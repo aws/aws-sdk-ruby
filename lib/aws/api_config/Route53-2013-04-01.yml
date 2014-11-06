@@ -24,21 +24,21 @@
     :hosted_zone_id:
       :type: :string
       :required: true
-      :position: 0
       :lstrip: /hostedzone/
     :vpc:
       :name: VPC
       :type: :hash
-      :position: 1
+      :required: true
       :members:
-        :vpc_id:
-          :name: VPCId
-          :type: :string
-          :position: 0
         :vpc_region:
           :name: VPCRegion
           :type: :string
-          :position: 1
+        :vpc_id:
+          :name: VPCId
+          :type: :string
+    :comment:
+      :name: Comment
+      :type: :string
   :outputs:
     :children:
       ChangeInfo:
@@ -49,6 +49,8 @@
             :type: :string
           SubmittedAt:
             :type: :time
+          Comment:
+            :type: :string
 - :name: ChangeResourceRecordSets
   :method: :change_resource_record_sets
   :http:
@@ -58,23 +60,19 @@
     :hosted_zone_id:
       :type: :string
       :required: true
-      :position: 0
       :lstrip: /hostedzone/
     :change_batch:
       :name: ChangeBatch
       :type: :hash
       :required: true
-      :position: 1
       :members:
         :comment:
           :name: Comment
           :type: :string
-          :position: 0
         :changes:
           :name: Changes
           :type: :array
           :required: true
-          :position: 1
           :members:
             :name: Change
             :type: :hash
@@ -83,64 +81,50 @@
                 :name: Action
                 :type: :string
                 :required: true
-                :position: 0
               :resource_record_set:
                 :name: ResourceRecordSet
                 :type: :hash
                 :required: true
-                :position: 1
                 :members:
                   :name:
                     :name: Name
                     :type: :string
                     :required: true
-                    :position: 0
                   :type:
                     :name: Type
                     :type: :string
                     :required: true
-                    :position: 1
                   :set_identifier:
                     :name: SetIdentifier
                     :type: :string
-                    :position: 2
                   :weight:
                     :name: Weight
                     :type: :integer
-                    :position: 3
                   :region:
                     :name: Region
                     :type: :string
-                    :position: 4
                   :geo_location:
                     :name: GeoLocation
                     :type: :hash
-                    :position: 5
                     :members:
                       :continent_code:
                         :name: ContinentCode
                         :type: :string
-                        :position: 0
                       :country_code:
                         :name: CountryCode
                         :type: :string
-                        :position: 1
                       :subdivision_code:
                         :name: SubdivisionCode
                         :type: :string
-                        :position: 2
                   :failover:
                     :name: Failover
                     :type: :string
-                    :position: 6
                   :ttl:
                     :name: TTL
                     :type: :integer
-                    :position: 7
                   :resource_records:
                     :name: ResourceRecords
                     :type: :array
-                    :position: 8
                     :members:
                       :name: ResourceRecord
                       :type: :hash
@@ -149,32 +133,26 @@
                           :name: Value
                           :type: :string
                           :required: true
-                          :position: 0
                   :alias_target:
                     :name: AliasTarget
                     :type: :hash
-                    :position: 9
                     :members:
                       :hosted_zone_id:
                         :name: HostedZoneId
                         :type: :string
                         :required: true
-                        :position: 0
                         :lstrip: /hostedzone/
                       :dns_name:
                         :name: DNSName
                         :type: :string
                         :required: true
-                        :position: 1
                       :evaluate_target_health:
                         :name: EvaluateTargetHealth
                         :type: :boolean
                         :required: true
-                        :position: 2
                   :health_check_id:
                     :name: HealthCheckId
                     :type: :string
-                    :position: 10
   :outputs:
     :children:
       ChangeInfo:
@@ -196,15 +174,12 @@
     :resource_type:
       :type: :string
       :required: true
-      :position: 0
     :resource_id:
       :type: :string
       :required: true
-      :position: 1
     :add_tags:
       :name: AddTags
       :type: :array
-      :position: 2
       :members:
         :name: Tag
         :type: :hash
@@ -218,7 +193,6 @@
     :remove_tag_keys:
       :name: RemoveTagKeys
       :type: :array
-      :position: 3
       :members:
         :name: Key
         :type: :string
@@ -236,46 +210,36 @@
       :name: CallerReference
       :type: :string
       :required: true
-      :position: 0
     :health_check_config:
       :name: HealthCheckConfig
       :type: :hash
       :required: true
-      :position: 1
       :members:
         :ip_address:
           :name: IPAddress
           :type: :string
-          :position: 0
         :port:
           :name: Port
           :type: :integer
-          :position: 1
         :type:
           :name: Type
           :type: :string
           :required: true
-          :position: 2
         :resource_path:
           :name: ResourcePath
           :type: :string
-          :position: 3
         :fully_qualified_domain_name:
           :name: FullyQualifiedDomainName
           :type: :string
-          :position: 4
         :search_string:
           :name: SearchString
           :type: :string
-          :position: 5
         :request_interval:
           :name: RequestInterval
           :type: :integer
-          :position: 6
         :failure_threshold:
           :name: FailureThreshold
           :type: :integer
-          :position: 7
   :outputs:
     :children:
       HealthCheck:
@@ -317,34 +281,33 @@
       :name: Name
       :type: :string
       :required: true
-      :position: 0
     :vpc:
       :name: VPC
       :type: :hash
-      :position: 1
       :members:
-        :vpc_id:
-          :name: VPCId
-          :type: :string
-          :position: 0
         :vpc_region:
           :name: VPCRegion
           :type: :string
-          :position: 1
+        :vpc_id:
+          :name: VPCId
+          :type: :string
     :caller_reference:
       :name: CallerReference
       :type: :string
       :required: true
-      :position: 2
     :hosted_zone_config:
       :name: HostedZoneConfig
       :type: :hash
-      :position: 3
       :members:
         :comment:
           :name: Comment
           :type: :string
-          :position: 0
+        :private_zone:
+          :name: PrivateZone
+          :type: :boolean
+    :delegation_set_id:
+      :name: DelegationSetId
+      :type: :string
   :outputs:
     :children:
       HostedZone:
@@ -359,6 +322,8 @@
             :children:
               Comment:
                 :type: :string
+              PrivateZone:
+                :type: :boolean
           ResourceRecordSetCount:
             :type: :integer
       ChangeInfo:
@@ -373,6 +338,48 @@
             :type: :string
       DelegationSet:
         :children:
+          Id:
+            :type: :string
+          CallerReference:
+            :type: :string
+          NameServers:
+            :ignore: true
+            :children:
+              NameServer:
+                :rename: :name_servers
+                :list: true
+                :type: :string
+      VPC:
+        :children:
+          VPCRegion:
+            :type: :string
+          VPCId:
+            :type: :string
+- :name: CreateReusableDelegationSet
+  :method: :create_reusable_delegation_set
+  :http:
+    :verb: POST
+    :uri: /2013-04-01/delegationset
+    :response_code: 201
+    :response_headers:
+      :location: Location
+  :inputs:
+    :caller_reference:
+      :name: CallerReference
+      :type: :string
+      :required: true
+    :hosted_zone_id:
+      :name: HostedZoneId
+      :type: :string
+      :lstrip: /hostedzone/
+  :outputs:
+    :children:
+      DelegationSet:
+        :children:
+          Id:
+            :type: :string
+          CallerReference:
+            :type: :string
           NameServers:
             :ignore: true
             :children:
@@ -389,7 +396,6 @@
     :health_check_id:
       :type: :string
       :required: true
-      :position: 0
   :outputs: {}
 - :name: DeleteHostedZone
   :method: :delete_hosted_zone
@@ -400,7 +406,6 @@
     :id:
       :type: :string
       :required: true
-      :position: 0
       :lstrip: /hostedzone/
   :outputs:
     :children:
@@ -414,6 +419,17 @@
             :type: :time
           Comment:
             :type: :string
+- :name: DeleteReusableDelegationSet
+  :method: :delete_reusable_delegation_set
+  :http:
+    :verb: DELETE
+    :uri: /2013-04-01/delegationset/:id
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+      :lstrip: /hostedzone/
+  :outputs: {}
 - :name: DisassociateVPCFromHostedZone
   :method: :disassociate_vpc_from_hosted_zone
   :http:
@@ -423,21 +439,21 @@
     :hosted_zone_id:
       :type: :string
       :required: true
-      :position: 0
       :lstrip: /hostedzone/
     :vpc:
       :name: VPC
       :type: :hash
-      :position: 1
+      :required: true
       :members:
-        :vpc_id:
-          :name: VPCId
-          :type: :string
-          :position: 0
         :vpc_region:
           :name: VPCRegion
           :type: :string
-          :position: 1
+        :vpc_id:
+          :name: VPCId
+          :type: :string
+    :comment:
+      :name: Comment
+      :type: :string
   :outputs:
     :children:
       ChangeInfo:
@@ -448,6 +464,8 @@
             :type: :string
           SubmittedAt:
             :type: :time
+          Comment:
+            :type: :string
 - :name: GetChange
   :method: :get_change
   :http:
@@ -457,7 +475,6 @@
     :id:
       :type: :string
       :required: true
-      :position: 0
       :lstrip: /change/
   :outputs:
     :children:
@@ -494,13 +511,10 @@
   :inputs:
     :continent_code:
       :type: :string
-      :position: 0
     :country_code:
       :type: :string
-      :position: 1
     :subdivision_code:
       :type: :string
-      :position: 2
   :outputs:
     :children:
       GeoLocationDetails:
@@ -526,7 +540,6 @@
     :health_check_id:
       :type: :string
       :required: true
-      :position: 0
   :outputs:
     :children:
       HealthCheck:
@@ -565,6 +578,58 @@
     :children:
       HealthCheckCount:
         :type: :integer
+- :name: GetHealthCheckLastFailureReason
+  :method: :get_health_check_last_failure_reason
+  :http:
+    :verb: GET
+    :uri: /2013-04-01/healthcheck/:health_check_id/lastfailurereason
+  :inputs:
+    :health_check_id:
+      :type: :string
+      :required: true
+  :outputs:
+    :children:
+      HealthCheckObservations:
+        :ignore: true
+        :children:
+          HealthCheckObservation:
+            :rename: :health_check_observations
+            :list: true
+            :children:
+              IPAddress:
+                :type: :string
+              StatusReport:
+                :children:
+                  Status:
+                    :type: :string
+                  CheckedTime:
+                    :type: :time
+- :name: GetHealthCheckStatus
+  :method: :get_health_check_status
+  :http:
+    :verb: GET
+    :uri: /2013-04-01/healthcheck/:health_check_id/status
+  :inputs:
+    :health_check_id:
+      :type: :string
+      :required: true
+  :outputs:
+    :children:
+      HealthCheckObservations:
+        :ignore: true
+        :children:
+          HealthCheckObservation:
+            :rename: :health_check_observations
+            :list: true
+            :children:
+              IPAddress:
+                :type: :string
+              StatusReport:
+                :children:
+                  Status:
+                    :type: :string
+                  CheckedTime:
+                    :type: :time
 - :name: GetHostedZone
   :method: :get_hosted_zone
   :http:
@@ -574,7 +639,6 @@
     :id:
       :type: :string
       :required: true
-      :position: 0
       :lstrip: /hostedzone/
   :outputs:
     :children:
@@ -594,21 +658,48 @@
                 :type: :boolean
           ResourceRecordSetCount:
             :type: :integer
+      DelegationSet:
+        :children:
+          Id:
+            :type: :string
+          CallerReference:
+            :type: :string
+          NameServers:
+            :ignore: true
+            :children:
+              NameServer:
+                :rename: :name_servers
+                :list: true
+                :type: :string
       VPCs:
         :ignore: true
         :children:
           VPC:
-            :rename: :vpcs
+            :rename: :vp_cs
             :list: true
             :children:
-              VPCId:
-                :rename: :vpc_id
-                :type: :string
               VPCRegion:
-                :rename: :vpc_region
                 :type: :string
+              VPCId:
+                :type: :string
+- :name: GetReusableDelegationSet
+  :method: :get_reusable_delegation_set
+  :http:
+    :verb: GET
+    :uri: /2013-04-01/delegationset/:id
+  :inputs:
+    :id:
+      :type: :string
+      :required: true
+      :lstrip: /hostedzone/
+  :outputs:
+    :children:
       DelegationSet:
         :children:
+          Id:
+            :type: :string
+          CallerReference:
+            :type: :string
           NameServers:
             :ignore: true
             :children:
@@ -624,16 +715,12 @@
   :inputs:
     :start_continent_code:
       :type: :string
-      :position: 0
     :start_country_code:
       :type: :string
-      :position: 1
     :start_subdivision_code:
       :type: :string
-      :position: 2
     :max_items:
       :type: :integer
-      :position: 3
   :outputs:
     :children:
       GeoLocationDetailsList:
@@ -673,10 +760,8 @@
   :inputs:
     :marker:
       :type: :string
-      :position: 0
     :max_items:
       :type: :integer
-      :position: 1
   :outputs:
     :children:
       HealthChecks:
@@ -722,14 +807,14 @@
   :method: :list_hosted_zones
   :http:
     :verb: GET
-    :uri: /2013-04-01/hostedzone?marker=:marker&maxitems=:max_items
+    :uri: /2013-04-01/hostedzone?marker=:marker&maxitems=:max_items&delegationsetid=:delegation_set_id
   :inputs:
     :marker:
       :type: :string
-      :position: 0
     :max_items:
       :type: :integer
-      :position: 1
+    :delegation_set_id:
+      :type: :string
   :outputs:
     :children:
       HostedZones:
@@ -770,20 +855,15 @@
     :hosted_zone_id:
       :type: :string
       :required: true
-      :position: 0
       :lstrip: /hostedzone/
     :start_record_name:
       :type: :string
-      :position: 1
     :start_record_type:
       :type: :string
-      :position: 2
     :start_record_identifier:
       :type: :string
-      :position: 3
     :max_items:
       :type: :integer
-      :position: 4
   :outputs:
     :children:
       ResourceRecordSets:
@@ -844,6 +924,44 @@
         :type: :string
       MaxItems:
         :type: :integer
+- :name: ListReusableDelegationSets
+  :method: :list_reusable_delegation_sets
+  :http:
+    :verb: GET
+    :uri: /2013-04-01/delegationset?marker=:marker&maxitems=:max_items
+  :inputs:
+    :marker:
+      :type: :string
+    :max_items:
+      :type: :integer
+  :outputs:
+    :children:
+      DelegationSets:
+        :ignore: true
+        :children:
+          DelegationSet:
+            :rename: :delegation_sets
+            :list: true
+            :children:
+              Id:
+                :type: :string
+              CallerReference:
+                :type: :string
+              NameServers:
+                :ignore: true
+                :children:
+                  NameServer:
+                    :rename: :name_servers
+                    :list: true
+                    :type: :string
+      Marker:
+        :type: :string
+      IsTruncated:
+        :type: :boolean
+      NextMarker:
+        :type: :string
+      MaxItems:
+        :type: :string
 - :name: ListTagsForResource
   :method: :list_tags_for_resource
   :http:
@@ -853,11 +971,9 @@
     :resource_type:
       :type: :string
       :required: true
-      :position: 0
     :resource_id:
       :type: :string
       :required: true
-      :position: 1
   :outputs:
     :children:
       ResourceTagSet:
@@ -886,12 +1002,10 @@
     :resource_type:
       :type: :string
       :required: true
-      :position: 0
     :resource_ids:
       :name: ResourceIds
       :type: :array
       :required: true
-      :position: 1
       :members:
         :name: ResourceId
         :type: :string
@@ -928,35 +1042,27 @@
     :health_check_id:
       :type: :string
       :required: true
-      :position: 0
     :health_check_version:
       :name: HealthCheckVersion
       :type: :integer
-      :position: 1
     :ip_address:
       :name: IPAddress
       :type: :string
-      :position: 2
     :port:
       :name: Port
       :type: :integer
-      :position: 3
     :resource_path:
       :name: ResourcePath
       :type: :string
-      :position: 4
     :fully_qualified_domain_name:
       :name: FullyQualifiedDomainName
       :type: :string
-      :position: 5
     :search_string:
       :name: SearchString
       :type: :string
-      :position: 6
     :failure_threshold:
       :name: FailureThreshold
       :type: :integer
-      :position: 7
   :outputs:
     :children:
       HealthCheck:

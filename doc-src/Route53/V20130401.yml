@@ -1,4 +1,17 @@
 ---
+:associate_vpc_with_hosted_zone: "Calls the POST AssociateVPCWithHostedZone API operation.\n@param
+  [Hash] options\n  * `:hosted_zone_id` - *required* - (String) The ID of the hosted
+  zone you want to associate your VPC with. Note that you cannot associate a VPC with
+  a hosted zone that doesn't have an existing VPC association.\n  * `:vpc` - *required*
+  - (Hash) The VPC that you want your hosted zone to be associated with.\n    * `:vpc_region`
+  - (String) Valid values include:\n      * `us-east-1`\n      * `us-west-1`\n      *
+  `us-west-2`\n      * `eu-west-1`\n      * `eu-central-1`\n      * `ap-southeast-1`\n
+  \     * `ap-southeast-2`\n      * `ap-northeast-1`\n      * `sa-east-1`\n      *
+  `cn-north-1`\n    * `:vpc_id` - (String) \n  * `:comment` - (String) Optional: Any
+  comments you want to include about a AssociateVPCWithHostedZoneRequest.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:change_info` - (Hash)\n    * `:id` - (String)\n    *
+  `:status` - (String)\n    * `:submitted_at` - (Time)\n    * `:comment` - (String)"
 :change_resource_record_sets: "Calls the POST ChangeResourceRecordSets API operation.\n@param
   [Hash] options\n  * `:hosted_zone_id` - *required* - (String) The ID of the hosted
   zone that contains the resource record sets that you want to change.\n  * `:change_batch`
@@ -24,64 +37,65 @@
   Regional resource record sets only: Among resource record sets that have the same
   combination of DNS name and type, a value that specifies the AWS region for the
   current resource record set.  Valid values include:\n          * `us-east-1`\n          *
-  `us-west-1`\n          * `us-west-2`\n          * `eu-west-1`\n          * `ap-southeast-1`\n
-  \         * `ap-southeast-2`\n          * `ap-northeast-1`\n          * `sa-east-1`\n
-  \         * `cn-north-1`\n        * `:geo_location` - (Hash) Geo location resource
-  record sets only: Among resource record sets that have the same combination of DNS
-  name and type, a value that specifies the geo location for the current resource
-  record set.\n          * `:continent_code` - (String) The code for a continent geo
-  location. Note: only continent locations have a continent code. Valid values: AF
-  | AN | AS | EU | OC | NA | SA Constraint: Specifying ContinentCode with either CountryCode
-  or SubdivisionCode returns an InvalidInput error.\n          * `:country_code` -
-  (String) The code for a country geo location. The default location uses '*' for
-  the country code and will match all locations that are not matched by a geo location.
-  The default geo location uses a * for the country code. All other country codes
-  follow the ISO 3166 two-character code.\n          * `:subdivision_code` - (String)
-  The code for a country's subdivision (e.g., a province of Canada). A subdivision
-  code is only valid with the appropriate country code. Constraint: Specifying SubdivisionCode
-  without CountryCode returns an InvalidInput error.\n        * `:failover` - (String)
-  Failover resource record sets only: Among resource record sets that have the same
-  combination of DNS name and type, a value that indicates whether the current resource
-  record set is a primary or secondary resource record set. A failover set may contain
-  at most one resource record set marked as primary and one resource record set marked
-  as secondary. A resource record set marked as primary will be returned if any of
-  the following are  `true` : (1) an associated health check is passing, (2) if the
-  resource record set is an alias with the evaluate target health and at least one
-  target resource record set is healthy, (3) both the primary and secondary resource
-  record set are failing health checks or (4) there is no secondary resource record
-  set. A secondary resource record set will be returned if: (1) the primary is failing
-  a health check and either the secondary is passing a health check or has no associated
-  health check, or (2) there is no primary resource record set. Valid values: PRIMARY
-  | SECONDARY  Valid values include:\n          * `PRIMARY`\n          * `SECONDARY`\n
-  \       * `:ttl` - (Integer) The cache time to live for the current resource record
-  set.\n        * `:resource_records` - (Array&lt;Hash>) A complex type that contains
-  the resource records for the current resource record set.\n        * `:ResourceRecord`
-  - (Hash) \n          * `:value` - *required* - (String) The value of the Value element
-  for the current resource record set.\n        * `:alias_target` - (Hash) Alias resource
-  record sets only: Information about the Elastic Load Balancing LoadBalancer to which
-  you are redirecting traffic.\n          * `:hosted_zone_id` - *required* - (String)
-  Alias resource record sets only: The value of the hosted zone ID, CanonicalHostedZoneNameId,
-  for the LoadBalancer. Currently, Route 53 supports alias resource record sets only
-  for Elastic Load Balancing. For more information, an example, and several ways to
-  get the hosted zone ID for the LoadBalancer, see Creating Alias Resource Record
-  Sets for Elastic Load Balancing in the Amazon Route 53 Developer Guide.\n          *
-  `:dns_name` - *required* - (String) Alias resource record sets only: The external
-  DNS name associated with the LoadBalancer. Currently, Route 53 supports alias resource
-  record sets only for Elastic Load Balancing. For more information, an example, and
-  several ways to get the hosted zone ID for the LoadBalancer, see Creating Alias
-  Resource Record Sets for Elastic Load Balancing in the Amazon Route 53 Developer
-  Guide.\n          * `:evaluate_target_health` - *required* - (Boolean) Alias resource
-  record sets only: A boolean value that indicates whether this Resource Record Set
-  should respect the health status of any health checks associated with the ALIAS
-  target record which it is linked to. Currently, Route 53 supports health checks
-  only for Elastic Load Balancing. For more information, an example, see Creating
-  Alias Resource Record Sets for Elastic Load Balancing in the Amazon Route 53 Developer
-  Guide.\n        * `:health_check_id` - (String) Health Check resource record sets
-  only, not required for alias resource record sets: An identifier that is used to
-  identify health check associated with the resource record set.\n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:change_info` - (Hash)\n    * `:id` - (String)\n    * `:status` - (String)\n
-  \   * `:submitted_at` - (Time)\n    * `:comment` - (String)"
+  `us-west-1`\n          * `us-west-2`\n          * `eu-west-1`\n          * `eu-central-1`\n
+  \         * `ap-southeast-1`\n          * `ap-southeast-2`\n          * `ap-northeast-1`\n
+  \         * `sa-east-1`\n          * `cn-north-1`\n        * `:geo_location` - (Hash)
+  Geo location resource record sets only: Among resource record sets that have the
+  same combination of DNS name and type, a value that specifies the geo location for
+  the current resource record set.\n          * `:continent_code` - (String) The code
+  for a continent geo location. Note: only continent locations have a continent code.
+  Valid values: AF | AN | AS | EU | OC | NA | SA Constraint: Specifying ContinentCode
+  with either CountryCode or SubdivisionCode returns an InvalidInput error.\n          *
+  `:country_code` - (String) The code for a country geo location. The default location
+  uses '*' for the country code and will match all locations that are not matched
+  by a geo location. The default geo location uses a * for the country code. All other
+  country codes follow the ISO 3166 two-character code.\n          * `:subdivision_code`
+  - (String) The code for a country's subdivision (e.g., a province of Canada). A
+  subdivision code is only valid with the appropriate country code. Constraint: Specifying
+  SubdivisionCode without CountryCode returns an InvalidInput error.\n        * `:failover`
+  - (String) Failover resource record sets only: Among resource record sets that have
+  the same combination of DNS name and type, a value that indicates whether the current
+  resource record set is a primary or secondary resource record set. A failover set
+  may contain at most one resource record set marked as primary and one resource record
+  set marked as secondary. A resource record set marked as primary will be returned
+  if any of the following are  `true` : (1) an associated health check is passing,
+  (2) if the resource record set is an alias with the evaluate target health and at
+  least one target resource record set is healthy, (3) both the primary and secondary
+  resource record set are failing health checks or (4) there is no secondary resource
+  record set. A secondary resource record set will be returned if: (1) the primary
+  is failing a health check and either the secondary is passing a health check or
+  has no associated health check, or (2) there is no primary resource record set.
+  Valid values: PRIMARY | SECONDARY  Valid values include:\n          * `PRIMARY`\n
+  \         * `SECONDARY`\n        * `:ttl` - (Integer) The cache time to live for
+  the current resource record set.\n        * `:resource_records` - (Array&lt;Hash>)
+  A complex type that contains the resource records for the current resource record
+  set.\n        * `:ResourceRecord` - (Hash) \n          * `:value` - *required* -
+  (String) The value of the Value element for the current resource record set.\n        *
+  `:alias_target` - (Hash) Alias resource record sets only: Information about the
+  Elastic Load Balancing LoadBalancer to which you are redirecting traffic.\n          *
+  `:hosted_zone_id` - *required* - (String) Alias resource record sets only: The value
+  of the hosted zone ID, CanonicalHostedZoneNameId, for the LoadBalancer. Currently,
+  Route 53 supports alias resource record sets only for Elastic Load Balancing. For
+  more information, an example, and several ways to get the hosted zone ID for the
+  LoadBalancer, see Creating Alias Resource Record Sets for Elastic Load Balancing
+  in the Amazon Route 53 Developer Guide.\n          * `:dns_name` - *required* -
+  (String) Alias resource record sets only: The external DNS name associated with
+  the LoadBalancer. Currently, Route 53 supports alias resource record sets only for
+  Elastic Load Balancing. For more information, an example, and several ways to get
+  the hosted zone ID for the LoadBalancer, see Creating Alias Resource Record Sets
+  for Elastic Load Balancing in the Amazon Route 53 Developer Guide.\n          *
+  `:evaluate_target_health` - *required* - (Boolean) Alias resource record sets only:
+  A boolean value that indicates whether this Resource Record Set should respect the
+  health status of any health checks associated with the ALIAS target record which
+  it is linked to. Currently, Route 53 supports health checks only for Elastic Load
+  Balancing. For more information, an example, see Creating Alias Resource Record
+  Sets for Elastic Load Balancing in the Amazon Route 53 Developer Guide.\n        *
+  `:health_check_id` - (String) Health Check resource record sets only, not required
+  for alias resource record sets: An identifier that is used to identify health check
+  associated with the resource record set.\n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:change_info`
+  - (Hash)\n    * `:id` - (String)\n    * `:status` - (String)\n    * `:submitted_at`
+  - (Time)\n    * `:comment` - (String)"
 :change_tags_for_resource: "Calls the POST ChangeTagsForResource API operation.\n@param
   [Hash] options\n  * `:resource_type` - *required* - (String) The type of the resource.
   The resource type for health checks is healthcheck.  Valid values include:\n    *
@@ -126,28 +140,51 @@
         * `:request_interval` - (Integer)
         * `:failure_threshold` - (Integer)
       * `:health_check_version` - (Integer)
-:create_hosted_zone: |-
-  Calls the POST CreateHostedZone API operation.
+:create_hosted_zone: "Calls the POST CreateHostedZone API operation.\n@param [Hash]
+  options\n  * `:name` - *required* - (String) The name of the domain. This must be
+  a fully-specified domain, for example, www.example.com. The trailing dot is optional;
+  Route 53 assumes that the domain name is fully qualified. This means that Route
+  53 treats www.example.com (without a trailing dot) and www.example.com. (with a
+  trailing dot) as identical. This is the name you have registered with your DNS registrar.
+  You should ask your registrar to change the authoritative name servers for your
+  domain to the set of NameServers elements returned in DelegationSet.\n  * `:vpc`
+  - (Hash) The VPC that you want your hosted zone to be associated with. By providing
+  this parameter, your newly created hosted cannot be resolved anywhere other than
+  the given VPC.\n    * `:vpc_region` - (String) Valid values include:\n      * `us-east-1`\n
+  \     * `us-west-1`\n      * `us-west-2`\n      * `eu-west-1`\n      * `eu-central-1`\n
+  \     * `ap-southeast-1`\n      * `ap-southeast-2`\n      * `ap-northeast-1`\n      *
+  `sa-east-1`\n      * `cn-north-1`\n    * `:vpc_id` - (String) \n  * `:caller_reference`
+  - *required* - (String) A unique string that identifies the request and that allows
+  failed CreateHostedZone requests to be retried without the risk of executing the
+  operation twice. You must use a unique CallerReference string every time you create
+  a hosted zone. CallerReference can be any unique string; you might choose to use
+  a string that identifies your project, such as DNSMigration_01. Valid characters
+  are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding
+  of the value must be less than 128 bytes.\n  * `:hosted_zone_config` - (Hash) A
+  complex type that contains an optional comment about your hosted zone.\n    * `:comment`
+  - (String) An optional comment about your hosted zone. If you don't want to specify
+  a comment, you can omit the HostedZoneConfig and Comment elements from the XML document.\n
+  \   * `:private_zone` - (Boolean) \n  * `:delegation_set_id` - (String) The delegation
+  set id of the reusable delgation set whose NS records you want to assign to the
+  new hosted zone.\n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:hosted_zone` - (Hash)\n    *
+  `:id` - (String)\n    * `:name` - (String)\n    * `:caller_reference` - (String)\n
+  \   * `:config` - (Hash)\n      * `:comment` - (String)\n      * `:private_zone`
+  - (Boolean)\n    * `:resource_record_set_count` - (Integer)\n  * `:change_info`
+  - (Hash)\n    * `:id` - (String)\n    * `:status` - (String)\n    * `:submitted_at`
+  - (Time)\n    * `:comment` - (String)\n  * `:delegation_set` - (Hash)\n    * `:id`
+  - (String)\n    * `:caller_reference` - (String)\n    * `:name_servers` - (Array<String>)\n
+  \ * `:vpc` - (Hash)\n    * `:vpc_region` - (String)\n    * `:vpc_id` - (String)"
+:create_reusable_delegation_set: |-
+  Calls the POST CreateReusableDelegationSet API operation.
   @param [Hash] options
-    * `:name` - *required* - (String) The name of the domain. This must be a fully-specified domain, for example, www.example.com. The trailing dot is optional; Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical. This is the name you have registered with your DNS registrar. You should ask your registrar to change the authoritative name servers for your domain to the set of NameServers elements returned in DelegationSet.
-    * `:caller_reference` - *required* - (String) A unique string that identifies the request and that allows failed CreateHostedZone requests to be retried without the risk of executing the operation twice. You must use a unique CallerReference string every time you create a hosted zone. CallerReference can be any unique string; you might choose to use a string that identifies your project, such as DNSMigration_01. Valid characters are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding of the value must be less than 128 bytes.
-    * `:hosted_zone_config` - (Hash) A complex type that contains an optional comment about your hosted zone.
-      * `:comment` - (String) An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the HostedZoneConfig and Comment elements from the XML document.
+    * `:caller_reference` - *required* - (String) A unique string that identifies the request and that allows failed CreateReusableDelegationSet requests to be retried without the risk of executing the operation twice. You must use a unique CallerReference string every time you create a reusable delegation set. CallerReference can be any unique string; you might choose to use a string that identifies your project, such as DNSMigration_01. Valid characters are any Unicode code points that are legal in an XML 1.0 document. The UTF-8 encoding of the value must be less than 128 bytes.
+    * `:hosted_zone_id` - (String) The ID of the hosted zone whose delegation set you want to mark as reusable. It is an optional parameter.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
-    * `:hosted_zone` - (Hash)
-      * `:id` - (String)
-      * `:name` - (String)
-      * `:caller_reference` - (String)
-      * `:config` - (Hash)
-        * `:comment` - (String)
-      * `:resource_record_set_count` - (Integer)
-    * `:change_info` - (Hash)
-      * `:id` - (String)
-      * `:status` - (String)
-      * `:submitted_at` - (Time)
-      * `:comment` - (String)
     * `:delegation_set` - (Hash)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
       * `:name_servers` - (Array<String>)
 :delete_health_check: |-
   Calls the DELETE DeleteHealthCheck API operation.
@@ -165,6 +202,24 @@
       * `:status` - (String)
       * `:submitted_at` - (Time)
       * `:comment` - (String)
+:delete_reusable_delegation_set: |-
+  Calls the DELETE DeleteReusableDelegationSet API operation.
+  @param [Hash] options
+    * `:id` - *required* - (String) The ID of the reusable delegation set you want to delete.
+  @return [Core::Response]
+:disassociate_vpc_from_hosted_zone: "Calls the POST DisassociateVPCFromHostedZone
+  API operation.\n@param [Hash] options\n  * `:hosted_zone_id` - *required* - (String)
+  The ID of the hosted zone you want to disassociate your VPC from. Note that you
+  cannot disassociate the last VPC from a hosted zone.\n  * `:vpc` - *required* -
+  (Hash) The VPC that you want your hosted zone to be disassociated from.\n    * `:vpc_region`
+  - (String) Valid values include:\n      * `us-east-1`\n      * `us-west-1`\n      *
+  `us-west-2`\n      * `eu-west-1`\n      * `eu-central-1`\n      * `ap-southeast-1`\n
+  \     * `ap-southeast-2`\n      * `ap-northeast-1`\n      * `sa-east-1`\n      *
+  `cn-north-1`\n    * `:vpc_id` - (String) \n  * `:comment` - (String) Optional: Any
+  comments you want to include about a DisassociateVPCFromHostedZoneRequest.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:change_info` - (Hash)\n    * `:id` - (String)\n    *
+  `:status` - (String)\n    * `:submitted_at` - (Time)\n    * `:comment` - (String)"
 :get_change: |-
   Calls the GET GetChange API operation.
   @param [Hash] options
@@ -222,6 +277,28 @@
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:health_check_count` - (Integer)
+:get_health_check_last_failure_reason: |-
+  Calls the GET GetHealthCheckLastFailureReason API operation.
+  @param [Hash] options
+    * `:health_check_id` - *required* - (String) The ID of the health check for which you want to retrieve the reason for the most recent failure.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check_observations` - (Array<Hash>)
+      * `:ip_address` - (String)
+      * `:status_report` - (Hash)
+        * `:status` - (String)
+        * `:checked_time` - (Time)
+:get_health_check_status: |-
+  Calls the GET GetHealthCheckStatus API operation.
+  @param [Hash] options
+    * `:health_check_id` - *required* - (String) The ID of the health check for which you want to retrieve the most recent status.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:health_check_observations` - (Array<Hash>)
+      * `:ip_address` - (String)
+      * `:status_report` - (Hash)
+        * `:status` - (String)
+        * `:checked_time` - (Time)
 :get_hosted_zone: |-
   Calls the GET GetHostedZone API operation.
   @param [Hash] options
@@ -234,8 +311,24 @@
       * `:caller_reference` - (String)
       * `:config` - (Hash)
         * `:comment` - (String)
+        * `:private_zone` - (Boolean)
       * `:resource_record_set_count` - (Integer)
     * `:delegation_set` - (Hash)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
+      * `:name_servers` - (Array<String>)
+    * `:vp_cs` - (Array<Hash>)
+      * `:vpc_region` - (String)
+      * `:vpc_id` - (String)
+:get_reusable_delegation_set: |-
+  Calls the GET GetReusableDelegationSet API operation.
+  @param [Hash] options
+    * `:id` - *required* - (String) The ID of the reusable delegation set for which you want to get a list of the name server.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:delegation_set` - (Hash)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
       * `:name_servers` - (Array<String>)
 :list_geo_locations: |-
   Calls the GET ListGeoLocations API operation.
@@ -282,24 +375,18 @@
     * `:is_truncated` - (Boolean)
     * `:next_marker` - (String)
     * `:max_items` - (String)
-:list_hosted_zones: |-
-  Calls the GET ListHostedZones API operation.
-  @param [Hash] options
-    * `:marker` - (String) If the request returned more than one page of results, submit another request and specify the value of NextMarker from the last response in the marker parameter to get the next page of results.
-    * `:max_items` - (Integer) Specify the maximum number of hosted zones to return per page of results.
-  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
-
-    * `:hosted_zones` - (Array<Hash>)
-      * `:id` - (String)
-      * `:name` - (String)
-      * `:caller_reference` - (String)
-      * `:config` - (Hash)
-        * `:comment` - (String)
-      * `:resource_record_set_count` - (Integer)
-    * `:marker` - (String)
-    * `:is_truncated` - (Boolean)
-    * `:next_marker` - (String)
-    * `:max_items` - (Integer)
+:list_hosted_zones: "Calls the GET ListHostedZones API operation.\n@param [Hash] options\n
+  \ * `:marker` - (String) If the request returned more than one page of results,
+  submit another request and specify the value of NextMarker from the last response
+  in the marker parameter to get the next page of results.\n  * `:max_items` - (Integer)
+  Specify the maximum number of hosted zones to return per page of results.\n  * `:delegation_set_id`
+  - (String) \n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `:hosted_zones` - (Array<Hash>)\n
+  \   * `:id` - (String)\n    * `:name` - (String)\n    * `:caller_reference` - (String)\n
+  \   * `:config` - (Hash)\n      * `:comment` - (String)\n      * `:private_zone`
+  - (Boolean)\n    * `:resource_record_set_count` - (Integer)\n  * `:marker` - (String)\n
+  \ * `:is_truncated` - (Boolean)\n  * `:next_marker` - (String)\n  * `:max_items`
+  - (Integer)"
 :list_resource_record_sets: |-
   Calls the GET ListResourceRecordSets API operation.
   @param [Hash] options
@@ -344,6 +431,21 @@
     * `:next_record_type` - (String)
     * `:next_record_identifier` - (String)
     * `:max_items` - (Integer)
+:list_reusable_delegation_sets: |-
+  Calls the GET ListReusableDelegationSets API operation.
+  @param [Hash] options
+    * `:marker` - (String) If the request returned more than one page of results, submit another request and specify the value of NextMarker from the last response in the marker parameter to get the next page of results.
+    * `:max_items` - (Integer) Specify the maximum number of reusable delegation sets to return per page of results.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:delegation_sets` - (Array<Hash>)
+      * `:id` - (String)
+      * `:caller_reference` - (String)
+      * `:name_servers` - (Array<String>)
+    * `:marker` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:next_marker` - (String)
+    * `:max_items` - (String)
 :list_tags_for_resource: |-
   Calls the GET ListTagsForResource API operation.
   @param [Hash] options
