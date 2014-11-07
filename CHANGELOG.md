@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2::Instance - Added `#decrypt_windows_password` method
+  to the Instance class.
+
 2.0.7 (2014-11-06)
 ------------------
 
