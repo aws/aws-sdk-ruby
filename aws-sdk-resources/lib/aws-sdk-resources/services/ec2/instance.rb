@@ -8,7 +8,7 @@ module Aws
       # @return [String]
       def decrypt_windows_password(key_pair_path)
         decoded = Base64.decode64(encrypted_password)
-        pem_bytes = Pathname.new(key_pair_path).read
+        pem_bytes = File.open(key_pair_path, 'rb') { |f| f.read }
         private_key = OpenSSL::PKey::RSA.new(pem_bytes)
         private_key.private_decrypt(decoded)
       end
