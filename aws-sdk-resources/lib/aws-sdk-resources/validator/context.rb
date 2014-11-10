@@ -3,21 +3,28 @@ module Aws
     module Validator
       class Context
 
-        # @option options [required, String] :path
-        # @option options [required, Object] :value
-        # @option options [required, Hash] :definition
-        # @option options [required, Hash] :api
-        # @option options [required, MatchData] :matches
         def initialize(options = {})
-          [:path, :value, :definition, :api, :matches].each do |opt|
-            if options.key?(opt)
-              instance_variable_set("@#{opt}", options[opt])
-            else
-              raise ArgumentError, "missing required option :#{opt}"
-            end
-          end
-          @errors = []
+          @parent = options[:parent]
+          @path = options[:path]
+          @value = options[:value]
+          @definition = options[:definition]
+          @api = options[:api]
+          @errors = options[:errors] || []
         end
+
+        def child(at)
+          Context.new(
+            parent: self,
+            path: "#{path}/#{at}",
+            value: value[at],
+            definition: definition,
+            api: api,
+            errors: errors
+          )
+        end
+
+        # @return [Context,nil]
+        attr_reader :parent
 
         # @return [String]
         attr_reader :path
@@ -31,27 +38,16 @@ module Aws
         # @return [Hash]
         attr_reader :api
 
-        # @return [MatchData]
-        attr_reader :matches
-
         # @return [Array<String>]
         attr_reader :errors
+
+        def [] key
+          @value[key]
+        end
 
         def error(msg)
           @errors << msg
           false
-        end
-
-        def resource
-          definition['resources'][matches[1]]
-        end
-
-        def resource_name
-          matches[1]
-        end
-
-        def shape(name)
-          api['shapes'][name]
         end
 
       end

@@ -319,11 +319,11 @@ module Aws
         end
 
         def validate_operation_exists
-          if api_operation
+          #if api_operation
             true
-          else
-            error("'#{path}/request/operation' is set but is not defined at 'api#/operations/#{operation_name}'.")
-          end
+          #else
+          #  error("'#{path}/request/operation' is set but is not defined at 'api#/operations/#{operation_name}'.")
+          #end
         end
 
         def resource_name

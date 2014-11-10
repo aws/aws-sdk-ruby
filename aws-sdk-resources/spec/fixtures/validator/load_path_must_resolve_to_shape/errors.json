@@ -1,3 +1,3 @@
 [
-  "'#/resources/ResourceName/load/path' did not resolve to a 'ResourceShape' shape."
+  "#/resources/ResourceName/load/path must resolve to a 'ResourceShape' shape"
 ]
