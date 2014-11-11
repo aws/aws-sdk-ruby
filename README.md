@@ -284,6 +284,7 @@ to be backwards compatible.
 | AWS Elastic Beanstalk               | ElasticBeanstalk          | 2010-12-01                     |
 | AWS Identity and Access Management  | IAM                       | 2010-05-08                     |
 | AWS Import/Export                   | ImportExport              | 2010-06-01                     |
+| AWS Key Management Service          | KMS                       | 2014-11-01                     |
 | AWS OpsWorks                        | OpsWorks                  | 2013-02-18                     |
 | AWS Security Token Service          | STS                       | 2011-06-15                     |
 | AWS Storage Gateway                 | StorageGateway            | 2013-06-30                     |

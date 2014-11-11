@@ -40,6 +40,7 @@ module Aws
     IAM
     ImportExport
     Kinesis
+    KMS
     OpsWorks
     RDS
     Redshift

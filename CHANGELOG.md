@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - New Service - Added support for Amazon Key Management Service (KMS).
+
+  ```ruby
+  kms = Aws::KMS::Client.new
+  ```
+
 * Feature - Aws::EC2::Instance - Added `#decrypt_windows_password` method
   to the Instance class.
 
