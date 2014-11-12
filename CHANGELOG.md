@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - New Service - Added support for AWS CodeDeploy.
+
+  ```ruby
+  cd = Aws::CodeDeploy::Client.new
+  ```
+
 * Feature - New Service - Added support for Amazon Key Management Service (KMS).
 
   ```ruby
