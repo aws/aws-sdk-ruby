@@ -99,6 +99,33 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"InvalidCloudWatchLogsLogGroupArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsLogGroupArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidCloudWatchLogsRoleArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsRoleArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"CloudWatchLogsDeliveryUnavailableException",
+          "error":{
+            "code":"CloudWatchLogsDeliveryUnavailable",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -307,12 +334,50 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"InvalidCloudWatchLogsLogGroupArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsLogGroupArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidCloudWatchLogsRoleArnException",
+          "error":{
+            "code":"InvalidCloudWatchLogsRoleArn",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"CloudWatchLogsDeliveryUnavailableException",
+          "error":{
+            "code":"CloudWatchLogsDeliveryUnavailable",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     }
   },
   "shapes":{
     "Boolean":{"type":"boolean"},
+    "CloudWatchLogsDeliveryUnavailableException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"CloudWatchLogsDeliveryUnavailable",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "CreateTrailRequest":{
       "type":"structure",
       "required":[
@@ -324,7 +389,9 @@
         "S3BucketName":{"shape":"String"},
         "S3KeyPrefix":{"shape":"String"},
         "SnsTopicName":{"shape":"String"},
-        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"},
+        "CloudWatchLogsLogGroupArn":{"shape":"String"},
+        "CloudWatchLogsRoleArn":{"shape":"String"}
       }
     },
     "CreateTrailResponse":{
@@ -334,7 +401,9 @@
         "S3BucketName":{"shape":"String"},
         "S3KeyPrefix":{"shape":"String"},
         "SnsTopicName":{"shape":"String"},
-        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"},
+        "CloudWatchLogsLogGroupArn":{"shape":"String"},
+        "CloudWatchLogsRoleArn":{"shape":"String"}
       }
     },
     "Date":{"type":"timestamp"},
@@ -378,7 +447,9 @@
         "LatestDeliveryTime":{"shape":"Date"},
         "LatestNotificationTime":{"shape":"Date"},
         "StartLoggingTime":{"shape":"Date"},
-        "StopLoggingTime":{"shape":"Date"}
+        "StopLoggingTime":{"shape":"Date"},
+        "LatestCloudWatchLogsDeliveryError":{"shape":"String"},
+        "LatestCloudWatchLogsDeliveryTime":{"shape":"Date"}
       }
     },
     "InsufficientS3BucketPolicyException":{
@@ -399,6 +470,28 @@
       "error":{
         "code":"InsufficientSnsTopicPolicy",
         "httpStatusCode":403,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InvalidCloudWatchLogsLogGroupArnException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidCloudWatchLogsLogGroupArn",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InvalidCloudWatchLogsRoleArnException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidCloudWatchLogsRoleArn",
+        "httpStatusCode":400,
         "senderFault":true
       },
       "exception":true
@@ -501,7 +594,9 @@
         "S3BucketName":{"shape":"String"},
         "S3KeyPrefix":{"shape":"String"},
         "SnsTopicName":{"shape":"String"},
-        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"},
+        "CloudWatchLogsLogGroupArn":{"shape":"String"},
+        "CloudWatchLogsRoleArn":{"shape":"String"}
       }
     },
     "TrailAlreadyExistsException":{
@@ -542,7 +637,9 @@
         "S3BucketName":{"shape":"String"},
         "S3KeyPrefix":{"shape":"String"},
         "SnsTopicName":{"shape":"String"},
-        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"},
+        "CloudWatchLogsLogGroupArn":{"shape":"String"},
+        "CloudWatchLogsRoleArn":{"shape":"String"}
       }
     },
     "UpdateTrailResponse":{
@@ -552,7 +649,9 @@
         "S3BucketName":{"shape":"String"},
         "S3KeyPrefix":{"shape":"String"},
         "SnsTopicName":{"shape":"String"},
-        "IncludeGlobalServiceEvents":{"shape":"Boolean"}
+        "IncludeGlobalServiceEvents":{"shape":"Boolean"},
+        "CloudWatchLogsLogGroupArn":{"shape":"String"},
+        "CloudWatchLogsRoleArn":{"shape":"String"}
       }
     }
   }
