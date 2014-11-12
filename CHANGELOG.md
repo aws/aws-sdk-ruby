@@ -7,6 +7,12 @@ Unreleased Changes
   kms = Aws::KMS::Client.new
   ```
 
+* Feature - New Service - Added support for AWS Config.
+
+  ```ruby
+  cfg = Aws::ConfigService::Client.new
+  ```
+
 * Feature - Aws::EC2::Instance - Added `#decrypt_windows_password` method
   to the Instance class.
 

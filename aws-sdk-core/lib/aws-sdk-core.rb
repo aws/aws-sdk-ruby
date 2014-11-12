@@ -27,6 +27,7 @@ module Aws
     CloudWatchLogs
     CognitoIdentity
     CognitoSync
+    ConfigService
     DataPipeline
     DirectConnect
     DynamoDB

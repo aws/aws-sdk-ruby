@@ -279,6 +279,7 @@ to be backwards compatible.
 | Auto Scaling                        | AutoScaling               | 2011-01-01                     |
 | AWS CloudFormation                  | CloudFormation            | 2010-05-15                     |
 | AWS CloudTrail                      | CloudTrail                | 2013-11-01                     |
+| AWS Config                          | ConfigService             | 2014-10-17                     |
 | AWS Data Pipeline                   | DataPipeline              | 2012-10-29                     |
 | AWS Direct Connect                  | DirectConnect             | 2012-10-25                     |
 | AWS Elastic Beanstalk               | ElasticBeanstalk          | 2010-12-01                     |
