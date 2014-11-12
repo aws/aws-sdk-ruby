@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.8 (2014-11-12)
 ------------------
 
 * Feature - New Service - Added support for AWS CodeDeploy.
