@@ -260,7 +260,7 @@ to be backwards compatible.
 | Amazon Cognito Identity             | CognitoIdentity           | 2014-06-30                     |
 | Amazon Cognito Sync                 | CognitoSync               | 2014-06-30                     |
 | Amazon DynamoDB                     | DynamoDB                  | 2012-08-10                     |
-| Amazon Elastic Compute Cloud        | EC2                       | 2014-09-01                     |
+| Amazon Elastic Compute Cloud        | EC2                       | 2014-10-01                     |
 | Amazon Elastic MapReduce            | EMR                       | 2009-03-31                     |
 | Amazon Elastic Transcoder           | ElasticTranscoder         | 2012-09-25                     |
 | Amazon ElastiCache                  | ElastiCache               | 2014-09-30                     |
@@ -279,6 +279,7 @@ to be backwards compatible.
 | Auto Scaling                        | AutoScaling               | 2011-01-01                     |
 | AWS CloudFormation                  | CloudFormation            | 2010-05-15                     |
 | AWS CloudTrail                      | CloudTrail                | 2013-11-01                     |
+| AWS CodeDeploy                      | CodeDeploy                | 2014-10-06                     |
 | AWS Config                          | ConfigService             | 2014-10-17                     |
 | AWS Data Pipeline                   | DataPipeline              | 2012-10-29                     |
 | AWS Direct Connect                  | DirectConnect             | 2012-10-25                     |
