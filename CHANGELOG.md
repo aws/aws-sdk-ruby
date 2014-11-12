@@ -19,6 +19,9 @@ Unreleased Changes
   cfg = Aws::ConfigService::Client.new
   ```
 
+* Feature - Aws::CloudFormation - Added support for the new GetTemplateSummary
+  API call via `Aws::CloudFormation::Client#get_template_summary`.
+
 * Feature - Aws::EC2::Instance - Added `#decrypt_windows_password` method
   to the Instance class.
 
