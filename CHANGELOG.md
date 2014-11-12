@@ -24,6 +24,8 @@ Unreleased Changes
 
 * Feature - Aws::CloudTrail - Added support for Amazon CloudWatch logs delivery.
 
+* Feature - Aws::EC2 - Added support for EBS encryption with Amazon KMS.
+
 2.0.7 (2014-11-06)
 ------------------
 
