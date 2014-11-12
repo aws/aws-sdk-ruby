@@ -649,7 +649,8 @@
         "ap-southeast-2",
         "ap-northeast-1",
         "sa-east-1",
-        ""
+        "",
+        "cn-north-1"
       ]
     },
     "BucketLoggingStatus":{
@@ -751,6 +752,11 @@
           "shape":"ObjectVersionId",
           "location":"header",
           "locationName":"x-amz-version-id"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -847,6 +853,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       },
       "payload":"CopyObjectResult"
@@ -1003,6 +1014,11 @@
           "shape":"CopySourceSSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"
+        },
+        "CopySourceSSEKMSKeyId":{
+          "shape":"CopySourceSSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-copy-source-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -1030,8 +1046,15 @@
     "CopySourceIfUnmodifiedSince":{"type":"timestamp"},
     "CopySourceRange":{"type":"string"},
     "CopySourceSSECustomerAlgorithm":{"type":"string"},
-    "CopySourceSSECustomerKey":{"type":"string"},
+    "CopySourceSSECustomerKey":{
+      "type":"string",
+      "sensitive":true
+    },
     "CopySourceSSECustomerKeyMD5":{"type":"string"},
+    "CopySourceSSEKMSKeyId":{
+      "type":"string",
+      "sensitive":true
+    },
     "CopySourceVersionId":{"type":"string"},
     "CreateBucketConfiguration":{
       "type":"structure",
@@ -1119,6 +1142,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -1228,6 +1256,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -1818,6 +1851,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       },
       "payload":"Body"
@@ -1913,6 +1951,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -2092,6 +2135,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -2156,6 +2204,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -2285,7 +2338,7 @@
           "locationName":"Version"
         },
         "DeleteMarkers":{
-          "shape":"ObjectVersionList",
+          "shape":"DeleteMarkers",
           "locationName":"DeleteMarker"
         },
         "Name":{"shape":"BucketName"},
@@ -3044,6 +3097,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -3167,6 +3225,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       },
       "payload":"Body"
@@ -3281,8 +3344,15 @@
       "flattened":true
     },
     "SSECustomerAlgorithm":{"type":"string"},
-    "SSECustomerKey":{"type":"string"},
+    "SSECustomerKey":{
+      "type":"string",
+      "sensitive":true
+    },
     "SSECustomerKeyMD5":{"type":"string"},
+    "SSEKMSKeyId":{
+      "type":"string",
+      "sensitive":true
+    },
     "ServerSideEncryption":{
       "type":"string",
       "enum":["AES256"]
@@ -3392,6 +3462,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       },
       "payload":"CopyPartResult"
@@ -3485,6 +3560,11 @@
           "shape":"CopySourceSSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"
+        },
+        "CopySourceSSEKMSKeyId":{
+          "shape":"CopySourceSSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -3510,6 +3590,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -3570,6 +3655,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       },
       "payload":"Body"

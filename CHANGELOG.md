@@ -19,6 +19,9 @@ Unreleased Changes
   cfg = Aws::ConfigService::Client.new
   ```
 
+* Feature - Aws::S3 - Added support for server-side encryption using
+  Amazon Key Management Service (KMS).
+
 * Feature - Aws::CloudFormation - Added support for the new GetTemplateSummary
   API call via `Aws::CloudFormation::Client#get_template_summary`.
 

@@ -112,7 +112,7 @@
       "refs": {
         "GetObjectOutput$Body": "Object data.",
         "GetObjectTorrentOutput$Body": null,
-        "PutObjectRequest$Body": null,
+        "PutObjectRequest$Body": "Object data.",
         "UploadPartRequest$Body": null
       }
     },
@@ -460,6 +460,13 @@
         "UploadPartCopyRequest$CopySourceSSECustomerKeyMD5": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
       }
     },
+    "CopySourceSSEKMSKeyId": {
+      "base": null,
+      "refs": {
+        "CopyObjectRequest$CopySourceSSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
+        "UploadPartCopyRequest$CopySourceSSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption."
+      }
+    },
     "CopySourceVersionId": {
       "base": null,
       "refs": {
@@ -614,8 +621,11 @@
     "Delimiter": {
       "base": null,
       "refs": {
+        "ListMultipartUploadsOutput$Delimiter": null,
         "ListMultipartUploadsRequest$Delimiter": "Character you use to group keys.",
+        "ListObjectVersionsOutput$Delimiter": null,
         "ListObjectVersionsRequest$Delimiter": "A delimiter is a character you use to group keys.",
+        "ListObjectsOutput$Delimiter": null,
         "ListObjectsRequest$Delimiter": "A delimiter is a character you use to group keys."
       }
     },
@@ -1722,19 +1732,19 @@
       "base": null,
       "refs": {
         "CopyObjectOutput$SSECustomerAlgorithm": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.",
-        "CopyObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
+        "CopyObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).",
         "CreateMultipartUploadOutput$SSECustomerAlgorithm": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.",
-        "CreateMultipartUploadRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
+        "CreateMultipartUploadRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).",
         "GetObjectOutput$SSECustomerAlgorithm": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.",
-        "GetObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
+        "GetObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).",
         "HeadObjectOutput$SSECustomerAlgorithm": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.",
-        "HeadObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
+        "HeadObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).",
         "PutObjectOutput$SSECustomerAlgorithm": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.",
-        "PutObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
+        "PutObjectRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).",
         "UploadPartCopyOutput$SSECustomerAlgorithm": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.",
-        "UploadPartCopyRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256).",
+        "UploadPartCopyRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms).",
         "UploadPartOutput$SSECustomerAlgorithm": "If server-side encryption with a customer-provided encryption key was requested, the response will include this header confirming the encryption algorithm used.",
-        "UploadPartRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256)."
+        "UploadPartRequest$SSECustomerAlgorithm": "Specifies the algorithm to use to when encrypting the object (e.g., AES256, aws:kms)."
       }
     },
     "SSECustomerKey": {
@@ -1768,20 +1778,38 @@
         "UploadPartRequest$SSECustomerKeyMD5": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
       }
     },
+    "SSEKMSKeyId": {
+      "base": null,
+      "refs": {
+        "CompleteMultipartUploadOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "CopyObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "CreateMultipartUploadOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "CreateMultipartUploadRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
+        "GetObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "GetObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
+        "HeadObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "HeadObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
+        "PutObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "PutObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
+        "UploadPartCopyOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "UploadPartOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
+        "UploadPartRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption."
+      }
+    },
     "ServerSideEncryption": {
       "base": null,
       "refs": {
-        "CompleteMultipartUploadOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "CopyObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "CopyObjectRequest$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "CreateMultipartUploadOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "CreateMultipartUploadRequest$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "GetObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "HeadObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "PutObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "PutObjectRequest$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "UploadPartCopyOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3.",
-        "UploadPartOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3."
+        "CompleteMultipartUploadOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "CopyObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "CopyObjectRequest$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "CreateMultipartUploadOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "CreateMultipartUploadRequest$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "GetObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "HeadObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "PutObjectOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "PutObjectRequest$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "UploadPartCopyOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).",
+        "UploadPartOutput$ServerSideEncryption": "The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
       }
     },
     "Size": {
