@@ -266,6 +266,7 @@ to be backwards compatible.
 | Amazon ElastiCache                  | ElastiCache               | 2014-09-30                     |
 | Amazon Glacier                      | Glacier                   | 2012-06-01                     |
 | Amazon Kinesis                      | Kinesis                   | 2013-12-02                     |
+| Amazon Lambda                       | Lambda                    | 2014-11-11                     |
 | Amazon Redshift                     | Redshift                  | 2012-12-01                     |
 | Amazon Relational Database Service  | RDS                       | 2014-09-01                     |
 | Amazon Route 53                     | Route53                   | 2013-04-01                     |

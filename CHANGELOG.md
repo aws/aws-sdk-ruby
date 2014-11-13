@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.9 (2014-11-13)
 ------------------
 
 * Feature - New Service - Added support for Amazon Lambda.
