@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added support for event notifications to
+  `Aws::S3::Client`.
+
 2.0.8 (2014-11-12)
 ------------------
 

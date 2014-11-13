@@ -255,6 +255,25 @@
         "PutObjectRequest$CacheControl": "Specifies caching behavior along the request/reply chain."
       }
     },
+    "CloudFunction": {
+      "base": null,
+      "refs": {
+        "CloudFunctionConfiguration$CloudFunction": null
+      }
+    },
+    "CloudFunctionConfiguration": {
+      "base": null,
+      "refs": {
+        "GetBucketNotificationOutput$CloudFunctionConfiguration": null,
+        "NotificationConfiguration$CloudFunctionConfiguration": null
+      }
+    },
+    "CloudFunctionInvocationRole": {
+      "base": null,
+      "refs": {
+        "CloudFunctionConfiguration$InvocationRole": null
+      }
+    },
     "Code": {
       "base": null,
       "refs": {
@@ -692,7 +711,18 @@
     "Event": {
       "base": null,
       "refs": {
+        "CloudFunctionConfiguration$Event": null,
+        "Events$member": null,
+        "QueueConfiguration$Event": null,
         "TopicConfiguration$Event": "Bucket event for which to send notifications."
+      }
+    },
+    "Events": {
+      "base": null,
+      "refs": {
+        "CloudFunctionConfiguration$Events": null,
+        "QueueConfiguration$Events": null,
+        "TopicConfiguration$Events": null
       }
     },
     "Expiration": {
@@ -1338,6 +1368,14 @@
         "PutBucketNotificationRequest$NotificationConfiguration": null
       }
     },
+    "NotificationId": {
+      "base": null,
+      "refs": {
+        "CloudFunctionConfiguration$Id": null,
+        "QueueConfiguration$Id": null,
+        "TopicConfiguration$Id": null
+      }
+    },
     "Object": {
       "base": null,
       "refs": {
@@ -1602,6 +1640,19 @@
     "PutObjectRequest": {
       "base": null,
       "refs": {
+      }
+    },
+    "Queue": {
+      "base": null,
+      "refs": {
+        "QueueConfiguration$Queue": null
+      }
+    },
+    "QueueConfiguration": {
+      "base": null,
+      "refs": {
+        "GetBucketNotificationOutput$QueueConfiguration": null,
+        "NotificationConfiguration$QueueConfiguration": null
       }
     },
     "Quiet": {

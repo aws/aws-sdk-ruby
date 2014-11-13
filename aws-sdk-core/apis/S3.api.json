@@ -719,6 +719,24 @@
       "flattened":true
     },
     "CacheControl":{"type":"string"},
+    "CloudFunction":{"type":"string"},
+    "CloudFunctionConfiguration":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"NotificationId"},
+        "Event":{
+          "shape":"Event",
+          "deprecated":true
+        },
+        "Events":{
+          "shape":"Events",
+          "locationName":"Event"
+        },
+        "CloudFunction":{"shape":"CloudFunction"},
+        "InvocationRole":{"shape":"CloudFunctionInvocationRole"}
+      }
+    },
+    "CloudFunctionInvocationRole":{"type":"string"},
     "Code":{"type":"string"},
     "CommonPrefix":{
       "type":"structure",
@@ -1488,7 +1506,18 @@
     },
     "Event":{
       "type":"string",
-      "enum":["s3:ReducedRedundancyLostObject"]
+      "enum":[
+        "s3:ReducedRedundancyLostObject",
+        "s3:ObjectCreated:Put",
+        "s3:ObjectCreated:Post",
+        "s3:ObjectCreated:Copy",
+        "s3:ObjectCreated:CompleteMultipartUpload"
+      ]
+    },
+    "Events":{
+      "type":"list",
+      "member":{"shape":"Event"},
+      "flattened":true
     },
     "Expiration":{"type":"timestamp"},
     "ExpirationStatus":{
@@ -1603,7 +1632,9 @@
     "GetBucketNotificationOutput":{
       "type":"structure",
       "members":{
-        "TopicConfiguration":{"shape":"TopicConfiguration"}
+        "TopicConfiguration":{"shape":"TopicConfiguration"},
+        "QueueConfiguration":{"shape":"QueueConfiguration"},
+        "CloudFunctionConfiguration":{"shape":"CloudFunctionConfiguration"}
       }
     },
     "GetBucketNotificationRequest":{
@@ -2595,11 +2626,13 @@
     },
     "NotificationConfiguration":{
       "type":"structure",
-      "required":["TopicConfiguration"],
       "members":{
-        "TopicConfiguration":{"shape":"TopicConfiguration"}
+        "TopicConfiguration":{"shape":"TopicConfiguration"},
+        "QueueConfiguration":{"shape":"QueueConfiguration"},
+        "CloudFunctionConfiguration":{"shape":"CloudFunctionConfiguration"}
       }
     },
+    "NotificationId":{"type":"string"},
     "Object":{
       "type":"structure",
       "members":{
@@ -3234,6 +3267,22 @@
       },
       "payload":"Body"
     },
+    "Queue":{"type":"string"},
+    "QueueConfiguration":{
+      "type":"structure",
+      "members":{
+        "Id":{"shape":"NotificationId"},
+        "Event":{
+          "shape":"Event",
+          "deprecated":true
+        },
+        "Events":{
+          "shape":"Events",
+          "locationName":"Event"
+        },
+        "Queue":{"shape":"Queue"}
+      }
+    },
     "Quiet":{"type":"boolean"},
     "Range":{"type":"string"},
     "Redirect":{
@@ -3411,7 +3460,15 @@
     "TopicConfiguration":{
       "type":"structure",
       "members":{
-        "Event":{"shape":"Event"},
+        "Id":{"shape":"NotificationId"},
+        "Events":{
+          "shape":"Events",
+          "locationName":"Event"
+        },
+        "Event":{
+          "shape":"Event",
+          "deprecated":true
+        },
         "Topic":{"shape":"Topic"}
       }
     },
