@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - New Service - Added support for Amazon Lambda.
+
+  ```ruby
+  lambda = Aws::Lambda::Client.new
+  ```
+
 * Feature - Aws::S3 - Added support for event notifications to
   `Aws::S3::Client`.
 

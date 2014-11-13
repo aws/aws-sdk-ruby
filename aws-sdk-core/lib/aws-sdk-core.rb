@@ -43,6 +43,7 @@ module Aws
     ImportExport
     Kinesis
     KMS
+    Lambda
     OpsWorks
     RDS
     Redshift
