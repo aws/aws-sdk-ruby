@@ -650,7 +650,8 @@
         "ap-northeast-1",
         "sa-east-1",
         "",
-        "cn-north-1"
+        "cn-north-1",
+        "eu-central-1"
       ]
     },
     "BucketLoggingStatus":{
