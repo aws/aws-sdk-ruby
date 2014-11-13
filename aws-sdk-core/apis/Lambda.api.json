@@ -2,7 +2,7 @@
   "metadata":{
     "apiVersion":"2014-11-11",
     "endpointPrefix":"lambda",
-    "serviceFullName":"Amazon Lambda",
+    "serviceFullName":"AWS Lambda",
     "signatureVersion":"v4",
     "protocol":"rest-json"
   },
