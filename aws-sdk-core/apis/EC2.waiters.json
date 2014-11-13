@@ -169,8 +169,8 @@
     },
     "SpotInstanceRequestFulfilled": {
       "extends": "__SpotInstanceRequestState",
-      "success.value": "fulfilled",
-      "failure.value": [
+      "success_value": "fulfilled",
+      "failure_value": [
         "schedule-expired",
         "canceled-before-fulfillment",
         "bad-parameters",
