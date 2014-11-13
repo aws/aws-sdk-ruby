@@ -4,6 +4,9 @@ Unreleased Changes
 * Feature - Aws::S3 - Added support for event notifications to
   `Aws::S3::Client`.
 
+* Feature - Aws::ConfigService - Added paginators for
+  `Aws::ConfigService::Client#get_resource_config_history`.
+
 2.0.8 (2014-11-12)
 ------------------
 
