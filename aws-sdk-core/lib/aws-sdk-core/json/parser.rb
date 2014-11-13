@@ -66,6 +66,7 @@ module Aws
           when Seahorse::Model::Shapes::Map then map(shape, value, target)
           when Seahorse::Model::Shapes::Timestamp then time(value)
           when Seahorse::Model::Shapes::Blob then Base64.decode64(value)
+          when Seahorse::Model::Shapes::Boolean then value.to_s == 'true'
           else value
           end
         end
