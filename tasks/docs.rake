@@ -22,6 +22,7 @@ task 'docs:update_readme' do
     lines << line unless skip
   end
   File.open('README.md', 'w') { |file| file.write(lines.join) }
+  sh("git add README.md")
 end
 
 desc "Generates api-docs.zip"
