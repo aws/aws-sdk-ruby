@@ -41,7 +41,7 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private
-      IDENTIFIERS = Set.new
+      IDENTIFIERS = Set.new(SERVICE_MODULE_NAMES.map(&:downcase).map(&:to_sym))
 
       # @api private
       def before_initialize(client_class, options)

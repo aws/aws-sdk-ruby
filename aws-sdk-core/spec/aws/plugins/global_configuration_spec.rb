@@ -50,6 +50,13 @@ module Aws
         expect(Aws::Svc::Client.new.config.property).to eq('svc-default')
       end
 
+      it 'keeps a map of service identifiers' do
+        Aws::SERVICE_MODULE_NAMES.each do |name|
+          identifier = name.downcase.to_sym
+          expect(GlobalConfiguration::IDENTIFIERS).to include(identifier)
+        end
+      end
+
     end
   end
 end
