@@ -11,7 +11,7 @@
 # ANY KIND, either express or implied. See the License for the specific
 # language governing permissions and limitations under the License.
 
-require 'digest'
+require 'openssl'
 
 module AWS
   class SQS
@@ -810,7 +810,7 @@ module AWS
       # @api private
       protected
       def calculate_checksum data
-        Digest::MD5.hexdigest data
+        OpenSSL::Digest::MD5.hexdigest data
       end
 
       # @api private
