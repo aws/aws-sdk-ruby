@@ -44,20 +44,22 @@ module Aws
 
       # @param [Array<Resource>] resources
       # @option options [Seahorse::Client::Response] :response
-      def initialize(resources, options = {})
+      def initialize(resource_class, resources, options = {})
+        @resource_class = resource_class
         @resources = resources
+        @response = options[:response]
+        @size = resources.size
         @options = options
       end
 
+      # @return [Class<Resource>]
+      attr_reader :resource_class
+
       # @return [Seahorse::Client::Response, nil]
-      def response
-        @options[:response]
-      end
+      attr_reader :response
 
       # @return [Integer]
-      def size
-        @resources.size
-      end
+      attr_reader :size
 
       alias count size
 
@@ -78,7 +80,7 @@ module Aws
       # @return [Resource, Batch]
       def first(count = nil)
         if count
-          self.class.new(@resources.first(count), @options)
+          self.class.new(@resource_class, @resources.first(count), @options)
         else
           @resources.first
         end
@@ -91,18 +93,17 @@ module Aws
 
       # @api private
       def inspect
-        "#<#{self.class.name} resources=#{@resources}>"
+        "#<#{self.class.name} resources=#{@resources.inspect}>"
       end
 
       # @api private
       def respond_to?(method_name, *args)
-        if !empty? && batch_method?(method_name)
+        if @resource_class.batch_operation_names.include?(method_name.to_sym)
           true
         else
           super
         end
       end
-
 
       # @api private
       def method_missing(method_name, *args, &block)
@@ -115,16 +116,8 @@ module Aws
 
       private
 
-      def batch_method?(method_name)
-        resource_class.batch_operation_names.include?(method_name.to_sym)
-      end
-
-      def resource_class
-        @resources.first.class
-      end
-
       def invoke_batch_operation(method_name, args, block)
-        operation = resource_class.batch_operation(method_name)
+        operation = @resource_class.batch_operation(method_name)
         operation.call(resource:self, args:args, block:block)
       end
 

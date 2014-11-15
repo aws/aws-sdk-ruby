@@ -78,7 +78,7 @@ module Aws
         if count == 1
           limit(1).to_a.first
         else
-          Batch.new(limit(count).to_a)
+          Batch.new(resource_class, limit(count).to_a)
         end
       end
 

@@ -101,7 +101,6 @@ module Aws
             client: double('client')
           )
           resource_class = new_resource_class(identifiers:[:id])
-          resource_class.const_set(:Batch, Class.new(Batch))
           builder = Builder.new(resource_class:resource_class, sources:[
             BuilderSources::DataMember.new('ids[]', 'id'),
           ])
