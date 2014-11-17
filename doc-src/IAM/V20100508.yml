@@ -1,4 +1,10 @@
 ---
+:add_client_id_to_open_id_connect_provider: |-
+  Calls the AddClientIDToOpenIDConnectProvider API operation.
+  @param [Hash] options
+    * `:open_id_connect_provider_arn` - *required* - (String) The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider to add the client ID to. You can get a list of OIDC provider ARNs by using the ListOpenIDConnectProviders action.
+    * `:client_id` - *required* - (String) The client ID (also known as audience) to add to the IAM OpenID Connect provider.
+  @return [Core::Response]
 :add_role_to_instance_profile: |-
   Calls the AddRoleToInstanceProfile API operation.
   @param [Hash] options
@@ -79,6 +85,15 @@
       * `:user_name` - (String)
       * `:create_date` - (Time)
       * `:password_reset_required` - (Boolean)
+:create_open_id_connect_provider: |-
+  Calls the CreateOpenIDConnectProvider API operation.
+  @param [Hash] options
+    * `:url` - *required* - (String) The URL of the identity provider. The URL must begin with "https://" and should correspond to the iss claim in the provider's OpenID Connect ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a host name, like "https://server.example.org" or "https://example.com". You cannot register the same provider multiple times in a single AWS account. If you try to submit a URL that has already been used for an OpenID Connect provider in the AWS account, you will get an error.
+    * `:client_id_list` - (Array&lt;<String>) A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.) You can register multiple client IDs with the same provider. For example, you might have multiple applications that use the same OIDC provider. You cannot register more than 100 client IDs with a single IAM OIDC provider. There is no defined format for a client ID. The CreateOpenIDConnectProviderRequest action accepts client IDs up to 255 characters long.
+    * `:thumbprint_list` - *required* - (Array&lt;<String>) A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). Typically this list includes only one entry. However, IAM lets you have up to five thumbprints for an OIDC provider. This lets you maintain multiple thumbprints if the identity provider is rotating certificates. The server certificate thumbprint is the hex-encoded SHA-1 hash value of the X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. You must provide at least one thumbprint when creating an IAM OIDC provider. For example, if the OIDC provider is server.example.com and the provider stores its keys at "https://keys.server.example.com/openid-connect", the thumbprint string would be the hex-encoded SHA-1 hash value of the certificate used by https://keys.server.example.com.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:open_id_connect_provider_arn` - (String)
 :create_role: |-
   Calls the CreateRole API operation.
   @param [Hash] options
@@ -115,6 +130,7 @@
       * `:user_id` - (String)
       * `:arn` - (String)
       * `:create_date` - (Time)
+      * `:password_last_used` - (Time)
 :create_virtual_mfa_device: |-
   Calls the CreateVirtualMFADevice API operation.
   @param [Hash] options
@@ -132,6 +148,7 @@
         * `:user_id` - (String)
         * `:arn` - (String)
         * `:create_date` - (Time)
+        * `:password_last_used` - (Time)
       * `:enable_date` - (Time)
 :deactivate_mfa_device: |-
   Calls the DeactivateMFADevice API operation.
@@ -174,6 +191,11 @@
   Calls the DeleteLoginProfile API operation.
   @param [Hash] options
     * `:user_name` - *required* - (String) The name of the user whose password you want to delete.
+  @return [Core::Response]
+:delete_open_id_connect_provider: |-
+  Calls the DeleteOpenIDConnectProvider API operation.
+  @param [Hash] options
+    * `:open_id_connect_provider_arn` - *required* - (String) The Amazon Resource Name (ARN) of the IAM OpenID Connect provider to delete. You can get a list of OpenID Connect provider ARNs by using the ListOpenIDConnectProviders action.
   @return [Core::Response]
 :delete_role: |-
   Calls the DeleteRole API operation.
@@ -283,6 +305,7 @@
       * `:user_id` - (String)
       * `:arn` - (String)
       * `:create_date` - (Time)
+      * `:password_last_used` - (Time)
     * `:is_truncated` - (Boolean)
     * `:marker` - (String)
 :get_group_policy: |-
@@ -324,6 +347,16 @@
       * `:user_name` - (String)
       * `:create_date` - (Time)
       * `:password_reset_required` - (Boolean)
+:get_open_id_connect_provider: |-
+  Calls the GetOpenIDConnectProvider API operation.
+  @param [Hash] options
+    * `:open_id_connect_provider_arn` - *required* - (String) The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider to get information for. You can get a list of OIDC provider ARNs by using the ListOpenIDConnectProviders action.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:url` - (String)
+    * `:client_id_list` - (Array<String>)
+    * `:thumbprint_list` - (Array<String>)
+    * `:create_date` - (Time)
 :get_role: |-
   Calls the GetRole API operation.
   @param [Hash] options
@@ -384,6 +417,7 @@
       * `:user_id` - (String)
       * `:arn` - (String)
       * `:create_date` - (Time)
+      * `:password_last_used` - (Time)
 :get_user_policy: |-
   Calls the GetUserPolicy API operation.
   @param [Hash] options
@@ -522,6 +556,13 @@
       * `:enable_date` - (Time)
     * `:is_truncated` - (Boolean)
     * `:marker` - (String)
+:list_open_id_connect_providers: |-
+  Calls the ListOpenIDConnectProviders API operation.
+  @param [Hash] options
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:open_id_connect_provider_list` - (Array<Hash>)
+      * `:arn` - (String)
 :list_role_policies: |-
   Calls the ListRolePolicies API operation.
   @param [Hash] options
@@ -617,6 +658,7 @@
       * `:user_id` - (String)
       * `:arn` - (String)
       * `:create_date` - (Time)
+      * `:password_last_used` - (Time)
     * `:is_truncated` - (Boolean)
     * `:marker` - (String)
 :list_virtual_mfa_devices: |-
@@ -640,6 +682,7 @@
         * `:user_id` - (String)
         * `:arn` - (String)
         * `:create_date` - (Time)
+        * `:password_last_used` - (Time)
       * `:enable_date` - (Time)
     * `:is_truncated` - (Boolean)
     * `:marker` - (String)
@@ -663,6 +706,12 @@
     * `:user_name` - *required* - (String) The name of the user to associate the policy with.
     * `:policy_name` - *required* - (String) The name of the policy document.
     * `:policy_document` - *required* - (String) The policy document.
+  @return [Core::Response]
+:remove_client_id_from_open_id_connect_provider: |-
+  Calls the RemoveClientIDFromOpenIDConnectProvider API operation.
+  @param [Hash] options
+    * `:open_id_connect_provider_arn` - *required* - (String) The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider to remove the client ID from. You can get a list of OIDC provider ARNs by using the ListOpenIDConnectProviders action.
+    * `:client_id` - *required* - (String) The client ID (also known as audience) to remove from the IAM OpenID Connect provider. For more information about client IDs, see CreateOpenIDConnectProvider.
   @return [Core::Response]
 :remove_role_from_instance_profile: |-
   Calls the RemoveRoleFromInstanceProfile API operation.
@@ -697,24 +746,25 @@
   [Hash] options\n  * `:minimum_password_length` - (Integer) The minimum number of
   characters allowed in an IAM user password. Default value: 6\n  * `:require_symbols`
   - (Boolean) Specifies whether IAM user passwords must contain at least one of the
-  following non-alphanumeric characters: ! @ # $ % ^ & * ( ) _ + - = [ ] { } | ' Default
-  value:  `false` \n  * `:require_numbers` - (Boolean) Specifies whether IAM user
-  passwords must contain at least one numeric character (0 to 9). Default value:  `false`
-  \n  * `:require_uppercase_characters` - (Boolean) Specifies whether IAM user passwords
-  must contain at least one uppercase character from the ISO basic Latin alphabet
-  (A to Z). Default value:  `false` \n  * `:require_lowercase_characters` - (Boolean)
-  Specifies whether IAM user passwords must contain at least one lowercase character
-  from the ISO basic Latin alphabet (a to z). Default value:  `false` \n  * `:allow_users_to_change_password`
-  - (Boolean) Allows all IAM users in your account to use the AWS Management Console
-  to change their own passwords. For more information, see Letting IAM Users Change
-  Their Own Passwords in the Using IAM guide. Default value:  `false` \n  * `:max_password_age`
-  - (Integer) The number of days that an IAM user password is valid. The default value
-  of 0 means IAM user passwords never expire. Default value: 0\n  * `:password_reuse_prevention`
-  - (Integer) Specifies the number of previous passwords that IAM users are prevented
-  from reusing. The default value of 0 means IAM users are not prevented from reusing
-  previous passwords. Default value: 0\n  * `:hard_expiry` - (Boolean) Prevents IAM
-  users from setting a new password after their password has expired. Default value:
-  \ `false` \n@return [Core::Response]"
+  following non-alphanumeric characters: ! @ # $ % ^ &amp; * ( ) _ + - = [ ] { } |
+  ' Default value:  `false` \n  * `:require_numbers` - (Boolean) Specifies whether
+  IAM user passwords must contain at least one numeric character (0 to 9). Default
+  value:  `false` \n  * `:require_uppercase_characters` - (Boolean) Specifies whether
+  IAM user passwords must contain at least one uppercase character from the ISO basic
+  Latin alphabet (A to Z). Default value:  `false` \n  * `:require_lowercase_characters`
+  - (Boolean) Specifies whether IAM user passwords must contain at least one lowercase
+  character from the ISO basic Latin alphabet (a to z). Default value:  `false` \n
+  \ * `:allow_users_to_change_password` - (Boolean) Allows all IAM users in your account
+  to use the AWS Management Console to change their own passwords. For more information,
+  see Letting IAM Users Change Their Own Passwords in the Using IAM guide. Default
+  value:  `false` \n  * `:max_password_age` - (Integer) The number of days that an
+  IAM user password is valid. The default value of 0 means IAM user passwords never
+  expire. Default value: 0\n  * `:password_reuse_prevention` - (Integer) Specifies
+  the number of previous passwords that IAM users are prevented from reusing. The
+  default value of 0 means IAM users are not prevented from reusing previous passwords.
+  Default value: 0\n  * `:hard_expiry` - (Boolean) Prevents IAM users from setting
+  a new password after their password has expired. Default value:  `false` \n@return
+  [Core::Response]"
 :update_assume_role_policy: |-
   Calls the UpdateAssumeRolePolicy API operation.
   @param [Hash] options
@@ -734,6 +784,12 @@
     * `:user_name` - *required* - (String) The name of the user whose password you want to update.
     * `:password` - (String) The new password for the specified user.
     * `:password_reset_required` - (Boolean) Require the specified user to set a new password on next sign-in.
+  @return [Core::Response]
+:update_open_id_connect_provider_thumbprint: |-
+  Calls the UpdateOpenIDConnectProviderThumbprint API operation.
+  @param [Hash] options
+    * `:open_id_connect_provider_arn` - *required* - (String) The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider to update the thumbprint for. You can get a list of OIDC provider ARNs by using the ListOpenIDConnectProviders action.
+    * `:thumbprint_list` - *required* - (Array&lt;<String>) A list of certificate thumbprints that are associated with the specified IAM OpenID Connect provider. For more information, see CreateOpenIDConnectProvider.
   @return [Core::Response]
 :update_saml_provider: |-
   Calls the UpdateSAMLProvider API operation.

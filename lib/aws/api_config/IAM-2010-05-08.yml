@@ -14,6 +14,19 @@
 ---
 :api_version: '2010-05-08'
 :operations:
+- :name: AddClientIDToOpenIDConnectProvider
+  :method: :add_client_id_to_open_id_connect_provider
+  :inputs:
+    OpenIDConnectProviderArn:
+    - :string
+    - :required
+    ClientID:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      AddClientIDToOpenIDConnectProviderResult:
+        :ignore: true
 - :name: AddRoleToInstanceProfile
   :method: :add_role_to_instance_profile
   :inputs:
@@ -142,6 +155,23 @@
                 :type: :time
               PasswordResetRequired:
                 :type: :boolean
+- :name: CreateOpenIDConnectProvider
+  :method: :create_open_id_connect_provider
+  :inputs:
+    Url:
+    - :string
+    - :required
+    ClientIDList:
+    - :list:
+      - :string
+    ThumbprintList:
+    - :list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      CreateOpenIDConnectProviderResult:
+        :ignore: true
 - :name: CreateRole
   :method: :create_role
   :inputs:
@@ -192,6 +222,8 @@
             :children:
               CreateDate:
                 :type: :time
+              PasswordLastUsed:
+                :type: :time
 - :name: CreateVirtualMFADevice
   :method: :create_virtual_mfa_device
   :inputs:
@@ -214,6 +246,8 @@
               User:
                 :children:
                   CreateDate:
+                    :type: :time
+                  PasswordLastUsed:
                     :type: :time
               EnableDate:
                 :type: :time
@@ -301,6 +335,16 @@
   :outputs:
     :children:
       DeleteLoginProfileResult:
+        :ignore: true
+- :name: DeleteOpenIDConnectProvider
+  :method: :delete_open_id_connect_provider
+  :inputs:
+    OpenIDConnectProviderArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteOpenIDConnectProviderResult:
         :ignore: true
 - :name: DeleteRole
   :method: :delete_role
@@ -505,6 +549,8 @@
                 :children:
                   CreateDate:
                     :type: :time
+                  PasswordLastUsed:
+                    :type: :time
           IsTruncated:
             :type: :boolean
 - :name: GetGroupPolicy
@@ -561,6 +607,31 @@
                 :type: :time
               PasswordResetRequired:
                 :type: :boolean
+- :name: GetOpenIDConnectProvider
+  :method: :get_open_id_connect_provider
+  :inputs:
+    OpenIDConnectProviderArn:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      GetOpenIDConnectProviderResult:
+        :ignore: true
+        :children:
+          ClientIDList:
+            :ignore: true
+            :children:
+              member:
+                :rename: :client_id_list
+                :list: true
+          ThumbprintList:
+            :ignore: true
+            :children:
+              member:
+                :rename: :thumbprint_list
+                :list: true
+          CreateDate:
+            :type: :time
 - :name: GetRole
   :method: :get_role
   :inputs:
@@ -636,6 +707,8 @@
           User:
             :children:
               CreateDate:
+                :type: :time
+              PasswordLastUsed:
                 :type: :time
 - :name: GetUserPolicy
   :method: :get_user_policy
@@ -863,6 +936,20 @@
                     :type: :time
           IsTruncated:
             :type: :boolean
+- :name: ListOpenIDConnectProviders
+  :method: :list_open_id_connect_providers
+  :inputs: {}
+  :outputs:
+    :children:
+      ListOpenIDConnectProvidersResult:
+        :ignore: true
+        :children:
+          OpenIDConnectProviderList:
+            :ignore: true
+            :children:
+              member:
+                :rename: :open_id_connect_provider_list
+                :list: true
 - :name: ListRolePolicies
   :method: :list_role_policies
   :inputs:
@@ -1028,6 +1115,8 @@
                 :children:
                   CreateDate:
                     :type: :time
+                  PasswordLastUsed:
+                    :type: :time
           IsTruncated:
             :type: :boolean
 - :name: ListVirtualMFADevices
@@ -1058,6 +1147,8 @@
                   User:
                     :children:
                       CreateDate:
+                        :type: :time
+                      PasswordLastUsed:
                         :type: :time
                   EnableDate:
                     :type: :time
@@ -1110,6 +1201,19 @@
   :outputs:
     :children:
       PutUserPolicyResult:
+        :ignore: true
+- :name: RemoveClientIDFromOpenIDConnectProvider
+  :method: :remove_client_id_from_open_id_connect_provider
+  :inputs:
+    OpenIDConnectProviderArn:
+    - :string
+    - :required
+    ClientID:
+    - :string
+    - :required
+  :outputs:
+    :children:
+      RemoveClientIDFromOpenIDConnectProviderResult:
         :ignore: true
 - :name: RemoveRoleFromInstanceProfile
   :method: :remove_role_from_instance_profile
@@ -1236,6 +1340,20 @@
   :outputs:
     :children:
       UpdateLoginProfileResult:
+        :ignore: true
+- :name: UpdateOpenIDConnectProviderThumbprint
+  :method: :update_open_id_connect_provider_thumbprint
+  :inputs:
+    OpenIDConnectProviderArn:
+    - :string
+    - :required
+    ThumbprintList:
+    - :list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      UpdateOpenIDConnectProviderThumbprintResult:
         :ignore: true
 - :name: UpdateSAMLProvider
   :method: :update_saml_provider
