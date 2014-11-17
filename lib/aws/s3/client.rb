@@ -53,11 +53,11 @@ module AWS
       # @param [Core::Http::Request] request
       # @api private
       def sign_request request
-        case @config.s3_signature_version
+        case @config.s3_signature_version.to_sym
         when :v4 then v4_signer.sign_request(request)
         when :v3 then v3_signer.sign_request(request)
         else
-          raise "invalid signature version #{version.inspect}"
+          raise "invalid signature version #{@config.s3_signature_version.inspect}"
         end
       end
 
