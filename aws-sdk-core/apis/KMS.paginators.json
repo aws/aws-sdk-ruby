@@ -4,28 +4,28 @@
       "limit_key": "Limit",
       "input_token": "Marker",
       "output_token": "NextMarker",
-      "more_results": "IsTruncated",
+      "more_results": "Truncated",
       "result_key": "Aliases"
     },
     "ListGrants": {
       "limit_key": "Limit",
       "input_token": "Marker",
       "output_token": "NextMarker",
-      "more_results": "IsTruncated",
+      "more_results": "Truncated",
       "result_key": "Grants"
     },
-    "ListPolicies": {
+    "ListKeyPolicies": {
       "limit_key": "Limit",
       "input_token": "Marker",
       "output_token": "NextMarker",
-      "more_results": "IsTruncated",
-      "result_key": "Policies"
+      "more_results": "Truncated",
+      "result_key": "PolicyNames"
     },
     "ListKeys": {
       "limit_key": "Limit",
       "input_token": "Marker",
       "output_token": "NextMarker",
-      "more_results": "IsTruncated",
+      "more_results": "Truncated",
       "result_key": "Keys"
     }
   }

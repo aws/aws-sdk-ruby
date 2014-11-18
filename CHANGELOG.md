@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::KMS - Corrected the paginators for `Aws::KMS::Client`.
+
 2.0.9 (2014-11-13)
 ------------------
 
