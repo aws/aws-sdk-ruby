@@ -14,6 +14,7 @@ module Aws
         end
       end
 
+      # Abstract base class for the other two handlers
       class Handler < Seahorse::Client::Handler
 
         private
@@ -29,6 +30,8 @@ module Aws
 
       end
 
+      # This handler will update the http endpoint when the bucket region
+      # is known/cached.
       class CachedBucketRegionHandler < Handler
 
         def call(context)
@@ -51,6 +54,10 @@ module Aws
 
       end
 
+      # This handler detects when a request fails because signature version 4
+      # is required but not used. It follows up by making a request to
+      # determine the correct region, then finally a version 4 signed
+      # request against the regional endpoint.
       class DetectRegionHandler < Handler
 
         def call(context)
