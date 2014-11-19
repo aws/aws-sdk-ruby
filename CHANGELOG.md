@@ -12,6 +12,11 @@ Unreleased Changes
   for GET requests in all known regions. When the region is not known, a best
   effort is made to determine the region. Fixes #157.
 
+* Issue - Aws::S3 - The `Aws::S3::Client#get_bucket_location` operation will no
+  longer use DNS addressing and will instead use path-addressing for the bucket
+  name. This avoids signature errors for v4-only regions when the classic
+  endpoint is used with a v2 signature.
+
 2.0.9 (2014-11-13)
 ------------------
 

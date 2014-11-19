@@ -123,11 +123,13 @@ module Aws
         # virtual hosted-style requests require the hostname to appear
         # in the canonicalized resource prefixed by a forward slash.
         if bucket = params[:bucket]
+          bucket = bucket.value
           ssl = endpoint.scheme == 'https'
-          if Plugins::S3BucketDns.dns_compatible?(bucket.value, ssl) &&
-            !@force_path_style
+          if Plugins::S3BucketDns.dns_compatible?(bucket, ssl) &&
+            !@force_path_style &&
+            !endpoint.path.match(/^\/#{Regexp.escape(bucket)}/)
           then
-            parts << "/#{bucket.value}"
+            parts << "/#{bucket}"
           end
         end
 

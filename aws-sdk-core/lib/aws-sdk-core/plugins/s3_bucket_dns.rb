@@ -38,7 +38,8 @@ module Aws
           endpoint = context.http_request.endpoint
           if
             bucket_name &&
-            S3BucketDns.dns_compatible?(bucket_name, https?(endpoint))
+            S3BucketDns.dns_compatible?(bucket_name, https?(endpoint)) &&
+            context.operation_name != 'get_bucket_location'
           then
             move_bucket_to_subdomain(bucket_name, endpoint)
           end
