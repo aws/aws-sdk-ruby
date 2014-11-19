@@ -102,7 +102,7 @@ module Aws
         add_plugin 'Aws::Plugins::S3Redirects'
         add_plugin 'Aws::Plugins::S3SseCpk'
         add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
-        add_plugin 'Aws::Plugins::S3RegionDetection'
+        add_plugin 'Aws::Plugins::S3RequestSigner'
         defs = client_class.waiters.instance_variable_get("@definitions")
         defs[:bucket_exists]['ignore_errors'] = ['NotFound']
         defs[:object_exists]['ignore_errors'] = ['NotFound']

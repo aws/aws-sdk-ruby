@@ -47,7 +47,7 @@ module Aws
         end
 
         it 'sends a warning to stderr' do
-          expect($stderr).to receive(:write).with(<<-WARNING.strip)
+          expect($stderr).to receive(:write).with(<<-WARNING.strip + "\n")
 S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1"; Please configure the proper region to avoid multiple unecessary redirects and signing attempts
           WARNING
           client.put_object(bucket:'bucket', key:'key', body:'body')
@@ -55,7 +55,7 @@ S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1
 
         it 'sends the warning to the logger if configured' do
           logger = double('logger').as_null_object
-          expect(logger).to receive(:warn).with(<<-WARNING.strip)
+          expect(logger).to receive(:warn).with(<<-WARNING.strip + "\n")
 S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1"; Please configure the proper region to avoid multiple unecessary redirects and signing attempts
           WARNING
           client = S3::Client.new(client_opts.merge(logger: logger))

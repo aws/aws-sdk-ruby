@@ -7,6 +7,11 @@ Unreleased Changes
   using `Aws::IAM::Client` in the `us-gov-west-1` region.
   Fixes #159
 
+* Issue - Aws::S3 - Resolved an issue when making a GET Object request against
+  an object encrypted with AWS KMS. Automatically using signature version 4
+  for GET requests in all known regions. When the region is not known, a best
+  effort is made to determine the region. Fixes #157.
+
 2.0.9 (2014-11-13)
 ------------------
 

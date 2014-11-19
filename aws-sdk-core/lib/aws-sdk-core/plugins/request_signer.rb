@@ -76,8 +76,7 @@ module Aws
         private
 
         def sign_authenticated_requests(context)
-          version = context[:signature_version] || context.config.signature_version
-          if signer = SIGNERS[version]
+          if signer = SIGNERS[context.config.signature_version]
             require_credentials(context)
             signer.sign(context)
           end
@@ -95,7 +94,10 @@ module Aws
 
       end
 
-      handler(Handler, step: :sign)
+      def add_handlers(handlers, config)
+        # See the S3RequestSignerPlugin for Amazon S3 signature logic
+        handlers.add(Handler, step: :sign) unless config.sigv4_name == 's3'
+      end
 
     end
   end

@@ -37,7 +37,6 @@ module Aws
       describe 'signature version' do
 
         [
-          "us-east-1",
           "us-west-1",
           "us-west-2",
           "ap-northeast-1",
@@ -47,20 +46,85 @@ module Aws
           "eu-west-1",
           "us-gov-west-1",
         ].each do |region|
-          it "defaults signature_version to 'v3' for '#{region}'" do
-            client = Client.new(region: region)
-            expect(client.config.signature_version).to eq('s3')
+
+          it "defaults signature version 4 for #{region}" do
+            client = Client.new(stub_responses: true, region: region)
+            resp = client.head_object(bucket:'name', key:'key')
+            expect(resp.context.http_request.headers['authorization']).to match(
+              'AWS4-HMAC-SHA256')
           end
+
+          it "falls back on classic S3 signing for #put_object in #{region}" do
+            client = Client.new(stub_responses: true, region: region)
+            resp = client.put_object(bucket:'name', key:'key', body:'data')
+            expect(resp.context.http_request.headers['authorization']).to match(
+              'AWS akid:')
+          end
+
+          it "forces v4 signing when aws:kms used for server side encryption" do
+            client = Client.new(stub_responses: true, region: region)
+            resp = client.put_object(
+              bucket: 'name',
+              key: 'key',
+              server_side_encryption: 'aws:kms',
+              body: 'data'
+            )
+            expect(resp.context.http_request.headers['authorization']).to match(
+              'AWS4-HMAC-SHA256')
+          end
+
         end
 
         [
           "cn-north-1",
-          "brand-new-region",
+          "eu-central-1",
+          "unknown-region",
         ].each do |region|
-          it "defaults signature_version to 'v4' for '#{region}'" do
-            client = Client.new(region: region)
-            expect(client.config.signature_version).to eq('v4')
+
+          it "defaults signature version 4 for #{region}" do
+            client = Client.new(stub_responses: true, region: region)
+            resp = client.head_object(bucket:'name', key:'key')
+            expect(resp.context.http_request.headers['authorization']).to match(
+              'AWS4-HMAC-SHA256')
           end
+
+          it "forces v4 signing, even for PUT object in #{region}" do
+            client = Client.new(stub_responses: true, region: region)
+            resp = client.put_object(bucket:'name', key:'key', body:'data')
+            expect(resp.context.http_request.headers['authorization']).to match(
+              'AWS4-HMAC-SHA256')
+          end
+
+          it "forces v4 signing when aws:kms used for server side encryption" do
+            client = Client.new(stub_responses: true, region: region)
+            resp = client.put_object(
+              bucket: 'name',
+              key: 'key',
+              server_side_encryption: 'aws:kms',
+              body: 'data'
+            )
+            expect(resp.context.http_request.headers['authorization']).to match(
+              'AWS4-HMAC-SHA256')
+          end
+        end
+
+        it "defaults classic s3 signature us-east-1" do
+          client = Client.new(stub_responses: true, region: 'us-east-1')
+          resp = client.head_object(bucket:'name', key:'key')
+          expect(resp.context.http_request.headers['authorization']).to match(
+            'AWS akid:')
+        end
+
+        it "upgrades to signature version 4 when aws:kms used for sse" do
+          client = Client.new(stub_responses: true, region: 'us-east-1')
+          resp = client.put_object(
+            bucket: 'name',
+            key: 'key',
+            server_side_encryption: 'aws:kms',
+            body: 'data'
+          )
+          expect(resp.context.http_request.headers['authorization']).to match(
+            'AWS4-HMAC-SHA256')
         end
 
       end
