@@ -30,6 +30,7 @@ module AWS
       # @attr_reader [Boolean] ssl_verify_peer
       # @attr_reader [String,nil] ssl_ca_file
       # @attr_reader [String,nil] ssl_ca_path
+      # @attr_reader [String,nil] ssl_cert_store
       # @api private
       class ConnectionPool
 
@@ -48,6 +49,7 @@ module AWS
           :ssl_verify_peer,
           :ssl_ca_file,
           :ssl_ca_path,
+          :ssl_cert_store,
         ]
 
         OPTIONS.each do |attr_name|
@@ -224,6 +226,8 @@ module AWS
           #   `:ssl_ca_file` or `:ssl_ca_path` the the system default will
           #   be used if available.
           #
+          # @option options [String] :ssl_cert_store
+          #
           # @return [ConnectionPool]
           def new options = {}
             options = pool_options(options)
@@ -268,6 +272,7 @@ module AWS
               :ssl_verify_peer => verify_peer,
               :ssl_ca_file => options[:ssl_ca_file],
               :ssl_ca_path => options[:ssl_ca_path],
+              :ssl_cert_store => options[:ssl_cert_store],
             }
           end
 
@@ -311,6 +316,7 @@ module AWS
               http.verify_mode = OpenSSL::SSL::VERIFY_PEER
               http.ca_file = ssl_ca_file if ssl_ca_file
               http.ca_path = ssl_ca_path if ssl_ca_path
+              http.cert_store = ssl_cert_store if ssl_cert_store
             else
               http.verify_mode = OpenSSL::SSL::VERIFY_NONE
             end

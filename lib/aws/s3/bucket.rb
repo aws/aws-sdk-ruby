@@ -238,11 +238,12 @@ module AWS
 
       # Returns the url for this bucket.
       # @return [String] url to the bucket
-      def url
+      def url(options = {})
+        protocol = options.fetch(:secure, false) ? "https://" : "http://"
         if client.dns_compatible_bucket_name?(name)
-          "http://#{name}.s3.amazonaws.com/"
+          "#{protocol}#{name}.s3.amazonaws.com/"
         else
-          "http://s3.amazonaws.com/#{name}/"
+          "#{protocol}s3.amazonaws.com/#{name}/"
         end
       end
 

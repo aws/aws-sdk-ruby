@@ -20,7 +20,7 @@ Then /^the instance (should|should not) be valid$/ do |should|
   if should == "should"
     @inst.errors.should == {}
   end
-  @inst.valid?.should send(should == "should" ? :be_true : :be_false)
+  @inst.valid?.should send(should == "should" ? :be_truthy : :be_falsey)
 end
 
 Then /^the errors should include:$/ do |table|

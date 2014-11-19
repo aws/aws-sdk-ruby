@@ -161,13 +161,13 @@ module AWS
         end
 
         it 'should return true when the call succeeds' do
-          profile.exists?.should be_true
+          profile.exists?.should be_truthy
         end
 
         it 'should return false when the call fails with NoSuchEntity' do
           client.stub(:get_login_profile).
             and_raise(Errors::NoSuchEntity)
-          profile.exists?.should be_false
+          profile.exists?.should be_falsey
         end
 
         it 'should not rescue other kinds of errors' do

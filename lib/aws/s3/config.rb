@@ -33,15 +33,28 @@ AWS::Core::Configuration.module_eval do
 
   add_option :s3_storage_class, 'STANDARD'
 
+  add_option :s3_cache_object_attributes, false, :boolean => true
+
   add_option :s3_signature_version do |config, value|
-    if config.s3_region.match(/^cn-/)
-      :v4
-    elsif value
+    v3_regions = %w(
+      us-east-1
+      us-west-1
+      us-west-2
+      ap-northeast-1
+      ap-southeast-1
+      ap-southeast-2
+      sa-east-1
+      eu-west-1
+      us-gov-west-1
+    )
+    if value
       value
     elsif config.s3 && config.s3[:signature_version]
       config.s3[:signature_version]
-    else
+    elsif v3_regions.include?(config.s3_region)
       :v3
+    else
+      :v4
     end
   end
 

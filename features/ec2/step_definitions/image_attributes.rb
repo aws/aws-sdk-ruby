@@ -71,7 +71,7 @@ Then /^the image launch permissions should eventually be empty$/ do
 end
 
 Then /^the image should be public$/ do
-  @image.public?.should be_true
+  @image.public?.should be_truthy
 end
 
 When /^I make the image public$/ do

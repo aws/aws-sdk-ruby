@@ -41,7 +41,7 @@ module AWS
 
         it 'should store :secure' do
           described_class.new(bucket, :secure => false).
-            secure?.should be_false
+            secure?.should be_falsey
         end
 
         it 'should store :metadata' do

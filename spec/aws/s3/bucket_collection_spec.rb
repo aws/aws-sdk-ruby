@@ -144,7 +144,7 @@ module AWS
         it 'should yield a bucket object for each item in the response' do
           got_buckets = []
           buckets.each { |b| got_buckets << b }
-          got_buckets.should have(1).item
+          expect(got_buckets.size).to eq(1)
           got_buckets.first.should be_an(S3::Bucket)
           got_buckets.first.name.should == "foo"
         end

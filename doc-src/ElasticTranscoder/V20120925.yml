@@ -65,10 +65,19 @@
   270. The value auto generally works only if the file that you're transcoding contains
   rotation metadata.\n    * `:preset_id` - (String) The Id of the preset to use for
   this job. The preset determines the audio, video, and thumbnail settings that Elastic
-  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) If you specify
-  a preset in PresetId for which the value of Container is ts (MPEG-TS), SegmentDuration
-  is the duration of each .ts file in seconds. The range of valid values is 1 to 60
-  seconds.\n    * `:watermarks` - (Array&lt;Hash>) Information about the watermarks
+  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) (Outputs
+  in Fragmented MP4 or MPEG-TS format only.If you specify a preset in PresetId for
+  which the value of Container is fmp4 (Fragmented MP4) or ts (MPEG-TS), SegmentDuration
+  is the target maximum duration of each segment in seconds. For HLSv3 format playlists,
+  each media segment is stored in a separate .ts file. For HLSv4 and Smooth playlists,
+  all media segments for an output are stored in a single file. Each segment is approximately
+  the length of the SegmentDuration, though individual segments might be shorter or
+  longer. The range of valid values is 1 to 60 seconds. If the duration of the video
+  is not evenly divisible by SegmentDuration, the duration of the last segment is
+  the remainder of total length/SegmentDuration. Elastic Transcoder creates an output-specific
+  playlist for each output HLS output that you specify in OutputKeys. To add an output
+  to the master playlist for this job, include it in the OutputKeys of the associated
+  playlist.\n    * `:watermarks` - (Array&lt;Hash>) Information about the watermarks
   that you want Elastic Transcoder to add to the video during transcoding. You can
   specify up to four watermarks for each output. Settings for each watermark must
   be defined in the preset for the current output.\n    * `:member` - (Hash) \n      *
@@ -199,16 +208,16 @@
   sidecar caption for this output. Valid Embedded Caption Formats: For MP3: None For
   MP4: mov-text For MPEG-TS: None For ogg: None For webm: None Valid Sidecar Caption
   Formats: Elastic Transcoder supports dfxp (first div element only), scc, srt, and
-  webvtt. There are no container restrictions on sidecar captions. If you want ttml
-  or smpte-tt compatible captions, specify dfxp as your output format.\n        *
-  `:pattern` - (String) The prefix for caption filenames, in the form description-`{language}`,
-  where: description is a description of the video. `{language}` is a literal value
-  that Elastic Transcoder replaces with the two- or three-letter code for the language
-  of the caption in the output file names. If you don't include `{language}` in the
-  file name pattern, Elastic Transcoder automatically appends \"`{language}`\" to
-  the value that you specify for the description. In addition, Elastic Transcoder
-  automatically appends the count to the end of the segment files. For example, suppose
-  you're transcoding into srt format. When you enter \"Sydney-`{language}`-sunrise\",
+  webvtt. If you want ttml or smpte-tt compatible captions, specify dfxp as your output
+  format. For FMP4: dfxp Non-FMP4 outputs: All sidecar types fmp4 captions have an
+  extension of .ismt\n        * `:pattern` - (String) The prefix for caption filenames,
+  in the form description-`{language}`, where: description is a description of the
+  video. `{language}` is a literal value that Elastic Transcoder replaces with the
+  two- or three-letter code for the language of the caption in the output file names.
+  If you don't include `{language}` in the file name pattern, Elastic Transcoder automatically
+  appends \"`{language}`\" to the value that you specify for the description. In addition,
+  Elastic Transcoder automatically appends the count to the end of the segment files.
+  For example, suppose you're transcoding into srt format. When you enter \"Sydney-`{language}`-sunrise\",
   and the language of the captions is English (en), the name of the first caption
   file will be Sydney-en-sunrise00000.srt.\n  * `:outputs` - (Array&lt;Hash>) A section
   of the request body that provides information about the transcoded (target) files.
@@ -241,10 +250,19 @@
   270. The value auto generally works only if the file that you're transcoding contains
   rotation metadata.\n    * `:preset_id` - (String) The Id of the preset to use for
   this job. The preset determines the audio, video, and thumbnail settings that Elastic
-  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) If you specify
-  a preset in PresetId for which the value of Container is ts (MPEG-TS), SegmentDuration
-  is the duration of each .ts file in seconds. The range of valid values is 1 to 60
-  seconds.\n    * `:watermarks` - (Array&lt;Hash>) Information about the watermarks
+  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) (Outputs
+  in Fragmented MP4 or MPEG-TS format only.If you specify a preset in PresetId for
+  which the value of Container is fmp4 (Fragmented MP4) or ts (MPEG-TS), SegmentDuration
+  is the target maximum duration of each segment in seconds. For HLSv3 format playlists,
+  each media segment is stored in a separate .ts file. For HLSv4 and Smooth playlists,
+  all media segments for an output are stored in a single file. Each segment is approximately
+  the length of the SegmentDuration, though individual segments might be shorter or
+  longer. The range of valid values is 1 to 60 seconds. If the duration of the video
+  is not evenly divisible by SegmentDuration, the duration of the last segment is
+  the remainder of total length/SegmentDuration. Elastic Transcoder creates an output-specific
+  playlist for each output HLS output that you specify in OutputKeys. To add an output
+  to the master playlist for this job, include it in the OutputKeys of the associated
+  playlist.\n    * `:watermarks` - (Array&lt;Hash>) Information about the watermarks
   that you want Elastic Transcoder to add to the video during transcoding. You can
   specify up to four watermarks for each output. Settings for each watermark must
   be defined in the preset for the current output.\n    * `:member` - (Hash) \n      *
@@ -375,36 +393,53 @@
   sidecar caption for this output. Valid Embedded Caption Formats: For MP3: None For
   MP4: mov-text For MPEG-TS: None For ogg: None For webm: None Valid Sidecar Caption
   Formats: Elastic Transcoder supports dfxp (first div element only), scc, srt, and
-  webvtt. There are no container restrictions on sidecar captions. If you want ttml
-  or smpte-tt compatible captions, specify dfxp as your output format.\n        *
-  `:pattern` - (String) The prefix for caption filenames, in the form description-`{language}`,
-  where: description is a description of the video. `{language}` is a literal value
-  that Elastic Transcoder replaces with the two- or three-letter code for the language
-  of the caption in the output file names. If you don't include `{language}` in the
-  file name pattern, Elastic Transcoder automatically appends \"`{language}`\" to
-  the value that you specify for the description. In addition, Elastic Transcoder
-  automatically appends the count to the end of the segment files. For example, suppose
-  you're transcoding into srt format. When you enter \"Sydney-`{language}`-sunrise\",
+  webvtt. If you want ttml or smpte-tt compatible captions, specify dfxp as your output
+  format. For FMP4: dfxp Non-FMP4 outputs: All sidecar types fmp4 captions have an
+  extension of .ismt\n        * `:pattern` - (String) The prefix for caption filenames,
+  in the form description-`{language}`, where: description is a description of the
+  video. `{language}` is a literal value that Elastic Transcoder replaces with the
+  two- or three-letter code for the language of the caption in the output file names.
+  If you don't include `{language}` in the file name pattern, Elastic Transcoder automatically
+  appends \"`{language}`\" to the value that you specify for the description. In addition,
+  Elastic Transcoder automatically appends the count to the end of the segment files.
+  For example, suppose you're transcoding into srt format. When you enter \"Sydney-`{language}`-sunrise\",
   and the language of the captions is English (en), the name of the first caption
   file will be Sydney-en-sunrise00000.srt.\n  * `:output_key_prefix` - (String) The
   value, if any, that you want Elastic Transcoder to prepend to the names of all files
   that this job creates, including output files, thumbnails, and playlists.\n  * `:playlists`
   - (Array&lt;Hash>) If you specify a preset in PresetId for which the value of Container
-  is ts (MPEG-TS), Playlists contains information about the master playlists that
-  you want Elastic Transcoder to create. We recommend that you create only one master
-  playlist. The maximum number of master playlists in a job is 30.\n  * `:member`
-  - (Hash) \n    * `:name` - (String) The name that you want Elastic Transcoder to
-  assign to the master playlist, for example, nyc-vacation.m3u8. The name cannot include
-  a / character. If you create more than one master playlist (not recommended), the
-  values of all Name objects must be unique. Elastic Transcoder automatically appends
-  .m3u8 to the file name. If you include .m3u8 in Name, it will appear twice in the
-  file name.\n    * `:format` - (String) This value must currently be HLSv3.\n    *
-  `:output_keys` - (Array&lt;String>) For each output in this job that you want to
-  include in a master playlist, the value of the Outputs:Key object. If you include
-  more than one output in a playlist, the value of SegmentDuration for all of the
-  outputs must be the same.\n    * `:member` - (String) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:job` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    * `:pipeline_id`
+  is fmp4 (Fragmented MP4) or ts (MPEG-TS), Playlists contains information about the
+  master playlists that you want Elastic Transcoder to create. The maximum number
+  of master playlists in a job is 30.\n  * `:member` - (Hash) \n    * `:name` - (String)
+  The name that you want Elastic Transcoder to assign to the master playlist, for
+  example, nyc-vacation.m3u8. If the name includes a / character, the section of the
+  name before the last / must be identical for all Name objects. If you create more
+  than one master playlist, the values of all Name objects must be unique. Note: Elastic
+  Transcoder automatically appends the relevant file extension to the file name (.m3u8
+  for HLSv3 and HLSv4 playlists, and .ism and .ismc for Smooth playlists). If you
+  include a file extension in Name, the file name will have two extensions.\n    *
+  `:format` - (String) The format of the output playlist. Valid formats include HLSv3,
+  HLSv4, and Smooth.\n    * `:output_keys` - (Array&lt;String>) For each output in
+  this job that you want to include in a master playlist, the value of the Outputs:Key
+  object. If your output is not HLS or does not have a segment duration set, the name
+  of the output file is a concatenation of OutputKeyPrefix and Outputs:Key: OutputKeyPrefixOutputs:Key
+  If your output is HLSv3 and has a segment duration set, or is not included in a
+  playlist, Elastic Transcoder creates an output playlist file with a file extension
+  of .m3u8, and a series of .ts files that include a five-digit sequential counter
+  beginning with 00000: OutputKeyPrefixOutputs:Key.m3u8 OutputKeyPrefixOutputs:Key00000.ts
+  If your output is HLSv4, has a segment duration set, and is included in an HLSv4
+  playlist, Elastic Transcoder creates an output playlist file with a file extension
+  of _v4.m3u8. If the output is video, Elastic Transcoder also creates an output file
+  with an extension of _iframe.m3u8: OutputKeyPrefixOutputs:Key_v4.m3u8 OutputKeyPrefixOutputs:Key_iframe.m3u8
+  OutputKeyPrefixOutputs:Key.ts Elastic Transcoder automatically appends the relevant
+  file extension to the file name. If you include a file extension in Output Key,
+  the file name will have two extensions. If you include more than one output in a
+  playlist, any segment duration settings, clip settings, or caption settings must
+  be the same for all outputs in the playlist. For Smooth playlists, the Audio:Profile,
+  Video:Profile, and Video:FrameRate to Video:KeyframesMaxDist ratio must be the same
+  for all outputs.\n    * `:member` - (String) \n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:job` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    * `:pipeline_id`
   - (String)\n    * `:input` - (Hash)\n      * `:key` - (String)\n      * `:frame_rate`
   - (String)\n      * `:resolution` - (String)\n      * `:aspect_ratio` - (String)\n
   \     * `:interlaced` - (String)\n      * `:container` - (String)\n    * `:output`
@@ -650,10 +685,10 @@
   \ * `:name` - *required* - (String) The name of the preset. We recommend that the
   name be unique within the AWS account, but uniqueness is not enforced.\n  * `:description`
   - (String) A description of the preset.\n  * `:container` - *required* - (String)
-  The container type for the output file. Valid values include mp3, mp4, ogg, ts,
-  and webm.\n  * `:video` - (Hash) A section of the request body that specifies the
-  video parameters.\n    * `:codec` - (String) The video codec for the output file.
-  Valid values include H.264 and vp8. You can only specify vp8 when the container
+  The container type for the output file. Valid values include fmp4, mp3, mp4, ogg,
+  ts, and webm.\n  * `:video` - (Hash) A section of the request body that specifies
+  the video parameters.\n    * `:codec` - (String) The video codec for the output
+  file. Valid values include H.264 and vp8. You can only specify vp8 when the container
   type is webm.\n    * `:codec_options` - (Hash) Profile The H.264 profile that you
   want to use for the output file. Elastic Transcoder supports the following profiles:
   baseline: The profile most commonly used for videoconferencing and for mobile applications.
@@ -676,141 +711,149 @@
   stream a video by reducing the maximum bit rate, but this also reduces the quality
   of the video. BufferSize The maximum number of bits in any x seconds of the output
   video. This window is commonly 10 seconds, the standard segment duration when you're
-  using MPEG-TS for the container type of the output video. Specify an integer greater
-  than 0. If you specify MaxBitRate and omit BufferSize, Elastic Transcoder sets BufferSize
-  to 10 times the value of MaxBitRate.\n    * `:value` - (String) \n    * `:keyframes_max_dist`
-  - (String) The maximum number of frames between key frames. Key frames are fully
-  encoded frames; the frames between key frames are encoded based, in part, on the
-  content of the key frames. The value is an integer formatted as a string; valid
-  values are between 1 (every frame is a key frame) and 100000, inclusive. A higher
-  value results in higher compression but may also discernibly decrease video quality.\n
-  \   * `:fixed_gop` - (String) Whether to use a fixed value for FixedGOP. Valid values
+  using FMP4 or MPEG-TS for the container type of the output video. Specify an integer
+  greater than 0. If you specify MaxBitRate and omit BufferSize, Elastic Transcoder
+  sets BufferSize to 10 times the value of MaxBitRate.\n    * `:value` - (String)
+  \n    * `:keyframes_max_dist` - (String) The maximum number of frames between key
+  frames. Key frames are fully encoded frames; the frames between key frames are encoded
+  based, in part, on the content of the key frames. The value is an integer formatted
+  as a string; valid values are between 1 (every frame is a key frame) and 100000,
+  inclusive. A higher value results in higher compression but may also discernibly
+  decrease video quality. For Smooth outputs, the FrameRate must have a constant ratio
+  to the KeyframesMaxDist. This allows Smooth playlists to switch between different
+  quality levels while the file is being played. For example, an input file can have
+  a FrameRate of 30 with a KeyframesMaxDist of 90. The output file then needs to have
+  a ratio of 1:3. Valid outputs would have FrameRate of 30, 25, and 10, and KeyframesMaxDist
+  of 90, 75, and 30, respectively. Alternately, this can be achieved by setting FrameRate
+  to auto and having the same values for MaxFrameRate and KeyframesMaxDist.\n    *
+  `:fixed_gop` - (String) Whether to use a fixed value for FixedGOP. Valid values
   are  `true`  and  `false` :  `true` : Elastic Transcoder uses the value of KeyframesMaxDist
   for the distance between key frames (the number of frames in a group of pictures,
-  or GOP).  `false` : The distance between key frames can vary.\n    * `:bit_rate`
-  - (String) The bit rate of the video stream in the output file, in kilobits/second.
-  Valid values depend on the values of Level and Profile. If you specify auto, Elastic
-  Transcoder uses the detected bit rate of the input source. If you specify a value
-  other than auto, we recommend that you specify a value less than or equal to the
-  maximum H.264-compliant value listed for your level and profile: Level - Maximum
-  video bit rate in kilobits/second (baseline and main Profile) : maximum video bit
-  rate in kilobits/second (high Profile) 1 - 64 : 80 1b - 128 : 160 1.1 - 192 : 240
-  1.2 - 384 : 480 1.3 - 768 : 960 2 - 2000 : 2500 3 - 10000 : 12500 3.1 - 14000 :
-  17500 3.2 - 20000 : 25000 4 - 20000 : 25000 4.1 - 50000 : 62500\n    * `:frame_rate`
-  - (String) The frames per second for the video stream in the output file. Valid
-  values include: auto, 10, 15, 23.97, 24, 25, 29.97, 30, 60 If you specify auto,
-  Elastic Transcoder uses the detected frame rate of the input source. If you specify
-  a frame rate, we recommend that you perform the following calculation: Frame rate
-  = maximum recommended decoding speed in luma samples/second / (width in pixels *
-  height in pixels) where: width in pixels and height in pixels represent the Resolution
-  of the output video. maximum recommended decoding speed in Luma samples/second is
-  less than or equal to the maximum value listed in the following table, based on
-  the value that you specified for Level. The maximum recommended decoding speed in
-  Luma samples/second for each level is described in the following list (Level - Decoding
-  speed): 1 - 380160 1b - 380160 1.1 - 76800 1.2 - 1536000 1.3 - 3041280 2 - 3041280
-  2.1 - 5068800 2.2 - 5184000 3 - 10368000 3.1 - 27648000 3.2 - 55296000 4 - 62914560
-  4.1 - 62914560\n    * `:max_frame_rate` - (String) If you specify auto for FrameRate,
-  Elastic Transcoder uses the frame rate of the input video for the frame rate of
-  the output video. Specify the maximum frame rate that you want Elastic Transcoder
-  to use when the frame rate of the input video is greater than the desired maximum
-  frame rate of the output video. Valid values include: 10, 15, 23.97, 24, 25, 29.97,
-  30, 60.\n    * `:resolution` - (String) To better control resolution and aspect
-  ratio of output videos, we recommend that you use the values MaxWidth, MaxHeight,
-  SizingPolicy, PaddingPolicy, and DisplayAspectRatio instead of Resolution and AspectRatio.
-  The two groups of settings are mutually exclusive. Do not use them together. The
-  width and height of the video in the output file, in pixels. Valid values are auto
-  and width x height: auto: Elastic Transcoder attempts to preserve the width and
-  height of the input file, subject to the following rules. width x height: The width
-  and height of the output video in pixels. Note the following about specifying the
-  width and height: The width must be an even integer between 128 and 4096, inclusive.
-  The height must be an even integer between 96 and 3072, inclusive. If you specify
-  a resolution that is less than the resolution of the input file, Elastic Transcoder
-  rescales the output file to the lower resolution. If you specify a resolution that
-  is greater than the resolution of the input file, Elastic Transcoder rescales the
-  output to the higher resolution. We recommend that you specify a resolution for
-  which the product of width and height is less than or equal to the applicable value
-  in the following list (List - Max width x height value): 1 - 25344 1b - 25344 1.1
-  - 101376 1.2 - 101376 1.3 - 101376 2 - 101376 2.1 - 202752 2.2 - 404720 3 - 404720
-  3.1 - 921600 3.2 - 1310720 4 - 2097152 4.1 - 2097152\n    * `:aspect_ratio` - (String)
+  or GOP).  `false` : The distance between key frames can vary. FixedGOP must be set
+  to  `true`  for fmp4 containers.\n    * `:bit_rate` - (String) The bit rate of the
+  video stream in the output file, in kilobits/second. Valid values depend on the
+  values of Level and Profile. If you specify auto, Elastic Transcoder uses the detected
+  bit rate of the input source. If you specify a value other than auto, we recommend
+  that you specify a value less than or equal to the maximum H.264-compliant value
+  listed for your level and profile: Level - Maximum video bit rate in kilobits/second
+  (baseline and main Profile) : maximum video bit rate in kilobits/second (high Profile)
+  1 - 64 : 80 1b - 128 : 160 1.1 - 192 : 240 1.2 - 384 : 480 1.3 - 768 : 960 2 - 2000
+  : 2500 3 - 10000 : 12500 3.1 - 14000 : 17500 3.2 - 20000 : 25000 4 - 20000 : 25000
+  4.1 - 50000 : 62500\n    * `:frame_rate` - (String) The frames per second for the
+  video stream in the output file. Valid values include: auto, 10, 15, 23.97, 24,
+  25, 29.97, 30, 60 If you specify auto, Elastic Transcoder uses the detected frame
+  rate of the input source. If you specify a frame rate, we recommend that you perform
+  the following calculation: Frame rate = maximum recommended decoding speed in luma
+  samples/second / (width in pixels * height in pixels) where: width in pixels and
+  height in pixels represent the Resolution of the output video. maximum recommended
+  decoding speed in Luma samples/second is less than or equal to the maximum value
+  listed in the following table, based on the value that you specified for Level.
+  The maximum recommended decoding speed in Luma samples/second for each level is
+  described in the following list (Level - Decoding speed): 1 - 380160 1b - 380160
+  1.1 - 76800 1.2 - 1536000 1.3 - 3041280 2 - 3041280 2.1 - 5068800 2.2 - 5184000
+  3 - 10368000 3.1 - 27648000 3.2 - 55296000 4 - 62914560 4.1 - 62914560\n    * `:max_frame_rate`
+  - (String) If you specify auto for FrameRate, Elastic Transcoder uses the frame
+  rate of the input video for the frame rate of the output video. Specify the maximum
+  frame rate that you want Elastic Transcoder to use when the frame rate of the input
+  video is greater than the desired maximum frame rate of the output video. Valid
+  values include: 10, 15, 23.97, 24, 25, 29.97, 30, 60.\n    * `:resolution` - (String)
   To better control resolution and aspect ratio of output videos, we recommend that
   you use the values MaxWidth, MaxHeight, SizingPolicy, PaddingPolicy, and DisplayAspectRatio
   instead of Resolution and AspectRatio. The two groups of settings are mutually exclusive.
-  Do not use them together. The display aspect ratio of the video in the output file.
-  Valid values include: auto, 1:1, 4:3, 3:2, 16:9 If you specify auto, Elastic Transcoder
-  tries to preserve the aspect ratio of the input file. If you specify an aspect ratio
-  for the output file that differs from aspect ratio of the input file, Elastic Transcoder
-  adds pillarboxing (black bars on the sides) or letterboxing (black bars on the top
-  and bottom) to maintain the aspect ratio of the active region of the video.\n    *
-  `:max_width` - (String) The maximum width of the output video in pixels. If you
-  specify auto, Elastic Transcoder uses 1920 (Full HD) as the default value. If you
-  specify a numeric value, enter an even integer between 128 and 4096.\n    * `:max_height`
-  - (String) The maximum height of the output video in pixels. If you specify auto,
-  Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric
-  value, enter an even integer between 96 and 3072.\n    * `:display_aspect_ratio`
-  - (String) The value that Elastic Transcoder adds to the metadata in the output
-  file.\n    * `:sizing_policy` - (String) Specify one of the following values to
-  control scaling of the output video: Fit: Elastic Transcoder scales the output video
-  so it matches the value that you specified in either MaxWidth or MaxHeight without
-  exceeding the other value. Fill: Elastic Transcoder scales the output video so it
-  matches the value that you specified in either MaxWidth or MaxHeight and matches
-  or exceeds the other value. Elastic Transcoder centers the output video and then
-  crops it in the dimension (if any) that exceeds the maximum value. Stretch: Elastic
-  Transcoder stretches the output video to match the values that you specified for
-  MaxWidth and MaxHeight. If the relative proportions of the input video and the output
-  video are different, the output video will be distorted. Keep: Elastic Transcoder
-  does not scale the output video. If either dimension of the input video exceeds
-  the values that you specified for MaxWidth and MaxHeight, Elastic Transcoder crops
-  the output video. ShrinkToFit: Elastic Transcoder scales the output video down so
-  that its dimensions match the values that you specified for at least one of MaxWidth
-  and MaxHeight without exceeding either value. If you specify this option, Elastic
-  Transcoder does not scale the video up. ShrinkToFill: Elastic Transcoder scales
-  the output video down so that its dimensions match the values that you specified
-  for at least one of MaxWidth and MaxHeight without dropping below either value.
-  If you specify this option, Elastic Transcoder does not scale the video up.\n    *
-  `:padding_policy` - (String) When you set PaddingPolicy to Pad, Elastic Transcoder
-  may add black bars to the top and bottom and/or left and right sides of the output
-  video to make the total size of the output video match the values that you specified
-  for MaxWidth and MaxHeight.\n    * `:watermarks` - (Array&lt;Hash>) Settings for
-  the size, location, and opacity of graphics that you want Elastic Transcoder to
-  overlay over videos that are transcoded using this preset. You can specify settings
-  for up to four watermarks. Watermarks appear in the specified size and location,
-  and with the specified opacity for the duration of the transcoded video. Watermarks
-  can be in .png or .jpg format. If you want to display a watermark that is not rectangular,
-  use the .png format, which supports transparency. When you create a job that uses
-  this preset, you specify the .png or .jpg graphics that you want Elastic Transcoder
-  to include in the transcoded videos. You can specify fewer graphics in the job than
-  you specify watermark settings in the preset, which allows you to use the same preset
-  for up to four watermarks that have different dimensions.\n    * `:member` - (Hash)
-  \n      * `:id` - (String) A unique identifier for the settings for one watermark.
-  The value of Id can be up to 40 characters long.\n      * `:max_width` - (String)
-  The maximum width of the watermark in one of the following formats: number of pixels
-  (px): The minimum value is 16 pixels, and the maximum value is the value of MaxWidth.
+  Do not use them together. The width and height of the video in the output file,
+  in pixels. Valid values are auto and width x height: auto: Elastic Transcoder attempts
+  to preserve the width and height of the input file, subject to the following rules.
+  width x height: The width and height of the output video in pixels. Note the following
+  about specifying the width and height: The width must be an even integer between
+  128 and 4096, inclusive. The height must be an even integer between 96 and 3072,
+  inclusive. If you specify a resolution that is less than the resolution of the input
+  file, Elastic Transcoder rescales the output file to the lower resolution. If you
+  specify a resolution that is greater than the resolution of the input file, Elastic
+  Transcoder rescales the output to the higher resolution. We recommend that you specify
+  a resolution for which the product of width and height is less than or equal to
+  the applicable value in the following list (List - Max width x height value): 1
+  - 25344 1b - 25344 1.1 - 101376 1.2 - 101376 1.3 - 101376 2 - 101376 2.1 - 202752
+  2.2 - 404720 3 - 404720 3.1 - 921600 3.2 - 1310720 4 - 2097152 4.1 - 2097152\n    *
+  `:aspect_ratio` - (String) To better control resolution and aspect ratio of output
+  videos, we recommend that you use the values MaxWidth, MaxHeight, SizingPolicy,
+  PaddingPolicy, and DisplayAspectRatio instead of Resolution and AspectRatio. The
+  two groups of settings are mutually exclusive. Do not use them together. The display
+  aspect ratio of the video in the output file. Valid values include: auto, 1:1, 4:3,
+  3:2, 16:9 If you specify auto, Elastic Transcoder tries to preserve the aspect ratio
+  of the input file. If you specify an aspect ratio for the output file that differs
+  from aspect ratio of the input file, Elastic Transcoder adds pillarboxing (black
+  bars on the sides) or letterboxing (black bars on the top and bottom) to maintain
+  the aspect ratio of the active region of the video.\n    * `:max_width` - (String)
+  The maximum width of the output video in pixels. If you specify auto, Elastic Transcoder
+  uses 1920 (Full HD) as the default value. If you specify a numeric value, enter
+  an even integer between 128 and 4096.\n    * `:max_height` - (String) The maximum
+  height of the output video in pixels. If you specify auto, Elastic Transcoder uses
+  1080 (Full HD) as the default value. If you specify a numeric value, enter an even
+  integer between 96 and 3072.\n    * `:display_aspect_ratio` - (String) The value
+  that Elastic Transcoder adds to the metadata in the output file.\n    * `:sizing_policy`
+  - (String) Specify one of the following values to control scaling of the output
+  video: Fit: Elastic Transcoder scales the output video so it matches the value that
+  you specified in either MaxWidth or MaxHeight without exceeding the other value.
+  Fill: Elastic Transcoder scales the output video so it matches the value that you
+  specified in either MaxWidth or MaxHeight and matches or exceeds the other value.
+  Elastic Transcoder centers the output video and then crops it in the dimension (if
+  any) that exceeds the maximum value. Stretch: Elastic Transcoder stretches the output
+  video to match the values that you specified for MaxWidth and MaxHeight. If the
+  relative proportions of the input video and the output video are different, the
+  output video will be distorted. Keep: Elastic Transcoder does not scale the output
+  video. If either dimension of the input video exceeds the values that you specified
+  for MaxWidth and MaxHeight, Elastic Transcoder crops the output video. ShrinkToFit:
+  Elastic Transcoder scales the output video down so that its dimensions match the
+  values that you specified for at least one of MaxWidth and MaxHeight without exceeding
+  either value. If you specify this option, Elastic Transcoder does not scale the
+  video up. ShrinkToFill: Elastic Transcoder scales the output video down so that
+  its dimensions match the values that you specified for at least one of MaxWidth
+  and MaxHeight without dropping below either value. If you specify this option, Elastic
+  Transcoder does not scale the video up.\n    * `:padding_policy` - (String) When
+  you set PaddingPolicy to Pad, Elastic Transcoder may add black bars to the top and
+  bottom and/or left and right sides of the output video to make the total size of
+  the output video match the values that you specified for MaxWidth and MaxHeight.\n
+  \   * `:watermarks` - (Array&lt;Hash>) Settings for the size, location, and opacity
+  of graphics that you want Elastic Transcoder to overlay over videos that are transcoded
+  using this preset. You can specify settings for up to four watermarks. Watermarks
+  appear in the specified size and location, and with the specified opacity for the
+  duration of the transcoded video. Watermarks can be in .png or .jpg format. If you
+  want to display a watermark that is not rectangular, use the .png format, which
+  supports transparency. When you create a job that uses this preset, you specify
+  the .png or .jpg graphics that you want Elastic Transcoder to include in the transcoded
+  videos. You can specify fewer graphics in the job than you specify watermark settings
+  in the preset, which allows you to use the same preset for up to four watermarks
+  that have different dimensions.\n    * `:member` - (Hash) \n      * `:id` - (String)
+  A unique identifier for the settings for one watermark. The value of Id can be up
+  to 40 characters long.\n      * `:max_width` - (String) The maximum width of the
+  watermark in one of the following formats: number of pixels (px): The minimum value
+  is 16 pixels, and the maximum value is the value of MaxWidth. integer percentage
+  (%): The range of valid values is 0 to 100. Use the value of Target to specify whether
+  you want Elastic Transcoder to include the black bars that are added by Elastic
+  Transcoder, if any, in the calculation. If you specify the value in pixels, it must
+  be less than or equal to the value of MaxWidth.\n      * `:max_height` - (String)
+  The maximum height of the watermark in one of the following formats: number of pixels
+  (px): The minimum value is 16 pixels, and the maximum value is the value of MaxHeight.
   integer percentage (%): The range of valid values is 0 to 100. Use the value of
   Target to specify whether you want Elastic Transcoder to include the black bars
   that are added by Elastic Transcoder, if any, in the calculation. If you specify
-  the value in pixels, it must be less than or equal to the value of MaxWidth.\n      *
-  `:max_height` - (String) The maximum height of the watermark in one of the following
-  formats: number of pixels (px): The minimum value is 16 pixels, and the maximum
-  value is the value of MaxHeight. integer percentage (%): The range of valid values
-  is 0 to 100. Use the value of Target to specify whether you want Elastic Transcoder
-  to include the black bars that are added by Elastic Transcoder, if any, in the calculation.
-  If you specify the value in pixels, it must be less than or equal to the value of
-  MaxHeight.\n      * `:sizing_policy` - (String) A value that controls scaling of
-  the watermark: Fit: Elastic Transcoder scales the watermark so it matches the value
-  that you specified in either MaxWidth or MaxHeight without exceeding the other value.
-  Stretch: Elastic Transcoder stretches the watermark to match the values that you
-  specified for MaxWidth and MaxHeight. If the relative proportions of the watermark
-  and the values of MaxWidth and MaxHeight are different, the watermark will be distorted.
-  ShrinkToFit: Elastic Transcoder scales the watermark down so that its dimensions
-  match the values that you specified for at least one of MaxWidth and MaxHeight without
-  exceeding either value. If you specify this option, Elastic Transcoder does not
-  scale the watermark up.\n      * `:horizontal_align` - (String) The horizontal position
-  of the watermark unless you specify a non-zero value for HorizontalOffset: Left:
-  The left edge of the watermark is aligned with the left border of the video. Right:
-  The right edge of the watermark is aligned with the right border of the video. Center:
-  The watermark is centered between the left and right borders.\n      * `:horizontal_offset`
-  - (String) The amount by which you want the horizontal position of the watermark
-  to be offset from the position specified by HorizontalAlign: number of pixels (px):
+  the value in pixels, it must be less than or equal to the value of MaxHeight.\n
+  \     * `:sizing_policy` - (String) A value that controls scaling of the watermark:
+  Fit: Elastic Transcoder scales the watermark so it matches the value that you specified
+  in either MaxWidth or MaxHeight without exceeding the other value. Stretch: Elastic
+  Transcoder stretches the watermark to match the values that you specified for MaxWidth
+  and MaxHeight. If the relative proportions of the watermark and the values of MaxWidth
+  and MaxHeight are different, the watermark will be distorted. ShrinkToFit: Elastic
+  Transcoder scales the watermark down so that its dimensions match the values that
+  you specified for at least one of MaxWidth and MaxHeight without exceeding either
+  value. If you specify this option, Elastic Transcoder does not scale the watermark
+  up.\n      * `:horizontal_align` - (String) The horizontal position of the watermark
+  unless you specify a non-zero value for HorizontalOffset: Left: The left edge of
+  the watermark is aligned with the left border of the video. Right: The right edge
+  of the watermark is aligned with the right border of the video. Center: The watermark
+  is centered between the left and right borders.\n      * `:horizontal_offset` -
+  (String) The amount by which you want the horizontal position of the watermark to
+  be offset from the position specified by HorizontalAlign: number of pixels (px):
   The minimum value is 0 pixels, and the maximum value is the value of MaxWidth. integer
   percentage (%): The range of valid values is 0 to 100. For example, if you specify
   Left for HorizontalAlign and 5px for HorizontalOffset, the left side of the watermark
@@ -875,11 +918,12 @@
   selected for the output file. AAC-LC: The most common AAC profile. Use for bitrates
   larger than 64 kbps. HE-AAC: Not supported on some older players and devices. Use
   for bitrates between 40 and 80 kbps. HE-AACv2: Not supported on some players and
-  devices. Use for bitrates less than 48 kbps. If you created any presets before AAC
-  profiles were added, Elastic Transcoder automatically updated your presets to use
-  AAC-LC. You can change the value as required.\n  * `:thumbnails` - (Hash) A section
-  of the request body that specifies the thumbnail parameters, if any.\n    * `:format`
-  - (String) The format of thumbnails, if any. Valid values are jpg and png. You specify
+  devices. Use for bitrates less than 48 kbps. All outputs in a Smooth playlist must
+  have the same value for Profile. If you created any presets before AAC profiles
+  were added, Elastic Transcoder automatically updated your presets to use AAC-LC.
+  You can change the value as required.\n  * `:thumbnails` - (Hash) A section of the
+  request body that specifies the thumbnail parameters, if any.\n    * `:format` -
+  (String) The format of thumbnails, if any. Valid values are jpg and png. You specify
   whether you want Elastic Transcoder to create thumbnails when you create a job.\n
   \   * `:interval` - (String) The number of seconds between thumbnails. Specify an
   integer value.\n    * `:resolution` - (String) To better control resolution and

@@ -16,7 +16,7 @@ When /^I write the string "([^\"]*)" to it using server side encryption$/ do |co
 end
 
 Then /^the object should be stored with server side encryption$/ do
-  @object.server_side_encryption?.should be_true
+  @object.server_side_encryption?.should be_truthy
 end
 
 Given /^I have an Amazon S3 interface configured to use server side encryption$/ do

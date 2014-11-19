@@ -26,7 +26,7 @@ application.
     'README.md',
     'LICENSE.txt',
   ]
-  s.files += Dir['lib/**/*.rb']
+  s.files += Dir['lib/**/*.rb'] - ['lib/aws-sdk.rb']
   s.files += Dir['lib/**/*.yml']
 
   s.bindir = 'bin'

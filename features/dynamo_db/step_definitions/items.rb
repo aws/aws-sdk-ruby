@@ -48,7 +48,7 @@ When /^I delete the item with the following arguments:?$/ do |string|
 end
 
 Then /^the item should not exist$/ do
-  @item.exists?(:consistent_read => true).should be_false
+  @item.exists?(:consistent_read => true).should be_falsey
 end
 
 When /^I ask if the DynamoDB item exists$/ do

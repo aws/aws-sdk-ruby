@@ -139,11 +139,11 @@ module AWS
 
         it 'should return true if the response includes an "Item" key' do
           response.data["Item"] = {}
-          item.exists?.should be_true
+          item.exists?.should be_truthy
         end
 
         it 'should return false if the response does not include an "Item" key' do
-          item.exists?.should be_false
+          item.exists?.should be_falsey
         end
 
         it 'accepts a :consistent_read option' do

@@ -100,6 +100,7 @@ module AWS
 
           it 'should expose an empty list of buckets' do
             response.buckets.should be_an(Array)
+            response.buckets.respond_to?(:empty?).should be_truthy
             response.buckets.should be_empty
           end
 
@@ -251,7 +252,7 @@ module AWS
           end
 
           it 'should expose IsTruncated as boolean truncated?' do
-            response.truncated?.should be_true
+            response.truncated?.should be_truthy
           end
 
           it 'should expose Contents as an array' do
@@ -541,7 +542,7 @@ module AWS
 
         it 'should expose a truncated? method' do
           response.should respond_to(:truncated?)
-          response.truncated?.should be_false
+          response.truncated?.should be_falsey
         end
 
         it 'should return a number for max_uploads' do

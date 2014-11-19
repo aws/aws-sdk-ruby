@@ -84,7 +84,7 @@ module AWS
           metadata.stub(:to_h).and_return("color" => "red",
                                           "shape" => "square")
           client.should_receive(:copy_object).
-            with(hash_including(:copy_source => "foobucket/foo",
+            with(hash_including(:copy_source => "/foobucket/foo",
                                 :bucket_name => "foobucket",
                                 :key => "foo",
                                 :metadata_directive => "REPLACE",
@@ -99,7 +99,7 @@ module AWS
           metadata.stub(:to_h).and_return("color" => "red",
                                           "shape" => "square")
           client.should_receive(:copy_object).
-            with(hash_including(:copy_source => "foobucket/foo",
+            with(hash_including(:copy_source => "/foobucket/foo",
                                 :bucket_name => "foobucket",
                                 :key => "foo",
                                 :metadata_directive => "REPLACE",

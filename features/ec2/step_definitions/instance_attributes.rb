@@ -37,7 +37,7 @@ When /^I disable API termination for the instance$/ do
 end
 
 Then /^the instance should eventually have API termination disabled$/ do
-  eventually { @instance.api_termination_disabled?.should be_true }
+  eventually { @instance.api_termination_disabled?.should be_truthy }
 end
 
 When /^I set the instance\'s user data to "([^\"]*)"$/ do |data|
@@ -65,7 +65,7 @@ When /^I disable source\/destination checking$/ do
 end
 
 Then /^the instance should eventually have source\/destination checking disabled$/ do
-  eventually { @instance.source_dest_check?.should be_false }
+  eventually { @instance.source_dest_check?.should be_falsey }
 end
 
 When /^I get the instance\-initiated shutdown behavior$/ do

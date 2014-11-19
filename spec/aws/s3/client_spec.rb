@@ -2215,11 +2215,11 @@ module AWS
       context '#valid_bucket_name?' do
 
         def should_pass(name)
-          client.valid_bucket_name?(name).should be_true
+          client.valid_bucket_name?(name).should be_truthy
         end
 
         def should_fail(name)
-          client.valid_bucket_name?(name).should be_false
+          client.valid_bucket_name?(name).should be_falsey
         end
 
         context 'accepts letters and' do
@@ -2297,11 +2297,11 @@ module AWS
       context '#dns_compatible_bucket_name?' do
 
         def should_pass(name)
-          client.dns_compatible_bucket_name?(name).should be_true
+          client.dns_compatible_bucket_name?(name).should be_truthy
         end
 
         def should_fail(name)
-          client.dns_compatible_bucket_name?(name).should be_false
+          client.dns_compatible_bucket_name?(name).should be_falsey
         end
 
         it 'should reject names that are not valid bucket names' do

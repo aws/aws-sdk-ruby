@@ -45,10 +45,12 @@ module AWS
           provider.providers[4].should be_a(EC2Provider)
         end
 
-        it 'includes a shared credential profile when Dir.home is gettable' do
-          Dir.stub(:home).and_return('~/')
-          provider = DefaultProvider.new
-          provider.providers[4].should be_a(SharedCredentialFileProvider)
+        if RUBY_VERSION >= '1.9'
+          it 'includes a shared credential profile when Dir.home is gettable' do
+            Dir.stub(:home).and_return('~/')
+            provider = DefaultProvider.new
+            provider.providers[4].should be_a(SharedCredentialFileProvider)
+          end
         end
 
         it 'passes static credentials to a static credential provider' do
@@ -81,12 +83,12 @@ module AWS
           provider.providers.clear
           provider.providers << double('provider-1', :set? => false)
           provider.providers << double('provider-2', :set? => false)
-          provider.set?.should be_false
+          provider.set?.should be_falsey
 
           provider.providers.clear
           provider.providers << double('provider-1', :set? => false)
           provider.providers << double('provider-2', :set? => true)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'refreshes its provider chain' do
@@ -189,13 +191,13 @@ module AWS
             :access_key_id => 'akid',
             :secret_access_key => 'secret'}
           provider = StaticProvider.new(creds)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
-          StaticProvider.new({}).set?.should be_false
-          StaticProvider.new({:access_key_id => 'akid'}).set?.should be_false
-          StaticProvider.new({:secret_access_key => 'secret'}).set?.should be_false
+          StaticProvider.new({}).set?.should be_falsey
+          StaticProvider.new({:access_key_id => 'akid'}).set?.should be_falsey
+          StaticProvider.new({:secret_access_key => 'secret'}).set?.should be_falsey
         end
 
         it 'raises an error if you pass an unexpected option' do
@@ -216,7 +218,7 @@ module AWS
         let(:mock_credential_file) { File.expand_path('../../../mock-credential-file.txt', __FILE__) }
 
         before(:each) do
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
         end
 
         it 'returns the prefix it was constructed with' do
@@ -296,20 +298,20 @@ module AWS
           provider = ENVProvider.new('AWS')
           env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
           env_variables['AWS_SECRET_ACCESS_KEY'] = 'new-secret'
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
           provider = ENVProvider.new('AWS')
           env_variables['AWS_ACCESS_KEY_ID'] = nil
           env_variables['AWS_SECRET_ACCESS_KEY'] = nil
-          provider.set?.should be_false
+          provider.set?.should be_falsey
           env_variables['AWS_ACCESS_KEY_ID'] = 'new-akid'
           env_variables['AWS_SECRET_ACCESS_KEY'] = nil
-          provider.set?.should be_false
+          provider.set?.should be_falsey
           env_variables['AWS_ACCESS_KEY_ID'] = nil
           env_variables['AWS_SECRET_ACCESS_KEY'] = 'new-secret'
-          provider.set?.should be_false
+          provider.set?.should be_falsey
         end
 
 
@@ -323,7 +325,7 @@ module AWS
         }}
 
         before(:each) do
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
         end
 
         it 'reads credentials with supplied suffixes' do
@@ -368,12 +370,12 @@ module AWS
 
         it 'is set when credentails is valid' do
           provider = CredentialFileProvider.new(mock_credential_file)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
           provider = CredentialFileProvider.new('/no/file/here')
-          provider.set?.should be_false
+          provider.set?.should be_falsey
         end
       end
 
@@ -391,7 +393,7 @@ module AWS
 
         it 'supports fetching profiles from ENV' do
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
           provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
           provider.credentials.should == {
             :access_key_id => 'ACCESS_KEY_2',
@@ -401,7 +403,7 @@ module AWS
 
         it 'supports a manually specified profile' do
           env_variables = { 'AWS_PROFILE' => 'barprofile' }
-          ENV.stub(:[]).and_return{|key| env_variables[key] }
+          ENV.stub(:[]){|key| env_variables[key] }
 
           provider = SharedCredentialFileProvider.new(
             :path => mock_shared_cred_file,
@@ -428,14 +430,22 @@ module AWS
 
         it 'is set when credentails is valid' do
           provider = SharedCredentialFileProvider.new(:path => mock_shared_cred_file)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
 
         it 'is not set when key_id or access_key is missing' do
           provider = SharedCredentialFileProvider.new(
             :path => '/no/file/here')
-          provider.set?.should be_false
+          provider.set?.should be_falsey
         end
+
+        it 'requires a path when RUBY_VERSION is less than 1.9' do
+          stub_const('RUBY_VERSION', '1.8.7')
+          lambda {
+            SharedCredentialFileProvider.new
+          }.should raise_error(ArgumentError, /specify the :path to your shared credential file/)
+        end
+
       end
 
       describe EC2Provider do
@@ -463,7 +473,7 @@ module AWS
 
         context 'timeouts' do
 
-          it 'has a short default timeouts' do
+          it 'has short default timeouts' do
             provider.http_open_timeout.should == 1
             provider.http_read_timeout.should == 1
           end
@@ -477,7 +487,7 @@ module AWS
             provider.http_read_timeout.should == 1.5
           end
 
-          it 'uses the timeouts when request credentials' do
+          it 'uses the timeouts when requesting credentials' do
 
             profiles = "profile-name\n"
             creds = <<-CREDS.strip
@@ -592,16 +602,42 @@ module AWS
           provider.credentials.should == creds2
         end
 
-        it 'is set when credentails is valid' do
-          provider.set?.should be_true
+        it 'is set when credentials are valid' do
+          provider.set?.should be_truthy
         end
 
-        it 'is not set when key_id or access_key is missing' do
+        it 'is not set when the request fails' do
           http = double('http').as_null_object
           http.should_receive(:start).and_raise(Errno::ECONNREFUSED)
           Net::HTTP.stub(:new).and_return(http)
 
-          provider.set?.should be_false
+          provider.set?.should be_falsey
+        end
+
+        context 'retries' do
+
+          it 'does not retry by default' do
+            provider.retries.should == 0
+          end
+
+          it 'accepts a value for the number of retries' do
+            provider = EC2Provider.new({:retries => 2})
+            provider.retries.should == 2
+          end
+
+          it 'retries the request for the set amount of times' do
+            http = double('http').as_null_object
+            http.should_receive(:start).exactly(3).times.and_raise(Errno::ECONNREFUSED)
+            Net::HTTP.stub(:new).and_return(http)
+
+            Kernel.should_receive(:sleep).with(1)
+            Kernel.should_receive(:sleep).with(2)
+
+            provider = EC2Provider.new({:retries => 2})
+            provider.set?.should be_false
+            provider.retries.should == 2
+          end
+
         end
 
       end
@@ -718,7 +754,7 @@ module AWS
             and_return(session_creds)
 
           provider = SessionProvider.for(long_term_creds)
-          provider.set?.should be_true
+          provider.set?.should be_truthy
         end
       end
     end

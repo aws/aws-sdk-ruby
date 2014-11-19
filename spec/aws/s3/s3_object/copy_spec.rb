@@ -31,9 +31,9 @@ module AWS
 
       let(:obj2) { S3Object.new(bucket2, 'key-2') }
 
-      let(:obj1_copy_source) { "#{obj1.bucket.name}/#{obj1.key}" }
+      let(:obj1_copy_source) { "/#{obj1.bucket.name}/#{obj1.key}" }
 
-      let(:obj2_copy_source) { "#{obj2.bucket.name}/#{obj2.key}" }
+      let(:obj2_copy_source) { "/#{obj2.bucket.name}/#{obj2.key}" }
 
       context '#copy_from' do
 
@@ -41,7 +41,7 @@ module AWS
           client.should_receive(:copy_object).
             with(:bucket_name => obj1.bucket.name,
                  :key => obj1.key,
-                 :copy_source => 'bucket-1/key',
+                 :copy_source => '/bucket-1/key',
                  :metadata_directive => 'COPY',
                  :storage_class => "STANDARD")
           obj1.copy_from('key')
@@ -49,19 +49,22 @@ module AWS
 
         it 'accepts a key string and defaults bucket to same bucket' do
           client.should_receive(:copy_object).with(hash_including(
-            :copy_source => 'bucket-1/some/key'))
+            :copy_source => '/bucket-1/some/key'))
           obj1.copy_from('some/key')
         end
 
         it 'accepts a key string and a bucket' do
           client.should_receive(:copy_object).with(hash_including(
-            :copy_source => 'bucket-2/some/key'))
+            :copy_source => '/bucket-2/some/key'))
           obj1.copy_from('some/key', :bucket => bucket2)
         end
 
         it 'accepts a key string and a bucket name' do
           client.should_receive(:copy_object).with(hash_including(
             :copy_source => 'bucketname/some/key'))
+          # intentionally not adding slash prefix here; users may
+          # already be working around previous bug by passing a slash
+          # in :bucket_name, we don't want to double-slash prefix
           obj1.copy_from('some/key', :bucket_name => 'bucketname')
         end
 
@@ -153,7 +156,7 @@ module AWS
         it 'allows you to copy a versioned object' do
           version = ObjectVersion.new(obj2, 'abc', :config => config)
           client.should_receive(:copy_object).with(hash_including(
-            :copy_source => "#{version.object.bucket.name}/#{version.object.key}",
+            :copy_source => "/#{version.object.bucket.name}/#{version.object.key}",
             :version_id => 'abc'))
           obj1.copy_from(version)
         end
@@ -166,7 +169,7 @@ module AWS
           client.should_receive(:copy_object).
             with(:bucket_name => obj1.bucket.name,
                  :key => 'key',
-                 :copy_source => 'bucket-1/key-1',
+                 :copy_source => '/bucket-1/key-1',
                  :metadata_directive => 'COPY',
                  :storage_class => "STANDARD")
           obj1.copy_to('key')

@@ -191,12 +191,12 @@ module AWS
         end
 
         it 'should return true if there is no error' do
-          group.exists?.should be_true
+          group.exists?.should be_truthy
         end
 
         it 'should return false if there is a NoSuchEntity error' do
           client.stub(:get_group).and_raise(Errors::NoSuchEntity)
-          group.exists?.should be_false
+          group.exists?.should be_falsey
         end
 
         it 'should not rescue other kinds of errors' do

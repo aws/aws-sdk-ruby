@@ -82,6 +82,14 @@ ec2.instances['i-12345678'].tags.to_h
 
 See the [API Documentation](http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html) for more examples.
 
+## Testing
+
+All HTTP requests to live services can be globally mocked (e.g. from within the `spec_helper.rb` file):
+
+```
+AWS.stub!
+```
+
 ## Links of Interest
 
 * [API Documentation](http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html)

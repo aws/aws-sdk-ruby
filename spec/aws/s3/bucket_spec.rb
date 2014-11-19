@@ -55,6 +55,13 @@ module AWS
           end
         end
 
+        context 'with secure options' do
+          it 'should return https and the bucket name in the host' do
+            bucket = Bucket.new('bucket-name', :config => config)
+            bucket.url(secure: true).should == "https://bucket-name.s3.amazonaws.com/"
+          end
+        end
+
       end
 
       context '#lifecycle_configuration' do
@@ -481,19 +488,19 @@ module AWS
 
         it 'should identify the same bucket correctly' do
           bucket = Bucket.new('a')
-          bucket.eql?(bucket).should be_true
+          bucket.eql?(bucket).should be_truthy
         end
 
         it 'should identify buckets with the same name correctly' do
           bucket = Bucket.new('a')
           another_bucket_same_name = Bucket.new('a')
-          bucket.eql?(another_bucket_same_name).should be_true
+          bucket.eql?(another_bucket_same_name).should be_truthy
         end
 
         it 'should identify differnt buckets correctly' do
           bucket_a = Bucket.new('a')
           bucket_b = Bucket.new('b')
-          bucket_a.eql?(bucket_b).should be_false
+          bucket_a.eql?(bucket_b).should be_falsey
         end
 
       end

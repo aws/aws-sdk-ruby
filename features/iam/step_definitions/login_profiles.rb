@@ -24,7 +24,7 @@ When /^I set the password for the user\'s login profile$/ do
 end
 
 Then /^the IAM user should have a login profile$/ do
-  @user.login_profile.exists?.should be_true
+  @user.login_profile.exists?.should be_truthy
 end
 
 When /^I get the create date for the user\'s login profile$/ do

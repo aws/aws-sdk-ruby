@@ -19,7 +19,7 @@ module AWS
 
       # @api private
       class CurbHandler
-
+        class NetworkError < StandardError; end
         def initialize
           @q = []
           @sem = Mutex.new
@@ -133,6 +133,9 @@ module AWS
 
           curl.on_complete do
             response.status = curl.response_code
+            unless curl.response_code > 0
+              response.network_error = NetworkError.new('Empty response. Assume network error.')
+            end
             unless read_block
               response.body = buffer.join("")
             end

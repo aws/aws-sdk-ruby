@@ -247,7 +247,7 @@ module AWS
           end
 
           def check_value(value)
-            value.should be_true
+            value.should be_truthy
           end
         end
 
@@ -275,7 +275,7 @@ module AWS
           let(:volume_index) { { "vol-123" => resp_volume } }
 
           it 'should return true' do
-            attachment.exists?.should be_true
+            attachment.exists?.should be_truthy
           end
 
         end
@@ -298,7 +298,7 @@ module AWS
           let(:volume_index) { { "vol-123" => resp_volume } }
 
           it 'should return false' do
-            attachment.exists?.should be_false
+            attachment.exists?.should be_falsey
           end
 
         end
@@ -308,7 +308,7 @@ module AWS
           let(:volume_index) { {} }
 
           it 'should return false' do
-            attachment.exists?.should be_false
+            attachment.exists?.should be_falsey
           end
 
         end

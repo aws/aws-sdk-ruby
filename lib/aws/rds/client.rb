@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Relational Database Service (RDS).
     class Client < Core::QueryClient
 
-      API_VERSION = '2013-09-09'
+      API_VERSION = '2014-09-01'
 
       signature_version :Version4, 'rds'
 
@@ -35,6 +35,12 @@ module AWS
     class Client::V20130909 < Client
 
       define_client_methods('2013-09-09')
+
+    end
+
+    class Client::V20140901 < Client
+
+      define_client_methods('2014-09-01')
 
     end
 
