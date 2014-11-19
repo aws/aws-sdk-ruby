@@ -16,3 +16,6 @@
 
 # tells autotest to use rspec extensions
 /.rspec
+
+# ignore Vim .swp files
+*.swp

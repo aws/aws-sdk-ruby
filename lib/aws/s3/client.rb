@@ -1412,8 +1412,12 @@ module AWS
       end
 
       # Gets the data for a key.
-      # @overload get_object(options = {})
+      # @overload get_object(options = {}, target)
       #   @param [Hash] options
+      #   @param [File] target
+      #     An optional file or path used to receive the object's data
+      #     (recommended for large objects). If this is not specified, the
+      #     object data will be returned in the body of the response object.
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
       #   @option options [Time] :if_modified_since If specified, the
