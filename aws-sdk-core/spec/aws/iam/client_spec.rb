@@ -21,6 +21,11 @@ module Aws
         expect(iam.config.endpoint.to_s).to eq('https://iam.us-gov.amazonaws.com')
       end
 
+      it 'uses the proper sigv4 signing name for gov-cloud' do
+        iam = Client.new(region: 'us-gov-west-1', credentials: credentials)
+        expect(iam.config.sigv4_region).to eq('us-gov-west-1')
+      end
+
     end
   end
 end

@@ -3,6 +3,10 @@ Unreleased Changes
 
 * Issue - Aws::KMS - Corrected the paginators for `Aws::KMS::Client`.
 
+* Issue - Aws::IAM - Corrected the signature version 4 signing name when
+  using `Aws::IAM::Client` in the `us-gov-west-1` region.
+  Fixes #159
+
 2.0.9 (2014-11-13)
 ------------------
 
