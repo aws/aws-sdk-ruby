@@ -51,9 +51,11 @@ module AWS
       #   launch the instances with.
       #
       # @option options [Array<EC2::SecurityGroup>,Array<String>] :security_groups
-      #   The list of security groups to associate with the instances.
-      #   This may be an array of {EC2::SecurityGroup} objects, security
-      #   group names or security group ids.
+      #   A list of security groups to associate with the instances.
+      #   For both EC2 Classic and VPC, this option can be an array of {EC2::SecurityGroup} objects
+      #   or security group ids. For EC2 Classic, this option can also be an array of
+      #   security group names.
+      #   Note: The VPC is derived from the security groups.
       #
       # @option options [String] :user_data The user data available to
       #   the launched Amazon EC2 instances.
