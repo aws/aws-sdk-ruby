@@ -1,5 +1,7 @@
 $REPO_ROOT = File.dirname(__FILE__)
 
+$VERSION = ENV['VERSION'] || File.read(File.join($REPO_ROOT, 'VERSION')).strip
+
 $GEM_NAMES = [
   'aws-sdk-core',
   'aws-sdk-resources',

@@ -8,14 +8,14 @@ task 'git:require-clean-workspace' do
 end
 
 task 'git:tag' do
-  sh("git commit -m \"Bumped version to v#{version}\"")
-  sh("git tag -a -m \"$(rake git:tag_message)\" v#{version}")
+  sh("git commit -m \"Bumped version to v#{$VERSION}\"")
+  sh("git tag -a -m \"$(rake git:tag_message)\" v#{$VERSION}")
 end
 
 task 'git:tag_message' do
   issues = `git log $(git describe --tags --abbrev=0)...HEAD -E --grep '#[0-9]+' 2>/dev/null`
   issues = issues.scan(/((?:\S+\/\S+)?#\d+)/).flatten
-  msg = "Tag release v#{version}"
+  msg = "Tag release v#{$VERSION}"
   msg << "\n\n"
   unless issues.empty?
     msg << "References: #{issues.uniq.sort.join(', ')}"

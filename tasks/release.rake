@@ -1,19 +1,12 @@
-def version
-  version = ENV['VERSION'].to_s.sub(/^v/, '')
-  if version.match(/^\d+\.\d+\.\d+(\.rc\d+)?$/)
-    version
-  else
+task 'release:require-version' do
+  unless ENV['VERSION']
     warn("usage: VERSION=x.y.z rake release")
     exit
   end
 end
 
-task 'release:require-version' do
-  version
-end
-
+# bumps the VERSION file and the `Aws::VERSION` constant
 task 'release:bump-version' do
-  # bumps the VERSION file and the `Aws::VERSION` constant
   sh("echo '#{version}' > VERSION")
   path = 'aws-sdk-core/lib/aws-sdk-core/version.rb'
   file = File.read(path)
@@ -23,12 +16,15 @@ task 'release:bump-version' do
   sh("git add VERSION")
 end
 
-task 'release:stage' => [
+# ensures all of the required credentials are present
+task 'release:check' => [
   'release:require-version',
   'github:require-access-token',
   'git:require-clean-workspace',
-  'test:unit',
-  'test:integration',
+]
+
+# builds release artificats
+task 'release:build' => [
   'docs:update_readme',
   'changelog:version',
   'release:bump-version',
@@ -37,6 +33,7 @@ task 'release:stage' => [
   'docs:zip',
 ]
 
+# deploys release artificats
 task 'release:publish' => [
   'release:require-version',
   'git:push',
@@ -44,9 +41,16 @@ task 'release:publish' => [
   'github:release',
 ]
 
+# post release tasks
 task 'release:cleanup' => [
   'changelog:next_release',
 ]
 
-desc "Public release"
-task :release => ['release:stage', 'release:publish', 'release:cleanup']
+desc "Public release, `VERSION=x.y.z rake release`"
+task :release => [
+  'release:check',
+  'test',
+  'release:build',
+  'release:publish',
+  'release:cleanup'
+]

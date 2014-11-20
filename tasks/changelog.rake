@@ -2,7 +2,7 @@ task 'changelog:version' do
   # replaces "Next Release (TBD)" in the CHANGELOG with a version and date
   changelog = File.open('CHANGELOG.md', 'r', encoding: 'UTF-8') { |f| f.read }
   changelog = changelog.lines
-  changelog[0] = "#{version} (#{Time.now.strftime('%Y-%m-%d')})\n"
+  changelog[0] = "#{$VERSION} (#{Time.now.strftime('%Y-%m-%d')})\n"
   changelog = changelog.join
   File.open('CHANGELOG.md', 'w', encoding: 'UTF-8') { |f| f.write(changelog) }
   sh("git add CHANGELOG.md")
