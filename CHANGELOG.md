@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.10 (2014-11-20)
 ------------------
 
 * Feature - Aws::Redshift - Added support for AWS Key Management Service (KMS)
