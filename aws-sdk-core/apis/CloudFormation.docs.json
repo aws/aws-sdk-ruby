@@ -453,30 +453,30 @@
     "StackName": {
       "base": null,
       "refs": {
-        "CancelUpdateStackInput$StackName": "<p>The name or the unique identifier associated with the stack.</p>",
-        "CreateStackInput$StackName": "<p>The name associated with the stack. The name must be unique within your AWS account.</p> <note>Must contain only alphanumeric characters (case sensitive) and start with an alpha character. Maximum length of the name is 255 characters.</note>",
-        "DeleteStackInput$StackName": "<p>The name or the unique identifier associated with the stack.</p>",
-        "DescribeStackEventsInput$StackName": "<p>The name or the unique identifier associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
-        "DescribeStackResourceInput$StackName": "<p>The name or the unique identifier associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
-        "DescribeStackResourcesInput$StackName": "<p>The name or the unique identifier associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p> <p>Required: Conditional. If you do not specify <code>StackName</code>, you must specify <code>PhysicalResourceId</code>.</p>",
-        "DescribeStacksInput$StackName": "<p>The name or the unique identifier associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
-        "GetStackPolicyInput$StackName": "<p>The name or stack ID that is associated with the stack whose policy you want to get.</p>",
-        "GetTemplateInput$StackName": "<p>The name or the unique identifier associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
-        "ListStackResourcesInput$StackName": "<p>The name or the unique identifier associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
-        "SetStackPolicyInput$StackName": "<p>The name or stack ID that you want to associate a policy with.</p>",
+        "CancelUpdateStackInput$StackName": "<p>The name or the unique stack ID that is associated with the stack.</p>",
+        "CreateStackInput$StackName": "<p>The name that is associated with the stack. The name must be unique in the region in which you are creating the stack.</p> <note>A stack name can contain only alphanumeric characters (case sensitive) and hyphens. It must start with an alphabetic character and cannot be longer than 255 characters.</note>",
+        "DeleteStackInput$StackName": "<p>The name or the unique stack ID that is associated with the stack.</p>",
+        "DescribeStackEventsInput$StackName": "<p>The name or the unique stack ID that is associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
+        "DescribeStackResourceInput$StackName": "<p>The name or the unique stack ID that is associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
+        "DescribeStackResourcesInput$StackName": "<p>The name or the unique stack ID that is associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p> <p>Required: Conditional. If you do not specify <code>StackName</code>, you must specify <code>PhysicalResourceId</code>.</p>",
+        "DescribeStacksInput$StackName": "<p>The name or the unique stack ID that is associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
+        "GetStackPolicyInput$StackName": "<p>The name or unique stack ID that is associated with the stack whose policy you want to get.</p>",
+        "GetTemplateInput$StackName": "<p>The name or the unique stack ID that is associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
+        "ListStackResourcesInput$StackName": "<p>The name or the unique stack ID that is associated with the stack, which are not always interchangeable:</p> <ul> <li>Running stacks: You can specify either the stack's name or its unique stack ID.</li> <li>Deleted stacks: You must specify the unique stack ID.</li> </ul> <p>Default: There is no default value.</p>",
+        "SetStackPolicyInput$StackName": "<p>The name or unique stack ID that you want to associate a policy with.</p>",
         "Stack$StackName": "<p>The name associated with the stack.</p>",
         "StackEvent$StackName": "<p>The name associated with a stack.</p>",
         "StackResource$StackName": "<p>The name associated with the stack.</p>",
         "StackResourceDetail$StackName": "<p>The name associated with the stack.</p>",
         "StackSummary$StackName": "<p>The name associated with the stack.</p>",
-        "UpdateStackInput$StackName": "<p>The name or stack ID of the stack to update.</p> <note> Must contain only alphanumeric characters (case sensitive) and start with an alpha character. Maximum length of the name is 255 characters. </note>"
+        "UpdateStackInput$StackName": "<p>The name or unique stack ID of the stack to update.</p>"
       }
     },
     "StackNameOrId": {
       "base": null,
       "refs": {
-        "GetTemplateSummaryInput$StackName": "<p>The name or the unique identifier associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack's name or its unique stack ID. For deleted stack, you must specify the unique stack ID.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>",
-        "SignalResourceInput$StackName": "<p>The stack name or ID that includes the resource that you want to signal.</p>"
+        "GetTemplateSummaryInput$StackName": "<p>The name or the stack ID that is associated with the stack, which are not always interchangeable. For running stacks, you can specify either the stack's name or its unique stack ID. For deleted stack, you must specify the unique stack ID.</p> <p>Conditional: You must specify only one of the following parameters: <code>StackName</code>, <code>TemplateBody</code>, or <code>TemplateURL</code>.</p>",
+        "SignalResourceInput$StackName": "<p>The stack name or unique stack ID that includes the resource that you want to signal.</p>"
       }
     },
     "StackPolicyBody": {
