@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Redshift - Added support for AWS Key Management Service (KMS)
+  integration.
+
 * Issue - Aws::KMS - Corrected the paginators for `Aws::KMS::Client`.
 
 * Issue - Aws::IAM - Corrected the signature version 4 signing name when
