@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - Aws::IAM - Renamed `Aws::IAM::User#create_access_key`
+  to `#create_access_key_pair`. Also returning an AccessKeyPair
+  now instead of an AccessKey.
+
+  ```ruby
+  key_pair = iam.user('username').create_access_key_pair
+  key_pair.id     #=> access key id
+  key_pair.secret #=> secret access key
+  ```
+
 2.0.10 (2014-11-20)
 ------------------
 

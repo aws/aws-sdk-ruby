@@ -192,8 +192,62 @@
   "resources": {
     "AccessKey": {
       "identifiers": [
-        { "name": "UserName" },
-        { "name": "Id" }
+        {
+          "name": "UserName",
+          "memberName": "UserName"
+        },
+        {
+          "name": "Id",
+          "memberName": "AccessKeyId"
+        }
+      ],
+      "shape": "AccessKeyMetadata",
+      "actions": {
+        "Activate": {
+          "request": {
+            "operation": "UpdateAccessKey",
+            "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
+              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" },
+              { "target": "Status", "sourceType": "string", "source": "Active" }
+            ]
+          }
+        },
+        "Deactivate": {
+          "request": {
+            "operation": "UpdateAccessKey",
+            "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
+              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" },
+              { "target": "Status", "sourceType": "string", "source": "Inactive" }
+            ]
+          }
+        },
+        "Delete": {
+          "request": {
+            "operation": "DeleteAccessKey",
+            "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
+              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" }
+            ]
+          }
+        }
+      }
+    },
+    "AccessKeyPair": {
+      "identifiers": [
+        {
+          "name": "UserName",
+          "memberName": "UserName"
+        },
+        {
+          "name": "Id",
+          "memberName": "AccessKeyId"
+        },
+        {
+          "name": "Secret",
+          "memberName": "SecretAccessKey"
+        }
       ],
       "shape": "AccessKey",
       "actions": {
@@ -782,7 +836,7 @@
             ]
           }
         },
-        "CreateAccessKey": {
+        "CreateAccessKeyPair": {
           "request": {
             "operation": "CreateAccessKey",
             "params": [
@@ -790,10 +844,11 @@
             ]
           },
           "resource": {
-            "type": "AccessKey",
+            "type": "AccessKeyPair",
             "identifiers": [
               { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Id", "sourceType": "responsePath", "source": "AccessKey.AccessKeyId" }
+              { "target": "Id", "sourceType": "responsePath", "source": "AccessKey.AccessKeyId" },
+              { "target": "Secret", "sourceType": "responsePath", "source": "AccessKey.SecretAccessKey" }
             ],
             "path": "AccessKey"
           }

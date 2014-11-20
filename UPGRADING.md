@@ -1,5 +1,26 @@
 # Upgrade Notes
 
+## `aws-sdk-resources` - v2.0.11.pre
+
+* Renamed `Aws::IAM::User#create_access_key` to `#create_access_key_pair`.
+  The return value from this method has changed from an instance of
+  `AccessKey` to `AccessKeyPair` and now has an additional method,
+  `#secret`.
+
+  ```ruby
+  iam = Aws::IAM::Resource.new
+
+  # old
+  key_pair = iam.user('name').create_access_key
+  key_pair.id     #=> access key id
+  key_pair.secret #=> raises NoMethodError, oops
+
+  # new
+  key_pair = iam.user('name').create_access_key_pair
+  key_pair.id     #=> access key id
+  key_pair.secret #=> secret_access_key
+  ```
+
 ## `aws-sdk-resources` - v2.0.7.pre
 
 * Moved `Aws::S3::MultipartUpload#upload_part` and `#copy_part` to
