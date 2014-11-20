@@ -2027,7 +2027,11 @@
         "DisplayName":{"shape":"DisplayName"},
         "EmailAddress":{"shape":"EmailAddress"},
         "ID":{"shape":"ID"},
-        "Type":{"shape":"Type"},
+        "Type":{
+          "shape":"Type",
+          "xmlAttribute":true,
+          "locationName":"xsi:type"
+        },
         "URI":{"shape":"URI"}
       },
       "xmlNamespace":{
@@ -3479,9 +3483,7 @@
         "CanonicalUser",
         "AmazonCustomerByEmail",
         "Group"
-      ],
-      "xmlAttribute":true,
-      "locationName":"xsi:type"
+      ]
     },
     "URI":{"type":"string"},
     "UploadIdMarker":{"type":"string"},

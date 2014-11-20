@@ -335,6 +335,41 @@ module Aws
         end
 
       end
+
+      describe '#put_object_acl' do
+
+        it 'builds the ACL xml from request params' do
+          client = Client.new(stub_responses: true)
+          resp = client.put_object_acl(
+            bucket: 'bucket',
+            key: 'key',
+            access_control_policy: {
+              grants: [
+                {
+                  grantee: {
+                    display_name: 'name',
+                    type: 'CanonicalUser'
+                  },
+                  permission: 'READ'
+                }
+              ]
+            }
+          )
+          expect(resp.context.http_request.body_contents).to eq(<<-XML)
+<AccessControlPolicy xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <AccessControlList>
+    <Grant>
+      <Grantee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CanonicalUser">
+        <DisplayName>name</DisplayName>
+      </Grantee>
+      <Permission>READ</Permission>
+    </Grant>
+  </AccessControlList>
+</AccessControlPolicy>
+          XML
+        end
+
+      end
     end
   end
 end

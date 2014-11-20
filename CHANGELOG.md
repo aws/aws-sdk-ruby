@@ -17,6 +17,9 @@ Unreleased Changes
   name. This avoids signature errors for v4-only regions when the classic
   endpoint is used with a v2 signature.
 
+* Issue - Aws::S3 - Fixed a bug in `#put_object_acl` serialization.
+  Fixes #160.
+
 2.0.9 (2014-11-13)
 ------------------
 
