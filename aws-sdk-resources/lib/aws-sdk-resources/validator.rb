@@ -1,4 +1,3 @@
-require 'multi_json'
 require 'json-schema'
 require 'aws-sdk-resources/validator/context'
 require 'aws-sdk-resources/validator/dsl'

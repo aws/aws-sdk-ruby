@@ -1,5 +1,3 @@
-require 'jmespath'
-
 module Aws
   module Waiters
     class Waiter

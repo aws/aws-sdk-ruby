@@ -1,5 +1,6 @@
-require 'seahorse'
+require 'jmespath'
 require 'multi_json'
+require 'seahorse'
 
 Seahorse::Util.irregular_inflections({
   'ARNs' => 'arns',

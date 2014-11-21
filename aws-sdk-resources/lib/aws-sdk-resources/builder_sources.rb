@@ -1,5 +1,3 @@
-require 'jmespath'
-
 module Aws
   module Resources
     module BuilderSources

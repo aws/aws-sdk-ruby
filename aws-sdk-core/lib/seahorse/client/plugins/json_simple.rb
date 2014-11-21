@@ -1,5 +1,3 @@
-require 'multi_json'
-
 module Seahorse
   module Client
     module Plugins

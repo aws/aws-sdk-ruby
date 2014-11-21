@@ -1,4 +1,3 @@
-require 'multi_json'
 require 'base64'
 
 module Aws

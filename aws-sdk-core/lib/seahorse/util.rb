@@ -1,5 +1,4 @@
 require 'cgi'
-require 'multi_json'
 
 module Seahorse
   module Util
