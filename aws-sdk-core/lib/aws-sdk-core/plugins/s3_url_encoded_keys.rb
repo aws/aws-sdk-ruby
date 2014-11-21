@@ -1,4 +1,4 @@
-require 'cgi'
+require 'uri'
 
 module Aws
   module Plugins
@@ -71,7 +71,7 @@ module Aws
 
         def decode(member, struct)
           if struct[member]
-            struct[member] = CGI.unescape(struct[member])
+            struct[member] = URI.decode(struct[member])
           end
         end
 

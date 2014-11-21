@@ -370,6 +370,37 @@ module Aws
         end
 
       end
+
+      describe '#put_object_acl' do
+
+        it 'correct decodes url keys' do
+          client.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            context.http_response.body = <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Contents>
+    <Key>prefix+suffix</Key>
+  </Contents>
+  <Contents>
+    <Key>prefix%2Bsuffix</Key>
+  </Contents>
+  <Contents>
+    <Key>prefix%20suffix</Key>
+  </Contents>
+</ListBucketResult>
+            XML
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.list_objects(bucket:'aws-sdk')
+          expect(resp.contents.map(&:key)).to eq([
+            'prefix+suffix',
+            'prefix+suffix',
+            'prefix suffix',
+          ])
+        end
+
+      end
     end
   end
 end

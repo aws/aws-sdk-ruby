@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved an issue where object keys with plus
+  signs were incorrectly un-marhsalled from the XML response when
+  keys are URL encoded. Fixes #161.
+
 * Upgrading - Aws::IAM - Renamed `Aws::IAM::User#create_access_key`
   to `#create_access_key_pair`. Also returning an AccessKeyPair
   now instead of an AccessKey.
