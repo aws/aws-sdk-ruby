@@ -128,7 +128,7 @@
             { "target": "jobId", "sourceType": "identifier", "source": "Id" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "GetOutput": {
@@ -250,7 +250,7 @@
             { "target": "accountId", "sourceType": "identifier", "source": "AccountId" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Create": {

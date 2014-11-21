@@ -94,7 +94,7 @@
             { "target": "AttributeNames[]", "sourceType": "string", "source": "All" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "AddPermission": {

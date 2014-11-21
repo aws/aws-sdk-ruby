@@ -64,7 +64,7 @@
             { "target": "PlatformApplicationArn", "sourceType": "identifier", "source": "Arn" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "CreatePlatformEndpoint": {
@@ -128,7 +128,7 @@
             { "target": "EndpointArn", "sourceType": "identifier", "source": "Arn" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -170,7 +170,7 @@
             { "target": "SubscriptionArn", "sourceType": "identifier", "source": "Arn" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -203,7 +203,7 @@
             { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "AddPermission": {

@@ -95,7 +95,7 @@
           "identifiers": [
             { "target": "Id", "sourceType": "responsePath", "source": "SnapshotId" }
           ],
-          "path": "$"
+          "path": "@"
         }
       },
       "CreateSubnet": {
@@ -126,7 +126,7 @@
           "identifiers": [
             { "target": "Id", "sourceType": "responsePath", "source": "VolumeId" }
           ],
-          "path": "$"
+          "path": "@"
         }
       },
       "CreateVpc": {
@@ -1620,7 +1620,7 @@
             "identifiers": [
               { "target": "Id", "sourceType": "responsePath", "source": "SnapshotId" }
             ],
-            "path": "$"
+            "path": "@"
           }
         },
         "CreateTags": {

@@ -236,7 +236,7 @@ module Aws
         end
 
         def resolve_shape(shape, path)
-          if path != '$'
+          if path != '@'
             shape = path.scan(/\w+|\[.*?\]/).inject(shape) do |shape, part|
               if part[0] == '['
                 shape.member

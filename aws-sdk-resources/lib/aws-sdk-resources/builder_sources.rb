@@ -118,11 +118,7 @@ module Aws
 
         # @option [required, Seahorse::Client::Response] :response
         def extract(options)
-          if source == '$'
-            response(options).data
-          else
-            JMESPath.search(source, response(options).data)
-          end
+          JMESPath.search(source, response(options).data)
         end
 
         private

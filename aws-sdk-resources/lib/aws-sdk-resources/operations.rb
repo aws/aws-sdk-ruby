@@ -66,7 +66,7 @@ module Aws
         private
 
         def extract(resp)
-          @path == '$' ? resp.data : JMESPath.search(@path, resp.data)
+          JMESPath.search(@path, resp.data)
         end
 
       end

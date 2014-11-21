@@ -318,7 +318,7 @@
       "shape": "GetAccountSummaryResponse",
       "load": {
         "request": { "operation": "GetAccountSummary" },
-        "path": "$"
+        "path": "@"
       }
     },
     "Group": {
@@ -449,7 +449,7 @@
             { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -684,7 +684,7 @@
             { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -719,7 +719,7 @@
             { "target": "SAMLProviderArn", "sourceType": "identifier", "source": "Arn" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -1002,7 +1002,7 @@
             { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {

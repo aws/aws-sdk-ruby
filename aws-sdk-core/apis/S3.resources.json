@@ -165,7 +165,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Put": {
@@ -190,7 +190,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -223,7 +223,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -256,7 +256,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Put": {
@@ -281,7 +281,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Put": {
@@ -306,7 +306,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -339,7 +339,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Put": {
@@ -364,7 +364,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -397,7 +397,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Enable": {
@@ -440,7 +440,7 @@
             { "target": "Bucket", "sourceType": "identifier", "source": "BucketName" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Delete": {
@@ -579,7 +579,7 @@
             { "target": "Key", "sourceType": "identifier", "source": "Key" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "CopyFrom": {
@@ -689,7 +689,7 @@
             { "target": "Key", "sourceType": "identifier", "source": "ObjectKey" }
           ]
         },
-        "path": "$"
+        "path": "@"
       },
       "actions": {
         "Put": {
