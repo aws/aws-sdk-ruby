@@ -1355,22 +1355,7 @@
       }
     },
     "DeleteMarker":{"type":"boolean"},
-    "DeleteMarkerEntry":{
-      "type":"structure",
-      "members":{
-        "Owner":{"shape":"Owner"},
-        "Key":{"shape":"ObjectKey"},
-        "VersionId":{"shape":"ObjectVersionId"},
-        "IsLatest":{"shape":"IsLatest"},
-        "LastModified":{"shape":"LastModified"}
-      }
-    },
     "DeleteMarkerVersionId":{"type":"string"},
-    "DeleteMarkers":{
-      "type":"list",
-      "member":{"shape":"DeleteMarkerEntry"},
-      "flattened":true
-    },
     "DeleteObjectOutput":{
       "type":"structure",
       "members":{
@@ -2362,7 +2347,7 @@
           "locationName":"Version"
         },
         "DeleteMarkers":{
-          "shape":"DeleteMarkers",
+          "shape":"ObjectVersionList",
           "locationName":"DeleteMarker"
         },
         "Name":{"shape":"BucketName"},
