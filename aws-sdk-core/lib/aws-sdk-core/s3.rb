@@ -21,12 +21,5 @@ module Aws
     # @api private
     BUCKET_REGIONS = BucketRegionCache.new
 
-    # @param [String] region
-    # @return [Boolean]
-    # @api private
-    def self.sigv2_region?(region)
-      Client.api.metadata('sigv2Regions').include?(region)
-    end
-
   end
 end
