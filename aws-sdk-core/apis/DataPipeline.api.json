@@ -441,7 +441,8 @@
       "type":"structure",
       "required":["pipelineId"],
       "members":{
-        "pipelineId":{"shape":"id"}
+        "pipelineId":{"shape":"id"},
+        "parameterValues":{"shape":"ParameterValueList"}
       }
     },
     "ActivatePipelineOutput":{
@@ -551,7 +552,9 @@
     "GetPipelineDefinitionOutput":{
       "type":"structure",
       "members":{
-        "pipelineObjects":{"shape":"PipelineObjectList"}
+        "pipelineObjects":{"shape":"PipelineObjectList"},
+        "parameterObjects":{"shape":"ParameterObjectList"},
+        "parameterValues":{"shape":"ParameterValueList"}
       }
     },
     "InstanceIdentity":{
@@ -607,6 +610,51 @@
         "GE",
         "BETWEEN"
       ]
+    },
+    "ParameterAttribute":{
+      "type":"structure",
+      "required":[
+        "key",
+        "stringValue"
+      ],
+      "members":{
+        "key":{"shape":"attributeNameString"},
+        "stringValue":{"shape":"attributeValueString"}
+      }
+    },
+    "ParameterAttributeList":{
+      "type":"list",
+      "member":{"shape":"ParameterAttribute"}
+    },
+    "ParameterObject":{
+      "type":"structure",
+      "required":[
+        "id",
+        "attributes"
+      ],
+      "members":{
+        "id":{"shape":"fieldNameString"},
+        "attributes":{"shape":"ParameterAttributeList"}
+      }
+    },
+    "ParameterObjectList":{
+      "type":"list",
+      "member":{"shape":"ParameterObject"}
+    },
+    "ParameterValue":{
+      "type":"structure",
+      "required":[
+        "id",
+        "stringValue"
+      ],
+      "members":{
+        "id":{"shape":"fieldNameString"},
+        "stringValue":{"shape":"fieldStringValue"}
+      }
+    },
+    "ParameterValueList":{
+      "type":"list",
+      "member":{"shape":"ParameterValue"}
     },
     "PipelineDeletedException":{
       "type":"structure",
@@ -692,7 +740,9 @@
       ],
       "members":{
         "pipelineId":{"shape":"id"},
-        "pipelineObjects":{"shape":"PipelineObjectList"}
+        "pipelineObjects":{"shape":"PipelineObjectList"},
+        "parameterObjects":{"shape":"ParameterObjectList"},
+        "parameterValues":{"shape":"ParameterValueList"}
       }
     },
     "PutPipelineDefinitionOutput":{
@@ -736,7 +786,8 @@
       "type":"structure",
       "required":["taskId"],
       "members":{
-        "taskId":{"shape":"taskId"}
+        "taskId":{"shape":"taskId"},
+        "fields":{"shape":"fieldList"}
       }
     },
     "ReportTaskProgressOutput":{
@@ -837,7 +888,9 @@
       ],
       "members":{
         "pipelineId":{"shape":"id"},
-        "pipelineObjects":{"shape":"PipelineObjectList"}
+        "pipelineObjects":{"shape":"PipelineObjectList"},
+        "parameterObjects":{"shape":"ParameterObjectList"},
+        "parameterValues":{"shape":"ParameterValueList"}
       }
     },
     "ValidatePipelineDefinitionOutput":{
@@ -870,6 +923,18 @@
     "ValidationWarnings":{
       "type":"list",
       "member":{"shape":"ValidationWarning"}
+    },
+    "attributeNameString":{
+      "type":"string",
+      "min":1,
+      "max":256,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+    },
+    "attributeValueString":{
+      "type":"string",
+      "min":0,
+      "max":10240,
+      "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
     "boolean":{"type":"boolean"},
     "errorMessage":{"type":"string"},
