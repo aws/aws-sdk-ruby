@@ -1007,6 +1007,11 @@
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
         },
+        "SSEKMSKeyId":{
+          "shape":"SSEKMSKeyId",
+          "location":"header",
+          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
         "CopySourceSSECustomerAlgorithm":{
           "shape":"CopySourceSSECustomerAlgorithm",
           "location":"header",
@@ -1021,11 +1026,6 @@
           "shape":"CopySourceSSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"
-        },
-        "CopySourceSSEKMSKeyId":{
-          "shape":"CopySourceSSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-copy-source-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -1058,10 +1058,6 @@
       "sensitive":true
     },
     "CopySourceSSECustomerKeyMD5":{"type":"string"},
-    "CopySourceSSEKMSKeyId":{
-      "type":"string",
-      "sensitive":true
-    },
     "CopySourceVersionId":{"type":"string"},
     "CreateBucketConfiguration":{
       "type":"structure",
@@ -1355,7 +1351,22 @@
       }
     },
     "DeleteMarker":{"type":"boolean"},
+    "DeleteMarkerEntry":{
+      "type":"structure",
+      "members":{
+        "Owner":{"shape":"Owner"},
+        "Key":{"shape":"ObjectKey"},
+        "VersionId":{"shape":"ObjectVersionId"},
+        "IsLatest":{"shape":"IsLatest"},
+        "LastModified":{"shape":"LastModified"}
+      }
+    },
     "DeleteMarkerVersionId":{"type":"string"},
+    "DeleteMarkers":{
+      "type":"list",
+      "member":{"shape":"DeleteMarkerEntry"},
+      "flattened":true
+    },
     "DeleteObjectOutput":{
       "type":"structure",
       "members":{
@@ -1956,11 +1967,6 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
-        },
-        "SSEKMSKeyId":{
-          "shape":"SSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -2213,11 +2219,6 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
-        },
-        "SSEKMSKeyId":{
-          "shape":"SSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -2347,7 +2348,7 @@
           "locationName":"Version"
         },
         "DeleteMarkers":{
-          "shape":"ObjectVersionList",
+          "shape":"DeleteMarkers",
           "locationName":"DeleteMarker"
         },
         "Name":{"shape":"BucketName"},
@@ -3593,11 +3594,6 @@
           "shape":"CopySourceSSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"
-        },
-        "CopySourceSSEKMSKeyId":{
-          "shape":"CopySourceSSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       }
     },
@@ -3688,11 +3684,6 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
-        },
-        "SSEKMSKeyId":{
-          "shape":"SSEKMSKeyId",
-          "location":"header",
-          "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
         }
       },
       "payload":"Body"

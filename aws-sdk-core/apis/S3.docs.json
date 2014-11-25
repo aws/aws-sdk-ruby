@@ -479,13 +479,6 @@
         "UploadPartCopyRequest$CopySourceSSECustomerKeyMD5": "Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure the encryption key was transmitted without error."
       }
     },
-    "CopySourceSSEKMSKeyId": {
-      "base": null,
-      "refs": {
-        "CopyObjectRequest$CopySourceSSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
-        "UploadPartCopyRequest$CopySourceSSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption."
-      }
-    },
     "CopySourceVersionId": {
       "base": null,
       "refs": {
@@ -1832,19 +1825,17 @@
     "SSEKMSKeyId": {
       "base": null,
       "refs": {
-        "CompleteMultipartUploadOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "CopyObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "CreateMultipartUploadOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "CreateMultipartUploadRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
-        "GetObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "GetObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
-        "HeadObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "HeadObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
-        "PutObjectOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "PutObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption.",
-        "UploadPartCopyOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "UploadPartOutput$SSEKMSKeyId": "If present, specifies the AWS KMS key used to encrypt the object.",
-        "UploadPartRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption."
+        "CompleteMultipartUploadOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.",
+        "CopyObjectOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.",
+        "CopyObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version",
+        "CreateMultipartUploadOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.",
+        "CreateMultipartUploadRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version",
+        "GetObjectOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.",
+        "HeadObjectOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.",
+        "PutObjectOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.",
+        "PutObjectRequest$SSEKMSKeyId": "Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not made via SSL or using SigV4. Documentation on configuring any of the officially supported AWS SDKs and CLI can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version",
+        "UploadPartCopyOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.",
+        "UploadPartOutput$SSEKMSKeyId": "If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object."
       }
     },
     "ServerSideEncryption": {
