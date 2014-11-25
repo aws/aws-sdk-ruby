@@ -1,11 +1,11 @@
 {
   "operations": {
-    "CancelJob": "<p>The CancelJob operation cancels an unfinished job.</p>",
+    "CancelJob": "<p>The CancelJob operation cancels an unfinished job.</p> <note>You can only cancel a job that has a status of <code>Submitted</code>. To prevent a pipeline from starting to process a job while you're getting the job identifier, use <a>UpdatePipelineStatus</a> to temporarily pause the pipeline.</note>",
     "CreateJob": "<p> When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created. </p> <p>If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).</p>",
     "CreatePipeline": "<p>The CreatePipeline operation creates a pipeline with settings that you specify.</p>",
     "CreatePreset": "<p>The CreatePreset operation creates a preset with settings that you specify.</p> <important>Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (<code>ValidationException</code>) and does not create the preset. If the settings are valid for Elastic Transcoder but aren't strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.</important> <p>Elastic Transcoder uses the H.264 video-compression format. For more information, see the International Telecommunication Union publication <i>Recommendation ITU-T H.264: Advanced video coding for generic audiovisual services</i>.</p>",
     "DeletePipeline": "<p>The DeletePipeline operation removes a pipeline.</p> <p> You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, <code>DeletePipeline</code> returns an error. </p>",
-    "DeletePreset": "<p>The DeletePreset operation removes a preset that you've added in an AWS region.</p>",
+    "DeletePreset": "<p>The DeletePreset operation removes a preset that you've added in an AWS region.</p> <note> <p>You can't delete the default presets that are included with Elastic Transcoder.</p> </note>",
     "ListJobsByPipeline": "<p>The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline.</p> <p>Elastic Transcoder returns all of the jobs currently in the specified pipeline. The response body contains one element for each job that satisfies the search criteria.</p>",
     "ListJobsByStatus": "<p>The ListJobsByStatus operation gets a list of jobs that have a specified status. The response body contains one element for each job that satisfies the search criteria.</p>",
     "ListPipelines": "<p>The ListPipelines operation gets a list of the pipelines associated with the current AWS account.</p>",
@@ -94,7 +94,7 @@
     "AudioCodecProfile": {
       "base": null,
       "refs": {
-        "AudioCodecOptions$Profile": "<p>You can only choose an audio profile when you specify AAC for the value of Audio:Codec.</p> <p>Specify the AAC profile for the output file. Elastic Transcoder supports the following profiles:</p> <ul> <li> <code>auto</code>: If you specify <code>auto</code>, Elastic Transcoder will select the profile based on the bit rate selected for the output file.</li> <li> <code>AAC-LC</code>: The most common AAC profile. Use for bitrates larger than 64 kbps.</li> <li> <code>HE-AAC</code>: Not supported on some older players and devices. Use for bitrates between 40 and 80 kbps.</li> <li> <code>HE-AACv2</code>: Not supported on some players and devices. Use for bitrates less than 48 kbps.</li> </ul> <p>All outputs in a <code>Smooth</code> playlist must have the same value for <code>Profile</code>.</p>"
+        "AudioCodecOptions$Profile": "<p>You can only choose an audio profile when you specify AAC for the value of Audio:Codec.</p> <p>Specify the AAC profile for the output file. Elastic Transcoder supports the following profiles:</p> <ul> <li> <code>auto</code>: If you specify <code>auto</code>, Elastic Transcoder will select the profile based on the bit rate selected for the output file.</li> <li> <code>AAC-LC</code>: The most common AAC profile. Use for bit rates larger than 64 kbps.</li> <li> <code>HE-AAC</code>: Not supported on some older players and devices. Use for bit rates between 40 and 80 kbps.</li> <li> <code>HE-AACv2</code>: Not supported on some players and devices. Use for bit rates less than 48 kbps.</li> </ul> <p>All outputs in a <code>Smooth</code> playlist must have the same value for <code>Profile</code>.</p> <note><p>If you created any presets before AAC profiles were added, Elastic Transcoder automatically updated your presets to use AAC-LC. You can change the value as required.</p></note>"
       }
     },
     "AudioParameters": {
@@ -108,6 +108,13 @@
       "base": null,
       "refs": {
         "AudioParameters$SampleRate": "<p>The sample rate of the audio stream in the output file, in Hertz. Valid values include:</p> <p><code>auto</code>, <code>22050</code>, <code>32000</code>, <code>44100</code>, <code>48000</code>, <code>96000</code></p> <p>If you specify <code>auto</code>, Elastic Transcoder automatically detects the sample rate.</p>"
+      }
+    },
+    "Base64EncodedString": {
+      "base": null,
+      "refs": {
+        "Encryption$Key": "<p>The data encryption key that you want Elastic Transcoder to use to encrypt your output file, or that was used to encrypt your input file. The key must be base64-encoded and it must be one of the following bit lengths before being base64-encoded:</p> <p><code>128</code>, <code>192</code>, or <code>256</code>. </p> <p>The key must also be encrypted by using the Amazon Key Management Service.</p>",
+        "Encryption$KeyMd5": "<p>The MD5 digest of the key that you used to encrypt your input file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder uses the key digest as a checksum to make sure your key was not corrupted in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.</p>"
       }
     },
     "BucketName": {
@@ -160,7 +167,7 @@
     "CaptionMergePolicy": {
       "base": null,
       "refs": {
-        "Captions$MergePolicy": "<p>A policy that determines how Elastic Transcoder handles the existence of multiple captions.</p> <ul> <li><p><b>MergeOverride:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language.</p></li> <li><p><b>MergeRetain:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If <guilabel>CaptionSources</guilabel> is empty, Elastic Transcoder omits all sidecar captions from the output files.</p></li> <li><p><b>Override:</b> Elastic Transcoder transcodes only the sidecar captions that you specify in <code>CaptionSources</code>.</p></li> </ul> <p><code>MergePolicy</code> cannot be null.</p>"
+        "Captions$MergePolicy": "<p>A policy that determines how Elastic Transcoder handles the existence of multiple captions.</p> <ul> <li><p><b>MergeOverride:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the sidecar captions and ignores the embedded captions for that language.</p></li> <li><p><b>MergeRetain:</b> Elastic Transcoder transcodes both embedded and sidecar captions into outputs. If captions for a language are embedded in the input file and also appear in a sidecar file, Elastic Transcoder uses the embedded captions and ignores the sidecar captions for that language. If <code>CaptionSources</code> is empty, Elastic Transcoder omits all sidecar captions from the output files.</p></li> <li><p><b>Override:</b> Elastic Transcoder transcodes only the sidecar captions that you specify in <code>CaptionSources</code>.</p></li> </ul> <p><code>MergePolicy</code> cannot be null.</p>"
       }
     },
     "CaptionSource": {
@@ -295,7 +302,7 @@
     "Digits": {
       "base": null,
       "refs": {
-        "Thumbnails$Interval": "<p>The number of seconds between thumbnails. Specify an integer value.</p>"
+        "Thumbnails$Interval": "<p>The approximate number of seconds between thumbnails. Specify an integer value.</p>"
       }
     },
     "DigitsOrAuto": {
@@ -307,6 +314,26 @@
         "Thumbnails$MaxHeight": "<p>The maximum height of thumbnails in pixels. If you specify auto, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 32 and 3072. </p>",
         "VideoParameters$MaxWidth": "<p> The maximum width of the output video in pixels. If you specify <code>auto</code>, Elastic Transcoder uses 1920 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 128 and 4096. </p>",
         "VideoParameters$MaxHeight": "<p>The maximum height of the output video in pixels. If you specify <code>auto</code>, Elastic Transcoder uses 1080 (Full HD) as the default value. If you specify a numeric value, enter an even integer between 96 and 3072.</p>"
+      }
+    },
+    "Encryption": {
+      "base": "<p>The encryption settings, if any, that are used for decrypting your input files or encrypting your output files. If your input file is encrypted, you must specify the mode that Elastic Transcoder will use to decrypt your file, otherwise you must specify the mode you want Elastic Transcoder to use to encrypt your output files.</p>",
+      "refs": {
+        "Artwork$Encryption": "<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your artwork.</p>",
+        "CaptionFormat$Encryption": "<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your caption formats.</p>",
+        "CaptionSource$Encryption": "<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your caption sources.</p>",
+        "CreateJobOutput$ThumbnailEncryption": "<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your thumbnail.</p>",
+        "CreateJobOutput$Encryption": "<p>You can specify encryption settings for any output files that you want to use for a transcoding job. This includes the output file and any watermarks, thumbnails, album art, or captions that you want to use. You must specify encryption settings for each file individually.</p>",
+        "JobInput$Encryption": "<p>The encryption settings, if any, that are used for decrypting your input files. If your input file is encrypted, you must specify the mode that Elastic Transcoder will use to decrypt your file.</p>",
+        "JobOutput$ThumbnailEncryption": "<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your thumbnail.</p>",
+        "JobOutput$Encryption": "<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your output files. If you choose to use encryption, you must specify a mode to use. If you choose not to use encryption, Elastic Transcoder will write an unencrypted file to your Amazon S3 bucket.</p>",
+        "JobWatermark$Encryption": "<p>The encryption settings, if any, that you want Elastic Transcoder to apply to your watermarks.</p>"
+      }
+    },
+    "EncryptionMode": {
+      "base": null,
+      "refs": {
+        "Encryption$Mode": "<p>The specific server-side encryption mode that you want Elastic Transcoder to use when decrypting your input files or encrypting your output files. Elastic Transcoder supports the following options:</p> <ul> <li><p><b>S3:</b> Amazon S3 creates and manages the keys used for encrypting your files.</p></li> <li><p><b>S3-AWS-KMS:</b> Amazon S3 calls the Amazon Key Management Service, which creates and manages the keys that are used for encrypting your files. If you specify <code>S3-AWS-KMS</code> and you don't want to use the default key, you must add the AWS-KMS key that you want to use to your pipeline.</p></li> <li><p><b>AES-CBC-PKCS7:</b> A padded cipher-block mode of operation originally used for HLS files.</p></li> <li><p><b>AES-CTR:</b> AES Counter Mode.</p></li> <li><p><b>AES-GCM:</b> AES Galois Counter Mode, a mode of operation that is an authenticated encryption format, meaning that a file, key, or initialization vector that has been tampered with will fail the decryption process.</p></li> </ul> <p>For all three AES options, you must provide the following settings, which must be base64-encoded:</p> <ul> <li><p><b>Key</b></p></li> <li><p><b>Key MD5</b></p></li> <li><p><b>Initialization Vector</b></p></li> </ul> <important><p>For the AES modes, your private encryption keys and your unencrypted data are never stored by AWS; therefore, it is important that you safely manage your encryption keys. If you lose them, you won't be able to unencrypt your data.</p></important>"
       }
     },
     "ExceptionMessages": {
@@ -490,10 +517,19 @@
         "CaptionSource$Language": "<p>A string that specifies the language of the caption. Specify this as one of:</p> <ul> <li><p>2-character ISO 639-1 code</p></li> <li><p>3-character ISO 639-2 code</p></li> </ul> <p>For more information on ISO language codes and language names, see the List of ISO 639-1 codes.</p>",
         "CreateJobOutput$Key": "<p> The name to assign to the transcoded file. Elastic Transcoder saves the file in the Amazon S3 bucket specified by the <code>OutputBucket</code> object in the pipeline that is specified by the pipeline ID. If a file with the specified name already exists in the output bucket, the job fails. </p>",
         "CreateJobRequest$OutputKeyPrefix": "<p>The value, if any, that you want Elastic Transcoder to prepend to the names of all files that this job creates, including output files, thumbnails, and playlists.</p>",
+        "Encryption$InitializationVector": "<p>The series of random bits created by a random bit generator, unique for every encryption operation, that you used to encrypt your input files or that you want Elastic Transcoder to use to encrypt your output files. The initialization vector must be base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.</p>",
         "Job$OutputKeyPrefix": "<p>The value, if any, that you want Elastic Transcoder to prepend to the names of all files that this job creates, including output files, thumbnails, and playlists. We recommend that you add a / or some other delimiter to the end of the <code>OutputKeyPrefix</code>.</p>",
         "JobInput$Key": "<p> The name of the file to transcode. Elsewhere in the body of the JSON block is the the ID of the pipeline to use for processing the job. The <code>InputBucket</code> object in that pipeline tells Elastic Transcoder which Amazon S3 bucket to get the file from. </p> <p>If the file name includes a prefix, such as <code>cooking/lasagna.mpg</code>, include the prefix in the key. If the file isn't in the specified bucket, Elastic Transcoder returns an error.</p>",
         "JobOutput$Key": "<p> The name to assign to the transcoded file. Elastic Transcoder saves the file in the Amazon S3 bucket specified by the <code>OutputBucket</code> object in the pipeline that is specified by the pipeline ID.</p>",
         "OutputKeys$member": null
+      }
+    },
+    "KeyArn": {
+      "base": null,
+      "refs": {
+        "CreatePipelineRequest$AwsKmsKeyArn": "<p>The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.</p> <p>If you use either <code>S3</code> or <code>S3-AWS-KMS</code> as your <code>Encryption:Mode</code>, you don't need to provide a key with your job because a default key, known as an AWS-KMS key, is created for you automatically. You need to provide an AWS-KMS key only if you want to use a non-default AWS-KMS key, or if you are using an <code>Encryption:Mode</code> of <code>AES-PKCS7</code>, <code>AES-CTR</code>, or <code>AES-GCM</code>.</p>",
+        "Pipeline$AwsKmsKeyArn": "<p>The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.</p> <p>If you use either <code>S3</code> or <code>S3-AWS-KMS</code> as your <code>Encryption:Mode</code>, you don't need to provide a key with your job because a default key, known as an AWS-KMS key, is created for you automatically. You need to provide an AWS-KMS key only if you want to use a non-default AWS-KMS key, or if you are using an <code>Encryption:Mode</code> of <code>AES-PKCS7</code>, <code>AES-CTR</code>, or <code>AES-GCM</code>.</p>",
+        "UpdatePipelineRequest$AwsKmsKeyArn": "<p>The AWS Key Management Service (AWS KMS) key that you want to use with this pipeline.</p> <p>If you use either <code>S3</code> or <code>S3-AWS-KMS</code> as your <code>Encryption:Mode</code>, you don't need to provide a key with your job because a default key, known as an AWS-KMS key, is created for you automatically. You need to provide an AWS-KMS key only if you want to use a non-default AWS-KMS key, or if you are using an <code>Encryption:Mode</code> of <code>AES-PKCS7</code>, <code>AES-CTR</code>, or <code>AES-GCM</code>.</p>"
       }
     },
     "KeyframesMaxDist": {

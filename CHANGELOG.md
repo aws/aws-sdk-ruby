@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticTranscoder - Added support for encyption using
+  AWS Key Management Service.
+
 * Issue - Aws::S3 - Resolved an issue where object keys with plus
   signs were incorrectly un-marhsalled from the XML response when
   keys are URL encoded. Fixes #161.
