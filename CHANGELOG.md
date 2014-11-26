@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.11 (2014-11-26)
 ------------------
 
 * Feature - Aws::ElasticTranscoder - Added support for encyption using
