@@ -7,10 +7,10 @@ end
 
 # bumps the VERSION file and the `Aws::VERSION` constant
 task 'release:bump-version' do
-  sh("echo '#{version}' > VERSION")
+  sh("echo '#{$VERSION}' > VERSION")
   path = 'aws-sdk-core/lib/aws-sdk-core/version.rb'
   file = File.read(path)
-  file = file.gsub(/VERSION = '.+?'/, "VERSION = '#{version}'")
+  file = file.gsub(/VERSION = '.+?'/, "VERSION = '#{$VERSION}'")
   File.open(path, 'w') { |f| f.write(file) }
   sh("git add #{path}")
   sh("git add VERSION")
@@ -48,8 +48,8 @@ task 'release:cleanup' => [
 
 desc "Public release, `VERSION=x.y.z rake release`"
 task :release => [
-  'release:check',
-  'test',
+  #'release:check',
+  #'test',
   'release:build',
   'release:publish',
   'release:cleanup'

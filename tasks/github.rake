@@ -1,5 +1,5 @@
 task 'github:require-access-token' do
-  unless github_access_token
+  unless `rake github:access-token`
     warn('missing github access token')
     exit
   end
@@ -11,7 +11,8 @@ task 'github:access-token'
 task 'github:release' do
   require 'octokit'
 
-  gh = Octokit::Client.new(access_token: github_access_token)
+  gh_access_token = `rake github:access-token`
+  gh = Octokit::Client.new(access_token: gh_access_token)
 
   repo = 'aws/aws-sdk-core-ruby'
   tag_ref_sha = `git show-ref v#{$VERSION}`.split(' ').first
