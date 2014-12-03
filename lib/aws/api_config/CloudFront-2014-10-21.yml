@@ -12,13 +12,13 @@
 # language governing permissions and limitations under the License.
 
 ---
-:api_version: '2014-11-06'
+:api_version: '2014-10-21'
 :operations:
 - :name: CreateCloudFrontOriginAccessIdentity
   :method: :create_cloud_front_origin_access_identity
   :http:
     :verb: POST
-    :uri: /2014-11-06/origin-access-identity/cloudfront
+    :uri: /2014-10-21/origin-access-identity/cloudfront
     :request_payload: :cloud_front_origin_access_identity_config
     :response_code: 201
     :response_headers:
@@ -54,7 +54,7 @@
   :method: :create_distribution
   :http:
     :verb: POST
-    :uri: /2014-11-06/distribution
+    :uri: /2014-10-21/distribution
     :request_payload: :distribution_config
     :response_code: 201
     :response_headers:
@@ -73,6 +73,7 @@
         :aliases:
           :name: Aliases
           :type: :hash
+          :required: true
           :members:
             :quantity:
               :name: Quantity
@@ -87,6 +88,7 @@
         :default_root_object:
           :name: DefaultRootObject
           :type: :string
+          :required: true
         :origins:
           :name: Origins
           :type: :hash
@@ -111,9 +113,6 @@
                     :name: DomainName
                     :type: :string
                     :required: true
-                  :origin_path:
-                    :name: OriginPath
-                    :type: :string
                   :s3_origin_config:
                     :name: S3OriginConfig
                     :type: :hash
@@ -193,31 +192,6 @@
                       :members:
                         :name: Name
                         :type: :string
-            :referers:
-              :name: Referers
-              :type: :hash
-              :members:
-                :allow_blank_referer:
-                  :name: AllowBlankReferer
-                  :type: :boolean
-                :referer_checks:
-                  :name: RefererChecks
-                  :type: :string
-                  :required: true
-                :whitelisted_patterns:
-                  :name: WhitelistedPatterns
-                  :type: :hash
-                  :members:
-                    :quantity:
-                      :name: Quantity
-                      :type: :integer
-                      :required: true
-                    :items:
-                      :name: Items
-                      :type: :array
-                      :members:
-                        :name: Name
-                        :type: :string
             :trusted_signers:
               :name: TrustedSigners
               :type: :hash
@@ -281,6 +255,7 @@
         :cache_behaviors:
           :name: CacheBehaviors
           :type: :hash
+          :required: true
           :members:
             :quantity:
               :name: Quantity
@@ -335,31 +310,6 @@
                                   :type: :string
                       :headers:
                         :name: Headers
-                        :type: :hash
-                        :members:
-                          :quantity:
-                            :name: Quantity
-                            :type: :integer
-                            :required: true
-                          :items:
-                            :name: Items
-                            :type: :array
-                            :members:
-                              :name: Name
-                              :type: :string
-                  :referers:
-                    :name: Referers
-                    :type: :hash
-                    :members:
-                      :allow_blank_referer:
-                        :name: AllowBlankReferer
-                        :type: :boolean
-                      :referer_checks:
-                        :name: RefererChecks
-                        :type: :string
-                        :required: true
-                      :whitelisted_patterns:
-                        :name: WhitelistedPatterns
                         :type: :hash
                         :members:
                           :quantity:
@@ -467,6 +417,7 @@
         :logging:
           :name: Logging
           :type: :hash
+          :required: true
           :members:
             :enabled:
               :name: Enabled
@@ -487,6 +438,7 @@
         :price_class:
           :name: PriceClass
           :type: :string
+          :required: true
         :enabled:
           :name: Enabled
           :type: :boolean
@@ -600,8 +552,6 @@
                         :type: :string
                       DomainName:
                         :type: :string
-                      OriginPath:
-                        :type: :string
                       S3OriginConfig:
                         :children:
                           OriginAccessIdentity:
@@ -638,23 +588,6 @@
                                 :list: true
                                 :type: :string
                   Headers:
-                    :children:
-                      Quantity:
-                        :type: :integer
-                      Items:
-                        :ignore: true
-                        :children:
-                          Name:
-                            :rename: :items
-                            :list: true
-                            :type: :string
-              Referers:
-                :children:
-                  AllowBlankReferer:
-                    :type: :boolean
-                  RefererChecks:
-                    :type: :string
-                  WhitelistedPatterns:
                     :children:
                       Quantity:
                         :type: :integer
@@ -741,23 +674,6 @@
                                         :list: true
                                         :type: :string
                           Headers:
-                            :children:
-                              Quantity:
-                                :type: :integer
-                              Items:
-                                :ignore: true
-                                :children:
-                                  Name:
-                                    :rename: :items
-                                    :list: true
-                                    :type: :string
-                      Referers:
-                        :children:
-                          AllowBlankReferer:
-                            :type: :boolean
-                          RefererChecks:
-                            :type: :string
-                          WhitelistedPatterns:
                             :children:
                               Quantity:
                                 :type: :integer
@@ -873,7 +789,7 @@
   :method: :create_invalidation
   :http:
     :verb: POST
-    :uri: /2014-11-06/distribution/:distribution_id/invalidation
+    :uri: /2014-10-21/distribution/:distribution_id/invalidation
     :request_payload: :invalidation_batch
     :response_code: 201
     :response_headers:
@@ -933,7 +849,7 @@
   :method: :create_streaming_distribution
   :http:
     :verb: POST
-    :uri: /2014-11-06/streaming-distribution
+    :uri: /2014-10-21/streaming-distribution
     :request_payload: :streaming_distribution_config
     :response_code: 201
     :response_headers:
@@ -965,6 +881,7 @@
         :aliases:
           :name: Aliases
           :type: :hash
+          :required: true
           :members:
             :quantity:
               :name: Quantity
@@ -983,6 +900,7 @@
         :logging:
           :name: Logging
           :type: :hash
+          :required: true
           :members:
             :enabled:
               :name: Enabled
@@ -1018,6 +936,7 @@
         :price_class:
           :name: PriceClass
           :type: :string
+          :required: true
         :enabled:
           :name: Enabled
           :type: :boolean
@@ -1110,7 +1029,7 @@
   :method: :delete_cloud_front_origin_access_identity
   :http:
     :verb: DELETE
-    :uri: /2014-11-06/origin-access-identity/cloudfront/:id
+    :uri: /2014-10-21/origin-access-identity/cloudfront/:id
     :request_headers:
       :if_match: If-Match
     :response_code: 204
@@ -1125,7 +1044,7 @@
   :method: :delete_distribution
   :http:
     :verb: DELETE
-    :uri: /2014-11-06/distribution/:id
+    :uri: /2014-10-21/distribution/:id
     :request_headers:
       :if_match: If-Match
     :response_code: 204
@@ -1140,7 +1059,7 @@
   :method: :delete_streaming_distribution
   :http:
     :verb: DELETE
-    :uri: /2014-11-06/streaming-distribution/:id
+    :uri: /2014-10-21/streaming-distribution/:id
     :request_headers:
       :if_match: If-Match
     :response_code: 204
@@ -1155,7 +1074,7 @@
   :method: :get_cloud_front_origin_access_identity
   :http:
     :verb: GET
-    :uri: /2014-11-06/origin-access-identity/cloudfront/:id
+    :uri: /2014-10-21/origin-access-identity/cloudfront/:id
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1178,7 +1097,7 @@
   :method: :get_cloud_front_origin_access_identity_config
   :http:
     :verb: GET
-    :uri: /2014-11-06/origin-access-identity/cloudfront/:id/config
+    :uri: /2014-10-21/origin-access-identity/cloudfront/:id/config
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1195,7 +1114,7 @@
   :method: :get_distribution
   :http:
     :verb: GET
-    :uri: /2014-11-06/distribution/:id
+    :uri: /2014-10-21/distribution/:id
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1272,8 +1191,6 @@
                         :type: :string
                       DomainName:
                         :type: :string
-                      OriginPath:
-                        :type: :string
                       S3OriginConfig:
                         :children:
                           OriginAccessIdentity:
@@ -1310,23 +1227,6 @@
                                 :list: true
                                 :type: :string
                   Headers:
-                    :children:
-                      Quantity:
-                        :type: :integer
-                      Items:
-                        :ignore: true
-                        :children:
-                          Name:
-                            :rename: :items
-                            :list: true
-                            :type: :string
-              Referers:
-                :children:
-                  AllowBlankReferer:
-                    :type: :boolean
-                  RefererChecks:
-                    :type: :string
-                  WhitelistedPatterns:
                     :children:
                       Quantity:
                         :type: :integer
@@ -1413,23 +1313,6 @@
                                         :list: true
                                         :type: :string
                           Headers:
-                            :children:
-                              Quantity:
-                                :type: :integer
-                              Items:
-                                :ignore: true
-                                :children:
-                                  Name:
-                                    :rename: :items
-                                    :list: true
-                                    :type: :string
-                      Referers:
-                        :children:
-                          AllowBlankReferer:
-                            :type: :boolean
-                          RefererChecks:
-                            :type: :string
-                          WhitelistedPatterns:
                             :children:
                               Quantity:
                                 :type: :integer
@@ -1545,7 +1428,7 @@
   :method: :get_distribution_config
   :http:
     :verb: GET
-    :uri: /2014-11-06/distribution/:id/config
+    :uri: /2014-10-21/distribution/:id/config
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1584,8 +1467,6 @@
                     :type: :string
                   DomainName:
                     :type: :string
-                  OriginPath:
-                    :type: :string
                   S3OriginConfig:
                     :children:
                       OriginAccessIdentity:
@@ -1622,23 +1503,6 @@
                             :list: true
                             :type: :string
               Headers:
-                :children:
-                  Quantity:
-                    :type: :integer
-                  Items:
-                    :ignore: true
-                    :children:
-                      Name:
-                        :rename: :items
-                        :list: true
-                        :type: :string
-          Referers:
-            :children:
-              AllowBlankReferer:
-                :type: :boolean
-              RefererChecks:
-                :type: :string
-              WhitelistedPatterns:
                 :children:
                   Quantity:
                     :type: :integer
@@ -1725,23 +1589,6 @@
                                     :list: true
                                     :type: :string
                       Headers:
-                        :children:
-                          Quantity:
-                            :type: :integer
-                          Items:
-                            :ignore: true
-                            :children:
-                              Name:
-                                :rename: :items
-                                :list: true
-                                :type: :string
-                  Referers:
-                    :children:
-                      AllowBlankReferer:
-                        :type: :boolean
-                      RefererChecks:
-                        :type: :string
-                      WhitelistedPatterns:
                         :children:
                           Quantity:
                             :type: :integer
@@ -1857,7 +1704,7 @@
   :method: :get_invalidation
   :http:
     :verb: GET
-    :uri: /2014-11-06/distribution/:distribution_id/invalidation/:id
+    :uri: /2014-10-21/distribution/:distribution_id/invalidation/:id
   :inputs:
     :distribution_id:
       :type: :string
@@ -1892,7 +1739,7 @@
   :method: :get_streaming_distribution
   :http:
     :verb: GET
-    :uri: /2014-11-06/streaming-distribution/:id
+    :uri: /2014-10-21/streaming-distribution/:id
     :response_headers:
       :etag: ETag
   :inputs:
@@ -1987,7 +1834,7 @@
   :method: :get_streaming_distribution_config
   :http:
     :verb: GET
-    :uri: /2014-11-06/streaming-distribution/:id/config
+    :uri: /2014-10-21/streaming-distribution/:id/config
     :response_headers:
       :etag: ETag
   :inputs:
@@ -2046,7 +1893,7 @@
   :method: :list_cloud_front_origin_access_identities
   :http:
     :verb: GET
-    :uri: /2014-11-06/origin-access-identity/cloudfront?Marker=:marker&MaxItems=:max_items
+    :uri: /2014-10-21/origin-access-identity/cloudfront?Marker=:marker&MaxItems=:max_items
   :inputs:
     :marker:
       :type: :string
@@ -2081,7 +1928,7 @@
   :method: :list_distributions
   :http:
     :verb: GET
-    :uri: /2014-11-06/distribution?Marker=:marker&MaxItems=:max_items
+    :uri: /2014-10-21/distribution?Marker=:marker&MaxItems=:max_items
   :inputs:
     :marker:
       :type: :string
@@ -2140,8 +1987,6 @@
                             :type: :string
                           DomainName:
                             :type: :string
-                          OriginPath:
-                            :type: :string
                           S3OriginConfig:
                             :children:
                               OriginAccessIdentity:
@@ -2178,23 +2023,6 @@
                                     :list: true
                                     :type: :string
                       Headers:
-                        :children:
-                          Quantity:
-                            :type: :integer
-                          Items:
-                            :ignore: true
-                            :children:
-                              Name:
-                                :rename: :items
-                                :list: true
-                                :type: :string
-                  Referers:
-                    :children:
-                      AllowBlankReferer:
-                        :type: :boolean
-                      RefererChecks:
-                        :type: :string
-                      WhitelistedPatterns:
                         :children:
                           Quantity:
                             :type: :integer
@@ -2281,23 +2109,6 @@
                                             :list: true
                                             :type: :string
                               Headers:
-                                :children:
-                                  Quantity:
-                                    :type: :integer
-                                  Items:
-                                    :ignore: true
-                                    :children:
-                                      Name:
-                                        :rename: :items
-                                        :list: true
-                                        :type: :string
-                          Referers:
-                            :children:
-                              AllowBlankReferer:
-                                :type: :boolean
-                              RefererChecks:
-                                :type: :string
-                              WhitelistedPatterns:
                                 :children:
                                   Quantity:
                                     :type: :integer
@@ -2403,7 +2214,7 @@
   :method: :list_invalidations
   :http:
     :verb: GET
-    :uri: /2014-11-06/distribution/:distribution_id/invalidation?Marker=:marker&MaxItems=:max_items
+    :uri: /2014-10-21/distribution/:distribution_id/invalidation?Marker=:marker&MaxItems=:max_items
   :inputs:
     :distribution_id:
       :type: :string
@@ -2441,7 +2252,7 @@
   :method: :list_streaming_distributions
   :http:
     :verb: GET
-    :uri: /2014-11-06/streaming-distribution?Marker=:marker&MaxItems=:max_items
+    :uri: /2014-10-21/streaming-distribution?Marker=:marker&MaxItems=:max_items
   :inputs:
     :marker:
       :type: :string
@@ -2514,7 +2325,7 @@
   :method: :update_cloud_front_origin_access_identity
   :http:
     :verb: PUT
-    :uri: /2014-11-06/origin-access-identity/cloudfront/:id/config
+    :uri: /2014-10-21/origin-access-identity/cloudfront/:id/config
     :request_payload: :cloud_front_origin_access_identity_config
     :request_headers:
       :if_match: If-Match
@@ -2555,7 +2366,7 @@
   :method: :update_distribution
   :http:
     :verb: PUT
-    :uri: /2014-11-06/distribution/:id/config
+    :uri: /2014-10-21/distribution/:id/config
     :request_payload: :distribution_config
     :request_headers:
       :if_match: If-Match
@@ -2574,6 +2385,7 @@
         :aliases:
           :name: Aliases
           :type: :hash
+          :required: true
           :members:
             :quantity:
               :name: Quantity
@@ -2588,6 +2400,7 @@
         :default_root_object:
           :name: DefaultRootObject
           :type: :string
+          :required: true
         :origins:
           :name: Origins
           :type: :hash
@@ -2612,9 +2425,6 @@
                     :name: DomainName
                     :type: :string
                     :required: true
-                  :origin_path:
-                    :name: OriginPath
-                    :type: :string
                   :s3_origin_config:
                     :name: S3OriginConfig
                     :type: :hash
@@ -2694,31 +2504,6 @@
                       :members:
                         :name: Name
                         :type: :string
-            :referers:
-              :name: Referers
-              :type: :hash
-              :members:
-                :allow_blank_referer:
-                  :name: AllowBlankReferer
-                  :type: :boolean
-                :referer_checks:
-                  :name: RefererChecks
-                  :type: :string
-                  :required: true
-                :whitelisted_patterns:
-                  :name: WhitelistedPatterns
-                  :type: :hash
-                  :members:
-                    :quantity:
-                      :name: Quantity
-                      :type: :integer
-                      :required: true
-                    :items:
-                      :name: Items
-                      :type: :array
-                      :members:
-                        :name: Name
-                        :type: :string
             :trusted_signers:
               :name: TrustedSigners
               :type: :hash
@@ -2782,6 +2567,7 @@
         :cache_behaviors:
           :name: CacheBehaviors
           :type: :hash
+          :required: true
           :members:
             :quantity:
               :name: Quantity
@@ -2836,31 +2622,6 @@
                                   :type: :string
                       :headers:
                         :name: Headers
-                        :type: :hash
-                        :members:
-                          :quantity:
-                            :name: Quantity
-                            :type: :integer
-                            :required: true
-                          :items:
-                            :name: Items
-                            :type: :array
-                            :members:
-                              :name: Name
-                              :type: :string
-                  :referers:
-                    :name: Referers
-                    :type: :hash
-                    :members:
-                      :allow_blank_referer:
-                        :name: AllowBlankReferer
-                        :type: :boolean
-                      :referer_checks:
-                        :name: RefererChecks
-                        :type: :string
-                        :required: true
-                      :whitelisted_patterns:
-                        :name: WhitelistedPatterns
                         :type: :hash
                         :members:
                           :quantity:
@@ -2968,6 +2729,7 @@
         :logging:
           :name: Logging
           :type: :hash
+          :required: true
           :members:
             :enabled:
               :name: Enabled
@@ -2988,6 +2750,7 @@
         :price_class:
           :name: PriceClass
           :type: :string
+          :required: true
         :enabled:
           :name: Enabled
           :type: :boolean
@@ -3106,8 +2869,6 @@
                         :type: :string
                       DomainName:
                         :type: :string
-                      OriginPath:
-                        :type: :string
                       S3OriginConfig:
                         :children:
                           OriginAccessIdentity:
@@ -3144,23 +2905,6 @@
                                 :list: true
                                 :type: :string
                   Headers:
-                    :children:
-                      Quantity:
-                        :type: :integer
-                      Items:
-                        :ignore: true
-                        :children:
-                          Name:
-                            :rename: :items
-                            :list: true
-                            :type: :string
-              Referers:
-                :children:
-                  AllowBlankReferer:
-                    :type: :boolean
-                  RefererChecks:
-                    :type: :string
-                  WhitelistedPatterns:
                     :children:
                       Quantity:
                         :type: :integer
@@ -3247,23 +2991,6 @@
                                         :list: true
                                         :type: :string
                           Headers:
-                            :children:
-                              Quantity:
-                                :type: :integer
-                              Items:
-                                :ignore: true
-                                :children:
-                                  Name:
-                                    :rename: :items
-                                    :list: true
-                                    :type: :string
-                      Referers:
-                        :children:
-                          AllowBlankReferer:
-                            :type: :boolean
-                          RefererChecks:
-                            :type: :string
-                          WhitelistedPatterns:
                             :children:
                               Quantity:
                                 :type: :integer
@@ -3379,7 +3106,7 @@
   :method: :update_streaming_distribution
   :http:
     :verb: PUT
-    :uri: /2014-11-06/streaming-distribution/:id/config
+    :uri: /2014-10-21/streaming-distribution/:id/config
     :request_payload: :streaming_distribution_config
     :request_headers:
       :if_match: If-Match
@@ -3411,6 +3138,7 @@
         :aliases:
           :name: Aliases
           :type: :hash
+          :required: true
           :members:
             :quantity:
               :name: Quantity
@@ -3429,6 +3157,7 @@
         :logging:
           :name: Logging
           :type: :hash
+          :required: true
           :members:
             :enabled:
               :name: Enabled
@@ -3464,6 +3193,7 @@
         :price_class:
           :name: PriceClass
           :type: :string
+          :required: true
         :enabled:
           :name: Enabled
           :type: :boolean
@@ -3557,4 +3287,4 @@
             :type: :string
           Enabled:
             :type: :boolean
-:namespace: http://cloudfront.amazonaws.com/doc/2014-11-06/
+:namespace: http://cloudfront.amazonaws.com/doc/2014-10-21/

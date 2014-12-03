@@ -23,35 +23,35 @@
   to the original request. If the CallerReference is a value you already sent in a
   previous request to create a distribution but the content of the DistributionConfig
   is different from the original request, CloudFront returns a DistributionAlreadyExists
-  error.\n    * `:aliases` - (Hash) A complex type that contains information about
-  CNAMEs (alternate domain names), if any, for this distribution.\n      * `:quantity`
+  error.\n    * `:aliases` - *required* - (Hash) A complex type that contains information
+  about CNAMEs (alternate domain names), if any, for this distribution.\n      * `:quantity`
   - *required* - (Integer) The number of CNAMEs, if any, for this distribution.\n
   \     * `:items` - (Array&lt;String>) Optional: A complex type that contains CNAME
   elements, if any, for this distribution. If Quantity is 0, you can omit Items.\n
-  \     * `:CNAME` - (String) \n    * `:default_root_object` - (String) The object
-  that you want CloudFront to return (for example, index.html) when an end user requests
-  the root URL for your distribution (http://www.example.com) instead of an object
-  in your distribution (http://www.example.com/index.html). Specifying a default root
-  object avoids exposing the contents of your distribution. If you don't want to specify
-  a default root object when you create a distribution, include an empty DefaultRootObject
-  element. To delete the default root object from an existing distribution, update
-  the distribution configuration and include an empty DefaultRootObject element. To
-  replace the default root object, update the distribution configuration and specify
-  the new object.\n    * `:origins` - *required* - (Hash) A complex type that contains
-  information about origins for this distribution.\n      * `:quantity` - *required*
-  - (Integer) The number of origins for this distribution.\n      * `:items` - (Array&lt;Hash>)
-  A complex type that contains origins for this distribution.\n      * `:Origin` -
-  (Hash) \n        * `:id` - *required* - (String) A unique identifier for the origin.
-  The value of Id must be unique within the distribution. You use the value of Id
-  when you create a cache behavior. The Id identifies the origin that CloudFront routes
-  a request to when the request matches the path pattern for that cache behavior.\n
-  \       * `:domain_name` - *required* - (String) Amazon S3 origins: The DNS name
-  of the Amazon S3 bucket from which you want CloudFront to get objects for this origin,
-  for example, myawsbucket.s3.amazonaws.com. Custom origins: The DNS domain name for
-  the HTTP server from which you want CloudFront to get objects for this origin, for
-  example, www.example.com.\n        * `:origin_path` - (String) \n        * `:s3_origin_config`
-  - (Hash) A complex type that contains information about the Amazon S3 origin. If
-  the origin is a custom origin, use the CustomOriginConfig element instead.\n          *
+  \     * `:CNAME` - (String) \n    * `:default_root_object` - *required* - (String)
+  The object that you want CloudFront to return (for example, index.html) when an
+  end user requests the root URL for your distribution (http://www.example.com) instead
+  of an object in your distribution (http://www.example.com/index.html). Specifying
+  a default root object avoids exposing the contents of your distribution. If you
+  don't want to specify a default root object when you create a distribution, include
+  an empty DefaultRootObject element. To delete the default root object from an existing
+  distribution, update the distribution configuration and include an empty DefaultRootObject
+  element. To replace the default root object, update the distribution configuration
+  and specify the new object.\n    * `:origins` - *required* - (Hash) A complex type
+  that contains information about origins for this distribution.\n      * `:quantity`
+  - *required* - (Integer) The number of origins for this distribution.\n      * `:items`
+  - (Array&lt;Hash>) A complex type that contains origins for this distribution.\n
+  \     * `:Origin` - (Hash) \n        * `:id` - *required* - (String) A unique identifier
+  for the origin. The value of Id must be unique within the distribution. You use
+  the value of Id when you create a cache behavior. The Id identifies the origin that
+  CloudFront routes a request to when the request matches the path pattern for that
+  cache behavior.\n        * `:domain_name` - *required* - (String) Amazon S3 origins:
+  The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects
+  for this origin, for example, myawsbucket.s3.amazonaws.com. Custom origins: The
+  DNS domain name for the HTTP server from which you want CloudFront to get objects
+  for this origin, for example, www.example.com.\n        * `:s3_origin_config` -
+  (Hash) A complex type that contains information about the Amazon S3 origin. If the
+  origin is a custom origin, use the CustomOriginConfig element instead.\n          *
   `:origin_access_identity` - *required* - (String) The CloudFront origin access identity
   to associate with the origin. Use an origin access identity to configure the origin
   so that end users can only access objects in an Amazon S3 bucket through CloudFront.
@@ -102,102 +102,8 @@
   specify 0 for Quantity and omit Items.\n          * `:items` - (Array&lt;String>)
   Optional: A complex type that contains a Name element for each header that you want
   CloudFront to forward to the origin and to vary on for this cache behavior. If Quantity
-  is 0, omit Items.\n          * `:Name` - (String) \n      * `:referers` - (Hash)
-  \n        * `:allow_blank_referer` - (Boolean) \n        * `:referer_checks` - *required*
-  - (String) Valid values include:\n          * `none`\n          * `whitelist`\n
-  \       * `:whitelisted_patterns` - (Hash) \n          * `:quantity` - *required*
-  - (Integer) \n          * `:items` - (Array&lt;String>) \n          * `:Name` -
-  (String) \n      * `:trusted_signers` - *required* - (Hash) A complex type that
-  specifies the AWS accounts, if any, that you want to allow to create signed URLs
-  for private content. If you want to require signed URLs in requests for objects
-  in the target origin that match the PathPattern for this cache behavior, specify
-  \ `true`  for Enabled, and specify the applicable values for Quantity and Items.
-  For more information, go to Using a Signed URL to Serve Private Content in the Amazon
-  CloudFront Developer Guide. If you don't want to require signed URLs in requests
-  for objects that match PathPattern, specify  `false`  for Enabled and 0 for Quantity.
-  Omit Items. To add, change, or remove one or more trusted signers, change Enabled
-  to  `true`  (if it's currently  `false` ), change Quantity as applicable, and specify
-  all of the trusted signers that you want to include in the updated distribution.\n
-  \       * `:enabled` - *required* - (Boolean) Specifies whether you want to require
-  end users to use signed URLs to access the files specified by PathPattern and TargetOriginId.\n
-  \       * `:quantity` - *required* - (Integer) The number of trusted signers for
-  this cache behavior.\n        * `:items` - (Array&lt;String>) Optional: A complex
-  type that contains trusted signers for this cache behavior. If Quantity is 0, you
-  can omit Items.\n        * `:AwsAccountNumber` - (String) \n      * `:viewer_protocol_policy`
-  - *required* - (String) Use this element to specify the protocol that users can
-  use to access the files in the origin specified by TargetOriginId when a request
-  matches the path pattern in PathPattern. If you want CloudFront to allow end users
-  to use any available protocol, specify allow-all. If you want CloudFront to require
-  HTTPS, specify https. If you want CloudFront to respond to an HTTP request with
-  an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https.
-  The viewer then resubmits the request using the HTTPS URL.  Valid values include:\n
-  \       * `allow-all`\n        * `https-only`\n        * `redirect-to-https`\n      *
-  `:min_ttl` - *required* - (Integer) The minimum amount of time that you want objects
-  to stay in CloudFront caches before CloudFront queries your origin to see whether
-  the object has been updated.You can specify a value from 0 to 3,153,600,000 seconds
-  (100 years).\n      * `:allowed_methods` - (Hash) \n        * `:quantity` - *required*
-  - (Integer) The number of HTTP methods that you want CloudFront to forward to your
-  origin. Valid values are 2 (for GET and HEAD requests), 3 (for GET, HEAD and OPTIONS
-  requests) and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests).\n
-  \       * `:items` - *required* - (Array&lt;String>) A complex type that contains
-  the HTTP methods that you want CloudFront to process and forward to your origin.\n
-  \       * `:Method` - (String) \n        * `:cached_methods` - (Hash) \n          *
-  `:quantity` - *required* - (Integer) The number of HTTP methods for which you want
-  CloudFront to cache responses. Valid values are 2 (for caching responses to GET
-  and HEAD requests) and 3 (for caching responses to GET, HEAD, and OPTIONS requests).\n
-  \         * `:items` - *required* - (Array&lt;String>) A complex type that contains
-  the HTTP methods that you want CloudFront to cache responses to.\n          * `:Method`
-  - (String) \n      * `:smooth_streaming` - (Boolean) Indicates whether you want
-  to distribute media files in Microsoft Smooth Streaming format using the origin
-  that is associated with this cache behavior. If so, specify  `true` ; if not, specify
-  \ `false` .\n    * `:cache_behaviors` - (Hash) A complex type that contains zero
-  or more CacheBehavior elements.\n      * `:quantity` - *required* - (Integer) The
-  number of cache behaviors for this distribution.\n      * `:items` - (Array&lt;Hash>)
-  Optional: A complex type that contains cache behaviors for this distribution. If
-  Quantity is 0, you can omit Items.\n      * `:CacheBehavior` - (Hash) \n        *
-  `:path_pattern` - *required* - (String) The pattern (for example, images/*.jpg)
-  that specifies which requests you want this cache behavior to apply to. When CloudFront
-  receives an end-user request, the requested path is compared with path patterns
-  in the order in which cache behaviors are listed in the distribution. The path pattern
-  for the default cache behavior is * and cannot be changed. If the request for an
-  object does not match the path pattern for any cache behaviors, CloudFront applies
-  the behavior in the default cache behavior.\n        * `:target_origin_id` - *required*
-  - (String) The value of ID for the origin that you want CloudFront to route requests
-  to when a request matches the path pattern either for a cache behavior or for the
-  default cache behavior.\n        * `:forwarded_values` - *required* - (Hash) A complex
-  type that specifies how CloudFront handles query strings, cookies and headers.\n
-  \         * `:query_string` - *required* - (Boolean) Indicates whether you want
-  CloudFront to forward query strings to the origin that is associated with this cache
-  behavior. If so, specify  `true` ; if not, specify  `false` .\n          * `:cookies`
-  - *required* - (Hash) A complex type that specifies how CloudFront handles cookies.\n
-  \           * `:forward` - *required* - (String) Use this element to specify whether
-  you want CloudFront to forward cookies to the origin that is associated with this
-  cache behavior. You can specify all, none or whitelist. If you choose All, CloudFront
-  forwards all cookies regardless of how many your application uses.  Valid values
-  include:\n              * `none`\n              * `whitelist`\n              * `all`\n
-  \           * `:whitelisted_names` - (Hash) A complex type that specifies the whitelisted
-  cookies, if any, that you want CloudFront to forward to your origin that is associated
-  with this cache behavior.\n              * `:quantity` - *required* - (Integer)
-  The number of whitelisted cookies for this cache behavior.\n              * `:items`
-  - (Array&lt;String>) Optional: A complex type that contains whitelisted cookies
-  for this cache behavior. If Quantity is 0, you can omit Items.\n              *
-  `:Name` - (String) \n          * `:headers` - (Hash) A complex type that specifies
-  the Headers, if any, that you want CloudFront to vary upon for this cache behavior.\n
-  \           * `:quantity` - *required* - (Integer) The number of different headers
-  that you want CloudFront to forward to the origin and to vary on for this cache
-  behavior. The maximum number of headers that you can specify by name is 10. If you
-  want CloudFront to forward all headers to the origin and vary on all of them, specify
-  1 for Quantity and * for Name. If you don't want CloudFront to forward any additional
-  headers to the origin or to vary on any headers, specify 0 for Quantity and omit
-  Items.\n            * `:items` - (Array&lt;String>) Optional: A complex type that
-  contains a Name element for each header that you want CloudFront to forward to the
-  origin and to vary on for this cache behavior. If Quantity is 0, omit Items.\n            *
-  `:Name` - (String) \n        * `:referers` - (Hash) \n          * `:allow_blank_referer`
-  - (Boolean) \n          * `:referer_checks` - *required* - (String) Valid values
-  include:\n            * `none`\n            * `whitelist`\n          * `:whitelisted_patterns`
-  - (Hash) \n            * `:quantity` - *required* - (Integer) \n            * `:items`
-  - (Array&lt;String>) \n            * `:Name` - (String) \n        * `:trusted_signers`
-  - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
+  is 0, omit Items.\n          * `:Name` - (String) \n      * `:trusted_signers` -
+  *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
   for this cache behavior, specify  `true`  for Enabled, and specify the applicable
@@ -207,59 +113,145 @@
   \ for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more
   trusted signers, change Enabled to  `true`  (if it's currently  `false` ), change
   Quantity as applicable, and specify all of the trusted signers that you want to
-  include in the updated distribution.\n          * `:enabled` - *required* - (Boolean)
+  include in the updated distribution.\n        * `:enabled` - *required* - (Boolean)
   Specifies whether you want to require end users to use signed URLs to access the
-  files specified by PathPattern and TargetOriginId.\n          * `:quantity` - *required*
-  - (Integer) The number of trusted signers for this cache behavior.\n          *
-  `:items` - (Array&lt;String>) Optional: A complex type that contains trusted signers
-  for this cache behavior. If Quantity is 0, you can omit Items.\n          * `:AwsAccountNumber`
-  - (String) \n        * `:viewer_protocol_policy` - *required* - (String) Use this
+  files specified by PathPattern and TargetOriginId.\n        * `:quantity` - *required*
+  - (Integer) The number of trusted signers for this cache behavior.\n        * `:items`
+  - (Array&lt;String>) Optional: A complex type that contains trusted signers for
+  this cache behavior. If Quantity is 0, you can omit Items.\n        * `:AwsAccountNumber`
+  - (String) \n      * `:viewer_protocol_policy` - *required* - (String) Use this
   element to specify the protocol that users can use to access the files in the origin
   specified by TargetOriginId when a request matches the path pattern in PathPattern.
   If you want CloudFront to allow end users to use any available protocol, specify
   allow-all. If you want CloudFront to require HTTPS, specify https. If you want CloudFront
   to respond to an HTTP request with an HTTP status code of 301 (Moved Permanently)
   and the HTTPS URL, specify redirect-to-https. The viewer then resubmits the request
-  using the HTTPS URL.  Valid values include:\n          * `allow-all`\n          *
-  `https-only`\n          * `redirect-to-https`\n        * `:min_ttl` - *required*
-  - (Integer) The minimum amount of time that you want objects to stay in CloudFront
-  caches before CloudFront queries your origin to see whether the object has been
-  updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years).\n        *
-  `:allowed_methods` - (Hash) \n          * `:quantity` - *required* - (Integer) The
-  number of HTTP methods that you want CloudFront to forward to your origin. Valid
-  values are 2 (for GET and HEAD requests), 3 (for GET, HEAD and OPTIONS requests)
-  and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests).\n          *
-  `:items` - *required* - (Array&lt;String>) A complex type that contains the HTTP
-  methods that you want CloudFront to process and forward to your origin.\n          *
-  `:Method` - (String) \n          * `:cached_methods` - (Hash) \n            * `:quantity`
-  - *required* - (Integer) The number of HTTP methods for which you want CloudFront
-  to cache responses. Valid values are 2 (for caching responses to GET and HEAD requests)
-  and 3 (for caching responses to GET, HEAD, and OPTIONS requests).\n            *
-  `:items` - *required* - (Array&lt;String>) A complex type that contains the HTTP
-  methods that you want CloudFront to cache responses to.\n            * `:Method`
-  - (String) \n        * `:smooth_streaming` - (Boolean) Indicates whether you want
-  to distribute media files in Microsoft Smooth Streaming format using the origin
-  that is associated with this cache behavior. If so, specify  `true` ; if not, specify
-  \ `false` .\n    * `:custom_error_responses` - (Hash) A complex type that contains
-  zero or more CustomErrorResponse elements.\n      * `:quantity` - *required* - (Integer)
-  The number of custom error responses for this distribution.\n      * `:items` -
-  (Array&lt;Hash>) Optional: A complex type that contains custom error responses for
-  this distribution. If Quantity is 0, you can omit Items.\n      * `:CustomErrorResponse`
-  - (Hash) \n        * `:error_code` - *required* - (Integer) The 4xx or 5xx HTTP
-  status code that you want to customize. For a list of HTTP status codes that you
-  can customize, see CloudFront documentation.\n        * `:response_page_path` -
-  (String) The path of the custom error page (for example, /custom_404.html). The
-  path is relative to the distribution and must begin with a slash (/). If the path
-  includes any non-ASCII characters or unsafe characters as defined in RFC 1783 (http://www.ietf.org/rfc/rfc1738.txt),
-  URL encode those characters. Do not URL encode any other characters in the path,
-  or CloudFront will not return the custom error page to the viewer.\n        * `:response_code`
-  - (String) The HTTP status code that you want CloudFront to return with the custom
-  error page to the viewer. For a list of HTTP status codes that you can replace,
-  see CloudFront Documentation.\n        * `:error_caching_min_ttl` - (Integer) The
-  minimum amount of time you want HTTP error codes to stay in CloudFront caches before
-  CloudFront queries your origin to see whether the object has been updated. You can
-  specify a value from 0 to 31,536,000.\n    * `:comment` - *required* - (String)
-  Any comments you want to include about the distribution.\n    * `:logging` - (Hash)
+  using the HTTPS URL.  Valid values include:\n        * `allow-all`\n        * `https-only`\n
+  \       * `redirect-to-https`\n      * `:min_ttl` - *required* - (Integer) The minimum
+  amount of time that you want objects to stay in CloudFront caches before CloudFront
+  queries your origin to see whether the object has been updated.You can specify a
+  value from 0 to 3,153,600,000 seconds (100 years).\n      * `:allowed_methods` -
+  (Hash) \n        * `:quantity` - *required* - (Integer) The number of HTTP methods
+  that you want CloudFront to forward to your origin. Valid values are 2 (for GET
+  and HEAD requests), 3 (for GET, HEAD and OPTIONS requests) and 7 (for GET, HEAD,
+  OPTIONS, PUT, PATCH, POST, and DELETE requests).\n        * `:items` - *required*
+  - (Array&lt;String>) A complex type that contains the HTTP methods that you want
+  CloudFront to process and forward to your origin.\n        * `:Method` - (String)
+  \n        * `:cached_methods` - (Hash) \n          * `:quantity` - *required* -
+  (Integer) The number of HTTP methods for which you want CloudFront to cache responses.
+  Valid values are 2 (for caching responses to GET and HEAD requests) and 3 (for caching
+  responses to GET, HEAD, and OPTIONS requests).\n          * `:items` - *required*
+  - (Array&lt;String>) A complex type that contains the HTTP methods that you want
+  CloudFront to cache responses to.\n          * `:Method` - (String) \n      * `:smooth_streaming`
+  - (Boolean) Indicates whether you want to distribute media files in Microsoft Smooth
+  Streaming format using the origin that is associated with this cache behavior. If
+  so, specify  `true` ; if not, specify  `false` .\n    * `:cache_behaviors` - *required*
+  - (Hash) A complex type that contains zero or more CacheBehavior elements.\n      *
+  `:quantity` - *required* - (Integer) The number of cache behaviors for this distribution.\n
+  \     * `:items` - (Array&lt;Hash>) Optional: A complex type that contains cache
+  behaviors for this distribution. If Quantity is 0, you can omit Items.\n      *
+  `:CacheBehavior` - (Hash) \n        * `:path_pattern` - *required* - (String) The
+  pattern (for example, images/*.jpg) that specifies which requests you want this
+  cache behavior to apply to. When CloudFront receives an end-user request, the requested
+  path is compared with path patterns in the order in which cache behaviors are listed
+  in the distribution. The path pattern for the default cache behavior is * and cannot
+  be changed. If the request for an object does not match the path pattern for any
+  cache behaviors, CloudFront applies the behavior in the default cache behavior.\n
+  \       * `:target_origin_id` - *required* - (String) The value of ID for the origin
+  that you want CloudFront to route requests to when a request matches the path pattern
+  either for a cache behavior or for the default cache behavior.\n        * `:forwarded_values`
+  - *required* - (Hash) A complex type that specifies how CloudFront handles query
+  strings, cookies and headers.\n          * `:query_string` - *required* - (Boolean)
+  Indicates whether you want CloudFront to forward query strings to the origin that
+  is associated with this cache behavior. If so, specify  `true` ; if not, specify
+  \ `false` .\n          * `:cookies` - *required* - (Hash) A complex type that specifies
+  how CloudFront handles cookies.\n            * `:forward` - *required* - (String)
+  Use this element to specify whether you want CloudFront to forward cookies to the
+  origin that is associated with this cache behavior. You can specify all, none or
+  whitelist. If you choose All, CloudFront forwards all cookies regardless of how
+  many your application uses.  Valid values include:\n              * `none`\n              *
+  `whitelist`\n              * `all`\n            * `:whitelisted_names` - (Hash)
+  A complex type that specifies the whitelisted cookies, if any, that you want CloudFront
+  to forward to your origin that is associated with this cache behavior.\n              *
+  `:quantity` - *required* - (Integer) The number of whitelisted cookies for this
+  cache behavior.\n              * `:items` - (Array&lt;String>) Optional: A complex
+  type that contains whitelisted cookies for this cache behavior. If Quantity is 0,
+  you can omit Items.\n              * `:Name` - (String) \n          * `:headers`
+  - (Hash) A complex type that specifies the Headers, if any, that you want CloudFront
+  to vary upon for this cache behavior.\n            * `:quantity` - *required* -
+  (Integer) The number of different headers that you want CloudFront to forward to
+  the origin and to vary on for this cache behavior. The maximum number of headers
+  that you can specify by name is 10. If you want CloudFront to forward all headers
+  to the origin and vary on all of them, specify 1 for Quantity and * for Name. If
+  you don't want CloudFront to forward any additional headers to the origin or to
+  vary on any headers, specify 0 for Quantity and omit Items.\n            * `:items`
+  - (Array&lt;String>) Optional: A complex type that contains a Name element for each
+  header that you want CloudFront to forward to the origin and to vary on for this
+  cache behavior. If Quantity is 0, omit Items.\n            * `:Name` - (String)
+  \n        * `:trusted_signers` - *required* - (Hash) A complex type that specifies
+  the AWS accounts, if any, that you want to allow to create signed URLs for private
+  content. If you want to require signed URLs in requests for objects in the target
+  origin that match the PathPattern for this cache behavior, specify  `true`  for
+  Enabled, and specify the applicable values for Quantity and Items. For more information,
+  go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer
+  Guide. If you don't want to require signed URLs in requests for objects that match
+  PathPattern, specify  `false`  for Enabled and 0 for Quantity. Omit Items. To add,
+  change, or remove one or more trusted signers, change Enabled to  `true`  (if it's
+  currently  `false` ), change Quantity as applicable, and specify all of the trusted
+  signers that you want to include in the updated distribution.\n          * `:enabled`
+  - *required* - (Boolean) Specifies whether you want to require end users to use
+  signed URLs to access the files specified by PathPattern and TargetOriginId.\n          *
+  `:quantity` - *required* - (Integer) The number of trusted signers for this cache
+  behavior.\n          * `:items` - (Array&lt;String>) Optional: A complex type that
+  contains trusted signers for this cache behavior. If Quantity is 0, you can omit
+  Items.\n          * `:AwsAccountNumber` - (String) \n        * `:viewer_protocol_policy`
+  - *required* - (String) Use this element to specify the protocol that users can
+  use to access the files in the origin specified by TargetOriginId when a request
+  matches the path pattern in PathPattern. If you want CloudFront to allow end users
+  to use any available protocol, specify allow-all. If you want CloudFront to require
+  HTTPS, specify https. If you want CloudFront to respond to an HTTP request with
+  an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https.
+  The viewer then resubmits the request using the HTTPS URL.  Valid values include:\n
+  \         * `allow-all`\n          * `https-only`\n          * `redirect-to-https`\n
+  \       * `:min_ttl` - *required* - (Integer) The minimum amount of time that you
+  want objects to stay in CloudFront caches before CloudFront queries your origin
+  to see whether the object has been updated.You can specify a value from 0 to 3,153,600,000
+  seconds (100 years).\n        * `:allowed_methods` - (Hash) \n          * `:quantity`
+  - *required* - (Integer) The number of HTTP methods that you want CloudFront to
+  forward to your origin. Valid values are 2 (for GET and HEAD requests), 3 (for GET,
+  HEAD and OPTIONS requests) and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and
+  DELETE requests).\n          * `:items` - *required* - (Array&lt;String>) A complex
+  type that contains the HTTP methods that you want CloudFront to process and forward
+  to your origin.\n          * `:Method` - (String) \n          * `:cached_methods`
+  - (Hash) \n            * `:quantity` - *required* - (Integer) The number of HTTP
+  methods for which you want CloudFront to cache responses. Valid values are 2 (for
+  caching responses to GET and HEAD requests) and 3 (for caching responses to GET,
+  HEAD, and OPTIONS requests).\n            * `:items` - *required* - (Array&lt;String>)
+  A complex type that contains the HTTP methods that you want CloudFront to cache
+  responses to.\n            * `:Method` - (String) \n        * `:smooth_streaming`
+  - (Boolean) Indicates whether you want to distribute media files in Microsoft Smooth
+  Streaming format using the origin that is associated with this cache behavior. If
+  so, specify  `true` ; if not, specify  `false` .\n    * `:custom_error_responses`
+  - (Hash) A complex type that contains zero or more CustomErrorResponse elements.\n
+  \     * `:quantity` - *required* - (Integer) The number of custom error responses
+  for this distribution.\n      * `:items` - (Array&lt;Hash>) Optional: A complex
+  type that contains custom error responses for this distribution. If Quantity is
+  0, you can omit Items.\n      * `:CustomErrorResponse` - (Hash) \n        * `:error_code`
+  - *required* - (Integer) The 4xx or 5xx HTTP status code that you want to customize.
+  For a list of HTTP status codes that you can customize, see CloudFront documentation.\n
+  \       * `:response_page_path` - (String) The path of the custom error page (for
+  example, /custom_404.html). The path is relative to the distribution and must begin
+  with a slash (/). If the path includes any non-ASCII characters or unsafe characters
+  as defined in RFC 1783 (http://www.ietf.org/rfc/rfc1738.txt), URL encode those characters.
+  Do not URL encode any other characters in the path, or CloudFront will not return
+  the custom error page to the viewer.\n        * `:response_code` - (String) The
+  HTTP status code that you want CloudFront to return with the custom error page to
+  the viewer. For a list of HTTP status codes that you can replace, see CloudFront
+  Documentation.\n        * `:error_caching_min_ttl` - (Integer) The minimum amount
+  of time you want HTTP error codes to stay in CloudFront caches before CloudFront
+  queries your origin to see whether the object has been updated. You can specify
+  a value from 0 to 31,536,000.\n    * `:comment` - *required* - (String) Any comments
+  you want to include about the distribution.\n    * `:logging` - *required* - (Hash)
   A complex type that controls whether access logs are written for the distribution.\n
   \     * `:enabled` - *required* - (Boolean) Specifies whether you want CloudFront
   to save access logs to an Amazon S3 bucket. If you do not want to enable logging
@@ -278,40 +270,40 @@
   to prefix to the access log filenames for this distribution, for example, myprefix/.
   If you want to enable logging, but you do not want to specify a prefix, you still
   must include an empty Prefix element in the Logging element.\n    * `:price_class`
-  - (String) A complex type that contains information about price class for this distribution.
-  \ Valid values include:\n      * `PriceClass_100`\n      * `PriceClass_200`\n      *
-  `PriceClass_All`\n    * `:enabled` - *required* - (Boolean) Whether the distribution
-  is enabled to accept end user requests for content.\n    * `:viewer_certificate`
-  - (Hash) \n      * `:iam_certificate_id` - (String) If you want viewers to use HTTPS
-  to request your objects and you're using an alternate domain name in your object
-  URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier
-  of the custom viewer certificate for this distribution. Specify either this value
-  or CloudFrontDefaultCertificate.\n      * `:cloud_front_default_certificate` - (Boolean)
-  If you want viewers to use HTTPS to request your objects and you're using the CloudFront
-  domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg),
-  set to  `true` . Omit this value if you are setting an IAMCertificateId.\n      *
-  `:ssl_support_method` - (String) If you specify a value for IAMCertificateId, you
-  must also specify how you want CloudFront to serve HTTPS requests. Valid values
-  are vip and sni-only. If you specify vip, CloudFront uses dedicated IP addresses
-  for your content and can respond to HTTPS requests from any viewer. However, you
-  must request permission to use this feature, and you incur additional monthly charges.
-  If you specify sni-only, CloudFront can only respond to HTTPS requests from viewers
-  that support Server Name Indication (SNI). All modern browsers support SNI, but
-  some browsers still in use don't support SNI. Do not specify a value for SSLSupportMethod
-  if you specified  `true`  for CloudFrontDefaultCertificate.  Valid values include:\n
-  \       * `sni-only`\n        * `vip`\n      * `:minimum_protocol_version` - (String)
-  Specify the minimum version of the SSL protocol that you want CloudFront to use,
-  SSLv3 or TLSv1, for HTTPS connections. CloudFront will serve your objects only to
-  browsers or devices that support at least the SSL version that you specify. The
-  TLSv1 protocol is more secure, so we recommend that you specify SSLv3 only if your
-  users are using browsers or devices that don't support TLSv1. If you're using a
-  custom certificate (if you specify a value for IAMCertificateId) and if you're using
-  dedicated IP (if you specify vip for SSLSupportMethod), you can choose SSLv3 or
-  TLSv1 as the MinimumProtocolVersion. If you're using a custom certificate (if you
-  specify a value for IAMCertificateId) and if you're using SNI (if you specify sni-only
-  for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.  Valid
-  values include:\n        * `SSLv3`\n        * `TLSv1`\n    * `:restrictions` - (Hash)
-  \n      * `:geo_restriction` - *required* - (Hash) \n        * `:restriction_type`
+  - *required* - (String) A complex type that contains information about price class
+  for this distribution.  Valid values include:\n      * `PriceClass_100`\n      *
+  `PriceClass_200`\n      * `PriceClass_All`\n    * `:enabled` - *required* - (Boolean)
+  Whether the distribution is enabled to accept end user requests for content.\n    *
+  `:viewer_certificate` - (Hash) \n      * `:iam_certificate_id` - (String) If you
+  want viewers to use HTTPS to request your objects and you're using an alternate
+  domain name in your object URLs (for example, https://example.com/logo.jpg), specify
+  the IAM certificate identifier of the custom viewer certificate for this distribution.
+  Specify either this value or CloudFrontDefaultCertificate.\n      * `:cloud_front_default_certificate`
+  - (Boolean) If you want viewers to use HTTPS to request your objects and you're
+  using the CloudFront domain name of your distribution in your object URLs (for example,
+  https://d111111abcdef8.cloudfront.net/logo.jpg), set to  `true` . Omit this value
+  if you are setting an IAMCertificateId.\n      * `:ssl_support_method` - (String)
+  If you specify a value for IAMCertificateId, you must also specify how you want
+  CloudFront to serve HTTPS requests. Valid values are vip and sni-only. If you specify
+  vip, CloudFront uses dedicated IP addresses for your content and can respond to
+  HTTPS requests from any viewer. However, you must request permission to use this
+  feature, and you incur additional monthly charges. If you specify sni-only, CloudFront
+  can only respond to HTTPS requests from viewers that support Server Name Indication
+  (SNI). All modern browsers support SNI, but some browsers still in use don't support
+  SNI. Do not specify a value for SSLSupportMethod if you specified  `true`  for CloudFrontDefaultCertificate.
+  \ Valid values include:\n        * `sni-only`\n        * `vip`\n      * `:minimum_protocol_version`
+  - (String) Specify the minimum version of the SSL protocol that you want CloudFront
+  to use, SSLv3 or TLSv1, for HTTPS connections. CloudFront will serve your objects
+  only to browsers or devices that support at least the SSL version that you specify.
+  The TLSv1 protocol is more secure, so we recommend that you specify SSLv3 only if
+  your users are using browsers or devices that don't support TLSv1. If you're using
+  a custom certificate (if you specify a value for IAMCertificateId) and if you're
+  using dedicated IP (if you specify vip for SSLSupportMethod), you can choose SSLv3
+  or TLSv1 as the MinimumProtocolVersion. If you're using a custom certificate (if
+  you specify a value for IAMCertificateId) and if you're using SNI (if you specify
+  sni-only for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.
+  \ Valid values include:\n        * `SSLv3`\n        * `TLSv1`\n    * `:restrictions`
+  - (Hash) \n      * `:geo_restriction` - *required* - (Hash) \n        * `:restriction_type`
   - *required* - (String) The method that you want to use to restrict distribution
   of your content by country: - none: No geo restriction is enabled, meaning access
   to content is not restricted by client geo location. - blacklist: The Location elements
@@ -341,32 +333,26 @@
   `:quantity` - (Integer)\n      * `:items` - (Array<String>)\n    * `:default_root_object`
   - (String)\n    * `:origins` - (Hash)\n      * `:quantity` - (Integer)\n      *
   `:items` - (Array<Hash>)\n        * `:id` - (String)\n        * `:domain_name` -
-  (String)\n        * `:origin_path` - (String)\n        * `:s3_origin_config` - (Hash)\n
-  \         * `:origin_access_identity` - (String)\n        * `:custom_origin_config`
-  - (Hash)\n          * `:http_port` - (Integer)\n          * `:https_port` - (Integer)\n
-  \         * `:origin_protocol_policy` - (String)\n    * `:default_cache_behavior`
-  - (Hash)\n      * `:target_origin_id` - (String)\n      * `:forwarded_values` -
-  (Hash)\n        * `:query_string` - (Boolean)\n        * `:cookies` - (Hash)\n          *
-  `:forward` - (String)\n          * `:whitelisted_names` - (Hash)\n            *
-  `:quantity` - (Integer)\n            * `:items` - (Array<String>)\n        * `:headers`
-  - (Hash)\n          * `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n
-  \     * `:referers` - (Hash)\n        * `:allow_blank_referer` - (Boolean)\n        *
-  `:referer_checks` - (String)\n        * `:whitelisted_patterns` - (Hash)\n          *
-  `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n      * `:trusted_signers`
-  - (Hash)\n        * `:enabled` - (Boolean)\n        * `:quantity` - (Integer)\n
-  \       * `:items` - (Array<String>)\n      * `:viewer_protocol_policy` - (String)\n
-  \     * `:min_ttl` - (Integer)\n      * `:allowed_methods` - (Hash)\n        * `:quantity`
-  - (Integer)\n        * `:items` - (Array<String>)\n        * `:cached_methods` -
-  (Hash)\n          * `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n
-  \     * `:smooth_streaming` - (Boolean)\n    * `:cache_behaviors` - (Hash)\n      *
-  `:quantity` - (Integer)\n      * `:items` - (Array<Hash>)\n        * `:path_pattern`
-  - (String)\n        * `:target_origin_id` - (String)\n        * `:forwarded_values`
-  - (Hash)\n          * `:query_string` - (Boolean)\n          * `:cookies` - (Hash)\n
-  \           * `:forward` - (String)\n            * `:whitelisted_names` - (Hash)\n
-  \             * `:quantity` - (Integer)\n              * `:items` - (Array<String>)\n
-  \         * `:headers` - (Hash)\n            * `:quantity` - (Integer)\n            *
-  `:items` - (Array<String>)\n        * `:referers` - (Hash)\n          * `:allow_blank_referer`
-  - (Boolean)\n          * `:referer_checks` - (String)\n          * `:whitelisted_patterns`
+  (String)\n        * `:s3_origin_config` - (Hash)\n          * `:origin_access_identity`
+  - (String)\n        * `:custom_origin_config` - (Hash)\n          * `:http_port`
+  - (Integer)\n          * `:https_port` - (Integer)\n          * `:origin_protocol_policy`
+  - (String)\n    * `:default_cache_behavior` - (Hash)\n      * `:target_origin_id`
+  - (String)\n      * `:forwarded_values` - (Hash)\n        * `:query_string` - (Boolean)\n
+  \       * `:cookies` - (Hash)\n          * `:forward` - (String)\n          * `:whitelisted_names`
+  - (Hash)\n            * `:quantity` - (Integer)\n            * `:items` - (Array<String>)\n
+  \       * `:headers` - (Hash)\n          * `:quantity` - (Integer)\n          *
+  `:items` - (Array<String>)\n      * `:trusted_signers` - (Hash)\n        * `:enabled`
+  - (Boolean)\n        * `:quantity` - (Integer)\n        * `:items` - (Array<String>)\n
+  \     * `:viewer_protocol_policy` - (String)\n      * `:min_ttl` - (Integer)\n      *
+  `:allowed_methods` - (Hash)\n        * `:quantity` - (Integer)\n        * `:items`
+  - (Array<String>)\n        * `:cached_methods` - (Hash)\n          * `:quantity`
+  - (Integer)\n          * `:items` - (Array<String>)\n      * `:smooth_streaming`
+  - (Boolean)\n    * `:cache_behaviors` - (Hash)\n      * `:quantity` - (Integer)\n
+  \     * `:items` - (Array<Hash>)\n        * `:path_pattern` - (String)\n        *
+  `:target_origin_id` - (String)\n        * `:forwarded_values` - (Hash)\n          *
+  `:query_string` - (Boolean)\n          * `:cookies` - (Hash)\n            * `:forward`
+  - (String)\n            * `:whitelisted_names` - (Hash)\n              * `:quantity`
+  - (Integer)\n              * `:items` - (Array<String>)\n          * `:headers`
   - (Hash)\n            * `:quantity` - (Integer)\n            * `:items` - (Array<String>)\n
   \       * `:trusted_signers` - (Hash)\n          * `:enabled` - (Boolean)\n          *
   `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n        * `:viewer_protocol_policy`
@@ -426,26 +412,26 @@
   about the Amazon S3 bucket from which you want CloudFront to get your media files
   for distribution.\n      * `:domain_name` - *required* - (String) The DNS name of
   the S3 origin.\n      * `:origin_access_identity` - *required* - (String) Your S3
-  origin's origin access identity.\n    * `:aliases` - (Hash) A complex type that
-  contains information about CNAMEs (alternate domain names), if any, for this streaming
-  distribution.\n      * `:quantity` - *required* - (Integer) The number of CNAMEs,
-  if any, for this distribution.\n      * `:items` - (Array&lt;String>) Optional:
-  A complex type that contains CNAME elements, if any, for this distribution. If Quantity
-  is 0, you can omit Items.\n      * `:CNAME` - (String) \n    * `:comment` - *required*
-  - (String) Any comments you want to include about the streaming distribution.\n
-  \   * `:logging` - (Hash) A complex type that controls whether access logs are written
-  for the streaming distribution.\n      * `:enabled` - *required* - (Boolean) Specifies
-  whether you want CloudFront to save access logs to an Amazon S3 bucket. If you do
-  not want to enable logging when you create a streaming distribution or if you want
-  to disable logging for an existing streaming distribution, specify  `false`  for
-  Enabled, and specify empty Bucket and Prefix elements. If you specify  `false`  for
-  Enabled but you specify values for Bucket and Prefix, the values are automatically
-  deleted.\n      * `:bucket` - *required* - (String) The Amazon S3 bucket to store
-  the access logs in, for example, myawslogbucket.s3.amazonaws.com.\n      * `:prefix`
-  - *required* - (String) An optional string that you want CloudFront to prefix to
-  the access log filenames for this streaming distribution, for example, myprefix/.
-  If you want to enable logging, but you do not want to specify a prefix, you still
-  must include an empty Prefix element in the Logging element.\n    * `:trusted_signers`
+  origin's origin access identity.\n    * `:aliases` - *required* - (Hash) A complex
+  type that contains information about CNAMEs (alternate domain names), if any, for
+  this streaming distribution.\n      * `:quantity` - *required* - (Integer) The number
+  of CNAMEs, if any, for this distribution.\n      * `:items` - (Array&lt;String>)
+  Optional: A complex type that contains CNAME elements, if any, for this distribution.
+  If Quantity is 0, you can omit Items.\n      * `:CNAME` - (String) \n    * `:comment`
+  - *required* - (String) Any comments you want to include about the streaming distribution.\n
+  \   * `:logging` - *required* - (Hash) A complex type that controls whether access
+  logs are written for the streaming distribution.\n      * `:enabled` - *required*
+  - (Boolean) Specifies whether you want CloudFront to save access logs to an Amazon
+  S3 bucket. If you do not want to enable logging when you create a streaming distribution
+  or if you want to disable logging for an existing streaming distribution, specify
+  \ `false`  for Enabled, and specify empty Bucket and Prefix elements. If you specify
+  \ `false`  for Enabled but you specify values for Bucket and Prefix, the values
+  are automatically deleted.\n      * `:bucket` - *required* - (String) The Amazon
+  S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com.\n
+  \     * `:prefix` - *required* - (String) An optional string that you want CloudFront
+  to prefix to the access log filenames for this streaming distribution, for example,
+  myprefix/. If you want to enable logging, but you do not want to specify a prefix,
+  you still must include an empty Prefix element in the Logging element.\n    * `:trusted_signers`
   - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
@@ -462,13 +448,13 @@
   - (Integer) The number of trusted signers for this cache behavior.\n      * `:items`
   - (Array&lt;String>) Optional: A complex type that contains trusted signers for
   this cache behavior. If Quantity is 0, you can omit Items.\n      * `:AwsAccountNumber`
-  - (String) \n    * `:price_class` - (String) A complex type that contains information
-  about price class for this streaming distribution.  Valid values include:\n      *
-  `PriceClass_100`\n      * `PriceClass_200`\n      * `PriceClass_All`\n    * `:enabled`
-  - *required* - (Boolean) Whether the streaming distribution is enabled to accept
-  end user requests for content.\n@return [Core::Response] The `#data` method of the
-  response object returns a hash with the following structure:\n\n  * `:id` - (String)\n
-  \ * `:status` - (String)\n  * `:last_modified_time` - (Time)\n  * `:domain_name`
+  - (String) \n    * `:price_class` - *required* - (String) A complex type that contains
+  information about price class for this streaming distribution.  Valid values include:\n
+  \     * `PriceClass_100`\n      * `PriceClass_200`\n      * `PriceClass_All`\n    *
+  `:enabled` - *required* - (Boolean) Whether the streaming distribution is enabled
+  to accept end user requests for content.\n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `:id`
+  - (String)\n  * `:status` - (String)\n  * `:last_modified_time` - (Time)\n  * `:domain_name`
   - (String)\n  * `:active_trusted_signers` - (Hash)\n    * `:enabled` - (Boolean)\n
   \   * `:quantity` - (Integer)\n    * `:items` - (Array<Hash>)\n      * `:aws_account_number`
   - (String)\n      * `:key_pair_ids` - (Hash)\n        * `:quantity` - (Integer)\n
@@ -547,7 +533,6 @@
         * `:items` - (Array<Hash>)
           * `:id` - (String)
           * `:domain_name` - (String)
-          * `:origin_path` - (String)
           * `:s3_origin_config` - (Hash)
             * `:origin_access_identity` - (String)
           * `:custom_origin_config` - (Hash)
@@ -564,12 +549,6 @@
               * `:quantity` - (Integer)
               * `:items` - (Array<String>)
           * `:headers` - (Hash)
-            * `:quantity` - (Integer)
-            * `:items` - (Array<String>)
-        * `:referers` - (Hash)
-          * `:allow_blank_referer` - (Boolean)
-          * `:referer_checks` - (String)
-          * `:whitelisted_patterns` - (Hash)
             * `:quantity` - (Integer)
             * `:items` - (Array<String>)
         * `:trusted_signers` - (Hash)
@@ -598,12 +577,6 @@
                 * `:quantity` - (Integer)
                 * `:items` - (Array<String>)
             * `:headers` - (Hash)
-              * `:quantity` - (Integer)
-              * `:items` - (Array<String>)
-          * `:referers` - (Hash)
-            * `:allow_blank_referer` - (Boolean)
-            * `:referer_checks` - (String)
-            * `:whitelisted_patterns` - (Hash)
               * `:quantity` - (Integer)
               * `:items` - (Array<String>)
           * `:trusted_signers` - (Hash)
@@ -660,7 +633,6 @@
       * `:items` - (Array<Hash>)
         * `:id` - (String)
         * `:domain_name` - (String)
-        * `:origin_path` - (String)
         * `:s3_origin_config` - (Hash)
           * `:origin_access_identity` - (String)
         * `:custom_origin_config` - (Hash)
@@ -677,12 +649,6 @@
             * `:quantity` - (Integer)
             * `:items` - (Array<String>)
         * `:headers` - (Hash)
-          * `:quantity` - (Integer)
-          * `:items` - (Array<String>)
-      * `:referers` - (Hash)
-        * `:allow_blank_referer` - (Boolean)
-        * `:referer_checks` - (String)
-        * `:whitelisted_patterns` - (Hash)
           * `:quantity` - (Integer)
           * `:items` - (Array<String>)
       * `:trusted_signers` - (Hash)
@@ -711,12 +677,6 @@
               * `:quantity` - (Integer)
               * `:items` - (Array<String>)
           * `:headers` - (Hash)
-            * `:quantity` - (Integer)
-            * `:items` - (Array<String>)
-        * `:referers` - (Hash)
-          * `:allow_blank_referer` - (Boolean)
-          * `:referer_checks` - (String)
-          * `:whitelisted_patterns` - (Hash)
             * `:quantity` - (Integer)
             * `:items` - (Array<String>)
         * `:trusted_signers` - (Hash)
@@ -874,7 +834,6 @@
         * `:items` - (Array<Hash>)
           * `:id` - (String)
           * `:domain_name` - (String)
-          * `:origin_path` - (String)
           * `:s3_origin_config` - (Hash)
             * `:origin_access_identity` - (String)
           * `:custom_origin_config` - (Hash)
@@ -891,12 +850,6 @@
               * `:quantity` - (Integer)
               * `:items` - (Array<String>)
           * `:headers` - (Hash)
-            * `:quantity` - (Integer)
-            * `:items` - (Array<String>)
-        * `:referers` - (Hash)
-          * `:allow_blank_referer` - (Boolean)
-          * `:referer_checks` - (String)
-          * `:whitelisted_patterns` - (Hash)
             * `:quantity` - (Integer)
             * `:items` - (Array<String>)
         * `:trusted_signers` - (Hash)
@@ -925,12 +878,6 @@
                 * `:quantity` - (Integer)
                 * `:items` - (Array<String>)
             * `:headers` - (Hash)
-              * `:quantity` - (Integer)
-              * `:items` - (Array<String>)
-          * `:referers` - (Hash)
-            * `:allow_blank_referer` - (Boolean)
-            * `:referer_checks` - (String)
-            * `:whitelisted_patterns` - (Hash)
               * `:quantity` - (Integer)
               * `:items` - (Array<String>)
           * `:trusted_signers` - (Hash)
@@ -1039,35 +986,35 @@
   to the original request. If the CallerReference is a value you already sent in a
   previous request to create a distribution but the content of the DistributionConfig
   is different from the original request, CloudFront returns a DistributionAlreadyExists
-  error.\n    * `:aliases` - (Hash) A complex type that contains information about
-  CNAMEs (alternate domain names), if any, for this distribution.\n      * `:quantity`
+  error.\n    * `:aliases` - *required* - (Hash) A complex type that contains information
+  about CNAMEs (alternate domain names), if any, for this distribution.\n      * `:quantity`
   - *required* - (Integer) The number of CNAMEs, if any, for this distribution.\n
   \     * `:items` - (Array&lt;String>) Optional: A complex type that contains CNAME
   elements, if any, for this distribution. If Quantity is 0, you can omit Items.\n
-  \     * `:CNAME` - (String) \n    * `:default_root_object` - (String) The object
-  that you want CloudFront to return (for example, index.html) when an end user requests
-  the root URL for your distribution (http://www.example.com) instead of an object
-  in your distribution (http://www.example.com/index.html). Specifying a default root
-  object avoids exposing the contents of your distribution. If you don't want to specify
-  a default root object when you create a distribution, include an empty DefaultRootObject
-  element. To delete the default root object from an existing distribution, update
-  the distribution configuration and include an empty DefaultRootObject element. To
-  replace the default root object, update the distribution configuration and specify
-  the new object.\n    * `:origins` - *required* - (Hash) A complex type that contains
-  information about origins for this distribution.\n      * `:quantity` - *required*
-  - (Integer) The number of origins for this distribution.\n      * `:items` - (Array&lt;Hash>)
-  A complex type that contains origins for this distribution.\n      * `:Origin` -
-  (Hash) \n        * `:id` - *required* - (String) A unique identifier for the origin.
-  The value of Id must be unique within the distribution. You use the value of Id
-  when you create a cache behavior. The Id identifies the origin that CloudFront routes
-  a request to when the request matches the path pattern for that cache behavior.\n
-  \       * `:domain_name` - *required* - (String) Amazon S3 origins: The DNS name
-  of the Amazon S3 bucket from which you want CloudFront to get objects for this origin,
-  for example, myawsbucket.s3.amazonaws.com. Custom origins: The DNS domain name for
-  the HTTP server from which you want CloudFront to get objects for this origin, for
-  example, www.example.com.\n        * `:origin_path` - (String) \n        * `:s3_origin_config`
-  - (Hash) A complex type that contains information about the Amazon S3 origin. If
-  the origin is a custom origin, use the CustomOriginConfig element instead.\n          *
+  \     * `:CNAME` - (String) \n    * `:default_root_object` - *required* - (String)
+  The object that you want CloudFront to return (for example, index.html) when an
+  end user requests the root URL for your distribution (http://www.example.com) instead
+  of an object in your distribution (http://www.example.com/index.html). Specifying
+  a default root object avoids exposing the contents of your distribution. If you
+  don't want to specify a default root object when you create a distribution, include
+  an empty DefaultRootObject element. To delete the default root object from an existing
+  distribution, update the distribution configuration and include an empty DefaultRootObject
+  element. To replace the default root object, update the distribution configuration
+  and specify the new object.\n    * `:origins` - *required* - (Hash) A complex type
+  that contains information about origins for this distribution.\n      * `:quantity`
+  - *required* - (Integer) The number of origins for this distribution.\n      * `:items`
+  - (Array&lt;Hash>) A complex type that contains origins for this distribution.\n
+  \     * `:Origin` - (Hash) \n        * `:id` - *required* - (String) A unique identifier
+  for the origin. The value of Id must be unique within the distribution. You use
+  the value of Id when you create a cache behavior. The Id identifies the origin that
+  CloudFront routes a request to when the request matches the path pattern for that
+  cache behavior.\n        * `:domain_name` - *required* - (String) Amazon S3 origins:
+  The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects
+  for this origin, for example, myawsbucket.s3.amazonaws.com. Custom origins: The
+  DNS domain name for the HTTP server from which you want CloudFront to get objects
+  for this origin, for example, www.example.com.\n        * `:s3_origin_config` -
+  (Hash) A complex type that contains information about the Amazon S3 origin. If the
+  origin is a custom origin, use the CustomOriginConfig element instead.\n          *
   `:origin_access_identity` - *required* - (String) The CloudFront origin access identity
   to associate with the origin. Use an origin access identity to configure the origin
   so that end users can only access objects in an Amazon S3 bucket through CloudFront.
@@ -1118,102 +1065,8 @@
   specify 0 for Quantity and omit Items.\n          * `:items` - (Array&lt;String>)
   Optional: A complex type that contains a Name element for each header that you want
   CloudFront to forward to the origin and to vary on for this cache behavior. If Quantity
-  is 0, omit Items.\n          * `:Name` - (String) \n      * `:referers` - (Hash)
-  \n        * `:allow_blank_referer` - (Boolean) \n        * `:referer_checks` - *required*
-  - (String) Valid values include:\n          * `none`\n          * `whitelist`\n
-  \       * `:whitelisted_patterns` - (Hash) \n          * `:quantity` - *required*
-  - (Integer) \n          * `:items` - (Array&lt;String>) \n          * `:Name` -
-  (String) \n      * `:trusted_signers` - *required* - (Hash) A complex type that
-  specifies the AWS accounts, if any, that you want to allow to create signed URLs
-  for private content. If you want to require signed URLs in requests for objects
-  in the target origin that match the PathPattern for this cache behavior, specify
-  \ `true`  for Enabled, and specify the applicable values for Quantity and Items.
-  For more information, go to Using a Signed URL to Serve Private Content in the Amazon
-  CloudFront Developer Guide. If you don't want to require signed URLs in requests
-  for objects that match PathPattern, specify  `false`  for Enabled and 0 for Quantity.
-  Omit Items. To add, change, or remove one or more trusted signers, change Enabled
-  to  `true`  (if it's currently  `false` ), change Quantity as applicable, and specify
-  all of the trusted signers that you want to include in the updated distribution.\n
-  \       * `:enabled` - *required* - (Boolean) Specifies whether you want to require
-  end users to use signed URLs to access the files specified by PathPattern and TargetOriginId.\n
-  \       * `:quantity` - *required* - (Integer) The number of trusted signers for
-  this cache behavior.\n        * `:items` - (Array&lt;String>) Optional: A complex
-  type that contains trusted signers for this cache behavior. If Quantity is 0, you
-  can omit Items.\n        * `:AwsAccountNumber` - (String) \n      * `:viewer_protocol_policy`
-  - *required* - (String) Use this element to specify the protocol that users can
-  use to access the files in the origin specified by TargetOriginId when a request
-  matches the path pattern in PathPattern. If you want CloudFront to allow end users
-  to use any available protocol, specify allow-all. If you want CloudFront to require
-  HTTPS, specify https. If you want CloudFront to respond to an HTTP request with
-  an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https.
-  The viewer then resubmits the request using the HTTPS URL.  Valid values include:\n
-  \       * `allow-all`\n        * `https-only`\n        * `redirect-to-https`\n      *
-  `:min_ttl` - *required* - (Integer) The minimum amount of time that you want objects
-  to stay in CloudFront caches before CloudFront queries your origin to see whether
-  the object has been updated.You can specify a value from 0 to 3,153,600,000 seconds
-  (100 years).\n      * `:allowed_methods` - (Hash) \n        * `:quantity` - *required*
-  - (Integer) The number of HTTP methods that you want CloudFront to forward to your
-  origin. Valid values are 2 (for GET and HEAD requests), 3 (for GET, HEAD and OPTIONS
-  requests) and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests).\n
-  \       * `:items` - *required* - (Array&lt;String>) A complex type that contains
-  the HTTP methods that you want CloudFront to process and forward to your origin.\n
-  \       * `:Method` - (String) \n        * `:cached_methods` - (Hash) \n          *
-  `:quantity` - *required* - (Integer) The number of HTTP methods for which you want
-  CloudFront to cache responses. Valid values are 2 (for caching responses to GET
-  and HEAD requests) and 3 (for caching responses to GET, HEAD, and OPTIONS requests).\n
-  \         * `:items` - *required* - (Array&lt;String>) A complex type that contains
-  the HTTP methods that you want CloudFront to cache responses to.\n          * `:Method`
-  - (String) \n      * `:smooth_streaming` - (Boolean) Indicates whether you want
-  to distribute media files in Microsoft Smooth Streaming format using the origin
-  that is associated with this cache behavior. If so, specify  `true` ; if not, specify
-  \ `false` .\n    * `:cache_behaviors` - (Hash) A complex type that contains zero
-  or more CacheBehavior elements.\n      * `:quantity` - *required* - (Integer) The
-  number of cache behaviors for this distribution.\n      * `:items` - (Array&lt;Hash>)
-  Optional: A complex type that contains cache behaviors for this distribution. If
-  Quantity is 0, you can omit Items.\n      * `:CacheBehavior` - (Hash) \n        *
-  `:path_pattern` - *required* - (String) The pattern (for example, images/*.jpg)
-  that specifies which requests you want this cache behavior to apply to. When CloudFront
-  receives an end-user request, the requested path is compared with path patterns
-  in the order in which cache behaviors are listed in the distribution. The path pattern
-  for the default cache behavior is * and cannot be changed. If the request for an
-  object does not match the path pattern for any cache behaviors, CloudFront applies
-  the behavior in the default cache behavior.\n        * `:target_origin_id` - *required*
-  - (String) The value of ID for the origin that you want CloudFront to route requests
-  to when a request matches the path pattern either for a cache behavior or for the
-  default cache behavior.\n        * `:forwarded_values` - *required* - (Hash) A complex
-  type that specifies how CloudFront handles query strings, cookies and headers.\n
-  \         * `:query_string` - *required* - (Boolean) Indicates whether you want
-  CloudFront to forward query strings to the origin that is associated with this cache
-  behavior. If so, specify  `true` ; if not, specify  `false` .\n          * `:cookies`
-  - *required* - (Hash) A complex type that specifies how CloudFront handles cookies.\n
-  \           * `:forward` - *required* - (String) Use this element to specify whether
-  you want CloudFront to forward cookies to the origin that is associated with this
-  cache behavior. You can specify all, none or whitelist. If you choose All, CloudFront
-  forwards all cookies regardless of how many your application uses.  Valid values
-  include:\n              * `none`\n              * `whitelist`\n              * `all`\n
-  \           * `:whitelisted_names` - (Hash) A complex type that specifies the whitelisted
-  cookies, if any, that you want CloudFront to forward to your origin that is associated
-  with this cache behavior.\n              * `:quantity` - *required* - (Integer)
-  The number of whitelisted cookies for this cache behavior.\n              * `:items`
-  - (Array&lt;String>) Optional: A complex type that contains whitelisted cookies
-  for this cache behavior. If Quantity is 0, you can omit Items.\n              *
-  `:Name` - (String) \n          * `:headers` - (Hash) A complex type that specifies
-  the Headers, if any, that you want CloudFront to vary upon for this cache behavior.\n
-  \           * `:quantity` - *required* - (Integer) The number of different headers
-  that you want CloudFront to forward to the origin and to vary on for this cache
-  behavior. The maximum number of headers that you can specify by name is 10. If you
-  want CloudFront to forward all headers to the origin and vary on all of them, specify
-  1 for Quantity and * for Name. If you don't want CloudFront to forward any additional
-  headers to the origin or to vary on any headers, specify 0 for Quantity and omit
-  Items.\n            * `:items` - (Array&lt;String>) Optional: A complex type that
-  contains a Name element for each header that you want CloudFront to forward to the
-  origin and to vary on for this cache behavior. If Quantity is 0, omit Items.\n            *
-  `:Name` - (String) \n        * `:referers` - (Hash) \n          * `:allow_blank_referer`
-  - (Boolean) \n          * `:referer_checks` - *required* - (String) Valid values
-  include:\n            * `none`\n            * `whitelist`\n          * `:whitelisted_patterns`
-  - (Hash) \n            * `:quantity` - *required* - (Integer) \n            * `:items`
-  - (Array&lt;String>) \n            * `:Name` - (String) \n        * `:trusted_signers`
-  - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
+  is 0, omit Items.\n          * `:Name` - (String) \n      * `:trusted_signers` -
+  *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
   for this cache behavior, specify  `true`  for Enabled, and specify the applicable
@@ -1223,59 +1076,145 @@
   \ for Enabled and 0 for Quantity. Omit Items. To add, change, or remove one or more
   trusted signers, change Enabled to  `true`  (if it's currently  `false` ), change
   Quantity as applicable, and specify all of the trusted signers that you want to
-  include in the updated distribution.\n          * `:enabled` - *required* - (Boolean)
+  include in the updated distribution.\n        * `:enabled` - *required* - (Boolean)
   Specifies whether you want to require end users to use signed URLs to access the
-  files specified by PathPattern and TargetOriginId.\n          * `:quantity` - *required*
-  - (Integer) The number of trusted signers for this cache behavior.\n          *
-  `:items` - (Array&lt;String>) Optional: A complex type that contains trusted signers
-  for this cache behavior. If Quantity is 0, you can omit Items.\n          * `:AwsAccountNumber`
-  - (String) \n        * `:viewer_protocol_policy` - *required* - (String) Use this
+  files specified by PathPattern and TargetOriginId.\n        * `:quantity` - *required*
+  - (Integer) The number of trusted signers for this cache behavior.\n        * `:items`
+  - (Array&lt;String>) Optional: A complex type that contains trusted signers for
+  this cache behavior. If Quantity is 0, you can omit Items.\n        * `:AwsAccountNumber`
+  - (String) \n      * `:viewer_protocol_policy` - *required* - (String) Use this
   element to specify the protocol that users can use to access the files in the origin
   specified by TargetOriginId when a request matches the path pattern in PathPattern.
   If you want CloudFront to allow end users to use any available protocol, specify
   allow-all. If you want CloudFront to require HTTPS, specify https. If you want CloudFront
   to respond to an HTTP request with an HTTP status code of 301 (Moved Permanently)
   and the HTTPS URL, specify redirect-to-https. The viewer then resubmits the request
-  using the HTTPS URL.  Valid values include:\n          * `allow-all`\n          *
-  `https-only`\n          * `redirect-to-https`\n        * `:min_ttl` - *required*
-  - (Integer) The minimum amount of time that you want objects to stay in CloudFront
-  caches before CloudFront queries your origin to see whether the object has been
-  updated.You can specify a value from 0 to 3,153,600,000 seconds (100 years).\n        *
-  `:allowed_methods` - (Hash) \n          * `:quantity` - *required* - (Integer) The
-  number of HTTP methods that you want CloudFront to forward to your origin. Valid
-  values are 2 (for GET and HEAD requests), 3 (for GET, HEAD and OPTIONS requests)
-  and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests).\n          *
-  `:items` - *required* - (Array&lt;String>) A complex type that contains the HTTP
-  methods that you want CloudFront to process and forward to your origin.\n          *
-  `:Method` - (String) \n          * `:cached_methods` - (Hash) \n            * `:quantity`
-  - *required* - (Integer) The number of HTTP methods for which you want CloudFront
-  to cache responses. Valid values are 2 (for caching responses to GET and HEAD requests)
-  and 3 (for caching responses to GET, HEAD, and OPTIONS requests).\n            *
-  `:items` - *required* - (Array&lt;String>) A complex type that contains the HTTP
-  methods that you want CloudFront to cache responses to.\n            * `:Method`
-  - (String) \n        * `:smooth_streaming` - (Boolean) Indicates whether you want
-  to distribute media files in Microsoft Smooth Streaming format using the origin
-  that is associated with this cache behavior. If so, specify  `true` ; if not, specify
-  \ `false` .\n    * `:custom_error_responses` - (Hash) A complex type that contains
-  zero or more CustomErrorResponse elements.\n      * `:quantity` - *required* - (Integer)
-  The number of custom error responses for this distribution.\n      * `:items` -
-  (Array&lt;Hash>) Optional: A complex type that contains custom error responses for
-  this distribution. If Quantity is 0, you can omit Items.\n      * `:CustomErrorResponse`
-  - (Hash) \n        * `:error_code` - *required* - (Integer) The 4xx or 5xx HTTP
-  status code that you want to customize. For a list of HTTP status codes that you
-  can customize, see CloudFront documentation.\n        * `:response_page_path` -
-  (String) The path of the custom error page (for example, /custom_404.html). The
-  path is relative to the distribution and must begin with a slash (/). If the path
-  includes any non-ASCII characters or unsafe characters as defined in RFC 1783 (http://www.ietf.org/rfc/rfc1738.txt),
-  URL encode those characters. Do not URL encode any other characters in the path,
-  or CloudFront will not return the custom error page to the viewer.\n        * `:response_code`
-  - (String) The HTTP status code that you want CloudFront to return with the custom
-  error page to the viewer. For a list of HTTP status codes that you can replace,
-  see CloudFront Documentation.\n        * `:error_caching_min_ttl` - (Integer) The
-  minimum amount of time you want HTTP error codes to stay in CloudFront caches before
-  CloudFront queries your origin to see whether the object has been updated. You can
-  specify a value from 0 to 31,536,000.\n    * `:comment` - *required* - (String)
-  Any comments you want to include about the distribution.\n    * `:logging` - (Hash)
+  using the HTTPS URL.  Valid values include:\n        * `allow-all`\n        * `https-only`\n
+  \       * `redirect-to-https`\n      * `:min_ttl` - *required* - (Integer) The minimum
+  amount of time that you want objects to stay in CloudFront caches before CloudFront
+  queries your origin to see whether the object has been updated.You can specify a
+  value from 0 to 3,153,600,000 seconds (100 years).\n      * `:allowed_methods` -
+  (Hash) \n        * `:quantity` - *required* - (Integer) The number of HTTP methods
+  that you want CloudFront to forward to your origin. Valid values are 2 (for GET
+  and HEAD requests), 3 (for GET, HEAD and OPTIONS requests) and 7 (for GET, HEAD,
+  OPTIONS, PUT, PATCH, POST, and DELETE requests).\n        * `:items` - *required*
+  - (Array&lt;String>) A complex type that contains the HTTP methods that you want
+  CloudFront to process and forward to your origin.\n        * `:Method` - (String)
+  \n        * `:cached_methods` - (Hash) \n          * `:quantity` - *required* -
+  (Integer) The number of HTTP methods for which you want CloudFront to cache responses.
+  Valid values are 2 (for caching responses to GET and HEAD requests) and 3 (for caching
+  responses to GET, HEAD, and OPTIONS requests).\n          * `:items` - *required*
+  - (Array&lt;String>) A complex type that contains the HTTP methods that you want
+  CloudFront to cache responses to.\n          * `:Method` - (String) \n      * `:smooth_streaming`
+  - (Boolean) Indicates whether you want to distribute media files in Microsoft Smooth
+  Streaming format using the origin that is associated with this cache behavior. If
+  so, specify  `true` ; if not, specify  `false` .\n    * `:cache_behaviors` - *required*
+  - (Hash) A complex type that contains zero or more CacheBehavior elements.\n      *
+  `:quantity` - *required* - (Integer) The number of cache behaviors for this distribution.\n
+  \     * `:items` - (Array&lt;Hash>) Optional: A complex type that contains cache
+  behaviors for this distribution. If Quantity is 0, you can omit Items.\n      *
+  `:CacheBehavior` - (Hash) \n        * `:path_pattern` - *required* - (String) The
+  pattern (for example, images/*.jpg) that specifies which requests you want this
+  cache behavior to apply to. When CloudFront receives an end-user request, the requested
+  path is compared with path patterns in the order in which cache behaviors are listed
+  in the distribution. The path pattern for the default cache behavior is * and cannot
+  be changed. If the request for an object does not match the path pattern for any
+  cache behaviors, CloudFront applies the behavior in the default cache behavior.\n
+  \       * `:target_origin_id` - *required* - (String) The value of ID for the origin
+  that you want CloudFront to route requests to when a request matches the path pattern
+  either for a cache behavior or for the default cache behavior.\n        * `:forwarded_values`
+  - *required* - (Hash) A complex type that specifies how CloudFront handles query
+  strings, cookies and headers.\n          * `:query_string` - *required* - (Boolean)
+  Indicates whether you want CloudFront to forward query strings to the origin that
+  is associated with this cache behavior. If so, specify  `true` ; if not, specify
+  \ `false` .\n          * `:cookies` - *required* - (Hash) A complex type that specifies
+  how CloudFront handles cookies.\n            * `:forward` - *required* - (String)
+  Use this element to specify whether you want CloudFront to forward cookies to the
+  origin that is associated with this cache behavior. You can specify all, none or
+  whitelist. If you choose All, CloudFront forwards all cookies regardless of how
+  many your application uses.  Valid values include:\n              * `none`\n              *
+  `whitelist`\n              * `all`\n            * `:whitelisted_names` - (Hash)
+  A complex type that specifies the whitelisted cookies, if any, that you want CloudFront
+  to forward to your origin that is associated with this cache behavior.\n              *
+  `:quantity` - *required* - (Integer) The number of whitelisted cookies for this
+  cache behavior.\n              * `:items` - (Array&lt;String>) Optional: A complex
+  type that contains whitelisted cookies for this cache behavior. If Quantity is 0,
+  you can omit Items.\n              * `:Name` - (String) \n          * `:headers`
+  - (Hash) A complex type that specifies the Headers, if any, that you want CloudFront
+  to vary upon for this cache behavior.\n            * `:quantity` - *required* -
+  (Integer) The number of different headers that you want CloudFront to forward to
+  the origin and to vary on for this cache behavior. The maximum number of headers
+  that you can specify by name is 10. If you want CloudFront to forward all headers
+  to the origin and vary on all of them, specify 1 for Quantity and * for Name. If
+  you don't want CloudFront to forward any additional headers to the origin or to
+  vary on any headers, specify 0 for Quantity and omit Items.\n            * `:items`
+  - (Array&lt;String>) Optional: A complex type that contains a Name element for each
+  header that you want CloudFront to forward to the origin and to vary on for this
+  cache behavior. If Quantity is 0, omit Items.\n            * `:Name` - (String)
+  \n        * `:trusted_signers` - *required* - (Hash) A complex type that specifies
+  the AWS accounts, if any, that you want to allow to create signed URLs for private
+  content. If you want to require signed URLs in requests for objects in the target
+  origin that match the PathPattern for this cache behavior, specify  `true`  for
+  Enabled, and specify the applicable values for Quantity and Items. For more information,
+  go to Using a Signed URL to Serve Private Content in the Amazon CloudFront Developer
+  Guide. If you don't want to require signed URLs in requests for objects that match
+  PathPattern, specify  `false`  for Enabled and 0 for Quantity. Omit Items. To add,
+  change, or remove one or more trusted signers, change Enabled to  `true`  (if it's
+  currently  `false` ), change Quantity as applicable, and specify all of the trusted
+  signers that you want to include in the updated distribution.\n          * `:enabled`
+  - *required* - (Boolean) Specifies whether you want to require end users to use
+  signed URLs to access the files specified by PathPattern and TargetOriginId.\n          *
+  `:quantity` - *required* - (Integer) The number of trusted signers for this cache
+  behavior.\n          * `:items` - (Array&lt;String>) Optional: A complex type that
+  contains trusted signers for this cache behavior. If Quantity is 0, you can omit
+  Items.\n          * `:AwsAccountNumber` - (String) \n        * `:viewer_protocol_policy`
+  - *required* - (String) Use this element to specify the protocol that users can
+  use to access the files in the origin specified by TargetOriginId when a request
+  matches the path pattern in PathPattern. If you want CloudFront to allow end users
+  to use any available protocol, specify allow-all. If you want CloudFront to require
+  HTTPS, specify https. If you want CloudFront to respond to an HTTP request with
+  an HTTP status code of 301 (Moved Permanently) and the HTTPS URL, specify redirect-to-https.
+  The viewer then resubmits the request using the HTTPS URL.  Valid values include:\n
+  \         * `allow-all`\n          * `https-only`\n          * `redirect-to-https`\n
+  \       * `:min_ttl` - *required* - (Integer) The minimum amount of time that you
+  want objects to stay in CloudFront caches before CloudFront queries your origin
+  to see whether the object has been updated.You can specify a value from 0 to 3,153,600,000
+  seconds (100 years).\n        * `:allowed_methods` - (Hash) \n          * `:quantity`
+  - *required* - (Integer) The number of HTTP methods that you want CloudFront to
+  forward to your origin. Valid values are 2 (for GET and HEAD requests), 3 (for GET,
+  HEAD and OPTIONS requests) and 7 (for GET, HEAD, OPTIONS, PUT, PATCH, POST, and
+  DELETE requests).\n          * `:items` - *required* - (Array&lt;String>) A complex
+  type that contains the HTTP methods that you want CloudFront to process and forward
+  to your origin.\n          * `:Method` - (String) \n          * `:cached_methods`
+  - (Hash) \n            * `:quantity` - *required* - (Integer) The number of HTTP
+  methods for which you want CloudFront to cache responses. Valid values are 2 (for
+  caching responses to GET and HEAD requests) and 3 (for caching responses to GET,
+  HEAD, and OPTIONS requests).\n            * `:items` - *required* - (Array&lt;String>)
+  A complex type that contains the HTTP methods that you want CloudFront to cache
+  responses to.\n            * `:Method` - (String) \n        * `:smooth_streaming`
+  - (Boolean) Indicates whether you want to distribute media files in Microsoft Smooth
+  Streaming format using the origin that is associated with this cache behavior. If
+  so, specify  `true` ; if not, specify  `false` .\n    * `:custom_error_responses`
+  - (Hash) A complex type that contains zero or more CustomErrorResponse elements.\n
+  \     * `:quantity` - *required* - (Integer) The number of custom error responses
+  for this distribution.\n      * `:items` - (Array&lt;Hash>) Optional: A complex
+  type that contains custom error responses for this distribution. If Quantity is
+  0, you can omit Items.\n      * `:CustomErrorResponse` - (Hash) \n        * `:error_code`
+  - *required* - (Integer) The 4xx or 5xx HTTP status code that you want to customize.
+  For a list of HTTP status codes that you can customize, see CloudFront documentation.\n
+  \       * `:response_page_path` - (String) The path of the custom error page (for
+  example, /custom_404.html). The path is relative to the distribution and must begin
+  with a slash (/). If the path includes any non-ASCII characters or unsafe characters
+  as defined in RFC 1783 (http://www.ietf.org/rfc/rfc1738.txt), URL encode those characters.
+  Do not URL encode any other characters in the path, or CloudFront will not return
+  the custom error page to the viewer.\n        * `:response_code` - (String) The
+  HTTP status code that you want CloudFront to return with the custom error page to
+  the viewer. For a list of HTTP status codes that you can replace, see CloudFront
+  Documentation.\n        * `:error_caching_min_ttl` - (Integer) The minimum amount
+  of time you want HTTP error codes to stay in CloudFront caches before CloudFront
+  queries your origin to see whether the object has been updated. You can specify
+  a value from 0 to 31,536,000.\n    * `:comment` - *required* - (String) Any comments
+  you want to include about the distribution.\n    * `:logging` - *required* - (Hash)
   A complex type that controls whether access logs are written for the distribution.\n
   \     * `:enabled` - *required* - (Boolean) Specifies whether you want CloudFront
   to save access logs to an Amazon S3 bucket. If you do not want to enable logging
@@ -1294,40 +1233,40 @@
   to prefix to the access log filenames for this distribution, for example, myprefix/.
   If you want to enable logging, but you do not want to specify a prefix, you still
   must include an empty Prefix element in the Logging element.\n    * `:price_class`
-  - (String) A complex type that contains information about price class for this distribution.
-  \ Valid values include:\n      * `PriceClass_100`\n      * `PriceClass_200`\n      *
-  `PriceClass_All`\n    * `:enabled` - *required* - (Boolean) Whether the distribution
-  is enabled to accept end user requests for content.\n    * `:viewer_certificate`
-  - (Hash) \n      * `:iam_certificate_id` - (String) If you want viewers to use HTTPS
-  to request your objects and you're using an alternate domain name in your object
-  URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier
-  of the custom viewer certificate for this distribution. Specify either this value
-  or CloudFrontDefaultCertificate.\n      * `:cloud_front_default_certificate` - (Boolean)
-  If you want viewers to use HTTPS to request your objects and you're using the CloudFront
-  domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg),
-  set to  `true` . Omit this value if you are setting an IAMCertificateId.\n      *
-  `:ssl_support_method` - (String) If you specify a value for IAMCertificateId, you
-  must also specify how you want CloudFront to serve HTTPS requests. Valid values
-  are vip and sni-only. If you specify vip, CloudFront uses dedicated IP addresses
-  for your content and can respond to HTTPS requests from any viewer. However, you
-  must request permission to use this feature, and you incur additional monthly charges.
-  If you specify sni-only, CloudFront can only respond to HTTPS requests from viewers
-  that support Server Name Indication (SNI). All modern browsers support SNI, but
-  some browsers still in use don't support SNI. Do not specify a value for SSLSupportMethod
-  if you specified  `true`  for CloudFrontDefaultCertificate.  Valid values include:\n
-  \       * `sni-only`\n        * `vip`\n      * `:minimum_protocol_version` - (String)
-  Specify the minimum version of the SSL protocol that you want CloudFront to use,
-  SSLv3 or TLSv1, for HTTPS connections. CloudFront will serve your objects only to
-  browsers or devices that support at least the SSL version that you specify. The
-  TLSv1 protocol is more secure, so we recommend that you specify SSLv3 only if your
-  users are using browsers or devices that don't support TLSv1. If you're using a
-  custom certificate (if you specify a value for IAMCertificateId) and if you're using
-  dedicated IP (if you specify vip for SSLSupportMethod), you can choose SSLv3 or
-  TLSv1 as the MinimumProtocolVersion. If you're using a custom certificate (if you
-  specify a value for IAMCertificateId) and if you're using SNI (if you specify sni-only
-  for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.  Valid
-  values include:\n        * `SSLv3`\n        * `TLSv1`\n    * `:restrictions` - (Hash)
-  \n      * `:geo_restriction` - *required* - (Hash) \n        * `:restriction_type`
+  - *required* - (String) A complex type that contains information about price class
+  for this distribution.  Valid values include:\n      * `PriceClass_100`\n      *
+  `PriceClass_200`\n      * `PriceClass_All`\n    * `:enabled` - *required* - (Boolean)
+  Whether the distribution is enabled to accept end user requests for content.\n    *
+  `:viewer_certificate` - (Hash) \n      * `:iam_certificate_id` - (String) If you
+  want viewers to use HTTPS to request your objects and you're using an alternate
+  domain name in your object URLs (for example, https://example.com/logo.jpg), specify
+  the IAM certificate identifier of the custom viewer certificate for this distribution.
+  Specify either this value or CloudFrontDefaultCertificate.\n      * `:cloud_front_default_certificate`
+  - (Boolean) If you want viewers to use HTTPS to request your objects and you're
+  using the CloudFront domain name of your distribution in your object URLs (for example,
+  https://d111111abcdef8.cloudfront.net/logo.jpg), set to  `true` . Omit this value
+  if you are setting an IAMCertificateId.\n      * `:ssl_support_method` - (String)
+  If you specify a value for IAMCertificateId, you must also specify how you want
+  CloudFront to serve HTTPS requests. Valid values are vip and sni-only. If you specify
+  vip, CloudFront uses dedicated IP addresses for your content and can respond to
+  HTTPS requests from any viewer. However, you must request permission to use this
+  feature, and you incur additional monthly charges. If you specify sni-only, CloudFront
+  can only respond to HTTPS requests from viewers that support Server Name Indication
+  (SNI). All modern browsers support SNI, but some browsers still in use don't support
+  SNI. Do not specify a value for SSLSupportMethod if you specified  `true`  for CloudFrontDefaultCertificate.
+  \ Valid values include:\n        * `sni-only`\n        * `vip`\n      * `:minimum_protocol_version`
+  - (String) Specify the minimum version of the SSL protocol that you want CloudFront
+  to use, SSLv3 or TLSv1, for HTTPS connections. CloudFront will serve your objects
+  only to browsers or devices that support at least the SSL version that you specify.
+  The TLSv1 protocol is more secure, so we recommend that you specify SSLv3 only if
+  your users are using browsers or devices that don't support TLSv1. If you're using
+  a custom certificate (if you specify a value for IAMCertificateId) and if you're
+  using dedicated IP (if you specify vip for SSLSupportMethod), you can choose SSLv3
+  or TLSv1 as the MinimumProtocolVersion. If you're using a custom certificate (if
+  you specify a value for IAMCertificateId) and if you're using SNI (if you specify
+  sni-only for SSLSupportMethod), you must specify TLSv1 for MinimumProtocolVersion.
+  \ Valid values include:\n        * `SSLv3`\n        * `TLSv1`\n    * `:restrictions`
+  - (Hash) \n      * `:geo_restriction` - *required* - (Hash) \n        * `:restriction_type`
   - *required* - (String) The method that you want to use to restrict distribution
   of your content by country: - none: No geo restriction is enabled, meaning access
   to content is not restricted by client geo location. - blacklist: The Location elements
@@ -1359,32 +1298,26 @@
   `:quantity` - (Integer)\n      * `:items` - (Array<String>)\n    * `:default_root_object`
   - (String)\n    * `:origins` - (Hash)\n      * `:quantity` - (Integer)\n      *
   `:items` - (Array<Hash>)\n        * `:id` - (String)\n        * `:domain_name` -
-  (String)\n        * `:origin_path` - (String)\n        * `:s3_origin_config` - (Hash)\n
-  \         * `:origin_access_identity` - (String)\n        * `:custom_origin_config`
-  - (Hash)\n          * `:http_port` - (Integer)\n          * `:https_port` - (Integer)\n
-  \         * `:origin_protocol_policy` - (String)\n    * `:default_cache_behavior`
-  - (Hash)\n      * `:target_origin_id` - (String)\n      * `:forwarded_values` -
-  (Hash)\n        * `:query_string` - (Boolean)\n        * `:cookies` - (Hash)\n          *
-  `:forward` - (String)\n          * `:whitelisted_names` - (Hash)\n            *
-  `:quantity` - (Integer)\n            * `:items` - (Array<String>)\n        * `:headers`
-  - (Hash)\n          * `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n
-  \     * `:referers` - (Hash)\n        * `:allow_blank_referer` - (Boolean)\n        *
-  `:referer_checks` - (String)\n        * `:whitelisted_patterns` - (Hash)\n          *
-  `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n      * `:trusted_signers`
-  - (Hash)\n        * `:enabled` - (Boolean)\n        * `:quantity` - (Integer)\n
-  \       * `:items` - (Array<String>)\n      * `:viewer_protocol_policy` - (String)\n
-  \     * `:min_ttl` - (Integer)\n      * `:allowed_methods` - (Hash)\n        * `:quantity`
-  - (Integer)\n        * `:items` - (Array<String>)\n        * `:cached_methods` -
-  (Hash)\n          * `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n
-  \     * `:smooth_streaming` - (Boolean)\n    * `:cache_behaviors` - (Hash)\n      *
-  `:quantity` - (Integer)\n      * `:items` - (Array<Hash>)\n        * `:path_pattern`
-  - (String)\n        * `:target_origin_id` - (String)\n        * `:forwarded_values`
-  - (Hash)\n          * `:query_string` - (Boolean)\n          * `:cookies` - (Hash)\n
-  \           * `:forward` - (String)\n            * `:whitelisted_names` - (Hash)\n
-  \             * `:quantity` - (Integer)\n              * `:items` - (Array<String>)\n
-  \         * `:headers` - (Hash)\n            * `:quantity` - (Integer)\n            *
-  `:items` - (Array<String>)\n        * `:referers` - (Hash)\n          * `:allow_blank_referer`
-  - (Boolean)\n          * `:referer_checks` - (String)\n          * `:whitelisted_patterns`
+  (String)\n        * `:s3_origin_config` - (Hash)\n          * `:origin_access_identity`
+  - (String)\n        * `:custom_origin_config` - (Hash)\n          * `:http_port`
+  - (Integer)\n          * `:https_port` - (Integer)\n          * `:origin_protocol_policy`
+  - (String)\n    * `:default_cache_behavior` - (Hash)\n      * `:target_origin_id`
+  - (String)\n      * `:forwarded_values` - (Hash)\n        * `:query_string` - (Boolean)\n
+  \       * `:cookies` - (Hash)\n          * `:forward` - (String)\n          * `:whitelisted_names`
+  - (Hash)\n            * `:quantity` - (Integer)\n            * `:items` - (Array<String>)\n
+  \       * `:headers` - (Hash)\n          * `:quantity` - (Integer)\n          *
+  `:items` - (Array<String>)\n      * `:trusted_signers` - (Hash)\n        * `:enabled`
+  - (Boolean)\n        * `:quantity` - (Integer)\n        * `:items` - (Array<String>)\n
+  \     * `:viewer_protocol_policy` - (String)\n      * `:min_ttl` - (Integer)\n      *
+  `:allowed_methods` - (Hash)\n        * `:quantity` - (Integer)\n        * `:items`
+  - (Array<String>)\n        * `:cached_methods` - (Hash)\n          * `:quantity`
+  - (Integer)\n          * `:items` - (Array<String>)\n      * `:smooth_streaming`
+  - (Boolean)\n    * `:cache_behaviors` - (Hash)\n      * `:quantity` - (Integer)\n
+  \     * `:items` - (Array<Hash>)\n        * `:path_pattern` - (String)\n        *
+  `:target_origin_id` - (String)\n        * `:forwarded_values` - (Hash)\n          *
+  `:query_string` - (Boolean)\n          * `:cookies` - (Hash)\n            * `:forward`
+  - (String)\n            * `:whitelisted_names` - (Hash)\n              * `:quantity`
+  - (Integer)\n              * `:items` - (Array<String>)\n          * `:headers`
   - (Hash)\n            * `:quantity` - (Integer)\n            * `:items` - (Array<String>)\n
   \       * `:trusted_signers` - (Hash)\n          * `:enabled` - (Boolean)\n          *
   `:quantity` - (Integer)\n          * `:items` - (Array<String>)\n        * `:viewer_protocol_policy`
@@ -1419,26 +1352,26 @@
   about the Amazon S3 bucket from which you want CloudFront to get your media files
   for distribution.\n      * `:domain_name` - *required* - (String) The DNS name of
   the S3 origin.\n      * `:origin_access_identity` - *required* - (String) Your S3
-  origin's origin access identity.\n    * `:aliases` - (Hash) A complex type that
-  contains information about CNAMEs (alternate domain names), if any, for this streaming
-  distribution.\n      * `:quantity` - *required* - (Integer) The number of CNAMEs,
-  if any, for this distribution.\n      * `:items` - (Array&lt;String>) Optional:
-  A complex type that contains CNAME elements, if any, for this distribution. If Quantity
-  is 0, you can omit Items.\n      * `:CNAME` - (String) \n    * `:comment` - *required*
-  - (String) Any comments you want to include about the streaming distribution.\n
-  \   * `:logging` - (Hash) A complex type that controls whether access logs are written
-  for the streaming distribution.\n      * `:enabled` - *required* - (Boolean) Specifies
-  whether you want CloudFront to save access logs to an Amazon S3 bucket. If you do
-  not want to enable logging when you create a streaming distribution or if you want
-  to disable logging for an existing streaming distribution, specify  `false`  for
-  Enabled, and specify empty Bucket and Prefix elements. If you specify  `false`  for
-  Enabled but you specify values for Bucket and Prefix, the values are automatically
-  deleted.\n      * `:bucket` - *required* - (String) The Amazon S3 bucket to store
-  the access logs in, for example, myawslogbucket.s3.amazonaws.com.\n      * `:prefix`
-  - *required* - (String) An optional string that you want CloudFront to prefix to
-  the access log filenames for this streaming distribution, for example, myprefix/.
-  If you want to enable logging, but you do not want to specify a prefix, you still
-  must include an empty Prefix element in the Logging element.\n    * `:trusted_signers`
+  origin's origin access identity.\n    * `:aliases` - *required* - (Hash) A complex
+  type that contains information about CNAMEs (alternate domain names), if any, for
+  this streaming distribution.\n      * `:quantity` - *required* - (Integer) The number
+  of CNAMEs, if any, for this distribution.\n      * `:items` - (Array&lt;String>)
+  Optional: A complex type that contains CNAME elements, if any, for this distribution.
+  If Quantity is 0, you can omit Items.\n      * `:CNAME` - (String) \n    * `:comment`
+  - *required* - (String) Any comments you want to include about the streaming distribution.\n
+  \   * `:logging` - *required* - (Hash) A complex type that controls whether access
+  logs are written for the streaming distribution.\n      * `:enabled` - *required*
+  - (Boolean) Specifies whether you want CloudFront to save access logs to an Amazon
+  S3 bucket. If you do not want to enable logging when you create a streaming distribution
+  or if you want to disable logging for an existing streaming distribution, specify
+  \ `false`  for Enabled, and specify empty Bucket and Prefix elements. If you specify
+  \ `false`  for Enabled but you specify values for Bucket and Prefix, the values
+  are automatically deleted.\n      * `:bucket` - *required* - (String) The Amazon
+  S3 bucket to store the access logs in, for example, myawslogbucket.s3.amazonaws.com.\n
+  \     * `:prefix` - *required* - (String) An optional string that you want CloudFront
+  to prefix to the access log filenames for this streaming distribution, for example,
+  myprefix/. If you want to enable logging, but you do not want to specify a prefix,
+  you still must include an empty Prefix element in the Logging element.\n    * `:trusted_signers`
   - *required* - (Hash) A complex type that specifies the AWS accounts, if any, that
   you want to allow to create signed URLs for private content. If you want to require
   signed URLs in requests for objects in the target origin that match the PathPattern
@@ -1455,13 +1388,13 @@
   - (Integer) The number of trusted signers for this cache behavior.\n      * `:items`
   - (Array&lt;String>) Optional: A complex type that contains trusted signers for
   this cache behavior. If Quantity is 0, you can omit Items.\n      * `:AwsAccountNumber`
-  - (String) \n    * `:price_class` - (String) A complex type that contains information
-  about price class for this streaming distribution.  Valid values include:\n      *
-  `PriceClass_100`\n      * `PriceClass_200`\n      * `PriceClass_All`\n    * `:enabled`
-  - *required* - (Boolean) Whether the streaming distribution is enabled to accept
-  end user requests for content.\n  * `:id` - *required* - (String) The streaming
-  distribution's id.\n  * `:if_match` - (String) The value of the ETag header you
-  received when retrieving the streaming distribution's configuration. For example:
+  - (String) \n    * `:price_class` - *required* - (String) A complex type that contains
+  information about price class for this streaming distribution.  Valid values include:\n
+  \     * `PriceClass_100`\n      * `PriceClass_200`\n      * `PriceClass_All`\n    *
+  `:enabled` - *required* - (Boolean) Whether the streaming distribution is enabled
+  to accept end user requests for content.\n  * `:id` - *required* - (String) The
+  streaming distribution's id.\n  * `:if_match` - (String) The value of the ETag header
+  you received when retrieving the streaming distribution's configuration. For example:
   E2QWRUHAPOMQZL.\n@return [Core::Response] The `#data` method of the response object
   returns a hash with the following structure:\n\n  * `:id` - (String)\n  * `:status`
   - (String)\n  * `:last_modified_time` - (Time)\n  * `:domain_name` - (String)\n
