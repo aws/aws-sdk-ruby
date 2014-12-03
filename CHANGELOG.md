@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::STS::Client - Resolved an issue with the endpoint used for Gov Cloud.
+  Resolves issue #167.
+
 * Issue - Persistent Connections - Resolved an issue that prevented Aws::S3::Client
   from re-using HTTP connections.
 
