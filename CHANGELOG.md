@@ -1,3 +1,9 @@
+Unreleased Changes
+------------------
+
+* Issue - Persistent Connections - Resolved an issue that prevented Aws::S3::Client
+  from re-using HTTP connections.
+
 2.0.11 (2014-11-26)
 ------------------
 
@@ -383,7 +389,7 @@
   See the client API documentation for `#wait_until` and the resource API
   documentation for `#wait_until_{condition}`.
 
-* Feature - Resources - Merged in resources branch. You can now use 
+* Feature - Resources - Merged in resources branch. You can now use
   resource-oriented interfaces with `Aws::S3`, `Aws::EC2`, `Aws::SQS`,
   `Aws::SNS`, `Aws::Glacier`,
   and `Aws::IAM`.

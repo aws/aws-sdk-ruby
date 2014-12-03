@@ -84,14 +84,14 @@ module Seahorse
           end
         end
 
-        # @param [URI::HTTP, URI::HTTPS, String] endpoint The HTTP(S) endpoint
+        # @param [URI::HTTP, URI::HTTPS] endpoint The HTTP(S) endpoint
         #    to connect to (e.g. 'https://domain.com').
         #
         # @yieldparam [Net::HTTPSession] session
         #
         # @return [nil]
         def session_for(endpoint, &block)
-          endpoint = endpoint.to_s
+          endpoint = remove_path_and_query(endpoint)
           session = nil
 
           # attempt to recycle an already open session
@@ -151,13 +151,22 @@ module Seahorse
           nil
         end
 
+        private
+
+        def remove_path_and_query(endpoint)
+          endpoint.dup.tap do |e|
+            e.path = ''
+            e.query = nil
+          end.to_s
+        end
+
         class << self
 
           # Returns a connection pool constructed from the given options.
           # Calling this method twice with the same options will return
           # the same pool.
           #
-          # @option options [URI::HTTP,String] :http_proxy A proxy to send 
+          # @option options [URI::HTTP,String] :http_proxy A proxy to send
           #   requests through.  Formatted like 'http://proxy.com:123'.
           #
           # @option options [Float] :http_open_timeout (15) The number of

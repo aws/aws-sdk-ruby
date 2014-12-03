@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'ostruct'
 require 'stringio'
+require 'uri'
 
 module Seahorse
   module Client
@@ -24,6 +25,27 @@ module Seahorse
 
         def endpoint
           @endpoint ||= 'http://test.endpoint.api'
+        end
+
+        describe '#session_for' do
+
+          it 're-uses session for endpoints that share port, scheme and host' do
+            session = double('http-session', last_used: Time.now).as_null_object
+            pool = ConnectionPool.for({})
+            expect(pool).to receive(:start_session).
+              exactly(1).times.
+              with('http://foo.com').
+              and_return(session)
+            endpoint1 = URI.parse('http://foo.com/path?query')
+            endpoint2 = URI.parse('http://foo.com/different')
+            endpoint3 = URI.parse('http://foo.com')
+            sessions = []
+            pool.session_for(endpoint1) { |https| sessions << https }
+            pool.session_for(endpoint2) { |https| sessions << https }
+            pool.session_for(endpoint3) { |https| sessions << https }
+            expect(sessions).to eq([session, session, session])
+          end
+
         end
 
         describe '#pool' do
