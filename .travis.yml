@@ -1,22 +1,25 @@
+language: ruby
+
+rvm:
+  - 1.9.3
+  - 2.0.0
+  - 2.1
+  - jruby
+
+sudo: false
+
+env:
+  - PURE_RUBY=1
+  - NOKOGIRI=1
+  - OX=1 OJ=1
+
 script: bundle exec rake
+
 bundler_args: --without docs release repl
+
 branches:
   only:
   - master
-
-rvm:
-- 1.9.3
-- 2.0.0
-- 2.1.2
-- jruby
-
-env:
-- PURE_RUBY=1
-- NOKOGIRI=1
-- OX=1 OJ=1
-
-gemfile:
-- Gemfile
 
 matrix:
   exclude:
