@@ -12,6 +12,7 @@
 # language governing permissions and limitations under the License.
 
 require 'spec_helper'
+require 'openssl'
 
 module AWS
   class SQS
@@ -70,7 +71,7 @@ module AWS
         before(:each) do
           resp.data[:message_id] = 'abc123'
           resp.data[:md5_of_message_body] = valid_md5
-          Digest::MD5.stub(:hexdigest).and_return(valid_md5)
+          OpenSSL::Digest::MD5.stub(:hexdigest).and_return(valid_md5)
           client.stub(:send_message).and_return(resp)
         end
 
@@ -132,7 +133,7 @@ module AWS
 
         before(:each) do
           resp.data[:messages] = [response_message]
-          Digest::MD5.stub(:hexdigest).and_return(valid_md5)
+          OpenSSL::Digest::MD5.stub(:hexdigest).and_return(valid_md5)
           client.stub(:receive_message).and_return(resp)
         end
 
@@ -1056,7 +1057,7 @@ module AWS
           let(:valid_md5) { 'md5' }
 
           before(:each) do
-            Digest::MD5.stub(:hexdigest).and_return(valid_md5)
+            OpenSSL::Digest::MD5.stub(:hexdigest).and_return(valid_md5)
             client.stub(:send_message_batch).and_return(response)
           end
 
