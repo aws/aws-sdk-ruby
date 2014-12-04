@@ -48,8 +48,8 @@ task 'release:cleanup' => [
 
 desc "Public release, `VERSION=x.y.z rake release`"
 task :release => [
-  #'release:check',
-  #'test',
+  'release:check',
+  'test',
   'release:build',
   'release:publish',
   'release:cleanup'
