@@ -232,6 +232,29 @@
         }
       ]
     },
+    "PutRecords":{
+      "name":"PutRecords",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutRecordsInput"},
+      "output":{"shape":"PutRecordsOutput"},
+      "errors":[
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidArgumentException",
+          "exception":true
+        },
+        {
+          "shape":"ProvisionedThroughputExceededException",
+          "exception":true
+        }
+      ]
+    },
     "RemoveTagsFromStream":{
       "name":"RemoveTagsFromStream",
       "http":{
@@ -342,6 +365,7 @@
         "StreamDescription":{"shape":"StreamDescription"}
       }
     },
+    "ErrorCode":{"type":"string"},
     "ErrorMessage":{"type":"string"},
     "ExpiredIteratorException":{
       "type":"structure",
@@ -522,6 +546,58 @@
         "ShardId":{"shape":"ShardId"},
         "SequenceNumber":{"shape":"SequenceNumber"}
       }
+    },
+    "PutRecordsInput":{
+      "type":"structure",
+      "required":[
+        "Records",
+        "StreamName"
+      ],
+      "members":{
+        "Records":{"shape":"PutRecordsRequestEntryList"},
+        "StreamName":{"shape":"StreamName"}
+      }
+    },
+    "PutRecordsOutput":{
+      "type":"structure",
+      "required":["Records"],
+      "members":{
+        "FailedRecordCount":{"shape":"PositiveIntegerObject"},
+        "Records":{"shape":"PutRecordsResultEntryList"}
+      }
+    },
+    "PutRecordsRequestEntry":{
+      "type":"structure",
+      "required":[
+        "Data",
+        "PartitionKey"
+      ],
+      "members":{
+        "Data":{"shape":"Data"},
+        "ExplicitHashKey":{"shape":"HashKey"},
+        "PartitionKey":{"shape":"PartitionKey"}
+      }
+    },
+    "PutRecordsRequestEntryList":{
+      "type":"list",
+      "member":{"shape":"PutRecordsRequestEntry"},
+      "min":1,
+      "max":500
+    },
+    "PutRecordsResultEntry":{
+      "type":"structure",
+      "members":{
+        "SequenceNumber":{"shape":"SequenceNumber"},
+        "ShardId":{"shape":"ShardId"},
+        "ErrorCode":{"shape":"ErrorCode"},
+        "ErrorMessage":{"shape":"ErrorMessage"}
+      }
+    },
+    "PutRecordsResultEntryList":{
+      "type":"list",
+      "member":{"shape":"PutRecordsResultEntry"},
+      "min":1,
+      "max":500
     },
     "Record":{
       "type":"structure",

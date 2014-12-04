@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kinesis - Added support to `Aws::Kinesis::Client` for the new
+  PutRecords operation.
+
+  ```ruby
+  kinesis = Aws::Kinesis::Client.new
+  kinesis.put_records(stream_name: '...', records:[...])
+  ```
+
 * Issue - Aws::STS::Client - Resolved an issue with the endpoint used for Gov Cloud.
   Resolves issue #167.
 
