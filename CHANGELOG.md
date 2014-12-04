@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Added support to `Aws::IAM::Client` for the new
+  GetAccountAuthorizationDetails operation.
+
 * Feature - Aws::Kinesis - Added support to `Aws::Kinesis::Client` for the new
   PutRecords operation.
 
