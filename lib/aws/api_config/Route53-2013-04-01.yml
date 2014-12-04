@@ -675,7 +675,7 @@
         :ignore: true
         :children:
           VPC:
-            :rename: :vp_cs
+            :rename: :vpcs
             :list: true
             :children:
               VPCRegion:
