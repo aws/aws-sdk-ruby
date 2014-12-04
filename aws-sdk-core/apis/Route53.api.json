@@ -111,6 +111,11 @@
           "exception":true
         },
         {
+          "shape":"NoSuchHostedZone",
+          "error":{"httpStatusCode":404},
+          "exception":true
+        },
+        {
           "shape":"PriorRequestNotComplete",
           "error":{"httpStatusCode":400},
           "exception":true
@@ -660,6 +665,11 @@
           "exception":true
         },
         {
+          "shape":"NoSuchHostedZone",
+          "error":{"httpStatusCode":404},
+          "exception":true
+        },
+        {
           "shape":"PriorRequestNotComplete",
           "error":{"httpStatusCode":400},
           "exception":true
@@ -691,6 +701,11 @@
         },
         {
           "shape":"NoSuchHealthCheck",
+          "error":{"httpStatusCode":404},
+          "exception":true
+        },
+        {
+          "shape":"NoSuchHostedZone",
           "error":{"httpStatusCode":404},
           "exception":true
         },
@@ -732,6 +747,31 @@
         {
           "shape":"HealthCheckVersionMismatch",
           "error":{"httpStatusCode":409},
+          "exception":true
+        }
+      ]
+    },
+    "UpdateHostedZoneComment":{
+      "name":"UpdateHostedZoneComment",
+      "http":{
+        "method":"POST",
+        "requestUri":"/2013-04-01/hostedzone/{Id}"
+      },
+      "input":{
+        "shape":"UpdateHostedZoneCommentRequest",
+        "xmlNamespace":{"uri":"https://route53.amazonaws.com/doc/2013-04-01/"},
+        "locationName":"UpdateHostedZoneCommentRequest"
+      },
+      "output":{"shape":"UpdateHostedZoneCommentResponse"},
+      "errors":[
+        {
+          "shape":"NoSuchHostedZone",
+          "error":{"httpStatusCode":404},
+          "exception":true
+        },
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
           "exception":true
         }
       ]
@@ -2061,7 +2101,10 @@
     },
     "TagResourceType":{
       "type":"string",
-      "enum":["healthcheck"]
+      "enum":[
+        "healthcheck",
+        "hostedzone"
+      ]
     },
     "TagValue":{
       "type":"string",
@@ -2114,6 +2157,25 @@
       "required":["HealthCheck"],
       "members":{
         "HealthCheck":{"shape":"HealthCheck"}
+      }
+    },
+    "UpdateHostedZoneCommentRequest":{
+      "type":"structure",
+      "required":["Id"],
+      "members":{
+        "Id":{
+          "shape":"ResourceId",
+          "location":"uri",
+          "locationName":"Id"
+        },
+        "Comment":{"shape":"ResourceDescription"}
+      }
+    },
+    "UpdateHostedZoneCommentResponse":{
+      "type":"structure",
+      "required":["HostedZone"],
+      "members":{
+        "HostedZone":{"shape":"HostedZone"}
       }
     },
     "VPC":{

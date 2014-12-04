@@ -26,7 +26,8 @@
     "ListReusableDelegationSets": "<p> To retrieve a list of your reusable delegation sets, send a <code>GET</code> request to the <code>2013-04-01/delegationset</code> resource. The response to this request includes a <code>DelegationSets</code> element with zero, one, or multiple <code>DelegationSet</code> child elements. By default, the list of delegation sets is displayed on a single page. You can control the length of the page that is displayed by using the <code>MaxItems</code> parameter. You can use the <code>Marker</code> parameter to control the delegation set that the list begins with. </p> <note> Amazon Route 53 returns a maximum of 100 items. If you set MaxItems to a value greater than 100, Amazon Route 53 returns only the first 100.</note>",
     "ListTagsForResource": null,
     "ListTagsForResources": null,
-    "UpdateHealthCheck": "<p> This action updates an existing health check.</p> <p> To update a health check, send a <code>POST</code> request to the <code>2013-04-01/healthcheck/<i>health check ID</i></code> resource. The request body must include an XML document with an <code>UpdateHealthCheckRequest</code> element. The response returns an <code>UpdateHealthCheckResponse</code> element, which contains metadata about the health check.</p>"
+    "UpdateHealthCheck": "<p> This action updates an existing health check.</p> <p> To update a health check, send a <code>POST</code> request to the <code>2013-04-01/healthcheck/<i>health check ID</i></code> resource. The request body must include an XML document with an <code>UpdateHealthCheckRequest</code> element. The response returns an <code>UpdateHealthCheckResponse</code> element, which contains metadata about the health check.</p>",
+    "UpdateHostedZoneComment": "<p> To update the hosted zone comment, send a <code>POST</code> request to the <code>2013-04-01/hostedzone/<i>hosted zone ID</i></code> resource. The request body must include an XML document with a <code>UpdateHostedZoneCommentRequest</code> element. The response to this request includes the modified <code>HostedZone</code> element.</p> <note> The comment can have a maximum length of 256 characters.</note>"
   },
   "service": null,
   "shapes": {
@@ -571,7 +572,8 @@
       "refs": {
         "CreateHostedZoneResponse$HostedZone": "<p>A complex type that contains identifying information about the hosted zone.</p>",
         "GetHostedZoneResponse$HostedZone": "<p>A complex type that contains the information about the specified hosted zone.</p>",
-        "HostedZones$member": null
+        "HostedZones$member": null,
+        "UpdateHostedZoneCommentResponse$HostedZone": null
       }
     },
     "HostedZoneAlreadyExists": {
@@ -853,7 +855,8 @@
       "refs": {
         "ChangeBatch$Comment": "<p><i>Optional:</i> Any comments you want to include about a change batch request.</p>",
         "ChangeInfo$Comment": "<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a <a>GetChange</a> action to get detailed information about the change.</p>",
-        "HostedZoneConfig$Comment": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>"
+        "HostedZoneConfig$Comment": "<p>An optional comment about your hosted zone. If you don't want to specify a comment, you can omit the <code>HostedZoneConfig</code> and <code>Comment</code> elements from the XML document.</p>",
+        "UpdateHostedZoneCommentRequest$Comment": "<p>A comment about your hosted zone.</p>"
       }
     },
     "ResourceId": {
@@ -874,7 +877,8 @@
         "GetReusableDelegationSetRequest$Id": "<p>The ID of the reusable delegation set for which you want to get a list of the name server.</p>",
         "HostedZone$Id": "<p>The ID of the specified hosted zone.</p>",
         "ListHostedZonesRequest$DelegationSetId": null,
-        "ListResourceRecordSetsRequest$HostedZoneId": "<p> The ID of the hosted zone that contains the resource record sets that you want to get.</p>"
+        "ListResourceRecordSetsRequest$HostedZoneId": "<p> The ID of the hosted zone that contains the resource record sets that you want to get.</p>",
+        "UpdateHostedZoneCommentRequest$Id": "<p>The ID of the hosted zone you want to update.</p>"
       }
     },
     "ResourcePath": {
@@ -1025,10 +1029,10 @@
     "TagResourceType": {
       "base": null,
       "refs": {
-        "ChangeTagsForResourceRequest$ResourceType": "<p>The type of the resource. The resource type for health checks is <code>healthcheck</code>.</p>",
-        "ListTagsForResourceRequest$ResourceType": "<p>The type of the resource. The resource type for health checks is <code>healthcheck</code>.</p>",
-        "ListTagsForResourcesRequest$ResourceType": "<p>The type of the resources. The resource type for health checks is <code>healthcheck</code>.</p>",
-        "ResourceTagSet$ResourceType": "<p>The type of the resource. The resource type for health checks is <code>healthcheck</code>.</p>"
+        "ChangeTagsForResourceRequest$ResourceType": "<p>The type of the resource.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>",
+        "ListTagsForResourceRequest$ResourceType": "<p>The type of the resource.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>",
+        "ListTagsForResourcesRequest$ResourceType": "<p>The type of the resources.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>",
+        "ResourceTagSet$ResourceType": "<p>The type of the resource.</p> <p>- The resource type for health checks is <code>healthcheck</code>.</p> <p>- The resource type for hosted zones is <code>hostedzone</code>.</p>"
       }
     },
     "TagValue": {
@@ -1066,6 +1070,16 @@
     },
     "UpdateHealthCheckResponse": {
       "base": null,
+      "refs": {
+      }
+    },
+    "UpdateHostedZoneCommentRequest": {
+      "base": "<p>A complex type that contains information about the request to update a hosted zone comment.</p>",
+      "refs": {
+      }
+    },
+    "UpdateHostedZoneCommentResponse": {
+      "base": "<p>A complex type containing information about the specified hosted zone after the update.</p>",
       "refs": {
       }
     },

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Route53 - Added support to `Aws::Route53::Client` for the new
+  UpdateHostedZoneComment operation.
+
 * Feature - Aws::IAM - Added support to `Aws::IAM::Client` for the new
   GetAccountAuthorizationDetails operation.
 
