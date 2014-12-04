@@ -48,6 +48,21 @@ module Aws
         ))
       end
 
+      # Returns the public (un-signed) URL for this object.
+      #
+      #     s3.bucket('bucket-name').object('obj-key').public_url
+      #     #=> "https://bucket-name.s3.amazonaws.com/obj-key"
+      #
+      # @return [String]
+      def public_url
+        PublicUrl.build(
+          endpoint: client.config.endpoint,
+          bucket_name: bucket_name,
+          object_key: key,
+          force_path_style: client.config.force_path_style
+        )
+      end
+
       # Uploads a file from disk to the current object in S3.
       #
       # @example

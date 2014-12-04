@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added a `#public_url` method to `Aws::S3::Object`.
+  Use this method to generate a URL that can be pasted into the
+  browser for objects with a "public-read" ACL.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new(region:'us-west-2')
+  s3.bucket('aws-sdk').object('key').public_url
+  #=> "https://aws-sdk.s3-us-west-2.amazonaws.com/key"
+  ```
+
 * Feature - Aws::Route53 - Added support to `Aws::Route53::Client` for the new
   UpdateHostedZoneComment operation.
 

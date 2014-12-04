@@ -83,7 +83,7 @@ module Seahorse
           end
 
           def escape(string)
-            CGI::escape(string.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
+            Util.uri_escape(string)
           end
 
         end
