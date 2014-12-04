@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.12 (2014-12-04)
 ------------------
 
 * Feature - Aws::S3 - Added a `#public_url` method to `Aws::S3::Object`.
