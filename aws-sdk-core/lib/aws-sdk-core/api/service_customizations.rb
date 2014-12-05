@@ -52,6 +52,11 @@ module Aws
 
       customize 'cloudfront' do
         reshape_members 'MaxItems', 'shape' => 'integer'
+        api.operations.each do |method_name|
+          operation = api.operation(method_name)
+          name = operation.name.sub(/\d{4}_\d{2}_\d{2}$/, '')
+          operation.instance_variable_set("@name", name)
+        end
       end
 
       customize 'cloudsearchdomain' do

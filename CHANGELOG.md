@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CloudFront - Resolved an issue that prevented the client
+  paginators from working. Fixes #169.
+
 2.0.12 (2014-12-04)
 ------------------
 
