@@ -3,7 +3,7 @@ module Aws
     module Operations
 
       # Base class for operations. An operation is any object that responds
-      # to {#call} receiving a hash of options including:
+      # to `#call` receiving a hash of options including:
       #
       # * `:resource` - The resource object the operation is invoked against.
       # * `:args` - An array of arguments given by the caller

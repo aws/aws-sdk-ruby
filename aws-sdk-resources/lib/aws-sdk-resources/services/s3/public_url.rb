@@ -13,9 +13,9 @@ module Aws
         # @option options [required, String] :object_key Key of the object
         #   to generate a URL for.
         #
-        # @param [Boolean] :force_path_style (false) When `true`, the bucket
-        #   name will always be part of the URI path. When `false`, DNS
-        #   compatible bucket names will be the endpoint host subdomain.
+        # @option options [Boolean] :force_path_style (false) When `true`,
+        #   the bucket name will always be part of the URI path. When `false`,
+        #   DNS compatible bucket names will be the endpoint host subdomain.
         #
         #       # path style
         #       "https://s3.amazonaws.com/bucket-name/key"

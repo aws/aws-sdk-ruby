@@ -56,8 +56,7 @@ module Aws
 
         # Recursively lints the resource definition hash against the given
         # api.
-        # @param [Hash] definition
-        # @param [Hash] api
+        # @param [Context] context
         # @return [Array<String>] Returns an array of schema validation errors.
         #   Returns an empty array if there are no errors.
         def lint(context)
