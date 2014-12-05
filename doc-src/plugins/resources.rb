@@ -7,7 +7,7 @@ $LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', '..'
 #   with the appropriate return values
 #
 #   - This appears to be caused by embed-mixins
-#   - might be fixed if I could document the attr_reader in the subclass 
+#   - might be fixed if I could document the attr_reader in the subclass
 #   - method appears twice when I leave it as attr_reader in subclass
 #   - able to work around this by creating method object, and moving it
 #     into the instance_attributes[:client] = { :read => m } and marking
@@ -41,6 +41,7 @@ class ResourceDocPlugin
   def apply
     Aws.service_added do |_, svc_module, files|
 
+      # merges the .docs.json API docs onto the .api.json model
       Aws::Api::Docstrings.apply(svc_module::Client, files[:docs])
 
       namespace = YARD::Registry[svc_module.name]
@@ -54,6 +55,9 @@ class ResourceDocPlugin
         end
       end
     end
+
+    Aws::Resources::Documenter.apply_customizations
+
   end
 
   def service_docstring(name, yard_class, svc_class)

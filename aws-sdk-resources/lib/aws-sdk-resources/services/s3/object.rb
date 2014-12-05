@@ -65,12 +65,20 @@ module Aws
 
       # Uploads a file from disk to the current object in S3.
       #
-      # @example
-      #
+      #     # small files are uploaded in a single API call
       #     obj.upload_file('/path/to/file')
+      #
+      # Files larger than `:multipart_threshold` are uploaded using the
+      # Amazon S3 multipart upload APIs.
+      #
+      #     # large files are automatically split into parts
+      #     # and the parts are uploaded in parallel
+      #     obj.upload_file('/path/to/very_large_file')
       #
       # @param [String,Pathname,File,Tempfile] source A file or path to a file
       #   on the local file system that should be uploaded to this object.
+      #   If you pass an open file object, then it is your responsibility
+      #   to close the file object once the upload completes.
       #
       # @option options [Integer] :multipart_threshold (15728640) Files larger
       #   than `:multipart_threshold` are uploaded using the S3 multipart APIs.
@@ -82,13 +90,15 @@ module Aws
       #   method that returns the failures that caused the upload to be
       #   aborted.
       #
-      # @return [void]
+      # @return [Boolean] Returns `true` when the object is uploaded
+      #   without any errors.
       #
       def upload_file(source, options = {})
         uploader = FileUploader.new(
           multipart_threshold: options.delete(:multipart_threshold),
           client: client)
         uploader.upload(source, options.merge(bucket: bucket_name, key: key))
+        true
       end
 
     end
