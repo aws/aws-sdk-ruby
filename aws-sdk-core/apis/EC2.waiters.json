@@ -56,7 +56,8 @@
     },
     "PasswordDataAvailable": {
       "operation": "GetPasswordData",
-      "success_path": "not_null(PasswordData)"
+      "success_path": "length(PasswordData) > `0`",
+      "success_value": true
     },
     "__ExportTaskState": {
       "operation": "DescribeExportTasks",
