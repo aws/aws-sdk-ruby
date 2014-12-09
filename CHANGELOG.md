@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SQS - Added support for purging queues.
+
 * Feature - Aws::OpsWorks - You can now use AWS OpsWorks with existing EC2
   instances and on-premises servers.
 
