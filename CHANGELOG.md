@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::OpsWorks - You can now use AWS OpsWorks with existing EC2
+  instances and on-premises servers.
+
 * Issue - Aws::CloudFront - Resolved an issue that prevented the client
   paginators from working. Fixes #169.
 

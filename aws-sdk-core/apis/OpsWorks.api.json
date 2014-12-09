@@ -9,6 +9,24 @@
     "protocol":"json"
   },
   "operations":{
+    "AssignInstance":{
+      "name":"AssignInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AssignInstanceRequest"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true
+        }
+      ]
+    },
     "AssignVolume":{
       "name":"AssignVolume",
       "http":{
@@ -296,6 +314,24 @@
         }
       ]
     },
+    "DeregisterInstance":{
+      "name":"DeregisterInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeregisterInstanceRequest"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true
+        }
+      ]
+    },
     "DeregisterRdsDbInstance":{
       "name":"DeregisterRdsDbInstance",
       "http":{
@@ -568,6 +604,25 @@
         }
       ]
     },
+    "DescribeStackProvisioningParameters":{
+      "name":"DescribeStackProvisioningParameters",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeStackProvisioningParametersRequest"},
+      "output":{"shape":"DescribeStackProvisioningParametersResult"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true
+        }
+      ]
+    },
     "DescribeStackSummary":{
       "name":"DescribeStackSummary",
       "http":{
@@ -751,6 +806,25 @@
         }
       ]
     },
+    "RegisterInstance":{
+      "name":"RegisterInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RegisterInstanceRequest"},
+      "output":{"shape":"RegisterInstanceResult"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true
+        }
+      ]
+    },
     "RegisterRdsDbInstance":{
       "name":"RegisterRdsDbInstance",
       "http":{
@@ -903,6 +977,24 @@
         "requestUri":"/"
       },
       "input":{"shape":"StopStackRequest"},
+      "errors":[
+        {
+          "shape":"ValidationException",
+          "exception":true
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "exception":true
+        }
+      ]
+    },
+    "UnassignInstance":{
+      "name":"UnassignInstance",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UnassignInstanceRequest"},
       "errors":[
         {
           "shape":"ValidationException",
@@ -1146,6 +1238,17 @@
         "i386"
       ]
     },
+    "AssignInstanceRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "LayerIds"
+      ],
+      "members":{
+        "InstanceId":{"shape":"String"},
+        "LayerIds":{"shape":"Strings"}
+      }
+    },
     "AssignVolumeRequest":{
       "type":"structure",
       "required":["VolumeId"],
@@ -1360,7 +1463,8 @@
         "AutoAssignPublicIps":{"shape":"Boolean"},
         "CustomRecipes":{"shape":"Recipes"},
         "InstallUpdatesOnBoot":{"shape":"Boolean"},
-        "UseEbsOptimizedInstances":{"shape":"Boolean"}
+        "UseEbsOptimizedInstances":{"shape":"Boolean"},
+        "LifecycleEventConfiguration":{"shape":"LifecycleEventConfiguration"}
       }
     },
     "CreateLayerResult":{
@@ -1529,6 +1633,13 @@
       "required":["ElasticIp"],
       "members":{
         "ElasticIp":{"shape":"String"}
+      }
+    },
+    "DeregisterInstanceRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{"shape":"String"}
       }
     },
     "DeregisterRdsDbInstanceRequest":{
@@ -1714,6 +1825,20 @@
         "ServiceErrors":{"shape":"ServiceErrors"}
       }
     },
+    "DescribeStackProvisioningParametersRequest":{
+      "type":"structure",
+      "required":["StackId"],
+      "members":{
+        "StackId":{"shape":"String"}
+      }
+    },
+    "DescribeStackProvisioningParametersResult":{
+      "type":"structure",
+      "members":{
+        "AgentInstallerUrl":{"shape":"String"},
+        "Parameters":{"shape":"Parameters"}
+      }
+    },
     "DescribeStackSummaryRequest":{
       "type":"structure",
       "required":["StackId"],
@@ -1896,7 +2021,17 @@
         "RootDeviceType":{"shape":"RootDeviceType"},
         "RootDeviceVolumeId":{"shape":"String"},
         "InstallUpdatesOnBoot":{"shape":"Boolean"},
-        "EbsOptimized":{"shape":"Boolean"}
+        "EbsOptimized":{"shape":"Boolean"},
+        "ReportedOs":{"shape":"ReportedOs"},
+        "InfrastructureClass":{"shape":"String"},
+        "RegisteredBy":{"shape":"String"}
+      }
+    },
+    "InstanceIdentity":{
+      "type":"structure",
+      "members":{
+        "Document":{"shape":"String"},
+        "Signature":{"shape":"String"}
       }
     },
     "Instances":{
@@ -1906,11 +2041,15 @@
     "InstancesCount":{
       "type":"structure",
       "members":{
+        "Assigning":{"shape":"Integer"},
         "Booting":{"shape":"Integer"},
         "ConnectionLost":{"shape":"Integer"},
+        "Deregistering":{"shape":"Integer"},
         "Online":{"shape":"Integer"},
         "Pending":{"shape":"Integer"},
         "Rebooting":{"shape":"Integer"},
+        "Registered":{"shape":"Integer"},
+        "Registering":{"shape":"Integer"},
         "Requested":{"shape":"Integer"},
         "RunningSetup":{"shape":"Integer"},
         "SetupFailed":{"shape":"Integer"},
@@ -1919,7 +2058,8 @@
         "Stopped":{"shape":"Integer"},
         "Stopping":{"shape":"Integer"},
         "Terminated":{"shape":"Integer"},
-        "Terminating":{"shape":"Integer"}
+        "Terminating":{"shape":"Integer"},
+        "Unassigning":{"shape":"Integer"}
       }
     },
     "Integer":{
@@ -1947,7 +2087,8 @@
         "CustomRecipes":{"shape":"Recipes"},
         "CreatedAt":{"shape":"DateTime"},
         "InstallUpdatesOnBoot":{"shape":"Boolean"},
-        "UseEbsOptimizedInstances":{"shape":"Boolean"}
+        "UseEbsOptimizedInstances":{"shape":"Boolean"},
+        "LifecycleEventConfiguration":{"shape":"LifecycleEventConfiguration"}
       }
     },
     "LayerAttributes":{
@@ -2003,6 +2144,12 @@
       "type":"list",
       "member":{"shape":"Layer"}
     },
+    "LifecycleEventConfiguration":{
+      "type":"structure",
+      "members":{
+        "Shutdown":{"shape":"ShutdownEventConfiguration"}
+      }
+    },
     "LoadBasedAutoScalingConfiguration":{
       "type":"structure",
       "members":{
@@ -2021,6 +2168,11 @@
       "min":1,
       "max":100,
       "box":true
+    },
+    "Parameters":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
     },
     "Permission":{
       "type":"structure",
@@ -2110,6 +2262,25 @@
         "ElasticIp":{"shape":"String"}
       }
     },
+    "RegisterInstanceRequest":{
+      "type":"structure",
+      "required":["StackId"],
+      "members":{
+        "StackId":{"shape":"String"},
+        "Hostname":{"shape":"String"},
+        "PublicIp":{"shape":"String"},
+        "PrivateIp":{"shape":"String"},
+        "RsaPublicKey":{"shape":"String"},
+        "RsaPublicKeyFingerprint":{"shape":"String"},
+        "InstanceIdentity":{"shape":"InstanceIdentity"}
+      }
+    },
+    "RegisterInstanceResult":{
+      "type":"structure",
+      "members":{
+        "InstanceId":{"shape":"String"}
+      }
+    },
     "RegisterRdsDbInstanceRequest":{
       "type":"structure",
       "required":[
@@ -2137,6 +2308,14 @@
       "type":"structure",
       "members":{
         "VolumeId":{"shape":"String"}
+      }
+    },
+    "ReportedOs":{
+      "type":"structure",
+      "members":{
+        "Family":{"shape":"String"},
+        "Name":{"shape":"String"},
+        "Version":{"shape":"String"}
       }
     },
     "ResourceNotFoundException":{
@@ -2207,6 +2386,13 @@
       "members":{
         "InstanceId":{"shape":"String"},
         "AutoScalingSchedule":{"shape":"WeeklyAutoScalingSchedule"}
+      }
+    },
+    "ShutdownEventConfiguration":{
+      "type":"structure",
+      "members":{
+        "ExecutionTimeout":{"shape":"Integer"},
+        "DelayUntilElbConnectionsDrained":{"shape":"Boolean"}
       }
     },
     "Source":{
@@ -2343,6 +2529,13 @@
       "type":"list",
       "member":{"shape":"TimeBasedAutoScalingConfiguration"}
     },
+    "UnassignInstanceRequest":{
+      "type":"structure",
+      "required":["InstanceId"],
+      "members":{
+        "InstanceId":{"shape":"String"}
+      }
+    },
     "UnassignVolumeRequest":{
       "type":"structure",
       "required":["VolumeId"],
@@ -2409,7 +2602,8 @@
         "AutoAssignPublicIps":{"shape":"Boolean"},
         "CustomRecipes":{"shape":"Recipes"},
         "InstallUpdatesOnBoot":{"shape":"Boolean"},
-        "UseEbsOptimizedInstances":{"shape":"Boolean"}
+        "UseEbsOptimizedInstances":{"shape":"Boolean"},
+        "LifecycleEventConfiguration":{"shape":"LifecycleEventConfiguration"}
       }
     },
     "UpdateMyUserProfileRequest":{
