@@ -54,6 +54,11 @@
         "stopping"
       ]
     },
+    "PasswordDataAvailable": {
+      "operation": "GetPasswordData",
+      "success_path": "length(PasswordData) > `0`",
+      "success_value": true
+    },
     "__ExportTaskState": {
       "operation": "DescribeExportTasks",
       "acceptor_path": "ExportTasks[].State"
