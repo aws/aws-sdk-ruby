@@ -159,7 +159,6 @@
     },
     "Subscription": {
       "identifiers": [
-        { "name": "TopicArn" },
         { "name": "Arn" }
       ],
       "shape": "GetSubscriptionAttributesResponse",
@@ -224,7 +223,6 @@
           "resource": {
             "type": "Subscription",
             "identifiers": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" },
               { "target": "Arn", "sourceType": "responsePath", "source": "SubscriptionArn" }
             ]
           }
@@ -271,7 +269,6 @@
           "resource": {
             "type": "Subscription",
             "identifiers": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" },
               { "target": "Arn", "sourceType": "responsePath", "source": "SubscriptionArn" }
             ]
           }
@@ -288,15 +285,10 @@
           "resource": {
             "type": "Subscription",
             "identifiers": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" },
               { "target": "Arn", "sourceType": "responsePath", "source": "Subscriptions[].SubscriptionArn" }
             ]
           }
         }
-      },
-      "subResources": {
-        "resources": [ "Subscription" ],
-        "identifiers": { "Arn": "TopicArn" }
       }
     }
   }

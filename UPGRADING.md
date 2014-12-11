@@ -1,5 +1,21 @@
 # Upgrade Notes
 
+## `aws-sdk-resources` - v2.0.13.pre
+
+* Removed `:topic_arn` from the list of identifiers required
+  to construct an `Aws::SNS::Subscription`. Subscription
+  is no longer a sub-resource of Topic.
+
+  ```ruby
+  sns = Aws::SNS::Resource.new
+
+  # old
+  subscription = sns.topic(topic_arn).subscription(subscription_arn)
+
+  # new
+  subscription = sns.subscription(subscription_arn)
+  ```
+
 ## `aws-sdk-resources` - v2.0.11.pre
 
 * Renamed `Aws::IAM::User#create_access_key` to `#create_access_key_pair`.

@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - Aws::SNS - Removed `:topic_arn` from the list of identifiers
+  required to construct an `Aws::SNS::Subscription`. Subscription is no longer a sub-resource of Topic.
+
+  ```ruby
+  sns = Aws::SNS::Resource.new
+
+  # old
+  subscription = sns.topic(topic_arn).subscription(subscription_arn)
+
+  # new
+  subscription = sns.subscription(subscription_arn)
+  ```
+
 2.0.13 (2014-12-08)
 ------------------
 
