@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.14 (2014-12-12)
 ------------------
 
 * Feature - Aws::ElasticTranscoder - Added support for user metadata to
