@@ -871,7 +871,9 @@
         "Job$Arn": "<p>The Amazon Resource Name (ARN) for the job.</p>",
         "JobOutput$Id": "<p>A sequential counter, starting with 1, that identifies an output among the outputs from the current job. In the Output syntax, this value is always 1.</p>",
         "Pipeline$Arn": "<p>The Amazon Resource Name (ARN) for the pipeline.</p>",
-        "Preset$Arn": "<p>The Amazon Resource Name (ARN) for the preset.</p>"
+        "Preset$Arn": "<p>The Amazon Resource Name (ARN) for the preset.</p>",
+        "UserMetadata$key": null,
+        "UserMetadata$value": null
       }
     },
     "Success": {
@@ -963,6 +965,13 @@
     "UpdatePipelineStatusResponse": {
       "base": "When you update status for a pipeline, Elastic Transcoder returns the values that you specified in the request.",
       "refs": {
+      }
+    },
+    "UserMetadata": {
+      "base": null,
+      "refs": {
+        "CreateJobRequest$UserMetadata": "<p>User-defined metadata that you want to associate with an Elastic Transcoder job. You specify metadata in <code>key/value</code> pairs, and you can add up to 10 <code>key/value</code> pairs per job. Elastic Transcoder does not guarantee that <code>key/value</code> pairs will be returned in the same order in which you specify them.</p>",
+        "Job$UserMetadata": "<p>User-defined metadata that you want to associate with an Elastic Transcoder job. You specify metadata in <code>key/value</code> pairs, and you can add up to 10 <code>key/value</code> pairs per job. Elastic Transcoder does not guarantee that <code>key/value</code> pairs will be returned in the same order in which you specify them.</p> <p>Metadata <code>keys</code> and <code>values</code> must use characters from the following list:</p> <ul> <li><p><code>0-9</code></p></li> <li><p><code>A-Z</code> and <code>a-z</code></p></li> <li><p><code>Space</code></p></li> <li><p>The following symbols: <code>_.:/=+-%@</code></p></li> </ul>"
       }
     },
     "ValidationException": {

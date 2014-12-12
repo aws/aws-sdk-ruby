@@ -869,7 +869,8 @@
         "Output":{"shape":"CreateJobOutput"},
         "Outputs":{"shape":"CreateJobOutputs"},
         "OutputKeyPrefix":{"shape":"Key"},
-        "Playlists":{"shape":"CreateJobPlaylists"}
+        "Playlists":{"shape":"CreateJobPlaylists"},
+        "UserMetadata":{"shape":"UserMetadata"}
       }
     },
     "CreateJobResponse":{
@@ -1049,7 +1050,8 @@
         "Outputs":{"shape":"JobOutputs"},
         "OutputKeyPrefix":{"shape":"Key"},
         "Playlists":{"shape":"Playlists"},
-        "Status":{"shape":"JobStatus"}
+        "Status":{"shape":"JobStatus"},
+        "UserMetadata":{"shape":"UserMetadata"}
       }
     },
     "JobAlbumArt":{
@@ -1626,6 +1628,11 @@
       "members":{
         "Pipeline":{"shape":"Pipeline"}
       }
+    },
+    "UserMetadata":{
+      "type":"map",
+      "key":{"shape":"String"},
+      "value":{"shape":"String"}
     },
     "ValidationException":{
       "type":"structure",

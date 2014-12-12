@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticTranscoder - Added support for user metadata to
+  `Aws::ElasticTranscoder::Client`.
+
 * Feature - Aws::Glacier - Added support for data retrieval policies to
   `Aws::Glacier::Client`.
 
