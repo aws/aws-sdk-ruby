@@ -1,6 +1,6 @@
 # Upgrade Notes
 
-## `aws-sdk-resources` - v2.0.13.pre
+## `aws-sdk-resources` - v2.0.14.pre
 
 * Removed `:topic_arn` from the list of identifiers required
   to construct an `Aws::SNS::Subscription`. Subscription
