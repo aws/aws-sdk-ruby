@@ -1,8 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glacier - Added support for data retrieval policies to
+  `Aws::Glacier::Client`.
+
 * Upgrading - Aws::SNS - Removed `:topic_arn` from the list of identifiers
-  required to construct an `Aws::SNS::Subscription`. Subscription is no longer a sub-resource of Topic.
+  required to construct an `Aws::SNS::Subscription`. Subscription is no
+  longer a sub-resource of Topic.
 
   ```ruby
   sns = Aws::SNS::Resource.new
