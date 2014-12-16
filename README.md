@@ -187,7 +187,7 @@ bucket = s3.bucket('aws-sdk')
 
 # enumerate every object in a bucket
 bucket.objects.each do |obj|
-  puts "#{object.key} => #{obj.etag}"
+  puts "#{obj.key} => #{obj.etag}"
 end
 
 # batch operations, delete objects in batches of 1k
