@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'zlib'
 
 module Aws
   module DynamoDB
@@ -43,6 +44,55 @@ module Aws
           end
           resp = ddb.get_item(table_name: 'aws-sdk', key: { 'id' => 'guid' })
           expect(resp.data.item).to eq('id' => 'guid')
+        end
+
+      end
+
+      describe 'CRC32' do
+        it 'rejects responses with an invalid crc32 header' do
+          opts[:retry_limit] = 0
+          ddb.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            context.http_response.body = <<-JSON
+              { "Item": { "id": { "S": "guid" } } }
+            JSON
+            context.http_response.headers['x-amz-crc32'] = 'invalid'
+            Seahorse::Client::Response.new(context: context)
+          end
+          expect {
+            ddb.get_item(table_name: 'aws-sdk', key: { 'id' => 'guid' })
+          }.to raise_error(Errors::CRC32CheckFailed)
+        end
+
+        it 'accepts responses with a valid crc32 header' do
+          ddb.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            body = <<-JSON
+              { "Item": { "id": { "S": "guid" } } }
+            JSON
+            context.http_response.body = body
+            context.http_response.headers['x-amz-crc32'] = Zlib.crc32(body)
+            Seahorse::Client::Response.new(context: context)
+          end
+          ddb.get_item(table_name: 'aws-sdk', key: { 'id' => 'guid' })
+        end
+
+        it 'retries crc32 failures' do
+          ddb.handle(step: :send) do |context|
+            context.http_response.status_code = 200
+            body = <<-JSON
+              { "Item": { "id": { "S": "guid" } } }
+            JSON
+            context.http_response.body = body
+            if context[:already_failed]
+              context.http_response.headers['x-amz-crc32'] = Zlib.crc32(body)
+            else
+              context.http_response.headers['x-amz-crc32'] = 'invalid'
+              context[:already_failed] = true
+            end
+            Seahorse::Client::Response.new(context: context)
+          end
+          ddb.get_item(table_name: 'aws-sdk', key: { 'id' => 'guid' })
         end
 
       end

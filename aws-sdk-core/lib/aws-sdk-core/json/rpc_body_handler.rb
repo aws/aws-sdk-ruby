@@ -7,8 +7,9 @@ module Aws
       def call(context)
         build_json(context)
         @handler.call(context).on_success do |response|
-          response.error = nil
-          response.data = parse_json(context)
+          unless response.error
+            response.data = parse_json(context)
+          end
         end
       end
 

@@ -124,6 +124,7 @@ module Aws
     autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
     autoload :DynamoDBExtendedRetries, 'aws-sdk-core/plugins/dynamodb_extended_retries'
     autoload :DynamoDBSimpleAttributes, 'aws-sdk-core/plugins/dynamodb_simple_attributes'
+    autoload :DynamoDBCRC32Validation, 'aws-sdk-core/plugins/dynamodb_crc32_validation'
     autoload :EC2CopyEncryptedSnapshot, 'aws-sdk-core/plugins/ec2_copy_encrypted_snapshot'
     autoload :GlacierAccountId, 'aws-sdk-core/plugins/glacier_account_id'
     autoload :GlacierApiVersion, 'aws-sdk-core/plugins/glacier_api_version'

@@ -67,6 +67,7 @@ module Aws
       customize 'dynamodb' do
         add_plugin 'Aws::Plugins::DynamoDBExtendedRetries'
         add_plugin 'Aws::Plugins::DynamoDBSimpleAttributes'
+        add_plugin 'Aws::Plugins::DynamoDBCRC32Validation'
       end
 
       customize 'ec2' do
