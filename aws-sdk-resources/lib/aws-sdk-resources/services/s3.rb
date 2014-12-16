@@ -6,6 +6,7 @@ module Aws
     require 'aws-sdk-resources/services/s3/multipart_upload'
     require 'aws-sdk-resources/services/s3/public_url'
 
+    autoload :Encryption, 'aws-sdk-resources/services/s3/encryption'
     autoload :FilePart, 'aws-sdk-resources/services/s3/file_part'
     autoload :FileUploader, 'aws-sdk-resources/services/s3/file_uploader'
     autoload :MultipartFileUploader, 'aws-sdk-resources/services/s3/multipart_file_uploader'

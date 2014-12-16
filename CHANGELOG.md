@@ -1,6 +1,34 @@
 Unreleased Changes
 ------------------
 
+* Feature - Client-Side Encryption - Added `Aws::S3::Encryption::Client`
+  which allows users to perform PUT and GET Object operations against
+  Amazon S3 while encrypting and decrypting the object client-side.
+
+  ```ruby
+  require 'openssl'
+  key = OpenSSL::Cipher.new("AES-256-ECB").random_key
+
+  # vanilla S3 client
+  s3 = Aws::S3::Client.new(region:'us-west-2', credentials: ...)
+
+  # encryption client
+  s3e = Aws::S3::Encryption::Client.new(encryption_key: key, client: s3)
+
+  # round-trip an object, encrypted/decrypted locally
+  s3e.put_object(bucket:'aws-sdk', key:'secret', body:'handshake')
+  s3e.get_object(bucket:'aws-sdk', key:'secret').body.read
+  #=> 'handshake'
+
+  # attempt to read the encrypted object without the encryption client
+  s3.get_object(bucket:'aws-sdk', key:'secret').body.read
+  #=> "... cipher text ..."
+  ```
+
+  You can configure a `:key_provider` to the encyrption client to allow
+  for using multiple decryption keys. See the `Aws::S3::Encryption::Client`
+  API documentation for more information.
+
 * Feature - Async Handlers - The HTTP handler now signals the response
   object on HTTP headers, data, complete and errors. This allows downstream
   handlers to handler HTTP events as they happen. As a result, all
