@@ -1,3 +1,5 @@
+require 'base64'
+
 Before("@s3") do
   @s3 = Aws::S3::Resource.new
   @created_buckets = []
@@ -36,4 +38,47 @@ end
 
 Then(/^the file should have been uploaded as a multipart upload$/) do
   expect(ApiCallTracker.called_operations).to include('create_multipart_upload')
+end
+
+Given(/^I have an encryption client$/) do
+  @cse = Aws::S3::Encryption::Client.new({
+    client: @s3.client,
+    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
+  })
+end
+
+Given(/^I have an encryption client configured for :instruction_file$/) do
+  @cse = Aws::S3::Encryption::Client.new({
+    client: @s3.client,
+    encryption_key: Base64.decode64("w1WLio3agRWRTSJK/Ouh8NHoqRQ6fn5WbSXDTHjXMSo="),
+    envelope_location: :instruction_file,
+  })
+end
+
+When(/^I perform an encrypted PUT of the value "(.*?)"$/) do |value|
+  @key = 'encrypted'
+  @plain_text = value
+  @cse.put_object(bucket: @bucket_name, key: @key, body: @plain_text)
+end
+
+When(/^I GET the object with a non\-encyrption client$/) do
+  @cipher_text = @s3.client.get_object(bucket: @bucket_name, key: @key).body.read
+end
+
+Then(/^the object data should be encrypted$/) do
+  expect(@cipher_text).not_to eq(@plaint_text)
+end
+
+When(/^I GET the object with an encryption client$/) do
+  @plain_text = @cse.get_object(bucket: @bucket_name, key: @key).body.read
+end
+
+Then(/^the object data should be "(.*?)"$/) do |value|
+  expect(@plain_text).to eq(value)
+end
+
+Then(/^the instruction file should exist$/) do
+  expect {
+    @s3.client.head_object(bucket: @bucket_name, key: @key + '.instruction')
+  }.not_to raise_error
 end
