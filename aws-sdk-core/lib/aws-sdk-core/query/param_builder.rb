@@ -80,7 +80,7 @@ module Aws
         when 'structure' then structure(shape, value, prefix + '.')
         when 'list'      then list(shape, value, prefix)
         when 'map'       then map(shape, value, prefix)
-        when 'blob'      then set(prefix, Base64.strict_encode64(value))
+        when 'blob'      then set(prefix, Base64.strict_encode64(value.read))
         when 'timestamp'
           set(prefix, shape.format_time(value, 'iso8601').to_s)
         else

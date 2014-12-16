@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Async Handlers - The HTTP handler now signals the response
+  object on HTTP headers, data, complete and errors. This allows downstream
+  handlers to handler HTTP events as they happen. As a result, all
+  handlers calling `#on(...)` on the response object no longer need
+  to block on the HTTP response being complete.
+
 2.0.14 (2014-12-12)
 ------------------
 

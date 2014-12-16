@@ -36,10 +36,11 @@ module Aws
 
         it 'unmarshals returned attribute values' do
           ddb.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = <<-JSON
-              { "Item": { "id": { "S": "guid" } } }
-            JSON
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: '{ "Item": { "id": { "S": "guid" } } }'
+            )
             Seahorse::Client::Response.new(context: context)
           end
           resp = ddb.get_item(table_name: 'aws-sdk', key: { 'id' => 'guid' })
@@ -52,11 +53,11 @@ module Aws
         it 'rejects responses with an invalid crc32 header' do
           opts[:retry_limit] = 0
           ddb.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = <<-JSON
-              { "Item": { "id": { "S": "guid" } } }
-            JSON
-            context.http_response.headers['x-amz-crc32'] = 'invalid'
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: { 'x-amz-crc32' => 'invalid' },
+              body: '{ "Item": { "id": { "S": "guid" } } }'
+            )
             Seahorse::Client::Response.new(context: context)
           end
           expect {

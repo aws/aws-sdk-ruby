@@ -31,7 +31,11 @@ module Seahorse
             log_level: @log_level,
             log_formatter: @formatter)
           @handler ||= Handler.new(lambda { |context|
-            context.http_response.status_code = 200
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: ''
+            )
             Response.new(context: context)
           })
           @handler.call(RequestContext.new(config: @config))

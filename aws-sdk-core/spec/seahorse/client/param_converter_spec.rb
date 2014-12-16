@@ -277,8 +277,8 @@ module Seahorse
             file.delete
           end
 
-          it 'accepts and returns strings' do
-            expect(ParamConverter.c(shape_class, 'abc')).to eq('abc')
+          it 'accepts strings and returns StringIO' do
+            expect(ParamConverter.c(shape_class, 'abc').read).to eq('abc')
           end
 
         end

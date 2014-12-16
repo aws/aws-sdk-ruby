@@ -12,6 +12,9 @@ module Seahorse
         @error = options[:error]
         @http_request = @context.http_request
         @http_response = @context.http_response
+        @http_response.on_error do |error|
+          @error = error
+        end
       end
 
       # @return [RequestContext]
@@ -24,14 +27,21 @@ module Seahorse
       # @return [StandardError, nil]
       attr_accessor :error
 
-      # @param [Integer,Range<Integer>] status_code_range The block will be
-      #   triggered only for responses with a status code that matches
-      #   the given status code or status code range.
+      # @overload on(status_code, &block)
+      #   @param [Integer] status_code The block will be
+      #     triggered only for responses with the given status code.
+      #
+      # @overload on(status_code_range, &block)
+      #   @param [Range<Integer>] status_code_range The block will be
+      #     triggered only for responses with a status code that falls
+      #     witin the given range.
+      #
       # @return [self]
-      def on(status_code_range, &block)
-        range = status_code_range
-        range = range..range if range.is_a?(Integer)
-        yield(self) if range.include?(status_code)
+      def on(range, &block)
+        response = self
+        @context.http_response.on_success(range) do
+          block.call(response)
+        end
         self
       end
 
@@ -41,15 +51,10 @@ module Seahorse
         on(200..299, &block)
       end
 
-      # @param [Boolean] Returns `true` if the http response status
-      #   is a 200 level status code.
+      # @return [Boolean] Returns `true` if the response is complete with
+      #   a ~ 200 level http status code.
       def successful?
-        (200..299).include?(status_code)
-      end
-
-      # @api private
-      def respond_to?(*args)
-        @data.respond_to?(args.first, false) || super
+        (200..299).include?(@context.http_response.status_code) && @error.nil?
       end
 
       # @api private
@@ -61,11 +66,12 @@ module Seahorse
         end
       end
 
-      private
-
-      def status_code
-        @http_response.status_code
+      # @api private
+      def respond_to?(*args)
+        @data.respond_to?(args.first, false) || super
       end
+
+      private
 
       def method_missing(*args, &block)
         if @data.respond_to?(args.first, false)

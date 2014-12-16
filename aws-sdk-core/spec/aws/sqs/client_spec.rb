@@ -22,8 +22,10 @@ module Aws
 
         it 'returns a structure with all of the root members' do
           client.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = StringIO.new(<<-XML.strip)
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body:<<-XML)
               <ReceiveMessageResponse>
                 <ReceiveMessageResult/>
                 <ResponseMetadata>

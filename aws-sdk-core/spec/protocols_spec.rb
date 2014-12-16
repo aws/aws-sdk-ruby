@@ -104,7 +104,7 @@ end
 
 def normalize_headers(hash)
   hash.each.with_object({}) do |(k,v),headers|
-    headers[k.downcase] = v
+    headers[k.downcase] = v.to_s
   end
 end
 
@@ -168,9 +168,16 @@ fixtures.each do |directory, files|
 
         client = client_for(suite, test_case)
         client.handle(step: :send) do |context|
-          context.http_response.status_code = test_case['response']['status_code']
+          context.http_response.signal_headers(
+            test_case['response']['status_code'],
+            test_case['response']['headers']
+          )
+
+          # temporary work-around for header case-sensitive test
           context.http_response.headers = test_case['response']['headers']
-          context.http_response.body = test_case['response']['body']
+
+          context.http_response.signal_data(test_case['response']['body'])
+          context.http_response.signal_done
           Seahorse::Client::Response.new(context:context)
         end
 

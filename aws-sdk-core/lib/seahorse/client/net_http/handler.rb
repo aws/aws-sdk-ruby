@@ -22,13 +22,8 @@ module Seahorse
         # @param [RequestContext] context
         # @return [Response]
         def call(context)
-          response = Response.new(context: context)
-          begin
-            transmit(context.config, context.http_request, context.http_response)
-          rescue *NETWORK_ERRORS => error
-            response.error = Http::Error.new(error, error_message(context, error))
-          end
-          response
+          transmit(context.config, context.http_request, context.http_response)
+          Response.new(context: context)
         end
 
         # @param [Configuration] config
@@ -39,9 +34,9 @@ module Seahorse
 
         private
 
-        def error_message(context, error)
+        def error_message(req, error)
           if error.is_a?(SocketError) && error.message == DNS_ERROR_MESSAGE
-            host = context.http_request.endpoint.host
+            host = req.endpoint.host
             "unable to connect to `#{host}`; SocketError: #{error.message}"
           else
             error.message
@@ -49,26 +44,37 @@ module Seahorse
         end
 
         # @param [Configuration] config
-        # @param [Http::Request] request
-        # @param [Http::Response] response
+        # @param [Http::Request] req
+        # @param [Http::Response] resp
         # @return [void]
-        def transmit(config, request, response)
-          pool_for(config).session_for(request.endpoint) do |http|
+        def transmit(config, req, resp)
+          session(config, req) do |http|
+            http.request(build_net_request(req)) do |net_resp|
 
-            http.read_timeout = config.http_read_timeout
-            http.request(net_http_request(request)) do |resp|
+              status_code = net_resp.code.to_i
+              headers = extract_headers(net_resp)
 
-              # extract HTTP status code and headers
-              response.status_code = resp.code.to_i
-              response.headers.update(response_headers(resp))
-
-              # read the body in chunks
-              resp.read_body do |chunk|
-                response.body.write(chunk)
+              resp.signal_headers(status_code, headers)
+              net_resp.read_body do |chunk|
+                resp.signal_data(chunk)
               end
-              response.body.rewind if response.body.respond_to?(:rewind)
+              resp.signal_done
 
             end
+          end
+        rescue *NETWORK_ERRORS => error
+          # these are retryable
+          error = NetworkingError.new(error, error_message(req, error))
+          resp.signal_error(error)
+        rescue => error
+          # not retryable
+          resp.signal_error(error)
+        end
+
+        def session(config, req, &block)
+          pool_for(config).session_for(req.endpoint) do |http|
+            http.read_timeout = config.http_read_timeout
+            yield(http)
           end
         end
 
@@ -86,7 +92,7 @@ module Seahorse
         # a {Http::Request}.
         # @param [Http::Request] request
         # @return [Net::HTTP::Request]
-        def net_http_request(request)
+        def build_net_request(request)
           request_class = net_http_request_class(request)
           req = request_class.new(request.endpoint.request_uri, headers(request))
           req.body_stream = request.body
@@ -118,7 +124,7 @@ module Seahorse
 
         # @param [Net::HTTP::Response] response
         # @return [Hash<String, String>]
-        def response_headers(response)
+        def extract_headers(response)
           response.to_hash.inject({}) do |headers, (k, v)|
             headers[k] = v.first
             headers

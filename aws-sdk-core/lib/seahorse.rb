@@ -12,6 +12,7 @@ module Seahorse
     autoload :HandlerList, 'seahorse/client/handler_list'
     autoload :HandlerListEntry, 'seahorse/client/handler_list_entry'
     autoload :ManagedFile, 'seahorse/client/managed_file'
+    autoload :NetworkingError, 'seahorse/client/networking_error'
     autoload :ParamConverter, 'seahorse/client/param_converter'
     autoload :ParamValidator, 'seahorse/client/param_validator'
     autoload :Plugin, 'seahorse/client/plugin'
@@ -21,7 +22,6 @@ module Seahorse
     autoload :Response, 'seahorse/client/response'
 
     module Http
-      autoload :Error, 'seahorse/client/http/error'
       autoload :Headers, 'seahorse/client/http/headers'
       autoload :Request, 'seahorse/client/http/request'
       autoload :Response, 'seahorse/client/http/response'

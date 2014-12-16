@@ -200,7 +200,7 @@ module Seahorse
       add(Model::Shapes::Blob, IO)
       add(Model::Shapes::Blob, Tempfile)
       add(Model::Shapes::Blob, StringIO)
-      add(Model::Shapes::Blob, String)
+      add(Model::Shapes::Blob, String) { |str| StringIO.new(str) }
 
     end
   end

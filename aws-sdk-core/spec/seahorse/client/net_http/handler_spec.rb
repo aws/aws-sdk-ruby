@@ -158,8 +158,8 @@ module Seahorse
             it 'raises a helpful error if the request method is invalid' do
               message = '`abc` is not a valid http verb'
               http_request.http_method = 'abc'
-              expect { make_request }.to raise_error(
-                Handler::InvalidHttpVerbError, message)
+              resp = make_request
+              expect(resp.error.message).to eq(message)
             end
 
           end
@@ -250,10 +250,10 @@ module Seahorse
               expect(resp_body.read).to eq('response-body')
             end
 
-            it 'wraps errors with a Http::Error' do
+            it 'wraps errors with a NetworkingError' do
               stub_request(:any, endpoint).to_raise(EOFError)
               resp = make_request
-              expect(resp.error).to be_a(Seahorse::Client::Http::Error)
+              expect(resp.error).to be_a(Seahorse::Client::NetworkingError)
             end
 
           end
@@ -264,7 +264,7 @@ module Seahorse
               msg = 'getaddrinfo: nodename nor servname provided, or not known'
               stub_request(:any, endpoint).to_raise(SocketError.new(msg))
               resp = make_request
-              expect(resp.error).to be_a(Seahorse::Client::Http::Error)
+              expect(resp.error).to be_a(Seahorse::Client::NetworkingError)
               expect(resp.error.message).to match("unable to connect to `#{URI.parse(endpoint).host}`; SocketError: #{msg}")
             end
 

@@ -68,22 +68,34 @@ module Seahorse
         describe '#on' do
 
           it 'triggers the callback when status code matches' do
-            http_resp.status_code = 200
+            http_resp.signal_done(
+              status_code: 200,
+              headers: {},
+              body: '')
             expect { |b| response.on(200,&b) }.to yield_control
           end
 
           it 'triggers the callback when status code included' do
-            http_resp.status_code = 307
+            http_resp.signal_done(
+              status_code: 307,
+              headers: {},
+              body: '')
             expect { |b| response.on(300..599,&b) }.to yield_control
           end
 
           it 'does not trigger when when a response is not included' do
-            http_resp.status_code = 300
+            http_resp.signal_done(
+              status_code: 300,
+              headers: {},
+              body: '')
             expect { |b| response.on(200..299,&b) }.not_to yield_control
           end
 
           it 'returns self' do
-            http_resp.status_code = 300
+            http_resp.signal_done(
+              status_code: 300,
+              headers: {},
+              body: '')
             expect(response.on(300) { |r| }).to be(response)
           end
 

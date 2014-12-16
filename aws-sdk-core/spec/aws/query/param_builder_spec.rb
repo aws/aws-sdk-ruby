@@ -349,7 +349,7 @@ module Aws
 
           it 'serializes blobs as base64 strings' do
             members['data'] = { 'type' => 'blob' }
-            expect(query_params(data:'hello')).to eq([
+            expect(query_params(data:StringIO.new('hello'))).to eq([
               ['data', 'aGVsbG8=']
             ])
           end

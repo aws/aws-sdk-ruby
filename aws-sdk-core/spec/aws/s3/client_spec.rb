@@ -23,8 +23,11 @@ module Aws
 
         it 'creates an error class from empty body responses' do
           client.handle(step: :send) do |context|
-            context.http_response.status_code = 500
-            context.http_response.body = StringIO.new('')
+            context.http_response.signal_done(
+              status_code: 500,
+              headers: {},
+              body: ''
+            )
             Seahorse::Client::Response.new(context: context)
           end
           expect {
@@ -211,8 +214,10 @@ module Aws
 
         it 'request url encoded keys and decodes them by default' do
           client.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = <<-XML.strip
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body:<<-XML.strip)
             <?xml version="1.0" encoding="UTF-8"?>
             <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
               <Prefix>a%26</Prefix>
@@ -243,8 +248,10 @@ module Aws
 
         it 'skips url decoding when the user specifies the encoding' do
           client.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = <<-XML.strip
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body:<<-XML.strip)
             <?xml version="1.0" encoding="UTF-8"?>
             <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
               <Contents>
@@ -264,8 +271,10 @@ module Aws
 
         it 'request url encoded keys and decodes them by default' do
           client.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = <<-XML.strip
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body:<<-XML.strip)
             <?xml version="1.0" encoding="UTF-8"?>
             <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
               <Prefix>a%26</Prefix>
@@ -304,8 +313,10 @@ module Aws
 
         it 'request url encoded keys and decodes them by default' do
           client.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = <<-XML.strip
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body:<<-XML.strip)
             <?xml version="1.0" encoding="UTF-8"?>
             <ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01">
               <Prefix>a%26</Prefix>
@@ -375,8 +386,10 @@ module Aws
 
         it 'correct decodes url keys' do
           client.handle(step: :send) do |context|
-            context.http_response.status_code = 200
-            context.http_response.body = <<-XML
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body:<<-XML)
 <?xml version="1.0" encoding="UTF-8"?>
 <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
   <Contents>

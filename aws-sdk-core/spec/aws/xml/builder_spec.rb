@@ -287,7 +287,7 @@ module Aws
           rules['members'] = {
             'Data' => { 'type' => 'blob' }
           }
-          expect(xml(data: 'hello')).to eq(<<-XML)
+          expect(xml(data: StringIO.new('hello'))).to eq(<<-XML)
 <xml>
   <Data>aGVsbG8=</Data>
 </xml>

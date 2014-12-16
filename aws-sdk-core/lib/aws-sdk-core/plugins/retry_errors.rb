@@ -61,7 +61,7 @@ module Aws
         end
 
         def networking?
-          @error.is_a?(Seahorse::Client::Http::Error) ||
+          @error.is_a?(Seahorse::Client::NetworkingError) ||
           NETWORKING_ERRORS.include?(@name) ||
           @http_status_code == 0
         end
@@ -115,7 +115,7 @@ module Aws
           context.retries += 1
           context.config.credentials.refresh! if error.expired_credentials?
           context.http_request.body.rewind
-          context.http_response.body.truncate(0)
+          context.http_response.reset
           call(context)
         end
 
