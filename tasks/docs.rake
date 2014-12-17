@@ -12,11 +12,11 @@ task 'docs:update_readme' do
   lines = []
   skip = false
   File.read('README.md').lines.each do |line|
-    if line == '## Supported Services\n'
+    if line == "## Supported Services\n"
       lines << line
       lines += supported_services_table
       skip = true
-    elsif line == '## License\n'
+    elsif line == "## License\n"
       skip = false
     end
     lines << line unless skip
@@ -37,22 +37,36 @@ end
 
 # Generates an HTML table of supported services that is used by README.md
 def supported_services_table
+  table = [
+    # header row
+    ['Service Name', 'Service Class', 'API Version']
+  ]
 
-  line = "| %-35s | %-25s | %-30s |\n"
-
-  lines = []
+  # insert one row for each supported service
   Aws::SERVICE_MODULE_NAMES.each do |svc_name|
     client_class = Aws.const_get(svc_name).const_get(:Client)
     full_name = client_class.api.metadata('serviceFullName')
     version = client_class.api.version
-    lines << line % [full_name, svc_name, version]
+    table << [full_name, svc_name, version]
   end
 
-  [
-    "\n",
-    line % ['Service Name', 'Service Class', 'API Versions'],
-    line % ['-' * 35, '-' * 25, '-' * 30],
-    lines.sort_by(&:downcase),
-    "\n",
+  # compute the width of each column by scanning for longest values
+  column_width = lambda do |col|
+    table.map { |row| row[col].size }.max
+  end
+  widths = [
+    column_width.call(0),
+    column_width.call(1),
+    column_width.call(2),
   ]
+
+  # insert a dashed line after the header row
+  table = [
+    table[0],
+    ['-' * widths[0], '-' * widths[1], '-' * widths[2]]
+  ] + table[1..-1]
+
+  # build the final table
+  line = "| #{widths.map{|n| "%-#{n}s" }.join(' | ')} |\n"
+  ["\n"] + table.map { |row| line % row } + ["\n"]
 end
