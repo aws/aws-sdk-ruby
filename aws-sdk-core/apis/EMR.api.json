@@ -456,7 +456,9 @@
         "VisibleToAllUsers":{"shape":"Boolean"},
         "Applications":{"shape":"ApplicationList"},
         "Tags":{"shape":"TagList"},
-        "ServiceRole":{"shape":"String"}
+        "ServiceRole":{"shape":"String"},
+        "NormalizedInstanceHours":{"shape":"Integer"},
+        "MasterPublicDnsName":{"shape":"String"}
       }
     },
     "ClusterId":{"type":"string"},
@@ -508,7 +510,8 @@
       "members":{
         "Id":{"shape":"ClusterId"},
         "Name":{"shape":"String"},
-        "Status":{"shape":"ClusterStatus"}
+        "Status":{"shape":"ClusterStatus"},
+        "NormalizedInstanceHours":{"shape":"Integer"}
       }
     },
     "ClusterSummaryList":{
@@ -1044,6 +1047,7 @@
       "members":{
         "ClusterId":{"shape":"ClusterId"},
         "StepStates":{"shape":"StepStateList"},
+        "StepIds":{"shape":"XmlStringList"},
         "Marker":{"shape":"Marker"}
       }
     },
@@ -1265,6 +1269,8 @@
       "members":{
         "Id":{"shape":"StepId"},
         "Name":{"shape":"String"},
+        "Config":{"shape":"HadoopStepConfig"},
+        "ActionOnFailure":{"shape":"ActionOnFailure"},
         "Status":{"shape":"StepStatus"}
       }
     },

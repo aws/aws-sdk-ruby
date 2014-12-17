@@ -48,6 +48,9 @@ Unreleased Changes
   ddb = Aws::DynamoDB::Client.new(compute_checksums: false) # disabled
   ```
 
+* Feature - Aws::EMR - Added support for accessing the new normalized
+  instance hours attribute.
+
 2.0.14 (2014-12-12)
 ------------------
 
