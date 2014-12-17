@@ -35,6 +35,19 @@ Unreleased Changes
   handlers calling `#on(...)` on the response object no longer need
   to block on the HTTP response being complete.
 
+* Feature - Aws::DynamoDB - Now calculating a CRC32 checksum of the
+  HTTP response body on every request and comparing it against the
+  value returned by Amazon DynamoDB in the `X-Amz-Crc32` header.
+  Failed checksums trigger an automatic retry.
+
+  You can disable this checksum by passing `compute_checksums: false`
+  to the Aws::DynamoDB::Client constructor:
+
+  ```ruby
+  ddb = Aws::DynamoDB::Client.new # verify crc32 checksums
+  ddb = Aws::DynamoDB::Client.new(compute_checksums: false) # disabled
+  ```
+
 2.0.14 (2014-12-12)
 ------------------
 
