@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.15 (2014-12-17)
 ------------------
 
 * Feature - Client-Side Encryption - Added `Aws::S3::Encryption::Client`
