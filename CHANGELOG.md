@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3::Encryption::Client - Added new options to
+  `Aws::S3::Encryption::Client#get_objet`. You can now pass the
+  following options to `#get_object`:
+
+  * `:envelope_location`
+  * `:instruction_file_suffix`
+
+  Passing these options override the default values determined
+  during construction of the `Aws::S3::Encryption::Client`.
+
 2.0.15 (2014-12-17)
 ------------------
 

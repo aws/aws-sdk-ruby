@@ -273,6 +273,22 @@ module Aws
               expect(resp.body.read).to eq('secret')
             end
 
+            it 'accepts :envelope_location, overriding the default location' do
+              stub_encrypted_get_with_instruction_file
+              resp = client.get_object(bucket:'bucket', key:'key', envelope_location: :instruction_file)
+              expect(resp.body.read).to eq('secret')
+              expect(resp.context[:encryption][:envelope_location]).to eq(:instruction_file)
+              expect(resp.context[:encryption][:instruction_file_suffix]).to eq('.instruction')
+            end
+
+            it 'accepts :instruction_file_suffix, overriding the default location' do
+              stub_encrypted_get_with_instruction_file('.envelope')
+              resp = client.get_object(bucket:'bucket', key:'key', instruction_file_suffix: '.envelope')
+              expect(resp.body.read).to eq('secret')
+              expect(resp.context[:encryption][:envelope_location]).to eq(:instruction_file)
+              expect(resp.context[:encryption][:instruction_file_suffix]).to eq('.envelope')
+            end
+
             it 'supports multiple master keys with a key provider' do
               stub_encrypted_get('MATERIALS-DESC')
               key_provider = double('key-provider')

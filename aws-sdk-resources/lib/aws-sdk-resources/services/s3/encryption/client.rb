@@ -200,11 +200,14 @@ module Aws
         #   by this string.
         attr_reader :instruction_file_suffix
 
-        # Calls {S3::Client#put_object}. The `:body` option will be encrypted
-        # client-side before sending data to Amazon S3.
+        # Uploads an object to Amazon S3, encrypting data client-side.
+        # See {S3::Client#put_object} for documentation on accepted
+        # request parameters.
+        # @option (see S3::Client#put_object)
+        # @return (see S3::Client#put_object)
         # @see S3::Client#put_object
-        def put_object(options = {})
-          req = @client.build_request(:put_object, options)
+        def put_object(params = {})
+          req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
             materials: @key_provider.encryption_materials,
@@ -214,29 +217,45 @@ module Aws
           req.send_request
         end
 
-        # Performs an `#get_object` request on the `#config.client`. The
-        # response body is decrypted as it is read from the HTTP response
-        # socket. See {Client#get_object} for documentation on valid
-        # options.
-        def get_object(options = {})
-          if options[:range]
+        # Gets an object from Amazon S3, decrypting  data locally.
+        # See {S3::Client#get_object} for documentation on accepted
+        # request parameters.
+        # @option params [String] :instruction_file_suffix The suffix
+        #   used to find the instruction file containing the encryption
+        #   envelope. You should not set this option when the envelope
+        #   is stored in the object metadata. Defaults to
+        #   {#instruction_file_suffix}.
+        # @option params [String] :instruction_file_suffix
+        # @option (see S3::Client#get_object)
+        # @return (see S3::Client#get_object)
+        # @see S3::Client#get_object
+        # @note The `:range` request parameter is not yet supported.
+        def get_object(params = {})
+          if params[:range]
             raise NotImplementedError, '#get_object with :range not supported yet'
           end
-
-          location = options.delete(:envelope_location) || @envelope_location
-          suffix = options.delete(:instruction_file_suffix) || @instruction_file_suffix
-
-          req = @client.build_request(:get_object, options)
+          envelope_location, instruction_file_suffix = envelope_options(params)
+          req = @client.build_request(:get_object, params)
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
             key_provider: @key_provider,
-            envelope_location: location,
-            instruction_file_suffix: suffix,
+            envelope_location: envelope_location,
+            instruction_file_suffix: instruction_file_suffix,
           }
           req.send_request
         end
 
         private
+
+        def envelope_options(params)
+          location = params.delete(:envelope_location) || @envelope_location
+          suffix = params.delete(:instruction_file_suffix)
+          if suffix
+            [:instruction_file, suffix]
+          else
+            [location, @instruction_file_suffix]
+          end
+        end
 
         def extract_key_provider(options)
           if options[:key_provider]
