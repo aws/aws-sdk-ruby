@@ -2,16 +2,16 @@
 
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/aws/aws-sdk-core-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-core-ruby/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-core-ruby?branch=master)
 
-This repository contains the code for the V2 AWS SDK for Ruby. For v1 of the 
+This repository contains the code for the V2 AWS SDK for Ruby. For v1 of the
 AWS SDK for Ruby, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
 
 ## Links of Interest
 
-* [Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
-* [Release Notes](http://aws.amazon.com/releasenotes/SDK/Ruby/Core)
+* [API Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
+* [Change Log](https://github.com/aws/aws-sdk-core-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-core-ruby/blob/master/UPGRADING.md)
 * [Issues](http://github.com/aws/aws-sdk-core-ruby/issues)
-* [Forums](https://forums.aws.amazon.com/forum.jspa?forumID=125)
+* [Gitter Channel](https://gitter.im/aws/aws-sdk-core-ruby)
 * [License](http://aws.amazon.com/apache2.0/)
 
 ## V2 Preview Release
