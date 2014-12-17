@@ -51,6 +51,9 @@ Unreleased Changes
 * Feature - Aws::EMR - Added support for accessing the new normalized
   instance hours attribute.
 
+* Feature - Aws::StorageGateway - Added support for for the new ResetCache
+  API operation.
+
 2.0.14 (2014-12-12)
 ------------------
 
