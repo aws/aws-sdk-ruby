@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SWF - Added support for task priorities.
+
 * Feature - Aws::S3::Encryption::Client - Added new options to
   `Aws::S3::Encryption::Client#get_objet`. You can now pass the
   following options to `#get_object`:

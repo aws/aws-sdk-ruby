@@ -730,6 +730,7 @@
         "scheduleToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "startToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "decisionTaskCompletedEventId":{"shape":"EventId"},
         "heartbeatTimeout":{"shape":"DurationInSecondsOptional"}
       }
@@ -789,6 +790,7 @@
         "defaultTaskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskHeartbeatTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskList":{"shape":"TaskList"},
+        "defaultTaskPriority":{"shape":"TaskPriority"},
         "defaultTaskScheduleToStartTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskScheduleToCloseTimeout":{"shape":"DurationInSecondsOptional"}
       }
@@ -1033,6 +1035,7 @@
         "input":{"shape":"Data"},
         "executionStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "taskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "childPolicy":{"shape":"ChildPolicy"},
         "tagList":{"shape":"TagList"},
@@ -1049,6 +1052,7 @@
         "DEFAULT_TASK_START_TO_CLOSE_TIMEOUT_UNDEFINED",
         "DEFAULT_TASK_LIST_UNDEFINED",
         "DEFAULT_CHILD_POLICY_UNDEFINED",
+        "CONTINUE_AS_NEW_WORKFLOW_EXECUTION_RATE_EXCEEDED",
         "OPERATION_NOT_PERMITTED"
       ]
     },
@@ -1179,6 +1183,7 @@
       "required":["taskList"],
       "members":{
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "startToCloseTimeout":{"shape":"DurationInSecondsOptional"}
       }
     },
@@ -1799,6 +1804,7 @@
         "defaultTaskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskHeartbeatTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskList":{"shape":"TaskList"},
+        "defaultTaskPriority":{"shape":"TaskPriority"},
         "defaultTaskScheduleToStartTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskScheduleToCloseTimeout":{"shape":"DurationInSecondsOptional"}
       }
@@ -1830,6 +1836,7 @@
         "defaultTaskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultExecutionStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskList":{"shape":"TaskList"},
+        "defaultTaskPriority":{"shape":"TaskPriority"},
         "defaultChildPolicy":{"shape":"ChildPolicy"}
       }
     },
@@ -1989,6 +1996,7 @@
         "input":{"shape":"Data"},
         "scheduleToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "scheduleToStartTimeout":{"shape":"DurationInSecondsOptional"},
         "startToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "heartbeatTimeout":{"shape":"DurationInSecondsOptional"}
@@ -2113,6 +2121,7 @@
         "input":{"shape":"Data"},
         "executionStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "taskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "childPolicy":{"shape":"ChildPolicy"},
         "tagList":{"shape":"TagList"}
@@ -2168,6 +2177,7 @@
         "input":{"shape":"Data"},
         "executionStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "decisionTaskCompletedEventId":{"shape":"EventId"},
         "childPolicy":{"shape":"ChildPolicy"},
         "taskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
@@ -2220,6 +2230,7 @@
         "workflowId":{"shape":"WorkflowId"},
         "workflowType":{"shape":"WorkflowType"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "input":{"shape":"Data"},
         "executionStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "tagList":{"shape":"TagList"},
@@ -2250,6 +2261,10 @@
       "members":{
         "name":{"shape":"Name"}
       }
+    },
+    "TaskPriority":{
+      "type":"string",
+      "max":11
     },
     "TaskToken":{
       "type":"string",
@@ -2408,6 +2423,7 @@
         "taskStartToCloseTimeout":{"shape":"DurationInSeconds"},
         "executionStartToCloseTimeout":{"shape":"DurationInSeconds"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "childPolicy":{"shape":"ChildPolicy"}
       }
     },
@@ -2426,6 +2442,7 @@
         "newExecutionRunId":{"shape":"RunId"},
         "executionStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "taskList":{"shape":"TaskList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "taskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "childPolicy":{"shape":"ChildPolicy"},
         "tagList":{"shape":"TagList"},
@@ -2543,6 +2560,7 @@
         "taskList":{"shape":"TaskList"},
         "workflowType":{"shape":"WorkflowType"},
         "tagList":{"shape":"TagList"},
+        "taskPriority":{"shape":"TaskPriority"},
         "continuedExecutionRunId":{"shape":"RunIdOptional"},
         "parentWorkflowExecution":{"shape":"WorkflowExecution"},
         "parentInitiatedEventId":{"shape":"EventId"}
@@ -2603,6 +2621,7 @@
         "defaultTaskStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultExecutionStartToCloseTimeout":{"shape":"DurationInSecondsOptional"},
         "defaultTaskList":{"shape":"TaskList"},
+        "defaultTaskPriority":{"shape":"TaskPriority"},
         "defaultChildPolicy":{"shape":"ChildPolicy"}
       }
     },
