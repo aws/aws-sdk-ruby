@@ -51,7 +51,7 @@ module Aws
         when 'list'      then list(shape, value)
         when 'map'       then map(shape, value)
         when 'timestamp' then shape.format_time(value, 'unixTimestamp')
-        when 'blob'      then Base64.strict_encode64(value)
+        when 'blob'      then Base64.strict_encode64(value.read)
         else value
         end
       end
