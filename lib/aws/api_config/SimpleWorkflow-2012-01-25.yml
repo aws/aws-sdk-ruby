@@ -2404,7 +2404,7 @@
     childPolicy:
     - :string
   :outputs:
-    Run:
+    runId:
       :type: :string
 - :name: TerminateWorkflowExecution
   :method: :terminate_workflow_execution
