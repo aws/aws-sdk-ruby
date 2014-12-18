@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.16 (2014-12-18)
 ------------------
 
 * Feature - Aws::SWF - Added support for task priorities.
