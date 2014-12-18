@@ -1,80 +1,109 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :count_closed_workflow_executions: "Calls the CountClosedWorkflowExecutions API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
-  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
-  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
-  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:execution_filter` -
-  (Hash) \n    * `:workflow_id` - *required* - (String) \n  * `:type_filter` - (Hash)
-  \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
-  - (Hash) \n    * `:tag` - *required* - (String) \n  * `:close_status_filter` - (Hash)
-  \n    * `:status` - *required* - (String) Valid values include:\n      * `COMPLETED`\n
-  \     * `FAILED`\n      * `CANCELED`\n      * `TERMINATED`\n      * `CONTINUED_AS_NEW`\n
-  \     * `TIMED_OUT`\n@return [Core::Response] The `#data` method of the response
-  object returns a hash with the following structure:\n\n  * `count` - (Integer)\n
-  \ * `truncated` - (Boolean)"
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain containing
+  the workflow executions to count.\n  * `:start_time_filter` - (Hash) If specified,
+  only workflow executions that meet the start time criteria of the filter are counted.
+  startTimeFilter and closeTimeFilter are mutually exclusive. You must specify one
+  of these in a request but not both.\n    * `:oldest_date` - *required* - (Integer&lt;<unix
+  timestamp>) \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
+  - (Hash) If specified, only workflow executions that meet the close time criteria
+  of the filter are counted. startTimeFilter and closeTimeFilter are mutually exclusive.
+  You must specify one of these in a request but not both.\n    * `:oldest_date` -
+  *required* - (Integer&lt;<unix timestamp>) \n    * `:latest_date` - (Integer&lt;<unix
+  timestamp>) \n  * `:execution_filter` - (Hash) If specified, only workflow executions
+  matching the WorkflowId in the filter are counted. closeStatusFilter, executionFilter,
+  typeFilter and tagFilter are mutually exclusive. You can specify at most one of
+  these in a request.\n    * `:workflow_id` - *required* - (String) \n  * `:type_filter`
+  - (Hash) If specified, indicates the type of the workflow executions to be counted.
+  closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually exclusive.
+  You can specify at most one of these in a request.\n    * `:name` - *required* -
+  (String) \n    * `:version` - (String) \n  * `:tag_filter` - (Hash) If specified,
+  only executions that have a tag that matches the filter are counted. closeStatusFilter,
+  executionFilter, typeFilter and tagFilter are mutually exclusive. You can specify
+  at most one of these in a request.\n    * `:tag` - *required* - (String) \n  * `:close_status_filter`
+  - (Hash) If specified, only workflow executions that match this close status are
+  counted. This filter has an affect only if executionStatus is specified as CLOSED.
+  closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually exclusive.
+  You can specify at most one of these in a request.\n    * `:status` - *required*
+  - (String) Valid values include:\n      * `COMPLETED`\n      * `FAILED`\n      *
+  `CANCELED`\n      * `TERMINATED`\n      * `CONTINUED_AS_NEW`\n      * `TIMED_OUT`\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `count` - (Integer)\n  * `truncated` - (Boolean)"
 :count_open_workflow_executions: "Calls the CountOpenWorkflowExecutions API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>)
-  \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:type_filter` - (Hash)
-  \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
-  - (Hash) \n    * `:tag` - *required* - (String) \n  * `:execution_filter` - (Hash)
-  \n    * `:workflow_id` - *required* - (String) \n@return [Core::Response] The `#data`
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain containing
+  the workflow executions to count.\n  * `:start_time_filter` - *required* - (Hash)
+  Specifies the start time criteria that workflow executions must meet in order to
+  be counted.\n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
+  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:type_filter` - (Hash)
+  Specifies the type of the workflow executions to be counted. executionFilter, typeFilter
+  and tagFilter are mutually exclusive. You can specify at most one of these in a
+  request.\n    * `:name` - *required* - (String) \n    * `:version` - (String) \n
+  \ * `:tag_filter` - (Hash) If specified, only executions that have a tag that matches
+  the filter are counted. executionFilter, typeFilter and tagFilter are mutually exclusive.
+  You can specify at most one of these in a request.\n    * `:tag` - *required* -
+  (String) \n  * `:execution_filter` - (Hash) If specified, only workflow executions
+  matching the WorkflowId in the filter are counted. executionFilter, typeFilter and
+  tagFilter are mutually exclusive. You can specify at most one of these in a request.\n
+  \   * `:workflow_id` - *required* - (String) \n@return [Core::Response] The `#data`
   method of the response object returns a hash with the following structure:\n\n  *
   `count` - (Integer)\n  * `truncated` - (Boolean)"
 :count_pending_activity_tasks: "Calls the CountPendingActivityTasks API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required*
-  - (Hash) \n    * `:name` - *required* - (String) \n@return [Core::Response] The
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain that
+  contains the task list.\n  * `:task_list` - *required* - (Hash) The name of the
+  task list.\n    * `:name` - *required* - (String) \n@return [Core::Response] The
   `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `count` - (Integer)\n  * `truncated` - (Boolean)"
 :count_pending_decision_tasks: "Calls the CountPendingDecisionTasks API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required*
-  - (Hash) \n    * `:name` - *required* - (String) \n@return [Core::Response] The
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain that
+  contains the task list.\n  * `:task_list` - *required* - (Hash) The name of the
+  task list.\n    * `:name` - *required* - (String) \n@return [Core::Response] The
   `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `count` - (Integer)\n  * `truncated` - (Boolean)"
 :deprecate_activity_type: "Calls the DeprecateActivityType API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:activity_type` - *required*
-  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
-  - (String) \n@return [Core::Response]"
-:deprecate_domain: "Calls the DeprecateDomain API operation.\n@param [Hash] options\n
-  \ * `:name` - *required* - (String) \n@return [Core::Response]"
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain in
+  which the activity type is registered.\n  * `:activity_type` - *required* - (Hash)
+  The activity type to deprecate.\n    * `:name` - *required* - (String) \n    * `:version`
+  - *required* - (String) \n@return [Core::Response]"
+:deprecate_domain: |-
+  Calls the DeprecateDomain API operation.
+  @param [Hash] options
+    * `:name` - *required* - (String) The name of the domain to deprecate.
+  @return [Core::Response]
 :deprecate_workflow_type: "Calls the DeprecateWorkflowType API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_type` - *required*
-  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
-  - (String) \n@return [Core::Response]"
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain in
+  which the workflow type is registered.\n  * `:workflow_type` - *required* - (Hash)
+  The workflow type to deprecate.\n    * `:name` - *required* - (String) \n    * `:version`
+  - *required* - (String) \n@return [Core::Response]"
 :describe_activity_type: "Calls the DescribeActivityType API operation.\n@param [Hash]
-  options\n  * `:domain` - *required* - (String) \n  * `:activity_type` - *required*
-  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
-  - (String) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `typeInfo` - (Hash)\n    * `activityType`
-  - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n    * `status`
-  - (String)\n    * `description` - (String)\n    * `creationDate` - (Time)\n    *
-  `deprecationDate` - (Time)\n  * `configuration` - (Hash)\n    * `defaultTaskStartToCloseTimeout`
-  - (String)\n    * `defaultTaskHeartbeatTimeout` - (String)\n    * `defaultTaskList`
-  - (Hash)\n      * `name` - (String)\n    * `defaultTaskScheduleToStartTimeout` -
-  (String)\n    * `defaultTaskScheduleToCloseTimeout` - (String)"
-:describe_domain: "Calls the DescribeDomain API operation.\n@param [Hash] options\n
-  \ * `:name` - *required* - (String) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `domainInfo`
-  - (Hash)\n    * `name` - (String)\n    * `status` - (String)\n    * `description`
-  - (String)\n  * `configuration` - (Hash)\n    * `workflowExecutionRetentionPeriodInDays`
+  options\n  * `:domain` - *required* - (String) The name of the domain in which the
+  activity type is registered.\n  * `:activity_type` - *required* - (Hash) The activity
+  type to get information about. Activity types are identified by the name and version
+  that were supplied when the activity was registered.\n    * `:name` - *required*
+  - (String) \n    * `:version` - *required* - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `typeInfo` - (Hash)\n    * `activityType` - (Hash)\n      * `name` - (String)\n
+  \     * `version` - (String)\n    * `status` - (String)\n    * `description` - (String)\n
+  \   * `creationDate` - (Time)\n    * `deprecationDate` - (Time)\n  * `configuration`
+  - (Hash)\n    * `defaultTaskStartToCloseTimeout` - (String)\n    * `defaultTaskHeartbeatTimeout`
+  - (String)\n    * `defaultTaskList` - (Hash)\n      * `name` - (String)\n    * `defaultTaskPriority`
+  - (String)\n    * `defaultTaskScheduleToStartTimeout` - (String)\n    * `defaultTaskScheduleToCloseTimeout`
   - (String)"
+:describe_domain: |-
+  Calls the DescribeDomain API operation.
+  @param [Hash] options
+    * `:name` - *required* - (String) The name of the domain to describe.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `domainInfo` - (Hash)
+      * `name` - (String)
+      * `status` - (String)
+      * `description` - (String)
+    * `configuration` - (Hash)
+      * `workflowExecutionRetentionPeriodInDays` - (String)
 :describe_workflow_execution: "Calls the DescribeWorkflowExecution API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:execution` - *required*
-  - (Hash) \n    * `:workflow_id` - *required* - (String) \n    * `:run_id` - *required*
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain containing
+  the workflow execution.\n  * `:execution` - *required* - (Hash) The workflow execution
+  to describe.\n    * `:workflow_id` - *required* - (String) \n    * `:run_id` - *required*
   - (String) \n@return [Core::Response] The `#data` method of the response object
   returns a hash with the following structure:\n\n  * `executionInfo` - (Hash)\n    *
   `execution` - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n
@@ -84,41 +113,56 @@
   - (String)\n      * `runId` - (String)\n    * `tagList` - (Array<String>)\n    *
   `cancelRequested` - (Boolean)\n  * `executionConfiguration` - (Hash)\n    * `taskStartToCloseTimeout`
   - (String)\n    * `executionStartToCloseTimeout` - (String)\n    * `taskList` -
-  (Hash)\n      * `name` - (String)\n    * `childPolicy` - (String)\n  * `openCounts`
-  - (Hash)\n    * `openActivityTasks` - (Integer)\n    * `openDecisionTasks` - (Integer)\n
-  \   * `openTimers` - (Integer)\n    * `openChildWorkflowExecutions` - (Integer)\n
-  \ * `latestActivityTaskTimestamp` - (Time)\n  * `latestExecutionContext` - (String)"
+  (Hash)\n      * `name` - (String)\n    * `taskPriority` - (String)\n    * `childPolicy`
+  - (String)\n  * `openCounts` - (Hash)\n    * `openActivityTasks` - (Integer)\n    *
+  `openDecisionTasks` - (Integer)\n    * `openTimers` - (Integer)\n    * `openChildWorkflowExecutions`
+  - (Integer)\n  * `latestActivityTaskTimestamp` - (Time)\n  * `latestExecutionContext`
+  - (String)"
 :describe_workflow_type: "Calls the DescribeWorkflowType API operation.\n@param [Hash]
-  options\n  * `:domain` - *required* - (String) \n  * `:workflow_type` - *required*
-  - (Hash) \n    * `:name` - *required* - (String) \n    * `:version` - *required*
+  options\n  * `:domain` - *required* - (String) The name of the domain in which this
+  workflow type is registered.\n  * `:workflow_type` - *required* - (Hash) The workflow
+  type to describe.\n    * `:name` - *required* - (String) \n    * `:version` - *required*
   - (String) \n@return [Core::Response] The `#data` method of the response object
   returns a hash with the following structure:\n\n  * `typeInfo` - (Hash)\n    * `workflowType`
   - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n    * `status`
   - (String)\n    * `description` - (String)\n    * `creationDate` - (Time)\n    *
   `deprecationDate` - (Time)\n  * `configuration` - (Hash)\n    * `defaultTaskStartToCloseTimeout`
   - (String)\n    * `defaultExecutionStartToCloseTimeout` - (String)\n    * `defaultTaskList`
-  - (Hash)\n      * `name` - (String)\n    * `defaultChildPolicy` - (String)"
+  - (Hash)\n      * `name` - (String)\n    * `defaultTaskPriority` - (String)\n    *
+  `defaultChildPolicy` - (String)"
 :get_workflow_execution_history: "Calls the GetWorkflowExecutionHistory API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:execution` - *required*
-  - (Hash) \n    * `:workflow_id` - *required* - (String) \n    * `:run_id` - *required*
-  - (String) \n  * `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer)
-  \n  * `:reverse_order` - (Boolean) \n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `events`
-  - (Array<Hash>)\n    * `eventTimestamp` - (Time)\n    * `eventType` - (String)\n
-  \   * `eventId` - (Integer)\n    * `workflowExecutionStartedEventAttributes` - (Hash)\n
-  \     * `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain containing
+  the workflow execution.\n  * `:execution` - *required* - (Hash) Specifies the workflow
+  execution for which to return the history.\n    * `:workflow_id` - *required* -
+  (String) \n    * `:run_id` - *required* - (String) \n  * `:next_page_token` - (String)
+  If a NextPageToken was returned by a previous call, there are more results available.
+  To retrieve the next page of results, make the call again using the returned token
+  in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize
+  determines how many results can be returned in a single call.\n  * `:maximum_page_size`
+  - (Integer) The maximum number of results that will be returned per call. nextPageToken
+  can be used to obtain futher pages of results. The default is 100, which is the
+  maximum allowed page size. You can, however, specify a page size smaller than 100.
+  This is an upper limit only; the actual number of results returned per call may
+  be fewer than the specified maximum.\n  * `:reverse_order` - (Boolean) When set
+  to  `true` , returns the events in reverse order. By default the results are returned
+  in ascending order of the eventTimeStamp of the events.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `events` - (Array<Hash>)\n    * `eventTimestamp` - (Time)\n    * `eventType`
+  - (String)\n    * `eventId` - (Integer)\n    * `workflowExecutionStartedEventAttributes`
+  - (Hash)\n      * `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n
   \     * `taskStartToCloseTimeout` - (String)\n      * `childPolicy` - (String)\n
   \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `workflowType`
   - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n      * `tagList`
-  - (Array<String>)\n      * `continuedExecutionRunId` - (String)\n      * `parentWorkflowExecution`
-  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
-  `parentInitiatedEventId` - (Integer)\n    * `workflowExecutionCompletedEventAttributes`
-  - (Hash)\n      * `result` - (String)\n      * `decisionTaskCompletedEventId` -
-  (Integer)\n    * `completeWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
-  `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n    * `workflowExecutionFailedEventAttributes`
-  - (Hash)\n      * `reason` - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n    * `failWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
-  `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n    * `workflowExecutionTimedOutEventAttributes`
+  - (Array<String>)\n      * `taskPriority` - (String)\n      * `continuedExecutionRunId`
+  - (String)\n      * `parentWorkflowExecution` - (Hash)\n        * `workflowId` -
+  (String)\n        * `runId` - (String)\n      * `parentInitiatedEventId` - (Integer)\n
+  \   * `workflowExecutionCompletedEventAttributes` - (Hash)\n      * `result` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `completeWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
+  \   * `workflowExecutionFailedEventAttributes` - (Hash)\n      * `reason` - (String)\n
+  \     * `details` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
+  \   * `failWorkflowExecutionFailedEventAttributes` - (Hash)\n      * `cause` - (String)\n
+  \     * `decisionTaskCompletedEventId` - (Integer)\n    * `workflowExecutionTimedOutEventAttributes`
   - (Hash)\n      * `timeoutType` - (String)\n      * `childPolicy` - (String)\n    *
   `workflowExecutionCanceledEventAttributes` - (Hash)\n      * `details` - (String)\n
   \     * `decisionTaskCompletedEventId` - (Integer)\n    * `cancelWorkflowExecutionFailedEventAttributes`
@@ -126,9 +170,10 @@
   \   * `workflowExecutionContinuedAsNewEventAttributes` - (Hash)\n      * `input`
   - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `newExecutionRunId`
   - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
-  - (Hash)\n        * `name` - (String)\n      * `taskStartToCloseTimeout` - (String)\n
-  \     * `childPolicy` - (String)\n      * `tagList` - (Array<String>)\n      * `workflowType`
-  - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n    * `continueAsNewWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n        * `name` - (String)\n      * `taskPriority` - (String)\n      *
+  `taskStartToCloseTimeout` - (String)\n      * `childPolicy` - (String)\n      *
+  `tagList` - (Array<String>)\n      * `workflowType` - (Hash)\n        * `name` -
+  (String)\n        * `version` - (String)\n    * `continueAsNewWorkflowExecutionFailedEventAttributes`
   - (Hash)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
   \   * `workflowExecutionTerminatedEventAttributes` - (Hash)\n      * `reason` -
   (String)\n      * `details` - (String)\n      * `childPolicy` - (String)\n      *
@@ -136,35 +181,35 @@
   \     * `externalWorkflowExecution` - (Hash)\n        * `workflowId` - (String)\n
   \       * `runId` - (String)\n      * `externalInitiatedEventId` - (Integer)\n      *
   `cause` - (String)\n    * `decisionTaskScheduledEventAttributes` - (Hash)\n      *
-  `taskList` - (Hash)\n        * `name` - (String)\n      * `startToCloseTimeout`
-  - (String)\n    * `decisionTaskStartedEventAttributes` - (Hash)\n      * `identity`
-  - (String)\n      * `scheduledEventId` - (Integer)\n    * `decisionTaskCompletedEventAttributes`
-  - (Hash)\n      * `executionContext` - (String)\n      * `scheduledEventId` - (Integer)\n
-  \     * `startedEventId` - (Integer)\n    * `decisionTaskTimedOutEventAttributes`
-  - (Hash)\n      * `timeoutType` - (String)\n      * `scheduledEventId` - (Integer)\n
-  \     * `startedEventId` - (Integer)\n    * `activityTaskScheduledEventAttributes`
-  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
-  `version` - (String)\n      * `activityId` - (String)\n      * `input` - (String)\n
-  \     * `control` - (String)\n      * `scheduleToStartTimeout` - (String)\n      *
-  `scheduleToCloseTimeout` - (String)\n      * `startToCloseTimeout` - (String)\n
-  \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n      * `heartbeatTimeout` - (String)\n    * `activityTaskStartedEventAttributes`
+  `taskList` - (Hash)\n        * `name` - (String)\n      * `taskPriority` - (String)\n
+  \     * `startToCloseTimeout` - (String)\n    * `decisionTaskStartedEventAttributes`
   - (Hash)\n      * `identity` - (String)\n      * `scheduledEventId` - (Integer)\n
-  \   * `activityTaskCompletedEventAttributes` - (Hash)\n      * `result` - (String)\n
-  \     * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
-  `activityTaskFailedEventAttributes` - (Hash)\n      * `reason` - (String)\n      *
-  `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
-  - (Integer)\n    * `activityTaskTimedOutEventAttributes` - (Hash)\n      * `timeoutType`
+  \   * `decisionTaskCompletedEventAttributes` - (Hash)\n      * `executionContext`
   - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n
-  \     * `details` - (String)\n    * `activityTaskCanceledEventAttributes` - (Hash)\n
-  \     * `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
-  - (Integer)\n      * `latestCancelRequestedEventId` - (Integer)\n    * `activityTaskCancelRequestedEventAttributes`
-  - (Hash)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `activityId`
-  - (String)\n    * `workflowExecutionSignaledEventAttributes` - (Hash)\n      * `signalName`
-  - (String)\n      * `input` - (String)\n      * `externalWorkflowExecution` - (Hash)\n
-  \       * `workflowId` - (String)\n        * `runId` - (String)\n      * `externalInitiatedEventId`
-  - (Integer)\n    * `markerRecordedEventAttributes` - (Hash)\n      * `markerName`
-  - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
+  \   * `decisionTaskTimedOutEventAttributes` - (Hash)\n      * `timeoutType` - (String)\n
+  \     * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
+  `activityTaskScheduledEventAttributes` - (Hash)\n      * `activityType` - (Hash)\n
+  \       * `name` - (String)\n        * `version` - (String)\n      * `activityId`
+  - (String)\n      * `input` - (String)\n      * `control` - (String)\n      * `scheduleToStartTimeout`
+  - (String)\n      * `scheduleToCloseTimeout` - (String)\n      * `startToCloseTimeout`
+  - (String)\n      * `taskList` - (Hash)\n        * `name` - (String)\n      * `taskPriority`
+  - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `heartbeatTimeout`
+  - (String)\n    * `activityTaskStartedEventAttributes` - (Hash)\n      * `identity`
+  - (String)\n      * `scheduledEventId` - (Integer)\n    * `activityTaskCompletedEventAttributes`
+  - (Hash)\n      * `result` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `activityTaskFailedEventAttributes`
+  - (Hash)\n      * `reason` - (String)\n      * `details` - (String)\n      * `scheduledEventId`
+  - (Integer)\n      * `startedEventId` - (Integer)\n    * `activityTaskTimedOutEventAttributes`
+  - (Hash)\n      * `timeoutType` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n      * `details` - (String)\n    * `activityTaskCanceledEventAttributes`
+  - (Hash)\n      * `details` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n      * `latestCancelRequestedEventId` - (Integer)\n
+  \   * `activityTaskCancelRequestedEventAttributes` - (Hash)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `activityId` - (String)\n    * `workflowExecutionSignaledEventAttributes`
+  - (Hash)\n      * `signalName` - (String)\n      * `input` - (String)\n      * `externalWorkflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `externalInitiatedEventId` - (Integer)\n    * `markerRecordedEventAttributes` -
+  (Hash)\n      * `markerName` - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n    * `recordMarkerFailedEventAttributes` - (Hash)\n      * `markerName`
   - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
   (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
@@ -176,26 +221,26 @@
   \     * `workflowId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
   - (String)\n        * `version` - (String)\n      * `control` - (String)\n      *
   `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
-  - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId` -
-  (Integer)\n      * `childPolicy` - (String)\n      * `taskStartToCloseTimeout` -
-  (String)\n      * `tagList` - (Array<String>)\n    * `childWorkflowExecutionStartedEventAttributes`
+  - (Hash)\n        * `name` - (String)\n      * `taskPriority` - (String)\n      *
+  `decisionTaskCompletedEventId` - (Integer)\n      * `childPolicy` - (String)\n      *
+  `taskStartToCloseTimeout` - (String)\n      * `tagList` - (Array<String>)\n    *
+  `childWorkflowExecutionStartedEventAttributes` - (Hash)\n      * `workflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `initiatedEventId` - (Integer)\n    * `childWorkflowExecutionCompletedEventAttributes`
   - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
   \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
-  - (String)\n        * `version` - (String)\n      * `initiatedEventId` - (Integer)\n
-  \   * `childWorkflowExecutionCompletedEventAttributes` - (Hash)\n      * `workflowExecution`
-  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
-  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
-  \     * `result` - (String)\n      * `initiatedEventId` - (Integer)\n      * `startedEventId`
-  - (Integer)\n    * `childWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  - (String)\n        * `version` - (String)\n      * `result` - (String)\n      *
+  `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    * `childWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `reason` - (String)\n      *
+  `details` - (String)\n      * `initiatedEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n    * `childWorkflowExecutionTimedOutEventAttributes` - (Hash)\n      *
   `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n        * `runId`
   - (String)\n      * `workflowType` - (Hash)\n        * `name` - (String)\n        *
-  `version` - (String)\n      * `reason` - (String)\n      * `details` - (String)\n
-  \     * `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
-  `childWorkflowExecutionTimedOutEventAttributes` - (Hash)\n      * `workflowExecution`
-  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
-  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
-  \     * `timeoutType` - (String)\n      * `initiatedEventId` - (Integer)\n      *
-  `startedEventId` - (Integer)\n    * `childWorkflowExecutionCanceledEventAttributes`
+  `version` - (String)\n      * `timeoutType` - (String)\n      * `initiatedEventId`
+  - (Integer)\n      * `startedEventId` - (Integer)\n    * `childWorkflowExecutionCanceledEventAttributes`
   - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
   \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
   - (String)\n        * `version` - (String)\n      * `details` - (String)\n      *
@@ -232,28 +277,71 @@
   \     * `cause` - (String)\n      * `workflowId` - (String)\n      * `initiatedEventId`
   - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `control`
   - (String)\n  * `nextPageToken` - (String)"
-:list_activity_types: "Calls the ListActivityTypes API operation.\n@param [Hash] options\n
-  \ * `:domain` - *required* - (String) \n  * `:name` - (String) \n  * `:registration_status`
-  - *required* - (String) Valid values include:\n    * `REGISTERED`\n    * `DEPRECATED`\n
-  \ * `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order`
-  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `typeInfos` - (Array<Hash>)\n
-  \   * `activityType` - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n
-  \   * `status` - (String)\n    * `description` - (String)\n    * `creationDate`
-  - (Time)\n    * `deprecationDate` - (Time)\n  * `nextPageToken` - (String)"
+:list_activity_types: |-
+  Calls the ListActivityTypes API operation.
+  @param [Hash] options
+    * `:domain` - *required* - (String) The name of the domain in which the activity types have been registered.
+    * `:name` - (String) If specified, only lists the activity types that have this name.
+    * `:registration_status` - *required* - (String) Specifies the registration status of the activity types to list.  Valid values include:
+      * `REGISTERED`
+      * `DEPRECATED`
+    * `:next_page_token` - (String) If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+    * `:maximum_page_size` - (Integer) The maximum number of results that will be returned per call. nextPageToken can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size smaller than 100. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+    * `:reverse_order` - (Boolean) When set to  `true` , returns the results in reverse order. By default, the results are returned in ascending alphabetical order by name of the activity types.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `typeInfos` - (Array<Hash>)
+      * `activityType` - (Hash)
+        * `name` - (String)
+        * `version` - (String)
+      * `status` - (String)
+      * `description` - (String)
+      * `creationDate` - (Time)
+      * `deprecationDate` - (Time)
+    * `nextPageToken` - (String)
 :list_closed_workflow_executions: "Calls the ListClosedWorkflowExecutions API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
-  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
-  - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>) \n
-  \   * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:execution_filter` -
-  (Hash) \n    * `:workflow_id` - *required* - (String) \n  * `:close_status_filter`
-  - (Hash) \n    * `:status` - *required* - (String) Valid values include:\n      *
-  `COMPLETED`\n      * `FAILED`\n      * `CANCELED`\n      * `TERMINATED`\n      *
-  `CONTINUED_AS_NEW`\n      * `TIMED_OUT`\n  * `:type_filter` - (Hash) \n    * `:name`
-  - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter` - (Hash)
-  \n    * `:tag` - *required* - (String) \n  * `:next_page_token` - (String) \n  *
-  `:maximum_page_size` - (Integer) \n  * `:reverse_order` - (Boolean) \n@return [Core::Response]
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain that
+  contains the workflow executions to list.\n  * `:start_time_filter` - (Hash) If
+  specified, the workflow executions are included in the returned results based on
+  whether their start times are within the range specified by this filter. Also, if
+  this parameter is specified, the returned results are ordered by their start times.
+  startTimeFilter and closeTimeFilter are mutually exclusive. You must specify one
+  of these in a request but not both.\n    * `:oldest_date` - *required* - (Integer&lt;<unix
+  timestamp>) \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:close_time_filter`
+  - (Hash) If specified, the workflow executions are included in the returned results
+  based on whether their close times are within the range specified by this filter.
+  Also, if this parameter is specified, the returned results are ordered by their
+  close times. startTimeFilter and closeTimeFilter are mutually exclusive. You must
+  specify one of these in a request but not both.\n    * `:oldest_date` - *required*
+  - (Integer&lt;<unix timestamp>) \n    * `:latest_date` - (Integer&lt;<unix timestamp>)
+  \n  * `:execution_filter` - (Hash) If specified, only workflow executions matching
+  the workflow id specified in the filter are returned. closeStatusFilter, executionFilter,
+  typeFilter and tagFilter are mutually exclusive. You can specify at most one of
+  these in a request.\n    * `:workflow_id` - *required* - (String) \n  * `:close_status_filter`
+  - (Hash) If specified, only workflow executions that match this close status are
+  listed. For example, if TERMINATED is specified, then only TERMINATED workflow executions
+  are listed. closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
+  exclusive. You can specify at most one of these in a request.\n    * `:status` -
+  *required* - (String) Valid values include:\n      * `COMPLETED`\n      * `FAILED`\n
+  \     * `CANCELED`\n      * `TERMINATED`\n      * `CONTINUED_AS_NEW`\n      * `TIMED_OUT`\n
+  \ * `:type_filter` - (Hash) If specified, only executions of the type specified
+  in the filter are returned. closeStatusFilter, executionFilter, typeFilter and tagFilter
+  are mutually exclusive. You can specify at most one of these in a request.\n    *
+  `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
+  - (Hash) If specified, only executions that have the matching tag are listed. closeStatusFilter,
+  executionFilter, typeFilter and tagFilter are mutually exclusive. You can specify
+  at most one of these in a request.\n    * `:tag` - *required* - (String) \n  * `:next_page_token`
+  - (String) If a NextPageToken was returned by a previous call, there are more results
+  available. To retrieve the next page of results, make the call again using the returned
+  token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize
+  determines how many results can be returned in a single call.\n  * `:maximum_page_size`
+  - (Integer) The maximum number of results that will be returned per call. nextPageToken
+  can be used to obtain futher pages of results. The default is 100, which is the
+  maximum allowed page size. You can, however, specify a page size smaller than 100.
+  This is an upper limit only; the actual number of results returned per call may
+  be fewer than the specified maximum.\n  * `:reverse_order` - (Boolean) When set
+  to  `true` , returns the results in reverse order. By default the results are returned
+  in descending order of the start or the close time of the executions.\n@return [Core::Response]
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `executionInfos` - (Array<Hash>)\n    * `execution` - (Hash)\n      * `workflowId`
   - (String)\n      * `runId` - (String)\n    * `workflowType` - (Hash)\n      * `name`
@@ -262,61 +350,130 @@
   - (String)\n    * `parent` - (Hash)\n      * `workflowId` - (String)\n      * `runId`
   - (String)\n    * `tagList` - (Array<String>)\n    * `cancelRequested` - (Boolean)\n
   \ * `nextPageToken` - (String)"
-:list_domains: "Calls the ListDomains API operation.\n@param [Hash] options\n  * `:next_page_token`
-  - (String) \n  * `:registration_status` - *required* - (String) Valid values include:\n
-  \   * `REGISTERED`\n    * `DEPRECATED`\n  * `:maximum_page_size` - (Integer) \n
-  \ * `:reverse_order` - (Boolean) \n@return [Core::Response] The `#data` method of
-  the response object returns a hash with the following structure:\n\n  * `domainInfos`
-  - (Array<Hash>)\n    * `name` - (String)\n    * `status` - (String)\n    * `description`
-  - (String)\n  * `nextPageToken` - (String)"
+:list_domains: |-
+  Calls the ListDomains API operation.
+  @param [Hash] options
+    * `:next_page_token` - (String) If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+    * `:registration_status` - *required* - (String) Specifies the registration status of the domains to list.  Valid values include:
+      * `REGISTERED`
+      * `DEPRECATED`
+    * `:maximum_page_size` - (Integer) The maximum number of results that will be returned per call. nextPageToken can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size smaller than 100. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+    * `:reverse_order` - (Boolean) When set to  `true` , returns the results in reverse order. By default, the results are returned in ascending alphabetical order by name of the domains.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `domainInfos` - (Array<Hash>)
+      * `name` - (String)
+      * `status` - (String)
+      * `description` - (String)
+    * `nextPageToken` - (String)
 :list_open_workflow_executions: "Calls the ListOpenWorkflowExecutions API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:start_time_filter`
-  - *required* - (Hash) \n    * `:oldest_date` - *required* - (Integer&lt;<unix timestamp>)
-  \n    * `:latest_date` - (Integer&lt;<unix timestamp>) \n  * `:type_filter` - (Hash)
-  \n    * `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
-  - (Hash) \n    * `:tag` - *required* - (String) \n  * `:next_page_token` - (String)
-  \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order` - (Boolean) \n  *
-  `:execution_filter` - (Hash) \n    * `:workflow_id` - *required* - (String) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `executionInfos` - (Array<Hash>)\n    * `execution`
-  - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n    * `workflowType`
-  - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n    * `startTimestamp`
-  - (Time)\n    * `closeTimestamp` - (Time)\n    * `executionStatus` - (String)\n
-  \   * `closeStatus` - (String)\n    * `parent` - (Hash)\n      * `workflowId` -
-  (String)\n      * `runId` - (String)\n    * `tagList` - (Array<String>)\n    * `cancelRequested`
-  - (Boolean)\n  * `nextPageToken` - (String)"
-:list_workflow_types: "Calls the ListWorkflowTypes API operation.\n@param [Hash] options\n
-  \ * `:domain` - *required* - (String) \n  * `:name` - (String) \n  * `:registration_status`
-  - *required* - (String) Valid values include:\n    * `REGISTERED`\n    * `DEPRECATED`\n
-  \ * `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order`
-  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `typeInfos` - (Array<Hash>)\n
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain that
+  contains the workflow executions to list.\n  * `:start_time_filter` - *required*
+  - (Hash) Workflow executions are included in the returned results based on whether
+  their start times are within the range specified by this filter.\n    * `:oldest_date`
+  - *required* - (Integer&lt;<unix timestamp>) \n    * `:latest_date` - (Integer&lt;<unix
+  timestamp>) \n  * `:type_filter` - (Hash) If specified, only executions of the type
+  specified in the filter are returned. executionFilter, typeFilter and tagFilter
+  are mutually exclusive. You can specify at most one of these in a request.\n    *
+  `:name` - *required* - (String) \n    * `:version` - (String) \n  * `:tag_filter`
+  - (Hash) If specified, only executions that have the matching tag are listed. executionFilter,
+  typeFilter and tagFilter are mutually exclusive. You can specify at most one of
+  these in a request.\n    * `:tag` - *required* - (String) \n  * `:next_page_token`
+  - (String) If a NextPageToken was returned by a previous call, there are more results
+  available. To retrieve the next page of results, make the call again using the returned
+  token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize
+  determines how many results can be returned in a single call.\n  * `:maximum_page_size`
+  - (Integer) The maximum number of results that will be returned per call. nextPageToken
+  can be used to obtain futher pages of results. The default is 100, which is the
+  maximum allowed page size. You can, however, specify a page size smaller than 100.
+  This is an upper limit only; the actual number of results returned per call may
+  be fewer than the specified maximum.\n  * `:reverse_order` - (Boolean) When set
+  to  `true` , returns the results in reverse order. By default the results are returned
+  in descending order of the start time of the executions.\n  * `:execution_filter`
+  - (Hash) If specified, only workflow executions matching the workflow id specified
+  in the filter are returned. executionFilter, typeFilter and tagFilter are mutually
+  exclusive. You can specify at most one of these in a request.\n    * `:workflow_id`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `executionInfos` - (Array<Hash>)\n
+  \   * `execution` - (Hash)\n      * `workflowId` - (String)\n      * `runId` - (String)\n
   \   * `workflowType` - (Hash)\n      * `name` - (String)\n      * `version` - (String)\n
-  \   * `status` - (String)\n    * `description` - (String)\n    * `creationDate`
-  - (Time)\n    * `deprecationDate` - (Time)\n  * `nextPageToken` - (String)"
+  \   * `startTimestamp` - (Time)\n    * `closeTimestamp` - (Time)\n    * `executionStatus`
+  - (String)\n    * `closeStatus` - (String)\n    * `parent` - (Hash)\n      * `workflowId`
+  - (String)\n      * `runId` - (String)\n    * `tagList` - (Array<String>)\n    *
+  `cancelRequested` - (Boolean)\n  * `nextPageToken` - (String)"
+:list_workflow_types: |-
+  Calls the ListWorkflowTypes API operation.
+  @param [Hash] options
+    * `:domain` - *required* - (String) The name of the domain in which the workflow types have been registered.
+    * `:name` - (String) If specified, lists the workflow type with this name.
+    * `:registration_status` - *required* - (String) Specifies the registration status of the workflow types to list.  Valid values include:
+      * `REGISTERED`
+      * `DEPRECATED`
+    * `:next_page_token` - (String) If a NextPageToken was returned by a previous call, there are more results available. To retrieve the next page of results, make the call again using the returned token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize determines how many results can be returned in a single call.
+    * `:maximum_page_size` - (Integer) The maximum number of results that will be returned per call. nextPageToken can be used to obtain futher pages of results. The default is 100, which is the maximum allowed page size. You can, however, specify a page size smaller than 100. This is an upper limit only; the actual number of results returned per call may be fewer than the specified maximum.
+    * `:reverse_order` - (Boolean) When set to  `true` , returns the results in reverse order. By default the results are returned in ascending alphabetical order of the name of the workflow types.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `typeInfos` - (Array<Hash>)
+      * `workflowType` - (Hash)
+        * `name` - (String)
+        * `version` - (String)
+      * `status` - (String)
+      * `description` - (String)
+      * `creationDate` - (Time)
+      * `deprecationDate` - (Time)
+    * `nextPageToken` - (String)
 :poll_for_activity_task: "Calls the PollForActivityTask API operation.\n@param [Hash]
-  options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required* -
-  (Hash) \n    * `:name` - *required* - (String) \n  * `:identity` - (String) \n@return
-  [Core::Response] The `#data` method of the response object returns a hash with the
-  following structure:\n\n  * `taskToken` - (String)\n  * `activityId` - (String)\n
-  \ * `startedEventId` - (Integer)\n  * `workflowExecution` - (Hash)\n    * `workflowId`
-  - (String)\n    * `runId` - (String)\n  * `activityType` - (Hash)\n    * `name`
-  - (String)\n    * `version` - (String)\n  * `input` - (String)"
+  options\n  * `:domain` - *required* - (String) The name of the domain that contains
+  the task lists being polled.\n  * `:task_list` - *required* - (Hash) Specifies the
+  task list to poll for activity tasks. The specified string must not start or end
+  with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or
+  any control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not
+  contain the literal string \"arn\".\n    * `:name` - *required* - (String) \n  *
+  `:identity` - (String) Identity of the worker making the request, recorded in the
+  ActivityTaskStarted event in the workflow history. This enables diagnostic tracing
+  when problems arise. The form of this identity is user defined.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `taskToken` - (String)\n  * `activityId` - (String)\n  * `startedEventId` -
+  (Integer)\n  * `workflowExecution` - (Hash)\n    * `workflowId` - (String)\n    *
+  `runId` - (String)\n  * `activityType` - (Hash)\n    * `name` - (String)\n    *
+  `version` - (String)\n  * `input` - (String)"
 :poll_for_decision_task: "Calls the PollForDecisionTask API operation.\n@param [Hash]
-  options\n  * `:domain` - *required* - (String) \n  * `:task_list` - *required* -
-  (Hash) \n    * `:name` - *required* - (String) \n  * `:identity` - (String) \n  *
-  `:next_page_token` - (String) \n  * `:maximum_page_size` - (Integer) \n  * `:reverse_order`
-  - (Boolean) \n@return [Core::Response] The `#data` method of the response object
-  returns a hash with the following structure:\n\n  * `taskToken` - (String)\n  *
-  `startedEventId` - (Integer)\n  * `workflowExecution` - (Hash)\n    * `workflowId`
-  - (String)\n    * `runId` - (String)\n  * `workflowType` - (Hash)\n    * `name`
-  - (String)\n    * `version` - (String)\n  * `events` - (Array<Hash>)\n    * `eventTimestamp`
-  - (Time)\n    * `eventType` - (String)\n    * `eventId` - (Integer)\n    * `workflowExecutionStartedEventAttributes`
-  - (Hash)\n      * `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n
-  \     * `taskStartToCloseTimeout` - (String)\n      * `childPolicy` - (String)\n
-  \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `workflowType`
-  - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n      * `tagList`
-  - (Array<String>)\n      * `continuedExecutionRunId` - (String)\n      * `parentWorkflowExecution`
+  options\n  * `:domain` - *required* - (String) The name of the domain containing
+  the task lists to poll.\n  * `:task_list` - *required* - (Hash) Specifies the task
+  list to poll for decision tasks. The specified string must not start or end with
+  whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any
+  control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain
+  the literal string \"arn\".\n    * `:name` - *required* - (String) \n  * `:identity`
+  - (String) Identity of the decider making the request, which is recorded in the
+  DecisionTaskStarted event in the workflow history. This enables diagnostic tracing
+  when problems arise. The form of this identity is user defined.\n  * `:next_page_token`
+  - (String) If a NextPageToken was returned by a previous call, there are more results
+  available. To retrieve the next page of results, make the call again using the returned
+  token in nextPageToken. Keep all other arguments unchanged. The configured maximumPageSize
+  determines how many results can be returned in a single call. The nextPageToken
+  returned by this action cannot be used with GetWorkflowExecutionHistory to get the
+  next page. You must call PollForDecisionTask again (with the nextPageToken) to retrieve
+  the next page of history records. Calling PollForDecisionTask with a nextPageToken
+  will not return a new decision task..\n  * `:maximum_page_size` - (Integer) The
+  maximum number of results that will be returned per call. nextPageToken can be used
+  to obtain futher pages of results. The default is 100, which is the maximum allowed
+  page size. You can, however, specify a page size smaller than 100. This is an upper
+  limit only; the actual number of results returned per call may be fewer than the
+  specified maximum.\n  * `:reverse_order` - (Boolean) When set to  `true` , returns
+  the events in reverse order. By default the results are returned in ascending order
+  of the eventTimestamp of the events.\n@return [Core::Response] The `#data` method
+  of the response object returns a hash with the following structure:\n\n  * `taskToken`
+  - (String)\n  * `startedEventId` - (Integer)\n  * `workflowExecution` - (Hash)\n
+  \   * `workflowId` - (String)\n    * `runId` - (String)\n  * `workflowType` - (Hash)\n
+  \   * `name` - (String)\n    * `version` - (String)\n  * `events` - (Array<Hash>)\n
+  \   * `eventTimestamp` - (Time)\n    * `eventType` - (String)\n    * `eventId` -
+  (Integer)\n    * `workflowExecutionStartedEventAttributes` - (Hash)\n      * `input`
+  - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskStartToCloseTimeout`
+  - (String)\n      * `childPolicy` - (String)\n      * `taskList` - (Hash)\n        *
+  `name` - (String)\n      * `workflowType` - (Hash)\n        * `name` - (String)\n
+  \       * `version` - (String)\n      * `tagList` - (Array<String>)\n      * `taskPriority`
+  - (String)\n      * `continuedExecutionRunId` - (String)\n      * `parentWorkflowExecution`
   - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
   `parentInitiatedEventId` - (Integer)\n    * `workflowExecutionCompletedEventAttributes`
   - (Hash)\n      * `result` - (String)\n      * `decisionTaskCompletedEventId` -
@@ -332,9 +489,10 @@
   \   * `workflowExecutionContinuedAsNewEventAttributes` - (Hash)\n      * `input`
   - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `newExecutionRunId`
   - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
-  - (Hash)\n        * `name` - (String)\n      * `taskStartToCloseTimeout` - (String)\n
-  \     * `childPolicy` - (String)\n      * `tagList` - (Array<String>)\n      * `workflowType`
-  - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n    * `continueAsNewWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n        * `name` - (String)\n      * `taskPriority` - (String)\n      *
+  `taskStartToCloseTimeout` - (String)\n      * `childPolicy` - (String)\n      *
+  `tagList` - (Array<String>)\n      * `workflowType` - (Hash)\n        * `name` -
+  (String)\n        * `version` - (String)\n    * `continueAsNewWorkflowExecutionFailedEventAttributes`
   - (Hash)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n
   \   * `workflowExecutionTerminatedEventAttributes` - (Hash)\n      * `reason` -
   (String)\n      * `details` - (String)\n      * `childPolicy` - (String)\n      *
@@ -342,35 +500,35 @@
   \     * `externalWorkflowExecution` - (Hash)\n        * `workflowId` - (String)\n
   \       * `runId` - (String)\n      * `externalInitiatedEventId` - (Integer)\n      *
   `cause` - (String)\n    * `decisionTaskScheduledEventAttributes` - (Hash)\n      *
-  `taskList` - (Hash)\n        * `name` - (String)\n      * `startToCloseTimeout`
-  - (String)\n    * `decisionTaskStartedEventAttributes` - (Hash)\n      * `identity`
-  - (String)\n      * `scheduledEventId` - (Integer)\n    * `decisionTaskCompletedEventAttributes`
-  - (Hash)\n      * `executionContext` - (String)\n      * `scheduledEventId` - (Integer)\n
-  \     * `startedEventId` - (Integer)\n    * `decisionTaskTimedOutEventAttributes`
-  - (Hash)\n      * `timeoutType` - (String)\n      * `scheduledEventId` - (Integer)\n
-  \     * `startedEventId` - (Integer)\n    * `activityTaskScheduledEventAttributes`
-  - (Hash)\n      * `activityType` - (Hash)\n        * `name` - (String)\n        *
-  `version` - (String)\n      * `activityId` - (String)\n      * `input` - (String)\n
-  \     * `control` - (String)\n      * `scheduleToStartTimeout` - (String)\n      *
-  `scheduleToCloseTimeout` - (String)\n      * `startToCloseTimeout` - (String)\n
-  \     * `taskList` - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId`
-  - (Integer)\n      * `heartbeatTimeout` - (String)\n    * `activityTaskStartedEventAttributes`
+  `taskList` - (Hash)\n        * `name` - (String)\n      * `taskPriority` - (String)\n
+  \     * `startToCloseTimeout` - (String)\n    * `decisionTaskStartedEventAttributes`
   - (Hash)\n      * `identity` - (String)\n      * `scheduledEventId` - (Integer)\n
-  \   * `activityTaskCompletedEventAttributes` - (Hash)\n      * `result` - (String)\n
-  \     * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
-  `activityTaskFailedEventAttributes` - (Hash)\n      * `reason` - (String)\n      *
-  `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
-  - (Integer)\n    * `activityTaskTimedOutEventAttributes` - (Hash)\n      * `timeoutType`
+  \   * `decisionTaskCompletedEventAttributes` - (Hash)\n      * `executionContext`
   - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n
-  \     * `details` - (String)\n    * `activityTaskCanceledEventAttributes` - (Hash)\n
-  \     * `details` - (String)\n      * `scheduledEventId` - (Integer)\n      * `startedEventId`
-  - (Integer)\n      * `latestCancelRequestedEventId` - (Integer)\n    * `activityTaskCancelRequestedEventAttributes`
-  - (Hash)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `activityId`
-  - (String)\n    * `workflowExecutionSignaledEventAttributes` - (Hash)\n      * `signalName`
-  - (String)\n      * `input` - (String)\n      * `externalWorkflowExecution` - (Hash)\n
-  \       * `workflowId` - (String)\n        * `runId` - (String)\n      * `externalInitiatedEventId`
-  - (Integer)\n    * `markerRecordedEventAttributes` - (Hash)\n      * `markerName`
-  - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
+  \   * `decisionTaskTimedOutEventAttributes` - (Hash)\n      * `timeoutType` - (String)\n
+  \     * `scheduledEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
+  `activityTaskScheduledEventAttributes` - (Hash)\n      * `activityType` - (Hash)\n
+  \       * `name` - (String)\n        * `version` - (String)\n      * `activityId`
+  - (String)\n      * `input` - (String)\n      * `control` - (String)\n      * `scheduleToStartTimeout`
+  - (String)\n      * `scheduleToCloseTimeout` - (String)\n      * `startToCloseTimeout`
+  - (String)\n      * `taskList` - (Hash)\n        * `name` - (String)\n      * `taskPriority`
+  - (String)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `heartbeatTimeout`
+  - (String)\n    * `activityTaskStartedEventAttributes` - (Hash)\n      * `identity`
+  - (String)\n      * `scheduledEventId` - (Integer)\n    * `activityTaskCompletedEventAttributes`
+  - (Hash)\n      * `result` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n    * `activityTaskFailedEventAttributes`
+  - (Hash)\n      * `reason` - (String)\n      * `details` - (String)\n      * `scheduledEventId`
+  - (Integer)\n      * `startedEventId` - (Integer)\n    * `activityTaskTimedOutEventAttributes`
+  - (Hash)\n      * `timeoutType` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n      * `details` - (String)\n    * `activityTaskCanceledEventAttributes`
+  - (Hash)\n      * `details` - (String)\n      * `scheduledEventId` - (Integer)\n
+  \     * `startedEventId` - (Integer)\n      * `latestCancelRequestedEventId` - (Integer)\n
+  \   * `activityTaskCancelRequestedEventAttributes` - (Hash)\n      * `decisionTaskCompletedEventId`
+  - (Integer)\n      * `activityId` - (String)\n    * `workflowExecutionSignaledEventAttributes`
+  - (Hash)\n      * `signalName` - (String)\n      * `input` - (String)\n      * `externalWorkflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `externalInitiatedEventId` - (Integer)\n    * `markerRecordedEventAttributes` -
+  (Hash)\n      * `markerName` - (String)\n      * `details` - (String)\n      * `decisionTaskCompletedEventId`
   - (Integer)\n    * `recordMarkerFailedEventAttributes` - (Hash)\n      * `markerName`
   - (String)\n      * `cause` - (String)\n      * `decisionTaskCompletedEventId` -
   (Integer)\n    * `timerStartedEventAttributes` - (Hash)\n      * `timerId` - (String)\n
@@ -382,26 +540,26 @@
   \     * `workflowId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
   - (String)\n        * `version` - (String)\n      * `control` - (String)\n      *
   `input` - (String)\n      * `executionStartToCloseTimeout` - (String)\n      * `taskList`
-  - (Hash)\n        * `name` - (String)\n      * `decisionTaskCompletedEventId` -
-  (Integer)\n      * `childPolicy` - (String)\n      * `taskStartToCloseTimeout` -
-  (String)\n      * `tagList` - (Array<String>)\n    * `childWorkflowExecutionStartedEventAttributes`
+  - (Hash)\n        * `name` - (String)\n      * `taskPriority` - (String)\n      *
+  `decisionTaskCompletedEventId` - (Integer)\n      * `childPolicy` - (String)\n      *
+  `taskStartToCloseTimeout` - (String)\n      * `tagList` - (Array<String>)\n    *
+  `childWorkflowExecutionStartedEventAttributes` - (Hash)\n      * `workflowExecution`
+  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
+  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
+  \     * `initiatedEventId` - (Integer)\n    * `childWorkflowExecutionCompletedEventAttributes`
   - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
   \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
-  - (String)\n        * `version` - (String)\n      * `initiatedEventId` - (Integer)\n
-  \   * `childWorkflowExecutionCompletedEventAttributes` - (Hash)\n      * `workflowExecution`
-  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
-  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
-  \     * `result` - (String)\n      * `initiatedEventId` - (Integer)\n      * `startedEventId`
-  - (Integer)\n    * `childWorkflowExecutionFailedEventAttributes` - (Hash)\n      *
+  - (String)\n        * `version` - (String)\n      * `result` - (String)\n      *
+  `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    * `childWorkflowExecutionFailedEventAttributes`
+  - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
+  \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
+  - (String)\n        * `version` - (String)\n      * `reason` - (String)\n      *
+  `details` - (String)\n      * `initiatedEventId` - (Integer)\n      * `startedEventId`
+  - (Integer)\n    * `childWorkflowExecutionTimedOutEventAttributes` - (Hash)\n      *
   `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n        * `runId`
   - (String)\n      * `workflowType` - (Hash)\n        * `name` - (String)\n        *
-  `version` - (String)\n      * `reason` - (String)\n      * `details` - (String)\n
-  \     * `initiatedEventId` - (Integer)\n      * `startedEventId` - (Integer)\n    *
-  `childWorkflowExecutionTimedOutEventAttributes` - (Hash)\n      * `workflowExecution`
-  - (Hash)\n        * `workflowId` - (String)\n        * `runId` - (String)\n      *
-  `workflowType` - (Hash)\n        * `name` - (String)\n        * `version` - (String)\n
-  \     * `timeoutType` - (String)\n      * `initiatedEventId` - (Integer)\n      *
-  `startedEventId` - (Integer)\n    * `childWorkflowExecutionCanceledEventAttributes`
+  `version` - (String)\n      * `timeoutType` - (String)\n      * `initiatedEventId`
+  - (Integer)\n      * `startedEventId` - (Integer)\n    * `childWorkflowExecutionCanceledEventAttributes`
   - (Hash)\n      * `workflowExecution` - (Hash)\n        * `workflowId` - (String)\n
   \       * `runId` - (String)\n      * `workflowType` - (Hash)\n        * `name`
   - (String)\n        * `version` - (String)\n      * `details` - (String)\n      *
@@ -438,43 +596,149 @@
   \     * `cause` - (String)\n      * `workflowId` - (String)\n      * `initiatedEventId`
   - (Integer)\n      * `decisionTaskCompletedEventId` - (Integer)\n      * `control`
   - (String)\n  * `nextPageToken` - (String)\n  * `previousStartedEventId` - (Integer)"
-:record_activity_task_heartbeat: "Calls the RecordActivityTaskHeartbeat API operation.\n@param
-  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:details` - (String)
-  \n@return [Core::Response] The `#data` method of the response object returns a hash
-  with the following structure:\n\n  * `cancelRequested` - (Boolean)"
+:record_activity_task_heartbeat: |-
+  Calls the RecordActivityTaskHeartbeat API operation.
+  @param [Hash] options
+    * `:task_token` - *required* - (String) The taskToken of the ActivityTask. taskToken is generated by the service and should be treated as an opaque value. If the task is passed to another process, its taskToken must also be passed. This enables it to provide its progress and respond with results.
+    * `:details` - (String) If specified, contains details about the progress of the task.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `cancelRequested` - (Boolean)
 :register_activity_type: "Calls the RegisterActivityType API operation.\n@param [Hash]
-  options\n  * `:domain` - *required* - (String) \n  * `:name` - *required* - (String)
-  \n  * `:version` - *required* - (String) \n  * `:description` - (String) \n  * `:default_task_start_to_close_timeout`
-  - (String) \n  * `:default_task_heartbeat_timeout` - (String) \n  * `:default_task_list`
-  - (Hash) \n    * `:name` - *required* - (String) \n  * `:default_task_schedule_to_start_timeout`
-  - (String) \n  * `:default_task_schedule_to_close_timeout` - (String) \n@return
-  [Core::Response]"
-:register_domain: "Calls the RegisterDomain API operation.\n@param [Hash] options\n
-  \ * `:name` - *required* - (String) \n  * `:description` - (String) \n  * `:workflow_execution_retention_period_in_days`
-  - *required* - (String) \n@return [Core::Response]"
+  options\n  * `:domain` - *required* - (String) The name of the domain in which this
+  activity is to be registered.\n  * `:name` - *required* - (String) The name of the
+  activity type within the domain. The specified string must not start or end with
+  whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any
+  control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain
+  the literal string \"arn\".\n  * `:version` - *required* - (String) The version
+  of the activity type. The activity type consists of the name and version, the combination
+  of which must be unique within the domain. The specified string must not start or
+  end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar),
+  or any control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not
+  contain the literal string \"arn\".\n  * `:description` - (String) A textual description
+  of the activity type.\n  * `:default_task_start_to_close_timeout` - (String) If
+  set, specifies the default maximum duration that a worker can take to process tasks
+  of this activity type. This default can be overridden when scheduling an activity
+  task using the ScheduleActivityTask Decision. The duration is specified in seconds;
+  an integer greater than or equal to 0. The value \"NONE\" can be used to specify
+  unlimited duration.\n  * `:default_task_heartbeat_timeout` - (String) If set, specifies
+  the default maximum time before which a worker processing a task of this type must
+  report progress by calling RecordActivityTaskHeartbeat. If the timeout is exceeded,
+  the activity task is automatically timed out. This default can be overridden when
+  scheduling an activity task using the ScheduleActivityTask Decision. If the activity
+  worker subsequently attempts to record a heartbeat or returns a result, the activity
+  worker receives an UnknownResource fault. In this case, Amazon SWF no longer considers
+  the activity task to be valid; the activity worker should clean up the activity
+  task. The duration is specified in seconds; an integer greater than or equal to
+  0. The value \"NONE\" can be used to specify unlimited duration.\n  * `:default_task_list`
+  - (Hash) If set, specifies the default task list to use for scheduling tasks of
+  this activity type. This default task list is used if a task list is not provided
+  when a task is scheduled through the ScheduleActivityTask Decision.\n    * `:name`
+  - *required* - (String) \n  * `:default_task_priority` - (String) The default task
+  priority to assign to the activity type. If not assigned, then \"0\" will be used.
+  Valid values are integers that range from Java's Integer.MIN_VALUE (-2147483648)
+  to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
+  more information about setting task priority, see Setting Task Priority in the Amazon
+  Simple Workflow Developer Guide.\n  * `:default_task_schedule_to_start_timeout`
+  - (String) If set, specifies the default maximum duration that a task of this activity
+  type can wait before being assigned to a worker. This default can be overridden
+  when scheduling an activity task using the ScheduleActivityTask Decision. The duration
+  is specified in seconds; an integer greater than or equal to 0. The value \"NONE\"
+  can be used to specify unlimited duration.\n  * `:default_task_schedule_to_close_timeout`
+  - (String) If set, specifies the default maximum duration for a task of this activity
+  type. This default can be overridden when scheduling an activity task using the
+  ScheduleActivityTask Decision. The duration is specified in seconds; an integer
+  greater than or equal to 0. The value \"NONE\" can be used to specify unlimited
+  duration.\n@return [Core::Response]"
+:register_domain: |-
+  Calls the RegisterDomain API operation.
+  @param [Hash] options
+    * `:name` - *required* - (String) Name of the domain to register. The name must be unique in the region that the domain is registered in. The specified string must not start or end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any control characters (\u0000-\u001f | \u007f - \u009f). Also, it must not contain the literal string "arn".
+    * `:description` - (String) A text description of the domain.
+    * `:workflow_execution_retention_period_in_days` - *required* - (String) The duration (in days) that records and histories of workflow executions on the domain should be kept by the service. After the retention period, the workflow execution is not available in the results of visibility calls. If you pass the value NONE or 0 (zero), then the workflow execution history will not be retained. As soon as the workflow execution completes, the execution record and its history are deleted. The maximum workflow execution retention period is 90 days. For more information about Amazon SWF service limits, see: Amazon SWF Service Limits in the Amazon SWF Developer Guide.
+  @return [Core::Response]
 :register_workflow_type: "Calls the RegisterWorkflowType API operation.\n@param [Hash]
-  options\n  * `:domain` - *required* - (String) \n  * `:name` - *required* - (String)
-  \n  * `:version` - *required* - (String) \n  * `:description` - (String) \n  * `:default_task_start_to_close_timeout`
-  - (String) \n  * `:default_execution_start_to_close_timeout` - (String) \n  * `:default_task_list`
-  - (Hash) \n    * `:name` - *required* - (String) \n  * `:default_child_policy` -
-  (String) Valid values include:\n    * `TERMINATE`\n    * `REQUEST_CANCEL`\n    *
-  `ABANDON`\n@return [Core::Response]"
-:request_cancel_workflow_execution: "Calls the RequestCancelWorkflowExecution API
-  operation.\n@param [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id`
-  - *required* - (String) \n  * `:run_id` - (String) \n@return [Core::Response]"
-:respond_activity_task_canceled: "Calls the RespondActivityTaskCanceled API operation.\n@param
-  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:details` - (String)
-  \n@return [Core::Response]"
-:respond_activity_task_completed: "Calls the RespondActivityTaskCompleted API operation.\n@param
-  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:result` - (String)
-  \n@return [Core::Response]"
-:respond_activity_task_failed: "Calls the RespondActivityTaskFailed API operation.\n@param
-  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:reason` - (String)
-  \n  * `:details` - (String) \n@return [Core::Response]"
+  options\n  * `:domain` - *required* - (String) The name of the domain in which to
+  register the workflow type.\n  * `:name` - *required* - (String) The name of the
+  workflow type. The specified string must not start or end with whitespace. It must
+  not contain a : (colon), / (slash), | (vertical bar), or any control characters
+  (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain the literal string
+  \"arn\".\n  * `:version` - *required* - (String) The version of the workflow type.
+  The workflow type consists of the name and version, the combination of which must
+  be unique within the domain. To get a list of all currently registered workflow
+  types, use the ListWorkflowTypes action. The specified string must not start or
+  end with whitespace. It must not contain a : (colon), / (slash), | (vertical bar),
+  or any control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not
+  contain the literal string \"arn\".\n  * `:description` - (String) Textual description
+  of the workflow type.\n  * `:default_task_start_to_close_timeout` - (String) If
+  set, specifies the default maximum duration of decision tasks for this workflow
+  type. This default can be overridden when starting a workflow execution using the
+  StartWorkflowExecution action or the StartChildWorkflowExecution Decision. The duration
+  is specified in seconds; an integer greater than or equal to 0. The value \"NONE\"
+  can be used to specify unlimited duration.\n  * `:default_execution_start_to_close_timeout`
+  - (String) If set, specifies the default maximum duration for executions of this
+  workflow type. You can override this default when starting an execution through
+  the StartWorkflowExecution Action or StartChildWorkflowExecution Decision. The duration
+  is specified in seconds; an integer greater than or equal to 0. Unlike some of the
+  other timeout parameters in Amazon SWF, you cannot specify a value of \"NONE\" for
+  defaultExecutionStartToCloseTimeout; there is a one-year max limit on the time that
+  a workflow execution can run. Exceeding this limit will always cause the workflow
+  execution to time out.\n  * `:default_task_list` - (Hash) If set, specifies the
+  default task list to use for scheduling decision tasks for executions of this workflow
+  type. This default is used only if a task list is not provided when starting the
+  execution through the StartWorkflowExecution Action or StartChildWorkflowExecution
+  Decision.\n    * `:name` - *required* - (String) \n  * `:default_task_priority`
+  - (String) The default task priority to assign to the workflow type. If not assigned,
+  then \"0\" will be used. Valid values are integers that range from Java's Integer.MIN_VALUE
+  (-2147483648) to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher
+  priority. For more information about setting task priority, see Setting Task Priority
+  in the Amazon Simple Workflow Developer Guide.\n  * `:default_child_policy` - (String)
+  If set, specifies the default policy to use for the child workflow executions when
+  a workflow execution of this type is terminated, by calling the TerminateWorkflowExecution
+  action explicitly or due to an expired timeout. This default can be overridden when
+  starting a workflow execution using the StartWorkflowExecution action or the StartChildWorkflowExecution
+  Decision. The supported child policies are: TERMINATE: the child executions will
+  be terminated. REQUEST_CANCEL: a request to cancel will be attempted for each child
+  execution by recording a WorkflowExecutionCancelRequested event in its history.
+  It is up to the decider to take appropriate actions when it receives an execution
+  history with this event. ABANDON: no action will be taken. The child executions
+  will continue to run.  Valid values include:\n    * `TERMINATE`\n    * `REQUEST_CANCEL`\n
+  \   * `ABANDON`\n@return [Core::Response]"
+:request_cancel_workflow_execution: |-
+  Calls the RequestCancelWorkflowExecution API operation.
+  @param [Hash] options
+    * `:domain` - *required* - (String) The name of the domain containing the workflow execution to cancel.
+    * `:workflow_id` - *required* - (String) The workflowId of the workflow execution to cancel.
+    * `:run_id` - (String) The runId of the workflow execution to cancel.
+  @return [Core::Response]
+:respond_activity_task_canceled: |-
+  Calls the RespondActivityTaskCanceled API operation.
+  @param [Hash] options
+    * `:task_token` - *required* - (String) The taskToken of the ActivityTask. taskToken is generated by the service and should be treated as an opaque value. If the task is passed to another process, its taskToken must also be passed. This enables it to provide its progress and respond with results.
+    * `:details` - (String) Optional. Information about the cancellation.
+  @return [Core::Response]
+:respond_activity_task_completed: |-
+  Calls the RespondActivityTaskCompleted API operation.
+  @param [Hash] options
+    * `:task_token` - *required* - (String) The taskToken of the ActivityTask. taskToken is generated by the service and should be treated as an opaque value. If the task is passed to another process, its taskToken must also be passed. This enables it to provide its progress and respond with results.
+    * `:result` - (String) The result of the activity task. It is a free form string that is implementation specific.
+  @return [Core::Response]
+:respond_activity_task_failed: |-
+  Calls the RespondActivityTaskFailed API operation.
+  @param [Hash] options
+    * `:task_token` - *required* - (String) The taskToken of the ActivityTask. taskToken is generated by the service and should be treated as an opaque value. If the task is passed to another process, its taskToken must also be passed. This enables it to provide its progress and respond with results.
+    * `:reason` - (String) Description of the error that may assist in diagnostics.
+    * `:details` - (String) Optional. Detailed information about the failure.
+  @return [Core::Response]
 :respond_decision_task_completed: "Calls the RespondDecisionTaskCompleted API operation.\n@param
-  [Hash] options\n  * `:task_token` - *required* - (String) \n  * `:decisions` - (Array&lt;<Hash>)
-  \n    * `:decision_type` - *required* - (String) Valid values include:\n      *
-  `ScheduleActivityTask`\n      * `RequestCancelActivityTask`\n      * `CompleteWorkflowExecution`\n
+  [Hash] options\n  * `:task_token` - *required* - (String) The taskToken from the
+  DecisionTask. taskToken is generated by the service and should be treated as an
+  opaque value. If the task is passed to another process, its taskToken must also
+  be passed. This enables it to provide its progress and respond with results.\n  *
+  `:decisions` - (Array&lt;<Hash>) The list of decisions (possibly empty) made by
+  the decider while processing this decision task. See the docs for the Decision structure
+  for details.\n    * `:decision_type` - *required* - (String) Valid values include:\n
+  \     * `ScheduleActivityTask`\n      * `RequestCancelActivityTask`\n      * `CompleteWorkflowExecution`\n
   \     * `FailWorkflowExecution`\n      * `CancelWorkflowExecution`\n      * `ContinueAsNewWorkflowExecution`\n
   \     * `RecordMarker`\n      * `StartTimer`\n      * `CancelTimer`\n      * `SignalExternalWorkflowExecution`\n
   \     * `RequestCancelExternalWorkflowExecution`\n      * `StartChildWorkflowExecution`\n
@@ -483,23 +747,25 @@
   - *required* - (String) \n      * `:activity_id` - *required* - (String) \n      *
   `:control` - (String) \n      * `:input` - (String) \n      * `:schedule_to_close_timeout`
   - (String) \n      * `:task_list` - (Hash) \n        * `:name` - *required* - (String)
-  \n      * `:schedule_to_start_timeout` - (String) \n      * `:start_to_close_timeout`
-  - (String) \n      * `:heartbeat_timeout` - (String) \n    * `:request_cancel_activity_task_decision_attributes`
-  - (Hash) \n      * `:activity_id` - *required* - (String) \n    * `:complete_workflow_execution_decision_attributes`
+  \n      * `:task_priority` - (String) \n      * `:schedule_to_start_timeout` - (String)
+  \n      * `:start_to_close_timeout` - (String) \n      * `:heartbeat_timeout` -
+  (String) \n    * `:request_cancel_activity_task_decision_attributes` - (Hash) \n
+  \     * `:activity_id` - *required* - (String) \n    * `:complete_workflow_execution_decision_attributes`
   - (Hash) \n      * `:result` - (String) \n    * `:fail_workflow_execution_decision_attributes`
   - (Hash) \n      * `:reason` - (String) \n      * `:details` - (String) \n    *
   `:cancel_workflow_execution_decision_attributes` - (Hash) \n      * `:details` -
   (String) \n    * `:continue_as_new_workflow_execution_decision_attributes` - (Hash)
   \n      * `:input` - (String) \n      * `:execution_start_to_close_timeout` - (String)
   \n      * `:task_list` - (Hash) \n        * `:name` - *required* - (String) \n      *
-  `:task_start_to_close_timeout` - (String) \n      * `:child_policy` - (String) Valid
-  values include:\n        * `TERMINATE`\n        * `REQUEST_CANCEL`\n        * `ABANDON`\n
-  \     * `:tag_list` - (Array&lt;<String>) \n      * `:workflow_type_version` - (String)
-  \n    * `:record_marker_decision_attributes` - (Hash) \n      * `:marker_name` -
-  *required* - (String) \n      * `:details` - (String) \n    * `:start_timer_decision_attributes`
-  - (Hash) \n      * `:timer_id` - *required* - (String) \n      * `:control` - (String)
-  \n      * `:start_to_fire_timeout` - *required* - (String) \n    * `:cancel_timer_decision_attributes`
-  - (Hash) \n      * `:timer_id` - *required* - (String) \n    * `:signal_external_workflow_execution_decision_attributes`
+  `:task_priority` - (String) \n      * `:task_start_to_close_timeout` - (String)
+  \n      * `:child_policy` - (String) Valid values include:\n        * `TERMINATE`\n
+  \       * `REQUEST_CANCEL`\n        * `ABANDON`\n      * `:tag_list` - (Array&lt;<String>)
+  \n      * `:workflow_type_version` - (String) \n    * `:record_marker_decision_attributes`
+  - (Hash) \n      * `:marker_name` - *required* - (String) \n      * `:details` -
+  (String) \n    * `:start_timer_decision_attributes` - (Hash) \n      * `:timer_id`
+  - *required* - (String) \n      * `:control` - (String) \n      * `:start_to_fire_timeout`
+  - *required* - (String) \n    * `:cancel_timer_decision_attributes` - (Hash) \n
+  \     * `:timer_id` - *required* - (String) \n    * `:signal_external_workflow_execution_decision_attributes`
   - (Hash) \n      * `:workflow_id` - *required* - (String) \n      * `:run_id` -
   (String) \n      * `:signal_name` - *required* - (String) \n      * `:input` - (String)
   \n      * `:control` - (String) \n    * `:request_cancel_external_workflow_execution_decision_attributes`
@@ -509,26 +775,96 @@
   *required* - (String) \n        * `:version` - *required* - (String) \n      * `:workflow_id`
   - *required* - (String) \n      * `:control` - (String) \n      * `:input` - (String)
   \n      * `:execution_start_to_close_timeout` - (String) \n      * `:task_list`
-  - (Hash) \n        * `:name` - *required* - (String) \n      * `:task_start_to_close_timeout`
-  - (String) \n      * `:child_policy` - (String) Valid values include:\n        *
-  `TERMINATE`\n        * `REQUEST_CANCEL`\n        * `ABANDON`\n      * `:tag_list`
-  - (Array&lt;<String>) \n  * `:execution_context` - (String) \n@return [Core::Response]"
-:signal_workflow_execution: "Calls the SignalWorkflowExecution API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id` - *required*
-  - (String) \n  * `:run_id` - (String) \n  * `:signal_name` - *required* - (String)
-  \n  * `:input` - (String) \n@return [Core::Response]"
+  - (Hash) \n        * `:name` - *required* - (String) \n      * `:task_priority`
+  - (String) \n      * `:task_start_to_close_timeout` - (String) \n      * `:child_policy`
+  - (String) Valid values include:\n        * `TERMINATE`\n        * `REQUEST_CANCEL`\n
+  \       * `ABANDON`\n      * `:tag_list` - (Array&lt;<String>) \n  * `:execution_context`
+  - (String) User defined context to add to workflow execution.\n@return [Core::Response]"
+:signal_workflow_execution: |-
+  Calls the SignalWorkflowExecution API operation.
+  @param [Hash] options
+    * `:domain` - *required* - (String) The name of the domain containing the workflow execution to signal.
+    * `:workflow_id` - *required* - (String) The workflowId of the workflow execution to signal.
+    * `:run_id` - (String) The runId of the workflow execution to signal.
+    * `:signal_name` - *required* - (String) The name of the signal. This name must be meaningful to the target workflow.
+    * `:input` - (String) Data to attach to the WorkflowExecutionSignaled event in the target workflow execution's history.
+  @return [Core::Response]
 :start_workflow_execution: "Calls the StartWorkflowExecution API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id` - *required*
-  - (String) \n  * `:workflow_type` - *required* - (Hash) \n    * `:name` - *required*
-  - (String) \n    * `:version` - *required* - (String) \n  * `:task_list` - (Hash)
-  \n    * `:name` - *required* - (String) \n  * `:input` - (String) \n  * `:execution_start_to_close_timeout`
-  - (String) \n  * `:tag_list` - (Array&lt;<String>) \n  * `:task_start_to_close_timeout`
-  - (String) \n  * `:child_policy` - (String) Valid values include:\n    * `TERMINATE`\n
-  \   * `REQUEST_CANCEL`\n    * `ABANDON`\n@return [Core::Response] The `#data` method
-  of the response object returns a hash with the following structure:\n\n  * `runId`
-  - (String)"
-:terminate_workflow_execution: "Calls the TerminateWorkflowExecution API operation.\n@param
-  [Hash] options\n  * `:domain` - *required* - (String) \n  * `:workflow_id` - *required*
-  - (String) \n  * `:run_id` - (String) \n  * `:reason` - (String) \n  * `:details`
-  - (String) \n  * `:child_policy` - (String) Valid values include:\n    * `TERMINATE`\n
-  \   * `REQUEST_CANCEL`\n    * `ABANDON`\n@return [Core::Response]"
+  [Hash] options\n  * `:domain` - *required* - (String) The name of the domain in
+  which the workflow execution is created.\n  * `:workflow_id` - *required* - (String)
+  The user defined identifier associated with the workflow execution. You can use
+  this to associate a custom identifier with the workflow execution. You may specify
+  the same identifier if a workflow execution is logically a restart of a previous
+  execution. You cannot have two open workflow executions with the same workflowId
+  at the same time. The specified string must not start or end with whitespace. It
+  must not contain a : (colon), / (slash), | (vertical bar), or any control characters
+  (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain the literal string
+  \"arn\".\n  * `:workflow_type` - *required* - (Hash) The type of the workflow to
+  start.\n    * `:name` - *required* - (String) \n    * `:version` - *required* -
+  (String) \n  * `:task_list` - (Hash) The task list to use for the decision tasks
+  generated for this workflow execution. This overrides the defaultTaskList specified
+  when registering the workflow type. A task list for this workflow execution must
+  be specified either as a default for the workflow type or through this parameter.
+  If neither this parameter is set nor a default task list was specified at registration
+  time then a fault will be returned. The specified string must not start or end with
+  whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any
+  control characters (\\u0000-\\u001f | \\u007f - \\u009f). Also, it must not contain
+  the literal string \"arn\".\n    * `:name` - *required* - (String) \n  * `:task_priority`
+  - (String) The task priority to use for this workflow execution. This will override
+  any default priority that was assigned when the workflow type was registered. If
+  not set, then the default task priority for the workflow type will be used. Valid
+  values are integers that range from Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE
+  (2147483647). Higher numbers indicate higher priority. For more information about
+  setting task priority, see Setting Task Priority in the Amazon Simple Workflow Developer
+  Guide.\n  * `:input` - (String) The input for the workflow execution. This is a
+  free form string which should be meaningful to the workflow you are starting. This
+  input is made available to the new workflow execution in the WorkflowExecutionStarted
+  history event.\n  * `:execution_start_to_close_timeout` - (String) The total duration
+  for this workflow execution. This overrides the defaultExecutionStartToCloseTimeout
+  specified when registering the workflow type. The duration is specified in seconds;
+  an integer greater than or equal to 0. Exceeding this limit will cause the workflow
+  execution to time out. Unlike some of the other timeout parameters in Amazon SWF,
+  you cannot specify a value of \"NONE\" for this timeout; there is a one-year max
+  limit on the time that a workflow execution can run. An execution start-to-close
+  timeout must be specified either through this parameter or as a default when the
+  workflow type is registered. If neither this parameter nor a default execution start-to-close
+  timeout is specified, a fault is returned.\n  * `:tag_list` - (Array&lt;<String>)
+  The list of tags to associate with the workflow execution. You can specify a maximum
+  of 5 tags. You can list workflow executions with a specific tag by calling ListOpenWorkflowExecutions
+  or ListClosedWorkflowExecutions and specifying a TagFilter.\n  * `:task_start_to_close_timeout`
+  - (String) Specifies the maximum duration of decision tasks for this workflow execution.
+  This parameter overrides the defaultTaskStartToCloseTimout specified when registering
+  the workflow type using RegisterWorkflowType. The duration is specified in seconds;
+  an integer greater than or equal to 0. The value \"NONE\" can be used to specify
+  unlimited duration. A task start-to-close timeout for this workflow execution must
+  be specified either as a default for the workflow type or through this parameter.
+  If neither this parameter is set nor a default task start-to-close timeout was specified
+  at registration time then a fault will be returned.\n  * `:child_policy` - (String)
+  If set, specifies the policy to use for the child workflow executions of this workflow
+  execution if it is terminated, by calling the TerminateWorkflowExecution action
+  explicitly or due to an expired timeout. This policy overrides the default child
+  policy specified when registering the workflow type using RegisterWorkflowType.
+  The supported child policies are: TERMINATE: the child executions will be terminated.
+  REQUEST_CANCEL: a request to cancel will be attempted for each child execution by
+  recording a WorkflowExecutionCancelRequested event in its history. It is up to the
+  decider to take appropriate actions when it receives an execution history with this
+  event. ABANDON: no action will be taken. The child executions will continue to run.
+  A child policy for this workflow execution must be specified either as a default
+  for the workflow type or through this parameter. If neither this parameter is set
+  nor a default child policy was specified at registration time then a fault will
+  be returned.  Valid values include:\n    * `TERMINATE`\n    * `REQUEST_CANCEL`\n
+  \   * `ABANDON`\n@return [Core::Response] The `#data` method of the response object
+  returns a hash with the following structure:\n\n  * `runId` - (String)"
+:terminate_workflow_execution: |-
+  Calls the TerminateWorkflowExecution API operation.
+  @param [Hash] options
+    * `:domain` - *required* - (String) The domain of the workflow execution to terminate.
+    * `:workflow_id` - *required* - (String) The workflowId of the workflow execution to terminate.
+    * `:run_id` - (String) The runId of the workflow execution to terminate.
+    * `:reason` - (String) Optional. A descriptive reason for terminating the workflow execution.
+    * `:details` - (String) Optional. Details for terminating the workflow execution.
+    * `:child_policy` - (String) If set, specifies the policy to use for the child workflow executions of the workflow execution being terminated. This policy overrides the child policy specified for the workflow execution at registration time or when starting the execution. The supported child policies are: TERMINATE: the child executions will be terminated. REQUEST_CANCEL: a request to cancel will be attempted for each child execution by recording a WorkflowExecutionCancelRequested event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event. ABANDON: no action will be taken. The child executions will continue to run. A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault will be returned.  Valid values include:
+      * `TERMINATE`
+      * `REQUEST_CANCEL`
+      * `ABANDON`
+  @return [Core::Response]

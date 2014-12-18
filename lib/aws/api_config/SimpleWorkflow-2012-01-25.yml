@@ -1,4 +1,4 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -217,6 +217,8 @@
           :members:
             name:
               :type: :string
+        defaultTaskPriority:
+          :type: :string
         defaultTaskScheduleToStartTimeout:
           :type: :string
         defaultTaskScheduleToCloseTimeout:
@@ -306,6 +308,8 @@
           :members:
             name:
               :type: :string
+        taskPriority:
+          :type: :string
         childPolicy:
           :type: :string
     openCounts:
@@ -369,6 +373,8 @@
           :members:
             name:
               :type: :string
+        defaultTaskPriority:
+          :type: :string
         defaultChildPolicy:
           :type: :string
 - :name: GetWorkflowExecutionHistory
@@ -426,6 +432,8 @@
                 version:
                   :type: :string
             tagList:
+              :type: :string
+            taskPriority:
               :type: :string
             continuedExecutionRunId:
               :type: :string
@@ -505,6 +513,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             taskStartToCloseTimeout:
               :type: :string
             childPolicy:
@@ -558,6 +568,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             startToCloseTimeout:
               :type: :string
         decisionTaskStartedEventAttributes:
@@ -612,6 +624,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             decisionTaskCompletedEventId:
               :type: :integer
             heartbeatTimeout:
@@ -756,6 +770,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             decisionTaskCompletedEventId:
               :type: :integer
             childPolicy:
@@ -1416,6 +1432,8 @@
                   :type: :string
             tagList:
               :type: :string
+            taskPriority:
+              :type: :string
             continuedExecutionRunId:
               :type: :string
             parentWorkflowExecution:
@@ -1494,6 +1512,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             taskStartToCloseTimeout:
               :type: :string
             childPolicy:
@@ -1547,6 +1567,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             startToCloseTimeout:
               :type: :string
         decisionTaskStartedEventAttributes:
@@ -1601,6 +1623,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             decisionTaskCompletedEventId:
               :type: :integer
             heartbeatTimeout:
@@ -1745,6 +1769,8 @@
               :members:
                 name:
                   :type: :string
+            taskPriority:
+              :type: :string
             decisionTaskCompletedEventId:
               :type: :integer
             childPolicy:
@@ -2068,6 +2094,8 @@
         name:
         - :string
         - :required
+    defaultTaskPriority:
+    - :string
     defaultTaskScheduleToStartTimeout:
     - :string
     defaultTaskScheduleToCloseTimeout:
@@ -2108,6 +2136,8 @@
         name:
         - :string
         - :required
+    defaultTaskPriority:
+    - :string
     defaultChildPolicy:
     - :string
   :outputs: {}
@@ -2189,6 +2219,8 @@
                   name:
                   - :string
                   - :required
+              taskPriority:
+              - :string
               scheduleToStartTimeout:
               - :string
               startToCloseTimeout:
@@ -2225,6 +2257,8 @@
                   name:
                   - :string
                   - :required
+              taskPriority:
+              - :string
               taskStartToCloseTimeout:
               - :string
               childPolicy:
@@ -2304,6 +2338,8 @@
                   name:
                   - :string
                   - :required
+              taskPriority:
+              - :string
               taskStartToCloseTimeout:
               - :string
               childPolicy:
@@ -2354,6 +2390,8 @@
         name:
         - :string
         - :required
+    taskPriority:
+    - :string
     input:
     - :string
     executionStartToCloseTimeout:
@@ -2366,7 +2404,7 @@
     childPolicy:
     - :string
   :outputs:
-    runId:
+    Run:
       :type: :string
 - :name: TerminateWorkflowExecution
   :method: :terminate_workflow_execution
