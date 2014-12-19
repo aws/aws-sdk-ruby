@@ -45,6 +45,7 @@ module AWS
               "parentInitiatedEventId"=>0,
               "taskStartToCloseTimeout"=>"3600",
               "taskList"=>{"name"=>"task-list"},
+              "taskPriority"=>"12345",
               "workflowType"=>{"name"=>"name", "version"=>"version"},
               "executionStartToCloseTimeout"=>"3600",
               "childPolicy"=>"TERMINATE"
@@ -58,6 +59,7 @@ module AWS
             "eventId"=>2,
             "decisionTaskScheduledEventAttributes"=>{
               "taskList"=>{"name"=>"task-list"},
+              "taskPriority"=>"12345",
               "startToCloseTimeout"=>"P0Y0M0DT0H0M3600S"
             },
             "eventTimestamp"=>1320428958.56
@@ -165,6 +167,7 @@ module AWS
                 :schedule_to_start_timeout => '132',
                 :start_to_close_timeout => 'NONE',
                 :task_list => { :name => 'task-list' },
+                :task_priority => '1234',
               }
             })
             activity_type = { :name => 'name', :version => 'version' }
@@ -175,6 +178,7 @@ module AWS
               :schedule_to_start_timeout => 132,
               :start_to_close_timeout => :none,
               :task_list => 'task-list',
+              :task_priority => 1234,
             })
             task.complete!
           end
@@ -309,13 +313,15 @@ module AWS
                 :execution_start_to_close_timeout => '1000',
                 :task_start_to_close_timeout => 'NONE',
                 :task_list => { :name => 'task-list' },
+                :task_priority => '1234',
               },
             })
             task.continue_as_new_workflow_execution(
               :child_policy => :terminate,
               :execution_start_to_close_timeout => 1000,
               :task_start_to_close_timeout => :none,
-              :task_list => 'task-list')
+              :task_list => 'task-list',
+              :task_priority => 1234)
             task.complete!
           end
 
@@ -521,6 +527,7 @@ module AWS
                 :execution_start_to_close_timeout => '1000',
                 :task_start_to_close_timeout => 'NONE',
                 :task_list => { :name => 'task-list' },
+                :task_priority => '12345',
                 :control => 'control',
               },
             })
@@ -531,6 +538,7 @@ module AWS
               :execution_start_to_close_timeout => 1000,
               :task_start_to_close_timeout => :none,
               :task_list => 'task-list',
+              :task_priority => 12345,
               :control => 'control')
             task.complete!
           end

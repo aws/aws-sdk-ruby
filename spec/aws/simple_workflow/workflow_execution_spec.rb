@@ -34,6 +34,7 @@ module AWS
           'childPolicy' => 'TERMINATE',
           'executionStartToCloseTimeout' => '123456789',
           'taskList' => { 'name' => 'task-list' },
+          'taskPriority' => '123456789',
           'taskStartToCloseTimeout' => '123456',
         },
         'executionInfo' => {
@@ -167,6 +168,16 @@ module AWS
           :static => true
 
       end
+
+      context '#task_priority' do
+
+        it_behaves_like "an attribute",
+          :name => :task_priority,
+          :value => 123456789,
+          :static => true
+
+      end
+
 
       context '#task_start_to_close_timeout' do
 

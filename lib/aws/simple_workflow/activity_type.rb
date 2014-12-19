@@ -61,6 +61,11 @@ module AWS
     #   registration. This default task list is used if a task list is
     #   not provided when a task is scheduled.
     #
+    # @attr_reader [Integer,nil] default_task_priority
+    #   The default priority specified for this activity type at registration.
+    #   This default task priority is used if a task priority is not provided
+    #   when a task is scheduled.
+    #
     # @attr_reader [Integer,:none,nil] default_task_schedule_to_close_timeout
     #   The default maximum duration specified when registering the
     #   activity type, for tasks of this activity type. You can override
@@ -97,6 +102,10 @@ module AWS
 
       config_attribute :default_task_list do
         translates_output {|v| v['name'] }
+      end
+
+      config_attribute :default_task_priority do
+        translates_output {|v| v.to_i }
       end
 
       config_attribute :default_task_schedule_to_close_timeout, :duration => true
