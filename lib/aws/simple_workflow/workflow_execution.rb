@@ -35,6 +35,9 @@ module AWS
     # @attr_reader [String] task_list The task list used for the decision
     #   tasks generated for this workflow execution.
     #
+    # @attr_reader [Integer] task_priority The task priority used for the decision
+    #   tasks generated for this workflow execution.
+    #
     # @attr_reader [String] task_start_to_close_timeout The maximum duration
     #   allowed for decision tasks for this workflow execution.
     #
@@ -86,6 +89,8 @@ module AWS
       config_attribute :task_list do
         translates_output{|v| v['name'] }
       end
+
+      config_attribute :task_priority
 
       config_attribute :task_start_to_close_timeout, :duration => true
 
