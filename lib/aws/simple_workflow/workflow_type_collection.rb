@@ -54,6 +54,11 @@ module AWS
       #   executions of this workflow type. This default is used only if
       #   a task list is not provided when starting the workflow execution.
       #
+      # @option options [Integer] :default_task_priority (nil) Specifies
+      #   the default task priority to use for scheduling decision tasks for
+      #   executions of this workflow type. This default is used only if
+      #   a task priority is not provided when starting the workflow execution.
+      #
       # @option options [Integer,:none] :default_task_start_to_close_timeout (nil)
       #   The default maximum duration of decision tasks for this workflow type.
       #
@@ -74,6 +79,10 @@ module AWS
         duration_opts(options,
           :default_execution_start_to_close_timeout,
           :default_task_start_to_close_timeout)
+
+        if priority = options[:default_task_priority]
+          options[:default_task_priority] = priority.to_s
+        end
 
         if task_list = options[:default_task_list]
           options[:default_task_list] = { :name => task_list.to_s }

@@ -251,6 +251,11 @@ module AWS
       #   the activity task. If not specified, the default task list
       #   registered with the activity type will be used.
       #
+      # @option options [Integer] :task_priority (nil)
+      #   If set, specifies the value of the task priority at which to
+      #   schedule the activity task. If not specified, the default task
+      #   priority registered with the activity type will be used.
+      #
       # @return [nil]
       #
       def schedule_activity_task activity_type, options = {}
@@ -280,6 +285,10 @@ module AWS
           :schedule_to_close_timeout,
           :schedule_to_start_timeout,
           :start_to_close_timeout)
+
+        if priority = options[:task_priority]
+          options[:task_priority] = priority.to_s
+        end
 
         if task_list = options[:task_list]
           options[:task_list] = { :name => task_list }
@@ -395,6 +404,11 @@ module AWS
       # @option options [String] :task_list (nil)
       #   The task list to use for the decision tasks generated for this
       #   workflow execution. This overrides the default task list specified
+      #   when registering the workflow type.
+      #
+      # @option options [Integer] :task_priority (nil)
+      #   The task priority to use for the decision tasks generated for this
+      #   workflow execution. This overrides the default task priority specified
       #   when registering the workflow type.
       #
       # @option options [Integer,:none] :task_start_to_close_timeout (nil)

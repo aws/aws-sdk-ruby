@@ -104,7 +104,9 @@ module AWS
         translates_output {|v| v['name'] }
       end
 
-      config_attribute :default_task_priority
+      config_attribute :default_task_priority do
+        translates_output {|v| v.to_i }
+      end
 
       config_attribute :default_task_schedule_to_close_timeout, :duration => true
 

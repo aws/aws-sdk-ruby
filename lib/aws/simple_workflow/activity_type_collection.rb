@@ -42,6 +42,11 @@ module AWS
       #   This default task list is used if a task list is not provided
       #   when a task is scheduled.
       #
+      # @option options [Integer] :default_task_priority (nil) Specifies
+      #   the default task priority to use for scheduling tasks for this
+      #   activity type. This default is used only if a task priority is
+      #   not provided when a task is scheduled.
+      #
       # @option options [Integer,:none] :default_task_schedule_to_close_timeout (nil)
       #   The value should be a number of seconds (integer) or the symbol
       #   `:none` (implying no timeout).
@@ -76,6 +81,10 @@ module AWS
           :default_task_schedule_to_close_timeout,
           :default_task_schedule_to_start_timeout,
           :default_task_start_to_close_timeout)
+
+        if priority = options[:default_task_priority]
+          options[:default_task_priority] = priority.to_s
+        end
 
         if task_list = options[:default_task_list]
           options[:default_task_list] = { :name => task_list.to_s }

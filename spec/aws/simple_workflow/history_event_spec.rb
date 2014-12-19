@@ -52,6 +52,7 @@ module AWS
         'workflowType' => { 'name' => 'name', 'version' => 'version' },
         'workflowExecution' => { 'workflowId' => 'wid', 'runId' => 'rid' },
         'taskList' => { 'name' => 'task-list-name' },
+        'taskPriority' => '123456789',
 
       }}
 
@@ -100,6 +101,7 @@ module AWS
             :workflow_type => domain.workflow_types['name','version'],
             :workflow_execution => domain.workflow_executions['wid','rid'],
             :task_list => 'task-list-name',
+            :task_priority => 123456789,
 
           }
 

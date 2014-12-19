@@ -71,6 +71,10 @@ module AWS
           :execution_start_to_close_timeout,
           :task_start_to_close_timeout)
 
+        if priority = options[:task_priority]
+          options[:task_priority] = priority.to_s
+        end
+
         if options.has_key?(:task_list)
           options[:task_list] = { :name => options[:task_list].to_s }
         end
