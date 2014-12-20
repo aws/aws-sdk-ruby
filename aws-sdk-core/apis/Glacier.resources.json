@@ -43,7 +43,12 @@
       ],
       "actions": {
         "CreateVault": {
-          "request": { "operation": "CreateVault" },
+          "request": {
+            "operation": "CreateVault",
+            "params": [
+              { "target": "accountId", "sourceType": "identifier", "source": "Id" }
+            ]
+          },
           "resource": {
             "type": "Vault",
             "identifiers": [

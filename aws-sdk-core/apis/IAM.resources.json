@@ -323,7 +323,10 @@
     },
     "Group": {
       "identifiers": [
-        { "name": "Name" }
+        {
+          "name": "Name",
+          "memberName": "GroupName"
+        }
       ],
       "shape": "Group",
       "load": {
@@ -437,8 +440,14 @@
     },
     "GroupPolicy": {
       "identifiers": [
-        { "name": "GroupName" },
-        { "name": "Name" }
+        {
+          "name": "GroupName",
+          "memberName": "GroupName"
+        },
+        {
+          "name": "Name",
+          "memberName": "PolicyName"
+        }
       ],
       "shape": "GetGroupPolicyResponse",
       "load": {
@@ -474,7 +483,10 @@
     },
     "InstanceProfile": {
       "identifiers": [
-        { "name": "Name" }
+        {
+          "name": "Name",
+          "memberName": "InstanceProfileName"
+        }
       ],
       "shape": "InstanceProfile",
       "load": {
@@ -526,7 +538,10 @@
     },
     "LoginProfile": {
       "identifiers": [
-        { "name": "UserName" }
+        {
+          "name": "UserName",
+          "memberName": "UserName"
+        }
       ],
       "shape": "LoginProfile",
       "load": {
@@ -567,8 +582,14 @@
     },
     "MfaDevice": {
       "identifiers": [
-        { "name": "UserName" },
-        { "name": "SerialNumber" }
+        {
+          "name": "UserName",
+          "memberName": "UserName"
+        },
+        {
+          "name": "SerialNumber",
+          "memberName": "SerialNumber"
+        }
       ],
       "shape": "MFADevice",
       "actions": {
@@ -603,7 +624,10 @@
     },
     "Role": {
       "identifiers": [
-        { "name": "Name" }
+        {
+          "name": "Name",
+          "memberName": "RoleName"
+        }
       ],
       "shape": "Role",
       "load": {
@@ -672,8 +696,14 @@
     },
     "RolePolicy": {
       "identifiers": [
-        { "name": "RoleName" },
-        { "name": "Name" }
+        {
+          "name": "RoleName",
+          "memberName": "RoleName"
+        },
+        {
+          "name": "Name",
+          "memberName": "PolicyName"
+        }
       ],
       "shape": "GetRolePolicyResponse",
       "load": {
@@ -781,7 +811,10 @@
     },
     "SigningCertificate": {
       "identifiers": [
-        { "name": "Id" }
+        {
+          "name": "Id",
+          "memberName": "CertificateId"
+        }
       ],
       "shape": "SigningCertificate",
       "actions": {
@@ -815,7 +848,10 @@
     },
     "User": {
       "identifiers": [
-        { "name": "Name" }
+        {
+          "name": "Name",
+          "memberName": "UserName"
+        }
       ],
       "shape": "User",
       "load": {
@@ -847,7 +883,7 @@
             "type": "AccessKeyPair",
             "identifiers": [
               { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Id", "sourceType": "responsePath", "source": "AccessKey.AccessKeyId" },
+              { "target": "Id", "sourceType": "responsePath", "source": "AccessKey.AccessKeyId" }
               { "target": "Secret", "sourceType": "responsePath", "source": "AccessKey.SecretAccessKey" }
             ],
             "path": "AccessKey"
@@ -990,8 +1026,14 @@
     },
     "UserPolicy": {
       "identifiers": [
-        { "name": "UserName" },
-        { "name": "Name" }
+        {
+          "name": "UserName",
+          "memberName": "UserName"
+        },
+        {
+          "name": "Name",
+          "memberName": "PolicyName"
+        }
       ],
       "shape": "GetUserPolicyResponse",
       "load": {
@@ -1027,7 +1069,10 @@
     },
     "VirtualMfaDevice": {
       "identifiers": [
-        { "name": "SerialNumber" }
+        {
+          "name": "SerialNumber",
+          "memberName": "SerialNumber"
+        }
       ],
       "shape": "VirtualMFADevice",
       "actions": {
