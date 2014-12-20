@@ -168,7 +168,7 @@ module Aws
 
         it 'serializes blobs as base64 strings' do
           members['data'] = { 'type' => 'blob' }
-          expect(json(data:'hello')).to eq('{"data":"aGVsbG8="}')
+          expect(json(data:StringIO.new('hello'))).to eq('{"data":"aGVsbG8="}')
         end
 
       end
