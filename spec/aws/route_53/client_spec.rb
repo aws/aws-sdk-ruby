@@ -70,14 +70,14 @@ module AWS
       <Change>
         <Action>CREATE</Action>
         <ResourceRecordSet>
-          <Name>sub.domain.com</Name>
           <Type>CNAME</Type>
-          <TTL>3600</TTL>
           <ResourceRecords>
             <ResourceRecord>
               <Value>value1</Value>
             </ResourceRecord>
           </ResourceRecords>
+          <Name>sub.domain.com</Name>
+          <TTL>3600</TTL>
         </ResourceRecordSet>
       </Change>
     </Changes>

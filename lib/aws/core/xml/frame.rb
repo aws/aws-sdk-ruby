@@ -232,7 +232,7 @@ module AWS
           if @text.tr(*TRANSLATE_DIGITS) == EASY_FORMAT
             parts = @text.tr(*DATE_PUNCTUATION).chop.split.map {|p| p.to_i }
             milliseconds = parts.pop
-            parts[-1] = parts[-1] + "0.#{milliseconds}".to_f
+            parts[-1] = parts[-1] + Rational(milliseconds, 1000)  #Ruby 1.8.7 compatibility
             klass.send(parts_constructor, *parts)
           else
             # fallback in case we have to handle another date format
