@@ -634,7 +634,7 @@ module AWS
             Kernel.should_receive(:sleep).with(2)
 
             provider = EC2Provider.new({:retries => 2})
-            provider.set?.should be_false
+            provider.set?.should be false
             provider.retries.should == 2
           end
 
