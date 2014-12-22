@@ -71,6 +71,11 @@ module AWS
     #   the default task list to use for scheduling decision tasks for
     #   executions of this workflow type.
     #
+    # @attr_reader [Integer,nil] default_task_priority Specifies the
+    #   default task priority for this workflow type at registration.
+    #   This default task priority is used if a task priority is not provided
+    #   when a task is scheduled.
+    #
     # @attr_reader [Integer,:none,nil] default_task_start_to_close_timeout
     #   The default maximum duration of decision tasks for this workflow type.
     #
@@ -96,6 +101,10 @@ module AWS
 
       config_attribute :default_task_list do
         translates_output {|v| v['name'] }
+      end
+
+      config_attribute :default_task_priority do
+        translates_output {|v| v.to_i }
       end
 
       config_attribute :default_task_start_to_close_timeout,

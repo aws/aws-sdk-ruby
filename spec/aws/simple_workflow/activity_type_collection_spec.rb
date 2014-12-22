@@ -87,6 +87,14 @@ module AWS
               :default_task_start_to_close_timeout => :none)
           end
 
+          it 'accepts :default_task_priority as an integer' do
+            client.should_receive(register_method).with(register_opts.merge(
+              :default_task_priority => '123456'))
+            types.register('name', 'version',
+              :default_task_priority => 123456)
+          end
+
+
         end
 
       end

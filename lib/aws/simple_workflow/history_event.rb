@@ -164,6 +164,8 @@ module AWS
       #
       # * taskList is returned as a string, not a hash.
       #
+      # * taskPriority is returned as an Integer, not a String.
+      #
       class Attributes
 
         # @api private
@@ -234,6 +236,8 @@ module AWS
             value.to_s =~ /^\d+$/ ? value.to_i : value.downcase.to_sym
           when 'taskList'
             value['name']
+          when 'taskPriority'
+            value.to_i
           when 'childPolicy'
             value.downcase.to_sym
           when 'activityType'

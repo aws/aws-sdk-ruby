@@ -102,6 +102,18 @@ module AWS
 
         end
 
+        context ':task_priority' do
+
+          it 'accepts a task priority' do
+            client.should_receive(:start_workflow_execution).
+              with(hash_including(:task_priority => '10')).
+              and_return(response)
+            type.start_execution(:task_priority => 10)
+          end
+
+        end
+
+
       end
 
       context '#count_executions' do
