@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.17 (2014-12-22)
 ------------------
 
 * Issue - Request Marshalling - Resolved an issue with how blob types
