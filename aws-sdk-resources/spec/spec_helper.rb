@@ -1,3 +1,5 @@
+$: << File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-core', 'lib')
+
 require 'simplecov'
 require 'rspec'
 require 'webmock/rspec'
