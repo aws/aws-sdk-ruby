@@ -883,7 +883,7 @@
             "type": "AccessKeyPair",
             "identifiers": [
               { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Id", "sourceType": "responsePath", "source": "AccessKey.AccessKeyId" }
+              { "target": "Id", "sourceType": "responsePath", "source": "AccessKey.AccessKeyId" },
               { "target": "Secret", "sourceType": "responsePath", "source": "AccessKey.SecretAccessKey" }
             ],
             "path": "AccessKey"
