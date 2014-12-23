@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Request Marshalling - Resolved an issue with how blob types
+  are marshalled into a JSON request body. Resolved by #180, fixes
+  #178, #182.
+
 2.0.16 (2014-12-18)
 ------------------
 
