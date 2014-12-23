@@ -59,35 +59,6 @@ module AWS
           }
         }}
 
-        it 'makes a POST request' do
-          handler.should_receive(:handle) do |req,resp|
-            req.http_method.should eq("POST")
-            req.uri.should eq('/2013-04-01/hostedzone/zone-id/rrset/')
-            req.body.xml_cleanup.should eq(<<-XML.xml_cleanup)
-<ChangeResourceRecordSetsRequest #{namespace}>
-  <ChangeBatch>
-    <Changes>
-      <Change>
-        <Action>CREATE</Action>
-        <ResourceRecordSet>
-          <Type>CNAME</Type>
-          <ResourceRecords>
-            <ResourceRecord>
-              <Value>value1</Value>
-            </ResourceRecord>
-          </ResourceRecords>
-          <Name>sub.domain.com</Name>
-          <TTL>3600</TTL>
-        </ResourceRecordSet>
-      </Change>
-    </Changes>
-  </ChangeBatch>
-</ChangeResourceRecordSetsRequest>
-XML
-          end
-          client.change_resource_record_sets(options)
-        end
-
         it 'strips the /hostedzone/ prefix from the :hosted_zone_id param' do
           options[:hosted_zone_id] = '/hostedzone/zone-id'
           handler.should_receive(:handle) do |req,resp|
