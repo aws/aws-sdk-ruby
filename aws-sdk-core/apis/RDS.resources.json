@@ -1,0 +1,61 @@
+{
+  "service": {
+    "actions": {
+      "CreateDBInstance": {
+        "request": { "operation": "CreateDBInstance" },
+        "resource": {
+          "type": "DBInstance",
+          "identifiers": [
+            { "target": "Id", "sourceType": "requestParameter", "source": "DBInstanceIdentifier" }
+          ]
+        }
+      }
+    },
+    "hasMany": {
+      "DBInstances": {
+        "request": { "operation": "DescribeDBInstances" },
+        "resource": {
+          "type": "DBInstance",
+          "identifiers": [
+            { "target": "Id", "sourceType": "responsePath", "source": "DBInstances[].DBInstanceIdentifier" }
+          ]
+        }
+      }
+    }
+  },
+  "resources": {
+    "DBInstance": {
+      "identifiers": [
+        { "name": "Id" }
+      ],
+      "shape": "DBInstance",
+      "load": {
+        "request": {
+          "operation": "DescribeDBInstances",
+          "params": [
+            { "target": "DBInstanceIdentifier", "sourceType": "identifier", "source": "Id" }
+          ]
+        },
+        "path": "DBInstances[0]"
+      },
+      "actions": {
+        "Modify": {
+          "request": {
+            "operation": "ModifyDBInstance",
+            "params": [
+              { "target": "DBInstanceIdentifier", "sourceType": "identifier", "source": "Id" }
+            ]
+          }
+        },
+        "Delete": {
+          "request": {
+            "operation": "DeleteDBInstance",
+            "params": [
+              { "target": "DBInstanceIdentifier", "sourceType": "identifier", "source": "Id" }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
