@@ -5,13 +5,7 @@
         "request": { "operation": "ChangePassword" }
       },
       "CreateAccountAlias": {
-        "request": { "operation": "CreateAccountAlias" },
-        "resource": {
-          "type": "AccountAlias",
-          "identifiers": [
-            { "target": "Name", "sourceType": "requestParameter", "source": "AccountAlias" }
-          ]
-        }
+        "request": { "operation": "CreateAccountAlias" }
       },
       "CreateAccountPasswordPolicy": {
         "request": { "operation": "UpdateAccountPasswordPolicy" },
@@ -100,15 +94,6 @@
       }
     },
     "hasMany": {
-      "AccountAliases": {
-        "request": { "operation": "ListAccountAliases" },
-        "resource": {
-          "type": "AccountAlias",
-          "identifiers": [
-            { "target": "Name", "sourceType": "responsePath", "source": "AccountAliases[]" }
-          ]
-        }
-      },
       "Groups": {
         "request": { "operation": "ListGroups" },
         "resource": {
@@ -277,21 +262,6 @@
             "params": [
               { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
               { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" }
-            ]
-          }
-        }
-      }
-    },
-    "AccountAlias": {
-      "identifiers": [
-        { "name": "Name" }
-      ],
-      "actions": {
-        "Delete": {
-          "request": {
-            "operation": "DeleteAccountAlias",
-            "params": [
-              { "target": "AccountAlias", "sourceType": "identifier", "source": "Name" }
             ]
           }
         }

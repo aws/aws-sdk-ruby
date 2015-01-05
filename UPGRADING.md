@@ -1,5 +1,27 @@
 # Upgrade Notes
 
+## `aws-sdk-resources` - v2.0.18.pre
+
+* Removed `Aws::IAM::AccountSummary`. Calling
+  `Aws::IAM::Resource#create_account_summary` no longer returns a resource
+  object.
+
+  ```ruby
+  iam = Aws::IAM::Resource.new
+
+  # old
+  iam.create_account_alias(account_alias:'alias')
+  iam.account_alias('alias').delete
+
+  # new (no need to specify the alias when deleting)
+  iam.create_account_alias(account_alias:'alias')
+  iam.delete_account_alias
+  ```
+
+  Also, the `Aws::IAM::Resource#account_aliases` method has been removed.
+  There is no replacement. IAM does not permit more than one account
+  alias.
+
 ## `aws-sdk-resources` - v2.0.14.pre
 
 * Removed `:topic_arn` from the list of identifiers required
