@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - Aws::IAM - Renamed two methods on `Aws::IAM::MFADevice`.
+
+  * `#enable` -> `#associate`
+  * `#disable` -> `#disassociate`
+
 * Upgrading - Aws::IAM - Removed `Aws::IAM::AccountSummary`. Calling
   `Aws::IAM::Resource#create_account_summary` no longer returns a resource
   object.

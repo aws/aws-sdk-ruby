@@ -2,6 +2,11 @@
 
 ## `aws-sdk-resources` - v2.0.18.pre
 
+* Renamed two methods on `Aws::IAM::MFADevice`.
+
+  * `#enable` -> `#associate`
+  * `#disable` -> `#disassociate`
+
 * Removed `Aws::IAM::AccountSummary`. Calling
   `Aws::IAM::Resource#create_account_summary` no longer returns a resource
   object.

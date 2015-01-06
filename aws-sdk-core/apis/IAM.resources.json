@@ -563,18 +563,18 @@
       ],
       "shape": "MFADevice",
       "actions": {
-        "Deactivate": {
+        "Associate": {
           "request": {
-            "operation": "DeactivateMFADevice",
+            "operation": "EnableMFADevice",
             "params": [
               { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
               { "target": "SerialNumber", "sourceType": "identifier", "source": "SerialNumber" }
             ]
           }
         },
-        "Enable": {
+        "Disassociate": {
           "request": {
-            "operation": "EnableMFADevice",
+            "operation": "DeactivateMFADevice",
             "params": [
               { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
               { "target": "SerialNumber", "sourceType": "identifier", "source": "SerialNumber" }
