@@ -2,6 +2,18 @@
 
 ## `aws-sdk-resources` - v2.0.18.pre
 
+* Moved `Aws::IAM::Role#update_assume_role_policy` to a new resource class.
+
+  ```ruby
+  iam = Aws::IAM::Resource.new
+
+  # old
+  iam.role('name').update_assume_role_policy(policy_document:'...')
+
+  # new
+  iam.role('name').assume_role_policy.update(policy_document:'...')
+  ```
+
 * Renamed two methods on `Aws::IAM::MFADevice`.
 
   * `#enable` -> `#associate`

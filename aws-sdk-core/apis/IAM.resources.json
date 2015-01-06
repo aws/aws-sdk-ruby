@@ -291,6 +291,21 @@
         "path": "@"
       }
     },
+    "AssumeRolePolicy": {
+      "identifiers": [
+        { "name": "RoleName" }
+      ],
+      "actions": {
+        "Update": {
+          "request": {
+            "operation": "UpdateAssumeRolePolicy",
+            "params": [
+              { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
+            ]
+          }
+        }
+      }
+    },
     "Group": {
       "identifiers": [
         {
@@ -617,14 +632,6 @@
               { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
             ]
           }
-        },
-        "UpdateAssumeRolePolicy": {
-          "request": {
-            "operation": "UpdateAssumeRolePolicy",
-            "params": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
-            ]
-          }
         }
       },
       "hasMany": {
@@ -660,7 +667,10 @@
         }
       },
       "subResources": {
-        "resources": [ "RolePolicy" ],
+        "resources": [
+          "AssumeRolePolicy",
+          "RolePolicy"
+        ],
         "identifiers": { "Name": "RoleName" }
       }
     },
