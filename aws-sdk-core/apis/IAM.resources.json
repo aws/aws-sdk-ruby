@@ -142,16 +142,6 @@
           ]
         }
       },
-      "SigningCertificates": {
-        "request": { "operation": "ListSigningCertificates" },
-        "resource": {
-          "type": "SigningCertificate",
-          "identifiers": [
-            { "target": "Id", "sourceType": "responsePath", "source": "Certificates[].CertificateId" }
-          ],
-          "path": "Certificates[]"
-        }
-      },
       "Users": {
         "request": { "operation": "ListUsers" },
         "resource": {
@@ -306,6 +296,43 @@
         }
       }
     },
+    "CurrentUser": {
+      "hasMany": {
+        "AccessKeys": {
+          "request": { "operation": "ListAccessKeys" },
+          "resource": {
+            "type": "AccessKey",
+            "identifiers": [
+              { "target": "UserName", "sourceType": "responsePath", "source": "AccessKeyMetadata[].UserName" },
+              { "target": "Id", "sourceType": "responsePath", "source": "AccessKeyMetadata[].AccessKeyId" }
+            ],
+            "path": "AccessKeyMetadata[]"
+          }
+        },
+        "MfaDevices": {
+          "request": { "operation": "ListMFADevices" },
+          "resource": {
+            "type": "MfaDevice",
+            "identifiers": [
+              { "target": "UserName", "sourceType": "responsePath", "source": "MFADevices[].UserName" },
+              { "target": "SerialNumber", "sourceType": "responsePath", "source": "MFADevices[].SerialNumber" }
+            ],
+            "path": "MFADevices[]"
+          }
+        },
+        "SigningCertificates": {
+          "request": { "operation": "ListSigningCertificates" },
+          "resource": {
+            "type": "SigningCertificate",
+            "identifiers": [
+              { "target": "UserName", "sourceType": "responsePath", "source": "Certificates[].UserName" },
+              { "target": "Id", "sourceType": "responsePath", "source": "Certificates[].CertificateId" }
+            ],
+            "path": "Certificates[]"
+          }
+        }
+      }
+    },
     "Group": {
       "identifiers": [
         {
@@ -338,6 +365,13 @@
             "params": [
               { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
             ]
+          },
+          "resource": {
+            "type": "Group",
+            "identifiers": [
+              { "target": "Name", "sourceType": "requestParameter", "source": "GroupName" }
+            ],
+            "path": "Group"
           }
         },
         "CreatePolicy": {
@@ -545,6 +579,13 @@
             "params": [
               { "target": "UserName", "sourceType": "identifier", "source": "UserName" }
             ]
+          },
+          "resource": {
+            "type": "LoginProfile",
+            "identifiers": [
+              { "target": "UserName", "sourceType": "responsePath", "source": "LoginProfile.UserName" }
+            ],
+            "path": "LoginProfile"
           }
         },
         "Delete": {
@@ -792,6 +833,10 @@
     "SigningCertificate": {
       "identifiers": [
         {
+          "name": "UserName",
+          "memberName": "UserName"
+        },
+        {
           "name": "Id",
           "memberName": "CertificateId"
         }
@@ -802,6 +847,7 @@
           "request": {
             "operation": "UpdateSigningCertificate",
             "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
               { "target": "CertificateId", "sourceType": "identifier", "source": "Id" },
               { "target": "Status", "sourceType": "string", "source": "Active" }
             ]
@@ -811,6 +857,7 @@
           "request": {
             "operation": "UpdateSigningCertificate",
             "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
               { "target": "CertificateId", "sourceType": "identifier", "source": "Id" },
               { "target": "Status", "sourceType": "string", "source": "Inactive" }
             ]
@@ -820,6 +867,7 @@
           "request": {
             "operation": "DeleteSigningCertificate",
             "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
               { "target": "CertificateId", "sourceType": "identifier", "source": "Id" }
             ]
           }
@@ -852,6 +900,21 @@
             ]
           }
         },
+        "Create": {
+          "request": {
+            "operation": "CreateUser",
+            "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+            ]
+          },
+          "resource": {
+            "type": "User",
+            "identifiers": [
+              { "target": "Name", "sourceType": "requestParameter", "source": "UserName" }
+            ],
+            "path": "User"
+          }
+        },
         "CreateAccessKeyPair": {
           "request": {
             "operation": "CreateAccessKey",
@@ -867,6 +930,21 @@
               { "target": "Secret", "sourceType": "responsePath", "source": "AccessKey.SecretAccessKey" }
             ],
             "path": "AccessKey"
+          }
+        },
+        "CreateLoginProfile": {
+          "request": {
+            "operation": "CreateLoginProfile",
+            "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+            ]
+          },
+          "resource": {
+            "type": "LoginProfile",
+            "identifiers": [
+              { "target": "UserName", "sourceType": "responsePath", "source": "LoginProfile.UserName" }
+            ],
+            "path": "LoginProfile"
           }
         },
         "CreatePolicy": {
@@ -992,6 +1070,22 @@
               { "target": "Name", "sourceType": "responsePath", "source": "PolicyNames[]" }
             ]
           }
+        },
+        "SigningCertificates": {
+          "request": {
+            "operation": "ListSigningCertificates",
+            "params": [
+              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+            ]
+          },
+          "resource": {
+            "type": "SigningCertificate",
+            "identifiers": [
+              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
+              { "target": "Id", "sourceType": "responsePath", "source": "Certificates[].CertificateId" }
+            ],
+            "path": "Certificates[]"
+          }
         }
       },
       "subResources": {
@@ -999,6 +1093,7 @@
           "AccessKey",
           "LoginProfile",
           "MfaDevice",
+          "SigningCertificate",
           "UserPolicy"
         ],
         "identifiers": { "Name": "UserName" }

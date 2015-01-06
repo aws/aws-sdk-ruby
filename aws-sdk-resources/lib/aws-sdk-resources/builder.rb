@@ -60,7 +60,7 @@ module Aws
       end
 
       def build_one(identifiers, options)
-        if identifiers.values.any?(&:nil?)
+        if identifiers.count > 0 && identifiers.values.all?(&:nil?)
           nil
         else
           @resource_class.new(identifiers.merge(
