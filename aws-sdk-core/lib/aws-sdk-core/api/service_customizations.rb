@@ -109,6 +109,12 @@ module Aws
         add_plugin 'Aws::Plugins::S3SseCpk'
         add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
         add_plugin 'Aws::Plugins::S3RequestSigner'
+
+        # required for the GetBucketLocation fix to work, disabled normal
+        # parsing of the output
+        client_class.api.operation(:get_bucket_location).
+          instance_variable_set("@output", nil)
+
         defs = client_class.waiters.instance_variable_get("@definitions")
         defs[:bucket_exists]['ignore_errors'] = ['NotFound']
         defs[:object_exists]['ignore_errors'] = ['NotFound']

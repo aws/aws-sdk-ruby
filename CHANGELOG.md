@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved an issue with `Aws::S3::Client#get_bucket_location`.
+  Fixes GitHub issue #185.
+
 * Upgrading - Aws::IAM - Moved `Aws::Role#update_assume_role_policy` to a
   new resource class.
 

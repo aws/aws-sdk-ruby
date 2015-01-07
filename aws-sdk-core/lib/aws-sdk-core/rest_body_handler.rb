@@ -7,8 +7,7 @@ module Aws
     def call(context)
       context.http_request.body = build_body(context)
       @handler.call(context).on_success do |response|
-        response.error = nil
-        response.data = extract_data(response.context)
+        response.data = extract_data(response.context) unless response.data
       end
     end
 
