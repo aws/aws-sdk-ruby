@@ -8,12 +8,12 @@ module Aws
 Waits until this #{resource_class_name} is #{state}. This method
 waits by polling {Client##{api_request_name}} until successful. An error is
 raised after a configurable number of failed checks.
-    
+
 This waiter uses the following defaults:
 
 | Configuration   | Default                |
 |-----------------|------------------------|
-| `#interval`     | #{waiter.interval}     |
+| `#delay`        | #{waiter.delay}        |
 | `#max_attempts` | #{waiter.max_attempts} |
 
 You can modify defaults and register callbacks by passing a block argument.
@@ -52,7 +52,7 @@ You can modify defaults and register callbacks by passing a block argument.
         end
 
         def api_request_name
-          waiter.send(:operation_name)
+          waiter.poller.operation_name
         end
 
         def option_tags

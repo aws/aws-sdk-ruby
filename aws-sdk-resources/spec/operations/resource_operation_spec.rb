@@ -67,7 +67,7 @@ module Aws
 
             request = Request.new(method_name: 'operation_name')
             builder = Builder.new(resource_class:resource_class, sources:[
-              BuilderSources::ResponsePath.new('path', 'id')
+              BuilderSources::ResponsePath.new(source:'path', target:'id')
             ])
 
             operation = ResourceOperation.new(request:request, builder:builder)

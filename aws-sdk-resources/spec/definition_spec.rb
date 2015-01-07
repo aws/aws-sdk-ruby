@@ -100,8 +100,8 @@ module Aws
                         'identifiers' => [
                           {
                             'target' => 'Name',
-                            'sourceType' => 'requestParameter',
-                            'source' => 'ThingName'
+                            'source' => 'requestParameter',
+                            'path' => 'ThingName'
                           }
                         ]
                       }
@@ -144,8 +144,8 @@ module Aws
                           {
                             # using JMESPath to extract thing names
                             'target' => 'Name',
-                            'sourceType' => 'responsePath',
-                            'source' => 'Things[].Name'
+                            'source' => 'response',
+                            'path' => 'Things[].Name'
                           }
                         ]
                       }
@@ -192,8 +192,8 @@ module Aws
                           {
                             # using JMESPath to extract thing names
                             'target' => 'Name',
-                            'sourceType' => 'responsePath',
-                            'source' => 'Things[].Name'
+                            'source' => 'response',
+                            'path' => 'Things[].Name'
                           }
                         ],
                         'path' => 'Things[]'
@@ -233,6 +233,19 @@ module Aws
 
             let(:definition) {{
               'service' => {
+                'has' => {
+                  'Thing' => {
+                    'resource' => {
+                      'type' => 'Thing',
+                      'identifiers' => [
+                        {
+                          'target' => 'Name',
+                          'source' => 'input'
+                        }
+                      ]
+                    }
+                  }
+                },
                 'hasMany' => {
                   'Things' => {
                     'request' => { 'operation' => 'ListThings' },
@@ -241,8 +254,8 @@ module Aws
                       'identifiers' => [
                         {
                           'target' => 'Name',
-                          'sourceType' => 'responsePath',
-                          'source' => 'Things[].Name'
+                          'source' => 'response',
+                          'path' => 'Things[].Name'
                         }
                       ],
                       'path' => 'Things[]'
@@ -416,7 +429,7 @@ module Aws
                     'request' => {
                       'operation' => 'DescribeThing',
                       'params' => [
-                        { 'target' => 'ThingName', 'sourceType' => 'identifier', 'source' => 'Name' }
+                        { 'target' => 'ThingName', 'source' => 'identifier', 'name' => 'Name' }
                       ]
                     },
                     'path' => 'ThingData'
@@ -477,7 +490,7 @@ module Aws
                       'request' => {
                         'operation' => 'DeleteThing',
                         'params' => [
-                          { "target" => "ThingName", "sourceType" => "identifier", "source" => "Name" }
+                          { "target" => "ThingName", "source" => "identifier", "name" => "Name" }
                         ]
                       }
                     }
@@ -513,8 +526,8 @@ module Aws
                         'identifiers' => [
                           {
                             'target' => 'Name',
-                            'sourceType' => 'requestParameter',
-                            'source' => 'ThingName'
+                            'source' => 'requestParameter',
+                            'path' => 'ThingName'
                           }
                         ]
                       }
@@ -549,8 +562,8 @@ module Aws
                         'params' => [
                           {
                             'target' => 'ThingName',
-                            'sourceType' => 'identifier',
-                            'source' => 'Name'
+                            'source' => 'identifier',
+                            'name' => 'Name'
                           }
                         ]
                       },
@@ -559,13 +572,13 @@ module Aws
                         'identifiers' => [
                           {
                             'target' => 'ThingName',
-                            'sourceType' => 'identifier',
-                            'source' => 'Name'
+                            'source' => 'identifier',
+                            'name' => 'Name'
                           },
                           {
                             'target' => 'Name',
-                            'sourceType' => 'responsePath',
-                            'source' => 'DooDad.DooDadName'
+                            'source' => 'response',
+                            'path' => 'DooDad.DooDadName'
                           }
                         ]
                       }
@@ -609,8 +622,8 @@ module Aws
                         'params' => [
                           {
                             'target' => 'ThingName',
-                            'sourceType' => 'identifier',
-                            'source' => 'Name'
+                            'source' => 'identifier',
+                            'name' => 'Name'
                           }
                         ]
                       },
@@ -619,13 +632,13 @@ module Aws
                         'identifiers' => [
                           {
                             'target' => 'ThingName',
-                            'sourceType' => 'identifier',
-                            'source' => 'Name'
+                            'source' => 'identifier',
+                            'name' => 'Name'
                           },
                           {
                             'target' => 'Name',
-                            'sourceType' => 'responsePath',
-                            'source' => 'DooDad.DooDadName'
+                            'source' => 'response',
+                            'path' => 'DooDad.DooDadName'
                           }
                         ],
                         'path' => 'DooDad'
@@ -677,8 +690,8 @@ module Aws
                         'params' => [
                           {
                             'target' => 'ThingName',
-                            'sourceType' => 'identifier',
-                            'source' => 'Name'
+                            'source' => 'identifier',
+                            'name' => 'Name'
                           },
                         ]
                       },
@@ -687,18 +700,18 @@ module Aws
                         'identifiers' => [
                           {
                             'target' => 'ThingName',
-                            'sourceType' => 'identifier',
-                            'source' => 'Name',
+                            'source' => 'identifier',
+                            'name' => 'Name',
                           },
                           {
                             'target' => 'ThingType',
-                            'sourceType' => 'dataMember',
-                            'source' => 'Type',
+                            'source' => 'data',
+                            'path' => 'Type',
                           },
                           {
                             'target' => 'Name',
-                            'sourceType' => 'responsePath',
-                            'source' => 'DooDads[].Name'
+                            'source' => 'response',
+                            'path' => 'DooDads[].Name'
                           },
                         ],
                         'path' => 'DooDads[]'
@@ -760,80 +773,22 @@ module Aws
 
           end
 
-          describe 'sub resources' do
-
-            it 'defines a getter with a single argument for sub-resources' do
-              definition['resources'] = {
-                'Thing' => {
-                  'identifiers' => [{ 'name' => 'Name' }],
-                  'subResources' => {
-                    'resources' => ['DooDad'],
-                    'identifiers' => { 'Name' => 'ThingName' }
-                  }
-                },
-                'DooDad' => {
-                  'identifiers' => [
-                    { 'name' => 'ThingName' },
-                    { 'name' => 'Name' }
-                  ]
-                }
-              }
-
-              apply_definition
-
-              thing = namespace::Thing.new(name:'thing-name')
-              doo_dad = thing.doo_dad('doo-dad-name')
-              expect(doo_dad).to be_kind_of(namespace::DooDad)
-              expect(doo_dad.name).to eq('doo-dad-name')
-              expect(doo_dad.thing_name).to eq('thing-name')
-              expect(doo_dad.thing.name).to eq('thing-name') # reverse association
-              expect(doo_dad.client).to be(thing.client)
-            end
-
-            it 'defines a getter without arguments when possible' do
-              definition['resources'] = {
-                'Thing' => {
-                  'identifiers' => [{ 'name' => 'Name' }],
-                  'subResources' => {
-                    'resources' => ['DooDad'],
-                    'identifiers' => { 'Name' => 'ThingName' }
-                  }
-                },
-                'DooDad' => {
-                  'identifiers' => [
-                    { 'name' => 'ThingName' },
-                  ]
-                }
-              }
-
-              apply_definition
-
-              thing = namespace::Thing.new(name:'thing-name')
-              doo_dad = thing.doo_dad
-              expect(doo_dad).to be_kind_of(namespace::DooDad)
-              expect(doo_dad.thing_name).to eq('thing-name')
-              expect(doo_dad.thing.name).to eq('thing-name') # reverse association
-              expect(doo_dad.client).to be(thing.client)
-            end
-
-          end
-
-          describe 'belongsTo associations' do
+          describe 'has associations' do
 
             it 'can return a batch of resource objects when plural' do
               definition['resources'] = {
                 'Thing' => {
                   'identifiers' => [{ 'name' => 'Name' }],
                   'shape' => 'ThingShape',
-                  'belongsTo' => {
+                  'has' => {
                     'DooDads' => {
                       'resource' => {
                         'type' => 'DooDad',
                         'identifiers' => [
                           {
                             'target' => 'Name',
-                            'sourceType' => 'dataMember',
-                            'source' => 'DooDads[].Name',
+                            'source' => 'data',
+                            'path' => 'DooDads[].Name',
                           }
                         ],
                         'path' => 'DooDads[]'
@@ -902,15 +857,15 @@ module Aws
                 'Thing' => {
                   'identifiers' => [{ 'name' => 'Name' }],
                   'shape' => 'ThingShape',
-                  'belongsTo' => {
+                  'has' => {
                     'DooDad' => {
                       'resource' => {
                         'type' => 'DooDad',
                         'identifiers' => [
                           {
                             'target' => 'Name',
-                            'sourceType' => 'dataMember',
-                            'source' => 'DooDadName',
+                            'source' => 'data',
+                            'path' => 'DooDadName',
                           }
                         ]
                       }
@@ -961,7 +916,7 @@ module Aws
                     'Ready' => {
                       'waiterName' => 'ThingReady',
                       'params' => [
-                        { 'target' => 'ThingName', 'sourceType' => 'identifier', 'source' => 'Name' }
+                        { 'target' => 'ThingName', 'source' => 'identifier', 'name' => 'Name' }
                       ],
                       'path' => 'Thing'
                     }

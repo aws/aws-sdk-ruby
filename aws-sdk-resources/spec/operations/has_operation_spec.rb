@@ -3,19 +3,19 @@ require 'spec_helper'
 module Aws
   module Resources
     module Operations
-      describe BelongsToOperation do
+      describe HasOperation do
         describe '#request' do
 
           it 'returns the builder given to the constructor' do
             builder = double('builder')
-            operation = BelongsToOperation.new(builder: builder)
+            operation = HasOperation.new(builder: builder)
             expect(operation.builder).to be(builder)
           end
 
           it 'requries a :builder option' do
             msg = 'missing required option :builder'
             expect {
-              BelongsToOperation.new
+              HasOperation.new
             }.to raise_error(Errors::DefinitionError, msg)
           end
 
@@ -25,9 +25,9 @@ module Aws
 
           it 'calls the builder, returning the resource' do
             resource_class = new_resource_class(identifiers: [:id])
-            resource_class.add_operation(:get_linked, BelongsToOperation.new(
+            resource_class.add_operation(:get_linked, HasOperation.new(
               builder: Builder.new(resource_class:resource_class, sources:[
-                BuilderSources::DataMember.new('ids[]', 'id')
+                BuilderSources::DataMember.new(source:'ids[]', target:'id')
               ])
             ))
             client = double('client')

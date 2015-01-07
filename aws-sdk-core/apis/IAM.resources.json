@@ -19,7 +19,7 @@
         "resource": {
           "type": "Group",
           "identifiers": [
-            { "target": "Name", "sourceType": "requestParameter", "source": "GroupName" }
+            { "target": "Name", "source": "requestParameter", "path": "GroupName" }
           ],
           "path": "Group"
         }
@@ -29,7 +29,7 @@
         "resource": {
           "type": "InstanceProfile",
           "identifiers": [
-            { "target": "Name", "sourceType": "requestParameter", "source": "InstanceProfileName" }
+            { "target": "Name", "source": "requestParameter", "path": "InstanceProfileName" }
           ],
           "path": "InstanceProfile"
         }
@@ -39,7 +39,7 @@
         "resource": {
           "type": "Role",
           "identifiers": [
-            { "target": "Name", "sourceType": "requestParameter", "source": "RoleName" }
+            { "target": "Name", "source": "requestParameter", "path": "RoleName" }
           ],
           "path": "Role"
         }
@@ -49,7 +49,7 @@
         "resource": {
           "type": "SamlProvider",
           "identifiers": [
-            { "target": "Arn", "sourceType": "responsePath", "source": "SAMLProviderArn" }
+            { "target": "Arn", "source": "response", "path": "SAMLProviderArn" }
           ]
         }
       },
@@ -58,7 +58,7 @@
         "resource": {
           "type": "ServerCertificate",
           "identifiers": [
-            { "target": "Name", "sourceType": "requestParameter", "source": "ServerCertificateName" }
+            { "target": "Name", "source": "requestParameter", "path": "ServerCertificateName" }
           ]
         }
       },
@@ -67,7 +67,7 @@
         "resource": {
           "type": "SigningCertificate",
           "identifiers": [
-            { "target": "Id", "sourceType": "responsePath", "source": "Certificate.CertificateId" }
+            { "target": "Id", "source": "response", "path": "Certificate.CertificateId" }
           ],
           "path": "Certificate"
         }
@@ -77,7 +77,7 @@
         "resource": {
           "type": "User",
           "identifiers": [
-            { "target": "Name", "sourceType": "requestParameter", "source": "UserName" }
+            { "target": "Name", "source": "requestParameter", "path": "UserName" }
           ],
           "path": "User"
         }
@@ -87,9 +87,85 @@
         "resource": {
           "type": "VirtualMfaDevice",
           "identifiers": [
-            { "target": "SerialNumber", "sourceType": "responsePath", "source": "VirtualMFADevice.SerialNumber" }
+            { "target": "SerialNumber", "source": "response", "path": "VirtualMFADevice.SerialNumber" }
           ],
           "path": "VirtualMFADevice"
+        }
+      }
+    },
+    "has": {
+      "AccountPasswordPolicy": {
+        "resource": {
+          "type": "AccountPasswordPolicy",
+          "identifiers": [  ]
+        }
+      },
+      "AccountSummary": {
+        "resource": {
+          "type": "AccountSummary",
+          "identifiers": [  ]
+        }
+      },
+      "CurrentUser": {
+        "resource": {
+          "type": "CurrentUser",
+          "identifiers": [  ]
+        }
+      },
+      "Group": {
+        "resource": {
+          "type": "Group",
+          "identifiers": [
+            { "target": "Name", "source": "input" }
+          ]
+        }
+      },
+      "InstanceProfile": {
+        "resource": {
+          "type": "InstanceProfile",
+          "identifiers": [
+            { "target": "Name", "source": "input" }
+          ]
+        }
+      },
+      "Role": {
+        "resource": {
+          "type": "Role",
+          "identifiers": [
+            { "target": "Name", "source": "input" }
+          ]
+        }
+      },
+      "SamlProvider": {
+        "resource": {
+          "type": "SamlProvider",
+          "identifiers": [
+            { "target": "Arn", "source": "input" }
+          ]
+        }
+      },
+      "ServerCertificate": {
+        "resource": {
+          "type": "ServerCertificate",
+          "identifiers": [
+            { "target": "Name", "source": "input" }
+          ]
+        }
+      },
+      "User": {
+        "resource": {
+          "type": "User",
+          "identifiers": [
+            { "target": "Name", "source": "input" }
+          ]
+        }
+      },
+      "VirtualMfaDevice": {
+        "resource": {
+          "type": "VirtualMfaDevice",
+          "identifiers": [
+            { "target": "SerialNumber", "source": "input" }
+          ]
         }
       }
     },
@@ -99,7 +175,7 @@
         "resource": {
           "type": "Group",
           "identifiers": [
-            { "target": "Name", "sourceType": "responsePath", "source": "Groups[].GroupName" }
+            { "target": "Name", "source": "response", "path": "Groups[].GroupName" }
           ],
           "path": "Groups[]"
         }
@@ -109,7 +185,7 @@
         "resource": {
           "type": "InstanceProfile",
           "identifiers": [
-            { "target": "Name", "sourceType": "responsePath", "source": "InstanceProfiles[].InstanceProfileName" }
+            { "target": "Name", "source": "response", "path": "InstanceProfiles[].InstanceProfileName" }
           ],
           "path": "InstanceProfiles[]"
         }
@@ -119,7 +195,7 @@
         "resource": {
           "type": "Role",
           "identifiers": [
-            { "target": "Name", "sourceType": "responsePath", "source": "Roles[].RoleName" }
+            { "target": "Name", "source": "response", "path": "Roles[].RoleName" }
           ],
           "path": "Roles[]"
         }
@@ -129,7 +205,7 @@
         "resource": {
           "type": "SamlProvider",
           "identifiers": [
-            { "target": "Arn", "sourceType": "responsePath", "source": "SAMLProviderList[].Arn" }
+            { "target": "Arn", "source": "response", "path": "SAMLProviderList[].Arn" }
           ]
         }
       },
@@ -138,7 +214,7 @@
         "resource": {
           "type": "ServerCertificate",
           "identifiers": [
-            { "target": "Name", "sourceType": "responsePath", "source": "ServerCertificateMetadataList[].ServerCertificateName" }
+            { "target": "Name", "source": "response", "path": "ServerCertificateMetadataList[].ServerCertificateName" }
           ]
         }
       },
@@ -147,7 +223,7 @@
         "resource": {
           "type": "User",
           "identifiers": [
-            { "target": "Name", "sourceType": "responsePath", "source": "Users[].UserName" }
+            { "target": "Name", "source": "response", "path": "Users[].UserName" }
           ],
           "path": "Users[]"
         }
@@ -157,7 +233,7 @@
         "resource": {
           "type": "VirtualMfaDevice",
           "identifiers": [
-            { "target": "SerialNumber", "sourceType": "responsePath", "source": "VirtualMFADevices[].SerialNumber" }
+            { "target": "SerialNumber", "source": "response", "path": "VirtualMFADevices[].SerialNumber" }
           ],
           "path": "VirtualMFADevices[]"
         }
@@ -182,9 +258,9 @@
           "request": {
             "operation": "UpdateAccessKey",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" },
-              { "target": "Status", "sourceType": "string", "source": "Active" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "AccessKeyId", "source": "identifier", "name": "Id" },
+              { "target": "Status", "source": "string", "value": "Active" }
             ]
           }
         },
@@ -192,9 +268,9 @@
           "request": {
             "operation": "UpdateAccessKey",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" },
-              { "target": "Status", "sourceType": "string", "source": "Inactive" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "AccessKeyId", "source": "identifier", "name": "Id" },
+              { "target": "Status", "source": "string", "value": "Inactive" }
             ]
           }
         },
@@ -202,8 +278,18 @@
           "request": {
             "operation": "DeleteAccessKey",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "AccessKeyId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "User": {
+          "resource": {
+            "type": "User",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "UserName" }
             ]
           }
         }
@@ -230,9 +316,9 @@
           "request": {
             "operation": "UpdateAccessKey",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" },
-              { "target": "Status", "sourceType": "string", "source": "Active" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "AccessKeyId", "source": "identifier", "name": "Id" },
+              { "target": "Status", "source": "string", "value": "Active" }
             ]
           }
         },
@@ -240,9 +326,9 @@
           "request": {
             "operation": "UpdateAccessKey",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" },
-              { "target": "Status", "sourceType": "string", "source": "Inactive" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "AccessKeyId", "source": "identifier", "name": "Id" },
+              { "target": "Status", "source": "string", "value": "Inactive" }
             ]
           }
         },
@@ -250,8 +336,8 @@
           "request": {
             "operation": "DeleteAccessKey",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "AccessKeyId", "sourceType": "identifier", "source": "Id" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "AccessKeyId", "source": "identifier", "name": "Id" }
             ]
           }
         }
@@ -290,7 +376,17 @@
           "request": {
             "operation": "UpdateAssumeRolePolicy",
             "params": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
+              { "target": "RoleName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "Role": {
+          "resource": {
+            "type": "Role",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "RoleName" }
             ]
           }
         }
@@ -303,8 +399,8 @@
           "resource": {
             "type": "AccessKey",
             "identifiers": [
-              { "target": "UserName", "sourceType": "responsePath", "source": "AccessKeyMetadata[].UserName" },
-              { "target": "Id", "sourceType": "responsePath", "source": "AccessKeyMetadata[].AccessKeyId" }
+              { "target": "UserName", "source": "response", "path": "AccessKeyMetadata[].UserName" },
+              { "target": "Id", "source": "response", "path": "AccessKeyMetadata[].AccessKeyId" }
             ],
             "path": "AccessKeyMetadata[]"
           }
@@ -314,8 +410,8 @@
           "resource": {
             "type": "MfaDevice",
             "identifiers": [
-              { "target": "UserName", "sourceType": "responsePath", "source": "MFADevices[].UserName" },
-              { "target": "SerialNumber", "sourceType": "responsePath", "source": "MFADevices[].SerialNumber" }
+              { "target": "UserName", "source": "response", "path": "MFADevices[].UserName" },
+              { "target": "SerialNumber", "source": "response", "path": "MFADevices[].SerialNumber" }
             ],
             "path": "MFADevices[]"
           }
@@ -325,8 +421,8 @@
           "resource": {
             "type": "SigningCertificate",
             "identifiers": [
-              { "target": "UserName", "sourceType": "responsePath", "source": "Certificates[].UserName" },
-              { "target": "Id", "sourceType": "responsePath", "source": "Certificates[].CertificateId" }
+              { "target": "UserName", "source": "response", "path": "Certificates[].UserName" },
+              { "target": "Id", "source": "response", "path": "Certificates[].CertificateId" }
             ],
             "path": "Certificates[]"
           }
@@ -345,7 +441,7 @@
         "request": {
           "operation": "GetGroup",
           "params": [
-            { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+            { "target": "GroupName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "Group"
@@ -355,7 +451,7 @@
           "request": {
             "operation": "AddUserToGroup",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -363,13 +459,13 @@
           "request": {
             "operation": "CreateGroup",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "Group",
             "identifiers": [
-              { "target": "Name", "sourceType": "requestParameter", "source": "GroupName" }
+              { "target": "Name", "source": "requestParameter", "path": "GroupName" }
             ],
             "path": "Group"
           }
@@ -378,14 +474,14 @@
           "request": {
             "operation": "PutGroupPolicy",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "GroupPolicy",
             "identifiers": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Name", "sourceType": "requestParameter", "source": "PolicyName" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "requestParameter", "path": "PolicyName" }
             ]
           }
         },
@@ -393,7 +489,7 @@
           "request": {
             "operation": "DeleteGroup",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -401,7 +497,7 @@
           "request": {
             "operation": "RemoveUserFromGroup",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -409,13 +505,24 @@
           "request": {
             "operation": "UpdateGroup",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "Group",
             "identifiers": [
-              { "target": "Name", "sourceType": "requestParameter", "source": "NewGroupName" }
+              { "target": "Name", "source": "requestParameter", "path": "NewGroupName" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "Policy": {
+          "resource": {
+            "type": "GroupPolicy",
+            "identifiers": [
+              { "target": "GroupName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "input" }
             ]
           }
         }
@@ -425,14 +532,14 @@
           "request": {
             "operation": "ListGroupPolicies",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "GroupPolicy",
             "identifiers": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Name", "sourceType": "responsePath", "source": "PolicyNames[]" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "response", "path": "PolicyNames[]" }
             ]
           }
         },
@@ -440,21 +547,17 @@
           "request": {
             "operation": "GetGroup",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "User",
             "identifiers": [
-              { "target": "Name", "sourceType": "responsePath", "source": "Users[].UserName" }
+              { "target": "Name", "source": "response", "path": "Users[].UserName" }
             ],
             "path": "Users[]"
           }
         }
-      },
-      "subResources": {
-        "resources": [ "GroupPolicy" ],
-        "identifiers": { "Name": "GroupName" }
       }
     },
     "GroupPolicy": {
@@ -473,8 +576,8 @@
         "request": {
           "operation": "GetGroupPolicy",
           "params": [
-            { "target": "GroupName", "sourceType": "identifier", "source": "GroupName" },
-            { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+            { "target": "GroupName", "source": "identifier", "name": "GroupName" },
+            { "target": "PolicyName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "@"
@@ -484,8 +587,8 @@
           "request": {
             "operation": "DeleteGroupPolicy",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "GroupName" },
-              { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "GroupName" },
+              { "target": "PolicyName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -493,8 +596,18 @@
           "request": {
             "operation": "PutGroupPolicy",
             "params": [
-              { "target": "GroupName", "sourceType": "identifier", "source": "GroupName" },
-              { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+              { "target": "GroupName", "source": "identifier", "name": "GroupName" },
+              { "target": "PolicyName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "Group": {
+          "resource": {
+            "type": "Group",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "GroupName" }
             ]
           }
         }
@@ -512,7 +625,7 @@
         "request": {
           "operation": "GetInstanceProfile",
           "params": [
-            { "target": "InstanceProfileName", "sourceType": "identifier", "source": "Name" }
+            { "target": "InstanceProfileName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "InstanceProfile"
@@ -522,7 +635,7 @@
           "request": {
             "operation": "AddRoleToInstanceProfile",
             "params": [
-              { "target": "InstanceProfileName", "sourceType": "identifier", "source": "Name" }
+              { "target": "InstanceProfileName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -530,7 +643,7 @@
           "request": {
             "operation": "DeleteInstanceProfile",
             "params": [
-              { "target": "InstanceProfileName", "sourceType": "identifier", "source": "Name" }
+              { "target": "InstanceProfileName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -538,17 +651,17 @@
           "request": {
             "operation": "RemoveRoleFromInstanceProfile",
             "params": [
-              { "target": "InstanceProfileName", "sourceType": "identifier", "source": "Name" }
+              { "target": "InstanceProfileName", "source": "identifier", "name": "Name" }
             ]
           }
         }
       },
-      "belongsTo": {
+      "has": {
         "Roles": {
           "resource": {
             "type": "Role",
             "identifiers": [
-              { "target": "Name", "sourceType": "dataMember", "source": "Roles[].RoleName" }
+              { "target": "Name", "source": "data", "path": "Roles[].RoleName" }
             ],
             "path": "Roles[]"
           }
@@ -567,7 +680,7 @@
         "request": {
           "operation": "GetLoginProfile",
           "params": [
-            { "target": "UserName", "sourceType": "identifier", "source": "UserName" }
+            { "target": "UserName", "source": "identifier", "name": "UserName" }
           ]
         },
         "path": "LoginProfile"
@@ -577,13 +690,13 @@
           "request": {
             "operation": "CreateLoginProfile",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" }
             ]
           },
           "resource": {
             "type": "LoginProfile",
             "identifiers": [
-              { "target": "UserName", "sourceType": "responsePath", "source": "LoginProfile.UserName" }
+              { "target": "UserName", "source": "response", "path": "LoginProfile.UserName" }
             ],
             "path": "LoginProfile"
           }
@@ -592,7 +705,7 @@
           "request": {
             "operation": "DeleteLoginProfile",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" }
             ]
           }
         },
@@ -600,7 +713,17 @@
           "request": {
             "operation": "UpdateLoginProfile",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "User": {
+          "resource": {
+            "type": "User",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "UserName" }
             ]
           }
         }
@@ -623,8 +746,8 @@
           "request": {
             "operation": "EnableMFADevice",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "SerialNumber", "sourceType": "identifier", "source": "SerialNumber" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "SerialNumber", "source": "identifier", "name": "SerialNumber" }
             ]
           }
         },
@@ -632,8 +755,8 @@
           "request": {
             "operation": "DeactivateMFADevice",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "SerialNumber", "sourceType": "identifier", "source": "SerialNumber" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "SerialNumber", "source": "identifier", "name": "SerialNumber" }
             ]
           }
         },
@@ -641,8 +764,18 @@
           "request": {
             "operation": "ResyncMFADevice",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "SerialNumber", "sourceType": "identifier", "source": "SerialNumber" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "SerialNumber", "source": "identifier", "name": "SerialNumber" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "User": {
+          "resource": {
+            "type": "User",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "UserName" }
             ]
           }
         }
@@ -660,7 +793,7 @@
         "request": {
           "operation": "GetRole",
           "params": [
-            { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
+            { "target": "RoleName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "Role"
@@ -670,7 +803,26 @@
           "request": {
             "operation": "DeleteRole",
             "params": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
+              { "target": "RoleName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "AssumeRolePolicy": {
+          "resource": {
+            "type": "AssumeRolePolicy",
+            "identifiers": [
+              { "target": "RoleName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        },
+        "Policy": {
+          "resource": {
+            "type": "RolePolicy",
+            "identifiers": [
+              { "target": "RoleName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "input" }
             ]
           }
         }
@@ -680,13 +832,13 @@
           "request": {
             "operation": "ListInstanceProfilesForRole",
             "params": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
+              { "target": "RoleName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "InstanceProfile",
             "identifiers": [
-              { "target": "Name", "sourceType": "responsePath", "source": "InstanceProfiles[].InstanceProfileName" }
+              { "target": "Name", "source": "response", "path": "InstanceProfiles[].InstanceProfileName" }
             ],
             "path": "InstanceProfiles[]"
           }
@@ -695,24 +847,17 @@
           "request": {
             "operation": "ListRolePolicies",
             "params": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "Name" }
+              { "target": "RoleName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "RolePolicy",
             "identifiers": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Name", "sourceType": "responsePath", "source": "PolicyNames[]" }
+              { "target": "RoleName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "response", "path": "PolicyNames[]" }
             ]
           }
         }
-      },
-      "subResources": {
-        "resources": [
-          "AssumeRolePolicy",
-          "RolePolicy"
-        ],
-        "identifiers": { "Name": "RoleName" }
       }
     },
     "RolePolicy": {
@@ -731,8 +876,8 @@
         "request": {
           "operation": "GetRolePolicy",
           "params": [
-            { "target": "RoleName", "sourceType": "identifier", "source": "RoleName" },
-            { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+            { "target": "RoleName", "source": "identifier", "name": "RoleName" },
+            { "target": "PolicyName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "@"
@@ -742,8 +887,8 @@
           "request": {
             "operation": "DeleteRolePolicy",
             "params": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "RoleName" },
-              { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+              { "target": "RoleName", "source": "identifier", "name": "RoleName" },
+              { "target": "PolicyName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -751,8 +896,18 @@
           "request": {
             "operation": "PutRolePolicy",
             "params": [
-              { "target": "RoleName", "sourceType": "identifier", "source": "RoleName" },
-              { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+              { "target": "RoleName", "source": "identifier", "name": "RoleName" },
+              { "target": "PolicyName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "Role": {
+          "resource": {
+            "type": "Role",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "RoleName" }
             ]
           }
         }
@@ -767,7 +922,7 @@
         "request": {
           "operation": "GetSAMLProvider",
           "params": [
-            { "target": "SAMLProviderArn", "sourceType": "identifier", "source": "Arn" }
+            { "target": "SAMLProviderArn", "source": "identifier", "name": "Arn" }
           ]
         },
         "path": "@"
@@ -777,7 +932,7 @@
           "request": {
             "operation": "DeleteSAMLProvider",
             "params": [
-              { "target": "SAMLProviderArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "SAMLProviderArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -785,7 +940,7 @@
           "request": {
             "operation": "UpdateSAMLProvider",
             "params": [
-              { "target": "SAMLProviderArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "SAMLProviderArn", "source": "identifier", "name": "Arn" }
             ]
           }
         }
@@ -800,7 +955,7 @@
         "request": {
           "operation": "GetServerCertificate",
           "params": [
-            { "target": "ServerCertificateName", "sourceType": "identifier", "source": "Name" }
+            { "target": "ServerCertificateName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "ServerCertificate"
@@ -810,7 +965,7 @@
           "request": {
             "operation": "DeleteServerCertificate",
             "params": [
-              { "target": "ServerCertificateName", "sourceType": "identifier", "source": "Name" }
+              { "target": "ServerCertificateName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -818,13 +973,13 @@
           "request": {
             "operation": "UpdateServerCertificate",
             "params": [
-              { "target": "ServerCertificateName", "sourceType": "identifier", "source": "Name" }
+              { "target": "ServerCertificateName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "ServerCertificate",
             "identifiers": [
-              { "target": "Name", "sourceType": "requestParameter", "source": "NewServerCertificateName" }
+              { "target": "Name", "source": "requestParameter", "path": "NewServerCertificateName" }
             ]
           }
         }
@@ -847,9 +1002,9 @@
           "request": {
             "operation": "UpdateSigningCertificate",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "CertificateId", "sourceType": "identifier", "source": "Id" },
-              { "target": "Status", "sourceType": "string", "source": "Active" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "CertificateId", "source": "identifier", "name": "Id" },
+              { "target": "Status", "source": "string", "value": "Active" }
             ]
           }
         },
@@ -857,9 +1012,9 @@
           "request": {
             "operation": "UpdateSigningCertificate",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "CertificateId", "sourceType": "identifier", "source": "Id" },
-              { "target": "Status", "sourceType": "string", "source": "Inactive" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "CertificateId", "source": "identifier", "name": "Id" },
+              { "target": "Status", "source": "string", "value": "Inactive" }
             ]
           }
         },
@@ -867,8 +1022,18 @@
           "request": {
             "operation": "DeleteSigningCertificate",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "CertificateId", "sourceType": "identifier", "source": "Id" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "CertificateId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "User": {
+          "resource": {
+            "type": "User",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "UserName" }
             ]
           }
         }
@@ -886,7 +1051,7 @@
         "request": {
           "operation": "GetUser",
           "params": [
-            { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+            { "target": "UserName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "User"
@@ -896,7 +1061,7 @@
           "request": {
             "operation": "AddUserToGroup",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -904,13 +1069,13 @@
           "request": {
             "operation": "CreateUser",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "User",
             "identifiers": [
-              { "target": "Name", "sourceType": "requestParameter", "source": "UserName" }
+              { "target": "Name", "source": "requestParameter", "path": "UserName" }
             ],
             "path": "User"
           }
@@ -919,15 +1084,15 @@
           "request": {
             "operation": "CreateAccessKey",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "AccessKeyPair",
             "identifiers": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Id", "sourceType": "responsePath", "source": "AccessKey.AccessKeyId" },
-              { "target": "Secret", "sourceType": "responsePath", "source": "AccessKey.SecretAccessKey" }
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Id", "source": "response", "path": "AccessKey.AccessKeyId" },
+              { "target": "Secret", "source": "response", "path": "AccessKey.SecretAccessKey" }
             ],
             "path": "AccessKey"
           }
@@ -936,13 +1101,13 @@
           "request": {
             "operation": "CreateLoginProfile",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "LoginProfile",
             "identifiers": [
-              { "target": "UserName", "sourceType": "responsePath", "source": "LoginProfile.UserName" }
+              { "target": "UserName", "source": "response", "path": "LoginProfile.UserName" }
             ],
             "path": "LoginProfile"
           }
@@ -951,14 +1116,14 @@
           "request": {
             "operation": "PutUserPolicy",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "UserPolicy",
             "identifiers": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Name", "sourceType": "requestParameter", "source": "PolicyName" }
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "requestParameter", "path": "PolicyName" }
             ]
           }
         },
@@ -966,7 +1131,7 @@
           "request": {
             "operation": "DeleteUser",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -974,14 +1139,14 @@
           "request": {
             "operation": "EnableMFADevice",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "MfaDevice",
             "identifiers": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "SerialNumber", "sourceType": "requestParameter", "source": "SerialNumber" }
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "SerialNumber", "source": "requestParameter", "path": "SerialNumber" }
             ]
           }
         },
@@ -989,7 +1154,7 @@
           "request": {
             "operation": "RemoveUserFromGroup",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -997,13 +1162,59 @@
           "request": {
             "operation": "UpdateUser",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "User",
             "identifiers": [
-              { "target": "Name", "sourceType": "requestParameter", "source": "NewUserName" }
+              { "target": "Name", "source": "requestParameter", "path": "NewUserName" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "AccessKey": {
+          "resource": {
+            "type": "AccessKey",
+            "identifiers": [
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Id", "source": "input" }
+            ]
+          }
+        },
+        "LoginProfile": {
+          "resource": {
+            "type": "LoginProfile",
+            "identifiers": [
+              { "target": "UserName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        },
+        "MfaDevice": {
+          "resource": {
+            "type": "MfaDevice",
+            "identifiers": [
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "SerialNumber", "source": "input" }
+            ]
+          }
+        },
+        "Policy": {
+          "resource": {
+            "type": "UserPolicy",
+            "identifiers": [
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "input" }
+            ]
+          }
+        },
+        "SigningCertificate": {
+          "resource": {
+            "type": "SigningCertificate",
+            "identifiers": [
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Id", "source": "input" }
             ]
           }
         }
@@ -1013,14 +1224,14 @@
           "request": {
             "operation": "ListAccessKeys",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "AccessKey",
             "identifiers": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Id", "sourceType": "responsePath", "source": "AccessKeyMetadata[].AccessKeyId" }
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Id", "source": "response", "path": "AccessKeyMetadata[].AccessKeyId" }
             ],
             "path": "AccessKeyMetadata[]"
           }
@@ -1029,13 +1240,13 @@
           "request": {
             "operation": "ListGroupsForUser",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "Group",
             "identifiers": [
-              { "target": "Name", "sourceType": "responsePath", "source": "Groups[].GroupName" }
+              { "target": "Name", "source": "response", "path": "Groups[].GroupName" }
             ],
             "path": "Groups[]"
           }
@@ -1044,14 +1255,14 @@
           "request": {
             "operation": "ListMFADevices",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "MfaDevice",
             "identifiers": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "SerialNumber", "sourceType": "responsePath", "source": "MFADevices[].SerialNumber" }
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "SerialNumber", "source": "response", "path": "MFADevices[].SerialNumber" }
             ],
             "path": "MFADevices[]"
           }
@@ -1060,14 +1271,14 @@
           "request": {
             "operation": "ListUserPolicies",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "UserPolicy",
             "identifiers": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Name", "sourceType": "responsePath", "source": "PolicyNames[]" }
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Name", "source": "response", "path": "PolicyNames[]" }
             ]
           }
         },
@@ -1075,28 +1286,18 @@
           "request": {
             "operation": "ListSigningCertificates",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "Name" }
             ]
           },
           "resource": {
             "type": "SigningCertificate",
             "identifiers": [
-              { "target": "UserName", "sourceType": "identifier", "source": "Name" },
-              { "target": "Id", "sourceType": "responsePath", "source": "Certificates[].CertificateId" }
+              { "target": "UserName", "source": "identifier", "name": "Name" },
+              { "target": "Id", "source": "response", "path": "Certificates[].CertificateId" }
             ],
             "path": "Certificates[]"
           }
         }
-      },
-      "subResources": {
-        "resources": [
-          "AccessKey",
-          "LoginProfile",
-          "MfaDevice",
-          "SigningCertificate",
-          "UserPolicy"
-        ],
-        "identifiers": { "Name": "UserName" }
       }
     },
     "UserPolicy": {
@@ -1115,8 +1316,8 @@
         "request": {
           "operation": "GetUserPolicy",
           "params": [
-            { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-            { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+            { "target": "UserName", "source": "identifier", "name": "UserName" },
+            { "target": "PolicyName", "source": "identifier", "name": "Name" }
           ]
         },
         "path": "@"
@@ -1126,8 +1327,8 @@
           "request": {
             "operation": "DeleteUserPolicy",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "PolicyName", "source": "identifier", "name": "Name" }
             ]
           }
         },
@@ -1135,8 +1336,18 @@
           "request": {
             "operation": "PutUserPolicy",
             "params": [
-              { "target": "UserName", "sourceType": "identifier", "source": "UserName" },
-              { "target": "PolicyName", "sourceType": "identifier", "source": "Name" }
+              { "target": "UserName", "source": "identifier", "name": "UserName" },
+              { "target": "PolicyName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        }
+      },
+      "has": {
+        "User": {
+          "resource": {
+            "type": "User",
+            "identifiers": [
+              { "target": "Name", "source": "identifier", "name": "UserName" }
             ]
           }
         }
@@ -1155,17 +1366,17 @@
           "request": {
             "operation": "DeleteVirtualMFADevice",
             "params": [
-              { "target": "SerialNumber", "sourceType": "identifier", "source": "SerialNumber" }
+              { "target": "SerialNumber", "source": "identifier", "name": "SerialNumber" }
             ]
           }
         }
       },
-      "belongsTo": {
+      "has": {
         "User": {
           "resource": {
             "type": "User",
             "identifiers": [
-              { "target": "Name", "sourceType": "dataMember", "source": "User.UserName" }
+              { "target": "Name", "source": "data", "path": "User.UserName" }
             ]
           }
         }

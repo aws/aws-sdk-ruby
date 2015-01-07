@@ -2,66 +2,61 @@ require 'spec_helper'
 
 module Aws
   module Resources
-    describe RequestParams do
-
-      describe RequestParams::Base do
+    module RequestParams
+      describe 'Param#apply' do
 
         it 'supports simple param targets' do
-          param = RequestParams::Base.new('param_name')
-          params = param.apply({}, 'value')
+          params = {}
+          Literal.new(target:'param_name', value:'value').apply(params)
           expect(params).to eq(param_name:'value')
         end
 
         it 'supports nested param targets' do
           params = {}
-          RequestParams::Base.new('person.name').apply(params, 'John Doe')
-          RequestParams::Base.new('person.age').apply(params, 40)
+          Literal.new(target:'person.name', value:'John Doe').apply(params)
+          Literal.new(target:'person.age', value: 40).apply(params)
           expect(params).to eq(person: { name:'John Doe', age: 40})
         end
 
         it 'supports list param targets' do
           params = {}
-          RequestParams::Base.new('params[]').apply(params, 'p1')
-          RequestParams::Base.new('params[]').apply(params, 'p2')
+          Literal.new(target:'params[]', value:'p1').apply(params)
+          Literal.new(target:'params[]', value:'p2').apply(params)
           expect(params).to eq(params:['p1','p2'])
         end
 
         it 'supports nested lists of structures' do
           params = {}
-          RequestParams::Base.new('delete.objects[].key').apply(params, 'k1')
-          RequestParams::Base.new('delete.objects[].key').apply(params, 'k2')
+          Literal.new(target:'delete.objects[].key', value:'k1').apply(params)
+          Literal.new(target:'delete.objects[].key', value:'k2').apply(params)
           expect(params).to eq(delete: { objects: [{key:'k1'}, {key:'k2'}]})
         end
 
         it 'supports numbered list members' do
           params = {}
-          RequestParams::Base.new('people[0].name').apply(params, 'name1')
-          RequestParams::Base.new('people[0].age').apply(params, 30)
-          RequestParams::Base.new('people[1].name').apply(params, 'name2')
-          RequestParams::Base.new('people[1].age').apply(params, 40)
+          Literal.new(target:'people[0].name', value:'name1').apply(params)
+          Literal.new(target:'people[0].age', value:30).apply(params)
+          Literal.new(target:'people[1].name', value:'name2').apply(params)
+          Literal.new(target:'people[1].age', value:40).apply(params)
           expect(params).to eq(people:[{name:'name1',age:30},{name:'name2',age:40}])
         end
 
         it 'supports nested lists' do
           params = {}
-          RequestParams::Base.new('params[0].name').apply(params, 'n1')
-          RequestParams::Base.new('params[0].values[]').apply(params, 'v1')
-          RequestParams::Base.new('params[0].values[]').apply(params, 'v2')
-          RequestParams::Base.new('params[1].name').apply(params, 'n2')
-          RequestParams::Base.new('params[1].values[]').apply(params, 'v3')
-          RequestParams::Base.new('params[1].values[]').apply(params, 'v4')
+          Literal.new(target:'params[0].name', value:'n1').apply(params)
+          Literal.new(target:'params[0].values[]', value:'v1').apply(params)
+          Literal.new(target:'params[0].values[]', value:'v2').apply(params)
+          Literal.new(target:'params[1].name', value:'n2').apply(params)
+          Literal.new(target:'params[1].values[]', value:'v3').apply(params)
+          Literal.new(target:'params[1].values[]', value:'v4').apply(params)
           expect(params).to eq(params:[{name:'n1', values:['v1','v2']},{name:'n2', values:['v3','v4']}])
         end
 
         it 'supports grouped params' do
           params = {}
-          param_list = [
-            RequestParams::Base.new('entries[*].id'),
-            RequestParams::Base.new('entries[*].value')
-          ]
           3.times do |n|
-            param_list[0].apply(params, "id-#{n+1}", n)
-            param_list[1].apply(params, "value-#{n+1}", n)
+            Literal.new(target:'entries[*].id', value:"id-#{n+1}").apply(params, n: n)
+            Literal.new(target:'entries[*].value', value:"value-#{n+1}").apply(params, n:n)
           end
           expect(params).to eq({
             entries: [
@@ -76,61 +71,32 @@ module Aws
 
       describe RequestParams::Identifier do
 
-        it 'is a subclass of Base' do
-          expect(RequestParams::Identifier.ancestors).to include(
-            RequestParams::Base)
-        end
-
         it 'extracts the identifier from the given resource' do
-          resource = double('resource', identifiers: { id: 'abcmnoxyz' })
-          param = RequestParams::Identifier.new('id', :name)
-          expect(param.apply({}, resource:resource)).to eq(name:'abcmnoxyz')
+          params = {}
+          resource = double('resource', id: 'abcmnoxyz')
+          RequestParams::Identifier.new({
+            target: 'name',
+            name: 'id',
+          }).apply(params, resource:resource)
+          expect(params).to eq(name:'abcmnoxyz')
         end
 
       end
 
       describe RequestParams::DataMember do
 
-        it 'is a subclass of Base' do
-          expect(RequestParams::DataMember.ancestors).to include(
-            RequestParams::Base)
-        end
-
         it 'extracts the data member value from the given resoruce' do
+          params = {}
           resource = double('resource', data: { member_name: 'johndoe' })
-          param = RequestParams::DataMember.new('member_name', :name)
-          expect(param.apply({}, resource:resource)).to eq(name:'johndoe')
+          RequestParams::DataMember.new({
+            target: 'name',
+            data_path: 'member_name',
+          }).apply(params, resource:resource)
+          expect(params).to eq(name:'johndoe')
         end
 
       end
 
-      describe RequestParams::String do
-
-        it 'is a subclass of Base' do
-          expect(RequestParams::String.ancestors).to include(
-            RequestParams::Base)
-        end
-
-        it 'applies the source as a string literal' do
-          param = RequestParams::String.new('abc', :value)
-          expect(param.apply({})).to eq(value:'abc')
-        end
-
-      end
-
-      describe RequestParams::Integer do
-
-        it 'is a subclass of Base' do
-          expect(RequestParams::Integer.ancestors).to include(
-            RequestParams::Base)
-        end
-
-        it 'applies the source as an integer' do
-          param = RequestParams::Integer.new("10", :count)
-          expect(param.apply({})).to eq(count:10)
-        end
-
-      end
     end
   end
 end

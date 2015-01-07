@@ -9,6 +9,7 @@
       "additionalProperties": false,
       "properties": {
         "actions": { "$ref": "#/definitions/Actions" },
+        "has":     { "$ref": "#/definitions/Has" },
         "hasMany": { "$ref": "#/definitions/HasMany" }
       }
     },
@@ -19,15 +20,14 @@
         "required": [],
         "additionalProperties": false,
         "properties": {
-          "shape":            { "$ref": "#/definitions/ShapeName" },
-          "identifiers":      { "$ref": "#/definitions/Identifiers" },
-          "load":             { "$ref": "#/definitions/Load" },
-          "actions":          { "$ref": "#/definitions/Actions" },
-          "batchActions":     { "$ref": "#/definitions/Actions" },
-          "waiters":          { "$ref": "#/definitions/Waiters" },
-          "hasMany":          { "$ref": "#/definitions/HasMany" },
-          "belongsTo":        { "$ref": "#/definitions/BelongsTo" },
-          "subResources":     { "$ref": "#/definitions/SubResources" }
+          "shape":        { "$ref": "#/definitions/ShapeName" },
+          "identifiers":  { "$ref": "#/definitions/Identifiers" },
+          "load":         { "$ref": "#/definitions/Load" },
+          "actions":      { "$ref": "#/definitions/Actions" },
+          "batchActions": { "$ref": "#/definitions/Actions" },
+          "waiters":      { "$ref": "#/definitions/Waiters" },
+          "has":          { "$ref": "#/definitions/Has" },
+          "hasMany":      { "$ref": "#/definitions/HasMany" }
         }
       }
     }
@@ -45,6 +45,17 @@
         }
       }
     },
+    "Has": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["resource"],
+        "additionalProperties": false,
+        "properties": {
+          "resource": { "$ref": "#/definitions/ResourceBuilder" }
+        }
+      }
+    },
     "HasMany": {
       "type": "object",
       "additionalProperties": {
@@ -53,17 +64,6 @@
         "additionalProperties": false,
         "properties": {
           "request": { "$ref": "#/definitions/Request" },
-          "resource": { "$ref": "#/definitions/ResourceBuilder" }
-        }
-      }
-    },
-    "BelongsTo": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "required": ["resource"],
-        "additionalProperties": false,
-        "properties": {
           "resource": { "$ref": "#/definitions/ResourceBuilder" }
         }
       }
@@ -111,57 +111,38 @@
       "additionalProperties": false,
       "properties": {
         "operation": { "$ref": "#/definitions/OperationName" },
-        "params":  { "$ref": "#/definitions/RequestParams" }
+        "params":  { "$ref": "#/definitions/RequestParameterSources" }
       }
     },
-    "RequestParams": {
+    "RequestParameterSources": {
       "type": "array",
       "minItems": 1,
       "additionalItems": false,
       "items": {
-        "type": "object",
-        "required": [
-          "target",
-          "sourceType",
-          "source"
-        ],
-        "additionalProperties": false,
-        "properties": {
-          "target": { "type": "string" },
-          "sourceType": {
-            "type": "string",
-            "enum": ["identifier", "dataMember", "string", "integer", "boolean"]
-          },
-          "source": { "type": "string" }
-        }
+        "anyOf": [
+          { "$ref": "#/definitions/Sources/Identifier" },
+          { "$ref": "#/definitions/Sources/Data" },
+          { "$ref": "#/definitions/Sources/String" },
+          { "$ref": "#/definitions/Sources/Integer" },
+          { "$ref": "#/definitions/Sources/Boolean" }
+        ]
       }
     },
-    "ResourceIdentifier": {
-      "type": "object",
-      "required": [
-        "target",
-        "sourceType",
-        "source"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "target": { "$ref": "#/definitions/IdentifierName" },
-        "sourceType": {
-          "type": "string",
-          "enum": [
-            "identifier",
-            "dataMember",
-            "requestParameter",
-            "responsePath"
-          ]
-        },
-        "source": { "type": "string" }
-      }
-    },
-    "ResourceIdentifierList": {
+    "ResourceIdentifierSources": {
       "type": "array",
       "additionalItems": false,
-      "items": { "$ref": "#/definitions/ResourceIdentifier" }
+      "items": { 
+        "anyOf": [
+          { "$ref": "#/definitions/Sources/Input" },
+          { "$ref": "#/definitions/Sources/Identifier" },
+          { "$ref": "#/definitions/Sources/Data" },
+          { "$ref": "#/definitions/Sources/RequestParameter" },
+          { "$ref": "#/definitions/Sources/Response" },
+          { "$ref": "#/definitions/Sources/String" },
+          { "$ref": "#/definitions/Sources/Integer" },
+          { "$ref": "#/definitions/Sources/Boolean" }
+        ]
+      }
     },
     "ResourceBuilder": {
       "type": "object",
@@ -169,32 +150,91 @@
       "additionalProperties": false,
       "properties": {
         "type": { "$ref": "#/definitions/ResourceName" },
-        "identifiers": { "$ref": "#/definitions/ResourceIdentifierList" },
+        "identifiers": { "$ref": "#/definitions/ResourceIdentifierSources" },
         "path": { "$ref": "#/definitions/JMESPathExpression" }
       }
     },
     "ResourceName": { "$ref": "#/definitions/UpperCamelCaseString" },
     "ShapeName": { "type": "string" },
-    "SubResourceIdentifierMap": {
-      "type": "object",
-      "additionalProperties": { "$ref": "#/definitions/UpperCamelCaseString" }
-    },
-    "SubResourceList": {
-      "type": "array",
-      "minItems": 1,
-      "additionalItems": false,
-      "items": { "$ref": "#/definitions/ResourceName" }
-    },
-    "SubResources": {
-      "type": "object",
-      "required": [
-        "resources",
-        "identifiers"
-      ],
-      "additionalProperties": false,
-      "properties": {
-        "resources": { "$ref": "#/definitions/SubResourceList" },
-        "identifiers": { "$ref": "#/definitions/SubResourceIdentifierMap" }
+    "Sources": {
+      "Input": {
+        "type": "object",
+        "required": ["target", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^input$" }
+        }
+      },
+      "Identifier": {
+        "type": "object",
+        "required": ["target", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^identifier$" },
+          "name": { "$ref": "#/definitions/IdentifierName" }
+        }
+      },
+      "Data": {
+        "type": "object",
+        "required": ["target", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^data$" },
+          "path": { "$ref": "#/definitions/JMESPathExpression" }
+        }
+      },
+      "RequestParameter": {
+        "type": "object",
+        "required": ["target", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^requestParameter$" },
+          "path": { "$ref": "#/definitions/JMESPathExpression" }
+        }
+      },
+      "Response": {
+        "type": "object",
+        "required": ["target", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^response$" },
+          "path": { "$ref": "#/definitions/JMESPathExpression" }
+        }
+      },
+      "String": {
+        "type": "object",
+        "required": ["target", "source", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^string$" },
+          "value": { "type": "string" }
+        }
+      },
+      "Integer": {
+        "type": "object",
+        "required": ["target", "source", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^integer$" },
+          "value": { "type": "number" }
+        }
+      },
+      "Boolean": {
+        "type": "object",
+        "required": ["target", "source", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "$ref": "#/definitions/UpperCamelCaseString" },
+          "source": { "type": "string", "pattern": "^boolean$" },
+          "value": { "type": "boolean" }
+        }
       }
     },
     "UpperCamelCaseString": {
@@ -211,7 +251,7 @@
         "additionalProperties": false,
         "properties": {
           "waiterName": { "$ref": "#/definitions/UpperCamelCaseString" },
-          "params":  { "$ref": "#/definitions/RequestParams" },
+          "params":  { "$ref": "#/definitions/RequestParameterSources" },
           "path": { "$ref": "#/definitions/JMESPathExpression" }
         }
       }

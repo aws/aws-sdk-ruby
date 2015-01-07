@@ -154,7 +154,7 @@ module Aws
 
       end
 
-      class BelongsToOperation < Base
+      class HasOperation < Base
 
         # @option options [required, Builder] :builder
         def initialize(options = {})

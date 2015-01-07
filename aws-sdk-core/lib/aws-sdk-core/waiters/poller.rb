@@ -15,6 +15,9 @@ module Aws
         @acceptors = options['acceptors'] || []
       end
 
+      # @return [Symbol]
+      attr_reader :operation_name
+
       # Makes an API call, returning the resultant state and the response.
       #
       # * `:success` - A success state has been matched.

@@ -10,8 +10,8 @@
         "request": {
           "operation": "OperationName",
           "params": [
-            { "target":"Filters[0].Name", "sourceType":"identifier", "source":"Type" },
-            { "target":"Filters[0].Values[]", "sourceType":"identifier", "source":"Id" }
+            { "target":"Filters[0].Name", "source":"identifier", "name":"Type" },
+            { "target":"Filters[0].Values[]", "source":"identifier", "name":"Id" }
           ]
         },
         "path": "$"

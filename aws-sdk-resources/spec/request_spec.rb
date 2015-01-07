@@ -55,8 +55,8 @@ module Aws
 
         it 'merges request params with given params before calling client method' do
           request = Request.new(method_name:'method_name', params: [
-            RequestParams::String.new('John Doe', 'person.name'),
-            RequestParams::Integer.new('40', 'person.age'),
+            RequestParams::Literal.new(value:'John Doe', target:'person.name'),
+            RequestParams::Literal.new(value:40, target:'person.age'),
           ])
           expect(client).to receive(:method_name).
             with(person:{name:'John Doe', age:40, aka:'johndoe'})
@@ -65,12 +65,12 @@ module Aws
 
         it 'deep merges params with incoming params' do
           request = Request.new(method_name:'method_name', params: [
-            RequestParams::String.new('n1', 'filters[0].name'),
-            RequestParams::String.new('v1', 'filters[0].values[]'),
-            RequestParams::String.new('v2', 'filters[0].values[]'),
-            RequestParams::String.new('n2', 'filters[1].name'),
-            RequestParams::String.new('v3', 'filters[1].values[]'),
-            RequestParams::String.new('v4', 'filters[1].values[]'),
+            RequestParams::Literal.new(value:'n1', target:'filters[0].name'),
+            RequestParams::Literal.new(value:'v1', target:'filters[0].values[]'),
+            RequestParams::Literal.new(value:'v2', target:'filters[0].values[]'),
+            RequestParams::Literal.new(value:'n2', target:'filters[1].name'),
+            RequestParams::Literal.new(value:'v3', target:'filters[1].values[]'),
+            RequestParams::Literal.new(value:'v4', target:'filters[1].values[]'),
           ])
           expect(client).to receive(:method_name).with(filters:[
             { name:'n1', values: %w(v1 v2) },

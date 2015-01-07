@@ -6,7 +6,7 @@
         "resource": {
           "type": "PlatformApplication",
           "identifiers": [
-            { "target": "Arn", "sourceType": "responsePath", "source": "PlatformApplicationArn" }
+            { "target": "Arn", "source": "response", "path": "PlatformApplicationArn" }
           ]
         }
       },
@@ -15,7 +15,41 @@
         "resource": {
           "type": "Topic",
           "identifiers": [
-            { "target": "Arn", "sourceType": "responsePath", "source": "TopicArn" }
+            { "target": "Arn", "source": "response", "path": "TopicArn" }
+          ]
+        }
+      }
+    },
+    "has": {
+      "PlatformApplication": {
+        "resource": {
+          "type": "PlatformApplication",
+          "identifiers": [
+            { "target": "Arn", "source": "input" }
+          ]
+        }
+      },
+      "PlatformEndpoint": {
+        "resource": {
+          "type": "PlatformEndpoint",
+          "identifiers": [
+            { "target": "Arn", "source": "input" }
+          ]
+        }
+      },
+      "Subscription": {
+        "resource": {
+          "type": "Subscription",
+          "identifiers": [
+            { "target": "Arn", "source": "input" }
+          ]
+        }
+      },
+      "Topic": {
+        "resource": {
+          "type": "Topic",
+          "identifiers": [
+            { "target": "Arn", "source": "input" }
           ]
         }
       }
@@ -26,7 +60,7 @@
         "resource": {
           "type": "PlatformApplication",
           "identifiers": [
-            { "target": "Arn", "sourceType": "responsePath", "source": "PlatformApplications[].PlatformApplicationArn" }
+            { "target": "Arn", "source": "response", "path": "PlatformApplications[].PlatformApplicationArn" }
           ]
         }
       },
@@ -35,8 +69,8 @@
         "resource": {
           "type": "Subscription",
           "identifiers": [
-            { "target": "TopicArn", "sourceType": "responsePath", "source": "Subscriptions[].TopicArn" },
-            { "target": "Arn", "sourceType": "responsePath", "source": "Subscriptions[].SubscriptionArn" }
+            { "target": "TopicArn", "source": "response", "path": "Subscriptions[].TopicArn" },
+            { "target": "Arn", "source": "response", "path": "Subscriptions[].SubscriptionArn" }
           ]
         }
       },
@@ -45,7 +79,7 @@
         "resource": {
           "type": "Topic",
           "identifiers": [
-            { "target": "Arn", "sourceType": "responsePath", "source": "Topics[].TopicArn" }
+            { "target": "Arn", "source": "response", "path": "Topics[].TopicArn" }
           ]
         }
       }
@@ -61,7 +95,7 @@
         "request": {
           "operation": "GetPlatformApplicationAttributes",
           "params": [
-            { "target": "PlatformApplicationArn", "sourceType": "identifier", "source": "Arn" }
+            { "target": "PlatformApplicationArn", "source": "identifier", "name": "Arn" }
           ]
         },
         "path": "@"
@@ -71,14 +105,14 @@
           "request": {
             "operation": "CreatePlatformEndpoint",
             "params": [
-              { "target": "PlatformApplicationArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "PlatformApplicationArn", "source": "identifier", "name": "Arn" }
             ]
           },
           "resource": {
             "type": "PlatformEndpoint",
             "identifiers": [
-              { "target": "PlatformApplicationArn", "sourceType": "identifier", "source": "Arn" },
-              { "target": "Arn", "sourceType": "responsePath", "source": "EndpointArn" }
+              { "target": "PlatformApplicationArn", "source": "identifier", "name": "Arn" },
+              { "target": "Arn", "source": "response", "path": "EndpointArn" }
             ]
           }
         },
@@ -86,7 +120,7 @@
           "request": {
             "operation": "DeletePlatformApplication",
             "params": [
-              { "target": "PlatformApplicationArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "PlatformApplicationArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -94,7 +128,7 @@
           "request": {
             "operation": "SetPlatformApplicationAttributes",
             "params": [
-              { "target": "PlatformApplicationArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "PlatformApplicationArn", "source": "identifier", "name": "Arn" }
             ]
           }
         }
@@ -104,13 +138,13 @@
           "request": {
             "operation": "ListEndpointsByPlatformApplication",
             "params": [
-              { "target": "PlatformApplicationArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "PlatformApplicationArn", "source": "identifier", "name": "Arn" }
             ]
           },
           "resource": {
             "type": "PlatformEndpoint",
             "identifiers": [
-              { "target": "Arn", "sourceType": "responsePath", "source": "Endpoints[].EndpointArn" }
+              { "target": "Arn", "source": "response", "path": "Endpoints[].EndpointArn" }
             ]
           }
         }
@@ -125,7 +159,7 @@
         "request": {
           "operation": "GetEndpointAttributes",
           "params": [
-            { "target": "EndpointArn", "sourceType": "identifier", "source": "Arn" }
+            { "target": "EndpointArn", "source": "identifier", "name": "Arn" }
           ]
         },
         "path": "@"
@@ -135,7 +169,7 @@
           "request": {
             "operation": "DeleteEndpoint",
             "params": [
-              { "target": "EndpointArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "EndpointArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -143,7 +177,7 @@
           "request": {
             "operation": "Publish",
             "params": [
-              { "target": "TargetArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TargetArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -151,7 +185,7 @@
           "request": {
             "operation": "SetEndpointAttributes",
             "params": [
-              { "target": "EndpointArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "EndpointArn", "source": "identifier", "name": "Arn" }
             ]
           }
         }
@@ -166,7 +200,7 @@
         "request": {
           "operation": "GetSubscriptionAttributes",
           "params": [
-            { "target": "SubscriptionArn", "sourceType": "identifier", "source": "Arn" }
+            { "target": "SubscriptionArn", "source": "identifier", "name": "Arn" }
           ]
         },
         "path": "@"
@@ -176,7 +210,7 @@
           "request": {
             "operation": "Unsubscribe",
             "params": [
-              { "target": "SubscriptionArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "SubscriptionArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -184,7 +218,7 @@
           "request": {
             "operation": "SetSubscriptionAttributes",
             "params": [
-              { "target": "SubscriptionArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "SubscriptionArn", "source": "identifier", "name": "Arn" }
             ]
           }
         }
@@ -199,7 +233,7 @@
         "request": {
           "operation": "GetTopicAttributes",
           "params": [
-            { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+            { "target": "TopicArn", "source": "identifier", "name": "Arn" }
           ]
         },
         "path": "@"
@@ -209,7 +243,7 @@
           "request": {
             "operation": "AddPermission",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -217,13 +251,13 @@
           "request": {
             "operation": "ConfirmSubscription",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           },
           "resource": {
             "type": "Subscription",
             "identifiers": [
-              { "target": "Arn", "sourceType": "responsePath", "source": "SubscriptionArn" }
+              { "target": "Arn", "source": "response", "path": "SubscriptionArn" }
             ]
           }
         },
@@ -231,7 +265,7 @@
           "request": {
             "operation": "DeleteTopic",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -239,7 +273,7 @@
           "request": {
             "operation": "Publish",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -247,7 +281,7 @@
           "request": {
             "operation": "RemovePermission",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -255,7 +289,7 @@
           "request": {
             "operation": "SetTopicAttributes",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           }
         },
@@ -263,13 +297,13 @@
           "request": {
             "operation": "Subscribe",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           },
           "resource": {
             "type": "Subscription",
             "identifiers": [
-              { "target": "Arn", "sourceType": "responsePath", "source": "SubscriptionArn" }
+              { "target": "Arn", "source": "response", "path": "SubscriptionArn" }
             ]
           }
         }
@@ -279,13 +313,13 @@
           "request": {
             "operation": "ListSubscriptionsByTopic",
             "params": [
-              { "target": "TopicArn", "sourceType": "identifier", "source": "Arn" }
+              { "target": "TopicArn", "source": "identifier", "name": "Arn" }
             ]
           },
           "resource": {
             "type": "Subscription",
             "identifiers": [
-              { "target": "Arn", "sourceType": "responsePath", "source": "Subscriptions[].SubscriptionArn" }
+              { "target": "Arn", "source": "response", "path": "Subscriptions[].SubscriptionArn" }
             ]
           }
         }

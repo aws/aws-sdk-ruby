@@ -23,12 +23,10 @@ module Aws
           define_actions(namespace, resource, definition['actions'] || {})
           define_batch_actions(namespace, resource, definition['batchActions'] || {})
           define_waiters(namespace, resource, definition['waiters'] || {})
+          define_has(namespace, resource, definition['has'] || {})
           define_has_many(namespace, resource, definition['hasMany'] || {})
-          define_belongs_to(namespace, resource, definition['belongsTo'] || {})
           define_data_attributes(namespace, resource, definition)
-          define_subresources(namespace, resource, definition['subResources'] || {})
         end
-        define_top_level_references(namespace)
       end
 
       private
@@ -48,52 +46,6 @@ module Aws
       def each_resource_class(namespace, &block)
         each_definition do |name, definition|
           yield(namespace.const_get(name), definition)
-        end
-      end
-
-      def define_subresources(namespace, parent, definition)
-        parent_name = parent.resource_name
-        identifiers = definition['identifiers'] || {}
-        (definition['resources'] || []).each do |child_name|
-
-          method_name = underscore(child_name.sub(/^#{parent_name}/, ''))
-          operation = subresource(namespace, child_name, identifiers)
-          parent.add_operation(method_name, operation)
-
-          method_name = underscore(parent_name)
-          operation = subresource(namespace, parent_name, identifiers.invert)
-          namespace.const_get(child_name).add_operation(method_name, operation)
-
-        end
-      end
-
-      def subresource(namespace, type, identifiers)
-        Operations::BelongsToOperation.new(builder: define_builder(namespace, {
-          'type' => type,
-          'identifiers' => identifiers.map { |source, target|
-            {
-              'target' => target,
-              'sourceType' => 'identifier',
-              'source' => source,
-            }
-          }
-        }))
-      end
-
-      def define_top_level_references(namespace)
-        top_level = Set.new(resource_definitions.keys)
-        each_resource_class(namespace) do |resource, definition|
-          unless resource.identifiers.count <= 1
-            top_level.delete(resource.resource_name)
-          end
-          ((definition['subResources'] || {})['resources'] || {}).each do |child|
-            top_level.delete(child)
-          end
-        end
-        top_level.each do |resource_name|
-          method_name = underscore(resource_name)
-          operation = subresource(namespace, resource_name, {})
-          namespace::Resource.add_operation(method_name, operation)
         end
       end
 
@@ -149,22 +101,27 @@ module Aws
       end
 
       def build_operation(namespace, resource, definition)
-        type = operation_type(definition)
-        send("build_#{type}_operation", namespace, resource, definition)
+        if definition['resource']
+          build_resource_action(namespace, resource, definition)
+        else
+          build_basic_action(namespace, resource, definition)
+        end
       end
 
-      def build_basic_operation(namespace, resource, definition)
+      def build_basic_action(namespace, resource, definition)
         Operations::Operation.new(
           request: define_request(definition['request']),
           source: source(definition)
         )
       end
 
-      def build_resource_operation(namespace, resource, definition)
+      def build_resource_action(namespace, resource, definition)
         builder = define_builder(namespace, definition['resource'])
         if path = definition['resource']['path']
-          source = underscore(path)
-          builder.sources << BuilderSources::ResponsePath.new(source, :data)
+          builder.sources << BuilderSources::ResponsePath.new({
+            source: underscore(path),
+            target: :data,
+          })
         end
         Operations::ResourceOperation.new(
           request: define_request(definition['request']),
@@ -173,11 +130,13 @@ module Aws
         )
       end
 
-      def build_enumerate_resource_operation(namespace, resource, definition)
+      def has_many(namespace, resource, definition)
         builder = define_builder(namespace, definition['resource'])
         if path = definition['resource']['path']
-          source = underscore(path)
-          builder.sources << BuilderSources::ResponsePath.new(source, :data)
+          builder.sources << BuilderSources::ResponsePath.new({
+            source: underscore(path),
+            target: :data,
+          })
         end
         Operations::HasManyOperation.new(
           request: define_request(definition['request']),
@@ -209,98 +168,107 @@ module Aws
 
       def request_params(params)
         params.map do |definition|
-          param_class =
-            case definition['sourceType']
-            when 'identifier' then RequestParams::Identifier
-            when 'dataMember' then RequestParams::DataMember
-            when 'string'     then RequestParams::String
-            when 'integer'    then RequestParams::Integer
-            when 'boolean'    then RequestParams::Boolean
-            else
-              msg = "unhandled param source type `#{definition['sourceType']}'"
-              raise ArgumentError, msg
-            end
-          source = definition['source']
-          param_class.new(
-            param_class.literal? ? source : underscore(source),
-            underscore(definition['target'])
-          )
+          send("#{definition['source']}_request_param", definition)
         end
       end
 
+      def identifier_request_param(definition)
+        RequestParams::Identifier.new({
+          target: underscore(definition['target']),
+          name: underscore(definition['name']).to_sym,
+        })
+      end
+
+      def data_request_param(definition)
+        RequestParams::DataMember.new({
+          target: underscore(definition['target']),
+          value: underscore(definition['path']),
+        })
+      end
+
+      def string_request_param(definition)
+        RequestParams::Literal.new({
+          target: underscore(definition['target']),
+          value: definition['value'],
+        })
+      end
+      alias integer_request_param string_request_param
+      alias float_request_param string_request_param
+      alias boolean_request_param string_request_param
+      alias null_request_param string_request_param
+
       def define_has_many(namespace, resource, has_many)
         has_many.each do |name, definition|
-          operation = build_enumerate_resource_operation(namespace, resource, definition)
+          operation = has_many(namespace, resource, definition)
           resource.add_operation(underscore(name), operation)
         end
       end
 
-      def define_belongs_to(namespace, resource, has_some)
-        has_some.each do |name, definition|
-          define_reference(namespace, resource, name, definition)
+      def define_has(namespace, resource, has)
+        has.each do |name, definition|
+          has_operation(namespace, resource, name, definition)
         end
       end
 
-      def define_reference(namespace, resource, name, definition)
+      def has_operation(namespace, resource, name, definition)
         builder = define_builder(namespace, definition['resource'])
         if path = definition['resource']['path']
-          source = underscore(path)
-          builder.sources << BuilderSources::DataMember.new(source, :data)
+          builder.sources << BuilderSources::DataMember.new({
+            source: underscore(path),
+            target: :data,
+          })
         end
-        operation = Operations::BelongsToOperation.new(
+        operation = Operations::HasOperation.new(
           builder: builder,
           source: source(definition))
         resource.add_operation(underscore(name), operation)
       end
 
       def define_builder(namespace, definition)
-        builder = Builder.new(
+        Builder.new(
           resource_class: namespace.const_get(definition['type']),
           sources: builder_sources(definition['identifiers'] || [])
         )
-        delta = builder.resource_class.identifiers - builder.sources.map(&:target)
-        if delta.size == 0
-          # all identifiers provided
-        elsif delta.size == 1
-          # all but one provided, adding an Argument source
-          target = delta.first
-          builder.sources << BuilderSources::Argument.new(target)
-        else
-          msg = "too many unsourced identifiers: #{definition.inspect}"
-          raise Errors::DefinitionError, msg
-        end
-        builder
       end
 
       def builder_sources(sources)
         sources.map do |definition|
-          source_class =
-            case definition['sourceType']
-            when 'identifier'       then BuilderSources::Identifier
-            when 'dataMember'       then BuilderSources::DataMember
-            when 'requestParameter' then BuilderSources::RequestParameter
-            when 'responsePath'     then BuilderSources::ResponsePath
-            else
-              msg = "unhandled identifier source type `#{definition['sourceType']}'"
-              raise ArgumentError, msg
-            end
-          source_class.new(
-            underscore(definition['source']),
-            underscore(definition['target'])
-          )
+          send("#{definition['source']}_builder_source", definition)
         end
       end
 
-      def operation_type(action)
-        case action.keys.sort
-        when %w(request) then :basic
-        when %w(path request) then :data
-        when %w(request resource) then :resource
-        when %w(path request resource) then :resource
-        else
-          msg = "unhandled action: #{action.keys.inspect}"
-          raise Errors::DefinitionError, msg
-        end
+      def input_builder_source(definition)
+        BuilderSources::Argument.new({
+          target: underscore(definition['target']),
+        })
+      end
+
+      def identifier_builder_source(definition)
+        BuilderSources::Identifier.new({
+          source: underscore(definition['name']),
+          target: underscore(definition['target']),
+        })
+      end
+
+      def data_builder_source(definition)
+        BuilderSources::DataMember.new({
+          source: underscore(definition['path']),
+          target: underscore(definition['target']),
+        })
+      end
+
+      def requestParameter_builder_source(definition)
+        BuilderSources::RequestParameter.new({
+          source: underscore(definition['path']),
+          target: underscore(definition['target']),
+        })
+      end
+
+      def response_builder_source(definition)
+        BuilderSources::ResponsePath.new({
+          source: underscore(definition['path']),
+          target: underscore(definition['target']),
+        })
       end
 
       def svc_definition
@@ -320,10 +288,6 @@ module Aws
         if str
           str.gsub(/\w+/) { |part| Seahorse::Util.underscore(part) }
         end
-      end
-
-      def pluralize(str)
-        underscore(str) + 's'
       end
 
       def source(definition)
