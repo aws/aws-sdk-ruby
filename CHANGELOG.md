@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added support for Amazon EC2 classic link.
+
 * Feature - Aws::RDS - Updated to the latest API version, 2014-10-31, adding
   support for the new `#describe_pending_maintenance_actions` operation to
   `Aws::RDS::Client`.
