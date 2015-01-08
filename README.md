@@ -255,6 +255,7 @@ to be backwards compatible.
 | Auto Scaling                       | AutoScaling          | 2011-01-01  |
 | AWS CloudFormation                 | CloudFormation       | 2010-05-15  |
 | Amazon CloudFront                  | CloudFront           | 2014-10-21  |
+| Amazon CloudHSM                    | CloudHSM             | 2014-05-30  |
 | Amazon CloudSearch                 | CloudSearch          | 2013-01-01  |
 | Amazon CloudSearch Domain          | CloudSearchDomain    | 2013-01-01  |
 | AWS CloudTrail                     | CloudTrail           | 2013-11-01  |
@@ -268,6 +269,7 @@ to be backwards compatible.
 | AWS Direct Connect                 | DirectConnect        | 2012-10-25  |
 | Amazon DynamoDB                    | DynamoDB             | 2012-08-10  |
 | Amazon Elastic Compute Cloud       | EC2                  | 2014-10-01  |
+| Amazon EC2 Container Service       | ECS                  | 2014-11-13  |
 | Amazon ElastiCache                 | ElastiCache          | 2014-09-30  |
 | AWS Elastic Beanstalk              | ElasticBeanstalk     | 2010-12-01  |
 | Elastic Load Balancing             | ElasticLoadBalancing | 2012-06-01  |
@@ -280,7 +282,7 @@ to be backwards compatible.
 | AWS Key Management Service         | KMS                  | 2014-11-01  |
 | AWS Lambda                         | Lambda               | 2014-11-11  |
 | AWS OpsWorks                       | OpsWorks             | 2013-02-18  |
-| Amazon Relational Database Service | RDS                  | 2014-09-01  |
+| Amazon Relational Database Service | RDS                  | 2014-10-31  |
 | Amazon Redshift                    | Redshift             | 2012-12-01  |
 | Amazon Route 53                    | Route53              | 2013-04-01  |
 | Amazon Route 53 Domains            | Route53Domains       | 2014-05-15  |

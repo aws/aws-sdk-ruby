@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.18 (2015-01-08)
 ------------------
 
 * Feature - Aws::CloudHsm - Added support for the new Amazon CloudHSM
