@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Updated to the latest API version, 2014-10-31, adding
+  support for the new `#describe_pending_maintenance_actions` operation to
+  `Aws::RDS::Client`.
+
 * Issue - Aws::S3 - Resolved an issue with `Aws::S3::Client#get_bucket_location`.
   Fixes GitHub issue #185.
 
