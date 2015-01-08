@@ -34,6 +34,7 @@ module Aws
     DirectConnect
     DynamoDB
     EC2
+    ECS
     ElastiCache
     ElasticBeanstalk
     ElasticLoadBalancing

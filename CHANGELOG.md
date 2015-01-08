@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added support for the new Amazon EC2 Container
+  Service.
+
 * Feature - Aws::EC2 - Added support for Amazon EC2 classic link.
 
 * Feature - Aws::RDS - Updated to the latest API version, 2014-10-31, adding
