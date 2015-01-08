@@ -434,8 +434,7 @@ module AWS
         end
 
         it 'is not set when key_id or access_key is missing' do
-          provider = SharedCredentialFileProvider.new(
-            :path => '/no/file/here')
+          provider = SharedCredentialFileProvider.new(:path => '/no/file/here')
           provider.set?.should be_falsey
         end
 
