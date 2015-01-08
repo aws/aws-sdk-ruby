@@ -21,6 +21,7 @@ module Aws
     AutoScaling
     CloudFormation
     CloudFront
+    CloudHSM
     CloudSearch
     CloudSearchDomain
     CloudTrail

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudHsm - Added support for the new Amazon CloudHSM
+  service.
+
 * Feature - Aws::EC2 - Added support for the new Amazon EC2 Container
   Service.
 
