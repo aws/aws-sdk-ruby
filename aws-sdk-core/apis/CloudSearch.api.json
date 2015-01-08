@@ -1051,7 +1051,7 @@
         "AnalysisSchemeLanguage"
       ],
       "members":{
-        "AnalysisSchemeName":{"shape":"FieldName"},
+        "AnalysisSchemeName":{"shape":"StandardName"},
         "AnalysisSchemeLanguage":{"shape":"AnalysisSchemeLanguage"},
         "AnalysisOptions":{"shape":"AnalysisOptions"}
       }
@@ -1258,7 +1258,7 @@
       ],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "AnalysisSchemeName":{"shape":"FieldName"}
+        "AnalysisSchemeName":{"shape":"StandardName"}
       }
     },
     "DeleteAnalysisSchemeResponse":{
@@ -1289,7 +1289,7 @@
       ],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "ExpressionName":{"shape":"FieldName"}
+        "ExpressionName":{"shape":"StandardName"}
       }
     },
     "DeleteExpressionResponse":{
@@ -1307,7 +1307,7 @@
       ],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "IndexFieldName":{"shape":"FieldName"}
+        "IndexFieldName":{"shape":"DynamicFieldName"}
       }
     },
     "DeleteIndexFieldResponse":{
@@ -1325,7 +1325,7 @@
       ],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "SuggesterName":{"shape":"FieldName"}
+        "SuggesterName":{"shape":"StandardName"}
       }
     },
     "DeleteSuggesterResponse":{
@@ -1340,7 +1340,7 @@
       "required":["DomainName"],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "AnalysisSchemeNames":{"shape":"FieldNameList"},
+        "AnalysisSchemeNames":{"shape":"StandardNameList"},
         "Deployed":{"shape":"Boolean"}
       }
     },
@@ -1383,7 +1383,7 @@
       "required":["DomainName"],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "ExpressionNames":{"shape":"FieldNameList"},
+        "ExpressionNames":{"shape":"StandardNameList"},
         "Deployed":{"shape":"Boolean"}
       }
     },
@@ -1399,7 +1399,7 @@
       "required":["DomainName"],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "FieldNames":{"shape":"FieldNameList"},
+        "FieldNames":{"shape":"DynamicFieldNameList"},
         "Deployed":{"shape":"Boolean"}
       }
     },
@@ -1444,7 +1444,7 @@
       "required":["DomainName"],
       "members":{
         "DomainName":{"shape":"DomainName"},
-        "SuggesterNames":{"shape":"FieldNameList"},
+        "SuggesterNames":{"shape":"StandardNameList"},
         "Deployed":{"shape":"Boolean"}
       }
     },
@@ -1544,6 +1544,16 @@
         "SortEnabled":{"shape":"Boolean"}
       }
     },
+    "DynamicFieldName":{
+      "type":"string",
+      "min":1,
+      "max":64,
+      "pattern":"([a-z][a-z0-9_]*\\*?|\\*[a-z0-9_]*)"
+    },
+    "DynamicFieldNameList":{
+      "type":"list",
+      "member":{"shape":"DynamicFieldName"}
+    },
     "ErrorCode":{"type":"string"},
     "ErrorMessage":{"type":"string"},
     "Expression":{
@@ -1553,7 +1563,7 @@
         "ExpressionValue"
       ],
       "members":{
-        "ExpressionName":{"shape":"FieldName"},
+        "ExpressionName":{"shape":"StandardName"},
         "ExpressionValue":{"shape":"ExpressionValue"}
       }
     },
@@ -1585,7 +1595,7 @@
     },
     "FieldNameCommaList":{
       "type":"string",
-      "pattern":"\\s*[a-z][a-z0-9_]*\\s*(,\\s*[a-z][a-z0-9_]*\\s*)*"
+      "pattern":"\\s*[a-z*][a-z0-9_]*\\*?\\s*(,\\s*[a-z*][a-z0-9_]*\\*?\\s*)*"
     },
     "FieldNameList":{
       "type":"list",
@@ -1616,7 +1626,7 @@
         "IndexFieldType"
       ],
       "members":{
-        "IndexFieldName":{"shape":"FieldName"},
+        "IndexFieldName":{"shape":"DynamicFieldName"},
         "IndexFieldType":{"shape":"IndexFieldType"},
         "IntOptions":{"shape":"IntOptions"},
         "DoubleOptions":{"shape":"DoubleOptions"},
@@ -1854,6 +1864,16 @@
       }
     },
     "ServiceUrl":{"type":"string"},
+    "StandardName":{
+      "type":"string",
+      "min":1,
+      "max":64,
+      "pattern":"[a-z][a-z0-9_]*"
+    },
+    "StandardNameList":{
+      "type":"list",
+      "member":{"shape":"StandardName"}
+    },
     "String":{"type":"string"},
     "Suggester":{
       "type":"structure",
@@ -1862,7 +1882,7 @@
         "DocumentSuggesterOptions"
       ],
       "members":{
-        "SuggesterName":{"shape":"FieldName"},
+        "SuggesterName":{"shape":"StandardName"},
         "DocumentSuggesterOptions":{"shape":"DocumentSuggesterOptions"}
       }
     },
