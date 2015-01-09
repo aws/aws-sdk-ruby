@@ -1,25 +1,35 @@
 {
+  "version": 2,
   "waiters": {
-    "__default__": {
-      "interval": 20,
-      "max_attempts": 25
-    },
-    "__TableState": {
-      "operation": "DescribeTable"
-    },
     "TableExists": {
-      "extends": "__TableState",
-      "ignore_errors": [
-        "ResourceNotFoundException"
-      ],
-      "success_type": "output",
-      "success_path": "Table.TableStatus",
-      "success_value": "ACTIVE"
+      "delay": 20,
+      "operation": "DescribeTable",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "expected": "ACTIVE",
+          "matcher": "path",
+          "state": "success",
+          "argument": "Table.TableStatus"
+        },
+        {
+          "expected": "ResourceNotFoundException",
+          "matcher": "error",
+          "state": "retry"
+        }
+      ]
     },
     "TableNotExists": {
-      "extends": "__TableState",
-      "success_type": "error",
-      "success_value": "ResourceNotFoundException"
+      "delay": 20,
+      "operation": "DescribeTable",
+      "maxAttempts": 25,
+      "acceptors": [
+        {
+          "expected": "ResourceNotFoundException",
+          "matcher": "error",
+          "state": "success"
+        }
+      ]
     }
   }
 }

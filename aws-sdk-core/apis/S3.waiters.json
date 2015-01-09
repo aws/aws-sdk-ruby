@@ -1,32 +1,63 @@
 {
+  "version": 2,
   "waiters": {
-    "__default__": {
-      "interval": 5,
-      "max_attempts": 20
-    },
     "BucketExists": {
+      "delay": 5,
       "operation": "HeadBucket",
-      "ignore_errors": [
-        "NoSuchBucket"
-      ],
-      "success_type": "output"
+      "maxAttempts": 20,
+      "acceptors": [
+        {
+          "expected": 200,
+          "matcher": "status",
+          "state": "success"
+        },
+        {
+          "expected": 404,
+          "matcher": "status",
+          "state": "retry"
+        }
+      ]
     },
     "BucketNotExists": {
+      "delay": 5,
       "operation": "HeadBucket",
-      "success_type": "error",
-      "success_value": "NoSuchBucket"
+      "maxAttempts": 20,
+      "acceptors": [
+        {
+          "expected": 404,
+          "matcher": "status",
+          "state": "success"
+        }
+      ]
     },
     "ObjectExists": {
+      "delay": 5,
       "operation": "HeadObject",
-      "ignore_errors": [
-        "NoSuchKey"
-      ],
-      "success_type": "output"
+      "maxAttempts": 20,
+      "acceptors": [
+        {
+          "expected": 200,
+          "matcher": "status",
+          "state": "success"
+        },
+        {
+          "expected": 404,
+          "matcher": "status",
+          "state": "retry"
+        }
+      ]
     },
     "ObjectNotExists": {
+      "delay": 5,
       "operation": "HeadObject",
-      "success_type": "error",
-      "success_value": "NoSuchKey"
+      "maxAttempts": 20,
+      "acceptors": [
+        {
+          "expected": 404,
+          "matcher": "status",
+          "state": "success"
+        }
+      ]
     }
   }
 }
