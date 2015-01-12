@@ -20,7 +20,7 @@ module Aws
       def next_tokens(response)
         @tokens.each.with_object({}) do |(source, target), next_tokens|
           value = JMESPath.search(source, response.data)
-          next_tokens[target.to_sym] = value unless value.nil?
+          next_tokens[target.to_sym] = value unless empty_value?(value)
         end
       end
 
@@ -49,6 +49,10 @@ module Aws
         str.
           gsub(' or ', '||').
           gsub(/\w+/) { |part| Seahorse::Util.underscore(part) }
+      end
+
+      def empty_value?(value)
+        value.nil? || value == [] || value == {}
       end
 
     end

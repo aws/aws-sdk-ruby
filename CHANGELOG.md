@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Pagingation - Resolved an issue where an empty hashes or arrays
+  were being treated as valid next tokens for paging response. This appears
+  to only have affected `Aws::DynamoDB::Client#batch_get_item`.
+
 2.0.18 (2015-01-08)
 ------------------
 
