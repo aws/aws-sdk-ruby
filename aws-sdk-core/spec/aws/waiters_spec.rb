@@ -5,21 +5,43 @@ module Aws
     # functionally testing waiters using the S3 and EC2 waiter configurations
     describe 'Waiters' do
 
-      let(:client_options) {{
-        region: 'us-west-2',
-        access_key_id:'akid',
-        secret_access_key:'akid',
-        retry_limit: 0,
-      }}
+      let(:client) { EC2::Client.new(stub_responses: true, retry_limit: 0) }
+
+      describe 'client waiters module' do
+
+        it 'accepts a waiter provider' do
+          klass = Class.new { include ClientWaiters }
+          klass.set_waiters(Waiters::Provider.new('waiters' => {}))
+          expect(klass.new.waiter_names).to eq([])
+        end
+
+        it 'accepts a hash' do
+          klass = Class.new { include ClientWaiters }
+          klass.set_waiters('waiters' => {})
+          expect(klass.new.waiter_names).to eq([])
+        end
+
+        it 'accepts nil' do
+          klass = Class.new { include ClientWaiters }
+          klass.set_waiters(nil)
+          expect(klass.new.waiter_names).to eq([])
+        end
+
+        it 'rejects unknown providers' do
+          klass = Class.new { include ClientWaiters }
+          expect {
+            klass.set_waiters(123)
+          }.to raise_error(ArgumentError, 'invalid waiters')
+        end
+
+      end
 
       describe 'unkonwn waiters' do
-
-        let(:client) { S3::Client.new(client_options) }
 
         it 'raises an error when attempting to wait for an unknown state' do
           expect {
             client.wait_until(:fake_condition)
-          }.to raise_error(Waiters::Errors::NoSuchWaiter)
+          }.to raise_error(Waiters::Errors::NoSuchWaiterError)
         end
 
         it 'lists available waiters in the error message' do
@@ -28,7 +50,7 @@ module Aws
             client.wait_until(:fake_condition)
           rescue => error
           end
-          S3::Client.waiters.waiter_names.each do |waiter_name|
+          client.waiter_names.each do |waiter_name|
             expect(error.message).to match(waiter_name.inspect)
           end
         end
@@ -42,151 +64,161 @@ module Aws
 
       describe 'Client#wait_until' do
 
-        let(:client) { EC2::Client.new(client_options) }
+        let(:instances) { [] }
+
+        let(:data) {{
+          reservations: [
+            { instances: instances }
+          ]
+        }}
+
+        let(:client) { EC2::Client.new(stub_responses: true, retry_limit: 0) }
+
+        it 'can match an path value' do
+          client = DynamoDB::Client.new(stub_responses:true)
+          client.stub_responses(:describe_table, table: { table_status: 'ACTIVE' })
+          r = client.wait_until(:table_exists, table_name:'foo')
+          expect(r).to be(true)
+        end
 
         it 'yields the waiter to the client #wait_until block' do
-          client.wait_until(:instance_stopped) do |waiter|
+          client.wait_until(:instance_running) do |waiter|
             # pulled from apis/EC2.waiters.json, if these defaults
             # change this test case will need to be updated
-            expect(waiter.interval).to eq(15)
+            expect(waiter.delay).to eq(15)
+            expect(waiter.interval).to eq(15) # aliased `#delay`
             expect(waiter.max_attempts).to eq(40)
-            expect(waiter).to receive(:wait).with(client, {})
+            waiter.before_attempt do
+              throw :success
+            end
           end
         end
 
         it 'triggers callbacks before sending and before waiting' do
-          client.handle(step: :send) do |context|
-            Seahorse::Client::Response.new(context:context)
-          end
+          instances << { state: { name: 'pending' }}
+          client.stub_responses(:describe_instances, data)
           yielded = []
           expect {
             client.wait_until(:instance_running) do |w|
               w.interval = 0
               w.max_attempts = 2
               w.before_attempt do |attempts|
-                yielded << "#{attempts}-attempts-made"
+                yielded << "before attempt #{attempts + 1}"
               end
               w.before_wait do |attempts, resp|
-                expect(resp).to be_kind_of(Seahorse::Client::Response)
-                yielded << "waited-#{attempts}-times"
+                yielded << "before wait #{attempts}"
               end
             end
-          }.to raise_error
-          expect(yielded).to eq(%w(0-attempts-made waited-1-times 1-attempts-made))
+          }.to raise_error(Waiters::Errors::WaiterFailed)
+          expect(yielded).to eq([
+            "before attempt 1",
+            "before wait 1",
+            "before attempt 2",
+          ])
         end
 
-        describe 'success and failure' do
+        it 'returns when successful' do
+          instances << { state: { name: 'running' }}
+          client.stub_responses(:describe_instances, data)
+          expect {
+            client.wait_until(:instance_running)
+          }.not_to raise_error
+        end
 
-          let(:instances) { [] }
+        it 'raises an error when failed' do
+          instances << { state: { name: 'terminated' }}
+          client.stub_responses(:describe_instances, data)
+          expect {
+            client.wait_until(:instance_stopped)
+          }.to raise_error(Errors::WaiterFailed)
+        end
 
-          before(:each) do
-            instance_states = instances
-            client.handle(step: :send) do |context|
-              resp = Seahorse::Client::Response.new(context:context)
-              resp.data = {'reservations' => [{'instances' => instance_states}]}
-              resp
-            end
-          end
-
-          it 'passes additional params to the client request' do
-            params = { instance_ids:['i-12345678'] }
-            resp = client.wait_until(:instance_running, params)
-            expect(resp.context.params).to eq(params)
-          end
-
-          it 'returns when successful' do
-            instances << { 'state' => {'name' => 'stopped' }}
-            expect {
-              client.wait_until(:instance_stopped)
-            }.not_to raise_error
-          end
-
-          it 'raises an error when failed' do
-            instances << { 'state' => {'name' => 'terminated' }}
-            expect {
-              client.wait_until(:instance_stopped)
-            }.to raise_error(Errors::WaiterFailed)
-          end
-
-          it 'raises a max attempts after the configured attempt count' do
-            instances << { 'state' => {'name' => 'running' }}
-            expect {
-              client.wait_until(:instance_stopped) do |w|
-                w.interval = 0
-                w.max_attempts = 4
-              end
-            }.to raise_error(Errors::WaiterFailed, /4 attempts made/)
-          end
-
-          it 'sleeps between attempts' do
-            expect {
-              instances << { 'state' => {'name' => 'running' }}
-              client.wait_until(:instance_stopped) do |w|
-                w.interval = 1.234
-                w.max_attempts = 4
-                expect(w).to receive(:sleep).with(1.234).exactly(3).times
-              end
-            }.to raise_error(/too many attempts/)
-          end
-
-          it 'catches :stop_waiting from callbacks' do
-            expect {
-              instances << { 'state' => {'name' => 'running' }}
-              client.wait_until(:instance_stopped) do |w|
-                expect(w).not_to receive(:sleep)
-                w.before_wait do |attempts, response|
-                  throw :failure, 'custom-message'
-                end
-              end
-            }.to raise_error(Errors::WaiterFailed, 'custom-message')
-          end
-
-          it 'catches :stop_waiting from callbacks' do
-            expect(client).not_to receive(:build_request)
+        it 'raises a max attempts after the configured attempt count' do
+          expect {
             client.wait_until(:instance_stopped) do |w|
-              w.before_attempt do |attempt|
-                throw :success
+              w.interval = 0
+              w.max_attempts = 4
+            end
+          }.to raise_error(Errors::TooManyAttemptsError,
+                           /stopped waiting after 4 attempts/)
+        end
+
+        it 'sleeps between attempts' do
+          instances << { state: { name: 'running' }}
+          expect {
+            client.wait_until(:instance_stopped) do |w|
+              w.interval = 1.234
+              w.max_attempts = 4
+              expect(w).to receive(:sleep).with(1.234).exactly(3).times
+            end
+          }.to raise_error(Errors::TooManyAttemptsError)
+        end
+
+        it 'catches :failure from before attempt callbacks' do
+          instances << { state: { name: 'running' }}
+          client.stub_responses(:describe_instances, data)
+          expect {
+            instances << { 'state' => {'name' => 'running' }}
+            client.wait_until(:instance_stopped) do |w|
+              expect(w).not_to receive(:sleep)
+              w.before_attempt do |attempts|
+                throw :failure, 'custom-message'
               end
             end
-          end
+          }.to raise_error(Errors::WaiterFailed, 'custom-message')
+        end
 
+        it 'catches :failure from before wait callbacks' do
+          instances << { state: { name: 'running' }}
+          client.stub_responses(:describe_instances, data)
+          expect {
+            instances << { 'state' => {'name' => 'running' }}
+            client.wait_until(:instance_stopped) do |w|
+              expect(w).not_to receive(:sleep)
+              w.before_wait do |attempts, response|
+                throw :failure, 'custom-message'
+              end
+            end
+          }.to raise_error(Errors::WaiterFailed, 'custom-message')
+        end
+
+        it 'catches :success from before attempt callbacks' do
+          expect(client).not_to receive(:build_request)
+          client.wait_until(:instance_stopped) do |w|
+            w.before_attempt do |attempt|
+              throw :success
+            end
+          end
+        end
+
+        it 'catches :success from before wait callbacks' do
+          expect(client).not_to receive(:build_request)
+          client.wait_until(:instance_stopped) do |w|
+            w.before_attempt do |attempt|
+              throw :success
+            end
+          end
         end
 
         describe 'matching on expectd errors' do
 
-          let(:client) { S3::Client.new(client_options) }
-
-          before(:each) do
-            client.handle(step: :send) do |context|
-              Seahorse::Client::Response.new(context:context)
-            end
-          end
+          let(:client) { S3::Client.new(stub_responses: true) }
 
           it 'succeedes when an expected error is encountered' do
-            client.handle(step: :send) do |context|
-              resp = Seahorse::Client::Response.new(context:context)
-              resp.error = S3::Errors::NotFound.new(context, 'not found')
-              resp
+            client.handle do |context|
+              context.http_response.status_code = 404
+              Seahorse::Client::Response.new(context:context)
             end
-            client.wait_until(:bucket_not_exists, bucket:'aws-sdk')
+            result = client.wait_until(:bucket_not_exists, bucket:'aws-sdk')
+            expect(result).to be(true)
           end
 
           it 'fails when an expected error is not encountered' do
-            client.handle(step: :send) do |context|
-              Seahorse::Client::Response.new(context:context)
-            end
             expect {
               client.wait_until(:bucket_not_exists, bucket:'aws-sdk') do |w|
-                w.interval = 0
+                w.delay = 0
               end
-            }.to raise_error(Errors::WaiterFailed)
-          end
-
-          it 'does not require an acceptor path to succeede' do
-            client.handle(step: :send) do |context|
-              Seahorse::Client::Response.new(context:context)
-            end
-            client.wait_until(:bucket_exists, bucket:'aws-sdk')
+            }.to raise_error(Errors::TooManyAttemptsError)
           end
 
         end
@@ -203,14 +235,17 @@ module Aws
           end
 
           it 'raises response errors' do
-            client.handle(step: :send) do |context|
-              resp = Seahorse::Client::Response.new(context:context)
-              resp.error = RuntimeError.new('oops')
-              resp
-            end
+            client.stub_responses(:describe_instances, RuntimeError.new('oops'))
             expect {
               client.wait_until(:instance_stopped)
-            }.to raise_error(RuntimeError, 'oops')
+            }.to raise_error(Errors::WaiterFailed, /oops/)
+          end
+
+          it 'can match an error code' do
+            client = DynamoDB::Client.new(stub_responses:true)
+            client.stub_responses(:describe_table, 'ResourceNotFoundException')
+            r = client.wait_until(:table_not_exists, table_name:'foo')
+            expect(r).to be(true)
           end
 
         end

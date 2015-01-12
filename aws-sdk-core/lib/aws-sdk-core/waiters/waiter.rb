@@ -6,13 +6,25 @@ module Aws
       RAISE_HANDLER = Seahorse::Client::Plugins::RaiseResponseErrors::Handler
 
       # @api private
-      def initialize(definition = {})
-        @definition = definition
-        @interval = definition['interval']
-        @max_attempts = definition['max_attempts']
+      def initialize(options = {})
+        @poller = options[:poller]
+        @max_attempts = options[:max_attempts]
+        @delay = options[:delay]
         @before_attempt = []
         @before_wait = []
       end
+
+      # @api private
+      attr_reader :poller
+
+      # @return [Integer]
+      attr_accessor :max_attempts
+
+      # @return [Float]
+      attr_accessor :delay
+
+      alias interval delay
+      alias interval= delay=
 
       # Register a callback that is invoked before every polling attempt.
       # Yields the number of attempts made so far.
@@ -71,120 +83,48 @@ module Aws
         @before_wait << Proc.new
       end
 
-      # @return [Float]
-      attr_accessor :interval
-
-      # @return [Integer]
-      attr_accessor :max_attempts
-
-      # @param [Client] client
-      # @param [Hash] params
-      def wait(client, params)
-        attempts = 0
+      # @option options [Client] :client
+      # @option options [Hash] :params
+      def wait(options)
         catch(:success) do
-          failure = catch(:failure) do
-            loop do
-              trigger_callbacks(@before_attempt, attempts)
-              attempts += 1
-              resp = send_request(client, params)
-              throw :success, resp if successful?(resp)
-              throw :failure if failure?(resp)
-              throw :failure, resp.error unless error_ignored?(resp)
-              throw :failure, too_many(attempts) if attempts == max_attempts
-              trigger_callbacks(@before_wait, attempts, resp)
-              sleep(interval)
-            end
+          failure_msg = catch(:failure) do
+            poll(options)
+            return true
           end
-          failure = 'waiter failed' if failure.nil?
-          raise String === failure ? Errors::WaiterFailed.new(failure) : failure
+          raise Errors::WaiterFailed.new(failure_msg || 'waiter failed')
         end
       end
 
       private
 
-      def successful?(response)
-        acceptor_matches?(:success, response)
-      end
+      def poll(options)
+        n = 0
+        loop do
+          trigger_before_attempt(n)
 
-      def failure?(response)
-        acceptor_matches?(:failure, response)
-      end
+          state, resp = @poller.call(options)
+          n += 1
 
-      def trigger_callbacks(callbacks, *args)
-        callbacks.each { |block| block.call(*args) }
-      end
+          case state
+          when :retry
+          when :success then return resp
+          when :failure then raise Errors::FailureStateError.new(resp)
+          when :error   then raise Errors::UnexpectedError.new(resp.error)
+          end
 
-      def send_request(client, params)
-        req = client.build_request(operation_name, params)
-        req.handlers.remove(RAISE_HANDLER)
-        req.send_request
-      end
+          raise Errors::TooManyAttemptsError.new(n) if n == @max_attempts
 
-      def operation_name
-        underscore(@definition['operation']).to_sym
-      end
-
-      def acceptor_matches?(acceptor, resp)
-        case type(acceptor)
-        when 'output' then output_matches?(resp, values(acceptor), path(acceptor))
-        when 'error' then error_matches?(resp.error, values(acceptor))
+          trigger_before_wait(n, resp)
+          sleep(@delay)
         end
       end
 
-      def type(acceptor)
-        @definition["#{acceptor}_type"] || @definition['acceptor_type']
+      def trigger_before_attempt(attempts)
+        @before_attempt.each { |block| block.call(attempts) }
       end
 
-      def path(acceptor)
-        underscore(@definition["#{acceptor}_path"] || @definition['acceptor_path'])
-      end
-
-      def values(acceptor)
-        values = @definition["#{acceptor}_value"] || @definition['acceptor_value']
-        values.is_a?(Array) ? values : [values]
-      end
-
-      def output_matches?(resp, value, path)
-        if resp.error
-          false
-        elsif path
-          output_value_matches?(value, JMESPath.search(path, resp.data))
-        else
-          true
-        end
-      end
-
-      def output_value_matches?(expected, results)
-        if results.is_a?(Array)
-          results.all? { |result| expected.include?(result) }
-        else
-          expected.include?(results)
-        end
-      end
-
-      def error_ignored?(resp)
-        if resp.error
-          error_matches?(resp.error, @definition['ignore_errors'] || [])
-        else
-          true
-        end
-      end
-
-      def error_matches?(error, errors)
-        if error
-          errors.any? { |pattern| error.class.name.match(/#{pattern}$/) }
-        else
-          false
-        end
-      end
-
-      def too_many(attempts)
-        "too many attempts made, #{attempts} attempts made without " +
-        "success or failure"
-      end
-
-      def underscore(str)
-        str.gsub(/\w+/) { |part| Seahorse::Util.underscore(part) } if str
+      def trigger_before_wait(attempts, response)
+        @before_wait.each { |block| block.call(attempts, response) }
       end
 
     end

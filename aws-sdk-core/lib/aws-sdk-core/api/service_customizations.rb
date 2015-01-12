@@ -114,12 +114,6 @@ module Aws
         # parsing of the output
         client_class.api.operation(:get_bucket_location).
           instance_variable_set("@output", nil)
-
-        defs = client_class.waiters.instance_variable_get("@definitions")
-        defs[:bucket_exists]['ignore_errors'] = ['NotFound']
-        defs[:object_exists]['ignore_errors'] = ['NotFound']
-        defs[:bucket_not_exists]['success_value'] = 'NotFound'
-        defs[:object_not_exists]['success_value'] = 'NotFound'
       end
 
       customize 'sqs' do

@@ -14,9 +14,13 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       def initialize(context, message)
+        @code = self.class.code
         @context = context
         super(message)
       end
+
+      # @return [String]
+      attr_reader :code
 
       # @return [Seahorse::Client::RequestContext] The context of the request
       #   that triggered the remote service to return this error.

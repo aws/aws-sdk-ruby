@@ -182,6 +182,7 @@ module Aws
   end
 
   module Waiters
+    autoload :Poller, 'aws-sdk-core/waiters/poller'
     autoload :Errors, 'aws-sdk-core/waiters/errors'
     autoload :NullProvider, 'aws-sdk-core/waiters/null_provider'
     autoload :Provider, 'aws-sdk-core/waiters/provider'
