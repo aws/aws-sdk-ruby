@@ -26,8 +26,8 @@ module Aws
       #
       #   | HTTP Method   | Client Method          |
       #   |---------------|------------------------|
-      #   | `:get`        | {Client#put_object}    |
-      #   | `:put`        | {Client#get_object}    |
+      #   | `:get`        | {Client#get_object}    |
+      #   | `:put`        | {Client#put_object}    |
       #   | `:head`       | {Client#head_object}   |
       #   | `:delete`     | {Client#delete_object} |
       #
