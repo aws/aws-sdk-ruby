@@ -75,6 +75,19 @@ module Aws
         expect(c.expiration.to_s).to eq(expiration2.to_s)
       end
 
+      it 'retries if the first load fails' do
+        stub_request(:get, "http://169.254.169.254#{path}").
+          to_return(:status => 500).
+          to_return(:status => 200, :body => "profile-name\n")
+        stub_request(:get, "http://169.254.169.254#{path}profile-name").
+          to_return(:status => 200, :body => resp2)
+        c = InstanceProfileCredentials.new
+        expect(c.access_key_id).to eq('akid-2')
+        expect(c.secret_access_key).to eq('secret-2')
+        expect(c.session_token).to eq('session-token-2')
+        expect(c.expiration.to_s).to eq(expiration2.to_s)
+      end
+
       describe 'auto refreshing' do
 
         # expire in 4 minutes
@@ -97,6 +110,8 @@ module Aws
         it 'given an empty response, entry credentials are returned' do
           # This handles the case when the service response but returns
           # a JSON document without credentials (error cases)
+          stub_request(:get, "http://169.254.169.254#{path}profile-name").
+            to_return(:status => 200, :body => resp)
           c = InstanceProfileCredentials.new
           expect(c.set?).to be(false)
           expect(c.access_key_id).to be(nil)

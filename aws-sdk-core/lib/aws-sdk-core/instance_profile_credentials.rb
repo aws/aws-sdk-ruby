@@ -17,6 +17,7 @@ module Aws
     FAILURES = [
       Errno::EHOSTUNREACH,
       Errno::ECONNREFUSED,
+      Errno::EHOSTDOWN,
       SocketError,
       Timeout::Error,
       Non200Response,
