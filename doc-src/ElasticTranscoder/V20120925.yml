@@ -36,14 +36,45 @@
   Transcoder to automatically detect the container type of the input file, specify
   auto. If you want to specify the container type for the input file, enter one of
   the following values: 3gp, aac, asf, avi, divx, flv, m4a, mkv, mov, mp3, mp4, mpeg,
-  mpeg-ps, mpeg-ts, mxf, ogg, vob, wav, webm\n  * `:output` - (Hash) \n    * `:key`
-  - (String) The name to assign to the transcoded file. Elastic Transcoder saves the
-  file in the Amazon S3 bucket specified by the OutputBucket object in the pipeline
-  that is specified by the pipeline ID. If a file with the specified name already
-  exists in the output bucket, the job fails.\n    * `:thumbnail_pattern` - (String)
-  Whether you want Elastic Transcoder to create thumbnails for your videos and, if
-  so, how you want Elastic Transcoder to name the files. If you don't want Elastic
-  Transcoder to create thumbnails, specify \"\". If you do want Elastic Transcoder
+  mpeg-ps, mpeg-ts, mxf, ogg, vob, wav, webm\n    * `:encryption` - (Hash) The encryption
+  settings, if any, that are used for decrypting your input files. If your input file
+  is encrypted, you must specify the mode that Elastic Transcoder will use to decrypt
+  your file.\n      * `:mode` - (String) The specific server-side encryption mode
+  that you want Elastic Transcoder to use when decrypting your input files or encrypting
+  your output files. Elastic Transcoder supports the following options: S3: Amazon
+  S3 creates and manages the keys used for encrypting your files. S3-AWS-KMS: Amazon
+  S3 calls the Amazon Key Management Service, which creates and manages the keys that
+  are used for encrypting your files. If you specify S3-AWS-KMS and you don't want
+  to use the default key, you must add the AWS-KMS key that you want to use to your
+  pipeline. AES-CBC-PKCS7: A padded cipher-block mode of operation originally used
+  for HLS files. AES-CTR: AES Counter Mode. AES-GCM: AES Galois Counter Mode, a mode
+  of operation that is an authenticated encryption format, meaning that a file, key,
+  or initialization vector that has been tampered with will fail the decryption process.
+  For all three AES options, you must provide the following settings, which must be
+  base64-encoded: Key Key MD5 Initialization Vector For the AES modes, your private
+  encryption keys and your unencrypted data are never stored by AWS; therefore, it
+  is important that you safely manage your encryption keys. If you lose them, you
+  won't be able to unencrypt your data.\n      * `:key` - (String) The data encryption
+  key that you want Elastic Transcoder to use to encrypt your output file, or that
+  was used to encrypt your input file. The key must be base64-encoded and it must
+  be one of the following bit lengths before being base64-encoded: 128, 192, or 256.
+  The key must also be encrypted by using the Amazon Key Management Service.\n      *
+  `:key_md_5` - (String) The MD5 digest of the key that you used to encrypt your input
+  file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic
+  Transcoder uses the key digest as a checksum to make sure your key was not corrupted
+  in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
+  long before being base64-encoded.\n      * `:initialization_vector` - (String) The
+  series of random bits created by a random bit generator, unique for every encryption
+  operation, that you used to encrypt your input files or that you want Elastic Transcoder
+  to use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n  * `:output`
+  - (Hash) \n    * `:key` - (String) The name to assign to the transcoded file. Elastic
+  Transcoder saves the file in the Amazon S3 bucket specified by the OutputBucket
+  object in the pipeline that is specified by the pipeline ID. If a file with the
+  specified name already exists in the output bucket, the job fails.\n    * `:thumbnail_pattern`
+  - (String) Whether you want Elastic Transcoder to create thumbnails for your videos
+  and, if so, how you want Elastic Transcoder to name the files. If you don't want
+  Elastic Transcoder to create thumbnails, specify \"\". If you do want Elastic Transcoder
   to create thumbnails, specify the information that you want to include in the file
   name for each thumbnail. You can specify the following values in any sequence: `{count}`
   (Required): If you want to create thumbnails, you must include `{count}` in the
@@ -59,15 +90,45 @@
   `{resolution}` in the ThumbnailPattern object. When creating thumbnails, Elastic
   Transcoder automatically saves the files in the format (.jpg or .png) that appears
   in the preset that you specified in the PresetID value of CreateJobOutput. Elastic
-  Transcoder also appends the applicable file name extension.\n    * `:rotate` - (String)
-  The number of degrees clockwise by which you want Elastic Transcoder to rotate the
-  output relative to the input. Enter one of the following values: auto, 0, 90, 180,
-  270. The value auto generally works only if the file that you're transcoding contains
-  rotation metadata.\n    * `:preset_id` - (String) The Id of the preset to use for
-  this job. The preset determines the audio, video, and thumbnail settings that Elastic
-  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) (Outputs
-  in Fragmented MP4 or MPEG-TS format only.If you specify a preset in PresetId for
-  which the value of Container is fmp4 (Fragmented MP4) or ts (MPEG-TS), SegmentDuration
+  Transcoder also appends the applicable file name extension.\n    * `:thumbnail_encryption`
+  - (Hash) The encryption settings, if any, that you want Elastic Transcoder to apply
+  to your thumbnail.\n      * `:mode` - (String) The specific server-side encryption
+  mode that you want Elastic Transcoder to use when decrypting your input files or
+  encrypting your output files. Elastic Transcoder supports the following options:
+  S3: Amazon S3 creates and manages the keys used for encrypting your files. S3-AWS-KMS:
+  Amazon S3 calls the Amazon Key Management Service, which creates and manages the
+  keys that are used for encrypting your files. If you specify S3-AWS-KMS and you
+  don't want to use the default key, you must add the AWS-KMS key that you want to
+  use to your pipeline. AES-CBC-PKCS7: A padded cipher-block mode of operation originally
+  used for HLS files. AES-CTR: AES Counter Mode. AES-GCM: AES Galois Counter Mode,
+  a mode of operation that is an authenticated encryption format, meaning that a file,
+  key, or initialization vector that has been tampered with will fail the decryption
+  process. For all three AES options, you must provide the following settings, which
+  must be base64-encoded: Key Key MD5 Initialization Vector For the AES modes, your
+  private encryption keys and your unencrypted data are never stored by AWS; therefore,
+  it is important that you safely manage your encryption keys. If you lose them, you
+  won't be able to unencrypt your data.\n      * `:key` - (String) The data encryption
+  key that you want Elastic Transcoder to use to encrypt your output file, or that
+  was used to encrypt your input file. The key must be base64-encoded and it must
+  be one of the following bit lengths before being base64-encoded: 128, 192, or 256.
+  The key must also be encrypted by using the Amazon Key Management Service.\n      *
+  `:key_md_5` - (String) The MD5 digest of the key that you used to encrypt your input
+  file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic
+  Transcoder uses the key digest as a checksum to make sure your key was not corrupted
+  in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
+  long before being base64-encoded.\n      * `:initialization_vector` - (String) The
+  series of random bits created by a random bit generator, unique for every encryption
+  operation, that you used to encrypt your input files or that you want Elastic Transcoder
+  to use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n    * `:rotate`
+  - (String) The number of degrees clockwise by which you want Elastic Transcoder
+  to rotate the output relative to the input. Enter one of the following values: auto,
+  0, 90, 180, 270. The value auto generally works only if the file that you're transcoding
+  contains rotation metadata.\n    * `:preset_id` - (String) The Id of the preset
+  to use for this job. The preset determines the audio, video, and thumbnail settings
+  that Elastic Transcoder uses for transcoding.\n    * `:segment_duration` - (String)
+  (Outputs in Fragmented MP4 or MPEG-TS format only.If you specify a preset in PresetId
+  for which the value of Container is fmp4 (Fragmented MP4) or ts (MPEG-TS), SegmentDuration
   is the target maximum duration of each segment in seconds. For HLSv3 format playlists,
   each media segment is stored in a separate .ts file. For HLSv4 and Smooth playlists,
   all media segments for an output are stored in a single file. Each segment is approximately
@@ -90,77 +151,138 @@
   Elastic Transcoder checks the pipeline specified by Pipeline; the Input Bucket object
   in that pipeline identifies the bucket. If the file name includes a prefix, for
   example, logos/128x64.png, include the prefix in the key. If the file isn't in the
-  specified bucket, Elastic Transcoder returns an error.\n    * `:album_art` - (Hash)
-  Information about the album art that you want Elastic Transcoder to add to the file
-  during transcoding. You can specify up to twenty album artworks for each output.
-  Settings for each artwork must be defined in the job for the current output.\n      *
-  `:merge_policy` - (String) A policy that determines how Elastic Transcoder will
-  handle the existence of multiple album artwork files. Replace: The specified album
-  art will replace any existing album art. Prepend: The specified album art will be
-  placed in front of any existing album art. Append: The specified album art will
-  be placed after any existing album art. Fallback: If the original input file contains
-  artwork, Elastic Transcoder will use that artwork for the output. If the original
-  input does not contain artwork, Elastic Transcoder will use the specified album
-  art file.\n      * `:artwork` - (Array&lt;Hash>) The file to be used as album art.
-  There can be multiple artworks associated with an audio file, to a maximum of 20.
-  Valid formats are .jpg and .png\n      * `:member` - (Hash) \n        * `:input_key`
-  - (String) The name of the file to be used as album art. To determine which Amazon
-  S3 bucket contains the specified file, Elastic Transcoder checks the pipeline specified
-  by PipelineId; the InputBucket object in that pipeline identifies the bucket. If
-  the file name includes a prefix, for example, cooking/pie.jpg, include the prefix
-  in the key. If the file isn't in the specified bucket, Elastic Transcoder returns
-  an error.\n        * `:max_width` - (String) The maximum width of the output album
-  art in pixels. If you specify auto, Elastic Transcoder uses 600 as the default value.
-  If you specify a numeric value, enter an even integer between 32 and 4096, inclusive.\n
-  \       * `:max_height` - (String) The maximum height of the output album art in
-  pixels. If you specify auto, Elastic Transcoder uses 600 as the default value. If
-  you specify a numeric value, enter an even integer between 32 and 3072, inclusive.\n
-  \       * `:sizing_policy` - (String) Specify one of the following values to control
-  scaling of the output album art: Fit: Elastic Transcoder scales the output art so
-  it matches the value that you specified in either MaxWidth or MaxHeight without
-  exceeding the other value. Fill: Elastic Transcoder scales the output art so it
-  matches the value that you specified in either MaxWidth or MaxHeight and matches
-  or exceeds the other value. Elastic Transcoder centers the output art and then crops
-  it in the dimension (if any) that exceeds the maximum value. Stretch: Elastic Transcoder
-  stretches the output art to match the values that you specified for MaxWidth and
-  MaxHeight. If the relative proportions of the input art and the output art are different,
-  the output art will be distorted. Keep: Elastic Transcoder does not scale the output
-  art. If either dimension of the input art exceeds the values that you specified
-  for MaxWidth and MaxHeight, Elastic Transcoder crops the output art. ShrinkToFit:
-  Elastic Transcoder scales the output art down so that its dimensions match the values
-  that you specified for at least one of MaxWidth and MaxHeight without exceeding
-  either value. If you specify this option, Elastic Transcoder does not scale the
-  art up. ShrinkToFill Elastic Transcoder scales the output art down so that its dimensions
-  match the values that you specified for at least one of MaxWidth and MaxHeight without
-  dropping below either value. If you specify this option, Elastic Transcoder does
-  not scale the art up.\n        * `:padding_policy` - (String) When you set PaddingPolicy
-  to Pad, Elastic Transcoder may add white bars to the top and bottom and/or left
-  and right sides of the output album art to make the total size of the output art
-  match the values that you specified for MaxWidth and MaxHeight.\n        * `:album_art_format`
-  - (String) The format of album art, if any. Valid formats are .jpg and .png.\n    *
-  `:composition` - (Array&lt;Hash>) You can create an output file that contains an
-  excerpt from the input file. This excerpt, called a clip, can come from the beginning,
-  middle, or end of the file. The Composition object contains settings for the clips
-  that make up an output file. For the current release, you can only specify settings
-  for a single clip per output file. The Composition object cannot be null.\n    *
-  `:member` - (Hash) \n      * `:time_span` - (Hash) Settings that determine when
-  a clip begins and how long it lasts.\n        * `:start_time` - (String) The place
-  in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS
-  (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum
-  value: 86399.999). If you don't specify a value, Elastic Transcoder starts at the
-  beginning of the input file.\n        * `:duration` - (String) The duration of the
-  clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is
-  thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify
-  a value, Elastic Transcoder creates an output file from StartTime to the end of
-  the file. If you specify a value longer than the duration of the input file, Elastic
-  Transcoder transcodes the file and returns a warning message.\n    * `:captions`
-  - (Hash) You can configure Elastic Transcoder to transcode captions, or subtitles,
-  from one format to another. All captions must be in UTF-8. Elastic Transcoder supports
-  two types of captions: Embedded: Embedded captions are included in the same file
-  as the audio and video. Elastic Transcoder supports only one embedded caption per
-  language, to a maximum of 300 embedded captions per file. Valid input values include:
-  CEA-608 (EIA-608, first non-empty channel only), CEA-708 (EIA-708, first non-empty
-  channel only), and mov-text Valid outputs include: mov-text Elastic Transcoder supports
+  specified bucket, Elastic Transcoder returns an error.\n      * `:encryption` -
+  (Hash) The encryption settings, if any, that you want Elastic Transcoder to apply
+  to your watermarks.\n        * `:mode` - (String) The specific server-side encryption
+  mode that you want Elastic Transcoder to use when decrypting your input files or
+  encrypting your output files. Elastic Transcoder supports the following options:
+  S3: Amazon S3 creates and manages the keys used for encrypting your files. S3-AWS-KMS:
+  Amazon S3 calls the Amazon Key Management Service, which creates and manages the
+  keys that are used for encrypting your files. If you specify S3-AWS-KMS and you
+  don't want to use the default key, you must add the AWS-KMS key that you want to
+  use to your pipeline. AES-CBC-PKCS7: A padded cipher-block mode of operation originally
+  used for HLS files. AES-CTR: AES Counter Mode. AES-GCM: AES Galois Counter Mode,
+  a mode of operation that is an authenticated encryption format, meaning that a file,
+  key, or initialization vector that has been tampered with will fail the decryption
+  process. For all three AES options, you must provide the following settings, which
+  must be base64-encoded: Key Key MD5 Initialization Vector For the AES modes, your
+  private encryption keys and your unencrypted data are never stored by AWS; therefore,
+  it is important that you safely manage your encryption keys. If you lose them, you
+  won't be able to unencrypt your data.\n        * `:key` - (String) The data encryption
+  key that you want Elastic Transcoder to use to encrypt your output file, or that
+  was used to encrypt your input file. The key must be base64-encoded and it must
+  be one of the following bit lengths before being base64-encoded: 128, 192, or 256.
+  The key must also be encrypted by using the Amazon Key Management Service.\n        *
+  `:key_md_5` - (String) The MD5 digest of the key that you used to encrypt your input
+  file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic
+  Transcoder uses the key digest as a checksum to make sure your key was not corrupted
+  in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
+  long before being base64-encoded.\n        * `:initialization_vector` - (String)
+  The series of random bits created by a random bit generator, unique for every encryption
+  operation, that you used to encrypt your input files or that you want Elastic Transcoder
+  to use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n    * `:album_art`
+  - (Hash) Information about the album art that you want Elastic Transcoder to add
+  to the file during transcoding. You can specify up to twenty album artworks for
+  each output. Settings for each artwork must be defined in the job for the current
+  output.\n      * `:merge_policy` - (String) A policy that determines how Elastic
+  Transcoder will handle the existence of multiple album artwork files. Replace: The
+  specified album art will replace any existing album art. Prepend: The specified
+  album art will be placed in front of any existing album art. Append: The specified
+  album art will be placed after any existing album art. Fallback: If the original
+  input file contains artwork, Elastic Transcoder will use that artwork for the output.
+  If the original input does not contain artwork, Elastic Transcoder will use the
+  specified album art file.\n      * `:artwork` - (Array&lt;Hash>) The file to be
+  used as album art. There can be multiple artworks associated with an audio file,
+  to a maximum of 20. Valid formats are .jpg and .png\n      * `:member` - (Hash)
+  \n        * `:input_key` - (String) The name of the file to be used as album art.
+  To determine which Amazon S3 bucket contains the specified file, Elastic Transcoder
+  checks the pipeline specified by PipelineId; the InputBucket object in that pipeline
+  identifies the bucket. If the file name includes a prefix, for example, cooking/pie.jpg,
+  include the prefix in the key. If the file isn't in the specified bucket, Elastic
+  Transcoder returns an error.\n        * `:max_width` - (String) The maximum width
+  of the output album art in pixels. If you specify auto, Elastic Transcoder uses
+  600 as the default value. If you specify a numeric value, enter an even integer
+  between 32 and 4096, inclusive.\n        * `:max_height` - (String) The maximum
+  height of the output album art in pixels. If you specify auto, Elastic Transcoder
+  uses 600 as the default value. If you specify a numeric value, enter an even integer
+  between 32 and 3072, inclusive.\n        * `:sizing_policy` - (String) Specify one
+  of the following values to control scaling of the output album art: Fit: Elastic
+  Transcoder scales the output art so it matches the value that you specified in either
+  MaxWidth or MaxHeight without exceeding the other value. Fill: Elastic Transcoder
+  scales the output art so it matches the value that you specified in either MaxWidth
+  or MaxHeight and matches or exceeds the other value. Elastic Transcoder centers
+  the output art and then crops it in the dimension (if any) that exceeds the maximum
+  value. Stretch: Elastic Transcoder stretches the output art to match the values
+  that you specified for MaxWidth and MaxHeight. If the relative proportions of the
+  input art and the output art are different, the output art will be distorted. Keep:
+  Elastic Transcoder does not scale the output art. If either dimension of the input
+  art exceeds the values that you specified for MaxWidth and MaxHeight, Elastic Transcoder
+  crops the output art. ShrinkToFit: Elastic Transcoder scales the output art down
+  so that its dimensions match the values that you specified for at least one of MaxWidth
+  and MaxHeight without exceeding either value. If you specify this option, Elastic
+  Transcoder does not scale the art up. ShrinkToFill Elastic Transcoder scales the
+  output art down so that its dimensions match the values that you specified for at
+  least one of MaxWidth and MaxHeight without dropping below either value. If you
+  specify this option, Elastic Transcoder does not scale the art up.\n        * `:padding_policy`
+  - (String) When you set PaddingPolicy to Pad, Elastic Transcoder may add white bars
+  to the top and bottom and/or left and right sides of the output album art to make
+  the total size of the output art match the values that you specified for MaxWidth
+  and MaxHeight.\n        * `:album_art_format` - (String) The format of album art,
+  if any. Valid formats are .jpg and .png.\n        * `:encryption` - (Hash) The encryption
+  settings, if any, that you want Elastic Transcoder to apply to your artwork.\n          *
+  `:mode` - (String) The specific server-side encryption mode that you want Elastic
+  Transcoder to use when decrypting your input files or encrypting your output files.
+  Elastic Transcoder supports the following options: S3: Amazon S3 creates and manages
+  the keys used for encrypting your files. S3-AWS-KMS: Amazon S3 calls the Amazon
+  Key Management Service, which creates and manages the keys that are used for encrypting
+  your files. If you specify S3-AWS-KMS and you don't want to use the default key,
+  you must add the AWS-KMS key that you want to use to your pipeline. AES-CBC-PKCS7:
+  A padded cipher-block mode of operation originally used for HLS files. AES-CTR:
+  AES Counter Mode. AES-GCM: AES Galois Counter Mode, a mode of operation that is
+  an authenticated encryption format, meaning that a file, key, or initialization
+  vector that has been tampered with will fail the decryption process. For all three
+  AES options, you must provide the following settings, which must be base64-encoded:
+  Key Key MD5 Initialization Vector For the AES modes, your private encryption keys
+  and your unencrypted data are never stored by AWS; therefore, it is important that
+  you safely manage your encryption keys. If you lose them, you won't be able to unencrypt
+  your data.\n          * `:key` - (String) The data encryption key that you want
+  Elastic Transcoder to use to encrypt your output file, or that was used to encrypt
+  your input file. The key must be base64-encoded and it must be one of the following
+  bit lengths before being base64-encoded: 128, 192, or 256. The key must also be
+  encrypted by using the Amazon Key Management Service.\n          * `:key_md_5` -
+  (String) The MD5 digest of the key that you used to encrypt your input file, or
+  that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder
+  uses the key digest as a checksum to make sure your key was not corrupted in transit.
+  The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before
+  being base64-encoded.\n          * `:initialization_vector` - (String) The series
+  of random bits created by a random bit generator, unique for every encryption operation,
+  that you used to encrypt your input files or that you want Elastic Transcoder to
+  use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n    * `:composition`
+  - (Array&lt;Hash>) You can create an output file that contains an excerpt from the
+  input file. This excerpt, called a clip, can come from the beginning, middle, or
+  end of the file. The Composition object contains settings for the clips that make
+  up an output file. For the current release, you can only specify settings for a
+  single clip per output file. The Composition object cannot be null.\n    * `:member`
+  - (Hash) \n      * `:time_span` - (Hash) Settings that determine when a clip begins
+  and how long it lasts.\n        * `:start_time` - (String) The place in the input
+  file where you want a clip to start. The format can be either HH:mm:ss.SSS (maximum
+  value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value:
+  86399.999). If you don't specify a value, Elastic Transcoder starts at the beginning
+  of the input file.\n        * `:duration` - (String) The duration of the clip. The
+  format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths
+  of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value,
+  Elastic Transcoder creates an output file from StartTime to the end of the file.
+  If you specify a value longer than the duration of the input file, Elastic Transcoder
+  transcodes the file and returns a warning message.\n    * `:captions` - (Hash) You
+  can configure Elastic Transcoder to transcode captions, or subtitles, from one format
+  to another. All captions must be in UTF-8. Elastic Transcoder supports two types
+  of captions: Embedded: Embedded captions are included in the same file as the audio
+  and video. Elastic Transcoder supports only one embedded caption per language, to
+  a maximum of 300 embedded captions per file. Valid input values include: CEA-608
+  (EIA-608, first non-empty channel only), CEA-708 (EIA-708, first non-empty channel
+  only), and mov-text Valid outputs include: mov-text Elastic Transcoder supports
   a maximum of one embedded format per output. Sidecar: Sidecar captions are kept
   in a separate metadata file from the audio and video data. Sidecar captions require
   a player that is capable of understanding the relationship between the video file
@@ -201,58 +323,182 @@
   captions. Specify the TimeOffset in the form [+-]SS.sss or [+-]HH:mm:SS.ss.\n        *
   `:label` - (String) The label of the caption shown in the player when choosing a
   language. We recommend that you put the caption language name here, in the language
-  of the captions.\n      * `:caption_formats` - (Array&lt;Hash>) The array of file
-  formats for the output captions. If you leave this value blank, Elastic Transcoder
-  returns an error.\n      * `:member` - (Hash) \n        * `:format` - (String) The
-  format you specify determines whether Elastic Transcoder generates an embedded or
-  sidecar caption for this output. Valid Embedded Caption Formats: For MP3: None For
-  MP4: mov-text For MPEG-TS: None For ogg: None For webm: None Valid Sidecar Caption
-  Formats: Elastic Transcoder supports dfxp (first div element only), scc, srt, and
-  webvtt. If you want ttml or smpte-tt compatible captions, specify dfxp as your output
-  format. For FMP4: dfxp Non-FMP4 outputs: All sidecar types fmp4 captions have an
-  extension of .ismt\n        * `:pattern` - (String) The prefix for caption filenames,
-  in the form description-`{language}`, where: description is a description of the
-  video. `{language}` is a literal value that Elastic Transcoder replaces with the
-  two- or three-letter code for the language of the caption in the output file names.
-  If you don't include `{language}` in the file name pattern, Elastic Transcoder automatically
-  appends \"`{language}`\" to the value that you specify for the description. In addition,
-  Elastic Transcoder automatically appends the count to the end of the segment files.
-  For example, suppose you're transcoding into srt format. When you enter \"Sydney-`{language}`-sunrise\",
-  and the language of the captions is English (en), the name of the first caption
-  file will be Sydney-en-sunrise00000.srt.\n  * `:outputs` - (Array&lt;Hash>) A section
-  of the request body that provides information about the transcoded (target) files.
-  We recommend that you use the Outputs syntax instead of the Output syntax.\n  *
-  `:member` - (Hash) \n    * `:key` - (String) The name to assign to the transcoded
-  file. Elastic Transcoder saves the file in the Amazon S3 bucket specified by the
-  OutputBucket object in the pipeline that is specified by the pipeline ID. If a file
-  with the specified name already exists in the output bucket, the job fails.\n    *
-  `:thumbnail_pattern` - (String) Whether you want Elastic Transcoder to create thumbnails
-  for your videos and, if so, how you want Elastic Transcoder to name the files. If
-  you don't want Elastic Transcoder to create thumbnails, specify \"\". If you do
-  want Elastic Transcoder to create thumbnails, specify the information that you want
-  to include in the file name for each thumbnail. You can specify the following values
-  in any sequence: `{count}` (Required): If you want to create thumbnails, you must
-  include `{count}` in the ThumbnailPattern object. Wherever you specify `{count}`,
-  Elastic Transcoder adds a five-digit sequence number (beginning with 00001) to thumbnail
-  file names. The number indicates where a given thumbnail appears in the sequence
-  of thumbnails for a transcoded file. If you specify a literal value and/or `{resolution}`
-  but you omit `{count}`, Elastic Transcoder returns a validation error and does not
-  create the job. Literal values (Optional): You can specify literal values anywhere
-  in the ThumbnailPattern object. For example, you can include them as a file name
-  prefix or as a delimiter between `{resolution}` and `{count}`. `{resolution}` (Optional):
+  of the captions.\n        * `:encryption` - (Hash) The encryption settings, if any,
+  that you want Elastic Transcoder to apply to your caption sources.\n          *
+  `:mode` - (String) The specific server-side encryption mode that you want Elastic
+  Transcoder to use when decrypting your input files or encrypting your output files.
+  Elastic Transcoder supports the following options: S3: Amazon S3 creates and manages
+  the keys used for encrypting your files. S3-AWS-KMS: Amazon S3 calls the Amazon
+  Key Management Service, which creates and manages the keys that are used for encrypting
+  your files. If you specify S3-AWS-KMS and you don't want to use the default key,
+  you must add the AWS-KMS key that you want to use to your pipeline. AES-CBC-PKCS7:
+  A padded cipher-block mode of operation originally used for HLS files. AES-CTR:
+  AES Counter Mode. AES-GCM: AES Galois Counter Mode, a mode of operation that is
+  an authenticated encryption format, meaning that a file, key, or initialization
+  vector that has been tampered with will fail the decryption process. For all three
+  AES options, you must provide the following settings, which must be base64-encoded:
+  Key Key MD5 Initialization Vector For the AES modes, your private encryption keys
+  and your unencrypted data are never stored by AWS; therefore, it is important that
+  you safely manage your encryption keys. If you lose them, you won't be able to unencrypt
+  your data.\n          * `:key` - (String) The data encryption key that you want
+  Elastic Transcoder to use to encrypt your output file, or that was used to encrypt
+  your input file. The key must be base64-encoded and it must be one of the following
+  bit lengths before being base64-encoded: 128, 192, or 256. The key must also be
+  encrypted by using the Amazon Key Management Service.\n          * `:key_md_5` -
+  (String) The MD5 digest of the key that you used to encrypt your input file, or
+  that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder
+  uses the key digest as a checksum to make sure your key was not corrupted in transit.
+  The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before
+  being base64-encoded.\n          * `:initialization_vector` - (String) The series
+  of random bits created by a random bit generator, unique for every encryption operation,
+  that you used to encrypt your input files or that you want Elastic Transcoder to
+  use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n      * `:caption_formats`
+  - (Array&lt;Hash>) The array of file formats for the output captions. If you leave
+  this value blank, Elastic Transcoder returns an error.\n      * `:member` - (Hash)
+  \n        * `:format` - (String) The format you specify determines whether Elastic
+  Transcoder generates an embedded or sidecar caption for this output. Valid Embedded
+  Caption Formats: For MP3: None For MP4: mov-text For MPEG-TS: None For ogg: None
+  For webm: None Valid Sidecar Caption Formats: Elastic Transcoder supports dfxp (first
+  div element only), scc, srt, and webvtt. If you want ttml or smpte-tt compatible
+  captions, specify dfxp as your output format. For FMP4: dfxp Non-FMP4 outputs: All
+  sidecar types fmp4 captions have an extension of .ismt\n        * `:pattern` - (String)
+  The prefix for caption filenames, in the form description-`{language}`, where: description
+  is a description of the video. `{language}` is a literal value that Elastic Transcoder
+  replaces with the two- or three-letter code for the language of the caption in the
+  output file names. If you don't include `{language}` in the file name pattern, Elastic
+  Transcoder automatically appends \"`{language}`\" to the value that you specify
+  for the description. In addition, Elastic Transcoder automatically appends the count
+  to the end of the segment files. For example, suppose you're transcoding into srt
+  format. When you enter \"Sydney-`{language}`-sunrise\", and the language of the
+  captions is English (en), the name of the first caption file will be Sydney-en-sunrise00000.srt.\n
+  \       * `:encryption` - (Hash) The encryption settings, if any, that you want
+  Elastic Transcoder to apply to your caption formats.\n          * `:mode` - (String)
+  The specific server-side encryption mode that you want Elastic Transcoder to use
+  when decrypting your input files or encrypting your output files. Elastic Transcoder
+  supports the following options: S3: Amazon S3 creates and manages the keys used
+  for encrypting your files. S3-AWS-KMS: Amazon S3 calls the Amazon Key Management
+  Service, which creates and manages the keys that are used for encrypting your files.
+  If you specify S3-AWS-KMS and you don't want to use the default key, you must add
+  the AWS-KMS key that you want to use to your pipeline. AES-CBC-PKCS7: A padded cipher-block
+  mode of operation originally used for HLS files. AES-CTR: AES Counter Mode. AES-GCM:
+  AES Galois Counter Mode, a mode of operation that is an authenticated encryption
+  format, meaning that a file, key, or initialization vector that has been tampered
+  with will fail the decryption process. For all three AES options, you must provide
+  the following settings, which must be base64-encoded: Key Key MD5 Initialization
+  Vector For the AES modes, your private encryption keys and your unencrypted data
+  are never stored by AWS; therefore, it is important that you safely manage your
+  encryption keys. If you lose them, you won't be able to unencrypt your data.\n          *
+  `:key` - (String) The data encryption key that you want Elastic Transcoder to use
+  to encrypt your output file, or that was used to encrypt your input file. The key
+  must be base64-encoded and it must be one of the following bit lengths before being
+  base64-encoded: 128, 192, or 256. The key must also be encrypted by using the Amazon
+  Key Management Service.\n          * `:key_md_5` - (String) The MD5 digest of the
+  key that you used to encrypt your input file, or that you want Elastic Transcoder
+  to use to encrypt your output file. Elastic Transcoder uses the key digest as a
+  checksum to make sure your key was not corrupted in transit. The key MD5 must be
+  base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.\n
+  \         * `:initialization_vector` - (String) The series of random bits created
+  by a random bit generator, unique for every encryption operation, that you used
+  to encrypt your input files or that you want Elastic Transcoder to use to encrypt
+  your output files. The initialization vector must be base64-encoded, and it must
+  be exactly 16 bytes long before being base64-encoded.\n    * `:encryption` - (Hash)
+  You can specify encryption settings for any output files that you want to use for
+  a transcoding job. This includes the output file and any watermarks, thumbnails,
+  album art, or captions that you want to use. You must specify encryption settings
+  for each file individually.\n      * `:mode` - (String) The specific server-side
+  encryption mode that you want Elastic Transcoder to use when decrypting your input
+  files or encrypting your output files. Elastic Transcoder supports the following
+  options: S3: Amazon S3 creates and manages the keys used for encrypting your files.
+  S3-AWS-KMS: Amazon S3 calls the Amazon Key Management Service, which creates and
+  manages the keys that are used for encrypting your files. If you specify S3-AWS-KMS
+  and you don't want to use the default key, you must add the AWS-KMS key that you
+  want to use to your pipeline. AES-CBC-PKCS7: A padded cipher-block mode of operation
+  originally used for HLS files. AES-CTR: AES Counter Mode. AES-GCM: AES Galois Counter
+  Mode, a mode of operation that is an authenticated encryption format, meaning that
+  a file, key, or initialization vector that has been tampered with will fail the
+  decryption process. For all three AES options, you must provide the following settings,
+  which must be base64-encoded: Key Key MD5 Initialization Vector For the AES modes,
+  your private encryption keys and your unencrypted data are never stored by AWS;
+  therefore, it is important that you safely manage your encryption keys. If you lose
+  them, you won't be able to unencrypt your data.\n      * `:key` - (String) The data
+  encryption key that you want Elastic Transcoder to use to encrypt your output file,
+  or that was used to encrypt your input file. The key must be base64-encoded and
+  it must be one of the following bit lengths before being base64-encoded: 128, 192,
+  or 256. The key must also be encrypted by using the Amazon Key Management Service.\n
+  \     * `:key_md_5` - (String) The MD5 digest of the key that you used to encrypt
+  your input file, or that you want Elastic Transcoder to use to encrypt your output
+  file. Elastic Transcoder uses the key digest as a checksum to make sure your key
+  was not corrupted in transit. The key MD5 must be base64-encoded, and it must be
+  exactly 16 bytes long before being base64-encoded.\n      * `:initialization_vector`
+  - (String) The series of random bits created by a random bit generator, unique for
+  every encryption operation, that you used to encrypt your input files or that you
+  want Elastic Transcoder to use to encrypt your output files. The initialization
+  vector must be base64-encoded, and it must be exactly 16 bytes long before being
+  base64-encoded.\n  * `:outputs` - (Array&lt;Hash>) A section of the request body
+  that provides information about the transcoded (target) files. We recommend that
+  you use the Outputs syntax instead of the Output syntax.\n  * `:member` - (Hash)
+  \n    * `:key` - (String) The name to assign to the transcoded file. Elastic Transcoder
+  saves the file in the Amazon S3 bucket specified by the OutputBucket object in the
+  pipeline that is specified by the pipeline ID. If a file with the specified name
+  already exists in the output bucket, the job fails.\n    * `:thumbnail_pattern`
+  - (String) Whether you want Elastic Transcoder to create thumbnails for your videos
+  and, if so, how you want Elastic Transcoder to name the files. If you don't want
+  Elastic Transcoder to create thumbnails, specify \"\". If you do want Elastic Transcoder
+  to create thumbnails, specify the information that you want to include in the file
+  name for each thumbnail. You can specify the following values in any sequence: `{count}`
+  (Required): If you want to create thumbnails, you must include `{count}` in the
+  ThumbnailPattern object. Wherever you specify `{count}`, Elastic Transcoder adds
+  a five-digit sequence number (beginning with 00001) to thumbnail file names. The
+  number indicates where a given thumbnail appears in the sequence of thumbnails for
+  a transcoded file. If you specify a literal value and/or `{resolution}` but you
+  omit `{count}`, Elastic Transcoder returns a validation error and does not create
+  the job. Literal values (Optional): You can specify literal values anywhere in the
+  ThumbnailPattern object. For example, you can include them as a file name prefix
+  or as a delimiter between `{resolution}` and `{count}`. `{resolution}` (Optional):
   If you want Elastic Transcoder to include the resolution in the file name, include
   `{resolution}` in the ThumbnailPattern object. When creating thumbnails, Elastic
   Transcoder automatically saves the files in the format (.jpg or .png) that appears
   in the preset that you specified in the PresetID value of CreateJobOutput. Elastic
-  Transcoder also appends the applicable file name extension.\n    * `:rotate` - (String)
-  The number of degrees clockwise by which you want Elastic Transcoder to rotate the
-  output relative to the input. Enter one of the following values: auto, 0, 90, 180,
-  270. The value auto generally works only if the file that you're transcoding contains
-  rotation metadata.\n    * `:preset_id` - (String) The Id of the preset to use for
-  this job. The preset determines the audio, video, and thumbnail settings that Elastic
-  Transcoder uses for transcoding.\n    * `:segment_duration` - (String) (Outputs
-  in Fragmented MP4 or MPEG-TS format only.If you specify a preset in PresetId for
-  which the value of Container is fmp4 (Fragmented MP4) or ts (MPEG-TS), SegmentDuration
+  Transcoder also appends the applicable file name extension.\n    * `:thumbnail_encryption`
+  - (Hash) The encryption settings, if any, that you want Elastic Transcoder to apply
+  to your thumbnail.\n      * `:mode` - (String) The specific server-side encryption
+  mode that you want Elastic Transcoder to use when decrypting your input files or
+  encrypting your output files. Elastic Transcoder supports the following options:
+  S3: Amazon S3 creates and manages the keys used for encrypting your files. S3-AWS-KMS:
+  Amazon S3 calls the Amazon Key Management Service, which creates and manages the
+  keys that are used for encrypting your files. If you specify S3-AWS-KMS and you
+  don't want to use the default key, you must add the AWS-KMS key that you want to
+  use to your pipeline. AES-CBC-PKCS7: A padded cipher-block mode of operation originally
+  used for HLS files. AES-CTR: AES Counter Mode. AES-GCM: AES Galois Counter Mode,
+  a mode of operation that is an authenticated encryption format, meaning that a file,
+  key, or initialization vector that has been tampered with will fail the decryption
+  process. For all three AES options, you must provide the following settings, which
+  must be base64-encoded: Key Key MD5 Initialization Vector For the AES modes, your
+  private encryption keys and your unencrypted data are never stored by AWS; therefore,
+  it is important that you safely manage your encryption keys. If you lose them, you
+  won't be able to unencrypt your data.\n      * `:key` - (String) The data encryption
+  key that you want Elastic Transcoder to use to encrypt your output file, or that
+  was used to encrypt your input file. The key must be base64-encoded and it must
+  be one of the following bit lengths before being base64-encoded: 128, 192, or 256.
+  The key must also be encrypted by using the Amazon Key Management Service.\n      *
+  `:key_md_5` - (String) The MD5 digest of the key that you used to encrypt your input
+  file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic
+  Transcoder uses the key digest as a checksum to make sure your key was not corrupted
+  in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
+  long before being base64-encoded.\n      * `:initialization_vector` - (String) The
+  series of random bits created by a random bit generator, unique for every encryption
+  operation, that you used to encrypt your input files or that you want Elastic Transcoder
+  to use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n    * `:rotate`
+  - (String) The number of degrees clockwise by which you want Elastic Transcoder
+  to rotate the output relative to the input. Enter one of the following values: auto,
+  0, 90, 180, 270. The value auto generally works only if the file that you're transcoding
+  contains rotation metadata.\n    * `:preset_id` - (String) The Id of the preset
+  to use for this job. The preset determines the audio, video, and thumbnail settings
+  that Elastic Transcoder uses for transcoding.\n    * `:segment_duration` - (String)
+  (Outputs in Fragmented MP4 or MPEG-TS format only.If you specify a preset in PresetId
+  for which the value of Container is fmp4 (Fragmented MP4) or ts (MPEG-TS), SegmentDuration
   is the target maximum duration of each segment in seconds. For HLSv3 format playlists,
   each media segment is stored in a separate .ts file. For HLSv4 and Smooth playlists,
   all media segments for an output are stored in a single file. Each segment is approximately
@@ -275,77 +521,138 @@
   Elastic Transcoder checks the pipeline specified by Pipeline; the Input Bucket object
   in that pipeline identifies the bucket. If the file name includes a prefix, for
   example, logos/128x64.png, include the prefix in the key. If the file isn't in the
-  specified bucket, Elastic Transcoder returns an error.\n    * `:album_art` - (Hash)
-  Information about the album art that you want Elastic Transcoder to add to the file
-  during transcoding. You can specify up to twenty album artworks for each output.
-  Settings for each artwork must be defined in the job for the current output.\n      *
-  `:merge_policy` - (String) A policy that determines how Elastic Transcoder will
-  handle the existence of multiple album artwork files. Replace: The specified album
-  art will replace any existing album art. Prepend: The specified album art will be
-  placed in front of any existing album art. Append: The specified album art will
-  be placed after any existing album art. Fallback: If the original input file contains
-  artwork, Elastic Transcoder will use that artwork for the output. If the original
-  input does not contain artwork, Elastic Transcoder will use the specified album
-  art file.\n      * `:artwork` - (Array&lt;Hash>) The file to be used as album art.
-  There can be multiple artworks associated with an audio file, to a maximum of 20.
-  Valid formats are .jpg and .png\n      * `:member` - (Hash) \n        * `:input_key`
-  - (String) The name of the file to be used as album art. To determine which Amazon
-  S3 bucket contains the specified file, Elastic Transcoder checks the pipeline specified
-  by PipelineId; the InputBucket object in that pipeline identifies the bucket. If
-  the file name includes a prefix, for example, cooking/pie.jpg, include the prefix
-  in the key. If the file isn't in the specified bucket, Elastic Transcoder returns
-  an error.\n        * `:max_width` - (String) The maximum width of the output album
-  art in pixels. If you specify auto, Elastic Transcoder uses 600 as the default value.
-  If you specify a numeric value, enter an even integer between 32 and 4096, inclusive.\n
-  \       * `:max_height` - (String) The maximum height of the output album art in
-  pixels. If you specify auto, Elastic Transcoder uses 600 as the default value. If
-  you specify a numeric value, enter an even integer between 32 and 3072, inclusive.\n
-  \       * `:sizing_policy` - (String) Specify one of the following values to control
-  scaling of the output album art: Fit: Elastic Transcoder scales the output art so
-  it matches the value that you specified in either MaxWidth or MaxHeight without
-  exceeding the other value. Fill: Elastic Transcoder scales the output art so it
-  matches the value that you specified in either MaxWidth or MaxHeight and matches
-  or exceeds the other value. Elastic Transcoder centers the output art and then crops
-  it in the dimension (if any) that exceeds the maximum value. Stretch: Elastic Transcoder
-  stretches the output art to match the values that you specified for MaxWidth and
-  MaxHeight. If the relative proportions of the input art and the output art are different,
-  the output art will be distorted. Keep: Elastic Transcoder does not scale the output
-  art. If either dimension of the input art exceeds the values that you specified
-  for MaxWidth and MaxHeight, Elastic Transcoder crops the output art. ShrinkToFit:
-  Elastic Transcoder scales the output art down so that its dimensions match the values
-  that you specified for at least one of MaxWidth and MaxHeight without exceeding
-  either value. If you specify this option, Elastic Transcoder does not scale the
-  art up. ShrinkToFill Elastic Transcoder scales the output art down so that its dimensions
-  match the values that you specified for at least one of MaxWidth and MaxHeight without
-  dropping below either value. If you specify this option, Elastic Transcoder does
-  not scale the art up.\n        * `:padding_policy` - (String) When you set PaddingPolicy
-  to Pad, Elastic Transcoder may add white bars to the top and bottom and/or left
-  and right sides of the output album art to make the total size of the output art
-  match the values that you specified for MaxWidth and MaxHeight.\n        * `:album_art_format`
-  - (String) The format of album art, if any. Valid formats are .jpg and .png.\n    *
-  `:composition` - (Array&lt;Hash>) You can create an output file that contains an
-  excerpt from the input file. This excerpt, called a clip, can come from the beginning,
-  middle, or end of the file. The Composition object contains settings for the clips
-  that make up an output file. For the current release, you can only specify settings
-  for a single clip per output file. The Composition object cannot be null.\n    *
-  `:member` - (Hash) \n      * `:time_span` - (Hash) Settings that determine when
-  a clip begins and how long it lasts.\n        * `:start_time` - (String) The place
-  in the input file where you want a clip to start. The format can be either HH:mm:ss.SSS
-  (maximum value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum
-  value: 86399.999). If you don't specify a value, Elastic Transcoder starts at the
-  beginning of the input file.\n        * `:duration` - (String) The duration of the
-  clip. The format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is
-  thousandths of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify
-  a value, Elastic Transcoder creates an output file from StartTime to the end of
-  the file. If you specify a value longer than the duration of the input file, Elastic
-  Transcoder transcodes the file and returns a warning message.\n    * `:captions`
-  - (Hash) You can configure Elastic Transcoder to transcode captions, or subtitles,
-  from one format to another. All captions must be in UTF-8. Elastic Transcoder supports
-  two types of captions: Embedded: Embedded captions are included in the same file
-  as the audio and video. Elastic Transcoder supports only one embedded caption per
-  language, to a maximum of 300 embedded captions per file. Valid input values include:
-  CEA-608 (EIA-608, first non-empty channel only), CEA-708 (EIA-708, first non-empty
-  channel only), and mov-text Valid outputs include: mov-text Elastic Transcoder supports
+  specified bucket, Elastic Transcoder returns an error.\n      * `:encryption` -
+  (Hash) The encryption settings, if any, that you want Elastic Transcoder to apply
+  to your watermarks.\n        * `:mode` - (String) The specific server-side encryption
+  mode that you want Elastic Transcoder to use when decrypting your input files or
+  encrypting your output files. Elastic Transcoder supports the following options:
+  S3: Amazon S3 creates and manages the keys used for encrypting your files. S3-AWS-KMS:
+  Amazon S3 calls the Amazon Key Management Service, which creates and manages the
+  keys that are used for encrypting your files. If you specify S3-AWS-KMS and you
+  don't want to use the default key, you must add the AWS-KMS key that you want to
+  use to your pipeline. AES-CBC-PKCS7: A padded cipher-block mode of operation originally
+  used for HLS files. AES-CTR: AES Counter Mode. AES-GCM: AES Galois Counter Mode,
+  a mode of operation that is an authenticated encryption format, meaning that a file,
+  key, or initialization vector that has been tampered with will fail the decryption
+  process. For all three AES options, you must provide the following settings, which
+  must be base64-encoded: Key Key MD5 Initialization Vector For the AES modes, your
+  private encryption keys and your unencrypted data are never stored by AWS; therefore,
+  it is important that you safely manage your encryption keys. If you lose them, you
+  won't be able to unencrypt your data.\n        * `:key` - (String) The data encryption
+  key that you want Elastic Transcoder to use to encrypt your output file, or that
+  was used to encrypt your input file. The key must be base64-encoded and it must
+  be one of the following bit lengths before being base64-encoded: 128, 192, or 256.
+  The key must also be encrypted by using the Amazon Key Management Service.\n        *
+  `:key_md_5` - (String) The MD5 digest of the key that you used to encrypt your input
+  file, or that you want Elastic Transcoder to use to encrypt your output file. Elastic
+  Transcoder uses the key digest as a checksum to make sure your key was not corrupted
+  in transit. The key MD5 must be base64-encoded, and it must be exactly 16 bytes
+  long before being base64-encoded.\n        * `:initialization_vector` - (String)
+  The series of random bits created by a random bit generator, unique for every encryption
+  operation, that you used to encrypt your input files or that you want Elastic Transcoder
+  to use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n    * `:album_art`
+  - (Hash) Information about the album art that you want Elastic Transcoder to add
+  to the file during transcoding. You can specify up to twenty album artworks for
+  each output. Settings for each artwork must be defined in the job for the current
+  output.\n      * `:merge_policy` - (String) A policy that determines how Elastic
+  Transcoder will handle the existence of multiple album artwork files. Replace: The
+  specified album art will replace any existing album art. Prepend: The specified
+  album art will be placed in front of any existing album art. Append: The specified
+  album art will be placed after any existing album art. Fallback: If the original
+  input file contains artwork, Elastic Transcoder will use that artwork for the output.
+  If the original input does not contain artwork, Elastic Transcoder will use the
+  specified album art file.\n      * `:artwork` - (Array&lt;Hash>) The file to be
+  used as album art. There can be multiple artworks associated with an audio file,
+  to a maximum of 20. Valid formats are .jpg and .png\n      * `:member` - (Hash)
+  \n        * `:input_key` - (String) The name of the file to be used as album art.
+  To determine which Amazon S3 bucket contains the specified file, Elastic Transcoder
+  checks the pipeline specified by PipelineId; the InputBucket object in that pipeline
+  identifies the bucket. If the file name includes a prefix, for example, cooking/pie.jpg,
+  include the prefix in the key. If the file isn't in the specified bucket, Elastic
+  Transcoder returns an error.\n        * `:max_width` - (String) The maximum width
+  of the output album art in pixels. If you specify auto, Elastic Transcoder uses
+  600 as the default value. If you specify a numeric value, enter an even integer
+  between 32 and 4096, inclusive.\n        * `:max_height` - (String) The maximum
+  height of the output album art in pixels. If you specify auto, Elastic Transcoder
+  uses 600 as the default value. If you specify a numeric value, enter an even integer
+  between 32 and 3072, inclusive.\n        * `:sizing_policy` - (String) Specify one
+  of the following values to control scaling of the output album art: Fit: Elastic
+  Transcoder scales the output art so it matches the value that you specified in either
+  MaxWidth or MaxHeight without exceeding the other value. Fill: Elastic Transcoder
+  scales the output art so it matches the value that you specified in either MaxWidth
+  or MaxHeight and matches or exceeds the other value. Elastic Transcoder centers
+  the output art and then crops it in the dimension (if any) that exceeds the maximum
+  value. Stretch: Elastic Transcoder stretches the output art to match the values
+  that you specified for MaxWidth and MaxHeight. If the relative proportions of the
+  input art and the output art are different, the output art will be distorted. Keep:
+  Elastic Transcoder does not scale the output art. If either dimension of the input
+  art exceeds the values that you specified for MaxWidth and MaxHeight, Elastic Transcoder
+  crops the output art. ShrinkToFit: Elastic Transcoder scales the output art down
+  so that its dimensions match the values that you specified for at least one of MaxWidth
+  and MaxHeight without exceeding either value. If you specify this option, Elastic
+  Transcoder does not scale the art up. ShrinkToFill Elastic Transcoder scales the
+  output art down so that its dimensions match the values that you specified for at
+  least one of MaxWidth and MaxHeight without dropping below either value. If you
+  specify this option, Elastic Transcoder does not scale the art up.\n        * `:padding_policy`
+  - (String) When you set PaddingPolicy to Pad, Elastic Transcoder may add white bars
+  to the top and bottom and/or left and right sides of the output album art to make
+  the total size of the output art match the values that you specified for MaxWidth
+  and MaxHeight.\n        * `:album_art_format` - (String) The format of album art,
+  if any. Valid formats are .jpg and .png.\n        * `:encryption` - (Hash) The encryption
+  settings, if any, that you want Elastic Transcoder to apply to your artwork.\n          *
+  `:mode` - (String) The specific server-side encryption mode that you want Elastic
+  Transcoder to use when decrypting your input files or encrypting your output files.
+  Elastic Transcoder supports the following options: S3: Amazon S3 creates and manages
+  the keys used for encrypting your files. S3-AWS-KMS: Amazon S3 calls the Amazon
+  Key Management Service, which creates and manages the keys that are used for encrypting
+  your files. If you specify S3-AWS-KMS and you don't want to use the default key,
+  you must add the AWS-KMS key that you want to use to your pipeline. AES-CBC-PKCS7:
+  A padded cipher-block mode of operation originally used for HLS files. AES-CTR:
+  AES Counter Mode. AES-GCM: AES Galois Counter Mode, a mode of operation that is
+  an authenticated encryption format, meaning that a file, key, or initialization
+  vector that has been tampered with will fail the decryption process. For all three
+  AES options, you must provide the following settings, which must be base64-encoded:
+  Key Key MD5 Initialization Vector For the AES modes, your private encryption keys
+  and your unencrypted data are never stored by AWS; therefore, it is important that
+  you safely manage your encryption keys. If you lose them, you won't be able to unencrypt
+  your data.\n          * `:key` - (String) The data encryption key that you want
+  Elastic Transcoder to use to encrypt your output file, or that was used to encrypt
+  your input file. The key must be base64-encoded and it must be one of the following
+  bit lengths before being base64-encoded: 128, 192, or 256. The key must also be
+  encrypted by using the Amazon Key Management Service.\n          * `:key_md_5` -
+  (String) The MD5 digest of the key that you used to encrypt your input file, or
+  that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder
+  uses the key digest as a checksum to make sure your key was not corrupted in transit.
+  The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before
+  being base64-encoded.\n          * `:initialization_vector` - (String) The series
+  of random bits created by a random bit generator, unique for every encryption operation,
+  that you used to encrypt your input files or that you want Elastic Transcoder to
+  use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n    * `:composition`
+  - (Array&lt;Hash>) You can create an output file that contains an excerpt from the
+  input file. This excerpt, called a clip, can come from the beginning, middle, or
+  end of the file. The Composition object contains settings for the clips that make
+  up an output file. For the current release, you can only specify settings for a
+  single clip per output file. The Composition object cannot be null.\n    * `:member`
+  - (Hash) \n      * `:time_span` - (Hash) Settings that determine when a clip begins
+  and how long it lasts.\n        * `:start_time` - (String) The place in the input
+  file where you want a clip to start. The format can be either HH:mm:ss.SSS (maximum
+  value: 23:59:59.999; SSS is thousandths of a second) or sssss.SSS (maximum value:
+  86399.999). If you don't specify a value, Elastic Transcoder starts at the beginning
+  of the input file.\n        * `:duration` - (String) The duration of the clip. The
+  format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS is thousandths
+  of a second) or sssss.SSS (maximum value: 86399.999). If you don't specify a value,
+  Elastic Transcoder creates an output file from StartTime to the end of the file.
+  If you specify a value longer than the duration of the input file, Elastic Transcoder
+  transcodes the file and returns a warning message.\n    * `:captions` - (Hash) You
+  can configure Elastic Transcoder to transcode captions, or subtitles, from one format
+  to another. All captions must be in UTF-8. Elastic Transcoder supports two types
+  of captions: Embedded: Embedded captions are included in the same file as the audio
+  and video. Elastic Transcoder supports only one embedded caption per language, to
+  a maximum of 300 embedded captions per file. Valid input values include: CEA-608
+  (EIA-608, first non-empty channel only), CEA-708 (EIA-708, first non-empty channel
+  only), and mov-text Valid outputs include: mov-text Elastic Transcoder supports
   a maximum of one embedded format per output. Sidecar: Sidecar captions are kept
   in a separate metadata file from the audio and video data. Sidecar captions require
   a player that is capable of understanding the relationship between the video file
@@ -386,43 +693,137 @@
   captions. Specify the TimeOffset in the form [+-]SS.sss or [+-]HH:mm:SS.ss.\n        *
   `:label` - (String) The label of the caption shown in the player when choosing a
   language. We recommend that you put the caption language name here, in the language
-  of the captions.\n      * `:caption_formats` - (Array&lt;Hash>) The array of file
-  formats for the output captions. If you leave this value blank, Elastic Transcoder
-  returns an error.\n      * `:member` - (Hash) \n        * `:format` - (String) The
-  format you specify determines whether Elastic Transcoder generates an embedded or
-  sidecar caption for this output. Valid Embedded Caption Formats: For MP3: None For
-  MP4: mov-text For MPEG-TS: None For ogg: None For webm: None Valid Sidecar Caption
-  Formats: Elastic Transcoder supports dfxp (first div element only), scc, srt, and
-  webvtt. If you want ttml or smpte-tt compatible captions, specify dfxp as your output
-  format. For FMP4: dfxp Non-FMP4 outputs: All sidecar types fmp4 captions have an
-  extension of .ismt\n        * `:pattern` - (String) The prefix for caption filenames,
-  in the form description-`{language}`, where: description is a description of the
-  video. `{language}` is a literal value that Elastic Transcoder replaces with the
-  two- or three-letter code for the language of the caption in the output file names.
-  If you don't include `{language}` in the file name pattern, Elastic Transcoder automatically
-  appends \"`{language}`\" to the value that you specify for the description. In addition,
-  Elastic Transcoder automatically appends the count to the end of the segment files.
-  For example, suppose you're transcoding into srt format. When you enter \"Sydney-`{language}`-sunrise\",
-  and the language of the captions is English (en), the name of the first caption
-  file will be Sydney-en-sunrise00000.srt.\n  * `:output_key_prefix` - (String) The
-  value, if any, that you want Elastic Transcoder to prepend to the names of all files
-  that this job creates, including output files, thumbnails, and playlists.\n  * `:playlists`
-  - (Array&lt;Hash>) If you specify a preset in PresetId for which the value of Container
-  is fmp4 (Fragmented MP4) or ts (MPEG-TS), Playlists contains information about the
-  master playlists that you want Elastic Transcoder to create. The maximum number
-  of master playlists in a job is 30.\n  * `:member` - (Hash) \n    * `:name` - (String)
-  The name that you want Elastic Transcoder to assign to the master playlist, for
-  example, nyc-vacation.m3u8. If the name includes a / character, the section of the
-  name before the last / must be identical for all Name objects. If you create more
-  than one master playlist, the values of all Name objects must be unique. Note: Elastic
-  Transcoder automatically appends the relevant file extension to the file name (.m3u8
-  for HLSv3 and HLSv4 playlists, and .ism and .ismc for Smooth playlists). If you
-  include a file extension in Name, the file name will have two extensions.\n    *
-  `:format` - (String) The format of the output playlist. Valid formats include HLSv3,
-  HLSv4, and Smooth.\n    * `:output_keys` - (Array&lt;String>) For each output in
-  this job that you want to include in a master playlist, the value of the Outputs:Key
-  object. If your output is not HLS or does not have a segment duration set, the name
-  of the output file is a concatenation of OutputKeyPrefix and Outputs:Key: OutputKeyPrefixOutputs:Key
+  of the captions.\n        * `:encryption` - (Hash) The encryption settings, if any,
+  that you want Elastic Transcoder to apply to your caption sources.\n          *
+  `:mode` - (String) The specific server-side encryption mode that you want Elastic
+  Transcoder to use when decrypting your input files or encrypting your output files.
+  Elastic Transcoder supports the following options: S3: Amazon S3 creates and manages
+  the keys used for encrypting your files. S3-AWS-KMS: Amazon S3 calls the Amazon
+  Key Management Service, which creates and manages the keys that are used for encrypting
+  your files. If you specify S3-AWS-KMS and you don't want to use the default key,
+  you must add the AWS-KMS key that you want to use to your pipeline. AES-CBC-PKCS7:
+  A padded cipher-block mode of operation originally used for HLS files. AES-CTR:
+  AES Counter Mode. AES-GCM: AES Galois Counter Mode, a mode of operation that is
+  an authenticated encryption format, meaning that a file, key, or initialization
+  vector that has been tampered with will fail the decryption process. For all three
+  AES options, you must provide the following settings, which must be base64-encoded:
+  Key Key MD5 Initialization Vector For the AES modes, your private encryption keys
+  and your unencrypted data are never stored by AWS; therefore, it is important that
+  you safely manage your encryption keys. If you lose them, you won't be able to unencrypt
+  your data.\n          * `:key` - (String) The data encryption key that you want
+  Elastic Transcoder to use to encrypt your output file, or that was used to encrypt
+  your input file. The key must be base64-encoded and it must be one of the following
+  bit lengths before being base64-encoded: 128, 192, or 256. The key must also be
+  encrypted by using the Amazon Key Management Service.\n          * `:key_md_5` -
+  (String) The MD5 digest of the key that you used to encrypt your input file, or
+  that you want Elastic Transcoder to use to encrypt your output file. Elastic Transcoder
+  uses the key digest as a checksum to make sure your key was not corrupted in transit.
+  The key MD5 must be base64-encoded, and it must be exactly 16 bytes long before
+  being base64-encoded.\n          * `:initialization_vector` - (String) The series
+  of random bits created by a random bit generator, unique for every encryption operation,
+  that you used to encrypt your input files or that you want Elastic Transcoder to
+  use to encrypt your output files. The initialization vector must be base64-encoded,
+  and it must be exactly 16 bytes long before being base64-encoded.\n      * `:caption_formats`
+  - (Array&lt;Hash>) The array of file formats for the output captions. If you leave
+  this value blank, Elastic Transcoder returns an error.\n      * `:member` - (Hash)
+  \n        * `:format` - (String) The format you specify determines whether Elastic
+  Transcoder generates an embedded or sidecar caption for this output. Valid Embedded
+  Caption Formats: For MP3: None For MP4: mov-text For MPEG-TS: None For ogg: None
+  For webm: None Valid Sidecar Caption Formats: Elastic Transcoder supports dfxp (first
+  div element only), scc, srt, and webvtt. If you want ttml or smpte-tt compatible
+  captions, specify dfxp as your output format. For FMP4: dfxp Non-FMP4 outputs: All
+  sidecar types fmp4 captions have an extension of .ismt\n        * `:pattern` - (String)
+  The prefix for caption filenames, in the form description-`{language}`, where: description
+  is a description of the video. `{language}` is a literal value that Elastic Transcoder
+  replaces with the two- or three-letter code for the language of the caption in the
+  output file names. If you don't include `{language}` in the file name pattern, Elastic
+  Transcoder automatically appends \"`{language}`\" to the value that you specify
+  for the description. In addition, Elastic Transcoder automatically appends the count
+  to the end of the segment files. For example, suppose you're transcoding into srt
+  format. When you enter \"Sydney-`{language}`-sunrise\", and the language of the
+  captions is English (en), the name of the first caption file will be Sydney-en-sunrise00000.srt.\n
+  \       * `:encryption` - (Hash) The encryption settings, if any, that you want
+  Elastic Transcoder to apply to your caption formats.\n          * `:mode` - (String)
+  The specific server-side encryption mode that you want Elastic Transcoder to use
+  when decrypting your input files or encrypting your output files. Elastic Transcoder
+  supports the following options: S3: Amazon S3 creates and manages the keys used
+  for encrypting your files. S3-AWS-KMS: Amazon S3 calls the Amazon Key Management
+  Service, which creates and manages the keys that are used for encrypting your files.
+  If you specify S3-AWS-KMS and you don't want to use the default key, you must add
+  the AWS-KMS key that you want to use to your pipeline. AES-CBC-PKCS7: A padded cipher-block
+  mode of operation originally used for HLS files. AES-CTR: AES Counter Mode. AES-GCM:
+  AES Galois Counter Mode, a mode of operation that is an authenticated encryption
+  format, meaning that a file, key, or initialization vector that has been tampered
+  with will fail the decryption process. For all three AES options, you must provide
+  the following settings, which must be base64-encoded: Key Key MD5 Initialization
+  Vector For the AES modes, your private encryption keys and your unencrypted data
+  are never stored by AWS; therefore, it is important that you safely manage your
+  encryption keys. If you lose them, you won't be able to unencrypt your data.\n          *
+  `:key` - (String) The data encryption key that you want Elastic Transcoder to use
+  to encrypt your output file, or that was used to encrypt your input file. The key
+  must be base64-encoded and it must be one of the following bit lengths before being
+  base64-encoded: 128, 192, or 256. The key must also be encrypted by using the Amazon
+  Key Management Service.\n          * `:key_md_5` - (String) The MD5 digest of the
+  key that you used to encrypt your input file, or that you want Elastic Transcoder
+  to use to encrypt your output file. Elastic Transcoder uses the key digest as a
+  checksum to make sure your key was not corrupted in transit. The key MD5 must be
+  base64-encoded, and it must be exactly 16 bytes long before being base64-encoded.\n
+  \         * `:initialization_vector` - (String) The series of random bits created
+  by a random bit generator, unique for every encryption operation, that you used
+  to encrypt your input files or that you want Elastic Transcoder to use to encrypt
+  your output files. The initialization vector must be base64-encoded, and it must
+  be exactly 16 bytes long before being base64-encoded.\n    * `:encryption` - (Hash)
+  You can specify encryption settings for any output files that you want to use for
+  a transcoding job. This includes the output file and any watermarks, thumbnails,
+  album art, or captions that you want to use. You must specify encryption settings
+  for each file individually.\n      * `:mode` - (String) The specific server-side
+  encryption mode that you want Elastic Transcoder to use when decrypting your input
+  files or encrypting your output files. Elastic Transcoder supports the following
+  options: S3: Amazon S3 creates and manages the keys used for encrypting your files.
+  S3-AWS-KMS: Amazon S3 calls the Amazon Key Management Service, which creates and
+  manages the keys that are used for encrypting your files. If you specify S3-AWS-KMS
+  and you don't want to use the default key, you must add the AWS-KMS key that you
+  want to use to your pipeline. AES-CBC-PKCS7: A padded cipher-block mode of operation
+  originally used for HLS files. AES-CTR: AES Counter Mode. AES-GCM: AES Galois Counter
+  Mode, a mode of operation that is an authenticated encryption format, meaning that
+  a file, key, or initialization vector that has been tampered with will fail the
+  decryption process. For all three AES options, you must provide the following settings,
+  which must be base64-encoded: Key Key MD5 Initialization Vector For the AES modes,
+  your private encryption keys and your unencrypted data are never stored by AWS;
+  therefore, it is important that you safely manage your encryption keys. If you lose
+  them, you won't be able to unencrypt your data.\n      * `:key` - (String) The data
+  encryption key that you want Elastic Transcoder to use to encrypt your output file,
+  or that was used to encrypt your input file. The key must be base64-encoded and
+  it must be one of the following bit lengths before being base64-encoded: 128, 192,
+  or 256. The key must also be encrypted by using the Amazon Key Management Service.\n
+  \     * `:key_md_5` - (String) The MD5 digest of the key that you used to encrypt
+  your input file, or that you want Elastic Transcoder to use to encrypt your output
+  file. Elastic Transcoder uses the key digest as a checksum to make sure your key
+  was not corrupted in transit. The key MD5 must be base64-encoded, and it must be
+  exactly 16 bytes long before being base64-encoded.\n      * `:initialization_vector`
+  - (String) The series of random bits created by a random bit generator, unique for
+  every encryption operation, that you used to encrypt your input files or that you
+  want Elastic Transcoder to use to encrypt your output files. The initialization
+  vector must be base64-encoded, and it must be exactly 16 bytes long before being
+  base64-encoded.\n  * `:output_key_prefix` - (String) The value, if any, that you
+  want Elastic Transcoder to prepend to the names of all files that this job creates,
+  including output files, thumbnails, and playlists.\n  * `:playlists` - (Array&lt;Hash>)
+  If you specify a preset in PresetId for which the value of Container is fmp4 (Fragmented
+  MP4) or ts (MPEG-TS), Playlists contains information about the master playlists
+  that you want Elastic Transcoder to create. The maximum number of master playlists
+  in a job is 30.\n  * `:member` - (Hash) \n    * `:name` - (String) The name that
+  you want Elastic Transcoder to assign to the master playlist, for example, nyc-vacation.m3u8.
+  If the name includes a / character, the section of the name before the last / must
+  be identical for all Name objects. If you create more than one master playlist,
+  the values of all Name objects must be unique. Note: Elastic Transcoder automatically
+  appends the relevant file extension to the file name (.m3u8 for HLSv3 and HLSv4
+  playlists, and .ism and .ismc for Smooth playlists). If you include a file extension
+  in Name, the file name will have two extensions.\n    * `:format` - (String) The
+  format of the output playlist. Valid formats include HLSv3, HLSv4, and Smooth.\n
+  \   * `:output_keys` - (Array&lt;String>) For each output in this job that you want
+  to include in a master playlist, the value of the Outputs:Key object. If your output
+  is not HLS or does not have a segment duration set, the name of the output file
+  is a concatenation of OutputKeyPrefix and Outputs:Key: OutputKeyPrefixOutputs:Key
   If your output is HLSv3 and has a segment duration set, or is not included in a
   playlist, Elastic Transcoder creates an output playlist file with a file extension
   of .m3u8, and a series of .ts files that include a five-digit sequential counter
@@ -437,47 +838,80 @@
   playlist, any segment duration settings, clip settings, or caption settings must
   be the same for all outputs in the playlist. For Smooth playlists, the Audio:Profile,
   Video:Profile, and Video:FrameRate to Video:KeyframesMaxDist ratio must be the same
-  for all outputs.\n    * `:member` - (String) \n@return [Core::Response] The `#data`
-  method of the response object returns a hash with the following structure:\n\n  *
-  `:job` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    * `:pipeline_id`
+  for all outputs.\n    * `:member` - (String) \n  * `:user_metadata` - (Hash) User-defined
+  metadata that you want to associate with an Elastic Transcoder job. You specify
+  metadata in key/value pairs, and you can add up to 10 key/value pairs per job. Elastic
+  Transcoder does not guarantee that key/value pairs will be returned in the same
+  order in which you specify them.\n  * `:value` - (String) \n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:job` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    * `:pipeline_id`
   - (String)\n    * `:input` - (Hash)\n      * `:key` - (String)\n      * `:frame_rate`
   - (String)\n      * `:resolution` - (String)\n      * `:aspect_ratio` - (String)\n
-  \     * `:interlaced` - (String)\n      * `:container` - (String)\n    * `:output`
-  - (Hash)\n      * `:id` - (String)\n      * `:key` - (String)\n      * `:thumbnail_pattern`
-  - (String)\n      * `:rotate` - (String)\n      * `:preset_id` - (String)\n      *
-  `:segment_duration` - (String)\n      * `:status` - (String)\n      * `:status_detail`
-  - (String)\n      * `:duration` - (Integer)\n      * `:width` - (Integer)\n      *
-  `:height` - (Integer)\n      * `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id`
-  - (String)\n        * `:input_key` - (String)\n      * `:album_art` - (Hash)\n        *
-  `:merge_policy` - (String)\n        * `:artwork` - (Array<Hash>)\n          * `:input_key`
-  - (String)\n          * `:max_width` - (String)\n          * `:max_height` - (String)\n
-  \         * `:sizing_policy` - (String)\n          * `:padding_policy` - (String)\n
-  \         * `:album_art_format` - (String)\n      * `:composition` - (Array<Hash>)\n
-  \       * `:time_span` - (Hash)\n          * `:start_time` - (String)\n          *
-  `:duration` - (String)\n      * `:captions` - (Hash)\n        * `:merge_policy`
-  - (String)\n        * `:caption_sources` - (Array<Hash>)\n          * `:key` - (String)\n
-  \         * `:language` - (String)\n          * `:time_offset` - (String)\n          *
-  `:label` - (String)\n        * `:caption_formats` - (Array<Hash>)\n          * `:format`
-  - (String)\n          * `:pattern` - (String)\n    * `:outputs` - (Array<Hash>)\n
+  \     * `:interlaced` - (String)\n      * `:container` - (String)\n      * `:encryption`
+  - (Hash)\n        * `:mode` - (String)\n        * `:key` - (String)\n        * `:key_md_5`
+  - (String)\n        * `:initialization_vector` - (String)\n    * `:output` - (Hash)\n
   \     * `:id` - (String)\n      * `:key` - (String)\n      * `:thumbnail_pattern`
+  - (String)\n      * `:thumbnail_encryption` - (Hash)\n        * `:mode` - (String)\n
+  \       * `:key` - (String)\n        * `:key_md_5` - (String)\n        * `:initialization_vector`
   - (String)\n      * `:rotate` - (String)\n      * `:preset_id` - (String)\n      *
   `:segment_duration` - (String)\n      * `:status` - (String)\n      * `:status_detail`
   - (String)\n      * `:duration` - (Integer)\n      * `:width` - (Integer)\n      *
   `:height` - (Integer)\n      * `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id`
-  - (String)\n        * `:input_key` - (String)\n      * `:album_art` - (Hash)\n        *
-  `:merge_policy` - (String)\n        * `:artwork` - (Array<Hash>)\n          * `:input_key`
-  - (String)\n          * `:max_width` - (String)\n          * `:max_height` - (String)\n
-  \         * `:sizing_policy` - (String)\n          * `:padding_policy` - (String)\n
-  \         * `:album_art_format` - (String)\n      * `:composition` - (Array<Hash>)\n
-  \       * `:time_span` - (Hash)\n          * `:start_time` - (String)\n          *
-  `:duration` - (String)\n      * `:captions` - (Hash)\n        * `:merge_policy`
-  - (String)\n        * `:caption_sources` - (Array<Hash>)\n          * `:key` - (String)\n
-  \         * `:language` - (String)\n          * `:time_offset` - (String)\n          *
-  `:label` - (String)\n        * `:caption_formats` - (Array<Hash>)\n          * `:format`
-  - (String)\n          * `:pattern` - (String)\n    * `:output_key_prefix` - (String)\n
-  \   * `:playlists` - (Array<Hash>)\n      * `:name` - (String)\n      * `:format`
-  - (String)\n      * `:output_keys` - (Array<String>)\n      * `:status` - (String)\n
-  \     * `:status_detail` - (String)\n    * `:status` - (String)"
+  - (String)\n        * `:input_key` - (String)\n        * `:encryption` - (Hash)\n
+  \         * `:mode` - (String)\n          * `:key` - (String)\n          * `:key_md_5`
+  - (String)\n          * `:initialization_vector` - (String)\n      * `:album_art`
+  - (Hash)\n        * `:merge_policy` - (String)\n        * `:artwork` - (Array<Hash>)\n
+  \         * `:input_key` - (String)\n          * `:max_width` - (String)\n          *
+  `:max_height` - (String)\n          * `:sizing_policy` - (String)\n          * `:padding_policy`
+  - (String)\n          * `:album_art_format` - (String)\n          * `:encryption`
+  - (Hash)\n            * `:mode` - (String)\n            * `:key` - (String)\n            *
+  `:key_md_5` - (String)\n            * `:initialization_vector` - (String)\n      *
+  `:composition` - (Array<Hash>)\n        * `:time_span` - (Hash)\n          * `:start_time`
+  - (String)\n          * `:duration` - (String)\n      * `:captions` - (Hash)\n        *
+  `:merge_policy` - (String)\n        * `:caption_sources` - (Array<Hash>)\n          *
+  `:key` - (String)\n          * `:language` - (String)\n          * `:time_offset`
+  - (String)\n          * `:label` - (String)\n          * `:encryption` - (Hash)\n
+  \           * `:mode` - (String)\n            * `:key` - (String)\n            *
+  `:key_md_5` - (String)\n            * `:initialization_vector` - (String)\n        *
+  `:caption_formats` - (Array<Hash>)\n          * `:format` - (String)\n          *
+  `:pattern` - (String)\n          * `:encryption` - (Hash)\n            * `:mode`
+  - (String)\n            * `:key` - (String)\n            * `:key_md_5` - (String)\n
+  \           * `:initialization_vector` - (String)\n      * `:encryption` - (Hash)\n
+  \       * `:mode` - (String)\n        * `:key` - (String)\n        * `:key_md_5`
+  - (String)\n        * `:initialization_vector` - (String)\n    * `:outputs` - (Array<Hash>)\n
+  \     * `:id` - (String)\n      * `:key` - (String)\n      * `:thumbnail_pattern`
+  - (String)\n      * `:thumbnail_encryption` - (Hash)\n        * `:mode` - (String)\n
+  \       * `:key` - (String)\n        * `:key_md_5` - (String)\n        * `:initialization_vector`
+  - (String)\n      * `:rotate` - (String)\n      * `:preset_id` - (String)\n      *
+  `:segment_duration` - (String)\n      * `:status` - (String)\n      * `:status_detail`
+  - (String)\n      * `:duration` - (Integer)\n      * `:width` - (Integer)\n      *
+  `:height` - (Integer)\n      * `:watermarks` - (Array<Hash>)\n        * `:preset_watermark_id`
+  - (String)\n        * `:input_key` - (String)\n        * `:encryption` - (Hash)\n
+  \         * `:mode` - (String)\n          * `:key` - (String)\n          * `:key_md_5`
+  - (String)\n          * `:initialization_vector` - (String)\n      * `:album_art`
+  - (Hash)\n        * `:merge_policy` - (String)\n        * `:artwork` - (Array<Hash>)\n
+  \         * `:input_key` - (String)\n          * `:max_width` - (String)\n          *
+  `:max_height` - (String)\n          * `:sizing_policy` - (String)\n          * `:padding_policy`
+  - (String)\n          * `:album_art_format` - (String)\n          * `:encryption`
+  - (Hash)\n            * `:mode` - (String)\n            * `:key` - (String)\n            *
+  `:key_md_5` - (String)\n            * `:initialization_vector` - (String)\n      *
+  `:composition` - (Array<Hash>)\n        * `:time_span` - (Hash)\n          * `:start_time`
+  - (String)\n          * `:duration` - (String)\n      * `:captions` - (Hash)\n        *
+  `:merge_policy` - (String)\n        * `:caption_sources` - (Array<Hash>)\n          *
+  `:key` - (String)\n          * `:language` - (String)\n          * `:time_offset`
+  - (String)\n          * `:label` - (String)\n          * `:encryption` - (Hash)\n
+  \           * `:mode` - (String)\n            * `:key` - (String)\n            *
+  `:key_md_5` - (String)\n            * `:initialization_vector` - (String)\n        *
+  `:caption_formats` - (Array<Hash>)\n          * `:format` - (String)\n          *
+  `:pattern` - (String)\n          * `:encryption` - (Hash)\n            * `:mode`
+  - (String)\n            * `:key` - (String)\n            * `:key_md_5` - (String)\n
+  \           * `:initialization_vector` - (String)\n      * `:encryption` - (Hash)\n
+  \       * `:mode` - (String)\n        * `:key` - (String)\n        * `:key_md_5`
+  - (String)\n        * `:initialization_vector` - (String)\n    * `:output_key_prefix`
+  - (String)\n    * `:playlists` - (Array<Hash>)\n      * `:name` - (String)\n      *
+  `:format` - (String)\n      * `:output_keys` - (Array<String>)\n      * `:status`
+  - (String)\n      * `:status_detail` - (String)\n    * `:status` - (String)\n    *
+  `:user_metadata` - (Hash<String,String>)"
 :create_pipeline: "Calls the POST CreatePipeline API operation.\n@param [Hash] options\n
   \ * `:name` - *required* - (String) The name of the pipeline. We recommend that
   the name be unique within the AWS account, but uniqueness is not enforced. Constraints:
@@ -498,25 +932,31 @@
   Amazon S3 storage class, omit OutputBucket and specify values for ContentConfig
   and ThumbnailConfig instead.\n  * `:role` - *required* - (String) The IAM Amazon
   Resource Name (ARN) for the role that you want Elastic Transcoder to use to create
-  the pipeline.\n  * `:notifications` - (Hash) The Amazon Simple Notification Service
-  (Amazon SNS) topic that you want to notify to report job status. To receive notifications,
-  you must also subscribe to the new topic in the Amazon SNS console. Progressing:
-  The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic that
-  you want to notify when Elastic Transcoder has started to process a job in this
-  pipeline. This is the ARN that Amazon SNS returned when you created the topic. For
-  more information, see Create a Topic in the Amazon Simple Notification Service Developer
-  Guide. Completed: The topic ARN for the Amazon SNS topic that you want to notify
-  when Elastic Transcoder has finished processing a job in this pipeline. This is
-  the ARN that Amazon SNS returned when you created the topic. Warning: The topic
-  ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder encounters
-  a warning condition while processing a job in this pipeline. This is the ARN that
-  Amazon SNS returned when you created the topic. Error: The topic ARN for the Amazon
-  SNS topic that you want to notify when Elastic Transcoder encounters an error condition
-  while processing a job in this pipeline. This is the ARN that Amazon SNS returned
-  when you created the topic.\n    * `:progressing` - (String) The Amazon Simple Notification
-  Service (Amazon SNS) topic that you want to notify when Elastic Transcoder has started
-  to process the job.\n    * `:completed` - (String) The Amazon SNS topic that you
-  want to notify when Elastic Transcoder has finished processing the job.\n    * `:warning`
+  the pipeline.\n  * `:aws_kms_key_arn` - (String) The AWS Key Management Service
+  (AWS KMS) key that you want to use with this pipeline. If you use either S3 or S3-AWS-KMS
+  as your Encryption:Mode, you don't need to provide a key with your job because a
+  default key, known as an AWS-KMS key, is created for you automatically. You need
+  to provide an AWS-KMS key only if you want to use a non-default AWS-KMS key, or
+  if you are using an Encryption:Mode of AES-PKCS7, AES-CTR, or AES-GCM.\n  * `:notifications`
+  - (Hash) The Amazon Simple Notification Service (Amazon SNS) topic that you want
+  to notify to report job status. To receive notifications, you must also subscribe
+  to the new topic in the Amazon SNS console. Progressing: The topic ARN for the Amazon
+  Simple Notification Service (Amazon SNS) topic that you want to notify when Elastic
+  Transcoder has started to process a job in this pipeline. This is the ARN that Amazon
+  SNS returned when you created the topic. For more information, see Create a Topic
+  in the Amazon Simple Notification Service Developer Guide. Completed: The topic
+  ARN for the Amazon SNS topic that you want to notify when Elastic Transcoder has
+  finished processing a job in this pipeline. This is the ARN that Amazon SNS returned
+  when you created the topic. Warning: The topic ARN for the Amazon SNS topic that
+  you want to notify when Elastic Transcoder encounters a warning condition while
+  processing a job in this pipeline. This is the ARN that Amazon SNS returned when
+  you created the topic. Error: The topic ARN for the Amazon SNS topic that you want
+  to notify when Elastic Transcoder encounters an error condition while processing
+  a job in this pipeline. This is the ARN that Amazon SNS returned when you created
+  the topic.\n    * `:progressing` - (String) The Amazon Simple Notification Service
+  (Amazon SNS) topic that you want to notify when Elastic Transcoder has started to
+  process the job.\n    * `:completed` - (String) The Amazon SNS topic that you want
+  to notify when Elastic Transcoder has finished processing the job.\n    * `:warning`
   - (String) The Amazon SNS topic that you want to notify when Elastic Transcoder
   encounters a warning condition.\n    * `:error` - (String) The Amazon SNS topic
   that you want to notify when Elastic Transcoder encounters an error condition.\n
@@ -672,15 +1112,15 @@
   The `#data` method of the response object returns a hash with the following structure:\n\n
   \ * `:pipeline` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    *
   `:name` - (String)\n    * `:status` - (String)\n    * `:input_bucket` - (String)\n
-  \   * `:output_bucket` - (String)\n    * `:role` - (String)\n    * `:notifications`
-  - (Hash)\n      * `:progressing` - (String)\n      * `:completed` - (String)\n      *
-  `:warning` - (String)\n      * `:error` - (String)\n    * `:content_config` - (Hash)\n
-  \     * `:bucket` - (String)\n      * `:storage_class` - (String)\n      * `:permissions`
-  - (Array<Hash>)\n        * `:grantee_type` - (String)\n        * `:grantee` - (String)\n
-  \       * `:access` - (Array<String>)\n    * `:thumbnail_config` - (Hash)\n      *
-  `:bucket` - (String)\n      * `:storage_class` - (String)\n      * `:permissions`
-  - (Array<Hash>)\n        * `:grantee_type` - (String)\n        * `:grantee` - (String)\n
-  \       * `:access` - (Array<String>)"
+  \   * `:output_bucket` - (String)\n    * `:role` - (String)\n    * `:aws_kms_key_arn`
+  - (String)\n    * `:notifications` - (Hash)\n      * `:progressing` - (String)\n
+  \     * `:completed` - (String)\n      * `:warning` - (String)\n      * `:error`
+  - (String)\n    * `:content_config` - (Hash)\n      * `:bucket` - (String)\n      *
+  `:storage_class` - (String)\n      * `:permissions` - (Array<Hash>)\n        * `:grantee_type`
+  - (String)\n        * `:grantee` - (String)\n        * `:access` - (Array<String>)\n
+  \   * `:thumbnail_config` - (Hash)\n      * `:bucket` - (String)\n      * `:storage_class`
+  - (String)\n      * `:permissions` - (Array<Hash>)\n        * `:grantee_type` -
+  (String)\n        * `:grantee` - (String)\n        * `:access` - (Array<String>)"
 :create_preset: "Calls the POST CreatePreset API operation.\n@param [Hash] options\n
   \ * `:name` - *required* - (String) The name of the preset. We recommend that the
   name be unique within the AWS account, but uniqueness is not enforced.\n  * `:description`
@@ -915,19 +1355,19 @@
   profile when you specify AAC for the value of Audio:Codec. Specify the AAC profile
   for the output file. Elastic Transcoder supports the following profiles: auto: If
   you specify auto, Elastic Transcoder will select the profile based on the bit rate
-  selected for the output file. AAC-LC: The most common AAC profile. Use for bitrates
+  selected for the output file. AAC-LC: The most common AAC profile. Use for bit rates
   larger than 64 kbps. HE-AAC: Not supported on some older players and devices. Use
-  for bitrates between 40 and 80 kbps. HE-AACv2: Not supported on some players and
-  devices. Use for bitrates less than 48 kbps. All outputs in a Smooth playlist must
+  for bit rates between 40 and 80 kbps. HE-AACv2: Not supported on some players and
+  devices. Use for bit rates less than 48 kbps. All outputs in a Smooth playlist must
   have the same value for Profile. If you created any presets before AAC profiles
   were added, Elastic Transcoder automatically updated your presets to use AAC-LC.
   You can change the value as required.\n  * `:thumbnails` - (Hash) A section of the
   request body that specifies the thumbnail parameters, if any.\n    * `:format` -
   (String) The format of thumbnails, if any. Valid values are jpg and png. You specify
   whether you want Elastic Transcoder to create thumbnails when you create a job.\n
-  \   * `:interval` - (String) The number of seconds between thumbnails. Specify an
-  integer value.\n    * `:resolution` - (String) To better control resolution and
-  aspect ratio of thumbnails, we recommend that you use the values MaxWidth, MaxHeight,
+  \   * `:interval` - (String) The approximate number of seconds between thumbnails.
+  Specify an integer value.\n    * `:resolution` - (String) To better control resolution
+  and aspect ratio of thumbnails, we recommend that you use the values MaxWidth, MaxHeight,
   SizingPolicy, and PaddingPolicy instead of Resolution and AspectRatio. The two groups
   of settings are mutually exclusive. Do not use them together. The width and height
   of thumbnail files in pixels. Specify a value in the format width x height where
@@ -1017,10 +1457,20 @@
         * `:aspect_ratio` - (String)
         * `:interlaced` - (String)
         * `:container` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:output` - (Hash)
         * `:id` - (String)
         * `:key` - (String)
         * `:thumbnail_pattern` - (String)
+        * `:thumbnail_encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
         * `:rotate` - (String)
         * `:preset_id` - (String)
         * `:segment_duration` - (String)
@@ -1032,6 +1482,11 @@
         * `:watermarks` - (Array<Hash>)
           * `:preset_watermark_id` - (String)
           * `:input_key` - (String)
+          * `:encryption` - (Hash)
+            * `:mode` - (String)
+            * `:key` - (String)
+            * `:key_md_5` - (String)
+            * `:initialization_vector` - (String)
         * `:album_art` - (Hash)
           * `:merge_policy` - (String)
           * `:artwork` - (Array<Hash>)
@@ -1041,6 +1496,11 @@
             * `:sizing_policy` - (String)
             * `:padding_policy` - (String)
             * `:album_art_format` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
         * `:composition` - (Array<Hash>)
           * `:time_span` - (Hash)
             * `:start_time` - (String)
@@ -1052,13 +1512,33 @@
             * `:language` - (String)
             * `:time_offset` - (String)
             * `:label` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
           * `:caption_formats` - (Array<Hash>)
             * `:format` - (String)
             * `:pattern` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:outputs` - (Array<Hash>)
         * `:id` - (String)
         * `:key` - (String)
         * `:thumbnail_pattern` - (String)
+        * `:thumbnail_encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
         * `:rotate` - (String)
         * `:preset_id` - (String)
         * `:segment_duration` - (String)
@@ -1070,6 +1550,11 @@
         * `:watermarks` - (Array<Hash>)
           * `:preset_watermark_id` - (String)
           * `:input_key` - (String)
+          * `:encryption` - (Hash)
+            * `:mode` - (String)
+            * `:key` - (String)
+            * `:key_md_5` - (String)
+            * `:initialization_vector` - (String)
         * `:album_art` - (Hash)
           * `:merge_policy` - (String)
           * `:artwork` - (Array<Hash>)
@@ -1079,6 +1564,11 @@
             * `:sizing_policy` - (String)
             * `:padding_policy` - (String)
             * `:album_art_format` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
         * `:composition` - (Array<Hash>)
           * `:time_span` - (Hash)
             * `:start_time` - (String)
@@ -1090,9 +1580,24 @@
             * `:language` - (String)
             * `:time_offset` - (String)
             * `:label` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
           * `:caption_formats` - (Array<Hash>)
             * `:format` - (String)
             * `:pattern` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:output_key_prefix` - (String)
       * `:playlists` - (Array<Hash>)
         * `:name` - (String)
@@ -1101,6 +1606,7 @@
         * `:status` - (String)
         * `:status_detail` - (String)
       * `:status` - (String)
+      * `:user_metadata` - (Hash<String,String>)
     * `:next_page_token` - (String)
 :list_jobs_by_status: |-
   Calls the GET ListJobsByStatus API operation.
@@ -1121,10 +1627,20 @@
         * `:aspect_ratio` - (String)
         * `:interlaced` - (String)
         * `:container` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:output` - (Hash)
         * `:id` - (String)
         * `:key` - (String)
         * `:thumbnail_pattern` - (String)
+        * `:thumbnail_encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
         * `:rotate` - (String)
         * `:preset_id` - (String)
         * `:segment_duration` - (String)
@@ -1136,6 +1652,11 @@
         * `:watermarks` - (Array<Hash>)
           * `:preset_watermark_id` - (String)
           * `:input_key` - (String)
+          * `:encryption` - (Hash)
+            * `:mode` - (String)
+            * `:key` - (String)
+            * `:key_md_5` - (String)
+            * `:initialization_vector` - (String)
         * `:album_art` - (Hash)
           * `:merge_policy` - (String)
           * `:artwork` - (Array<Hash>)
@@ -1145,6 +1666,11 @@
             * `:sizing_policy` - (String)
             * `:padding_policy` - (String)
             * `:album_art_format` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
         * `:composition` - (Array<Hash>)
           * `:time_span` - (Hash)
             * `:start_time` - (String)
@@ -1156,13 +1682,33 @@
             * `:language` - (String)
             * `:time_offset` - (String)
             * `:label` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
           * `:caption_formats` - (Array<Hash>)
             * `:format` - (String)
             * `:pattern` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:outputs` - (Array<Hash>)
         * `:id` - (String)
         * `:key` - (String)
         * `:thumbnail_pattern` - (String)
+        * `:thumbnail_encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
         * `:rotate` - (String)
         * `:preset_id` - (String)
         * `:segment_duration` - (String)
@@ -1174,6 +1720,11 @@
         * `:watermarks` - (Array<Hash>)
           * `:preset_watermark_id` - (String)
           * `:input_key` - (String)
+          * `:encryption` - (Hash)
+            * `:mode` - (String)
+            * `:key` - (String)
+            * `:key_md_5` - (String)
+            * `:initialization_vector` - (String)
         * `:album_art` - (Hash)
           * `:merge_policy` - (String)
           * `:artwork` - (Array<Hash>)
@@ -1183,6 +1734,11 @@
             * `:sizing_policy` - (String)
             * `:padding_policy` - (String)
             * `:album_art_format` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
         * `:composition` - (Array<Hash>)
           * `:time_span` - (Hash)
             * `:start_time` - (String)
@@ -1194,9 +1750,24 @@
             * `:language` - (String)
             * `:time_offset` - (String)
             * `:label` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
           * `:caption_formats` - (Array<Hash>)
             * `:format` - (String)
             * `:pattern` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:output_key_prefix` - (String)
       * `:playlists` - (Array<Hash>)
         * `:name` - (String)
@@ -1205,6 +1776,7 @@
         * `:status` - (String)
         * `:status_detail` - (String)
       * `:status` - (String)
+      * `:user_metadata` - (Hash<String,String>)
     * `:next_page_token` - (String)
 :list_pipelines: |-
   Calls the GET ListPipelines API operation.
@@ -1221,6 +1793,7 @@
       * `:input_bucket` - (String)
       * `:output_bucket` - (String)
       * `:role` - (String)
+      * `:aws_kms_key_arn` - (String)
       * `:notifications` - (Hash)
         * `:progressing` - (String)
         * `:completed` - (String)
@@ -1315,10 +1888,20 @@
         * `:aspect_ratio` - (String)
         * `:interlaced` - (String)
         * `:container` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:output` - (Hash)
         * `:id` - (String)
         * `:key` - (String)
         * `:thumbnail_pattern` - (String)
+        * `:thumbnail_encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
         * `:rotate` - (String)
         * `:preset_id` - (String)
         * `:segment_duration` - (String)
@@ -1330,6 +1913,11 @@
         * `:watermarks` - (Array<Hash>)
           * `:preset_watermark_id` - (String)
           * `:input_key` - (String)
+          * `:encryption` - (Hash)
+            * `:mode` - (String)
+            * `:key` - (String)
+            * `:key_md_5` - (String)
+            * `:initialization_vector` - (String)
         * `:album_art` - (Hash)
           * `:merge_policy` - (String)
           * `:artwork` - (Array<Hash>)
@@ -1339,6 +1927,11 @@
             * `:sizing_policy` - (String)
             * `:padding_policy` - (String)
             * `:album_art_format` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
         * `:composition` - (Array<Hash>)
           * `:time_span` - (Hash)
             * `:start_time` - (String)
@@ -1350,13 +1943,33 @@
             * `:language` - (String)
             * `:time_offset` - (String)
             * `:label` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
           * `:caption_formats` - (Array<Hash>)
             * `:format` - (String)
             * `:pattern` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:outputs` - (Array<Hash>)
         * `:id` - (String)
         * `:key` - (String)
         * `:thumbnail_pattern` - (String)
+        * `:thumbnail_encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
         * `:rotate` - (String)
         * `:preset_id` - (String)
         * `:segment_duration` - (String)
@@ -1368,6 +1981,11 @@
         * `:watermarks` - (Array<Hash>)
           * `:preset_watermark_id` - (String)
           * `:input_key` - (String)
+          * `:encryption` - (Hash)
+            * `:mode` - (String)
+            * `:key` - (String)
+            * `:key_md_5` - (String)
+            * `:initialization_vector` - (String)
         * `:album_art` - (Hash)
           * `:merge_policy` - (String)
           * `:artwork` - (Array<Hash>)
@@ -1377,6 +1995,11 @@
             * `:sizing_policy` - (String)
             * `:padding_policy` - (String)
             * `:album_art_format` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
         * `:composition` - (Array<Hash>)
           * `:time_span` - (Hash)
             * `:start_time` - (String)
@@ -1388,9 +2011,24 @@
             * `:language` - (String)
             * `:time_offset` - (String)
             * `:label` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
           * `:caption_formats` - (Array<Hash>)
             * `:format` - (String)
             * `:pattern` - (String)
+            * `:encryption` - (Hash)
+              * `:mode` - (String)
+              * `:key` - (String)
+              * `:key_md_5` - (String)
+              * `:initialization_vector` - (String)
+        * `:encryption` - (Hash)
+          * `:mode` - (String)
+          * `:key` - (String)
+          * `:key_md_5` - (String)
+          * `:initialization_vector` - (String)
       * `:output_key_prefix` - (String)
       * `:playlists` - (Array<Hash>)
         * `:name` - (String)
@@ -1399,6 +2037,7 @@
         * `:status` - (String)
         * `:status_detail` - (String)
       * `:status` - (String)
+      * `:user_metadata` - (Hash<String,String>)
 :read_pipeline: |-
   Calls the GET ReadPipeline API operation.
   @param [Hash] options
@@ -1413,6 +2052,7 @@
       * `:input_bucket` - (String)
       * `:output_bucket` - (String)
       * `:role` - (String)
+      * `:aws_kms_key_arn` - (String)
       * `:notifications` - (Hash)
         * `:progressing` - (String)
         * `:completed` - (String)
@@ -1506,174 +2146,180 @@
   the media files that you want to transcode and the graphics that you want to use
   as watermarks.\n  * `:role` - (String) The IAM Amazon Resource Name (ARN) for the
   role that you want Elastic Transcoder to use to transcode jobs for this pipeline.\n
-  \ * `:notifications` - (Hash) \n    * `:progressing` - (String) The Amazon Simple
-  Notification Service (Amazon SNS) topic that you want to notify when Elastic Transcoder
-  has started to process the job.\n    * `:completed` - (String) The Amazon SNS topic
-  that you want to notify when Elastic Transcoder has finished processing the job.\n
-  \   * `:warning` - (String) The Amazon SNS topic that you want to notify when Elastic
-  Transcoder encounters a warning condition.\n    * `:error` - (String) The Amazon
-  SNS topic that you want to notify when Elastic Transcoder encounters an error condition.\n
-  \ * `:content_config` - (Hash) The optional ContentConfig object specifies information
-  about the Amazon S3 bucket in which you want Elastic Transcoder to save transcoded
-  files and playlists: which bucket to use, which users you want to have access to
-  the files, the type of access you want users to have, and the storage class that
-  you want to assign to the files. If you specify values for ContentConfig, you must
-  also specify values for ThumbnailConfig. If you specify values for ContentConfig
-  and ThumbnailConfig, omit the OutputBucket object. Bucket: The Amazon S3 bucket
-  in which you want Elastic Transcoder to save transcoded files and playlists. Permissions
-  (Optional): The Permissions object specifies which users you want to have access
-  to transcoded files and the type of access you want them to have. You can grant
-  permissions to a maximum of 30 users and/or predefined Amazon S3 groups. Grantee
-  Type: Specify the type of value that appears in the Grantee object: Canonical: The
-  value in the Grantee object is either the canonical user ID for an AWS account or
-  an origin access identity for an Amazon CloudFront distribution. For more information
-  about canonical user IDs, see Access Control List (ACL) Overview in the Amazon Simple
-  Storage Service Developer Guide. For more information about using CloudFront origin
-  access identities to require that users use CloudFront URLs instead of Amazon S3
-  URLs, see Using an Origin Access Identity to Restrict Access to Your Amazon S3 Content.
-  A canonical user ID is not the same as an AWS account number. Email: The value in
-  the Grantee object is the registered email address of an AWS account. Group: The
-  value in the Grantee object is one of the following predefined Amazon S3 groups:
-  AllUsers, AuthenticatedUsers, or LogDelivery. Grantee: The AWS user or group that
-  you want to have access to transcoded files and playlists. To identify the user
+  \ * `:aws_kms_key_arn` - (String) The AWS Key Management Service (AWS KMS) key that
+  you want to use with this pipeline. If you use either S3 or S3-AWS-KMS as your Encryption:Mode,
+  you don't need to provide a key with your job because a default key, known as an
+  AWS-KMS key, is created for you automatically. You need to provide an AWS-KMS key
+  only if you want to use a non-default AWS-KMS key, or if you are using an Encryption:Mode
+  of AES-PKCS7, AES-CTR, or AES-GCM.\n  * `:notifications` - (Hash) \n    * `:progressing`
+  - (String) The Amazon Simple Notification Service (Amazon SNS) topic that you want
+  to notify when Elastic Transcoder has started to process the job.\n    * `:completed`
+  - (String) The Amazon SNS topic that you want to notify when Elastic Transcoder
+  has finished processing the job.\n    * `:warning` - (String) The Amazon SNS topic
+  that you want to notify when Elastic Transcoder encounters a warning condition.\n
+  \   * `:error` - (String) The Amazon SNS topic that you want to notify when Elastic
+  Transcoder encounters an error condition.\n  * `:content_config` - (Hash) The optional
+  ContentConfig object specifies information about the Amazon S3 bucket in which you
+  want Elastic Transcoder to save transcoded files and playlists: which bucket to
+  use, which users you want to have access to the files, the type of access you want
+  users to have, and the storage class that you want to assign to the files. If you
+  specify values for ContentConfig, you must also specify values for ThumbnailConfig.
+  If you specify values for ContentConfig and ThumbnailConfig, omit the OutputBucket
+  object. Bucket: The Amazon S3 bucket in which you want Elastic Transcoder to save
+  transcoded files and playlists. Permissions (Optional): The Permissions object specifies
+  which users you want to have access to transcoded files and the type of access you
+  want them to have. You can grant permissions to a maximum of 30 users and/or predefined
+  Amazon S3 groups. Grantee Type: Specify the type of value that appears in the Grantee
+  object: Canonical: The value in the Grantee object is either the canonical user
+  ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
+  For more information about canonical user IDs, see Access Control List (ACL) Overview
+  in the Amazon Simple Storage Service Developer Guide. For more information about
+  using CloudFront origin access identities to require that users use CloudFront URLs
+  instead of Amazon S3 URLs, see Using an Origin Access Identity to Restrict Access
+  to Your Amazon S3 Content. A canonical user ID is not the same as an AWS account
+  number. Email: The value in the Grantee object is the registered email address of
+  an AWS account. Group: The value in the Grantee object is one of the following predefined
+  Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery. Grantee: The AWS
+  user or group that you want to have access to transcoded files and playlists. To
+  identify the user or group, you can specify the canonical user ID for an AWS account,
+  an origin access identity for a CloudFront distribution, the registered email address
+  of an AWS account, or a predefined Amazon S3 group Access: The permission that you
+  want to give to the AWS user that you specified in Grantee. Permissions are granted
+  on the files that Elastic Transcoder adds to the bucket, including playlists and
+  video files. Valid values include: READ: The grantee can read the objects and metadata
+  for objects that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP: The
+  grantee can read the object ACL for objects that Elastic Transcoder adds to the
+  Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the objects that
+  Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee has READ,
+  READ_ACP, and WRITE_ACP permissions for the objects that Elastic Transcoder adds
+  to the Amazon S3 bucket. StorageClass: The Amazon S3 storage class, Standard or
+  ReducedRedundancy, that you want Elastic Transcoder to assign to the video files
+  and playlists that it stores in your Amazon S3 bucket.\n    * `:bucket` - (String)
+  The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded
+  files. Specify this value when all of the following are  `true` : You want to save
+  transcoded files, thumbnails (if any), and playlists (if any) together in one bucket.
+  You do not want to specify the users or groups who have access to the transcoded
+  files, thumbnails, and playlists. You do not want to specify the permissions that
+  Elastic Transcoder grants to the files. You want to associate the transcoded files
+  and thumbnails with the Amazon S3 Standard storage class. If you want to save transcoded
+  files and playlists in one bucket and thumbnails in another bucket, specify which
+  users can access the transcoded files or the permissions the users have, or change
+  the Amazon S3 storage class, omit OutputBucket and specify values for ContentConfig
+  and ThumbnailConfig instead.\n    * `:storage_class` - (String) The Amazon S3 storage
+  class, Standard or ReducedRedundancy, that you want Elastic Transcoder to assign
+  to the video files and playlists that it stores in your Amazon S3 bucket.\n    *
+  `:permissions` - (Array&lt;Hash>) Optional. The Permissions object specifies which
+  users and/or predefined Amazon S3 groups you want to have access to transcoded files
+  and playlists, and the type of access you want them to have. You can grant permissions
+  to a maximum of 30 users and/or predefined Amazon S3 groups. If you include Permissions,
+  Elastic Transcoder grants only the permissions that you specify. It does not grant
+  full permissions to the owner of the role specified by Role. If you want that user
+  to have full control, you must explicitly grant full control to the user. If you
+  omit Permissions, Elastic Transcoder grants full control over the transcoded files
+  and playlists to the owner of the role specified by Role, and grants no other permissions
+  to any other user or group.\n    * `:member` - (Hash) \n      * `:grantee_type`
+  - (String) The type of value that appears in the Grantee object: Canonical: Either
+  the canonical user ID for an AWS account or an origin access identity for an Amazon
+  CloudFront distribution. A canonical user ID is not the same as an AWS account number.
+  Email: The registered email address of an AWS account. Group: One of the following
+  predefined Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery.\n      *
+  `:grantee` - (String) The AWS user or group that you want to have access to transcoded
+  files and playlists. To identify the user or group, you can specify the canonical
+  user ID for an AWS account, an origin access identity for a CloudFront distribution,
+  the registered email address of an AWS account, or a predefined Amazon S3 group.\n
+  \     * `:access` - (Array&lt;String>) The permission that you want to give to the
+  AWS user that is listed in Grantee. Valid values include: READ: The grantee can
+  read the thumbnails and metadata for thumbnails that Elastic Transcoder adds to
+  the Amazon S3 bucket. READ_ACP: The grantee can read the object ACL for thumbnails
+  that Elastic Transcoder adds to the Amazon S3 bucket. WRITE_ACP: The grantee can
+  write the ACL for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+  FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions for the
+  thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.\n      * `:member`
+  - (String) \n  * `:thumbnail_config` - (Hash) The ThumbnailConfig object specifies
+  several values, including the Amazon S3 bucket in which you want Elastic Transcoder
+  to save thumbnail files, which users you want to have access to the files, the type
+  of access you want users to have, and the storage class that you want to assign
+  to the files. If you specify values for ContentConfig, you must also specify values
+  for ThumbnailConfig even if you don't want to create thumbnails. If you specify
+  values for ContentConfig and ThumbnailConfig, omit the OutputBucket object. Bucket:
+  The Amazon S3 bucket in which you want Elastic Transcoder to save thumbnail files.
+  Permissions (Optional): The Permissions object specifies which users and/or predefined
+  Amazon S3 groups you want to have access to thumbnail files, and the type of access
+  you want them to have. You can grant permissions to a maximum of 30 users and/or
+  predefined Amazon S3 groups. GranteeType: Specify the type of value that appears
+  in the Grantee object: Canonical: The value in the Grantee object is either the
+  canonical user ID for an AWS account or an origin access identity for an Amazon
+  CloudFront distribution. A canonical user ID is not the same as an AWS account number.
+  Email: The value in the Grantee object is the registered email address of an AWS
+  account. Group: The value in the Grantee object is one of the following predefined
+  Amazon S3 groups: AllUsers, AuthenticatedUsers, or LogDelivery. Grantee: The AWS
+  user or group that you want to have access to thumbnail files. To identify the user
   or group, you can specify the canonical user ID for an AWS account, an origin access
   identity for a CloudFront distribution, the registered email address of an AWS account,
-  or a predefined Amazon S3 group Access: The permission that you want to give to
-  the AWS user that you specified in Grantee. Permissions are granted on the files
-  that Elastic Transcoder adds to the bucket, including playlists and video files.
-  Valid values include: READ: The grantee can read the objects and metadata for objects
-  that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can
-  read the object ACL for objects that Elastic Transcoder adds to the Amazon S3 bucket.
-  WRITE_ACP: The grantee can write the ACL for the objects that Elastic Transcoder
-  adds to the Amazon S3 bucket. FULL_CONTROL: The grantee has READ, READ_ACP, and
-  WRITE_ACP permissions for the objects that Elastic Transcoder adds to the Amazon
-  S3 bucket. StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
-  that you want Elastic Transcoder to assign to the video files and playlists that
-  it stores in your Amazon S3 bucket.\n    * `:bucket` - (String) The Amazon S3 bucket
-  in which you want Elastic Transcoder to save the transcoded files. Specify this
-  value when all of the following are  `true` : You want to save transcoded files,
-  thumbnails (if any), and playlists (if any) together in one bucket. You do not want
-  to specify the users or groups who have access to the transcoded files, thumbnails,
-  and playlists. You do not want to specify the permissions that Elastic Transcoder
-  grants to the files. You want to associate the transcoded files and thumbnails with
-  the Amazon S3 Standard storage class. If you want to save transcoded files and playlists
-  in one bucket and thumbnails in another bucket, specify which users can access the
-  transcoded files or the permissions the users have, or change the Amazon S3 storage
-  class, omit OutputBucket and specify values for ContentConfig and ThumbnailConfig
-  instead.\n    * `:storage_class` - (String) The Amazon S3 storage class, Standard
-  or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files
-  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array&lt;Hash>)
-  Optional. The Permissions object specifies which users and/or predefined Amazon
-  S3 groups you want to have access to transcoded files and playlists, and the type
-  of access you want them to have. You can grant permissions to a maximum of 30 users
-  and/or predefined Amazon S3 groups. If you include Permissions, Elastic Transcoder
-  grants only the permissions that you specify. It does not grant full permissions
-  to the owner of the role specified by Role. If you want that user to have full control,
-  you must explicitly grant full control to the user. If you omit Permissions, Elastic
-  Transcoder grants full control over the transcoded files and playlists to the owner
-  of the role specified by Role, and grants no other permissions to any other user
-  or group.\n    * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
-  of value that appears in the Grantee object: Canonical: Either the canonical user
-  ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
-  A canonical user ID is not the same as an AWS account number. Email: The registered
-  email address of an AWS account. Group: One of the following predefined Amazon S3
-  groups: AllUsers, AuthenticatedUsers, or LogDelivery.\n      * `:grantee` - (String)
-  The AWS user or group that you want to have access to transcoded files and playlists.
-  To identify the user or group, you can specify the canonical user ID for an AWS
-  account, an origin access identity for a CloudFront distribution, the registered
-  email address of an AWS account, or a predefined Amazon S3 group.\n      * `:access`
-  - (Array&lt;String>) The permission that you want to give to the AWS user that is
-  listed in Grantee. Valid values include: READ: The grantee can read the thumbnails
-  and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-  READ_ACP: The grantee can read the object ACL for thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
-  that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
-  has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket.\n      * `:member` - (String) \n  * `:thumbnail_config`
-  - (Hash) The ThumbnailConfig object specifies several values, including the Amazon
-  S3 bucket in which you want Elastic Transcoder to save thumbnail files, which users
-  you want to have access to the files, the type of access you want users to have,
-  and the storage class that you want to assign to the files. If you specify values
-  for ContentConfig, you must also specify values for ThumbnailConfig even if you
-  don't want to create thumbnails. If you specify values for ContentConfig and ThumbnailConfig,
-  omit the OutputBucket object. Bucket: The Amazon S3 bucket in which you want Elastic
-  Transcoder to save thumbnail files. Permissions (Optional): The Permissions object
-  specifies which users and/or predefined Amazon S3 groups you want to have access
-  to thumbnail files, and the type of access you want them to have. You can grant
-  permissions to a maximum of 30 users and/or predefined Amazon S3 groups. GranteeType:
-  Specify the type of value that appears in the Grantee object: Canonical: The value
-  in the Grantee object is either the canonical user ID for an AWS account or an origin
+  or a predefined Amazon S3 group. Access: The permission that you want to give to
+  the AWS user that you specified in Grantee. Permissions are granted on the thumbnail
+  files that Elastic Transcoder adds to the bucket. Valid values include: READ: The
+  grantee can read the thumbnails and metadata for objects that Elastic Transcoder
+  adds to the Amazon S3 bucket. READ_ACP: The grantee can read the object ACL for
+  thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. WRITE_ACP: The
+  grantee can write the ACL for the thumbnails that Elastic Transcoder adds to the
+  Amazon S3 bucket. FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP permissions
+  for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. StorageClass:
+  The Amazon S3 storage class, Standard or ReducedRedundancy, that you want Elastic
+  Transcoder to assign to the thumbnails that it stores in your Amazon S3 bucket.\n
+  \   * `:bucket` - (String) The Amazon S3 bucket in which you want Elastic Transcoder
+  to save the transcoded files. Specify this value when all of the following are  `true`
+  : You want to save transcoded files, thumbnails (if any), and playlists (if any)
+  together in one bucket. You do not want to specify the users or groups who have
+  access to the transcoded files, thumbnails, and playlists. You do not want to specify
+  the permissions that Elastic Transcoder grants to the files. You want to associate
+  the transcoded files and thumbnails with the Amazon S3 Standard storage class. If
+  you want to save transcoded files and playlists in one bucket and thumbnails in
+  another bucket, specify which users can access the transcoded files or the permissions
+  the users have, or change the Amazon S3 storage class, omit OutputBucket and specify
+  values for ContentConfig and ThumbnailConfig instead.\n    * `:storage_class` -
+  (String) The Amazon S3 storage class, Standard or ReducedRedundancy, that you want
+  Elastic Transcoder to assign to the video files and playlists that it stores in
+  your Amazon S3 bucket.\n    * `:permissions` - (Array&lt;Hash>) Optional. The Permissions
+  object specifies which users and/or predefined Amazon S3 groups you want to have
+  access to transcoded files and playlists, and the type of access you want them to
+  have. You can grant permissions to a maximum of 30 users and/or predefined Amazon
+  S3 groups. If you include Permissions, Elastic Transcoder grants only the permissions
+  that you specify. It does not grant full permissions to the owner of the role specified
+  by Role. If you want that user to have full control, you must explicitly grant full
+  control to the user. If you omit Permissions, Elastic Transcoder grants full control
+  over the transcoded files and playlists to the owner of the role specified by Role,
+  and grants no other permissions to any other user or group.\n    * `:member` - (Hash)
+  \n      * `:grantee_type` - (String) The type of value that appears in the Grantee
+  object: Canonical: Either the canonical user ID for an AWS account or an origin
   access identity for an Amazon CloudFront distribution. A canonical user ID is not
-  the same as an AWS account number. Email: The value in the Grantee object is the
-  registered email address of an AWS account. Group: The value in the Grantee object
-  is one of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
-  or LogDelivery. Grantee: The AWS user or group that you want to have access to thumbnail
-  files. To identify the user or group, you can specify the canonical user ID for
-  an AWS account, an origin access identity for a CloudFront distribution, the registered
-  email address of an AWS account, or a predefined Amazon S3 group. Access: The permission
-  that you want to give to the AWS user that you specified in Grantee. Permissions
-  are granted on the thumbnail files that Elastic Transcoder adds to the bucket. Valid
-  values include: READ: The grantee can read the thumbnails and metadata for objects
-  that Elastic Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can
-  read the object ACL for thumbnails that Elastic Transcoder adds to the Amazon S3
-  bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails that Elastic
-  Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee has READ, READ_ACP,
-  and WRITE_ACP permissions for the thumbnails that Elastic Transcoder adds to the
-  Amazon S3 bucket. StorageClass: The Amazon S3 storage class, Standard or ReducedRedundancy,
-  that you want Elastic Transcoder to assign to the thumbnails that it stores in your
-  Amazon S3 bucket.\n    * `:bucket` - (String) The Amazon S3 bucket in which you
-  want Elastic Transcoder to save the transcoded files. Specify this value when all
-  of the following are  `true` : You want to save transcoded files, thumbnails (if
-  any), and playlists (if any) together in one bucket. You do not want to specify
-  the users or groups who have access to the transcoded files, thumbnails, and playlists.
-  You do not want to specify the permissions that Elastic Transcoder grants to the
-  files. You want to associate the transcoded files and thumbnails with the Amazon
-  S3 Standard storage class. If you want to save transcoded files and playlists in
-  one bucket and thumbnails in another bucket, specify which users can access the
-  transcoded files or the permissions the users have, or change the Amazon S3 storage
-  class, omit OutputBucket and specify values for ContentConfig and ThumbnailConfig
-  instead.\n    * `:storage_class` - (String) The Amazon S3 storage class, Standard
-  or ReducedRedundancy, that you want Elastic Transcoder to assign to the video files
-  and playlists that it stores in your Amazon S3 bucket.\n    * `:permissions` - (Array&lt;Hash>)
-  Optional. The Permissions object specifies which users and/or predefined Amazon
-  S3 groups you want to have access to transcoded files and playlists, and the type
-  of access you want them to have. You can grant permissions to a maximum of 30 users
-  and/or predefined Amazon S3 groups. If you include Permissions, Elastic Transcoder
-  grants only the permissions that you specify. It does not grant full permissions
-  to the owner of the role specified by Role. If you want that user to have full control,
-  you must explicitly grant full control to the user. If you omit Permissions, Elastic
-  Transcoder grants full control over the transcoded files and playlists to the owner
-  of the role specified by Role, and grants no other permissions to any other user
-  or group.\n    * `:member` - (Hash) \n      * `:grantee_type` - (String) The type
-  of value that appears in the Grantee object: Canonical: Either the canonical user
-  ID for an AWS account or an origin access identity for an Amazon CloudFront distribution.
-  A canonical user ID is not the same as an AWS account number. Email: The registered
-  email address of an AWS account. Group: One of the following predefined Amazon S3
-  groups: AllUsers, AuthenticatedUsers, or LogDelivery.\n      * `:grantee` - (String)
-  The AWS user or group that you want to have access to transcoded files and playlists.
-  To identify the user or group, you can specify the canonical user ID for an AWS
-  account, an origin access identity for a CloudFront distribution, the registered
-  email address of an AWS account, or a predefined Amazon S3 group.\n      * `:access`
-  - (Array&lt;String>) The permission that you want to give to the AWS user that is
-  listed in Grantee. Valid values include: READ: The grantee can read the thumbnails
-  and metadata for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
-  READ_ACP: The grantee can read the object ACL for thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket. WRITE_ACP: The grantee can write the ACL for the thumbnails
-  that Elastic Transcoder adds to the Amazon S3 bucket. FULL_CONTROL: The grantee
-  has READ, READ_ACP, and WRITE_ACP permissions for the thumbnails that Elastic Transcoder
-  adds to the Amazon S3 bucket.\n      * `:member` - (String) \n@return [Core::Response]
-  The `#data` method of the response object returns a hash with the following structure:\n\n
-  \ * `:pipeline` - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    *
-  `:name` - (String)\n    * `:status` - (String)\n    * `:input_bucket` - (String)\n
-  \   * `:output_bucket` - (String)\n    * `:role` - (String)\n    * `:notifications`
-  - (Hash)\n      * `:progressing` - (String)\n      * `:completed` - (String)\n      *
-  `:warning` - (String)\n      * `:error` - (String)\n    * `:content_config` - (Hash)\n
-  \     * `:bucket` - (String)\n      * `:storage_class` - (String)\n      * `:permissions`
-  - (Array<Hash>)\n        * `:grantee_type` - (String)\n        * `:grantee` - (String)\n
-  \       * `:access` - (Array<String>)\n    * `:thumbnail_config` - (Hash)\n      *
-  `:bucket` - (String)\n      * `:storage_class` - (String)\n      * `:permissions`
-  - (Array<Hash>)\n        * `:grantee_type` - (String)\n        * `:grantee` - (String)\n
-  \       * `:access` - (Array<String>)"
+  the same as an AWS account number. Email: The registered email address of an AWS
+  account. Group: One of the following predefined Amazon S3 groups: AllUsers, AuthenticatedUsers,
+  or LogDelivery.\n      * `:grantee` - (String) The AWS user or group that you want
+  to have access to transcoded files and playlists. To identify the user or group,
+  you can specify the canonical user ID for an AWS account, an origin access identity
+  for a CloudFront distribution, the registered email address of an AWS account, or
+  a predefined Amazon S3 group.\n      * `:access` - (Array&lt;String>) The permission
+  that you want to give to the AWS user that is listed in Grantee. Valid values include:
+  READ: The grantee can read the thumbnails and metadata for thumbnails that Elastic
+  Transcoder adds to the Amazon S3 bucket. READ_ACP: The grantee can read the object
+  ACL for thumbnails that Elastic Transcoder adds to the Amazon S3 bucket. WRITE_ACP:
+  The grantee can write the ACL for the thumbnails that Elastic Transcoder adds to
+  the Amazon S3 bucket. FULL_CONTROL: The grantee has READ, READ_ACP, and WRITE_ACP
+  permissions for the thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.\n
+  \     * `:member` - (String) \n@return [Core::Response] The `#data` method of the
+  response object returns a hash with the following structure:\n\n  * `:pipeline`
+  - (Hash)\n    * `:id` - (String)\n    * `:arn` - (String)\n    * `:name` - (String)\n
+  \   * `:status` - (String)\n    * `:input_bucket` - (String)\n    * `:output_bucket`
+  - (String)\n    * `:role` - (String)\n    * `:aws_kms_key_arn` - (String)\n    *
+  `:notifications` - (Hash)\n      * `:progressing` - (String)\n      * `:completed`
+  - (String)\n      * `:warning` - (String)\n      * `:error` - (String)\n    * `:content_config`
+  - (Hash)\n      * `:bucket` - (String)\n      * `:storage_class` - (String)\n      *
+  `:permissions` - (Array<Hash>)\n        * `:grantee_type` - (String)\n        *
+  `:grantee` - (String)\n        * `:access` - (Array<String>)\n    * `:thumbnail_config`
+  - (Hash)\n      * `:bucket` - (String)\n      * `:storage_class` - (String)\n      *
+  `:permissions` - (Array<Hash>)\n        * `:grantee_type` - (String)\n        *
+  `:grantee` - (String)\n        * `:access` - (Array<String>)"
 :update_pipeline_notifications: |-
   Calls the POST UpdatePipelineNotifications API operation.
   @param [Hash] options
@@ -1693,6 +2339,7 @@
       * `:input_bucket` - (String)
       * `:output_bucket` - (String)
       * `:role` - (String)
+      * `:aws_kms_key_arn` - (String)
       * `:notifications` - (Hash)
         * `:progressing` - (String)
         * `:completed` - (String)
@@ -1727,6 +2374,7 @@
       * `:input_bucket` - (String)
       * `:output_bucket` - (String)
       * `:role` - (String)
+      * `:aws_kms_key_arn` - (String)
       * `:notifications` - (Hash)
         * `:progressing` - (String)
         * `:completed` - (String)
