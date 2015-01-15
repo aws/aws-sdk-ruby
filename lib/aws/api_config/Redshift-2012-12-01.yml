@@ -1,4 +1,4 @@
-# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# Copyright 2011-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License"). You
 # may not use this file except in compliance with the License. A copy of
@@ -39,11 +39,31 @@
                   EC2SecurityGroup:
                     :rename: :ec2_security_groups
                     :list: true
+                    :children:
+                      Tags:
+                        :ignore: true
+                        :children:
+                          Tag:
+                            :rename: :tags
+                            :list: true
               IPRanges:
                 :ignore: true
                 :children:
                   IPRange:
                     :rename: :ip_ranges
+                    :list: true
+                    :children:
+                      Tags:
+                        :ignore: true
+                        :children:
+                          Tag:
+                            :rename: :tags
+                            :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
 - :name: AuthorizeSnapshotAccess
@@ -94,6 +114,12 @@
                 :type: :integer
               ElapsedTimeInSeconds:
                 :type: :integer
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: CopyClusterSnapshot
   :method: :copy_cluster_snapshot
@@ -143,6 +169,12 @@
                 :type: :integer
               ElapsedTimeInSeconds:
                 :type: :integer
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: CreateCluster
   :method: :create_cluster
@@ -196,6 +228,15 @@
     HsmConfigurationIdentifier:
     - :string
     ElasticIp:
+    - :string
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
+    KmsKeyId:
     - :string
   :outputs:
     :children:
@@ -266,6 +307,12 @@
                   member:
                     :rename: :cluster_nodes
                     :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: CreateClusterParameterGroup
   :method: :create_cluster_parameter_group
@@ -279,12 +326,26 @@
     Description:
     - :string
     - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateClusterParameterGroupResult:
         :ignore: true
         :children:
           ClusterParameterGroup:
+            :children:
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: CreateClusterSecurityGroup
   :method: :create_cluster_security_group
@@ -295,6 +356,13 @@
     Description:
     - :string
     - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateClusterSecurityGroupResult:
@@ -308,11 +376,31 @@
                   EC2SecurityGroup:
                     :rename: :ec2_security_groups
                     :list: true
+                    :children:
+                      Tags:
+                        :ignore: true
+                        :children:
+                          Tag:
+                            :rename: :tags
+                            :list: true
               IPRanges:
                 :ignore: true
                 :children:
                   IPRange:
                     :rename: :ip_ranges
+                    :list: true
+                    :children:
+                      Tags:
+                        :ignore: true
+                        :children:
+                          Tag:
+                            :rename: :tags
+                            :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
 - :name: CreateClusterSnapshot
@@ -324,6 +412,13 @@
     ClusterIdentifier:
     - :string
     - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateClusterSnapshotResult:
@@ -361,6 +456,12 @@
                 :type: :integer
               ElapsedTimeInSeconds:
                 :type: :integer
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: CreateClusterSubnetGroup
   :method: :create_cluster_subnet_group
@@ -375,6 +476,13 @@
     - :membered_list:
       - :string
     - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateClusterSubnetGroupResult:
@@ -387,6 +495,12 @@
                 :children:
                   Subnet:
                     :rename: :subnets
+                    :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
 - :name: CreateEventSubscription
@@ -410,6 +524,13 @@
     - :string
     Enabled:
     - :boolean
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateEventSubscriptionResult:
@@ -433,6 +554,12 @@
                     :list: true
               Enabled:
                 :type: :boolean
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: CreateHsmClientCertificate
   :method: :create_hsm_client_certificate
@@ -440,12 +567,26 @@
     HsmClientCertificateIdentifier:
     - :string
     - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateHsmClientCertificateResult:
         :ignore: true
         :children:
           HsmClientCertificate:
+            :children:
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: CreateHsmConfiguration
   :method: :create_hsm_configuration
@@ -468,13 +609,45 @@
     HsmServerPublicCertificate:
     - :string
     - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
   :outputs:
     :children:
       CreateHsmConfigurationResult:
         :ignore: true
         :children:
           HsmConfiguration:
+            :children:
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
+- :name: CreateTags
+  :method: :create_tags
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+    Tags:
+    - :membered_list:
+      - :structure:
+          Key:
+          - :string
+          Value:
+          - :string
+    - :required
+  :outputs:
+    :children:
+      CreateTagsResult:
+        :ignore: true
 - :name: DeleteCluster
   :method: :delete_cluster
   :inputs:
@@ -554,6 +727,12 @@
                   member:
                     :rename: :cluster_nodes
                     :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: DeleteClusterParameterGroup
   :method: :delete_cluster_parameter_group
@@ -620,6 +799,12 @@
                 :type: :integer
               ElapsedTimeInSeconds:
                 :type: :integer
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: DeleteClusterSubnetGroup
   :method: :delete_cluster_subnet_group
@@ -662,6 +847,20 @@
     :children:
       DeleteHsmConfigurationResult:
         :ignore: true
+- :name: DeleteTags
+  :method: :delete_tags
+  :inputs:
+    ResourceName:
+    - :string
+    - :required
+    TagKeys:
+    - :membered_list:
+      - :string
+    - :required
+  :outputs:
+    :children:
+      DeleteTagsResult:
+        :ignore: true
 - :name: DescribeClusterParameterGroups
   :method: :describe_cluster_parameter_groups
   :inputs:
@@ -671,6 +870,12 @@
     - :integer
     Marker:
     - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       DescribeClusterParameterGroupsResult:
@@ -682,6 +887,13 @@
               ClusterParameterGroup:
                 :rename: :parameter_groups
                 :list: true
+                :children:
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
+                        :list: true
 - :name: DescribeClusterParameters
   :method: :describe_cluster_parameters
   :inputs:
@@ -717,6 +929,12 @@
     - :integer
     Marker:
     - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       DescribeClusterSecurityGroupsResult:
@@ -735,11 +953,31 @@
                       EC2SecurityGroup:
                         :rename: :ec2_security_groups
                         :list: true
+                        :children:
+                          Tags:
+                            :ignore: true
+                            :children:
+                              Tag:
+                                :rename: :tags
+                                :list: true
                   IPRanges:
                     :ignore: true
                     :children:
                       IPRange:
                         :rename: :ip_ranges
+                        :list: true
+                        :children:
+                          Tags:
+                            :ignore: true
+                            :children:
+                              Tag:
+                                :rename: :tags
+                                :list: true
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
                         :list: true
 - :name: DescribeClusterSnapshots
   :method: :describe_cluster_snapshots
@@ -760,6 +998,12 @@
     - :string
     OwnerAccount:
     - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       DescribeClusterSnapshotsResult:
@@ -802,6 +1046,12 @@
                     :type: :integer
                   ElapsedTimeInSeconds:
                     :type: :integer
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
+                        :list: true
 - :name: DescribeClusterSubnetGroups
   :method: :describe_cluster_subnet_groups
   :inputs:
@@ -811,6 +1061,12 @@
     - :integer
     Marker:
     - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       DescribeClusterSubnetGroupsResult:
@@ -828,6 +1084,12 @@
                     :children:
                       Subnet:
                         :rename: :subnets
+                        :list: true
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
                         :list: true
 - :name: DescribeClusterVersions
   :method: :describe_cluster_versions
@@ -860,6 +1122,12 @@
     - :integer
     Marker:
     - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       DescribeClustersResult:
@@ -933,6 +1201,12 @@
                     :children:
                       member:
                         :rename: :cluster_nodes
+                        :list: true
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
                         :list: true
 - :name: DescribeDefaultClusterParameters
   :method: :describe_default_cluster_parameters
@@ -1028,6 +1302,12 @@
                         :list: true
                   Enabled:
                     :type: :boolean
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
+                        :list: true
 - :name: DescribeEvents
   :method: :describe_events
   :inputs:
@@ -1074,6 +1354,12 @@
     - :integer
     Marker:
     - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       DescribeHsmClientCertificatesResult:
@@ -1085,6 +1371,13 @@
               HsmClientCertificate:
                 :rename: :hsm_client_certificates
                 :list: true
+                :children:
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
+                        :list: true
 - :name: DescribeHsmConfigurations
   :method: :describe_hsm_configurations
   :inputs:
@@ -1094,6 +1387,12 @@
     - :integer
     Marker:
     - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
   :outputs:
     :children:
       DescribeHsmConfigurationsResult:
@@ -1105,6 +1404,13 @@
               HsmConfiguration:
                 :rename: :hsm_configurations
                 :list: true
+                :children:
+                  Tags:
+                    :ignore: true
+                    :children:
+                      Tag:
+                        :rename: :tags
+                        :list: true
 - :name: DescribeLoggingStatus
   :method: :describe_logging_status
   :inputs:
@@ -1268,6 +1574,34 @@
             :type: :integer
           EstimatedTimeToCompletionInSeconds:
             :type: :integer
+- :name: DescribeTags
+  :method: :describe_tags
+  :inputs:
+    ResourceName:
+    - :string
+    ResourceType:
+    - :string
+    MaxRecords:
+    - :integer
+    Marker:
+    - :string
+    TagKeys:
+    - :membered_list:
+      - :string
+    TagValues:
+    - :membered_list:
+      - :string
+  :outputs:
+    :children:
+      DescribeTagsResult:
+        :ignore: true
+        :children:
+          TaggedResources:
+            :ignore: true
+            :children:
+              TaggedResource:
+                :rename: :tagged_resources
+                :list: true
 - :name: DisableLogging
   :method: :disable_logging
   :inputs:
@@ -1359,6 +1693,12 @@
                 :children:
                   member:
                     :rename: :cluster_nodes
+                    :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
 - :name: EnableLogging
@@ -1462,6 +1802,12 @@
                 :children:
                   member:
                     :rename: :cluster_nodes
+                    :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
 - :name: ModifyCluster
@@ -1569,6 +1915,12 @@
                   member:
                     :rename: :cluster_nodes
                     :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: ModifyClusterParameterGroup
   :method: :modify_cluster_parameter_group
@@ -1625,6 +1977,12 @@
                   Subnet:
                     :rename: :subnets
                     :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: ModifyEventSubscription
   :method: :modify_event_subscription
@@ -1669,6 +2027,12 @@
                     :list: true
               Enabled:
                 :type: :boolean
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: ModifySnapshotCopyRetentionPeriod
   :method: :modify_snapshot_copy_retention_period
@@ -1747,6 +2111,12 @@
                 :children:
                   member:
                     :rename: :cluster_nodes
+                    :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
 - :name: PurchaseReservedNodeOffering
@@ -1859,6 +2229,12 @@
                   member:
                     :rename: :cluster_nodes
                     :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: ResetClusterParameterGroup
   :method: :reset_cluster_parameter_group
@@ -1932,6 +2308,8 @@
     - :string
     AutomatedSnapshotRetentionPeriod:
     - :integer
+    KmsKeyId:
+    - :string
   :outputs:
     :children:
       RestoreFromClusterSnapshotResult:
@@ -2001,6 +2379,12 @@
                   member:
                     :rename: :cluster_nodes
                     :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: RevokeClusterSecurityGroupIngress
   :method: :revoke_cluster_security_group_ingress
@@ -2027,11 +2411,31 @@
                   EC2SecurityGroup:
                     :rename: :ec2_security_groups
                     :list: true
+                    :children:
+                      Tags:
+                        :ignore: true
+                        :children:
+                          Tag:
+                            :rename: :tags
+                            :list: true
               IPRanges:
                 :ignore: true
                 :children:
                   IPRange:
                     :rename: :ip_ranges
+                    :list: true
+                    :children:
+                      Tags:
+                        :ignore: true
+                        :children:
+                          Tag:
+                            :rename: :tags
+                            :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
 - :name: RevokeSnapshotAccess
@@ -2082,6 +2486,12 @@
                 :type: :integer
               ElapsedTimeInSeconds:
                 :type: :integer
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
+                    :list: true
             :ignore: true
 - :name: RotateEncryptionKey
   :method: :rotate_encryption_key
@@ -2157,5 +2567,11 @@
                 :children:
                   member:
                     :rename: :cluster_nodes
+                    :list: true
+              Tags:
+                :ignore: true
+                :children:
+                  Tag:
+                    :rename: :tags
                     :list: true
             :ignore: true
