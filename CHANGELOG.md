@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticTranscoder - Updated `Client` to support the new
+  encryption features.
+
 * Feature - Waiters - Added support for version 2 of the waiters
   definition format.
 
