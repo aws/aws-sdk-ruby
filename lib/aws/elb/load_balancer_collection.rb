@@ -17,7 +17,7 @@ module AWS
     class LoadBalancerCollection
 
       include ListenerOpts
-      include Core::Collection::Simple
+      include Core::Collection::WithNextToken
 
       # Creates and returns a load balancer.  A load balancer requires:
       #
@@ -126,7 +126,8 @@ module AWS
       end
 
       protected
-      def _each_item options = {}, &block
+      def _each_item marker, options = {}, &block
+        options = options.merge(:marker => marker) if marker
         response = client.describe_load_balancers(options)
         response.data[:load_balancer_descriptions].each do |description|
 
@@ -139,6 +140,7 @@ module AWS
           yield(load_balancer)
 
         end
+        response[:next_marker]
       end
 
     end
