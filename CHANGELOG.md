@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2015-01-15)
+----------------------
+
 * Feature - AWS::EC2::Client - Updated to the latest 2014-10-01 API version.
 
 * Feature - AWS::ElasticTranscoder::Client - Added support for the new
