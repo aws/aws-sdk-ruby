@@ -83,7 +83,9 @@ module Aws
         part_number = 1
         parts = []
         while offset < size
-          parts << options.merge(
+          parts << {
+            bucket: options[:bucket],
+            key: options[:key],
             upload_id: upload_id,
             part_number: part_number,
             body: FilePart.new(
@@ -91,7 +93,7 @@ module Aws
               offset: offset,
               size: part_size(size, default_part_size, offset)
             )
-          )
+          }
           part_number += 1
           offset += default_part_size
         end

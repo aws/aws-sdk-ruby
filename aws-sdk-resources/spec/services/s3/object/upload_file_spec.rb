@@ -91,7 +91,7 @@ module Aws
             create_resp = double('create-resp', upload_id:'upload-id')
 
             expect(client).to receive(:create_multipart_upload).
-              with(bucket:'bucket', key:'key').
+              with(bucket:'bucket', key:'key', content_type:'text/plain').
               and_return(client.next_stub(:create_multipart_upload))
 
             (1..3).each do |n|
@@ -132,7 +132,7 @@ module Aws
                 ]
               }
             )
-            object.upload_file(seventeen_meg_file)
+            object.upload_file(seventeen_meg_file, content_type: 'text/plain')
           end
 
           it 'raises an error if the multipart threshold is too small' do

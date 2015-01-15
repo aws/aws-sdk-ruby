@@ -12,6 +12,11 @@ Unreleased Changes
   profile credentials would never load if the first attempt fails.
   See GitHub issue #193.
 
+* Issue - Aws::S3::Object - Resolved an issue with `#upload_file` where
+  options intended for `#initiate_multipart_upload` are being passed along
+  to individual `#upload_part` API calls. Fixes
+  [GitHub issue #684](https://github.com/aws/aws-sdk-ruby/issues/684).
+
 2.0.18 (2015-01-08)
 ------------------
 
