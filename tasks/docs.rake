@@ -15,7 +15,7 @@ namespace :docs do
 
   task :yard => [:update_readme, :update_region] do
     ENV['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSRubySDK/latest'
-    sh "yard"
+    sh "bundle exec yard"
   end
 
   desc "Builds a distributable documentation zip file at ./pkg/aws-docs.zip"
