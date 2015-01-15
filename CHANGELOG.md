@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.19 (2015-01-15)
 ------------------
 
 * Feature - Aws::ElasticTranscoder - Updated `Client` to support the new
