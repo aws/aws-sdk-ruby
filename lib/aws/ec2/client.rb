@@ -17,7 +17,7 @@ module AWS
     # Client class for Amazon Elastic Compute Cloud (EC2).
     class Client < Core::QueryClient
 
-      API_VERSION = '2014-09-01'
+      API_VERSION = '2014-10-01'
 
       signature_version :Version4, 'ec2'
 
@@ -104,8 +104,12 @@ module AWS
     end
 
     class Client::V20140901 < Client
-
       define_client_methods('2014-09-01')
+    end
+
+    class Client::V20141001 < Client
+
+      define_client_methods('2014-10-01')
 
       alias basic_copy_snapshot copy_snapshot
 

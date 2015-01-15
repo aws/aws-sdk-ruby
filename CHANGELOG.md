@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS::EC2 - Updated to the latest 2014-10-01 API version.
+
 * Issue - AWS::Redshift - Updated API model to support tagging. Without
   this update, tags are flattened in the response data.
   Resolves GitHub issue #685.
