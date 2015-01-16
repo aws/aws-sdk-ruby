@@ -78,7 +78,7 @@ module AWS
         options = @filters.merge(options)
 
         options[:marker] = next_token if next_token
-        options[:maxitems] = limit if limit
+        options[:max_items] = limit if limit
 
         resp = client.list_hosted_zones(options)
         resp.data[:hosted_zones].each do |details|

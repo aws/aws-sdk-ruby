@@ -11,6 +11,14 @@ Unreleased Changes
 * Issue - AWS::S3 - The `AWS::S3::S3Object#restore` method now passes through
   all additional options. Fixes #574.
 
+* Issue - AWS::Route53 - Resolved an issue that caused the following code
+  to raise an error:
+
+  ```ruby
+  AWS::Route53.new.hosted_zones.first
+  #=> was previously raising an ArgumentError
+  ```
+
 1.61.0 (2015-01-15)
 ----------------------
 
