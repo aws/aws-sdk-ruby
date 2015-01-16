@@ -28,6 +28,10 @@ module AWS
 
       include RegionDetection
 
+      def initialize(options = {})
+        super(options.merge(:http_continue_threshold => 0))
+      end
+
       signature_version :S3
 
       API_VERSION = '2006-03-01'

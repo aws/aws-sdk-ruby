@@ -308,25 +308,6 @@ module AWS
     #   true, AWS::DynamoDB::Errors::ProvisionedThroughputExceededException
     #   errors will be retried.
     #
-    # @option options [Float] :http_continue_timeout (1) The number of
-    #   seconds to wait for a "100-continue" response before sending the request
-    #   payload.  **This option has no effect unless the `:http_continue_threshold`
-    #   is configured to a positive integer and the payload exeedes the
-    #   threshold.** NOTE: currently there is a bug in Net::HTTP.
-    #   You must call `AWS.patch_net_http_100_continue!` for this feature to work.
-    #   Not supported in Ruby < 1.9.
-    #
-    # @option options [Integer,false] :http_continue_threshold (false) If a request
-    #   body exceedes the `:http_continue_threshold` size (in bytes), then
-    #   an "Expect" header will be added to the request with the value of
-    #   "100-continue".  This will cause the SDK to wait up to
-    #   `:http_continue_timeout` seconds for a 100 Contiue HTTP response
-    #   before sending the request payload.  By default, this feature
-    #   is disbled.  Set this option to a positive number of bytes
-    #   to enable 100 continues.  NOTE: currently there is a bug in Net::HTTP.
-    #   You must call `AWS.patch_net_http_100_continue!` for this feature to work.
-    #   Not supported in Ruby < 1.9.
-    #
     # @option options [Object] :http_handler (AWS::Core::Http::NetHttpHandler)
     #   The http handler that sends requests to AWS.
     #
@@ -662,11 +643,9 @@ module AWS
       visited
     end
 
-    # Patches Net::HTTP, fixing a bug in how it handles non 100-continue
-    # responses while waiting for a 100-continue.
+    # Now deprecated, as the SDK will always patch Net::HTTP when loaded.
+    # @api private
     def patch_net_http_100_continue!
-      require 'aws/core/http/patch'
-      AWS::Core::Http.patch_net_http_100_continue!
       nil
     end
 
@@ -714,3 +693,6 @@ unless SecureRandom.respond_to?(:uuid)
     end
   end
 end
+
+require 'aws/core/http/patch'
+AWS::Core::Http::Patches.apply!

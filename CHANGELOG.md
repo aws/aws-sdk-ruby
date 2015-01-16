@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - AWS::S3 - Backported the "Expect: 100-continue" patch from the v2
+  AWS SDK for Ruby and enabled expect 100 continue behavior by default
+  when working with Amazon S3. Fixes #241.
+
 1.61.0 (2015-01-15)
 ----------------------
 
