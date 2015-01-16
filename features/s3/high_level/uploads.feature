@@ -33,14 +33,14 @@ Feature: Uploads
     | TYPE        | NAME           | VALUE   |
     | http        | verb           | PUT     |
     | http        | path           | /foo    |
-    | header      | content-length | 5242880 |
+    | header      | content-length | 5242896 |
     | param       | partNumber     | 1       |
     | param_match | uploadId       | .+      |
     And a request should have been made like:
     | TYPE        | NAME           | VALUE   |
     | http        | verb           | PUT     |
     | http        | path           | /foo    |
-    | header      | content-length | 2097152 |
+    | header      | content-length | 2097136 |
     | param       | partNumber     | 2       |
     | param_match | uploadId       | .+      |
     And a request should have been made like:

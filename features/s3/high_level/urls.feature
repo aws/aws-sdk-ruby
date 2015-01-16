@@ -36,7 +36,7 @@ Feature: Pre-signed URLs
     Then the contents of object "foo" should eventually be "HELLO"
 
   Scenario: Pre-signed PUT with canned ACL
-    When I generate a pre-signed PUT URL for the object "food" with "public_read"
+    When I generate a pre-signed PUT URL for the object "food" with "public-read"
     And I use a regular HTTP client to PUT "yummy" to the URL
     Then the public contents of object "food" should eventually be "yummy"
 

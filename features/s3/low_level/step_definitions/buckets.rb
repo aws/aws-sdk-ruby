@@ -47,9 +47,8 @@ end
 
 Then /^I should follow redirects$/ do
   @response.retry_count.should be > 0
-  @response.http_request.host.should eq("#{@bucket_name}.s3-external-3.amazonaws.com")
+  @response.http_request.host.should eq("#{@bucket_name}.s3-eu-west-1.amazonaws.com")
 end
-
 
 When /^I call create_bucket( asynchronously)?$/ do |async|
   create_bucket_low_level(:async => !async.to_s.strip.empty?)

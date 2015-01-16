@@ -140,6 +140,7 @@ def requests_matching requests, table
             when 'host_match' then request.host =~ /^#{value}$/
             when 'path'       then request.path == value
             when 'path_match' then request.path =~ /^#{value}$/
+            when 'path_contains' then request.path =~ /#{value}/
             when 'uri'        then request.uri == value
             when 'uri_match'  then request.uri =~ /^#{value}$/
             when 'body'       then request.body == value

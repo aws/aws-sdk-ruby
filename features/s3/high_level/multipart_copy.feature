@@ -21,23 +21,23 @@ Feature: Multipart Copy Object
     When I copy the object from "foo" to "bar" with multipart
     # initiate multipart upload
     Then a request should have been made like:
-    | TYPE   | NAME                | VALUE        |
-    | http   | verb                | POST         |
-    | http   | uri                 | /bar?uploads |
+    | TYPE   | NAME                | VALUE         |
+    | http   | verb                | POST          |
+    | http   | uri                 | /bar?uploads= |
     # copy first part
     And a request should have been made like:
     | TYPE   | NAME                    | VALUE           |
     | http   | verb                    | PUT             |
     | http   | path                    | /bar            |
     | param  | partNumber              | 1               |
-    | header | x-amz-copy-source-range | bytes=0-5242879 |
+    | header | x-amz-copy-source-range | bytes=0-5242895 |
     # copy second part
     And a request should have been made like:
     | TYPE   | NAME                    | VALUE                 |
     | http   | verb                    | PUT                   |
     | http   | path                    | /bar                  |
     | param  | partNumber              | 2                     |
-    | header | x-amz-copy-source-range | bytes=5242880-7340031 |
+    | header | x-amz-copy-source-range | bytes=5242896-7340031 |
     # complete multipart upload
     And a request should have been made like:
     | TYPE   | NAME           | VALUE |

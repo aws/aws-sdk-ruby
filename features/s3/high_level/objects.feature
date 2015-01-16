@@ -191,7 +191,7 @@ Feature: CRUD Objects (High Level)
     | AWS::S3::Errors::PreconditionFailed | PreconditionFailed |
     | AWS::Errors::ClientError            | PreconditionFailed |
 
-  @read_object @wip @broken
+  @read_object
   Scenario Outline: Read an object if it has been modified recently
     Given I ask for the object with key "foo"
     And I write the string "HELLO" to it
@@ -307,15 +307,15 @@ Feature: CRUD Objects (High Level)
     | baz | bla   |
     When I copy the object "foo" in place without changing anything
     Then the object "foo" should read "a-string" with the metadata:
-    | key          | value                    |           |
-    | foo          | bar                      |           |
-    | baz          | bla                      |           |
+    | key          | value                    |                   |
+    | foo          | bar                      |                   |
+    | baz          | bla                      |                   |
     And a request should have been made like:
-    | TYPE         | NAME                     | VALUE     |
-    | http         | verb                     | PUT       |
-    | header_match | x-amz-copy-source        | [^/]+/foo |
-    | header       | x-amz-metadata-directive | COPY      |
-    | header       | x-amz-storage-class      | STANDARD  |
+    | TYPE         | NAME                     | VALUE             |
+    | http         | verb                     | PUT               |
+    | header_match | x-amz-copy-source        | /ruby-test-.*/foo |
+    | header       | x-amz-metadata-directive | COPY              |
+    | header       | x-amz-storage-class      | STANDARD          |
 
   @copy
   Scenario Outline: Change S3 storage class on an object
@@ -327,11 +327,11 @@ Feature: CRUD Objects (High Level)
     | key | value |
     | foo | bar   |
     And a request should have been made like:
-    | TYPE         | NAME                     | VALUE           |
-    | http         | verb                     | PUT             |
-    | header_match | x-amz-copy-source        | [^/]+/foo       |
-    | header       | x-amz-metadata-directive | COPY            |
-    | header       | x-amz-storage-class      | <storage class> |
+    | TYPE         | NAME                     | VALUE             |
+    | http         | verb                     | PUT               |
+    | header_match | x-amz-copy-source        | /ruby-test-.*/foo |
+    | header       | x-amz-metadata-directive | COPY              |
+    | header       | x-amz-storage-class      | <storage class>   |
 
   Examples:
     | action  | storage class      |

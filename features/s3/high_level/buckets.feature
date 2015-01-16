@@ -25,12 +25,12 @@ Feature: CRUD Buckets (High Level)
 
   @create_bucket
   Scenario: Create a bucket with a dns compat name with sub-domains
-    When I create a bucket named "ruby.integration.test"
+    When I create a bucket prefixed "ruby.integration.test"
     Then a request should have been made like:
-    | TYPE   | NAME | VALUE                  |
-    | http   | verb | PUT                    |
-    | http   | host | s3.amazonaws.com       |
-    | http   | path | /ruby.integration.test |
+    | TYPE   | NAME          | VALUE                  |
+    | http   | verb          | PUT                    |
+    | http   | host          | s3.amazonaws.com       |
+    | http   | path_contains | /ruby.integration.test |
 
   @get_bucket
   Scenario: Get a bucket

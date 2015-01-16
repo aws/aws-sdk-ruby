@@ -20,7 +20,13 @@ When(/^I generate a pre\-signed PUT URL for the object "(.*?)" with "(.*?)"$/) d
 end
 
 Then(/^the public contents of object "(.*?)" should eventually be "(.*?)"$/) do |key, data|
-  Net::HTTP.get_response(@bucket.objects[key].public_url).body.should eq(data)
+  url = @bucket.objects[key].public_url
+  body = nil
+  Net::HTTP.start(url.host) do |http|
+    resp = http.send_request("GET", url.request_uri)
+    body = resp.body
+  end
+  body.should eq(data)
 end
 
 When(/^I generate a pre\-signed PUT URL for the object "(.*?)" with content info$/) do |key|

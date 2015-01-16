@@ -24,6 +24,10 @@ When /^I ask for the bucket named "([^\"]*)"$/ do |bucket_name|
   @bucket = @s3.buckets[bucket_name]
 end
 
+When(/^I create a bucket prefixed "(.*?)"$/) do |prefix|
+  create_bucket_high_level(:name => "#{prefix}-#{Time.now.to_i}-#{rand(1000)}")
+end
+
 When /^I ask for the bucket named "([^\"]*)" using a symbol$/ do |bucket_name|
   @bucket = @s3.buckets[bucket_name.to_sym]
 end
