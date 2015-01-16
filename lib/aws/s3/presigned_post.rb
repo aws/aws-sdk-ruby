@@ -95,8 +95,9 @@ module AWS
                         :metadata,
                         :content_length,
                         :conditions,
-                        :ignore]
-      
+                        :ignore,
+                        :secure]
+
       # Creates a new presigned post object.
       #
       # @param [Bucket] bucket The bucket to which data can be uploaded

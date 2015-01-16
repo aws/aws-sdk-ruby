@@ -5,6 +5,9 @@ Unreleased Changes
   AWS SDK for Ruby and enabled expect 100 continue behavior by default
   when working with Amazon S3. Fixes #241.
 
+* Issue - AWS::S3 - Added `:secure` to the list of special fields for the
+  pre-signed post tool. Fixes #641.
+
 1.61.0 (2015-01-15)
 ----------------------
 
