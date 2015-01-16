@@ -421,11 +421,10 @@ module AWS
       # @since 1.7.2
       def restore options = {}
         options[:days] ||= 1
-
-        client.restore_object(
+        client.restore_object(options.merge({
           :bucket_name => bucket.name,
-          :key => key, :days => options[:days])
-
+          :key => key,
+        }))
         true
       end
 

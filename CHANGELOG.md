@@ -8,6 +8,9 @@ Unreleased Changes
 * Issue - AWS::S3 - Added `:secure` to the list of special fields for the
   pre-signed post tool. Fixes #641.
 
+* Issue - AWS::S3 - The `AWS::S3::S3Object#restore` method now passes through
+  all additional options. Fixes #574.
+
 1.61.0 (2015-01-15)
 ----------------------
 
