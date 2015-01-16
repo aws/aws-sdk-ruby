@@ -28,7 +28,7 @@ When /^I ask the client to list the multipart uploads in the bucket$/ do
 end
 
 Then /^the result should include the upload ID I initiated$/ do
-  eventually(10) do
+  eventually(20) do
     @result.uploads.map { |upload| upload.upload_id }.should include(@upload_id)
   end
 end
