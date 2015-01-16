@@ -100,7 +100,7 @@ module AWS
         let(:collection)      { hosted_zones }
         let(:client_method)   { :list_hosted_zones }
         let(:next_token_key)  { :marker }
-        let(:limit_key)       { :maxitems }
+        let(:limit_key)       { :max_items }
         let(:request_options) {{}}
 
         def stub_next_token(response, token)
