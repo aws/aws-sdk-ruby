@@ -12,8 +12,10 @@ module AWS
           elsif RUBY_VERSION >= '1.9.3'
             Net::HTTP.send(:include, Ruby_1_9_3)
           end
-          Net::HTTP.send(:alias_method, :old_transport_request, :transport_request)
-          Net::HTTP.send(:alias_method, :transport_request, :new_transport_request)
+          if RUBY_VERSION >= '1.9.3'
+            Net::HTTP.send(:alias_method, :old_transport_request, :transport_request)
+            Net::HTTP.send(:alias_method, :transport_request, :new_transport_request)
+          end
         end
 
         module Ruby_2
