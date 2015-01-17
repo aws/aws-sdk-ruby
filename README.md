@@ -28,7 +28,7 @@ same process; The v2 Ruby SDK uses a different namespace, making this possible.
     gem 'aws-sdk-v1'
 
 If you are currently using v1 of `aws-sdk` and you update to `aws-sdk-v1`, you
-may need to change how your require the Ruby SDK:
+may need to change how you require the Ruby SDK:
 
     require 'aws-sdk-v1' # not 'aws-sdk'
 
