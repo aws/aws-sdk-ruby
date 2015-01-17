@@ -298,8 +298,8 @@ module AWS
         end
 
         security_group_opts(options)
-
-        options[:client_token] = SecureRandom.uuid
+        
+        options[:client_token] = SecureRandom.uuid unless options[:client_token]
 
         resp = client.run_instances(options)
 

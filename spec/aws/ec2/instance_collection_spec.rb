@@ -94,6 +94,10 @@ module AWS
               collection.create(:image_id => "ami-123").config.should be(config)
             end
 
+            it 'should pass the client token' do
+              collection.create(:client_token => "client-token123").config.should be(config)
+            end
+
           end
 
           context 'multiple instances' do
