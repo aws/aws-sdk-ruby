@@ -210,7 +210,7 @@ Currently there are Resource-oriented interfaces for:
 * `Aws::SQS`
 * `Aws::SNS`
 * `Aws::Glacier`
-* `Aws::OpsWorld`
+* `Aws::OpsWorks`
 * `Aws::CloudFormation`
 
 ## REPL - AWS Interactive Console
