@@ -18,6 +18,7 @@ module Aws
       Errno::EHOSTUNREACH,
       Errno::ECONNREFUSED,
       Errno::EHOSTDOWN,
+      Errno::ENETUNREACH,
       SocketError,
       Timeout::Error,
       Non200Response,
