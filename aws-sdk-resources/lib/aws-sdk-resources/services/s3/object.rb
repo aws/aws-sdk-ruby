@@ -2,6 +2,8 @@ module Aws
   module S3
     class Object
 
+      alias size content_length
+
       # Generates a pre-signed URL for this object.
       #
       # @example Pre-signed GET URL, valid for one hour
