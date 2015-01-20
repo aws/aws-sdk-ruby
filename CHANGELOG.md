@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EMR - Added support for Custom security groups feature for
+  Amazon Elastic MapReduce (EMR). Custom security groups allow you to define
+  fine grain control over the security rules for your EMR cluster by specifying
+  your own Amazon EC2 security groups.
+
 * Feature - Aws::CognitoIdentity - Amazon Cognito now allows developers to save
   the association between IAM roles and an identity pool via the
   `#set_identity_pool_roles` API. Identity pools with IAM roles associated can
