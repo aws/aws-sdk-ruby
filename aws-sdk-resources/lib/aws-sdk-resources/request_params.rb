@@ -46,7 +46,6 @@ module Aws
 
       module Param
 
-        # @param [String] target
         def initialize(options)
           @target = options[:target].to_s
           @steps = []

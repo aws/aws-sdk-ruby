@@ -39,7 +39,7 @@ module Aws
     #
     # You can configure the maximum number of polling attempts, and the
     # delay (in seconds) between each polling attempt. You configure
-    # waiters by passing a block to #{wait_until}:
+    # waiters by passing a block to {#wait_until}:
     #
     #     # poll for ~25 seconds
     #     client.wait_until(...) do |w|
