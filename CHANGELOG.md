@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentity - Amazon Cognito now allows developers to save
+  the association between IAM roles and an identity pool via the
+  `#set_identity_pool_roles` API. Identity pools with IAM roles associated can
+  use the new `#get_credentials_for_identity` API to retrieve a set of temporary
+  credentials based on the associated roles. Roles associated to the pool must
+  be properly configured to work with Amazon Cognito. Developers can still use
+  the `#get_open_id_token` API in conjunction with STS
+  `#assume_role_with_web_identity` API if there are no roles associated with
+  their pool.
+
 * Feature - Aws::AutoScaling - Added support to `Aws::AutoScaling::Client` for
   classic link.
 
