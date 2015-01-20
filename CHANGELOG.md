@@ -1,3 +1,9 @@
+Unreleased Changes
+------------------
+
+* Feature - Aws::AutoScaling - Added support to `Aws::AutoScaling::Client` for
+  classic link.
+
 2.0.19 (2015-01-15)
 ------------------
 
