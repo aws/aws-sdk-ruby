@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.20 (2015-01-20)
 ------------------
 
 * Feature - Aws::EMR - Added support for Custom security groups feature for
