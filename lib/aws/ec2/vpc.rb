@@ -40,6 +40,8 @@ module AWS
 
       attribute :instance_tenancy, :static => true, :to_sym => true
 
+      attribute :is_default, :alias => :is_default?, :static => true, :boolean => true
+
       populates_from(:create_vpc) do |resp|
         resp.vpc if resp.vpc.vpc_id == vpc_id
       end
