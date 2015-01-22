@@ -23,7 +23,7 @@ module AWS
       # @return [String] Returns a URI escaped string.
       def escape value
         value = value.encode("UTF-8") if value.respond_to?(:encode)
-        CGI::escape(value.to_s).gsub('+', '%20').gsub('%7E', '~')
+        CGI::escape(value.to_s).gsub('+', '%20').gsub('%7E', '~').gsub('%2B', '%20')
       end
       module_function :escape
 
