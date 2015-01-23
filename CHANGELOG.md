@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Added missing paginator configuration for
+  `Aws::EC2::Client#describe_instances`. Fixes GitHub issue #196.
+
 2.0.20 (2015-01-20)
 ------------------
 
