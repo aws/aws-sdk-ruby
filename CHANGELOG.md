@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Response Stubbing - Resolved an issue where the response stubbing
+  plugin would not correctly populate the response target for streaming API calls,
+  such as `Aws::S3::Client#get_object`. Fixes GitHub issue #197.
+
 * Issue - Aws::EC2 - Added missing paginator configuration for
   `Aws::EC2::Client#describe_instances`. Fixes GitHub issue #196.
 

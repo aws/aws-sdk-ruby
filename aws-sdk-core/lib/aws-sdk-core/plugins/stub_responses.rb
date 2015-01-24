@@ -54,7 +54,25 @@ module Aws
             resp.error = stub.new
           else
             resp.data = stub
+            stub_http_body(resp) if streaming?(resp)
           end
+        end
+
+        def streaming?(resp)
+          if output = resp.context.operation.output
+            payload = output.payload_member
+            payload && payload.definition['streaming'] == true
+          else
+            false
+          end
+        end
+
+        def stub_http_body(resp)
+          payload = resp.context.operation.output.payload
+          body = resp.context.http_response.body
+          body.write(resp.data[payload])
+          body.rewind if body.respond_to?(:rewind)
+          resp.data[payload] = body
         end
 
       end

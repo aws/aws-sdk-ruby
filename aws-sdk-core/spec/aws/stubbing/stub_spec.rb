@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'stringio'
 
 module Aws
   module ClientStubs
@@ -176,6 +177,19 @@ module Aws
             expect(r.parents.map(&:full_name).map(&:first)).to eq(['John', 'Jane'])
           end
 
+        end
+
+        describe 'streaming resposnes' do
+
+          it 'stubs the HTTP response target when with streaming APIs' do
+            s3 = S3::Client.new(stub_responses: true)
+            s3.stub_responses(:get_object, { body: 'data' })
+            io = StringIO.new
+            resp = s3.get_object(bucket:'bucket', key:'key', response_target: io)
+            expect(resp.body.read).to eq('data')
+            expect(resp.body).to be(io)
+            expect(resp.context.http_response.body).to be(io)
+          end
         end
       end
     end
