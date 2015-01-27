@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ImportExport - Added support for the new get shipping
+  label API operation.
+
 * Feature - Aws::DynamoDB - Added support for online indexing.
 
 * Issue - Response Stubbing - Resolved an issue where the response stubbing

@@ -40,6 +40,10 @@
         {
           "shape":"InvalidAccessKeyIdException",
           "exception":true
+        },
+        {
+          "shape":"InvalidVersionException",
+          "exception":true
         }
       ]
     },
@@ -57,10 +61,6 @@
       "errors":[
         {
           "shape":"MissingParameterException",
-          "exception":true
-        },
-        {
-          "shape":"InvalidParameterException",
           "exception":true
         },
         {
@@ -110,6 +110,60 @@
         {
           "shape":"MalformedManifestException",
           "exception":true
+        },
+        {
+          "shape":"CreateJobQuotaExceededException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidJobIdException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidVersionException",
+          "exception":true
+        }
+      ]
+    },
+    "GetShippingLabel":{
+      "name":"GetShippingLabel",
+      "http":{
+        "method":"POST",
+        "requestUri":"/?Operation=GetShippingLabel"
+      },
+      "input":{"shape":"GetShippingLabelInput"},
+      "output":{
+        "shape":"GetShippingLabelOutput",
+        "resultWrapper":"GetShippingLabelResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidJobIdException",
+          "exception":true
+        },
+        {
+          "shape":"ExpiredJobIdException",
+          "exception":true
+        },
+        {
+          "shape":"CanceledJobIdException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidAccessKeyIdException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidAddressException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidVersionException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidParameterException",
+          "exception":true
         }
       ]
     },
@@ -140,6 +194,10 @@
         {
           "shape":"InvalidAccessKeyIdException",
           "exception":true
+        },
+        {
+          "shape":"InvalidVersionException",
+          "exception":true
         }
       ]
     },
@@ -161,6 +219,10 @@
         },
         {
           "shape":"InvalidAccessKeyIdException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidVersionException",
           "exception":true
         }
       ]
@@ -240,12 +302,31 @@
         {
           "shape":"MalformedManifestException",
           "exception":true
+        },
+        {
+          "shape":"UnableToUpdateJobIdException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidVersionException",
+          "exception":true
         }
       ]
     }
   },
   "shapes":{
-    "AwsShippingAddress":{"type":"string"},
+    "APIVersion":{"type":"string"},
+    "Artifact":{
+      "type":"structure",
+      "members":{
+        "Description":{"shape":"Description"},
+        "URL":{"shape":"URL"}
+      }
+    },
+    "ArtifactList":{
+      "type":"list",
+      "member":{"shape":"Artifact"}
+    },
     "BucketPermissionException":{
       "type":"structure",
       "members":{
@@ -257,7 +338,8 @@
       "type":"structure",
       "required":["JobId"],
       "members":{
-        "JobId":{"shape":"JobId"}
+        "JobId":{"shape":"JobId"},
+        "APIVersion":{"shape":"APIVersion"}
       }
     },
     "CancelJobOutput":{
@@ -285,7 +367,8 @@
         "JobType":{"shape":"JobType"},
         "Manifest":{"shape":"Manifest"},
         "ManifestAddendum":{"shape":"ManifestAddendum"},
-        "ValidateOnly":{"shape":"ValidateOnly"}
+        "ValidateOnly":{"shape":"ValidateOnly"},
+        "APIVersion":{"shape":"APIVersion"}
       }
     },
     "CreateJobOutput":{
@@ -293,14 +376,22 @@
       "members":{
         "JobId":{"shape":"JobId"},
         "JobType":{"shape":"JobType"},
-        "AwsShippingAddress":{"shape":"AwsShippingAddress"},
         "Signature":{"shape":"Signature"},
         "SignatureFileContents":{"shape":"SignatureFileContents"},
-        "WarningMessage":{"shape":"WarningMessage"}
+        "WarningMessage":{"shape":"WarningMessage"},
+        "ArtifactList":{"shape":"ArtifactList"}
       }
+    },
+    "CreateJobQuotaExceededException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
     },
     "CreationDate":{"type":"timestamp"},
     "CurrentManifest":{"type":"string"},
+    "Description":{"type":"string"},
     "ErrorCount":{"type":"integer"},
     "ErrorMessage":{"type":"string"},
     "ExpiredJobIdException":{
@@ -310,11 +401,38 @@
       },
       "exception":true
     },
+    "GenericString":{"type":"string"},
+    "GetShippingLabelInput":{
+      "type":"structure",
+      "required":["jobIds"],
+      "members":{
+        "jobIds":{"shape":"JobIdList"},
+        "name":{"shape":"GenericString"},
+        "company":{"shape":"GenericString"},
+        "phoneNumber":{"shape":"GenericString"},
+        "country":{"shape":"GenericString"},
+        "stateOrProvince":{"shape":"GenericString"},
+        "city":{"shape":"GenericString"},
+        "postalCode":{"shape":"GenericString"},
+        "street1":{"shape":"GenericString"},
+        "street2":{"shape":"GenericString"},
+        "street3":{"shape":"GenericString"},
+        "APIVersion":{"shape":"GenericString"}
+      }
+    },
+    "GetShippingLabelOutput":{
+      "type":"structure",
+      "members":{
+        "ShippingLabelURL":{"shape":"GenericString"},
+        "Warning":{"shape":"GenericString"}
+      }
+    },
     "GetStatusInput":{
       "type":"structure",
       "required":["JobId"],
       "members":{
-        "JobId":{"shape":"JobId"}
+        "JobId":{"shape":"JobId"},
+        "APIVersion":{"shape":"APIVersion"}
       }
     },
     "GetStatusOutput":{
@@ -322,7 +440,6 @@
       "members":{
         "JobId":{"shape":"JobId"},
         "JobType":{"shape":"JobType"},
-        "AwsShippingAddress":{"shape":"AwsShippingAddress"},
         "LocationCode":{"shape":"LocationCode"},
         "LocationMessage":{"shape":"LocationMessage"},
         "ProgressCode":{"shape":"ProgressCode"},
@@ -335,7 +452,8 @@
         "Signature":{"shape":"Signature"},
         "SignatureFileContents":{"shape":"Signature"},
         "CurrentManifest":{"shape":"CurrentManifest"},
-        "CreationDate":{"shape":"CreationDate"}
+        "CreationDate":{"shape":"CreationDate"},
+        "ArtifactList":{"shape":"ArtifactList"}
       }
     },
     "InvalidAccessKeyIdException":{
@@ -387,6 +505,13 @@
       },
       "exception":true
     },
+    "InvalidVersionException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "IsCanceled":{"type":"boolean"},
     "IsTruncated":{"type":"boolean"},
     "Job":{
@@ -399,6 +524,10 @@
       }
     },
     "JobId":{"type":"string"},
+    "JobIdList":{
+      "type":"list",
+      "member":{"shape":"GenericString"}
+    },
     "JobType":{
       "type":"string",
       "enum":[
@@ -414,7 +543,8 @@
       "type":"structure",
       "members":{
         "MaxJobs":{"shape":"MaxJobs"},
-        "Marker":{"shape":"Marker"}
+        "Marker":{"shape":"Marker"},
+        "APIVersion":{"shape":"APIVersion"}
       }
     },
     "ListJobsOutput":{
@@ -480,7 +610,15 @@
     "SignatureFileContents":{"type":"string"},
     "Success":{"type":"boolean"},
     "TrackingNumber":{"type":"string"},
+    "URL":{"type":"string"},
     "UnableToCancelJobIdException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
+    "UnableToUpdateJobIdException":{
       "type":"structure",
       "members":{
         "message":{"shape":"ErrorMessage"}
@@ -499,14 +637,16 @@
         "JobId":{"shape":"JobId"},
         "Manifest":{"shape":"Manifest"},
         "JobType":{"shape":"JobType"},
-        "ValidateOnly":{"shape":"ValidateOnly"}
+        "ValidateOnly":{"shape":"ValidateOnly"},
+        "APIVersion":{"shape":"APIVersion"}
       }
     },
     "UpdateJobOutput":{
       "type":"structure",
       "members":{
         "Success":{"shape":"Success"},
-        "WarningMessage":{"shape":"WarningMessage"}
+        "WarningMessage":{"shape":"WarningMessage"},
+        "ArtifactList":{"shape":"ArtifactList"}
       }
     },
     "ValidateOnly":{"type":"boolean"},
