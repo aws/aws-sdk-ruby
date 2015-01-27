@@ -6,7 +6,17 @@
         "resource": {
           "type": "DBInstance",
           "identifiers": [
-            { "target": "Id", "sourceType": "requestParameter", "source": "DBInstanceIdentifier" }
+            { "target": "Id", "source": "requestParameter", "path": "DBInstanceIdentifier" }
+          ]
+        }
+      }
+    },
+    "has": {
+      "DBInstance": {
+        "resource": {
+          "type": "DBInstance",
+          "identifiers": [
+            { "target": "Id", "source": "input" }
           ]
         }
       }
@@ -17,7 +27,7 @@
         "resource": {
           "type": "DBInstance",
           "identifiers": [
-            { "target": "Id", "sourceType": "responsePath", "source": "DBInstances[].DBInstanceIdentifier" }
+            { "target": "Id", "source": "response", "path": "DBInstances[].DBInstanceIdentifier" }
           ]
         }
       }
@@ -33,25 +43,25 @@
         "request": {
           "operation": "DescribeDBInstances",
           "params": [
-            { "target": "DBInstanceIdentifier", "sourceType": "identifier", "source": "Id" }
+            { "target": "DBInstanceIdentifier", "source": "identifier", "name": "Id" }
           ]
         },
         "path": "DBInstances[0]"
       },
       "actions": {
-        "Modify": {
-          "request": {
-            "operation": "ModifyDBInstance",
-            "params": [
-              { "target": "DBInstanceIdentifier", "sourceType": "identifier", "source": "Id" }
-            ]
-          }
-        },
         "Delete": {
           "request": {
             "operation": "DeleteDBInstance",
             "params": [
-              { "target": "DBInstanceIdentifier", "sourceType": "identifier", "source": "Id" }
+              { "target": "DBInstanceIdentifier", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
+        "Modify": {
+          "request": {
+            "operation": "ModifyDBInstance",
+            "params": [
+              { "target": "DBInstanceIdentifier", "source": "identifier", "name": "Id" }
             ]
           }
         }
