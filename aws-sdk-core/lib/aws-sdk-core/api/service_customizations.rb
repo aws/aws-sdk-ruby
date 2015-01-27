@@ -93,6 +93,10 @@ module Aws
         end
       end
 
+      customize 'lambda' do
+        reshape 'Timestamp', 'type' => 'timestamp'
+      end
+
       customize 'route53' do
         add_plugin 'Aws::Plugins::Route53IdFix'
         reshape 'PageMaxItems', 'type' => 'integer'
