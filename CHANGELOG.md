@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.21 (2015-01-27)
 ------------------
 
 * Feature - Aws::ImportExport - Added support for the new get shipping
