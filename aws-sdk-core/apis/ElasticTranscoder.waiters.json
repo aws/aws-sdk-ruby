@@ -1,15 +1,29 @@
 {
+  "version": 2,
   "waiters": {
     "JobComplete": {
+      "delay": 30,
       "operation": "ReadJob",
-      "success_type": "output",
-      "success_path": "Job.Status",
-      "interval": 30,
-      "max_attempts": 120,
-      "success_value": "Complete",
-      "failure_value": [
-        "Canceled",
-        "Error"
+      "maxAttempts": 120,
+      "acceptors": [
+        {
+          "expected": "Complete",
+          "matcher": "path",
+          "state": "success",
+          "argument": "Job.Status"
+        },
+        {
+          "expected": "Canceled",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "Job.Status"
+        },
+        {
+          "expected": "Error",
+          "matcher": "path",
+          "state": "failure",
+          "argument": "Job.Status"
+        }
       ]
     }
   }

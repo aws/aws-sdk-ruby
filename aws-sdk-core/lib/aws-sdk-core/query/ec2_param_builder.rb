@@ -9,7 +9,7 @@ module Aws
         @params = param_list
       end
 
-      # @param [ParamList]
+      # @return [ParamList]
       attr_reader :params
 
       # Serializes the `params` hash onto {#param_list} following the rules

@@ -93,6 +93,10 @@ module Aws
         end
       end
 
+      customize 'lambda' do
+        reshape 'Timestamp', 'type' => 'timestamp'
+      end
+
       customize 'route53' do
         add_plugin 'Aws::Plugins::Route53IdFix'
         reshape 'PageMaxItems', 'type' => 'integer'
@@ -109,11 +113,11 @@ module Aws
         add_plugin 'Aws::Plugins::S3SseCpk'
         add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
         add_plugin 'Aws::Plugins::S3RequestSigner'
-        defs = client_class.waiters.instance_variable_get("@definitions")
-        defs[:bucket_exists]['ignore_errors'] = ['NotFound']
-        defs[:object_exists]['ignore_errors'] = ['NotFound']
-        defs[:bucket_not_exists]['success_value'] = 'NotFound'
-        defs[:object_not_exists]['success_value'] = 'NotFound'
+
+        # required for the GetBucketLocation fix to work, disabled normal
+        # parsing of the output
+        client_class.api.operation(:get_bucket_location).
+          instance_variable_set("@output", nil)
       end
 
       customize 'sqs' do

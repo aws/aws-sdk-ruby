@@ -37,18 +37,20 @@ end
 
 # Generates an HTML table of supported services that is used by README.md
 def supported_services_table
-  table = [
-    # header row
-    ['Service Name', 'Service Class', 'API Version']
-  ]
 
   # insert one row for each supported service
+  table = []
   Aws::SERVICE_MODULE_NAMES.each do |svc_name|
     client_class = Aws.const_get(svc_name).const_get(:Client)
     full_name = client_class.api.metadata('serviceFullName')
     version = client_class.api.version
     table << [full_name, svc_name, version]
   end
+
+  table = table.sort_by(&:first)
+
+  # header row
+  table.unshift(['Service Name', 'Service Class', 'API Version'])
 
   # compute the width of each column by scanning for longest values
   column_width = lambda do |col|

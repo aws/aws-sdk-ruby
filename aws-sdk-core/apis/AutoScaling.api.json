@@ -937,12 +937,12 @@
     "BlockDeviceEbsIops":{
       "type":"integer",
       "min":100,
-      "max":4000
+      "max":30000
     },
     "BlockDeviceEbsVolumeSize":{
       "type":"integer",
       "min":1,
-      "max":1024
+      "max":16384
     },
     "BlockDeviceEbsVolumeType":{
       "type":"string",
@@ -962,6 +962,10 @@
     "BlockDeviceMappings":{
       "type":"list",
       "member":{"shape":"BlockDeviceMapping"}
+    },
+    "ClassicLinkVPCSecurityGroups":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen255"}
     },
     "CompleteLifecycleActionAnswer":{
       "type":"structure",
@@ -1017,6 +1021,8 @@
         "ImageId":{"shape":"XmlStringMaxLen255"},
         "KeyName":{"shape":"XmlStringMaxLen255"},
         "SecurityGroups":{"shape":"SecurityGroups"},
+        "ClassicLinkVPCId":{"shape":"XmlStringMaxLen255"},
+        "ClassicLinkVPCSecurityGroups":{"shape":"ClassicLinkVPCSecurityGroups"},
         "UserData":{"shape":"XmlStringUserData"},
         "InstanceId":{"shape":"XmlStringMaxLen16"},
         "InstanceType":{"shape":"XmlStringMaxLen255"},
@@ -1383,6 +1389,8 @@
         "ImageId":{"shape":"XmlStringMaxLen255"},
         "KeyName":{"shape":"XmlStringMaxLen255"},
         "SecurityGroups":{"shape":"SecurityGroups"},
+        "ClassicLinkVPCId":{"shape":"XmlStringMaxLen255"},
+        "ClassicLinkVPCSecurityGroups":{"shape":"ClassicLinkVPCSecurityGroups"},
         "UserData":{"shape":"XmlStringUserData"},
         "InstanceType":{"shape":"XmlStringMaxLen255"},
         "KernelId":{"shape":"XmlStringMaxLen255"},

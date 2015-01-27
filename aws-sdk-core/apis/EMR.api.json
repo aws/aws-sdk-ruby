@@ -594,7 +594,11 @@
         "Ec2KeyName":{"shape":"String"},
         "Ec2SubnetId":{"shape":"String"},
         "Ec2AvailabilityZone":{"shape":"String"},
-        "IamInstanceProfile":{"shape":"String"}
+        "IamInstanceProfile":{"shape":"String"},
+        "EmrManagedMasterSecurityGroup":{"shape":"String"},
+        "EmrManagedSlaveSecurityGroup":{"shape":"String"},
+        "AdditionalMasterSecurityGroups":{"shape":"StringList"},
+        "AdditionalSlaveSecurityGroups":{"shape":"StringList"}
       }
     },
     "ErrorCode":{
@@ -941,7 +945,11 @@
         "KeepJobFlowAliveWhenNoSteps":{"shape":"Boolean"},
         "TerminationProtected":{"shape":"Boolean"},
         "HadoopVersion":{"shape":"XmlStringMaxLen256"},
-        "Ec2SubnetId":{"shape":"XmlStringMaxLen256"}
+        "Ec2SubnetId":{"shape":"XmlStringMaxLen256"},
+        "EmrManagedMasterSecurityGroup":{"shape":"XmlStringMaxLen256"},
+        "EmrManagedSlaveSecurityGroup":{"shape":"XmlStringMaxLen256"},
+        "AdditionalMasterSecurityGroups":{"shape":"SecurityGroupsList"},
+        "AdditionalSlaveSecurityGroups":{"shape":"SecurityGroupsList"}
       }
     },
     "JobFlowInstancesDetail":{
@@ -1135,6 +1143,10 @@
         "Path":{"shape":"XmlString"},
         "Args":{"shape":"XmlStringList"}
       }
+    },
+    "SecurityGroupsList":{
+      "type":"list",
+      "member":{"shape":"XmlStringMaxLen256"}
     },
     "SetTerminationProtectionInput":{
       "type":"structure",

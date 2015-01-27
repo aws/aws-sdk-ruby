@@ -180,7 +180,7 @@ module Aws
       match('#/resources/(\w+)/load') do |context|
         v = OperationValidator.new(context)
         v.validate_request do
-          v.validate_param_source_type_not_used('dataMember')
+          v.validate_param_source_type_not_used('data')
           #v.validate_path(origin: :response, target: :self)
         end
         v.validate_path_set
@@ -214,7 +214,7 @@ module Aws
         end
       end
 
-      match('#/resources/(\w+)/belongsTo/\w+') do |context, matches|
+      match('#/resources/(\w+)/has/\w+') do |context, matches|
         v = OperationValidator.new(context)
         v.validate_request_not_set
         v.validate_resource do
@@ -232,10 +232,6 @@ module Aws
           # identifier sources must be singular
           # path must be singular if given
         end
-      end
-
-      match('#/resources/(\w+)/subResources') do |context|
-        # TODO : validate subResources
       end
 
     end

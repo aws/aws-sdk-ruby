@@ -10,7 +10,6 @@ module Aws
       def initialize(operation, options)
         @operation = operation
         @options = options
-        reject_limit_param(options)
       end
 
       # @return [Enumerator<Resource>]
@@ -22,6 +21,7 @@ module Aws
         end
       end
 
+      # @api private
       # @return [Enumerator<Batch>]
       def batches(&block)
         @operation.batches(@options)
@@ -38,28 +38,6 @@ module Aws
       # @return [Collection]
       def limit(limit)
         self.class.new(@operation, @options.merge(limit: limit))
-      end
-
-      # Specifies max size of each batch. Some services may return fewer
-      # than `size` number of items per request.
-      #
-      # @example Enumerate the collection in batches with a max size
-      #
-      #   collection.batch_size(10).batches.each do |batch|
-      #     # batch has at most 10 items
-      #   end
-      #
-      # @param [Integer] size
-      # @return [Collection]
-      def batch_size(size)
-        if limit_key
-          self.class.new(@operation, @options.merge(batch_size: size))
-        else
-          resource = resource_class.name
-          method_name = @operation.request.method_name
-          msg = "batch size not supported by #{resource}##{method_name}"
-          raise NotImplementedError, msg
-        end
       end
 
       # Returns the first resource from the collection.
@@ -107,7 +85,6 @@ module Aws
         parts = {}
         parts[:type] = resource_class.name
         parts[:limit] = @options[:limit]
-        parts[:batch_size] = @options[:batch_size] if limit_key
         parts[:params] = @options[:params] || {}
         parts = parts.inject("") {|s,(k,v)| s << " #{k}=#{v.inspect}" }
         ['#<', self.class.name, parts, '>'].join
@@ -118,14 +95,6 @@ module Aws
       # @api private
       def limit_key
         @operation.limit_key
-      end
-
-      def reject_limit_param(options)
-        if options[:params] && options[:params][limit_key]
-          msg = "invalid option :#{limit_key}, call #limit or #batch_size "
-          msg << "on the returned Aws::Resources::Collection instead"
-          raise ArgumentError, msg
-        end
       end
 
       def resource_class

@@ -61,7 +61,7 @@ module Aws
               builder: Builder.new(
                 resource_class: resource_class,
                 sources: [
-                  BuilderSources::ResponsePath.new('path[]', 'id')
+                  BuilderSources::ResponsePath.new(source:'path[]', target:'id')
                 ]
               )
             ))

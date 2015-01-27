@@ -124,7 +124,6 @@ module Aws
         private
 
         def all_batches(options, &block)
-          options = apply_batch_size(options)
           @request.call(options).each do |response|
             yield(@builder.build(options.merge(response:response)))
           end
@@ -143,18 +142,9 @@ module Aws
           end
         end
 
-        def apply_batch_size(options)
-          if batch_size = options[:batch_size]
-            params = (options[:params] || {}).merge(limit_key => batch_size)
-            options.merge(params: params)
-          else
-            options
-          end
-        end
-
       end
 
-      class BelongsToOperation < Base
+      class HasOperation < Base
 
         # @option options [required, Builder] :builder
         def initialize(options = {})

@@ -6,7 +6,7 @@
         "request": {
           "operation": "OperationName",
           "params": [
-            { "target":"ResourceId", "sourceType":"dataMember", "source":"Id" }
+            { "target":"ResourceId", "source":"data", "path":"Id" }
           ]
         },
         "path": "$"

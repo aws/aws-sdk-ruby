@@ -1,3 +1,120 @@
+Unreleased Changes
+------------------
+
+2.0.21 (2015-01-27)
+------------------
+
+* Feature - Aws::ImportExport - Added support for the new get shipping
+  label API operation.
+
+* Feature - Aws::DynamoDB - Added support for online indexing.
+
+* Issue - Response Stubbing - Resolved an issue where the response stubbing
+  plugin would not correctly populate the response target for streaming API calls,
+  such as `Aws::S3::Client#get_object`. Fixes GitHub issue #197.
+
+* Issue - Aws::EC2 - Added missing paginator configuration for
+  `Aws::EC2::Client#describe_instances`. Fixes GitHub issue #196.
+
+2.0.20 (2015-01-20)
+------------------
+
+* Feature - Aws::EMR - Added support for Custom security groups feature for
+  Amazon Elastic MapReduce (EMR). Custom security groups allow you to define
+  fine grain control over the security rules for your EMR cluster by specifying
+  your own Amazon EC2 security groups.
+
+* Feature - Aws::CognitoIdentity - Amazon Cognito now allows developers to save
+  the association between IAM roles and an identity pool via the
+  `#set_identity_pool_roles` API. Identity pools with IAM roles associated can
+  use the new `#get_credentials_for_identity` API to retrieve a set of temporary
+  credentials based on the associated roles. Roles associated to the pool must
+  be properly configured to work with Amazon Cognito. Developers can still use
+  the `#get_open_id_token` API in conjunction with STS
+  `#assume_role_with_web_identity` API if there are no roles associated with
+  their pool.
+
+* Feature - Aws::AutoScaling - Added support to `Aws::AutoScaling::Client` for
+  classic link.
+
+2.0.19 (2015-01-15)
+------------------
+
+* Feature - Aws::ElasticTranscoder - Updated `Client` to support the new
+  encryption features.
+
+* Feature - Waiters - Added support for version 2 of the waiters
+  definition format.
+
+* Issue - Pagingation - Resolved an issue where an empty hashes or arrays
+  were being treated as valid next tokens for paging response. This appears
+  to only have affected `Aws::DynamoDB::Client#batch_get_item`.
+
+* Issue - Instance Profile Credentials - Resolved an issue where instance
+  profile credentials would never load if the first attempt fails.
+  See GitHub issue #193.
+
+* Issue - Aws::S3::Object - Resolved an issue with `#upload_file` where
+  options intended for `#initiate_multipart_upload` are being passed along
+  to individual `#upload_part` API calls. Fixes
+  [GitHub issue #684](https://github.com/aws/aws-sdk-ruby/issues/684).
+
+2.0.18 (2015-01-08)
+------------------
+
+* Feature - Aws::CloudHsm - Added support for the new Amazon CloudHSM
+  service.
+
+* Feature - Aws::EC2 - Added support for the new Amazon EC2 Container
+  Service.
+
+* Feature - Aws::EC2 - Added support for Amazon EC2 classic link.
+
+* Feature - Aws::RDS - Updated to the latest API version, 2014-10-31, adding
+  support for the new `#describe_pending_maintenance_actions` operation to
+  `Aws::RDS::Client`.
+
+* Issue - Aws::S3 - Resolved an issue with `Aws::S3::Client#get_bucket_location`.
+  Fixes GitHub issue #185.
+
+* Upgrading - Aws::IAM - Moved `Aws::Role#update_assume_role_policy` to a
+  new resource class.
+
+  ```ruby
+  iam = Aws::IAM::Resource.new
+
+  # old
+  iam.role('name').update_assume_role_policy(policy_document:'...')
+
+  # new
+  iam.role('name').assume_role_policy.update(policy_document:'...')
+  ```
+
+* Upgrading - Aws::IAM - Renamed two methods on `Aws::IAM::MFADevice`.
+
+  * `#enable` -> `#associate`
+  * `#disable` -> `#disassociate`
+
+* Upgrading - Aws::IAM - Removed `Aws::IAM::AccountSummary`. Calling
+  `Aws::IAM::Resource#create_account_summary` no longer returns a resource
+  object.
+
+  ```ruby
+  iam = Aws::IAM::Resource.new
+
+  # old
+  iam.create_account_alias(account_alias:'alias')
+  iam.account_alias('alias').delete
+
+  # new (no need to specify the alias when deleting)
+  iam.create_account_alias(account_alias:'alias')
+  iam.delete_account_alias
+  ```
+
+  Also, the `Aws::IAM::Resource#account_aliases` method has been removed.
+  There is no replacement. IAM does not permit more than one account
+  alias.
+
 2.0.17 (2014-12-22)
 ------------------
 

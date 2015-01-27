@@ -28,7 +28,7 @@ module Aws
 
         it 'returns an array of builder sources' do
           sources = [
-            BuilderSources::Identifier.new('source', 'target')
+            BuilderSources::Identifier.new(source:'source', target:'target')
           ]
           builder = Builder.new(sources:sources)
           expect(builder.sources).to be(sources)
@@ -42,7 +42,7 @@ module Aws
           builder = Builder.new(
             resource_class: resource_class,
             sources: [
-              BuilderSources::ResponsePath.new('names[]', 'name')
+              BuilderSources::ResponsePath.new(source:'names[]', target:'name')
             ]
           )
           expect(builder.plural?).to be(true)
@@ -52,7 +52,7 @@ module Aws
           builder = Builder.new(
             resource_class: resource_class,
             sources: [
-              BuilderSources::ResponsePath.new('name', 'name')
+              BuilderSources::ResponsePath.new(source:'name', target:'name')
             ]
           )
           expect(builder.plural?).to be(false)
@@ -70,7 +70,7 @@ module Aws
 
         it 'extracts resource identifiers from mixed sources' do
           parent = double('resource-parent',
-            identifiers: { id: 'parent-id' },
+            id: 'parent-id',
             data: { 'member' => 'parent-member' },
             client: client,
           )
@@ -87,10 +87,10 @@ module Aws
             client: client,
           ).and_return(resource)
           builder = Builder.new(resource_class:resource_class, sources:[
-            BuilderSources::Identifier.new('id', 'parent_id'),
-            BuilderSources::DataMember.new('member', 'parent_member'),
-            BuilderSources::RequestParameter.new('param', 'request_param'),
-            BuilderSources::ResponsePath.new('path', 'response_path'),
+            BuilderSources::Identifier.new(source:'id', target:'parent_id'),
+            BuilderSources::DataMember.new(source:'member', target:'parent_member'),
+            BuilderSources::RequestParameter.new(source:'param', target:'request_param'),
+            BuilderSources::ResponsePath.new(source:'path', target:'response_path'),
           ])
           expect(builder.build(client:client,resource:parent,response:response)).to be(resource)
         end
@@ -102,7 +102,7 @@ module Aws
           )
           resource_class = new_resource_class(identifiers:[:id])
           builder = Builder.new(resource_class:resource_class, sources:[
-            BuilderSources::DataMember.new('ids[]', 'id'),
+            BuilderSources::DataMember.new(source:'ids[]', target:'id'),
           ])
           result = builder.build(client:client,resource:parent)
           expect(result).to be_a(Batch)

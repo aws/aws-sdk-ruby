@@ -31,7 +31,7 @@ module Aws
       end
 
       def req_params(options)
-        RequestParams::ParamsHash.new(@params).build(options)
+        RequestParams::ParamHash.new(@params).build(options)
       end
 
     end

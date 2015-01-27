@@ -3,13 +3,18 @@ require 'spec_helper'
 module Aws
   module Resources
     module BuilderSources
-      describe Base do
+      describe Source do
+
+        let(:klass) { Class.new { include Source } }
 
         describe '#source' do
 
           it 'returns the given source' do
-            source = Base.new('source-expression', :target)
-            expect(source.source).to eq('source-expression')
+            source = klass.new({
+              source: 'source-expression',
+              target: 'target'
+            }).source
+            expect(source).to eq('source-expression')
           end
 
         end
@@ -17,13 +22,11 @@ module Aws
         describe '#target' do
 
           it 'returns the target' do
-            source = Base.new('source-expression', :target)
-            expect(source.target).to eq(:target)
-          end
-
-          it 'symbolizes the target' do
-            source = Base.new('source-expression', 'target')
-            expect(source.target).to eq(:target)
+            target = klass.new({
+              source: 'source-expression',
+              target: 'target'
+            }).target
+            expect(target).to eq(:target)
           end
 
         end
@@ -31,24 +34,27 @@ module Aws
         describe '#plural?' do
 
           it 'returns true if the source expression has an expansion' do
-            source = Base.new('source[]', :target)
-            expect(source.plural?).to be(true)
+            plural = klass.new({
+              source: 'plura.path[].expression',
+              target: 'target'
+            }).plural?
+            expect(plural).to be(true)
           end
 
           it 'returns false if the source expression has no expansion' do
-            source = Base.new('source', :target)
-            expect(source.plural?).to be(false)
+            plural = klass.new({
+              source: 'source',
+              target: 'target',
+            }).plural?
+            expect(plural).to be(false)
           end
 
-        end
-
-        describe '#extract' do
-
-          it 'is not defined in the base class' do
-            source = Base.new('source', :target)
-            expect {
-              source.extract({})
-            }.to raise_error(NotImplementedError)
+          it 'returns false if the source is nil' do
+            plural = klass.new({
+              source: nil,
+              target: 'target',
+            }).plural?
+            expect(plural).to be(false)
           end
 
         end
@@ -57,17 +63,17 @@ module Aws
 
       describe Argument do
 
-        it 'is a BuilderSources::Base' do
-          expect(described_class.ancestors).to include(Base)
+        it 'is a Source' do
+          expect(described_class.ancestors).to include(Source)
         end
 
         it 'extracts the named argument' do
-          source = described_class.new('target')
+          source = described_class.new(target:'target')
           expect(source.extract(args:['value'])).to eq('value')
         end
 
         it 'returns nil when the argument is not present' do
-          source = described_class.new('target')
+          source = described_class.new(target:'target')
           expect(source.extract({})).to be(nil)
         end
 
@@ -75,99 +81,67 @@ module Aws
 
       describe Identifier do
 
-        it 'is a BuilderSources::Base' do
-          expect(described_class.ancestors).to include(Base)
+        it 'is a Source' do
+          expect(described_class.ancestors).to include(Source)
         end
 
         it 'extracts an identifier from the given resource' do
-          resource = double('resource', identifiers: {name:'foo'})
-          source = described_class.new('name', 'target')
+          resource = double('resource', name:'foo')
+          source = described_class.new(source:'name', target:'target')
           expect(source.extract(resource:resource)).to eq('foo')
-        end
-
-        it 'raises an error if a resource is not given' do
-          source = described_class.new('source', 'target')
-          msg = 'missing required option :resource'
-          expect {
-            source.extract({})
-          }.to raise_error(Errors::DefinitionError, msg)
         end
 
       end
 
       describe DataMember do
 
-        it 'is a BuilderSources::Base' do
-          expect(described_class.ancestors).to include(Base)
+        it 'is a Source' do
+          expect(described_class.ancestors).to include(Source)
         end
 
         it 'extracts a data member from the given resource' do
           data = { 'nested' => { 'data' => 'value' }}
           resource = double('resource', data:data)
-          source = described_class.new('nested.data', 'target')
+          source = described_class.new(source:'nested.data', target:'target')
           expect(source.extract(resource:resource)).to eq('value')
-        end
-
-        it 'raises an error if a resource is not given' do
-          source = described_class.new('source', 'target')
-          msg = 'missing required option :resource'
-          expect {
-            source.extract({})
-          }.to raise_error(Errors::DefinitionError, msg)
         end
 
       end
 
       describe RequestParameter do
 
-        it 'is a BuilderSources::Base' do
-          expect(described_class.ancestors).to include(Base)
+        it 'is a Source' do
+          expect(described_class.ancestors).to include(Source)
         end
 
         it 'extracts a request parameter from the response context' do
           context = double('request-context', params: { key:'value' })
           response = double('response', context: context)
-          source = described_class.new('key', 'target')
+          source = described_class.new(source:'key', target:'target')
           expect(source.extract(response:response)).to eq('value')
-        end
-
-        it 'raises an error if a response is not given' do
-          source = described_class.new('source', 'target')
-          msg = 'missing required option :response'
-          expect {
-            source.extract({})
-          }.to raise_error(Errors::DefinitionError, msg)
         end
 
       end
 
       describe ResponsePath do
 
-        it 'is a BuilderSources::Base' do
-          expect(described_class.ancestors).to include(Base)
+        it 'is a Source' do
+          expect(described_class.ancestors).to include(Source)
         end
 
         it 'extracts a value from the response data' do
           data = { 'nested' => { 'data' => 'value' }}
           response = double('response', data: data)
-          source = described_class.new('nested.data', 'target')
+          source = described_class.new(source:'nested.data', target:'target')
           expect(source.extract(response:response)).to eq('value')
         end
 
         it 'extracts a value from the response data' do
           data = { 'members' => [{'name' => 'name1'}, {'name' => 'name2'}]}
           response = double('response', data: data)
-          source = described_class.new('members[].name', 'target')
+          source = described_class.new(source:'members[].name', target:'target')
           expect(source.extract(response:response)).to eq(%w(name1 name2))
           expect(source.plural?).to be(true)
-        end
-
-        it 'raises an error if a response is not given' do
-          source = described_class.new('source', 'target')
-          msg = 'missing required option :response'
-          expect {
-            source.extract({})
-          }.to raise_error(Errors::DefinitionError, msg)
         end
 
       end

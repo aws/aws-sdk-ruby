@@ -3,9 +3,9 @@ module Aws
     module RequestParams
 
       # @api private
-      class ParamsHash
+      class ParamHash
 
-        # @param [Array<RequestParams::Base>] params
+        # @param [Array<RequestParams::Param>] params
         def initialize(params)
           @params = params
         end
@@ -21,7 +21,7 @@ module Aws
 
         def user_params(options)
           args = options[:args] || []
-          args.last.is_a?(Hash) ? args.last : {} 
+          args.last.is_a?(Hash) ? args.last : {}
         end
 
         def computed_params(options)
@@ -44,16 +44,10 @@ module Aws
 
       end
 
-      # Base class for all request parameter types.
-      # @see {RequestParams::Identifier}
-      # @see {RequestParams::DataMember}
-      # @see {RequestParams::String}
-      # @see {RequestParams::Integer}
-      class Base
+      module Param
 
-        # @param [String] target
-        def initialize(target)
-          @target = target.to_s
+        def initialize(options)
+          @target = options[:target].to_s
           @steps = []
           @target.scan(/\w+|\[\]|\[\*\]|\[[0-9]+\]/) do |step|
             case step
@@ -70,14 +64,11 @@ module Aws
         # @return [String] target
         attr_reader :target
 
-        # @param [Hash] params
-        # @param [Object] value
-        # @return [Hash] Returns the modified params hash.
-        def apply(params, value, n = nil)
+        def apply(params, options = {})
           if @final == -1
-            build_context(params, n) << value
+            build_context(params, options[:n]) << value(options)
           else
-            build_context(params, n)[@final] = value
+            build_context(params, options[:n])[@final] = value(options)
           end
           params
         end
@@ -100,126 +91,47 @@ module Aws
 
       end
 
-      class Identifier < Base
+      class Identifier
 
-        # @param [String] identifier_name
-        # @param (see Base#initialize)
-        def initialize(identifier_name, target)
-          @identifier_name = identifier_name.to_sym
-          super(target)
+        include Param
+
+        def initialize(options)
+          @identifier_name = options[:name]
+          super
         end
 
-        # @param [Symbol] identifier_name
-        attr_reader :identifier_name
-
-        # @param [Hash] params_hash
-        # @option [requried, Resource] :resource
-        def apply(params_hash, options)
-          value = options[:resource].identifiers[identifier_name]
-          super(params_hash, value, options[:n])
-        end
-
-        # @api private
-        def self.literal?
-          false
+        def value(options)
+          options[:resource].send(@identifier_name)
         end
 
       end
 
-      class DataMember < Base
+      class DataMember
 
-        # @param [String] member_name
-        # @param (see Base#initialize)
-        def initialize(member_name, target)
-          @member_name = member_name
-          super(target)
+        include Param
+
+        def initialize(options)
+          @path = options[:data_path]
+          super
         end
 
-        # @return [String]
-        attr_reader :member_name
-
-        # @param [Hash] params_hash
-        # @option [requried, Resource] :resource
-        def apply(params_hash, options)
-          value = options[:resource].data[member_name.to_sym]
-          super(params_hash, value, options[:n])
-        end
-
-        # @api private
-        def self.literal?
-          false
+        def value(options)
+          JMESPath.search(@path, options[:resource].data)
         end
 
       end
 
-      class String < Base
+      class Literal
 
-        # @param [String] value
-        # @param (see Base#initialize)
-        def initialize(value, target)
-          @value = value
-          super(target)
+        include Param
+
+        def initialize(options)
+          @value = options[:value]
+          super
         end
 
-        # @return [String]
-        attr_reader :value
-
-        # @param [Hash] params_hash
-        def apply(params_hash, options = {})
-          super(params_hash, value, options[:n])
-        end
-
-        # @api private
-        def self.literal?
-          true
-        end
-
-      end
-
-      class Integer < Base
-
-        # @param [String] value
-        # @param (see Base#initialize)
-        def initialize(value, target)
-          @value = value.to_i
-          super(target)
-        end
-
-        # @return [Integer]
-        attr_reader :value
-
-        # @param [Hash] params_hash
-        def apply(params_hash, options = {})
-          super(params_hash, value, options[:n])
-        end
-
-        # @api private
-        def self.literal?
-          true
-        end
-
-      end
-
-      class Boolean < Base
-
-        # @param [String<'true'>,String<'false'>] value
-        # @param (see Base#initialize)
-        def initialize(value, target)
-          @value = (value == 'true')
-          super(target)
-        end
-
-        # @return [Integer]
-        attr_reader :value
-
-        # @param [Hash] params_hash
-        def apply(params_hash, options = {})
-          super(params_hash, value, options[:n])
-        end
-
-        # @api private
-        def self.literal?
-          true
+        def value(*args)
+          @value
         end
 
       end

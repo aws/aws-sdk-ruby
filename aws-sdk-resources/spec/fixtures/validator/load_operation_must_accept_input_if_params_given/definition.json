@@ -9,7 +9,7 @@
         "request": {
           "operation": "OperationName",
           "params": [
-            { "target":"ResourceId", "sourceType":"identifier", "source":"Id" }
+            { "target":"ResourceId", "source":"identifier", "name":"Id" }
           ]
         },
         "path": "$"

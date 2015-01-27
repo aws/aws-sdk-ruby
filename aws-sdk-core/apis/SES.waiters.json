@@ -1,14 +1,18 @@
 {
+  "version": 2,
   "waiters": {
-    "__default__": {
-      "interval": 3,
-      "max_attempts": 20
-    },
     "IdentityExists": {
+      "delay": 3,
       "operation": "GetIdentityVerificationAttributes",
-      "success_type": "output",
-      "success_path": "VerificationAttributes[].VerificationStatus",
-      "success_value": true
+      "maxAttempts": 20,
+      "acceptors": [
+        {
+          "expected": "Success",
+          "matcher": "pathAll",
+          "state": "success",
+          "argument": "VerificationAttributes.*.VerificationStatus"
+        }
+      ]
     }
   }
 }

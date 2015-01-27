@@ -1,11 +1,11 @@
 {
   "metadata":{
-    "apiVersion":"2014-09-01",
+    "apiVersion":"2014-10-31",
     "endpointPrefix":"rds",
     "serviceAbbreviation":"Amazon RDS",
     "serviceFullName":"Amazon Relational Database Service",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://rds.amazonaws.com/doc/2014-09-01/",
+    "xmlNamespace":"http://rds.amazonaws.com/doc/2014-10-31/",
     "protocol":"query"
   },
   "operations":{
@@ -63,6 +63,30 @@
           "shape":"DBSnapshotNotFoundFault",
           "error":{
             "code":"DBSnapshotNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
+    "ApplyPendingMaintenanceAction":{
+      "name":"ApplyPendingMaintenanceAction",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ApplyPendingMaintenanceActionMessage"},
+      "output":{
+        "shape":"ApplyPendingMaintenanceActionResult",
+        "wrapper":true,
+        "resultWrapper":"ApplyPendingMaintenanceActionResult"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundFault",
+          "error":{
+            "code":"ResourceNotFoundFault",
             "httpStatusCode":404,
             "senderFault":true
           },
@@ -240,7 +264,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -327,7 +351,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -372,7 +396,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -391,6 +415,15 @@
           "error":{
             "code":"AuthorizationNotFound",
             "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"KMSKeyNotAccessibleFault",
+          "error":{
+            "code":"KMSKeyNotAccessibleFault",
+            "httpStatusCode":400,
             "senderFault":true
           },
           "exception":true
@@ -486,7 +519,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -531,7 +564,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -558,6 +591,15 @@
           "shape":"StorageTypeNotSupportedFault",
           "error":{
             "code":"StorageTypeNotSupported",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"KMSKeyNotAccessibleFault",
+          "error":{
+            "code":"KMSKeyNotAccessibleFault",
             "httpStatusCode":400,
             "senderFault":true
           },
@@ -1032,7 +1074,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -1084,7 +1126,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -1266,7 +1308,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -1361,7 +1403,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -1379,6 +1421,29 @@
         "shape":"OrderableDBInstanceOptionsMessage",
         "resultWrapper":"DescribeOrderableDBInstanceOptionsResult"
       }
+    },
+    "DescribePendingMaintenanceActions":{
+      "name":"DescribePendingMaintenanceActions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribePendingMaintenanceActionsMessage"},
+      "output":{
+        "shape":"PendingMaintenanceActionsMessage",
+        "resultWrapper":"DescribePendingMaintenanceActionsResult"
+      },
+      "errors":[
+        {
+          "shape":"ResourceNotFoundFault",
+          "error":{
+            "code":"ResourceNotFoundFault",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
     },
     "DescribeReservedDBInstances":{
       "name":"DescribeReservedDBInstances",
@@ -1588,7 +1653,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -1671,7 +1736,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -1809,7 +1874,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -2106,7 +2171,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -2142,7 +2207,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -2161,6 +2226,15 @@
           "error":{
             "code":"AuthorizationNotFound",
             "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"KMSKeyNotAccessibleFault",
+          "error":{
+            "code":"KMSKeyNotAccessibleFault",
+            "httpStatusCode":400,
             "senderFault":true
           },
           "exception":true
@@ -2265,7 +2339,7 @@
           "shape":"DBSubnetGroupNotFoundFault",
           "error":{
             "code":"DBSubnetGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -2301,7 +2375,7 @@
           "shape":"OptionGroupNotFoundFault",
           "error":{
             "code":"OptionGroupNotFoundFault",
-            "httpStatusCode":400,
+            "httpStatusCode":404,
             "senderFault":true
           },
           "exception":true
@@ -2320,6 +2394,15 @@
           "error":{
             "code":"AuthorizationNotFound",
             "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"KMSKeyNotAccessibleFault",
+          "error":{
+            "code":"KMSKeyNotAccessibleFault",
+            "httpStatusCode":400,
             "senderFault":true
           },
           "exception":true
@@ -2398,6 +2481,19 @@
         "immediate",
         "pending-reboot"
       ]
+    },
+    "ApplyPendingMaintenanceActionMessage":{
+      "type":"structure",
+      "required":[
+        "ResourceIdentifier",
+        "ApplyAction",
+        "OptInType"
+      ],
+      "members":{
+        "ResourceIdentifier":{"shape":"String"},
+        "ApplyAction":{"shape":"String"},
+        "OptInType":{"shape":"String"}
+      }
     },
     "AuthorizationAlreadyExistsFault":{
       "type":"structure",
@@ -2544,7 +2640,9 @@
         "Tags":{"shape":"TagList"},
         "StorageType":{"shape":"String"},
         "TdeCredentialArn":{"shape":"String"},
-        "TdeCredentialPassword":{"shape":"String"}
+        "TdeCredentialPassword":{"shape":"String"},
+        "StorageEncrypted":{"shape":"BooleanOptional"},
+        "KmsKeyId":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaMessage":{
@@ -2713,7 +2811,10 @@
         "PubliclyAccessible":{"shape":"Boolean"},
         "StatusInfos":{"shape":"DBInstanceStatusInfoList"},
         "StorageType":{"shape":"String"},
-        "TdeCredentialArn":{"shape":"String"}
+        "TdeCredentialArn":{"shape":"String"},
+        "StorageEncrypted":{"shape":"Boolean"},
+        "KmsKeyId":{"shape":"String"},
+        "DbiResourceId":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -2965,7 +3066,9 @@
         "PercentProgress":{"shape":"Integer"},
         "SourceRegion":{"shape":"String"},
         "StorageType":{"shape":"String"},
-        "TdeCredentialArn":{"shape":"String"}
+        "TdeCredentialArn":{"shape":"String"},
+        "Encrypted":{"shape":"Boolean"},
+        "KmsKeyId":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -3062,7 +3165,7 @@
       },
       "error":{
         "code":"DBSubnetGroupNotFoundFault",
-        "httpStatusCode":400,
+        "httpStatusCode":404,
         "senderFault":true
       },
       "exception":true
@@ -3338,6 +3441,15 @@
         "Filters":{"shape":"FilterList"},
         "MaxRecords":{"shape":"IntegerOptional"},
         "Marker":{"shape":"String"}
+      }
+    },
+    "DescribePendingMaintenanceActionsMessage":{
+      "type":"structure",
+      "members":{
+        "ResourceIdentifier":{"shape":"String"},
+        "Filters":{"shape":"FilterList"},
+        "Marker":{"shape":"String"},
+        "MaxRecords":{"shape":"IntegerOptional"}
       }
     },
     "DescribeReservedDBInstancesMessage":{
@@ -3710,6 +3822,17 @@
       },
       "exception":true
     },
+    "KMSKeyNotAccessibleFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"KMSKeyNotAccessibleFault",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "KeyList":{
       "type":"list",
       "member":{"shape":"String"}
@@ -3869,7 +3992,7 @@
       },
       "error":{
         "code":"OptionGroupNotFoundFault",
-        "httpStatusCode":400,
+        "httpStatusCode":404,
         "senderFault":true
       },
       "exception":true
@@ -4004,6 +4127,7 @@
         "MultiAZCapable":{"shape":"Boolean"},
         "ReadReplicaCapable":{"shape":"Boolean"},
         "Vpc":{"shape":"Boolean"},
+        "SupportsStorageEncryption":{"shape":"Boolean"},
         "StorageType":{"shape":"String"},
         "SupportsIops":{"shape":"Boolean"}
       },
@@ -4043,6 +4167,37 @@
       "member":{
         "shape":"Parameter",
         "locationName":"Parameter"
+      }
+    },
+    "PendingMaintenanceAction":{
+      "type":"structure",
+      "members":{
+        "Action":{"shape":"String"},
+        "AutoAppliedAfterDate":{"shape":"TStamp"},
+        "ForcedApplyDate":{"shape":"TStamp"},
+        "OptInStatus":{"shape":"String"},
+        "CurrentApplyDate":{"shape":"TStamp"}
+      }
+    },
+    "PendingMaintenanceActionDetails":{
+      "type":"list",
+      "member":{
+        "shape":"PendingMaintenanceAction",
+        "locationName":"PendingMaintenanceAction"
+      }
+    },
+    "PendingMaintenanceActions":{
+      "type":"list",
+      "member":{
+        "shape":"ResourcePendingMaintenanceActions",
+        "locationName":"ResourcePendingMaintenanceActions"
+      }
+    },
+    "PendingMaintenanceActionsMessage":{
+      "type":"structure",
+      "members":{
+        "PendingMaintenanceActions":{"shape":"PendingMaintenanceActions"},
+        "Marker":{"shape":"String"}
       }
     },
     "PendingModifiedValues":{
@@ -4269,6 +4424,25 @@
         "ResetAllParameters":{"shape":"Boolean"},
         "Parameters":{"shape":"ParametersList"}
       }
+    },
+    "ResourceNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"ResourceNotFoundFault",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "ResourcePendingMaintenanceActions":{
+      "type":"structure",
+      "members":{
+        "ResourceIdentifier":{"shape":"String"},
+        "PendingMaintenanceActionDetails":{"shape":"PendingMaintenanceActionDetails"}
+      },
+      "wrapper":true
     },
     "RestoreDBInstanceFromDBSnapshotMessage":{
       "type":"structure",
@@ -4550,6 +4724,12 @@
       "type":"structure",
       "members":{
         "EventSubscription":{"shape":"EventSubscription"}
+      }
+    },
+    "ApplyPendingMaintenanceActionResult":{
+      "type":"structure",
+      "members":{
+        "ResourcePendingMaintenanceActions":{"shape":"ResourcePendingMaintenanceActions"}
       }
     },
     "AuthorizeDBSecurityGroupIngressResult":{

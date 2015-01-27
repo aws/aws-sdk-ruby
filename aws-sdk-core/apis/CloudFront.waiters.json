@@ -1,29 +1,47 @@
 {
+  "version": 2,
   "waiters": {
-    "__default__": {
-      "success_type": "output",
-      "success_path": "Status"
-    },
-    "StreamingDistributionDeployed": {
-      "operation": "GetStreamingDistribution",
-      "description": "Wait until a streaming distribution is deployed.",
-      "interval": 60,
-      "max_attempts": 25,
-      "success_value": "Deployed"
-    },
     "DistributionDeployed": {
+      "delay": 60,
       "operation": "GetDistribution",
+      "maxAttempts": 25,
       "description": "Wait until a distribution is deployed.",
-      "interval": 60,
-      "max_attempts": 25,
-      "success_value": "Deployed"
+      "acceptors": [
+        {
+          "expected": "Deployed",
+          "matcher": "path",
+          "state": "success",
+          "argument": "Status"
+        }
+      ]
     },
     "InvalidationCompleted": {
+      "delay": 20,
       "operation": "GetInvalidation",
+      "maxAttempts": 30,
       "description": "Wait until an invalidation has completed.",
-      "interval": 20,
-      "max_attempts": 30,
-      "success_value": "Completed"
+      "acceptors": [
+        {
+          "expected": "Completed",
+          "matcher": "path",
+          "state": "success",
+          "argument": "Status"
+        }
+      ]
+    },
+    "StreamingDistributionDeployed": {
+      "delay": 60,
+      "operation": "GetStreamingDistribution",
+      "maxAttempts": 25,
+      "description": "Wait until a streaming distribution is deployed.",
+      "acceptors": [
+        {
+          "expected": "Deployed",
+          "matcher": "path",
+          "state": "success",
+          "argument": "Status"
+        }
+      ]
     }
   }
 }

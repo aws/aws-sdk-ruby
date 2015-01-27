@@ -55,6 +55,18 @@ module Aws
         expect(resp.next_page?).to be(false)
       end
 
+      it 'is not pageable if next token is an empty hash' do
+        resp.data = { 'next_token' => {} }
+        expect(resp.last_page?).to be(true)
+        expect(resp.next_page?).to be(false)
+      end
+
+      it 'is not pageable if next token is an empty array' do
+        resp.data = { 'next_token' => [] }
+        expect(resp.last_page?).to be(true)
+        expect(resp.next_page?).to be(false)
+      end
+
       it 'responds to #next_page by sending a new request with tokens applied' do
         client = double('client')
         new_request = double('new-request')

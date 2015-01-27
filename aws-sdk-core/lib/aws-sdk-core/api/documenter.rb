@@ -175,15 +175,16 @@ Constructs an API client.
         m.docstring = YARD::Registry['Aws::ClientWaiters#wait_until'].docstring
 
         waiters = @client_class.waiters.waiter_names.sort.inject('') do |w,name|
-          operation = @client_class.waiters.waiter(name).send(:operation_name)
-          w << "<tr><td><tt>:#{name}</tt></td><td>{##{operation}}</td></tr>"
+          waiter = @client_class.waiters.waiter(name)
+          operation = waiter.poller.operation_name
+          w << "<tr><td><tt>:#{name}</tt></td><td>{##{operation}}</td><td>#{waiter.delay}</td><td>#{waiter.max_attempts}</td></tr>"
         end
         docstring = <<-DOCSTRING
 Returns the list of supported waiters. The following table lists the supported
 waiters and the client method they call:
 <table>
 <thead>
-<tr><th>Waiter Name</th><th>Client Method</th></tr>
+<tr><th>Waiter Name</th><th>Client Method</th><th>Delay</th><th>Max Attempts</th></tr>
 </thead>
 <tbody>
 #{waiters}

@@ -145,7 +145,7 @@ module Aws
         #   "dataMember" source types.
         def validate_param_source_type_not_used(source_type)
           (@operation['request']['params'] || []).each.with_index do |param, n|
-            if param['sourceType'] == source_type
+            if param['source'] == source_type
               error("'#{path}/request/params/#{n}/sourceType' is set to '#{source_type}' which is not valid in this context.")
             end
           end

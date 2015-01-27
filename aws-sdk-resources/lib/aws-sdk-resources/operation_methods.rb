@@ -28,7 +28,7 @@ module Aws
 
       # @return [Array<Symbol>]
       def operation_names
-        @operations.keys
+        @operations.keys.sort
       end
 
       # @param [Symbol] name
@@ -54,7 +54,7 @@ module Aws
 
       # @return [Array<Symbol>]
       def batch_operation_names
-        @batch_operations.keys
+        @batch_operations.keys.sort
       end
 
       # @api private

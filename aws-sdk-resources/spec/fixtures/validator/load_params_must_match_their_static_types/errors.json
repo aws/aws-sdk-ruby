@@ -1,5 +1,0 @@
-[
-  "'#/resources/ResourceName/load/request/params/0/sourceType' given as 'string' but resolves to a 'integer' shape.",
-    "'#/resources/ResourceName/load/request/params/1/sourceType' given as 'boolean' but resolves to a 'string' shape.",
-    "'#/resources/ResourceName/load/request/params/2/sourceType' given as 'integer' but resolves to a 'boolean' shape."
-]
