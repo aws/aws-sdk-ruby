@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Added support for online indexing.
+
 * Issue - Response Stubbing - Resolved an issue where the response stubbing
   plugin would not correctly populate the response target for streaming API calls,
   such as `Aws::S3::Client#get_object`. Fixes GitHub issue #197.
