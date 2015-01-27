@@ -1,51 +1,34 @@
-# AWS SDK for Ruby - V2
+# AWS SDK for Ruby - Version 2
 
-[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/aws/aws-sdk-core-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-core-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-core-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-core-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-core-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-core-ruby/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-core-ruby?branch=master)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/aws/aws-sdk-ruby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby) [![Code Climate](https://codeclimate.com/github/aws/aws-sdk-ruby.png)](https://codeclimate.com/github/aws/aws-sdk-ruby) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-ruby/badge.png?branch=master)](https://coveralls.io/r/aws/aws-sdk-ruby?branch=master)
 
-This repository contains the code for the V2 AWS SDK for Ruby. For v1 of the
-AWS SDK for Ruby, see [aws/aws-sdk-ruby](http://github.com/aws/aws-sdk-ruby).
+This is version 2 of the `aws-sdk` gem.  **Version 1 can be found in the
+[aws-sdk-v1 branch](https://github.com/aws/aws-sdk-ruby/tree/aws-sdk-v1).**
 
 ## Links of Interest
 
-* [API Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
+* [Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
 * [Change Log](https://github.com/aws/aws-sdk-core-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-core-ruby/blob/master/UPGRADING.md)
 * [Issues](http://github.com/aws/aws-sdk-core-ruby/issues)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-core-ruby)
 * [License](http://aws.amazon.com/apache2.0/)
 
-## V2 Preview Release
+## NameError: uninitialized constant AWS
 
-The V2 AWS SDK for Ruby is currently available as a preview-release. The code
-is organized into multiple gems. Installing the preview release of `aws-sdk`
-will install two other gems:
+If you receive this error, you likely have upgraded to version 2 of the
+`aws-sdk` gem unintentionally. Version 2 uses the `Aws` namespace, not `AWS`.
+This allows version 1 and version 2 to be used in the same application.
 
-* `aws-sdk` - *preview*
-* `aws-sdk-resources` - *preview*
-* `aws-sdk-core` - **stable**
+See [this blog post](http://ruby.awsblog.com/) for more information.
 
-**Note:** Version 2 of the AWS SDK for Ruby requires Ruby 1.9.3+
+## Installation
 
-## Using V1 and V2 Together
-
-Version 2 uses a the `Aws` namespace, allowing it to be used in the same
-application as the v1 AWS SDK for Ruby.
+The AWS SDK for Ruby is available as the `aws-sdk` gem from RubyGems. Please
+use a major version when expressing a dependency on `aws-sdk`.
 
 ```ruby
-AWS::S3 # v1
-Aws::S3 # v2
-```
-
-Here is an example that demonstrates using V1 and V2 together:
-
-```ruby
-# in Gemfile
-gem 'aws-sdk-v1'
-gem 'aws-sdk', '2.0.6.pre'
-
-# in application
-require 'aws-sdk-v1'
-require 'aws-sdk'
+gem 'aws-sdk', '~> 2'
 ```
 
 ## Configuration
@@ -77,12 +60,12 @@ You can construct a client with credentials like so:
 s3 = Aws::S3::Client.new(credentials: credentials)
 ```
 
-The credentials object may be an instance of:
+The `:credentials` object may be an instance of:
 
-* `Aws::Credentials`
-* `Aws::SharedCredentials`
-* `Aws::InstanceProfileCredentials`
-* `Aws::AssumeRoleCredentials`
+* [`Aws::Credentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/Credentials.html)
+* [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/SharedCredentials.html)
+* [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/InstanceProfileCredentials.html)
+* [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/AssumeRoleCredentials.html)
 
 Default credentials are searched for in the following locations:
 
@@ -100,7 +83,7 @@ creds = JSON.load(File.read('secrets.json'))
 creds = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
 ```
 
-## Clients (aws-sdk-core) - **stable**
+## API Clients (aws-sdk-core gem)
 
 Construct a service client to make API calls. Each client provides a 1-to-1
 mapping of methods to API operations. Refer to the
@@ -173,16 +156,16 @@ that are triggered before each polling attempt and before waiting.
 See the API documentation for more examples and for a list of supported
 waiters per service.
 
-## Resources (aws-sdk-resource) - *preview release*
+## Resource Interfaces (aws-sdk-resources gem)
 
 Resource interfaces are object oriented classes that represent actual
-resources in AWS. Resource interfaces built ontop of API clients and provide
+resources in AWS. Resource interfaces built on top of API clients and provide
 additional functionality.
 
 ```ruby
 s3 = Aws::S3::Resource.new
 
-# reference an existing bucket
+# reference an existing bucket by name
 bucket = s3.bucket('aws-sdk')
 
 # enumerate every object in a bucket
@@ -199,19 +182,6 @@ obj.put(body:'Hello World!')
 obj.etag
 obj.delete
 ```
-
-Resource interfaces are currently in a preview period. While quite stable,
-expect possible minor changes before a final stable version is released.
-Currently there are Resource-oriented interfaces for:
-
-* `Aws::S3`
-* `Aws::IAM`
-* `Aws::EC2` - partial
-* `Aws::SQS`
-* `Aws::SNS`
-* `Aws::Glacier`
-* `Aws::OpsWorks`
-* `Aws::CloudFormation`
 
 ## REPL - AWS Interactive Console
 
