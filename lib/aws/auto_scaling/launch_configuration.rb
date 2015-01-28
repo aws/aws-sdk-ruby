@@ -44,6 +44,7 @@ module AWS
     #
     # @attr_reader [Boolean] associate_public_ip_address
     #
+    # @attr_reader [String] classic_link_vpc_id
     class LaunchConfiguration < Core::Resource
 
       # @api private
@@ -94,9 +95,17 @@ module AWS
         :from => :security_groups,
         :static => true
 
-      attribute :associate_public_ip_address, :static => true
-
       protected :security_group_details
+
+      attribute :classic_link_vpc_security_group_details,
+                :from => :classic_link_vpc_security_groups,
+                :static => true
+
+      protected :classic_link_vpc_security_group_details
+
+      attribute :classic_link_vpc_id, :static => true
+
+      attribute :associate_public_ip_address, :static => true
 
       populates_from(:describe_launch_configurations) do |resp|
         resp.launch_configurations.find do |lc|
@@ -118,19 +127,12 @@ module AWS
 
       # @return [Array<EC2::SecurityGroup>]
       def security_groups
-        names_or_ids = security_group_details
-        if names_or_ids.all?{|str| str.match(/^sg-[0-9a-f]{8}$/) }
-          names_or_ids.collect do |security_group_id|
-            EC2::SecurityGroup.new(security_group_id, :config => config)
-          end
-        else
-          begin
-            ec2 = EC2.new(:config => config)
-            ec2.security_groups.filter('group-name', *names_or_ids).to_a
-          rescue
-            names_or_ids
-          end
-        end
+        get_security_groups(security_group_details)
+      end
+
+      # @return [Array<EC2::SecurityGroup>]
+      def classic_link_vpc_security_groups
+        get_security_groups(classic_link_vpc_security_group_details)
       end
 
       # @return [Boolean] Returns true if this launch configuration exists.
@@ -146,6 +148,21 @@ module AWS
       end
 
       protected
+
+      def get_security_groups(names_or_ids)
+        if names_or_ids.all?{|str| str.match(/^sg-[0-9a-f]{8}$/) }
+          names_or_ids.collect do |security_group_id|
+            EC2::SecurityGroup.new(security_group_id, :config => config)
+          end
+        else
+          begin
+            ec2 = EC2.new(:config => config)
+            ec2.security_groups.filter('group-name', *names_or_ids).to_a
+          rescue
+            names_or_ids
+          end
+        end
+      end
 
       def resource_identifiers
         [[:launch_configuration_name, name]]
