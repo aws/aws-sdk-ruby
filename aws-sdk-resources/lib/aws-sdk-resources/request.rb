@@ -2,7 +2,7 @@ module Aws
   module Resources
     class Request
 
-      # @option opitons [requried, String] :method_name
+      # @option options [required, String] :method_name
       # @option options [Array<RequestParams::Param>] :params ([]) A list of
       #   request params to apply to the request when called.
       def initialize(options = {})
@@ -17,7 +17,7 @@ module Aws
       # @return [Array<RequestParams::Param>]
       attr_reader :params
 
-      # @option options [required,Resource] :resource
+      # @option options [required, Resource] :resource
       # @option options [Array<Mixed>] :args
       # @return [Seahorse::Client::Response]
       def call(options)
