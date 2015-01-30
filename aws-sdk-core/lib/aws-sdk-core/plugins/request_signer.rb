@@ -17,7 +17,7 @@ module Aws
     # @seahorse.client.option [String] :access_key_id Used to set credentials
     #   statically.
     #
-    # @seahorse.client.option [String] :secret_access_key_id Used to set
+    # @seahorse.client.option [String] :secret_access_key Used to set
     #   credentials statically.
     #
     # @seahorse.client.option [String] :session_token Used to set credentials
