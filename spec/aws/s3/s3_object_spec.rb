@@ -916,7 +916,6 @@ module AWS
         end
 
         it 'should set the endpoint according to the configuration' do
-          #object.stub(endpoint: nil)
           object.config.stub(:s3_endpoint).and_return("foo.com")
           http_request.should_receive(:host=).with("foo.com")
           object.url_for(:get)
