@@ -1487,7 +1487,13 @@ module AWS
 
         req.key = key
         req.host = options.fetch(:endpoint, config.s3_endpoint)
-        req.host.nil? ? req.host = bucket.name : req.bucket = bucket.name
+
+        if req.host.nil? && options.include?(:endpoint) && options[:endpoint].nil?
+          req.host = bucket.name
+        else
+          req.bucket = bucket.name
+        end
+
         req.port = options.fetch(:port, port)
         req.force_path_style = options.fetch(:force_path_style, config.s3_force_path_style)
 
