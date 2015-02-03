@@ -7319,7 +7319,10 @@
       "enum":[
         "Heavy Utilization",
         "Medium Utilization",
-        "Light Utilization"
+        "Light Utilization",
+        "No Upfront",
+        "Partial Upfront",
+        "All Upfront"
       ]
     },
     "OwnerStringList":{
