@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - Aws::SQS::Resources - Removed resource interfaces for
+  `Aws::SQS`. These are unstable, so they have been removed for the public
+  release of `aws-sdk-resources`.
+
 * Feature - Aws::S3::Presigner - Added a `:secure` option to `#presigned_url`,
   which defaults to `true`. When `false`, the presigned URL will use HTTP and
   not HTTPS.

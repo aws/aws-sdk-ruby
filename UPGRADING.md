@@ -1,5 +1,14 @@
 # Upgrade Notes
 
+## `aws-sdk-resources` - v2.0.22
+
+* Removed the `Aws::SQS::Resource` interfaces. These have not been formalized,
+  so they have been removed as part of the stable release of the
+  `aws-sdk-resources` gem.
+
+* Removed the `Aws::SQS::Resource` interfaces. These are unstable, so they have
+  been removed for the public release of `aws-sdk-resources`.
+
 ## `aws-sdk-resources` - v2.0.18.pre
 
 * Moved `Aws::IAM::Role#update_assume_role_policy` to a new resource class.
