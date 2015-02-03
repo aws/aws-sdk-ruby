@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3::Presigner - Added a `:secure` option to `#presigned_url`,
+  which defaults to `true`. When `false`, the presigned URL will use HTTP and
+  not HTTPS.
+
 2.0.21 (2015-01-27)
 ------------------
 

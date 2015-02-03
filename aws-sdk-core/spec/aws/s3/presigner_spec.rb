@@ -77,6 +77,17 @@ module Aws
             pre.presigned_url(:get_object, params)
           }.to raise_error(ArgumentError)
         end
+
+        it 'can generate http (non-secure) urls' do
+          signer = Presigner.new(client: client)
+          url = signer.presigned_url(:get_object,
+            bucket:'aws-sdk',
+            key:'foo',
+            secure: false
+          )
+          expect(url).to match(/^http:/)
+        end
+
       end
     end
   end
