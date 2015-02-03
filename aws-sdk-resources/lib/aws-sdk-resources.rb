@@ -10,15 +10,13 @@ module Aws
     autoload :Definition, 'aws-sdk-resources/definition'
     autoload :Documenter, 'aws-sdk-resources/documenter'
     autoload :Errors, 'aws-sdk-resources/errors'
-    autoload :HasOperations, 'aws-sdk-resources/has_operations'
-    autoload :Operations, 'aws-sdk-resources/operations'
     autoload :OperationMethods, 'aws-sdk-resources/operation_methods'
+    autoload :Operations, 'aws-sdk-resources/operations'
     autoload :Options, 'aws-sdk-resources/options'
     autoload :Request, 'aws-sdk-resources/request'
     autoload :RequestParams, 'aws-sdk-resources/request_params'
     autoload :Resource, 'aws-sdk-resources/resource'
     autoload :Source, 'aws-sdk-resources/source'
-    autoload :Validator, 'aws-sdk-resources/validator'
   end
 
   service_added do |name, svc_module, options|
