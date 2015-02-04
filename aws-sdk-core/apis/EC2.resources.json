@@ -122,7 +122,7 @@
       "CreateVolume": {
         "request": { "operation": "CreateVolume" },
         "resource": {
-          "type": "Image",
+          "type": "Volume",
           "identifiers": [
             { "target": "Id", "source": "response", "path": "VolumeId" }
           ],

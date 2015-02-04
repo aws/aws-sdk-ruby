@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Fixed the return value from
+  `Aws::EC2::Resource#create_volume`.
+
 * Upgrading - Aws::SQS::Resources - Removed resource interfaces for
   `Aws::SQS`. These are unstable, so they have been removed for the public
   release of `aws-sdk-resources`.
