@@ -25,6 +25,7 @@ module AWS
       def detect_region_and_retry(response, &retry_block)
         updgrade_to_v4(response, 'us-east-1')
         yield
+        return if response.http_response.status == 200
         actual_region = region_from_location_header(response)
         updgrade_to_v4(response, actual_region)
         log_region_warning(response, actual_region)
@@ -33,7 +34,9 @@ module AWS
 
       def updgrade_to_v4(response, region)
         bucket = response.request_options[:bucket_name]
-        response.http_request.body_stream.rewind
+        if response.http_request.body_stream.respond_to?(:rewind)
+          response.http_request.body_stream.rewind
+        end
         response.http_request.headers.delete('authorization')
         response.http_request.headers.delete('x-amz-security-token')
         response.http_request.host = new_hostname(response, region)

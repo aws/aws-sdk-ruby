@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - AWS::S3 - Resolved an issue with `AWS::S3::Client#get_bucket_location`
+  for buckets in the eu-central-1 region.
+
 * Issue - AWS::S3 - Backported the "Expect: 100-continue" patch from the v2
   AWS SDK for Ruby and enabled expect 100 continue behavior by default
   when working with Amazon S3. Fixes #241.
