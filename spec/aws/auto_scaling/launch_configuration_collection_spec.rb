@@ -76,6 +76,8 @@ module AWS
             :iam_instance_profile => 'iam-profile',
             :spot_price => '123.45',
             :associate_public_ip_address => true,
+            :classic_link_vpc_id => 'vpc-id',
+            :classic_link_vpc_security_groups => %w(sg-87654321 sg-98765432),
           })
 
           launch_configurations.create('name', 'image', 'type', {
@@ -101,6 +103,8 @@ module AWS
             :iam_instance_profile => 'iam-profile',
             :spot_price => '123.45',
             :associate_public_ip_address => true,
+            :classic_link_vpc_id => 'vpc-id',
+            :classic_link_vpc_security_groups => %w(sg-87654321 sg-98765432),
           })
         end
 

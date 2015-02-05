@@ -30,6 +30,8 @@ module AWS
 
       let(:groups) { [] }
 
+      let(:classic_link_groups) { [] }
+
       let(:details) {
         {
           :launch_configuration_name => launch_config.name,
@@ -50,6 +52,8 @@ module AWS
           :security_groups => groups,
           :iam_instance_profile => 'iam-profile',
           :spot_price => '123.45',
+          :classic_link_vpc_id => 'vpc-id',
+          :classic_link_vpc_security_groups => classic_link_groups,
         }
       }
 
@@ -85,6 +89,7 @@ module AWS
           ]
           launch_config.iam_instance_profile.should == 'iam-profile'
           launch_config.spot_price.should == '123.45'
+          launch_config.classic_link_vpc_id == 'vpc-id'
         end
 
       end
@@ -120,6 +125,44 @@ module AWS
           groups << 'sg2'
 
           launch_config.security_groups.should == [
+            EC2::SecurityGroup.new('sg-12345678', :config => config),
+            EC2::SecurityGroup.new('sg-22345678', :config => config),
+          ]
+        end
+
+      end
+
+      context '#classic_link_security_groups' do
+
+        it 'returns security groups with id patterns' do
+          classic_link_groups
+          classic_link_groups << 'sg-12345678'
+          classic_link_groups << 'sg-22345678'
+          launch_config.classic_link_vpc_security_groups.should == [
+            EC2::SecurityGroup.new('sg-12345678', :config => config),
+            EC2::SecurityGroup.new('sg-22345678', :config => config),
+          ]
+        end
+
+        it 'describes security groups with a filter if given names' do
+
+          ec2_client = config.ec2_client
+
+          resp = ec2_client.stub_for(:describe_security_groups)
+          resp.data[:security_group_info] = [
+            { :group_id => 'sg-12345678' },
+            { :group_id => 'sg-22345678' },
+          ]
+
+          ec2_client.should_receive(:describe_security_groups).
+            with(:filters => [{ :name => 'group-name', :values => %w(sg1 sg2)}]).
+            and_return(resp)
+
+          classic_link_groups
+          classic_link_groups << 'sg1'
+          classic_link_groups << 'sg2'
+
+          launch_config.classic_link_vpc_security_groups.should == [
             EC2::SecurityGroup.new('sg-12345678', :config => config),
             EC2::SecurityGroup.new('sg-22345678', :config => config),
           ]

@@ -69,6 +69,15 @@ module AWS
       #
       # @option options [String] :placement_tenancy
       #
+      # @option options [String] :classic_link_vpc_id
+      #   The ID of a ClassicLink-enabled VPC to link EC2 Classic instances to.
+      #
+      # @option options [Array<EC2::SecurityGroup>,Array<String>] :classic_link_vpc_security_groups
+      #   The list of security groups for the specified VPC to associate
+      #   with the instances. This may be an array of {EC2::SecurityGroup}
+      #   objects or security group ids. VPC security groups cannot be
+      #   referenced by name.
+      #
       # @return [LaunchConfiguration]
       #
       def create name, image, instance_type, options = {}
@@ -80,11 +89,14 @@ module AWS
         client_opts[:instance_monitoring] = instance_monitoring_opt(options) if
           options.key?(:detailed_instance_monitoring)
         client_opts[:key_name] = key_name_opt(options) if options[:key_pair]
-        client_opts[:security_groups] = security_groups_opt(options) if
+        client_opts[:security_groups] = security_groups_opt(options[:security_groups]) if
           options.key?(:security_groups)
+        client_opts[:classic_link_vpc_security_groups] = security_groups_opt(options[:classic_link_vpc_security_groups]) if
+          options.key?(:classic_link_vpc_security_groups)
         client_opts[:user_data] = user_data_opt(options) if options[:user_data]
 
         [
+          :classic_link_vpc_id,
           :iam_instance_profile,
           :spot_price,
           :kernel_id,
@@ -148,8 +160,8 @@ module AWS
         key_pair.is_a?(EC2::KeyPair) ? key_pair.name : key_pair
       end
 
-      def security_groups_opt options
-        options[:security_groups].collect do |sg|
+      def security_groups_opt security_groups
+        security_groups.collect do |sg|
           sg.is_a?(EC2::SecurityGroup) ? sg.id : sg
         end
       end

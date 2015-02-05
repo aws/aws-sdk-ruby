@@ -146,6 +146,11 @@
               - :integer
           NoDevice:
           - :boolean
+    ClassicLinkVPCId:
+    - :string
+    ClassicLinkVPCSecurityGroups:
+    - :membered_list:
+        - :string
     InstanceMonitoring:
     - :structure:
         Enabled:
@@ -465,6 +470,14 @@
                                 :type: :integer
                           NoDevice:
                             :type: :boolean
+                  ClassicLinkVPCId:
+                    :type: :string
+                  ClassicLinkVPCSecurityGroups:
+                    :ignore: true
+                    :children:
+                      member:
+                        :rename: :classic_link_vpc_security_groups
+                        :list: true
                   InstanceMonitoring:
                     :children:
                       Enabled:
