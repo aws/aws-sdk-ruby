@@ -1420,6 +1420,9 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
+	  #   @option options [String] :request_payer If specified, the request
+	  #     will contain the specified String value in the x-amz-request-payer
+	  #     header. This is required for Requester Pays enabled buckets.
       #   @option options [Time] :if_modified_since If specified, the
       #     response will contain an additional `:modified` value that
       #     returns true if the object was modified after the given
@@ -1457,7 +1460,8 @@ module AWS
       #
       object_method(:get_object, :get,
                     :header_options => {
-                      :if_modified_since => "If-Modified-Since",
+                      :request_payer => "x-amz-request-payer",
+					  :if_modified_since => "If-Modified-Since",
                       :if_unmodified_since => "If-Unmodified-Since",
                       :if_match => "If-Match",
                       :if_none_match => "If-None-Match",
