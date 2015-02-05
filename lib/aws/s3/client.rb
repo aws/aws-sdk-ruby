@@ -1461,7 +1461,7 @@ module AWS
       object_method(:get_object, :get,
                     :header_options => {
                       :request_payer => "x-amz-request-payer",
-					  :if_modified_since => "If-Modified-Since",
+                      :if_modified_since => "If-Modified-Since",
                       :if_unmodified_since => "If-Unmodified-Since",
                       :if_match => "If-Match",
                       :if_none_match => "If-None-Match",
