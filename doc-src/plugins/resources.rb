@@ -75,7 +75,7 @@ You can supply a client object with custom configuration that will be
 used for all resource operations.  If you do not pass `:client`,
 a default client will be constructed.
 
-    client = Aws::#{name}.new(region: 'us-west-2')
+    client = Aws::#{svc_class.name.split('::')[1]}::Client.new(region: 'us-west-2')
     #{name.downcase} = #{svc_class.name}.new(client: client)
 
 # #{name} Resource Classes
