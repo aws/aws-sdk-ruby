@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS::EC2 - `AWS::EC2::InstanceCollection#create` now passes through the
+  optional `:client_token`. Resolves #640.
+
 * Feature - AWS::S3 - Added a `:request_payer` option to `AWS::S3::Client#get_object`
   that sets the "x-amz-request-payer" header with the given value.
 
