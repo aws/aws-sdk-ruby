@@ -28,8 +28,7 @@ task 'github:release' do
     :content_type => 'application/octet-stream')
 
   $GEM_NAMES.each do |gem_name|
-    suffix = '.pre' unless gem_name == 'aws-sdk-core'
-    gh.upload_asset(release.url, "#{gem_name}-#{$VERSION}#{suffix}.gem",
+    gh.upload_asset(release.url, "#{gem_name}-#{$VERSION}.gem",
       :content_type => 'application/octet-stream')
   end
 
