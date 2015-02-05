@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.22 (2015-02-05)
 ------------------
 
 * Issue - Aws::EC2 - Fixed the return value from
