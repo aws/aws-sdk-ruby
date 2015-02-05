@@ -4,7 +4,7 @@ task 'gems:build' do
   $GEM_NAMES.each do |gem_name|
     Dir.chdir(gem_name) do
       sh("gem build #{gem_name}.gemspec")
-      sh("mv #{gem_name}-#{$VERSION}*.gem ..")
+      sh("mv #{gem_name}-#{$VERSION}.gem ..")
     end
   end
 end
