@@ -1420,9 +1420,9 @@ module AWS
       #   @param [Hash] options
       #   @option options [required,String] :bucket_name
       #   @option options [required,String] :key
-	  #   @option options [String] :request_payer If specified, the request
-	  #     will contain the specified String value in the x-amz-request-payer
-	  #     header. This is required for Requester Pays enabled buckets.
+      #   @option options [String] :request_payer If specified, the request
+      #     will contain the specified String value in the x-amz-request-payer
+      #     header. This is required for Requester Pays enabled buckets.
       #   @option options [Time] :if_modified_since If specified, the
       #     response will contain an additional `:modified` value that
       #     returns true if the object was modified after the given
