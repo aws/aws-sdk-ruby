@@ -67,6 +67,7 @@ module AWS
           :cidr_block => '192.0.0.0/16',
           :dhcp_options_id => 'dopt-12345',
           :instance_tenancy => 'default',
+          :is_default => true,
           :tag_set => [],
         }}
 
@@ -107,6 +108,22 @@ module AWS
 
           it 'is returned as a symbol' do
             vpc.instance_tenancy.should == :default
+          end
+
+        end
+
+        context '#is_default' do
+
+          it 'is returned as a boolean' do
+            vpc.is_default.should be_truthy
+          end
+
+        end
+
+        context '#is_default?' do
+
+          it 'is returned as a boolean' do
+            vpc.is_default?.should be_truthy
           end
 
         end
