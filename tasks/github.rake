@@ -14,7 +14,7 @@ task 'github:release' do
   gh_access_token = `rake github:access-token`
   gh = Octokit::Client.new(access_token: gh_access_token)
 
-  repo = 'aws/aws-sdk-core-ruby'
+  repo = 'aws/aws-sdk-ruby'
   tag_ref_sha = `git show-ref v#{$VERSION}`.split(' ').first
   tag = gh.tag(repo, tag_ref_sha)
 
