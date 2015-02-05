@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS::AutoScaling - Added support for classic link to launch configurations.
+  Closes #691.
+
 * Feature - AWS::EC2 - `AWS::EC2::InstanceCollection#create` now passes through the
   optional `:client_token`. Resolves #640.
 
