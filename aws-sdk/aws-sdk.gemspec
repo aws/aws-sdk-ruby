@@ -13,6 +13,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files += Dir['lib/**/*.rb']
 
-  spec.add_dependency('aws-sdk-resources', version + '.pre')
+  spec.add_dependency('aws-sdk-resources', version)
 
 end
