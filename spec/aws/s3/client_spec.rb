@@ -1599,6 +1599,7 @@ module AWS
         it_should_behave_like "sends option as header", :if_unmodified_since, "If-Unmodified-Since"
         it_should_behave_like "sends option as header", :if_match, "If-Match"
         it_should_behave_like "sends option as header", :if_none_match, "If-None-Match"
+		it_should_behave_like "sends option as header", :request_payer, "x-amz-request-payer"
 
         it_should_behave_like "sends option as header", :sse_customer_algorithm, "x-amz-server-side-encryption-customer-algorithm"
         it_should_behave_like "sends option as header", :sse_customer_key, "x-amz-server-side-encryption-customer-key"

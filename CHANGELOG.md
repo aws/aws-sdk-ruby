@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS::S3 - Added a `:request_payer` option to `AWS::S3::Client#get_object`
+  that sets the "x-amz-request-payer" header with the given value.
+
 * Issue - AWS::S3 - Resolved an issue with `AWS::S3::Client#get_bucket_location`
   for buckets in the eu-central-1 region.
 
