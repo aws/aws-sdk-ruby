@@ -71,7 +71,7 @@ module Aws
     # Yields the current and each following response to the given block.
     # @yieldparam [Response] response
     # @return [Enumerable,nil] Returns a new Enumerable if no block is given.
-    def each_page(&block)
+    def each(&block)
       return enum_for(:each_page) unless block_given?
       response = self
       yield(response)
@@ -80,7 +80,7 @@ module Aws
         yield(response)
       end
     end
-    alias each each_page
+    alias each_page each
 
     # @api private
     def count
