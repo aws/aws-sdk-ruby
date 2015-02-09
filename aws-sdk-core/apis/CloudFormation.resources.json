@@ -94,7 +94,7 @@
             "type": "StackResource",
             "identifiers": [
               { "target": "StackName", "source": "identifier", "name": "Name" },
-              { "target": "StackName", "source": "input" }
+              { "target": "LogicalId", "source": "input" }
             ]
           }
         }
@@ -135,8 +135,8 @@
     },
     "StackResource": {
       "identifiers": [
-        { "name": "LogicalId" },
-        { "name": "StackName" }
+        { "name": "StackName" },
+        { "name": "LogicalId" }
       ],
       "shape": "StackResourceDetail",
       "load": {
@@ -162,8 +162,8 @@
     },
     "StackResourceSummary": {
       "identifiers": [
-        { "name": "LogicalId" },
-        { "name": "StackName" }
+        { "name": "StackName" },
+        { "name": "LogicalId" }
       ],
       "shape": "StackResourceSummary",
       "has": {

@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - CloudFormation - Resolved an issue with `Aws::CloudFormation` resource
+  interfaces for accessing associated "has" associations. Fixes
+  [GitHub issue #209](https://github.com/aws/aws-sdk-core-ruby/issues/209).
+
 * Issue - Resource Waiters - Resolved an issue with resource waiters raising
   an error after success. Introduced v2.0.19.pre. Fixes aws/aws-sdk-core#210.
 
