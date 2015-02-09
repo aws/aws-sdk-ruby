@@ -88,11 +88,10 @@ module Aws
       def wait(options)
         catch(:success) do
           failure_msg = catch(:failure) do
-            poll(options)
-            return true
+            return poll(options)
           end
           raise Errors::WaiterFailed.new(failure_msg || 'waiter failed')
-        end
+        end || true
       end
 
       private

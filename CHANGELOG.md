@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resource Waiters - Resolved an issue with resource waiters raising
+  an error after success. Introduced v2.0.19.pre. Fixes aws/aws-sdk-core#210.
+
 2.0.22 (2015-02-05)
 ------------------
 

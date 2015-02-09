@@ -214,7 +214,9 @@ module Aws
           resp = resource.client.wait_until(@waiter_name, params)
 
           resource_opts = resource.identifiers.dup
-          resource_opts[:data] = JMESPath.search(@path, resp.data) if @path
+          if @path && resp.respond_to?(:data)
+            resource_opts[:data] = JMESPath.search(@path, resp.data)
+          end
           resource_opts[:client] = resource.client
           resource.class.new(resource_opts)
         end

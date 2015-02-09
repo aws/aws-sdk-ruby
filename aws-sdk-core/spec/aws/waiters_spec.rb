@@ -78,7 +78,7 @@ module Aws
           client = DynamoDB::Client.new(stub_responses:true)
           client.stub_responses(:describe_table, table: { table_status: 'ACTIVE' })
           r = client.wait_until(:table_exists, table_name:'foo')
-          expect(r).to be(true)
+          expect(!!r).to be(true)
         end
 
         it 'yields the waiter to the client #wait_until block' do
@@ -92,6 +92,24 @@ module Aws
               throw :success
             end
           end
+        end
+
+        it 'returns true when :success thrown' do
+          result = client.wait_until(:instance_running) do |waiter|
+            waiter.before_attempt do
+              throw :success
+            end
+          end
+          expect(result).to be(true)
+        end
+
+        it 'returns the thrown value when :success thrown' do
+          result = client.wait_until(:instance_running) do |waiter|
+            waiter.before_attempt do
+              throw :success, 'sweet!'
+            end
+          end
+          expect(result).to eq('sweet!')
         end
 
         it 'triggers callbacks before sending and before waiting' do
@@ -123,6 +141,13 @@ module Aws
           expect {
             client.wait_until(:instance_running)
           }.not_to raise_error
+        end
+
+        it 'returns the client response' do
+          instances << { state: { name: 'running' }}
+          client.stub_responses(:describe_instances, data)
+          resp = client.wait_until(:instance_running)
+          expect(resp).to be_kind_of(Seahorse::Client::Response)
         end
 
         it 'raises an error when failed' do
@@ -205,12 +230,14 @@ module Aws
           let(:client) { S3::Client.new(stub_responses: true) }
 
           it 'succeedes when an expected error is encountered' do
+            attempts = 0
             client.handle do |context|
+              attempts += 1
               context.http_response.status_code = 404
               Seahorse::Client::Response.new(context:context)
             end
-            result = client.wait_until(:bucket_not_exists, bucket:'aws-sdk')
-            expect(result).to be(true)
+            client.wait_until(:bucket_not_exists, bucket:'aws-sdk')
+            expect(attempts).to be(1)
           end
 
           it 'fails when an expected error is not encountered' do
@@ -243,9 +270,15 @@ module Aws
 
           it 'can match an error code' do
             client = DynamoDB::Client.new(stub_responses:true)
-            client.stub_responses(:describe_table, 'ResourceNotFoundException')
-            r = client.wait_until(:table_not_exists, table_name:'foo')
-            expect(r).to be(true)
+            attempts = 0
+            client.handle do |context|
+              attempts += 1
+              resp = Seahorse::Client::Response.new(context:context)
+              resp.error = DynamoDB::Errors::ResourceNotFoundException.new(context, 'msg')
+              resp
+            end
+            client.wait_until(:table_not_exists, table_name:'foo')
+            expect(attempts).to be(1)
           end
 
         end
