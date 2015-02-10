@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.23 (2015-02-10)
 ------------------
 
 * Feature - Aws::DynamoDB - Added support for the new index scan feature to
