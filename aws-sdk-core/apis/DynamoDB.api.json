@@ -1127,6 +1127,7 @@
       "required":["TableName"],
       "members":{
         "TableName":{"shape":"TableName"},
+        "IndexName":{"shape":"IndexName"},
         "AttributesToGet":{"shape":"AttributeNameList"},
         "Limit":{"shape":"PositiveIntegerObject"},
         "Select":{"shape":"Select"},

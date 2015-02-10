@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Added support for the new index scan feature to
+  `Aws::DynamoDB::Client`.
+
 * Issue - Aws::S3 - Resolved an issue where calling `Aws::S3::Client#get_object`
   with a block would yield error data for non-200 HTTP responses.
   Resolves [GitHub issue #207](https://github.com/aws/aws-sdk-core-ruby/issues/207).
