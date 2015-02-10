@@ -11,6 +11,6 @@ end
 
 task 'gems:push' do
   $GEM_NAMES.each do |gem_name|
-    sh("gem push #{gem_name}-#{$VERSION}*.gem")
+    sh("gem push #{gem_name}-#{$VERSION}.gem")
   end
 end
