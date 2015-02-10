@@ -10,7 +10,8 @@ Unreleased Changes
   [GitHub issue #209](https://github.com/aws/aws-sdk-core-ruby/issues/209).
 
 * Issue - Resource Waiters - Resolved an issue with resource waiters raising
-  an error after success. Introduced v2.0.19.pre. Fixes aws/aws-sdk-core#210.
+  an error after success. Introduced v2.0.19.pre. Resolves
+  [GitHub issue #210](https://github.com/aws/aws-sdk-core-ruby/issues/210).
 
 2.0.22 (2015-02-05)
 ------------------
