@@ -69,10 +69,10 @@ module Aws
 
         def stub_http_body(resp)
           payload = resp.context.operation.output.payload
-          body = resp.context.http_response.body
-          body.write(resp.data[payload])
-          body.rewind if body.respond_to?(:rewind)
-          resp.data[payload] = body
+          resp.context.http_response.signal_headers(200, {})
+          resp.context.http_response.signal_data(resp.data[payload])
+          resp.context.http_response.signal_done
+          resp.data[payload] = resp.context.http_response.body
         end
 
       end

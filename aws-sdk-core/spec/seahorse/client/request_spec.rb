@@ -68,15 +68,18 @@ module Seahorse
 
         let(:handler) do
           Proc.new do
-            context.http_response.body.write('part1')
-            context.http_response.body.write('part2')
-            context.http_response.body.write('part3')
+            context.http_response.signal_headers(200, {})
+            context.http_response.signal_data('part1')
+            context.http_response.signal_data('part2')
+            context.http_response.signal_data('part3')
+            context.http_response.signal_done
             Response.new(context: context)
           end
         end
 
         before(:each) do
-          allow(handlers).to receive(:to_stack).and_return(handler)
+          handlers.add(Plugins::ResponseTarget::Handler, step: :initialize)
+          handlers.add(double('send-handler-class', new: handler))
         end
 
         describe 'String target' do

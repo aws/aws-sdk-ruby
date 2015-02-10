@@ -48,6 +48,7 @@ module Seahorse
       autoload :ParamConversion, 'seahorse/client/plugins/param_conversion'
       autoload :ParamValidation, 'seahorse/client/plugins/param_validation'
       autoload :RaiseResponseErrors, 'seahorse/client/plugins/raise_response_errors'
+      autoload :ResponseTarget, 'seahorse/client/plugins/response_target'
       autoload :RestfulBindings, 'seahorse/client/plugins/restful_bindings'
     end
 

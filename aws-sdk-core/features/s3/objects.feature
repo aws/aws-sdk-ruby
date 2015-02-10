@@ -27,6 +27,10 @@ Feature: S3 Objects
     Then the body should be an IO object
     And the body#read method should return "hello"
 
+  Scenario: Using block mode with GET object and errors
+    When I get an object that doesn't exist with a read block
+    Then an error should be raise and the block should not yield
+
   @paging
   Scenario: Paging responses
     Given I put nothing to the key "photos/camping/cascades.jpg"

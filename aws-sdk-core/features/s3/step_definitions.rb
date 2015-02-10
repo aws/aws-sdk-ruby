@@ -215,3 +215,19 @@ Then(/^I make an unauthenticated HTTP request for key "(.*?)"$/) do |key|
   url = "https://#{@bucket_name}.s3.amazonaws.com/#{key}"
   @resp = Net::HTTP.get(URI(url))
 end
+
+When(/^I get an object that doesn't exist with a read block$/) do
+  @yielded = []
+  begin
+    @client.get_object(bucket: @bucket_name, key: 'bad-key') do |chunk|
+      @yielded << chunk
+    end
+  rescue => error
+    @error = error
+  end
+end
+
+Then(/^an error should be raise and the block should not yield$/) do
+  expect(@error).to be_kind_of(Aws::S3::Errors::NoSuchKey)
+  expect(@yielded).to eq([])
+end

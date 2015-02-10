@@ -13,6 +13,7 @@ module Seahorse
         Plugins::ParamConversion,
         Plugins::ParamValidation,
         Plugins::RaiseResponseErrors,
+        Plugins::ResponseTarget,
       ])
 
       # @api private
