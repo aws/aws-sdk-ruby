@@ -1,8 +1,6 @@
 ---
-title: Home
+title: Developer Guide
 ---
-
-# Developer Guide
 
 ## Sections
 
