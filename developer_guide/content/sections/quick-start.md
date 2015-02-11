@@ -15,6 +15,7 @@ gem 'aws-sdk', '~> 2'
 ```language-ruby
 require 'aws-sdk'
 
+# comment here
 Aws.config[:region] = 'us-west-2'
 Aws.config[:credentials] = Aws::Credentials.new('akid', 'secret')
 ```
