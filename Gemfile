@@ -18,9 +18,21 @@ group :test do
 end
 
 group :docs do
+
   gem 'yard'
   gem 'yard-sitemap', '~> 1.0'
-  gem 'rdiscount', require: false
+  gem 'rdiscount'
+
+  gem 'nanoc' # guide
+
+  # guide - syntax highlight
+  gem 'nokogiri'
+  gem 'coderay'
+
+  # guide - local preview
+  gem 'adsf' # a dead simple fileserver
+  gem 'guard-nanoc'
+
 end
 
 group :release do

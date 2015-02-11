@@ -7,3 +7,7 @@
 /coverage
 /Gemfile.lock
 /vendor
+
+/developer_guide/output
+/developer_guide/tmp
+/developer_guide/crash.log
