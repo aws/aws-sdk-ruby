@@ -2,16 +2,12 @@
 title: Developer Guide
 ---
 
+The AWS SDK for Ruby is available from [RubyGems.org](https://rubygems.org/) as the [`aws-sdk` gem](https://rubygems.org/gems/aws-sdk).
+
 ## Sections
 
-* <%= link_to('Quick Start', '/quick-start/') %>
-* <%= link_to('Basic Usage', '/') %>
-* <%= link_to('Pagination', '/') %>
-* <%= link_to('Watiers', '/') %>
-* <%= link_to('Logging', '/') %>
-* <%= link_to('Testing', '/') %>
-* <%= link_to('Extending', '/') %>
-* <%= link_to('Performance Tuning', '/') %>
+<% sections.each do |name, _| %>
+* <%= section_link(name) %><% end %>
 
 ## Links of Interest
 

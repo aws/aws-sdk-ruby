@@ -24,7 +24,13 @@ compile '*' do
 end
 
 route '*' do
-  if item[:extension] == 'md'
+  if match = item.identifier.match(/^\/sections\/(.+)$/)
+    item[:section] = match[1].chop
+    puts [item.identifier, match[1]].inspect
+    item[:path] = '/' + match[1]
+    puts item[:path]
+    '/' + match[1] + 'index.html'
+  elsif item[:extension] == 'md'
     item.identifier + 'index.html'
   else
     item.identifier.chop + '.' + item[:extension]
