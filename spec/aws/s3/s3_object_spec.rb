@@ -1012,7 +1012,8 @@ module AWS
         end
 
         it 'should add a parameter for the expiration timestamp' do
-          Time.stub(:now).and_return(Time.parse("2011-05-23 17:39:04 -0700"))
+          now = Time.parse("2011-05-23 17:39:04 -0700")
+          Time.stub(:now).and_return(now)
           object.url_for(:get).query.split("&").
             should include("Expires=1306201144")
         end
@@ -1037,7 +1038,8 @@ module AWS
         end
 
         it 'should accept an integer offset for :expires' do
-          Time.stub(:now).and_return(Time.parse("2011-05-23 18:39:00 -0700"))
+          now = Time.parse("2011-05-23 18:39:00 -0700")
+          Time.stub(:now).and_return(now)
           object.url_for(:get, :expires => 4).
             query.split("&").should include("Expires=1306201144")
         end

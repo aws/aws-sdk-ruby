@@ -16,9 +16,9 @@ rescue LoadError
 end
 
 task 'test:loading' do
-  execute_cmd("ruby spec/require_test_1.rb")
-  execute_cmd("ruby spec/require_test_2.rb")
-  execute_cmd("ruby spec/require_test_3.rb")
+  sh("ruby spec/require_test_1.rb")
+  sh("ruby spec/require_test_2.rb")
+  sh("ruby spec/require_test_3.rb")
 end
 
 task 'test' => 'test:unit'
