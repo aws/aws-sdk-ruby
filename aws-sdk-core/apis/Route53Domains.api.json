@@ -30,6 +30,27 @@
         }
       ]
     },
+    "DeleteTagsForDomain":{
+      "name":"DeleteTagsForDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTagsForDomainRequest"},
+      "output":{"shape":"DeleteTagsForDomainResponse"},
+      "errors":[
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        },
+        {
+          "shape":"OperationLimitExceeded",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        }
+      ]
+    },
     "DisableDomainAutoRenew":{
       "name":"DisableDomainAutoRenew",
       "http":{
@@ -183,6 +204,27 @@
       "errors":[
         {
           "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        }
+      ]
+    },
+    "ListTagsForDomain":{
+      "name":"ListTagsForDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForDomainRequest"},
+      "output":{"shape":"ListTagsForDomainResponse"},
+      "errors":[
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        },
+        {
+          "shape":"OperationLimitExceeded",
           "error":{"httpStatusCode":400},
           "exception":true
         }
@@ -369,6 +411,27 @@
         },
         {
           "shape":"TLDRulesViolation",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        },
+        {
+          "shape":"OperationLimitExceeded",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        }
+      ]
+    },
+    "UpdateTagsForDomain":{
+      "name":"UpdateTagsForDomain",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateTagsForDomainRequest"},
+      "output":{"shape":"UpdateTagsForDomainResponse"},
+      "errors":[
+        {
+          "shape":"InvalidInput",
           "error":{"httpStatusCode":400},
           "exception":true
         },
@@ -678,6 +741,22 @@
       ]
     },
     "DNSSec":{"type":"string"},
+    "DeleteTagsForDomainRequest":{
+      "type":"structure",
+      "required":[
+        "DomainName",
+        "TagsToDelete"
+      ],
+      "members":{
+        "DomainName":{"shape":"DomainName"},
+        "TagsToDelete":{"shape":"TagKeyList"}
+      }
+    },
+    "DeleteTagsForDomainResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "DisableDomainAutoRenewRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -825,6 +904,9 @@
         "AU_ID_NUMBER",
         "AU_ID_TYPE",
         "CA_LEGAL_TYPE",
+        "ES_IDENTIFICATION",
+        "ES_IDENTIFICATION_TYPE",
+        "ES_LEGAL_FORM",
         "FI_BUSINESS_NUMBER",
         "FI_ID_NUMBER",
         "IT_PIN",
@@ -838,6 +920,7 @@
       "type":"string",
       "max":2048
     },
+    "FIAuthKey":{"type":"string"},
     "GetDomainDetailRequest":{
       "type":"structure",
       "required":["DomainName"],
@@ -949,6 +1032,20 @@
       "members":{
         "Operations":{"shape":"OperationSummaryList"},
         "NextPageMarker":{"shape":"PageMarker"}
+      }
+    },
+    "ListTagsForDomainRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{"shape":"DomainName"}
+      }
+    },
+    "ListTagsForDomainResponse":{
+      "type":"structure",
+      "required":["TagList"],
+      "members":{
+        "TagList":{"shape":"TagList"}
       }
     },
     "Nameserver":{
@@ -1084,13 +1181,29 @@
       "error":{"httpStatusCode":400},
       "exception":true
     },
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{"shape":"TagKey"},
+        "Value":{"shape":"TagValue"}
+      }
+    },
+    "TagKey":{"type":"string"},
+    "TagKeyList":{
+      "type":"list",
+      "member":{"shape":"TagKey"}
+    },
+    "TagList":{
+      "type":"list",
+      "member":{"shape":"Tag"}
+    },
+    "TagValue":{"type":"string"},
     "Timestamp":{"type":"timestamp"},
     "TransferDomainRequest":{
       "type":"structure",
       "required":[
         "DomainName",
         "DurationInYears",
-        "Nameservers",
         "AdminContact",
         "RegistrantContact",
         "TechContact"
@@ -1167,6 +1280,7 @@
       ],
       "members":{
         "DomainName":{"shape":"DomainName"},
+        "FIAuthKey":{"shape":"FIAuthKey"},
         "Nameservers":{"shape":"NameserverList"}
       }
     },
@@ -1175,6 +1289,19 @@
       "required":["OperationId"],
       "members":{
         "OperationId":{"shape":"OperationId"}
+      }
+    },
+    "UpdateTagsForDomainRequest":{
+      "type":"structure",
+      "required":["DomainName"],
+      "members":{
+        "DomainName":{"shape":"DomainName"},
+        "TagsToUpdate":{"shape":"TagList"}
+      }
+    },
+    "UpdateTagsForDomainResponse":{
+      "type":"structure",
+      "members":{
       }
     },
     "ZipCode":{

@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Aws::IAM - Added support for named and managed policies.
 
+* Feature - Aws::Route53Domains - Added support for tagging operations.
+
 2.0.23 (2015-02-10)
 ------------------
 
