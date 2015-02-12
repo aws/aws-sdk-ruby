@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.24 (2015-02-12)
 ------------------
 
 * Feature - Aws::IAM - Added support for named and managed policies.
