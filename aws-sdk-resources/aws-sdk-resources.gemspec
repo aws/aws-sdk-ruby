@@ -5,9 +5,10 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-resources'
   spec.version       = version
   spec.summary       = 'AWS SDK for Ruby - Resources'
-  spec.description   = 'Provides resource-oriented abstractions for AWS.'
+  spec.description   = 'Provides resource oriented interfaces and other higher-level abstractions for many AWS services. This gem is part of the official AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
-  spec.homepage      = 'http://github.com/aws/aws-sdk-core-ruby'
+  spec.email         = ['trevrowe@amazon.com']
+  spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache 2.0'
   spec.require_paths = ['lib']
 
