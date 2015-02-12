@@ -61,13 +61,24 @@ module Aws
         end
       end
 
+      def map(name, shape, hash)
+        node(name, shape) do
+          hash.each do |key, value|
+            node('entry', shape)  do
+              member(shape.key.location_name || 'key', shape.key, key)
+              member(shape.value.location_name || 'value', shape.value, value)
+            end
+          end
+        end
+      end
+
       def member(name, shape, value)
         case shape.type
         when 'structure' then structure(name, shape, value)
         when 'list'      then list(name, shape, value)
         when 'timestamp' then node(name, shape, shape.format_time(value, 'iso8601'))
         when 'blob'      then node(name, shape, Base64.strict_encode64(value.read))
-        when 'map'       then raise NotImplementedError, 'not supported'
+        when 'map'       then map(name, shape, value)
         else
           node(name, shape, value.to_s)
         end
