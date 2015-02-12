@@ -44,6 +44,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -81,6 +89,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -107,6 +123,149 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "AttachGroupPolicy":{
+      "name":"AttachGroupPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachGroupPolicyRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "AttachRolePolicy":{
+      "name":"AttachRolePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachRolePolicyRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "AttachUserPolicy":{
+      "name":"AttachUserPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachUserPolicyRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -164,6 +323,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -196,6 +363,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -222,6 +397,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -265,6 +448,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -295,6 +486,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -347,6 +546,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -386,6 +593,130 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "CreatePolicy":{
+      "name":"CreatePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePolicyRequest"},
+      "output":{
+        "shape":"CreatePolicyResponse",
+        "resultWrapper":"CreatePolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"EntityAlreadyExistsException",
+          "error":{
+            "code":"EntityAlreadyExists",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"MalformedPolicyDocumentException",
+          "error":{
+            "code":"MalformedPolicyDocument",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "CreatePolicyVersion":{
+      "name":"CreatePolicyVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreatePolicyVersionRequest"},
+      "output":{
+        "shape":"CreatePolicyVersionResponse",
+        "resultWrapper":"CreatePolicyVersionResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"MalformedPolicyDocumentException",
+          "error":{
+            "code":"MalformedPolicyDocument",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -429,6 +760,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -468,6 +807,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -511,6 +858,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -541,6 +896,14 @@
             "code":"EntityAlreadyExists",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -580,6 +943,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -606,6 +977,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -636,6 +1015,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -661,6 +1048,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -700,6 +1095,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -726,6 +1129,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -765,6 +1176,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -802,6 +1221,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -828,6 +1255,122 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "DeletePolicy":{
+      "name":"DeletePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePolicyRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"DeleteConflictException",
+          "error":{
+            "code":"DeleteConflict",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "DeletePolicyVersion":{
+      "name":"DeletePolicyVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeletePolicyVersionRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"DeleteConflictException",
+          "error":{
+            "code":"DeleteConflict",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -867,6 +1410,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -893,6 +1444,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -932,6 +1491,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -969,6 +1536,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -995,6 +1570,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1034,6 +1617,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1060,6 +1651,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1097,6 +1696,149 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "DetachGroupPolicy":{
+      "name":"DetachGroupPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachGroupPolicyRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "DetachRolePolicy":{
+      "name":"DetachRolePolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachRolePolicyRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "DetachUserPolicy":{
+      "name":"DetachUserPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DetachUserPolicyRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1154,6 +1896,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1176,6 +1926,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1189,7 +1947,17 @@
       "output":{
         "shape":"GetAccountAuthorizationDetailsResponse",
         "resultWrapper":"GetAccountAuthorizationDetailsResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "GetAccountPasswordPolicy":{
       "name":"GetAccountPasswordPolicy",
@@ -1210,6 +1978,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1222,7 +1998,17 @@
       "output":{
         "shape":"GetAccountSummaryResponse",
         "resultWrapper":"GetAccountSummaryResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "GetCredentialReport":{
       "name":"GetCredentialReport",
@@ -1261,6 +2047,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1282,6 +2076,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1307,6 +2109,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1330,6 +2140,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1351,6 +2169,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1385,6 +2211,94 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "GetPolicy":{
+      "name":"GetPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPolicyRequest"},
+      "output":{
+        "shape":"GetPolicyResponse",
+        "resultWrapper":"GetPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "GetPolicyVersion":{
+      "name":"GetPolicyVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPolicyVersionRequest"},
+      "output":{
+        "shape":"GetPolicyVersionResponse",
+        "resultWrapper":"GetPolicyVersionResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1408,6 +2322,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1429,6 +2351,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1463,6 +2393,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1484,6 +2422,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1509,6 +2455,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1530,6 +2484,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1555,6 +2517,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1568,7 +2538,177 @@
       "output":{
         "shape":"ListAccountAliasesResponse",
         "resultWrapper":"ListAccountAliasesResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "ListAttachedGroupPolicies":{
+      "name":"ListAttachedGroupPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAttachedGroupPoliciesRequest"},
+      "output":{
+        "shape":"ListAttachedGroupPoliciesResponse",
+        "resultWrapper":"ListAttachedGroupPoliciesResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "ListAttachedRolePolicies":{
+      "name":"ListAttachedRolePolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAttachedRolePoliciesRequest"},
+      "output":{
+        "shape":"ListAttachedRolePoliciesResponse",
+        "resultWrapper":"ListAttachedRolePoliciesResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "ListAttachedUserPolicies":{
+      "name":"ListAttachedUserPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListAttachedUserPoliciesRequest"},
+      "output":{
+        "shape":"ListAttachedUserPoliciesResponse",
+        "resultWrapper":"ListAttachedUserPoliciesResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "ListEntitiesForPolicy":{
+      "name":"ListEntitiesForPolicy",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListEntitiesForPolicyRequest"},
+      "output":{
+        "shape":"ListEntitiesForPolicyResponse",
+        "resultWrapper":"ListEntitiesForPolicyResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListGroupPolicies":{
       "name":"ListGroupPolicies",
@@ -1590,6 +2730,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1603,7 +2751,17 @@
       "output":{
         "shape":"ListGroupsResponse",
         "resultWrapper":"ListGroupsResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListGroupsForUser":{
       "name":"ListGroupsForUser",
@@ -1625,6 +2783,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1638,7 +2804,17 @@
       "output":{
         "shape":"ListInstanceProfilesResponse",
         "resultWrapper":"ListInstanceProfilesResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListInstanceProfilesForRole":{
       "name":"ListInstanceProfilesForRole",
@@ -1658,6 +2834,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1683,6 +2867,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1696,7 +2888,79 @@
       "output":{
         "shape":"ListOpenIDConnectProvidersResponse",
         "resultWrapper":"ListOpenIDConnectProvidersResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "ListPolicies":{
+      "name":"ListPolicies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPoliciesRequest"},
+      "output":{
+        "shape":"ListPoliciesResponse",
+        "resultWrapper":"ListPoliciesResult"
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "ListPolicyVersions":{
+      "name":"ListPolicyVersions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListPolicyVersionsRequest"},
+      "output":{
+        "shape":"ListPolicyVersionsResponse",
+        "resultWrapper":"ListPolicyVersionsResult"
+      },
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListRolePolicies":{
       "name":"ListRolePolicies",
@@ -1718,6 +2982,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1731,7 +3003,17 @@
       "output":{
         "shape":"ListRolesResponse",
         "resultWrapper":"ListRolesResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListSAMLProviders":{
       "name":"ListSAMLProviders",
@@ -1743,7 +3025,17 @@
       "output":{
         "shape":"ListSAMLProvidersResponse",
         "resultWrapper":"ListSAMLProvidersResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListServerCertificates":{
       "name":"ListServerCertificates",
@@ -1755,7 +3047,17 @@
       "output":{
         "shape":"ListServerCertificatesResponse",
         "resultWrapper":"ListServerCertificatesResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListSigningCertificates":{
       "name":"ListSigningCertificates",
@@ -1775,6 +3077,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1800,6 +3110,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1813,7 +3131,17 @@
       "output":{
         "shape":"ListUsersResponse",
         "resultWrapper":"ListUsersResult"
-      }
+      },
+      "errors":[
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
     },
     "ListVirtualMFADevices":{
       "name":"ListVirtualMFADevices",
@@ -1861,6 +3189,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1896,6 +3232,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1935,6 +3279,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -1961,6 +3313,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -1991,6 +3351,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -2017,6 +3385,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -2056,6 +3432,59 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
+        }
+      ]
+    },
+    "SetDefaultPolicyVersion":{
+      "name":"SetDefaultPolicyVersion",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SetDefaultPolicyVersionRequest"},
+      "errors":[
+        {
+          "shape":"NoSuchEntityException",
+          "error":{
+            "code":"NoSuchEntity",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidInputException",
+          "error":{
+            "code":"InvalidInput",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"LimitExceededException",
+          "error":{
+            "code":"LimitExceeded",
+            "httpStatusCode":409,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -2082,6 +3511,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -2121,6 +3558,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -2158,6 +3603,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -2193,6 +3646,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -2241,6 +3702,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -2267,6 +3736,14 @@
             "code":"NoSuchEntity",
             "httpStatusCode":404,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -2310,6 +3787,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -2347,6 +3832,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     },
@@ -2373,6 +3866,14 @@
             "code":"LimitExceeded",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -2419,6 +3920,14 @@
             "code":"EntityTemporarilyUnmodifiable",
             "httpStatusCode":409,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -2469,6 +3978,14 @@
             "code":"KeyPairMismatch",
             "httpStatusCode":400,
             "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
           },
           "exception":true
         }
@@ -2539,6 +4056,14 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ServiceFailureException",
+          "error":{
+            "code":"ServiceFailure",
+            "httpStatusCode":500
+          },
+          "exception":true
         }
       ]
     }
@@ -2600,6 +4125,46 @@
       "members":{
         "GroupName":{"shape":"groupNameType"},
         "UserName":{"shape":"existingUserNameType"}
+      }
+    },
+    "AttachGroupPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "GroupName",
+        "PolicyArn"
+      ],
+      "members":{
+        "GroupName":{"shape":"groupNameType"},
+        "PolicyArn":{"shape":"arnType"}
+      }
+    },
+    "AttachRolePolicyRequest":{
+      "type":"structure",
+      "required":[
+        "RoleName",
+        "PolicyArn"
+      ],
+      "members":{
+        "RoleName":{"shape":"roleNameType"},
+        "PolicyArn":{"shape":"arnType"}
+      }
+    },
+    "AttachUserPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "UserName",
+        "PolicyArn"
+      ],
+      "members":{
+        "UserName":{"shape":"userNameType"},
+        "PolicyArn":{"shape":"arnType"}
+      }
+    },
+    "AttachedPolicy":{
+      "type":"structure",
+      "members":{
+        "PolicyName":{"shape":"policyNameType"},
+        "PolicyArn":{"shape":"arnType"}
       }
     },
     "BootstrapDatum":{
@@ -2702,6 +4267,43 @@
       "type":"structure",
       "members":{
         "OpenIDConnectProviderArn":{"shape":"arnType"}
+      }
+    },
+    "CreatePolicyRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyName",
+        "PolicyDocument"
+      ],
+      "members":{
+        "PolicyName":{"shape":"policyNameType"},
+        "Path":{"shape":"policyPathType"},
+        "PolicyDocument":{"shape":"policyDocumentType"},
+        "Description":{"shape":"policyDescriptionType"}
+      }
+    },
+    "CreatePolicyResponse":{
+      "type":"structure",
+      "members":{
+        "Policy":{"shape":"Policy"}
+      }
+    },
+    "CreatePolicyVersionRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyArn",
+        "PolicyDocument"
+      ],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "PolicyDocument":{"shape":"policyDocumentType"},
+        "SetAsDefault":{"shape":"booleanType"}
+      }
+    },
+    "CreatePolicyVersionResponse":{
+      "type":"structure",
+      "members":{
+        "PolicyVersion":{"shape":"PolicyVersion"}
       }
     },
     "CreateRoleRequest":{
@@ -2882,6 +4484,24 @@
         "OpenIDConnectProviderArn":{"shape":"arnType"}
       }
     },
+    "DeletePolicyRequest":{
+      "type":"structure",
+      "required":["PolicyArn"],
+      "members":{
+        "PolicyArn":{"shape":"arnType"}
+      }
+    },
+    "DeletePolicyVersionRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyArn",
+        "VersionId"
+      ],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "VersionId":{"shape":"policyVersionIdType"}
+      }
+    },
     "DeleteRolePolicyRequest":{
       "type":"structure",
       "required":[
@@ -2945,6 +4565,39 @@
       "required":["SerialNumber"],
       "members":{
         "SerialNumber":{"shape":"serialNumberType"}
+      }
+    },
+    "DetachGroupPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "GroupName",
+        "PolicyArn"
+      ],
+      "members":{
+        "GroupName":{"shape":"groupNameType"},
+        "PolicyArn":{"shape":"arnType"}
+      }
+    },
+    "DetachRolePolicyRequest":{
+      "type":"structure",
+      "required":[
+        "RoleName",
+        "PolicyArn"
+      ],
+      "members":{
+        "RoleName":{"shape":"roleNameType"},
+        "PolicyArn":{"shape":"arnType"}
+      }
+    },
+    "DetachUserPolicyRequest":{
+      "type":"structure",
+      "required":[
+        "UserName",
+        "PolicyArn"
+      ],
+      "members":{
+        "UserName":{"shape":"userNameType"},
+        "PolicyArn":{"shape":"arnType"}
       }
     },
     "DuplicateCertificateException":{
@@ -3140,6 +4793,36 @@
         "ClientIDList":{"shape":"clientIDListType"},
         "ThumbprintList":{"shape":"thumbprintListType"},
         "CreateDate":{"shape":"dateType"}
+      }
+    },
+    "GetPolicyRequest":{
+      "type":"structure",
+      "required":["PolicyArn"],
+      "members":{
+        "PolicyArn":{"shape":"arnType"}
+      }
+    },
+    "GetPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "Policy":{"shape":"Policy"}
+      }
+    },
+    "GetPolicyVersionRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyArn",
+        "VersionId"
+      ],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "VersionId":{"shape":"policyVersionIdType"}
+      }
+    },
+    "GetPolicyVersionResponse":{
+      "type":"structure",
+      "members":{
+        "PolicyVersion":{"shape":"PolicyVersion"}
       }
     },
     "GetRolePolicyRequest":{
@@ -3398,6 +5081,81 @@
         "Marker":{"shape":"markerType"}
       }
     },
+    "ListAttachedGroupPoliciesRequest":{
+      "type":"structure",
+      "required":["GroupName"],
+      "members":{
+        "GroupName":{"shape":"groupNameType"},
+        "PathPrefix":{"shape":"policyPathType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListAttachedGroupPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "AttachedPolicies":{"shape":"attachedPoliciesListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"markerType"}
+      }
+    },
+    "ListAttachedRolePoliciesRequest":{
+      "type":"structure",
+      "required":["RoleName"],
+      "members":{
+        "RoleName":{"shape":"roleNameType"},
+        "PathPrefix":{"shape":"policyPathType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListAttachedRolePoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "AttachedPolicies":{"shape":"attachedPoliciesListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"markerType"}
+      }
+    },
+    "ListAttachedUserPoliciesRequest":{
+      "type":"structure",
+      "required":["UserName"],
+      "members":{
+        "UserName":{"shape":"userNameType"},
+        "PathPrefix":{"shape":"policyPathType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListAttachedUserPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "AttachedPolicies":{"shape":"attachedPoliciesListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"markerType"}
+      }
+    },
+    "ListEntitiesForPolicyRequest":{
+      "type":"structure",
+      "required":["PolicyArn"],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "EntityFilter":{"shape":"EntityType"},
+        "PathPrefix":{"shape":"pathType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListEntitiesForPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "PolicyGroups":{"shape":"PolicyGroupListType"},
+        "PolicyUsers":{"shape":"PolicyUserListType"},
+        "PolicyRoles":{"shape":"PolicyRoleListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"markerType"}
+      }
+    },
     "ListGroupPoliciesRequest":{
       "type":"structure",
       "required":["GroupName"],
@@ -3512,6 +5270,41 @@
       "type":"structure",
       "members":{
         "OpenIDConnectProviderList":{"shape":"OpenIDConnectProviderListType"}
+      }
+    },
+    "ListPoliciesRequest":{
+      "type":"structure",
+      "members":{
+        "Scope":{"shape":"policyScopeType"},
+        "OnlyAttached":{"shape":"booleanType"},
+        "PathPrefix":{"shape":"policyPathType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListPoliciesResponse":{
+      "type":"structure",
+      "members":{
+        "Policies":{"shape":"policyListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"markerType"}
+      }
+    },
+    "ListPolicyVersionsRequest":{
+      "type":"structure",
+      "required":["PolicyArn"],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "Marker":{"shape":"markerType"},
+        "MaxItems":{"shape":"maxItemsType"}
+      }
+    },
+    "ListPolicyVersionsResponse":{
+      "type":"structure",
+      "members":{
+        "Versions":{"shape":"policyDocumentVersionListType"},
+        "IsTruncated":{"shape":"booleanType"},
+        "Marker":{"shape":"markerType"}
       }
     },
     "ListRolePoliciesRequest":{
@@ -3749,11 +5542,65 @@
       },
       "exception":true
     },
+    "Policy":{
+      "type":"structure",
+      "members":{
+        "PolicyName":{"shape":"policyNameType"},
+        "PolicyId":{"shape":"idType"},
+        "Arn":{"shape":"arnType"},
+        "Path":{"shape":"policyPathType"},
+        "DefaultVersionId":{"shape":"policyVersionIdType"},
+        "AttachmentCount":{"shape":"attachmentCountType"},
+        "IsAttachable":{"shape":"booleanType"},
+        "Description":{"shape":"policyDescriptionType"},
+        "CreateDate":{"shape":"dateType"},
+        "UpdateDate":{"shape":"dateType"}
+      }
+    },
     "PolicyDetail":{
       "type":"structure",
       "members":{
         "PolicyName":{"shape":"policyNameType"},
         "PolicyDocument":{"shape":"policyDocumentType"}
+      }
+    },
+    "PolicyGroup":{
+      "type":"structure",
+      "members":{
+        "GroupName":{"shape":"groupNameType"}
+      }
+    },
+    "PolicyGroupListType":{
+      "type":"list",
+      "member":{"shape":"PolicyGroup"}
+    },
+    "PolicyRole":{
+      "type":"structure",
+      "members":{
+        "RoleName":{"shape":"roleNameType"}
+      }
+    },
+    "PolicyRoleListType":{
+      "type":"list",
+      "member":{"shape":"PolicyRole"}
+    },
+    "PolicyUser":{
+      "type":"structure",
+      "members":{
+        "UserName":{"shape":"userNameType"}
+      }
+    },
+    "PolicyUserListType":{
+      "type":"list",
+      "member":{"shape":"PolicyUser"}
+    },
+    "PolicyVersion":{
+      "type":"structure",
+      "members":{
+        "Document":{"shape":"policyDocumentType"},
+        "VersionId":{"shape":"policyVersionIdType"},
+        "IsDefaultVersion":{"shape":"booleanType"},
+        "CreateDate":{"shape":"dateType"}
       }
     },
     "PutGroupPolicyRequest":{
@@ -3938,6 +5785,28 @@
         "Arn":{"shape":"arnType"},
         "UploadDate":{"shape":"dateType"},
         "Expiration":{"shape":"dateType"}
+      }
+    },
+    "ServiceFailureException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"serviceFailureExceptionMessage"}
+      },
+      "error":{
+        "code":"ServiceFailure",
+        "httpStatusCode":500
+      },
+      "exception":true
+    },
+    "SetDefaultPolicyVersionRequest":{
+      "type":"structure",
+      "required":[
+        "PolicyArn",
+        "VersionId"
+      ],
+      "members":{
+        "PolicyArn":{"shape":"arnType"},
+        "VersionId":{"shape":"policyVersionIdType"}
       }
     },
     "SigningCertificate":{
@@ -4183,6 +6052,11 @@
         "Any"
       ]
     },
+    "attachedPoliciesListType":{
+      "type":"list",
+      "member":{"shape":"AttachedPolicy"}
+    },
+    "attachmentCountType":{"type":"integer"},
     "authenticationCodeType":{
       "type":"string",
       "min":6,
@@ -4338,6 +6212,10 @@
       "max":512,
       "pattern":"(\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F)"
     },
+    "policyDescriptionType":{
+      "type":"string",
+      "max":1000
+    },
     "policyDetailListType":{
       "type":"list",
       "member":{"shape":"PolicyDetail"}
@@ -4348,6 +6226,14 @@
       "max":131072,
       "pattern":"[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
     },
+    "policyDocumentVersionListType":{
+      "type":"list",
+      "member":{"shape":"PolicyVersion"}
+    },
+    "policyListType":{
+      "type":"list",
+      "member":{"shape":"Policy"}
+    },
     "policyNameListType":{
       "type":"list",
       "member":{"shape":"policyNameType"}
@@ -4357,6 +6243,22 @@
       "min":1,
       "max":128,
       "pattern":"[\\w+=,.@-]*"
+    },
+    "policyPathType":{
+      "type":"string",
+      "pattern":"((/[A-Za-z0-9\\.,\\+@=_-]+)*)/"
+    },
+    "policyScopeType":{
+      "type":"string",
+      "enum":[
+        "All",
+        "AWS",
+        "Local"
+      ]
+    },
+    "policyVersionIdType":{
+      "type":"string",
+      "pattern":"v[1-9][0-9]*(\\.[A-Za-z0-9-]*)?"
     },
     "privateKeyType":{
       "type":"string",
@@ -4395,6 +6297,7 @@
       "max":128,
       "pattern":"[\\w+=,.@-]*"
     },
+    "serviceFailureExceptionMessage":{"type":"string"},
     "statusType":{
       "type":"string",
       "enum":[
@@ -4418,7 +6321,18 @@
         "AccessKeysPerUserQuota",
         "MFADevices",
         "MFADevicesInUse",
-        "AccountMFAEnabled"
+        "AccountMFAEnabled",
+        "AccountAccessKeysPresent",
+        "AccountSigningCertificatesPresent",
+        "AttachedPoliciesPerGroupQuota",
+        "AttachedPoliciesPerRoleQuota",
+        "AttachedPoliciesPerUserQuota",
+        "Policies",
+        "PoliciesQuota",
+        "PolicySizeQuota",
+        "PolicyVersionsInUse",
+        "PolicyVersionsInUseQuota",
+        "VersionsPerPolicyQuota"
       ]
     },
     "summaryMapType":{
