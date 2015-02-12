@@ -17,10 +17,6 @@ script: bundle exec rake
 
 bundler_args: --without docs release repl
 
-branches:
-  only:
-  - master
-
 matrix:
   exclude:
     - rvm: jruby
