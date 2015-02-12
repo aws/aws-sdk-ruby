@@ -27,10 +27,11 @@ task 'github:release' do
   gh.upload_asset(release.url, 'api-docs.zip',
     :content_type => 'application/octet-stream')
 
-  $GEM_NAMES.each do |gem_name|
-    gh.upload_asset(release.url, "#{gem_name}-#{$VERSION}.gem",
-      :content_type => 'application/octet-stream')
-  end
+  gh.upload_asset(release.url, "aws-sdk-#{$VERSION}.gem",
+    :content_type => 'application/octet-stream')
+
+  gh.upload_asset(release.url, "aws-sdk-v1-#{$VERSION}.gem",
+    :content_type => 'application/octet-stream')
 
 end
 
