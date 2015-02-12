@@ -1,4 +1,4 @@
-Unreleased Changes
+1.62.0 (2015-02-12)
 ------------------
 
 * Feature - AWS::AutoScaling - Added support for classic link to launch configurations.
