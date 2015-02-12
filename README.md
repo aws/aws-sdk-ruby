@@ -1,4 +1,4 @@
-# AWS SDK for Ruby - Version 1 [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.png?branch=master)](https://travis-ci.org/aws/aws-sdk-ruby)
+# AWS SDK for Ruby - Version 1 [![Build Status](https://travis-ci.org/aws/aws-sdk-ruby.svg?branch=aws-sdk-v1)](https://travis-ci.org/aws/aws-sdk-ruby)
 
 This is version 1 of the AWS SDK for Ruby. **Version 2 can be found in the
 [master branch](https://github.com/aws/aws-sdk-ruby).**
