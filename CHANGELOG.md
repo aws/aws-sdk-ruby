@@ -5,6 +5,8 @@ Unreleased Changes
 
 * Feature - Aws::Route53Domains - Added support for tagging operations.
 
+* Feature - Aws::ElastiCache - Added support for tagging operations.
+
 2.0.23 (2015-02-10)
 ------------------
 

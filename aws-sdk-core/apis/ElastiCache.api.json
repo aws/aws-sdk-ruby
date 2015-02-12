@@ -1,13 +1,63 @@
 {
   "metadata":{
-    "apiVersion":"2014-09-30",
+    "apiVersion":"2015-02-02",
     "endpointPrefix":"elasticache",
     "serviceFullName":"Amazon ElastiCache",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://elasticache.amazonaws.com/doc/2014-09-30/",
+    "xmlNamespace":"http://elasticache.amazonaws.com/doc/2015-02-02/",
     "protocol":"query"
   },
   "operations":{
+    "AddTagsToResource":{
+      "name":"AddTagsToResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddTagsToResourceMessage"},
+      "output":{
+        "shape":"TagListMessage",
+        "resultWrapper":"AddTagsToResourceResult"
+      },
+      "errors":[
+        {
+          "shape":"CacheClusterNotFoundFault",
+          "error":{
+            "code":"CacheClusterNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"SnapshotNotFoundFault",
+          "error":{
+            "code":"SnapshotNotFoundFault",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"TagQuotaPerResourceExceeded",
+          "error":{
+            "code":"TagQuotaPerResourceExceeded",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidARNFault",
+          "error":{
+            "code":"InvalidARN",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
     "AuthorizeCacheSecurityGroupIngress":{
       "name":"AuthorizeCacheSecurityGroupIngress",
       "http":{
@@ -244,6 +294,15 @@
           "shape":"InvalidVPCNetworkStateFault",
           "error":{
             "code":"InvalidVPCNetworkStateFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"TagQuotaPerResourceExceeded",
+          "error":{
+            "code":"TagQuotaPerResourceExceeded",
             "httpStatusCode":400,
             "senderFault":true
           },
@@ -538,6 +597,15 @@
           "shape":"InvalidVPCNetworkStateFault",
           "error":{
             "code":"InvalidVPCNetworkStateFault",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"TagQuotaPerResourceExceeded",
+          "error":{
+            "code":"TagQuotaPerResourceExceeded",
             "httpStatusCode":400,
             "senderFault":true
           },
@@ -1405,6 +1473,47 @@
         }
       ]
     },
+    "ListTagsForResource":{
+      "name":"ListTagsForResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTagsForResourceMessage"},
+      "output":{
+        "shape":"TagListMessage",
+        "resultWrapper":"ListTagsForResourceResult"
+      },
+      "errors":[
+        {
+          "shape":"CacheClusterNotFoundFault",
+          "error":{
+            "code":"CacheClusterNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"SnapshotNotFoundFault",
+          "error":{
+            "code":"SnapshotNotFoundFault",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidARNFault",
+          "error":{
+            "code":"InvalidARN",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
     "ModifyCacheCluster":{
       "name":"ModifyCacheCluster",
       "http":{
@@ -1845,6 +1954,56 @@
         }
       ]
     },
+    "RemoveTagsFromResource":{
+      "name":"RemoveTagsFromResource",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveTagsFromResourceMessage"},
+      "output":{
+        "shape":"TagListMessage",
+        "resultWrapper":"RemoveTagsFromResourceResult"
+      },
+      "errors":[
+        {
+          "shape":"CacheClusterNotFoundFault",
+          "error":{
+            "code":"CacheClusterNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"SnapshotNotFoundFault",
+          "error":{
+            "code":"SnapshotNotFoundFault",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidARNFault",
+          "error":{
+            "code":"InvalidARN",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"TagNotFoundFault",
+          "error":{
+            "code":"TagNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
     "ResetCacheParameterGroup":{
       "name":"ResetCacheParameterGroup",
       "http":{
@@ -1963,6 +2122,17 @@
         "single-az",
         "cross-az"
       ]
+    },
+    "AddTagsToResourceMessage":{
+      "type":"structure",
+      "required":[
+        "ResourceName",
+        "Tags"
+      ],
+      "members":{
+        "ResourceName":{"shape":"String"},
+        "Tags":{"shape":"TagList"}
+      }
     },
     "AuthorizationAlreadyExistsFault":{
       "type":"structure",
@@ -2454,6 +2624,7 @@
         "CacheSubnetGroupName":{"shape":"String"},
         "CacheSecurityGroupNames":{"shape":"CacheSecurityGroupNameList"},
         "SecurityGroupIds":{"shape":"SecurityGroupIdsList"},
+        "Tags":{"shape":"TagList"},
         "SnapshotArns":{"shape":"SnapshotArnsList"},
         "SnapshotName":{"shape":"String"},
         "PreferredMaintenanceWindow":{"shape":"String"},
@@ -2521,6 +2692,7 @@
         "CacheSubnetGroupName":{"shape":"String"},
         "CacheSecurityGroupNames":{"shape":"CacheSecurityGroupNameList"},
         "SecurityGroupIds":{"shape":"SecurityGroupIdsList"},
+        "Tags":{"shape":"TagList"},
         "SnapshotArns":{"shape":"SnapshotArnsList"},
         "SnapshotName":{"shape":"String"},
         "PreferredMaintenanceWindow":{"shape":"String"},
@@ -2781,6 +2953,17 @@
     },
     "Integer":{"type":"integer"},
     "IntegerOptional":{"type":"integer"},
+    "InvalidARNFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidARN",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidCacheClusterStateFault":{
       "type":"structure",
       "members":{
@@ -2881,6 +3064,17 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "KeyList":{
+      "type":"list",
+      "member":{"shape":"String"}
+    },
+    "ListTagsForResourceMessage":{
+      "type":"structure",
+      "required":["ResourceName"],
+      "members":{
+        "ResourceName":{"shape":"String"}
+      }
     },
     "ModifyCacheClusterMessage":{
       "type":"structure",
@@ -3114,6 +3308,17 @@
       "member":{
         "shape":"RecurringCharge",
         "locationName":"RecurringCharge"
+      }
+    },
+    "RemoveTagsFromResourceMessage":{
+      "type":"structure",
+      "required":[
+        "ResourceName",
+        "TagKeys"
+      ],
+      "members":{
+        "ResourceName":{"shape":"String"},
+        "TagKeys":{"shape":"KeyList"}
       }
     },
     "ReplicationGroup":{
@@ -3447,6 +3652,48 @@
       }
     },
     "TStamp":{"type":"timestamp"},
+    "Tag":{
+      "type":"structure",
+      "members":{
+        "Key":{"shape":"String"},
+        "Value":{"shape":"String"}
+      }
+    },
+    "TagList":{
+      "type":"list",
+      "member":{
+        "shape":"Tag",
+        "locationName":"Tag"
+      }
+    },
+    "TagListMessage":{
+      "type":"structure",
+      "members":{
+        "TagList":{"shape":"TagList"}
+      }
+    },
+    "TagNotFoundFault":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"TagNotFound",
+        "httpStatusCode":404,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "TagQuotaPerResourceExceeded":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"TagQuotaPerResourceExceeded",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "AuthorizeCacheSecurityGroupIngressResult":{
       "type":"structure",
       "members":{
