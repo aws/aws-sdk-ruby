@@ -121,9 +121,9 @@ The SDK currently supports the following services:
       <td>AWS CloudFormation</td>
     </tr>
     <tr>
-      <td rowspan="7">AWS::CloudFront</td>
+      <td rowspan="8">AWS::CloudFront</td>
       <td>2013-05-12</td>
-      <td rowspan="7">Amazon CloudFront</td>
+      <td rowspan="8">Amazon CloudFront</td>
     </tr>
     <tr>
       <td>2013-08-26</td>
@@ -142,6 +142,9 @@ The SDK currently supports the following services:
     </tr>
     <tr>
       <td>2014-05-31</td>
+    </tr>
+    <tr>
+      <td>2014-10-21</td>
     </tr>
     <tr>
       <td rowspan="2">AWS::CloudSearch</td>
@@ -180,9 +183,9 @@ The SDK currently supports the following services:
       <td>2012-08-10</td>
     </tr>
     <tr>
-      <td rowspan="5">AWS::EC2</td>
+      <td rowspan="7">AWS::EC2</td>
       <td>2013-08-15</td>
-      <td rowspan="5">Amazon Elastic Compute Cloud</td>
+      <td rowspan="7">Amazon Elastic Compute Cloud</td>
     </tr>
     <tr>
       <td>2013-10-01</td>
@@ -197,15 +200,24 @@ The SDK currently supports the following services:
       <td>2014-05-01</td>
     </tr>
     <tr>
-      <td rowspan="3">AWS::ElastiCache</td>
+      <td>2014-09-01</td>
+    </tr>
+    <tr>
+      <td>2014-10-01</td>
+    </tr>
+    <tr>
+      <td rowspan="4">AWS::ElastiCache</td>
       <td>2013-06-15</td>
-      <td rowspan="3">Amazon ElastiCache</td>
+      <td rowspan="4">Amazon ElastiCache</td>
     </tr>
     <tr>
       <td>2014-03-24</td>
     </tr>
     <tr>
       <td>2014-07-15</td>
+    </tr>
+    <tr>
+      <td>2014-09-30</td>
     </tr>
     <tr>
       <td>AWS::ElasticBeanstalk</td>
@@ -253,12 +265,15 @@ The SDK currently supports the following services:
       <td>AWS OpsWorks</td>
     </tr>
     <tr>
-      <td rowspan="2">AWS::RDS</td>
+      <td rowspan="3">AWS::RDS</td>
       <td>2013-05-15</td>
-      <td rowspan="2">Amazon Relational Database Service (Beta)</td>
+      <td rowspan="3">Amazon Relational Database Service (Beta)</td>
     </tr>
     <tr>
       <td>2013-09-09</td>
+    </tr>
+    <tr>
+      <td>2014-09-01</td>
     </tr>
     <tr>
       <td>AWS::Redshift</td>
