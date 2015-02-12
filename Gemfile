@@ -38,6 +38,8 @@ group :test do
   gem 'rotp', '~> 1.3.0'
 end
 
-group :release do
-  gem 'octokit'
+if RUBY_VERSION >= '1.9.2'
+  group :release do
+    gem 'octokit'
+  end
 end
