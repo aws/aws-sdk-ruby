@@ -32,12 +32,11 @@ group :test do
   gem 'rspec', '~> 2.12'
   gem 'cucumber'
   gem 'simplecov', :require => false
-  gem 'rvm-tester'
   gem 'net-ssh', '~> 2.1'
   gem 'multipart-post'
   gem 'rotp', '~> 1.3.0'
 end
 
 group :release do
-  gem 'samus'
+  gem 'octokit'
 end

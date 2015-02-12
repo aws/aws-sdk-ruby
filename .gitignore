@@ -1,6 +1,7 @@
 /.bundle
 /Gemfile.lock
-/doc
+/api-docs
+/api-docs.zip
 /.yardoc
 /coverage
 /pkg

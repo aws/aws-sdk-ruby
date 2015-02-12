@@ -1,4 +1,5 @@
 --title 'AWS SDK for Ruby'
+--output-dir api-docs
 --template-path doc-src/templates
 --markup markdown
 --markup-provider rdiscount

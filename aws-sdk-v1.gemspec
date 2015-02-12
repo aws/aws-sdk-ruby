@@ -1,10 +1,6 @@
-$:.unshift(File.dirname(__FILE__) + '/lib')
-
-require 'aws/core'
-
 Gem::Specification.new do |s|
   s.name = 'aws-sdk-v1'
-  s.version = AWS::VERSION
+  s.version = File.read(File.expand_path('../VERSION', __FILE__)).strip
   s.summary = 'AWS SDK for Ruby V1'
   s.description = <<-DESCRIPTION.strip
 Version 1 of the AWS SDK for Ruby. Available as both `aws-sdk` and `aws-sdk-v1`.

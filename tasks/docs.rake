@@ -1,38 +1,21 @@
-# Copyright 2011-2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
+desc 'Delete the locally generated docs' if ENV['ALL']
+task 'docs:clobber' do
+  rm_rf '.yardoc'
+  rm_rf 'api-docs'
+end
+
+desc 'Generates api-docs.zip'
+task 'docs:zip' => 'docs' do
+  sh('zip -9 -r -q api-docs.zip api-docs/')
+end
+
+desc 'Generate the API documentation.'
+task 'docs' => ['docs:clobber', 'docs:update_readme'] do
+  sh({'SOURCE' => '1'}, 'bundle exec yard')
+end
 
 namespace :docs do
-
-  task :yard => [:update_readme, :update_region] do
-    ENV['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSRubySDK/latest'
-    sh "bundle exec yard"
-  end
-
-  desc "Builds a distributable documentation zip file at ./pkg/aws-docs.zip"
-  task :package => [:clobber, :yard, "pkg/aws-docs.zip"]
-
-  task :clobber do
-    rm_rf "doc"
-    rm_rf "pkg/aws-docs.zip"
-  end
-
-  directory "pkg"
-  file "pkg/aws-docs.zip" => ["pkg", "doc"] do |t|
-    rm_f t.name
-    sh "zip -r #{t.name} doc"
-  end
-
-  task :update_readme do
+  task :update_readme => :update_region do
 
     require 'aws/core'
 
@@ -104,9 +87,6 @@ namespace :docs do
   end
 
 end
-
-desc "Builds the API documentation to ./doc/"
-task :docs => ['docs:yard']
 
 def update_file filename, content, start_pattern, stop_pattern
 
