@@ -71,7 +71,7 @@ Default credentials are searched for in the following locations:
 
 * `Aws.config[:credentials]`
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
-* The shared credentials ini file at `HOME/.aws/credentials`
+* The shared credentials ini file at `~/.aws/credentials` ([more information](http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs))
 * From an instance profile when running on EC2
 
 Please take care to **never commit credentials to source control**.  We
