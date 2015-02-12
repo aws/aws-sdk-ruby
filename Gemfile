@@ -15,6 +15,7 @@ source 'https://rubygems.org'
 
 gemspec :name => 'aws-sdk-v1'
 
+gem 'rake'
 gem 'nokogiri', '< 1.6'
 
 group :repl do

@@ -13,6 +13,7 @@
 
 require 'spec_helper'
 require 'json'
+require 'time'
 
 module AWS
   class S3
@@ -176,7 +177,7 @@ module AWS
         it 'should include arbitrary fields and capitalize them' do
           original_post.fields.should include("Arbitrary-Param")
         end
-        
+
         context 'equality condition' do
 
           let(:post) { original_post.where(:expires_header).is("foobar") }
@@ -346,8 +347,8 @@ module AWS
         let(:policy) { JSON.load(Base64.decode64(post.policy)) }
 
         it 'should expire an hour from now by default' do
-          Time.stub(:now).
-            and_return(Time.parse("2011-05-24T17:51:04-07:00"))
+          now = Time.parse("2011-05-24T17:51:04-07:00Z")
+          Time.stub(:now).and_return(now)
           policy["expiration"].should == "2011-05-25T01:51:04Z"
         end
 
@@ -366,8 +367,8 @@ module AWS
           end
 
           it 'should support an integer offset' do
-            Time.stub(:now).
-              and_return(Time.parse("2011-05-25T01:51:04Z"))
+            now = Time.parse("2011-05-25T01:51:04Z")
+            Time.stub(:now).and_return(now)
             post.stub(:expires).and_return(60)
             policy["expiration"].should == "2011-05-25T01:52:04Z"
           end
