@@ -1,11 +1,15 @@
 module Aws
   class SharedCredentials < Credentials
 
+    # @return [String, nil]
+    attr_reader :region
+
     # @api private
     KEY_MAP = {
       'aws_access_key_id' => 'access_key_id',
       'aws_secret_access_key' => 'secret_access_key',
       'aws_session_token' => 'session_token',
+      'region' => 'region'
     }
 
     # Constructs a new SharedCredentials object. This will load AWS access
