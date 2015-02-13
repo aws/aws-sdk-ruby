@@ -3,6 +3,28 @@
 
 include Nanoc::Helpers::LinkTo
 
+# Changes the fenced code blocks from:
+#
+#     ```ruby
+#     # code here
+#     ```
+#
+# To
+#
+#     ```language-ruby
+#     # code here
+#     ```
+#
+# This format is required by code-ray, but we want the files on disk to
+# use GitHub style fenced code-blocks
+class CodeLanguageFilter < Nanoc::Filter
+  identifier :code_language
+  type :text
+  def run(content, params = {})
+    content.gsub(/```(.+)/, '```language-\1')
+  end
+end
+
 module Sections
 
   def sections

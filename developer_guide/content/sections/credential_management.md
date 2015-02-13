@@ -20,7 +20,7 @@ By default, the AWS SDK for Ruby searches the following locations for credential
 
 When you populate `Aws.config[:credentials]`, you are setting default credentials for all services. You can provide per-client credentials that will take precedence over the default ones.
 
-```language-ruby
+```ruby
 Aws.config[:credentials] = default_creds
 
 ec2 = Aws::EC2::Resource.new
@@ -41,9 +41,7 @@ When configuring `Aws.config[:credentials]`, you need to provide a credentials o
 * [Aws::InstanceProfileCredentials](http://docs.aws.amazon.com/sdkforruby/api/Aws/InstanceProfileCredentials.html)
 * [Aws::AssumeRoleCredentials](http://docs.aws.amazon.com/sdkforruby/api/Aws/AssumeRoleCredentials.html)
 
-## Examples
-
-### Static Credentials
+### Aws::Credentials
 
 The following JSON document and Ruby code demonstrate loading credentials from disk.
 
@@ -54,7 +52,7 @@ The following JSON document and Ruby code demonstrate loading credentials from d
 }
 ```
 
-```language-ruby
+```ruby
 require 'aws-sdk'
 require 'json'
 
@@ -64,7 +62,7 @@ creds = Aws::Credentials.new(creds['accessKeyId'], creds['secretAccessKey'])
 Aws.config[:credentials] = creds
 ```
 
-### Shared Credentials File
+### Aws::SharedCredentials
 
 All of the official AWS SDKs and CLIs can share a single credential file. This file is located at `~/.aws/credentials`, or `%USERPROFILE%\.aws\credentials` for Windows. It is formatted as an INI file and can contain multiple credential profiles:
 
@@ -80,7 +78,7 @@ aws_secret_access_key=ALTERNATE_SECRET_ACCESS_KEY
 
 When the shared credentials file is present, no credential configuration is required. If you do not wish to use the default profile, you can configure the profile name via `:profile`.
 
-```language-ruby
+```ruby
 Aws.config[:profile] = 'alternate-profile'
 
 s3 = Aws::S3::Client.new
@@ -90,7 +88,7 @@ s3.config.credentials.access_key_id
 
 If you want to load credentials from an INI file, but it is not in the default location, you can construct an instance of the shared credential class with a custom path.
 
-```language-ruby
+```ruby
 creds = Aws::SharedCredentials.new(
   path: '/path/to/credentials/file',
   profile_name: 'default'
@@ -99,18 +97,18 @@ creds = Aws::SharedCredentials.new(
 s3 = Aws::S3::Client.new(credentials: creds)
 ```
 
-### Instance Profile Credentials
+### Aws::InstanceProfileCredentials
 
 If you are using the AWS SDK for Ruby from an Amazon EC2 instance, the SDK will attempt to automatically load instance profile credentials.
 
-```language-ruby
+```ruby
 # no configuration required when running from EC2 with an instance profile
 iam = Aws::IAM::Client.new
 ```
 
 If you wish to force only EC2 credentials, or you wish to customize network timeouts, you can construct the instance profile credentials object yourself.
 
-```language-ruby
+```ruby
 Aws.config[:credentials] = Aws::InstanceProfileCredentials.new({
   retries: 10,
   http_open_timeout: 5,
@@ -128,7 +126,7 @@ The SDK will automatically rotate instance profile credentials before they expir
 If you need to assume a role for credentials, then you can use an instance of `Aws::AssumeRoleCredentials`. To do this, you need to provide an `Aws::STS::Client` that has credentials required for assuming the given role.
 
 
-```language-ruby
+```ruby
 sts = Aws::STS::Client.new(credentials: your_credentials)
 
 creds = Aws::AssumeRoleCredentials.new(

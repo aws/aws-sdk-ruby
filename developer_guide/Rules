@@ -16,6 +16,7 @@
 compile '*' do
   if item[:extension] == 'md'
     filter :erb
+    filter :code_language
     filter :rdiscount
     filter :colorize_syntax, code_ray: { :css => :class }
     layout 'default'
