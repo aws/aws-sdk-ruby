@@ -91,7 +91,7 @@ module Aws
         if section
           current_section = section[1]
         elsif current_section
-          item = line.match(/^\s*(.+?)\s*=\s*(.+)\s*$/) unless line.nil?
+          item = line.match(/^\s*(.+?)\s*=\s*(.+?)\s*$/) unless line.nil?
           if item
             map[current_section] = map[current_section] || {}
             map[current_section][item[1]] = item[2]
