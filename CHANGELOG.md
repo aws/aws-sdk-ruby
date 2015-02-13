@@ -7,8 +7,8 @@ Unreleased Changes
   from 1 to 5 seconds each. This increases the reliability of loading instance
   credentials.
 
-  These new defaults only affect users who are constructing `Aws::InstanceProfileCredential`
-  objects directly. If you are using the default credential provider chain, the original
+  **These new defaults only affect users who are constructing `Aws::InstanceProfileCredential`
+  objects directly.** If you are using the default credential provider chain, the original
   defaults remain un-changed.
 
   To revert to default values:
