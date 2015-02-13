@@ -1,5 +1,26 @@
 # Upgrade Notes
 
+** `aws-sdk-core` - v2.0.25
+
+* Increased the default number of attempts to make when loading credentials from the
+  Amazon EC2 instance metadata service before failing from 0 to 5. Also increased
+  the default open and read timeouts from 1 to 5 seconds each. This increases the
+  reliability of loading instance credentials.
+
+  These new defaults only affect users who are constructing `Aws::InstanceProfileCredential`
+  objects directly. If you are using the default credential provider chain, the original
+  defaults remain un-changed.
+
+  To revert to default values:
+
+  ```ruby
+  Aws.config[:credentials] = Aws::InstanceProfileCredentials.new(
+    retries: 0,
+    http_open_timeout: 1,
+    http_read_timeout: 1
+  )
+  ```
+
 ## `aws-sdk-resources` - v2.0.22
 
 * Removed the `Aws::SQS::Resource` interfaces. These have not been formalized,

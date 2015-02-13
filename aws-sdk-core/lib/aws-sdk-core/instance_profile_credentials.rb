@@ -25,22 +25,27 @@ module Aws
     ]
 
     # @param [Hash] options
-    # @option options [Integer] :retries (0) Number of times to retry
+    # @option options [Integer] :retries (5) Number of times to retry
     #   when retrieving credentials.
     # @option options [String] :ip_address ('169.254.169.254')
     # @option options [Integer] :port (80)
-    # @option options [Float] :http_open_timeout (1)
-    # @option options [Float] :http_read_timeout (1)
+    # @option options [Float] :http_open_timeout (5)
+    # @option options [Float] :http_read_timeout (5)
+    # @option options [Numeric, Proc] :delay By default, failures are retried
+    #   with exponential back-off, i.e. `sleep(1.2 ** num_failures)`. You can
+    #   pass a number of seconds to sleep between failed attempts, or
+    #   a Proc that accepts the number of failures.
     # @option options [IO] :http_debug_output (nil) HTTP wire
     #   traces are sent to this object.  You can specify something
     #   like $stdout.
     def initialize options = {}
-      @retries = options[:retries] || 0
+      @retries = options[:retries] || 5
       @ip_address = options[:ip_address] || '169.254.169.254'
       @port = options[:port] || 80
-      @http_open_timeout = options[:http_open_timeout] || 1
-      @http_read_timeout = options[:http_read_timeout] || 1
+      @http_open_timeout = options[:http_open_timeout] || 5
+      @http_read_timeout = options[:http_read_timeout] || 5
       @http_debug_output = options[:http_debug_output]
+      @backoff = backoff(options[:backoff])
       super
     end
 
@@ -49,6 +54,14 @@ module Aws
     attr_reader :retries
 
     private
+
+    def backoff(backoff)
+      case backoff
+      when Proc then backoff
+      when Numeric then lambda { |_| sleep(backoff) }
+      else lambda { |num_failures| Kernel.sleep(1.2 ** num_failures) }
+      end
+    end
 
     def refresh
       credentials = MultiJson.load(get_credentials)
@@ -72,17 +85,13 @@ module Aws
         end
       rescue *FAILURES => e
         if failed_attempts < @retries
-          backoff(failed_attempts)
+          @backoff.call(failed_attempts)
           failed_attempts += 1
           retry
         else
           '{}'
         end
       end
-    end
-
-    def backoff(failed_attempts)
-      Kernel.sleep(2 ** failed_attempts)
     end
 
     def open_connection

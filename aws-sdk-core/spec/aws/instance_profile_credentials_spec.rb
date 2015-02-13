@@ -15,7 +15,7 @@ module Aws
       ].each do |error_class|
         it "returns no credentials for #{error_class}" do
           stub_request(:get, "http://169.254.169.254#{path}").to_raise(error_class)
-          expect(InstanceProfileCredentials.new.set?).to be(false)
+          expect(InstanceProfileCredentials.new(backoff:0).set?).to be(false)
         end
       end
 
@@ -59,7 +59,7 @@ module Aws
       end
 
       it 'populates credentials from the instance profile' do
-        c = InstanceProfileCredentials.new
+        c = InstanceProfileCredentials.new(backoff:0)
         expect(c.access_key_id).to eq('akid')
         expect(c.secret_access_key).to eq('secret')
         expect(c.session_token).to eq('session-token')
@@ -81,7 +81,7 @@ module Aws
           to_return(:status => 200, :body => "profile-name\n")
         stub_request(:get, "http://169.254.169.254#{path}profile-name").
           to_return(:status => 200, :body => resp2)
-        c = InstanceProfileCredentials.new
+        c = InstanceProfileCredentials.new(backoff:0)
         expect(c.access_key_id).to eq('akid-2')
         expect(c.secret_access_key).to eq('secret-2')
         expect(c.session_token).to eq('session-token-2')
@@ -127,7 +127,7 @@ module Aws
     describe '#retries' do
 
       it 'defaults to 0' do
-        expect(InstanceProfileCredentials.new.retries).to be(0)
+        expect(InstanceProfileCredentials.new(backoff:0).retries).to be(5)
       end
 
       it 'keepts trying "retries" times, with exponential backoff' do
@@ -136,7 +136,10 @@ module Aws
         expect(Kernel).to receive(:sleep).with(1)
         expect(Kernel).to receive(:sleep).with(2)
         expect(Kernel).to receive(:sleep).with(4)
-        InstanceProfileCredentials.new(retries:3)
+        InstanceProfileCredentials.new(
+          backoff: lambda{|n| Kernel.sleep(2 ** n ) },
+          retries:3
+        )
         assert_requested(expected_request, times:4)
       end
 

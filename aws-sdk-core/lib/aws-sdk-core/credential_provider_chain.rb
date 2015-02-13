@@ -23,7 +23,11 @@ module Aws
         [:env_credentials, { prefix: 'AMAZON' }],
         [:env_credentials, { key:'AWS_ACCESS_KEY', secret:'AWS_SECRET_KEY' }],
         [:shared_credentials, {}],
-        [:instance_profile_credentials, {}],
+        [:instance_profile_credentials, {
+          retries: 0,
+          http_open_timeout: 1,
+          http_read_timeout: 1,
+        }],
       ]
     end
 
@@ -54,8 +58,8 @@ module Aws
       nil
     end
 
-    def instance_profile_credentials(*args)
-      InstanceProfileCredentials.new
+    def instance_profile_credentials(options)
+      InstanceProfileCredentials.new(options)
     end
 
   end
