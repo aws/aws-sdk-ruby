@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::SharedCredentials - Now ignoring trailing whitespace from the
+  access key id and secret access key values when loading the INI file.
+
 * Upgrading - Aws::InstanceProfileCredentials - Increased the default number of
   attempts to make when loading credentials from the Amazon EC2 instance metadata
   service before failing from 0 to 5. Also increased the default open and read timeouts
