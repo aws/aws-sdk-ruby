@@ -1,3 +1,12 @@
+/* Version 2 warning */
+
+#version-2-warning {
+  margin: 10px 0px;
+  padding: 10px;
+  font-weight: bold;
+  background-color: lightblue;
+  border: 2px solid darkblue;
+}
 
 /* AWS API operation tabs */
 
