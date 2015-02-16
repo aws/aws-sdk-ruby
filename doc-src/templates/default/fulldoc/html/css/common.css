@@ -1,0 +1,9 @@
+/* Version 1 warning */
+
+#version-1-warning {
+  margin: 10px 0px;
+  padding: 10px;
+  font-weight: bold;
+  background-color: #FCC;
+  border: 2px solid #F88;
+}
