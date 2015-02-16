@@ -6,7 +6,7 @@ module Aws
     # @api private
     class S3RequestSigner < Seahorse::Client::Plugin
 
-      class SigningHandler < Seahorse::Client::Handler
+      class SigningHandler < RequestSigner::Handler
 
         # List of regions that support older S3 signature versions.
         # All new regions only support signature version 4.
@@ -23,6 +23,7 @@ module Aws
         ))
 
         def call(context)
+          require_credentials(context)
           version = signature_version(context)
           case version
           when /v4/ then apply_v4_signature(context)

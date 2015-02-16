@@ -19,6 +19,14 @@ module Aws
         Aws.config = {}
       end
 
+      it 'raises an appropriate error when credentials are missing' do
+        creds = Aws::Credentials.new(nil, nil)
+        client = Aws::S3::Client.new(credentials: creds)
+        expect {
+          client.list_buckets
+        }.to raise_error(Aws::Errors::MissingCredentialsError)
+      end
+
       describe 'empty body error responses' do
 
         it 'creates an error class from empty body responses' do
