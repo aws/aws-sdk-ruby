@@ -1,6 +1,7 @@
 {
+  "version":"2.0",
   "metadata":{
-    "apiVersion":"2014-10-21",
+    "apiVersion":"2014-11-06",
     "endpointPrefix":"cloudfront",
     "globalEndpoint":"cloudfront.amazonaws.com",
     "serviceAbbreviation":"CloudFront",
@@ -10,10 +11,10 @@
   },
   "operations":{
     "CreateCloudFrontOriginAccessIdentity":{
-      "name":"CreateCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"CreateCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront",
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront",
         "responseCode":201
       },
       "input":{"shape":"CreateCloudFrontOriginAccessIdentityRequest"},
@@ -47,10 +48,10 @@
       ]
     },
     "CreateDistribution":{
-      "name":"CreateDistribution2014_10_21",
+      "name":"CreateDistribution2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/distribution",
+        "requestUri":"/2014-11-06/distribution",
         "responseCode":201
       },
       "input":{"shape":"CreateDistributionRequest"},
@@ -204,10 +205,10 @@
       ]
     },
     "CreateInvalidation":{
-      "name":"CreateInvalidation2014_10_21",
+      "name":"CreateInvalidation2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation",
+        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation",
         "responseCode":201
       },
       "input":{"shape":"CreateInvalidationRequest"},
@@ -251,10 +252,10 @@
       ]
     },
     "CreateStreamingDistribution":{
-      "name":"CreateStreamingDistribution2014_10_21",
+      "name":"CreateStreamingDistribution2014_11_06",
       "http":{
         "method":"POST",
-        "requestUri":"/2014-10-21/streaming-distribution",
+        "requestUri":"/2014-11-06/streaming-distribution",
         "responseCode":201
       },
       "input":{"shape":"CreateStreamingDistributionRequest"},
@@ -323,10 +324,10 @@
       ]
     },
     "DeleteCloudFrontOriginAccessIdentity":{
-      "name":"DeleteCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"DeleteCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}",
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}",
         "responseCode":204
       },
       "input":{"shape":"DeleteCloudFrontOriginAccessIdentityRequest"},
@@ -359,10 +360,10 @@
       ]
     },
     "DeleteDistribution":{
-      "name":"DeleteDistribution2014_10_21",
+      "name":"DeleteDistribution2014_11_06",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-10-21/distribution/{Id}",
+        "requestUri":"/2014-11-06/distribution/{Id}",
         "responseCode":204
       },
       "input":{"shape":"DeleteDistributionRequest"},
@@ -395,10 +396,10 @@
       ]
     },
     "DeleteStreamingDistribution":{
-      "name":"DeleteStreamingDistribution2014_10_21",
+      "name":"DeleteStreamingDistribution2014_11_06",
       "http":{
         "method":"DELETE",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}",
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}",
         "responseCode":204
       },
       "input":{"shape":"DeleteStreamingDistributionRequest"},
@@ -431,10 +432,10 @@
       ]
     },
     "GetCloudFrontOriginAccessIdentity":{
-      "name":"GetCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"GetCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}"
       },
       "input":{"shape":"GetCloudFrontOriginAccessIdentityRequest"},
       "output":{"shape":"GetCloudFrontOriginAccessIdentityResult"},
@@ -452,10 +453,10 @@
       ]
     },
     "GetCloudFrontOriginAccessIdentityConfig":{
-      "name":"GetCloudFrontOriginAccessIdentityConfig2014_10_21",
+      "name":"GetCloudFrontOriginAccessIdentityConfig2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{"shape":"GetCloudFrontOriginAccessIdentityConfigRequest"},
       "output":{"shape":"GetCloudFrontOriginAccessIdentityConfigResult"},
@@ -473,10 +474,10 @@
       ]
     },
     "GetDistribution":{
-      "name":"GetDistribution2014_10_21",
+      "name":"GetDistribution2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{Id}"
+        "requestUri":"/2014-11-06/distribution/{Id}"
       },
       "input":{"shape":"GetDistributionRequest"},
       "output":{"shape":"GetDistributionResult"},
@@ -494,10 +495,10 @@
       ]
     },
     "GetDistributionConfig":{
-      "name":"GetDistributionConfig2014_10_21",
+      "name":"GetDistributionConfig2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{Id}/config"
+        "requestUri":"/2014-11-06/distribution/{Id}/config"
       },
       "input":{"shape":"GetDistributionConfigRequest"},
       "output":{"shape":"GetDistributionConfigResult"},
@@ -515,10 +516,10 @@
       ]
     },
     "GetInvalidation":{
-      "name":"GetInvalidation2014_10_21",
+      "name":"GetInvalidation2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation/{Id}"
+        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation/{Id}"
       },
       "input":{"shape":"GetInvalidationRequest"},
       "output":{"shape":"GetInvalidationResult"},
@@ -541,10 +542,10 @@
       ]
     },
     "GetStreamingDistribution":{
-      "name":"GetStreamingDistribution2014_10_21",
+      "name":"GetStreamingDistribution2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}"
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}"
       },
       "input":{"shape":"GetStreamingDistributionRequest"},
       "output":{"shape":"GetStreamingDistributionResult"},
@@ -562,10 +563,10 @@
       ]
     },
     "GetStreamingDistributionConfig":{
-      "name":"GetStreamingDistributionConfig2014_10_21",
+      "name":"GetStreamingDistributionConfig2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}/config"
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}/config"
       },
       "input":{"shape":"GetStreamingDistributionConfigRequest"},
       "output":{"shape":"GetStreamingDistributionConfigResult"},
@@ -583,10 +584,10 @@
       ]
     },
     "ListCloudFrontOriginAccessIdentities":{
-      "name":"ListCloudFrontOriginAccessIdentities2014_10_21",
+      "name":"ListCloudFrontOriginAccessIdentities2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront"
       },
       "input":{"shape":"ListCloudFrontOriginAccessIdentitiesRequest"},
       "output":{"shape":"ListCloudFrontOriginAccessIdentitiesResult"},
@@ -599,10 +600,10 @@
       ]
     },
     "ListDistributions":{
-      "name":"ListDistributions2014_10_21",
+      "name":"ListDistributions2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution"
+        "requestUri":"/2014-11-06/distribution"
       },
       "input":{"shape":"ListDistributionsRequest"},
       "output":{"shape":"ListDistributionsResult"},
@@ -615,10 +616,10 @@
       ]
     },
     "ListInvalidations":{
-      "name":"ListInvalidations2014_10_21",
+      "name":"ListInvalidations2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/distribution/{DistributionId}/invalidation"
+        "requestUri":"/2014-11-06/distribution/{DistributionId}/invalidation"
       },
       "input":{"shape":"ListInvalidationsRequest"},
       "output":{"shape":"ListInvalidationsResult"},
@@ -641,10 +642,10 @@
       ]
     },
     "ListStreamingDistributions":{
-      "name":"ListStreamingDistributions2014_10_21",
+      "name":"ListStreamingDistributions2014_11_06",
       "http":{
         "method":"GET",
-        "requestUri":"/2014-10-21/streaming-distribution"
+        "requestUri":"/2014-11-06/streaming-distribution"
       },
       "input":{"shape":"ListStreamingDistributionsRequest"},
       "output":{"shape":"ListStreamingDistributionsResult"},
@@ -657,10 +658,10 @@
       ]
     },
     "UpdateCloudFrontOriginAccessIdentity":{
-      "name":"UpdateCloudFrontOriginAccessIdentity2014_10_21",
+      "name":"UpdateCloudFrontOriginAccessIdentity2014_11_06",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-10-21/origin-access-identity/cloudfront/{Id}/config"
+        "requestUri":"/2014-11-06/origin-access-identity/cloudfront/{Id}/config"
       },
       "input":{"shape":"UpdateCloudFrontOriginAccessIdentityRequest"},
       "output":{"shape":"UpdateCloudFrontOriginAccessIdentityResult"},
@@ -708,10 +709,10 @@
       ]
     },
     "UpdateDistribution":{
-      "name":"UpdateDistribution2014_10_21",
+      "name":"UpdateDistribution2014_11_06",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-10-21/distribution/{Id}/config"
+        "requestUri":"/2014-11-06/distribution/{Id}/config"
       },
       "input":{"shape":"UpdateDistributionRequest"},
       "output":{"shape":"UpdateDistributionResult"},
@@ -864,10 +865,10 @@
       ]
     },
     "UpdateStreamingDistribution":{
-      "name":"UpdateStreamingDistribution2014_10_21",
+      "name":"UpdateStreamingDistribution2014_11_06",
       "http":{
         "method":"PUT",
-        "requestUri":"/2014-10-21/streaming-distribution/{Id}/config"
+        "requestUri":"/2014-11-06/streaming-distribution/{Id}/config"
       },
       "input":{"shape":"UpdateStreamingDistributionRequest"},
       "output":{"shape":"UpdateStreamingDistributionResult"},
@@ -1163,7 +1164,7 @@
       "members":{
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         }
       },
@@ -1192,7 +1193,7 @@
       "members":{
         "DistributionConfig":{
           "shape":"DistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"DistributionConfig"
         }
       },
@@ -1229,7 +1230,7 @@
         },
         "InvalidationBatch":{
           "shape":"InvalidationBatch",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"InvalidationBatch"
         }
       },
@@ -1253,7 +1254,7 @@
       "members":{
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"StreamingDistributionConfig"
         }
       },
@@ -1414,14 +1415,9 @@
       "type":"structure",
       "required":[
         "CallerReference",
-        "Aliases",
-        "DefaultRootObject",
         "Origins",
         "DefaultCacheBehavior",
-        "CacheBehaviors",
         "Comment",
-        "Logging",
-        "PriceClass",
         "Enabled"
       ],
       "members":{
@@ -2139,6 +2135,7 @@
       "members":{
         "Id":{"shape":"string"},
         "DomainName":{"shape":"string"},
+        "OriginPath":{"shape":"string"},
         "S3OriginConfig":{"shape":"S3OriginConfig"},
         "CustomOriginConfig":{"shape":"CustomOriginConfig"}
       }
@@ -2274,11 +2271,8 @@
       "required":[
         "CallerReference",
         "S3Origin",
-        "Aliases",
         "Comment",
-        "Logging",
         "TrustedSigners",
-        "PriceClass",
         "Enabled"
       ],
       "members":{
@@ -2489,7 +2483,7 @@
       "members":{
         "CloudFrontOriginAccessIdentityConfig":{
           "shape":"CloudFrontOriginAccessIdentityConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"CloudFrontOriginAccessIdentityConfig"
         },
         "Id":{
@@ -2526,7 +2520,7 @@
       "members":{
         "DistributionConfig":{
           "shape":"DistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"DistributionConfig"
         },
         "Id":{
@@ -2563,7 +2557,7 @@
       "members":{
         "StreamingDistributionConfig":{
           "shape":"StreamingDistributionConfig",
-          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-10-21/"},
+          "xmlNamespace":{"uri":"http://cloudfront.amazonaws.com/doc/2014-11-06/"},
           "locationName":"StreamingDistributionConfig"
         },
         "Id":{

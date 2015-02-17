@@ -1,4 +1,5 @@
 {
+  "version": "2.0",
   "operations": {
     "CreateCloudFrontOriginAccessIdentity": "Create a new origin access identity.",
     "CreateDistribution": "Create a new distribution.",
@@ -1062,6 +1063,7 @@
         "NoSuchStreamingDistribution$Message": null,
         "Origin$Id": "A unique identifier for the origin. The value of Id must be unique within the distribution. You use the value of Id when you create a cache behavior. The Id identifies the origin that CloudFront routes a request to when the request matches the path pattern for that cache behavior.",
         "Origin$DomainName": "Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. Custom origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com.",
+        "Origin$OriginPath": "An optional element that causes CloudFront to request your content from a directory in your Amazon S3 bucket or your custom origin. When you include the OriginPath element, specify the directory name, beginning with a /. CloudFront appends the directory name to the value of DomainName.",
         "PathList$member": null,
         "PreconditionFailed$Message": null,
         "S3Origin$DomainName": "The DNS name of the S3 origin.",

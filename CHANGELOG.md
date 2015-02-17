@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Added support for the 2014-11-06 API version.
+
 * Feature - Aws::STS - Added support for the regionalized enpoints.
 
 * Issue - Aws::S3 - Resolved an issue where the `Aws::S3::Client` would raise
