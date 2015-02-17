@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.26 (2015-02-17)
 ------------------
 
 * Feature - API Documentation - Updated the
