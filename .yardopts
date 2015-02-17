@@ -6,3 +6,4 @@
 --hide-api private
 --plugin sitemap
 -e doc-src/api_docs_plugin.rb
+lib/**/*.rb
