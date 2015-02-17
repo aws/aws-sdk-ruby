@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::STS - Added support for the regionalized enpoints.
+
 * Issue - Aws::S3 - Resolved an issue where the `Aws::S3::Client` would raise
   an unhelpful error when credentials were not set. Now the client will
   raise an `Aws::Errors::MissingCredentialsError` when an API operation is

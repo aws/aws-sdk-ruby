@@ -11,9 +11,6 @@
     "us-gov-west-1/iam": {
       "endpoint": "iam.us-gov.amazonaws.com"
     },
-    "us-gov-west-1/sts": {
-      "endpoint": "sts.us-gov-west-1.amazonaws.com"
-    },
     "us-gov-west-1/s3": {
       "endpoint": "s3-{region}.amazonaws.com"
     },
@@ -28,9 +25,6 @@
     },
     "*/route53": {
       "endpoint": "route53.amazonaws.com"
-    },
-    "*/sts": {
-      "endpoint": "sts.amazonaws.com"
     },
     "us-east-1/sdb": {
       "endpoint": "sdb.amazonaws.com"
