@@ -5,6 +5,13 @@ Unreleased Changes
   [API reference documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
   to use the new framless Yard layout.
 
+* Issue - Aws::STS - Reverted regionalized endpoints. Customers relying on the
+  `Aws::STS::Client` using the 'sts.amazonaws.com' endpoint, even when specifying
+  a region such as 'us-west-2' would likely receive errors when they are sent to
+  the 'sts.us-west-2.amazonaws.com' endpoint. This is due to the new endpoints
+  being opt-in via the AWS console. Reverting the change to prevent runtime-errors
+  for customers that have not opted-in.
+
 * Issue - Resource Waiters - Resolve an issue where the resource waiter
   methods were not yielding the waiter object like the client waiters do.
   This made it impossible to configure the delay and max attempts or

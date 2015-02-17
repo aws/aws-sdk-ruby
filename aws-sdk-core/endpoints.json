@@ -20,11 +20,17 @@
     "*/iam": {
       "endpoint": "iam.amazonaws.com"
     },
+    "us-gov-west-1/sts": {
+      "endpoint": "sts.us-gov-west-1.amazonaws.com"
+    },
     "*/importexport": {
       "endpoint": "importexport.amazonaws.com"
     },
     "*/route53": {
       "endpoint": "route53.amazonaws.com"
+    },
+    "*/sts": {
+      "endpoint": "sts.amazonaws.com"
     },
     "us-east-1/sdb": {
       "endpoint": "sdb.amazonaws.com"
