@@ -57,6 +57,7 @@ module Aws
     SimpleDB
     SNS
     SQS
+    SSM
     StorageGateway
     STS
     Support

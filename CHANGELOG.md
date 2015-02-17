@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SSM - Added support fot the new Amazon Simple Systems
+  Management Service.
+
 * Feature - Aws::CloudFront - Added support for the 2014-11-06 API version.
 
 * Feature - Aws::STS - Added support for the regionalized enpoints.
