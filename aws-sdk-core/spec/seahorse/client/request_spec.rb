@@ -160,6 +160,26 @@ module Seahorse
             expect(body).not_to respond_to(:truncate)
           end
 
+          describe '2xx responses, not 200' do
+
+            let(:handler) do
+              Proc.new do
+                context.http_response.signal_headers(206, {})
+                context.http_response.signal_data('part1')
+                context.http_response.signal_data('part2')
+                context.http_response.signal_data('part3')
+                context.http_response.signal_done
+                Response.new(context: context)
+              end
+            end
+
+            it 'streams data from the handler to the #send_request block' do
+              data = []
+              request.send_request { |chunk| data << chunk }
+              expect(data).to eq(['part1', 'part2', 'part3'])
+            end
+
+          end
         end
       end
     end

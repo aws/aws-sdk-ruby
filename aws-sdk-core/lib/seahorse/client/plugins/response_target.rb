@@ -22,11 +22,11 @@ module Seahorse
 
           def add_event_listeners(context, target)
             handler = self
-            context.http_response.on_headers(200) do
+            context.http_response.on_headers(200..299) do
               context.http_response.body = handler.send(:io, target)
             end
 
-            context.http_response.on_success(200) do
+            context.http_response.on_success(200..299) do
               body = context.http_response.body
               if ManagedFile === body && body.open?
                 body.close

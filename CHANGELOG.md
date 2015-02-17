@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Expanded logic for yielding data to a given block for
+  more than just HTTP 200 response status codes. This is important so that
+  206 responses can yield their data. This happens when using range headers.
+
 2.0.26 (2015-02-17)
 ------------------
 
