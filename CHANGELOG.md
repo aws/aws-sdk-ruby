@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.25 (2015-02-17)
 ------------------
 
 * Feature - Aws::SSM - Added support fot the new Amazon Simple Systems

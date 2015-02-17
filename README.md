@@ -220,51 +220,52 @@ to be backwards compatible.
 
 ## Supported Services
 
-| Service Name                       | Service Class        | API Version |
-| ---------------------------------- | -------------------- | ----------- |
-| AWS CloudFormation                 | CloudFormation       | 2010-05-15  |
-| AWS CloudTrail                     | CloudTrail           | 2013-11-01  |
-| AWS CodeDeploy                     | CodeDeploy           | 2014-10-06  |
-| AWS Config                         | ConfigService        | 2014-10-17  |
-| AWS Data Pipeline                  | DataPipeline         | 2012-10-29  |
-| AWS Direct Connect                 | DirectConnect        | 2012-10-25  |
-| AWS Elastic Beanstalk              | ElasticBeanstalk     | 2010-12-01  |
-| AWS Identity and Access Management | IAM                  | 2010-05-08  |
-| AWS Import/Export                  | ImportExport         | 2010-06-01  |
-| AWS Key Management Service         | KMS                  | 2014-11-01  |
-| AWS Lambda                         | Lambda               | 2014-11-11  |
-| AWS OpsWorks                       | OpsWorks             | 2013-02-18  |
-| AWS Security Token Service         | STS                  | 2011-06-15  |
-| AWS Storage Gateway                | StorageGateway       | 2013-06-30  |
-| AWS Support                        | Support              | 2013-04-15  |
-| Amazon CloudFront                  | CloudFront           | 2014-10-21  |
-| Amazon CloudHSM                    | CloudHSM             | 2014-05-30  |
-| Amazon CloudSearch                 | CloudSearch          | 2013-01-01  |
-| Amazon CloudSearch Domain          | CloudSearchDomain    | 2013-01-01  |
-| Amazon CloudWatch                  | CloudWatch           | 2010-08-01  |
-| Amazon CloudWatch Logs             | CloudWatchLogs       | 2014-03-28  |
-| Amazon Cognito Identity            | CognitoIdentity      | 2014-06-30  |
-| Amazon Cognito Sync                | CognitoSync          | 2014-06-30  |
-| Amazon DynamoDB                    | DynamoDB             | 2012-08-10  |
-| Amazon EC2 Container Service       | ECS                  | 2014-11-13  |
-| Amazon ElastiCache                 | ElastiCache          | 2015-02-02  |
-| Amazon Elastic Compute Cloud       | EC2                  | 2014-10-01  |
-| Amazon Elastic MapReduce           | EMR                  | 2009-03-31  |
-| Amazon Elastic Transcoder          | ElasticTranscoder    | 2012-09-25  |
-| Amazon Glacier                     | Glacier              | 2012-06-01  |
-| Amazon Kinesis                     | Kinesis              | 2013-12-02  |
-| Amazon Redshift                    | Redshift             | 2012-12-01  |
-| Amazon Relational Database Service | RDS                  | 2014-10-31  |
-| Amazon Route 53                    | Route53              | 2013-04-01  |
-| Amazon Route 53 Domains            | Route53Domains       | 2014-05-15  |
-| Amazon Simple Email Service        | SES                  | 2010-12-01  |
-| Amazon Simple Notification Service | SNS                  | 2010-03-31  |
-| Amazon Simple Queue Service        | SQS                  | 2012-11-05  |
-| Amazon Simple Storage Service      | S3                   | 2006-03-01  |
-| Amazon Simple Workflow Service     | SWF                  | 2012-01-25  |
-| Amazon SimpleDB                    | SimpleDB             | 2009-04-15  |
-| Auto Scaling                       | AutoScaling          | 2011-01-01  |
-| Elastic Load Balancing             | ElasticLoadBalancing | 2012-06-01  |
+| Service Name                             | Service Class        | API Version |
+| ---------------------------------------- | -------------------- | ----------- |
+| AWS CloudFormation                       | CloudFormation       | 2010-05-15  |
+| AWS CloudTrail                           | CloudTrail           | 2013-11-01  |
+| AWS CodeDeploy                           | CodeDeploy           | 2014-10-06  |
+| AWS Config                               | ConfigService        | 2014-10-17  |
+| AWS Data Pipeline                        | DataPipeline         | 2012-10-29  |
+| AWS Direct Connect                       | DirectConnect        | 2012-10-25  |
+| AWS Elastic Beanstalk                    | ElasticBeanstalk     | 2010-12-01  |
+| AWS Identity and Access Management       | IAM                  | 2010-05-08  |
+| AWS Import/Export                        | ImportExport         | 2010-06-01  |
+| AWS Key Management Service               | KMS                  | 2014-11-01  |
+| AWS Lambda                               | Lambda               | 2014-11-11  |
+| AWS OpsWorks                             | OpsWorks             | 2013-02-18  |
+| AWS Security Token Service               | STS                  | 2011-06-15  |
+| AWS Storage Gateway                      | StorageGateway       | 2013-06-30  |
+| AWS Support                              | Support              | 2013-04-15  |
+| Amazon CloudFront                        | CloudFront           | 2014-11-06  |
+| Amazon CloudHSM                          | CloudHSM             | 2014-05-30  |
+| Amazon CloudSearch                       | CloudSearch          | 2013-01-01  |
+| Amazon CloudSearch Domain                | CloudSearchDomain    | 2013-01-01  |
+| Amazon CloudWatch                        | CloudWatch           | 2010-08-01  |
+| Amazon CloudWatch Logs                   | CloudWatchLogs       | 2014-03-28  |
+| Amazon Cognito Identity                  | CognitoIdentity      | 2014-06-30  |
+| Amazon Cognito Sync                      | CognitoSync          | 2014-06-30  |
+| Amazon DynamoDB                          | DynamoDB             | 2012-08-10  |
+| Amazon EC2 Container Service             | ECS                  | 2014-11-13  |
+| Amazon ElastiCache                       | ElastiCache          | 2015-02-02  |
+| Amazon Elastic Compute Cloud             | EC2                  | 2014-10-01  |
+| Amazon Elastic MapReduce                 | EMR                  | 2009-03-31  |
+| Amazon Elastic Transcoder                | ElasticTranscoder    | 2012-09-25  |
+| Amazon Glacier                           | Glacier              | 2012-06-01  |
+| Amazon Kinesis                           | Kinesis              | 2013-12-02  |
+| Amazon Redshift                          | Redshift             | 2012-12-01  |
+| Amazon Relational Database Service       | RDS                  | 2014-10-31  |
+| Amazon Route 53                          | Route53              | 2013-04-01  |
+| Amazon Route 53 Domains                  | Route53Domains       | 2014-05-15  |
+| Amazon Simple Email Service              | SES                  | 2010-12-01  |
+| Amazon Simple Notification Service       | SNS                  | 2010-03-31  |
+| Amazon Simple Queue Service              | SQS                  | 2012-11-05  |
+| Amazon Simple Storage Service            | S3                   | 2006-03-01  |
+| Amazon Simple Systems Management Service | SSM                  | 2014-11-06  |
+| Amazon Simple Workflow Service           | SWF                  | 2012-01-25  |
+| Amazon SimpleDB                          | SimpleDB             | 2009-04-15  |
+| Auto Scaling                             | AutoScaling          | 2011-01-01  |
+| Elastic Load Balancing                   | ElasticLoadBalancing | 2012-06-01  |
 
 ## License
 
