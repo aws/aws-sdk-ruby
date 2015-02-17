@@ -16,7 +16,7 @@ module AWS
 
     class Client < Core::RESTXMLClient
 
-      API_VERSION = '2014-10-21'
+      API_VERSION = '2014-11-06'
 
       signature_version :Version4, 'cloudfront'
 
@@ -55,6 +55,10 @@ module AWS
 
     class Client::V20141021 < Client
       define_client_methods('2014-10-21')
+    end
+
+    class Client::V20141106 < Client
+      define_client_methods('2014-11-06')
     end
 
   end

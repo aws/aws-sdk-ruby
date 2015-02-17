@@ -6,7 +6,8 @@ task 'test:coverage:clear' do
   sh("rm -rf #{File.join($REPO_ROOT, 'coverage')}")
 end
 
-Dir.glob('**/*.rake').each do |task_file|
+Dir.glob('**/*/**/*.rake').each do |task_file|
+  puts task_file
   load task_file
 end
 

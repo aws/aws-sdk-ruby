@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Added support for the
+
 1.62.0 (2015-02-12)
 ------------------
 
