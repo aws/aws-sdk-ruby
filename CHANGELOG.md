@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - API Documentation - Updated the
+  [API reference documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
+  to use the new framless Yard layout.
+
 * Issue - Resource Waiters - Resolve an issue where the resource waiter
   methods were not yielding the waiter object like the client waiters do.
   This made it impossible to configure the delay and max attempts or

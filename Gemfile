@@ -19,7 +19,7 @@ end
 
 group :docs do
 
-  gem 'yard'
+  gem 'yard', :git => 'https://github.com/lsegal/yard.git', :branch => 'frameless'
   gem 'yard-sitemap', '~> 1.0'
   gem 'rdiscount'
 

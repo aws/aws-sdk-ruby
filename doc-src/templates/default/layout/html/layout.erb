@@ -1,25 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
   <head>
     <%= erb(:headers) %>
   </head>
   <body>
-    <div id="header">
-      <%= erb(:breadcrumb) %>
-      <%= erb(:search) %>
-      <div class="clear"></div>
+    <div class="nav_wrap">
+      <iframe id="nav" src="<%= @nav_url %>"></iframe>
+      <div id="resizer"></div>
     </div>
 
-    <iframe id="search_frame"></iframe>
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <%= erb(:breadcrumb) %>
+        <%= erb(:search) %>
+        <div class="clear"></div>
+      </div>
 
-    <p id="version-2-warning">You are viewing the API reference documentation for version 2 of the AWS SDK for Ruby. <a href="http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html">Version 1 documentation can be found here</a>.</p>
+      <iframe id="search_frame" src="<%= @nav_url %>"></iframe>
 
-    <div id="content">
-      <!-- REGION_DISCLAIMER_DO_NOT_REMOVE -->
-      <%= yieldall %>
+      <div id="content">
+        <!-- REGION_DISCLAIMER_DO_NOT_REMOVE -->
+        <p id="version-2-warning">You are viewing documentation for version 2 of the AWS SDK for Ruby. <a href="http://docs.aws.amazon.com/AWSRubySDK/latest/frames.html">Version 1 documentation can be found here</a>.</p>
+        <%= yieldall %>
+      </div>
+
+      <%= erb(:footer) %>
     </div>
-
-    <%= erb(:footer) %>
   </body>
 </html>
