@@ -7,7 +7,6 @@ task 'test:coverage:clear' do
 end
 
 Dir.glob('**/*/**/*.rake').each do |task_file|
-  puts task_file
   load task_file
 end
 
