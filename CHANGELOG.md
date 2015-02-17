@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resource Waiters - Resolve an issue where the resource waiter
+  methods were not yielding the waiter object like the client waiters do.
+  This made it impossible to configure the delay and max attempts or
+  callbacks.
+
 2.0.25 (2015-02-17)
 ------------------
 

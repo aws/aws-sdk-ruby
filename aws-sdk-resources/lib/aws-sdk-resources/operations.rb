@@ -200,7 +200,7 @@ module Aws
 
         # @option options [required,Resource] :resource
         # @option options [required,Array<Mixed>] :args
-        def call(options, &block)
+        def call(options)
 
           resource = options[:resource]
 
@@ -211,7 +211,7 @@ module Aws
 
           user_params = options[:params] || {}
           params = deep_merge(user_params, params_hash)
-          resp = resource.client.wait_until(@waiter_name, params)
+          resp = resource.client.wait_until(@waiter_name, params, &options[:block])
 
           resource_opts = resource.identifiers.dup
           if @path && resp.respond_to?(:data)
