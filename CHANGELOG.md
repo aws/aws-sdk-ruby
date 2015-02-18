@@ -1,7 +1,9 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::CloudFront - Added support for the
+* Feature - Aws::CloudFront - Added support for the 2014-11-06 API version.
+
+* Feature - Aws::IAM - Added support for managed policies.
 
 1.62.0 (2015-02-12)
 ------------------
