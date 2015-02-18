@@ -17,6 +17,18 @@
     * `:group_name` - *required* - (String) The name of the group to update.
     * `:user_name` - *required* - (String) The name of the user to add.
   @return [Core::Response]
+:attach_group_policy: "Calls the AttachGroupPolicy API operation.\n@param [Hash] options\n
+  \ * `:group_name` - *required* - (String) The name (friendly name, not ARN) of the
+  group to attach the policy to.\n  * `:policy_arn` - *required* - (String) \n@return
+  [Core::Response]"
+:attach_role_policy: "Calls the AttachRolePolicy API operation.\n@param [Hash] options\n
+  \ * `:role_name` - *required* - (String) The name (friendly name, not ARN) of the
+  role to attach the policy to.\n  * `:policy_arn` - *required* - (String) \n@return
+  [Core::Response]"
+:attach_user_policy: "Calls the AttachUserPolicy API operation.\n@param [Hash] options\n
+  \ * `:user_name` - *required* - (String) The name (friendly name, not ARN) of the
+  user to attach the policy to.\n  * `:policy_arn` - *required* - (String) \n@return
+  [Core::Response]"
 :change_password: |-
   Calls the ChangePassword API operation.
   @param [Hash] options
@@ -38,7 +50,7 @@
 :create_account_alias: |-
   Calls the CreateAccountAlias API operation.
   @param [Hash] options
-    * `:account_alias` - *required* - (String) The name of the account alias to create.
+    * `:account_alias` - *required* - (String) The account alias to create.
   @return [Core::Response]
 :create_group: |-
   Calls the CreateGroup API operation.
@@ -90,10 +102,42 @@
   @param [Hash] options
     * `:url` - *required* - (String) The URL of the identity provider. The URL must begin with "https://" and should correspond to the iss claim in the provider's OpenID Connect ID tokens. Per the OIDC standard, path components are allowed but query parameters are not. Typically the URL consists of only a host name, like "https://server.example.org" or "https://example.com". You cannot register the same provider multiple times in a single AWS account. If you try to submit a URL that has already been used for an OpenID Connect provider in the AWS account, you will get an error.
     * `:client_id_list` - (Array&lt;<String>) A list of client IDs (also known as audiences). When a mobile or web app registers with an OpenID Connect provider, they establish a value that identifies the application. (This is the value that's sent as the client_id parameter on OAuth requests.) You can register multiple client IDs with the same provider. For example, you might have multiple applications that use the same OIDC provider. You cannot register more than 100 client IDs with a single IAM OIDC provider. There is no defined format for a client ID. The CreateOpenIDConnectProviderRequest action accepts client IDs up to 255 characters long.
-    * `:thumbprint_list` - *required* - (Array&lt;<String>) A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). Typically this list includes only one entry. However, IAM lets you have up to five thumbprints for an OIDC provider. This lets you maintain multiple thumbprints if the identity provider is rotating certificates. The server certificate thumbprint is the hex-encoded SHA-1 hash value of the X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. You must provide at least one thumbprint when creating an IAM OIDC provider. For example, if the OIDC provider is server.example.com and the provider stores its keys at "https://keys.server.example.com/openid-connect", the thumbprint string would be the hex-encoded SHA-1 hash value of the certificate used by https://keys.server.example.com.
+    * `:thumbprint_list` - *required* - (Array&lt;<String>) A list of server certificate thumbprints for the OpenID Connect (OIDC) identity provider's server certificate(s). Typically this list includes only one entry. However, IAM lets you have up to five thumbprints for an OIDC provider. This lets you maintain multiple thumbprints if the identity provider is rotating certificates. The server certificate thumbprint is the hex-encoded SHA-1 hash value of the X.509 certificate used by the domain where the OpenID Connect provider makes its keys available. It is always a 40-character string. You must provide at least one thumbprint when creating an IAM OIDC provider. For example, if the OIDC provider is server.example.com and the provider stores its keys at "https://keys.server.example.com/openid-connect", the thumbprint string would be the hex-encoded SHA-1 hash value of the certificate used by https://keys.server.example.com. For more information about obtaining the OIDC provider's thumbprint, see Obtaining the Thumbprint for an OpenID Connect Provider in the Using IAM guide.
   @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
 
     * `:open_id_connect_provider_arn` - (String)
+:create_policy: |-
+  Calls the CreatePolicy API operation.
+  @param [Hash] options
+    * `:policy_name` - *required* - (String) The name of the policy document.
+    * `:path` - (String) The path for the policy. For more information about paths, see IAM Identifiers in the Using IAM guide. This parameter is optional. If it is not included, it defaults to a slash (/).
+    * `:policy_document` - *required* - (String) The policy document. The policy must be URL-encoded according to RFC 3986.
+    * `:description` - (String) A friendly description of the policy. Typically used to store information about the permissions defined in the policy. For example, "Grants access to production DynamoDB tables." The policy description is immutable. After a value is assigned, it cannot be changed.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:policy` - (Hash)
+      * `:policy_name` - (String)
+      * `:policy_id` - (String)
+      * `:arn` - (String)
+      * `:path` - (String)
+      * `:default_version_id` - (String)
+      * `:attachment_count` - (Integer)
+      * `:is_attachable` - (Boolean)
+      * `:description` - (String)
+      * `:create_date` - (Time)
+      * `:update_date` - (Time)
+:create_policy_version: "Calls the CreatePolicyVersion API operation.\n@param [Hash]
+  options\n  * `:policy_arn` - *required* - (String) \n  * `:policy_document` - *required*
+  - (String) The policy document. The policy must be URL-encoded according to RFC
+  3986.\n  * `:set_as_default` - (Boolean) Specifies whether to set this version as
+  the policy's default version. When this parameter is  `true` , the new policy version
+  becomes the operative version; that is, the version that is in effect for the IAM
+  users, groups, and roles that the policy is attached to. For more information about
+  managed policy versions, see Versioning for Managed Policies in the Using IAM guide.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:policy_version` - (Hash)\n    * `:document` - (String)\n
+  \   * `:version_id` - (String)\n    * `:is_default_version` - (Boolean)\n    * `:create_date`
+  - (Time)"
 :create_role: |-
   Calls the CreateRole API operation.
   @param [Hash] options
@@ -179,8 +223,8 @@
 :delete_group_policy: |-
   Calls the DeleteGroupPolicy API operation.
   @param [Hash] options
-    * `:group_name` - *required* - (String) The name of the group the policy is associated with.
-    * `:policy_name` - *required* - (String) The name of the policy document to delete.
+    * `:group_name` - *required* - (String) The name (friendly name, not ARN) identifying the group that the policy is embedded in.
+    * `:policy_name` - *required* - (String) The name identifying the policy document to delete.
   @return [Core::Response]
 :delete_instance_profile: |-
   Calls the DeleteInstanceProfile API operation.
@@ -197,6 +241,12 @@
   @param [Hash] options
     * `:open_id_connect_provider_arn` - *required* - (String) The Amazon Resource Name (ARN) of the IAM OpenID Connect provider to delete. You can get a list of OpenID Connect provider ARNs by using the ListOpenIDConnectProviders action.
   @return [Core::Response]
+:delete_policy: "Calls the DeletePolicy API operation.\n@param [Hash] options\n  *
+  `:policy_arn` - *required* - (String) \n@return [Core::Response]"
+:delete_policy_version: "Calls the DeletePolicyVersion API operation.\n@param [Hash]
+  options\n  * `:policy_arn` - *required* - (String) \n  * `:version_id` - *required*
+  - (String) The policy version to delete. For more information about managed policy
+  versions, see Versioning for Managed Policies in the Using IAM guide.\n@return [Core::Response]"
 :delete_role: |-
   Calls the DeleteRole API operation.
   @param [Hash] options
@@ -205,8 +255,8 @@
 :delete_role_policy: |-
   Calls the DeleteRolePolicy API operation.
   @param [Hash] options
-    * `:role_name` - *required* - (String) The name of the role the associated with the policy.
-    * `:policy_name` - *required* - (String) The name of the policy document to delete.
+    * `:role_name` - *required* - (String) The name (friendly name, not ARN) identifying the role that the policy is embedded in.
+    * `:policy_name` - *required* - (String) The name identifying the policy document to delete.
   @return [Core::Response]
 :delete_saml_provider: |-
   Calls the DeleteSAMLProvider API operation.
@@ -232,14 +282,26 @@
 :delete_user_policy: |-
   Calls the DeleteUserPolicy API operation.
   @param [Hash] options
-    * `:user_name` - *required* - (String) The name of the user the policy is associated with.
-    * `:policy_name` - *required* - (String) The name of the policy document to delete.
+    * `:user_name` - *required* - (String) The name (friendly name, not ARN) identifying the user that the policy is embedded in.
+    * `:policy_name` - *required* - (String) The name identifying the policy document to delete.
   @return [Core::Response]
 :delete_virtual_mfa_device: |-
   Calls the DeleteVirtualMFADevice API operation.
   @param [Hash] options
     * `:serial_number` - *required* - (String) The serial number that uniquely identifies the MFA device. For virtual MFA devices, the serial number is the same as the ARN.
   @return [Core::Response]
+:detach_group_policy: "Calls the DetachGroupPolicy API operation.\n@param [Hash] options\n
+  \ * `:group_name` - *required* - (String) The name (friendly name, not ARN) of the
+  group to detach the policy from.\n  * `:policy_arn` - *required* - (String) \n@return
+  [Core::Response]"
+:detach_role_policy: "Calls the DetachRolePolicy API operation.\n@param [Hash] options\n
+  \ * `:role_name` - *required* - (String) The name (friendly name, not ARN) of the
+  role to detach the policy from.\n  * `:policy_arn` - *required* - (String) \n@return
+  [Core::Response]"
+:detach_user_policy: "Calls the DetachUserPolicy API operation.\n@param [Hash] options\n
+  \ * `:user_name` - *required* - (String) The name (friendly name, not ARN) of the
+  user to detach the policy from.\n  * `:policy_arn` - *required* - (String) \n@return
+  [Core::Response]"
 :enable_mfa_device: |-
   Calls the EnableMFADevice API operation.
   @param [Hash] options
@@ -255,6 +317,58 @@
 
     * `:state` - (String)
     * `:description` - (String)
+:get_account_authorization_details: |-
+  Calls the GetAccountAuthorizationDetails API operation.
+  @param [Hash] options
+    * `:filter` - (Array&lt;<String>) A list of entity types (user, group, or role) for filtering the results.
+    * `:max_items` - (Integer) Use this only when paginating results to indicate the maximum number of items you want in the response. If there are additional items beyond the maximum you specify, the IsTruncated response element is  `true` . This parameter is optional. If you do not include it, it defaults to 100.
+    * `:marker` - (String) Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the Marker element in the response you just received.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:user_detail_list` - (Array<Hash>)
+      * `:path` - (String)
+      * `:user_name` - (String)
+      * `:user_id` - (String)
+      * `:arn` - (String)
+      * `:create_date` - (Time)
+      * `:user_policy_list` - (Array<Hash>)
+        * `:policy_name` - (String)
+        * `:policy_document` - (String)
+      * `:group_list` - (Array<String>)
+    * `:group_detail_list` - (Array<Hash>)
+      * `:path` - (String)
+      * `:group_name` - (String)
+      * `:group_id` - (String)
+      * `:arn` - (String)
+      * `:create_date` - (Time)
+      * `:group_policy_list` - (Array<Hash>)
+        * `:policy_name` - (String)
+        * `:policy_document` - (String)
+    * `:role_detail_list` - (Array<Hash>)
+      * `:path` - (String)
+      * `:role_name` - (String)
+      * `:role_id` - (String)
+      * `:arn` - (String)
+      * `:create_date` - (Time)
+      * `:assume_role_policy_document` - (String)
+      * `:instance_profile_list` - (Array<Hash>)
+        * `:path` - (String)
+        * `:instance_profile_name` - (String)
+        * `:instance_profile_id` - (String)
+        * `:arn` - (String)
+        * `:create_date` - (Time)
+        * `:roles` - (Array<Hash>)
+          * `:path` - (String)
+          * `:role_name` - (String)
+          * `:role_id` - (String)
+          * `:arn` - (String)
+          * `:create_date` - (Time)
+          * `:assume_role_policy_document` - (String)
+      * `:role_policy_list` - (Array<Hash>)
+        * `:policy_name` - (String)
+        * `:policy_document` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:marker` - (String)
 :get_account_password_policy: |-
   Calls the GetAccountPasswordPolicy API operation.
   @param [Hash] options
@@ -357,6 +471,19 @@
     * `:client_id_list` - (Array<String>)
     * `:thumbprint_list` - (Array<String>)
     * `:create_date` - (Time)
+:get_policy: "Calls the GetPolicy API operation.\n@param [Hash] options\n  * `:policy_arn`
+  - *required* - (String) \n@return [Core::Response] The `#data` method of the response
+  object returns a hash with the following structure:\n\n  * `:policy` - (Hash)\n
+  \   * `:policy_name` - (String)\n    * `:policy_id` - (String)\n    * `:arn` - (String)\n
+  \   * `:path` - (String)\n    * `:default_version_id` - (String)\n    * `:attachment_count`
+  - (Integer)\n    * `:is_attachable` - (Boolean)\n    * `:description` - (String)\n
+  \   * `:create_date` - (Time)\n    * `:update_date` - (Time)"
+:get_policy_version: "Calls the GetPolicyVersion API operation.\n@param [Hash] options\n
+  \ * `:policy_arn` - *required* - (String) \n  * `:version_id` - *required* - (String)
+  Identifies the policy version to retrieve.\n@return [Core::Response] The `#data`
+  method of the response object returns a hash with the following structure:\n\n  *
+  `:policy_version` - (Hash)\n    * `:document` - (String)\n    * `:version_id` -
+  (String)\n    * `:is_default_version` - (Boolean)\n    * `:create_date` - (Time)"
 :get_role: |-
   Calls the GetRole API operation.
   @param [Hash] options
@@ -453,6 +580,68 @@
     * `:account_aliases` - (Array<String>)
     * `:is_truncated` - (Boolean)
     * `:marker` - (String)
+:list_attached_group_policies: |-
+  Calls the ListAttachedGroupPolicies API operation.
+  @param [Hash] options
+    * `:group_name` - *required* - (String) The name (friendly name, not ARN) of the group to list attached policies for.
+    * `:path_prefix` - (String) The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies.
+    * `:marker` - (String) Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the Marker element in the response you just received.
+    * `:max_items` - (Integer) Use this only when paginating results to indicate the maximum number of policies you want in the response. If there are additional policies beyond the maximum you specify, the IsTruncated response element is  `true` . This parameter is optional. If you do not include it, it defaults to 100.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:attached_policies` - (Array<Hash>)
+      * `:policy_name` - (String)
+      * `:policy_arn` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:marker` - (String)
+:list_attached_role_policies: |-
+  Calls the ListAttachedRolePolicies API operation.
+  @param [Hash] options
+    * `:role_name` - *required* - (String) The name (friendly name, not ARN) of the role to list attached policies for.
+    * `:path_prefix` - (String) The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies.
+    * `:marker` - (String) Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the Marker element in the response you just received.
+    * `:max_items` - (Integer) Use this only when paginating results to indicate the maximum number of policies you want in the response. If there are additional policies beyond the maximum you specify, the IsTruncated response element is  `true` . This parameter is optional. If you do not include it, it defaults to 100.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:attached_policies` - (Array<Hash>)
+      * `:policy_name` - (String)
+      * `:policy_arn` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:marker` - (String)
+:list_attached_user_policies: |-
+  Calls the ListAttachedUserPolicies API operation.
+  @param [Hash] options
+    * `:user_name` - *required* - (String) The name (friendly name, not ARN) of the user to list attached policies for.
+    * `:path_prefix` - (String) The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies.
+    * `:marker` - (String) Use this only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the Marker element in the response you just received.
+    * `:max_items` - (Integer) Use this only when paginating results to indicate the maximum number of policies you want in the response. If there are additional policies beyond the maximum you specify, the IsTruncated response element is  `true` . This parameter is optional. If you do not include it, it defaults to 100.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:attached_policies` - (Array<Hash>)
+      * `:policy_name` - (String)
+      * `:policy_arn` - (String)
+    * `:is_truncated` - (Boolean)
+    * `:marker` - (String)
+:list_entities_for_policy: "Calls the ListEntitiesForPolicy API operation.\n@param
+  [Hash] options\n  * `:policy_arn` - *required* - (String) \n  * `:entity_filter`
+  - (String) The entity type to use for filtering the results. For example, when EntityFilter
+  is Role, only the roles that are attached to the specified policy are returned.
+  This parameter is optional. If it is not included, all attached entities (users,
+  groups, and roles) are returned.  Valid values include:\n    * `User`\n    * `Role`\n
+  \   * `Group`\n  * `:path_prefix` - (String) The path prefix for filtering the results.
+  This parameter is optional. If it is not included, it defaults to a slash (/), listing
+  all entities.\n  * `:marker` - (String) Use this only when paginating results, and
+  only in a subsequent request after you've received a response where the results
+  are truncated. Set it to the value of the Marker element in the response you just
+  received.\n  * `:max_items` - (Integer) Use this only when paginating results to
+  indicate the maximum number of entities you want in the response. If there are additional
+  entities beyond the maximum you specify, the IsTruncated response element is  `true`
+  . This parameter is optional. If you do not include it, it defaults to 100.\n@return
+  [Core::Response] The `#data` method of the response object returns a hash with the
+  following structure:\n\n  * `:policy_groups` - (Array<Hash>)\n    * `:group_name`
+  - (String)\n  * `:policy_users` - (Array<Hash>)\n    * `:user_name` - (String)\n
+  \ * `:policy_roles` - (Array<Hash>)\n    * `:role_name` - (String)\n  * `:is_truncated`
+  - (Boolean)\n  * `:marker` - (String)"
 :list_group_policies: |-
   Calls the ListGroupPolicies API operation.
   @param [Hash] options
@@ -563,6 +752,45 @@
 
     * `:open_id_connect_provider_list` - (Array<Hash>)
       * `:arn` - (String)
+:list_policies: |-
+  Calls the ListPolicies API operation.
+  @param [Hash] options
+    * `:scope` - (String) The scope to use for filtering the results. To list only AWS managed policies, set Scope to AWS. To list only the customer managed policies in your AWS account, set Scope to Local. This parameter is optional. If it is not included, or if it is set to All, all policies are returned.  Valid values include:
+      * `All`
+      * `AWS`
+      * `Local`
+    * `:only_attached` - (Boolean) A flag to filter the results to only the attached policies. When OnlyAttached is  `true` , the returned list contains only the policies that are attached to a user, group, or role. When OnlyAttached is  `false` , or when the parameter is not included, all policies are returned.
+    * `:path_prefix` - (String) The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies.
+    * `:marker` - (String) Use this parameter only when paginating results, and only in a subsequent request after you've received a response where the results are truncated. Set it to the value of the Marker element in the response you just received.
+    * `:max_items` - (Integer) Use this parameter only when paginating results to indicate the maximum number of policies you want in the response. If there are additional policies beyond the maximum you specify, the IsTruncated response element is  `true` . This parameter is optional. If you do not include it, it defaults to 100.
+  @return [Core::Response] The `#data` method of the response object returns a hash with the following structure:
+
+    * `:policies` - (Array<Hash>)
+      * `:policy_name` - (String)
+      * `:policy_id` - (String)
+      * `:arn` - (String)
+      * `:path` - (String)
+      * `:default_version_id` - (String)
+      * `:attachment_count` - (Integer)
+      * `:is_attachable` - (Boolean)
+      * `:description` - (String)
+      * `:create_date` - (Time)
+      * `:update_date` - (Time)
+    * `:is_truncated` - (Boolean)
+    * `:marker` - (String)
+:list_policy_versions: "Calls the ListPolicyVersions API operation.\n@param [Hash]
+  options\n  * `:policy_arn` - *required* - (String) \n  * `:marker` - (String) Use
+  this parameter only when paginating results, and only in a subsequent request after
+  you've received a response where the results are truncated. Set it to the value
+  of the Marker element in the response you just received.\n  * `:max_items` - (Integer)
+  Use this parameter only when paginating results to indicate the maximum number of
+  policy versions you want in the response. If there are additional policy versions
+  beyond the maximum you specify, the IsTruncated response element is  `true` . This
+  parameter is optional. If you do not include it, it defaults to 100.\n@return [Core::Response]
+  The `#data` method of the response object returns a hash with the following structure:\n\n
+  \ * `:versions` - (Array<Hash>)\n    * `:document` - (String)\n    * `:version_id`
+  - (String)\n    * `:is_default_version` - (Boolean)\n    * `:create_date` - (Time)\n
+  \ * `:is_truncated` - (Boolean)\n  * `:marker` - (String)"
 :list_role_policies: |-
   Calls the ListRolePolicies API operation.
   @param [Hash] options
@@ -733,6 +961,11 @@
     * `:authentication_code_1` - *required* - (String) An authentication code emitted by the device.
     * `:authentication_code_2` - *required* - (String) A subsequent authentication code emitted by the device.
   @return [Core::Response]
+:set_default_policy_version: "Calls the SetDefaultPolicyVersion API operation.\n@param
+  [Hash] options\n  * `:policy_arn` - *required* - (String) \n  * `:version_id` -
+  *required* - (String) The version of the policy to set as the default (operative)
+  version. For more information about managed policy versions, see Versioning for
+  Managed Policies in the Using IAM guide.\n@return [Core::Response]"
 :update_access_key: |-
   Calls the UpdateAccessKey API operation.
   @param [Hash] options
