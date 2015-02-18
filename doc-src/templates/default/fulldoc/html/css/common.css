@@ -7,3 +7,7 @@
   background-color: #FCC;
   border: 2px solid #F88;
 }
+
+#toc {
+  display: none;
+}
