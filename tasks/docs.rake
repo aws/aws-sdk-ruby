@@ -2,6 +2,7 @@ desc 'Delete the locally generated docs' if ENV['ALL']
 task 'docs:clobber' do
   rm_rf '.yardoc'
   rm_rf 'api-docs'
+  rm_rf 'api-docs.zip'
 end
 
 desc 'Generates api-docs.zip'
