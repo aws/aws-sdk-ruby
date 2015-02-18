@@ -22,7 +22,7 @@ You can configure a default region in the following locations:
 
 Credentials are loaded automatically from the following locations:
 
-* `ENV['AWS_ACCESS_KEY']` and `ENV['AWS_SECRET_ACCESS_KEY']`
+* `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
 * `Aws.config[:credentials]`
 * Shared credentials file, `~/.aws/credentials`
 * EC2 Instance profile
