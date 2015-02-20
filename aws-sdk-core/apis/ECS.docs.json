@@ -1,27 +1,29 @@
 {
+  "version": "2.0",
   "operations": {
     "CreateCluster": "<p>Creates a new Amazon ECS cluster. By default, your account will receive a <code>default</code> cluster when you launch your first container instance. However, you can create your own cluster with a unique name with the <code>CreateCluster</code> action.</p> <important> <p>During the preview, each account is limited to two clusters.</p> </important>",
     "DeleteCluster": "<p>Deletes the specified cluster. You must deregister all container instances from this cluster before you may delete it. You can list the container instances in a cluster with <a>ListContainerInstances</a> and deregister them with <a>DeregisterContainerInstance</a>.</p>",
     "DeregisterContainerInstance": "<p>Deregisters an Amazon ECS container instance from the specified cluster. This instance will no longer be available to run tasks.</p>",
-    "DeregisterTaskDefinition": "<p>Deregisters the specified task definition. You will no longer be able to run tasks from this definition after deregistration.</p>",
+    "DeregisterTaskDefinition": "<p>NOT YET IMPLEMENTED.</p> <p>Deregisters the specified task definition. You will no longer be able to run tasks from this definition after deregistration.</p>",
     "DescribeClusters": "<p>Describes one or more of your clusters.</p>",
     "DescribeContainerInstances": "<p>Describes Amazon EC2 Container Service container instances. Returns metadata about registered and remaining resources on each container instance requested.</p>",
-    "DescribeTaskDefinition": "<p>Describes a task definition.</p>",
+    "DescribeTaskDefinition": "<p>Describes a task definition. You can specify a <code>family</code> and <code>revision</code> to find information on a specific task definition, or you can simply specify the family to find the latest revision in that family.</p>",
     "DescribeTasks": "<p>Describes a specified task or tasks.</p>",
     "DiscoverPollEndpoint": "<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Returns an endpoint for the Amazon EC2 Container Service agent to poll for updates.</p>",
     "ListClusters": "<p>Returns a list of existing clusters.</p>",
     "ListContainerInstances": "<p>Returns a list of container instances in a specified cluster.</p>",
+    "ListTaskDefinitionFamilies": "<p>Returns a list of task definition families that are registered to your account. You can filter the results with the <code>familyPrefix</code> parameter.</p>",
     "ListTaskDefinitions": "<p>Returns a list of task definitions that are registered to your account. You can filter the results by family name with the <code>familyPrefix</code> parameter.</p>",
     "ListTasks": "<p>Returns a list of tasks for a specified cluster. You can filter the results by family name or by a particular container instance with the <code>family</code> and <code>containerInstance</code> parameters.</p>",
     "RegisterContainerInstance": "<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Registers an Amazon EC2 instance into the specified cluster. This instance will become available to place containers on.</p>",
-    "RegisterTaskDefinition": "<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>.</p>",
+    "RegisterTaskDefinition": "<p>Registers a new task definition from the supplied <code>family</code> and <code>containerDefinitions</code>. Optionally, you can add data volumes to your containers with the <code>volumes</code> parameter. For more information on task definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>",
     "RunTask": "<p>Start a task using random placement and the default Amazon ECS scheduler. If you want to use your own scheduler or place a task on a specific container instance, use <code>StartTask</code> instead.</p>",
     "StartTask": "<p>Starts a new task from the specified task definition on the specified container instance or instances. If you want to use the default Amazon ECS scheduler to place your task, use <code>RunTask</code> instead.</p>",
     "StopTask": "<p>Stops a running task.</p>",
     "SubmitContainerStateChange": "<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a container changed states.</p>",
     "SubmitTaskStateChange": "<note><p>This action is only used by the Amazon EC2 Container Service agent, and it is not intended for use outside of the agent.</p></note> <p>Sent to acknowledge that a task changed states.</p>"
   },
-  "service": "<p>Amazon EC2 Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster of Amazon EC2 instances. Amazon ECS lets you launch and stop container-enabled applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features like security groups, Amazon EBS volumes, and IAM roles.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon EC2 Container Service eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>",
+  "service": "<p></p> <p>Amazon EC2 Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster of Amazon EC2 instances. Amazon ECS lets you launch and stop container-enabled applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features like security groups, Amazon EBS volumes, and IAM roles.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon EC2 Container Service eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>",
   "shapes": {
     "Boolean": {
       "base": null,
@@ -33,7 +35,9 @@
       "base": null,
       "refs": {
         "ContainerDefinition$essential": "<p>If the <code>essential</code> parameter of a container is marked as <code>true</code>, the failure of that container will stop the task. If the <code>essential</code> parameter of a container is marked as <code>false</code>, then its failure will not affect the rest of the containers in a task.</p>",
-        "DeregisterContainerInstanceRequest$force": "<p>Force the deregistration of the container instance. You can use the <code>force</code> parameter if you have several tasks running on a container instance and you don't want to run <code>StopTask</code> for each task before deregistering the container instance.</p>"
+        "DeregisterContainerInstanceRequest$force": "<p>Force the deregistration of the container instance. You can use the <code>force</code> parameter if you have several tasks running on a container instance and you don't want to run <code>StopTask</code> for each task before deregistering the container instance.</p>",
+        "MountPoint$readOnly": "<p>If this value is <code>true</code>, the container has read-only access to the volume. If this value is <code>false</code>, then the container can write to the volume. The default value is <code>false</code>.</p>",
+        "VolumeFrom$readOnly": "<p>If this value is <code>true</code>, the container has read-only access to the volume. If this value is <code>false</code>, then the container can write to the volume. The default value is <code>false</code>.</p>"
       }
     },
     "BoxedInteger": {
@@ -42,10 +46,11 @@
         "Container$exitCode": "<p>The exit code returned from the container.</p>",
         "ListClustersRequest$maxResults": "<p>The maximum number of cluster results returned by <code>ListClusters</code> in paginated output. When this parameter is used, <code>ListClusters</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListClusters</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListClusters</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>",
         "ListContainerInstancesRequest$maxResults": "<p>The maximum number of container instance results returned by <code>ListContainerInstances</code> in paginated output. When this parameter is used, <code>ListContainerInstances</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListContainerInstances</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListContainerInstances</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>",
+        "ListTaskDefinitionFamiliesRequest$maxResults": "<p>The maximum number of task definition family results returned by <code>ListTaskDefinitionFamilies</code> in paginated output. When this parameter is used, <code>ListTaskDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListTaskDefinitionFamilies</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListTaskDefinitionFamilies</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>",
         "ListTaskDefinitionsRequest$maxResults": "<p>The maximum number of task definition results returned by <code>ListTaskDefinitions</code> in paginated output. When this parameter is used, <code>ListTaskDefinitions</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListTaskDefinitions</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListTaskDefinitions</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>",
         "ListTasksRequest$maxResults": "<p>The maximum number of task results returned by <code>ListTasks</code> in paginated output. When this parameter is used, <code>ListTasks</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListTasks</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListTasks</code> returns up to 100 results and a <code>nextToken</code> value if applicable.</p>",
-        "NetworkBinding$containerPort": "<p>The port number on the container that should be used with the network binding.</p>",
-        "NetworkBinding$hostPort": "<p>The port number on the host that should be used with the network binding.</p>",
+        "NetworkBinding$containerPort": "<p>The port number on the container that is be used with the network binding.</p>",
+        "NetworkBinding$hostPort": "<p>The port number on the host that is used with the network binding.</p>",
         "RunTaskRequest$count": "<p>The number of instances of the specified task that you would like to place on your cluster.</p>",
         "SubmitContainerStateChangeRequest$exitCode": "<p>The exit code returned for the state change request.</p>"
       }
@@ -85,7 +90,7 @@
       "base": null,
       "refs": {
         "RegisterTaskDefinitionRequest$containerDefinitions": "<p>A list of container definitions in JSON format that describe the different containers that make up your task.</p>",
-        "TaskDefinition$containerDefinitions": "<p>A list of container definitions in JSON format that describe the different containers that make up your task.</p>"
+        "TaskDefinition$containerDefinitions": "<p>A list of container definitions in JSON format that describe the different containers that make up your task. For more information on container definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
       }
     },
     "ContainerInstance": {
@@ -238,13 +243,19 @@
         "StartTaskResponse$failures": "<p>Any failed tasks from your <code>StartTask</code> action are listed here.</p>"
       }
     },
+    "HostVolumeProperties": {
+      "base": null,
+      "refs": {
+        "Volume$host": "<p>The path on the host container instance that is presented to the containers which access the volume. If this parameter is empty, then the Docker daemon assigns a host path for you.</p>"
+      }
+    },
     "Integer": {
       "base": null,
       "refs": {
         "ContainerDefinition$cpu": "<p>The number of <code>cpu</code> units reserved for the container. A container instance has 1,024 <code>cpu</code> units for every CPU core.</p>",
         "ContainerDefinition$memory": "<p>The number of MiB of memory reserved for the container. Docker will allocate a minimum of 4 MiB of memory to a container.</p>",
-        "PortMapping$containerPort": "<p>The port number on the container that should be used with the port mapping.</p>",
-        "PortMapping$hostPort": "<p>The port number on the host that should be used with the port mapping.</p>",
+        "PortMapping$containerPort": "<p>The port number on the container that is bound to the user-specified or automatically assigned host port. If you specify a container port and not a host port, your container will automatically receive a host port in the 49153 to 65535 port range.</p>",
+        "PortMapping$hostPort": "<p>The port number on the container instance to reserve for your container. You can specify a non-reserved host port for your container port mapping, or you can omit the <code>hostPort</code> while specifying a <code>containerPort</code> and your container will automatically receive a port in the 49153 to 65535 port range. You should not attempt to specify a host port in the 49153 to 65535 port range, since these are reserved for automatic assignment.</p> <p>The default reserved ports are 22 for SSH, the Docker ports 2375 and 2376, and the Amazon ECS Container Agent port 51678. Any host port that was previously specified in a running task is also reserved while the task is running (once a task stops, the host port is released).The current reserved ports are displayed in the <code>remainingResources</code> of <a>DescribeContainerInstances</a> output, and a container instance may have up to 50 reserved ports at a time, including the default reserved ports (automatically assigned ports do not count toward this limit).</p>",
         "Resource$integerValue": "<p>When the <code>integerValue</code> type is set, the value of the resource must be an integer.</p>",
         "TaskDefinition$revision": "<p>The revision of the task in a particular family. You can think of the revision as a version number of a task definition in a family. When you register a task definition for the first time, the revision is <code>1</code>, and each time you register a task definition in the same family, the revision value increases by one.</p>"
       }
@@ -275,6 +286,16 @@
       "refs": {
       }
     },
+    "ListTaskDefinitionFamiliesRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ListTaskDefinitionFamiliesResponse": {
+      "base": null,
+      "refs": {
+      }
+    },
     "ListTaskDefinitionsRequest": {
       "base": null,
       "refs": {
@@ -299,6 +320,18 @@
       "base": null,
       "refs": {
         "Resource$longValue": "<p>When the <code>longValue</code> type is set, the value of the resource must be an extended precision floating-point type.</p>"
+      }
+    },
+    "MountPoint": {
+      "base": null,
+      "refs": {
+        "MountPointList$member": null
+      }
+    },
+    "MountPointList": {
+      "base": null,
+      "refs": {
+        "ContainerDefinition$mountPoints": "<p>The mount points for data volumes in your container.</p>"
       }
     },
     "NetworkBinding": {
@@ -414,17 +447,19 @@
         "ContainerInstance$status": "<p>The status of the container instance. The valid values are <code>ACTIVE</code> or <code>INACTIVE</code>. <code>ACTIVE</code> indicates that the container instance can accept tasks.</p>",
         "ContainerOverride$name": "<p>The name of the container that receives the override.</p>",
         "CreateClusterRequest$clusterName": "<p>The name of your cluster. If you do not specify a name for your cluster, you will create a cluster named <code>default</code>.</p>",
-        "DeleteClusterRequest$cluster": "<p>The cluster you want to delete.</p>",
+        "DeleteClusterRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to delete.</p>",
         "DeregisterContainerInstanceRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance you want to deregister. If you do not specify a cluster, the default cluster is assumed.</p>",
         "DeregisterContainerInstanceRequest$containerInstance": "<p>The container instance UUID or full Amazon Resource Name (ARN) of the container instance you want to deregister. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance UUID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_UUID</i>.</p>",
         "DeregisterTaskDefinitionRequest$taskDefinition": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition that you want to deregister.</p>",
         "DescribeContainerInstancesRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances you want to describe. If you do not specify a cluster, the default cluster is assumed.</p>",
-        "DescribeTaskDefinitionRequest$taskDefinition": "<p>The <code>family</code> and <code>revision</code> (<code>family:revision</code>) or full Amazon Resource Name (ARN) of the task definition that you want to describe.</p>",
+        "DescribeTaskDefinitionRequest$taskDefinition": "<p>The <code>family</code> for the latest revision, <code>family</code> and <code>revision</code> (<code>family:revision</code>) for a specific revision in the family, or full Amazon Resource Name (ARN) of the task definition that you want to describe.</p>",
         "DescribeTasksRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task you want to describe. If you do not specify a cluster, the default cluster is assumed.</p>",
         "DiscoverPollEndpointRequest$containerInstance": "<p>The container instance UUID or full Amazon Resource Name (ARN) of the container instance. The ARN contains the <code>arn:aws:ecs</code> namespace, followed by the region of the container instance, the AWS account ID of the container instance owner, the <code>container-instance</code> namespace, and then the container instance UUID. For example, arn:aws:ecs:<i>region</i>:<i>aws_account_id</i>:container-instance/<i>container_instance_UUID</i>.</p>",
+        "DiscoverPollEndpointRequest$cluster": "<p>The cluster that the container instance belongs to.</p>",
         "DiscoverPollEndpointResponse$endpoint": "<p>The endpoint for the Amazon ECS agent to poll.</p>",
         "Failure$arn": "<p>The Amazon Resource Name (ARN) of the failed resource.</p>",
         "Failure$reason": "<p>The reason for the failure.</p>",
+        "HostVolumeProperties$sourcePath": "<p>The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you.</p>",
         "KeyValuePair$name": "<p>The name of the key value pair.</p>",
         "KeyValuePair$value": "<p>The value of the key value pair.</p>",
         "ListClustersRequest$nextToken": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListClusters</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>",
@@ -432,7 +467,10 @@
         "ListContainerInstancesRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances you want to list. If you do not specify a cluster, the default cluster is assumed..</p>",
         "ListContainerInstancesRequest$nextToken": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListContainerInstances</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>",
         "ListContainerInstancesResponse$nextToken": "<p>The <code>nextToken</code> value to include in a future <code>ListContainerInstances</code> request. When the results of a <code>ListContainerInstances</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
-        "ListTaskDefinitionsRequest$familyPrefix": "<p>The name of the family that you want to filter the <code>ListTaskDefinitions</code> results with. Specifying a <code>familyPrefix</code> will limit the listed task definitions to definitions that belong to that family.</p>",
+        "ListTaskDefinitionFamiliesRequest$familyPrefix": "<p>The <code>familyPrefix</code> is a string that is used to filter the results of <code>ListTaskDefinitionFamilies</code>. If you specify a <code>familyPrefix</code>, only task definition family names that begin with the <code>familyPrefix</code> string are returned.</p>",
+        "ListTaskDefinitionFamiliesRequest$nextToken": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListTaskDefinitionFamilies</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>",
+        "ListTaskDefinitionFamiliesResponse$nextToken": "<p>The <code>nextToken</code> value to include in a future <code>ListTaskDefinitionFamilies</code> request. When the results of a <code>ListTaskDefinitionFamilies</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+        "ListTaskDefinitionsRequest$familyPrefix": "<p>The full family name that you want to filter the <code>ListTaskDefinitions</code> results with. Specifying a <code>familyPrefix</code> will limit the listed task definitions to task definition revisions that belong to that family.</p>",
         "ListTaskDefinitionsRequest$nextToken": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListTaskDefinitions</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>",
         "ListTaskDefinitionsResponse$nextToken": "<p>The <code>nextToken</code> value to include in a future <code>ListTaskDefinitions</code> request. When the results of a <code>ListTaskDefinitions</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
         "ListTasksRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that hosts the tasks you want to list. If you do not specify a cluster, the default cluster is assumed..</p>",
@@ -440,11 +478,13 @@
         "ListTasksRequest$family": "<p>The name of the family that you want to filter the <code>ListTasks</code> results with. Specifying a <code>family</code> will limit the results to tasks that belong to that family.</p>",
         "ListTasksRequest$nextToken": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListTasks</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value. This value is <code>null</code> when there are no more results to return.</p>",
         "ListTasksResponse$nextToken": "<p>The <code>nextToken</code> value to include in a future <code>ListTasks</code> request. When the results of a <code>ListTasks</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+        "MountPoint$sourceVolume": "<p>The name of the volume to mount.</p>",
+        "MountPoint$containerPath": "<p>The path on the container to mount the host volume at.</p>",
         "NetworkBinding$bindIP": "<p>The IP address that the container is bound to on the container instance.</p>",
         "RegisterContainerInstanceRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to register your container instance with. If you do not specify a cluster, the default cluster is assumed..</p>",
         "RegisterContainerInstanceRequest$instanceIdentityDocument": null,
         "RegisterContainerInstanceRequest$instanceIdentityDocumentSignature": null,
-        "RegisterTaskDefinitionRequest$family": "<p>You can specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. You can think of the <code>family</code> as a name for your task definition.</p>",
+        "RegisterTaskDefinitionRequest$family": "<p>You must specify a <code>family</code> for a task definition, which allows you to track multiple versions of the same task definition. You can think of the <code>family</code> as a name for your task definition.</p>",
         "Resource$name": "<p>The name of the resource, such as <code>CPU</code>, <code>MEMORY</code>, <code>PORTS</code>, or a user-defined resource.</p>",
         "Resource$type": "<p>The type of the resource, such as <code>INTEGER</code>, <code>DOUBLE</code>, <code>LONG</code>, or <code>STRINGSET</code>.</p>",
         "RunTaskRequest$cluster": "<p>The short name or full Amazon Resource Name (ARN) of the cluster that you want to run your task on. If you do not specify a cluster, the default cluster is assumed..</p>",
@@ -473,14 +513,16 @@
         "Task$lastStatus": "<p>The last known status of the task.</p>",
         "Task$desiredStatus": "<p>The desired status of the task.</p>",
         "TaskDefinition$taskDefinitionArn": "<p>The full Amazon Resource Name (ARN) of the of the task definition.</p>",
-        "TaskDefinition$family": "<p>The family of your task definition. You can think of the <code>family</code> as the name of your task definition.</p>"
+        "TaskDefinition$family": "<p>The family of your task definition. You can think of the <code>family</code> as the name of your task definition.</p>",
+        "Volume$name": "<p>The name of the volume. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.</p>",
+        "VolumeFrom$sourceContainer": "<p>The name of the container to mount volumes from.</p>"
       }
     },
     "StringList": {
       "base": null,
       "refs": {
         "ContainerDefinition$links": "<p>The <code>link</code> parameter allows containers to communicate with each other without the need for port mappings, using the <code>name</code> parameter. For more information on linking Docker containers, see <a href=\"https://docs.docker.com/userguide/dockerlinks/\">https://docs.docker.com/userguide/dockerlinks/</a>.</p>",
-        "ContainerDefinition$entryPoint": "<p>The <code>ENTRYPOINT</code> that is passed to the container. For more information on the Docker <code>ENTRYPOINT</code> parameter, see <a href=\"https://docs.docker.com/reference/builder/#entrypoint\">https://docs.docker.com/reference/builder/#entrypoint</a>.</p>",
+        "ContainerDefinition$entryPoint": "<important> <p>Early versions of the Amazon ECS container agent do not properly handle <code>entryPoint</code> parameters. If you have problems using <code>entryPoint</code>, update your container agent or enter your commands and arguments as <code>command</code> array items instead.</p> </important> <p>The <code>ENTRYPOINT</code> that is passed to the container. For more information on the Docker <code>ENTRYPOINT</code> parameter, see <a href=\"https://docs.docker.com/reference/builder/#entrypoint\">https://docs.docker.com/reference/builder/#entrypoint</a>.</p>",
         "ContainerDefinition$command": "<p>The <code>CMD</code> that is passed to the container. For more information on the Docker <code>CMD</code> parameter, see <a href=\"https://docs.docker.com/reference/builder/#cmd\">https://docs.docker.com/reference/builder/#cmd</a>.</p>",
         "ContainerOverride$command": "<p>The command to send to the container that receives the override.</p>",
         "DescribeClustersRequest$clusters": "<p>A space-separated list of cluster names or full cluster Amazon Resource Name (ARN) entries. If you do not specify a cluster, the default cluster is assumed.</p>",
@@ -488,6 +530,7 @@
         "DescribeTasksRequest$tasks": "<p>A space-separated list of task UUIDs or full Amazon Resource Name (ARN) entries.</p>",
         "ListClustersResponse$clusterArns": "<p>The list of full Amazon Resource Name (ARN) entries for each cluster associated with your account.</p>",
         "ListContainerInstancesResponse$containerInstanceArns": "<p>The list of container instance full Amazon Resource Name (ARN) entries for each container instance associated with the specified cluster.</p>",
+        "ListTaskDefinitionFamiliesResponse$families": "<p>The list of task definition family names that match the <code>ListTaskDefinitionFamilies</code> request.</p>",
         "ListTaskDefinitionsResponse$taskDefinitionArns": "<p>The list of task definition Amazon Resource Name (ARN) entries for the <code>ListTaskDefintions</code> request.</p>",
         "ListTasksResponse$taskArns": "<p>The list of task Amazon Resource Name (ARN) entries for the <code>ListTasks</code> request.</p>",
         "Resource$stringSetValue": "<p>When the <code>stringSetValue</code> type is set, the value of the resource must be a string type.</p>",
@@ -543,6 +586,31 @@
         "DescribeTasksResponse$tasks": "<p>The list of tasks.</p>",
         "RunTaskResponse$tasks": "<p>A full description of the tasks that were run. Each task that was successfully placed on your cluster will be described here.</p>",
         "StartTaskResponse$tasks": "<p>A full description of the tasks that were started. Each task that was successfully placed on your container instances will be described here.</p>"
+      }
+    },
+    "Volume": {
+      "base": null,
+      "refs": {
+        "VolumeList$member": null
+      }
+    },
+    "VolumeFrom": {
+      "base": null,
+      "refs": {
+        "VolumeFromList$member": null
+      }
+    },
+    "VolumeFromList": {
+      "base": null,
+      "refs": {
+        "ContainerDefinition$volumesFrom": "<p>Data volumes to mount from another container.</p>"
+      }
+    },
+    "VolumeList": {
+      "base": null,
+      "refs": {
+        "RegisterTaskDefinitionRequest$volumes": "<p>A list of volume definitions in JSON format that containers in your task may use.</p>",
+        "TaskDefinition$volumes": "<p>The list of volumes in a task. For more information on volume definition parameters and defaults, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html\">Amazon ECS Task Definitions</a> in the <i>Amazon EC2 Container Service Developer Guide</i>.</p>"
       }
     }
   }

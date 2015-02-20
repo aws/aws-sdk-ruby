@@ -1,13 +1,14 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-11-13",
     "endpointPrefix":"ecs",
+    "jsonVersion":"1.1",
     "serviceAbbreviation":"Amazon ECS",
     "serviceFullName":"Amazon EC2 Container Service",
     "signatureVersion":"v4",
-    "signingName":"ecs",
-    "xmlNamespace":"http://ecs.amazonaws.com/doc/2014-11-13/",
-    "protocol":"query"
+    "targetPrefix":"AmazonEC2ContainerServiceV20141113",
+    "protocol":"json"
   },
   "operations":{
     "CreateCluster":{
@@ -17,14 +18,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"CreateClusterRequest"},
-      "output":{
-        "shape":"CreateClusterResponse",
-        "resultWrapper":"CreateClusterResult"
-      },
+      "output":{"shape":"CreateClusterResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -39,14 +38,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteClusterRequest"},
-      "output":{
-        "shape":"DeleteClusterResponse",
-        "resultWrapper":"DeleteClusterResult"
-      },
+      "output":{"shape":"DeleteClusterResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -61,14 +58,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeregisterContainerInstanceRequest"},
-      "output":{
-        "shape":"DeregisterContainerInstanceResponse",
-        "resultWrapper":"DeregisterContainerInstanceResult"
-      },
+      "output":{"shape":"DeregisterContainerInstanceResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -83,14 +78,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeregisterTaskDefinitionRequest"},
-      "output":{
-        "shape":"DeregisterTaskDefinitionResponse",
-        "resultWrapper":"DeregisterTaskDefinitionResult"
-      },
+      "output":{"shape":"DeregisterTaskDefinitionResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -105,14 +98,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeClustersRequest"},
-      "output":{
-        "shape":"DescribeClustersResponse",
-        "resultWrapper":"DescribeClustersResult"
-      },
+      "output":{"shape":"DescribeClustersResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -127,14 +118,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeContainerInstancesRequest"},
-      "output":{
-        "shape":"DescribeContainerInstancesResponse",
-        "resultWrapper":"DescribeContainerInstancesResult"
-      },
+      "output":{"shape":"DescribeContainerInstancesResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -149,14 +138,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTaskDefinitionRequest"},
-      "output":{
-        "shape":"DescribeTaskDefinitionResponse",
-        "resultWrapper":"DescribeTaskDefinitionResult"
-      },
+      "output":{"shape":"DescribeTaskDefinitionResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -171,14 +158,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DescribeTasksRequest"},
-      "output":{
-        "shape":"DescribeTasksResponse",
-        "resultWrapper":"DescribeTasksResult"
-      },
+      "output":{"shape":"DescribeTasksResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -193,14 +178,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"DiscoverPollEndpointRequest"},
-      "output":{
-        "shape":"DiscoverPollEndpointResponse",
-        "resultWrapper":"DiscoverPollEndpointResult"
-      },
+      "output":{"shape":"DiscoverPollEndpointResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -215,14 +198,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListClustersRequest"},
-      "output":{
-        "shape":"ListClustersResponse",
-        "resultWrapper":"ListClustersResult"
-      },
+      "output":{"shape":"ListClustersResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -237,14 +218,32 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListContainerInstancesRequest"},
-      "output":{
-        "shape":"ListContainerInstancesResponse",
-        "resultWrapper":"ListContainerInstancesResult"
-      },
+      "output":{"shape":"ListContainerInstancesResponse"},
       "errors":[
         {
           "shape":"ServerException",
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"ClientException",
           "exception":true
+        }
+      ]
+    },
+    "ListTaskDefinitionFamilies":{
+      "name":"ListTaskDefinitionFamilies",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTaskDefinitionFamiliesRequest"},
+      "output":{"shape":"ListTaskDefinitionFamiliesResponse"},
+      "errors":[
+        {
+          "shape":"ServerException",
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -259,14 +258,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListTaskDefinitionsRequest"},
-      "output":{
-        "shape":"ListTaskDefinitionsResponse",
-        "resultWrapper":"ListTaskDefinitionsResult"
-      },
+      "output":{"shape":"ListTaskDefinitionsResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -281,14 +278,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"ListTasksRequest"},
-      "output":{
-        "shape":"ListTasksResponse",
-        "resultWrapper":"ListTasksResult"
-      },
+      "output":{"shape":"ListTasksResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -303,14 +298,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"RegisterContainerInstanceRequest"},
-      "output":{
-        "shape":"RegisterContainerInstanceResponse",
-        "resultWrapper":"RegisterContainerInstanceResult"
-      },
+      "output":{"shape":"RegisterContainerInstanceResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -325,14 +318,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"RegisterTaskDefinitionRequest"},
-      "output":{
-        "shape":"RegisterTaskDefinitionResponse",
-        "resultWrapper":"RegisterTaskDefinitionResult"
-      },
+      "output":{"shape":"RegisterTaskDefinitionResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -347,14 +338,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"RunTaskRequest"},
-      "output":{
-        "shape":"RunTaskResponse",
-        "resultWrapper":"RunTaskResult"
-      },
+      "output":{"shape":"RunTaskResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -369,14 +358,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"StartTaskRequest"},
-      "output":{
-        "shape":"StartTaskResponse",
-        "resultWrapper":"StartTaskResult"
-      },
+      "output":{"shape":"StartTaskResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -391,14 +378,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"StopTaskRequest"},
-      "output":{
-        "shape":"StopTaskResponse",
-        "resultWrapper":"StopTaskResult"
-      },
+      "output":{"shape":"StopTaskResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -413,14 +398,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"SubmitContainerStateChangeRequest"},
-      "output":{
-        "shape":"SubmitContainerStateChangeResponse",
-        "resultWrapper":"SubmitContainerStateChangeResult"
-      },
+      "output":{"shape":"SubmitContainerStateChangeResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -435,14 +418,12 @@
         "requestUri":"/"
       },
       "input":{"shape":"SubmitTaskStateChangeRequest"},
-      "output":{
-        "shape":"SubmitTaskStateChangeResponse",
-        "resultWrapper":"SubmitTaskStateChangeResult"
-      },
+      "output":{"shape":"SubmitTaskStateChangeResponse"},
       "errors":[
         {
           "shape":"ServerException",
-          "exception":true
+          "exception":true,
+          "fault":true
         },
         {
           "shape":"ClientException",
@@ -504,7 +485,9 @@
         "essential":{"shape":"BoxedBoolean"},
         "entryPoint":{"shape":"StringList"},
         "command":{"shape":"StringList"},
-        "environment":{"shape":"EnvironmentVariables"}
+        "environment":{"shape":"EnvironmentVariables"},
+        "mountPoints":{"shape":"MountPointList"},
+        "volumesFrom":{"shape":"VolumeFromList"}
       }
     },
     "ContainerDefinitions":{
@@ -653,7 +636,8 @@
     "DiscoverPollEndpointRequest":{
       "type":"structure",
       "members":{
-        "containerInstance":{"shape":"String"}
+        "containerInstance":{"shape":"String"},
+        "cluster":{"shape":"String"}
       }
     },
     "DiscoverPollEndpointResponse":{
@@ -677,6 +661,12 @@
     "Failures":{
       "type":"list",
       "member":{"shape":"Failure"}
+    },
+    "HostVolumeProperties":{
+      "type":"structure",
+      "members":{
+        "sourcePath":{"shape":"String"}
+      }
     },
     "Integer":{"type":"integer"},
     "KeyValuePair":{
@@ -715,6 +705,21 @@
         "nextToken":{"shape":"String"}
       }
     },
+    "ListTaskDefinitionFamiliesRequest":{
+      "type":"structure",
+      "members":{
+        "familyPrefix":{"shape":"String"},
+        "nextToken":{"shape":"String"},
+        "maxResults":{"shape":"BoxedInteger"}
+      }
+    },
+    "ListTaskDefinitionFamiliesResponse":{
+      "type":"structure",
+      "members":{
+        "families":{"shape":"StringList"},
+        "nextToken":{"shape":"String"}
+      }
+    },
     "ListTaskDefinitionsRequest":{
       "type":"structure",
       "members":{
@@ -748,6 +753,18 @@
       }
     },
     "Long":{"type":"long"},
+    "MountPoint":{
+      "type":"structure",
+      "members":{
+        "sourceVolume":{"shape":"String"},
+        "containerPath":{"shape":"String"},
+        "readOnly":{"shape":"BoxedBoolean"}
+      }
+    },
+    "MountPointList":{
+      "type":"list",
+      "member":{"shape":"MountPoint"}
+    },
     "NetworkBinding":{
       "type":"structure",
       "members":{
@@ -794,7 +811,8 @@
       ],
       "members":{
         "family":{"shape":"String"},
-        "containerDefinitions":{"shape":"ContainerDefinitions"}
+        "containerDefinitions":{"shape":"ContainerDefinitions"},
+        "volumes":{"shape":"VolumeList"}
       }
     },
     "RegisterTaskDefinitionResponse":{
@@ -840,7 +858,8 @@
       "members":{
         "message":{"shape":"String"}
       },
-      "exception":true
+      "exception":true,
+      "fault":true
     },
     "StartTaskRequest":{
       "type":"structure",
@@ -933,7 +952,8 @@
         "taskDefinitionArn":{"shape":"String"},
         "containerDefinitions":{"shape":"ContainerDefinitions"},
         "family":{"shape":"String"},
-        "revision":{"shape":"Integer"}
+        "revision":{"shape":"Integer"},
+        "volumes":{"shape":"VolumeList"}
       }
     },
     "TaskOverride":{
@@ -945,6 +965,28 @@
     "Tasks":{
       "type":"list",
       "member":{"shape":"Task"}
+    },
+    "Volume":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"String"},
+        "host":{"shape":"HostVolumeProperties"}
+      }
+    },
+    "VolumeFrom":{
+      "type":"structure",
+      "members":{
+        "sourceContainer":{"shape":"String"},
+        "readOnly":{"shape":"BoxedBoolean"}
+      }
+    },
+    "VolumeFromList":{
+      "type":"list",
+      "member":{"shape":"VolumeFrom"}
+    },
+    "VolumeList":{
+      "type":"list",
+      "member":{"shape":"Volume"}
     }
   }
 }
