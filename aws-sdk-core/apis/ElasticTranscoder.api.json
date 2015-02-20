@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2012-09-25",
     "endpointPrefix":"elastictranscoder",
@@ -901,7 +902,8 @@
     "CreatePipelineResponse":{
       "type":"structure",
       "members":{
-        "Pipeline":{"shape":"Pipeline"}
+        "Pipeline":{"shape":"Pipeline"},
+        "Warnings":{"shape":"Warnings"}
       }
     },
     "CreatePresetRequest":{
@@ -1454,7 +1456,8 @@
     "ReadPipelineResponse":{
       "type":"structure",
       "members":{
-        "Pipeline":{"shape":"Pipeline"}
+        "Pipeline":{"shape":"Pipeline"},
+        "Warnings":{"shape":"Warnings"}
       }
     },
     "ReadPresetRequest":{
@@ -1626,7 +1629,8 @@
     "UpdatePipelineResponse":{
       "type":"structure",
       "members":{
-        "Pipeline":{"shape":"Pipeline"}
+        "Pipeline":{"shape":"Pipeline"},
+        "Warnings":{"shape":"Warnings"}
       }
     },
     "UpdatePipelineStatusRequest":{
@@ -1693,6 +1697,17 @@
         "PaddingPolicy":{"shape":"PaddingPolicy"},
         "Watermarks":{"shape":"PresetWatermarks"}
       }
+    },
+    "Warning":{
+      "type":"structure",
+      "members":{
+        "Code":{"shape":"String"},
+        "Message":{"shape":"String"}
+      }
+    },
+    "Warnings":{
+      "type":"list",
+      "member":{"shape":"Warning"}
     },
     "WatermarkKey":{
       "type":"string",

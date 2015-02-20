@@ -1,4 +1,5 @@
 {
+  "version": "2.0",
   "operations": {
     "CancelJob": "<p>The CancelJob operation cancels an unfinished job.</p> <note>You can only cancel a job that has a status of <code>Submitted</code>. To prevent a pipeline from starting to process a job while you're getting the job identifier, use <a>UpdatePipelineStatus</a> to temporarily pause the pipeline.</note>",
     "CreateJob": "<p> When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created. </p> <p>If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).</p>",
@@ -893,7 +894,9 @@
         "Pipeline$Arn": "<p>The Amazon Resource Name (ARN) for the pipeline.</p>",
         "Preset$Arn": "<p>The Amazon Resource Name (ARN) for the preset.</p>",
         "UserMetadata$key": null,
-        "UserMetadata$value": null
+        "UserMetadata$value": null,
+        "Warning$Code": "<p>The code of the cross-regional warning.</p>",
+        "Warning$Message": "<p>The message explaining what resources are in a different region from the pipeline.</p> <p><b>Note:</b> AWS KMS keys must be in the same region as the pipeline.</p>"
       }
     },
     "Success": {
@@ -1022,6 +1025,20 @@
       "refs": {
         "CreatePresetRequest$Video": "<p>A section of the request body that specifies the video parameters.</p>",
         "Preset$Video": "<p>A section of the response body that provides information about the video preset values.</p>"
+      }
+    },
+    "Warning": {
+      "base": "<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>",
+      "refs": {
+        "Warnings$member": null
+      }
+    },
+    "Warnings": {
+      "base": null,
+      "refs": {
+        "CreatePipelineResponse$Warnings": "<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>",
+        "ReadPipelineResponse$Warnings": "<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>",
+        "UpdatePipelineResponse$Warnings": "<p>Elastic Transcoder returns a warning if the resources used by your pipeline are not in the same region as the pipeline.</p> <p>Using resources in the same region, such as your Amazon S3 buckets, Amazon SNS notification topics, and AWS KMS key, reduces processing time and prevents cross-regional charges.</p>"
       }
     },
     "WatermarkKey": {
