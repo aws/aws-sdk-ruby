@@ -5,6 +5,8 @@ Unreleased Changes
 
 * Feature - Aws::ElasticTranscoder - Added support for warnings and cross region.
 
+* Feature - Aws::Route53::Domains - Added paginators.
+
 * Issue - Aws::S3 - Expanded logic for yielding data to a given block for
   more than just HTTP 200 response status codes. This is important so that
   206 responses can yield their data. This happens when using range headers.

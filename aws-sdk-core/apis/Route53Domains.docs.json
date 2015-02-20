@@ -1,4 +1,5 @@
 {
+  "version": "2.0",
   "operations": {
     "CheckDomainAvailability": "<p>This operation checks the availability of one domain name. You can access this API without authenticating. Note that if the availability status of a domain is pending, you must submit another request to determine the availability of the domain name.</p>",
     "DeleteTagsForDomain": "<p>This operation deletes the specified tags for a domain.</p> <p>All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.</p>",
