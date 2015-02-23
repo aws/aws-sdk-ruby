@@ -33,7 +33,7 @@ module Aws
       #   | `:head`       | {Client#head_object}   |
       #   | `:delete`     | {Client#delete_object} |
       #
-      # @option params [Integer] :exipres_in (900) Number of seconds before
+      # @option params [Integer] :expires_in (900) Number of seconds before
       #   the pre-signed URL expires. This may not exceed one week (604800
       #   seconds).
       #
