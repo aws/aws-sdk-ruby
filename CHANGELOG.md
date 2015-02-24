@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.28 (2015-02-24)
 ------------------
 
 * Feature - Aws::RDS - Added an initial resource interface implementation.
