@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Added an initial resource interface implementation.
+
 * Feature - Aws::DataPipeline - Added support for tagging.
 
 * Feature - Aws::Route53 - Added support for the new `ListHostedZonesByName` and
