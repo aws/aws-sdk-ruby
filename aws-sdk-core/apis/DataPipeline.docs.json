@@ -1,6 +1,8 @@
 {
+  "version": "2.0",
   "operations": {
     "ActivatePipeline": "<p> Validates a pipeline and initiates processing. If the pipeline does not pass validation, activation fails. You cannot perform this operation on FINISHED pipelines and attempting to do so will return an InvalidRequestException. </p> <p> Call this action to start processing pipeline tasks of a pipeline you've created using the <a>CreatePipeline</a> and <a>PutPipelineDefinition</a> actions. A pipeline cannot be modified after it has been successfully activated. </p>",
+    "AddTags": "<p>Add or modify tags in an existing pipeline.</p>",
     "CreatePipeline": "<p>Creates a new empty pipeline. When this action succeeds, you can then use the <a>PutPipelineDefinition</a> action to populate the pipeline.</p>",
     "DeletePipeline": "<p> Permanently deletes a pipeline, its pipeline definition and its run history. You cannot query or restore a deleted pipeline. AWS Data Pipeline will attempt to cancel instances associated with the pipeline that are currently being processed by task runners. Deleting a pipeline cannot be undone. </p> <p> To temporarily pause a pipeline instead of deleting it, call <a>SetStatus</a> with the status set to Pause on individual components. Components that are paused by <a>SetStatus</a> can be resumed. </p>",
     "DescribeObjects": "<p> Returns the object definitions for a set of objects associated with the pipeline. Object definitions are composed of a set of fields that define the properties of the object. </p>",
@@ -11,13 +13,14 @@
     "PollForTask": "<p> Task runners call this action to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the workerGroup parameter of the <a>PollForTask</a> call. The task returned by <a>PollForTask</a> may come from any of the pipelines that match the workerGroup value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner. </p> <p> If tasks are ready in the work queue, <a>PollForTask</a> returns a response immediately. If no tasks are available in the queue, <a>PollForTask</a> uses long-polling and holds on to a poll connection for up to a 90 seconds during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call <a>PollForTask</a> again on the same <code>workerGroup</code> until it receives a response, and this may take up to 90 seconds. </p>",
     "PutPipelineDefinition": "<p>Adds tasks, schedules, and preconditions that control the behavior of the pipeline. You can use PutPipelineDefinition to populate a new pipeline. </p> <p> <a>PutPipelineDefinition</a> also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline. <ol> <li>An object is missing a name or identifier field.</li> <li>A string or reference field is empty.</li> <li>The number of objects in the pipeline exceeds the maximum allowed objects.</li> <li>The pipeline is in a FINISHED state.</li> </ol> </p> <p> Pipeline object definitions are passed to the <a>PutPipelineDefinition</a> action and returned by the <a>GetPipelineDefinition</a> action. </p>",
     "QueryObjects": "<p>Queries a pipeline for the names of objects that match a specified set of conditions.</p> <p>The objects returned by <a>QueryObjects</a> are paginated and then filtered by the value you set for query. This means the action may return an empty result set with a value set for marker. If <code>HasMoreResults</code> is set to <code>True</code>, you should continue to call <a>QueryObjects</a>, passing in the returned value for marker, until <code>HasMoreResults</code> returns <code>False</code>.</p>",
+    "RemoveTags": "<p>Remove existing tags from a pipeline.</p>",
     "ReportTaskProgress": "<p> Updates the AWS Data Pipeline service on the progress of the calling task runner. When the task runner is assigned a task, it should call ReportTaskProgress to acknowledge that it has the task within 2 minutes. If the web service does not recieve this acknowledgement within the 2 minute window, it will assign the task in a subsequent <a>PollForTask</a> call. After this initial acknowledgement, the task runner only needs to report progress every 15 minutes to maintain its ownership of the task. You can change this reporting time from 15 minutes by specifying a <code>reportProgressTimeout</code> field in your pipeline. If a task runner does not report its status after 5 minutes, AWS Data Pipeline will assume that the task runner is unable to process the task and will reassign the task in a subsequent response to <a>PollForTask</a>. task runners should call <a>ReportTaskProgress</a> every 60 seconds. </p>",
     "ReportTaskRunnerHeartbeat": "<p>Task runners call <a>ReportTaskRunnerHeartbeat</a> every 15 minutes to indicate that they are operational. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service can use this call to detect when the task runner application has failed and restart a new instance.</p>",
     "SetStatus": "<p>Requests that the status of an array of physical or logical pipeline objects be updated in the pipeline. This update may not occur immediately, but is eventually consistent. The status that can be set depends on the type of object, e.g. DataNode or Activity. You cannot perform this operation on FINISHED pipelines and attempting to do so will return an InvalidRequestException.</p>",
     "SetTaskStatus": "<p> Notifies AWS Data Pipeline that a task is completed and provides information about the final status. The task runner calls this action regardless of whether the task was sucessful. The task runner does not need to call <a>SetTaskStatus</a> for tasks that are canceled by the web service during a call to <a>ReportTaskProgress</a>. </p>",
     "ValidatePipelineDefinition": "<p>Tests the pipeline definition with a set of validation checks to ensure that it is well formed and can run without error. </p>"
   },
-  "service": "<p> AWS Data Pipeline is a web service that configures and manages a data-driven workflow called a pipeline. AWS Data Pipeline handles the details of scheduling and ensuring that data dependencies are met so your application can focus on processing the data.</p> <p> The AWS Data Pipeline SDKs and CLI implements two main sets of functionality. The first set of actions configure the pipeline in the web service. You perform these actions to create a pipeline and define data sources, schedules, dependencies, and the transforms to be performed on the data. </p> <p> The second set of actions are used by a task runner application that calls the AWS Data Pipeline API to receive the next task ready for processing. The logic for performing the task, such as querying the data, running data analysis, or converting the data from one format to another, is contained within the task runner. The task runner performs the task assigned to it by the web service, reporting progress to the web service as it does so. When the task is done, the task runner reports the final success or failure of the task to the web service. </p> <p> AWS Data Pipeline provides a JAR implementation of a task runner called AWS Data Pipeline Task Runner. AWS Data Pipeline Task Runner provides logic for common data management scenarios, such as performing database queries and running data analysis using Amazon Elastic MapReduce (Amazon EMR). You can use AWS Data Pipeline Task Runner as your task runner, or you can write your own task runner to provide custom data management. </p>",
+  "service": "<p> AWS Data Pipeline is a web service that configures and manages a data-driven workflow called a pipeline. AWS Data Pipeline handles the details of scheduling and ensuring that data dependencies are met so your application can focus on processing the data.</p> <p> The AWS Data Pipeline SDKs and CLI implements two main sets of functionality. The first set of actions configure the pipeline in the web service. You perform these actions to create a pipeline and define data sources, schedules, dependencies, and the transforms to be performed on the data. </p> <p> The second set of actions are used by a task runner application that calls the AWS Data Pipeline service to receive the next task ready for processing. The logic for performing the task, such as querying the data, running data analysis, or converting the data from one format to another, is contained within the task runner. The task runner performs the task assigned to it by the web service, reporting progress to the web service as it does so. When the task is done, the task runner reports the final success or failure of the task to the web service. </p> <p> AWS Data Pipeline provides a JAR implementation of a task runner called AWS Data Pipeline Task Runner. AWS Data Pipeline Task Runner provides logic for common data management scenarios, such as performing database queries and running data analysis using Amazon Elastic MapReduce (Amazon EMR). You can use AWS Data Pipeline Task Runner as your task runner, or you can write your own task runner to provide custom data management. </p>",
   "shapes": {
     "ActivatePipelineInput": {
       "base": "<p>The input of the ActivatePipeline action.</p>",
@@ -26,6 +29,16 @@
     },
     "ActivatePipelineOutput": {
       "base": "<p>Contains the output from the <a>ActivatePipeline</a> action.</p>",
+      "refs": {
+      }
+    },
+    "AddTagsInput": {
+      "base": "<p>The input to the AddTags action.</p>",
+      "refs": {
+      }
+    },
+    "AddTagsOutput": {
+      "base": "<p>The response from the AddTags action.</p>",
       "refs": {
       }
     },
@@ -255,6 +268,16 @@
       "refs": {
       }
     },
+    "RemoveTagsInput": {
+      "base": "<p>The input to the RemoveTags action.</p>",
+      "refs": {
+      }
+    },
+    "RemoveTagsOutput": {
+      "base": "<p>The result of the RemoveTags action.</p>",
+      "refs": {
+      }
+    },
     "ReportTaskProgressInput": {
       "base": "<p>The input for the ReportTaskProgress action.</p>",
       "refs": {
@@ -300,6 +323,12 @@
     "SetTaskStatusOutput": {
       "base": "<p>The output from the <a>SetTaskStatus</a> action.</p>",
       "refs": {
+      }
+    },
+    "Tag": {
+      "base": "<p>Tags are key/value pairs defined by a user and associated with a pipeline to control access. AWS Data Pipeline allows you to associate ten tags per pipeline. For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html\">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.</p>",
+      "refs": {
+        "tagList$member": null
       }
     },
     "TaskNotFoundException": {
@@ -419,6 +448,7 @@
       "base": null,
       "refs": {
         "ActivatePipelineInput$pipelineId": "<p>The identifier of the pipeline to activate. </p>",
+        "AddTagsInput$pipelineId": "<p>The identifier of the pipeline to which you want to add the tags.</p>",
         "CreatePipelineInput$name": "<p> The name of the new pipeline. You can use the same name for multiple pipelines associated with your AWS account, because AWS Data Pipeline assigns each new pipeline a unique pipeline identifier. </p>",
         "CreatePipelineInput$uniqueId": "<p> A unique identifier that you specify. This identifier is not the same as the pipeline identifier assigned by AWS Data Pipeline. You are responsible for defining the format and ensuring the uniqueness of this identifier. You use this parameter to ensure idempotency during repeated calls to <a>CreatePipeline</a>. For example, if the first call to <a>CreatePipeline</a> does not return a clear success, you can pass in the same unique identifier and pipeline name combination on a subsequent call to <a>CreatePipeline</a>. <a>CreatePipeline</a> ensures that if a pipeline already exists with the same name and unique identifier, a new pipeline will not be created. Instead, you'll receive the pipeline identifier from the previous attempt. The uniqueness of the name and unique identifier combination is scoped to the AWS account or IAM user credentials. </p>",
         "CreatePipelineOutput$pipelineId": "<p>The ID that AWS Data Pipeline assigns the newly created pipeline. The ID is a string of the form: df-06372391ZG65EXAMPLE.</p>",
@@ -437,6 +467,7 @@
         "PollForTaskInput$hostname": "<p>The public DNS name of the calling task runner.</p>",
         "PutPipelineDefinitionInput$pipelineId": "<p>The identifier of the pipeline to be configured.</p>",
         "QueryObjectsInput$pipelineId": "<p>Identifier of the pipeline to be queried for object names.</p>",
+        "RemoveTagsInput$pipelineId": "<p>The pipeline from which you want to remove tags.</p>",
         "ReportTaskRunnerHeartbeatInput$taskrunnerId": "<p>The identifier of the task runner. This value should be unique across your AWS account. In the case of AWS Data Pipeline Task Runner launched on a resource managed by AWS Data Pipeline, the web service provides a unique identifier when it launches the application. If you have written a custom task runner, you should assign a unique identifier for the task runner.</p>",
         "ReportTaskRunnerHeartbeatInput$hostname": "<p>The public DNS name of the calling task runner.</p>",
         "SetStatusInput$pipelineId": "<p>Identifies the pipeline that contains the objects.</p>",
@@ -494,7 +525,7 @@
         "QueryObjectsOutput$marker": "<p> The starting point for the results to be returned. As long as the action returns <code>HasMoreResults</code> as <code>True</code>, you can call <a>QueryObjects</a> again and pass the marker value from the response to retrieve the next set of results. </p>",
         "ReportTaskRunnerHeartbeatInput$workerGroup": "<p>Indicates the type of task the task runner is configured to accept and process. The worker group is set as a field on objects in the pipeline when they are created. You can only specify a single value for <code>workerGroup</code> in the call to <a>ReportTaskRunnerHeartbeat</a>. There are no wildcard values permitted in <code>workerGroup</code>, the string must be an exact, case-sensitive, match.</p>",
         "Selector$fieldName": "<p>The name of the field that the operator will be applied to. The field name is the \"key\" portion of the field definition in the pipeline definition syntax that is used by the AWS Data Pipeline API. If the field is not set on the object, the condition fails.</p>",
-        "SetStatusInput$status": "<p>Specifies the status to be set on all the objects in <code>objectIds</code>. For components, this can be either <code>PAUSE</code> or <code>RESUME</code>. For instances, this can be either <code>CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.</p>",
+        "SetStatusInput$status": "<p>Specifies the status to be set on all the objects in <code>objectIds</code>. For components, this can be either <code>PAUSE</code> or <code>RESUME</code>. For instances, this can be either <code>TRY_CANCEL</code>, <code>RERUN</code>, or <code>MARK_FINISHED</code>.</p>",
         "SetTaskStatusInput$errorId": "<p>If an error occurred during the task, this value specifies an id value that represents the error. This value is set on the physical attempt object. It is used to display error information to the user. It should not start with string \"Service_\" which is reserved by the system.</p>",
         "SetTaskStatusInput$errorStackTrace": "<p>If an error occurred during the task, this value specifies the stack trace associated with the error. This value is set on the physical attempt object. It is used to display error information to the user. The web service does not parse this value.</p>",
         "stringList$member": null
@@ -503,7 +534,28 @@
     "stringList": {
       "base": null,
       "refs": {
-        "Operator$values": "<p>The value that the actual field value will be compared with.</p>"
+        "Operator$values": "<p>The value that the actual field value will be compared with.</p>",
+        "RemoveTagsInput$tagKeys": "<p>The keys of the tags you wish to remove.</p>"
+      }
+    },
+    "tagKey": {
+      "base": null,
+      "refs": {
+        "Tag$key": "<p>The key name of a tag defined by a user. For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html\">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.</p>"
+      }
+    },
+    "tagList": {
+      "base": null,
+      "refs": {
+        "AddTagsInput$tags": "<p>The tags as key/value pairs to add to the pipeline.</p>",
+        "CreatePipelineInput$tags": "<p>A list of tags to associate with a pipeline at creation time. Tags let you control access to pipelines. For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html\">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.</p>",
+        "PipelineDescription$tags": "<p>A list of tags to associated with a pipeline. Tags let you control access to pipelines. For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html\">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.</p>"
+      }
+    },
+    "tagValue": {
+      "base": null,
+      "refs": {
+        "Tag$value": "<p>The optional value portion of a tag defined by a user. For more information, see <a href=\"http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html\">Controlling User Access to Pipelines</a> in the <i>AWS Data Pipeline Developer Guide</i>.</p>"
       }
     },
     "taskId": {

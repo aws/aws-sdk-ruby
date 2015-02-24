@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2012-10-29",
     "endpointPrefix":"datapipeline",
@@ -33,6 +34,34 @@
         },
         {
           "shape":"InvalidRequestException",
+          "exception":true
+        }
+      ]
+    },
+    "AddTags":{
+      "name":"AddTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AddTagsInput"},
+      "output":{"shape":"AddTagsOutput"},
+      "errors":[
+        {
+          "shape":"InternalServiceError",
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true
+        },
+        {
+          "shape":"PipelineNotFoundException",
+          "exception":true
+        },
+        {
+          "shape":"PipelineDeletedException",
           "exception":true
         }
       ]
@@ -296,6 +325,34 @@
         }
       ]
     },
+    "RemoveTags":{
+      "name":"RemoveTags",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RemoveTagsInput"},
+      "output":{"shape":"RemoveTagsOutput"},
+      "errors":[
+        {
+          "shape":"InternalServiceError",
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true
+        },
+        {
+          "shape":"PipelineNotFoundException",
+          "exception":true
+        },
+        {
+          "shape":"PipelineDeletedException",
+          "exception":true
+        }
+      ]
+    },
     "ReportTaskProgress":{
       "name":"ReportTaskProgress",
       "http":{
@@ -450,6 +507,22 @@
       "members":{
       }
     },
+    "AddTagsInput":{
+      "type":"structure",
+      "required":[
+        "pipelineId",
+        "tags"
+      ],
+      "members":{
+        "pipelineId":{"shape":"id"},
+        "tags":{"shape":"tagList"}
+      }
+    },
+    "AddTagsOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "CreatePipelineInput":{
       "type":"structure",
       "required":[
@@ -459,7 +532,8 @@
       "members":{
         "name":{"shape":"id"},
         "uniqueId":{"shape":"id"},
-        "description":{"shape":"string"}
+        "description":{"shape":"string"},
+        "tags":{"shape":"tagList"}
       }
     },
     "CreatePipelineOutput":{
@@ -674,7 +748,8 @@
         "pipelineId":{"shape":"id"},
         "name":{"shape":"id"},
         "fields":{"shape":"fieldList"},
-        "description":{"shape":"string"}
+        "description":{"shape":"string"},
+        "tags":{"shape":"tagList"}
       }
     },
     "PipelineDescriptionList":{
@@ -782,6 +857,22 @@
         "hasMoreResults":{"shape":"boolean"}
       }
     },
+    "RemoveTagsInput":{
+      "type":"structure",
+      "required":[
+        "pipelineId",
+        "tagKeys"
+      ],
+      "members":{
+        "pipelineId":{"shape":"id"},
+        "tagKeys":{"shape":"stringList"}
+      }
+    },
+    "RemoveTagsOutput":{
+      "type":"structure",
+      "members":{
+      }
+    },
     "ReportTaskProgressInput":{
       "type":"structure",
       "required":["taskId"],
@@ -854,6 +945,17 @@
     "SetTaskStatusOutput":{
       "type":"structure",
       "members":{
+      }
+    },
+    "Tag":{
+      "type":"structure",
+      "required":[
+        "key",
+        "value"
+      ],
+      "members":{
+        "key":{"shape":"tagKey"},
+        "value":{"shape":"tagValue"}
       }
     },
     "TaskNotFoundException":{
@@ -984,6 +1086,22 @@
     "stringList":{
       "type":"list",
       "member":{"shape":"string"}
+    },
+    "tagKey":{
+      "type":"string",
+      "min":1,
+      "max":128
+    },
+    "tagList":{
+      "type":"list",
+      "member":{"shape":"Tag"},
+      "min":0,
+      "max":10
+    },
+    "tagValue":{
+      "type":"string",
+      "min":0,
+      "max":256
     },
     "taskId":{
       "type":"string",
