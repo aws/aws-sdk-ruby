@@ -18,6 +18,9 @@ module Aws
         docs['shapes'].each do |shape_name, shape|
           api['shapes'][shape_name]['documentation'] = shape['base']
           shape['refs'].each do |ref,doc|
+            if doc.nil?
+              doc = shape['base']
+            end
             target_shape_name, member = ref.split('$')
             target_shape = api['shapes'][target_shape_name]
             case target_shape['type']
