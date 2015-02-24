@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-04-01",
     "endpointPrefix":"route53",
@@ -523,6 +524,22 @@
         }
       ]
     },
+    "GetHostedZoneCount":{
+      "name":"GetHostedZoneCount",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/hostedzonecount"
+      },
+      "input":{"shape":"GetHostedZoneCountRequest"},
+      "output":{"shape":"GetHostedZoneCountResponse"},
+      "errors":[
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        }
+      ]
+    },
     "GetReusableDelegationSet":{
       "name":"GetReusableDelegationSet",
       "http":{
@@ -604,6 +621,27 @@
         },
         {
           "shape":"DelegationSetNotReusable",
+          "exception":true
+        }
+      ]
+    },
+    "ListHostedZonesByName":{
+      "name":"ListHostedZonesByName",
+      "http":{
+        "method":"GET",
+        "requestUri":"/2013-04-01/hostedzonesbyname"
+      },
+      "input":{"shape":"ListHostedZonesByNameRequest"},
+      "output":{"shape":"ListHostedZonesByNameResponse"},
+      "errors":[
+        {
+          "shape":"InvalidInput",
+          "error":{"httpStatusCode":400},
+          "exception":true
+        },
+        {
+          "shape":"InvalidDomainName",
+          "error":{"httpStatusCode":400},
           "exception":true
         }
       ]
@@ -1347,6 +1385,18 @@
         "HealthCheckObservations":{"shape":"HealthCheckObservations"}
       }
     },
+    "GetHostedZoneCountRequest":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "GetHostedZoneCountResponse":{
+      "type":"structure",
+      "required":["HostedZoneCount"],
+      "members":{
+        "HostedZoneCount":{"shape":"HostedZoneCount"}
+      }
+    },
     "GetHostedZoneRequest":{
       "type":"structure",
       "required":["Id"],
@@ -1513,6 +1563,7 @@
         "PrivateZone":{"shape":"IsPrivateZone"}
       }
     },
+    "HostedZoneCount":{"type":"long"},
     "HostedZoneNotEmpty":{
       "type":"structure",
       "members":{
@@ -1673,6 +1724,43 @@
         "Marker":{"shape":"PageMarker"},
         "IsTruncated":{"shape":"PageTruncated"},
         "NextMarker":{"shape":"PageMarker"},
+        "MaxItems":{"shape":"PageMaxItems"}
+      }
+    },
+    "ListHostedZonesByNameRequest":{
+      "type":"structure",
+      "members":{
+        "DNSName":{
+          "shape":"DNSName",
+          "location":"querystring",
+          "locationName":"dnsname"
+        },
+        "HostedZoneId":{
+          "shape":"ResourceId",
+          "location":"querystring",
+          "locationName":"hostedzoneid"
+        },
+        "MaxItems":{
+          "shape":"PageMaxItems",
+          "location":"querystring",
+          "locationName":"maxitems"
+        }
+      }
+    },
+    "ListHostedZonesByNameResponse":{
+      "type":"structure",
+      "required":[
+        "HostedZones",
+        "IsTruncated",
+        "MaxItems"
+      ],
+      "members":{
+        "HostedZones":{"shape":"HostedZones"},
+        "DNSName":{"shape":"DNSName"},
+        "HostedZoneId":{"shape":"ResourceId"},
+        "IsTruncated":{"shape":"PageTruncated"},
+        "NextDNSName":{"shape":"DNSName"},
+        "NextHostedZoneId":{"shape":"ResourceId"},
         "MaxItems":{"shape":"PageMaxItems"}
       }
     },
