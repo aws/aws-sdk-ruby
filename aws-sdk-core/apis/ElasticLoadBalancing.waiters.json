@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "waiters": {
+    "InstanceHealthy": {
+      "delay": 15,
+      "operation": "DescribeInstanceHealth",
+      "maxAttempts": 40,
+      "acceptors": [
+        {
+          "expected": "InService",
+          "matcher": "pathAny",
+          "state": "success",
+          "argument": "InstanceStates[].State"
+        }
+      ]
+    } 
+  }
+}
