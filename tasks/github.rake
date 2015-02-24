@@ -1,6 +1,6 @@
 task 'github:require-access-token' do
   unless ENV['AWS_SDK_FOR_RUBY_GH_TOKEN']
-    warn('missing github access token')
+    warn("export ENV['AWS_SDK_FOR_RUBY_GH_TOKEN']")
     exit
   end
 end
