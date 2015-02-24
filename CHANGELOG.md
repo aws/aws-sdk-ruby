@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Route53 - Added support for the new `ListHostedZonesByName` and
+  `GetHostedZoneCount` operations.
+
 2.0.27 (2015-02-20)
 ------------------
 
