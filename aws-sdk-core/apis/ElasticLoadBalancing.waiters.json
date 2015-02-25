@@ -8,11 +8,24 @@
       "acceptors": [
         {
           "expected": "InService",
+          "matcher": "pathAll",
+          "state": "success",
+          "argument": "InstanceStates[].State"
+        }
+      ]
+    },
+    "AnyInstanceHealthy": {
+      "delay": 15,
+      "operation": "DescribeInstanceHealth",
+      "maxAttempts": 40,
+      "acceptors": [
+        {
+          "expected": "InService",
           "matcher": "pathAny",
           "state": "success",
           "argument": "InstanceStates[].State"
         }
       ]
-    } 
+    }
   }
 }
