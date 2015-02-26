@@ -1,7 +1,7 @@
 {
   "version": 2,
   "waiters": {
-    "InstanceHealthy": {
+    "InstanceInService": {
       "delay": 15,
       "operation": "DescribeInstanceHealth",
       "maxAttempts": 40,
@@ -14,7 +14,7 @@
         }
       ]
     },
-    "AnyInstanceHealthy": {
+    "AnyInstanceInService": {
       "delay": 15,
       "operation": "DescribeInstanceHealth",
       "maxAttempts": 40,
