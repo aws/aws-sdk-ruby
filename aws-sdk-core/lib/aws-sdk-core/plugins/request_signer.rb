@@ -68,14 +68,20 @@ module Aws
           's3'      => Signers::S3,
         }
 
+        STS_UNAUTHED_OPERATIONS = Set.new(%w(
+          AssumeRoleWithSaml
+          AssumeRoleWithWebIdentity
+        ))
+
         def call(context)
-          sign_authenticated_requests(context)
+          sign_authenticated_requests(context) if requires_credentials?(context)
           @handler.call(context)
         end
 
         private
 
         def sign_authenticated_requests(context)
+          require_credentials(context)
           if signer = SIGNERS[context.config.signature_version]
             require_credentials(context)
             signer.sign(context)
@@ -83,12 +89,22 @@ module Aws
         end
 
         def require_credentials(context)
-          if
-            context.config.credentials.nil? or
-            !context.config.credentials.set?
-          then
+          if missing_credentials?(context)
             msg = 'unable to sign request without credentials set'
             raise Errors::MissingCredentialsError, msg
+          end
+        end
+
+        def missing_credentials?(context)
+          context.config.credentials.nil? or
+          !context.config.credentials.set?
+        end
+
+        def requires_credentials?(context)
+          if context.config.api.metdata('endointPrefix') == 'sts'
+            !STS_UNAUTHED_OPERATIONS.include?(context.operation.name)
+          else
+            true
           end
         end
 

@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::STS - Resolved an issue that prevented `Aws::STS::Client` from making
+  unatuthenticated requests to AssumeRoleWithSAML, and AssumeRoleWithWebIdentity.
+  Resolves [GitHub issue #725](https://github.com/aws/aws-sdk-ruby/issues/725).
+
 2.0.28 (2015-02-24)
 ------------------
 
