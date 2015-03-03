@@ -58,7 +58,7 @@ module Aws
           if header_name.match(/^x-amz/)
             params.set(header_name, header_value)
           end
-          unless %w(host content-md5).include?(header_name)
+          unless %w(host content-type content-md5).include?(header_name)
             request.headers.delete(header_name)
           end
         end

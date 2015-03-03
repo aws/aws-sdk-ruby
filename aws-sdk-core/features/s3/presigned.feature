@@ -17,5 +17,21 @@ Feature: S3 Presigned Operations
     | key | test        |
     | acl | public-read |
     And I send an HTTP put request for the presigned url with body "hello"
-    Then I make an unauthenticated HTTP request for key "test"
+    Then I make an unauthenticated GET request for key "test"
     And the response should be "hello"
+
+  Scenario: Presigned PUT with content-type
+    When I create a presigned url for "put_object" with:
+    | key          | test        |
+    | acl          | public-read |
+    | content_type | text/plain  |
+    When I send an HTTP put request with the content type as "text/plain"
+    Then the response should have a 200 status code
+
+  Scenario: Presigned PUT with wrong content-type
+    Given I create a presigned url for "put_object" with:
+    | key          | test        |
+    | acl          | public-read |
+    | content_type | text/plain  |
+    When I send an HTTP put request with the content type as "image/jpg"
+    And the response should have a 403 status code

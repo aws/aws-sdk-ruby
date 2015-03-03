@@ -196,11 +196,11 @@ When(/^I create a presigned url for "(.*?)" with:$/) do |method, params|
 end
 
 When(/^I send an HTTP get request for the presigned url$/) do
-  @resp = Net::HTTP.get(URI(@url))
+  @resp = Net::HTTP.get_response(URI(@url))
 end
 
 Then(/^the response should be "(.*?)"$/) do |expected|
-  expect(@resp).to eq(expected)
+  expect(@resp.body).to eq(expected)
 end
 
 When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
@@ -209,11 +209,12 @@ When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do 
   req = Net::HTTP::Put.new(uri)
   req.body = body
   @resp = http.request(req)
+  expect(@resp.code).to eq('200')
 end
 
-Then(/^I make an unauthenticated HTTP request for key "(.*?)"$/) do |key|
-  url = "https://#{@bucket_name}.s3.amazonaws.com/#{key}"
-  @resp = Net::HTTP.get(URI(url))
+Then(/^I make an unauthenticated GET request for key "(.*?)"$/) do |key|
+  uri = URI.parse("https://#{@bucket_name}.s3.amazonaws.com/#{key}")
+  @resp = Net::HTTP.get_response(uri)
 end
 
 When(/^I get an object that doesn't exist with a read block$/) do
@@ -230,4 +231,20 @@ end
 Then(/^an error should be raise and the block should not yield$/) do
   expect(@error).to be_kind_of(Aws::S3::Errors::NoSuchKey)
   expect(@yielded).to eq([])
+end
+
+Then(/^the response content\-type should be "(.*?)"$/) do |arg1|
+  expect(@resp.to_hash['content-type']).to eq(['text/plain'])
+end
+
+When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
+  uri = URI(@url)
+  http = Net::HTTP.new(uri.host)
+  req = Net::HTTP::Put.new(uri, 'content-type' => content_type)
+  req.body = 'data'
+  @resp = http.request(req)
+end
+
+When(/^the response should have a (\d+) status code$/) do |code|
+  expect(@resp.code).to eq(code)
 end

@@ -5,6 +5,9 @@ Unreleased Changes
   unatuthenticated requests to AssumeRoleWithSAML, and AssumeRoleWithWebIdentity.
   Resolves [GitHub issue #725](https://github.com/aws/aws-sdk-ruby/issues/725).
 
+* Issue - Aws::S3 - Added support for pre-signed PUT object URLs with a content-type.
+  Resolves [GitHub issue #721](https://github.com/aws/aws-sdk-ruby/issues/721).
+
 2.0.28 (2015-02-24)
 ------------------
 
