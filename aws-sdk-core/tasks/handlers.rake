@@ -69,7 +69,7 @@ Valid service names include:
 INSTRUCTIONS
 end
 
-desc "List availalbe operation names for a service"
+desc "List available operation names for a service"
 task "operations:svc" => "operations"
 
 Aws::SERVICE_MODULE_NAMES.each do |svc_name|
