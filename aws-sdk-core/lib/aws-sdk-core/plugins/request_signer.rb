@@ -68,13 +68,13 @@ module Aws
           's3'      => Signers::S3,
         }
 
-        STS_UNAUTHED_OPERATIONS = Set.new(%w(
-          AssumeRoleWithSaml
+        STS_UNSIGNED_REQUESTS = Set.new(%w(
+          AssumeRoleWithSAML
           AssumeRoleWithWebIdentity
         ))
 
         def call(context)
-          sign_authenticated_requests(context) if requires_credentials?(context)
+          sign_authenticated_requests(context) unless unsigned_request?(context)
           @handler.call(context)
         end
 
@@ -100,11 +100,13 @@ module Aws
           !context.config.credentials.set?
         end
 
-        def requires_credentials?(context)
-          if context.config.api.metdata('endointPrefix') == 'sts'
-            !STS_UNAUTHED_OPERATIONS.include?(context.operation.name)
+        def unsigned_request?(context)
+          if context.config.api.metadata('endpointPrefix') == 'sts'
+            STS_UNSIGNED_REQUESTS.include?(context.operation.name)
+          elsif context.config.api.metadata('endpointPrefix') == 'cloudsearchdomain'
+            context.config.credentials.nil? || !context.config.credentials.set?
           else
-            true
+            false
           end
         end
 

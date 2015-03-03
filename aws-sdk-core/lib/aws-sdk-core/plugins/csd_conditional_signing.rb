@@ -25,13 +25,6 @@ module Aws
         end
       end
 
-      def after_initialize(client)
-        # disable request singing when credentials are not set
-        if client.config.credentials.nil? or !client.config.credentials.set?
-          client.config.signature_version = nil
-        end
-      end
-
     end
   end
 end
