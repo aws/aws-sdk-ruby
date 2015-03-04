@@ -11,6 +11,7 @@ This is version 2 of the `aws-sdk` gem.  **Version 1 can be found in the
 * [Change Log](https://github.com/aws/aws-sdk-core-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-core-ruby/blob/master/UPGRADING.md)
 * [Issues](http://github.com/aws/aws-sdk-core-ruby/issues)
+* [Feature Requests](https://github.com/aws/aws-sdk-core-ruby/blob/master/FEATURE_REQUESTS.md)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-core-ruby)
 * [License](http://aws.amazon.com/apache2.0/)
 

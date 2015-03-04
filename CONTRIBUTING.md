@@ -10,7 +10,7 @@ Please submit any [issues][] or [pull requests][pull-requests] through GitHub.
    substantial contributions, we may ask you to sign a [Contributor License Agreement (CLA)][cla].
 2. We maintain a high percentage of code coverage in our unit tests. If you make changes to the code, please add,
    update, and/or remove unit (and integration) tests as appropriate.
-3. We may choose not to accept pull requests that change service descriptions, such as `apis/S3.api.json`.
+3. We may choose not to accept pull requests that change service descriptions, such as `aws-sdk-core/apis/S3.api.json`.
    We generate these files based on our internal knowledge of the AWS services. If there is something incorrect
    with or missing from a service description, it may be more appropriate to [submit an issue][issues].
    We *will*, however, consider pull requests affecting service descriptions, if the changes are related to
@@ -23,16 +23,17 @@ Please submit any [issues][] or [pull requests][pull-requests] through GitHub.
 ## What we are looking for
 
 We are open to anything that improves the SDK and doesn't unnecessarily cause backwards-incompatible changes. If you are
-unsure if your idea is something we would be open to, please ask us; Open a ticket, send us an email, or post on the
-[forums](https://forums.aws.amazon.com/forum.jspa?forumID=125). Specifically, here are a few things that we would
+unsure if your idea is something we would be open to, please ask us; Open an issue, send us an email, or ask in the
+[Gitter channel](https://gitter.im/aws/aws-sdk-ruby). Specifically, here are a few things that we would
 appreciate help on:
 
 1. **Waiters** – Waiter configurations are located in the apis directory.
 2. **Docs** – We  greatly appreciate contributions to our documentation. The docs are written as code comments
    and via a pair of (YARD)[https://github.com/lsegal/yard] plugins.
 3. **Tests** – We maintain high code coverage, but if there are any tests you feel are missing, please add them.
-4. **Convenience features** – Are there any features you feel would add value to the SDK? Contributions in this 
-   area would be greatly appreciated.
+4. **Convenience features** – Are there any features you feel would add value to the SDK? Contributions in this
+   area would be greatly appreciated. See the [feature requests document](https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE_REQUESTS.md)
+   for a list of ideas.
 5. If you have some other ideas, please let us know!
 
 ## Running the unit tests
