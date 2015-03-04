@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoSync - Added for for streams. Amazon Cognito streams allows
+  customers to receive near-realtime updates as their data changes as well as
+  exporting historical data. Customers configure an Amazon Kinesis stream to receive
+  the data which can then be processed and exported to other data stores such as
+  Amazon Redshift.
+
 * Feature - Aws::CloudSearch - Added support for manual scaling mode and m3
   instance types.
 

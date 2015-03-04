@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-06-30",
     "endpointPrefix":"cognito-sync",
@@ -8,6 +9,72 @@
     "protocol":"rest-json"
   },
   "operations":{
+    "BulkPublish":{
+      "name":"BulkPublish",
+      "http":{
+        "method":"POST",
+        "requestUri":"/identitypools/{IdentityPoolId}/bulkpublish",
+        "responseCode":200
+      },
+      "input":{"shape":"BulkPublishRequest"},
+      "output":{"shape":"BulkPublishResponse"},
+      "errors":[
+        {
+          "shape":"NotAuthorizedException",
+          "error":{
+            "code":"NotAuthorizedError",
+            "httpStatusCode":403,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidParameterException",
+          "error":{
+            "code":"InvalidParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InternalErrorException",
+          "error":{
+            "code":"InternalError",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"DuplicateRequestException",
+          "error":{
+            "code":"DuplicateRequest",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"AlreadyStreamedException",
+          "error":{
+            "code":"AlreadyStreamed",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
     "DeleteDataset":{
       "name":"DeleteDataset",
       "http":{
@@ -53,6 +120,15 @@
           },
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -101,6 +177,15 @@
           },
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -149,6 +234,15 @@
           },
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -161,6 +255,63 @@
       },
       "input":{"shape":"DescribeIdentityUsageRequest"},
       "output":{"shape":"DescribeIdentityUsageResponse"},
+      "errors":[
+        {
+          "shape":"NotAuthorizedException",
+          "error":{
+            "code":"NotAuthorizedError",
+            "httpStatusCode":403,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidParameterException",
+          "error":{
+            "code":"InvalidParameter",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"ResourceNotFoundException",
+          "error":{
+            "code":"ResourceNotFound",
+            "httpStatusCode":404,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InternalErrorException",
+          "error":{
+            "code":"InternalError",
+            "httpStatusCode":500
+          },
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
+    "GetBulkPublishDetails":{
+      "name":"GetBulkPublishDetails",
+      "http":{
+        "method":"POST",
+        "requestUri":"/identitypools/{IdentityPoolId}/getBulkPublishDetails",
+        "responseCode":200
+      },
+      "input":{"shape":"GetBulkPublishDetailsRequest"},
+      "output":{"shape":"GetBulkPublishDetailsResponse"},
       "errors":[
         {
           "shape":"NotAuthorizedException",
@@ -245,6 +396,15 @@
           },
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -284,6 +444,15 @@
           },
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -323,6 +492,15 @@
           },
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -428,6 +606,15 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -476,6 +663,15 @@
           },
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -533,6 +729,15 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -587,6 +792,15 @@
           "error":{
             "code":"InvalidConfiguration",
             "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"TooManyRequestsException",
+          "error":{
+            "code":"TooManyRequests",
+            "httpStatusCode":429,
             "senderFault":true
           },
           "exception":true
@@ -670,6 +884,19 @@
     }
   },
   "shapes":{
+    "AlreadyStreamedException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "error":{
+        "code":"AlreadyStreamed",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "ApplicationArn":{
       "type":"string",
       "pattern":"arn:aws:sns:[-0-9a-z]+:\\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+"
@@ -685,7 +912,41 @@
       "pattern":"arn:aws:iam::\\d+:role/.*"
     },
     "Boolean":{"type":"boolean"},
+    "BulkPublishRequest":{
+      "type":"structure",
+      "required":["IdentityPoolId"],
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "location":"uri",
+          "locationName":"IdentityPoolId"
+        }
+      }
+    },
+    "BulkPublishResponse":{
+      "type":"structure",
+      "members":{
+        "IdentityPoolId":{"shape":"IdentityPoolId"}
+      }
+    },
+    "BulkPublishStatus":{
+      "type":"string",
+      "enum":[
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "FAILED",
+        "SUCCEEDED"
+      ]
+    },
     "ClientContext":{"type":"string"},
+    "CognitoStreams":{
+      "type":"structure",
+      "members":{
+        "StreamName":{"shape":"StreamName"},
+        "RoleArn":{"shape":"AssumeRoleArn"},
+        "StreamingStatus":{"shape":"StreamingStatus"}
+      }
+    },
     "Dataset":{
       "type":"structure",
       "members":{
@@ -818,7 +1079,41 @@
       "min":1,
       "max":256
     },
+    "DuplicateRequestException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"ExceptionMessage"}
+      },
+      "error":{
+        "code":"DuplicateRequest",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "ExceptionMessage":{"type":"string"},
+    "GetBulkPublishDetailsRequest":{
+      "type":"structure",
+      "required":["IdentityPoolId"],
+      "members":{
+        "IdentityPoolId":{
+          "shape":"IdentityPoolId",
+          "location":"uri",
+          "locationName":"IdentityPoolId"
+        }
+      }
+    },
+    "GetBulkPublishDetailsResponse":{
+      "type":"structure",
+      "members":{
+        "IdentityPoolId":{"shape":"IdentityPoolId"},
+        "BulkPublishStartTime":{"shape":"Date"},
+        "BulkPublishCompleteTime":{"shape":"Date"},
+        "BulkPublishStatus":{"shape":"BulkPublishStatus"},
+        "FailureMessage":{"shape":"String"}
+      }
+    },
     "GetIdentityPoolConfigurationRequest":{
       "type":"structure",
       "required":["IdentityPoolId"],
@@ -834,7 +1129,8 @@
       "type":"structure",
       "members":{
         "IdentityPoolId":{"shape":"IdentityPoolId"},
-        "PushSync":{"shape":"PushSync"}
+        "PushSync":{"shape":"PushSync"},
+        "CognitoStreams":{"shape":"CognitoStreams"}
       }
     },
     "IdentityId":{
@@ -1195,15 +1491,29 @@
           "location":"uri",
           "locationName":"IdentityPoolId"
         },
-        "PushSync":{"shape":"PushSync"}
+        "PushSync":{"shape":"PushSync"},
+        "CognitoStreams":{"shape":"CognitoStreams"}
       }
     },
     "SetIdentityPoolConfigurationResponse":{
       "type":"structure",
       "members":{
         "IdentityPoolId":{"shape":"IdentityPoolId"},
-        "PushSync":{"shape":"PushSync"}
+        "PushSync":{"shape":"PushSync"},
+        "CognitoStreams":{"shape":"CognitoStreams"}
       }
+    },
+    "StreamName":{
+      "type":"string",
+      "min":1,
+      "max":128
+    },
+    "StreamingStatus":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "String":{"type":"string"},
     "SubscribeToDatasetRequest":{
