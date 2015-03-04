@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.29 (2015-03-04)
 ------------------
 
 * Feature - Aws::CognitoSync - Added for for streams. Amazon Cognito streams allows
