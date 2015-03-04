@@ -86,6 +86,8 @@ module AWS
     # @attr_reader [Array<String>] product_codes Returns an array of
     #   product codes attached to this instance.
     #
+    # @attr_reader [String] creation_date The date and time the image was created in ISO-8601 format
+    #
     class Image < Resource
 
       include TaggedItem
@@ -143,6 +145,8 @@ module AWS
           (list || []).collect{|item| item.product_code }
         end
       end
+      
+      attribute :creation_date, :static => true
 
       populates_from(:describe_images) do |resp|
         resp.image_index[id]
