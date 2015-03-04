@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-01-01",
     "endpointPrefix":"cloudsearch",
@@ -1822,7 +1823,11 @@
         "search.m1.small",
         "search.m1.large",
         "search.m2.xlarge",
-        "search.m2.2xlarge"
+        "search.m2.2xlarge",
+        "search.m3.medium",
+        "search.m3.large",
+        "search.m3.xlarge",
+        "search.m3.2xlarge"
       ]
     },
     "PolicyDocument":{"type":"string"},

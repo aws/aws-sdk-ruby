@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudSearch - Added support for manual scaling mode and m3
+  instance types.
+
 * Issue - Aws::STS - Resolved an issue that prevented `Aws::STS::Client` from making
   unatuthenticated requests to AssumeRoleWithSAML, and AssumeRoleWithWebIdentity.
   Resolves [GitHub issue #725](https://github.com/aws/aws-sdk-ruby/issues/725).
