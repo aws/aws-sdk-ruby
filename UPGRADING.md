@@ -1,6 +1,6 @@
 # Upgrade Notes
 
-** `aws-sdk-core` - v2.0.25
+## `aws-sdk-core` - v2.0.25
 
 * Increased the default number of attempts to make when loading credentials from the
   Amazon EC2 instance metadata service before failing from 0 to 5. Also increased
