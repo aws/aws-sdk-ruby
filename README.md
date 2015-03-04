@@ -8,11 +8,11 @@ This is version 2 of the `aws-sdk` gem.  **Version 1 can be found in the
 ## Links of Interest
 
 * [Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
-* [Change Log](https://github.com/aws/aws-sdk-core-ruby/blob/master/CHANGELOG.md)
-* [Upgrading Notes](https://github.com/aws/aws-sdk-core-ruby/blob/master/UPGRADING.md)
-* [Issues](http://github.com/aws/aws-sdk-core-ruby/issues)
-* [Feature Requests](https://github.com/aws/aws-sdk-core-ruby/blob/master/FEATURE_REQUESTS.md)
-* [Gitter Channel](https://gitter.im/aws/aws-sdk-core-ruby)
+* [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
+* [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
+* [Issues](http://github.com/aws/aws-sdk-ruby/issues)
+* [Feature Requests](https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE_REQUESTS.md)
+* [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
 * [License](http://aws.amazon.com/apache2.0/)
 
 ## NameError: uninitialized constant AWS
