@@ -86,7 +86,7 @@ module AWS
 
       # Creates an AMI.  There are several ways to create an AMI
       # using this method; for detailed information on each strategy
-      # see [the EC2 Developer Guide](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/creating-an-ami.html).
+      # see [the EC2 Developer Guide](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html).
       #
       # @param [Hash] options Options for creating the image.
       #   `:name` is required, and you must also specify one of the

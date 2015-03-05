@@ -40,7 +40,7 @@ module AWS
       #     iam.account_aliases.create('myaccountalias')
       #
       # For information about account alias restrictions and usage,
-      # see http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?AccountAlias.html.
+      # see http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?AccountAlias.html.
       #
       # @param [String] account_alias
       # @return [String] Returns the account_alias string that was passed.

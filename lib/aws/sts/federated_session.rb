@@ -28,7 +28,7 @@ module AWS
       # The ARN specifying the federated user associated with the
       # session. For more information about ARNs and how to use them
       # in policies, see
-      # {http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
+      # {http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
       # Identifiers for IAM Entities} in <i>Using AWS Identity and
       # Access Management</i>.
       #

@@ -42,7 +42,7 @@ module AWS
     #     subnet = subnets['subnet-id-here']
     #
     # You can filter subnets as well.  See the EC2 API documentation
-    # (http://docs.amazonwebservices.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSubnets.html) for a complete list of accepted filters.
+    # (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSubnets.html) for a complete list of accepted filters.
     #
     #     subnet = subnets.filter('state', 'available').first
     #

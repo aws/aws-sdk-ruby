@@ -314,7 +314,7 @@ module AWS
 
       # @return [Integer] The approximate number of visible messages
       #   in a queue.  For more information, see
-      #   [Resources Required to Process Messages](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber)
+      #   [Resources Required to Process Messages](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber)
       #   in the Amazon SQS Developer Guide.
       def approximate_number_of_messages
         get_attribute("ApproximateNumberOfMessages").to_i
@@ -323,7 +323,7 @@ module AWS
 
       # @return [Integer] The approximate number of messages that
       #   are not timed-out and not deleted.  For more information,
-      #   see [Resources Required to Process Messages](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber)
+      #   see [Resources Required to Process Messages](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#ApproximateNumber)
       #   in the Amazon SQS Developer Guide.
       def approximate_number_of_messages_not_visible
         get_attribute("ApproximateNumberOfMessagesNotVisible").to_i
@@ -332,7 +332,7 @@ module AWS
 
       # @return [Integer] Returns the visibility timeout for the
       #   queue. For more information about visibility timeout, see
-      #   [Visibility Timeout](http://docs.amazonwebservices.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT)
+      #   [Visibility Timeout](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/IntroductionArticle.html#AboutVT)
       #   in the Amazon SQS Developer Guide.
       def visibility_timeout
         get_attribute("VisibilityTimeout").to_i

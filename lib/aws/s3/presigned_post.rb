@@ -179,7 +179,7 @@ module AWS
       #   If the value is set to 201, Amazon S3 returns an XML
       #   document with a 201 status code.  For information on the
       #   content of the XML document, see
-      #   [POST Object](http://docs.amazonwebservices.com/AmazonS3/2006-03-01/API/index.html?RESTObjectPOST.html).
+      #   [POST Object](http://docs.aws.amazon.com/AmazonS3/2006-03-01/API/index.html?RESTObjectPOST.html).
       #
       # @option opts [Hash] :metadata A hash of the metadata fields
       #   included in the signed fields.  Additional metadata fields

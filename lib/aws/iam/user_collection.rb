@@ -60,7 +60,7 @@ module AWS
       # @param [String] name Name of the user to create.
       # @option options [String] :path ('/') The path for the user name.
       #   For more information about paths, see
-      #   [Identifiers for IAM Entities](http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
+      #   [Identifiers for IAM Entities](http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
       # @return [User] Returns the newly created user.
       def create name, options = {}
         create_opts = {}

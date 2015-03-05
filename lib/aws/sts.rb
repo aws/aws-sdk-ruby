@@ -101,7 +101,7 @@ module AWS
     # any resource or user policies that apply to the caller of the
     # GetFederationToken API. For more information about how token
     # permissions work, see
-    # {http://docs.amazonwebservices.com/IAM/latest/UserGuide/TokenPermissions.html
+    # {http://docs.aws.amazon.com/IAM/latest/UserGuide/TokenPermissions.html
     # Controlling Token Permissions} in Using AWS Identity and Access
     # Management.
     #

@@ -30,7 +30,7 @@ module AWS
     #
     # For information about generating a server certificate for use
     # with IAM, see
-    # {http://docs.amazonwebservices.com/IAM/latest/UserGuide/InstallCert.html
+    # {http://docs.aws.amazon.com/IAM/latest/UserGuide/InstallCert.html
     # Creating and Uploading Server Certificates} in <i>Using AWS
     # Identity and Access Management</i>.
     #
@@ -74,7 +74,7 @@ module AWS
       #
       # @option options [String] :path The path for the server
       #   certificate. For more information about paths, see
-      #   {http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
+      #   {http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
       #   Identifiers for IAM Entities} in <i>Using AWS Identity and
       #   Access Management</i>.
       #

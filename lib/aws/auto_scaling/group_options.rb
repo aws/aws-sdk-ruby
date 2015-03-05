@@ -59,7 +59,7 @@ module AWS
       # @option options [String] :placement_group
       #   Physical location of your cluster placement group created in
       #   Amazon EC2. For more information about cluster placement group, see
-      #   [Using Cluster Instances](http://docs.amazonwebservices.com/AWSEC2/latest/UserGuide/using_cluster_computing.html).
+      #   [Using Cluster Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cluster_computing.html).
       #
       # @option options [Array<String>] :termination_policies
       #   A standalone termination policy or a list of termination policies used

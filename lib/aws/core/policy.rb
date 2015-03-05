@@ -29,7 +29,7 @@ module AWS
     #     policy.to_json # => '{ "Version":"2008-10-17", ...'
     #
     # @see #initialize More ways to construct a policy.
-    # @see http://docs.amazonwebservices.com/AmazonS3/latest/dev/AccessPolicyLanguage_UseCases_s3_a.html Example policies (in JSON).
+    # @see http://docs.aws.amazon.com/AmazonS3/latest/dev/AccessPolicyLanguage_UseCases_s3_a.html Example policies (in JSON).
     class Policy
 
       # @see Statement
@@ -350,7 +350,7 @@ module AWS
         #   `:s3_prefix` is sent as "s3:prefix" while
         #   `:secure_transport` is sent as "aws:SecureTransport".
         #   See
-        #   http://docs.amazonwebservices.com/AmazonS3/latest/dev/UsingResOpsConditions.html
+        #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingResOpsConditions.html
         #   for a list of the available keys for each action in S3.
         #
         # @param [Mixed] values The value to compare against.

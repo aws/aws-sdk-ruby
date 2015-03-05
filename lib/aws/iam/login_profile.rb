@@ -19,7 +19,7 @@ module AWS
     # Console}. Without a login profile, a user cannot access the
     # console. (For information about accessing and using the AWS
     # Management Console, see
-    # {http://docs.amazonwebservices.com/IAM/latest/UserGuide/Using_AWSManagementConsole.html
+    # {http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_AWSManagementConsole.html
     # Using the AWS Management Console}.)
     #
     # @example Setting a password for a user's login profile

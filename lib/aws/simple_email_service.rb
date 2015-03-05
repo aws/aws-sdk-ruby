@@ -72,7 +72,7 @@ module AWS
   #
   # Before you can send emails, you need to verify one or more identities.
   # Identities are email addresses or domain names that you have control over.
-  # Until you have [requested production access](http://docs.amazonwebservices.com/ses/latest/DeveloperGuide/InitialSetup.Customer.html)
+  # Until you have [requested production access](http://docs.aws.amazon.com/ses/latest/DeveloperGuide/InitialSetup.Customer.html)
   # you will only be able to send emails to and from verified email addresses
   # and domains.
   #

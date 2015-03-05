@@ -239,7 +239,7 @@ module AWS
     #   service to support the use of server certificates with
     #   IAM. Using server certificates with Amazon Elastic Load
     #   Balancing is described in the
-    #   {http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/US_SettingUpLoadBalancerHTTPSIntegrated.html
+    #   {http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_SettingUpLoadBalancerHTTPSIntegrated.html
     #   Amazon Elastic Load Balancing} Developer Guide.
     #
     # Returns a collection that represents the server certificates

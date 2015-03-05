@@ -32,7 +32,7 @@ module AWS
     # @attr_reader [String] arn The Amazon Resource Name (ARN)
     #   specifying the server certificate. For more information
     #   about ARNs and how to use them in policies, see
-    #   {http://docs.amazonwebservices.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
+    #   {http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
     #   Identifiers for IAM Entities} in <i>Using AWS Identity and
     #   Access Management</i>.
     #
@@ -114,7 +114,7 @@ module AWS
       #   remove the reference to the certificate from Elastic Load
       #   Balancing before using this command to delete the
       #   certificate. For more information, go to
-      #   {http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html
+      #   {http://docs.aws.amazon.com/ElasticLoadBalancing/latest/APIReference/API_DeleteLoadBalancerListeners.html
       #   DeleteLoadBalancerListeners} in the _Elastic Load Balancing
       #   API Reference_.
       #

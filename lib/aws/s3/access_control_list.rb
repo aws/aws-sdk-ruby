@@ -80,7 +80,7 @@ module AWS
       #        Grantee.new(:group_uri => 'http://acs.amazonaws.com/groups/global/AllUsers')
       #
       #   For more details about group URIs, see:
-      #   http://docs.amazonwebservices.com/AmazonS3/latest/dev/ACLOverview.html
+      #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html
       #
       # When constructing a grantee, you must provide a value for
       # exactly one of the following attributes:
@@ -182,7 +182,7 @@ module AWS
       # ACL.
       #
       # See
-      # http://docs.amazonwebservices.com/AmazonS3/latest/dev/ACLOverview.html
+      # http://docs.aws.amazon.com/AmazonS3/latest/dev/ACLOverview.html
       # for more information on how grantees and permissions are
       # interpreted by S3.
       #

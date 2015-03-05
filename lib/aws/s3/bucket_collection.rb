@@ -47,7 +47,7 @@ module AWS
       #       bucket = s3.buckets.create("my.eu.bucket")
       #
       #   For a full list of endpoints and regions, see
-      #   {http://docs.amazonwebservices.com/general/latest/gr/index.html?rande.html
+      #   {http://docs.aws.amazon.com/general/latest/gr/index.html?rande.html
       #   Regions and Endpoints} in the Amazon Web Services General
       #   Reference.
       #

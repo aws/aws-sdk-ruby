@@ -21,11 +21,11 @@ module AWS
     #
     # @attr_reader [String] canonical_hosted_zone_name Provides the name of
     #   the Amazon Route 53 hosted zone that is associated with the load
-    #   balancer.  For more information: [using-domain-names-with-elb.html](http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html).
+    #   balancer.  For more information: [using-domain-names-with-elb.html](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html).
     #
     # @attr_reader [String] canonical_hosted_zone_name_id Provides the ID of
     #   the Amazon Route 53 hosted zone name that is associated with the
-    #   load balancer.  For more information: [using-domain-names-with-elb.html](http://docs.amazonwebservices.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html).
+    #   load balancer.  For more information: [using-domain-names-with-elb.html](http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/index.html?using-domain-names-with-elb.html).
     #
     # @attr_reader [String] dns_name Specifies the external DNS name
     #   associated with this load balancer.
