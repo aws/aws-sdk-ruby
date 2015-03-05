@@ -11,7 +11,7 @@ The AWS SDK for Ruby is available from [RubyGems.org](https://rubygems.org/) as 
 
 ## Links of Interest
 
-* [API Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
+* [API Documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
 * [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 * [Issues](http://github.com/aws/aws-sdk-ruby/issues)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)

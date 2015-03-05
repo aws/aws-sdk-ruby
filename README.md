@@ -7,7 +7,7 @@ This is version 2 of the `aws-sdk` gem.  **Version 1 can be found in the
 
 ## Links of Interest
 
-* [Documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
+* [Documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
 * [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
 * [Issues](http://github.com/aws/aws-sdk-ruby/issues)
@@ -50,7 +50,7 @@ locations:
 * `Aws.config[:region]`
 * `ENV['AWS_REGION']`
 
-See [this document](http://docs.amazonwebservices.com/general/latest/gr/rande.html)
+See [this document](http://docs.aws.amazon.com/general/latest/gr/rande.html)
 for a list of supported regions by service.
 
 ### Credentials
@@ -88,7 +88,7 @@ creds = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
 
 Construct a service client to make API calls. Each client provides a 1-to-1
 mapping of methods to API operations. Refer to the
-[API documentation](http://docs.amazonwebservices.com/sdkforruby/api/frames.html)
+[API documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
 for a complete list of available methods.
 
 ```ruby
