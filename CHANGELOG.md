@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CloudWatchLogs - Resolved an issue that would cause an infinite
+  loop when paginating `Aws::CloudWatchLogs#get_log_events`.
+  Resolves [GitHub issue #712](https://github.com/aws/aws-sdk-ruby/issues/712).
+
 2.0.29 (2015-03-04)
 ------------------
 
