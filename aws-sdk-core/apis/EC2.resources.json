@@ -1769,6 +1769,14 @@
             ]
           }
         },
+        "Delete": {
+          "request": {
+            "operation": "DeleteVolume",
+            "params": [
+              { "target": "VolumeId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
         "DescribeAttribute": {
           "request": {
             "operation": "DescribeVolumeAttribute",
