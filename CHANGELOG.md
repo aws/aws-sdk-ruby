@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added a `Aws::EC2::Volume#delete` method
+  via [pull request](https://github.com/aws/aws-sdk-ruby/pull/731).
+
 2.0.29 (2015-03-04)
 ------------------
 
