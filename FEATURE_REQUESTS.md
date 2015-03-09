@@ -67,3 +67,7 @@ See [related GitHub issue #694](https://github.com/aws/aws-sdk-ruby/issues/694).
 The version 1 SDK has support for generating a pre-signed POST request. This returned a hash of key/value pairs that should be embedded into a HTML POST form for browsers. This should be ported to the version 2 SDK, and updated to use signature version 4.
 
 See [related GitHub issue #720](https://github.com/aws/aws-sdk-ruby/issues/720).
+
+### Amazon SQS Queue Poller
+
+Add a utility class that can poll an Amazon SQS Queue for messages. This should do a better than than the version 1 SDK in handling errors raised inside the polling logic.  Ideally, users should be able to fail a message, causing it to not delete, but without terminating the polling abstraction. This should be opt-in to avoid draining a queue of messages without succeeding any.
