@@ -24,13 +24,23 @@ module Aws
         end
       end
 
+      # @api private
+      def prev_tokens(response)
+        @tokens.each.with_object({}) do |(_, target), tokens|
+          value = JMESPath.search(target, response.context.params)
+          tokens[target.to_sym] = value unless empty_value?(value)
+        end
+      end
+
       # @param [Seahorse::Client::Response] response
       # @return [Boolean]
       def truncated?(response)
         if @more_results
           JMESPath.search(@more_results, response.data)
         else
-          !next_tokens(response).empty?
+          next_tokens = self.next_tokens(response)
+          prev_tokens = self.prev_tokens(response)
+          !(next_tokens.empty? || next_tokens == prev_tokens)
         end
       end
 
