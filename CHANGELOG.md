@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SQS - Added `Aws::SQS::QueuePoller`, a utility class for
+  long polling and processing messages from a queue.
+
+  ```ruby
+  poller = Aws::SQS::QueuePoller.new(queue_url)
+  poller.poll do |msg|
+    puts msg.body
+  end # message deleted here
+  ```
+
+  See the [API reference documentation](http://docs.aws.amazon.com/sdkforruby/api/Aws/SQS/QueuePoller.html) for more examples.
+
 * Issue - Query Protocol - No longer returning nil for empty maps in
   query responses. `Aws::SQS::Client#get_queue_attributes` will always
   have a hash a `resp.attributes` instead of a possible `nil` value.
