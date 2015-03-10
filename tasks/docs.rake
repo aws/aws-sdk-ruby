@@ -33,7 +33,10 @@ end
 
 desc 'Generate the API documentation.'
 task 'docs' => ['docs:clobber', 'docs:update_readme'] do
-  sh({'SOURCE' => '1'}, 'bundle exec yard')
+  env = {}
+  env['SOURCE'] = '1'
+  env['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/sdkforruby/api/'
+  sh(env, 'bundle exec yard')
 end
 
 # Generates an HTML table of supported services that is used by README.md
