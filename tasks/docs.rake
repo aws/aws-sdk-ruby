@@ -12,7 +12,9 @@ end
 
 desc 'Generate the API documentation.'
 task 'docs' => ['docs:clobber', 'docs:update_readme'] do
-  sh({'SOURCE' => '1'}, 'bundle exec yard')
+  env = {}
+  env['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/AWSRubySDK/latest/'
+  sh(env, 'bundle exec yard')
 end
 
 namespace :docs do
