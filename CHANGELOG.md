@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added `Aws::EC2::Snapshot#wait_until_completed` resource
+  waiter. See relevant [GitHub issue #735](https://github.com/aws/aws-sdk-ruby/issues/735).
+
 * Feature - Aws::EC2 - Added a `Aws::EC2::Volume#delete` method
   via [pull request](https://github.com/aws/aws-sdk-ruby/pull/731).
 

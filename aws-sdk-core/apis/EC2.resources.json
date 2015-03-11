@@ -1530,6 +1530,15 @@
           }
         }
       },
+      "waiters": {
+        "Completed": {
+          "waiterName": "SnapshotCompleted",
+          "params": [
+            { "target": "SnapshotIds[]", "source": "identifier", "name": "Id" }
+          ],
+          "path": "Snapshots[]"
+        }
+      },
       "has": {
         "Volume": {
           "resource": {
