@@ -23,7 +23,7 @@ group :repl do
 end
 
 group :documentation do
-  gem 'yard', :git => 'https://github.com/trevorrowe/yard.git', branch: 'frameless'
+  gem 'yard', :git => 'https://github.com/trevorrowe/yard.git', :branch => 'frameless'
   gem 'rdiscount', :github => 'lsegal/rdiscount', :branch => 'gfm-fenced-code'
   gem 'yard-sitemap', '~> 1.0'
   gem 'rdoc', '= 3.9.4'
