@@ -76,4 +76,10 @@ Add a utility class that can poll an Amazon SQS Queue for messages. This should 
 
 There are currently no waiters for `Aws::ElasticBeanstalk::Client`. Particular useful would be environment states.
 
-See [related GitHub issue aws/aws-sdk-core-ruby#216](https://github.com/aws/aws-sdk-core-ruby/issues/216)
+See [related GitHub issue aws/aws-sdk-core-ruby#216](https://github.com/aws/aws-sdk-core-ruby/issues/216).
+
+### Progress callbacks for Amazon S3 Object uploads
+
+To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.  
+
+See [related Github issue #648](https://github.com/aws/aws-sdk-ruby/issues/648#issuecomment-78246370).
