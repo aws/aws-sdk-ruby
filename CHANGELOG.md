@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatchLogs - Added support for ordering DescribeLogStreams
+  results by LastEventTime.
+
 * Feature - Aws::EC2 - Added `Aws::EC2::Snapshot#wait_until_completed` resource
   waiter. See relevant [GitHub issue #735](https://github.com/aws/aws-sdk-ruby/issues/735).
 

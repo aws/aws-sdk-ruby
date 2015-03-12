@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-03-28",
     "endpointPrefix":"logs",
@@ -446,6 +447,7 @@
         "logGroupName":{"shape":"LogGroupName"}
       }
     },
+    "Descending":{"type":"boolean"},
     "DescribeLimit":{
       "type":"integer",
       "min":1,
@@ -472,6 +474,8 @@
       "members":{
         "logGroupName":{"shape":"LogGroupName"},
         "logStreamNamePrefix":{"shape":"LogStreamName"},
+        "orderBy":{"shape":"OrderBy"},
+        "descending":{"shape":"Descending"},
         "nextToken":{"shape":"NextToken"},
         "limit":{"shape":"DescribeLimit"}
       }
@@ -502,8 +506,7 @@
     },
     "EventMessage":{
       "type":"string",
-      "min":1,
-      "max":32768
+      "min":1
     },
     "EventNumber":{"type":"long"},
     "EventsLimit":{
@@ -567,7 +570,7 @@
       "type":"list",
       "member":{"shape":"InputLogEvent"},
       "min":1,
-      "max":1000
+      "max":10000
     },
     "InvalidParameterException":{
       "type":"structure",
@@ -588,6 +591,7 @@
       },
       "exception":true
     },
+    "LogEventIndex":{"type":"integer"},
     "LogGroup":{
       "type":"structure",
       "members":{
@@ -690,12 +694,22 @@
       "type":"string",
       "max":100
     },
-    "NextToken":{"type":"string"},
+    "NextToken":{
+      "type":"string",
+      "min":1
+    },
     "OperationAbortedException":{
       "type":"structure",
       "members":{
       },
       "exception":true
+    },
+    "OrderBy":{
+      "type":"string",
+      "enum":[
+        "LogStreamName",
+        "LastEventTime"
+      ]
     },
     "OutputLogEvent":{
       "type":"structure",
@@ -726,7 +740,8 @@
     "PutLogEventsResponse":{
       "type":"structure",
       "members":{
-        "nextSequenceToken":{"shape":"SequenceToken"}
+        "nextSequenceToken":{"shape":"SequenceToken"},
+        "rejectedLogEventsInfo":{"shape":"RejectedLogEventsInfo"}
       }
     },
     "PutMetricFilterRequest":{
@@ -753,6 +768,14 @@
       "members":{
         "logGroupName":{"shape":"LogGroupName"},
         "retentionInDays":{"shape":"Days"}
+      }
+    },
+    "RejectedLogEventsInfo":{
+      "type":"structure",
+      "members":{
+        "tooNewLogEventStartIndex":{"shape":"LogEventIndex"},
+        "tooOldLogEventEndIndex":{"shape":"LogEventIndex"},
+        "expiredLogEventEndIndex":{"shape":"LogEventIndex"}
       }
     },
     "ResourceAlreadyExistsException":{
