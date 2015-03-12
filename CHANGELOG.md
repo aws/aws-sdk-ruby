@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.30 (2015-03-12)
 ------------------
 
 * Feature - Aws::CloudTrail - Added support for the new Lookup feature.
