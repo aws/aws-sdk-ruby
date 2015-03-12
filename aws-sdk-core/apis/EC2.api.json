@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2014-10-01",
     "endpointPrefix":"ec2",
@@ -4215,7 +4216,9 @@
         "Filters":{
           "shape":"FilterList",
           "locationName":"Filter"
-        }
+        },
+        "NextToken":{"shape":"String"},
+        "MaxResults":{"shape":"Integer"}
       }
     },
     "DescribeSnapshotsResult":{
@@ -4224,6 +4227,10 @@
         "Snapshots":{
           "shape":"SnapshotList",
           "locationName":"snapshotSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },

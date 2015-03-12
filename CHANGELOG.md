@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added pagination support to `Aws::EC2::Client#describe_snapshots`.
+
 * Feature - Aws::CloudWatchLogs - Added support for ordering DescribeLogStreams
   results by LastEventTime.
 

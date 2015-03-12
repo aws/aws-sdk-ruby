@@ -81,6 +81,8 @@
       "result_key": "SecurityGroups"
     },
     "DescribeSnapshots": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
       "result_key": "Snapshots"
     },
     "DescribeSpotInstanceRequests": {
