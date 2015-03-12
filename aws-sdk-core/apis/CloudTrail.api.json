@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-11-01",
     "endpointPrefix":"cloudtrail",
@@ -189,6 +190,53 @@
           "shape":"InvalidTrailNameException",
           "error":{
             "code":"InvalidTrailName",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        }
+      ]
+    },
+    "LookupEvents":{
+      "name":"LookupEvents",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"LookupEventsRequest"},
+      "output":{"shape":"LookupEventsResponse"},
+      "errors":[
+        {
+          "shape":"InvalidLookupAttributesException",
+          "error":{
+            "code":"InvalidLookupAttributes",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidTimeRangeException",
+          "error":{
+            "code":"InvalidTimeRange",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidMaxResultsException",
+          "error":{
+            "code":"InvalidMaxResults",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
+        },
+        {
+          "shape":"InvalidNextTokenException",
+          "error":{
+            "code":"InvalidNextToken",
             "httpStatusCode":400,
             "senderFault":true
           },
@@ -431,6 +479,21 @@
         "trailList":{"shape":"TrailList"}
       }
     },
+    "Event":{
+      "type":"structure",
+      "members":{
+        "EventId":{"shape":"String"},
+        "EventName":{"shape":"String"},
+        "EventTime":{"shape":"Date"},
+        "Username":{"shape":"String"},
+        "Resources":{"shape":"ResourceList"},
+        "CloudTrailEvent":{"shape":"String"}
+      }
+    },
+    "EventsList":{
+      "type":"list",
+      "member":{"shape":"Event"}
+    },
     "GetTrailStatusRequest":{
       "type":"structure",
       "required":["Name"],
@@ -496,6 +559,39 @@
       },
       "exception":true
     },
+    "InvalidLookupAttributesException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidLookupAttributes",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InvalidMaxResultsException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidMaxResults",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
+    "InvalidNextTokenException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidNextToken",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidS3BucketNameException":{
       "type":"structure",
       "members":{
@@ -529,6 +625,17 @@
       },
       "exception":true
     },
+    "InvalidTimeRangeException":{
+      "type":"structure",
+      "members":{
+      },
+      "error":{
+        "code":"InvalidTimeRange",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
+    },
     "InvalidTrailNameException":{
       "type":"structure",
       "members":{
@@ -540,6 +647,53 @@
       },
       "exception":true
     },
+    "LookupAttribute":{
+      "type":"structure",
+      "required":[
+        "AttributeKey",
+        "AttributeValue"
+      ],
+      "members":{
+        "AttributeKey":{"shape":"LookupAttributeKey"},
+        "AttributeValue":{"shape":"String"}
+      }
+    },
+    "LookupAttributeKey":{
+      "type":"string",
+      "enum":[
+        "EventId",
+        "EventName",
+        "Username",
+        "ResourceType",
+        "ResourceName"
+      ]
+    },
+    "LookupAttributesList":{
+      "type":"list",
+      "member":{"shape":"LookupAttribute"}
+    },
+    "LookupEventsRequest":{
+      "type":"structure",
+      "members":{
+        "LookupAttributes":{"shape":"LookupAttributesList"},
+        "StartTime":{"shape":"Date"},
+        "EndTime":{"shape":"Date"},
+        "MaxResults":{"shape":"MaxResults"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "LookupEventsResponse":{
+      "type":"structure",
+      "members":{
+        "Events":{"shape":"EventsList"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "MaxResults":{
+      "type":"integer",
+      "min":1,
+      "max":50
+    },
     "MaximumNumberOfTrailsExceededException":{
       "type":"structure",
       "members":{
@@ -550,6 +704,18 @@
         "senderFault":true
       },
       "exception":true
+    },
+    "NextToken":{"type":"string"},
+    "Resource":{
+      "type":"structure",
+      "members":{
+        "ResourceType":{"shape":"String"},
+        "ResourceName":{"shape":"String"}
+      }
+    },
+    "ResourceList":{
+      "type":"list",
+      "member":{"shape":"Resource"}
     },
     "S3BucketDoesNotExistException":{
       "type":"structure",
