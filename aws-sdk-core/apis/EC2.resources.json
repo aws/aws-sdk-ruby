@@ -65,7 +65,7 @@
         "resource": {
           "type": "PlacementGroup",
           "identifiers": [
-            { "target": "Id", "source": "requestParameter", "path": "GroupName" }
+            { "target": "Name", "source": "requestParameter", "path": "GroupName" }
           ]
         }
       },
@@ -1261,6 +1261,14 @@
         "path": "RouteTables[0]"
       },
       "actions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteRouteTable",
+            "params": [
+              { "target": "RouteTableId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
         "AssociateWithSubnet": {
           "request": {
             "operation": "AssociateRouteTable",
