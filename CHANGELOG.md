@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Query Protocol - No longer returning nil for empty maps in
+  query responses. `Aws::SQS::Client#get_queue_attributes` will always
+  have a hash a `resp.attributes` instead of a possible `nil` value.
+
 * Issue - Aws::EC2 - Fixed an issue with constructing `PlacementGroup`
   resources and added a missing `#delete` method to `RouteTable`.
   See related [GitHub pull request #737](https://github.com/aws/aws-sdk-ruby/issues/712).

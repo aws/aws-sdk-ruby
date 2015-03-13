@@ -321,7 +321,7 @@ module Aws
 
       describe 'non-flattened maps' do
 
-        it 'returns missing maps as nil' do
+        it 'returns missing maps as {}' do
           definition['members'] = {
             'Attributes' => {
               'type' => 'map',
@@ -330,7 +330,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:attributes]).to be(nil)
+          expect(parse(xml)[:attributes]).to eq({})
         end
 
         it 'returns empty maps as {}' do
@@ -423,7 +423,7 @@ module Aws
 
       describe 'flattened maps' do
 
-        it 'returns missing maps as nil' do
+        it 'returns missing maps as {}' do
           definition['members'] = {
             'Attributes' => {
               'type' => 'map',
@@ -433,7 +433,7 @@ module Aws
             }
           }
           xml = "<xml/>"
-          expect(parse(xml)[:attributes]).to be(nil)
+          expect(parse(xml)[:attributes]).to eq({})
         end
 
         it 'returns empty maps as {}' do
