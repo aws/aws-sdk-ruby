@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Fixed an issue with constructing `PlacementGroup`
+  resources and added a missing `#delete` method to `RouteTable`.
+  See related [GitHub pull request #737](https://github.com/aws/aws-sdk-ruby/issues/712).
+
 2.0.30 (2015-03-12)
 ------------------
 
