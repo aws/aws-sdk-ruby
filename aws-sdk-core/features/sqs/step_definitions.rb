@@ -1,12 +1,8 @@
 Before("@sqs") do
   @client = Aws::SQS::Client.new
-  @sqs_created_queues = []
 end
 
 After("@sqs") do
-  @sqs_created_queues.each do |url|
-    @client.delete_delete_queue(queue_url: url)
-  end
 end
 
 Given(/^I create a queue in "(.*?)"$/) do |region|
@@ -25,5 +21,3 @@ end
 Then(/^the request should be made against "(.*?)"$/) do |region|
   expect(@response.context.http_request.endpoint.to_s).to include(region)
 end
-
-
