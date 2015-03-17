@@ -14,6 +14,15 @@ module Aws
 
       describe 'configuration' do
 
+        it 'raises an error on unknown configuration options' do
+          expect {
+            QueuePoller.new(queue_url, client:client, bad:'option')
+          }.to raise_error(ArgumentError, 'invalid option :bad')
+          expect {
+            QueuePoller.new(queue_url, client:client).poll(bad:'option') {|m|}
+          }.to raise_error(ArgumentError, 'invalid option :bad')
+        end
+
         it 'is immutable' do
           expect(poller.default_config).to be_frozen
           expect(poller.default_config.request_params).to be_frozen
