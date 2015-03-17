@@ -516,21 +516,6 @@ module Aws
         end
 
       end
-
-      # @api private
-      class PollerRequestParams < Hash
-
-        DEFAULTS = {
-        }
-
-        def initialize(options)
-          super(nil)
-          DEFAULTS.each do |key, default|
-            self[key] = options.key?(key) ? options[key] : default
-          end
-        end
-
-      end
     end
   end
 end
