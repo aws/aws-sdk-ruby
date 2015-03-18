@@ -34,12 +34,6 @@ Adding a retry limit for instance profile credentials might be a possible soluti
 
 See [related GitHub issue #717](https://github.com/aws/aws-sdk-ruby/issues/717).
 
-### Verify SNS Message Authenticity
-
-Version 1 of the AWS SDK for Ruby has an method that can verify the authenticity of an SNS message. No such functionality exists in the v2 SDK. Ideally, this could be ported as a standalone class, such as `Aws::SNS::MessageVerifier`. This could then be exposed from the `Aws::SNS::Message` as a `#verify` method for resource users or called directly for client users.
-
-See [related GitHub issue #709](https://github.com/aws/aws-sdk-ruby/issues/709).
-
 ### Signed CloudFront URLs
 
 Amazon CloudFront supports pre-signed URLs, similar to those used by Amazon S3. It would be helpful to have a pre-signed url builder for SDK users.
@@ -80,6 +74,6 @@ See [related GitHub issue aws/aws-sdk-core-ruby#216](https://github.com/aws/aws-
 
 ### Progress callbacks for Amazon S3 Object uploads
 
-To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.  
+To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
 
 See [related Github issue #648](https://github.com/aws/aws-sdk-ruby/issues/648#issuecomment-78246370).

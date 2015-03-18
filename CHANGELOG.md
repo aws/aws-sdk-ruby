@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SNS - Added a utility class that can verify the authenticity
+  of an SNS message.
+
+  ```ruby
+  verifier = Aws::SNS::MessageVerifier.new
+
+  verifier.authentic?(message_body)
+  #=> returns true/false
+
+  verifier.authenticate!(message_body)
+  #=> raises an error on bad message signature
+  ```
+
+  See [related GitHub issue #709](https://github.com/aws/aws-sdk-ruby/issues/709).
+
 * Issue - Query Protocol - No longer returning nil for empty maps in
   query responses. `Aws::SQS::Client#get_queue_attributes` will always
   have a hash a `resp.attributes` instead of a possible `nil` value.
