@@ -8,5 +8,4 @@
 --asset doc-src/images:images
 -e doc-src/plugins/apis.rb
 -e doc-src/plugins/resources.rb
--e doc-src/plugins/stability.rb
 aws-sdk-core/lib/**/*.rb aws-sdk-resources/lib/**/*.rb aws-sdk/lib/**/*.rb
