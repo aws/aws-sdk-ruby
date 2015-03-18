@@ -62,10 +62,6 @@ The version 1 SDK has support for generating a pre-signed POST request. This ret
 
 See [related GitHub issue #720](https://github.com/aws/aws-sdk-ruby/issues/720).
 
-### Amazon SQS Queue Poller
-
-Add a utility class that can poll an Amazon SQS Queue for messages. This should do a better than than the version 1 SDK in handling errors raised inside the polling logic.  Ideally, users should be able to fail a message, causing it to not delete, but without terminating the polling abstraction. This should be opt-in to avoid draining a queue of messages without succeeding any.
-
 ### Aws::ElasticBeanstalk::Client Waiters
 
 There are currently no waiters for `Aws::ElasticBeanstalk::Client`. Particular useful would be environment states.
