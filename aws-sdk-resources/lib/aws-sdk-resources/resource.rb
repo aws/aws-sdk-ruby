@@ -23,6 +23,26 @@ module Aws
       # @return [Hash<Symbol,String>]
       attr_reader :identifiers
 
+      # @option options [Integer] :max_attempts (10)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt (nil)
+      # @option options [Proc] :before_wait (nil)
+      def wait_until(options = {}, &block)
+        attempts = 0
+        options[:max_attempts] ||= 10
+        options[:delay] ||= 10
+        options[:poller] = Proc.new do
+          attempts += 1
+          if block.call(self)
+            [:success, self]
+          else
+            reload unless attempts == options[:max_attempts]
+            :retry
+          end
+        end
+        Waiters::Waiter.new(options).wait({})
+      end
+
       # @return [Struct]
       def data
         load unless @data
