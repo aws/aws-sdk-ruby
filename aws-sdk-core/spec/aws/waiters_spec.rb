@@ -7,6 +7,11 @@ module Aws
 
       let(:client) { EC2::Client.new(stub_responses: true, retry_limit: 0) }
 
+      let(:waiters_file) {
+        File.expand_path(File.join(File.dirname(__FILE__),
+                                   '..', 'fixtures', 'waiters', 'waiters.json'))
+      }
+
       describe 'client waiters module' do
 
         it 'accepts a waiter provider' do
@@ -18,6 +23,18 @@ module Aws
         it 'accepts a hash' do
           klass = Class.new { include ClientWaiters }
           klass.set_waiters('waiters' => {})
+          expect(klass.new.waiter_names).to eq([])
+        end
+
+        it 'accepts a String' do
+          klass = Class.new { include ClientWaiters }
+          klass.set_waiters(waiters_file)
+          expect(klass.new.waiter_names).to eq([])
+        end
+
+        it 'accepts a Pathname' do
+          klass = Class.new { include ClientWaiters }
+          klass.set_waiters(Pathname.new waiters_file)
           expect(klass.new.waiter_names).to eq([])
         end
 

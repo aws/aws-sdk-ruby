@@ -30,14 +30,14 @@ module Aws
           expect(r.identifiers).to eq(bucket_name:'bucket', key:'key')
         end
 
-        it 'accpets identifiers positionally' do
+        it 'accepts identifiers positionally' do
           resource_class.add_identifier(:bucket_name)
           resource_class.add_identifier(:key)
           r = resource_class.new('bucket', 'key')
           expect(r.identifiers).to eq(bucket_name:'bucket', key:'key')
         end
 
-        it 'accpets identifiers positionally and as a hash' do
+        it 'accepts identifiers positionally and as a hash' do
           resource_class.add_identifier(:bucket_name)
           resource_class.add_identifier(:key)
           r = resource_class.new('bucket', key:'key')
