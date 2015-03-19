@@ -50,12 +50,6 @@ This approach has the benefit of expanding waiter coverage and providing a relia
 
 See [related GitHub issue #696](https://github.com/aws/aws-sdk-ruby/issues/696).
 
-### Amazon S3 Requester Pays
-
-Many, but not all Amazon S3 API operations accept a special header to indicate the API request should pay associated costs. Adding support for these to Amazon S3 operations is very trivial once the appropriate operations are identified.
-
-See [related GitHub issue #694](https://github.com/aws/aws-sdk-ruby/issues/694).
-
 ### Amazon S3 Presigned Post
 
 The version 1 SDK has support for generating a pre-signed POST request. This returned a hash of key/value pairs that should be embedded into a HTML POST form for browsers. This should be ported to the version 2 SDK, and updated to use signature version 4.

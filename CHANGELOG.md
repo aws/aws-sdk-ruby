@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added support for requester pays headers to all supported
+  object operations.
+
+  See [related GitHub issue #694](https://github.com/aws/aws-sdk-ruby/issues/694).
+
 * Feature - Aws::SNS - Added a utility class that can verify the authenticity
   of an SNS message.
 

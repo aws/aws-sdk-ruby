@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2006-03-01",
     "checksumFormat":"md5",
@@ -17,6 +18,7 @@
         "requestUri":"/{Bucket}/{Key+}"
       },
       "input":{"shape":"AbortMultipartUploadRequest"},
+      "output":{"shape":"AbortMultipartUploadOutput"},
       "errors":[
         {
           "shape":"NoSuchUpload",
@@ -503,6 +505,7 @@
         "requestUri":"/{Bucket}/{Key+}?acl"
       },
       "input":{"shape":"PutObjectAclRequest"},
+      "output":{"shape":"PutObjectAclOutput"},
       "errors":[
         {
           "shape":"NoSuchKey",
@@ -518,6 +521,7 @@
         "requestUri":"/{Bucket}/{Key+}?restore"
       },
       "input":{"shape":"RestoreObjectRequest"},
+      "output":{"shape":"RestoreObjectOutput"},
       "errors":[
         {
           "shape":"ObjectAlreadyInActiveTierError",
@@ -549,6 +553,16 @@
     }
   },
   "shapes":{
+    "AbortMultipartUploadOutput":{
+      "type":"structure",
+      "members":{
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
+        }
+      }
+    },
     "AbortMultipartUploadRequest":{
       "type":"structure",
       "required":[
@@ -571,6 +585,11 @@
           "shape":"MultipartUploadId",
           "location":"querystring",
           "locationName":"uploadId"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -764,6 +783,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       }
     },
@@ -794,6 +818,11 @@
           "shape":"MultipartUploadId",
           "location":"querystring",
           "locationName":"uploadId"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       },
       "payload":"MultipartUpload"
@@ -865,6 +894,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       },
       "payload":"CopyObjectResult"
@@ -1026,6 +1060,11 @@
           "shape":"CopySourceSSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -1150,6 +1189,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       }
     },
@@ -1264,6 +1308,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -1379,6 +1428,11 @@
           "shape":"ObjectVersionId",
           "location":"header",
           "locationName":"x-amz-version-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       }
     },
@@ -1408,6 +1462,11 @@
           "shape":"ObjectVersionId",
           "location":"querystring",
           "locationName":"versionId"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -1415,6 +1474,11 @@
       "type":"structure",
       "members":{
         "Deleted":{"shape":"DeletedObjects"},
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
+        },
         "Errors":{
           "shape":"Errors",
           "locationName":"Error"
@@ -1442,6 +1506,11 @@
           "shape":"MFA",
           "location":"header",
           "locationName":"x-amz-mfa"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       },
       "payload":"Delete"
@@ -1504,7 +1573,7 @@
       "member":{"shape":"Event"},
       "flattened":true
     },
-    "Expiration":{"type":"timestamp"},
+    "Expiration":{"type":"string"},
     "ExpirationStatus":{
       "type":"string",
       "enum":[
@@ -1734,6 +1803,11 @@
         "Grants":{
           "shape":"Grants",
           "locationName":"AccessControlList"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       }
     },
@@ -1758,6 +1832,11 @@
           "shape":"ObjectVersionId",
           "location":"querystring",
           "locationName":"versionId"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -1872,6 +1951,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       },
       "payload":"Body"
@@ -1967,6 +2051,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -1976,6 +2065,11 @@
         "Body":{
           "shape":"Body",
           "streaming":true
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       },
       "payload":"Body"
@@ -1996,6 +2090,11 @@
           "shape":"ObjectKey",
           "location":"uri",
           "locationName":"Key"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -2155,6 +2254,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       }
     },
@@ -2219,6 +2323,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -2467,7 +2576,12 @@
         },
         "Initiator":{"shape":"Initiator"},
         "Owner":{"shape":"Owner"},
-        "StorageClass":{"shape":"StorageClass"}
+        "StorageClass":{"shape":"StorageClass"},
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
+        }
       }
     },
     "ListPartsRequest":{
@@ -2502,6 +2616,11 @@
           "shape":"MultipartUploadId",
           "location":"querystring",
           "locationName":"uploadId"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -3017,6 +3136,16 @@
       },
       "payload":"WebsiteConfiguration"
     },
+    "PutObjectAclOutput":{
+      "type":"structure",
+      "members":{
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
+        }
+      }
+    },
     "PutObjectAclRequest":{
       "type":"structure",
       "required":[
@@ -3073,6 +3202,11 @@
           "shape":"ObjectKey",
           "location":"uri",
           "locationName":"Key"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       },
       "payload":"AccessControlPolicy"
@@ -3114,6 +3248,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       }
     },
@@ -3242,6 +3381,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       },
       "payload":"Body"
@@ -3284,6 +3428,14 @@
     },
     "ReplaceKeyPrefixWith":{"type":"string"},
     "ReplaceKeyWith":{"type":"string"},
+    "RequestCharged":{
+      "type":"string",
+      "enum":["requester"]
+    },
+    "RequestPayer":{
+      "type":"string",
+      "enum":["requester"]
+    },
     "RequestPaymentConfiguration":{
       "type":"structure",
       "required":["Payer"],
@@ -3298,6 +3450,16 @@
     "ResponseContentType":{"type":"string"},
     "ResponseExpires":{"type":"timestamp"},
     "Restore":{"type":"string"},
+    "RestoreObjectOutput":{
+      "type":"structure",
+      "members":{
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
+        }
+      }
+    },
     "RestoreObjectRequest":{
       "type":"structure",
       "required":[
@@ -3324,6 +3486,11 @@
           "shape":"RestoreRequest",
           "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
           "locationName":"RestoreRequest"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       },
       "payload":"RestoreRequest"
@@ -3501,6 +3668,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       },
       "payload":"CopyPartResult"
@@ -3594,6 +3766,11 @@
           "shape":"CopySourceSSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-copy-source-server-side-encryption-customer-key-MD5"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -3624,6 +3801,11 @@
           "shape":"SSEKMSKeyId",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-aws-kms-key-id"
+        },
+        "RequestCharged":{
+          "shape":"RequestCharged",
+          "location":"header",
+          "locationName":"x-amz-request-charged"
         }
       }
     },
@@ -3684,6 +3866,11 @@
           "shape":"SSECustomerKeyMD5",
           "location":"header",
           "locationName":"x-amz-server-side-encryption-customer-key-MD5"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       },
       "payload":"Body"

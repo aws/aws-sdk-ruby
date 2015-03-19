@@ -1,4 +1,5 @@
 {
+  "version": "2.0",
   "operations": {
     "AbortMultipartUpload": "<p>Aborts a multipart upload.</p> <p>To verify that all parts have been removed, so you don't get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.</p>",
     "CompleteMultipartUpload": "Completes a multipart upload by assembling previously uploaded parts.",
@@ -40,7 +41,7 @@
     "PutBucketLogging": "Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.",
     "PutBucketNotification": "Enables notifications of specified events for a bucket.",
     "PutBucketPolicy": "Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.",
-    "PutBucketRequestPayment": "Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download.",
+    "PutBucketRequestPayment": "Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download. Documentation on requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html",
     "PutBucketTagging": "Sets the tags for a bucket.",
     "PutBucketVersioning": "Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.",
     "PutBucketWebsite": "Set the website configuration for a bucket.",
@@ -52,6 +53,11 @@
   },
   "service": null,
   "shapes": {
+    "AbortMultipartUploadOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "AbortMultipartUploadRequest": {
       "base": null,
       "refs": {
@@ -1620,6 +1626,11 @@
       "refs": {
       }
     },
+    "PutObjectAclOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
     "PutObjectAclRequest": {
       "base": null,
       "refs": {
@@ -1686,6 +1697,48 @@
         "Redirect$ReplaceKeyWith": "The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided."
       }
     },
+    "RequestCharged": {
+      "base": "If present, indicates that the requester was successfully charged for the request.",
+      "refs": {
+        "AbortMultipartUploadOutput$RequestCharged": null,
+        "CompleteMultipartUploadOutput$RequestCharged": null,
+        "CopyObjectOutput$RequestCharged": null,
+        "CreateMultipartUploadOutput$RequestCharged": null,
+        "DeleteObjectOutput$RequestCharged": null,
+        "DeleteObjectsOutput$RequestCharged": null,
+        "GetObjectAclOutput$RequestCharged": null,
+        "GetObjectOutput$RequestCharged": null,
+        "GetObjectTorrentOutput$RequestCharged": null,
+        "HeadObjectOutput$RequestCharged": null,
+        "ListPartsOutput$RequestCharged": null,
+        "PutObjectAclOutput$RequestCharged": null,
+        "PutObjectOutput$RequestCharged": null,
+        "RestoreObjectOutput$RequestCharged": null,
+        "UploadPartCopyOutput$RequestCharged": null,
+        "UploadPartOutput$RequestCharged": null
+      }
+    },
+    "RequestPayer": {
+      "base": "Confirms that the requester knows that she or he will be charged for the request. Bucket owners need not specify this parameter in their requests. Documentation on downloading objects from requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html",
+      "refs": {
+        "AbortMultipartUploadRequest$RequestPayer": null,
+        "CompleteMultipartUploadRequest$RequestPayer": null,
+        "CopyObjectRequest$RequestPayer": null,
+        "CreateMultipartUploadRequest$RequestPayer": null,
+        "DeleteObjectRequest$RequestPayer": null,
+        "DeleteObjectsRequest$RequestPayer": null,
+        "GetObjectAclRequest$RequestPayer": null,
+        "GetObjectRequest$RequestPayer": null,
+        "GetObjectTorrentRequest$RequestPayer": null,
+        "HeadObjectRequest$RequestPayer": null,
+        "ListPartsRequest$RequestPayer": null,
+        "PutObjectAclRequest$RequestPayer": null,
+        "PutObjectRequest$RequestPayer": null,
+        "RestoreObjectRequest$RequestPayer": null,
+        "UploadPartCopyRequest$RequestPayer": null,
+        "UploadPartRequest$RequestPayer": null
+      }
+    },
     "RequestPaymentConfiguration": {
       "base": null,
       "refs": {
@@ -1733,6 +1786,11 @@
       "refs": {
         "GetObjectOutput$Restore": "Provides information about object restoration operation and expiration time of the restored object copy.",
         "HeadObjectOutput$Restore": "Provides information about object restoration operation and expiration time of the restored object copy."
+      }
+    },
+    "RestoreObjectOutput": {
+      "base": null,
+      "refs": {
       }
     },
     "RestoreObjectRequest": {
