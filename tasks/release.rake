@@ -44,6 +44,7 @@ task 'release:publish' => [
 # post release tasks
 task 'release:cleanup' => [
   'changelog:next_release',
+  'git:push',
 ]
 
 desc "Public release, `VERSION=x.y.z rake release`"
