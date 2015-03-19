@@ -33,6 +33,8 @@ Unreleased Changes
 
   See the [API reference documentation](http://docs.aws.amazon.com/sdkforruby/api/Aws/SQS/QueuePoller.html) for more examples.
 
+* Feature - Aws::ElasticTranscoder - API update to support Applied Color SpaceConversion.
+
 * Issue - Query Protocol - No longer returning nil for empty maps in
   query responses. `Aws::SQS::Client#get_queue_attributes` will always
   have a hash a `resp.attributes` instead of a possible `nil` value.

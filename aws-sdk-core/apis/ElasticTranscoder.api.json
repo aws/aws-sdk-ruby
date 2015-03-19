@@ -705,7 +705,7 @@
     },
     "AudioCodec":{
       "type":"string",
-      "pattern":"(^AAC$)|(^vorbis$)|(^mp3$)"
+      "pattern":"(^AAC$)|(^vorbis$)|(^mp3$)|(^mp2$)"
     },
     "AudioCodecOptions":{
       "type":"structure",
@@ -1114,7 +1114,8 @@
         "AlbumArt":{"shape":"JobAlbumArt"},
         "Composition":{"shape":"Composition"},
         "Captions":{"shape":"Captions"},
-        "Encryption":{"shape":"Encryption"}
+        "Encryption":{"shape":"Encryption"},
+        "AppliedColorSpaceConversion":{"shape":"String"}
       }
     },
     "JobOutputs":{
@@ -1391,7 +1392,7 @@
     },
     "PresetContainer":{
       "type":"string",
-      "pattern":"(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)|(^fmp4$)"
+      "pattern":"(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^ogg$)|(^fmp4$)|(^mpg$)|(^flv$)|(^gif$)"
     },
     "PresetType":{
       "type":"string",
@@ -1676,7 +1677,7 @@
     },
     "VideoCodec":{
       "type":"string",
-      "pattern":"(^H\\.264$)|(^vp8$)"
+      "pattern":"(^H\\.264$)|(^vp8$)|(^mpeg2$)|(^gif$)"
     },
     "VideoParameters":{
       "type":"structure",
