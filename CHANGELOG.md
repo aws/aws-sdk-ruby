@@ -1,6 +1,29 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added `Aws::S3::PresignedPost`, making it possible
+  to generate a presigned post form for uploading a file from a browser
+  directly to Amazon S3.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new
+
+  # post form for a specific object
+  post = s3.bucket('bucket').object('key').presigned_post(options)
+  post.fields
+  #=> { ... }
+
+  # force a key prefix
+  post = s3.bucket('bucket').presigned_post(key_starts_with: '/uploads/')
+  post.fields
+  #=> { ... }
+  ```
+
+  See the API [PresignedPost documentation](http://docs.aws.amazon.com/sdkforruby/api/Aws/S3/PresignedPost.html)
+  for more information and examples.
+
+  See [related GitHub issue #720](https://github.com/aws/aws-sdk-ruby/issues/720).
+
 2.0.33 (2015-03-26)
 ------------------
 
