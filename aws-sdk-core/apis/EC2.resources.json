@@ -1261,14 +1261,6 @@
         "path": "RouteTables[0]"
       },
       "actions": {
-        "Delete": {
-          "request": {
-            "operation": "DeleteRouteTable",
-            "params": [
-              { "target": "RouteTableId", "source": "identifier", "name": "Id" }
-            ]
-          }
-        },
         "AssociateWithSubnet": {
           "request": {
             "operation": "AssociateRouteTable",
@@ -1304,6 +1296,14 @@
               { "target": "ResourceId", "source": "identifier", "name": "Id" },
               { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
               { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
+            ]
+          }
+        },
+        "Delete": {
+          "request": {
+            "operation": "DeleteRouteTable",
+            "params": [
+              { "target": "RouteTableId", "source": "identifier", "name": "Id" }
             ]
           }
         }
