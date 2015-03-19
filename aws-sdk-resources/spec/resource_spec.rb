@@ -188,6 +188,37 @@ module Aws
 
         end
 
+        describe '#wait_until' do
+
+          it 'does not reload if waiting condition already met' do
+            expect(load_operation).not_to receive(:call)
+            resource.wait_until {true}
+          end
+
+          it 'reloads up to maximum attempts' do
+            expect{
+              expect(load_operation).to receive(:call).exactly(4).times
+              resource.wait_until(max_attempts:5, delay:0) {false}
+            }.to raise_error(Aws::Waiters::Errors::TooManyAttemptsError, /stopped waiting after 5 attempts without success/)
+          end
+
+          it 'reloads until condition met' do
+            proc = double('proc')
+            allow(proc).to receive(:call).and_return(false,false, true)
+            expect(load_operation).to receive(:call).exactly(2).times
+            resource.wait_until(delay:0) {proc.call}
+          end
+
+          it 'returns last reloaded resource if successful' do
+            proc = double('proc')
+            allow(proc).to receive(:call).and_return(false,false, true)
+            expect(load_operation).to receive(:call).exactly(2).times
+            response = resource.wait_until(delay:0) {proc.call}
+            expect(response.data).to be(data2)
+          end
+
+        end
+
       end
 
       describe 'class methods' do
