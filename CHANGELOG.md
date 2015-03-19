@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.31 (2015-03-19)
 ------------------
 
 * Feature - Aws::S3 - Added support for requester pays headers to all supported
