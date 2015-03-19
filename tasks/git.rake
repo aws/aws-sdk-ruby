@@ -18,10 +18,10 @@ task 'git:tag_message' do
   msg = "Tag release v#{$VERSION}"
   msg << "\n\n"
   unless issues.empty?
-    msg << "References: #{issues.uniq.sort.join(', ')}"
+    msg << "References:\n"
+    msg << "  #{issues.uniq.sort.join(', ')}"
     msg << "\n\n"
   end
-  msg << `rake changelog:latest`
   puts msg
 end
 

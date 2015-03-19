@@ -19,7 +19,7 @@ task 'github:release' do
 
   release = gh.create_release(repo, "v#{$VERSION}", {
     name: 'Release v' + $VERSION + ' - ' + tag.tagger.date.strftime('%Y-%m-%d'),
-    body: tag.message.lines.to_a[2..-1].join,
+    body: tag.message.lines.to_a[2..-1].join + `rake changelog:latest`,
     prerelease: $VERSION.match('rc') ? true : false,
   })
 
