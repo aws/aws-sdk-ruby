@@ -41,6 +41,9 @@ Unreleased Changes
   resources and added a missing `#delete` method to `RouteTable`.
   See related [GitHub pull request #737](https://github.com/aws/aws-sdk-ruby/issues/712).
 
+* Issue - Aws::CloudSearchDomain - Resolved an issue with parsing error HTTP responses
+  that have an empty body.
+
 2.0.30 (2015-03-12)
 ------------------
 

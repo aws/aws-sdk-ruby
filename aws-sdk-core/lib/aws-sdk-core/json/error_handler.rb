@@ -1,6 +1,6 @@
 module Aws
   module Json
-    class ErrorHandler < Seahorse::Client::Handler
+    class ErrorHandler < Xml::ErrorHandler
 
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
@@ -12,13 +12,6 @@ module Aws
       end
 
       private
-
-      def error(context)
-        error_code, error_message = extract_error(context)
-        svc = context.client.class.name.split('::')[1]
-        errors_module = Aws.const_get(svc).const_get(:Errors)
-        errors_module.error_class(error_code).new(context, error_message)
-      end
 
       def extract_error(context)
         json = MultiJson.load(context.http_response.body_contents)

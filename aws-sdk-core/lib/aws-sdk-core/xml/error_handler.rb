@@ -38,6 +38,7 @@ module Aws
           403 => 'Forbidden',
           404 => 'NotFound',
           412 => 'PreconditionFailed',
+          413 => 'RequestEntityTooLarge',
         }[status_code] || "Http#{status_code}Error"
       end
 

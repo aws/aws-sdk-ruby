@@ -37,6 +37,18 @@ module Aws
         }.not_to raise_error
       end
 
+      it 'can process empty response body errors' do
+        csd = Client.new(endpoint: 'http://foo.com')
+        csd.handle(step: :send) do |context|
+          context.http_response.signal_headers(413, {})
+          context.http_response.signal_done
+          Seahorse::Client::Response.new(context:context)
+        end
+        expect {
+          csd.search(query:'test')
+        }.to raise_error(Errors::RequestEntityTooLarge)
+      end
+
     end
   end
 end
