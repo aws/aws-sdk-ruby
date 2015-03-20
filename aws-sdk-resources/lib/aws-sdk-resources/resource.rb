@@ -28,15 +28,16 @@ module Aws
       # @option options [Proc] :before_attempt (nil)
       # @option options [Proc] :before_wait (nil)
       def wait_until(options = {}, &block)
+        resource_copy = self.class.new(@identifiers.merge(client:@client, data:@data))
         attempts = 0
         options[:max_attempts] ||= 10
         options[:delay] ||= 10
         options[:poller] = Proc.new do
           attempts += 1
-          if block.call(self)
-            [:success, self]
+          if block.call(resource_copy)
+            [:success, resource_copy]
           else
-            reload unless attempts == options[:max_attempts]
+            resource_copy.reload unless attempts == options[:max_attempts]
             :retry
           end
         end
