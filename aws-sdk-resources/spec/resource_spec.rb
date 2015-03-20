@@ -127,6 +127,7 @@ module Aws
 
         before(:each) do
           allow(load_operation).to receive(:call).
+            with(client: client, resource:resource).
             and_return(*datas)
           resource_class.load_operation = load_operation
         end
