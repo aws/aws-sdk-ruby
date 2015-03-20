@@ -186,59 +186,77 @@ module Aws
           end
 
         end
+      end
 
-        describe '#wait_until' do
+      describe '#wait_until' do
 
-          let(:resource) { resource_class.new(data: data) }
-          let(:proc) { double('proc') }
+        let(:data) { double('data') }
 
-          it 'does not reload if waiting condition already met' do
-            expect(load_operation).not_to receive(:call)
-            resource.wait_until {true}
-          end
+        let(:data2) { double('data-2') }
 
-          it 'does not modify the resource if waiting condition already met' do
-            response = resource.wait_until {true}
-            expect(resource.data).to be(data)
-          end
+        let(:data3) { double('data-3') }
 
-          it 'reloads up to maximum attempts and raises an error' do
-            expect{
-              expect(load_operation).to receive(:call).exactly(4).times
-              resource.wait_until(max_attempts:5, delay:0) {false}
-            }.to raise_error(Aws::Waiters::Errors::TooManyAttemptsError, /stopped waiting after 5 attempts without success/)
-          end
+        let(:resource) { resource_class.new(data:data) }
 
-          it 'reloads until condition met' do
-            allow(proc).to receive(:call).and_return(false,false, true)
-            expect(load_operation).to receive(:call).exactly(2).times
-            resource.wait_until(delay:0, max_attempts:10) {proc.call}
-          end
+        let(:datas) { [data2, data3] }
 
-          it 'returns last reloaded resource if successful' do
-            allow(proc).to receive(:call).and_return(false,false, true)
-            expect(load_operation).to receive(:call).exactly(2).times
-            response = resource.wait_until(delay:0) {proc.call}
-            expect(response.data).to be(data2)
-          end
+        let(:load_operation) { double('load-operation') }
 
-          it 'does not modify the resource if waiting' do
-            allow(proc).to receive(:call).and_return(false,false, true)
-            response = resource.wait_until {true}
-            expect(resource.data).to be(data)
-          end
+        before(:each) do
+          allow(load_operation).to receive(:call).
+                                       and_return(*datas)
+          resource_class.load_operation = load_operation
+        end
 
-          it 'raises a NotImplementedError when load_operation is not defined' do
-            resource_class.load_operation = nil
-            msg = "#load not defined for #{resource_name}"
-            expect {
-              resource_class.new.wait_until {false}
-            }.to raise_error(NotImplementedError, msg)
-          end
+        let(:proc) { double('proc') }
 
+        it 'does not reload if waiting condition already met' do
+          expect(load_operation).not_to receive(:call)
+          resource.wait_until {true}
+        end
+
+        it 'does not modify the resource if waiting condition already met' do
+          response = resource.wait_until {true}
+          expect(resource.data).to be(data)
+        end
+
+        it 'reloads up to maximum attempts and raises an error and does not modify the resource' do
+          expect{
+            expect(load_operation).to receive(:call).exactly(4).times
+            resource.wait_until(max_attempts:5, delay:0) {false}
+          }.to raise_error(Aws::Waiters::Errors::TooManyAttemptsError, /stopped waiting after 5 attempts without success/)
+          expect(resource.data).to be(data)
+        end
+
+        it 'reloads until condition met' do
+          allow(proc).to receive(:call).and_return(false,false, true)
+          expect(load_operation).to receive(:call).exactly(2).times
+          resource.wait_until(delay:0, max_attempts:10) {proc.call}
+        end
+
+        it 'returns last reloaded resource if successful' do
+          allow(proc).to receive(:call).and_return(false,false, true)
+          expect(load_operation).to receive(:call).exactly(2).times
+          response = resource.wait_until(delay:0) {proc.call}
+          expect(response.data).to be(data3)
+        end
+
+        it 'does not modify the resource if waiting if waiting condition not met' do
+          allow(proc).to receive(:call).and_return(false,false, true)
+          response = resource.wait_until(delay:0) {proc.call}
+          expect(resource.data).to be(data)
+        end
+
+        it 'raises a NotImplementedError when load_operation is not defined' do
+          resource_class.load_operation = nil
+          msg = "#load not defined for #{resource_name}"
+          expect {
+            resource_class.new.wait_until {false}
+          }.to raise_error(NotImplementedError, msg)
         end
 
       end
+
 
       describe 'class methods' do
 

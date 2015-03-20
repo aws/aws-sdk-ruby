@@ -28,7 +28,7 @@ module Aws
       # @option options [Proc] :before_attempt (nil)
       # @option options [Proc] :before_wait (nil)
       def wait_until(options = {}, &block)
-        resource_copy = self.class.new(@identifiers.merge(client:@client, data:@data))
+        resource_copy = self.dup
         attempts = 0
         options[:max_attempts] ||= 10
         options[:delay] ||= 10
