@@ -26,6 +26,8 @@ module Aws
       # Waiter polls an API operation until a resource enters a desired
       # state.
       #
+      # @note The waiting operation is performed on a copy. The original resource remains unchanged
+      #
       # ## Basic Usage
       #
       # Waiter will polls until it is succesful, it fails by
