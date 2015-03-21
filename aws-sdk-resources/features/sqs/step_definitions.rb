@@ -18,7 +18,6 @@ end
 Given(/^I send (\d+) messages to the queue$/) do |count|
   count.to_i.times do |n|
     @sqs_client.send_message(queue_url:@queue_url, message_body:"msg-#{n}")
-    puts 'sent'
   end
 end
 
