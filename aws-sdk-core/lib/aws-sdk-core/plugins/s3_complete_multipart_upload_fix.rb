@@ -1,5 +1,3 @@
-require 'multi_xml'
-
 module Aws
   module Plugins
     class S3CompleteMultipartUploadFix < Seahorse::Client::Plugin
