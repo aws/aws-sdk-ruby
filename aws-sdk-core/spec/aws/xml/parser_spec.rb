@@ -16,6 +16,10 @@ module Aws
             next
           end
 
+          before(:each) do
+            Parser.engine = engine
+          end
+
           let(:members) { {} }
 
           let(:definition) {{ 'type' => 'structure', 'members' => members }}
