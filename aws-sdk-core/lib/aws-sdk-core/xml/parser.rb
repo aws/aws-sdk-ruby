@@ -23,7 +23,7 @@ module Aws
       def parse(xml, target = nil)
         xml = '<xml/>' if xml.nil? or xml.empty?
         stack = Stack.new(@shape, target)
-        @engine.new(stack).parse(xml)
+        @engine.new(stack).parse(xml.to_s)
         stack.result
       end
 

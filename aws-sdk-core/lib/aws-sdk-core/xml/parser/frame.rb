@@ -272,7 +272,7 @@ module Aws
           when /^\d+$/ then Time.at(value.to_i)
           else
             begin
-              Time.parse(value)
+              Time.parse(value).utc
             rescue ArgumentError
               raise "unhandled timestamp format `#{value}'"
             end
