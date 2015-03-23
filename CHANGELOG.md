@@ -13,6 +13,8 @@ Unreleased Changes
 
   See [related GitHub issue #771](https://github.com/aws/aws-sdk-ruby/issues/771).
 
+* Feature - Aws::DynamoDB - Added resource class for `Aws::DynamoDB::Table`.
+
 2.0.38 (2015-04-09)
 ------------------
 
