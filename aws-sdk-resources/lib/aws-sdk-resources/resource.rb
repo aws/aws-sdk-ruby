@@ -79,15 +79,15 @@ module Aws
       #
       # @yieldparam [Resource] resource to be used in the waiting condition
       #
-      # @raise [Errors::FailureStateError] Raised when the waiter terminates
+      # @raise [Aws::Waiters::Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition
       #   out of, preventing success.
       #
-      # @raise [Errors::TooManyAttemptsError] Raised when the configured
+      # @raise [Aws::Waiters::Errors::TooManyAttemptsError] Raised when the configured
       #   maximum number of attempts have been made, and the waiter is not
       #   yet successful.
       #
-      # @raise [Errors::UnexpectedError] Raised when an error is encounted
+      # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encounted
       #   while polling for a resource that is not expected.
       #
       # @raise [NotImplementedError] Raised when the resource does not
