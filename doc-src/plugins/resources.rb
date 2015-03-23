@@ -40,17 +40,18 @@ class ResourceDocPlugin
 
   def apply
     Aws.service_added do |_, svc_module, files|
+      if files[:resources]
+        # merges the .docs.json API docs onto the .api.json model
+        Aws::Api::Docstrings.apply(svc_module::Client, files[:docs])
 
-      # merges the .docs.json API docs onto the .api.json model
-      Aws::Api::Docstrings.apply(svc_module::Client, files[:docs])
-
-      namespace = YARD::Registry[svc_module.name]
-      svc_module.constants.each do |const|
-        klass = svc_module.const_get(const)
-        if klass.is_a?(Module) && klass.ancestors.include?(Aws::Resources::Resource)
-          yard_class = document_resource_class(const, namespace, klass)
-          if const == :Resource
-            yard_class.docstring = service_docstring(const, yard_class, klass)
+        namespace = YARD::Registry[svc_module.name]
+        svc_module.constants.each do |const|
+          klass = svc_module.const_get(const)
+          if klass.is_a?(Module) && klass.ancestors.include?(Aws::Resources::Resource)
+            yard_class = document_resource_class(const, namespace, klass)
+            if const == :Resource
+              yard_class.docstring = service_docstring(const, yard_class, klass)
+            end
           end
         end
       end
