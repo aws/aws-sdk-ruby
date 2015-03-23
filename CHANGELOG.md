@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Resources::Resource - Added support for custom waiters
+  with `Aws::Resources::Resource#wait_until`.
+
 * Issue - Query Protocol - No longer returning nil for empty maps in
   query responses. `Aws::SQS::Client#get_queue_attributes` will always
   have a hash a `resp.attributes` instead of a possible `nil` value.
