@@ -1,5 +1,7 @@
 module Aws
   module Xml
+
+    # A SAX-style XML parser that uses a shape context to handle types.
     class Parser
 
       autoload :Stack, 'aws-sdk-core/xml/parser/stack'
@@ -29,7 +31,14 @@ module Aws
 
       class << self
 
-        # @param [Symbol,Class] :engine
+        # @param [Symbol,Class] engine
+        #   Must be one of the following values:
+        #
+        #   * :ox
+        #   * :libxml
+        #   * :nokogiri
+        #   * :rexml
+        #
         def engine= engine
           @engine = Class === engine ? engine : load_engine(engine)
         end
@@ -38,6 +47,9 @@ module Aws
         #   One of:
         #
         #   * {OxEngine}
+        #   * {LibxmlEngine}
+        #   * {NokogiriEngine}
+        #   * {RexmlEngine}
         #
         def engine
           @engine
