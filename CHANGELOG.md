@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.32 (2015-03-24)
 ------------------
 
 * Feature - Aws::EC2 - Updated API reference documentation and add a few resource
