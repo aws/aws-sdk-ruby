@@ -93,9 +93,9 @@ for a complete list of available methods.
 
 ```ruby
 # list buckets in Amazon S3
-s3 = Aws::S3::Client.new
+s3   = Aws::S3::Client.new(credentials: credentials, region: 'us-west-2')
 resp = s3.list_buckets
-resp.buckets.map(&:name)
+resp.data.buckets.map(&:name)
 #=> ["bucket-1", "bucket-2", ...]
 ```
 
