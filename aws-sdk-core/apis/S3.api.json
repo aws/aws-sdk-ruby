@@ -118,6 +118,14 @@
       "input":{"shape":"DeleteBucketPolicyRequest"},
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketDELETEpolicy.html"
     },
+    "DeleteBucketReplication":{
+      "name":"DeleteBucketReplication",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/{Bucket}?replication"
+      },
+      "input":{"shape":"DeleteBucketReplicationRequest"}
+    },
     "DeleteBucketTagging":{
       "name":"DeleteBucketTagging",
       "http":{
@@ -226,6 +234,15 @@
       "input":{"shape":"GetBucketPolicyRequest"},
       "output":{"shape":"GetBucketPolicyOutput"},
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETpolicy.html"
+    },
+    "GetBucketReplication":{
+      "name":"GetBucketReplication",
+      "http":{
+        "method":"GET",
+        "requestUri":"/{Bucket}?replication"
+      },
+      "input":{"shape":"GetBucketReplicationRequest"},
+      "output":{"shape":"GetBucketReplicationOutput"}
     },
     "GetBucketRequestPayment":{
       "name":"GetBucketRequestPayment",
@@ -452,6 +469,14 @@
       "input":{"shape":"PutBucketPolicyRequest"},
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTpolicy.html"
     },
+    "PutBucketReplication":{
+      "name":"PutBucketReplication",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/{Bucket}?replication"
+      },
+      "input":{"shape":"PutBucketReplicationRequest"}
+    },
     "PutBucketRequestPayment":{
       "name":"PutBucketRequestPayment",
       "http":{
@@ -656,7 +681,6 @@
         "ap-southeast-2",
         "ap-northeast-1",
         "sa-east-1",
-        "",
         "cn-north-1",
         "eu-central-1"
       ]
@@ -1366,6 +1390,17 @@
         }
       }
     },
+    "DeleteBucketReplicationRequest":{
+      "type":"structure",
+      "required":["Bucket"],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "location":"uri",
+          "locationName":"Bucket"
+        }
+      }
+    },
     "DeleteBucketRequest":{
       "type":"structure",
       "required":["Bucket"],
@@ -1530,6 +1565,13 @@
       "flattened":true
     },
     "Delimiter":{"type":"string"},
+    "Destination":{
+      "type":"structure",
+      "required":["Bucket"],
+      "members":{
+        "Bucket":{"shape":"BucketName"}
+      }
+    },
     "DisplayName":{"type":"string"},
     "ETag":{"type":"string"},
     "EmailAddress":{"type":"string"},
@@ -1710,6 +1752,24 @@
       "payload":"Policy"
     },
     "GetBucketPolicyRequest":{
+      "type":"structure",
+      "required":["Bucket"],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "location":"uri",
+          "locationName":"Bucket"
+        }
+      }
+    },
+    "GetBucketReplicationOutput":{
+      "type":"structure",
+      "members":{
+        "ReplicationConfiguration":{"shape":"ReplicationConfiguration"}
+      },
+      "payload":"ReplicationConfiguration"
+    },
+    "GetBucketReplicationRequest":{
       "type":"structure",
       "required":["Bucket"],
       "members":{
@@ -1956,6 +2016,11 @@
           "shape":"RequestCharged",
           "location":"header",
           "locationName":"x-amz-request-charged"
+        },
+        "ReplicationStatus":{
+          "shape":"ReplicationStatus",
+          "location":"header",
+          "locationName":"x-amz-replication-status"
         }
       },
       "payload":"Body"
@@ -2259,6 +2324,11 @@
           "shape":"RequestCharged",
           "location":"header",
           "locationName":"x-amz-request-charged"
+        },
+        "ReplicationStatus":{
+          "shape":"ReplicationStatus",
+          "location":"header",
+          "locationName":"x-amz-replication-status"
         }
       }
     },
@@ -3031,6 +3101,31 @@
       },
       "payload":"Policy"
     },
+    "PutBucketReplicationRequest":{
+      "type":"structure",
+      "required":[
+        "Bucket",
+        "ReplicationConfiguration"
+      ],
+      "members":{
+        "Bucket":{
+          "shape":"BucketName",
+          "location":"uri",
+          "locationName":"Bucket"
+        },
+        "ContentMD5":{
+          "shape":"ContentMD5",
+          "location":"header",
+          "locationName":"Content-MD5"
+        },
+        "ReplicationConfiguration":{
+          "shape":"ReplicationConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
+          "locationName":"ReplicationConfiguration"
+        }
+      },
+      "payload":"ReplicationConfiguration"
+    },
     "PutBucketRequestPaymentRequest":{
       "type":"structure",
       "required":[
@@ -3428,6 +3523,55 @@
     },
     "ReplaceKeyPrefixWith":{"type":"string"},
     "ReplaceKeyWith":{"type":"string"},
+    "ReplicationConfiguration":{
+      "type":"structure",
+      "required":[
+        "Role",
+        "Rules"
+      ],
+      "members":{
+        "Role":{"shape":"Role"},
+        "Rules":{
+          "shape":"ReplicationRules",
+          "locationName":"Rule"
+        }
+      }
+    },
+    "ReplicationRule":{
+      "type":"structure",
+      "required":[
+        "Prefix",
+        "Status",
+        "Destination"
+      ],
+      "members":{
+        "ID":{"shape":"ID"},
+        "Prefix":{"shape":"Prefix"},
+        "Status":{"shape":"ReplicationRuleStatus"},
+        "Destination":{"shape":"Destination"}
+      }
+    },
+    "ReplicationRuleStatus":{
+      "type":"string",
+      "enum":[
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "ReplicationRules":{
+      "type":"list",
+      "member":{"shape":"ReplicationRule"},
+      "flattened":true
+    },
+    "ReplicationStatus":{
+      "type":"string",
+      "enum":[
+        "COMPLETE",
+        "PENDING",
+        "FAILED",
+        "REPLICA"
+      ]
+    },
     "RequestCharged":{
       "type":"string",
       "enum":["requester"]
@@ -3502,6 +3646,7 @@
         "Days":{"shape":"Days"}
       }
     },
+    "Role":{"type":"string"},
     "RoutingRule":{
       "type":"structure",
       "required":["Redirect"],

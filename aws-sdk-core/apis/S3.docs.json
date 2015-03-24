@@ -10,6 +10,7 @@
     "DeleteBucketCors": "Deletes the cors configuration information set for the bucket.",
     "DeleteBucketLifecycle": "Deletes the lifecycle configuration from the bucket.",
     "DeleteBucketPolicy": "Deletes the policy from the bucket.",
+    "DeleteBucketReplication": null,
     "DeleteBucketTagging": "Deletes the tags from the bucket.",
     "DeleteBucketWebsite": "This operation removes the website configuration from the bucket.",
     "DeleteObject": "Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.",
@@ -21,6 +22,7 @@
     "GetBucketLogging": "Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.",
     "GetBucketNotification": "Return the notification configuration of a bucket.",
     "GetBucketPolicy": "Returns the policy of a specified bucket.",
+    "GetBucketReplication": null,
     "GetBucketRequestPayment": "Returns the request payment configuration of a bucket.",
     "GetBucketTagging": "Returns the tag set associated with the bucket.",
     "GetBucketVersioning": "Returns the versioning state of a bucket.",
@@ -41,6 +43,7 @@
     "PutBucketLogging": "Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.",
     "PutBucketNotification": "Enables notifications of specified events for a bucket.",
     "PutBucketPolicy": "Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.",
+    "PutBucketReplication": "Creates a new replication configuration (or replaces an existing one, if present).",
     "PutBucketRequestPayment": "Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download. Documentation on requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html",
     "PutBucketTagging": "Sets the tags for a bucket.",
     "PutBucketVersioning": "Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.",
@@ -143,7 +146,7 @@
     "BucketLocationConstraint": {
       "base": null,
       "refs": {
-        "CreateBucketConfiguration$LocationConstraint": "Specifies the region where the bucket will be created.",
+        "CreateBucketConfiguration$LocationConstraint": "Specifies the region where the bucket will be created. If you don't specify a region, the bucket will be created in US Standard.",
         "GetBucketLocationOutput$LocationConstraint": null
       }
     },
@@ -173,11 +176,13 @@
         "DeleteBucketCorsRequest$Bucket": null,
         "DeleteBucketLifecycleRequest$Bucket": null,
         "DeleteBucketPolicyRequest$Bucket": null,
+        "DeleteBucketReplicationRequest$Bucket": null,
         "DeleteBucketRequest$Bucket": null,
         "DeleteBucketTaggingRequest$Bucket": null,
         "DeleteBucketWebsiteRequest$Bucket": null,
         "DeleteObjectRequest$Bucket": null,
         "DeleteObjectsRequest$Bucket": null,
+        "Destination$Bucket": "Amazon resource name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.",
         "GetBucketAclRequest$Bucket": null,
         "GetBucketCorsRequest$Bucket": null,
         "GetBucketLifecycleRequest$Bucket": null,
@@ -185,6 +190,7 @@
         "GetBucketLoggingRequest$Bucket": null,
         "GetBucketNotificationRequest$Bucket": null,
         "GetBucketPolicyRequest$Bucket": null,
+        "GetBucketReplicationRequest$Bucket": null,
         "GetBucketRequestPaymentRequest$Bucket": null,
         "GetBucketTaggingRequest$Bucket": null,
         "GetBucketVersioningRequest$Bucket": null,
@@ -208,6 +214,7 @@
         "PutBucketLoggingRequest$Bucket": null,
         "PutBucketNotificationRequest$Bucket": null,
         "PutBucketPolicyRequest$Bucket": null,
+        "PutBucketReplicationRequest$Bucket": null,
         "PutBucketRequestPaymentRequest$Bucket": null,
         "PutBucketTaggingRequest$Bucket": null,
         "PutBucketVersioningRequest$Bucket": null,
@@ -382,6 +389,7 @@
         "PutBucketLoggingRequest$ContentMD5": null,
         "PutBucketNotificationRequest$ContentMD5": null,
         "PutBucketPolicyRequest$ContentMD5": null,
+        "PutBucketReplicationRequest$ContentMD5": null,
         "PutBucketRequestPaymentRequest$ContentMD5": null,
         "PutBucketTaggingRequest$ContentMD5": null,
         "PutBucketVersioningRequest$ContentMD5": null,
@@ -562,6 +570,11 @@
       "refs": {
       }
     },
+    "DeleteBucketReplicationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DeleteBucketRequest": {
       "base": null,
       "refs": {
@@ -645,6 +658,12 @@
         "ListObjectVersionsRequest$Delimiter": "A delimiter is a character you use to group keys.",
         "ListObjectsOutput$Delimiter": null,
         "ListObjectsRequest$Delimiter": "A delimiter is a character you use to group keys."
+      }
+    },
+    "Destination": {
+      "base": null,
+      "refs": {
+        "ReplicationRule$Destination": null
       }
     },
     "DisplayName": {
@@ -832,6 +851,16 @@
       "refs": {
       }
     },
+    "GetBucketReplicationOutput": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "GetBucketReplicationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
     "GetBucketRequestPaymentOutput": {
       "base": null,
       "refs": {
@@ -1015,6 +1044,7 @@
         "Grantee$ID": "The canonical user ID of the grantee.",
         "Initiator$ID": "If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value.",
         "Owner$ID": null,
+        "ReplicationRule$ID": "Unique identifier for the rule. The value cannot be longer than 255 characters.",
         "Rule$ID": "Unique identifier for the rule. The value cannot be longer than 255 characters."
       }
     },
@@ -1566,6 +1596,7 @@
         "ListObjectVersionsRequest$Prefix": "Limits the response to keys that begin with the specified prefix.",
         "ListObjectsOutput$Prefix": null,
         "ListObjectsRequest$Prefix": "Limits the response to keys that begin with the specified prefix.",
+        "ReplicationRule$Prefix": "Object keyname prefix identifying one or more objects to which the rule applies. Maximum prefix length can be up to 1,024 characters. Overlapping prefixes are not supported.",
         "Rule$Prefix": "Prefix identifying one or more objects to which the rule applies."
       }
     },
@@ -1602,6 +1633,11 @@
       }
     },
     "PutBucketPolicyRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "PutBucketReplicationRequest": {
       "base": null,
       "refs": {
       }
@@ -1695,6 +1731,38 @@
       "base": null,
       "refs": {
         "Redirect$ReplaceKeyWith": "The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided."
+      }
+    },
+    "ReplicationConfiguration": {
+      "base": "Container for replication rules. You can add as many as 1,000 rules. Total replication configuration size can be up to 2 MB.",
+      "refs": {
+        "GetBucketReplicationOutput$ReplicationConfiguration": null,
+        "PutBucketReplicationRequest$ReplicationConfiguration": null
+      }
+    },
+    "ReplicationRule": {
+      "base": null,
+      "refs": {
+        "ReplicationRules$member": null
+      }
+    },
+    "ReplicationRuleStatus": {
+      "base": null,
+      "refs": {
+        "ReplicationRule$Status": "The rule is ignored if status is not Enabled."
+      }
+    },
+    "ReplicationRules": {
+      "base": null,
+      "refs": {
+        "ReplicationConfiguration$Rules": "Container for information about a particular replication rule. Replication configuration must have at least one rule and can contain up to 1,000 rules."
+      }
+    },
+    "ReplicationStatus": {
+      "base": null,
+      "refs": {
+        "GetObjectOutput$ReplicationStatus": null,
+        "HeadObjectOutput$ReplicationStatus": null
       }
     },
     "RequestCharged": {
@@ -1802,6 +1870,12 @@
       "base": null,
       "refs": {
         "RestoreObjectRequest$RestoreRequest": null
+      }
+    },
+    "Role": {
+      "base": null,
+      "refs": {
+        "ReplicationConfiguration$Role": "Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume when replicating the objects."
       }
     },
     "RoutingRule": {
