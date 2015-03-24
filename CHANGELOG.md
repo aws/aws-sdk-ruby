@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated API reference documentation and add a few resource
+  methods.
+
 * Feature - Aws::S3 - Added support for Amazon S3 cross-region bucket replication.
 
 2.0.31 (2015-03-19)

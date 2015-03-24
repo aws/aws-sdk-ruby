@@ -593,6 +593,14 @@
         "path": "Reservations[0].Instances[0]"
       },
       "actions": {
+        "AttachClassicLinkVpc": {
+          "request": {
+            "operation": "AttachClassicLinkVpc",
+            "params": [
+              { "target": "InstanceId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
         "AttachVolume": {
           "request": {
             "operation": "AttachVolume",
@@ -642,6 +650,14 @@
         "DescribeAttribute": {
           "request": {
             "operation": "DescribeInstanceAttribute",
+            "params": [
+              { "target": "InstanceId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
+        "DetachClassicLinkVpc": {
+          "request": {
+            "operation": "DetachClassicLinkVpc",
             "params": [
               { "target": "InstanceId", "source": "identifier", "name": "Id" }
             ]
@@ -1880,6 +1896,14 @@
             ]
           }
         },
+        "AttachClassicLinkInstance": {
+          "request": {
+            "operation": "AttachClassicLinkVpc",
+            "params": [
+              { "target": "VpcId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
         "AttachInternetGateway": {
           "request": {
             "operation": "AttachInternetGateway",
@@ -1979,9 +2003,33 @@
             ]
           }
         },
+        "DetachClassicLinkInstance": {
+          "request": {
+            "operation": "DetachClassicLinkVpc",
+            "params": [
+              { "target": "VpcId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
         "DetachInternetGateway": {
           "request": {
             "operation": "DetachInternetGateway",
+            "params": [
+              { "target": "VpcId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
+        "DisableClassicLink": {
+          "request": {
+            "operation": "DisableVpcClassicLink",
+            "params": [
+              { "target": "VpcId", "source": "identifier", "name": "Id" }
+            ]
+          }
+        },
+        "EnableClassicLink": {
+          "request": {
+            "operation": "EnableVpcClassicLink",
             "params": [
               { "target": "VpcId", "source": "identifier", "name": "Id" }
             ]
