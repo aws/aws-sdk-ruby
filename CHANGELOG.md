@@ -6,6 +6,8 @@ Unreleased Changes
 
 * Feature - Aws::IAM - Add NamedPolicy to GetAccountAuthorizationDetails.
 
+* Feature - Aws::IAM::Resouce - Added support for named policies.
+
 2.0.32 (2015-03-24)
 ------------------
 
