@@ -832,7 +832,7 @@
         "ThumbnailEncryption":{"shape":"Encryption"},
         "Rotate":{"shape":"Rotate"},
         "PresetId":{"shape":"Id"},
-        "SegmentDuration":{"shape":"Float"},
+        "SegmentDuration":{"shape":"FloatString"},
         "Watermarks":{"shape":"JobWatermarks"},
         "AlbumArt":{"shape":"JobAlbumArt"},
         "Composition":{"shape":"Composition"},
@@ -965,6 +965,16 @@
       "min":0,
       "max":255
     },
+    "DetectedProperties":{
+      "type":"structure",
+      "members":{
+        "Width":{"shape":"NullableInteger"},
+        "Height":{"shape":"NullableInteger"},
+        "FrameRate":{"shape":"FloatString"},
+        "FileSize":{"shape":"NullableLong"},
+        "DurationMillis":{"shape":"NullableLong"}
+      }
+    },
     "Digits":{
       "type":"string",
       "pattern":"^\\d{1,5}$"
@@ -999,7 +1009,7 @@
       "type":"string",
       "pattern":"(^true$)|(^false$)"
     },
-    "Float":{
+    "FloatString":{
       "type":"string",
       "pattern":"^\\d{1,5}(\\.\\d{0,5})?$"
     },
@@ -1069,7 +1079,8 @@
         "OutputKeyPrefix":{"shape":"Key"},
         "Playlists":{"shape":"Playlists"},
         "Status":{"shape":"JobStatus"},
-        "UserMetadata":{"shape":"UserMetadata"}
+        "UserMetadata":{"shape":"UserMetadata"},
+        "Timing":{"shape":"Timing"}
       }
     },
     "JobAlbumArt":{
@@ -1092,7 +1103,8 @@
         "AspectRatio":{"shape":"AspectRatio"},
         "Interlaced":{"shape":"Interlaced"},
         "Container":{"shape":"JobContainer"},
-        "Encryption":{"shape":"Encryption"}
+        "Encryption":{"shape":"Encryption"},
+        "DetectedProperties":{"shape":"DetectedProperties"}
       }
     },
     "JobOutput":{
@@ -1104,12 +1116,15 @@
         "ThumbnailEncryption":{"shape":"Encryption"},
         "Rotate":{"shape":"Rotate"},
         "PresetId":{"shape":"Id"},
-        "SegmentDuration":{"shape":"Float"},
+        "SegmentDuration":{"shape":"FloatString"},
         "Status":{"shape":"JobStatus"},
         "StatusDetail":{"shape":"Description"},
         "Duration":{"shape":"NullableLong"},
         "Width":{"shape":"NullableInteger"},
         "Height":{"shape":"NullableInteger"},
+        "FrameRate":{"shape":"FloatString"},
+        "FileSize":{"shape":"NullableLong"},
+        "DurationMillis":{"shape":"NullableLong"},
         "Watermarks":{"shape":"JobWatermarks"},
         "AlbumArt":{"shape":"JobAlbumArt"},
         "Composition":{"shape":"Composition"},
@@ -1586,6 +1601,14 @@
       "members":{
         "StartTime":{"shape":"Time"},
         "Duration":{"shape":"Time"}
+      }
+    },
+    "Timing":{
+      "type":"structure",
+      "members":{
+        "SubmitTimeMillis":{"shape":"NullableLong"},
+        "StartTimeMillis":{"shape":"NullableLong"},
+        "FinishTimeMillis":{"shape":"NullableLong"}
       }
     },
     "UpdatePipelineNotificationsRequest":{
