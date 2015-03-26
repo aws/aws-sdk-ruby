@@ -38,7 +38,7 @@ module Seahorse
       # @return [Operation]
       def operation(name)
         name = name.to_sym
-        if definition = @operation_defs[name.to_sym]
+        if definition = @operation_defs[name]
           @operations[name] ||= Operation.new(definition, shape_map: @shape_map)
         else
           raise ArgumentError, "unknown operation :#{name}"
