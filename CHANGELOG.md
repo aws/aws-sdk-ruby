@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.33 (2015-03-26)
 ------------------
 
 * Feature - Aws::ElasticTranscoder - Added support for job timing and input/output
