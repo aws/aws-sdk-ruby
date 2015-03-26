@@ -8,6 +8,9 @@ Unreleased Changes
 
 * Feature - Aws::IAM::Resouce - Added support for named policies.
 
+* Feature - Aws::OpsWorks - Allow for customisation of BlockDeviceMapping on EC2
+  instances launched through OpsWorks.
+
 2.0.32 (2015-03-24)
 ------------------
 

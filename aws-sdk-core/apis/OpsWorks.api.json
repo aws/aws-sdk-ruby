@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2013-02-18",
     "endpointPrefix":"opsworks",
@@ -1294,6 +1295,19 @@
         "timer"
       ]
     },
+    "BlockDeviceMapping":{
+      "type":"structure",
+      "members":{
+        "DeviceName":{"shape":"String"},
+        "NoDevice":{"shape":"String"},
+        "VirtualName":{"shape":"String"},
+        "Ebs":{"shape":"EbsBlockDevice"}
+      }
+    },
+    "BlockDeviceMappings":{
+      "type":"list",
+      "member":{"shape":"BlockDeviceMapping"}
+    },
     "Boolean":{
       "type":"boolean",
       "box":true
@@ -1430,6 +1444,7 @@
         "SubnetId":{"shape":"String"},
         "Architecture":{"shape":"Architecture"},
         "RootDeviceType":{"shape":"RootDeviceType"},
+        "BlockDeviceMappings":{"shape":"BlockDeviceMappings"},
         "InstallUpdatesOnBoot":{"shape":"Boolean"},
         "EbsOptimized":{"shape":"Boolean"}
       }
@@ -1926,6 +1941,16 @@
       "type":"double",
       "box":true
     },
+    "EbsBlockDevice":{
+      "type":"structure",
+      "members":{
+        "SnapshotId":{"shape":"String"},
+        "Iops":{"shape":"Integer"},
+        "VolumeSize":{"shape":"Integer"},
+        "VolumeType":{"shape":"VolumeType"},
+        "DeleteOnTermination":{"shape":"Boolean"}
+      }
+    },
     "ElasticIp":{
       "type":"structure",
       "members":{
@@ -2020,8 +2045,10 @@
         "Architecture":{"shape":"Architecture"},
         "RootDeviceType":{"shape":"RootDeviceType"},
         "RootDeviceVolumeId":{"shape":"String"},
+        "BlockDeviceMappings":{"shape":"BlockDeviceMappings"},
         "InstallUpdatesOnBoot":{"shape":"Boolean"},
         "EbsOptimized":{"shape":"Boolean"},
+        "ReportedAgentVersion":{"shape":"String"},
         "ReportedOs":{"shape":"ReportedOs"},
         "InfrastructureClass":{"shape":"String"},
         "RegisteredBy":{"shape":"String"}
@@ -2728,6 +2755,14 @@
     "VolumeConfigurations":{
       "type":"list",
       "member":{"shape":"VolumeConfiguration"}
+    },
+    "VolumeType":{
+      "type":"string",
+      "enum":[
+        "gp2",
+        "io1",
+        "standard"
+      ]
     },
     "Volumes":{
       "type":"list",
