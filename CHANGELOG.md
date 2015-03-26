@@ -1,7 +1,10 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::ElasticTranscoder - Added support for job timing and input/output metadata.
+* Feature - Aws::ElasticTranscoder - Added support for job timing and input/output
+  metadata.
+
+* Feature - Aws::IAM - Add NamedPolicy to GetAccountAuthorizationDetails.
 
 2.0.32 (2015-03-24)
 ------------------

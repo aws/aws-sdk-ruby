@@ -1,4 +1,5 @@
 {
+  "version":"2.0",
   "metadata":{
     "apiVersion":"2010-05-08",
     "endpointPrefix":"iam",
@@ -4656,7 +4657,9 @@
       "enum":[
         "User",
         "Role",
-        "Group"
+        "Group",
+        "LocalManagedPolicy",
+        "AWSManagedPolicy"
       ]
     },
     "GenerateCredentialReportResponse":{
@@ -4680,6 +4683,7 @@
         "UserDetailList":{"shape":"userDetailListType"},
         "GroupDetailList":{"shape":"groupDetailListType"},
         "RoleDetailList":{"shape":"roleDetailListType"},
+        "Policies":{"shape":"ManagedPolicyDetailListType"},
         "IsTruncated":{"shape":"booleanType"},
         "Marker":{"shape":"markerType"}
       }
@@ -4954,7 +4958,8 @@
         "GroupId":{"shape":"idType"},
         "Arn":{"shape":"arnType"},
         "CreateDate":{"shape":"dateType"},
-        "GroupPolicyList":{"shape":"policyDetailListType"}
+        "GroupPolicyList":{"shape":"policyDetailListType"},
+        "AttachedManagedPolicies":{"shape":"attachedPoliciesListType"}
       }
     },
     "InstanceProfile":{
@@ -5488,6 +5493,26 @@
       },
       "exception":true
     },
+    "ManagedPolicyDetail":{
+      "type":"structure",
+      "members":{
+        "PolicyName":{"shape":"policyNameType"},
+        "PolicyId":{"shape":"idType"},
+        "Arn":{"shape":"arnType"},
+        "Path":{"shape":"policyPathType"},
+        "DefaultVersionId":{"shape":"policyVersionIdType"},
+        "AttachmentCount":{"shape":"attachmentCountType"},
+        "IsAttachable":{"shape":"booleanType"},
+        "Description":{"shape":"policyDescriptionType"},
+        "CreateDate":{"shape":"dateType"},
+        "UpdateDate":{"shape":"dateType"},
+        "PolicyVersionList":{"shape":"policyDocumentVersionListType"}
+      }
+    },
+    "ManagedPolicyDetailListType":{
+      "type":"list",
+      "member":{"shape":"ManagedPolicyDetail"}
+    },
     "NoSuchEntityException":{
       "type":"structure",
       "members":{
@@ -5732,7 +5757,8 @@
         "CreateDate":{"shape":"dateType"},
         "AssumeRolePolicyDocument":{"shape":"policyDocumentType"},
         "InstanceProfileList":{"shape":"instanceProfileListType"},
-        "RolePolicyList":{"shape":"policyDetailListType"}
+        "RolePolicyList":{"shape":"policyDetailListType"},
+        "AttachedManagedPolicies":{"shape":"attachedPoliciesListType"}
       }
     },
     "SAMLMetadataDocumentType":{
@@ -6001,7 +6027,8 @@
         "Arn":{"shape":"arnType"},
         "CreateDate":{"shape":"dateType"},
         "UserPolicyList":{"shape":"policyDetailListType"},
-        "GroupList":{"shape":"groupNameListType"}
+        "GroupList":{"shape":"groupNameListType"},
+        "AttachedManagedPolicies":{"shape":"attachedPoliciesListType"}
       }
     },
     "VirtualMFADevice":{

@@ -1,4 +1,5 @@
 {
+  "version": "2.0",
   "operations": {
     "AddClientIDToOpenIDConnectProvider": "<p>Adds a new client ID (also known as audience) to the list of client IDs already registered for the specified IAM OpenID Connect provider.</p> <p>This action is idempotent; it does not fail or return an error if you add an existing client ID to the provider.</p>",
     "AddRoleToInstanceProfile": "<p>Adds the specified role to the specified instance profile. For more information about roles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html\">Working with Roles</a>. For more information about instance profiles, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html\">About Instance Profiles</a>. </p>",
@@ -43,7 +44,7 @@
     "DetachUserPolicy": "<p>Removes the specified managed policy from the specified user. </p> <p>A user can also have inline policies embedded with it. To delete an inline policy, use the <a>DeleteUserPolicy</a> API. For information about policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>",
     "EnableMFADevice": "<p> Enables the specified MFA device and associates it with the specified user name. When enabled, the MFA device is required for every subsequent login by the user name associated with the device. </p>",
     "GenerateCredentialReport": "<p> Generates a credential report for the AWS account. For more information about the credential report, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>Using IAM</i> guide. </p>",
-    "GetAccountAuthorizationDetails": "<p>Retrieves information about all IAM users, groups, and roles in your account, including their relationships to one another and their policies. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and their policies) in your account.</p> <p>You can optionally filter the results using the <code>Filter</code> parameter. You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>",
+    "GetAccountAuthorizationDetails": "<p>Retrieves information about all IAM users, groups, and roles in your account, including their relationships to one another and their policies. Use this API to obtain a snapshot of the configuration of IAM permissions (users, groups, roles, and policies) in your account.</p> <p>You can optionally filter the results using the <code>Filter</code> parameter. You can paginate the results using the <code>MaxItems</code> and <code>Marker</code> parameters.</p>",
     "GetAccountPasswordPolicy": "<p> Retrieves the password policy for the AWS account. For more information about using a password policy, go to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html\">Managing an IAM Password Policy</a>. </p>",
     "GetAccountSummary": "<p>Retrieves information about IAM entity usage and IAM quotas in the AWS account.</p> <p> For information about limitations on IAM entities, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html\">Limitations on IAM Entities</a> in the <i>Using IAM</i> guide. </p>",
     "GetCredentialReport": "<p> Retrieves a credential report for the AWS account. For more information about the credential report, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/credential-reports.html\">Getting Credential Reports</a> in the <i>Using IAM</i> guide. </p>",
@@ -149,7 +150,7 @@
       }
     },
     "AttachedPolicy": {
-      "base": "<p>Contains information about an attached policy.</p> <p>An attached policy is a managed policy that has been attached to a user, group, or role. This data type is used as a response element in the <a>ListAttachedGroupPolicies</a>, <a>ListAttachedRolePolicies</a>, and <a>ListAttachedUserPolicies</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>",
+      "base": "<p>Contains information about an attached policy.</p> <p>An attached policy is a managed policy that has been attached to a user, group, or role. This data type is used as a response element in the <a>ListAttachedGroupPolicies</a>, <a>ListAttachedRolePolicies</a>, <a>ListAttachedUserPolicies</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>",
       "refs": {
         "attachedPoliciesListType$member": null
       }
@@ -898,6 +899,18 @@
       "refs": {
       }
     },
+    "ManagedPolicyDetail": {
+      "base": "<p>Contains information about a managed policy, including the policy's ARN, versions, and the number of principal entities (users, groups, and roles) that the policy is attached to.</p> <p>This data type is used as a response element in the <a>GetAccountAuthorizationDetails</a> action.</p> <p>For more information about managed policies, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>",
+      "refs": {
+        "ManagedPolicyDetailListType$member": null
+      }
+    },
+    "ManagedPolicyDetailListType": {
+      "base": null,
+      "refs": {
+        "GetAccountAuthorizationDetailsResponse$Policies": "<p>A list containing information about managed policies.</p>"
+      }
+    },
     "NoSuchEntityException": {
       "base": "<p> The request was rejected because it referenced an entity that does not exist. The error message describes the entity. </p>",
       "refs": {
@@ -984,7 +997,7 @@
       }
     },
     "PolicyVersion": {
-      "base": "<p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, and <a>ListPolicyVersions</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>",
+      "base": "<p>Contains information about a version of a managed policy.</p> <p>This data type is used as a response element in the <a>CreatePolicyVersion</a>, <a>GetPolicyVersion</a>, <a>ListPolicyVersions</a>, and <a>GetAccountAuthorizationDetails</a> actions. </p> <p>For more information about managed policies, refer to <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed Policies and Inline Policies</a> in the <i>Using IAM</i> guide. </p>",
       "refs": {
         "CreatePolicyVersionResponse$PolicyVersion": "<p>Information about the policy version.</p>",
         "GetPolicyVersionResponse$PolicyVersion": "<p>Information about the policy version.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>",
@@ -1280,6 +1293,7 @@
         "InstanceProfile$Arn": "<p> The Amazon Resource Name (ARN) specifying the instance profile. For more information about ARNs and how to use them in policies, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide. </p>",
         "ListEntitiesForPolicyRequest$PolicyArn": null,
         "ListPolicyVersionsRequest$PolicyArn": null,
+        "ManagedPolicyDetail$Arn": null,
         "OpenIDConnectProviderListEntry$Arn": null,
         "Policy$Arn": null,
         "RemoveClientIDFromOpenIDConnectProviderRequest$OpenIDConnectProviderArn": "<p>The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC) provider to remove the client ID from. You can get a list of OIDC provider ARNs by using the <a>ListOpenIDConnectProviders</a> action.</p>",
@@ -1304,14 +1318,18 @@
     "attachedPoliciesListType": {
       "base": null,
       "refs": {
+        "GroupDetail$AttachedManagedPolicies": "<p>A list of the managed policies attached to the group.</p>",
         "ListAttachedGroupPoliciesResponse$AttachedPolicies": "<p>A list of the attached policies.</p>",
         "ListAttachedRolePoliciesResponse$AttachedPolicies": "<p>A list of the attached policies.</p>",
-        "ListAttachedUserPoliciesResponse$AttachedPolicies": "<p>A list of the attached policies.</p>"
+        "ListAttachedUserPoliciesResponse$AttachedPolicies": "<p>A list of the attached policies.</p>",
+        "RoleDetail$AttachedManagedPolicies": "<p>A list of managed policies attached to the role. These policies are the role's access (permissions) policies.</p>",
+        "UserDetail$AttachedManagedPolicies": "<p>A list of the managed policies attached to the user.</p>"
       }
     },
     "attachmentCountType": {
       "base": null,
       "refs": {
+        "ManagedPolicyDetail$AttachmentCount": "<p>The number of principal entities (users, groups, and roles) that the policy is attached to.</p>",
         "Policy$AttachmentCount": "<p>The number of entities (users, groups, and roles) that the policy is attached to.</p>"
       }
     },
@@ -1362,6 +1380,7 @@
         "ListUsersResponse$IsTruncated": "<p> A flag that indicates whether there are more user names to list. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more users in the list. </p>",
         "ListVirtualMFADevicesResponse$IsTruncated": "<p> A flag that indicates whether there are more items to list. If your results were truncated, you can make a subsequent pagination request using the <code>Marker</code> request parameter to retrieve more items the list. </p>",
         "LoginProfile$PasswordResetRequired": "<p>Specifies whether the user is required to set a new password on next sign-in.</p>",
+        "ManagedPolicyDetail$IsAttachable": "<p>Specifies whether the policy can be attached to an IAM user, group, or role. </p>",
         "PasswordPolicy$RequireSymbols": "<p>Specifies whether to require symbols for IAM user passwords.</p>",
         "PasswordPolicy$RequireNumbers": "<p>Specifies whether to require numbers for IAM user passwords.</p>",
         "PasswordPolicy$RequireUppercaseCharacters": "<p>Specifies whether to require uppercase characters for IAM user passwords.</p>",
@@ -1454,6 +1473,8 @@
         "InstanceProfile$CreateDate": "<p>The date when the instance profile was created.</p>",
         "LoginProfile$CreateDate": "<p>The date when the password for the user was created.</p>",
         "MFADevice$EnableDate": "<p>The date when the MFA device was enabled for the user.</p>",
+        "ManagedPolicyDetail$CreateDate": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy was created.</p>",
+        "ManagedPolicyDetail$UpdateDate": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy was last updated.</p> <p>When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created. </p>",
         "Policy$CreateDate": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy was created.</p>",
         "Policy$UpdateDate": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy was last updated.</p> <p>When a policy has only one version, this field contains the date and time when the policy was created. When a policy has more than one version, this field contains the date and time when the most recent policy version was created. </p>",
         "PolicyVersion$CreateDate": "<p>The date and time, in <a href=\"http://www.iso.org/iso/iso8601\">ISO 8601 date-time format</a>, when the policy version was created.</p>",
@@ -1491,7 +1512,7 @@
     "entityListType": {
       "base": null,
       "refs": {
-        "GetAccountAuthorizationDetailsRequest$Filter": "<p>A list of entity types (user, group, or role) for filtering the results.</p>"
+        "GetAccountAuthorizationDetailsRequest$Filter": "<p>A list of entity types (user, group, role, local managed policy, or AWS managed policy) for filtering the results.</p>"
       }
     },
     "entityTemporarilyUnmodifiableMessage": {
@@ -1577,6 +1598,7 @@
         "Group$GroupId": "<p> The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide. </p>",
         "GroupDetail$GroupId": "<p>The stable and unique string identifying the group. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>",
         "InstanceProfile$InstanceProfileId": "<p> The stable and unique string identifying the instance profile. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide. </p>",
+        "ManagedPolicyDetail$PolicyId": "<p>The stable and unique string identifying the policy. </p> <p>For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>",
         "Policy$PolicyId": "<p>The stable and unique string identifying the policy. </p> <p>For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>",
         "Role$RoleId": "<p> The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide. </p>",
         "RoleDetail$RoleId": "<p>The stable and unique string identifying the role. For more information about IDs, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>",
@@ -1816,15 +1838,16 @@
       "base": null,
       "refs": {
         "CreatePolicyRequest$Description": "<p>A friendly description of the policy. </p> <p>Typically used to store information about the permissions defined in the policy. For example, \"Grants access to production DynamoDB tables.\" </p> <p>The policy description is immutable. After a value is assigned, it cannot be changed. </p>",
+        "ManagedPolicyDetail$Description": "<p>A friendly description of the policy.</p>",
         "Policy$Description": "<p>A friendly description of the policy.</p> <p>This element is included in the response to the <a>GetPolicy</a> operation. It is not included in the response to the <a>ListPolicies</a> operation. </p>"
       }
     },
     "policyDetailListType": {
       "base": null,
       "refs": {
-        "GroupDetail$GroupPolicyList": "<p>A list of the group's policies.</p>",
-        "RoleDetail$RolePolicyList": "<p>A list of the role's access (permissions) policies. </p>",
-        "UserDetail$UserPolicyList": "<p>A list of the user's policies.</p>"
+        "GroupDetail$GroupPolicyList": "<p>A list of the inline policies embedded in the group.</p>",
+        "RoleDetail$RolePolicyList": "<p>A list of inline policies embedded in the role. These policies are the role's access (permissions) policies.</p>",
+        "UserDetail$UserPolicyList": "<p>A list of the inline policies embedded in the user.</p>"
       }
     },
     "policyDocumentType": {
@@ -1837,7 +1860,7 @@
         "GetRolePolicyResponse$PolicyDocument": "<p>The policy document.</p>",
         "GetUserPolicyResponse$PolicyDocument": "<p>The policy document.</p>",
         "PolicyDetail$PolicyDocument": "<p>The policy document.</p> <p>The returned policy is URL-encoded according to <a href=\"http://www.faqs.org/rfcs/rfc3986.html\">RFC 3986</a>. </p>",
-        "PolicyVersion$Document": "<p>The policy document.</p> <p>The policy document is returned in the response to the <a>GetPolicyVersion</a> operation. It is not included in the response to the <a>ListPolicyVersions</a> operation. </p>",
+        "PolicyVersion$Document": "<p>The policy document.</p> <p>The policy document is returned in the response to the <a>GetPolicyVersion</a> operation. It is not included in the response to the <a>ListPolicyVersions</a> or <a>GetAccountAuthorizationDetails</a> operations. </p>",
         "PutGroupPolicyRequest$PolicyDocument": "<p>The policy document.</p>",
         "PutRolePolicyRequest$PolicyDocument": "<p>The policy document.</p>",
         "PutUserPolicyRequest$PolicyDocument": "<p>The policy document.</p>",
@@ -1849,7 +1872,8 @@
     "policyDocumentVersionListType": {
       "base": null,
       "refs": {
-        "ListPolicyVersionsResponse$Versions": "<p>A list of policy versions.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
+        "ListPolicyVersionsResponse$Versions": "<p>A list of policy versions.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>",
+        "ManagedPolicyDetail$PolicyVersionList": "<p>A list containing information about the versions of the policy.</p>"
       }
     },
     "policyListType": {
@@ -1880,6 +1904,7 @@
         "GetRolePolicyResponse$PolicyName": "<p>The name of the policy.</p>",
         "GetUserPolicyRequest$PolicyName": "<p>The name of the policy document to get.</p>",
         "GetUserPolicyResponse$PolicyName": "<p>The name of the policy.</p>",
+        "ManagedPolicyDetail$PolicyName": "<p>The friendly name (not ARN) identifying the policy.</p>",
         "Policy$PolicyName": "<p>The friendly name (not ARN) identifying the policy.</p>",
         "PolicyDetail$PolicyName": "<p>The name of the policy.</p>",
         "PutGroupPolicyRequest$PolicyName": "<p>The name of the policy document.</p>",
@@ -1896,6 +1921,7 @@
         "ListAttachedRolePoliciesRequest$PathPrefix": "<p>The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies.</p>",
         "ListAttachedUserPoliciesRequest$PathPrefix": "<p>The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies.</p>",
         "ListPoliciesRequest$PathPrefix": "<p>The path prefix for filtering the results. This parameter is optional. If it is not included, it defaults to a slash (/), listing all policies.</p>",
+        "ManagedPolicyDetail$Path": "<p>The path to the policy.</p> <p>For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>",
         "Policy$Path": "<p>The path to the policy.</p> <p>For more information about paths, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html\">IAM Identifiers</a> in the <i>Using IAM</i> guide.</p>"
       }
     },
@@ -1910,6 +1936,7 @@
       "refs": {
         "DeletePolicyVersionRequest$VersionId": "<p>The policy version to delete.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>",
         "GetPolicyVersionRequest$VersionId": "<p>Identifies the policy version to retrieve.</p>",
+        "ManagedPolicyDetail$DefaultVersionId": "<p>The identifier for the version of the policy that is set as the default (operative) version. </p> <p>For more information about policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>",
         "Policy$DefaultVersionId": "<p>The identifier for the version of the policy that is set as the default version. </p>",
         "PolicyVersion$VersionId": "<p>The identifier for the policy version.</p> <p>Policy version identifiers always begin with <code>v</code> (always lowercase). When a policy is created, the first policy version is <code>v1</code>. </p>",
         "SetDefaultPolicyVersionRequest$VersionId": "<p>The version of the policy to set as the default (operative) version.</p> <p>For more information about managed policy versions, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html\">Versioning for Managed Policies</a> in the <i>Using IAM</i> guide. </p>"
