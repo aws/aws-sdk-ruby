@@ -5,29 +5,20 @@ module Aws
     describe Object do
       describe '#presigned_url' do
 
-        let(:client) {
-          S3::Client.new(
-            region: 'us-west-2',
-            access_key_id:'akid',
-            secret_access_key: 'secret',
-          )
-        }
+        # from http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+        it 'generates a valid presigned url' do
+          obj = Object.new({
+            bucket_name: 'examplebucket',
+            key: 'test.txt',
+            access_key_id: 'AKIAIOSFODNN7EXAMPLE',
+            secret_access_key: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+            region: 'us-east-1',
+          })
 
-        let(:object) { Object.new('bucket', 'key', client: client) }
-
-        it 'returns a presigned url for the object' do
-          url = object.presigned_url(:get)
-          expect(url).to match(/^https:\/\/bucket\.s3-us-west-2\.amazonaws\.com\/key\?/)
-        end
-
-        it 'defaults to a 15 minute expiration' do
-          url = object.presigned_url(:get)
-          expect(url).to match(/x-amz-expires=900/i)
-        end
-
-        it 'passes through client request params' do
-          url = object.presigned_url(:put, acl: 'public-read')
-          expect(url).to match(/x-amz-acl=public-read/i)
+          now = Time.parse('20130524T000000Z')
+          allow(Time).to receive(:now).and_return(now)
+          url = obj.presigned_url(:get, expires_in: 86400)
+          expect(url).to eq('https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20130524%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=aeeed9bbccd4d02ee5c0109b86d86835f995330da4c265957d157751f604d404')
         end
 
       end

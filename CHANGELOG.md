@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Presigned URLs - Resolved an issue where `x-amz-` headers were not
+  being signed as part of a pre-signed URL.
+
 2.0.33 (2015-03-26)
 ------------------
 

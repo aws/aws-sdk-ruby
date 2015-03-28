@@ -51,25 +51,17 @@ module Aws
         now = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
         body_digest = options[:body_digest] || hexdigest(request.body)
 
-        params = Query::ParamList.new
+        request.headers['Host'] = request.endpoint.host
+        request.headers.delete('User-Agent')
 
-        request.headers['Host'] ||= request.endpoint.host
-        request.headers.each do |header_name, header_value|
-          if header_name.match(/^x-amz/)
-            params.set(header_name, header_value)
-          end
-          unless %w(host content-type content-md5).include?(header_name)
-            request.headers.delete(header_name)
-          end
-        end
-
+        params = Aws::Query::ParamList.new
         params.set("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
+        params.set("X-Amz-Credential", credential(now))
         params.set("X-Amz-Date", now)
-        params.set("X-Amz-SignedHeaders", signed_headers(request))
         params.set("X-Amz-Expires", options[:expires_in].to_s)
+        params.set("X-Amz-SignedHeaders", signed_headers(request))
         params.set('X-Amz-Security-Token', credentials.session_token) if
           credentials.session_token
-        params.set("X-Amz-Credential", credential(now))
 
         endpoint = request.endpoint
         if endpoint.query

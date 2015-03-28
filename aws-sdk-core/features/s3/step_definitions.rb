@@ -206,7 +206,7 @@ end
 When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
-  req = Net::HTTP::Put.new(uri)
+  req = Net::HTTP::Put.new(uri, 'x-amz-acl' => 'public-read')
   req.body = body
   @resp = http.request(req)
   expect(@resp.code).to eq('200')
@@ -240,7 +240,7 @@ end
 When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
-  req = Net::HTTP::Put.new(uri, 'content-type' => content_type)
+  req = Net::HTTP::Put.new(uri, 'x-amz-acl' => 'public-read', 'content-type' => content_type)
   req.body = 'data'
   @resp = http.request(req)
 end
