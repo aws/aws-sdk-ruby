@@ -949,6 +949,54 @@ module Aws
             end
 
           end
+
+          describe '#exists?' do
+
+            it 'uses the client waiter to poll for state change' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'waiters' => {
+                    'Exists' => {
+                      'waiterName' => 'ThingExists',
+                      'params' => [
+                        { 'target' => 'ThingName', 'source' => 'identifier', 'name' => 'Name' }
+                      ]
+                    }
+                  }
+                },
+                'OtherThing' => {
+                  'identifiers' => []
+                }
+              }
+
+              expect(client).to receive(:wait_until).
+                with(:thing_exists, { thing_name: 'thing1'}).
+                and_return(double('successful-response'))
+
+              expect(client).to receive(:wait_until).
+                with(:thing_exists, { thing_name: 'thing2'}).
+                and_raise(Waiters::Errors::WaiterFailed.new('oops'))
+
+              expect(client).to receive(:wait_until).
+                with(:thing_exists, { thing_name: 'thing3'}).
+                and_raise(Waiters::Errors::UnexpectedError.new(RuntimeError.new('oops')))
+
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name')
+
+              expect(namespace::Thing.new('thing1').exists?).to be(true)
+              expect(namespace::Thing.new('thing2').exists?).to be(false)
+              expect {
+                namespace::Thing.new('thing3').exists?
+              }.to raise_error(RuntimeError, 'oops')
+              expect {
+                namespace::OtherThing.new.exists?
+              }.to raise_error(NotImplementedError)
+            end
+
+          end
         end
       end
     end

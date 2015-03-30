@@ -838,6 +838,13 @@
         }
       },
       "waiters": {
+        "Exists": {
+          "waiterName": "InstanceExists",
+          "params": [
+            { "target": "InstanceIds[]", "source": "identifier", "name": "Id" }
+          ],
+          "path": "Reservations[0].Instances[0]"
+        },
         "Running": {
           "waiterName": "InstanceRunning",
           "params": [
