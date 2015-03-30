@@ -3,4 +3,5 @@ Aws.add_service(:OpsWorks, {
   docs: File.join(Aws::API_DIR, 'OpsWorks.docs.json'),
   paginators: File.join(Aws::API_DIR, 'OpsWorks.paginators.json'),
   resources: File.join(Aws::API_DIR, 'OpsWorks.resources.json'),
+  waiters: File.join(Aws::API_DIR, 'OpsWorks.waiters.json'),
 })
