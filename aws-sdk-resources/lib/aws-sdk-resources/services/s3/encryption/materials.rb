@@ -5,21 +5,12 @@ module Aws
     module Encryption
       class Materials
 
-        # @option options [required, OpenSSL::PKey::RSA, String] :encryption_key
+        # @option options [required, OpenSSL::PKey::RSA, String] :key
         #   The master key to use for encrypting/decrypting all objects.
         #
-        # @option options [String<JSON>] :materials_description ('{}')
+        # @option options [String<JSON>] :description ('{}')
         #   The encryption materials description. This is must be
         #   a JSON document string.
-        #
-        # @option options [Symbol] :materials_location (:metadata) Where to
-        #   store the envelope encryption keys. This must be one of
-        #   the following values:
-        #
-        #   * `:metadata`
-        #   * `:instruction_file`
-        #
-        # @option options [String] :instruction_file_suffix ('.instruction')
         #
         def initialize(options = {})
           @key = validate_key(options[:key])
