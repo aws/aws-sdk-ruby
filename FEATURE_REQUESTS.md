@@ -56,7 +56,7 @@ There are currently no waiters for `Aws::ElasticBeanstalk::Client`. Particular u
 
 See [related GitHub issue aws/aws-sdk-core-ruby#216](https://github.com/aws/aws-sdk-core-ruby/issues/216).
 
-### Aws::ElasticBeanstalk::Client Waiters
+### Aws::ECS::Client Waiters
 
 There are currently no waiters for `Aws::ECS::Client`.
 
