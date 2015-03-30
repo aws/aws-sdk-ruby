@@ -10,8 +10,7 @@ sudo: false
 
 env:
   - PURE_RUBY=1
-  - NOKOGIRI=1
-  - OX=1 OJ=1
+  - KITCHEN_SINK=1
 
 script: bundle exec rake
 
@@ -20,7 +19,7 @@ bundler_args: --without docs release repl
 matrix:
   exclude:
     - rvm: jruby
-      env: OX=1 OJ=1
+      env: KITCHEN_SINK=1
 
 notifications:
   webhooks:

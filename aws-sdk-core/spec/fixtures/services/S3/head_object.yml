@@ -18,8 +18,8 @@ request:
     Content-Length: 0
     If-Match: match
     If-None-Match: none-match
-    If-Modified-Since: Fri, 13 Sep 2013 14:58:41 -0000
-    If-Unmodified-Since: Fri, 13 Sep 2013 14:58:41 -0000
+    If-Modified-Since: Fri, 13 Sep 2013 14:58:41 GMT
+    If-Unmodified-Since: Fri, 13 Sep 2013 14:58:41 GMT
     Range: range
   body: ''
 response:
@@ -39,7 +39,7 @@ response:
 data:
   :delete_marker: false
   :accept_ranges: accept-ranges
-  :expiration: 2013-09-13 14:58:41 Z
+  :expiration: "Fri, 13 Sep 2013 14:58:41 -0000"
   :last_modified: 2013-09-13 14:58:41 Z
   :content_length: 100
   :etag: etag

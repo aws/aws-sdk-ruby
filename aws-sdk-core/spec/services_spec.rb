@@ -12,7 +12,7 @@ module Aws
 
       def self.load(svc_name, fixture_name)
         path = File.expand_path(File.join(File.dirname(__FILE__),
-          '..', 'fixtures', 'operations', svc_name, "#{fixture_name}.yml"))
+          'fixtures', 'services', svc_name, "#{fixture_name}.yml"))
         self.new(YAML.load(File.read(path)))
       end
 
@@ -64,14 +64,16 @@ module Aws
     class FixtureHandler < Seahorse::Client::Handler
 
       def call(context)
-        response = Seahorse::Client::Response.new(context: context)
         f = context.metadata[:fixture]
         if f.response
-          context.http_response.status_code = f.response.status_code
-          context.http_response.headers = f.response.headers
-          context.http_response.body = f.response.body
+          context.http_response.signal_headers(
+            f.response.status_code,
+            f.response.headers
+          )
+          context.http_response.signal_data(f.response.body.read)
         end
-        response
+        context.http_response.signal_done
+        Seahorse::Client::Response.new(context: context)
       end
 
     end
@@ -115,9 +117,13 @@ module Aws
     end
 
     glob = File.expand_path(File.join(
-      File.dirname(__FILE__), '..', 'fixtures', 'operations', '**', '*.yml'))
+      File.dirname(__FILE__), 'fixtures', 'services', '**', '*.yml'))
 
-    Dir.glob(glob).group_by { |p| p.split('/')[-2] }.each do |svc_name, paths|
+    fixtures = Dir.glob(glob)
+
+    raise "unable to locate test fixures" if fixtures.empty?
+
+    fixtures.group_by { |p| p.split('/')[-2] }.each do |svc_name, paths|
       describe(svc_name) do
         paths.each do |path|
           fixture_name = path.split('/')[-1][0..-5]

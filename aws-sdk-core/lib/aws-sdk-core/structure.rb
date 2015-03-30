@@ -63,7 +63,7 @@ module Aws
       when Struct
         obj.members.each.with_object({}) do |member, hash|
           value = obj[member]
-          hash[member] = to_hash(value) unless value.nil?
+          hash[member] = to_hash(value) unless value == nil
         end
       when Hash
         obj.each.with_object({}) do |(key, value), hash|

@@ -1,4 +1,4 @@
-require 'multi_xml'
+require 'cgi'
 
 module Aws
   module Xml
@@ -43,11 +43,11 @@ module Aws
       end
 
       def extract_error(context)
-        error = MultiXml.parse(context.http_response.body_contents)
-        %w(Response ErrorResponse Errors Error).each do |wrapper|
-          error = error[wrapper] if error[wrapper]
-        end
-        [remove_prefix(context, error['Code']), error['Message']]
+        xml = context.http_response.body_contents
+        code = xml.match(/<Code>(.+?)<\/Code>/)[1]
+        message = xml.match(/<Message>(.+?)<\/Message>/)[1]
+        message = CGI.unescape_html(message)
+        [remove_prefix(context, code), message]
       end
 
       def remove_prefix(context, error_code)
