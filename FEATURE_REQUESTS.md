@@ -56,6 +56,12 @@ There are currently no waiters for `Aws::ElasticBeanstalk::Client`. Particular u
 
 See [related GitHub issue aws/aws-sdk-core-ruby#216](https://github.com/aws/aws-sdk-core-ruby/issues/216).
 
+### Aws::ElasticBeanstalk::Client Waiters
+
+There are currently no waiters for `Aws::ECS::Client`.
+
+See [related GitHub issue #756](https://github.com/aws/aws-sdk-ruby/issues/756).
+
 ### Progress callbacks for Amazon S3 Object uploads
 
 To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
