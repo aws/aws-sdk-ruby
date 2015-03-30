@@ -52,7 +52,7 @@ When(/^I attempt to call the "(.*?)" API with:$/) do |api, params|
   params = @simple_json ? raw_params(params) : symbolized_params(params)
   begin
     @response = @client.send(underscore(api), params)
-  rescue => @error
+  rescue Aws::Errors::ServiceError => @error
   end
 end
 

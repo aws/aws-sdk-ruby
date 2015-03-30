@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Errors - Improved the logic for extracting errors from HTTP responses
+  to not fail when the body is empty or if the expected error XML or JSON is not
+  present.
+
+  Now falls back on providing a more generic service error based on the HTTP
+  status code.
+
+  See [related GitHub issue #755](https://github.com/aws/aws-sdk-ruby/pull/755).
+
 * Issue - Presigned URLs - Resolved an issue where `x-amz-` headers were not
   being signed as part of a pre-signed URL.
 
