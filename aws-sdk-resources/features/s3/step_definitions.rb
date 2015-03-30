@@ -1,4 +1,5 @@
 require 'base64'
+require 'rest-client'
 
 Before("@s3") do
   @s3 = Aws::S3::Resource.new
@@ -81,4 +82,15 @@ Then(/^the instruction file should exist$/) do
   expect {
     @s3.client.head_object(bucket: @bucket_name, key: @key + '.instruction')
   }.not_to raise_error
+end
+
+When(/^I create a presigned post$/) do
+  @post = @bucket.object('key').presigned_post({
+    success_action_status: '201',
+  })
+end
+
+Then(/^I should be able to POST an object to the form url$/) do
+  r = RestClient.post(@post.url, @post.fields.merge(file: File.open(__FILE__, 'r')))
+  expect(r.code).to eq(201)
 end

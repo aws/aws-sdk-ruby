@@ -16,6 +16,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'coveralls', require: false
   gem 'json-schema'
+  gem 'rest-client' # used for presigned-post integration test
 end
 
 group :docs do

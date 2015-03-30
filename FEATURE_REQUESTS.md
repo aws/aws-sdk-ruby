@@ -50,12 +50,6 @@ This approach has the benefit of expanding waiter coverage and providing a relia
 
 See [related GitHub issue #696](https://github.com/aws/aws-sdk-ruby/issues/696).
 
-### Amazon S3 Presigned Post
-
-The version 1 SDK has support for generating a pre-signed POST request. This returned a hash of key/value pairs that should be embedded into a HTML POST form for browsers. This should be ported to the version 2 SDK, and updated to use signature version 4.
-
-See [related GitHub issue #720](https://github.com/aws/aws-sdk-ruby/issues/720).
-
 ### Aws::ElasticBeanstalk::Client Waiters
 
 There are currently no waiters for `Aws::ElasticBeanstalk::Client`. Particular useful would be environment states.

@@ -12,6 +12,7 @@ module Aws
     autoload :FileUploader, 'aws-sdk-resources/services/s3/file_uploader'
     autoload :MultipartFileUploader, 'aws-sdk-resources/services/s3/multipart_file_uploader'
     autoload :MultipartUploadError, 'aws-sdk-resources/services/s3/multipart_upload_error'
+    autoload :PresignedPost, 'aws-sdk-resources/services/s3/presigned_post'
 
   end
 end
