@@ -34,54 +34,54 @@ gem 'aws-sdk', '~> 2'
 
 ## Configuration
 
-To use the Ruby SDK, you must configure a region and credentials.
+You need to configure `:credentials` and a `:region` to make API calls. It is recommended that you provide these via your environment. This makes it easier to rotate credentials and it keeps your secrets out of source control.
 
-### Region
+The SDK searches the following locations for credentials:
 
-You can construct a service client with a region:
-
-```ruby
-ec2 = Aws::EC2::Client.new(region:'us-west-2')
-```
-
-Alternatively, a default region can be loaded from one of the following
-locations:
-
-* `Aws.config[:region]`
-* `ENV['AWS_REGION']`
-
-See [this document](http://docs.aws.amazon.com/general/latest/gr/rande.html)
-for a list of supported regions by service.
-
-### Credentials
-
-You can construct a client with credentials like so:
-
-```ruby
-s3 = Aws::S3::Client.new(credentials: credentials)
-```
-
-The `:credentials` object may be an instance of:
-
-* [`Aws::Credentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/Credentials.html)
-* [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/SharedCredentials.html)
-* [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/InstanceProfileCredentials.html)
-* [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/AssumeRoleCredentials.html)
-
-Default credentials are searched for in the following locations:
-
-* `Aws.config[:credentials]`
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
 * The shared credentials ini file at `~/.aws/credentials` ([more information](http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs))
 * From an instance profile when running on EC2
 
-Please take care to **never commit credentials to source control**.  We
-strongly recommended loading credentials from an external source.
+The SDK searches the following locations for a region:
+
+* `ENV['AWS_REGION']`
+
+### Configuration Options
+
+You can configure default credentials and region via `Aws.config`. **In version 2, `Aws.config` is a vanilla Ruby hash, not a method like it was in version 1**.
+
+```ruby
+Aws.config.update({
+  region: 'us-west-2',
+  credentials: Aws::Credentials.new('akid', 'secret'),
+})
+```
+
+Valid region and credentials options are:
+
+* `:region` - A string like `us-west-2`. See [this document](http://docs.aws.amazon.com/general/latest/gr/rande.html) for a list of supported regions by service.
+* `:credentials` - An instance of one of the following classes:
+  * [`Aws::Credentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/Credentials.html)
+  * [`Aws::SharedCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/SharedCredentials.html)
+  * [`Aws::InstanceProfileCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/InstanceProfileCredentials.html)
+  * [`Aws::AssumeRoleCredentials`](http://docs.aws.amazon.com/sdkforruby/api/Aws/AssumeRoleCredentials.html)
+
+You may also pass configuration options directly to resource and client constructors. These options take precedence over the environment and `Aws.config` defaults.
+
+```ruby
+# resource constructors
+ec2 = Aws::EC2::Resource.new(region:'us-west-2', credentials: credentails)
+
+# client constructors
+ec2 = Aws::EC2::Client.new(region:'us-west-2', credentials: credentails)
+```
+
+Please take care to **never commit credentials to source control**.  We strongly recommended loading credentials from an external source.
 
 ```ruby
 require 'json'
 creds = JSON.load(File.read('secrets.json'))
-creds = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
+Aws.config[:credentials] = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
 ```
 
 ## API Clients (aws-sdk-core gem)
