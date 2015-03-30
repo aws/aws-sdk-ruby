@@ -98,6 +98,7 @@ a default client will be constructed.
     document_identifier_attributes(yard_class, resource_class)
     document_data_attribute_getters(yard_class, resource_class)
     document_operation_methods(yard_class, resource_class)
+    document_exists_method(yard_class, resource_class)
     yard_class
   end
 
@@ -222,6 +223,15 @@ Loads the current #{name} by calling {Client##{method}}.
     documenter = Aws::Resources::Documenter.const_get(type + 'Documenter')
     documenter = documenter.new(yard_class, resource_class, name, operation)
     documenter.method_object
+  end
+
+  def document_exists_method(yard_class, resource_class)
+    if resource_class.operation_names.include?(:wait_until_exists)
+      name = resource_class.name.split('::').last
+      m = YARD::CodeObjects::MethodObject.new(yard_class, :exists?)
+      m.scope = :instance
+      m.docstring = "@return [Boolean] Returns true if this #{name} exists. Returns `false` otherwise."
+    end
   end
 
 end

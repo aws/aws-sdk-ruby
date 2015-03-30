@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Feature - Resources - Added `#exists?` methods to a handful of resource classes.
+  The `#exists?` method works by polling the exists wait for the resource exactly
+  once. If the waiter is successful, then `true` is returned, if it fails, then
+  `false` is returned.
+
+  To add additional `#exists?` methods, a waiter must be added to the resource
+  class as `Exists` and that waiter must be defined in the *.waiters.json
+  document for that service.
+
 * Issue - Presigned URLs - Resolved an issue where `x-amz-` headers were not
   being signed as part of a pre-signed URL.
 

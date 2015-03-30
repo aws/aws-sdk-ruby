@@ -34,6 +34,19 @@ module Aws
         !@data.nil?
       end
 
+      # @api private
+      def exists?
+        wait_until_exists { |w| w.max_attempts = 1 }
+        true
+      rescue Waiters::Errors::UnexpectedError => e
+        raise e.error
+      rescue Waiters::Errors::WaiterFailed
+        false
+      rescue NoMethodError
+        msg = "#exists? is not implemented for #{self.class.name}"
+        raise NotImplementedError, msg
+      end
+
       # Loads data for this resource.
       # @note Calling this method will send a request to AWS.
       # @return [self]
