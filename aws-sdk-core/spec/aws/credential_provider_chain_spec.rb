@@ -65,6 +65,15 @@ module Aws
       expect(credentials.session_token).to be(nil)
     end
 
+    it 'hydrates credentials from ENV at AWS_ACCESS_KEY_ID & AWS_SECRET_KEY' do
+      env['AWS_ACCESS_KEY_ID'] = 'akid4'
+      env['AWS_SECRET_KEY'] = 'secret4'
+      expect(credentials.set?).to be(true)
+      expect(credentials.access_key_id).to eq('akid4')
+      expect(credentials.secret_access_key).to eq('secret4')
+      expect(credentials.session_token).to be(nil)
+    end
+
     it 'hydrates credentials from the shared credentials file' do
       mock_path = File.join(
         File.dirname(__FILE__), '..', 'fixtures', 'credentials',

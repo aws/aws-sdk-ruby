@@ -19,9 +19,7 @@ module Aws
     def providers
       [
         [:static_credentials, {}],
-        [:env_credentials, { prefix: 'AWS' }],
-        [:env_credentials, { prefix: 'AMAZON' }],
-        [:env_credentials, { key:'AWS_ACCESS_KEY', secret:'AWS_SECRET_KEY' }],
+        [:env_credentials, {}],
         [:shared_credentials, {}],
         [:instance_profile_credentials, {
           retries: 0,
@@ -40,16 +38,19 @@ module Aws
     end
 
     def env_credentials(options)
-      env_keys = []
-      if prefix = options[:prefix]
-        env_keys << "#{prefix}_ACCESS_KEY_ID"
-        env_keys << "#{prefix}_SECRET_ACCESS_KEY"
-        env_keys << "#{prefix}_SESSION_TOKEN"
-      else
-        env_keys << options[:key]
-        env_keys << options[:secret]
+      key =    %w(AWS_ACCESS_KEY_ID     AMAZON_ACCESS_KEY_ID     AWS_ACCESS_KEY)
+      secret = %w(AWS_SECRET_ACCESS_KEY AMAZON_SECRET_ACCESS_KEY AWS_SECRET_KEY)
+      token =  %w(AWS_SESSION_TOKEN     AMAZON_SESSION_TOKEN)
+      Credentials.new(envar(key), envar(secret), envar(token))
+    end
+
+    def envar(keys)
+      keys.each do |key|
+        if ENV.key?(key)
+          return ENV[key]
+        end
       end
-      Credentials.new(*ENV.values_at(*env_keys))
+      nil
     end
 
     def shared_credentials(options = {})
