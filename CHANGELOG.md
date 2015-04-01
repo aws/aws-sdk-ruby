@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::SNS - Removed some incorrect identifiers from a few resource methods
+  that were attempting to create `Aws::SNS::PlatformApplication` objects.
+
 * Issue - Aws::Glacier - Corrected a typo in the `Aws::Vault#initiate_archive_retrieval`
   method.
 
