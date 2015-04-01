@@ -70,10 +70,10 @@ You may also pass configuration options directly to resource and client construc
 
 ```ruby
 # resource constructors
-ec2 = Aws::EC2::Resource.new(region:'us-west-2', credentials: credentails)
+ec2 = Aws::EC2::Resource.new(region:'us-west-2', credentials: credentials)
 
 # client constructors
-ec2 = Aws::EC2::Client.new(region:'us-west-2', credentials: credentails)
+ec2 = Aws::EC2::Client.new(region:'us-west-2', credentials: credentials)
 ```
 
 Please take care to **never commit credentials to source control**.  We strongly recommended loading credentials from an external source.
