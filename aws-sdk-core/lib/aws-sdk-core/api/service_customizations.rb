@@ -114,6 +114,8 @@ module Aws
         add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
         add_plugin 'Aws::Plugins::S3RequestSigner'
 
+        api.definition['metadata'].delete('signatureVersion')
+
         # required for the GetBucketLocation fix to work, disabled normal
         # parsing of the output
         client_class.api.operation(:get_bucket_location).
