@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Glacier - Corrected a typo in the `Aws::Vault#initiate_archive_retrieval`
+  method.
+
 * Issue - Aws::Errors - Improved the logic for extracting errors from HTTP responses
   to not fail when the body is empty or if the expected error XML or JSON is not
   present.
