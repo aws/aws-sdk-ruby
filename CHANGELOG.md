@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.34 (2015-04-02)
 ------------------
 
 * Feature - Aws::CodeDeploy - AWS CodeDeploy now supports OnPremises
