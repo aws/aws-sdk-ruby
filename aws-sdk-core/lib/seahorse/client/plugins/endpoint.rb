@@ -58,7 +58,7 @@ module Seahorse
               name, shape = input.member_by_location_name(placeholder)
               param = context.params[name]
               if greedy
-                param.split('/').map{ |value| escape(value) }.join('/')
+                param = param.gsub(/[^\/]+/) { |v| escape(v) }
               else
                 escape(param)
               end
