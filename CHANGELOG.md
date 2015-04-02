@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Adds the #describe_certificates API call, and changes
+  other calls to show the current certificate.
+
 * Feature - Aws::EC2 - Added the "D2" family of instance types.
 
 * Feature - Aws::ElasticTranscoder - Adds support for PlayReady DRM.
