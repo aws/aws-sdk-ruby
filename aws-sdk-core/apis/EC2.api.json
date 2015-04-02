@@ -6510,7 +6510,11 @@
         "r3.xlarge",
         "r3.2xlarge",
         "r3.4xlarge",
-        "r3.8xlarge"
+        "r3.8xlarge",
+        "d2.xlarge",
+        "d2.2xlarge",
+        "d2.4xlarge",
+        "d2.8xlarge"
       ]
     },
     "InstanceTypeList":{
