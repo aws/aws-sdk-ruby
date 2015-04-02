@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - AWS CodeDeploy now supports OnPremises
+  deployments.
+
 * Feature - Aws::RDS - Adds the #describe_certificates API call, and changes
   other calls to show the current certificate.
 
