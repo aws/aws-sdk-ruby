@@ -5,12 +5,15 @@ Unreleased Changes
 
 * Feature - Aws::ElasticTranscoder - Adds support for PlayReady DRM.
 
+<<<<<<< HEAD
 * Issue - Endpoints - Resolved an issue where trailing slashes were lost from
   request parameter values that were bound to the end of the request uri path
   as a greedy placeholder.
 
   See [related GitHub issue #762](https://github.com/aws/aws-sdk-ruby/issues/762).
 
+=======
+>>>>>>> Aws::ElasticTranscoder API Update
 * Issue - Aws::SNS - Removed some incorrect identifiers from a few resource methods
   that were attempting to create `Aws::SNS::PlatformApplication` objects.
 
