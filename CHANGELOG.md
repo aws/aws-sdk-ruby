@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added the "D2" family of instance types.
+
+* Feature - Aws::ElasticTranscoder - Adds support for PlayReady DRM.
+
 * Issue - Endpoints - Resolved an issue where trailing slashes were lost from
   request parameter values that were bound to the end of the request uri path
   as a greedy placeholder.
