@@ -8,7 +8,7 @@ end
 task 'github:release' do
   require 'octokit'
 
-  gh = Octokit::Client.new(access_token: ENV['AWS_SDK_FOR_RUBY_GH_TOKEN'])
+  gh = Octokit::Client.new(:access_token => ENV['AWS_SDK_FOR_RUBY_GH_TOKEN'])
 
   repo = 'aws/aws-sdk-ruby'
   tag_ref_sha = `git show-ref v#{$VERSION}`.split(' ').first
