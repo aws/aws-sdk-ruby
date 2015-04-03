@@ -5,9 +5,6 @@ task 'github:require-access-token' do
   end
 end
 
-# this task must be defined to deploy
-task 'github:access-token'
-
 task 'github:release' do
   require 'octokit'
 
