@@ -1,18 +1,14 @@
 task 'github:require-access-token' do
-  unless `rake github:access-token`
-    warn('missing github access token')
+  unless ENV['AWS_SDK_FOR_RUBY_GH_TOKEN']
+    warn("export ENV['AWS_SDK_FOR_RUBY_GH_TOKEN']")
     exit
   end
 end
 
-# this task must be defined to deploy
-task 'github:access-token'
-
 task 'github:release' do
   require 'octokit'
 
-  gh_access_token = `rake github:access-token`
-  gh = Octokit::Client.new(:access_token => gh_access_token)
+  gh = Octokit::Client.new(access_token: ENV['AWS_SDK_FOR_RUBY_GH_TOKEN'])
 
   repo = 'aws/aws-sdk-ruby'
   tag_ref_sha = `git show-ref v#{$VERSION}`.split(' ').first
