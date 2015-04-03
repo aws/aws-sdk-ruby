@@ -177,6 +177,18 @@ module Aws
             expect(r.parents.map(&:full_name).map(&:first)).to eq(['John', 'Jane'])
           end
 
+          it 'does not replace scalar null values' do
+            data = {
+              full_name: {
+                first: nil,
+                last: nil,
+              }
+            }
+            r = stub.format(data)
+            expect(r.full_name.first).to be(nil)
+            expect(r.full_name.last).to be(nil)
+          end
+
         end
 
         describe 'streaming resposnes' do

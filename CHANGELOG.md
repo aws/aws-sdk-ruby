@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Response Stubbing - Resolved an issue that prevented response stubs from
+  forcing a nil value for scalars.
+
+  See [related GitHub issue #763](https://github.com/aws/aws-sdk-ruby/issues/763).
+
 * Feature - Aws::Resources::Resource - Added support for custom waiters
   with `Aws::Resources::Resource#wait_until`.
 
