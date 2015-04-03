@@ -1,12 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS::Kinesis - Added support for `AWS::Kinesis::Client#put_records`.
+
+  See [related GitHub issue #760](https://github.com/aws/aws-sdk-ruby/issues/760).
+
 1.63.0 (2015-02-18)
 ------------------
 
-* Feature - Aws::CloudFront - Added support for the 2014-11-06 API version.
+* Feature - AWS::CloudFront - Added support for the 2014-11-06 API version.
 
-* Feature - Aws::IAM - Added support for managed policies.
+* Feature - AWS::IAM - Added support for managed policies.
 
 1.62.0 (2015-02-12)
 ------------------

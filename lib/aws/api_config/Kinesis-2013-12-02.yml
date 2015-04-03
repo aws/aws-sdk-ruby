@@ -1,16 +1,3 @@
-# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :json_version: '1.1'
 :target_prefix: Kinesis_20131202.
@@ -224,6 +211,44 @@
     SequenceNumber:
       :sym: :sequence_number
       :type: :string
+- :name: PutRecords
+  :method: :put_records
+  :inputs:
+    Records:
+    - :list:
+      - :structure:
+          Data:
+          - :blob
+          - :required
+          ExplicitHashKey:
+          - :string
+          PartitionKey:
+          - :string
+          - :required
+    - :required
+    StreamName:
+    - :string
+    - :required
+  :outputs:
+    FailedRecordCount:
+      :sym: :failed_record_count
+      :type: :integer
+    Records:
+      :sym: :records
+      :type: :hash
+      :members:
+        SequenceNumber:
+          :sym: :sequence_number
+          :type: :string
+        ShardId:
+          :sym: :shard_id
+          :type: :string
+        ErrorCode:
+          :sym: :error_code
+          :type: :string
+        ErrorMessage:
+          :sym: :error_message
+          :type: :string
 - :name: RemoveTagsFromStream
   :method: :remove_tags_from_stream
   :inputs:
