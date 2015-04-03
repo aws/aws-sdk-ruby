@@ -31,7 +31,7 @@ end
 
 group :test do
   gem 'rspec', '~> 2.12'
-  gem 'cucumber'
+  gem 'cucumber', '< 2.0'
   gem 'simplecov', :require => false
   gem 'net-ssh', '~> 2.1'
   gem 'multipart-post'
