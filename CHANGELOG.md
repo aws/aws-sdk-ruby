@@ -1,4 +1,4 @@
-Unreleased Changes
+1.64.0 (2015-04-03)
 ------------------
 
 * Feature - AWS::Kinesis - Added support for `AWS::Kinesis::Client#put_records`.
