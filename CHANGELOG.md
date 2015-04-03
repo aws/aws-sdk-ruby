@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Resources::Resource - Added support for custom waiters
+  with `Aws::Resources::Resource#wait_until`.
+
 2.0.34 (2015-04-02)
 ------------------
 

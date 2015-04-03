@@ -10,8 +10,8 @@ module Aws
         @poller = options[:poller]
         @max_attempts = options[:max_attempts]
         @delay = options[:delay]
-        @before_attempt = []
-        @before_wait = []
+        @before_attempt = Array(options[:before_attempt])
+        @before_wait = Array(options[:before_wait])
       end
 
       # @api private
