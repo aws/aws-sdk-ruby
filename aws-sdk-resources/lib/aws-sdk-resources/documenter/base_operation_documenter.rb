@@ -94,7 +94,7 @@ module Aws
             m.source_type = :json
             m.source = source.format
             filename = source.file
-            filename = filename.match('(aws-sdk-core/apis/.+\.resources\.json)')[1]
+            filename = filename.match('(aws-sdk-core/apis/.+)')[1]
             m.add_file(filename, nil, true)
           end
           tags.each do |tag|

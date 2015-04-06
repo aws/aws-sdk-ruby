@@ -177,7 +177,9 @@ Loads the current #{name} by calling {Client##{method}}.
 
     return if resource_name == 'Resource'
 
-    definition = File.read("aws-sdk-core/apis/#{svc}.resources.json")
+    endpoint = resource_class.client_class.api.metadata('endpointPrefix')
+    version = resource_class.client_class.api.version
+    definition = File.read("aws-sdk-core/apis/#{endpoint}/#{version}/resources-1.json")
     definition = MultiJson.load(definition)
     definition = definition['resources'][resource_name]
     if shape_name = definition['shape']
