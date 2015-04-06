@@ -1,5 +1,5 @@
 Aws.add_service(:KMS, {
-  api: File.join(Aws::API_DIR, 'KMS.api.json'),
-  docs: File.join(Aws::API_DIR, 'KMS.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'KMS.paginators.json'),
+  api: "#{Aws::API_DIR}/kms/2014-11-01/api-2.json",
+  docs: "#{Aws::API_DIR}/kms/2014-11-01/docs-2.json",
+  paginators: "#{Aws::API_DIR}/kms/2014-11-01/paginators-1.json",
 })

@@ -1,4 +1,4 @@
 Aws.add_service(:ECS, {
-  api: File.join(Aws::API_DIR, 'ECS.api.json'),
-  docs: File.join(Aws::API_DIR, 'ECS.docs.json'),
+  api: "#{Aws::API_DIR}/ecs/2014-11-13/api-2.json",
+  docs: "#{Aws::API_DIR}/ecs/2014-11-13/docs-2.json",
 })

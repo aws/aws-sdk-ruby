@@ -1,5 +1,5 @@
 Aws.add_service(:AutoScaling, {
-  api: File.join(Aws::API_DIR, 'AutoScaling.api.json'),
-  docs: File.join(Aws::API_DIR, 'AutoScaling.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'AutoScaling.paginators.json'),
+  api: "#{Aws::API_DIR}/autoscaling/2011-01-01/api-2.json",
+  docs: "#{Aws::API_DIR}/autoscaling/2011-01-01/docs-2.json",
+  paginators: "#{Aws::API_DIR}/autoscaling/2011-01-01/paginators-1.json",
 })

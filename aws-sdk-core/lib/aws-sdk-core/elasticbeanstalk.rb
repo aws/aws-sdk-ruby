@@ -1,5 +1,5 @@
 Aws.add_service(:ElasticBeanstalk, {
-  api: File.join(Aws::API_DIR, 'ElasticBeanstalk.api.json'),
-  docs: File.join(Aws::API_DIR, 'ElasticBeanstalk.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'ElasticBeanstalk.paginators.json'),
+  api: "#{Aws::API_DIR}/elasticbeanstalk/2010-12-01/api-2.json",
+  docs: "#{Aws::API_DIR}/elasticbeanstalk/2010-12-01/docs-2.json",
+  paginators: "#{Aws::API_DIR}/elasticbeanstalk/2010-12-01/paginators-1.json",
 })

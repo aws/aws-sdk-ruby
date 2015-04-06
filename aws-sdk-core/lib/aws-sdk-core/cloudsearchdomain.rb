@@ -1,4 +1,4 @@
 Aws.add_service(:CloudSearchDomain, {
-  api: File.join(Aws::API_DIR, 'CloudSearchDomain.api.json'),
-  docs: File.join(Aws::API_DIR, 'CloudSearchDomain.docs.json'),
+  api: "#{Aws::API_DIR}/cloudsearchdomain/2013-01-01/api-2.json",
+  docs: "#{Aws::API_DIR}/cloudsearchdomain/2013-01-01/docs-2.json",
 })

@@ -1,6 +1,6 @@
 Aws.add_service(:ElasticLoadBalancing, {
-  api: File.join(Aws::API_DIR, 'ElasticLoadBalancing.api.json'),
-  docs: File.join(Aws::API_DIR, 'ElasticLoadBalancing.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'ElasticLoadBalancing.paginators.json'),
-  waiters: File.join(Aws::API_DIR, 'ElasticLoadBalancing.waiters.json'),
+  api: "#{Aws::API_DIR}/elasticloadbalancing/2012-06-01/api-2.json",
+  docs: "#{Aws::API_DIR}/elasticloadbalancing/2012-06-01/docs-2.json",
+  paginators: "#{Aws::API_DIR}/elasticloadbalancing/2012-06-01/paginators-1.json",
+  waiters: "#{Aws::API_DIR}/elasticloadbalancing/2012-06-01/waiters-2.json",
 })

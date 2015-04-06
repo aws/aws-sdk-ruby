@@ -1,4 +1,4 @@
 Aws.add_service(:STS, {
-  api: File.join(Aws::API_DIR, 'STS.api.json'),
-  docs: File.join(Aws::API_DIR, 'STS.docs.json'),
+  api: "#{Aws::API_DIR}/sts/2011-06-15/api-2.json",
+  docs: "#{Aws::API_DIR}/sts/2011-06-15/docs-2.json",
 })

@@ -1,5 +1,5 @@
 Aws.add_service(:CloudWatch, {
-  api: File.join(Aws::API_DIR, 'CloudWatch.api.json'),
-  docs: File.join(Aws::API_DIR, 'CloudWatch.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'CloudWatch.paginators.json'),
+  api: "#{Aws::API_DIR}/monitoring/2010-08-01/api-2.json",
+  docs: "#{Aws::API_DIR}/monitoring/2010-08-01/docs-2.json",
+  paginators: "#{Aws::API_DIR}/monitoring/2010-08-01/paginators-1.json",
 })

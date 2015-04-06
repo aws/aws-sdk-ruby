@@ -1,5 +1,5 @@
 Aws.add_service(:StorageGateway, {
-  api: File.join(Aws::API_DIR, 'StorageGateway.api.json'),
-  docs: File.join(Aws::API_DIR, 'StorageGateway.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'StorageGateway.paginators.json'),
+  api: "#{Aws::API_DIR}/storagegateway/2013-06-30/api-2.json",
+  docs: "#{Aws::API_DIR}/storagegateway/2013-06-30/docs-2.json",
+  paginators: "#{Aws::API_DIR}/storagegateway/2013-06-30/paginators-1.json",
 })

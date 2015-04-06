@@ -1,5 +1,5 @@
 Aws.add_service(:CodeDeploy, {
-  api: File.join(Aws::API_DIR, 'CodeDeploy.api.json'),
-  docs: File.join(Aws::API_DIR, 'CodeDeploy.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'CodeDeploy.paginators.json'),
+  api: "#{Aws::API_DIR}/codedeploy/2014-10-06/api-2.json",
+  docs: "#{Aws::API_DIR}/codedeploy/2014-10-06/docs-2.json",
+  paginators: "#{Aws::API_DIR}/codedeploy/2014-10-06/paginators-1.json",
 })

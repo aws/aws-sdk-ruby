@@ -1,6 +1,6 @@
 Aws.add_service(:EMR, {
-  api: File.join(Aws::API_DIR, 'EMR.api.json'),
-  docs: File.join(Aws::API_DIR, 'EMR.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'EMR.paginators.json'),
-  waiters: File.join(Aws::API_DIR, 'EMR.waiters.json'),
+  api: "#{Aws::API_DIR}/elasticmapreduce/2009-03-31/api-2.json",
+  docs: "#{Aws::API_DIR}/elasticmapreduce/2009-03-31/docs-2.json",
+  paginators: "#{Aws::API_DIR}/elasticmapreduce/2009-03-31/paginators-1.json",
+  waiters: "#{Aws::API_DIR}/elasticmapreduce/2009-03-31/waiters-2.json",
 })

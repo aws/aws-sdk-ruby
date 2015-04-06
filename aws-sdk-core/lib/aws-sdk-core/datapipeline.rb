@@ -1,5 +1,5 @@
 Aws.add_service(:DataPipeline, {
-  api: File.join(Aws::API_DIR, 'DataPipeline.api.json'),
-  docs: File.join(Aws::API_DIR, 'DataPipeline.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'DataPipeline.paginators.json'),
+  api: "#{Aws::API_DIR}/datapipeline/2012-10-29/api-2.json",
+  docs: "#{Aws::API_DIR}/datapipeline/2012-10-29/docs-2.json",
+  paginators: "#{Aws::API_DIR}/datapipeline/2012-10-29/paginators-1.json",
 })
