@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.35 (2015-04-06)
 ------------------
 
 * Issue - Xml Parser - Resolved an issue with the recent XML parser update that
