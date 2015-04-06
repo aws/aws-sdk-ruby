@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.files = ['endpoints.json']
   spec.files += Dir['lib/**/*.rb']
-  spec.files += Dir['apis/*.json'].select { |p| !p.match(/\.docs\.json$/) }
+  spec.files += Dir['apis/**/**/*.json'].select { |p| !p.match(/\.docs\.json$/) }
 
   spec.bindir = 'bin'
   spec.executables << 'aws.rb'
