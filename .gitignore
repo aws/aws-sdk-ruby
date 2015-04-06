@@ -7,6 +7,7 @@
 /coverage
 /Gemfile.lock
 /vendor
+/release-notes.html
 
 /developer_guide/output
 /developer_guide/tmp
