@@ -2,7 +2,12 @@ require 'spec_helper'
 require 'time'
 
 # This engine behaves the same as the rexml parser, except it fires
-# multiple text events for the xml text. This ensures the
+# multiple text events for the xml text. This ensures the parser
+# supports the text value of a single element can be given in
+# multiple events.
+#
+# This is known to happen with Nokogiri on larger xml documents.
+#
 class Aws::Xml::Parser::DummyEngine < Aws::Xml::Parser::RexmlEngine
   def text(value)
     if value.empty?
