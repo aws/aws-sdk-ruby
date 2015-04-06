@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+* Issue - Xml Parser - Resolved an issue with the recent XML parser update that
+  caused bugs when using Nokogiri. Nokogiri will inconsistently trigger one or
+  multiple text events for XML elements. This seems to be affected by the total
+  size of the XML document.
+
+  The XML parser now supports SAX parsing engines that trigger mulitple text
+  events for a single XML element value. Added test where a dummy engine simulates
+  this behavior.
+
+  See [related GitHub issue #764](https://github.com/aws/aws-sdk-ruby/issues/764).
+
 * Issue - Response Stubbing - Resolved an issue that prevented response stubs from
   forcing a nil value for scalars.
 

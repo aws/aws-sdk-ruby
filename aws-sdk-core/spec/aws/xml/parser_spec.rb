@@ -1,23 +1,30 @@
 require 'spec_helper'
 require 'time'
 
+# This engine behaves the same as the rexml parser, except it fires
+# multiple text events for the xml text. This ensures the
+class Aws::Xml::Parser::DummyEngine < Aws::Xml::Parser::RexmlEngine
+  def text(value)
+    if value.empty?
+      super(value)
+    else
+      value.chars.each do |char|
+        super(char)
+      end
+    end
+  end
+end
+
 module Aws
   module Xml
     describe Parser do
-
-      default_engine = Parser.engine
-
-      [:ox, :nokogiri, :libxml, :rexml].each do |engine|
+      [:OxEngine, :NokogiriEngine, :LibxmlEngine, :RexmlEngine, :DummyEngine].each do |engine|
         describe("ENGINE: #{engine}") do
 
           begin
-            Parser.engine = engine
+            Parser.const_get(engine)
           rescue LoadError
             next
-          end
-
-          before(:each) do
-            Parser.engine = engine
           end
 
           let(:members) { {} }
@@ -26,8 +33,13 @@ module Aws
 
           let(:shape) { Seahorse::Model::Shapes::Structure.new(definition) }
 
+          let(:parser) {
+            engine_class = Parser.const_get(engine)
+            Parser.new(shape, engine: engine_class)
+          }
+
           def parse(xml)
-            Parser.new(shape).parse(xml).to_h
+            parser.parse(xml).to_h
           end
 
           it 'returns an empty hash when the XML is empty' do
@@ -737,9 +749,6 @@ module Aws
 
         end
       end
-
-      Parser.engine = default_engine
-
     end
   end
 end

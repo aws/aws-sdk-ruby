@@ -14,9 +14,9 @@ module Aws
       autoload :RexmlEngine, 'aws-sdk-core/xml/parser/engines/rexml'
 
       # @param [Seahorse::Model::Shapes::Structure] shape
-      def initialize(shape)
+      def initialize(shape, options = {})
         @shape = shape
-        @engine = self.class.engine
+        @engine = options[:engine] || self.class.engine
       end
 
       # @param [String] xml An XML document string to parse.

@@ -10,6 +10,7 @@ module Aws
           @parent = parent
           @shape = shape
           @result = result
+          @text = []
         end
 
         attr_reader :parent
@@ -18,7 +19,9 @@ module Aws
 
         attr_reader :result
 
-        def set_text(value); end
+        def set_text(value)
+          @text << value
+        end
 
         def child_frame(xml_name)
           NullFrame.new(self)
@@ -229,42 +232,38 @@ module Aws
       end
 
       class BlobFrame < Frame
-        def set_text(value)
-          @result = Base64.decode64(value)
+        def result
+          @text.empty? ? nil : Base64.decode64(@text.join)
         end
       end
 
       class BooleanFrame < Frame
-        def set_text(value)
-          @result = (value == 'true')
+        def result
+          @text.empty? ? nil : (@text.join == 'true')
         end
       end
 
       class FloatFrame < Frame
-        def set_text(value)
-          @result = value.to_f
+        def result
+          @text.empty? ? nil : @text.join.to_f
         end
       end
 
       class IntegerFrame < Frame
-        def set_text(value)
-          @result = value.to_i
+        def result
+          @text.empty? ? nil : @text.join.to_i
         end
       end
 
       class StringFrame < Frame
-        def initialize(*args)
-          super
-          @result = ''
-        end
-        def set_text(value)
-          @result = value
+        def result
+          @text.join
         end
       end
 
       class TimestampFrame < Frame
-        def set_text(value)
-          @result = parse(value)
+        def result
+          @text.empty? ? nil : parse(@text.join)
         end
         def parse(value)
           case value
