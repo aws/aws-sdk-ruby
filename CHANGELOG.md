@@ -1,6 +1,8 @@
 2.0.36 (2015-04-06)
 ------------------
 
+* Issue - Gemspec - Corrected the paths in the gemspec for the API files.
+
 2.0.35 (2015-04-06)
 ------------------
 
