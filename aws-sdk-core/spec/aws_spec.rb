@@ -25,6 +25,8 @@ module Aws
 
   describe 'add_service' do
 
+    let(:api_path) { Dir.glob(File.join(API_DIR, 'ec2', '*')).last + '/api-2.json' }
+
     let(:dummy_credentials) { Aws::Credentials.new('akid', 'secret') }
 
     before(:each) do
@@ -37,19 +39,19 @@ module Aws
     end
 
     it 'defines a new service module' do
-      Aws.add_service('DummyService', api: File.join(API_DIR, 'EC2.api.json'))
+      Aws.add_service('DummyService', api: api_path)
       expect(Aws::DummyService.ancestors).to include(Aws::Service)
     end
 
     it 'defines an errors module' do
-      Aws.add_service('DummyService', api: File.join(API_DIR, 'EC2.api.json'))
+      Aws.add_service('DummyService', api: api_path)
       errors = Aws::DummyService::Errors
       expect(errors::ServiceError.ancestors).to include(Aws::Errors::ServiceError)
       expect(errors::FooError.ancestors).to include(Aws::Errors::ServiceError)
     end
 
     it 'defines a client class' do
-      Aws.add_service('DummyService', api: File.join(API_DIR, 'EC2.api.json'))
+      Aws.add_service('DummyService', api: api_path)
       expect(Aws::DummyService::Client.ancestors).to include(Seahorse::Client::Base)
     end
 
@@ -69,25 +71,24 @@ module Aws
       end
 
       it 'accepts string file path values' do
-        path = File.join(API_DIR, 'EC2.api.json')
-        Aws.add_service('DummyService', api: path)
+        Aws.add_service('DummyService', api: api_path)
         expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
       end
 
       it 'accpets Pathname values' do
-        path = Pathname.new(File.join(API_DIR, 'EC2.api.json'))
+        path = Pathname.new(api_path)
         Aws.add_service('DummyService', api: path)
         expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
       end
 
       it 'accpets hash values' do
-        api = Aws.load_json(File.join(API_DIR, 'EC2.api.json'))
+        api = Aws.load_json(api_path)
         Aws.add_service('DummyService', api: api)
         expect(DummyService::Client.api.definition).to eq(api)
       end
 
       it 'accpets Seahorse::Model::Api values' do
-        api = Aws.load_json(File.join(API_DIR, 'EC2.api.json'))
+        api = Aws.load_json(api_path)
         api = Seahorse::Model::Api.new(api)
         Aws.add_service('DummyService', api: api)
         expect(DummyService::Client.api).to be(api)
