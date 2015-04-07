@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DataPipeline - This release introduces support for AWS Data
+  Pipeline Deactivate feature. You now have the ability to deactivate a running
+  pipeline and activate it later at a time of your choosing.
+
 * Feature - Aws::ElasticBeanstalk - Added new `#abort_environment_update`
   operation for Elastic Beanstalk. Added a new parameter, `:solution_stack_name`,
   to the `#update_environment` operation for ElasticBeanstalk.
