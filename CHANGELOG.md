@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.37 (2015-04-07)
 ------------------
 
 * Feature - Aws::DataPipeline - This release introduces support for AWS Data
