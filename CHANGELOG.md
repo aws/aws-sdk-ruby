@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::IAM - Resolved an issue with `Aws::IAM::Resource#policy` that would
+  raise an `ArgumentError`. The resource definition incorrectly supplied the
+  argument as the "PolicyArn" when it should have been simply "Arn".
+
+  See [related GitHub issue #768](https://github.com/aws/aws-sdk-ruby/issues/768).
+
 2.0.36 (2015-04-06)
 ------------------
 

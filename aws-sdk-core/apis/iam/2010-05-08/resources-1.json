@@ -141,7 +141,7 @@
         "resource": {
           "type": "Policy",
           "identifiers": [
-            { "target": "PolicyArn", "source": "input" }
+            { "target": "Arn", "source": "input" }
           ]
         }
       },
