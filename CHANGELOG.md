@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticBeanstalk - Added new `#abort_environment_update`
+  operation for Elastic Beanstalk. Added a new parameter, `:solution_stack_name`,
+  to the `#update_environment` operation for ElasticBeanstalk.
+
 * Issue - Aws::IAM - Resolved an issue with `Aws::IAM::Resource#policy` that would
   raise an `ArgumentError`. The resource definition incorrectly supplied the
   argument as the "PolicyArn" when it should have been simply "Arn".
