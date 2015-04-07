@@ -48,6 +48,7 @@ module Aws
         private
 
         def format_set(set)
+          return { l: [] } if set.empty?
           case set.first
           when String then { ss: set.map(&:to_s) }
           when Numeric then { ns: set.map(&:to_s) }
