@@ -363,6 +363,97 @@
     ]
   },
   {
+    "description": "Structure payload",
+    "metadata": {
+      "protocol": "rest-json"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "foo": {
+            "shape": "FooShape"
+          }
+        }
+      },
+      "FooShape": {
+        "locationName": "foo",
+        "type": "structure",
+        "members": {
+          "baz": {
+            "shape": "BazShape"
+          }
+        }
+      },
+      "BazShape": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "input": {
+            "shape": "InputShape",
+            "payload": "foo"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "foo": {
+            "baz": "bar"
+          }
+        },
+        "serialized": {
+          "method": "POST",
+          "body": "{ \"baz\": \"bar\" }",
+          "uri": "/"
+        }
+      },
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "input": {
+            "shape": "InputShape",
+            "payload": "foo"
+          },
+          "name": "OperationName"
+        },
+        "params": {},
+        "serialized": {
+          "method": "POST",
+          "body": "",
+          "uri": "/"
+        }
+      },
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "input": {
+            "shape": "InputShape",
+            "payload": "foo"
+          },
+          "name": "OperationName"
+        },
+        "params": { "foo": {} },
+        "serialized": {
+          "method": "POST",
+          "body": "{}",
+          "uri": "/"
+        }
+      }
+    ]
+  },
+  {
     "description": "Omits null query params, but serializes empty strings",
     "metadata": {
       "protocol": "rest-json",

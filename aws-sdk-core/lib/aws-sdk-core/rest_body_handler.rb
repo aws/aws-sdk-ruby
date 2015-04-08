@@ -21,8 +21,9 @@ module Aws
       when streaming?(input)
         context.params[input.payload]
       when input.payload
-        params = context.params[input.payload] || {}
-        serialize_params(input.payload_member, params) unless params.empty?
+        if params = context.params[input.payload]
+          serialize_params(input.payload_member, params)
+        end
       else
         params = body_params(input, context.params)
         serialize_params(input, params) unless params.empty?
