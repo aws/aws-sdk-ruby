@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - Aws::Lambda - AWS Lambda is exiting their preview period and has
+  made changes to their control plane APIs. If you are invoking methods outside
+  of `Aws::Lambda::Client#invoke_async`, you should switch to the
+  `Aws::LambdaPreview::Client` until you can upgrade.
+
+  ```ruby
+  # returns the stable 2015-03-01 API client
+  lambda = Aws::Lambda::Client.new
+
+  # returns the preview API client
+  lambda = Aws::LambdaPreview::Client.new
+  ```
+
 * Feature - Aws::WorkSpaces - Added support for Amazon WorkSpaces.
 
 * Feature - Aws::ECS - You can now use the Amazon ECS Service scheduler to
