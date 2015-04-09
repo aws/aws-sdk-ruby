@@ -97,6 +97,10 @@ module Aws
         reshape 'Timestamp', 'type' => 'timestamp'
       end
 
+      customize 'machinelearning' do
+        add_plugin 'Aws::Plugins::MachineLearningPredictEndpoint'
+      end
+
       customize 'route53' do
         add_plugin 'Aws::Plugins::Route53IdFix'
         reshape 'PageMaxItems', 'type' => 'integer'

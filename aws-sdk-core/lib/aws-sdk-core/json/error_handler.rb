@@ -23,8 +23,8 @@ module Aws
       end
 
       def error_code(json, context)
-        code = json['code']
-        code ||= json['__type']
+        code = json['__type']
+        code ||= json['code']
         code ||= context.http_response.headers['x-amzn-errortype']
         if code
           code.split('#').last

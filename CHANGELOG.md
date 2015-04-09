@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MachineLearning - Added support for Amazon Machine Learning.
+
 2.0.37 (2015-04-07)
 ------------------
 
