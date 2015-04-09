@@ -62,7 +62,7 @@
   )
   ```
 
-  Notice the `:lambda_function_configurations` do not take an
+  Notice the `:lambda_function_configurations` does not take an
   `:invocation_role` and that each of the configuration types now takes
   a list of configurations.
 
