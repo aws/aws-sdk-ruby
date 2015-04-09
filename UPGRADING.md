@@ -1,5 +1,58 @@
 # Upgrade Notes
 
+## `aws-sdk-core` - v2.0.38
+
+* Deprecated two methods:
+
+  * `Aws::S3::Client#put_bucket_notification`
+  * `Aws::S3::Client#get_bucket_notification`
+
+  These methods have been replaced by:
+
+  * `Aws::S3::Client#put_bucket_notification_configuration`
+  * `Aws::S3::Client#get_bucket_notification_configuration`
+
+  The method signatures for the old two methods did not correctly allow users
+  to specify multiple topic, queue, and lambda function configurations. The
+  new methods, suffixed by `_notification` correct these errors. The new
+  methods now also support resource based permissions on notifications to
+  lambda functions.
+
+
+  ```ruby
+  s3 = Aws::S3::Client.new
+
+  # old
+  s3.put_bucket_notification(
+    bucket: 'aws-sdk',
+    notification_configuration: {
+      topic_configuration: { id:'id1', events:[...] },
+      queue_configuration: { id:'id2', events:[...] },
+      cloud_function_configuration: { id:'id3', events:[...], invocation_role: '...' },
+    }
+  )
+
+  # new
+  s3.put_bucket_notification_configuration(
+    bucket: 'aws-sdk',
+    notification_configuration: {
+      topic_configurations: [
+      	{ id:'id1', events:[...] }
+      ],
+      queue_configurations: [
+      	{ id:'id2', events:[...] }
+      ],
+      lambda_function_configurations: [
+      	{ id:'id3', events:[...] }
+      ]
+    }
+  )
+  ```
+
+  Notice the `:lambda_function_configurations` do not take an
+  `:invocation_role` and that each of the configuration types now takes
+  a list of configurations.
+
 ## `aws-sdk-core` - v2.0.25
 
 * Increased the default number of attempts to make when loading credentials from the
