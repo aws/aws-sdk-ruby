@@ -233,7 +233,7 @@ to be backwards compatible.
 | AWS Identity and Access Management       | IAM                  | 2010-05-08  |
 | AWS Import/Export                        | ImportExport         | 2010-06-01  |
 | AWS Key Management Service               | KMS                  | 2014-11-01  |
-| AWS Lambda                               | Lambda               | 2014-11-11  |
+| AWS Lambda                               | Lambda               | 2015-03-31  |
 | AWS OpsWorks                             | OpsWorks             | 2013-02-18  |
 | AWS Security Token Service               | STS                  | 2011-06-15  |
 | AWS Storage Gateway                      | StorageGateway       | 2013-06-30  |
@@ -254,6 +254,7 @@ to be backwards compatible.
 | Amazon Elastic Transcoder                | ElasticTranscoder    | 2012-09-25  |
 | Amazon Glacier                           | Glacier              | 2012-06-01  |
 | Amazon Kinesis                           | Kinesis              | 2013-12-02  |
+| Amazon Machine Learning                  | MachineLearning      | 2014-12-12  |
 | Amazon Redshift                          | Redshift             | 2012-12-01  |
 | Amazon Relational Database Service       | RDS                  | 2014-10-31  |
 | Amazon Route 53                          | Route53              | 2013-04-01  |
@@ -265,6 +266,7 @@ to be backwards compatible.
 | Amazon Simple Systems Management Service | SSM                  | 2014-11-06  |
 | Amazon Simple Workflow Service           | SWF                  | 2012-01-25  |
 | Amazon SimpleDB                          | SimpleDB             | 2009-04-15  |
+| Amazon WorkSpaces                        | WorkSpaces           | 2015-04-08  |
 | Auto Scaling                             | AutoScaling          | 2011-01-01  |
 | Elastic Load Balancing                   | ElasticLoadBalancing | 2012-06-01  |
 

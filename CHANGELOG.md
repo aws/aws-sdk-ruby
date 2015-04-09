@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.38 (2015-04-09)
 ------------------
 
 * Upgrading - Aws::Lambda - AWS Lambda is exiting their preview period and has
