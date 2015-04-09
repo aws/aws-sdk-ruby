@@ -63,5 +63,5 @@ task 'release:patch' do
   version = parts.join('.')
   env = {}
   env['VERSION'] = version
-  sh(env, 'bundle exec release')
+  sh(env, 'bundle exec rake release')
 end
