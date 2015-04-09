@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - You can now use the Amazon ECS Service scheduler to
+  manage long-running applications and services. The Service scheduler allows
+  you to distribute traffic across your containers using Elastic Load Balancing.
+
 * Feature - Aws::S3 - Added support for resource based permissions for invoking
   Lambda functions via bucket notifications.
 
