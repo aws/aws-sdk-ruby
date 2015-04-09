@@ -63,6 +63,7 @@ module Aws
     STS
     Support
     SWF
+    WorkSpaces
   )
 
   @config = {}

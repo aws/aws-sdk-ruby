@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::WorkSpaces - Added support for Amazon WorkSpaces.
+
 * Feature - Aws::ECS - You can now use the Amazon ECS Service scheduler to
   manage long-running applications and services. The Service scheduler allows
   you to distribute traffic across your containers using Elastic Load Balancing.
