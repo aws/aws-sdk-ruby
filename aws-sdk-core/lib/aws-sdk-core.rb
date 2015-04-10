@@ -47,6 +47,7 @@ module Aws
     Kinesis
     KMS
     Lambda
+    LambdaPreview
     MachineLearning
     OpsWorks
     RDS
