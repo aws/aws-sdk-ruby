@@ -43,8 +43,13 @@ module Aws
             Parser.new(shape, engine: engine_class)
           }
 
-          def parse(xml)
-            parser.parse(xml).to_h
+          def parse(xml, to_h = true)
+            data = parser.parse(xml)
+            if to_h
+              data.to_h
+            else
+              data
+            end
           end
 
           it 'returns an empty hash when the XML is empty' do
@@ -137,7 +142,7 @@ module Aws
                 }
               }
               xml = "<xml/>"
-              expect(parse(xml)[:values]).to eq([])
+              expect(parse(xml, false)[:values]).to eq([])
             end
 
             it 'popluates list members with a default list when not present' do
@@ -267,7 +272,7 @@ module Aws
                 }
               }
               xml = "<xml/>"
-              expect(parse(xml)[:values]).to eq([])
+              expect(parse(xml, false)[:values]).to eq([])
             end
 
             it 'supports lists of scalars' do
