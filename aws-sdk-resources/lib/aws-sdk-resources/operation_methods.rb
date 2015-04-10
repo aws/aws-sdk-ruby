@@ -66,7 +66,10 @@ module Aws
       private
 
       def safe_define_method(method_name, &block)
-        if instance_methods.include?(method_name.to_sym)
+        if
+          instance_methods.include?(method_name.to_sym) &&
+          ENV['AWS_SDK_SAFE_DEFINE']
+        then
           msg = "unable to define method #{name}##{method_name}, "
           msg << "method already exists"
           raise Errors::DefinitionError, msg

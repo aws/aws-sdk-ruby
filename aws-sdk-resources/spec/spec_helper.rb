@@ -17,7 +17,7 @@ SimpleCov.command_name('test:unit:aws-sdk-resources')
 RSpec.configure do |config|
   config.before(:each) do
 
-    stub_const('ENV', {})
+    stub_const('ENV', { 'AWS_SDK_SAFE_DEFINE' => '1' })
 
     # disable loading credentials from shared file
     allow(Dir).to receive(:home).and_raise(ArgumentError)

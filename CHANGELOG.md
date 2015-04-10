@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resources - Resolved an issue that prevented the `aws-sdk-resources`
+  gem from loading resource definitions that have naming conflicts with
+  the Capistrano project.
+
+  The `#safe_define_method` is intenteded to ensure the resource methods do
+  not conflict with methods of Object, such as `#send`, and `#object_id`.
+  These are now tested only in local testing but not at runtime. This allows
+  for projects to add functionality to Object without triggering this
+  check.
+
+  See [related GitHub issue #771](https://github.com/aws/aws-sdk-ruby/issues/771).
+
 2.0.38 (2015-04-09)
 ------------------
 

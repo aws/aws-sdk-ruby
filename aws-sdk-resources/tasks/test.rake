@@ -8,6 +8,12 @@ RSpec::Core::RakeTask.new('test:unit:aws-sdk-resources') do |t|
 end
 task 'test:unit' => 'test:unit:aws-sdk-resources'
 
+task 'test:unit:resource-name-collisions' do
+  ENV['AWS_SDK_SAFE_DEFINE'] = '1'
+  Aws.load_all_services
+end
+task 'test:unit' => 'test:unit:resource-name-collisions'
+
 begin
   require 'cucumber/rake/task'
   desc = 'aws-sdk-resource integration tests'
