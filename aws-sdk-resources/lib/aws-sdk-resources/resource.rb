@@ -1,6 +1,6 @@
 module Aws
   module Resources
-    class Resource
+    class Resource < BasicObject
 
       extend OperationMethods
 
@@ -9,10 +9,16 @@ module Aws
       #     used to construct a {Client} unless `:client` is given.
       #   @option options [Client] :client
       def initialize(*args)
-        options = args.last.is_a?(Hash) ? args.pop.dup : {}
+        options = args.last.is_a?(::Hash) ? args.pop.dup : {}
         @identifiers = extract_identifiers(args, options)
         @data = options.delete(:data)
         @client = extract_client(options)
+      end
+
+      # Because we're a BasicObject
+      include ::Kernel
+      def self.const_missing(name)
+        ::Object.const_get(name)
       end
 
       # Marked private to prevent double documentation
