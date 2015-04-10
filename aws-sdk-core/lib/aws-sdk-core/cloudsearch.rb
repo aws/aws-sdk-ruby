@@ -1,5 +1,5 @@
 Aws.add_service(:CloudSearch, {
-  api: File.join(Aws::API_DIR, 'CloudSearch.api.json'),
-  docs: File.join(Aws::API_DIR, 'CloudSearch.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'CloudSearch.paginators.json'),
+  api: "#{Aws::API_DIR}/cloudsearch/2013-01-01/api-2.json",
+  docs: "#{Aws::API_DIR}/cloudsearch/2013-01-01/docs-2.json",
+  paginators: "#{Aws::API_DIR}/cloudsearch/2013-01-01/paginators-1.json",
 })

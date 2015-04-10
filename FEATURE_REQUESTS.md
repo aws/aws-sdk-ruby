@@ -40,27 +40,17 @@ Amazon CloudFront supports pre-signed URLs, similar to those used by Amazon S3. 
 
 See [related GitHub issue #700](https://github.com/aws/aws-sdk-ruby/issues/700).
 
-### Adding `#exists?` method to Resource Classes
-
-Version 1 of the AWS SDK for Ruby had hand-coded methods for each resource class that would return a boolean value as a response to `#exists?`. These methods would typically call an API operation to describe the resource, rescuing errors as appropriate.
-
-No such functionality exists in the version 2 SDK currently. It would be ideal to avoid hand-coding these methods. One possible solution is to add waiters for each resource type, e.g. `:bucket_exists`. The resource classes could be linked to their exists waiter. The resource class would poll the waiter exactly once, returning a true or false value.
-
-This approach has the benefit of expanding waiter coverage and providing a reliable `#exists?` method.
-
-See [related GitHub issue #696](https://github.com/aws/aws-sdk-ruby/issues/696).
-
-### Amazon S3 Presigned Post
-
-The version 1 SDK has support for generating a pre-signed POST request. This returned a hash of key/value pairs that should be embedded into a HTML POST form for browsers. This should be ported to the version 2 SDK, and updated to use signature version 4.
-
-See [related GitHub issue #720](https://github.com/aws/aws-sdk-ruby/issues/720).
-
 ### Aws::ElasticBeanstalk::Client Waiters
 
 There are currently no waiters for `Aws::ElasticBeanstalk::Client`. Particular useful would be environment states.
 
 See [related GitHub issue aws/aws-sdk-core-ruby#216](https://github.com/aws/aws-sdk-core-ruby/issues/216).
+
+### Aws::ECS::Client Waiters
+
+There are currently no waiters for `Aws::ECS::Client`.
+
+See [related GitHub issue #756](https://github.com/aws/aws-sdk-ruby/issues/756).
 
 ### Progress callbacks for Amazon S3 Object uploads
 

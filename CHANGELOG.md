@@ -1,8 +1,196 @@
 Unreleased Changes
 ------------------
 
+2.0.38 (2015-04-09)
+------------------
+
+* Upgrading - Aws::Lambda - AWS Lambda is exiting their preview period and has
+  made changes to their control plane APIs. If you are invoking methods outside
+  of `Aws::Lambda::Client#invoke_async`, you should switch to the
+  `Aws::LambdaPreview::Client` until you can upgrade.
+
+  ```ruby
+  # returns the stable 2015-03-01 API client
+  lambda = Aws::Lambda::Client.new
+
+  # returns the preview API client
+  lambda = Aws::LambdaPreview::Client.new
+  ```
+
+* Feature - Aws::WorkSpaces - Added support for Amazon WorkSpaces.
+
+* Feature - Aws::ECS - You can now use the Amazon ECS Service scheduler to
+  manage long-running applications and services. The Service scheduler allows
+  you to distribute traffic across your containers using Elastic Load Balancing.
+
+* Feature - Aws::S3 - Added support for resource based permissions for invoking
+  Lambda functions via bucket notifications.
+
+* Upgrading - Aws::S3::Client - Deprecated two methods:
+
+  * `Aws::S3::Client#put_bucket_notification`
+  * `Aws::S3::Client#get_bucket_notification`
+
+  These methods have been replaced by:
+
+  * `Aws::S3::Client#put_bucket_notification_configuration`
+  * `Aws::S3::Client#get_bucket_notification_configuration`
+
+  The method signatures for the old two methods did not correctly allow users
+  to specify multiple topic, queue, and lambda function configurations. The
+  new methods, suffixed by `_notification` correct these errors. The new
+  methods now also support resource based permissions on notifications to
+  lambda functions.
+
+
+  ```ruby
+  s3 = Aws::S3::Client.new
+
+  # old
+  s3.put_bucket_notification(
+    bucket: 'aws-sdk',
+    notification_configuration: {
+      topic_configuration: { id:'id1', events:[...] },
+      queue_configuration: { id:'id2', events:[...] },
+      cloud_function_configuration: { id:'id3', events:[...], invocation_role: '...' },
+    }
+  )
+
+  # new
+  s3.put_bucket_notification_configuration(
+    bucket: 'aws-sdk',
+    notification_configuration: {
+      topic_configurations: [
+      	{ id:'id1', events:[...] }
+      ],
+      queue_configurations: [
+      	{ id:'id2', events:[...] }
+      ],
+      lambda_function_configurations: [
+      	{ id:'id3', events:[...] }
+      ]
+    }
+  )
+  ```
+
+  Notice the `:lambda_function_configurations` does not take an
+  `:invocation_role` and that each of the configuration types now takes
+  a list of configurations.
+
+* Feature - Aws::MachineLearning - Added support for Amazon Machine Learning.
+
+2.0.37 (2015-04-07)
+------------------
+
+* Feature - Aws::DataPipeline - This release introduces support for AWS Data
+  Pipeline Deactivate feature. You now have the ability to deactivate a running
+  pipeline and activate it later at a time of your choosing.
+
+* Feature - Aws::ElasticBeanstalk - Added new `#abort_environment_update`
+  operation for Elastic Beanstalk. Added a new parameter, `:solution_stack_name`,
+  to the `#update_environment` operation for ElasticBeanstalk.
+
+* Issue - Aws::IAM - Resolved an issue with `Aws::IAM::Resource#policy` that would
+  raise an `ArgumentError`. The resource definition incorrectly supplied the
+  argument as the "PolicyArn" when it should have been simply "Arn".
+
+  See [related GitHub issue #768](https://github.com/aws/aws-sdk-ruby/issues/768).
+
+2.0.36 (2015-04-06)
+------------------
+
+* Issue - Gemspec - Corrected the paths in the gemspec for the API files.
+
+2.0.35 (2015-04-06)
+------------------
+
+* Issue - Xml Parser - Resolved an issue with the recent XML parser update that
+  caused bugs when using Nokogiri. Nokogiri will inconsistently trigger one or
+  multiple text events for XML elements. This seems to be affected by the total
+  size of the XML document.
+
+  The XML parser now supports SAX parsing engines that trigger mulitple text
+  events for a single XML element value. Added test where a dummy engine simulates
+  this behavior.
+
+  See [related GitHub issue #764](https://github.com/aws/aws-sdk-ruby/issues/764).
+
+* Issue - Response Stubbing - Resolved an issue that prevented response stubs from
+  forcing a nil value for scalars.
+
+  See [related GitHub issue #763](https://github.com/aws/aws-sdk-ruby/issues/763).
+
+* Feature - Aws::Resources::Resource - Added support for custom waiters
+  with `Aws::Resources::Resource#wait_until`.
+
+2.0.34 (2015-04-02)
+------------------
+
+* Feature - Aws::CodeDeploy - AWS CodeDeploy now supports OnPremises
+  deployments.
+
+* Feature - Aws::RDS - Adds the #describe_certificates API call, and changes
+  other calls to show the current certificate.
+
+* Feature - Aws::EC2 - Added the "D2" family of instance types.
+
+* Feature - Aws::ElasticTranscoder - Adds support for PlayReady DRM.
+
+* Issue - Endpoints - Resolved an issue where trailing slashes were lost from
+  request parameter values that were bound to the end of the request uri path
+  as a greedy placeholder.
+
+  See [related GitHub issue #762](https://github.com/aws/aws-sdk-ruby/issues/762).
+
+* Issue - Aws::SNS - Removed some incorrect identifiers from a few resource methods
+  that were attempting to create `Aws::SNS::PlatformApplication` objects.
+
+* Issue - Aws::Glacier - Corrected a typo in the `Aws::Vault#initiate_archive_retrieval`
+  method.
+
+* Issue - Aws::Errors - Improved the logic for extracting errors from HTTP responses
+  to not fail when the body is empty or if the expected error XML or JSON is not
+  present.
+
+  Now falls back on providing a more generic service error based on the HTTP
+  status code.
+
+  See [related GitHub issue #755](https://github.com/aws/aws-sdk-ruby/pull/755).
+
+* Feature - Resources - Added `#exists?` methods to a handful of resource classes.
+  The `#exists?` method works by polling the exists wait for the resource exactly
+  once. If the waiter is successful, then `true` is returned, if it fails, then
+  `false` is returned.
+
+  To add additional `#exists?` methods, a waiter must be added to the resource
+  class as `Exists` and that waiter must be defined in the *.waiters.json
+  document for that service.
+
 * Issue - Presigned URLs - Resolved an issue where `x-amz-` headers were not
   being signed as part of a pre-signed URL.
+
+* Feature - Aws::S3 - Added `Aws::S3::PresignedPost`, making it possible
+  to generate a presigned post form for uploading a file from a browser
+  directly to Amazon S3.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new
+
+  # post form for a specific object
+  post = s3.bucket('bucket').object('key').presigned_post(options)
+  post.fields
+  #=> { ... }
+
+  # force a key prefix
+  post = s3.bucket('bucket').presigned_post(key_starts_with: '/uploads/')
+  post.fields
+  #=> { ... }
+  ```
+
+  See the API [PresignedPost documentation](http://docs.aws.amazon.com/sdkforruby/api/Aws/S3/PresignedPost.html)
+  for more information and examples.
+
+  See [related GitHub issue #720](https://github.com/aws/aws-sdk-ruby/issues/720).
 
 2.0.33 (2015-03-26)
 ------------------

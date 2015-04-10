@@ -7,16 +7,9 @@ module Aws
         def call(context)
           @handler.call(context).on(200) do |response|
             response.data = Structure.new([:location_constraint])
-            xml = MultiXml.parse(context.http_response.body_contents)
-            if constraint = xml['LocationConstraint']
-              response.data[:location_constraint] =
-                case constraint
-                when String then constraint
-                when Hash then constraint['__content__'].to_s
-                end
-            else
-              response.data[:location_constraint] = ''
-            end
+            xml = context.http_response.body_contents
+            matches = xml.match(/>(.+?)<\/LocationConstraint>/)
+            response.data[:location_constraint] = matches ? matches[1] : ''
           end
         end
       end

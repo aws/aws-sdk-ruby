@@ -1,7 +1,7 @@
 Aws.add_service(:RDS, {
-  api: File.join(Aws::API_DIR, 'RDS.api.json'),
-  docs: File.join(Aws::API_DIR, 'RDS.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'RDS.paginators.json'),
-  resources: File.join(Aws::API_DIR, 'RDS.resources.json'),
-  waiters: File.join(Aws::API_DIR, 'RDS.waiters.json'),
+  api: "#{Aws::API_DIR}/rds/2014-10-31/api-2.json",
+  docs: "#{Aws::API_DIR}/rds/2014-10-31/docs-2.json",
+  paginators: "#{Aws::API_DIR}/rds/2014-10-31/paginators-1.json",
+  resources: "#{Aws::API_DIR}/rds/2014-10-31/resources-1.json",
+  waiters: "#{Aws::API_DIR}/rds/2014-10-31/waiters-2.json",
 })

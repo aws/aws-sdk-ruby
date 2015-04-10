@@ -1,5 +1,5 @@
 Aws.add_service(:SWF, {
-  api: File.join(Aws::API_DIR, 'SWF.api.json'),
-  docs: File.join(Aws::API_DIR, 'SWF.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'SWF.paginators.json'),
+  api: "#{Aws::API_DIR}/swf/2012-01-25/api-2.json",
+  docs: "#{Aws::API_DIR}/swf/2012-01-25/docs-2.json",
+  paginators: "#{Aws::API_DIR}/swf/2012-01-25/paginators-1.json",
 })

@@ -3,11 +3,11 @@
 Feature: Amazon Lambda
 
   Scenario: Making a basic request
-    When I call the "ListEventSources" API
-    Then the response should contain a list of "EventSources"
+    When I call the "ListEventSourceMappings" API
+    Then the response should contain a list of "EventSourceMappings"
 
   Scenario: Error handling
-    When I attempt to call the "GetEventSource" API with:
+    When I attempt to call the "GetEventSourceMapping" API with:
     | UUID | fake-uuid |
     Then I expect the response error code to be "ResourceNotFoundException"
     And I expect the response error message to include:

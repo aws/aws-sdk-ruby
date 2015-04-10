@@ -47,6 +47,7 @@ module Aws
     Kinesis
     KMS
     Lambda
+    MachineLearning
     OpsWorks
     RDS
     Redshift
@@ -62,6 +63,7 @@ module Aws
     STS
     Support
     SWF
+    WorkSpaces
   )
 
   @config = {}
@@ -133,6 +135,7 @@ module Aws
     autoload :GlacierApiVersion, 'aws-sdk-core/plugins/glacier_api_version'
     autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
+    autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
     autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'

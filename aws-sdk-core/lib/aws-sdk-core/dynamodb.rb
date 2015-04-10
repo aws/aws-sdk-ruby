@@ -1,8 +1,8 @@
 Aws.add_service(:DynamoDB, {
-  api: File.join(Aws::API_DIR, 'DynamoDB.api.json'),
-  docs: File.join(Aws::API_DIR, 'DynamoDB.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'DynamoDB.paginators.json'),
-  waiters: File.join(Aws::API_DIR, 'DynamoDB.waiters.json'),
+  api: "#{Aws::API_DIR}/dynamodb/2012-08-10/api-2.json",
+  docs: "#{Aws::API_DIR}/dynamodb/2012-08-10/docs-2.json",
+  paginators: "#{Aws::API_DIR}/dynamodb/2012-08-10/paginators-1.json",
+  waiters: "#{Aws::API_DIR}/dynamodb/2012-08-10/waiters-2.json",
 })
 
 module Aws

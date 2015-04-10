@@ -1,5 +1,3 @@
-require 'multi_xml'
-
 module Aws
   module Plugins
     class S3CompleteMultipartUploadFix < Seahorse::Client::Plugin
@@ -17,10 +15,10 @@ module Aws
         end
 
         def check_for_error(context)
-          xml = MultiXml.parse(context.http_response.body_contents)
-          if xml['Error']
-            error_code = xml['Error']['Code']
-            error_message = xml['Error']['Message']
+          xml = context.http_response.body_contents
+          if xml.match(/<Error>/)
+            error_code = xml.match(/<Code>(.+?)<\/Code>/)[1]
+            error_message = xml.match(/<Message>(.+?)<\/Message>/)[1]
             S3::Errors.error_class(error_code).new(context, error_message)
           end
         end

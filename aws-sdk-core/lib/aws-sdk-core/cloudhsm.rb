@@ -1,4 +1,4 @@
 Aws.add_service(:CloudHSM, {
-  api: File.join(Aws::API_DIR, 'CloudHSM.api.json'),
-  docs: File.join(Aws::API_DIR, 'CloudHSM.docs.json'),
+  api: "#{Aws::API_DIR}/cloudhsm/2014-05-30/api-2.json",
+  docs: "#{Aws::API_DIR}/cloudhsm/2014-05-30/docs-2.json",
 })

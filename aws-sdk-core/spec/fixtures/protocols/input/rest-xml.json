@@ -855,6 +855,25 @@
           "body": "",
           "uri": "/"
         }
+      },
+      {
+        "given": {
+          "http": {
+            "method": "POST",
+            "requestUri": "/"
+          },
+          "input": {
+            "shape": "InputShape",
+            "payload": "foo"
+          },
+          "name": "OperationName"
+        },
+        "params": { "foo": {} },
+        "serialized": {
+          "method": "POST",
+          "body": "<foo/>",
+          "uri": "/"
+        }
       }
     ]
   },
@@ -982,6 +1001,27 @@
           "method": "GET",
           "body": "",
           "uri": "/my%2Fbucket/testing%20/123"
+        }
+      },
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/{Bucket}/{Key+}"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Key": "/surrounded/by/slashes/",
+          "Bucket": "my/bucket"
+        },
+        "serialized": {
+          "method": "GET",
+          "body": "",
+          "uri": "/my%2Fbucket//surrounded/by/slashes/"
         }
       }
     ]

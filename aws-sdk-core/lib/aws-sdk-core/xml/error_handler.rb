@@ -1,4 +1,4 @@
-require 'multi_xml'
+require 'cgi'
 
 module Aws
   module Xml
@@ -14,22 +14,29 @@ module Aws
       private
 
       def error(context)
-        if empty_body?(context)
-          error_code = empty_body_error_code(context)
-          error_message = ''
-        else
-          error_code, error_message = extract_error(context)
-        end
+        body = context.http_response.body_contents
+        code, message = extract_error(body, context)
         svc = context.client.class.name.split('::')[1]
         errors_module = Aws.const_get(svc).const_get(:Errors)
-        errors_module.error_class(error_code).new(context, error_message)
+        errors_module.error_class(code).new(context, message)
       end
 
-      def empty_body?(context)
-        context.http_response.body_contents.empty?
+      def extract_error(body, context)
+        [
+          error_code(body, context),
+          error_message(body),
+        ]
       end
 
-      def empty_body_error_code(context)
+      def error_code(body, context)
+        if matches = body.match(/<Code>(.+?)<\/Code>/)
+          remove_prefix(unescape(matches[1]), context)
+        else
+          http_status_error_code(context)
+        end
+      end
+
+      def http_status_error_code(context)
         status_code = context.http_response.status_code
         {
           302 => 'MovedTemporarily',
@@ -42,20 +49,24 @@ module Aws
         }[status_code] || "Http#{status_code}Error"
       end
 
-      def extract_error(context)
-        error = MultiXml.parse(context.http_response.body_contents)
-        %w(Response ErrorResponse Errors Error).each do |wrapper|
-          error = error[wrapper] if error[wrapper]
-        end
-        [remove_prefix(context, error['Code']), error['Message']]
-      end
-
-      def remove_prefix(context, error_code)
+      def remove_prefix(error_code, context)
         if prefix = context.config.api.metadata('errorPrefix')
           error_code.sub(/^#{prefix}/, '')
         else
           error_code
         end
+      end
+
+      def error_message(body)
+        if matches = body.match(/<Message>(.+?)<\/Message>/)
+          unescape(matches[1])
+        else
+          ''
+        end
+      end
+
+      def unescape(str)
+        CGI.unescapeHTML(str)
       end
 
     end

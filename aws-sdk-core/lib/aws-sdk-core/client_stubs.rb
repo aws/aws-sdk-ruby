@@ -169,8 +169,12 @@ module Aws
       def structure_obj(shape, hash)
         stubs = Structure.new(shape.member_names)
         shape.members.each do |member_name, member_shape|
-          value = structure_value(shape, member_name, member_shape, hash)
-          stubs[member_name] = stub(member_shape, value)
+          if hash.key?(member_name) && hash[member_name].nil?
+            stubs[member_name] = nil
+          else
+            value = structure_value(shape, member_name, member_shape, hash)
+            stubs[member_name] = stub(member_shape, value)
+          end
         end
         stubs
       end

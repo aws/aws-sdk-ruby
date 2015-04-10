@@ -122,6 +122,7 @@ response:
     </DistributionList>
 data:
   :distribution_list:
+    :marker: ""
     :max_items: 100
     :is_truncated: false
     :quantity: 1

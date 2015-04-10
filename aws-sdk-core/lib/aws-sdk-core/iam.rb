@@ -1,6 +1,6 @@
 Aws.add_service(:IAM, {
-  api: File.join(Aws::API_DIR, 'IAM.api.json'),
-  docs: File.join(Aws::API_DIR, 'IAM.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'IAM.paginators.json'),
-  resources: File.join(Aws::API_DIR, 'IAM.resources.json'),
+  api: "#{Aws::API_DIR}/iam/2010-05-08/api-2.json",
+  docs: "#{Aws::API_DIR}/iam/2010-05-08/docs-2.json",
+  paginators: "#{Aws::API_DIR}/iam/2010-05-08/paginators-1.json",
+  resources: "#{Aws::API_DIR}/iam/2010-05-08/resources-1.json",
 })

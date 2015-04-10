@@ -97,6 +97,10 @@ module Aws
         reshape 'Timestamp', 'type' => 'timestamp'
       end
 
+      customize 'machinelearning' do
+        add_plugin 'Aws::Plugins::MachineLearningPredictEndpoint'
+      end
+
       customize 'route53' do
         add_plugin 'Aws::Plugins::Route53IdFix'
         reshape 'PageMaxItems', 'type' => 'integer'
@@ -113,6 +117,8 @@ module Aws
         add_plugin 'Aws::Plugins::S3SseCpk'
         add_plugin 'Aws::Plugins::S3UrlEncodedKeys'
         add_plugin 'Aws::Plugins::S3RequestSigner'
+
+        api.definition['metadata'].delete('signatureVersion')
 
         # required for the GetBucketLocation fix to work, disabled normal
         # parsing of the output

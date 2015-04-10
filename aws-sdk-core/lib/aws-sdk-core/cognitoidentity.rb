@@ -1,4 +1,4 @@
 Aws.add_service(:CognitoIdentity, {
-  api: File.join(Aws::API_DIR, 'CognitoIdentity.api.json'),
-  docs: File.join(Aws::API_DIR, 'CognitoIdentity.docs.json'),
+  api: "#{Aws::API_DIR}/cognito-identity/2014-06-30/api-2.json",
+  docs: "#{Aws::API_DIR}/cognito-identity/2014-06-30/docs-2.json",
 })

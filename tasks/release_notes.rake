@@ -47,6 +47,8 @@ task 'release_notes:html' do
   end
 
   template = File.read('tasks/release-notes-template.html.erb')
-  puts ERB.new(template, false, '<>').result(binding)
+  File.open('release-notes.html', 'w', encoding: 'UTF-8') do |file|
+    file.write(ERB.new(template, false, '<>').result(binding))
+  end
 
 end

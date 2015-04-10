@@ -1,5 +1,5 @@
 Aws.add_service(:Lambda, {
-  api: File.join(Aws::API_DIR, 'Lambda.api.json'),
-  docs: File.join(Aws::API_DIR, 'Lambda.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'Lambda.paginators.json'),
+  api: "#{Aws::API_DIR}/lambda/2015-03-31/api-2.json",
+  docs: "#{Aws::API_DIR}/lambda/2015-03-31/docs-2.json",
+  paginators: "#{Aws::API_DIR}/lambda/2015-03-31/paginators-1.json",
 })

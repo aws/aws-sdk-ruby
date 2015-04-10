@@ -1,6 +1,6 @@
 Aws.add_service(:Kinesis, {
-  api: File.join(Aws::API_DIR, 'Kinesis.api.json'),
-  docs: File.join(Aws::API_DIR, 'Kinesis.docs.json'),
-  paginators: File.join(Aws::API_DIR, 'Kinesis.paginators.json'),
-  waiters: File.join(Aws::API_DIR, 'Kinesis.waiters.json'),
+  api: "#{Aws::API_DIR}/kinesis/2013-12-02/api-2.json",
+  docs: "#{Aws::API_DIR}/kinesis/2013-12-02/docs-2.json",
+  paginators: "#{Aws::API_DIR}/kinesis/2013-12-02/paginators-1.json",
+  waiters: "#{Aws::API_DIR}/kinesis/2013-12-02/waiters-2.json",
 })

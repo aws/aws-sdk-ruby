@@ -62,7 +62,7 @@ module Aws
       end
 
       def empty_value?(value)
-        value.nil? || value == [] || value == {}
+        value.nil? || value == '' || value == [] || value == {}
       end
 
     end

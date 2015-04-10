@@ -55,3 +55,13 @@ task :release => [
   'release:publish',
   'release:cleanup'
 ]
+
+desc 'Generate the API documentation.'
+task 'release:patch' do
+  parts = $VERSION.split(/\./)
+  parts[-1] = (parts[-1].to_i + 1).to_s
+  version = parts.join('.')
+  env = {}
+  env['VERSION'] = version
+  sh(env, 'bundle exec rake release')
+end

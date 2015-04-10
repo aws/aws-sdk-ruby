@@ -13,17 +13,32 @@ module Aws
 
       private
 
-      def extract_error(context)
-        json = MultiJson.load(context.http_response.body_contents)
-        error_code = json['code'] || json['__type']
-        error_code ||= context.http_response.headers['x-amzn-errortype']
-        error_code = error_code.split('#').last
-        if error_code == 'RequestEntityTooLarge'
-          error_message = 'Request body must be less than 1 MB'
+      def extract_error(body, context)
+        json = MultiJson.load(body)
+        code = error_code(json, context)
+        message = error_message(code, json)
+        [code, message]
+      rescue MultiJson::ParseError
+        [http_status_error_code(context), '']
+      end
+
+      def error_code(json, context)
+        code = json['__type']
+        code ||= json['code']
+        code ||= context.http_response.headers['x-amzn-errortype']
+        if code
+          code.split('#').last
         else
-          error_message = json['message'] || json['Message']
+          http_status_error_code(context)
         end
-        [error_code, error_message]
+      end
+
+      def error_message(code, json)
+        if code == 'RequestEntityTooLarge'
+          'Request body must be less than 1 MB'
+        else
+          json['message'] || json['Message'] || ''
+        end
       end
 
     end

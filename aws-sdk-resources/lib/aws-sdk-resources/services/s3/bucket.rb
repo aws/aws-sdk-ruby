@@ -39,6 +39,24 @@ module Aws
         url.to_s
       end
 
+      # Creates a {PresignedPost} that makes it easy to upload a file from
+      # a web browser direct to Amazon S3 using an HTML post form with
+      # a file field.
+      #
+      # See the {PresignedPost} documentation for more information.
+      # @note You must specify `:key` or `:key_starts_with`. All other options
+      #   are optional.
+      # @option (see PresignedPost#initialize)
+      # @return [PresignedPost]
+      # @see PresignedPost
+      def presigned_post(options = {})
+        PresignedPost.new(
+          client.config.credentials,
+          client.config.region,
+          name,
+          options)
+      end
+
       private
 
       def dns_compatible?(scheme)
