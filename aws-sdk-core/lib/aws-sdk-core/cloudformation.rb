@@ -3,4 +3,5 @@ Aws.add_service(:CloudFormation, {
   docs: "#{Aws::API_DIR}/cloudformation/2010-05-15/docs-2.json",
   paginators: "#{Aws::API_DIR}/cloudformation/2010-05-15/paginators-1.json",
   resources: "#{Aws::API_DIR}/cloudformation/2010-05-15/resources-1.json",
+  waiters: "#{Aws::API_DIR}/cloudformation/2010-05-15/waiters-1.json",
 })
