@@ -11,7 +11,7 @@ module Aws
         end
 
         def parse(xml)
-          Ox.sax_parse(@stack, StringIO.new(xml))
+          Ox.sax_parse(@stack, StringIO.new(xml), :convert_special => true)
         end
 
       end

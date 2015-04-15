@@ -695,6 +695,14 @@ module Aws
               expect(parsed[:not_encoded]).to eq('mno')
             end
 
+            it 'xml decodes string values' do
+              definition['members'] = {
+                'data' => { 'type' => 'string' }
+              }
+              xml = "<xml><data>a&amp;b</data></xml>"
+              expect(parse(xml)[:data]).to eq('a&b')
+            end
+
           end
 
           describe 'blobs' do
