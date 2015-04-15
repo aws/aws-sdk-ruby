@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - XML Parsing - Resolved an issue where XML string values were not
+  being unescaped.
+
+  See [related GitHub issue #780](https://github.com/aws/aws-sdk-ruby/issues/780).
+
 * Issue - Resources - Resolved an issue that prevented the `aws-sdk-resources`
   gem from loading resource definitions that have naming conflicts with
   the Capistrano project.
