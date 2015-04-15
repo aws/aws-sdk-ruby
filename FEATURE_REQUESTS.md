@@ -56,4 +56,10 @@ See [related GitHub issue #756](https://github.com/aws/aws-sdk-ruby/issues/756).
 
 To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
 
-See [related Github issue #648](https://github.com/aws/aws-sdk-ruby/issues/648#issuecomment-78246370).
+See [related GitHub issue #648](https://github.com/aws/aws-sdk-ruby/issues/648#issuecomment-78246370).
+
+### Paperclip Integration
+
+Version 1 of the AWS SDK for Ruby can be used by paperclip to upload file attachments to Amazon S3. This should be revisited to add support for version 2 of hte AWS SDK for Ruby.
+
+See [related GitHub issue #781](https://github.com/aws/aws-sdk-ruby/issues/781).
