@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Waiters - Added waiters for:
+
+  * Aws::CloudFormation
+  * Aws::ElastiCache
+  * Aws::OpsWorks
+
+  Expanded waiters for:
+
+  * Aws::EC2
+
+  Also resolved a few issues in the Aws::CloudFront and Aws::RDS waiters.
+
+  See [related GitHub issue #758](https://github.com/aws/aws-sdk-ruby/pull/758).
+
+* Feature - Aws::DynamoDB - Added resource class for `Aws::DynamoDB::Table`.
+
 * Issue - XML Parsing - Resolved an issue where XML string values were not
   being unescaped.
 
@@ -17,8 +33,6 @@ Unreleased Changes
   check.
 
   See [related GitHub issue #771](https://github.com/aws/aws-sdk-ruby/issues/771).
-
-* Feature - Aws::DynamoDB - Added resource class for `Aws::DynamoDB::Table`.
 
 2.0.38 (2015-04-09)
 ------------------
