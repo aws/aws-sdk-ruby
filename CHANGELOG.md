@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoSync - Adds support for Amazon Cognito Events, a new
+  feature that allows developers to run an AWS Lambda function in response to
+  important events in Amazon Cognito. The first event supported is the Sync
+  Trigger event.
+
 * Feature - Waiters - Added waiters for:
 
   * Aws::CloudFormation
