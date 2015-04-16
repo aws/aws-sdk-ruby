@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.39 (2015-04-16)
 ------------------
 
 * Feature - Aws::ConfigService - SNS topics on AWS Config's DeliveryChannel are
