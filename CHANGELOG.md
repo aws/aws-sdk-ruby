@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - SNS topics on AWS Config's DeliveryChannel are
+  now optional. If the SNS delivery is turned off the last status will be
+  Not_Applicable.
+
 * Feature - Aws::CognitoSync - Adds support for Amazon Cognito Events, a new
   feature that allows developers to run an AWS Lambda function in response to
   important events in Amazon Cognito. The first event supported is the Sync
