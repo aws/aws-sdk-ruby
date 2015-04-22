@@ -33,6 +33,7 @@ module Aws
               list[:l] << format(value)
             end
           when String then { s: obj }
+          when Symbol then { s: obj.to_s }
           when Numeric then { n: obj.to_s }
           when StringIO, IO then { b: obj.read }
           when Set then format_set(obj)
@@ -49,7 +50,7 @@ module Aws
 
         def format_set(set)
           case set.first
-          when String then { ss: set.map(&:to_s) }
+          when String, Symbol then { ss: set.map(&:to_s) }
           when Numeric then { ns: set.map(&:to_s) }
           when StringIO, IO then { bs: set.map(&:read) }
           else

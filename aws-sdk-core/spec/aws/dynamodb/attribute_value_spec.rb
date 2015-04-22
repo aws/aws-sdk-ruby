@@ -31,6 +31,11 @@ module Aws
           expect(formatted).to eq(ss: %w(abc mno))
         end
 
+        it 'converts symbol sets to :ss (string set)' do
+          formatted = value.marshal(Set.new([:abc, :mno]))
+          expect(formatted).to eq(ss: %w(abc mno))
+        end
+
         it 'converts numeric sets to :ns (number set)' do
           formatted = value.marshal(Set.new([123, 456]))
           expect(formatted).to eq(ns: %w(123 456))
@@ -50,6 +55,10 @@ module Aws
 
         it 'converts strings to :s' do
           expect(value.marshal('abc')).to eq(s: 'abc')
+        end
+
+        it 'converts symbol to :s' do
+          expect(value.marshal(:abc)).to eq(s: 'abc')
         end
 
         it 'converts booleans :bool' do
