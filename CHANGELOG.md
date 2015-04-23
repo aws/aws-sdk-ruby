@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Added support for `Aws::IAM::Client#access_key_last_used`.
+
 * Feature - Aws::CloudSearchDomain - Added support for response expressions.
 
 2.0.39 (2015-04-16)
