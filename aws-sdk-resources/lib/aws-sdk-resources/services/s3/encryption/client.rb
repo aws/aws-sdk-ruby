@@ -80,14 +80,14 @@ module Aws
     #         @keys = keys
     #         @encryption_materials = Aws::S3::Encryption::Materials.new(
     #           key: @keys[default_key_name],
-    #           description: MultiJson.dump(key: default_key_name),
+    #           description: JSON.dump(key: default_key_name),
     #         )
     #       end
     #
     #       attr_reader :encryption_materials
     #
     #       def key_for(matdesc)
-    #         key_name = MultiJson.load(matdesc)['key']
+    #         key_name = JSON.parse(matdesc)['key']
     #         if key = @keys[key_name]
     #           key
     #         else

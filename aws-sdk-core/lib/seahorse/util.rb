@@ -25,7 +25,7 @@ module Seahorse
       end
 
       def load_json(path)
-        MultiJson.load(File.open(path, 'r', encoding: 'UTF-8') { |f| f.read })
+        JSON.parse(File.open(path, 'r', encoding: 'UTF-8') { |f| f.read })
       end
 
     end

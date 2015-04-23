@@ -45,9 +45,9 @@ module Aws
         end
 
         def validate_desc(description)
-          MultiJson.load(description)
+          JSON.parse(description)
           description
-        rescue MultiJson::ParseError
+        rescue JSON::ParserError
           msg = "expected description to be a valid JSON document string"
           raise ArgumentError, msg
         end

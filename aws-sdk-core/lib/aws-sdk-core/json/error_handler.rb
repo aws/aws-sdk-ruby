@@ -14,11 +14,11 @@ module Aws
       private
 
       def extract_error(body, context)
-        json = MultiJson.load(body)
+        json = JSON.parse(body)
         code = error_code(json, context)
         message = error_message(code, json)
         [code, message]
-      rescue MultiJson::ParseError
+      rescue JSON::ParserError
         [http_status_error_code(context), '']
       end
 

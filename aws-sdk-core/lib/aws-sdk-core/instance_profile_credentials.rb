@@ -64,7 +64,7 @@ module Aws
     end
 
     def refresh
-      credentials = MultiJson.load(get_credentials)
+      credentials = JSON.parse(get_credentials)
       @access_key_id = credentials['AccessKeyId']
       @secret_access_key = credentials['SecretAccessKey']
       @session_token = credentials['Token']
