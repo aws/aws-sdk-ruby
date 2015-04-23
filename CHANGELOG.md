@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudSearchDomain - Added support for response expressions.
+
 2.0.39 (2015-04-16)
 ------------------
 
