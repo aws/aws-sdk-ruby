@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added support for the new 2015-03-01 API version.
+
 * Feature - Aws::IAM - Added support for `Aws::IAM::Client#access_key_last_used`.
 
 * Feature - Aws::CloudSearchDomain - Added support for response expressions.
