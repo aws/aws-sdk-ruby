@@ -32,58 +32,7 @@ module Aws
             next
           end
 
-          let(:shapes) {{
-            'StructureShape' => {
-              'type' => 'structure',
-              'members' => {
-                # complex members
-                'Nested' => { 'shape' => 'StructureShape' },
-                'NestedList' => { 'shape' => 'StructureList' },
-                'NestedMap' => { 'shape' => 'StructureMap' },
-                'NumberList' => { 'shape' => 'IntegerList' },
-                'StringMap' => { 'shape' => 'StringMap' },
-                # scalar members
-                'Blob' => { 'shape' => 'BlobShape' },
-                'Byte' => { 'shape' => 'ByteShape' },
-                'Boolean' => { 'shape' => 'BooleanShape' },
-                'Character' => { 'shape' => 'CharacterShape' },
-                'Double' => { 'shape' => 'DoubleShape' },
-                'Float' => { 'shape' => 'FloatShape' },
-                'Integer' => { 'shape' => 'IntegerShape' },
-                'Long' => { 'shape' => 'LongShape' },
-                'String' => { 'shape' => 'StringShape' },
-                'Timestamp' => { 'shape' => 'TimestampShape' },
-              }
-            },
-            'StructureList' => {
-              'type' => 'list',
-              'member' => { 'shape' => 'StructureShape' }
-            },
-            'StructureMap' => {
-              'type' => 'map',
-              'key' => { 'shape' => 'StringShape' },
-              'value' => { 'shape' => 'StructureShape' }
-            },
-            'IntegerList' => {
-              'type' => 'list',
-              'member' => { 'shape' => 'IntegerShape' }
-            },
-            'StringMap' => {
-              'type' => 'map',
-              'key' => { 'shape' => 'StringShape' },
-              'value' => { 'shape' => 'StringShape' }
-            },
-            'BlobShape' => { 'type' => 'blob' },
-            'ByteShape' => { 'type' => 'byte' },
-            'BooleanShape' => { 'type' => 'boolean' },
-            'CharacterShape' => { 'type' => 'character' },
-            'DoubleShape' => { 'type' => 'double' },
-            'FloatShape' => { 'type' => 'float' },
-            'IntegerShape' => { 'type' => 'integer' },
-            'LongShape' => { 'type' => 'long' },
-            'StringShape' => { 'type' => 'string' },
-            'TimestampShape' => { 'type' => 'timestamp' },
-          }}
+          let(:shapes) { ApiHelper.sample_shapes }
 
           let(:parser) {
             engine_class = Parser.const_get(engine)
