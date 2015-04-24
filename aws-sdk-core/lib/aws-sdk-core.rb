@@ -97,14 +97,15 @@ module Aws
 
   # @api private
   module Api
-    autoload :Customizer, 'aws-sdk-core/api/customizer'
+    autoload :Builder, 'aws-sdk-core/api/builder'
+    autoload :Customizations, 'aws-sdk-core/api/customizations'
     autoload :Documenter, 'aws-sdk-core/api/documenter'
     autoload :Docstrings, 'aws-sdk-core/api/docstrings'
     autoload :Manifest, 'aws-sdk-core/api/manifest'
     autoload :ManifestBuilder, 'aws-sdk-core/api/manifest_builder'
     autoload :OperationDocumenter, 'aws-sdk-core/api/operation_documenter'
     autoload :OperationExample, 'aws-sdk-core/api/operation_example'
-    autoload :ServiceCustomizations, 'aws-sdk-core/api/service_customizations'
+    autoload :ShapeMap, 'aws-sdk-core/api/shape_map'
   end
 
   # @api private

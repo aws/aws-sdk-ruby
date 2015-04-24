@@ -40,6 +40,7 @@ module Aws
       @secret_access_key = creds.secret_access_key
       @session_token = creds.session_token
       @expiration = creds.expiration
+      creds
     end
 
   end

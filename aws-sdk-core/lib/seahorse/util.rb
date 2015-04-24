@@ -1,10 +1,10 @@
 require 'cgi'
 
 module Seahorse
+  # @api private
   module Util
     class << self
 
-      # @api private
       def irregular_inflections(hash)
         @irregular_inflections.update(hash)
         @irregular_regex = Regexp.new(@irregular_inflections.keys.join('|'))

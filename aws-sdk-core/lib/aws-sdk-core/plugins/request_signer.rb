@@ -40,15 +40,15 @@ module Aws
       # Intentionally not documented - this should go away when all
       # services support signature version 4 in every region.
       option(:signature_version) do |cfg|
-        cfg.api.metadata('signatureVersion')
+        cfg.api.metadata['signatureVersion']
       end
 
       option(:sigv4_name) do |cfg|
-        cfg.api.metadata('signingName') || cfg.api.metadata('endpointPrefix')
+        cfg.api.metadata['signingName'] || cfg.api.metadata['endpointPrefix']
       end
 
       option(:sigv4_region) do |cfg|
-        prefix = cfg.api.metadata('endpointPrefix')
+        prefix = cfg.api.metadata['endpointPrefix']
         endpoint = cfg.endpoint.to_s
         if matches = endpoint.match(/#{prefix}[.-](.+)\.amazonaws\.com/)
           matches[1] == 'us-gov' ? 'us-gov-west-1' : matches[1]
@@ -101,9 +101,9 @@ module Aws
         end
 
         def unsigned_request?(context)
-          if context.config.api.metadata('endpointPrefix') == 'sts'
+          if context.config.api.metadata['endpointPrefix'] == 'sts'
             STS_UNSIGNED_REQUESTS.include?(context.operation.name)
-          elsif context.config.api.metadata('endpointPrefix') == 'cloudsearchdomain'
+          elsif context.config.api.metadata['endpointPrefix'] == 'cloudsearchdomain'
             context.config.credentials.nil? || !context.config.credentials.set?
           else
             false

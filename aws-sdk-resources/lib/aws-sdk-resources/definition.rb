@@ -59,7 +59,7 @@ module Aws
 
       def define_data_attributes(namespace, resource, definition)
         return unless shape_name = definition['shape']
-        shape = resource.client_class.api.shape_map.shape('shape' => shape_name)
+        shape = resource.client_class.api.metadata['shapes'][shape_name]
         shape.member_names.each do |member_name|
           if
             resource.instance_methods.include?(member_name) ||

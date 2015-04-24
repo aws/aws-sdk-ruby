@@ -3,8 +3,8 @@ module Aws
     class Parser
       class Stack
 
-        def initialize(shape, result = nil)
-          @shape = shape
+        def initialize(shape_ref, result = nil)
+          @shape_ref = shape_ref
           @frame = self
           @result = result
         end
@@ -19,7 +19,7 @@ module Aws
 
         def attr(name, value)
           if name.to_s == 'encoding' && value.to_s == 'base64'
-            @frame = BlobFrame.new(@frame.parent, @frame.shape)
+            @frame = BlobFrame.new(@frame.parent, @frame.shape_ref)
           else
             start_element(name)
             text(value)
@@ -45,7 +45,7 @@ module Aws
         end
 
         def child_frame(name)
-          Frame.new(self, @shape, @result)
+          Frame.new(self, @shape_ref, @result)
         end
 
         def consume_child_frame(frame)

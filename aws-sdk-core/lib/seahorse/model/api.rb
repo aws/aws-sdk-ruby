@@ -2,82 +2,45 @@ module Seahorse
   module Model
     class Api
 
-      # @param [Hash] definition
-      def initialize(definition = {})
-        @metadata = definition['metadata'] || {}
-        @version = metadata('apiVersion')
-        @documentation = definition['documentation']
-        @definition = definition
-        @shape_map = ShapeMap.new(definition['shapes'] || {})
-        compute_operations
+      def initialize
+        @metadata = {}
+        @operations = {}
       end
 
       # @return [String, nil]
-      attr_reader :version
-
-      # @return [Array<Symbol>]
-      attr_reader :operation_names
-
-      # @return [String, nil]
-      attr_reader :documentation
-
-      # @return [ShapeMap]
-      attr_reader :shape_map
+      attr_accessor :version
 
       # @return [Hash]
-      attr_reader :definition
+      attr_accessor :metadata
 
-      # @param [Symbol] name
-      # @return [Boolean] Returns `true` if this API provides an operation
-      #   with the given name.
-      def operation?(name)
-        @operation_defs.key?(name.to_sym)
-      end
-
-      # @param [Symbol] name
-      # @return [Operation]
-      def operation(name)
-        name = name.to_sym
-        if definition = @operation_defs[name]
-          @operations[name] ||= Operation.new(definition, shape_map: @shape_map)
+      def operations(&block)
+        if block_given?
+          @operations.each(&block)
         else
-          raise ArgumentError, "unknown operation :#{name}"
+          @operations.enum_for(:each)
         end
       end
 
-      # @return [Enumerable]
-      def operations
-        enum_for(:each_operation) { |*args| operation_names.size }
+      def operation(name)
+        if @operations.key?(name)
+          @operations[name]
+        else
+          raise ArgumentError, "unknown operation #{name.inspect}"
+        end
       end
 
-      # @param [String] key
-      # @return [Object, nil]
-      def metadata(key)
-        @metadata[key]
+      def operation_names
+        @operations.keys
+      end
+
+      def add_operation(name, operation)
+        @operations[name] = operation
       end
 
       # @api private
       # @return [String]
       def inspect
         "#<#{self.class.name} version=#{version.inspect}>"
-      end
-
-      private
-
-      def each_operation(&block)
-        operation_names.each do |name|
-          yield(name, operation(name))
-        end
-      end
-
-      def compute_operations
-        @operations = {}
-        @operation_defs = {}
-        (definition['operations'] || {}).each do |name,definition|
-          name = Util.underscore(name).to_sym
-          @operation_defs[name] = definition
-        end
-        @operation_names = @operation_defs.keys
       end
 
     end

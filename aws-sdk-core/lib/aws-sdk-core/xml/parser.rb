@@ -13,9 +13,9 @@ module Aws
       autoload :OxEngine, 'aws-sdk-core/xml/parser/engines/ox'
       autoload :RexmlEngine, 'aws-sdk-core/xml/parser/engines/rexml'
 
-      # @param [Seahorse::Model::Shapes::Structure] shape
-      def initialize(shape, options = {})
-        @shape = shape
+      # @param [Seahorse::Model::ShapeRef] rules
+      def initialize(rules, options = {})
+        @rules = rules
         @engine = options[:engine] || self.class.engine
       end
 
@@ -24,7 +24,7 @@ module Aws
       # @return [Structure]
       def parse(xml, target = nil)
         xml = '<xml/>' if xml.nil? or xml.empty?
-        stack = Stack.new(@shape, target)
+        stack = Stack.new(@rules, target)
         @engine.new(stack).parse(xml.to_s)
         stack.result
       end

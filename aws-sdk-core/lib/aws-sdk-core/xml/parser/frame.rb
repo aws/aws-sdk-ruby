@@ -6,14 +6,60 @@ module Aws
     class Parser
       class Frame
 
-        def initialize(parent, shape, result = nil)
+        include Seahorse::Model::Shapes
+
+        FRAME_CLASSES = {
+          NilClass => NullFrame,
+          BlobShape => BlobFrame,
+          BooleanShape => BooleanFrame,
+          FloatShape => FloatFrame,
+          IntegerShape => IntegerFrame,
+          ListShape => ListFrame,
+          MapShape => MapFrame,
+          StringShape => StringFrame,
+          StructureShape => StructureFrame,
+          TimestampShape => TimestampFrame,
+        }
+
+        class << self
+
+          def new(parent, shape_ref, result = nil)
+            if self == Frame
+              frame = frame_class(shape_ref && shape_ref.shape).allocate
+              frame.send(:initialize, parent, shape_ref, result)
+              frame
+            else
+              super
+            end
+          end
+
+          private
+
+          def frame_class(shape)
+            klass = FRAME_CLASSES[shape.class]
+            if ListFrame == klass && shape.flattened
+              FlatListFrame
+            elsif MapFrame == klass && shape.flattened
+              MapEntryFrame
+            else
+              klass
+            end
+          end
+
+        end
+
+
+        def initialize(parent, shape_ref, result = nil)
           @parent = parent
-          @shape = shape
+          @shape_ref = shape_ref
+          @shape = shape_ref.shape
           @result = result
           @text = []
         end
 
         attr_reader :parent
+
+        attr_reader :shape_ref
 
         attr_reader :shape
 
@@ -28,51 +74,6 @@ module Aws
         end
 
         def consume_child_frame(child); end
-
-        private
-
-        class << self
-
-          def new(parent, shape, result = nil)
-            if self == Frame
-              frame = frame_class(shape).allocate
-              frame.send(:initialize, parent, shape, result)
-              frame
-            else
-              super
-            end
-          end
-
-          private
-
-          def frame_class(shape)
-            @classes ||= {
-              'blob' => BlobFrame,
-              'boolean' => BooleanFrame,
-              'byte' => BlobFrame,
-              'character' => StringFrame,
-              'double' => FloatFrame,
-              'float' => FloatFrame,
-              'integer' => IntegerFrame,
-              'list' => ListFrame,
-              'list:flat' => FlatListFrame,
-              'long' => IntegerFrame,
-              'map' => MapFrame,
-              'map:flat' => MapEntryFrame,
-              'string' => StringFrame,
-              'structure' => StructureFrame,
-              'timestamp' => TimestampFrame,
-            }
-            if shape
-              type = shape.type
-              type += ':flat' if shape.definition['flattened']
-              @classes[type]
-            else
-              NullFrame
-            end
-          end
-
-        end
       end
 
       class StructureFrame < Frame

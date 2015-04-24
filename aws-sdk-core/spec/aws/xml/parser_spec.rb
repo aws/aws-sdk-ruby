@@ -32,24 +32,33 @@ module Aws
             next
           end
 
-          let(:members) { {} }
+          let(:shapes) {{
+            'OutputShape' => {
+              'type' => 'structure',
+              'members' => {}
+            }
+          }}
 
-          let(:definition) {{ 'type' => 'structure', 'members' => members }}
-
-          let(:shape) { Seahorse::Model::Shapes::Structure.new(definition) }
+          let(:api) {
+            Api::Builder.build({
+              'operations' => {
+                'ExampleOperation' => {
+                  'output' => { 'shape' => 'OutputShape' }
+                }
+              },
+              'shapes' => shapes,
+            })
+          }
 
           let(:parser) {
             engine_class = Parser.const_get(engine)
-            Parser.new(shape, engine: engine_class)
+            output = api.operation(:example_operation).output
+            Parser.new(output, engine: engine_class)
           }
 
           def parse(xml, to_h = true)
             data = parser.parse(xml)
-            if to_h
-              data.to_h
-            else
-              data
-            end
+            to_h ? data.to_h : data
           end
 
           it 'returns an empty hash when the XML is empty' do

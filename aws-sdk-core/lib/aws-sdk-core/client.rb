@@ -28,11 +28,13 @@ module Aws
       def define(svc_name, options)
         client_class = Class.new(self)
         client_class.identifier = svc_name.downcase.to_sym
-        [:api, :paginators, :waiters].each do |definition|
-          client_class.send("set_#{definition}", options[definition])
+        client_class.set_api(Api.build(options[:api]))
+        client_class.set_paginators(options[:paginators])
+        client_class.set_waiters(options[:waiters])
+        DEFAULT_PLUGINS.each do |plugin|
+          client_class.add_plugin(plugin)
         end
-        DEFAULT_PLUGINS.each { |plugin| client_class.add_plugin(plugin) }
-        Api::ServiceCustomizations.apply(client_class)
+        Api::Customizations.apply_plugins(client_class)
         client_class
       end
 

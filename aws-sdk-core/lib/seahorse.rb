@@ -62,7 +62,6 @@ module Seahorse
   module Model
     autoload :Api, 'seahorse/model/api'
     autoload :Operation, 'seahorse/model/operation'
-    autoload :ShapeMap, 'seahorse/model/shape_map'
     autoload :Shapes, 'seahorse/model/shapes'
   end
 
