@@ -1,214 +1,186 @@
 require 'spec_helper'
+require 'base64'
+require 'time'
 
 module Aws
   module Json
     describe Parser do
 
-      let(:members) { {} }
+      let(:shapes) {{
+        'StructureShape' => {
+          'type' => 'structure',
+          'members' => {
+            # complex members
+            'Nested' => { 'shape' => 'StructureShape' },
+            'NestedList' => { 'shape' => 'StructureList' },
+            'NestedMap' => { 'shape' => 'StructureMap' },
+            'NumberList' => { 'shape' => 'IntegerList' },
+            'StringMap' => { 'shape' => 'StringMap' },
+            # scalar members
+            'Blob' => { 'shape' => 'BlobShape' },
+            'Byte' => { 'shape' => 'ByteShape' },
+            'Boolean' => { 'shape' => 'BooleanShape' },
+            'Character' => { 'shape' => 'CharacterShape' },
+            'Double' => { 'shape' => 'DoubleShape' },
+            'Float' => { 'shape' => 'FloatShape' },
+            'Integer' => { 'shape' => 'IntegerShape' },
+            'Long' => { 'shape' => 'LongShape' },
+            'String' => { 'shape' => 'StringShape' },
+            'Timestamp' => { 'shape' => 'TimestampShape' },
+          }
+        },
+        'StructureList' => {
+          'type' => 'list',
+          'member' => { 'shape' => 'StructureShape' }
+        },
+        'StructureMap' => {
+          'type' => 'map',
+          'key' => { 'shape' => 'StringShape' },
+          'value' => { 'shape' => 'StructureShape' }
+        },
+        'IntegerList' => {
+          'type' => 'list',
+          'member' => { 'shape' => 'IntegerShape' }
+        },
+        'StringMap' => {
+          'type' => 'map',
+          'key' => { 'shape' => 'StringShape' },
+          'value' => { 'shape' => 'StringShape' }
+        },
+        'BlobShape' => { 'type' => 'blob' },
+        'ByteShape' => { 'type' => 'byte' },
+        'BooleanShape' => { 'type' => 'boolean' },
+        'CharacterShape' => { 'type' => 'character' },
+        'DoubleShape' => { 'type' => 'double' },
+        'FloatShape' => { 'type' => 'float' },
+        'IntegerShape' => { 'type' => 'integer' },
+        'LongShape' => { 'type' => 'long' },
+        'StringShape' => { 'type' => 'string' },
+        'TimestampShape' => { 'type' => 'timestamp' },
+      }}
 
       def parse(json)
-        shape = Seahorse::Model::Shapes::Structure.new('members' => members)
-        Parser.new.parse(shape, json).to_hash
+        shape_map = Api::ShapeMap.new(shapes)
+        rules = shape_map.shape_ref('shape' => 'StructureShape')
+        Parser.new(rules).parse(json).to_hash
       end
 
       it 'returns an empty hash when the JSON is {}' do
         expect(parse('{}')).to eq({})
       end
 
-      describe 'structures' do
-
-        it 'symbolizes structure members' do
-          members['Name'] = { 'type' => 'string' }
-          json = '{"Name":"John Doe"}'
-          expect(parse(json)).to eq(name: 'John Doe')
-        end
-
-        it 'parses members using their serialized name' do
-          members['First'] = {
-            'type' => 'string',
-            'locationName' => 'FirstName'
-          }
-          members['Last'] = {
-            'type' => 'string',
-            'locationName' => 'LastName'
-          }
-          json = '{"FirstName":"John", "LastName":"Doe"}'
-          expect(parse(json)).to eq(first: 'John', last: 'Doe')
-        end
-
-        it 'ignores non-described values' do
-          members['Foo'] = { 'type' => 'string' }
-          json = '{"Foo":"bar", "Abc":"xyz"}'
-          expect(parse(json)).to eq(foo: 'bar')
-        end
-
-        it 'skips over null values' do
-          members['Base'] = {
-            'type' => 'structure',
-            'members' => {
-              'Nested' => {
-                'type' => 'structure',
-                'members' => {
-                  'Leaf' => { 'type' => 'string' }
-                }
-              }
-            }
-          }
-          json = '{"Base":{"Nested":null}}'
-          expect(parse(json)).to eq(base: {})
-        end
-
+      it 'parses complex and nested documents' do
+        json = <<-JSON
+        {
+          "Nested": {
+            "Nested": {
+              "Nested": {
+                "Integer": 3
+              },
+              "Integer": 2
+            },
+            "Integer": 1
+          },
+          "NestedList": [
+            { "String": "v1" },
+            { "String": "v2" },
+            { "Nested": { "String": "v3" }}
+          ],
+          "NestedMap": {
+            "First": { "String": "v1" },
+            "Second": { "Nested": { "String": "v2" }}
+          },
+          "NumberList": [1,2,3,4,5],
+          "StringMap": {
+            "Size": "large",
+            "Color": "red"
+          },
+          "Blob": "#{Base64.strict_encode64('data')}",
+          "Byte": "a",
+          "Boolean": true,
+          "Character": "b",
+          "Double": 123.456,
+          "Float": 654.321,
+          "Intger": 123,
+          "Long": 321,
+          "String": "Hello",
+          "Timestamp": 123456789
+        }
+        JSON
+        expect(parse(json)).to eq({
+          nested: {
+            nested: {
+              nested: { integer: 3 },
+              integer: 2
+            },
+            integer: 1
+          },
+          nested_list: [
+            { string: "v1" },
+            { string: "v2" },
+            { nested: { string: "v3" }}
+          ],
+          nested_map: {
+            "First" => { string: "v1" },
+            "Second" => { nested: { string: "v2" }},
+          },
+          number_list: [1,2,3,4,5],
+          string_map: {
+            "Size" => "large",
+            "Color" => "red",
+          },
+          blob: "data",
+          byte: "a",
+          boolean: true,
+          character: "b",
+          double: 123.456,
+          float: 654.321,
+          long: 321,
+          string: "Hello",
+          timestamp: Time.at(123456789),
+        })
       end
 
-      describe 'lists' do
-
-        it 'returns nil for lists missing in the json' do
-          members['Values'] = {
-            'type' => 'list',
-            'member' => { 'type' => 'string' }
-          }
-          json = '{}'
-          expect(parse(json)[:values]).to be(nil)
-        end
-
-        it 'parses lists' do
-          members['Values'] = {
-            'type' => 'list',
-            'member' => { 'type' => 'string' }
-          }
-          json = '{"Values":["abc", "mno", "xyz"]}'
-          expect(parse(json)).to eq(values: %w(abc mno xyz))
-        end
-
-        it 'parses lists of complex members' do
-          members['Values'] = {
-            'type' => 'list',
-            'member' => {
-              'type' => 'structure',
-              'members' => {
-                'Name' => { 'type' => 'string' }
-              }
-            }
-          }
-          json = '{"Values":[{"Name":"abc"},{"Name":"xyz"}]}'
-          expect(parse(json)).to eq(values: [{name:'abc'}, {name:'xyz'}])
-        end
-
+      it 'observes structure member locationNames' do
+        shapes['StructureShape']['members']['Integer']['locationName'] = 'Nesting'
+        json = '{ "Nesting": 0}'
+        expect(parse(json)).to eq(integer: 0)
       end
 
-      describe 'maps' do
-
-        it 'parses maps as hashes (without symbolizing keys' do
-          members['Attributes'] = {
-            'type' => 'map',
-            'key' => { 'type' => 'string' },
-            'value' => { 'type' => 'string' }
-          }
-          json = '{"Attributes":{"Size":"large","Color":"red"}}'
-          expect(parse(json)).to eq(attributes: {
-            'Size' => 'large',
-            'Color' => 'red'
-          })
-        end
-
+      it 'ignores unknown json object keys' do
+        json = '{ "Integer": 123, "Unknown": "data" }'
+        expect(parse(json)).to eq({integer: 123})
       end
 
-      describe 'booleans' do
-
-        it 'converts true/false booleans' do
-          members['Hot'] = { 'type' => 'boolean' }
-          members['Cold'] = { 'type' => 'boolean' }
-          json = '{"Hot":true,"Cold":false}'
-          expect(parse(json)).to eq(hot: true, cold: false)
-        end
-
+      it 'supports unix timestamps' do
+        now = Time.now.to_i
+        json = "{ \"Timestamp\": #{now.inspect} }"
+        expect(parse(json)).to eq({timestamp: Time.at(now) })
       end
 
-      describe 'timestamps' do
-
-        before(:each) do
-          members['CreatedAt'] = {
-            'type' => 'timestamp',
-            'locationName' => 'Created',
-          }
-        end
-
-        it 'can parse unix timestamps' do
-          timestamp = 1349908100
-          time = Time.at(timestamp)
-          json = "{\"Created\":#{timestamp}}"
-          data = parse(json)
-          expect(data[:created_at]).to be_a(Time)
-          expect(data[:created_at]).to eq(time)
-        end
-
-        it 'can parse unix timestamps expressed as floats' do
-          timestamp = 1349908100.123
-          time = Time.at(timestamp)
-          json = "{\"Created\":#{timestamp}}"
-          data = parse(json)
-          expect(data[:created_at]).to be_a(Time)
-          expect(data[:created_at]).to eq(time)
-        end
-
-        it 'can parse iso8601 strings' do
-          timestamp = '2012-09-10T15:47:10.001Z'
-          time = Time.parse(timestamp).to_time.utc
-          json = "{\"Created\":\"#{timestamp}\"}"
-          data = parse(json)
-          expect(data[:created_at]).to be_a(Time)
-          expect(data[:created_at]).to eq(time)
-        end
-
-        it 'can parse rfc822 strings' do
-          timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC'
-          time = Time.parse(timestamp).to_time.utc
-          json = "{\"Created\":\"#{timestamp}\"}"
-          data = parse(json)
-          expect(data[:created_at]).to be_a(Time)
-          expect(data[:created_at]).to eq(time)
-        end
-
+      it 'supports iso8601 strings' do
+        now = Time.now.iso8601
+        json = "{ \"Timestamp\": #{now.inspect} }"
+        expect(parse(json)).to eq({timestamp: Time.parse(now) })
       end
 
-      describe 'integers' do
-
-        it 'parses integers' do
-          members['count'] = { 'type' => 'integer' }
-          json = '{"count":123}'
-          expect(parse(json)).to eq(count: 123)
-        end
-
+      it 'supports rfc822 strings' do
+        now = Time.now.rfc822
+        json = "{ \"Timestamp\": #{now.inspect} }"
+        expect(parse(json)).to eq({timestamp: Time.parse(now) })
       end
 
-      describe 'floats' do
-
-        it 'parses floats' do
-          members['value'] = { 'type' => 'float' }
-          json = '{"value":12.34}'
-          expect(parse(json)).to eq(value: 12.34)
-        end
-
+      it 'supports quoted and unquoted booleans' do
+        expect(parse('{ "Boolean": true }')).to eq(boolean: true)
+        expect(parse('{ "Boolean": false }')).to eq(boolean: false)
+        expect(parse('{ "Boolean": "true" }')).to eq(boolean: true)
+        expect(parse('{ "Boolean": "false" }')).to eq(boolean: false)
       end
 
-      describe 'blobs' do
-
-        it 'base64 decodes blobs' do
-          members['data'] = { 'type' => 'blob' }
-          json = '{"data":"aGVsbG8="}'
-          expect(parse(json)).to eq(data: 'hello')
-        end
-
+      it 'does not trap json parsing errors' do
+        expect { parse('{"abc') }.to raise_error
       end
 
-      describe 'parsing errors' do
-
-        it 'does not trap xml parsing errors' do
-          json = '{"abc'
-          expect { parse(json) }.to raise_error
-        end
-
-      end
     end
   end
 end
