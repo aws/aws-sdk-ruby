@@ -33,32 +33,73 @@ module Aws
           end
 
           let(:shapes) {{
-            'OutputShape' => {
+            'StructureShape' => {
               'type' => 'structure',
-              'members' => {}
-            }
+              'members' => {
+                # complex members
+                'Nested' => { 'shape' => 'StructureShape' },
+                'NestedList' => { 'shape' => 'StructureList' },
+                'NestedMap' => { 'shape' => 'StructureMap' },
+                'NumberList' => { 'shape' => 'IntegerList' },
+                'StringMap' => { 'shape' => 'StringMap' },
+                # scalar members
+                'Blob' => { 'shape' => 'BlobShape' },
+                'Byte' => { 'shape' => 'ByteShape' },
+                'Boolean' => { 'shape' => 'BooleanShape' },
+                'Character' => { 'shape' => 'CharacterShape' },
+                'Double' => { 'shape' => 'DoubleShape' },
+                'Float' => { 'shape' => 'FloatShape' },
+                'Integer' => { 'shape' => 'IntegerShape' },
+                'Long' => { 'shape' => 'LongShape' },
+                'String' => { 'shape' => 'StringShape' },
+                'Timestamp' => { 'shape' => 'TimestampShape' },
+              }
+            },
+            'StructureList' => {
+              'type' => 'list',
+              'member' => { 'shape' => 'StructureShape' }
+            },
+            'StructureMap' => {
+              'type' => 'map',
+              'key' => { 'shape' => 'StringShape' },
+              'value' => { 'shape' => 'StructureShape' }
+            },
+            'IntegerList' => {
+              'type' => 'list',
+              'member' => { 'shape' => 'IntegerShape' }
+            },
+            'StringMap' => {
+              'type' => 'map',
+              'key' => { 'shape' => 'StringShape' },
+              'value' => { 'shape' => 'StringShape' }
+            },
+            'BlobShape' => { 'type' => 'blob' },
+            'ByteShape' => { 'type' => 'byte' },
+            'BooleanShape' => { 'type' => 'boolean' },
+            'CharacterShape' => { 'type' => 'character' },
+            'DoubleShape' => { 'type' => 'double' },
+            'FloatShape' => { 'type' => 'float' },
+            'IntegerShape' => { 'type' => 'integer' },
+            'LongShape' => { 'type' => 'long' },
+            'StringShape' => { 'type' => 'string' },
+            'TimestampShape' => { 'type' => 'timestamp' },
           }}
-
-          let(:api) {
-            Api::Builder.build({
-              'operations' => {
-                'ExampleOperation' => {
-                  'output' => { 'shape' => 'OutputShape' }
-                }
-              },
-              'shapes' => shapes,
-            })
-          }
 
           let(:parser) {
             engine_class = Parser.const_get(engine)
-            output = api.operation(:example_operation).output
-            Parser.new(output, engine: engine_class)
+            shape_map = Api::ShapeMap.new(shapes)
+            rules = shape_map.shape_ref('shape' => 'StructureShape')
+            Parser.new(rules, engine: engine_class)
           }
 
           def parse(xml, to_h = true)
             data = parser.parse(xml)
             to_h ? data.to_h : data
+          end
+
+          it 'does not trap xml parsing errors' do
+            xml = '<xml'
+            expect { parse(xml) }.to raise_error(Parser::ParsingError)
           end
 
           it 'returns an empty hash when the XML is empty' do
@@ -69,511 +110,325 @@ module Aws
             expect(parse('<xml xmlns="http://xmlns.com"/>')).to eq({})
           end
 
-          it 'ignores xml elements when the rules are empty' do
-            expect(parse('<xml><foo>bar</foo></xml>')).to eq({})
+          it 'returns an instance of Struct' do
+            expect(parse('<xml/>', false)).to be_kind_of(Struct)
           end
 
-          it 'returns an instance of Struct' do
-            expect(Parser.new(shape).parse('<xml/>')).to be_kind_of(Aws::Structure)
+          it 'parses complex and nested documents' do
+            xml = <<-XML.strip
+            <xml>
+              <Nested>
+                <Nested>
+                  <Nested>
+                    <Integer>3</Integer>
+                  </Nested>
+                  <Integer>2</Integer>
+                </Nested>
+                <Integer>1</Integer>
+              </Nested>
+              <NestedList>
+                <member>
+                  <String>v1</String>
+                </member>
+                <member>
+                  <String>v2</String>
+                </member>
+                <member>
+                  <Nested>
+                    <String>v3</String>
+                  </Nested>
+                </member>
+              </NestedList>
+              <NestedMap>
+                <entry>
+                  <key>First</key>
+                  <value><String>v1</String></value>
+                </entry>
+                <entry>
+                  <key>Second</key>
+                  <value>
+                    <Nested>
+                      <String>v2</String>
+                    </Nested>
+                  </value>
+                </entry>
+              </NestedMap>
+              <NumberList>
+                <member>1</member>
+                <member>2</member>
+                <member>3</member>
+                <member>4</member>
+                <member>5</member>
+              </NumberList>
+              <StringMap>
+                <entry>
+                  <key>Size</key>
+                  <value>large</value>
+                </entry>
+                <entry>
+                  <key>Color</key>
+                  <value>red</value>
+                </entry>
+              </StringMap>
+              <Blob>#{Base64.strict_encode64('data')}}</Blob>
+              <Byte>a</Byte>
+              <Boolean>true</Boolean>
+              <Character>b</Character>
+              <Double>123.456</Double>
+              <Float>654.321</Float>
+              <Integer>123</Integer>
+              <Long>321</Long>
+              <String>Hello</String>
+              <Timestamp>123456789</Timestamp>
+            </xml>
+            XML
+            expect(parse(xml)).to eq({
+              nested: {
+                nested: {
+                  nested: { integer: 3 },
+                  integer: 2
+                },
+                integer: 1
+              },
+              nested_list: [
+                { string: "v1" },
+                { string: "v2" },
+                { nested: { string: "v3" }}
+              ],
+              nested_map: {
+                "First" => { string: "v1" },
+                "Second" => { nested: { string: "v2" }},
+              },
+              number_list: [1,2,3,4,5],
+              string_map: {
+                "Size" => "large",
+                "Color" => "red",
+              },
+              blob: "data",
+              byte: "a",
+              boolean: true,
+              character: "b",
+              double: 123.456,
+              float: 654.321,
+              integer: 123,
+              long: 321,
+              string: "Hello",
+              timestamp: Time.at(123456789),
+            })
           end
 
           describe 'structures' do
 
-            it 'ignores root elements' do
-              members['First'] = { 'type' => 'string' }
-              members['Last'] = { 'type' => 'string' }
+            it 'observes locationName traits' do
+              ref = shapes['StructureShape']['members']['Integer']
+              ref['locationName'] = 'IntegerElement'
+              xml = '<xml><IntegerElement>123</IntegerElement></xml>'
+              expect(parse(xml)).to eq(integer: 123)
+            end
+
+            it 'ignores unknown elements' do
+              xml = '<xml><String>abc</String><Unknown>value</Unknown></xml>'
+              expect(parse(xml)).to eq(string: 'abc')
+            end
+
+          end
+
+          describe 'lists' do
+
+            it 'observes locationName traits' do # list and list member
+              ref = shapes['StructureShape']['members']['NumberList']
+              ref['locationName'] = 'Numbers'
+              shapes['IntegerList']['member']['locationName'] = 'Value'
               xml = <<-XML.strip
-                <?xml version="1.0" encoding="UTF-8"?>
-                <xml>
-                  <First>abc</First>
-                  <Last>xyz</Last>
-                </xml>
+              <xml>
+                <Numbers>
+                  <Value>1</Value>
+                  <Value>2</Value>
+                  <Value>3</Value>
+                </Numbers>
+              </xml>
               XML
-              expect(parse(xml)).to eq(first: 'abc', last: 'xyz')
+              expect(parse(xml)).to eq(number_list:[1,2,3])
             end
 
-            it 'parses structure members' do
-              members['First'] = { 'type' => 'string' }
-              members['Last'] = { 'type' => 'string' }
-              xml = <<-XML
-                <xml>
-                  <First>abc</First>
-                  <Last>xyz</Last>
-                </xml>
+            it 'returns missing lists as a DefaultList' do
+              xml = '<xml/>'
+              expect(parse(xml, false)[:number_list]).to be_kind_of(DefaultList)
+              expect(parse(xml)).to eq({})
+            end
+
+            it 'returns empty lists as a []' do
+              xml = '<xml><NumberList/></xml>'
+              expect(parse(xml)).to eq(number_list: [])
+            end
+
+            it 'supports flattened lists' do
+              shapes['StructureList']['flattened'] = true
+              xml = <<-XML.strip
+              <xml>
+                <NestedList>
+                  <String>v1</String>
+                </NestedList>
+                <NestedList>
+                  <String>v2</String>
+                </NestedList>
+                <NestedList>
+                  <String>v3</String>
+                </NestedList>
+              </xml>
               XML
-              expect(parse(xml)).to eq(first: 'abc', last: 'xyz')
+              expect(parse(xml)).to eq(nested_list: [
+                { string: 'v1' },
+                { string: 'v2' },
+                { string: 'v3' },
+              ])
             end
 
-            it 'parses members using their location name' do
-              definition['members'] = {
-                'first' => { 'type' => 'string', 'locationName' => 'FirstName' },
-                'last' => { 'type' => 'string', 'locationName' => 'LastName' }
-              }
-              xml = <<-XML
-                <xml>
-                  <FirstName>John</FirstName>
-                  <LastName>Doe</LastName>
-                </xml>
+            it 'supports flattened lists with locationName trait' do
+              shapes['StructureList']['flattened'] = true
+              ref = shapes['StructureShape']['members']['NestedList']
+              ref['locationName'] = 'List'
+              xml = <<-XML.strip
+              <xml>
+                <List>
+                  <String>v1</String>
+                </List>
+                <List>
+                  <String>v2</String>
+                </List>
+                <List>
+                  <String>v3</String>
+                </List>
+              </xml>
               XML
-              expect(parse(xml)).to eq(first: 'John', last: 'Doe')
+              expect(parse(xml)).to eq(nested_list: [
+                { string: 'v1' },
+                { string: 'v2' },
+                { string: 'v3' },
+              ])
             end
 
-            it 'parses structures of structures' do
-              definition['members'] = {
-                'config' => {
-                  'type' => 'structure',
-                  'members' => {
-                    'state' => { 'type' => 'string' }
-                  }
-                },
-                'name' => { 'type' => 'string' }
-              }
-              xml = <<-XML
-                <xml>
-                  <config>
-                    <state>on</state>
-                  </config>
-                  <name>abc</name>
-                </xml>
+            it 'supports flattened lists with member locationName trait' do
+              shapes['StructureList']['flattened'] = true
+              shapes['StructureList']['member']['locationName'] = 'ListMember'
+              xml = <<-XML.strip
+              <xml>
+                <ListMember>
+                  <String>v1</String>
+                </ListMember>
+                <ListMember>
+                  <String>v2</String>
+                </ListMember>
+                <ListMember>
+                  <String>v3</String>
+                </ListMember>
+              </xml>
               XML
-              expect(parse(xml)).to eq(config: { state: 'on' }, name: 'abc')
-            end
-
-          end
-
-          describe 'non-flattened lists' do
-
-            it 'returns missing lists as []' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string' }
-                }
-              }
-              xml = "<xml/>"
-              expect(parse(xml, false)[:values]).to eq([])
-            end
-
-            it 'popluates list members with a default list when not present' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string' }
-                }
-              }
-              xml = "<xml/>"
-              result = Parser.new(shape).parse(xml)
-              expect(result[:values]).to be_kind_of(DefaultList)
-              expect(result[:values]).to be_empty
-              expect(result[:values]).to be_nil
-            end
-
-            it 'returns empty list elements as []' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string' }
-                }
-              }
-              xml = "<xml><Values/></xml>"
-              expect(parse(xml)[:values]).to eq([])
-            end
-
-            it 'converts lists of strings into arrays of strings' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string' }
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Values>
-                    <member>abc</member>
-                    <member>mno</member>
-                    <member>xyz</member>
-                  </Values>
-                </xml>
-              XML
-              expect(parse(xml)[:values]).to eq(%w(abc mno xyz))
-            end
-
-            it 'accepts lists of single elements' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => {
-                    'type' => 'structure',
-                    'members' => {
-                      'Enabled' => { 'type' => 'boolean' }
-                    }
-                  }
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Values>
-                    <member>
-                      <Enabled>true</Enabled>
-                    </member>
-                  </Values>
-                </xml>
-              XML
-              expect(parse(xml)[:values]).to eq([{ enabled: true }])
-            end
-
-            it 'observes the list member location name when present' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string', 'locationName' => 'Value' }
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Values>
-                    <Value>abc</Value>
-                    <Value>mno</Value>
-                    <Value>xyz</Value>
-                  </Values>
-                </xml>
-              XML
-              expect(parse(xml)[:values]).to eq(%w(abc mno xyz))
-            end
-
-            it 'can parse lists of complex types' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => {
-                    'type' => 'structure',
-                    'locationName' => 'item',
-                    'members' => { 'Name' => { 'type' => 'string' } }
-                  }
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Values>
-                    <item><Name>abc</Name></item>
-                    <item><Name>mno</Name></item>
-                    <item><Name>xyz</Name></item>
-                  </Values>
-                </xml>
-              XML
-              expect(parse(xml)[:values]).to eq([
-                { name: 'abc' },
-                { name: 'mno' },
-                { name: 'xyz' }
+              expect(parse(xml)).to eq(nested_list: [
+                { string: 'v1' },
+                { string: 'v2' },
+                { string: 'v3' },
               ])
             end
 
           end
 
-          describe 'flattened lists' do
+          describe 'maps' do
 
-            it 'returns missing lists as []' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string' },
-                  'flattened' => true
-                }
-              }
-              xml = "<xml/>"
-              expect(parse(xml, false)[:values]).to eq([])
-            end
-
-            it 'supports lists of scalars' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'integer' },
-                  'flattened' => true
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Values>1</Values>
-                  <Values>2</Values>
-                  <Values>3</Values>
-                </xml>
-              XML
-              expect(parse(xml)).to eq(values: [1,2,3])
-            end
-
-            it 'accepts lists of a single element' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string' },
-                  'flattened' => true
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Values>abc</Values>
-                </xml>
-              XML
-              expect(parse(xml)[:values]).to eq(['abc'])
-            end
-
-            it 'observes the list serialization name when present' do
-              definition['members'] = {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string', 'locationName' => 'Item' },
-                  'flattened' => true
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Item>abc</Item>
-                  <Item>mno</Item>
-                  <Item>xyz</Item>
-                </xml>
-              XML
-              expect(parse(xml)[:values]).to eq(%w(abc mno xyz))
-            end
-
-            it 'can parse lists of complex types' do
-              definition['members'] = {
-                'People' => {
-                  'type' => 'list',
-                  'locationName' => 'Person',
-                  'member' => {
-                    'type' => 'structure',
-                    'members' => {
-                      'Handle' => { 'type' => 'string', 'locationName' => 'Name' }
-                    }
-                  },
-                  'flattened' => true
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Person><Name>abc</Name></Person>
-                  <Person><Name>mno</Name></Person>
-                  <Person><Name>xyz</Name></Person>
-                </xml>
-              XML
-              expect(parse(xml)[:people]).to eq([
-                { handle: 'abc' },
-                { handle: 'mno' },
-                { handle: 'xyz' },
-              ])
-            end
-
-          end
-
-          describe 'non-flattened maps' do
-
-            it 'returns missing maps as {}' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' }
-                }
-              }
-              xml = "<xml/>"
-              expect(parse(xml)[:attributes]).to eq({})
+            it 'returns missing maps as a DefaultMap' do
+              xml = '<xml/>'
+              expect(parse(xml, false)[:string_map]).to be_kind_of(DefaultMap)
+              expect(parse(xml)).to eq({})
             end
 
             it 'returns empty maps as {}' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' }
-                }
-              }
-              xml = "<xml><Attributes/></xml>"
-              expect(parse(xml)[:attributes]).to eq({})
+              xml = '<xml><StringMap/></xml>'
+              expect(parse(xml)).to eq(string_map: {})
             end
 
-            it 'expects entry, key and value tags by default' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' }
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Attributes>
-                    <entry>
-                      <key>Color</key>
-                      <value>red</value>
-                    </entry>
-                    <entry>
-                      <key>Size</key>
-                      <value>large</value>
-                    </entry>
-                  </Attributes>
-                </xml>
+            it 'supports maps with locationName traits' do # key and value
+              shapes['StringMap']['key']['locationName'] = 'AttrName'
+              shapes['StringMap']['value']['locationName'] = 'AttrValue'
+              xml = <<-XML.strip
+              <xml>
+                <StringMap>
+                  <entry>
+                    <AttrName>size</AttrName>
+                    <AttrValue>large</AttrValue>
+                  </entry>
+                  <entry>
+                    <AttrName>color</AttrName>
+                    <AttrValue>red</AttrValue>
+                  </entry>
+                </StringMap>
+              </xml>
               XML
-              expect(parse(xml)[:attributes]).to eq({
-                'Color' => 'red',
-                'Size' => 'large'
+              expect(parse(xml)).to eq(string_map: {
+                'size' => 'large',
+                'color' => 'red',
               })
             end
 
-            it 'accepts maps with a single entry' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' }
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Attributes>
-                    <entry>
-                      <key>Color</key>
-                      <value>red</value>
-                    </entry>
-                  </Attributes>
-                </xml>
+            it 'supports flattened maps' do
+              shapes['StringMap']['flattened'] = true
+              xml = <<-XML.strip
+              <xml>
+                <StringMap>
+                  <key>size</key>
+                  <value>large</value>
+                </StringMap>
+                <StringMap>
+                  <key>color</key>
+                  <value>red</value>
+                </StringMap>
+              </xml>
               XML
-              expect(parse(xml)[:attributes]).to eq('Color' => 'red')
-            end
-
-            it 'accepts alternate key and value names' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string', 'locationName' => 'attr' },
-                  'value' => { 'type' => 'string', 'locationName' => 'val' }
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Attributes>
-                    <entry>
-                      <attr>hue</attr>
-                      <val>red</val>
-                    </entry>
-                    <entry>
-                      <attr>size</attr>
-                      <val>med</val>
-                    </entry>
-                  </Attributes>
-                </xml>
-              XML
-              expect(parse(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
-            end
-
-          end
-
-          describe 'flattened maps' do
-
-            it 'returns missing maps as {}' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' },
-                  'flattened' => true
-                }
-              }
-              xml = "<xml/>"
-              expect(parse(xml)[:attributes]).to eq({})
-            end
-
-            it 'expects key and value tags by default' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' },
-                  'flattened' => true
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Attributes>
-                    <key>Color</key>
-                    <value>red</value>
-                  </Attributes>
-                  <Attributes>
-                    <key>Size</key>
-                    <value>large</value>
-                  </Attributes>
-                </xml>
-              XML
-              expect(parse(xml)[:attributes]).to eq({
-                'Color' => 'red',
-                'Size' => 'large'
+              expect(parse(xml)).to eq(string_map: {
+                'size' => 'large',
+                'color' => 'red',
               })
             end
 
-            it 'accepts maps with a single entry' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' },
-                  'flattened' => true
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Attributes>
-                    <key>Color</key>
-                    <value>red</value>
-                  </Attributes>
-                </xml>
+            it 'supports flattened maps with locationName traits' do
+              shapes['StringMap']['flattened'] = true
+              shapes['StringMap']['key']['locationName'] = 'AttrName'
+              shapes['StringMap']['value']['locationName'] = 'AttrValue'
+              ref = shapes['StructureShape']['members']['StringMap']
+              ref['locationName'] = 'Attributes'
+              xml = <<-XML.strip
+              <xml>
+                <Attributes>
+                  <AttrName>size</AttrName>
+                  <AttrValue>large</AttrValue>
+                </Attributes>
+                <Attributes>
+                  <AttrName>color</AttrName>
+                  <AttrValue>red</AttrValue>
+                </Attributes>
+              </xml>
               XML
-              expect(parse(xml)[:attributes]).to eq('Color' => 'red')
-            end
-
-            it 'accepts alternate key and value names' do
-              definition['members'] = {
-                'Attributes' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string', 'locationName' => 'attr' },
-                  'value' => { 'type' => 'string', 'locationName' => 'val' },
-                  'flattened' => true
-                }
-              }
-              xml = <<-XML
-                <xml>
-                  <Attributes>
-                    <attr>hue</attr>
-                    <val>red</val>
-                  </Attributes>
-                  <Attributes>
-                    <attr>size</attr>
-                    <val>med</val>
-                  </Attributes>
-                </xml>
-              XML
-              expect(parse(xml)[:attributes]).to eq('hue' => 'red', 'size' => 'med')
+              expect(parse(xml)).to eq(string_map: {
+                'size' => 'large',
+                'color' => 'red',
+              })
             end
 
           end
 
           describe 'booleans' do
 
-            before(:each) do
-              definition['members'] = { 'enabled' => { 'type' => 'boolean' } }
+            it 'supports true values' do
+              xml = '<xml><Boolean>true</Boolean></xml>'
+              expect(parse(xml)).to eq(boolean: true)
             end
 
-            it 'converts boolean true values' do
-              xml = "<xml><enabled>true</enabled></xml>"
-              expect(parse(xml)).to eq(enabled: true)
+            it 'supports false values' do
+              xml = '<xml><Boolean>false</Boolean></xml>'
+              expect(parse(xml)).to eq(boolean: false)
             end
 
-            it 'converts boolean false values' do
-              xml = "<xml><enabled>false</enabled></xml>"
-              expect(parse(xml)).to eq(enabled: false)
-            end
-
-            it 'does not apply a boolean true/false value when not present' do
-              xml = "<xml/>"
+            it 'returns nil for an empty element' do
+              xml = '<xml><Boolean/></xml>'
               expect(parse(xml)).to eq({})
             end
 
@@ -581,199 +436,57 @@ module Aws
 
           describe 'timestamps' do
 
-            before(:each) do
-              definition['members'] = {
-                'CreatedAt' => {
-                  'type' => 'timestamp',
-                  'locationName' => 'Created',
-                }
-              }
+            it 'supports unix timestamps' do
+              now = Time.now.to_i
+              xml = "<xml><Timestamp>#{now}</Timestamp></xml>"
+              expect(parse(xml)).to eq({timestamp: Time.at(now) })
             end
 
-            it 'returns an empty element as nil' do
-              xml = "<xml><Created/></xml>"
-              expect(parse(xml)[:created_at]).to be(nil)
+            it 'supports iso8601 strings' do
+              now = Time.now.iso8601
+              xml = "<xml><Timestamp>#{now}</Timestamp></xml>"
+              expect(parse(xml)).to eq({timestamp: Time.parse(now) })
             end
 
-            it 'can parse unix timestamps' do
-              timestamp = 1349908100
-              time = Time.at(timestamp)
-              xml = "<xml><Created>#{timestamp}</Created></xml>"
-              data = parse(xml)
-              expect(data[:created_at]).to be_a(Time)
-              expect(data[:created_at]).to eq(time)
-            end
-
-            it 'understands basic iso8601 strings' do
-              timestamp = '2012-09-10T15:47:10.001Z'
-              time = Time.parse(timestamp).to_time.utc
-              xml = "<xml><Created>#{timestamp}</Created></xml>"
-              data = parse(xml)
-              expect(data[:created_at]).to be_a(Time)
-              expect(data[:created_at]).to eq(time)
-            end
-
-            it 'understands basic rfc822 strings' do
-              timestamp = 'Wed, 10 Oct 2012 15:59:55 UTC'
-              time = Time.parse(timestamp).to_time.utc
-              xml = "<xml><Created>#{timestamp}</Created></xml>"
-              data = parse(xml)
-              expect(data[:created_at]).to be_a(Time)
-              expect(data[:created_at]).to eq(time)
-            end
-
-            it 'throws an error when unable to determine the format' do
-              timestamp = 'bad-date-format'
-              xml = "<xml><Created>#{timestamp}</Created></xml>"
-              expect {
-                parse(xml)
-              }.to raise_error("unhandled timestamp format `#{timestamp}'")
-            end
-
-          end
-
-          describe 'integers' do
-
-            before(:each) do
-              definition['members'] = { 'count' => { 'type' => 'integer' } }
-            end
-
-            it 'parses integer elements' do
-              xml = "<xml><count>123</count></xml>"
-              expect(parse(xml)[:count]).to eq(123)
-            end
-
-            it 'returns empty elements as nil' do
-              xml = "<xml><count/></xml>"
-              expect(parse(xml)[:count]).to eq(nil)
-            end
-
-          end
-
-          describe 'floats' do
-
-            before(:each) do
-              definition['members'] = { 'price' => { 'type' => 'float' } }
-            end
-
-            it 'parses float elements' do
-              xml = "<xml><price>12.34</price></xml>"
-              expect(parse(xml)[:price]).to eq(12.34)
-            end
-
-            it 'returns empty elements as nil' do
-              xml = "<xml><price/></xml>"
-              expect(parse(xml)[:price]).to eq(nil)
+            it 'supports rfc822 strings' do
+              now = Time.now.rfc822
+              xml = "<xml><Timestamp>#{now}</Timestamp></xml>"
+              expect(parse(xml)).to eq({timestamp: Time.parse(now) })
             end
 
           end
 
           describe 'strings' do
 
-            it 'returns the empty string for self closing string XML elements' do
-              definition['members'] = {
-                'data' => { 'type' => 'string' }
-              }
-              xml = "<xml><data/></xml>"
-              expect(parse(xml)[:data]).to eq('')
-            end
-
-            it 'base64 decodes strings when encoding attribute is present' do
-              definition['members'] = {
-                'encoded' => { 'type' => 'string' },
-                'not_encoded' => { 'type' => 'string' },
-                'nested' => {
-                  'type' => 'structure',
-                  'members' => {
-                    'encoded' => { 'type' => 'string' }
-                  }
-                }
-              }
+            it 'base64 decodes with encoding is set' do
               xml = <<-XML.strip
               <xml>
-                <encoded encoding="base64">#{Base64.encode64('a')}</encoded>
-                <not_encoded abc="yxz">mno</not_encoded>
-                <nested>
-                  <encoded encoding="base64">#{Base64.encode64('b')}</encoded>
-                </nested>
+                <String encoding="base64">#{Base64.encode64('a')}</String>
+                <Nested>
+                  <String encoding="base64">#{Base64.encode64('b')}</String>
+                </Nested>
               </xml>
               XML
-              parsed = parse(xml)
-              expect(parsed[:encoded]).to eq('a')
-              expect(parsed[:nested][:encoded]).to eq('b')
-              expect(parsed[:not_encoded]).to eq('mno')
-            end
-
-            it 'xml decodes string values' do
-              definition['members'] = {
-                'data' => { 'type' => 'string' }
-              }
-              xml = "<xml><data>a&amp;b</data></xml>"
-              expect(parse(xml)[:data]).to eq('a&b')
-            end
-
-          end
-
-          describe 'blobs' do
-
-            it 'returns nil for empty elements' do
-              definition['members'] = {
-                'data' => { 'type' => 'blob' }
-              }
-              xml = "<xml><data/></xml>"
-              expect(parse(xml)[:data]).to be(nil)
-            end
-
-            it 'base64 decodes blob elements' do
-              definition['members'] = {
-                'data' => { 'type' => 'blob' }
-              }
-              xml = "<xml><data>aGVsbG8=</data></xml>"
-              expect(parse(xml)).to eq(data: 'hello')
+              expect(parse(xml)).to eq(string: 'a', nested: { string: 'b' })
             end
 
           end
 
           describe 'xml attributes' do
 
-            it 'omits attributes that are not members' do
-              definition['members'] = {
-                'config' => {
-                  'type' => 'structure',
-                  'members' => {
-                    'state' => { 'type' => 'string' }
-                  }
-                }
-              }
-              xml = "<xml><config foo='bar'><state>on</state></config></xml>"
-              expect(parse(xml)).to eq(config: { state: 'on' })
+            it 'supports paring structure members from xml attributes' do
+              ref = shapes['StructureShape']['members']['String']
+              ref['locationName'] = 'stringAsAttribute'
+              xml = '<xml><Nested stringAsAttribute="value"/></xml>'
+              expect(parse(xml)).to eq(nested: { string: 'value' })
             end
 
-            it 'merges xml attributes that are members' do
-              definition['members'] = {
-                'config' => {
-                  'type' => 'structure',
-                  'members' => {
-                    'state' => { 'type' => 'string' },
-                    'foo' => { 'type' => 'string' }
-                  }
-                }
-              }
-              xml = "<xml><config foo='bar'><state>on</state></config></xml>"
-              expect(parse(xml)).to eq(config: { state: 'on', foo: 'bar' })
+            it 'ignores xml attributes that are not members' do
+              xml = '<xml><Nested ignored="value"/></xml>'
+              expect(parse(xml)).to eq(nested: {})
             end
 
           end
-
-          describe 'parsing errors' do
-
-            it 'does not trap xml parsing errors' do
-              xml = '<xml'
-              expect { parse(xml) }.to raise_error(Parser::ParsingError)
-            end
-
-          end
-
         end
       end
     end

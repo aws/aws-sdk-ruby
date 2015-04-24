@@ -8,25 +8,12 @@ module Aws
 
         include Seahorse::Model::Shapes
 
-        FRAME_CLASSES = {
-          NilClass => NullFrame,
-          BlobShape => BlobFrame,
-          BooleanShape => BooleanFrame,
-          FloatShape => FloatFrame,
-          IntegerShape => IntegerFrame,
-          ListShape => ListFrame,
-          MapShape => MapFrame,
-          StringShape => StringFrame,
-          StructureShape => StructureFrame,
-          TimestampShape => TimestampFrame,
-        }
-
         class << self
 
-          def new(parent, shape_ref, result = nil)
+          def new(parent, ref, result = nil)
             if self == Frame
-              frame = frame_class(shape_ref && shape_ref.shape).allocate
-              frame.send(:initialize, parent, shape_ref, result)
+              frame = frame_class(ref && ref.shape).allocate
+              frame.send(:initialize, parent, ref, result)
               frame
             else
               super
@@ -48,20 +35,16 @@ module Aws
 
         end
 
-
-        def initialize(parent, shape_ref, result = nil)
+        def initialize(parent, ref, result = nil)
           @parent = parent
-          @shape_ref = shape_ref
-          @shape = shape_ref.shape
+          @ref = ref
           @result = result
           @text = []
         end
 
         attr_reader :parent
 
-        attr_reader :shape_ref
-
-        attr_reader :shape
+        attr_reader :ref
 
         attr_reader :result
 
@@ -74,26 +57,27 @@ module Aws
         end
 
         def consume_child_frame(child); end
+
       end
 
       class StructureFrame < Frame
 
-        def initialize(parent, shape, result = nil)
+        def initialize(parent, ref, result = nil)
           super
-          @result ||= Structure.new(shape.member_names)
+          @result ||= Structure.new(ref.shape.member_names)
           @members = {}
-          shape.members.each do |member_name, member_shape|
-            apply_default_value(member_name, member_shape)
-            @members[xml_name(member_shape)] = {
+          ref.shape.members.each do |member_name, member_ref|
+            apply_default_value(member_name, member_ref)
+            @members[xml_name(member_ref)] = {
               name: member_name,
-              shape: member_shape,
+              ref: member_ref,
             }
           end
         end
 
         def child_frame(xml_name)
           if @member = @members[xml_name]
-            Frame.new(self, @member[:shape])
+            Frame.new(self, @member[:ref])
           else
             NullFrame.new(self)
           end
@@ -113,19 +97,23 @@ module Aws
 
         private
 
-        def apply_default_value(name, shape)
-          case shape
-          when Seahorse::Model::Shapes::List then @result[name] = DefaultList.new
-          when Seahorse::Model::Shapes::Map then @result[name] = {}
+        def apply_default_value(name, ref)
+          case ref.shape
+          when ListShape then @result[name] = DefaultList.new
+          when MapShape then @result[name] = DefaultMap.new
           end
         end
 
-        def xml_name(member_shape)
-          if member_shape.type == 'list' && member_shape.definition['flattened']
-            member_shape.member.location_name || member_shape.location_name
+        def xml_name(ref)
+          if flattened_list?(ref.shape)
+            ref.shape.member.location_name || ref.location_name
           else
-            member_shape.location_name
+            ref.location_name
           end
+        end
+
+        def flattened_list?(shape)
+          ListShape === shape && shape.flattened
         end
 
       end
@@ -135,12 +123,12 @@ module Aws
         def initialize(*args)
           super
           @result = []
-          @member_xml_name = @shape.member.location_name || 'member'
+          @member_xml_name = @ref.shape.member.location_name || 'member'
         end
 
         def child_frame(xml_name)
           if xml_name == @member_xml_name
-            Frame.new(self, @shape.member)
+            Frame.new(self, @ref.shape.member)
           else
             raise NotImplementedError
           end
@@ -156,7 +144,7 @@ module Aws
 
         def initialize(*args)
           super
-          @member = Frame.new(self, @shape.member)
+          @member = Frame.new(self, @ref.shape.member)
         end
 
         def result
@@ -186,7 +174,7 @@ module Aws
 
         def child_frame(xml_name)
           if xml_name == 'entry'
-            MapEntryFrame.new(self, @shape)
+            MapEntryFrame.new(self, @ref)
           else
             raise NotImplementedError
           end
@@ -202,10 +190,10 @@ module Aws
 
         def initialize(*args)
           super
-          @key_name = @shape.key.location_name || 'key'
-          @key = Frame.new(self, @shape.key)
-          @value_name = @shape.value.location_name || 'value'
-          @value = Frame.new(self, @shape.value)
+          @key_name = @ref.shape.key.location_name || 'key'
+          @key = Frame.new(self, @ref.shape.key)
+          @value_name = @ref.shape.value.location_name || 'value'
+          @value = Frame.new(self, @ref.shape.value)
         end
 
         # @return [StringFrame]
@@ -279,6 +267,22 @@ module Aws
           end
         end
       end
+
+      include Seahorse::Model::Shapes
+
+      FRAME_CLASSES = {
+        NilClass => NullFrame,
+        BlobShape => BlobFrame,
+        BooleanShape => BooleanFrame,
+        FloatShape => FloatFrame,
+        IntegerShape => IntegerFrame,
+        ListShape => ListFrame,
+        MapShape => MapFrame,
+        StringShape => StringFrame,
+        StructureShape => StructureFrame,
+        TimestampShape => TimestampFrame,
+      }
+
     end
   end
 end
