@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Added support to `Aws::DynamoDB::Client` for
+  key conditions.
+
 2.0.40 (2015-04-23)
 ------------------
 

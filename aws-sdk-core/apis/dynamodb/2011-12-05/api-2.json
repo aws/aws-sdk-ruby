@@ -1,13 +1,13 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2012-08-10",
+    "apiVersion":"2011-12-05",
     "endpointPrefix":"dynamodb",
     "jsonVersion":"1.0",
     "serviceAbbreviation":"DynamoDB",
     "serviceFullName":"Amazon DynamoDB",
     "signatureVersion":"v4",
-    "targetPrefix":"DynamoDB_20120810",
+    "targetPrefix":"DynamoDB_20111205",
     "protocol":"json"
   },
   "operations":{
@@ -53,7 +53,7 @@
           "exception":true
         },
         {
-          "shape":"ItemCollectionSizeLimitExceededException",
+          "shape":"LimitExceededException",
           "exception":true
         },
         {
@@ -109,7 +109,7 @@
           "exception":true
         },
         {
-          "shape":"ItemCollectionSizeLimitExceededException",
+          "shape":"LimitExceededException",
           "exception":true
         },
         {
@@ -229,7 +229,7 @@
           "exception":true
         },
         {
-          "shape":"ItemCollectionSizeLimitExceededException",
+          "shape":"LimitExceededException",
           "exception":true
         },
         {
@@ -309,7 +309,7 @@
           "exception":true
         },
         {
-          "shape":"ItemCollectionSizeLimitExceededException",
+          "shape":"LimitExceededException",
           "exception":true
         },
         {
@@ -357,21 +357,6 @@
         "DELETE"
       ]
     },
-    "AttributeDefinition":{
-      "type":"structure",
-      "required":[
-        "AttributeName",
-        "AttributeType"
-      ],
-      "members":{
-        "AttributeName":{"shape":"KeySchemaAttributeName"},
-        "AttributeType":{"shape":"ScalarAttributeType"}
-      }
-    },
-    "AttributeDefinitions":{
-      "type":"list",
-      "member":{"shape":"AttributeDefinition"}
-    },
     "AttributeMap":{
       "type":"map",
       "key":{"shape":"AttributeName"},
@@ -399,11 +384,7 @@
         "B":{"shape":"BinaryAttributeValue"},
         "SS":{"shape":"StringSetAttributeValue"},
         "NS":{"shape":"NumberSetAttributeValue"},
-        "BS":{"shape":"BinarySetAttributeValue"},
-        "M":{"shape":"MapAttributeValue"},
-        "L":{"shape":"ListAttributeValue"},
-        "NULL":{"shape":"NullAttributeValue"},
-        "BOOL":{"shape":"BooleanAttributeValue"}
+        "BS":{"shape":"BinarySetAttributeValue"}
       }
     },
     "AttributeValueList":{
@@ -417,21 +398,18 @@
         "Action":{"shape":"AttributeAction"}
       }
     },
-    "Backfilling":{"type":"boolean"},
     "BatchGetItemInput":{
       "type":"structure",
       "required":["RequestItems"],
       "members":{
-        "RequestItems":{"shape":"BatchGetRequestMap"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"}
+        "RequestItems":{"shape":"BatchGetRequestMap"}
       }
     },
     "BatchGetItemOutput":{
       "type":"structure",
       "members":{
         "Responses":{"shape":"BatchGetResponseMap"},
-        "UnprocessedKeys":{"shape":"BatchGetRequestMap"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacityMultiple"}
+        "UnprocessedKeys":{"shape":"BatchGetRequestMap"}
       }
     },
     "BatchGetRequestMap":{
@@ -444,23 +422,27 @@
     "BatchGetResponseMap":{
       "type":"map",
       "key":{"shape":"TableName"},
-      "value":{"shape":"ItemList"}
+      "value":{"shape":"BatchResponse"}
+    },
+    "BatchResponse":{
+      "type":"structure",
+      "members":{
+        "Items":{"shape":"ItemList"},
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
+      }
     },
     "BatchWriteItemInput":{
       "type":"structure",
       "required":["RequestItems"],
       "members":{
-        "RequestItems":{"shape":"BatchWriteItemRequestMap"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
-        "ReturnItemCollectionMetrics":{"shape":"ReturnItemCollectionMetrics"}
+        "RequestItems":{"shape":"BatchWriteItemRequestMap"}
       }
     },
     "BatchWriteItemOutput":{
       "type":"structure",
       "members":{
-        "UnprocessedItems":{"shape":"BatchWriteItemRequestMap"},
-        "ItemCollectionMetrics":{"shape":"ItemCollectionMetricsPerTable"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacityMultiple"}
+        "Responses":{"shape":"BatchWriteResponseMap"},
+        "UnprocessedItems":{"shape":"BatchWriteItemRequestMap"}
       }
     },
     "BatchWriteItemRequestMap":{
@@ -470,19 +452,23 @@
       "min":1,
       "max":25
     },
+    "BatchWriteResponse":{
+      "type":"structure",
+      "members":{
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
+      }
+    },
+    "BatchWriteResponseMap":{
+      "type":"map",
+      "key":{"shape":"TableName"},
+      "value":{"shape":"BatchWriteResponse"}
+    },
     "BinaryAttributeValue":{"type":"blob"},
     "BinarySetAttributeValue":{
       "type":"list",
       "member":{"shape":"BinaryAttributeValue"}
     },
-    "BooleanAttributeValue":{"type":"boolean"},
     "BooleanObject":{"type":"boolean"},
-    "Capacity":{
-      "type":"structure",
-      "members":{
-        "CapacityUnits":{"shape":"ConsumedCapacityUnits"}
-      }
-    },
     "ComparisonOperator":{
       "type":"string",
       "enum":[
@@ -509,7 +495,6 @@
         "ComparisonOperator":{"shape":"ComparisonOperator"}
       }
     },
-    "ConditionExpression":{"type":"string"},
     "ConditionalCheckFailedException":{
       "type":"structure",
       "members":{
@@ -517,58 +502,18 @@
       },
       "exception":true
     },
-    "ConditionalOperator":{
-      "type":"string",
-      "enum":[
-        "AND",
-        "OR"
-      ]
-    },
     "ConsistentRead":{"type":"boolean"},
-    "ConsumedCapacity":{
-      "type":"structure",
-      "members":{
-        "TableName":{"shape":"TableName"},
-        "CapacityUnits":{"shape":"ConsumedCapacityUnits"},
-        "Table":{"shape":"Capacity"},
-        "LocalSecondaryIndexes":{"shape":"SecondaryIndexesCapacityMap"},
-        "GlobalSecondaryIndexes":{"shape":"SecondaryIndexesCapacityMap"}
-      }
-    },
-    "ConsumedCapacityMultiple":{
-      "type":"list",
-      "member":{"shape":"ConsumedCapacity"}
-    },
     "ConsumedCapacityUnits":{"type":"double"},
-    "CreateGlobalSecondaryIndexAction":{
-      "type":"structure",
-      "required":[
-        "IndexName",
-        "KeySchema",
-        "Projection",
-        "ProvisionedThroughput"
-      ],
-      "members":{
-        "IndexName":{"shape":"IndexName"},
-        "KeySchema":{"shape":"KeySchema"},
-        "Projection":{"shape":"Projection"},
-        "ProvisionedThroughput":{"shape":"ProvisionedThroughput"}
-      }
-    },
     "CreateTableInput":{
       "type":"structure",
       "required":[
-        "AttributeDefinitions",
         "TableName",
         "KeySchema",
         "ProvisionedThroughput"
       ],
       "members":{
-        "AttributeDefinitions":{"shape":"AttributeDefinitions"},
         "TableName":{"shape":"TableName"},
         "KeySchema":{"shape":"KeySchema"},
-        "LocalSecondaryIndexes":{"shape":"LocalSecondaryIndexList"},
-        "GlobalSecondaryIndexes":{"shape":"GlobalSecondaryIndexList"},
         "ProvisionedThroughput":{"shape":"ProvisionedThroughput"}
       }
     },
@@ -579,13 +524,6 @@
       }
     },
     "Date":{"type":"timestamp"},
-    "DeleteGlobalSecondaryIndexAction":{
-      "type":"structure",
-      "required":["IndexName"],
-      "members":{
-        "IndexName":{"shape":"IndexName"}
-      }
-    },
     "DeleteItemInput":{
       "type":"structure",
       "required":[
@@ -596,21 +534,14 @@
         "TableName":{"shape":"TableName"},
         "Key":{"shape":"Key"},
         "Expected":{"shape":"ExpectedAttributeMap"},
-        "ConditionalOperator":{"shape":"ConditionalOperator"},
-        "ReturnValues":{"shape":"ReturnValue"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
-        "ReturnItemCollectionMetrics":{"shape":"ReturnItemCollectionMetrics"},
-        "ConditionExpression":{"shape":"ConditionExpression"},
-        "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"},
-        "ExpressionAttributeValues":{"shape":"ExpressionAttributeValueMap"}
+        "ReturnValues":{"shape":"ReturnValue"}
       }
     },
     "DeleteItemOutput":{
       "type":"structure",
       "members":{
         "Attributes":{"shape":"AttributeMap"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacity"},
-        "ItemCollectionMetrics":{"shape":"ItemCollectionMetrics"}
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
       }
     },
     "DeleteRequest":{
@@ -656,26 +587,12 @@
       "type":"structure",
       "members":{
         "Value":{"shape":"AttributeValue"},
-        "Exists":{"shape":"BooleanObject"},
-        "ComparisonOperator":{"shape":"ComparisonOperator"},
-        "AttributeValueList":{"shape":"AttributeValueList"}
+        "Exists":{"shape":"BooleanObject"}
       }
     },
-    "ExpressionAttributeNameMap":{
-      "type":"map",
-      "key":{"shape":"ExpressionAttributeNameVariable"},
-      "value":{"shape":"AttributeName"}
-    },
-    "ExpressionAttributeNameVariable":{"type":"string"},
-    "ExpressionAttributeValueMap":{
-      "type":"map",
-      "key":{"shape":"ExpressionAttributeValueVariable"},
-      "value":{"shape":"AttributeValue"}
-    },
-    "ExpressionAttributeValueVariable":{"type":"string"},
     "FilterConditionMap":{
       "type":"map",
-      "key":{"shape":"AttributeName"},
+      "key":{"shape":"String"},
       "value":{"shape":"Condition"}
     },
     "GetItemInput":{
@@ -688,81 +605,15 @@
         "TableName":{"shape":"TableName"},
         "Key":{"shape":"Key"},
         "AttributesToGet":{"shape":"AttributeNameList"},
-        "ConsistentRead":{"shape":"ConsistentRead"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
-        "ProjectionExpression":{"shape":"ProjectionExpression"},
-        "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"}
+        "ConsistentRead":{"shape":"ConsistentRead"}
       }
     },
     "GetItemOutput":{
       "type":"structure",
       "members":{
         "Item":{"shape":"AttributeMap"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacity"}
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
       }
-    },
-    "GlobalSecondaryIndex":{
-      "type":"structure",
-      "required":[
-        "IndexName",
-        "KeySchema",
-        "Projection",
-        "ProvisionedThroughput"
-      ],
-      "members":{
-        "IndexName":{"shape":"IndexName"},
-        "KeySchema":{"shape":"KeySchema"},
-        "Projection":{"shape":"Projection"},
-        "ProvisionedThroughput":{"shape":"ProvisionedThroughput"}
-      }
-    },
-    "GlobalSecondaryIndexDescription":{
-      "type":"structure",
-      "members":{
-        "IndexName":{"shape":"IndexName"},
-        "KeySchema":{"shape":"KeySchema"},
-        "Projection":{"shape":"Projection"},
-        "IndexStatus":{"shape":"IndexStatus"},
-        "Backfilling":{"shape":"Backfilling"},
-        "ProvisionedThroughput":{"shape":"ProvisionedThroughputDescription"},
-        "IndexSizeBytes":{"shape":"Long"},
-        "ItemCount":{"shape":"Long"}
-      }
-    },
-    "GlobalSecondaryIndexDescriptionList":{
-      "type":"list",
-      "member":{"shape":"GlobalSecondaryIndexDescription"}
-    },
-    "GlobalSecondaryIndexList":{
-      "type":"list",
-      "member":{"shape":"GlobalSecondaryIndex"}
-    },
-    "GlobalSecondaryIndexUpdate":{
-      "type":"structure",
-      "members":{
-        "Update":{"shape":"UpdateGlobalSecondaryIndexAction"},
-        "Create":{"shape":"CreateGlobalSecondaryIndexAction"},
-        "Delete":{"shape":"DeleteGlobalSecondaryIndexAction"}
-      }
-    },
-    "GlobalSecondaryIndexUpdateList":{
-      "type":"list",
-      "member":{"shape":"GlobalSecondaryIndexUpdate"}
-    },
-    "IndexName":{
-      "type":"string",
-      "min":3,
-      "max":255,
-      "pattern":"[a-zA-Z0-9_.-]+"
-    },
-    "IndexStatus":{
-      "type":"string",
-      "enum":[
-        "CREATING",
-        "UPDATING",
-        "DELETING",
-        "ACTIVE"
-      ]
     },
     "Integer":{"type":"integer"},
     "InternalServerError":{
@@ -773,54 +624,18 @@
       "exception":true,
       "fault":true
     },
-    "ItemCollectionKeyAttributeMap":{
-      "type":"map",
-      "key":{"shape":"AttributeName"},
-      "value":{"shape":"AttributeValue"}
-    },
-    "ItemCollectionMetrics":{
-      "type":"structure",
-      "members":{
-        "ItemCollectionKey":{"shape":"ItemCollectionKeyAttributeMap"},
-        "SizeEstimateRangeGB":{"shape":"ItemCollectionSizeEstimateRange"}
-      }
-    },
-    "ItemCollectionMetricsMultiple":{
-      "type":"list",
-      "member":{"shape":"ItemCollectionMetrics"}
-    },
-    "ItemCollectionMetricsPerTable":{
-      "type":"map",
-      "key":{"shape":"TableName"},
-      "value":{"shape":"ItemCollectionMetricsMultiple"}
-    },
-    "ItemCollectionSizeEstimateBound":{"type":"double"},
-    "ItemCollectionSizeEstimateRange":{
-      "type":"list",
-      "member":{"shape":"ItemCollectionSizeEstimateBound"}
-    },
-    "ItemCollectionSizeLimitExceededException":{
-      "type":"structure",
-      "members":{
-        "message":{"shape":"ErrorMessage"}
-      },
-      "exception":true
-    },
     "ItemList":{
       "type":"list",
       "member":{"shape":"AttributeMap"}
     },
     "Key":{
-      "type":"map",
-      "key":{"shape":"AttributeName"},
-      "value":{"shape":"AttributeValue"}
+      "type":"structure",
+      "required":["HashKeyElement"],
+      "members":{
+        "HashKeyElement":{"shape":"AttributeValue"},
+        "RangeKeyElement":{"shape":"AttributeValue"}
+      }
     },
-    "KeyConditions":{
-      "type":"map",
-      "key":{"shape":"AttributeName"},
-      "value":{"shape":"Condition"}
-    },
-    "KeyExpression":{"type":"string"},
     "KeyList":{
       "type":"list",
       "member":{"shape":"Key"},
@@ -828,10 +643,12 @@
       "max":100
     },
     "KeySchema":{
-      "type":"list",
-      "member":{"shape":"KeySchemaElement"},
-      "min":1,
-      "max":2
+      "type":"structure",
+      "required":["HashKeyElement"],
+      "members":{
+        "HashKeyElement":{"shape":"KeySchemaElement"},
+        "RangeKeyElement":{"shape":"KeySchemaElement"}
+      }
     },
     "KeySchemaAttributeName":{
       "type":"string",
@@ -842,19 +659,12 @@
       "type":"structure",
       "required":[
         "AttributeName",
-        "KeyType"
+        "AttributeType"
       ],
       "members":{
         "AttributeName":{"shape":"KeySchemaAttributeName"},
-        "KeyType":{"shape":"KeyType"}
+        "AttributeType":{"shape":"ScalarAttributeType"}
       }
-    },
-    "KeyType":{
-      "type":"string",
-      "enum":[
-        "HASH",
-        "RANGE"
-      ]
     },
     "KeysAndAttributes":{
       "type":"structure",
@@ -862,9 +672,7 @@
       "members":{
         "Keys":{"shape":"KeyList"},
         "AttributesToGet":{"shape":"AttributeNameList"},
-        "ConsistentRead":{"shape":"ConsistentRead"},
-        "ProjectionExpression":{"shape":"ProjectionExpression"},
-        "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"}
+        "ConsistentRead":{"shape":"ConsistentRead"}
       }
     },
     "LimitExceededException":{
@@ -873,10 +681,6 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true
-    },
-    "ListAttributeValue":{
-      "type":"list",
-      "member":{"shape":"AttributeValue"}
     },
     "ListTablesInput":{
       "type":"structure",
@@ -897,55 +701,7 @@
         "LastEvaluatedTableName":{"shape":"TableName"}
       }
     },
-    "LocalSecondaryIndex":{
-      "type":"structure",
-      "required":[
-        "IndexName",
-        "KeySchema",
-        "Projection"
-      ],
-      "members":{
-        "IndexName":{"shape":"IndexName"},
-        "KeySchema":{"shape":"KeySchema"},
-        "Projection":{"shape":"Projection"}
-      }
-    },
-    "LocalSecondaryIndexDescription":{
-      "type":"structure",
-      "members":{
-        "IndexName":{"shape":"IndexName"},
-        "KeySchema":{"shape":"KeySchema"},
-        "Projection":{"shape":"Projection"},
-        "IndexSizeBytes":{"shape":"Long"},
-        "ItemCount":{"shape":"Long"}
-      }
-    },
-    "LocalSecondaryIndexDescriptionList":{
-      "type":"list",
-      "member":{"shape":"LocalSecondaryIndexDescription"}
-    },
-    "LocalSecondaryIndexList":{
-      "type":"list",
-      "member":{"shape":"LocalSecondaryIndex"}
-    },
     "Long":{"type":"long"},
-    "MapAttributeValue":{
-      "type":"map",
-      "key":{"shape":"AttributeName"},
-      "value":{"shape":"AttributeValue"}
-    },
-    "NonKeyAttributeName":{
-      "type":"string",
-      "min":1,
-      "max":255
-    },
-    "NonKeyAttributeNameList":{
-      "type":"list",
-      "member":{"shape":"NonKeyAttributeName"},
-      "min":1,
-      "max":20
-    },
-    "NullAttributeValue":{"type":"boolean"},
     "NumberAttributeValue":{"type":"string"},
     "NumberSetAttributeValue":{
       "type":"list",
@@ -958,22 +714,6 @@
     "PositiveLongObject":{
       "type":"long",
       "min":1
-    },
-    "Projection":{
-      "type":"structure",
-      "members":{
-        "ProjectionType":{"shape":"ProjectionType"},
-        "NonKeyAttributes":{"shape":"NonKeyAttributeNameList"}
-      }
-    },
-    "ProjectionExpression":{"type":"string"},
-    "ProjectionType":{
-      "type":"string",
-      "enum":[
-        "ALL",
-        "KEYS_ONLY",
-        "INCLUDE"
-      ]
     },
     "ProvisionedThroughput":{
       "type":"structure",
@@ -1013,13 +753,7 @@
         "TableName":{"shape":"TableName"},
         "Item":{"shape":"PutItemInputAttributeMap"},
         "Expected":{"shape":"ExpectedAttributeMap"},
-        "ReturnValues":{"shape":"ReturnValue"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
-        "ReturnItemCollectionMetrics":{"shape":"ReturnItemCollectionMetrics"},
-        "ConditionalOperator":{"shape":"ConditionalOperator"},
-        "ConditionExpression":{"shape":"ConditionExpression"},
-        "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"},
-        "ExpressionAttributeValues":{"shape":"ExpressionAttributeValueMap"}
+        "ReturnValues":{"shape":"ReturnValue"}
       }
     },
     "PutItemInputAttributeMap":{
@@ -1031,8 +765,7 @@
       "type":"structure",
       "members":{
         "Attributes":{"shape":"AttributeMap"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacity"},
-        "ItemCollectionMetrics":{"shape":"ItemCollectionMetrics"}
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
       }
     },
     "PutRequest":{
@@ -1044,25 +777,20 @@
     },
     "QueryInput":{
       "type":"structure",
-      "required":["TableName"],
+      "required":[
+        "TableName",
+        "HashKeyValue"
+      ],
       "members":{
         "TableName":{"shape":"TableName"},
-        "IndexName":{"shape":"IndexName"},
-        "Select":{"shape":"Select"},
         "AttributesToGet":{"shape":"AttributeNameList"},
         "Limit":{"shape":"PositiveIntegerObject"},
         "ConsistentRead":{"shape":"ConsistentRead"},
-        "KeyConditions":{"shape":"KeyConditions"},
-        "QueryFilter":{"shape":"FilterConditionMap"},
-        "ConditionalOperator":{"shape":"ConditionalOperator"},
+        "Count":{"shape":"BooleanObject"},
+        "HashKeyValue":{"shape":"AttributeValue"},
+        "RangeKeyCondition":{"shape":"Condition"},
         "ScanIndexForward":{"shape":"BooleanObject"},
-        "ExclusiveStartKey":{"shape":"Key"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
-        "ProjectionExpression":{"shape":"ProjectionExpression"},
-        "FilterExpression":{"shape":"ConditionExpression"},
-        "KeyConditionExpression":{"shape":"KeyExpression"},
-        "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"},
-        "ExpressionAttributeValues":{"shape":"ExpressionAttributeValueMap"}
+        "ExclusiveStartKey":{"shape":"Key"}
       }
     },
     "QueryOutput":{
@@ -1070,9 +798,8 @@
       "members":{
         "Items":{"shape":"ItemList"},
         "Count":{"shape":"Integer"},
-        "ScannedCount":{"shape":"Integer"},
         "LastEvaluatedKey":{"shape":"Key"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacity"}
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
       }
     },
     "ResourceInUseException":{
@@ -1088,21 +815,6 @@
         "message":{"shape":"ErrorMessage"}
       },
       "exception":true
-    },
-    "ReturnConsumedCapacity":{
-      "type":"string",
-      "enum":[
-        "INDEXES",
-        "TOTAL",
-        "NONE"
-      ]
-    },
-    "ReturnItemCollectionMetrics":{
-      "type":"string",
-      "enum":[
-        "SIZE",
-        "NONE"
-      ]
     },
     "ReturnValue":{
       "type":"string",
@@ -1127,20 +839,11 @@
       "required":["TableName"],
       "members":{
         "TableName":{"shape":"TableName"},
-        "IndexName":{"shape":"IndexName"},
         "AttributesToGet":{"shape":"AttributeNameList"},
         "Limit":{"shape":"PositiveIntegerObject"},
-        "Select":{"shape":"Select"},
+        "Count":{"shape":"BooleanObject"},
         "ScanFilter":{"shape":"FilterConditionMap"},
-        "ConditionalOperator":{"shape":"ConditionalOperator"},
-        "ExclusiveStartKey":{"shape":"Key"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
-        "TotalSegments":{"shape":"ScanTotalSegments"},
-        "Segment":{"shape":"ScanSegment"},
-        "ProjectionExpression":{"shape":"ProjectionExpression"},
-        "FilterExpression":{"shape":"ConditionExpression"},
-        "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"},
-        "ExpressionAttributeValues":{"shape":"ExpressionAttributeValueMap"}
+        "ExclusiveStartKey":{"shape":"Key"}
       }
     },
     "ScanOutput":{
@@ -1150,33 +853,10 @@
         "Count":{"shape":"Integer"},
         "ScannedCount":{"shape":"Integer"},
         "LastEvaluatedKey":{"shape":"Key"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacity"}
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
       }
     },
-    "ScanSegment":{
-      "type":"integer",
-      "min":0,
-      "max":999999
-    },
-    "ScanTotalSegments":{
-      "type":"integer",
-      "min":1,
-      "max":1000000
-    },
-    "SecondaryIndexesCapacityMap":{
-      "type":"map",
-      "key":{"shape":"IndexName"},
-      "value":{"shape":"Capacity"}
-    },
-    "Select":{
-      "type":"string",
-      "enum":[
-        "ALL_ATTRIBUTES",
-        "ALL_PROJECTED_ATTRIBUTES",
-        "SPECIFIC_ATTRIBUTES",
-        "COUNT"
-      ]
-    },
+    "String":{"type":"string"},
     "StringAttributeValue":{"type":"string"},
     "StringSetAttributeValue":{
       "type":"list",
@@ -1185,16 +865,13 @@
     "TableDescription":{
       "type":"structure",
       "members":{
-        "AttributeDefinitions":{"shape":"AttributeDefinitions"},
         "TableName":{"shape":"TableName"},
         "KeySchema":{"shape":"KeySchema"},
         "TableStatus":{"shape":"TableStatus"},
         "CreationDateTime":{"shape":"Date"},
         "ProvisionedThroughput":{"shape":"ProvisionedThroughputDescription"},
         "TableSizeBytes":{"shape":"Long"},
-        "ItemCount":{"shape":"Long"},
-        "LocalSecondaryIndexes":{"shape":"LocalSecondaryIndexDescriptionList"},
-        "GlobalSecondaryIndexes":{"shape":"GlobalSecondaryIndexDescriptionList"}
+        "ItemCount":{"shape":"Long"}
       }
     },
     "TableName":{
@@ -1216,55 +893,37 @@
         "ACTIVE"
       ]
     },
-    "UpdateExpression":{"type":"string"},
-    "UpdateGlobalSecondaryIndexAction":{
-      "type":"structure",
-      "required":[
-        "IndexName",
-        "ProvisionedThroughput"
-      ],
-      "members":{
-        "IndexName":{"shape":"IndexName"},
-        "ProvisionedThroughput":{"shape":"ProvisionedThroughput"}
-      }
-    },
     "UpdateItemInput":{
       "type":"structure",
       "required":[
         "TableName",
-        "Key"
+        "Key",
+        "AttributeUpdates"
       ],
       "members":{
         "TableName":{"shape":"TableName"},
         "Key":{"shape":"Key"},
         "AttributeUpdates":{"shape":"AttributeUpdates"},
         "Expected":{"shape":"ExpectedAttributeMap"},
-        "ConditionalOperator":{"shape":"ConditionalOperator"},
-        "ReturnValues":{"shape":"ReturnValue"},
-        "ReturnConsumedCapacity":{"shape":"ReturnConsumedCapacity"},
-        "ReturnItemCollectionMetrics":{"shape":"ReturnItemCollectionMetrics"},
-        "UpdateExpression":{"shape":"UpdateExpression"},
-        "ConditionExpression":{"shape":"ConditionExpression"},
-        "ExpressionAttributeNames":{"shape":"ExpressionAttributeNameMap"},
-        "ExpressionAttributeValues":{"shape":"ExpressionAttributeValueMap"}
+        "ReturnValues":{"shape":"ReturnValue"}
       }
     },
     "UpdateItemOutput":{
       "type":"structure",
       "members":{
         "Attributes":{"shape":"AttributeMap"},
-        "ConsumedCapacity":{"shape":"ConsumedCapacity"},
-        "ItemCollectionMetrics":{"shape":"ItemCollectionMetrics"}
+        "ConsumedCapacityUnits":{"shape":"ConsumedCapacityUnits"}
       }
     },
     "UpdateTableInput":{
       "type":"structure",
-      "required":["TableName"],
+      "required":[
+        "TableName",
+        "ProvisionedThroughput"
+      ],
       "members":{
-        "AttributeDefinitions":{"shape":"AttributeDefinitions"},
         "TableName":{"shape":"TableName"},
-        "ProvisionedThroughput":{"shape":"ProvisionedThroughput"},
-        "GlobalSecondaryIndexUpdates":{"shape":"GlobalSecondaryIndexUpdateList"}
+        "ProvisionedThroughput":{"shape":"ProvisionedThroughput"}
       }
     },
     "UpdateTableOutput":{
