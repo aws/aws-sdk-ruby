@@ -5,14 +5,14 @@ module Aws
       # @param [Seahorse::Model::Shapes::Structure] shape
       # @param [Hash] params
       def serialize_params(shape, params)
-        Builder.new.to_json(shape, params)
+        Builder.new(shape).to_json(params)
       end
 
       # @param [String] json
       # @param [Seahorse::Model::Shapes::Structure] shape
       # @param [Structure, nil] target
       def parse_body(json, shape, target)
-        Parser.new.parse(shape, json, target)
+        Parser.new(shape).parse(json, target)
       end
 
     end

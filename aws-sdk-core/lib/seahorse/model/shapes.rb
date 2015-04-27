@@ -116,6 +116,13 @@ module Seahorse
           @members.keys
         end
 
+        # @param [Symbol] member_name
+        # @return [Boolean] Returns `true` if there exists a member with
+        #   the given name.
+        def member?(member_name)
+          @members.key?(member_name)
+        end
+
         # @return [Enumerator<[Symbol,ShapeRef]>]
         def members
           @members.to_enum
