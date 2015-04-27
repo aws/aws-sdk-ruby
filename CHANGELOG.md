@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.41 (2015-04-27)
 ------------------
 
 * Feature - Aws::DynamoDB - Added support to `Aws::DynamoDB::Client` for
