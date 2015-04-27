@@ -7,7 +7,9 @@ module Aws
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
       def call(context)
-        @handler.call(add_headers(context))
+        @handler.call(add_headers(context)).on(200..599) do |resp|
+          context[:request_id] = context.http_response.headers['x-amzn-requestid']
+        end
       end
 
       private

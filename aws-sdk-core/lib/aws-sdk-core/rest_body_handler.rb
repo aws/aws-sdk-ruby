@@ -8,10 +8,17 @@ module Aws
       context.http_request.body = build_body(context)
       @handler.call(context).on_success do |response|
         response.data = extract_data(response.context) unless response.data
+      end.on(200..599) do |respson|
+        context[:request_id] = extract_request_id(context)
       end
     end
 
     private
+
+    def extract_request_id(context)
+      headers = context.http_response.headers
+      headers['x-amz-request-id'] || headers['x-amzn-requestid']
+    end
 
     def build_body(context)
       input = context.operation.input
