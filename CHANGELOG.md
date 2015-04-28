@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added a client-side check to ensure HTTP response bodies are
+  not truncated before all of the expected bytes have been received. This check is
+  performed for all non-HEAD requests where a 'Content-Length' response header is
+  present.
+
+  When fewer bytes are returned, then the request is retried up to the configured
+  `:retry_limit` number limit of attempts. This limit defaults to 3.
+
+
 2.0.41 (2015-04-27)
 ------------------
 

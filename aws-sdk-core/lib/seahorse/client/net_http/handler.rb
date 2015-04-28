@@ -6,6 +6,15 @@ module Seahorse
       # the Ruby's `Net::HTTP`.
       class Handler < Client::Handler
 
+        # @api private
+        class TruncatedBodyError < IOError
+          def initialize(bytes_expected, bytes_received)
+            msg = "http response body truncated, expected #{bytes_expected} "
+            msg << "bytes, received #{bytes_received} bytes"
+            super(msg)
+          end
+        end
+
         NETWORK_ERRORS = [
           SocketError, EOFError, IOError, Timeout::Error,
           Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
@@ -54,11 +63,13 @@ module Seahorse
               status_code = net_resp.code.to_i
               headers = extract_headers(net_resp)
 
+              bytes_received = 0
               resp.signal_headers(status_code, headers)
               net_resp.read_body do |chunk|
+                bytes_received += chunk.bytesize
                 resp.signal_data(chunk)
               end
-              resp.signal_done
+              complete_response(req, resp, bytes_received)
 
             end
           end
@@ -69,6 +80,28 @@ module Seahorse
         rescue => error
           # not retryable
           resp.signal_error(error)
+        end
+
+        def complete_response(req, resp, bytes_received)
+          if should_verify_bytes?(req, resp)
+            verify_bytes_received(resp, bytes_received)
+          else
+            resp.signal_done
+          end
+        end
+
+        def should_verify_bytes?(req, resp)
+          req.http_method != 'HEAD' && resp.headers['content-length']
+        end
+
+        def verify_bytes_received(resp, bytes_received)
+          bytes_expected = resp.headers['content-length'].to_i
+          if bytes_expected == bytes_received
+            resp.signal_done
+          else
+            error = TruncatedBodyError.new(bytes_expected, bytes_received)
+            resp.signal_error(NetworkingError.new(error, error.message))
+          end
         end
 
         def session(config, req, &block)

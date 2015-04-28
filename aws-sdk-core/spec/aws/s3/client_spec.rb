@@ -11,12 +11,13 @@ module Aws
         Aws.config[:s3] = {
           region: 'us-east-1',
           credentials: Credentials.new('akid', 'secret'),
-          retry_limit: 0
+          retry_backoff: lambda {|*args| }
         }
       end
 
       after(:each) do
         Aws.config = {}
+        S3::BUCKET_REGIONS.clear
       end
 
       it 'raises an appropriate error when credentials are missing' do
@@ -419,6 +420,44 @@ module Aws
             'prefix+suffix',
             'prefix suffix',
           ])
+        end
+
+      end
+
+      describe 'truncated body checks' do
+
+        it 'accepts responses where content-length equals bytes received' do
+          stub_request(:get, "https://bucket.s3.amazonaws.com/key").
+            to_return(:status => 200, :body => 'data', :headers => {'content-length' => '4'})
+          expect {
+            client.get_object(bucket:'bucket', key:'key')
+          }.not_to raise_error
+        end
+
+        it 'retries requests when fewer than content-length bytes are received' do
+          stub_request(:get, "https://bucket.s3.amazonaws.com/key").
+            to_return(:status => 200, :body => 'dat', :headers => {'content-length' => '4'}).
+            to_return(:status => 200, :body => 'data', :headers => {'content-length' => '4'})
+          resp = client.get_object(bucket:'bucket', key:'key')
+          expect(resp.context.retries).to eq(1)
+          expect(resp.body.read).to eq('data')
+        end
+
+        it 'raises an error if fewer than content-length bytes are received' do
+          stub_request(:get, "https://bucket.s3.amazonaws.com/key").
+            to_return(:status => 200, :body => 'dat', :headers => {'content-length' => '4'})
+          msg = 'http response body truncated, expected 4 bytes, received 3 bytes'
+          expect {
+            client.get_object(bucket:'bucket', key:'key')
+          }.to raise_error(Seahorse::Client::NetworkingError, msg)
+        end
+
+        it 'does not check content-length when header not present' do
+          stub_request(:head, "https://bucket.s3.amazonaws.com/key").
+            to_return(:status => 200, headers:{})
+          expect {
+            client.head_object(bucket:'bucket', key:'key')
+          }.not_to raise_error
         end
 
       end
