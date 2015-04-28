@@ -370,6 +370,11 @@
           "matcher": "pathAll",
           "state": "success",
           "argument": "Volumes[].State"
+        },
+        {
+          "matcher": "error",
+          "expected": "InvalidVolumeNotFound",
+          "state": "success"
         }
       ]
     },

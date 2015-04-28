@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - The `:volume_deleted` waiter no longer raises an error on a
+  400 `Aws::EC2::Errors::InvalidVolumeNotFound` error. Instead it returns
+  with success.
+
+  See [related GitHub issue #789](https://github.com/aws/aws-sdk-ruby/pull/789).
+
 * Feature - Aws::S3 - Added a client-side check to ensure HTTP response bodies are
   not truncated before all of the expected bytes have been received. This check is
   performed for all non-HEAD requests where a 'Content-Length' response header is
