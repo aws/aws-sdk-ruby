@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved an issue were the bucket exists waiter could raise
+  when receiving a 301 permanent redirect from Amazon S3. This happens when
+  the HEAD request is made against a region different from where the bucket
+  exists. Instead this will now cause the `:bucket_exists` waiter to return a
+  truthy value and not raise.
+
+  See [related GitHub issue #796](https://github.com/aws/aws-sdk-ruby/pull/796).
+
 * Issue - Aws::EC2 - The `:volume_deleted` waiter no longer raises an error on a
   400 `Aws::EC2::Errors::InvalidVolumeNotFound` error. Instead it returns
   with success.
