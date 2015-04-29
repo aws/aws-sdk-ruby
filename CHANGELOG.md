@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added the ability to pass a block to
+  `Aws::S3::Encryption::Client#get_object` that yields data as it is
+  decrypted. This increases parity with the vanilla `Aws::S3::Client#get_object`
+  method.
+
+  See [related GitHub issue #794](https://github.com/aws/aws-sdk-ruby/pull/794).
+
 * Issue - Aws::S3 - Resolved an issue were the bucket exists waiter could raise
   when receiving a 301 permanent redirect from Amazon S3. This happens when
   the HEAD request is made against a region different from where the bucket

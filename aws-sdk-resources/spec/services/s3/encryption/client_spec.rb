@@ -245,6 +245,15 @@ module Aws
               expect(resp.body.read).to eq('secret')
             end
 
+            it 'supports #get_object with a block' do
+              stub_encrypted_get
+              data = ''
+              client.get_object(bucket:'bucket', key:'key') do |chunk|
+                data << chunk
+              end
+              expect(data).to eq('secret')
+            end
+
             it 'does not attempt to decrypt failed responses' do
               stub_request(:get, "https://bucket.s3-us-west-1.amazonaws.com/key").
                 to_return(status: 500)

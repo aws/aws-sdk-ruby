@@ -230,7 +230,7 @@ module Aws
         # @return (see S3::Client#get_object)
         # @see S3::Client#get_object
         # @note The `:range` request parameter is not yet supported.
-        def get_object(params = {})
+        def get_object(params = {}, &block)
           if params[:range]
             raise NotImplementedError, '#get_object with :range not supported yet'
           end
@@ -242,7 +242,7 @@ module Aws
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
           }
-          req.send_request
+          req.send_request(target: block)
         end
 
         private
