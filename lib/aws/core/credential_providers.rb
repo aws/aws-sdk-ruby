@@ -347,6 +347,7 @@ module AWS
           Errno::ECONNREFUSED,
           SocketError,
           Timeout::Error,
+          JSON::ParserError,
         ]
 
         include Provider
