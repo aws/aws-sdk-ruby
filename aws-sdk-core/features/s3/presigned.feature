@@ -17,7 +17,16 @@ Feature: S3 Presigned Operations
     | key | test        |
     | acl | public-read |
     And I send an HTTP put request for the presigned url with body "hello"
-    Then I make an unauthenticated GET request for key "test"
+    Then I make an unauthenticated HTTPS GET request for key "test"
+    And the response should be "hello"
+
+  Scenario: Presigned GET with virtual-hosted bucket
+    Given I have a bucket configured with a virtual hosted CNAME
+    When I create a presigned url for "put_object" with:
+    | key | test        |
+    | acl | public-read |
+    And I send an HTTP put request for the presigned url with body "hello"
+    Then I make an unauthenticated HTTP GET request for key "test"
     And the response should be "hello"
 
   Scenario: Presigning a put object request with x-amz-*
@@ -27,7 +36,7 @@ Feature: S3 Presigned Operations
     | storage_class | REDUCED_REDUNDANCY |
     And I send an HTTP put request for the presigned url with body "hello"
     Then the object "test" should have a "REDUCED_REDUNDANCY" storage class
-    Then I make an unauthenticated GET request for key "test"
+    Then I make an unauthenticated HTTPS GET request for key "test"
     And the response should be "hello"
 
   Scenario: Presigned PUT with content-type

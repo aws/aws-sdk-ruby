@@ -45,7 +45,7 @@ module Aws
       # @option options [optional, String] :body_digest The SHA256 hexdigest of
       #   the payload to sign.  For S3, this should be the string literal
       #   `UNSIGNED-PAYLOAD`.
-      # @return [Seahorse::Client::Http::Request] the signed request.
+      # @return [String]
       # @api private
       def presigned_url(request, options = {})
         now = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")

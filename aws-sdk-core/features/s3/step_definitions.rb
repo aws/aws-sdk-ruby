@@ -212,8 +212,13 @@ When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do 
   expect(@resp.code).to eq('200')
 end
 
-Then(/^I make an unauthenticated GET request for key "(.*?)"$/) do |key|
+Then(/^I make an unauthenticated HTTPS GET request for key "(.*?)"$/) do |key|
   uri = URI.parse("https://#{@bucket_name}.s3.amazonaws.com/#{key}")
+  @resp = Net::HTTP.get_response(uri)
+end
+
+Then(/^I make an unauthenticated HTTP GET request for key "(.*?)"$/) do |key|
+  uri = URI.parse("http://#{@bucket_name}.s3.amazonaws.com/#{key}")
   @resp = Net::HTTP.get_response(uri)
 end
 
@@ -257,4 +262,8 @@ end
 Then(/^the keys in my bucket should be$/) do |table|
   keys = @client.list_objects(bucket:@bucket_name).contents.map(&:key)
   expect(keys.sort).to eq(table.rows.map(&:first).sort)
+end
+
+Given(/^I have a bucket configured with a virtual hosted CNAME$/) do
+  @bucket_name = 'aws-sdk.roweclan.com'
 end

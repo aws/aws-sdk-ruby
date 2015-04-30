@@ -21,6 +21,19 @@ module Aws
           expect(url).to eq('https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20130524%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=aeeed9bbccd4d02ee5c0109b86d86835f995330da4c265957d157751f604d404')
         end
 
+        it 'can use the bucket name to create a virtual hosted url' do
+          obj = Object.new({
+            bucket_name: 'my.bucket.com',
+            key: 'test.txt',
+            access_key_id: 'AKIAIOSFODNN7EXAMPLE',
+            secret_access_key: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+            region: 'us-east-1',
+          })
+
+          url = obj.presigned_url(:get, virtual_host: true)
+          expect(url).to match(/^http:\/\/my.bucket.com\//)
+        end
+
       end
     end
   end

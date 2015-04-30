@@ -28,15 +28,30 @@ module Aws
         delete
       end
 
+      # Returns a public URL for this bucket.
+      #
+      #     bucket = s3.bucket('bucket-name')
+      #     bucket.url
+      #     #=> "https://bucket-name.s3.amazonaws.com"
+      #
+      # You can pass `virtual_host: true` to use the bucket name as the
+      # host name.
+      #
+      #     bucket = s3.bucket('my.bucket.com', virtual_host: true)
+      #     bucket.url
+      #     #=> "http://my.bucket.com"
+      #
+      # @option options [Boolean] :virtual_host (false) When `true`,
+      #   the bucket name will be used as the host name. This is useful
+      #   when you have a CNAME configured for this bucket.
+      #
       # @return [String] the URL for this bucket.
-      def url
-        url = URI.parse(client.config.endpoint.to_s)
-        if dns_compatible?(url.scheme) && !client.config.force_path_style
-          url.host = "#{name}.#{url.host}"
+      def url(options = {})
+        if options[:virtual_host]
+          "http://#{name}"
         else
-          url.path = "/#{name}"
+          s3_bucket_url
         end
-        url.to_s
       end
 
       # Creates a {PresignedPost} that makes it easy to upload a file from
@@ -66,10 +81,25 @@ module Aws
 
       private
 
-      def dns_compatible?(scheme)
-        Plugins::S3BucketDns.dns_compatible?(name, scheme == 'https')
+      def s3_bucket_url
+        url = client.config.endpoint.dup
+        if bucket_as_hostname?(url.scheme == 'https')
+          url.host = "#{name}.#{url.host}"
+        else
+          url.path += '/' unless url.path[-1] == '/'
+          url.path += path_escape(name)
+        end
+        url.to_s
       end
 
+      def bucket_as_hostname?(https)
+        Plugins::S3BucketDns.dns_compatible?(name, https) &&
+        !client.config.force_path_style
+      end
+
+      def path_escape(name)
+        name.gsub(/[^\/]+/) {|part| Seahorse::Util.uri_escape(part) }
+      end
     end
   end
 end

@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+* Feature - Virtual Hosted Bucket Urls - You can now generated URLs and pre-signed URLs
+  from `Aws::S3` using a CNAME for your virtually hosted buckets.
+
+      bucket = Aws::S3::Bucket.new('my.bucket.com')
+
+      bucket.url
+      #=> 'https://s3.amazonaws.com/my.bucket.com'
+
+      bucket.url(virtual_host: true)
+      #=> 'http://my.bucket.com'
+
+      bucket.object('key').public_url
+      #=> 'https://s3.amazonaws.com/my.bucket.com/key'
+
+      bucket.object('key').public_url(virtual_host: true)
+      #=> 'http://my.bucket.com/key'
+
+      bucket.object('key').presigned_url(:get)
+      #=> 'https://s3.amazonaws.com/my.bucket.com/key?...'
+
+      bucket.object('key').presigned_url(:get, virtual_host: true)
+      #=> 'http://my.bucket.com/key?...'
+
+  See [related GitHub issue #786](https://github.com/aws/aws-sdk-ruby/issues/786).
+
 * Feature - Signature Version 4 - Added support for signing requests against
   hosts that do not use the standard port for the given HTTP scheme. This
   makes it possible to use the signer against test endpoints.

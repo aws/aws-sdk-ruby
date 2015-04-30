@@ -31,53 +31,73 @@ module Aws
       # @option params [Boolean] :secure (true) When `false`, a HTTP URL
       #   is returned instead of the default HTTPS URL.
       #
+      # @option params [Boolean] :virtual_host (false) When `true`, the
+      #   {#bucket} name will be used as the hostname. This will cause
+      #   the returned URL to be 'http' and not 'https'.
+      #
       # @raise [ArgumentError] Raises an ArgumentError if `:expires_in`
       #   exceeds one week.
       #
       def presigned_url(method, params = {})
-        expires_in = params.delete(:expires_in) || FIFTEEN_MINUTES
-        scheme = params.delete(:secure) == false ? 'http' : 'https'
+        virtual_host = !!params.delete(:virtual_host)
+        scheme = http_scheme(params, virtual_host)
 
-        request = @client.build_request(method, params)
-        request.handle(PresignHandler, step: :sign, priority: 99)
-        validate_expires_in_header(expires_in)
-        request.context[:presigned_expires_in] = expires_in
-
-        url = URI.parse(request.send_request.data)
-        url.scheme = scheme
-        url.to_s
+        req = @client.build_request(method, params)
+        use_bucket_as_hostname(req) if virtual_host
+        sign_but_dont_send(req, expires_in(params), scheme)
+        req.send_request.data
       end
 
       private
-      def validate_expires_in_header(expires_in)
-        if(expires_in > ONE_WEEK)
-          raise ArgumentError.new(
-            "expires_in value of #{expires_in} exceeds one-week maximum"
-          )
+
+      def http_scheme(params, virtual_host)
+        if params.delete(:secure) == false || virtual_host
+          'http'
+        else
+          'https'
         end
       end
 
-      # @api private
-      class PresignHandler < Seahorse::Client::Handler
-        def call(context)
-          Seahorse::Client::Response.new(
-            context: context,
-            data: presigned_url(context)
-          )
+      def expires_in(params)
+        if expires_in = params.delete(:expires_in)
+          if expires_in > ONE_WEEK
+            msg = "expires_in value of #{expires_in} exceeds one-week maximum"
+            raise ArgumentError, msg
+          end
+          expires_in
+        else
+          FIFTEEN_MINUTES
         end
+      end
 
-        def presigned_url(context)
+      def use_bucket_as_hostname(req)
+        req.handlers.remove(Plugins::S3BucketDns::Handler)
+        req.handle do |context|
+          uri = context.http_request.endpoint
+          uri.host = context.params[:bucket]
+          uri.path = uri.path.sub("/#{context.params[:bucket]}", '')
+          @handler.call(context)
+        end
+      end
+
+      def sign_but_dont_send(req, expires_in, scheme)
+        req.handlers.remove(Plugins::S3RequestSigner::SigningHandler)
+        req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
+        req.handle(step: :send) do |context|
+          context.http_request.endpoint.scheme = scheme
           signer = Signers::V4.new(
             context.config.credentials, 's3',
             context.config.region
           )
-          signer.presigned_url(
+          url = signer.presigned_url(
             context.http_request,
-            expires_in: context[:presigned_expires_in],
+            expires_in: expires_in,
             body_digest: "UNSIGNED-PAYLOAD"
           )
+          Seahorse::Client::Response.new(context: context, data: url)
         end
       end
+
     end
   end
 end

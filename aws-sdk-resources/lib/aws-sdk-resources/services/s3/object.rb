@@ -33,6 +33,13 @@ module Aws
       #   | `:head`       | {Client#head_object}   |
       #   | `:delete`     | {Client#delete_object} |
       #
+      # @option params [Boolean] :virtual_host (false) When `true` the
+      #   presigned URL will use the bucket name as a virtual host.
+      #
+      #     bucket = Aws::S3::Bucket.new('my.bucket.com')
+      #     bucket.object('key').presigned_url(virtual_host: true)
+      #     #=> "http://my.bucket.com/key?..."
+      #
       # @option params [Integer] :expires_in (900) Number of seconds before
       #   the pre-signed URL expires. This may not exceed one week (604800
       #   seconds).
@@ -55,14 +62,21 @@ module Aws
       #     s3.bucket('bucket-name').object('obj-key').public_url
       #     #=> "https://bucket-name.s3.amazonaws.com/obj-key"
       #
+      # To use virtual hosted bucket url (disables https):
+      #
+      #     s3.bucket('my.bucket.com').object('key').public_url(virtual_host: true)
+      #     #=> "http://my.bucket.com/key"
+      #
+      # @option options [Boolean] :virtual_host (false) When `true`, the bucket
+      #   name will be used as the host name. This is useful when you have
+      #   a CNAME configured for the bucket.
+      #
       # @return [String]
-      def public_url
-        PublicUrl.build(
-          endpoint: client.config.endpoint,
-          bucket_name: bucket_name,
-          object_key: key,
-          force_path_style: client.config.force_path_style
-        )
+      def public_url(options = {})
+        url = URI.parse(bucket.url(options))
+        url.path += '/' unless url.path[-1] == '/'
+        url.path += key.gsub(/[^\/]+/) { |s| Seahorse::Util.uri_escape(s) }
+        url.to_s
       end
 
       # Uploads a file from disk to the current object in S3.
