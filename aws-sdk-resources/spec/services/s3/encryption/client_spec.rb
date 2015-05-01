@@ -32,6 +32,18 @@ module Aws
             expect(client.client).to be(api_client)
           end
 
+          it 'accepts vanilla client options' do
+            opts = {
+              region: 'us-west-2',
+              credentials:Credentials.new('akid', 'secret'),
+              encryption_key: '.' * 32,
+            }
+            enc_client = Encryption::Client.new(opts)
+            expect(enc_client.client.config.region).to eq('us-west-2')
+            expect(enc_client.client.config.credentials.access_key_id).to eq('akid')
+            expect(enc_client.client.config.credentials.secret_access_key).to eq('secret')
+          end
+
           it 'requires an encryption key or provider' do
             expect {
               options.delete(:encryption_key)

@@ -159,6 +159,8 @@ module Aws
         # * `:key_provider`
         # * `:encryption_key`
         #
+        # You may also pass any other options accepted by {S3::Client.new}.
+        #
         # @option options [S3::Client] :client A basic S3 client that is used
         #   to make api calls. If a `:client` is not provided, a new {S3::Client}
         #   will be constructed.
@@ -180,7 +182,7 @@ module Aws
         #   instruction file uses the object key with this suffix appended.
         #
         def initialize(options = {})
-          @client = options[:client] || S3::Client.new
+          @client = extract_client(options)
           @key_provider = extract_key_provider(options)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
@@ -246,6 +248,17 @@ module Aws
         end
 
         private
+
+        def extract_client(options)
+          options[:client] || begin
+            options = options.dup
+            options.delete(:key_provider)
+            options.delete(:encryption_key)
+            options.delete(:envelope_location)
+            options.delete(:instruction_file_suffix)
+            S3::Client.new(options)
+          end
+        end
 
         def envelope_options(params)
           location = params.delete(:envelope_location) || @envelope_location

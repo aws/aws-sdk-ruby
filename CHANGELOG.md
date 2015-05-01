@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3::Encryption::Client - You can now pass vanilla
+  client constructor options to the encryption client constructor and these
+  will pass through when generating the underlying client. This increases
+  the parity with the vanilla client.
+
+  See [related GitHub issue #800](https://github.com/aws/aws-sdk-ruby/pull/800)
+  and [related GitHub issue #801](https://github.com/aws/aws-sdk-ruby/pull/801).
+
 * Feature - Aws::S3 - Added the ability to pass a block to
   `Aws::S3::Encryption::Client#get_object` that yields data as it is
   decrypted. This increases parity with the vanilla `Aws::S3::Client#get_object`
