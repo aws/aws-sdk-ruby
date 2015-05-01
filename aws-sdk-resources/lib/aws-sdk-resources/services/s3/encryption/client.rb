@@ -159,7 +159,7 @@ module Aws
         # * `:key_provider`
         # * `:encryption_key`
         #
-        # @option opitons [S3::Client] :client A basic S3 client that is used
+        # @option options [S3::Client] :client A basic S3 client that is used
         #   to make api calls. If a `:client` is not provided, a new {S3::Client}
         #   will be constructed.
         #
