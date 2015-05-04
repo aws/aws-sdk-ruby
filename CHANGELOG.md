@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+* Issue - HTTP Handler - Applied a local fix for a Net::HTTP bug. Net::HTTP
+  will retry failed requests when the request method is idempotent, such as
+  HTTP GET, PUT, etc. Unfortunately, Net::HTTP will create a new request, but
+  yield bytes to the same callback after bytes have already been yielded. This
+  causes the response data sink to contain a truncated response, followed
+  by a full response.  This results in correct data.
+
+  The fix current is to disable idempotent retries until this is fixed upstream.
+
+  See [related GitHub issue #799](https://github.com/aws/aws-sdk-ruby/pull/799)
+
 * Feature - Aws::S3::Encryption::Client - You can now pass vanilla
   client constructor options to the encryption client constructor and these
   will pass through when generating the underlying client. This increases
