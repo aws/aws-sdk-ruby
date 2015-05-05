@@ -44,7 +44,7 @@ module Aws
       end
 
       def list(name, ref, values)
-        if flat?(ref)
+        if ref['flattened']
           values.each do |value|
             member(ref.shape.member.location_name || name, ref.shape.member, value)
           end
@@ -123,10 +123,6 @@ module Aws
 
       def xml_attribute?(ref)
         !!ref['xmlAttribute']
-      end
-
-      def flat?(ref)
-        ref.shape.flattened
       end
 
     end

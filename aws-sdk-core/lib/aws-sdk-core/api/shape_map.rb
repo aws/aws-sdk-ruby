@@ -20,9 +20,9 @@ module Aws
         'timestamp' => TimestampShape,
       }
 
-      SHAPE_ATTRS = Set.new(%w(min max documentation flattened))
+      SHAPE_ATTRS = Set.new(%w(min max documentation))
 
-      SHAPE_METADATA = Set.new(%w(xmlNamespace))
+      SHAPE_METADATA = Set.new(%w(xmlNamespace flattened))
 
       # @param [ShapeMap] shapes
       def initialize(definitions)
