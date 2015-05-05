@@ -6,6 +6,10 @@ module Seahorse
 
       class ShapeRef
 
+        def initialize
+          @metadata = {}
+        end
+
         # @return [Shape]
         attr_accessor :shape
 
@@ -15,15 +19,43 @@ module Seahorse
         # @return [String, nil]
         attr_accessor :location_name
 
+        # Gets metadata for the given `key`.
+        def [](key)
+          if @metadata.key?(key)
+            @metadata[key]
+          else
+            @shape[key]
+          end
+        end
+
+        # Sets metadata for the given `key`.
+        def []=(key, value)
+          @metadata[key] = value
+        end
+
       end
 
       class Shape
+
+        def initialize
+          @metadata = {}
+        end
 
         # @return [String]
         attr_accessor :name
 
         # @return [String, nil]
         attr_accessor :documentation
+
+        # Gets metadata for the given `key`.
+        def [](key)
+          @metadata[key]
+        end
+
+        # Sets metadata for the given `key`.
+        def []=(key, value)
+          @metadata[key] = value
+        end
 
       end
 
@@ -45,6 +77,11 @@ module Seahorse
 
       class ListShape < Shape
 
+        def initialize
+          @flattened = false
+          super
+        end
+
         # @return [ShapeRef]
         attr_accessor :member
 
@@ -60,6 +97,11 @@ module Seahorse
       end
 
       class MapShape < Shape
+
+        def initialize
+          @flattened = false
+          super
+        end
 
         # @return [ShapeRef]
         attr_accessor :key
@@ -97,6 +139,7 @@ module Seahorse
           @members = {}
           @members_by_location_name = {}
           @required = Set.new
+          super()
         end
 
         # @return [Set<Symbol>]
