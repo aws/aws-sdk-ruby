@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::IAM - Added the missing pagination configuration for
+  `Aws::IAM::Client#list_policies`.
+
+  See [related GitHub issue #805](https://github.com/aws/aws-sdk-ruby/pull/805)
+
 * Issue - HTTP Handler - Applied a local fix for a Net::HTTP bug. Net::HTTP
   will retry failed requests when the request method is idempotent, such as
   HTTP GET, PUT, etc. Unfortunately, Net::HTTP will create a new request, but
