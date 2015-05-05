@@ -5,83 +5,91 @@ module Aws
   module Xml
     class Builder
 
-      # @param [Seahorse::Model::Shapes::Structure] shape
-      def initialize(shape)
-        @shape = shape
+      include Seahorse::Model::Shapes
+
+      def initialize(rules)
+        @rules = rules
         @xml = []
         @builder = ::Builder::XmlMarkup.new(target: @xml, indent: 2)
       end
 
-      # @param [Hash] params
-      # @return [String] Returns an XML doc string.
       def to_xml(params)
-        structure(@shape.location_name, @shape, params)
+        structure(@rules.location_name, @rules, params)
         @xml.join
       end
 
       private
 
-      def structure(name, shape, values)
+      def structure(name, ref, values)
         if values.empty?
-          node(name, shape)
+          node(name, ref)
         else
-          node(name, shape, structure_attrs(shape, values)) do
-            shape.members.each do |member_name, member_shape|
-              unless values[member_name].nil?
-                next if xml_attribute?(member_shape)
-                mname = member_shape.location_name || member_name.to_s
-                member(mname, member_shape, values[member_name])
-              end
+          node(name, ref, structure_attrs(ref, values)) do
+            ref.shape.members.each do |member_name, member_ref|
+              next if values[member_name].nil?
+              next if xml_attribute?(member_ref)
+              member(member_ref.location_name, member_ref, values[member_name])
             end
           end
         end
       end
 
-      def structure_attrs(shape, values)
-        shape.members.inject({}) do |attrs, (member_name, member_shape)|
-          if xml_attribute?(member_shape) && values.key?(member_name)
-            attrs[member_shape.location_name] = values[member_name]
+      def structure_attrs(ref, values)
+        ref.shape.members.inject({}) do |attrs, (member_name, member_ref)|
+          if xml_attribute?(member_ref) && values.key?(member_name)
+            attrs[member_ref.location_name] = values[member_name]
           end
           attrs
         end
       end
 
-      def list(name, shape, values)
-        if flat?(shape)
+      def list(name, ref, values)
+        if flat?(ref)
           values.each do |value|
-            member(name, shape.member, value)
+            member(ref.shape.member.location_name || name, ref.shape.member, value)
           end
         else
-          node(name, shape) do
+          node(name, ref) do
             values.each do |value|
-              mname = shape.member.location_name || 'member'
-              member(mname, shape.member, value)
+              mname = ref.shape.member.location_name || 'member'
+              member(mname, ref.shape.member, value)
             end
           end
         end
       end
 
-      def map(name, shape, hash)
-        node(name, shape) do
+      def map(name, ref, hash)
+        key_ref = ref.shape.key
+        value_ref = ref.shape.value
+        node(name, ref) do
           hash.each do |key, value|
-            node('entry', shape)  do
-              member(shape.key.location_name || 'key', shape.key, key)
-              member(shape.value.location_name || 'value', shape.value, value)
+            node('entry', ref)  do
+              member(key_ref.location_name || 'key', key_ref, key)
+              member(value_ref.location_name || 'value', value_ref, value)
             end
           end
         end
       end
 
-      def member(name, shape, value)
-        case shape.type
-        when 'structure' then structure(name, shape, value)
-        when 'list'      then list(name, shape, value)
-        when 'timestamp' then node(name, shape, shape.format_time(value, 'iso8601'))
-        when 'blob'      then node(name, shape, Base64.strict_encode64(value.read))
-        when 'map'       then map(name, shape, value)
+      def member(name, ref, value)
+        case ref.shape
+        when StructureShape then structure(name, ref, value)
+        when ListShape      then list(name, ref, value)
+        when MapShape       then map(name, ref, value)
+        when TimestampShape then node(name, ref, timestamp(value))
+        when BlobShape      then node(name, ref, blob(value))
         else
-          node(name, shape, value.to_s)
+          node(name, ref, value.to_s)
         end
+      end
+
+      def blob(value)
+        value = value.read unless String === value
+        Base64.strict_encode64(value)
+      end
+
+      def timestamp(value)
+        value.utc.iso8601
       end
 
       # The `args` list may contain:
@@ -94,15 +102,15 @@ module Aws
       # Pass a block if you want to nest XML nodes inside.  When doing this,
       # you may *not* pass a value to the `args` list.
       #
-      def node(name, shape, *args, &block)
+      def node(name, ref, *args, &block)
         attrs = args.last.is_a?(Hash) ? args.pop : {}
-        attrs = shape_attrs(shape).merge(attrs)
+        attrs = shape_attrs(ref).merge(attrs)
         args << attrs
         @builder.__send__(name, *args, &block)
       end
 
-      def shape_attrs(shape)
-        if xmlns = shape.metadata('xmlNamespace')
+      def shape_attrs(ref)
+        if xmlns = ref['xmlNamespace']
           if prefix = xmlns['prefix']
             { 'xmlns:' + prefix => xmlns['uri'] }
           else
@@ -113,12 +121,12 @@ module Aws
         end
       end
 
-      def xml_attribute?(shape)
-        !!shape.metadata('xmlAttribute')
+      def xml_attribute?(ref)
+        !!ref['xmlAttribute']
       end
 
-      def flat?(shape)
-        shape.metadata('flattened')
+      def flat?(ref)
+        ref.shape.flattened
       end
 
     end

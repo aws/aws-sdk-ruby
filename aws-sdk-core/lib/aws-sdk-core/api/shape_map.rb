@@ -20,6 +20,10 @@ module Aws
         'timestamp' => TimestampShape,
       }
 
+      SHAPE_ATTRS = Set.new(%w(min max documentation flattened))
+
+      SHAPE_METADATA = Set.new(%w(xmlNamespace))
+
       # @param [ShapeMap] shapes
       def initialize(definitions)
         @shapes = {}
@@ -37,9 +41,15 @@ module Aws
       def shape_ref(definition, options = {})
         if definition
           ref = ShapeRef.new
-          ref.shape = self[definition['shape']]
-          ref.location = definition['location']
-          ref.location_name = definition['locationName'] || options[:location_name]
+          ref.location_name = options[:location_name]
+          definition.each do |key, value|
+            case key
+            when 'shape' then ref.shape = self[value]
+            when 'location' then ref.location = value
+            when 'locationName' then ref.location_name = value
+            else ref[key] = value
+            end
+          end
           ref
         else
           nil
@@ -55,16 +65,18 @@ module Aws
           @shapes[name] = shape
         end
         definitions.each do |name, definition|
-          shape = @shapes[name]
-          apply_common_traits(shape, definition)
-          apply_shape_refs(shape, definition)
+          populate_shape(@shapes[name], definition)
         end
       end
 
-      def apply_common_traits(shape, definition)
-        shape.enum = Set.new(definition['enum']) if definition.key?('enum')
-        %w(min max flattened documentation).each do |trait|
-          shape.send("#{trait}=", definition[trait]) if definition.key?(trait)
+      def populate_shape(shape, definition)
+        apply_shape_refs(shape, definition)
+        definition.each do |key, value|
+          case
+          when SHAPE_ATTRS.include?(key) then shape.send("#{key}=", value)
+          when SHAPE_METADATA.include?(key) then shape[key] = value
+          when key == 'enum' then shape.enum = Set.new(value)
+          end
         end
       end
 
