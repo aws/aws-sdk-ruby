@@ -6,13 +6,9 @@ module Seahorse
       #    The HTTP or HTTPS endpoint to send requests to.
       #    For example:
       #
-      #        'example.com'
       #        'http://example.com'
       #        'https://example.com'
       #        'http://example.com:123'
-      #
-      #    This must include the host.  It may also include the scheme and
-      #    port.  When the scheme is not set it defaults to `https`.
       #
       class Endpoint < Plugin
 
