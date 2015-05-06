@@ -1,15 +1,18 @@
+require 'spec_helper'
+
 module Aws
   describe ParamValidator do
 
-    let(:rules) {{ 'type' => 'structure', 'members' => {} }}
+    let(:shapes) { ApiHelper.sample_shapes }
 
     def validate(params, expected_errors = [])
-      shape = Model::Shapes::Shape.new(rules)
+      shape_map = Api::ShapeMap.new(shapes)
+      rules = shape_map.shape_ref('shape' => 'StructureShape')
       if expected_errors.empty?
-        ParamValidator.new(shape).validate!(params)
+        ParamValidator.new(rules).validate!(params)
       else
         expect {
-          ParamValidator.new(shape).validate!(params)
+          ParamValidator.new(rules).validate!(params)
         }.to raise_error(ArgumentError) do |error|
           match_errors(error, expected_errors)
         end
@@ -38,20 +41,9 @@ module Aws
     describe 'structures' do
 
       it 'validates nested structures' do
-        rules['members'] = {
-          'config' => {
-            'type' => 'structure',
-            'members' => {
-              'settings' => {
-                'type' => 'structure',
-                'members' => {}
-              }
-            }
-          }
-        }
         validate('abc', 'expected params to be a hash')
-        validate({ config: 'abc' }, 'expected params[:config] to be a hash')
-        validate({ config: { settings: 'abc' }}, 'expected params[:config][:settings] to be a hash')
+        validate({ nested: 'abc' }, 'expected params[:nested] to be a hash')
+        validate({ nested: { nested: 'abc' }}, 'expected params[:nested][:nested] to be a hash')
       end
 
       it 'accepts hashes' do
@@ -59,11 +51,8 @@ module Aws
       end
 
       it 'raises an error when a required paramter is missing' do
-        rules['required'] = %w(name)
-        rules['members'] = {
-          'name' => { 'type' => 'string' }
-        }
-        validate({}, 'missing required parameter params[:name]')
+        shapes['StructureShape']['required'] = %w(String)
+        validate({}, 'missing required parameter params[:string]')
       end
 
       it 'raises an error when a given parameter is unexpected' do
@@ -71,117 +60,65 @@ module Aws
       end
 
       it 'accepts members that pass validation' do
-        rules['required'] = %w(name)
-        rules['members'] = {
-          'name' => { 'type' => 'string' }
-        }
-        validate(name: 'john doe')
+        shapes['StructureShape']['required'] = %w(String)
+        validate(string: 'abc')
       end
 
       it 'aggregates errors for members' do
-        rules['required'] = %w(name)
-        rules['members'] = {
-          'name' => { 'type' => 'string' }
-        }
-        validate({foo: 'bar'}, [
-          'missing required parameter params[:name]',
-          'unexpected value at params[:foo]'
+        shapes['StructureShape']['required'] = %w(String)
+        validate({nested: { foo: 'bar' }}, [
+          'missing required parameter params[:string]',
+          'missing required parameter params[:nested][:string]',
+          'unexpected value at params[:nested][:foo]'
         ])
-      end
-
-      it 'provides a helpful context for nested params' do
-        rules['members'] = {
-          'config' => {
-            'type' => 'structure',
-            'required' => %w(name),
-            'members' => {
-              'name' => { 'type' => 'string' }
-            }
-          }
-        }
-        validate({ config: {} },
-          'missing required parameter params[:config][:name]')
       end
 
     end
 
     describe 'lists' do
 
-      before(:each) do
-        rules['members'] = {
-          # list of strings
-          'names' => {
-            'type' => 'list',
-            'member' => { 'type' => 'string' }
-          },
-          # list of structures
-          'filters' => {
-            'type' => 'list',
-            'member' => {
-              'type' => 'structure',
-              'members' => {
-                'values' => {
-                  'type' => 'list',
-                  'member' => { 'type' => 'string' }
-                }
-              }
-            }
-          }
-        }
-      end
-
       it 'accepts arrays' do
-        validate(names: [])
-        validate(names: %w(abc mno xyz))
+        validate(number_list: [])
+        validate(nested_list: [{}, {}])
       end
 
       it 'expects the value to be an array' do
-        validate({ names: [] })
-        validate({ names: 'abc' }, 'expected params[:names] to be an array')
+        validate({ nested_list: [] })
+        validate({ nested_list: 'abc' }, 'expected params[:nested_list] to be an array')
       end
 
       it 'validates each member of the list' do
-        validate({ filters: [{}] })
-        validate({ filters: ['abc'] },
-          'expected params[:filters][0] to be a hash')
-        validate({ filters: [{}, 'abc'] },
-          'expected params[:filters][1] to be a hash')
-        validate({ filters: [{ values: 'abc' }] },
-          'expected params[:filters][0][:values] to be an array')
-        validate({ filters: [{ value: 'abc' }] },
-          'unexpected value at params[:filters][0][:value]')
+        validate({ nested_list: [{}] })
+        validate({ number_list: ['abc'] },
+          'expected params[:number_list][0] to be an integer')
+        validate({ nested_list: [{}, 'abc'] },
+          'expected params[:nested_list][1] to be a hash')
+        validate({ nested_list: [{ number_list: ['abc'] }] },
+          'expected params[:nested_list][0][:number_list][0] to be an integer')
+        validate({ nested_list: [{ foo: 'abc' }] },
+          'unexpected value at params[:nested_list][0][:foo]')
       end
 
     end
 
     describe 'maps' do
 
-      before(:each) do
-        rules['members'] = {
-          'attributes' => {
-            'type' => 'map',
-            'key' => { 'type' => 'string' },
-            'value' => { 'type' => 'integer' }
-          }
-        }
-      end
-
       it 'accepts hashes' do
-        validate({ attributes: {}})
-        validate({ attributes: 'abc' },
-          'expected params[:attributes] to be a hash')
+        validate({ string_map: {}})
+        validate({ string_map: 'abc' },
+          'expected params[:string_map] to be a hash')
       end
 
       it 'validates map keys' do
-        validate({ attributes: { 'foo' => 123 }})
-        validate({ attributes: { 123 => 456 }},
-          'expected params[:attributes] 123 key to be a string')
+        validate({ string_map: { 'abc' => 'mno' }})
+        validate({ string_map: { 123 => 'xyz' }},
+          'expected params[:string_map] 123 key to be a string')
       end
 
       it 'validates map values' do
-        validate({ attributes: { 'foo' => 123 }})
-        validate({ attributes: { 'foo' => 'bar' }},
-          'expected params[:attributes]["foo"] to be an integer')
+        validate({ string_map: { 'foo' => 'bar' }})
+        validate({ string_map: { 'foo' => 123 }},
+          'expected params[:string_map]["foo"] to be a string')
       end
 
     end
@@ -189,9 +126,8 @@ module Aws
     describe 'integers' do
 
       it 'accepts integers' do
-        rules['members'] = { 'count' => { 'type' => 'integer' } }
-        validate(count: 123)
-        validate({ count: '123' }, 'expected params[:count] to be an integer')
+        validate(integer: 123)
+        validate({ integer: '123' }, 'expected params[:integer] to be an integer')
       end
 
     end
@@ -199,9 +135,8 @@ module Aws
     describe 'floats' do
 
       it 'accepts integers' do
-        rules['members'] = { 'price' => { 'type' => 'float' } }
-        validate(price: 123.0)
-        validate({ price: 123 }, 'expected params[:price] to be a float')
+        validate(float: 123.0)
+        validate({ float: 123 }, 'expected params[:float] to be a float')
       end
 
     end
@@ -209,20 +144,8 @@ module Aws
     describe 'timestamps' do
 
       it 'accepts time objects' do
-        rules['members'] = {
-          'a' => { 'type' => 'timestamp' },
-          'b' => { 'type' => 'timestamp', 'metadata' => { 'timestamp_format' => 'iso8601' }},
-          'c' => { 'type' => 'timestamp', 'metadata' => { 'timestamp_format' => 'rfc822' }},
-          'd' => { 'type' => 'timestamp', 'metadata' => { 'timestamp_format' => 'unix_timestamp' }},
-        }
-        validate(a: Time.now)
-        validate(b: Time.now)
-        validate(c: Time.now)
-        validate(d: Time.now)
-        validate({a: 12345}, 'expected params[:a] to be a Time object')
-        validate({b: '2013-01-01'}, 'expected params[:b] to be a Time object')
-        validate({c: DateTime.now}, 'expected params[:c] to be a Time object')
-        validate({d: Date.new}, 'expected params[:d] to be a Time object')
+        validate(timestamp: Time.now)
+        validate({timestamp: Date.new}, 'expected params[:timestamp] to be a Time object')
       end
 
     end
@@ -230,11 +153,10 @@ module Aws
     describe 'booleans' do
 
       it 'accepts TrueClass and FalseClass' do
-        rules['members'] = { 'enabled' => { 'type' => 'boolean' } }
-        validate(enabled: true)
-        validate(enabled: false)
-        validate({ enabled: 'true' },
-          'expected params[:enabled] to be true or false')
+        validate(boolean: true)
+        validate(boolean: false)
+        validate({ boolean: 'true' },
+          'expected params[:boolean] to be true or false')
       end
 
     end
@@ -242,20 +164,10 @@ module Aws
     describe 'blobs' do
 
       it 'accepts strings and io objects for payload members' do
-        rules['payload'] = 'data'
-        rules['members'] = {
-          'data' => { 'type' => 'blob' }
-        }
-        validate(data: StringIO.new('abc'))
-        validate(data: double('d', :read => 'abc', :size => 3, :rewind => 0))
-        validate({ data: 'abc' })
-      end
-
-      it 'accepts string objects for non-payload members' do
-        rules['members'] = { 'data' => { 'type' => 'blob' } }
-        validate(data: 'YQ==')
-        validate({ data: 123 },
-          'expected params[:data] to be a string or IO object')
+        validate(blob: StringIO.new('abc'))
+        validate(blob: double('d', :read => 'abc', :size => 3, :rewind => 0))
+        validate({ blob: 'abc' })
+        validate({ blob: 123 }, 'expected params[:blob] to be a string or IO object')
       end
 
     end
@@ -263,9 +175,8 @@ module Aws
     describe 'strings' do
 
       it 'accepts string objects' do
-        rules['members'] = { 'name' => { 'type' => 'string' } }
-        validate(name: 'john doe')
-        validate({ name: 123 }, 'expected params[:name] to be a string')
+        validate(string: 'john doe')
+        validate({ string: 123 }, 'expected params[:string] to be a string')
       end
 
     end

@@ -4,17 +4,17 @@ module Aws
 
     include Seahorse::Model::Shapes
 
-    # @param [Model::Shapes::Shape] shape
+    # @param [Seahorse::Model::Shapes::ShapeRef] rules
     # @param [Hash] params
     # @return [void]
-    def self.validate!(shape, params)
-      new(shape).validate!(params)
+    def self.validate!(rules, params)
+      new(rules).validate!(params)
     end
 
-    # @param [Model::Shapes::Shape] shape
+    # @param [Seahorse::Model::Shapes::ShapeRef] rules
     # @option options [Boolean] :validate_required (true)
-    def initialize(shape, options = {})
-      @shape = shape || StructureShape.new
+    def initialize(rules, options = {})
+      @rules = rules
       @validate_required = options[:validate_required] != false
     end
 
@@ -22,19 +22,21 @@ module Aws
     # @return [void]
     def validate!(params)
       errors = []
-      shape(@shape, params, errors, context = 'params')
+      structure(@rules, params, errors, context = 'params')
       raise ArgumentError, error_messages(errors) unless errors.empty?
     end
 
     private
 
-    def structure(structure, values, errors, context)
+    def structure(ref, values, errors, context)
       # ensure the value is hash like
       return unless hash?(values, errors, context)
 
+      shape = ref.shape
+
       # ensure required members are present
       if @validate_required
-        structure.required.each do |member_name|
+        shape.required.each do |member_name|
           if values[member_name].nil?
             param = "#{context}[#{member_name.inspect}]"
             errors << "missing required parameter #{param}"
@@ -45,9 +47,9 @@ module Aws
       # validate non-nil members
       values.each do |name, value|
         unless value.nil?
-          if structure.member?(name)
-            member_shape = structure.member(name)
-            shape(member_shape, value, errors, context + "[#{name.inspect}]")
+          if shape.member?(name)
+            member_ref = shape.member(name)
+            shape(member_ref, value, errors, context + "[#{name.inspect}]")
           else
             errors << "unexpected value at #{context}[#{name.inspect}]"
           end
@@ -55,7 +57,7 @@ module Aws
       end
     end
 
-    def list(list, values, errors, context)
+    def list(ref, values, errors, context)
       # ensure the value is an array
       unless values.is_a?(Array)
         errors << "expected #{context} to be an array"
@@ -63,27 +65,30 @@ module Aws
       end
 
       # validate members
+      member_ref = ref.shape.member
       values.each.with_index do |value, index|
-        shape(list.member, value, errors, context + "[#{index}]")
+        shape(member_ref, value, errors, context + "[#{index}]")
       end
     end
 
-    def map(map, values, errors, context)
+    def map(ref, values, errors, context)
+
       return unless hash?(values, errors, context)
+
+      key_ref = ref.shape.key
+      value_ref = ref.shape.value
+
       values.each do |key, value|
-        shape(map.key, key, errors, "#{context} #{key.inspect} key")
-        shape(map.value, value, errors, context + "[#{key.inspect}]")
+        shape(key_ref, key, errors, "#{context} #{key.inspect} key")
+        shape(value_ref, value, errors, context + "[#{key.inspect}]")
       end
     end
 
-    def shape(shape, value, errors, context)
-      case shape
-      when StructureShape
-        structure(shape, value, errors, context)
-      when ListShape
-        list(shape, value, errors, context)
-      when MapShape
-        map(shape, value, errors, context)
+    def shape(ref, value, errors, context)
+      case ref.shape
+      when StructureShape then structure(ref, value, errors, context)
+      when ListShape then list(ref, value, errors, context)
+      when MapShape then map(ref, value, errors, context)
       when StringShape
         unless value.is_a?(String)
           errors << "expected #{context} to be a string"
@@ -108,6 +113,8 @@ module Aws
         unless io_like?(value) or value.is_a?(String)
           errors << "expected #{context} to be a string or IO object"
         end
+      else
+        raise "unhandled shape type: #{ref.shape.class.name}"
       end
     end
 
