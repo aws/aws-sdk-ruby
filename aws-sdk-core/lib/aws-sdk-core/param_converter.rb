@@ -13,25 +13,25 @@ module Aws
     @mutex = Mutex.new
     @converters = Hash.new { |h,k| h[k] = {} }
 
-    def initialize(shape)
-      @shape = shape
+    def initialize(rules)
+      @rules = rules
     end
 
     # @param [Hash] params
     # @return [Hash]
     def convert(params)
-      structure(@shape, params)
+      structure(@rules, params)
     end
 
     private
 
-    def structure(structure, values)
-      values = c(structure, values)
+    def structure(ref, values)
+      values = c(ref, values)
       if values.is_a?(Hash)
         values.each do |k, v|
           unless v.nil?
-            if structure.member?(k)
-              values[k] = member(structure.member(k), v)
+            if ref.shape.member?(k)
+              values[k] = member(ref.shape.member(k), v)
             end
           end
         end
@@ -39,44 +39,41 @@ module Aws
       values
     end
 
-    def list(list, values)
-      values = c(list, values)
+    def list(ref, values)
+      values = c(ref, values)
       if values.is_a?(Array)
-        values.map { |v| member(list.member, v) }
+        values.map { |v| member(ref.shape.member, v) }
       else
         values
       end
     end
 
-    def map(map, values)
-      values = c(map, values)
+    def map(ref, values)
+      values = c(ref, values)
       if values.is_a?(Hash)
         values.each.with_object({}) do |(key, value), hash|
-          hash[member(map.key, key)] = member(map.value, value)
+          hash[member(ref.shape.key, key)] = member(ref.shape.value, value)
         end
       else
         values
       end
     end
 
-    def member(shape, value)
-      case shape
-      when StructureShape then structure(shape, value)
-      when ListShape then list(shape, value)
-      when MapShape then map(shape, value)
-      else c(shape, value)
+    def member(ref, value)
+      case ref.shape
+      when StructureShape then structure(ref, value)
+      when ListShape then list(ref, value)
+      when MapShape then map(ref, value)
+      else c(ref, value)
       end
     end
 
-    def c(shape, value)
-      self.class.c(shape.class, value)
+    def c(ref, value)
+      self.class.c(ref.shape.class, value)
     end
 
     class << self
 
-      # @param [Model::Shapes::InputShape] shape
-      # @param [Hash] params
-      # @return [Hash]
       def convert(shape, params)
         new(shape).convert(params)
       end

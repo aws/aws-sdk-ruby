@@ -1,3 +1,4 @@
+require 'spec_helper'
 require 'stringio'
 
 module Aws
@@ -5,61 +6,33 @@ module Aws
 
     describe 'convert' do
 
+      let(:shapes) { ApiHelper.sample_shapes }
+
+      let(:rules) {
+        Api::ShapeMap.new(shapes).shape_ref('shape' => 'StructureShape')
+      }
+
       it 'performs a deeply nested conversion of values' do
-        rules = Model::Shapes::Shape.new({
-          'type' => 'structure',
-          'members' => {
-            'username' => { 'type' => 'string' },
-            'config' => {
-              'type' => 'structure',
-              'members' => {
-                'enabled' => { 'type' => 'boolean' },
-                'settings' => {
-                  'type' => 'map',
-                  'key' => { 'type' => 'string' },
-                  'value' => { 'type' => 'string' },
-                },
-                'counts' => {
-                  'type' => 'list',
-                  'member' => {
-                    'type' => 'structure',
-                    'members' => {
-                      'value' => { 'type' => 'integer' }
-                    }
-                  },
-                }
-              }
-            }
-          }
-        })
 
         data = double('data')
 
-        config = Struct.new(:enabled, :settings, :counts, :unknown)
-        config = config.new(true, { color: :red }, [
-          { value: 1 },
-          { value: 2.0 },
-          { value: '3' },
+        params = Struct.new(:boolean, :string_map, :nested_list, :unknown)
+        params = params.new(true, { color: :red }, [
+          { integer: 1 },
+          { integer: 2.0 },
+          { integer: '3' },
         ], data)
-
-        params = {
-          username: :johndoe,
-          config: config
-        }
 
         converted = ParamConverter.convert(rules, params)
         expect(converted).to eq({
-          username: 'johndoe',
-          config: {
-            enabled: true,
-            settings: { 'color' => 'red' },
-            counts: [
-              { value: 1 },
-              { value: 2 },
-              { value: 3 },
-            ],
-            unknown: data
-          }
+          boolean: true,
+          string_map: { 'color' => 'red' },
+          nested_list: [
+            { integer: 1 },
+            { integer: 2 },
+            { integer: 3 },
+          ],
+          unknown: data
         })
       end
 
@@ -76,7 +49,7 @@ module Aws
         end
 
         it 'returns the value unmodified if the value class is unknown' do
-          shape_class = Model::Shapes::String
+          shape_class = Seahorse::Model::Shapes::StringShape
           value = double('raw')
           expect(ParamConverter.c(shape_class, value)).to be(value)
         end
@@ -85,7 +58,7 @@ module Aws
 
       describe 'structures' do
 
-        let(:shape_class) { Model::Shapes::Structure }
+        let(:shape_class) { Seahorse::Model::Shapes::StructureShape }
 
         it 'returns duplicate hashes' do
           value = { a: 1 }
@@ -104,7 +77,7 @@ module Aws
 
       describe 'maps' do
 
-        let(:shape_class) { Model::Shapes::Map }
+        let(:shape_class) { Seahorse::Model::Shapes::MapShape }
 
         it 'returns duplicate hashes' do
           value = { a: 1 }
@@ -123,7 +96,7 @@ module Aws
 
       describe 'lists' do
 
-        let(:shape_class) { Model::Shapes::List }
+        let(:shape_class) { Seahorse::Model::Shapes::ListShape }
 
         it 'duplicates arrays' do
           value = [1,2,3]
@@ -142,7 +115,7 @@ module Aws
 
       describe 'strings' do
 
-        let(:shape_class) { Model::Shapes::String }
+        let(:shape_class) { Seahorse::Model::Shapes::StringShape }
 
         it 'returns strings unmodified' do
           expect(ParamConverter.c(shape_class, 'abc')).to eq('abc')
@@ -156,7 +129,7 @@ module Aws
 
       describe 'integers' do
 
-        let(:shape_class) { Model::Shapes::Integer }
+        let(:shape_class) { Seahorse::Model::Shapes::IntegerShape }
 
         it 'returns integers unmodified' do
           expect(ParamConverter.c(shape_class, 123)).to eq(123)
@@ -178,7 +151,7 @@ module Aws
 
       describe 'floats' do
 
-        let(:shape_class) { Model::Shapes::Float }
+        let(:shape_class) { Seahorse::Model::Shapes::FloatShape }
 
         it 'returns floats unmodified' do
           expect(ParamConverter.c(shape_class, 12.34)).to eq(12.34)
@@ -200,7 +173,7 @@ module Aws
 
       describe 'timestamps' do
 
-        let(:shape_class) { Model::Shapes::Timestamp }
+        let(:shape_class) { Seahorse::Model::Shapes::TimestampShape }
 
         it 'returns Time objects unmodfied' do
           time = Time.now
@@ -241,7 +214,7 @@ module Aws
 
       describe 'booleans' do
 
-        let(:shape_class) { Model::Shapes::Boolean }
+        let(:shape_class) { Seahorse::Model::Shapes::BooleanShape }
 
         it 'returns true and false' do
           expect(ParamConverter.c(shape_class, true)).to be(true)
@@ -256,7 +229,7 @@ module Aws
 
       describe 'blobs' do
 
-        let(:shape_class) { Model::Shapes::Blob }
+        let(:shape_class) { Seahorse::Model::Shapes::BlobShape }
 
         it 'accepts io objects (like file)' do
           file = File.open(__FILE__, 'r')
