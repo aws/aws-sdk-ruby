@@ -10,8 +10,6 @@ module Seahorse
       @plugins = PluginList.new([
         Plugins::Endpoint,
         Plugins::NetHttp,
-        Plugins::ParamConversion,
-        Plugins::ParamValidation,
         Plugins::RaiseResponseErrors,
         Plugins::ResponseTarget,
       ])

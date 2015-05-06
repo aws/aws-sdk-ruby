@@ -7,6 +7,8 @@ module Aws
       'Seahorse::Client::Plugins::Logging',
       'Seahorse::Client::Plugins::RestfulBindings',
       'Seahorse::Client::Plugins::ContentLength',
+      'Aws::Plugins::ParamConverter',
+      'Aws::Plugins::ParamValidator',
       'Aws::Plugins::UserAgent',
       'Aws::Plugins::RetryErrors',
       'Aws::Plugins::GlobalConfiguration',
@@ -28,7 +30,7 @@ module Aws
       def define(svc_name, options)
         client_class = Class.new(self)
         client_class.identifier = svc_name.downcase.to_sym
-        client_class.set_api(Api.build(options[:api]))
+        client_class.set_api(Api::Builder.build(options[:api]))
         client_class.set_paginators(options[:paginators])
         client_class.set_waiters(options[:waiters])
         DEFAULT_PLUGINS.each do |plugin|
