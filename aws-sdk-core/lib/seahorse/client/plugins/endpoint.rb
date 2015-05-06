@@ -67,7 +67,7 @@ module Seahorse
             parts.compact!
             if input = context.operation.input
               params = context.params
-              input.members.each do |member_name, member|
+              input.shape.members.each do |member_name, member|
                 if member.location == 'querystring' && !params[member_name].nil?
                   param_name = member.location_name
                   param_value = params[member_name]

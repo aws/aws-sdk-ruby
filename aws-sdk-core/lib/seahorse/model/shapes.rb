@@ -6,8 +6,17 @@ module Seahorse
 
       class ShapeRef
 
-        def initialize
+        def initialize(options = {})
           @metadata = {}
+          options.each do |key, value|
+            if key == :metadata
+              value.each do |k,v|
+                self[k] = v
+              end
+            else
+              send("#{key}=", value)
+            end
+          end
         end
 
         # @return [Shape]

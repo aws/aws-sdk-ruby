@@ -49,7 +49,7 @@ module Aws
         op = Seahorse::Model::Operation.new
         op.name = name
         op.http_method = http['method']
-        op.http_request_uri = http['requestUri']
+        op.http_request_uri = http['requestUri'] || '/'
         op.documentation = definition['documentation']
         op.deprecated = !!definition['deprecated']
         op.input = shapes.shape_ref(definition['input'])

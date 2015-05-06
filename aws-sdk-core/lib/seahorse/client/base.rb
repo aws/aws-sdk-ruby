@@ -179,6 +179,8 @@ module Seahorse
         # @return [Model::Api]
         def set_api(api)
           @api = api
+          define_operation_methods
+          @api
         end
 
         # @option options [Model::Api, Hash] :api ({})

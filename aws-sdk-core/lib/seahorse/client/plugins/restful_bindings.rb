@@ -104,8 +104,8 @@ module Seahorse
             end
           end
 
-          def each_member(shape, &block)
-            shape.members.each(&block) if shape
+          def each_member(ref, &block)
+            ref.shape.members.each(&block) if ref
           end
 
         end

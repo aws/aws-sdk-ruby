@@ -2,7 +2,18 @@ module Aws
   module Query
     class Handler < Seahorse::Client::Handler
 
+      include Seahorse::Model::Shapes
+
       CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=utf-8'
+
+      METADATA_REF = begin
+        request_id = ShapeRef.new(
+          shape: StringShape.new,
+          location_name: 'RequestId')
+        response_metadata = StructureShape.new
+        response_metadata.add_member(:request_id, request_id)
+        ShapeRef.new(shape: response_metadata, location_name: 'ResponseMetadata')
+      end
 
       # @param [Seahorse::Client::RequestContext] context
       # @return [Seahorse::Client::Response]
@@ -32,9 +43,9 @@ module Aws
       end
 
       def parse_xml(context)
-        if rules = context.operation.output
-          data = Xml::Parser.new(apply_wrapper(rules)).parse(xml(context))
-          remove_wrapper(data, context, rules)
+        if context.operation.output
+          data = Xml::Parser.new(rules(context)).parse(xml(context))
+          remove_wrapper(data, context)
         else
           EmptyStructure.new
         end
@@ -44,24 +55,20 @@ module Aws
         context.http_response.body_contents
       end
 
-      def apply_wrapper(shape)
-        Seahorse::Model::Shapes::Structure.new({
-          'members' => {
-            shape.metadata('resultWrapper') => shape.definition,
-            'ResponseMetadata' => {
-              'type' => 'structure',
-              'members' => {
-                'RequestId' => { 'type' => 'string' }
-              }
-            }
-          }
-        }, shape_map: shape.shape_map)
+      def rules(context)
+        shape = Seahorse::Model::Shapes::StructureShape.new
+        shape.add_member(:result, ShapeRef.new(
+          shape: context.operation.output.shape,
+          location_name: context.operation.name + 'Result'
+        ))
+        shape.add_member(:response_metadata, METADATA_REF)
+        ShapeRef.new(shape: shape)
       end
 
-      def remove_wrapper(data, context, rules)
-        if context.operation.output.metadata('resultWrapper')
+      def remove_wrapper(data, context)
+        if context.operation.output['resultWrapper']
           context[:request_id] = data.response_metadata.request_id
-          data[data.members.first] || Structure.new(rules.member_names)
+          data.result || Structure.new(context.operation.output.shape.member_names)
         else
           data
         end
