@@ -20,10 +20,6 @@ module Aws
         'timestamp' => TimestampShape,
       }
 
-      SHAPE_ATTRS = Set.new(%w(min max documentation))
-
-      SHAPE_METADATA = Set.new(%w(xmlNamespace flattened))
-
       # @param [ShapeMap] shapes
       def initialize(definitions)
         @shapes = {}
@@ -40,17 +36,12 @@ module Aws
 
       def shape_ref(definition, options = {})
         if definition
-          ref = ShapeRef.new
-          ref.location_name = options[:location_name]
-          definition.each do |key, value|
-            case key
-            when 'shape' then ref.shape = self[value]
-            when 'location' then ref.location = value
-            when 'locationName' then ref.location_name = value
-            else ref[key] = value
-            end
-          end
-          ref
+          meta = definition.dup
+          ShapeRef.new(
+            shape: self[meta.delete('shape')],
+            location: meta.delete('location'),
+            location_name: meta.delete('locationName') || options[:location_name],
+            metadata: meta)
         else
           nil
         end
@@ -65,36 +56,46 @@ module Aws
           @shapes[name] = shape
         end
         definitions.each do |name, definition|
-          populate_shape(@shapes[name], definition)
+          shape = @shapes[name]
+          traits = definition.dup
+          apply_shape_refs(shape, traits)
+          apply_shape_traits(shape, traits)
         end
       end
 
-      def populate_shape(shape, definition)
-        apply_shape_refs(shape, definition)
-        definition.each do |key, value|
-          case
-          when SHAPE_ATTRS.include?(key) then shape.send("#{key}=", value)
-          when SHAPE_METADATA.include?(key) then shape[key] = value
-          when key == 'enum' then shape.enum = Set.new(value)
-          end
-        end
-      end
-
-      def apply_shape_refs(shape, definition)
+      def apply_shape_refs(shape, traits)
         case shape
         when StructureShape
-          required = Set.new(definition['required'] || [])
-          definition['members'].each do |member_name, ref|
+          required = Set.new(traits.delete('required') || [])
+          traits.delete('members').each do |member_name, ref|
             name = underscore(member_name)
             ref = shape_ref(ref, location_name: member_name)
             shape.add_member(name, ref, required: required.include?(member_name))
           end
         when ListShape
-          shape.member = shape_ref(definition['member'])
+          shape.member = shape_ref(traits.delete('member'))
         when MapShape
-          shape.key = shape_ref(definition['key'])
-          shape.value = shape_ref(definition['value'])
+          shape.key = shape_ref(traits.delete('key'))
+          shape.value = shape_ref(traits.delete('value'))
         end
+      end
+
+      def apply_shape_traits(shape, traits)
+        shape.enum = Set.new(traits.delete('enum')) if traits.key?('enum')
+        shape.min = traits.delete('min') if traits.key?('min')
+        shape.max = traits.delete('max') if traits.key?('max')
+        shape.documentation = traits.delete('documentation')
+        if payload = traits.delete('payload')
+          shape[:payload] = underscore(payload)
+          shape[:payload_member] = shape.member(shape[:payload])
+        end
+        traits.each do |key, value|
+          shape[key] = value
+        end
+      end
+
+      def apply_payload(ref, name)
+        ref['payload'] = underscore(name).to_sym
       end
 
       def underscore(str)
