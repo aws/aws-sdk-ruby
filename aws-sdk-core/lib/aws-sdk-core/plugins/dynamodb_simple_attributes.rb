@@ -137,20 +137,21 @@ module Aws
       # @api private
       class ValueTranslator
 
-        # @param [Seahorse::Model::Shapes::Shape] shape
-        # @param [Symbol<:marshal,:unmarshal>] mode
-        def initialize(shape, mode)
-          @shape = shape
+        include Seahorse::Model::Shapes
+
+        def initialize(rules, mode)
+          @rules = rules
           @mode = mode
         end
 
         def apply(values)
-          structure(@shape, values) if @shape
+          structure(@rules, values) if @rules
         end
 
         private
 
-        def structure(shape, values)
+        def structure(ref, values)
+          shape = ref.shape
           if values.is_a?(Struct)
             values.members.each do |key|
               values[key] = translate(shape.member(key), values[key])
@@ -165,33 +166,35 @@ module Aws
           end
         end
 
-        def list(shape, values)
+        def list(ref, values)
           return values unless values.is_a?(Array)
+          member_ref = ref.shape.member
           values.inject([]) do |list, value|
-            list << translate(shape.member, value)
+            list << translate(member_ref, value)
           end
         end
 
-        def map(shape, values)
+        def map(ref, values)
           return values unless values.is_a?(Hash)
+          value_ref = ref.shape.value
           values.each.with_object({}) do |(key, value), hash|
-            hash[key] = translate(shape.value, value)
+            hash[key] = translate(value_ref, value)
           end
         end
 
-        def translate(shape, value)
-          if shape.name == 'AttributeValue'
+        def translate(ref, value)
+          if ref.shape.name == 'AttributeValue'
             DynamoDB::AttributeValue.new.send(@mode, value)
           else
-            translate_complex(shape, value)
+            translate_complex(ref, value)
           end
         end
 
-        def translate_complex(shape, value)
-          case shape
-          when Seahorse::Model::Shapes::Structure then structure(shape, value)
-          when Seahorse::Model::Shapes::List then list(shape, value)
-          when Seahorse::Model::Shapes::Map then map(shape, value)
+        def translate_complex(ref, value)
+          case ref.shape
+          when StructureShape then structure(ref, value)
+          when ListShape then list(ref, value)
+          when MapShape then map(ref, value)
           else value
           end
         end

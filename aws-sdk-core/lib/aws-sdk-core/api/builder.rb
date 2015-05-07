@@ -6,7 +6,11 @@ module Aws
       class << self
 
         def build(definition)
-          Builder.new.build(customize(load_definition(definition)))
+          if Seahorse::Model::Api === definition
+            definition
+          else
+            Builder.new.build(customize(load_definition(definition)))
+          end
         end
 
         private
@@ -16,7 +20,7 @@ module Aws
           when nil then {}
           when Hash then definition
           when String, Pathname then Seahorse::Util.load_json(definition)
-          else raise ArgumentError, "invalid api definition #{api}"
+          else raise ArgumentError, "invalid api definition #{definition}"
           end
         end
 

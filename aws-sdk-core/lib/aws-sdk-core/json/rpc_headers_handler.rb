@@ -21,11 +21,11 @@ module Aws
       end
 
       def content_type(context)
-        CONTENT_TYPE % [context.config.api.metadata('jsonVersion')]
+        CONTENT_TYPE % [context.config.api.metadata['jsonVersion']]
       end
 
       def target(context)
-        prefix = context.config.api.metadata('targetPrefix')
+        prefix = context.config.api.metadata['targetPrefix']
         "#{prefix}.#{context.operation.name}"
       end
 
