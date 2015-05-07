@@ -30,16 +30,16 @@ module Seahorse
 
         # Gets metadata for the given `key`.
         def [](key)
-          if @metadata.key?(key)
-            @metadata[key]
+          if @metadata.key?(key.to_s)
+            @metadata[key.to_s]
           else
-            @shape[key]
+            @shape[key.to_s]
           end
         end
 
         # Sets metadata for the given `key`.
         def []=(key, value)
-          @metadata[key] = value
+          @metadata[key.to_s] = value
         end
 
       end
@@ -58,12 +58,12 @@ module Seahorse
 
         # Gets metadata for the given `key`.
         def [](key)
-          @metadata[key]
+          @metadata[key.to_s]
         end
 
         # Sets metadata for the given `key`.
         def []=(key, value)
-          @metadata[key] = value
+          @metadata[key.to_s] = value
         end
 
       end

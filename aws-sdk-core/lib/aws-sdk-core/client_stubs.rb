@@ -94,7 +94,7 @@ module Aws
       @stub_mutex.synchronize do
         stubs = @stubs[operation_name.to_sym] || []
         case stubs.length
-        when 0 then new_stub(operation_name)
+        when 0 then new_stub(operation_name.to_sym)
         when 1 then stubs.first
         else stubs.shift
         end

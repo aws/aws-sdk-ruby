@@ -62,8 +62,8 @@ module Aws
 
     def streaming?(ref)
       ref.shape[:payload] && (
-        Seahorse::Model::Shapes::BlobShape === ref.shape[:payload_member] ||
-        Seahorse::Model::Shapes::StringShape === ref.shape[:payload_member]
+        Seahorse::Model::Shapes::BlobShape === ref.shape[:payload_member].shape ||
+        Seahorse::Model::Shapes::StringShape === ref.shape[:payload_member].shape
       )
     end
 

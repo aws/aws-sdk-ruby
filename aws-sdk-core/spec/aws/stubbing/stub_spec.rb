@@ -23,7 +23,7 @@ module Aws
 
         describe 'with an output shape' do
 
-          let(:shape_map) { Seahorse::Model::ShapeMap.new({
+          let(:shape_map) { Api::ShapeMap.new({
             'Person' => {
               'type' => 'structure',
               'required' => ['FullName'],
@@ -68,14 +68,14 @@ module Aws
             'Timestamp' => { 'type' => 'timestamp' },
           })}
 
-          let(:shape) { shape_map.shape('shape' => 'Person') }
+          let(:ref) { shape_map.shape_ref('shape' => 'Person') }
 
-          let(:stub) { Stub.new(shape) }
+          let(:stub) { Stub.new(ref) }
 
           it 'returns a stub with the appropriate members' do
             data = stub.format
             expect(data).to be_kind_of(Structure)
-            expect(data.members).to eq(shape.member_names)
+            expect(data.members).to eq(ref.shape.member_names)
           end
 
           it 'validates the given data matches the response shape' do
@@ -191,7 +191,7 @@ module Aws
 
         end
 
-        describe 'streaming resposnes' do
+        describe 'streaming responses' do
 
           it 'stubs the HTTP response target when with streaming APIs' do
             s3 = S3::Client.new(stub_responses: true)
