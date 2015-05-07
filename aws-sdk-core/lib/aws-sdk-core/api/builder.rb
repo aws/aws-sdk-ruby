@@ -30,12 +30,12 @@ module Aws
       # @param [Hash]
       # @return [Seahorse::Model::Api]
       def build(definition)
-        shapes = ShapeMap.new(definition['shapes'])
+        shapes = ShapeMap.new(definition['shapes'] || {})
         api = Seahorse::Model::Api.new
         metadata = definition['metadata'] || {}
         api.version = metadata['apiVersion']
         api.metadata = metadata
-        definition['operations'].each do |name, definition|
+        (definition['operations'] || {}).each do |name, definition|
           operation = build_operation(name, definition, shapes)
           api.add_operation(underscore(name), operation)
         end
