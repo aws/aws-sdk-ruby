@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glacier - Added support for vault access policies.
+
 * Issue - Aws::IAM - Added the missing pagination configuration for
   `Aws::IAM::Client#list_policies`.
 
