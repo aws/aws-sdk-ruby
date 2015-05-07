@@ -51,7 +51,7 @@ module Seahorse
               else
                 placeholder = placeholder[1..-2]
               end
-              name, shape = input.member_by_location_name(placeholder)
+              name, shape = input.shape.member_by_location_name(placeholder)
               param = context.params[name]
               if greedy
                 param = param.gsub(/[^\/]+/) { |v| escape(v) }

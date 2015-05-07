@@ -103,9 +103,6 @@ module Aws
 
     private
 
-    # @param [Symbol] operation_name
-    # @param [Hash, nil] data
-    # @return [Structure]
     def new_stub(operation_name, data = nil)
       Stub.new(operation(operation_name).output).format(data || {})
     end
@@ -130,61 +127,62 @@ module Aws
 
     class Stub
 
-      # @param [Seahorse::Models::Shapes::Structure] output_shape This should
-      #   be the output shape for an operation.
-      def initialize(output_shape)
-        @shape = output_shape
+      include Seahorse::Model::Shapes
+
+      # @param [Seahorse::Models::Shapes::ShapeRef] rules
+      def initialize(rules)
+        @rules = rules
       end
 
       # @param [Hash] data An optional hash of data to format into the stubbed
       #   object.
       def format(data = {})
-        if @shape.nil?
+        if @rules.nil?
           empty_stub(data)
         else
           validate_data(data)
-          stub(@shape, data)
+          stub(@rules, data)
         end
       end
 
       private
 
-      def stub(shape, value)
-        case shape
-        when Seahorse::Model::Shapes::Structure then stub_structure(shape, value)
-        when Seahorse::Model::Shapes::List then stub_list(shape, value || [])
-        when Seahorse::Model::Shapes::Map then stub_map(shape, value || {})
-        else stub_scalar(shape, value)
+      def stub(ref, value)
+        case ref.shape
+        when StructureShape then stub_structure(ref, value)
+        when ListShape then stub_list(ref, value || [])
+        when MapShape then stub_map(ref, value || {})
+        else stub_scalar(ref, value)
         end
       end
 
-      def stub_structure(shape, hash)
+      def stub_structure(ref, hash)
         if hash
-          structure_obj(shape, hash)
+          structure_obj(ref, hash)
         else
           nil
         end
       end
 
-      def structure_obj(shape, hash)
-        stubs = Structure.new(shape.member_names)
-        shape.members.each do |member_name, member_shape|
+      def structure_obj(ref, hash)
+        stubs = Structure.new(ref.shape.member_names)
+        ref.shape.members.each do |member_name, member_ref|
           if hash.key?(member_name) && hash[member_name].nil?
             stubs[member_name] = nil
           else
-            value = structure_value(shape, member_name, member_shape, hash)
-            stubs[member_name] = stub(member_shape, value)
+            value = structure_value(ref, member_name, member_ref, hash)
+            stubs[member_name] = stub(member_ref, value)
           end
         end
         stubs
       end
 
-      def structure_value(shape, member_name, member_shape, hash)
+      def structure_value(ref, member_name, member_ref, hash)
         if hash.key?(member_name)
           hash[member_name]
         elsif
-          Seahorse::Model::Shapes::Structure === member_shape &&
-          shape.required.include?(member_name)
+          StructureShape === member_ref.shape &&
+          ref.shape.required.include?(member_name)
         then
           {}
         else
@@ -192,30 +190,30 @@ module Aws
         end
       end
 
-      def stub_list(shape, array)
+      def stub_list(ref, array)
         stubs = []
         array.each do |value|
-          stubs << stub(shape.member, value)
+          stubs << stub(ref.shape.member, value)
         end
         stubs
       end
 
-      def stub_map(shape, value)
+      def stub_map(ref, value)
         stubs = {}
         value.each do |key, value|
-          stubs[key] = stub(shape.value, value)
+          stubs[key] = stub(ref.shape.value, value)
         end
         stubs
       end
 
-      def stub_scalar(shape, value)
+      def stub_scalar(ref, value)
         if value.nil?
-          case shape
-          when Seahorse::Model::Shapes::String then shape.name
-          when Seahorse::Model::Shapes::Integer then 0
-          when Seahorse::Model::Shapes::Float then 0.0
-          when Seahorse::Model::Shapes::Boolean then false
-          when Seahorse::Model::Shapes::Timestamp then Time.now
+          case ref.shape
+          when StringShape then ref.shape.name
+          when IntegerShape then 0
+          when FloatShape then 0.0
+          when BooleanShape then false
+          when TimestampShape then Time.now
           else nil
           end
         else
@@ -234,8 +232,8 @@ module Aws
       end
 
       def validate_data(data)
-        args = [@shape, { validate_required:false }]
-        Seahorse::Client::ParamValidator.new(*args).validate!(data)
+        args = [@rules, { validate_required:false }]
+        ParamValidator.new(*args).validate!(data)
       end
 
     end

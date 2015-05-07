@@ -56,8 +56,8 @@ module Aws
           @shapes[name] = shape
         end
         definitions.each do |name, definition|
-          shape = @shapes[name]
           traits = definition.dup
+          shape = @shapes[name]
           apply_shape_refs(shape, traits)
           apply_shape_traits(shape, traits)
         end

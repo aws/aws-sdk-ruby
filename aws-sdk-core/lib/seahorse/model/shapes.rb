@@ -100,9 +100,6 @@ module Seahorse
         # @return [Integer, nil]
         attr_accessor :max
 
-        # @return [Boolean]
-        attr_accessor :flattened
-
       end
 
       class MapShape < Shape
@@ -123,9 +120,6 @@ module Seahorse
 
         # @return [Integer, nil]
         attr_accessor :max
-
-        # @return [Boolean]
-        attr_accessor :flattened
 
       end
 

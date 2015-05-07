@@ -60,15 +60,15 @@ module Aws
 
         def streaming?(resp)
           if output = resp.context.operation.output
-            payload = output.payload_member
-            payload && payload.definition['streaming'] == true
+            payload = output.shape[:payload_member]
+            payload && payload[:streaming]
           else
             false
           end
         end
 
         def stub_http_body(resp)
-          payload = resp.context.operation.output.payload
+          payload = resp.context.operation.output.shape[:payload]
           resp.context.http_response.signal_headers(200, {})
           resp.context.http_response.signal_data(resp.data[payload])
           resp.context.http_response.signal_done

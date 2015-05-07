@@ -10,8 +10,8 @@ module Aws
         @operation = options[:operation]
         @streaming_output = !!(
           @operation.output &&
-          @operation.output.payload_member &&
-          @operation.output.payload_member.definition['streaming']
+          @operation.output.shape[:payload] &&
+          @operation.output.shape[:payload_member].shape['streaming']
         )
       end
 

@@ -16,8 +16,8 @@ module Aws
       private
 
       def build_json(context)
-        if shape = context.operation.input
-          context.http_request.body = Builder.new(shape).to_json(context.params)
+        if rules = context.operation.input
+          context.http_request.body = Builder.new(rules).to_json(context.params)
         else
           context.http_request.body = '{}'
         end
