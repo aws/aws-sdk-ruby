@@ -14,7 +14,7 @@ module Aws
       end
 
       before(:each) do
-        api = Seahorse::Model::Api.new('metadata' => {
+        api = Aws::Api::Builder.build('metadata' => {
           'apiVersion' => '2013-01-01',
         })
         svc = Aws.add_service(:Svc, api: api)::Client

@@ -152,6 +152,7 @@ module Seahorse
         # @param [ShapeRef] shape_ref
         # @option options [Boolean] :required (false)
         def add_member(name, shape_ref, options = {})
+          name = name.to_sym
           @required << name if options[:required]
           @members_by_location_name[shape_ref.location_name] = [name, shape_ref]
           @members[name] = shape_ref
@@ -166,7 +167,7 @@ module Seahorse
         # @return [Boolean] Returns `true` if there exists a member with
         #   the given name.
         def member?(member_name)
-          @members.key?(member_name)
+          @members.key?(member_name.to_sym)
         end
 
         # @return [Enumerator<[Symbol,ShapeRef]>]
@@ -177,8 +178,8 @@ module Seahorse
         # @param [Symbol] name
         # @return [ShapeRef]
         def member(name)
-          if @members.key?(name)
-            @members[name]
+          if member?(name)
+            @members[name.to_sym]
           else
             raise ArgumentError, "no such member #{name.inspect}"
           end

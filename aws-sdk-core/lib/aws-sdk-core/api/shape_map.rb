@@ -94,10 +94,6 @@ module Aws
         end
       end
 
-      def apply_payload(ref, name)
-        ref['payload'] = underscore(name).to_sym
-      end
-
       def underscore(str)
         Seahorse::Util.underscore(str).to_sym
       end

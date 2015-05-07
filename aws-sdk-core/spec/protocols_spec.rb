@@ -56,18 +56,18 @@ def underscore(str)
   Seahorse::Util.underscore(str)
 end
 
-def format_data(shape, src)
-  case shape
+def format_data(ref, src)
+  case ref.shape
   when Seahorse::Model::Shapes::StructureShape
     src.each.with_object({}) do |(key, value), params|
-      member = shape.member(underscore(key))
-      params[underscore(key).to_sym] = format_data(member, value)
+      member_ref = ref.shape.member(underscore(key).to_sym)
+      params[underscore(key).to_sym] = format_data(member_ref, value)
     end
   when Seahorse::Model::Shapes::ListShape
-    src.map { |value| format_data(shape.member, value) }
+    src.map { |value| format_data(ref.shape.member, value) }
   when Seahorse::Model::Shapes::MapShape
     src.each.with_object({}) do |(key, value), params|
-      params[key] = format_data(shape.value, value)
+      params[key] = format_data(ref.shape.value, value)
     end
   when Seahorse::Model::Shapes::TimestampShape
     Time.at(src)

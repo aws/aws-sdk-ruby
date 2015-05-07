@@ -692,7 +692,8 @@
           "foo": {
             "shape": "FooShape"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
         "type": "string"
@@ -706,8 +707,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -735,7 +735,8 @@
           "foo": {
             "shape": "FooShape"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
         "type": "blob"
@@ -749,8 +750,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -770,8 +770,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -798,7 +797,8 @@
           "foo": {
             "shape": "FooShape"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
         "locationName": "foo",
@@ -821,8 +821,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -844,8 +843,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -863,8 +861,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -890,7 +887,8 @@
           "Grant": {
             "shape": "Grant"
           }
-        }
+        },
+        "payload": "Grant"
       },
       "Grant": {
         "type": "structure",
@@ -933,8 +931,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "Grant"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },

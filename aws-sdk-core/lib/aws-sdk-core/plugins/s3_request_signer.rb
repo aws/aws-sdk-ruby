@@ -91,7 +91,7 @@ module Aws
         end
 
         def uploading_file?(context)
-          %w(put_object upload_part).include?(context.operation_name) &&
+          [:put_object, :upload_part].include?(context.operation_name) &&
             context.http_request.body.size > 0
         end
 

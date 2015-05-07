@@ -374,7 +374,8 @@
           "foo": {
             "shape": "FooShape"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
         "locationName": "foo",
@@ -397,8 +398,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -420,8 +420,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -439,8 +438,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },

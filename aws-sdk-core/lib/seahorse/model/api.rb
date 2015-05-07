@@ -22,8 +22,8 @@ module Seahorse
       end
 
       def operation(name)
-        if @operations.key?(name)
-          @operations[name]
+        if @operations.key?(name.to_sym)
+          @operations[name.to_sym]
         else
           raise ArgumentError, "unknown operation #{name.inspect}"
         end
@@ -34,7 +34,7 @@ module Seahorse
       end
 
       def add_operation(name, operation)
-        @operations[name] = operation
+        @operations[name.to_sym] = operation
       end
 
       # @api private

@@ -24,10 +24,10 @@ module Aws
       ref = context.operation.input
       case
       when ref.nil? then nil
-      when streaming?(ref) then context.params[ref.shape[:payload]]
-      when ref.shape[:payload]
-        if params = context.params[ref.shape[:payload]]
-          serialize_params(ref.shape[:payload_member], params)
+      when streaming?(ref) then context.params[ref[:payload]]
+      when ref[:payload]
+        if params = context.params[ref[:payload]]
+          serialize_params(ref[:payload_member], params)
         end
       else
         params = body_params(ref, context.params)
@@ -39,9 +39,9 @@ module Aws
       if ref = context.operation.output
         data = Structure.new(ref.shape.member_names)
         if streaming?(ref)
-          data[ref.shape[:payload]] = context.http_response.body
-        elsif ref.shape[:payload]
-          data[ref.shape[:payload]] = parse(context, ref.shape[:payload_member])
+          data[ref[:payload]] = context.http_response.body
+        elsif ref[:payload]
+          data[ref[:payload]] = parse(context, ref[:payload_member])
         else
           parse(context, ref, data)
         end
@@ -53,7 +53,7 @@ module Aws
 
     def body_params(ref, params)
       ref.shape.members.inject({}) do |hash, (member_name, member_ref)|
-        if member_ref.location == 'body'
+        if member_ref.location.nil?
           hash[member_name] = params[member_name] if params.key?(member_name)
         end
         hash
@@ -61,9 +61,9 @@ module Aws
     end
 
     def streaming?(ref)
-      ref.shape[:payload] && (
-        Seahorse::Model::Shapes::BlobShape === ref.shape[:payload_member].shape ||
-        Seahorse::Model::Shapes::StringShape === ref.shape[:payload_member].shape
+      ref[:payload] && (
+        Seahorse::Model::Shapes::BlobShape === ref[:payload_member].shape ||
+        Seahorse::Model::Shapes::StringShape === ref[:payload_member].shape
       )
     end
 

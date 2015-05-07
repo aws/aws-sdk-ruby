@@ -88,7 +88,7 @@ module Seahorse
       # @return [RequestContext]
       def context_for(operation_name, params)
         RequestContext.new(
-          operation_name: operation_name.to_s,
+          operation_name: operation_name,
           operation: operation(operation_name),
           client: self,
           params: params,
