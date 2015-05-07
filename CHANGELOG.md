@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.42 (2015-05-07)
 ------------------
 
 * Feature - Aws::Glacier - Added support for vault access policies.
