@@ -8,6 +8,8 @@ module Seahorse
         # @api private
         class Handler < Client::Handler
 
+          include Seahorse::Model::Shapes
+
           def call(context)
             build_request(context)
             @handler.call(context).on(200..299) do |response|
@@ -30,31 +32,31 @@ module Seahorse
           def populate_http_headers(context)
             params = context.params
             headers = context.http_request.headers
-            each_member(context.operation.input) do |member_name, member|
+            each_member(context.operation.input) do |member_name, member_ref|
               value = params[member_name]
               next if value.nil?
-              case member.location
-              when 'header'  then serialize_header(headers, member, value)
-              when 'headers' then serialize_header_map(headers, member, value)
+              case member_ref.location
+              when 'header'  then serialize_header(headers, member_ref, value)
+              when 'headers' then serialize_header_map(headers, member_ref, value)
               end
             end
           end
 
-          def serialize_header(headers, shape, value)
-            headers[shape.location_name] = serialize_header_value(shape, value)
+          def serialize_header(headers, ref, value)
+            headers[ref.location_name] = serialize_header_value(ref, value)
           end
 
-          def serialize_header_map(headers, shape, values)
-            prefix = shape.location_name || ''
+          def serialize_header_map(headers, ref, values)
+            prefix = ref.location_name || ''
             values.each_pair do |name, value|
-              value = serialize_header_value(shape.value, value)
+              value = serialize_header_value(ref.shape.value, value)
               headers["#{prefix}#{name}"] = value
             end
           end
 
-          def serialize_header_value(shape, value)
-            if shape.is_a?(Model::Shapes::Timestamp)
-              shape.format_time(value, 'httpdate')
+          def serialize_header_value(ref, value)
+            if TimestampShape === ref.shape
+              value.utc.httpdate
             else
               value.to_s
             end

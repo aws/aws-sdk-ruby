@@ -31,7 +31,7 @@ end
 
 def client_for(suite, test_case)
   protocol = suite['metadata']['protocol']
-  api = Seahorse::Model::Api.new({
+  api = Aws::Api::Builder.build({
     'metadata' => suite['metadata'],
     'operations' => {
       'ExampleOperation' => test_case['given']
@@ -58,18 +58,18 @@ end
 
 def format_data(shape, src)
   case shape
-  when Seahorse::Model::Shapes::Structure
+  when Seahorse::Model::Shapes::StructureShape
     src.each.with_object({}) do |(key, value), params|
       member = shape.member(underscore(key))
       params[underscore(key).to_sym] = format_data(member, value)
     end
-  when Seahorse::Model::Shapes::List
+  when Seahorse::Model::Shapes::ListShape
     src.map { |value| format_data(shape.member, value) }
-  when Seahorse::Model::Shapes::Map
+  when Seahorse::Model::Shapes::MapShape
     src.each.with_object({}) do |(key, value), params|
       params[key] = format_data(shape.value, value)
     end
-  when Seahorse::Model::Shapes::Timestamp
+  when Seahorse::Model::Shapes::TimestampShape
     Time.at(src)
   else src
   end
