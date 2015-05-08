@@ -1,4 +1,3 @@
-require 'builder'
 require 'base64'
 
 module Aws
@@ -10,7 +9,7 @@ module Aws
       def initialize(rules)
         @rules = rules
         @xml = []
-        @builder = ::Builder::XmlMarkup.new(target: @xml, indent: 2)
+        @builder = DocBuilder.new(target: @xml, indent: '  ')
       end
 
       def to_xml(params)
@@ -106,7 +105,7 @@ module Aws
         attrs = args.last.is_a?(Hash) ? args.pop : {}
         attrs = shape_attrs(ref).merge(attrs)
         args << attrs
-        @builder.__send__(name, *args, &block)
+        @builder.node(name, *args, &block)
       end
 
       def shape_attrs(ref)

@@ -204,6 +204,7 @@ module Aws
     autoload :Builder, 'aws-sdk-core/xml/builder'
     autoload :DefaultList,  'aws-sdk-core/xml/default_list'
     autoload :DefaultMap,  'aws-sdk-core/xml/default_map'
+    autoload :DocBuilder, 'aws-sdk-core/xml/doc_builder'
     autoload :ErrorHandler,  'aws-sdk-core/xml/error_handler'
     autoload :Parser, 'aws-sdk-core/xml/parser'
     autoload :RestHandler, 'aws-sdk-core/xml/rest_handler'

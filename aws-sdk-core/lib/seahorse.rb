@@ -47,11 +47,6 @@ module Seahorse
       autoload :RestfulBindings, 'seahorse/client/plugins/restful_bindings'
     end
 
-    # @api private
-    module Xml
-      autoload :Builder, 'seahorse/client/xml/builder'
-    end
-
   end
 
   module Model

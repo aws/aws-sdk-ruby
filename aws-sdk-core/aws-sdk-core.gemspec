@@ -21,7 +21,6 @@ Gem::Specification.new do |spec|
   spec.executables << 'aws.rb'
 
   spec.add_dependency('multi_json', '~> 1.0')
-  spec.add_dependency('builder', '~> 3.0')
   spec.add_dependency('jmespath', '~> 1.0')
 
 end
