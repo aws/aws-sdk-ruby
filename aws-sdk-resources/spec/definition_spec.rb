@@ -19,23 +19,20 @@ module Aws
 
         let(:shapes) {{}}
 
-        let(:api) { Seahorse::Model::Api.new('shapes' => shapes) }
+        let(:api) { Aws::Api::Builder.build('shapes' => shapes) }
 
         let(:namespace) { Module.new }
 
-        before(:each) do
+        def apply_definition
           namespace.const_set(:Client, client_class)
           allow(client_class).to receive(:new).and_return(client)
-        end
-
-        def apply_definition
           Definition.new(definition).apply(namespace)
         end
 
         describe 'service' do
 
           it 'constructs default clients' do
-            Definition.new(definition).apply(namespace)
+            apply_definition
             expect(namespace::Resource.new.client).to be(client)
           end
 

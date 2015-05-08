@@ -76,7 +76,7 @@ module Aws
         case shape
         when StructureShape
           required = Set.new(traits.delete('required') || [])
-          traits.delete('members').each do |member_name, ref|
+          (traits.delete('members') || {}).each do |member_name, ref|
             name = underscore(member_name)
             ref = shape_ref(ref, member_name: member_name)
             shape.add_member(name, ref, required: required.include?(member_name))

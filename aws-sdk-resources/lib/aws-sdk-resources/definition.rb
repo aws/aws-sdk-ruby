@@ -58,16 +58,17 @@ module Aws
       end
 
       def define_data_attributes(namespace, resource, definition)
-        return unless shape_name = definition['shape']
-        shape = resource.client_class.api.metadata['shapes'][shape_name]
-        shape.member_names.each do |member_name|
-          if
-            resource.instance_methods.include?(member_name) ||
-            data_attribute_is_an_identifier?(member_name, resource, definition)
-          then
-            next # some data attributes are duplicates to identifiers
-          else
-            resource.add_data_attribute(member_name)
+        if shape_name = definition['shape']
+          shape = resource.client_class.api.metadata['shapes'][shape_name]
+          shape.member_names.each do |member_name|
+            if
+              resource.instance_methods.include?(member_name) ||
+              data_attribute_is_an_identifier?(member_name, resource, definition)
+            then
+              next # some data attributes are duplicates to identifiers
+            else
+              resource.add_data_attribute(member_name)
+            end
           end
         end
       end
