@@ -21,7 +21,7 @@ module Aws
 
       def structure(ref, values, target = nil)
         shape = ref.shape
-        target = Structure.new(shape.member_names) if target.nil?
+        target = ref[:struct_class].new if target.nil?
         values.each do |key, value|
           member_name, member_ref = shape.member_by_location_name(key)
           if member_ref

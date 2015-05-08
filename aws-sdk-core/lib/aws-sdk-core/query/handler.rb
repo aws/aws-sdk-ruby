@@ -6,11 +6,16 @@ module Aws
 
       CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=utf-8'
 
+      WRAPPER_STRUCT = Structure.new(:result, :response_metadata)
+
+      METADATA_STRUCT = Structure.new(:request_id)
+
       METADATA_REF = begin
         request_id = ShapeRef.new(
           shape: StringShape.new,
           location_name: 'RequestId')
         response_metadata = StructureShape.new
+        response_metadata[:struct_class] = METADATA_STRUCT
         response_metadata.add_member(:request_id, request_id)
         ShapeRef.new(shape: response_metadata, location_name: 'ResponseMetadata')
       end
@@ -61,6 +66,7 @@ module Aws
           shape: context.operation.output.shape,
           location_name: context.operation.name + 'Result'
         ))
+        shape[:struct_class] = WRAPPER_STRUCT
         shape.add_member(:response_metadata, METADATA_REF)
         ShapeRef.new(shape: shape)
       end

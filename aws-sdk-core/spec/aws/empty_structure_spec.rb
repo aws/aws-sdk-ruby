@@ -3,8 +3,8 @@ require 'spec_helper'
 module Aws
   describe EmptyStructure do
 
-    it 'can be constructed via Structure.new' do
-      expect(Structure.new({})).to be_kind_of(EmptyStructure)
+    it 'can be constructed via .new' do
+      expect(EmptyStructure.new).to be_kind_of(EmptyStructure)
     end
 
     it 'it is a Struct' do
@@ -67,12 +67,12 @@ module Aws
 
     it 'supports pretty print' do
       r = double('receiver')
-      expect(r).to receive(:text).with('#<struct>')
+      expect(r).to receive(:text).with('#<struct Aws::EmptyStructure>')
       EmptyStructure.new.pretty_print(r)
     end
 
     it 'has a sensible inspect string' do
-      expect(EmptyStructure.new.inspect).to eq('#<struct>')
+      expect(EmptyStructure.new.inspect).to eq('#<struct Aws::EmptyStructure>')
     end
 
     it 'has a zero length' do
@@ -104,7 +104,7 @@ module Aws
       struct = EmptyStructure.new
       expect(struct.values_at(*[])).to eq([])
       expect {
-        struct.values_at(:foo, :bar)
+        struct.values_at(0,1)
       }.to raise_error(IndexError)
     end
 

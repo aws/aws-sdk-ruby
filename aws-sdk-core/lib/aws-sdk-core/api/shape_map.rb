@@ -34,6 +34,12 @@ module Aws
         end
       end
 
+      def each_structure
+        @shapes.each do |_, shape|
+          yield(shape) if StructureShape === shape
+        end
+      end
+
       def shape_ref(definition, options = {})
         if definition
 
@@ -81,6 +87,7 @@ module Aws
             ref = shape_ref(ref, member_name: member_name)
             shape.add_member(name, ref, required: required.include?(member_name))
           end
+          shape[:struct_class] = Structure.new(*shape.member_names)
         when ListShape
           shape.member = shape_ref(traits.delete('member'))
         when MapShape

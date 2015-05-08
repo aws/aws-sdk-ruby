@@ -37,7 +37,7 @@ module Aws
 
     def extract_data(context)
       if ref = context.operation.output
-        data = Structure.new(ref.shape.member_names)
+        data = ref[:struct_class].new
         if streaming?(ref)
           data[ref[:payload]] = context.http_response.body
         elsif ref[:payload]

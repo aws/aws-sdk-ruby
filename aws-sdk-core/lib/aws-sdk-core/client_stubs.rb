@@ -165,7 +165,7 @@ module Aws
       end
 
       def structure_obj(ref, hash)
-        stubs = Structure.new(ref.shape.member_names)
+        stubs = ref[:struct_class].new
         ref.shape.members.each do |member_name, member_ref|
           if hash.key?(member_name) && hash[member_name].nil?
             stubs[member_name] = nil
@@ -223,7 +223,7 @@ module Aws
 
       def empty_stub(data)
         if data.empty?
-          Structure.new(data)
+          EmptyStructure.new
         else
           msg = 'unable to generate a stubbed response from the given data; '
           msg << 'this operation does not return data'

@@ -267,6 +267,9 @@ module Aws
   service_added do |name, svc_module, options|
     svc_module.const_set(:Client, Client.define(name, options))
     svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
+    svc_module::Client.api.metadata['shapes'].each_structure do |shape|
+      svc_module::Client.const_set(shape.name, shape[:struct_class])
+    end
   end
 
 end
