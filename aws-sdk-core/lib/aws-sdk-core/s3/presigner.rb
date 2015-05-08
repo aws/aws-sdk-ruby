@@ -60,7 +60,6 @@ module Aws
       # @api private
       class PresignHandler < Seahorse::Client::Handler
         def call(context)
-puts context.http_request.endpoint.inspect
           Seahorse::Client::Response.new(
             context: context,
             data: presigned_url(context)

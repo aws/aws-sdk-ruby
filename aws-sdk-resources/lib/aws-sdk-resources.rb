@@ -19,26 +19,26 @@ module Aws
     autoload :Source, 'aws-sdk-resources/source'
   end
 
-#  service_added do |name, svc_module, options|
-#    definition = options[:resources]
-#    definition = case definition
-#      when nil then Resources::Definition.new({})
-#      when Resources::Definition then definition
-#      when Hash then Resources::Definition.new(definition)
-#      when String
-#        Resources::Definition.new(Aws.load_json(definition), source_path: definition)
-#      else raise ArgumentError, "invalid resource definition #{definition}"
-#    end
-#    definition.apply(svc_module)
-#
-#    # load customizations
-#    svc = File.join(
-#      File.dirname(__FILE__),
-#      'aws-sdk-resources',
-#      'services',
-#      "#{name.downcase}.rb")
-#
-#    require(svc) if File.exists?(svc)
-#  end
+  service_added do |name, svc_module, options|
+    definition = options[:resources]
+    definition = case definition
+      when nil then Resources::Definition.new({})
+      when Resources::Definition then definition
+      when Hash then Resources::Definition.new(definition)
+      when String
+        Resources::Definition.new(Aws.load_json(definition), source_path: definition)
+      else raise ArgumentError, "invalid resource definition #{definition}"
+    end
+    definition.apply(svc_module)
+
+    # load customizations
+    svc = File.join(
+      File.dirname(__FILE__),
+      'aws-sdk-resources',
+      'services',
+      "#{name.downcase}.rb")
+
+    require(svc) if File.exists?(svc)
+  end
 
 end

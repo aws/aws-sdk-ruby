@@ -37,6 +37,7 @@ module Aws
         shapes = ShapeMap.new(definition['shapes'] || {})
         api = Seahorse::Model::Api.new
         metadata = definition['metadata'] || {}
+        metadata['shapes'] = shapes
         api.version = metadata['apiVersion']
         api.metadata = metadata
         (definition['operations'] || {}).each do |name, definition|
