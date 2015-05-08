@@ -65,42 +65,46 @@ module Seahorse
           # Extracts HTTP response headers and status code.
           def parse_response(response)
             headers = response.context.http_response.headers
-            each_member(response.context.operation.output) do |key, shape|
-              case shape.location
+            each_member(response.context.operation.output) do |key, ref|
+              case ref.location
               when 'statusCode'
                 status_code = response.context.http_response.status_code
                 response.data[key] = status_code
               when 'header'
-                response.data[key] = extract_header(headers, shape)
+                response.data[key] = extract_header(headers, ref)
               when 'headers'
-                response.data[key] = extract_header_map(headers, shape)
+                response.data[key] = extract_header_map(headers, ref)
               end
             end
           end
 
-          def extract_header(headers, shape)
-            parse_header_value(shape, headers[shape.location_name])
+          def extract_header(headers, ref)
+            parse_header_value(ref, headers[ref.location_name])
           end
 
-          def extract_header_map(headers, shape)
-            prefix = shape.location_name || ''
+          def extract_header_map(headers, ref)
+            prefix = ref.location_name || ''
             hash = {}
             headers.each do |header, value|
               if match = header.match(/^#{prefix}(.+)/i)
-                hash[match[1]] = parse_header_value(shape.value, value)
+                hash[match[1]] = parse_header_value(ref.shape.value, value)
               end
             end
             hash
           end
 
-          def parse_header_value(shape, value)
+          def parse_header_value(ref, value)
             if value
-              case shape
-              when Model::Shapes::Integer then value.to_i
-              when Model::Shapes::Float then value.to_f
-              when Model::Shapes::Boolean then value == 'true'
-              when Model::Shapes::Timestamp
-                shape.format == 'unix_timestamp' ? value.to_i : Time.parse(value)
+              case ref.shape
+              when IntegerShape then value.to_i
+              when FloatShape then value.to_f
+              when BooleanShape then value == 'true'
+              when TimestampShape
+                if value =~ /\d+(\.\d*)/
+                  Time.at(value.to_f)
+                else
+                  Time.parse(value)
+                end
               else value
               end
             end

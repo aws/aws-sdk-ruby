@@ -21,7 +21,7 @@ module Seahorse
         operation = Operation.new
         expect(operation.http_request_uri).to eq('/')
         operation.http_request_uri = '/path?query'
-        expect(operation.http_method).to eq('/path?query')
+        expect(operation.http_request_uri).to eq('/path?query')
       end
 
       it 'defaults #deprecated to false' do
@@ -35,7 +35,7 @@ module Seahorse
         operation = Operation.new
         expect(operation.documentation).to be(nil)
         operation.documentation = 'docstring'
-        expect(operation.documenation).to eq('docstring')
+        expect(operation.documentation).to eq('docstring')
       end
 
       it 'defaults #input to nil' do
@@ -58,8 +58,9 @@ module Seahorse
         shape_ref = double('shape-ref')
         operation = Operation.new
         expect(operation.errors).to eq([])
-        operation.errors << [shape_ref, shape_ref]
-        expect(operation.output).to eq([shape_ref, shape_ref])
+        operation.errors << shape_ref
+        operation.errors << shape_ref
+        expect(operation.errors).to eq([shape_ref, shape_ref])
       end
 
     end

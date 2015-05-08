@@ -67,29 +67,26 @@ module Aws
 
       it 'accepts nil' do
         Aws.add_service('DummyService', api: nil)
-        expect(DummyService::Client.api.definition).to eq({})
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accepts string file path values' do
         Aws.add_service('DummyService', api: api_path)
-        expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accpets Pathname values' do
-        path = Pathname.new(api_path)
-        Aws.add_service('DummyService', api: path)
-        expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
+        Aws.add_service('DummyService', api: Pathname.new(api_path))
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accpets hash values' do
-        api = Aws.load_json(api_path)
-        Aws.add_service('DummyService', api: api)
-        expect(DummyService::Client.api.definition).to eq(api)
+        Aws.add_service('DummyService', api: Aws.load_json(api_path))
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accpets Seahorse::Model::Api values' do
-        api = Aws.load_json(api_path)
-        api = Seahorse::Model::Api.new(api)
+        api = Aws::Api::Builder.build(Aws.load_json(api_path))
         Aws.add_service('DummyService', api: api)
         expect(DummyService::Client.api).to be(api)
       end

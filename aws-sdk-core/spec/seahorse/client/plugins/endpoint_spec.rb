@@ -6,11 +6,9 @@ module Seahorse
       describe Endpoint do
 
         let(:client_class) do
-          client_class = Client::Base.define api: {
-            'operations' => {
-              'OperationName' => { 'name' => 'OperationName' },
-            }
-          }
+          api = Model::Api.new
+          api.add_operation(:operation_name, Model::Operation.new)
+          client_class = Client::Base.define(api: api)
           client_class.clear_plugins
           client_class.add_plugin(Endpoint)
           client_class.add_plugin(DummySendPlugin)

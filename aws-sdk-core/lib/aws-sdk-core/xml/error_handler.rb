@@ -50,7 +50,7 @@ module Aws
       end
 
       def remove_prefix(error_code, context)
-        if prefix = context.config.api.metadata('errorPrefix')
+        if prefix = context.config.api.metadata['errorPrefix']
           error_code.sub(/^#{prefix}/, '')
         else
           error_code
