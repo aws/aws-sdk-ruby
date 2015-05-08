@@ -40,7 +40,6 @@ module Seahorse
     module Plugins
       autoload :ContentLength, 'seahorse/client/plugins/content_length'
       autoload :Endpoint, 'seahorse/client/plugins/endpoint'
-      autoload :JsonSimple, 'seahorse/client/plugins/json_simple'
       autoload :Logging, 'seahorse/client/plugins/logging'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
       autoload :RaiseResponseErrors, 'seahorse/client/plugins/raise_response_errors'
