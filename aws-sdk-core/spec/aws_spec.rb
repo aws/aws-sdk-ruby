@@ -81,12 +81,12 @@ module Aws
       end
 
       it 'accpets hash values' do
-        Aws.add_service('DummyService', api: Aws.load_json(api_path))
+        Aws.add_service('DummyService', api: Json.load_file(api_path))
         expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accpets Seahorse::Model::Api values' do
-        api = Aws::Api::Builder.build(Aws.load_json(api_path))
+        api = Aws::Api::Builder.build(Json.load_file(api_path))
         Aws.add_service('DummyService', api: api)
         expect(DummyService::Client.api).to be(api)
       end

@@ -14,7 +14,7 @@ module Aws
 
       # @param [String<JSON>] json
       def parse(json, target = nil)
-        parse_ref(@rules, MultiJson.load(json, max_nesting: false), target)
+        parse_ref(@rules, Json.load(json), target)
       end
 
       private

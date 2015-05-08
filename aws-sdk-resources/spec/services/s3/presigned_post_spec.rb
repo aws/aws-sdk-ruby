@@ -1,6 +1,5 @@
 require 'spec_helper'
 require 'base64'
-require 'multi_json'
 
 module Aws
   module S3
@@ -17,7 +16,7 @@ module Aws
       let(:post) { PresignedPost.new(creds, region, bucket, options) }
 
       def decode(policy)
-        MultiJson.load(Base64.decode64(policy))
+        Json.load(Base64.decode64(policy))
       end
 
       def policy(post)

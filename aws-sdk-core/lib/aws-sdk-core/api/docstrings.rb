@@ -8,7 +8,7 @@ module Aws
         return
         api = client_class.api.definition
         docs = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
-        docs = MultiJson.load(docs)
+        docs = Json.load(docs)
 
         api['documentation'] = docs['service']
 

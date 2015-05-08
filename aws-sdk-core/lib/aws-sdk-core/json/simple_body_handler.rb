@@ -22,11 +22,11 @@ module Aws
       private
 
       def build_json(context)
-        context.http_request.body = MultiJson.dump(context.params)
+        context.http_request.body = Json.dump(context.params)
       end
 
       def parse_json(context)
-        MultiJson.load(context.http_response.body_contents)
+        Json.load(context.http_response.body_contents)
       end
 
     end

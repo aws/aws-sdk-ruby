@@ -1,6 +1,5 @@
 require 'openssl'
 require 'base64'
-require 'multi_json'
 
 module Aws
   module S3
@@ -597,7 +596,7 @@ module Aws
         signature_fields(datetime).each do |name, value|
           policy['conditions'] << { name => value }
         end
-        base64(MultiJson.dump(policy))
+        base64(Json.dump(policy))
       end
 
       def signature_fields(datetime)

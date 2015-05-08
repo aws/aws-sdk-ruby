@@ -1,5 +1,4 @@
 require 'jmespath'
-require 'multi_json'
 require 'seahorse'
 
 Seahorse::Util.irregular_inflections({
@@ -86,6 +85,7 @@ module Aws
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
+  autoload :Json, 'aws-sdk-core/json'
   autoload :PageableResponse, 'aws-sdk-core/pageable_response'
   autoload :ParamConverter, 'aws-sdk-core/param_converter'
   autoload :ParamValidator, 'aws-sdk-core/param_validator'
@@ -108,17 +108,6 @@ module Aws
     autoload :OperationDocumenter, 'aws-sdk-core/api/operation_documenter'
     autoload :OperationExample, 'aws-sdk-core/api/operation_example'
     autoload :ShapeMap, 'aws-sdk-core/api/shape_map'
-  end
-
-  # @api private
-  module Json
-    autoload :Builder, 'aws-sdk-core/json/builder'
-    autoload :ErrorHandler, 'aws-sdk-core/json/error_handler'
-    autoload :Parser, 'aws-sdk-core/json/parser'
-    autoload :RestHandler, 'aws-sdk-core/json/rest_handler'
-    autoload :RpcBodyHandler, 'aws-sdk-core/json/rpc_body_handler'
-    autoload :RpcHeadersHandler, 'aws-sdk-core/json/rpc_headers_handler'
-    autoload :SimpleBodyHandler, 'aws-sdk-core/json/simple_body_handler'
   end
 
   # @api private
@@ -235,11 +224,6 @@ module Aws
         yield(svc_name, svc_module, options)
       end
       @service_added_callbacks << callback
-    end
-
-    # @api private
-    def load_json(path)
-      Seahorse::Util.load_json(path)
     end
 
     # Registers a new service.

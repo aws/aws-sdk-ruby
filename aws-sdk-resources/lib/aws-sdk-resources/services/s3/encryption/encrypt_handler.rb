@@ -30,7 +30,7 @@ module Aws
             context.client.put_object(
               bucket: context.params[:bucket],
               key: context.params[:key] + suffix,
-              body: MultiJson.dump(envelope)
+              body: Json.dump(envelope)
             )
           end
         end

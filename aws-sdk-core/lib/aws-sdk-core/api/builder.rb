@@ -19,7 +19,7 @@ module Aws
           case definition
           when nil then {}
           when Hash then definition
-          when String, Pathname then Seahorse::Util.load_json(definition)
+          when String, Pathname then Json.load_file(definition)
           else raise ArgumentError, "invalid api definition #{definition}"
           end
         end

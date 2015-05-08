@@ -11,7 +11,7 @@ module Aws
       end
 
       def to_json(params)
-        MultiJson.dump(format(@rules, params))
+        Json.dump(format(@rules, params))
       end
 
       private

@@ -66,11 +66,11 @@ module Aws
 
         def envelope_from_instr_file(context)
           suffix = context[:encryption][:instruction_file_suffix]
-          MultiJson.load(context.client.get_object(
+          Json.load(context.client.get_object(
             bucket: context.params[:bucket],
             key: context.params[:key] + suffix
           ).body.read)
-        rescue S3::Errors::ServiceError, MultiJson::ParseError
+        rescue S3::Errors::ServiceError, Json::ParseError
           nil
         end
 
