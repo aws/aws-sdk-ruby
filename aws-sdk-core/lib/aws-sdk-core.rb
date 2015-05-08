@@ -1,5 +1,5 @@
 require 'jmespath'
-require 'multi_json'
+require 'json'
 require 'seahorse'
 
 Seahorse::Util.irregular_inflections({

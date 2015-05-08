@@ -6,7 +6,7 @@ module Aws
     PATH = File.join(File.dirname(__FILE__), '..', '..', 'endpoints.json')
 
     # @api private
-    RULES = MultiJson.load(File.read(PATH))['endpoints']
+    RULES = JSON.parse(File.read(PATH))['endpoints']
 
     class << self
 

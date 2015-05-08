@@ -8,7 +8,7 @@ module Aws
       # @param [Hash] params
       # @return [String<JSON>]
       def to_json(shape, params)
-        MultiJson.dump(format(shape, params))
+        JSON.dump(format(shape, params))
       end
 
       private

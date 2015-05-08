@@ -8,7 +8,7 @@ SimpleCov.command_name('test:integration:aws-sdk-resources')
 cfg = './integration-test-config.json'
 
 if File.exist?(cfg)
-  Aws.config = MultiJson.load(File.read(cfg), symbolize_keys: true)
+  Aws.config = JSON.parse(File.read(cfg), symbolize_names: true)
 elsif ENV['AWS_INTEGRATION']
   # run integration tests, just don't read a configuration file from disk
 else

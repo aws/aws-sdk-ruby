@@ -1,6 +1,6 @@
-require 'spec_helper'
-require 'multi_json'
+require 'json'
 require 'rexml/document'
+require 'spec_helper'
 
 def fixtures
   fixtures = {}
@@ -18,7 +18,7 @@ end
 
 def each_test_case(context, fixture_path)
   return unless fixture_path
-  MultiJson.load(File.read(fixture_path)).each do |suite|
+  JSON.parse(File.read(fixture_path)).each do |suite|
     describe(suite['description'].inspect) do
       suite['cases'].each.with_index do |test_case,n|
         describe("case: #{n}") do
@@ -118,12 +118,12 @@ def match_req_body(group, suite, test_case, http_req)
         body = body.split('&').sort.join('&')
         expected_body = expected_body.split('&').sort.join('&')
       when 'json'
-        body = MultiJson.load(body) unless body == ''
-        expected_body = MultiJson.load(expected_body)
+        body = JSON.parse(body) unless body == ''
+        expected_body = JSON.parse(expected_body)
       when 'rest-json'
         if body[0] == '{'
-          body = MultiJson.load(body)
-          expected_body = MultiJson.load(expected_body)
+          body = JSON.parse(body)
+          expected_body = JSON.parse(expected_body)
         end
       when 'rest-xml'
         body = normalize_xml(body)

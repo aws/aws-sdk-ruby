@@ -10,7 +10,7 @@ module Aws
       # @param [Hash, Array, nil] target
       # @return [Hash]
       def parse(shape, json, target = nil)
-        parse_shape(shape, MultiJson.load(json, max_nesting: false), target)
+        parse_shape(shape, JSON.parse(json, max_nesting: false), target)
       end
 
       private

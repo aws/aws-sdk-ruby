@@ -16,10 +16,10 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            context.http_request.body = MultiJson.dump(context.params)
+            context.http_request.body = JSON.dump(context.params)
             @handler.call(context).on_success do |response|
               response.error = nil
-              response.data = MultiJson.load(context.http_response.body_contents)
+              response.data = JSON.parse(context.http_response.body_contents)
             end
           end
 

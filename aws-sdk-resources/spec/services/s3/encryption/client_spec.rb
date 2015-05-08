@@ -162,7 +162,7 @@ module Aws
               # first request stores the encryption materials in the instruction file
               expect(
                 a_request(:put, "https://bucket.s3-us-west-1.amazonaws.com/key.instruction").with(
-                  :body => MultiJson.dump(
+                  :body => JSON.dump(
                     'x-amz-key'=>'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
                     'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                     'x-amz-matdesc' => '{}',
@@ -243,7 +243,7 @@ module Aws
                 to_return(body: encrypted_body)
               stub_request(:get, "https://bucket.s3-us-west-1.amazonaws.com/key#{suffix}").
                 to_return(
-                  :body => MultiJson.dump(
+                  :body => JSON.dump(
                     'x-amz-key'=>'gX+a4JQYj7FP0y5TAAvxTz4e2l0DvOItbXByml/NPtKQcUlsoGHoYR/T0TuYHcNj',
                     'x-amz-iv' => 'TO5mQgtOzWkTfoX4RE5tsA==',
                     'x-amz-matdesc' => '{}',
