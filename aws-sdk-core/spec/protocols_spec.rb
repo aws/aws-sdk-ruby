@@ -34,7 +34,7 @@ def client_for(suite, test_case)
   api = Aws::Api::Builder.build({
     'metadata' => suite['metadata'],
     'operations' => {
-      'ExampleOperation' => test_case['given']
+      'OperationName' => test_case['given']
     },
     'shapes' => suite['shapes'],
   })
@@ -156,9 +156,9 @@ fixtures.each do |directory, files|
           Seahorse::Client::Response.new(context:context)
         end
 
-        input_shape = client.config.api.operation(:example_operation).input
+        input_shape = client.config.api.operation(:operation_name).input
         request_params = format_data(input_shape, test_case['params'])
-        client.example_operation(request_params)
+        client.operation_name(request_params)
 
       end
     end
@@ -182,7 +182,7 @@ fixtures.each do |directory, files|
         end
 
         group.it "extract response data correctly" do
-          resp = client.example_operation
+          resp = client.operation_name
           data = data_to_hash(resp.data)
           expected_data = format_data(resp.context.operation.output, test_case['result'])
           expect(data).to eq(expected_data)

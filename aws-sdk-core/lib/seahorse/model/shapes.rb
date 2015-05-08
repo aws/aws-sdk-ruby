@@ -98,11 +98,6 @@ module Seahorse
 
       class ListShape < Shape
 
-        def initialize
-          @flattened = false
-          super
-        end
-
         # @return [ShapeRef]
         attr_accessor :member
 
@@ -115,11 +110,6 @@ module Seahorse
       end
 
       class MapShape < Shape
-
-        def initialize
-          @flattened = false
-          super
-        end
 
         # @return [ShapeRef]
         attr_accessor :key

@@ -24,9 +24,9 @@ module Aws
 
           def frame_class(shape)
             klass = FRAME_CLASSES[shape.class]
-            if ListFrame == klass && shape['flattened']
+            if ListFrame == klass && shape[:flattened]
               FlatListFrame
-            elsif MapFrame == klass && shape['flattened']
+            elsif MapFrame == klass && shape[:flattened]
               MapEntryFrame
             else
               klass

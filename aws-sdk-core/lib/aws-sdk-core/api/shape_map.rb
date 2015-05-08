@@ -36,14 +36,21 @@ module Aws
 
       def shape_ref(definition, options = {})
         if definition
+
           meta = definition.dup
+
           shape = self[meta.delete('shape')]
+          location = meta.delete('location')
+          location_name = meta.delete('locationName')
+          location_name ||= options[:member_name] unless location == 'headers'
+
           ShapeRef.new(
             shape: shape,
-            location: meta.delete('location'),
-            location_name: meta.delete('locationName') || options[:location_name],
+            location: location,
+            location_name: location_name,
             deprecated: !!(meta.delete('deprecated') || shape[:deprecated]),
-            metadata: meta)
+            metadata: meta
+          )
         else
           nil
         end
@@ -71,7 +78,7 @@ module Aws
           required = Set.new(traits.delete('required') || [])
           traits.delete('members').each do |member_name, ref|
             name = underscore(member_name)
-            ref = shape_ref(ref, location_name: member_name)
+            ref = shape_ref(ref, member_name: member_name)
             shape.add_member(name, ref, required: required.include?(member_name))
           end
         when ListShape
