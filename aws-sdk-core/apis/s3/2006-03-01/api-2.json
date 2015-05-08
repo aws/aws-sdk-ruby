@@ -1362,8 +1362,7 @@
     },
     "CreationDate":{"type":"timestamp"},
     "Date":{
-      "type":"timestamp",
-      "timestampFormat":"iso8601"
+      "type":"timestamp"
     },
     "Days":{"type":"integer"},
     "Delete":{
