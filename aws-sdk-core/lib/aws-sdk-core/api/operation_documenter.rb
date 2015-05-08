@@ -2,6 +2,8 @@ module Aws
   module Api
     class OperationDocumenter
 
+      include Seahorse::Model::Shapes
+
       def initialize(options)
         @operation = options[:operation]
         @example = OperationExample.new(options)
@@ -44,8 +46,12 @@ module Aws
         docs
       end
 
-      def api_ref(shape)
-        docs = shape.nil? ? '' : shape.documentation
+      def api_ref(ref)
+        if ref
+          doc = ref.documentation
+          docs ||= ref.shape.documentation if ref.respond_to?(:shape)
+        end
+        docs ||= ''
         if docs && !docs.empty?
           "<div class=\"api-ref\">#{clean(docs)}</div>"
         end
@@ -53,68 +59,68 @@ module Aws
 
       private
 
-      def params(shape, &block)
-        if shape && shape.name == 'AttributeValue'
+      def params(ref, &block)
+        if ref && ref.shape.name == 'AttributeValue'
           ['<p>An attribute value may be one of:<ul><li>`Hash`</li><li>`Array`</li><li>`String`</li><li>`Numeric`</li><li>`true` | `false`</li><li>`nil`</li><li>`IO`</li><li>`Set<String,Numeric,IO>`</li></ul></p>']
         else
-          ['<div class="params">', api_ref(shape)] + yield + ['</div>']
+          ['<div class="params">', api_ref(ref)] + yield + ['</div>']
         end
       end
 
-      def param(shape, key_name, value_type, required, visited, &block)
+      def param(ref, key_name, value_type, required, visited, &block)
         lines = []
         lines << '<div class="param">'
-        lines << entry(shape, key_name, value_type, required, visited)
+        lines << entry(ref, key_name, value_type, required, visited)
 
-        if visited.include?(shape)
+        if visited.include?(ref)
           lines << "AttributeValue, recursive"
         else
-          visited = visited + [shape]
+          visited = visited + [ref]
           yield(lines) if block_given?
-          lines += nested_params(shape, visited)
+          lines += nested_params(ref, visited)
         end
 
         lines << '</div>'
         lines
       end
 
-      def nested_params(shape, visited)
-        if leaf?(shape)
-          nested(shape, visited)
+      def nested_params(ref, visited)
+        if leaf?(ref)
+          nested(ref, visited)
         else
-          params(shape) { nested(shape, visited) }
+          params(ref) { nested(ref, visited) }
         end
       end
 
-      def nested(shape, visited)
-        case shape
-        when Seahorse::Model::Shapes::Structure then structure(shape, visited)
-        when Seahorse::Model::Shapes::Map then map(shape, visited)
-        when Seahorse::Model::Shapes::List then list(shape, visited)
-        else [api_ref(shape)]
+      def nested(ref, visited)
+        case ref.shape
+        when StructureShape then structure(ref, visited)
+        when MapShape then map(ref, visited)
+        when ListShape then list(ref, visited)
+        else [api_ref(ref)]
         end
       end
 
-      def structure(shape, visited)
-        shape.members.inject([]) do |lines, (member_name, member_shape)|
-          lines += param(member_shape, member_name, shape_type(member_shape), shape.required.include?(member_name), visited)
+      def structure(ref, visited)
+        ref.shape.members.inject([]) do |lines, (member_name, member_ref)|
+          lines += param(member_ref, member_name, shape_type(member_ref), ref.shape.required.include?(member_name), visited)
         end
       end
 
-      def map(shape, visited)
-        param(shape.value, key_name(shape), value_type(shape), false, visited)
+      def map(ref, visited)
+        param(ref.shape.value, key_name(ref), value_type(ref), false, visited)
       end
 
-      def list(shape, visited)
-        case shape.member
-        when Seahorse::Model::Shapes::Structure then structure(shape.member, visited)
-        when Seahorse::Model::Shapes::Map then map(shape.member, visited)
-        when Seahorse::Model::Shapes::List then raise NotImplementedError
-        else [api_ref(shape)]
+      def list(ref, visited)
+        case ref.shape.member
+        when StructureShape then structure(ref.shape.member, visited)
+        when MapShape then map(ref.shape.member, visited)
+        when ListShape then raise NotImplementedError
+        else [api_ref(ref)]
         end
       end
 
-      def entry(shape, key_name, value_type, required, visited)
+      def entry(ref, key_name, value_type, required, visited)
         classes = ['key']
         classes << 'required' if required
         line = '<div class="entry">'
@@ -124,46 +130,42 @@ module Aws
         line
       end
 
-      def shape_type(shape)
-        case shape
-        when Seahorse::Model::Shapes::Structure then 'Hash'
-        when Seahorse::Model::Shapes::Map then 'Hash'
-        when Seahorse::Model::Shapes::List then "Array&lt;#{value_type(shape)}&gt;"
-        when Seahorse::Model::Shapes::String then 'String'
-        when Seahorse::Model::Shapes::Timestamp then 'Time'
-        when Seahorse::Model::Shapes::Integer then 'Integer'
-        when Seahorse::Model::Shapes::Float then 'Number'
-        when Seahorse::Model::Shapes::Boolean then 'Boolean'
-        when Seahorse::Model::Shapes::Blob then 'String,IO'
-        else raise "unhandled type #{shape.type}"
+      def shape_type(ref)
+        case ref.shape
+        when StructureShape then 'Hash'
+        when MapShape then 'Hash'
+        when ListShape then "Array&lt;#{value_type(ref)}&gt;"
+        when StringShape then 'String'
+        when TimestampShape then 'Time'
+        when IntegerShape then 'Integer'
+        when FloatShape then 'Number'
+        when BooleanShape then 'Boolean'
+        when BlobShape then 'String,IO'
+        else raise "unhandled type #{ref.shape.type}"
         end
       end
 
-      def key_type(shape)
-        shape_type(shape.key)
+      def key_type(ref)
+        shape_type(ref.shape.key)
       end
 
-      def value_type(shape)
-        case shape
-        when Seahorse::Model::Shapes::List then shape_type(shape.member)
-        when Seahorse::Model::Shapes::Map then shape_type(shape.value)
+      def value_type(ref)
+        case ref.shape
+        when ListShape then shape_type(ref.shape.member)
+        when MapShape then shape_type(ref.shape.value)
         else raise 'stop'
         end
       end
 
-      def key_name(shape)
-        shape.key.metadata('shape')
+      def key_name(ref)
+        ref.shape.key.shape.name
       end
 
-      def value_name(shape)
-        shape.members.metadata('shape')
-      end
-
-      def leaf?(shape)
-        case shape
-        when Seahorse::Model::Shapes::Structure then false
-        when Seahorse::Model::Shapes::Map then false
-        when Seahorse::Model::Shapes::List then leaf?(shape.member)
+      def leaf?(ref)
+        case ref.shape
+        when StructureShape then false
+        when MapShape then false
+        when ListShape then leaf?(ref.shape.member)
         else true
         end
       end

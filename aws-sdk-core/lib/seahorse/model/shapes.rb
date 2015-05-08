@@ -29,6 +29,9 @@ module Seahorse
         # @return [String, nil]
         attr_accessor :location_name
 
+        # @return [String, nil]
+        attr_accessor :documentation
+
         # @return [Boolean]
         attr_accessor :deprecated
 

@@ -46,7 +46,7 @@ def supported_services_table
   table = []
   Aws::SERVICE_MODULE_NAMES.each do |svc_name|
     client_class = Aws.const_get(svc_name).const_get(:Client)
-    full_name = client_class.api.metadata('serviceFullName')
+    full_name = client_class.api.metadata['serviceFullName']
     version = client_class.api.version
     table << [full_name, svc_name, version]
   end

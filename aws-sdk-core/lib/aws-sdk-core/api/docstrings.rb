@@ -5,6 +5,7 @@ module Aws
     module Docstrings
 
       def self.apply(client_class, path)
+        return
         api = client_class.api.definition
         docs = File.open(path, 'r', encoding: 'UTF-8') { |f| f.read }
         docs = MultiJson.load(docs)

@@ -20,10 +20,10 @@ module Aws
         'timestamp' => TimestampShape,
       }
 
-      # @param [ShapeMap] shapes
-      def initialize(definitions)
+      # @param [Hash] shape_definitions
+      def initialize(shape_definitions)
         @shapes = {}
-        build_shapes(definitions)
+        build_shapes(shape_definitions)
       end
 
       def [](shape_name)

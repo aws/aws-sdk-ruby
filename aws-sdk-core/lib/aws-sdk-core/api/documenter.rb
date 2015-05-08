@@ -10,8 +10,8 @@ module Aws
         @client_class = svc_module.const_get(:Client)
         Aws::Api::Docstrings.apply(@client_class, docs_path)
         @api = @client_class.api
-        @full_name = @api.metadata('serviceFullName')
-        @error_names = @api.operations.map {|_,o| o.errors.map(&:name) }
+        @full_name = @api.metadata['serviceFullName']
+        @error_names = @api.operations.map {|_,o| o.errors.map(&:shape).map(&:name) }
         @error_names = @error_names.flatten.uniq.sort
         @namespace = YARD::Registry['Aws']
       end
@@ -154,7 +154,7 @@ Constructs an API client.
           end
         end
 
-        errors = (operation.errors || []).map { |shape| shape.name }
+        errors = (operation.errors || []).map { |ref| ref.shape.name }
         errors = errors.map { |e| "@raise [Errors::#{e}]" }.join("\n")
 
         docstring = <<-DOCSTRING.strip

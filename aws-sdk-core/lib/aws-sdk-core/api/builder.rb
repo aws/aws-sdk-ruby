@@ -31,7 +31,7 @@ module Aws
 
       end
 
-      # @param [Hash]
+      # @param [Hash] definition
       # @return [Seahorse::Model::Api]
       def build(definition)
         shapes = ShapeMap.new(definition['shapes'] || {})

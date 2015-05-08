@@ -3,6 +3,8 @@ module Aws
     class Documenter
       class BaseOperationDocumenter
 
+        include Seahorse::Model::Shapes
+
         def initialize(yard_class, resource_class, operation_name, operation)
           @yard_class = yard_class
           @resource_class = resource_class
@@ -131,16 +133,16 @@ module Aws
         def option_tags
           if api_request && api_request.input
             tags = []
-            required = api_request.input.required
-            members = api_request.input.members
+            required = api_request.input.shape.required
+            members = api_request.input.shape.members
             members = members.sort_by { |name,_| required.include?(name) ? 0 : 1 }
-            members.each do |member_name, member_shape|
+            members.each do |member_name, member_ref|
               if api_request_params.any? { |p| p.target.match(/^#{member_name}\b/) }
                 next
               end
-              docstring = member_shape.documentation
+              docstring = docs(member_ref)
               req = ' **`required`** &mdash; ' if required.include?(member_name)
-              tags << "@option options [#{param_type(member_shape)}] :#{member_name} #{req}#{docstring}"
+              tags << "@option options [#{param_type(member_ref)}] :#{member_name} #{req}#{docstring}"
             end
             tags = tags.join("\n")
             YARD::DocstringParser.new.parse(tags).to_docstring.tags
@@ -211,15 +213,15 @@ module Aws
 
         def path_type
           case path_shape
-          when Seahorse::Model::Shapes::Structure then 'Structure'
-          when Seahorse::Model::Shapes::List then 'Array'
-          when Seahorse::Model::Shapes::Map then 'Hash'
-          when Seahorse::Model::Shapes::String then 'String'
-          when Seahorse::Model::Shapes::Integer then 'Integer'
-          when Seahorse::Model::Shapes::Float then 'Float'
-          when Seahorse::Model::Shapes::Boolean then 'Boolean'
-          when Seahorse::Model::Shapes::Timestamp then 'Time'
-          when Seahorse::Model::Shapes::Blob then 'IO'
+          when StructureShape then 'Structure'
+          when ListShape then 'Array'
+          when MapShape then 'Hash'
+          when StringShape then 'String'
+          when IntegerShape then 'Integer'
+          when FloatShape then 'Float'
+          when BooleanShape then 'Boolean'
+          when TimestampShape then 'Time'
+          when BlobShape then 'IO'
           else
             raise "unhandled shape class `#{path_shape.class.name}'"
           end
@@ -232,38 +234,39 @@ module Aws
         # Returns the output shape for the called operation.
         def response_shape
           api = resource_class.client_class.api
-          api.operation(@operation.request.method_name).output
+          output = api.operation(@operation.request.method_name).output
+          output ? output.shape : nil
         end
 
         def resolve_shape(shape, path)
           if path != '@'
             shape = path.scan(/\w+|\[.*?\]/).inject(shape) do |shape, part|
               if part[0] == '['
-                shape.member
+                shape.member.shape
               else
-                shape.member(part)
+                shape.member(part).shape
               end
             end
           end
         end
 
-        def param_type(shape)
-          case shape
-          when Seahorse::Model::Shapes::Blob then 'IO'
-          when Seahorse::Model::Shapes::Byte then  'String'
-          when Seahorse::Model::Shapes::Boolean then 'Boolean'
-          when Seahorse::Model::Shapes::Character then 'String'
-          when Seahorse::Model::Shapes::Double then 'Float'
-          when Seahorse::Model::Shapes::Float then 'Float'
-          when Seahorse::Model::Shapes::Integer then 'Integer'
-          when Seahorse::Model::Shapes::List then 'Array'
-          when Seahorse::Model::Shapes::Long then 'Integer'
-          when Seahorse::Model::Shapes::Map then 'Hash'
-          when Seahorse::Model::Shapes::String then 'String'
-          when Seahorse::Model::Shapes::Structure then 'Hash'
-          when Seahorse::Model::Shapes::Timestamp then 'Time'
+        def param_type(ref)
+          case ref.shape
+          when BlobShape then 'IO'
+          when BooleanShape then 'Boolean'
+          when FloatShape then 'Float'
+          when IntegerShape then 'Integer'
+          when ListShape then 'Array'
+          when MapShape then 'Hash'
+          when StringShape then 'String'
+          when StructureShape then 'Hash'
+          when TimestampShape then 'Time'
           else raise 'unhandled type'
           end
+        end
+
+        def docs(ref)
+          ref.documentation || ref.shape.documentation
         end
 
       end
