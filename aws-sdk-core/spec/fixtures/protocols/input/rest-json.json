@@ -372,13 +372,13 @@
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "FooShape"
+            "shape": "FooShape",
+            "locationName": "foo"
           }
         },
         "payload": "foo"
       },
       "FooShape": {
-        "locationName": "foo",
         "type": "structure",
         "members": {
           "baz": {

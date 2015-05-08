@@ -628,14 +628,14 @@
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "FooShape"
+            "shape": "FooShape",
+            "location": "headers",
+            "locationName": "x-foo-"
           }
         }
       },
       "FooShape": {
         "type": "map",
-        "location": "headers",
-        "locationName": "x-foo-",
         "key": {
           "shape": "FooKeyValue"
         },
@@ -795,13 +795,13 @@
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "FooShape"
+            "shape": "FooShape",
+            "locationName": "foo"
           }
         },
         "payload": "foo"
       },
       "FooShape": {
-        "locationName": "foo",
         "type": "structure",
         "members": {
           "baz": {
@@ -885,14 +885,14 @@
         "type": "structure",
         "members": {
           "Grant": {
-            "shape": "Grant"
+            "shape": "Grant",
+            "locationName": "Grant"
           }
         },
         "payload": "Grant"
       },
       "Grant": {
         "type": "structure",
-        "locationName": "Grant",
         "members": {
           "Grantee": {
             "shape": "Grantee"
