@@ -59,11 +59,12 @@ module Seahorse
 
       # @api private
       def inspect
-        if @data
-          @data.respond_to?(:pretty_inspect) ? @data.pretty_inspect : super
-        else
-          super
-        end
+        @data.inspect
+      end
+
+      # @api private
+      def pretty_print(q)
+        @data.pretty_print(q)
       end
 
       # @api private
