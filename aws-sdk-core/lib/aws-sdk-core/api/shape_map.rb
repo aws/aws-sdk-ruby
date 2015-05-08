@@ -37,10 +37,12 @@ module Aws
       def shape_ref(definition, options = {})
         if definition
           meta = definition.dup
+          shape = self[meta.delete('shape')]
           ShapeRef.new(
-            shape: self[meta.delete('shape')],
+            shape: shape,
             location: meta.delete('location'),
             location_name: meta.delete('locationName') || options[:location_name],
+            deprecated: !!(meta.delete('deprecated') || shape[:deprecated]),
             metadata: meta)
         else
           nil

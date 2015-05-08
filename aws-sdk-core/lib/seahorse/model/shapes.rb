@@ -8,6 +8,7 @@ module Seahorse
 
         def initialize(options = {})
           @metadata = {}
+          @deprecated = false
           options.each do |key, value|
             if key == :metadata
               value.each do |k,v|
@@ -27,6 +28,9 @@ module Seahorse
 
         # @return [String, nil]
         attr_accessor :location_name
+
+        # @return [Boolean]
+        attr_accessor :deprecated
 
         # Gets metadata for the given `key`.
         def [](key)
