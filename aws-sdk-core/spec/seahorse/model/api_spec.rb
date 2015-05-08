@@ -3,151 +3,64 @@ require 'spec_helper'
 module Seahorse
   module Model
     describe Api do
-
-      describe '#definition' do
-
-        it 'returns an empty hash by default' do
-          expect(Api.new.definition).to eq({})
-        end
-
-        it 'returns the definitions given the constructor' do
-          definition = { 'operations' => {} }
-          api = Api.new(definition)
-          expect(api.definition).to be(definition)
-        end
-
-      end
-
-      describe '#shape_map' do
-
-        it 'defaults to an empty shape map' do
-          expect(Api.new.shape_map.definitions).to eq({})
-        end
-
-        it 'initializes the shape map with the given shape definitions' do
-          shape_definitions = { 'Name' => { 'type' => 'string' }}
-          api = Api.new('shapes' => shape_definitions)
-          expect(api.shape_map.definitions).to be(shape_definitions)
-        end
-
-      end
-
       describe '#version' do
 
         it 'defaults to nil' do
           expect(Api.new.version).to be(nil)
         end
 
-        it 'returns the value given in the definition' do
-          api = Api.new('metadata' => { 'apiVersion' => '1'})
-          expect(api.version).to eq('1')
-        end
-
-      end
-
-      describe '#documentation' do
-
-        it 'defaults to nil' do
-          expect(Api.new.documentation).to be(nil)
-        end
-
-        it 'returns the value given in the definition' do
-          api = Api.new('documentation' => 'docs')
-          expect(api.documentation).to eq('docs')
+        it 'can be set' do
+          api = Api.new
+          api.version = '2015-01-01'
+          expect(api.version).to eq('2015-01-01')
         end
 
       end
 
       describe '#metadata' do
 
-        it 'returns the value given in the definition' do
-          metadata = { 'format' => 'query' }
-          api = Api.new('metadata' => metadata)
-          expect(api.metadata('format')).to eq('query')
+        it 'defaults to {}' do
+          expect(Api.new.metadata).to eq({})
+        end
+
+        it 'can be populated' do
+          api = Api.new
+          api.metadata['key'] = 'value'
+          expect(api.metadata['key']).to eq('value')
         end
 
       end
 
-      describe '#operation' do
-
-        let(:definition) {{
-          'operations' => {
-            'Operation1' => { 'documentation' => 'first' },
-            'Operation2' => { 'documentation' => 'second' },
-          }
-        }}
-
-        it 'returns an operation' do
-          api = Api.new(definition)
-          expect(api.operation('operation_1')).to be_kind_of(Operation)
-        end
-
-        it 'returns an operation built from the definition' do
-          api = Api.new(definition)
-          expect(api.operation(:operation_1).documentation).to eq('first')
-        end
-
-        it 'returns the same operation object when called multiple times' do
-          api = Api.new(definition)
-          o1 = api.operation('operation_1')
-          o2 = api.operation('operation_1')
-          expect(o1).to be(o2)
-        end
-
-        it 'accepts operation names as symbols' do
-          api = Api.new(definition)
-          o1 = api.operation(:operation_1)
-          o2 = api.operation('operation_1')
-          expect(o1).to be(o2)
-        end
-
-        it 'raises an ArgumentError for an undefined operation' do
-          api = Api.new(definition)
-          expect {
-            api.operation('operation3')
-          }.to raise_error(ArgumentError, "unknown operation :operation3")
-        end
-
+      it 'provides an enumerator for operations' do
+        operation = double('operation')
+        api = Api.new
+        api.add_operation('name', operation)
+        expect(api.operations).to be_kind_of(Enumerator)
+        expect(api.operations.to_a).to eq([[:name, operation]])
       end
 
-      describe '#operation_names' do
-
-        it 'returns an array of symbolized operation names' do
-          api = Api.new('operations' => {
-            'Operation1' => {},
-            'Operation2' => {},
-          })
-          expect(api.operation_names).to eq([:operation_1, :operation_2])
-        end
-
+      it 'provides operation names' do
+        api = Api.new
+        api.add_operation('op1', double('operation'))
+        api.add_operation('op2', double('operation'))
+        expect(api.operation_names).to eq([:op1, :op2])
       end
 
-      describe '#operations' do
-
-        it 'yields operation names and operation objects' do
-          api = Api.new('operations' => {
-            'OperationName' => {},
-            'OperationName2' => {},
-          })
-          yielded = []
-          api.operations.each do |operation_name, operation|
-            yielded << [operation_name, operation]
-          end
-          expect(yielded).to eq([
-            [:operation_name, api.operation('operation_name')],
-            [:operation_name_2, api.operation('operation_name_2')],
-          ])
-        end
-
+      it 'provides an operation getter' do
+        operation = double('operation')
+        api = Api.new
+        api.add_operation(:name, operation)
+        expect(api.operation(:name)).to be(operation)
       end
 
-      describe '#inspect' do
-
-        it 'returns a simplified inspect string' do
-          api = Api.new('metadata' => { 'apiVersion' => '1'})
-          expect(api.inspect).to eq('#<Seahorse::Model::Api version="1">')
-        end
-
+      it 'provides indifferent string/symbol access to operations by name' do
+        operation1 = double('operation-1')
+        operation2 = double('operation-2')
+        api = Api.new
+        api.add_operation(:name, operation1)
+        expect(api.operation('name')).to be(operation1)
+        api.add_operation('name', operation2)
+        expect(api.operation(:name)).to be(operation2)
       end
     end
   end

@@ -33,11 +33,6 @@ module Seahorse
       # @return [Array<ShapeRef>]
       attr_accessor :errors
 
-      # @api private
-      def inspect
-        "#<#{self.class.name} name=#{name.inspect}>"
-      end
-
     end
   end
 end

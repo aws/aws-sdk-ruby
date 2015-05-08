@@ -37,12 +37,6 @@ module Seahorse
         @operations[name.to_sym] = operation
       end
 
-      # @api private
-      # @return [String]
-      def inspect
-        "#<#{self.class.name} version=#{version.inspect}>"
-      end
-
     end
   end
 end

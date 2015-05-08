@@ -72,7 +72,15 @@ module Seahorse
 
       end
 
-      class BlobShape < Shape; end
+      class BlobShape < Shape
+
+        # @return [Integer, nil]
+        attr_accessor :min
+
+        # @return [Integer, nil]
+        attr_accessor :max
+
+      end
 
       class BooleanShape < Shape; end
 

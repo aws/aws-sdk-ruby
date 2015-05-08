@@ -4,159 +4,64 @@ module Seahorse
   module Model
     describe Operation do
 
-      describe '#name' do
-
-        it 'defaults to nil' do
-          expect(Operation.new.name).to be(nil)
-        end
-
-        it 'returns the name set in the definition' do
-          operation = Operation.new('name' => 'abc')
-          expect(operation.name).to eq('abc')
-        end
-
+      it 'defaults #name to nil' do
+        operation = Operation.new
+        operation.name = 'OperationName'
+        expect(operation.name).to eq('OperationName')
       end
 
-      describe '#http_method' do
-
-        it 'defaults to POST' do
-          expect(Operation.new.http_method).to eq('POST')
-        end
-
-        it 'returns the verb set in the definition' do
-          operation = Operation.new('http' => { 'method' => 'GET'})
-          expect(operation.http_method).to eq('GET')
-        end
-
+      it 'defaults #http_method to "POST"' do
+        operation = Operation.new
+        expect(operation.http_method).to eq('POST')
+        operation.http_method = 'GET'
+        expect(operation.http_method).to eq('GET')
       end
 
-      describe '#http_request_uri' do
-
-        it 'defaults to /' do
-          expect(Operation.new.http_request_uri).to eq('/')
-        end
-
-        it 'returns the request uri template set in the definition' do
-          operation = Operation.new('http' => { 'requestUri' => '/{id}{?cache}'})
-          expect(operation.http_request_uri).to eq('/{id}{?cache}')
-        end
-
+      it 'defaults #http_request_uri to "/"' do
+        operation = Operation.new
+        expect(operation.http_request_uri).to eq('/')
+        operation.http_request_uri = '/path?query'
+        expect(operation.http_method).to eq('/path?query')
       end
 
-      describe '#documentation' do
-
-        it 'defaults to nil' do
-          expect(Operation.new.documentation).to be(nil)
-        end
-
-        it 'returns the value set in the definition' do
-          operation = Operation.new('documentation' => 'docs')
-          expect(operation.documentation).to eq('docs')
-        end
-
+      it 'defaults #deprecated to false' do
+        operation = Operation.new
+        expect(operation.deprecated).to be(false)
+        operation.deprecated = true
+        expect(operation.deprecated).to be(true)
       end
 
-      describe '#input' do
-
-        it 'defaults to nil' do
-          expect(Operation.new.input).to be(nil)
-        end
-
-        it 'returns the shape set in the definition' do
-          definition = { 'input' => { 'type' => 'structure' }}
-          operation = Operation.new(definition)
-          expect(operation.input).to be_kind_of(Shapes::Structure)
-        end
-
-        it 'loads a shape from the shape map when given as a reference' do
-          definition = {
-            'input' => { 'shape' => 'InputShape', 'documentation' => 'input' }
-          }
-          shapes = ShapeMap.new(
-            'InputShape' => { 'type' => 'structure' }
-          )
-          operation = Operation.new(definition, shape_map: shapes)
-          expect(operation.input.documentation).to eq('input')
-        end
-
+      it 'defaults #documentation to nil' do
+        operation = Operation.new
+        expect(operation.documentation).to be(nil)
+        operation.documentation = 'docstring'
+        expect(operation.documenation).to eq('docstring')
       end
 
-      describe '#output' do
-
-        it 'defaults to nil' do
-          expect(Operation.new.output).to be(nil)
-        end
-
-        it 'returns the shape set in the definition' do
-          definition = {
-            'output' => { 'shape' => 'OutputShape', 'documentation' => 'output' }
-          }
-          shapes = ShapeMap.new(
-            'OutputShape' => { 'type' => 'structure' }
-          )
-          operation = Operation.new(definition, shape_map: shapes)
-          expect(operation.output.documentation).to eq('output')
-        end
-
-        it 'loads a shape from the shape map when given as a reference' do
-          shapes = ShapeMap.new('OutputShape' => { 'type' => 'structure' })
-          definition = { 'output' => { 'shape' => 'OutputShape' }}
-          operation = Operation.new(definition, shape_map: shapes)
-          expect(operation.output).to be(shapes.shape('shape' => 'OutputShape'))
-        end
-
+      it 'defaults #input to nil' do
+        shape_ref = double('shape-ref')
+        operation = Operation.new
+        expect(operation.input).to be(nil)
+        operation.input = shape_ref
+        expect(operation.input).to be(shape_ref)
       end
 
-      describe '#errors' do
-
-        it 'returns an enumerator' do
-          expect(Operation.new.errors).to be_kind_of(Enumerator)
-        end
-
-        it 'defaults to an empty list' do
-          expect(Operation.new.errors.to_a).to eq([])
-        end
-
-        it 'returns the shapes set in the definition' do
-          definition = {
-            'errors' => [
-              { 'type' => 'structure', 'documentation' => 'error1' },
-              { 'type' => 'structure', 'documentation' => 'error2' },
-            ]
-          }
-          operation = Operation.new(definition)
-          expect(operation.errors.map(&:documentation)).to eq(%w(error1 error2))
-        end
-
-        it 'loads shapes from the shape map when given as a references' do
-          definition = {
-            'errors' => [
-              { 'shape' => 'Error1' },
-              { 'shape' => 'Error2' },
-            ]
-          }
-          shapes = ShapeMap.new(
-            'Error1' => { 'type' => 'structure', 'documentation' => 'error1' },
-            'Error2' => { 'type' => 'structure', 'documentation' => 'error2' },
-          )
-          operation = Operation.new(definition, shape_map: shapes)
-          expect(operation.errors.map(&:documentation)).to eq(%w(error1 error2))
-        end
-
+      it 'defaults #output to nil' do
+        shape_ref = double('shape-ref')
+        operation = Operation.new
+        expect(operation.output).to be(nil)
+        operation.output = shape_ref
+        expect(operation.output).to be(shape_ref)
       end
 
-      describe '#deprecated?' do
-
-        it 'defaults to false' do
-          expect(Operation.new.deprecated?).to be(false)
-        end
-
-        it 'returns true if specified in the definition' do
-          operation = Operation.new('deprecated' => true)
-          expect(operation.deprecated?).to be(true)
-        end
-
+      it 'defaults #errors to []' do
+        shape_ref = double('shape-ref')
+        operation = Operation.new
+        expect(operation.errors).to eq([])
+        operation.errors << [shape_ref, shape_ref]
+        expect(operation.output).to eq([shape_ref, shape_ref])
       end
+
     end
   end
 end
