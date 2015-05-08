@@ -35,10 +35,7 @@ Given(/^I have a vault ready to receive uploads$/) do
 end
 
 When(/^I upload an archive with the contents "(.*?)"$/) do |contents|
-  begin
-    upload_glacier_archive(contents)
-  rescue => @error
-  end
+  upload_glacier_archive(contents)
 end
 
 When(/^I upload an archive from a ([0-9\.]+)MB large file$/) do |size_in_mb|

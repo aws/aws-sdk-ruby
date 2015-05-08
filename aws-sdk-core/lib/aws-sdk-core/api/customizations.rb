@@ -25,12 +25,6 @@ module Aws
         end
 
         def apply_plugins(client_class)
-          prefix = client_class.api.metadata['endpointPrefix']
-          if @plugins[prefix]
-            @plugins[prefix][:add].each { |p| client_class.add_plugin(p) }
-            @plugins[prefix][:remove].each { |p| client_class.remove_plugin(p) }
-          end
-
           protocol = client_class.api.metadata['protocol']
           plugin = case protocol
             when 'ec2'       then Aws::Plugins::Protocols::EC2
@@ -40,6 +34,11 @@ module Aws
             when 'rest-xml'  then Aws::Plugins::Protocols::RestXml
           end
           client_class.add_plugin(plugin) if plugin
+          prefix = client_class.api.metadata['endpointPrefix']
+          if @plugins[prefix]
+            @plugins[prefix][:add].each { |p| client_class.add_plugin(p) }
+            @plugins[prefix][:remove].each { |p| client_class.remove_plugin(p) }
+          end
         end
 
       end
