@@ -10,7 +10,7 @@ module Aws
 
       def input_type(ref)
         case ref.shape
-        when Shapes::StructureShape then 'Client::' + ref.shape.name
+        when Shapes::StructureShape then ref.shape.name
         when Shapes::ListShape then "Array<#{input_type(ref.shape.member)}>"
         when Shapes::MapShape then "Hash<String,#{input_type(ref.shape.value)}>"
         when Shapes::BlobShape then 'String,IO'
@@ -25,7 +25,7 @@ module Aws
 
       def output_type(ref)
         case ref.shape
-        when Shapes::StructureShape then 'Client::' + ref.shape.name
+        when Shapes::StructureShape then ref.shape.name
         when Shapes::ListShape then "Array<#{output_type(ref.shape.member)}>"
         when Shapes::MapShape then "Hash<String,#{output_type(ref.shape.value)}>"
         when Shapes::BlobShape then ref.location == 'body' ? 'StringIO' : 'String'
