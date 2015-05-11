@@ -34,10 +34,16 @@ module Aws
         end
         shape = ref.shape
         shape.members.each do |member_name, member_ref|
-          if shape.required.include?(member_name)
-            lines << "#{i}  # required"
+          nested = "#{i}  #{member_name}: #{member(member_ref, i + '  ', visited)},"
+          if member_ref.required
+            # add a required comment to the first line
+            nested = nested.lines
+            nested[0] = nested[0].match(/\n$/) ?
+              "#{nested[0].rstrip} # required\n" :
+              "#{nested[0]} # required"
+            nested = nested.join
           end
-          lines << "#{i}  #{member_name}: #{member(member_ref, i + '  ', visited)},"
+          lines << nested
         end
         lines << "#{i}}"
         lines.join("\n")
