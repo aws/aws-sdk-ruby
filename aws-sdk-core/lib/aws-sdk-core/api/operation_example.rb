@@ -38,9 +38,13 @@ module Aws
           if member_ref.required
             # add a required comment to the first line
             nested = nested.lines
-            nested[0] = nested[0].match(/\n$/) ?
-              "#{nested[0].rstrip} # required\n" :
-              "#{nested[0]} # required"
+            if nested[0].match(/\n$/)
+              nested[0] = "#{nested[0].rstrip} # required\n"
+            elsif nested[0].match(/# one of/)
+              nested[0] = nested[0].sub('# one of', '# required, one of')
+            else
+              nested[0] = "#{nested[0]} # required"
+            end
             nested = nested.join
           end
           lines << nested
@@ -112,8 +116,9 @@ module Aws
       end
 
       def string_value(ref)
-        if ref.shape.enum
-          ref.shape.enum.to_a.join('|').inspect
+        if enum = ref.shape.enum
+          #ref.shape.enum.to_a.join('|').inspect
+          "#{enum.first.inspect}, # one of #{enum.to_a.join(', ')}"
         else
           shape_name(ref)
         end
