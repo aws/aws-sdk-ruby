@@ -83,7 +83,8 @@ module Seahorse
         it 'allows members to be added' do
           shape = StructureShape.new
           expect(shape.member_names).to eq([])
-          shape.add_member(:member_name, shape_ref, required: true)
+          shape_ref.required = true
+          shape.add_member(:member_name, shape_ref)
           expect(shape.member?(:member_name)).to be(true)
           expect(shape.member?('member_name')).to be(true)
           expect(shape.member_names).to eq([:member_name])
@@ -92,16 +93,18 @@ module Seahorse
         end
 
         it 'provides a list of required members' do
+          shape_ref.required = true
           shape = StructureShape.new
           expect(shape.required).to be_kind_of(Set)
           expect(shape.required).to be_empty
-          shape.add_member(:member_name, shape_ref, required: true)
+          shape.add_member(:member_name, shape_ref)
           expect(shape.required).to include(:member_name)
         end
 
         it 'provides access to members by their location name' do
+          shape_ref.required = true
           shape = StructureShape.new
-          shape.add_member(:member_name, shape_ref, required: true)
+          shape.add_member(:member_name, shape_ref)
           expect(shape.member_by_location_name(shape_ref.location_name)).to eq([:member_name, shape_ref])
         end
 

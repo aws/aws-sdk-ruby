@@ -8,6 +8,7 @@ module Seahorse
 
         def initialize(options = {})
           @metadata = {}
+          @required = false
           @deprecated = false
           options.each do |key, value|
             if key == :metadata
@@ -28,6 +29,9 @@ module Seahorse
 
         # @return [String, nil]
         attr_accessor :location_name
+
+        # @return [Boolean]
+        attr_accessor :required
 
         # @return [String, nil]
         attr_accessor :documentation
@@ -155,10 +159,9 @@ module Seahorse
 
         # @param [Symbol] name
         # @param [ShapeRef] shape_ref
-        # @option options [Boolean] :required (false)
-        def add_member(name, shape_ref, options = {})
+        def add_member(name, shape_ref)
           name = name.to_sym
-          @required << name if options[:required]
+          @required << name if shape_ref.required
           @members_by_location_name[shape_ref.location_name] = [name, shape_ref]
           @members[name] = shape_ref
         end

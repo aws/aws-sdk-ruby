@@ -43,9 +43,6 @@ class ResourceDocPlugin
   def apply
     Aws.service_added do |_, svc_module, files|
       if files[:resources]
-        # merges the .docs.json API docs onto the .api.json model
-        Aws::Api::Docstrings.apply(svc_module::Client, files[:docs])
-
         namespace = YARD::Registry[svc_module.name]
         svc_module.constants.each do |const|
           klass = svc_module.const_get(const)
@@ -181,7 +178,7 @@ Loads the current #{name} by calling {Client##{method}}.
 
     endpoint = resource_class.client_class.api.metadata['endpointPrefix']
     version = resource_class.client_class.api.version
-    definition = Json.load_file("aws-sdk-core/apis/#{endpoint}/#{version}/resources-1.json")
+    definition = Aws::Json.load_file("aws-sdk-core/apis/#{endpoint}/#{version}/resources-1.json")
     definition = definition['resources'][resource_name]
     if shape_name = definition['shape']
 

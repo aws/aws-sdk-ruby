@@ -159,7 +159,7 @@ module Aws
         # * `:key_provider`
         # * `:encryption_key`
         #
-        # You may also pass any other options accepted by {S3::Client.new}.
+        # You may also pass any other options accepted by {S3::Client#initialize}.
         #
         # @option options [S3::Client] :client A basic S3 client that is used
         #   to make api calls. If a `:client` is not provided, a new {S3::Client}
@@ -175,7 +175,7 @@ module Aws
         # @option options [Symbol] :envelope_location (:metadata) Where to
         #   store the envelope encryption keys. By default, the envelope is
         #   stored with the encrypted object. If you pass `:instruction_file`,
-        #   then the envelope is stored in a seperate object in Amazon S3.
+        #   then the envelope is stored in a separate object in Amazon S3.
         #
         # @option options [String] :instruction_file_suffix ('.instruction')
         #   When `:envelope_location` is `:instruction_file` then the

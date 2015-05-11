@@ -181,6 +181,7 @@ module Aws
     add(TimestampShape, Date) { |d| d.to_time }
     add(TimestampShape, DateTime) { |dt| dt.to_time }
     add(TimestampShape, Integer) { |i| Time.at(i) }
+    add(TimestampShape, Float) { |f| Time.at(f) }
     add(TimestampShape, String) do |str|
       begin
         Time.parse(str)

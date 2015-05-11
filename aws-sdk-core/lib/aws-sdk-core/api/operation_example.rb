@@ -5,7 +5,6 @@ module Aws
       include Seahorse::Model::Shapes
 
       def initialize(options)
-        @obj_name = options[:svc_var_name]
         @method_name = options[:method_name]
         @operation = options[:operation]
         @streaming_output = !!(
@@ -16,7 +15,7 @@ module Aws
       end
 
       def to_str
-        "resp = #{@obj_name}.#{@method_name}(#{params[1...-1]})"
+        "resp = client.#{@method_name}(#{params[1...-1]})"
       end
       alias to_s to_str
       alias inspect to_str

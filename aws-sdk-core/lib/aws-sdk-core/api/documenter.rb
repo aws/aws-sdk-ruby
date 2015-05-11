@@ -4,11 +4,10 @@ module Aws
   module Api
     class Documenter
 
-      def initialize(svc_module, docs_path)
+      def initialize(svc_module)
         @svc_module = svc_module
         @svc_name = svc_module.name.split('::').last
         @client_class = svc_module.const_get(:Client)
-        Aws::Api::Docstrings.apply(@client_class, docs_path)
         @api = @client_class.api
         @full_name = @api.metadata['serviceFullName']
         @error_names = @api.operations.map {|_,o| o.errors.map(&:shape).map(&:name) }
@@ -70,9 +69,17 @@ module Aws
         yard_class = YARD::CodeObjects::ClassObject.new(@namespace, 'Client')
         yard_class.superclass = YARD::Registry['Seahorse::Client::Base']
         yard_class.docstring = client_docstring
+        document_client_types(yard_class)
         document_client_constructor(yard_class)
         document_client_operations(yard_class)
         document_client_waiters(yard_class)
+      end
+
+      def document_client_types(namespace)
+        documenter = ClientTypeDocumenter.new(namespace)
+        @api.metadata['shapes'].each_structure do |shape|
+          documenter.document(shape)
+        end
       end
 
       def client_docstring
@@ -128,43 +135,34 @@ Constructs an API client.
       end
 
       def document_client_operation(namespace, method_name, operation)
-        m = YARD::CodeObjects::MethodObject.new(namespace, method_name)
-        m.group = 'Service Operations'
-        m.scope = :instance
-        m.parameters << ['params', '{}']
-        m.docstring = operation_docstring(method_name, operation)
+        documenter = OperationDocumenter.new(namespace)
+        documenter.document(method_name, operation)
       end
 
       def operation_docstring(method_name, operation)
-
-        documentor = OperationDocumenter.new(
-          svc_var_name: @svc_name.downcase,
-          method_name: method_name,
-          operation: operation)
-
-        tabs = Tabulator.new.tap do |t|
-          t.tab(method_name, 'Formatting Example') do
-            "<pre><code>#{documentor.example}</code></pre>"
-          end
-          t.tab(method_name, 'Request Parameters') do
-            documentor.input
-          end
-          t.tab(method_name, 'Response Structure') do
-            documentor.output
-          end
-        end
-
-        errors = (operation.errors || []).map { |ref| ref.shape.name }
-        errors = errors.map { |e| "@raise [Errors::#{e}]" }.join("\n")
-
-        docstring = <<-DOCSTRING.strip
-<p>Calls the #{operation.name} operation.<p>
-#{documentor.api_ref(operation)}
-#{tabs}
-@param [Hash] params ({})
-@return [PageableResponse]
-#{errors}
-        DOCSTRING
+#        tabs = Tabulator.new.tap do |t|
+#          t.tab(method_name, 'Formatting Example') do
+#            "<pre><code>#{documentor.example}</code></pre>"
+#          end
+#          t.tab(method_name, 'Request Parameters') do
+#            documentor.input
+#          end
+#          t.tab(method_name, 'Response Structure') do
+#            documentor.output
+#          end
+#        end
+#
+#        errors = (operation.errors || []).map { |ref| ref.shape.name }
+#        errors = errors.map { |e| "@raise [Errors::#{e}]" }.join("\n")
+#
+#        docstring = <<-DOCSTRING.strip
+#<p>Calls the #{operation.name} operation.<p>
+##{documentor.api_ref(operation)}
+##{tabs}
+#@param [Hash] params ({})
+#@return [PageableResponse]
+##{errors}
+#        DOCSTRING
       end
 
       def document_client_waiters(yard_class)

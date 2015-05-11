@@ -21,8 +21,10 @@ module Aws
       }
 
       # @param [Hash] shape_definitions
-      def initialize(shape_definitions)
+      # @option options [DocstringProvider] :docs (NullDocstringProvider)
+      def initialize(shape_definitions, options = {})
         @shapes = {}
+        @docs = options[:docs] || NullDocstringProvider.new
         build_shapes(shape_definitions)
       end
 
@@ -49,14 +51,16 @@ module Aws
           location = meta.delete('location')
           location_name = meta.delete('locationName')
           location_name ||= options[:member_name] unless location == 'headers'
+          documentation = @docs.shape_ref_docs(shape.name, options[:target])
 
           ShapeRef.new(
             shape: shape,
             location: location,
             location_name: location_name,
+            required: !!options[:required],
             deprecated: !!(meta.delete('deprecated') || shape[:deprecated]),
-            metadata: meta
-          )
+            documentation: documentation,
+            metadata: meta)
         else
           nil
         end
@@ -84,15 +88,24 @@ module Aws
           required = Set.new(traits.delete('required') || [])
           (traits.delete('members') || {}).each do |member_name, ref|
             name = underscore(member_name)
-            ref = shape_ref(ref, member_name: member_name)
-            shape.add_member(name, ref, required: required.include?(member_name))
+            shape.add_member(name, shape_ref(ref,
+              member_name: member_name,
+              required: required.include?(member_name),
+              target: "#{shape.name}$#{member_name}",
+            ))
           end
           shape[:struct_class] = Structure.new(*shape.member_names)
         when ListShape
-          shape.member = shape_ref(traits.delete('member'))
+          shape.member = shape_ref(
+            traits.delete('member'),
+            target: "#{shape.name}$member")
         when MapShape
-          shape.key = shape_ref(traits.delete('key'))
-          shape.value = shape_ref(traits.delete('value'))
+          shape.key = shape_ref(
+            traits.delete('key'),
+            target: "#{shape.name}$key")
+          shape.value = shape_ref(
+            traits.delete('value'),
+            target: "#{shape.name}$value")
         end
       end
 
@@ -100,7 +113,7 @@ module Aws
         shape.enum = Set.new(traits.delete('enum')) if traits.key?('enum')
         shape.min = traits.delete('min') if traits.key?('min')
         shape.max = traits.delete('max') if traits.key?('max')
-        shape.documentation = traits.delete('documentation')
+        shape.documentation = @docs.shape_docs(shape.name)
         if payload = traits.delete('payload')
           shape[:payload] = underscore(payload)
           shape[:payload_member] = shape.member(shape[:payload])
