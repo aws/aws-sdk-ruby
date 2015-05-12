@@ -60,18 +60,18 @@ module Aws
 
       it 'populates credentials from the instance profile' do
         c = InstanceProfileCredentials.new(backoff:0)
-        expect(c.access_key_id).to eq('akid')
-        expect(c.secret_access_key).to eq('secret')
-        expect(c.session_token).to eq('session-token')
+        expect(c.credentials.access_key_id).to eq('akid')
+        expect(c.credentials.secret_access_key).to eq('secret')
+        expect(c.credentials.session_token).to eq('session-token')
         expect(c.expiration.to_s).to eq(expiration.to_s)
       end
 
       it 're-queries the metadata service when #refresh! is called' do
         c = InstanceProfileCredentials.new
         c.refresh!
-        expect(c.access_key_id).to eq('akid-2')
-        expect(c.secret_access_key).to eq('secret-2')
-        expect(c.session_token).to eq('session-token-2')
+        expect(c.credentials.access_key_id).to eq('akid-2')
+        expect(c.credentials.secret_access_key).to eq('secret-2')
+        expect(c.credentials.session_token).to eq('session-token-2')
         expect(c.expiration.to_s).to eq(expiration2.to_s)
       end
 
@@ -82,10 +82,24 @@ module Aws
         stub_request(:get, "http://169.254.169.254#{path}profile-name").
           to_return(:status => 200, :body => resp2)
         c = InstanceProfileCredentials.new(backoff:0)
-        expect(c.access_key_id).to eq('akid-2')
-        expect(c.secret_access_key).to eq('secret-2')
-        expect(c.session_token).to eq('session-token-2')
+        expect(c.credentials.access_key_id).to eq('akid-2')
+        expect(c.credentials.secret_access_key).to eq('secret-2')
+        expect(c.credentials.session_token).to eq('session-token-2')
         expect(c.expiration.to_s).to eq(expiration2.to_s)
+      end
+
+      it 'generates deprecation warnings for credential accessors' do
+        c = InstanceProfileCredentials.new(backoff:0)
+        expect(c).to receive(:warn).exactly(3).times
+
+        c.access_key_id
+        c.secret_access_key
+        c.session_token
+
+        # warnings are not duplicated
+        c.access_key_id
+        c.secret_access_key
+        c.session_token
       end
 
       describe 'auto refreshing' do
@@ -95,9 +109,9 @@ module Aws
 
         it 'auto-refreshes within 5 minutes from expiration' do
           c = InstanceProfileCredentials.new
-          expect(c.access_key_id).to eq('akid-2')
-          expect(c.secret_access_key).to eq('secret-2')
-          expect(c.session_token).to eq('session-token-2')
+          expect(c.credentials.access_key_id).to eq('akid-2')
+          expect(c.credentials.secret_access_key).to eq('secret-2')
+          expect(c.credentials.session_token).to eq('session-token-2')
           expect(c.expiration.to_s).to eq(expiration2.to_s)
         end
 
@@ -114,9 +128,9 @@ module Aws
             to_return(:status => 200, :body => resp)
           c = InstanceProfileCredentials.new
           expect(c.set?).to be(false)
-          expect(c.access_key_id).to be(nil)
-          expect(c.secret_access_key).to be(nil)
-          expect(c.session_token).to be(nil)
+          expect(c.credentials.access_key_id).to be(nil)
+          expect(c.credentials.secret_access_key).to be(nil)
+          expect(c.credentials.session_token).to be(nil)
           expect(c.expiration).to be(nil)
         end
 

@@ -27,9 +27,9 @@ module Aws
         ).sign(context.http_request)
       end
 
-      # @param [Credentials] credentials
+      # @param [CredentialProvider] credentials
       def initialize(credentials, params, force_path_style)
-        @credentials = credentials
+        @credentials = credentials.credentials
         @params = Query::ParamList.new
         params.each_pair do |param_name, param_value|
           @params.set(param_name, param_value)

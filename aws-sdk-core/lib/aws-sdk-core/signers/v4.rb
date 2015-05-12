@@ -21,7 +21,7 @@ module Aws
       #   will be made to.
       def initialize(credentials, service_name, region)
         @service_name = service_name
-        @credentials = credentials
+        @credentials = credentials.credentials
         @region = region
       end
 

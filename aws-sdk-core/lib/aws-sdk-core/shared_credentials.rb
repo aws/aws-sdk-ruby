@@ -1,5 +1,7 @@
 module Aws
-  class SharedCredentials < Credentials
+  class SharedCredentials
+
+    include CredentialProvider
 
     # @api private
     KEY_MAP = {
@@ -33,6 +35,9 @@ module Aws
     # @return [String]
     attr_reader :profile_name
 
+    # @return [Credentials]
+    attr_reader :credentials
+
     # @api private
     def inspect
       parts = [
@@ -62,11 +67,11 @@ module Aws
 
     def load_from_path
       profile = load_profile
-      KEY_MAP.each do |source, target|
-        if profile.key?(source)
-          instance_variable_set("@#{target}", profile[source])
-        end
-      end
+      @credentials = Credentials.new(
+        profile['aws_access_key_id'],
+        profile['aws_secret_access_key'],
+        profile['aws_session_token']
+      )
     end
 
     def load_profile

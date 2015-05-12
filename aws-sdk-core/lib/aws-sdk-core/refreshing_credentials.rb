@@ -20,22 +20,10 @@ module Aws
       refresh
     end
 
-    # @return [String,nil]
-    def access_key_id
+    # @return [Credentials]
+    def credentials
       refresh_if_near_expiration
-      @access_key_id
-    end
-
-    # @return [String,nil]
-    def secret_access_key
-      refresh_if_near_expiration
-      @secret_access_key
-    end
-
-    # @return [String,nil]
-    def session_token
-      refresh_if_near_expiration
-      @session_token
+      @credentials
     end
 
     # @return [Time,nil]

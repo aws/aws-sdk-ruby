@@ -6,7 +6,7 @@ module Aws
 
       # @param [Credentials] credentials
       def initialize(credentials)
-        @credentials = credentials
+        @credentials = credentials.credentials
       end
 
       private

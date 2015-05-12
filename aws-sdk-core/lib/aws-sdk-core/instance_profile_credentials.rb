@@ -2,8 +2,9 @@ require 'time'
 require 'net/http'
 
 module Aws
-  class InstanceProfileCredentials < Credentials
+  class InstanceProfileCredentials
 
+    include CredentialProvider
     include RefreshingCredentials
 
     # @api private
@@ -64,15 +65,13 @@ module Aws
     end
 
     def refresh
-      credentials = Json.load(get_credentials)
-      @access_key_id = credentials['AccessKeyId']
-      @secret_access_key = credentials['SecretAccessKey']
-      @session_token = credentials['Token']
-      if expires = credentials['Expiration']
-        @expiration = Time.parse(expires)
-      else
-        @expiration = nil
-      end
+      c = Json.load(get_credentials)
+      @credentials = Credentials.new(
+        c['AccessKeyId'],
+        c['SecretAccessKey'],
+        c['Token']
+      )
+      @expiration = c['Expiration'] ? Time.parse(c['Expiration']) : nil
     end
 
     def get_credentials

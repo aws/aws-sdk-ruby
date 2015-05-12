@@ -13,8 +13,9 @@ module Aws
   #
   # If you omit `:client` option, a new {STS::Client} object will be
   # constructed.
-  class AssumeRoleCredentials < Credentials
+  class AssumeRoleCredentials
 
+    include CredentialProvider
     include RefreshingCredentials
 
     # @option options [required, String] :role_arn
@@ -35,12 +36,13 @@ module Aws
     private
 
     def refresh
-      creds = @client.assume_role(@options).credentials
-      @access_key_id = creds.access_key_id
-      @secret_access_key = creds.secret_access_key
-      @session_token = creds.session_token
-      @expiration = creds.expiration
-      creds
+      c = @client.assume_role(@options).credentials
+      @credentials = Credentials.new(
+        c.access_key_id,
+        c.secret_access_key,
+        c.session_token
+      )
+      @expiration = c.expiration
     end
 
   end
