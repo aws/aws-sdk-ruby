@@ -64,19 +64,5 @@ module Aws
       expect(creds.set?).to eq(false)
     end
 
-    it 'generates deprecation warnings for credential accessors' do
-      c = SharedCredentials.new(path:mock_credential_file)
-      expect(c).to receive(:warn).exactly(3).times
-
-      c.access_key_id
-      c.secret_access_key
-      c.session_token
-
-      # warnings are not duplicated
-      c.access_key_id
-      c.secret_access_key
-      c.session_token
-    end
-
   end
 end

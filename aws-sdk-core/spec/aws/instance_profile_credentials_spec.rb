@@ -88,20 +88,6 @@ module Aws
         expect(c.expiration.to_s).to eq(expiration2.to_s)
       end
 
-      it 'generates deprecation warnings for credential accessors' do
-        c = InstanceProfileCredentials.new(backoff:0)
-        expect(c).to receive(:warn).exactly(3).times
-
-        c.access_key_id
-        c.secret_access_key
-        c.session_token
-
-        # warnings are not duplicated
-        c.access_key_id
-        c.secret_access_key
-        c.session_token
-      end
-
       describe 'auto refreshing' do
 
         # expire in 4 minutes
