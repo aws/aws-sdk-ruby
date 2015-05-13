@@ -9,11 +9,5 @@ Aws.add_service(:DynamoDB, {
 module Aws
   module DynamoDB
     autoload :AttributeValue, 'aws-sdk-core/dynamodb/attribute_value'
-
-    class Client
-      add_plugin(Aws::Plugins::DynamoDBExtendedRetries)
-      add_plugin(Aws::Plugins::DynamoDBSimpleAttributes)
-      add_plugin(Aws::Plugins::DynamoDBCRC32Validation)
-    end
   end
 end
