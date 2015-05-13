@@ -156,8 +156,12 @@ module Aws
 
       def limit_key(resource, definition)
         operation_name = definition['request']['operation']
-        paginators = resource.client_class.paginators
-        paginators.pager(operation_name).limit_key
+        operation = resource.client_class.api.operation(underscore(operation_name))
+        if operation[:pager]
+          operation[:pager].limit_key
+        else
+          nil
+        end
       end
 
       def define_request(definition)

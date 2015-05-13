@@ -14,9 +14,9 @@ module Aws
       'Aws::Plugins::GlobalConfiguration',
       'Aws::Plugins::RegionalEndpoint',
       'Aws::Plugins::RequestSigner',
+      'Aws::Plugins::ResponsePaging',
     ]
 
-    include ClientPaging
     include ClientStubs
     include ClientWaiters
 
@@ -31,7 +31,6 @@ module Aws
         client_class = Class.new(self)
         client_class.identifier = svc_name.downcase.to_sym
         client_class.set_api(Api::Builder.build(options[:api], options))
-        client_class.set_paginators(options[:paginators])
         client_class.set_waiters(options[:waiters])
         DEFAULT_PLUGINS.each do |plugin|
           client_class.add_plugin(plugin)

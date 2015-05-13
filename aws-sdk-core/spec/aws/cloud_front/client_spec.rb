@@ -10,9 +10,7 @@ module Aws
       end
 
       it 'returns the paginator for the operation' do
-        operation = Client.api.operation(:list_distributions)
-        pager = Client.paginators.pager(operation.name)
-        expect(pager).not_to be_kind_of(Paging::NullPager)
+        expect(Client.api.operation(:list_distributions)[:pager]).not_to be(nil)
       end
 
     end

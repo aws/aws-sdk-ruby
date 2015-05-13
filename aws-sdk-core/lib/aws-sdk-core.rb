@@ -76,7 +76,6 @@ module Aws
 
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
   autoload :Client, 'aws-sdk-core/client'
-  autoload :ClientPaging, 'aws-sdk-core/client_paging'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :ClientWaiters, 'aws-sdk-core/client_waiters'
   autoload :CredentialProvider, 'aws-sdk-core/credential_provider'
@@ -89,6 +88,7 @@ module Aws
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
   autoload :Json, 'aws-sdk-core/json'
   autoload :PageableResponse, 'aws-sdk-core/pageable_response'
+  autoload :Pager, 'aws-sdk-core/pager'
   autoload :ParamConverter, 'aws-sdk-core/param_converter'
   autoload :ParamValidator, 'aws-sdk-core/param_validator'
   autoload :RestBodyHandler, 'aws-sdk-core/rest_body_handler'
@@ -113,14 +113,6 @@ module Aws
     autoload :OperationDocumenter, 'aws-sdk-core/api/operation_documenter'
     autoload :OperationExample, 'aws-sdk-core/api/operation_example'
     autoload :ShapeMap, 'aws-sdk-core/api/shape_map'
-  end
-
-  # @api private
-  module Paging
-    autoload :NullPager, 'aws-sdk-core/paging/null_pager'
-    autoload :NullProvider, 'aws-sdk-core/paging/null_provider'
-    autoload :Pager, 'aws-sdk-core/paging/pager'
-    autoload :Provider, 'aws-sdk-core/paging/provider'
   end
 
   module Plugins
@@ -245,7 +237,7 @@ module Aws
     # @param [String] svc_name The name of the service. This will also be
     #   the namespace under {Aws}. This must be a valid constant name.
     # @option options[String,Pathname,Hash,Seahorse::Model::Api,nil] :api
-    # @option options[String,Pathname,Hash,Paging::Provider,nil] :paginators
+    # @option options[String,Pathname,Hash,nil] :paginators
     # @option options[String,Pathname,Hash,Waiters::Provider,nil] :waiters
     # @option options[String,Pathname,Hash,Resources::Definition,nil] :resources
     # @return [Module<Service>] Returns the new service module.
@@ -274,6 +266,18 @@ module Aws
     svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
     svc_module::Client.api.metadata['shapes'].each_structure do |shape|
       svc_module::Client.const_set(shape.name, shape[:struct_class])
+    end
+  end
+
+  # enable response paging
+  service_added do |name, svc_module, options|
+    if paginators = options[:paginators]
+      paginators = Json.load_file(paginators) unless Hash === paginators
+      svc_module::Client.api.operations.each do |_, operation|
+        if rules = paginators['pagination'][operation.name]
+          operation[:pager] = Pager.new(rules)
+        end
+      end
     end
   end
 

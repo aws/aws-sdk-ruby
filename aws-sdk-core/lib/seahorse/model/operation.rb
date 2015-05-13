@@ -7,6 +7,7 @@ module Seahorse
         @http_request_uri = '/'
         @deprecated = false
         @errors = []
+        @metadata = {}
       end
 
       # @return [String, nil]
@@ -32,6 +33,14 @@ module Seahorse
 
       # @return [Array<ShapeRef>]
       attr_accessor :errors
+
+      def [](key)
+        @metadata[key.to_s]
+      end
+
+      def []=(key, value)
+        @metadata[key.to_s] = value
+      end
 
     end
   end

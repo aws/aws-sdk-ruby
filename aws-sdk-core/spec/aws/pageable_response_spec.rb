@@ -3,38 +3,15 @@ require 'spec_helper'
 module Aws
   describe PageableResponse do
 
-    let(:pager) { Paging::Pager.new(rules) }
-
-    let(:resp) {
-      r = Seahorse::Client::Response.new
-      r.context[:original_params] = r.context.params
-      PageableResponse.new(r, pager)
-    }
-
-    # If an operation has no paging metadata, then it is considered
-    # un-pageable and will always treat a response as the last page.
-    describe 'unpageable-operation' do
-
-      let(:pager) { Paging::NullPager.new }
-
-      it 'returns true from #last_page?' do
-        expect(resp.last_page?).to be(true)
-        expect(resp.next_page?).to be(false)
-      end
-
-      it 'raises a LastPageError when calling next_page' do
-        expect { resp.next_page }.to raise_error(PageableResponse::LastPageError)
-      end
-
-      it 'popualtes the error with the response' do
-        begin
-          resp.next_page
-        rescue => error
-          expect(error.response).to be(resp)
-        end
-      end
-
+    def pageable(resp, pager)
+      resp.extend(PageableResponse)
+      resp.pager = pager
+      resp
     end
+
+    let(:pager) { Pager.new(rules) }
+
+    let(:resp) { pageable(Seahorse::Client::Response.new, pager) }
 
     describe 'pagable operations' do
 
@@ -174,7 +151,7 @@ module Aws
         resp.context.client = client
         resp.context.operation_name = 'operation-name'
 
-        resp2 = Seahorse::Client::Response.new
+        resp2 = pageable(Seahorse::Client::Response.new, resp.pager)
         resp2.data = {}
 
         allow(client).to receive(:build_request).
@@ -192,10 +169,12 @@ module Aws
 
     describe '#count' do
 
+      let(:rules) {{}}
+
       it 'raises not implemented error by default' do
         data = double('data')
         resp = double('resp', data:data, error:nil, context:nil)
-        page = PageableResponse.new(resp, Paging::NullPager.new)
+        page = pageable(resp, pager)
         expect {
           page.count
         }.to raise_error(NotImplementedError)
@@ -204,21 +183,21 @@ module Aws
       it 'passes count from the raises not implemented error by default' do
         data = double('data', count: 10)
         resp = double('resp', data:data, error:nil, context:nil)
-        page = PageableResponse.new(resp, Paging::NullPager.new)
+        page = pageable(resp, pager)
         expect(page.count).to eq(10)
       end
 
       it 'returns false from respond_to when count not present' do
         data = double('data')
         resp = double('resp', data:data, error:nil, context:nil)
-        page = PageableResponse.new(resp, Paging::NullPager.new)
+        page = pageable(resp, pager)
         expect(page.respond_to?(:count)).to be(false)
       end
 
       it 'indicates it responds to count when data#count exists' do
         data = double('data', count: 10)
         resp = double('resp', data:data, error:nil, context:nil)
-        page = PageableResponse.new(resp, Paging::NullPager.new)
+        page = pageable(resp, pager)
         expect(page.respond_to?(:count))
       end
 

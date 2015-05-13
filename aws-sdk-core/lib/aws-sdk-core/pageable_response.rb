@@ -30,25 +30,22 @@ module Aws
   #   directly. The {Plugins::ResponsePaging} plugin automatically
   #   decorates all responses with a {PageableResponse}.
   #
-  class PageableResponse < Seahorse::Client::Response
+  module PageableResponse
 
-    include Enumerable
-
-    # @param [Seahorse::Client::Response] response
-    # @param [Paging::Pager] pager
-    def initialize(response, pager)
-      @pager = pager
-      super(context:response.context, data:response.data, error:response.error)
+    def self.included(base)
+      base.send(:include, Enumerable)
     end
 
     # @return [Paging::Pager]
-    attr_reader :pager
+    attr_accessor :pager
 
     # Returns `true` if there are no more results.  Calling {#next_page}
     # when this method returns `false` will raise an error.
     # @return [Boolean]
     def last_page?
-      @last_page = !@pager.truncated?(self)
+      if @last_page.nil?
+        @last_page = !@pager.truncated?(self)
+      end
       @last_page
     end
 
@@ -64,7 +61,7 @@ module Aws
       if last_page?
         raise LastPageError.new(self)
       else
-        PageableResponse.new(next_response(params), pager)
+        next_response(params)
       end
     end
 
@@ -117,7 +114,7 @@ module Aws
     # @return [Hash] Returns the hash of request parameters for the
     #   next page, merging any given params.
     def next_page_params(params)
-      context[:original_params].merge(@pager.next_tokens(self).merge(params))
+      context.params.merge(@pager.next_tokens(self).merge(params))
     end
 
     # Raised when calling {PageableResponse#next_page} on a pager that
