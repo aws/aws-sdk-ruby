@@ -209,7 +209,7 @@ module Aws
       # @option options [String] :server_side_encryption_customer_algorithm See {PresignedPost#server_side_encryption_customer_algorithm}.
       # @option options [String] :server_side_encryption_customer_key See {PresignedPost#server_side_encryption_customer_key}.
       def initialize(credentials, bucket_region, bucket_name, options = {})
-        @credentials = credentials
+        @credentials = credentials.credentials
         @bucket_region = bucket_region
         @bucket_name = bucket_name
         @url = bucket_url
