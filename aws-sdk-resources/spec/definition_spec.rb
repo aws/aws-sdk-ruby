@@ -19,7 +19,13 @@ module Aws
 
         let(:shapes) {{}}
 
-        let(:api) { Aws::Api::Builder.build('shapes' => shapes) }
+        let(:api_model) {{
+          'metadata' => {},
+          'operations' => {},
+          'shapes' => shapes,
+        }}
+
+        let(:api) { Aws::Api::Builder.build(api_model) }
 
         let(:namespace) { Module.new }
 
@@ -265,6 +271,11 @@ module Aws
                   'identifiers' => [{ 'name' => 'Name' }]
                 }
               }
+            }}
+
+            let(:api_model) {{
+              'operations' => { 'ListThings' => {} },
+              'shapes' => shapes
             }}
 
             it 'returns an resource enumerator' do
@@ -731,6 +742,8 @@ module Aws
                   'Type' => { 'shape' => 'StringShape' }
                 }
               }
+
+              api_model['operations']['ListDooDads'] = {}
 
               apply_definition
 
