@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.43 (2015-05-14)
 ------------------
 
 * Feature - Aws::DirectoryService - APIs are now supported for the Simple AD and
