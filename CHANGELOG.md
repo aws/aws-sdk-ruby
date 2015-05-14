@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatchLogs - Added support for the `#filter_log_events` API
+  for searching logs within a group.
+
 2.0.42 (2015-05-07)
 ------------------
 
