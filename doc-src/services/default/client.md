@@ -1,13 +1,12 @@
-An API client for <%= full_name %>.
-
-# Configuration
-
-To construct a client, you need to configure a `:region` and `:credentials`.
+An API client for <%= full_name %>. To construct a client, you need to configure a `:region` and `:credentials`.
 
     <%= svc_name.downcase %> = Aws::<%= svc_name %>::Client.new(
       region: region_name,
-      credentials: credentials
+      credentials: credentials,
+      # ...
     )
+
+See {#initialize} for a full list of supported configuration options.
 
 ## Region
 
@@ -20,12 +19,12 @@ You can configure a default region in the following locations:
 
 ## Credentials
 
-Credentials are loaded automatically from the following locations:
+Default credentials are loaded automatically from the following locations:
 
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
 * `Aws.config[:credentials]`
-* Shared credentials file, `~/.aws/credentials`
-* EC2 Instance profile
+* The shared credentials ini file at `~/.aws/credentials` ([more information](http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs))
+* From an instance profile when running on EC2
 
 You can also construct a credentials object from one of the following
 classes:
