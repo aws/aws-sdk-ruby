@@ -76,6 +76,7 @@ module Aws
       end
 
       def document_client_types(namespace)
+        namespace = YARD::CodeObjects::ModuleObject.new(namespace, 'Types')
         documenter = ClientTypeDocumenter.new(namespace)
         @api.metadata['shapes'].each_structure do |shape|
           documenter.document(shape)
