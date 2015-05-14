@@ -33,6 +33,7 @@ module Aws
     ConfigService
     DataPipeline
     DirectConnect
+    DirectoryService
     DynamoDB
     EC2
     ECS

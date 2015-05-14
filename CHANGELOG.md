@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DirectoryService - APIs are now supported for the Simple AD and
+  AD Connector directories in AWS Directory Service, enabling you to
+  programmatically create and configure these directories via the AWS SDK for
+  Ruby.
+
 * Feature - Aws::EC2 - Added support for Amazon VPC Endpoints for Amazon S3.
 
 * Feature - Aws::EC2 - Added support to migrate an Elastic IP Address from
