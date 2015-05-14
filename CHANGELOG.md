@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added support for Amazon VPC Endpoints for Amazon S3.
+
+* Feature - Aws::EC2 - Added support to migrate an Elastic IP Address from
+  EC2-Classic to EC2-VPC.
+
 * Feature - Aws::Route53Domains - `#check_domain_availability` can now return
   `DONT_KNOW` when a definitive response has not been received from the
   registry, such as during domain registry scheduled maintenance periods.
