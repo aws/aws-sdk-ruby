@@ -4,6 +4,9 @@ Unreleased Changes
 * Feature - Aws::CloudWatchLogs - Added support for the `#filter_log_events` API
   for searching logs within a group.
 
+* Feature - Aws::CloudFormation - Added new parameters to the return type of
+  the `#get_template_summary` API.
+
 2.0.42 (2015-05-07)
 ------------------
 
