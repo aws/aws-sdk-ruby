@@ -15,7 +15,7 @@ module Aws
       # @param [Seahorse::Model::Opeation] operation
       def document(method_name, operation)
         m = YARD::CodeObjects::MethodObject.new(@namespace, method_name)
-        m.group = 'API Calls'
+        m.group = 'API Operations'
         m.scope = :instance
         m.parameters << [@optname, '{}']
         m.docstring = operation.documentation
