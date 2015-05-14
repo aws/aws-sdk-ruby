@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Route53Domains - `#check_domain_availability` can now return
+  `DONT_KNOW` when a definitive response has not been received from the
+  registry, such as during domain registry scheduled maintenance periods.
+  UnsupportedTLD is now a potential error from more Route 53 Domains activities.
+
 * Feature - Aws::CloudWatchLogs - Added support for the `#filter_log_events` API
   for searching logs within a group.
 
