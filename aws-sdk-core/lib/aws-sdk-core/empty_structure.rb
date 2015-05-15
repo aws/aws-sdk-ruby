@@ -11,5 +11,11 @@ module Aws
       q.text(inspect)
     end
 
+    # @api private
+    def to_h
+      {}
+    end
+    alias to_hash to_h
+
   end
 end
