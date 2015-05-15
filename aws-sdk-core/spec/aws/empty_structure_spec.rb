@@ -65,10 +65,6 @@ module Aws
       expect(EmptyStructure.new.eql?(EmptyStructure.new)).to be(true)
     end
 
-    it 'has a sensible inspect string' do
-      expect(EmptyStructure.new.inspect).to eq('#<struct Aws::EmptyStructure>')
-    end
-
     it 'has a zero length' do
       expect(EmptyStructure.new.length).to be(0)
       expect(EmptyStructure.new.size).to be(0)
