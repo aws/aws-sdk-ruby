@@ -206,7 +206,7 @@ end
 When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
-  req = Net::HTTP::Put.new(uri, 'x-amz-acl' => 'public-read')
+  req = Net::HTTP::Put.new(uri)
   req.body = body
   @resp = http.request(req)
   expect(@resp.code).to eq('200')
@@ -240,11 +240,16 @@ end
 When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
-  req = Net::HTTP::Put.new(uri, 'x-amz-acl' => 'public-read', 'content-type' => content_type)
+  req = Net::HTTP::Put.new(uri, 'content-type' => content_type)
   req.body = 'data'
   @resp = http.request(req)
 end
 
 When(/^the response should have a (\d+) status code$/) do |code|
   expect(@resp.code).to eq(code)
+end
+
+Then(/^the object "([^"]*)" should have a "([^"]*)" storage class$/) do |key, sc|
+  resp = @client.list_objects(bucket: @bucket_name, prefix: key, max_keys: 1)
+  expect(resp.contents.first.storage_class).to eq(sc)
 end

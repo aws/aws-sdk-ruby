@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resolved a regression with presigned S3 urls where input parameters
+  that are normally sent as x-amz-* headers had to be serialized onto the
+  GET or PUT request. This restores the behavior where they are hoisted
+  onto the request uri as query string parameters.
+
+  See [related GitHub issue #816](https://github.com/aws/aws-sdk-ruby/pull/816)
+
 2.0.43 (2015-05-14)
 ------------------
 
