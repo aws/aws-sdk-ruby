@@ -8,14 +8,28 @@ module Aws
 
       let(:ref) {{ 'shape' => 'StructureShape', 'locationName' => 'xml' }}
 
+      let(:rules) { Api::ShapeMap.new(shapes).shape_ref(ref) }
+
       def xml(params)
-        shape_map = Api::ShapeMap.new(shapes)
-        rules = shape_map.shape_ref(ref)
         Builder.new(rules).to_xml(params)
       end
 
       it 'serializes empty values as empty elements' do
         expect(xml({})).to eq("<xml/>\n")
+      end
+
+      it 'can serialize structures' do
+        params = Structure.new(*rules.shape.member_names).new
+        params.boolean = true
+        params.integer = 123
+        params.string = 'abc'
+        expect(xml(params)).to eq(<<-XML)
+<xml>
+  <Boolean>true</Boolean>
+  <Integer>123</Integer>
+  <String>abc</String>
+</xml>
+        XML
       end
 
       it 'orders xml elements by members order' do

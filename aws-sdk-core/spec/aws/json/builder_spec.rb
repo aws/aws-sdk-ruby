@@ -6,14 +6,24 @@ module Aws
 
       let(:shapes) { ApiHelper.sample_shapes }
 
+      let(:rules) {
+        Api::ShapeMap.new(shapes).shape_ref('shape' => 'StructureShape')
+      }
+
       def json(params)
-        shape_map = Api::ShapeMap.new(shapes)
-        rules = shape_map.shape_ref('shape' => 'StructureShape')
         Builder.new(rules).to_json(params)
       end
 
       it 'builds an empty JOSN document when there are no params' do
         expect(json({})).to eq('{}')
+      end
+
+      it 'can serialize structures' do
+        params = Structure.new(*rules.shape.member_names).new
+        params.boolean = true
+        params.integer = 123
+        params.string = 'abc'
+        expect(json(params)).to eq('{"Boolean":true,"Integer":123,"String":"abc"}')
       end
 
       it 'supports locationName traits on structure members' do

@@ -6,9 +6,12 @@ module Aws
 
       let(:shapes) { ApiHelper.sample_shapes }
 
-      def query(params = {})
+      let(:rules) {
         shape_map = Api::ShapeMap.new(shapes)
-        rules = shape_map.shape_ref('shape' => 'StructureShape')
+        shape_map.shape_ref('shape' => 'StructureShape')
+      }
+
+      def query(params = {})
         param_list = ParamList.new
         ParamBuilder.new(param_list).apply(rules, params)
         param_list.map { |param| [param.name, param.value ] }.sort
@@ -16,6 +19,18 @@ module Aws
 
       it 'returns an empty list when there are no params' do
         expect(query({})).to eq([])
+      end
+
+      it 'can serialize structures' do
+        params = Structure.new(*rules.shape.member_names).new
+        params.boolean = true
+        params.integer = 123
+        params.string = 'abc'
+        expect(query(params)).to eq([
+          ['Boolean', 'true'],
+          ['Integer', '123'],
+          ['String', 'abc'],
+        ])
       end
 
       it 'does not serialize nil values' do

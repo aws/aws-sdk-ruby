@@ -20,7 +20,7 @@ module Aws
 
       def structure(ref, values, prefix)
         shape = ref.shape
-        values.each do |name, value|
+        values.each_pair do |name, value|
           next if value.nil?
           member_ref = shape.member(name)
           format(member_ref, value, prefix + query_name(member_ref))

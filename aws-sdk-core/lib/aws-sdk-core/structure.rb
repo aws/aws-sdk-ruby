@@ -8,6 +8,17 @@ module Aws
       alias orig_to_h to_h
     end
 
+    # @return [Boolean] Returns `true` if this structure has a value
+    #   set for the given member.
+    def key?(member_name)
+      !self[member_name].nil?
+    end
+
+    # @return [Boolean] Returns `true` if all of the member values are `nil`.
+    def empty?
+      values.compact == []
+    end
+
     # Deeply converts the Structure into a hash.  Structure members that
     # are `nil` are omitted from the resultant hash.
     #

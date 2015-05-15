@@ -18,7 +18,7 @@ module Aws
 
       def structure(ref, values)
         shape = ref.shape
-        values.each.with_object({}) do |(key, value), data|
+        values.each_pair.with_object({}) do |(key, value), data|
           if shape.member?(key) && !value.nil?
             member_ref = shape.member(key)
             member_name = member_ref.location_name || key
