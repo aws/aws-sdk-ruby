@@ -65,12 +65,6 @@ module Aws
       expect(EmptyStructure.new.eql?(EmptyStructure.new)).to be(true)
     end
 
-    it 'supports pretty print' do
-      r = double('receiver')
-      expect(r).to receive(:text).with('#<struct Aws::EmptyStructure>')
-      EmptyStructure.new.pretty_print(r)
-    end
-
     it 'has a sensible inspect string' do
       expect(EmptyStructure.new.inspect).to eq('#<struct Aws::EmptyStructure>')
     end
