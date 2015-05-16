@@ -20,6 +20,16 @@ Feature: S3 Presigned Operations
     Then I make an unauthenticated GET request for key "test"
     And the response should be "hello"
 
+  Scenario: Presigning a put object request with x-amz-*
+    When I create a presigned url for "put_object" with:
+    | key           | test               |
+    | acl           | public-read        |
+    | storage_class | REDUCED_REDUNDANCY |
+    And I send an HTTP put request for the presigned url with body "hello"
+    Then the object "test" should have a "REDUCED_REDUNDANCY" storage class
+    Then I make an unauthenticated GET request for key "test"
+    And the response should be "hello"
+
   Scenario: Presigned PUT with content-type
     When I create a presigned url for "put_object" with:
     | key          | test        |

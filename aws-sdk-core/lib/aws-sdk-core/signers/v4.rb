@@ -55,6 +55,13 @@ module Aws
         request.headers.delete('User-Agent')
 
         params = Aws::Query::ParamList.new
+
+        request.headers.keys.each do |key|
+          if key.match(/^x-amz/i)
+            params.set(key, request.headers.delete(key))
+          end
+        end
+
         params.set("X-Amz-Algorithm", "AWS4-HMAC-SHA256")
         params.set("X-Amz-Credential", credential(now))
         params.set("X-Amz-Date", now)

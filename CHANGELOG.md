@@ -1,6 +1,40 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resolved a regression with presigned S3 urls where input parameters
+  that are normally sent as x-amz-* headers had to be serialized onto the
+  GET or PUT request. This restores the behavior where they are hoisted
+  onto the request uri as query string parameters.
+
+  See [related GitHub issue #816](https://github.com/aws/aws-sdk-ruby/pull/816)
+
+2.0.43 (2015-05-14)
+------------------
+
+* Feature - Aws::DirectoryService - APIs are now supported for the Simple AD and
+  AD Connector directories in AWS Directory Service, enabling you to
+  programmatically create and configure these directories via the AWS SDK for
+  Ruby.
+
+* Feature - Aws::EC2 - Added support for Amazon VPC Endpoints for Amazon S3.
+
+* Feature - Aws::EC2 - Added support to migrate an Elastic IP Address from
+  EC2-Classic to EC2-VPC.
+
+* Feature - Aws::Route53Domains - `#check_domain_availability` can now return
+  `DONT_KNOW` when a definitive response has not been received from the
+  registry, such as during domain registry scheduled maintenance periods.
+  UnsupportedTLD is now a potential error from more Route 53 Domains activities.
+
+* Feature - Aws::CloudWatchLogs - Added support for the `#filter_log_events` API
+  for searching logs within a group.
+
+* Feature - Aws::CloudFormation - Added new parameters to the return type of
+  the `#get_template_summary` API.
+
+2.0.42 (2015-05-07)
+------------------
+
 * Feature - Aws::Glacier - Added support for vault access policies.
 
 * Issue - Aws::IAM - Added the missing pagination configuration for
