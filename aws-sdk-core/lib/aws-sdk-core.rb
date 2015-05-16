@@ -104,16 +104,16 @@ module Aws
   module Api
     autoload :Builder, 'aws-sdk-core/api/builder'
     autoload :Customizations, 'aws-sdk-core/api/customizations'
-    autoload :Documenter, 'aws-sdk-core/api/documenter'
-    autoload :DocstringProvider, 'aws-sdk-core/api/docstring_provider'
-    autoload :DocUtils, 'aws-sdk-core/api/doc_utils'
-    autoload :ClientTypeDocumenter, 'aws-sdk-core/api/client_type_documenter'
-    autoload :Manifest, 'aws-sdk-core/api/manifest'
-    autoload :ManifestBuilder, 'aws-sdk-core/api/manifest_builder'
-    autoload :NullDocstringProvider, 'aws-sdk-core/api/docstring_provider'
-    autoload :OperationDocumenter, 'aws-sdk-core/api/operation_documenter'
-    autoload :OperationExample, 'aws-sdk-core/api/operation_example'
     autoload :ShapeMap, 'aws-sdk-core/api/shape_map'
+    module Docs
+      autoload :Builder, 'aws-sdk-core/api/docs/builder'
+      autoload :ClientTypeDocumenter, 'aws-sdk-core/api/docs/client_type_documenter'
+      autoload :DocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
+      autoload :NullDocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
+      autoload :OperationDocumenter, 'aws-sdk-core/api/docs/operation_documenter'
+      autoload :OperationExample, 'aws-sdk-core/api/docs/operation_example'
+      autoload :Utils, 'aws-sdk-core/api/docs/utils'
+    end
   end
 
   module Plugins

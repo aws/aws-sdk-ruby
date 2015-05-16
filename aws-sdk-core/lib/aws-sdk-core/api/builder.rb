@@ -45,9 +45,9 @@ module Aws
 
       def build_docstring_provider(options)
         if options[:docs] && ENV['DOCSTRINGS']
-          DocstringProvider.new(Json.load_file(options[:docs]))
+          Docs::DocstringProvider.new(Json.load_file(options[:docs]))
         else
-          NullDocstringProvider.new
+          Docs::NullDocstringProvider.new
         end
       end
 

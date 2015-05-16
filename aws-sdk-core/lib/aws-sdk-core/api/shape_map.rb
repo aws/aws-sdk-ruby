@@ -24,7 +24,7 @@ module Aws
       # @option options [DocstringProvider] :docs (NullDocstringProvider)
       def initialize(shape_definitions, options = {})
         @shapes = {}
-        @docs = options[:docs] || NullDocstringProvider.new
+        @docs = options[:docs] || Docs::NullDocstringProvider.new
         build_shapes(shape_definitions)
       end
 
