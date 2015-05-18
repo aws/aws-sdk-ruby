@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added support for the new Spot Fleet API operations.
+
 * Issue - Resolved a regression with presigned S3 urls where input parameters
   that are normally sent as x-amz-* headers had to be serialized onto the
   GET or PUT request. This restores the behavior where they are hoisted
