@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.44 (2015-05-18)
 ------------------
 
 * Issue - Aws::EC2 - Two waiters were added in v2.0.39 and then lost in v2.0.40
