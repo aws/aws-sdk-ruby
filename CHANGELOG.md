@@ -4,9 +4,6 @@ Unreleased Changes
 2.0.44 (2015-05-18)
 ------------------
 
-* Feature - Aws::EC2 - Added support for the new spot fleet API operations to
-  `Aws::EC2::Client`.
-
 * Issue - Aws::EC2 - Two waiters were added in v2.0.39 and then lost in v2.0.40
   in this commit: https://github.com/aws/aws-sdk-ruby/commit/f0fad0a038a4f81b0a697f7c367fd2735d9dd698.
   The waiters did not get merged upstream and got squashed in the automated release.
