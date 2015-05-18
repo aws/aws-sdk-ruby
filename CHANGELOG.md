@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::OpsWorks - Added support for custom auto-scaling based on
+  CloudWatch alarms.
+
 * Feature - Aws::EC2 - Added support for the new Spot Fleet API operations.
 
 * Issue - Resolved a regression with presigned S3 urls where input parameters
