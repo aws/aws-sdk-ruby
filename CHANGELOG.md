@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticBeanstalk - Added resource names to
+  Aws::ElasticBeanstalk::Client configuration option settings.
+
 * Feature - Aws::OpsWorks - Added support for custom auto-scaling based on
   CloudWatch alarms.
 

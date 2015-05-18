@@ -813,6 +813,13 @@
         "Trigger$Name": "<p>The name of the trigger.</p>"
       }
     },
+    "ResourceName": {
+      "base": null,
+      "refs": {
+        "ConfigurationOptionSetting$ResourceName": null,
+        "OptionSpecification$ResourceName": null
+      }
+    },
     "RestartAppServerMessage": {
       "base": "<p></p>",
       "refs": {
