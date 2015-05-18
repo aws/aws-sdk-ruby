@@ -22,6 +22,7 @@ module Aws
 
         def document
           document_service
+          document_types
           document_client
           document_errors
         end
@@ -74,13 +75,12 @@ module Aws
           yard_class = YARD::CodeObjects::ClassObject.new(@namespace, 'Client')
           yard_class.superclass = YARD::Registry['Seahorse::Client::Base']
           yard_class.docstring = client_docstring
-          document_client_types
           document_client_constructor(yard_class)
           document_client_operations(yard_class)
           document_client_waiters(yard_class)
         end
 
-        def document_client_types
+        def document_types
           namespace = YARD::CodeObjects::ModuleObject.new(@namespace, 'Types')
           documenter = ClientTypeDocumenter.new(namespace)
           @api.metadata['shapes'].each_structure do |shape|

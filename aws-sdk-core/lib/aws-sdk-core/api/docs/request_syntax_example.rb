@@ -1,13 +1,18 @@
 module Aws
   module Api
     module Docs
-      class OperationExample
+      class RequestSyntaxExample
 
+        include Utils
         include Seahorse::Model::Shapes
 
-        def initialize(options)
-          @method_name = options[:method_name]
-          @operation = options[:operation]
+        def self.tag(*args)
+          new(*args).build_tag
+        end
+
+        def initialize(method_name, operation)
+          @method_name = method_name
+          @operation = operation
           @streaming_output = !!(
             @operation.output &&
             @operation.output[:payload] &&
@@ -15,11 +20,18 @@ module Aws
           )
         end
 
+        def build_tag
+          parts = []
+          parts << "@example Request syntax with placeholder values\n\n"
+          parts += to_str.lines.map { |line| "  " + line }
+          tag(parts.join)
+        end
+
+        private
+
         def to_str
           "resp = client.#{@method_name}(#{params[1...-1]})"
         end
-        alias to_s to_str
-        alias inspect to_str
 
         private
 
@@ -31,7 +43,7 @@ module Aws
         def structure(ref, i, visited)
           lines = ['{']
           if @streaming_output
-            lines << "#{i}  response_target: '/path/to/file', # optional target file path"
+            lines << "#{i}  response_target: '/path/to/file', # optional IO object or file path"
           end
           shape = ref.shape
           shape.members.each do |member_name, member_ref|

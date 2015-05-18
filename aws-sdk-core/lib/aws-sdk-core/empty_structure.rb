@@ -1,4 +1,3 @@
 module Aws
-  class EmptyStructure < Structure.new('AwsEmptyStructure')
-  end
+  EmptyStructure = Class.new(Structure.new('AwsEmptyStructure'))
 end

@@ -111,7 +111,8 @@ module Aws
       autoload :DocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
       autoload :NullDocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
       autoload :OperationDocumenter, 'aws-sdk-core/api/docs/operation_documenter'
-      autoload :OperationExample, 'aws-sdk-core/api/docs/operation_example'
+      autoload :RequestSyntaxExample, 'aws-sdk-core/api/docs/request_syntax_example'
+      autoload :ResponseStructureExample, 'aws-sdk-core/api/docs/response_structure_example'
       autoload :Utils, 'aws-sdk-core/api/docs/utils'
     end
   end

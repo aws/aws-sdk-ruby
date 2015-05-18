@@ -60,23 +60,14 @@ module Aws
         end
 
         def example_tags(method_name, operation)
-          [formatting_example(method_name, operation)]
+          [
+            RequestSyntaxExample.tag(method_name, operation),
+            ResponseStructureExample.tag(method_name, operation),
+          ]
         end
 
         def see_also_tags(method_name, operation)
           []
-        end
-
-        def formatting_example(method_name, operation)
-          example = OperationExample.new(
-            method_name: method_name,
-            operation: operation,
-          )
-          parts = []
-          parts << "@example Formatting example with placeholder values, "
-          parts << "demonstrates params structure.\n\n"
-          parts += example.to_s.lines.map { |line| "  " + line }
-          tag(parts.join)
         end
 
       end
