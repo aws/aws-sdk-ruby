@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Two waiters were added in v2.0.39 and then lost in v2.0.40
+  in this commit: https://github.com/aws/aws-sdk-ruby/commit/f0fad0a038a4f81b0a697f7c367fd2735d9dd698.
+  The waiters did not get merged upstream and got squashed in the automated release.
+  Reverting this loss. Actual changes have also been merged upstream now.
+
+  See [related GitHub issue #818](https://github.com/aws/aws-sdk-ruby/pull/818)
+
 * Feature - Aws::ElasticBeanstalk - Added resource names to
   Aws::ElasticBeanstalk::Client configuration option settings.
 
