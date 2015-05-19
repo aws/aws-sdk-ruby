@@ -346,7 +346,7 @@ module Aws
       #   `#receipt_handle`.
       # @param [Integer] seconds
       def change_message_visibility_timeout(message, seconds)
-        @client.change_message_visibility_timeout({
+        @client.change_message_visibility({
           queue_url: @queue_url,
           receipt_handle: message.receipt_handle,
           visibility_timeout: seconds,

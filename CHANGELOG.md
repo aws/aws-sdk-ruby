@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws:SQS - Resolved an issue with the SQS queue poller and changing message
+  visibility timeouts.
+
+  See [related GitHub issue #821](https://github.com/aws/aws-sdk-ruby/pull/821)
+
 2.0.44 (2015-05-18)
 ------------------
 
