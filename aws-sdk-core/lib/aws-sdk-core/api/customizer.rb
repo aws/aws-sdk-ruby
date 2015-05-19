@@ -47,7 +47,7 @@ module Aws
         if member_regex.is_a?(String)
           member_regex = /^#{member_regex}$/
         end
-        @client_class.api.definition['shapes'].each do |shape_name, shape|
+        @client_class.api.definition['shapes'].each_value do |shape|
           if shape['members']
             shape['members'].each do |member_name, member_ref|
               if member_name.match(member_regex)

@@ -34,7 +34,7 @@ module Seahorse
           if @types.key?(type)
             @types[type]
           else
-            raise ArgumentError, "unregisterd type `#{type}'"
+            raise ArgumentError, "unregistered type `#{type}'"
           end
         end
 
