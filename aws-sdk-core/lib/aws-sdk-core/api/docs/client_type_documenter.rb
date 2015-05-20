@@ -20,12 +20,26 @@ module Aws
           end
         end
 
+        private
+
         def document_struct_member(yard_class, member_name, ref)
           m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
           m.scope = :instance
           m.docstring = ref.documentation
-          m.add_tag(tag("@return [#{output_type(ref)}] #{ref.documentation}"))
+          returns = "@return [#{output_type(ref)}] #{summary(ref.documentation)}"
+          m.add_tag(tag(returns))
           yard_class.instance_attributes[member_name] = { :read => m, :write => m }
+          document_possible_values(m, ref)
+        end
+
+        def document_possible_values(m, ref)
+          if
+            Seahorse::Model::Shapes::StringShape === ref.shape &&
+            ref.shape.enum
+          then
+            values = ref.shape.enum.map { |v| "\n  * `#{v}`" }.join
+            m.docstring += "\nPossible values:\n#{values}"
+          end
         end
 
       end

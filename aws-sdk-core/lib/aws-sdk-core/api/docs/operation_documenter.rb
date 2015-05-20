@@ -53,17 +53,42 @@ module Aws
         end
 
         def return_tags(method_name, operation)
-          ref = operation.output ? output_type(operation.output) : 'EmptyStructure'
-          resp_type = '{Seahorse::Client::Response response}'
-          desc = "Returns a #{resp_type} object where the data is a {#{ref}}."
-          [tag("@return [#{ref}] #{desc}")]
+          resp = '{Seahorse::Client::Response response}'
+          if operation.output && operation.output.shape.members.count > 0
+            rtype = output_type(operation.output)
+            returns = "[#{rtype}] Returns a #{resp} object which responds to "
+            returns << "the following methods:\n\n"
+            operation.output.shape.members.each do |mname, mref|
+              returns << "  * {#{rtype}##{mname} ##{mname}} => #{output_type(mref, true)}\n"
+            end
+          else
+            returns = "[Struct] Returns an empty #{resp}."
+          end
+          [tag("@return #{returns}")]
         end
 
         def example_tags(method_name, operation)
           [
-            RequestSyntaxExample.tag(method_name, operation),
-            ResponseStructureExample.tag(method_name, operation),
-          ]
+            request_syntax_example(method_name, operation),
+            response_structure_example(method_name, operation),
+          ].compact
+        end
+
+        def request_syntax_example(method_name, operation)
+          example = RequestSyntaxExample.new(method_name, operation).to_str
+          parts = []
+          parts << "@example Request syntax with placeholder values\n\n"
+          parts += example.lines.map { |line| "  " + line }
+          tag(parts.join)
+        end
+
+        def response_structure_example(method_name, operation)
+          if example = ResponseStructureExample.new(method_name, operation).to_str
+            parts = []
+            parts << "@example Response structure\n\n"
+            parts += example.lines.map { |line| "  " + line }
+            tag(parts.join)
+          end
         end
 
         def see_also_tags(method_name, operation)
