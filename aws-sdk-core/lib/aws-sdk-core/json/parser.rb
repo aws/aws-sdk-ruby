@@ -34,7 +34,8 @@ module Aws
       # @param [Array] values
       # @param [Array, nil] target
       # @return [Array]
-      def list(list, values, target = [])
+      def list(list, values, target = nil)
+        target = [] if target.nil?
         values.each { |value| target << parse_shape(list.member, value) }
         target
       end
@@ -42,7 +43,8 @@ module Aws
       # @param [Seahorse::Model::Shapes::Map] map
       # @param [Hash] values
       # @return [Hash]
-      def map(map, values, target = {})
+      def map(map, values, target = nil)
+        target = {} if target.nil?
         values.each do |key, value|
           target[key] = parse_shape(map.value, value)
         end
