@@ -77,29 +77,6 @@ module Aws
           []
         end
 
-        def document_struct_member(yard_class, member_name, ref)
-          m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
-          m.scope = :instance
-          m.docstring = docstring(ref.documentation, ref)
-          returns = "@return [#{output_type(ref)}] #{summary(ref.documentation)}"
-          m.add_tag(tag(returns))
-          yard_class.instance_attributes[member_name] = { :read => m, :write => m }
-        end
-
-        def docstring(docs, ref)
-          if
-            Seahorse::Model::Shapes::StringShape === ref.shape &&
-            ref.shape.enum
-          then
-            docs = "#{docs}<p>Possible values:</p><ul>"
-            docs += ref.shape.enum.map { |v| "<li><tt>#{v}</tt></li>" }.join
-            docs += "</ul>"
-            docs
-          else
-            docs
-          end
-        end
-
       end
     end
   end

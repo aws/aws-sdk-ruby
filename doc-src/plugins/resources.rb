@@ -38,6 +38,7 @@ end
 
 class ResourceDocPlugin
 
+  include Aws::Api::Docs::Utils
   include Seahorse::Model::Shapes
 
   def apply
@@ -185,27 +186,8 @@ Loads the current #{name} by calling {Client##{method}}.
       shape = resource_class.client_class.api.metadata['shapes'].shape_ref('shape' => shape_name).shape
 
       resource_class.data_attributes.each do |member_name|
-
         member_ref = shape.member(member_name)
-        return_type = case member_ref.shape
-          when BlobShape then 'String<bytes>'
-          when BooleanShape then 'Boolean'
-          when FloatShape then 'Float'
-          when IntegerShape then 'Integer'
-          when ListShape then 'Array'
-          when MapShape then 'Hash'
-          when StringShape then 'String'
-          when StructureShape then 'Structure'
-          when TimestampShape then 'Time'
-          else raise 'unhandled type'
-        end
-
-        docstring = member_ref.documentation || member_ref.shape.documentation
-
-        m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
-        m.scope = :instance
-        m.docstring = "#{docstring}\n@return [#{return_type}] #{docstring}"
-        yard_class.instance_attributes[member_name] = { :read => m }
+        document_struct_member(yard_class, member_name, member_ref, false)
       end
     end
   end

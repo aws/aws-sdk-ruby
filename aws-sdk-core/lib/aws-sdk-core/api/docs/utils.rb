@@ -100,6 +100,33 @@ module Aws
           end
         end
 
+        # Documents a structure member as a attribute method
+        def document_struct_member(yard_class, member_name, ref, read_write = true)
+          m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
+          m.scope = :instance
+          m.docstring = struct_member_docstring(ref.documentation, ref)
+          returns = "@return [#{output_type(ref)}] #{summary(ref.documentation)}"
+          m.add_tag(tag(returns))
+          yard_class.instance_attributes[member_name] = read_write ?
+            { :read => m, :write => m } :
+            { :read => m }
+        end
+
+        def struct_member_docstring(docs, ref)
+          if
+            Seahorse::Model::Shapes::StringShape === ref.shape &&
+            ref.shape.enum
+          then
+            docs = "#{docs}<p>Possible values:</p><ul>"
+            docs += ref.shape.enum.map { |v| "<li><tt>#{v}</tt></li>" }.join
+            docs += "</ul>"
+            docs
+          else
+            docs
+          end
+        end
+
+
       end
     end
   end
