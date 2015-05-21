@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::KMS - Adds the `#update_alias` API, which allows you to update
+  the association of a key alias from one key to another within a region.
+
 * Issue - Aws:SQS - Resolved an issue with the SQS queue poller and changing message
   visibility timeouts.
 
