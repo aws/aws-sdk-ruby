@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kinesis - The Amazon Kinesis API `#get_records` now includes a
+  new parameter `:millis_behind_latest`: the number of milliseconds the
+  GetRecords response is from the end of the stream, indicating how far behind
+  real time a consumer is.
+
 * Feature - Aws::KMS - Adds the `#update_alias` API, which allows you to update
   the association of a key alias from one key to another within a region.
 
