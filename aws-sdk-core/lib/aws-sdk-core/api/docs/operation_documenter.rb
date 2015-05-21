@@ -41,14 +41,10 @@ module Aws
         end
 
         def option_tags(method_name, operation)
-          if operation.input
-            operation.input.shape.members.map do |name, ref|
-              req = ref.required ? 'required,' : ''
-              type = input_type(ref)
-              tag("@option #{@optname} [#{req}#{type}] :#{name} #{ref.documentation}")
-            end
-          else
-            []
+          operation_input_ref(operation).shape.members.map do |name, ref|
+            req = ref.required ? 'required,' : ''
+            type = input_type(ref)
+            tag("@option #{@optname} [#{req}#{type}] :#{name} #{ref.documentation}")
           end
         end
 

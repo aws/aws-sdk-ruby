@@ -17,7 +17,7 @@ collection. {#{called_operation}} will be called multiple times until every
         end
 
         def example_tags
-          tags = []
+          tags = super
           tags << enumerate_example_tag
           tags << enumerate_with_limit_example_tag
           tags << batch_examples_tag if target_resource_batches?

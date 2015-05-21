@@ -66,11 +66,10 @@ module Aws
         end
 
         def input_example_tag(api, shape)
-          example = RequestSyntaxExample.new('', Operation.new)
-          example = example.params(ShapeRef.new(shape: shape))
+          params = ParamFormatter.new(ShapeRef.new(shape: shape))
           note = "@note When passing #{shape.name} as input to an #{Client} "
           note << "method, you can use a\n  vanilla Hash:\n\n      "
-          note << example.lines.join("      ")
+          note << params.format.lines.join("      ")
           tag(note)
         end
 

@@ -130,7 +130,20 @@ module Aws
         # to the method code object.
         # @return [Array<YARD::Tag>]
         def example_tags
-          []
+          if api_request && api_request.input
+            [request_syntax_example_tag]
+          else
+            []
+          end
+        end
+
+        def request_syntax_example_tag
+          input = operation_input_ref(api_request)
+          params = Api::Docs::ParamFormatter.new(input).format
+          example = "#{variable_name}.#{operation_name}(#{params})"
+          example = "@example Request syntax example with placeholder values" +
+            "\n\n    " + example.lines.join('    ')
+          tag(example)
         end
 
         def option_tags

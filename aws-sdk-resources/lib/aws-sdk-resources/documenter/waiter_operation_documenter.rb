@@ -60,7 +60,7 @@ You can modify defaults and register callbacks by passing a block argument.
         end
 
         def example_tags
-          tag = <<-EXAMPLE.strip
+          example = <<-EXAMPLE.strip
 @example Basic usage
   #{variable_name}.#{operation_name}
 
@@ -72,7 +72,7 @@ You can modify defaults and register callbacks by passing a block argument.
      w.before_wait do { |count, prev_resp| ... }
   end
           EXAMPLE
-          YARD::DocstringParser.new.parse(tag).to_docstring.tags
+          super + [tag(example)]
         end
 
       end
