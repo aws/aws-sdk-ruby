@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticTranscoder - Elastic Transcoder now supports additional
+  formats, including MXF, FLAC, and OGA, and additional flexibility for your
+  output audio. You can use these formats to transcode files to the XDCAM format
+  or to a lossless audio format. 
+
 * Feature - Aws::Kinesis - The Amazon Kinesis API `#get_records` now includes a
   new parameter `:millis_behind_latest`: the number of milliseconds the
   GetRecords response is from the end of the stream, indicating how far behind
