@@ -3,6 +3,7 @@ module Aws
     class Documenter
       class BaseOperationDocumenter
 
+        include Api::Docs::Utils
         include Seahorse::Model::Shapes
 
         def initialize(yard_class, resource_class, operation_name, operation)
@@ -18,6 +19,8 @@ module Aws
             @api_request_params = @operation.request.params
             @request_operation_name = @operation.request.method_name.to_s
             @called_operation = "Client##{@api_request_name}"
+            @yard_client_operation = YARD::Registry["#{@resource_class.client_class.name}##{api_request_name}"]
+
           end
           if @operation.respond_to?(:builder)
             @builder = @operation.builder
@@ -133,8 +136,7 @@ module Aws
         def option_tags
           if api_request && api_request.input
             tags = []
-            m = "#{@resource_class.client_class.name}##{api_request_name}"
-            YARD::Registry[m].tags.each do |tag|
+            @yard_client_operation.tags.each do |tag|
               if YARD::Tags::OptionTag === tag
                 name = tag.pair.name[1..-1]
                 next if api_request_params.any? { |p| p.target.match(/^#{name}\b/) }
@@ -174,26 +176,6 @@ module Aws
             end
           end
           YARD::DocstringParser.new.parse(tags.sort.join("\n")).to_docstring.tags
-        end
-
-        def return_tag
-          if return_type == ['void'] && return_message.strip.empty?
-            nil
-          else
-            YARD::Tags::Tag.new(:return, return_message, return_type)
-          end
-        end
-
-        # The response object type for the @return tag. This must be overridden
-        # in sub-classes.
-        def return_type
-          raise NotImplementedError
-        end
-
-        # The message portion of the @return tag for this operation. This must
-        # be overidden in sub-classes.
-        def return_message
-          raise NotImplementedError
         end
 
         # Returns a suitable variable name for the resource class being

@@ -29,7 +29,7 @@ module Aws
           when MapShape
             "Hash<String,#{output_type(ref.shape.value, link)}>"
           when BlobShape
-            ref.location == 'body' ? 'StringIO' : 'String'
+            ref[:streaming] ? 'IO,File'
           when BooleanShape then 'Boolean'
           when FloatShape then 'Float'
           when IntegerShape then 'Integer'

@@ -8,30 +8,18 @@ module Aws
           @plural = @operation.builder.plural?
         end
 
-        # @return [Boolean] Returns `true` if this operation returns an 
+        # @return [Boolean] Returns `true` if this operation returns an
         #   array of resource objects. Returns `false` if this method returns
         #   a single resource object.
         attr_reader :plural
 
         alias plural? plural
 
-        def docstring
-          super + ' ' "#{return_message} Calls {#{called_operation}}."
-        end
-
-        def return_type
+        def return_tag
           if plural?
-            ["Array<#{target_resource_class_name}>"]
+            tag("@return [Array<#{target_resource_class_name}>]")
           else
-            [target_resource_class_name]
-          end
-        end
-
-        def return_message
-          if plural?
-            "Returns an array of {#{target_resource_class_name}} resources."
-          else
-            "Returns a {#{target_resource_class_name}} resource."
+            tag("@return [#{target_resource_class_name}]")
           end
         end
 

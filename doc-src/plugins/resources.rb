@@ -228,7 +228,7 @@ Loads the current #{name} by calling {Client##{method}}.
       name = resource_class.name.split('::').last
       m = YARD::CodeObjects::MethodObject.new(yard_class, :exists?)
       m.scope = :instance
-      m.docstring = "@return [Boolean] Returns true if this #{name} exists. Returns `false` otherwise."
+      m.docstring = "@return [Boolean] Returns `true` if this #{name} exists. Returns `false` otherwise."
     end
   end
 

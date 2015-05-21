@@ -23,8 +23,8 @@ You can modify defaults and register callbacks by passing a block argument.
           DOCSTRING
         end
 
-        def return_type
-          [resource_class_name]
+        def return_tag
+          tag("@return [#{resource_class_name}] #{return_message}")
         end
 
         def return_message
