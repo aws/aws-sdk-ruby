@@ -84,7 +84,7 @@ module Aws
           namespace = YARD::CodeObjects::ModuleObject.new(@namespace, 'Types')
           documenter = ClientTypeDocumenter.new(namespace)
           @api.metadata['shapes'].each_structure do |shape|
-            documenter.document(shape)
+            documenter.document(@api, shape)
           end
         end
 

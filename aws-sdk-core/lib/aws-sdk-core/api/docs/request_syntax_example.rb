@@ -19,15 +19,16 @@ module Aws
         end
 
         def to_str
-          "resp = client.#{@method_name}(#{params})"
+          if @operation.input
+            params_string = params(@operation.input)
+          else
+            params_string = ''
+          end
+          "resp = client.#{@method_name}(#{params_string})"
         end
 
-        def params
-          if @operation.input
-            ref_value(@operation.input, '', [])
-          else
-            ''
-          end
+        def params(shape_ref)
+          ref_value(shape_ref, '', [])
         end
 
         private
