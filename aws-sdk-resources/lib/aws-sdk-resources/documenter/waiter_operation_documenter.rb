@@ -47,10 +47,6 @@ You can modify defaults and register callbacks by passing a block argument.
           @resource_class.client_class.api.operation(api_request_name)
         end
 
-        def api_request_params
-          @operation.params
-        end
-
         def api_request_name
           waiter.poller.operation_name
         end

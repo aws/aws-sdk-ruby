@@ -1,3 +1,5 @@
+require 'set'
+
 module Aws
   module Resources
     class Documenter
@@ -138,7 +140,7 @@ module Aws
         end
 
         def request_syntax_example_tag
-          input = operation_input_ref(api_request)
+          input = operation_input_ref(api_request, without: fixed_param_names)
           params = Api::Docs::ParamFormatter.new(input).format
           example = "#{variable_name}.#{operation_name}(#{params})"
           example = "@example Request syntax example with placeholder values" +
@@ -148,17 +150,28 @@ module Aws
 
         def option_tags
           if api_request && api_request.input
+            skip = fixed_param_names
             tags = []
             @yard_client_operation.tags.each do |tag|
               if YARD::Tags::OptionTag === tag
-                name = tag.pair.name[1..-1]
-                next if api_request_params.any? { |p| p.target.match(/^#{name}\b/) }
+                next if skip.include?(tag.pair.name[1..-1]) # remove `:` prefix
                 tags << tag
               end
             end
             tags
           else
             []
+          end
+        end
+
+        # Returns a set of root input params that are provided by default
+        # by this operation. These params should not be documented in syntax
+        # examples or in option tags.
+        def fixed_param_names
+          if api_request_params
+            Set.new(api_request_params.map { |p| p.target.split(/\b/).first })
+          else
+            Set.new
           end
         end
 

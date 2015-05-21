@@ -37,6 +37,8 @@ module Aws
           when BlobShape
             if ref[:response_target]
               '"/path/to/file"'
+            elsif ref[:streaming]
+              'source_file'
             else
               '"data"'
             end
@@ -111,6 +113,9 @@ module Aws
           comments = []
           if ref[:response_target]
             comments << 'where to write response data, file path, or IO object'
+          end
+          if ref[:streaming]
+            comments << 'file/IO object, or string data'
           end
           if ref.required
             comments << 'required'

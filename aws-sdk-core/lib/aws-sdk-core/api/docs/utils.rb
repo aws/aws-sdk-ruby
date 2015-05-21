@@ -1,4 +1,5 @@
 require 'set'
+
 module Aws
   module Api
     module Docs
@@ -35,10 +36,12 @@ module Aws
           end
 
           # copy existing input members
+          skip = options[:without] || Set.new
           if operation.input
             operation.input.shape.members.each do |member_name, member_ref|
-              # TODO : allow filtering members
-              struct.add_member(member_name, member_ref)
+              unless skip.include?(member_name.to_s)
+                struct.add_member(member_name, member_ref)
+              end
             end
           end
 
