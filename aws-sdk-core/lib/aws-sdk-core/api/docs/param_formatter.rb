@@ -12,7 +12,7 @@ module Aws
         end
 
         def format
-          if @shape_ref
+          if @shape_ref && @shape_ref.shape.member_names.count > 0
             ref_value(@shape_ref, '', [])
           else
             ''

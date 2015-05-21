@@ -88,38 +88,22 @@ resp = client.operation_name({
           EXAMPLE
         end
 
-        it 'documents :response_target' do
-          blob = BlobShape.new
-          blob[:streaming] = true
-          output = StructureShape.new
-          output.add_member(:data, ShapeRef.new(shape: blob))
-          output[:payload] = :data
-          output[:payload_member] = output.member(:data)
-          operation.output = output
-
-          input = StructureShape.new
-          input.add_member(:value, ShapeRef.new(shape: StringShape.new))
-          operation.input = ShapeRef.new(shape: input)
-          expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
-  response_target: '/path/to/file', # optional file path or IO object
-  value: "string",
-})
-          EXAMPLE
-        end
-
         it 'supports recursive structures' do
+          recursive = StructureShape.new
+          recursive.name = 'RecursiveData'
+          recursive.add_member(:recursive, ShapeRef.new(shape: recursive))
+          recursive.add_member(:value, ShapeRef.new(shape: StringShape.new))
           input = StructureShape.new
-          input.name = 'RecursiveData'
-          input.add_member(:nested, ShapeRef.new(shape: input))
-          input.add_member(:value, ShapeRef.new(shape: StringShape.new))
+          input.add_member(:nested, ShapeRef.new(shape: recursive))
           operation.input = ShapeRef.new(shape: input)
           expect(example).to match_example(<<-EXAMPLE)
 resp = client.operation_name({
   nested: {
-    # recursive RecursiveData
+    recursive: {
+      # recursive RecursiveData
+    },
+    value: "string",
   },
-  value: "string",
 })
           EXAMPLE
         end
@@ -303,36 +287,40 @@ resp = client.operation_name({
 
         it 'supports complex structures' do
           shapes = ShapeMap.new(ApiHelper.sample_shapes)
-          operation.input = shapes.shape_ref('shape' => 'StructureShape')
+          input = StructureShape.new
+          input.add_member(:recursive, shapes.shape_ref('shape' => 'StructureShape'))
+          operation.input = ShapeRef.new(shape: input)
           expect(example).to match_example(<<-EXAMPLE)
 resp = client.operation_name({
-  nested: {
-    # recursive StructureShape
-  },
-  nested_list: [
-    {
+  recursive: {
+    nested: {
       # recursive StructureShape
     },
-  ],
-  nested_map: {
-    "StringShape" => {
-      # recursive StructureShape
+    nested_list: [
+      {
+        # recursive StructureShape
+      },
+    ],
+    nested_map: {
+      "StringShape" => {
+        # recursive StructureShape
+      },
     },
+    number_list: [1],
+    string_map: {
+      "StringShape" => "StringShape",
+    },
+    blob: "data",
+    byte: "ByteShape",
+    boolean: true,
+    character: "CharacterShape",
+    double: 1.0,
+    float: 1.0,
+    integer: 1,
+    long: 1,
+    string: "StringShape",
+    timestamp: Time.now,
   },
-  number_list: [1],
-  string_map: {
-    "StringShape" => "StringShape",
-  },
-  blob: "data",
-  byte: "ByteShape",
-  boolean: true,
-  character: "CharacterShape",
-  double: 1.0,
-  float: 1.0,
-  integer: 1,
-  long: 1,
-  string: "StringShape",
-  timestamp: Time.now,
 })
           EXAMPLE
         end
@@ -345,18 +333,22 @@ resp = client.operation_name({
           map = MapShape.new
           map.key = ShapeRef.new(shape:StringShape.new)
           map.value = ShapeRef.new(shape:attr_value)
+          recursive = StructureShape.new
+          recursive.add_member(:list, ShapeRef.new(shape:list))
+          recursive.add_member(:map, ShapeRef.new(shape:map))
+          recursive.add_member(:member, ShapeRef.new(shape:attr_value))
           input = StructureShape.new
-          input.add_member(:list, ShapeRef.new(shape:list))
-          input.add_member(:map, ShapeRef.new(shape:map))
-          input.add_member(:member, ShapeRef.new(shape:attr_value))
+          input.add_member(:recursive, ShapeRef.new(shape:recursive))
           operation.input = ShapeRef.new(shape:input)
           expect(example).to match_example(<<-EXAMPLE)
 resp = client.operation_name({
-  list: ["value"], # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
-  map: {
-    "string" => "value", # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+  recursive: {
+    list: ["value"], # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    map: {
+      "string" => "value", # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    },
+    member: "value", # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
   },
-  member: "value", # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
 })
           EXAMPLE
         end
