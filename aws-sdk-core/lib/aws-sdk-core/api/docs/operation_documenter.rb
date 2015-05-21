@@ -6,8 +6,8 @@ module Aws
         include Seahorse::Model
         include Utils
 
-        # @param [YARD::CodeObject::Base] namespace
-        def initialize(namespace)
+        def initialize(service_name, namespace)
+          @service_name = service_name
           @namespace = namespace
           @optname = 'options'
         end
@@ -64,10 +64,20 @@ module Aws
         end
 
         def example_tags(method_name, operation)
-          [
+          examples_from_disk(method_name, operation) + [
             request_syntax_example(method_name, operation),
             response_structure_example(method_name, operation),
           ].compact
+        end
+
+        def examples_from_disk(method_name, operation)
+          dir = "examples/#{@service_name.downcase}/client/#{method_name}/*.md"
+          Dir.glob(dir).map do |path|
+            title = File.basename(path).split(/\./).first
+            title = title.sub(/^\d+_/, '').gsub(/_/, ' ')
+            title = title[0].upcase + title[1..-1]
+            tag("@example #{title}\n\n    " + File.read(path).lines.join('    '))
+          end
         end
 
         def request_syntax_example(method_name, operation)

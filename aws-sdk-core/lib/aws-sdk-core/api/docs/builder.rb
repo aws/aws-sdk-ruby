@@ -141,34 +141,8 @@ module Aws
         end
 
         def document_client_operation(namespace, method_name, operation)
-          documenter = OperationDocumenter.new(namespace)
+          documenter = OperationDocumenter.new(@svc_name, namespace)
           documenter.document(method_name, operation)
-        end
-
-        def operation_docstring(method_name, operation)
-  #        tabs = Tabulator.new.tap do |t|
-  #          t.tab(method_name, 'Formatting Example') do
-  #            "<pre><code>#{documentor.example}</code></pre>"
-  #          end
-  #          t.tab(method_name, 'Request Parameters') do
-  #            documentor.input
-  #          end
-  #          t.tab(method_name, 'Response Structure') do
-  #            documentor.output
-  #          end
-  #        end
-  #
-  #        errors = (operation.errors || []).map { |ref| ref.shape.name }
-  #        errors = errors.map { |e| "@raise [Errors::#{e}]" }.join("\n")
-  #
-  #        docstring = <<-DOCSTRING.strip
-  #<p>Calls the #{operation.name} operation.<p>
-  ##{documentor.api_ref(operation)}
-  ##{tabs}
-  #@param [Hash] params ({})
-  #@return [PageableResponse]
-  ##{errors}
-  #        DOCSTRING
         end
 
         def document_client_waiters(yard_class)
