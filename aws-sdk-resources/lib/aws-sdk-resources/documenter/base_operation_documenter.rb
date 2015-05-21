@@ -133,19 +133,15 @@ module Aws
         def option_tags
           if api_request && api_request.input
             tags = []
-            required = api_request.input.shape.required
-            members = api_request.input.shape.members
-            members = members.sort_by { |name,_| required.include?(name) ? 0 : 1 }
-            members.each do |member_name, member_ref|
-              if api_request_params.any? { |p| p.target.match(/^#{member_name}\b/) }
-                next
+            m = "#{@resource_class.client_class.name}##{api_request_name}"
+            YARD::Registry[m].tags.each do |tag|
+              if YARD::Tags::OptionTag === tag
+                name = tag.pair.name[1..-1]
+                next if api_request_params.any? { |p| p.target.match(/^#{name}\b/) }
+                tags << tag
               end
-              docstring = docs(member_ref)
-              req = ' **`required`** &mdash; ' if required.include?(member_name)
-              tags << "@option options [#{param_type(member_ref)}] :#{member_name} #{req}#{docstring}"
             end
-            tags = tags.join("\n")
-            YARD::DocstringParser.new.parse(tags).to_docstring.tags
+            tags
           else
             []
           end

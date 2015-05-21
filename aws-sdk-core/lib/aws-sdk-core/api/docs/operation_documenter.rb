@@ -9,7 +9,7 @@ module Aws
         # @param [YARD::CodeObject::Base] namespace
         def initialize(namespace)
           @namespace = namespace
-          @optname = 'params'
+          @optname = 'options'
         end
 
         # @param [Symbol] method_name
