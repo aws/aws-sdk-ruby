@@ -11,7 +11,7 @@ module Seahorse
       #     headers[:Authorization] = 'Abc'
       #
       #     headers.keys
-      #     #=> ['content-length', 'authorization']]
+      #     #=> ['content-length', 'authorization']
       #
       #     headers.values
       #     #=> ['100', 'Abc']

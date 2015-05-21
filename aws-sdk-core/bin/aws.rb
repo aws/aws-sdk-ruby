@@ -9,7 +9,7 @@ require 'logger'
 
 def env_bool key, default
   if ENV.key?(key)
-    !['0', 'false', 'no', 'off'].include?(ENV[key].downcase)
+    ['0', 'false', 'no', 'off'].exclude?(ENV[key].downcase)
   else
     default
   end

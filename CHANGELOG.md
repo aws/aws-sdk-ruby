@@ -1,7 +1,46 @@
 Unreleased Changes
 ------------------
 
-* Issue - Resolved a regression with presigned S3 urls where input parameters
+2.0.45 (2015-05-21)
+------------------
+
+* Feature - Aws::ElasticTranscoder - Elastic Transcoder now supports additional
+  formats, including MXF, FLAC, and OGA, and additional flexibility for your
+  output audio. You can use these formats to transcode files to the XDCAM format
+  or to a lossless audio format. 
+
+* Feature - Aws::Kinesis - The Amazon Kinesis API `#get_records` now includes a
+  new parameter `:millis_behind_latest`: the number of milliseconds the
+  GetRecords response is from the end of the stream, indicating how far behind
+  real time a consumer is.
+
+* Feature - Aws::KMS - Adds the `#update_alias` API, which allows you to update
+  the association of a key alias from one key to another within a region.
+
+* Issue - Aws:SQS - Resolved an issue with the SQS queue poller and changing message
+  visibility timeouts.
+
+  See [related GitHub issue #821](https://github.com/aws/aws-sdk-ruby/pull/821)
+
+2.0.44 (2015-05-18)
+------------------
+
+* Issue - Aws::EC2 - Two waiters were added in v2.0.39 and then lost in v2.0.40
+  in this commit: https://github.com/aws/aws-sdk-ruby/commit/f0fad0a038a4f81b0a697f7c367fd2735d9dd698.
+  The waiters did not get merged upstream and got squashed in the automated release.
+  Reverting this loss. Actual changes have also been merged upstream now.
+
+  See [related GitHub issue #818](https://github.com/aws/aws-sdk-ruby/pull/818)
+
+* Feature - Aws::ElasticBeanstalk - Added resource names to
+  Aws::ElasticBeanstalk::Client configuration option settings.
+
+* Feature - Aws::OpsWorks - Added support for custom auto-scaling based on
+  CloudWatch alarms.
+
+* Feature - Aws::EC2 - Added support for the new Spot Fleet API operations.
+
+* Issue - Aws::S3 - Resolved a regression with presigned S3 urls where input parameters
   that are normally sent as x-amz-* headers had to be serialized onto the
   GET or PUT request. This restores the behavior where they are hoisted
   onto the request uri as query string parameters.

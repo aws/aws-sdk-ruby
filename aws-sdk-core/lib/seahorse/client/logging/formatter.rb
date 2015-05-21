@@ -5,7 +5,7 @@ module Seahorse
     module Logging
 
       # A log formatter receives a {Response} object and return
-      # a log message as a string..  When you construct a {Formatter}, you provide
+      # a log message as a string. When you construct a {Formatter}, you provide
       # a pattern string with substitutions.
       #
       #     pattern = ':operation :http_response_status_code :time'

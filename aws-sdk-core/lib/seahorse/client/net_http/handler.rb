@@ -24,7 +24,7 @@ module Seahorse
         # @api private
         DNS_ERROR_MESSAGE = 'getaddrinfo: nodename nor servname provided, or not known'
 
-        # Raised when a {Handler} can not construct a `Net::HTTP::Request`
+        # Raised when a {Handler} cannot construct a `Net::HTTP::Request`
         # from the given http verb.
         class InvalidHttpVerbError < StandardError; end
 

@@ -11,7 +11,7 @@ module Aws
     # * `:upload_multipart_part`
     #
     # The `:upload_archive` and `:upload_multipart_part` operations
-    # accept a `:checksum` request paramter.  If this param
+    # accept a `:checksum` request parameter.  If this param
     # is present, then the checksum is assumed to be the proper
     # tree hash of the file to be uploaded.  If this param is
     # not present, then the required tree hash checksum will

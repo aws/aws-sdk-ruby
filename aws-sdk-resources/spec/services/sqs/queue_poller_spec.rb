@@ -205,18 +205,20 @@ module Aws
         describe 'visibility timeouts' do
 
           it 'provides a method to update the visibility timeout of a message' do
-            expect(client).to receive(:change_message_visibility_timeout).with({
-              queue_url: queue_url,
-              receipt_handle: 'rh1',
-              visibility_timeout: 60,
-            })
             client.stub_responses(:receive_message, [
               { messages: [{ receipt_handle: 'rh1' }] },
               { messages: [] },
             ])
+            resp = nil
             poller.poll(idle_timeout:0) do |msg|
-              poller.change_message_visibility_timeout(msg, 60)
+              resp = poller.change_message_visibility_timeout(msg, 60)
             end
+            expect(resp.context.operation_name.to_s).to eq('change_message_visibility')
+            expect(resp.context.params).to eq({
+              queue_url: queue_url,
+              receipt_handle: 'rh1',
+              visibility_timeout: 60,
+            })
           end
 
         end
