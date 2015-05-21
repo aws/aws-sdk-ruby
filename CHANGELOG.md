@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.45 (2015-05-21)
 ------------------
 
 * Feature - Aws::ElasticTranscoder - Elastic Transcoder now supports additional
