@@ -10,6 +10,7 @@ module Aws
 
       autoload :LibxmlEngine, 'aws-sdk-core/xml/parser/engines/libxml'
       autoload :NokogiriEngine, 'aws-sdk-core/xml/parser/engines/nokogiri'
+      autoload :OgaEngine, 'aws-sdk-core/xml/parser/engines/oga'
       autoload :OxEngine, 'aws-sdk-core/xml/parser/engines/ox'
       autoload :RexmlEngine, 'aws-sdk-core/xml/parser/engines/rexml'
 
@@ -35,6 +36,7 @@ module Aws
         #   Must be one of the following values:
         #
         #   * :ox
+        #   * :oga
         #   * :libxml
         #   * :nokogiri
         #   * :rexml
@@ -47,6 +49,7 @@ module Aws
         #   One of:
         #
         #   * {OxEngine}
+        #   * {OgaEngine}
         #   * {LibxmlEngine}
         #   * {NokogiriEngine}
         #   * {RexmlEngine}
@@ -71,7 +74,7 @@ module Aws
 
       end
 
-      self.engine = [:ox, :libxml, :nokogiri, :rexml].find do |name|
+      self.engine = [:ox, :oga, :libxml, :nokogiri, :rexml].find do |name|
         try_load_engine(name)
       end
 

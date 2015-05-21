@@ -23,7 +23,7 @@ end
 module Aws
   module Xml
     describe Parser do
-      [:OxEngine, :NokogiriEngine, :LibxmlEngine, :RexmlEngine, :DummyEngine].each do |engine|
+      [:OxEngine, :OgaEngine, :NokogiriEngine, :LibxmlEngine, :RexmlEngine, :DummyEngine].each do |engine|
         describe("ENGINE: #{engine}") do
 
           begin
