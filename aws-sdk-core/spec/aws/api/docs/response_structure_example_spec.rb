@@ -215,23 +215,17 @@ resp.timestamp #=> Time
         end
 
         it 'documents the simplified dynamodb attribute values' do
-          attr_value = StructureShape.new
-          attr_value.name = 'AttributeValue'
-          list = ListShape.new
-          list.member = ShapeRef.new(shape:attr_value)
-          map = MapShape.new
-          map.key = ShapeRef.new(shape:StringShape.new)
-          map.value = ShapeRef.new(shape:attr_value)
-          attr_value.add_member(:list, ShapeRef.new(shape:list))
-          attr_value.add_member(:map, ShapeRef.new(shape:map))
-          attr_value.add_member(:member, ShapeRef.new(shape:attr_value))
-          operation.output = ShapeRef.new(shape:attr_value)
+          operation.output = DynamoDB::Client.api.operation(:get_item).output
           expect(example).to match_example(<<-EXAMPLE)
-resp.list #=> Array
-resp.list[0] #=> Types::AttributeValue
-resp.map #=> Hash
-resp.map["string"] #=> Types::AttributeValue
-resp.member #=> Types::AttributeValue
+resp.item #=> Hash
+resp.item["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+resp.consumed_capacity.table_name #=> String
+resp.consumed_capacity.capacity_units #=> Float
+resp.consumed_capacity.table.capacity_units #=> Float
+resp.consumed_capacity.local_secondary_indexes #=> Hash
+resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
+resp.consumed_capacity.global_secondary_indexes #=> Hash
+resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
           EXAMPLE
         end
 

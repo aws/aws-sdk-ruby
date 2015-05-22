@@ -50,7 +50,9 @@ module Aws
         end
 
         def entry(ref, context, visited)
-          if visited.include?(ref.shape)
+          if ref.shape.name == 'AttributeValue'
+            return ["#{context} #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>"]
+          elsif visited.include?(ref.shape)
             return ["#{context} #=> Types::#{ref.shape.name}"]
           else
             visited  = visited + [ref.shape]
