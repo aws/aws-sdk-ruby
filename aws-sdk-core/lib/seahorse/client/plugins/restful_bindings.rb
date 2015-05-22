@@ -69,7 +69,9 @@ module Seahorse
                 status_code = response.context.http_response.status_code
                 response.data[key] = status_code
               when 'header'
-                response.data[key] = extract_header(headers, shape)
+                if headers.key?(shape.location_name)
+                  response.data[key] = extract_header(headers, shape)
+                end
               when 'headers'
                 response.data[key] = extract_header_map(headers, shape)
               end
