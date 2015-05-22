@@ -124,7 +124,7 @@ module Aws
             comments << "accepts #{enum.to_a.join(', ')}"
           end
           if ddb_av?(ref)
-            comments << 'accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>'
+            comments << 'value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>'
           end
           comments == [] ? '' : " # #{comments.join(', ')}"
         end
