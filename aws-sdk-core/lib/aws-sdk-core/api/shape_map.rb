@@ -38,7 +38,9 @@ module Aws
 
       def each_structure
         @shapes.each do |_, shape|
-          yield(shape) if StructureShape === shape
+          if StructureShape === shape && !shape[:error] && !shape[:exception]
+            yield(shape)
+          end
         end
       end
 

@@ -17,7 +17,7 @@ module Aws
         def document(api, shape)
           yard_class = YARD::CodeObjects::ClassObject.new(@namespace, shape.name)
           yard_class.superclass = 'Struct'
-          yard_class.docstring = shape.documentation
+          yard_class.docstring = docstring(api, shape)
           tags(api, shape).each do |tag|
             yard_class.add_tag(tag)
           end
@@ -28,10 +28,21 @@ module Aws
 
         private
 
+        def docstring(api, shape)
+          docs = shape.documentation || ''
+          methods = returned_by(api, shape)
+          unless methods.empty?
+            docs += "<p>Returned by:</p>"
+            docs += "<ul>"
+            docs += methods.map{|m| "<li>{#{m}}</li>" }.join
+            docs += "</ul>"
+          end
+          docs
+        end
+
         def tags(api, shape)
           tags = []
           tags << input_example_tag(api, shape) if input_shape?(api, shape)
-          tags += see_also_tags(api, shape)
           tags
         end
 
@@ -73,8 +84,23 @@ module Aws
           tag(note)
         end
 
-        def see_also_tags(api, shape)
-          []
+        def returned_by(api, shape)
+          methods = []
+
+          api.metadata['shapes'].each_structure do |struct|
+            struct.members.each do |member_name, member_ref|
+              if member_ref.shape == shape
+                methods << "Types::#{struct.name}##{member_name}"
+              end
+            end
+          end
+
+          api.operations.each do |operation_name, operation|
+            if operation.output && operation.output.shape == shape
+              methods << "Client##{operation_name}"
+            end
+          end
+          methods
         end
 
       end

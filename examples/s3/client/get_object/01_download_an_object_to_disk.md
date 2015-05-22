@@ -5,8 +5,5 @@ resp = s3.get_object(
   key: 'object-key')
 
 # you can still access other response data
-resp.metadata
-#=> { ... }
-
-resp.etag
-#=> "..."
+resp.metadata #=> { ... }
+resp.etag #=> "..."
