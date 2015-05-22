@@ -343,11 +343,11 @@ resp = client.operation_name({
           expect(example).to match_example(<<-EXAMPLE)
 resp = client.operation_name({
   recursive: {
-    list: ["value"], # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     map: {
-      "string" => "value", # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      "string" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     },
-    member: "value", # accepts <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    member: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
   },
 })
           EXAMPLE
