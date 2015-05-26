@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.46 (2015-05-26)
 ------------------
 
 * Feature - Aws::EFS - Amazon Elastic File System (Amazon EFS) is a file storage

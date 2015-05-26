@@ -234,8 +234,8 @@ to be backwards compatible.
 | AWS Identity and Access Management       | IAM                  | 2010-05-08  |
 | AWS Import/Export                        | ImportExport         | 2010-06-01  |
 | AWS Key Management Service               | KMS                  | 2014-11-01  |
-| AWS Lambda                               | LambdaPreview        | 2014-11-11  |
 | AWS Lambda                               | Lambda               | 2015-03-31  |
+| AWS Lambda                               | LambdaPreview        | 2014-11-11  |
 | AWS OpsWorks                             | OpsWorks             | 2013-02-18  |
 | AWS Security Token Service               | STS                  | 2011-06-15  |
 | AWS Storage Gateway                      | StorageGateway       | 2013-06-30  |
@@ -252,6 +252,7 @@ to be backwards compatible.
 | Amazon EC2 Container Service             | ECS                  | 2014-11-13  |
 | Amazon ElastiCache                       | ElastiCache          | 2015-02-02  |
 | Amazon Elastic Compute Cloud             | EC2                  | 2015-04-15  |
+| Amazon Elastic File System               | EFS                  | 2015-02-01  |
 | Amazon Elastic MapReduce                 | EMR                  | 2009-03-31  |
 | Amazon Elastic Transcoder                | ElasticTranscoder    | 2012-09-25  |
 | Amazon Glacier                           | Glacier              | 2012-06-01  |
