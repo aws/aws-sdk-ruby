@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EFS - Amazon Elastic File System (Amazon EFS) is a file storage
+  service for Amazon Elastic Compute Cloud (Amazon EC2) instances. Amazon EFS is
+  easy to use and provides a simple interface that allows you to create and
+  configure file systems quickly and easily. With Amazon EFS, storage capacity
+  is elastic, growing and shrinking automatically as you add and remove files,
+  so your applications have the storage they need, when they need it.
+
 2.0.45 (2015-05-21)
 ------------------
 

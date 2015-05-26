@@ -37,6 +37,7 @@ module Aws
     DynamoDB
     EC2
     ECS
+    EFS
     ElastiCache
     ElasticBeanstalk
     ElasticLoadBalancing
