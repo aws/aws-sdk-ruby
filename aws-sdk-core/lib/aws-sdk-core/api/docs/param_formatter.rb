@@ -100,7 +100,7 @@ module Aws
         end
 
         def apply_comments(ref, text)
-          lines = text.lines
+          lines = text.lines.to_a
           if lines[0].match(/\n$/)
             lines[0] = lines[0].sub(/\n$/, comments(ref) + "\n")
           else
