@@ -1,9 +1,10 @@
 module Aws
   module Stubbing
     module Protocols
-      class RestJson
+      class RestJson < Rest
 
-        def stub_data(api, operation, data)
+        def body_for(_, _, rules, data)
+          Aws::Json::Builder.new(rules).serialize(data)
         end
 
       end

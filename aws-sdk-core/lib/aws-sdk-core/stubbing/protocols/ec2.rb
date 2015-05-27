@@ -3,12 +3,11 @@ module Aws
     module Protocols
       class EC2
 
-        def stub_data(api, operation, data)
+        def stub_response(api, operation, data)
           resp = Seahorse::Client::Http::Response.new
           resp.status_code = 200
           resp.body = build_body(api, operation, data)
           resp.headers['Content-Length'] = resp.body.size
-          resp.headers['Date'] = Time.now.utc.httpdate
           resp.headers['Content-Type'] = 'text/xml;charset=UTF-8'
           resp.headers['Server'] = 'AmazonEC2'
           resp
@@ -23,8 +22,8 @@ module Aws
             xml.shift
             xml.pop
           end
-          xmlns = "http://ec2.amazonaws.com/doc/#{api.version}/"
-          xml.unshift("  <requestId>stubbed-data</requestId>")
+          xmlns = "http://ec2.amazonaws.com/doc/#{api.version}/".inspect
+          xml.unshift("  <requestId>stubbed-request-id</requestId>")
           xml.unshift("<#{operation.name}Response xmlns=#{xmlns}>\n")
           xml.push("</#{operation.name}Response>\n")
           xml.join

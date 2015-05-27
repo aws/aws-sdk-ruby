@@ -203,6 +203,7 @@ module Aws
       autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
       autoload :Json, 'aws-sdk-core/stubbing/protocols/json'
       autoload :Query, 'aws-sdk-core/stubbing/protocols/query'
+      autoload :Rest, 'aws-sdk-core/stubbing/protocols/rest'
       autoload :RestJson, 'aws-sdk-core/stubbing/protocols/rest_json'
       autoload :RestXml, 'aws-sdk-core/stubbing/protocols/rest_xml'
     end
