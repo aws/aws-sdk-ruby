@@ -4,6 +4,12 @@ module Aws
 
       include Seahorse::Model::Shapes
 
+      EMPTY_REF = begin
+        ref = ShapeRef.new(shape: StructureShape.new)
+        ref[:struct_class] = Aws::EmptyStructure
+        ref
+      end
+
       SHAPE_CLASSES = {
         'blob' => BlobShape,
         'byte' => StringShape,
@@ -64,7 +70,7 @@ module Aws
             documentation: documentation,
             metadata: meta)
         else
-          nil
+          EMPTY_REF
         end
       end
 

@@ -13,6 +13,7 @@ module Aws
       def to_json(params)
         Json.dump(format(@rules, params))
       end
+      alias serialize to_json
 
       private
 

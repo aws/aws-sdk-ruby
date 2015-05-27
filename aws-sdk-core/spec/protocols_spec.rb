@@ -38,7 +38,6 @@ def client_for(suite, test_case)
     'shapes' => suite['shapes'],
   })
   client_class = Seahorse::Client::Base.define(api: api)
-  client_class.add_plugin(Seahorse::Client::Plugins::RestfulBindings)
   client_class.add_plugin(
     case protocol
     when 'ec2'       then Aws::Plugins::Protocols::EC2

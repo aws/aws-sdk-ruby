@@ -92,7 +92,6 @@ module Aws
   autoload :Pager, 'aws-sdk-core/pager'
   autoload :ParamConverter, 'aws-sdk-core/param_converter'
   autoload :ParamValidator, 'aws-sdk-core/param_validator'
-  autoload :RestBodyHandler, 'aws-sdk-core/rest_body_handler'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
   autoload :Service, 'aws-sdk-core/service'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
@@ -171,6 +170,23 @@ module Aws
   end
 
   # @api private
+  module Rest
+    autoload :Handler, 'aws-sdk-core/rest/handler'
+    module Request
+      autoload :Body, 'aws-sdk-core/rest/request/body'
+      autoload :Builder, 'aws-sdk-core/rest/request/builder'
+      autoload :Endpoint, 'aws-sdk-core/rest/request/endpoint'
+      autoload :Headers, 'aws-sdk-core/rest/request/headers'
+    end
+    module Response
+      autoload :Body, 'aws-sdk-core/rest/response/body'
+      autoload :Headers, 'aws-sdk-core/rest/response/headers'
+      autoload :Parser, 'aws-sdk-core/rest/response/parser'
+      autoload :StatusCode, 'aws-sdk-core/rest/response/status_code'
+    end
+  end
+
+  # @api private
   module Signers
     autoload :Base, 'aws-sdk-core/signers/base'
     autoload :Handler, 'aws-sdk-core/signers/handler'
@@ -178,6 +194,17 @@ module Aws
     autoload :V2, 'aws-sdk-core/signers/v2'
     autoload :V3, 'aws-sdk-core/signers/v3'
     autoload :V4, 'aws-sdk-core/signers/v4'
+  end
+
+  # @api private
+  module Stubbing
+    module Protocols
+      autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
+      autoload :Json, 'aws-sdk-core/stubbing/protocols/json'
+      autoload :Query, 'aws-sdk-core/stubbing/protocols/query'
+      autoload :RestJson, 'aws-sdk-core/stubbing/protocols/rest_json'
+      autoload :RestXml, 'aws-sdk-core/stubbing/protocols/rest_xml'
+    end
   end
 
   module Waiters
@@ -196,7 +223,6 @@ module Aws
     autoload :DocBuilder, 'aws-sdk-core/xml/doc_builder'
     autoload :ErrorHandler,  'aws-sdk-core/xml/error_handler'
     autoload :Parser, 'aws-sdk-core/xml/parser'
-    autoload :RestHandler, 'aws-sdk-core/xml/rest_handler'
   end
 
   class << self

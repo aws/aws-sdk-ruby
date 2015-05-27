@@ -3,6 +3,7 @@ require 'cgi'
 module Seahorse
   module Client
     module Plugins
+      # @api private
       class RestfulBindings < Plugin
 
         # @api private

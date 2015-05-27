@@ -33,6 +33,7 @@ module Aws
       private
 
       def build_request(context)
+        context.http_request.http_method = 'POST'
         context.http_request.headers['Content-Type'] = CONTENT_TYPE
         param_list = ParamList.new
         param_list.set('Version', context.config.api.version)

@@ -4,11 +4,8 @@ module Aws
 
     autoload :Builder, 'aws-sdk-core/json/builder'
     autoload :ErrorHandler, 'aws-sdk-core/json/error_handler'
+    autoload :Handler, 'aws-sdk-core/json/handler'
     autoload :Parser, 'aws-sdk-core/json/parser'
-    autoload :RestHandler, 'aws-sdk-core/json/rest_handler'
-    autoload :RpcBodyHandler, 'aws-sdk-core/json/rpc_body_handler'
-    autoload :RpcHeadersHandler, 'aws-sdk-core/json/rpc_headers_handler'
-    autoload :SimpleBodyHandler, 'aws-sdk-core/json/simple_body_handler'
 
     class ParseError < StandardError
 

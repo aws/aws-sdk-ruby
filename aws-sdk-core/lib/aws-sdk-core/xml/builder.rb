@@ -6,16 +6,19 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      def initialize(rules)
+      def initialize(rules, options = {})
         @rules = rules
-        @xml = []
-        @builder = DocBuilder.new(target: @xml, indent: '  ')
+        @xml = options[:target] || []
+        indent = options[:indent] || '  '
+        pad = options[:pad] || ''
+        @builder = DocBuilder.new(target:@xml, indent:indent, pad:pad)
       end
 
       def to_xml(params)
         structure(@rules.location_name, @rules, params)
         @xml.join
       end
+      alias serialize to_xml
 
       private
 

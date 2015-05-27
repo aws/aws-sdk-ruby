@@ -21,11 +21,26 @@ module Aws
       end
 
       it 'raises an appropriate error when credentials are missing' do
-        creds = Aws::Credentials.new(nil, nil)
-        client = Aws::S3::Client.new(credentials: creds)
+        creds = Credentials.new(nil, nil)
+        client = Client.new(credentials: creds)
         expect {
           client.list_buckets
         }.to raise_error(Aws::Errors::MissingCredentialsError)
+      end
+
+      describe 'endpoints' do
+
+        it 'preserves custom endpoints' do
+          client = Client.new(
+            stub_responses:true,
+            endpoint: 'http://custom.domain/path/prefix',
+            force_path_style: true,
+          )
+          resp = client.put_object(bucket:'bucket-name', key:'key/path')
+          expect(resp.context.http_request.endpoint.to_s).to eq(
+            "http://custom.domain/path/prefix/bucket-name/key/path")
+        end
+
       end
 
       describe 'empty body error responses' do
