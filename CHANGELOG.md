@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Lambda - Lambda now supports specifying an Amazon S3 object as
+  the function zip when creating and updating Lambda functions.
+
 2.0.46 (2015-05-26)
 ------------------
 
