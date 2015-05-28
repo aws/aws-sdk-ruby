@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.47 (2015-05-28)
 ------------------
 
 * Feature - Aws::Lambda - Lambda now supports specifying an Amazon S3 object as
