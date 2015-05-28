@@ -21,7 +21,7 @@ module Aws
 
         def return_base_message
           if returns_data_members
-            "Calls {#{called_operation}}, returning its reponse."
+            "Calls {#{called_operation}}, returning its response."
           end
         end
 

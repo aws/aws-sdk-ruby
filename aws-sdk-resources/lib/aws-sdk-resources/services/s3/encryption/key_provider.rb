@@ -8,7 +8,7 @@ module Aws
       # * Responds to {#encryption_materials} with an {Materials} object.
       #
       # * Responds to {#key_for}, receiving a JSON document String,
-      #   returning an ecryption key. The returned encryption key
+      #   returning an encryption key. The returned encryption key
       #   must be one of:
       #
       #   * `OpenSSL::PKey::RSA` - for asymmetric encryption

@@ -30,7 +30,7 @@ module Aws
       #
       # ## Basic Usage
       #
-      # Waiter will polls until it is succesful, it fails by
+      # Waiter will polls until it is successful, it fails by
       # entering a terminal state, or until a maximum number of attempts
       # are made.
       #
@@ -87,7 +87,7 @@ module Aws
       #   maximum number of attempts have been made, and the waiter is not
       #   yet successful.
       #
-      # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encounted
+      # @raise [Aws::Waiters::Errors::UnexpectedError] Raised when an error is encountered
       #   while polling for a resource that is not expected.
       #
       # @raise [NotImplementedError] Raised when the resource does not

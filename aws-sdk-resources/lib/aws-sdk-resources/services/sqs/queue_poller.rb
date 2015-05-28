@@ -172,7 +172,7 @@ module Aws
     # * Configure a {#before_request} callback.
     #
     #   ```
-    #   poller.before_reqeust do |stats|
+    #   poller.before_request do |stats|
     #     logger.info("requests: #{stats.request_count}")
     #     logger.info("messages: #{stats.received_message_count}")
     #     logger.info("last-timestamp: #{stats.last_message_received_at}")
@@ -223,7 +223,7 @@ module Aws
       # Registers a callback that is invoked once before every polling
       # attempt.
       #
-      #     poller.before_reqeust do |stats|
+      #     poller.before_request do |stats|
       #       logger.info("requests: #{stats.request_count}")
       #       logger.info("messages: #{stats.received_message_count}")
       #       logger.info("last-timestamp: #{stats.last_message_received_at}")
@@ -239,7 +239,7 @@ module Aws
       # then the poller will exit normally before making the next long
       # poll request.
       #
-      #     poller.before_reqeust do |stats|
+      #     poller.before_request do |stats|
       #       throw :stop_polling if stats.received_messages >= 100
       #     end
       #
