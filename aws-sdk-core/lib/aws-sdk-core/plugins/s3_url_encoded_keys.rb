@@ -71,15 +71,15 @@ module Aws
 
         def decode(member, struct)
           if struct[member]
-            struct[member] = URI.decode(struct[member])
+            struct[member] = CGI.unescape(struct[member])
           end
         end
 
       end
 
       handler(Handler,
-        step: :build,
-        priority: 60, # run this just before/after the XML builder/parser
+        step: :validate,
+        priority: 0,
         operations: [
           :list_objects,
           :list_object_versions,

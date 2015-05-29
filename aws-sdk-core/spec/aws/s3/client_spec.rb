@@ -244,6 +244,7 @@ module Aws
             Seahorse::Client::Response.new(context: context)
           end
           resp = client.list_objects(bucket:'aws-sdk')
+          expect(resp.context.http_request.endpoint.query).to include('encoding-type=url')
           expect(resp.context.params[:encoding_type]).to eq('url')
           expect(resp.data.to_h).to eq({
             prefix: 'a&',
@@ -416,7 +417,7 @@ module Aws
           end
           resp = client.list_objects(bucket:'aws-sdk')
           expect(resp.contents.map(&:key)).to eq([
-            'prefix+suffix',
+            'prefix suffix',
             'prefix+suffix',
             'prefix suffix',
           ])
