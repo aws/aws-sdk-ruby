@@ -24,8 +24,8 @@ module Aws
       attr_reader :multipart_threshold
 
       # @param [String,Pathname,File,Tempfile] source
-      # @option options [requried,String] :bucket
-      # @option options [requried,String] :key
+      # @option options [required,String] :bucket
+      # @option options [required,String] :key
       # @return [void]
       def upload(source, options = {})
         if File.size(source) >= multipart_threshold

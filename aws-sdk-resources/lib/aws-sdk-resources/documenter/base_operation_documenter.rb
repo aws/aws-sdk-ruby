@@ -193,7 +193,7 @@ module Aws
         end
 
         # The message portion of the @return tag for this operation. This must
-        # be overidden in sub-classes.
+        # be overridden in sub-classes.
         def return_message
           raise NotImplementedError
         end

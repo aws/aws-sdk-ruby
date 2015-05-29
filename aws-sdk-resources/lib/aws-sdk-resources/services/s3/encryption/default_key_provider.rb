@@ -13,7 +13,7 @@ module Aws
         # @option options [required, OpenSSL::PKey::RSA, String] :encryption_key
         #   The master key to use for encrypting objects.
         # @option options [String<JSON>] :materials_description ('{}')
-        #   A description of the encyrption key.
+        #   A description of the encryption key.
         def initialize(options = {})
           @encryption_materials = Materials.new(
             key: options[:encryption_key],

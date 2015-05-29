@@ -13,7 +13,7 @@ module Aws
 
         def return_message
           if plural? && structure?
-            "an array of {Structure structures} with the following memers:\n" + data_members
+            "an array of {Structure structures} with the following members:\n" + data_members
           elsif structure?
             "a {Structure} with the following members:\n" + data_members
           else

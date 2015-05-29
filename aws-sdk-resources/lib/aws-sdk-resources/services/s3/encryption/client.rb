@@ -6,7 +6,7 @@ module Aws
     #
     # This client uses a process called "envelope encryption". Your private
     # encryption keys and your data's plain-text are **never** sent to
-    # Amazon S3. **If you loose you encrption keys, you will not be able to
+    # Amazon S3. **If you loose you encryption keys, you will not be able to
     # un-encrypt your data.**
     #
     # ## Envelope Encryption Overview
@@ -175,7 +175,7 @@ module Aws
         # @option options [Symbol] :envelope_location (:metadata) Where to
         #   store the envelope encryption keys. By default, the envelope is
         #   stored with the encrypted object. If you pass `:instruction_file`,
-        #   then the envelope is stored in a seperate object in Amazon S3.
+        #   then the envelope is stored in a separate object in Amazon S3.
         #
         # @option options [String] :instruction_file_suffix ('.instruction')
         #   When `:envelope_location` is `:instruction_file` then the

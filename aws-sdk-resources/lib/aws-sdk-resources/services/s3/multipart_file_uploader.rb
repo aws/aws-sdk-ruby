@@ -23,8 +23,8 @@ module Aws
       attr_reader :client
 
       # @param [String,Pathname,File,Tempfile] source
-      # @option options [requried,String] :bucket
-      # @option options [requried,String] :key
+      # @option options [required,String] :bucket
+      # @option options [required,String] :key
       # @return [void]
       def upload(source, options = {})
         if File.size(source) < MIN_PART_SIZE
@@ -120,7 +120,7 @@ module Aws
           thread.abort_on_exception = true
           threads << thread
         end
-        errors = threads.map(&:value).compact
+        threads.map(&:value).compact
       end
 
       def compute_default_part_size(source_size)
