@@ -3,13 +3,14 @@ module Aws
     module Protocols
       class Query
 
-        def stub_response(api, operation, data)
+        def stub_data(api, operation, data)
           resp = Seahorse::Client::Http::Response.new
           resp.status_code = 200
           resp.body = build_body(api, operation, data)
-          resp.headers['Content-Length'] = resp.body.size
-          resp.headers['Content-Type'] = 'text/xml'
           resp
+        end
+
+        def stub_error(error_code)
         end
 
         private

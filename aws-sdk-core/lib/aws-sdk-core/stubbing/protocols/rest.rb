@@ -5,7 +5,7 @@ module Aws
 
         include Seahorse::Model::Shapes
 
-        def stub_response(api, operation, data)
+        def stub_data(api, operation, data)
           resp = new_http_response
           apply_status_code(operation, resp, data)
           apply_headers(operation, resp, data)

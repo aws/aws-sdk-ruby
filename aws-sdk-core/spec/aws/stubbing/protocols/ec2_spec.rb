@@ -5,7 +5,7 @@ module Aws
   module Stubbing
     module Protocols
       describe EC2 do
-        describe '#stub_response' do
+        describe '#stub_data' do
 
           def normalize(xml)
             result = ''
@@ -18,13 +18,13 @@ module Aws
           let(:operation) { api.operation(:describe_instances) }
 
           it 'returns a stubbed http response' do
-            resp = EC2.new.stub_response(api, operation, {})
+            resp = EC2.new.stub_data(api, operation, {})
             expect(resp).to be_kind_of(Seahorse::Client::Http::Response)
             expect(resp.status_code).to eq(200)
           end
 
           it 'populates the content-type header' do
-            resp = EC2.new.stub_response(api, operation, {})
+            resp = EC2.new.stub_data(api, operation, {})
             expect(resp.headers['content-type']).to eq('text/xml;charset=UTF-8')
             expect(resp.headers['server']).to eq('AmazonEC2')
           end
@@ -59,7 +59,7 @@ module Aws
                 }
               ]
             }
-            resp = EC2.new.stub_response(api, operation, data)
+            resp = EC2.new.stub_data(api, operation, data)
             expect(normalize(resp.body.string)).to eq(normalize(<<-XML))
               <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2015-04-15/">
                   <requestId>stubbed-request-id</requestId>

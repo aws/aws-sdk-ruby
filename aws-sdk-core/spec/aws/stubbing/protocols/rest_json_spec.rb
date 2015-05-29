@@ -5,7 +5,7 @@ module Aws
   module Stubbing
     module Protocols
       describe RestJson do
-        describe '#stub_response' do
+        describe '#stub_data' do
 
           def normalize(json)
             JSON.pretty_generate(JSON.load(json), indent: '  ')
@@ -16,13 +16,13 @@ module Aws
           let(:operation) { api.operation(:list_vaults) }
 
           it 'returns a stubbed http response' do
-            resp = RestJson.new.stub_response(api, operation, {})
+            resp = RestJson.new.stub_data(api, operation, {})
             expect(resp).to be_kind_of(Seahorse::Client::Http::Response)
             expect(resp.status_code).to eq(200)
           end
 
           it 'populates the expected headers' do
-            resp = RestJson.new.stub_response(api, operation, {})
+            resp = RestJson.new.stub_data(api, operation, {})
             expect(resp.headers.to_h).to eq({
               "x-amzn-requestid" => "stubbed-request-id",
             })
@@ -42,7 +42,7 @@ module Aws
                 }
               ]
             }
-            resp = RestJson.new.stub_response(api, operation, data)
+            resp = RestJson.new.stub_data(api, operation, data)
             expect(normalize(resp.body.string)).to eq(normalize(<<-JSON))
               {
                 "VaultList": [
@@ -72,7 +72,7 @@ module Aws
               archive_description: 'description',
             }
             operation = api.operation(:get_job_output)
-            resp = RestJson.new.stub_response(api, operation, params)
+            resp = RestJson.new.stub_data(api, operation, params)
             expect(resp.status_code).to eq(201)
             expect(resp.headers['x-amz-sha256-tree-hash']).to eq('checksum')
             expect(resp.headers['Content-Range']).to eq('range')
@@ -90,7 +90,7 @@ module Aws
               body: data,
             }
             operation = api.operation(:get_job_output)
-            resp = RestJson.new.stub_response(api, operation, params)
+            resp = RestJson.new.stub_data(api, operation, params)
             expect(resp.status_code).to eq(200)
             expect(resp.body).to be(data)
             expect(resp.body.read).to eq('DATA')
@@ -103,7 +103,7 @@ module Aws
               }
             }
             operation = api.operation(:get_vault_access_policy)
-            resp = RestJson.new.stub_response(api, operation, params)
+            resp = RestJson.new.stub_data(api, operation, params)
             expect(resp.status_code).to eq(200)
             expect(normalize(resp.body.string)).to eq(normalize(<<-JSON))
               {

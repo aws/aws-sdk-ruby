@@ -3,7 +3,7 @@ module Aws
     module Protocols
       class EC2
 
-        def stub_response(api, operation, data)
+        def stub_data(api, operation, data)
           resp = Seahorse::Client::Http::Response.new
           resp.status_code = 200
           resp.body = build_body(api, operation, data)
@@ -11,6 +11,20 @@ module Aws
           resp.headers['Content-Type'] = 'text/xml;charset=UTF-8'
           resp.headers['Server'] = 'AmazonEC2'
           resp
+        end
+
+        def stub_error(error_code)
+          http_resp = Seahorse::Client::Http::Response.new
+          http_resp.status_code = 400
+          http_resp.body = <<-XML.strip
+<ErrorResponse>
+  <Error>
+    <Code>#{error_code}</Code>
+    <Message>stubbed-response-error-message</Message>
+  </Error>
+</ErrorResponse>
+          XML
+          http_resp
         end
 
         private

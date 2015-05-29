@@ -31,6 +31,14 @@ Feature: S3 Objects
     When I get an object that doesn't exist with a read block
     Then an error should be raise and the block should not yield
 
+  Scenario: URL decoding Keys
+    Given I put "data1" to the key "a b"
+    And I put "data2" to the key "a+b"
+    Then the keys in my bucket should be
+    | keys |
+    | a b  |
+    | a+b  |
+
   @paging
   Scenario: Paging responses
     Given I put nothing to the key "photos/camping/cascades.jpg"

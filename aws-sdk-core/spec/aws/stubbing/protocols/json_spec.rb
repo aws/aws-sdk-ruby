@@ -5,7 +5,7 @@ module Aws
   module Stubbing
     module Protocols
       describe Json do
-        describe '#stub_response' do
+        describe '#stub_data' do
 
           def normalize(json)
             JSON.pretty_generate(JSON.load(json), indent: '  ')
@@ -16,13 +16,13 @@ module Aws
           let(:operation) { api.operation(:describe_table) }
 
           it 'returns a stubbed http response' do
-            resp = Json.new.stub_response(api, operation, {})
+            resp = Json.new.stub_data(api, operation, {})
             expect(resp).to be_kind_of(Seahorse::Client::Http::Response)
             expect(resp.status_code).to eq(200)
           end
 
           it 'populates the expected headers' do
-            resp = Json.new.stub_response(api, operation, {})
+            resp = Json.new.stub_data(api, operation, {})
             expect(resp.headers.to_h).to eq({
               "content-type" => "application/x-amz-json-",
               "x-amzn-requestid" => "stubbed-request-id",
@@ -57,7 +57,7 @@ module Aws
                 }
               }
             }
-            resp = Json.new.stub_response(api, operation, data)
+            resp = Json.new.stub_data(api, operation, data)
             expect(normalize(resp.body.string)).to eq(normalize(<<-JSON))
               {
                 "Table": {

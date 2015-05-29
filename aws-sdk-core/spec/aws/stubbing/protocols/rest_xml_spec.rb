@@ -5,7 +5,7 @@ module Aws
   module Stubbing
     module Protocols
       describe RestXml do
-        describe '#stub_response' do
+        describe '#stub_data' do
 
           def normalize(xml)
             result = ''
@@ -22,13 +22,13 @@ module Aws
           end
 
           it 'returns a stubbed http response' do
-            resp = RestXml.new.stub_response(api, operation, {})
+            resp = RestXml.new.stub_data(api, operation, {})
             expect(resp).to be_kind_of(Seahorse::Client::Http::Response)
             expect(resp.status_code).to eq(200)
           end
 
           it 'populates the expected headers' do
-            resp = RestXml.new.stub_response(api, operation, {})
+            resp = RestXml.new.stub_data(api, operation, {})
             expect(resp.headers.to_h).to eq({
               "x-amzn-requestid" => "stubbed-request-id",
             })
@@ -48,7 +48,7 @@ module Aws
                 id: 'owner-id',
               }
             }
-            resp = RestXml.new.stub_response(api, operation, data)
+            resp = RestXml.new.stub_data(api, operation, data)
             expect(normalize(resp.body.string)).to eq(normalize(<<-XML))
               <ListBucketsResult xmlns="http://xmlns">
                 <Buckets>
@@ -72,7 +72,7 @@ module Aws
               etag: 'etag-value',
             }
             operation = api.operation(:get_object)
-            resp = RestXml.new.stub_response(api, operation, params)
+            resp = RestXml.new.stub_data(api, operation, params)
             expect(resp.status_code).to eq(200)
             expect(resp.headers['ETag']).to eq('etag-value')
             expect(resp.body).to be(data)
@@ -84,7 +84,7 @@ module Aws
               policy: 'policy-document'
             }
             operation = api.operation(:get_bucket_policy)
-            resp = RestXml.new.stub_response(api, operation, params)
+            resp = RestXml.new.stub_data(api, operation, params)
             expect(resp.status_code).to eq(200)
             expect(normalize(resp.body.string)).to eq(normalize(<<-JSON))
               {

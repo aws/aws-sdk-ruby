@@ -5,7 +5,7 @@ module Aws
   module Stubbing
     module Protocols
       describe Query do
-        describe '#stub_response' do
+        describe '#stub_data' do
 
           def normalize(xml)
             result = ''
@@ -18,13 +18,13 @@ module Aws
           let(:operation) { api.operation(:list_users) }
 
           it 'returns a stubbed http response' do
-            resp = Query.new.stub_response(api, operation, {})
+            resp = Query.new.stub_data(api, operation, {})
             expect(resp).to be_kind_of(Seahorse::Client::Http::Response)
             expect(resp.status_code).to eq(200)
           end
 
           it 'populates the content-type header' do
-            resp = Query.new.stub_response(api, operation, {})
+            resp = Query.new.stub_data(api, operation, {})
             expect(resp.headers['content-type']).to eq('text/xml')
           end
 
@@ -42,7 +42,7 @@ module Aws
                 }
               ]
             }
-            resp = Query.new.stub_response(api, operation, data)
+            resp = Query.new.stub_data(api, operation, data)
             expect(normalize(resp.body.string)).to eq(normalize(<<-XML))
               <ListUsersResponse xmlns="https://iam.amazonaws.com/doc/2010-05-08/">
                 <ListUsersResult>

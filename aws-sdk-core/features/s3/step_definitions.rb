@@ -253,3 +253,8 @@ Then(/^the object "([^"]*)" should have a "([^"]*)" storage class$/) do |key, sc
   resp = @client.list_objects(bucket: @bucket_name, prefix: key, max_keys: 1)
   expect(resp.contents.first.storage_class).to eq(sc)
 end
+
+Then(/^the keys in my bucket should be$/) do |table|
+  keys = @client.list_objects(bucket:@bucket_name).contents.map(&:key)
+  expect(keys.sort).to eq(table.rows.map(&:first).sort)
+end
