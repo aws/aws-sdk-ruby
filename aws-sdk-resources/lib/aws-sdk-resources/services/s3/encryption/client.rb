@@ -6,7 +6,7 @@ module Aws
     #
     # This client uses a process called "envelope encryption". Your private
     # encryption keys and your data's plain-text are **never** sent to
-    # Amazon S3. **If you loose you encrption keys, you will not be able to
+    # Amazon S3. **If you loose you encryption keys, you will not be able to
     # un-encrypt your data.**
     #
     # ## Envelope Encryption Overview

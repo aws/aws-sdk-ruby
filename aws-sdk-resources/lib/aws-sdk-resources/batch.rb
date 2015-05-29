@@ -24,7 +24,7 @@ module Aws
     # You can invoke batch operations against collections and they will
     # invoke them on each batch.
     #
-    #     # delets all all objects in this bucket in batches of 1k
+    #     # delete all objects in this bucket in batches of 1k
     #     objects = s3.bucket('aws-sdk').objects
     #     objects.delete
     #

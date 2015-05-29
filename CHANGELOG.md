@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved an issue with the URL decoding of keys in the
+  response to a call to `Aws::S3::Client#list_objects`.
+
+  See [related GitHub issue #828](https://github.com/aws/aws-sdk-ruby/pull/828)
+
+2.0.47 (2015-05-28)
+------------------
+
+* Feature - Aws::Lambda - Lambda now supports specifying an Amazon S3 object as
+  the function zip when creating and updating Lambda functions.
+
 2.0.46 (2015-05-26)
 ------------------
 
@@ -17,7 +28,7 @@ Unreleased Changes
 * Feature - Aws::ElasticTranscoder - Elastic Transcoder now supports additional
   formats, including MXF, FLAC, and OGA, and additional flexibility for your
   output audio. You can use these formats to transcode files to the XDCAM format
-  or to a lossless audio format. 
+  or to a lossless audio format.
 
 * Feature - Aws::Kinesis - The Amazon Kinesis API `#get_records` now includes a
   new parameter `:millis_behind_latest`: the number of milliseconds the
