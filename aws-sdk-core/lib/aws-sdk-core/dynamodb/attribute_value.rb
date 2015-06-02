@@ -34,7 +34,7 @@ module Aws
             end
           when String then { s: obj }
           when Numeric then { n: obj.to_s }
-          when StringIO, IO then { b: obj.read }
+          when StringIO, IO then { b: obj }
           when Set then format_set(obj)
           when true, false then { bool: obj }
           when nil then { null: true }

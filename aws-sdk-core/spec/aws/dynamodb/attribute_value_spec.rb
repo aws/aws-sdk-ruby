@@ -26,6 +26,12 @@ module Aws
           ])
         end
 
+        it 'converts IO objects to :b (blob)' do
+          io = StringIO.new('bar')
+          formatted = value.marshal(foo: io)
+          expect(formatted[:m]["foo"][:b].read).to eq('bar')
+        end
+
         it 'converts string sets to :ss (string set)' do
           formatted = value.marshal(Set.new(%w(abc mno)))
           expect(formatted).to eq(ss: %w(abc mno))
