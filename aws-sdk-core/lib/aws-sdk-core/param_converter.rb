@@ -199,7 +199,7 @@ module Aws
     add(BlobShape, IO)
     add(BlobShape, Tempfile)
     add(BlobShape, StringIO)
-    add(BlobShape, String) { |str| StringIO.new(str) }
+    add(BlobShape, String)
 
   end
 end
