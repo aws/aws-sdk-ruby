@@ -58,9 +58,7 @@ module Aws
     # ## Stubbing HTTP Responses
     #
     # As an alternative to providing the response data, you can provide
-    # an HTTP response. The SDK will use the response status code, headers,
-    # and body as if it were received over the wire. It will parse it for
-    # errors and data.
+    # an HTTP response.
     #
     #     client.stub_responses(:get_object, {
     #       status_code: 200,
@@ -68,12 +66,12 @@ module Aws
     #       body: "...",
     #     })
     #
-    # To stub a HTTP response, pass a Hash with the following three
+    # To stub a HTTP response, pass a Hash with all three of the following
     # keys set:
     #
-    # * `:status_code` - <Integer>
-    # * `:headers` - Hash<String,String>
-    # * `:body` - <String,IO>
+    # * **`:status_code`** - <Integer> - The HTTP status code
+    # * **`:headers`** - Hash<String,String> - A hash of HTTP header keys and values
+    # * **`:body`** - <String,IO> - The HTTP response body.
     #
     # ## Stubbing Multiple Responses
     #
