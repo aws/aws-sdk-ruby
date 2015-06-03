@@ -51,7 +51,7 @@ module Aws
           case set.first
           when String then { ss: set.map(&:to_s) }
           when Numeric then { ns: set.map(&:to_s) }
-          when StringIO, IO then { bs: set.map(&:read) }
+          when StringIO, IO then { bs: set.to_a }
           else
             msg = "set types only support String, Numeric, or IO objects"
             raise ArgumentError, msg

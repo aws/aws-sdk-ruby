@@ -26,7 +26,7 @@ module Aws
           ])
         end
 
-        it 'converts IO objects to :b (blob)' do
+        it 'converts IO objects to :b (binary)' do
           io = StringIO.new('bar')
           formatted = value.marshal(foo: io)
           expect(formatted[:m]["foo"][:b].read).to eq('bar')
@@ -43,8 +43,9 @@ module Aws
         end
 
         it 'converts binary sets to :bs (binary set)' do
-          formatted = value.marshal(Set.new([StringIO.new('data')]))
-          expect(formatted).to eq(bs: ['data'])
+          io_obj = StringIO.new('data')
+          formatted = value.marshal(Set.new([io_obj]))
+          expect(formatted).to eq(bs: [io_obj])
         end
 
         it 'converts numerics to :n (number)' do
