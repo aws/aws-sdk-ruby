@@ -23,11 +23,6 @@ module Aws
             expect(resp.status_code).to eq(200)
           end
 
-          it 'populates the content-type header' do
-            resp = Query.new.stub_data(api, operation, {})
-            expect(resp.headers['content-type']).to eq('text/xml')
-          end
-
           it 'populates the body with the stub data' do
             now = Time.now
             data = {

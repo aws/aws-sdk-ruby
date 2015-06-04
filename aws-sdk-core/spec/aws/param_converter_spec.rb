@@ -249,8 +249,8 @@ module Aws
           file.delete
         end
 
-        it 'accepts strings and returns StringIO' do
-          expect(ParamConverter.c(shape_class, 'abc').read).to eq('abc')
+        it 'accepts strings' do
+          expect(ParamConverter.c(shape_class, 'abc')).to eq('abc')
         end
 
       end

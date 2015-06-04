@@ -19,6 +19,7 @@ module Aws
       end
 
       option(:credentials) do |config|
+        puts "HERE2"
         if config.stub_responses
           Credentials.new('stubbed-akid', 'stubbed-secret')
         end
@@ -26,6 +27,12 @@ module Aws
 
       def add_handlers(handlers, config)
         handlers.add(Handler, step: :send) if config.stub_responses
+      end
+
+      def after_initialize(client)
+        if client.config.stub_responses
+          client.handlers.remove(RetryErrors::Handler)
+        end
       end
 
       class Handler < Seahorse::Client::Handler
@@ -49,7 +56,11 @@ module Aws
         # @param [Exception] stub
         # @param [Seahorse::Client::Http::Response] http_resp
         def signal_error(error, http_resp)
-          http_resp.signal_error(error)
+          if Exception === error
+            http_resp.signal_error(error)
+          else
+            http_resp.signal_error(error.new)
+          end
         end
 
         # @param [Seahorse::Client::Http::Response] stub
@@ -59,6 +70,7 @@ module Aws
           while chunk = stub.body.read(1024 * 1024)
             http_resp.signal_data(chunk)
           end
+          stub.body.rewind
           http_resp.signal_done
         end
 

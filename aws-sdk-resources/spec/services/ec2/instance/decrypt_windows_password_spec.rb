@@ -19,7 +19,7 @@ module Aws
           })
           expect(client).to receive(:get_password_data).
             with(instance_id:'id').
-            and_return(client.next_stub(:get_password_data))
+            and_return(client.stub_data(:get_password_data))
           instance = Instance.new('id', client: client)
           expect(instance.decrypt_windows_password(keypair)).to eq('password')
         end

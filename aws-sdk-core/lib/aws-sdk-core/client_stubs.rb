@@ -116,24 +116,25 @@ module Aws
       @stub_mutex.synchronize do
         stubs = @stubs[operation_name.to_sym] || []
         case stubs.length
-        when 0 then { data: new_stub(operation_name.to_sym) }
+        when 0 then { data: stub_data(operation_name.to_sym) }
         when 1 then stubs.first
         else stubs.shift
         end
       end
     end
 
-    private
-
-    def new_stub(operation_name, data = nil)
+    # @api private
+    def stub_data(operation_name, data = nil)
       Stub.new(operation(operation_name).output).format(data || {})
     end
+
+    private
 
     def apply_stubs(operation_name, stubs)
       @stub_mutex.synchronize do
         @stubs[operation_name.to_sym] = stubs.map do |stub|
           case stub
-          when Exception then error_stub(stub)
+          when Exception, Class then { error: stub }
           when String then service_error_stub(stub)
           when Hash then http_response_stub(operation_name, stub)
           when Seahorse::Client::Http::Response then { http: stub }
@@ -141,10 +142,6 @@ module Aws
           end
         end
       end
-    end
-
-    def error_stub(error)
-      { error: stub }
     end
 
     def service_error_stub(error_code)

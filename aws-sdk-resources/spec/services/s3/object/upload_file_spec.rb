@@ -77,22 +77,38 @@ module Aws
         describe 'large objects' do
 
           before(:each) do
-            client.stub_responses(:create_multipart_upload, upload_id: 'upload-id')
-            client.stub_responses(:upload_part, [
-              { etag: 'etag-1' },
-              { etag: 'etag-2' },
-              { etag: 'etag-3' },
-              { etag: 'etag-4' },
-            ])
+            client.stub_responses(:create_multipart_upload, {
+              upload_id: 'upload-id',
+            })
           end
 
           it 'uses multipart APIs for objects >= 15MB' do
 
-            create_resp = double('create-resp', upload_id:'upload-id')
+            client.stub_responses(:create_multipart_upload, upload_id:'upload-id')
+            client.stub_responses(:upload_part, etag:'etag-1')
+            client.stub_responses(:upload_part, etag:'etag-2')
+            client.stub_responses(:upload_part, etag:'etag-3')
+            client.stub_responses(:upload_part, etag:'etag-4')
+
+            # record actual requests made
+            requests = []
+            client.handle_request do |context|
+              requests << { name:context.operation_name, params:context.params }
+            end
+
+            object.upload_file(seventeen_meg_file, content_type: 'text/plain')
+
+            expect(requests).to eq([
+              {
+                name: :create_multipart_upload,
+                params: {},
+              },
+            ])
+
 
             expect(client).to receive(:create_multipart_upload).
               with(bucket:'bucket', key:'key', content_type:'text/plain').
-              and_return(client.next_stub(:create_multipart_upload))
+              and_return(create_resp)
 
             (1..3).each do |n|
               expect(client).to receive(:upload_part).with(
@@ -105,7 +121,7 @@ module Aws
                   offset: (n - 1) * 5 * one_meg,
                   size: 5 * one_meg
                 )
-              ).and_return(client.next_stub(:upload_part))
+              ).and_return(client.stub_data(:upload_part, etag: "etag-#{n}"))
             end
             expect(client).to receive(:upload_part).with(
               bucket: 'bucket',
@@ -117,7 +133,7 @@ module Aws
                 offset: 15 * one_meg,
                 size: 2 * one_meg
               )
-            ).and_return(client.next_stub(:upload_part))
+            ).and_return(client.stub_data(:upload_part, etag:'etag-4'))
 
             expect(client).to receive(:complete_multipart_upload).with(
               bucket: 'bucket',
@@ -132,7 +148,6 @@ module Aws
                 ]
               }
             )
-            object.upload_file(seventeen_meg_file, content_type: 'text/plain')
           end
 
           it 'raises an error if the multipart threshold is too small' do
