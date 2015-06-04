@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentity - Adds support for the `#delete_identities`
+  API operation, and hiding disabled identities with the `#list_identities` API
+  operation.
+
 * Feature - Aws::StorageGateway - Updated Aws::StorageGateway API to add support
   for the `#list_volume_initiators` API operation.
 
