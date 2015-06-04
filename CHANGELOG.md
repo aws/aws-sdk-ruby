@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::StorageGateway - Updated Aws::StorageGateway API to add support
+  for the `#list_volume_initiators` API operation.
+
 * Issue - Aws::DynamoDB - Resolve an issue where IO objects were not properly
   marshaled, leading to runtime errors.
 
