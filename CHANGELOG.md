@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatchLogs - Adds support for the `#put_subscription_filter`,
+  `#describe_subscription_filters`, and `#delete_subscription_filter` API
+  operations.
+
 * Feature - Aws::CognitoIdentity - Adds support for the `#delete_identities`
   API operation, and hiding disabled identities with the `#list_identities` API
   operation.
