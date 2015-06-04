@@ -1,4 +1,4 @@
-Unreleased Changes
+2.0.48 (2015-06-04)
 ------------------
 
 * Feature - Aws::CloudWatchLogs - Adds support for the `#put_subscription_filter`,
