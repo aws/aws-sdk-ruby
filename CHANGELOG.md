@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::DynamoDB - Resolve an issue where IO objects were not properly
+  marshaled, leading to runtime errors.
+
+  See [related GitHub issue #831](https://github.com/aws/aws-sdk-ruby/issues/831)
+
 * Issue - Aws::S3 - Resolved an issue with the URL decoding of keys in the
   response to a call to `Aws::S3::Client#list_objects`.
 
