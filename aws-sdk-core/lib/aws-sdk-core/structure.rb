@@ -8,6 +8,12 @@ module Aws
       alias orig_to_h to_h
     end
 
+    def initialize(values = {})
+      values.each do |k, v|
+        self[k] = v
+      end
+    end
+
     # @return [Boolean] Returns `true` if this structure has a value
     #   set for the given member.
     def key?(member_name)

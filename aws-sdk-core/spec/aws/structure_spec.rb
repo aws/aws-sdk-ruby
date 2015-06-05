@@ -11,6 +11,11 @@ module Aws
       expect(Structure.new(:abc, :xyz).members).to eq([:abc, :xyz])
     end
 
+    it 'accepts values to its constructor as a hash, not, positional' do
+      klass = Structure.new(:name)
+      expect(klass.new(name:'value').name).to eq('value')
+    end
+
     describe '#to_hash' do
 
       it 'returns a hash' do
@@ -18,7 +23,7 @@ module Aws
       end
 
       it 'only serializes non-nil members' do
-        s = Structure.new(:abc, :mno).new('abc')
+        s = Structure.new(:abc, :mno).new(abc:'abc')
         expect(s.to_hash).to eq(abc: 'abc')
       end
 
