@@ -250,9 +250,9 @@ module Aws
         stubs
       end
 
-      def stub_map(ref, value)
+      def stub_map(ref, hash)
         stubs = {}
-        value.each do |key, value|
+        hash.each do |key, value|
           stubs[key] = stub(ref.shape.value, value)
         end
         stubs

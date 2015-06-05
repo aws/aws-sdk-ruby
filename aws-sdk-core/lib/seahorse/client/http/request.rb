@@ -17,17 +17,16 @@ module Seahorse
           self.body = options[:body]
         end
 
-        # @return [URI::HTTP, URI::HTTPS, nil]
-        attr_accessor :endpoint
-
         # @return [String] The HTTP request method, e.g. `GET`, `PUT`, etc.
         attr_accessor :http_method
 
         # @return [Headers] The hash of request headers.
         attr_accessor :headers
 
-        # @return [IO]
-        attr_reader :body
+        # @return [URI::HTTP, URI::HTTPS, nil]
+        def endpoint
+          @endpoint
+        end
 
         # @param [String, URI::HTTP, URI::HTTPS, nil] endpoint
         def endpoint=(endpoint)
@@ -39,6 +38,11 @@ module Seahorse
             msg << "got #{endpoint.inspect}"
             raise ArgumentError, msg
           end
+        end
+
+        # @return [IO]
+        def body
+          @body
         end
 
         # @return [String]

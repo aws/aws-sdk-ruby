@@ -22,7 +22,7 @@ module Aws
     # @return [void]
     def validate!(params)
       errors = []
-      structure(@rules, params, errors, context = 'params') if @rules
+      structure(@rules, params, errors, 'params') if @rules
       raise ArgumentError, error_messages(errors) unless errors.empty?
     end
 

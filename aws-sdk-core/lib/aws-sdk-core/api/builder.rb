@@ -63,8 +63,8 @@ module Aws
         api.metadata['shapes'] = ShapeMap.new(shapes, docs: docs)
       end
 
-      def build_operations(definition, api, shapes, docs)
-        (definition['operations'] || {}).each do |name, definition|
+      def build_operations(definitions, api, shapes, docs)
+        (definitions['operations'] || {}).each do |name, definition|
           operation = build_operation(name, definition, shapes, docs)
           api.add_operation(underscore(name), operation)
         end

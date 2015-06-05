@@ -32,8 +32,8 @@ module Aws
         body_digest = req.headers['X-Amz-Content-Sha256'] || hexdigest(req.body)
         req.headers['X-Amz-Date'] = datetime
         req.headers['Host'] = req.endpoint.host
-        req.headers['X-Amz-Security-Token'] = credentials.session_token if
-          credentials.session_token
+        req.headers['X-Amz-Security-Token'] = @credentials.session_token if
+          @credentials.session_token
         req.headers['X-Amz-Content-Sha256'] ||= body_digest
         req.headers['Authorization'] = authorization(req, datetime, body_digest)
         req
@@ -67,8 +67,8 @@ module Aws
         params.set("X-Amz-Date", now)
         params.set("X-Amz-Expires", options[:expires_in].to_s)
         params.set("X-Amz-SignedHeaders", signed_headers(request))
-        params.set('X-Amz-Security-Token', credentials.session_token) if
-          credentials.session_token
+        params.set('X-Amz-Security-Token', @credentials.session_token) if
+          @credentials.session_token
 
         endpoint = request.endpoint
         if endpoint.query
@@ -88,14 +88,14 @@ module Aws
       end
 
       def credential(datetime)
-        "#{credentials.access_key_id}/#{credential_scope(datetime)}"
+        "#{@credentials.access_key_id}/#{credential_scope(datetime)}"
       end
 
       def signature(request, datetime, body_digest)
-        k_secret = credentials.secret_access_key
+        k_secret = @credentials.secret_access_key
         k_date = hmac("AWS4" + k_secret, datetime[0,8])
-        k_region = hmac(k_date, region)
-        k_service = hmac(k_region, service_name)
+        k_region = hmac(k_date, @region)
+        k_service = hmac(k_region, @service_name)
         k_credentials = hmac(k_service, 'aws4_request')
         hexhmac(k_credentials, string_to_sign(request, datetime, body_digest))
       end
@@ -112,8 +112,8 @@ module Aws
       def credential_scope(datetime)
         parts = []
         parts << datetime[0,8]
-        parts << region
-        parts << service_name
+        parts << @region
+        parts << @service_name
         parts << 'aws4_request'
         parts.join("/")
       end
@@ -199,17 +199,6 @@ module Aws
       def hexhmac(key, value)
         OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), key, value)
       end
-
-      private
-
-      # @return [Credentials]
-      attr_reader :credentials
-
-      # @return [String]
-      attr_reader :service_name
-
-      # @return [String]
-      attr_reader :region
 
     end
   end

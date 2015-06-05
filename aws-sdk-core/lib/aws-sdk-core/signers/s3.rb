@@ -51,7 +51,6 @@ module Aws
       end
 
       def signature(request)
-        secret = credentials.secret_access_key
         string_to_sign = string_to_sign(request)
         signature = digest(credentials.secret_access_key, string_to_sign)
         URI.escape(signature)
