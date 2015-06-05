@@ -76,78 +76,20 @@ module Aws
 
         describe 'large objects' do
 
-          before(:each) do
-            client.stub_responses(:create_multipart_upload, {
-              upload_id: 'upload-id',
-            })
-          end
-
           it 'uses multipart APIs for objects >= 15MB' do
-
-            client.stub_responses(:create_multipart_upload, upload_id:'upload-id')
-            client.stub_responses(:upload_part, etag:'etag-1')
-            client.stub_responses(:upload_part, etag:'etag-2')
-            client.stub_responses(:upload_part, etag:'etag-3')
-            client.stub_responses(:upload_part, etag:'etag-4')
-
-            # record actual requests made
-            requests = []
+            called = []
             client.handle_request do |context|
-              requests << { name:context.operation_name, params:context.params }
+              called << context.operation_name
             end
-
             object.upload_file(seventeen_meg_file, content_type: 'text/plain')
-
-            expect(requests).to eq([
-              {
-                name: :create_multipart_upload,
-                params: {},
-              },
+            expect(called).to eq([
+              :create_multipart_upload,
+              :upload_part,
+              :upload_part,
+              :upload_part,
+              :upload_part,
+              :complete_multipart_upload
             ])
-
-
-            expect(client).to receive(:create_multipart_upload).
-              with(bucket:'bucket', key:'key', content_type:'text/plain').
-              and_return(create_resp)
-
-            (1..3).each do |n|
-              expect(client).to receive(:upload_part).with(
-                bucket: 'bucket',
-                key: 'key',
-                upload_id: 'upload-id',
-                part_number: n,
-                body: file_part(
-                  source: seventeen_meg_file,
-                  offset: (n - 1) * 5 * one_meg,
-                  size: 5 * one_meg
-                )
-              ).and_return(client.stub_data(:upload_part, etag: "etag-#{n}"))
-            end
-            expect(client).to receive(:upload_part).with(
-              bucket: 'bucket',
-              key: 'key',
-              upload_id: 'upload-id',
-              part_number: 4,
-              body: file_part(
-                source: seventeen_meg_file,
-                offset: 15 * one_meg,
-                size: 2 * one_meg
-              )
-            ).and_return(client.stub_data(:upload_part, etag:'etag-4'))
-
-            expect(client).to receive(:complete_multipart_upload).with(
-              bucket: 'bucket',
-              key: 'key',
-              upload_id: 'upload-id',
-              multipart_upload: {
-                parts: [
-                  { part_number: 1, etag: 'etag-1' },
-                  { part_number: 2, etag: 'etag-2' },
-                  { part_number: 3, etag: 'etag-3' },
-                  { part_number: 4, etag: 'etag-4' },
-                ]
-              }
-            )
           end
 
           it 'raises an error if the multipart threshold is too small' do
@@ -169,7 +111,7 @@ module Aws
             ])
 
             expect(client).to receive(:abort_multipart_upload).
-              with(bucket: 'bucket', key: 'key', upload_id: 'upload-id')
+              with(bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId')
 
             expect {
               object.upload_file(seventeen_meg_file)
