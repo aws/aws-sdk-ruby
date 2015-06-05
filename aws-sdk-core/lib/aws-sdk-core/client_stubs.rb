@@ -8,11 +8,6 @@ module Aws
   # behavior.
   module ClientStubs
 
-    # @api private
-    def self.included(subclass)
-      subclass.add_plugin('Aws::Plugins::StubResponses')
-    end
-
     def initialize(*args)
       @stubs = {}
       @stub_mutex = Mutex.new

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Response Stubbing - When enabling response stubbing via
+  `stub_responses: true` on a client, the default credential chain is longer
+  used to source credentials. Instead a set of fake stubbed static credentials
+  are used by default.
+
+  See [related GitHub issue #835](https://github.com/aws/aws-sdk-ruby/pull/835)
+
 2.0.48 (2015-06-04)
 ------------------
 

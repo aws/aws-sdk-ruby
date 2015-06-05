@@ -12,6 +12,7 @@ module Aws
       'Aws::Plugins::GlobalConfiguration',
       'Aws::Plugins::RegionalEndpoint',
       'Aws::Plugins::RequestSigner',
+      'Aws::Plugins::StubResponses',
     ]
 
     include ClientPaging
