@@ -14,6 +14,7 @@ module Aws
       'Aws::Plugins::RegionalEndpoint',
       'Aws::Plugins::RequestSigner',
       'Aws::Plugins::ResponsePaging',
+      'Aws::Plugins::StubResponses',
     ]
 
     include ClientStubs

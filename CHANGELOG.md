@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+* Issue - Response Stubbing - When enabling response stubbing via
+  `stub_responses: true` on a client, the default credential chain is longer
+  used to source credentials. Instead a set of fake stubbed static credentials
+  are used by default.
+
+  See [related GitHub issue #835](https://github.com/aws/aws-sdk-ruby/pull/835)
+
+2.0.48 (2015-06-04)
+------------------
+
+* Feature - Aws::CloudWatchLogs - Adds support for the `#put_subscription_filter`,
+  `#describe_subscription_filters`, and `#delete_subscription_filter` API
+  operations.
+
+* Feature - Aws::CognitoIdentity - Adds support for the `#delete_identities`
+  API operation, and hiding disabled identities with the `#list_identities` API
+  operation.
+
+* Feature - Aws::StorageGateway - Updated Aws::StorageGateway API to add support
+  for the `#list_volume_initiators` API operation.
+
+* Issue - Aws::DynamoDB - Resolve an issue where IO objects were not properly
+  marshaled, leading to runtime errors.
+
+  See [related GitHub issue #831](https://github.com/aws/aws-sdk-ruby/issues/831)
+
 * Issue - Aws::S3 - Resolved an issue with the URL decoding of keys in the
   response to a call to `Aws::S3::Client#list_objects`.
 

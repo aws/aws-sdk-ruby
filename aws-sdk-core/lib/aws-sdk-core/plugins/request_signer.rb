@@ -34,7 +34,6 @@ module Aws
       option(:profile)
 
       option(:credentials) do |config|
-        puts "HERE"
         CredentialProviderChain.new(config).resolve
       end
 

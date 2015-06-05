@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Aws
   describe Client do
-    describe '#stub_responses' do
+    describe 'response stubbing' do
 
       let(:options) {{
         stub_responses: true,
@@ -12,6 +12,14 @@ module Aws
       }}
 
       let(:client) { S3::Client.new(options) }
+
+      it 'skips the credential provider chain' do
+        expect(Aws::CredentialProviderChain).not_to receive(:new)
+        creds = S3::Client.new(stub_responses:true).config.credentials
+        expect(creds).to be_kind_of(Credentials)
+        expect(creds.access_key_id).to eq('stubbed-akid')
+        expect(creds.secret_access_key).to eq('stubbed-secret')
+      end
 
       it 'raises an error if stubbed_responses is not enabled' do
         client = S3::Client.new(options.merge(stub_responses: false))

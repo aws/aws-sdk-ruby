@@ -19,7 +19,6 @@ module Aws
       end
 
       option(:credentials) do |config|
-        puts "HERE2"
         if config.stub_responses
           Credentials.new('stubbed-akid', 'stubbed-secret')
         end
