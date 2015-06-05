@@ -80,6 +80,16 @@ module Aws
         expect(client.head_bucket(bucket:'aws-sdk').data.to_h).to eq({})
       end
 
+      it 'accepts stubs given to the constructor' do
+        client = S3::Client.new(stub_responses: {
+          list_buckets: { buckets: [{ name: 'b1' }, { name:'b2' }] },
+          get_object: [{ body: 'a' }, { body: 'b' }],
+        })
+        expect(client.list_buckets.buckets.map(&:name)).to eq(%w(b1 b2))
+        expect(client.get_object(bucket:'name', key:'key').body.read).to eq('a')
+        expect(client.get_object(bucket:'name', key:'key').body.read).to eq('b')
+      end
+
     end
   end
 end

@@ -12,6 +12,12 @@ module Aws
       @stubs = {}
       @stub_mutex = Mutex.new
       super
+      if Hash === @config.stub_responses
+        @config.stub_responses.each do |operation_name, stubs|
+          apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
+        end
+        @config.stub_responses = true
+      end
     end
 
     # Configures what data / errors should be returned from the named operation
@@ -19,18 +25,44 @@ module Aws
     #
     # ## Basic usage
     #
-    # By default, fake responses are generated. You can override the default
-    # fake data with specific response data by passing a hash.
+    # When you enable response stubbing, the client will generate fake
+    # responses and will not make any HTTP requests.
     #
-    #     # enable response stubbing in the client constructor
     #     client = Aws::S3::Client.new(stub_responses: true)
+    #     client.list_buckets
+    #     #=> #<struct Aws::S3::Types::ListBucketsOutput buckets=[], owner=nil>
     #
-    #     # specify the response data for #list_buckets
-    #     client.stub_responses(:list_buckets, buckets:[{name:'aws-sdk'}])
+    # You can provide stub data that will be returned by the client.
     #
-    #     # no api calls made, stub returned
-    #     client.list_buckets.map(&:name)
+    #     # stub data in the constructor
+    #     client = Aws::S3::Client.new(stub_responses: {
+    #       list_buckets: { bukets: [{name: 'my-bucket' }] },
+    #       get_object: { body: 'data' },
+    #     })
+    #
+    #     client.list_buckets.buckets.map(&:name) #=> ['my-bucket']
+    #     client.get_object(bucket:'name', key:'key').body.read #=> 'data'
+    #
+    # You can also specify the stub data using {#stub_responses}
+    #
+    #     client = Aws::S3::Client.new(stub_responses: true)
+    #     client.stub_resposnes(:list_buckets, {
+    #       buckets: [{ name: 'my-bucket' }]
+    #     })
+    #
+    #     client.list_buckets.buckets.map(&:name) #=> ['my-bucket']
     #     #=> ['aws-sdk']
+    #
+    # Lastly, default stubs can be configured via `Aws.config`:
+    #
+    #     Aws.config[:s3] = {
+    #       stub_responses: {
+    #         list_buckets: { bukets: [{name: 'my-bucket' }] }
+    #       }
+    #     }
+    #
+    #     Aws::S3::Client.new.list_buckets.buckets.map(&:name)
+    #     #=> ['my-bucket']
     #
     # ## Stubbing Errors
     #
@@ -72,7 +104,6 @@ module Aws
     #
     # Calling an operation multiple times will return similar responses.
     # You can configure multiple stubs and they will be returned in sequence.
-    #
     #
     #     client.stub_responses(:head_object, [
     #       'NotFound',
