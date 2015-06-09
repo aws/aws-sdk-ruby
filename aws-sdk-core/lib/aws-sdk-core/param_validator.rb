@@ -30,7 +30,7 @@ module Aws
 
     def structure(ref, values, errors, context)
       # ensure the value is hash like
-      return unless hash?(values, errors, context)
+      return unless correct_type?(ref, values, errors, context)
 
       shape = ref.shape
 
@@ -73,7 +73,7 @@ module Aws
 
     def map(ref, values, errors, context)
 
-      return unless hash?(values, errors, context)
+      return unless correct_type?(ref, values, errors, context)
 
       key_ref = ref.shape.key
       value_ref = ref.shape.value
@@ -118,9 +118,10 @@ module Aws
       end
     end
 
-    def hash?(value, errors, context)
-      if value.is_a?(Hash)
-        true
+    def correct_type?(ref, value, errors, context)
+      case value
+      when Hash then true
+      when ref[:struct_class] then true
       else
         errors << "expected #{context} to be a hash"
         false

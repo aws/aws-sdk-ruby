@@ -139,10 +139,11 @@ module Aws
 
     # @api private
     def next_stub(operation_name)
+      operation_name = operation_name.to_sym
       @stub_mutex.synchronize do
-        stubs = @stubs[operation_name.to_sym] || []
+        stubs = @stubs[operation_name] || []
         case stubs.length
-        when 0 then empty_stub(operation_name.to_sym)
+        when 0 then default_stub(operation_name)
         when 1 then stubs.first
         else stubs.shift
         end
@@ -150,15 +151,21 @@ module Aws
     end
 
     # @api private
-    def empty_stub(operation_name)
-      operation = self.operation(operation_name)
-      data = Stubbing::EmptyStub.new(operation.output).stub
-      remove_paging_tokens(operation[:pager], data)
-      http_response_stub(operation_name, data.to_h)
+    def stub_data(operation_name, data = {})
+      Stubbing::StubData.new(operation(operation_name)).stub(data)
     end
 
     private
 
+    def default_stub(operation_name)
+      stub = stub_data(operation_name)
+      http_response_stub(operation_name, stub)
+    end
+
+    # This method converts the given stub data and converts it to a
+    # HTTP response (when possible). This enables the response stubbing
+    # plugin to provide a HTTP response that triggers all normal events
+    # during response handling.
     def apply_stubs(operation_name, stubs)
       @stub_mutex.synchronize do
         @stubs[operation_name.to_sym] = stubs.map do |stub|
@@ -166,7 +173,6 @@ module Aws
           when Exception, Class then { error: stub }
           when String then service_error_stub(stub)
           when Hash then http_response_stub(operation_name, stub)
-          when Seahorse::Client::Http::Response then { http: stub }
           else { data: stub }
           end
         end
@@ -178,7 +184,7 @@ module Aws
     end
 
     def http_response_stub(operation_name, data)
-      if data.keys.sort == [:body, :headers, :status_code]
+      if Hash === data && data.keys.sort == [:body, :headers, :status_code]
         { http: hash_to_http_resp(data) }
       else
         { http: data_to_http_resp(operation_name, data) }
@@ -209,15 +215,6 @@ module Aws
       when 'rest-xml'  then Stubbing::Protocols::RestXml
       else raise "unsupported protocol"
       end.new
-    end
-
-    def remove_paging_tokens(pager, stub)
-      if pager
-        pager.instance_variable_get("@tokens").keys.each do |path|
-          key = path.split(/\b/)[0]
-          stub[key] = nil
-        end
-      end
     end
   end
 end

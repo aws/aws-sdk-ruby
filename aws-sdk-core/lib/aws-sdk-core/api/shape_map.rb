@@ -5,9 +5,9 @@ module Aws
       include Seahorse::Model::Shapes
 
       EMPTY_REF = begin
-        ref = ShapeRef.new(shape: StructureShape.new)
-        ref[:struct_class] = Aws::EmptyStructure
-        ref
+        shape = StructureShape.new
+        shape[:struct_class] = Aws::EmptyStructure
+        ShapeRef.new(shape: shape)
       end
 
       SHAPE_CLASSES = {

@@ -200,6 +200,8 @@ module Aws
   # @api private
   module Stubbing
     autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
+    autoload :StubData, 'aws-sdk-core/stubbing/stub_data'
+    autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'
     module Protocols
       autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
       autoload :Json, 'aws-sdk-core/stubbing/protocols/json'

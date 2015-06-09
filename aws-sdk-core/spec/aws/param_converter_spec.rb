@@ -24,7 +24,7 @@ module Aws
         ], data)
 
         converted = ParamConverter.convert(rules, params)
-        expect(converted).to eq({
+        expect(converted.to_h).to eq({
           boolean: true,
           string_map: { 'color' => 'red' },
           nested_list: [
@@ -67,10 +67,10 @@ module Aws
           expect(converted).not_to be(value)
         end
 
-        it 'creates a hash from a struct' do
+        it 'does not modify structs' do
           value = Struct.new(:a).new(1)
           converted = ParamConverter.c(shape_class, value)
-          expect(converted).to eq(a: 1)
+          expect(converted).to be(value)
         end
 
       end

@@ -27,8 +27,8 @@ module Aws
 
     def structure(ref, values)
       values = c(ref, values)
-      if values.is_a?(Hash)
-        values.each do |k, v|
+      if Struct === values || Hash === values
+        values.each_pair do |k, v|
           unless v.nil?
             if ref.shape.member?(k)
               values[k] = member(ref.shape.member(k), v)
@@ -142,9 +142,7 @@ module Aws
     end
 
     add(StructureShape, Hash) { |h| h.dup }
-    add(StructureShape, Struct) do |s|
-      s.members.each.with_object({}) {|k,h| h[k] = s[k] }
-    end
+    add(StructureShape, Struct)
 
     add(MapShape, Hash) { |h| h.dup }
     add(MapShape, Struct) do |s|
