@@ -1,5 +1,3 @@
-require 'thread'
-
 module Aws
   # @api private
   class Structure < Struct
