@@ -150,8 +150,11 @@ module Aws
     end
 
     # @api private
-    def stub_data(operation_name, data = nil)
-      Stub.new(operation(operation_name).output).format(data || {})
+    def stub_data(operation_name)
+      operation = self.operation(operation_name)
+      stub = Stubbing::EmptyStub.new(operation.output).stub
+      remove_paging_tokens(operation[:pager], stub)
+      stub
     end
 
     private
@@ -208,117 +211,13 @@ module Aws
       end.new
     end
 
-    class Stub
-
-      include Seahorse::Model::Shapes
-
-      # @param [Seahorse::Models::Shapes::ShapeRef] rules
-      def initialize(rules)
-        @rules = rules
-      end
-
-      # @param [Hash] data An optional hash of data to format into the stubbed
-      #   object.
-      def format(data = {})
-        if @rules.nil?
-          empty_stub(data)
-        else
-          validate_data(data)
-          stub(@rules, data)
+    def remove_paging_tokens(pager, stub)
+      if pager
+        pager.instance_variable_get("@tokens").keys.each do |path|
+          key = path.split(/\b/)[0]
+          stub[key] = nil
         end
       end
-
-      private
-
-      def stub(ref, value)
-        case ref.shape
-        when StructureShape then stub_structure(ref, value)
-        when ListShape then stub_list(ref, value || [])
-        when MapShape then stub_map(ref, value || {})
-        else stub_scalar(ref, value)
-        end
-      end
-
-      def stub_structure(ref, hash)
-        if hash
-          structure_obj(ref, hash)
-        else
-          nil
-        end
-      end
-
-      def structure_obj(ref, hash)
-        stubs = ref[:struct_class].new
-        ref.shape.members.each do |member_name, member_ref|
-          if hash.key?(member_name) && hash[member_name].nil?
-            stubs[member_name] = nil
-          else
-            value = structure_value(ref, member_name, member_ref, hash)
-            stubs[member_name] = stub(member_ref, value)
-          end
-        end
-        stubs
-      end
-
-      def structure_value(ref, member_name, member_ref, hash)
-        if hash.key?(member_name)
-          hash[member_name]
-        elsif
-          StructureShape === member_ref.shape &&
-          ref.shape.required.include?(member_name)
-        then
-          {}
-        else
-          nil
-        end
-      end
-
-      def stub_list(ref, array)
-        stubs = []
-        array.each do |value|
-          stubs << stub(ref.shape.member, value)
-        end
-        stubs
-      end
-
-      def stub_map(ref, hash)
-        stubs = {}
-        hash.each do |key, value|
-          stubs[key] = stub(ref.shape.value, value)
-        end
-        stubs
-      end
-
-      def stub_scalar(ref, value)
-        if value.nil?
-          case ref.shape
-          when StringShape then ref.shape.name
-          when IntegerShape then 0
-          when FloatShape then 0.0
-          when BooleanShape then false
-          when TimestampShape then Time.now
-          else nil
-          end
-        else
-          value
-        end
-      end
-
-      def empty_stub(data)
-        if data.empty?
-          EmptyStructure.new
-        else
-          msg = 'unable to generate a stubbed response from the given data; '
-          msg << 'this operation does not return data'
-          raise ArgumentError, msg
-        end
-      end
-
-      def validate_data(data)
-        args = [@rules, { validate_required:false }]
-        ParamValidator.new(*args).validate!(data)
-      end
-
     end
   end
 end
