@@ -30,10 +30,10 @@ module Aws
 
       it 'does not stub paging markers' do
         client = S3::Client.new(stub_responses:true)
-        resp = client.list_objects(bucket:'bucket')
-        expect(resp.to_h).to eq({
-          common_prefixes: [],
-          contents: [],
+        stub = client.list_objects(bucket:'bucket')
+        expect(stub[:contents]).to eq([])
+        expect(stub[:common_prefixes]).to eq([])
+        expect(stub.to_h).to eq({
           delimiter: "Delimiter",
           encoding_type: "EncodingType",
           is_truncated: false,

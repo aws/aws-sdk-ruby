@@ -142,7 +142,7 @@ module Aws
       @stub_mutex.synchronize do
         stubs = @stubs[operation_name.to_sym] || []
         case stubs.length
-        when 0 then { data: stub_data(operation_name.to_sym) }
+        when 0 then empty_stub(operation_name.to_sym)
         when 1 then stubs.first
         else stubs.shift
         end
@@ -150,11 +150,11 @@ module Aws
     end
 
     # @api private
-    def stub_data(operation_name)
+    def empty_stub(operation_name)
       operation = self.operation(operation_name)
-      stub = Stubbing::EmptyStub.new(operation.output).stub
-      remove_paging_tokens(operation[:pager], stub)
-      stub
+      data = Stubbing::EmptyStub.new(operation.output).stub
+      remove_paging_tokens(operation[:pager], data)
+      http_response_stub(operation_name, data.to_h)
     end
 
     private
