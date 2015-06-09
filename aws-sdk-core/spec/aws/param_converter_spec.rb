@@ -16,12 +16,17 @@ module Aws
 
         data = double('data')
 
-        params = Struct.new(:boolean, :string_map, :nested_list, :unknown)
-        params = params.new(true, { color: :red }, [
-          { integer: 1 },
-          { integer: 2.0 },
-          { integer: '3' },
-        ], data)
+        params = Structure.new(:boolean, :string_map, :nested_list, :unknown)
+        params = params.new({
+          boolean: true,
+          string_map: { color: :red },
+          nested_list: [
+            { integer: 1 },
+            { integer: 2.0 },
+            { integer: '3' },
+          ],
+          unknown: data
+        })
 
         converted = ParamConverter.convert(rules, params)
         expect(converted.to_h).to eq({
