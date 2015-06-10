@@ -10,7 +10,7 @@ task 'test:unit' => 'test:unit:aws-sdk-resources'
 
 task 'test:unit:resource-name-collisions' do
   ENV['AWS_SDK_SAFE_DEFINE'] = '1'
-  Aws.load_all_services
+  Aws.eager_autoload!
 end
 task 'test:unit' => 'test:unit:resource-name-collisions'
 

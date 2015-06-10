@@ -84,6 +84,7 @@ module Aws
   autoload :CredentialProviderChain, 'aws-sdk-core/credential_provider_chain'
   autoload :Credentials, 'aws-sdk-core/credentials'
   autoload :Deprecations, 'aws-sdk-core/deprecations'
+  autoload :EagerLoader, 'aws-sdk-core/eager_loader'
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
@@ -266,6 +267,34 @@ module Aws
       ))
     end
 
+    # Loads modules that are normally loaded with Ruby's `autoload`.
+    # This can avoid thread-safety issues that some Ruby versions have
+    # with `autoload`.
+    #
+    #     # loads ALL services
+    #     Aws.eager_autoload!
+    #
+    # Loading all services can be slow. You can specify what services you
+    # want to load with the `:services` option. All services not named
+    # will continue to autoload as normal.
+    #
+    #     Aws.eager_auotload(services: %w(S3 EC2))
+    #
+    # @return [void]
+    def eager_autoload!(options = {})
+      eager_loader = EagerLoader.new
+      eager_loader.load(JMESPath)
+      eager_loader.load(Seahorse)
+      (options[:services] || SERVICE_MODULE_NAMES).each do |svc_name|
+        begin
+          eager_loader.load(Aws.const_get(svc_name))
+        rescue NameError
+          raise ArgumentError, "invalid service Aws::#{svc_name}"
+        end
+      end
+      eager_loader
+    end
+
     # Yields to the given block for each service that has already been
     # defined via {add_service}. Also yields to the given block for
     # each new service added after the callback is registered.
@@ -304,13 +333,6 @@ module Aws
         callback.call(svc_name.to_s, *@services[svc_name])
       end
       svc_module
-    end
-
-    # @api private
-    def load_all_services
-      SERVICE_MODULE_NAMES.each do |const_name|
-        const_get(const_name)
-      end
     end
 
   end

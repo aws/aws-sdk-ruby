@@ -114,6 +114,23 @@ module Aws
       expect(Aws.config).to eq(ssl_ca_bundle: path)
     end
 
+  end
+
+  describe '.eager_autoload!' do
+
+    it 'loads all services by default' do
+      eager_loader = Aws.eager_autoload!
+      SERVICE_MODULE_NAMES.each do |svc_name|
+        expect(eager_loader.loaded).to include(Aws.const_get(svc_name))
+      end
+    end
+
+    it 'can load fewer than all services' do
+      eager_loader = Aws.eager_autoload!(services:['S3', 'IAM'])
+      expect(eager_loader.loaded).to include(Aws::S3)
+      expect(eager_loader.loaded).to include(Aws::IAM)
+      expect(eager_loader.loaded).not_to include(Aws::EC2)
+    end
 
   end
 end
