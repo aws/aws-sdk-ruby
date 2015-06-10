@@ -32,7 +32,7 @@ module Aws
 
         let(:ten_meg_file) { Tempfile.new('ten-meg-file') }
 
-        let(:seventeen_meg_file) { Tempfile.new('ten-meg-file') }
+        let(:seventeen_meg_file) { Tempfile.new('seventeen-meg-file') }
 
         before(:each) do
           allow(File).to receive(:size).with(one_meg_file).and_return(one_meg)
@@ -77,19 +77,15 @@ module Aws
         describe 'large objects' do
 
           it 'uses multipart APIs for objects >= 15MB' do
-            called = []
-            client.handle_request do |context|
-              called << context.operation_name
-            end
+            expect(client).to receive(:create_multipart_upload).
+              and_return(client.stub_data(:create_multipart_upload, upload_id:'id'))
+
+            expect(client).to receive(:upload_part).exactly(4).times.
+              and_return(client.stub_data(:upload_part, etag:'etag'))
+
+            expect(client).to receive(:complete_multipart_upload)
+
             object.upload_file(seventeen_meg_file, content_type: 'text/plain')
-            expect(called).to eq([
-              :create_multipart_upload,
-              :upload_part,
-              :upload_part,
-              :upload_part,
-              :upload_part,
-              :complete_multipart_upload
-            ])
           end
 
           it 'raises an error if the multipart threshold is too small' do
