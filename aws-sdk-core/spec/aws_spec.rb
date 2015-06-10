@@ -11,7 +11,7 @@ module Aws
 
   end
 
-  describe 'config' do
+  describe '.config' do
 
     it 'defaults to an empty hash' do
       expect(Aws.config).to eq({})
@@ -23,7 +23,7 @@ module Aws
 
   end
 
-  describe 'add_service' do
+  describe '.add_service' do
 
     let(:api_path) { Dir.glob(File.join(API_DIR, 'ec2', '*')).last + '/api-2.json' }
 
@@ -92,6 +92,28 @@ module Aws
       end
 
     end
+
+  end
+
+  describe '.use_bundled_cert!' do
+
+    after(:each) do
+      Aws.config = {}
+    end
+
+    it 'configures a default ssl cert bundle' do
+      path = Aws.use_bundled_cert!
+      expect(File.exists?(path)).to be(true)
+      expect(Aws.config[:ssl_ca_bundle]).to eq(path)
+    end
+
+    it 'replaced any other default ssl ca' do
+      Aws.config[:ssl_ca_directory] = 'dir'
+      Aws.config[:ssl_ca_store] = 'store'
+      path = Aws.use_bundled_cert!
+      expect(Aws.config).to eq(ssl_ca_bundle: path)
+    end
+
 
   end
 end

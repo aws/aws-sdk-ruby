@@ -245,6 +245,27 @@ module Aws
       end
     end
 
+    # The SDK ships with a ca certificate bundle to use when verifying SSL
+    # peer certificates. By default, this cert bundle is *NOT* used. The
+    # SDK will rely on the default cert available to OpenSSL. This ensures
+    # the cert provided by your OS is used.
+    #
+    # For cases where the default cert is unavailable, e.g. Windows, you
+    # can call this method.
+    #
+    #     Aws.use_bundled_cert!
+    #
+    # @return [String] Returns the path to the bundled cert.
+    def use_bundled_cert!
+      config.delete(:ssl_ca_directory)
+      config.delete(:ssl_ca_store)
+      config[:ssl_ca_bundle] = File.expand_path(File.join(
+        File.dirname(__FILE__),
+        '..',
+        'ca-bundle.crt'
+      ))
+    end
+
     # Yields to the given block for each service that has already been
     # defined via {add_service}. Also yields to the given block for
     # each new service added after the callback is registered.
