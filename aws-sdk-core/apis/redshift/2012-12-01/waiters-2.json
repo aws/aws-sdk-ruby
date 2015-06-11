@@ -44,6 +44,25 @@
         }
       ]
     },
+    "ClusterRestored": {
+      "operation": "DescribeClusters",
+      "maxAttempts": 30,
+      "delay": 60,
+      "acceptors": [
+        {
+          "state": "success",
+          "matcher": "pathAll",
+          "argument": "Clusters[].RestoreStatus.Status",
+          "expected": "completed"
+        },
+        {
+          "state": "failure",
+          "matcher": "pathAny",
+          "argument": "Clusters[].ClusterStatus",
+          "expected": "deleting"
+        }
+      ]
+    },
     "SnapshotAvailable": {
       "operation": "DescribeClusterSnapshots",
       "maxAttempts": 20,
