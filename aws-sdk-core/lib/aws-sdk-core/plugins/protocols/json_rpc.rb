@@ -20,13 +20,9 @@ module Aws
 
         option(:convert_params) { |config| !config.simple_json }
 
-        def add_handlers(handlers, config)
-          handlers.add(Json::ErrorHandler, step: :sign)
-          handlers.add(Json::RpcHeadersHandler)
-          handlers.add(config.simple_json ?
-            Json::SimpleBodyHandler :
-            Json::RpcBodyHandler)
-        end
+        handler(Json::Handler)
+
+        handler(Json::ErrorHandler, step: :sign)
 
       end
     end

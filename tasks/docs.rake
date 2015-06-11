@@ -9,7 +9,7 @@ end
 desc 'Updated the list of supported services in the README' if ENV['ALL']
 task 'docs:update_readme' do
   # Updates the table of supported services / api version in the README
-  Aws.load_all_services
+  Aws.eager_autolaod!
   lines = []
   skip = false
   File.read('README.md').lines.each do |line|
@@ -34,7 +34,7 @@ end
 desc 'Generate the API documentation.'
 task 'docs' => ['docs:clobber', 'docs:update_readme'] do
   env = {}
-  env['SOURCE'] = '1'
+  env['DOCSTRINGS'] = '1'
   env['SITEMAP_BASEURL'] = 'http://docs.aws.amazon.com/sdkforruby/api/'
   sh(env, 'bundle exec yard')
 end
@@ -46,7 +46,7 @@ def supported_services_table
   table = []
   Aws::SERVICE_MODULE_NAMES.each do |svc_name|
     client_class = Aws.const_get(svc_name).const_get(:Client)
-    full_name = client_class.api.metadata('serviceFullName')
+    full_name = client_class.api.metadata['serviceFullName']
     version = client_class.api.version
     table << [full_name, svc_name, version]
   end

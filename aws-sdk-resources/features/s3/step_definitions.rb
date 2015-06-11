@@ -38,7 +38,7 @@ When(/^I upload the file to the "(.*?)" object$/) do |key|
 end
 
 Then(/^the file should have been uploaded as a multipart upload$/) do
-  expect(ApiCallTracker.called_operations).to include('create_multipart_upload')
+  expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
 end
 
 Given(/^I have an encryption client$/) do

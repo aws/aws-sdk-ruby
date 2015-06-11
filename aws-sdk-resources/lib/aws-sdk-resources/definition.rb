@@ -58,16 +58,17 @@ module Aws
       end
 
       def define_data_attributes(namespace, resource, definition)
-        return unless shape_name = definition['shape']
-        shape = resource.client_class.api.shape_map.shape('shape' => shape_name)
-        shape.member_names.each do |member_name|
-          if
-            resource.instance_methods.include?(member_name) ||
-            data_attribute_is_an_identifier?(member_name, resource, definition)
-          then
-            next # some data attributes are duplicates to identifiers
-          else
-            resource.add_data_attribute(member_name)
+        if shape_name = definition['shape']
+          shape = resource.client_class.api.metadata['shapes'][shape_name]
+          shape.member_names.each do |member_name|
+            if
+              resource.instance_methods.include?(member_name) ||
+              data_attribute_is_an_identifier?(member_name, resource, definition)
+            then
+              next # some data attributes are duplicates to identifiers
+            else
+              resource.add_data_attribute(member_name)
+            end
           end
         end
       end
@@ -155,8 +156,12 @@ module Aws
 
       def limit_key(resource, definition)
         operation_name = definition['request']['operation']
-        paginators = resource.client_class.paginators
-        paginators.pager(operation_name).limit_key
+        operation = resource.client_class.api.operation(underscore(operation_name))
+        if operation[:pager]
+          operation[:pager].limit_key
+        else
+          nil
+        end
       end
 
       def define_request(definition)

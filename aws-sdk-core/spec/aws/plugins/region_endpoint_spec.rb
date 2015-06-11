@@ -11,7 +11,7 @@ module Aws
       let(:client_class) {
         Seahorse::Client::Base.define(
           plugins: [RegionalEndpoint],
-          api: { 'metadata' => metadata }
+          api: Aws::Api::Builder.build('metadata' => metadata),
         )
       }
 

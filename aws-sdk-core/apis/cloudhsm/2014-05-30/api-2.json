@@ -540,8 +540,7 @@
           "shape":"IpAddress",
           "locationName":"SyslogIp"
         }
-      },
-      "locationName":"CreateHsmRequest"
+      }
     },
     "CreateHsmResponse":{
       "type":"structure",
@@ -585,8 +584,7 @@
           "shape":"HsmArn",
           "locationName":"HsmArn"
         }
-      },
-      "locationName":"DeleteHsmRequest"
+      }
     },
     "DeleteHsmResponse":{
       "type":"structure",
@@ -854,8 +852,7 @@
           "shape":"IpAddress",
           "locationName":"SyslogIp"
         }
-      },
-      "locationName":"ModifyHsmRequest"
+      }
     },
     "ModifyHsmResponse":{
       "type":"structure",

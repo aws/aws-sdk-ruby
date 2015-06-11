@@ -3,8 +3,7 @@ module Aws
     module Protocols
       class RestJson < Seahorse::Client::Plugin
 
-        handler(Json::RestHandler)
-
+        handler(Rest::Handler)
         handler(Json::ErrorHandler, step: :sign)
 
       end

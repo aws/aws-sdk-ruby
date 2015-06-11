@@ -2,14 +2,15 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
 
 require 'simplecov'
 require 'aws-sdk-core'
-require 'multi_json'
 
 SimpleCov.command_name('test:integration:aws-sdk-core')
 
 cfg = './integration-test-config.json'
 
 if File.exist?(cfg)
-  Aws.config = MultiJson.load(File.read(cfg), symbolize_keys: true)
+  Aws.config = Aws::Json.load_file(cfg).inject({}) do |h, (k, v)|
+    h[k.to_sym] = v; h
+  end
 elsif ENV['AWS_INTEGRATION']
   # run integration tests, just don't read a configuration file from disk
 else

@@ -4,368 +4,202 @@ module Aws
   module Query
     describe ParamBuilder do
 
-      let(:members) { {} }
+      let(:shapes) { ApiHelper.sample_shapes }
 
-      def query_params(params = {})
-        shape = Seahorse::Model::Shapes::Structure.new('members' => members)
+      let(:rules) {
+        shape_map = Api::ShapeMap.new(shapes)
+        shape_map.shape_ref('shape' => 'StructureShape')
+      }
+
+      def query(params = {})
         param_list = ParamList.new
-        ParamBuilder.new(param_list).apply(shape, params)
+        ParamBuilder.new(param_list).apply(rules, params)
         param_list.map { |param| [param.name, param.value ] }.sort
       end
 
-      describe '#apply' do
-        describe 'structures' do
-
-          it 'returns an empty list when there are no members' do
-            expect(query_params({})).to be_empty
-          end
-
-          it 'returns an empty list when there are no params' do
-            members['Name'] = { 'type' => 'string' }
-            expect(query_params({})).to be_empty
-          end
-
-          it 'serializes params by name' do
-            members['Name'] = { 'type' => 'string' }
-            members['Age'] = { 'type' => 'integer' }
-            expect(query_params(name: 'John', age: 40)).to eq([
-              ['Age', '40'],
-              ['Name', 'John'],
-            ])
-          end
-
-          it 'observes location name properties' do
-            members['Name'] = { 'type' => 'string', 'locationName' => 'NAME' }
-            members['Age'] = { 'type' => 'integer', 'locationName' => 'AGE' }
-            expect(query_params(name: 'John', age: 40)).to eq([
-              ['AGE', '40'],
-              ['NAME', 'John'],
-            ])
-          end
-
-          it 'serializes nested params' do
-            members['Name'] = { 'type' => 'string' }
-            members['Config'] = {
-              'type' => 'structure',
-              'members' => {
-                'Enabled' => { 'type' => 'boolean' }
-              }
-            }
-            params = { name: 'John', config: { enabled: true } }
-            expect(query_params(params)).to eq([
-              ['Config.Enabled', 'true'],
-              ['Name', 'John'],
-            ])
-          end
-
-          it 'does not serialize nil values' do
-            members['Name'] = { 'type' => 'string' }
-            members['Nickname'] = { 'type' => 'string' }
-            params = { name: 'John', nickname: nil }
-            expect(query_params(params)).to eq([
-              ['Name', 'John'],
-            ])
-          end
-
-        end
-
-        describe 'flattened lists' do
-
-          it 'numbers list members starting at 1' do
-            members['Values'] = {
-              'type' => 'list',
-              'member' => { 'type' => 'string' },
-              'flattened' => true
-            }
-            expect(query_params(values: %w(abc mno xyz))).to eq([
-              ['Values.1', 'abc'],
-              ['Values.2', 'mno'],
-              ['Values.3', 'xyz'],
-            ])
-          end
-
-          it 'uses the list member serialized name as the param name' do
-            members['Config'] = {
-              'type' => 'structure',
-              'members' => {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => {
-                    'type' => 'string',
-                    'locationName' => 'Item'
-                  },
-                  'flattened' => true
-                }
-              }
-            }
-            params = { config: { values: %w(abc mno xyz) } }
-            expect(query_params(params)).to eq([
-              ['Config.Item.1', 'abc'],
-              ['Config.Item.2', 'mno'],
-              ['Config.Item.3', 'xyz'],
-            ])
-          end
-
-          it 'supports lists of complex types' do
-            members['People'] = {
-              'type' => 'list',
-              'member' => {
-                'type' => 'structure',
-                'members' => {
-                  'Name' => { 'type' => 'string' }
-                }
-              },
-              'flattened' => true
-            }
-            params = { people: [ { name: 'John' }, { name: 'Jane' } ] }
-            expect(query_params(params)).to eq([
-              ['People.1.Name', 'John'],
-              ['People.2.Name', 'Jane'],
-            ])
-          end
-
-          it 'serializes empty lists' do
-            members['Config'] = {
-              'type' => 'structure',
-              'members' => {
-                'Items' => {
-                  'type' => 'list',
-                  'member' => {
-                    'type' => 'string'
-                  },
-                  'flattened' => true,
-                  'locationName' => 'items'
-                }
-              },
-              'locationName' => 'config'
-            }
-            params = { config: { items: [] }}
-            expect(query_params(params)).to eq([
-              ['config.items', ''],
-            ])
-          end
-
-        end
-
-        describe 'non-flattened lists' do
-
-          it 'numbers list members starting at 1' do
-            members['Values'] = {
-              'type' => 'list',
-              'member' => { 'type' => 'string' }
-            }
-            expect(query_params(values: %w(abc mno xyz))).to eq([
-              ['Values.member.1', 'abc'],
-              ['Values.member.2', 'mno'],
-              ['Values.member.3', 'xyz'],
-            ])
-          end
-
-          it 'ignores the list member name' do
-            members['Config'] = {
-              'type' => 'structure',
-              'members' => {
-                'Values' => {
-                  'type' => 'list',
-                  'member' => {
-                    'type' => 'string',
-                    'locationName' => 'Item' # has no effect
-                  }
-                }
-              }
-            }
-            params = { config: { values: %w(abc mno xyz) } }
-            expect(query_params(params)).to eq([
-              ['Config.Values.member.1', 'abc'],
-              ['Config.Values.member.2', 'mno'],
-              ['Config.Values.member.3', 'xyz'],
-            ])
-          end
-
-          it 'supports lists of complex types' do
-            members['People'] = {
-              'type' => 'list',
-              'member' => {
-                'type' => 'structure',
-                'members' => {
-                  'Name' => { 'type' => 'string' }
-                }
-              }
-            }
-            params = { people: [ { name: 'John' }, { name: 'Jane' } ] }
-            expect(query_params(params)).to eq([
-              ['People.member.1.Name', 'John'],
-              ['People.member.2.Name', 'Jane'],
-            ])
-          end
-
-          it 'serializes empty lists' do
-            members['Config'] = {
-              'type' => 'structure',
-              'members' => {
-                'Items' => {
-                  'type' => 'list',
-                  'member' => {
-                    'type' => 'string'
-                  }
-                }
-              }
-            }
-            params = { config: { items: [] }}
-            expect(query_params(params)).to eq([
-              ['Config.Items', ''],
-            ])
-          end
-
-        end
-
-        describe 'flattened maps' do
-
-          it 'serializes hashes with keys and values' do
-            members['Attributes'] = {
-              'type' => 'map',
-              'key' => { 'type' => 'string' },
-              'value' => { 'type' => 'string' },
-              'flattened' => true
-            }
-            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
-            expect(query_params(params)).to eq([
-              ['Attributes.1.key', 'Size'],
-              ['Attributes.1.value', 'large'],
-              ['Attributes.2.key', 'Color'],
-              ['Attributes.2.value', 'red'],
-            ])
-          end
-
-          it 'observes location name traits' do
-            members['Attributes'] = {
-              'type' => 'map',
-              'key' => { 'type' => 'string', 'locationName' => 'K' },
-              'value' => { 'type' => 'string', 'locationName' => 'V' },
-              'flattened' => true
-            }
-            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
-            expect(query_params(params)).to eq([
-              ['Attributes.1.K', 'Size'],
-              ['Attributes.1.V', 'large'],
-              ['Attributes.2.K', 'Color'],
-              ['Attributes.2.V', 'red'],
-            ])
-          end
-
-        end
-
-        describe 'non-flattened maps' do
-
-          it 'serializes hashes with keys and values' do
-            members['Attributes'] = {
-              'type' => 'map',
-              'key' => { 'type' => 'string' },
-              'value' => { 'type' => 'string' }
-            }
-            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
-            expect(query_params(params)).to eq([
-              ['Attributes.entry.1.key', 'Size'],
-              ['Attributes.entry.1.value', 'large'],
-              ['Attributes.entry.2.key', 'Color'],
-              ['Attributes.entry.2.value', 'red'],
-            ])
-          end
-
-          it 'observes location name traits' do
-            members['Attributes'] = {
-              'type' => 'map',
-              'key' => { 'type' => 'string', 'locationName' => 'K' },
-              'value' => { 'type' => 'string', 'locationName' => 'V' }
-            }
-            params = { attributes: { 'Size' => 'large', 'Color' => 'red' } }
-            expect(query_params(params)).to eq([
-              ['Attributes.entry.1.K', 'Size'],
-              ['Attributes.entry.1.V', 'large'],
-              ['Attributes.entry.2.K', 'Color'],
-              ['Attributes.entry.2.V', 'red'],
-            ])
-          end
-
-        end
-
-        describe 'scalars' do
-
-          it 'serializes integers' do
-            members['count'] = { 'type' => 'integer' }
-            expect(query_params(count: 123)).to eq([
-              ['count', '123'],
-            ])
-          end
-
-          it 'serializes floats' do
-            members['price'] = { 'type' => 'float' }
-            expect(query_params(price: 12.34)).to eq([
-              ['price', '12.34'],
-            ])
-          end
-
-          it 'serializes booleans' do
-            members['hot'] = { 'type' => 'boolean' }
-            members['cold'] = { 'type' => 'boolean' }
-            expect(query_params(hot:true, cold:false)).to eq([
-              ['cold', 'false'],
-              ['hot', 'true'],
-            ])
-          end
-
-          it 'serializes is8601 timestamps' do
-            now = Time.now
-            members['when'] = {
-              'type' => 'timestamp',
-              'timestampFormat' => 'iso8601'
-            }
-            expect(query_params(when:now)).to eq([
-              ['when', now.utc.iso8601]
-            ])
-          end
-
-          it 'can serializes timestamps as rfc8622 strings' do
-            now = Time.now
-            members['when'] = {
-              'type' => 'timestamp',
-              'timestampFormat' => 'rfc822'
-            }
-            expect(query_params(when:now)).to eq([
-              ['when', now.utc.rfc822]
-            ])
-          end
-
-          it 'can serializes timestamps as unix timestamps' do
-            now = Time.now
-            members['when'] = {
-              'type' => 'timestamp',
-              'timestampFormat' => 'unixTimestamp',
-            }
-            expect(query_params(when:now)).to eq([
-              ['when', now.to_i.to_s]
-            ])
-          end
-
-          it 'serializes blobs as base64 strings' do
-            members['data'] = { 'type' => 'blob' }
-            expect(query_params(data:StringIO.new('hello'))).to eq([
-              ['data', 'aGVsbG8=']
-            ])
-          end
-
-        end
+      it 'returns an empty list when there are no params' do
+        expect(query({})).to eq([])
       end
 
-      describe '#params' do
-
-        it 'returns the param list given the constructor' do
-          param_list = double('param-list')
-          builder = ParamBuilder.new(param_list)
-          expect(builder.params).to be(param_list)
-        end
-
+      it 'can serialize structures' do
+        params = Structure.new(*rules.shape.member_names).new
+        params.boolean = true
+        params.integer = 123
+        params.string = 'abc'
+        expect(query(params)).to eq([
+          ['Boolean', 'true'],
+          ['Integer', '123'],
+          ['String', 'abc'],
+        ])
       end
+
+      it 'does not serialize nil values' do
+        params = {
+          string: 'abc',
+          integer: nil,
+        }
+        expect(query(params)).to eq([
+          ['String', 'abc'],
+        ])
+      end
+
+      it 'supports locationName on structure members' do
+        shapes['StructureShape']['members']['String']['locationName'] = 'Value'
+        expect(query(string: 'abc')).to eq([
+          ['Value', 'abc'],
+        ])
+      end
+
+      it 'supports locationName traits on list members' do
+        shapes['IntegerList']['member']['locationName'] = 'Int'
+        expect(query(number_list: [3,2,1])).to eq([
+          ['NumberList.Int.1', '3'],
+          ['NumberList.Int.2', '2'],
+          ['NumberList.Int.3', '1'],
+        ])
+      end
+
+      it 'supports locationName traits on map keys and values' do
+        shapes['StringMap']['key']['locationName'] = 'AttrName'
+        shapes['StringMap']['value']['locationName'] = 'AttrValue'
+        params = {
+          string_map: {
+            'color' => 'red',
+            'size' => 'large',
+          }
+        }
+        expect(query(params)).to eq([
+          ['StringMap.entry.1.AttrName', 'color'],
+          ['StringMap.entry.1.AttrValue', 'red'],
+          ['StringMap.entry.2.AttrName', 'size'],
+          ['StringMap.entry.2.AttrValue', 'large'],
+        ])
+      end
+
+      it 'supports nested and complex structures' do
+        params = {
+          nested: {
+            nested: {
+              nested: { integer: 3 },
+              integer: 2
+            },
+            integer: 1
+          },
+          nested_list: [
+            { string: "v1" },
+            { string: "v2" },
+            { nested: { string: "v3" }}
+          ],
+          nested_map: {
+            "First" => { string: "v1" },
+            "Second" => { nested: { string: "v2" }},
+          },
+          number_list: [1,2,3,4,5],
+          string_map: {
+            "Size" => "large",
+            "Color" => "red",
+          },
+          blob: "data",
+          byte: "a",
+          boolean: true,
+          character: "b",
+          double: 123.456,
+          float: 654.321,
+          long: 321,
+          string: "Hello",
+          timestamp: Time.at(123456789),
+        }
+        expect(query(params)).to eq([
+          ['Blob', 'ZGF0YQ=='],
+          ['Boolean', 'true'],
+          ['Byte', 'a'],
+          ['Character', 'b'],
+          ['Double', '123.456'],
+          ['Float', '654.321'],
+          ['Long', '321'],
+          ['Nested.Integer', '1'],
+          ['Nested.Nested.Integer', '2'],
+          ['Nested.Nested.Nested.Integer', '3'],
+          ['NestedList.member.1.String', 'v1'],
+          ['NestedList.member.2.String', 'v2'],
+          ['NestedList.member.3.Nested.String', 'v3'],
+          ['NestedMap.entry.1.key', 'First'],
+          ['NestedMap.entry.1.value.String', 'v1'],
+          ['NestedMap.entry.2.key', 'Second'],
+          ['NestedMap.entry.2.value.Nested.String', 'v2'],
+          ['NumberList.member.1', '1'],
+          ['NumberList.member.2', '2'],
+          ['NumberList.member.3', '3'],
+          ['NumberList.member.4', '4'],
+          ['NumberList.member.5', '5'],
+          ['String', 'Hello'],
+          ['StringMap.entry.1.key', 'Size'],
+          ['StringMap.entry.1.value', 'large'],
+          ['StringMap.entry.2.key', 'Color'],
+          ['StringMap.entry.2.value', 'red'],
+          ['Timestamp', '1973-11-29T21:33:09Z']
+        ])
+      end
+
+      it 'supports empty lists' do
+        expect(query(number_list:[])).to eq([
+          ['NumberList', '']
+        ])
+      end
+
+      it 'supports flattened lists' do
+        shapes['IntegerList']['flattened'] = true
+        expect(query(number_list: [3,2,1])).to eq([
+          ['NumberList.1', '3'],
+          ['NumberList.2', '2'],
+          ['NumberList.3', '1'],
+        ])
+      end
+
+      it 'supports flattened lists with locationName traits' do
+        shapes['IntegerList']['flattened'] = true
+        shapes['IntegerList']['member']['locationName'] = 'Number'
+        expect(query(number_list: [3,2,1])).to eq([
+          ['Number.1', '3'],
+          ['Number.2', '2'],
+          ['Number.3', '1'],
+        ])
+      end
+
+      it 'supports flattened maps' do
+        shapes['StringMap']['flattened'] = true
+        params = {
+          string_map: {
+            'color' => 'red',
+            'size' => 'large',
+          }
+        }
+        expect(query(params)).to eq([
+          ['StringMap.1.key', 'color'],
+          ['StringMap.1.value', 'red'],
+          ['StringMap.2.key', 'size'],
+          ['StringMap.2.value', 'large'],
+        ])
+      end
+
+      it 'supports flattened maps with locationName traits' do
+        shapes['StringMap']['flattened'] = true
+        shapes['StringMap']['key']['locationName'] = 'AttrName'
+        shapes['StringMap']['value']['locationName'] = 'AttrValue'
+        params = {
+          string_map: {
+            'color' => 'red',
+            'size' => 'large',
+          }
+        }
+        expect(query(params)).to eq([
+          ['StringMap.1.AttrName', 'color'],
+          ['StringMap.1.AttrValue', 'red'],
+          ['StringMap.2.AttrName', 'size'],
+          ['StringMap.2.AttrValue', 'large'],
+        ])
+      end
+
     end
   end
 end

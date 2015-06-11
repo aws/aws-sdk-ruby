@@ -27,6 +27,23 @@ RSpec.configure do |config|
   end
 end
 
+RSpec::Matchers.define :match_example do |expected|
+  match do |actual|
+    actual.to_s.strip == expected.to_s.strip
+  end
+  failure_message do |actual|
+    <<-MSG
+expected:
+
+#{expected.to_s.strip}
+
+got:
+
+#{actual.to_s.strip}
+    MSG
+  end
+end
+
 # Simply returns the request context without any http response info.
 class NoSendHandler < Seahorse::Client::Handler
   def call(context)
@@ -107,5 +124,64 @@ def data_to_hash(obj)
   when Array then obj.collect { |value| data_to_hash(value) }
   when IO, StringIO then obj.read
   else obj
+  end
+end
+
+module ApiHelper
+  class << self
+    def sample_shapes
+      {
+        'StructureShape' => {
+          'type' => 'structure',
+          'members' => {
+            # complex members
+            'Nested' => { 'shape' => 'StructureShape' },
+            'NestedList' => { 'shape' => 'StructureList' },
+            'NestedMap' => { 'shape' => 'StructureMap' },
+            'NumberList' => { 'shape' => 'IntegerList' },
+            'StringMap' => { 'shape' => 'StringMap' },
+            # scalar members
+            'Blob' => { 'shape' => 'BlobShape' },
+            'Byte' => { 'shape' => 'ByteShape' },
+            'Boolean' => { 'shape' => 'BooleanShape' },
+            'Character' => { 'shape' => 'CharacterShape' },
+            'Double' => { 'shape' => 'DoubleShape' },
+            'Float' => { 'shape' => 'FloatShape' },
+            'Integer' => { 'shape' => 'IntegerShape' },
+            'Long' => { 'shape' => 'LongShape' },
+            'String' => { 'shape' => 'StringShape' },
+            'Timestamp' => { 'shape' => 'TimestampShape' },
+          }
+        },
+        'StructureList' => {
+          'type' => 'list',
+          'member' => { 'shape' => 'StructureShape' }
+        },
+        'StructureMap' => {
+          'type' => 'map',
+          'key' => { 'shape' => 'StringShape' },
+          'value' => { 'shape' => 'StructureShape' }
+        },
+        'IntegerList' => {
+          'type' => 'list',
+          'member' => { 'shape' => 'IntegerShape' }
+        },
+        'StringMap' => {
+          'type' => 'map',
+          'key' => { 'shape' => 'StringShape' },
+          'value' => { 'shape' => 'StringShape' }
+        },
+        'BlobShape' => { 'type' => 'blob' },
+        'ByteShape' => { 'type' => 'byte' },
+        'BooleanShape' => { 'type' => 'boolean' },
+        'CharacterShape' => { 'type' => 'character' },
+        'DoubleShape' => { 'type' => 'double' },
+        'FloatShape' => { 'type' => 'float' },
+        'IntegerShape' => { 'type' => 'integer' },
+        'LongShape' => { 'type' => 'long' },
+        'StringShape' => { 'type' => 'string' },
+        'TimestampShape' => { 'type' => 'timestamp' },
+      }
+    end
   end
 end

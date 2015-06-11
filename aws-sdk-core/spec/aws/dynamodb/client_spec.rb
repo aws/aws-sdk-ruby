@@ -97,6 +97,17 @@ module Aws
         end
 
       end
+
+      describe '#stub_responses' do
+
+        it 'accepts the simplified attribute format' do
+          client = Client.new(stub_responses: true)
+          client.stub_responses(:get_item, item: {'id' => 'value', })
+          resp = client.get_item(table_name:'table', key: {'id' => 'value' })
+          expect(resp.item).to eq('id' => 'value')
+        end
+
+      end
     end
   end
 end

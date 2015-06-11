@@ -30,6 +30,7 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         HASH = 'X-Amz-Content-Sha256'
+
         TREE_HASH = 'X-Amz-Sha256-Tree-Hash'
 
         def call(context)
@@ -65,12 +66,10 @@ module Aws
             digest.update('')
           end
 
-          until body.eof?
-            chunk = body.read(1024 * 1024) # read 1MB
+          while chunk = body.read(1024 * 1024) # read 1MB
             tree_hash.update(chunk)
             digest.update(chunk)
           end
-
           body.rewind
 
           yield(digest.to_s, tree_hash)

@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'multi_json'
 require 'rexml/document'
 
 def fixtures
@@ -18,7 +17,7 @@ end
 
 def each_test_case(context, fixture_path)
   return unless fixture_path
-  MultiJson.load(File.read(fixture_path)).each do |suite|
+  Aws::Json.load_file(fixture_path).each do |suite|
     describe(suite['description'].inspect) do
       suite['cases'].each.with_index do |test_case,n|
         describe("case: #{n}") do
@@ -31,15 +30,14 @@ end
 
 def client_for(suite, test_case)
   protocol = suite['metadata']['protocol']
-  api = Seahorse::Model::Api.new({
+  api = Aws::Api::Builder.build({
     'metadata' => suite['metadata'],
     'operations' => {
-      'ExampleOperation' => test_case['given']
+      'OperationName' => test_case['given']
     },
     'shapes' => suite['shapes'],
   })
   client_class = Seahorse::Client::Base.define(api: api)
-  client_class.add_plugin(Seahorse::Client::Plugins::RestfulBindings)
   client_class.add_plugin(
     case protocol
     when 'ec2'       then Aws::Plugins::Protocols::EC2
@@ -56,20 +54,20 @@ def underscore(str)
   Seahorse::Util.underscore(str)
 end
 
-def format_data(shape, src)
-  case shape
-  when Seahorse::Model::Shapes::Structure
+def format_data(ref, src)
+  case ref.shape
+  when Seahorse::Model::Shapes::StructureShape
     src.each.with_object({}) do |(key, value), params|
-      member = shape.member(underscore(key))
-      params[underscore(key).to_sym] = format_data(member, value)
+      member_ref = ref.shape.member(underscore(key).to_sym)
+      params[underscore(key).to_sym] = format_data(member_ref, value)
     end
-  when Seahorse::Model::Shapes::List
-    src.map { |value| format_data(shape.member, value) }
-  when Seahorse::Model::Shapes::Map
+  when Seahorse::Model::Shapes::ListShape
+    src.map { |value| format_data(ref.shape.member, value) }
+  when Seahorse::Model::Shapes::MapShape
     src.each.with_object({}) do |(key, value), params|
-      params[key] = format_data(shape.value, value)
+      params[key] = format_data(ref.shape.value, value)
     end
-  when Seahorse::Model::Shapes::Timestamp
+  when Seahorse::Model::Shapes::TimestampShape
     Time.at(src)
   else src
   end
@@ -118,12 +116,12 @@ def match_req_body(group, suite, test_case, http_req)
         body = body.split('&').sort.join('&')
         expected_body = expected_body.split('&').sort.join('&')
       when 'json'
-        body = MultiJson.load(body) unless body == ''
-        expected_body = MultiJson.load(expected_body)
+        body = Aws::Json.load(body) unless body == ''
+        expected_body = Aws::Json.load(expected_body)
       when 'rest-json'
         if body[0] == '{'
-          body = MultiJson.load(body)
-          expected_body = MultiJson.load(expected_body)
+          body = Aws::Json.load(body)
+          expected_body = Aws::Json.load(expected_body)
         end
       when 'rest-xml'
         body = normalize_xml(body)
@@ -156,9 +154,9 @@ fixtures.each do |directory, files|
           Seahorse::Client::Response.new(context:context)
         end
 
-        input_shape = client.config.api.operation(:example_operation).input
+        input_shape = client.config.api.operation(:operation_name).input
         request_params = format_data(input_shape, test_case['params'])
-        client.example_operation(request_params)
+        client.operation_name(request_params)
 
       end
     end
@@ -182,7 +180,7 @@ fixtures.each do |directory, files|
         end
 
         group.it "extract response data correctly" do
-          resp = client.example_operation
+          resp = client.operation_name
           data = data_to_hash(resp.data)
           expected_data = format_data(resp.context.operation.output, test_case['result'])
           expect(data).to eq(expected_data)

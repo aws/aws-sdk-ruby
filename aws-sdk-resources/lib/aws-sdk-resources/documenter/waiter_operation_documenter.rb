@@ -23,8 +23,8 @@ You can modify defaults and register callbacks by passing a block argument.
           DOCSTRING
         end
 
-        def return_type
-          [resource_class_name]
+        def return_tag
+          tag("@return [#{resource_class_name}] #{return_message}")
         end
 
         def return_message
@@ -47,10 +47,6 @@ You can modify defaults and register callbacks by passing a block argument.
           @resource_class.client_class.api.operation(api_request_name)
         end
 
-        def api_request_params
-          @operation.params
-        end
-
         def api_request_name
           waiter.poller.operation_name
         end
@@ -60,7 +56,7 @@ You can modify defaults and register callbacks by passing a block argument.
         end
 
         def example_tags
-          tag = <<-EXAMPLE.strip
+          example = <<-EXAMPLE.strip
 @example Basic usage
   #{variable_name}.#{operation_name}
 
@@ -72,7 +68,7 @@ You can modify defaults and register callbacks by passing a block argument.
      w.before_wait do { |count, prev_resp| ... }
   end
           EXAMPLE
-          YARD::DocstringParser.new.parse(tag).to_docstring.tags
+          super + [tag(example)]
         end
 
       end

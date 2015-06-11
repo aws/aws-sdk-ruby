@@ -11,7 +11,7 @@ module Aws
 
   end
 
-  describe 'config' do
+  describe '.config' do
 
     it 'defaults to an empty hash' do
       expect(Aws.config).to eq({})
@@ -23,7 +23,7 @@ module Aws
 
   end
 
-  describe 'add_service' do
+  describe '.add_service' do
 
     let(:api_path) { Dir.glob(File.join(API_DIR, 'ec2', '*')).last + '/api-2.json' }
 
@@ -67,33 +67,69 @@ module Aws
 
       it 'accepts nil' do
         Aws.add_service('DummyService', api: nil)
-        expect(DummyService::Client.api.definition).to eq({})
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accepts string file path values' do
         Aws.add_service('DummyService', api: api_path)
-        expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accpets Pathname values' do
-        path = Pathname.new(api_path)
-        Aws.add_service('DummyService', api: path)
-        expect(DummyService::Client.api.definition).to eq(EC2::Client.api.definition)
+        Aws.add_service('DummyService', api: Pathname.new(api_path))
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accpets hash values' do
-        api = Aws.load_json(api_path)
-        Aws.add_service('DummyService', api: api)
-        expect(DummyService::Client.api.definition).to eq(api)
+        Aws.add_service('DummyService', api: Json.load_file(api_path))
+        expect(DummyService::Client.api).to be_kind_of(Seahorse::Model::Api)
       end
 
       it 'accpets Seahorse::Model::Api values' do
-        api = Aws.load_json(api_path)
-        api = Seahorse::Model::Api.new(api)
+        api = Aws::Api::Builder.build(Json.load_file(api_path))
         Aws.add_service('DummyService', api: api)
         expect(DummyService::Client.api).to be(api)
       end
 
+    end
+
+  end
+
+  describe '.use_bundled_cert!' do
+
+    after(:each) do
+      Aws.config = {}
+    end
+
+    it 'configures a default ssl cert bundle' do
+      path = Aws.use_bundled_cert!
+      expect(File.exists?(path)).to be(true)
+      expect(Aws.config[:ssl_ca_bundle]).to eq(path)
+    end
+
+    it 'replaced any other default ssl ca' do
+      Aws.config[:ssl_ca_directory] = 'dir'
+      Aws.config[:ssl_ca_store] = 'store'
+      path = Aws.use_bundled_cert!
+      expect(Aws.config).to eq(ssl_ca_bundle: path)
+    end
+
+  end
+
+  describe '.eager_autoload!' do
+
+    it 'loads all services by default' do
+      eager_loader = Aws.eager_autoload!
+      SERVICE_MODULE_NAMES.each do |svc_name|
+        expect(eager_loader.loaded).to include(Aws.const_get(svc_name))
+      end
+    end
+
+    it 'can load fewer than all services' do
+      eager_loader = Aws.eager_autoload!(services:['S3', 'IAM'])
+      expect(eager_loader.loaded).to include(Aws::S3)
+      expect(eager_loader.loaded).to include(Aws::IAM)
+      expect(eager_loader.loaded).not_to include(Aws::EC2)
     end
 
   end

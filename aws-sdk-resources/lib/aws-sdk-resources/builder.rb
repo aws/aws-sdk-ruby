@@ -47,10 +47,11 @@ module Aws
 
       def build_batch(identifier_map, options, &block)
         resources = (0...resource_count(identifier_map)).collect do |n|
-          identifiers = @sources.each.with_object({}) do |source, identifiers|
+          identifiers = @sources.inject({}) do |hash, source|
             value = identifier_map[source.target]
             value = value[n] if source.plural?
-            identifiers[source.target] = value
+            hash[source.target] = value
+            hash
           end
           resource = build_one(identifiers, options)
           yield(resource) if block_given?

@@ -10,8 +10,6 @@ module Seahorse
       @plugins = PluginList.new([
         Plugins::Endpoint,
         Plugins::NetHttp,
-        Plugins::ParamConversion,
-        Plugins::ParamValidation,
         Plugins::RaiseResponseErrors,
         Plugins::ResponseTarget,
       ])
@@ -90,7 +88,7 @@ module Seahorse
       # @return [RequestContext]
       def context_for(operation_name, params)
         RequestContext.new(
-          operation_name: operation_name.to_s,
+          operation_name: operation_name,
           operation: operation(operation_name),
           client: self,
           params: params,
@@ -177,17 +175,10 @@ module Seahorse
           @api ||= Model::Api.new
         end
 
-        # @param [Model::Api, Hash] api
+        # @param [Model::Api] api
         # @return [Model::Api]
         def set_api(api)
-          @api =
-            case api
-            when nil then Model::Api.new({})
-            when Model::Api then api
-            when Hash then Model::Api.new(api)
-            when String, Pathname then Model::Api.new(Util.load_json(api))
-            else raise ArgumentError, "invalid api definition #{api}"
-            end
+          @api = api
           define_operation_methods
           @api
         end

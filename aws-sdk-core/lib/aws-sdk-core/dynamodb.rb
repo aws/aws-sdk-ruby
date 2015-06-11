@@ -9,5 +9,17 @@ Aws.add_service(:DynamoDB, {
 module Aws
   module DynamoDB
     autoload :AttributeValue, 'aws-sdk-core/dynamodb/attribute_value'
+
+    class Client
+      def data_to_http_resp(operation_name, data)
+        api = config.api
+        operation = api.operation(operation_name)
+        translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
+        translator = translator.new(operation.output, :marshal)
+        data = translator.apply(data)
+        ParamValidator.validate!(operation.output, data)
+        protocol_helper.stub_data(api, operation, data)
+      end
+    end
   end
 end

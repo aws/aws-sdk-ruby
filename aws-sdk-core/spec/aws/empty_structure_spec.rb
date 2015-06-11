@@ -3,8 +3,8 @@ require 'spec_helper'
 module Aws
   describe EmptyStructure do
 
-    it 'can be constructed via Structure.new' do
-      expect(Structure.new({})).to be_kind_of(EmptyStructure)
+    it 'can be constructed via .new' do
+      expect(EmptyStructure.new).to be_kind_of(EmptyStructure)
     end
 
     it 'it is a Struct' do
@@ -37,19 +37,7 @@ module Aws
 
     it 'can be enumerated, but yields no members' do
       yields = []
-      EmptyStructure.new.each { |member| yields << member }
-      expect(yields).to be_empty
-    end
-
-    it 'returns an enumerable from #each' do
-      enum = EmptyStructure.new.each
-      expect(enum).to be_kind_of(Enumerable)
-      expect(enum.to_a).to eq([])
-    end
-
-    it 'can be enumerated in pairs, but yields no members or values' do
-      yields = []
-      EmptyStructure.new.each { |*args| yields << args }
+      EmptyStructure.new.each_pair { |member| yields << member }
       expect(yields).to be_empty
     end
 
@@ -59,20 +47,16 @@ module Aws
       expect(enum.to_a).to eq([])
     end
 
+    it 'can be enumerated in pairs, but yields no members or values' do
+      yields = []
+      EmptyStructure.new.each_pair { |*args| yields << args }
+      expect(yields).to be_empty
+    end
+
     it 'equals other empty structures' do
       expect(EmptyStructure.new).to eq(EmptyStructure.new)
       expect(EmptyStructure.new == EmptyStructure.new).to be(true)
       expect(EmptyStructure.new.eql?(EmptyStructure.new)).to be(true)
-    end
-
-    it 'supports pretty print' do
-      r = double('receiver')
-      expect(r).to receive(:text).with('#<struct>')
-      EmptyStructure.new.pretty_print(r)
-    end
-
-    it 'has a sensible inspect string' do
-      expect(EmptyStructure.new.inspect).to eq('#<struct>')
     end
 
     it 'has a zero length' do
@@ -104,7 +88,7 @@ module Aws
       struct = EmptyStructure.new
       expect(struct.values_at(*[])).to eq([])
       expect {
-        struct.values_at(:foo, :bar)
+        struct.values_at(0,1)
       }.to raise_error(IndexError)
     end
 

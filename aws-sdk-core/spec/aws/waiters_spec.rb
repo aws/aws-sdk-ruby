@@ -73,7 +73,7 @@ module Aws
         end
 
         it 'defaults new clients with an empty list of waiters' do
-          Aws.add_service(:WaiterTestSvc, api: Seahorse::Model::Api.new)
+          Aws.add_service(:WaiterTestSvc, api: {})
           expect(Aws::WaiterTestSvc::Client.waiters.waiter_names).to eq([])
         end
 

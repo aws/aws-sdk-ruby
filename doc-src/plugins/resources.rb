@@ -38,12 +38,12 @@ end
 
 class ResourceDocPlugin
 
+  include Aws::Api::Docs::Utils
+  include Seahorse::Model::Shapes
+
   def apply
     Aws.service_added do |_, svc_module, files|
       if files[:resources]
-        # merges the .docs.json API docs onto the .api.json model
-        Aws::Api::Docstrings.apply(svc_module::Client, files[:docs])
-
         namespace = YARD::Registry[svc_module.name]
         svc_module.constants.each do |const|
           klass = svc_module.const_get(const)
@@ -63,8 +63,8 @@ class ResourceDocPlugin
 
   def service_docstring(name, yard_class, svc_class)
     api = svc_class.client_class.api
-    product_name = api.metadata('serviceAbbreviation')
-    product_name ||= api.metadata('serviceFullName')
+    product_name = api.metadata['serviceAbbreviation']
+    product_name ||= api.metadata['serviceFullName']
 
     docstring = <<-DOCSTRING.strip
 This class provides a resource oriented interface for #{product_name}.
@@ -177,39 +177,17 @@ Loads the current #{name} by calling {Client##{method}}.
 
     return if resource_name == 'Resource'
 
-    endpoint = resource_class.client_class.api.metadata('endpointPrefix')
+    endpoint = resource_class.client_class.api.metadata['endpointPrefix']
     version = resource_class.client_class.api.version
-    definition = File.read("aws-sdk-core/apis/#{endpoint}/#{version}/resources-1.json")
-    definition = MultiJson.load(definition)
+    definition = Aws::Json.load_file("aws-sdk-core/apis/#{endpoint}/#{version}/resources-1.json")
     definition = definition['resources'][resource_name]
     if shape_name = definition['shape']
 
-      shape = resource_class.client_class.api.shape_map.shape('shape' => shape_name)
+      shape = resource_class.client_class.api.metadata['shapes'].shape_ref('shape' => shape_name).shape
 
       resource_class.data_attributes.each do |member_name|
-
-        member_shape = shape.member(member_name)
-        return_type = case member_shape
-          when Seahorse::Model::Shapes::Blob then 'String<bytes>'
-          when Seahorse::Model::Shapes::Byte then  'String<bytes>'
-          when Seahorse::Model::Shapes::Boolean then 'Boolean'
-          when Seahorse::Model::Shapes::Character then 'String'
-          when Seahorse::Model::Shapes::Double then 'Float'
-          when Seahorse::Model::Shapes::Float then 'Float'
-          when Seahorse::Model::Shapes::Integer then 'Integer'
-          when Seahorse::Model::Shapes::List then 'Array'
-          when Seahorse::Model::Shapes::Long then 'Integer'
-          when Seahorse::Model::Shapes::Map then 'Hash'
-          when Seahorse::Model::Shapes::String then 'String'
-          when Seahorse::Model::Shapes::Structure then 'Structure'
-          when Seahorse::Model::Shapes::Timestamp then 'Time'
-          else raise 'unhandled type'
-        end
-
-        m = YARD::CodeObjects::MethodObject.new(yard_class, member_name)
-        m.scope = :instance
-        m.docstring = "#{member_shape.documentation}\n@return [#{return_type}] #{member_shape.documentation}"
-        yard_class.instance_attributes[member_name] = { :read => m }
+        member_ref = shape.member(member_name)
+        document_struct_member(yard_class, member_name, member_ref, false)
       end
     end
   end
@@ -232,7 +210,7 @@ Loads the current #{name} by calling {Client##{method}}.
       name = resource_class.name.split('::').last
       m = YARD::CodeObjects::MethodObject.new(yard_class, :exists?)
       m.scope = :instance
-      m.docstring = "@return [Boolean] Returns true if this #{name} exists. Returns `false` otherwise."
+      m.docstring = "@return [Boolean] Returns `true` if this #{name} exists. Returns `false` otherwise."
     end
   end
 

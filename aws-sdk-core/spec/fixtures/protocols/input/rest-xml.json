@@ -628,14 +628,14 @@
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "FooShape"
+            "shape": "FooShape",
+            "location": "headers",
+            "locationName": "x-foo-"
           }
         }
       },
       "FooShape": {
         "type": "map",
-        "location": "headers",
-        "locationName": "x-foo-",
         "key": {
           "shape": "FooKeyValue"
         },
@@ -692,7 +692,8 @@
           "foo": {
             "shape": "FooShape"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
         "type": "string"
@@ -706,8 +707,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -735,7 +735,8 @@
           "foo": {
             "shape": "FooShape"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
         "type": "blob"
@@ -749,8 +750,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -770,8 +770,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -796,12 +795,13 @@
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "FooShape"
+            "shape": "FooShape",
+            "locationName": "foo"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
-        "locationName": "foo",
         "type": "structure",
         "members": {
           "baz": {
@@ -821,8 +821,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -844,8 +843,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -863,8 +861,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -888,13 +885,14 @@
         "type": "structure",
         "members": {
           "Grant": {
-            "shape": "Grant"
+            "shape": "Grant",
+            "locationName": "Grant"
           }
-        }
+        },
+        "payload": "Grant"
       },
       "Grant": {
         "type": "structure",
-        "locationName": "Grant",
         "members": {
           "Grantee": {
             "shape": "Grantee"
@@ -933,8 +931,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "Grant"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },

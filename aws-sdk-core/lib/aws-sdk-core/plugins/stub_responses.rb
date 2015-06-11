@@ -29,7 +29,6 @@ module Aws
       end
 
       def after_initialize(client)
-        # disable retries when stubbing responses
         if client.config.stub_responses
           client.handlers.remove(RetryErrors::Handler)
         end
@@ -38,41 +37,40 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          response = Seahorse::Client::Response.new(context: context)
-          apply_stub(response, context.client.next_stub(context.operation_name))
-          response
+          stub = context.client.next_stub(context.operation_name)
+          resp = Seahorse::Client::Response.new(context: context)
+          apply_stub(stub, resp)
+          resp
         end
 
-        private
-
-        def apply_stub(resp, stub)
-          if Exception === stub
-            resp.error = stub
-          elsif Class === stub && stub.ancestors.include?(Errors::ServiceError)
-            resp.error = stub.new(resp.context, 'stubbed error')
-          elsif Class === stub && stub.ancestors.include?(Exception)
-            resp.error = stub.new
-          else
-            resp.data = stub
-            stub_http_body(resp) if streaming?(resp)
+        def apply_stub(stub, response)
+          http_resp = response.context.http_response
+          case
+          when stub[:error] then signal_error(stub[:error], http_resp)
+          when stub[:http] then signal_http(stub[:http], http_resp)
+          when stub[:data] then response.data = stub[:data]
           end
         end
 
-        def streaming?(resp)
-          if output = resp.context.operation.output
-            payload = output.payload_member
-            payload && payload.definition['streaming'] == true
+        # @param [Exception] stub
+        # @param [Seahorse::Client::Http::Response] http_resp
+        def signal_error(error, http_resp)
+          if Exception === error
+            http_resp.signal_error(error)
           else
-            false
+            http_resp.signal_error(error.new)
           end
         end
 
-        def stub_http_body(resp)
-          payload = resp.context.operation.output.payload
-          resp.context.http_response.signal_headers(200, {})
-          resp.context.http_response.signal_data(resp.data[payload])
-          resp.context.http_response.signal_done
-          resp.data[payload] = resp.context.http_response.body
+        # @param [Seahorse::Client::Http::Response] stub
+        # @param [Seahorse::Client::Http::Response] http_resp
+        def signal_http(stub, http_resp)
+          http_resp.signal_headers(stub.status_code, stub.headers.to_h)
+          while chunk = stub.body.read(1024 * 1024)
+            http_resp.signal_data(chunk)
+          end
+          stub.body.rewind
+          http_resp.signal_done
         end
 
       end

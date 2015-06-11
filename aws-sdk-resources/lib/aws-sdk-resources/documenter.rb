@@ -13,6 +13,8 @@ module Aws
 
       class << self
 
+        include Seahorse::Model::Shapes
+
         def apply_customizations
           document_s3_object_upload_file_additional_options
         end
@@ -21,23 +23,24 @@ module Aws
 
         def document_s3_object_upload_file_additional_options
           input = Aws::S3::Client.api.operation(:create_multipart_upload).input
-          opts = input.member_names - [:bucket, :key]
+          opts = input.shape.member_names - [:bucket, :key]
           tags = opts.map do |opt|
-            shape = input.member(opt)
-            type = case shape
-            when Seahorse::Model::Shapes::Structure then 'Structure'
-            when Seahorse::Model::Shapes::List then 'Array'
-            when Seahorse::Model::Shapes::Map then 'Hash'
-            when Seahorse::Model::Shapes::String then 'String'
-            when Seahorse::Model::Shapes::Integer then 'Integer'
-            when Seahorse::Model::Shapes::Float then 'Float'
-            when Seahorse::Model::Shapes::Boolean then 'Boolean'
-            when Seahorse::Model::Shapes::Timestamp then 'Time'
-            when Seahorse::Model::Shapes::Blob then 'IO'
+            ref = input.shape.member(opt)
+            type = case ref.shape
+            when StructureShape then 'Structure'
+            when ListShape then 'Array'
+            when MapShape then 'Hash'
+            when StringShape then 'String'
+            when IntegerShape then 'Integer'
+            when FloatShape then 'Float'
+            when BooleanShape then 'Boolean'
+            when TimestampShape then 'Time'
+            when BlobShape then 'IO'
             else
-              raise "unhandled shape class `#{shape.class.name}'"
+              raise "unhandled shape class `#{ref.shape.class.name}'"
             end
-            "@option options [#{type}] :#{opt} #{shape.documentation}"
+            docs = ref.documentation || ref.shape.documentation
+            "@option options [#{type}] :#{opt} #{docs}"
           end
           tags = YARD::DocstringParser.new.parse(tags).to_docstring.tags
           m = YARD::Registry['Aws::S3::Object#upload_file']

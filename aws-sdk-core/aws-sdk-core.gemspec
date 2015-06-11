@@ -13,15 +13,13 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.files = ['endpoints.json']
+  spec.files = ['endpoints.json', 'ca-bundle.crt']
   spec.files += Dir['lib/**/*.rb']
-  spec.files += Dir['apis/**/**/*.json'].select { |p| !p.match(/\.docs\.json$/) }
+  spec.files += Dir['apis/**/**/*.json'].select { |p| !p.match(/\/docs/) }
 
   spec.bindir = 'bin'
   spec.executables << 'aws.rb'
 
-  spec.add_dependency('multi_json', '~> 1.0')
-  spec.add_dependency('builder', '~> 3.0')
   spec.add_dependency('jmespath', '~> 1.0')
 
 end

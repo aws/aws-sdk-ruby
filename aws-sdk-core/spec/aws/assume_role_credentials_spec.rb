@@ -66,25 +66,42 @@ module Aws
     end
 
     it 'extracts credentials from the assume role response' do
-      creds = AssumeRoleCredentials.new(
+      c = AssumeRoleCredentials.new(
         role_arn: 'arn',
         role_session_name: 'session')
-      expect(creds).to be_set
-      expect(creds.access_key_id).to eq('akid')
-      expect(creds.secret_access_key).to eq('secret')
-      expect(creds.session_token).to eq('session')
-      expect(creds.expiration).to eq(in_one_hour)
+      expect(c).to be_set
+      expect(c.credentials.access_key_id).to eq('akid')
+      expect(c.credentials.secret_access_key).to eq('secret')
+      expect(c.credentials.session_token).to eq('session')
+      expect(c.expiration).to eq(in_one_hour)
     end
 
     it 'refreshes credentials automatically when they are near expiration' do
       allow(credentials).to receive(:expiration).and_return(Time.now)
       expect(client).to receive(:assume_role).exactly(4).times
-      creds = AssumeRoleCredentials.new(
+      c = AssumeRoleCredentials.new(
         role_arn: 'arn',
         role_session_name: 'session')
-      creds.access_key_id
-      creds.access_key_id
-      creds.access_key_id
+      c.credentials
+      c.credentials
+      c.credentials
+    end
+
+    it 'generates deprecation warnings for credential accessors' do
+      c = AssumeRoleCredentials.new(
+        role_arn: 'arn',
+        role_session_name: 'session')
+
+      expect(c).to receive(:warn).exactly(3).times
+
+      c.access_key_id
+      c.secret_access_key
+      c.session_token
+
+      # warnings are not duplicated
+      c.access_key_id
+      c.secret_access_key
+      c.session_token
     end
 
   end

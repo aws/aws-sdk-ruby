@@ -25,14 +25,13 @@ module Aws
       def string_to_sign(http_request, params)
         [
           http_request.http_method,
-          host(http_request),
-          http_request.endpoint.path,
+          host(http_request.endpoint),
+          path(http_request.endpoint),
           params.to_s,
         ].join("\n")
       end
 
-      def host(http_request)
-        endpoint = http_request.endpoint
+      def host(endpoint)
         host = endpoint.host.downcase
         if
           (endpoint.scheme == 'http' && endpoint.port != 80) ||
@@ -41,6 +40,10 @@ module Aws
           host += ":#{endpoint.port}"
         end
         host
+      end
+
+      def path(endpoint)
+        endpoint.path == '' ? '/' : endpoint.path
       end
 
     end

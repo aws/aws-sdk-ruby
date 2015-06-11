@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'multi_json'
 
 module Aws
   module SNS
@@ -69,36 +68,36 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
         end
 
         it 'raises when the SigningCertURL is not https' do
-          msg = MultiJson.load(message)
+          msg = Json.load(message)
           msg['SigningCertURL'] = msg['SigningCertURL'].sub(/https/, 'http')
-          msg = MultiJson.dump(msg)
+          msg = Json.dump(msg)
           expect {
             verifier.authenticate!(msg)
           }.to raise_error(MessageVerifier::VerificationError, /must be https/)
         end
 
         it 'raises when the SigningCertURL is not AWS hosted' do
-          msg = MultiJson.load(message)
+          msg = Json.load(message)
           msg['SigningCertURL'] = 'https://internetbadguys.com/cert.pem'
-          msg = MultiJson.dump(msg)
+          msg = Json.dump(msg)
           expect {
             verifier.authenticate!(msg)
           }.to raise_error(MessageVerifier::VerificationError, /hosted by AWS/)
         end
 
         it 'raises when the SigningCertURL is not a pem file' do
-          msg = MultiJson.load(message)
+          msg = Json.load(message)
           msg['SigningCertURL'] = msg['SigningCertURL'].sub(/pem$/, 'key')
-          msg = MultiJson.dump(msg)
+          msg = Json.dump(msg)
           expect {
             verifier.authenticate!(msg)
           }.to raise_error(MessageVerifier::VerificationError, /a \.pem file/)
         end
 
         it 'raises when the message signature fails validation' do
-          msg = MultiJson.load(message)
+          msg = Json.load(message)
           msg['Signature'] = 'bad'
-          msg = MultiJson.dump(msg)
+          msg = Json.dump(msg)
           expect {
             verifier.authenticate!(msg)
           }.to raise_error(MessageVerifier::VerificationError, /cannot be verified/)
@@ -142,9 +141,9 @@ kMFvPxlw0XwWsvjTGPFCBIR7NZXnwQfVYbdFu88TjT10wTCZ/E3yCp77aDWD1JLV
         end
 
         it 'returns false if the message can not be authenticated' do
-          msg = MultiJson.load(message)
+          msg = Json.load(message)
           msg['Signature'] = 'bad'
-          msg = MultiJson.dump(msg)
+          msg = Json.dump(msg)
           expect(verifier.authentic?(msg)).to be(false)
         end
 

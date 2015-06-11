@@ -12,5 +12,5 @@ Feature: Amazon Route53 Domains
     Then I expect the response error code to be "InvalidInput"
     And I expect the response error message to include:
     """
-    Invalid request
+    Errors
     """

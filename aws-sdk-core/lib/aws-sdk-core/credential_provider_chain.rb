@@ -6,10 +6,11 @@ module Aws
       @config = config
     end
 
+    # @return [CredentialProvider, nil]
     def resolve
       providers.each do |method_name, options|
-        credentials = send(method_name, options.merge(config: @config))
-        return credentials if credentials && credentials.set?
+        provider = send(method_name, options.merge(config: @config))
+        return provider if provider && provider.set?
       end
       nil
     end

@@ -71,7 +71,7 @@ module Aws
             responses = [resp1, resp2]
 
             client = double('client')
-            allow(client).to receive_message_chain(:config, :api, :metadata).and_return(Paging::NullProvider.new)
+            allow(client).to receive_message_chain(:config, :api, :metadata).and_return(Pager.new({}))
             allow(client).to receive_message_chain(:config, :api, :operation, :name).and_return('OperationName')
             expect(client).to receive(:list_resources).
               and_return(responses)

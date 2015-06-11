@@ -20,7 +20,7 @@ module Aws
       }
 
       option(:endpoint) do |cfg|
-        EndpointProvider.resolve(cfg.region, cfg.api.metadata('endpointPrefix'))
+        EndpointProvider.resolve(cfg.region, cfg.api.metadata['endpointPrefix'])
       end
 
       def after_initialize(client)

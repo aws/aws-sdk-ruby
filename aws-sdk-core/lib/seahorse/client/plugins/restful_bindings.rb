@@ -3,10 +3,13 @@ require 'cgi'
 module Seahorse
   module Client
     module Plugins
+      # @api private
       class RestfulBindings < Plugin
 
         # @api private
         class Handler < Client::Handler
+
+          include Seahorse::Model::Shapes
 
           def call(context)
             build_request(context)
@@ -30,31 +33,31 @@ module Seahorse
           def populate_http_headers(context)
             params = context.params
             headers = context.http_request.headers
-            each_member(context.operation.input) do |member_name, member|
+            each_member(context.operation.input) do |member_name, member_ref|
               value = params[member_name]
               next if value.nil?
-              case member.location
-              when 'header'  then serialize_header(headers, member, value)
-              when 'headers' then serialize_header_map(headers, member, value)
+              case member_ref.location
+              when 'header'  then serialize_header(headers, member_ref, value)
+              when 'headers' then serialize_header_map(headers, member_ref, value)
               end
             end
           end
 
-          def serialize_header(headers, shape, value)
-            headers[shape.location_name] = serialize_header_value(shape, value)
+          def serialize_header(headers, ref, value)
+            headers[ref.location_name] = serialize_header_value(ref, value)
           end
 
-          def serialize_header_map(headers, shape, values)
-            prefix = shape.location_name || ''
+          def serialize_header_map(headers, ref, values)
+            prefix = ref.location_name || ''
             values.each_pair do |name, value|
-              value = serialize_header_value(shape.value, value)
+              value = serialize_header_value(ref.shape.value, value)
               headers["#{prefix}#{name}"] = value
             end
           end
 
-          def serialize_header_value(shape, value)
-            if shape.is_a?(Model::Shapes::Timestamp)
-              shape.format_time(value, 'httpdate')
+          def serialize_header_value(ref, value)
+            if TimestampShape === ref.shape
+              value.utc.httpdate
             else
               value.to_s
             end
@@ -63,51 +66,55 @@ module Seahorse
           # Extracts HTTP response headers and status code.
           def parse_response(response)
             headers = response.context.http_response.headers
-            each_member(response.context.operation.output) do |key, shape|
-              case shape.location
+            each_member(response.context.operation.output) do |key, ref|
+              case ref.location
               when 'statusCode'
                 status_code = response.context.http_response.status_code
                 response.data[key] = status_code
               when 'header'
-                if headers.key?(shape.location_name)
-                  response.data[key] = extract_header(headers, shape)
+                if headers.key?(ref.location_name)
+                  response.data[key] = extract_header(headers, ref)
                 end
               when 'headers'
-                response.data[key] = extract_header_map(headers, shape)
+                response.data[key] = extract_header_map(headers, ref)
               end
             end
           end
 
-          def extract_header(headers, shape)
-            parse_header_value(shape, headers[shape.location_name])
+          def extract_header(headers, ref)
+            parse_header_value(ref, headers[ref.location_name])
           end
 
-          def extract_header_map(headers, shape)
-            prefix = shape.location_name || ''
+          def extract_header_map(headers, ref)
+            prefix = ref.location_name || ''
             hash = {}
             headers.each do |header, value|
               if match = header.match(/^#{prefix}(.+)/i)
-                hash[match[1]] = parse_header_value(shape.value, value)
+                hash[match[1]] = parse_header_value(ref.shape.value, value)
               end
             end
             hash
           end
 
-          def parse_header_value(shape, value)
+          def parse_header_value(ref, value)
             if value
-              case shape
-              when Model::Shapes::Integer then value.to_i
-              when Model::Shapes::Float then value.to_f
-              when Model::Shapes::Boolean then value == 'true'
-              when Model::Shapes::Timestamp
-                shape.format == 'unix_timestamp' ? value.to_i : Time.parse(value)
+              case ref.shape
+              when IntegerShape then value.to_i
+              when FloatShape then value.to_f
+              when BooleanShape then value == 'true'
+              when TimestampShape
+                if value =~ /\d+(\.\d*)/
+                  Time.at(value.to_f)
+                else
+                  Time.parse(value)
+                end
               else value
               end
             end
           end
 
-          def each_member(shape, &block)
-            shape.members.each(&block) if shape
+          def each_member(ref, &block)
+            ref.shape.members.each(&block) if ref
           end
 
         end

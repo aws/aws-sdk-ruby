@@ -4,7 +4,7 @@ module Seahorse
   module Client
     class RequestContext
 
-      # @option options [required,String] :operation_name (nil)
+      # @option options [required,Symbol] :operation_name (nil)
       # @option options [required,Model::Operation] :operation (nil)
       # @option options [Hash] :params ({})
       # @option options [Configuration] :config (nil)
@@ -23,7 +23,7 @@ module Seahorse
         @metadata = {}
       end
 
-      # @return [String] Name of the API operation called.
+      # @return [Symbol] Name of the API operation called.
       attr_accessor :operation_name
 
       # @return [Model::Operation]

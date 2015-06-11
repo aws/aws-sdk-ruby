@@ -26,7 +26,7 @@ module Aws
       when Resources::Definition then definition
       when Hash then Resources::Definition.new(definition)
       when String
-        Resources::Definition.new(Aws.load_json(definition), source_path: definition)
+        Resources::Definition.new(Json.load_file(definition), source_path: definition)
       else raise ArgumentError, "invalid resource definition #{definition}"
     end
     definition.apply(svc_module)

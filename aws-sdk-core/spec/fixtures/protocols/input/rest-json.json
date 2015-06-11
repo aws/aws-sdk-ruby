@@ -372,12 +372,13 @@
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "FooShape"
+            "shape": "FooShape",
+            "locationName": "foo"
           }
-        }
+        },
+        "payload": "foo"
       },
       "FooShape": {
-        "locationName": "foo",
         "type": "structure",
         "members": {
           "baz": {
@@ -397,8 +398,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -420,8 +420,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },
@@ -439,8 +438,7 @@
             "requestUri": "/"
           },
           "input": {
-            "shape": "InputShape",
-            "payload": "foo"
+            "shape": "InputShape"
           },
           "name": "OperationName"
         },

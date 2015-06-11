@@ -80,14 +80,14 @@ module Aws
     #         @keys = keys
     #         @encryption_materials = Aws::S3::Encryption::Materials.new(
     #           key: @keys[default_key_name],
-    #           description: MultiJson.dump(key: default_key_name),
+    #           description: JSON.dump(key: default_key_name),
     #         )
     #       end
     #
     #       attr_reader :encryption_materials
     #
     #       def key_for(matdesc)
-    #         key_name = MultiJson.load(matdesc)['key']
+    #         key_name = JSON.load(matdesc)['key']
     #         if key = @keys[key_name]
     #           key
     #         else
@@ -159,7 +159,7 @@ module Aws
         # * `:key_provider`
         # * `:encryption_key`
         #
-        # You may also pass any other options accepted by {S3::Client.new}.
+        # You may also pass any other options accepted by {S3::Client#initialize}.
         #
         # @option options [S3::Client] :client A basic S3 client that is used
         #   to make api calls. If a `:client` is not provided, a new {S3::Client}

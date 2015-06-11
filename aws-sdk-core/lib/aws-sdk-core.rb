@@ -1,5 +1,4 @@
 require 'jmespath'
-require 'multi_json'
 require 'seahorse'
 
 Seahorse::Util.irregular_inflections({
@@ -79,17 +78,22 @@ module Aws
 
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
   autoload :Client, 'aws-sdk-core/client'
-  autoload :ClientPaging, 'aws-sdk-core/client_paging'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :ClientWaiters, 'aws-sdk-core/client_waiters'
+  autoload :CredentialProvider, 'aws-sdk-core/credential_provider'
   autoload :CredentialProviderChain, 'aws-sdk-core/credential_provider_chain'
   autoload :Credentials, 'aws-sdk-core/credentials'
+  autoload :Deprecations, 'aws-sdk-core/deprecations'
+  autoload :EagerLoader, 'aws-sdk-core/eager_loader'
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
+  autoload :Json, 'aws-sdk-core/json'
   autoload :PageableResponse, 'aws-sdk-core/pageable_response'
-  autoload :RestBodyHandler, 'aws-sdk-core/rest_body_handler'
+  autoload :Pager, 'aws-sdk-core/pager'
+  autoload :ParamConverter, 'aws-sdk-core/param_converter'
+  autoload :ParamValidator, 'aws-sdk-core/param_validator'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
   autoload :Service, 'aws-sdk-core/service'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
@@ -99,33 +103,20 @@ module Aws
 
   # @api private
   module Api
-    autoload :Customizer, 'aws-sdk-core/api/customizer'
-    autoload :Documenter, 'aws-sdk-core/api/documenter'
-    autoload :Docstrings, 'aws-sdk-core/api/docstrings'
-    autoload :Manifest, 'aws-sdk-core/api/manifest'
-    autoload :ManifestBuilder, 'aws-sdk-core/api/manifest_builder'
-    autoload :OperationDocumenter, 'aws-sdk-core/api/operation_documenter'
-    autoload :OperationExample, 'aws-sdk-core/api/operation_example'
-    autoload :ServiceCustomizations, 'aws-sdk-core/api/service_customizations'
-  end
-
-  # @api private
-  module Json
-    autoload :Builder, 'aws-sdk-core/json/builder'
-    autoload :ErrorHandler, 'aws-sdk-core/json/error_handler'
-    autoload :Parser, 'aws-sdk-core/json/parser'
-    autoload :RestHandler, 'aws-sdk-core/json/rest_handler'
-    autoload :RpcBodyHandler, 'aws-sdk-core/json/rpc_body_handler'
-    autoload :RpcHeadersHandler, 'aws-sdk-core/json/rpc_headers_handler'
-    autoload :SimpleBodyHandler, 'aws-sdk-core/json/simple_body_handler'
-  end
-
-  # @api private
-  module Paging
-    autoload :NullPager, 'aws-sdk-core/paging/null_pager'
-    autoload :NullProvider, 'aws-sdk-core/paging/null_provider'
-    autoload :Pager, 'aws-sdk-core/paging/pager'
-    autoload :Provider, 'aws-sdk-core/paging/provider'
+    autoload :Builder, 'aws-sdk-core/api/builder'
+    autoload :Customizations, 'aws-sdk-core/api/customizations'
+    autoload :ShapeMap, 'aws-sdk-core/api/shape_map'
+    module Docs
+      autoload :Builder, 'aws-sdk-core/api/docs/builder'
+      autoload :ClientTypeDocumenter, 'aws-sdk-core/api/docs/client_type_documenter'
+      autoload :DocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
+      autoload :NullDocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
+      autoload :OperationDocumenter, 'aws-sdk-core/api/docs/operation_documenter'
+      autoload :ParamFormatter, 'aws-sdk-core/api/docs/param_formatter'
+      autoload :RequestSyntaxExample, 'aws-sdk-core/api/docs/request_syntax_example'
+      autoload :ResponseStructureExample, 'aws-sdk-core/api/docs/response_structure_example'
+      autoload :Utils, 'aws-sdk-core/api/docs/utils'
+    end
   end
 
   module Plugins
@@ -139,6 +130,8 @@ module Aws
     autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
+    autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
+    autoload :ParamValidator, 'aws-sdk-core/plugins/param_validator'
     autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
     autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
@@ -179,6 +172,23 @@ module Aws
   end
 
   # @api private
+  module Rest
+    autoload :Handler, 'aws-sdk-core/rest/handler'
+    module Request
+      autoload :Body, 'aws-sdk-core/rest/request/body'
+      autoload :Builder, 'aws-sdk-core/rest/request/builder'
+      autoload :Endpoint, 'aws-sdk-core/rest/request/endpoint'
+      autoload :Headers, 'aws-sdk-core/rest/request/headers'
+    end
+    module Response
+      autoload :Body, 'aws-sdk-core/rest/response/body'
+      autoload :Headers, 'aws-sdk-core/rest/response/headers'
+      autoload :Parser, 'aws-sdk-core/rest/response/parser'
+      autoload :StatusCode, 'aws-sdk-core/rest/response/status_code'
+    end
+  end
+
+  # @api private
   module Signers
     autoload :Base, 'aws-sdk-core/signers/base'
     autoload :Handler, 'aws-sdk-core/signers/handler'
@@ -186,6 +196,21 @@ module Aws
     autoload :V2, 'aws-sdk-core/signers/v2'
     autoload :V3, 'aws-sdk-core/signers/v3'
     autoload :V4, 'aws-sdk-core/signers/v4'
+  end
+
+  # @api private
+  module Stubbing
+    autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
+    autoload :StubData, 'aws-sdk-core/stubbing/stub_data'
+    autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'
+    module Protocols
+      autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
+      autoload :Json, 'aws-sdk-core/stubbing/protocols/json'
+      autoload :Query, 'aws-sdk-core/stubbing/protocols/query'
+      autoload :Rest, 'aws-sdk-core/stubbing/protocols/rest'
+      autoload :RestJson, 'aws-sdk-core/stubbing/protocols/rest_json'
+      autoload :RestXml, 'aws-sdk-core/stubbing/protocols/rest_xml'
+    end
   end
 
   module Waiters
@@ -200,9 +225,10 @@ module Aws
   module Xml
     autoload :Builder, 'aws-sdk-core/xml/builder'
     autoload :DefaultList,  'aws-sdk-core/xml/default_list'
+    autoload :DefaultMap,  'aws-sdk-core/xml/default_map'
+    autoload :DocBuilder, 'aws-sdk-core/xml/doc_builder'
     autoload :ErrorHandler,  'aws-sdk-core/xml/error_handler'
     autoload :Parser, 'aws-sdk-core/xml/parser'
-    autoload :RestHandler, 'aws-sdk-core/xml/rest_handler'
   end
 
   class << self
@@ -220,6 +246,55 @@ module Aws
       end
     end
 
+    # The SDK ships with a ca certificate bundle to use when verifying SSL
+    # peer certificates. By default, this cert bundle is *NOT* used. The
+    # SDK will rely on the default cert available to OpenSSL. This ensures
+    # the cert provided by your OS is used.
+    #
+    # For cases where the default cert is unavailable, e.g. Windows, you
+    # can call this method.
+    #
+    #     Aws.use_bundled_cert!
+    #
+    # @return [String] Returns the path to the bundled cert.
+    def use_bundled_cert!
+      config.delete(:ssl_ca_directory)
+      config.delete(:ssl_ca_store)
+      config[:ssl_ca_bundle] = File.expand_path(File.join(
+        File.dirname(__FILE__),
+        '..',
+        'ca-bundle.crt'
+      ))
+    end
+
+    # Loads modules that are normally loaded with Ruby's `autoload`.
+    # This can avoid thread-safety issues that some Ruby versions have
+    # with `autoload`.
+    #
+    #     # loads ALL services
+    #     Aws.eager_autoload!
+    #
+    # Loading all services can be slow. You can specify what services you
+    # want to load with the `:services` option. All services not named
+    # will continue to autoload as normal.
+    #
+    #     Aws.eager_auotload(services: %w(S3 EC2))
+    #
+    # @return [void]
+    def eager_autoload!(options = {})
+      eager_loader = EagerLoader.new
+      eager_loader.load(JMESPath)
+      eager_loader.load(Seahorse)
+      (options[:services] || SERVICE_MODULE_NAMES).each do |svc_name|
+        begin
+          eager_loader.load(Aws.const_get(svc_name))
+        rescue NameError
+          raise ArgumentError, "invalid service Aws::#{svc_name}"
+        end
+      end
+      eager_loader
+    end
+
     # Yields to the given block for each service that has already been
     # defined via {add_service}. Also yields to the given block for
     # each new service added after the callback is registered.
@@ -230,11 +305,6 @@ module Aws
         yield(svc_name, svc_module, options)
       end
       @service_added_callbacks << callback
-    end
-
-    # @api private
-    def load_json(path)
-      Seahorse::Util.load_json(path)
     end
 
     # Registers a new service.
@@ -251,7 +321,7 @@ module Aws
     # @param [String] svc_name The name of the service. This will also be
     #   the namespace under {Aws}. This must be a valid constant name.
     # @option options[String,Pathname,Hash,Seahorse::Model::Api,nil] :api
-    # @option options[String,Pathname,Hash,Paging::Provider,nil] :paginators
+    # @option options[String,Pathname,Hash,nil] :paginators
     # @option options[String,Pathname,Hash,Waiters::Provider,nil] :waiters
     # @option options[String,Pathname,Hash,Resources::Definition,nil] :resources
     # @return [Module<Service>] Returns the new service module.
@@ -265,19 +335,32 @@ module Aws
       svc_module
     end
 
-    # @api private
-    def load_all_services
-      SERVICE_MODULE_NAMES.each do |const_name|
-        const_get(const_name)
-      end
-    end
-
   end
 
   # build service client classes
   service_added do |name, svc_module, options|
     svc_module.const_set(:Client, Client.define(name, options))
     svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
+  end
+
+  # define a struct class for each client data type
+  service_added do |name, svc_module, options|
+    svc_module.const_set(:Types, Module.new)
+    svc_module::Client.api.metadata['shapes'].each_structure do |shape|
+      svc_module::Types.const_set(shape.name, shape[:struct_class])
+    end
+  end
+
+  # enable response paging
+  service_added do |name, svc_module, options|
+    if paginators = options[:paginators]
+      paginators = Json.load_file(paginators) unless Hash === paginators
+      svc_module::Client.api.operations.each do |_, operation|
+        if rules = paginators['pagination'][operation.name]
+          operation[:pager] = Pager.new(rules)
+        end
+      end
+    end
   end
 
 end

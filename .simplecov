@@ -12,6 +12,7 @@ SimpleCov.start do
 
   add_filter '/spec/'
   add_filter '/features/'
+  add_filter '/aws-sdk-core/lib/aws/api/docs'
   add_filter '/aws-sdk-resources/lib/aws/resource/documenter'
   add_filter '/aws-sdk-resources/lib/aws/resource/source.rb'
 

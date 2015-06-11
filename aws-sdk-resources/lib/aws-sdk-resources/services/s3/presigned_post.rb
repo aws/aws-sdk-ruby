@@ -1,6 +1,5 @@
 require 'openssl'
 require 'base64'
-require 'multi_json'
 
 module Aws
   module S3
@@ -210,7 +209,7 @@ module Aws
       # @option options [String] :server_side_encryption_customer_algorithm See {PresignedPost#server_side_encryption_customer_algorithm}.
       # @option options [String] :server_side_encryption_customer_key See {PresignedPost#server_side_encryption_customer_key}.
       def initialize(credentials, bucket_region, bucket_name, options = {})
-        @credentials = credentials
+        @credentials = credentials.credentials
         @bucket_region = bucket_region
         @bucket_name = bucket_name
         @url = bucket_url
@@ -597,7 +596,7 @@ module Aws
         signature_fields(datetime).each do |name, value|
           policy['conditions'] << { name => value }
         end
-        base64(MultiJson.dump(policy))
+        base64(Json.dump(policy))
       end
 
       def signature_fields(datetime)

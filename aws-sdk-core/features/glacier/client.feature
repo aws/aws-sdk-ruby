@@ -10,8 +10,8 @@ Feature: Amazon Glacier
   Scenario: Error handling
     When I attempt to call the "ListVaults" API with:
     | AccountId | abcmnoxyz |
-    Then I expect the response error code to be "AccessDeniedException"
+    Then I expect the response error code to be "UnrecognizedClientException"
     And I expect the response error message to include:
     """
-    Access denied
+    No account found for the given parameters
     """

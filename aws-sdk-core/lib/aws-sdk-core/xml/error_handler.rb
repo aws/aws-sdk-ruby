@@ -15,7 +15,12 @@ module Aws
 
       def error(context)
         body = context.http_response.body_contents
-        code, message = extract_error(body, context)
+        if body.empty?
+          code = http_status_error_code(context)
+          message = ''
+        else
+          code, message = extract_error(body, context)
+        end
         svc = context.client.class.name.split('::')[1]
         errors_module = Aws.const_get(svc).const_get(:Errors)
         errors_module.error_class(code).new(context, message)
@@ -50,7 +55,7 @@ module Aws
       end
 
       def remove_prefix(error_code, context)
-        if prefix = context.config.api.metadata('errorPrefix')
+        if prefix = context.config.api.metadata['errorPrefix']
           error_code.sub(/^#{prefix}/, '')
         else
           error_code

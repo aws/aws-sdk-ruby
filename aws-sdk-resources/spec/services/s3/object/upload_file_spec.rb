@@ -32,7 +32,7 @@ module Aws
 
         let(:ten_meg_file) { Tempfile.new('ten-meg-file') }
 
-        let(:seventeen_meg_file) { Tempfile.new('ten-meg-file') }
+        let(:seventeen_meg_file) { Tempfile.new('seventeen-meg-file') }
 
         before(:each) do
           allow(File).to receive(:size).with(one_meg_file).and_return(one_meg)
@@ -76,62 +76,15 @@ module Aws
 
         describe 'large objects' do
 
-          before(:each) do
-            client.stub_responses(:create_multipart_upload, upload_id: 'upload-id')
-            client.stub_responses(:upload_part, [
-              { etag: 'etag-1' },
-              { etag: 'etag-2' },
-              { etag: 'etag-3' },
-              { etag: 'etag-4' },
-            ])
-          end
-
           it 'uses multipart APIs for objects >= 15MB' do
-
-            create_resp = double('create-resp', upload_id:'upload-id')
-
             expect(client).to receive(:create_multipart_upload).
-              with(bucket:'bucket', key:'key', content_type:'text/plain').
-              and_return(client.next_stub(:create_multipart_upload))
+              and_return(client.stub_data(:create_multipart_upload, upload_id:'id'))
 
-            (1..3).each do |n|
-              expect(client).to receive(:upload_part).with(
-                bucket: 'bucket',
-                key: 'key',
-                upload_id: 'upload-id',
-                part_number: n,
-                body: file_part(
-                  source: seventeen_meg_file,
-                  offset: (n - 1) * 5 * one_meg,
-                  size: 5 * one_meg
-                )
-              ).and_return(client.next_stub(:upload_part))
-            end
-            expect(client).to receive(:upload_part).with(
-              bucket: 'bucket',
-              key: 'key',
-              upload_id: 'upload-id',
-              part_number: 4,
-              body: file_part(
-                source: seventeen_meg_file,
-                offset: 15 * one_meg,
-                size: 2 * one_meg
-              )
-            ).and_return(client.next_stub(:upload_part))
+            expect(client).to receive(:upload_part).exactly(4).times.
+              and_return(client.stub_data(:upload_part, etag:'etag'))
 
-            expect(client).to receive(:complete_multipart_upload).with(
-              bucket: 'bucket',
-              key: 'key',
-              upload_id: 'upload-id',
-              multipart_upload: {
-                parts: [
-                  { part_number: 1, etag: 'etag-1' },
-                  { part_number: 2, etag: 'etag-2' },
-                  { part_number: 3, etag: 'etag-3' },
-                  { part_number: 4, etag: 'etag-4' },
-                ]
-              }
-            )
+            expect(client).to receive(:complete_multipart_upload)
+
             object.upload_file(seventeen_meg_file, content_type: 'text/plain')
           end
 
@@ -154,7 +107,7 @@ module Aws
             ])
 
             expect(client).to receive(:abort_multipart_upload).
-              with(bucket: 'bucket', key: 'key', upload_id: 'upload-id')
+              with(bucket: 'bucket', key: 'key', upload_id: 'MultipartUploadId')
 
             expect {
               object.upload_file(seventeen_meg_file)

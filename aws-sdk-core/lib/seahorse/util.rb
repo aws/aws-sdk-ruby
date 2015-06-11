@@ -1,10 +1,10 @@
 require 'cgi'
 
 module Seahorse
+  # @api private
   module Util
     class << self
 
-      # @api private
       def irregular_inflections(hash)
         @irregular_inflections.update(hash)
         @irregular_regex = Regexp.new(@irregular_inflections.keys.join('|'))
@@ -21,11 +21,7 @@ module Seahorse
       end
 
       def uri_escape(string)
-        CGI::escape(string.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
-      end
-
-      def load_json(path)
-        MultiJson.load(File.open(path, 'r', encoding: 'UTF-8') { |f| f.read })
+        CGI.escape(string.encode('UTF-8')).gsub('+', '%20').gsub('%7E', '~')
       end
 
     end

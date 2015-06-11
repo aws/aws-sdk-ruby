@@ -20,7 +20,7 @@ module Aws
     end
 
     it 'reads the correct default credentials from a credentials file' do
-      creds = SharedCredentials.new(path:mock_credential_file)
+      creds = SharedCredentials.new(path:mock_credential_file).credentials
       expect(creds.access_key_id).to eq('ACCESS_KEY_0')
       expect(creds.secret_access_key).to eq('SECRET_KEY_0')
       expect(creds.session_token).to eq('TOKEN_0')
@@ -28,7 +28,7 @@ module Aws
 
     it 'supports fetching profiles from ENV' do
       stub_const('ENV', { 'AWS_PROFILE' => 'barprofile' })
-      creds = SharedCredentials.new(path:mock_credential_file)
+      creds = SharedCredentials.new(path:mock_credential_file).credentials
       expect(creds.access_key_id).to eq('ACCESS_KEY_2')
       expect(creds.secret_access_key).to eq('SECRET_KEY_2')
       expect(creds.session_token).to eq('TOKEN_2')
@@ -38,7 +38,7 @@ module Aws
       stub_const('ENV', { 'AWS_PROFILE' => 'barporfile' })
       creds = SharedCredentials.new(
         path: mock_credential_file,
-        profile_name: 'fooprofile')
+        profile_name: 'fooprofile').credentials
       expect(creds.access_key_id).to eq('ACCESS_KEY_1')
       expect(creds.secret_access_key).to eq('SECRET_KEY_1')
       expect(creds.session_token).to eq('TOKEN_1')

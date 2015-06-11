@@ -1,12 +1,160 @@
 Unreleased Changes
 ------------------
 
-* Issue - Response Stubbing - When enabling response stubbing via
-  `stub_responses: true` on a client, the default credential chain is longer
-  used to source credentials. Instead a set of fake stubbed static credentials
-  are used by default.
+* Feature - Fewer gem dependencies - Removed the dependency on the follow
+  two 3rd party gems:
+
+  * `multi_json`
+  * `builder`
+
+  For JSON parsing and dumping, the SDK will attempt to use the `Oj`
+  gem if available, and will fall back on `JSON` from the Ruby
+  standard library.
+
+  The only remaining gem dependency is `jmespath`.
+
+* Feature - Service Types - Added struct classes for all AWS data types.
+  Previous versions used anonymous structure classes for response data.
+
+      Aws::IAM::Types.constants
+      #=> [:AccessKey, :AccessKeyLastUsed, :AccessKeyMetadata, ...]
+
+  Each of these data type classes are now fully documented in the
+  [api reference docs](http://docs.aws.amazon.com/sdkforruby/api/index.html).
+
+* Feature - Examples - The API reference documentation can now load client
+  operation examples from disk. This allows users to contribute examples
+  to the documentation. It also allows for more targeted examples
+  than the auto-generated ones previously used.
+
+  Examples are stored inside the examples folder at the root of this
+  repository. https://github.com/aws/aws-sdk-ruby/tree/master/examples
+
+* Feature - Documentation - Significant work has gone into API reference
+  documentation. The changes made are based on user feedback. Some of
+  the many changes include:
+
+  * More concise syntax examples
+  * Response structure examples
+  * Request and response data structures each documented as their own type
+  * Expanded resource interface documentation on inputs and return values
+
+  Expect more documentation improvements.
+
+* Feature - Smaller Gem - Reduced the size of the `aws-sdk-core` gem
+  by removing the AWS API documentation source files from the gemspec.
+  This reduces the total size of the gem by half.
+
+* Feature - Stub Data - Added a `#stub_data` method to `Aws::Client` that
+  makes it trivial to generate response data structures.
+
+      s3 = Aws::S3::Client.new
+
+      s3.stub_data(:list_buckets)
+      #=> #<struct Aws::S3::Types::ListBucketsOutput buckets=[], owner=#<struct Aws::S3::Types::Owner display_name="DisplayName", id="ID">>
+
+  You can also provide an optional hash of data to apply to the stub.
+  The data hash will be validated to ensure it is properly formed and
+  then it is applied. This makes it easy to generated nested response
+  data.
+
+      s3.stub_data(:list_buckets, buckets:[{name:'aws-sdk'}])
+      #=> #<struct Aws::S3::Types::ListBucketsOutput
+        buckets=[
+          #<struct Aws::S3::Types::Bucket name="aws-sdk", creation_date=nil>
+        ],
+        owner=#<struct Aws::S3::Types::Owner display_name="DisplayName", id="ID">>
+
+* Feature - Shared Response Stubs - You can now provide default stubs to a
+  client via the constructor and via `Aws.config`. This can be very useful
+  if you need to stub client responses, but you are not constructing the
+  client.
+
+      Aws.config[:s3] = {
+        stub_responses: {
+          list_buckets: { buckets: [{name:'aws-sdk'}]}
+        }
+      }
+
+      s3 = Aws::S3::Client.new
+      s3.list_buckets.buckets.map(&:name)
+      #=> ['aws-sdk']
+
+  See [related GitHub issue aws/aws-sdk-core#187](https://github.com/aws/aws-sdk-core-ruby/issues/187)
+
+* Issue - Response Stubbing - When using response stubbing, pagination
+  tokens will no longer be generated. This prevents stubbed responses
+  from appearing pageable when they are not.
+
+  See [related GitHub issue #804](https://github.com/aws/aws-sdk-ruby/pull/804)
+
+* Issue - Aws::DynamoDB::Client - Resolved an issue where it was not
+  possible to stub attribute values. You can now stub DynamoDB responses
+  as expected:
+
+      ddb = Aws::DynamoDB::Client.new(stub_responses:true)
+      ddb.stub_responses(:get_item, item: { 'id' => 'value', 'color' => 'red' })
+      ddb.get_item(table_name:'table', key:{'id' => 'value'})
+      #=> #<struct Aws::DynamoDB::Types::GetItemOutput item={"id"=>"value", "color"=>"red"}, consumed_capacity=nil>
+
+  See [related GitHub issue #770](https://github.com/aws/aws-sdk-ruby/pull/770)
+
+* Feature - SSL Peer Verification - Added a method to configure a default
+  SSL CA certificate bundle to be used when verifying SSL peer certificates.
+  V1 did this by default, v2 is now opt-in only.
+
+      Aws.use_bundled_cert!
+
+  This method can be very useful for Ruby users on Windows where OpenSSL
+  does not tend to have access to a valid SSL cert bundle.
+
+  See [related GitHub issue aws/aws-sdk-core#166](https://github.com/aws/aws-sdk-core-ruby/issues/166)
+
+* Feature - Eager auto-loading - Added a utility method that eagerly loads
+  classes and modules. This can help avoid thread-safety issues with
+  autoload affecting some versions Ruby.
+
+      # autoload specific services (faster)
+      Aws.eager_autoload!(services: %w(S3 EC2))
+
+      # autoload everything
+      Aws.eager_autoload!
+
+  See [related GitHub issue #833](https://github.com/aws/aws-sdk-ruby/pull/833)
+
+* Issue - Response Stubbing - Clients with `stub_responses: true` were still
+  attempting to load credentials from ENV, and the EC2 instance metadata
+  service. Instead, stubbed clients will now construct fake static credentials.
 
   See [related GitHub issue #835](https://github.com/aws/aws-sdk-ruby/pull/835)
+
+* Upgrading - Pageable Responses - Due to frequent confusion caused by
+  having every response be decorated as pageable, only operations that can
+  possibly have multiple responses are now decorated.
+
+  This ensures that if you call `#each` on a non-pageable response that
+  an appropriate `NoMethodError` is raised instead of doing nothing. Simply
+  remove calls to `#each` if you encounter this unlikely situation.
+
+      s3 = Aws::S3::Client.new
+      s3.head_object(bucket:'name', key:'key').each do |page|
+      end
+      #=> raises NoMethodError for #each, HEAD object is not pageable
+
+  This is correctly reflected now in the API reference documentation as
+  well.
+
+* Upgrading - Seahorse::Model - The internal representation of AWS API models
+  has been updated. Users digging into internals of the API model will need
+  to update their code to deal with shape references.
+
+  **This change should not affect users of the public SDK interfaces**.
+
+  Complex shapes, structures, lists, and maps, now use shape references
+  to nest other shapes. The entire API model now loaded when the service client
+  is defined. This eliminates the need to maintain a complex map of all
+  shapes and define them lazily. This has allows for massive simplifications
+  around API loading, especially when dealing with thread-safety concerns.
 
 2.0.48 (2015-06-04)
 ------------------

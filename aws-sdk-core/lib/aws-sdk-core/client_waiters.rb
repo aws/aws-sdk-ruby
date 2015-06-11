@@ -10,7 +10,7 @@ module Aws
             case waiters
             when Waiters::Provider then waiters
             when Hash then Waiters::Provider.new(waiters)
-            when String, Pathname then Waiters::Provider.new(Aws.load_json(waiters))
+            when String, Pathname then Waiters::Provider.new(Json.load_file(waiters))
             when nil then Waiters::NullProvider.new
             else raise ArgumentError, 'invalid waiters'
             end

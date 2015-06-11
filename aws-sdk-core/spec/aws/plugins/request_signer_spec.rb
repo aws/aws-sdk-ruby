@@ -6,13 +6,10 @@ module Aws
 
       let(:plugin) { RequestSigner.new }
 
-      let(:api) {
-        Seahorse::Model::Api.new(
+      let(:config) {
+        api = Api::Builder.build(
           'metadata' => { 'endpointPrefix' => 'svc-name' }
         )
-      }
-
-      let(:config) {
         cfg = Seahorse::Client::Configuration.new
         cfg.add_option(:endpoint, 'http://svc-name.us-west-2.amazonaws.com')
         cfg.add_option(:api, api)
@@ -23,11 +20,11 @@ module Aws
 
       it 'raises an error when attempting to sign a request w/out credentials' do
         klass = Class.new(Seahorse::Client::Base)
-        klass.set_api({
+        klass.set_api(Api::Builder.build(
           'operations' => {
             'DoSomething' => {}
           }
-        })
+        ))
         klass.add_plugin(RegionalEndpoint)
         klass.add_plugin(RequestSigner)
         client = klass.new(

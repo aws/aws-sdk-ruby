@@ -5,11 +5,7 @@ module Seahorse
   module Client
     describe Base do
 
-      let(:api) {{
-        'operations' => {
-          'operation_name' => {},
-        }
-      }}
+      let(:api) { Seahorse::Model::Api.new }
 
       let(:client_class) { Base.define(api:api) }
 
@@ -63,6 +59,10 @@ module Seahorse
 
         let(:request) { client.build_request('operation_name') }
 
+        before(:each) do
+          api.add_operation(:operation_name, Model::Operation.new)
+        end
+
         it 'returns a Request' do
           expect(request).to be_kind_of(Request)
         end
@@ -85,7 +85,7 @@ module Seahorse
 
         it 'stringifies the operation name' do
           request = client.build_request(:operation_name)
-          expect(request.context.operation_name).to eq('operation_name')
+          expect(request.context.operation_name).to eq(:operation_name)
         end
 
         it 'populates the request context params' do
@@ -107,7 +107,7 @@ module Seahorse
         it 'raises an error for unknown operations' do
           expect {
             client.build_request('foo')
-          }.to raise_error("unknown operation :foo")
+          }.to raise_error("unknown operation \"foo\"")
         end
 
       end
@@ -117,6 +117,7 @@ module Seahorse
         let(:request) { double('request') }
 
         before(:each) do
+          api.add_operation(:operation_name, Model::Operation.new)
           allow(client).to receive(:build_request).and_return(request)
           allow(request).to receive(:send_request)
         end
@@ -156,17 +157,10 @@ module Seahorse
       describe '.api' do
 
         it 'can be set' do
-          api = Model::Api.new({})
+          api = Model::Api.new
           client_class = Class.new(Base)
           client_class.set_api(api)
           expect(client_class.api).to be(api)
-        end
-
-        it 'can be set as a hash, returning a Model::Api' do
-          client_class = Class.new(Base)
-          api = client_class.set_api({})
-          expect(api).to be_kind_of(Model::Api)
-          expect(api.definition).to eq(Model::Api.new({}).definition)
         end
 
       end
@@ -179,7 +173,7 @@ module Seahorse
         end
 
         it 'sets the api on the client class' do
-          api = Model::Api.new({})
+          api = Model::Api.new
           client_class = Base.define(api: api)
           expect(client_class.api).to be(api)
         end
@@ -269,19 +263,9 @@ module Seahorse
           expect(client_class.plugins.to_a).to eq([
             Plugins::Endpoint,
             Plugins::NetHttp,
-            Plugins::ParamConversion,
-            Plugins::ParamValidation,
             Plugins::RaiseResponseErrors,
             Plugins::ResponseTarget,
           ])
-        end
-
-        it 'add plugins specified in the api to the default plugins' do
-          stub_const('Seahorse::Client::PluginA', plugin_a)
-          api = { 'plugins' => ['Seahorse::Client::PluginA'] }
-          client_class = Base.define(api: api)
-          expect(client_class.plugins).to include(Plugins::NetHttp)
-          expect(client_class.plugins).to include(Client::Plugins::NetHttp)
         end
 
       end

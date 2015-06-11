@@ -13,8 +13,6 @@ module Seahorse
     autoload :HandlerListEntry, 'seahorse/client/handler_list_entry'
     autoload :ManagedFile, 'seahorse/client/managed_file'
     autoload :NetworkingError, 'seahorse/client/networking_error'
-    autoload :ParamConverter, 'seahorse/client/param_converter'
-    autoload :ParamValidator, 'seahorse/client/param_validator'
     autoload :Plugin, 'seahorse/client/plugin'
     autoload :PluginList, 'seahorse/client/plugin_list'
     autoload :Request, 'seahorse/client/request'
@@ -42,19 +40,11 @@ module Seahorse
     module Plugins
       autoload :ContentLength, 'seahorse/client/plugins/content_length'
       autoload :Endpoint, 'seahorse/client/plugins/endpoint'
-      autoload :JsonSimple, 'seahorse/client/plugins/json_simple'
       autoload :Logging, 'seahorse/client/plugins/logging'
       autoload :NetHttp, 'seahorse/client/plugins/net_http'
-      autoload :ParamConversion, 'seahorse/client/plugins/param_conversion'
-      autoload :ParamValidation, 'seahorse/client/plugins/param_validation'
       autoload :RaiseResponseErrors, 'seahorse/client/plugins/raise_response_errors'
       autoload :ResponseTarget, 'seahorse/client/plugins/response_target'
       autoload :RestfulBindings, 'seahorse/client/plugins/restful_bindings'
-    end
-
-    # @api private
-    module Xml
-      autoload :Builder, 'seahorse/client/xml/builder'
     end
 
   end
@@ -62,7 +52,6 @@ module Seahorse
   module Model
     autoload :Api, 'seahorse/model/api'
     autoload :Operation, 'seahorse/model/operation'
-    autoload :ShapeMap, 'seahorse/model/shape_map'
     autoload :Shapes, 'seahorse/model/shapes'
   end
 

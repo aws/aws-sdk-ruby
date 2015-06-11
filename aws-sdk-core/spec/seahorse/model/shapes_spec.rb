@@ -1,520 +1,282 @@
 require 'spec_helper'
+require 'set'
 
 module Seahorse
   module Model
     module Shapes
+      describe ShapeRef do
 
-      shared_examples 'subclass of Shape' do |definition|
-
-        it 'can be initialized without any arguments' do
-          described_class.new(definition)
+        it 'defaults #shape to nil' do
+          shape = double('shape')
+          ref = ShapeRef.new
+          expect(ref.shape).to be(nil)
+          ref.shape = shape
+          expect(ref.shape).to be(shape)
         end
 
-        it 'can be constructed directly from Shape.new with "type"' do
-          shape = Shape.new(definition.merge('type' => described_class.type))
-          expect(shape).to be_kind_of(described_class)
+        it 'defaults #location to nil' do
+          ref = ShapeRef.new
+          expect(ref.location).to be(nil)
+          ref.location = 'value'
+          expect(ref.location).to eq('value')
         end
 
-        it 'responds to #type with the shape class type' do
-          shape = described_class.new(definition)
-          expect(shape.type).to eq(described_class.type)
+        it 'defaults #location_name to nil' do
+          ref = ShapeRef.new
+          expect(ref.location_name).to be(nil)
+          ref.location_name = 'value'
+          expect(ref.location_name).to eq('value')
         end
 
-        it 'responds to #location_name with a default of  nil' do
-          shape = described_class.new(definition)
-          expect(shape.location_name).to be(nil)
+        it 'defaults #deprecated to false' do
+          ref = ShapeRef.new
+          expect(ref.deprecated).to be(false)
+          ref.deprecated = true
+          expect(ref.deprecated).to be(true)
         end
 
-        it 'responds to #location_name with the given value' do
-          definition['locationName'] = 'Name'
-          shape = described_class.new(definition)
-          expect(shape.location_name).to eq('Name')
+        it 'provides metadata access via #[] and #[]=' do
+          ref = ShapeRef.new
+          ref[:key] = 'value'
+          expect(ref[:key]).to eq('value')
+          expect(ref['key']).to eq('value')
         end
 
-        it 'responds to #documentation with a default of  nil' do
-          shape = described_class.new(definition)
-          expect(shape.documentation).to be(nil)
+        it 'provides read access to the shape metadata' do
+          shape = Shape.new
+          shape['key'] = 'value'
+          ref = ShapeRef.new(shape: shape)
+          expect(ref[:key]).to eq('value')
+          expect(ref['key']).to eq('value')
         end
 
-        it 'responds to #documentation with the given docs' do
-          definition['documentation'] = 'docs'
-          shape = described_class.new(definition)
-          expect(shape.documentation).to eq('docs')
-        end
-
-        it 'responds to #metadata, returning the definition at that key' do
-          shape = described_class.new(definition.merge('foo' => 'bar'))
-          expect(shape.metadata('foo')).to eq('bar')
-        end
-
-        it 'responds to #shape_map with a default empty shape map' do
-          shape = described_class.new(definition)
-          expect(shape.shape_map).to be_kind_of(ShapeMap)
-        end
-
-        it 'responds to #shape_map with the constructed object' do
-          shape_map = double('shape-map')
-          shape = described_class.new(definition, shape_map: shape_map)
-          expect(shape.shape_map).to be(shape_map)
-        end
-
-      end
-
-      describe Shapes::Shape do
-
-        describe 'new' do
-
-          it 'constructs and returns a shape of the indicited type' do
-            shape = Shape.new('type' => 'structure')
-            expect(shape).to be_kind_of(Shapes::Structure)
-          end
-
-        end
-
-        describe 'types' do
-
-          it 'returns an enumerator of shape types to shape classes' do
-            expect(Shapes.types.to_a.sort).to eq([
-              ['blob', Shapes::Blob],
-              ['boolean', Shapes::Boolean],
-              ['byte', Shapes::Byte],
-              ['character', Shapes::Character],
-              ['double', Shapes::Double],
-              ['float', Shapes::Float],
-              ['integer', Shapes::Integer],
-              ['list', Shapes::List],
-              ['long', Shapes::Long],
-              ['map', Shapes::Map],
-              ['string', Shapes::String],
-              ['structure', Shapes::Structure],
-              ['timestamp', Shapes::Timestamp],
-            ])
-          end
-
+        it 'can be populated via .new' do
+          shape = double('shape')
+          ref = ShapeRef.new(
+            shape: shape,
+            location: 'location',
+            location_name: 'location_name',
+            deprecated: true,
+            metadata: {
+              key: 'value'
+            }
+          )
+          expect(ref.shape).to be(shape)
+          expect(ref.location).to eq('location')
+          expect(ref.location_name).to eq('location_name')
+          expect(ref.deprecated).to be(true)
+          expect(ref[:key]).to eq('value')
         end
 
       end
 
-      describe Shapes::Structure do
+      describe StructureShape do
 
-        let(:definition) {{
-          'type' => 'structure',
-          'required' => ['name'],
-          'members' => {
-            'name' => { 'type' => 'string' },
-            'age' => { 'type' => 'integer' },
-          }
-        }}
-
-        let(:shape) { Shapes::Structure.new(definition) }
-
-        it_should_behave_like 'subclass of Shape', {}
-
-        describe '#member' do
-
-          it 'returns the shape for the named member' do
-            name_shape = shape.member(:name)
-            expect(name_shape).to be_a(Shapes::String)
-          end
-
-          it 'accepts string member names' do
-            name_shape = shape.member('name')
-            expect(name_shape).to be_a(Shapes::String)
-          end
-
-          it 'raises an ArgumentError if an undefined member is requested' do
-            expect {
-              shape.member(:gender)
-            }.to raise_error(ArgumentError, "no such member :gender")
-          end
-
-        end
-
-        describe '#member?' do
-
-          it 'returns true if the member is defined' do
-            expect(shape.member?(:name)).to be(true)
-            expect(shape.member?('name')).to be(true)
-          end
-
-          it 'returns false if the member is not defined' do
-            expect(shape.member?(:gender)).to be(false)
-          end
-
-        end
-
-        describe '#members' do
-
-          it 'returns an enumerable object' do
-            expect(shape.members).to be_kind_of(Enumerable)
-          end
-
-          it 'enumerates member names and member shapes' do
-            yielded = []
-            shape.members.each do |member_name, member_shape|
-              yielded << [member_name, member_shape]
-            end
-            expect(yielded).to eq([
-              [:name, shape.member(:name)],
-              [:age, shape.member(:age)],
-            ])
-          end
-
-        end
-
-        describe '#member_names' do
-
-          it 'returns an array of symbolized member names' do
-            expect(shape.member_names).to eq([:name, :age])
-          end
-
-        end
-
-        describe '#required' do
-
-          it 'returns an array of symbolized required member names' do
-            expect(shape.required).to eq([:name])
-          end
-
-          it 'defaults to an empty list' do
-            shape = Shapes::Structure.new
-            expect(shape.required).to eq([])
-          end
-
-        end
-
-        describe 'with a shape map (recursive shapes)' do
-
-          let(:shape_map) {
-            ShapeMap.new({
-              'Person' => {
-                'type' => 'structure',
-                'members' => {
-                  'Father' => { 'shape' => 'Person' },
-                  'Mother' => { 'shape' => 'Person', 'hasMaidenName' => true },
-                }
-              }
-            })
-          }
-
-          let(:shape) { shape_map.shape('shape' => 'Person') }
-
-          it 'constructs and returns recursive shapes' do
-            shape.member(:father).member(:father)
-          end
-
-          it 'reuses shapes that share references' do
-            father = shape.member(:father)
-            grand_father = father.member(:father)
-            expect(father).to be(grand_father)
-          end
-
-          it 'constructs new shape for references with additional traits' do
-            mother = shape.member(:mother)
-            expect(mother).not_to be(shape.member(:father))
-            expect(mother).to be(shape.member(:mother).member(:mother))
-          end
-
-          it 'merges shape refs with shape definitions' do
-            mother = shape.member(:mother)
-            expect(mother.metadata('hasMaidenName')).to be(true)
-          end
-
-        end
-
-      end
-
-      describe Shapes::List do
-
-        it_should_behave_like 'subclass of Shape', { 'member' => { 'type' => 'string' }}
-
-        let(:definition) {{ 'member' => { 'type' => 'string' }}}
-
-        let(:options) { {} }
-
-        let(:shape) { Shapes::List.new(definition, options) }
-
-        describe '#min' do
-
-          it 'defaults to nil' do
-            expect(shape.min).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['min'] = 1
-            expect(shape.min).to be(1)
-          end
-
-        end
-
-        describe '#max' do
-
-          it 'defaults to nil' do
-            expect(shape.max).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['max'] = 100
-            expect(shape.max).to be(100)
-          end
-
-        end
-
-        describe '#member' do
-
-          it 'returns the shape given in the definition' do
-            definition['member'] = { 'type' => 'integer' }
-            expect(shape.member).to be_kind_of(Shapes::Integer)
-          end
-
-          it 'resolves shape refs in the given shape map' do
-            shape_map = ShapeMap.new({'Number' => { 'type' => 'integer' }})
-            definition['member'] = { 'shape' => 'Number' }
-            options[:shape_map] = shape_map
-            shape = Shapes::List.new(definition, options)
-            expect(shape.member).to be_kind_of(Shapes::Integer)
-            expect(shape.member).to be(shape_map.shape('shape' => 'Number'))
-          end
-
-        end
-
-      end
-
-      describe Shapes::Map do
-
-        it_should_behave_like 'subclass of Shape', {
-          'key' => { 'type' => 'string' },
-          'value' => { 'type' => 'string' },
+        let(:shape_ref) {
+          ShapeRef.new(shape: Shape.new, location_name: 'LocName')
         }
 
-        let(:definition) {{
-          'key' => { 'type' => 'string' },
-          'value' => { 'type' => 'string' },
-        }}
-
-        let(:options) { {} }
-
-        let(:shape) { Shapes::Map.new(definition, options) }
-
-        describe '#min' do
-
-          it 'defaults to nil' do
-            expect(shape.min).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['min'] = 1
-            expect(shape.min).to be(1)
-          end
-
+        it 'is a Shape' do
+          expect(StructureShape.new).to be_kind_of(Shape)
         end
 
-        describe '#max' do
-
-          it 'defaults to nil' do
-            expect(shape.max).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['max'] = 100
-            expect(shape.max).to be(100)
-          end
-
+        it 'allows members to be added' do
+          shape = StructureShape.new
+          expect(shape.member_names).to eq([])
+          shape_ref.required = true
+          shape.add_member(:member_name, shape_ref)
+          expect(shape.member?(:member_name)).to be(true)
+          expect(shape.member?('member_name')).to be(true)
+          expect(shape.member_names).to eq([:member_name])
+          expect(shape.member(:member_name)).to be(shape_ref)
+          expect(shape.member('member_name')).to be(shape_ref)
         end
 
-        describe '#key' do
-
-          it 'defaults to a string shape' do
-            expect(shape.key).to be_kind_of(Shapes::String)
-          end
-
-          it 'returns the shape given in the definition' do
-            definition['key'] = { 'type' => 'integer' }
-            expect(shape.key).to be_kind_of(Shapes::Integer)
-          end
-
-          it 'resolves shape refs in the given shape map' do
-            shape_map = ShapeMap.new({'String' => { 'type' => 'integer' }})
-            definition['key'] = { 'shape' => 'String' }
-            options[:shape_map] = shape_map
-            shape = Shapes::Map.new(definition, options)
-            expect(shape.key).to be_kind_of(Shapes::Integer)
-            expect(shape.key).to be(shape_map.shape('shape' => 'String'))
-          end
-
+        it 'provides a list of required members' do
+          shape_ref.required = true
+          shape = StructureShape.new
+          expect(shape.required).to be_kind_of(Set)
+          expect(shape.required).to be_empty
+          shape.add_member(:member_name, shape_ref)
+          expect(shape.required).to include(:member_name)
         end
 
-        describe '#value' do
-
-          it 'defaults to a string shape' do
-            expect(shape.value).to be_kind_of(Shapes::String)
-          end
-
-          it 'returns the shape given in the definition' do
-            definition['value'] = { 'type' => 'integer' }
-            expect(shape.value).to be_kind_of(Shapes::Integer)
-          end
-
-          it 'resolves shape refs in the given shape map' do
-            shape_map = ShapeMap.new({'String' => { 'type' => 'integer' }})
-            definition['value'] = { 'shape' => 'String' }
-            options[:shape_map] = shape_map
-            shape = Shapes::Map.new(definition, options)
-            expect(shape.value).to be_kind_of(Shapes::Integer)
-            expect(shape.value).to be(shape_map.shape('shape' => 'String'))
-          end
-
+        it 'provides access to members by their location name' do
+          shape_ref.required = true
+          shape = StructureShape.new
+          shape.add_member(:member_name, shape_ref)
+          expect(shape.member_by_location_name(shape_ref.location_name)).to eq([:member_name, shape_ref])
         end
 
       end
 
-      describe Shapes::String do
+      describe ListShape do
 
-        it_should_behave_like 'subclass of Shape', {}
+        let(:shape_ref) {
+          ShapeRef.new(shape: Shape.new, location_name: 'LocName')
+        }
 
-        let(:definition) { {} }
-
-        let(:shape) { Shapes::String.new(definition) }
-
-        describe '#min' do
-
-          it 'defaults to nil' do
-            expect(shape.min).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['min'] = 1
-            expect(shape.min).to be(1)
-          end
-
+        it 'is a Shape' do
+          expect(ListShape.new).to be_kind_of(Shape)
         end
 
-        describe '#max' do
-
-          it 'defaults to nil' do
-            expect(shape.max).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['max'] = 100
-            expect(shape.max).to be(100)
-          end
-
+        it 'defaults #min to nil' do
+          shape = ListShape.new
+          expect(shape.min).to be(nil)
+          shape.min = 10
+          expect(shape.min).to eq(10)
         end
 
-        describe '#enum' do
-
-          it 'defaults to nil' do
-            expect(shape.enum).to be(nil)
-          end
-
-          it 'returns the value given in the definition in a Set' do
-            definition['enum'] = %w(a b c)
-            expect(shape.enum).to eq(Set.new(%w(a b c)))
-          end
-
+        it 'defaults #max to nil' do
+          shape = ListShape.new
+          expect(shape.max).to be(nil)
+          shape.max = 10
+          expect(shape.max).to eq(10)
         end
 
-        describe '#pattern' do
-
-          it 'defaults to nil' do
-            expect(shape.pattern).to be(nil)
-          end
-
-          it 'returns the value given' do
-            definition['pattern'] = 'abc'
-            expect(shape.pattern).to eq('abc')
-          end
-
+        it 'has a #member reference' do
+          shape = ListShape.new
+          expect(shape.member).to be(nil)
+          shape.member = shape_ref
+          expect(shape.member).to be(shape_ref)
         end
 
       end
 
-      describe Shapes::Timestamp do
+      describe MapShape do
 
-        it_should_behave_like 'subclass of Shape', {}
+        let(:shape_ref) {
+          ShapeRef.new(shape: Shape.new, location_name: 'LocName')
+        }
 
-        let(:definition) { {} }
-
-        let(:shape) { Shapes::Timestamp.new(definition) }
-
-        describe '#format' do
-
-          it 'returns the value given in definition' do
-            definition['timestampFormat'] = 'rfc822'
-            expect(shape.format).to eq('rfc822')
-          end
-
+        it 'is a Shape' do
+          expect(MapShape.new).to be_kind_of(Shape)
         end
 
-        describe '#format_time' do
-
-          it 'defaults to the given timestamp format' do
-            now = Time.now
-            expect(shape.format_time(now, 'unixTimestamp')).to eq(now.to_i)
-          end
-
-          it 'uses the given timestampFormat over the given default' do
-            now = Time.now
-            definition['timestampFormat'] = 'rfc822'
-            expect(shape.format_time(now, 'unixTimestamp')).to eq(now.utc.rfc822)
-          end
-
+        it 'defaults #min to nil' do
+          shape = MapShape.new
+          expect(shape.min).to be(nil)
+          shape.min = 10
+          expect(shape.min).to eq(10)
         end
 
-      end
-
-      describe Shapes::Integer do
-
-        it_should_behave_like 'subclass of Shape', {}
-
-        let(:definition) { {} }
-
-        let(:shape) { Shapes::Integer.new(definition) }
-
-        describe '#min' do
-
-          it 'defaults to nil' do
-            expect(shape.min).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['min'] = 1
-            expect(shape.min).to be(1)
-          end
-
+        it 'defaults #max to nil' do
+          shape = MapShape.new
+          expect(shape.max).to be(nil)
+          shape.max = 10
+          expect(shape.max).to eq(10)
         end
 
-        describe '#max' do
+        it 'has a #key reference' do
+          shape = MapShape.new
+          expect(shape.key).to be(nil)
+          shape.key = shape_ref
+          expect(shape.key).to be(shape_ref)
+        end
 
-          it 'defaults to nil' do
-            expect(shape.max).to be(nil)
-          end
-
-          it 'returns the value given in the definition' do
-            definition['max'] = 100
-            expect(shape.max).to be(100)
-          end
-
+        it 'has a #value reference' do
+          shape = MapShape.new
+          expect(shape.value).to be(nil)
+          shape.value = shape_ref
+          expect(shape.value).to be(shape_ref)
         end
 
       end
 
-      describe Shapes::Float do
+      describe BlobShape do
 
-        it_should_behave_like 'subclass of Shape', {}
+        it 'is a Shape' do
+          expect(BlobShape.new).to be_kind_of(Shape)
+        end
+
+        it 'defaults #min to nil' do
+          shape = BlobShape.new
+          expect(shape.min).to be(nil)
+          shape.min = 10
+          expect(shape.min).to eq(10)
+        end
+
+        it 'defaults #max to nil' do
+          shape = BlobShape.new
+          expect(shape.max).to be(nil)
+          shape.max = 10
+          expect(shape.max).to eq(10)
+        end
 
       end
 
-      describe Shapes::Boolean do
+      describe BooleanShape do
 
-        it_should_behave_like 'subclass of Shape', {}
+        it 'is a Shape' do
+          expect(BooleanShape.new).to be_kind_of(Shape)
+        end
 
       end
 
-      describe Shapes::Blob do
+      describe FloatShape do
 
-        it_should_behave_like 'subclass of Shape', {}
+        it 'is a Shape' do
+          expect(FloatShape.new).to be_kind_of(Shape)
+        end
+
+      end
+
+      describe IntegerShape do
+
+        it 'is a Shape' do
+          expect(IntegerShape.new).to be_kind_of(Shape)
+        end
+
+        it 'defaults #min to nil' do
+          shape = IntegerShape.new
+          expect(shape.min).to be(nil)
+          shape.min = 10
+          expect(shape.min).to eq(10)
+        end
+
+        it 'defaults #max to nil' do
+          shape = IntegerShape.new
+          expect(shape.max).to be(nil)
+          shape.max = 10
+          expect(shape.max).to eq(10)
+        end
+
+      end
+
+      describe StringShape do
+
+        it 'is a Shape' do
+          expect(StringShape.new).to be_kind_of(Shape)
+        end
+
+        it 'defaults #enum to nil' do
+          shape = StringShape.new
+          expect(shape.enum).to be(nil)
+          shape.enum = Set.new(%w(a b c))
+          expect(shape.enum).to eq(Set.new(%w(a b c)))
+        end
+
+        it 'defaults #min to nil' do
+          shape = StringShape.new
+          expect(shape.min).to be(nil)
+          shape.min = 10
+          expect(shape.min).to eq(10)
+        end
+
+        it 'defaults #max to nil' do
+          shape = StringShape.new
+          expect(shape.max).to be(nil)
+          shape.max = 10
+          expect(shape.max).to eq(10)
+        end
+
+      end
+
+      describe TimestampShape do
+
+        it 'is a Shape' do
+          expect(TimestampShape.new).to be_kind_of(Shape)
+        end
 
       end
     end

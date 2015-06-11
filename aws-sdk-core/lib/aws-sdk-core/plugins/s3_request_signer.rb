@@ -91,7 +91,7 @@ module Aws
         end
 
         def uploading_file?(context)
-          %w(put_object upload_part).include?(context.operation_name) &&
+          [:put_object, :upload_part].include?(context.operation_name) &&
             context.http_request.body.size > 0
         end
 
@@ -199,7 +199,6 @@ module Aws
         end
 
         def updgrade_to_v4(context, region)
-          bucket = context.params[:bucket]
           context.http_response.body.truncate(0)
           context.http_request.headers.delete('authorization')
           context.http_request.headers.delete('x-amz-security-token')

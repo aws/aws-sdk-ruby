@@ -217,8 +217,7 @@
         "type": "structure",
         "members": {
           "ListMember": {
-            "shape": "ListType",
-            "flattened": true
+            "shape": "ListType"
           }
         }
       },
@@ -226,7 +225,8 @@
         "type": "list",
         "member": {
           "shape": "StringType"
-        }
+        },
+        "flattened": true
       },
       "StringType": {
         "type": "string"
@@ -322,8 +322,7 @@
         "type": "structure",
         "members": {
           "Map": {
-            "shape": "MapType",
-            "flattened": true
+            "shape": "MapType"
           }
         }
       },
@@ -334,7 +333,8 @@
         },
         "value": {
           "shape": "StringType"
-        }
+        },
+        "flattened": true
       },
       "StringType": {
         "type": "string"
@@ -372,8 +372,7 @@
         "type": "structure",
         "members": {
           "Map": {
-            "shape": "MapType",
-            "flattened": true
+            "shape": "MapType"
           }
         }
       },
@@ -386,7 +385,8 @@
         "value": {
           "shape": "StringType",
           "locationName": "bar"
-        }
+        },
+        "flattened": true
       },
       "StringType": {
         "type": "string"

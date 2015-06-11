@@ -1,7 +1,6 @@
 require 'net/http'
 require 'openssl'
 require 'base64'
-require 'multi_json'
 
 module Aws
   module SNS
@@ -59,7 +58,7 @@ module Aws
       # @raise [VerificationError] Raised when the given message has failed
       #   verification.
       def authenticate!(message_body)
-        msg = MultiJson.load(message_body)
+        msg = Json.load(message_body)
         if public_key(msg).verify(sha1, signature(msg), canonical_string(msg))
           true
         else

@@ -496,8 +496,7 @@
         "shape":"String",
         "locationName":"Value"
       },
-      "flattened":true,
-      "locationName":"Attribute"
+      "flattened":true
     },
     "AttributeNameList":{
       "type":"list",
@@ -557,7 +556,8 @@
       "member":{
         "shape":"Binary",
         "locationName":"BinaryListValue"
-      }
+      },
+      "flattened":true
     },
     "Boolean":{"type":"boolean"},
     "ChangeMessageVisibilityBatchRequest":{
@@ -866,12 +866,10 @@
         "BinaryValue":{"shape":"Binary"},
         "StringListValues":{
           "shape":"StringList",
-          "flattened":true,
           "locationName":"StringListValue"
         },
         "BinaryListValues":{
           "shape":"BinaryList",
-          "flattened":true,
           "locationName":"BinaryListValue"
         },
         "DataType":{"shape":"String"}
@@ -1131,7 +1129,8 @@
       "member":{
         "shape":"String",
         "locationName":"StringListValue"
-      }
+      },
+      "flattened":true
     },
     "TooManyEntriesInBatchRequest":{
       "type":"structure",

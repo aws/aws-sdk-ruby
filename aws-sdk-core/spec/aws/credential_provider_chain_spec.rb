@@ -85,9 +85,9 @@ module Aws
       expect(File).to receive(:read).with(path).and_return(File.read(mock_path))
       expect(credentials).to be_kind_of(SharedCredentials)
       expect(credentials.set?).to be(true)
-      expect(credentials.access_key_id).to eq('ACCESS_KEY_0')
-      expect(credentials.secret_access_key).to eq('SECRET_KEY_0')
-      expect(credentials.session_token).to eq('TOKEN_0')
+      expect(credentials.credentials.access_key_id).to eq('ACCESS_KEY_0')
+      expect(credentials.credentials.secret_access_key).to eq('SECRET_KEY_0')
+      expect(credentials.credentials.session_token).to eq('TOKEN_0')
     end
 
     it 'hydrates credentials from the instance profile service' do

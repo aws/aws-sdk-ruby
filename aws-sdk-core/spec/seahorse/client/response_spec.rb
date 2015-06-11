@@ -4,21 +4,6 @@ require 'pp'
 module Seahorse
   module Client
     describe Response do
-
-      describe '#inspect' do
-
-        it 'returns the inspect string for the data' do
-          resp = Response.new
-          resp.data = double('data')
-          expect(resp.inspect).to eq(resp.data.pretty_inspect)
-        end
-
-        it 'returns the default inspect if data is not set' do
-          expect(Response.new.inspect).to include('#<Seahorse::Client::Response:')
-        end
-
-      end
-
       describe '#data' do
 
         it 'can be set' do
