@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Adds support for Amazon VPC flow logs.
+
 * Feature - Aws::ECS - Adds the `#update_container_agent` method, as well
   as paginator and waiter support.
 

@@ -1,7 +1,7 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2015-04-15",
+    "apiVersion":"2015-03-01",
     "endpointPrefix":"ec2",
     "serviceAbbreviation":"Amazon EC2",
     "serviceFullName":"Amazon Elastic Compute Cloud",
@@ -177,15 +177,6 @@
       "input":{"shape":"CancelReservedInstancesListingRequest"},
       "output":{"shape":"CancelReservedInstancesListingResult"}
     },
-    "CancelSpotFleetRequests":{
-      "name":"CancelSpotFleetRequests",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"CancelSpotFleetRequestsRequest"},
-      "output":{"shape":"CancelSpotFleetRequestsResponse"}
-    },
     "CancelSpotInstanceRequests":{
       "name":"CancelSpotInstanceRequests",
       "http":{
@@ -239,15 +230,6 @@
       },
       "input":{"shape":"CreateDhcpOptionsRequest"},
       "output":{"shape":"CreateDhcpOptionsResult"}
-    },
-    "CreateFlowLogs":{
-      "name":"CreateFlowLogs",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"CreateFlowLogsRequest"},
-      "output":{"shape":"CreateFlowLogsResult"}
     },
     "CreateImage":{
       "name":"CreateImage",
@@ -476,15 +458,6 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteDhcpOptionsRequest"}
-    },
-    "DeleteFlowLogs":{
-      "name":"DeleteFlowLogs",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DeleteFlowLogsRequest"},
-      "output":{"shape":"DeleteFlowLogsResult"}
     },
     "DeleteInternetGateway":{
       "name":"DeleteInternetGateway",
@@ -737,15 +710,6 @@
       "input":{"shape":"DescribeExportTasksRequest"},
       "output":{"shape":"DescribeExportTasksResult"}
     },
-    "DescribeFlowLogs":{
-      "name":"DescribeFlowLogs",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DescribeFlowLogsRequest"},
-      "output":{"shape":"DescribeFlowLogsResult"}
-    },
     "DescribeImageAttribute":{
       "name":"DescribeImageAttribute",
       "http":{
@@ -973,33 +937,6 @@
       },
       "input":{"shape":"DescribeSpotDatafeedSubscriptionRequest"},
       "output":{"shape":"DescribeSpotDatafeedSubscriptionResult"}
-    },
-    "DescribeSpotFleetInstances":{
-      "name":"DescribeSpotFleetInstances",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DescribeSpotFleetInstancesRequest"},
-      "output":{"shape":"DescribeSpotFleetInstancesResponse"}
-    },
-    "DescribeSpotFleetRequestHistory":{
-      "name":"DescribeSpotFleetRequestHistory",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DescribeSpotFleetRequestHistoryRequest"},
-      "output":{"shape":"DescribeSpotFleetRequestHistoryResponse"}
-    },
-    "DescribeSpotFleetRequests":{
-      "name":"DescribeSpotFleetRequests",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DescribeSpotFleetRequestsRequest"},
-      "output":{"shape":"DescribeSpotFleetRequestsResponse"}
     },
     "DescribeSpotInstanceRequests":{
       "name":"DescribeSpotInstanceRequests",
@@ -1479,15 +1416,6 @@
       },
       "input":{"shape":"ReportInstanceStatusRequest"}
     },
-    "RequestSpotFleet":{
-      "name":"RequestSpotFleet",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"RequestSpotFleetRequest"},
-      "output":{"shape":"RequestSpotFleetResponse"}
-    },
     "RequestSpotInstances":{
       "name":"RequestSpotInstances",
       "http":{
@@ -1681,30 +1609,6 @@
       "type":"list",
       "member":{
         "shape":"AccountAttributeValue",
-        "locationName":"item"
-      }
-    },
-    "ActiveInstance":{
-      "type":"structure",
-      "members":{
-        "InstanceType":{
-          "shape":"String",
-          "locationName":"instanceType"
-        },
-        "InstanceId":{
-          "shape":"String",
-          "locationName":"instanceId"
-        },
-        "SpotInstanceRequestId":{
-          "shape":"String",
-          "locationName":"spotInstanceRequestId"
-        }
-      }
-    },
-    "ActiveInstanceSet":{
-      "type":"list",
-      "member":{
-        "shape":"ActiveInstance",
         "locationName":"item"
       }
     },
@@ -2160,17 +2064,6 @@
       "type":"string",
       "enum":["available"]
     },
-    "BatchState":{
-      "type":"string",
-      "enum":[
-        "submitted",
-        "active",
-        "cancelled",
-        "failed",
-        "cancelled_running",
-        "cancelled_terminating"
-      ]
-    },
     "BlockDeviceMapping":{
       "type":"structure",
       "members":{
@@ -2307,15 +2200,6 @@
         "failed"
       ]
     },
-    "CancelBatchErrorCode":{
-      "type":"string",
-      "enum":[
-        "fleetRequestIdDoesNotExist",
-        "fleetRequestIdMalformed",
-        "fleetRequestNotInCancellableState",
-        "unexpectedError"
-      ]
-    },
     "CancelBundleTaskRequest":{
       "type":"structure",
       "required":["BundleId"],
@@ -2406,110 +2290,6 @@
           "shape":"ReservedInstancesListingList",
           "locationName":"reservedInstancesListingsSet"
         }
-      }
-    },
-    "CancelSpotFleetRequestsError":{
-      "type":"structure",
-      "required":[
-        "Code",
-        "Message"
-      ],
-      "members":{
-        "Code":{
-          "shape":"CancelBatchErrorCode",
-          "locationName":"code"
-        },
-        "Message":{
-          "shape":"String",
-          "locationName":"message"
-        }
-      }
-    },
-    "CancelSpotFleetRequestsErrorItem":{
-      "type":"structure",
-      "required":[
-        "SpotFleetRequestId",
-        "Error"
-      ],
-      "members":{
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        },
-        "Error":{
-          "shape":"CancelSpotFleetRequestsError",
-          "locationName":"error"
-        }
-      }
-    },
-    "CancelSpotFleetRequestsErrorSet":{
-      "type":"list",
-      "member":{
-        "shape":"CancelSpotFleetRequestsErrorItem",
-        "locationName":"item"
-      }
-    },
-    "CancelSpotFleetRequestsRequest":{
-      "type":"structure",
-      "required":[
-        "SpotFleetRequestIds",
-        "TerminateInstances"
-      ],
-      "members":{
-        "DryRun":{
-          "shape":"Boolean",
-          "locationName":"dryRun"
-        },
-        "SpotFleetRequestIds":{
-          "shape":"ValueStringList",
-          "locationName":"spotFleetRequestId"
-        },
-        "TerminateInstances":{
-          "shape":"Boolean",
-          "locationName":"terminateInstances"
-        }
-      }
-    },
-    "CancelSpotFleetRequestsResponse":{
-      "type":"structure",
-      "members":{
-        "UnsuccessfulFleetRequests":{
-          "shape":"CancelSpotFleetRequestsErrorSet",
-          "locationName":"unsuccessfulFleetRequestSet"
-        },
-        "SuccessfulFleetRequests":{
-          "shape":"CancelSpotFleetRequestsSuccessSet",
-          "locationName":"successfulFleetRequestSet"
-        }
-      }
-    },
-    "CancelSpotFleetRequestsSuccessItem":{
-      "type":"structure",
-      "required":[
-        "SpotFleetRequestId",
-        "CurrentSpotFleetRequestState",
-        "PreviousSpotFleetRequestState"
-      ],
-      "members":{
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        },
-        "CurrentSpotFleetRequestState":{
-          "shape":"BatchState",
-          "locationName":"currentSpotFleetRequestState"
-        },
-        "PreviousSpotFleetRequestState":{
-          "shape":"BatchState",
-          "locationName":"previousSpotFleetRequestState"
-        }
-      }
-    },
-    "CancelSpotFleetRequestsSuccessSet":{
-      "type":"list",
-      "member":{
-        "shape":"CancelSpotFleetRequestsSuccessItem",
-        "locationName":"item"
       }
     },
     "CancelSpotInstanceRequestState":{
@@ -2793,44 +2573,6 @@
         "DhcpOptions":{
           "shape":"DhcpOptions",
           "locationName":"dhcpOptions"
-        }
-      }
-    },
-    "CreateFlowLogsRequest":{
-      "type":"structure",
-      "required":[
-        "ResourceIds",
-        "ResourceType",
-        "TrafficType",
-        "LogGroupName",
-        "DeliverLogsPermissionArn"
-      ],
-      "members":{
-        "ResourceIds":{
-          "shape":"ValueStringList",
-          "locationName":"ResourceId"
-        },
-        "ResourceType":{"shape":"FlowLogsResourceType"},
-        "TrafficType":{"shape":"TrafficType"},
-        "LogGroupName":{"shape":"String"},
-        "DeliverLogsPermissionArn":{"shape":"String"},
-        "ClientToken":{"shape":"String"}
-      }
-    },
-    "CreateFlowLogsResult":{
-      "type":"structure",
-      "members":{
-        "FlowLogIds":{
-          "shape":"ValueStringList",
-          "locationName":"flowLogIdSet"
-        },
-        "ClientToken":{
-          "shape":"String",
-          "locationName":"clientToken"
-        },
-        "Unsuccessful":{
-          "shape":"UnsuccessfulItemSet",
-          "locationName":"unsuccessful"
         }
       }
     },
@@ -3569,25 +3311,6 @@
         "DhcpOptionsId":{"shape":"String"}
       }
     },
-    "DeleteFlowLogsRequest":{
-      "type":"structure",
-      "required":["FlowLogIds"],
-      "members":{
-        "FlowLogIds":{
-          "shape":"ValueStringList",
-          "locationName":"FlowLogId"
-        }
-      }
-    },
-    "DeleteFlowLogsResult":{
-      "type":"structure",
-      "members":{
-        "Unsuccessful":{
-          "shape":"UnsuccessfulItemSet",
-          "locationName":"unsuccessful"
-        }
-      }
-    },
     "DeleteInternetGatewayRequest":{
       "type":"structure",
       "required":["InternetGatewayId"],
@@ -4127,31 +3850,6 @@
         "ExportTasks":{
           "shape":"ExportTaskList",
           "locationName":"exportTaskSet"
-        }
-      }
-    },
-    "DescribeFlowLogsRequest":{
-      "type":"structure",
-      "members":{
-        "FlowLogIds":{
-          "shape":"ValueStringList",
-          "locationName":"FlowLogId"
-        },
-        "Filter":{"shape":"FilterList"},
-        "NextToken":{"shape":"String"},
-        "MaxResults":{"shape":"Integer"}
-      }
-    },
-    "DescribeFlowLogsResult":{
-      "type":"structure",
-      "members":{
-        "FlowLogs":{
-          "shape":"FlowLogSet",
-          "locationName":"flowLogSet"
-        },
-        "NextToken":{
-          "shape":"String",
-          "locationName":"nextToken"
         }
       }
     },
@@ -4899,148 +4597,6 @@
         "SpotDatafeedSubscription":{
           "shape":"SpotDatafeedSubscription",
           "locationName":"spotDatafeedSubscription"
-        }
-      }
-    },
-    "DescribeSpotFleetInstancesRequest":{
-      "type":"structure",
-      "required":["SpotFleetRequestId"],
-      "members":{
-        "DryRun":{
-          "shape":"Boolean",
-          "locationName":"dryRun"
-        },
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        },
-        "NextToken":{
-          "shape":"String",
-          "locationName":"nextToken"
-        },
-        "MaxResults":{
-          "shape":"Integer",
-          "locationName":"maxResults"
-        }
-      }
-    },
-    "DescribeSpotFleetInstancesResponse":{
-      "type":"structure",
-      "required":[
-        "SpotFleetRequestId",
-        "ActiveInstances"
-      ],
-      "members":{
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        },
-        "ActiveInstances":{
-          "shape":"ActiveInstanceSet",
-          "locationName":"activeInstanceSet"
-        },
-        "NextToken":{
-          "shape":"String",
-          "locationName":"nextToken"
-        }
-      }
-    },
-    "DescribeSpotFleetRequestHistoryRequest":{
-      "type":"structure",
-      "required":[
-        "SpotFleetRequestId",
-        "StartTime"
-      ],
-      "members":{
-        "DryRun":{
-          "shape":"Boolean",
-          "locationName":"dryRun"
-        },
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        },
-        "EventType":{
-          "shape":"EventType",
-          "locationName":"eventType"
-        },
-        "StartTime":{
-          "shape":"DateTime",
-          "locationName":"startTime"
-        },
-        "NextToken":{
-          "shape":"String",
-          "locationName":"nextToken"
-        },
-        "MaxResults":{
-          "shape":"Integer",
-          "locationName":"maxResults"
-        }
-      }
-    },
-    "DescribeSpotFleetRequestHistoryResponse":{
-      "type":"structure",
-      "required":[
-        "SpotFleetRequestId",
-        "StartTime",
-        "LastEvaluatedTime",
-        "HistoryRecords"
-      ],
-      "members":{
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        },
-        "StartTime":{
-          "shape":"DateTime",
-          "locationName":"startTime"
-        },
-        "LastEvaluatedTime":{
-          "shape":"DateTime",
-          "locationName":"lastEvaluatedTime"
-        },
-        "HistoryRecords":{
-          "shape":"HistoryRecords",
-          "locationName":"historyRecordSet"
-        },
-        "NextToken":{
-          "shape":"String",
-          "locationName":"nextToken"
-        }
-      }
-    },
-    "DescribeSpotFleetRequestsRequest":{
-      "type":"structure",
-      "members":{
-        "DryRun":{
-          "shape":"Boolean",
-          "locationName":"dryRun"
-        },
-        "SpotFleetRequestIds":{
-          "shape":"ValueStringList",
-          "locationName":"spotFleetRequestId"
-        },
-        "NextToken":{
-          "shape":"String",
-          "locationName":"nextToken"
-        },
-        "MaxResults":{
-          "shape":"Integer",
-          "locationName":"maxResults"
-        }
-      }
-    },
-    "DescribeSpotFleetRequestsResponse":{
-      "type":"structure",
-      "required":["SpotFleetRequestConfigs"],
-      "members":{
-        "SpotFleetRequestConfigs":{
-          "shape":"SpotFleetRequestConfigSet",
-          "locationName":"spotFleetRequestConfigSet"
-        },
-        "NextToken":{
-          "shape":"String",
-          "locationName":"nextToken"
         }
       }
     },
@@ -5918,31 +5474,6 @@
         "instance-stop"
       ]
     },
-    "EventInformation":{
-      "type":"structure",
-      "members":{
-        "InstanceId":{
-          "shape":"String",
-          "locationName":"instanceId"
-        },
-        "EventSubType":{
-          "shape":"String",
-          "locationName":"eventSubType"
-        },
-        "EventDescription":{
-          "shape":"String",
-          "locationName":"eventDescription"
-        }
-      }
-    },
-    "EventType":{
-      "type":"string",
-      "enum":[
-        "instanceChange",
-        "fleetRequestChange",
-        "error"
-      ]
-    },
     "ExecutableByStringList":{
       "type":"list",
       "member":{
@@ -6070,62 +5601,6 @@
       }
     },
     "Float":{"type":"float"},
-    "FlowLog":{
-      "type":"structure",
-      "members":{
-        "CreationTime":{
-          "shape":"DateTime",
-          "locationName":"creationTime"
-        },
-        "FlowLogId":{
-          "shape":"String",
-          "locationName":"flowLogId"
-        },
-        "FlowLogStatus":{
-          "shape":"String",
-          "locationName":"flowLogStatus"
-        },
-        "ResourceId":{
-          "shape":"String",
-          "locationName":"resourceId"
-        },
-        "TrafficType":{
-          "shape":"TrafficType",
-          "locationName":"trafficType"
-        },
-        "LogGroupName":{
-          "shape":"String",
-          "locationName":"logGroupName"
-        },
-        "DeliverLogsStatus":{
-          "shape":"String",
-          "locationName":"deliverLogsStatus"
-        },
-        "DeliverLogsErrorMessage":{
-          "shape":"String",
-          "locationName":"deliverLogsErrorMessage"
-        },
-        "DeliverLogsPermissionArn":{
-          "shape":"String",
-          "locationName":"deliverLogsPermissionArn"
-        }
-      }
-    },
-    "FlowLogSet":{
-      "type":"list",
-      "member":{
-        "shape":"FlowLog",
-        "locationName":"item"
-      }
-    },
-    "FlowLogsResourceType":{
-      "type":"string",
-      "enum":[
-        "VPC",
-        "Subnet",
-        "NetworkInterface"
-      ]
-    },
     "GatewayType":{
       "type":"string",
       "enum":["ipsec.1"]
@@ -6218,35 +5693,6 @@
       "member":{
         "shape":"String",
         "locationName":"GroupName"
-      }
-    },
-    "HistoryRecord":{
-      "type":"structure",
-      "required":[
-        "Timestamp",
-        "EventType",
-        "EventInformation"
-      ],
-      "members":{
-        "Timestamp":{
-          "shape":"DateTime",
-          "locationName":"timestamp"
-        },
-        "EventType":{
-          "shape":"EventType",
-          "locationName":"eventType"
-        },
-        "EventInformation":{
-          "shape":"EventInformation",
-          "locationName":"eventInformation"
-        }
-      }
-    },
-    "HistoryRecords":{
-      "type":"list",
-      "member":{
-        "shape":"HistoryRecord",
-        "locationName":"item"
       }
     },
     "HypervisorType":{
@@ -7635,11 +7081,6 @@
         "m3.large",
         "m3.xlarge",
         "m3.2xlarge",
-        "m4.large",
-        "m4.xlarge",
-        "m4.2xlarge",
-        "m4.4xlarge",
-        "m4.10xlarge",
         "t2.micro",
         "t2.small",
         "t2.medium",
@@ -7916,14 +7357,6 @@
           "locationName":"monitoring"
         }
       }
-    },
-    "LaunchSpecsList":{
-      "type":"list",
-      "member":{
-        "shape":"LaunchSpecification",
-        "locationName":"item"
-      },
-      "min":1
     },
     "ListingState":{
       "type":"string",
@@ -9284,30 +8717,6 @@
         "impaired"
       ]
     },
-    "RequestSpotFleetRequest":{
-      "type":"structure",
-      "required":["SpotFleetRequestConfig"],
-      "members":{
-        "DryRun":{
-          "shape":"Boolean",
-          "locationName":"dryRun"
-        },
-        "SpotFleetRequestConfig":{
-          "shape":"SpotFleetRequestConfigData",
-          "locationName":"spotFleetRequestConfig"
-        }
-      }
-    },
-    "RequestSpotFleetResponse":{
-      "type":"structure",
-      "required":["SpotFleetRequestId"],
-      "members":{
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        }
-      }
-    },
     "RequestSpotInstancesRequest":{
       "type":"structure",
       "required":["SpotPrice"],
@@ -9319,10 +8728,6 @@
         "SpotPrice":{
           "shape":"String",
           "locationName":"spotPrice"
-        },
-        "ClientToken":{
-          "shape":"String",
-          "locationName":"clientToken"
         },
         "InstanceCount":{
           "shape":"Integer",
@@ -10435,78 +9840,6 @@
         }
       }
     },
-    "SpotFleetRequestConfig":{
-      "type":"structure",
-      "required":[
-        "SpotFleetRequestId",
-        "SpotFleetRequestState",
-        "SpotFleetRequestConfig"
-      ],
-      "members":{
-        "SpotFleetRequestId":{
-          "shape":"String",
-          "locationName":"spotFleetRequestId"
-        },
-        "SpotFleetRequestState":{
-          "shape":"BatchState",
-          "locationName":"spotFleetRequestState"
-        },
-        "SpotFleetRequestConfig":{
-          "shape":"SpotFleetRequestConfigData",
-          "locationName":"spotFleetRequestConfig"
-        }
-      }
-    },
-    "SpotFleetRequestConfigData":{
-      "type":"structure",
-      "required":[
-        "SpotPrice",
-        "TargetCapacity",
-        "IamFleetRole",
-        "LaunchSpecifications"
-      ],
-      "members":{
-        "ClientToken":{
-          "shape":"String",
-          "locationName":"clientToken"
-        },
-        "SpotPrice":{
-          "shape":"String",
-          "locationName":"spotPrice"
-        },
-        "TargetCapacity":{
-          "shape":"Integer",
-          "locationName":"targetCapacity"
-        },
-        "ValidFrom":{
-          "shape":"DateTime",
-          "locationName":"validFrom"
-        },
-        "ValidUntil":{
-          "shape":"DateTime",
-          "locationName":"validUntil"
-        },
-        "TerminateInstancesWithExpiration":{
-          "shape":"Boolean",
-          "locationName":"terminateInstancesWithExpiration"
-        },
-        "IamFleetRole":{
-          "shape":"String",
-          "locationName":"iamFleetRole"
-        },
-        "LaunchSpecifications":{
-          "shape":"LaunchSpecsList",
-          "locationName":"launchSpecifications"
-        }
-      }
-    },
-    "SpotFleetRequestConfigSet":{
-      "type":"list",
-      "member":{
-        "shape":"SpotFleetRequestConfig",
-        "locationName":"item"
-      }
-    },
     "SpotInstanceRequest":{
       "type":"structure",
       "members":{
@@ -10748,8 +10081,7 @@
       "enum":[
         "passed",
         "failed",
-        "insufficient-data",
-        "initializing"
+        "insufficient-data"
       ]
     },
     "StopInstancesRequest":{
@@ -10854,8 +10186,7 @@
         "ok",
         "impaired",
         "insufficient-data",
-        "not-applicable",
-        "initializing"
+        "not-applicable"
       ]
     },
     "Tag":{
@@ -10942,14 +10273,6 @@
           "locationName":"instancesSet"
         }
       }
-    },
-    "TrafficType":{
-      "type":"string",
-      "enum":[
-        "ACCEPT",
-        "REJECT",
-        "ALL"
-      ]
     },
     "UnassignPrivateIpAddressesRequest":{
       "type":"structure",
