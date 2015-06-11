@@ -57,7 +57,7 @@ module Aws
       def new(*args)
         if args == ['AwsEmptyStructure']
           super
-        elsif args.empty?
+        elsif args.empty? || args.first == []
           EmptyStructure
         else
           super(*args)
