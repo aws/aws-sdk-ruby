@@ -45,7 +45,7 @@ module Aws
       end
 
       # validate non-nil members
-      values.each do |name, value|
+      values.each_pair do |name, value|
         unless value.nil?
           if shape.member?(name)
             member_ref = shape.member(name)

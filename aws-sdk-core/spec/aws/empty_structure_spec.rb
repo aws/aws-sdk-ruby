@@ -37,19 +37,7 @@ module Aws
 
     it 'can be enumerated, but yields no members' do
       yields = []
-      EmptyStructure.new.each { |member| yields << member }
-      expect(yields).to be_empty
-    end
-
-    it 'returns an enumerable from #each' do
-      enum = EmptyStructure.new.each
-      expect(enum).to be_kind_of(Enumerable)
-      expect(enum.to_a).to eq([])
-    end
-
-    it 'can be enumerated in pairs, but yields no members or values' do
-      yields = []
-      EmptyStructure.new.each { |*args| yields << args }
+      EmptyStructure.new.each_pair { |member| yields << member }
       expect(yields).to be_empty
     end
 
@@ -57,6 +45,12 @@ module Aws
       enum = EmptyStructure.new.each_pair
       expect(enum).to be_kind_of(Enumerable)
       expect(enum.to_a).to eq([])
+    end
+
+    it 'can be enumerated in pairs, but yields no members or values' do
+      yields = []
+      EmptyStructure.new.each_pair { |*args| yields << args }
+      expect(yields).to be_empty
     end
 
     it 'equals other empty structures' do
