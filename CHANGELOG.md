@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Adds the `#update_container_agent` method, as well
+  as paginator and waiter support.
+
 * Feature - Aws::AutoScaling - Adds the `#describe_load_balancers` method,
   and adding the `:load_balancer_names` parameter to the
   `#update_auto_scaling_group` method.
