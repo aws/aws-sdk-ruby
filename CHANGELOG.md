@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Adds the `#describe_load_balancers` method,
+  and adding the `:load_balancer_names` parameter to the
+  `#update_auto_scaling_group` method.
+
 * Feature - Fewer gem dependencies - Removed the dependency on the follow
   two 3rd party gems:
 
