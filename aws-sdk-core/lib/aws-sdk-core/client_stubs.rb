@@ -137,6 +137,28 @@ module Aws
       end
     end
 
+    # Generates and returns stubbed response data from the named operation.
+    #
+    #     s3 = Aws::S3::Client.new
+    #     s3.stub_data(:list_buckets)
+    #     #=> #<struct Aws::S3::Types::ListBucketsOutput buckets=[], owner=#<struct Aws::S3::Types::Owner display_name="DisplayName", id="ID">>
+    #
+    # In addition to generating default stubs, you can provide data to
+    # apply to the response stub.
+    #
+    #     s3.stub_data(:list_buckets, buckets:[{name:'aws-sdk'}])
+    #     #=> #<struct Aws::S3::Types::ListBucketsOutput
+    #       buckets=[#<struct Aws::S3::Types::Bucket name="aws-sdk", creation_date=nil>],
+    #       owner=#<struct Aws::S3::Types::Owner display_name="DisplayName", id="ID">>
+    #
+    # @param [Symbol] operation_name
+    # @param [Hash] data
+    # @return [Structure] Returns a stubbed response data structure. The
+    #   actual class returned will depend on the given `operation_name`.
+    def stub_data(operation_name, data = {})
+      Stubbing::StubData.new(operation(operation_name)).stub(data)
+    end
+
     # @api private
     def next_stub(operation_name)
       operation_name = operation_name.to_sym
@@ -148,11 +170,6 @@ module Aws
         else stubs.shift
         end
       end
-    end
-
-    # @api private
-    def stub_data(operation_name, data = {})
-      Stubbing::StubData.new(operation(operation_name)).stub(data)
     end
 
     private

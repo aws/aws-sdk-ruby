@@ -49,6 +49,8 @@ module Aws
     end
     alias to_hash to_h
 
+    undef_method :each
+
     class << self
 
       # @api private
