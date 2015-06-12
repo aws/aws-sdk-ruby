@@ -60,7 +60,6 @@ module Aws
           end
 
           it 'supports stubbing streaming response bodies' do
-            now = Time.now
             data = StringIO.new('DATA')
             params = {
               body: data,
@@ -84,7 +83,6 @@ module Aws
           end
 
           it 'does not stub status code when not present' do
-            now = Time.now
             data = StringIO.new('DATA')
             params = {
               body: data,

@@ -66,8 +66,8 @@ module Aws
           type, value = extract_type_and_value(obj)
           case type
           when :m
-            value.each.with_object({}) do |(key, value), map|
-              map[key] = format(value)
+            value.each.with_object({}) do |(k, v), map|
+              map[k] = format(v)
             end
           when :l then value.map { |v| format(v) }
           when :s then value

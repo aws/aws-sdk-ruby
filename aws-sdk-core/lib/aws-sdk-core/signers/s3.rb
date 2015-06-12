@@ -1,7 +1,7 @@
 require 'set'
 require 'time'
 require 'openssl'
-require 'uri'
+require 'webrick/httputils'
 
 module Aws
   module Signers
@@ -53,7 +53,7 @@ module Aws
       def signature(request)
         string_to_sign = string_to_sign(request)
         signature = digest(credentials.secret_access_key, string_to_sign)
-        URI.escape(signature)
+        uri_escape(signature)
       end
 
       def digest(secret, string_to_sign)
@@ -150,7 +150,35 @@ module Aws
       def signed_querystring_params(endpoint)
         endpoint.query.to_s.split('&').select do |p|
           SIGNED_QUERYSTRING_PARAMS.include?(p.split('=')[0])
-        end.map { |p| URI.decode(p) }
+        end.map { |p| CGI.unescape(p) }
+      end
+
+      def uri_escape(s)
+
+        #URI.escape(s)
+
+        # URI.escape is deprecated, replacing it with escape from webrick
+        # to squelch the massive number of warnings generated from Ruby.
+        # The following script was used to determine the differences
+        # between the various escape methods available. The webrick
+        # escape only had two differences and it is available in the
+        # standard lib.
+        #
+        #     (0..255).each {|c|
+        #       s = [c].pack("C")
+        #       e = [
+        #         CGI.escape(s),
+        #         ERB::Util.url_encode(s),
+        #         URI.encode_www_form_component(s),
+        #         WEBrick::HTTPUtils.escape_form(s),
+        #         WEBrick::HTTPUtils.escape(s),
+        #         URI.escape(s),
+        #       ]
+        #       next if e.uniq.length == 1
+        #       puts("%5s %5s %5s %5s %5s %5s %5s" % ([s.inspect] + e))
+        #     }
+        #
+        WEBrick::HTTPUtils.escape(s).gsub('%5B', '[').gsub('%5D', ']')
       end
 
     end

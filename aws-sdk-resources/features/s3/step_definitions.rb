@@ -67,7 +67,7 @@ When(/^I GET the object with a non\-encyrption client$/) do
 end
 
 Then(/^the object data should be encrypted$/) do
-  expect(@cipher_text).not_to eq(@plaint_text)
+  expect(@cipher_text).not_to eq(@plain_text)
 end
 
 When(/^I GET the object with an encryption client$/) do

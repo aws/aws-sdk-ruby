@@ -19,7 +19,6 @@ module Aws
 
       let(:now) { double('now') }
       let(:utc) { double('utc-time') }
-      let(:datetime) { 'datetime' }
 
       before(:each) {
         allow(Time).to receive(:now).and_return(now)

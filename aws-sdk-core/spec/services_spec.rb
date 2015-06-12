@@ -17,6 +17,7 @@ module Aws
       end
 
       def initialize(data)
+        @response = nil
         @operation = data['operation']
         @config = (data['config'] || {}).inject({}) do |config, (key, value)|
           config.merge(key.to_sym => value)

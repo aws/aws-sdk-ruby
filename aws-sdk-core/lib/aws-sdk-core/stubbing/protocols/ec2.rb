@@ -31,11 +31,9 @@ module Aws
 
         def build_body(api, operation, data)
           xml = []
-          if rules = operation.output
-            Xml::Builder.new(operation.output, target:xml).to_xml(data)
-            xml.shift
-            xml.pop
-          end
+          Xml::Builder.new(operation.output, target:xml).to_xml(data)
+          xml.shift
+          xml.pop
           xmlns = "http://ec2.amazonaws.com/doc/#{api.version}/".inspect
           xml.unshift("  <requestId>stubbed-request-id</requestId>")
           xml.unshift("<#{operation.name}Response xmlns=#{xmlns}>\n")

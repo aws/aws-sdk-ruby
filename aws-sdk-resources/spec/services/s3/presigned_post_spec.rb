@@ -144,7 +144,6 @@ module Aws
         end
 
         it 'allows prefixed Expires' do
-          now = Time.now
           post.expires_starts_with('')
           expect(post.fields['Expires']).to be(nil)
           expect(policy(post)).to include(['starts-with', '$Expires', ''])

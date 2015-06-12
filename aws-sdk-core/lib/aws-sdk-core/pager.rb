@@ -3,9 +3,8 @@ module Aws
   class Pager
 
     def initialize(rules)
-      if rules['more_results']
-        @more_results = underscore(rules['more_results'])
-      end
+      @more_results = rules['more_results']
+      @more_results = underscore(@more_results) if @more_results
       if rules['limit_key']
         @limit_key = underscore(rules['limit_key']).to_sym
       end

@@ -82,7 +82,7 @@ module Aws
           profile_name = http_get(conn, path).lines.first.strip
           http_get(conn, path + profile_name)
         end
-      rescue *FAILURES => e
+      rescue *FAILURES
         if failed_attempts < @retries
           @backoff.call(failed_attempts)
           failed_attempts += 1

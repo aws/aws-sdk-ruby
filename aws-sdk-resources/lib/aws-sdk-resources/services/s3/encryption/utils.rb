@@ -23,7 +23,6 @@ module Aws
           end
 
           def decrypt(key, data)
-            rsa = OpenSSL::PKey::RSA
             begin
               case key
               when OpenSSL::PKey::RSA # asymmetric decryption

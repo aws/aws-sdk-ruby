@@ -2,38 +2,41 @@ module Aws
 
   # Decorates a {Seahorse::Client::Response} with paging methods:
   #
-  #     page = PageableResponse.new(response, pager)
-  #     page.last_page?
+  #     resp = s3.list_objects(params)
+  #     resp.last_page?
   #     #=> false
   #
   #     # sends a request to receive the next response page
-  #     page = page.next_page
-  #     page.last_page?
+  #     resp = resp.next_page
+  #     resp.last_page?
   #     #=> true
   #
-  #     page.next_page
+  #     resp.next_page
   #     #=> raises PageableResponse::LastPageError
   #
   # You can enumerate all response pages with a block
   #
-  #     page = PageableResponse.new(response, pager)
-  #     page.each do |page|
+  #     ec2.describe_instances(params).each do |page|
   #       # yields once per page
+  #       page.reservations.each do |r|
+  #         # ...
+  #       end
   #     end
   #
   # Or using {#next_page} and {#last_page?}:
   #
-  #     page = PageableResponse.new(response, pager)
-  #     page = page.next_page until page.last_page?
-  #
-  # @note Normally you should not need to construct a {PageableResponse}
-  #   directly. The {Plugins::ResponsePaging} plugin automatically
-  #   decorates all responses with a {PageableResponse}.
+  #     resp.last_page?
+  #     resp = resp.next_page until resp.last_page?
   #
   module PageableResponse
 
     def self.included(base)
       base.send(:include, Enumerable)
+    end
+
+    def self.extended(base)
+      base.instance_variable_set("@last_page", nil)
+      base.instance_variable_set("@more_results", nil)
     end
 
     # @return [Paging::Pager]

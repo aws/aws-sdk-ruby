@@ -30,7 +30,6 @@ module Aws
           end
 
           it 'populates the body with the stub data' do
-            now = Time.now
             data = {
               reservations: [
                 {

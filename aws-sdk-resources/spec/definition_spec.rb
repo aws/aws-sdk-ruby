@@ -994,8 +994,6 @@ module Aws
 
               apply_definition
 
-              thing = namespace::Thing.new(name:'thing-name')
-
               expect(namespace::Thing.new('thing1').exists?).to be(true)
               expect(namespace::Thing.new('thing2').exists?).to be(false)
               expect {

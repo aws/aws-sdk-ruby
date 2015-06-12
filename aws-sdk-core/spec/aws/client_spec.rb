@@ -65,7 +65,7 @@ module Aws
           client.head_bucket(bucket:'aws-sdk')
         }.to raise_error(S3::Errors::NotFound, 'stubbed-response-error-message')
         expect {
-          r = client.head_bucket(bucket:'aws-sdk')
+          client.head_bucket(bucket:'aws-sdk')
         }.to raise_error(StandardError)
         expect {
           client.head_bucket(bucket:'aws-sdk')

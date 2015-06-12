@@ -1,5 +1,6 @@
 Before("@dynamodb") do
   @client = Aws::DynamoDB::Client.new
+  @simple_json = false
 end
 
 After("@dynamodb") do

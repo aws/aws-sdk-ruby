@@ -56,7 +56,7 @@ module Aws
         duration_seconds: 100,
         external_id: 'id'
       ).and_return(resp)
-      creds = AssumeRoleCredentials.new(
+      AssumeRoleCredentials.new(
         client: client,
         role_arn: 'arn',
         role_session_name: 'session',

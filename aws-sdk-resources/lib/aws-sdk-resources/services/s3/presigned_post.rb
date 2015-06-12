@@ -214,6 +214,7 @@ module Aws
         @bucket_name = bucket_name
         @url = bucket_url
         @fields = {}
+        @key_set = false
         @signature_expiration = Time.now + 3600
         @conditions = [{ 'bucket' => @bucket_name }]
         options.each do |option_name, option_value|

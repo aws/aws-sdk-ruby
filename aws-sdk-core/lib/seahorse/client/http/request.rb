@@ -11,7 +11,7 @@ module Seahorse
         # @option options [Headers] :headers (Headers.new)
         # @option options [Body] :body (StringIO.new)
         def initialize(options = {})
-          self.endpoint = options[:endpoint] if options[:endpoint]
+          self.endpoint = options[:endpoint]
           self.http_method = options[:http_method] || 'GET'
           self.headers = Headers.new(options[:headers] || {})
           self.body = options[:body]

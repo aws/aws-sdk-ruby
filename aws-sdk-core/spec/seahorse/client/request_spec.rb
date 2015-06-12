@@ -134,7 +134,7 @@ module Seahorse
             tempfile = Tempfile.new('response-target')
             tempfile.close
             context.params[:response_target] = tempfile.path
-            resp = request.send_request
+            request.send_request
             expect(File.read(tempfile.path)).to eq('part1part2part3')
           end
 

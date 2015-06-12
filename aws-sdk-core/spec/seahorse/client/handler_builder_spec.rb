@@ -90,7 +90,7 @@ module Seahorse
             nil # still calls the next handler, despite the block return value
           end
           context = Object.new
-          resp = handler.new(->(context) { context }).call(context)
+          resp = handler.new(->(c) { c }).call(context)
           expect(resp).to be(context)
         end
 

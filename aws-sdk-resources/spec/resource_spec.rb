@@ -217,7 +217,7 @@ module Aws
         end
 
         it 'does not modify the resource if waiting condition already met' do
-          response = resource.wait_until {true}
+          resource.wait_until {true}
           expect(resource.data).to be(data)
         end
 
@@ -244,7 +244,7 @@ module Aws
 
         it 'does not modify the resource if waiting if waiting condition not met' do
           allow(proc).to receive(:call).and_return(false,false, true)
-          response = resource.wait_until(delay:0) {proc.call}
+          resource.wait_until(delay:0) {proc.call}
           expect(resource.data).to be(data)
         end
 

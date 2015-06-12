@@ -16,6 +16,7 @@ module Aws
         @first_byte = options[:offset]
         @last_byte = @first_byte + options[:size]
         @size = options[:size]
+        @file = nil
       end
 
       # @return [String,Pathname,File,Tempfile]

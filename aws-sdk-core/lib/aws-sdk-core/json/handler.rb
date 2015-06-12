@@ -8,10 +8,10 @@ module Aws
       # @return [Seahorse::Client::Response]
       def call(context)
         build_request(context)
-        resp = @handler.call(context)
-        resp.on(200..299) { |resp| parse_response(resp) }
-        resp.on(200..599) { |resp| apply_request_id(context) }
-        resp
+        response = @handler.call(context)
+        response.on(200..299) { |resp| parse_response(resp) }
+        response.on(200..599) { |resp| apply_request_id(context) }
+        response
       end
 
       private

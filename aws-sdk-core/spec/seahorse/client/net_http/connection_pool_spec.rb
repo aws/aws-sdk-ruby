@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Seahorse
   module Client
-      module NetHttp
+    module NetHttp
       describe ConnectionPool do
       end
     end
