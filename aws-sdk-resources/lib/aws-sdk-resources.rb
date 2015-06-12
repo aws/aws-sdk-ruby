@@ -38,7 +38,7 @@ module Aws
       'services',
       "#{name.downcase}.rb")
 
-    require(svc) if File.exists?(svc)
+    require(svc) if File.exist?(svc)
   end
 
 end

@@ -80,7 +80,7 @@ module Aws
         'mock_shared_credentials')
       path = File.join('HOME', '.aws', 'credentials')
       allow(Dir).to receive(:home).and_return('HOME')
-      allow(File).to receive(:exists?).with(path).and_return(true)
+      allow(File).to receive(:exist?).with(path).and_return(true)
       allow(File).to receive(:readable?).with(path).and_return(true)
       expect(File).to receive(:read).with(path).and_return(File.read(mock_path))
       expect(credentials).to be_kind_of(SharedCredentials)
@@ -119,7 +119,7 @@ module Aws
       let(:path) { File.join('HOME', '.aws', 'credentials') }
 
       before(:each) do
-        allow(File).to receive(:exists?).with(path).and_return(true)
+        allow(File).to receive(:exist?).with(path).and_return(true)
         allow(File).to receive(:readable?).with(path).and_return(true)
         allow(Dir).to receive(:home).and_return('HOME')
       end

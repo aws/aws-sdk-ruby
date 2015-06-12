@@ -38,7 +38,7 @@ module Aws
 
         def service_docstring
           path = "doc-src/services/#{@svc_name}/service.md"
-          path = 'doc-src/services/default/service.md' unless File.exists?(path)
+          path = 'doc-src/services/default/service.md' unless File.exist?(path)
           template = read(path)
           svc_name = @svc_name
           api = @api
@@ -62,7 +62,7 @@ module Aws
 
         def errors_docstring
           path = "doc-src/services/#{@svc_name}/errors.md"
-          path = 'doc-src/services/default/errors.md' unless File.exists?(path)
+          path = 'doc-src/services/default/errors.md' unless File.exist?(path)
           template = read(path)
           svc_name = @svc_name
           api = @api
@@ -90,7 +90,7 @@ module Aws
 
         def client_docstring
           path = "doc-src/services/#{@svc_name}/client.md"
-          path = 'doc-src/services/default/client.md' unless File.exists?(path)
+          path = 'doc-src/services/default/client.md' unless File.exist?(path)
           render(path)
         end
 

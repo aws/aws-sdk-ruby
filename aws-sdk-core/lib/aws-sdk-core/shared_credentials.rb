@@ -53,7 +53,7 @@ module Aws
     # @note This method does not indicate if the file found at {#path}
     #   will be parsable, only if it can be read.
     def loadable?
-      !path.nil? && File.exists?(path) && File.readable?(path)
+      !path.nil? && File.exist?(path) && File.readable?(path)
     end
 
     private

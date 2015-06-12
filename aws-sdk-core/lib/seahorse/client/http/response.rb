@@ -23,11 +23,13 @@ module Seahorse
         # @return [Headers]
         attr_accessor :headers
 
-        # @return [IO]
-        attr_accessor :body
-
         # @return [StandardError, nil]
         attr_reader :error
+
+        # @return [IO]
+        def body
+          @body
+        end
 
         # @param [#read, #size, #rewind] io
         def body=(io)

@@ -103,7 +103,7 @@ module Aws
 
     it 'configures a default ssl cert bundle' do
       path = Aws.use_bundled_cert!
-      expect(File.exists?(path)).to be(true)
+      expect(File.exist?(path)).to be(true)
       expect(Aws.config[:ssl_ca_bundle]).to eq(path)
     end
 
