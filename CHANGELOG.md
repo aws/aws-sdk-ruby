@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Shared Credentials - Resolved an issue where the shared credentials
+  provider would fail to parse profiles which contained an inline comment.
+
+  See [related GitHub issue #837](https://github.com/aws/aws-sdk-ruby/issues/837)
+
 * Feature - Aws::IAM - Added `Aws::IAM::User#exists?`.
 
   See [related GitHub issue #840](https://github.com/aws/aws-sdk-ruby/issues/840)

@@ -92,7 +92,7 @@ module Aws
       map = {}
       file.lines.each do |line|
         line = line.split(/^|\s;/).first # remove comments
-        section = line.match(/^\s*\[([^\[\]]+)\]\s*$/) unless line.nil?
+        section = line.match(/^\s*\[([^\[\]]+)\]\s*(#.+)?$/) unless line.nil?
         if section
           current_section = section[1]
         elsif current_section

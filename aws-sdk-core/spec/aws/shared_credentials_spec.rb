@@ -64,5 +64,18 @@ module Aws
       expect(creds.set?).to eq(false)
     end
 
+    it 'supports inline comments with the profile' do
+      file = <<-FILE
+[default] # comment
+aws_access_key_id=commented-akid
+aws_secret_access_key=commented-secret
+      FILE
+      allow(File).to receive(:read).and_return(file)
+      creds = SharedCredentials.new(path:mock_credential_file).credentials
+      expect(creds.access_key_id).to eq('commented-akid')
+      expect(creds.secret_access_key).to eq('commented-secret')
+
+    end
+
   end
 end
