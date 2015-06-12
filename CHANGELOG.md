@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.0 (2015-06-11)
 ------------------
 
 * Feature - Aws::EC2 - Adds support for Amazon VPC flow logs.
