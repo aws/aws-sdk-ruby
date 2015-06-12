@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - REPL - Added a short-cut inside the `aws.rb` REPL
+  for accessing a resource from a client.
+
+  ```ruby
+  Aws> ec2
+  #=> #<Aws::EC2::Client>
+  Aws> ec2.resource
+  #=> #<Aws::EC2::Resource>
+  ```
+
 2.1.0 (2015-06-11)
 ------------------
 

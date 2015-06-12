@@ -102,6 +102,12 @@ module Aws
       end
     end
   end
+  class Client
+    def resource
+      namespace = Aws.const_get(self.class.name.split('::')[1])
+      namespace::Resource.new(client: self)
+    end
+  end
 end
 
 begin
