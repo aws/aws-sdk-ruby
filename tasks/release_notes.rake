@@ -37,7 +37,7 @@ task 'release_notes:html' do
   services = {}
   Aws::SERVICE_MODULE_NAMES.each do |svc_name|
     client_class = Aws.const_get(svc_name).const_get(:Client)
-    name = client_class.api.metadata('serviceFullName')
+    name = client_class.api.metadata['serviceFullName']
     services[name] = client_class.api.version
   end
 
