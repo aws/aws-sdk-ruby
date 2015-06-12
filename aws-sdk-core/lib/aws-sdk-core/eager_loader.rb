@@ -17,12 +17,11 @@ module Aws
       @loaded << klass_or_module
       klass_or_module.constants.each do |const_name|
         path = klass_or_module.autoload?(const_name)
-        require(path) if path
-        const = klass_or_module.const_get(const_name)
-        if const.is_a?(Module)
-          unless @loaded.include?(const)
-            load(const)
-          end
+        begin
+          require(path) if path
+          const = klass_or_module.const_get(const_name)
+          self.load(const) if Module === const && !@loaded.include?(const)
+        rescue LoadError
         end
       end
       self
