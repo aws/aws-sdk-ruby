@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Added `Aws::IAM::User#exists?`.
+
+  See [related GitHub issue #840](https://github.com/aws/aws-sdk-ruby/issues/840)
+
 * Feature - REPL - Added a short-cut inside the `aws.rb` REPL
   for accessing a resource from a client.
 

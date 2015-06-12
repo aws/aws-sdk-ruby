@@ -1497,6 +1497,14 @@
           }
         }
       },
+      "waiters": {
+        "Exists": {
+          "waiterName": "UserExists",
+          "params": [
+            { "target": "UserName", "source": "identifier", "name": "Name" }
+          ]
+        }
+      },
       "has": {
         "AccessKey": {
           "resource": {
