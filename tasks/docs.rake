@@ -9,7 +9,7 @@ end
 desc 'Updated the list of supported services in the README' if ENV['ALL']
 task 'docs:update_readme' do
   # Updates the table of supported services / api version in the README
-  Aws.eager_autolaod!
+  Aws.eager_autoload!
   lines = []
   skip = false
   File.read('README.md').lines.each do |line|
