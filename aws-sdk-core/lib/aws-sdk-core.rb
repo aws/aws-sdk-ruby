@@ -191,7 +191,6 @@ module Aws
   # @api private
   module Signers
     autoload :Base, 'aws-sdk-core/signers/base'
-    autoload :Handler, 'aws-sdk-core/signers/handler'
     autoload :S3, 'aws-sdk-core/signers/s3'
     autoload :V2, 'aws-sdk-core/signers/v2'
     autoload :V3, 'aws-sdk-core/signers/v3'
@@ -285,14 +284,23 @@ module Aws
       eager_loader = EagerLoader.new
       eager_loader.load(JMESPath)
       eager_loader.load(Seahorse)
-      (options[:services] || SERVICE_MODULE_NAMES).each do |svc_name|
-        begin
-          eager_loader.load(Aws.const_get(svc_name))
-        rescue NameError
-          raise ArgumentError, "invalid service Aws::#{svc_name}"
-        end
+      sub_modules(options).each do |module_or_class|
+        eager_loader.load(module_or_class)
       end
       eager_loader
+    end
+
+    def sub_modules(options = {})
+      constants = Aws.constants.map(&:to_s)
+      if options[:services]
+        constants -= SERVICE_MODULE_NAMES
+        constants += options[:services] || SERVICE_MODULE_NAMES
+      end
+      constants.inject([]) do |modules, const_name|
+        constant = Aws.const_get(const_name)
+        modules << constant if Module === constant
+        modules
+      end
     end
 
     # Yields to the given block for each service that has already been

@@ -132,5 +132,10 @@ module Aws
       expect(eager_loader.loaded).not_to include(Aws::EC2)
     end
 
+    it  'loads non-service modules' do
+      eager_loader = Aws.eager_autoload!
+      expect(eager_loader.loaded).to include(Aws::Xml)
+    end
+
   end
 end
