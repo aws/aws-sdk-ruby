@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - PageableResponse - Resolved an issue where Enumerable was not
+  correctly getting mixed into pageable responses.
+
+  See [related GitHub issue #842](https://github.com/aws/aws-sdk-ruby/issues/842)
+
 * Issue - Shared Credentials - Resolved an issue where the shared credentials
   provider would fail to parse profiles which contained an inline comment.
 

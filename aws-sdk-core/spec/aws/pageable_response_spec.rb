@@ -20,6 +20,10 @@ module Aws
         'output_token' => 'NextToken',
       }}
 
+      it 'is Enumerable' do
+        expect(resp).to be_kind_of(Enumerable)
+      end
+
       it 'returns false from last page if the paging token value is present' do
         resp.data = { 'next_token' => 'OFFSET' }
         expect(resp.last_page?).to be(false)
@@ -177,7 +181,7 @@ module Aws
         page = pageable(resp, pager)
         expect {
           page.count
-        }.to raise_error(NotImplementedError)
+        }.to raise_error(NoMethodError)
       end
 
       it 'passes count from the raises not implemented error by default' do

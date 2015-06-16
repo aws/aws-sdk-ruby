@@ -30,11 +30,9 @@ module Aws
   #
   module PageableResponse
 
-    def self.included(base)
-      base.send(:include, Enumerable)
-    end
-
     def self.extended(base)
+      base.send(:extend, Enumerable)
+      base.send(:extend, SafeCount)
       base.instance_variable_set("@last_page", nil)
       base.instance_variable_set("@more_results", nil)
     end
@@ -82,24 +80,6 @@ module Aws
     end
     alias each_page each
 
-    # @api private
-    def count
-      if respond_to?(:count)
-        data.count
-      else
-        raise NotImplementedError
-      end
-    end
-
-    # @api private
-    def respond_to?(method_name, *args)
-      if method_name == :count
-        data.respond_to?(:count)
-      else
-        super
-      end
-    end
-
     private
 
     # @param [Hash] params A hash of additional request params to
@@ -136,5 +116,27 @@ module Aws
 
     end
 
+    module SafeCount
+
+      # Enumerable#count is a dangerous method to expose on a pageable
+      # response as it will trigger potentially many API calls. This causes
+      # a response to respond to #count if-and-only-if the data defines count.
+      def count
+        if data.respond_to?(:count)
+          data.count
+        else
+          raise NoMethodError, "undefined method `count'"
+        end
+      end
+
+      def respond_to?(method_name, *args)
+        if method_name == :count
+          data.respond_to?(:count)
+        else
+          false
+        end
+      end
+
+    end
   end
 end
