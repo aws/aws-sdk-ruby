@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::IAM - Added missing paginator configurations for the newer
+  IAM attached policy operations.
+
+  See [related GitHub issue #841](https://github.com/aws/aws-sdk-ruby/issues/841)
+
 * Issue - PageableResponse - Resolved an issue where Enumerable was not
   correctly getting mixed into pageable responses.
 
