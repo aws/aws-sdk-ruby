@@ -53,17 +53,42 @@ module Aws
     #
     # ## Keys
     #
-    # For client-side encryption to work, you must provide an encryption key:
+    # For client-side encryption to work, you must provide one of the following:
+    #
+    # * An encryption key
+    # * A {KeyProvider}
+    # * A KMS encryption key id
+    #
+    # ### An Encryption Key
+    #
+    # You can pass a single encryption key. This is used as a master key
+    # encrypting and decrypting all object keys.
     #
     #     key = OpenSSL::Cipher.new("AES-256-ECB").random_key # symmetric key
     #     key = OpenSSL::PKey::RSA.new(1024) # asymmetric key pair
     #
     #     s3 = Aws::S3::Encryption::Client.new(encryption_key: key)
     #
+    # ### Key Provider
+    #
     # Alternatively, you can use a {KeyProvider}. A key provider makes
     # it easy to work with multiple keys and simplifies key rotation.
     #
-    # ### Key Provider
+    # ### KMS Encryption Key Id
+    #
+    # If you pass the id to an AWS Key Management Service (KMS) key,
+    # then KMS will be used to generate, encrypt and decrypt object keys.
+    #
+    #     # keep track of the kms key id
+    #     kms = Aws::KMS::Client.new
+    #     key_id = kms.create_key.key_metadata.key_id
+    #
+    #     Aws::S3::Encryption::Client.new(
+    #       kms_key_id: key_id,
+    #       kms_client: kms,
+    #     )
+    #
+    # ## Custom Key Providers
     #
     # A {KeyProvider} is any object that responds to:
     #
@@ -150,14 +175,16 @@ module Aws
     # issuing concurrent PUT and GET requests to an encrypted object.**
     #
     module Encryption
-
       class Client
+
+        extend Deprecations
 
         # Creates a new encryption client. You must provide on of the following
         # options:
         #
-        # * `:key_provider`
         # * `:encryption_key`
+        # * `:kms_key_id`
+        # * `:key_provider`
         #
         # You may also pass any other options accepted by {S3::Client#initialize}.
         #
@@ -165,12 +192,18 @@ module Aws
         #   to make api calls. If a `:client` is not provided, a new {S3::Client}
         #   will be constructed.
         #
+        # @option options [OpenSSL::PKey::RSA, String] :encryption_key The master
+        #   key to use for encrypting/decrypting all objects.
+        #
+        # @option options [String] :kms_key_id When you provide a `:kms_key_id`,
+        #   then AWS Key Management Service (KMS) will be used to manage the
+        #   object encryption keys. By default a {KMS::Client} will be
+        #   constructed for KMS API calls. Alternatively, you can provide
+        #   your own via `:kms_client`.
+        #
         # @option options [#key_for] :key_provider Any object that responds
         #   to `#key_for`. This method should accept a materials description
         #   JSON document string and return return an encryption key.
-        #
-        # @option options [OpenSSL::PKey::RSA, String] :encryption_key The master
-        #   key to use for encrypting/decrypting all objects.
         #
         # @option options [Symbol] :envelope_location (:metadata) Where to
         #   store the envelope encryption keys. By default, the envelope is
@@ -181,9 +214,12 @@ module Aws
         #   When `:envelope_location` is `:instruction_file` then the
         #   instruction file uses the object key with this suffix appended.
         #
+        # @option options [KMS::Client] :kms_client A default {KMS::Client}
+        #   is constructed when using KMS to manage encryption keys.
+        #
         def initialize(options = {})
           @client = extract_client(options)
-          @key_provider = extract_key_provider(options)
+          @crypto_materials = crypto_materials(options)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
         end
@@ -191,8 +227,10 @@ module Aws
         # @return [S3::Client]
         attr_reader :client
 
-        # @return [KeyProvider]
+        # @return [KeyProvider, nil] Returns `nil` if you are using
+        #   AWS Key Management Service (KMS).
         attr_reader :key_provider
+        deprecated :key_provider
 
         # @return [Symbol<:metadata, :instruction_file>]
         attr_reader :envelope_location
@@ -212,7 +250,7 @@ module Aws
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
-            materials: @key_provider.encryption_materials,
+            crypto_materials: @crypto_materials,
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
           }
@@ -240,7 +278,7 @@ module Aws
           req = @client.build_request(:get_object, params)
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
-            key_provider: @key_provider,
+            crypto_materials: @crypto_materials,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
           }
@@ -252,11 +290,45 @@ module Aws
         def extract_client(options)
           options[:client] || begin
             options = options.dup
+            options.delete(:kms_key_id)
             options.delete(:key_provider)
             options.delete(:encryption_key)
             options.delete(:envelope_location)
             options.delete(:instruction_file_suffix)
             S3::Client.new(options)
+          end
+        end
+
+        def kms_client(options)
+          options[:kms_client] || begin
+            KMS::Client.new(
+              region: @client.config.region,
+              credentials: @client.config.credentials,
+            )
+          end
+        end
+
+        def crypto_materials(options)
+          if options[:kms_key_id]
+            KmsSecuredKeyCryptoMaterials.new(
+              kms_key_id: options[:kms_key_id],
+              kms_client: kms_client(options),
+            )
+          else
+            # kept here for backwards compatability, {#key_provider} is deprecated
+            @key_provider = extract_key_provider(options)
+            CryptoMaterials.new(key_provider: @key_provider)
+          end
+        end
+
+        def extract_key_provider(options)
+          if options[:key_provider]
+            options[:key_provider]
+          elsif options[:encryption_key]
+            DefaultKeyProvider.new(options)
+          else
+            msg = "you must pass a :kms_key_id, :key_provider, or :encryption_key"
+            raise ArgumentError, msg
           end
         end
 
@@ -267,17 +339,6 @@ module Aws
             [:instruction_file, suffix]
           else
             [location, @instruction_file_suffix]
-          end
-        end
-
-        def extract_key_provider(options)
-          if options[:key_provider]
-            options[:key_provider]
-          elsif options[:encryption_key]
-            DefaultKeyProvider.new(options)
-          else
-            msg = "you must pass a :key_provider or :encryption_key"
-            raise ArgumentError, msg
           end
         end
 

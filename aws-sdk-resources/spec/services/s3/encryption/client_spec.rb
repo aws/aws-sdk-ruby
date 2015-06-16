@@ -48,7 +48,7 @@ module Aws
             expect {
               options.delete(:encryption_key)
               Encryption::Client.new(options)
-            }.to raise_error(ArgumentError, /:key_provider or :encryption_key/)
+            }.to raise_error(ArgumentError, /:kms_key_id, :key_provider, or :encryption_key/)
 
             expect {
               Encryption::Client.new(options.merge(encryption_key: master_key))
@@ -62,7 +62,7 @@ module Aws
 
           it 'consturcts a key provider from a master key' do
             options[:encryption_key] = master_key
-            # the master key is used for every materials description
+            expect(client).to receive(:warn) # `#key_provider` deprecated
             expect(client.key_provider.key_for('')).to eq(master_key)
             expect(client.key_provider.key_for('{}')).to eq(master_key)
             expect(client.key_provider.key_for('{"foo":"bar"}')).to eq(master_key)
@@ -81,10 +81,6 @@ module Aws
               Encryption::Client.new(options.merge(envelope_location: :metadata))
               Encryption::Client.new(options.merge(envelope_location: :instruction_file))
             }.not_to raise_error
-          end
-
-          it 'defaults :materials_description to an empty JSON document' do
-            expect(client.key_provider.encryption_materials.description).to eq('{}')
           end
 
           it 'requires :materials_description to be a valid JSON document' do

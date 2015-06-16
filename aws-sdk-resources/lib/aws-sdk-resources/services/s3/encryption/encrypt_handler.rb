@@ -7,21 +7,16 @@ module Aws
       class EncryptHandler < Seahorse::Client::Handler
 
         def call(context)
-          cipher = Utils.aes_encryption_cipher(:CBC)
-          context[:encryption][:cipher] = cipher
-          envelope = {
-            'x-amz-key' => encode64(encrypt(context, envelope_key(cipher))),
-            'x-amz-iv' => encode64(envelope_iv(cipher)),
-            'x-amz-matdesc' => context[:encryption][:materials].description,
-          }
-          apply_encryption_envelope(context, envelope)
+          envelope, cipher = context[:encryption][:crypto_materials].for_encyrption
+          apply_encryption_envelope(context, envelope, cipher)
           apply_encryption_cipher(context, cipher)
           @handler.call(context)
         end
 
         private
 
-        def apply_encryption_envelope(context, envelope)
+        def apply_encryption_envelope(context, envelope, cipher)
+          context[:encryption][:cipher] = cipher
           if context[:encryption][:envelope_location] == :metadata
             context.params[:metadata] ||= {}
             context.params[:metadata].update(envelope)
@@ -47,22 +42,6 @@ module Aws
           context.http_response.on_headers do
             context.params[:body].close
           end
-        end
-
-        def envelope_key(cipher)
-          cipher.key = cipher.random_key
-        end
-
-        def envelope_iv(cipher)
-          cipher.iv = cipher.random_iv
-        end
-
-        def encode64(str)
-          Base64.encode64(str).split("\n") * ""
-        end
-
-        def encrypt(context, data)
-          Utils.encrypt(context[:encryption][:materials].key, data)
         end
 
       end

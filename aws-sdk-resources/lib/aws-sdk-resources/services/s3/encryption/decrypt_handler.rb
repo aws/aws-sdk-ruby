@@ -36,11 +36,7 @@ module Aws
 
         def decryption_cipher(context)
           if envelope = get_encryption_envelope(context)
-            key_provider = context[:encryption][:key_provider]
-            key = key_provider.key_for(envelope['x-amz-matdesc'])
-            envelope_key = Utils.decrypt(key, decode64(envelope['x-amz-key']))
-            envelope_iv = decode64(envelope['x-amz-iv'])
-            Utils.aes_decryption_cipher(:CBC, envelope_key, envelope_iv)
+            context[:encryption][:crypto_materials].for_decryption(envelope)
           else
             raise Errors::DecryptionError, "unable to locate encyrption envelope"
           end
@@ -72,10 +68,6 @@ module Aws
           ).body.read)
         rescue S3::Errors::ServiceError, Json::ParseError
           nil
-        end
-
-        def decode64(str)
-          Base64.decode64(str)
         end
 
       end
