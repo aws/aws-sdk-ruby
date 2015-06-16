@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - XML Parsing - Added support for the new Oga XML parser. This
+  is enabled by default when the gem is present. You can force this
+  by setting the XML parsing engine:
+
+      Aws::Xml::Parser.engine = :oga
+
 * Issue - Aws::DynamoDB - Resolved an issue with pageable responses where the
   paging token values contained attribute values.
 
