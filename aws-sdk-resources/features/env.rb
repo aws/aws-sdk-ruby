@@ -5,19 +5,26 @@ require 'aws-sdk-resources'
 
 SimpleCov.command_name('test:integration:aws-sdk-resources')
 
-cfg = './integration-test-config.json'
 
-if File.exist?(cfg)
-  Aws.config = Aws::Json.load_file(cfg).inject({}) do |h, (k, v)|
-    h[k.to_sym] = v; h
+if ENV['AWS_INTEGRATION']
+
+  $cfg_path = File.expand_path(File.join([
+    File.dirname(__FILE__),
+    '..',
+    '..',
+    'integration-test-config.json',
+  ]))
+  if File.exist?($cfg_path)
+    $cfg = Aws::Json.load_file($cfg_path)
+  else
+    $cfg = {}
   end
-elsif ENV['AWS_INTEGRATION']
-  # run integration tests, just don't read a configuration file from disk
+
 else
   msg = <<-MSG
 
 *** skipping aws-sdk-resource integration tests ***
-  To enable integration tests, create a #{cfg} file or export AWS_INTEGRATION=1
+  To enable integration tests, export AWS_INTEGRATION=1 to ENV
 
   MSG
   puts msg
@@ -45,6 +52,22 @@ class ApiCallTracker < Seahorse::Client::Plugin
     response
   end
 
+end
+
+def cfg_value(*path)
+  path_value = path.inject($cfg) do |value, key|
+    if Hash === value && value.key?(key)
+      value[key]
+    else
+      nil
+    end
+  end
+  if path_value.nil?
+    pending("set cfg#{path.map {|p| "[#{p.inspect}]" }.join} in #{$cfg_path}")
+  else
+    puts path_value.inspect
+    path_value
+  end
 end
 
 Aws.service_added do |_, svc_module, _|

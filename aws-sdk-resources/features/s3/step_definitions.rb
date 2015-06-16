@@ -48,6 +48,13 @@ Given(/^I have an encryption client$/) do
   })
 end
 
+Given(/^I have an encryption client configured to use KMS$/) do
+  @cse = Aws::S3::Encryption::Client.new({
+    client: @s3.client,
+    kms_key_id: @kms_key_id,
+  })
+end
+
 Given(/^I have an encryption client configured for :instruction_file$/) do
   @cse = Aws::S3::Encryption::Client.new({
     client: @s3.client,

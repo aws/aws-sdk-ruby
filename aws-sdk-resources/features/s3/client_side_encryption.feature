@@ -19,3 +19,13 @@ Feature: S3 Objects
     Then the instruction file should exist
     When I GET the object with an encryption client
     Then the object data should be "secret"
+
+  @kms
+  Scenario: Using KMS Encryption Using instruction file for storing the encryption envelope
+    Given a "kms_key_id" is set in cfg["client_side_encryption"]["kms_key_id"]
+    And I have an encryption client configured to use KMS
+    When I perform an encrypted PUT of the value "secret"
+    And I GET the object with a non-encyrption client
+    Then the object data should be encrypted
+    When I GET the object with an encryption client
+    Then the object data should be "secret"
