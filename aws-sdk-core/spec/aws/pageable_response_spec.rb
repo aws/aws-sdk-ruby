@@ -6,6 +6,7 @@ module Aws
     def pageable(resp, pager)
       resp.extend(PageableResponse)
       resp.pager = pager
+      resp.context[:original_params] = resp.context.params
       resp
     end
 
@@ -177,7 +178,7 @@ module Aws
 
       it 'raises not implemented error by default' do
         data = double('data')
-        resp = double('resp', data:data, error:nil, context:nil)
+        resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
         expect {
           page.count
@@ -186,21 +187,21 @@ module Aws
 
       it 'passes count from the raises not implemented error by default' do
         data = double('data', count: 10)
-        resp = double('resp', data:data, error:nil, context:nil)
+        resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
         expect(page.count).to eq(10)
       end
 
       it 'returns false from respond_to when count not present' do
         data = double('data')
-        resp = double('resp', data:data, error:nil, context:nil)
+        resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
         expect(page.respond_to?(:count)).to be(false)
       end
 
       it 'indicates it responds to count when data#count exists' do
         data = double('data', count: 10)
-        resp = double('resp', data:data, error:nil, context:nil)
+        resp = Seahorse::Client::Response.new(data:data)
         page = pageable(resp, pager)
         expect(page.respond_to?(:count))
       end

@@ -97,7 +97,7 @@ module Aws
     # @return [Hash] Returns the hash of request parameters for the
     #   next page, merging any given params.
     def next_page_params(params)
-      context.params.merge(@pager.next_tokens(self).merge(params))
+      context[:original_params].merge(@pager.next_tokens(self).merge(params))
     end
 
     # Raised when calling {PageableResponse#next_page} on a pager that

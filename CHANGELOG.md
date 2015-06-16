@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::DynamoDB - Resolved an issue with pageable responses where the
+  paging token values contained attribute values.
+
+  See [related GitHub issue #843](https://github.com/aws/aws-sdk-ruby/issues/843)
+
 * Issue - Aws::IAM - Added missing paginator configurations for the newer
   IAM attached policy operations.
 

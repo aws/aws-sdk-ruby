@@ -22,6 +22,7 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
+          context[:original_params] = context.params
           resp = @handler.call(context)
           resp.extend(PageableResponse)
           resp.pager = context.operation[:pager]
