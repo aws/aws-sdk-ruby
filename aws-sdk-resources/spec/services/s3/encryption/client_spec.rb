@@ -62,7 +62,6 @@ module Aws
 
           it 'consturcts a key provider from a master key' do
             options[:encryption_key] = master_key
-            expect(client).to receive(:warn) # `#key_provider` deprecated
             expect(client.key_provider.key_for('')).to eq(master_key)
             expect(client.key_provider.key_for('{}')).to eq(master_key)
             expect(client.key_provider.key_for('{"foo":"bar"}')).to eq(master_key)

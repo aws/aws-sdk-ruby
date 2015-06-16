@@ -230,7 +230,6 @@ module Aws
         # @return [KeyProvider, nil] Returns `nil` if you are using
         #   AWS Key Management Service (KMS).
         attr_reader :key_provider
-        deprecated :key_provider
 
         # @return [Symbol<:metadata, :instruction_file>]
         attr_reader :envelope_location
