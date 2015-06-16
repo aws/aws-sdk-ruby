@@ -32,7 +32,7 @@ module Aws
 
     def self.extended(base)
       base.send(:extend, Enumerable)
-      base.send(:extend, SafeCount)
+      base.send(:extend, UnsafeEnumerableMethods)
       base.instance_variable_set("@last_page", nil)
       base.instance_variable_set("@more_results", nil)
     end
@@ -116,11 +116,12 @@ module Aws
 
     end
 
-    module SafeCount
+    # A handful of Enumerable methods, such as #count are not safe
+    # to call on a pageable response, as this would trigger n api calls
+    # simply to count the number of response pages, when likely what is
+    # wanted is to access count on the data. Same for #to_h.
+    module UnsafeEnumerableMethods
 
-      # Enumerable#count is a dangerous method to expose on a pageable
-      # response as it will trigger potentially many API calls. This causes
-      # a response to respond to #count if-and-only-if the data defines count.
       def count
         if data.respond_to?(:count)
           data.count
@@ -135,6 +136,10 @@ module Aws
         else
           false
         end
+      end
+
+      def to_h
+        data.to_h
       end
 
     end
