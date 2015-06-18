@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Added support for environment variable overrides.
+
 * Feature - XML Parsing - Added support for the new Oga XML parser. This
   is enabled by default when the gem is present. You can force this
   by setting the XML parsing engine:
