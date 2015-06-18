@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.1 (2015-06-18)
 ------------------
 
 * Feature - Aws::ECS - Added support for environment variable overrides.
