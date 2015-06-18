@@ -50,7 +50,7 @@
       "result_key": [
         "PolicyGroups",
         "PolicyUsers",
-        "PoliyRoles"
+        "PolicyRoles"
       ]
     },
     "ListGroupPolicies": {
