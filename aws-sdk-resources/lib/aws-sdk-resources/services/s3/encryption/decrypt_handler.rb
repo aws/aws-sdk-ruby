@@ -6,6 +6,22 @@ module Aws
       # @api private
       class DecryptHandler < Seahorse::Client::Handler
 
+        V1_ENVELOPE_KEYS = %w(
+          x-amz-key
+          x-amz-iv
+          x-amz-matdesc
+        )
+
+        V2_ENVELOPE_KEYS = %w(
+          x-amz-key-v2
+          x-amz-iv
+          x-amz-cek-alg
+          x-amz-wrap-alg
+          x-amz-matdesc
+        )
+
+        POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS + V2_ENVELOPE_KEYS).uniq
+
         def call(context)
           attach_http_event_listeners(context)
           @handler.call(context)
@@ -50,24 +66,62 @@ module Aws
           end
         end
 
-        def envelope_from_metadata(context)
-          keys = %w(x-amz-key x-amz-iv x-amz-matdesc)
-          envelope = keys.each.with_object({}) do |key, hash|
-            if value = context.http_response.headers["x-amz-meta-#{key}"]
-              hash[key] = value
+        def envelope_from_metdata(context)
+          possible_envelope = {}
+          POSSIBLE_ENVELOPE_KEYS.each do |suffix|
+            if value = context.http_response.headers["x-amz-meta-#{suffix}"]
+              possible_envelope[key] = value
             end
           end
-          envelope.keys == keys ? envelope : nil
+          extract_envelope(possible_envelope)
         end
 
         def envelope_from_instr_file(context)
           suffix = context[:encryption][:instruction_file_suffix]
-          Json.load(context.client.get_object(
+          possible_envelope = Json.load(context.client.get_object(
             bucket: context.params[:bucket],
             key: context.params[:key] + suffix
           ).body.read)
+          extract_envelope(possible_envelope)
         rescue S3::Errors::ServiceError, Json::ParseError
           nil
+        end
+
+        def extract_envelope(hash)
+          return v1_envelope(hash) if hash.key?('x-amz-key')
+          return v2_envelope(hash) if hash.key?('x-amz-key-v2')
+          if hash.keys.any? { |key| key.match(/^x-amz-key-(.+)$/) }
+            msg = "unsupported envelope encryption version #{$1}"
+            raise Errors::DecryptionError, msg
+          else
+            nil # no envelope found
+          end
+        end
+
+        def v1_envelope(envelope)
+          envelope
+        end
+
+        def v2_envelope(envelope)
+          unless envelope['x-amz-cek-alg'] == 'AES/CBC/PKCS5Padding'
+            alg = envelope['x-amz-cek-alg'].inspect
+            msg = "unsupported content encrypting key (cek) format: #{alg}"
+            raise Errors::DecryptionError, msg
+          end
+          unless envelope['x-amz-wrap-alg'] == 'kms'
+            # possible to support
+            #   RSA/ECB/OAEPWithSHA-256AndMGF1Padding
+            alg = envelope['x-amz-wrap-alg'].inspect
+            msg = "unsupported key wrapping algorithm: #{alg}"
+            raise Errors::DecryptionError, msg
+          end
+          unless V2_ENVELOPE_KEYS.sort == envelope.keys.sort
+            msg = "incomplete v2 encryption envelope:\n"
+            msg += "  expected: #{V2_ENVELOPE_KEYS.join(',')}\n"
+            msg += "  got: #{envelope_keys.join(', ')}"
+            raise Errors::DecryptionError, msg
+          end
+          envelope
         end
 
       end

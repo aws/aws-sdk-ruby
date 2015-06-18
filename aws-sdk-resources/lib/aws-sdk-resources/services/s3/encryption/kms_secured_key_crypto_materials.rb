@@ -23,8 +23,10 @@ module Aws
           cipher = Utils.aes_encryption_cipher(:CBC)
           cipher.key = key_data.plaintext
           envelope = {
-            'x-amz-key' => encode64(key_data.ciphertext_blob),
+            'x-amz-key-v2' => encode64(key_data.ciphertext_blob),
             'x-amz-iv' => encode64(cipher.iv = cipher.random_iv),
+            'x-amz-cek-alg' => 'AES/CBC/PKCS5Padding',
+            'x-amz-wrap-alg' => 'kms',
             'x-amz-matdesc' => Json.dump(encryption_context)
           }
           [envelope, cipher]
