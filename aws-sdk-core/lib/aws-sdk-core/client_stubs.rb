@@ -36,7 +36,7 @@ module Aws
     #
     #     # stub data in the constructor
     #     client = Aws::S3::Client.new(stub_responses: {
-    #       list_buckets: { bukets: [{name: 'my-bucket' }] },
+    #       list_buckets: { buckets: [{name: 'my-bucket' }] },
     #       get_object: { body: 'data' },
     #     })
     #
@@ -46,7 +46,7 @@ module Aws
     # You can also specify the stub data using {#stub_responses}
     #
     #     client = Aws::S3::Client.new(stub_responses: true)
-    #     client.stub_resposnes(:list_buckets, {
+    #     client.stub_responses(:list_buckets, {
     #       buckets: [{ name: 'my-bucket' }]
     #     })
     #
