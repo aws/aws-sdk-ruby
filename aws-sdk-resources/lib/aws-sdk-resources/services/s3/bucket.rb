@@ -57,6 +57,13 @@ module Aws
           options)
       end
 
+      # @api private
+      def load
+        @data = client.list_buckets.buckets.find { |b| b.name == name }
+        raise "unable to load bucket #{name}" if @data.nil?
+        self
+      end
+
       private
 
       def dns_compatible?(scheme)
