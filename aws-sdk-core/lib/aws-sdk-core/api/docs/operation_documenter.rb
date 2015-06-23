@@ -71,7 +71,7 @@ module Aws
         end
 
         def examples_from_disk(method_name, operation)
-          dir = "examples/#{@service_name.downcase}/client/#{method_name}/*.md"
+          dir = "examples/#{@service_name.downcase}/client/#{method_name}/*.rb"
           Dir.glob(dir).map do |path|
             title = File.basename(path).split(/\./).first
             title = title.sub(/^\d+_/, '').gsub(/_/, ' ')
