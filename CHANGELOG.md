@@ -6,6 +6,10 @@ Unreleased Changes
 
 * Feature - Aws::Lambda - Adds `java8` as a supported runtime.
 
+* Feature - Aws::CognitoSync - Add `ConcurrentModificationException` error.
+
+* Feature - Aws::CognitoIdentity - Add `ConcurrentModificationException` error.
+
 2.1.1 (2015-06-18)
 ------------------
 

@@ -794,6 +794,15 @@
             "senderFault":true
           },
           "exception":true
+        },
+        {
+          "shape":"ConcurrentModificationException",
+          "error":{
+            "code":"ConcurrentModification",
+            "httpStatusCode":400,
+            "senderFault":true
+          },
+          "exception":true
         }
       ]
     },
@@ -1087,6 +1096,19 @@
         "RoleArn":{"shape":"AssumeRoleArn"},
         "StreamingStatus":{"shape":"StreamingStatus"}
       }
+    },
+    "ConcurrentModificationException":{
+      "type":"structure",
+      "required":["message"],
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{
+        "code":"ConcurrentModification",
+        "httpStatusCode":400,
+        "senderFault":true
+      },
+      "exception":true
     },
     "Dataset":{
       "type":"structure",
