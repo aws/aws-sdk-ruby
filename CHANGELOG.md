@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Can now set `:max_ttl` and `:default_ttl` within
+  `:cache_behaviors`. New API version `2015-04-17`.
+
 2.1.1 (2015-06-18)
 ------------------
 
