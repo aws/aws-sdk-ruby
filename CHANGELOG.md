@@ -16,6 +16,11 @@ Unreleased Changes
 * Feature - Aws::OpsWorks - You can specify which agent version will be used in
   your AWS OpsWorks managed instances.
 
+* Feature - Aws::Glacier - Amazon Glacier now allows you to tag your Amazon
+  Glacier vaults for easier resource and cost management. Tags are labels that
+  you can define and associate with your vaults, and using tags adds filtering
+  capabilities to operations such as AWS cost reports.
+
 2.1.1 (2015-06-18)
 ------------------
 
