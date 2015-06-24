@@ -2,45 +2,50 @@
   "version": 2,
   "waiters": {
     "ClusterAvailable": {
+      "delay": 60,
       "operation": "DescribeClusters",
       "maxAttempts": 30,
-      "delay": 60,
       "acceptors": [
         {
-          "state": "success",
+          "expected": "available",
           "matcher": "pathAll",
-          "argument": "Clusters[].ClusterStatus",
-          "expected": "available"
+          "state": "success",
+          "argument": "Clusters[].ClusterStatus"
         },
         {
-          "state": "failure",
+          "expected": "deleting",
           "matcher": "pathAny",
-          "argument": "Clusters[].ClusterStatus",
-          "expected": "deleting"
+          "state": "failure",
+          "argument": "Clusters[].ClusterStatus"
+        },
+        {
+          "expected": "ClusterNotFound",
+          "matcher": "error",
+          "state": "retry"
         }
       ]
     },
     "ClusterDeleted": {
+      "delay": 60,
       "operation": "DescribeClusters",
       "maxAttempts": 30,
-      "delay": 60,
       "acceptors": [
         {
-          "state": "success",
+          "expected": "ClusterNotFound",
           "matcher": "error",
-          "expected": "ClusterNotFound"
+          "state": "success"
         },
         {
-          "state": "failure",
+          "expected": "creating",
           "matcher": "pathAny",
-          "argument": "Clusters[].ClusterStatus",
-          "expected": "creating"
+          "state": "failure",
+          "argument": "Clusters[].ClusterStatus"
         },
         {
+          "expected": "pathAny",
+          "matcher": "pathList",
           "state": "failure",
-          "matcher": "pathAny",
-          "argument": "Clusters[].ClusterStatus",
-          "expected": "rebooting"
+          "argument": "Clusters[].ClusterStatus"
         }
       ]
     },
@@ -64,22 +69,27 @@
       ]
     },
     "SnapshotAvailable": {
+      "delay": 15,
       "operation": "DescribeClusterSnapshots",
       "maxAttempts": 20,
-      "delay": 15,
       "acceptors": [
         {
-          "state": "success",
+          "expected": "available",
           "matcher": "pathAll",
-          "argument": "Snapshots[].Status",
-          "expected": "available"
+          "state": "success",
+          "argument": "Snapshots[].Status"
         },
         {
-          "state": "failure",
-          "matcher": "pathAny",
-          "argument": "Snapshots[].Status",
           "expected": "failed",
-          "expected": "deleted"
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "Snapshots[].Status"
+        },
+        {
+          "expected": "deleted",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "Snapshots[].Status"
         }
       ]
     }

@@ -21,6 +21,9 @@ Unreleased Changes
   you can define and associate with your vaults, and using tags adds filtering
   capabilities to operations such as AWS cost reports.
 
+* Feature - Aws::Redshift - You can create automatic cross-region backups of
+  your KMS encrypted clusters for disaster recovery.
+
 2.1.1 (2015-06-18)
 ------------------
 
