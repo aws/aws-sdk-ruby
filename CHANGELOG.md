@@ -10,6 +10,9 @@ Unreleased Changes
 
 * Feature - Aws::CognitoIdentity - Add `ConcurrentModificationException` error.
 
+* Feature - Aws::ConfigService - You can now set up AWS Config to record changes
+  for specific resource types.
+
 2.1.1 (2015-06-18)
 ------------------
 
