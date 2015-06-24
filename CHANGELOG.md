@@ -13,6 +13,9 @@ Unreleased Changes
 * Feature - Aws::ConfigService - You can now set up AWS Config to record changes
   for specific resource types.
 
+* Feature - Aws::OpsWorks - You can specify which agent version will be used in
+  your AWS OpsWorks managed instances.
+
 2.1.1 (2015-06-18)
 ------------------
 
