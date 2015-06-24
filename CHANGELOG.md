@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.2 (2015-06-24)
 ------------------
 
 * Feature - Aws::CloudFront - Can now set `:max_ttl` and `:default_ttl` within
