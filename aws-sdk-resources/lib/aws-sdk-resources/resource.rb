@@ -101,7 +101,7 @@ module Aws
       def wait_until(options = {}, &block)
         resource_copy = self.dup
         attempts = 0
-        options[:max_attempts] ||= 10
+        options[:max_attempts] = 10 unless options.key?(:max_attempts)
         options[:delay] ||= 10
         options[:poller] = Proc.new do
           attempts += 1
