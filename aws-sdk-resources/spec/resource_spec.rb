@@ -229,6 +229,12 @@ module Aws
           expect(resource.data).to be(data)
         end
 
+        it 'allows unlimited attempts' do
+          attempts = 0
+          resource.wait_until(max_attempts:nil, delay:0) { (attempts += 1) == 12 }
+          expect(attempts).to be(12)
+        end
+
         it 'reloads until condition met' do
           allow(proc).to receive(:call).and_return(false,false, true)
           expect(load_operation).to receive(:call).exactly(2).times
