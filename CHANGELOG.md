@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resource - Fixed behavior of `#wait_until` option `max_attempts: nil`
+  to match documentation and allow unlimited retries. Default number of retries
+  remains at 10.
+
+  See [related GitHub pull request #855](https://github.com/aws/aws-sdk-ruby/pull/855)
+
 2.1.2 (2015-06-24)
 ------------------
 
