@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::DynamoDB - The Aws::DynamoDB::Client#stub_data method will
+  now observe the configured `:simple_attributes` option and conditionally
+  accept and return simple attribute values.
+
+  See [related GitHub pull request #863](https://github.com/aws/aws-sdk-ruby/pull/863)
+
 * Issue - Resource - Fixed behavior of `#wait_until` option `max_attempts: nil`
   to match documentation and allow unlimited retries. Default number of retries
   remains at 10.
