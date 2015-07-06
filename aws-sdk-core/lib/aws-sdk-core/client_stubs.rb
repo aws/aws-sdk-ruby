@@ -70,14 +70,18 @@ module Aws
     # fake responses with placeholder values. You can override the data
     # returned. You can also specify errors it should raise.
     #
+    #     # simulate service errors, give the error code
     #     client.stub_responses(:get_object, 'NotFound')
     #     client.get_object(bucket:'aws-sdk', key:'foo')
     #     #=> raises Aws::S3::Errors::NotFound
     #
+    #     # to simulate other errors, give the error class, you must
+    #     # be able to construct an instance with `.new`
     #     client.stub_responses(:get_object, Timeout::Error)
     #     client.get_object(bucket:'aws-sdk', key:'foo')
     #     #=> raises new Timeout::Error
     #
+    #     # or you can give an instance of an error class
     #     client.stub_responses(:get_object, RuntimeError.new('custom message'))
     #     client.get_object(bucket:'aws-sdk', key:'foo')
     #     #=> raises the given runtime error object
