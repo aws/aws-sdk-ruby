@@ -159,11 +159,10 @@ module Aws
           end
           docstring = <<-DOCSTRING
   Returns the list of supported waiters. The following table lists the supported
-  waiters, the client method they call, the default delay between polling
-  attempts, and the default maximum number of polling attempts:
+  waiters and the client method they call:
   <table>
   <thead>
-  <tr><th>Waiter Name</th><th>Client Method</th><th>Delay</th><th>Max Attempts</th></tr>
+  <tr><th>Waiter Name</th><th>Client Method</th><th>Default Delay:</th><th>Default Max Attempts:</th></tr>
   </thead>
   <tbody>
   #{waiters}
