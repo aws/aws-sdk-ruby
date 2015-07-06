@@ -207,7 +207,7 @@ module AWS
         @content_length = range_value(opts[:content_length])
         @conditions = opts[:conditions] || {}
         @ignored_fields = [opts[:ignore]].flatten.compact
-        @expires = opts[:expires]
+        @expires = opts[:expires] || Time.now.utc + 60*60
 
         super
 
@@ -397,17 +397,16 @@ module AWS
       # @api private
       private
       def format_expiration
-        time = expires || Time.now.utc + 60*60
         time =
-          case time
+          case expires
           when Time
-            time
+            expires
           when DateTime
-            Time.parse(time.to_s)
+            Time.parse(expires.to_s)
           when Integer
-            (Time.now + time)
+            (Time.now + expires)
           when String
-            Time.parse(time)
+            Time.parse(expires)
           end
         time.utc.iso8601
       end

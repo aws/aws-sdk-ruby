@@ -352,6 +352,17 @@ module AWS
           policy["expiration"].should == "2011-05-25T01:51:04Z"
         end
 
+        it "should reuse the default expire set during initialize" do
+          now = Time.parse("2011-05-24T17:54:04-07:00Z")
+          Time.stub(:now).and_return(now)
+          policy["expiration"].should == "2011-05-25T01:54:04Z"
+
+          later = Time.parse("2011-05-24T17:54:05-07:00Z")
+          Time.stub(:now).and_return(later)
+          later_policy = JSON.load(Base64.decode64(post.policy))
+          later_policy["expiration"].should == "2011-05-25T01:54:04Z"
+        end
+
         context 'when :expires is provided' do
 
           it 'should support Time' do
