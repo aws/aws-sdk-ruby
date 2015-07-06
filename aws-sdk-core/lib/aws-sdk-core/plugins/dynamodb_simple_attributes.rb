@@ -139,6 +139,10 @@ module Aws
 
         include Seahorse::Model::Shapes
 
+        def self.apply(rules, mode, data)
+          new(rules, mode).apply(data)
+        end
+
         def initialize(rules, mode)
           @rules = rules
           @mode = mode

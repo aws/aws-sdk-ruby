@@ -139,6 +139,26 @@ module Aws
         end
 
       end
+
+      describe '#stub_data' do
+
+        it 'accepts and returns simple attributes' do
+          client = Client.new(stub_responses: true)
+          data = client.stub_data(:get_item, item: { 'id' => 'value' })
+          expect(data.item).to eq({ 'id' => 'value' })
+        end
+
+        it 'observes the :simple_attributes configuration option' do
+          client = Client.new(stub_responses: true, simple_attributes: false)
+          expect {
+            client.stub_data(:get_item, item: { 'id' => 'value' })
+          }.to raise_error(ArgumentError)
+
+          data = client.stub_data(:get_item, item: { 'id' => { s: 'value' }})
+          expect(data.to_h[:item]).to eq({ 'id' => { s: 'value' }})
+        end
+
+      end
     end
   end
 end
