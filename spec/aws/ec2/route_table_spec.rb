@@ -262,6 +262,12 @@ module AWS
               :state => 'foo',
             }
 
+            route_set << {
+              :gateway_id => 'vpce-123',
+              :state => 'active',
+              :origin => 'CreateRoute',
+            }
+
             routes = route_table.routes
 
             routes[0].destination_cidr_block.should == 'cidr-block-1'
@@ -282,6 +288,10 @@ module AWS
             routes[2].origin.should == :enable_vgw_route_propagation
             routes[2].state.should == :foo
             routes[2].target.should == routes[2].network_interface
+
+            routes[3].target.should == InternetGateway.new('vpce-123', :config => config)
+            routes[3].state.should == :active
+            routes[3].origin.should == :create_route
 
           end
 

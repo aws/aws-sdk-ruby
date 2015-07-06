@@ -30,7 +30,9 @@ module AWS
 
           @route_table = route_table
 
-          @destination_cidr_block = details.destination_cidr_block
+          if details[:destination_cidr_block]
+            @destination_cidr_block = details.destination_cidr_block
+          end
 
           if details[:gateway_id]
             @internet_gateway = InternetGateway.new(
