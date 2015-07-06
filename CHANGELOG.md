@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added a `Aws::EC2::Route` resource class with the
+  associated `#delete` and `#replace` operations.
+
 * Issue - Aws::DynamoDB - The Aws::DynamoDB::Client#stub_data method will
   now observe the configured `:simple_attributes` option and conditionally
   accept and return simple attribute values.
