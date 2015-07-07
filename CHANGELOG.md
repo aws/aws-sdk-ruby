@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Amazon Elastic Block Store snapshot copy support for
+  customer-managed encryption keys.
+
 * Feature - Aws::EC2 - Added a `Aws::EC2::Route` resource class with the
   associated `#delete` and `#replace` operations.
 
