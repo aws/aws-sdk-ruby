@@ -22,7 +22,7 @@ module Aws
         protocol_helper.stub_data(api, operation, data)
       end
 
-      def stub_data(operation_name, data)
+      def stub_data(operation_name, data = {})
         if config.simple_attributes
           rules = config.api.operation(operation_name).output
           translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
