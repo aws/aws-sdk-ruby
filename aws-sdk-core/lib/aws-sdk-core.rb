@@ -99,6 +99,7 @@ module Aws
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :Structure, 'aws-sdk-core/structure'
   autoload :TreeHash, 'aws-sdk-core/tree_hash'
+  autoload :TypeBuilder, 'aws-sdk-core/type_builder'
   autoload :VERSION, 'aws-sdk-core/version'
 
   # @api private
@@ -347,16 +348,9 @@ module Aws
 
   # build service client classes
   service_added do |name, svc_module, options|
+    options[:type_builder] ||= TypeBuilder.new(svc_module)
     svc_module.const_set(:Client, Client.define(name, options))
     svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-  end
-
-  # define a struct class for each client data type
-  service_added do |name, svc_module, options|
-    svc_module.const_set(:Types, Module.new)
-    svc_module::Client.api.metadata['shapes'].each_structure do |shape|
-      svc_module::Types.const_set(shape.name, shape[:struct_class])
-    end
   end
 
   # enable response paging
