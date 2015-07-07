@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.3 (2015-07-07)
 ------------------
 
 * Feature - Aws::AutoScaling - Adds support for step policies. Step scaling
