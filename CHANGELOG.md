@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Adds support for step policies. Step scaling
+  policies allow customers to scale their Auto Scaling groups based on the
+  magnitude of the alarm breach, giving them more control over how Auto Scaling
+  responds to an alarm breach and enables them to scale their groups faster.
+
 * Feature - Aws::EC2 - Amazon Elastic Block Store snapshot copy support for
   customer-managed encryption keys.
 
