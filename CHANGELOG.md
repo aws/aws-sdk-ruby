@@ -6,6 +6,9 @@ Unreleased Changes
 
 * Feature - Aws::IAM - Add support for SSH Public Key Operations.
 
+* Feature - Aws::SES - Adds support for cross-account sending, which is
+  available through the use of the sending authorization feature.
+
 2.1.3 (2015-07-07)
 ------------------
 
