@@ -225,7 +225,9 @@ to be backwards compatible.
 | ---------------------------------------- | -------------------- | ----------- |
 | AWS CloudFormation                       | CloudFormation       | 2010-05-15  |
 | AWS CloudTrail                           | CloudTrail           | 2013-11-01  |
+| AWS CodeCommit                           | CodeCommit           | 2015-04-13  |
 | AWS CodeDeploy                           | CodeDeploy           | 2014-10-06  |
+| AWS CodePipeline                         | CodePipeline         | 2015-07-09  |
 | AWS Config                               | ConfigService        | 2014-11-12  |
 | AWS Data Pipeline                        | DataPipeline         | 2012-10-29  |
 | AWS Direct Connect                       | DirectConnect        | 2012-10-25  |
@@ -234,8 +236,8 @@ to be backwards compatible.
 | AWS Identity and Access Management       | IAM                  | 2010-05-08  |
 | AWS Import/Export                        | ImportExport         | 2010-06-01  |
 | AWS Key Management Service               | KMS                  | 2014-11-01  |
-| AWS Lambda                               | Lambda               | 2015-03-31  |
 | AWS Lambda                               | LambdaPreview        | 2014-11-11  |
+| AWS Lambda                               | Lambda               | 2015-03-31  |
 | AWS OpsWorks                             | OpsWorks             | 2013-02-18  |
 | AWS Security Token Service               | STS                  | 2011-06-15  |
 | AWS Storage Gateway                      | StorageGateway       | 2013-06-30  |

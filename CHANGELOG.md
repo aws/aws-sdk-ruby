@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.4 (2015-07-09)
 ------------------
 
 * Feature - Aws::ECS - Amazon EC2 Container Service now supports the UDP
