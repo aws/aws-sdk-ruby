@@ -4,6 +4,8 @@ Unreleased Changes
 * Feature - Aws::ECS - Amazon EC2 Container Service now supports the UDP
   protocol.
 
+* Feature - Aws::IAM - Add support for SSH Public Key Operations.
+
 2.1.3 (2015-07-07)
 ------------------
 
