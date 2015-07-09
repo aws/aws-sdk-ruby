@@ -28,6 +28,7 @@ module Aws
     CloudWatchLogs
     CodeCommit
     CodeDeploy
+    CodePipeline
     CognitoIdentity
     CognitoSync
     ConfigService

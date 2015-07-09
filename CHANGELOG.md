@@ -11,6 +11,8 @@ Unreleased Changes
 
 * Feature - Aws::CodeCommit - Adds support for AWS CodeCommit.
 
+* Feature - Aws::CodePipeline - Adds support for AWS CodePipeline.
+
 2.1.3 (2015-07-07)
 ------------------
 
