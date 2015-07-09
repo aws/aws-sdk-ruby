@@ -26,6 +26,7 @@ module Aws
     CloudTrail
     CloudWatch
     CloudWatchLogs
+    CodeCommit
     CodeDeploy
     CognitoIdentity
     CognitoSync
