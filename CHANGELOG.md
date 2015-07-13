@@ -4,6 +4,11 @@ Unreleased Changes
 * Feature - AWS::OpsWorks - Updated `AWS::OpsWorks::Client` to support the latest API
   features.
 
+* Issue - AWS::EC2 - Now conditionally extracting DestintationCidrBlock from VPC
+  endpoints.
+
+  See [related GitHub issue #864](https://github.com/aws/aws-sdk-ruby/issues/864).
+
 1.64.0 (2015-04-03)
 ------------------
 
