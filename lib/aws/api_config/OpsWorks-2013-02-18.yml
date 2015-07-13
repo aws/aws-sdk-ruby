@@ -1,21 +1,19 @@
-# Copyright 2011-2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License"). You
-# may not use this file except in compliance with the License. A copy of
-# the License is located at
-#
-#     http://aws.amazon.com/apache2.0/
-#
-# or in the "license" file accompanying this file. This file is
-# distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
-# ANY KIND, either express or implied. See the License for the specific
-# language governing permissions and limitations under the License.
-
 ---
 :json_version: '1.1'
 :target_prefix: OpsWorks_20130218.
 :api_version: '2013-02-18'
 :operations:
+- :name: AssignInstance
+  :method: :assign_instance
+  :inputs:
+    InstanceId:
+    - :string
+    - :required
+    LayerIds:
+    - :list:
+      - :string
+    - :required
+  :outputs: {}
 - :name: AssignVolume
   :method: :assign_volume
   :inputs:
@@ -115,6 +113,8 @@
     - :list:
       - :string
     DefaultRootDeviceType:
+    - :string
+    AgentVersion:
     - :string
   :outputs:
     StackId:
@@ -260,10 +260,33 @@
     - :string
     RootDeviceType:
     - :string
+    BlockDeviceMappings:
+    - :list:
+      - :structure:
+          DeviceName:
+          - :string
+          NoDevice:
+          - :string
+          VirtualName:
+          - :string
+          Ebs:
+          - :structure:
+              SnapshotId:
+              - :string
+              Iops:
+              - :integer
+              VolumeSize:
+              - :integer
+              VolumeType:
+              - :string
+              DeleteOnTermination:
+              - :boolean
     InstallUpdatesOnBoot:
     - :boolean
     EbsOptimized:
     - :boolean
+    AgentVersion:
+    - :string
   :outputs:
     InstanceId:
       :sym: :instance_id
@@ -342,6 +365,14 @@
     - :boolean
     UseEbsOptimizedInstances:
     - :boolean
+    LifecycleEventConfiguration:
+    - :structure:
+        Shutdown:
+        - :structure:
+            ExecutionTimeout:
+            - :integer
+            DelayUntilElbConnectionsDrained:
+            - :boolean
   :outputs:
     LayerId:
       :sym: :layer_id
@@ -413,6 +444,8 @@
     - :string
     DefaultRootDeviceType:
     - :string
+    AgentVersion:
+    - :string
   :outputs:
     StackId:
       :sym: :stack_id
@@ -479,6 +512,13 @@
     - :string
     - :required
   :outputs: {}
+- :name: DeregisterInstance
+  :method: :deregister_instance
+  :inputs:
+    InstanceId:
+    - :string
+    - :required
+  :outputs: {}
 - :name: DeregisterRdsDbInstance
   :method: :deregister_rds_db_instance
   :inputs:
@@ -493,6 +533,35 @@
     - :string
     - :required
   :outputs: {}
+- :name: DescribeAgentVersions
+  :method: :describe_agent_versions
+  :inputs:
+    StackId:
+    - :string
+    ConfigurationManager:
+    - :structure:
+        Name:
+        - :string
+        Version:
+        - :string
+  :outputs:
+    AgentVersions:
+      :sym: :agent_versions
+      :type: :hash
+      :members:
+        Version:
+          :sym: :version
+          :type: :string
+        ConfigurationManager:
+          :sym: :configuration_manager
+          :type: :hash
+          :members:
+            Name:
+              :sym: :name
+              :type: :string
+            Version:
+              :sym: :version
+              :type: :string
 - :name: DescribeApps
   :method: :describe_apps
   :inputs:
@@ -791,96 +860,156 @@
       :sym: :instances
       :type: :hash
       :members:
-        InstanceId:
-          :sym: :instance_id
-          :type: :string
-        Ec2InstanceId:
-          :sym: :ec2_instance_id
-          :type: :string
-        VirtualizationType:
-          :sym: :virtualization_type
-          :type: :string
-        Hostname:
-          :sym: :hostname
-          :type: :string
-        StackId:
-          :sym: :stack_id
-          :type: :string
-        LayerIds:
-          :sym: :layer_ids
-          :type: :string
-        SecurityGroupIds:
-          :sym: :security_group_ids
-          :type: :string
-        InstanceType:
-          :sym: :instance_type
-          :type: :string
-        InstanceProfileArn:
-          :sym: :instance_profile_arn
-          :type: :string
-        Status:
-          :sym: :status
-          :type: :string
-        Os:
-          :sym: :os
+        AgentVersion:
+          :sym: :agent_version
           :type: :string
         AmiId:
           :sym: :ami_id
           :type: :string
-        AvailabilityZone:
-          :sym: :availability_zone
-          :type: :string
-        SubnetId:
-          :sym: :subnet_id
-          :type: :string
-        PublicDns:
-          :sym: :public_dns
-          :type: :string
-        PrivateDns:
-          :sym: :private_dns
-          :type: :string
-        PublicIp:
-          :sym: :public_ip
-          :type: :string
-        PrivateIp:
-          :sym: :private_ip
-          :type: :string
-        ElasticIp:
-          :sym: :elastic_ip
+        Architecture:
+          :sym: :architecture
           :type: :string
         AutoScalingType:
           :sym: :auto_scaling_type
           :type: :string
-        SshKeyName:
-          :sym: :ssh_key_name
+        AvailabilityZone:
+          :sym: :availability_zone
           :type: :string
-        SshHostRsaKeyFingerprint:
-          :sym: :ssh_host_rsa_key_fingerprint
-          :type: :string
-        SshHostDsaKeyFingerprint:
-          :sym: :ssh_host_dsa_key_fingerprint
-          :type: :string
+        BlockDeviceMappings:
+          :sym: :block_device_mappings
+          :type: :hash
+          :members:
+            DeviceName:
+              :sym: :device_name
+              :type: :string
+            NoDevice:
+              :sym: :no_device
+              :type: :string
+            VirtualName:
+              :sym: :virtual_name
+              :type: :string
+            Ebs:
+              :sym: :ebs
+              :type: :hash
+              :members:
+                SnapshotId:
+                  :sym: :snapshot_id
+                  :type: :string
+                Iops:
+                  :sym: :iops
+                  :type: :integer
+                VolumeSize:
+                  :sym: :volume_size
+                  :type: :integer
+                VolumeType:
+                  :sym: :volume_type
+                  :type: :string
+                DeleteOnTermination:
+                  :sym: :delete_on_termination
+                  :type: :boolean
         CreatedAt:
           :sym: :created_at
+          :type: :string
+        EbsOptimized:
+          :sym: :ebs_optimized
+          :type: :boolean
+        Ec2InstanceId:
+          :sym: :ec2_instance_id
+          :type: :string
+        ElasticIp:
+          :sym: :elastic_ip
+          :type: :string
+        Hostname:
+          :sym: :hostname
+          :type: :string
+        InfrastructureClass:
+          :sym: :infrastructure_class
+          :type: :string
+        InstallUpdatesOnBoot:
+          :sym: :install_updates_on_boot
+          :type: :boolean
+        InstanceId:
+          :sym: :instance_id
+          :type: :string
+        InstanceProfileArn:
+          :sym: :instance_profile_arn
+          :type: :string
+        InstanceType:
+          :sym: :instance_type
           :type: :string
         LastServiceErrorId:
           :sym: :last_service_error_id
           :type: :string
-        Architecture:
-          :sym: :architecture
+        LayerIds:
+          :sym: :layer_ids
           :type: :string
+        Os:
+          :sym: :os
+          :type: :string
+        Platform:
+          :sym: :platform
+          :type: :string
+        PrivateDns:
+          :sym: :private_dns
+          :type: :string
+        PrivateIp:
+          :sym: :private_ip
+          :type: :string
+        PublicDns:
+          :sym: :public_dns
+          :type: :string
+        PublicIp:
+          :sym: :public_ip
+          :type: :string
+        RegisteredBy:
+          :sym: :registered_by
+          :type: :string
+        ReportedAgentVersion:
+          :sym: :reported_agent_version
+          :type: :string
+        ReportedOs:
+          :sym: :reported_os
+          :type: :hash
+          :members:
+            Family:
+              :sym: :family
+              :type: :string
+            Name:
+              :sym: :name
+              :type: :string
+            Version:
+              :sym: :version
+              :type: :string
         RootDeviceType:
           :sym: :root_device_type
           :type: :string
         RootDeviceVolumeId:
           :sym: :root_device_volume_id
           :type: :string
-        InstallUpdatesOnBoot:
-          :sym: :install_updates_on_boot
-          :type: :boolean
-        EbsOptimized:
-          :sym: :ebs_optimized
-          :type: :boolean
+        SecurityGroupIds:
+          :sym: :security_group_ids
+          :type: :string
+        SshHostDsaKeyFingerprint:
+          :sym: :ssh_host_dsa_key_fingerprint
+          :type: :string
+        SshHostRsaKeyFingerprint:
+          :sym: :ssh_host_rsa_key_fingerprint
+          :type: :string
+        SshKeyName:
+          :sym: :ssh_key_name
+          :type: :string
+        StackId:
+          :sym: :stack_id
+          :type: :string
+        Status:
+          :sym: :status
+          :type: :string
+        SubnetId:
+          :sym: :subnet_id
+          :type: :string
+        VirtualizationType:
+          :sym: :virtualization_type
+          :type: :string
 - :name: DescribeLayers
   :method: :describe_layers
   :inputs:
@@ -1005,6 +1134,20 @@
         UseEbsOptimizedInstances:
           :sym: :use_ebs_optimized_instances
           :type: :boolean
+        LifecycleEventConfiguration:
+          :sym: :lifecycle_event_configuration
+          :type: :hash
+          :members:
+            Shutdown:
+              :sym: :shutdown
+              :type: :hash
+              :members:
+                ExecutionTimeout:
+                  :sym: :execution_timeout
+                  :type: :integer
+                DelayUntilElbConnectionsDrained:
+                  :sym: :delay_until_elb_connections_drained
+                  :type: :boolean
 - :name: DescribeLoadBasedAutoScaling
   :method: :describe_load_based_auto_scaling
   :inputs:
@@ -1045,6 +1188,9 @@
             LoadThreshold:
               :sym: :load_threshold
               :type: :float
+            Alarms:
+              :sym: :alarms
+              :type: :string
         DownScaling:
           :sym: :down_scaling
           :type: :hash
@@ -1067,6 +1213,9 @@
             LoadThreshold:
               :sym: :load_threshold
               :type: :float
+            Alarms:
+              :sym: :alarms
+              :type: :string
 - :name: DescribeMyUserProfile
   :method: :describe_my_user_profile
   :inputs: {}
@@ -1242,6 +1391,22 @@
         CreatedAt:
           :sym: :created_at
           :type: :string
+- :name: DescribeStackProvisioningParameters
+  :method: :describe_stack_provisioning_parameters
+  :inputs:
+    StackId:
+    - :string
+    - :required
+  :outputs:
+    AgentInstallerUrl:
+      :sym: :agent_installer_url
+      :type: :string
+    Parameters:
+      :sym: :parameters
+      :type: :map
+      :members:
+        :sym: :map_value
+        :type: :string
 - :name: DescribeStackSummary
   :method: :describe_stack_summary
   :inputs:
@@ -1272,11 +1437,17 @@
           :sym: :instances_count
           :type: :hash
           :members:
+            Assigning:
+              :sym: :assigning
+              :type: :integer
             Booting:
               :sym: :booting
               :type: :integer
             ConnectionLost:
               :sym: :connection_lost
+              :type: :integer
+            Deregistering:
+              :sym: :deregistering
               :type: :integer
             Online:
               :sym: :online
@@ -1286,6 +1457,12 @@
               :type: :integer
             Rebooting:
               :sym: :rebooting
+              :type: :integer
+            Registered:
+              :sym: :registered
+              :type: :integer
+            Registering:
+              :sym: :registering
               :type: :integer
             Requested:
               :sym: :requested
@@ -1313,6 +1490,9 @@
               :type: :integer
             Terminating:
               :sym: :terminating
+              :type: :integer
+            Unassigning:
+              :sym: :unassigning
               :type: :integer
 - :name: DescribeStacks
   :method: :describe_stacks
@@ -1423,6 +1603,9 @@
           :type: :string
         DefaultRootDeviceType:
           :sym: :default_root_device_type
+          :type: :string
+        AgentVersion:
+          :sym: :agent_version
           :type: :string
 - :name: DescribeTimeBasedAutoScaling
   :method: :describe_time_based_auto_scaling
@@ -1597,6 +1780,31 @@
     Hostname:
       :sym: :hostname
       :type: :string
+- :name: GrantAccess
+  :method: :grant_access
+  :inputs:
+    InstanceId:
+    - :string
+    - :required
+    ValidForInMinutes:
+    - :integer
+  :outputs:
+    TemporaryCredential:
+      :sym: :temporary_credential
+      :type: :hash
+      :members:
+        Username:
+          :sym: :username
+          :type: :string
+        Password:
+          :sym: :password
+          :type: :string
+        ValidForInMinutes:
+          :sym: :valid_for_in_minutes
+          :type: :integer
+        InstanceId:
+          :sym: :instance_id
+          :type: :string
 - :name: RebootInstance
   :method: :reboot_instance
   :inputs:
@@ -1616,6 +1824,32 @@
   :outputs:
     ElasticIp:
       :sym: :elastic_ip
+      :type: :string
+- :name: RegisterInstance
+  :method: :register_instance
+  :inputs:
+    StackId:
+    - :string
+    - :required
+    Hostname:
+    - :string
+    PublicIp:
+    - :string
+    PrivateIp:
+    - :string
+    RsaPublicKey:
+    - :string
+    RsaPublicKeyFingerprint:
+    - :string
+    InstanceIdentity:
+    - :structure:
+        Document:
+        - :string
+        Signature:
+        - :string
+  :outputs:
+    InstanceId:
+      :sym: :instance_id
       :type: :string
 - :name: RegisterRdsDbInstance
   :method: :register_rds_db_instance
@@ -1667,6 +1901,9 @@
         - :double
         LoadThreshold:
         - :double
+        Alarms:
+        - :list:
+          - :string
     DownScaling:
     - :structure:
         InstanceCount:
@@ -1681,6 +1918,9 @@
         - :double
         LoadThreshold:
         - :double
+        Alarms:
+        - :list:
+          - :string
   :outputs: {}
 - :name: SetPermission
   :method: :set_permission
@@ -1774,6 +2014,13 @@
   :method: :stop_stack
   :inputs:
     StackId:
+    - :string
+    - :required
+  :outputs: {}
+- :name: UnassignInstance
+  :method: :unassign_instance
+  :inputs:
+    InstanceId:
     - :string
     - :required
   :outputs: {}
@@ -1888,6 +2135,8 @@
     - :boolean
     EbsOptimized:
     - :boolean
+    AgentVersion:
+    - :string
   :outputs: {}
 - :name: UpdateLayer
   :method: :update_layer
@@ -1958,6 +2207,14 @@
     - :boolean
     UseEbsOptimizedInstances:
     - :boolean
+    LifecycleEventConfiguration:
+    - :structure:
+        Shutdown:
+        - :structure:
+            ExecutionTimeout:
+            - :integer
+            DelayUntilElbConnectionsDrained:
+            - :boolean
   :outputs: {}
 - :name: UpdateMyUserProfile
   :method: :update_my_user_profile
@@ -2038,6 +2295,8 @@
     - :string
     UseOpsworksSecurityGroups:
     - :boolean
+    AgentVersion:
+    - :string
   :outputs: {}
 - :name: UpdateUserProfile
   :method: :update_user_profile

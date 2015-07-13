@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - AWS::OpsWorks - Updated `AWS::OpsWorks::Client` to support the latest API
+  features.
+
 1.64.0 (2015-04-03)
 ------------------
 
