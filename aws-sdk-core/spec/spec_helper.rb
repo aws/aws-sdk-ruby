@@ -183,5 +183,19 @@ module ApiHelper
         'TimestampShape' => { 'type' => 'timestamp' },
       }
     end
+
+    def sample_api(shapes = sample_shapes)
+      api = {
+        'operations' => {
+          'ExampleOperation' => {
+            'input' => { 'shape' => 'StructureShape' },
+            'output' => { 'shape' => 'StructureShape' },
+          }
+        },
+        'shapes' => shapes
+      }
+      Aws::Api::Builder.build(api)
+    end
+
   end
 end

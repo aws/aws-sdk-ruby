@@ -158,6 +158,12 @@ module Aws
           expect(data.to_h[:item]).to eq({ 'id' => { s: 'value' }})
         end
 
+        it 'can be called without data' do
+          expect {
+            Client.new(stub_responses:true).stub_data(:get_item)
+          }.not_to raise_error
+        end
+
       end
     end
   end

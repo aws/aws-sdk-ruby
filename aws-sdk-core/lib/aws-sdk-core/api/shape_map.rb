@@ -4,12 +4,6 @@ module Aws
 
       include Seahorse::Model::Shapes
 
-      EMPTY_REF = begin
-        shape = StructureShape.new
-        shape[:struct_class] = Aws::EmptyStructure
-        ShapeRef.new(shape: shape)
-      end
-
       SHAPE_CLASSES = {
         'blob' => BlobShape,
         'byte' => StringShape,
@@ -70,7 +64,7 @@ module Aws
             documentation: documentation,
             metadata: meta)
         else
-          EMPTY_REF
+          empty_ref
         end
       end
 
@@ -102,7 +96,6 @@ module Aws
               target: "#{shape.name}$#{member_name}",
             ))
           end
-          shape[:struct_class] = Structure.new(*shape.member_names)
         when ListShape
           shape.member = shape_ref(
             traits.delete('member'),
@@ -128,6 +121,15 @@ module Aws
         end
         traits.each do |key, value|
           shape[key] = value
+        end
+      end
+
+      def empty_ref
+        @empty_ref ||= begin
+          shape = StructureShape.new
+          shape.name = 'EmptyStructure'
+          @shapes['EmptyStructure'] = shape
+          ShapeRef.new(shape: shape)
         end
       end
 

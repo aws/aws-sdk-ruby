@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+2.1.4 (2015-07-09)
+------------------
+
+* Feature - Aws::ECS - Amazon EC2 Container Service now supports the UDP
+  protocol.
+
+* Feature - Aws::IAM - Adds support for SSH Public Key Operations.
+
+* Feature - Aws::SES - Adds support for cross-account sending, which is
+  available through the use of the sending authorization feature.
+
+* Feature - Aws::CodeCommit - Adds support for AWS CodeCommit.
+
+* Feature - Aws::CodePipeline - Adds support for AWS CodePipeline.
+
+2.1.3 (2015-07-07)
+------------------
+
+* Feature - Aws::AutoScaling - Adds support for step policies. Step scaling
+  policies allow customers to scale their Auto Scaling groups based on the
+  magnitude of the alarm breach, giving them more control over how Auto Scaling
+  responds to an alarm breach and enables them to scale their groups faster.
+
+* Feature - Aws::EC2 - Amazon Elastic Block Store snapshot copy support for
+  customer-managed encryption keys.
+
 * Feature - Aws::EC2 - Added a `Aws::EC2::Route` resource class with the
   associated `#delete` and `#replace` operations.
 
