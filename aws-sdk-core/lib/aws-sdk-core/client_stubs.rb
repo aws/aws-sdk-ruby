@@ -8,10 +8,10 @@ module Aws
   # behavior.
   module ClientStubs
 
-    def initialize(*args)
+    # @api private
+    def setup_stubbing
       @stubs = {}
       @stub_mutex = Mutex.new
-      super
       if Hash === @config.stub_responses
         @config.stub_responses.each do |operation_name, stubs|
           apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
