@@ -207,10 +207,10 @@ module AWS
         @completed_mutex.synchronize do
           @completed_parts[part_number] = {
             :part_number => part_number,
-            :etag => resp.etag
+            :etag => resp[:etag]
           }
         end
-        UploadedPart.new(self, part_number)
+        UploadedPart.new(self, part_number, :etag => resp[:etag])
       end
 
       # Copies a part.
@@ -240,7 +240,7 @@ module AWS
             :etag => resp[:etag]
           }
         end
-        UploadedPart.new(self, part_number)
+        UploadedPart.new(self, part_number, :etag => resp[:etag])
       end
 
       # Completes the upload by assembling previously uploaded
