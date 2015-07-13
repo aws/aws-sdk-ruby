@@ -67,7 +67,43 @@ module Aws
           examples_from_disk(method_name, operation) + [
             request_syntax_example(method_name, operation),
             response_structure_example(method_name, operation),
-          ].compact
+          ].compact + c2j_examples(method_name, operation)
+        end
+
+        def c2j_examples(method_name, operation)
+          paths = Dir["#{Aws::API_DIR}/#{@service_name.downcase}/**/examples-1.json"]
+          File.open(paths[0], "r") do |f|
+            all_examples = JSON.load(f)
+            tags = []
+            if examples = all_examples['examples'][operation.name]
+              examples.each do |json_ex|
+                tags << c2j_example_input(json_ex, method_name, operation)
+                if json_ex['output']
+                  tags << c2j_example_output(json_ex, method_name, operation)
+                end
+              end
+            end
+            tags
+          end
+        end
+
+        def c2j_example_input(json_ex, method_name, operation)
+          comments = json_ex['comments']['input']
+          input = C2JExample.new(json_ex['input'], method_name, operation, comments).to_str_input
+          parts = []
+          parts << "@example #{json_ex['title']}\n\n"
+          parts << "  # #{json_ex['description']}\n\n"
+          parts += input.lines.map { |line| "  " + line }
+          tag(parts.join)
+        end
+
+        def c2j_example_output(json_ex, method_name, operation)
+          comments = json_ex['comments']['output']
+          output = C2JExample.new(json_ex['output'], method_name, operation, comments).to_str_output
+          parts = []
+          parts << "@example Response structure\n\n"
+          parts += output.lines.map { |line| "  " + line }
+          tag(parts.join)
         end
 
         def examples_from_disk(method_name, operation)
