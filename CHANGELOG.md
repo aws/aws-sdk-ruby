@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.5 (2015-07-14)
 ------------------
 
 * Feature - Aws::DeviceFarm - Added support for AWS Device Farm.

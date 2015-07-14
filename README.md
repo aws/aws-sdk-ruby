@@ -230,14 +230,15 @@ to be backwards compatible.
 | AWS CodePipeline                         | CodePipeline         | 2015-07-09  |
 | AWS Config                               | ConfigService        | 2014-11-12  |
 | AWS Data Pipeline                        | DataPipeline         | 2012-10-29  |
+| AWS Device Farm                          | DeviceFarm           | 2015-06-23  |
 | AWS Direct Connect                       | DirectConnect        | 2012-10-25  |
 | AWS Directory Service                    | DirectoryService     | 2015-04-16  |
 | AWS Elastic Beanstalk                    | ElasticBeanstalk     | 2010-12-01  |
 | AWS Identity and Access Management       | IAM                  | 2010-05-08  |
 | AWS Import/Export                        | ImportExport         | 2010-06-01  |
 | AWS Key Management Service               | KMS                  | 2014-11-01  |
-| AWS Lambda                               | LambdaPreview        | 2014-11-11  |
 | AWS Lambda                               | Lambda               | 2015-03-31  |
+| AWS Lambda                               | LambdaPreview        | 2014-11-11  |
 | AWS OpsWorks                             | OpsWorks             | 2013-02-18  |
 | AWS Security Token Service               | STS                  | 2011-06-15  |
 | AWS Storage Gateway                      | StorageGateway       | 2013-06-30  |
@@ -251,6 +252,7 @@ to be backwards compatible.
 | Amazon Cognito Identity                  | CognitoIdentity      | 2014-06-30  |
 | Amazon Cognito Sync                      | CognitoSync          | 2014-06-30  |
 | Amazon DynamoDB                          | DynamoDB             | 2012-08-10  |
+| Amazon DynamoDB Streams                  | DynamoDBStreams      | 2012-08-10  |
 | Amazon EC2 Container Service             | ECS                  | 2014-11-13  |
 | Amazon ElastiCache                       | ElastiCache          | 2015-02-02  |
 | Amazon Elastic Compute Cloud             | EC2                  | 2015-04-15  |
