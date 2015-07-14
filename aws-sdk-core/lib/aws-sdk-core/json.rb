@@ -33,20 +33,20 @@ module Aws
       end
 
       def dump(value)
-        ENGINE.dump(value, ENGINE_DUMP_OPTIONS)
+        ENGINE.dump(value, *ENGINE_DUMP_OPTIONS)
       end
 
       private
 
       def oj_engine
         require 'oj'
-        [Oj, { mode: :compat }, Oj::ParseError]
+        [Oj, [{ mode: :compat }], Oj::ParseError]
       rescue LoadError
         false
       end
 
       def json_engine
-        [JSON, {}, JSON::ParserError]
+        [JSON, [], JSON::ParserError]
       end
 
     end
