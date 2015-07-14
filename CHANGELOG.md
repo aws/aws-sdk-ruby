@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.6 (2015-07-14)
 ------------------
 
 * Issue - Aws::Json - Resolved an issue with dumping JSON documents from the
