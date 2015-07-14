@@ -139,7 +139,7 @@ resp = resp.next_page until resp.last_page?
 
 ### Waiters
 
-Waiters are a utility methods that poll for a particular state. To invoke a
+Waiters are utility methods that poll for a particular state. To invoke a
 waiter, call `#wait_until` on a client:
 
 ```ruby
