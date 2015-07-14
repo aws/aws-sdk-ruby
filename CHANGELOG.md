@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Added support for AWS Device Farm.
+
 * Feature - Aws::DynamoDBStreams - Added support for Amazon DynamoDB Streams.
 
 * Feature - Aws::DynamoDB - Added support for consistent reads with the

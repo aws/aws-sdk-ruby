@@ -33,6 +33,7 @@ module Aws
     CognitoSync
     ConfigService
     DataPipeline
+    DeviceFarm
     DirectConnect
     DirectoryService
     DynamoDB
