@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Added support for consistent reads with the
+  Scan API.
+
 2.1.4 (2015-07-09)
 ------------------
 
