@@ -77,32 +77,26 @@ module Aws
             tags = []
             if examples = all_examples['examples'][operation.name]
               examples.each do |json_ex|
-                tags << c2j_example_input(json_ex, method_name, operation)
-                if json_ex['output']
-                  tags << c2j_example_output(json_ex, method_name, operation)
-                end
+                tags << c2j_example(json_ex, method_name, operation)
               end
             end
             tags
           end
         end
 
-        def c2j_example_input(json_ex, method_name, operation)
-          comments = json_ex['comments']['input']
-          input = C2JExample.new(json_ex['input'], method_name, operation, comments).to_str_input
+        def c2j_example(json_ex, method_name, operation)
+          input_comments = json_ex['comments']['input']
+          input = C2JExample.new(json_ex['input'], method_name, operation, input_comments).to_str_input
           parts = []
-          parts << "@example #{json_ex['title']}\n\n"
+          parts << "@example Example: #{json_ex['title']}\n\n"
           parts << "  # #{json_ex['description']}\n\n"
           parts += input.lines.map { |line| "  " + line }
-          tag(parts.join)
-        end
-
-        def c2j_example_output(json_ex, method_name, operation)
-          comments = json_ex['comments']['output']
-          output = C2JExample.new(json_ex['output'], method_name, operation, comments).to_str_output
-          parts = []
-          parts << "@example Response structure\n\n"
-          parts += output.lines.map { |line| "  " + line }
+          if json_ex['output']
+            output_comments = json_ex['comments']['output']
+            output = C2JExample.new(json_ex['output'], method_name, operation, output_comments).to_str_output
+            parts << "\n\n  # resp.to_h outputs the following:\n"
+            parts += output.lines.map { |line| "  " + line }
+          end
           tag(parts.join)
         end
 
