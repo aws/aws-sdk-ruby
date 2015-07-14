@@ -1,7 +1,7 @@
 module Aws
   module Api
     module Docs
-      class C2JExample
+      class SharedExample
 
         include Utils
         include Seahorse::Model::Shapes

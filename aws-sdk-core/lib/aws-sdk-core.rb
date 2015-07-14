@@ -118,7 +118,7 @@ module Aws
       autoload :ParamFormatter, 'aws-sdk-core/api/docs/param_formatter'
       autoload :RequestSyntaxExample, 'aws-sdk-core/api/docs/request_syntax_example'
       autoload :ResponseStructureExample, 'aws-sdk-core/api/docs/response_structure_example'
-      autoload :C2JExample, 'aws-sdk-core/api/docs/c2j_example'
+      autoload :SharedExample, 'aws-sdk-core/api/docs/shared_example'
       autoload :Utils, 'aws-sdk-core/api/docs/utils'
     end
   end

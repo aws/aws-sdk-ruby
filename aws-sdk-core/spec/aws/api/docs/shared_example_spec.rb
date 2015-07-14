@@ -6,7 +6,7 @@ module Aws
 
       include Seahorse::Model
 
-      describe C2JExample do
+      describe SharedExample do
 
         before(:all) do
           services = ["s3"]
@@ -28,7 +28,7 @@ module Aws
         def load_example_input(operation_camel, operation_name)
           example = @examples["s3"][operation_camel][0]
           operation = s3_client.operation(operation_name)
-          input_str = C2JExample.new(
+          input_str = SharedExample.new(
             example["input"], operation_name, operation, example["comments"]["input"]).to_str_input
           cutoff = "resp = client.#{operation_name}".size
           eval(input_str[cutoff..-1])
@@ -37,7 +37,7 @@ module Aws
         def load_example_output(operation_camel, operation_name)
           example = @examples["s3"][operation_camel][0]
           operation = s3_client.operation(operation_name)
-          output_str = C2JExample.new(
+          output_str = SharedExample.new(
             example["output"], operation_name, operation, example["comments"]["output"]).to_str_output
           eval(output_str)
         end
@@ -71,7 +71,7 @@ module Aws
           operation_name = Seahorse::Util.underscore(operation_camel)
           example = @examples["s3"][operation_camel][0]
           operation = s3_client.operation(operation_name)
-          output_str = C2JExample.new(
+          output_str = SharedExample.new(
             example["output"], operation_name, operation, example["comments"]["output"]).to_str_output
           expect(output_str).to include("size: 5242881, # Here is a comment for Parts[1].Size")
         end
@@ -81,7 +81,7 @@ module Aws
           operation_name = Seahorse::Util.underscore(operation_camel)
           example = @examples["s3"][operation_camel][0]
           operation = s3_client.operation(operation_name)
-          input_str = C2JExample.new(
+          input_str = SharedExample.new(
             example["input"], operation_name, operation, example["comments"]["input"]).to_str_input
           expect(input_str).to include("key: \"multipart/01\", # Here is a comment for Key")
         end
@@ -91,7 +91,7 @@ module Aws
           operation_name = Seahorse::Util.underscore(operation_camel)
           example = @examples["s3"][operation_camel][0]
           operation = s3_client.operation(operation_name)
-          input_str = C2JExample.new(
+          input_str = SharedExample.new(
             example["input"], operation_name, operation, example["comments"]["input"]).to_str_input
           expect(input_str).to include("\"Metakey2\" => \"Metavalue2\", # Here is a comment for Metadata.Metakey2")
         end
