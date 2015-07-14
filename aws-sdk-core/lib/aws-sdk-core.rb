@@ -36,6 +36,7 @@ module Aws
     DirectConnect
     DirectoryService
     DynamoDB
+    DynamoDBStreams
     EC2
     ECS
     EFS
