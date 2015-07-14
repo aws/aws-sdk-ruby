@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Json - Resolved an issue with dumping JSON documents from the
+  standard library JSON implementation.
+
 2.1.5 (2015-07-14)
 ------------------
 
