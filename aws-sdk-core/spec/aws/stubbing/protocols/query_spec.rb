@@ -59,6 +59,18 @@ module Aws
             XML
           end
 
+          it 'can stub errors' do
+            resp = Query.new.stub_error('error-code')
+            expect(normalize(resp.body.string)).to eq(normalize(<<-XML))
+              <ErrorResponse>
+                <Error>
+                  <Code>error-code</Code>
+                  <Message>stubbed-response-error-message</Message>
+                </Error>
+              </ErrorResponse>
+            XML
+          end
+
         end
       end
     end

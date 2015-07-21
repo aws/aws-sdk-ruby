@@ -16,14 +16,7 @@ module Aws
         def stub_error(error_code)
           http_resp = Seahorse::Client::Http::Response.new
           http_resp.status_code = 400
-          http_resp.body = <<-XML.strip
-<ErrorResponse>
-  <Error>
-    <Code>#{error_code}</Code>
-    <Message>stubbed-response-error-message</Message>
-  </Error>
-</ErrorResponse>
-          XML
+          http_resp.body = XmlError.new(error_code).to_xml
           http_resp
         end
 

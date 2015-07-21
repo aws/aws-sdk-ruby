@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Stubbing - Added missing support for stubbing query protocol errors by their
+  error code.
+
 2.1.7 (2015-07-14)
 ------------------
 
