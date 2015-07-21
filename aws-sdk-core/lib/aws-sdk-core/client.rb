@@ -17,6 +17,15 @@ module Aws
       'Aws::Plugins::StubResponses',
     ]
 
+    # @api private
+    PROTOCOL_PLUGINS = Hash.new(DEFAULT_PLUGINS).merge({
+      'json'      => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::JsonRpc),
+      'rest-json' => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::RestJson),
+      'rest-xml'  => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::RestXml),
+      'query'     => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::Query),
+      'ec2'       => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::EC2),
+    })
+
     include ClientStubs
     include ClientWaiters
 
@@ -32,10 +41,14 @@ module Aws
         client_class.identifier = svc_name.downcase.to_sym
         client_class.set_api(Api::Builder.build(options[:api], options))
         client_class.set_waiters(options[:waiters])
-        DEFAULT_PLUGINS.each do |plugin|
+
+        protocol = client_class.api.metadata['protocol']
+        PROTOCOL_PLUGINS[protocol].each do |plugin|
           client_class.add_plugin(plugin)
         end
+
         Api::Customizations.apply_plugins(client_class)
+
         client_class
       end
 

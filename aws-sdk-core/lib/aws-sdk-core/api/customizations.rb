@@ -25,15 +25,6 @@ module Aws
         end
 
         def apply_plugins(client_class)
-          protocol = client_class.api.metadata['protocol']
-          plugin = case protocol
-            when 'ec2'       then Aws::Plugins::Protocols::EC2
-            when 'query'     then Aws::Plugins::Protocols::Query
-            when 'json'      then Aws::Plugins::Protocols::JsonRpc
-            when 'rest-json' then Aws::Plugins::Protocols::RestJson
-            when 'rest-xml'  then Aws::Plugins::Protocols::RestXml
-          end
-          client_class.add_plugin(plugin) if plugin
           prefix = client_class.api.metadata['endpointPrefix']
           if @plugins[prefix]
             @plugins[prefix][:add].each { |p| client_class.add_plugin(p) }
