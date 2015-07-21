@@ -4,6 +4,8 @@ Unreleased Changes
 * Issue - Stubbing - Added missing support for stubbing query protocol errors by their
   error code.
 
+  See [related GitHub pull request #873](https://github.com/aws/aws-sdk-ruby/pull/873)
+
 2.1.7 (2015-07-14)
 ------------------
 
