@@ -67,7 +67,37 @@ module Aws
           examples_from_disk(method_name, operation) + [
             request_syntax_example(method_name, operation),
             response_structure_example(method_name, operation),
-          ].compact
+          ].compact + shared_examples(method_name, operation)
+        end
+
+        def shared_examples(method_name, operation)
+          paths = Dir["#{Aws::API_DIR}/#{@service_name.downcase}/**/examples-1.json"]
+          File.open(paths[0], "r") do |f|
+            all_examples = JSON.load(f)
+            tags = []
+            if examples = all_examples['examples'][operation.name]
+              examples.each do |json_ex|
+                tags << shared_example(json_ex, method_name, operation)
+              end
+            end
+            tags
+          end
+        end
+
+        def shared_example(json_ex, method_name, operation)
+          input_comments = json_ex['comments']['input']
+          input = SharedExample.new(json_ex['input'], method_name, operation, input_comments).to_str_input
+          parts = []
+          parts << "@example Example: #{json_ex['title']}\n\n"
+          parts << "  # #{json_ex['description']}\n\n"
+          parts += input.lines.map { |line| "  " + line }
+          if json_ex['output']
+            output_comments = json_ex['comments']['output']
+            output = SharedExample.new(json_ex['output'], method_name, operation, output_comments).to_str_output
+            parts << "\n\n  # resp.to_h outputs the following:\n"
+            parts += output.lines.map { |line| "  " + line }
+          end
+          tag(parts.join)
         end
 
         def examples_from_disk(method_name, operation)
