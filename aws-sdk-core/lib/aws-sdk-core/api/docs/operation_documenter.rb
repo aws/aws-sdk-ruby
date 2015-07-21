@@ -64,23 +64,21 @@ module Aws
         end
 
         def example_tags(method_name, operation)
-          examples_from_disk(method_name, operation) + [
+          shared_examples(method_name, operation) +
+          examples_from_disk(method_name, operation) +
+          [
             request_syntax_example(method_name, operation),
             response_structure_example(method_name, operation),
-          ].compact + shared_examples(method_name, operation)
+          ].compact
         end
 
         def shared_examples(method_name, operation)
-          paths = Dir["#{Aws::API_DIR}/#{@service_name.downcase}/**/examples-1.json"]
-          File.open(paths[0], "r") do |f|
-            all_examples = JSON.load(f)
-            tags = []
-            if examples = all_examples['examples'][operation.name]
-              examples.each do |json_ex|
-                tags << shared_example(json_ex, method_name, operation)
-              end
+          if operation['examples']
+            operation['examples'].map do |example|
+              shared_example(example, method_name, operation)
             end
-            tags
+          else
+            []
           end
         end
 
