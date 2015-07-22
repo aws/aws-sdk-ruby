@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Waiters - Added two new waiters:
+
+  * `:instance_profile_exists` - `Aws::IAM::Client`
+  * `:app_exists` - `Aws::OpsWorks::Client`
+
+  See [related GitHub pull request #866](https://github.com/aws/aws-sdk-ruby/pull/866)
+
 * Issue - Stubbing - Added missing support for stubbing query protocol errors by their
   error code.
 

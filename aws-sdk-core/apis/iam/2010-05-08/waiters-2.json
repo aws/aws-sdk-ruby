@@ -1,8 +1,8 @@
 {
   "version": 2,
   "waiters": {
-    "InstanceProfileAvailable": {
-      "delay": 15,
+    "InstanceProfileExists": {
+      "delay": 1,
       "operation": "GetInstanceProfile",
       "maxAttempts": 40,
       "acceptors": [
