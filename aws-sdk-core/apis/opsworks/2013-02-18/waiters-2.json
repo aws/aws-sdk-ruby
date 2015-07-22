@@ -1,6 +1,18 @@
 {
   "version": 2,
   "waiters": {
+    "AppAvailable": {
+      "delay": 15,
+      "operation": "DescribeApps",
+      "maxAttempts": 40,
+      "acceptors": [
+        {
+          "expected": 200,
+          "matcher": "status",
+          "state": "success"
+        }
+      ]
+    },
     "InstanceOnline": {
       "delay": 15,
       "operation": "DescribeInstances",
