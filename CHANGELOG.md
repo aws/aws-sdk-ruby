@@ -6,6 +6,18 @@ Unreleased Changes
 
   See [related GitHub pull request #873](https://github.com/aws/aws-sdk-ruby/pull/873)
 
+* Feature - Aws::CognitoIdentity - The following operations can now be called from
+  Aws::CognitoIdentity::Client without credentials:
+
+  * `#get_credentialsForIdentity`
+  * `#get_id`
+  * `#get_open_id_token`
+  * `#list_identity_pools`
+  * `#unlink_developer_identity`
+  * `#unlink_identity`
+
+  See [related GitHub pull request #862](https://github.com/aws/aws-sdk-ruby/pull/862)
+
 2.1.7 (2015-07-14)
 ------------------
 

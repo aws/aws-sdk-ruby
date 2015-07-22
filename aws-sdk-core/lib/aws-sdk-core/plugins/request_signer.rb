@@ -73,6 +73,15 @@ module Aws
           AssumeRoleWithWebIdentity
         ))
 
+        COGNITO_IDENTITY_UNSIGNED_REQUESTS = Set.new(%w(
+          GetCredentialsForIdentity
+          GetId
+          GetOpenIdToken
+          ListIdentityPools
+          UnlinkDeveloperIdentity
+          UnlinkIdentity
+        ))
+
         def call(context)
           sign_authenticated_requests(context) unless unsigned_request?(context)
           @handler.call(context)
@@ -105,6 +114,8 @@ module Aws
             STS_UNSIGNED_REQUESTS.include?(context.operation.name)
           elsif context.config.api.metadata['endpointPrefix'] == 'cloudsearchdomain'
             context.config.credentials.nil? || !context.config.credentials.set?
+          elsif context.config.api.metadata['endpointPrefix'] == 'cognito-identity'
+            COGNITO_IDENTITY_UNSIGNED_REQUESTS.include?(context.operation.name)
           else
             false
           end
