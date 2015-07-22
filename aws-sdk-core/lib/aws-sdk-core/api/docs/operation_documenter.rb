@@ -64,10 +64,38 @@ module Aws
         end
 
         def example_tags(method_name, operation)
-          examples_from_disk(method_name, operation) + [
+          shared_examples(method_name, operation) +
+          examples_from_disk(method_name, operation) +
+          [
             request_syntax_example(method_name, operation),
             response_structure_example(method_name, operation),
           ].compact
+        end
+
+        def shared_examples(method_name, operation)
+          if operation['examples']
+            operation['examples'].map do |example|
+              shared_example(example, method_name, operation)
+            end
+          else
+            []
+          end
+        end
+
+        def shared_example(json_ex, method_name, operation)
+          input_comments = json_ex['comments']['input']
+          input = SharedExample.new(json_ex['input'], method_name, operation, input_comments).to_str_input
+          parts = []
+          parts << "@example Example: #{json_ex['title']}\n\n"
+          parts << "  # #{json_ex['description']}\n\n"
+          parts += input.lines.map { |line| "  " + line }
+          if json_ex['output']
+            output_comments = json_ex['comments']['output']
+            output = SharedExample.new(json_ex['output'], method_name, operation, output_comments).to_str_output
+            parts << "\n\n  # resp.to_h outputs the following:\n"
+            parts += output.lines.map { |line| "  " + line }
+          end
+          tag(parts.join)
         end
 
         def examples_from_disk(method_name, operation)
