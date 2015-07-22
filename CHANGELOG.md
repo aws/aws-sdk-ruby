@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::IAM - Added missing paginator for `Aws::IAM::Client#list_policy_versions`.
+
+  See [related GitHub issue #879](https://github.com/aws/aws-sdk-ruby/issues/879).
+
 * Feature - Waiters - Added two new waiters:
 
   * `:instance_profile_exists` - `Aws::IAM::Client`
