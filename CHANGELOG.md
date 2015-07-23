@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added support for new spot fleet launch specification features.
+
 * Feature - Aws::Glacier - Added support for vault locks.
 
 * Feature - Aws::ElasticMapReduce - Adds support for Amazon EMR release 4.0.0, which
