@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Glacier - Added support for vault locks.
+
 * Feature - Aws::ElasticMapReduce - Adds support for Amazon EMR release 4.0.0, which
   includes a new application installation and configuration experience, upgraded
   versions of Hadoop, Hive, and Spark, and now uses open source standards for ports
