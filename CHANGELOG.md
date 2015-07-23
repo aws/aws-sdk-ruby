@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.8 (2015-07-23)
 ------------------
 
 * Feature - Aws::EC2 - Added support for new spot fleet launch specification features.
