@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticMapReduce - Adds support for Amazon EMR release 4.0.0, which
+  includes a new application installation and configuration experience, upgraded
+  versions of Hadoop, Hive, and Spark, and now uses open source standards for ports
+  and paths. To specify an Amazon EMR release, use the release label parameter
+  (AMI versions 3.x and 2.x can still be specified with the AMI version parameter).
+
+  For more information on Amazon EMR release 4.0.0, please visit:
+  https://docs.aws.amazon.com/ElasticMapReduce/latest/ReleaseGuide/emr-release-components.html
+
 * Issue - Aws::IAM - Added missing paginator for `Aws::IAM::Client#list_policy_versions`.
 
   See [related GitHub issue #879](https://github.com/aws/aws-sdk-ruby/issues/879).
