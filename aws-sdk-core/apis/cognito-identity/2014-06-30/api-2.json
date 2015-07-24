@@ -605,6 +605,11 @@
           "shape":"InternalErrorException",
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"ConcurrentModificationException",
+          "error":{"httpStatusCode":400},
+          "exception":true
         }
       ]
     },
@@ -731,6 +736,11 @@
           "shape":"InternalErrorException",
           "exception":true,
           "fault":true
+        },
+        {
+          "shape":"ConcurrentModificationException",
+          "error":{"httpStatusCode":400},
+          "exception":true
         }
       ]
     }
@@ -747,6 +757,14 @@
       "min":1,
       "max":15,
       "pattern":"\\d+"
+    },
+    "ConcurrentModificationException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"String"}
+      },
+      "error":{"httpStatusCode":400},
+      "exception":true
     },
     "CreateIdentityPoolInput":{
       "type":"structure",

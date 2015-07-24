@@ -11,6 +11,10 @@ module Aws
         end
 
         def stub_error(error_code)
+          http_resp = Seahorse::Client::Http::Response.new
+          http_resp.status_code = 400
+          http_resp.body = XmlError.new(error_code).to_xml
+          http_resp
         end
 
         private

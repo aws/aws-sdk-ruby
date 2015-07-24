@@ -12,8 +12,11 @@ module Seahorse
         class Handler < Client::Handler
 
           def call(context)
-            target = context.params.delete(:response_target)
-            target ||= context[:response_target]
+            if context.params.is_a?(Hash) && context.params[:response_target]
+              target = context.params.delete(:response_target)
+            else
+              target = context[:response_target]
+            end
             add_event_listeners(context, target) if target
             @handler.call(context)
           end

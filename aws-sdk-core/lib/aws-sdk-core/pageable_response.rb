@@ -30,11 +30,9 @@ module Aws
   #
   module PageableResponse
 
-    def self.included(base)
-      base.send(:include, Enumerable)
-    end
-
     def self.extended(base)
+      base.send(:extend, Enumerable)
+      base.send(:extend, UnsafeEnumerableMethods)
       base.instance_variable_set("@last_page", nil)
       base.instance_variable_set("@more_results", nil)
     end
@@ -82,24 +80,6 @@ module Aws
     end
     alias each_page each
 
-    # @api private
-    def count
-      if respond_to?(:count)
-        data.count
-      else
-        raise NotImplementedError
-      end
-    end
-
-    # @api private
-    def respond_to?(method_name, *args)
-      if method_name == :count
-        data.respond_to?(:count)
-      else
-        super
-      end
-    end
-
     private
 
     # @param [Hash] params A hash of additional request params to
@@ -117,7 +97,7 @@ module Aws
     # @return [Hash] Returns the hash of request parameters for the
     #   next page, merging any given params.
     def next_page_params(params)
-      context.params.merge(@pager.next_tokens(self).merge(params))
+      context[:original_params].merge(@pager.next_tokens(self).merge(params))
     end
 
     # Raised when calling {PageableResponse#next_page} on a pager that
@@ -136,5 +116,32 @@ module Aws
 
     end
 
+    # A handful of Enumerable methods, such as #count are not safe
+    # to call on a pageable response, as this would trigger n api calls
+    # simply to count the number of response pages, when likely what is
+    # wanted is to access count on the data. Same for #to_h.
+    module UnsafeEnumerableMethods
+
+      def count
+        if data.respond_to?(:count)
+          data.count
+        else
+          raise NoMethodError, "undefined method `count'"
+        end
+      end
+
+      def respond_to?(method_name, *args)
+        if method_name == :count
+          data.respond_to?(:count)
+        else
+          false
+        end
+      end
+
+      def to_h
+        data.to_h
+      end
+
+    end
   end
 end

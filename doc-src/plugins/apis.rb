@@ -14,3 +14,14 @@ YARD::Parser::SourceParser.after_parse_list do
     Aws::Api::Docs::Builder.document(svc_module)
   end
 end
+
+# load shared examples
+Aws.service_added do |name, svc_module, options|
+  api = svc_module::Client.api
+  if path = options[:examples]
+    Aws::Json.load_file(path)['examples'].each do |operation_name, examples|
+      operation = api.operation(Seahorse::Util.underscore(operation_name))
+      operation['examples'] = examples
+    end
+  end
+end

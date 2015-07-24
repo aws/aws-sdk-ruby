@@ -1,6 +1,159 @@
 Unreleased Changes
 ------------------
 
+2.1.8 (2015-07-23)
+------------------
+
+* Feature - Aws::EC2 - Added support for new spot fleet launch specification features.
+
+* Feature - Aws::Glacier - Added support for vault locks.
+
+* Feature - Aws::ElasticMapReduce - Adds support for Amazon EMR release 4.0.0, which
+  includes a new application installation and configuration experience, upgraded
+  versions of Hadoop, Hive, and Spark, and now uses open source standards for ports
+  and paths. To specify an Amazon EMR release, use the release label parameter
+  (AMI versions 3.x and 2.x can still be specified with the AMI version parameter).
+
+  For more information on Amazon EMR release 4.0.0, please visit:
+  https://docs.aws.amazon.com/ElasticMapReduce/latest/ReleaseGuide/emr-release-components.html
+
+* Issue - Aws::IAM - Added missing paginator for `Aws::IAM::Client#list_policy_versions`.
+
+  See [related GitHub issue #879](https://github.com/aws/aws-sdk-ruby/issues/879).
+
+* Feature - Waiters - Added two new waiters:
+
+  * `:instance_profile_exists` - `Aws::IAM::Client`
+  * `:app_exists` - `Aws::OpsWorks::Client`
+
+  See [related GitHub pull request #866](https://github.com/aws/aws-sdk-ruby/pull/866)
+
+* Issue - Stubbing - Added missing support for stubbing query protocol errors by their
+  error code.
+
+  See [related GitHub pull request #873](https://github.com/aws/aws-sdk-ruby/pull/873)
+
+* Feature - Aws::CognitoIdentity - The following operations can now be called from
+  Aws::CognitoIdentity::Client without credentials:
+
+  * `#get_credentialsForIdentity`
+  * `#get_id`
+  * `#get_open_id_token`
+  * `#list_identity_pools`
+  * `#unlink_developer_identity`
+  * `#unlink_identity`
+
+  See [related GitHub pull request #862](https://github.com/aws/aws-sdk-ruby/pull/862)
+
+2.1.7 (2015-07-14)
+------------------
+
+* Issue - Aws::Json - Resolved an issue with dumping JSON documents from the
+  standard library JSON implementation.
+
+2.1.5 (2015-07-14)
+------------------
+
+* Feature - Aws::DeviceFarm - Added support for AWS Device Farm.
+
+* Feature - Aws::DynamoDBStreams - Added support for Amazon DynamoDB Streams.
+
+* Feature - Aws::DynamoDB - Added support for consistent reads with the
+  Scan API.
+
+2.1.4 (2015-07-09)
+------------------
+
+* Feature - Aws::ECS - Amazon EC2 Container Service now supports the UDP
+  protocol.
+
+* Feature - Aws::IAM - Adds support for SSH Public Key Operations.
+
+* Feature - Aws::SES - Adds support for cross-account sending, which is
+  available through the use of the sending authorization feature.
+
+* Feature - Aws::CodeCommit - Adds support for AWS CodeCommit.
+
+* Feature - Aws::CodePipeline - Adds support for AWS CodePipeline.
+
+2.1.3 (2015-07-07)
+------------------
+
+* Feature - Aws::AutoScaling - Adds support for step policies. Step scaling
+  policies allow customers to scale their Auto Scaling groups based on the
+  magnitude of the alarm breach, giving them more control over how Auto Scaling
+  responds to an alarm breach and enables them to scale their groups faster.
+
+* Feature - Aws::EC2 - Amazon Elastic Block Store snapshot copy support for
+  customer-managed encryption keys.
+
+* Feature - Aws::EC2 - Added a `Aws::EC2::Route` resource class with the
+  associated `#delete` and `#replace` operations.
+
+* Issue - Aws::DynamoDB - The Aws::DynamoDB::Client#stub_data method will
+  now observe the configured `:simple_attributes` option and conditionally
+  accept and return simple attribute values.
+
+  See [related GitHub pull request #863](https://github.com/aws/aws-sdk-ruby/pull/863)
+
+* Issue - Resource - Fixed behavior of `#wait_until` option `max_attempts: nil`
+  to match documentation and allow unlimited retries. Default number of retries
+  remains at 10.
+
+  See [related GitHub pull request #855](https://github.com/aws/aws-sdk-ruby/pull/855)
+
+2.1.2 (2015-06-24)
+------------------
+
+* Feature - Aws::CloudFront - Can now set `:max_ttl` and `:default_ttl` within
+  `:cache_behaviors`. New API version `2015-04-17`.
+
+* Feature - Aws::Lambda - Adds `java8` as a supported runtime.
+
+* Feature - Aws::CognitoSync - Add `ConcurrentModificationException` error.
+
+* Feature - Aws::CognitoIdentity - Add `ConcurrentModificationException` error.
+
+* Feature - Aws::ConfigService - You can now set up AWS Config to record changes
+  for specific resource types.
+
+* Feature - Aws::OpsWorks - You can specify which agent version will be used in
+  your AWS OpsWorks managed instances.
+
+* Feature - Aws::Glacier - Amazon Glacier now allows you to tag your Amazon
+  Glacier vaults for easier resource and cost management. Tags are labels that
+  you can define and associate with your vaults, and using tags adds filtering
+  capabilities to operations such as AWS cost reports.
+
+* Feature - Aws::Redshift - You can create automatic cross-region backups of
+  your KMS encrypted clusters for disaster recovery.
+
+2.1.1 (2015-06-18)
+------------------
+
+* Feature - Aws::ECS - Added support for environment variable overrides.
+
+* Feature - XML Parsing - Added support for the new Oga XML parser. This
+  is enabled by default when the gem is present. You can force this
+  by setting the XML parsing engine:
+
+      Aws::Xml::Parser.engine = :oga
+
+* Issue - Aws::DynamoDB - Resolved an issue with pageable responses where the
+  paging token values contained attribute values.
+
+  See [related GitHub issue #843](https://github.com/aws/aws-sdk-ruby/issues/843)
+
+* Issue - Aws::IAM - Added missing paginator configurations for the newer
+  IAM attached policy operations.
+
+  See [related GitHub issue #841](https://github.com/aws/aws-sdk-ruby/issues/841)
+
+* Issue - PageableResponse - Resolved an issue where Enumerable was not
+  correctly getting mixed into pageable responses.
+
+  See [related GitHub issue #842](https://github.com/aws/aws-sdk-ruby/issues/842)
+
 * Issue - Shared Credentials - Resolved an issue where the shared credentials
   provider would fail to parse profiles which contained an inline comment.
 

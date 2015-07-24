@@ -66,11 +66,11 @@ module Aws
           end
         end
 
-        def envelope_from_metdata(context)
+        def envelope_from_metadata(context)
           possible_envelope = {}
           POSSIBLE_ENVELOPE_KEYS.each do |suffix|
             if value = context.http_response.headers["x-amz-meta-#{suffix}"]
-              possible_envelope[key] = value
+              possible_envelope[suffix] = value
             end
           end
           extract_envelope(possible_envelope)

@@ -729,6 +729,14 @@
           }
         }
       },
+      "waiters": {
+        "Exists": {
+          "waiterName": "InstanceProfileExists",
+          "params": [
+            { "target": "InstanceProfileName", "source": "identifier", "name": "Name" }
+          ]
+        }
+      },
       "has": {
         "Roles": {
           "resource": {

@@ -8,12 +8,12 @@
     "DescribeDeliveryChannelStatus": "<p>Returns the current status of the specified delivery channel. If a delivery channel is not specified, this action returns the current status of all delivery channels associated with the account. </p> <note>Currently, you can specify only one delivery channel per account.</note>",
     "DescribeDeliveryChannels": "<p>Returns details about the specified delivery channel. If a delivery channel is not specified, this action returns the details of all delivery channels associated with the account. </p> <note> <p>Currently, you can specify only one delivery channel per account.</p></note>",
     "GetResourceConfigHistory": "<p>Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. You can specify a <code>limit</code> on the number of results returned on the page. If a limit is specified, a <code>nextToken</code> is returned as part of the result that you can use to continue this request. </p> <note> <p>Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified <code>limit</code>. In such cases, you can make another call, using the <code>nextToken</code> .</p> </note>",
-    "PutConfigurationRecorder": "<p>Creates a new configuration recorder to record the resource configurations. </p> <p>You can use this action to change the role (<code>roleARN</code>) of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.</p> <note> <p>Currently, you can specify only one configuration recorder per account. </p> </note>",
+    "PutConfigurationRecorder": "<p>Creates a new configuration recorder to record the selected resource configurations. </p> <p>You can use this action to change the role <code>roleARN</code> and/or the <code>recordingGroup</code> of an existing recorder. To change the role, call the action on the existing configuration recorder and specify a role.</p> <note> <p>Currently, you can specify only one configuration recorder per account.</p> <p>If <code>ConfigurationRecorder</code> does not have the <b>recordingGroup</b> parameter specified, the default is to record all supported resource types.</p> </note>",
     "PutDeliveryChannel": "<p>Creates a new delivery channel object to deliver the configuration information to an Amazon S3 bucket, and to an Amazon SNS topic. </p> <p>You can use this action to change the Amazon S3 bucket or an Amazon SNS topic of the existing delivery channel. To change the Amazon S3 bucket or an Amazon SNS topic, call this action and specify the changed values for the S3 bucket and the SNS topic. If you specify a different value for either the S3 bucket or the SNS topic, this action will keep the existing value for the parameter that is not changed. </p> <note> <p>Currently, you can specify only one delivery channel per account.</p> </note>",
-    "StartConfigurationRecorder": "<p>Starts recording configurations of all the resources associated with the account.</p> <p>You must have created at least one delivery channel to successfully start the configuration recorder.</p>",
-    "StopConfigurationRecorder": "<p>Stops recording configurations of all the resources associated with the account.</p>"
+    "StartConfigurationRecorder": "<p>Starts recording configurations of the AWS resources you have selected to record in your AWS account.</p> <p>You must have created at least one delivery channel to successfully start the configuration recorder.</p>",
+    "StopConfigurationRecorder": "<p>Stops recording configurations of the AWS resources you have selected to record in your AWS account.</p>"
   },
-  "service": "<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html\">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config</p> <p>This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config.</p> <p>The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html\">What Is AWS Config?</a> in the <i>AWS Config Developer Guide</i>.</p>",
+  "service": "<fullname>AWS Config</fullname> <p>AWS Config provides a way to keep track of the configurations of all the AWS resources associated with your AWS account. You can use AWS Config to get the current and historical configurations of each AWS resource and also to get information about the relationship between the resources. An AWS resource can be an Amazon Compute Cloud (Amazon EC2) instance, an Elastic Block Store (EBS) volume, an Elastic network Interface (ENI), or a security group. For a complete list of resources currently supported by AWS Config, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resources</a>.</p> <p>You can access and manage AWS Config through the AWS Management Console, the AWS Command Line Interface (AWS CLI), the AWS Config API, or the AWS SDKs for AWS Config</p> <p>This reference guide contains documentation for the AWS Config API and the AWS CLI commands that you can use to manage AWS Config.</p> <p>The AWS Config API uses the Signature Version 4 protocol for signing requests. For more information about how to sign a request with this protocol, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing Process</a>.</p> <p>For detailed information about AWS Config features and their associated actions or commands, as well as how to work with AWS Management Console, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html\">What Is AWS Config?</a> in the <i>AWS Config Developer Guide</i>.</p>",
   "shapes": {
     "ARN": {
       "base": null,
@@ -25,6 +25,12 @@
       "base": null,
       "refs": {
         "ConfigurationItem$accountId": "<p>The 12 digit AWS account ID associated with the resource.</p>"
+      }
+    },
+    "AllSupported": {
+      "base": null,
+      "refs": {
+        "RecordingGroup$allSupported": "<p>Records all supported resource types in the recording group. For a list of supported resource types, see <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported resource types</a>. If you specify <b>allSupported</b>, you cannot enumerate a list of <b>resourceTypes</b>. </p>"
       }
     },
     "AvailabilityZone": {
@@ -203,7 +209,7 @@
       "base": null,
       "refs": {
         "ConfigExportDeliveryInfo$lastStatus": "<p>Status of the last attempted delivery.</p>",
-        "ConfigStreamDeliveryInfo$lastStatus": "<p>Status of the last attempted delivery.</p>"
+        "ConfigStreamDeliveryInfo$lastStatus": "<p>Status of the last attempted delivery.</p> <p><b>Note</b> Providing an SNS topic on a <a href=\"http://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html\">DeliveryChannel</a> for AWS Config is optional. If the SNS delivery is turned off, the last status will be <b>Not_Applicable</b>.</p>"
       }
     },
     "DescribeConfigurationRecorderStatusRequest": {
@@ -284,6 +290,11 @@
     },
     "InvalidNextTokenException": {
       "base": "<p>The specified nextToken for pagination is not valid.</p>",
+      "refs": {
+      }
+    },
+    "InvalidRecordingGroupException": {
+      "base": "<p>AWS Config throws an exception if the recording group does not contain a valid list of resource types. Invalid values could also be incorrectly formatted.</p>",
       "refs": {
       }
     },
@@ -402,6 +413,12 @@
         "ConfigurationRecorderStatus$lastStatus": "<p>The last (previous) status of the recorder.</p>"
       }
     },
+    "RecordingGroup": {
+      "base": "<p>The group of AWS resource types that AWS Config records when starting the configuration recorder.</p> <p><b>recordingGroup</b> can have one and only one parameter. Choose either <b>allSupported</b> or <b>resourceTypes</b>.</p>",
+      "refs": {
+        "ConfigurationRecorder$recordingGroup": "<p>The recording group specifies either to record configurations for all supported resources or to provide a list of resource types to record. The list of resource types must be a subset of supported resource types.</p>"
+      }
+    },
     "RelatedEvent": {
       "base": null,
       "refs": {
@@ -443,7 +460,7 @@
       "refs": {
         "ConfigurationItem$resourceId": "<p>The ID of the resource (for example., <code>sg-xxxxxx</code>).</p>",
         "GetResourceConfigHistoryRequest$resourceId": "<p>The ID of the resource (for example., <code>sg-xxxxxx</code>).</p>",
-        "Relationship$resourceId": "<p>The resource ID of the related resource (for example, <code>sg-xxxxxx</code>.</p>"
+        "Relationship$resourceId": "<p>The resource ID of the related resource (for example, <code>sg-xxxxxx</code>).</p>"
       }
     },
     "ResourceNotDiscoveredException": {
@@ -456,7 +473,14 @@
       "refs": {
         "ConfigurationItem$resourceType": "<p>The type of AWS resource.</p>",
         "GetResourceConfigHistoryRequest$resourceType": "<p>The resource type.</p>",
-        "Relationship$resourceType": "<p>The resource type of the related resource.</p>"
+        "Relationship$resourceType": "<p>The resource type of the related resource.</p>",
+        "ResourceTypeList$member": null
+      }
+    },
+    "ResourceTypeList": {
+      "base": null,
+      "refs": {
+        "RecordingGroup$resourceTypes": "<p>A comma-separated list of strings representing valid AWS resource types (e.g., <code>AWS::EC2::Instance</code> or <code>AWS::CloudTrail::Trail</code>). <b>resourceTypes</b> is only valid if you have chosen not to select <b>allSupported</b>. For a list of valid <b>resourceTypes</b> values, see the <b>resourceType Value</b> column in the following topic: <a href=\"http://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resource Types</a>.</p>"
       }
     },
     "StartConfigurationRecorderRequest": {

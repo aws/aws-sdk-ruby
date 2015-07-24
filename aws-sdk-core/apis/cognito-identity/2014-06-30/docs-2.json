@@ -41,6 +41,11 @@
         "GetIdInput$AccountId": "A standard AWS account ID (9+ digits)."
       }
     },
+    "ConcurrentModificationException": {
+      "base": "<p>Thrown if there are parallel requests to modify a resource.</p>",
+      "refs": {
+      }
+    },
     "CreateIdentityPoolInput": {
       "base": "<p>Input to the CreateIdentityPool action.</p>",
       "refs": {
@@ -457,6 +462,7 @@
     "String": {
       "base": null,
       "refs": {
+        "ConcurrentModificationException$message": "<p>The message returned by a ConcurrentModificationException.</p>",
         "DeveloperUserAlreadyRegisteredException$message": "<p>This developer user identifier is already registered with Cognito.</p>",
         "ExternalServiceException$message": "<p>The message returned by an ExternalServiceException</p>",
         "InternalErrorException$message": "The message returned by an InternalErrorException.",

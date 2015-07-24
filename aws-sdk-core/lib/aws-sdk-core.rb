@@ -7,6 +7,7 @@ Seahorse::Util.irregular_inflections({
   'Ec2' => 'ec2',
   'ElastiCache' => 'elasticache',
   'iSCSI' => 'iscsi',
+  #'SSEKMS' => 'sse_kms',
 })
 
 module Aws
@@ -26,14 +27,18 @@ module Aws
     CloudTrail
     CloudWatch
     CloudWatchLogs
+    CodeCommit
     CodeDeploy
+    CodePipeline
     CognitoIdentity
     CognitoSync
     ConfigService
     DataPipeline
+    DeviceFarm
     DirectConnect
     DirectoryService
     DynamoDB
+    DynamoDBStreams
     EC2
     ECS
     EFS
@@ -99,6 +104,7 @@ module Aws
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :Structure, 'aws-sdk-core/structure'
   autoload :TreeHash, 'aws-sdk-core/tree_hash'
+  autoload :TypeBuilder, 'aws-sdk-core/type_builder'
   autoload :VERSION, 'aws-sdk-core/version'
 
   # @api private
@@ -115,6 +121,7 @@ module Aws
       autoload :ParamFormatter, 'aws-sdk-core/api/docs/param_formatter'
       autoload :RequestSyntaxExample, 'aws-sdk-core/api/docs/request_syntax_example'
       autoload :ResponseStructureExample, 'aws-sdk-core/api/docs/response_structure_example'
+      autoload :SharedExample, 'aws-sdk-core/api/docs/shared_example'
       autoload :Utils, 'aws-sdk-core/api/docs/utils'
     end
   end
@@ -200,8 +207,9 @@ module Aws
   # @api private
   module Stubbing
     autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
-    autoload :StubData, 'aws-sdk-core/stubbing/stub_data'
     autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'
+    autoload :StubData, 'aws-sdk-core/stubbing/stub_data'
+    autoload :XmlError, 'aws-sdk-core/stubbing/xml_error'
     module Protocols
       autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
       autoload :Json, 'aws-sdk-core/stubbing/protocols/json'
@@ -347,16 +355,9 @@ module Aws
 
   # build service client classes
   service_added do |name, svc_module, options|
+    options[:type_builder] ||= TypeBuilder.new(svc_module)
     svc_module.const_set(:Client, Client.define(name, options))
     svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
-  end
-
-  # define a struct class for each client data type
-  service_added do |name, svc_module, options|
-    svc_module.const_set(:Types, Module.new)
-    svc_module::Client.api.metadata['shapes'].each_structure do |shape|
-      svc_module::Types.const_set(shape.name, shape[:struct_class])
-    end
   end
 
   # enable response paging

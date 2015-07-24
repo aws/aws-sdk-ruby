@@ -64,6 +64,7 @@ module Aws
           context.http_request.http_method = 'GET'
           context.http_request.endpoint = new_endpoint(context)
           context.http_request.body = ''
+          context.http_request.headers.delete('Content-Type')
         end
 
         def new_endpoint(context)
@@ -74,7 +75,7 @@ module Aws
         end
 
         def presigned_url(http_request, config)
-          signer = Signers::V4.new('ec2', config.credentials, config.region)
+          signer = Signers::V4.new(config.credentials, 'ec2', config.region)
           signer.presigned_url(http_request, expires_in: 3600)
         end
 

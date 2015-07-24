@@ -24,7 +24,7 @@ else
   msg = <<-MSG
 
 *** skipping aws-sdk-resource integration tests ***
-  To enable integration tests, export AWS_INTEGRATION=1 to ENV
+  Export AWS_INTEGRATION=1 to enable integration tests
 
   MSG
   puts msg
@@ -65,7 +65,6 @@ def cfg_value(*path)
   if path_value.nil?
     pending("set cfg#{path.map {|p| "[#{p.inspect}]" }.join} in #{$cfg_path}")
   else
-    puts path_value.inspect
     path_value
   end
 end

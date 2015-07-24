@@ -139,7 +139,7 @@ resp = resp.next_page until resp.last_page?
 
 ### Waiters
 
-Waiters are a utility methods that poll for a particular state. To invoke a
+Waiters are utility methods that poll for a particular state. To invoke a
 waiter, call `#wait_until` on a client:
 
 ```ruby
@@ -225,9 +225,12 @@ to be backwards compatible.
 | ---------------------------------------- | -------------------- | ----------- |
 | AWS CloudFormation                       | CloudFormation       | 2010-05-15  |
 | AWS CloudTrail                           | CloudTrail           | 2013-11-01  |
+| AWS CodeCommit                           | CodeCommit           | 2015-04-13  |
 | AWS CodeDeploy                           | CodeDeploy           | 2014-10-06  |
+| AWS CodePipeline                         | CodePipeline         | 2015-07-09  |
 | AWS Config                               | ConfigService        | 2014-11-12  |
 | AWS Data Pipeline                        | DataPipeline         | 2012-10-29  |
+| AWS Device Farm                          | DeviceFarm           | 2015-06-23  |
 | AWS Direct Connect                       | DirectConnect        | 2012-10-25  |
 | AWS Directory Service                    | DirectoryService     | 2015-04-16  |
 | AWS Elastic Beanstalk                    | ElasticBeanstalk     | 2010-12-01  |
@@ -240,7 +243,7 @@ to be backwards compatible.
 | AWS Security Token Service               | STS                  | 2011-06-15  |
 | AWS Storage Gateway                      | StorageGateway       | 2013-06-30  |
 | AWS Support                              | Support              | 2013-04-15  |
-| Amazon CloudFront                        | CloudFront           | 2014-11-06  |
+| Amazon CloudFront                        | CloudFront           | 2015-04-17  |
 | Amazon CloudHSM                          | CloudHSM             | 2014-05-30  |
 | Amazon CloudSearch                       | CloudSearch          | 2013-01-01  |
 | Amazon CloudSearch Domain                | CloudSearchDomain    | 2013-01-01  |
@@ -249,6 +252,7 @@ to be backwards compatible.
 | Amazon Cognito Identity                  | CognitoIdentity      | 2014-06-30  |
 | Amazon Cognito Sync                      | CognitoSync          | 2014-06-30  |
 | Amazon DynamoDB                          | DynamoDB             | 2012-08-10  |
+| Amazon DynamoDB Streams                  | DynamoDBStreams      | 2012-08-10  |
 | Amazon EC2 Container Service             | ECS                  | 2014-11-13  |
 | Amazon ElastiCache                       | ElastiCache          | 2015-02-02  |
 | Amazon Elastic Compute Cloud             | EC2                  | 2015-04-15  |

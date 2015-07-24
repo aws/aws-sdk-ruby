@@ -38,6 +38,7 @@ module Aws
         api = build_api(definition)
         shapes = build_shape_map(definition, api, docs)
         build_operations(definition, api, shapes, docs)
+        build_struct_classes(shapes, options)
         api
       end
 
@@ -84,6 +85,13 @@ module Aws
           op.errors << shapes.shape_ref(error)
         end
         op
+      end
+
+      def build_struct_classes(shapes, options)
+        type_builder = options[:type_builder] || TypeBuilder.new(Module.new)
+        shapes.each_structure do |shape|
+          shape[:struct_class] = type_builder.build_type(shape, shapes)
+        end
       end
 
       def underscore(str)

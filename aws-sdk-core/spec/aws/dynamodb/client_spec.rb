@@ -108,6 +108,63 @@ module Aws
         end
 
       end
+
+      describe '#enumerable responses' do
+
+        it 'can round trip paging params that contain item attributes' do
+          client = Client.new(stub_responses: {
+            query: {
+              :items=> [
+                {"indexhash"=>"hash", "id"=>"id-1", "indexrange"=>"range-1"},
+                {"indexhash"=>"hash", "id"=>"id-2", "indexrange"=>"range-2"},
+              ],
+              :count=>2,
+              :scanned_count=>2,
+              :last_evaluated_key=>{
+                "indexhash"=>"hash", "id"=>"id-160", "indexrange"=>"range-160"
+              }
+            }
+          })
+          result = client.query(
+            table_name: 'table-name',
+            limit: 2,
+            index_name: 'indexname',
+            key_condition_expression: 'indexhash = :value1',
+            expression_attribute_values: { ':value1' => 'hash'}
+          )
+          result2 = result.next_page
+          expect(result2.context.params[:expression_attribute_values]).to eq(
+            ':value1' => { s:'hash'}
+          )
+        end
+
+      end
+
+      describe '#stub_data' do
+
+        it 'accepts and returns simple attributes' do
+          client = Client.new(stub_responses: true)
+          data = client.stub_data(:get_item, item: { 'id' => 'value' })
+          expect(data.item).to eq({ 'id' => 'value' })
+        end
+
+        it 'observes the :simple_attributes configuration option' do
+          client = Client.new(stub_responses: true, simple_attributes: false)
+          expect {
+            client.stub_data(:get_item, item: { 'id' => 'value' })
+          }.to raise_error(ArgumentError)
+
+          data = client.stub_data(:get_item, item: { 'id' => { s: 'value' }})
+          expect(data.to_h[:item]).to eq({ 'id' => { s: 'value' }})
+        end
+
+        it 'can be called without data' do
+          expect {
+            Client.new(stub_responses:true).stub_data(:get_item)
+          }.not_to raise_error
+        end
+
+      end
     end
   end
 end

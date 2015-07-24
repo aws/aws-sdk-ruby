@@ -106,9 +106,9 @@ module Seahorse
             session.continue_timeout = http_continue_timeout if
               session.respond_to?(:continue_timeout=)
             yield(session)
-          rescue Exception => error
+          rescue
             session.finish if session
-            raise error
+            raise
           else
             # No error raised? Good, check the session into the pool.
             @pool_mutex.synchronize { @pool[endpoint] << session }

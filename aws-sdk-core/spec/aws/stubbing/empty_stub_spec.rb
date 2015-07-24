@@ -8,8 +8,7 @@ module Aws
       it 'supports complex recursive structures' do
         now = Time.now
         allow(Time).to receive(:now).and_return(now)
-        rules = ApiHelper.sample_shapes
-        rules = Api::ShapeMap.new(rules).shape_ref('shape' => 'StructureShape')
+        rules = ApiHelper.sample_api.operation(:example_operation).output
         stub = EmptyStub.new(rules).stub
         expect(stub.to_h).to eq({
           nested_list: [],

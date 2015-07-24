@@ -8,6 +8,7 @@ gem 'oj' unless ENV['PURE_RUBY']
 gem 'ox' unless ENV['PURE_RUBY']
 gem 'libxml-ruby' unless ENV['PURE_RUBY']
 gem 'nokogiri' unless ENV['PURE_RUBY']
+gem 'oga'
 
 group :test do
   gem 'rspec', '~> 3.0.0'

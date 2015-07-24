@@ -8,10 +8,10 @@ module Aws
   # behavior.
   module ClientStubs
 
-    def initialize(*args)
+    # @api private
+    def setup_stubbing
       @stubs = {}
       @stub_mutex = Mutex.new
-      super
       if Hash === @config.stub_responses
         @config.stub_responses.each do |operation_name, stubs|
           apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
@@ -36,7 +36,7 @@ module Aws
     #
     #     # stub data in the constructor
     #     client = Aws::S3::Client.new(stub_responses: {
-    #       list_buckets: { bukets: [{name: 'my-bucket' }] },
+    #       list_buckets: { buckets: [{name: 'my-bucket' }] },
     #       get_object: { body: 'data' },
     #     })
     #
@@ -46,7 +46,7 @@ module Aws
     # You can also specify the stub data using {#stub_responses}
     #
     #     client = Aws::S3::Client.new(stub_responses: true)
-    #     client.stub_resposnes(:list_buckets, {
+    #     client.stub_responses(:list_buckets, {
     #       buckets: [{ name: 'my-bucket' }]
     #     })
     #
@@ -70,14 +70,18 @@ module Aws
     # fake responses with placeholder values. You can override the data
     # returned. You can also specify errors it should raise.
     #
+    #     # simulate service errors, give the error code
     #     client.stub_responses(:get_object, 'NotFound')
     #     client.get_object(bucket:'aws-sdk', key:'foo')
     #     #=> raises Aws::S3::Errors::NotFound
     #
+    #     # to simulate other errors, give the error class, you must
+    #     # be able to construct an instance with `.new`
     #     client.stub_responses(:get_object, Timeout::Error)
     #     client.get_object(bucket:'aws-sdk', key:'foo')
     #     #=> raises new Timeout::Error
     #
+    #     # or you can give an instance of an error class
     #     client.stub_responses(:get_object, RuntimeError.new('custom message'))
     #     client.get_object(bucket:'aws-sdk', key:'foo')
     #     #=> raises the given runtime error object

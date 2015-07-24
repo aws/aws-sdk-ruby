@@ -30,6 +30,7 @@ module Aws
 
       def after_initialize(client)
         if client.config.stub_responses
+          client.setup_stubbing
           client.handlers.remove(RetryErrors::Handler)
         end
       end

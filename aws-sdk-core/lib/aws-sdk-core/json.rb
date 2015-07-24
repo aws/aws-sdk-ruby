@@ -1,3 +1,5 @@
+require 'json'
+
 module Aws
   # @api private
   module Json
@@ -31,26 +33,26 @@ module Aws
       end
 
       def dump(value)
-        ENGINE.dump(value)
+        ENGINE.dump(value, *ENGINE_DUMP_OPTIONS)
       end
 
       private
 
       def oj_engine
         require 'oj'
-        [Oj, Oj::ParseError]
+        [Oj, [{ mode: :compat }], Oj::ParseError]
       rescue LoadError
         false
       end
 
       def json_engine
-        require 'json'
-        [JSON, JSON::ParserError]
+        [JSON, [], JSON::ParserError]
       end
 
     end
 
-    ENGINE, ENGINE_ERROR = oj_engine || json_engine
+    # @api private
+    ENGINE, ENGINE_DUMP_OPTIONS, ENGINE_ERROR = oj_engine || json_engine
 
   end
 end

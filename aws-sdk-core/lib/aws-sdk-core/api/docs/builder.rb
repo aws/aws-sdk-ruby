@@ -162,7 +162,7 @@ module Aws
   waiters and the client method they call:
   <table>
   <thead>
-  <tr><th>Waiter Name</th><th>Client Method</th><th>Delay</th><th>Max Attempts</th></tr>
+  <tr><th>Waiter Name</th><th>Client Method</th><th>Default Delay:</th><th>Default Max Attempts:</th></tr>
   </thead>
   <tbody>
   #{waiters}

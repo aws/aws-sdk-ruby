@@ -37,7 +37,7 @@ module Aws
         def for_decryption(envelope)
           encryption_context = Json.load(envelope['x-amz-matdesc'])
           key = @kms_client.decrypt(
-            ciphertext_blob: decode64(envelope['x-amz-key']),
+            ciphertext_blob: decode64(envelope['x-amz-key-v2']),
             encryption_context: encryption_context,
           ).plaintext
           iv = decode64(envelope['x-amz-iv'])
