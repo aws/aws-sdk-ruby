@@ -219,7 +219,7 @@ module Aws
         #
         def initialize(options = {})
           @client = extract_client(options)
-          @crypto_materials = crypto_materials(options)
+          @cipher_provider = cipher_provider(options)
           @envelope_location = extract_location(options)
           @instruction_file_suffix = extract_suffix(options)
         end
@@ -249,7 +249,7 @@ module Aws
           req = @client.build_request(:put_object, params)
           req.handlers.add(EncryptHandler, priority: 95)
           req.context[:encryption] = {
-            crypto_materials: @crypto_materials,
+            cipher_provider: @cipher_provider,
             envelope_location: @envelope_location,
             instruction_file_suffix: @instruction_file_suffix,
           }
@@ -277,7 +277,7 @@ module Aws
           req = @client.build_request(:get_object, params)
           req.handlers.add(DecryptHandler)
           req.context[:encryption] = {
-            crypto_materials: @crypto_materials,
+            cipher_provider: @cipher_provider,
             envelope_location: envelope_location,
             instruction_file_suffix: instruction_file_suffix,
           }
@@ -307,16 +307,16 @@ module Aws
           end
         end
 
-        def crypto_materials(options)
+        def cipher_provider(options)
           if options[:kms_key_id]
-            KmsSecuredKeyCryptoMaterials.new(
+            KmsCipherProvider.new(
               kms_key_id: options[:kms_key_id],
               kms_client: kms_client(options),
             )
           else
             # kept here for backwards compatability, {#key_provider} is deprecated
             @key_provider = extract_key_provider(options)
-            CryptoMaterials.new(key_provider: @key_provider)
+            DefaultCipherProvider.new(key_provider: @key_provider)
           end
         end
 

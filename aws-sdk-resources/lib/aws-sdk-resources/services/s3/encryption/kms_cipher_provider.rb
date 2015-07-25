@@ -4,7 +4,7 @@ module Aws
   module S3
     module Encryption
       # @api private
-      class KmsSecuredKeyCryptoMaterials
+      class KmsCipherProvider
 
         def initialize(options = {})
           @kms_key_id = options[:kms_key_id]
@@ -13,7 +13,7 @@ module Aws
 
         # @return [Array<Hash,Cipher>] Creates an returns a new encryption
         #   envelope and encryption cipher.
-        def for_encyrption
+        def encryption_cipher
           encryption_context = { "kms_cmk_id" => @kms_key_id }
           key_data = @kms_client.generate_data_key(
             key_id: @kms_key_id,
@@ -34,7 +34,7 @@ module Aws
 
         # @return [Cipher] Given an encryption envelope, returns a
         #   decryption cipher.
-        def for_decryption(envelope)
+        def decryption_cipher(envelope)
           encryption_context = Json.load(envelope['x-amz-matdesc'])
           key = @kms_client.decrypt(
             ciphertext_blob: decode64(envelope['x-amz-key-v2']),
