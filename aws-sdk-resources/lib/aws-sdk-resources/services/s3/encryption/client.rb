@@ -290,6 +290,7 @@ module Aws
           options[:client] || begin
             options = options.dup
             options.delete(:kms_key_id)
+            options.delete(:kms_client)
             options.delete(:key_provider)
             options.delete(:encryption_key)
             options.delete(:envelope_location)

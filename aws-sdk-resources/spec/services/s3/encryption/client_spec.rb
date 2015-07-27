@@ -383,6 +383,66 @@ module Aws
 
           end
         end
+
+        describe 'kms' do
+
+          let(:kms_client) { KMS::Client.new(stub_responses:true) }
+
+          let(:client) do
+            Encryption::Client.new({
+              kms_key_id: 'kms-key-id',
+              kms_client: kms_client,
+              stub_responses: true,
+            })
+          end
+
+          let(:envelope) {{
+            "x-amz-wrap-alg" => "kms",
+            "x-amz-cek-alg" => "AES/CBC/PKCS5Padding",
+            "x-amz-iv" => "rVucSqIJvenVa7HliO+oIw==",
+            "x-amz-key-v2" => Base64.strict_encode64("encrypted-object-key"),
+            "x-amz-matdesc" => "{\"kms_cmk_id\":\"kms-key-id\"}",
+          }}
+
+          let(:plaintext_object_key) {
+            "\xE4^\xE3\xE0v@\x8Aq\xAF\xE7y\x10\x18\xD4X\xC2\xDC&\xF6\xDB\xCCM\x03\xAF3DD\xFF\xDA\x0Flj"
+          }
+
+          let(:encrypted_object_key) { 'encrypted-object-key' }
+
+          let(:random_iv) { Base64.decode64("rVucSqIJvenVa7HliO+oIw==") }
+
+          before(:each) do
+            allow_any_instance_of(OpenSSL::Cipher).to(
+              receive(:random_iv).
+              and_return(random_iv)
+            )
+          end
+
+          it 'supports encryption via KMS' do
+            kms_client.stub_responses(:generate_data_key, {
+              plaintext: plaintext_object_key,
+              ciphertext_blob: encrypted_object_key,
+            })
+            resp = client.put_object(bucket:'aws-sdk', key:'foo', body:'plain-text')
+            headers = resp.context.http_request.headers
+            envelope.each do |key, value|
+              expect(headers["x-amz-meta-#{key}"]).to eq(value)
+            end
+            expect(Base64.encode64(resp.context.http_request.body_contents)).to eq("4FAj3kTOIisQ+9b8/kia8g==\n")
+          end
+
+          it 'supports decryption via KMS' do
+            kms_client.stub_responses(:decrypt, plaintext: plaintext_object_key)
+            client.client.stub_responses(:get_object, {
+              body: Base64.decode64("4FAj3kTOIisQ+9b8/kia8g==\n"),
+              metadata: envelope
+            })
+            resp = client.get_object(bucket:'aws-sdk', key:'foo')
+            expect(resp.body.read).to eq('plain-text')
+          end
+
+        end
       end
     end
   end
