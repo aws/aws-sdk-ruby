@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - KMS Client-Side-Encryption - Added support to `Aws::S3::Encryption::Client` for using AWS Key Management Service (KMS) to manage master encryption keys.
+
+  ```ruby
+  s3_enc = Aws::S3::Encryption::Client.new(kms_key_id: 'kms-key-id')
+  s3_enc.put_object(bucket:'aws-sdk', key:'secret', body:'data')
+  s3_enc.get_object(bucket:'aws-sdk', key:'secret').body.read
+  #=> 'data'
+  ```
+
+  This implementation is compatible with objects written by the AWS SDK for Java
+  encryption client.
+
 2.1.8 (2015-07-23)
 ------------------
 
