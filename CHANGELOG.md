@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added support for the new long tail storage class and the new
+  storage class headers in the GET and HEAD Object responses.
+
+* Feature - Aws::S3 - Added support for the new object delete notification events.
+
 * Issue - Aws::Glacier - `Aws::Glacier::Account#vaults` was not populating the account
   in the call to list vaults.
 
