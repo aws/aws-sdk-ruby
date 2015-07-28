@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Resolved a regression with serializing `Aws::Structure` types in
+  `Aws::EC2::Client` requests. The `Aws::Query::EC2ParamBuilder` class is responsible
+  for testing protocol specific implementations but it tests with input that is loaded
+  from a JSON document into a vanilla Ruby hash which does not trigger this behavior.
+
+  The other protocol builder classes have full unit test suites, while the EC2 param
+  builder did not. A test case has been added to cover this regression.
+
+  See [related GitHub issue #881](https://github.com/aws/aws-sdk-ruby/issues/881).
+
 * Feature - KMS Client-Side-Encryption - Added support to `Aws::S3::Encryption::Client` for using AWS Key Management Service (KMS) to manage master encryption keys.
 
   ```ruby
