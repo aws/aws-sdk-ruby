@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.9 (2015-07-28)
 ------------------
 
 * Feature - Aws::CloudWatchLogs - Added support for destinations.  You can now
