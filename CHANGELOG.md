@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Glacier - `Aws::Glacier::Account#vaults` was not populating the account
+  in the call to list vaults.
+
 * Issue - Aws::EC2 - Resolved a regression with serializing `Aws::Structure` types in
   `Aws::EC2::Client` requests. The `Aws::Query::EC2ParamBuilder` class is responsible
   for testing protocol specific implementations but it tests with input that is loaded
