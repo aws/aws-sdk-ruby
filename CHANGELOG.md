@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatchLogs - Added support for destinations.  You can now
+  use destinations to subscribe to cross-account real-time feed of log events
+  from CloudWatch Logs and have it delivered to an Amazon Kinesis stream for
+  custom processing, analysis, or loading to other systems.
+
 * Feature - Aws::S3 - Added support for the new long tail storage class and the new
   storage class headers in the GET and HEAD Object responses.
 
