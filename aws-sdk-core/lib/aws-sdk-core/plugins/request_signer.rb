@@ -77,8 +77,6 @@ module Aws
           GetCredentialsForIdentity
           GetId
           GetOpenIdToken
-          ListIdentityPools
-          UnlinkDeveloperIdentity
           UnlinkIdentity
         ))
 

@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CognitoIdentity - Six operations of `Aws::CognitoIdentity::Client`
+  were whitelisted to be unsigned when sent in version 2.1.9. Two of these
+  operations were incorrectly documented in the API reference and require
+  authentication. Fixed this and added integration tests to ensure they are
+  correctly signed.
+
+  See [related GitHub issue #882](https://github.com/aws/aws-sdk-ruby/issues/882).
+
 2.1.9 (2015-07-28)
 ------------------
 
