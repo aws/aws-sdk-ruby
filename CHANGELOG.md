@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Signature Version 4 - Added support for signing requests against
+  hosts that do not use the standard port for the given HTTP scheme. This
+  makes it possible to use the signer against test endpoints.
+
+  See [related GitHub issue #883](https://github.com/aws/aws-sdk-ruby/issues/883).
+
 2.1.10 (2015-07-29)
 ------------------
 

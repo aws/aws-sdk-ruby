@@ -32,6 +32,15 @@ module Aws
           expect(sign.headers['Host']).to eq('domain.com')
         end
 
+        it "includes port in host when non stadard" do
+          endpoint.scheme = 'http'
+          endpoint.port = 3000
+          expect(sign.headers['Host']).to eq('domain.com:3000')
+          endpoint.scheme = 'https'
+          endpoint.port = 3000
+          expect(sign.headers['Host']).to eq('domain.com:3000')
+        end
+
         it "populates the 'X-Amz-Date' header" do
           datetime = '20120102:10:11:12Z'
           expect(utc).to receive(:strftime).with("%Y%m%dT%H%M%SZ") { datetime }

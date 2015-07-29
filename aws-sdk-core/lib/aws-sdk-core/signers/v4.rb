@@ -31,7 +31,7 @@ module Aws
         datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
         body_digest = req.headers['X-Amz-Content-Sha256'] || hexdigest(req.body)
         req.headers['X-Amz-Date'] = datetime
-        req.headers['Host'] = req.endpoint.host
+        req.headers['Host'] = host(req.endpoint)
         req.headers['X-Amz-Security-Token'] = @credentials.session_token if
           @credentials.session_token
         req.headers['X-Amz-Content-Sha256'] ||= body_digest
@@ -51,7 +51,7 @@ module Aws
         now = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
         body_digest = options[:body_digest] || hexdigest(request.body)
 
-        request.headers['Host'] = request.endpoint.host
+        request.headers['Host'] = host(request.endpoint)
         request.headers.delete('User-Agent')
 
         params = Aws::Query::ParamList.new
@@ -177,6 +177,19 @@ module Aws
 
       def canonical_header_value(value)
         value.match(/^".*"$/) ? value : value.gsub(/\s+/, ' ').strip
+      end
+
+      def host(uri)
+        if standard_port?(uri)
+          uri.host
+        else
+          "#{uri.host}:#{uri.port}"
+        end
+      end
+
+      def standard_port?(uri)
+        (uri.scheme == 'http' && uri.port == 80) ||
+        (uri.scheme == 'https' && uri.port == 443)
       end
 
       def hexdigest(value)
