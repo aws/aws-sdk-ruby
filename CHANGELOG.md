@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.10 (2015-07-29)
 ------------------
 
 * Issue - Aws::CognitoIdentity - Six operations of `Aws::CognitoIdentity::Client`
