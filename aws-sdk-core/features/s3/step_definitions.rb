@@ -265,5 +265,5 @@ Then(/^the keys in my bucket should be$/) do |table|
 end
 
 Given(/^I have a bucket configured with a virtual hosted CNAME$/) do
-  @bucket_name = 'aws-sdk.roweclan.com'
+  @bucket_name = cfg_value('s3', 'virtual_hosted_bucket')
 end

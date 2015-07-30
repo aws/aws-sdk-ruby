@@ -8,16 +8,10 @@ RSpec::Core::RakeTask.new('test:unit:aws-sdk-core') do |t|
 end
 task 'test:unit' => 'test:unit:aws-sdk-core'
 
-begin
-  require 'cucumber/rake/task'
-  desc = 'aws-sdk-core integration tests'
-  Cucumber::Rake::Task.new('test:integration:aws-sdk-core', desc) do |t|
-    t.cucumber_opts = 'aws-sdk-core/features -t ~@veryslow'
-  end
-  task 'test:integration' => 'test:integration:aws-sdk-core'
-rescue LoadError
-  desc 'aws-sdk-core integration tests'
-  task 'test:integration' do
-    puts 'skipping aws-sdk-core integration tests, cucumber not loaded'
+desc 'aws-sdk-core integration tests'
+task 'test:integration:aws-sdk-core' do |t|
+  Dir.chdir('aws-sdk-core') do
+    exec("bundle exec cucumber -t ~@veryslow")
   end
 end
+task 'test:integration' => 'test:integration:aws-sdk-core'

@@ -1,35 +1,13 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), '..', 'lib')
+$LOAD_PATH << File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-core', 'features')
 
 require 'simplecov'
 require 'aws-sdk-resources'
+require 'integration-test-config'
+
+IntegrationTestConfig.load!
 
 SimpleCov.command_name('test:integration:aws-sdk-resources')
-
-
-if ENV['AWS_INTEGRATION']
-
-  $cfg_path = File.expand_path(File.join([
-    File.dirname(__FILE__),
-    '..',
-    '..',
-    'integration-test-config.json',
-  ]))
-  if File.exist?($cfg_path)
-    $cfg = Aws::Json.load_file($cfg_path)
-  else
-    $cfg = {}
-  end
-
-else
-  msg = <<-MSG
-
-*** skipping aws-sdk-resource integration tests ***
-  Export AWS_INTEGRATION=1 to enable integration tests
-
-  MSG
-  puts msg
-  exit(0)
-end
 
 # Track all API calls made
 class ApiCallTracker < Seahorse::Client::Plugin
@@ -52,21 +30,6 @@ class ApiCallTracker < Seahorse::Client::Plugin
     response
   end
 
-end
-
-def cfg_value(*path)
-  path_value = path.inject($cfg) do |value, key|
-    if Hash === value && value.key?(key)
-      value[key]
-    else
-      nil
-    end
-  end
-  if path_value.nil?
-    pending("set cfg#{path.map {|p| "[#{p.inspect}]" }.join} in #{$cfg_path}")
-  else
-    path_value
-  end
 end
 
 Aws.service_added do |_, svc_module, _|

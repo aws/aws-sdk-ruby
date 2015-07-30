@@ -14,16 +14,10 @@ task 'test:unit:resource-name-collisions' do
 end
 task 'test:unit' => 'test:unit:resource-name-collisions'
 
-begin
-  require 'cucumber/rake/task'
-  desc = 'aws-sdk-resource integration tests'
-  Cucumber::Rake::Task.new('test:integration:aws-sdk-resources', desc) do |t|
-    t.cucumber_opts = 'aws-sdk-resources/features -t ~@veryslow'
-  end
-  task 'test:integration' => 'test:integration:aws-sdk-resources'
-rescue LoadError
-  desc 'aws-sdk-resources integration tests'
-  task 'test:integration' do
-    puts 'skipping aws-sdk-resource integration tests, cucumber not loaded'
+desc 'aws-sdk-resource integration tests'
+task 'test:integration:aws-sdk-resources' do |t|
+  Dir.chdir('aws-sdk-resources') do
+    exec("bundle exec cucumber -t ~@veryslow")
   end
 end
+task 'test:integration' => 'test:integration:aws-sdk-resources'
