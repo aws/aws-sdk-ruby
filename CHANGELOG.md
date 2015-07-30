@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Added support for cluster operations for Aurora.
+
 * Feature - Aws::OpsWorks - Added support for ECS clusters to `Aws::OpsWorks::Client`.
 
 * Feature - Virtual Hosted Bucket Urls - You can now generated URLs and pre-signed URLs
