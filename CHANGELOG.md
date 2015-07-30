@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::OpsWorks - Added support for ECS clusters to `Aws::OpsWorks::Client`.
+
 * Feature - Virtual Hosted Bucket Urls - You can now generated URLs and pre-signed URLs
   from `Aws::S3` using a CNAME for your virtually hosted buckets.
 
