@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.11 (2015-07-30)
 ------------------
 
 * Feature - Aws::RDS - Added support for cluster operations for Aurora.
