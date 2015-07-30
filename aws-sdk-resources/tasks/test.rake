@@ -16,8 +16,17 @@ task 'test:unit' => 'test:unit:resource-name-collisions'
 
 desc 'aws-sdk-resource integration tests'
 task 'test:integration:aws-sdk-resources' do |t|
-  Dir.chdir('aws-sdk-resources') do
-    exec("bundle exec cucumber -t ~@veryslow")
+  if ENV['AWS_INTEGRATION']
+    Dir.chdir('aws-sdk-resources') do
+      exec("bundle exec cucumber -t ~@veryslow")
+    end
+  else
+    puts(<<-MSG)
+
+*** skipping aws-sdk-core integration tests ***
+  export AWS_INTEGRATION=1 to enable integration tests
+
+    MSG
   end
 end
 task 'test:integration' => 'test:integration:aws-sdk-resources'
