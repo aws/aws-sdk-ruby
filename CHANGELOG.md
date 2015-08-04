@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.12 (2015-08-04)
 ------------------
 
 * Feature - Aws::DeviceFarm - Added support for testing iOS applications with
