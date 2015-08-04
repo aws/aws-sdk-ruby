@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Updated two `Aws::EC2::Client#wait_until` waiters to
+  retry instance ID not found errors. The two waiters are:
+
+  * `:instance_running`
+  * `:instance_status_ok`
+
+  See [related GitHub issue #859](https://github.com/aws/aws-sdk-ruby/issues/859).
+
 2.1.11 (2015-07-30)
 ------------------
 

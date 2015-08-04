@@ -186,6 +186,11 @@
           "matcher": "pathAny",
           "state": "failure",
           "argument": "Reservations[].Instances[].State.Name"
+        },
+        {
+          "matcher": "error",
+          "expected": "InvalidInstanceIDNotFound",
+          "state": "retry"
         }
       ]
     },
@@ -199,6 +204,11 @@
           "matcher": "pathAll",
           "argument": "InstanceStatuses[].InstanceStatus.Status",
           "expected": "ok"
+        },
+        {
+          "matcher": "error",
+          "expected": "InvalidInstanceIDNotFound",
+          "state": "retry"
         }
       ]
     },
