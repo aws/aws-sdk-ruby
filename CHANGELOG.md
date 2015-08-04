@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Added support for testing iOS applications with
+  AWS Device Farm. You can now upload your iOS apps and test them on real Apple
+  phones and tablets in the AWS Cloud. You can select from a built-in fuzz test
+  or upload your own tests written with Appium Java JUnit, Appium Java TestNG,
+  Calabash, UI Automation, or XCTest. Results in AWS Device Farm are consistent
+  regardless of the application type (Android, Fire OS, iOS) you upload and test
+  framework you select.
+
 * Issue - Aws::EC2 - Updated two `Aws::EC2::Client#wait_until` waiters to
   retry instance ID not found errors. The two waiters are:
 
