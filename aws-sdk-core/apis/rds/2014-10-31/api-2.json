@@ -3817,8 +3817,7 @@
         "PubliclyAccessible":{"shape":"BooleanOptional"},
         "Tags":{"shape":"TagList"},
         "DBSubnetGroupName":{"shape":"String"},
-        "StorageType":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"Boolean"}
+        "StorageType":{"shape":"String"}
       }
     },
     "CreateDBParameterGroupMessage":{
@@ -4181,8 +4180,7 @@
         "StorageEncrypted":{"shape":"Boolean"},
         "KmsKeyId":{"shape":"String"},
         "DbiResourceId":{"shape":"String"},
-        "CACertificateIdentifier":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"Boolean"}
+        "CACertificateIdentifier":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -5414,8 +5412,7 @@
         "StorageType":{"shape":"String"},
         "TdeCredentialArn":{"shape":"String"},
         "TdeCredentialPassword":{"shape":"String"},
-        "CACertificateIdentifier":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"Boolean"}
+        "CACertificateIdentifier":{"shape":"String"}
       }
     },
     "ModifyDBParameterGroupMessage":{
@@ -6063,8 +6060,7 @@
         "Tags":{"shape":"TagList"},
         "StorageType":{"shape":"String"},
         "TdeCredentialArn":{"shape":"String"},
-        "TdeCredentialPassword":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"Boolean"}
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "RestoreDBInstanceToPointInTimeMessage":{
@@ -6093,8 +6089,7 @@
         "Tags":{"shape":"TagList"},
         "StorageType":{"shape":"String"},
         "TdeCredentialArn":{"shape":"String"},
-        "TdeCredentialPassword":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"Boolean"}
+        "TdeCredentialPassword":{"shape":"String"}
       }
     },
     "RevokeDBSecurityGroupIngressMessage":{
