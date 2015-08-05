@@ -150,7 +150,7 @@ module Aws
     #
     #     # stop after processing 100 messages
     #     poller.before_request do |stats|
-    #       throw :stop_polling if stats.receive_message_count >= 100
+    #       throw :stop_polling if stats.received_message_count >= 100
     #     end
     #
     #     poller.poll do |msg|
