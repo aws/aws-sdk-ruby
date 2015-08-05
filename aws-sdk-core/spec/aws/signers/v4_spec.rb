@@ -107,6 +107,7 @@ module Aws
       context '#signed_headers' do
 
         it 'lower-cases and sort all header keys except authorization' do
+          http_request.headers = {}
           http_request.headers['Xyz'] = '1'
           http_request.headers['Abc'] = '2'
           http_request.headers['Mno'] = '3'

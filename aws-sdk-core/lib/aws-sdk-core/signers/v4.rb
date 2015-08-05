@@ -160,9 +160,11 @@ module Aws
       end
 
       def signed_headers(request)
-        headers = request.headers.keys
-        headers.delete('authorization')
-        headers.sort.join(';')
+        request.headers.keys.inject([]) do |signed_headers, header_key|
+          header_key = header_key.downcase
+          signed_headers << header_key unless header_key == 'authorization'
+          signed_headers
+        end.sort.join(';')
       end
 
       def canonical_headers(request)
