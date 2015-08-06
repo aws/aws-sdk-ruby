@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SWF - You can now use Amazon Simple Workflow Service to trigger
+  AWS Lambda functions.
+
 2.1.12 (2015-08-04)
 ------------------
 
