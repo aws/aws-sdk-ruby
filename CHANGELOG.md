@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.13 (2015-08-06)
 ------------------
 
 * Feature - Aws::SWF - You can now use Amazon Simple Workflow Service to trigger
