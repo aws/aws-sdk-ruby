@@ -63,7 +63,7 @@ module Aws
       end
 
       def error_message(body)
-        if matches = body.match(/<Message>(.+?)<\/Message>/)
+        if matches = body.match(/<Message>(.+?)<\/Message>/m)
           unescape(matches[1])
         else
           ''
