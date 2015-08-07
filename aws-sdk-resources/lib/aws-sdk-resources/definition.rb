@@ -187,7 +187,7 @@ module Aws
       def data_request_param(definition)
         RequestParams::DataMember.new({
           target: underscore(definition['target']),
-          value: underscore(definition['path']),
+          path: underscore(definition['path']),
         })
       end
 

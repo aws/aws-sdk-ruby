@@ -90,7 +90,7 @@ module Aws
           resource = double('resource', data: { member_name: 'johndoe' })
           RequestParams::DataMember.new({
             target: 'name',
-            data_path: 'member_name',
+            path: 'member_name',
           }).apply(params, resource:resource)
           expect(params).to eq(name:'johndoe')
         end

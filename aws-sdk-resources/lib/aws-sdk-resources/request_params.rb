@@ -111,7 +111,7 @@ module Aws
         include Param
 
         def initialize(options)
-          @path = options[:data_path]
+          @path = options[:path]
           super
         end
 

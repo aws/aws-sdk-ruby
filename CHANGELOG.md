@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resources - Resolved an issue with resource actions that source
+  request parameters from data members.
+
+  See [related GitHub issue #893](https://github.com/aws/aws-sdk-ruby/issues/893).
+
 2.1.13 (2015-08-06)
 ------------------
 
