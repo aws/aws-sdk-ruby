@@ -518,6 +518,46 @@ module Aws
               expect(resp).to be(client_resp)
             end
 
+            it 'supports extracting request params from data' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [
+                    { 'name' => 'Name' }
+                  ],
+                  'shape' => 'ThingShape',
+                  'actions' => {
+                    'Delete' => {
+                      'request' => {
+                        'operation' => 'DeleteThing',
+                        'params' => [
+                          { "target" => "ThingName", "source" => "identifier", "name" => "Name" },
+                          { "target" => "Checksum", "source" => "data", "path" => "Checksum" }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['ThingShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Checksum' => { 'shape' => 'StringShape' }
+                }
+              }
+
+              client_resp = double('client-response')
+              expect(client).to receive(:delete_thing).
+                with(thing_name: 'thing-name', checksum:'checksum-value').
+                and_return(client_resp)
+
+              apply_definition
+
+              thing = namespace::Thing.new(name:'thing-name', data: { checksum: 'checksum-value' })
+              expect(thing.checksum).to eq('checksum-value')
+              thing.delete
+            end
+
             it 'supports operations that return singular resources' do
               definition['resources'] = {
                 'Thing' => {
