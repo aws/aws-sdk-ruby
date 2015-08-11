@@ -17,6 +17,7 @@ module Aws
 
         def apply_customizations
           document_s3_object_upload_file_additional_options
+          document_s3_object_copy_from_options
         end
 
         private
@@ -45,6 +46,46 @@ module Aws
           tags = YARD::DocstringParser.new.parse(tags).to_docstring.tags
           m = YARD::Registry['Aws::S3::Object#upload_file']
           tags.each { |tag| m.add_tag(tag) }
+        end
+
+        def document_s3_object_copy_from_options
+          copy_from = YARD::Registry['Aws::S3::Object#copy_from']
+          copy_to = YARD::Registry['Aws::S3::Object#copy_to']
+          existing_tags = copy_from.tags
+          copy_from.docstring = 'Copies another object to this object.  Use `multipart_copy: true` for large objects. This is required for objects that exceed 5GB.'
+          existing_tags.each do |tag|
+            if tag.tag_name == 'option' && tag.pair.name != ":copy_source"
+              copy_from.add_tag(tag)
+              copy_to.add_tag(tag)
+            end
+          end
+          copy_from.add_tag(tag(<<-EXAMPLE))
+@example Basic object copy
+
+  bucket = Aws::S3::Bucket.new('target-bucket')
+  object = bucket.object('target-key')
+
+  # source as String
+  object.copy_from('source-bucket/source-key')
+
+  # source as Hash
+  object.copy_from(bucket:'source-bucket', key:'source-key')
+
+  # source as Aws::S3::Object
+  object.copy_from(bucket.object('source-key'))
+          EXAMPLE
+
+          copy_from.add_tag(tag(<<-EXAMPLE))
+@example Managed copy of large objects
+
+  # uses multipart upload APIs to copy object
+  object.copy_from('src-bucket/src-key', multipart_copy: true)
+          EXAMPLE
+
+        end
+
+        def tag(string)
+          YARD::DocstringParser.new.parse(string).to_docstring.tags.first
         end
 
       end

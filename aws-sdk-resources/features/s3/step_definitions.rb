@@ -112,3 +112,10 @@ Given(/^I have an encryption client configured to read a Java encrypted object$/
     kms_key_id: @kms_key_id,
   )
 end
+
+Then(/^I should be able to multipart copy the object to a different bucket$/) do
+  target_bucket = @s3.bucket(@bucket_name)
+  target_object = target_bucket.object("#{@source_key}-copy")
+  target_object.copy_from("#{@source_bucket}/#{@source_key}", multipart_copy: true)
+  expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
+end

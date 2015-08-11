@@ -135,6 +135,63 @@ module Aws
           options.merge(key: key))
       end
 
+      # @param [S3::Object, String, Hash] source Where to copy object
+      #   data from. `source` must be one of the following:
+      #
+      #   * {Aws::S3::Object}
+      #   * Hash - with `:bucket` and `:key`
+      #   * String - formatted like `"source-bucket-name/source-key"`
+      #
+      # @option options [Boolean] :multipart_copy (false) When `true`,
+      #   the object will be copied using the multipart APIs. This is
+      #   necessary for objects larger than 5GB and can provide
+      #   performance improvements on large objects. Amazon S3 does
+      #   not accept multipart copies for objects smaller than 5MB.
+      #
+      # @see #copy_to
+      #
+      def copy_from(source, options = {})
+        if Hash === source && source[:copy_source]
+          # for backwards compatibility
+          @client.copy_object(source.merge(bucket: bucket_name, key: key))
+        else
+          ObjectCopier.new(self, options).copy_from(source, options)
+        end
+      end
+
+      # Copies this object to another object. Use `multipart_copy: true`
+      # for large objects. This is required for objects that exceed 5GB.
+      #
+      # @param [S3::Object, String, Hash] target Where to copy the object
+      #   data to. `target` must be one of the following:
+      #
+      #   * {Aws::S3::Object}
+      #   * Hash - with `:bucket` and `:key`
+      #   * String - formatted like `"target-bucket-name/target-key"`
+      #
+      # @example Basic object copy
+      #
+      #   bucket = Aws::S3::Bucket.new('source-bucket')
+      #   object = bucket.object('source-key')
+      #
+      #   # target as String
+      #   object.copy_to('target-bucket/target-key')
+      #
+      #   # target as Hash
+      #   object.copy_to(bucket: 'target-bucket', key: 'target-key')
+      #
+      #   # target as Aws::S3::Object
+      #   object.copy_to(bucket.object('target-key'))
+      #
+      # @example Managed copy of large objects
+      #
+      #   # uses multipart upload APIs to copy object
+      #   object.copy_to('src-bucket/src-key', multipart_copy: true)
+      #
+      def copy_to(target, options = {})
+        ObjectCopier.new(self, options).copy_to(target, options)
+      end
+
     end
   end
 end
