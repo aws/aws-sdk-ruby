@@ -1,6 +1,34 @@
 Unreleased Changes
 ------------------
 
+* Feature - Managed Multipart Copies - Added support to `Aws::S3::Object`
+  for managed multipart copies of large objects.
+
+      obj = Aws::S3::Object.new('bucket', 'key')
+
+      obj.copy_from('source-bucket/source-key', multipart_copy: true)
+      obj.copy_to('target-bucket/target-key', multipart_copy: true)
+
+* Feature - Aws::S3::Object - Improved the interfaces for copying objects.
+  There are three new supported signatures for calling `#copy_from`.
+  Also added the logical pair, `#copy_to`.
+
+      obj = Aws::S3::Object.new('bucket', 'key')
+
+      obj.copy_from('source-bucket/source-key')
+      obj.copy_to('target-bucket/target-key')
+
+      obj.copy_from(bucket: 'source-bucket', key: 'source-key')
+      obj.copy_to(bucket: 'target-bucket', key: 'target-key')
+
+      other_obj = Aws::S3::Object('other-bucket', 'other-key')
+      obj.copy_from(other_obj)
+      obj.copy_to(other_obj)
+
+  For backwards compatibility, the old form of `#copy_from` still works.
+
+      obj.copy_from(copy_source: 'source-bucket/source-key')
+
 * Issue - Resources - Resolved an issue with resource actions that source
   request parameters from data members.
 
