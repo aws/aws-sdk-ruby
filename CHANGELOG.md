@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.14 (2015-08-12)
 ------------------
 
 * Feature - Aws::ElasticBeanstalk - Added support for the two new
