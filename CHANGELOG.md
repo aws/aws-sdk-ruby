@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticBeanstalk - Added support for the two new
+  operations, DescribeEnvironmentHealth, and DescribeInstanceHealth.
+
 * Feature - Managed Multipart Copies - Added support to `Aws::S3::Object`
   for managed multipart copies of large objects.
 
