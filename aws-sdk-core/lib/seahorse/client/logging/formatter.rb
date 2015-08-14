@@ -9,7 +9,7 @@ module Seahorse
       # a pattern string with substitutions.
       #
       #     pattern = ':operation :http_response_status_code :time'
-      #     formatter = Seahorse::Logging::Formatter.new(pattern)
+      #     formatter = Seahorse::Client::Logging::Formatter.new(pattern)
       #     formatter.format(response)
       #     #=> 'get_bucket 200 0.0352'
       #
