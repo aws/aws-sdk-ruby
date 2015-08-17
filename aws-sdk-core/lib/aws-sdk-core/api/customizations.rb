@@ -110,7 +110,6 @@ module Aws
 
       api('s3') do |api|
         api['metadata'].delete('signatureVersion')
-        api['operations']['GetBucketLocation'].delete('output')
       end
 
       plugins('s3', add: %w(
