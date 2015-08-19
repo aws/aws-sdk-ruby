@@ -29,11 +29,10 @@ appreciate help on:
 
 1. **Waiters** – Waiter configurations are located in the apis directory.
 2. **Docs** – We  greatly appreciate contributions to our documentation. The docs are written as code comments
-   and via a pair of (YARD)[https://github.com/lsegal/yard] plugins.
+   and via a pair of [YARD](https://github.com/lsegal/yard) plugins.
 3. **Tests** – We maintain high code coverage, but if there are any tests you feel are missing, please add them.
 4. **Convenience features** – Are there any features you feel would add value to the SDK? Contributions in this
-   area would be greatly appreciated. See the [feature requests document](https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE_REQUESTS.md)
-   for a list of ideas.
+   area would be greatly appreciated. See the [feature requests document][feature-requests] for a list of ideas.
 5. If you have some other ideas, please let us know!
 
 ## Running the unit tests
@@ -46,8 +45,9 @@ The AWS SDK for Ruby is unit tested using RSpec. You can run the unit tests of t
 To run integration tests, create a `integration-test-config.json` file at the root of this repository. It should
 contain a `"region"` and credentials. Running rake test when this file is present will enable integration tests.
 
-[issues]: https://github.com/aws/aws-sdk-core-ruby/issues
-[pull-requests]: https://github.com/aws/aws-sdk-core-ruby/pulls
+[issues]: https://github.com/aws/aws-sdk-ruby/issues
+[pull-requests]: https://github.com/aws/aws-sdk-ruby/pulls
+[feature-requests]: https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE_REQUESTS.md
 [license]: http://aws.amazon.com/apache2.0/
 [cla]: http://en.wikipedia.org/wiki/Contributor_License_Agreement
 [docs-readme]: https://github.com/aws/aws-sdk-php/blob/master/docs/README.md
