@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added support for event notification filter rules.
+
 2.1.14 (2015-08-12)
 ------------------
 
