@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.15 (2015-08-20)
 ------------------
 
 * Issue - Aws::Glacier - Resolved an issue with how dates were serialized
