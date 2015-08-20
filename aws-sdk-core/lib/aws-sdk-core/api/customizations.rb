@@ -65,12 +65,15 @@ module Aws
       ))
 
       api('glacier') do |api|
-        api['shapes']['Date'] = { 'type' => 'timestamp' }
+        api['shapes']['Timestamp'] = {
+          'type' => 'timestamp',
+          'timestampFormat' => 'iso8601',
+        }
         api['shapes'].each do |_, shape|
           if shape['members']
             shape['members'].each do |name, ref|
               case name
-              when /date/i then ref['shape'] = 'Date'
+              when /date/i then ref['shape'] = 'Timestamp'
               when 'limit' then ref['shape'] = 'Size'
               when 'partSize' then ref['shape'] = 'Size'
               when 'archiveSize' then ref['shape'] = 'Size'

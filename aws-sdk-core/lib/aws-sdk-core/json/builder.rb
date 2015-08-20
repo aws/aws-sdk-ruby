@@ -45,7 +45,7 @@ module Aws
         when StructureShape then structure(ref, value)
         when ListShape      then list(ref, value)
         when MapShape       then map(ref, value)
-        when TimestampShape then value.to_i
+        when TimestampShape then timestamp(ref, value)
         when BlobShape      then encode(value)
         else value
         end
@@ -53,6 +53,14 @@ module Aws
 
       def encode(blob)
         Base64.strict_encode64(String === blob ? blob : blob.read)
+      end
+
+      def timestamp(ref, value)
+        if ref['timestampFormat'] == 'iso8601'
+          value.utc.iso8601
+        else
+          value.to_i
+        end
       end
 
     end
