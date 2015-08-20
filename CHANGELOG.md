@@ -9,6 +9,10 @@
 
   See [related GitHub issue #864](https://github.com/aws/aws-sdk-ruby/issues/864).
 
+* Issue - Instance Profile Credentials - Resolved an issue were the instance
+  profile credentials provider could cache empty credentials and fail to
+  refresh.
+
 1.64.0 (2015-04-03)
 ------------------
 
