@@ -913,9 +913,14 @@ module Aws
                         'type' => 'DooDad',
                         'identifiers' => [
                           {
-                            'target' => 'Name',
+                            'target' => 'ThingName',
+                            'source' => 'identifier',
+                            'name' => 'Name',
+                          },
+                          {
+                            'target' => 'Id',
                             'source' => 'data',
-                            'path' => 'DooDadName',
+                            'path' => 'DooDadId',
                           }
                         ]
                       }
@@ -924,7 +929,8 @@ module Aws
                 },
                 'DooDad' => {
                   'identifiers' => [
-                    { 'name' => 'Name' },
+                    { 'name' => 'ThingName' },
+                    { 'name' => 'Id' },
                   ]
                 }
               }
@@ -932,7 +938,7 @@ module Aws
               shapes['ThingShape'] = {
                 'type' => 'structure',
                 'members' => {
-                  'DooDadName' => { 'shape' => 'StringShape' }
+                  'DooDadId' => { 'shape' => 'StringShape' }
                 }
               }
 
@@ -941,14 +947,14 @@ module Aws
               # returns associated object when data member set
               thing = namespace::Thing.new(
                 name: 'thing-name',
-                data: { 'doo_dad_name' => 'doo-dad-name' }
+                data: { 'doo_dad_id' => 'id' }
               )
-              expect(thing.doo_dad.name).to eq('doo-dad-name')
+              expect(thing.doo_dad.id).to eq('id')
 
               # returns nil when data member not set
               thing = namespace::Thing.new(
                 name: 'thing-name',
-                data: {}
+                data: { 'doo_dad_id' => nil }
               )
               expect(thing.doo_dad).to be(nil)
             end
