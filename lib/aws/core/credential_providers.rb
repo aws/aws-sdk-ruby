@@ -400,13 +400,21 @@ module AWS
         #   `:access_key_id` or the `:secret_access_key` can not be found.
         #
         def credentials
-          if @credentials_expiration && @credentials_expiration.utc <= (Time.now.utc + (15 * 60))
-            refresh
-          end
+          refresh if near_expiration?
           super
         end
 
         protected
+
+        def near_expiration?
+          if @credentials_expiration.nil?
+            true
+          elsif @credentials_expiration.utc <= (Time.now.utc + (15 * 60))
+            true
+          else
+            false
+          end
+        end
 
         # (see Provider#get_credentials)
         def get_credentials
