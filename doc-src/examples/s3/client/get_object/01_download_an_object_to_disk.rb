@@ -1,6 +1,6 @@
 # stream object directly to disk
 resp = s3.get_object(
-  target: '/path/to/file',
+  response_target: '/path/to/file',
   bucket: 'bucket-name',
   key: 'object-key')
 
