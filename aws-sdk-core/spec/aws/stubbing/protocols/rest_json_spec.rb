@@ -47,8 +47,8 @@ module Aws
               {
                 "VaultList": [
                   {
-                    "CreationDate": #{now.to_i},
-                    "LastInventoryDate": #{now.to_i},
+                    "CreationDate": #{now.utc.iso8601.inspect},
+                    "LastInventoryDate": #{now.utc.iso8601.inspect},
                     "NumberOfArchives": 1,
                     "SizeInBytes": 100,
                     "VaultARN": "arn",
