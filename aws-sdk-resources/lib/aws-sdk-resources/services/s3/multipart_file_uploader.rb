@@ -17,6 +17,7 @@ module Aws
       # @option options [Client] :client
       def initialize(options = {})
         @client = options[:client] || Client.new
+        @thread_count = options[:thread_count] || THREAD_COUNT
       end
 
       # @return [Client]
@@ -102,7 +103,7 @@ module Aws
 
       def upload_in_threads(pending, completed)
         threads = []
-        THREAD_COUNT.times do
+        @thread_count.times do
           thread = Thread.new do
             begin
               while part = pending.shift
