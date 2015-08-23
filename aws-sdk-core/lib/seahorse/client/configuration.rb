@@ -33,7 +33,7 @@ module Seahorse
     #     cfg1.color #=> 'red'
     #
     #     # supplied color
-    #     cfg2 = configuration.build!(color: blue)
+    #     cfg2 = configuration.build!(color: 'blue')
     #     cfg2.color #=> 'blue'
     #
     # ## Accepted Options
