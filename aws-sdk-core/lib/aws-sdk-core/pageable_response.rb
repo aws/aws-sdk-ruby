@@ -134,7 +134,7 @@ module Aws
         if method_name == :count
           data.respond_to?(:count)
         else
-          false
+          super
         end
       end
 

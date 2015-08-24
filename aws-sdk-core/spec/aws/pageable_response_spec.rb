@@ -206,6 +206,13 @@ module Aws
         expect(page.respond_to?(:count))
       end
 
+      it 'correctly answers respond_to? with methods different than #count' do
+        data = double('data', foo: 'bar')
+        resp = Seahorse::Client::Response.new(data:data)
+        page = pageable(resp, pager)
+        expect(page.respond_to?(:foo)).to be(true)
+      end
+
     end
   end
 end
