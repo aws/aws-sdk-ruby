@@ -24,6 +24,8 @@ Unreleased Changes
   You can pass your own list of params to filter when you construct an
   `Aws::Log::Formatter` with a custom pattern.
 
+  See [related GitHub issue #908](https://github.com/aws/aws-sdk-ruby/issues/908).
+
 * Issue - Aws::PageableResponse::UnsafeEnumerableMethods - `respond_to?`
   was not being forwarded to ancestors and it was always retuning `false`
   except for #count.
