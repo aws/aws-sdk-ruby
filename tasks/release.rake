@@ -25,6 +25,7 @@ task 'release:check' => [
 
 # builds release artificats
 task 'release:build' => [
+  'update-filtered-params',
   'docs:update_readme',
   'changelog:version',
   'release:bump-version',

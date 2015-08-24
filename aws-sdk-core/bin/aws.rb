@@ -132,7 +132,7 @@ if options[:log]
 end
 
 if options[:color]
-  cfg[:log_formatter] = Seahorse::Client::Logging::Formatter.colored
+  cfg[:log_formatter] = Aws::Log::Formatter.colored
 end
 
 if options[:debug]

@@ -25,6 +25,8 @@ module Seahorse
       autoload :Response, 'seahorse/client/http/response'
     end
 
+    # The following module has been deprecated.
+    # @api private
     module Logging
       autoload :Handler, 'seahorse/client/logging/handler'
       autoload :Formatter, 'seahorse/client/logging/formatter'

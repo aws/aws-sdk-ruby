@@ -126,6 +126,12 @@ module Aws
     end
   end
 
+  module Log
+    autoload :Formatter, 'aws-sdk-core/log/formatter'
+    autoload :ParamFilter, 'aws-sdk-core/log/param_filter'
+    autoload :ParamFormatter, 'aws-sdk-core/log/param_formatter'
+  end
+
   module Plugins
     autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
     autoload :DynamoDBExtendedRetries, 'aws-sdk-core/plugins/dynamodb_extended_retries'
@@ -136,6 +142,7 @@ module Aws
     autoload :GlacierApiVersion, 'aws-sdk-core/plugins/glacier_api_version'
     autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
+    autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
     autoload :ParamValidator, 'aws-sdk-core/plugins/param_validator'

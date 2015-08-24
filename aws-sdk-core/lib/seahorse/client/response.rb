@@ -58,6 +58,12 @@ module Seahorse
       end
 
       # @api private
+      def on_complete(&block)
+        @context.http_response.on_done(&block)
+        self
+      end
+
+      # @api private
       def inspect
         @data.inspect
       end

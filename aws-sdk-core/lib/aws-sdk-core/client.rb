@@ -4,8 +4,8 @@ module Aws
 
     # @api private
     DEFAULT_PLUGINS = [
-      'Seahorse::Client::Plugins::Logging',
       'Seahorse::Client::Plugins::ContentLength',
+      'Aws::Plugins::Logging',
       'Aws::Plugins::ParamConverter',
       'Aws::Plugins::ParamValidator',
       'Aws::Plugins::UserAgent',

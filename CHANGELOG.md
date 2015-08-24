@@ -1,6 +1,29 @@
 Unreleased Changes
 ------------------
 
+* Feature - Logging - Now filtering potentially sensitive request parameters
+  from logs. There is a default list of sensitive request parameters that
+  should be filtered:
+
+  ```ruby
+  require 'logger'
+
+  kms = Aws::KMS::Client.new(logger: Logger.new($stdout))
+  kms.encrypt({
+    key_id: "key-arn",
+    plaintext: "secret-data",
+  })
+  ```
+
+  Produces:
+
+  ```
+  I, [2015-08-24T14:53:04.545354 #47906]  INFO -- : [Aws::KMS::Client 400 0.362187 0 retries] encrypt({key_id:"key-arn",plaintext:"[FILTERED]"})
+  ```
+
+  You can pass your own list of params to filter when you construct an
+  `Aws::Log::Formatter` with a custom pattern.
+
 * Issue - Aws::PageableResponse::UnsafeEnumerableMethods - `respond_to?`
   was not being forwarded to ancestors and it was always retuning `false`
   except for #count.
