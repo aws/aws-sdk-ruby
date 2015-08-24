@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::PageableResponse::UnsafeEnumerableMethods - `respond_to?`
+  was not being forwarded to ancestors and it was always retuning `false`
+  except for #count.
+
 2.1.15 (2015-08-20)
 ------------------
 
