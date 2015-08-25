@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Allows specification of an encryption key to use
+  with the artifact bucket when creating and updating a pipeline.
+
 * Feature - Logging - Now filtering potentially sensitive request parameters
   from logs. There is a default list of sensitive request parameters that
   should be filtered:
