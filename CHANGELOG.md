@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.16 (2015-08-25)
 ------------------
 
 * Feature - Aws::CodePipeline - Allows specification of an encryption key to use
