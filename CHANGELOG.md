@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.17 (2015-08-27)
 ------------------
 
 * Feature - Aws::ConfigService - Adds support for the
