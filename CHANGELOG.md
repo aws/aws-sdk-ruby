@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Adds support for the
+  `#list_discovered_resources` API.
+
 2.1.16 (2015-08-25)
 ------------------
 
