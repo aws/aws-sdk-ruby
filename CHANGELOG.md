@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticLoadBalancing - Added a waiter that will poll
+  until an instance has been deregistered.
+
+  See [related GitHub issue #793](https://github.com/aws/aws-sdk-ruby/issues/793).
+
 * Issue - Aws::EC2 - Added a missing `#load` method for
   `Aws::EC2::NetworkInterfaceAssociation`.
 
