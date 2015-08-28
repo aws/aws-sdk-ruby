@@ -135,9 +135,9 @@ module Aws
             expect(inspector(error).networking?).to be(true)
           end
 
-          it 'returns true if the http status code is 0' do
+          it 'does not assume a networking error for 0 status code' do
             error = double('error')
-            expect(inspector(error, 0).networking?).to be(true)
+            expect(inspector(error, 0).networking?).to be(false)
           end
 
           it 'returns false if the http status code is not 0' do
@@ -247,9 +247,12 @@ module Aws
         end
 
         it 'retries 500 level errors' do
-          resp.context.http_response.status_code = 500
-          resp.error = RuntimeError.new('random-runtime-error')
-          handle { |context| resp }
+          error = RuntimeError.new('random-runtime-error')
+          handle do |context|
+            context.http_response.signal_headers(500, {})
+            context.http_response.signal_error(error)
+            resp
+          end
           expect(resp.context.retries).to eq(3)
         end
 

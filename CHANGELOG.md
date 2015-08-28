@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Retries - No longer retrying non-networking errors generated during
+  HTTP handling.
+
+  See [related GitHub issue #912](https://github.com/aws/aws-sdk-ruby/issues/912).
+
 2.1.17 (2015-08-27)
 ------------------
 
