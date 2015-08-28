@@ -1344,6 +1344,16 @@
         }
       ],
       "shape": "InstanceNetworkInterfaceAssociation",
+      "load": {
+        "request": {
+          "operation": "DescribeNetworkInterfaces",
+          "params": [
+            { "target": "Filters[0].Name", "source": "string", "value": "association.association-id" },
+            { "target": "Filters[0].Values[0]", "source": "identifier", "name": "Id" }
+          ]
+        },
+        "path": "NetworkInterfaces[0].Association"
+      },
       "actions": {
         "Delete": {
           "request": {

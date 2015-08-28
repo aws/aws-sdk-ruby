@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Added a missing `#load` method for
+  `Aws::EC2::NetworkInterfaceAssociation`.
+
+  See [related GitHub issue #890](https://github.com/aws/aws-sdk-ruby/issues/890).
+
 * Issue - Retries - No longer retrying non-networking errors generated during
   HTTP handling.
 
