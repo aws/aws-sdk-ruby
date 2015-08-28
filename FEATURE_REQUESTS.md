@@ -69,3 +69,9 @@ See [related GitHub issue #781](https://github.com/aws/aws-sdk-ruby/issues/781).
 The `#predict` operation of `Aws::MachineLearning::Client` accepts a map of string-to-strings. When a user wishes to provide a boolean value, the API expects the boolean to be "1" or "0". It would be helpful if a plugin were added that converted the boolean values of the record map from `true` and `false` to their expected string formats.
 
 See [related GitHub issue #878](https://github.com/aws/aws-sdk-ruby/issues/878).
+
+### Support Assume Role Credentials from Shared Credentials File
+
+You can currently only configure an access key id, secret access key, and session token in the shared credentials file, `~/.aws/credentials`. It would be useful if you could also specify a role to assume similar to how the CLI supports.
+
+See [related GitHub issue #910](https://github.com/aws/aws-sdk-ruby/issues/910).
