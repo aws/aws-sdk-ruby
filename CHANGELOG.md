@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Launch Amazon EC2 Spot instances that have the lowest
+  price per unit of capacity using the updated RequestSpotFleet API. Define and
+  set target capacity in any unit including instances, vCPUs, memory, storage,
+  or network throughput. You can specify how much each instance type is worth to
+  your application, and automatically adjust your bid price for each type. This
+  enables you to bid on multiple instance types in a single request and
+  provision cost-effective capacity, regardless of instance type.
+
 * Feature - Aws::ElasticLoadBalancing - Added a waiter that will poll
   until an instance has been deregistered.
 
