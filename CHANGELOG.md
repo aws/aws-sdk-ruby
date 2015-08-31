@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.18 (2015-08-31)
 ------------------
 
 * Feature - Aws::EC2 - Launch Amazon EC2 Spot instances that have the lowest
