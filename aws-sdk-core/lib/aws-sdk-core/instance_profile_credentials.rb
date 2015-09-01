@@ -1,3 +1,4 @@
+require 'json'
 require 'time'
 require 'net/http'
 
@@ -15,7 +16,7 @@ module Aws
     # is not present, no responding or some other non-recoverable
     # error.
     # @api private
-    FAILURES = [
+    NETWORK_ERRORS = [
       Errno::EHOSTUNREACH,
       Errno::ECONNREFUSED,
       Errno::EHOSTDOWN,
@@ -65,31 +66,33 @@ module Aws
     end
 
     def refresh
-      c = Json.load(get_credentials)
-      @credentials = Credentials.new(
-        c['AccessKeyId'],
-        c['SecretAccessKey'],
-        c['Token']
-      )
-      @expiration = c['Expiration'] ? Time.parse(c['Expiration']) : nil
+      # Retry loading credentials up to 3 times is the instance metadata
+      # service is responding but is returning invalid JSON documents
+      # in response to the GET profile credentials call.
+      retry_errors([JSON::ParserError], max_retries: 3) do
+        c = JSON.parse(get_credentials.to_s)
+        @credentials = Credentials.new(
+          c['AccessKeyId'],
+          c['SecretAccessKey'],
+          c['Token']
+        )
+        @expiration = c['Expiration'] ? Time.parse(c['Expiration']) : nil
+      end
     end
 
     def get_credentials
-      failed_attempts = 0
+      # Retry loading credentials a configurable number of times if
+      # the instance metadata service is not responding.
       begin
-        open_connection do |conn|
-          path = '/latest/meta-data/iam/security-credentials/'
-          profile_name = http_get(conn, path).lines.first.strip
-          http_get(conn, path + profile_name)
+        retry_errors(NETWORK_ERRORS, max_retries: @retries) do
+          open_connection do |conn|
+            path = '/latest/meta-data/iam/security-credentials/'
+            profile_name = http_get(conn, path).lines.first.strip
+            http_get(conn, path + profile_name)
+          end
         end
-      rescue *FAILURES
-        if failed_attempts < @retries
-          @backoff.call(failed_attempts)
-          failed_attempts += 1
-          retry
-        else
-          '{}'
-        end
+      rescue
+        '{}'
       end
     end
 
@@ -108,6 +111,22 @@ module Aws
         response.body
       else
         raise Non200Response
+      end
+    end
+
+    def retry_errors(error_classes, options = {}, &block)
+      max_retries = options[:max_retries]
+      retries = 0
+      begin
+        yield
+      rescue *error_classes => error
+        if retries < max_retries
+          @backoff.call(retries)
+          retries += 1
+          retry
+        else
+          raise
+        end
       end
     end
 

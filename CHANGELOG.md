@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::InstanceProfileCredentials - Expanded retry logic in the
+  `Aws::InstanceProfileCredentials` class. Previously this class could
+  raise JSON parse error if the instance metadata service responded but
+  with an invalid JSON document. These errors will be retried 3 times now
+  with backoff.
+
+  See [related GitHub issue #913](https://github.com/aws/aws-sdk-ruby/issues/913).
+
 * Feature - Aws::EC2 - Implemented `Aws::EC2::VpcPeeringConnection#exists?`.
 
   See [related GitHub issue #916](https://github.com/aws/aws-sdk-ruby/issues/916).
