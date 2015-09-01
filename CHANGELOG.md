@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Implemented `Aws::EC2::VpcPeeringConnection#exists?`.
+
+  See [related GitHub issue #916](https://github.com/aws/aws-sdk-ruby/issues/916).
+
 * Issue - Aws::EC2 - Added missing pagination configuraiton for the
   `Aws::EC2::Client#describe_vpc_peering_connections` operation. Without
   this, calling `#each` on the response fails to trigger paging and

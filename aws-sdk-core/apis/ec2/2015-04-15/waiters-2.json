@@ -499,6 +499,23 @@
           "argument": "VpnConnections[].State"
         }
       ]
+    },
+    "VpcPeeringConnectionExists": {
+      "delay": 15,
+      "operation": "DescribeVpcPeeringConnections",
+      "maxAttempts": 40,
+      "acceptors": [
+        {
+          "matcher": "status",
+          "expected": 200,
+          "state": "success"
+        },
+        {
+          "matcher": "error",
+          "expected": "InvalidVpcPeeringConnectionIDNotFound",
+          "state": "retry"
+        }
+      ]
     }
   }
 }

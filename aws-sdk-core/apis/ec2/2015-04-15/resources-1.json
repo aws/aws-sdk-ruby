@@ -2470,6 +2470,15 @@
           }
         }
       },
+      "waiters": {
+        "Exists": {
+          "waiterName": "VpcPeeringConnectionExists",
+          "params": [
+            { "target": "VpcPeeringConnectionIds[]", "source": "identifier", "name": "Id" }
+          ],
+          "path": "VpcPeeringConnections[0]"
+        }
+      },
       "has": {
         "AccepterVpc": {
           "resource": {
