@@ -46,7 +46,7 @@ The SDK searches the following locations for a region:
 
 * `ENV['AWS_REGION']`
 
-**The region is used to construct an SSL endpoint**. If you need to connect to a non-standard endpoint, you may specify the `:enpoint` option.
+**The region is used to construct an SSL endpoint**. If you need to connect to a non-standard endpoint, you may specify the `:endpoint` option.
 
 ### Configuration Options
 
