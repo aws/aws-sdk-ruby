@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::StorageGateway - Adds tagging support for AWS Storage Gateway.
+
 * Issue - Aws::InstanceProfileCredentials - Expanded retry logic in the
   `Aws::InstanceProfileCredentials` class. Previously this class could
   raise JSON parse error if the instance metadata service responded but
