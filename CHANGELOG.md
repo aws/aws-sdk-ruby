@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.19 (2015-09-03)
 ------------------
 
 * Feature - Aws::StorageGateway - Adds tagging support for AWS Storage Gateway.
