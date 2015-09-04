@@ -212,7 +212,7 @@ module Aws
         @credentials = credentials.credentials
         @bucket_region = bucket_region
         @bucket_name = bucket_name
-        @url = bucket_url
+        @url = options.delete(:url) || bucket_url
         @fields = {}
         @key_set = false
         @signature_expiration = Time.now + 3600

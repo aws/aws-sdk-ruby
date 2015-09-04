@@ -132,7 +132,11 @@ module Aws
           client.config.credentials,
           client.config.region,
           bucket_name,
-          options.merge(key: key))
+          {
+            key: key,
+            url: bucket.url,
+          }.merge(options)
+        )
       end
 
       # @param [S3::Object, String, Hash] source Where to copy object

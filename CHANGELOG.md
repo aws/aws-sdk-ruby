@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3::Object - The `#presigned_post` method now respects
+  the configured custom endpoint.
+
+  ```ruby
+  obj = Aws::S3::Object.new("bucket", "key", endpoint: "http://custom-endpoint.com")
+  obj.presigned_post.url
+  #=> "http://bucket.custom-endpoint.com"
+  ```
+
 * Issue - Aws::S3::Presigner - Added validation to `#presigned_url` to
   ensure the `:key` option is not an empty string. This prevents a
   presigned `:get_object` URL from becoming a presigned `:list_objects`
