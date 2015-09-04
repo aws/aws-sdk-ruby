@@ -39,6 +39,9 @@ module Aws
       #   exceeds one week.
       #
       def presigned_url(method, params = {})
+        if params[:key].nil? or params[:key] == ''
+          raise ArgumentError, ":key must not be blank"
+        end
         virtual_host = !!params.delete(:virtual_host)
         scheme = http_scheme(params, virtual_host)
 

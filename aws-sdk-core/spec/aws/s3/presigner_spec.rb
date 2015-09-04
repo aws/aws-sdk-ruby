@@ -42,6 +42,17 @@ module Aws
       end
 
       describe "#presigned_url" do
+
+        it 'raises an error if the key is blank' do
+          presigner = Presigner.new(client: client)
+          expect {
+            presigner.presigned_url(:get_object, {
+              bucket: 'aws-sdk',
+              key: '',
+            })
+          }.to raise_error(ArgumentError, /key must not be blank/)
+        end
+
         it 'can presign #get_object to spec' do
           bucket = "examplebucket"
           key = "test.txt"

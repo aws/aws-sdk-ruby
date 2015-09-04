@@ -34,6 +34,18 @@ module Aws
           expect(url).to match(/^http:\/\/my.bucket.com\//)
         end
 
+        it 'rejects empty keys' do
+          obj = Object.new('bucket-name', '', {
+            region: 'us-west-1',
+            access_key_id: 'AKIAIOSFODNN7EXAMPLE',
+            secret_access_key: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY',
+          })
+          expect(obj.key).to eq('')
+          expect {
+            obj.presigned_url(:get)
+          }.to raise_error(ArgumentError, /key must not be blank/)
+        end
+
       end
     end
   end
