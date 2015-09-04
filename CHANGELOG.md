@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3::Client - Added support for errors returned from
+  Amazon S3 in the body of HTTP 200 responses. Previously only
+  the `#complete_multipart_upload` operation handled these errors.
+  Extended this to `#copy_object` and `#upload_part_copy`.
+
 * Issue - Aws::S3::Object - The `#presigned_post` method now respects
   the configured custom endpoint.
 

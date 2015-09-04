@@ -487,6 +487,39 @@ module Aws
         end
 
       end
+
+      {
+        complete_multipart_upload: { upload_id: 'upload-id'},
+        copy_object: { copy_source: 'bucket/key' },
+        upload_part_copy: { upload_id: 'upload-id', copy_source: 'bucket/key', part_number: 1 },
+      }.each do |operation_name, params|
+
+        it "handles 200 http response errors from ##{operation_name}" do
+          client.handlers.remove(Seahorse::Client::Plugins::RaiseResponseErrors::Handler)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_headers(200, {})
+            context.http_response.signal_data(<<-XML.strip)
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+  <Code>InternalError</Code>
+  <Message>We encountered an internal error. Please try again.</Message>
+  <RequestId>656c76696e6727732072657175657374</RequestId>
+  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+</Error>
+            XML
+            context.http_response.signal_done
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.send(operation_name, {
+            bucket:'bucket',
+            key:'key'
+          }.merge(params))
+          expect(resp.error).to be_kind_of(S3::Errors::InternalError)
+          expect(resp.context.retries).to eq(3)
+          expect(resp.data).to be(nil)
+        end
+      end
+
     end
   end
 end

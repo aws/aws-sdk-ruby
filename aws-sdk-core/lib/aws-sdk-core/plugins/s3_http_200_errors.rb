@@ -1,6 +1,12 @@
 module Aws
   module Plugins
-    class S3CompleteMultipartUploadFix < Seahorse::Client::Plugin
+
+    # A handful of Amazon S3 operations will respond with a 200 status
+    # code but will send an error in the response body. This plugin
+    # injects a handler that will parse 200 response bodies for potential
+    # errors, allowing them to be retried.
+    # @api private
+    class S3Http200Errors < Seahorse::Client::Plugin
 
       class Handler < Seahorse::Client::Handler
 
@@ -26,9 +32,12 @@ module Aws
       end
 
       handler(Handler,
-        step: :build,
-        priority: 40,
-        operations: [:complete_multipart_upload]
+        step: :sign,
+        operations: [
+          :complete_multipart_upload,
+          :copy_object,
+          :upload_part_copy,
+        ]
       )
 
     end

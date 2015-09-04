@@ -118,7 +118,7 @@ module Aws
       plugins('s3', add: %w(
         Aws::Plugins::S3BucketDns
         Aws::Plugins::S3Expect100Continue
-        Aws::Plugins::S3CompleteMultipartUploadFix
+        Aws::Plugins::S3Http200Errors
         Aws::Plugins::S3GetBucketLocationFix
         Aws::Plugins::S3LocationConstraint
         Aws::Plugins::S3Md5s
