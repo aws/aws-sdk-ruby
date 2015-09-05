@@ -1,4 +1,4 @@
-Unreleased Changes
+1.66.0 (2015-09-04)
 ------------------
 
 * Issue - AWS::S3 - Resolved an issue where the SDK would not retry errors returned
