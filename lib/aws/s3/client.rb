@@ -19,6 +19,7 @@ require 'json'
 require 'digest/md5'
 require 'base64'
 require 'nokogiri'
+require 'set'
 
 module AWS
   class S3
@@ -37,6 +38,12 @@ module AWS
       API_VERSION = '2006-03-01'
 
       XMLNS = "http://s3.amazonaws.com/doc/#{API_VERSION}/"
+
+      HTTP_200_ERROR_OPERATIONS = Set.new([
+        :complete_multipart_upload,
+        :copy_object,
+        :copy_part,
+      ])
 
       autoload :XML, 'aws/s3/client/xml'
 
@@ -168,8 +175,10 @@ module AWS
 
       def extract_error_details response
         if
-          (response.http_response.status >= 300 ||
-            response.request_type == :complete_multipart_upload) and
+          (
+            response.http_response.status >= 300 ||
+            HTTP_200_ERROR_OPERATIONS.include?(response.request_type)
+          ) and
           body = response.http_response.body and
           error = Core::XML::Parser.parse(body) and
           error[:code]
@@ -196,16 +205,22 @@ module AWS
       end
 
       def retryable_error? response
-        super or
-        failed_multipart_upload?(response) or
+        super ||
+        http_200_error?(response) ||
         response.error.is_a?(Errors::RequestTimeout)
       end
 
-      # S3 may return a 200 response code in response to complete_multipart_upload
-      # and then start streaming whitespace until it knows the final result.
-      # At that time it sends an XML message with success or failure.
-      def failed_multipart_upload? response
-        response.request_type == :complete_multipart_upload &&
+      # S3 may return with a 200 status code in the response, but still
+      # embed an error in the body for the following operations:
+      #
+      # * `#complete_multipart_upload`
+      # * `#copy_object`
+      # * `#copy_part`
+      #
+      # To ensure the response is not in error, we have to parse
+      # it before the normal parser.
+      def http_200_error? response
+        HTTP_200_ERROR_OPERATIONS.include?(response.request_type) &&
         extract_error_details(response)
       end
 

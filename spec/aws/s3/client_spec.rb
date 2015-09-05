@@ -2028,6 +2028,32 @@ module AWS
 
       end
 
+      context '200 response errors' do
+        {
+          complete_multipart_upload: { :upload_id => 'upload-id', parts: [{ :part_number => 1, :etag => 'etag1' }]},
+          copy_object: { :copy_source => 'bucket/key' },
+          copy_part: { :upload_id => 'upload-id', :copy_source => 'bucket/key', :part_number => 1 },
+        }.each do |operation_name, params|
+          it 'handles 200 errors in ##{operation_name} response' do
+            Kernel.stub(:sleep)
+            http_handler.should_receive(:handle).exactly(4).times do |req, resp|
+              resp.body = <<-BODY.strip
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+  <Code>InternalError</Code>
+  <Message>We encountered an internal error. Please try again.</Message>
+  <RequestId>656c76696e6727732072657175657374</RequestId>
+  <HostId>Uuag1LuByRx9e6j5Onimru9pO4ZVKnJ2Qz7/C1NPcfTWAtRPfTaOFg==</HostId>
+</Error>
+              BODY
+            end
+            expect {
+              client.send(operation_name, { :bucket_name => 'bucket', :key => 'key' }.merge(params))
+            }.to raise_error(AWS::S3::Errors::InternalError)
+          end
+        end
+      end
+
       context '#complete_multipart_upload' do
 
         let(:method) { :complete_multipart_upload }

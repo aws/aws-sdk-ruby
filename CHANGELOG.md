@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+* Issue - AWS::S3 - Resolved an issue where the SDK would not retry errors returned
+  from Amazon S3 inside the bodies of 200 status code HTTP responses. This was
+  correctly handled for `AWS::S3::Client#complete_multipart_upload`, but
+  not for `#copy_part`, and `:copy_object`.
+
+  This fix addresses an issue where managed multipart copies would raise an
+  error about a missing etag. These operations should not be retried up to
+  three times and raise a terminal error if they are not successful.
+
+  See [related GitHub issue #870](https://github.com/aws/aws-sdk-ruby/issues/870).
+
 1.65.0 (2015-08-20)
 ------------------
 
