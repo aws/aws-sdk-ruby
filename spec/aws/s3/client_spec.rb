@@ -2030,9 +2030,9 @@ module AWS
 
       context '200 response errors' do
         {
-          complete_multipart_upload: { :upload_id => 'upload-id', parts: [{ :part_number => 1, :etag => 'etag1' }]},
-          copy_object: { :copy_source => 'bucket/key' },
-          copy_part: { :upload_id => 'upload-id', :copy_source => 'bucket/key', :part_number => 1 },
+          :complete_multipart_upload => { :upload_id => 'upload-id', parts: [{ :part_number => 1, :etag => 'etag1' }]},
+          :copy_object => { :copy_source => 'bucket/key' },
+          :copy_part => { :upload_id => 'upload-id', :copy_source => 'bucket/key', :part_number => 1 },
         }.each do |operation_name, params|
           it 'handles 200 errors in ##{operation_name} response' do
             Kernel.stub(:sleep)
