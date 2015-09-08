@@ -31,6 +31,9 @@ module Aws
       # Copies this object to another object. Use `multipart_copy: true`
       # for large objects. This is required for objects that exceed 5GB.
       #
+      # @note If you need to copy to a bucket in a different region, use
+      #   #{copy_from}.
+      #
       # @param [S3::Object, String, Hash] target Where to copy the object
       #   data to. `target` must be one of the following:
       #
@@ -59,6 +62,18 @@ module Aws
       #
       def copy_to(target, options = {})
         ObjectCopier.new(self, options).copy_to(target, options)
+      end
+
+      # Copies and deletes the current object. The object will only be
+      # deleted if the copy operation succeeds.
+      # @param (see Object#copy_to)
+      # @options (see Object#copy_to)
+      # @return [void]
+      # @see Object#copy_to
+      # @see Object#delete
+      def move_to(target, options = {})
+        copy_to(target, options)
+        delete
       end
 
       # Creates a {PresignedPost} that makes it easy to upload a file from

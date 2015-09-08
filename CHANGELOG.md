@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3::Object - Added a `#move_to` method that copies
+  the object to the destination and then deletes the source object.
+
 * Issue - Aws::S3::Client - Added support for errors returned from
   Amazon S3 in the body of HTTP 200 responses. Previously only
   the `#complete_multipart_upload` operation handled these errors.

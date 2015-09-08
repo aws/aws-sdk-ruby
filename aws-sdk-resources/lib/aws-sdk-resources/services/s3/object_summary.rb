@@ -20,6 +20,14 @@ module Aws
         object.copy_to(target, options)
       end
 
+      # @param (see Object#move_to)
+      # @options (see Object#move_to)
+      # @return (see Object#move_to)
+      # @see Object#move_to
+      def move_to(taret, options = {})
+        object.move_to(target, options)
+      end
+
       # @param (see Object#presigned_post)
       # @options (see Object#presigned_post)
       # @return (see Object#presigned_post)
