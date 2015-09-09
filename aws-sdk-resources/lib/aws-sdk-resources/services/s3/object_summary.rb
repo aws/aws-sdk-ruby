@@ -9,14 +9,14 @@ module Aws
       # @return (see Object#copy_from)
       # @see Object#copy_from
       def copy_from(source, options = {})
-        object.copy_from(target, options)
+        object.copy_from(source, options)
       end
 
       # @param (see Object#copy_to)
       # @options (see Object#copy_to)
       # @return (see Object#copy_to)
       # @see Object#copy_to
-      def copy_to(taret, options = {})
+      def copy_to(target, options = {})
         object.copy_to(target, options)
       end
 
@@ -24,7 +24,7 @@ module Aws
       # @options (see Object#move_to)
       # @return (see Object#move_to)
       # @see Object#move_to
-      def move_to(taret, options = {})
+      def move_to(target, options = {})
         object.move_to(target, options)
       end
 
