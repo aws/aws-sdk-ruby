@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Added two new APIs that enable programmatic access to the
+  AWS Identity and Access Management policy simulator.
+
 * Feature - Aws::S3::Object - Added a `#move_to` method that copies
   the object to the destination and then deletes the source object.
 
