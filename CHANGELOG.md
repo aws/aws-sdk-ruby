@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.20 (2015-09-10)
 ------------------
 
 * Feature - Aws::IAM - Added two new APIs that enable programmatic access to the
