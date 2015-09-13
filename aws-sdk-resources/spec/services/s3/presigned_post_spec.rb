@@ -258,7 +258,12 @@ eyAiZXhwaXJhdGlvbiI6ICIyMDEzLTA4LTA3VDEyOjAwOjAwLjAwMFoiLA0KICAiY29uZGl0aW9ucyI6
           expect(post.fields['x-amz-security-token']).to eq('token')
           expect(policy(post)).to include('x-amz-security-token' => 'token')
         end
-
+        
+        it 'sets the storage class if requested' do
+          creds = Credentials.new('key', 'secret', 'token')
+          post = PresignedPost.new(creds, region, bucket).key('key').storage_class('REDUCED_REDUNDANCY')
+          expect(post.fields['x-amz-storage-class']).to eq('REDUCED_REDUNDANCY')
+        end
       end
     end
   end

@@ -444,7 +444,7 @@ module Aws
       #   configuration.
       #   @param [String] value Storage class to use for storing the
       #   @return [self]
-      define_field(:storage_class)
+      define_field(:storage_class, 'x-amz-storage-class')
 
       # @!method website_redirect_location(value)
       #   If the bucket is configured as a website,
