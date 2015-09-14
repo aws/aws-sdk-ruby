@@ -124,10 +124,7 @@ module Aws
         if bucket = params[:bucket]
           bucket = bucket.value
           ssl = endpoint.scheme == 'https'
-          if Plugins::S3BucketDns.dns_compatible?(bucket, ssl) &&
-            !@force_path_style &&
-            !endpoint.path.match(/^\/#{Regexp.escape(bucket)}/)
-          then
+          if Plugins::S3BucketDns.dns_compatible?(bucket, ssl) && !@force_path_style
             parts << "/#{bucket}"
           end
         end

@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved an issue which could raise a signature error
+  when making reqeusts against an object where the key is prefixed
+  with the bucket name. This only affects classic S3 signatures, not requests
+  using signature version 4.
+
+  See [related GitHub issue #923](https://github.com/aws/aws-sdk-ruby/issues/923).
+
 2.1.20 (2015-09-10)
 ------------------
 
