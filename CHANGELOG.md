@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Route53 - Added support for calculated health checks and
+  latency health checks.
+
 * Issue - Aws::S3 - Resolved an issue which could raise a signature error
   when making reqeusts against an object where the key is prefixed
   with the bucket name. This only affects classic S3 signatures, not requests
