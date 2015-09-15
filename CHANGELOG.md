@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added two new fields to expose data encryption key id,
+  and state message.
+
+* Feature - Aws::EC2 - Added support for the new "Diversified" allocation
+  strategy.
+
 * Feature - Aws::ElasticFileSystem - Added support for optional mount
   target ID to the DescribeMountTargets operation.
 

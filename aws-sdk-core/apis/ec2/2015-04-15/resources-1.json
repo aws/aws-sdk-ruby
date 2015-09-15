@@ -109,15 +109,7 @@
         }
       },
       "CreateTags": {
-        "request": { "operation": "CreateTags" },
-        "resource": {
-          "type": "Tag",
-          "identifiers": [
-            { "target": "ResourceId", "source": "requestParameter", "path": "Resources[]" },
-            { "target": "Key", "source": "requestParameter", "path": "Tags[].Key" },
-            { "target": "Value", "source": "requestParameter", "path": "Tags[].Value" }
-          ]
-        }
+        "request": { "operation": "CreateTags" }
       },
       "CreateVolume": {
         "request": { "operation": "CreateVolume" },
