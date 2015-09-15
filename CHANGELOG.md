@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.21 (2015-09-15)
 ------------------
 
 * Feature - Aws::EC2 - Added two new fields to expose data encryption key id,
