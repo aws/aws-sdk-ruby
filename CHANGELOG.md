@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticFileSystem - Added support for optional mount
+  target ID to the DescribeMountTargets operation.
+
 * Feature - Aws::Route53 - Added support for calculated health checks and
   latency health checks.
 
