@@ -67,6 +67,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -192,6 +193,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -235,6 +237,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -279,6 +282,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -323,6 +327,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -367,6 +372,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -424,6 +430,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -447,6 +454,7 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
+        "resultWrapper": "OperationNameResult",
         "members": {
           "List": {
             "shape": "ListOfStructs"
@@ -527,6 +535,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -581,6 +590,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -613,7 +623,8 @@
         "type": "structure",
         "members": {
           "Map": {
-            "shape": "StringMap"
+            "shape": "StringMap",
+            "flattened": true
           }
         }
       },
@@ -624,8 +635,7 @@
         },
         "value": {
             "shape": "StringType"
-        },
-        "flattened": true
+        }
       },
       "StringType": {
         "type": "string"
@@ -635,6 +645,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -678,7 +689,8 @@
             "shape": "StringType",
             "locationName": "Value"
         },
-        "flattened": true
+        "flattened": true,
+        "locationName": "Attribute"
       },
       "StringType": {
         "type": "string"
@@ -688,6 +700,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -739,6 +752,7 @@
       {
         "given": {
           "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"

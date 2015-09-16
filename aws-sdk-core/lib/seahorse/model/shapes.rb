@@ -24,12 +24,6 @@ module Seahorse
         # @return [Shape]
         attr_accessor :shape
 
-        # @return [String, nil]
-        attr_accessor :location
-
-        # @return [String, nil]
-        attr_accessor :location_name
-
         # @return [Boolean]
         attr_accessor :required
 
@@ -38,6 +32,24 @@ module Seahorse
 
         # @return [Boolean]
         attr_accessor :deprecated
+
+        # @return [String, nil]
+        def location
+          @location || (shape && shape[:location])
+        end
+
+        def location= location
+          @location = location
+        end
+
+        # @return [String, nil]
+        def location_name
+          @location_name || (shape && shape[:location_name])
+        end
+
+        def location_name= location_name
+          @location_name = location_name
+        end
 
         # Gets metadata for the given `key`.
         def [](key)

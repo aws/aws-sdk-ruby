@@ -9,12 +9,10 @@
         "type": "structure",
         "members": {
           "ImaHeader": {
-            "shape": "HeaderShape",
-            "location": "header"
+            "shape": "HeaderShape"
           },
           "ImaHeaderLocation": {
             "shape": "HeaderShape",
-            "location": "header",
             "locationName": "X-Foo"
           },
           "Status": {
@@ -48,7 +46,8 @@
         }
       },
       "HeaderShape": {
-        "type": "string"
+        "type": "string",
+        "location": "header"
       },
       "StatusShape": {
         "type": "integer"
@@ -491,7 +490,7 @@
         },
         "result": {
           "AllHeaders": {
-            "Content-Length": 10,
+            "Content-Length": "10",
             "x-Foo": "bar",
             "X-bam": "boo"
           },
@@ -503,7 +502,7 @@
         "response": {
           "status_code": 200,
           "headers": {
-            "Content-Length": 10,
+            "Content-Length": "10",
             "x-Foo": "bar",
             "X-bam": "boo"
           },

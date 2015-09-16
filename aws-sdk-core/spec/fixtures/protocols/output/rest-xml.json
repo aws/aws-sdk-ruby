@@ -9,12 +9,10 @@
         "type": "structure",
         "members": {
           "ImaHeader": {
-            "shape": "HeaderShape",
-            "location": "header"
+            "shape": "HeaderShape"
           },
           "ImaHeaderLocation": {
             "shape": "HeaderShape",
-            "location": "header",
             "locationName": "X-Foo"
           },
           "Str": {
@@ -69,7 +67,12 @@
         "type": "character"
       },
       "HeaderShape": {
-        "type": "string"
+        "type": "string",
+        "location": "header"
+      },
+      "StatusShape": {
+        "type": "integer",
+        "location": "statusCode"
       },
       "TimestampType": {
         "type": "timestamp"
@@ -270,7 +273,8 @@
         "type": "structure",
         "members": {
           "ListMember": {
-            "shape": "StringList"
+            "shape": "StringList",
+            "flattened": true
           }
         }
       },
@@ -278,8 +282,7 @@
         "type": "list",
         "member": {
           "shape": "StringType"
-        },
-        "flattened": true
+        }
       },
       "StringType": {
         "type": "string"
@@ -375,7 +378,8 @@
         "type": "structure",
         "members": {
           "Map": {
-            "shape": "StringMap"
+            "shape": "StringMap",
+            "flattened": true
           }
         }
       },
@@ -386,8 +390,7 @@
         },
         "value": {
           "shape": "StringType"
-        },
-        "flattened": true
+        }
       },
       "StringType": {
         "type": "string"
@@ -570,74 +573,73 @@
         "type": "structure",
         "members": {
           "Str": {
-            "location": "header",
             "locationName": "x-str",
             "shape": "StringHeaderType"
           },
           "Integer": {
-            "location": "header",
             "locationName": "x-int",
             "shape": "IntegerHeaderType"
           },
           "TrueBool": {
-            "location": "header",
             "locationName": "x-true-bool",
             "shape": "BooleanHeaderType"
           },
           "FalseBool": {
-            "location": "header",
             "locationName": "x-false-bool",
             "shape": "BooleanHeaderType"
           },
           "Float": {
-            "location": "header",
             "locationName": "x-float",
             "shape": "FloatHeaderType"
           },
           "Double": {
-            "location": "header",
             "locationName": "x-double",
             "shape": "DoubleHeaderType"
           },
           "Long": {
-            "location": "header",
             "locationName": "x-long",
             "shape": "LongHeaderType"
           },
           "Char": {
-            "location": "header",
             "locationName": "x-char",
             "shape": "CharHeaderType"
           },
           "Timestamp": {
-            "location": "header",
             "locationName": "x-timestamp",
             "shape": "TimestampHeaderType"
           }
         }
       },
       "StringHeaderType": {
+        "location": "header",
         "type": "string"
       },
       "IntegerHeaderType": {
+        "location": "header",
         "type": "integer"
       },
       "BooleanHeaderType": {
+        "location": "header",
         "type": "boolean"
       },
       "FloatHeaderType": {
+        "location": "header",
         "type": "float"
       },
       "DoubleHeaderType": {
+        "location": "header",
         "type": "double"
       },
       "LongHeaderType": {
+        "location": "header",
         "type": "long"
       },
       "CharHeaderType": {
+        "location": "header",
         "type": "character"
       },
       "TimestampHeaderType": {
+        "location": "header",
         "type": "timestamp"
       }
     },
@@ -671,7 +673,7 @@
             "x-double": "1.5",
             "x-long": "100",
             "x-char": "a",
-            "x-timestamp": "Sun, 25 Jan 2015 08:00:00 -0000"
+            "x-timestamp": "Sun, 25 Jan 2015 08:00:00 GMT"
           },
           "body": ""
         }

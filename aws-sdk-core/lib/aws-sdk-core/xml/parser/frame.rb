@@ -12,7 +12,7 @@ module Aws
 
           def new(parent, ref, result = nil)
             if self == Frame
-              frame = frame_class(ref && ref.shape).allocate
+              frame = frame_class(ref).allocate
               frame.send(:initialize, parent, ref, result)
               frame
             else
@@ -22,11 +22,11 @@ module Aws
 
           private
 
-          def frame_class(shape)
-            klass = FRAME_CLASSES[shape.class]
-            if ListFrame == klass && shape[:flattened]
+          def frame_class(ref)
+            klass = FRAME_CLASSES[ref.shape.class]
+            if ListFrame == klass && ref[:flattened]
               FlatListFrame
-            elsif MapFrame == klass && shape[:flattened]
+            elsif MapFrame == klass && ref[:flattened]
               MapEntryFrame
             else
               klass
