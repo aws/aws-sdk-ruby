@@ -11,7 +11,7 @@ gem 'nokogiri' unless ENV['PURE_RUBY']
 gem 'oga'
 
 group :test do
-  gem 'rspec', '~> 3.0.0'
+  gem 'rspec'
   gem 'cucumber'
   gem 'webmock'
   gem 'simplecov', require: false
