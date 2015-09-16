@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - Aws::S3::Client - Deprecated two methods:
+
+  * `Aws::S3::Client#put_bucket_lifecycle`
+  * `Aws::S3::Client#get_bucket_lifecycle`
+
+  These methods have been replaced by:
+
+  * `Aws::S3::Client#put_bucket_lifecycle_configuration`
+  * `Aws::S3::Client#get_bucket_lifecycle_configuration`
+
+  Amazon S3 now permits multiple transitions for a single
+  lifecycle rule. Previously, a lifecycle rule would
+  return a transition value, or `nil`. Now it will always
+  return an array.
+
+* Feature - Aws::S3 - Added support for the new STANDARD_IA storage class,
+  lifecycle transitions and cross region replication with storage class
+  features.
+
 2.1.21 (2015-09-15)
 ------------------
 
