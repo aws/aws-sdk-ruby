@@ -11,9 +11,6 @@ module Aws
     class Presigner
 
       # @api private
-      ONE_WEEK = 60 * 60 * 24 * 7
-
-      # @api private
       FIFTEEN_MINUTES = 60 * 15
 
       # @option options [Client] :client Optionally provide an existing
@@ -63,10 +60,6 @@ module Aws
 
       def expires_in(params)
         if expires_in = params.delete(:expires_in)
-          if expires_in > ONE_WEEK
-            msg = "expires_in value of #{expires_in} exceeds one-week maximum"
-            raise ArgumentError, msg
-          end
           expires_in
         else
           FIFTEEN_MINUTES
