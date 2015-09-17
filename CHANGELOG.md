@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.22 (2015-09-16)
 ------------------
 
 * Upgrading - Aws::S3::Client - Deprecated two methods:
