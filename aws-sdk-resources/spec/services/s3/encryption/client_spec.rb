@@ -372,7 +372,7 @@ module Aws
             it 'supports asymmetric keys' do
               stub_encrypted_get
               options[:encryption_key] = OpenSSL::PKey::RSA.generate(1024)
-              expect { client.get_object(bucket:'bucket', key:'key') }.to raise_error
+              expect { client.get_object(bucket:'bucket', key:'key') }.to raise_error(StandardError)
             end
 
             it 'does not support get with range' do

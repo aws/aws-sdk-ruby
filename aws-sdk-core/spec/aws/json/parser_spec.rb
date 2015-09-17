@@ -127,7 +127,7 @@ module Aws
       end
 
       it 'does not trap json parsing errors' do
-        expect { parse('{"abc') }.to raise_error
+        expect { parse('{"abc') }.to raise_error(StandardError)
       end
 
     end
