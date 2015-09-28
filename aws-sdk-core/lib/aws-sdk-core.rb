@@ -7,6 +7,7 @@ Seahorse::Util.irregular_inflections({
   'Ec2' => 'ec2',
   'ElastiCache' => 'elasticache',
   'iSCSI' => 'iscsi',
+  'ACLs' => 'acls',
   #'SSEKMS' => 'sse_kms',
 })
 
