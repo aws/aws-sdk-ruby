@@ -4,6 +4,11 @@ Unreleased Changes
 * Feature - Aws::EC2 - Add `#modify_spot_fleet_request` API to Amazon EC2 client
   and bump API version to 2015-10-01.
 
+* Feature - Aws::CloudFormation - Add `#describe_account_limits` API to allow
+  users to view account-level limits imposed by AWS CloudFormation. Also adds
+  optional parameter `:resource_types` to `#create_stack` and `#update_stack`
+  APIs.
+
 2.1.23 (2015-09-17)
 ------------------
 
