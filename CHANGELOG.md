@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SES - Amazon SES can now accept incoming emails. You can
+  configure Amazon SES to deliver messages to an Amazon S3 bucket, call an AWS
+  Lambda function, publish notifications to Amazon SNS, drop messages, or bounce
+  messages.
+
 * Feature - Aws::EC2 - Add `#modify_spot_fleet_request` API to Amazon EC2 client
   and bump API version to 2015-10-01.
 
