@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.24 (2015-09-29)
 ------------------
 
 * Feature - Aws::SES - Amazon SES can now accept incoming emails. You can

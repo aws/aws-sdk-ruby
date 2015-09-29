@@ -257,7 +257,7 @@ to be backwards compatible.
 | Amazon DynamoDB Streams                  | DynamoDBStreams      | 2012-08-10  |
 | Amazon EC2 Container Service             | ECS                  | 2014-11-13  |
 | Amazon ElastiCache                       | ElastiCache          | 2015-02-02  |
-| Amazon Elastic Compute Cloud             | EC2                  | 2015-04-15  |
+| Amazon Elastic Compute Cloud             | EC2                  | 2015-10-01  |
 | Amazon Elastic File System               | EFS                  | 2015-02-01  |
 | Amazon Elastic MapReduce                 | EMR                  | 2009-03-31  |
 | Amazon Elastic Transcoder                | ElasticTranscoder    | 2012-09-25  |
