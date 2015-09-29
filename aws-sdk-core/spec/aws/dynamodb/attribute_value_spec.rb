@@ -42,6 +42,20 @@ module Aws
           expect(formatted).to eq(ss: %w(abc mno))
         end
 
+        it 'converts objects sets responding to #to_str to :ss (string set)' do
+          stringy_class = Class.new do
+            attr_reader :val
+            alias :to_str :val
+
+            def initialize(val)
+              @val = val
+            end
+          end
+          set = Set.new([stringy_class.new("abc"), stringy_class.new("mno")])
+          formatted = value.marshal(set)
+          expect(formatted).to eq(ss: %w(abc mno))
+        end
+
         it 'converts numeric sets to :ns (number set)' do
           formatted = value.marshal(Set.new([123, 456]))
           expect(formatted).to eq(ns: %w(123 456))
@@ -66,6 +80,11 @@ module Aws
 
         it 'converts symbol to :s' do
           expect(value.marshal(:abc)).to eq(s: 'abc')
+        end
+
+        it 'converts objects responding to #to_str to :s' do
+          obj = Class.new { def to_str; 'abc' end }.new
+          expect(value.marshal(obj)).to eq(s: 'abc')
         end
 
         it 'converts booleans :bool' do
