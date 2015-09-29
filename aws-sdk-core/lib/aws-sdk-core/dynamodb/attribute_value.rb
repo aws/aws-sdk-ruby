@@ -21,6 +21,7 @@ module Aws
       end
 
       class Marshaler
+        STRINGY_TEST = lambda { |val| val.respond_to?(:to_str) }
 
         def format(obj)
           case obj
@@ -34,6 +35,7 @@ module Aws
             end
           when String then { s: obj }
           when Symbol then { s: obj.to_s }
+          when STRINGY_TEST then { s: obj.to_str }
           when Numeric then { n: obj.to_s }
           when StringIO, IO then { b: obj }
           when Set then format_set(obj)
@@ -51,6 +53,7 @@ module Aws
         def format_set(set)
           case set.first
           when String, Symbol then { ss: set.map(&:to_s) }
+          when STRINGY_TEST then { ss: set.map(&:to_str) }
           when Numeric then { ns: set.map(&:to_s) }
           when StringIO, IO then { bs: set.to_a }
           else
