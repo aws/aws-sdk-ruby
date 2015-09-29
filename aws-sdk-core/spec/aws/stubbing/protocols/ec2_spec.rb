@@ -60,7 +60,7 @@ module Aws
             }
             resp = EC2.new.stub_data(api, operation, data)
             expect(normalize(resp.body.string)).to eq(normalize(<<-XML))
-              <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2015-04-15/">
+              <DescribeInstancesResponse xmlns="http://ec2.amazonaws.com/doc/2015-10-01/">
                   <requestId>stubbed-request-id</requestId>
                   <reservationSet>
                       <item>

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Add `#modify_spot_fleet_request` API to Amazon EC2 client
+  and bump API version to 2015-10-01.
+
 2.1.23 (2015-09-17)
 ------------------
 
