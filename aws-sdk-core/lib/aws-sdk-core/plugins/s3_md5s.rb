@@ -35,6 +35,9 @@ module Aws
 
         def md5(body)
           md5 = OpenSSL::Digest::MD5.new
+
+          ensure_open(body)
+
           while chunk = body.read(OneMB)
             md5.update(chunk)
           end
@@ -42,6 +45,11 @@ module Aws
           Base64.encode64(md5.digest).strip
         end
 
+        def ensure_open(io)
+          if io.respond_to? :closed?
+            io.open if io.closed?
+          end
+        end
       end
 
       option(:compute_checksums, true)

@@ -10,6 +10,8 @@ module Aws
 
       let(:handlers) { Seahorse::Client::HandlerList.new }
 
+      let(:handler) { S3Md5s::Handler.new }
+
       it 'adds a :compute_checksums option that defaults to true' do
         S3Md5s.new.add_options(config)
         expect(config.build!.compute_checksums).to be(true)
@@ -57,6 +59,7 @@ module Aws
         it 'computes the md5 in 1MB chunks for IO objects' do
           chunk = '.' * 1024 * 1024
           body = double('io-object', size: 5 * 1024 * 1024)
+
           expect(body).to receive(:read).
             with(1024 * 1024).
             exactly(6).times.
@@ -76,6 +79,15 @@ module Aws
           handlers.add(NoSendHandler, step: :send)
           handlers.to_stack.call(context)
           expect(context.http_request.headers['Content-Md5']).to be(nil)
+        end
+
+        it 'ensures that the IO object is open' do
+          io = double('io-object')
+
+          expect(io).to receive(:closed?).and_return(true)
+          expect(io).to receive(:open)
+
+          handler.ensure_open(io)
         end
 
       end
