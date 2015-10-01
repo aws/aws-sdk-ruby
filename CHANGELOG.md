@@ -9,7 +9,7 @@ Unreleased Changes
   See [related GitHub issue #887](https://github.com/aws/aws-sdk-ruby/pull/887).
 
 * Feature - Aws::CloudTrail - This release of CloudTrail includes support for log
-  file integrity validation, log encryption with AWS KMS–Managed Keys (SSE-KMS),
+  file integrity validation, log encryption with AWS KMS-Managed Keys (SSE-KMS),
   and trail tagging.
 
 * Feature - Aws::CloudSearch - Added support for the new DefineIndexFields operation.
