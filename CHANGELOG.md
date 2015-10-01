@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticsearchService - Added support for Amazon Elasticsearch Service
+  (Amazon ES), is a managed service that makes it easy to deploy, operate, and scale
+  Elasticsearch in the AWS cloud. Elasticsearch is a popular open-source search and
+  analytics engine for use cases such as log analytics, real-time application
+  monitoring, and click stream analytics. With Amazon ES, you get direct access
+  to the Elasticsearch open-source API so that existing code and applications will
+  work seamlessly. You can set up and configure your Amazon ES cluster in minutes
+  from the AWS Management Console. Amazon Elasticsearch Service provisions all the
+  resources for your cluster and launches it. Amazon ES also automatically detects
+  and replaces failed Elasticsearch nodes, reducing the overhead associated with
+  self-managed infrastructures. You can easily scale your cluster with a single
+  API call or a few clicks in the AWS Management Console.
+
 2.1.25 (2015-10-01)
 ------------------
 
@@ -11,8 +24,6 @@ Unreleased Changes
 * Feature - Aws::CloudTrail - This release of CloudTrail includes support for log
   file integrity validation, log encryption with AWS KMS-Managed Keys (SSE-KMS),
   and trail tagging.
-
-* Feature - Aws::CloudSearch - Added support for the new DefineIndexFields operation.
 
 2.1.24 (2015-09-29)
 ------------------

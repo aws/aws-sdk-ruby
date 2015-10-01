@@ -46,6 +46,7 @@ module Aws
     ElastiCache
     ElasticBeanstalk
     ElasticLoadBalancing
+    ElasticsearchService
     ElasticTranscoder
     EMR
     Glacier

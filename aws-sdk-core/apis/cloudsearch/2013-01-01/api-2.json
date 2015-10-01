@@ -238,59 +238,6 @@
         }
       ]
     },
-    "DefineIndexFields":{
-      "name":"DefineIndexFields",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
-      },
-      "input":{"shape":"DefineIndexFieldsRequest"},
-      "output":{
-        "shape":"DefineIndexFieldsResponse",
-        "resultWrapper":"DefineIndexFieldsResult"
-      },
-      "errors":[
-        {
-          "shape":"BaseException",
-          "exception":true
-        },
-        {
-          "shape":"InternalException",
-          "error":{
-            "code":"InternalException",
-            "httpStatusCode":500
-          },
-          "exception":true
-        },
-        {
-          "shape":"LimitExceededException",
-          "error":{
-            "code":"LimitExceeded",
-            "httpStatusCode":409,
-            "senderFault":true
-          },
-          "exception":true
-        },
-        {
-          "shape":"InvalidTypeException",
-          "error":{
-            "code":"InvalidType",
-            "httpStatusCode":409,
-            "senderFault":true
-          },
-          "exception":true
-        },
-        {
-          "shape":"ResourceNotFoundException",
-          "error":{
-            "code":"ResourceNotFound",
-            "httpStatusCode":409,
-            "senderFault":true
-          },
-          "exception":true
-        }
-      ]
-    },
     "DefineSuggester":{
       "name":"DefineSuggester",
       "http":{
@@ -1176,10 +1123,6 @@
         "Status":{"shape":"OptionStatus"}
       }
     },
-    "AvailableInstanceTypes":{
-      "type":"list",
-      "member":{"shape":"String"}
-    },
     "BaseException":{
       "type":"structure",
       "members":{
@@ -1288,24 +1231,6 @@
       "required":["IndexField"],
       "members":{
         "IndexField":{"shape":"IndexFieldStatus"}
-      }
-    },
-    "DefineIndexFieldsRequest":{
-      "type":"structure",
-      "required":[
-        "DomainName",
-        "IndexFields"
-      ],
-      "members":{
-        "DomainName":{"shape":"DomainName"},
-        "IndexFields":{"shape":"IndexFieldList"}
-      }
-    },
-    "DefineIndexFieldsResponse":{
-      "type":"structure",
-      "required":["IndexFields"],
-      "members":{
-        "IndexFields":{"shape":"IndexFieldStatusList"}
       }
     },
     "DefineSuggesterRequest":{
@@ -1717,10 +1642,6 @@
         "DateArrayOptions":{"shape":"DateArrayOptions"}
       }
     },
-    "IndexFieldList":{
-      "type":"list",
-      "member":{"shape":"IndexField"}
-    },
     "IndexFieldStatus":{
       "type":"structure",
       "required":[
@@ -1824,13 +1745,11 @@
       "type":"structure",
       "required":[
         "MaximumReplicationCount",
-        "MaximumPartitionCount",
-        "AvailableInstanceTypes"
+        "MaximumPartitionCount"
       ],
       "members":{
         "MaximumReplicationCount":{"shape":"MaximumReplicationCount"},
-        "MaximumPartitionCount":{"shape":"MaximumPartitionCount"},
-        "AvailableInstanceTypes":{"shape":"AvailableInstanceTypes"}
+        "MaximumPartitionCount":{"shape":"MaximumPartitionCount"}
       }
     },
     "ListDomainNamesResponse":{
@@ -1923,20 +1842,12 @@
       },
       "exception":true
     },
-    "ScalingMode":{
-      "type":"string",
-      "enum":[
-        "Automatic",
-        "Manual"
-      ]
-    },
     "ScalingParameters":{
       "type":"structure",
       "members":{
         "DesiredInstanceType":{"shape":"PartitionInstanceType"},
         "DesiredReplicationCount":{"shape":"UIntValue"},
-        "DesiredPartitionCount":{"shape":"UIntValue"},
-        "ScalingMode":{"shape":"ScalingMode"}
+        "DesiredPartitionCount":{"shape":"UIntValue"}
       }
     },
     "ScalingParametersStatus":{
