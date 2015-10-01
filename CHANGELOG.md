@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.25 (2015-10-01)
 ------------------
 
 * Feature - Aws::RDS - Added support for CopyTagsToSnapshot.
