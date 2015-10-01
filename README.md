@@ -261,6 +261,7 @@ to be backwards compatible.
 | Amazon Elastic File System               | EFS                  | 2015-02-01  |
 | Amazon Elastic MapReduce                 | EMR                  | 2009-03-31  |
 | Amazon Elastic Transcoder                | ElasticTranscoder    | 2012-09-25  |
+| Amazon Elasticsearch Service             | ElasticsearchService | 2015-01-01  |
 | Amazon Glacier                           | Glacier              | 2012-06-01  |
 | Amazon Kinesis                           | Kinesis              | 2013-12-02  |
 | Amazon Machine Learning                  | MachineLearning      | 2014-12-12  |

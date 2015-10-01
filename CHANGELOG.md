@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.26 (2015-10-01)
 ------------------
 
 * Feature - Aws::ElasticsearchService - Added support for Amazon Elasticsearch Service
