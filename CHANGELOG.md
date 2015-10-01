@@ -1,9 +1,6 @@
 Unreleased Changes
 ------------------
 
-2.1.24 (2015-09-29)
-------------------
-
 * Feature - Aws::SES - Amazon SES can now accept incoming emails. You can
   configure Amazon SES to deliver messages to an Amazon S3 bucket, call an AWS
   Lambda function, publish notifications to Amazon SNS, drop messages, or bounce
@@ -16,6 +13,11 @@ Unreleased Changes
   users to view account-level limits imposed by AWS CloudFormation. Also adds
   optional parameter `:resource_types` to `#create_stack` and `#update_stack`
   APIs.
+
+2.1.24 (2015-09-29)
+------------------
+
+* Feature - Aws::CloudSearch - Added support for the new DefineIndexFields operation.
 
 2.1.23 (2015-09-17)
 ------------------

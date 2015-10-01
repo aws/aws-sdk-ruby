@@ -6,6 +6,7 @@
     "DefineAnalysisScheme": "<p>Configures an analysis scheme that can be applied to a <code>text</code> or <code>text-array</code> field to define language-specific text processing options. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html\" target=\"_blank\">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>",
     "DefineExpression": "<p>Configures an <code><a>Expression</a></code> for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html\" target=\"_blank\">Configuring Expressions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>",
     "DefineIndexField": "<p>Configures an <code><a>IndexField</a></code> for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the <code><a>IndexFieldType</a></code>. If the field exists, the new configuration replaces the old one. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html\" target=\"_blank\">Configuring Index Fields</a> in the <i>Amazon CloudSearch Developer Guide</i>. </p>",
+    "DefineIndexFields": null,
     "DefineSuggester": "<p>Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html\" target=\"_blank\">Getting Search Suggestions</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>",
     "DeleteAnalysisScheme": "<p>Deletes an analysis scheme. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html\" target=\"_blank\">Configuring Analysis Schemes</a> in the <i>Amazon CloudSearch Developer Guide</i>. </p>",
     "DeleteDomain": "<p>Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/deleting-domains.html\" target=\"_blank\">Deleting a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>. </p>",
@@ -91,6 +92,12 @@
       "refs": {
         "DescribeAvailabilityOptionsResponse$AvailabilityOptions": "<p>The availability options configured for the domain. Indicates whether Multi-AZ is enabled for the domain. </p>",
         "UpdateAvailabilityOptionsResponse$AvailabilityOptions": "<p>The newly-configured availability options. Indicates whether Multi-AZ is enabled for the domain. </p>"
+      }
+    },
+    "AvailableInstanceTypes": {
+      "base": null,
+      "refs": {
+        "Limits$AvailableInstanceTypes": null
       }
     },
     "BaseException": {
@@ -211,6 +218,16 @@
     },
     "DefineIndexFieldResponse": {
       "base": "<p>The result of a <code><a>DefineIndexField</a></code> request. Contains the status of the newly-configured index field.</p>",
+      "refs": {
+      }
+    },
+    "DefineIndexFieldsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DefineIndexFieldsResponse": {
+      "base": null,
       "refs": {
       }
     },
@@ -379,6 +396,7 @@
         "DefineAnalysisSchemeRequest$DomainName": null,
         "DefineExpressionRequest$DomainName": null,
         "DefineIndexFieldRequest$DomainName": null,
+        "DefineIndexFieldsRequest$DomainName": null,
         "DefineSuggesterRequest$DomainName": null,
         "DeleteAnalysisSchemeRequest$DomainName": null,
         "DeleteDomainRequest$DomainName": "<p>The name of the domain you want to permanently delete.</p>",
@@ -555,7 +573,14 @@
       "base": "<p>Configuration information for a field in the index, including its name, type, and options. The supported options depend on the <code><a>IndexFieldType</a></code>.</p>",
       "refs": {
         "DefineIndexFieldRequest$IndexField": "<p>The index field and field options you want to configure. </p>",
+        "IndexFieldList$member": null,
         "IndexFieldStatus$Options": null
+      }
+    },
+    "IndexFieldList": {
+      "base": null,
+      "refs": {
+        "DefineIndexFieldsRequest$IndexFields": null
       }
     },
     "IndexFieldStatus": {
@@ -569,6 +594,7 @@
     "IndexFieldStatusList": {
       "base": "<p>Contains the status of multiple index fields.</p>",
       "refs": {
+        "DefineIndexFieldsResponse$IndexFields": null,
         "DescribeIndexFieldsResponse$IndexFields": "<p>The index fields configured for the domain.</p>"
       }
     },
@@ -707,6 +733,12 @@
       "refs": {
       }
     },
+    "ScalingMode": {
+      "base": null,
+      "refs": {
+        "ScalingParameters$ScalingMode": null
+      }
+    },
     "ScalingParameters": {
       "base": "<p>The desired instance type and desired number of replicas of each index partition.</p>",
       "refs": {
@@ -767,6 +799,7 @@
         "AnalysisOptions$Stopwords": "<p>A JSON array of terms to ignore during indexing and searching. For example, <code>[\"a\", \"an\", \"the\", \"of\"]</code>. The stopwords dictionary must explicitly list each word you want to ignore. Wildcards and regular expressions are not supported. </p>",
         "AnalysisOptions$StemmingDictionary": "<p>A JSON object that contains a collection of string:value pairs that each map a term to its stem. For example, <code>{\"term1\": \"stem1\", \"term2\": \"stem2\", \"term3\": \"stem3\"}</code>. The stemming dictionary is applied in addition to any algorithmic stemming. This enables you to override the results of the algorithmic stemming to correct specific cases of overstemming or understemming. The maximum size of a stemming dictionary is 500 KB.</p>",
         "AnalysisOptions$JapaneseTokenizationDictionary": "<p>A JSON array that contains a collection of terms, tokens, readings and part of speech for Japanese Tokenizaiton. The Japanese tokenization dictionary enables you to override the default tokenization for selected terms. This is only valid for Japanese language fields.</p>",
+        "AvailableInstanceTypes$member": null,
         "DocumentSuggesterOptions$SortExpression": "<p>An expression that computes a score for each suggestion to control how they are sorted. The scores are rounded to the nearest integer, with a floor of 0 and a ceiling of 2^31-1. A document's relevance score is not computed for suggestions, so sort expressions cannot reference the <code>_score</code> value. To sort suggestions using a numeric field or existing expression, simply specify the name of the field or expression. If no expression is configured for the suggester, the suggestions are sorted with the closest matches listed first.</p>"
       }
     },
