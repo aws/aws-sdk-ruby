@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Adds "Spot Blocks" for Amazon Elastic Compute Cloud.
+
 * Feature - Aws::CloudFront - Adds support for adding WebACLIds to CloudFront
   distributions.
 
