@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Adds support for adding WebACLIds to CloudFront
+  distributions.
+
 2.1.26 (2015-10-01)
 ------------------
 
