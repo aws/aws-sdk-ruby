@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.27 (2015-10-06)
 ------------------
 
 * Feature - Aws::WAF - Adds SDK support for AWS WAF, a web application firewall

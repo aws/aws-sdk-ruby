@@ -245,7 +245,8 @@ to be backwards compatible.
 | AWS Security Token Service               | STS                  | 2011-06-15  |
 | AWS Storage Gateway                      | StorageGateway       | 2013-06-30  |
 | AWS Support                              | Support              | 2013-04-15  |
-| Amazon CloudFront                        | CloudFront           | 2015-04-17  |
+| AWS WAF                                  | WAF                  | 2015-08-24  |
+| Amazon CloudFront                        | CloudFront           | 2015-07-27  |
 | Amazon CloudHSM                          | CloudHSM             | 2014-05-30  |
 | Amazon CloudSearch                       | CloudSearch          | 2013-01-01  |
 | Amazon CloudSearch Domain                | CloudSearchDomain    | 2013-01-01  |
