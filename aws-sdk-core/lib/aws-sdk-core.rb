@@ -72,6 +72,7 @@ module Aws
     STS
     Support
     SWF
+    WAF
     WorkSpaces
   )
 

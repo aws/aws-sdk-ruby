@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::WAF - Adds SDK support for AWS WAF, a web application firewall
+  that helps protect your web applications from common web exploits that could
+  affect application availability, compromise security, or consume excessive
+  resources.
+
 * Feature - Aws::EC2 - Adds "Spot Blocks" for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::CloudFront - Adds support for adding WebACLIds to CloudFront

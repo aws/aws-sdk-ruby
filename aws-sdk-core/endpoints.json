@@ -20,6 +20,9 @@
     "*/iam": {
       "endpoint": "iam.amazonaws.com"
     },
+    "*/waf": {
+      "endpoint": "waf.amazonaws.com"
+    },
     "us-gov-west-1/sts": {
       "endpoint": "sts.us-gov-west-1.amazonaws.com"
     },
