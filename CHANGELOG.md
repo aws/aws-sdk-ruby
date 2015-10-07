@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Kinesis - Two new Amazon Kinesis APIs that allow customers to
+  choose how long their data records are stored in their Amazon Kinesis streams.
+  Customers can modify a their streams to store records from 1 to 7 days, in
+  increments of 1 day.
+
 * Feature - Aws::Config - Added support for Config Rules.
 
 2.1.27 (2015-10-06)
