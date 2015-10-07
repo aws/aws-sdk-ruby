@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Config - Added support for Config Rules.
+
 2.1.27 (2015-10-06)
 ------------------
 
