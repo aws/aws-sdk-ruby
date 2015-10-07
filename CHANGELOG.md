@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.28 (2015-10-07)
 ------------------
 
 * Feature - Aws::Inspector - Added support for the new Amazon Inspector
