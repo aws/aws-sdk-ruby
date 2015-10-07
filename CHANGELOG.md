@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MarketplaceCommerceAnalytics - Added support for the new AWS
+  Marketplace Commerce Analytics service.
+
 * Feature - Aws::Kinesis - Two new Amazon Kinesis APIs that allow customers to
   choose how long their data records are stored in their Amazon Kinesis streams.
   Customers can modify a their streams to store records from 1 to 7 days, in

@@ -57,6 +57,7 @@ module Aws
     Lambda
     LambdaPreview
     MachineLearning
+    MarketplaceCommerceAnalytics
     OpsWorks
     RDS
     Redshift
