@@ -49,6 +49,7 @@ module Aws
     ElasticsearchService
     ElasticTranscoder
     EMR
+    Firehose
     Glacier
     IAM
     ImportExport

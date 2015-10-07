@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::KinesisFirehose - Added support Amazon Kinesis Firehose.
+  Amazon Kinesis Firehose is a fully managed service for ingesting data
+  streams directly into AWS data services such as Amazon S3 and Amazon Redshift.
+
 * Feature - Aws::MarketplaceCommerceAnalytics - Added support for the new AWS
   Marketplace Commerce Analytics service.
 
