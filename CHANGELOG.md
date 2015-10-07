@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Inspector - Added support for the new Amazon Inspector
+  service. Amazon Inspector is a new service from AWS that identifies
+  security issues in your application deployments. Use Inspector with
+  your applications to assess your security posture and identify areas
+  that can be improved. Inspector works with your EC2 Instances to
+  monitor activity in the applications and system.
+
 * Feature - Aws::KinesisFirehose - Added support Amazon Kinesis Firehose.
   Amazon Kinesis Firehose is a fully managed service for ingesting data
   streams directly into AWS data services such as Amazon S3 and Amazon Redshift.

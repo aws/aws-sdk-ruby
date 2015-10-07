@@ -53,6 +53,7 @@ module Aws
     Glacier
     IAM
     ImportExport
+    Inspector
     Kinesis
     KMS
     Lambda
