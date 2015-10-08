@@ -18,7 +18,14 @@ module Seahorse
         end
 
         def after_initialize(client)
-          endpoint = URI.parse(client.config.endpoint.to_s)
+
+          endpoint = client.config.endpoint
+          if endpoint.nil?
+            msg = "missing required option `:endpoint'"
+            raise ArgumentError, msg
+          end
+
+          endpoint = URI.parse(endpoint.to_s)
           if URI::HTTPS === endpoint or URI::HTTP === endpoint
             client.config.endpoint = endpoint
           else

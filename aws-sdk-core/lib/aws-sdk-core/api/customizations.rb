@@ -95,6 +95,10 @@ module Aws
         end
       end
 
+      api('data.iot') do |api|
+        api['metadata'].delete('endpointPrefix')
+      end
+
       api('lambda') do |api|
         api['shapes']['Timestamp']['type'] = 'timestamp'
       end

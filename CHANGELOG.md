@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Added support for AWS IoT control and data plane
+  services.
+
 * Feature - Aws::Lambda - Added support for function versioning.
 
 2.1.28 (2015-10-07)

@@ -54,6 +54,8 @@ module Aws
     IAM
     ImportExport
     Inspector
+    IoT
+    IoTDataPlane
     Kinesis
     KMS
     Lambda
