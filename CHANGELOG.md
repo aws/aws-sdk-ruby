@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Task definitions now support more Docker
+  options hostname, Docker labels, working directory, networking
+  disabled, privileged execution, read-only root filesystem, DNS
+  servers, DNS search domains, ulimits, log configuration, extra
+  hosts (hosts to add to /etc/hosts), and security options (for
+  MLS systems like SELinux).
+
 * Feature - Aws::IoT - Added support for AWS IoT control and data plane
   services.
 
