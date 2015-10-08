@@ -238,6 +238,8 @@ to be backwards compatible.
 | AWS Elastic Beanstalk                    | ElasticBeanstalk             | 2010-12-01  |
 | AWS Identity and Access Management       | IAM                          | 2010-05-08  |
 | AWS Import/Export                        | ImportExport                 | 2010-06-01  |
+| AWS IoT                                  | IoT                          | 2015-05-28  |
+| AWS IoT Data Plane                       | IoTDataPlane                 | 2015-05-28  |
 | AWS Key Management Service               | KMS                          | 2014-11-01  |
 | AWS Lambda                               | LambdaPreview                | 2014-11-11  |
 | AWS Lambda                               | Lambda                       | 2015-03-31  |

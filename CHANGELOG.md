@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.29 (2015-10-08)
 ------------------
 
 * Feature - Aws::ECS - Task definitions now support more Docker
