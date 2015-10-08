@@ -6,7 +6,9 @@ module Aws
 
       let(:env) {{}}
 
-      let(:metadata) {{}}
+      let(:metadata) {{
+        'endpointPrefix' => 'PREFIX',
+      }}
 
       let(:client_class) {
         Seahorse::Client::Base.define(
@@ -79,7 +81,6 @@ module Aws
       describe 'endpoint option' do
 
         it 'defaults the endpoint to PREFIX.REGION.amazonaws.com' do
-          metadata['endpointPrefix'] = 'PREFIX'
           client = client_class.new(region: 'REGION')
           expect(client.config.endpoint.to_s).to eq('https://PREFIX.REGION.amazonaws.com')
         end
