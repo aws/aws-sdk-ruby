@@ -300,7 +300,7 @@ module Aws
     # want to load with the `:services` option. All services not named
     # will continue to autoload as normal.
     #
-    #     Aws.eager_auotload(services: %w(S3 EC2))
+    #     Aws.eager_autoload!(services: %w(S3 EC2))
     #
     # @return [void]
     def eager_autoload!(options = {})
