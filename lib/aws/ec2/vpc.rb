@@ -102,6 +102,18 @@ module AWS
         NetworkInterfaceCollection.new(:config => config).filter('vpc-id', id)
       end
 
+      # @return [VPCPeeringConnectionCollection] Returns a filtered collection
+      #   of VPC peering connection from this VPC.
+      def peering_connections
+        VPCPeeringConnectionCollection.new(:config => config).filter('requester-vpc-info.vpc-id', vpc_id)
+      end
+
+      # @return [VPCPeeringConnectionCollection] Returns a filtered collection
+      #   of VPC peering connection to this VPC.
+      def peering_connections
+        VPCPeeringConnectionCollection.new(:config => config).filter('accepter-vpc-info.vpc-id', vpc_id)
+      end
+
       # @return [InternetGateway,nil] Returns the internet gateway attached to
       #   this VPC.  If no internet gateway has been attached, then
       #   nil is returned.
@@ -169,6 +181,16 @@ module AWS
           dhcp_options = DHCPOptions.new(dhcp_options, :config => config)
         end
         dhcp_options.associate(self)
+      end
+
+      # Create a VPC peering connection between this VPC and another
+      #   VPC owned by the same user, and accept it.
+      # @return [VPCPeeringConnection] Returns the VPC peering connection
+      #   that was created
+      def peer_to vpc
+        peering_connection = peering_connections.create(self, vpc)
+        peering_connection.accept
+        peering_connection
       end
 
     end
