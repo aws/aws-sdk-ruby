@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved an issue with pre-signed URLs generated
+  with `virtual_host: true`.
+
+  See [related GitHub issue #938](https://github.com/aws/aws-sdk-ruby/issues/938).
+
+  See [related GitHub pull-request #940](https://github.com/aws/aws-sdk-ruby/pull/940).
+
 2.1.29 (2015-10-08)
 ------------------
 
