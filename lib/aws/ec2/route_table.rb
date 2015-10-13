@@ -196,6 +196,11 @@ module AWS
           client_opts[:network_interface_id] = interface
         end
 
+        if vpc_peering_connection = options[:vpc_peering_connection]
+          vpc_peering_connection = vpc_peering_connection.id if vpc_peering_connection.is_a?(VPCPeeringConnection)
+          client_opts[:vpc_peering_connection_id] = vpc_peering_connection
+        end
+
         client_opts
 
       end
