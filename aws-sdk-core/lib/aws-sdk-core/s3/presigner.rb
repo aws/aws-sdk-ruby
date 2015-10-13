@@ -78,7 +78,9 @@ module Aws
         req.handle do |context|
           uri = context.http_request.endpoint
           uri.host = context.params[:bucket]
-          uri.path = uri.path.sub("/#{context.params[:bucket]}", '')
+          uri.path.sub!("/#{context.params[:bucket]}", '')
+          uri.scheme = 'http'
+          uri.port = 80
           @handler.call(context)
         end
       end
