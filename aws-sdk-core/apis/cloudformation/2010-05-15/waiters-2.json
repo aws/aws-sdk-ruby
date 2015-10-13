@@ -18,6 +18,18 @@
           "matcher": "pathAny",
           "state": "failure",
           "argument": "Stacks[].StackStatus"
+        },
+        {
+          "expected": "ROLLBACK_COMPLETE",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "Stacks[].StackStatus"
+        },
+        {
+          "expected": "ROLLBACK_FAILED",
+          "matcher": "pathAny",
+          "state": "failure",
+          "argument": "Stacks[].StackStatus"
         }
       ]
     },

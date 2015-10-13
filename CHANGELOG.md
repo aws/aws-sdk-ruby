@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CloudFormation - Added support for rollback states to the
+  `Aws::CloudFormation::Client#wait_until` `:stack_create_complete` waiter.
+
+  See [related GitHub issue #931](https://github.com/aws/aws-sdk-ruby/issues/931).
+
 * Feature - Aws::AssumeRoleCredentials - Added support for passing
   `Aws::STS::Client` configuration options to `Aws::AssumeRoleCredentials#initialize`.
   This allows you to configure things such as `:region`, `:logger`, etc without
