@@ -1,3 +1,5 @@
+require 'set'
+
 module Aws
 
   # An auto-refreshing credential provider that works by assuming
@@ -25,8 +27,16 @@ module Aws
     # @option options [String] :external_id
     # @option options [STS::Client] :client
     def initialize(options = {})
-      @options = options.dup
-      @client = @options.delete(:client) || STS::Client.new
+      client_opts = {}
+      @assume_role_params = {}
+      options.each_pair do |key, value|
+        if self.class.assume_role_options.include?(key)
+          @assume_role_params[key] = value
+        else
+          client_opts[key] = value
+        end
+      end
+      @client = client_opts[:client] || STS::Client.new(client_opts)
       super
     end
 
@@ -36,7 +46,7 @@ module Aws
     private
 
     def refresh
-      c = @client.assume_role(@options).credentials
+      c = @client.assume_role(@assume_role_params).credentials
       @credentials = Credentials.new(
         c.access_key_id,
         c.secret_access_key,
@@ -45,5 +55,16 @@ module Aws
       @expiration = c.expiration
     end
 
+    class << self
+
+      # @api private
+      def assume_role_options
+        @aro ||= begin
+          input = STS::Client.api.operation(:assume_role).input
+          Set.new(input.shape.member_names)
+        end
+      end
+
+    end
   end
 end

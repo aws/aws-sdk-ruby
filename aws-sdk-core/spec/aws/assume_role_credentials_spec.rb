@@ -48,6 +48,19 @@ module Aws
       expect(creds.client).to be(client)
     end
 
+    it 'accepts client options' do
+      client = STS::Client.new(stub_responses: true)
+      expect(STS::Client).to receive(:new).
+        with(region: 'region-name').
+        and_return(client)
+      creds = AssumeRoleCredentials.new(
+        region: 'region-name',
+        role_arn: 'arn',
+        role_session_name: 'session'
+      )
+      expect(creds.client).to be(client)
+    end
+
     it 'assumes a role using the client' do
       expect(client).to receive(:assume_role).with(
         role_arn: 'arn',

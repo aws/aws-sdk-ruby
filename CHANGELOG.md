@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AssumeRoleCredentials - Added support for passing
+  `Aws::STS::Client` configuration options to `Aws::AssumeRoleCredentials#initialize`.
+  This allows you to configure things such as `:region`, `:logger`, etc without
+  having to pass an `Aws::STS::Client`.
+
+  See [related GitHub issue #957](https://github.com/aws/aws-sdk-ruby/issues/957).
+
 * Issue - Aws::S3 - Resolved an issue with pre-signed URLs generated
   with `virtual_host: true`.
 
