@@ -191,6 +191,31 @@ module AWS
         peering_connection = peering_connections.create(self, vpc)
         peering_connection.accept
         peering_connection
+
+      # @return [Boolean] Returns true if DNS resolution is supported for
+      #   this VPC
+      def dns_support
+        resp = client.describe_vpc_attribute(:vpc_id => vpc_id, :attribute => 'enableDnsSupport')
+        resp.enable_dns_support
+      end
+
+      # Enables DNS resolution support for this VPC
+      def dns_support= enable_dns_support
+        client.modify_vpc_attribute(:vpc_id => vpc_id, :enable_dns_support => { :value => enable_dns_support } )
+        enable_dns_support
+      end
+
+      # @return [Boolean] Returns true if instances launched in the VPC get
+      #   DNS hostnames in this VPC
+      def dns_hostnames
+        resp = client.describe_vpc_attribute(:vpc_id => vpc_id, :attribute => 'enableDnsHostnames')
+        resp.enable_dns_hostnames
+      end
+
+      # Enables DNS hostnames for this VPC
+      def dns_hostnames= enable_dns_hostnames
+        client.modify_vpc_attribute(:vpc_id => vpc_id, :enable_dns_hostnames => { :value => enable_dns_hostnames } )
+        enable_dns_hostnames
       end
 
     end
