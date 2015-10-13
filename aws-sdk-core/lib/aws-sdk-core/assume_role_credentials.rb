@@ -23,7 +23,7 @@ module Aws
     # @option options [String] :policy
     # @option options [Integer] :duration_seconds
     # @option options [String] :external_id
-    # @option opitons [STS::Client] :client
+    # @option options [STS::Client] :client
     def initialize(options = {})
       @options = options.dup
       @client = @options.delete(:client) || STS::Client.new
