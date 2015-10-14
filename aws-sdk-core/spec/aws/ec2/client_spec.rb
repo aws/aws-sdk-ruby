@@ -19,6 +19,13 @@ module Aws
 
       describe '#copy_snapshot' do
 
+        it 'requires a source shapshot region' do
+          ec2 = Client.new(stub_responses: true)
+          expect {
+            ec2.copy_snapshot
+          }.to raise_error(ArgumentError)
+        end
+
         it 'manages :destination_region and :presigned_url' do
 
           now = Time.now

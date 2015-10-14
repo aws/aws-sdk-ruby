@@ -31,7 +31,7 @@ module Aws
 
         def source_region_client(client, params)
           EC2::Client.new({
-            region: params[:source_region],
+            region: params[:source_region] || 'region',
             credentials: client.config.credentials,
           })
         end
