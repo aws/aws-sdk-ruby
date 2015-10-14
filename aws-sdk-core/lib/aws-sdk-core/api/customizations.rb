@@ -60,6 +60,14 @@ module Aws
         Aws::Plugins::DynamoDBCRC32Validation
       ))
 
+      api('ec2') do |api|
+        if ENV['DOCSTRINGS']
+          members = api['shapes']['CopySnapshotRequest']['members']
+          members.delete('DestinationRegion')
+          members.delete('PresignedUrl')
+        end
+      end
+
       plugins('ec2', add: %w(
         Aws::Plugins::EC2CopyEncryptedSnapshot
       ))
