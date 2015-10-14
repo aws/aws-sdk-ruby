@@ -30,10 +30,10 @@ module Aws
         end
 
         def source_region_client(client, params)
-          config = client.config.to_h
-          config.delete(:endpoint)
-          config[:region] = params[:source_region]
-          client.class.new(config)
+          EC2::Client.new({
+            region: params[:source_region],
+            credentials: client.config.credentials,
+          })
         end
 
       end
