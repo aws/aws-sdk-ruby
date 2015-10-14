@@ -53,8 +53,6 @@ module Aws
           end
         end
 
-        # @param [Exception] stub
-        # @param [Seahorse::Client::Http::Response] http_resp
         def signal_error(error, http_resp)
           if Exception === error
             http_resp.signal_error(error)

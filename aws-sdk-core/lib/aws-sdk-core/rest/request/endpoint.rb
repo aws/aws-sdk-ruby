@@ -5,7 +5,7 @@ module Aws
     module Request
       class Endpoint
 
-        # @param [Seahorse::Model::Shapes::ShapeRef]
+        # @param [Seahorse::Model::Shapes::ShapeRef] rules
         # @param [String] request_uri_pattern
         def initialize(rules, request_uri_pattern)
           @rules = rules

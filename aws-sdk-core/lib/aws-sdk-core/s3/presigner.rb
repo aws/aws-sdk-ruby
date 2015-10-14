@@ -32,7 +32,7 @@ module Aws
       #   is returned instead of the default HTTPS URL.
       #
       # @option params [Boolean] :virtual_host (false) When `true`, the
-      #   {#bucket} name will be used as the hostname. This will cause
+      #   bucket name will be used as the hostname. This will cause
       #   the returned URL to be 'http' and not 'https'.
       #
       # @raise [ArgumentError] Raises an ArgumentError if `:expires_in`

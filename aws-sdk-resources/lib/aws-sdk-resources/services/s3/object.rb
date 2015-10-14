@@ -32,7 +32,7 @@ module Aws
       # for large objects. This is required for objects that exceed 5GB.
       #
       # @note If you need to copy to a bucket in a different region, use
-      #   #{copy_from}.
+      #   {#copy_from}.
       #
       # @param [S3::Object, String, Hash] target Where to copy the object
       #   data to. `target` must be one of the following:
@@ -81,8 +81,7 @@ module Aws
       # a file field.
       #
       # See the {PresignedPost} documentation for more information.
-      # @note The `:key` is populated by {#key}. Do not specify
-      #   the `:key` or `:key_starts_with` options.
+      #
       # @option (see PresignedPost#initialize)
       # @return [PresignedPost]
       # @see PresignedPost

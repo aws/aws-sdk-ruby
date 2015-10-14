@@ -30,7 +30,7 @@ module Aws
     #
     #   * `:request_params` - The user provided request parameters. Long
     #     strings are truncated/summarized if they exceed the
-    #     {#max_string_size}.  Other objects are inspected.
+    #     `:max_string_size`.  Other objects are inspected.
     #
     #   * `:time` - The total time in seconds spent on the
     #     request.  This includes client side time spent building
