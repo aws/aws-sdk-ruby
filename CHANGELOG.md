@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Resolved an issue where `Aws::EC2::Client#copy_snapshot`
+  would not compute the required presigned url when the `:destination_region`
+  was populated.
+
+  See [related GitHub issue #928](https://github.com/aws/aws-sdk-ruby/issues/928).
+
 * Issue - Aws::CloudFormation - Added support for rollback states to the
   `Aws::CloudFormation::Client#wait_until` `:stack_create_complete` waiter.
 

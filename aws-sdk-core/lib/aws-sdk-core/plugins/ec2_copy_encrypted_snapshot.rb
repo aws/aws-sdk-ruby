@@ -15,10 +15,8 @@ module Aws
 
         def call(context)
           params = context.params
-          unless params.key?(:destination_region)
-            params[:destination_region] = context.config.region
-            params[:presigned_url] = presigned_url(context.client, params)
-          end
+          params[:destination_region] = context.config.region
+          params[:presigned_url] = presigned_url(context.client, params)
           @handler.call(context)
         end
 
@@ -27,6 +25,7 @@ module Aws
         def presigned_url(client, params)
           client = source_region_client(client, params)
           client.handle(PresignHandler, step: :build, priority: 0)
+          client.handlers.remove(Handler)
           client.copy_snapshot(params).data # presigned url
         end
 

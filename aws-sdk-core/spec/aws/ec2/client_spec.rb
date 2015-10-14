@@ -4,13 +4,40 @@ module Aws
   module EC2
     describe Client do
 
-      let(:credentials) { Aws::Credentials.new('akid', 'secret') }
+      describe 'gov-cloud' do
 
-      it 'expands the endpoint correctly for gov-cloud' do
-        ec2 = Client.new(region: 'us-gov-west-1', credentials: credentials)
-        expect(ec2.config.endpoint.to_s).to eq('https://ec2.us-gov-west-1.amazonaws.com')
+        it 'expands the endpoint correctly for gov-cloud' do
+          ec2 = Client.new({
+            region: 'us-gov-west-1',
+            credentials: Credentials.new('key', 'secret'),
+          })
+          endpoint = ec2.config.endpoint.to_s
+          expect(endpoint).to eq('https://ec2.us-gov-west-1.amazonaws.com')
+        end
+
       end
 
+      describe '#copy_snapshot' do
+
+        it 'manages :destination_region and :presigned_url' do
+
+          now = Time.now
+          allow(Time).to receive(:now).and_return(now)
+          dest_region = 'us-west-1'
+          src_region = 'us-west-2'
+          snap_id = 'id'
+
+          ec2 = Client.new(region: dest_region, stub_responses: true)
+          resp = ec2.copy_snapshot({
+            source_region: src_region,
+            source_snapshot_id: snap_id,
+          })
+
+          expect(resp.context.params[:destination_region]).to eq(dest_region)
+          expect(resp.context.params[:presigned_url]).to match(/^https:\/\/ec2\.#{src_region}.amazonaws.com\?Action=CopySnapshot&DestinationRegion=#{dest_region}&SourceRegion=#{src_region}&SourceSnapshotId=#{snap_id}&Version=\d{4}-\d{2}-\d{2}&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=stubbed-akid%2F#{now.strftime('%Y%m%d')}%2F#{src_region}%2Fec2%2Faws4_request&X-Amz-Date=#{now.strftime('%Y%m%dT%H%M%SZ')}&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=.+$/)
+        end
+
+      end
     end
   end
 end
