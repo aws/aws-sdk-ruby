@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Adds support for Service Side Encryption (AES256) to `Aws::S3::Client#upload_part`.
+
 * Issue - Aws::EC2 - Resolved an issue where `Aws::EC2::Client#copy_snapshot`
   would not compute the required presigned url when the `:destination_region`
   was populated.
