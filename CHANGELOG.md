@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.30 (2015-10-15)
 ------------------
 
 * Feature - Aws::KMS - This release of AWS Key Management Service introduces the
