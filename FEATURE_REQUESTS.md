@@ -10,6 +10,13 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Proxy Option to Instance Profile Credentials
+
+The SDK ignores environment proxies by default for security reasons. Add the ability
+to configure a proxy or to enable the default proxy from the constructor.
+
+See [related GitHub issue #956](https://github.com/aws/aws-sdk-ruby/issues/956).
+
 ### Configurable Default Retry Limit for Instance Profile Credentials
 
 The default credential provider chain will check for credentials from the EC2 instance metadata service once before giving up. This is intentional to prevent development environments from hanging for an extended period of time when not running on Amazon EC2.
