@@ -3,12 +3,17 @@ module Aws
     module Customizations
 
       @apis = {}
+      @docs = {}
       @plugins = {}
 
       class << self
 
         def api(prefix, &block)
           @apis[prefix] = block
+        end
+
+        def doc(prefix, &block)
+          @docs[prefix] = block
         end
 
         def plugins(prefix, options)
@@ -22,6 +27,12 @@ module Aws
           metadata = api['metadata'] || {}
           prefix = metadata['endpointPrefix']
           @apis[prefix].call(api) if @apis[prefix]
+        end
+
+        def apply_doc_customizations(api)
+          metadata = api['metadata'] || {}
+          prefix = metadata['endpointPrefix']
+          @docs[prefix].call(api) if @docs[prefix]
         end
 
         def apply_plugins(client_class)
@@ -109,6 +120,11 @@ module Aws
 
       api('lambda') do |api|
         api['shapes']['Timestamp']['type'] = 'timestamp'
+      end
+
+      doc('lambda') do |docs|
+        docs['shapes']['Blob']['refs']['UpdateFunctionCodeRequest$ZipFile'] =
+          "<p>.zip file containing your packaged source code.</p>"
       end
 
       plugins('machinelearning', add: %w(
