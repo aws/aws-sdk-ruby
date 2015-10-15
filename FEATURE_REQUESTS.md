@@ -10,6 +10,14 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add ability to pre-sign a request
+
+To work around limitations of S3 bucket policies, it is necessary to send certain headers
+as headers and to not hoist them to querystring of a request URI. This would be useful
+functionality in general.
+
+See [related GitHub issue #874](https://github.com/aws/aws-sdk-ruby/issues/874).
+
 ### Extract SigV4 Signer into a Gem
 
 More services have interfaces like Amazon Elasticsearch Service where it would be useful to use the signature version 4 interface directly. It is currently marked API private. It should be extracted, polished and released as a separate gem.
