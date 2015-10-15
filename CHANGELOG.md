@@ -1,7 +1,12 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::S3 - Adds support for Service Side Encryption (AES256) to `Aws::S3::Client#upload_part`.
+* Feature - Aws::KMS - This release of AWS Key Management Service introduces the
+  ability to delete customer master keys (CMKs), including two new APIs for
+  scheduling and canceling key deletion.
+
+* Feature - Aws::S3 - Adds support for Service Side Encryption (AES256) to
+  `Aws::S3::Client#upload_part`.
 
 * Issue - Aws::EC2 - Resolved an issue where `Aws::EC2::Client#copy_snapshot`
   would not compute the required presigned url when the `:destination_region`
