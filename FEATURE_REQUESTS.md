@@ -10,6 +10,12 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Extract SigV4 Signer into a Gem
+
+More services have interfaces like Amazon Elasticsearch Service where it would be useful to use the signature version 4 interface directly. It is currently marked API private. It should be extracted, polished and released as a separate gem.
+
+See [related GitHub issue #961](https://github.com/aws/aws-sdk-ruby/issues/961).
+
 ### Add Proxy Option to Instance Profile Credentials
 
 The SDK ignores environment proxies by default for security reasons. Add the ability
