@@ -5,6 +5,11 @@ Unreleased Changes
 
   See [related GitHub issue #939](https://github.com/aws/aws-sdk-ruby/pull/939).
 
+* Issue - Aws::S3 - The `Aws::S3::Object#copy_from` no longer modifies the
+  given options hash.
+
+  See [related GitHub issue #947](https://github.com/aws/aws-sdk-ruby/issues/947).
+
 2.1.30 (2015-10-15)
 ------------------
 
