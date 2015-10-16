@@ -12,21 +12,18 @@ module Aws
       end
 
       def copy_from(source, options = {})
-        apply_options(source, options)
-        copy_object(source, @object, options)
+        copy_object(source, @object, merge_options(source, options))
       end
 
 
       def copy_to(target, options = {})
-        apply_options(target, options)
-        copy_object(@object, target, options)
+        copy_object(@object, target, merge_options(target, options))
       end
 
       private
 
       def copy_object(source, target, options)
         target_bucket, target_key = copy_target(target)
-        options = options.dup
         options[:bucket] = target_bucket
         options[:key] = target_key
         options[:copy_source] = copy_source(source)
@@ -59,13 +56,14 @@ module Aws
         end
       end
 
-      def apply_options(source_or_target, options)
+      def merge_options(source_or_target, options)
         if Hash === source_or_target
-          source_or_target.each do |key, value|
-            next if key == :bucket
-            next if key == :key
-            options[key] = value
+          source_or_target.inject(options.dup) do |opts, (key, value)|
+            opts[key] = value unless [:bucket, :key].include?(key)
+            opts
           end
+        else
+          options.dup
         end
       end
 
