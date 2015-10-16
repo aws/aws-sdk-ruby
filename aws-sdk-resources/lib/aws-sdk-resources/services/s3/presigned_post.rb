@@ -385,7 +385,7 @@ module Aws
       end
 
       # The minimum and maximum allowable size for the uploaded content.
-      # @param [Range<Ineger>] byte_range
+      # @param [Range<Integer>] byte_range
       # @return [self]
       def content_length_range(byte_range)
         min = byte_range.begin
