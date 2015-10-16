@@ -4,6 +4,9 @@ module Aws
 
       alias size content_length
 
+      # Copies another object to this object. Use `multipart_copy: true`
+      # for large objects. This is required for objects that exceed 5GB.'
+      #
       # @param [S3::Object, String, Hash] source Where to copy object
       #   data from. `source` must be one of the following:
       #
@@ -16,6 +19,25 @@ module Aws
       #   necessary for objects larger than 5GB and can provide
       #   performance improvements on large objects. Amazon S3 does
       #   not accept multipart copies for objects smaller than 5MB.
+      #
+      # @example Basic object copy
+      #
+      #   bucket = Aws::S3::Bucket.new('target-bucket')
+      #   object = bucket.object('target-key')
+      #
+      #   # source as String
+      #   object.copy_from('source-bucket/source-key')
+      #
+      #   # source as Hash
+      #   object.copy_from(bucket:'source-bucket', key:'source-key')
+      #
+      #   # source as Aws::S3::Object
+      #   object.copy_from(bucket.object('source-key'))
+      #
+      # @example Managed copy of large objects
+      #
+      #   # uses multipart upload APIs to copy object
+      #   object.copy_from('src-bucket/src-key', multipart_copy: true)
       #
       # @see #copy_to
       #
