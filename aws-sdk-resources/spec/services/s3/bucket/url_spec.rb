@@ -24,8 +24,8 @@ module Aws
         end
 
         it 'uses path-style addressing when the bucket name is not dns-compatible' do
-          bucket = Bucket.new('Bucket/Name', client: client)
-          expect(bucket.url).to eq('https://s3.amazonaws.com/Bucket/Name')
+          bucket = Bucket.new('BucketName', client: client)
+          expect(bucket.url).to eq('https://s3.amazonaws.com/BucketName')
         end
 
         it 'uses path-style addressing when the dns-compat bucket name contains dots' do
