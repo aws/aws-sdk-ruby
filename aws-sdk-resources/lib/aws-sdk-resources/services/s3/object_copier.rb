@@ -12,11 +12,13 @@ module Aws
       end
 
       def copy_from(source, options = {})
+        apply_options(source, options)
         copy_object(source, @object, options)
       end
 
 
       def copy_to(target, options = {})
+        apply_options(target, options)
         copy_object(@object, target, options)
       end
 
@@ -54,6 +56,16 @@ module Aws
         else
           msg = "expected target to be an Aws::S3::Object, Hash, or String"
           raise ArgumentError, msg
+        end
+      end
+
+      def apply_options(source_or_target, options)
+        if Hash === source_or_target
+          source_or_target.each do |key, value|
+            next if key == :bucket
+            next if key == :key
+            options[key] = value
+          end
         end
       end
 

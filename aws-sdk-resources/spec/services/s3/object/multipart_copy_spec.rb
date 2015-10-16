@@ -38,6 +38,20 @@ module Aws
             object.copy_from(bucket:'source-bucket', key:'source-key')
           end
 
+          it 'accept a hash with options merged' do
+            expect(client).to receive(:copy_object).with({
+              bucket: 'bucket',
+              key: 'key',
+              copy_source: 'source-bucket/source-key',
+              content_type: 'text/plain',
+            })
+            object.copy_from(
+              bucket: 'source-bucket',
+              key: 'source-key',
+              content_type: 'text/plain'
+            )
+          end
+
           it 'accepts an S3::Object source' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
@@ -84,6 +98,20 @@ module Aws
               copy_source: 'bucket/key',
             })
             object.copy_to(bucket:'target-bucket', key:'target-key')
+          end
+
+          it 'accept a hash with options merged' do
+            expect(client).to receive(:copy_object).with({
+              bucket: 'target-bucket',
+              key: 'target-key',
+              copy_source: 'bucket/key',
+              content_type: 'text/plain',
+            })
+            object.copy_to(
+              bucket: 'target-bucket',
+              key: 'target-key',
+              content_type: 'text/plain'
+            )
           end
 
           it 'accepts an S3::Object source' do

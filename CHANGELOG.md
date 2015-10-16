@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - The `#copy_from` and `#copy_to` methods of `Aws::S3::Object`
+  now accept the source or target bucket and key as a hash with mixed
+  options.
+
+  ```ruby
+  # old format
+  obj.copy_from({ bucket: 'source-bucket', key: 'source-key' }, { multipart_copy: true })
+
+  # new format
+  obj.copy_from(bucket: 'source-bucket', key: 'source-key', multipart_copy: true)
+  ```
+
+  Passing two hashes is still valid.
+
+  See [related GitHub issue #963](https://github.com/aws/aws-sdk-ruby/issues/963).
+
 * Feature - Aws::S3 - `Aws::S3::Client#put_object` now accepts closed files.
 
   See [related GitHub issue #939](https://github.com/aws/aws-sdk-ruby/pull/939).
