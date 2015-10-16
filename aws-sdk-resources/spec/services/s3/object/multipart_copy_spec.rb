@@ -212,6 +212,12 @@ module Aws
             )
           end
 
+          it 'does not modify given options' do
+            options = { multipart_copy: true }
+            object.copy_from('source-bucket/source/key', options)
+            expect(options).to eq(multipart_copy: true)
+          end
+
         end
       end
     end

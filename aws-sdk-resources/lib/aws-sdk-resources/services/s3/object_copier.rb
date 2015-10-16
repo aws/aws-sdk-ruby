@@ -24,6 +24,7 @@ module Aws
 
       def copy_object(source, target, options)
         target_bucket, target_key = copy_target(target)
+        options = options.dup
         options[:bucket] = target_bucket
         options[:key] = target_key
         options[:copy_source] = copy_source(source)
