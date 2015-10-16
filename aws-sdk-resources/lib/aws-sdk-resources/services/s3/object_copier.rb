@@ -36,9 +36,9 @@ module Aws
 
       def copy_source(source)
         case source
-        when String then source
-        when Hash then "#{source[:bucket]}/#{source[:key]}"
-        when S3::Object then "#{source.bucket_name}/#{source.key}"
+        when String then Seahorse::Util.uri_path_escape(source)
+        when Hash then "#{source[:bucket]}/#{escape(source[:key])}"
+        when S3::Object then "#{source.bucket_name}/#{escape(source.key)}"
         else
           msg = "expected source to be an Aws::S3::Object, Hash, or String"
           raise ArgumentError, msg
@@ -65,6 +65,10 @@ module Aws
         else
           options.dup
         end
+      end
+
+      def escape(str)
+        Seahorse::Util.uri_path_escape(str)
       end
 
     end

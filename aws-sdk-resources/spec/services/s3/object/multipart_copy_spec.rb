@@ -4,7 +4,7 @@ module Aws
   module S3
     describe Object do
 
-      let(:object) { S3::Object.new('bucket', 'key', stub_responses: true) }
+      let(:object) { S3::Object.new('bucket', 'unescaped/key path', stub_responses: true) }
 
       let(:client) { object.client }
 
@@ -14,34 +14,34 @@ module Aws
           it 'supports the deprecated form' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
-              key: 'key',
-              copy_source: 'source-bucket/source-key',
+              key: 'unescaped/key path',
+              copy_source: 'source-bucket/escaped/source/key%20path',
             })
-            object.copy_from(copy_source:'source-bucket/source-key')
+            object.copy_from(copy_source: 'source-bucket/escaped/source/key%20path')
           end
 
           it 'accepts a string source' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
-              key: 'key',
-              copy_source: 'source-bucket/source-key',
+              key: 'unescaped/key path',
+              copy_source: 'source-bucket/source/key%20path',
             })
-            object.copy_from('source-bucket/source-key')
+            object.copy_from('source-bucket/source/key path')
           end
 
           it 'accepts a hash source' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
-              key: 'key',
-              copy_source: 'source-bucket/source-key',
+              key: 'unescaped/key path',
+              copy_source: 'source-bucket/unescaped/source/key%20path'
             })
-            object.copy_from(bucket:'source-bucket', key:'source-key')
+            object.copy_from(bucket:'source-bucket', key:'unescaped/source/key path')
           end
 
           it 'accept a hash with options merged' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
-              key: 'key',
+              key: 'unescaped/key path',
               copy_source: 'source-bucket/source-key',
               content_type: 'text/plain',
             })
@@ -55,17 +55,17 @@ module Aws
           it 'accepts an S3::Object source' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
-              key: 'key',
-              copy_source: 'source-bucket/source-key',
+              key: 'unescaped/key path',
+              copy_source: 'source-bucket/unescaped/source/key%20path',
             })
-            src = S3::Object.new('source-bucket', 'source-key', stub_responses:true)
+            src = S3::Object.new('source-bucket', 'unescaped/source/key path', stub_responses:true)
             object.copy_from(src)
           end
 
           it 'accepts additional options' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
-              key: 'key',
+              key: 'unescaped/key path',
               copy_source: 'source-bucket/source-key',
               acl: 'public-read',
             })
@@ -86,7 +86,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'target-bucket',
               key: 'target-key',
-              copy_source: 'bucket/key',
+              copy_source: 'bucket/unescaped/key%20path',
             })
             object.copy_to('target-bucket/target-key')
           end
@@ -95,7 +95,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'target-bucket',
               key: 'target-key',
-              copy_source: 'bucket/key',
+              copy_source: 'bucket/unescaped/key%20path',
             })
             object.copy_to(bucket:'target-bucket', key:'target-key')
           end
@@ -104,7 +104,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'target-bucket',
               key: 'target-key',
-              copy_source: 'bucket/key',
+              copy_source: 'bucket/unescaped/key%20path',
               content_type: 'text/plain',
             })
             object.copy_to(
@@ -118,7 +118,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'target-bucket',
               key: 'target-key',
-              copy_source: 'bucket/key',
+              copy_source: 'bucket/unescaped/key%20path',
             })
             target = S3::Object.new('target-bucket', 'target-key', stub_responses:true)
             object.copy_to(target)
@@ -128,7 +128,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'target-bucket',
               key: 'target-key',
-              copy_source: 'bucket/key',
+              copy_source: 'bucket/unescaped/key%20path',
               acl: 'public-read',
             })
             object.copy_to('target-bucket/target-key', acl: 'public-read')
@@ -156,12 +156,12 @@ module Aws
 
           it 'performs multipart uploads when :multipart_copy is true' do
             expect(client).to receive(:create_multipart_upload).
-              with(bucket: 'bucket', key: 'key').
+              with(bucket: 'bucket', key: 'unescaped/key path').
               and_return(client.stub_data(:create_multipart_upload, upload_id:'id'))
             (1..6).each do |n|
               expect(client).to receive(:upload_part_copy).with(
                 bucket: 'bucket',
-                key: 'key',
+                key: 'unescaped/key path',
                 part_number: n,
                 copy_source: 'source-bucket/source/key',
                 copy_source_range: "bytes=#{(n-1)*52428800}-#{n*52428800-1}",
@@ -170,7 +170,7 @@ module Aws
             end
             expect(client).to receive(:complete_multipart_upload).with({
               bucket: 'bucket',
-              key: 'key',
+              key: 'unescaped/key path',
               upload_id: 'id',
               multipart_upload: {
                 parts: (1..6).map { |n| { etag: "etag#{n}", part_number: n } }
@@ -182,13 +182,13 @@ module Aws
           it 'supports alternative part sizes' do
 
             expect(client).to receive(:create_multipart_upload).
-              with(bucket: 'bucket', key: 'key').
+              with(bucket: 'bucket', key: 'unescaped/key path').
               and_return(client.stub_data(:create_multipart_upload, upload_id:'id'))
 
             (1..60).each do |n|
               expect(client).to receive(:upload_part_copy).with(
                 bucket: 'bucket',
-                key: 'key',
+                key: 'unescaped/key path',
                 part_number: n,
                 copy_source: 'source-bucket/source/key',
                 copy_source_range: "bytes=#{(n-1)*5242880}-#{n*5242880-1}",
@@ -197,7 +197,7 @@ module Aws
             end
             expect(client).to receive(:complete_multipart_upload).with({
               bucket: 'bucket',
-              key: 'key',
+              key: 'unescaped/key path',
               upload_id: 'id',
               multipart_upload: {
                 parts: (1..60).map { |n| { etag: "etag#{n}", part_number: n } }
@@ -212,10 +212,10 @@ module Aws
           it 'aborts the upload on errors' do
             client.stub_responses(:upload_part_copy, 'NoSuchKey')
             allow(client).to receive(:create_multipart_upload).
-              with(bucket: 'bucket', key: 'key').
+              with(bucket: 'bucket', key: 'unescaped/key path').
               and_return(client.stub_data(:create_multipart_upload, upload_id:'id'))
             expect(client).to receive(:abort_multipart_upload).
-              with(bucket: 'bucket', key: 'key', upload_id: 'id')
+              with(bucket: 'bucket', key: 'unescaped/key path', upload_id: 'id')
             expect {
               object.copy_from('source-bucket/source/key', multipart_copy: true)
             }.to raise_error(Aws::S3::Errors::NoSuchKey)

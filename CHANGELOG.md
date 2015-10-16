@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - The `#copy_from` and `#copy_to` methods of `Aws::S3::Object`
+  will now correctly encode URL un-safe characters as required by Amazon S3.
+  Without the fix, these calls fail with a signature error.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new
+  obj = s3.bucket('target-bucket').object('target-key')
+
+  # the key will now correctly be encoded as 'unescaped/key%20path'
+  obj.copy_from(bucket:'source-bucket', key:'unescaped/key path')
+
+  # the key will now correctly be encoded as 'unescaped/key%20path'
+  src = S3::Object.new('source-bucket', 'unescaped/key path')
+  obj.copy_from(src)
+
+  # the key will now correctly be encoded as 'unescaped/key%20path'
+  obj.copy_from('source-bucket/unescaped/key path')
+  ```
+
+  If you have previously worked around this issue, you should remove your
+  code that URL encodes the key.
+
+  See [related GitHub issue #944](https://github.com/aws/aws-sdk-ruby/issues/944).
+
 * Feature - Aws::S3 - The `#copy_from` and `#copy_to` methods of `Aws::S3::Object`
   now accept the source or target bucket and key as a hash with mixed
   options.

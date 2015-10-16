@@ -1,5 +1,30 @@
 # Upgrade Notes
 
+## `aws-sdk-resources` - v2.2.0
+
+* A bug was discovered in `Aws::S3::Object#copy_from` and
+  `Aws::S3::Object#copy_to` where source and target keys were not getting
+  properly URL encoded. This would result in a signature error.
+
+  If you have written code to work around this bug, you should remove the
+  URL encoding of your key or it will be double encoded. This works for
+  all three calling patterns.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new
+  obj = s3.bucket('target-bucket').object('target-key')
+
+  # the key will now correctly be encoded as 'unescaped/key%20path'
+  obj.copy_from(bucket:'source-bucket', key:'unescaped/key path')
+
+  # the key will now correctly be encoded as 'unescaped/key%20path'
+  src = S3::Object.new('source-bucket', 'unescaped/key path')
+  obj.copy_from(src)
+
+  # the key will now correctly be encoded as 'unescaped/key%20path'
+  obj.copy_from('source-bucket/unescaped/key path')
+  ```
+
 ## `aws-sdk-core` - v2.0.38
 
 * AWS Lambda is exiting their preview period and has made changes to
