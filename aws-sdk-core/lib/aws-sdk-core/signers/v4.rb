@@ -134,7 +134,7 @@ module Aws
         if @service_name == 's3'
           path
         else
-          path.gsub(/[^\/]+/) { |segment| Seahorse::Util.uri_escape(segment) }
+          Seahorse::Util.uri_path_escape(path)
         end
       end
 

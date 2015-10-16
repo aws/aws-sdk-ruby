@@ -87,7 +87,7 @@ module Aws
           url.host = "#{name}.#{url.host}"
         else
           url.path += '/' unless url.path[-1] == '/'
-          url.path += path_escape(name)
+          url.path += Seahorse::Util.uri_path_escape(name)
         end
         url.to_s
       end
@@ -97,9 +97,6 @@ module Aws
         !client.config.force_path_style
       end
 
-      def path_escape(name)
-        name.gsub(/[^\/]+/) {|part| Seahorse::Util.uri_escape(part) }
-      end
     end
   end
 end
