@@ -36,7 +36,7 @@ module Aws
 
       def copy_source(source)
         case source
-        when String then Seahorse::Util.uri_path_escape(source)
+        when String then escape(source)
         when Hash then "#{source[:bucket]}/#{escape(source[:key])}"
         when S3::Object then "#{source.bucket_name}/#{escape(source.key)}"
         else
