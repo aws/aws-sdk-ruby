@@ -41,6 +41,18 @@ Adding a retry limit for instance profile credentials might be a possible soluti
 
 See [related GitHub issue #717](https://github.com/aws/aws-sdk-ruby/issues/717).
 
+### Add Region Enumeration
+
+Add the ability to programmatically determine what region a specific service is available in. Some useful interfaces include:
+
+* pass the service name; return a list of supported regions
+* pass a region; return a list of supported services.
+* pass service_name and region; return true/false if region supports that service
+
+This feature would be an interface for the information provided here http://docs.aws.amazon.com/general/latest/gr/rande.html#ct_region
+
+See [related GitHub issue #926](https://github.com/aws/aws-sdk-ruby/issues/926).
+
 ### Signed CloudFront URLs
 
 Amazon CloudFront supports pre-signed URLs, similar to those used by Amazon S3. It would be helpful to have a pre-signed url builder for SDK users.
