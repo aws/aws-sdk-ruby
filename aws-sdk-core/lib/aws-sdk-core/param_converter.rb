@@ -97,6 +97,14 @@ module Aws
         @converters[shape_class][value_class] = converter || block
       end
 
+      def ensure_open(file)
+        if file.closed?
+          File.open(file.path, 'rb')
+        else
+          file
+        end
+      end
+
       # @api private
       def c(shape, value)
         if converter = converter_for(shape, value)
@@ -195,7 +203,8 @@ module Aws
     end
 
     add(BlobShape, IO)
-    add(BlobShape, Tempfile)
+    add(BlobShape, File) { |file| ensure_open(file) }
+    add(BlobShape, Tempfile) { |tmpfile| ensure_open(tmpfile) }
     add(BlobShape, StringIO)
     add(BlobShape, String)
 

@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - `Aws::S3::Client#put_object` now accepts closed files.
+
+  See [related GitHub issue #939](https://github.com/aws/aws-sdk-ruby/pull/939).
+
 2.1.30 (2015-10-15)
 ------------------
 

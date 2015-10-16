@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'stringio'
+require 'tempfile'
 
 module Aws
   module S3
@@ -39,6 +40,27 @@ module Aws
           resp = client.put_object(bucket:'bucket-name', key:'key/path')
           expect(resp.context.http_request.endpoint.to_s).to eq(
             "http://custom.domain/path/prefix/bucket-name/key/path")
+        end
+
+      end
+
+      describe 'closed files' do
+
+        it 'accepts closed File objects' do
+          closed_file = File.open(__FILE__, 'rb')
+          closed_file.close
+          client = Client.new(stub_responses: true)
+          resp = client.put_object(bucket:'aws-sdk', key:'key', body: closed_file)
+          expect(resp.context.http_request.body_contents).to eq(File.read(__FILE__))
+        end
+
+        it 'accepts closed Tempfile objects' do
+          tmpfile = Tempfile.new('tmpfile')
+          tmpfile.write('abc')
+          tmpfile.close
+          client = Client.new(stub_responses: true)
+          resp = client.put_object(bucket:'aws-sdk', key:'key', body: tmpfile)
+          expect(resp.context.http_request.body_contents).to eq('abc')
         end
 
       end
