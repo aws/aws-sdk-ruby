@@ -29,10 +29,9 @@ module Aws
           @apis[prefix].call(api) if @apis[prefix]
         end
 
-        def apply_doc_customizations(api)
-          metadata = api['metadata'] || {}
-          prefix = metadata['endpointPrefix']
-          @docs[prefix].call(api) if @docs[prefix]
+        def apply_doc_customizations(api, docs)
+          prefix = api.metadata['endpointPrefix']
+          @docs[prefix].call(docs) if @docs[prefix]
         end
 
         def apply_plugins(client_class)

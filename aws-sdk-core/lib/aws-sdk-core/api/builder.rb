@@ -34,8 +34,8 @@ module Aws
       # @param [Hash] definition
       # @return [Seahorse::Model::Api]
       def build(definition, options = {})
-        docs = build_docstring_provider(options)
         api = build_api(definition)
+        docs = build_docstring_provider(api, options)
         shapes = build_shape_map(definition, api, docs)
         build_operations(definition, api, shapes, docs)
         build_struct_classes(shapes, options)
@@ -44,10 +44,10 @@ module Aws
 
       private
 
-      def build_docstring_provider(options)
+      def build_docstring_provider(api, options)
         if options[:docs] && ENV['DOCSTRINGS']
           docs = Json.load_file(options[:docs])
-          Customizations.apply_doc_customizations(docs)
+          Customizations.apply_doc_customizations(api, docs)
           Docs::DocstringProvider.new(docs)
         else
           Docs::NullDocstringProvider.new
