@@ -69,7 +69,7 @@ module Aws
       # Retry loading credentials up to 3 times is the instance metadata
       # service is responding but is returning invalid JSON documents
       # in response to the GET profile credentials call.
-      retry_errors([JSON::ParserError], max_retries: 3) do
+      retry_errors([JSON::ParserError, StandardError], max_retries: 3) do
         c = JSON.parse(get_credentials.to_s)
         @credentials = Credentials.new(
           c['AccessKeyId'],

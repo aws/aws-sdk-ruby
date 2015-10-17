@@ -118,6 +118,20 @@ module Aws
         }.to raise_error(JSON::ParserError)
       end
 
+      it 'retries errors parsing expiration time 3 times' do
+        stub_request(:get, "http://169.254.169.254#{path}").
+          to_return(:status => 500).
+          to_return(:status => 200, :body => "profile-name\n")
+        stub_request(:get, "http://169.254.169.254#{path}profile-name").
+          to_return(:status => 200, :body => '{ "Expiration": "Expiration" }').
+          to_return(:status => 200, :body => '{ "Expiration": "Expiration" }').
+          to_return(:status => 200, :body => '{ "Expiration": "Expiration" }').
+          to_return(:status => 200, :body => '{ "Expiration": "Expiration" }')
+        expect {
+          InstanceProfileCredentials.new(backoff:0)
+        }.to raise_error(ArgumentError)
+      end
+
       describe 'auto refreshing' do
 
         # expire in 4 minutes

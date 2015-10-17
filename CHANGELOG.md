@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::InstanceProfileCredentials - Now retries errors
+  raised while attempting to parse the expiration time from
+  instance metadata credentials.
+
+  See [related GitHub issue #880](https://github.com/aws/aws-sdk-ruby/issues/880).
+
 * Issue - Aws::S3 - The `#copy_from` and `#copy_to` methods of `Aws::S3::Object`
   will now correctly encode URL un-safe characters as required by Amazon S3.
   Without the fix, these calls fail with a signature error.
