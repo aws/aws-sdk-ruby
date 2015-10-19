@@ -17,6 +17,16 @@ module Aws
 
       end
 
+      describe ':region' do
+
+        it 'should not be an availability zone' do
+          expect {
+            Client.new(region: 'us-east-1a')
+          }.to raise_error(ArgumentError)
+        end
+
+      end
+
       describe '#copy_snapshot' do
 
         it 'requires a source shapshot region' do

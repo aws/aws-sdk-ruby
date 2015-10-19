@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added helpful error messages when configuring an
+  `Aws::EC2::Client` with region which is actually an availability zone.
+  This will prevent users from getting unhelpful networking errors.
+
+  ```ruby
+  Aws::EC2::Client.new(region: 'us-east-1a')
+  #=> raises ArgumentError: :region should be a region name, not an availability zone name; try `us-west-2' instead of `us-west-2a'
+  ```
+
+  See [related GitHub issue #966](https://github.com/aws/aws-sdk-ruby/issues/966).
+
 * Issue - Aws::InstanceProfileCredentials - Now retries errors
   raised while attempting to parse the expiration time from
   instance metadata credentials.

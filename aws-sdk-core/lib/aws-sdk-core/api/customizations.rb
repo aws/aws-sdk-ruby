@@ -80,6 +80,7 @@ module Aws
 
       plugins('ec2', add: %w(
         Aws::Plugins::EC2CopyEncryptedSnapshot
+        Aws::Plugins::EC2RegionValidation
       ))
 
       api('glacier') do |api|
