@@ -63,7 +63,7 @@ Unreleased Changes
   ability to delete customer master keys (CMKs), including two new APIs for
   scheduling and canceling key deletion.
 
-* Feature - Aws::S3 - Adds support for Service Side Encryption (AES256) to
+* Feature - Aws::S3 - Adds support for Server-Side Encryption (AES256) to
   `Aws::S3::Client#upload_part`.
 
 * Issue - Aws::EC2 - Resolved an issue where `Aws::EC2::Client#copy_snapshot`
