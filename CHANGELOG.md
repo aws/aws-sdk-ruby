@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.31 (2015-10-22)
 ------------------
 
 * Feature - Aws::AutoScaling - The Amazon Auto Scaling service now allows you to
