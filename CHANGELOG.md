@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Adds support for resource-based policies in the AWS IAM
+  policy simulator.
+
 * Feature - Aws::EC2 - Added helpful error messages when configuring an
   `Aws::EC2::Client` with region which is actually an availability zone.
   This will prevent users from getting unhelpful networking errors.
