@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - The Amazon Auto Scaling service now allows you to
+  create launch configurations that include encrypted Amazon Elastic Block Store
+  (EBS) volumes.
+
 * Feature - Aws::IAM - Adds support for resource-based policies in the AWS IAM
   policy simulator.
 
