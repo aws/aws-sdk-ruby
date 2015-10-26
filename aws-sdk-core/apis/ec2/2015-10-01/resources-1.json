@@ -37,7 +37,8 @@
           "type": "KeyPair",
           "identifiers": [
             { "target": "Name", "source": "response", "path": "KeyName" }
-          ]
+          ],
+          "path": "@"
         }
       },
       "CreateNetworkAcl": {
@@ -147,7 +148,7 @@
       "ImportKeyPair": {
         "request": { "operation": "ImportKeyPair" },
         "resource": {
-          "type": "KeyPair",
+          "type": "KeyPairInfo",
           "identifiers": [
             { "target": "Name", "source": "response", "path": "KeyName" }
           ]
@@ -198,7 +199,7 @@
       },
       "KeyPair": {
         "resource": {
-          "type": "KeyPair",
+          "type": "KeyPairInfo",
           "identifiers": [
             { "target": "Name", "source": "input" }
           ]
@@ -353,7 +354,7 @@
       "KeyPairs": {
         "request": { "operation": "DescribeKeyPairs" },
         "resource": {
-          "type": "KeyPair",
+          "type": "KeyPairInfo",
           "identifiers": [
             { "target": "Name", "source": "response", "path": "KeyPairs[].KeyName" }
           ],
@@ -490,7 +491,7 @@
         "request": {
           "operation": "DescribeAddresses",
           "params": [
-            { "target": "PublicIp", "source": "identifier", "name": "PublicIp" }
+            { "target": "PublicIps[]", "source": "identifier", "name": "PublicIp" }
           ]
         },
         "path": "Addresses[0]"
@@ -953,7 +954,7 @@
         },
         "KeyPair": {
           "resource": {
-            "type": "KeyPair",
+            "type": "KeyPairInfo",
             "identifiers": [
               { "target": "Name", "source": "data", "path": "KeyName" }
             ]
@@ -1089,6 +1090,25 @@
       }
     },
     "KeyPair": {
+      "identifiers": [
+        {
+          "name": "Name",
+          "memberName": "KeyName"
+        }
+      ],
+      "shape": "KeyPair",
+      "actions": {
+        "Delete": {
+          "request": {
+            "operation": "DeleteKeyPair",
+            "params": [
+              { "target": "KeyName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        }
+      }
+    },
+    "KeyPairInfo": {
       "identifiers": [
         {
           "name": "Name",
