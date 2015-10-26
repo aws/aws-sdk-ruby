@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SSM - API update for Amazon Simple Systems Management Service.
+
 * Feature - Aws::APIGateway - Added for Amazon API Gateway.
 
   See [related GitHub issue #884](https://github.com/aws/aws-sdk-ruby/issues/884).
