@@ -18,7 +18,7 @@ module Aws
           }
         })
 
-        expect(resp.context.http_request.endpoint.to_s).to eq('https://apigateway.stubbed-region.amazonaws.com/restapis/rest-api-id/stages/stage-name/sdks/sdk-type?abc=xyz&key=value&string=string')
+        expect(resp.context.http_request.endpoint.to_s).to match(/\?abc=xyz&key=value&string=string$/)
 
       end
 
