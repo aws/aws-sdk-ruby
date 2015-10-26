@@ -250,6 +250,7 @@ to be backwards compatible.
 | AWS Storage Gateway                      | StorageGateway               | 2013-06-30  |
 | AWS Support                              | Support                      | 2013-04-15  |
 | AWS WAF                                  | WAF                          | 2015-08-24  |
+| Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
 | Amazon CloudFront                        | CloudFront                   | 2015-07-27  |
 | Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |

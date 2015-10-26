@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.32 (2015-10-26)
 ------------------
 
 * Feature - Aws::SSM - API update for Amazon Simple Systems Management Service.
