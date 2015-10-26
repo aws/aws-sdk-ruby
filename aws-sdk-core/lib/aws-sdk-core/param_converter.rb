@@ -112,7 +112,6 @@ module Aws
 
       def ensure_open(file, converter)
         if file.closed?
-          puts file.object_id
           new_file = File.open(file.path, 'rb')
           converter.opened_files << new_file
           new_file
