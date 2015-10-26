@@ -1,6 +1,6 @@
 # Upgrade Notes
 
-## `aws-sdk-resources` - v2.2.0
+## `aws-sdk-resources` - v2.1.31
 
 * A bug was discovered in `Aws::S3::Object#copy_from` and
   `Aws::S3::Object#copy_to` where source and target keys were not getting
