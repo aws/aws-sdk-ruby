@@ -51,7 +51,11 @@ module Aws
           closed_file.close
           client = Client.new(stub_responses: true)
           resp = client.put_object(bucket:'aws-sdk', key:'key', body: closed_file)
-          expect(resp.context.http_request.body_contents).to eq(File.read(__FILE__))
+          body = resp.context.http_request.body
+          expect(body).to be_kind_of(File)
+          expect(body.path).to eq(__FILE__)
+          expect(body).not_to be(closed_file)
+          expect(body.closed?).to be(true)
         end
 
         it 'accepts closed Tempfile objects' do
@@ -60,7 +64,11 @@ module Aws
           tmpfile.close
           client = Client.new(stub_responses: true)
           resp = client.put_object(bucket:'aws-sdk', key:'key', body: tmpfile)
-          expect(resp.context.http_request.body_contents).to eq('abc')
+          body = resp.context.http_request.body
+          expect(body).to be_kind_of(File)
+          expect(body.path).to eq(tmpfile.path)
+          expect(body).not_to be(tmpfile)
+          expect(body.closed?).to be(true)
         end
 
       end

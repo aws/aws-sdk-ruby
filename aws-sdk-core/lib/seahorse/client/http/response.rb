@@ -124,7 +124,7 @@ module Seahorse
           @listeners[:data] << Proc.new
         end
 
-        def on_done(status_code_range, &callback)
+        def on_done(status_code_range = nil, &callback)
           listener = listener(status_code_range, Proc.new)
           if @done
             listener.call

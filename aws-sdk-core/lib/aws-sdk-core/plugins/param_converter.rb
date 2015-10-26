@@ -15,10 +15,11 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          if input = context.operation.input
-            context.params = Aws::ParamConverter.convert(input, context.params)
+          converter = Aws::ParamConverter.new(context.operation.input)
+          context.params = converter.convert(context.params)
+          @handler.call(context).on_complete do |resp|
+            converter.close_opened_files
           end
-          @handler.call(context)
         end
 
       end

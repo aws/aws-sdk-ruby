@@ -15,12 +15,25 @@ module Aws
 
     def initialize(rules)
       @rules = rules
+      @opened_files = []
     end
+
+    # @api private
+    attr_reader :opened_files
 
     # @param [Hash] params
     # @return [Hash]
     def convert(params)
-      structure(@rules, params)
+      if @rules
+        structure(@rules, params)
+      else
+        params
+      end
+    end
+
+    def close_opened_files
+      @opened_files.each(&:close)
+      @opened_files = []
     end
 
     private
@@ -69,7 +82,7 @@ module Aws
     end
 
     def c(ref, value)
-      self.class.c(ref.shape.class, value)
+      self.class.c(ref.shape.class, value, self)
     end
 
     class << self
@@ -97,18 +110,21 @@ module Aws
         @converters[shape_class][value_class] = converter || block
       end
 
-      def ensure_open(file)
+      def ensure_open(file, converter)
         if file.closed?
-          File.open(file.path, 'rb')
+          puts file.object_id
+          new_file = File.open(file.path, 'rb')
+          converter.opened_files << new_file
+          new_file
         else
           file
         end
       end
 
       # @api private
-      def c(shape, value)
+      def c(shape, value, instance = nil)
         if converter = converter_for(shape, value)
-          converter.call(value)
+          converter.call(value, instance)
         else
           value
         end
@@ -203,8 +219,8 @@ module Aws
     end
 
     add(BlobShape, IO)
-    add(BlobShape, File) { |file| ensure_open(file) }
-    add(BlobShape, Tempfile) { |tmpfile| ensure_open(tmpfile) }
+    add(BlobShape, File) { |file, converter| ensure_open(file, converter) }
+    add(BlobShape, Tempfile) { |tmpfile, converter| ensure_open(tmpfile, converter) }
     add(BlobShape, StringIO)
     add(BlobShape, String)
 
