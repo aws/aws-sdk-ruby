@@ -44,6 +44,10 @@ module Aws
 
       end
 
+      plugins('apigateway',
+        add: %w(Aws::Plugins::APIGatewayHeader),
+      )
+
       api('cloudfront') do |api|
 
         api['shapes'].each do |_, shape|

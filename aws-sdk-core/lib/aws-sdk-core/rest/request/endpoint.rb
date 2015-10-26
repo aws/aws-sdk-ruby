@@ -5,6 +5,8 @@ module Aws
     module Request
       class Endpoint
 
+        include Seahorse::Model::Shapes
+
         # @param [Seahorse::Model::Shapes::ShapeRef] rules
         # @param [String] request_uri_pattern
         def initialize(rules, request_uri_pattern)
@@ -52,12 +54,56 @@ module Aws
           parts << @query_pattern if @query_pattern
           @rules.shape.members.each do |member_name, member|
             if member.location == 'querystring' && !params[member_name].nil?
-              param_name = member.location_name
-              param_value = params[member_name]
-              parts << "#{param_name}=#{escape(param_value.to_s)}"
+              case member.shape
+
+              # supported scalar types
+              when StringShape, BooleanShape, FloatShape, IntegerShape, StringShape
+                param_name = member.location_name
+                param_value = params[member_name]
+                parts << "#{param_name}=#{escape(param_value.to_s)}"
+
+              # map of strings or map of string-list
+              when MapShape
+                if StringShape === member.shape.value.shape
+                  parts += query_map_of_string(params[member_name])
+                elsif ListShape === member.shape.value.shape
+                  parts += query_map_of_string_list(params[member_name])
+                else
+                  msg = "only map of string and string list supported"
+                  raise NotImplementedError, msg
+                end
+
+              # unsupported querystring shape
+              else
+                raise NotImplementedError
+              end
+
             end
           end
           uri.query = parts.empty? ? nil : parts.join('&')
+        end
+
+        def query_map_of_string(hash)
+          list = []
+          hash.each_pair do |key, value|
+            list << "#{escape(key)}=#{escape(value)}"
+          end
+          list
+        end
+
+        def query_map_of_string_list(hash)
+          list = []
+          hash.each_pair do |key, values|
+            values.each do |value|
+              list << "#{escape(key)}=#{escape(value)}"
+            end
+          end
+          list
+        end
+
+        def querystring_param(key, value)
+          param_name = member.location_name
+          param_value = params[member_name]
         end
 
         def escape(string)

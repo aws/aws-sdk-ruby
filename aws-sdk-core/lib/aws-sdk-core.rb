@@ -19,6 +19,7 @@ module Aws
   # @api private
   # services
   SERVICE_MODULE_NAMES = %w(
+    APIGateway
     AutoScaling
     CloudFormation
     CloudFront
@@ -141,6 +142,7 @@ module Aws
   end
 
   module Plugins
+    autoload :APIGatewayHeader, 'aws-sdk-core/plugins/api_gateway_header'
     autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
     autoload :DynamoDBExtendedRetries, 'aws-sdk-core/plugins/dynamodb_extended_retries'
     autoload :DynamoDBSimpleAttributes, 'aws-sdk-core/plugins/dynamodb_simple_attributes'
