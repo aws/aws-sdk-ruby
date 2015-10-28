@@ -191,6 +191,7 @@ module AWS
         peering_connection = peering_connections.create(self, vpc)
         peering_connection.accept
         peering_connection
+      end
 
       # @return [Boolean] Returns true if DNS resolution is supported for
       #   this VPC
