@@ -30,6 +30,9 @@ module AWS
         # @option options [Array] :groups An array of SecurityGroup objects to
         #   grant permission to.
         #
+        # @option options [Array] :prefix_list_ids An array of prefix list IDs
+        #   to grant permission to.
+        #
         # @option options [Boolean] :egress (false) When true this IpPermission
         #   is assumed to be an egress permission.
         #
@@ -44,6 +47,8 @@ module AWS
           @groups = Array(options[:groups])
 
           @egress = options[:egress] || false
+
+          @prefix_list_ids = Array(options[:prefix_list_ids])
 
           # not all egress permissions require port ranges, depends on the
           # protocol
@@ -71,6 +76,9 @@ module AWS
 
         # @return [Array] An array of string CIDR ip addresses.
         attr_reader :ip_ranges
+
+        # @return [Array] An array of string prefix list IDs.
+        attr_reader :prefix_list_ids
 
         # @return [Array] An array of security groups that have been
         #   granted access with this permission.
@@ -104,6 +112,7 @@ module AWS
           other.protocol == protocol and
           other.port_range == port_range and
           other.ip_ranges.sort == ip_ranges.sort and
+          other.prefix_list_ids.sort == prefix_list_ids.sort and
           other.groups.sort == groups.sort and
           other.egress? == egress?
         end
@@ -115,6 +124,7 @@ module AWS
           sources = []
           sources += ip_ranges
           sources += groups
+          sources += prefix_list_ids
 
           if egress?
             opts = {}

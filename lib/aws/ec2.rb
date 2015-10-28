@@ -255,6 +255,8 @@ module AWS
     autoload :NetworkInterface, 'aws/ec2/network_interface'
     autoload :NetworkInterfaceCollection, 'aws/ec2/network_interface_collection'
     autoload :PermissionCollection, 'aws/ec2/permission_collection'
+    autoload :PrefixList, 'aws/ec2/prefix_list'
+    autoload :PrefixListCollection, 'aws/ec2/prefix_list_collection'
     autoload :Region, 'aws/ec2/region'
     autoload :RegionCollection, 'aws/ec2/region_collection'
     autoload :ReservedInstances, 'aws/ec2/reserved_instances'
@@ -422,6 +424,11 @@ module AWS
     # @return [ExportTaskCollection]
     def export_tasks
       ExportTaskCollection.new(:config => config)
+    end
+
+    # @return [PrefixListCollection]
+    def prefix_lists
+      PrefixListCollection.new(:config => config)
     end
 
   end

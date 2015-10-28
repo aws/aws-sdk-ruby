@@ -86,6 +86,13 @@ module AWS
 
       end
 
+      context '#describe_prefix_lists' do
+        let(:method) { :describe_prefix_lists }
+        let(:opts) { {} }
+        it_should_behave_like "uses cached responses"
+        it_should_behave_like "an aws http request", "POST"
+      end
+
       context '#describe_volumes' do
 
         let(:method) { :describe_volumes }

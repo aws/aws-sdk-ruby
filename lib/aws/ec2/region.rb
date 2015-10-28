@@ -78,6 +78,7 @@ module AWS
         :tags,
         :availability_zones,
         :images,
+        :prefix_lists,
         :volumes,
         :snapshots,
         :reserved_instances,

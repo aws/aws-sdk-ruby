@@ -49,8 +49,9 @@ module AWS
                 :ip_protocol => "-1",
                 :ip_ranges => [{ :cidr_ip => "1.1.1.1/1" }],
                 :groups => [],
+                :prefix_list_ids => [],
               },
-              # tcp, plus ports and groups
+              # tcp, plus ports, groups, prefix list ids
               {
                 :ip_protocol => 'TCP',
                 :from_port => 80,
@@ -58,7 +59,8 @@ module AWS
                 :ip_ranges => [],
                 :groups => [
                   { :group_id => 'grp1-id', :user_id => 'grp1-user-id' },
-                ]
+                ],
+                :prefix_list_ids => [{ :prefix_list_id => 'pl-123' }],
               },
             ]
           end
@@ -107,6 +109,7 @@ module AWS
             p2.groups[0].id.should == 'grp1-id'
             p2.groups[0].owner_id.should == 'grp1-user-id'
             p2.groups[0].vpc?.should == true
+            p2.prefix_list_ids.should == ['pl-123']
 
           end
 
