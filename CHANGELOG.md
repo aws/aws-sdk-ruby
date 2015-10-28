@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.33 (2015-10-28)
 ------------------
 
 * Issue - Aws::APIGateway - Resolved an issue that prevented users from calling
