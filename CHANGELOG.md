@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::APIGateway - Resolved an issue that prevented users from calling
+  `Aws::APIGateway::Client#put_integration`.
+
 2.1.32 (2015-10-26)
 ------------------
 
