@@ -10,7 +10,7 @@ Unreleased Changes
   not for `#copy_part`, and `:copy_object`.
 
   This fix addresses an issue where managed multipart copies would raise an
-  error about a missing etag. These operations should not be retried up to
+  error about a missing etag. These operations should now be retried up to
   three times and raise a terminal error if they are not successful.
 
   See [related GitHub issue #870](https://github.com/aws/aws-sdk-ruby/issues/870).
