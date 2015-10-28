@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Added `Aws::CloudFormation::Stack#exists?`
+
 2.1.33 (2015-10-28)
 ------------------
 
