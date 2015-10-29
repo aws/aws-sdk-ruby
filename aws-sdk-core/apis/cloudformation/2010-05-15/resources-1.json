@@ -78,6 +78,14 @@
             ]
           }
         },
+        "Create": {
+          "request": {
+            "operation": "CreateStack",
+            "params": [
+              { "target": "StackName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        },
         "Delete": {
           "request": {
             "operation": "DeleteStack",
