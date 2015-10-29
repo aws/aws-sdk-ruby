@@ -6,28 +6,15 @@ module Aws
     # @api private
     class S3RequestSigner < Seahorse::Client::Plugin
 
-      class SigningHandler < RequestSigner::Handler
+      option :signature_version, 'v4'
 
-        # List of regions that support older S3 signature versions.
-        # All new regions only support signature version 4.
-        V2_REGIONS = Set.new(%w(
-          us-east-1
-          us-west-1
-          us-west-2
-          ap-northeast-1
-          ap-southeast-1
-          ap-southeast-2
-          sa-east-1
-          eu-west-1
-          us-gov-west-1
-        ))
+      class SigningHandler < RequestSigner::Handler
 
         def call(context)
           require_credentials(context)
-          version = signature_version(context)
-          case version
-          when /v4/ then apply_v4_signature(context)
-          when /s3/ then apply_v2_signature(context)
+          case context.config.signature_version
+          when 'v4' then apply_v4_signature(context)
+          when 's3' then apply_s3_legacy_signature(context)
           else raise "unsupported signature version #{version.inspect}"
           end
           @handler.call(context)
@@ -42,57 +29,8 @@ module Aws
           ).sign(context.http_request)
         end
 
-        def apply_v2_signature(context)
+        def apply_s3_legacy_signature(context)
           Signers::S3.sign(context)
-        end
-
-        def signature_version(context)
-          context[:cached_signature_version] ||
-          context.config.signature_version ||
-          version_by_region(context)
-        end
-
-        def version_by_region(context)
-          if classic_endpoint?(context)
-            classic_sigv(context)
-          else
-            regional_sigv(context)
-          end
-        end
-
-        def classic_endpoint?(context)
-          context.config.region == 'us-east-1'
-        end
-
-        # When accessing the classic endpoint, s3.amazonaws.com, we don't know
-        # the region name. This makes creating a version 4 signature difficult.
-        # Choose v4 only if using KMS encryptions, which requires v4.
-        def classic_sigv(context)
-          if kms_encrypted?(context)
-            :v4
-          else
-            :s3
-          end
-        end
-
-        def regional_sigv(context)
-          # Drop back to older S3 signature version when uploading objects for
-          # better performance. This optimization may be removed at some point
-          # in favor of always using signature version 4.
-          if V2_REGIONS.include?(context.config.region)
-            uploading_file?(context) && !kms_encrypted?(context) ? :s3 : :v4
-          else
-            :v4
-          end
-        end
-
-        def kms_encrypted?(context)
-          context.params[:server_side_encryption] == 'aws:kms'
-        end
-
-        def uploading_file?(context)
-          [:put_object, :upload_part].include?(context.operation_name) &&
-            context.http_request.body.size > 0
         end
 
       end
@@ -143,8 +81,6 @@ module Aws
       # request against the regional endpoint.
       class BucketSigningErrorHandler < Handler
 
-        SIGV4_MSG = /(Please use AWS4-HMAC-SHA256|AWS Signature Version 4)/
-
         def call(context)
           response = @handler.call(context)
           handle_region_errors(response)
@@ -153,52 +89,34 @@ module Aws
         private
 
         def handle_region_errors(response)
-          if sigv4_required_error?(response)
-            detect_region_and_retry(response)
-          elsif wrong_sigv4_region?(response)
-            extract_body_region_and_retry(response.context)
+          if wrong_sigv4_region?(response)
+            get_region_and_retry(response.context)
           else
             response
           end
         end
 
-        def sigv4_required_error?(resp)
-          resp.context.http_response.status_code == 400 &&
-          resp.context.http_response.body_contents.match(SIGV4_MSG) &&
-          resp.context.http_response.body.respond_to?(:truncate)
+        def get_region_and_retry(context)
+          actual_region = region_from_body(context)
+          if actual_region.nil? || actual_region == ""
+            raise "Couldn't get region from body: #{context.body}"
+          end
+          update_bucket_cache(context, actual_region)
+          log_warning(context, actual_region)
+          update_region_header(context, actual_region)
+          @handler.call(context)
+        end
+
+        def update_bucket_cache(context, actual_region)
+          S3::BUCKET_REGIONS[context.params[:bucket]] = actual_region
         end
 
         def wrong_sigv4_region?(resp)
           resp.context.http_response.status_code == 400 &&
-          resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/)
+            resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/)
         end
 
-        def extract_body_region_and_retry(context)
-          actual_region = region_from_body(context)
-          updgrade_to_v4(context, actual_region)
-          log_warning(context, actual_region)
-          @handler.call(context)
-        end
-
-        def region_from_body(context)
-          context.http_response.body_contents.match(/<Region>(.+?)<\/Region>/)[1]
-        end
-
-        def detect_region_and_retry(resp)
-          context = resp.context
-          updgrade_to_v4(context, 'us-east-1')
-          resp = @handler.call(context)
-          if resp.successful?
-            resp
-          else
-            actual_region = region_from_location_header(context)
-            updgrade_to_v4(context, actual_region)
-            log_warning(context, actual_region)
-            @handler.call(context)
-          end
-        end
-
-        def updgrade_to_v4(context, region)
+        def update_region_header(context, region)
           context.http_response.body.truncate(0)
           context.http_request.headers.delete('authorization')
           context.http_request.headers.delete('x-amz-security-token')
@@ -207,13 +125,11 @@ module Aws
           signer.sign(context.http_request)
         end
 
-        def region_from_location_header(context)
-          location = context.http_response.headers['location']
-          location.match(/s3[.-](.+?)\.amazonaws\.com/)[1]
+        def region_from_body(context)
+          context.http_response.body_contents.match(/<Region>(.+?)<\/Region>/)[1]
         end
 
         def log_warning(context, actual_region)
-          S3::BUCKET_REGIONS[context.params[:bucket]] = actual_region
           msg = "S3 client configured for #{context.config.region.inspect} " +
             "but the bucket #{context.params[:bucket].inspect} is in " +
             "#{actual_region.inspect}; Please configure the proper region " +

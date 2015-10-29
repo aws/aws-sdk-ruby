@@ -102,37 +102,6 @@ module Aws
           "sa-east-1",
           "eu-west-1",
           "us-gov-west-1",
-        ].each do |region|
-
-          it "defaults signature version 4 for #{region}" do
-            client = Client.new(stub_responses: true, region: region)
-            resp = client.head_object(bucket:'name', key:'key')
-            expect(resp.context.http_request.headers['authorization']).to match(
-              'AWS4-HMAC-SHA256')
-          end
-
-          it "falls back on classic S3 signing for #put_object in #{region}" do
-            client = Client.new(stub_responses: true, region: region)
-            resp = client.put_object(bucket:'name', key:'key', body:'data')
-            expect(resp.context.http_request.headers['authorization']).to match(
-              'AWS akid:')
-          end
-
-          it "forces v4 signing when aws:kms used for server side encryption" do
-            client = Client.new(stub_responses: true, region: region)
-            resp = client.put_object(
-              bucket: 'name',
-              key: 'key',
-              server_side_encryption: 'aws:kms',
-              body: 'data'
-            )
-            expect(resp.context.http_request.headers['authorization']).to match(
-              'AWS4-HMAC-SHA256')
-          end
-
-        end
-
-        [
           "cn-north-1",
           "eu-central-1",
           "unknown-region",
@@ -165,14 +134,7 @@ module Aws
           end
         end
 
-        it "defaults classic s3 signature us-east-1" do
-          client = Client.new(stub_responses: true, region: 'us-east-1')
-          resp = client.head_object(bucket:'name', key:'key')
-          expect(resp.context.http_request.headers['authorization']).to match(
-            'AWS akid:')
-        end
-
-        it "upgrades to signature version 4 when aws:kms used for sse" do
+        it "uses signature version 4 when aws:kms used for sse" do
           client = Client.new(stub_responses: true, region: 'us-east-1')
           resp = client.put_object(
             bucket: 'name',

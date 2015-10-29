@@ -17,72 +17,6 @@ module Aws
         S3::BUCKET_REGIONS.clear
       end
 
-      describe 'accessing eu-central-1 via classic endpoint and sigv2' do
-
-        before(:each) do
-
-          stub_request(:put, 'https://bucket.s3.amazonaws.com/key').
-            to_return(status: [400, 'Bad Request'], body: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>InvalidRequest</Code><Message>The authorization mechanism you have provided is not supported. Please use AWS4-HMAC-SHA256.</Message><RequestId>164473A33C2BACDF</RequestId><HostId>I8hhmfGvN74WPyu6kduBoVhnHPgKATFF4nWlro8kRdpuFxXVgcRgLZ2oTxJFhZMgAn75GqyhUHY=</HostId></Error>")
-
-          stub_request(:put, 'https://bucket.s3-external-1.amazonaws.com/key').
-            to_return(status: [307, 'Temporary Redirect'], headers: {
-              'Location' => 'https://bucket.s3.eu-central-1.amazonaws.com/key'
-            })
-
-          stub_request(:put, 'https://bucket.s3.eu-central-1.amazonaws.com/key').
-            to_return(status: [200, 'Ok'])
-
-        end
-
-        it 'detects the sigv4 error, determines actual region and redirects' do
-          resp = client.put_object(bucket:'bucket', key:'key', body:'body')
-          host = resp.context.http_request.endpoint.host
-          expect(host).to eq('bucket.s3.eu-central-1.amazonaws.com')
-        end
-
-        it 'uses cached regions to determine the actual region' do
-          client.put_object(bucket:'bucket', key:'key', body:'body')
-          client.put_object(bucket:'bucket', key:'key', body:'body')
-          client.put_object(bucket:'bucket', key:'key', body:'body')
-        end
-
-        it 'sends a warning to stderr' do
-          expect($stderr).to receive(:write).with(<<-WARNING.strip + "\n")
-S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1"; Please configure the proper region to avoid multiple unecessary redirects and signing attempts
-          WARNING
-          client.put_object(bucket:'bucket', key:'key', body:'body')
-        end
-
-        it 'sends the warning to the logger if configured' do
-          logger = double('logger').as_null_object
-          expect(logger).to receive(:warn).with(<<-WARNING.strip + "\n")
-S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1"; Please configure the proper region to avoid multiple unecessary redirects and signing attempts
-          WARNING
-          client = S3::Client.new(client_opts.merge(logger: logger))
-          client.put_object(bucket:'bucket', key:'key', body:'body')
-        end
-
-        it 'triggers a callback where you can listen for new bucket regions' do
-          yielded = nil
-          S3::BUCKET_REGIONS.bucket_added {|*args| yielded = args }
-          client.put_object(bucket:'bucket', key:'key', body:'body')
-          expect(yielded).to eq(['bucket', 'eu-central-1'])
-        end
-
-        it 'triggers a callback where you can listen for new bucket regions' do
-          yielded = nil
-          S3::BUCKET_REGIONS.bucket_added {|*args| yielded = args }
-          client.put_object(bucket:'bucket', key:'key', body:'body')
-          expect(yielded).to eq(['bucket', 'eu-central-1'])
-          expect(S3::BUCKET_REGIONS.to_h).to eq('bucket' => 'eu-central-1')
-
-          expect {
-            S3::BUCKET_REGIONS.bucket_added
-          }.to raise_error(ArgumentError, 'missing required block')
-        end
-
-      end
-
       describe 'accessing a bucket in eu-central-1 with wrong region' do
 
         before(:each) do
@@ -102,7 +36,7 @@ S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1
 
       end
 
-      describe 'accessing eu-central-1 bucket using classic endpoitn and wrong sigv4 region' do
+      describe 'accessing eu-central-1 bucket using classic endpoint and wrong sigv4 region' do
 
         before(:each) do
 
@@ -116,7 +50,7 @@ S3 client configured for "us-east-1" but the bucket "bucket" is in "eu-central-1
 
         it 'detects the moved permanently and redirects' do
           client = S3::Client.new(client_opts.merge(
-            region: 'us-west-2', signature_version:'v4')
+            region: 'us-west-2')
           )
           resp = client.put_object(bucket:'bucket', key:'key', body:'body')
           host = resp.context.http_request.endpoint.host

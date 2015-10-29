@@ -14,7 +14,9 @@ After("@s3") do
       break if objects.empty?
       @client.delete_objects(bucket: bucket, delete: { objects: objects })
     end
+    puts "MADE IT TO DELETING BUCKET"
     @client.delete_bucket(bucket: bucket)
+    puts "DELETED BUCKET"
   end
 end
 
