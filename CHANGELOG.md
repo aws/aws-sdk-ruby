@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - DeviceFarm is adding APIs to manage projects,
+  device pools, new operations include:
+
+  * UpdateDevicePool
+  * DeleteDevicePool
+
 2.1.34 (2015-11-02)
 ------------------
 
