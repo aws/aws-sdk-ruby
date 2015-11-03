@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.35 (2015-11-03)
 ------------------
 
 * Feature - Aws::DeviceFarm - DeviceFarm is adding APIs to manage projects,
