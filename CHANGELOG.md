@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - Include support for simulating resource-level scenarios.
+
 2.1.33 (2015-10-28)
 ------------------
 
