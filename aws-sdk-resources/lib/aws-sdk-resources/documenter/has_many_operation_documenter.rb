@@ -51,12 +51,11 @@ collection. {#{called_operation}} will be called multiple times until every
         end
 
         def target_resource_batches?
-          target_resource_class.const_defined?(:Batch) &&
           target_resource_batch_operations.count > 0
         end
 
         def target_resource_batch_operations
-          target_resource_class::Batch.operation_names
+          target_resource_class.batch_operation_names
         end
 
       end
