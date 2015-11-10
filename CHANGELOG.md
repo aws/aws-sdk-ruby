@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Adds support for stage variables. Stage variables
+  allow customers to define environment variables on each stage running their
+  API configuration. The API configuration can then reference these variables to
+  load values at runtime.
+
 2.1.35 (2015-11-03)
 ------------------
 
