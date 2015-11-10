@@ -1,4 +1,4 @@
-Unreleased Changes
+2.1.36 (2015-11-10)
 ------------------
 
 * Feature - Aws::APIGateway - Adds support for stage variables. Stage variables
