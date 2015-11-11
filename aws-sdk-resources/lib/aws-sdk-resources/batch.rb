@@ -117,10 +117,27 @@ module Aws
       private
 
       def invoke_batch_operation(method_name, args, block)
+        self.class.validate_batch_args!(args)
         operation = @resource_class.batch_operation(method_name)
         operation.call(resource:self, args:args, block:block)
       end
 
+      class << self
+
+        # @api private
+        def validate_batch_args!(args)
+          case args.count
+          when 0
+          when 1
+            unless Hash === args.first
+              raise ArgumentError, "expected options to be a hash"
+            end
+          else
+            raise ArgumentError, "wrong number of arguments, expected 0 or 1"
+          end
+        end
+
+      end
     end
   end
 end

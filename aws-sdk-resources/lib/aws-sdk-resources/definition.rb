@@ -51,9 +51,23 @@ module Aws
 
       def define_batch_actions(namespace, resource, batch_actions)
         batch_actions.each do |name, definition|
-          method_name = underscore(name)
+          method_name = "batch_" + underscore(name)
+          method_name += '!' if dangerous?(name, definition)
           operation = build_operation(namespace, resource, definition)
           resource.add_batch_operation(method_name, operation)
+        end
+      end
+
+      def dangerous?(name, definition)
+        if
+          name.match(/delete/i) ||
+          name.match(/terminate/i) ||
+          definition['request']['operation'].match(/delete/i) ||
+          definition['request']['operation'].match(/terminate/i)
+        then
+          true
+        else
+          false
         end
       end
 

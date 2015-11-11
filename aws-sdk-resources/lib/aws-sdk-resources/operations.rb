@@ -231,6 +231,43 @@ module Aws
 
       end
 
+      # @api private
+      class DeprecatedOperation
+
+        def initialize(options = {})
+          @name = options[:name]
+          @deprecated_name = options[:deprecated_name]
+          @resource_class = options[:resource_class]
+          @operation = @resource_class.batch_operation(@name)
+          @warned = false
+        end
+
+        def call(*args)
+          unless @warned
+            @warned = true
+            warn(deprecation_warning)
+          end
+          @operation.call(*args)
+        end
+
+        private
+
+        def deprecation_warning
+          "DEPRECATION WARNING: called deprecated batch method " +
+          "`##{@deprecated_name}` on a batch of `#{@resource_class.name}` " +
+          "objects; use `##{@name}` instead"
+        end
+
+        class << self
+
+          def define(options = {})
+            klass = options[:resource_class]
+            deprecated_name = options[:deprecated_name]
+            klass.add_batch_operation(deprecated_name, new(options))
+          end
+
+        end
+      end
     end
   end
 end

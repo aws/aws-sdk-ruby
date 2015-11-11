@@ -724,6 +724,63 @@ module Aws
 
           end
 
+          describe 'batch actions' do
+
+            it 'supports operations on batches' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [
+                    { 'name' => 'Name' }
+                  ],
+                  'batchActions' => {
+                    'Update' => {
+                      'request' => {
+                        'operation' => 'UpdateThings',
+                        'params' => [
+                          { "target" => "ThingNames[]", "source" => "identifier", "name" => "Name" }
+                        ]
+                      }
+                    },
+                    'Delete' => {
+                      'request' => {
+                        'operation' => 'DeleteThings',
+                        'params' => [
+                          { "target" => "ThingNames[]", "source" => "identifier", "name" => "Name" }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+
+              client_resp = double('client-response')
+
+              expect(client).to receive(:update_things).
+                with(thing_names: ['thing1', 'thing2'], foo:'bar').
+                and_return(client_resp)
+
+              expect(client).to receive(:delete_things).
+                with(thing_names: ['thing1', 'thing2']).
+                and_return(client_resp)
+
+              apply_definition
+
+              thing1 = namespace::Thing.new('thing1', client: client)
+              thing2 = namespace::Thing.new('thing2', client: client)
+              things = Batch.new(namespace::Thing, [thing1, thing2])
+
+              expect(things).to respond_to(:batch_update)
+              expect(things).to respond_to(:batch_delete!)
+
+              expect {
+                things.batch_update('abc', 'mno')
+              }.to raise_error(ArgumentError, /wrong number of arguments/)
+
+              things.batch_update(foo:'bar')
+              things.batch_delete!
+            end
+          end
+
           describe 'has many associations' do
 
             it 'returns an enumerable' do

@@ -1,5 +1,20 @@
 # Upgrade Notes
 
+## `aws-sdk-resources` - v2.2
+
+* All batch resource operations have been renamed to make it clear
+  that they operate in batches on the entire collection.
+
+  * All batch operations are now prefixed with `batch_`, e.g. `#start`
+    is now `#batch_start`.
+
+  * All batch operations named "delete" or "terminate" are now suffixed
+    with a `!`, e.g. `#delete` is now `#batch_delete!`
+
+  For backwards compatibility, existing batch methods still respond
+  to their old names with a deprecation warning. New batch operations
+  will strictly follow the new conventions.
+
 ## `aws-sdk-resources` - v2.1.31
 
 * A bug was discovered in `Aws::S3::Object#copy_from` and

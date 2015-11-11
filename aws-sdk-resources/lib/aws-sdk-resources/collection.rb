@@ -72,6 +72,7 @@ module Aws
       # @api private
       def method_missing(method_name, *args, &block)
         if respond_to?(method_name)
+          Batch.validate_batch_args!(args)
           batches.each do |batch|
             batch.send(method_name, *args, &block)
           end
