@@ -10,6 +10,20 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Multipart Download Helper(s)
+
+The SDK already has a multipart upload helper for Amazon S3, but doing a GET request
+for very large objects can be problematic using the client directly. Byte ranged
+requests allow the user to circumvent the issue, but this could be distilled
+into a high level helper class that manages multipart downloads in this manner.
+
+See [related GitHub issue #990](https://github.com/aws/aws-sdk-ruby/issues/990)
+for an example related to Amazon S3.
+
+See [related GitHub issue #987](https://github.com/aws/aws-sdk-ruby/issues/987)
+for an example related to the Amazon RDS client (similar, not identical,
+pattern).
+
 ### Add ability to pre-sign a request
 
 To work around limitations of S3 bucket policies, it is necessary to send certain headers
