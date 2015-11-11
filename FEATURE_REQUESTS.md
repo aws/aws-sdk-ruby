@@ -10,6 +10,15 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Support for Copying Object Versions to Aws::S3::Resource
+
+You can copy Amazon S3 object versions to a new Amazon S3 object using the
+`Aws::S3::Client#copy_from` operation. However, there isn't currently a way to
+do this in the resource interface. This is a feature request to add that support
+to the `Aws::S3::Resource` interface.
+
+See [related GitHub issue #969](https://github.com/aws/aws-sdk-ruby/issues/969).
+
 ### Add to Param Validation Error Message
 
 Currently, parameter validation errors come in the following form:
