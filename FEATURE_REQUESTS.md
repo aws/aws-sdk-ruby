@@ -10,6 +10,15 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Pagination Support for Amazon CloudSearch Domain Client
+
+The current spec for pagination is not able to support the response structure of
+the `Aws::CloudSearchDomain::Client#search` API, for example. The feature
+request is to either add a custom CloudSearch Domain pagination plugin, or to
+enhance pagination in general to support this type of response.
+
+See [related GitHub issue #984](https://github.com/aws/aws-sdk-ruby/issues/984).
+
 ### Add Support for Copying Object Versions to Aws::S3::Resource
 
 You can copy Amazon S3 object versions to a new Amazon S3 object using the
