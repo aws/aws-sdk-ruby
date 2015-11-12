@@ -45,7 +45,7 @@ module Aws
         def new_hostname(context, region)
           bucket = context.params[:bucket]
           if region == 'us-east-1'
-            "#{bucket}.s3-external-1.amazonaws.com"
+            "#{bucket}.s3.amazonaws.com"
           else
             bucket + '.' + URI.parse(EndpointProvider.resolve(region, 's3')).host
           end
