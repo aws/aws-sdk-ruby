@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Adds support for cross-account snapshot sharing and
+  modifying DB instance visibility.
+
 * Upgrading - Aws::S3::Client - All `Aws::S3::Client` instances will default to
   using Signature Version 4 in all regions. This replaces the behavior where a
   subset of regions used the 's3' signer and would attempt to upgrade only when
