@@ -6,7 +6,7 @@ module Aws
     # @api private
     class S3RequestSigner < Seahorse::Client::Plugin
 
-      option :signature_version, 'v4'
+      option(:signature_version, 'v4')
 
       class SigningHandler < RequestSigner::Handler
 
@@ -15,7 +15,9 @@ module Aws
           case context.config.signature_version
           when 'v4' then apply_v4_signature(context)
           when 's3' then apply_s3_legacy_signature(context)
-          else raise "unsupported signature version #{version.inspect}"
+          else
+            raise "unsupported signature version #{version.inspect}, valid"\
+              " options: 'v4' (default), 's3'"
           end
           @handler.call(context)
         end
@@ -75,11 +77,11 @@ module Aws
 
       end
 
-      # This handler detects when a request fails because signature version 4
-      # is required but not used. It follows up by making a request to
-      # determine the correct region, then finally a version 4 signed
-      # request against the regional endpoint.
-      class BucketSigningErrorHandler < Handler
+      # This handler detects when a request fails because of a mismatched bucket
+      # region. It follows up by making a request to determine the correct
+      # region, then finally a version 4 signed request against the correct
+      # regional endpoint.
+      class BucketRegionErrorHandler < Handler
 
         def call(context)
           response = @handler.call(context)
@@ -150,7 +152,7 @@ module Aws
       handler(SigningHandler, step: :sign)
 
       # AFTER signing
-      handle(BucketSigningErrorHandler, step: :sign, priority: 40)
+      handle(BucketRegionErrorHandler, step: :sign, priority: 40)
 
     end
   end
