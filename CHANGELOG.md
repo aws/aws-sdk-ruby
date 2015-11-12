@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::EC2 - Fix for `:instance_exists` waiter. Instances that have been
+  terminated for a long period of time could fail the previous waiter definition
+  with a false positive.
+
+  See [related GitHub pull request #985](https://github.com/aws/aws-sdk-ruby/pull/985).
+
 * Upgrading - Resources - All batch resource operations have been renamed to make
   it clear that they operate in batches on the entire collection.
 
