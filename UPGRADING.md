@@ -1,5 +1,35 @@
 # Upgrade Notes
 
+## `aws-sdk-core` - v2.2.0
+
+* We are moving the `Aws::S3::Client` class to use Signature Version 4 by
+  default in all regions. This replaces the previous behavior, in which
+  some regions would default to a previous signature version, which we called
+  the 's3' signer. This signer would then attempt to upgrade to the 'v4' signer
+  only when necessary.
+
+  This signature switching behavior has required an increasing amount of special
+  support code, and risks the creation of unexpected API calls when we have to
+  upgrade signature versions on the fly. It also has been prone to creating
+  issues, the most recent of which was visible when using AWS Key Management
+  Service alongside the Amazon S3 client for multipart uploads. KMS requires
+  signature version 4, and the current Amazon S3 client logic had difficulty
+  'raising' the part upload requests to SigV4 with the current code path.
+  Defaulting to signature version 4 across S3 should help simplify these issues,
+  improve maintainability, and reduce unexpected extra API calls.
+
+  Existing code should continue to work with this change. The new signature
+  version doesn't require anything different from you as the caller of the
+  client code. If you wish, however, you still have the option to use the
+  previous signature version, though there will be no fallbacks to signature
+  version 4 - you are responsible for ensuring that your operation supports the
+  old signature version in the region your client is operating in, and handling
+  any errors that are thrown. You can use the previous signer like so:
+
+  ```ruby
+  client = Aws::S3::Client.new(signature_version: 's3')
+  ```
+
 ## `aws-sdk-resources` - v2.2
 
 * All batch resource operations have been renamed to make it clear

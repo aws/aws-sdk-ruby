@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Upgrading - Aws::S3::Client - All `Aws::S3::Client` instances will default to
+  using Signature Version 4 in all regions. This replaces the behavior where a
+  subset of regions used the 's3' signer and would attempt to upgrade only when
+  encountering signing errors.
+
+  If you wish to continue using the 's3' signer, without auto-upgrade logic, you
+  can manually choose to use the 's3' signer at client creation time:
+
+  ```ruby
+  client = Aws::S3::Client.new(signature_version: 's3')
+  ```
+
 * Issue - Aws::EC2 - Fix for `:instance_exists` waiter. Instances that have been
   terminated for a long period of time could fail the previous waiter definition
   with a false positive.
