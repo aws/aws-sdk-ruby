@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.0 (2015-11-12)
 ------------------
 
 * Feature - Aws::RDS - Adds support for cross-account snapshot sharing and
