@@ -22,7 +22,8 @@ If you receive this error, you likely have upgraded to version 2 of the
 `aws-sdk` gem unintentionally. Version 2 uses the `Aws` namespace, not `AWS`.
 This allows version 1 and version 2 to be used in the same application.
 
-See [this blog post](http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2) for more information.
+* [Additional Information](http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2)
+* [Migration Guide](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md)
 
 ## Installation
 
