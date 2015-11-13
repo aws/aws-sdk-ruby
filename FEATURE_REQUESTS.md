@@ -10,6 +10,14 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Accept AWS CLI Output for Stubbed Responses
+
+There are some format differences between the input/output shapes of the AWS CLI
+and the AWS SDK for Ruby. Supporting a transformation between these two formats
+could be useful if using actual AWS CLI output as stubbed output for Ruby tests.
+
+See [related GitHub issue #970](https://github.com/aws/aws-sdk-ruby/issues/970).
+
 ### Add SDK Performance Metrics in Amazon CloudWatch
 
 Similar to the
