@@ -74,10 +74,10 @@ module Aws
     def load_from_path
       profile = load_profile
       credentials = Credentials.new(
-          profile['aws_access_key_id'],
-          profile['aws_secret_access_key'],
-          profile['aws_session_token']
-        )
+        profile['aws_access_key_id'],
+        profile['aws_secret_access_key'],
+        profile['aws_session_token']
+      )
       @credentials = if profile['role_arn']
                         AssumeRoleCredentials.new(
                           role_arn: profile['role_arn'],
@@ -93,6 +93,7 @@ module Aws
       if profile['source_profile']
         profile = load_named_profile(profile['source_profile']).merge(profile)
       end
+      profile
     end
 
     def load_named_profile(name)
