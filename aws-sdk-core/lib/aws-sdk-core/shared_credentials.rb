@@ -36,7 +36,13 @@ module Aws
     attr_reader :profile_name
 
     # @return [Credentials]
-    attr_reader :credentials
+    def credentials
+      if @credentials.respond_to?(:credentials)
+        @credentials.credentials
+      else
+        @credentials
+      end
+    end
 
     # @api private
     def inspect
