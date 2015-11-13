@@ -10,6 +10,15 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add SDK Performance Metrics in Amazon CloudWatch
+
+Similar to the
+[AWS SDK for Java's feature](https://java.awsblog.com/post/Tx3C0RV4NRRBKTG/Enabling-Metrics-with-the-AWS-SDK-for-Java).
+
+This would create a plugin that takes metrics about API call performance and
+possibly other SDK performance metrics, and would enable automatic uploads to
+Amazon CloudWatch.
+
 ### Add Pagination Support for Amazon CloudSearch Domain Client
 
 The current spec for pagination is not able to support the response structure of
