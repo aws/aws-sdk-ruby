@@ -44,6 +44,14 @@ module Aws
       expect(creds.session_token).to eq('TOKEN_1')
     end
 
+    it 'supports fetching a source_profile' do
+      stub_const('ENV', { 'AWS_PROFILE' => 'childprofile' })
+      creds = SharedCredentials.new(path:mock_credential_file).credentials
+      expect(creds.access_key_id).to eq('ACCESS_KEY_1')
+      expect(creds.secret_access_key).to eq('SECRET_KEY_1')
+      expect(creds.session_token).to eq('TOKEN_3')
+    end
+
     it 'raises when a profile does not exist' do
       msg = /^Profile `bazprofile' not found in .+mock_shared_credentials/
       expect {
