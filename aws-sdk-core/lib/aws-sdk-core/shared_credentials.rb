@@ -67,18 +67,33 @@ module Aws
 
     def load_from_path
       profile = load_profile
-      @credentials = Credentials.new(
-        profile['aws_access_key_id'],
-        profile['aws_secret_access_key'],
-        profile['aws_session_token']
-      )
+      credentials = Credentials.new(
+          profile['aws_access_key_id'],
+          profile['aws_secret_access_key'],
+          profile['aws_session_token']
+        )
+      @credentials = if profile['role_arn']
+                        AssumeRoleCredentials.new(
+                          role_arn: profile['role_arn'],
+                          role_session_name: profile_name,
+                          credentials: credentials
+                        )
+                      else credentials
+                      end
     end
 
     def load_profile
-      if profile = profiles[profile_name]
+      profile = load_named_profile(profile_name)
+      if profile['source_profile']
+        profile = load_named_profile(profile['source_profile']).merge(profile)
+      end
+    end
+
+    def load_named_profile(name)
+      if profile = profiles[name]
         profile
       else
-        msg = "Profile `#{profile_name}' not found in #{path}"
+        msg = "Profile `#{name}' not found in #{path}"
         raise Errors::NoSuchProfileError, msg
       end
     end
