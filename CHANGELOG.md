@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Added `Aws::CloudFormation::Stack#exists?`
+  operation via a new `:stack_exists` waiter.
+
 2.2.0 (2015-11-12)
 ------------------
 

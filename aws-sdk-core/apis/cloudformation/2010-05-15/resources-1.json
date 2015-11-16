@@ -94,6 +94,14 @@
           }
         }
       },
+      "waiters": {
+        "Exists": {
+          "waiterName": "StackExists",
+          "params": [
+            { "target": "StackName", "source": "identifier", "name": "Name" }
+          ]
+        }
+      },
       "has": {
         "Resource": {
           "resource": {
