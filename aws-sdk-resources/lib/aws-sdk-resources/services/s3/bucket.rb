@@ -22,10 +22,29 @@ module Aws
       #
       #   bucket.delete!
       #
+      # @option options [Float]  :initial_wait (1.3) Initial wait time. Exponentially increased for each attempt.
+      #                 [Fixnum] :max_attempts (3) Maximum number of attempts to make before raising Errors::BucketNotEmpty.
+      #
       # @return [void]
-      def delete!
-        clear!
-        delete
+      DELETE_BANG_DEFAULTS = { initial_wait: 1.3, max_attempts: 3 }
+
+      def delete! options = { }
+        options = DELETE_BANG_DEFAULTS.merge options
+
+        attempts = 0
+
+        begin
+          clear!
+          delete
+        rescue Errors::BucketNotEmpty => e
+          attempts += 1
+
+          raise e if attempts >= options[:max_attempts]
+
+          Kernel.sleep options[:initial_wait] ** attempts
+
+          retry
+        end
       end
 
       # Returns a public URL for this bucket.
