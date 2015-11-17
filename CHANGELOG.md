@@ -1,8 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3::Resource - Added retries to the `Aws::S3::Bucket#delete!`
+  method, which covers the case where the object wipe was not complete.
+
+  See related GitHub [pull request #994](https://github.com/aws/aws-sdk-ruby/pull/994).
+
 * Feature - Aws::CloudFormation - Added `Aws::CloudFormation::Stack#exists?`
   operation via a new `:stack_exists` waiter.
+
+  See related GitHub [pull request #975](https://github.com/aws/aws-sdk-ruby/pull/975).
 
 2.2.0 (2015-11-12)
 ------------------
