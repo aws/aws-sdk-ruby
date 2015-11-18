@@ -12,7 +12,7 @@ module Aws
       #
       # @return [void]
       def clear!
-        object_versions.delete
+        object_versions.batch_delete!
       end
 
       # Deletes all objects and versioned objects from this bucket and
