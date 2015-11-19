@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.1 (2015-11-19)
 ------------------
 
 * Feature - Aws::DeviceFarm - Add new test and upload types to support web
