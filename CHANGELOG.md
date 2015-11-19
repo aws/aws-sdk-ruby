@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Add new test and upload types to support web
+  application testing on mobile devices.
+
 * Feature - Aws::S3::Resource - Added retries to the `Aws::S3::Bucket#delete!`
   method, which covers the case where the object wipe was not complete.
 
