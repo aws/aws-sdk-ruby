@@ -148,7 +148,7 @@ module Seahorse
       # Yields the handlers in stack order, which is reverse priority.
       def each(&block)
         entries.sort.each do |entry|
-          yield(entry.handler_class) if entry.operations.empty?
+          yield(entry.handler_class) if entry.operations.nil?
         end
       end
 
@@ -175,10 +175,10 @@ module Seahorse
 
       def filter(operation)
         entries.inject([]) do |filtered, entry|
-          if entry.operations.empty?
-            filtered << entry
+          if entry.operations.nil?
+            filtered << entry.copy
           elsif entry.operations.include?(operation)
-            filtered << entry.copy(operations: [])
+            filtered << entry.copy(operations: nil)
           end
           filtered
         end

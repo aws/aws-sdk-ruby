@@ -27,7 +27,8 @@ module Seahorse
         @options = options
         @handler_class = option(:handler_class, options)
         @inserted = option(:inserted, options)
-        @operations = Set.new((options[:operations] || []).map(&:to_s))
+        @operations = options[:operations]
+        @operations = Set.new(options[:operations]).map(&:to_s) if @operations
         set_step(options[:step] || :build)
         set_priority(options[:priority] || 50)
         compute_weight

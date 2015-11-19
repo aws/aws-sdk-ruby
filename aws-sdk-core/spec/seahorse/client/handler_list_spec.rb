@@ -141,6 +141,18 @@ module Seahorse
             expect(handlers.for('operation1').to_a).to eq(%w(handler2 handler1))
           end
 
+          it 'does not add handlers when operation list is empty' do
+            handlers.add('handler1', operations: ['operation1'])
+            handlers.add('handler2', operations: [])
+            expect(handlers.for('operation1').to_a).to eq(%w(handler1))
+          end
+
+          it 'does add handlers when operation list is nil' do
+            handlers.add('handler1', operations: ['operation1'])
+            handlers.add('handler2', operations: nil)
+            expect(handlers.for('operation1').to_a).to eq(%w(handler2 handler1))
+          end
+
         end
 
       end
