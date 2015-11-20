@@ -390,4 +390,16 @@ module Aws
     end
   end
 
+  # add shared client examples
+  service_added do |name, svc_module, options|
+    if ENV['DOCSTRINGS'] && options[:examples]
+      json = Json.load_file(options[:examples])
+      json['examples'].each_pair do |operation_name, examples|
+        operation_name = Seahorse::Util.underscore(operation_name)
+        operation = svc_module::Client.api.operation(operation_name)
+        operation['examples'] = examples
+      end
+    end
+  end
+
 end
