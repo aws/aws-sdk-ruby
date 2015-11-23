@@ -10,6 +10,15 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Injectable Timestamp to Presigner
+
+Since the signing logic uses `now` for the signing time, the
+`Aws::S3::Presigner` class will always generate unique URLs, though use cases
+can exist for wanting consistency across generated URLs. The ask would be to add
+support for an injectable timestamp into signing via the presigner.
+
+See [related GitHub issue #1013](https://github.com/aws/aws-sdk-ruby/issues/1013).
+
 ### Add Client-Side Decryption for Amazon EC2 Passwords
 
 Calling `Aws::EC2::Client#get_password_data` returns an encrypted password,
