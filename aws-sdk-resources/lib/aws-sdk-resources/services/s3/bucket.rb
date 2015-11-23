@@ -42,12 +42,12 @@ module Aws
           clear!
           delete
         rescue Errors::BucketNotEmpty => error
-          if attempts < options[:max_attempts]
-            attempts += 1
+          attempts += 1
+          if attempts >= options[:max_attempts]
+            raise
+          else
             Kernel.sleep(options[:initial_wait] ** attempts)
             retry
-          else
-            raise
           end
         end
       end
