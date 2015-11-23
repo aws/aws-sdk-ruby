@@ -55,6 +55,22 @@ module Aws
         end
 
       end
+
+      describe '#wait_until' do
+        describe ':instance_exists' do
+
+          it 'returns fails when an error is returned' do
+            client = Client.new(stub_responses: true)
+            client.stub_responses(:describe_instances, 'InvalidInstanceIDNotFound')
+            expect {
+              client.wait_until(:instance_exists, instance_ids:['i-1234578']) do |w|
+                w.max_attempts = 1
+              end
+            }.to raise_error(Waiters::Errors::TooManyAttemptsError)
+          end
+
+        end
+      end
     end
   end
 end
