@@ -73,13 +73,13 @@ module Aws
         end
       end
 
-      def matches_path_all?(acceptor, response)
+      def matches_pathAll?(acceptor, response)
         non_empty_array(acceptor, response) do |values|
           values.all? { |value| value == acceptor['expected'] }
         end
       end
 
-      def matches_path_any?(acceptor, response)
+      def matches_pathAny?(acceptor, response)
         non_empty_array(acceptor, response) do |values|
           values.any? { |value| value == acceptor['expected'] }
         end
