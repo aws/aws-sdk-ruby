@@ -121,11 +121,11 @@ module AWS
           @providers << ENVProvider.new('AMAZON')
           begin
             if Dir.home
-              @providers << SharedCredentialFileProvider.new
+              @providers << SharedCredentialFileProvider.new(static_credentials)
             end
           rescue ArgumentError, NoMethodError
           end
-          @providers << EC2Provider.new
+          @providers << EC2Provider.new(static_credentials)
         end
 
         # @return [Array<Provider>]
@@ -284,6 +284,7 @@ module AWS
           "aws_access_key_id" => :access_key_id,
           "aws_secret_access_key" => :secret_access_key,
           "aws_session_token" => :session_token,
+          "region" => :region,
         }
 
         # @option [String] :path
