@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Amazon ECS has added task stopped reasons and task start
+  and stop times. You can now see if a task was stopped by a user or stopped due
+  to other reasons such as a failing Elastic Load Balancing health check, as
+  well as the time the task was started and stopped. Service scheduler error
+  messages have additional information that describe why tasks cannot be placed
+  in the cluster.
+
 2.2.1 (2015-11-19)
 ------------------
 
