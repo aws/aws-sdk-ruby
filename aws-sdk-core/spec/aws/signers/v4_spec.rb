@@ -116,6 +116,16 @@ module Aws
           expect(signer.signed_headers(http_request)).to eq('abc;mno;xyz')
         end
 
+        it 'ignores certain headers such as user-agent and cache-control' do
+          http_request.headers = {}
+          http_request.headers['Xyz'] = '1'
+          http_request.headers['Abc'] = '2'
+          http_request.headers['Mno'] = '3'
+          http_request.headers['Cache-Control'] = '4'
+          http_request.headers['User-Agent'] = '5'
+          expect(signer.signed_headers(http_request)).to eq('abc;mno;xyz')
+        end
+
       end
 
       context '#canonical_headers' do
