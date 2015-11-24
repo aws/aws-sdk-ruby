@@ -467,12 +467,16 @@ module AWS
 
       add_option :session_token
 
+      add_option :path
+
+      add_option :profile_name
+
       add_option :region do |cfg,region|
         region || cfg.credential_provider.credentials[:region] || ENV['AWS_REGION'] || ENV['AMAZON_REGION'] || ENV['AWS_DEFAULT_REGION'] || 'us-east-1'
       end
 
       add_option_with_needs :credential_provider,
-        [:access_key_id, :secret_access_key, :session_token] do |cfg,static_creds|
+        [:access_key_id, :secret_access_key, :session_token, :path, :profile_name] do |cfg,static_creds|
 
         CredentialProviders::DefaultProvider.new(static_creds)
 

@@ -113,19 +113,28 @@ module AWS
         include Provider
 
         # (see StaticProvider#new)
+        # (see SharedCredentialFileProvider#new)
         def initialize static_credentials = {}
           @providers = []
-          @providers << StaticProvider.new(static_credentials)
+          # Avoid failures due to StaticProvider being picky abouts its options.
+          @providers << StaticProvider.new(
+            :access_key_id => options[:access_key_id],
+            :secret_access_key => options[:secret_access_key],
+            :session_token => options[:session_token],
+          )
           @providers << ENVProvider.new('AWS')
           @providers << ENVProvider.new('AWS', :access_key_id => 'ACCESS_KEY', :secret_access_key => 'SECRET_KEY', :session_token => 'SESSION_TOKEN')
           @providers << ENVProvider.new('AMAZON')
           begin
             if Dir.home
-              @providers << SharedCredentialFileProvider.new(static_credentials)
+              @providers << SharedCredentialFileProvider.new(
+                :path => options[:path],
+                :profile_name => options[:profile_name],
+              )
             end
           rescue ArgumentError, NoMethodError
           end
-          @providers << EC2Provider.new(static_credentials)
+          @providers << EC2Provider.new
         end
 
         # @return [Array<Provider>]
