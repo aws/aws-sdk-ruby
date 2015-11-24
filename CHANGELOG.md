@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticBeanstalk - Elastic Beanstalk (EB) is launching support
+  for composable web applications. Customers, whose applications consists of
+  several linked modules (micro services architecture), can now deploy, manage,
+  and scale their applications using EB.
+
 * Feature - Aws::EC2 - This release includes two new APIs, `#modify_id_format`
   and `#describe_id_format`, that will be used to manage the transition to
   longer EC2 and EBS resource IDs. These APIs are reserved for future use.
