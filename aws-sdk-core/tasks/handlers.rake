@@ -24,7 +24,7 @@ def print_handlers(handlers)
   row = '%-6s %-11s %-9s %s'
   puts row % ['Order', 'Step', 'Priority', 'Handler Class']
   puts '---------------------------------------------------------'
-  entries = handlers.entries.sort.reverse.select{ |e| e.operations.empty? }
+  entries = handlers.entries.sort.reverse.select{ |e| e.operations.nil? }
   entries.each_with_index do |entry, n|
     puts row % [n + 1, entry.step, entry.priority, entry.handler_class]
   end
