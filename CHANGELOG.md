@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - This release includes two new APIs, `#modify_id_format`
+  and `#describe_id_format`, that will be used to manage the transition to
+  longer EC2 and EBS resource IDs. These APIs are reserved for future use.
+
 * Feature - Aws::ECS - Amazon ECS has added task stopped reasons and task start
   and stop times. You can now see if a task was stopped by a user or stopped due
   to other reasons such as a failing Elastic Load Balancing health check, as
