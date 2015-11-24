@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.2 (2015-11-23)
 ------------------
 
 * Feature - Aws::ElasticBeanstalk - Elastic Beanstalk (EB) is launching support
