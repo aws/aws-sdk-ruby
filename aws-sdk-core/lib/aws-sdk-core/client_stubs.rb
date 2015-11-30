@@ -57,7 +57,7 @@ module Aws
     #
     #     Aws.config[:s3] = {
     #       stub_responses: {
-    #         list_buckets: { bukets: [{name: 'my-bucket' }] }
+    #         list_buckets: { buckets: [{name: 'my-bucket' }] }
     #       }
     #     }
     #
