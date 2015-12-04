@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DirectoryService - Added support for the new Microsoft AD Apis.
+
 * Feature - Aws::Route53 - Added support for the new traffic flow APIs.
 
 2.2.3 (2015-11-23)
