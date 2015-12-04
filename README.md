@@ -57,7 +57,7 @@ You can configure default credentials and region via `Aws.config`. **In version 
 ```ruby
 Aws.config.update({
   region: 'us-west-2',
-  credentials: Aws::Credentials.new('akid', 'secret'),
+  credentials: Aws::Credentials.new('akid', 'secret')
 })
 ```
 
