@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Added support for the new modify DB port feature.
+
 * Feature - Aws::DirectoryService - Added support for the new Microsoft AD Apis.
 
 * Feature - Aws::Route53 - Added support for the new traffic flow APIs.
