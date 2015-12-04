@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IAM - API reference update for Aws::IAM::Client.
+
 * Feature - Aws::RDS - Added support for the new modify DB port feature.
 
 * Feature - Aws::DirectoryService - Added support for the new Microsoft AD Apis.
