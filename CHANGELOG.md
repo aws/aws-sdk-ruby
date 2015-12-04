@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.4 (2015-12-03)
 ------------------
 
 * Feature - Aws::IAM - API reference update for Aws::IAM::Client.
