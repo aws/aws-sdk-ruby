@@ -93,7 +93,8 @@ module Aws
           client.config.credentials,
           client.config.region,
           name,
-          options)
+          {url: url}.merge(options)
+        )
       end
 
       # @api private
