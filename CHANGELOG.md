@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved a regression with `Aws::S3::Presigner#presigned_url`
+  when using the `secure: false` option. Added integration test to prevent
+  future regressions.
+
+  See [related GitHub issue #988](https://github.com/aws/aws-sdk-ruby/issues/988).
+
 * Issue - Aws::Route53 - Fixed an issue that prevented users from calling  the
   `Aws::Route53::Client#get_traffic_policy` operation. The endpoint builder
   was failing to convert the paramters to strings before URI encoding them.

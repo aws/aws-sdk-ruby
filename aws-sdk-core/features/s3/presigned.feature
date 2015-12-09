@@ -5,9 +5,16 @@ Feature: S3 Presigned Operations
   Background:
     Given I create a bucket
 
-  Scenario: Presigning a get object request
+  Scenario: Presigning a HTTPS get object request
     When I put "signed" to the key "retrieve_me"
     And I create a presigned url for "get_object" with:
+    | key  | retrieve_me |
+    And I send an HTTP get request for the presigned url
+    Then the response should be "signed"
+
+  Scenario: Presinging a HTTP get object request
+    When I put "signed" to the key "retrieve_me"
+    And I create a non-secure presigned url for "get_object" with:
     | key  | retrieve_me |
     And I send an HTTP get request for the presigned url
     Then the response should be "signed"
