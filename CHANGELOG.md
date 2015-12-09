@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Added support for Aurora encryption at rest.
+
+* Feature - Aws::AutoScaling - API update to allow customers to set a flag on
+  instances that is used to prevent those instances from getting terminated
+  from scale-in events.
+
 2.2.4 (2015-12-03)
 ------------------
 
