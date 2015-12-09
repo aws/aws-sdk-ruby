@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Route53 - Fixed an issue that prevented users from calling  the
+  `Aws::Route53::Client#get_traffic_policy` operation. The endpoint builder
+  was failing to convert the paramters to strings before URI encoding them.
+  The required `:version` parameter is an integer and would trigger an exception.
+
+  See [related GitHub issue #1023](https://github.com/aws/aws-sdk-ruby/issues/1023).
+
 2.2.5 (2015-12-08)
 ------------------
 

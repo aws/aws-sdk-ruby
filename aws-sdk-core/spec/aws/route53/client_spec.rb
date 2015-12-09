@@ -82,6 +82,14 @@ module Aws
         end
 
       end
+
+      describe '#get_traffic_policy' do
+        it 'supports integer versions' do
+          client = Client.new(stub_responses:true)
+          resp = client.get_traffic_policy(id: 'id', version: 1)
+          expect(resp.context.http_request.endpoint.to_s).to eq('https://route53.amazonaws.com/2013-04-01/trafficpolicy/id/1')
+        end
+      end
     end
   end
 end
