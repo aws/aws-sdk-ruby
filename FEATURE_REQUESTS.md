@@ -155,3 +155,7 @@ See [related GitHub issue #878](https://github.com/aws/aws-sdk-ruby/issues/878).
 You can currently only configure an access key id, secret access key, and session token in the shared credentials file, `~/.aws/credentials`. It would be useful if you could also specify a role to assume similar to how the CLI supports.
 
 See [related GitHub issue #910](https://github.com/aws/aws-sdk-ruby/issues/910).
+
+### Support Raw crednetial objects from AWS API responses in config
+
+See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009).
