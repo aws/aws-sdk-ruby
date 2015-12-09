@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.5 (2015-12-08)
 ------------------
 
 * Feature - Aws::RDS - Added support for Aurora encryption at rest.
