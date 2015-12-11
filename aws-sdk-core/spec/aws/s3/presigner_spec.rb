@@ -99,6 +99,16 @@ module Aws
           expect(url).to match(/^http:/)
         end
 
+        it 'uses the correct :endpoint scheme' do
+          client.config.endpoint = URI("http://example.com")
+          signer = Presigner.new(client: client)
+          url = signer.presigned_url(:get_object,
+            bucket:'aws-sdk',
+            key:'foo',
+          )
+          expect(url).to match(/^http:/)
+        end
+
       end
     end
   end
