@@ -11,7 +11,6 @@ module Aws
         'expect',
         'max-forwards',
         'pragma',
-        'range',
         'te',
         'if-match',
         'if-none-match',
