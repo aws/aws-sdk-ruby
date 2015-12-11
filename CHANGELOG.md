@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Signers::V4 - Added a list of "blacklisted" headers that we will
+  never attempt to sign during request generation.
+
 * Issue - Aws::S3 - Resolved a regression with `Aws::S3::Presigner#presigned_url`
   when using the `secure: false` option. Added integration test to prevent
   future regressions.
