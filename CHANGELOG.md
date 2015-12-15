@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Alters the `Aws::EC2::Client#copy_image` API to support
+  launching Amazon EC2 instances with Amazon EBS encrypted boot volumes.
+
 * Issue - Aws::Signers::V4 - Added a list of "blacklisted" headers that we will
   never attempt to sign during request generation.
 
