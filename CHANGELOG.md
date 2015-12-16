@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.6 (2015-12-15)
 ------------------
 
 * Feature - Aws::EC2 - Alters the `Aws::EC2::Client#copy_image` API to support
