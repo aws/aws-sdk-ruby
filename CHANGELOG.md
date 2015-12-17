@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Adds support for serving gzip compressed files
+  from Amazon CloudFront edge locations.
+
 * Feature - Aws::RDS - Adds support for enhanced monitoring of Amazon
   Relational Database Service instances.
 
