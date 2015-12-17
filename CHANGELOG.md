@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Adds support for managed NATs in Amazon Virtual Private
+  Cloud.
+
 * Feature - Aws::CloudFront - Adds support for serving gzip compressed files
   from Amazon CloudFront edge locations.
 
