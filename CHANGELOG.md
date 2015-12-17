@@ -4,6 +4,10 @@ Unreleased Changes
 * Feature - Aws::RDS - Adds support for enhanced monitoring of Amazon
   Relational Database Service instances.
 
+* Feature - Aws::ConfigService - Update for AWS Config Rules APIs. Additionally,
+  adds supported Amazon Identity and Access Management resources to resource
+  type enum.
+
 2.2.6 (2015-12-15)
 ------------------
 
