@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudTrail - Adds support for multi-region trails.
+
 * Feature - Aws::EC2 - Adds support for managed NATs in Amazon Virtual Private
   Cloud.
 
