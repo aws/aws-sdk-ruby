@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Adds support for enhanced monitoring of Amazon
+  Relational Database Service instances.
+
 2.2.6 (2015-12-15)
 ------------------
 
