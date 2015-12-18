@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.7 (2015-12-17)
 ------------------
 
 * Feature - Aws::CloudTrail - Adds support for multi-region trails.
