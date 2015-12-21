@@ -42,6 +42,7 @@ module Aws
     DynamoDB
     DynamoDBStreams
     EC2
+    ECR
     ECS
     EFS
     ElastiCache

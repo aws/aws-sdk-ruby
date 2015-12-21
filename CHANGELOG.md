@@ -1,7 +1,12 @@
 Unreleased Changes
 ------------------
 
-* Feature Aws::ECS - Adds support for deployment configuration.
+* Feature - Aws::ECR - Adds initial support for the Amazon EC2 Container
+  Registry (Amazon ECR). Amazon ECR is a secure, fully-managed Docker image
+  registry that makes it easy for developers to store and retrieve Docker
+  container images.
+
+* Feature - Aws::ECS - Adds support for deployment configuration.
 
 2.2.7 (2015-12-17)
 ------------------
