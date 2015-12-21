@@ -8,6 +8,9 @@ Unreleased Changes
 
 * Feature - Aws::ECS - Adds support for deployment configuration.
 
+* Feature - Aws::EMR - Adds a new parameter `:service_security_group` to
+  `Aws::EMR::Client#run_job_flow`.
+
 2.2.7 (2015-12-17)
 ------------------
 
