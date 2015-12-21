@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.8 (2015-12-21)
 ------------------
 
 * Feature - Aws::ECR - Adds initial support for the Amazon EC2 Container
