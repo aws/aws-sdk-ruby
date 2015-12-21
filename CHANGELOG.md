@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature Aws::ECS - Adds support for deployment configuration.
+
 2.2.7 (2015-12-17)
 ------------------
 
