@@ -22,6 +22,11 @@ module Aws
 
         POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS + V2_ENVELOPE_KEYS).uniq
 
+        POSSIBLE_ENCRYPTION_FORMATS = %w(
+          AES/GCM/NoPadding
+          AES/CBC/PKCS5Padding
+        )
+
         def call(context)
           attach_http_event_listeners(context)
           @handler.call(context)
@@ -103,7 +108,7 @@ module Aws
         end
 
         def v2_envelope(envelope)
-          unless envelope['x-amz-cek-alg'] == 'AES/CBC/PKCS5Padding'
+          unless POSSIBLE_ENCRYPTION_FORMATS.include? envelope['x-amz-cek-alg']
             alg = envelope['x-amz-cek-alg'].inspect
             msg = "unsupported content encrypting key (cek) format: #{alg}"
             raise Errors::DecryptionError, msg
