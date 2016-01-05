@@ -1,6 +1,8 @@
 2.2.9 (2016-01-05)
 ------------------
 
+* Feature - Aws::EC2 - Adds support for the `t2.nano` instance type.
+
 2.2.8 (2015-12-21)
 ------------------
 
