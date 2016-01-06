@@ -18,7 +18,8 @@ module Seahorse
         NETWORK_ERRORS = [
           SocketError, EOFError, IOError, Timeout::Error,
           Errno::ECONNABORTED, Errno::ECONNRESET, Errno::EPIPE,
-          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError
+          Errno::EINVAL, Errno::ETIMEDOUT, OpenSSL::SSL::SSLError,
+          Errno::EHOSTUNREACH, Errno::ECONNREFUSED
         ]
 
         # @api private
