@@ -23,7 +23,7 @@ module Aws
     class << self
 
       def load(json)
-        ENGINE.load(json)
+        ENGINE.load(json, *ENGINE_LOAD_OPTIONS)
       rescue ENGINE_ERROR => e
         raise ParseError.new(e)
       end
@@ -40,19 +40,20 @@ module Aws
 
       def oj_engine
         require 'oj'
-        [Oj, [{ mode: :compat }], Oj::ParseError]
+        [Oj, [{mode: :compat, symbol_keys: false}], [{ mode: :compat }], Oj::ParseError]
       rescue LoadError
         false
       end
 
       def json_engine
-        [JSON, [], JSON::ParserError]
+        [JSON, [], [], JSON::ParserError]
       end
 
     end
 
     # @api private
-    ENGINE, ENGINE_DUMP_OPTIONS, ENGINE_ERROR = oj_engine || json_engine
+    ENGINE, ENGINE_LOAD_OPTIONS, ENGINE_DUMP_OPTIONS, ENGINE_ERROR =
+      oj_engine || json_engine
 
   end
 end
