@@ -1,3 +1,73 @@
+Unreleased Changes
+------------------
+
+2.2.9 (2016-01-05)
+------------------
+
+* Feature - Aws::EC2 - Adds support for the `t2.nano` instance type.
+
+2.2.8 (2015-12-21)
+------------------
+
+* Feature - Aws::ECR - Adds initial support for the Amazon EC2 Container
+  Registry (Amazon ECR). Amazon ECR is a secure, fully-managed Docker image
+  registry that makes it easy for developers to store and retrieve Docker
+  container images.
+
+* Feature - Aws::ECS - Adds support for deployment configuration.
+
+* Feature - Aws::EMR - Adds a new parameter `:service_security_group` to
+  `Aws::EMR::Client#run_job_flow`.
+
+2.2.7 (2015-12-17)
+------------------
+
+* Feature - Aws::CloudTrail - Adds support for multi-region trails.
+
+* Feature - Aws::EC2 - Adds support for managed NATs in Amazon Virtual Private
+  Cloud.
+
+* Feature - Aws::CloudFront - Adds support for serving gzip compressed files
+  from Amazon CloudFront edge locations.
+
+* Feature - Aws::RDS - Adds support for enhanced monitoring of Amazon
+  Relational Database Service instances.
+
+* Feature - Aws::ConfigService - Update for AWS Config Rules APIs. Additionally,
+  adds supported Amazon Identity and Access Management resources to resource
+  type enum.
+
+2.2.6 (2015-12-15)
+------------------
+
+* Feature - Aws::EC2 - Alters the `Aws::EC2::Client#copy_image` API to support
+  launching Amazon EC2 instances with Amazon EBS encrypted boot volumes.
+
+* Issue - Aws::Signers::V4 - Added a list of "blacklisted" headers that we will
+  never attempt to sign during request generation.
+
+* Issue - Aws::S3 - Resolved a regression with `Aws::S3::Presigner#presigned_url`
+  when using the `secure: false` option. Added integration test to prevent
+  future regressions.
+
+  See [related GitHub issue #988](https://github.com/aws/aws-sdk-ruby/issues/988).
+
+* Issue - Aws::Route53 - Fixed an issue that prevented users from calling  the
+  `Aws::Route53::Client#get_traffic_policy` operation. The endpoint builder
+  was failing to convert the paramters to strings before URI encoding them.
+  The required `:version` parameter is an integer and would trigger an exception.
+
+  See [related GitHub issue #1023](https://github.com/aws/aws-sdk-ruby/issues/1023).
+
+2.2.5 (2015-12-08)
+------------------
+
+* Feature - Aws::RDS - Added support for Aurora encryption at rest.
+
+* Feature - Aws::AutoScaling - API update to allow customers to set a flag on
+  instances that is used to prevent those instances from getting terminated
+  from scale-in events.
+
 2.2.4 (2015-12-03)
 ------------------
 

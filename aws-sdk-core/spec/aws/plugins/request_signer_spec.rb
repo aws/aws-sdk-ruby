@@ -58,11 +58,6 @@ module Aws
 
       describe 'sigv4 signing region' do
 
-        it 'extracts the region from standard endpoints' do
-          plugin.add_options(config)
-          expect(config.build!.sigv4_region).to eq('us-west-2')
-        end
-
         it 'defaults to us-east-1 for global endpoints' do
           plugin.add_options(config)
           cfg = config.build!(endpoint: 'svc-name.amazonaws.com')

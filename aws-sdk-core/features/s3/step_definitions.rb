@@ -188,10 +188,11 @@ Then(/^the object should exist$/) do
   @client.head_object(bucket: @bucket_name, key: @key)
 end
 
-When(/^I create a presigned url for "(.*?)" with:$/) do |method, params|
+When(/^I create a (non-secure )?presigned url for "(.*?)" with:$/) do |non_secure, method, params|
   presigner = Aws::S3::Presigner.new(client: @client)
   params = symbolized_params(params)
   params[:bucket] = @bucket_name
+  params[:secure] = false if non_secure
   @url = presigner.presigned_url(method.to_sym, params)
 end
 

@@ -37,7 +37,7 @@ module Aws
         end
 
         def param_value_for_placeholder(placeholder, params)
-          value = params[param_name(placeholder)]
+          value = params[param_name(placeholder)].to_s
           placeholder.include?('+') ?
             value.gsub(/[^\/]+/) { |v| escape(v) } :
             escape(value)

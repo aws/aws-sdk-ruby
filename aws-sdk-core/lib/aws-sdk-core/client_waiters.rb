@@ -60,7 +60,7 @@ module Aws
     #       w.max_attempts = nil
     #
     #       # poll for 1 hour, instead of a number of attempts
-    #       before_wait do |attempts, response|
+    #       w.before_wait do |attempts, response|
     #         throw :failure if Time.now - started_at > 3600
     #       end
     #

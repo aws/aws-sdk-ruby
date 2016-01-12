@@ -99,7 +99,7 @@ module Aws
           http_request.headers['Bar2'] = '"bar  bar"'
           http_request.body = StringIO.new('http-body')
           http_request.headers['Content-Length'] = 9
-          expect(sign.headers['Authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120102/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;content-length;foo;host;x-amz-content-sha256;x-amz-date, Signature=6b40912702f78866fcd13804e2bc2703bf5f73264ebe0fa54a28d16bcdddb88c')
+          expect(sign.headers['Authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120102/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=7066fb1a3fd7e436114d029b208143fdba353169990d430be4562a9c1d2749d5')
         end
 
       end
@@ -113,6 +113,16 @@ module Aws
           http_request.headers['Mno'] = '3'
           http_request.headers['Authorization'] = '4'
           http_request.headers['authorization'] = '5'
+          expect(signer.signed_headers(http_request)).to eq('abc;mno;xyz')
+        end
+
+        it 'ignores certain headers such as user-agent and cache-control' do
+          http_request.headers = {}
+          http_request.headers['Xyz'] = '1'
+          http_request.headers['Abc'] = '2'
+          http_request.headers['Mno'] = '3'
+          http_request.headers['Cache-Control'] = '4'
+          http_request.headers['User-Agent'] = '5'
           expect(signer.signed_headers(http_request)).to eq('abc;mno;xyz')
         end
 

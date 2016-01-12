@@ -5,6 +5,26 @@ module Aws
   module Signers
     class V4
 
+      BLACKLIST_HEADERS = [
+        'cache-control',
+        'content-length',
+        'expect',
+        'max-forwards',
+        'pragma',
+        'te',
+        'if-match',
+        'if-none-match',
+        'if-modified-since',
+        'if-unmodified-since',
+        'if-range',
+        'accept',
+        'authorization',
+        'proxy-authorization',
+        'from',
+        'referer',
+        'user-agent'
+      ]
+
       def self.sign(context)
         new(
           context.config.credentials,
@@ -162,7 +182,9 @@ module Aws
       def signed_headers(request)
         request.headers.keys.inject([]) do |signed_headers, header_key|
           header_key = header_key.downcase
-          signed_headers << header_key unless header_key == 'authorization'
+          unless BLACKLIST_HEADERS.include?(header_key)
+            signed_headers << header_key
+          end
           signed_headers
         end.sort.join(';')
       end
@@ -171,7 +193,7 @@ module Aws
         headers = []
         request.headers.each_pair do |k,v|
           k = k.downcase
-          headers << [k,v] unless k == 'authorization'
+          headers << [k,v] unless BLACKLIST_HEADERS.include?(k)
         end
         headers = headers.sort_by(&:first)
         headers.map{|k,v| "#{k}:#{canonical_header_value(v.to_s)}" }.join("\n")

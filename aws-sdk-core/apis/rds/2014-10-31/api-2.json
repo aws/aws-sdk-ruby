@@ -1637,7 +1637,9 @@
         "OptionGroupName":{"shape":"String"},
         "PreferredBackupWindow":{"shape":"String"},
         "PreferredMaintenanceWindow":{"shape":"String"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "StorageEncrypted":{"shape":"BooleanOptional"},
+        "KmsKeyId":{"shape":"String"}
       }
     },
     "CreateDBClusterParameterGroupMessage":{
@@ -1723,7 +1725,9 @@
         "TdeCredentialPassword":{"shape":"String"},
         "StorageEncrypted":{"shape":"BooleanOptional"},
         "KmsKeyId":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "MonitoringInterval":{"shape":"IntegerOptional"},
+        "MonitoringRoleArn":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaMessage":{
@@ -1745,7 +1749,9 @@
         "Tags":{"shape":"TagList"},
         "DBSubnetGroupName":{"shape":"String"},
         "StorageType":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"BooleanOptional"}
+        "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "MonitoringInterval":{"shape":"IntegerOptional"},
+        "MonitoringRoleArn":{"shape":"String"}
       }
     },
     "CreateDBInstanceReadReplicaResult":{
@@ -1905,7 +1911,10 @@
         "PreferredMaintenanceWindow":{"shape":"String"},
         "DBClusterMembers":{"shape":"DBClusterMemberList"},
         "VpcSecurityGroups":{"shape":"VpcSecurityGroupMembershipList"},
-        "HostedZoneId":{"shape":"String"}
+        "HostedZoneId":{"shape":"String"},
+        "StorageEncrypted":{"shape":"Boolean"},
+        "KmsKeyId":{"shape":"String"},
+        "DbClusterResourceId":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -2050,7 +2059,9 @@
         "EngineVersion":{"shape":"String"},
         "LicenseModel":{"shape":"String"},
         "SnapshotType":{"shape":"String"},
-        "PercentProgress":{"shape":"Integer"}
+        "PercentProgress":{"shape":"Integer"},
+        "StorageEncrypted":{"shape":"Boolean"},
+        "KmsKeyId":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -2159,7 +2170,10 @@
         "KmsKeyId":{"shape":"String"},
         "DbiResourceId":{"shape":"String"},
         "CACertificateIdentifier":{"shape":"String"},
-        "CopyTagsToSnapshot":{"shape":"Boolean"}
+        "CopyTagsToSnapshot":{"shape":"Boolean"},
+        "MonitoringInterval":{"shape":"IntegerOptional"},
+        "EnhancedMonitoringResourceArn":{"shape":"String"},
+        "MonitoringRoleArn":{"shape":"String"}
       },
       "wrapper":true
     },
@@ -3487,8 +3501,10 @@
         "TdeCredentialPassword":{"shape":"String"},
         "CACertificateIdentifier":{"shape":"String"},
         "CopyTagsToSnapshot":{"shape":"BooleanOptional"},
+        "MonitoringInterval":{"shape":"IntegerOptional"},
         "DBPortNumber":{"shape":"IntegerOptional"},
-        "PubliclyAccessible":{"shape":"BooleanOptional"}
+        "PubliclyAccessible":{"shape":"BooleanOptional"},
+        "MonitoringRoleArn":{"shape":"String"}
       }
     },
     "ModifyDBInstanceResult":{
@@ -3787,7 +3803,8 @@
         "Vpc":{"shape":"Boolean"},
         "SupportsStorageEncryption":{"shape":"Boolean"},
         "StorageType":{"shape":"String"},
-        "SupportsIops":{"shape":"Boolean"}
+        "SupportsIops":{"shape":"Boolean"},
+        "SupportsEnhancedMonitoring":{"shape":"Boolean"}
       },
       "wrapper":true
     },
@@ -4155,7 +4172,8 @@
         "DatabaseName":{"shape":"String"},
         "OptionGroupName":{"shape":"String"},
         "VpcSecurityGroupIds":{"shape":"VpcSecurityGroupIdList"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "KmsKeyId":{"shape":"String"}
       }
     },
     "RestoreDBClusterFromSnapshotResult":{
@@ -4179,7 +4197,8 @@
         "DBSubnetGroupName":{"shape":"String"},
         "OptionGroupName":{"shape":"String"},
         "VpcSecurityGroupIds":{"shape":"VpcSecurityGroupIdList"},
-        "Tags":{"shape":"TagList"}
+        "Tags":{"shape":"TagList"},
+        "KmsKeyId":{"shape":"String"}
       }
     },
     "RestoreDBClusterToPointInTimeResult":{

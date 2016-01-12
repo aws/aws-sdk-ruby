@@ -1,5 +1,6 @@
 {
   "version": "2.0",
+  "service": null,
   "operations": {
     "CreateCloudFrontOriginAccessIdentity": "Create a new origin access identity.",
     "CreateDistribution": "Create a new distribution.",
@@ -24,7 +25,6 @@
     "UpdateDistribution": "Update a distribution.",
     "UpdateStreamingDistribution": "Update a streaming distribution."
   },
-  "service": null,
   "shapes": {
     "AccessDenied": {
       "base": "Access denied.",
@@ -99,6 +99,12 @@
       "base": "A complex type that controls whether CloudFront caches the response to requests using the specified HTTP methods. There are two choices: - CloudFront caches responses to GET and HEAD requests. - CloudFront caches responses to GET, HEAD, and OPTIONS requests. If you pick the second choice for your S3 Origin, you may need to forward Access-Control-Request-Method, Access-Control-Request-Headers and Origin headers for the responses to be cached correctly.",
       "refs": {
         "AllowedMethods$CachedMethods": null
+      }
+    },
+    "CertificateSource": {
+      "base": null,
+      "refs": {
+        "ViewerCertificate$CertificateSource": "If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to \"cloudfront\". If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), set to \"iam\", and update the Certificate field with the IAM certificate identifier of the custom viewer certificate for this distribution."
       }
     },
     "CloudFrontOriginAccessIdentity": {
@@ -922,8 +928,10 @@
       "refs": {
         "ActiveTrustedSigners$Enabled": "Each active trusted signer.",
         "CacheBehavior$SmoothStreaming": "Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false.",
+        "CacheBehavior$Compress": "Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header. If so, specify true; if not, specify false. CloudFront compresses files larger than 1000 bytes and less than 1 megabyte for both Amazon S3 and custom origins. When a CloudFront edge location is unusually busy, some files might not be compressed. The value of the Content-Type header must be on the list of file types that CloudFront will compress. For the current list, see <a href=\"http://docs.aws.amazon.com/console/cloudfront/compressed-content\">Serving Compressed Content</a> in the Amazon CloudFront Developer Guide. If you configure CloudFront to compress content, CloudFront removes the ETag response header from the objects that it compresses. The ETag header indicates that the version in a CloudFront edge cache is identical to the version on the origin server, but after compression the two versions are no longer identical. As a result, for compressed objects, CloudFront can't use the ETag header to determine whether an expired object in the CloudFront edge cache is still the latest version.",
         "CloudFrontOriginAccessIdentityList$IsTruncated": "A flag that indicates whether more origin access identities remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more items in the list.",
         "DefaultCacheBehavior$SmoothStreaming": "Indicates whether you want to distribute media files in Microsoft Smooth Streaming format using the origin that is associated with this cache behavior. If so, specify true; if not, specify false.",
+        "DefaultCacheBehavior$Compress": "Whether you want CloudFront to automatically compress content for web requests that include Accept-Encoding: gzip in the request header. If so, specify true; if not, specify false. CloudFront compresses files larger than 1000 bytes and less than 1 megabyte for both Amazon S3 and custom origins. When a CloudFront edge location is unusually busy, some files might not be compressed. The value of the Content-Type header must be on the list of file types that CloudFront will compress. For the current list, see <a href=\"http://docs.aws.amazon.com/console/cloudfront/compressed-content\">Serving Compressed Content</a> in the Amazon CloudFront Developer Guide. If you configure CloudFront to compress content, CloudFront removes the ETag response header from the objects that it compresses. The ETag header indicates that the version in a CloudFront edge cache is identical to the version on the origin server, but after compression the two versions are no longer identical. As a result, for compressed objects, CloudFront can't use the ETag header to determine whether an expired object in the CloudFront edge cache is still the latest version.",
         "DistributionConfig$Enabled": "Whether the distribution is enabled to accept end user requests for content.",
         "DistributionList$IsTruncated": "A flag that indicates whether more distributions remain to be listed. If your results were truncated, you can make a follow-up pagination request using the Marker request parameter to retrieve more distributions in the list.",
         "DistributionSummary$Enabled": "Whether the distribution is enabled to accept end user requests for content.",
@@ -936,7 +944,7 @@
         "StreamingDistributionSummary$Enabled": "Whether the distribution is enabled to accept end user requests for content.",
         "StreamingLoggingConfig$Enabled": "Specifies whether you want CloudFront to save access logs to an Amazon S3 bucket. If you do not want to enable logging when you create a streaming distribution or if you want to disable logging for an existing streaming distribution, specify false for Enabled, and specify empty Bucket and Prefix elements. If you specify false for Enabled but you specify values for Bucket and Prefix, the values are automatically deleted.",
         "TrustedSigners$Enabled": "Specifies whether you want to require end users to use signed URLs to access the files specified by PathPattern and TargetOriginId.",
-        "ViewerCertificate$CloudFrontDefaultCertificate": "If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to true. Omit this value if you are setting an IAMCertificateId."
+        "ViewerCertificate$CloudFrontDefaultCertificate": "Note: this field is deprecated. Please use \"cloudfront\" as CertificateSource and omit specifying a Certificate. If you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name of your distribution in your object URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg), set to true. Omit this value if you are setting an IAMCertificateId."
       }
     },
     "integer": {
@@ -1146,7 +1154,8 @@
         "UpdateStreamingDistributionRequest$Id": "The streaming distribution's id.",
         "UpdateStreamingDistributionRequest$IfMatch": "The value of the ETag header you received when retrieving the streaming distribution's configuration. For example: E2QWRUHAPOMQZL.",
         "UpdateStreamingDistributionResult$ETag": "The current version of the configuration. For example: E2QWRUHAPOMQZL.",
-        "ViewerCertificate$IAMCertificateId": "If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier of the custom viewer certificate for this distribution. Specify either this value or CloudFrontDefaultCertificate."
+        "ViewerCertificate$Certificate": "If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), set to the IAM certificate identifier of the custom viewer certificate for this distribution.",
+        "ViewerCertificate$IAMCertificateId": "Note: this field is deprecated. Please use \"iam\" as CertificateSource and specify the IAM certificate Id as the Certificate. If you want viewers to use HTTPS to request your objects and you're using an alternate domain name in your object URLs (for example, https://example.com/logo.jpg), specify the IAM certificate identifier of the custom viewer certificate for this distribution. Specify either this value or CloudFrontDefaultCertificate."
       }
     },
     "timestamp": {

@@ -89,7 +89,12 @@ module Aws
         req.handlers.remove(Plugins::S3RequestSigner::SigningHandler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handle(step: :send) do |context|
-          context.http_request.endpoint.scheme = scheme
+          if scheme != context.http_request.endpoint.scheme
+            endpoint = context.http_request.endpoint.dup
+            endpoint.scheme = scheme
+            endpoint.port = (scheme == 'http' ? 80 : 443)
+            context.http_request.endpoint = URI.parse(endpoint.to_s)
+          end
           signer = Signers::V4.new(
             context.config.credentials, 's3',
             context.config.region
