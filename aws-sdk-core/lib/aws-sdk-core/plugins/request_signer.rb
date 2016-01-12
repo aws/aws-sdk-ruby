@@ -49,8 +49,11 @@ module Aws
 
       option(:sigv4_region) do |cfg|
         prefix = cfg.api.metadata['endpointPrefix']
+
         if cfg.endpoint.to_s.match(/#{prefix}\.amazonaws\.com/)
-          'us-east-1'
+          'us-east-1' if cfg.endpoint.to_s.include? 'us-east-1'
+          'ap-northeast-1' if cfg.endpoint.to_s.include? 'ap-northeast-1'
+          'eu-west-1' if cfg.endpoint.to_s.include? 'eu-west-1'          
         else
           cfg.region
         end
