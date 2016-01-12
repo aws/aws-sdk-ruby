@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.10 (2016-01-12)
 ------------------
 
 * Feature - Aws::EC2 - Add DNS hostname resolution support for ClassicLink.
