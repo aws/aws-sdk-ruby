@@ -204,7 +204,7 @@
         "type": "list",
         "member": {
           "shape": "StringType",
-          "locationName": "item"
+          "LocationName": "item"
         }
       },
       "StringType": {
@@ -254,7 +254,7 @@
         "type": "list",
         "member": {
           "shape": "StringType",
-          "locationName": "item"
+          "LocationName": "item"
         }
       },
       "StringType": {

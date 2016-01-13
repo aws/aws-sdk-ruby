@@ -1,5 +1,29 @@
 [
   {
+    "description": "No parameters",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {},
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/2014-01-01/jobs"
+          },
+          "name": "OperationName"
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/2014-01-01/jobs",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
     "description": "URI parameter only with no location name",
     "metadata": {
       "protocol": "rest-json",
@@ -81,6 +105,182 @@
         "serialized": {
           "body": "",
           "uri": "/2014-01-01/jobsByPipeline/bar",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "Querystring list of strings",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "Items": {
+            "shape": "StringList",
+            "location": "querystring",
+            "locationName": "item"
+          }
+        }
+      },
+      "StringList": {
+        "type": "list",
+        "member": {
+          "shape": "String"
+        }
+      },
+      "String": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "Items": ["value1", "value2"]
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path?item=value1&item=value2",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "String to string maps in querystring",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "PipelineId": {
+            "shape": "StringType",
+            "location": "uri"
+          },
+          "QueryDoc": {
+            "shape": "MapStringStringType",
+            "location": "querystring"
+          }
+        }
+      },
+      "MapStringStringType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/2014-01-01/jobsByPipeline/{PipelineId}"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "PipelineId": "foo",
+          "QueryDoc": {
+            "bar": "baz",
+            "fizz": "buzz"
+          }
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/2014-01-01/jobsByPipeline/foo?bar=baz&fizz=buzz",
+          "headers": {}
+        }
+      }
+    ]
+  },
+  {
+    "description": "String to string list maps in querystring",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "PipelineId": {
+            "shape": "StringType",
+            "location": "uri"
+          },
+          "QueryDoc": {
+            "shape": "MapStringStringListType",
+            "location": "querystring"
+          }
+        }
+      },
+      "MapStringStringListType": {
+        "type": "map",
+        "key": {
+          "shape": "StringType"
+        },
+        "value": {
+          "shape": "StringListType"
+        }
+      },
+      "StringListType": {
+        "type": "list",
+        "member": {
+          "shape": "StringType"
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/2014-01-01/jobsByPipeline/{PipelineId}"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "PipelineId": "id",
+          "QueryDoc": {
+            "foo": ["bar", "baz"],
+            "fizz": ["buzz", "pop"]
+          }
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/2014-01-01/jobsByPipeline/id?foo=bar&foo=baz&fizz=buzz&fizz=pop",
           "headers": {}
         }
       }
@@ -363,39 +563,39 @@
     ]
   },
   {
-    "description": "Structure payload",
+    "description": "Serialize blobs in body",
     "metadata": {
-      "protocol": "rest-json"
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
     },
     "shapes": {
       "InputShape": {
         "type": "structure",
         "members": {
-          "foo": {
-            "shape": "FooShape",
-            "locationName": "foo"
-          }
+          "Foo": {
+            "shape": "StringType",
+            "location": "uri",
+            "locationName": "Foo"
+          },
+          "Bar": {"shape": "BlobType"}
         },
-        "payload": "foo"
+        "required": [
+          "Foo"
+        ]
       },
-      "FooShape": {
-        "type": "structure",
-        "members": {
-          "baz": {
-            "shape": "BazShape"
-          }
-        }
-      },
-      "BazShape": {
+      "StringType": {
         "type": "string"
+      },
+      "BlobType": {
+        "type": "blob"
       }
     },
     "cases": [
       {
         "given": {
           "http": {
-            "method": "POST",
-            "requestUri": "/"
+            "method": "GET",
+            "requestUri": "/2014-01-01/{Foo}"
           },
           "input": {
             "shape": "InputShape"
@@ -403,50 +603,12 @@
           "name": "OperationName"
         },
         "params": {
-          "foo": {
-            "baz": "bar"
-          }
+          "Foo": "foo_name",
+          "Bar": "Blob param"
         },
         "serialized": {
-          "method": "POST",
-          "body": "{ \"baz\": \"bar\" }",
-          "uri": "/"
-        }
-      },
-      {
-        "given": {
-          "http": {
-            "method": "POST",
-            "requestUri": "/"
-          },
-          "input": {
-            "shape": "InputShape"
-          },
-          "name": "OperationName"
-        },
-        "params": {},
-        "serialized": {
-          "method": "POST",
-          "body": "",
-          "uri": "/"
-        }
-      },
-      {
-        "given": {
-          "http": {
-            "method": "POST",
-            "requestUri": "/"
-          },
-          "input": {
-            "shape": "InputShape"
-          },
-          "name": "OperationName"
-        },
-        "params": { "foo": {} },
-        "serialized": {
-          "method": "POST",
-          "body": "{}",
-          "uri": "/"
+          "body": "{\"Bar\": \"QmxvYiBwYXJhbQ==\"}",
+          "uri": "/2014-01-01/foo_name"
         }
       }
     ]
@@ -787,6 +949,49 @@
           "uri": "/path",
           "headers": {"x-amz-timearg": "Sun, 25 Jan 2015 08:00:00 GMT"},
           "body": ""
+        }
+      }
+    ]
+  },
+  {
+    "description": "Named locations in JSON body",
+    "metadata": {
+      "protocol": "rest-json",
+      "apiVersion": "2014-01-01"
+    },
+    "shapes": {
+      "InputShape": {
+        "type": "structure",
+        "members": {
+          "TimeArg": {
+            "shape": "TimestampType",
+            "locationName": "timestamp_location"
+          }
+        }
+      },
+      "TimestampType": {
+        "type": "timestamp"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "input": {
+            "shape": "InputShape"
+          },
+          "http": {
+            "method": "POST",
+            "requestUri": "/path"
+          },
+          "name": "OperationName"
+        },
+        "params": {
+          "TimeArg": 1422172800
+        },
+        "serialized": {
+          "uri": "/path",
+          "headers": {},
+          "body": "{\"timestamp_location\": 1422172800}"
         }
       }
     ]
