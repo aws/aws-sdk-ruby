@@ -73,6 +73,14 @@ module Aws
                   raise NotImplementedError, msg
                 end
 
+              when ListShape
+                if StringShape === member.shape.member.shape
+                  parts += list_of_strings(member.location_name, params[member_name])
+                else
+                  msg = "Only list of strings supported"
+                  raise NotImplementedError, msg
+                end
+
               # unsupported querystring shape
               else
                 raise NotImplementedError
@@ -99,6 +107,12 @@ module Aws
             end
           end
           list
+        end
+
+        def list_of_strings(name, values)
+          values.map do |value|
+            "#{name}=#{escape(value)}"
+          end
         end
 
         def escape(string)
