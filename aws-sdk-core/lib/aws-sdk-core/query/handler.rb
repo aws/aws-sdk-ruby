@@ -74,7 +74,9 @@ module Aws
 
       def remove_wrapper(data, context)
         if context.operation.output
-          context[:request_id] = data.response_metadata.request_id
+          if data.response_metadata
+            context[:request_id] = data.response_metadata.request_id
+          end
           data.result || Structure.new(context.operation.output.shape.member_names)
         else
           data
