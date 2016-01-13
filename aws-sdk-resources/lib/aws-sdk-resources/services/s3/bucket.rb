@@ -41,7 +41,7 @@ module Aws
         begin
           clear!
           delete
-        rescue Errors::BucketNotEmpty => error
+        rescue Errors::BucketNotEmpty
           attempts += 1
           if attempts >= options[:max_attempts]
             raise
