@@ -119,43 +119,7 @@
       {
         "given": {
           "output": {
-            "shape": "OutputShape"
-          },
-          "name": "OperationName"
-        },
-        "result": {
-          "Str": "myname"
-        },
-        "response": {
-          "status_code": 200,
-          "headers": {},
-          "body": "<OperationNameResponse><OperationNameResult><Str>myname</Str></OperationNameResult><ResponseMetadata><RequestId>request-id</RequestId></ResponseMetadata></OperationNameResponse>"
-        }
-      }
-    ]
-  },
-  {
-    "description": "Custom result wrapper",
-    "metadata": {
-      "protocol": "query"
-    },
-    "shapes": {
-      "OutputShape": {
-        "type": "structure",
-        "members": {
-          "Str": {
-            "shape": "StringType"
-          }
-        }
-      },
-      "StringType": {
-        "type": "string"
-      }
-    },
-    "cases": [
-      {
-        "given": {
-          "output": {
+            "resultWrapper": "OperationNameResult",
             "shape": "OutputShape"
           },
           "name": "OperationName"
@@ -767,6 +731,43 @@
           "status_code": 200,
           "headers": {},
           "body": "<OperationNameResponse><OperationNameResult><Map><foo>qux</foo><bar>bar</bar></Map><Map><foo>baz</foo><bar>bam</bar></Map></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
+        }
+      }
+    ]
+  },
+  {
+    "description": "Empty string",
+    "metadata": {
+      "protocol": "query"
+    },
+    "shapes": {
+      "OutputShape": {
+        "type": "structure",
+        "members": {
+          "Foo": {
+            "shape": "StringType"
+          }
+        }
+      },
+      "StringType": {
+        "type": "string"
+      }
+    },
+    "cases": [
+      {
+        "given": {
+          "output": {
+            "shape": "OutputShape"
+          },
+          "name": "OperationName"
+        },
+        "result": {
+          "Foo": ""
+        },
+        "response": {
+          "status_code": 200,
+          "headers": {},
+          "body": "<OperationNameResponse><OperationNameResult><Foo/></OperationNameResult><ResponseMetadata><RequestId>requestid</RequestId></ResponseMetadata></OperationNameResponse>"
         }
       }
     ]

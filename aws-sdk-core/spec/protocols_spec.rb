@@ -57,6 +57,7 @@ end
 def format_data(ref, src)
   case ref.shape
   when Seahorse::Model::Shapes::StructureShape
+    return nil if src.nil?
     src.each.with_object({}) do |(key, value), params|
       member_ref = ref.shape.member(underscore(key).to_sym)
       params[underscore(key).to_sym] = format_data(member_ref, value)
@@ -73,63 +74,55 @@ def format_data(ref, src)
   end
 end
 
-def match_req_method(group, test_case, http_req)
-  if expected_method = test_case['serialized']['method']
-    group.it "uses the #{expected_method} HTTP method" do
-      expect(http_req.http_method).to(eq(expected_method))
-    end
-  end
-end
-
-def match_req_uri(group, test_case, http_req)
-  if expected_uri = test_case['serialized']['uri']
-    group.it 'constructs a valid http request uri' do
-      expect(http_req.endpoint.request_uri).to eq(expected_uri)
-    end
-  end
-end
-
-def match_req_headers(group, test_case, http_req)
-  if expected_headers = test_case['serialized']['headers']
-    group.it 'populates the http request headers' do
-      http_req.headers.delete('user-agent')
-      headers = normalize_headers(http_req.headers)
-      expected_headers = normalize_headers(expected_headers)
-      expect(headers).to eq(headers)
-    end
-  end
-end
-
 def normalize_headers(hash)
   hash.each.with_object({}) do |(k,v),headers|
     headers[k.downcase] = v.to_s
   end
 end
 
-def match_req_body(group, suite, test_case, http_req)
+def match_req_method(group, test_case, http_req, it)
+  if expected_method = test_case['serialized']['method']
+    it.expect(http_req.http_method).to(eq(expected_method))
+  end
+end
+
+def match_req_uri(group, test_case, http_req, it)
+  if expected_uri = test_case['serialized']['uri']
+    it.expect(http_req.endpoint.request_uri).to eq(expected_uri)
+  end
+end
+
+def match_req_headers(group, test_case, http_req, it)
+  if expected_headers = test_case['serialized']['headers']
+    http_req.headers.delete('user-agent')
+    headers = normalize_headers(http_req.headers)
+    expected_headers = normalize_headers(expected_headers)
+    it.expect(headers).to eq(headers)
+  end
+end
+
+def match_req_body(group, suite, test_case, http_req, it)
   protocol = suite['metadata']['protocol']
   if expected_body = test_case['serialized']['body']
-    group.it "serializes the #{protocol} body correctly" do
-      body = http_req.body_contents
-      case protocol
-      when 'query', 'ec2'
-        body = body.split('&').sort.join('&')
-        expected_body = expected_body.split('&').sort.join('&')
-      when 'json'
-        body = Aws::Json.load(body) unless body == ''
+    body = http_req.body_contents
+    case protocol
+    when 'query', 'ec2'
+      body = body.split('&').sort.join('&')
+      expected_body = expected_body.split('&').sort.join('&')
+    when 'json'
+      body = Aws::Json.load(body) unless body == ''
+      expected_body = Aws::Json.load(expected_body)
+    when 'rest-json'
+      if body[0] == '{'
+        body = Aws::Json.load(body)
         expected_body = Aws::Json.load(expected_body)
-      when 'rest-json'
-        if body[0] == '{'
-          body = Aws::Json.load(body)
-          expected_body = Aws::Json.load(expected_body)
-        end
-      when 'rest-xml'
-        body = normalize_xml(body)
-        expected_body = normalize_xml(expected_body)
-      else raise "unsported protocol: `#{protocol}'"
       end
-      expect(body).to(eq(expected_body))
+    when 'rest-xml'
+      body = normalize_xml(body)
+      expected_body = normalize_xml(expected_body)
+    else raise "unsported protocol: `#{protocol}'"
     end
+    it.expect(body).to(eq(expected_body))
   end
 end
 
@@ -143,21 +136,25 @@ fixtures.each do |directory, files|
     describe 'input' do
       each_test_case(self, files['input']) do |group, suite, test_case, n|
 
-        client = client_for(suite, test_case)
-        client.handle(step: :send) do |context|
-          context.http_request.tap do |http_req|
-            match_req_method(group, test_case, http_req)
-            match_req_uri(group, test_case, http_req)
-            match_req_headers(group, test_case, http_req)
-            match_req_body(group, suite, test_case, http_req)
+        group.it "marshalls response data correctly" do
+
+          client = client_for(suite, test_case)
+          ctx = nil
+          client.handle(step: :send) do |context|
+            ctx = context
+            Seahorse::Client::Response.new(context:context)
           end
-          Seahorse::Client::Response.new(context:context)
+
+          input_shape = client.config.api.operation(:operation_name).input
+          request_params = format_data(input_shape, test_case['params'] || {})
+          client.operation_name(request_params)
+
+          match_req_method(group, test_case, ctx.http_request, self)
+          match_req_uri(group, test_case, ctx.http_request, self)
+          match_req_headers(group, test_case, ctx.http_request, self)
+          match_req_body(group, suite, test_case, ctx.http_request, self)
+
         end
-
-        input_shape = client.config.api.operation(:operation_name).input
-        request_params = format_data(input_shape, test_case['params'])
-        client.operation_name(request_params)
-
       end
     end
 
@@ -182,7 +179,7 @@ fixtures.each do |directory, files|
         group.it "extract response data correctly" do
           resp = client.operation_name
           data = data_to_hash(resp.data)
-          expected_data = format_data(resp.context.operation.output, test_case['result'])
+          expected_data = format_data(resp.context.operation.output, test_case['result'] || {})
           expect(data).to eq(expected_data)
         end
 
