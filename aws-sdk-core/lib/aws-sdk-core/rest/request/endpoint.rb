@@ -101,11 +101,6 @@ module Aws
           list
         end
 
-        def querystring_param(key, value)
-          param_name = member.location_name
-          param_value = params[member_name]
-        end
-
         def escape(string)
           Seahorse::Util.uri_escape(string)
         end
