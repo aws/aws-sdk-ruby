@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Adds support for purchasing reserved capacity for
+  specific blocks of time on a one-time of recurring basis.
+
 2.2.10 (2016-01-12)
 ------------------
 
