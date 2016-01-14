@@ -52,7 +52,7 @@ The SDK searches the following locations for a region:
 
 ### Configuration Options
 
-You can configure default credentials and region via `Aws.config`. **In version 2, `Aws.config` is a vanilla Ruby hash, not a method like it was in version 1**.
+You can configure default credentials and region via `Aws.config`. **In version 2, `Aws.config` is a vanilla Ruby hash, not a method like it was in version 1**. The `Aws.config` hash takes precedence over environment variables.
 
 ```ruby
 Aws.config.update({
