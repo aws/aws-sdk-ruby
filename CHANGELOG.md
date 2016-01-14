@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatchEvents - Initial support for Amazon CloudWatch
+  Events. CloudWatch Events allows you to track changes to your AWS resources
+  with less overhead and greater efficiency.
+
 * Feature - Aws::EC2 - Adds support for purchasing reserved capacity for
   specific blocks of time on a one-time of recurring basis.
 

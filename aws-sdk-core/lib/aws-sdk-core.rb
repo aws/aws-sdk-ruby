@@ -28,6 +28,7 @@ module Aws
     CloudSearchDomain
     CloudTrail
     CloudWatch
+    CloudWatchEvents
     CloudWatchLogs
     CodeCommit
     CodeDeploy
