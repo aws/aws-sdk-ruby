@@ -11,8 +11,11 @@ module Aws
 
           def parse_xml(context)
             if rules = context.operation.output
-              data = Xml::Parser.new(rules).parse(xml(context)) do |h|
-                context.metadata[:request_id] = h['requestId']
+              parser = Xml::Parser.new(rules)
+              data = parser.parse(xml(context)) do |path, value|
+                if path.size == 2 && path.last == 'requestId'
+                  context.metadata[:request_id] = value
+                end
               end
               data
             else

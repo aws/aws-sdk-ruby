@@ -20,12 +20,27 @@ module Aws
         @engine = options[:engine] || self.class.engine
       end
 
+      # Parses the XML document, returning a parsed structure.
+      #
+      # If you pass a block, this will yield for XML
+      # elements that are not modeled in the rules given
+      # to the constructor.
+      #
+      #   parser.parse(xml) do |path, value|
+      #     puts "uhandled: #{path.join('/')} - #{value}"
+      #   end
+      #
+      # The purpose of the unhandled callback block is to
+      # allow callers to access values such as the EC2
+      # request ID that are part of the XML body but not
+      # part of the operation result.
+      #
       # @param [String] xml An XML document string to parse.
       # @param [Structure] target (nil)
       # @return [Structure]
-      def parse(xml, target = nil)
+      def parse(xml, target = nil, &unhandled_callback)
         xml = '<xml/>' if xml.nil? or xml.empty?
-        stack = Stack.new(@rules, target)
+        stack = Stack.new(@rules, target, &unhandled_callback)
         @engine.new(stack).parse(xml.to_s)
         stack.result
       end

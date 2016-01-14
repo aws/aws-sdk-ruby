@@ -3,10 +3,11 @@ module Aws
     class Parser
       class Stack
 
-        def initialize(ref, result = nil)
+        def initialize(ref, result = nil, &unhandled_callback)
           @ref = ref
           @frame = self
           @result = result
+          @unhandled_callback = unhandled_callback
         end
 
         attr_reader :frame
@@ -19,7 +20,7 @@ module Aws
 
         def attr(name, value)
           if name.to_s == 'encoding' && value.to_s == 'base64'
-            @frame = BlobFrame.new(@frame.parent, @frame.ref)
+            @frame = BlobFrame.new(name, @frame.parent, @frame.ref)
           else
             start_element(name)
             text(value)
@@ -45,11 +46,18 @@ module Aws
         end
 
         def child_frame(name)
-          Frame.new(self, @ref, @result)
+          Frame.new(name, self, @ref, @result)
         end
 
         def consume_child_frame(frame)
           @result = frame.result
+        end
+
+        # @api private
+        def yield_unhandled_value(path, value)
+          if @unhandled_callback
+            @unhandled_callback.call(path, value)
+          end
         end
 
       end
