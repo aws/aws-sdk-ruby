@@ -77,7 +77,8 @@ module Aws
                 if StringShape === member.shape.member.shape
                   parts += list_of_strings(member.location_name, params[member_name])
                 else
-                  msg = "Only list of strings supported"
+                  msg = "Only list of strings supported, got "
+                  msg << member.shape.member.shape.class.name
                   raise NotImplementedError, msg
                 end
 
