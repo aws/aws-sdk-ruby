@@ -4,6 +4,9 @@ Unreleased Changes
 * Feature - Aws::EC2 - Adds support for purchasing reserved capacity for
   specific blocks of time on a one-time of recurring basis.
 
+* Feature - Aws::CloudFront - Adds support for HTTPS-only connections, and
+  control of edge-to-origin request headers.
+
 2.2.10 (2016-01-12)
 ------------------
 
