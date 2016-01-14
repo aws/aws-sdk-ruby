@@ -252,11 +252,12 @@ to be backwards compatible.
 | AWS Support                              | Support                      | 2013-04-15  |
 | AWS WAF                                  | WAF                          | 2015-08-24  |
 | Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
-| Amazon CloudFront                        | CloudFront                   | 2015-09-17  |
+| Amazon CloudFront                        | CloudFront                   | 2016-01-13  |
 | Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain                | CloudSearchDomain            | 2013-01-01  |
 | Amazon CloudWatch                        | CloudWatch                   | 2010-08-01  |
+| Amazon CloudWatch Events                 | CloudWatchEvents             | 2014-02-03  |
 | Amazon CloudWatch Logs                   | CloudWatchLogs               | 2014-03-28  |
 | Amazon Cognito Identity                  | CognitoIdentity              | 2014-06-30  |
 | Amazon Cognito Sync                      | CognitoSync                  | 2014-06-30  |

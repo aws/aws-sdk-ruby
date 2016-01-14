@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.11 (2016-01-14)
 ------------------
 
 * Feature - Aws::CloudWatchEvents - Initial support for Amazon CloudWatch
