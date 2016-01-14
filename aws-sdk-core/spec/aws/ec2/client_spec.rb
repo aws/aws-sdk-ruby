@@ -4,6 +4,34 @@ module Aws
   module EC2
     describe Client do
 
+      describe 'request ids' do
+
+        it 'populates request ids in the response context' do
+          client = Client.new(stub_responses: true)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: <<-XML.strip)
+              <?xml version="1.0" encoding="UTF-8"?>
+              <DescribeRegionsResponse xmlns="http://ec2.amazonaws.com/doc/2015-10-01/">
+                <requestId>9f93c10f-78e0-445e-ae6c-6e03fe74179b</requestId>
+                <regionInfo>
+                  <item>
+                    <regionEndpoint>ec2.us-west-2.amazonaws.com</regionEndpoint>
+                    <regionName>us-west-2</regionName>
+                  </item>
+                </regionInfo>
+              </DescribeRegionsResponse>
+            XML
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.describe_regions
+          expect(resp.context[:request_id]).to eq('9f93c10f-78e0-445e-ae6c-6e03fe74179b')
+        end
+
+      end
+
       describe 'gov-cloud' do
 
         it 'expands the endpoint correctly for gov-cloud' do

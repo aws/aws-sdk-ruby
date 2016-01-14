@@ -10,10 +10,10 @@ module Aws
 
         class << self
 
-          def new(parent, ref, result = nil)
+          def new(path, parent, ref, result = nil)
             if self == Frame
               frame = frame_class(ref).allocate
-              frame.send(:initialize, parent, ref, result)
+              frame.send(:initialize, path, parent, ref, result)
               frame
             else
               super
@@ -35,7 +35,8 @@ module Aws
 
         end
 
-        def initialize(parent, ref, result = nil)
+        def initialize(path, parent, ref, result)
+          @path = path
           @parent = parent
           @ref = ref
           @result = result
@@ -53,16 +54,30 @@ module Aws
         end
 
         def child_frame(xml_name)
-          NullFrame.new(self)
+          NullFrame.new(xml_name, self)
         end
 
         def consume_child_frame(child); end
+
+        # @api private
+        def path
+          if Stack === parent
+            [@path]
+          else
+            parent.path + [@path]
+          end
+        end
+
+        # @api private
+        def yield_unhandled_value(path, value)
+          parent.yield_unhandled_value(path, value)
+        end
 
       end
 
       class StructureFrame < Frame
 
-        def initialize(parent, ref, result = nil)
+        def initialize(xml_name, parent, ref, result = nil)
           super
           @result ||= ref[:struct_class].new
           @members = {}
@@ -77,9 +92,9 @@ module Aws
 
         def child_frame(xml_name)
           if @member = @members[xml_name]
-            Frame.new(self, @member[:ref])
+            Frame.new(xml_name, self, @member[:ref])
           else
-            NullFrame.new(self)
+            NullFrame.new(xml_name, self)
           end
         end
 
@@ -128,7 +143,7 @@ module Aws
 
         def child_frame(xml_name)
           if xml_name == @member_xml_name
-            Frame.new(self, @ref.shape.member)
+            Frame.new(xml_name, self, @ref.shape.member)
           else
             raise NotImplementedError
           end
@@ -142,9 +157,9 @@ module Aws
 
       class FlatListFrame < Frame
 
-        def initialize(*args)
+        def initialize(xml_name, *args)
           super
-          @member = Frame.new(self, @ref.shape.member)
+          @member = Frame.new(xml_name, self, @ref.shape.member)
         end
 
         def result
@@ -174,7 +189,7 @@ module Aws
 
         def child_frame(xml_name)
           if xml_name == 'entry'
-            MapEntryFrame.new(self, @ref)
+            MapEntryFrame.new(xml_name, self, @ref)
           else
             raise NotImplementedError
           end
@@ -188,12 +203,12 @@ module Aws
 
       class MapEntryFrame < Frame
 
-        def initialize(*args)
+        def initialize(xml_name, *args)
           super
           @key_name = @ref.shape.key.location_name || 'key'
-          @key = Frame.new(self, @ref.shape.key)
+          @key = Frame.new(xml_name, self, @ref.shape.key)
           @value_name = @ref.shape.value.location_name || 'value'
-          @value = Frame.new(self, @ref.shape.value)
+          @value = Frame.new(xml_name, self, @ref.shape.value)
         end
 
         # @return [StringFrame]
@@ -208,15 +223,20 @@ module Aws
           elsif @value_name == xml_name
             @value
           else
-            NullFrame.new(self)
+            NullFrame.new(xml_name, self)
           end
         end
 
       end
 
       class NullFrame < Frame
-        def self.new(parent)
-          super(parent, nil)
+        def self.new(xml_name, parent)
+          super(xml_name, parent, nil, nil)
+        end
+
+        def set_text(value)
+          yield_unhandled_value(path, value)
+          super
         end
       end
 

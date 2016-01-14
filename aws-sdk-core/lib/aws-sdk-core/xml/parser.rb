@@ -23,9 +23,9 @@ module Aws
       # @param [String] xml An XML document string to parse.
       # @param [Structure] target (nil)
       # @return [Structure]
-      def parse(xml, target = nil)
+      def parse(xml, target = nil, &unhandled_callback)
         xml = '<xml/>' if xml.nil? or xml.empty?
-        stack = Stack.new(@rules, target)
+        stack = Stack.new(@rules, target, &unhandled_callback)
         @engine.new(stack).parse(xml.to_s)
         stack.result
       end
