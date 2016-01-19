@@ -19,7 +19,7 @@ module Aws
             data[@rules[:payload]] = body
           elsif @rules[:payload]
             data[@rules[:payload]] = parse(body.read, @rules[:payload_member])
-          else
+          elsif !@rules.shape.member_names.empty?
             parse(body.read, @rules, data)
           end
         end
