@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.12 (2016-01-19)
 ------------------
 
 * Feature - Aws::DeviceFarm - You can now run Appium tests written in Python
