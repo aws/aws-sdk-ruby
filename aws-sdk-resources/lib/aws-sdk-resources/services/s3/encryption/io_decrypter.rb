@@ -17,7 +17,7 @@ module Aws
         # @return [#write]
         attr_reader :io
         attr_reader :cipher
-        attr_writer :has_tag
+        attr_writer :contains_tag
 
         def write(chunk)
           unless @has_tag
