@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - You can now run Appium tests written in Python
+  against your native, hybrid and browser-based apps on AWS Device Farm.
+
 * Feature - Aws::STS - AWS services now return RegionDisabledException instead
   of AccessDenied when a user sends an API request to an STS regional endpoint
   that is not activated for that AWS account. This enables customers to more
