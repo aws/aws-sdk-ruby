@@ -10,7 +10,7 @@ module Aws
           @orig_cipher = cipher.clone
           @cipher = cipher.clone
           @io = io
-          @contains_tag = contains_tag
+          @has_tag = contains_tag
           reset_cipher
         end
 
@@ -20,7 +20,7 @@ module Aws
         attr_writer :has_tag
 
         def write(chunk)
-          unless @contains_tag
+          unless @has_tag
             # decrypt and write
             @io.write(@cipher.update(chunk))
           else

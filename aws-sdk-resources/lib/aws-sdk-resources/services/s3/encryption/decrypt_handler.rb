@@ -64,7 +64,7 @@ module Aws
               decrypter.io.truncate(0)
               decrypter.io.rewind if decrypter.io.respond_to?(:rewind)
               # reprocess, decrypting data and authenticating ciphertext
-              decrypter.contains_tag = false
+              decrypter.has_tag = false
               decrypter.write(content)
             end
             decrypter.finalize
