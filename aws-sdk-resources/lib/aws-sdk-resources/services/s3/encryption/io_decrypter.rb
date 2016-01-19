@@ -6,18 +6,18 @@ module Aws
 
         # @param [OpenSSL::Cipher] cipher
         # @param [#write] io An IO-like object that responds to {#write}.
-        def initialize(cipher, io, contains_tag = false)
+        def initialize(cipher, io, has_tag = false)
           @orig_cipher = cipher.clone
           @cipher = cipher.clone
           @io = io
-          @has_tag = contains_tag
+          @has_tag = has_tag
           reset_cipher
         end
 
         # @return [#write]
         attr_reader :io
         attr_reader :cipher
-        attr_writer :contains_tag
+        attr_writer :has_tag
 
         def write(chunk)
           unless @has_tag
