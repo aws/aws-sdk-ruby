@@ -135,7 +135,7 @@ module Aws
           msg = "S3 client configured for #{context.config.region.inspect} " +
             "but the bucket #{context.params[:bucket].inspect} is in " +
             "#{actual_region.inspect}; Please configure the proper region " +
-            "to avoid multiple unecessary redirects and signing attempts\n"
+            "to avoid multiple unnecessary redirects and signing attempts\n"
           if logger = context.config.logger
             logger.warn(msg)
           else
