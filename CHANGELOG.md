@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::STS - AWS services now return RegionDisabledException instead
+  of AccessDenied when a user sends an API request to an STS regional endpoint
+  that is not activated for that AWS account. This enables customers to more
+  easily decide how to respond, such as by trying to call a different region
+  instead of simply failing the call.
+
 2.2.11 (2016-01-14)
 ------------------
 
