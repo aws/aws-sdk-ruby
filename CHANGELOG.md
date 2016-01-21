@@ -7,6 +7,8 @@ Unreleased Changes
 
 * Feature - Aws::IoT - Add support for topic rules.
 
+* Feature - Aws::CloudFormation - Adds a new API, `Aws::CloudFormation::Client#continue_update_rollback`.
+
 2.2.12 (2016-01-19)
 ------------------
 
