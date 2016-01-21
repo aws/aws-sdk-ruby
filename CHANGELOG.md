@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Add integration with AWS Certificate Manager.
+
 2.2.12 (2016-01-19)
 ------------------
 
