@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.13 (2016-01-21)
 ------------------
 
 * Feature - Aws::ACM - Initial support for the AWS Certificate Manager (ACM) API. ACM is an AWS service that makes it easier for you to deploy secure SSL based websites and applications on the AWS platform. SSL is the standard protocol for encrypting communications and establishing the identity of a website over the Internet. ACM takes care of all of the complexity of obtaining, deploying, and renewing the digital certificates used with SSL. ACM makes it easier to encrypt sensitive data in transit using SSL in order to help meet regulatory and compliance requirements such as PCI-DSS, FISMA, and HIPAA. Because ACM is integrated with AWS services such as Elastic Load Balancing (ELB) and Amazon CloudFront, it’s easy to request a certificate, install it on your load balancer or CloudFront distribution, and let ACM renew and deploy it automatically.

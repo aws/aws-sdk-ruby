@@ -227,6 +227,7 @@ to be backwards compatible.
 
 | Service Name                             | Service Class                | API Version |
 | ---------------------------------------- | ---------------------------- | ----------- |
+| AWS Certificate Manager                  | ACM                          | 2015-12-08  |
 | AWS CloudFormation                       | CloudFormation               | 2010-05-15  |
 | AWS CloudTrail                           | CloudTrail                   | 2013-11-01  |
 | AWS CodeCommit                           | CodeCommit                   | 2015-04-13  |
@@ -252,7 +253,7 @@ to be backwards compatible.
 | AWS Support                              | Support                      | 2013-04-15  |
 | AWS WAF                                  | WAF                          | 2015-08-24  |
 | Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
-| Amazon CloudFront                        | CloudFront                   | 2016-01-13  |
+| Amazon CloudFront                        | CloudFront                   | 2016-01-28  |
 | Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain                | CloudSearchDomain            | 2013-01-01  |
