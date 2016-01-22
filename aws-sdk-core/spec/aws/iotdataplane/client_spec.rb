@@ -31,6 +31,14 @@ module Aws
         expect(client.config.sigv4_region).to eq("us-east-1")
       end
 
+      it 'correctly extracts the sigv4 signing region outside of us-east-1' do
+        client = Client.new(
+          region: "eu-west-1",
+          endpoint: "https://FOOBARFOOBAR.iot.eu-west-1.amazonaws.com"
+        )
+        expect(client.config.sigv4_region).to eq("eu-west-1")
+      end
+
       it 'can be constructed with a region and endpoint' do
         expect {
           Client.new(region:'us-west-1', endpoint:'https://foo.com')
