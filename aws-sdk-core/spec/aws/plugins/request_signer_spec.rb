@@ -64,10 +64,28 @@ module Aws
           expect(cfg.sigv4_region).to eq('us-east-1')
         end
 
-        it 'defaults to configured region if it can not be extract' do
+        it 'defaults to configured region if it can not be extracted' do
           plugin.add_options(config)
           cfg = config.build!(region: 'eu-west-1', endpoint: 'localhost' )
           expect(cfg.sigv4_region).to eq('eu-west-1')
+        end
+
+        context 'services requiring endpoint specification' do
+          let(:config) {
+            api = Api::Builder.build({})
+            cfg = Seahorse::Client::Configuration.new
+            cfg.add_option(:endpoint, 'http://uniqueness.svc-name.us-west-2.amazonaws.com')
+            cfg.add_option(:api, api)
+            cfg.add_option(:region) { 'us-west-2' }
+            cfg.add_option(:region_defaults) {{}}
+            cfg
+          }
+
+          it 'uses the specified region when no endpointPrefix is present' do
+            plugin.add_options(config)
+            cfg = config.build!(region: 'eu-west-1')
+            expect(cfg.sigv4_region).to eq('eu-west-1')
+          end
         end
 
       end
