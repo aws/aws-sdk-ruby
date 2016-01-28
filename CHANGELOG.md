@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::WAF - Adds support for the size constraint predicate.
+
 2.2.13 (2016-01-21)
 ------------------
 
