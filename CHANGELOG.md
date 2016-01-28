@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Aws::WAF - Adds support for the size constraint predicate.
 
+* Feature - Aws::SSM - Removes 10 character limit for instance IDs.
+
 2.2.13 (2016-01-21)
 ------------------
 
