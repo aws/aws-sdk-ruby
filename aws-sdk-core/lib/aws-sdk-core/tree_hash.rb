@@ -48,6 +48,8 @@ module Aws
     end
 
     def digest
+      raise RuntimeError, "TreeHash Digest cannot be computed without any hashes" if @hashes.empty?
+      
       hashes = @hashes
       digest = OpenSSL::Digest.new('sha256')
       until hashes.count == 1
