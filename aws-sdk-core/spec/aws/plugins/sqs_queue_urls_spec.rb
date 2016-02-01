@@ -30,11 +30,18 @@ module Aws
         expect(resp.context.config.sigv4_region).to eq('us-west-2')
       end
 
-      it 'raises an argument error for invalid queue urls' do
+      it 'raises an argument error for badly formatted queue urls' do
         params[:queue_url] = 'oops'
         expect {
           send_request
-        }.to raise_error(ArgumentError, "invalid queue url `oops'")
+        }.to raise_error(ArgumentError, /invalid endpoint/)
+      end
+
+      it 'does not raise an error for fake sqs queue urls' do
+        params[:queue_url] = 'http://localhost:4567/test_queue'
+        expect {
+          send_request
+        }.to_not raise_error
       end
 
     end
