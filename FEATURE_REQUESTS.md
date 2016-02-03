@@ -10,6 +10,27 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Interface to Create Custom Waiters
+
+For cases where a particular waiter doesn't exist, this request would provide an
+interface with which someone could define a waiter in code, rather than having
+to alter the SDK source JSON files.
+
+See [related GitHub issue #1047](https://github.com/aws/aws-sdk-ruby/issues/1047).
+
+### Add Header Whitelist for Request Signing
+
+There are many headers that we blacklist from adding to the signed request. For
+example, the blacklist includes some headers that can be legally modified in
+transit, increasing the risk of signature errors despite a properly constructed
+request.
+
+This feature request is to allow users to manually whitelist a header to be
+signed. In essence, that user would be certifying "I know that this header will
+not be modified in transit or be otherwise changed, so sign it."
+
+See [related GitHub issue #1051](https://github.com/aws/aws-sdk-ruby/issues/1051).
+
 ### Add Injectable Timestamp to Presigner
 
 Since the signing logic uses `now` for the signing time, the
