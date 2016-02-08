@@ -206,6 +206,15 @@ module Aws
       #     # and the parts are uploaded in parallel
       #     obj.upload_file('/path/to/very_large_file')
       #
+      # You can provide a block progress updates as bytes are read from disk
+      # Only applies to multipart uploads.
+      #
+      #     # large files are automatically split into parts
+      #     # and the parts are uploaded in parallel
+      #     obj.upload_file('/path/to/very_large_file') do |bytes_read|
+      #       puts "Read #{bytes_read}"
+      #     end
+      #
       # @param [String,Pathname,File,Tempfile] source A file or path to a file
       #   on the local file system that should be uploaded to this object.
       #   If you pass an open file object, then it is your responsibility
