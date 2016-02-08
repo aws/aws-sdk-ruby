@@ -21,7 +21,7 @@ module Aws
         else
           code, message = extract_error(body, context)
         end
-        svc = context.client.class.name.split('::')[1]
+		svc = context.client.class.identifier.to_s.capitalize
         errors_module = Aws.const_get(svc).const_get(:Errors)
         errors_module.error_class(code).new(context, message)
       end
