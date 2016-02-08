@@ -57,7 +57,6 @@ module Aws
         end
 
         describe 'with block' do
-
           it 'yields the number of bytes read for a partial read' do
             bytes_read = 0
             read_block = lambda{|bytes| bytes_read += bytes}
