@@ -26,13 +26,14 @@ module Aws
       # @param [String,Pathname,File,Tempfile] source
       # @option options [required,String] :bucket
       # @option options [required,String] :key
+      # @yieldparam [Integer] # of bytes read from disk during upload
       # @return [void]
-      def upload(source, options = {})
+      def upload(source, options = {}, &block)
         if File.size(source) < MIN_PART_SIZE
           raise ArgumentError, FILE_TOO_SMALL
         else
           upload_id = initiate_upload(options)
-          parts = upload_parts(upload_id, source, options)
+          parts = upload_parts(upload_id, source, options, &block)
           complete_upload(upload_id, parts, options)
         end
       end
@@ -51,8 +52,8 @@ module Aws
           multipart_upload: { parts: parts })
       end
 
-      def upload_parts(upload_id, source, options)
-        pending = PartList.new(compute_parts(upload_id, source, options))
+      def upload_parts(upload_id, source, options, &block)
+        pending = PartList.new(compute_parts(upload_id, source, options, &block))
         completed = PartList.new
         errors = upload_in_threads(pending, completed)
         if errors.empty?
@@ -77,7 +78,7 @@ module Aws
         raise MultipartUploadError.new(msg, errors + [error])
       end
 
-      def compute_parts(upload_id, source, options)
+      def compute_parts(upload_id, source, options, &block)
         size = File.size(source)
         default_part_size = compute_default_part_size(size)
         offset = 0
@@ -92,7 +93,8 @@ module Aws
             body: FilePart.new(
               source: source,
               offset: offset,
-              size: part_size(size, default_part_size, offset)
+              size: part_size(size, default_part_size, offset), 
+              &block
             )
           }
           part_number += 1

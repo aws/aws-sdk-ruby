@@ -215,6 +215,8 @@ module Aws
       #   than `:multipart_threshold` are uploaded using the S3 multipart APIs.
       #   Default threshold is 15MB.
       #
+      # @yieldparam [Integer] # of bytes read from disk during upload
+      #
       # @raise [MultipartUploadError] If an object is being uploaded in
       #   parts, and the upload can not be completed, then the upload is
       #   aborted and this error is raised.  The raised error has a `#errors`
@@ -224,11 +226,11 @@ module Aws
       # @return [Boolean] Returns `true` when the object is uploaded
       #   without any errors.
       #
-      def upload_file(source, options = {})
+      def upload_file(source, options = {}, &block)
         uploader = FileUploader.new(
           multipart_threshold: options.delete(:multipart_threshold),
           client: client)
-        uploader.upload(source, options.merge(bucket: bucket_name, key: key))
+        uploader.upload(source, options.merge(bucket: bucket_name, key: key), &block)
         true
       end
 
