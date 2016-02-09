@@ -21,12 +21,6 @@ module Aws
         expect(handlers.count).to eq(1)
       end
 
-      it 'adds a handler when compute_checkums is true' do
-        plugin.add_options(config)
-        plugin.add_handlers(handlers, config.build!)
-        expect(handlers.count).to eq(1)
-      end
-
       it 'adds a limited handler when compute_checkums is false' do
         plugin.add_options(config)
         plugin.add_handlers(handlers, config.build!(compute_checksums:false))
