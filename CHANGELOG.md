@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MarketplaceCommerceAnalytics - Adds the
+  `:customer_defined_values` parameter to the `#generate_data_set` operation.
+  This parameter allows you to submit arbitrary key/value pair strings which
+  will be returned, as provided, in the asynchronous response. This allows you
+  to use your own identifiers to correlate responses with your internal systems.
+
 2.2.14 (2016-01-28)
 ------------------
 
