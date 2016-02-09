@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.15 (2016-02-09)
 ------------------
 
 * Feature - Aws::GameLift - Initial SDK support for Amazon GameLift.

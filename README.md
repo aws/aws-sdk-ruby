@@ -244,8 +244,8 @@ to be backwards compatible.
 | AWS IoT                                  | IoT                          | 2015-05-28  |
 | AWS IoT Data Plane                       | IoTDataPlane                 | 2015-05-28  |
 | AWS Key Management Service               | KMS                          | 2014-11-01  |
-| AWS Lambda                               | Lambda                       | 2015-03-31  |
 | AWS Lambda                               | LambdaPreview                | 2014-11-11  |
+| AWS Lambda                               | Lambda                       | 2015-03-31  |
 | AWS Marketplace Commerce Analytics       | MarketplaceCommerceAnalytics | 2015-07-01  |
 | AWS OpsWorks                             | OpsWorks                     | 2013-02-18  |
 | AWS Security Token Service               | STS                          | 2011-06-15  |
@@ -272,6 +272,7 @@ to be backwards compatible.
 | Amazon Elastic MapReduce                 | EMR                          | 2009-03-31  |
 | Amazon Elastic Transcoder                | ElasticTranscoder            | 2012-09-25  |
 | Amazon Elasticsearch Service             | ElasticsearchService         | 2015-01-01  |
+| Amazon GameLift                          | GameLift                     | 2015-10-01  |
 | Amazon Glacier                           | Glacier                      | 2012-06-01  |
 | Amazon Inspector                         | Inspector                    | 2015-08-18  |
 | Amazon Kinesis                           | Kinesis                      | 2013-12-02  |
