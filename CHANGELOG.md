@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::GameLift - Initial SDK support for Amazon GameLift.
+
 * Feature - Aws::MarketplaceCommerceAnalytics - Adds the
   `:customer_defined_values` parameter to the `#generate_data_set` operation.
   This parameter allows you to submit arbitrary key/value pair strings which

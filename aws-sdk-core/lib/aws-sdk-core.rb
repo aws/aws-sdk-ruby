@@ -54,6 +54,7 @@ module Aws
     ElasticTranscoder
     EMR
     Firehose
+    GameLift
     Glacier
     IAM
     ImportExport
