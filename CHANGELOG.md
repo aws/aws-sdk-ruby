@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.16 (2016-02-11)
 ------------------
 
 * Feature - Aws::Lambda - You can now configure a Lambda function to access
