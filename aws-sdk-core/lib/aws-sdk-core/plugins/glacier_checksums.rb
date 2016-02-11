@@ -66,6 +66,9 @@ module Aws
             digest.update('')
           end
 
+          # Rewind body before performing checksum computation.
+          body.rewind
+
           while chunk = body.read(1024 * 1024) # read 1MB
             tree_hash.update(chunk)
             digest.update(chunk)
