@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Lambda - You can now configure a Lambda function to access
+  resources in your VPC.
+
 2.2.15 (2016-02-09)
 ------------------
 
