@@ -4,6 +4,10 @@ Unreleased Changes
 * Feature - Aws::Lambda - You can now configure a Lambda function to access
   resources in your VPC.
 
+* Feature - Aws::APIGateway - Adds support for custom request authorizers. With
+  custom request authorizers, developers can authorize their APIs using bearer
+  token authorization strategies, such as OAuth using an AWS Lambda function.
+
 2.2.15 (2016-02-09)
 ------------------
 
