@@ -166,6 +166,7 @@ module Aws
 
       plugins('sqs', add: %w(
         Aws::Plugins::SQSQueueUrls
+        Aws::Plugins::SQSMd5s
       ))
 
       plugins('swf', add: %w(
