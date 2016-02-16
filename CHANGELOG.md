@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.17 (2016-02-16)
 ------------------
 
 * Feature - Aws::RDS - Added support for Cross-account Encrypted (KMS) snapshot sharing.
