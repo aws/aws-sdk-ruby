@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::MarketplaceCommerceAnalytics - Added a new data set
+  disbursed_amount_by_product_with_uncollected_funds to the Commerce Analytics Service.
+
 * Feature - Aws::CodeDeploy - Added support for trigger release.
 
 * Feature - Aws::StorageGateway - Added support for CreateTapeWithBarcode.
