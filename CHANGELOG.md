@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatch - Added resource interface for Aws::CloudWatch.
+
 * Feature - Aws::MarketplaceCommerceAnalytics - Added a new data set
   disbursed_amount_by_product_with_uncollected_funds to the Commerce Analytics Service.
 
