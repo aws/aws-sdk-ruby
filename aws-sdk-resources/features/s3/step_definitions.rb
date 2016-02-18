@@ -37,6 +37,17 @@ When(/^I upload the file to the "(.*?)" object$/) do |key|
   @bucket.object(key).upload_file(@file)
 end
 
+When(/^I upload the file to the "(.*?)" object with SSE\/CPK$/) do |key|
+  require 'openssl'
+  cipher = OpenSSL::Cipher::AES256.new(:CBC)
+  ecnryption_key = cipher.random_key
+  @bucket.object(key).upload_file(@file, {
+    sse_customer_key: ecnryption_key,
+    sse_customer_algorithm: 'AES256'
+  })
+  @bucket.object(key).upload_file(@file)
+end
+
 Then(/^the file should have been uploaded as a multipart upload$/) do
   expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
 end

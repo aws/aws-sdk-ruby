@@ -11,3 +11,8 @@ Feature: Aws::S3::Object
     When I upload the file to the "large" object
     Then the file should have been uploaded as a multipart upload
 
+  @slow
+  Scenario: Uploading a large file
+    Given I have a 15MB file
+    When I upload the file to the "large" object with SSE/CPK
+    Then the file should have been uploaded as a multipart upload

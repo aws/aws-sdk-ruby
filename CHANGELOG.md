@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - The `Aws::S3::Object#upload_file`  now works correctly with
+  server-side-encryption when using customer-provided-keys.
+
+  See [related GitHub issue #1084](https://github.com/aws/aws-sdk-ruby/issues/1084).
+
 * Issue - Resource Collections - Resolved an issue with collections that
   would fail on stubbed client responses that did not respond to #each.
 

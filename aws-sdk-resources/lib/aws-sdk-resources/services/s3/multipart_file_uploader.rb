@@ -1,5 +1,6 @@
 require 'pathname'
 require 'thread'
+require 'set'
 
 module Aws
   module S3
@@ -13,6 +14,14 @@ module Aws
       MAX_PARTS = 10_000
 
       THREAD_COUNT = 10
+
+      # @api private
+      CREATE_OPTIONS =
+        Set.new(Client.api.operation(:upload_part).input.shape.member_names)
+
+      # @api private
+      UPLOAD_PART_OPTIONS =
+        Set.new(Client.api.operation(:upload_part).input.shape.member_names)
 
       # @option options [Client] :client
       def initialize(options = {})
@@ -40,7 +49,7 @@ module Aws
       private
 
       def initiate_upload(options)
-        @client.create_multipart_upload(options).upload_id
+        @client.create_multipart_upload(create_opts(options)).upload_id
       end
 
       def complete_upload(upload_id, parts, options)
@@ -84,9 +93,7 @@ module Aws
         part_number = 1
         parts = []
         while offset < size
-          parts << {
-            bucket: options[:bucket],
-            key: options[:key],
+          parts << upload_part_opts(options).merge({
             upload_id: upload_id,
             part_number: part_number,
             body: FilePart.new(
@@ -94,11 +101,25 @@ module Aws
               offset: offset,
               size: part_size(size, default_part_size, offset)
             )
-          }
+          })
           part_number += 1
           offset += default_part_size
         end
         parts
+      end
+
+      def create_opts(options)
+        CREATE_OPTIONS.inject({}) do |hash, key|
+          hash[key] = options[key] if options.key?(key)
+          hash
+        end
+      end
+
+      def upload_part_opts(options)
+        UPLOAD_PART_OPTIONS.inject({}) do |hash, key|
+          hash[key] = options[key] if options.key?(key)
+          hash
+        end
       end
 
       def upload_in_threads(pending, completed)
