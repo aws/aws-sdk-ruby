@@ -4,7 +4,7 @@
 /api-docs
 /api-docs.zip
 /integration-test-config.json
-/coverage
+coverage
 /Gemfile.lock
 /vendor
 /release-notes.html
