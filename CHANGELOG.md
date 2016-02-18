@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::StorageGateway - Added support for CreateTapeWithBarcode.
+
 * Issue - Aws::S3 - The `Aws::S3::Object#upload_file`  now works correctly with
   server-side-encryption when using customer-provided-keys.
 
