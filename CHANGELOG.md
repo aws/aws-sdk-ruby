@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.18 (2016-02-18)
 ------------------
 
 * Feature - Aws::AutoScaling - Added resource interfaces and waiters.
