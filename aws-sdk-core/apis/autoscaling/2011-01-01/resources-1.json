@@ -731,44 +731,6 @@
                         ],
                         "path": "ScheduledUpdateGroupActions[]"
                     }
-                },
-                "Tags": {
-                    "request": {
-                        "operation": "DescribeTags",
-                        "params": [
-                            {
-                                "target": "Filters[0].Name",
-                                "source": "string",
-                                "value": "auto-scaling-group"
-                            },
-                            {
-                                "target": "Filters[0].Values[0]",
-                                "source": "identifier",
-                                "name": "Name"
-                            }
-                        ]
-                    },
-                    "resource": {
-                        "type": "Tag",
-                        "identifiers": [
-                            {
-                                "target": "Key",
-                                "source": "response",
-                                "path": "Tags[].Key"
-                            },
-                            {
-                                "target": "ResourceId",
-                                "source": "response",
-                                "path": "Tags[].ResourceId"
-                            },
-                            {
-                                "target": "ResourceType",
-                                "source": "response",
-                                "path": "Tags[].ResourceType"
-                            }
-                        ],
-                        "path": "Tags[]"
-                    }
                 }
             }
         },

@@ -153,7 +153,7 @@
                     "type": "DBEngineVersion",
                     "identifiers": [
                         {
-                            "target": "Engine",
+                            "target": "EngineName",
                             "source": "input"
                         },
                         {
@@ -363,7 +363,7 @@
                     "type": "DBEngineVersion",
                     "identifiers": [
                         {
-                            "target": "Engine",
+                            "target": "EngineName",
                             "source": "response",
                             "path": "DBEngineVersions[].Engine"
                         },
@@ -1170,7 +1170,7 @@
                         "type": "DBEngineVersion",
                         "identifiers": [
                             {
-                                "target": "Engine",
+                                "target": "EngineName",
                                 "source": "identifier",
                                 "name": "Name"
                             },
@@ -1244,7 +1244,7 @@
                         "type": "DBEngineVersion",
                         "identifiers": [
                             {
-                                "target": "Engine",
+                                "target": "EngineName",
                                 "source": "identifier",
                                 "name": "Name"
                             },
@@ -1262,7 +1262,7 @@
         "DBEngineVersion": {
             "identifiers": [
                 {
-                    "name": "Engine",
+                    "name": "EngineName",
                     "memberName": "Engine"
                 },
                 {
