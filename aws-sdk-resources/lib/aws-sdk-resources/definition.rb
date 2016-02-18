@@ -290,6 +290,13 @@ module Aws
         })
       end
 
+      def string_builder_source(definition)
+        BuilderSources::ResponsePath.new({
+          source: underscore(definition['value']),
+          target: underscore(definition['target']),
+        })
+      end
+
       def svc_definition
         @source['service'] || {}
       end

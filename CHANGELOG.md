@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Added resource interfaces and waiters.
+
 * Feature - Aws::RDS - Significant update to Aws::RDS resource interface.
   Expanded to cover all resource types.
 

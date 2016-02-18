@@ -85,6 +85,17 @@ module Aws
         end
 
       end
+
+      # Supplies a string literal.
+      class StringLiteral
+
+        include Source
+
+        def extract(options)
+          @source
+        end
+
+      end
     end
   end
 end
