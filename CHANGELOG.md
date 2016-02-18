@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - Significant update to Aws::RDS resource interface.
+  Expanded to cover all resource types.
+
 * Feature - Aws::CloudWatch - Added resource interface for Aws::CloudWatch.
 
 * Feature - Aws::MarketplaceCommerceAnalytics - Added a new data set
