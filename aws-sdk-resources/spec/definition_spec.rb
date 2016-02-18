@@ -878,6 +878,53 @@ module Aws
               expect(thing.doo_dads.limit(3).map(&:identifiers)).to eq(doo_dads[0..2].map(&:identifiers))
             end
 
+            it 'does not attempt to enumerate non-pageable responses' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'shape' => 'ThingShape',
+                  'hasMany' => {
+                    'DooDads' => {
+                      'request' => { 'operation' => 'ListDooDads' },
+                      'resource' => {
+                        'type' => 'DooDad',
+                        'identifiers' => [
+                          {
+                            'target' => 'Name',
+                            'source' => 'response',
+                            'path' => 'DooDads[].Name'
+                          },
+                        ]
+                      }
+                    }
+                  }
+                },
+                'DooDad' => {
+                  'identifiers' => [
+                    { 'name' => 'Name' },
+                  ]
+                }
+              }
+              shapes['StringShape'] = { 'type' => 'string' }
+              shapes['ThingShape'] = {
+                'type' => 'structure',
+                'members' => {
+                  'Type' => { 'shape' => 'StringShape' }
+                }
+              }
+
+              api_model['operations']['ListDooDads'] = {}
+
+              apply_definition
+
+              allow(client).to receive(:list_doo_dads).and_return(
+                double('client-resp', data: {doo_dads:[]})
+              )
+
+              thing = namespace::Thing.new(name:'thing-name')
+              expect(thing.doo_dads.to_a).to eq([])
+            end
+
           end
 
           describe 'has associations' do

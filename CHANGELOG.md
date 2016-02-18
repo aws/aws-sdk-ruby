@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Resource Collections - Resolved an issue with collections that
+  would fail on stubbed client responses that did not respond to #each.
+
+  See [related GitHub issue #1079](https://github.com/aws/aws-sdk-ruby/issues/1079).
+
 * Issue - Aws::SQS - Fixed an issue with stubbing queue attributes. The response
   stubbing interface did not correctly handle flattened query maps.
 

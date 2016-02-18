@@ -124,8 +124,13 @@ module Aws
         private
 
         def all_batches(options, &block)
-          @request.call(options).each do |response|
-            yield(@builder.build(options.merge(response:response)))
+          resp = @request.call(options)
+          if resp.respond_to?(:each)
+            resp.each do |response|
+              yield(@builder.build(options.merge(response:response)))
+            end
+          else
+            yield(@builder.build(options.merge(response:resp)))
           end
         end
 
