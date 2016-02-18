@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::SQS - Fixed an issue with stubbing queue attributes. The response
+  stubbing interface did not correctly handle flattened query maps.
+
+  See [related GitHub issue #1097](https://github.com/aws/aws-sdk-ruby/issues/1097).
+
 2.2.17 (2016-02-16)
 ------------------
 

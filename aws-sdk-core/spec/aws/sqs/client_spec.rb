@@ -41,6 +41,22 @@ module Aws
         end
 
       end
+
+      describe '#stub_responses' do
+
+        it 'supports stubbing flattened maps' do
+          client = Client.new(stub_responses: {
+            get_queue_attributes: {
+              attributes: {
+                'color' => 'red'
+              }
+            }
+          })
+          resp = client.get_queue_attributes(queue_url:'https://foo.com')
+          expect(resp.attributes).to eq('color' => 'red')
+        end
+
+      end
     end
   end
 end
