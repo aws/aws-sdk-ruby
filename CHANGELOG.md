@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Added support for trigger release.
+
 * Feature - Aws::StorageGateway - Added support for CreateTapeWithBarcode.
 
 * Issue - Aws::S3 - The `Aws::S3::Object#upload_file`  now works correctly with
