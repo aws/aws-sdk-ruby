@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added `#restore_object` method to `Aws::S3::Object`
+  and to `Aws::S3::ObjectSummary`.
+
 2.2.18 (2016-02-18)
 ------------------
 
