@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SQS - Added automatic MD5 computation and verification of
+  message bodies and attributes. This is now enabled by default for all
+  `#send_message` and `#send_message_batch` requests.
+
+  You can disable this feature by configuring `verify_checksums: false`.
+
+  See related GitHub [pull request #1093](https://github.com/aws/aws-sdk-ruby/pull/1093).
+
 * Feature - Aws::S3 - Added `#restore_object` method to `Aws::S3::Object`
   and to `Aws::S3::ObjectSummary`.
 
