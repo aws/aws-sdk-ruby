@@ -4,12 +4,10 @@
     "CreateQueue": [
       {
         "input": {
-          "Attributes": {
-          },
           "QueueName": "MyQueue"
         },
         "output": {
-          "QueueUrl": ""
+          "QueueUrl": "https://queue.amazonaws.com/012345678910/MyQueue"
         },
         "comments": {
           "input": {
