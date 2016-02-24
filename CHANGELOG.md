@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Route53 - Added support for enabling SNI health checks.
+
 * Feature - Aws::SQS - Added automatic MD5 computation and verification of
   message bodies and attributes. This is now enabled by default for all
   `#send_message` and `#send_message_batch` requests.
