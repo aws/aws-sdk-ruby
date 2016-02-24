@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.19 (2016-02-23)
 ------------------
 
 * Feature - Aws::Route53 - Added support for enabling SNI health checks.
