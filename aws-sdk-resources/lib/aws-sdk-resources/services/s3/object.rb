@@ -20,6 +20,10 @@ module Aws
       #   performance improvements on large objects. Amazon S3 does
       #   not accept multipart copies for objects smaller than 5MB.
       #
+      # @options options [Integer] :content_length When included
+      #   the source object will not be queried for its size before
+      #   starting the copy.
+      #
       # @example Basic object copy
       #
       #   bucket = Aws::S3::Bucket.new('target-bucket')
