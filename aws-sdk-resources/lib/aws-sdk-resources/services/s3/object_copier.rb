@@ -12,6 +12,7 @@ module Aws
       end
 
       def copy_from(source, options = {})
+        options[:copy_source_client] = source.client if source.is_a?(S3::Object)
         copy_object(source, @object, merge_options(source, options))
       end
 
@@ -24,9 +25,11 @@ module Aws
 
       def copy_object(source, target, options)
         target_bucket, target_key = copy_target(target)
+
         options[:bucket] = target_bucket
         options[:key] = target_key
         options[:copy_source] = copy_source(source)
+
         if options.delete(:multipart_copy)
           ObjectMultipartCopier.new(@options).copy(options)
         else

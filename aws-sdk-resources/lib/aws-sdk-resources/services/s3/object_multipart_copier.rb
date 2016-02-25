@@ -116,12 +116,12 @@ module Aws
       end
 
       def source_size(options)
-        if options[:content_length]
-          options.delete(:content_length)
-        else
-          bucket, key = options[:copy_source].match(/([^\/]+?)\/(.+)/)[1,2]
-          @client.head_object(bucket:bucket, key:key).content_length
-        end
+        return options.delete(:content_length) if options[:content_length]
+
+        client = options[:copy_source_client] || @client
+
+        bucket, key = options[:copy_source].match(/([^\/]+?)\/(.+)/)[1,2]
+        client.head_object(bucket: bucket, key: key).content_length
       end
 
       def default_part_size(source_size)
