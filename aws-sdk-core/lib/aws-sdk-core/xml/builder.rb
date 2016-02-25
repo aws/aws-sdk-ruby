@@ -63,12 +63,16 @@ module Aws
       def map(name, ref, hash)
         key_ref = ref.shape.key
         value_ref = ref.shape.value
-        node(name, ref) do
+        if ref['flattened']
           hash.each do |key, value|
-            if ref['flattened']
+            node(name, ref) do
               member(key_ref.location_name || 'key', key_ref, key)
               member(value_ref.location_name || 'value', value_ref, value)
-            else
+            end
+          end
+        else
+          node(name, ref) do
+            hash.each do |key, value|
               node('entry', ref)  do
                 member(key_ref.location_name || 'key', key_ref, key)
                 member(value_ref.location_name || 'value', value_ref, value)

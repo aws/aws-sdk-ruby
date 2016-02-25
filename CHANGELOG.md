@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Response Stubbing - Fixed stubbing flattened maps with
+  multiple values in XML.
+
+  See [related GitHub issue #1099](https://github.com/aws/aws-sdk-ruby/issues/1099).
+
 * Issue - Aws::SQS - Automatic MD5 checksum verification for
   `Aws::SQS::Client#send_message` and `#send_message_batch` is now
   disabled when using `stub_responses: true`. If you explicitly enable
