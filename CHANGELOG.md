@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - API updates to allow resources to be skipped
+  on deletion. Also now possible to specify tags on stack update.
+
 * Issue - Response Stubbing - Fixed stubbing flattened maps with
   multiple values in XML.
 
