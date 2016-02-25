@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Now possible to copmlete a lifecycle action using
+  either an instance id or an action token.
+
 * Feature - Aws::SES - Added support for the new SNSAction property.
 
 * Feature - Aws::CloudFormation - API updates to allow resources to be skipped
