@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.20 (2016-02-25)
 ------------------
 
 * Feature - Aws::AutoScaling - Now possible to copmlete a lifecycle action using
