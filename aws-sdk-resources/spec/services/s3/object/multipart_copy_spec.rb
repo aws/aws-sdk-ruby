@@ -53,12 +53,14 @@ module Aws
           end
 
           it 'accepts an S3::Object source' do
+            src = S3::Object.new('source-bucket', 'unescaped/source/key path', stub_responses:true)
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
               key: 'unescaped/key path',
               copy_source: 'source-bucket/unescaped/source/key%20path',
+              copy_source_client: src.client,
             })
-            src = S3::Object.new('source-bucket', 'unescaped/source/key path', stub_responses:true)
+
             object.copy_from(src)
           end
 
@@ -235,9 +237,37 @@ module Aws
           it 'accepts file size option to avoid HEAD request' do
             expect(client).not_to receive(:head_object)
             object.copy_from('source-bucket/source/key',
-              multipart_copy: true,
-              content_length: 10 * 1024 * 1024
-            )
+                             multipart_copy: true,
+                             content_length: 10 * 1024 * 1024
+                            )
+          end
+
+          context 'when the target and source objects are in different regions' do
+            let(:content_length) { 10 * 1024 * 1024 }
+
+            let(:source_bucket) { 'source-bucket' }
+            let(:target_bucket) { 'target-bucket' }
+
+            let(:key) { 'my/source-key' }
+
+            let(:source_client) { S3::Client.new(stub_responses: true) }
+            let(:target_client) { S3::Client.new(stub_responses: true) }
+
+            let(:source_object) { S3::Object.new(bucket_name: source_bucket, key: key, client: source_client) }
+            let(:target_object) { S3::Object.new(bucket_name: target_bucket, key: key, client: target_client) }
+
+            let(:head_response) { double Types::HeadObjectOutput, content_length: content_length }
+
+            before do
+              allow(source_client).to receive(:head_object).and_return(head_response)
+            end
+
+            it 'queries the content length of the source object from the source region' do
+              expect(source_client).to receive(:head_object).with({bucket: source_bucket, key: key})
+              expect(target_client).not_to receive(:head_object)
+
+              target_object.copy_from(source_object, multipart_copy: true)
+            end
           end
 
           it 'does not modify given options' do
