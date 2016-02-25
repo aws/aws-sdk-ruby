@@ -1,3 +1,14 @@
+Unreleased Changes
+------------------
+
+* Issue - Aws::SQS - Automatic MD5 checksum verification for
+  `Aws::SQS::Client#send_message` and `#send_message_batch` is now
+  disabled when using `stub_responses: true`. If you explicitly enable
+  both features, then you must stub valid MD5s for these API calls to
+  avoid the checksum error message.
+
+  See [related GitHub issue #1100](https://github.com/aws/aws-sdk-ruby/issues/1100).
+
 2.2.19 (2016-02-23)
 ------------------
 

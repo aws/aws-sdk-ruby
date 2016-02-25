@@ -7,7 +7,7 @@ module Aws
     class Client
       describe ':verify_checksums' do
 
-        let(:client) { Client.new(stub_responses:true) }
+        let(:client) { Client.new(stub_responses:true, verify_checksums: true) }
 
         let(:message_body) { 'abc' }
 
@@ -31,6 +31,21 @@ module Aws
         }}
 
         it 'is enabled by default' do
+          client = Client.new(
+            region: 'us-east-1',
+            access_key_id: 'akid',
+            secret_access_key: 'secret',
+          )
+          expect(client.config.verify_checksums).to be(true)
+        end
+
+        it 'is disabled when response stubbing is enabled' do
+          client = Client.new(stub_responses: true)
+          expect(client.config.verify_checksums).to be(false)
+        end
+
+        it 'can be enabled with response stubbing is enabled' do
+          client = Client.new(stub_responses: true, verify_checksums: true)
           expect(client.config.verify_checksums).to be(true)
         end
 

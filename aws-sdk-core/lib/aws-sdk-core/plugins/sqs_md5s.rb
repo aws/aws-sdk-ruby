@@ -132,7 +132,18 @@ module Aws
         end
       end
 
-      option(:verify_checksums, true)
+      option(:verify_checksums) do |config|
+        # By default, we will disable checksum verification when response
+        # stubbing is enable. If a user decides to enable both features,
+        # then they will need to stub the MD5s in the response.
+        # See the spec/aws/sqs/client/verify_checksums_spec.rb for
+        # examples of how to do this.
+        if config.respond_to?(:stub_responses)
+          !config.stub_responses
+        else
+          config.verify_checksums
+        end
+      end
 
       def add_handlers(handlers, config)
         if config.verify_checksums
