@@ -5,7 +5,7 @@ module Aws
       alias size content_length
 
       # Copies another object to this object. Use `multipart_copy: true`
-      # for large objects. This is required for objects that exceed 5GB.'
+      # for large objects. This is required for objects that exceed 5GB.
       #
       # @param [S3::Object, String, Hash] source Where to copy object
       #   data from. `source` must be one of the following:
