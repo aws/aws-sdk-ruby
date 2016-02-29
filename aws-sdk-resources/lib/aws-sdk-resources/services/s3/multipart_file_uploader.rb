@@ -17,7 +17,7 @@ module Aws
 
       # @api private
       CREATE_OPTIONS =
-        Set.new(Client.api.operation(:upload_part).input.shape.member_names)
+        Set.new(Client.api.operation(:create_multipart_upload).input.shape.member_names)
 
       # @api private
       UPLOAD_PART_OPTIONS =
