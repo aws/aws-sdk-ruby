@@ -1,3 +1,5 @@
+require 'kramdown'
+
 module Aws
   module Api
     module Docs
@@ -24,7 +26,11 @@ module Aws
         # @return [String,nil]
         def shape_ref_docs(shape_name, target)
           if ref_docs = shape(shape_name)['refs'][target]
-            clean(ref_docs)
+            docs = clean(ref_docs)
+            # Running through kramdown to catch unclosed tags that
+            # break the client doc pages, see Aws::RDS::Client
+            # for an example.
+            Kramdown::Document.new(docs, input: 'html').to_kramdown.strip
           else
             shape_docs(shape_name)
           end

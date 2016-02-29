@@ -44,7 +44,9 @@ module Aws
           operation_input_ref(operation).shape.members.map do |name, ref|
             req = ref.required ? 'required,' : ''
             type = input_type(ref)
-            tag("@option #{@optname} [#{req}#{type}] :#{name} #{ref.documentation}")
+            docstring = "@option #{@optname} [#{req}#{type}] :#{name}\n"
+            docstring += ref.documentation.lines.map { |line| "  #{line}" }.join
+            tag(docstring)
           end
         end
 
@@ -55,7 +57,8 @@ module Aws
             returns = "[#{rtype}] Returns a #{resp} object which responds to "
             returns << "the following methods:\n\n"
             operation.output.shape.members.each do |mname, mref|
-              returns << "  * {#{rtype}##{mname} ##{mname}} => #{output_type(mref, true)}\n"
+              mtype = output_type(mref, true).gsub(/</, '&lt;').gsub(/>/, '&gt;')
+              returns << "  * {#{rtype}##{mname} ##{mname}} => #{mtype}\n"
             end
           else
             returns = "[Struct] Returns an empty #{resp}."

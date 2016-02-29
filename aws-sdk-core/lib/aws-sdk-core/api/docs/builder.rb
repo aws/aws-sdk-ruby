@@ -111,9 +111,9 @@ module Aws
 
         def client_constructor_docstring
           <<-DOCS.strip
-  Constructs an API client.
-  #{client_constructor_options}
-  @return [#{@client_class.name}] Returns an API client.
+Constructs an API client.
+#{client_constructor_options}
+@return [#{@client_class.name}] Returns an API client.
           DOCS
         end
 
@@ -158,17 +158,17 @@ module Aws
             w << "<tr><td><tt>:#{name}</tt></td><td>{##{operation}}</td><td>#{waiter.delay}</td><td>#{waiter.max_attempts}</td></tr>"
           end
           docstring = <<-DOCSTRING
-  Returns the list of supported waiters. The following table lists the supported
-  waiters and the client method they call:
-  <table>
-  <thead>
-  <tr><th>Waiter Name</th><th>Client Method</th><th>Default Delay:</th><th>Default Max Attempts:</th></tr>
-  </thead>
-  <tbody>
-  #{waiters}
-  </tbody>
-  </table>
-  @return [Array<Symbol>] the list of supported waiters.
+Returns the list of supported waiters. The following table lists the supported
+waiters and the client method they call:
+<table>
+<thead>
+<tr><th>Waiter Name</th><th>Client Method</th><th>Default Delay:</th><th>Default Max Attempts:</th></tr>
+</thead>
+<tbody>
+#{waiters}
+</tbody>
+</table>
+@return [Array<Symbol>] the list of supported waiters.
           DOCSTRING
           m = YARD::CodeObjects::MethodObject.new(yard_class, :waiter_names)
           m.scope = :instance
