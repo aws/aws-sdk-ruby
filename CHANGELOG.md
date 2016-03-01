@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DynamoDB - Adds the `Aws::DynamoDB::Client#describe_limits`
+  operation.
+
 * Issue - Aws::AutoScaling - Fixes the waiter and resource definitions.
 
   See [related GitHub issue #1101](https://github.com/aws/aws-sdk-ruby/issues/1101)
