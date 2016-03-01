@@ -103,7 +103,15 @@ module Seahorse
 
       class BooleanShape < Shape; end
 
-      class FloatShape < Shape; end
+      class FloatShape < Shape
+
+        # @return [Integer, nil]
+        attr_accessor :min
+
+        # @return [Integer, nil]
+        attr_accessor :max
+
+      end
 
       class IntegerShape < Shape
 
