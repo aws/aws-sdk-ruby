@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::AutoScaling - Fixes the waiter and resource definitions.
+
+  See [related GitHub issue #1101](https://github.com/aws/aws-sdk-ruby/issues/1101)
+
+  See [related GitHub issue #1109](https://github.com/aws/aws-sdk-ruby/issues/1109)
+
 2.2.20 (2016-02-25)
 ------------------
 
