@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.21 (2016-03-01)
 ------------------
 
 * Feature - Aws::DynamoDB - Adds the `Aws::DynamoDB::Client#describe_limits`
