@@ -31,7 +31,9 @@ module Aws
             begin
               require 'kramdown'
               Kramdown::Document.new(docs, input: 'html').to_kramdown.strip
-            rescue LoadError; end
+            rescue LoadError
+              docs
+            end
           else
             shape_docs(shape_name)
           end
