@@ -1,6 +1,9 @@
 2.2.22 (2016-03-01)
 ------------------
 
+* Issue - Aws - Dependency on `kramdown` gem causing load errors. Moved the
+  require statement into the method and added a `LoadError` guard.
+
 2.2.21 (2016-03-01)
 ------------------
 
