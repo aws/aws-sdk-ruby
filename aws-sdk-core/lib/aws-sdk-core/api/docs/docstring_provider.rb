@@ -1,5 +1,3 @@
-require 'kramdown'
-
 module Aws
   module Api
     module Docs
@@ -30,7 +28,10 @@ module Aws
             # Running through kramdown to catch unclosed tags that
             # break the client doc pages, see Aws::RDS::Client
             # for an example.
-            Kramdown::Document.new(docs, input: 'html').to_kramdown.strip
+            begin
+              require 'kramdown'
+              Kramdown::Document.new(docs, input: 'html').to_kramdown.strip
+            rescue LoadError; end
           else
             shape_docs(shape_name)
           end
