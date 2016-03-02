@@ -20,9 +20,9 @@ module Aws
       #   performance improvements on large objects. Amazon S3 does
       #   not accept multipart copies for objects smaller than 5MB.
       #
-      # @options options [Integer] :content_length When included
-      #   the source object will not be queried for its size before
-      #   starting the copy.
+      # @options options [Integer] :content_length Used only when
+      # multipart_copy is TRUE.  When included the source object will not be
+      # queried for its size before starting the copy.
       #
       # @example Basic object copy
       #
