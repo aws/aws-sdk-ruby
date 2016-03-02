@@ -50,22 +50,26 @@ module Aws
         end
 
         describe '#send_message' do
+          let(:md5_of_attributes) { '756d7f4338696745d063b420a2f7e502' }
 
           before(:each) do
+            response_body = <<-XML
+              <SendMessageResponse>
+                <SendMessageResult>
+                  <MD5OfMessageBody>900150983cd24fb0d6963f7d28e17f72</MD5OfMessageBody>
+                  <MD5OfMessageAttributes>#{md5_of_attributes}</MD5OfMessageAttributes>
+                  <MessageId>5fea7756-0ea4-451a-a703-a558b933e274</MessageId>
+
+                </SendMessageResult>
+              </SendMessageResponse>
+            XML
+
+
             client.handle(step: :send) do |context|
               context.http_response.signal_done(
                 status_code: 200,
                 headers: {},
-                body:<<-XML)
-                <SendMessageResponse>
-                  <SendMessageResult>
-                    <MD5OfMessageBody>900150983cd24fb0d6963f7d28e17f72</MD5OfMessageBody>
-                    <MD5OfMessageAttributes>756d7f4338696745d063b420a2f7e502</MD5OfMessageAttributes>
-                    <MessageId>5fea7756-0ea4-451a-a703-a558b933e274</MessageId>
-
-                  </SendMessageResult>
-                </SendMessageResponse>
-              XML
+                body: response_body)
               Seahorse::Client::Response.new(context: context)
             end
           end
@@ -78,6 +82,26 @@ module Aws
                 message_attributes: message_attributes,
               )
             }.not_to raise_error
+          end
+
+          context 'when data types have custom labels' do
+            let(:md5_of_attributes) { '5b7ef6c8a8d46001c7cdadaeea917aa4' }
+
+            before(:each) do
+              message_attributes.keys.each do |attribute_name|
+                message_attributes[attribute_name][:data_type] << '.test'
+              end
+            end
+
+            it 'does not raise an error if checksums match' do
+              expect {
+                client.send_message(
+                  queue_url:'https://queue.url',
+                  message_body: message_body,
+                  message_attributes: message_attributes,
+                )
+              }.not_to raise_error
+            end
           end
 
           it 'raises when the md5 checksums do not match for the body' do

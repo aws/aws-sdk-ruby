@@ -32,6 +32,8 @@ module Aws
           'Number' => 1
         }
 
+        DATA_TYPE = /\A(String|Binary|Number)(\..+)?\z/
+
         NORMALIZED_ENCODING = Encoding::UTF_8
 
         def validate_send_message(context, response)
@@ -92,9 +94,10 @@ module Aws
           message_attributes.each do |name, attribute|
             name = name.to_s
             encoded[name] = String.new
+            data_type_without_label = DATA_TYPE.match(attribute[:data_type])[1]
             encoded[name] << encode_length_and_bytes(name) <<
             encode_length_and_bytes(attribute[:data_type]) <<
-            [TRANSPORT_TYPE_ENCODINGS[attribute[:data_type]]].pack('C'.freeze)
+            [TRANSPORT_TYPE_ENCODINGS[data_type_without_label]].pack('C'.freeze)
 
             if attribute[:string_value] != nil
               encoded[name] << encode_length_and_string(attribute[:string_value])
