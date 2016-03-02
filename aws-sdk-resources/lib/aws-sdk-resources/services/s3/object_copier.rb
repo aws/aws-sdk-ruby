@@ -12,7 +12,7 @@ module Aws
       end
 
       def copy_from(source, options = {})
-        options[:copy_source_client] = source.client if source.is_a?(S3::Object)
+        options[:copy_source_client] ||= source.client if source.respond_to?(:client)
         copy_object(source, @object, merge_options(source, options))
       end
 
