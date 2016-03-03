@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DirectoryService - Adds support for sending directory event
+  notifications to Amazon Simple Notification Service topics.
+
 * Feature - Aws::S3 - Added support to Aws::S3::Object#copy_from for versioned
   objects. You can pass the source object version id as an option, or you
   can also specify the source as an instance of `Aws::S3::ObjectVersion`.
