@@ -1,6 +1,9 @@
 2.2.24 (2016-03-03)
 ------------------
 
+* Issue - Aws::S3 - Previous fixes were broken in Ruby 1.9.3 due to a lack of
+  support for `:to_h` for Structs.
+
 2.2.23 (2016-03-03)
 ------------------
 
