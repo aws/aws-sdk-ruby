@@ -54,14 +54,10 @@ module Aws
       private
 
       def http_scheme(params, virtual_host)
-        secure = params.delete(:secure)
-
-        if @client.config.endpoint.host != "s3.amazonaws.com"
-          @client.config.endpoint.scheme
-        elsif secure == false || virtual_host
+        if params.delete(:secure) == false || virtual_host
           'http'
         else
-          'https'
+          @client.config.endpoint.scheme
         end
       end
 

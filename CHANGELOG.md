@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - `Aws::S3::Object#presigned_url` now correctly defaults the
+  URL scheme to the HTTP scheme of the configured endpoint.
+
+  ```ruby
+  s3 = Aws::S3::Resource.new(endpoint:'http://localhost:3000')
+  obj = s3.bucket('bucket-name').object('object-key')
+  obj.presigned_url(:get)
+  #=> "http://..."
+  ```
+
+  See [related GitHub pull request #1027](https://github.com/aws/aws-sdk-ruby/pulls/1027)
+
 2.2.24 (2016-03-03)
 ------------------
 
