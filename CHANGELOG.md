@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.23 (2016-03-03)
 ------------------
 
 * Feature - Aws::EC2 - Adds support for Cross VPC Security Group References with
