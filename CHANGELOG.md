@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Adds support for Cross VPC Security Group References with
+  VPC peering and ClassicLink traffic over VPC peering.
+
 * Feature - Aws::DirectoryService - Adds support for sending directory event
   notifications to Amazon Simple Notification Service topics.
 
