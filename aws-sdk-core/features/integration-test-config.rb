@@ -41,7 +41,7 @@ end
 def cfg_value(*path)
   value = IntegrationTestConfig.value_at(*path)
   if value.nil?
-    pending("set cfg#{path.map {|p| "[#{p.inspect}]" }.join} in #{IntegrationTestConfig.path}")
+    pending("set cfg#{path.map {|p| "[#{p.inspect}]" }.join} in #{IntegrationTestConfig.send(:path)}")
   else
     value
   end
