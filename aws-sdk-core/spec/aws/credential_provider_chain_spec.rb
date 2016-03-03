@@ -114,6 +114,14 @@ module Aws
       expect(credentials.session_token).to eq('token')
     end
 
+    describe 'with config set to nil' do
+      let(:config) { nil }
+
+      it 'defaults to nil' do
+        expect(credentials).to be(nil)
+      end
+
+    end
     describe 'with shared credentials' do
 
       let(:path) { File.join('HOME', '.aws', 'credentials') }

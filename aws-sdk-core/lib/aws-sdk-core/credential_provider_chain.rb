@@ -2,7 +2,7 @@ module Aws
   # @api private
   class CredentialProviderChain
 
-    def initialize(config)
+    def initialize(config = nil)
       @config = config
     end
 
@@ -31,11 +31,14 @@ module Aws
     end
 
     def static_credentials(options)
-      config = options[:config]
-      Credentials.new(
-        config.access_key_id,
-        config.secret_access_key,
-        config.session_token)
+      if options[:config]
+        Credentials.new(
+          options[:config].access_key_id,
+          options[:config].secret_access_key,
+          options[:config].session_token)
+      else
+        nil
+      end
     end
 
     def env_credentials(options)
@@ -54,8 +57,12 @@ module Aws
       nil
     end
 
-    def shared_credentials(options = {})
-      SharedCredentials.new(profile_name: options[:config].profile)
+    def shared_credentials(options)
+      if options[:config]
+        SharedCredentials.new(profile_name: options[:config].profile)
+      else
+        SharedCredentials.new(profile_name: 'default')
+      end
     rescue Errors::NoSuchProfileError
       nil
     end
