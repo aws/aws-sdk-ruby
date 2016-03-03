@@ -751,7 +751,7 @@
                     "operation": "DescribeAutoScalingInstances",
                     "params": [
                         {
-                            "target": "InstancesIds[0]",
+                            "target": "InstanceIds[0]",
                             "source": "identifier",
                             "name": "Id"
                         }
