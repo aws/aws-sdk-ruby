@@ -80,9 +80,10 @@ module Aws
         end
 
         if options[:copy_source_region]
-          options[:copy_source_client] ||= S3::Client.new(
-            @object.client.config.to_h.merge(region: options.delete(:copy_source_region))
-          )
+          config = @object.client.config
+          config = config.each_pair.inject({}) { |h, (k,v)| h[k] = v; h }
+          config[:region] = options.delete(:copy_source_region)
+          options[:copy_source_client] ||= S3::Client.new(config)
         end
 
         options[:copy_source_client] ||= @object.client
