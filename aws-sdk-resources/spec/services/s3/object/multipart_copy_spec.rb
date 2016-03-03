@@ -25,6 +25,15 @@ module Aws
           object.copy_to(bucket:'target-bucket', key:'target-key')
         end
 
+        it 'accepts a hash source' do
+          expect(client).to receive(:copy_object).with({
+            bucket: 'target-bucket',
+            key: 'target-key',
+            copy_source: 'bucket/unescaped/key%20path',
+          })
+          object.copy_to(bucket:'target-bucket', key:'target-key')
+        end
+
         it 'accept a hash with options merged' do
           expect(client).to receive(:copy_object).with({
             bucket: 'target-bucket',
@@ -95,6 +104,19 @@ module Aws
             object.copy_from(bucket:'source-bucket', key:'unescaped/source/key path')
           end
 
+          it 'accepts a hash source with version id' do
+            expect(client).to receive(:copy_object).with({
+              bucket: 'bucket',
+              key: 'unescaped/key path',
+              copy_source: 'src-bucket/src-key?versionId=src-version-id'
+            })
+            object.copy_from(
+              bucket: 'src-bucket',
+              key: 'src-key',
+              version_id: 'src-version-id'
+            )
+          end
+
           it 'accept a hash with options merged' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
@@ -115,9 +137,31 @@ module Aws
               bucket: 'bucket',
               key: 'unescaped/key path',
               copy_source: 'source-bucket/unescaped/source/key%20path',
-              copy_source_client: src.client,
             })
+            object.copy_from(src)
+          end
 
+          it 'accepts an S3::ObjectSummary source' do
+            src = S3::ObjectSummary.new('source-bucket', 'unescaped/source/key path', stub_responses:true)
+            expect(client).to receive(:copy_object).with({
+              bucket: 'bucket',
+              key: 'unescaped/key path',
+              copy_source: 'source-bucket/unescaped/source/key%20path',
+            })
+            object.copy_from(src)
+          end
+
+          it 'accepts an S3::ObjectVersion source' do
+            src = S3::ObjectVersion.new(
+              'source-bucket', 'unescaped/source/key path',
+              'source-version-id',
+              stub_responses: true
+            )
+            expect(client).to receive(:copy_object).with({
+              bucket: 'bucket',
+              key: 'unescaped/key path',
+              copy_source: 'source-bucket/unescaped/source/key%20path?versionId=source-version-id',
+            })
             object.copy_from(src)
           end
 
@@ -277,7 +321,7 @@ module Aws
               it 'the :copy_source_region option value is used to construct a client used to query content_length' do
                 allow(S3::Client).to receive(:new).and_call_original
 
-                expect(S3::Client).to receive(:new).with({region: source_region}).and_return(source_client)
+                expect(S3::Client).to receive(:new).with(hash_including(region: source_region)).and_return(source_client)
                 expect(source_client).to receive(:head_object).with({bucket: source_bucket, key: key})
                 expect(target_client).not_to receive(:head_object)
 
@@ -298,7 +342,7 @@ module Aws
               it 'the :copy_source_region option value is used to construct a client used to query content_length' do
                 allow(S3::Client).to receive(:new).and_call_original
 
-                expect(S3::Client).to receive(:new).with({region: source_region}).and_return(source_client)
+                expect(S3::Client).to receive(:new).with(hash_including(region: source_region)).and_return(source_client)
                 expect(source_client).to receive(:head_object).with({bucket: source_bucket, key: key})
                 expect(target_client).not_to receive(:head_object)
 

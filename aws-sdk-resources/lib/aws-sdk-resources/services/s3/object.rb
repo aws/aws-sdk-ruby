@@ -7,12 +7,15 @@ module Aws
       # Copies another object to this object. Use `multipart_copy: true`
       # for large objects. This is required for objects that exceed 5GB.
       #
-      # @param [S3::Object, String, Hash] source Where to copy object
-      #   data from. `source` must be one of the following:
+      # @param [S3::Object, S3::ObjectVersion, S3::ObjectSummary, String, Hash] source
+      #   Where to copy object data from. `source` must be one of the following:
       #
       #   * {Aws::S3::Object}
-      #   * Hash - with `:bucket` and `:key`
-      #   * String - formatted like `"source-bucket-name/source-key"`
+      #   * {Aws::S3::ObjectSummary}
+      #   * {Aws::S3::ObjectVersion}
+      #   * Hash - with `:bucket` and `:key` and optional `:version_id`
+      #   * String - formatted like `"source-bucket-name/uri-escaped-key"`
+      #     or `"source-bucket-name/uri-escaped-key?versionId=version-id"`
       #
       # @option options [Boolean] :multipart_copy (false) When `true`,
       #   the object will be copied using the multipart APIs. This is
@@ -20,18 +23,19 @@ module Aws
       #   performance improvements on large objects. Amazon S3 does
       #   not accept multipart copies for objects smaller than 5MB.
       #
-      # @options options [Integer] :content_length Used only when
-      #   multipart_copy is TRUE.  When included the source object will not be
-      #   queried for its size before starting the copy.
+      # @options options [Integer] :content_length Only used when
+      #   `:multipart_copy` is `true`. Passing this options avoids a HEAD
+      #   request to query the source object size.
       #
-      # @options options [S3::Client] :copy_source_client When present, will
-      #   be used to fetch the content length of the source object if the
-      #   :content_length options is not supplied,
+      # @options options [S3::Client] :copy_source_client Only used when
+      #   `:multipart_copy` is `true` and the source object is in a
+      #   different region. You do not need to specify this option
+      #   if you have provided `:content_length`.
       #
-      # @options options [String] :copy_source_region May be used instead of
-      #   :copy_source_client to specify the region where the source object
-      #   resides, and thus where the HEAD request to fetch the content length of
-      #   the source object should be directed.
+      # @options options [String] :copy_source_region Only used when
+      #   `:multipart_copy` is `true` and the source object is in a
+      #   different region. You do not need to specify this option
+      #   if you have provided a `:source_client` or a `:content_length`.
       #
       # @example Basic object copy
       #

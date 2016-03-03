@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added support to Aws::S3::Object#copy_from for versioned
+  objects. You can pass the source object version id as an option, or you
+  can also specify the source as an instance of `Aws::S3::ObjectVersion`.
+
+* Issue - Aws::S3 - Resolved an issue with `Aws::S3::Object#copy_from` with
+  multipart copies where the source region is different than the destination
+  region.
+
+  See [related GitHub pull request #1104](https://github.com/aws/aws-sdk-ruby/pulls/1104)
+
 2.2.22 (2016-03-01)
 ------------------
 

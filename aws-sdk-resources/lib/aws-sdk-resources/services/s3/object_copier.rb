@@ -12,14 +12,8 @@ module Aws
       end
 
       def copy_from(source, options = {})
-        options[:copy_source_client] ||= source.client if source.respond_to?(:client)
-        if options[:copy_source_region]
-          options[:copy_source_client] = S3::Client.new(region: options.delete(:copy_source_region))
-        end
-
         copy_object(source, @object, merge_options(source, options))
       end
-
 
       def copy_to(target, options = {})
         copy_object(@object, target, merge_options(target, options))
@@ -29,12 +23,11 @@ module Aws
 
       def copy_object(source, target, options)
         target_bucket, target_key = copy_target(target)
-
         options[:bucket] = target_bucket
         options[:key] = target_key
         options[:copy_source] = copy_source(source)
-
         if options.delete(:multipart_copy)
+          apply_source_client(source, options)
           ObjectMultipartCopier.new(@options).copy(options)
         else
           @object.client.copy_object(options)
@@ -44,8 +37,14 @@ module Aws
       def copy_source(source)
         case source
         when String then escape(source)
-        when Hash then "#{source[:bucket]}/#{escape(source[:key])}"
-        when S3::Object then "#{source.bucket_name}/#{escape(source.key)}"
+        when Hash
+          src = "#{source[:bucket]}/#{escape(source[:key])}"
+          src += "?versionId=#{source[:version_id]}" if source.key?(:version_id)
+          src
+        when S3::Object, S3::ObjectSummary
+          "#{source.bucket_name}/#{escape(source.key)}"
+        when S3::ObjectVersion
+          "#{source.bucket_name}/#{escape(source.object_key)}?versionId=#{source.id}"
         else
           msg = "expected source to be an Aws::S3::Object, Hash, or String"
           raise ArgumentError, msg
@@ -66,12 +65,28 @@ module Aws
       def merge_options(source_or_target, options)
         if Hash === source_or_target
           source_or_target.inject(options.dup) do |opts, (key, value)|
-            opts[key] = value unless [:bucket, :key].include?(key)
+            opts[key] = value unless [:bucket, :key, :version_id].include?(key)
             opts
           end
         else
           options.dup
         end
+      end
+
+      def apply_source_client(source, options)
+
+        if source.respond_to?(:client)
+          options[:copy_source_client] ||= source.client
+        end
+
+        if options[:copy_source_region]
+          options[:copy_source_client] ||= S3::Client.new(
+            @object.client.config.to_h.merge(region: options.delete(:copy_source_region))
+          )
+        end
+
+        options[:copy_source_client] ||= @object.client
+
       end
 
       def escape(str)
