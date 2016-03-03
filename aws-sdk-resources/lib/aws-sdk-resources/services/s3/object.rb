@@ -5,7 +5,7 @@ module Aws
       alias size content_length
 
       # Copies another object to this object. Use `multipart_copy: true`
-      # for large objects. This is required for objects that exceed 5GB.'
+      # for large objects. This is required for objects that exceed 5GB.
       #
       # @param [S3::Object, String, Hash] source Where to copy object
       #   data from. `source` must be one of the following:
@@ -19,6 +19,19 @@ module Aws
       #   necessary for objects larger than 5GB and can provide
       #   performance improvements on large objects. Amazon S3 does
       #   not accept multipart copies for objects smaller than 5MB.
+      #
+      # @options options [Integer] :content_length Used only when
+      #   multipart_copy is TRUE.  When included the source object will not be
+      #   queried for its size before starting the copy.
+      #
+      # @options options [S3::Client] :copy_source_client When present, will
+      #   be used to fetch the content length of the source object if the
+      #   :content_length options is not supplied,
+      #
+      # @options options [String] :copy_source_region May be used instead of
+      #   :copy_source_client to specify the region where the source object
+      #   resides, and thus where the HEAD request to fetch the content length of
+      #   the source object should be directed.
       #
       # @example Basic object copy
       #
