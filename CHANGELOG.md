@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CodeCommit - Adds new APIs for code browsing and triggers.
+
 * Issue - Aws::S3 - `Aws::S3::Object#presigned_url` now correctly defaults the
   URL scheme to the HTTP scheme of the configured endpoint.
 
