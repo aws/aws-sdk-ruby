@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.25 (2016-03-08)
 ------------------
 
 * Feature - Aws::DeviceFarm - Adds support for XCUI.

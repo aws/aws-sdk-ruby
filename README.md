@@ -258,7 +258,7 @@ to be backwards compatible.
 | Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain                | CloudSearchDomain            | 2013-01-01  |
 | Amazon CloudWatch                        | CloudWatch                   | 2010-08-01  |
-| Amazon CloudWatch Events                 | CloudWatchEvents             | 2014-02-03  |
+| Amazon CloudWatch Events                 | CloudWatchEvents             | 2015-10-07  |
 | Amazon CloudWatch Logs                   | CloudWatchLogs               | 2014-03-28  |
 | Amazon Cognito Identity                  | CognitoIdentity              | 2014-06-30  |
 | Amazon Cognito Sync                      | CognitoSync                  | 2014-06-30  |
