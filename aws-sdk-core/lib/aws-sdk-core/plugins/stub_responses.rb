@@ -15,7 +15,7 @@ module Aws
       option(:stub_responses, false)
 
       option(:region) do |config|
-        'stubbed-region' if config.stub_responses
+        'us-stubbed-1' if config.stub_responses
       end
 
       option(:credentials) do |config|
