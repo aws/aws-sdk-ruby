@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::GameLift - Adds auto-scaling support.
+
 * Feature - Aws::Redshift - Adds new APIs for supporting table restoration from
   a snapshot: `Aws::Redshift::Client#restore_table_from_cluster_snapshot` and
   `Aws::Redshift::Client#describe_table_restore_status`.
@@ -10,7 +12,8 @@ Unreleased Changes
 
 * Feature - Aws::DeviceFarm - Adds support for XCUI.
 
-* Feature - Aws::CodeCommit - Adds new APIs for code browsing and triggers.
+* Feature - Aws::CodeCommit - Adds new APIs for triggers and for retrieving 
+  commit information.
 
 * Issue - Aws::S3 - `Aws::S3::Object#presigned_url` now correctly defaults the
   URL scheme to the HTTP scheme of the configured endpoint.
