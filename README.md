@@ -244,8 +244,8 @@ to be backwards compatible.
 | AWS IoT                                  | IoT                          | 2015-05-28  |
 | AWS IoT Data Plane                       | IoTDataPlane                 | 2015-05-28  |
 | AWS Key Management Service               | KMS                          | 2014-11-01  |
-| AWS Lambda                               | LambdaPreview                | 2014-11-11  |
 | AWS Lambda                               | Lambda                       | 2015-03-31  |
+| AWS Lambda                               | LambdaPreview                | 2014-11-11  |
 | AWS Marketplace Commerce Analytics       | MarketplaceCommerceAnalytics | 2015-07-01  |
 | AWS OpsWorks                             | OpsWorks                     | 2013-02-18  |
 | AWS Security Token Service               | STS                          | 2011-06-15  |

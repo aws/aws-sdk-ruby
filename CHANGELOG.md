@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.26 (2016-03-10)
 ------------------
 
 * Feature - Aws::GameLift - Adds auto-scaling support.
