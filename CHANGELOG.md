@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Redshift - Adds new APIs for supporting table restoration from
+  a snapshot: `Aws::Redshift::Client#restore_table_from_cluster_snapshot` and
+  `Aws::Redshift::Client#describe_table_restore_status`.
+
 2.2.25 (2016-03-08)
 ------------------
 
