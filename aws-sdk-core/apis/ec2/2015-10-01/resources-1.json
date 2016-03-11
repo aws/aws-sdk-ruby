@@ -641,6 +641,15 @@
             ]
           }
         }
+      },
+      "waiters": {
+        "Exists": {
+          "waiterName": "ImageExists",
+          "params": [
+            { "target": "ImageIds[]", "source": "identifier", "name": "Id" }
+          ],
+          "path": "Images[0]"
+        }
       }
     },
     "Instance": {
