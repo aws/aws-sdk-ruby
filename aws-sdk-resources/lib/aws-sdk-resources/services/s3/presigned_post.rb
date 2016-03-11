@@ -531,7 +531,7 @@ module Aws
       # @return [self]
       def server_side_encryption_customer_key(value)
         field_name = 'x-amz-server-side-encryption-customer-key'
-        with(field_name, value)
+        with(field_name, base64(value))
         with(field_name + '-MD5', base64(OpenSSL::Digest::MD5.digest(value)))
       end
 
