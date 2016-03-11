@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Implemented `Aws::EC2::Image#exists?`.
+
+  See [related GitHub issue #916](https://github.com/aws/aws-sdk-ruby/issues/1127).
+
 2.2.26 (2016-03-10)
 ------------------
 
@@ -15,7 +19,7 @@ Unreleased Changes
 
 * Feature - Aws::DeviceFarm - Adds support for XCUI.
 
-* Feature - Aws::CodeCommit - Adds new APIs for triggers and for retrieving 
+* Feature - Aws::CodeCommit - Adds new APIs for triggers and for retrieving
   commit information.
 
 * Issue - Aws::S3 - `Aws::S3::Object#presigned_url` now correctly defaults the
