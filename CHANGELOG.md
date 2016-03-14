@@ -32,7 +32,7 @@ Unreleased Changes
   #=> "http://..."
   ```
 
-  See [related GitHub pull request #1027](https://github.com/aws/aws-sdk-ruby/pulls/1027)
+  See [related GitHub pull request #1027](https://github.com/aws/aws-sdk-ruby/pull/1027)
 
 2.2.24 (2016-03-03)
 ------------------
@@ -57,7 +57,7 @@ Unreleased Changes
   multipart copies where the source region is different than the destination
   region.
 
-  See [related GitHub pull request #1104](https://github.com/aws/aws-sdk-ruby/pulls/1104)
+  See [related GitHub pull request #1104](https://github.com/aws/aws-sdk-ruby/pull/1104)
 
 2.2.22 (2016-03-01)
 ------------------
