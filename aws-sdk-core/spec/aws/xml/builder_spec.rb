@@ -234,6 +234,16 @@ module Aws
         XML
       end
 
+      it 'correctly serializes newlines' do
+        expect(xml(string:"\n")).to eq(<<-XML)
+<xml>
+  <String>
+</String>
+</xml>
+        XML
+      end
+
+
       it 'applies xml attribute members to the structure' do
         shapes['StructureShape']['members']['String']['xmlAttribute'] = true
         shapes['StructureShape']['members']['String']['locationName'] = 'encode'
