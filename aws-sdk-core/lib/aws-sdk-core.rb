@@ -37,6 +37,7 @@ module Aws
     CognitoIdentity
     CognitoSync
     ConfigService
+    DatabaseMigrationService
     DataPipeline
     DeviceFarm
     DirectConnect

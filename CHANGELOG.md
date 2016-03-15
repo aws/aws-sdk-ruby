@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DatabaseMigrationService - Initial API support for AWS Database
+  Migration Service.
+
 * Feature - Aws::SES - Adds support for custom MAIL FROM domains.
 
 * Feature - Aws::EC2 - Implemented `Aws::EC2::Image#exists?`.
