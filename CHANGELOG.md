@@ -1,8 +1,18 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::DatabaseMigrationService - Initial API support for AWS Database
-  Migration Service.
+* Feature - Aws::DatabaseMigrationService - AWS Database Migration Service helps
+  you migrate databases to AWS easily and securely. The source database remains
+  fully operational during the migration, minimizing downtime to applications
+  that rely on the database. The AWS Database Migration Service can migrate your
+  data to and from most widely used commercial and open-source databases. The
+  service supports homogenous migrations such as Oracle to Oracle, as well as
+  heterogeneous migrations between different database platforms, such as Oracle
+  to Amazon Aurora or Microsoft SQL Server to MySQL. 
+  
+  For more information, go to the [product page](https://aws.amazon.com/dms/)
+  and for documentation, go to the
+  [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
 
 * Feature - Aws::SES - Adds support for custom MAIL FROM domains.
 
