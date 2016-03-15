@@ -1,9 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SES - Adds support for custom MAIL FROM domains.
+
 * Feature - Aws::EC2 - Implemented `Aws::EC2::Image#exists?`.
 
-  See [related GitHub issue #916](https://github.com/aws/aws-sdk-ruby/issues/1127).
+  See [related GitHub issue #1127](https://github.com/aws/aws-sdk-ruby/issues/1127).
 
 2.2.26 (2016-03-10)
 ------------------
