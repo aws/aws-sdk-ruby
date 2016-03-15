@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.27 (2016-03-15)
 ------------------
 
 * Feature - Aws::DatabaseMigrationService - AWS Database Migration Service helps
