@@ -177,11 +177,12 @@ module Aws
 
         it 'computes a MD5 of the customer provided encryption key' do
           key = 'abcmnoxyz12345'
+          encoded_key = Base64.strict_encode64(key)
           md5 = Base64.strict_encode64(OpenSSL::Digest::MD5.digest(key))
           post.server_side_encryption_customer_key(key)
-          expect(post.fields['x-amz-server-side-encryption-customer-key']).to eq(key)
+          expect(post.fields['x-amz-server-side-encryption-customer-key']).to eq(encoded_key)
           expect(post.fields['x-amz-server-side-encryption-customer-key-MD5']).to eq(md5)
-          expect(policy(post)).to include('x-amz-server-side-encryption-customer-key' => key)
+          expect(policy(post)).to include('x-amz-server-side-encryption-customer-key' => encoded_key)
           expect(policy(post)).to include('x-amz-server-side-encryption-customer-key-MD5' => md5)
         end
 
