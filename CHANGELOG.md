@@ -12,6 +12,8 @@ Unreleased Changes
 * Feature - Aws::IoT - Adding a new rule action for AWS IoT rules engine.
   This action allows you to send IoT data to Amazon Elasticsearch Service.
 
+* Feature - Aws::CloudHSM - Added support for tagging.
+
 2.2.27 (2016-03-15)
 ------------------
 
