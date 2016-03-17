@@ -9,6 +9,9 @@ Unreleased Changes
   expiration policy to automatically remove the current version delete
   marker when previous versions of the object no longer exist.
 
+* Feature - Aws::IoT - Adding a new rule action for AWS IoT rules engine.
+  This action allows you to send IoT data to Amazon Elasticsearch Service.
+
 2.2.27 (2016-03-15)
 ------------------
 
