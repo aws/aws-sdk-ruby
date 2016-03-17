@@ -5,11 +5,11 @@
     "checksumFormat":"md5",
     "endpointPrefix":"s3",
     "globalEndpoint":"s3.amazonaws.com",
+    "protocol":"rest-xml",
     "serviceAbbreviation":"Amazon S3",
     "serviceFullName":"Amazon Simple Storage Service",
     "signatureVersion":"s3",
-    "timestampFormat":"rfc822",
-    "protocol":"rest-xml"
+    "timestampFormat":"rfc822"
   },
   "operations":{
     "AbortMultipartUpload":{
@@ -21,10 +21,7 @@
       "input":{"shape":"AbortMultipartUploadRequest"},
       "output":{"shape":"AbortMultipartUploadOutput"},
       "errors":[
-        {
-          "shape":"NoSuchUpload",
-          "exception":true
-        }
+        {"shape":"NoSuchUpload"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/mpUploadAbort.html"
     },
@@ -47,10 +44,7 @@
       "input":{"shape":"CopyObjectRequest"},
       "output":{"shape":"CopyObjectOutput"},
       "errors":[
-        {
-          "shape":"ObjectNotInActiveTierError",
-          "exception":true
-        }
+        {"shape":"ObjectNotInActiveTierError"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectCOPY.html",
       "alias":"PutObjectCopy"
@@ -64,10 +58,8 @@
       "input":{"shape":"CreateBucketRequest"},
       "output":{"shape":"CreateBucketOutput"},
       "errors":[
-        {
-          "shape":"BucketAlreadyExists",
-          "exception":true
-        }
+        {"shape":"BucketAlreadyExists"},
+        {"shape":"BucketAlreadyOwnedByYou"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUT.html",
       "alias":"PutBucket"
@@ -194,8 +186,8 @@
       },
       "input":{"shape":"GetBucketLifecycleRequest"},
       "output":{"shape":"GetBucketLifecycleOutput"},
-      "deprecated":true,
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html"
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETlifecycle.html",
+      "deprecated":true
     },
     "GetBucketLifecycleConfiguration":{
       "name":"GetBucketLifecycleConfiguration",
@@ -234,8 +226,8 @@
       },
       "input":{"shape":"GetBucketNotificationConfigurationRequest"},
       "output":{"shape":"NotificationConfigurationDeprecated"},
-      "deprecated":true,
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html"
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGETnotification.html",
+      "deprecated":true
     },
     "GetBucketNotificationConfiguration":{
       "name":"GetBucketNotificationConfiguration",
@@ -314,10 +306,7 @@
       "input":{"shape":"GetObjectRequest"},
       "output":{"shape":"GetObjectOutput"},
       "errors":[
-        {
-          "shape":"NoSuchKey",
-          "exception":true
-        }
+        {"shape":"NoSuchKey"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGET.html"
     },
@@ -330,10 +319,7 @@
       "input":{"shape":"GetObjectAclRequest"},
       "output":{"shape":"GetObjectAclOutput"},
       "errors":[
-        {
-          "shape":"NoSuchKey",
-          "exception":true
-        }
+        {"shape":"NoSuchKey"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html"
     },
@@ -355,10 +341,7 @@
       },
       "input":{"shape":"HeadBucketRequest"},
       "errors":[
-        {
-          "shape":"NoSuchBucket",
-          "exception":true
-        }
+        {"shape":"NoSuchBucket"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketHEAD.html"
     },
@@ -371,10 +354,7 @@
       "input":{"shape":"HeadObjectRequest"},
       "output":{"shape":"HeadObjectOutput"},
       "errors":[
-        {
-          "shape":"NoSuchKey",
-          "exception":true
-        }
+        {"shape":"NoSuchKey"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectHEAD.html"
     },
@@ -418,10 +398,7 @@
       "input":{"shape":"ListObjectsRequest"},
       "output":{"shape":"ListObjectsOutput"},
       "errors":[
-        {
-          "shape":"NoSuchBucket",
-          "exception":true
-        }
+        {"shape":"NoSuchBucket"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketGET.html",
       "alias":"GetBucket"
@@ -461,8 +438,8 @@
         "requestUri":"/{Bucket}?lifecycle"
       },
       "input":{"shape":"PutBucketLifecycleRequest"},
-      "deprecated":true,
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html"
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTlifecycle.html",
+      "deprecated":true
     },
     "PutBucketLifecycleConfiguration":{
       "name":"PutBucketLifecycleConfiguration",
@@ -488,8 +465,8 @@
         "requestUri":"/{Bucket}?notification"
       },
       "input":{"shape":"PutBucketNotificationRequest"},
-      "deprecated":true,
-      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html"
+      "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTBucketPUTnotification.html",
+      "deprecated":true
     },
     "PutBucketNotificationConfiguration":{
       "name":"PutBucketNotificationConfiguration",
@@ -571,10 +548,7 @@
       "input":{"shape":"PutObjectAclRequest"},
       "output":{"shape":"PutObjectAclOutput"},
       "errors":[
-        {
-          "shape":"NoSuchKey",
-          "exception":true
-        }
+        {"shape":"NoSuchKey"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectPUTacl.html"
     },
@@ -587,10 +561,7 @@
       "input":{"shape":"RestoreObjectRequest"},
       "output":{"shape":"RestoreObjectOutput"},
       "errors":[
-        {
-          "shape":"ObjectAlreadyInActiveTierError",
-          "exception":true
-        }
+        {"shape":"ObjectAlreadyInActiveTierError"}
       ],
       "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectRestore.html",
       "alias":"PostObjectRestore"
@@ -617,6 +588,13 @@
     }
   },
   "shapes":{
+    "AbortDate":{"type":"timestamp"},
+    "AbortIncompleteMultipartUpload":{
+      "type":"structure",
+      "members":{
+        "DaysAfterInitiation":{"shape":"DaysAfterInitiation"}
+      }
+    },
     "AbortMultipartUploadOutput":{
       "type":"structure",
       "members":{
@@ -657,6 +635,7 @@
         }
       }
     },
+    "AbortRuleId":{"type":"string"},
     "AcceptRanges":{"type":"string"},
     "AccessControlPolicy":{
       "type":"structure",
@@ -695,6 +674,12 @@
       }
     },
     "BucketAlreadyExists":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "BucketAlreadyOwnedByYou":{
       "type":"structure",
       "members":{
       },
@@ -1214,8 +1199,8 @@
         },
         "CreateBucketConfiguration":{
           "shape":"CreateBucketConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"CreateBucketConfiguration"
+          "locationName":"CreateBucketConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "GrantFullControl":{
           "shape":"GrantFullControl",
@@ -1248,6 +1233,16 @@
     "CreateMultipartUploadOutput":{
       "type":"structure",
       "members":{
+        "AbortDate":{
+          "shape":"AbortDate",
+          "location":"header",
+          "locationName":"x-amz-abort-date"
+        },
+        "AbortRuleId":{
+          "shape":"AbortRuleId",
+          "location":"header",
+          "locationName":"x-amz-abort-rule-id"
+        },
         "Bucket":{
           "shape":"BucketName",
           "locationName":"Bucket"
@@ -1406,6 +1401,7 @@
       "timestampFormat":"iso8601"
     },
     "Days":{"type":"integer"},
+    "DaysAfterInitiation":{"type":"integer"},
     "Delete":{
       "type":"structure",
       "required":["Objects"],
@@ -1594,8 +1590,8 @@
         },
         "Delete":{
           "shape":"Delete",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"Delete"
+          "locationName":"Delete",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "MFA":{
           "shape":"MFA",
@@ -1688,6 +1684,7 @@
         "Disabled"
       ]
     },
+    "ExpiredObjectDeleteMarker":{"type":"boolean"},
     "Expires":{"type":"timestamp"},
     "ExposeHeader":{"type":"string"},
     "ExposeHeaders":{
@@ -2291,8 +2288,8 @@
         "ID":{"shape":"ID"},
         "Type":{
           "shape":"Type",
-          "xmlAttribute":true,
-          "locationName":"xsi:type"
+          "locationName":"xsi:type",
+          "xmlAttribute":true
         },
         "URI":{"shape":"URI"}
       },
@@ -2580,7 +2577,8 @@
       "type":"structure",
       "members":{
         "Date":{"shape":"Date"},
-        "Days":{"shape":"Days"}
+        "Days":{"shape":"Days"},
+        "ExpiredObjectDeleteMarker":{"shape":"ExpiredObjectDeleteMarker"}
       }
     },
     "LifecycleRule":{
@@ -2602,7 +2600,8 @@
           "shape":"NoncurrentVersionTransitionList",
           "locationName":"NoncurrentVersionTransition"
         },
-        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"}
+        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"},
+        "AbortIncompleteMultipartUpload":{"shape":"AbortIncompleteMultipartUpload"}
       }
     },
     "LifecycleRules":{
@@ -2797,6 +2796,16 @@
     "ListPartsOutput":{
       "type":"structure",
       "members":{
+        "AbortDate":{
+          "shape":"AbortDate",
+          "location":"header",
+          "locationName":"x-amz-abort-date"
+        },
+        "AbortRuleId":{
+          "shape":"AbortRuleId",
+          "location":"header",
+          "locationName":"x-amz-abort-rule-id"
+        },
         "Bucket":{"shape":"BucketName"},
         "Key":{"shape":"ObjectKey"},
         "UploadId":{"shape":"MultipartUploadId"},
@@ -3020,6 +3029,7 @@
         "public-read",
         "public-read-write",
         "authenticated-read",
+        "aws-exec-read",
         "bucket-owner-read",
         "bucket-owner-full-control"
       ]
@@ -3143,8 +3153,8 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"AccessControlPolicy"
+          "locationName":"AccessControlPolicy",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "Bucket":{
           "shape":"BucketName",
@@ -3198,8 +3208,8 @@
         },
         "CORSConfiguration":{
           "shape":"CORSConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"CORSConfiguration"
+          "locationName":"CORSConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "ContentMD5":{
           "shape":"ContentMD5",
@@ -3220,8 +3230,8 @@
         },
         "LifecycleConfiguration":{
           "shape":"BucketLifecycleConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"LifecycleConfiguration"
+          "locationName":"LifecycleConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"LifecycleConfiguration"
@@ -3242,8 +3252,8 @@
         },
         "LifecycleConfiguration":{
           "shape":"LifecycleConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"LifecycleConfiguration"
+          "locationName":"LifecycleConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"LifecycleConfiguration"
@@ -3262,8 +3272,8 @@
         },
         "BucketLoggingStatus":{
           "shape":"BucketLoggingStatus",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"BucketLoggingStatus"
+          "locationName":"BucketLoggingStatus",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "ContentMD5":{
           "shape":"ContentMD5",
@@ -3287,8 +3297,8 @@
         },
         "NotificationConfiguration":{
           "shape":"NotificationConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"NotificationConfiguration"
+          "locationName":"NotificationConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"NotificationConfiguration"
@@ -3312,8 +3322,8 @@
         },
         "NotificationConfiguration":{
           "shape":"NotificationConfigurationDeprecated",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"NotificationConfiguration"
+          "locationName":"NotificationConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"NotificationConfiguration"
@@ -3358,8 +3368,8 @@
         },
         "ReplicationConfiguration":{
           "shape":"ReplicationConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"ReplicationConfiguration"
+          "locationName":"ReplicationConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"ReplicationConfiguration"
@@ -3383,8 +3393,8 @@
         },
         "RequestPaymentConfiguration":{
           "shape":"RequestPaymentConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"RequestPaymentConfiguration"
+          "locationName":"RequestPaymentConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"RequestPaymentConfiguration"
@@ -3408,8 +3418,8 @@
         },
         "Tagging":{
           "shape":"Tagging",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"Tagging"
+          "locationName":"Tagging",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"Tagging"
@@ -3438,8 +3448,8 @@
         },
         "VersioningConfiguration":{
           "shape":"VersioningConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"VersioningConfiguration"
+          "locationName":"VersioningConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"VersioningConfiguration"
@@ -3463,8 +3473,8 @@
         },
         "WebsiteConfiguration":{
           "shape":"WebsiteConfiguration",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"WebsiteConfiguration"
+          "locationName":"WebsiteConfiguration",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         }
       },
       "payload":"WebsiteConfiguration"
@@ -3493,8 +3503,8 @@
         },
         "AccessControlPolicy":{
           "shape":"AccessControlPolicy",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"AccessControlPolicy"
+          "locationName":"AccessControlPolicy",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "Bucket":{
           "shape":"BucketName",
@@ -3890,8 +3900,8 @@
         },
         "RestoreRequest":{
           "shape":"RestoreRequest",
-          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-          "locationName":"RestoreRequest"
+          "locationName":"RestoreRequest",
+          "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
         },
         "RequestPayer":{
           "shape":"RequestPayer",
@@ -3937,7 +3947,8 @@
         "Status":{"shape":"ExpirationStatus"},
         "Transition":{"shape":"Transition"},
         "NoncurrentVersionTransition":{"shape":"NoncurrentVersionTransition"},
-        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"}
+        "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"},
+        "AbortIncompleteMultipartUpload":{"shape":"AbortIncompleteMultipartUpload"}
       }
     },
     "Rules":{

@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - You can now set Incomplete multipart upload expiration
+  policies to automatically expire incomplete multipart uploads after a
+  predefined number of days.
+
+* Feature - Aws::S3 - · You can now use the Expired object delete markers
+  expiration policy to automatically remove the current version delete
+  marker when previous versions of the object no longer exist.
+
 2.2.27 (2016-03-15)
 ------------------
 
@@ -11,8 +19,8 @@ Unreleased Changes
   data to and from most widely used commercial and open-source databases. The
   service supports homogenous migrations such as Oracle to Oracle, as well as
   heterogeneous migrations between different database platforms, such as Oracle
-  to Amazon Aurora or Microsoft SQL Server to MySQL. 
-  
+  to Amazon Aurora or Microsoft SQL Server to MySQL.
+
   For more information, go to the [product page](https://aws.amazon.com/dms/)
   and for documentation, go to the
   [AWS Database Migration Service User Guide](https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html).
