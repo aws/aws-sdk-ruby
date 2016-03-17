@@ -14,6 +14,9 @@ Unreleased Changes
 
 * Feature - Aws::CloudHSM - Added support for tagging.
 
+* Feature - Aws::MarketplaceMetering - Added support for the new AWS
+  Marketplace Metering service.
+
 2.2.27 (2016-03-15)
 ------------------
 
