@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.28 (2016-03-17)
 ------------------
 
 * Feature - Aws::S3 - You can now set Incomplete multipart upload expiration

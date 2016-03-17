@@ -253,6 +253,7 @@ to be backwards compatible.
 | AWS Storage Gateway                      | StorageGateway               | 2013-06-30  |
 | AWS Support                              | Support                      | 2013-04-15  |
 | AWS WAF                                  | WAF                          | 2015-08-24  |
+| AWSMarketplace Metering                  | MarketplaceMetering          | 2016-01-14  |
 | Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
 | Amazon CloudFront                        | CloudFront                   | 2016-01-28  |
 | Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
