@@ -11,6 +11,7 @@ module Aws
           @method_name = method_name
           @operation = operation
           @comments = comments
+          @params ||= {}
         end
 
         def to_str_input
