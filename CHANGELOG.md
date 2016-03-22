@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.29 (2016-03-22)
 ------------------
 
 * Feature - Aws::DeviceFarm - Pay a flat monthly fee for unlimited testing of
