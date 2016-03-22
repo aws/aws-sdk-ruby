@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DeviceFarm - Pay a flat monthly fee for unlimited testing of
+  your Android and iOS apps with AWS Device Farm device slots.
+
 * Feature - Aws::RDS - You can now customize the order in which Aurora Replicas
   are promoted to primary instance during a failover.
 
