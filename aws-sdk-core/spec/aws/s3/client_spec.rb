@@ -146,6 +146,17 @@ module Aws
             'AWS4-HMAC-SHA256')
         end
 
+        it 'raises a runtime error on unsupported signature version' do
+          client = Client.new(
+            signature_version: 'v2',
+            stub_responses: true,
+            region: 'us-east-1'
+          )
+          expect {
+            client.head_object(bucket:'name', key:'key')
+          }.to raise_error(/unsupported/)
+        end
+
       end
 
       describe 'https required for sse cpk' do

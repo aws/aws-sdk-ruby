@@ -12,7 +12,8 @@ module Aws
 
         def call(context)
           require_credentials(context)
-          case context.config.signature_version
+          version = context.config.signature_version
+          case version
           when 'v4' then apply_v4_signature(context)
           when 's3' then apply_s3_legacy_signature(context)
           else
