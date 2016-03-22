@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::RDS - You can now customize the order in which Aurora Replicas
+  are promoted to primary instance during a failover.
+
 2.2.28 (2016-03-17)
 ------------------
 
