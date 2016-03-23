@@ -68,7 +68,7 @@ You can modify defaults and register callbacks by passing a block argument.
      w.before_wait do { |count, prev_resp| ... }
   end
           EXAMPLE
-          super + [tag(example)]
+          [tag(example)]
         end
 
       end

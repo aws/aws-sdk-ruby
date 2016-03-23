@@ -214,9 +214,7 @@ module Aws
             param.apply(params_hash, options)
           end
 
-          user_params = options[:params] || {}
-          params = deep_merge(user_params, params_hash)
-          resp = resource.client.wait_until(@waiter_name, params, &options[:block])
+          resp = resource.client.wait_until(@waiter_name, params_hash, &options[:block])
 
           resource_opts = resource.identifiers.dup
           if @path && resp.respond_to?(:data)
@@ -224,14 +222,6 @@ module Aws
           end
           resource_opts[:client] = resource.client
           resource.class.new(resource_opts)
-        end
-
-        def deep_merge(obj1, obj2)
-          case obj1
-          when Hash then obj1.merge(obj2) { |key, v1, v2| deep_merge(v1, v2) }
-          when Array then obj2 + obj1
-          else obj2
-          end
         end
 
       end
