@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.30 (2016-03-24)
 ------------------
 
 * Feature - Aws::ElastiCache - Adds support for vertical scaling from one
