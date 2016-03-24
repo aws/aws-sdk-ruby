@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElastiCache - Adds support for vertical scaling from one
+  ElastiCache instance type to another.
+
 * Feature - Aws::RDS - Adds support for Windows authentication for RDS SQL
   Server.
 
