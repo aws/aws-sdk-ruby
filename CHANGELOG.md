@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::StorageGateway - Adds support for local console passwords.
+
 2.2.29 (2016-03-22)
 ------------------
 
