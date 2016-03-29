@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Adds support for change sets.
+
 2.2.30 (2016-03-24)
 ------------------
 
