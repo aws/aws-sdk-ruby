@@ -36,15 +36,15 @@ module Aws
 
       def copy_source(source)
         case source
-        when String then escape(source)
+        when String then source
         when Hash
-          src = "#{source[:bucket]}/#{escape(source[:key])}"
+          src = "#{source[:bucket]}/#{source[:key]}"
           src += "?versionId=#{source[:version_id]}" if source.key?(:version_id)
           src
         when S3::Object, S3::ObjectSummary
-          "#{source.bucket_name}/#{escape(source.key)}"
+          "#{source.bucket_name}/#{source.key}"
         when S3::ObjectVersion
-          "#{source.bucket_name}/#{escape(source.object_key)}?versionId=#{source.id}"
+          "#{source.bucket_name}/#{source.object_key}?versionId=#{source.id}"
         else
           msg = "expected source to be an Aws::S3::Object, Hash, or String"
           raise ArgumentError, msg
@@ -88,10 +88,6 @@ module Aws
 
         options[:copy_source_client] ||= @object.client
 
-      end
-
-      def escape(str)
-        Seahorse::Util.uri_path_escape(str)
       end
 
     end
