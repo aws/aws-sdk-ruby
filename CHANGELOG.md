@@ -7,6 +7,8 @@ Unreleased Changes
 
 * Feature - Aws::Redshift - Adds support for cluster IAM roles.
 
+* Feature - Aws::Inspector - New API version.
+
 2.2.30 (2016-03-24)
 ------------------
 
