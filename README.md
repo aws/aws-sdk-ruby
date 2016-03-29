@@ -276,7 +276,7 @@ to be backwards compatible.
 | Amazon Elasticsearch Service             | ElasticsearchService         | 2015-01-01  |
 | Amazon GameLift                          | GameLift                     | 2015-10-01  |
 | Amazon Glacier                           | Glacier                      | 2012-06-01  |
-| Amazon Inspector                         | Inspector                    | 2015-08-18  |
+| Amazon Inspector                         | Inspector                    | 2016-02-16  |
 | Amazon Kinesis                           | Kinesis                      | 2013-12-02  |
 | Amazon Kinesis Firehose                  | Firehose                     | 2015-08-04  |
 | Amazon Machine Learning                  | MachineLearning              | 2014-12-12  |
