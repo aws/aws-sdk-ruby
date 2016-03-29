@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Aws::CloudFormation - Adds support for change sets.
 
+* Feature - Aws::WAF - Support for XSS (Cross-site scripting) protection.
+
 * Feature - Aws::Redshift - Adds support for cluster IAM roles.
 
 2.2.30 (2016-03-24)
