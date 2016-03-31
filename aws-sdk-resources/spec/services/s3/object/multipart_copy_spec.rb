@@ -11,7 +11,7 @@ module Aws
           expect(client).to receive(:copy_object).with({
             bucket: 'target-bucket',
             key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
+            copy_source: 'bucket/unescaped/key path',
           })
           object.copy_to('target-bucket/target-key')
         end
@@ -20,7 +20,7 @@ module Aws
           expect(client).to receive(:copy_object).with({
             bucket: 'target-bucket',
             key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
+            copy_source: 'bucket/unescaped/key path',
           })
           object.copy_to(bucket:'target-bucket', key:'target-key')
         end
@@ -29,7 +29,7 @@ module Aws
           expect(client).to receive(:copy_object).with({
             bucket: 'target-bucket',
             key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
+            copy_source: 'bucket/unescaped/key path',
           })
           object.copy_to(bucket:'target-bucket', key:'target-key')
         end
@@ -38,7 +38,7 @@ module Aws
           expect(client).to receive(:copy_object).with({
             bucket: 'target-bucket',
             key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
+            copy_source: 'bucket/unescaped/key path',
             content_type: 'text/plain',
           })
           object.copy_to(
@@ -52,7 +52,7 @@ module Aws
           expect(client).to receive(:copy_object).with({
             bucket: 'target-bucket',
             key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
+            copy_source: 'bucket/unescaped/key path',
           })
           target = S3::Object.new('target-bucket', 'target-key', stub_responses:true)
           object.copy_to(target)
@@ -62,7 +62,7 @@ module Aws
           expect(client).to receive(:copy_object).with({
             bucket: 'target-bucket',
             key: 'target-key',
-            copy_source: 'bucket/unescaped/key%20path',
+            copy_source: 'bucket/unescaped/key path',
             acl: 'public-read',
           })
           object.copy_to('target-bucket/target-key', acl: 'public-read')
@@ -81,16 +81,16 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
               key: 'unescaped/key path',
-              copy_source: 'source-bucket/escaped/source/key%20path',
+              copy_source: 'source-bucket/escaped/source/key path',
             })
-            object.copy_from(copy_source: 'source-bucket/escaped/source/key%20path')
+            object.copy_from(copy_source: 'source-bucket/escaped/source/key path')
           end
 
           it 'accepts a string source' do
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
               key: 'unescaped/key path',
-              copy_source: 'source-bucket/source/key%20path',
+              copy_source: 'source-bucket/source/key path',
             })
             object.copy_from('source-bucket/source/key path')
           end
@@ -99,7 +99,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
               key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path'
+              copy_source: 'source-bucket/unescaped/source/key path'
             })
             object.copy_from(bucket:'source-bucket', key:'unescaped/source/key path')
           end
@@ -136,7 +136,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
               key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path',
+              copy_source: 'source-bucket/unescaped/source/key path',
             })
             object.copy_from(src)
           end
@@ -146,7 +146,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
               key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path',
+              copy_source: 'source-bucket/unescaped/source/key path',
             })
             object.copy_from(src)
           end
@@ -160,7 +160,7 @@ module Aws
             expect(client).to receive(:copy_object).with({
               bucket: 'bucket',
               key: 'unescaped/key path',
-              copy_source: 'source-bucket/unescaped/source/key%20path?versionId=source-version-id',
+              copy_source: 'source-bucket/unescaped/source/key path?versionId=source-version-id',
             })
             object.copy_from(src)
           end

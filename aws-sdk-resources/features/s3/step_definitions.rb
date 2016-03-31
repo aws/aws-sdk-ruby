@@ -8,16 +8,7 @@ end
 
 After("@s3") do
   @created_buckets.each do |bucket|
-    # TODO : provide a Bucket#delete! method
-    loop do
-      objects = bucket.client.list_object_versions(bucket: bucket.name)
-      objects = objects.data.versions.map do |v|
-        { key: v.key, version_id: v.version_id }
-      end
-      break if objects.empty?
-      bucket.client.delete_objects(bucket: bucket.name, delete: { objects: objects })
-    end
-    bucket.delete
+    bucket.delete!
   end
 end
 
@@ -129,4 +120,11 @@ Then(/^I should be able to multipart copy the object to a different bucket$/) do
   target_object = target_bucket.object("#{@source_key}-copy")
   target_object.copy_from("#{@source_bucket}/#{@source_key}", multipart_copy: true)
   expect(ApiCallTracker.called_operations).to include(:create_multipart_upload)
+end
+
+Then(/^I should be able to copy the object$/) do
+  target_bucket = @s3.bucket(@bucket_name)
+  target_object = target_bucket.object("test object-copy")
+  target_object.copy_from("#{@bucket_name}/test object")
+  expect(ApiCallTracker.called_operations).to include(:copy_object)
 end
