@@ -55,6 +55,8 @@ The SDK searches the following locations for a region:
 You can configure default credentials and region via `Aws.config`. **In version 2, `Aws.config` is a vanilla Ruby hash, not a method like it was in version 1**. The `Aws.config` hash takes precedence over environment variables.
 
 ```ruby
+require 'aws-sdk'
+
 Aws.config.update({
   region: 'us-west-2',
   credentials: Aws::Credentials.new('akid', 'secret')
@@ -83,6 +85,7 @@ ec2 = Aws::EC2::Client.new(region:'us-west-2', credentials: credentials)
 Please take care to **never commit credentials to source control**.  We strongly recommended loading credentials from an external source.
 
 ```ruby
+require 'aws-sdk'
 require 'json'
 creds = JSON.load(File.read('secrets.json'))
 Aws.config[:credentials] = Aws::Credentials.new(creds['AccessKeyId'], creds['SecretAccessKey'])
