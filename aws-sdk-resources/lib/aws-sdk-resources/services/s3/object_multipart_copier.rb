@@ -120,8 +120,16 @@ module Aws
 
         client = options[:copy_source_client] || @client
 
-        bucket, key = options[:copy_source].match(/([^\/]+?)\/(.+)/)[1,2]
-        client.head_object(bucket: bucket, key: key).content_length
+        if vid_match = options[:copy_source].match(/([^\/]+?)\/(.+)\?versionId=(.+)/)
+          bucket, key, version_id = vid_match[1,3]
+        else
+          bucket, key = options[:copy_source].match(/([^\/]+?)\/(.+)/)[1,2]
+        end
+        
+        key = CGI.unescape(key)
+        opts = { bucket: bucket, key: key }
+        opts[:version_id] = version_id if version_id
+        client.head_object(opts).content_length
       end
 
       def default_part_size(source_size)

@@ -5,7 +5,7 @@ module Aws
     # @api private
     class ObjectCopier
 
-      # @param [S3::Objecst] object
+      # @param [S3::Object] object
       def initialize(object, options = {})
         @object = object
         @options = options.merge(client: @object.client)
@@ -36,7 +36,7 @@ module Aws
 
       def copy_source(source)
         case source
-        when String then escape(source)
+        when String then source
         when Hash
           src = "#{source[:bucket]}/#{escape(source[:key])}"
           src += "?versionId=#{source[:version_id]}" if source.key?(:version_id)
