@@ -42,7 +42,7 @@ module Aws
       def initialize(credentials, service_name, region)
         @service_name = service_name
         @credentials = credentials.credentials
-        @region = region
+        @region = EndpointProvider.signing_region(region, service_name)
       end
 
       # @param [Seahorse::Client::Http::Request] req
