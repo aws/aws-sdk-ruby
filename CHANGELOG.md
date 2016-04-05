@@ -3,6 +3,9 @@ Unreleased Changes
 
 * Feature - Aws::APIGateway - Adds support for importing APIs. Includes two new
   methods for this: `#import_rest_api` and `#put_rest_api`.
+  
+* Feature - Aws::Route53 - Adds support for health checks based on Amazon
+  CloudWatch metrics.
 
 2.2.31 (2016-03-29)
 ------------------
