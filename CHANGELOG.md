@@ -6,6 +6,11 @@ Unreleased Changes
   
 * Feature - Aws::Route53 - Adds support for health checks based on Amazon
   CloudWatch metrics.
+  
+* Feature - Aws::STS - This release adds support for the new STS API
+  `#get_caller_identity`, which returns details about the credentials used to
+  make the API call. The details include name and account, as well as the type
+  of entity making the call, such as an IAM user vs. federated user.
 
 2.2.31 (2016-03-29)
 ------------------
