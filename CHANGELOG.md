@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.32 (2016-04-05)
 ------------------
 
 * Feature - Aws::APIGateway - Adds support for importing APIs. Includes two new
