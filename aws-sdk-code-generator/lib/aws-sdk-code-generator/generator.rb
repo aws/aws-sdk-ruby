@@ -88,7 +88,7 @@ module AwsSdkCodeGenerator
         resources: @resources
       )
       root_mod, svc_mod = build_modules
-      root_mod.require('aws-sdk-core')
+      #root_mod.require('aws-sdk-core')
       svc_mod.docstring(service_docstring)
       autoloads.apply(svc_mod)
       root_mod.to_s
