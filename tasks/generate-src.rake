@@ -22,7 +22,7 @@ task 'generate-src' do
     api = File.open("#{path}/api-2.json", "rb") { |f| JSON.load(f.read) }
     services << {
       identifier: compute_module_name.call(api).downcase,
-      modules: ['Aws', compute_module_name.call(api)],
+      module_names: ['Aws', compute_module_name.call(api)],
       full_name: api['metadata']['serviceFullName'],
       files: Dir.glob("#{path}/*"),
     }
@@ -34,8 +34,8 @@ task 'generate-src' do
 
     #next unless svc[:identifier] == 's3' || svc[:identifier] == 'ec2'
 
-    identifier, modules, full_name, files = svc.values_at(
-      :identifier, :modules, :full_name, :files)
+    identifier, module_names, full_name, files = svc.values_at(
+      :identifier, :module_names, :full_name, :files)
 
     files = files.inject({}) do |hash, path|
       key = case File.basename(path)
@@ -55,7 +55,7 @@ task 'generate-src' do
 
     options = { 
       gem_name: gem_name,
-      modules: modules,
+      module_names: module_names,
     }
     files.each do |key, path|
       options[key] = Aws::Json.load_file(path)
