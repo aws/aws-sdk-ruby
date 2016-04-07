@@ -12,6 +12,7 @@ $GEM_NAMES.each do |gem_name|
   $LOAD_PATH.unshift(File.join($REPO_ROOT, gem_name, 'lib'))
 end
 $LOAD_PATH.unshift(File.join($REPO_ROOT, 'aws-sdk-code-generator', 'lib'))
+$LOAD_PATH.unshift(File.join($REPO_ROOT, 'lib'))
 
 require 'aws-sdk'
 

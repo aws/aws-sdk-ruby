@@ -42,10 +42,11 @@ module AwsSdkCodeGenerator
     end
 
     def generate_src_files
+      name = underscore(@module_names.last)
       Enumerator.new do |y|
-        y.yield("#{@gem_name}.rb", service_module)
+        y.yield("#{name}.rb", service_module)
         each_module do |mod|
-          y.yield(module_path(mod), wrap(mod))
+          y.yield(File.join(name, underscore(mod.name) + '.rb'), wrap(mod))
         end
       end
     end
@@ -81,10 +82,6 @@ module AwsSdkCodeGenerator
       root_mod.to_s
     end
 
-    def module_path(mod)
-      File.join(@gem_name, underscore(mod.name) + '.rb')
-    end
-
     def service_module
       autoloads = Generators::ServiceAutoloads.new(
         gem_name: @gem_name,
@@ -110,7 +107,6 @@ module AwsSdkCodeGenerator
         identifier: @module_names.last.downcase,
         api: @api,
         waiters: @waiters,
-        gem_name: @gem_name,
       )
     end
 

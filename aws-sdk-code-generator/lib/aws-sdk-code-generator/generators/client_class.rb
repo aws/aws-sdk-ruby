@@ -31,11 +31,10 @@ module AwsSdkCodeGenerator
         nil         => DEFAULT_PLUGINS,
       })
 
-      def initialize(identifier:, api:, waiters:, gem_name:)
+      def initialize(identifier:, api:, waiters:)
         @identifier = identifier
         @api = api
         @waiters = waiters
-        @gem_name = gem_name
         super('Client', extends: 'Seahorse::Client::Base')
         apply_modules(self)
         apply_identifier(self)
