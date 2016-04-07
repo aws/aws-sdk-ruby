@@ -12,6 +12,9 @@ Unreleased Changes
   
 * Feature - Aws::DirectoryService - Adds support for conditional forwarder APIs.
 
+* Feature - Aws::ElasticBeanstalk - Adds additional response fields to
+  `#describe_instances_health`.
+
 2.2.32 (2016-04-05)
 ------------------
 
