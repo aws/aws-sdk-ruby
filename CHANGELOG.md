@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.33 (2016-04-07)
 ------------------
 
 * Feature - Aws::Lambda - You can now develop your Lambda functions using
