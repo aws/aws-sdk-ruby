@@ -12,8 +12,8 @@ def service_names
   service_names << line.sub(/, $/, '')
 end
 
-def client(svc_module)
-  svc_module.const_get(:Client).new({
+def client(task)
+  svc_module(task).const_get(:Client).new({
     region: 'region',
     access_key_id: 'akid',
     secret_access_key: 'secret',
@@ -72,25 +72,22 @@ end
 desc "List available operation names for a service"
 task "operations:svc" => "operations"
 
-Aws::SERVICE_MODULE_NAMES.each do |svc_name|
+def svc_module(task)
+  identifier = task.name.split(':')[1]
+  name = Aws::SERVICE_MODULE_NAMES.find { |name| name.downcase == identifier }
+  Aws.const_get(name)
+end
 
-  svc_identifier = svc_name.downcase
-  svc_module = Aws.const_get(svc_name)
+rule /^operations:\w+$/ do |task|
+  puts svc_module(task)::Client.api.operation_names
+end
 
-  task "handlers:#{svc_identifier}" do
-    print_handlers(client(svc_module).handlers)
-  end
+rule /^handlers:\w+$/ do |task|
+  print_handlers(client(task).handlers)
+end
 
-  api = svc_module.const_get(:Client).api
-  api.operation_names.each do |operation_name|
-    task "handlers:#{svc_identifier}:#{operation_name}" do
-      req = client(svc_module).build_request(operation_name)
-      print_handlers(req.handlers)
-    end
-  end
-
-  task "operations:#{svc_identifier}" do
-    puts api.operation_names
-  end
-
+rule /^handlers:\w+:\w+$/ do |task|
+  operation_name = task.name.split(':').last
+  req = client(task).build_request(operation_name)
+  print_handlers(req.handlers)
 end
