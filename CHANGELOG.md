@@ -9,6 +9,8 @@ Unreleased Changes
   function requires using specific methods within the Lambda context object. To
   learn more about implementing callbacks within Lambda functions, see our 
   [documentation](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html#nodejs-prog-model-handler-callback).
+  
+* Feature - Aws::DirectoryService - Adds support for conditional forwarder APIs.
 
 2.2.32 (2016-04-05)
 ------------------
