@@ -97,6 +97,40 @@ module Aws
     autoload const_name, "aws-sdk-core/#{const_name.downcase}"
   end
 
+  #module S3
+  #  autoload :Presigner, 'aws-sdk-core/s3/presigner'
+  #  autoload :BucketRegionCache, 'aws-sdk-core/s3/bucket_region_cache'
+  #  # @api private
+  #  BUCKET_REGIONS = BucketRegionCache.new
+  #end
+
+  #module DynamoDB
+  #  autoload :AttributeValue, 'aws-sdk-core/dynamodb/attribute_value'
+  #  class Client
+  #    def data_to_http_resp(operation_name, data)
+  #      api = config.api
+  #      operation = api.operation(operation_name)
+  #      translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
+  #      translator = translator.new(operation.output, :marshal)
+  #      data = translator.apply(data)
+  #      ParamValidator.validate!(operation.output, data)
+  #      protocol_helper.stub_data(api, operation, data)
+  #    end
+#
+#      def stub_data(operation_name, data = {})
+#        if config.simple_attributes
+#          rules = config.api.operation(operation_name).output
+#          translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
+#          data = translator.apply(rules, :marshal, data)
+#          data = super(operation_name, data)
+#          translator.apply(rules, :unmarshal, data)
+#        else
+#          super
+#        end
+#      end
+#    end
+#  end
+
   autoload :DefaultList, 'aws-sdk-core/default_list'
   autoload :DefaultMap, 'aws-sdk-core/default_map'
   autoload :Struct2Hash, 'aws-sdk-core/struct_2_hash'
