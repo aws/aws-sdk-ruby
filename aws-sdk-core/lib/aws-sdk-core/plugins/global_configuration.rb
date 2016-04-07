@@ -31,7 +31,7 @@ module Aws
     #     Aws::EC2.new
     #     #=> raises ArgumentError: invalid configuration option `:force_path_style'
     #
-    # To avoid this issue, you can nest service specific options 
+    # To avoid this issue, you can nest service specific options
     #
     #     Aws.config[:s3] = { force_path_style: true }
     #
