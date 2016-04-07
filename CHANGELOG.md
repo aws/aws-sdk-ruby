@@ -1,6 +1,15 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Lambda - You can now develop your Lambda functions using
+  Node.js 4.3.2, in addition to Node.js 0.10.4. In addition to the leveraging
+  new features in Node.js 4.3 such as ES6 support, functions written in Node.js
+  4.3 can use standard Node.js callback conventions to specify error or return
+  values for the function execution. Today, returning values from a lambda 
+  function requires using specific methods within the Lambda context object. To
+  learn more about implementing callbacks within Lambda functions, see our 
+  [documentation](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html#nodejs-prog-model-handler-callback).
+
 2.2.32 (2016-04-05)
 ------------------
 
