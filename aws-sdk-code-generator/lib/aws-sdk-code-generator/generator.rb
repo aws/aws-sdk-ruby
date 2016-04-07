@@ -3,9 +3,26 @@ module AwsSdkCodeGenerator
 
     include Helper
 
-    def initialize(gem_name:, modules:, api:, docs:nil, paginators:nil, waiters:nil, resources:nil, examples:nil)
+    # @param [required, String] gem_name
+    # @param [required, Array<String>] module_names
+    # @param [required, Hash] api
+    # @param [Hash] docs
+    # @param [Hash] paginators
+    # @param [Hash] waiters
+    # @param [Hash] resources
+    # @param [Hash] examples
+    def initialize(
+      gem_name:,
+      module_names:,
+      api:,
+      docs: nil,
+      paginators: nil,
+      waiters: nil,
+      resources: nil,
+      examples: nil
+    )
       @gem_name = gem_name
-      @modules = modules
+      @module_names = module_names
       apply_docs(api, docs) if docs
       @api = api
       @paginators = paginators
@@ -52,7 +69,7 @@ module AwsSdkCodeGenerator
     def build_modules
       root_mod = Dsl::Main.new
       root_mod.comments("WARNING ABOUT GENERATED CODE")
-      svc_mod = @modules.inject(root_mod) do |mod, module_name|
+      svc_mod = @module_names.inject(root_mod) do |mod, module_name|
         mod.module(module_name)
       end
       [root_mod, svc_mod]
@@ -90,7 +107,7 @@ module AwsSdkCodeGenerator
 
     def client_class
       Generators::ClientClass.new(
-        identifier: @modules.last.downcase,
+        identifier: @module_names.last.downcase,
         api: @api,
         waiters: @waiters,
         gem_name: @gem_name,
@@ -126,8 +143,8 @@ module AwsSdkCodeGenerator
     def service_docstring
       metadata = @api['metadata'] || {}
       Generators::ServiceDocumentation.new(
-        product_name: metadata['serviceFullName'] || @modules.last,
-        namespace: @modules.join('::'),
+        product_name: metadata['serviceFullName'] || @module_names.last,
+        namespace: @module_names.join('::'),
         api: @api
       ).docstring
     end
