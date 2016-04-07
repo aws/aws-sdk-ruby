@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+gem 'kramdown'
+gem 'rspec'
+
+gemspec path: '../aws-sdk-core'

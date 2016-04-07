@@ -97,6 +97,12 @@ module Aws
     autoload const_name, "aws-sdk-core/#{const_name.downcase}"
   end
 
+  autoload :DefaultList, 'aws-sdk-core/default_list'
+  autoload :DefaultMap, 'aws-sdk-core/default_map'
+  autoload :Struct2Hash, 'aws-sdk-core/struct_2_hash'
+  autoload :StructureType, 'aws-sdk-core/structure_type'
+  autoload :ResourceCollection, 'aws-sdk-core/resource_collection'
+
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
   autoload :Client, 'aws-sdk-core/client'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
@@ -122,6 +128,7 @@ module Aws
   autoload :Structure, 'aws-sdk-core/structure'
   autoload :TreeHash, 'aws-sdk-core/tree_hash'
   autoload :TypeBuilder, 'aws-sdk-core/type_builder'
+  autoload :Util, 'aws-sdk-core/util'
   autoload :VERSION, 'aws-sdk-core/version'
 
   # @api private
