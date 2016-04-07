@@ -2,22 +2,6 @@ module Aws
   module Plugins
     class ResponsePaging < Seahorse::Client::Plugin
 
-      def add_handlers(handlers, config)
-        handlers.add(Handler,
-          operations: pageable_operations(config),
-          step: :initialize,
-          priority: 90)
-      end
-
-      private
-
-      def pageable_operations(config)
-        config.api.operations.inject([]) do |pageable, (name, operation)|
-          pageable << name if operation[:pager]
-          pageable
-        end
-      end
-
       # @api private
       class Handler < Seahorse::Client::Handler
 
@@ -25,11 +9,14 @@ module Aws
           context[:original_params] = context.params
           resp = @handler.call(context)
           resp.extend(PageableResponse)
-          resp.pager = context.operation[:pager]
+          resp.pager = context.operation[:pager] || Aws::Pager::NullPager.new
           resp
         end
 
       end
+
+      handle(Handler, step: :initialize, priority: 90)
+
     end
   end
 end

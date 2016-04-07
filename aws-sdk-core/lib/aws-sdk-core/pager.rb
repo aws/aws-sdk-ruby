@@ -1,3 +1,5 @@
+require 'jmespath'
+
 module Aws
   # @api private
   class Pager
@@ -64,5 +66,23 @@ module Aws
       value.nil? || value == '' || value == [] || value == {}
     end
 
+    class NullPager
+
+      # @return [nil]
+      attr_reader :limit_key
+
+      def next_tokens
+        {}
+      end
+
+      def prev_tokens
+        {}
+      end
+
+      def truncated?(response)
+        false
+      end
+
+    end
   end
 end
