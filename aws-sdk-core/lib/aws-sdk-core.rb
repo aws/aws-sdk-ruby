@@ -116,6 +116,7 @@ module Aws
   autoload :ParamConverter, 'aws-sdk-core/param_converter'
   autoload :ParamValidator, 'aws-sdk-core/param_validator'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
+  autoload :RegionsAndEndpoints, 'aws-sdk-core/regions_and_endpoints'
   autoload :Service, 'aws-sdk-core/service'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :Structure, 'aws-sdk-core/structure'
