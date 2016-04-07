@@ -24,6 +24,6 @@ services.identifiers.each do |svc_id|
         file.write(contents)
       end
     end
-
   end
+  task 'build' => "build:#{svc_id}"
 end
