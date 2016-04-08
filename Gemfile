@@ -4,8 +4,14 @@ gemspec path: 'aws-sdk-core'
 
 gem 'rake', require: false
 
-gem 'oj' unless ENV['PURE_RUBY'] && !ENV['OLD_OJ']
-gem 'oj', '1.3.0' if ENV['OLD_OJ']
+if !ENV['PURE_RUBY']
+  if ENV['OLD_OJ']
+    gem 'oj', '1.3.0'
+  else
+    gem 'oj'
+  end
+end
+
 gem 'ox' unless ENV['PURE_RUBY']
 gem 'libxml-ruby' unless ENV['PURE_RUBY']
 gem 'nokogiri' unless ENV['PURE_RUBY']
