@@ -133,6 +133,7 @@ module Aws
 
   autoload :DefaultList, 'aws-sdk-core/default_list'
   autoload :DefaultMap, 'aws-sdk-core/default_map'
+  autoload :Hash2Struct, 'aws-sdk-core/hash_2_struct'
   autoload :Struct2Hash, 'aws-sdk-core/struct_2_hash'
   autoload :StructureType, 'aws-sdk-core/structure_type'
   autoload :ResourceCollection, 'aws-sdk-core/resource_collection'

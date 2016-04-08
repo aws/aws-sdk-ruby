@@ -27,7 +27,7 @@ module Aws
     # Performs a deep conversion to a hash.
     # @return [Hash]
     def to_hash
-      Struct2Hash.new(shape: self.class.shape).to_hash(self)
+      Struct2Hash.to_hash(self)
     end
     alias to_h to_hash
 
@@ -46,19 +46,6 @@ module Aws
           y.yield(member_name, self[member_name])
         end
       end
-    end
-
-    class << self
-
-      # @api private
-      attr_reader :shape
-
-      # @param [Hash] hash
-      # @return [#{@shape_name}]
-      def build(hash)
-        Hash2Struct.new(shape: shape, struct_class: self).struct(hash)
-      end
-
     end
   end
 end

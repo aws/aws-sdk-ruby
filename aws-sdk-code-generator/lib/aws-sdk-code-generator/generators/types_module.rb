@@ -29,9 +29,19 @@ module AwsSdkCodeGenerator
 
             end
 
-            c.method('self.shape') do |method|
-              method.docstring('@api private')
-              method.code("ClientApi::#{shape_name}")
+            c.eigenclass do |eigen|
+
+              eigen.method('shape') do |m|
+                m.docstring('@api private')
+                m.code("ClientApi::#{shape_name}")
+              end
+
+              eigen.method('build') do |m|
+                m.param('hash', default:{})
+                m.returns(shape_name)
+                m.code("Hash2Struct.to_struct(self, hash)")
+              end
+
             end
 
           end
