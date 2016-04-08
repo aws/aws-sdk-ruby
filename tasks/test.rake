@@ -1,7 +1,7 @@
 require 'rspec/core/rake_task'
 
 # unit test tasks
-%w(resources core).each do |gem|
+%w(resources core code-generator).each do |gem|
   desc "aws-sdk-#{gem} unit tests"
   RSpec::Core::RakeTask.new("test:unit:#{gem}") do |t|
     t.rspec_opts = "-I #{$REPO_ROOT}/aws-sdk-#{gem}/lib"

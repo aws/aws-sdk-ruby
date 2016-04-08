@@ -9,7 +9,6 @@ services.identifiers.each do |svc_id|
   task "build:#{svc_id}" do
 
     options = {}
-    options[:gem_name] = "aws-sdk-#{svc_id}"
     options[:module_names] = ['Aws', services.name(svc_id)]
     services.model_paths(svc_id).each do |option, path|
       options[option] = JSON.load(File.read(path))

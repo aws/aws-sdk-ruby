@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift('../aws-sdk-core/lib')
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-core', 'lib'))
 
 require 'tmpdir'
 require 'json'
@@ -52,12 +52,11 @@ module SpecHelper
     # @return [String] Returns a path to the tmp directory where
     #   the src code was generated into.
     #
-    def generate_service(modules, multiple_files:true)
-      gem_name = modules.map(&:downcase).join('-').gsub('::', '')
-      dir = "spec/fixtures/interfaces/#{gem_name}"
+    def generate_service(module_names, multiple_files:true)
+      path = module_names.map(&:downcase).join('/')
+      dir = File.join(File.dirname(__FILE__), 'fixtures', 'interfaces', path)
       generator = AwsSdkCodeGenerator::Generator.new({
-        gem_name: gem_name,
-        modules: modules,
+        module_names: module_names,
         api: JSON.load(File.read("#{dir}/api.json")),
         paginators: JSON.load(File.read("#{dir}/paginators.json")),
         resources: JSON.load(File.read("#{dir}/resources.json")),
@@ -76,7 +75,7 @@ module SpecHelper
           end
         end
         $LOAD_PATH << tmpdir
-        require "#{tmpdir}/#{gem_name}"
+        require "#{tmpdir}/#{path}"
         tmpdir
 
       else

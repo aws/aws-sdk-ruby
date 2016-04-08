@@ -3,7 +3,6 @@ module AwsSdkCodeGenerator
 
     include Helper
 
-    # @param [required, String] gem_name
     # @param [required, Array<String>] module_names
     # @param [required, Hash] api
     # @param [Hash] docs
@@ -12,7 +11,6 @@ module AwsSdkCodeGenerator
     # @param [Hash] resources
     # @param [Hash] examples
     def initialize(
-      gem_name:,
       module_names:,
       api:,
       docs: nil,
@@ -21,7 +19,6 @@ module AwsSdkCodeGenerator
       resources: nil,
       examples: nil
     )
-      @gem_name = gem_name
       @module_names = module_names
       apply_docs(api, docs) if docs
       @api = api
@@ -84,11 +81,11 @@ module AwsSdkCodeGenerator
 
     def service_module
       autoloads = Generators::ServiceAutoloads.new(
-        gem_name: @gem_name,
+        module_names: @module_names,
         resources: @resources
       )
       root_mod, svc_mod = build_modules
-      #root_mod.require('aws-sdk-core')
+      root_mod.require('aws-sdk-core')
       svc_mod.docstring(service_docstring)
       autoloads.apply(svc_mod)
       root_mod.to_s

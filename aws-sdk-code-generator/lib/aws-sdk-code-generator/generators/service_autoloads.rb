@@ -4,8 +4,8 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(gem_name:, resources:)
-        @gem_name = gem_name
+      def initialize(module_names:, resources:)
+        @module_names = module_names
         @resources = resources
       end
 
@@ -19,21 +19,22 @@ module AwsSdkCodeGenerator
       private
 
       def autolaods
-        autoloads = {}
+        prefix = underscore(@module_names.last)
 
-        autoloads['Client'] = "#{@gem_name}/client"
-        autoloads['ClientApi'] = "#{@gem_name}/client_api"
-        autoloads['Errors'] = "#{@gem_name}/errors"
-        autoloads['Resource'] = "#{@gem_name}/resource"
-        autoloads['Types'] = "#{@gem_name}/types"
-        autoloads['Waiters'] = "#{@gem_name}/waiters"
+        autoloads = {}
+        autoloads['Client'] = "#{prefix}/client"
+        autoloads['ClientApi'] = "#{prefix}/client_api"
+        autoloads['Errors'] = "#{prefix}/errors"
+        autoloads['Resource'] = "#{prefix}/resource"
+        autoloads['Types'] = "#{prefix}/types"
+        autoloads['Waiters'] = "#{prefix}/waiters"
 
         if @resources && @resources['resources']
           @resources['resources'].keys.each do |resource_name|
             if autoloads.key?(resource_name)
               raise "duplicate const `#{resource_name}'"
             else
-              autoloads[resource_name] = "#{@gem_name}/#{underscore(resource_name)}"
+              autoloads[resource_name] = "#{prefix}/#{underscore(resource_name)}"
             end
           end
         end
