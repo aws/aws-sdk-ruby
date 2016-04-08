@@ -14,9 +14,10 @@ services.identifiers.each do |svc_id|
       options[option] = JSON.load(File.read(path))
     end
 
+    prefix = "aws-sdk-core/#{svc_id}"
     generator = AwsSdkCodeGenerator::Generator.new(options)
-    generator.generate_src_files.each do |path, contents|
-      path = File.join('aws-sdk-core/lib/aws-sdk-core', path)
+    generator.generate_src_files(autoload_prefix: prefix).each do |path, contents|
+      path = File.join('aws-sdk-core/lib', path)
       puts path
       FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'wb') do |file|
