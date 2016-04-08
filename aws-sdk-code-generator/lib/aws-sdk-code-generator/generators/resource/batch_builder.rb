@@ -81,7 +81,7 @@ module AwsSdkCodeGenerator
             paths.first.match(/(.+\[\]).*?$/)[1]
           else
             prefix = find_prefix(paths)
-            prefix = prefix[0..-2] if prefix[-1] == '.'
+            prefix = prefix.sub(/\[\].+?$/, '[]')
             if prefix[-2..-1] != '[]'
               msg = 'response paths must have a common prefix ending in [], got :'
               msg << paths.inspect

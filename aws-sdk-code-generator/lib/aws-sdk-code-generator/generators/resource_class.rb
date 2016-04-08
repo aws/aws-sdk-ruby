@@ -209,20 +209,26 @@ module AwsSdkCodeGenerator
 
       def check_for_method_name_conflicts!
 
-        resource_method_names = Set.new
+        names = Set.new
 
         # Ensure the resource does not have duplicate names. This
         # includes comparing identifier names, action names, association
         # names, e.g. anything that is exposed as a method.
         @code_objects.each do |code_obj|
-          case code_obj
-          when Dsl::Method
-            check_for_duplicate_method!(code_obj.name, resource_method_names)
+          if Dsl::Method === code_obj || Dsl::AttributeAccessor === code_obj
+            check_for_duplicate_method!(code_obj.name, names)
+          end
+        end
+
+        # It is possible for Dsl::Method#aliases to collide with
+        # code object names. Remove aliases that collide.
+        @code_objects.each do |code_obj|
+          if Dsl::Method === code_obj
             code_obj.aliases.each do |alias_name|
-              check_for_duplicate_method!(alias_name, resource_method_names)
+              if names.include?(alias_name.to_s)
+                code_obj.aliases.delete(alias_name.to_s)
+              end
             end
-          when Dsl::AttributeAccessor
-            check_for_duplicate_method!(code_obj.name, resource_method_names)
           end
         end
 
@@ -230,7 +236,7 @@ module AwsSdkCodeGenerator
         # on Ruby's Object class as an instance method. We need to
         # ensure we do not clobber built in Ruby functionality.
         Object.instance_methods.each do |obj_method_name|
-          if resource_method_names.include?(obj_method_name.to_s)
+          if names.include?(obj_method_name.to_s)
             raise Errors::ResourceMethodConflict.new(
               resource_name: @name,
               method_name: obj_method_name
@@ -239,9 +245,9 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def check_for_duplicate_method!(method_name, method_names)
+      def check_for_duplicate_method!(method_name, names)
         method_name = method_name.to_s
-        if method_names.include?(method_name)
+        if names.include?(method_name)
           # uncomment to see generated class with method conflicts
           # puts self.to_s
           raise Errors::ResourceMethodConflict.new(
@@ -249,7 +255,7 @@ module AwsSdkCodeGenerator
             method_name: method_name
           )
         else
-          method_names << method_name
+          names << method_name
         end
       end
 
