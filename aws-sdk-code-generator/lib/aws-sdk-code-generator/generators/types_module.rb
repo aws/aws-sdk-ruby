@@ -11,6 +11,7 @@ module AwsSdkCodeGenerator
           self.class(shape_name, extends: 'Aws::StructureType') do |c|
 
             init = Dsl::Method.new(:initialize)
+            c.add(init) if needs_defaults?(shape)
 
             shape['members'].each do |member_name, ref|
               attr_name = underscore(member_name)
@@ -28,13 +29,21 @@ module AwsSdkCodeGenerator
 
             end
 
-            c.add(init) unless init.empty?
             c.method('self.shape') do |method|
               method.docstring('@api private')
               method.code("ClientApi::#{shape_name}")
             end
 
           end
+        end
+      end
+
+      private
+
+      def needs_defaults?(struct_shape)
+        struct_shape['members'].any? do |_, member_ref|
+          type = shape(member_ref)['type']
+          type == 'list' || type == 'map'
         end
       end
 
