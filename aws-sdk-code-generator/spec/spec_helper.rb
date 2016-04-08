@@ -4,6 +4,7 @@ require 'tmpdir'
 require 'json'
 require 'rspec'
 
+require 'aws-sdk-core'
 require 'aws-sdk-code-generator'
 
 module SpecHelper
