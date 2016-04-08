@@ -22,6 +22,9 @@ matrix:
   exclude:
     - rvm: jruby
       env: KITCHEN_SINK=1
+  include:
+    - rvm: 2.3.0
+      env: OLD_OJ=1
 
 notifications:
   webhooks:

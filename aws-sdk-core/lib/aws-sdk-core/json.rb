@@ -40,13 +40,21 @@ module Aws
 
       def oj_engine
         require 'oj'
-        [Oj, [{mode: :compat, symbol_keys: false}], [{ mode: :compat }], Oj::ParseError]
+        [Oj, [{mode: :compat, symbol_keys: false}], [{ mode: :compat }], oj_parse_error]
       rescue LoadError
         false
       end
 
       def json_engine
         [JSON, [], [], JSON::ParserError]
+      end
+
+      def oj_parse_error
+        if Oj.const_defined?('ParseError')
+          Oj::ParseError
+        else
+          SyntaxError
+        end
       end
 
     end
