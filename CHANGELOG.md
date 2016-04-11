@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Includes new APIs for AWS IoT that allow you to "bring
+  your own certificate".
+
+  Additional information is available in the
+  [AWS IoT Developer Guide](http://docs.aws.amazon.com/iot/latest/developerguide/identity-in-iot.html).
+
 2.2.33 (2016-04-07)
 ------------------
 
