@@ -41,6 +41,7 @@ module AwsSdkCodeGenerator
     autoload :ResourceClass, 'aws-sdk-code-generator/generators/resource_class'
     autoload :ServiceAutoloads, 'aws-sdk-code-generator/generators/service_autoloads'
     autoload :ServiceDocumentation, 'aws-sdk-code-generator/generators/service_documentation'
+    autoload :StructureTypeClass, 'aws-sdk-code-generator/generators/structure_type_class'
     autoload :WaiterClass, 'aws-sdk-code-generator/generators/waiter_class'
     autoload :WaitersModule, 'aws-sdk-code-generator/generators/waiters_module'
 
