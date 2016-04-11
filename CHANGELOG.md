@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.34 (2016-04-11)
 ------------------
 
 * Feature - Aws::IoT - Includes new APIs for AWS IoT that allow you to "bring
