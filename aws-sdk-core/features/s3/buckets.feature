@@ -9,6 +9,12 @@ Feature: S3 Buckets
     When I delete the bucket
     Then the bucket should not exist
 
+  Scenario: HEAD bucket works with improper region
+    Given I am using the S3 "us-west-2" region
+    And I create a bucket
+    When I am using the S3 "us-east-1" region
+    Then I should be able to HEAD the bucket
+
   Scenario: CRUD buckets using a regional endpoint
     Given I am using the S3 "us-west-2" region
     When I create a bucket
