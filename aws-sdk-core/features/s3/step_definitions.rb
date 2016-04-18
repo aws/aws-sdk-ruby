@@ -61,6 +61,10 @@ Then(/^the bucket should exist$/) do
   expect { @client.get_bucket_location(bucket: @bucket_name) }.not_to raise_error
 end
 
+Then(/^I should be able to HEAD the bucket$/) do
+  expect { @client.head_bucket(bucket: @bucket_name) }.not_to raise_error
+end
+
 When(/^I delete the bucket$/) do
   @client.delete_bucket(bucket: @bucket_name)
   @created_buckets.delete(@bucket_name)
