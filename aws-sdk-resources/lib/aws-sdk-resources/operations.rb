@@ -108,6 +108,7 @@ module Aws
         # @option (see Base#call)
         # @return [Collection]
         def call(options)
+          validate_args!(options)
           Collection.new(self, options)
         end
 
@@ -122,6 +123,17 @@ module Aws
         end
 
         private
+
+        def validate_args!(options)
+          args = options[:args]
+          unless args.count == 0 || args.count == 1
+            msg = "wrong number of arguments (given #{args.count}, expected 0..1)"
+            raise ArgumentError, msg
+          end
+          unless args[0].nil? || Hash === args[0]
+            raise ArgumentError, "expected Hash, got #{args[0].class}"
+          end
+        end
 
         def all_batches(options, &block)
           resp = @request.call(options)
