@@ -18,6 +18,9 @@ Unreleased Changes
 
 * Feature - Aws::EC2 - Added new volume types.
 
+* Feature - Aws::Firehose - Added support for delivery to CloudWatch Logs and
+  AWS Elasticsearch Service.
+
 2.2.34 (2016-04-11)
 ------------------
 
