@@ -115,6 +115,7 @@ module Aws
   autoload :Pager, 'aws-sdk-core/pager'
   autoload :ParamConverter, 'aws-sdk-core/param_converter'
   autoload :ParamValidator, 'aws-sdk-core/param_validator'
+  autoload :Partitions, 'aws-sdk-core/partitions'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
   autoload :RegionsAndEndpoints, 'aws-sdk-core/regions_and_endpoints'
   autoload :Service, 'aws-sdk-core/service'
@@ -278,6 +279,18 @@ module Aws
       else
         raise ArgumentError, 'configuration object must be a hash'
       end
+    end
+
+    # @param (see Partitions::PartitionList#partition)
+    # @return (see Partitions::PartitionList#partition)
+    # @raise (see Partitions::PartitionList#partition)
+    def partition(partition_name)
+      Partitions.default_list.partition(partition_name)
+    end
+
+    # @return (see Partitions::PartitionList#partitions)
+    def partitions
+      Partitions.default_list.partitions
     end
 
     # The SDK ships with a ca certificate bundle to use when verifying SSL
