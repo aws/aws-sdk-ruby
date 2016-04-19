@@ -83,6 +83,7 @@ module Aws
         op.deprecated = !!definition['deprecated']
         op.input = shapes.shape_ref(definition['input'])
         op.output = shapes.shape_ref(definition['output'])
+        op['authtype'] = definition['authtype'] unless definition['authtype'].nil?
         (definition['errors'] || []).each do |error|
           op.errors << shapes.shape_ref(error)
         end
