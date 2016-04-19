@@ -169,6 +169,7 @@ module Aws
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
     autoload :RetryErrors, 'aws-sdk-core/plugins/retry_errors'
     autoload :Route53IdFix, 'aws-sdk-core/plugins/route_53_id_fix'
+    autoload :S3Accelerate, 'aws-sdk-core/plugins/s3_accelerate'
     autoload :S3BucketDns, 'aws-sdk-core/plugins/s3_bucket_dns'
     autoload :S3Expect100Continue, 'aws-sdk-core/plugins/s3_expect_100_continue'
     autoload :S3GetBucketLocationFix, 'aws-sdk-core/plugins/s3_get_bucket_location_fix'

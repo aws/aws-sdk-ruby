@@ -145,9 +145,30 @@ module Aws
 
       api('s3') do |api|
         api['metadata'].delete('signatureVersion')
+        if ENV['DOCSTRINGS']
+          api['shapes']['AccelerateBoolean'] = { 'type' => 'boolean' }
+          api['operations'].each do |operation_name, operation|
+            next if %w(CreateBucket ListBuckets DeleteBucket).include?(operation_name)
+            if input_ref = operation['input']
+              input_shape = api['shapes'][input_ref['shape']]
+              input_shape['members']['UseAccelerateEndpoint'] = {
+                'shape' => 'AccelerateBoolean'
+              }
+            end
+          end
+        end
+      end
+
+      doc('s3') do |docs|
+        if ENV['DOCSTRINGS']
+          docs['shapes']['AccelerateBoolean'] = {}
+          docs['shapes']['AccelerateBoolean']['refs'] = {}
+          docs['shapes']['AccelerateBoolean']['base'] = 'When <tt>true</tt>, the "https://BUCKETNAME.s3-accelerate.amazonaws.com" endpoint will be used.'
+        end
       end
 
       plugins('s3', add: %w(
+        Aws::Plugins::S3Accelerate
         Aws::Plugins::S3BucketDns
         Aws::Plugins::S3Expect100Continue
         Aws::Plugins::S3Http200Errors

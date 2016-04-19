@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - You can now pass a configuration option to accelerate
+  `Aws::S3::Client` object operations. You can construct a client with
+  `use_accelerate_endpoint: true` to enable this feature.
+
+  ```ruby
+  s3 = Aws::S3::Client.new(use_accelerate_endpoint: true)
+  s3.put_object(bucket: 'bucket-name', key:'key')
+  #=> uses https://bucket-name.s3-accelerate.amazonaws.com
+  ```
+
+  You can pass `:use_accelerate_endpoint` to client operations to
+  override the client default.
+
+  ```ruby
+  # non-accelerated client
+  s3 = Aws::S3::Client.new
+
+  # non-accelerated
+  s3.put_object(bucket: 'bucket-name', key:'key')
+
+  # accelerated
+  s3.put_object(bucket: 'bucket-name', key:'key', use_accelerate_endpoint: true)
+  ```
+
+  [See the Amazon S3 documentation for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+
 2.2.35 (2016-04-19)
 ------------------
 
