@@ -266,6 +266,7 @@ to be backwards compatible.
 | Amazon CloudWatch Events                 | CloudWatchEvents             | 2015-10-07  |
 | Amazon CloudWatch Logs                   | CloudWatchLogs               | 2014-03-28  |
 | Amazon Cognito Identity                  | CognitoIdentity              | 2014-06-30  |
+| Amazon Cognito Identity Provider         | CognitoIdentityProvider      | 2016-04-18  |
 | Amazon Cognito Sync                      | CognitoSync                  | 2014-06-30  |
 | Amazon DynamoDB                          | DynamoDB                     | 2012-08-10  |
 | Amazon DynamoDB Streams                  | DynamoDBStreams              | 2012-08-10  |

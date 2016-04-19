@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.35 (2016-04-19)
 ------------------
 
 * Feature - Aws::S3 - Added support for Amazon S3 accelerate feature.
