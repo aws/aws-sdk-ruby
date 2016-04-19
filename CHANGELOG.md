@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Added support for Amazon S3 accelerate feature.
+
 * Feature - Aws::CognitoIdentityProvider - Added support for AWS Cognito Identity Provider.
 
 * Feature - Aws::ElasticBeanstalk - Adds support for automatic platform version upgrades with
