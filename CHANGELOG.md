@@ -2,7 +2,7 @@ Unreleased Changes
 ------------------
 
 * Feature - Aws::S3 - You can now pass a configuration option to accelerate
-  `Aws::S3::Client` object operations. You can construct a client with
+  `Aws::S3::Client` operations. You can construct a client with
   `use_accelerate_endpoint: true` to enable this feature.
 
   ```ruby
@@ -26,6 +26,12 @@ Unreleased Changes
   ```
 
   [See the Amazon S3 documentation for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+
+  Not supported for the following operations:
+
+  * `#create_bucket`
+  * `#list_buckets`
+  * `#delete_bucket`
 
 2.2.35 (2016-04-19)
 ------------------
