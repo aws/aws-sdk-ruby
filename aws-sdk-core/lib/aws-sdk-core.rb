@@ -35,6 +35,7 @@ module Aws
     CodeDeploy
     CodePipeline
     CognitoIdentity
+    CognitoIdentityProvider
     CognitoSync
     ConfigService
     DatabaseMigrationService

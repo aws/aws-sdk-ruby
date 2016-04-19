@@ -122,7 +122,14 @@ module Aws
 
       def add_handlers(handlers, config)
         # See the S3RequestSignerPlugin for Amazon S3 signature logic
-        handlers.add(Handler, step: :sign) unless config.sigv4_name == 's3'
+        unless config.sigv4_name == 's3'
+          operations = []
+          config.api.operations.each do |name, operation|
+            operations << name if operation['authtype'] != 'none'
+          end
+          operations = config.api.operations.select
+          handlers.add(Handler, step: :sign, operations: operations)
+        end
       end
 
     end

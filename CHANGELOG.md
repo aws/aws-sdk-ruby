@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Added support for AWS Cognito Identity Provider.
+
 2.2.34 (2016-04-11)
 ------------------
 
@@ -17,11 +19,11 @@ Unreleased Changes
   Node.js 4.3.2, in addition to Node.js 0.10.4. In addition to the leveraging
   new features in Node.js 4.3 such as ES6 support, functions written in Node.js
   4.3 can use standard Node.js callback conventions to specify error or return
-  values for the function execution. Today, returning values from a lambda 
+  values for the function execution. Today, returning values from a lambda
   function requires using specific methods within the Lambda context object. To
-  learn more about implementing callbacks within Lambda functions, see our 
+  learn more about implementing callbacks within Lambda functions, see our
   [documentation](http://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html#nodejs-prog-model-handler-callback).
-  
+
 * Feature - Aws::DirectoryService - Adds support for conditional forwarder APIs.
 
 * Feature - Aws::ElasticBeanstalk - Adds additional response fields to
@@ -32,10 +34,10 @@ Unreleased Changes
 
 * Feature - Aws::APIGateway - Adds support for importing APIs. Includes two new
   methods for this: `#import_rest_api` and `#put_rest_api`.
-  
+
 * Feature - Aws::Route53 - Adds support for health checks based on Amazon
   CloudWatch metrics.
-  
+
 * Feature - Aws::STS - This release adds support for the new STS API
   `#get_caller_identity`, which returns details about the credentials used to
   make the API call. The details include name and account, as well as the type

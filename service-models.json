@@ -15,6 +15,7 @@
   "CodeDeploy": "codedeploy/2014-10-06",
   "CodePipeline": "codepipeline/2015-07-09",
   "CognitoIdentity": "cognito-identity/2014-06-30",
+  "CognitoIdentityProvider": "cognito-idp/2016-04-18",
   "CognitoSync": "cognito-sync/2014-06-30",
   "ConfigService": "config/2014-11-12",
   "DatabaseMigrationService": "dms/2016-01-01",
