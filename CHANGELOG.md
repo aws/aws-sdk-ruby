@@ -6,6 +6,12 @@ Unreleased Changes
 * Feature - Aws::ElasticBeanstalk - Adds support for automatic platform version upgrades with
   [managed updates](http://http//docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-platform-update-managed.html).
 
+* Feature - Aws::Kinesis - Amazon Kinesis now allows customers to start reading
+  from a time position in a stream, enabling easier replay of streaming data
+  and more advanced use cases that process data for a specific time frame. You
+  can use this feature by calling GetShardIterator and specifying a timestamp
+  to start reading data at a given time position in the stream.
+
 2.2.34 (2016-04-11)
 ------------------
 
