@@ -14,6 +14,8 @@ Unreleased Changes
 
 * Feature - Aws::DeviceFarm - API update.
 
+* Feature - Aws::EC2 - Added new volume types.
+
 2.2.34 (2016-04-11)
 ------------------
 
