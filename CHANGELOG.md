@@ -3,6 +3,9 @@ Unreleased Changes
 
 * Feature - Aws::CognitoIdentityProvider - Added support for AWS Cognito Identity Provider.
 
+* Feature - Aws::ElasticBeanstalk - Adds support for automatic platform version upgrades with
+  [managed updates](http://http//docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-platform-update-managed.html).
+
 2.2.34 (2016-04-11)
 ------------------
 
