@@ -12,6 +12,8 @@ Unreleased Changes
   can use this feature by calling GetShardIterator and specifying a timestamp
   to start reading data at a given time position in the stream.
 
+* Feature - Aws::DeviceFarm - API update.
+
 2.2.34 (2016-04-11)
 ------------------
 
