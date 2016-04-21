@@ -1,4 +1,4 @@
-Unreleased Changes
+2.2.36 (2016-04-21)
 ------------------
 
 * Feature - Aws::ACM - Adds tagging support for AWS Certificate Manager.
