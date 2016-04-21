@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Adds tagging support for AWS Certificate Manager.
+
 * Feature - Aws::EMR - Includes the Smart Targeted Resize feature. This feature
   builds allows customers to leverage a set of flexible options when scaling
   down EMR clusters with the earlier launched Smart resize. Customers can now
