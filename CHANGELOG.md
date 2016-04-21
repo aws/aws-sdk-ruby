@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EMR - Includes the Smart Targeted Resize feature. This feature
+  builds allows customers to leverage a set of flexible options when scaling
+  down EMR clusters with the earlier launched Smart resize. Customers can now
+  specify a targeted set of EC2 instances as a blacklist and a whitelist for
+  finer control over which instances Smart resize considers when shrinking the
+  cluster.
+
 * Feature - Aws::IoT - Adds SQL RulesEngine version support. The SQL RulesEngine
   version allows you to control how your rules will work when new features are
   added and prevents breaking changes.
