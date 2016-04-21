@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - Adds SQL RulesEngine version support. The SQL RulesEngine
+  version allows you to control how your rules will work when new features are
+  added and prevents breaking changes.
+
 2.2.35 (2016-04-19)
 ------------------
 
