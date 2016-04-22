@@ -12,8 +12,8 @@ module Aws
       # @api private
       def add_partitions(new_partitions)
         new_partitions['partitions'].each do |partition|
-          defaults[partition['partition']] = partition
           default_list.add_partition(Partition.build(partition))
+          defaults[partition['partition']] = partition
         end
       end
 
