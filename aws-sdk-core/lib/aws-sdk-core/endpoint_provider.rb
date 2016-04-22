@@ -51,12 +51,12 @@ module Aws
     end
 
     def get_partition(region)
-      partition_with_region(region) ||
+      partition_containing_region(region) ||
       partition_matching_region(region) ||
       default_partition
     end
 
-    def partition_with_region(region)
+    def partition_containing_region(region)
       @rules['partitions'].find do |p|
         p['regions'].key?(region)
       end
