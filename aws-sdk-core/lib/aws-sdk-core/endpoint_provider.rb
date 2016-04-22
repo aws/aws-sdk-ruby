@@ -2,7 +2,7 @@ module Aws
   # @api private
   class EndpointProvider
 
-    RULES = RegionsAndEndpoints.new
+    RULES = RegionsAndEndpoints.new(Partitions.defaults)
 
     class << self
 

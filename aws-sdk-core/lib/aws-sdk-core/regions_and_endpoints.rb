@@ -4,14 +4,8 @@ module Aws
 
     attr_reader :rules
 
-    PATH = File.join(File.dirname(__FILE__), '..', '..', 'endpoints.json')
-
-    def initialize(file = PATH)
-      @rules = Json.load_file(file)
-    end
-
-    def set_endpoints_file(file)
-      @rules = Json.load_file(file)
+    def initialize(rules)
+      @rules = rules
     end
 
     def resolve(region, service)
