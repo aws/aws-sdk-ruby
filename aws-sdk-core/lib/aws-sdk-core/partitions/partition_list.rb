@@ -8,6 +8,10 @@ module Aws
         @partitions = {}
       end
 
+      def clear
+        @partitions = {}
+      end
+
       # @return [Enumerator<Partition>]
       def each(&block)
         @partitions.each_value(&block)
@@ -20,7 +24,7 @@ module Aws
           @partitions[partition_name]
         else
           msg = "invalid partition name #{partition_name.inspect}; valid "
-          msg << "partition names include %s" % [@partition.keys.join(', ')]
+          msg << "partition names include %s" % [@partitions.keys.join(', ')]
           raise ArgumentError, msg
         end
       end

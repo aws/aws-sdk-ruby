@@ -13,8 +13,14 @@ module Aws
       def add_partitions(new_partitions)
         new_partitions['partitions'].each do |partition|
           default_list.add_partition(Partition.build(partition))
-          defaults[partition['partition']] = partition
+          defaults['partitions'] << partition
         end
+      end
+
+      # @api private
+      def clear_partitions
+        default_list.clear
+        defaults['partitions'].clear
       end
 
       # @return [Hash]

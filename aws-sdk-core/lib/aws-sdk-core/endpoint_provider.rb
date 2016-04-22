@@ -70,7 +70,8 @@ module Aws
     end
 
     def default_partition
-      @rules['partitions'].find { |p| p["partition"] == "aws" }
+      @rules['partitions'].find { |p| p["partition"] == "aws" } ||
+      @rules['partitions'].first
     end
 
     class << self
