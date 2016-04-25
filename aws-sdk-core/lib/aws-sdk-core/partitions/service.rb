@@ -8,14 +8,15 @@ module Aws
       # @option options [required, String] :partition_name
       # @option options [required, Set<String>] :region_name
       # @option options [required, Boolean] :regionalized
-      # @option options [String] :partition_endpoint
+      # @option options [String] :partition_region
       # @api private
       def initialize(options = {})
         @name = options[:name]
         @partition_name = options[:partition_name]
-        @region_names = options[:region_names]
+        @regions = options[:regions]
         @regionalized = options[:regionalized]
-        @partition_endpoint = options[:partition_endpoint]
+        @partition_region = options[:partition_region]
+        @regions << @partition_region if !@regionalized
       end
 
       # @return [String] The name of this service. The name is the module
@@ -27,11 +28,11 @@ module Aws
 
       # @return [Set<String>] The regions this service is available in.
       #   Regions are scoped to the partition.
-      attr_reader :region_names
+      attr_reader :regions
 
       # @return [String,nil] The global patition endpoint for this service.
       #   May be `nil`.
-      attr_reader :partition_endpoint
+      attr_reader :partition_region
 
       # Returns `false` if the service operates with a single global
       # endpoint for the current partition, returns `true` if the service
@@ -47,21 +48,36 @@ module Aws
       class << self
 
         # @api private
-        def build(svc_id, service, partition)
+        def build(service_name, service, partition)
           Service.new(
-            name: Partitions.service_name(svc_id),
+            name: service_name,
             partition_name: partition['partition'],
-            region_names: region_names(service, partition),
+            regions: regions(service, partition),
             regionalized: service['isRegionalized'] != false,
-            partition_endpoint: service['partitionEndpoint']
+            partition_region: partition_region(service)
           )
         end
 
         private
 
-        def region_names(service, partition)
+        def regions(service, partition)
           names = Set.new(partition['regions'].keys & service['endpoints'].keys)
           names - ["#{partition['partition']}-global"]
+        end
+
+        def partition_region(service)
+          if service['partitionEndpoint']
+            endpoint = service['endpoints'][service['partitionEndpoint']]
+            region = if endpoint['credentialScope']
+              endpoint['credentialScope']['region']
+            elsif service['defaults'] && service['defaults']['credentialScope']
+              service['defaults']['credentialScope']['region']
+            end
+            unless region
+              raise "missing partition endpoint region for #{service.inspect}"
+            end
+            region
+          end
         end
 
       end

@@ -77,10 +77,12 @@ module Aws
         # @param [Hash] partition
         # @return [Hash<String,Service>]
         def build_services(partition)
-          partition['services'].inject({}) do |services, (svc_id, svc_data)|
-            if Partitions.service_names.key?(svc_id)
-              service = Service.build(svc_id, svc_data, partition)
-              services[service.name] = service
+          Partitions.service_ids.inject({}) do |services, (svc_name, svc_id)|
+            if partition['services'].key?(svc_id)
+              svc_data = partition['services'][svc_id]
+              services[svc_name] = Service.build(svc_name, svc_data, partition)
+            else
+              services[svc_name] = Service.build(svc_name, {'endpoints' => {}}, partition)
             end
             services
           end

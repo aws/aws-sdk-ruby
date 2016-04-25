@@ -10,7 +10,7 @@ module Aws
 
       # @param [Hash] new_partitions
       # @api private
-      def add_partitions(new_partitions)
+      def add(new_partitions)
         new_partitions['partitions'].each do |partition|
           default_list.add_partition(Partition.build(partition))
           defaults['partitions'] << partition
@@ -18,7 +18,7 @@ module Aws
       end
 
       # @api private
-      def clear_partitions
+      def clear
         default_list.clear
         defaults['partitions'].clear
       end
@@ -38,32 +38,16 @@ module Aws
         @default_list ||= PartitionList.build(defaults)
       end
 
-      # @param [String] svc_id
-      # @return [String] The service module name.
-      # @api priviate
-      def service_name(svc_id)
-        if service_names.key?(svc_id)
-          service_names[svc_id]
-        else
-          msg = "invalid service id #{svc_id.inspect}; valid service ids "
-          msg << "include %s" % [service_names.keys.join(', ')]
-          raise ArgumentError, msg
-        end
-      end
-
-      # @return [Hash<String,String>] Returns a hash of service id keys
-      #   and service module name values.
+      # @return [Hash<String,String>] Returns a map of service module names
+      #   to their id as used in the endpoints.json document.
       # @api private
-      def service_names
-        @service_names ||= begin
-          service_models = "#{File.dirname(__FILE__)}/../../service-models.json"
-          service_models = Aws::Json.load_file(service_models)
-          service_models.inject({}) do |names, (name, artifact)|
-            svc_id = artifact.split('/').first
-            # TODO : Remove this once endpoints.json has been corrected
-            svc_id = 'data.iot' if svc_id == 'iot-data'
-            names[svc_id] = name
-            names
+      def service_ids
+        @service_ids ||= begin
+          services = "#{File.dirname(__FILE__)}/../../service-models.json"
+          services = Aws::Json.load_file(services)
+          services.inject({}) do |ids, (name, svc)|
+            ids[name] = svc['endpoint'] #if svc['endpoint']
+            ids
           end
         end
       end

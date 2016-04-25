@@ -7,14 +7,13 @@ module Aws
       # @option options [required, String] :name
       # @option options [required, String] :description
       # @option options [required, String] :partition_name
-      # @option options [required, Set<String>] :service_names
+      # @option options [required, Set<String>] :services
       # @api private
       def initialize(options = {})
         @name = options[:name]
         @description = options[:description]
-        @partition = options[:partition]
         @partition_name = options[:partition_name]
-        @service_names = options[:service_names]
+        @services = options[:services]
       end
 
       # @return [String] The name of this region, e.g. "us-east-1".
@@ -30,7 +29,7 @@ module Aws
       # @return [Set<String>] The list of services available in this region.
       #   Service names are the module names as used by the AWS SDK
       #   for Ruby.
-      attr_reader :service_names
+      attr_reader :services
 
       class << self
 
@@ -40,18 +39,36 @@ module Aws
             name: region_name,
             description: region['description'],
             partition_name: partition['partition'],
-            service_names: region_services(region_name, partition)
+            services: region_services(region_name, partition)
           )
         end
 
         private
 
         def region_services(region_name, partition)
-          partition['services'].inject(Set.new) do |services, (svc_id, svc)|
-            if svc['endpoints'].key?(region_name) && Partitions.service_names.key?(svc_id)
-              services << Partitions.service_name(svc_id)
+          Partitions.service_ids.inject(Set.new) do |services, (svc_name, svc_id)|
+            if svc = partition['services'][svc_id]
+              services << svc_name if service_in_region?(svc, region_name)
+            else
+              #raise "missing endpoints for #{svc_name} / #{svc_id}"
             end
             services
+          end
+        end
+
+        def service_in_region?(svc, region_name)
+          svc_endpoints_contains_region?(svc, region_name) ||
+          svc_partition_endpoint_matches_region?(svc, region_name)
+        end
+
+        def svc_endpoints_contains_region?(svc, region_name)
+          svc['endpoints'].key?(region_name)
+        end
+
+        def svc_partition_endpoint_matches_region?(svc, region_name)
+          if pe = svc['partitionEndpoint']
+            region = svc['endpoints'][pe].fetch('credentialScope', {})['region']
+            region == region_name
           end
         end
 
