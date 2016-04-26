@@ -3,6 +3,10 @@ Unreleased Changes
 
 * Feature - Aws::EC2 - Added support for ClassicLink over VPC peering.
 
+* Feature - Aws::ECR - This update makes it easier to find repository URIs,
+  which are now appended to the `#describe_repositories`, `#create_repository`,
+  and `#delete_repository` responses.
+
 2.2.36 (2016-04-21)
 ------------------
 
