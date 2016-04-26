@@ -69,7 +69,9 @@ module Aws
         # @return [Hash<String,Region>]
         def build_regions(partition)
           partition['regions'].inject({}) do |regions, (region_name, region)|
-            regions[region_name] = Region.build(region_name, region, partition)
+            unless region_name == "#{partition['partition']}-global"
+              regions[region_name] = Region.build(region_name, region, partition)
+            end
             regions
           end
         end

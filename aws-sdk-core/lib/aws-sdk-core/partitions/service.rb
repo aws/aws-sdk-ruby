@@ -68,15 +68,13 @@ module Aws
         def partition_region(service)
           if service['partitionEndpoint']
             endpoint = service['endpoints'][service['partitionEndpoint']]
-            region = if endpoint['credentialScope']
+            if endpoint['credentialScope']
               endpoint['credentialScope']['region']
             elsif service['defaults'] && service['defaults']['credentialScope']
               service['defaults']['credentialScope']['region']
+            else
+              service['partitionEndpoint']
             end
-            unless region
-              raise "missing partition endpoint region for #{service.inspect}"
-            end
-            region
           end
         end
 
