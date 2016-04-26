@@ -13,9 +13,7 @@ module Aws
       end
 
       # @return [String] The partition name, e.g. "aws", "aws-cn", "aws-us-gov".
-      def name
-        @name
-      end
+      attr_reader :name
 
       # @param [String] region_name The name of the region, e.g. "us-east-1".
       # @return [Region]
@@ -55,6 +53,7 @@ module Aws
 
       class << self
 
+        # @api private
         def build(partition)
           Partition.new(
             name: partition['partition'],

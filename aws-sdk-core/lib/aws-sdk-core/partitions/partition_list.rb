@@ -1,5 +1,6 @@
 module Aws
   module Partitions
+    # @api private
     class PartitionList
 
       include Enumerable

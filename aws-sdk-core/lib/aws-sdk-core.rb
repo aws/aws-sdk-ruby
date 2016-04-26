@@ -280,14 +280,55 @@ module Aws
       end
     end
 
-    # @param (see Partitions::PartitionList#partition)
-    # @return (see Partitions::PartitionList#partition)
-    # @raise (see Partitions::PartitionList#partition)
+    # Return the partition with the given name. A partition describes
+    # the services and regions available in that partition.
+    #
+    #     aws = Aws.partition('aws')
+    #
+    #     puts "Regions available in the aws partition:\n"
+    #     aws.regions.each do |region|
+    #       puts region.name
+    #     end
+    #
+    #     puts "Services available in the aws partition:\n"
+    #     aws.services.each do |services|
+    #       puts services.name
+    #     end
+    #
+    # See {Partitions} for more information and examples.
+    #
+    # @param [String] partition_name The name of the partition to return.
+    #   Valid names include "aws", "aws-cn", and "aws-us-gov".
+    #
+    # @return [Partitions::Partition]
+    #
+    # @raise [ArgumentError] Raises an `ArgumentError` if a partition is
+    #   not found with the given name. The error message contains a list
+    #   of valid partition names.
     def partition(partition_name)
       Partitions.default_list.partition(partition_name)
     end
 
-    # @return (see Partitions::PartitionList#partitions)
+    # Return an array of partitions. A partition describes
+    # the services and regions available in that partition.
+    #
+    #     Aws.partitions.each do |partition|
+    #
+    #       puts "Regions available in #{partition.name}:\n"
+    #       partition.regions.each do |region|
+    #         puts region.name
+    #       end
+    #
+    #       puts "Services available in #{partition.name}:\n"
+    #       partition.services.each do |service|
+    #         puts service.name
+    #       end
+    #     end
+    #
+    # See {Partitions} for more information and examples.
+    #
+    # @return [Array<Partitions::Partition>] Returns an array of all
+    #   known partitions.
     def partitions
       Partitions.default_list.partitions
     end
