@@ -6,6 +6,8 @@ Unreleased Changes
 * Feature - Aws::ECR - This update makes it easier to find repository URIs,
   which are now appended to the `#describe_repositories`, `#create_repository`,
   and `#delete_repository` responses.
+  
+* Issues - Aws::CognitoIdentityProvider - Remove non-JSON operations.
 
 2.2.36 (2016-04-21)
 ------------------
