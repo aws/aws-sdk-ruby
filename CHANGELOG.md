@@ -7,7 +7,7 @@
   which are now appended to the `#describe_repositories`, `#create_repository`,
   and `#delete_repository` responses.
   
-* Issues - Aws::CognitoIdentityProvider - Remove non-JSON operations.
+* Issue - Aws::CognitoIdentityProvider - Remove non-JSON operations.
 
 2.2.36 (2016-04-21)
 ------------------
