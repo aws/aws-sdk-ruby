@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added support for ClassicLink over VPC peering.
+
 2.2.36 (2016-04-21)
 ------------------
 
