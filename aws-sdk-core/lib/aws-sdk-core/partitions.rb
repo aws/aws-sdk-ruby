@@ -32,7 +32,7 @@ module Aws
         end
       end
 
-      # @rdefaultseturn [PartitionList]
+      # @return [PartitionList]
       # @api priviate
       def default_list
         @default_list ||= PartitionList.build(defaults)
