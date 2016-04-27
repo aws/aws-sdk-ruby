@@ -1,5 +1,19 @@
 # Upgrade Notes
 
+## `aws-sdk-core` - v2.3.0
+
+* We have replaced the previous `endpoints.json` document that shipped with
+  the `aws-sdk-core` gem. The old file defined mapping heuristic for
+  constructing regionalized endpoints for services. The new document
+  defines explicit regions and services within partitions.
+
+  The old and new document and interfaces were private implementation
+  details and were not documented. Any usage of the old document
+  or classes would be broken in a 2.3.0 update. Normal SDK usage should
+  be completely unaffected by the update. This upgrading note
+  exists only as a warning to users who were reaching into the
+  internals.
+
 ## `aws-sdk-core` - v2.2.0
 
 * We are moving the `Aws::S3::Client` class to use Signature Version 4 by
