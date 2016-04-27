@@ -1,6 +1,80 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws.partitions - Added interfaces for exploring regions and
+  services within AWS partitions. A partition is a named group of
+  regions and services.
+
+  ```ruby
+  # enumerating regions in a partition
+  Aws.partition("aws").regions.each do |region|
+    puts region.name
+  end
+
+  # enumerating services in a partition
+  Aws.partition("aws").services.each do |service|
+    puts service.name
+  end
+  ```
+
+  Valid partition names include:
+
+  * `"aws"`
+  * `"aws-cn"`
+  * `"aws-us-gov"`
+
+  From a partition, you can also access a region or service by name.
+  Regions allow you to enumerate services, and services allow you to enumerate
+  regions:
+
+  ```ruby
+  # services in a specific region
+  Aws.partition("aws").region("us-west-2").services
+  #=> #<Set: {"APIGateway", "AutoScaling", ... }
+
+  # regions for a specific service
+  Aws.partition("aws").service('DynamoDB').regions
+  #=> #<Set: {"us-east-1", "us-west-1", "us-west-2", ... }
+  ```
+
+  You can also enumerate services or regions within a partition.
+
+  ```ruby
+  # services in regions
+  Aws.partition("aws").regions.each do |region|
+    puts "Services in the #{region.name}"
+    region.services.each do |service_name|
+      puts service_name
+    end
+  end
+
+  # regions in services
+  Aws.partition("aws").services.each do |service|
+    puts "Regions the #{servcie.name} is available in"
+    service.regions.each do |region_name|
+      puts region_name
+    end
+  end
+  ```
+
+  Lastly, you can also enumerate all partitions.
+
+  ```ruby
+  Aws.partitions.each do |partition|
+
+    puts partition.name
+
+    partition.regions.each |region|
+      # ...
+    end
+
+    partition.services.each |service|
+      # ...
+    end
+
+  end
+  ```
+
 2.2.37 (2016-04-26)
 ------------------
 
@@ -9,7 +83,7 @@ Unreleased Changes
 * Feature - Aws::ECR - This update makes it easier to find repository URIs,
   which are now appended to the `#describe_repositories`, `#create_repository`,
   and `#delete_repository` responses.
-  
+
 * Issue - Aws::CognitoIdentityProvider - Remove non-JSON operations.
 
 2.2.36 (2016-04-21)
