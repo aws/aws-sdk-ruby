@@ -4,7 +4,6 @@ module Aws
   # can use a partition to determine what services are available in a region,
   # or what regions a service is available in.
   #
-  #
   # ## Partitions
   #
   # **AWS accounts are scoped to a single partition**. You can get a partition
@@ -60,6 +59,17 @@ module Aws
   # the AWS SDK for Ruby. To find the complete list of supported
   # service names, see {Partition#services}.
   #
+  # Its also possible to enumerate every service for every region in
+  # every partition.
+  #
+  #     Aws.partitions.each do |partition|
+  #       partition.regions.each do |region|
+  #         region.services.each do |service_name|
+  #           puts "#{partition.name} -> #{region.name} -> #{service_name}"
+  #         end
+  #       end
+  #     end
+  #
   # ## Services
   #
   # A {Partition} has a list of services available. You can get a
@@ -89,6 +99,17 @@ module Aws
   #
   #     iam.regionalized? #=> false
   #     service.partition_region #=> "us-east-1"
+  #
+  # Its also possible to enumerate every region for every service in
+  # every partition.
+  #
+  #     Aws.partitions.each do |partition|
+  #       partition.services.each do |service|
+  #         service.regions.each do |region_name|
+  #           puts "#{partition.name} -> #{region_name} -> #{service.name}"
+  #         end
+  #       end
+  #     end
   #
   # ## Service Names
   #
