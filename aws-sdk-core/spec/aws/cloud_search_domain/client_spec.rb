@@ -21,13 +21,13 @@ module Aws
 
       it 'signs reqeusts when credentials given' do
         creds = Credentials.new('akid', 'secret')
-        endpoint = 'https://domain.region-name.amazonaws.com'
+        endpoint = 'https://domain.us-west-1.amazonaws.com'
         csd = Client.new(endpoint: endpoint, credentials: creds)
         csd.handle(NoSendHandler, step: :send)
         resp = csd.search(query: 'query')
         auth = resp.context.http_request.headers['Authorization']
         expect(auth).to match(/^AWS4-HMAC-SHA256/)
-        expect(auth).to match('region-name')
+        expect(auth).to match('us-west-1')
       end
 
       it 'ignores the globally configured region' do

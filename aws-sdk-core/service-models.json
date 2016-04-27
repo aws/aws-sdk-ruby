@@ -1,0 +1,273 @@
+{
+  "ACM": {
+    "models": "acm/2015-12-08",
+    "endpoint": "acm"
+  },
+  "APIGateway": {
+    "models": "apigateway/2015-07-09",
+    "endpoint": "apigateway"
+  },
+  "AutoScaling": {
+    "models": "autoscaling/2011-01-01",
+    "endpoint": "autoscaling"
+  },
+  "CloudFormation": {
+    "models": "cloudformation/2010-05-15",
+    "endpoint": "cloudformation"
+  },
+  "CloudFront": {
+    "models": "cloudfront/2016-01-28",
+    "endpoint": "cloudfront"
+  },
+  "CloudHSM": {
+    "models": "cloudhsm/2014-05-30",
+    "endpoint": "cloudhsm"
+  },
+  "CloudSearch": {
+    "models": "cloudsearch/2013-01-01",
+    "endpoint": "cloudsearch"
+  },
+  "CloudSearchDomain": {
+    "models": "cloudsearchdomain/2013-01-01"
+  },
+  "CloudTrail": {
+    "models": "cloudtrail/2013-11-01",
+    "endpoint": "cloudtrail"
+  },
+  "CloudWatch": {
+    "models": "monitoring/2010-08-01",
+    "endpoint": "monitoring"
+  },
+  "CloudWatchEvents": {
+    "models": "events/2015-10-07",
+    "endpoint": "events"
+  },
+  "CloudWatchLogs": {
+    "models": "logs/2014-03-28",
+    "endpoint": "logs"
+  },
+  "CodeCommit": {
+    "models": "codecommit/2015-04-13",
+    "endpoint": "codecommit"
+  },
+  "CodeDeploy": {
+    "models": "codedeploy/2014-10-06",
+    "endpoint": "codedeploy"
+  },
+  "CodePipeline": {
+    "models": "codepipeline/2015-07-09",
+    "endpoint": "codepipeline"
+  },
+  "CognitoIdentity": {
+    "models": "cognito-identity/2014-06-30",
+    "endpoint": "cognito-identity"
+  },
+  "CognitoIdentityProvider": {
+    "models": "cognito-idp/2016-04-18",
+    "endpoint": "cognito-idp"
+  },
+  "CognitoSync": {
+    "models": "cognito-sync/2014-06-30",
+    "endpoint": "cognito-sync"
+  },
+  "ConfigService": {
+    "models": "config/2014-11-12",
+    "endpoint": "config"
+  },
+  "DatabaseMigrationService": {
+    "models": "dms/2016-01-01",
+    "endpoint": "dms"
+  },
+  "DataPipeline": {
+    "models": "datapipeline/2012-10-29",
+    "endpoint": "datapipeline"
+  },
+  "DeviceFarm": {
+    "models": "devicefarm/2015-06-23",
+    "endpoint": "devicefarm"
+  },
+  "DirectConnect": {
+    "models": "directconnect/2012-10-25",
+    "endpoint": "directconnect"
+  },
+  "DirectoryService": {
+    "models": "ds/2015-04-16",
+    "endpoint": "ds"
+  },
+  "DynamoDB": {
+    "models": "dynamodb/2012-08-10",
+    "endpoint": "dynamodb"
+  },
+  "DynamoDBStreams": {
+    "models": "streams.dynamodb/2012-08-10",
+    "endpoint": "streams.dynamodb"
+  },
+  "EC2": {
+    "models": "ec2/2015-10-01",
+    "endpoint": "ec2"
+  },
+  "ECR": {
+    "models": "ecr/2015-09-21",
+    "endpoint": "ecr"
+  },
+  "ECS": {
+    "models": "ecs/2014-11-13",
+    "endpoint": "ecs"
+  },
+  "EFS": {
+    "models": "elasticfilesystem/2015-02-01",
+    "endpoint": "elasticfilesystem"
+  },
+  "ElastiCache": {
+    "models": "elasticache/2015-02-02",
+    "endpoint": "elasticache"
+  },
+  "ElasticBeanstalk": {
+    "models": "elasticbeanstalk/2010-12-01",
+    "endpoint": "elasticbeanstalk"
+  },
+  "ElasticLoadBalancing": {
+    "models": "elasticloadbalancing/2012-06-01",
+    "endpoint": "elasticloadbalancing"
+  },
+  "ElasticsearchService": {
+    "models": "es/2015-01-01",
+    "endpoint": "es"
+  },
+  "ElasticTranscoder": {
+    "models": "elastictranscoder/2012-09-25",
+    "endpoint": "elastictranscoder"
+  },
+  "EMR": {
+    "models": "elasticmapreduce/2009-03-31",
+    "endpoint": "elasticmapreduce"
+  },
+  "Firehose": {
+    "models": "firehose/2015-08-04",
+    "endpoint": "firehose"
+  },
+  "GameLift": {
+    "models": "gamelift/2015-10-01",
+    "endpoint": "gamelift"
+  },
+  "Glacier": {
+    "models": "glacier/2012-06-01",
+    "endpoint": "glacier"
+  },
+  "IAM": {
+    "models": "iam/2010-05-08",
+    "endpoint": "iam"
+  },
+  "ImportExport": {
+    "models": "importexport/2010-06-01",
+    "endpoint": "importexport"
+  },
+  "Inspector": {
+    "models": "inspector/2016-02-16",
+    "endpoint": "inspector"
+  },
+  "IoT": {
+    "models": "iot/2015-05-28",
+    "endpoint": "iot"
+  },
+  "IoTDataPlane": {
+    "models": "iot-data/2015-05-28",
+    "endpoint": "data.iot"
+  },
+  "Kinesis": {
+    "models": "kinesis/2013-12-02",
+    "endpoint": "kinesis"
+  },
+  "KMS": {
+    "models": "kms/2014-11-01",
+    "endpoint": "kms"
+  },
+  "Lambda": {
+    "models": "lambda/2015-03-31",
+    "endpoint": "lambda"
+  },
+  "LambdaPreview": {
+    "models": "lambda/2014-11-11",
+    "endpoint": "lambda"
+  },
+  "MachineLearning": {
+    "models": "machinelearning/2014-12-12",
+    "endpoint": "machinelearning"
+  },
+  "MarketplaceCommerceAnalytics": {
+    "models": "marketplacecommerceanalytics/2015-07-01",
+    "endpoint": "marketplacecommerceanalytics"
+  },
+  "MarketplaceMetering": {
+    "models": "meteringmarketplace/2016-01-14",
+    "endpoint": "metering.marketplace"
+  },
+  "OpsWorks": {
+    "models": "opsworks/2013-02-18",
+    "endpoint": "opsworks"
+  },
+  "RDS": {
+    "models": "rds/2014-10-31",
+    "endpoint": "rds"
+  },
+  "Redshift": {
+    "models": "redshift/2012-12-01",
+    "endpoint": "redshift"
+  },
+  "Route53": {
+    "models": "route53/2013-04-01",
+    "endpoint": "route53"
+  },
+  "Route53Domains": {
+    "models": "route53domains/2014-05-15",
+    "endpoint": "route53domains"
+  },
+  "S3": {
+    "models": "s3/2006-03-01",
+    "endpoint": "s3"
+  },
+  "SES": {
+    "models": "email/2010-12-01",
+    "endpoint": "email"
+  },
+  "SimpleDB": {
+    "models": "sdb/2009-04-15",
+    "endpoint": "sdb"
+  },
+  "SNS": {
+    "models": "sns/2010-03-31",
+    "endpoint": "sns"
+  },
+  "SQS": {
+    "models": "sqs/2012-11-05",
+    "endpoint": "sqs"
+  },
+  "SSM": {
+    "models": "ssm/2014-11-06",
+    "endpoint": "ssm"
+  },
+  "StorageGateway": {
+    "models": "storagegateway/2013-06-30",
+    "endpoint": "storagegateway"
+  },
+  "STS": {
+    "models": "sts/2011-06-15",
+    "endpoint": "sts"
+  },
+  "Support": {
+    "models": "support/2013-04-15",
+    "endpoint": "support"
+  },
+  "SWF": {
+    "models": "swf/2012-01-25",
+    "endpoint": "swf"
+  },
+  "WAF": {
+    "models": "waf/2015-08-24",
+    "endpoint": "waf"
+  },
+  "WorkSpaces": {
+    "models": "workspaces/2015-04-08",
+    "endpoint": "workspaces"
+  }
+}
