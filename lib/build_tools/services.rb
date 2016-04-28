@@ -7,27 +7,33 @@ module BuildTools
 
     API_DIR = File.join(ROOT_DIR, 'aws-sdk-core', 'apis')
 
-    MODELS_PATH = File.join(ROOT_DIR, 'service-models.json')
+    MANIFEST_PATH = File.join(ROOT_DIR, 'aws-sdk-core', 'service-models.json')
 
     def initialize
-      @prefixes = JSON.load(File.read(MODELS_PATH))
-      @names = @prefixes.keys.inject({}) do |names, name|
-        names[name.downcase] = name
-        names
+      @services = manifest.each.with_object({}) do |(svc_name, svc), hash|
+        hash[svc_name.downcase] = {
+          name: svc_name,
+          prefix: svc['models'],
+        }
       end
     end
 
     # @return [Array<String>]
     def identifiers
-      @names.keys.sort
+      @services.keys.sort
     end
 
-    # @return [Array<String>]
-    def names
-      @names.values.sort_by(&:downcase)
+    # @param [String] identifier
+    # @return [String]
+    def name(identifier)
+      service(identifier)[:name]
     end
 
-    # @param [String]
+    def prefix(identifier)
+      service(identifier)[:prefix]
+    end
+
+    # @param [String] identifier
     # @return [Hash<Symbol,Path>]
     def model_paths(identifier)
       Dir.glob("#{API_DIR}/#{prefix(identifier)}/*").inject({}) do |paths, path|
@@ -36,24 +42,21 @@ module BuildTools
       end
     end
 
-    # @param [String]
-    # @return [String]
-    def name(identifier)
-      if @names.key?(identifier)
-        @names[identifier]
+    private
+
+    def manifest
+      JSON.load(File.read(MANIFEST_PATH))
+    end
+
+    def service(identifier)
+      if @services.key?(identifier)
+        @services[identifier]
       else
-        msg = "unknown service identifier `#{identifier}'"
+        msg = "invalid service identifier; valid identifiers include %s"
+        msg = msg % [@services.keys.join(', ')]
         raise ArgumentError, msg
       end
     end
-
-    # @param [String] identifier The downcased service module name.
-    # @return [String] Returns the model path prefix, e.g. `"s3/2006-03-01"`.
-    def prefix(identifier)
-      @prefixes[name(identifier)]
-    end
-
-    private
 
     def model_option(path)
       case File.basename(path)
