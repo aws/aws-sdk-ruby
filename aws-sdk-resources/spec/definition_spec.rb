@@ -876,6 +876,16 @@ module Aws
               ])
               expect(doo_dads.all?(&:data_loaded?))
               expect(thing.doo_dads.limit(3).map(&:identifiers)).to eq(doo_dads[0..2].map(&:identifiers))
+
+              # raise on collection construction with string args
+              expect {
+                thing.doo_dads('doo-dad-name')
+              }.to raise_error(ArgumentError, /expected Hash, got String/)
+
+              # raise on collection construction with wrong arity
+              expect {
+                thing.doo_dads(1,2,3)
+              }.to raise_error(ArgumentError, /wrong number of arguments/)
             end
 
             it 'does not attempt to enumerate non-pageable responses' do
