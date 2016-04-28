@@ -44,7 +44,7 @@ module Aws
             end
           when ListShape then list(ref, i, visited)
           when MapShape then map(ref, i, visited)
-          when BooleanShape then "true"
+          when BooleanShape then "false"
           when IntegerShape then '1'
           when FloatShape then '1.0'
           when StringShape then string(ref)
