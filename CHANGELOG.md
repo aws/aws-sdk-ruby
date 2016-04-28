@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.0 (2016-04-28)
 ------------------
 
 * Feature - Aws.partitions - Added interfaces for exploring regions and
