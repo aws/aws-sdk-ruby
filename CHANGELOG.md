@@ -107,6 +107,8 @@ Unreleased Changes
   * `#list_buckets`
   * `#delete_bucket`
 
+* Feature - Aws::OpsWorks - Adds support for default tenancy selection.
+
 2.2.37 (2016-04-26)
 ------------------
 
