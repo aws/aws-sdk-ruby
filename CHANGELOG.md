@@ -109,6 +109,8 @@ Unreleased Changes
 
 * Feature - Aws::OpsWorks - Adds support for default tenancy selection.
 
+* Feature - Aws::Route53Domains - Adds support for new operations `#resend_contact_reachability_email` and `#get_contact_reachability_status`.
+
 2.2.37 (2016-04-26)
 ------------------
 
