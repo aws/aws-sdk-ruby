@@ -64,8 +64,8 @@ module Aws
         else
           data = @file.read(remaining_bytes)
         end
+        
         @position += data ? data.bytesize : 0
-        @read_block.call data ? data.bytesize : 0 if @read_block
         output_buffer ? output_buffer.replace(data || '') : data
       end
 

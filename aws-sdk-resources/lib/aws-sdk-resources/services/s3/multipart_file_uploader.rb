@@ -53,9 +53,9 @@ module Aws
       end
 
       def upload_parts(upload_id, source, options, &block)
-        pending = PartList.new(compute_parts(upload_id, source, options, &block))
+        pending = PartList.new(compute_parts(upload_id, source, options))
         completed = PartList.new
-        errors = upload_in_threads(pending, completed)
+        errors = upload_in_threads(pending, completed, &block)
         if errors.empty?
           completed.to_a.sort_by { |part| part[:part_number] }
         else
@@ -78,7 +78,7 @@ module Aws
         raise MultipartUploadError.new(msg, errors + [error])
       end
 
-      def compute_parts(upload_id, source, options, &block)
+      def compute_parts(upload_id, source, options)
         size = File.size(source)
         default_part_size = compute_default_part_size(size)
         offset = 0
@@ -93,8 +93,7 @@ module Aws
             body: FilePart.new(
               source: source,
               offset: offset,
-              size: part_size(size, default_part_size, offset), 
-              &block
+              size: part_size(size, default_part_size, offset)
             )
           }
           part_number += 1
@@ -103,7 +102,7 @@ module Aws
         parts
       end
 
-      def upload_in_threads(pending, completed)
+      def upload_in_threads(pending, completed, &block)
         threads = []
         @thread_count.times do
           thread = Thread.new do
@@ -111,10 +110,12 @@ module Aws
               while part = pending.shift
                 resp = @client.upload_part(part)
                 part[:body].close
+                block.call(part[:body].size) if block
                 completed.push(etag: resp.etag, part_number: part[:part_number])
               end
               nil
             rescue => error
+              Rails.logger.error("code=multipart_upload_error error=#{error.message} backtrace=#{error.backtrace.join(",")}")
               # keep other threads from uploading other parts
               pending.clear!
               error
