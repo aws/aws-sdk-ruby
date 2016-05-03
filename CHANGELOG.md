@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::CodePipeline - This model correction marks `:revision_change_id`
+  as a required parameter in `Aws::CodePipeline::Client#put_action_revision`.
+
 2.3.0 (2016-04-28)
 ------------------
 
