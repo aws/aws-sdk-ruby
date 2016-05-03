@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.1 (2016-05-03)
 ------------------
 
 * Issue - Aws::CodePipeline - This model correction marks `:revision_change_id`
