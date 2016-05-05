@@ -31,10 +31,12 @@ module AwsSdkCodeGenerator
         nil         => DEFAULT_PLUGINS,
       })
 
-      def initialize(identifier:, api:, waiters:)
+      def initialize(identifier:, api:, waiters:, add_plugins:[], remove_plugins:[])
         @identifier = identifier
         @api = api
         @waiters = waiters
+        @add_plugins = add_plugins
+        @remove_plugins = remove_plugins
         super('Client', extends: 'Seahorse::Client::Base')
         apply_modules(self)
         apply_identifier(self)
@@ -71,8 +73,11 @@ module AwsSdkCodeGenerator
 
       def apply_plugins(klass)
         protocol = (@api['metadata'] || {})['protocol']
+        plugins = PROTOCOL_PLUGINS[protocol]
+        plugins = plugins + @add_plugins
+        plugins = plugins - @remove_plugins
         klass.code do |c|
-          PROTOCOL_PLUGINS[protocol].each do |plugin|
+          plugins.each do |plugin|
             c << "add_plugin(#{plugin})"
           end
         end

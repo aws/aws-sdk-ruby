@@ -17,7 +17,10 @@ module AwsSdkCodeGenerator
       paginators: nil,
       waiters: nil,
       resources: nil,
-      examples: nil
+      examples: nil,
+      # overrides for the default client plugins
+      add_client_plugins: [],
+      remove_client_plugins: []
     )
       @module_names = module_names
       apply_docs(api, docs) if docs
@@ -26,6 +29,8 @@ module AwsSdkCodeGenerator
       @waiters = waiters
       @resources = resources
       @examples = examples
+      @add_client_plugins = add_client_plugins
+      @remove_client_plugins = remove_client_plugins
     end
 
     def generate_src
@@ -104,6 +109,8 @@ module AwsSdkCodeGenerator
         identifier: @module_names.last.downcase,
         api: @api,
         waiters: @waiters,
+        add_plugins: @add_client_plugins,
+        remove_plugins: @remove_client_plugins,
       )
     end
 

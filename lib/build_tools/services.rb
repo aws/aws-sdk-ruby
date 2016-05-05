@@ -3,43 +3,36 @@ require 'json'
 module BuildTools
   class Services
 
-    ROOT_DIR = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+    include Enumerable
 
-    API_DIR = File.join(ROOT_DIR, 'aws-sdk-core', 'apis')
+    MANIFEST_PATH = File.join(
+      File.dirname(__FILE__),
+      '..',
+      '..',
+      'aws-sdk-core',
+      'service-models.json'
+    )
 
-    MANIFEST_PATH = File.join(ROOT_DIR, 'aws-sdk-core', 'service-models.json')
+    API_DIR = File.join(
+      File.dirname(__FILE__),
+      '..',
+      '..',
+      'aws-sdk-core',
+      'apis'
+    )
 
     def initialize
-      @services = manifest.each.with_object({}) do |(svc_name, svc), hash|
-        hash[svc_name.downcase] = {
-          name: svc_name,
-          prefix: svc['models'],
-        }
+      @services = manifest.inject([]) do |services, (service_name, definition)|
+        services << Service.new.tap do |svc|
+          svc.identifier = service_name.downcase
+          svc.name = service_name
+          svc.models = service_models(definition['models'])
+        end
       end
     end
 
-    # @return [Array<String>]
-    def identifiers
-      @services.keys.sort
-    end
-
-    # @param [String] identifier
-    # @return [String]
-    def name(identifier)
-      service(identifier)[:name]
-    end
-
-    def prefix(identifier)
-      service(identifier)[:prefix]
-    end
-
-    # @param [String] identifier
-    # @return [Hash<Symbol,Path>]
-    def model_paths(identifier)
-      Dir.glob("#{API_DIR}/#{prefix(identifier)}/*").inject({}) do |paths, path|
-        paths[model_option(path)] = path
-        paths
-      end
+    def each(&block)
+      @services.each(&block)
     end
 
     private
@@ -48,13 +41,10 @@ module BuildTools
       JSON.load(File.read(MANIFEST_PATH))
     end
 
-    def service(identifier)
-      if @services.key?(identifier)
-        @services[identifier]
-      else
-        msg = "invalid service identifier; valid identifiers include %s"
-        msg = msg % [@services.keys.join(', ')]
-        raise ArgumentError, msg
+    def service_models(prefix)
+      Dir.glob("#{API_DIR}/#{prefix}/*").inject({}) do |paths, path|
+        paths[model_option(path)] = path
+        paths
       end
     end
 
@@ -70,6 +60,12 @@ module BuildTools
         msg = "unsupported `#{File.basename(path)}'"
         raise ArgumentError, msg
       end
+    end
+
+    class Service
+      attr_accessor :identifier
+      attr_accessor :name
+      attr_accessor :models
     end
 
   end
