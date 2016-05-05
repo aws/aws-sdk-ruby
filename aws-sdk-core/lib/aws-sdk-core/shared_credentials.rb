@@ -67,15 +67,35 @@ module Aws
 
     def load_from_path
       profile = load_profile
-      @credentials = Credentials.new(
+      credentials = Credentials.new(
         profile['aws_access_key_id'],
         profile['aws_secret_access_key'],
         profile['aws_session_token']
       )
+      @credentials = if role_arn = profile['role_arn']
+        AssumeRoleCredentials.new(
+          role_session_name: profile['role_session_name'] || "AWS-Ruby-session-%s"%[Time.now.to_i],
+          external_id: profile['external_id'],
+          role_arn: role_arn,
+          credentials: credentials
+        ).credentials
+      else
+        credentials
+      end
     end
 
     def load_profile
       if profile = profiles[profile_name]
+        if profile.key?('role_arn')
+          if source_profile = profile['source_profile']
+            profile['aws_access_key_id'] = profiles[source_profile]['aws_access_key_id']
+            profile['aws_secret_access_key'] = profiles[source_profile]['aws_secret_access_key']
+            profile['aws_session_token'] = profiles[source_profile]['aws_session_token']
+          else
+            msg = "Source Profile `#{source_profile}' not found in #{path}"
+            raise Errors::NoSuchProfileError, msg
+          end
+        end
         profile
       else
         msg = "Profile `#{profile_name}' not found in #{path}"
