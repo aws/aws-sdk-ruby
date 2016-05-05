@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.2 (2016-05-05)
 ------------------
 
 * Feature - Aws::S3 - Adds the `#list_objects_v2` API, for listing objects in
