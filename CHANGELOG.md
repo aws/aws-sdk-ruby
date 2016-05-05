@@ -10,6 +10,9 @@ Unreleased Changes
 * Feature - Aws::APIGateway - Adds the `:passthrough_behavior` field to
   `#put_integration`.
 
+* Feature - Aws::CloudTrail - Deprecates the `:sns_topic_name` field in favor of
+  `:sns_topic_arn`.
+
 2.3.1 (2016-05-03)
 ------------------
 
