@@ -7,6 +7,9 @@ Unreleased Changes
 * Feature - Aws::ECS - Task definition log driver supports log drivers available
   from Docker.
 
+* Feature - Aws::APIGateway - Adds the `:passthrough_behavior` field to
+  `#put_integration`.
+
 2.3.1 (2016-05-03)
 ------------------
 
