@@ -1,5 +1,6 @@
 require 'jmespath'
 require 'seahorse'
+require 'pathname'
 
 Seahorse::Util.irregular_inflections({
   'ARNs' => 'arns',
@@ -169,7 +170,6 @@ module Aws
   # @api private
   module Api
     autoload :Builder, 'aws-sdk-core/api/builder'
-    autoload :Customizations, 'aws-sdk-core/api/customizations'
     autoload :ShapeMap, 'aws-sdk-core/api/shape_map'
     module Docs
       autoload :Builder, 'aws-sdk-core/api/docs/builder'
@@ -458,28 +458,45 @@ module Aws
     #
     # @param [String] svc_name The name of the service. This will also be
     #   the namespace under {Aws}. This must be a valid constant name.
-    # @option options[String,Pathname,Hash,Seahorse::Model::Api,nil] :api
+    # @option options[required, String, Pathname] :api
     # @option options[String,Pathname,Hash,nil] :paginators
-    # @option options[String,Pathname,Hash,Waiters::Provider,nil] :waiters
-    # @option options[String,Pathname,Hash,Resources::Definition,nil] :resources
+    # @option options[String,Pathname,Hash,nil] :waiters
+    # @option options[String,Pathname,Hash,nil] :resources
     # @return [Module<Service>] Returns the new service module.
     def add_service(svc_name, options = {})
-      svc_module = Module.new { extend Service }
-      const_set(svc_name, svc_module)
-      @services[svc_name] = [svc_module, options]
+      require 'aws-sdk-code-generator'
+      options = options.inject({}) do |hash, (key, value)|
+        hash[key.to_sym] =
+          case value
+          when String, Pathname then Json.load_file(value.to_s)
+          when Hash then value
+          when nil then nil
+          else
+            msg = "expected :#{key} to be a String, Pathname, Hash, or nil, "
+            msg << "got #{value.class}"
+            raise ArgumentError, msg
+          end
+        hash
+      end
+      options[:module_names] = ['Aws', svc_name.to_s]
+      code = AwsSdkCodeGenerator::Generator.new(options).generate_src
+
+      begin
+        puts code
+        Object.module_eval(code)
+      rescue => error
+        puts code
+        raise error
+      end
+
+      svc_module = Aws.const_get(svc_name)
+      @services[svc_name.to_s] = [svc_module, options]
       @service_added_callbacks.each do |callback|
-        callback.call(svc_name.to_s, *@services[svc_name])
+        callback.call(svc_name.to_s, *@services[svc_name.to_s])
       end
       svc_module
     end
 
-  end
-
-  # build service client classes
-  service_added do |name, svc_module, options|
-    options[:type_builder] ||= TypeBuilder.new(svc_module)
-    svc_module.const_set(:Client, Client.define(name, options))
-    svc_module.const_set(:Errors, Module.new { extend Errors::DynamicErrors })
   end
 
   # enable response paging

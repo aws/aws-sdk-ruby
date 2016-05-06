@@ -12,7 +12,7 @@ module AwsSdkCodeGenerator
           super('Collection')
           include_module('Aws::ResourceCollection')
           add(each_method)
-          #add(*batch_actions)
+          add(*batch_actions)
         end
 
         def apply(mod)
@@ -42,7 +42,7 @@ enum
             @resource['batchActions'].each do |name, action|
               actions << Dsl::Method.new(batch_action_name(name, action)) do |m|
                 m.returns('void')
-                #m.code(<<-CODE)
+                m.code(<<-CODE)
 batches.each do |batch|
   params = {}
   batch.each.with_index do |item, n|

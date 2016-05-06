@@ -110,13 +110,15 @@ module Aws
   end
 end
 
-begin
-  # attempt to load aws-sdk-resources, checking first for source from
-  # a relative path in the repo, otherwise will check for the installed gem
-  lib = File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-resources', 'lib')
-  $LOAD_PATH.unshift(lib) if File.directory?(lib)
-  require 'aws-sdk-resources'
-rescue LoadError
+%w(aws-sdk-resources aws-sdk-code-generator).each do |opt_lib|
+  begin
+    # attempt to load aws-sdk-resources, checking first for source from
+    # a relative path in the repo, otherwise will check for the installed gem
+    lib = File.join(File.dirname(__FILE__), '..', '..', opt_lib, 'lib')
+    $LOAD_PATH.unshift(lib) if File.directory?(lib)
+    require(opt_lib)
+  rescue LoadError
+  end
 end
 
 # configure the aws-sdk gem

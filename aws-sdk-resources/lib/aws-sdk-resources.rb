@@ -20,24 +20,12 @@ module Aws
   end
 
   service_added do |name, svc_module, options|
-    definition = options[:resources]
-    definition = case definition
-      when nil then Resources::Definition.new({})
-      when Resources::Definition then definition
-      when Hash then Resources::Definition.new(definition)
-      when String
-        Resources::Definition.new(Json.load_file(definition), source_path: definition)
-      else raise ArgumentError, "invalid resource definition #{definition}"
-    end
-    definition.apply(svc_module)
-
     # load customizations
     svc = File.join(
       File.dirname(__FILE__),
       'aws-sdk-resources',
       'services',
       "#{name.downcase}.rb")
-
     require(svc) if File.exist?(svc)
   end
 
@@ -56,36 +44,31 @@ module Aws
     unless ENV['DOCSTRINGS']
       case name
       when 'EC2'
+        EC2::InstanceCollection.send(:extend, Aws::Deprecations)
         {
-          'create_tags' => 'batch_create_tags',
-          'monitor' => 'batch_create_tags',
-          'reboot' => 'batch_reboot',
-          'start' => 'batch_start',
-          'stop' => 'batch_stop',
-          'terminate' => 'batch_terminate!',
-          'unmonitor' => 'batch_unmonitor',
-        }.each do |deprecated_name, name|
-          Resources::Operations::DeprecatedOperation.define({
-            resource_class: EC2::Instance,
-            deprecated_name: deprecated_name,
-            name: name,
-          })
+          create_tags: :batch_create_tags,
+          monitor: :batch_create_tags,
+          reboot: :batch_reboot,
+          start: :batch_start,
+          stop: :batch_stop,
+          terminate: :batch_terminate!,
+          unmonitor: :batch_unmonitor,
+        }.each do |old, new|
+          EC2::Instance::Collection.send(:alias_method, old, new)
+          EC2::Instance::Collection.send(:deprecated, old, use: new)
         end
-        Resources::Operations::DeprecatedOperation.define({
-          resource_class: EC2::Tag,
-          deprecated_name: 'delete',
-          name: 'batch_delete!',
-        })
+        EC2::Tag::Collection.send(:alias_method, :delete, :batch_delete!)
+        EC2::Tag::Collection.send(:extend, Aws::Deprecations)
+        EC2::Tag::Collection.send(:deprecated, :delete, use: :batch_delete!)
       when 'S3'
         [S3::Object, S3::ObjectSummary, S3::ObjectVersion].each do |klass|
-          Resources::Operations::DeprecatedOperation.define({
-            resource_class: klass,
-            deprecated_name: 'delete',
-            name: 'batch_delete!',
-          })
+          klass = klass.const_get(:Collection)
+          klass.send(:alias_method, :delete, :batch_delete!)
+          klass.send(:extend, Aws::Deprecations)
+          klass.send(:deprecated, :delete, use: :batch_delete!)
         end
       end
+
     end
   end
-
 end
