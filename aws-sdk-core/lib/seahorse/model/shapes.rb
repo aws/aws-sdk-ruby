@@ -69,7 +69,8 @@ module Seahorse
 
       class Shape
 
-        def initialize
+        def initialize(options = {})
+          @name = options[:name]
           @metadata = {}
         end
 

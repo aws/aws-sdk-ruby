@@ -46,7 +46,7 @@ module AwsSdkCodeGenerator
         apply_waiter_methods(self)
         eigenclass do |eigenclass|
           eigenclass.docstring('@api private')
-          eigenclass.attr_accessor('identifier')
+          eigenclass.attr_reader('identifier')
           eigenclass.method('errors_module') do |m|
             m.code('Errors')
           end
@@ -62,8 +62,7 @@ module AwsSdkCodeGenerator
 
       def apply_identifier(klass)
         klass.code do |c|
-          c << "# @api private"
-          c << "IDENTIFIER = :#{@identifier}"
+          c << "@identifier = :#{@identifier}"
         end
       end
 

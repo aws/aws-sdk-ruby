@@ -41,7 +41,7 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private
-      IDENTIFIERS = Set.new(SERVICE_MODULE_NAMES.map(&:downcase).map(&:to_sym))
+      IDENTIFIERS = Partitions.service_ids.keys.map { |id| id.downcase.to_sym }
 
       # @api private
       def before_initialize(client_class, options)
@@ -71,9 +71,4 @@ module Aws
     end
   end
 
-  service_added do |name, _, _|
-    Plugins::GlobalConfiguration::IDENTIFIERS << name.downcase.to_sym
-  end
-
 end
-
