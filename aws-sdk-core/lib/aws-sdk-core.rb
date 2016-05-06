@@ -109,6 +109,7 @@ module Aws
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
+  autoload :IniParser, 'aws-sdk-core/ini_parser'
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
   autoload :Json, 'aws-sdk-core/json'
   autoload :PageableResponse, 'aws-sdk-core/pageable_response'
@@ -118,6 +119,7 @@ module Aws
   autoload :Partitions, 'aws-sdk-core/partitions'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
   autoload :Service, 'aws-sdk-core/service'
+  autoload :SharedConfig, 'aws-sdk-core/shared_config'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :Structure, 'aws-sdk-core/structure'
   autoload :TreeHash, 'aws-sdk-core/tree_hash'
@@ -265,6 +267,9 @@ module Aws
     autoload :ErrorHandler,  'aws-sdk-core/xml/error_handler'
     autoload :Parser, 'aws-sdk-core/xml/parser'
   end
+
+  # @api private
+  SHARED_CONFIG = SharedConfig.new
 
   class << self
 

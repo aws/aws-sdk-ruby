@@ -24,6 +24,7 @@ RSpec.configure do |config|
     path = '/latest/meta-data/iam/security-credentials/'
     stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
 
+    Aws::SHARED_CONFIG.fresh
   end
 end
 

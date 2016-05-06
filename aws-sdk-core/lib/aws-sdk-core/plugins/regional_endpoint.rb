@@ -14,10 +14,11 @@ module Aws
       # raised when region is not configured
       MISSING_REGION = 'missing required configuration option :region'
 
-      option(:region) {
-        keys = %w(AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION)
-        ENV.values_at(*keys).compact.first
-      }
+      option(:profile)
+
+      option(:region) do |cfg|
+        resolve_region(cfg)
+      end
 
       option(:endpoint) do |cfg|
         if endpoint_prefix = cfg.api.metadata['endpointPrefix']
@@ -31,6 +32,15 @@ module Aws
           msg << "export region name to ENV['AWS_REGION']"
           raise Errors::MissingRegionError, msg
         end
+      end
+
+      private
+      def self.resolve_region(cfg)
+        keys = %w(AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION)
+        env_region = ENV.values_at(*keys).compact.first
+        env_region = nil if env_region == ''
+        cfg_region = SHARED_CONFIG.region(profile: cfg.profile)
+        env_region || cfg_region
       end
 
     end

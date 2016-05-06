@@ -15,6 +15,7 @@ module Aws
 
     it 'defaults path to Dir.home/.aws/credentials' do
       expect(Dir).to receive(:home).and_return('HOME')
+      SHARED_CONFIG.fresh
       credentials = SharedCredentials.new
       expect(credentials.path).to eq(File.join('HOME', '.aws', 'credentials'))
     end
