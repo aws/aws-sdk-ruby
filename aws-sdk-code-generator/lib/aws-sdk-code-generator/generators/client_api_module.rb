@@ -31,6 +31,7 @@ module AwsSdkCodeGenerator
         'protocol' => true,
         'targetPrefix' => true,
         'jsonVersion' => true,
+        'errorPrefix' => true,
 
         # ignore
         'apiVersion' => false,
