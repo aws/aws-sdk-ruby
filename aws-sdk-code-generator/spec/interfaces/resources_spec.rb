@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Interface' do
+describe 'Interfaces' do
 
   before(:all) do
     # TODO : support Aws.config[:sample] = { ... }
