@@ -100,14 +100,16 @@ class DummySendPlugin < Seahorse::Client::Plugin
   handler Handler, step: :send
 end
 
-def client_class_with_plugin(&block)
-  client = Seahorse::Client::Base.define
-  client.set_plugins([Class.new(Seahorse::Client::Plugin, &block)])
-  client
-end
+module SpecHelper
+  class << self
 
-def client_with_plugin(options = {}, &block)
-  client_class_with_plugin(&block).new(options)
+    def client_with_plugin(options = {}, &block)
+      client_class = Class.new(Seahorse::Client::Base)
+      client_class.set_plugins([Class.new(Seahorse::Client::Plugin, &block)])
+      client_class.new(options)
+    end
+
+  end
 end
 
 def data_to_hash(obj)

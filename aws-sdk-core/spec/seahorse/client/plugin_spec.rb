@@ -88,7 +88,7 @@ module Seahorse
         it 'yeilds the client class and constructor options to the plugin' do
           yielded_class = nil
           yielded_options = nil
-          client = client_with_plugin(foo: 'bar') do
+          client = SpecHelper.client_with_plugin(foo: 'bar') do
             option(:foo)
             option(:endpoint, 'http://foo.com')
             before_initialize do |klass, options|
@@ -107,7 +107,7 @@ module Seahorse
 
         it 'yieldes the fully constructed client to the plugin' do
           initialized_client = nil
-          client = client_with_plugin do
+          client = SpecHelper.client_with_plugin do
             option(:endpoint, 'http://foo.com')
             after_initialize {|c| initialized_client = c }
           end
