@@ -2291,6 +2291,14 @@
           }
         }
       },
+      "waiters": {
+        "Exists": {
+          "waiterName": "VpcAvailable",
+          "params": [
+            { "target": "VpcIds[]", "source": "identifier", "name": "Id" }
+          ]
+        }
+      },
       "has": {
         "DhcpOptions": {
           "resource": {
