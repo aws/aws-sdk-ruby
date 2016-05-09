@@ -11,22 +11,21 @@ module AwsSdkCodeGenerator
 
       # @param [Dsl::Module] mod
       def apply(mod)
-        autolaods.each_pair do |const, path|
-          mod.autoload(const, path)
+        autoloads.each do |path|
+          mod.require_relative(path)
         end
       end
 
       private
 
-      def autolaods
+      def autoloads
         autoloads = {}
-        autoloads['Client'] = "#{@prefix}/client"
-        autoloads['ClientApi'] = "#{@prefix}/client_api"
-        autoloads['Errors'] = "#{@prefix}/errors"
-        autoloads['Resource'] = "#{@prefix}/resource"
         autoloads['Types'] = "#{@prefix}/types"
+        autoloads['ClientApi'] = "#{@prefix}/client_api"
+        autoloads['Client'] = "#{@prefix}/client"
+        autoloads['Errors'] = "#{@prefix}/errors"
         autoloads['Waiters'] = "#{@prefix}/waiters"
-
+        autoloads['Resource'] = "#{@prefix}/resource"
         if @resources && @resources['resources']
           @resources['resources'].keys.each do |resource_name|
             if autoloads.key?(resource_name)
@@ -36,12 +35,7 @@ module AwsSdkCodeGenerator
             end
           end
         end
-
-        # alphabetize autoload statements
-        autoloads.keys.sort.inject({}) do |hash, key|
-          hash[key] = autoloads[key]
-          hash
-        end
+        autoloads.values
       end
 
     end

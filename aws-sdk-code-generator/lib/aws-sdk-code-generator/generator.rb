@@ -43,12 +43,12 @@ module AwsSdkCodeGenerator
       root_mod.to_s
     end
 
-    def generate_src_files(autoload_prefix: nil)
-      autoload_prefix ||= @module_names.map { |n| underscore(n) }.join('/')
+    def generate_src_files(prefix: nil)
+      prefix ||= @module_names.map { |n| underscore(n) }.join('/')
       Enumerator.new do |y|
-        y.yield("#{autoload_prefix}.rb", service_module(autoload_prefix))
+        y.yield("#{prefix}.rb", service_module(prefix))
         each_module do |mod|
-          y.yield(File.join(autoload_prefix, underscore(mod.name) + '.rb'), wrap(mod))
+          y.yield(File.join(prefix, underscore(mod.name) + '.rb'), wrap(mod))
         end
       end
     end

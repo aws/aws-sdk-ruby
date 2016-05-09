@@ -65,6 +65,7 @@ nil
         def batch_action_name(name, action)
           method_name = "batch_" + underscore(name)
           method_name += '!' if dangerous?(name, action)
+          method_name
         end
 
         def dangerous?(name, action)

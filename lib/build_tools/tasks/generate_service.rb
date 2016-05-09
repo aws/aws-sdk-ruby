@@ -9,10 +9,9 @@ module BuildTools
         # @param [BuildTools::Services::Service] service
         def new(service)
           task = Rake::Task.define_task("build:#{service.identifier}") do
-            prefix = "aws-sdk-core/#{service.identifier}"
             generator = AwsSdkCodeGenerator::Generator.new(generate_opts(service))
-            generator.generate_src_files(autoload_prefix: prefix).each do |path, contents|
-              write_file(File.join('aws-sdk-core/lib', path), contents)
+            generator.generate_src_files(prefix:service.identifier).each do |path, contents|
+              write_file(File.join('aws-sdk-core/lib/aws-sdk-core', path), contents)
             end
           end
           task.add_description("Builds the code for Aws::#{service.name}")
