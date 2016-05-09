@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+2.3.2 (2016-05-05)
+------------------
+
+* Feature - Aws::S3 - Adds the `#list_objects_v2` API, for listing objects in
+  buckets with a large number of delete markers.
+  
+* Feature - Aws::ECS - Task definition log driver supports log drivers available
+  from Docker.
+
+* Feature - Aws::APIGateway - Adds the `:passthrough_behavior` field to
+  `#put_integration`.
+
+* Feature - Aws::CloudTrail - Deprecates the `:sns_topic_name` field in favor of
+  `:sns_topic_arn`.
+
+2.3.1 (2016-05-03)
+------------------
+
+* Issue - Aws::CodePipeline - This model correction marks `:revision_change_id`
+  as a required parameter in `Aws::CodePipeline::Client#put_action_revision`.
+
+2.3.0 (2016-04-28)
+------------------
+
 * Feature - Aws.partitions - Added interfaces for exploring regions and
   services within AWS partitions. A partition is a named group of
   regions and services.
@@ -74,6 +98,42 @@ Unreleased Changes
 
   end
   ```
+
+* Feature - Aws::S3 - You can now pass a configuration option to accelerate
+  `Aws::S3::Client` operations. You can construct a client with
+  `use_accelerate_endpoint: true` to enable this feature.
+
+  ```ruby
+  s3 = Aws::S3::Client.new(use_accelerate_endpoint: true)
+  s3.put_object(bucket: 'bucket-name', key:'key')
+  #=> uses https://bucket-name.s3-accelerate.amazonaws.com
+  ```
+
+  You can pass `:use_accelerate_endpoint` to client operations to
+  override the client default.
+
+  ```ruby
+  # non-accelerated client
+  s3 = Aws::S3::Client.new
+
+  # non-accelerated
+  s3.put_object(bucket: 'bucket-name', key:'key')
+
+  # accelerated
+  s3.put_object(bucket: 'bucket-name', key:'key', use_accelerate_endpoint: true)
+  ```
+
+  [See the Amazon S3 documentation for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
+
+  Not supported for the following operations:
+
+  * `#create_bucket`
+  * `#list_buckets`
+  * `#delete_bucket`
+
+* Feature - Aws::OpsWorks - Adds support for default tenancy selection.
+
+* Feature - Aws::Route53Domains - Adds support for new operations `#resend_contact_reachability_email` and `#get_contact_reachability_status`.
 
 2.2.37 (2016-04-26)
 ------------------
