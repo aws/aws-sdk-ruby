@@ -1,5 +1,9 @@
 # TODO
 
+* Support mixins/customizations of generated source code. This currently
+  affects S3, DynamoDB in aws-sdk-core, and S3, SNS, SQS, EC2, IAM from
+  resources.
+
 * Implement support for resource collection batch actions. Currently, the
   generated methods are non-functional.
 

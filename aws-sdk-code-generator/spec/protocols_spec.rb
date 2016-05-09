@@ -1,11 +1,10 @@
 require 'spec_helper'
 require 'rexml/document'
-require 'aws-sdk-code-generator'
 
 def fixtures
   fixtures = {}
   files = Dir.glob(File.join(
-    File.dirname(__FILE__), 'fixtures', 'protocols', '**', '*.json'))
+    File.dirname(__FILE__), 'protocols', '**', '*.json'))
   raise 'unable to locate spec files' if files.empty?
   files.each do |path|
     directory = File.basename(path).split('.').first
