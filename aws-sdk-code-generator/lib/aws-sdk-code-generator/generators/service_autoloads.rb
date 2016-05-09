@@ -1,5 +1,7 @@
 module AwsSdkCodeGenerator
   module Generators
+    # TODO : rename this from ServiceAutoload to something more descriptive
+    #        of what it really is, perhaps `ServiceModule`?
     class ServiceAutoloads
 
       include Helper
