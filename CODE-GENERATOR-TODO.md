@@ -25,3 +25,4 @@
   default to 1.0.0. This means `aws-sdk` v2.5.0 will depends on 70+ v1 gems.
   What version should they start at? (I'm leaning towards 1.0)
 
+* Ensure rake handlers:s3 functions (currently blocked by service loading)

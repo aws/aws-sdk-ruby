@@ -1,13 +1,15 @@
+require 'build_tools'
+
 def service_names
   line = "    "
   service_names = ""
-  Aws::SERVICE_MODULE_NAMES.each do |name|
-    if (line + name).size > 72
+  BuildTools::Services.each do |svc|
+    if (line + svc.name).size > 72
       service_names << line.sub(/, $/, '')
       service_names << "\n"
       line = "    "
     end
-    line << (name.downcase + ", ")
+    line << (svc.name.downcase + ", ")
   end
   service_names << line.sub(/, $/, '')
 end
@@ -74,8 +76,8 @@ task "operations:svc" => "operations"
 
 def svc_module(task)
   identifier = task.name.split(':')[1]
-  name = Aws::SERVICE_MODULE_NAMES.find { |name| name.downcase == identifier }
-  Aws.const_get(name)
+  svc = BuildTools::Services.find { |svc| svc.name.downcase == identifier }
+  Aws.const_get(svc.name)
 end
 
 rule /^operations:\w+$/ do |task|
