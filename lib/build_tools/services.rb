@@ -1,7 +1,7 @@
 require 'json'
 
 module BuildTools
-  class Services
+  class ServiceEnumerator
 
     include Enumerable
 
@@ -64,11 +64,52 @@ module BuildTools
     end
 
     class Service
-      attr_accessor :identifier
-      attr_accessor :name
-      attr_accessor :models
-      attr_accessor :gem_name
-    end
 
+      # @return [String] Something like "dynamodb"
+      attr_accessor :identifier
+
+      # @return [String] Something like "DynamoDB"
+      attr_accessor :name
+
+      # @return [Hash] A hash of service models paths. Keys may include the
+      #   following:
+      #
+      #   * `:api`
+      #   * `:docs`
+      #   * `:paginators`
+      #   * `:waiters`
+      #   * `:resources`
+      #   * `:examples`
+      #
+      attr_accessor :models
+
+      # @return [string] Something like "aws-sdk-dynamodb"
+      attr_accessor :gem_name
+
+      # @return [Hash]
+      def api
+        @api ||= json_load(models[:api])
+      end
+
+      # @return [String<YYYY-MM-DD>]
+      def api_version
+        api['metadata']['apiVersion']
+      end
+
+      # @return [String] Something like "AWS DyanmoDB"
+      def full_name
+        api['metadata']['serviceFullName']
+      end
+
+      private
+
+      def json_load(path)
+        JSON.load(File.open(path, 'rb') { |f| f.read })
+      end
+
+    end
   end
+
+  Services = ServiceEnumerator.new
+
 end

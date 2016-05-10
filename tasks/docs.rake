@@ -10,20 +10,12 @@ end
 # Updates the list of supported services and versions in the README
 desc 'Updated the list of supported services in the README' if ENV['ALL']
 task 'docs:update_readme' do
-  # Updates the table of supported services / api version in the README
-  lines = []
-  skip = false
-  File.read('README.md').lines.each do |line|
-    if line == "## Supported Services\n"
-      lines << line
-      lines += supported_services_table
-      skip = true
-    elsif line == "## License\n"
-      skip = false
-    end
-    lines << line unless skip
-  end
-  File.open('README.md', 'w') { |file| file.write(lines.join) }
+  BuildTools.replace_lines(
+    filename: 'README.md',
+    start: /## Supported Services/,
+    stop: /## License/,
+    new_lines: supported_services_table
+  )
   sh('git add README.md')
 end
 
@@ -45,14 +37,9 @@ def supported_services_table
 
   # insert one row for each supported service
   table = []
-  Aws::SERVICE_MODULE_NAMES.each do |svc_name|
-    client_class = Aws.const_get(svc_name).const_get(:Client)
-    full_name = client_class.api.metadata['serviceFullName']
-    gem_name = "aws-sdk-#{svc_name.downcase}"
-    version = client_class.api.version
-    table << [gem_name, full_name, "Aws::#{svc_name}", version]
+  BuildTools::Services.each do |svc|
+    table << [svc.gem_name, svc.full_name, "Aws::#{svc.name}", svc.api_version]
   end
-
   table = table.sort_by(&:first)
 
   # header row
