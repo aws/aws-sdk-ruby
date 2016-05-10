@@ -1,7 +1,10 @@
+$LOAD_PATH.unshift('lib/build_tools')
+
 require 'simplecov'
 require 'rspec'
 require 'webmock/rspec'
 require 'aws-sdk-core'
+require 'build_tools'
 
 SimpleCov.command_name('test:unit:aws-sdk-core')
 

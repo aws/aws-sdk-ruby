@@ -1,4 +1,7 @@
-require_relative 'build_tools/services'
-require_relative 'build_tools/customizations'
-require_relative 'build_tools/tasks'
-require_relative 'build_tools/replace_lines'
+require 'build_tools/replace_lines'
+
+module BuildTools
+  autoload :Services, 'build_tools/services'
+  autoload :Customizations, 'build_tools/customizations'
+  autoload :Tasks, 'build_tools/tasks'
+end
