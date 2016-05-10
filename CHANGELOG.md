@@ -6,7 +6,7 @@ Unreleased Changes
 
 * Feature - Aws::S3 - Adds the `#list_objects_v2` API, for listing objects in
   buckets with a large number of delete markers.
-  
+
 * Feature - Aws::ECS - Task definition log driver supports log drivers available
   from Docker.
 

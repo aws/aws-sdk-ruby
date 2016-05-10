@@ -1,3 +1,5 @@
+require 'build_tools'
+
 task 'release_notes:html' do
 
   require 'erb'
@@ -35,10 +37,8 @@ task 'release_notes:html' do
   end
 
   services = {}
-  Aws::SERVICE_MODULE_NAMES.each do |svc_name|
-    client_class = Aws.const_get(svc_name).const_get(:Client)
-    name = client_class.api.metadata['serviceFullName']
-    services[name] = client_class.api.version
+  BuildTools::Services.each do |svc|
+    services["Aws::#{svc.name}"] = svc.api_version
   end
 
   services = services.keys.sort_by(&:downcase).inject({}) do |h,k|
