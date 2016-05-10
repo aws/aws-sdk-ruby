@@ -121,6 +121,11 @@ end
   end
 end
 
+Aws::SERVICE_MODULE_NAMES.each do |svc|
+  dir = File.join(File.dirname(__FILE__), '..', '..', 'services', "aws-sdk-#{svc.downcase}", 'lib')
+  $LOAD_PATH.unshift(dir) if File.directory?(dir)
+end
+
 # configure the aws-sdk gem
 
 cfg = {}

@@ -80,7 +80,7 @@ module AwsSdkCodeGenerator
 
       def operation(name, operation)
         Dsl::CodeLiteral.new do |code|
-          code << "api.add_operation(:#{underscore(name)}, Operation.new.tap do |o|"
+          code << "api.add_operation(:#{underscore(name)}, Seahorse::Model::Operation.new.tap do |o|"
           code.indent do |c|
             c << "o.name = #{name.inspect}"
             c << "o.http_method = #{operation['http']['method'].inspect}"

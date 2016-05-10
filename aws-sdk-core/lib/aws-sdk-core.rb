@@ -94,9 +94,9 @@ module Aws
   @services = {}
   @service_added_callbacks = []
 
-  SERVICE_MODULE_NAMES.each do |const_name|
-    autoload const_name, "aws-sdk-core/#{const_name.downcase}"
-  end
+  #SERVICE_MODULE_NAMES.each do |const_name|
+  #  autoload const_name, "aws-sdk-core/#{const_name.downcase}"
+  #end
 
   autoload :DefaultList, 'aws-sdk-core/default_list'
   autoload :DefaultMap, 'aws-sdk-core/default_map'

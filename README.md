@@ -228,76 +228,76 @@ to be backwards compatible.
 
 ## Supported Services
 
-| Service Name                             | Service Class                | API Version |
-| ---------------------------------------- | ---------------------------- | ----------- |
-| AWS Certificate Manager                  | ACM                          | 2015-12-08  |
-| AWS CloudFormation                       | CloudFormation               | 2010-05-15  |
-| AWS CloudTrail                           | CloudTrail                   | 2013-11-01  |
-| AWS CodeCommit                           | CodeCommit                   | 2015-04-13  |
-| AWS CodeDeploy                           | CodeDeploy                   | 2014-10-06  |
-| AWS CodePipeline                         | CodePipeline                 | 2015-07-09  |
-| AWS Config                               | ConfigService                | 2014-11-12  |
-| AWS Data Pipeline                        | DataPipeline                 | 2012-10-29  |
-| AWS Database Migration Service           | DatabaseMigrationService     | 2016-01-01  |
-| AWS Device Farm                          | DeviceFarm                   | 2015-06-23  |
-| AWS Direct Connect                       | DirectConnect                | 2012-10-25  |
-| AWS Directory Service                    | DirectoryService             | 2015-04-16  |
-| AWS Elastic Beanstalk                    | ElasticBeanstalk             | 2010-12-01  |
-| AWS Identity and Access Management       | IAM                          | 2010-05-08  |
-| AWS Import/Export                        | ImportExport                 | 2010-06-01  |
-| AWS IoT                                  | IoT                          | 2015-05-28  |
-| AWS IoT Data Plane                       | IoTDataPlane                 | 2015-05-28  |
-| AWS Key Management Service               | KMS                          | 2014-11-01  |
-| AWS Lambda                               | LambdaPreview                | 2014-11-11  |
-| AWS Lambda                               | Lambda                       | 2015-03-31  |
-| AWS Marketplace Commerce Analytics       | MarketplaceCommerceAnalytics | 2015-07-01  |
-| AWS OpsWorks                             | OpsWorks                     | 2013-02-18  |
-| AWS Security Token Service               | STS                          | 2011-06-15  |
-| AWS Storage Gateway                      | StorageGateway               | 2013-06-30  |
-| AWS Support                              | Support                      | 2013-04-15  |
-| AWS WAF                                  | WAF                          | 2015-08-24  |
-| AWSMarketplace Metering                  | MarketplaceMetering          | 2016-01-14  |
-| Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
-| Amazon CloudFront                        | CloudFront                   | 2016-01-28  |
-| Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
-| Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |
-| Amazon CloudSearch Domain                | CloudSearchDomain            | 2013-01-01  |
-| Amazon CloudWatch                        | CloudWatch                   | 2010-08-01  |
-| Amazon CloudWatch Events                 | CloudWatchEvents             | 2015-10-07  |
-| Amazon CloudWatch Logs                   | CloudWatchLogs               | 2014-03-28  |
-| Amazon Cognito Identity                  | CognitoIdentity              | 2014-06-30  |
-| Amazon Cognito Identity Provider         | CognitoIdentityProvider      | 2016-04-18  |
-| Amazon Cognito Sync                      | CognitoSync                  | 2014-06-30  |
-| Amazon DynamoDB                          | DynamoDB                     | 2012-08-10  |
-| Amazon DynamoDB Streams                  | DynamoDBStreams              | 2012-08-10  |
-| Amazon EC2 Container Registry            | ECR                          | 2015-09-21  |
-| Amazon EC2 Container Service             | ECS                          | 2014-11-13  |
-| Amazon ElastiCache                       | ElastiCache                  | 2015-02-02  |
-| Amazon Elastic Compute Cloud             | EC2                          | 2015-10-01  |
-| Amazon Elastic File System               | EFS                          | 2015-02-01  |
-| Amazon Elastic MapReduce                 | EMR                          | 2009-03-31  |
-| Amazon Elastic Transcoder                | ElasticTranscoder            | 2012-09-25  |
-| Amazon Elasticsearch Service             | ElasticsearchService         | 2015-01-01  |
-| Amazon GameLift                          | GameLift                     | 2015-10-01  |
-| Amazon Glacier                           | Glacier                      | 2012-06-01  |
-| Amazon Inspector                         | Inspector                    | 2016-02-16  |
-| Amazon Kinesis                           | Kinesis                      | 2013-12-02  |
-| Amazon Kinesis Firehose                  | Firehose                     | 2015-08-04  |
-| Amazon Machine Learning                  | MachineLearning              | 2014-12-12  |
-| Amazon Redshift                          | Redshift                     | 2012-12-01  |
-| Amazon Relational Database Service       | RDS                          | 2014-10-31  |
-| Amazon Route 53                          | Route53                      | 2013-04-01  |
-| Amazon Route 53 Domains                  | Route53Domains               | 2014-05-15  |
-| Amazon Simple Email Service              | SES                          | 2010-12-01  |
-| Amazon Simple Notification Service       | SNS                          | 2010-03-31  |
-| Amazon Simple Queue Service              | SQS                          | 2012-11-05  |
-| Amazon Simple Storage Service            | S3                           | 2006-03-01  |
-| Amazon Simple Systems Management Service | SSM                          | 2014-11-06  |
-| Amazon Simple Workflow Service           | SWF                          | 2012-01-25  |
-| Amazon SimpleDB                          | SimpleDB                     | 2009-04-15  |
-| Amazon WorkSpaces                        | WorkSpaces                   | 2015-04-08  |
-| Auto Scaling                             | AutoScaling                  | 2011-01-01  |
-| Elastic Load Balancing                   | ElasticLoadBalancing         | 2012-06-01  |
+| Gem Name                             | Service Name                             | Service Module                    | API Version |
+| ------------------------------------ | ---------------------------------------- | --------------------------------- | ----------- |
+| aws-sdk-acm                          | AWS Certificate Manager                  | Aws::ACM                          | 2015-12-08  |
+| aws-sdk-apigateway                   | Amazon API Gateway                       | Aws::APIGateway                   | 2015-07-09  |
+| aws-sdk-autoscaling                  | Auto Scaling                             | Aws::AutoScaling                  | 2011-01-01  |
+| aws-sdk-cloudformation               | AWS CloudFormation                       | Aws::CloudFormation               | 2010-05-15  |
+| aws-sdk-cloudfront                   | Amazon CloudFront                        | Aws::CloudFront                   | 2016-01-28  |
+| aws-sdk-cloudhsm                     | Amazon CloudHSM                          | Aws::CloudHSM                     | 2014-05-30  |
+| aws-sdk-cloudsearch                  | Amazon CloudSearch                       | Aws::CloudSearch                  | 2013-01-01  |
+| aws-sdk-cloudsearchdomain            | Amazon CloudSearch Domain                | Aws::CloudSearchDomain            | 2013-01-01  |
+| aws-sdk-cloudtrail                   | AWS CloudTrail                           | Aws::CloudTrail                   | 2013-11-01  |
+| aws-sdk-cloudwatch                   | Amazon CloudWatch                        | Aws::CloudWatch                   | 2010-08-01  |
+| aws-sdk-cloudwatchevents             | Amazon CloudWatch Events                 | Aws::CloudWatchEvents             | 2015-10-07  |
+| aws-sdk-cloudwatchlogs               | Amazon CloudWatch Logs                   | Aws::CloudWatchLogs               | 2014-03-28  |
+| aws-sdk-codecommit                   | AWS CodeCommit                           | Aws::CodeCommit                   | 2015-04-13  |
+| aws-sdk-codedeploy                   | AWS CodeDeploy                           | Aws::CodeDeploy                   | 2014-10-06  |
+| aws-sdk-codepipeline                 | AWS CodePipeline                         | Aws::CodePipeline                 | 2015-07-09  |
+| aws-sdk-cognitoidentity              | Amazon Cognito Identity                  | Aws::CognitoIdentity              | 2014-06-30  |
+| aws-sdk-cognitoidentityprovider      | Amazon Cognito Identity Provider         | Aws::CognitoIdentityProvider      | 2016-04-18  |
+| aws-sdk-cognitosync                  | Amazon Cognito Sync                      | Aws::CognitoSync                  | 2014-06-30  |
+| aws-sdk-configservice                | AWS Config                               | Aws::ConfigService                | 2014-11-12  |
+| aws-sdk-databasemigrationservice     | AWS Database Migration Service           | Aws::DatabaseMigrationService     | 2016-01-01  |
+| aws-sdk-datapipeline                 | AWS Data Pipeline                        | Aws::DataPipeline                 | 2012-10-29  |
+| aws-sdk-devicefarm                   | AWS Device Farm                          | Aws::DeviceFarm                   | 2015-06-23  |
+| aws-sdk-directconnect                | AWS Direct Connect                       | Aws::DirectConnect                | 2012-10-25  |
+| aws-sdk-directoryservice             | AWS Directory Service                    | Aws::DirectoryService             | 2015-04-16  |
+| aws-sdk-dynamodb                     | Amazon DynamoDB                          | Aws::DynamoDB                     | 2012-08-10  |
+| aws-sdk-dynamodbstreams              | Amazon DynamoDB Streams                  | Aws::DynamoDBStreams              | 2012-08-10  |
+| aws-sdk-ec2                          | Amazon Elastic Compute Cloud             | Aws::EC2                          | 2015-10-01  |
+| aws-sdk-ecr                          | Amazon EC2 Container Registry            | Aws::ECR                          | 2015-09-21  |
+| aws-sdk-ecs                          | Amazon EC2 Container Service             | Aws::ECS                          | 2014-11-13  |
+| aws-sdk-efs                          | Amazon Elastic File System               | Aws::EFS                          | 2015-02-01  |
+| aws-sdk-elasticache                  | Amazon ElastiCache                       | Aws::ElastiCache                  | 2015-02-02  |
+| aws-sdk-elasticbeanstalk             | AWS Elastic Beanstalk                    | Aws::ElasticBeanstalk             | 2010-12-01  |
+| aws-sdk-elasticloadbalancing         | Elastic Load Balancing                   | Aws::ElasticLoadBalancing         | 2012-06-01  |
+| aws-sdk-elasticsearchservice         | Amazon Elasticsearch Service             | Aws::ElasticsearchService         | 2015-01-01  |
+| aws-sdk-elastictranscoder            | Amazon Elastic Transcoder                | Aws::ElasticTranscoder            | 2012-09-25  |
+| aws-sdk-emr                          | Amazon Elastic MapReduce                 | Aws::EMR                          | 2009-03-31  |
+| aws-sdk-firehose                     | Amazon Kinesis Firehose                  | Aws::Firehose                     | 2015-08-04  |
+| aws-sdk-gamelift                     | Amazon GameLift                          | Aws::GameLift                     | 2015-10-01  |
+| aws-sdk-glacier                      | Amazon Glacier                           | Aws::Glacier                      | 2012-06-01  |
+| aws-sdk-iam                          | AWS Identity and Access Management       | Aws::IAM                          | 2010-05-08  |
+| aws-sdk-importexport                 | AWS Import/Export                        | Aws::ImportExport                 | 2010-06-01  |
+| aws-sdk-inspector                    | Amazon Inspector                         | Aws::Inspector                    | 2016-02-16  |
+| aws-sdk-iot                          | AWS IoT                                  | Aws::IoT                          | 2015-05-28  |
+| aws-sdk-iotdataplane                 | AWS IoT Data Plane                       | Aws::IoTDataPlane                 | 2015-05-28  |
+| aws-sdk-kinesis                      | Amazon Kinesis                           | Aws::Kinesis                      | 2013-12-02  |
+| aws-sdk-kms                          | AWS Key Management Service               | Aws::KMS                          | 2014-11-01  |
+| aws-sdk-lambda                       | AWS Lambda                               | Aws::Lambda                       | 2015-03-31  |
+| aws-sdk-lambdapreview                | AWS Lambda                               | Aws::LambdaPreview                | 2014-11-11  |
+| aws-sdk-machinelearning              | Amazon Machine Learning                  | Aws::MachineLearning              | 2014-12-12  |
+| aws-sdk-marketplacecommerceanalytics | AWS Marketplace Commerce Analytics       | Aws::MarketplaceCommerceAnalytics | 2015-07-01  |
+| aws-sdk-marketplacemetering          | AWSMarketplace Metering                  | Aws::MarketplaceMetering          | 2016-01-14  |
+| aws-sdk-opsworks                     | AWS OpsWorks                             | Aws::OpsWorks                     | 2013-02-18  |
+| aws-sdk-rds                          | Amazon Relational Database Service       | Aws::RDS                          | 2014-10-31  |
+| aws-sdk-redshift                     | Amazon Redshift                          | Aws::Redshift                     | 2012-12-01  |
+| aws-sdk-route53                      | Amazon Route 53                          | Aws::Route53                      | 2013-04-01  |
+| aws-sdk-route53domains               | Amazon Route 53 Domains                  | Aws::Route53Domains               | 2014-05-15  |
+| aws-sdk-s3                           | Amazon Simple Storage Service            | Aws::S3                           | 2006-03-01  |
+| aws-sdk-ses                          | Amazon Simple Email Service              | Aws::SES                          | 2010-12-01  |
+| aws-sdk-simpledb                     | Amazon SimpleDB                          | Aws::SimpleDB                     | 2009-04-15  |
+| aws-sdk-sns                          | Amazon Simple Notification Service       | Aws::SNS                          | 2010-03-31  |
+| aws-sdk-sqs                          | Amazon Simple Queue Service              | Aws::SQS                          | 2012-11-05  |
+| aws-sdk-ssm                          | Amazon Simple Systems Management Service | Aws::SSM                          | 2014-11-06  |
+| aws-sdk-storagegateway               | AWS Storage Gateway                      | Aws::StorageGateway               | 2013-06-30  |
+| aws-sdk-sts                          | AWS Security Token Service               | Aws::STS                          | 2011-06-15  |
+| aws-sdk-support                      | AWS Support                              | Aws::Support                      | 2013-04-15  |
+| aws-sdk-swf                          | Amazon Simple Workflow Service           | Aws::SWF                          | 2012-01-25  |
+| aws-sdk-waf                          | AWS WAF                                  | Aws::WAF                          | 2015-08-24  |
+| aws-sdk-workspaces                   | Amazon WorkSpaces                        | Aws::WorkSpaces                   | 2015-04-08  |
 
 ## License
 

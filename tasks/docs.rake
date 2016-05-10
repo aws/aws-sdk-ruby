@@ -1,3 +1,5 @@
+require 'aws-sdk-core'
+
 desc 'Delete the locally generated docs' if ENV['ALL']
 task 'docs:clobber' do
   rm_rf '.yardoc'
@@ -9,7 +11,6 @@ end
 desc 'Updated the list of supported services in the README' if ENV['ALL']
 task 'docs:update_readme' do
   # Updates the table of supported services / api version in the README
-  Aws.eager_autoload!
   lines = []
   skip = false
   File.read('README.md').lines.each do |line|
@@ -47,14 +48,15 @@ def supported_services_table
   Aws::SERVICE_MODULE_NAMES.each do |svc_name|
     client_class = Aws.const_get(svc_name).const_get(:Client)
     full_name = client_class.api.metadata['serviceFullName']
+    gem_name = "aws-sdk-#{svc_name.downcase}"
     version = client_class.api.version
-    table << [full_name, svc_name, version]
+    table << [gem_name, full_name, "Aws::#{svc_name}", version]
   end
 
   table = table.sort_by(&:first)
 
   # header row
-  table.unshift(['Service Name', 'Service Class', 'API Version'])
+  table.unshift(['Gem Name', 'Service Name', 'Service Module', 'API Version'])
 
   # compute the width of each column by scanning for longest values
   column_width = lambda do |col|
@@ -64,12 +66,13 @@ def supported_services_table
     column_width.call(0),
     column_width.call(1),
     column_width.call(2),
+    column_width.call(3),
   ]
 
   # insert a dashed line after the header row
   table = [
     table[0],
-    ['-' * widths[0], '-' * widths[1], '-' * widths[2]]
+    ['-' * widths[0], '-' * widths[1], '-' * widths[2], '-' * widths[3]]
   ] + table[1..-1]
 
   # build the final table
