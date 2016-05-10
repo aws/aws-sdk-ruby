@@ -3,10 +3,15 @@ require 'json'
 module BuildTools
   class << self
 
+    # @return [Boolean] Returns `true` if the target file was changed.
+    #   Returns `false` otherwise.
     def replace_lines(filename:, start:, stop:, new_lines:, padding: false)
+
+      orig_file = File.open(filename, 'rb') { |file| file.read }
+
       skip = false
       lines = []
-      File.open(filename, 'rb') { |f| f.read }.lines.each do |line|
+      orig_file.lines.each do |line|
         if line.match(start)
           lines << line
           lines << "\n" if padding
@@ -24,8 +29,15 @@ module BuildTools
           lines << line
         end
       end
-      File.open(filename, 'wb') { |file| file.write(lines.join) }
-    end
 
+      new_file = lines.join
+      if new_file != orig_file
+        File.open(filename, 'wb') { |file| file.write(new_file) }
+        true
+      else
+        false
+      end
+
+    end
   end
 end

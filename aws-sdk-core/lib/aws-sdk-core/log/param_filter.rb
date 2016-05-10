@@ -9,9 +9,10 @@ module Aws
       # logs. This is updated automatically as part of each release. See the
       # `tasks/sensitive.rake` for more information.
       #
-      # ** DO NOT EDIT THE FOLLOWING LINE OF CODE **
-      #
+      # @api private
+      # begin
       SENSITIVE = [:access_token, :admin_contact, :artifact_credentials, :auth_code, :base_32_string_seed, :client_id, :client_secret, :copy_source_sse_customer_key, :local_console_password, :new_password, :old_password, :password, :plaintext, :previous_password, :private_key, :proposed_password, :qr_code_png, :registrant_contact, :secret_access_key, :secret_hash, :shared_secret, :sse_customer_key, :ssekms_key_id, :tech_contact, :trust_password, :upload_credentials, :username, :value]
+      # end
 
       def initialize(options = {})
         @filters = Set.new(SENSITIVE + Array(options[:filter]))
