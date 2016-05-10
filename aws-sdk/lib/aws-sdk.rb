@@ -1,4 +1,5 @@
 module Aws
+  # service gems
   autoload :ACM, "aws-sdk-acm"
   autoload :APIGateway, "aws-sdk-apigateway"
   autoload :AutoScaling, "aws-sdk-autoscaling"
@@ -67,4 +68,5 @@ module Aws
   autoload :SWF, "aws-sdk-swf"
   autoload :WAF, "aws-sdk-waf"
   autoload :WorkSpaces, "aws-sdk-workspaces"
+  # end service gems
 end

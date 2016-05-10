@@ -27,6 +27,7 @@ module BuildTools
           svc.identifier = service_name.downcase
           svc.name = service_name
           svc.models = service_models(definition['models'])
+          svc.gem_name = definition['gem'] || "aws-sdk-#{svc.identifier}"
         end
       end
     end
@@ -66,6 +67,7 @@ module BuildTools
       attr_accessor :identifier
       attr_accessor :name
       attr_accessor :models
+      attr_accessor :gem_name
     end
 
   end

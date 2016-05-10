@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['trevrowe@amazon.com']
   spec.files         = Dir['lib/**/*.rb']
 
+  # service gems
   spec.add_dependency("aws-sdk-acm", "~> 1.0")
   spec.add_dependency("aws-sdk-apigateway", "~> 1.0")
   spec.add_dependency("aws-sdk-autoscaling", "~> 1.0")
@@ -80,5 +81,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency("aws-sdk-swf", "~> 1.0")
   spec.add_dependency("aws-sdk-waf", "~> 1.0")
   spec.add_dependency("aws-sdk-workspaces", "~> 1.0")
+  # end service gems
 
 end
