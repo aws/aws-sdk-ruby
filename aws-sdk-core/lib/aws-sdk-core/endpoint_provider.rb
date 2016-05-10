@@ -77,16 +77,19 @@ module Aws
     class << self
 
       def resolve(region, service)
-        DEFAULT_PROVIDER.resolve(region, service)
+        default_provider.resolve(region, service)
       end
 
       def signing_region(region, service)
-        DEFAULT_PROVIDER.signing_region(region, service)
+        default_provider.signing_region(region, service)
+      end
+
+      private
+
+      def default_provider
+        @default_provider ||= EndpointProvider.new(Partitions.defaults)
       end
 
     end
-
-    DEFAULT_PROVIDER = EndpointProvider.new(Partitions.defaults)
-
   end
 end

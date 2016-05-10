@@ -70,7 +70,14 @@ module Aws
         #   * {RexmlEngine}
         #
         def engine
+          set_default_engine unless @engine
           @engine
+        end
+
+        def set_default_engine
+          [:ox, :oga, :libxml, :nokogiri, :rexml].each do |name|
+            @engine ||= try_load_engine(name)
+          end
         end
 
         private
@@ -89,9 +96,7 @@ module Aws
 
       end
 
-      self.engine = [:ox, :oga, :libxml, :nokogiri, :rexml].find do |name|
-        try_load_engine(name)
-      end
+      set_default_engine
 
     end
   end

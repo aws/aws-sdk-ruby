@@ -1,12 +1,17 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Xml::Parser - Resolved an concurrency issue with the XML parser
+  related to chosing the default parsing engine.
+
+  See related [GitHub issue #1135](https://github.com/aws/aws-sdk-ruby/issues/1135).
+
 2.3.2 (2016-05-05)
 ------------------
 
 * Feature - Aws::S3 - Adds the `#list_objects_v2` API, for listing objects in
   buckets with a large number of delete markers.
-  
+
 * Feature - Aws::ECS - Task definition log driver supports log drivers available
   from Docker.
 
