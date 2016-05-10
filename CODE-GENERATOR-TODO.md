@@ -20,3 +20,11 @@
    * Write a documentation plugin to document the option, but not modify
      the api. This becomes extra code to support. We'd like to eliminate
      all docuemntation plugins if possible.
+
+* `aws-sdk` gem needs to dynamically list it's dependencies and autoloads,
+   they are currently static.
+
+* Need to decide on versioning scheme for service gems. Currently they
+  default to 1.0.0. This means `aws-sdk` v2.5.0 will depends on 70+ v1 gems.
+  What version should they start at? (I'm leaning towards 1.0)
+
