@@ -51,9 +51,8 @@ module Aws
       end
 
       it 'keeps a map of service identifiers' do
-        Aws::SERVICE_MODULE_NAMES.each do |name|
-          identifier = name.downcase.to_sym
-          expect(GlobalConfiguration::IDENTIFIERS).to include(identifier)
+        BuildTools::Services.each do |svc|
+          expect(GlobalConfiguration::IDENTIFIERS).to include(svc.identifier)
         end
       end
 

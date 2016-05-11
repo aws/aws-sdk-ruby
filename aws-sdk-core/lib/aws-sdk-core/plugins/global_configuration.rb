@@ -41,7 +41,24 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private
-      IDENTIFIERS = Partitions.service_ids.keys.map { |id| id.downcase.to_sym }
+      # begin
+      IDENTIFIERS = Set.new([
+        :acm, :apigateway, :autoscaling, :cloudformation, :cloudfront,
+        :cloudhsm, :cloudsearch, :cloudsearchdomain, :cloudtrail, :cloudwatch,
+        :cloudwatchevents, :cloudwatchlogs, :codecommit, :codedeploy,
+        :codepipeline, :cognitoidentity, :cognitoidentityprovider,
+        :cognitosync, :configservice, :databasemigrationservice, :datapipeline,
+        :devicefarm, :directconnect, :directoryservice, :dynamodb,
+        :dynamodbstreams, :ec2, :ecr, :ecs, :efs, :elasticache,
+        :elasticbeanstalk, :elasticloadbalancing, :elasticsearchservice,
+        :elastictranscoder, :emr, :firehose, :gamelift, :glacier, :iam,
+        :importexport, :inspector, :iot, :iotdataplane, :kinesis, :kms,
+        :lambda, :lambdapreview, :machinelearning,
+        :marketplacecommerceanalytics, :marketplacemetering, :opsworks, :rds,
+        :redshift, :route53, :route53domains, :s3, :ses, :simpledb, :sns, :sqs,
+        :ssm, :storagegateway, :sts, :support, :swf, :waf, :workspaces
+      ])
+      # end
 
       # @api private
       def before_initialize(client_class, options)

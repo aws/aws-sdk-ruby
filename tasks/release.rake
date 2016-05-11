@@ -26,6 +26,7 @@ task 'release:check' => [
 # builds release artificats
 task 'release:build' => [
   'update-filtered-params',
+  'update-global-config-plugin',
   'docs:update_readme',
   'changelog:version',
   'release:bump-version',

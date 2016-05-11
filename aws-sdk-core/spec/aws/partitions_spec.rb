@@ -129,8 +129,10 @@ module Aws
         describe '#services' do
 
           it 'returns a list of supported services' do
-            services = Aws.partition('aws').services
-            expect(services.map(&:name).sort).to eq(Aws::SERVICE_MODULE_NAMES.sort)
+            services = Aws.partition('aws').services.map(&:name)
+            expect(services).to include('EC2')
+            expect(services).to include('DynamoDB')
+            expect(services).to include('S3')
           end
 
         end
