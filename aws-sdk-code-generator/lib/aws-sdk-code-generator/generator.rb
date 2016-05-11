@@ -20,7 +20,8 @@ module AwsSdkCodeGenerator
       examples: nil,
       # overrides for the default client plugins
       add_client_plugins: [],
-      remove_client_plugins: []
+      remove_client_plugins: [],
+      &block
     )
       @module_names = module_names
       apply_docs(api, docs) if docs
@@ -31,6 +32,7 @@ module AwsSdkCodeGenerator
       @examples = examples
       @add_client_plugins = add_client_plugins
       @remove_client_plugins = remove_client_plugins
+      @callback = block
     end
 
     def generate_src
@@ -40,6 +42,7 @@ module AwsSdkCodeGenerator
       each_module do |mod|
         svc_mod.add(mod)
       end
+      @callback.call(svc_mod) if @callback
       root_mod.to_s
     end
 
@@ -93,6 +96,7 @@ module AwsSdkCodeGenerator
       root_mod.require('aws-sdk-core')
       svc_mod.docstring(service_docstring)
       autoloads.apply(svc_mod)
+      @callback.call(svc_mod) if @callback
       root_mod.to_s
     end
 

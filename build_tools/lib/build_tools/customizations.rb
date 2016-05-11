@@ -44,8 +44,8 @@ module BuildTools
 
           svc_module.class('Client') do |client_class|
             client_class.method(:stub_data) do |m|
-              m.param(:operation_name)
-              m.param(:data, default: {})
+              m.param(:operation_name, type:Symbol)
+              m.param(:data, type:Hash, default: {})
               m.code(<<-CODE)
 if config.simple_attributes
   rules = config.api.operation(operation_name).output
@@ -59,8 +59,8 @@ end
               CODE
             end
             client_class.method(:data_to_http_resp, access: :private) do |m|
-              m.param(:operation_name)
-              m.param(:data)
+              m.param(:operation_name, type:Symbol)
+              m.param(:data, type:Hash)
               m.code(<<-CODE)
 api = config.api
 operation = api.operation(operation_name)

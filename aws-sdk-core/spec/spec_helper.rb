@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift('build_tools')
+$LOAD_PATH.unshift('build_tools/lib')
 
 require 'simplecov'
 require 'rspec'
