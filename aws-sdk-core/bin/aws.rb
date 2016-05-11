@@ -96,8 +96,7 @@ require 'aws-sdk-core'
 
 module Aws
   class << self
-    Partitions.service_models.each_pair do |svc_name, _|
-
+    Aws::SERVICE_MODULE_NAMES.each do |svc_name|
       gem_path = "../../../services/aws-sdk-#{svc_name.downcase}/lib"
       gem_path = File.expand_path(gem_path, __FILE__)
       $LOAD_PATH.unshift(gem_path) if File.directory?(gem_path)
