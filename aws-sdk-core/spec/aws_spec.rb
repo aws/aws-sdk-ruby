@@ -120,8 +120,8 @@ module Aws
 
     it 'loads all services by default' do
       eager_loader = Aws.eager_autoload!
-      SERVICE_MODULE_NAMES.each do |svc_name|
-        expect(eager_loader.loaded).to include(Aws.const_get(svc_name))
+      BuildTool::Services.each do |svc|
+        expect(eager_loader.loaded).to include(Aws.const_get(svc.name))
       end
     end
 
