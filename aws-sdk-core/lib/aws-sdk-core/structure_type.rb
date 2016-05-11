@@ -38,6 +38,19 @@ module Aws
       Object.instance_method(:inspect).bind(self).call
     end
 
+    # @api private
+    def members
+      self.class.shape.member_names
+    end
+
+    def values
+      Enumerator.new do |y|
+        each_pair do |_, value|
+          y.yield(value)
+        end
+      end
+    end
+
     private
 
     def attribute_enumerator

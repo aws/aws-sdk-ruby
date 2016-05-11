@@ -1,5 +1,12 @@
 # TODO
 
+* Move service specific customizations from aws-sdk-core into service gems.
+
+  * DynamoDB simple attribute
+  * S3 plugins
+  * Glacier
+  * etc
+
 * Add a YARD tag for each of the services to document which gem it is available
   from.
 

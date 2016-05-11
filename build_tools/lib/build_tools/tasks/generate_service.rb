@@ -17,6 +17,7 @@ module BuildTools
             build_version_file(gem_name, gem_dir, options)
             build_gemspec(gem_name, gem_dir, options)
             build_src(gem_name, gem_dir, options)
+            build_customizations(gem_name, gem_dir, options)
 
           end
           task.add_description("Builds the code for Aws::#{service.name}")
@@ -27,10 +28,17 @@ module BuildTools
 
         def build_src(gem_name, gem_dir, options)
           g = AwsSdkCodeGenerator::Generator.new(options) do |svc_module|
-            Customizations.apply_svc_module_customizations(svc_module)
+            svc_module.require_relative("#{gem_name}/customizations.rb")
           end
           g.generate_src_files(prefix:gem_name).each do |path, contents|
             write_file(File.join(gem_dir, 'lib', path), contents)
+          end
+        end
+
+        def build_customizations(gem_name, gem_dir, options)
+          path = "#{gem_dir}/lib/#{gem_name}/customizations.rb"
+          unless File.exists?(path)
+            write_file(path, "\n")
           end
         end
 

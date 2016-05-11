@@ -156,9 +156,6 @@ module Aws
   module Plugins
     autoload :APIGatewayHeader, 'aws-sdk-core/plugins/api_gateway_header'
     autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
-    autoload :DynamoDBExtendedRetries, 'aws-sdk-core/plugins/dynamodb_extended_retries'
-    autoload :DynamoDBSimpleAttributes, 'aws-sdk-core/plugins/dynamodb_simple_attributes'
-    autoload :DynamoDBCRC32Validation, 'aws-sdk-core/plugins/dynamodb_crc32_validation'
     autoload :EC2CopyEncryptedSnapshot, 'aws-sdk-core/plugins/ec2_copy_encrypted_snapshot'
     autoload :EC2RegionValidation, 'aws-sdk-core/plugins/ec2_region_validation'
     autoload :GlacierAccountId, 'aws-sdk-core/plugins/glacier_account_id'
@@ -490,33 +487,6 @@ module Aws
 #    autoload :BucketRegionCache, 'aws-sdk-core/s3/bucket_region_cache'
 #    # @api private
 #    BUCKET_REGIONS = BucketRegionCache.new
-#  end
-#
-#  module DynamoDB
-#    autoload :AttributeValue, 'aws-sdk-core/dynamodb/attribute_value'
-#    class Client
-#      def data_to_http_resp(operation_name, data)
-#        api = config.api
-#        operation = api.operation(operation_name)
-#        translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
-#        translator = translator.new(operation.output, :marshal)
-#        data = translator.apply(data)
-#        ParamValidator.validate!(operation.output, data)
-#        protocol_helper.stub_data(api, operation, data)
-#      end
-#
-#      def stub_data(operation_name, data = {})
-#        if config.simple_attributes
-#          rules = config.api.operation(operation_name).output
-#          translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
-#          data = translator.apply(rules, :marshal, data)
-#          data = super(operation_name, data)
-#          translator.apply(rules, :unmarshal, data)
-#        else
-#          super
-#        end
-#      end
-#    end
 #  end
 
 end
