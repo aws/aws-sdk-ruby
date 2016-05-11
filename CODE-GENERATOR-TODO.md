@@ -1,5 +1,8 @@
 # TODO
 
+* Add a YARD tag for each of the services to document which gem it is available
+  from.
+
 * Support mixins/customizations of generated source code. This currently
   affects S3, DynamoDB in aws-sdk-core, and S3, SNS, SQS, EC2, IAM from
   resources.
