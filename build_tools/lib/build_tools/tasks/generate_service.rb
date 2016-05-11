@@ -26,7 +26,9 @@ module BuildTools
         private
 
         def build_src(gem_name, gem_dir, options)
-          g = AwsSdkCodeGenerator::Generator.new(options)
+          g = AwsSdkCodeGenerator::Generator.new(options) do |svc_module|
+            Customizations.apply_svc_module_customizations(svc_module)
+          end
           g.generate_src_files(prefix:gem_name).each do |path, contents|
             write_file(File.join(gem_dir, 'lib', path), contents)
           end

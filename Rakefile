@@ -16,7 +16,7 @@ Dir.glob("#{$REPO_ROOT}/services/*").each do |svc|
   $LOAD_PATH.unshift(File.join(svc, 'lib'))
 end
 $LOAD_PATH.unshift(File.join($REPO_ROOT, 'aws-sdk-code-generator', 'lib'))
-$LOAD_PATH.unshift(File.join($REPO_ROOT, 'lib'))
+$LOAD_PATH.unshift(File.join($REPO_ROOT, 'build_tools', 'lib'))
 
 require 'aws-sdk'
 

@@ -37,6 +37,45 @@ module BuildTools
         @plugins_to_remove[svc_name]
       end
 
+      def apply_svc_module_customizations(svc_module)
+        if svc_module.name == 'DynamoDB'
+
+          svc_module.require('aws-sdk-core/dynamodb/attribute_value')
+
+          svc_module.class('Client') do |client_class|
+            client_class.method(:stub_data) do |m|
+              m.param(:operation_name)
+              m.param(:data, default: {})
+              m.code(<<-CODE)
+if config.simple_attributes
+  rules = config.api.operation(operation_name).output
+  translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
+  data = translator.apply(rules, :marshal, data)
+  data = super(operation_name, data)
+  translator.apply(rules, :unmarshal, data)
+else
+  super
+end
+              CODE
+            end
+            client_class.method(:data_to_http_resp, access: :private) do |m|
+              m.param(:operation_name)
+              m.param(:data)
+              m.code(<<-CODE)
+api = config.api
+operation = api.operation(operation_name)
+translator = Plugins::DynamoDBSimpleAttributes::ValueTranslator
+translator = translator.new(operation.output, :marshal)
+data = translator.apply(data)
+ParamValidator.validate!(operation.output, data)
+protocol_helper.stub_data(api, operation, data)
+              CODE
+            end
+          end
+
+        end
+      end
+
     end
 
     plugins('APIGateway',
