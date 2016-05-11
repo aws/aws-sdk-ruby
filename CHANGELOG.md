@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.3 (2016-05-11)
 ------------------
 
 * Feature - Aws::StorageGateway - Minor API update.
