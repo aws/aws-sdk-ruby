@@ -96,16 +96,23 @@ require 'aws-sdk-core'
 
 module Aws
   class << self
-    SERVICE_MODULE_NAMES.each do |svc_name|
+    Partitions.service_models.each_pair do |svc_name, _|
+
+      gem_path = "../../../services/aws-sdk-#{svc_name.downcase}/lib"
+      gem_path = File.expand_path(gem_path, __FILE__)
+      $LOAD_PATH.unshift(gem_path) if File.directory?(gem_path)
+
       define_method(svc_name.downcase) do |options={}|
-        const_get(svc_name).const_get(:Client).new(options)
+        require "aws-sdk-#{svc_name.downcase}"
+        client = const_get(svc_name).const_get(:Client).new(options)
+        resource = const_get(svc_name).const_get(:Resource).new(client: client)
+        client.instance_variable_set("@resource", resource)
+        client.extend(Module.new do
+          def resource; @resource; end
+        end)
+        client
       end
-    end
-  end
-  class Client
-    def resource
-      namespace = Aws.const_get(self.class.name.split('::')[1])
-      namespace::Resource.new(client: self)
+
     end
   end
 end
@@ -119,11 +126,6 @@ end
     require(opt_lib)
   rescue LoadError
   end
-end
-
-Aws::SERVICE_MODULE_NAMES.each do |svc|
-  dir = File.join(File.dirname(__FILE__), '..', '..', 'services', "aws-sdk-#{svc.downcase}", 'lib')
-  $LOAD_PATH.unshift(dir) if File.directory?(dir)
 end
 
 # configure the aws-sdk gem

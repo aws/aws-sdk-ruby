@@ -160,13 +160,16 @@ module Aws
       # @api private
       def service_ids
         @service_ids ||= begin
-          services = "#{File.dirname(__FILE__)}/../../service-models.json"
-          services = Aws::Json.load_file(services)
-          services.inject({}) do |ids, (name, svc)|
+          service_models.inject({}) do |ids, (name, svc)|
             ids[name] = svc['endpoint'] #if svc['endpoint']
             ids
           end
         end
+      end
+
+      # @api private
+      def service_models
+        Json.load_file("#{File.dirname(__FILE__)}/../../service-models.json")
       end
 
     end
