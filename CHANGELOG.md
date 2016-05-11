@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElasticMapReduce - Update Aws::ElasticMapReduce::Client#list_instances
+  API to have filter on instance state.
+
 * Issue - Aws::Xml::Parser - Resolved an concurrency issue with the XML parser
   related to chosing the default parsing engine.
 
