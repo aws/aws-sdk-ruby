@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::StorageGateway - Minor API update.
+
 * Feature - Aws::ElasticMapReduce - Update Aws::ElasticMapReduce::Client#list_instances
   API to have filter on instance state.
 
