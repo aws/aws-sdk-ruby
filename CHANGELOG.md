@@ -8,6 +8,8 @@ Unreleased Changes
   create and share documents. Documents can be shared privately with other
   AWS accounts, or publically to all accounts.
 
+* Feature - Aws::EC2 - Added support for identifying stale security groups.
+
 2.3.3 (2016-05-11)
 ------------------
 
