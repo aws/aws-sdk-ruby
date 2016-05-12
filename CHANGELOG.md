@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.4 (2016-05-12)
 ------------------
 
 * Feature - Aws::ApplicationDiscoveryService - Added support for the new

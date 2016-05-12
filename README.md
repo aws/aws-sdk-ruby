@@ -230,6 +230,7 @@ to be backwards compatible.
 
 | Service Name                             | Service Class                | API Version |
 | ---------------------------------------- | ---------------------------- | ----------- |
+| AWS Application Discovery Service        | ApplicationDiscoveryService  | 2015-11-01  |
 | AWS Certificate Manager                  | ACM                          | 2015-12-08  |
 | AWS CloudFormation                       | CloudFormation               | 2010-05-15  |
 | AWS CloudTrail                           | CloudTrail                   | 2013-11-01  |
