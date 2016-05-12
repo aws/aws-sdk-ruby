@@ -10,6 +10,8 @@ Unreleased Changes
 
 * Feature - Aws::EC2 - Added support for identifying stale security groups.
 
+* Feature - Aws::CloudFormation - Added support for ExceptionStatus to ChangeSets.
+
 2.3.3 (2016-05-11)
 ------------------
 
