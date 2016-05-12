@@ -152,9 +152,13 @@ module AwsSdkCodeGenerator
           shape_defs.each do |shape_name, shape|
             if shape['type'] == 'structure' && !shape['error'] && !shape['exception']
               required = Set.new(shape['required'] || [])
-              c << "#{shape_name}[:struct_class] = Types::#{shape_name}"
               shape['members'].each do |member_name, member_ref|
                 c << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
+              end
+              c << "#{shape_name}[:struct_class] = Types::#{shape_name}"
+              if payload = shape['payload']
+                c << "#{shape_name}[:payload] = :#{underscore(payload)}"
+                c << "#{shape_name}[:payload_member] = #{shape_name}.member(:#{underscore(payload)})"
               end
             elsif shape['type'] == 'list'
               c << "#{shape_name}.member = #{shape_ref(shape['member'])}"

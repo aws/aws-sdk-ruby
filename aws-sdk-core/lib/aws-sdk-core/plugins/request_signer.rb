@@ -64,7 +64,6 @@ module Aws
           'v4'      => Signers::V4,
           'v3https' => Signers::V3,
           'v2'      => Signers::V2,
-          's3'      => Signers::S3,
         }
 
         STS_UNSIGNED_REQUESTS = Set.new(%w(
@@ -121,16 +120,13 @@ module Aws
       end
 
       def add_handlers(handlers, config)
-        # See the S3RequestSignerPlugin for Amazon S3 signature logic
-        unless config.sigv4_name == 's3'
-          operations = []
-          config.api.operation_names.each do |operation_name|
-            if config.api.operation(operation_name)['authtype'] != 'none'
-              operations << operation_name
-            end
+        operations = []
+        config.api.operation_names.each do |operation_name|
+          if config.api.operation(operation_name)['authtype'] != 'none'
+            operations << operation_name
           end
-          handlers.add(Handler, step: :sign, operations: operations)
         end
+        handlers.add(Handler, step: :sign, operations: operations)
       end
 
     end
