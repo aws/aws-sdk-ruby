@@ -187,7 +187,7 @@ module Aws
           end
 
           def translate(ref, value)
-            if ref.shape.name == 'AttributeValue'
+            if ClientApi::AttributeValue === ref.shape
               AttributeValue.new.send(@mode, value)
             else
               translate_complex(ref, value)
