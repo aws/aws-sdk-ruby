@@ -11,8 +11,7 @@ module AwsSdkCodeGenerator
           m.docstring('Documentation here.')
           expect(m.to_s).to eq(<<-CODE)
 # Documentation here.
-module ModuleName
-end
+module ModuleName; end
           CODE
         end
 
@@ -52,11 +51,10 @@ end
 
       end
 
-      it 'generates simple methods' do
+      it 'can generate empty modules' do
         m = Dsl::Module.new('ModuleName')
         expect(m.to_s).to eq(<<-CODE)
-module ModuleName
-end
+module ModuleName; end
         CODE
       end
 
@@ -153,13 +151,11 @@ end
         bar_module = Dsl::Module.new('Bar')
         foo_module.add(bar_module)
         expect(bar_module.to_s).to eq(<<-CODE)
-module Bar
-end
+module Bar; end
         CODE
         expect(foo_module.to_s).to eq(<<-CODE)
 module Foo
-  module Bar
-  end
+  module Bar; end
 end
         CODE
       end
@@ -277,18 +273,19 @@ end
           m.module('NestedModule') do |m2|
             m2.module('DeeplyNestedModule') do |m3|
               m3.require('other-gem')
+              m3.top(:newline)
               m3.require_relative('path/to/require')
             end
           end
         end
         expect(dsl.to_s).to eq(<<-CODE)
 require 'other-gem'
+
 require_relative 'path/to/require'
 
 module ModuleName
   module NestedModule
-    module DeeplyNestedModule
-    end
+    module DeeplyNestedModule; end
   end
 end
         CODE

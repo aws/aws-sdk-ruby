@@ -17,7 +17,7 @@ module AwsSdkCodeGenerator
           expect(m.to_s).to eq(<<-CODE)
 # @return [Types::ShapeName]
 #   Returns the data for this {ResourceName}. Calls
-#   {Client#operation_name} if {#data_loaded?} is `false`."
+#   {Client#operation_name} if {#data_loaded?} is `false`.
 def data
   load unless @data
   @data
@@ -30,8 +30,7 @@ end
             'shape' => 'ShapeName',
           })
           expect(m.to_s).to eq(<<-CODE)
-# @raise [Errors::ResourceNotLoadableError] Raises this error if called
-#   when {#data_loaded?} if `false`.
+# @raise [Errors::ResourceNotLoadableError] Raises when {#data_loaded?} is `false`.
 # @return [Types::ShapeName]
 #   Returns the data for this {ResourceName}.
 def data

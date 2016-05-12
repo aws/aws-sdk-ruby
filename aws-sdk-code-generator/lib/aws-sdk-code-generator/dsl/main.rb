@@ -6,7 +6,7 @@ module AwsSdkCodeGenerator
 
       def initialize(root:nil, &block)
         @comments = Docstring.new(nil)
-        @require_statements = []
+        @top_content = []
         @code_objects = []
         @root = self
         yield(self) if block
@@ -37,11 +37,16 @@ module AwsSdkCodeGenerator
       alias :extend :extend_module
 
       def require(path)
-        @require_statements << "require '#{path}'"
+        @top_content << "require '#{path}'"
+      end
+
+      # Allows inserting top-of document content.
+      def top(string)
+        @root.instance_variable_get("@top_content") << string
       end
 
       def require_relative(path)
-        @require_statements << "require_relative '#{path}'"
+        @top_content << "require_relative '#{path}'"
       end
 
       def method(name, **options, &block)
@@ -71,10 +76,10 @@ module AwsSdkCodeGenerator
         lines.concat(@comments.lines)
         lines << :newline unless @comments.empty?
 
-        @require_statements.each do |statement|
+        @top_content.each do |statement|
           lines << statement
         end
-        lines << :newline unless @require_statements.empty?
+        lines << :newline unless @top_content.empty?
 
         @code_objects.each.with_index do |code_obj, n|
           lines.concat(code_obj.lines)
