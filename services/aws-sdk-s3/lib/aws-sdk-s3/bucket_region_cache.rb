@@ -71,5 +71,9 @@ module Aws
       alias to_h to_hash
 
     end
+
+    # @api private
+    BUCKET_REGIONS = BucketRegionCache.new
+
   end
 end
