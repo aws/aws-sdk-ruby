@@ -38,6 +38,7 @@ module AwsSdkCodeGenerator
     def generate_src
       root_mod, svc_mod = build_modules
       root_mod.require('aws-sdk-core')
+      root_mod.top(:newline)
       svc_mod.docstring(service_docstring)
       each_module do |mod|
         svc_mod.add(mod)
@@ -94,6 +95,7 @@ module AwsSdkCodeGenerator
       )
       root_mod, svc_mod = build_modules
       root_mod.require('aws-sdk-core')
+      root_mod.top(:newline)
       svc_mod.docstring(service_docstring)
       autoloads.apply(svc_mod)
       @callback.call(svc_mod) if @callback
