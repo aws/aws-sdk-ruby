@@ -16,8 +16,7 @@ module AwsSdkCodeGenerator
             end
             if !@load
               docstring(<<-DOCSTRING)
-@raise [Errors::ResourceNotLoadableError] Raises this error if called
-  when {#data_loaded?} if `false`.
+@raise [Errors::ResourceNotLoadableError] Raises when {#data_loaded?} is `false`.
               DOCSTRING
             end
           else
@@ -34,7 +33,7 @@ module AwsSdkCodeGenerator
           if @load
             <<-DOCSTRING
 Returns the data for this {#{@resource_name}}. Calls
-{Client##{underscore(@load)}} if {#data_loaded?} is `false`."
+{Client##{underscore(@load)}} if {#data_loaded?} is `false`.
             DOCSTRING
           else
             "Returns the data for this {#{@resource_name}}."
