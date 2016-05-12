@@ -30,8 +30,10 @@ module AwsSdkCodeGenerator
         @root.require(path)
       end
 
-      def docstring(docstring)
-        @docstring = Dsl::Docstring.new(docstring)
+      def docstring(docstring = nil)
+        @docstring ||= Dsl::Docstring.new
+        @docstring.append(docstring) unless docstring.nil?
+        @docstring
       end
 
       def require_relative(path)
@@ -73,7 +75,7 @@ module AwsSdkCodeGenerator
       def lines
         code = []
         code.concat(@docstring.lines)
-        code << open_module
+        code += open_module
         code << :newline if padded?(0)
 
         @code_objects.each.with_index do |code_object, n|
@@ -81,14 +83,18 @@ module AwsSdkCodeGenerator
           code << :newline if separator?(n)
         end
 
-        code << close_module
+        if @code_objects.empty?
+          code[-1] += "; end"
+        else
+          code << close_module
+        end
         code
       end
 
       private
 
       def open_module
-        "module #{@name}"
+        ["module #{@name}"]
       end
 
       def close_module

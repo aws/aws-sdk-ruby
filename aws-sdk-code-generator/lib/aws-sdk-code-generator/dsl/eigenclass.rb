@@ -7,7 +7,7 @@ module AwsSdkCodeGenerator
       end
 
       def open_module
-        "class << self"
+        ["class << self"]
       end
 
     end
