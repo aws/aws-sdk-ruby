@@ -1,6 +1,6 @@
 module Aws
   module Plugins
-    class S3GetBucketLocationFix < Seahorse::Client::Plugin
+    class GetBucketLocationFix < Seahorse::Client::Plugin
 
       class Handler < Seahorse::Client::Handler
 

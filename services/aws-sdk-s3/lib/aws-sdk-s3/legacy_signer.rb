@@ -4,8 +4,8 @@ require 'openssl'
 require 'webrick/httputils'
 
 module Aws
-  module Signers
-    class S3
+  module S3
+    class LegacySigner
 
       SIGNED_QUERYSTRING_PARAMS = Set.new(%w(
 
@@ -125,7 +125,7 @@ module Aws
         if bucket = params[:bucket]
           bucket = bucket.value
           ssl = endpoint.scheme == 'https'
-          if Plugins::S3BucketDns.dns_compatible?(bucket, ssl) && !@force_path_style
+          if Plugins::BucketDns.dns_compatible?(bucket, ssl) && !@force_path_style
             parts << "/#{bucket}"
           end
         end

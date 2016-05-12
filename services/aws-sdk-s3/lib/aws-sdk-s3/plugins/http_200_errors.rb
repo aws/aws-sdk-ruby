@@ -6,7 +6,7 @@ module Aws
     # injects a handler that will parse 200 response bodies for potential
     # errors, allowing them to be retried.
     # @api private
-    class S3Http200Errors < Seahorse::Client::Plugin
+    class Http200Errors < Seahorse::Client::Plugin
 
       class Handler < Seahorse::Client::Handler
 

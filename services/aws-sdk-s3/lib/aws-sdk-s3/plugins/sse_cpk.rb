@@ -7,7 +7,7 @@ module Aws
     #   When `true`, the endpoint **must** be HTTPS for all operations
     #   where server-side-encryption is used with customer-provided keys.
     #   This should only be disabled for local testing.
-    class S3SseCpk < Seahorse::Client::Plugin
+    class SseCpk < Seahorse::Client::Plugin
 
       option(:require_https_for_sse_cpk, true)
 

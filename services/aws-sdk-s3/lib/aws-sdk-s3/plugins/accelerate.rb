@@ -12,7 +12,7 @@ module Aws
     #   for all object operations. You must first enable
     #   accelerate for each bucket. [Go here for more information](http://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html).
     #
-    class S3Accelerate < Seahorse::Client::Plugin
+    class Accelerate < Seahorse::Client::Plugin
 
       option(:use_accelerate_endpoint, false)
 

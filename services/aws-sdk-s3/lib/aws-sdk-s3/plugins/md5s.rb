@@ -9,7 +9,7 @@ module Aws
     #   sends a body.  When `false`, MD5 checksums will only be computed
     #   for operations that require them.  Checksum errors returned by Amazon
     #   S3 are automatically retried up to `:retry_limit` times.
-    class S3Md5s < Seahorse::Client::Plugin
+    class Md5s < Seahorse::Client::Plugin
 
       # Amazon S3 requires these operations to have an MD5 checksum
       REQUIRED_OPERATIONS = [

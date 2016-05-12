@@ -4,7 +4,7 @@ module Aws
   module Plugins
     # This plugin is an implementation detail and may be modified.
     # @api private
-    class S3RequestSigner < Seahorse::Client::Plugin
+    class RequestSigner < Seahorse::Client::Plugin
 
       option(:signature_version, 'v4')
 
@@ -33,7 +33,7 @@ module Aws
         end
 
         def apply_s3_legacy_signature(context)
-          Signers::S3.sign(context)
+          LegacySigner.sign(context)
         end
 
       end

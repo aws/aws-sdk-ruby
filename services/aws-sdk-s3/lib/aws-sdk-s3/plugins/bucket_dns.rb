@@ -8,7 +8,7 @@ module Aws
     #   When set to `true`, the bucket name is always left in the
     #   request URI and never moved to the host as a sub-domain.
     #
-    class S3BucketDns < Seahorse::Client::Plugin
+    class BucketDns < Seahorse::Client::Plugin
 
       # When set to `false` DNS compatible bucket names are moved from
       # the request URI path to the host as a subdomain, unless the request
@@ -38,7 +38,7 @@ module Aws
           endpoint = context.http_request.endpoint
           if
             bucket_name &&
-            S3BucketDns.dns_compatible?(bucket_name, https?(endpoint)) &&
+            BucketDns.dns_compatible?(bucket_name, https?(endpoint)) &&
             context.operation_name != 'get_bucket_location'
           then
             move_bucket_to_subdomain(bucket_name, endpoint)

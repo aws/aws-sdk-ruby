@@ -1,6 +1,6 @@
 module Aws
   module Plugins
-    class S3Expect100Continue < Seahorse::Client::Plugin
+    class Expect100Continue < Seahorse::Client::Plugin
 
       def add_handlers(handlers, config)
         if config.http_continue_timeout && config.http_continue_timeout > 0

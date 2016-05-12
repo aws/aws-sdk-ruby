@@ -141,20 +141,6 @@ module BuildTools
       api['metadata'].delete('signatureVersion')
     end
 
-    plugins('S3', add: %w(
-      Aws::Plugins::S3Accelerate
-      Aws::Plugins::S3BucketDns
-      Aws::Plugins::S3Expect100Continue
-      Aws::Plugins::S3Http200Errors
-      Aws::Plugins::S3GetBucketLocationFix
-      Aws::Plugins::S3LocationConstraint
-      Aws::Plugins::S3Md5s
-      Aws::Plugins::S3Redirects
-      Aws::Plugins::S3SseCpk
-      Aws::Plugins::S3UrlEncodedKeys
-      Aws::Plugins::S3RequestSigner
-    ))
-
     api('SQS') do |api|
       api['metadata']['errorPrefix'] = 'AWS.SimpleQueueService.'
     end

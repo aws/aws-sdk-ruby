@@ -20,7 +20,7 @@ module Aws
     # * {S3::Client#list_multipart_uploads}
     # * {S3::Client#list_object_versions}
     #
-    class S3UrlEncodedKeys < Seahorse::Client::Plugin
+    class UrlEncodedKeys < Seahorse::Client::Plugin
 
       class Handler < Seahorse::Client::Handler
 

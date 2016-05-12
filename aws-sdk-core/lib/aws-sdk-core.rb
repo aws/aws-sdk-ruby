@@ -171,17 +171,6 @@ module Aws
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
     autoload :RetryErrors, 'aws-sdk-core/plugins/retry_errors'
     autoload :Route53IdFix, 'aws-sdk-core/plugins/route_53_id_fix'
-    autoload :S3Accelerate, 'aws-sdk-core/plugins/s3_accelerate'
-    autoload :S3BucketDns, 'aws-sdk-core/plugins/s3_bucket_dns'
-    autoload :S3Expect100Continue, 'aws-sdk-core/plugins/s3_expect_100_continue'
-    autoload :S3GetBucketLocationFix, 'aws-sdk-core/plugins/s3_get_bucket_location_fix'
-    autoload :S3Http200Errors, 'aws-sdk-core/plugins/s3_http_200_errors'
-    autoload :S3LocationConstraint, 'aws-sdk-core/plugins/s3_location_constraint'
-    autoload :S3Md5s, 'aws-sdk-core/plugins/s3_md5s'
-    autoload :S3Redirects, 'aws-sdk-core/plugins/s3_redirects'
-    autoload :S3RequestSigner, 'aws-sdk-core/plugins/s3_request_signer'
-    autoload :S3SseCpk, 'aws-sdk-core/plugins/s3_sse_cpk'
-    autoload :S3UrlEncodedKeys, 'aws-sdk-core/plugins/s3_url_encoded_keys'
     autoload :SQSQueueUrls, 'aws-sdk-core/plugins/sqs_queue_urls'
     autoload :SQSMd5s, 'aws-sdk-core/plugins/sqs_md5s'
     autoload :StubResponses, 'aws-sdk-core/plugins/stub_responses'
@@ -227,7 +216,6 @@ module Aws
   # @api private
   module Signers
     autoload :Base, 'aws-sdk-core/signers/base'
-    autoload :S3, 'aws-sdk-core/signers/s3'
     autoload :V2, 'aws-sdk-core/signers/v2'
     autoload :V3, 'aws-sdk-core/signers/v3'
     autoload :V4, 'aws-sdk-core/signers/v4'
@@ -481,12 +469,5 @@ module Aws
       end
     end
   end
-
-#  module S3
-#    autoload :Presigner, 'aws-sdk-core/s3/presigner'
-#    autoload :BucketRegionCache, 'aws-sdk-core/s3/bucket_region_cache'
-#    # @api private
-#    BUCKET_REGIONS = BucketRegionCache.new
-#  end
 
 end

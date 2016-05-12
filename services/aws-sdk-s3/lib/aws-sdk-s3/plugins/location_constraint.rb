@@ -4,7 +4,7 @@ module Aws
     # When making calls to {S3::Client#create_bucket} outside the
     # "classic" region, the bucket location constraint must be specified.
     # This plugin auto populates the constraint to the configured region.
-    class S3LocationConstraint < Seahorse::Client::Plugin
+    class LocationConstraint < Seahorse::Client::Plugin
 
       class Handler < Seahorse::Client::Handler
 
