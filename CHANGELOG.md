@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationDiscoveryService - Added support for the new
+  AWS Application Discovery Service.
+
 2.3.3 (2016-05-11)
 ------------------
 
