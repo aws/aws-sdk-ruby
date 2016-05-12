@@ -4,6 +4,10 @@ Unreleased Changes
 * Feature - Aws::ApplicationDiscoveryService - Added support for the new
   AWS Application Discovery Service.
 
+* Feature - Aws::SSM - EC2 Run Command has been updated to allow customers to
+  create and share documents. Documents can be shared privately with other
+  AWS accounts, or publically to all accounts.
+
 2.3.3 (2016-05-11)
 ------------------
 
