@@ -8,6 +8,7 @@ module Aws
         services = Aws::SERVICE_MODULE_NAMES.sort
         services -= ['CloudSearchDomain'] # user endpoints only
         services -= ['DeviceFarm'] # us-west-2 only
+        services -= ['ApplicationDiscoveryService'] # us-west-2 only
         services -= ['EFS'] # us-west-2 only
         services
       end
