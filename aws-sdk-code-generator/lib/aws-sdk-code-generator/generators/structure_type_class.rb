@@ -18,7 +18,7 @@ module AwsSdkCodeGenerator
 
         super(name, extends: "Aws::Structure.new(#{member_names})")
 
-        docstring(documentation(@shape))
+        docstring(documentation(@shape).to_s)
         @shape['members'].each do |member_name, member_ref|
           docstring(attribute_macro(member_name, member_ref))
           docstring("\n")

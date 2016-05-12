@@ -85,12 +85,13 @@ module AwsSdkCodeGenerator
       ref['streaming'] || shape['streaming']
     end
 
-    def documentation(ref)
-      docstring = ref['documentation'] || shape(ref)['documentation']
+    def documentation(ref_or_shape)
+      shape = ref_or_shape.key?('type') ? ref_or_shape : shape(ref_or_shape)
+      docstring = ref_or_shape['documentation'] || shape['documentation']
       if docstring
         markdown(docstring)
       else
-        nil
+        ''
       end
     end
 
