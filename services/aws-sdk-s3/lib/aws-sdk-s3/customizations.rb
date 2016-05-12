@@ -15,6 +15,22 @@ require 'aws-sdk-s3/plugins/request_signer'
 require 'aws-sdk-s3/plugins/sse_cpk'
 require 'aws-sdk-s3/plugins/url_encoded_keys'
 
+# utility classes
+require 'aws-sdk-s3/encryption'
+require 'aws-sdk-s3/file_part'
+require 'aws-sdk-s3/file_uploader'
+require 'aws-sdk-s3/multipart_upload'
+require 'aws-sdk-s3/multipart_upload_error'
+require 'aws-sdk-s3/object_copier'
+require 'aws-sdk-s3/object_multipart_copier'
+require 'aws-sdk-s3/presigned_post'
+
+# additions to generated classes
+require 'aws-sdk-s3/customizations/bucket'
+require 'aws-sdk-s3/customizations/object'
+require 'aws-sdk-s3/customizations/object_summary'
+require 'aws-sdk-s3/customizations/multipart_upload'
+
 module Aws
   module S3
 

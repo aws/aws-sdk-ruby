@@ -125,7 +125,7 @@ module Aws
         else
           bucket, key = options[:copy_source].match(/([^\/]+?)\/(.+)/)[1,2]
         end
-        
+
         key = CGI.unescape(key)
         opts = { bucket: bucket, key: key }
         opts[:version_id] = version_id if version_id
@@ -153,9 +153,9 @@ module Aws
       end
 
       API_OPTIONS = {
-        create_multipart_upload: options_for('CreateMultipartUploadRequest'),
-        upload_part_copy: options_for('UploadPartCopyRequest'),
-        complete_multipart_upload: options_for('CompleteMultipartUploadRequest'),
+        create_multipart_upload: Types::CreateMultipartUploadRequest.members,
+        upload_part_copy: Types::UploadPartCopyRequest.members,
+        complete_multipart_upload: Types::CompleteMultipartUploadRequest.members,
       }
 
       class PartQueue
