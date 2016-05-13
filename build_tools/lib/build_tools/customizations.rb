@@ -145,11 +145,6 @@ module BuildTools
       api['metadata']['errorPrefix'] = 'AWS.SimpleQueueService.'
     end
 
-    plugins('SQS', add: %w(
-      Aws::Plugins::SQSQueueUrls
-      Aws::Plugins::SQSMd5s
-    ))
-
     plugins('SWF', add: %w(
       Aws::Plugins::SWFReadTimeouts
     ))
