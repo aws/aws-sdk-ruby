@@ -54,12 +54,6 @@ module BuildTools
 
     end
 
-    plugins('CloudSearchDomain',
-      add: %w(Aws::Plugins::CSDConditionalSigning),
-      remove: %w(Aws::Plugins::RegionalEndpoint),
-    )
-
-
     api('EC2') do |api|
       if ENV['DOCSTRINGS']
         members = api['shapes']['CopySnapshotRequest']['members']
