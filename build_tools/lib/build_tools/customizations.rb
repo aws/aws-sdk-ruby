@@ -39,10 +39,6 @@ module BuildTools
 
     end
 
-    plugins('APIGateway',
-      add: %w(Aws::Plugins::APIGatewayHeader),
-    )
-
     api('CloudFront') do |api|
 
       api['shapes'].each do |_, shape|
@@ -95,12 +91,6 @@ module BuildTools
         end
       end
     end
-
-    plugins('Glacier', add: %w(
-      Aws::Plugins::GlacierAccountId
-      Aws::Plugins::GlacierApiVersion
-      Aws::Plugins::GlacierChecksums
-    ))
 
     api('ImportExport') do |api|
       api['operations'].each do |_, operation|

@@ -154,13 +154,9 @@ module Aws
   end
 
   module Plugins
-    autoload :APIGatewayHeader, 'aws-sdk-core/plugins/api_gateway_header'
     autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
     autoload :EC2CopyEncryptedSnapshot, 'aws-sdk-core/plugins/ec2_copy_encrypted_snapshot'
     autoload :EC2RegionValidation, 'aws-sdk-core/plugins/ec2_region_validation'
-    autoload :GlacierAccountId, 'aws-sdk-core/plugins/glacier_account_id'
-    autoload :GlacierApiVersion, 'aws-sdk-core/plugins/glacier_api_version'
-    autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
@@ -171,8 +167,6 @@ module Aws
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
     autoload :RetryErrors, 'aws-sdk-core/plugins/retry_errors'
     autoload :Route53IdFix, 'aws-sdk-core/plugins/route_53_id_fix'
-    autoload :SQSQueueUrls, 'aws-sdk-core/plugins/sqs_queue_urls'
-    autoload :SQSMd5s, 'aws-sdk-core/plugins/sqs_md5s'
     autoload :StubResponses, 'aws-sdk-core/plugins/stub_responses'
     autoload :SWFReadTimeouts, 'aws-sdk-core/plugins/swf_read_timeouts'
     autoload :UserAgent, 'aws-sdk-core/plugins/user_agent'
