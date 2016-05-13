@@ -5,31 +5,31 @@ module Aws
 
         def apply(response)
           # TODO : remove this unless check once response stubbing is fixed
-          unless response.data
-            response.data = response.context.operation.output.shape.struct_class.new
+          if rules = response.context.operation.output
+            response.data = rules.shape.struct_class.new
+            extract_status_code(rules, response)
+            extract_headers(rules, response)
+            extract_body(rules, response)
+          else
+            response.data = EmptyStructure.new
           end
-          extract_status_code(response)
-          extract_headers(response)
-          extract_body(response)
         end
 
         private
 
-        def extract_status_code(response)
-          status_code = StatusCode.new(response.context.operation.output)
+        def extract_status_code(rules, response)
+          status_code = StatusCode.new(rules)
           status_code.apply(response.context.http_response, response.data)
         end
 
-        def extract_headers(response)
-          headers = Headers.new(response.context.operation.output)
+        def extract_headers(rules, response)
+          headers = Headers.new(rules)
           headers.apply(response.context.http_response, response.data)
         end
 
-        def extract_body(response)
-          Body.new(
-            parser_class(response),
-            response.context.operation.output,
-          ).apply(response.context.http_response.body, response.data)
+        def extract_body(rules, response)
+          Body.new(parser_class(response), rules).
+            apply(response.context.http_response.body, response.data)
         end
 
         def parser_class(response)

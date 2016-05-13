@@ -86,8 +86,11 @@ module AwsSdkCodeGenerator
             c << "o.http_method = #{operation['http']['method'].inspect}"
             c << "o.http_request_uri = #{operation['http']['requestUri'].inspect}"
             c << "o.deprecated = true" if operation['deprecated']
-            c << "o.input = #{operation_shape_ref(operation['input'])}"
-            c << "o.output = #{operation_shape_ref(operation['output'])}"
+            %w(input output).each do |mode|
+              if operation[mode]
+                c << "o.#{mode} = #{operation_shape_ref(operation[mode])}"
+              end
+            end
             Array(operation['errors']).each do |error|
               c << "o.errors << #{operation_shape_ref(error)}"
             end

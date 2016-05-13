@@ -26,7 +26,7 @@ module Aws
         build_request(context)
         @handler.call(context).on_success do |response|
           response.error = nil
-          response.data = parse_xml(context)
+          response.data = parse_xml(context) || EmptyStructure.new
         end
       end
 
@@ -49,12 +49,8 @@ module Aws
       end
 
       def parse_xml(context)
-        if context.operation.output
-          data = Xml::Parser.new(rules(context)).parse(xml(context))
-          remove_wrapper(data, context)
-        else
-          EmptyStructure.new
-        end
+        data = Xml::Parser.new(rules(context)).parse(xml(context))
+        remove_wrapper(data, context)
       end
 
       def xml(context)
@@ -63,10 +59,12 @@ module Aws
 
       def rules(context)
         shape = Seahorse::Model::Shapes::StructureShape.new
-        shape.add_member(:result, ShapeRef.new(
-          shape: context.operation.output.shape,
-          location_name: context.operation.name + 'Result'
-        ))
+        if context.operation.output
+          shape.add_member(:result, ShapeRef.new(
+            shape: context.operation.output.shape,
+            location_name: context.operation.name + 'Result'
+          ))
+        end
         shape.struct_class = WRAPPER_STRUCT
         shape.add_member(:response_metadata, METADATA_REF)
         ShapeRef.new(shape: shape)

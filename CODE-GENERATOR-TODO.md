@@ -1,5 +1,8 @@
 # TODO
 
+* Verify protocol (un)marshallers and plugins that deal with output shapes
+  are functional with no input or output shape ref
+
 * Move EC2 protocol code into ec2 gem
 
 * Remove metadata from shapes, move these attributes onto the

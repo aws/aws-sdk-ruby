@@ -38,10 +38,11 @@ module Aws
       def parse_body(context)
         if simple_json?(context)
           Json.load(context.http_response.body_contents)
-        else
-          rules = context.operation.output
+        elsif rules = context.operation.output
           json = context.http_response.body_contents
           Parser.new(rules).parse(json == '' ? '{}' : json)
+        else
+          EmptyStructure.new
         end
       end
 
