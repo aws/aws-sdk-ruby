@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gemspec path: 'aws-sdk-core'
 
 gem 'rake', require: false
-gem 'byebug'
 
 if !ENV['PURE_RUBY']
   if ENV['OLD_OJ']

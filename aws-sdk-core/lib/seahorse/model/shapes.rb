@@ -156,6 +156,9 @@ module Seahorse
         # @return [Integer, nil]
         attr_accessor :max
 
+        # @return [Boolean]
+        attr_accessor :flattened
+
       end
 
       class StringShape < Shape

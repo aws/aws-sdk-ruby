@@ -143,6 +143,10 @@ module BuildTools
 
     api('SQS') do |api|
       api['metadata']['errorPrefix'] = 'AWS.SimpleQueueService.'
+      api['shapes']['StringList']['flattened'] = true
+      api['shapes']['BinaryList']['flattened'] = true
+      api['shapes']['MessageAttributeValue']['members']['StringListValues'].delete('flattened')
+      api['shapes']['MessageAttributeValue']['members']['BinaryListValues'].delete('flattened')
     end
 
     plugins('SWF', add: %w(
