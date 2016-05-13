@@ -23,7 +23,7 @@ module Aws
       add_plugin(Plugins::Redirects)
       add_plugin(Plugins::SseCpk)
       add_plugin(Plugins::UrlEncodedKeys)
-      add_plugin(S3::Plugins::RequestSigner)
+      add_plugin(Plugins::RequestSigner)
     end
   end
 end

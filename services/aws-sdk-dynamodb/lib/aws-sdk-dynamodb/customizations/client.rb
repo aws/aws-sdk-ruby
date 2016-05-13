@@ -6,9 +6,9 @@ module Aws
   module DynamoDB
     class Client
 
-      add_plugin(Aws::DynamoDB::Plugins::ExtendedRetries)
-      add_plugin(Aws::DynamoDB::Plugins::SimpleAttributes)
-      add_plugin(Aws::DynamoDB::Plugins::CRC32Validation)
+      add_plugin(Plugins::ExtendedRetries)
+      add_plugin(Plugins::SimpleAttributes)
+      add_plugin(Plugins::CRC32Validation)
 
       def stub_data(operation_name, data = {})
         if config.simple_attributes
