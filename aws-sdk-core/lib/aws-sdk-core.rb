@@ -154,17 +154,14 @@ module Aws
   end
 
   module Plugins
-    autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
-    autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
     autoload :ParamValidator, 'aws-sdk-core/plugins/param_validator'
     autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
     autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
     autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
     autoload :RetryErrors, 'aws-sdk-core/plugins/retry_errors'
-    autoload :Route53IdFix, 'aws-sdk-core/plugins/route_53_id_fix'
     autoload :StubResponses, 'aws-sdk-core/plugins/stub_responses'
     autoload :SWFReadTimeouts, 'aws-sdk-core/plugins/swf_read_timeouts'
     autoload :UserAgent, 'aws-sdk-core/plugins/user_agent'

@@ -104,17 +104,9 @@ module BuildTools
 
     end
 
-    plugins('MachineLearning', add: %w(
-      Aws::Plugins::MachineLearningPredictEndpoint
-    ))
-
     api('Route53') do |api|
       api['shapes']['PageMaxItems']['type'] = 'integer'
     end
-
-    plugins('Route53', add: %w(
-      Aws::Plugins::Route53IdFix
-    ))
 
     api('S3') do |api|
       api['metadata'].delete('signatureVersion')
