@@ -2,24 +2,20 @@ $REPO_ROOT = File.dirname(__FILE__)
 
 $VERSION = ENV['VERSION'] || File.read(File.join($REPO_ROOT, 'VERSION')).strip
 
-$GEM_NAMES = [
-  'aws-sdk-core',
-  'aws-sdk-resources',
-  'aws-sdk',
-]
-
-$GEM_NAMES.each do |gem_name|
-  $LOAD_PATH.unshift(File.join($REPO_ROOT, gem_name, 'lib'))
+%w(
+  aws-sdk
+  aws-sdk-core
+  aws-sdk-code-generator
+  build_tools
+).each do |dir|
+  $LOAD_PATH.unshift(File.join($REPO_ROOT, dir, 'lib'))
 end
 
 Dir.glob("#{$REPO_ROOT}/services/*").each do |svc|
   $LOAD_PATH.unshift(File.join(svc, 'lib'))
 end
-$LOAD_PATH.unshift(File.join($REPO_ROOT, 'aws-sdk-code-generator', 'lib'))
-$LOAD_PATH.unshift(File.join($REPO_ROOT, 'build_tools', 'lib'))
 
 require 'aws-sdk'
-
 Dir.glob('**/*.rake').each do |task_file|
   load task_file
 end

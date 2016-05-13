@@ -1,5 +1,23 @@
 # TODO
 
+* Remove the VERSION file from the repo root and replace with gem
+  specific versions
+
+* Move service specific specs from aws-sdk-resources and aws-sdk-core
+  into gem files.
+
+* Migrate resource interface docs from doc-src/plugins/resources.rb
+  and aws-sdk-resources/.../documentation into code generator
+
+* Migrate client api documentation from doc-src/plugins/apis.rb
+  into code generator
+
+* Document shared examples when build client operations
+
+* Decide the fate of Aws.add_service
+  - its not possible to support without a dependency on aws-sdk-code-generator
+  - minor API break if passing instance of API
+
 * Verify protocol (un)marshallers and plugins that deal with output shapes
   are functional with no input or output shape ref
 

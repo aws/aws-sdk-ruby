@@ -15,9 +15,6 @@ Seahorse::Util.irregular_inflections({
 module Aws
 
   # @api private
-  API_DIR = File.join(File.dirname(File.dirname(__FILE__)), 'apis')
-
-  # @api private
   # services
   SERVICE_MODULE_NAMES = %w(
     ACM
@@ -416,14 +413,7 @@ module Aws
       end
       options[:module_names] = ['Aws', svc_name.to_s]
       code = AwsSdkCodeGenerator::Generator.new(options).generate_src
-
-      begin
-        Object.module_eval(code)
-      rescue => error
-        puts code
-        raise error
-      end
-
+      Object.module_eval(code)
       svc_module = Aws.const_get(svc_name)
       @services[svc_name.to_s] = [svc_module, options]
       @service_added_callbacks.each do |callback|
@@ -433,29 +423,4 @@ module Aws
     end
 
   end
-
-  # enable response paging
-  service_added do |name, svc_module, options|
-    if paginators = options[:paginators]
-      paginators = Json.load_file(paginators) unless Hash === paginators
-      svc_module::Client.api.operations.each do |_, operation|
-        if rules = paginators['pagination'][operation.name]
-          operation[:pager] = Pager.new(rules)
-        end
-      end
-    end
-  end
-
-  # add shared client examples
-  service_added do |name, svc_module, options|
-    if ENV['DOCSTRINGS'] && options[:examples]
-      json = Json.load_file(options[:examples])
-      json['examples'].each_pair do |operation_name, examples|
-        operation_name = Seahorse::Util.underscore(operation_name)
-        operation = svc_module::Client.api.operation(operation_name)
-        operation['examples'] = examples
-      end
-    end
-  end
-
 end

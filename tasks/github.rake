@@ -23,10 +23,11 @@ task 'github:release' do
   gh.upload_asset(release.url, 'api-docs.zip',
     :content_type => 'application/octet-stream')
 
-  $GEM_NAMES.each do |gem_name|
-    gh.upload_asset(release.url, "#{gem_name}-#{$VERSION}.gem",
-      :content_type => 'application/octet-stream')
-  end
+  # TODO : rewrite to only publish modified gems
+  #$GEM_NAMES.each do |gem_name|
+  #  gh.upload_asset(release.url, "#{gem_name}-#{$VERSION}.gem",
+  #    :content_type => 'application/octet-stream')
+  #end
 
 end
 

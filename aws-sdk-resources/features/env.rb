@@ -32,8 +32,8 @@ class ApiCallTracker < Seahorse::Client::Plugin
 
 end
 
-Aws.service_added do |_, svc_module, _|
-  svc_module::Client.add_plugin(ApiCallTracker)
+Aws::SERVICE_MODULE_NAMES.each do |svc|
+  Aws.const_get(svc).const_get(:Client).add_plugin(ApiCallTracker)
 end
 
 Before do |scenario|
