@@ -3,7 +3,7 @@ require 'aws-sdk-ec2/customizations/client'
 require 'aws-sdk-ec2/customizations/resource'
 require 'aws-sdk-ec2/customizations/instance'
 
-Aws::EC2::InstanceCollection.send(:extend, Aws::Deprecations)
+Aws::EC2::Instance::Collection.send(:extend, Aws::Deprecations)
 {
   create_tags: :batch_create_tags,
   monitor: :batch_create_tags,
