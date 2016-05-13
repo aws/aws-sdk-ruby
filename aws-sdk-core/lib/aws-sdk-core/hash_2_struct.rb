@@ -17,7 +17,7 @@ module Aws
 
       def struct_value(ref, hash)
         if hash
-          struct = ref.shape[:struct_class].new
+          struct = ref.shape.struct_class.new
           hash.each_pair do |key, value|
             struct[key] = member_value(ref.shape.member(key), value)
           end

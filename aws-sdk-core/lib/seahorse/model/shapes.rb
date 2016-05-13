@@ -70,8 +70,10 @@ module Seahorse
       class Shape
 
         def initialize(options = {})
-          @name = options[:name]
           @metadata = {}
+          options.each_pair do |key, value|
+            send("#{key}=", value)
+          end
         end
 
         # @return [String]
@@ -135,6 +137,9 @@ module Seahorse
         # @return [Integer, nil]
         attr_accessor :max
 
+        # @return [Boolean]
+        attr_accessor :flattened
+
       end
 
       class MapShape < Shape
@@ -177,6 +182,9 @@ module Seahorse
 
         # @return [Set<Symbol>]
         attr_accessor :required
+
+        # @return [Class<Struct>]
+        attr_accessor :struct_class
 
         # @param [Symbol] name
         # @param [ShapeRef] shape_ref

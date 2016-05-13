@@ -2,7 +2,7 @@ module Aws
   module SQS
     module Plugins
       # @api private
-      class SQSQueueUrls < Seahorse::Client::Plugin
+      class QueueUrls < Seahorse::Client::Plugin
 
         class Handler < Seahorse::Client::Handler
 

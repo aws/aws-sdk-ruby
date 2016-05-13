@@ -104,11 +104,16 @@ module AwsSdkCodeGenerator
           if metadata.empty?
             options = ''
           else
-            options = ", metadata: {"
-            options += metadata.map do |key, value|
-              "#{key.inspect} => #{value.inspect}"
-            end.join(', ')
-            options += "}"
+            options = {}
+            metadata.each_pair do |key, value|
+              next if key == 'resultWrapper'
+              options[key] = value.inspect
+            end
+            if options.empty?
+              options = ''
+            else
+              options = ", metadata: #{HashFormatter.new.format(options)}"
+            end
           end
           "ShapeRef.new(shape: #{shape_name}#{options})"
         else
@@ -155,16 +160,18 @@ module AwsSdkCodeGenerator
               shape['members'].each do |member_name, member_ref|
                 c << "#{shape_name}.add_member(:#{underscore(member_name)}, #{shape_ref(member_ref, member_name, required)})"
               end
-              c << "#{shape_name}[:struct_class] = Types::#{shape_name}"
+              c << "#{shape_name}.struct_class = Types::#{shape_name}"
               if payload = shape['payload']
                 c << "#{shape_name}[:payload] = :#{underscore(payload)}"
                 c << "#{shape_name}[:payload_member] = #{shape_name}.member(:#{underscore(payload)})"
               end
             elsif shape['type'] == 'list'
               c << "#{shape_name}.member = #{shape_ref(shape['member'])}"
+              c << "#{shape_name}.flattened = true" if shape['flattened']
             elsif shape['type'] == 'map'
               c << "#{shape_name}.key = #{shape_ref(shape['key'])}"
               c << "#{shape_name}.value = #{shape_ref(shape['value'])}"
+              c << "#{shape_name}.flattened = true" if shape['flattened']
             else
               next
             end

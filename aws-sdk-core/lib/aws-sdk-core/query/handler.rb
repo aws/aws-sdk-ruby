@@ -15,7 +15,7 @@ module Aws
           shape: StringShape.new,
           location_name: 'RequestId')
         response_metadata = StructureShape.new
-        response_metadata[:struct_class] = METADATA_STRUCT
+        response_metadata.struct_class = METADATA_STRUCT
         response_metadata.add_member(:request_id, request_id)
         ShapeRef.new(shape: response_metadata, location_name: 'ResponseMetadata')
       end
@@ -67,7 +67,7 @@ module Aws
           shape: context.operation.output.shape,
           location_name: context.operation.name + 'Result'
         ))
-        shape[:struct_class] = WRAPPER_STRUCT
+        shape.struct_class = WRAPPER_STRUCT
         shape.add_member(:response_metadata, METADATA_REF)
         ShapeRef.new(shape: shape)
       end

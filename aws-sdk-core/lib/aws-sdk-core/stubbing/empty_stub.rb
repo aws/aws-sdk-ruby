@@ -31,7 +31,7 @@ module Aws
       end
 
       def stub_structure(ref, visited)
-        ref.shape.members.inject(ref[:struct_class].new) do |struct, (mname, mref)|
+        ref.shape.members.inject(ref.shape.struct_class.new) do |struct, (mname, mref)|
           struct[mname] = stub_ref(mref, visited)
           struct
         end

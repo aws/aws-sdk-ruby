@@ -121,7 +121,7 @@ module Aws
     def correct_type?(ref, value, errors, context)
       case value
       when Hash then true
-      when ref[:struct_class] then true
+      when ref.shape.struct_class then true
       else
         errors << "expected #{context} to be a hash"
         false

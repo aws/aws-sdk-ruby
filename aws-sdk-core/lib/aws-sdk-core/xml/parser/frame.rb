@@ -79,7 +79,7 @@ module Aws
 
         def initialize(xml_name, parent, ref, result = nil)
           super
-          @result ||= ref[:struct_class].new
+          @result ||= ref.shape.struct_class.new
           @members = {}
           ref.shape.members.each do |member_name, member_ref|
             apply_default_value(member_name, member_ref)

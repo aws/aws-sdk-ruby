@@ -27,7 +27,7 @@ module Aws
       def member_value(ref, value)
         case ref.shape
         when StructureShape
-          apply_data_to_struct(ref, value, ref[:struct_class].new)
+          apply_data_to_struct(ref, value, ref.shape.struct_class.new)
         when ListShape
           value.inject([]) do |list, v|
             list << member_value(ref.shape.member, v)

@@ -6,7 +6,7 @@ module Aws
         def apply(response)
           # TODO : remove this unless check once response stubbing is fixed
           unless response.data
-            response.data = response.context.operation.output[:struct_class].new
+            response.data = response.context.operation.output.shape.struct_class.new
           end
           extract_status_code(response)
           extract_headers(response)

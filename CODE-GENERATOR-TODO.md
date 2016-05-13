@@ -1,5 +1,11 @@
 # TODO
 
+* Remove metadata from shapes, move these attributes onto the
+  shapes themselves.
+
+  consider creating a structure shape ref which can be required,
+  leaving vanilla shape ref without.
+
 * Move service specific customizations from aws-sdk-core into service gems.
 
   * DynamoDB simple attribute
