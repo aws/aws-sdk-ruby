@@ -1,9 +1,7 @@
-version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
-
 Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk'
-  spec.version       = version
+  spec.version       = '2.4.0'
   spec.summary       = 'AWS SDK for Ruby'
   spec.description   = 'The official AWS SDK for Ruby. Provides both resource oriented interfaces and API clients for AWS services.'
   spec.author        = 'Amazon Web Services'
