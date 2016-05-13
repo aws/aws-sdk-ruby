@@ -18,9 +18,6 @@ module AwsSdkCodeGenerator
       waiters: nil,
       resources: nil,
       examples: nil,
-      # overrides for the default client plugins
-      add_client_plugins: [],
-      remove_client_plugins: [],
       &block
     )
       @module_names = module_names
@@ -30,8 +27,6 @@ module AwsSdkCodeGenerator
       @waiters = waiters
       @resources = resources
       @examples = examples
-      @add_client_plugins = add_client_plugins
-      @remove_client_plugins = remove_client_plugins
       @callback = block
     end
 
@@ -114,9 +109,7 @@ module AwsSdkCodeGenerator
       Generators::ClientClass.new(
         identifier: @module_names.last.downcase,
         api: @api,
-        waiters: @waiters,
-        add_plugins: @add_client_plugins,
-        remove_plugins: @remove_client_plugins,
+        waiters: @waiters
       )
     end
 

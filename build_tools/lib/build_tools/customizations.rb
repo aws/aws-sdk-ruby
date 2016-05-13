@@ -3,8 +3,6 @@ module BuildTools
 
     @api_customizations = {}
     @doc_customizations = {}
-    @plugins_to_add = Hash.new([])
-    @plugins_to_remove = Hash.new([])
 
     class << self
 
@@ -16,25 +14,12 @@ module BuildTools
         @doc_customizations[svc_name] = block
       end
 
-      def plugins(svc_name, options)
-        @plugins_to_add[svc_name] += options[:add] || []
-        @plugins_to_remove[svc_name] += options[:remove] || []
-      end
-
       def apply_api_customizations(svc_name, api)
         @api_customizations[svc_name].call(api) if @api_customizations[svc_name]
       end
 
       def apply_doc_customizations(svc_name, docs)
         @doc_customizations[svc_name].call(docs) if @doc_customizations[svc_name]
-      end
-
-      def plugins_to_add(svc_name)
-        @plugins_to_add[svc_name]
-      end
-
-      def plugins_to_remove(svc_name)
-        @plugins_to_remove[svc_name]
       end
 
     end
@@ -119,10 +104,6 @@ module BuildTools
       api['shapes']['MessageAttributeValue']['members']['StringListValues'].delete('flattened')
       api['shapes']['MessageAttributeValue']['members']['BinaryListValues'].delete('flattened')
     end
-
-    plugins('SWF', add: %w(
-      Aws::Plugins::SWFReadTimeouts
-    ))
 
   end
 end
