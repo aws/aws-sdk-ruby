@@ -1,5 +1,29 @@
-Unreleased Changes
+2.3.4 (2016-05-12)
 ------------------
+
+* Feature - Aws::ApplicationDiscoveryService - Added support for the new
+  AWS Application Discovery Service.
+
+* Feature - Aws::SSM - EC2 Run Command has been updated to allow customers to
+  create and share documents. Documents can be shared privately with other
+  AWS accounts, or publically to all accounts.
+
+* Feature - Aws::EC2 - Added support for identifying stale security groups.
+
+* Feature - Aws::CloudFormation - Added support for ExceptionStatus to ChangeSets.
+
+2.3.3 (2016-05-11)
+------------------
+
+* Feature - Aws::StorageGateway - Minor API update.
+
+* Feature - Aws::ElasticMapReduce - Update Aws::ElasticMapReduce::Client#list_instances
+  API to have filter on instance state.
+
+* Issue - Aws::Xml::Parser - Resolved an concurrency issue with the XML parser
+  related to chosing the default parsing engine.
+
+  See related [GitHub issue #1135](https://github.com/aws/aws-sdk-ruby/issues/1135).
 
 2.3.2 (2016-05-05)
 ------------------

@@ -232,6 +232,7 @@ to be backwards compatible.
 | ------------------------------------ | ---------------------------------------- | --------------------------------- | ----------- |
 | aws-sdk-acm                          | AWS Certificate Manager                  | Aws::ACM                          | 2015-12-08  |
 | aws-sdk-apigateway                   | Amazon API Gateway                       | Aws::APIGateway                   | 2015-07-09  |
+| aws-sdk-applicationdiscoveryservice  | AWS Application Discovery Service        | Aws::ApplicationDiscoveryService  | 2015-11-01  |
 | aws-sdk-autoscaling                  | Auto Scaling                             | Aws::AutoScaling                  | 2011-01-01  |
 | aws-sdk-cloudformation               | AWS CloudFormation                       | Aws::CloudFormation               | 2010-05-15  |
 | aws-sdk-cloudfront                   | Amazon CloudFront                        | Aws::CloudFront                   | 2016-01-28  |
