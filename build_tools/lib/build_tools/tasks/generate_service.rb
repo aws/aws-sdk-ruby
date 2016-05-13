@@ -68,8 +68,6 @@ end
         def generate_opts(service)
           options = {}
           options[:module_names] = ['Aws', service.name]
-          options[:add_client_plugins] = plugins_to_add(service.name)
-          options[:remove_client_plugins] = plugins_to_remove(service.name)
           service.models.each_pair do |model_name, model_path|
             options[model_name] = load_model(service.name, model_name, model_path)
           end
@@ -84,14 +82,6 @@ end
           when :docs then Customizations.apply_doc_customizations(svc_name, model)
           end
           model
-        end
-
-        def plugins_to_add(service_name)
-          Customizations.plugins_to_add(service_name)
-        end
-
-        def plugins_to_remove(service_name)
-          Customizations.plugins_to_remove(service_name)
         end
 
         def load_json(path)
