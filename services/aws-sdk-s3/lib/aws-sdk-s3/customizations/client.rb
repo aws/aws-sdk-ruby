@@ -13,17 +13,17 @@ require 'aws-sdk-s3/plugins/url_encoded_keys'
 module Aws
   module S3
     class Client
-      add_plugin(Aws::Plugins::Accelerate)
-      add_plugin(Aws::Plugins::BucketDns)
-      add_plugin(Aws::Plugins::Expect100Continue)
-      add_plugin(Aws::Plugins::Http200Errors)
-      add_plugin(Aws::Plugins::GetBucketLocationFix)
-      add_plugin(Aws::Plugins::LocationConstraint)
-      add_plugin(Aws::Plugins::Md5s)
-      add_plugin(Aws::Plugins::Redirects)
-      add_plugin(Aws::Plugins::SseCpk)
-      add_plugin(Aws::Plugins::UrlEncodedKeys)
-      add_plugin(Aws::Plugins::RequestSigner)
+      add_plugin(Plugins::Accelerate)
+      add_plugin(Plugins::BucketDns)
+      add_plugin(Plugins::Expect100Continue)
+      add_plugin(Plugins::Http200Errors)
+      add_plugin(Plugins::GetBucketLocationFix)
+      add_plugin(Plugins::LocationConstraint)
+      add_plugin(Plugins::Md5s)
+      add_plugin(Plugins::Redirects)
+      add_plugin(Plugins::SseCpk)
+      add_plugin(Plugins::UrlEncodedKeys)
+      add_plugin(S3::Plugins::RequestSigner)
     end
   end
 end
