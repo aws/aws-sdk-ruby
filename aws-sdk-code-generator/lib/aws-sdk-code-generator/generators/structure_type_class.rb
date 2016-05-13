@@ -16,7 +16,7 @@ module AwsSdkCodeGenerator
           member_names = "#{member_names[0]}"
         end
 
-        super(name, extends: "Aws::Structure.new(#{member_names})")
+        super(name, extends: "Struct.new(#{member_names}).send(:include, Aws::Structure)")
 
         docstring(documentation(@shape).to_s)
         @shape['members'].each do |member_name, member_ref|
@@ -35,41 +35,6 @@ module AwsSdkCodeGenerator
   @return [#{ruby_type(member_ref)}]
         MACRO
       end
-
-#        init = Dsl::Method.new(:initialize)
-#        add(init) if needs_defaults?
-#
-#        @shape['members'].each do |member_name, ref|
-#          attr_name = underscore(member_name)
-#
-#          # add constructor defaults
-#          case member_shape(name, member_name)['type']
-#          when 'list' then init.code("@#{attr_name} = Aws::DefaultList.new")
-#          when 'map' then init.code("@#{attr_name} = Aws::DefaultMap.new")
-#          end
-#
-#          # add attribute accessors
-#          attr_accessor(underscore(member_name)) do |attr|
-#            attr.returns(ruby_type(ref), docstring:documentation(ref))
-#          end
-#
-#        end
-#
-#        eigenclass do |eigen|
-#
-#          eigen.method('shape') do |m|
-#            m.docstring('@api private')
-#            m.code("ClientApi::#{name}")
-#          end
-#
-#          eigen.method('build') do |m|
-#            m.param('hash', default:{})
-#            m.returns(name)
-#            m.code("Hash2Struct.to_struct(self, hash)")
-#          end
-#
-#        end
-#      end
 
       private
 
