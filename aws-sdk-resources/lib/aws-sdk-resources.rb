@@ -19,16 +19,6 @@ module Aws
     autoload :Source, 'aws-sdk-resources/source'
   end
 
-  service_added do |name, svc_module, options|
-    # load customizations
-    svc = File.join(
-      File.dirname(__FILE__),
-      'aws-sdk-resources',
-      'services',
-      "#{name.downcase}.rb")
-    require(svc) if File.exist?(svc)
-  end
-
   # In version 2.2, all batch resource operations were renamed:
   #
   # * All operations are now prefixed with `batch_`, e.g. `#start`

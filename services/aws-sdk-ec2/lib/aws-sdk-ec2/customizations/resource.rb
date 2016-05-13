@@ -1,8 +1,5 @@
 module Aws
   module EC2
-
-    require 'aws-sdk-resources/services/ec2/instance'
-
     class Resource
 
       def create_tags(options)
@@ -13,7 +10,7 @@ module Aws
             tags << Tag.new(resource_id, tag[:key], tag[:value], client: @client)
           end
         end
-        Resources::Batch.new(Tag, tags, response: resp)
+        Tag::Collection.new(tags, response: resp)
       end
 
     end
