@@ -1,5 +1,7 @@
 # TODO
 
+* Move EC2 protocol code into ec2 gem
+
 * Remove metadata from shapes, move these attributes onto the
   shapes themselves.
 

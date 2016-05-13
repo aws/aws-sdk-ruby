@@ -68,11 +68,6 @@ module BuildTools
       end
     end
 
-    plugins('EC2', add: %w(
-      Aws::Plugins::EC2CopyEncryptedSnapshot
-      Aws::Plugins::EC2RegionValidation
-    ))
-
     api('Glacier') do |api|
       api['shapes']['Timestamp'] = {
         'type' => 'timestamp',

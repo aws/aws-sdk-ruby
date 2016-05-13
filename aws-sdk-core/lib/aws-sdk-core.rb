@@ -155,8 +155,6 @@ module Aws
 
   module Plugins
     autoload :CSDConditionalSigning, 'aws-sdk-core/plugins/csd_conditional_signing'
-    autoload :EC2CopyEncryptedSnapshot, 'aws-sdk-core/plugins/ec2_copy_encrypted_snapshot'
-    autoload :EC2RegionValidation, 'aws-sdk-core/plugins/ec2_region_validation'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
