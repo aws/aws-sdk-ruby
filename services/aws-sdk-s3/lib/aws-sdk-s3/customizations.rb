@@ -17,3 +17,13 @@ require 'aws-sdk-s3/customizations/bucket'
 require 'aws-sdk-s3/customizations/object'
 require 'aws-sdk-s3/customizations/object_summary'
 require 'aws-sdk-s3/customizations/multipart_upload'
+
+[
+  Aws::S3::Object::Collection,
+  Aws::S3::ObjectSummary::Collection,
+  Aws::S3::ObjectVersion::Collection,
+].each do |klass|
+  klass.send(:alias_method, :delete, :batch_delete!)
+  klass.send(:extend, Aws::Deprecations)
+  klass.send(:deprecated, :delete, use: :batch_delete!)
+end
