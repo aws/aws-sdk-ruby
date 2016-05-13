@@ -97,12 +97,19 @@ require 'aws-sdk-core'
 module Aws
   class << self
     Aws::SERVICE_MODULE_NAMES.each do |svc_name|
-      gem_path = "../../../services/aws-sdk-#{svc_name.downcase}/lib"
-      gem_path = File.expand_path(gem_path, __FILE__)
-      $LOAD_PATH.unshift(gem_path) if File.directory?(gem_path)
+
+      # Load a local copy from disk if present, this makes it possible
+      # to run the REPL against a clone of the repository.
+      gem_name = "aws-sdk-#{svc_name.downcase}"
+      gem_lib = File.expand_path("../../../services/#{gem_name}/lib", __FILE__)
+      if File.directory?(gem_lib)
+        $LOAD_PATH.unshift(gem_lib)
+        Aws.autoload(svc_name, "#{gem_lib}/#{gem_name}")
+      else
+        Aws.autoload(svc_name, gem_name)
+      end
 
       define_method(svc_name.downcase) do |options={}|
-        require "aws-sdk-#{svc_name.downcase}"
         client = const_get(svc_name).const_get(:Client).new(options)
         resource = const_get(svc_name).const_get(:Resource).new(client: client)
         client.instance_variable_set("@resource", resource)
