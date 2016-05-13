@@ -4,7 +4,7 @@ module Aws
   module CloudSearchDomain
     class Client
       add_plugin(Plugins::ConditionalSigning)
-      remove_plugin(Plugins::RegionalEndpoint)
+      remove_plugin(Aws::Plugins::RegionalEndpoint)
     end
   end
 end
