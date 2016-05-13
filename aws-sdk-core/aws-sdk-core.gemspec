@@ -1,9 +1,7 @@
-version = File.read(File.expand_path('../../VERSION', __FILE__)).strip
-
 Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk-core'
-  spec.version       = version
+  spec.version       = '2.4.0'
   spec.summary       = 'AWS SDK for Ruby - Core'
   spec.description   = 'Provides API clients for AWS. This gem is part of the official AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
@@ -15,7 +13,6 @@ Gem::Specification.new do |spec|
 
   spec.files = ['endpoints.json', 'service-models.json', 'ca-bundle.crt']
   spec.files += Dir['lib/**/*.rb']
-  spec.files += Dir['apis/**/**/*.json'].select { |p| !p.match(/\/docs/) }
 
   spec.bindir = 'bin'
   spec.executables << 'aws.rb'
