@@ -7,4 +7,4 @@
 --plugin sitemap
 --asset doc-src/images:images
 -e doc-src/plugins/apis.rb
-aws-sdk/lib/**/*.rb aws-sdk-resources/lib/**/*.rb aws-sdk-core/lib/**/*.rb services/**/lib/**/*.rb
+services/**/lib/**/*.rb aws-sdk-core/lib/**/*.rb aws-sdk/lib/**/*.rb

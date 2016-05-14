@@ -1,3 +1,4 @@
+# Aws module documentation.
 module Aws
   # service gems
   autoload :ACM, "aws-sdk-acm"
