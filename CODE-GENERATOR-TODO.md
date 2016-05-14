@@ -1,5 +1,11 @@
 # TODO
 
+* Currently there is an ALIAS for Struct = Structure in aws-sdk-core.
+  This is a work-around for YARD documentation bugs with struct.
+
+* Add documentation for `:response_target` to streaming operations
+  like get_object
+
 * Remove the VERSION file from the repo root and replace with gem
   specific versions
 

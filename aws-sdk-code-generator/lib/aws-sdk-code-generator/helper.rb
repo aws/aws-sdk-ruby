@@ -1,4 +1,5 @@
 require 'kramdown'
+require 'set'
 
 module AwsSdkCodeGenerator
   module Helper
@@ -85,11 +86,11 @@ module AwsSdkCodeGenerator
       ref['streaming'] || shape['streaming']
     end
 
-    def documentation(ref_or_shape)
+    def documentation(ref_or_shape, line_width:70)
       shape = ref_or_shape.key?('type') ? ref_or_shape : shape(ref_or_shape)
       docstring = ref_or_shape['documentation'] || shape['documentation']
       if docstring
-        markdown(docstring)
+        markdown(docstring, line_width:line_width)
       else
         ''
       end
@@ -111,11 +112,34 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def markdown(html)
+    def markdown(html, line_width: 70)
       if html
         html = "<p>#{html}</p>" unless html.match(/<\w+>/)
-        Kramdown::Document.new(html, input: 'html', line_width: 70).to_kramdown.strip
+        Kramdown::Document.new(html, input: 'html', line_width: line_width).to_kramdown.strip
       end
+    end
+
+    # Given a shape reference, this function returns a Set of all
+    # of the recursive shapes found in tree.
+    def compute_recursive_shapes(ref, stack = [], recursive = Set.new)
+      if ref && !stack.include?(ref['shape'])
+        stack.push(ref['shape'])
+        s = shape(ref)
+        case s['type']
+        when 'structure'
+          s['members'].each_pair do |_, member_ref|
+            compute_recursive_shapes(member_ref, stack, recursive)
+          end
+        when 'list'
+          compute_recursive_shapes(s['member'], stack, recursive)
+        when 'map'
+          compute_recursive_shapes(s['value'], stack, recursive)
+        end
+        stack.pop
+      elsif ref
+        recursive << ref.shape
+      end
+      recursive
     end
 
   end

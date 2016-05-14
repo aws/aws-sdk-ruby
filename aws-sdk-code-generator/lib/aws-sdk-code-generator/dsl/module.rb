@@ -86,7 +86,7 @@ module AwsSdkCodeGenerator
         if @code_objects.empty?
           code[-1] += "; end"
         else
-          code << close_module
+          code += close_module
         end
         code
       end
@@ -98,7 +98,7 @@ module AwsSdkCodeGenerator
       end
 
       def close_module
-        "end"
+        ["end"]
       end
 
       def padded?(n)
