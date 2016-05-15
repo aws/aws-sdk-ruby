@@ -174,7 +174,10 @@ module Aws
       #
       # @option params [Integer] :expires_in (900) Number of seconds before
       #   the pre-signed URL expires. This may not exceed one week (604800
-      #   seconds).
+      #   seconds). Note that the pre-signed URL is also only valid as long as
+      #   credentials used to sign it are. For example, when using IAM roles,
+      #   temporary tokens generated for signing also have a default expiration
+      #   which will affect the effective expiration of the pre-signed URL.
       #
       # @raise [ArgumentError] Raised if `:expires_in` exceeds one week
       #   (604800 seconds).
