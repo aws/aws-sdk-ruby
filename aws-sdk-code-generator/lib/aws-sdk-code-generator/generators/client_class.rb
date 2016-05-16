@@ -31,10 +31,11 @@ module AwsSdkCodeGenerator
         nil         => DEFAULT_PLUGINS,
       })
 
-      def initialize(identifier:, api:, waiters:)
+      def initialize(identifier:, api:, waiters:, examples:)
         @identifier = identifier
         @api = api
         @waiters = waiters
+        @examples = examples
         super('Client', extends: 'Seahorse::Client::Base')
         apply_modules(self)
         apply_identifier(self)
@@ -87,6 +88,7 @@ module AwsSdkCodeGenerator
               service_identifier: @identifier,
               operation_name: operation_name,
               operation: operation,
+              examples: @examples,
               method: m
             )
             m.param('params', type: Hash, default: {})

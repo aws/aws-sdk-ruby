@@ -109,7 +109,8 @@ module AwsSdkCodeGenerator
       Generators::ClientClass.new(
         identifier: @module_names.last.downcase,
         api: @api,
-        waiters: @waiters
+        waiters: @waiters,
+        examples: @examples
       )
     end
 

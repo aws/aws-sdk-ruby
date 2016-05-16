@@ -4,20 +4,22 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def self.apply(api:, service_identifier:, operation_name:, operation:, method:)
+      def self.apply(api:, service_identifier:, operation_name:, operation:, method:, examples:)
         new(
           api: api,
           service_identifier: service_identifier,
           operation_name: operation_name,
-          operation: operation
+          operation: operation,
+          examples: examples
         ).apply(method:method)
       end
 
-      def initialize(api:, service_identifier:, operation_name:, operation:)
+      def initialize(api:, service_identifier:, operation_name:, operation:, examples:)
         @api = api
         @service_identifier = service_identifier
         @operation_name = operation_name
         @operation = operation
+        @examples = examples ? examples['examples'][operation_name] || [] : []
       end
 
       # @param [String] service_identifier
@@ -29,7 +31,10 @@ module AwsSdkCodeGenerator
           apply_operation_docs(docstring)
           apply_option_tags(docstring)
           apply_return_tags(docstring)
-          apply_example_tags(docstring)
+          apply_shared_examples(docstring)
+          apply_examples_from_disk(docstring)
+          apply_request_syntax_example(docstring)
+          apply_response_struture_example(docstring)
         end
       end
 
@@ -71,48 +76,51 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def apply_example_tags(docstring)
-      end
-
-
-
-
-
-
-
-      def tags(method_name, operation)
-        tags = []
-        tags += option_tags(method_name, operation)
-        tags += return_tags(method_name, operation)
-        tags += example_tags(method_name, operation)
-        tags += see_also_tags(method_name, operation)
-      end
-
-      def option_tags(method_name, operation)
-        operation_input_ref(operation).shape.members.map do |name, ref|
-          req = ref.required ? 'required,' : ''
-          type = input_type(ref)
-          docstring = "@option #{@optname} [#{req}#{type}] :#{name}\n"
-          docstring += ref.documentation.lines.map { |line| "  #{line}" }.join
-          tag(docstring)
+      def apply_shared_examples(docstring)
+        @examples.each do |example|
+          docstring.append(
+            SharedExample.new(
+              example: example,
+              operation_name: @operation_name,
+              operation: @operation,
+              api: @api,
+            ).to_s
+          )
         end
       end
 
-      def return_tags(method_name, operation)
-        resp = '{Seahorse::Client::Response response}'
-        if operation.output && operation.output.shape.members.count > 0
-          rtype = output_type(operation.output)
-          returns = "[#{rtype}] Returns a #{resp} object which responds to "
-          returns << "the following methods:\n\n"
-          operation.output.shape.members.each do |mname, mref|
-            mtype = output_type(mref, true).gsub(/</, '&lt;').gsub(/>/, '&gt;')
-            returns << "  * {#{rtype}##{mname} ##{mname}} => #{mtype}\n"
-          end
-        else
-          returns = "[Struct] Returns an empty #{resp}."
+      def apply_shared_example(docstring, example)
+        return
+
+        input_comments = json_ex['comments']['input']
+        input = SharedExample.new(json_ex['input'], method_name, operation, input_comments).to_str_input
+        parts = []
+        parts << "@example Example: #{json_ex['title']}\n\n"
+        parts << "  # #{json_ex['description']}\n\n"
+        parts += input.lines.map { |line| "  " + line }
+        if json_ex['output']
+          output_comments = json_ex['comments']['output']
+          output = SharedExample.new(json_ex['output'], method_name, operation, output_comments).to_str_output
+          parts << "\n\n  # resp.to_h outputs the following:\n"
+          parts += output.lines.map { |line| "  " + line }
         end
-        [tag("@return #{returns}")]
+        tag(parts.join)
       end
+
+      def apply_examples_from_disk(docstring)
+      end
+
+      def apply_request_syntax_example(docstring)
+      end
+
+      def apply_response_struture_example(docstring)
+      end
+
+
+
+
+
+
 
       def example_tags(method_name, operation)
         shared_examples(method_name, operation) +
@@ -174,10 +182,6 @@ module AwsSdkCodeGenerator
           parts += example.lines.map { |line| "  " + line }
           tag(parts.join)
         end
-      end
-
-      def see_also_tags(method_name, operation)
-        []
       end
 
     end
