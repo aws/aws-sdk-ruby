@@ -115,7 +115,10 @@ module AwsSdkCodeGenerator
     def markdown(html, line_width: 70)
       if html
         html = "<p>#{html}</p>" unless html.match(/<\w+>/)
-        Kramdown::Document.new(html, input: 'html', line_width: line_width).to_kramdown.strip
+        Kramdown::Document.new(html, input: 'html', line_width: line_width).
+          to_kramdown.
+          gsub(/\{(\S+)\}/, '`{\1}`').
+          strip
       end
     end
 

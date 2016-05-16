@@ -35,6 +35,7 @@ module AwsSdkCodeGenerator
   module Generators
     autoload :ClientApiModule, 'aws-sdk-code-generator/generators/client_api_module'
     autoload :ClientClass, 'aws-sdk-code-generator/generators/client_class'
+    autoload :ClientOperationDocumentation, 'aws-sdk-code-generator/generators/client_operation_documentation'
     autoload :ErrorsModule, 'aws-sdk-code-generator/generators/errors_module'
     autoload :TypesModule, 'aws-sdk-code-generator/generators/types_module'
     autoload :RootResourceClass, 'aws-sdk-code-generator/generators/root_resource_class'

@@ -82,7 +82,13 @@ module AwsSdkCodeGenerator
         (@api['operations'] || {}).each do |operation_name, operation|
           method_name = underscore(operation_name)
           klass.method(method_name) do |m|
-            m.docstring(markdown(operation['documentation']))
+            ClientOperationDocumentation.apply(
+              api: @api,
+              service_identifier: @identifier,
+              operation_name: operation_name,
+              operation: operation,
+              method: m
+            )
             m.param('params', type: Hash, default: {})
             m.param('options', type: Hash, default: {})
             m.code do |c|
