@@ -1,5 +1,9 @@
 # TODO
 
+* In aws-sdk-code-generator/helpers.rb the *markdown* method is removing
+  invalid HTML artifacts. This should probably happen BEFORE handing it
+  to the code generator. Maybe move this into the rake task.
+
 * Currently there is an ALIAS for Struct = Structure in aws-sdk-core.
   This is a work-around for YARD documentation bugs with struct.
 

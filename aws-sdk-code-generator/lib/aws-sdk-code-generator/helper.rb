@@ -113,12 +113,30 @@ module AwsSdkCodeGenerator
     end
 
     def markdown(html, line_width: 70)
+      # TODO : this section of code is **very slow** and runs many times
+      #   while building a service.
       if html
         html = "<p>#{html}</p>" unless html.match(/<\w+>/)
+
+        # unescaped curly braces cause YARD errors, they are interpreted
+        # as code links.
+        html = html.gsub('{', "\\{").gsub('}', "\\}")
+
+        # Kramdown generates invalid markup when there are attributes
+        # on the code tag, have to reduce these down to get the proper markdown.
+        html = html.gsub(/<code.*?>(.+?)<\/code>/) { "<code>#{$1}</code>" }
+
+        # Kramdown creates invalid markup with target="_blank" attributes.
+        html = html.gsub(' target="_blank"', '')
+
+        # There are quite a few empty <a> tags. These appear to be code names,
+        # such as structure member names, or structure type names. We should
+        # investigate if it is possible to inflect these properly and then
+        # turn them into YARD links.
+        html = html.gsub(/<a>(.+?)<\/a>/) { $1 }
+
         Kramdown::Document.new(html, input: 'html', line_width: line_width).
-          to_kramdown.
-          gsub(/\{(\S+)\}/, '`{\1}`').
-          strip
+          to_kramdown.strip
       end
     end
 

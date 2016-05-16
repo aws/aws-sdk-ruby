@@ -186,7 +186,7 @@ module Aws
         # * `:kms_key_id`
         # * `:key_provider`
         #
-        # You may also pass any other options accepted by {S3::Client#initialize}.
+        # You may also pass any other options accepted by `Client#initialize`.
         #
         # @option options [S3::Client] :client A basic S3 client that is used
         #   to make api calls. If a `:client` is not provided, a new {S3::Client}
