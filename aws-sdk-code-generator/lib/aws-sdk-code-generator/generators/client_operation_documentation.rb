@@ -55,6 +55,20 @@ module AwsSdkCodeGenerator
       end
 
       def apply_return_tags(docstring)
+        output_shape = shape(@operation['output'])
+        resp = '{Seahorse::Client::Response response}'
+        if output_shape && output_shape['members'].size > 0
+          type = ruby_type(@operation['output'])
+          returns = "@return [#{type}] Returns a #{resp} object which responds to "
+          returns << "the following methods:\n\n"
+          output_shape['members'].each_pair do |mname, mref|
+            mtype = ruby_type(mref).gsub(/</, '&lt;').gsub(/>/, '&gt;')
+            returns << "  * {#{type}##{mname} ##{mname}} => #{mtype}\n"
+          end
+          docstring.append(returns)
+        else
+          docstring.append("@return [Struct] Returns an empty #{resp}.")
+        end
       end
 
       def apply_example_tags(docstring)
