@@ -12,7 +12,7 @@ module AwsSdkCodeGenerator
       end
 
       def to_str
-        "\n@example Response structure\n\n  #{entry(@output_ref, "resp", Set.new).join("\n  ")}"
+        "\n@example Response structure\n  #{entry(@output_ref, "resp", Set.new).join("\n  ")}"
       end
       alias to_s to_str
 

@@ -69,7 +69,7 @@ module AwsSdkCodeGenerator
           returns << "the following methods:\n\n"
           output_shape['members'].each_pair do |mname, mref|
             mtype = ruby_type(mref).gsub(/</, '&lt;').gsub(/>/, '&gt;')
-            returns << "  * {#{type}##{mname} ##{mname}} => #{mtype}\n"
+            returns << "  * {#{type}##{underscore(mname)} ##{mname}} => #{mtype}\n"
           end
           docstring.append(returns)
         else
@@ -115,7 +115,7 @@ module AwsSdkCodeGenerator
           title = title.sub(/^\d+_/, '').gsub(/_/, ' ')
           title = title[0].upcase + title[1..-1]
           docstring.append("\n@example #{title}")
-          docstring.append("\n  " + File.read(path).lines.join('  '))
+          docstring.append("  " + File.read(path).lines.join('  '))
         end
       end
 
@@ -127,7 +127,7 @@ module AwsSdkCodeGenerator
             indent: '  '
           ).format.strip
           docstring.append("\n@example Request syntax with placeholder values")
-          docstring.append("\n  resp = client.#{@method_name}(#{syntax})")
+          docstring.append("  resp = client.#{@method_name}(#{syntax})")
         end
       end
 
@@ -144,14 +144,14 @@ module AwsSdkCodeGenerator
           title = File.basename(path).split(/\./).first
           title = title.sub(/^\d+_/, '').gsub(/_/, ' ')
           title = title[0].upcase + title[1..-1]
-          tag("@example #{title}\n\n    " + File.read(path).lines.join('    '))
+          tag("@example #{title}\n    " + File.read(path).lines.join('    '))
         end
       end
 
       def request_syntax_example(method_name, operation)
         example = RequestSyntaxExample.new(method_name, operation).to_str
         parts = []
-        parts << "@example Request syntax with placeholder values\n\n"
+        parts << "@example Request syntax with placeholder values\n"
         parts += example.lines.map { |line| "  " + line }
         tag(parts.join)
       end
@@ -159,7 +159,7 @@ module AwsSdkCodeGenerator
       def response_structure_example(method_name, operation)
         if example = ResponseStructureExample.new(method_name, operation).to_str
           parts = []
-          parts << "@example Response structure\n\n"
+          parts << "@example Response structure"
           parts += example.lines.map { |line| "  " + line }
           tag(parts.join)
         end
