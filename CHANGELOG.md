@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.5 (2016-05-17)
 ------------------
 
 * Feature - Aws::WorkSpaces - You can now use tagging to categorize your Amazon
