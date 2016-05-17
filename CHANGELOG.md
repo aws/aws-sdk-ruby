@@ -1,3 +1,10 @@
+Unreleased Changes
+------------------
+
+* Issue - Aws::ApplicationDiscoveryService - This release fixes an incorrect
+  model from the previous release. To use AWS Application Discovery Service,
+  please upgrade to this version.
+
 2.3.4 (2016-05-12)
 ------------------
 
