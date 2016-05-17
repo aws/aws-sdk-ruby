@@ -80,6 +80,7 @@ module AwsSdkCodeGenerator
       end
 
       def apply_operations(klass)
+        code('# @!group API Operations')
         (@api['operations'] || {}).each do |operation_name, operation|
           method_name = underscore(operation_name)
           klass.method(method_name) do |m|
@@ -99,6 +100,7 @@ module AwsSdkCodeGenerator
             end
           end
         end
+        code('# @!endgroup')
       end
 
       def apply_waiter_methods(klass)
