@@ -56,19 +56,7 @@ module AwsSdkCodeGenerator
         when 'structure' then structure(ref, context, visited)
         when 'list' then list(ref, context, visited)
         when 'map' then map(ref, context, visited)
-        else ["#{context} #=> #{value(ref)}"]
-        end
-      end
-
-      def value(ref)
-        case shape(ref)['type']
-        when 'string' then string(ref)
-        when 'integer' then 'Integer'
-        when 'float' then 'Float'
-        when 'boolean' then 'true/false'
-        when 'blob' then 'IO'
-        when 'timestamp' then 'Time'
-        else raise "unhandled shape type #{shape(ref)['type'].inspect}"
+        else ["#{context} #=> #{ruby_type(ref)}"]
         end
       end
 
