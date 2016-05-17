@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::WorkSpaces - You can now use tagging to categorize your Amazon
+  WorkSpaces. Tagging also allows you to allocate usage to your cost centers
+  directly from your AWS account bill.
+
 * Issue - Aws::ApplicationDiscoveryService - This release fixes an incorrect
   model from the previous release. To use AWS Application Discovery Service,
   please upgrade to this version.
