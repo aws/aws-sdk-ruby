@@ -11,7 +11,11 @@ module Aws
 
       # @return [Structure]
       def stub
-        stub_ref(@rules)
+        if @rules
+          stub_ref(@rules)
+        else
+          EmptyStructure.new
+        end
       end
 
       private

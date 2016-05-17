@@ -4,7 +4,7 @@ module Aws
   module EC2
     describe Instance do
 
-      let(:client) { EC2::Client.new(stub_responses:true) }
+      let(:client) { Client.new(stub_responses: true) }
 
       describe '#decrypt_windows_password' do
 

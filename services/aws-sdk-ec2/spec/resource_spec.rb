@@ -4,7 +4,7 @@ module Aws
   module EC2
     describe Resource do
 
-      let(:client) { Client.new(stub_responses:true) }
+      let(:client) { Client.new(stub_responses: true) }
 
       let(:ec2) { Resource.new(client: client) }
 

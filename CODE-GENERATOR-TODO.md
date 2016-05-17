@@ -1,28 +1,33 @@
-# TODO
+# TODO (Must haves)
 
-* In aws-sdk-code-generator/helpers.rb the *markdown* method is removing
-  invalid HTML artifacts. This should probably happen BEFORE handing it
-  to the code generator. Maybe move this into the rake task.
+* Documentation is not correctly formatted, services are all
+  appearing under Aws >, instead of under Services >
+
+* Client#initialize methods are not being documented currently.
+
+* use_accelerate_endpoint: option docs missing from Aws::S3::Client
 
 * Currently there is an ALIAS for Struct = Structure in aws-sdk-core.
   This is a work-around for YARD documentation bugs with struct.
+  Rename the actual class from Aws::Structure to Aws::Struct
+  and reverse the alias for backwards compatabilty.
 
 * Add documentation for `:response_target` to streaming operations
-  like get_object
+  like get_object.
+
+* Silence the documentation of the options = {} after params = {}
+  in the client class operations.
 
 * Remove the VERSION file from the repo root and replace with gem
-  specific versions
+  specific versions.
+
+* Update the aws-sdk-core version to 3.0
 
 * Move service specific specs from aws-sdk-resources and aws-sdk-core
   into gem files.
 
 * Migrate resource interface docs from doc-src/plugins/resources.rb
   and aws-sdk-resources/.../documentation into code generator
-
-* Migrate client api documentation from doc-src/plugins/apis.rb
-  into code generator
-
-* Document shared examples when build client operations
 
 * Decide the fate of Aws.add_service
   - its not possible to support without a dependency on aws-sdk-code-generator
@@ -39,19 +44,8 @@
   consider creating a structure shape ref which can be required,
   leaving vanilla shape ref without.
 
-* Move service specific customizations from aws-sdk-core into service gems.
-
-  * DynamoDB simple attribute
-  * S3 plugins
-  * Glacier
-  * etc
-
 * Add a YARD tag for each of the services to document which gem it is available
   from.
-
-* Support mixins/customizations of generated source code. This currently
-  affects S3, DynamoDB in aws-sdk-core, and S3, SNS, SQS, EC2, IAM from
-  resources.
 
 * Implement support for resource collection batch actions. Currently, the
   generated methods are non-functional.
@@ -71,7 +65,11 @@
      all docuemntation plugins if possible.
 
 * Need to decide on versioning scheme for service gems. Currently they
-  default to 1.0.0. This means `aws-sdk` v2.5.0 will depends on 70+ v1 gems.
-  What version should they start at? (I'm leaning towards 1.0)
+  default to 1.0.0. This means `aws-sdk` v2.5.0 (or 3?) will depends on 70+
+  v1 gems.  What version should they start at? (I'm leaning towards 1.0)
 
-* Ensure rake handlers:s3 functions (currently blocked by service loading)
+# Improvements (Nice to haves)
+
+* In aws-sdk-code-generator/helpers.rb the *markdown* method is removing
+  invalid HTML artifacts. This should probably happen BEFORE handing it
+  to the code generator. Maybe move this into the rake task.

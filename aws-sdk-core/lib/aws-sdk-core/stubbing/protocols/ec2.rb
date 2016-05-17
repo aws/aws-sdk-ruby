@@ -6,7 +6,7 @@ module Aws
         def stub_data(api, operation, data)
           resp = Seahorse::Client::Http::Response.new
           resp.status_code = 200
-          resp.body = build_body(api, operation, data)
+          resp.body = build_body(api, operation, data) if operation.output
           resp.headers['Content-Length'] = resp.body.size
           resp.headers['Content-Type'] = 'text/xml;charset=UTF-8'
           resp.headers['Server'] = 'AmazonEC2'

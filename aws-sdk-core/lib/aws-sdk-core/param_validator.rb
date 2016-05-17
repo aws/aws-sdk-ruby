@@ -14,7 +14,11 @@ module Aws
     # @param [Seahorse::Model::Shapes::ShapeRef] rules
     # @option options [Boolean] :validate_required (true)
     def initialize(rules, options = {})
-      @rules = rules
+      @rules = rules || begin
+        shape = StructureShape.new
+        shape.struct_class = EmptyStructure
+        ShapeRef.new(shape: shape)
+      end
       @validate_required = options[:validate_required] != false
     end
 
@@ -123,7 +127,7 @@ module Aws
       when Hash then true
       when ref.shape.struct_class then true
       else
-        errors << "expected #{context} to be a hash"
+        errors << "expected #{context} to be a hash got #{value.class}"
         false
       end
     end
