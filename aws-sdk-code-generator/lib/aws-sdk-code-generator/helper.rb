@@ -135,8 +135,12 @@ module AwsSdkCodeGenerator
         # turn them into YARD links.
         html = html.gsub(/<a>(.+?)<\/a>/) { $1 }
 
-        Kramdown::Document.new(html, input: 'html', line_width: line_width).
-          to_kramdown.strip
+        Kramdown::Document.new(
+          html,
+          input: 'html',
+          line_width: line_width,
+          auto_ids: false
+        ).to_kramdown.strip
       end
     end
 
