@@ -138,33 +138,6 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def examples_from_disk(method_name, operation)
-        dir = "doc-src/examples/#{@service_name.downcase}/client/#{method_name}/*.rb"
-        Dir.glob(dir).map do |path|
-          title = File.basename(path).split(/\./).first
-          title = title.sub(/^\d+_/, '').gsub(/_/, ' ')
-          title = title[0].upcase + title[1..-1]
-          tag("@example #{title}\n    " + File.read(path).lines.join('    '))
-        end
-      end
-
-      def request_syntax_example(method_name, operation)
-        example = RequestSyntaxExample.new(method_name, operation).to_str
-        parts = []
-        parts << "@example Request syntax with placeholder values\n"
-        parts += example.lines.map { |line| "  " + line }
-        tag(parts.join)
-      end
-
-      def response_structure_example(method_name, operation)
-        if example = ResponseStructureExample.new(method_name, operation).to_str
-          parts = []
-          parts << "@example Response structure"
-          parts += example.lines.map { |line| "  " + line }
-          tag(parts.join)
-        end
-      end
-
     end
   end
 end
