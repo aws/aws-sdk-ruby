@@ -40,6 +40,7 @@ module AwsSdkCodeGenerator
     autoload :TypesModule, 'aws-sdk-code-generator/generators/types_module'
     autoload :RootResourceClass, 'aws-sdk-code-generator/generators/root_resource_class'
     autoload :ResourceClass, 'aws-sdk-code-generator/generators/resource_class'
+    autoload :ResponseStructureExample, 'aws-sdk-code-generator/generators/response_structure_example'
     autoload :ServiceAutoloads, 'aws-sdk-code-generator/generators/service_autoloads'
     autoload :ServiceDocumentation, 'aws-sdk-code-generator/generators/service_documentation'
     autoload :SharedExample, 'aws-sdk-code-generator/generators/shared_example'

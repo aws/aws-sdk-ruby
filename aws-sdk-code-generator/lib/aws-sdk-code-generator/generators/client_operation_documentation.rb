@@ -16,8 +16,9 @@ module AwsSdkCodeGenerator
 
       def initialize(api:, service_identifier:, operation_name:, operation:, examples:)
         @api = api
-        @service_identifier = service_identifier
+        @service_id = service_identifier
         @operation_name = operation_name
+        @method_name = underscore(operation_name)
         @operation = operation
         @examples = examples ? examples['examples'][operation_name] || [] : []
       end
@@ -108,53 +109,33 @@ module AwsSdkCodeGenerator
       end
 
       def apply_examples_from_disk(docstring)
+        glob = "doc-src/examples/#{@service_id}/client/#{@method_name}/*.rb"
+        Dir.glob(glob).map do |path|
+          title = File.basename(path).split(/\./).first
+          title = title.sub(/^\d+_/, '').gsub(/_/, ' ')
+          title = title[0].upcase + title[1..-1]
+          docstring.append("\n@example #{title}")
+          docstring.append("\n  " + File.read(path).lines.join('  '))
+        end
       end
 
       def apply_request_syntax_example(docstring)
+        if @operation['input']
+          syntax = SyntaxExample.new(
+            struct_shape: shape(@operation['input']),
+            api: @api,
+            indent: '  '
+          ).format.strip
+          docstring.append("\n@example Request syntax with placeholder values")
+          docstring.append("\n  resp = client.#{@method_name}(#{syntax})")
+        end
       end
 
       def apply_response_struture_example(docstring)
-      end
-
-
-
-
-
-
-
-      def example_tags(method_name, operation)
-        shared_examples(method_name, operation) +
-        examples_from_disk(method_name, operation) +
-        [
-          request_syntax_example(method_name, operation),
-          response_structure_example(method_name, operation),
-        ].compact
-      end
-
-      def shared_examples(method_name, operation)
-        if operation['examples']
-          operation['examples'].map do |example|
-            shared_example(example, method_name, operation)
-          end
-        else
-          []
+        output = @operation['output']
+        if output && shape(output)['members'].size > 0
+          docstring.append(ResponseStructureExample.new(output, @api).to_s)
         end
-      end
-
-      def shared_example(json_ex, method_name, operation)
-        input_comments = json_ex['comments']['input']
-        input = SharedExample.new(json_ex['input'], method_name, operation, input_comments).to_str_input
-        parts = []
-        parts << "@example Example: #{json_ex['title']}\n\n"
-        parts << "  # #{json_ex['description']}\n\n"
-        parts += input.lines.map { |line| "  " + line }
-        if json_ex['output']
-          output_comments = json_ex['comments']['output']
-          output = SharedExample.new(json_ex['output'], method_name, operation, output_comments).to_str_output
-          parts << "\n\n  # resp.to_h outputs the following:\n"
-          parts += output.lines.map { |line| "  " + line }
-        end
-        tag(parts.join)
       end
 
       def examples_from_disk(method_name, operation)
