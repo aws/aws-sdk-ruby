@@ -21,6 +21,7 @@ module Aws
   SERVICE_MODULE_NAMES = %w(
     ACM
     APIGateway
+    ApplicationAutoScaling
     ApplicationDiscoveryService
     AutoScaling
     CloudFormation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Application Auto Scaling is a general
+  purpose Auto Scaling service for supported elastic AWS resources. With
+  Application Auto Scaling, you can automatically scale your AWS resources, with
+  an experience similar to that of Auto Scaling.
+
 2.3.5 (2016-05-17)
 ------------------
 
