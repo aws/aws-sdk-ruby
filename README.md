@@ -297,6 +297,7 @@ to be backwards compatible.
 | Amazon Simple Workflow Service           | SWF                          | 2012-01-25  |
 | Amazon SimpleDB                          | SimpleDB                     | 2009-04-15  |
 | Amazon WorkSpaces                        | WorkSpaces                   | 2015-04-08  |
+| Application Auto Scaling                 | ApplicationAutoScaling       | 2016-02-06  |
 | Auto Scaling                             | AutoScaling                  | 2011-01-01  |
 | Elastic Load Balancing                   | ElasticLoadBalancing         | 2012-06-01  |
 
