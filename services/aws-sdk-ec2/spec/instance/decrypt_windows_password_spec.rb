@@ -8,10 +8,7 @@ module Aws
 
       describe '#decrypt_windows_password' do
 
-        let(:keypair) {
-          dir = File.dirname(__FILE__)
-          File.join(dir, '..', '..', '..', 'fixtures', 'keypair')
-        }
+        let(:keypair) { File.expand_path('../../fixtures/keypair', __FILE__) }
 
         it 'decrypts the password using the given key pair' do
           expect(client).to receive(:get_password_data).

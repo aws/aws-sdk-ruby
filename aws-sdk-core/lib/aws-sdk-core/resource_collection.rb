@@ -12,7 +12,7 @@ module Aws
     def initialize(batches, options = {})
       @batches = batches
       @limit = options[:limit]
-      @size = [@limit, options[:size]].compact.min
+      @size = options[:size]
     end
 
     # @return [Integer,nil]

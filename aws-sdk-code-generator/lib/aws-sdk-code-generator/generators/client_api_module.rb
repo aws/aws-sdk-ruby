@@ -87,9 +87,7 @@ module AwsSdkCodeGenerator
             c << "o.http_request_uri = #{operation['http']['requestUri'].inspect}"
             c << "o.deprecated = true" if operation['deprecated']
             %w(input output).each do |mode|
-              if operation[mode]
-                c << "o.#{mode} = #{operation_shape_ref(operation[mode])}"
-              end
+              c << "o.#{mode} = #{operation_shape_ref(operation[mode])}"
             end
             Array(operation['errors']).each do |error|
               c << "o.errors << #{operation_shape_ref(error)}"
@@ -120,7 +118,7 @@ module AwsSdkCodeGenerator
           end
           "ShapeRef.new(shape: #{shape_name}#{options})"
         else
-          "ShapeRef.new(shape: StructureShape.new)"
+          "ShapeRef.new(shape: StructureShape.new(struct_class: EmptyStructure))"
         end
       end
 

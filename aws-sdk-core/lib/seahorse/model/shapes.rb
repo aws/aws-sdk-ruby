@@ -180,7 +180,7 @@ module Seahorse
           @members = {}
           @members_by_location_name = {}
           @required = Set.new
-          super()
+          super
         end
 
         # @return [Set<Symbol>]

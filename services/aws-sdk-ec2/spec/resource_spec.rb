@@ -18,12 +18,15 @@ module Aws
               { key: 'k2', value: 'v2' },
             ]
           )
-          expect(tags).to be_kind_of(Resources::Batch)
-          expect(tags.count).to be(4)
-          (0..3).each do |n|
-            expect(tags[n]).to be_kind_of(Tag)
-            expect(tags[n].client).to be(ec2.client)
+          expect(tags).to be_kind_of(Tag::Collection)
+          expect(tags.size).to be(4)
+
+          tags.each do |tag|
+            expect(tag).to be_kind_of(Tag)
+            expect(tag.client).to be(ec2.client)
           end
+
+          tags = tags.to_a
           expect(tags[0].resource_id).to eq('i-12345678')
           expect(tags[0].key).to eq('k1')
           expect(tags[0].value).to eq('v1')

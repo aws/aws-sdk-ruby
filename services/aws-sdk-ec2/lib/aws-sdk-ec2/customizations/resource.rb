@@ -10,7 +10,7 @@ module Aws
             tags << Tag.new(resource_id, tag[:key], tag[:value], client: @client)
           end
         end
-        Tag::Collection.new(tags)
+        Tag::Collection.new([tags], size: tags.size)
       end
 
     end
