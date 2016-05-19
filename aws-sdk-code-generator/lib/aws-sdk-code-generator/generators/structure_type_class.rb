@@ -74,11 +74,11 @@ module AwsSdkCodeGenerator
       end
 
       def attribute_macro(member_name, member_ref)
-        <<-MACRO
-@!attribute [rw] #{underscore(member_name)}
-  #{documentation(member_ref, line_width:68).lines.to_a.join("  ")}
-  @return [#{ruby_type(member_ref)}]
-        MACRO
+        docs = documentation(member_ref, line_width:68).lines.to_a.join("  ")
+        macro = "@!attribute [rw] #{underscore(member_name)}\n"
+        macro << "  #{docs}\n" unless docs == ''
+        macro << "  @return [#{ruby_type(member_ref)}]"
+        macro
       end
 
       private

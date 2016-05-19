@@ -30,6 +30,7 @@ module AwsSdkCodeGenerator
       end
 
       def visit_inputs(shape_ref, inputs)
+        return if inputs.include?(shape_ref['shape']) # recursion
         inputs << shape_ref['shape']
         s = shape(shape_ref)
         case s['type']
