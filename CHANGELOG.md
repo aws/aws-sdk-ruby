@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECS - Filter option lets customers view active, inactive, or
+  all task definition families.
+
 2.3.6 (2016-05-18)
 ------------------
 
