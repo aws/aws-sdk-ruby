@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.7 (2016-05-19)
 ------------------
 
 * Feature - Aws::Firehose - Amazon Kinesis Firehose supports configurable retry
