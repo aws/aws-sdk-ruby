@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Firehose - Amazon Kinesis Firehose supports configurable retry
+  window for loading data into Amazon Redshift.
+
 * Feature - Aws::ECS - Filter option lets customers view active, inactive, or
   all task definition families.
 
