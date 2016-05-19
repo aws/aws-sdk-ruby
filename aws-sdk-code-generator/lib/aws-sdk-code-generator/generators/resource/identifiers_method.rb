@@ -5,19 +5,18 @@ module AwsSdkCodeGenerator
 
         def initialize(identifiers:)
           super('identifiers')
-          docstring('@deprecated')
           docstring('@api private')
           identifiers ||= []
-          if identifiers.empty?
-            code('{}')
-          else
-            code('{')
-            identifiers.each do |i|
-              name = underscore(i['name'])
-              code("  #{name}: @#{name},")
-            end
-            code('}')
+          identifiers = (identifiers || []).inject({}) do |hash, identifier|
+            name = underscore(identifier['name'])
+            hash[name.to_sym] = name
+            hash
           end
+          code(HashFormatter.new(inline: true).format(identifiers))
+        end
+
+        def lines
+          super + ["deprecated(:#{name})"]
         end
 
       end

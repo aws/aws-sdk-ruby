@@ -422,8 +422,8 @@ module Aws
       end
       svc_module
     end
-
-    Struct = Structure
-
   end
+
+  Struct = Structure
+
 end

@@ -25,6 +25,9 @@ end
 def wait(params = {})
   @waiter.wait(client: @client, params: params)
 end
+
+# @api private
+attr_reader :waiter
         CODE
       end
 

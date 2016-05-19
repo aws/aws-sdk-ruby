@@ -148,7 +148,7 @@ module AwsSdkCodeGenerator
       def apply_shape_classes(m)
         m.code do |c|
           shape_defs.each do |shape_name, shape|
-            c << "#{shape_name} = #{shape_class(shape['type'])}.new"
+            c << "#{shape_name} = #{shape_class(shape['type'])}.new(name: '#{shape_name}')"
           end
         end
       end

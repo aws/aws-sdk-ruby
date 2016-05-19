@@ -4,7 +4,7 @@ module AwsSdkCodeGenerator
   module Generators
     class ResourceClass < Dsl::Class
 
-      include Helper
+      extend Helper
 
       def initialize(name:, resource:, api:, paginators:nil, waiters:nil)
         @api = api
@@ -20,10 +20,10 @@ module AwsSdkCodeGenerator
       private
 
       def build
+        extend_module('Deprecations')
         add(initialize_method)
         code('# @!group Read-Only Attributes')
         add(*identifier_getters)
-        add(identifiers_method)
         add(*data_attribute_getters)
         code('# @!endgroup')
         add(client_getter)
@@ -34,7 +34,8 @@ module AwsSdkCodeGenerator
         add(*waiters)
         apply_actions
         apply_associations
-        add(*extract_identifier_methods)
+        add(identifiers_method)
+        add(*private_methods)
         add(Generators::Resource::CollectionClass.new(
           resource_name: @name,
           resource: @resource,
@@ -158,6 +159,13 @@ module AwsSdkCodeGenerator
         )
       end
 
+      def private_methods
+        methods = []
+        methods.concat(extract_identifier_methods)
+        methods << yield_waiter_and_warn_method
+        methods.compact
+      end
+
       def extract_identifier_methods
         identifiers.map.with_index do |identifier, n|
           Generators::Resource::ExtractIdentifierMethod.new(
@@ -256,6 +264,24 @@ module AwsSdkCodeGenerator
           )
         else
           names << method_name
+        end
+      end
+
+      def yield_waiter_and_warn_method
+        if @resource['waiters'] && @resource['waiters'].size > 0
+          Dsl::Method.new(:yield_waiter_and_warn, access: :private) do |m|
+            m.param(:waiter)
+            m.block_param
+            m.code(<<-CODE)
+if !@waiter_block_warned
+  msg = "pass options to configure the waiter; "
+  msg << "yielding the waiter is deprecated"
+  warn(msg)
+  @waiter_block_warned = true
+end
+yield(waiter.waiter)
+            CODE
+          end
         end
       end
 

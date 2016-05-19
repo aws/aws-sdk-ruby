@@ -74,7 +74,7 @@ module Aws
       end
 
       def use_bucket_as_hostname(req)
-        req.handlers.remove(Plugins::S3BucketDns::Handler)
+        req.handlers.remove(Plugins::BucketDns::Handler)
         req.handle do |context|
           uri = context.http_request.endpoint
           uri.host = context.params[:bucket]
@@ -86,7 +86,8 @@ module Aws
       end
 
       def sign_but_dont_send(req, expires_in, scheme)
-        req.handlers.remove(Plugins::S3RequestSigner::SigningHandler)
+        req.handlers.remove(Aws::Plugins::RequestSigner::Handler)
+        req.handlers.remove(Aws::S3::Plugins::RequestSigner::SigningHandler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handle(step: :send) do |context|
           if scheme != context.http_request.endpoint.scheme

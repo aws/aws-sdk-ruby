@@ -17,10 +17,13 @@ module AwsSdkCodeGenerator
 
           returns(resource_name)
 
-          code("waiter = Waiters::#{@waiter_name}.new(options.merge(client: @client))")
           resp = @resource_waiter['path'] ? 'resp = ' : ''
-          code("#{resp}waiter.wait(#{args})")
-          code("#{resource_name}.new(#{constructor_args})")
+          code(<<-CODE)
+waiter = Waiters::#{@waiter_name}.new(options.merge(client: @client))
+yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+#{resp}waiter.wait(#{args})
+#{resource_name}.new(#{constructor_args})
+          CODE
         end
 
         private

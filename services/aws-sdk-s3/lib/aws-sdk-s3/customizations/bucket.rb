@@ -118,7 +118,7 @@ module Aws
       end
 
       def bucket_as_hostname?(https)
-        Plugins::S3BucketDns.dns_compatible?(name, https) &&
+        Plugins::BucketDns.dns_compatible?(name, https) &&
         !client.config.force_path_style
       end
 
