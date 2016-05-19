@@ -4,14 +4,17 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(name:, api:)
+      # @param [String] name
+      # @param [Hash] api
+      # @param [Boolean] used_as_input
+      def initialize(name:, api:, used_as_input:)
         @name = name
         @api = api
         @shape = api['shapes'][name]
         super()
 
         apply_class_docs
-        apply_input_example
+        apply_input_example if used_as_input
         apply_returned_by
 
         if @shape['members'].empty?
@@ -30,13 +33,17 @@ module AwsSdkCodeGenerator
       end
 
       def apply_input_example
-        note = "@note When making an API call, pass #{@name}\n"
-        note += "  data as a hash:\n\n"
-        note += SyntaxExample.new(
-          struct_shape: @shape,
-          api: @api,
-          indent: ' ' * 6
-        ).format
+        if @shape['members'].empty?
+          note = '@api private'
+        else
+          note = "@note When making an API call, pass #{@name}\n"
+          note += "  data as a hash:\n\n"
+          note += SyntaxExample.new(
+            struct_shape: @shape,
+            api: @api,
+            indent: ' ' * 6
+          ).format
+        end
         append(Dsl::Docstring.new(note).to_s)
       end
 
