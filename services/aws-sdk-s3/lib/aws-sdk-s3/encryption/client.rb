@@ -1,3 +1,6 @@
+$LOAD_PATH.unshift(File.expand_path("../../../../../aws-sdk-kms/lib", __FILE__))
+require 'aws-sdk-kms'
+
 module Aws
   module S3
 

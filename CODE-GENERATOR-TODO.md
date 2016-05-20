@@ -1,5 +1,8 @@
 # TODO (Must haves)
 
+* Decide how to deal with cross-service dependencies. Known deps:
+  aws-sdk-s3 => aws-sdk-kms (for encryption client, encryption/client.rb)
+
 * Documentation is not correctly formatted, services are all
   appearing under Aws >, instead of under Services >
 
