@@ -18,6 +18,7 @@ module AwsSdkCodeGenerator
       waiters: nil,
       resources: nil,
       examples: nil,
+      gem_requires:[],
       &block
     )
       @module_names = module_names
@@ -27,12 +28,13 @@ module AwsSdkCodeGenerator
       @waiters = waiters
       @resources = resources
       @examples = examples
+      @gem_requires = gem_requires.unshift('aws-sdk-core').uniq
       @callback = block
     end
 
     def generate_src
       root_mod, svc_mod = build_modules
-      root_mod.require('aws-sdk-core')
+      @gem_requires.each { |gem_name| root_mod.require(gem_name) }
       root_mod.top(:newline)
       svc_mod.docstring(service_docstring)
       each_module do |mod|
@@ -89,7 +91,7 @@ module AwsSdkCodeGenerator
         resources: @resources
       )
       root_mod, svc_mod = build_modules
-      root_mod.require('aws-sdk-core')
+      @gem_requires.each { |gem_name| root_mod.require(gem_name) }
       root_mod.top(:newline)
       svc_mod.docstring(service_docstring)
       autoloads.apply(svc_mod)

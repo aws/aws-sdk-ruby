@@ -228,7 +228,10 @@
   },
   "S3": {
     "models": "s3/2006-03-01",
-    "endpoint": "s3"
+    "endpoint": "s3",
+    "dependencies": {
+      "aws-sdk-kms": "~> 1.0"
+    }
   },
   "SES": {
     "models": "email/2010-12-01",

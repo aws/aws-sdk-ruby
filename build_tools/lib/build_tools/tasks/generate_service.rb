@@ -9,15 +9,9 @@ module BuildTools
         # @param [BuildTools::Services::Service] service
         def new(service)
           task = Rake::Task.define_task("build:#{service.identifier}") do
-
-            gem_name = "aws-sdk-#{service.identifier}"
-            gem_dir = File.join('services', gem_name)
-            options = generate_opts(service)
-
-            build_version_file(gem_name, gem_dir, options)
-            build_gemspec(gem_name, gem_dir, options)
-            build_src(gem_name, gem_dir, options)
-
+            build_version_file(service)
+            build_gemspec(service)
+            build_src(service)
           end
           task.add_description("Builds the code for Aws::#{service.name}")
           task
@@ -25,26 +19,35 @@ module BuildTools
 
         private
 
-        def build_src(gem_name, gem_dir, options)
-          g = AwsSdkCodeGenerator::Generator.new(options) do |svc_module|
-            if File.exists?("#{gem_dir}/lib/#{gem_name}/customizations.rb")
+        def build_src(svc)
+          g = AwsSdkCodeGenerator::Generator.new(generate_opts(svc)) do |svc_module|
+
+            if File.exists?("#{svc.gem_dir}/lib/#{svc.gem_name}/customizations.rb")
               svc_module.top("\n# customizations for generated code")
-              svc_module.require_relative("#{gem_name}/customizations.rb")
+              svc_module.require_relative("#{svc.gem_name}/customizations.rb")
             end
+
+            svc_module.code("GEM_VERSION = '#{gem_version(svc)}'")
+
           end
-          g.generate_src_files(prefix:gem_name).each do |path, contents|
-            write_file(File.join(gem_dir, 'lib', path), contents)
+
+          g.generate_src_files(prefix: svc.gem_name).each do |path, contents|
+            write_file(File.join(svc.gem_dir, 'lib', path), contents)
           end
         end
 
-        def build_gemspec(gem_name, gem_dir, options)
-          service_name = options[:api]['metadata']['serviceFullName']
-          write_file(File.join(gem_dir, "#{gem_name}.gemspec"), <<-GEMSPEC)
+        def build_gemspec(service)
+          dependencies = service.dependencies.map do |gem, version|
+            "spec.add_dependency('#{gem}', '#{version}')"
+          end.join("\n  ")
+
+          write_file(File.join(service.gem_dir, "#{service.gem_name}.gemspec"), <<-GEMSPEC)
 Gem::Specification.new do |spec|
-  spec.name          = '#{gem_name}'
-  spec.version       = File.read(File.join(File.dirname(__FILE__), 'VERSION')).strip
-  spec.summary       = 'AWS SDK for Ruby - #{service_name}'
-  spec.description   = 'Official AWS Ruby gem for #{service_name}. This gem is part of the AWS SDK for Ruby.'
+
+  spec.name          = '#{service.gem_name}'
+  spec.version       = '#{gem_version(service)}'
+  spec.summary       = 'AWS SDK for Ruby - #{service.short_name}'
+  spec.description   = 'Official AWS Ruby gem for #{service.full_name}. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
@@ -52,15 +55,15 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files         = Dir['lib/**/*.rb']
 
-  spec.add_dependency('aws-sdk-core', '~> 2.4')
+  #{dependencies}
 
 end
           GEMSPEC
         end
 
-        def build_version_file(gem_name, gem_dir, options)
-          path = File.join(gem_dir, 'VERSION')
-          write_file(path, "1.0.0") unless File.exists?(path)
+        def build_version_file(service)
+          version_path = File.join(service.gem_dir, 'VERSION')
+          write_file(version_path, "1.0.0") unless File.exists?(version_path)
         end
 
         # Options given to the code generator, includes the loaded
@@ -71,6 +74,7 @@ end
           service.models.each_pair do |model_name, model_path|
             options[model_name] = load_model(service.name, model_name, model_path)
           end
+          options[:gem_requires] = service.dependencies.keys
           options
         end
 
@@ -94,6 +98,10 @@ end
           File.open(path, 'wb') do |file|
             file.write(contents)
           end
+        end
+
+        def gem_version(svc)
+          File.read("#{svc.gem_dir}/VERSION").strip
         end
 
       end

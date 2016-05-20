@@ -1,7 +1,7 @@
 Gem::Specification.new do |spec|
 
   spec.name          = 'aws-sdk-core'
-  spec.version       = '2.4.0'
+  spec.version       = '3.0.0'
   spec.summary       = 'AWS SDK for Ruby - Core'
   spec.description   = 'Provides API clients for AWS. This gem is part of the official AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
