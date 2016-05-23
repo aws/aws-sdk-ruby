@@ -80,7 +80,7 @@ module Aws
       end
 
       def flat?(ref)
-        ref.shape.flattend
+        ref.shape.flattened
       end
 
       def timestamp(value)

@@ -76,3 +76,5 @@
 * In aws-sdk-code-generator/helpers.rb the *markdown* method is removing
   invalid HTML artifacts. This should probably happen BEFORE handing it
   to the code generator. Maybe move this into the rake task.
+
+* Run unit & integration tests against the built gem artifacts
