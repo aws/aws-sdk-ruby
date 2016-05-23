@@ -29,6 +29,10 @@ module Aws
 
         let(:namespace) { Module.new }
 
+        before(:each) do
+          pending("disabled")
+        end
+
         def apply_definition
           namespace.const_set(:Client, client_class)
           allow(client_class).to receive(:new).and_return(client)
