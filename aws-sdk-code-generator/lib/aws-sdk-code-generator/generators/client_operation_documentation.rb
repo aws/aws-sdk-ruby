@@ -134,7 +134,7 @@ module AwsSdkCodeGenerator
       def apply_response_struture_example(docstring)
         output = @operation['output']
         if output && shape(output)['members'].size > 0
-          docstring.append(ResponseStructureExample.new(output, @api).to_s)
+          docstring.append(ResponseStructureExample.new(shape_ref:output, api:@api).to_s)
         end
       end
 

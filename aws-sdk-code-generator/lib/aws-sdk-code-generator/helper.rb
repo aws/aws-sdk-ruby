@@ -34,7 +34,6 @@ module AwsSdkCodeGenerator
       shape = @api['shapes'][shape_ref['shape']]
       case shape['type']
       when 'blob' then 'String, IO'
-      when 'byte' then 'Integer'
       when 'boolean' then 'Boolean'
       when 'character' then 'String'
       when 'double' then 'Float'
@@ -65,7 +64,6 @@ module AwsSdkCodeGenerator
       shape = @api['shapes'][shape_ref['shape']]
       case shape['type']
       when 'blob' then streaming?(shape_ref, shape) ? 'IO' : 'String'
-      when 'byte' then 'Integer'
       when 'boolean' then 'Boolean'
       when 'character' then 'String'
       when 'double' then 'Float'

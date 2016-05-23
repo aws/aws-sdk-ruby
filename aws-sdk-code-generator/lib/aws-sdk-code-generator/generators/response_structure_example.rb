@@ -6,13 +6,13 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(output_ref, api)
-        @output_ref = output_ref
+      def initialize(shape_ref:, api:)
+        @shape_ref = shape_ref
         @api = api
       end
 
       def to_str
-        "\n@example Response structure\n  #{entry(@output_ref, "resp", Set.new).join("\n  ")}"
+        "\n@example Response structure\n  #{entry(@shape_ref, "resp", Set.new).join("\n  ")}"
       end
       alias to_s to_str
 
@@ -41,11 +41,11 @@ module AwsSdkCodeGenerator
       end
 
       def map_key(ref)
-        shape(ref)['key']['shape']
+        shape(ref)['key']['shape'].inspect
       end
 
       def entry(ref, context, visited)
-        if shape(ref)['shape'] == 'AttributeValue'
+        if ref['shape'] == 'AttributeValue'
           return ["#{context} #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>"]
         elsif visited.include?(ref['shape'])
           return ["#{context} #=> Types::#{ref['shape']}"]
@@ -56,7 +56,15 @@ module AwsSdkCodeGenerator
         when 'structure' then structure(ref, context, visited)
         when 'list' then list(ref, context, visited)
         when 'map' then map(ref, context, visited)
-        else ["#{context} #=> #{ruby_type(ref)}"]
+        else ["#{context} #=> #{type(ref)}"]
+        end
+      end
+
+      def type(ref)
+        if shape(ref)['type'] == 'string'
+          string(ref)
+        else
+          ruby_type(ref)
         end
       end
 
