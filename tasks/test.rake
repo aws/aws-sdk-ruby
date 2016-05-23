@@ -23,8 +23,8 @@ end
     else
       puts(<<-MSG)
 
-  *** skipping aws-sdk-core integration tests ***
-    export AWS_INTEGRATION=1 to enable integration tests
+*** skipping aws-sdk-core integration tests ***
+  export AWS_INTEGRATION=1 to enable integration tests
 
       MSG
     end
