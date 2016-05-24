@@ -48,7 +48,6 @@ module AwsSdkCodeGenerator
         super('ClientApi')
         docstring("@api private")
         include('Seahorse::Model')
-        include('Seahorse::Model::Shapes')
         apply_shape_classes(self)
         apply_shape_definitions(self)
         apply_api_const(self)
@@ -116,14 +115,14 @@ module AwsSdkCodeGenerator
               options = ", metadata: #{HashFormatter.new.format(options)}"
             end
           end
-          "ShapeRef.new(shape: #{shape_name}#{options})"
+          "Shapes::ShapeRef.new(shape: #{shape_name}#{options})"
         else
-          "ShapeRef.new(shape: StructureShape.new(struct_class: EmptyStructure))"
+          "Shapes::ShapeRef.new(shape: StructureShape.new(struct_class: EmptyStructure))"
         end
       end
 
       def shape_ref(ref, member_name = nil, required = Set.new)
-        line = "ShapeRef.new(shape: #{ref['shape']}"
+        line = "Shapes::ShapeRef.new(shape: #{ref['shape']}"
         line += shape_ref_required(required, member_name)
         line += shape_ref_deprecated(ref)
         line += shape_ref_location(ref)
@@ -148,7 +147,7 @@ module AwsSdkCodeGenerator
       def apply_shape_classes(m)
         m.code do |c|
           shape_defs.each do |shape_name, shape|
-            c << "#{shape_name} = #{shape_class(shape['type'])}.new(name: '#{shape_name}')"
+            c << "#{shape_name} = Shapes::#{shape_class(shape['type'])}.new(name: '#{shape_name}')"
           end
         end
       end

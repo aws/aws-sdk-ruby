@@ -120,7 +120,7 @@ module Aws
                 </entry>
               </StringMap>
               <Blob>#{Base64.strict_encode64('data')}}</Blob>
-              <Byte>a</Byte>
+              <Byte>90</Byte>
               <Boolean>true</Boolean>
               <Character>b</Character>
               <Double>123.456</Double>
@@ -154,7 +154,7 @@ module Aws
                 "Color" => "red",
               },
               blob: "data",
-              byte: "a",
+              byte: 90,
               boolean: true,
               character: "b",
               double: 123.456,

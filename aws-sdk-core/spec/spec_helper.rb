@@ -5,6 +5,7 @@ require 'rspec'
 require 'webmock/rspec'
 require 'aws-sdk-core'
 require 'build_tools'
+require 'aws-sdk-code-generator'
 
 SimpleCov.command_name('test:unit:aws-sdk-core')
 
@@ -173,16 +174,22 @@ module ApiHelper
     end
 
     def sample_api(shapes = sample_shapes)
+      @sample_api_count ||= 0
+      @sample_api_count += 1
       api = {
         'operations' => {
           'ExampleOperation' => {
+            'http' => { 'method' => 'POST', 'requestUri' => '/' },
             'input' => { 'shape' => 'StructureShape' },
             'output' => { 'shape' => 'StructureShape' },
           }
         },
         'shapes' => shapes
       }
-      Aws::Api::Builder.build(api)
+      module_name = "SampleApi#{@sample_api_count}"
+      g = AwsSdkCodeGenerator::Generator.new(api: api, module_names: [module_name])
+      Object.module_eval(g.generate_src)
+      Object.const_get(module_name).const_get(:ClientApi).const_get(:API)
     end
 
   end

@@ -33,9 +33,10 @@ module AwsSdkCodeGenerator
     def ruby_input_type(shape_ref, nested:false)
       shape = @api['shapes'][shape_ref['shape']]
       case shape['type']
+      when 'byte' then 'Integer<byte>'
       when 'blob' then 'String, IO'
       when 'boolean' then 'Boolean'
-      when 'character' then 'String'
+      when 'character' then 'String<character>'
       when 'double' then 'Float'
       when 'float' then 'Float'
       when 'integer' then 'Integer'
@@ -65,7 +66,8 @@ module AwsSdkCodeGenerator
       case shape['type']
       when 'blob' then streaming?(shape_ref, shape) ? 'IO' : 'String'
       when 'boolean' then 'Boolean'
-      when 'character' then 'String'
+      when 'byte' then 'Integer<byte>'
+      when 'character' then 'String<character>'
       when 'double' then 'Float'
       when 'float' then 'Float'
       when 'integer' then 'Integer'

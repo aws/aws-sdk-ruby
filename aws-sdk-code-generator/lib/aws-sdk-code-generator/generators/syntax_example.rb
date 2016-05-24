@@ -49,6 +49,8 @@ module AwsSdkCodeGenerator
         when 'boolean' then "false"
         when 'integer', 'long' then '1'
         when 'float', 'double' then '1.0'
+        when 'byte' then '97'
+        when 'character' then '"a"'
         when 'string' then string(ref)
         when 'timestamp' then 'Time.now'
         else raise "unsupported shape #{s['type'].inspect}"

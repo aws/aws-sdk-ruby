@@ -56,7 +56,7 @@ module AwsSdkCodeGenerator
       end
 
       def apply_structure_with_members
-        append("class #{@name} < Struct.new(")
+        append("class #{@name} < Aws::Structure.new(")
         @shape['members'].keys.each.with_index do |member_name, n|
           comma = n == @shape['members'].size - 1 ? ')' : ','
           append("  :#{underscore(member_name)}#{comma}")
