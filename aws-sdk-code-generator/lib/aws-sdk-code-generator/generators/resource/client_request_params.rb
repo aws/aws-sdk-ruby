@@ -18,6 +18,10 @@ module AwsSdkCodeGenerator
           @params.empty?
         end
 
+        def size
+          @params.size
+        end
+
         private
 
         def format_params
@@ -25,7 +29,9 @@ module AwsSdkCodeGenerator
           @params.each do |param|
             ParamTarget.new(param).apply(hash, ValueSource.new(param))
           end
-          HashFormatter.new(wrap:false, inline: @params.count == 1).format(hash)
+          formatter = HashFormatter.new(wrap:false, inline: @params.count == 1)
+          params = formatter.format(hash)
+          @params.size == 1 ? params.strip : params
         end
 
         class ParamTarget
