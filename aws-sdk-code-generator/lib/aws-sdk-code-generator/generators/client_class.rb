@@ -143,7 +143,7 @@ w.wait(params)
           m.code(<<-CODE)
 waiter_class = waiters[waiter_name]
 if waiter_class
-  waiter_class.new(options.merge(client:self))
+  waiter_class.new(options.merge(client: self))
 else
   raise Aws::Waiters::Errors::NoSuchWaiter.new(waiter_name, waiters.keys)
 end
