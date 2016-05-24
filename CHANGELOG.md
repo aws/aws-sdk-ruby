@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Adds support for Instance Console Screenshot. Instance
+  Console Screenshot provides an on-demand screenshot of the instance console,
+  conveying valuable debug information.
+
 * Feature - Aws::RDS - Adds support for cross-account snapshot sharing.
 
 2.3.7 (2016-05-19)
