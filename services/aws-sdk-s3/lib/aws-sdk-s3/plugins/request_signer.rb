@@ -18,8 +18,9 @@ module Aws
             when 'v4' then apply_v4_signature(context)
             when 's3' then apply_s3_legacy_signature(context)
             else
-              raise "unsupported signature version #{version.inspect}, valid"\
-                " options: 'v4' (default), 's3'"
+              msg = "unsupported signature version `#{version}'; must "
+              msg << "be one of 'v4' or 's3'"
+              raise ArgumentError, msg
             end
             @handler.call(context)
           end

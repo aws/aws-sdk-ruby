@@ -72,7 +72,11 @@ module Seahorse
         def initialize(options = {})
           @metadata = {}
           options.each_pair do |key, value|
-            send("#{key}=", value)
+            if respond_to?("#{key}=")
+              send("#{key}=", value)
+            else
+              self[key] = value
+            end
           end
         end
 

@@ -154,7 +154,7 @@ module Aws
           )
           expect {
             client.head_object(bucket:'name', key:'key')
-          }.to raise_error(/unsupported/)
+          }.to raise_error(ArgumentError, /unsupported/)
         end
 
       end

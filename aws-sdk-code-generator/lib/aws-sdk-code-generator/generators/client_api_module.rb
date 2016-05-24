@@ -22,6 +22,28 @@ module AwsSdkCodeGenerator
         'timestamp' => 'TimestampShape',
       }
 
+      SHAPE_KEYS = {
+        # keep
+        'flattened' => true,
+        'xmlNamespace' => true,
+        # ignore
+        'type' => false,
+        'documentation' => false,
+        'members' => false,
+        'member' => false,
+        'key' => false,
+        'value' => false,
+        'required' => false,
+        'enum' => false,
+        'exception' => false,
+        'payload' => false,
+        'pattern' => false,
+        'sensitive' => false,
+        'timestampFormat' => false,
+        'min' => false,
+        'max' => false,
+      }
+
       METADATA_KEYS = {
         # keep
         'endpointPrefix' => true,
@@ -63,7 +85,7 @@ module AwsSdkCodeGenerator
               if METADATA_KEYS[key]
                 c << "#{key.inspect} => #{@api['metadata'][key].inspect},"
               elsif METADATA_KEYS[key].nil?
-                raise "unhandled metadata key `#{key}'"
+                raise "unhandled metadata key #{key.inspect}"
               end
             end
           end
@@ -117,7 +139,7 @@ module AwsSdkCodeGenerator
           end
           "Shapes::ShapeRef.new(shape: #{shape_name}#{options})"
         else
-          "Shapes::ShapeRef.new(shape: StructureShape.new(struct_class: EmptyStructure))"
+          "Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: EmptyStructure))"
         end
       end
 
@@ -147,7 +169,18 @@ module AwsSdkCodeGenerator
       def apply_shape_classes(m)
         m.code do |c|
           shape_defs.each do |shape_name, shape|
-            c << "#{shape_name} = Shapes::#{shape_class(shape['type'])}.new(name: '#{shape_name}')"
+            #c << "#{shape_name} = Shapes::#{shape_class(shape['type'])}.new(name: '#{shape_name}')"
+            attrs = []
+            attrs << "name: '#{shape_name}'"
+            shape.each_pair do |key, value|
+              if SHAPE_KEYS[key]
+                attrs << "#{key}: #{value.inspect}"
+              elsif SHAPE_KEYS[key].nil?
+                raise "unhandled shape key #{key.inspect}"
+              end
+            end
+            attrs = attrs.join(', ')
+            c << "#{shape_name} = Shapes::#{shape_class(shape['type'])}.new(#{attrs})"
           end
         end
       end
@@ -167,11 +200,9 @@ module AwsSdkCodeGenerator
               end
             elsif shape['type'] == 'list'
               c << "#{shape_name}.member = #{shape_ref(shape['member'])}"
-              c << "#{shape_name}.flattened = true" if shape['flattened']
             elsif shape['type'] == 'map'
               c << "#{shape_name}.key = #{shape_ref(shape['key'])}"
               c << "#{shape_name}.value = #{shape_ref(shape['value'])}"
-              c << "#{shape_name}.flattened = true" if shape['flattened']
             else
               next
             end

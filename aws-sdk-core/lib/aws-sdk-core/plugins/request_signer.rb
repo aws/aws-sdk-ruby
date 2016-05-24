@@ -120,13 +120,15 @@ module Aws
       end
 
       def add_handlers(handlers, config)
-        operations = []
-        config.api.operation_names.each do |operation_name|
-          if config.api.operation(operation_name)['authtype'] != 'none'
-            operations << operation_name
+        unless config.sigv4_name == 's3'
+          operations = []
+          config.api.operation_names.each do |operation_name|
+            if config.api.operation(operation_name)['authtype'] != 'none'
+              operations << operation_name
+            end
           end
+          handlers.add(Handler, step: :sign, operations: operations)
         end
-        handlers.add(Handler, step: :sign, operations: operations)
       end
 
     end
