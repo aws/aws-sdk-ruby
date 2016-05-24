@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.8 (2016-05-24)
 ------------------
 
 * Feature - Aws::EC2 - Adds support for Instance Console Screenshot. Instance
