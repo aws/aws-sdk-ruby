@@ -1,4 +1,5 @@
-$LOAD_PATH.unshift('build_tools/lib')
+$LOAD_PATH.unshift(File.expand_path('../../../build_tools/lib',  __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../../aws-sdk-code-generator/lib',  __FILE__))
 
 require 'simplecov'
 require 'rspec'
