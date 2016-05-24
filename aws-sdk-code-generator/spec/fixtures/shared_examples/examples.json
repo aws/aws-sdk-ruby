@@ -63,7 +63,7 @@
       {
         "id":"create-multipart-upload-1435862110",
         "title":"Create Multipart Upload",
-        "description":"The following example creates a multipart upload in the bucket my-bucket with the key multipart/01:",
+        "description":"desc",
         "input":{
           "Bucket":"my-bucket",
           "Key":"multipart/01",
@@ -157,16 +157,16 @@
       {
         "id":"list-parts-1435870463",
         "title":"List Parts",
-        "description":"The following example lists all of the parts that have been uploaded for a multipart upload with key multipart/01 in the bucket my-bucket:",
+        "description":"Example description here.",
         "input":{
-          "UploadId":"dfRtDYU0WWCCcH43C3WFbkRONycyCpTJJvxu2i5GYkZljF.Yxwh6XG7WfS2vC4to6HiV6Yjlx.cph0gtNBtJ8P3URCSbB7rjxI5iEwVDmgaXZOGgkk5nVTW16HOQ5l0R",
+          "UploadId":"upload-id",
           "Bucket":"my-bucket",
           "Key":"multipart/01"
         },
         "output":{
           "Owner":{
             "DisplayName":"aws-account-name",
-            "ID":"100719349fc3b6dcd7c820a124bf7aecd408092c3d7b51b38494939801fc248b"
+            "ID":"owner-id"
           },
           "Initiator":{
             "DisplayName":"username",
@@ -195,9 +195,10 @@
           "StorageClass":"STANDARD"
         },
         "comments":{
-          "input":{"Key": "Here is a comment for Key"},
+          "input":{"Key": "inline comment here"},
           "output":{
-            "Parts[1].Size":"Here is a comment for Parts[1].Size"
+            "Parts[1].Size":"Here is a comment for Parts[1].Size",
+            "Parts[1]":"Comment on list member"
           }
         }
       }
@@ -206,7 +207,7 @@
       {
         "id":"put-bucket-acl-1435870724",
         "title":"Put Bucket Acl",
-        "description":"This example grants full control to two AWS users (user1@example.com and user2@example.com) and read permission to everyone:",
+        "description":"desc",
         "input":{
           "Bucket":"MyBucket",
           "GrantFullControl":"emailaddress=\"user1@example.com\",emailaddress=\"user2@example.com\"",
@@ -224,7 +225,7 @@
       {
         "id":"put-bucket-cors-1435870893",
         "title":"Put Bucket Cors",
-        "description":"The following example enables PUT, POST, and DELETE requests from www.example.com, and enables GET requests from any domain:",
+        "description":"description-here",
         "input":{
           "Bucket":"MyBucket",
           "CORSConfiguration":{

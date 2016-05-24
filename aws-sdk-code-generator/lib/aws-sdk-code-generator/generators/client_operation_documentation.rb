@@ -20,7 +20,7 @@ module AwsSdkCodeGenerator
         @operation_name = operation_name
         @method_name = underscore(operation_name)
         @operation = operation
-        @examples = examples ? examples['examples'][operation_name] || [] : []
+        @examples = examples || { 'examples' => {} }
       end
 
       # @param [String] service_identifier
@@ -78,13 +78,13 @@ module AwsSdkCodeGenerator
       end
 
       def apply_shared_examples(docstring)
-        @examples.each do |example|
+        (@examples[@operation_name] || []).size.times do |n|
           docstring.append(
             SharedExample.new(
-              example: example,
               operation_name: @operation_name,
-              operation: @operation,
               api: @api,
+              examples: @examples,
+              example: n
             ).to_s
           )
         end

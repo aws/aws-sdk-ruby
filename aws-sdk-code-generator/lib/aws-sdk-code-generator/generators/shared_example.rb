@@ -4,10 +4,14 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(example:, operation_name:, operation:, api:)
-        @example = example
+      # @param [String] operation_name
+      # @param [Hash] api
+      # @param [Hash] examples
+      # @param [Integer] example
+      def initialize(operation_name:, api:, examples:, example:)
         @operation_name = operation_name
-        @operation = operation
+        @operation = api['operations'][operation_name]
+        @example = examples['examples'][operation_name][example]
         @api = api
         @method_name = underscore(operation_name)
       end
