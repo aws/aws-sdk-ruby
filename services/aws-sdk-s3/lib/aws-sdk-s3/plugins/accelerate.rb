@@ -56,7 +56,7 @@ module Aws
           end
 
           def validate_bucket_name!(bucket_name)
-            unless S3BucketDns.dns_compatible?(bucket_name, ssl = true)
+            unless BucketDns.dns_compatible?(bucket_name, ssl = true)
               msg = "unable to use `accelerate: true` on buckets with "
               msg << "non-DNS compatible names"
               raise ArgumentError, msg

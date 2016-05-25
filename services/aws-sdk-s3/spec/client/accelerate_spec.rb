@@ -9,7 +9,9 @@ module Aws
 
       let(:client) { Client.new(options) }
 
-      let(:accelerated_client) { Client.new(options.merge(use_accelerate_endpoint: true)) }
+      let(:accelerated_client) {
+        Client.new(options.merge(use_accelerate_endpoint: true))
+      }
 
       describe ':use_accelerate_endpoint' do
 
