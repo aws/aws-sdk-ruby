@@ -17,6 +17,7 @@ require 'aws-sdk-s3/customizations/bucket'
 require 'aws-sdk-s3/customizations/object'
 require 'aws-sdk-s3/customizations/object_summary'
 require 'aws-sdk-s3/customizations/multipart_upload'
+require 'aws-sdk-s3/customizations/types/list_object_versions_output'
 
 [
   Aws::S3::Object::Collection,
