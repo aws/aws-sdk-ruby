@@ -1,9 +1,0 @@
-operation: create_bucket
-params:
-  :bucket: 'bucket-name'
-request:
-  host: bucket-name.s3.amazonaws.com
-  method: PUT
-  path: /
-  headers: {}
-  body: ''

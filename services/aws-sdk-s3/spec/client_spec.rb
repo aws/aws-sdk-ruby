@@ -42,6 +42,41 @@ module Aws
             "http://custom.domain/path/prefix/bucket-name/key/path")
         end
 
+        it 'resolves correctly for gov-cloud' do
+          s3 = Client.new(region: 'us-gov-west-1')
+          expect(s3.config.endpoint.to_s).to eq('https://s3-us-gov-west-1.amazonaws.com')
+        end
+
+      end
+
+      describe 'http errors' do
+
+        {
+          304 => Errors::NotModified,
+          400 => Errors::BadRequest,
+          403 => Errors::Forbidden,
+          404 => Errors::NotFound,
+          412 => Errors::PreconditionFailed,
+          500 => Errors::Http500Error,
+        }.each_pair do |status_code, error_class|
+
+          it "raises #{error_class} for HTTP #{status_code} responses" do
+            client = Client.new(stub_responses: true)
+            client.handle(step: :send) do |context|
+              context.http_response.signal_done(
+                status_code: status_code,
+                headers: {},
+                body: ''
+              )
+              Seahorse::Client::Response.new(context: context)
+            end
+            expect {
+              client.head_object(bucket:'b', key:'k')
+            }.to raise_error(error_class)
+          end
+
+        end
+
       end
 
       describe 'closed files' do
@@ -69,24 +104,6 @@ module Aws
           expect(body.path).to eq(tmpfile.path)
           expect(body).not_to be(tmpfile)
           expect(body.closed?).to be(true)
-        end
-
-      end
-
-      describe 'empty body error responses' do
-
-        it 'creates an error class from empty body responses' do
-          client.handle(step: :send) do |context|
-            context.http_response.signal_done(
-              status_code: 500,
-              headers: {},
-              body: ''
-            )
-            Seahorse::Client::Response.new(context: context)
-          end
-          expect {
-            client.head_bucket(bucket:'aws-sdk')
-          }.to raise_error(S3::Errors::Http500Error)
         end
 
       end
@@ -181,15 +198,6 @@ module Aws
 
       end
 
-      describe 'endpoints' do
-
-        it 'resolves correctly for gov-cloud' do
-          s3 = Client.new(region: 'us-gov-west-1')
-          expect(s3.config.endpoint.to_s).to eq('https://s3-us-gov-west-1.amazonaws.com')
-        end
-
-      end
-
       describe '#create_bucket' do
 
         it 'omits location constraint for the classic region' do
@@ -233,6 +241,82 @@ module Aws
   <LocationConstraint>EU</LocationConstraint>
 </CreateBucketConfiguration>
           XML
+        end
+
+      end
+
+      describe '#delete_bucket' do
+
+        it 'correctly unmarshals errors' do
+          client = Client.new(stub_responses: true)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 409,
+              headers: {},
+              body: <<-XML.strip
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+  <Code>BucketNotEmpty</Code>
+  <Message>The bucket you tried to delete is not empty</Message>
+  <BucketName>aws-sdk</BucketName>
+  <RequestId>740BE6AB575EACED</RequestId>
+  <HostId>MQVg1RMI+d93Hps1E8qpIuDb9Gd2TzkDhm0wE40981DjxSHP1UfLBB7qOAlwAqJB</HostId>
+</Error>
+              XML
+            )
+            Seahorse::Client::Response.new(context: context)
+          end
+          expect {
+            client.delete_bucket(bucket: 'name')
+          }.to raise_error(Errors::BucketNotEmpty, 'The bucket you tried to delete is not empty')
+        end
+
+      end
+
+      describe '#get_bucket_location' do
+
+        it 'can parse the location constraint XML' do
+          client = Client.new(stub_responses: true)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: <<-XML.strip
+<?xml version="1.0" encoding="UTF-8"?>
+<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/">EU</LocationConstraint>
+              XML
+            )
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.get_bucket_location(bucket: 'name')
+          expect(resp.location_constraint).to eq('EU')
+        end
+
+        it 'returns an empty string when no constraint is present' do
+          client = Client.new(stub_responses: true)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 200,
+              headers: {},
+              body: <<-XML.strip
+<?xml version="1.0" encoding="UTF-8"?>
+<LocationConstraint xmlns="http://s3.amazonaws.com/doc/2006-03-01/"/>
+              XML
+            )
+            Seahorse::Client::Response.new(context: context)
+          end
+          resp = client.get_bucket_location(bucket: 'name')
+          expect(resp.location_constraint).to eq('')
+        end
+
+      end
+
+      describe '#head_bucket' do
+
+        it 'uses path style addressing for DNS incompatible bucket names' do
+          client = Client.new(stub_responses: true)
+          resp = client.head_bucket(bucket: 'Bucket123')
+          expect(resp.context.http_request.endpoint.path).to eq('/Bucket123')
         end
 
       end
@@ -406,6 +490,21 @@ module Aws
   </AccessControlList>
 </AccessControlPolicy>
           XML
+        end
+
+      end
+
+      describe '#put_object' do
+
+        it 'populates the content-type header when given' do
+          client = Client.new(stub_responses: true)
+          resp = client.put_object(
+            bucket: 'b',
+            key: 'k',
+            body: 'test',
+            content_type: 'text/plain'
+          )
+          expect(resp.context.http_request.headers['content-type']).to eq('text/plain')
         end
 
       end
