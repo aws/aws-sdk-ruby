@@ -36,7 +36,7 @@ module Aws
 
           let(:parser) {
             engine_class = Parser.const_get(engine)
-            api = ApiHelper.sample_api(shapes)
+            api = ApiHelper.sample_api(shapes:shapes)
             rules = api.operation(:example_operation).output
             Parser.new(rules, engine: engine_class)
           }

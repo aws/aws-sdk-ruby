@@ -174,10 +174,24 @@ module ApiHelper
       }
     end
 
-    def sample_api(shapes = sample_shapes)
-      @sample_api_count ||= 0
-      @sample_api_count += 1
-      api = {
+    def sample_service(options = {})
+      module_name = next_sample_module_name
+      options[:api] ||= default_api(options)
+      options[:module_names] = [module_name]
+      g = AwsSdkCodeGenerator::Generator.new(options)
+      #puts(g.generate_src)
+      Object.module_eval(g.generate_src)
+      Object.const_get(module_name)
+    end
+
+    def sample_api(options = {})
+      sample_service(options).const_get(:ClientApi).const_get(:API)
+    end
+
+    private
+
+    def default_api(options)
+      {
         'operations' => {
           'ExampleOperation' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },
@@ -185,12 +199,14 @@ module ApiHelper
             'output' => { 'shape' => 'StructureShape' },
           }
         },
-        'shapes' => shapes
+        'shapes' => options.delete(:shapes) || sample_shapes
       }
-      module_name = "SampleApi#{@sample_api_count}"
-      g = AwsSdkCodeGenerator::Generator.new(api: api, module_names: [module_name])
-      Object.module_eval(g.generate_src)
-      Object.const_get(module_name).const_get(:ClientApi).const_get(:API)
+    end
+
+    def next_sample_module_name
+      @sample_api_count ||= 0
+      @sample_api_count += 1
+      "SampleApi#{@sample_api_count}"
     end
 
   end

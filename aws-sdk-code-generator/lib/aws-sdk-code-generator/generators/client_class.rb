@@ -126,7 +126,7 @@ module AwsSdkCodeGenerator
           m.option(name: 'before_wait', type: Proc)
           m.code(<<-CODE)
 w = waiter(waiter_name, options)
-yield(w) if block_given?
+yield(w.waiter) if block_given? # deprecated
 w.wait(params)
           CODE
         end)
@@ -145,7 +145,7 @@ waiter_class = waiters[waiter_name]
 if waiter_class
   waiter_class.new(options.merge(client: self))
 else
-  raise Aws::Waiters::Errors::NoSuchWaiter.new(waiter_name, waiters.keys)
+  raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
 end
           CODE
         end)

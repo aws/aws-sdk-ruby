@@ -27,6 +27,7 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'xmlNamespace' => true,
         # ignore
+        'fault' => false,
         'type' => false,
         'documentation' => false,
         'members' => false,
@@ -139,7 +140,7 @@ module AwsSdkCodeGenerator
           end
           "Shapes::ShapeRef.new(shape: #{shape_name}#{options})"
         else
-          "Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: EmptyStructure))"
+          "Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))"
         end
       end
 

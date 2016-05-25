@@ -9,7 +9,7 @@ module Aws
       let(:shapes) { ApiHelper.sample_shapes }
 
       def parse(json)
-        api = ApiHelper.sample_api(shapes)
+        api = ApiHelper.sample_api(shapes: shapes)
         rules = api.operation(:example_operation).output
         Parser.new(rules).parse(json).to_hash
       end

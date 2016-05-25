@@ -52,7 +52,7 @@ module AwsSdkCodeGenerator
       end
 
       def apply_empty_structure
-        append("class #{@name} < EmptyStructure; end")
+        append("class #{@name} < Aws::EmptyStructure; end")
       end
 
       def apply_structure_with_members

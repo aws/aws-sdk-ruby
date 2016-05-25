@@ -13,11 +13,11 @@ module AwsSdkCodeGenerator
 # @option options [Proc] :before_wait
 def initialize(options = {})
   @client = options[:client]
-  @waiter = Aws::Waiters::Waiter.new(options.merge(
+  @waiter = Aws::Waiters::Waiter.new({
     max_attempts: #{waiter['maxAttempts']},
     delay: #{waiter['delay']},
     poller: Aws::Waiters::Poller.new(#{poller_args(waiter)}    )
-  ))
+  }.merge(options))
 end
 
 # @option (see Client##{client_method})
