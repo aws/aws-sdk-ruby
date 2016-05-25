@@ -4,18 +4,11 @@ module Aws
   module Plugins
     describe RegionalEndpoint do
 
+      RegionalEndpointClient = ApiHelper.sample_service.const_get(:Client)
+
       let(:env) {{}}
 
-      let(:metadata) {{
-        'endpointPrefix' => 'PREFIX',
-      }}
-
-      let(:client_class) {
-        Seahorse::Client::Base.define(
-          plugins: [RegionalEndpoint],
-          api: Aws::Api::Builder.build('metadata' => metadata),
-        )
-      }
+      let(:client_class) { RegionalEndpointClient }
 
       before do
         stub_const("ENV", env)
@@ -81,8 +74,9 @@ module Aws
       describe 'endpoint option' do
 
         it 'defaults the endpoint to PREFIX.REGION.amazonaws.com' do
+          prefix = client_class.api.metadata['endpointPrefix']
           client = client_class.new(region: 'REGION')
-          expect(client.config.endpoint.to_s).to eq('https://PREFIX.REGION.amazonaws.com')
+          expect(client.config.endpoint.to_s).to eq("https://#{prefix}.REGION.amazonaws.com")
         end
 
       end
