@@ -4,55 +4,53 @@ module Aws
   module Plugins
     describe GlobalConfiguration do
 
-      def plugin(&block)
-        Class.new(Seahorse::Client::Plugin, &block)
+      before(:each) do
+        Aws.config.clear
       end
 
-      before(:each) do
-        # to silence warnings about Svc getting redefined each pass
-        Aws.send(:remove_const, :Svc) if Aws.const_defined?(:Svc)
+      before(:all) do
+        GlobalConfiguration::IDENTIFIERS << :svc
       end
 
-      before(:each) do
-        api = Aws::Api::Builder.build('metadata' => {
-          'apiVersion' => '2013-01-01',
-        })
-        svc = Aws.add_service(:Svc, api: api)::Client
-        svc.remove_plugin(RegionalEndpoint)
-        svc.remove_plugin(RequestSigner)
-        svc.add_plugin(GlobalConfiguration)
-        svc.add_plugin(plugin { option(:endpoint, 'http://foo.com') })
-        svc.add_plugin(plugin { option(:property, 'plugin-default') })
-        allow(Aws).to receive(:config).and_return({})
+      after(:all) do
+        GlobalConfiguration::IDENTIFIERS.delete(:svc)
       end
+
+      GlobalConfigClient = Class.new(Aws::Client)
+      GlobalConfigClient.identifier = :svc
+      GlobalConfigClient.add_plugin(GlobalConfiguration)
+      GlobalConfigClient.add_plugin(Class.new(Seahorse::Client::Plugin) do
+        option(:endpoint, 'https://endpoint.com')
+        option(:property, 'plugin-default')
+      end)
 
       it 'gives priority to Aws.config over plugin defaults' do
         Aws.config[:property] = 'aws-default'
-        expect(Aws::Svc::Client.new.config.property).to eq('aws-default')
+        expect(GlobalConfigClient.new.config.property).to eq('aws-default')
       end
 
       it 'gives priority to Aws.config[:svc] over Aws.config' do
         Aws.config[:property] = 'aws-default'
         Aws.config[:svc] = { property: 'svc-default' }
-        expect(Aws::Svc::Client.new.config.property).to eq('svc-default')
+        expect(GlobalConfigClient.new.config.property).to eq('svc-default')
       end
 
       it 'gives priority to constructor options over Aws.config' do
         Aws.config[:property] = 'aws-default'
         Aws.config[:svc] = { property: 'svc-default' }
-        expect(Aws::Svc::Client.new(property: 'arg').config.property).to eq('arg')
+        expect(GlobalConfigClient.new(property: 'arg').config.property).to eq('arg')
       end
 
       it 'ignores configuration for others services in Aws.config' do
         Aws.config[:property] = 'aws-default'
         Aws.config[:svc] = { property: 'svc-default' }
         Aws.config[:s3] = { property: 's3-default' }
-        expect(Aws::Svc::Client.new.config.property).to eq('svc-default')
+        expect(GlobalConfigClient.new.config.property).to eq('svc-default')
       end
 
       it 'keeps a map of service identifiers' do
         BuildTools::Services.each do |svc|
-          expect(GlobalConfiguration::IDENTIFIERS).to include(svc.identifier)
+          expect(GlobalConfiguration::IDENTIFIERS).to include(svc.identifier.to_sym)
         end
       end
 
