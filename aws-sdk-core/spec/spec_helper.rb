@@ -176,7 +176,7 @@ module ApiHelper
 
     def sample_service(options = {})
       module_name = next_sample_module_name
-      options[:api] ||= default_api(options)
+      options[:api] ||= api(options)
       options[:module_names] = [module_name]
       g = AwsSdkCodeGenerator::Generator.new(options)
       #puts(g.generate_src)
@@ -190,21 +190,34 @@ module ApiHelper
 
     private
 
-    def default_api(options)
+    def api(options)
       {
-        'metadata' => {
-          'endpointPrefix' => 'svc',
-          'protocol' => 'json',
-        },
-        'operations' => {
-          'ExampleOperation' => {
-            'http' => { 'method' => 'POST', 'requestUri' => '/' },
-            'input' => { 'shape' => 'StructureShape' },
-            'output' => { 'shape' => 'StructureShape' },
-          }
-        },
-        'shapes' => options.delete(:shapes) || sample_shapes
+        'metadata' => metadata(options),
+        'operations' => operations(options),
+        'shapes' => shapes(options),
       }
+    end
+
+    def metadata(options)
+      {
+        'endpointPrefix' => 'svc',
+        'protocol' => 'json',
+        'jsonVersion' => '1.1',
+      }.merge(options.delete(:metadata) || {})
+    end
+
+    def operations(options)
+      options.delete(:operations) || {
+        'ExampleOperation' => {
+          'http' => { 'method' => 'POST', 'requestUri' => '/' },
+          'input' => { 'shape' => 'StructureShape' },
+          'output' => { 'shape' => 'StructureShape' },
+        }
+      }
+    end
+
+    def shapes(options)
+      options.delete(:shapes) || sample_shapes
     end
 
     def next_sample_module_name
