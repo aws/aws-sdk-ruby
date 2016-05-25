@@ -192,6 +192,10 @@ module ApiHelper
 
     def default_api(options)
       {
+        'metadata' => {
+          'endpointPrefix' => 'svc',
+          'protocol' => 'json',
+        },
         'operations' => {
           'ExampleOperation' => {
             'http' => { 'method' => 'POST', 'requestUri' => '/' },

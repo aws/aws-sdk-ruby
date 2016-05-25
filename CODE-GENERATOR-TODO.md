@@ -1,5 +1,7 @@
 # TODO (Must haves)
 
+* add #first method to collection classes.
+
 * Decide how to deal with cross-service dependencies. Known deps:
   aws-sdk-s3 => aws-sdk-kms (for encryption client, encryption/client.rb)
 

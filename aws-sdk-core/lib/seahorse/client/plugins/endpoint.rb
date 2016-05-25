@@ -18,7 +18,6 @@ module Seahorse
         end
 
         def after_initialize(client)
-
           endpoint = client.config.endpoint
           if endpoint.nil?
             msg = "missing required option `:endpoint'"
