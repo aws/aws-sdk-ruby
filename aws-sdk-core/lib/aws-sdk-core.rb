@@ -127,6 +127,12 @@ module Aws
   autoload :Util, 'aws-sdk-core/util'
   autoload :VERSION, 'aws-sdk-core/version'
 
+  # @deprecated
+  # @api private
+  module Resources
+    autoload :Batch, 'aws-sdk-core/resources/batch'
+  end
+
   # @api private
   module Api
     autoload :Builder, 'aws-sdk-core/api/builder'

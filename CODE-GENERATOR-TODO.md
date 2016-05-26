@@ -1,10 +1,5 @@
 # TODO (Must haves)
 
-* The Aws::Resource classes are currently documented (doh!)
-  Given we are removing the generic Collection and Batch
-  classes, these may need to stick around with a backwards compatabiltiy
-  shim. :(
-
 * add #first method to collection classes.
 
 * Decide how to deal with cross-service dependencies. Known deps:
