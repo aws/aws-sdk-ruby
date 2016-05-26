@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ElastiCache - This release of Amazon ElastiCache adds support
+  for exporting a Redis snapshot to an Amazon S3 bucket. After the export is
+  completed, you can access the exported snapshot from your Amazon S3 console or
+  API.
+
 2.3.8 (2016-05-24)
 ------------------
 
