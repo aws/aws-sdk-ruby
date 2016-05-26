@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.9 (2016-05-26)
 ------------------
 
 * Feature - Aws::ElastiCache - This release of Amazon ElastiCache adds support
