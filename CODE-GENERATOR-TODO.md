@@ -1,10 +1,5 @@
 # TODO (Must haves)
 
-* add #first method to collection classes.
-
-* Decide how to deal with cross-service dependencies. Known deps:
-  aws-sdk-s3 => aws-sdk-kms (for encryption client, encryption/client.rb)
-
 * Documentation is not correctly formatted, services are all
   appearing under Aws >, instead of under Services >
 
@@ -25,8 +20,6 @@
 
 * Remove the VERSION file from the repo root and replace with gem
   specific versions.
-
-* Update the aws-sdk-core version to 3.0
 
 * Move service specific specs from aws-sdk-resources and aws-sdk-core
   into gem files.

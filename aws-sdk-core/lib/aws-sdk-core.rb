@@ -97,7 +97,6 @@ module Aws
   autoload :Hash2Struct, 'aws-sdk-core/hash_2_struct'
   autoload :Struct2Hash, 'aws-sdk-core/struct_2_hash'
   autoload :StructureType, 'aws-sdk-core/structure_type'
-  autoload :ResourceCollection, 'aws-sdk-core/resource_collection'
 
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
   autoload :Client, 'aws-sdk-core/client'
@@ -127,10 +126,9 @@ module Aws
   autoload :Util, 'aws-sdk-core/util'
   autoload :VERSION, 'aws-sdk-core/version'
 
-  # @deprecated
-  # @api private
   module Resources
     autoload :Batch, 'aws-sdk-core/resources/batch'
+    autoload :Collection, 'aws-sdk-core/resources/collection'
   end
 
   # @api private

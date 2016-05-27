@@ -27,14 +27,19 @@ module AwsSdkCodeGenerator
         'flattened' => true,
         'xmlNamespace' => true,
         # ignore
+        'box' => false,
         'fault' => false,
+        'error' => false,
+        'deprecated' => false,
         'type' => false,
         'documentation' => false,
         'members' => false,
         'member' => false,
         'key' => false,
+        'locationName'  => false,
         'value' => false,
         'required' => false,
+        'streaming'  => false,
         'enum' => false,
         'exception' => false,
         'payload' => false,
@@ -43,6 +48,8 @@ module AwsSdkCodeGenerator
         'timestampFormat' => false,
         'min' => false,
         'max' => false,
+        'wrapper' => false,
+        'xmlOrder' => false,
       }
 
       METADATA_KEYS = {

@@ -10,7 +10,7 @@ module AwsSdkCodeGenerator
           @resource = resource
           @variable_name = underscore(resource_name)
           super('Collection')
-          include_module('Aws::ResourceCollection')
+          include_module('Aws::Resources::Collection')
           add(each_method)
           add(*batch_actions)
         end
