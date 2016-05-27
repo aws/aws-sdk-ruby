@@ -7,6 +7,10 @@
     "models": "apigateway/2015-07-09",
     "endpoint": "apigateway"
   },
+  "ApplicationAutoScaling": {
+    "models": "application-autoscaling/2016-02-06",
+    "endpoint": "application-autoscaling"
+  },
   "ApplicationDiscoveryService": {
     "models": "discovery/2015-11-01",
     "endpoint": "discovery"

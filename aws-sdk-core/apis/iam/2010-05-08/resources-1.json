@@ -866,7 +866,7 @@
       "identifiers": [
         {
           "name": "Arn",
-          "memberName": "PolicyArn"
+          "memberName": "Arn"
         }
       ],
       "shape": "Policy",

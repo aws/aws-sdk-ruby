@@ -1,3 +1,43 @@
+Unreleased Changes
+------------------
+
+2.3.8 (2016-05-24)
+------------------
+
+* Feature - Aws::EC2 - Adds support for Instance Console Screenshot. Instance
+  Console Screenshot provides an on-demand screenshot of the instance console,
+  conveying valuable debug information.
+
+* Feature - Aws::RDS - Adds support for cross-account snapshot sharing.
+
+2.3.7 (2016-05-19)
+------------------
+
+* Feature - Aws::Firehose - Amazon Kinesis Firehose supports configurable retry
+  window for loading data into Amazon Redshift.
+
+* Feature - Aws::ECS - Filter option lets customers view active, inactive, or
+  all task definition families.
+
+2.3.6 (2016-05-18)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Application Auto Scaling is a general
+  purpose Auto Scaling service for supported elastic AWS resources. With
+  Application Auto Scaling, you can automatically scale your AWS resources, with
+  an experience similar to that of Auto Scaling.
+
+2.3.5 (2016-05-17)
+------------------
+
+* Feature - Aws::WorkSpaces - You can now use tagging to categorize your Amazon
+  WorkSpaces. Tagging also allows you to allocate usage to your cost centers
+  directly from your AWS account bill.
+
+* Issue - Aws::ApplicationDiscoveryService - This release fixes an incorrect
+  model from the previous release. To use AWS Application Discovery Service,
+  please upgrade to this version.
+
 2.3.4 (2016-05-12)
 ------------------
 

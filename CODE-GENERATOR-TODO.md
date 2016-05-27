@@ -42,8 +42,7 @@
   consider creating a structure shape ref which can be required,
   leaving vanilla shape ref without.
 
-* Add a YARD tag for each of the services to document which gem it is available
-  from.
+* Add documentation to indicate which gem each module is defined in.
 
 * Implement support for resource collection batch actions. Currently, the
   generated methods are non-functional.
@@ -61,10 +60,6 @@
    * Write a documentation plugin to document the option, but not modify
      the api. This becomes extra code to support. We'd like to eliminate
      all docuemntation plugins if possible.
-
-* Need to decide on versioning scheme for service gems. Currently they
-  default to 1.0.0. This means `aws-sdk` v2.5.0 (or 3?) will depends on 70+
-  v1 gems.  What version should they start at? (I'm leaning towards 1.0)
 
 # Improvements (Nice to haves)
 
