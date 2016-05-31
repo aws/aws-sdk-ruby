@@ -1,5 +1,14 @@
 # TODO (Must haves)
 
+* sts gem depends on core for runtime plus credentials. Core has a
+  need for an sts client when assuming a role.
+
+  * Must aws-sdk-sts ship with core?
+  * We must not have a circular dependency.
+
+    # bad
+    aws-sdk-sts -> aws-sdk-core -> aws-sdk-sts
+
 * Documentation is not correctly formatted, services are all
   appearing under Aws >, instead of under Services >
 

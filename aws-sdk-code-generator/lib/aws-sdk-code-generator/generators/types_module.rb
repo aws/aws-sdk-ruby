@@ -23,7 +23,7 @@ module AwsSdkCodeGenerator
 
       def compute_input_shapes(api)
         inputs = Set.new
-        api['operations'].each do |_, operation|
+        (api['operations'] || {}).each do |_, operation|
           visit_inputs(operation['input'], inputs) if operation['input']
         end
         inputs

@@ -12,7 +12,7 @@ module AwsSdkCodeGenerator
     # @param [Hash] examples
     def initialize(
       module_names:,
-      api:,
+      api:nil,
       docs: nil,
       paginators: nil,
       waiters: nil,
@@ -23,7 +23,7 @@ module AwsSdkCodeGenerator
     )
       @module_names = module_names
       apply_docs(api, docs) if docs
-      @api = api
+      @api = api || {}
       @paginators = paginators
       @waiters = waiters
       @resources = resources

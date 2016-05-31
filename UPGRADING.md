@@ -1,5 +1,13 @@
 # Upgrade Notes
 
+## `aws-sdk-core` - v3.0.0
+
+* Removed `Aws.add_service`
+
+* `Aws.eager_autoload!` no longer loads every service unless `aws-sdk` is present.
+  TODO : consider removing this functionality if/when aws-sdk-core eliminates
+  autoload.
+
 ## `aws-sdk-core` - v2.3.0
 
 * We have replaced the previous `endpoints.json` document that shipped with
