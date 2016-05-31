@@ -11,8 +11,8 @@ module Aws
     # Example Use:
     # signer = Aws::CloudFront::UrlSigner.new
     # url = signer.signed_url(
-    #   "CF_KEYPAIR_ID",
-    #   "/path/to/private/key/cf_private_key.pem"
+    #   :key_pair_id => "CF_KEYPAIR_ID",
+    #   :private_key_path =>"#{File.dirname(__FILE__)}/cf_private_key.pem"
     # )
     #
     class UrlSigner
