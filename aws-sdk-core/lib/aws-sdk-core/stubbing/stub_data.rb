@@ -22,6 +22,9 @@ module Aws
             key = path.split(/\b/)[0]
             stub[key] = nil
           end
+          if more_results = @pager.instance_variable_get('@more_results')
+            stub[more_results] = nil
+          end
         end
       end
 

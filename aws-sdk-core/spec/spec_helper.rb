@@ -177,6 +177,7 @@ module ApiHelper
     def sample_service(options = {})
       module_name = next_sample_module_name
       options[:api] ||= api(options)
+      options[:api]['metadata'] ||= metadata(options)
       options[:module_names] = [module_name]
       g = AwsSdkCodeGenerator::Generator.new(options)
       #puts(g.generate_src)

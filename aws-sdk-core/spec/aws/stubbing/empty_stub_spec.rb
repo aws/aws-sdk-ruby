@@ -15,7 +15,7 @@ module Aws
           nested_map: {},
           number_list: [],
           string_map: {},
-          byte: "ByteShape",
+          byte: 0,
           boolean: false,
           character: "CharacterShape",
           double: 0.0,
@@ -28,19 +28,50 @@ module Aws
       end
 
       it 'does not stub paging markers' do
-        client = S3::Client.new(stub_responses:true)
-        stub = client.list_objects(bucket:'bucket')
-        expect(stub[:contents]).to eq([])
-        expect(stub[:common_prefixes]).to eq([])
-        expect(stub.to_h).to eq({
-          delimiter: "Delimiter",
-          encoding_type: "EncodingType",
-          is_truncated: false,
-          marker: "Marker",
-          max_keys: 0,
-          name: "BucketName",
-          prefix: "Prefix",
-        })
+
+        svc = ApiHelper.sample_service(
+          api: {
+            'operations' => {
+              'OperationName' => {
+                'http' => { 'method' => 'POST', 'requestUri' => '/' },
+                'input' => { 'shape' => 'StructureShape' },
+                'output' => { 'shape' => 'StructureShape' }
+              }
+            },
+            'shapes' => {
+              'StructureShape' => {
+                'type' => 'structure',
+                'members' => {
+                  'MaxResults' => { 'shape' => 'String' },
+                  'NextToken' => { 'shape' => 'String' },
+                  'IsTruncated' => { 'shape' => 'String' },
+                  'Results' => { 'shape' => 'StringList' }
+                }
+              },
+              'String' => { 'type' => 'string' },
+              'StringList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'String' }
+              }
+            }
+          },
+          paginators: {
+            'pagination' => {
+              'OperationName' => {
+                'limit_key' => 'MaxResults',
+                'input_token' => 'NextToken',
+                'output_token' => 'NextToken',
+                'more_results' => 'IsTruncated'
+              }
+            }
+          }
+        )
+
+        client = svc::Client.new(stub_responses: true)
+        stub = client.operation_name
+        expect(stub[:results]).to eq([])
+        expect(stub[:next_token]).to be(nil)
+        expect(stub[:is_truncated]).to be(nil)
       end
 
     end
