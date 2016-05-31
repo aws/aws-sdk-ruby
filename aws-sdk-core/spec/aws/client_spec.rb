@@ -4,6 +4,8 @@ module Aws
   describe Client do
     describe 'response stubbing' do
 
+      ResponseStubbingExample = ApiHelper.sample_service
+
       let(:options) {{
         stub_responses: true,
         region: 'us-east-1',
@@ -11,83 +13,89 @@ module Aws
         secret_access_key: 'secret',
       }}
 
-      let(:client) { S3::Client.new(options) }
+      let(:client_class) { ResponseStubbingExample.const_get(:Client) }
+
+      let(:client) { client_class.new(options) }
 
       it 'skips the credential provider chain' do
         expect(Aws::CredentialProviderChain).not_to receive(:new)
-        creds = S3::Client.new(stub_responses:true).config.credentials
+        creds = client_class.new(stub_responses:true).config.credentials
         expect(creds).to be_kind_of(Credentials)
         expect(creds.access_key_id).to eq('stubbed-akid')
         expect(creds.secret_access_key).to eq('stubbed-secret')
       end
 
       it 'raises an error if stubbed_responses is not enabled' do
-        client = S3::Client.new(options.merge(stub_responses: false))
+        client = client_class.new(options.merge(stub_responses: false))
         expect {
-          client.stub_responses(:list_buckets, buckets:[{name:'foo'}])
+          client.stub_responses(:example_operation, {})
         }.to raise_error(/enable stubbing .* `:stub_responses => true`/)
       end
 
       it 'returns stubbed responses without making a request' do
-        client.stub_responses(:list_buckets, buckets:[{name:'foo'}])
-        resp = client.list_buckets
-        expect(resp.buckets.map(&:name)).to eq(['foo'])
+        client.stub_responses(:example_operation, string:'value')
+        resp = client.example_operation
+        expect(resp.string).to eq('value')
       end
 
       it 'accepts a list of stubs' do
-        client.stub_responses(:list_buckets, [
-          {buckets:[{name:'foo'}]},
-          {buckets:[{name:'foo'},{name:'bar'}]}
+        client.stub_responses(:example_operation, [
+          { string: 'value-1' },
+          { string: 'value-2' },
         ])
-        expect(client.list_buckets.data.buckets.map(&:name)).to eq(%w(foo))
-        expect(client.list_buckets.data.buckets.map(&:name)).to eq(%w(foo bar))
+        expect(client.example_operation.string).to eq('value-1')
+        expect(client.example_operation.string).to eq('value-2')
       end
 
       it 'returns the same stub multiple times' do
-        client.stub_responses(:list_buckets, buckets:[{name:'foo'}])
-        expect(client.list_buckets.buckets.map(&:name)).to eq(%w(foo))
-        expect(client.list_buckets.buckets.map(&:name)).to eq(%w(foo))
+        client.stub_responses(:example_operation, string: 'fixed-value')
+        expect(client.example_operation.string).to eq('fixed-value')
+        expect(client.example_operation.string).to eq('fixed-value')
       end
 
       it 'returns the last stub after mulitple times' do
-        client.stub_responses(:list_buckets, [
-          {buckets:[{name:'foo'}]},
-          {buckets:[{name:'foo'},{name:'bar'}]}
+        client.stub_responses(:example_operation, [
+          { string: 'value-1' },
+          { string: 'value-2' },
         ])
-        expect(client.list_buckets.buckets.map(&:name)).to eq(%w(foo))
-        expect(client.list_buckets.buckets.map(&:name)).to eq(%w(foo bar))
-        expect(client.list_buckets.buckets.map(&:name)).to eq(%w(foo bar))
+        expect(client.example_operation.string).to eq('value-1')
+        expect(client.example_operation.string).to eq('value-2')
+        expect(client.example_operation.string).to eq('value-2')
       end
 
       it 'can stub errors' do
-        client.stub_responses(:head_bucket, ['NotFound', StandardError, RuntimeError.new('oops')])
+        client.stub_responses(:example_operation, [
+          'NotFound',
+          StandardError,
+          RuntimeError.new('oops')
+        ])
+
         expect {
-          client.head_bucket(bucket:'aws-sdk')
-        }.to raise_error(S3::Errors::NotFound, 'stubbed-response-error-message')
+          client.example_operation
+        }.to raise_error(client_class.errors_module::NotFound, 'stubbed-response-error-message')
+
         expect {
-          client.head_bucket(bucket:'aws-sdk')
+          client.example_operation
         }.to raise_error(StandardError)
+
         expect {
-          client.head_bucket(bucket:'aws-sdk')
+          client.example_operation
         }.to raise_error(RuntimeError, 'oops')
       end
 
       it 'can stub errors and data' do
-        client.stub_responses(:head_bucket, ['NotFound', {}])
+        client.stub_responses(:example_operation, ['NotFound', {}])
         expect {
-          client.head_bucket(bucket:'aws-sdk')
-        }.to raise_error(S3::Errors::NotFound)
-        expect(client.head_bucket(bucket:'aws-sdk').data.to_h).to eq({})
+          client.example_operation
+        }.to raise_error(client_class.errors_module::NotFound)
+        expect(client.example_operation.data.to_h).to eq({})
       end
 
       it 'accepts stubs given to the constructor' do
-        client = S3::Client.new(stub_responses: {
-          list_buckets: { buckets: [{ name: 'b1' }, { name:'b2' }] },
-          get_object: [{ body: 'a' }, { body: 'b' }],
+        client = client_class.new(stub_responses: {
+          example_operation: { string: 'value' }
         })
-        expect(client.list_buckets.buckets.map(&:name)).to eq(%w(b1 b2))
-        expect(client.get_object(bucket:'name', key:'key').body.read).to eq('a')
-        expect(client.get_object(bucket:'name', key:'key').body.read).to eq('b')
+        expect(client.example_operation.string).to eq('value')
       end
 
     end
