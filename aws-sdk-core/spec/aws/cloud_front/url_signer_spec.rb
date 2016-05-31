@@ -11,7 +11,7 @@ module Aws
         }
       }
       let(:signer) { Aws::CloudFront::UrlSigner.new(options) }
-      let(:expires) { Integer(1357034400) } # January 1, 2013 10:00 am UTC (Unix timestamp)
+      let(:expires) { 1357034400 } # January 1, 2013 10:00 am UTC (Unix timestamp)
 
       describe '#initialize' do
         it 'requires key pair id' do
