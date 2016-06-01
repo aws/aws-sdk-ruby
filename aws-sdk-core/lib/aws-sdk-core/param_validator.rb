@@ -60,7 +60,7 @@ module Aws
     def list(ref, values, errors, context)
       # ensure the value is an array
       unless values.is_a?(Array)
-        errors << "expected #{context} to be an array"
+        errors << "expected #{context} to be an array, got value #{values} (class: #{values.class}) instead."
         return
       end
 
@@ -91,27 +91,27 @@ module Aws
       when MapShape then map(ref, value, errors, context)
       when StringShape
         unless value.is_a?(String)
-          errors << "expected #{context} to be a string"
+          errors << "expected #{context} to be a string, got value #{value} (class: #{value.class}) instead."
         end
       when IntegerShape
         unless value.is_a?(Integer)
-          errors << "expected #{context} to be an integer"
+          errors << "expected #{context} to be an integer, got value #{value} (class: #{value.class}) instead."
         end
       when FloatShape
         unless value.is_a?(Float)
-          errors << "expected #{context} to be a float"
+          errors << "expected #{context} to be a float, got value #{value} (class: #{value.class}) instead."
         end
       when TimestampShape
         unless value.is_a?(Time)
-          errors << "expected #{context} to be a Time object"
+          errors << "expected #{context} to be a Time object, got value #{value} (class: #{value.class}) instead."
         end
       when BooleanShape
         unless [true, false].include?(value)
-          errors << "expected #{context} to be true or false"
+          errors << "expected #{context} to be true or false, got value #{value} (class: #{value.class}) instead."
         end
       when BlobShape
         unless io_like?(value) or value.is_a?(String)
-          errors << "expected #{context} to be a string or IO object"
+          errors << "expected #{context} to be a string or IO object, got value #{value} (class: #{value.class}) instead."
         end
       else
         raise "unhandled shape type: #{ref.shape.class.name}"
@@ -123,7 +123,7 @@ module Aws
       when Hash then true
       when ref[:struct_class] then true
       else
-        errors << "expected #{context} to be a hash"
+        errors << "expected #{context} to be a hash, got value #{value} (class: #{value.class}) instead."
         false
       end
     end
