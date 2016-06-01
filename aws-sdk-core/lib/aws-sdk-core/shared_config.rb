@@ -31,12 +31,16 @@ module Aws
     # @option options [String] :profile_name The credential/config profile name
     #   to use. If not specified, will check `ENV['AWS_PROFILE']` before using
     #   the fixed default value of 'default'.
+    # @option options [Boolean] :config_enabled If true, loads the shared config
+    #   file and enables new config values outside of the old shared credential
+    #   spec. Generally sourced from `ENV['AWS_SDK_LOAD_CONFIG']`.
     def initialize(options = {})
       @profile_name = determine_profile(options)
+      @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
         determine_credentials_path
       load_credentials_file if loadable?(@credentials_path)
-      if ENV["AWS_SDK_LOAD_CONFIG"]
+      if @config_enabled
         @config_path = options[:config_path] || determine_config_path
         load_config_file if loadable?(@config_path)
       end
@@ -49,11 +53,12 @@ module Aws
       @config_path = nil
       @parsed_credentials = nil
       @parsed_config = nil
+      @config_enabled = options[:config_enabled] ? true : false
       @profile_name = determine_profile(options)
       @credentials_path = options[:credentials_path] ||
         determine_credentials_path
       load_credentials_file if loadable?(@credentials_path)
-      if ENV["AWS_SDK_LOAD_CONFIG"]
+      if @config_enabled
         @config_path = options[:config_path] || determine_config_path
         load_config_file if loadable?(@config_path)
       end
@@ -82,7 +87,28 @@ module Aws
     # Currently assumes config is present.
     def assume_role_credentials_from_config(opts = {})
       p = opts.delete(:profile) || @profile_name
-      if prof_cfg = @parsed_config[p]
+      credentials = assume_role_from_profile(@parsed_credentials, p, opts) ||
+        assume_role_from_profile(@parsed_config, p, opts)
+    end
+
+    def region(opts = {})
+      p = opts[:profile] || @profile_name
+      if @config_enabled
+        if @parsed_credentials
+          region = @parsed_credentials.fetch(p, {})["region"]
+        end
+        if @parsed_config
+          region ||= @parsed_config.fetch(p, {})["region"]
+        end
+        region
+      else
+        nil
+      end
+    end
+
+    private
+    def assume_role_from_profile(cfg, profile, opts)
+      if cfg && prof_cfg = cfg[profile]
         opts[:source_profile] ||= prof_cfg["source_profile"]
         if opts[:source_profile]
           opts[:role_session_name] ||= prof_cfg["role_session_name"]
@@ -100,16 +126,6 @@ module Aws
       end
     end
 
-    def region(opts = {})
-      p = opts[:profile] || @profile_name
-      if @parsed_config
-        @parsed_config.fetch(p, {})["region"]
-      else
-        nil
-      end
-    end
-
-    private
     def credentials_from_shared(profile, opts)
       if @parsed_credentials && prof_config = @parsed_credentials[profile]
         credentials_from_profile(prof_config)

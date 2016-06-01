@@ -268,10 +268,13 @@ module Aws
     autoload :Parser, 'aws-sdk-core/xml/parser'
   end
 
-  # @api private
-  SHARED_CONFIG = SharedConfig.new
-
   class << self
+
+    # @api private
+    def shared_config
+      enabled = ENV["AWS_SDK_LOAD_CONFIG"] ? true : false
+      @shared_config ||= SharedConfig.new(config_enabled: true)
+    end
 
     # @return [Hash] Returns a hash of default configuration options shared
     #   by all constructed clients.

@@ -39,7 +39,7 @@ module Aws
         keys = %w(AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION)
         env_region = ENV.values_at(*keys).compact.first
         env_region = nil if env_region == ''
-        cfg_region = SHARED_CONFIG.region(profile: cfg.profile)
+        cfg_region = Aws.shared_config.region(profile: cfg.profile)
         env_region || cfg_region
       end
 

@@ -22,13 +22,14 @@ module Aws
     #   `ENV['AWS_PROFILE']`.
     #
     def initialize(options = {})
+      shared_config = Aws.shared_config
       @path = options[:path]
-      @path ||= SHARED_CONFIG.credentials_path
+      @path ||= shared_config.credentials_path
       @profile_name = options[:profile_name]
       @profile_name ||= ENV['AWS_PROFILE']
-      @profile_name ||= SHARED_CONFIG.profile_name
-      if @path && @path == SHARED_CONFIG.credentials_path
-        @credentials = SHARED_CONFIG.credentials(profile: @profile_name)
+      @profile_name ||= shared_config.profile_name
+      if @path && @path == shared_config.credentials_path
+        @credentials = shared_config.credentials(profile: @profile_name)
       else
         config = SharedConfig.new(
           credentials_path: @path,

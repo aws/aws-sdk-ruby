@@ -51,5 +51,4 @@ end
 
 group :repl do
   gem 'pry'
-  gem 'byebug'
 end
