@@ -40,17 +40,6 @@ support for an injectable timestamp into signing via the presigner.
 
 See [related GitHub issue #1013](https://github.com/aws/aws-sdk-ruby/issues/1013).
 
-### Add Client-Side Decryption for Amazon EC2 Passwords
-
-Calling `Aws::EC2::Client#get_password_data` returns an encrypted password,
-which can be decrypted using the .pem key associated with the instance. The
-feature request is to add a parameter that will automatically perform this when
-the correct .pem file is provided, most likely with a plugin.
-
-See [related GitHub issue #1003](https://github.com/aws/aws-sdk-ruby/issues/1003).
-
-See the [AWS CLI implementation](https://github.com/aws/aws-cli/blob/develop/awscli/customizations/ec2decryptpassword.py).
-
 ### Accept AWS CLI Output for Stubbed Responses
 
 There are some format differences between the input/output shapes of the AWS CLI
