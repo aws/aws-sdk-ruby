@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.11 (2016-06-02)
 ------------------
 
 * Issue - Aws::Xml::Parser - Resolved an issue parsing XML attributes with QNames.
