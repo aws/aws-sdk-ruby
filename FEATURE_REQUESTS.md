@@ -86,16 +86,6 @@ to the `Aws::S3::Resource` interface.
 
 See [related GitHub issue #969](https://github.com/aws/aws-sdk-ruby/issues/969).
 
-### Add to Param Validation Error Message
-
-Currently, parameter validation errors come in the following form:
-`expected params[:pipeline_objects][1][:fields][5][:string_value] to be a string`
-
-This could be enhanced by printing the actual value and type of what was passed
-to the client.
-
-See [related GitHub issue #991](https://github.com/aws/aws-sdk-ruby/issues/991).
-
 ### Add Multipart Download Helper(s)
 
 The SDK already has a multipart upload helper for Amazon S3, but doing a GET request
@@ -177,6 +167,6 @@ You can currently only configure an access key id, secret access key, and sessio
 
 See [related GitHub issue #910](https://github.com/aws/aws-sdk-ruby/issues/910).
 
-### Support Raw crednetial objects from AWS API responses in config
+### Support Raw credential objects from AWS API responses in config
 
 See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009).
