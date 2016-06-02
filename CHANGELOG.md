@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+  The new `:type` parameter in the RequestSpotFleet API indicates whether a Spot fleet will
+  only request the target capacity or also attempt to maintain it.
+
 2.3.9 (2016-05-26)
 ------------------
 
