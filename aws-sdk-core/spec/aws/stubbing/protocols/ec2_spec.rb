@@ -13,7 +13,7 @@ module Aws
             result.strip
           end
 
-          let(:api) { Aws::EC2::Client.api }
+          let(:api) { ApiHelper.sample_ec2::Client.api }
 
           let(:operation) { api.operation(:describe_instances) }
 

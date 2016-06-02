@@ -62,6 +62,7 @@ module AwsSdkCodeGenerator
         'targetPrefix' => true,
         'jsonVersion' => true,
         'errorPrefix' => true,
+        'xmlNamespace' => true,
 
         # ignore
         'apiVersion' => false,
@@ -69,7 +70,6 @@ module AwsSdkCodeGenerator
         'globalEndpoint' => false,
         'serviceAbbreviation' => false,
         'timestampFormat' => false,
-        'xmlNamespace' => false,
       }
 
       def initialize(api:, paginators:)

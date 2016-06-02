@@ -13,7 +13,7 @@ module Aws
             result.strip
           end
 
-          let(:api) { S3::Client.api }
+          let(:api) { ApiHelper.sample_rest_xml::Client.api }
 
           let(:operation) { api.operation(:list_buckets) }
 

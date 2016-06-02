@@ -13,7 +13,7 @@ module Aws
             result.strip
           end
 
-          let(:api) { IAM::Client.api }
+          let(:api) { ApiHelper.sample_query::Client.api }
 
           let(:operation) { api.operation(:list_users) }
 

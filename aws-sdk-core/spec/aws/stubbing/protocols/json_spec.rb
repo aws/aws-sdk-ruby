@@ -11,7 +11,7 @@ module Aws
             JSON.pretty_generate(JSON.load(json), indent: '  ')
           end
 
-          let(:api) { DynamoDB::Client.api }
+          let(:api) { ApiHelper.sample_json::Client.api }
 
           let(:operation) { api.operation(:describe_table) }
 

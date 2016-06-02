@@ -11,7 +11,7 @@ module Aws
             JSON.pretty_generate(JSON.load(json), indent: '  ')
           end
 
-          let(:api) { Glacier::Client.api }
+          let(:api) { ApiHelper.sample_rest_json::Client.api }
 
           let(:operation) { api.operation(:list_vaults) }
 
@@ -33,8 +33,8 @@ module Aws
             data = {
               vault_list: [
                 {
-                  creation_date: now,
-                  last_inventory_date: now,
+                  creation_date: now.utc.iso8601,
+                  last_inventory_date: now.utc.iso8601,
                   number_of_archives: 1,
                   size_in_bytes: 100,
                   vault_arn: 'arn',
