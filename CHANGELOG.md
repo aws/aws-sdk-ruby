@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::Xml::Parser - Resolved an issue parsing XML attributes with QNames.
+  This only affected parsing Amazon S3 ACL Grantees when using `nokogiri` or
+  `libxml-ruby`.
+
+  See related [GitHub issue #1201](https://github.com/aws/aws-sdk-ruby/issues/1201).
+
 2.3.10 (2016-06-02)
 ------------------
 

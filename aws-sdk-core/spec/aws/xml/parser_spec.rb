@@ -435,6 +435,13 @@ module Aws
               expect(parse(xml)).to eq(nested: {})
             end
 
+            it 'supports xml attributes with qnames' do
+              xml = '<xml><Nested xmlns:xsi="http://example.com" xsi:string-attr-value="value"/></xml>'
+              shapes['StructureShape']['members']['String']['xmlAttribute'] = true
+              shapes['StructureShape']['members']['String']['locationName'] = 'xsi:string-attr-value'
+              expect(parse(xml)).to eq(nested: { string: 'value' })
+            end
+
           end
         end
       end

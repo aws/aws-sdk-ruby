@@ -21,7 +21,9 @@ module Aws
         def start_element_namespace(element_name, attributes = [], *ignored)
           @stack.start_element(element_name)
           attributes.each do |attr|
-            @stack.attr(attr.localname, attr.value)
+            name = attr.localname
+            name = "#{attr.prefix}:#{name}" if attr.prefix
+            @stack.attr(name, attr.value)
           end
         end
 
