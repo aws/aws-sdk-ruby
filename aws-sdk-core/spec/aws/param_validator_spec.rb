@@ -41,11 +41,11 @@ module Aws
     describe 'structures' do
 
       it 'validates nested structures' do
-        validate('abc', 'expected params to be a hash, got value abc (class: String) instead.')
+        validate('abc', 'expected params to be a hash, got value "abc" (class: String) instead.')
         validate({ nested: 'abc' },
-          'expected params[:nested] to be a hash, got value abc (class: String) instead.')
+          'expected params[:nested] to be a hash, got value "abc" (class: String) instead.')
         validate({ nested: { nested: 'abc' } },
-          'expected params[:nested][:nested] to be a hash, got value abc (class: String) instead.')
+          'expected params[:nested][:nested] to be a hash, got value "abc" (class: String) instead.')
       end
 
       it 'accepts hashes' do
@@ -87,17 +87,17 @@ module Aws
       it 'expects the value to be an array' do
         validate({ nested_list: [] })
         validate({ nested_list: 'abc' },
-          'expected params[:nested_list] to be an array, got value abc (class: String) instead.')
+          'expected params[:nested_list] to be an array, got value "abc" (class: String) instead.')
       end
 
       it 'validates each member of the list' do
         validate({ nested_list: [{}] })
         validate({ number_list: ['abc'] },
-          'expected params[:number_list][0] to be an integer, got value abc (class: String) instead.')
+          'expected params[:number_list][0] to be an integer, got value "abc" (class: String) instead.')
         validate({ nested_list: [{}, 'abc'] },
-          'expected params[:nested_list][1] to be a hash, got value abc (class: String) instead.')
+          'expected params[:nested_list][1] to be a hash, got value "abc" (class: String) instead.')
         validate({ nested_list: [{ number_list: ['abc'] }] },
-          'expected params[:nested_list][0][:number_list][0] to be an integer, got value abc (class: String) instead.')
+          'expected params[:nested_list][0][:number_list][0] to be an integer, got value "abc" (class: String) instead.')
         validate({ nested_list: [{ foo: 'abc' }] },
           'unexpected value at params[:nested_list][0][:foo]')
       end
@@ -109,7 +109,7 @@ module Aws
       it 'accepts hashes' do
         validate({ string_map: {}})
         validate({ string_map: 'abc' },
-          'expected params[:string_map] to be a hash, got value abc (class: String) instead.')
+          'expected params[:string_map] to be a hash, got value "abc" (class: String) instead.')
       end
 
       it 'validates map keys' do
@@ -131,7 +131,7 @@ module Aws
       it 'accepts integers' do
         validate(integer: 123)
         validate({ integer: '123' },
-          'expected params[:integer] to be an integer, got value 123 (class: String) instead.')
+          'expected params[:integer] to be an integer, got value "123" (class: String) instead.')
       end
 
     end
@@ -162,7 +162,7 @@ module Aws
         validate(boolean: true)
         validate(boolean: false)
         validate({ boolean: 'true' },
-          'expected params[:boolean] to be true or false, got value true (class: String) instead.')
+          'expected params[:boolean] to be true or false, got value "true" (class: String) instead.')
       end
 
     end

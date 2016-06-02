@@ -3,6 +3,9 @@ module Aws
   class ParamValidator
 
     include Seahorse::Model::Shapes
+    
+    EXPECTED = "expected %s to be"
+    GOT_INSTEAD = "got value %s (class: %s) instead."
 
     # @param [Seahorse::Model::Shapes::ShapeRef] rules
     # @param [Hash] params
@@ -60,7 +63,7 @@ module Aws
     def list(ref, values, errors, context)
       # ensure the value is an array
       unless values.is_a?(Array)
-        errors << "expected #{context} to be an array, got value #{values} (class: #{values.class}) instead."
+        errors << "#{EXPECTED % context} an array, #{GOT_INSTEAD % [values.inspect, values.class.name]}"
         return
       end
 
@@ -91,27 +94,27 @@ module Aws
       when MapShape then map(ref, value, errors, context)
       when StringShape
         unless value.is_a?(String)
-          errors << "expected #{context} to be a string, got value #{value} (class: #{value.class}) instead."
+          errors << "#{EXPECTED % context} a string, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
         end
       when IntegerShape
         unless value.is_a?(Integer)
-          errors << "expected #{context} to be an integer, got value #{value} (class: #{value.class}) instead."
+          errors << "#{EXPECTED % context} an integer, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
         end
       when FloatShape
         unless value.is_a?(Float)
-          errors << "expected #{context} to be a float, got value #{value} (class: #{value.class}) instead."
+          errors << "#{EXPECTED % context} a float, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
         end
       when TimestampShape
         unless value.is_a?(Time)
-          errors << "expected #{context} to be a Time object, got value #{value} (class: #{value.class}) instead."
+          errors << "#{EXPECTED % context} a Time object, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
         end
       when BooleanShape
         unless [true, false].include?(value)
-          errors << "expected #{context} to be true or false, got value #{value} (class: #{value.class}) instead."
+          errors << "#{EXPECTED % context} true or false, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
         end
       when BlobShape
         unless io_like?(value) or value.is_a?(String)
-          errors << "expected #{context} to be a string or IO object, got value #{value} (class: #{value.class}) instead."
+          errors << "#{EXPECTED % context} a string or IO object, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
         end
       else
         raise "unhandled shape type: #{ref.shape.class.name}"
@@ -123,7 +126,7 @@ module Aws
       when Hash then true
       when ref[:struct_class] then true
       else
-        errors << "expected #{context} to be a hash, got value #{value} (class: #{value.class}) instead."
+        errors << "#{EXPECTED % context} a hash, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
         false
       end
     end
