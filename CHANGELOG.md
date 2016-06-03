@@ -1,6 +1,32 @@
 Unreleased Changes
 ------------------
 
+2.3.11 (2016-06-02)
+------------------
+
+* Issue - Aws::Xml::Parser - Resolved an issue parsing XML attributes with QNames.
+  This only affected parsing Amazon S3 ACL Grantees when using `nokogiri` or
+  `libxml-ruby`.
+
+  See related [GitHub issue #1201](https://github.com/aws/aws-sdk-ruby/issues/1201).
+
+2.3.10 (2016-06-02)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+  The new `:type` parameter in the RequestSpotFleet API indicates whether a Spot fleet will
+  only request the target capacity or also attempt to maintain it.
+
+2.3.9 (2016-05-26)
+------------------
+
+* Feature - Aws::ElastiCache - This release of Amazon ElastiCache adds support
+  for exporting a Redis snapshot to an Amazon S3 bucket. After the export is
+  completed, you can access the exported snapshot from your Amazon S3 console or
+  API.
+
 2.3.8 (2016-05-24)
 ------------------
 
