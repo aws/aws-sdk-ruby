@@ -10,6 +10,16 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Expose Raw Exception Response Bodies
+
+The SDK uses first the exception response `__type` field, then the `ErrorCode`
+field, to determine the exception's code. However, the related issue shows at
+least one case where the `ErrorCode` field would be the more descriptive error.
+We cannot change the exception classing behavior now, but exposing the raw
+exception response fields could improve the exception handling experience.
+
+See [related GitHub issue #1189](https://github.com/aws/aws-sdk-ruby/issues/1189).
+
 ### Add Waiters for Aws::SSM
 
 See [related GitHub issue #1185](https://github.com/aws/aws-sdk-ruby/issues/1185).
