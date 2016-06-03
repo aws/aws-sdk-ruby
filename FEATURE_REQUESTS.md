@@ -10,6 +10,19 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Cache-Friendly Presigned URLs
+
+Add functionality to the presigner to improve the experience of generating cache
+friendly presigned URLs. For example:
+
+```ruby
+req = s3.presigned_request(:get_object, bucket:'...', key: '...')
+req.uri #=> "https://..."
+req.headers #=> { ... } authorization in here
+```
+
+See [related GitHub issue #1152](https://github.com/aws/aws-sdk-ruby/issues/1152).
+
 ### Add Option to Create Unsigned Requests
 
 Add support to make unsigned calls using the SDK. Can be useful for cases such
