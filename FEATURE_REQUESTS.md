@@ -10,6 +10,12 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Programmable Stubs
+
+Provide an easy way to create stubbed clients that have programmable behavior.
+
+See [related GitHub issue #1120](https://github.com/aws/aws-sdk-ruby/issues/1120).
+
 ### Add Interface to Create Custom Waiters
 
 For cases where a particular waiter doesn't exist, this request would provide an
