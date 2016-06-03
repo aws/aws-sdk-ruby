@@ -10,6 +10,13 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Option to Create Unsigned Requests
+
+Add support to make unsigned calls using the SDK. Can be useful for cases such
+as anonymously downlading S3 objects that have a `public-read` ACL.
+
+See [related GitHub issue #1149](https://github.com/aws/aws-sdk-ruby/issues/1149).
+
 ### Enhance Aws::AutoScaling::Resource to Surface Tag Values in Collection
 
 Not all Auto Scaling tag resources surface the value, should be doable with
