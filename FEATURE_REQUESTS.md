@@ -10,6 +10,13 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Enhance Aws::AutoScaling::Resource to Surface Tag Values in Collection
+
+Not all Auto Scaling tag resources surface the value, should be doable with
+existing client calls within the resource.
+
+See [related GitHub issue #1145](https://github.com/aws/aws-sdk-ruby/issues/1145).
+
 ### Programmable Stubs
 
 Provide an easy way to create stubbed clients that have programmable behavior.
