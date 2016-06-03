@@ -22,6 +22,11 @@ module Aws
 
         POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS + V2_ENVELOPE_KEYS).uniq
 
+        POSSIBLE_ENCRYPTION_FORMATS = %w(
+          AES/GCM/NoPadding
+          AES/CBC/PKCS5Padding
+        )
+
         def call(context)
           attach_http_event_listeners(context)
           @handler.call(context)
@@ -33,11 +38,35 @@ module Aws
           context.http_response.on_headers(200) do
             cipher = decryption_cipher(context)
             body = context.http_response.body
-            context.http_response.body = IODecrypter.new(cipher, body)
+            if context.http_response.headers['x-amz-meta-x-amz-tag-len']
+              # we'll need to get the entire body before decrypting
+              context.http_response.body = IODecrypter.new(cipher, body, contains_tag = true)
+            else
+              context.http_response.body = IODecrypter.new(cipher, body, contains_tag = false)
+            end
+
           end
 
           context.http_response.on_success(200) do
             decrypter = context.http_response.body
+
+            # if present, we'll need to authenticate the ciphertext
+            if context.http_response.headers['x-amz-meta-x-amz-tag-len']
+              auth_tag_len = context.http_response.headers['x-amz-meta-x-amz-tag-len'].to_i
+              decrypter.io.seek((decrypter.io.size - (auth_tag_len/8)))
+              auth_tag = decrypter.io.read
+              decrypter.cipher.auth_tag = auth_tag
+              decrypter.cipher.auth_data = ''
+              decrypter.io.truncate((decrypter.io.size - (auth_tag_len/8)))
+              decrypter.io.rewind if decrypter.io.respond_to?(:rewind)
+              # read back in the encrypted data
+              content = decrypter.io.read
+              decrypter.io.truncate(0)
+              decrypter.io.rewind if decrypter.io.respond_to?(:rewind)
+              # reprocess, decrypting data and authenticating ciphertext
+              decrypter.has_tag = false
+              decrypter.write(content)
+            end
             decrypter.finalize
             decrypter.io.rewind if decrypter.io.respond_to?(:rewind)
             context.http_response.body = decrypter.io
@@ -103,7 +132,7 @@ module Aws
         end
 
         def v2_envelope(envelope)
-          unless envelope['x-amz-cek-alg'] == 'AES/CBC/PKCS5Padding'
+          unless POSSIBLE_ENCRYPTION_FORMATS.include? envelope['x-amz-cek-alg']
             alg = envelope['x-amz-cek-alg'].inspect
             msg = "unsupported content encrypting key (cek) format: #{alg}"
             raise Errors::DecryptionError, msg

@@ -57,8 +57,8 @@ module Aws
           # @param [String, nil] iv The initialization vector
           def aes_cipher(mode, block_mode, key, iv)
             cipher = key ?
-              OpenSSL::Cipher.new("AES-#{cipher_size(key)}-#{block_mode}") :
-              OpenSSL::Cipher.new("AES-256-#{block_mode}")
+              OpenSSL::Cipher.new("aes-#{cipher_size(key)}-#{block_mode.downcase}") :
+              OpenSSL::Cipher.new("aes-256-#{block_mode.downcase}")
             cipher.send(mode) # encrypt or decrypt
             cipher.key = key if key
             cipher.iv = iv if iv
