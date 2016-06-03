@@ -10,6 +10,10 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add Waiters for Aws::SSM
+
+See [related GitHub issue #1185](https://github.com/aws/aws-sdk-ruby/issues/1185).
+
 ### Customize Request HTTP Verbs
 
 Some services accept multiple HTTP verbs, potentially with differing behavior.
