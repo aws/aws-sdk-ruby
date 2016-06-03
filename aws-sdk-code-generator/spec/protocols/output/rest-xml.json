@@ -9,11 +9,17 @@
         "type": "structure",
         "members": {
           "ImaHeader": {
-            "shape": "HeaderShape"
+            "shape": "HeaderShape",
+            "location": "header"
           },
           "ImaHeaderLocation": {
             "shape": "HeaderShape",
+            "location": "header",
             "locationName": "X-Foo"
+          },
+          "Status": {
+            "shape": "StatusShape",
+            "location": "statusCode"
           },
           "Str": {
             "shape": "StringType"
@@ -67,12 +73,10 @@
         "type": "character"
       },
       "HeaderShape": {
-        "type": "string",
-        "location": "header"
+        "type": "string"
       },
       "StatusShape": {
-        "type": "integer",
-        "location": "statusCode"
+        "type": "integer"
       },
       "TimestampType": {
         "type": "timestamp"
@@ -97,7 +101,8 @@
           "Double": 1.3,
           "Long": 200,
           "Char": "a",
-          "Timestamp": 1422172800
+          "Timestamp": 1422172800,
+          "Status": 200
         },
         "response": {
           "status_code": 200,

@@ -9,23 +9,27 @@ module AwsSdkCodeGenerator
           @request = request
           @params = ClientRequestParams.new(params: request['params'])
           @resp = resp
-          @merge = merge
-          if @params.empty?
-            opts = ''
-          elsif @params.simple?
-            opts = "options = options.merge(#{@params})\n"
+          if merge
+            super("#{options}#{assignement}@client.#{operation_name}(options)")
           else
-            opts = "options = Aws::Util.deep_merge(options, #{@params})\n"
+            super("#{assignement}@client.#{operation_name}(#{@params})")
           end
-          super("#{opts}#{assignement}@client.#{operation_name}(options)")
         end
 
         private
 
-        def assignement
-          if @resp
-            "resp = "
+        def options
+          if @params.empty?
+            ''
+          elsif @params.simple?
+            "options = options.merge(#{@params})\n"
+          else
+            "options = Aws::Util.deep_merge(options, #{@params})\n"
           end
+        end
+
+        def assignement
+          "resp = " if @resp
         end
 
         def operation_name

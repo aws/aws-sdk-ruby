@@ -9,10 +9,12 @@
         "type": "structure",
         "members": {
           "ImaHeader": {
-            "shape": "HeaderShape"
+            "shape": "HeaderShape",
+            "location": "header"
           },
           "ImaHeaderLocation": {
             "shape": "HeaderShape",
+            "location": "header",
             "locationName": "X-Foo"
           },
           "Status": {
@@ -46,8 +48,7 @@
         }
       },
       "HeaderShape": {
-        "type": "string",
-        "location": "header"
+        "type": "string"
       },
       "StatusShape": {
         "type": "integer"
