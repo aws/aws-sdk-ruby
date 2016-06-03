@@ -10,6 +10,14 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Customize Request HTTP Verbs
+
+Some services accept multiple HTTP verbs, potentially with differing behavior.
+This feature request would be to investigate how multiple HTTP verbs could be
+supported.
+
+See [related GitHub issue #1181](https://github.com/aws/aws-sdk-ruby/issues/1181).
+
 ### Cache-Friendly Presigned URLs
 
 Add functionality to the presigner to improve the experience of generating cache
