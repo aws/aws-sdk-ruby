@@ -154,6 +154,12 @@ See [related GitHub issue #987](https://github.com/aws/aws-sdk-ruby/issues/987)
 for an example related to the Amazon RDS client (similar, not identical,
 pattern).
 
+### Add accelerate endpoint support to presigned POST requests
+
+The presigned POST utility does not support pre-signing Amazon S3 acclerated
+bucket endpoints. Explore adding an explicit configuration option to enable this,
+or determine this by looking at the client configuration.
+
 ### Add ability to pre-sign a request
 
 To work around limitations of S3 bucket policies, it is necessary to send certain headers
