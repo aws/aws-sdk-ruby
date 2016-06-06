@@ -84,20 +84,20 @@ module Aws
         validate(nested_list: [{}, {}])
       end
 
-      it 'expects the value to be an array' do
+      it 'expects the value to be an Array' do
         validate({ nested_list: [] })
         validate({ nested_list: 'abc' },
-          'expected params[:nested_list] to be an array, got value "abc" (class: String) instead.')
+          'expected params[:nested_list] to be an Array, got value "abc" (class: String) instead.')
       end
 
       it 'validates each member of the list' do
         validate({ nested_list: [{}] })
         validate({ number_list: ['abc'] },
-          'expected params[:number_list][0] to be an integer, got value "abc" (class: String) instead.')
+          'expected params[:number_list][0] to be an Integer, got value "abc" (class: String) instead.')
         validate({ nested_list: [{}, 'abc'] },
           'expected params[:nested_list][1] to be a hash, got value "abc" (class: String) instead.')
         validate({ nested_list: [{ number_list: ['abc'] }] },
-          'expected params[:nested_list][0][:number_list][0] to be an integer, got value "abc" (class: String) instead.')
+          'expected params[:nested_list][0][:number_list][0] to be an Integer, got value "abc" (class: String) instead.')
         validate({ nested_list: [{ foo: 'abc' }] },
           'unexpected value at params[:nested_list][0][:foo]')
       end
@@ -115,13 +115,13 @@ module Aws
       it 'validates map keys' do
         validate({ string_map: { 'abc' => 'mno' }})
         validate({ string_map: { 123 => 'xyz' }},
-          'expected params[:string_map] 123 key to be a string, got value 123 (class: Fixnum) instead.')
+          'expected params[:string_map] 123 key to be a String, got value 123 (class: Fixnum) instead.')
       end
 
       it 'validates map values' do
         validate({ string_map: { 'foo' => 'bar' }})
         validate({ string_map: { 'foo' => 123 }},
-          'expected params[:string_map]["foo"] to be a string, got value 123 (class: Fixnum) instead.')
+          'expected params[:string_map]["foo"] to be a String, got value 123 (class: Fixnum) instead.')
       end
 
     end
@@ -131,7 +131,7 @@ module Aws
       it 'accepts integers' do
         validate(integer: 123)
         validate({ integer: '123' },
-          'expected params[:integer] to be an integer, got value "123" (class: String) instead.')
+          'expected params[:integer] to be an Integer, got value "123" (class: String) instead.')
       end
 
     end
@@ -141,7 +141,7 @@ module Aws
       it 'accepts integers' do
         validate(float: 123.0)
         validate({ float: 123 },
-          'expected params[:float] to be a float, got value 123 (class: Fixnum) instead.')
+          'expected params[:float] to be a Float, got value 123 (class: Fixnum) instead.')
       end
 
     end
@@ -174,7 +174,7 @@ module Aws
         validate(blob: double('d', :read => 'abc', :size => 3, :rewind => 0))
         validate({ blob: 'abc' })
         validate({ blob: 123 },
-          'expected params[:blob] to be a string or IO object, got value 123 (class: Fixnum) instead.')
+          'expected params[:blob] to be a String or IO object, got value 123 (class: Fixnum) instead.')
       end
 
     end
@@ -183,8 +183,8 @@ module Aws
 
       it 'accepts string objects' do
         validate(string: 'john doe')
-        validate({ string: 123 }, 
-          'expected params[:string] to be a string, got value 123 (class: Fixnum) instead.')
+        validate({ string: 123 },
+          'expected params[:string] to be a String, got value 123 (class: Fixnum) instead.')
       end
 
     end

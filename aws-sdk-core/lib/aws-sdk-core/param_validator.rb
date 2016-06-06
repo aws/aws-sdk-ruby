@@ -3,9 +3,8 @@ module Aws
   class ParamValidator
 
     include Seahorse::Model::Shapes
-    
-    EXPECTED = "expected %s to be"
-    GOT_INSTEAD = "got value %s (class: %s) instead."
+
+    EXPECTED_GOT = "expected %s to be %s, got value %s (class: %s) instead."
 
     # @param [Seahorse::Model::Shapes::ShapeRef] rules
     # @param [Hash] params
@@ -63,7 +62,7 @@ module Aws
     def list(ref, values, errors, context)
       # ensure the value is an array
       unless values.is_a?(Array)
-        errors << "#{EXPECTED % context} an array, #{GOT_INSTEAD % [values.inspect, values.class.name]}"
+        errors << expected_got(context, "an Array", values)
         return
       end
 
@@ -94,27 +93,27 @@ module Aws
       when MapShape then map(ref, value, errors, context)
       when StringShape
         unless value.is_a?(String)
-          errors << "#{EXPECTED % context} a string, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
+          errors << expected_got(context, "a String", value)
         end
       when IntegerShape
         unless value.is_a?(Integer)
-          errors << "#{EXPECTED % context} an integer, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
+          errors << expected_got(context, "an Integer", value)
         end
       when FloatShape
         unless value.is_a?(Float)
-          errors << "#{EXPECTED % context} a float, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
+          errors << expected_got(context, "a Float", value)
         end
       when TimestampShape
         unless value.is_a?(Time)
-          errors << "#{EXPECTED % context} a Time object, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
+          errors << expected_got(context, "a Time object", value)
         end
       when BooleanShape
         unless [true, false].include?(value)
-          errors << "#{EXPECTED % context} true or false, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
+          errors << expected_got(context, "true or false", value)
         end
       when BlobShape
         unless io_like?(value) or value.is_a?(String)
-          errors << "#{EXPECTED % context} a string or IO object, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
+          errors << expected_got(context, "a String or IO object", value)
         end
       else
         raise "unhandled shape type: #{ref.shape.class.name}"
@@ -145,6 +144,10 @@ module Aws
         "parameter validator found #{errors.size} errors:" +
           prefix + errors.join(prefix)
       end
+    end
+
+    def expected_got(context, expected, got)
+      EXPECTED_GOT % [context, expected, got.inspect, got.class.name]
     end
 
   end
