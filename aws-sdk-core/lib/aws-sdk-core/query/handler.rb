@@ -6,9 +6,9 @@ module Aws
 
       CONTENT_TYPE = 'application/x-www-form-urlencoded; charset=utf-8'
 
-      WRAPPER_STRUCT = Structure.new(:result, :response_metadata)
+      WRAPPER_STRUCT = ::Struct.new(:result, :response_metadata)
 
-      METADATA_STRUCT = Structure.new(:request_id)
+      METADATA_STRUCT = ::Struct.new(:request_id)
 
       METADATA_REF = begin
         request_id = ShapeRef.new(

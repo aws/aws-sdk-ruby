@@ -93,6 +93,7 @@
         "result": {
           "ImaHeader": "test",
           "ImaHeaderLocation": "abc",
+          "Status": 200,
           "Str": "myname",
           "Num": 123,
           "FalseBool": false,
@@ -101,8 +102,7 @@
           "Double": 1.3,
           "Long": 200,
           "Char": "a",
-          "Timestamp": 1422172800,
-          "Status": 200
+          "Timestamp": 1422172800
         },
         "response": {
           "status_code": 200,
@@ -123,6 +123,7 @@
         "result": {
           "ImaHeader": "test",
           "ImaHeaderLocation": "abc",
+          "Status": 200,
           "Str": "",
           "Num": 123,
           "FalseBool": false,
@@ -278,8 +279,7 @@
         "type": "structure",
         "members": {
           "ListMember": {
-            "shape": "StringList",
-            "flattened": true
+            "shape": "StringList"
           }
         }
       },
@@ -287,7 +287,8 @@
         "type": "list",
         "member": {
           "shape": "StringType"
-        }
+        },
+        "flattened": true
       },
       "StringType": {
         "type": "string"
@@ -383,8 +384,7 @@
         "type": "structure",
         "members": {
           "Map": {
-            "shape": "StringMap",
-            "flattened": true
+            "shape": "StringMap"
           }
         }
       },
@@ -395,7 +395,8 @@
         },
         "value": {
           "shape": "StringType"
-        }
+        },
+        "flattened": true
       },
       "StringType": {
         "type": "string"
@@ -578,73 +579,74 @@
         "type": "structure",
         "members": {
           "Str": {
+            "location": "header",
             "locationName": "x-str",
             "shape": "StringHeaderType"
           },
           "Integer": {
+            "location": "header",
             "locationName": "x-int",
             "shape": "IntegerHeaderType"
           },
           "TrueBool": {
+            "location": "header",
             "locationName": "x-true-bool",
             "shape": "BooleanHeaderType"
           },
           "FalseBool": {
+            "location": "header",
             "locationName": "x-false-bool",
             "shape": "BooleanHeaderType"
           },
           "Float": {
+            "location": "header",
             "locationName": "x-float",
             "shape": "FloatHeaderType"
           },
           "Double": {
+            "location": "header",
             "locationName": "x-double",
             "shape": "DoubleHeaderType"
           },
           "Long": {
+            "location": "header",
             "locationName": "x-long",
             "shape": "LongHeaderType"
           },
           "Char": {
+            "location": "header",
             "locationName": "x-char",
             "shape": "CharHeaderType"
           },
           "Timestamp": {
+            "location": "header",
             "locationName": "x-timestamp",
             "shape": "TimestampHeaderType"
           }
         }
       },
       "StringHeaderType": {
-        "location": "header",
         "type": "string"
       },
       "IntegerHeaderType": {
-        "location": "header",
         "type": "integer"
       },
       "BooleanHeaderType": {
-        "location": "header",
         "type": "boolean"
       },
       "FloatHeaderType": {
-        "location": "header",
         "type": "float"
       },
       "DoubleHeaderType": {
-        "location": "header",
         "type": "double"
       },
       "LongHeaderType": {
-        "location": "header",
         "type": "long"
       },
       "CharHeaderType": {
-        "location": "header",
         "type": "character"
       },
       "TimestampHeaderType": {
-        "location": "header",
         "type": "timestamp"
       }
     },

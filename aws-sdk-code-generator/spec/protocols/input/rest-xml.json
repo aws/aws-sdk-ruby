@@ -671,13 +671,13 @@
         "type": "structure",
         "members": {
           "foo": {
-            "shape": "FooShape"
+            "shape": "FooShape",
+            "location": "headers"
           }
         }
       },
       "FooShape": {
         "type": "map",
-        "location": "headers",
         "locationName": "x-foo-",
         "key": {
           "shape": "FooKeyValue"
@@ -725,7 +725,7 @@
   {
     "description": "Querystring list of strings",
     "metadata": {
-      "protocol": "rest-json",
+      "protocol": "rest-xml",
       "apiVersion": "2014-01-01"
     },
     "shapes": {

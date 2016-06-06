@@ -418,7 +418,6 @@
     "shapes": {
       "OutputShape": {
         "type": "structure",
-        "resultWrapper": "OperationNameResult",
         "members": {
           "List": {
             "shape": "ListOfStructs"
@@ -454,7 +453,8 @@
       {
         "given": {
           "output": {
-            "shape": "OutputShape"
+            "shape": "OutputShape",
+            "resultWrapper": "OperationNameResult"
           },
           "name": "OperationName"
         },
@@ -587,8 +587,7 @@
         "type": "structure",
         "members": {
           "Map": {
-            "shape": "StringMap",
-            "flattened": true
+            "shape": "StringMap"
           }
         }
       },
@@ -599,7 +598,8 @@
         },
         "value": {
             "shape": "StringType"
-        }
+        },
+        "flattened": true
       },
       "StringType": {
         "type": "string"

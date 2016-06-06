@@ -137,12 +137,17 @@ module AwsSdkCodeGenerator
             options = {}
             metadata.each_pair do |key, value|
               next if key == 'resultWrapper'
-              options[key] = value.inspect
+              if key == 'locationName'
+                options[:location_name] = value.inspect
+              else
+                options[:metadata] ||= {}
+                options[:metadata][key] = value.inspect
+              end
             end
             if options.empty?
               options = ''
             else
-              options = ", metadata: #{HashFormatter.new.format(options)}"
+              options = ', ' + HashFormatter.new(wrap:false).format(options)
             end
           end
           "Shapes::ShapeRef.new(shape: #{shape_name}#{options})"

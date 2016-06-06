@@ -15,13 +15,32 @@ def fixtures
   fixtures
 end
 
+def data_to_hash(obj)
+  case obj
+  when Struct
+    obj.members.each.with_object({}) do |member, hash|
+      value = obj[member]
+      hash[member] = data_to_hash(value) unless value.nil?
+    end
+  when Hash
+    obj.each.with_object({}) do |(key, value), hash|
+      hash[key] = data_to_hash(value)
+    end
+  when Array then obj.collect { |value| data_to_hash(value) }
+  when IO, StringIO then obj.read
+  else obj
+  end
+end
+
 def each_test_case(context, fixture_path)
   return unless fixture_path
   Aws::Json.load_file(fixture_path).each.with_index do |suite, suite_n|
     describe(suite['description'].inspect) do
       suite['cases'].each.with_index do |test_case, case_n|
         describe("case: #{case_n}") do
-          yield(self, suite, test_case, "#{suite_n}_#{case_n}")
+          test_case_name = suite['metadata']['protocol'].gsub(/-/, '_')
+          test_case_name += "_#{suite_n}_#{case_n}"
+          yield(self, suite, test_case, test_case_name)
         end
       end
     end
@@ -139,54 +158,55 @@ fixtures.each do |directory, files|
   describe(directory) do
 
     describe 'input' do
-      each_test_case(self, files['input']) do |group, suite, test_case, n|
+      each_test_case(self, files['input']) do |group, suite, test_case, name|
 
         group.it "marshalls response data correctly" do
+          client = client_for(suite, test_case, "Input_#{name}")
+          ctx = nil
+          client.handle(step: :send) do |context|
+            ctx = context
+            Seahorse::Client::Response.new(context:context)
+          end
 
-          client = client_for(suite, test_case, n)
-#          ctx = nil
-#          client.handle(step: :send) do |context|
-#            ctx = context
-#            Seahorse::Client::Response.new(context:context)
-#          end
-#
-#          input_shape = client.config.api.operation(:operation_name).input
-#          request_params = format_data(input_shape, test_case['params'] || {})
-#          client.operation_name(request_params)
-#
-#          match_req_method(group, test_case, ctx.http_request, self)
-#          match_req_uri(group, test_case, ctx.http_request, self)
-#          match_req_headers(group, test_case, ctx.http_request, self)
-#          match_req_body(group, suite, test_case, ctx.http_request, self)
+          input_shape = client.config.api.operation(:operation_name).input
+          request_params = format_data(input_shape, test_case['params'] || {})
+          client.operation_name(request_params)
+
+          match_req_method(group, test_case, ctx.http_request, self)
+          match_req_uri(group, test_case, ctx.http_request, self)
+          match_req_headers(group, test_case, ctx.http_request, self)
+          match_req_body(group, suite, test_case, ctx.http_request, self)
 
         end
       end
     end
 
     describe 'output' do
-      each_test_case(self, files['output']) do |group, suite, test_case, n|
+      each_test_case(self, files['output']) do |group, suite, test_case, name|
 
-        client = client_for(suite, test_case, n)
-#        client.handle(step: :send) do |context|
-#          context.http_response.signal_headers(
-#            test_case['response']['status_code'],
-#            test_case['response']['headers']
-#          )
-#
-#          # temporary work-around for header case-sensitive test
-#          context.http_response.headers = test_case['response']['headers']
-#
-#          context.http_response.signal_data(test_case['response']['body'])
-#          context.http_response.signal_done
-#          Seahorse::Client::Response.new(context:context)
-#        end
-#
-#        group.it "extract response data correctly" do
-#          resp = client.operation_name
-#          data = data_to_hash(resp.data)
-#          expected_data = format_data(resp.context.operation.output, test_case['result'] || {})
-#          expect(data).to eq(expected_data)
-#        end
+        group.it "extract response data correctly" do
+
+          client = client_for(suite, test_case, "Output_#{name}")
+          client.handle(step: :send) do |context|
+            context.http_response.signal_headers(
+              test_case['response']['status_code'],
+              test_case['response']['headers']
+            )
+
+            # temporary work-around for header case-sensitive test
+            context.http_response.headers = test_case['response']['headers']
+
+            context.http_response.signal_data(test_case['response']['body'])
+            context.http_response.signal_done
+            Seahorse::Client::Response.new(context:context)
+          end
+          resp = client.operation_name
+          data = data_to_hash(resp.data)
+
+          expected_data = format_data(resp.context.operation.output, test_case['result'] || {})
+
+          expect(data).to eq(expected_data)
+        end
 
       end
     end
