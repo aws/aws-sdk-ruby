@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudWatch - Adds the `:alarm_exists` waiter for
+  `Aws::CloudWatch`. Additionally, this is wired into
+  `Aws::CloudWatch::Resource` as the `Aws::CloudWatch::Alarm#exists?` method.
+
 2.3.11 (2016-06-02)
 ------------------
 
