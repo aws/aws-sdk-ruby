@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::MachineLearning - Updated the API, and documentation for Amazon Machine Learning.
+
+* Feature - Aws::DynamoDBStreams - Updated the API, and documentation for Amazon DynamoDB Streams.
+
 * Feature - Aws::CloudWatch - Adds the `:alarm_exists` waiter for
   `Aws::CloudWatch`. Additionally, this is wired into
   `Aws::CloudWatch::Resource` as the `Aws::CloudWatch::Alarm#exists?` method.
