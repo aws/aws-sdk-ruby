@@ -125,7 +125,7 @@ module Aws
       when Hash then true
       when ref[:struct_class] then true
       else
-        errors << "#{EXPECTED % context} a hash, #{GOT_INSTEAD % [value.inspect, value.class.name]}"
+        errors << expected_got(context, "a hash", value)
         false
       end
     end
