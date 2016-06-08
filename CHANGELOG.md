@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::EC2 - Added `Aws::EC2::Vpc#exists?`
-
 2.2.36 (2016-04-21)
 ------------------
 
