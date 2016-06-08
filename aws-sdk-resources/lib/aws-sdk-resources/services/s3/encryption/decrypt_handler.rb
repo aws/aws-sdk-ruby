@@ -35,42 +35,13 @@ module Aws
         private
 
         def attach_http_event_listeners(context)
+
           context.http_response.on_headers(200) do
-
-            http_resp = context.http_response
-            body = context.http_response.body
             cipher = decryption_cipher(context)
-
-            if http_resp.headers['x-amz-meta-x-amz-tag-len']
-
-              content_length = http_resp.headers['content-length'].to_i
-              auth_tag_length = http_resp.headers['x-amz-meta-x-amz-tag-len']
-              auth_tag_length = auth_tag_length.to_i / 8
-
-              auth_tag = context.client.get_object(
-                bucket: context.params[:bucket],
-                key: context.params[:key],
-                range: "bytes=-#{auth_tag_length}"
-              ).body.read
-
-              # The encrypted object contains both the cipher text
-              # plus a trailing auth tag. This decrypter will the body
-              # expect for the trailing auth tag.
-              decrypter = IOAuthDecrypter.new(
-                io: body,
-                encrypted_content_length: content_length - auth_tag_length,
-                cipher: cipher,
-                cipher_auth_tag: auth_tag,
-                cipher_auth_data: '',
-              )
-
-            else
-              decrypter = IODecrypter.new(
-                cipher: cipher,
-                io: body
-              )
-            end
-            http_resp.body = decrypter
+            decrypter = body_contains_auth_tag?(context) ?
+              authenticated_decrypter(context, cipher) :
+              IODecrypter.new(cipher, context.http_response.body)
+            context.http_response.body = decrypter
           end
 
           context.http_response.on_success(200) do
@@ -159,6 +130,42 @@ module Aws
             raise Errors::DecryptionError, msg
           end
           envelope
+        end
+
+        # When the x-amz-meta-x-amz-tag-len header is present, it indicates
+        # that the body of this object has a trailing auth tag. The header
+        # indicates the length of that tag.
+        #
+        # This method fetches the tag from the end of the object by
+        # making a GET Object w/range request. This auth tag is used
+        # to initialize the cipher, and the decrypter truncates the
+        # auth tag from the body when writing the final bytes.
+        def authenticated_decrypter(context, cipher)
+          http_resp = context.http_response
+          content_length = http_resp.headers['content-length'].to_i
+          auth_tag_length = http_resp.headers['x-amz-meta-x-amz-tag-len']
+          auth_tag_length = auth_tag_length.to_i / 8
+
+          auth_tag = context.client.get_object(
+            bucket: context.params[:bucket],
+            key: context.params[:key],
+            range: "bytes=-#{auth_tag_length}"
+          ).body.read
+
+          cipher.auth_tag = auth_tag
+          cipher.auth_data = ''
+
+          # The encrypted object contains both the cipher text
+          # plus a trailing auth tag. This decrypter will the body
+          # expect for the trailing auth tag.
+          decrypter = IOAuthDecrypter.new(
+            io: http_resp.body,
+            encrypted_content_length: content_length - auth_tag_length,
+            cipher: cipher)
+        end
+
+        def body_contains_auth_tag?(context)
+          context.http_response.headers['x-amz-meta-x-amz-tag-len']
         end
 
       end

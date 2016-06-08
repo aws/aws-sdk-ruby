@@ -10,14 +10,12 @@ module Aws
         #   The number of bytes to decrypt from the `:io` object.
         #   This should be the total size of `:io` minus the length of
         #   the cipher auth tag.
-        # @option options [required, OpenSSL::Cipher] :cipher
-        # @option options [required, String] :cipher_auth_tag
-        # @option options [String] :cipher_auth_data ('')
+        # @option options [required, OpenSSL::Cipher] :cipher An initialized
+        #   cipher that can be used to decrypt the bytes as they are
+        #   written to the `:io` object. The cipher should already have
+        #   its `#auth_tag` set.
         def initialize(options = {})
-          @io = options[:io]
-          options[:cipher].auth_tag = options[:cipher_auth_tag]
-          options[:cipher].auth_data = options[:cipher_auth_data] || ''
-          @decrypter = IODecrypter.new(options)
+          @decrypter = IODecrypter.new(options[:cipher], options[:io])
           @max_bytes = options[:encrypted_content_length]
           @bytes_written = 0
         end
