@@ -1,6 +1,30 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3::Encryption::Client - Added support for reading objects
+  encrypted with AES/GCM/NoPadding with a trailing authentication tag.
+  This makes it possible to objects that have been encrypted from
+  Amazon SES inbound.
+
+  ```ruby
+  # you must use a KMS client that is the same region as the kms key id
+  kms = Aws::KMS::Client.new(region: 'us-west-2')
+
+  s3_enc = Aws::S3::Encryption::Client.new(
+    kms_key_id: 'arn:aws:kms:us-west-2:469596866844:alias/aws/ses',
+    kms_client: kms)
+
+  s3_enc.get_object(
+    bucket: 'aws-sdk',
+    key: 'ses-inbound/AMAZON_SES_SETUP_NOTIFICATION'
+  ).body.read
+
+  #=>
+  Date: Tue, 07 Jun 2016 18:25:40 +0000
+  To: recipient@example.com
+  ...
+  ```
+
 2.3.12 (2016-06-07)
 ------------------
 
@@ -15,7 +39,6 @@ Unreleased Changes
 * Feature - Aws::CloudWatch - Adds the `:alarm_exists` waiter for
   `Aws::CloudWatch`. Additionally, this is wired into
   `Aws::CloudWatch::Resource` as the `Aws::CloudWatch::Alarm#exists?` method.
-
 2.3.11 (2016-06-02)
 ------------------
 
