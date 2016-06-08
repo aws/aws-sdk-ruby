@@ -9,6 +9,7 @@ module Aws
       autoload :EncryptHandler, 'aws-sdk-resources/services/s3/encryption/encrypt_handler'
       autoload :Errors, 'aws-sdk-resources/services/s3/encryption/errors'
       autoload :IOEncrypter, 'aws-sdk-resources/services/s3/encryption/io_encrypter'
+      autoload :IOAuthDecrypter, 'aws-sdk-resources/services/s3/encryption/io_auth_decrypter'
       autoload :IODecrypter, 'aws-sdk-resources/services/s3/encryption/io_decrypter'
       autoload :KeyProvider, 'aws-sdk-resources/services/s3/encryption/key_provider'
       autoload :KmsCipherProvider, 'aws-sdk-resources/services/s3/encryption/kms_cipher_provider'

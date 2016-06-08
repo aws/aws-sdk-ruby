@@ -22,6 +22,11 @@ module Aws
 
         POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS + V2_ENVELOPE_KEYS).uniq
 
+        POSSIBLE_ENCRYPTION_FORMATS = %w(
+          AES/GCM/NoPadding
+          AES/CBC/PKCS5Padding
+        )
+
         def call(context)
           attach_http_event_listeners(context)
           @handler.call(context)
@@ -31,9 +36,41 @@ module Aws
 
         def attach_http_event_listeners(context)
           context.http_response.on_headers(200) do
-            cipher = decryption_cipher(context)
+
+            http_resp = context.http_response
             body = context.http_response.body
-            context.http_response.body = IODecrypter.new(cipher, body)
+            cipher = decryption_cipher(context)
+
+            if http_resp.headers['x-amz-meta-x-amz-tag-len']
+
+              content_length = http_resp.headers['content-length'].to_i
+              auth_tag_length = http_resp.headers['x-amz-meta-x-amz-tag-len']
+              auth_tag_length = auth_tag_length.to_i / 8
+
+              auth_tag = context.client.get_object(
+                bucket: context.params[:bucket],
+                key: context.params[:key],
+                range: "bytes=-#{auth_tag_length}"
+              ).body.read
+
+              # The encrypted object contains both the cipher text
+              # plus a trailing auth tag. This decrypter will the body
+              # expect for the trailing auth tag.
+              decrypter = IOAuthDecrypter.new(
+                io: body,
+                encrypted_content_length: content_length - auth_tag_length,
+                cipher: cipher,
+                cipher_auth_tag: auth_tag,
+                cipher_auth_data: '',
+              )
+
+            else
+              decrypter = IODecrypter.new(
+                cipher: cipher,
+                io: body
+              )
+            end
+            http_resp.body = decrypter
           end
 
           context.http_response.on_success(200) do
@@ -44,7 +81,7 @@ module Aws
           end
 
           context.http_response.on_error do
-            if context.http_response.body.is_a?(IODecrypter)
+            if context.http_response.body.respond_to?(:io)
               context.http_response.body = context.http_response.body.io
             end
           end
@@ -103,7 +140,7 @@ module Aws
         end
 
         def v2_envelope(envelope)
-          unless envelope['x-amz-cek-alg'] == 'AES/CBC/PKCS5Padding'
+          unless POSSIBLE_ENCRYPTION_FORMATS.include? envelope['x-amz-cek-alg']
             alg = envelope['x-amz-cek-alg'].inspect
             msg = "unsupported content encrypting key (cek) format: #{alg}"
             raise Errors::DecryptionError, msg
