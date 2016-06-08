@@ -36,44 +36,52 @@ module Aws
 
         def attach_http_event_listeners(context)
           context.http_response.on_headers(200) do
-            cipher = decryption_cipher(context)
-            body = context.http_response.body
-            if context.http_response.headers['x-amz-meta-x-amz-tag-len']
-              # we'll need to get the entire body before decrypting
-              context.http_response.body = IODecrypter.new(cipher, body, contains_tag = true)
-            else
-              context.http_response.body = IODecrypter.new(cipher, body, contains_tag = false)
-            end
 
+            http_resp = context.http_response
+            body = context.http_response.body
+            cipher = decryption_cipher(context)
+
+            if http_resp.headers['x-amz-meta-x-amz-tag-len']
+
+              content_length = http_resp.headers['content-length'].to_i
+              auth_tag_length = http_resp.headers['x-amz-meta-x-amz-tag-len']
+              auth_tag_length = auth_tag_length.to_i / 8
+
+              auth_tag = context.client.get_object(
+                bucket: context.params[:bucket],
+                key: context.params[:key],
+                range: "bytes=-#{auth_tag_length}"
+              ).body.read
+
+              # The encrypted object contains both the cipher text
+              # plus a trailing auth tag. This decrypter will the body
+              # expect for the trailing auth tag.
+              decrypter = IOAuthDecrypter.new(
+                io: body,
+                encrypted_content_length: content_length - auth_tag_length,
+                cipher: cipher,
+                cipher_auth_tag: auth_tag,
+                cipher_auth_data: '',
+              )
+
+            else
+              decrypter = IODecrypter.new(
+                cipher: cipher,
+                io: body
+              )
+            end
+            http_resp.body = decrypter
           end
 
           context.http_response.on_success(200) do
             decrypter = context.http_response.body
-
-            # if present, we'll need to authenticate the ciphertext
-            if context.http_response.headers['x-amz-meta-x-amz-tag-len']
-              auth_tag_len = context.http_response.headers['x-amz-meta-x-amz-tag-len'].to_i
-              decrypter.io.seek((decrypter.io.size - (auth_tag_len/8)))
-              auth_tag = decrypter.io.read
-              decrypter.cipher.auth_tag = auth_tag
-              decrypter.cipher.auth_data = ''
-              decrypter.io.truncate((decrypter.io.size - (auth_tag_len/8)))
-              decrypter.io.rewind if decrypter.io.respond_to?(:rewind)
-              # read back in the encrypted data
-              content = decrypter.io.read
-              decrypter.io.truncate(0)
-              decrypter.io.rewind if decrypter.io.respond_to?(:rewind)
-              # reprocess, decrypting data and authenticating ciphertext
-              decrypter.has_tag = false
-              decrypter.write(content)
-            end
             decrypter.finalize
             decrypter.io.rewind if decrypter.io.respond_to?(:rewind)
             context.http_response.body = decrypter.io
           end
 
           context.http_response.on_error do
-            if context.http_response.body.is_a?(IODecrypter)
+            if context.http_response.body.respond_to?(:io)
               context.http_response.body = context.http_response.body.io
             end
           end

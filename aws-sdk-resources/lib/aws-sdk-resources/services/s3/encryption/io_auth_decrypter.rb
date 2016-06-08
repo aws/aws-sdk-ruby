@@ -2,38 +2,6 @@ module Aws
   module S3
     module Encryption
       # @api private
-      class IODecrypter
-
-        # @option options [required, #write] :io
-        #   An IO-like object that responds to {#write}.
-        # @option options [required, OpenSSL::Cipher] :cipher
-        def initialize(options = {})
-          @io = options[:io]
-          @orig_cipher = options[:cipher].clone
-          reset_cipher
-        end
-
-        # @return [#write]
-        attr_reader :io
-
-        def write(chunk)
-          # decrypt and write
-          @io.write(@cipher.update(chunk))
-        end
-
-        def finalize
-          @io.write(@cipher.final)
-        end
-
-        private
-
-        def reset_cipher
-          @cipher = @orig_cipher.clone
-        end
-
-      end
-
-      # @api private
       class IOAuthDecrypter
 
         # @option options [required, IO#write] :io
