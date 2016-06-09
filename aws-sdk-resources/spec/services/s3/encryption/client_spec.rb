@@ -475,6 +475,7 @@ module Aws
 
           it 'supports decryption via KMS w/ GCM' do
             pending('aes-256-gcm not supported') unless OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
+            pending('openssl on travis not working') if ENV['TRAVIS']
             kms_client.stub_responses(:decrypt, plaintext: plaintext_object_key)
             client.client.stub_responses(:get_object, [
               # get_object resp
