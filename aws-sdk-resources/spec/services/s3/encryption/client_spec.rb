@@ -473,26 +473,29 @@ module Aws
             "\xACb.\xEB\x16\x19(\x9AJ\xE0uCA\x034z\xF6&\x7F\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
           }
 
-          it 'supports decryption via KMS w/ GCM' do
-            pending('aes-256-gcm not supported') unless OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
-            pending('openssl on travis not working') if ENV['TRAVIS']
-            kms_client.stub_responses(:decrypt, plaintext: plaintext_object_key)
-            client.client.stub_responses(:get_object, [
-              # get_object resp
-              {
-                status_code: 200,
-                headers: headers,
-                body: body,
-              },
-              # get_object w/range header resp
-              {
-                status_code: 200,
-                headers: headers.merge('content-length' => '16'),
-                body: body.bytes.to_a[-16..-1].pack("C*"),
-              },
-            ])
-            resp = client.get_object(bucket:'aws-sdk', key:'foo')
-            expect(resp.body.read).to eq('plain-text')
+          if !ENV['TRAVIS']
+            it 'supports decryption via KMS w/ GCM' do
+              if !OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
+                pending('aes-256-gcm not supported')
+              end
+              kms_client.stub_responses(:decrypt, plaintext: plaintext_object_key)
+              client.client.stub_responses(:get_object, [
+                # get_object resp
+                {
+                  status_code: 200,
+                  headers: headers,
+                  body: body,
+                },
+                # get_object w/range header resp
+                {
+                  status_code: 200,
+                  headers: headers.merge('content-length' => '16'),
+                  body: body.bytes.to_a[-16..-1].pack("C*"),
+                },
+              ])
+              resp = client.get_object(bucket:'aws-sdk', key:'foo')
+              expect(resp.body.read).to eq('plain-text')
+            end
           end
 
         end
