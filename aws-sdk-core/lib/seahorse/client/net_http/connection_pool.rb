@@ -10,17 +10,6 @@ module Seahorse
   module Client
     module NetHttp
 
-      # @attr_reader [URI::HTTP,nil] http_proxy Returns the configured proxy.
-      # @attr_reader [Integer,Float] http_open_timeout
-      # @attr_reader [Integer,Float] http_read_timeout
-      # @attr_reader [Integer,Float] http_idle_timeout
-      # @attr_reader [Float,nil] http_continue_timeout
-      # @attr_reader [Boolean] http_wire_trace
-      # @attr_reader [Logger,nil] logger
-      # @attr_reader [Boolean] ssl_verify_peer
-      # @attr_reader [String,nil] ssl_ca_bundle
-      # @attr_reader [String,nil] ssl_ca_directory
-      # @attr_reader [String,nil] ssl_ca_store
       class ConnectionPool
 
         @pools_mutex = Mutex.new
