@@ -487,7 +487,7 @@ module Aws
               {
                 status_code: 200,
                 headers: headers.merge('content-length' => '16'),
-                body: body.bytes[-16..-1].pack("C*"),
+                body: body.bytes.to_a[-16..-1].pack("C*"),
               },
             ])
             resp = client.get_object(bucket:'aws-sdk', key:'foo')
