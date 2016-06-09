@@ -6,33 +6,23 @@ require 'openssl'
 
 module Aws
   module CloudFront
+
     # Allows you to create signed URLs for Amazon CloudFront resources
     #
-    # Example Use:
-    # signer = Aws::CloudFront::UrlSigner.new
-    # url = signer.signed_url(
-    #   :key_pair_id => "CF_KEYPAIR_ID",
-    #   :private_key_path =>"#{File.dirname(__FILE__)}/cf_private_key.pem"
-    # )
+    #     signer = Aws::CloudFront::UrlSigner.new
+    #     url = signer.signed_url(url,
+    #       key_pair_id: "cf-keypair-id",
+    #       private_key_path: "./cf_private_key.pem"
+    #     )
     #
     class UrlSigner
-     	# @option options [String] :key_pair_id
+
+      # @option options [String] :key_pair_id
       # @option options [String] :private_key
       # @option options [String] :private_key_path
       def initialize(options = {})
-        if options[:key_pair_id].nil? or options[:key_pair_id] == ''
-          raise ArgumentError, ":key_pair_id must not be blank"
-        end
-        @key_pair_id = options[:key_pair_id]
-
-        if options[:private_key]
-          @private_key = options[:key_pair_id]
-        elsif options[:private_key_path]
-          @private_key = File.open(options[:private_key_path], 'rb') { |f| f.read }
-        else
-          msg = "Either :private_key or :private_key_path should be provided."
-          raise ArgumentError, msg
-        end
+        @key_pair_id = key_pair_id(options)
+        @private_key = private_key(options)
       end
 
       # create a signed Amazon CloudFront URL
@@ -48,7 +38,7 @@ module Aws
         scheme = url_sections[0].gsub('*', '')
         uri = "#{scheme}://#{url_sections[1]}"
         signed_content = signature(
-          :resource => resource(scheme, uri), 
+          :resource => resource(scheme, uri),
           :expires => time(params[:expires]),
           :policy => params[:policy]
         )
@@ -124,7 +114,7 @@ module Aws
           msg = "Either a policy or a resource with an expiration time must be provided."
           raise ArgumentError, msg
         end
-        
+
         signature_content << "Signature=#{encode(sign_policy(policy))}"
         signature_content << "Key-Pair-Id=#{@key_pair_id}"
         signature_content.join('&').gsub("\n", '')
@@ -148,10 +138,30 @@ module Aws
         }
         json_hash.to_json
       end
-      
+
       def encode(policy)
         Base64.encode64(policy).gsub(/[+=\/]/, '+' => '-', '=' => '_', '/' => '~')
       end
+
+      def key_pair_id(options)
+        if options[:key_pair_id].nil? or options[:key_pair_id] == ''
+          raise ArgumentError, ":key_pair_id must not be blank"
+        else
+          options[:key_pair_id]
+        end
+      end
+
+      def private_key(options)
+        if options[:private_key]
+          options[:private_key]
+        elsif options[:private_key_path]
+          File.open(options[:private_key_path], 'rb') { |f| f.read }
+        else
+          msg = ":private_key or :private_key_path should be provided"
+          raise ArgumentError, msg
+        end
+      end
+
     end
   end
 end

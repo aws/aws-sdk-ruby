@@ -25,8 +25,8 @@ module Aws
           expect {
             Aws::CloudFront::UrlSigner.new(
               :key_pair_id => "CF_KEYPAIR_ID"
-            ) 
-          }.to raise_error(ArgumentError)     
+            )
+          }.to raise_error(ArgumentError)
         end
       end
 
