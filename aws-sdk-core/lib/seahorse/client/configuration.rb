@@ -59,9 +59,15 @@ module Seahorse
       end
 
       # @api private
-      DynamicDefault = Struct.new(:block) do
-        def call(*args)
-          block.call(*args)
+      class DynamicDefault
+        attr_accessor :block
+
+        def initialize(block = nil)
+          @block = block
+        end
+
+        def call(*args) 
+          @block.call(*args)
         end
       end
 
