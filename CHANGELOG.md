@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.13 (2016-06-09)
 ------------------
 
 * Issue - Aws::S3 - Fix for `:start_after` option with the new
