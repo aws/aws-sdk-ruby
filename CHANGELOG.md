@@ -1,7 +1,8 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
+* Issue - Aws::S3 - Fix for `:start_after` option with the new
+  `#list_objects_v2` operation.
 
 * Feature - Aws::CloudFront - Added support for singing CloudFront
   URLs:
