@@ -1,6 +1,17 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFront - Added support for singing CloudFront
+  URLs:
+
+  ```ruby
+  signer = Aws::CloudFront::UrlSigner.new
+  url = signer.signed_url(url,
+    key_pair_id: "cf-keypair-id",
+    private_key_path: "./cf_private_key.pem"
+  )
+  ```
+
 * Feature - Aws::S3::Encryption::Client - Added support for reading objects
   encrypted with AES/GCM/NoPadding with a trailing authentication tag.
   This makes it possible to objects that have been encrypted from
