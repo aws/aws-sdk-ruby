@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
+
 * Feature - Aws::CloudFront - Added support for singing CloudFront
   URLs:
 
