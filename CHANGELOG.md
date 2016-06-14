@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.14 (2016-06-14)
 ------------------
 
 * Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
