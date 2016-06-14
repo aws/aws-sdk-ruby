@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
+
+* Feature - Aws::SES - Added support for enhanced notifications.
+
+* Feature - Aws::RDS - Added support for cross region binlog replication.
+
 2.3.13 (2016-06-09)
 ------------------
 
