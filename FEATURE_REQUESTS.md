@@ -193,12 +193,6 @@ This feature would be an interface for the information provided here http://docs
 
 See [related GitHub issue #926](https://github.com/aws/aws-sdk-ruby/issues/926).
 
-### Signed CloudFront URLs
-
-Amazon CloudFront supports pre-signed URLs, similar to those used by Amazon S3. It would be helpful to have a pre-signed url builder for SDK users.
-
-See [related GitHub issue #700](https://github.com/aws/aws-sdk-ruby/issues/700).
-
 ### Progress callbacks for Amazon S3 Object uploads
 
 To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
