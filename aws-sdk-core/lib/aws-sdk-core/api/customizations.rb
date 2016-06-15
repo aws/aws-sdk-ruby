@@ -170,6 +170,7 @@ module Aws
       plugins('s3', add: %w(
         Aws::Plugins::S3Accelerate
         Aws::Plugins::S3BucketDns
+        Aws::Plugins::S3BucketNameRestrictions
         Aws::Plugins::S3Expect100Continue
         Aws::Plugins::S3Http200Errors
         Aws::Plugins::S3GetBucketLocationFix

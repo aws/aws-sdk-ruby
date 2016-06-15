@@ -239,6 +239,13 @@ module Aws
 
       describe '#list_objects' do
 
+        it 'raises an error of the bucket name contains a forward slash' do
+          client = Client.new(stub_responses: true)
+          expect {
+            client.list_objects(bucket:'bucket-name/key-prefix')
+          }.to raise_error(ArgumentError, ":bucket option must not contain a forward-slash (/)")
+        end
+
         it 'request url encoded keys and decodes them by default' do
           client.handle(step: :send) do |context|
             context.http_response.signal_done(
