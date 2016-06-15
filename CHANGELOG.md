@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::RDS - Resolved an issue with `Aws::RDS::DBInstance#pending_maintenance_actions`
+  that caused it to raise an error.
+
 2.3.14 (2016-06-14)
 ------------------
 

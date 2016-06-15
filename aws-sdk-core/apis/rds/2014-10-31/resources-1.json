@@ -1804,7 +1804,7 @@
                             {
                                 "target": "Filters[0].Value",
                                 "source": "identifier",
-                                "name": "InstanceId"
+                                "name": "Id"
                             }
                         ]
                     },
