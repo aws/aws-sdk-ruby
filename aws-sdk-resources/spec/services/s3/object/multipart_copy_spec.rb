@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'thread'
 
 module Aws
   module S3
@@ -257,32 +258,60 @@ module Aws
 
           it 'supports alternative part sizes' do
 
-            expect(client).to receive(:create_multipart_upload).
-              with(bucket: 'bucket', key: 'unescaped/key path').
-              and_return(client.stub_data(:create_multipart_upload, upload_id:'id'))
+            client.stub_responses(:create_multipart_upload, upload_id: 'id')
+            client.stub_responses(:upload_part_copy, (1..60).map { |n|
+              { copy_part_result: { etag: "etag-#{n}" }}
+            })
 
-            (1..60).each do |n|
-              expect(client).to receive(:upload_part_copy).with(
+            # record all of the client requests
+            q = Queue.new
+            client.handle do |context|
+              q << context
+              @handler.call(context)
+            end
+
+            # initialize the multipart-copy
+            object.copy_from('source-bucket/source%20key',
+              multipart_copy: true,
+              min_part_size: 5 * 1024 * 1024
+            )
+
+            requests = []
+            requests << q.shift until q.empty?
+
+            # first request
+            first = requests.first
+            expect(first.operation_name).to eq(:create_multipart_upload)
+            expect(first.params).to eq({
+              bucket: 'bucket',
+              key: 'unescaped/key path',
+            })
+
+            # part requests
+            parts = requests[1..-2].sort_by { |r| r.params[:part_number] }
+            parts.each.with_index do |part, i|
+              n = i + 1
+              expect(part.params).to eq(
                 bucket: 'bucket',
                 key: 'unescaped/key path',
                 part_number: n,
                 copy_source: 'source-bucket/source%20key',
                 copy_source_range: "bytes=#{(n-1)*5242880}-#{n*5242880-1}",
                 upload_id: 'id'
-              ).and_return(client.stub_data(:upload_part_copy, copy_part_result:{etag: "etag#{n}"}))
+              )
             end
-            expect(client).to receive(:complete_multipart_upload).with({
+
+            # final request
+            final = requests.last
+            expect(final.operation_name).to eq(:complete_multipart_upload)
+            expect(final.params).to eq({
               bucket: 'bucket',
               key: 'unescaped/key path',
               upload_id: 'id',
               multipart_upload: {
-                parts: (1..60).map { |n| { etag: "etag#{n}", part_number: n } }
+                parts: (1..60).map { |n| { etag: "etag-#{n}", part_number: n } }
               }
             })
-            object.copy_from('source-bucket/source%20key',
-                             multipart_copy: true,
-                             min_part_size: 5 * 1024 * 1024
-                            )
           end
 
           it 'aborts the upload on errors' do
