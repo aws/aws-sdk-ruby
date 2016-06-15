@@ -23,23 +23,12 @@ module Aws
       # @api private
       class Handler < Seahorse::Client::Handler
 
-        OneMB = 1024 * 1024
-
         def call(context)
           body = context.http_request.body
           if body.size > 0
-            context.http_request.headers['Content-Md5'] ||= md5(body)
+            context.http_request.headers['Content-Md5'] ||= Checksums.md5(body)
           end
           @handler.call(context)
-        end
-
-        def md5(body)
-          md5 = OpenSSL::Digest::MD5.new
-          while chunk = body.read(OneMB)
-            md5.update(chunk)
-          end
-          body.rewind
-          Base64.encode64(md5.digest).strip
         end
 
       end

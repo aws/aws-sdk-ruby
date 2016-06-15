@@ -47,7 +47,7 @@ module Aws
         end
 
         def md5(str)
-          OpenSSL::Digest::MD5.digest(str)
+          Checksums.md5(str)
         end
 
         def base64(str)

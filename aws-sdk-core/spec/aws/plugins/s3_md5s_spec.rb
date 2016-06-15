@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'tempfile'
 
 module Aws
   module Plugins
@@ -48,13 +49,28 @@ module Aws
           )
         end
 
-        it 'computes the md5 in 1MB chunks for IO objects' do
-          chunk = '.' * 1024 * 1024
-          body = double('io-object', size: 5 * 1024 * 1024)
+        it 'computes the md5 of files without loading them into memory' do
+          body = Tempfile.new('tempfile')
+          body.write('.' * 5 * 1024 * 1024)
+          body.flush
+
+          expect(body).not_to receive(:read)
+          expect(body).not_to receive(:rewind)
+
+          context.http_request.body = body
+          handlers.add(NoSendHandler, step: :send)
+          handlers.to_stack.call(context)
+          expect(context.http_request.headers['Content-Md5']).to(
+            eq("+kDD2/74SZx+Rz+/Dw7I1Q==")
+          )
+        end
+
+        it 'computes the md5 in in memory for non-file IO objects' do
+          size = 5 * 1024 * 1024
+          body = double('io-object', size: size)
           expect(body).to receive(:read).
-            with(1024 * 1024).
-            exactly(6).times.
-            and_return(chunk, chunk, chunk, chunk, chunk, nil)
+            with(no_args). # read the entire object
+            and_return('.' * size)
           expect(body).to receive(:rewind)
 
           context.http_request.body = body

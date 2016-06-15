@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Memory Usage - Added a pair of utility methods that perform more efficient
+  SHA4256 and MD5 checksums of file objects. Before this change, data was read in
+  1MB chunks. Now using the `OpenSSL::Digest.file` interface to reduce memory usage.
+
+  See related [GitHub issue #1098](https://github.com/aws/aws-sdk-ruby/issues/1098).
+
 * Issue - Aws::RDS - Resolved an issue with `Aws::RDS#db_engine_version`.
 
   See related [GitHub issue #1138](https://github.com/aws/aws-sdk-ruby/issues/1138).
