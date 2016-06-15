@@ -68,12 +68,17 @@ module Aws
         end
 
         it 'extracts the named argument' do
-          source = described_class.new(target:'target')
+          source = described_class.new(source: 0, target:'target')
           expect(source.extract(args:['value'])).to eq('value')
         end
 
+        it 'supports multiple positional arguments' do
+          source = described_class.new(source: 1, target:'target')
+          expect(source.extract(args:['value-1', 'value-2'])).to eq('value-2')
+        end
+
         it 'returns nil when the argument is not present' do
-          source = described_class.new(target:'target')
+          source = described_class.new(source:0, target:'target')
           expect(source.extract({})).to be(nil)
         end
 

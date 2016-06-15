@@ -81,8 +81,6 @@ module Aws
 
         it 'reads non-file IO objects into  memory to compute checksusm' do
           body = StringIO.new('abc')
-          expect(body).to receive(:read).with(no_args).and_call_original
-          expect(body).to receive(:rewind).with(no_args).and_call_original
           http_request.body = body
           expect(sign.headers['X-Amz-Content-Sha256']).to eq(
             Digest::SHA256.hexdigest('abc'))

@@ -28,7 +28,11 @@ module Aws
 
         # @option [required, String] :argument
         def extract(options)
-          (options[:args] || [])[options[:n] || 0]
+          (options[:args] || [])[@source]
+        end
+
+        def plural?
+          false
         end
 
       end

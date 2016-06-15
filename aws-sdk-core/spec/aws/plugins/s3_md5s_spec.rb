@@ -67,11 +67,12 @@ module Aws
 
         it 'computes the md5 in in memory for non-file IO objects' do
           size = 5 * 1024 * 1024
-          body = double('io-object', size: size)
+          body = StringIO.new('.' * size)
           expect(body).to receive(:read).
-            with(no_args). # read the entire object
-            and_return('.' * size)
-          expect(body).to receive(:rewind)
+            exactly(6).times.
+            with(1024 * 1024). # read the object in 1MB chunks
+            and_call_original
+          expect(body).to receive(:rewind).and_call_original
 
           context.http_request.body = body
           handlers.add(NoSendHandler, step: :send)

@@ -33,9 +33,8 @@ module Aws
       # @return [Resource, Array<Resource>] Returns a resource object or an
       #   array of resource objects if {#plural?}.
       def build(options = {})
-        identifier_map = {}
-        @sources.each.with_index do |source, n|
-          identifier_map[source.target] = source.extract(options.merge(n: n))
+        identifier_map = @sources.each.with_object({}) do |source, hash|
+          hash[source.target] = source.extract(options)
         end
         if plural?
           build_batch(identifier_map, options)

@@ -4,6 +4,9 @@ require 'tempfile'
 module Aws
   # @api private
   module Checksums
+
+    CHUNK_SIZE = 1 * 1024 * 1024 # one MB
+
     class << self
 
       # @param [File, Tempfile, IO#read, String] value
@@ -12,7 +15,9 @@ module Aws
         if File === value || Tempfile === value
           OpenSSL::Digest::SHA256.file(value).hexdigest
         elsif value.respond_to?(:read)
-          OpenSSL::Digest::SHA256.hexdigest(read_and_rewind(value))
+          sha256 = OpenSSL::Digest::SHA256.new
+          update_in_chunks(sha256, value)
+          sha256.hexdigest
         else
           OpenSSL::Digest::SHA256.hexdigest(value)
         end
@@ -24,7 +29,9 @@ module Aws
         if File === value || Tempfile === value
           Base64.encode64(OpenSSL::Digest::MD5.file(value).digest).strip
         elsif value.respond_to?(:read)
-          Base64.encode64(OpenSSL::Digest::MD5.digest(read_and_rewind(value))).strip
+          md5 = OpenSSL::Digest::MD5.new
+          update_in_chunks(md5, value)
+          Base64.encode64(md5.digest).strip
         else
           Base64.encode64(OpenSSL::Digest::MD5.digest(value)).strip
         end
@@ -32,10 +39,11 @@ module Aws
 
       private
 
-      def read_and_rewind(io)
-        value = io.read
+      def update_in_chunks(digest, io)
+        while chunk = io.read(CHUNK_SIZE)
+          digest.update(chunk)
+        end
         io.rewind
-        value
       end
 
     end
