@@ -259,8 +259,8 @@ module Aws
           it 'supports alternative part sizes' do
 
             client.stub_responses(:create_multipart_upload, upload_id: 'id')
-            client.stub_responses(:upload_part_copy, (1..60).map { |n|
-              { copy_part_result: { etag: "etag-#{n}" }}
+            client.stub_responses(:upload_part_copy, lambda { |context|
+              { copy_part_result: { etag: "etag-#{context.params[:part_number]}" }}
             })
 
             # record all of the client requests
