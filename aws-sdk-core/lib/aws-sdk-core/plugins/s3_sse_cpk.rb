@@ -1,4 +1,5 @@
 require 'uri'
+require 'openssl'
 
 module Aws
   module Plugins
@@ -47,7 +48,7 @@ module Aws
         end
 
         def md5(str)
-          Checksums.md5(str)
+          OpenSSL::Digest::MD5.digest(str)
         end
 
         def base64(str)
