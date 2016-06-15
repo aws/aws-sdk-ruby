@@ -28,7 +28,7 @@ module Aws
           )
         }
 
-        let(:one_meg_file) { Tempfile.new('ten-meg-file') }
+        let(:one_meg_file) { Tempfile.new('one-meg-file') }
 
         let(:ten_meg_file) { Tempfile.new('ten-meg-file') }
 
