@@ -214,3 +214,7 @@ See [related GitHub issue #910](https://github.com/aws/aws-sdk-ruby/issues/910).
 ### Support Raw credential objects from AWS API responses in config
 
 See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009).
+
+### Add a helper for parsing DynamoDB stream events
+
+See [related GitHub issue #1212](https://github.com/aws/aws-sdk-ruby/issues/1212).
