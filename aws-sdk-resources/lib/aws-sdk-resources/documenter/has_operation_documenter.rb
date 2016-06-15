@@ -15,7 +15,7 @@ module Aws
 
         def parameters
           if argument?
-            [[argument_name, nil]]
+            arguments.map { |arg| [argument_name(arg), nil] }
           else
             []
           end
@@ -24,10 +24,12 @@ module Aws
         def tags
           tags = super
           if argument?
-            tag = "@param [String] #{argument_name} "
-            tag << "The {#{target_resource_class_name}##{argument_name}} "
-            tag << "identifier."
-            tags += YARD::DocstringParser.new.parse(tag).to_docstring.tags
+            arguments.each do |arg|
+              tag = "@param [String] #{argument_name(arg)} "
+              tag << "The {#{target_resource_class_name}##{argument_name(arg)}} "
+              tag << "identifier."
+              tags += YARD::DocstringParser.new.parse(tag).to_docstring.tags
+            end
           end
           tags
         end
@@ -48,10 +50,13 @@ module Aws
           builder.sources.find { |s| BuilderSources::DataMember === s }
         end
 
-        def argument_name
-          argument = builder.sources.find do |source|
+        def arguments
+          builder.sources.select do |source|
             BuilderSources::Argument === source
           end
+        end
+
+        def argument_name(argument)
           argument.target.to_s
         end
 

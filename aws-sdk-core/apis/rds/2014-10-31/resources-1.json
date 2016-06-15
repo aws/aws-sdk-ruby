@@ -163,6 +163,17 @@
                     ]
                 }
             },
+            "DBEngine": {
+                "resource": {
+                    "type": "DBEngine",
+                    "identifiers": [
+                        {
+                            "target": "Name",
+                            "source": "input"
+                        }
+                    ]
+                }
+            },
             "DBInstance": {
                 "resource": {
                     "type": "DBInstance",
@@ -1278,7 +1289,7 @@
                         {
                             "target": "Engine",
                             "source": "identifier",
-                            "name": "Engine"
+                            "name": "EngineName"
                         },
                         {
                             "target": "EngineVersion",

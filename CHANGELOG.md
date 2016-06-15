@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::RDS - Resolved an issue with `Aws::RDS#db_engine_version`.
+
+  See related [GitHub issue #1138](https://github.com/aws/aws-sdk-ruby/issues/1138).
+
 * Issue - Aws::RDS - Resolved an issue with `Aws::RDS::DBInstance#pending_maintenance_actions`
   that caused it to raise an error.
 
