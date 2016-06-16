@@ -1,3 +1,5 @@
+require 'time'
+
 module Aws
   module Rest
     module Response
@@ -38,7 +40,11 @@ module Aws
             if value =~ /\d+(\.\d*)/
               Time.at(value.to_f)
             else
-              Time.parse(value)
+              begin
+                Time.parse(value)
+              rescue
+                nil
+              end
             end
           else raise "unsupported shape #{ref.shape.class}"
           end
