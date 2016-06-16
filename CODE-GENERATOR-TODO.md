@@ -1,5 +1,8 @@
 # TODO (Must haves)
 
+* Support multiple fixed position input arguments, for a has
+  association, see Aws::RDS::Resource#DBEngineVersion
+
 * sts gem depends on core for runtime plus credentials. Core has a
   need for an sts client when assuming a role.
 
