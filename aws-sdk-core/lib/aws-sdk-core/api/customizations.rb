@@ -161,9 +161,9 @@ module Aws
         api['shapes']['ExpiresString'] = { 'type' => 'string' }
         %w(HeadObjectOutput GetObjectOutput).each do |shape|
           members = api['shapes'][shape]['members']
-          # inject this into sort order so this appears directly
-          # after #expires
+          # inject ExpiresString directly after Expires
           api['shapes'][shape]['members'] = members.inject({}) do |h, (k,v)|
+            h[k] = v
             if k == 'Expires'
               h['ExpiresString'] = {
                 'shape' => 'ExpiresString',
@@ -171,7 +171,6 @@ module Aws
                 'locationName' => 'Expires',
               }
             end
-            h[k] = v
             h
           end
         end
