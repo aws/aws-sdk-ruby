@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added two waiter methods to `Aws::EC2::VPC`:
+
+  * `#wait_until_exists`
+  * `#wait_until_available`
+
+  See related [GitHub pull request #1179](https://github.com/aws/aws-sdk-ruby/pull/1179).
+
 * Issue - Memory Usage - Added a pair of utility methods that perform more efficient
   SHA4256 and MD5 checksums of file objects. Before this change, data was read in
   1MB chunks. Now using the `OpenSSL::Digest.file` interface to reduce memory usage.
