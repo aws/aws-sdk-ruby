@@ -157,6 +157,24 @@ module Aws
             end
           end
         end
+
+        api['shapes']['ExpiresString'] = { 'type' => 'string' }
+        %w(HeadObjectOutput GetObjectOutput).each do |shape|
+          members = api['shapes'][shape]['members']
+          # inject this into sort order so this appears directly
+          # after #expires
+          api['shapes'][shape]['members'] = members.inject({}) do |h, (k,v)|
+            if k == 'Expires'
+              h['ExpiresString'] = {
+                'shape' => 'ExpiresString',
+                'location' => 'header',
+                'locationName' => 'Expires',
+              }
+            end
+            h[k] = v
+            h
+          end
+        end
       end
 
       doc('s3') do |docs|

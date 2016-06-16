@@ -190,6 +190,24 @@ module Aws
 
       end
 
+      describe 'invalid Expires header' do
+        %w(get_object head_object).each do |method|
+
+          it "correctly handled invalid Expires header for #{method}" do
+            s3 = Client.new
+            s3.handle(step: :send) do |context|
+              context.http_response.signal_headers(200, {'Expires' => 'abc'})
+              context.http_response.signal_done
+              Seahorse::Client::Response.new(context: context)
+            end
+            resp = s3.send(method, bucket:'b', key:'k')
+            expect(resp.expires).to be(nil)
+            expect(resp.expires_string).to eq('abc')
+          end
+
+        end
+      end
+
       describe '#create_bucket' do
 
         it 'omits location constraint for the classic region' do

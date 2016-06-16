@@ -1,6 +1,23 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::S3 - Resolved an issue with `Aws::S3::Client#head_object` and
+  `#get_object` where an `ArgumentError` was raised if Amazon S3 responded with
+  an Expires header that contained an unparsable string.
+
+  The `#head_object` and `#get_object` response now return `nil` when the Expires
+  header contains an invalid value. You can now access the raw string value
+  of the Expires header with `#expires_string`.
+
+  ```ruby
+  # If Amazon S3 responds with `Expires: abc` as a header
+  resp = s3.head_object(bucket:'bucket', key:'key')
+  resp.expires #=> nil
+  resp.expires_string #=> "abc"
+  ```
+
+  See related [GitHub issue #1184](https://github.com/aws/aws-sdk-ruby/issues/1184).
+
 * Issue - Memory Usage - Added a pair of utility methods that perform more efficient
   SHA4256 and MD5 checksums of file objects. Before this change, data was read in
   1MB chunks. Now using the `OpenSSL::Digest.file` interface to reduce memory usage.
