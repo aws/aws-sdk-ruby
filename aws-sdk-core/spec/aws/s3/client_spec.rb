@@ -205,6 +205,25 @@ module Aws
             expect(resp.expires_string).to eq('abc')
           end
 
+          it 'accepts a stubbed Expires header as a Time value' do
+            now = Time.at(Time.now.to_i)
+            s3 = Client.new(stub_responses: {
+              method.to_sym => { expires: now }
+            })
+            resp = s3.send(method, bucket:'b', key:'k')
+            expect(resp.expires).to eq(now)
+            expect(resp.expires_string).to eq(now.httpdate)
+          end
+
+          it 'accepts a stubbed Expires header as String value' do
+            s3 = Client.new(stub_responses: {
+              method.to_sym => { expires_string: 'abc' }
+            })
+            resp = s3.send(method, bucket:'b', key:'k')
+            expect(resp.expires).to be(nil)
+            expect(resp.expires_string).to eq('abc')
+          end
+
         end
       end
 
