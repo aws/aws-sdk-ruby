@@ -28,18 +28,28 @@ module Aws
           )
         }
 
-        let(:one_meg_file) { Tempfile.new('one-meg-file') }
+        let(:one_mb) { '.' * 1024 * 1024 }
 
-        let(:ten_meg_file) { Tempfile.new('ten-meg-file') }
+        let(:one_meg_file) {
+          Tempfile.new('one-meg-file').tap do |f|
+            f.write(one_mb)
+            f.rewind
+          end
+        }
 
-        let(:seventeen_meg_file) { Tempfile.new('seventeen-meg-file') }
+        let(:ten_meg_file) {
+          Tempfile.new('one-meg-file').tap do |f|
+            10.times { f.write(one_mb) }
+            f.rewind
+          end
+        }
 
-        before(:each) do
-          allow(File).to receive(:size).with(one_meg_file).and_return(one_meg)
-          allow(File).to receive(:size).with(ten_meg_file).and_return(10 * one_meg)
-          allow(File).to receive(:size).with(ten_meg_file.path).and_return(10 * one_meg)
-          allow(File).to receive(:size).with(seventeen_meg_file).and_return(17 * one_meg)
-        end
+        let(:seventeen_meg_file) {
+          Tempfile.new('one-meg-file').tap do |f|
+            17.times { f.write(one_mb) }
+            f.rewind
+          end
+        }
 
         describe 'small objects' do
 
