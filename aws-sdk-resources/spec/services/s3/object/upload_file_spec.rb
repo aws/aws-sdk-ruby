@@ -77,14 +77,21 @@ module Aws
         describe 'large objects' do
 
           it 'uses multipart APIs for objects >= 15MB' do
-            expect(client).to receive(:create_multipart_upload).
-              and_return(client.stub_data(:create_multipart_upload, upload_id:'id'))
-
-            expect(client).to receive(:upload_part).exactly(4).times.
-              and_return(client.stub_data(:upload_part, etag:'etag'))
-
-            expect(client).to receive(:complete_multipart_upload)
-
+            client.stub_responses(:create_multipart_upload, upload_id:'id')
+            client.stub_responses(:upload_part, etag:'etag')
+            expect(client).to receive(:complete_multipart_upload).with(
+              bucket: 'bucket',
+              key: 'key',
+              upload_id: 'id',
+              multipart_upload: {
+                parts: [
+                  { etag: 'etag', part_number: 1 },
+                  { etag: 'etag', part_number: 2 },
+                  { etag: 'etag', part_number: 3 },
+                  { etag: 'etag', part_number: 4 },
+                ]
+              }
+            )
             object.upload_file(seventeen_meg_file, content_type: 'text/plain')
           end
 
