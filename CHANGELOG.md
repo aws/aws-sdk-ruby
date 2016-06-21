@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.15 (2016-06-21)
 ------------------
 
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
