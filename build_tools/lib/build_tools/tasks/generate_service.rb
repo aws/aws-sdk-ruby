@@ -50,7 +50,7 @@ module BuildTools
 Gem::Specification.new do |spec|
 
   spec.name          = '#{service.gem_name}'
-  spec.version       = '#{gem_version}'
+  spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - #{service.short_name}'
   spec.description   = 'Official AWS Ruby gem for #{service.full_name}#{abbr}. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
