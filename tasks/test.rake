@@ -1,7 +1,7 @@
 require 'rspec/core/rake_task'
 
 # unit test tasks
-%w(resources core code-generator).each do |gem|
+%w(core code-generator).each do |gem|
   desc "aws-sdk-#{gem} unit tests"
   RSpec::Core::RakeTask.new("test:unit:#{gem}") do |t|
     t.rspec_opts = "-I #{$REPO_ROOT}/aws-sdk-#{gem}/lib"
@@ -13,7 +13,7 @@ require 'rspec/core/rake_task'
 end
 
 # integration test tasks
-%w(resources core).each do |gem|
+%w(core).each do |gem|
   desc "aws-sdk-#{gem} integration tests"
   task "test:integration:#{gem}" do |t|
     if ENV['AWS_INTEGRATION']
