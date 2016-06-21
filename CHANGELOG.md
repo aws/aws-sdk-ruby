@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
 * Feature - Aws::EC2 - Added two waiter methods to `Aws::EC2::VPC`:
 
   * `#wait_until_exists`
