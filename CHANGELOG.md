@@ -1,6 +1,107 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Added two waiter methods to `Aws::EC2::VPC`:
+
+  * `#wait_until_exists`
+  * `#wait_until_available`
+
+  See related [GitHub pull request #1179](https://github.com/aws/aws-sdk-ruby/pull/1179).
+
+* Issue - Aws::S3 - Resolved an issue with `Aws::S3::Client#head_object` and
+  `#get_object` where an `ArgumentError` was raised if Amazon S3 responded with
+  an Expires header that contained an unparsable string.
+
+  The `#head_object` and `#get_object` response now return `nil` when the Expires
+  header contains an invalid value. You can now access the raw string value
+  of the Expires header with `#expires_string`.
+
+  ```ruby
+  # If Amazon S3 responds with `Expires: abc` as a header
+  resp = s3.head_object(bucket:'bucket', key:'key')
+  resp.expires #=> nil
+  resp.expires_string #=> "abc"
+  ```
+
+  See related [GitHub issue #1184](https://github.com/aws/aws-sdk-ruby/issues/1184).
+
+* Issue - Memory Usage - Added a pair of utility methods that perform more efficient
+  SHA4256 and MD5 checksums of file objects. Before this change, data was read in
+  1MB chunks. Now using the `OpenSSL::Digest.file` interface to reduce memory usage.
+
+  See related [GitHub issue #1098](https://github.com/aws/aws-sdk-ruby/issues/1098).
+
+* Issue - Aws::RDS - Resolved an issue with `Aws::RDS#db_engine_version`.
+
+  See related [GitHub issue #1138](https://github.com/aws/aws-sdk-ruby/issues/1138).
+
+* Issue - Aws::RDS - Resolved an issue with `Aws::RDS::DBInstance#pending_maintenance_actions`
+  that caused it to raise an error.
+
+2.3.14 (2016-06-14)
+------------------
+
+* Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
+
+* Feature - Aws::SES - Added support for enhanced notifications.
+
+* Feature - Aws::RDS - Added support for cross region binlog replication.
+
+2.3.13 (2016-06-09)
+------------------
+
+* Issue - Aws::S3 - Fix for `:start_after` option with the new
+  `#list_objects_v2` operation.
+
+* Feature - Aws::CloudFront - Added support for singing CloudFront
+  URLs:
+
+  ```ruby
+  signer = Aws::CloudFront::UrlSigner.new
+  url = signer.signed_url(url,
+    key_pair_id: "cf-keypair-id",
+    private_key_path: "./cf_private_key.pem"
+  )
+  ```
+
+* Feature - Aws::S3::Encryption::Client - Added support for reading objects
+  encrypted with AES/GCM/NoPadding with a trailing authentication tag.
+  This makes it possible to objects that have been encrypted from
+  Amazon SES inbound.
+
+  ```ruby
+  # you must use a KMS client that is the same region as the kms key id
+  kms = Aws::KMS::Client.new(region: 'us-west-2')
+
+  s3_enc = Aws::S3::Encryption::Client.new(
+    kms_key_id: 'arn:aws:kms:us-west-2:469596866844:alias/aws/ses',
+    kms_client: kms)
+
+  s3_enc.get_object(
+    bucket: 'aws-sdk',
+    key: 'ses-inbound/AMAZON_SES_SETUP_NOTIFICATION'
+  ).body.read
+
+  #=>
+  Date: Tue, 07 Jun 2016 18:25:40 +0000
+  To: recipient@example.com
+  ...
+  ```
+
+2.3.12 (2016-06-07)
+------------------
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::MachineLearning - Updated the API, and documentation for Amazon Machine Learning.
+
+* Feature - Aws::DynamoDBStreams - Updated the API, and documentation for Amazon DynamoDB Streams.
+
+* Feature - Aws::CloudWatch - Adds the `:alarm_exists` waiter for
+  `Aws::CloudWatch`. Additionally, this is wired into
+  `Aws::CloudWatch::Resource` as the `Aws::CloudWatch::Alarm#exists?` method.
 2.3.11 (2016-06-02)
 ------------------
 
@@ -66,6 +167,17 @@ Unreleased Changes
 
 2.3.4 (2016-05-12)
 ------------------
+
+* Feature - Aws::CloudFront - Added support for signing CloudFront URLs.
+
+  ```ruby
+  signer = Aws::CloudFront::UrlSigner.new
+  signer.signed_url(url,
+    key_pair_id: "cf-keypair-id",
+    private_key_path: "./cf_private_key.pem"
+  )
+  #=> "http://..."
+  ```
 
 * Feature - Aws::ApplicationDiscoveryService - Added support for the new
   AWS Application Discovery Service.

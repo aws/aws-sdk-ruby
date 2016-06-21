@@ -1,5 +1,6 @@
 require 'aws-sdk-s3/plugins/accelerate'
 require 'aws-sdk-s3/plugins/bucket_dns'
+require 'aws-sdk-s3/plugins/bucket_name_restrictions'
 require 'aws-sdk-s3/plugins/expect_100_continue'
 require 'aws-sdk-s3/plugins/get_bucket_location_fix'
 require 'aws-sdk-s3/plugins/http_200_errors'
@@ -24,6 +25,7 @@ module Aws
       add_plugin(Plugins::SseCpk)
       add_plugin(Plugins::UrlEncodedKeys)
       add_plugin(Plugins::RequestSigner)
+      add_plugin(Plugins::BucketNameRestrictions)
     end
   end
 end

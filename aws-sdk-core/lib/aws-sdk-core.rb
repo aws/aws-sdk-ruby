@@ -100,6 +100,7 @@ module Aws
   autoload :StructureType, 'aws-sdk-core/structure_type'
 
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
+  autoload :Checksums, 'aws-sdk-core/checksums'
   autoload :Client, 'aws-sdk-core/client'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :ClientWaiters, 'aws-sdk-core/client_waiters'

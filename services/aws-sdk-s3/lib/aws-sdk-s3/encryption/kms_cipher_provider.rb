@@ -41,7 +41,18 @@ module Aws
             encryption_context: encryption_context,
           ).plaintext
           iv = decode64(envelope['x-amz-iv'])
-          Utils.aes_decryption_cipher(:CBC, key, iv)
+          block_mode =
+            case envelope['x-amz-cek-alg']
+            when 'AES/CBC/PKCS5Padding'
+              :CBC
+            when 'AES/GCM/NoPadding'
+              :GCM
+            else
+              type = envelope['x-amz-cek-alg'].inspect
+              msg = "unsupported content encrypting key (cek) format: #{type}"
+              raise Errors::DecryptionError, msg
+            end
+          Utils.aes_decryption_cipher(block_mode, key, iv)
         end
 
         private

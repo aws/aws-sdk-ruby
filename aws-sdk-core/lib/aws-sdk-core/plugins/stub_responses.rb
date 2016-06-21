@@ -38,7 +38,7 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          stub = context.client.next_stub(context.operation_name)
+          stub = context.client.next_stub(context)
           resp = Seahorse::Client::Response.new(context: context)
           apply_stub(stub, resp)
           resp

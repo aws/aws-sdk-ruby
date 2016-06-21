@@ -10,6 +10,61 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Expose Raw Exception Response Bodies
+
+The SDK uses first the exception response `__type` field, then the `ErrorCode`
+field, to determine the exception's code. However, the related issue shows at
+least one case where the `ErrorCode` field would be the more descriptive error.
+We cannot change the exception classing behavior now, but exposing the raw
+exception response fields could improve the exception handling experience.
+
+See [related GitHub issue #1189](https://github.com/aws/aws-sdk-ruby/issues/1189).
+
+### Add Waiters for Aws::SSM
+
+See [related GitHub issue #1185](https://github.com/aws/aws-sdk-ruby/issues/1185).
+
+### Customize Request HTTP Verbs
+
+Some services accept multiple HTTP verbs, potentially with differing behavior.
+This feature request would be to investigate how multiple HTTP verbs could be
+supported.
+
+See [related GitHub issue #1181](https://github.com/aws/aws-sdk-ruby/issues/1181).
+
+### Cache-Friendly Presigned URLs
+
+Add functionality to the presigner to improve the experience of generating cache
+friendly presigned URLs. For example:
+
+```ruby
+req = s3.presigned_request(:get_object, bucket:'...', key: '...')
+req.uri #=> "https://..."
+req.headers #=> { ... } authorization in here
+```
+
+See [related GitHub issue #1152](https://github.com/aws/aws-sdk-ruby/issues/1152).
+
+### Add Option to Create Unsigned Requests
+
+Add support to make unsigned calls using the SDK. Can be useful for cases such
+as anonymously downlading S3 objects that have a `public-read` ACL.
+
+See [related GitHub issue #1149](https://github.com/aws/aws-sdk-ruby/issues/1149).
+
+### Enhance Aws::AutoScaling::Resource to Surface Tag Values in Collection
+
+Not all Auto Scaling tag resources surface the value, should be doable with
+existing client calls within the resource.
+
+See [related GitHub issue #1145](https://github.com/aws/aws-sdk-ruby/issues/1145).
+
+### Programmable Stubs
+
+Provide an easy way to create stubbed clients that have programmable behavior.
+
+See [related GitHub issue #1120](https://github.com/aws/aws-sdk-ruby/issues/1120).
+
 ### Add Interface to Create Custom Waiters
 
 For cases where a particular waiter doesn't exist, this request would provide an
@@ -75,16 +130,6 @@ to the `Aws::S3::Resource` interface.
 
 See [related GitHub issue #969](https://github.com/aws/aws-sdk-ruby/issues/969).
 
-### Add to Param Validation Error Message
-
-Currently, parameter validation errors come in the following form:
-`expected params[:pipeline_objects][1][:fields][5][:string_value] to be a string`
-
-This could be enhanced by printing the actual value and type of what was passed
-to the client.
-
-See [related GitHub issue #991](https://github.com/aws/aws-sdk-ruby/issues/991).
-
 ### Add Multipart Download Helper(s)
 
 The SDK already has a multipart upload helper for Amazon S3, but doing a GET request
@@ -98,6 +143,12 @@ for an example related to Amazon S3.
 See [related GitHub issue #987](https://github.com/aws/aws-sdk-ruby/issues/987)
 for an example related to the Amazon RDS client (similar, not identical,
 pattern).
+
+### Add accelerate endpoint support to presigned POST requests
+
+The presigned POST utility does not support pre-signing Amazon S3 acclerated
+bucket endpoints. Explore adding an explicit configuration option to enable this,
+or determine this by looking at the client configuration.
 
 ### Add ability to pre-sign a request
 
@@ -142,12 +193,6 @@ This feature would be an interface for the information provided here http://docs
 
 See [related GitHub issue #926](https://github.com/aws/aws-sdk-ruby/issues/926).
 
-### Signed CloudFront URLs
-
-Amazon CloudFront supports pre-signed URLs, similar to those used by Amazon S3. It would be helpful to have a pre-signed url builder for SDK users.
-
-See [related GitHub issue #700](https://github.com/aws/aws-sdk-ruby/issues/700).
-
 ### Progress callbacks for Amazon S3 Object uploads
 
 To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
@@ -166,6 +211,10 @@ You can currently only configure an access key id, secret access key, and sessio
 
 See [related GitHub issue #910](https://github.com/aws/aws-sdk-ruby/issues/910).
 
-### Support Raw crednetial objects from AWS API responses in config
+### Support Raw credential objects from AWS API responses in config
 
 See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009).
+
+### Add a helper for parsing DynamoDB stream events
+
+See [related GitHub issue #1212](https://github.com/aws/aws-sdk-ruby/issues/1212).

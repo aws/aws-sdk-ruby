@@ -198,6 +198,52 @@ module Aws
 
       end
 
+      describe 'endpoints' do
+
+        it 'resolves correctly for gov-cloud' do
+          s3 = Client.new(region: 'us-gov-west-1')
+          expect(s3.config.endpoint.to_s).to eq('https://s3-us-gov-west-1.amazonaws.com')
+        end
+
+      end
+
+      describe 'invalid Expires header' do
+        %w(get_object head_object).each do |method|
+
+          it "correctly handled invalid Expires header for #{method}" do
+            s3 = Client.new
+            s3.handle(step: :send) do |context|
+              context.http_response.signal_headers(200, {'Expires' => 'abc'})
+              context.http_response.signal_done
+              Seahorse::Client::Response.new(context: context)
+            end
+            resp = s3.send(method, bucket:'b', key:'k')
+            expect(resp.expires).to be(nil)
+            expect(resp.expires_string).to eq('abc')
+          end
+
+          it 'accepts a stubbed Expires header as a Time value' do
+            now = Time.at(Time.now.to_i)
+            s3 = Client.new(stub_responses: {
+              method.to_sym => { expires: now }
+            })
+            resp = s3.send(method, bucket:'b', key:'k')
+            expect(resp.expires).to eq(now)
+            expect(resp.expires_string).to eq(now.httpdate)
+          end
+
+          it 'accepts a stubbed Expires header as String value' do
+            s3 = Client.new(stub_responses: {
+              method.to_sym => { expires_string: 'abc' }
+            })
+            resp = s3.send(method, bucket:'b', key:'k')
+            expect(resp.expires).to be(nil)
+            expect(resp.expires_string).to eq('abc')
+          end
+
+        end
+      end
+
       describe '#create_bucket' do
 
         it 'omits location constraint for the classic region' do
@@ -322,6 +368,13 @@ module Aws
       end
 
       describe '#list_objects' do
+
+        it 'raises an error of the bucket name contains a forward slash' do
+          client = Client.new(stub_responses: true)
+          expect {
+            client.list_objects(bucket:'bucket-name/key-prefix')
+          }.to raise_error(ArgumentError, ":bucket option must not contain a forward-slash (/)")
+        end
 
         it 'request url encoded keys and decodes them by default' do
           client.handle(step: :send) do |context|
