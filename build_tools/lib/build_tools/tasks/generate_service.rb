@@ -9,9 +9,9 @@ module BuildTools
         # @param [BuildTools::Services::Service] service
         def new(service)
           task = Rake::Task.define_task("build:#{service.identifier}") do
-            build_version_file(service)
-            build_gemspec(service)
-            build_src(service)
+            gem_version = boostrap_version_file(service)
+            build_gemspec(service, gem_version)
+            build_src(service, gem_version)
           end
           task.add_description("Builds the code for Aws::#{service.name}")
           task
@@ -19,7 +19,7 @@ module BuildTools
 
         private
 
-        def build_src(svc)
+        def build_src(svc, gem_version)
           g = AwsSdkCodeGenerator::Generator.new(generate_opts(svc)) do |svc_module|
 
             if File.exists?("#{svc.gem_dir}/lib/#{svc.gem_name}/customizations.rb")
@@ -27,7 +27,7 @@ module BuildTools
               svc_module.require_relative("#{svc.gem_name}/customizations.rb")
             end
 
-            svc_module.code("GEM_VERSION = '#{gem_version(svc)}'")
+            svc_module.code("GEM_VERSION = '#{gem_version}'")
 
           end
 
@@ -36,7 +36,12 @@ module BuildTools
           end
         end
 
-        def build_gemspec(service)
+        def build_gemspec(service, gem_version)
+
+          abbr = service.short_name != service.full_name ?
+            " (#{service.short_name})" :
+            ''
+
           dependencies = service.dependencies.map do |gem, version|
             "spec.add_dependency('#{gem}', '#{version}')"
           end.join("\n  ")
@@ -45,9 +50,9 @@ module BuildTools
 Gem::Specification.new do |spec|
 
   spec.name          = '#{service.gem_name}'
-  spec.version       = '#{gem_version(service)}'
+  spec.version       = '#{gem_version}'
   spec.summary       = 'AWS SDK for Ruby - #{service.short_name}'
-  spec.description   = 'Official AWS Ruby gem for #{service.full_name}. This gem is part of the AWS SDK for Ruby.'
+  spec.description   = 'Official AWS Ruby gem for #{service.full_name}#{abbr}. This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
@@ -61,9 +66,10 @@ end
           GEMSPEC
         end
 
-        def build_version_file(service)
+        def boostrap_version_file(service)
           version_path = File.join(service.gem_dir, 'VERSION')
           write_file(version_path, "1.0.0") unless File.exists?(version_path)
+          File.read(version_path).strip
         end
 
         # Options given to the code generator, includes the loaded
@@ -98,10 +104,6 @@ end
           File.open(path, 'wb') do |file|
             file.write(contents)
           end
-        end
-
-        def gem_version(svc)
-          File.read("#{svc.gem_dir}/VERSION").strip
         end
 
       end
