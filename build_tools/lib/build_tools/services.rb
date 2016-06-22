@@ -16,7 +16,7 @@ module BuildTools
           svc.name = service_name
           svc.models = service_models(definition['models'])
           svc.gem_name = definition['gem'] || "aws-sdk-#{svc.identifier}"
-          svc.gem_dir = File.join('services', svc.gem_name)
+          svc.gem_dir = File.join('gems', svc.gem_name)
           svc.dependencies = {}
           svc.dependencies['aws-sdk-core'] = '~> 3.0'
           svc.dependencies.update(definition['dependencies'] || {})
@@ -78,7 +78,7 @@ module BuildTools
       # @return [string] Something like "aws-sdk-dynamodb"
       attr_accessor :gem_name
 
-      # @return [string] Path to the gem directory, e.g. "services/aws-sdk-dynamodb"
+      # @return [string] Path to the gem directory, e.g. "gems/aws-sdk-dynamodb"
       attr_accessor :gem_dir
 
       # @return [Hash<String,String> A hash of runtime gem dependencies. Keys
