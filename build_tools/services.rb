@@ -5,9 +5,9 @@ module BuildTools
 
     include Enumerable
 
-    MANIFEST_PATH = File.expand_path('../../../../services.json', __FILE__)
+    MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
-    API_DIR = File.expand_path('../../../../apis', __FILE__)
+    API_DIR = File.expand_path('../../apis', __FILE__)
 
     def initialize
       @services = manifest.inject([]) do |services, (service_name, definition)|
