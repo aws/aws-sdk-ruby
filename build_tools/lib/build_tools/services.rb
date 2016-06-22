@@ -17,6 +17,7 @@ module BuildTools
           svc.models = service_models(definition['models'])
           svc.gem_name = definition['gem'] || "aws-sdk-#{svc.identifier}"
           svc.gem_dir = File.join('gems', svc.gem_name)
+          svc.endpoints_key = definition['endpoint']
           svc.dependencies = {}
           svc.dependencies['aws-sdk-core'] = '~> 3.0'
           svc.dependencies.update(definition['dependencies'] || {})
@@ -94,6 +95,9 @@ module BuildTools
       # @return [Hash<String,String> A hash of runtime gem dependencies. Keys
       #   are gem names and values are versions
       attr_accessor :dependencies
+
+      # @return [String] The name/key used in endpoints.json.
+      attr_accessor :endpoints_key
 
       # @return [Hash]
       def api
