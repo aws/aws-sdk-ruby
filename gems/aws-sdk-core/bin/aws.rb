@@ -101,7 +101,7 @@ module Aws
       # Load a local copy from disk if present, this makes it possible
       # to run the REPL against a clone of the repository.
       gem_name = "aws-sdk-#{svc_name.downcase}"
-      gem_lib = File.expand_path("../../../gems/#{gem_name}/lib", __FILE__)
+      gem_lib = File.expand_path("../../../#{gem_name}/lib", __FILE__)
       if File.directory?(gem_lib)
         $LOAD_PATH.unshift(gem_lib)
         Aws.autoload(svc_name, "#{gem_lib}/#{gem_name}")
