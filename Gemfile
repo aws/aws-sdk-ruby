@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gemspec path: 'aws-sdk-core'
+gemspec path: 'gems/aws-sdk-core'
 
 gem 'rake', require: false
 
