@@ -1,5 +1,3 @@
-require 'build_tools'
-
 task 'release_notes:html' do
 
   require 'erb'

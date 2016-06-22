@@ -1,5 +1,3 @@
-require 'build_tools'
-
 def service_names
   line = "    "
   service_names = ""

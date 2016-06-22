@@ -1,5 +1,3 @@
-require 'build_tools'
-
 desc "Rebuilds the source and gemspec for the aws-sdk umbrella gem."
 task 'aws-sdk:update' do
 

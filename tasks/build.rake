@@ -1,5 +1,3 @@
-require 'build_tools'
-
 desc 'Rebuilds all services.'
 task 'build'
 

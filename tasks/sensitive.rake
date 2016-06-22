@@ -1,6 +1,3 @@
-require 'build_tools'
-require 'aws-sdk-code-generator'
-
 task 'update-filtered-params' => ['git:require-clean-workspace'] do
 
   # compute the list of senstive params that should be filtered from logging

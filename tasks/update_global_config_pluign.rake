@@ -1,6 +1,3 @@
-require 'build_tools'
-require 'aws-sdk-code-generator'
-
 task 'update-global-config-plugin' => ['git:require-clean-workspace'] do
 
   ids = BuildTools::Services.map { |svc| ":#{svc.identifier}" }.sort
