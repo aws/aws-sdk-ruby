@@ -5,7 +5,7 @@ module BuildTools
 
     include Enumerable
 
-    MANIFEST_PATH = File.expand_path('../../../../gems/aws-sdk-core/service-models.json', __FILE__)
+    MANIFEST_PATH = File.expand_path('../../../../services.json', __FILE__)
 
     API_DIR = File.expand_path('../../../../apis', __FILE__)
 
