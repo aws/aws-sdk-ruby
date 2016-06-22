@@ -18,3 +18,24 @@ task 'update-global-config-plugin' => ['git:require-clean-workspace'] do
   end
 
 end
+
+task 'update-partition-service-list' => ['git:require-clean-workspace'] do
+
+  ids = BuildTools::Services.map { |svc| ":#{svc.identifier}" }.sort
+  ids = BuildTools.wrap_list(items: ids, indent: '        ')
+
+  filename = 'gems/aws-sdk-core/lib/aws-sdk-core/partitions.rb'
+
+  changed = BuildTools.replace_lines(
+    filename: filename,
+    start: /# service ids/,
+    stop: /# end service ids/,
+    new_lines: "abc"
+  )
+
+  #if changed
+  #  sh("git add #{filename}")
+  #  sh('git commit -m "Updated the list of partition services."')
+  #end
+
+end

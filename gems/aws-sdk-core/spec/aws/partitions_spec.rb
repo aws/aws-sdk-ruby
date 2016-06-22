@@ -5,7 +5,7 @@ module Aws
     describe 'Partitions' do
 
       let(:us_east_1_services) do
-        services = BuildTools::Services.map(&:name).sort
+        services = Aws::SERVICE_MODULE_NAMES.map.sort
         services -= ['CloudSearchDomain'] # user endpoints only
         services -= ['DeviceFarm'] # us-west-2 only
         services -= ['ApplicationDiscoveryService'] # us-west-2 only

@@ -27,6 +27,7 @@ task 'release:check' => [
 task 'release:build' => [
   'update-filtered-params',
   'update-global-config-plugin',
+  'update-partition-service-list',
   'docs:update_readme',
   'changelog:version',
   'release:bump-version',

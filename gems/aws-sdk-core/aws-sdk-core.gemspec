@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.license       = 'Apache 2.0'
   spec.email         = ['trevrowe@amazon.com']
   spec.require_paths = ['lib']
-  spec.files         = ['endpoints.json', 'service-models.json', 'ca-bundle.crt']
+  spec.files         = ['endpoints.json', 'ca-bundle.crt']
   spec.files         += Dir['lib/**/*.rb']
   spec.bindir        = 'bin'
   spec.executables   << 'aws.rb'

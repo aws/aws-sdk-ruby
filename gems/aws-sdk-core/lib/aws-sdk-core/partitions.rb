@@ -160,11 +160,10 @@ module Aws
       # @api private
       def service_ids
         @service_ids ||= begin
-          path = File.expand_path("../../../service-models.json", __FILE__)
-          Json.load_file(path).inject({}) do |ids, (name, svc)|
-            ids[name] = svc['endpoint'] #if svc['endpoint']
-            ids
-          end
+          # service ids
+          {
+          }
+          # end service ids
         end
       end
 
