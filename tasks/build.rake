@@ -1,6 +1,10 @@
-desc 'Rebuilds all services.'
-task 'build'
+desc 'Builds every service gem'
+task 'build' do
+  BuildTools::Services.each(&:build)
+end
 
-BuildTools::Services.each do |service|
-  task 'build' => BuildTools::Tasks::GenerateService.new(service)
+# build a single service gem; invoke like `rake build:s3`
+rule /^build:\w+$/ do |task|
+  identifier = task.name.split(':').last
+  BuildTools::Services.service(identifier).build
 end

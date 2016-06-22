@@ -24,6 +24,16 @@ module BuildTools
       end
     end
 
+    # @param [String] identifier
+    def service(identifier)
+      service = @services.find { |svc| svc.name.downcase == identifier }
+      if service
+        service
+      else
+        raise ArgumentError, "unknown service #{identifier.inspect}"
+      end
+    end
+
     def each(&block)
       @services.each(&block)
     end
@@ -103,6 +113,10 @@ module BuildTools
       # @return [String] Something like "Amazon S3"
       def short_name
         api['metadata']['serviceAbbreviation'] || full_name
+      end
+
+      def build
+        ServiceBuilder.new(self).build
       end
 
       private

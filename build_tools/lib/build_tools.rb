@@ -1,8 +1,8 @@
+require 'build_tools/customizations'
 require 'build_tools/replace_lines'
 require 'build_tools/wrap_list'
+require 'build_tools/services'
+require 'build_tools/service_builder'
 
-module BuildTools
-  autoload :Services, 'build_tools/services'
-  autoload :Customizations, 'build_tools/customizations'
-  autoload :Tasks, 'build_tools/tasks'
-end
+# @api private
+module BuildTools; end
