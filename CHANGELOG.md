@@ -60,7 +60,7 @@ Unreleased Changes
 * Issue - Aws::S3 - Fix for `:start_after` option with the new
   `#list_objects_v2` operation.
 
-* Feature - Aws::CloudFront - Added support for singing CloudFront
+* Feature - Aws::CloudFront - Added support for signing CloudFront
   URLs:
 
   ```ruby
@@ -206,7 +206,7 @@ Unreleased Changes
   API to have filter on instance state.
 
 * Issue - Aws::Xml::Parser - Resolved an concurrency issue with the XML parser
-  related to chosing the default parsing engine.
+  related to choosing the default parsing engine.
 
   See related [GitHub issue #1135](https://github.com/aws/aws-sdk-ruby/issues/1135).
 
