@@ -1,5 +1,9 @@
-require 'fileutils'
-require 'json'
+require_relative 'service_builder/features'
+require_relative 'service_builder/file_writer'
+require_relative 'service_builder/gemspec'
+require_relative 'service_builder/source'
+require_relative 'service_builder/specs'
+require_relative 'service_builder/version_file'
 
 module BuildTools
   class ServiceBuilder
@@ -10,9 +14,11 @@ module BuildTools
     end
 
     def build
-      gem_version = boostrap_version_file
-      build_gemspec(gem_version)
-      build_src(gem_version)
+      ServiceBuilder::VersionFile.new(@service).build
+      ServiceBuilder::Gemspec.new(@service).build
+      #ServiceBuilder::Source.new(@service).build
+      ServiceBuilder::Specs.new(@service).build
+      ServiceBuilder::Features.new(@service).build
     end
 
     private
@@ -53,43 +59,6 @@ module BuildTools
     def build_gemspec(gem_version)
       gemspec_path = File.join(@service.gem_dir, "#{@service.gem_name}.gemspec")
       write_file(gemspec_path, gemspec)
-    end
-
-    def gemspec
-      <<-GEMSPEC
-Gem::Specification.new do |spec|
-
-  spec.name          = '#{@service.gem_name}'
-  spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
-  spec.summary       = '#{gemspec_summary}'
-  spec.description   = '#{gemspec_description}'
-  spec.author        = 'Amazon Web Services'
-  spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
-  spec.license       = 'Apache-2.0'
-  spec.email         = ['trevrowe@amazon.com']
-  spec.require_paths = ['lib']
-  spec.files         = Dir['lib/**/*.rb']
-
-  #{gemspec_dependencies}
-
-end
-      GEMSPEC
-    end
-
-    def gemspec_summary
-      "AWS SDK for Ruby - #{@service.short_name}"
-    end
-
-    def gemspec_description
-      abbr = @service.short_name != @service.full_name ?
-        " (#{@service.short_name})" : ''
-      "Official AWS Ruby gem for #{@service.full_name}#{abbr}. This gem is part of the AWS SDK for Ruby."
-    end
-
-    def gemspec_dependencies
-      @service.dependencies.map do |gem, version|
-        "spec.add_dependency('#{gem}', '#{version}')"
-      end.join("\n  ")
     end
 
     # Loads a service model, applying customizations if necessary.
