@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.16 (2016-06-23)
 ------------------
 
 * Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
