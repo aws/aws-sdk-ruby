@@ -111,7 +111,7 @@
     "endpoint": "streams.dynamodb"
   },
   "EC2": {
-    "models": "ec2/2015-10-01",
+    "models": "ec2/2016-04-01",
     "endpoint": "ec2"
   },
   "ECR": {

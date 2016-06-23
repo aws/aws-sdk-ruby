@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::EC2 - Added support for the new 2016-04-01 API version of Amazon Elastic Compute Cloud.
+
 2.3.15 (2016-06-21)
 ------------------
 
