@@ -1,36 +1,42 @@
 require 'rspec/core/rake_task'
 
-# unit test tasks
-%w(core code-generator).each do |gem|
-  desc "aws-sdk-#{gem} unit tests"
-  RSpec::Core::RakeTask.new("test:unit:#{gem}") do |t|
-    t.rspec_opts = "-I #{$REPO_ROOT}/aws-sdk-#{gem}/lib"
-    t.rspec_opts << " -I #{$REPO_ROOT}/aws-sdk-#{gem}/spec"
-    t.rspec_opts << " -f d -c"
-    t.pattern = "#{$REPO_ROOT}/aws-sdk-#{gem}/spec"
-  end
-  task 'test:unit' => "test:unit:#{gem}"
-end
-
-# integration test tasks
-%w(core).each do |gem|
-  desc "aws-sdk-#{gem} integration tests"
-  task "test:integration:#{gem}" do |t|
-    if ENV['AWS_INTEGRATION']
-      Dir.chdir("aws-sdk-#{gem}") do
-        exec("bundle exec cucumber -t ~@veryslow")
+task 'test:unit' do
+  failures = []
+  Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
+    lib_dir = "#{File.dirname(spec_dir)}/lib"
+    sh("bundle exec rspec -I #{lib_dir} -I #{spec_dir} #{spec_dir}") do |ok, _|
+      if !ok
+        failures << File.basename(File.dirname(spec_dir))
       end
-    else
-      puts(<<-MSG)
-
-*** skipping aws-sdk-core integration tests ***
-  export AWS_INTEGRATION=1 to enable integration tests
-
-      MSG
     end
   end
-  task 'test:integration' => "test:integration:#{gem}"
+  abort("one or more test suites failed: %s" % [failures.join(', ')])
 end
+
+rule /test:unit:.+$/ do |task|
+  gem_dir = "#{$REPO_ROOT}/gems/#{task.name.split(':').last}"
+  lib_dir = "#{gem_dir}/lib"
+  spec_dir = "#{gem_dir}/spec"
+  sh("bundle exec rspec -I #{lib_dir} -I #{spec_dir} #{spec_dir}")
+end
+
+task 'test:unit:fast' do
+  options = []
+  spec_dirs = []
+  Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
+    lib_dir = "#{File.dirname(spec_dir)}/lib"
+    options << "-I #{lib_dir} -I #{spec_dir}"
+    spec_dirs << spec_dir
+  end
+  cmd = []
+  cmd << 'bundle exec rspec'
+  cmd += options
+  cmd += spec_dirs
+  cmd = cmd.join(' ')
+  sh(cmd)
+end
+
+
 
 task 'test:coverage:clear' do
   sh("rm -rf #{File.join($REPO_ROOT, 'coverage')}")
