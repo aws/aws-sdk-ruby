@@ -13,7 +13,7 @@ module BuildTools
 
       def build
         FileWriter.new(customizations_path).bootstrap('')
-        @generator.generate_src_files(prefix: gem_name).each do |path, contents|
+        @generator.generate_src_files(prefix: "gems/#{gem_name}").each do |path, contents|
           FileWriter.new(path).write(contents)
         end
       end
