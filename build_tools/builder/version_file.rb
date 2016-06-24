@@ -1,5 +1,5 @@
 module BuildTools
-  class ServiceBuilder
+  class Builder
     class VersionFile
 
       def initialize(service)

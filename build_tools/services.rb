@@ -120,7 +120,7 @@ module BuildTools
       end
 
       def build
-        ServiceBuilder.new(self).build
+        Builder.new(self).build
       end
 
       private

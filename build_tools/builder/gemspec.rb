@@ -1,5 +1,5 @@
 module BuildTools
-  class ServiceBuilder
+  class Builder
     class Gemspec
 
       def initialize(service)

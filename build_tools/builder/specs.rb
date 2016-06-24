@@ -1,5 +1,5 @@
 module BuildTools
-  class ServiceBuilder
+  class Builder
     class Specs
 
       def initialize(service)
@@ -18,6 +18,7 @@ module BuildTools
 
       def spec_helper
         <<-SPEC_HELPER
+$:.unshift(File.expand_path('../../lib', __FILE__))
 #{load_paths}
 
 require 'rspec'

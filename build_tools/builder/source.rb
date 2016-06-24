@@ -1,5 +1,5 @@
 module BuildTools
-  class ServiceBuilder
+  class Builder
     class Source
 
       def initialize(service)
@@ -12,9 +12,10 @@ module BuildTools
       end
 
       def build
+
         FileWriter.new(customizations_path).bootstrap('')
-        @generator.generate_src_files(prefix: "gems/#{gem_name}").each do |path, contents|
-          FileWriter.new(path).write(contents)
+        @generator.generate_src_files(prefix: @service.gem_name).each do |path, contents|
+          FileWriter.new("gems/#{gem_name}/lib/#{path}").write(contents)
         end
       end
 

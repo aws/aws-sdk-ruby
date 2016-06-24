@@ -1,7 +1,7 @@
+require_relative 'builder'
 require_relative 'customizations'
 require_relative 'file_writer'
 require_relative 'replace_lines'
-require_relative 'service_builder'
 require_relative 'services'
 require_relative 'wrap_list'
 
