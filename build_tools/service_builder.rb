@@ -1,5 +1,4 @@
 require_relative 'service_builder/features'
-require_relative 'service_builder/file_writer'
 require_relative 'service_builder/gemspec'
 require_relative 'service_builder/source'
 require_relative 'service_builder/specs'

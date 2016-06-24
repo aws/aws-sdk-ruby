@@ -72,7 +72,7 @@ module AwsSdkCodeGenerator
 
     def build_modules
       root_mod = Dsl::Main.new
-      root_mod.comments(code_gen_warning)
+      #root_mod.comments(code_gen_warning)
       svc_mod = @module_names.inject(root_mod) do |mod, module_name|
         mod.module(module_name)
       end
