@@ -7,286 +7,472 @@ module AwsSdkCodeGenerator
       let(:operation) { Operation.new }
 
       let(:example) {
-        RequestSyntaxExample.new('operation_name', operation).to_str
+        SyntaxExample.new('operation_name', operation).to_str
       }
 
       it 'supports operations that does not accept input' do
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name()
-        EXAMPLE
+        example = SyntaxExample.new(
+          struct_shape: nil,
+          api: {}
+        )
+        expect(example.format).to eq('')
       end
 
       it 'supports operations that accept hashes of scalars' do
-        input = StructureShape.new
-        input.add_member(:param_name, ShapeRef.new(shape: StringShape.new))
-        input.add_member(:other_param, ShapeRef.new(shape: StringShape.new))
-        operation.input = ShapeRef.new(shape: input)
-
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
-  param_name: "string",
-  other_param: "string",
-})
+        example = SyntaxExample.new(
+          struct_shape: {
+            'members' => {
+              'ParamName' => { 'shape' => 'String' },
+              'OtherParam' => { 'shape' => 'String' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => { 'type' => 'string' }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
+  param_name: "String",
+  other_param: "String",
+}
         EXAMPLE
       end
 
       it 'comments on required entries' do
-        ref = ShapeRef.new(shape: StringShape.new, required: true)
-        input = StructureShape.new
-        input.add_member(:param_name, ref)
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
-  param_name: "string", # required
-})
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['ParamName'],
+            'members' => {
+              'ParamName' => { 'shape' => 'String' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => { 'type' => 'string' }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
+  param_name: "String", # required
+}
         EXAMPLE
-      end
+     end
 
       it 'comments on accepted values for enums' do
-        string = StringShape.new
-        string.enum = %w(abc mno xyz)
-        input = StructureShape.new
-        input.add_member(:param_name, ShapeRef.new(shape: string))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'members' => {
+              'ParamName' => { 'shape' => 'String' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => {
+                'type' => 'string',
+                'enum' => ['abc', 'mno', 'xyz']
+              }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   param_name: "abc", # accepts abc, mno, xyz
-})
+}
         EXAMPLE
       end
 
       it 'combines required and enum comments' do
-        string = StringShape.new
-        string.enum = %w(abc mno xyz)
-        input = StructureShape.new
-        input.add_member(:param_name, ShapeRef.new(shape: string, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['ParamName'],
+            'members' => {
+              'ParamName' => { 'shape' => 'String' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => {
+                'type' => 'string',
+                'enum' => ['abc', 'mno', 'xyz']
+              }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   param_name: "abc", # required, accepts abc, mno, xyz
-})
+}
         EXAMPLE
       end
 
       it 'supports nested structures' do
-        nested = StructureShape.new
-        nested.add_member(:param, ShapeRef.new(shape: StringShape.new, required: true))
-        input = StructureShape.new
-        input.add_member(:nested, ShapeRef.new(shape: nested, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['Nested'],
+            'members' => {
+              'Nested' => { 'shape' => 'StructShape' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => { 'type' => 'string' },
+              'StructShape' => {
+                'type' => 'structure',
+                'required' => ['Param'],
+                'members' => {
+                  'Param' => { 'shape' => 'String' }
+                }
+              }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   nested: { # required
-    param: "string", # required
+    param: "String", # required
   },
-})
-        EXAMPLE
-      end
-
-      it 'supports recursive structures' do
-        recursive = StructureShape.new
-        recursive.name = 'RecursiveData'
-        recursive.add_member(:recursive, ShapeRef.new(shape: recursive))
-        recursive.add_member(:value, ShapeRef.new(shape: StringShape.new))
-        input = StructureShape.new
-        input.add_member(:nested, ShapeRef.new(shape: recursive))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
-  nested: {
-    recursive: {
-      # recursive RecursiveData
-    },
-    value: "string",
-  },
-})
-        EXAMPLE
-      end
-
-      it 'supports lists of scalars' do
-        list = ListShape.new
-        list.member = ShapeRef.new(shape: StringShape.new)
-        input = StructureShape.new
-        input.add_member(:items, ShapeRef.new(shape: list))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
-  items: ["string"],
-})
+}
         EXAMPLE
       end
 
       it 'supports list of scalars with enums' do
-        string = StringShape.new
-        string.enum = Set.new(%w(abc mno xyz))
-        list = ListShape.new
-        list.member = ShapeRef.new(shape: string)
-        input = StructureShape.new
-        input.add_member(:items, ShapeRef.new(shape: list))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'members' => {
+              'Items' => { 'shape' => 'StringList' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => {
+                'type' => 'string',
+                'enum' => ['abc', 'mno', 'xyz']
+              },
+              'StringList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'String' }
+              }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   items: ["abc"], # accepts abc, mno, xyz
-})
+}
         EXAMPLE
       end
 
       it 'supports required list of scalars with enums' do
-        string = StringShape.new
-        string.enum = Set.new(%w(abc mno xyz))
-        list = ListShape.new
-        list.member = ShapeRef.new(shape: string)
-        input = StructureShape.new
-        input.add_member(:items, ShapeRef.new(shape: list, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['Items'],
+            'members' => {
+              'Items' => { 'shape' => 'StringList' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => {
+                'type' => 'string',
+                'enum' => ['abc', 'mno', 'xyz']
+              },
+              'StringList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'String' }
+              }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   items: ["abc"], # required, accepts abc, mno, xyz
-})
+}
         EXAMPLE
       end
 
       it 'supports lists of structures' do
-        struct = StructureShape.new
-        struct.add_member(:value, ShapeRef.new(shape: StringShape.new))
-        struct.add_member(:count, ShapeRef.new(shape: IntegerShape.new))
-        list = ListShape.new
-        list.member = ShapeRef.new(shape: struct)
-        input = StructureShape.new
-        input.add_member(:items, ShapeRef.new(shape: list, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['Items'],
+            'members' => {
+              'Items' => { 'shape' => 'StructureList' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => { 'type' => 'string' },
+              'Integer' => { 'type' => 'integer' },
+              'StructureList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'StructureShape' },
+              },
+              'StructureShape' => {
+                'type' => 'structure',
+                'members' => {
+                  'Value' => { 'shape' => 'String' },
+                  'Count' => { 'shape' => 'Integer' },
+                }
+              }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   items: [ # required
     {
-      value: "string",
+      value: "String",
       count: 1,
     },
   ],
-})
+}
         EXAMPLE
       end
 
       it 'supports maps of scalars' do
-        key = StringShape.new
-        key.name = 'KeyName'
-        value = StringShape.new
-        value.name = 'ValueName'
-        map = MapShape.new
-        map.key = ShapeRef.new(shape: key)
-        map.value = ShapeRef.new(shape: value)
-        input = StructureShape.new
-        input.add_member(:attributes, ShapeRef.new(shape: map))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'members' => {
+              'Attributes' => { 'shape' => 'StringMap' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'KeyName' => { 'type' => 'string' },
+              'ValueName' => { 'type' => 'string' },
+              'StringMap' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'KeyName' },
+                'value' => { 'shape' => 'ValueName' },
+              },
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   attributes: {
     "KeyName" => "ValueName",
   },
-})
+}
         EXAMPLE
       end
 
       it 'supports maps of scalars with enums' do
-        key = StringShape.new
-        key.name = 'KeyName'
-        value = StringShape.new
-        value.name = 'ValueName'
-        value.enum = Set.new(%w(abc mno xyz))
-        map = MapShape.new
-        map.key = ShapeRef.new(shape: key)
-        map.value = ShapeRef.new(shape: value)
-        input = StructureShape.new
-        input.add_member(:attributes, ShapeRef.new(shape: map, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['Attributes'],
+            'members' => {
+              'Attributes' => { 'shape' => 'StringMap' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'KeyName' => { 'type' => 'string' },
+              'ValueName' => {
+                'type' => 'string',
+                'enum' => %w(abc mno xyz),
+              },
+              'StringMap' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'KeyName' },
+                'value' => { 'shape' => 'ValueName' },
+              },
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   attributes: { # required
     "KeyName" => "abc", # accepts abc, mno, xyz
   },
-})
+}
         EXAMPLE
       end
 
       it 'supports maps of list' do
-        string = StringShape.new
-        string.enum = Set.new(%w(abc mno xyz))
-        key = StringShape.new
-        key.name = 'KeyName'
-        value = ListShape.new
-        value.member = ShapeRef.new(shape: string)
-        map = MapShape.new
-        map.key = ShapeRef.new(shape: key)
-        map.value = ShapeRef.new(shape: value)
-        input = StructureShape.new
-        input.add_member(:attributes, ShapeRef.new(shape: map, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['Attributes'],
+            'members' => {
+              'Attributes' => { 'shape' => 'StringMap' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'KeyName' => { 'type' => 'string' },
+              'Value' => {
+                'type' => 'string',
+                'enum' => %w(abc mno xyz),
+              },
+              'StringList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'Value' },
+              },
+              'StringMap' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'KeyName' },
+                'value' => { 'shape' => 'StringList' },
+              },
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   attributes: { # required
     "KeyName" => ["abc"], # accepts abc, mno, xyz
   },
-})
+}
         EXAMPLE
       end
 
       it 'supports maps of list' do
-        struct = StructureShape.new
-        struct.add_member(:value, ShapeRef.new(shape: StringShape.new))
-        key = StringShape.new
-        key.name = 'KeyName'
-        value = ListShape.new
-        value.member = ShapeRef.new(shape: struct)
-        map = MapShape.new
-        map.key = ShapeRef.new(shape: key)
-        map.value = ShapeRef.new(shape: value)
-        input = StructureShape.new
-        input.add_member(:attributes, ShapeRef.new(shape: map, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['Attributes'],
+            'members' => {
+              'Attributes' => { 'shape' => 'Map' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => { 'type' => 'string' },
+              'Key' => { 'type' => 'string' },
+              'Struct' => {
+                'type' => 'structure',
+                'members' => {
+                  'Value' => { 'shape' => 'String' },
+                }
+              },
+              'List' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'Struct' },
+              },
+              'Map' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'Key' },
+                'value' => { 'shape' => 'List' },
+              },
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   attributes: { # required
-    "KeyName" => [
+    "Key" => [
       {
-        value: "string",
+        value: "String",
       },
     ],
   },
-})
+}
         EXAMPLE
       end
 
       it 'supports maps of structures' do
-        struct = StructureShape.new
-        struct.add_member(:value, ShapeRef.new(shape: StringShape.new))
-        struct.add_member(:count, ShapeRef.new(shape: IntegerShape.new))
-        key = StringShape.new
-        key.name = 'KeyName'
-        map = MapShape.new
-        map.key = ShapeRef.new(shape: key)
-        map.value = ShapeRef.new(shape: struct)
-        input = StructureShape.new
-        input.add_member(:attributes, ShapeRef.new(shape: map, required: true))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'required' => ['Attributes'],
+            'members' => {
+              'Attributes' => { 'shape' => 'Map' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => { 'type' => 'string' },
+              'Integer' => { 'type' => 'integer' },
+              'Key' => { 'type' => 'string' },
+              'Struct' => {
+                'type' => 'structure',
+                'members' => {
+                  'Value' => { 'shape' => 'String' },
+                  'Count' => { 'shape' => 'Integer' },
+                }
+              },
+              'Map' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'Key' },
+                'value' => { 'shape' => 'Struct' },
+              },
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   attributes: { # required
-    "KeyName" => {
-      value: "string",
+    "Key" => {
+      value: "String",
       count: 1,
     },
   },
-})
+}
         EXAMPLE
       end
 
       it 'supports complex structures' do
-        shapes = ShapeMap.new(ApiHelper.sample_shapes)
-        input = StructureShape.new
-        input.add_member(:recursive, shapes.shape_ref('shape' => 'StructureShape'))
-        operation.input = ShapeRef.new(shape: input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        struct = {
+          'members' => {
+            'Recursive' => { 'shape' => 'StructureShape' },
+          }
+        }
+        example = SyntaxExample.new(
+          struct_shape: struct,
+          api: {
+            'shapes' => {
+              'Integer' => { 'type' => 'integer' },
+              'IntegerList' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'Integer' }
+              },
+              'RecursiveListShape' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'StructureShape' }
+              },
+              'RecursiveMapShape' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'StringShape' },
+                'value' => { 'shape' => 'StructureShape' }
+              },
+              'StringShape' => { 'type' => 'string' },
+              'StringMap' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'StringShape' },
+                'value' => { 'shape' => 'StringShape' }
+              },
+              'StructureShape' => {
+                'type' => 'structure',
+                'members' => {
+                  'Nested' => { 'shape' => 'StructureShape' },
+                  'NestedList' => { 'shape' => 'RecursiveListShape' },
+                  'NestedMap' => { 'shape' => 'RecursiveMapShape' },
+                  'NumberList' => { 'shape' => 'IntegerList' },
+                  'StringMap' => { 'shape' => 'StringMap' },
+                  'Blob' => { 'shape' => 'Blob' },
+                  'Byte' => { 'shape' => 'Byte' },
+                  'Boolean' => { 'shape' => 'Boolean' },
+                  'Character' => { 'shape' => 'Character' },
+                  'double' => { 'shape' => 'Double' },
+                  'float' => { 'shape' => 'Float' },
+                  'integer' => { 'shape' => 'Integer' },
+                  'long' => { 'shape' => 'Long' },
+                  'string' => { 'shape' => 'StringShape' },
+                  'timestamp' => { 'shape' => 'Timestamp' },
+                }
+              },
+              'Blob' => { 'type' => 'blob' },
+              'Byte' => { 'type' => 'byte' },
+              'Boolean' => { 'type' => 'boolean' },
+              'Character' => { 'type' => 'character' },
+              'Double' => { 'type' => 'double' },
+              'Float' => { 'type' => 'float' },
+              'Long' => { 'type' => 'long' },
+              'Timestamp' => { 'type' => 'timestamp' },
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   recursive: {
     nested: {
       # recursive StructureShape
@@ -306,9 +492,9 @@ resp = client.operation_name({
       "StringShape" => "StringShape",
     },
     blob: "data",
-    byte: "ByteShape",
+    byte: 97,
     boolean: false,
-    character: "CharacterShape",
+    character: "a",
     double: 1.0,
     float: 1.0,
     integer: 1,
@@ -316,35 +502,51 @@ resp = client.operation_name({
     string: "StringShape",
     timestamp: Time.now,
   },
-})
+}
         EXAMPLE
       end
 
       it 'documents the simplified dynamodb attribute values' do
-        attr_value = StructureShape.new
-        attr_value.name = 'AttributeValue'
-        list = ListShape.new
-        list.member = ShapeRef.new(shape:attr_value)
-        map = MapShape.new
-        map.key = ShapeRef.new(shape:StringShape.new)
-        map.value = ShapeRef.new(shape:attr_value)
-        recursive = StructureShape.new
-        recursive.add_member(:list, ShapeRef.new(shape:list))
-        recursive.add_member(:map, ShapeRef.new(shape:map))
-        recursive.add_member(:member, ShapeRef.new(shape:attr_value))
-        input = StructureShape.new
-        input.add_member(:recursive, ShapeRef.new(shape:recursive))
-        operation.input = ShapeRef.new(shape:input)
-        expect(example).to match_example(<<-EXAMPLE)
-resp = client.operation_name({
+        example = SyntaxExample.new(
+          struct_shape: {
+            'members' => {
+              'Recursive' => { 'shape' => 'Structure' },
+            }
+          },
+          api: {
+            'shapes' => {
+              'String' => { 'type' => 'string' },
+              'ListShape' => {
+                'type' => 'list',
+                'member' => { 'shape' => 'AttributeValue' },
+              },
+              'MapShape' => {
+                'type' => 'map',
+                'key' => { 'shape' => 'String' },
+                'value' => { 'shape' => 'AttributeValue' },
+              },
+              'Structure' => {
+                'type' => 'structure',
+                'members' => {
+                  'List' => { 'shape' => 'ListShape' },
+                  'Map' => { 'shape' => 'MapShape' },
+                  'Member' => { 'shape' => 'AttributeValue' },
+                }
+              },
+              'AttributeValue' => { 'type' => 'structure' }
+            }
+          }
+        )
+        expect(example.format).to match_example(<<-EXAMPLE)
+{
   recursive: {
     list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     map: {
-      "string" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      "String" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     },
     member: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
   },
-})
+}
         EXAMPLE
       end
 
