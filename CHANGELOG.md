@@ -1,8 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Aws::Partitions - Adds support for the `ap-south-1` region, as well
-  as some other updates to regions and endpoints.
+* Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
 
 2.3.16 (2016-06-23)
 ------------------
