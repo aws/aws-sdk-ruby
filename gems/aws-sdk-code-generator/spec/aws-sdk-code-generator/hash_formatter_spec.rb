@@ -33,6 +33,26 @@ module AwsSdkCodeGenerator
       HASH
     end
 
+    it 'leaves indentation when not wrapping' do
+      hash = {
+        nested: {
+          single: '"param"'
+        }
+      }
+      expect(HashFormatter.new(wrap: true).format(hash)).to eq(<<-HASH.strip)
+{
+  nested: {
+    single: "param"
+  }
+}
+      HASH
+      expect(HashFormatter.new(wrap: false).format(hash)).to eq(<<-HASH.strip)
+nested: {
+  single: "param"
+}
+      HASH
+    end
+
     it 'can serialize a simple hash inline' do
       # wrapped
       str = HashFormatter.new(inline:true).format(abc: 'xyz'.inspect )
@@ -43,10 +63,15 @@ module AwsSdkCodeGenerator
     end
 
     it 'can omit curly braces' do
-      str = HashFormatter.new(wrap:false).format(abc: 'xyz'.inspect )
+      str = HashFormatter.new(wrap:false).format(abc: '"xyz"')
+      expect("(#{str})\n").to eq(<<-CODE)
+(abc: "xyz")
+      CODE
+      str = HashFormatter.new(wrap:false).format(abc: '"xyz"', mno: 123)
       expect("(#{str})\n").to eq(<<-CODE)
 (
-  abc: "xyz"
+  abc: "xyz",
+  mno: 123
 )
       CODE
     end

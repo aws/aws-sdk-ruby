@@ -19,7 +19,7 @@ module AwsSdkCodeGenerator
 
     def format(obj)
       result = hash(obj, i:'', inline:@inline)
-      result = result[1..-2] unless @wrap
+      result = unwrap(result, obj.size) if !@wrap
       result = result.strip if @inline && result.lines.length == 1
       result
     end
@@ -95,6 +95,18 @@ module AwsSdkCodeGenerator
 
     def inline_array?(array)
       array.length == 1# && String === array[0]
+    end
+
+    def unwrap(str, size)
+      if @inline || size > 1
+        str[1..-2]
+      else
+        lines = str.lines.to_a
+        lines.shift
+        lines.pop
+        lines = lines.map { |line| line[2..-1] }
+        lines.join.rstrip
+      end
     end
 
   end

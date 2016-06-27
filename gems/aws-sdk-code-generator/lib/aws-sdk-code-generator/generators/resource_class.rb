@@ -20,7 +20,7 @@ module AwsSdkCodeGenerator
       private
 
       def build
-        extend_module('Deprecations')
+        extend_module('Aws::Deprecations')
         add(initialize_method)
         code('# @!group Read-Only Attributes')
         add(*identifier_getters)

@@ -1,22 +1,5 @@
 require 'spec_helper'
 
-RSpec::Matchers.define(:match_example) do |expected|
-  match do |actual|
-    actual.to_s.strip == expected.to_s.strip
-  end
-  failure_message do |actual|
-    <<-MSG
-expected:
-
-#{expected.to_s.strip}
-
-got:
-
-#{actual.to_s.strip}
-    MSG
-  end
-end
-
 module AwsSdkCodeGenerator
   module Generators
 
@@ -290,7 +273,7 @@ module AwsSdkCodeGenerator
   resp.string_map["StringShape"] #=> String
   resp.blob #=> String
   resp.boolean #=> Boolean
-  resp.character #=> String
+  resp.character #=> String<character>
   resp.double #=> Float
   resp.float #=> Float
   resp.integer #=> Integer

@@ -13,6 +13,7 @@ module AwsSdkCodeGenerator
 def identifiers
   {}
 end
+deprecated(:identifiers)
           CODE
         end
 
@@ -30,9 +31,10 @@ def identifiers
   {
     bucket_name: @bucket_name,
     key: @key,
-    version_id: @version_id,
+    version_id: @version_id
   }
 end
+deprecated(:identifiers)
           CODE
         end
 

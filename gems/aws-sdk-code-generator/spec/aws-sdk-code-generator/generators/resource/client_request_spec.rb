@@ -37,7 +37,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(single: "param"))
+options = options.merge(single: "param")
+@client.operation_name(options)
             CODE
           end
 
@@ -53,9 +54,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(Aws::Util.deep_merge(options,
-  item_ids: ["param"]
-))
+options = Aws::Util.deep_merge(options, item_ids: ["param"])
+@client.operation_name(options)
             CODE
           end
 
@@ -71,11 +71,10 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(Aws::Util.deep_merge(options,
-  nested: {
+options = Aws::Util.deep_merge(options, nested: {
     single: "param"
-  }
-))
+  })
+@client.operation_name(options)
             CODE
           end
 
@@ -95,7 +94,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(param_name: "value"))
+options = options.merge(param_name: "value")
+@client.operation_name(options)
             CODE
           end
 
@@ -121,7 +121,7 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(Aws::Util.deep_merge(options,
+options = Aws::Util.deep_merge(options,
   nested: {
     param_a: "value-a",
     param_b: "value-b"
@@ -131,7 +131,8 @@ resp = @client.operation_name(options)
       value: "value-c"
     }
   }
-))
+)
+@client.operation_name(options)
             CODE
           end
 
@@ -152,12 +153,11 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(Aws::Util.deep_merge(options,
-  filters: [{
-    name: "filter-name",
-    values: ["filter-value"]
-  }]
-))
+options = Aws::Util.deep_merge(options, filters: [{
+  name: "filter-name",
+  values: ["filter-value"]
+}])
+@client.operation_name(options)
             CODE
           end
 
@@ -177,7 +177,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(param_name: @identifier_name))
+options = options.merge(param_name: @identifier_name)
+@client.operation_name(options)
             CODE
           end
 
@@ -193,7 +194,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(param_name: data.member_name))
+options = options.merge(param_name: data.member_name)
+@client.operation_name(options)
             CODE
           end
 
@@ -209,7 +211,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(param_name: data.foo.bar.yuck))
+options = options.merge(param_name: data.foo.bar.yuck)
+@client.operation_name(options)
             CODE
           end
 
@@ -240,7 +243,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(param_name: "string-literal"))
+options = options.merge(param_name: "string-literal")
+@client.operation_name(options)
             CODE
           end
 
@@ -256,7 +260,8 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(param_name: 123))
+options = options.merge(param_name: 123)
+@client.operation_name(options)
             CODE
           end
 
@@ -277,10 +282,11 @@ resp = @client.operation_name(options)
               ]
             })
             expect(req.to_s).to eq(<<-CODE)
-@client.operation_name(options.merge(
+options = options.merge(
   param_name: true,
   other_param_name: false
-))
+)
+@client.operation_name(options)
             CODE
           end
 

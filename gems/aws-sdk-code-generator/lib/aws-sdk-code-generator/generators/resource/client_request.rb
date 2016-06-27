@@ -12,7 +12,7 @@ module AwsSdkCodeGenerator
           if merge
             super("#{options}#{assignement}@client.#{operation_name}(options)")
           else
-            super("#{assignement}@client.#{operation_name}(#{@params})")
+            super("#{assignement}@client.#{operation_name}#{params}")
           end
         end
 
@@ -26,6 +26,10 @@ module AwsSdkCodeGenerator
           else
             "options = Aws::Util.deep_merge(options, #{@params})\n"
           end
+        end
+
+        def params
+          @params.empty? ? @params : "(#{@params})"
         end
 
         def assignement

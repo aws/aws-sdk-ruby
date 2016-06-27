@@ -1,4 +1,5 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', '..', 'aws-sdk-core', 'lib'))
+$:.unshift(File.expand_path('../../lib', __FILE__))
+$:.unshift(File.expand_path('../../../aws-sdk-core/lib', __FILE__))
 
 require 'tmpdir'
 require 'json'
@@ -100,5 +101,22 @@ module SpecHelper
       end
     end
 
+  end
+end
+
+RSpec::Matchers.define(:match_example) do |expected|
+  match do |actual|
+    actual.to_s.strip == expected.to_s.strip
+  end
+  failure_message do |actual|
+    <<-MSG
+expected:
+
+#{expected.to_s.strip}
+
+got:
+
+#{actual.to_s.strip}
+    MSG
   end
 end

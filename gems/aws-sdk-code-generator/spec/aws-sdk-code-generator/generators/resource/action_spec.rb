@@ -80,7 +80,8 @@ end
             )
             expect(SpecHelper.code(action)).to eq(<<-CODE)
 def create_object(options = {})
-  resp = @client.put_object(options.merge(bucket: @name))
+  options = options.merge(bucket: @name)
+  resp = @client.put_object(options)
   Object.new(
     bucket_name: @name,
     key: options[:key],
@@ -236,9 +237,9 @@ end
             )
             expect(SpecHelper.option_tags(action)).to eq(<<-CODE)
 # @option options [String, IO] :blob
-# @option options [Integer] :byte
+# @option options [Integer<byte>] :byte
 # @option options [Boolean] :boolean
-# @option options [String] :character
+# @option options [String<character>] :character
 # @option options [Float] :double
 # @option options [Float] :float
 # @option options [Integer] :integer
