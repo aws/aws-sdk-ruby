@@ -189,22 +189,22 @@ describe 'Interfaces' do
     describe '#initialize' do
 
       it 'accepts identifiers as positional arguments' do
-        band = Sample::Band.new('band-name')
+        band = Sample::Band.new('band-name', client: client)
         expect(band.name).to eq('band-name')
       end
 
       it 'accepts identifiers as keyword arguments' do
-        band = Sample::Band.new(name:'band-name')
+        band = Sample::Band.new(name:'band-name', client: client)
         expect(band.name).to eq('band-name')
       end
 
       it 'aliases identifiers when present in data' do
-        band = Sample::Band.new(name:'band-name')
+        band = Sample::Band.new(name:'band-name', client: client)
         expect(band.band_name).to eq('band-name')
       end
 
       it 'supports resources with numeric identifiers' do
-        ticket = Sample::Ticket.new(number: 123456)
+        ticket = Sample::Ticket.new(number: 123456, client: client)
         expect(ticket.number).to eq(123456)
         expect(ticket.ticket_number).to eq(123456)
         expect {
@@ -219,8 +219,9 @@ describe 'Interfaces' do
       end
 
       it 'supports a resource that has no identifiers' do
-        res = Sample::EmptyResource.new
-        expect(res.identifiers).to eq({})
+        expect {
+          Sample::EmptyResource.new(client: client)
+        }.not_to raise_error
       end
 
     end
@@ -228,6 +229,11 @@ describe 'Interfaces' do
     describe '#client' do
 
       it 'constructs an instance of Client by default' do
+        stub_const('ENV', {
+          'AWS_REGION' => 'us-east-1',
+          'AWS_ACCESS_KEY_ID' => 'akid',
+          'AWS_SECRET_ACCESS_KEY' => 'secret',
+        })
         band = Sample::Band.new('name')
         expect(band.client).to be_kind_of(Sample::Client)
       end
@@ -297,7 +303,7 @@ describe 'Interfaces' do
         it 'uses data as provided to the constructor' do
           data = client.stub_data(:get_ticket, ticket:{purchase_price:10}).ticket
           expect(client).not_to receive(:get_ticket)
-          ticket = Sample::Ticket.new(123, data: data)
+          ticket = Sample::Ticket.new(123, data: data, client: client)
           expect(ticket.data).to be(data)
           expect(ticket.data_loaded?).to be(true)
           expect(ticket.purchase_price).to be(10)
@@ -316,20 +322,20 @@ describe 'Interfaces' do
 
         it '#data returns the shape when present' do
           data = Sample::Types::Ticket.new
-          res = Sample::TicketReservation.new(123, data: data)
+          res = Sample::TicketReservation.new(123, data: data, client: client)
           expect(res.data).to be(data)
         end
 
         it '#data raises an error when shape not present' do
           expect {
-            Sample::TicketReservation.new(123).data
+            Sample::TicketReservation.new(123, client: client).data
           }.to raise_error(Sample::Errors::ResourceNotLoadable)
         end
 
         it '#data_loaded? returns true if data is present' do
-          res = Sample::TicketReservation.new(123)
+          res = Sample::TicketReservation.new(123, client: client)
           expect(res.data_loaded?).to be(false)
-          res = Sample::TicketReservation.new(123, data: double('data'))
+          res = Sample::TicketReservation.new(123, data: double('data'), client: client)
           expect(res.data_loaded?).to be(true)
         end
 
@@ -338,19 +344,19 @@ describe 'Interfaces' do
       describe 'no shape' do
 
         it '#load raises an error' do
-          res = Sample::EmptyResource.new
+          res = Sample::EmptyResource.new(client: client)
           expect {
             res.load
           }.to raise_error(Sample::Errors::ResourceNotLoadable)
         end
 
         it '#data returns an empty shape' do
-          res = Sample::EmptyResource.new
+          res = Sample::EmptyResource.new(client: client)
           expect(res.data).to be_kind_of(Aws::EmptyStructure)
         end
 
         it '#data_loaded? returns true' do
-          res = Sample::EmptyResource.new
+          res = Sample::EmptyResource.new(client: client)
           expect(res.data_loaded?).to be(true)
         end
 
@@ -360,13 +366,13 @@ describe 'Interfaces' do
     describe 'attributes' do
 
       it 'defines a read-only method for each identifier' do
-        band = Sample::Band.new(name:'name')
+        band = Sample::Band.new(name:'name', client: client)
         expect(band).to respond_to(:name)
         expect(band).not_to respond_to(:name=)
       end
 
       it 'defines a read-only method for each data shape member' do
-        band = Sample::Band.new(name:'name', data: double('data', year_established:2000))
+        band = Sample::Band.new(name:'name', data: double('data', year_established:2000), client: client)
         expect(band).to respond_to(:band_name)
         expect(band).not_to respond_to(:band_name=)
         expect(band).to respond_to(:year_established)
@@ -374,10 +380,21 @@ describe 'Interfaces' do
         expect(band.year_established).to eq(2000)
       end
 
+      # deprecated method
       it 'returns all identifiers as a hash' do
-        # NOTE: this method is deprecated
-        band = Sample::Band.new(name:'name')
-        expect(band.identifiers).to eq(name:'name')
+
+        # first invocation generates a deprecation warning
+        band = Sample::Band.new(name:'name', client: client)
+        expect {
+          band.identifiers
+        }.to output(/DEPRECATION WARNING: called deprecated method `identifiers'/).to_stderr
+        # second invocation generates no warning, even from new instance
+        band2 = Sample::Band.new(name:'name', client: client)
+        expect {
+          band2.identifiers
+        }.not_to output.to_stderr
+
+        expect(band.identifiers).to eq(name: 'name')
       end
 
     end
@@ -627,7 +644,7 @@ describe 'Interfaces' do
     describe 'waiters' do
 
       it 'defines a single #wait_until_* method for each named waiter' do
-        band = Sample::Band.new(name:'band-name')
+        band = Sample::Band.new(name:'band-name', client: client)
         expect(band).to respond_to(:wait_until_exists)
         expect(band).to respond_to(:wait_until_famous)
       end
