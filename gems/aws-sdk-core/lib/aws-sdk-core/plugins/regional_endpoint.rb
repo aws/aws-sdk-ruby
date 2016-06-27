@@ -20,8 +20,10 @@ module Aws
       }
 
       option(:endpoint) do |cfg|
-        if endpoint_prefix = cfg.api.metadata['endpointPrefix']
-          EndpointProvider.resolve(cfg.region, endpoint_prefix)
+        region = cfg.region
+        prefix = cfg.api.metadata['endpointPrefix']
+        if region && prefix
+          EndpointProvider.resolve(region, prefix)
         end
       end
 

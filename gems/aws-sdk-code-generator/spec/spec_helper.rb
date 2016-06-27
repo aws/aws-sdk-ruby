@@ -68,7 +68,6 @@ module SpecHelper
       if multiple_files
 
         tmpdir = Dir.mktmpdir
-        puts "\nGenerating service to :#{tmpdir}"
         generator.generate_src_files.each do |path, code|
           path = File.join(tmpdir, path)
           FileUtils.mkdir_p(File.dirname(path))
@@ -83,9 +82,7 @@ module SpecHelper
       else
 
         code = generator.generate_src
-        puts ''
-        puts "CODE:"
-        puts code
+        #warn("\nCODE:\n#{code}\n")
         Kernel.module_eval(code)
 
       end
@@ -95,7 +92,6 @@ module SpecHelper
       if ENV['CLEANUP_GENERATED_SOURCE'] == 'false'
         puts "\nLeaving generated service in: #{tmpdir}"
       else
-        puts "\nRemoving generated service from: #{tmpdir}"
         $LOAD_PATH.delete(tmpdir)
         FileUtils.rm_rf(tmpdir)
       end

@@ -4,7 +4,7 @@ task 'test:unit' do
   failures = []
   Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
     lib_dir = "#{File.dirname(spec_dir)}/lib"
-    sh("bundle exec rspec -I #{lib_dir} -I #{spec_dir} #{spec_dir}") do |ok, _|
+    sh("bundle exec rspec -I #{spec_dir} #{spec_dir}") do |ok, _|
       if !ok
         failures << File.basename(File.dirname(spec_dir))
       end
@@ -17,15 +17,14 @@ rule /test:unit:.+$/ do |task|
   gem_dir = "#{$REPO_ROOT}/gems/#{task.name.split(':').last}"
   lib_dir = "#{gem_dir}/lib"
   spec_dir = "#{gem_dir}/spec"
-  sh("bundle exec rspec -I #{lib_dir} -I #{spec_dir} #{spec_dir}")
+  sh("bundle exec rspec -I #{spec_dir} #{spec_dir}")
 end
 
-task 'test:unit:fast' do
+task 'test:unit:combined' do
   options = []
   spec_dirs = []
   Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
-    lib_dir = "#{File.dirname(spec_dir)}/lib"
-    options << "-I #{lib_dir} -I #{spec_dir}"
+    options << "-I #{spec_dir} -r #{spec_dir}/spec_helper.rb"
     spec_dirs << spec_dir
   end
   cmd = []
@@ -35,8 +34,6 @@ task 'test:unit:fast' do
   cmd = cmd.join(' ')
   sh(cmd)
 end
-
-
 
 task 'test:coverage:clear' do
   sh("rm -rf #{File.join($REPO_ROOT, 'coverage')}")
