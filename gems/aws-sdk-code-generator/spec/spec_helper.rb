@@ -80,11 +80,13 @@ module SpecHelper
         tmpdir
 
       else
-
         code = generator.generate_src
-        #warn("\nCODE:\n#{code}\n")
-        Kernel.module_eval(code)
-
+        begin
+          Kernel.module_eval(code)
+        rescue => error
+          $stderr.puts("\nCODE:\n#{code}\n")
+          raise error
+        end
       end
     end
 
