@@ -164,6 +164,24 @@ module Aws
           }.not_to raise_error
         end
 
+        it 'parses errors from DynamoDB __type' do
+          client = Client.new(stub_responses: true)
+          client.handle(step: :send) do |context|
+            context.http_response.signal_headers(400, {})
+            context.http_response.signal_data(<<-JSON)
+              {
+                "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException",
+                "message": "Requested resource not found: Table: abc not found"
+              }
+            JSON
+            context.http_response.signal_done
+            Seahorse::Client::Response.new(context: context)
+          end
+          expect {
+            client.describe_table(table_name: 'abc')
+          }.to raise_error(Errors::ResourceNotFoundException)
+        end
+
       end
     end
   end
