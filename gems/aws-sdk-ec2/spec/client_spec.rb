@@ -94,7 +94,7 @@ module Aws
               client.wait_until(:instance_exists, instance_ids:['i-1234578']) do |w|
                 w.max_attempts = 1
               end
-            }.to raise_error(Waiters::Errors::TooManyAttemptsError)
+            }.to raise_error(Aws::Waiters::Errors::TooManyAttemptsError)
           end
 
         end

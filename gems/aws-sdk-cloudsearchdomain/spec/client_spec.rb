@@ -1,5 +1,12 @@
 require 'spec_helper'
 
+# Simply returns the request context without any http response info.
+class NoSendHandler < Seahorse::Client::Handler
+  def call(context)
+    Seahorse::Client::Response.new(context: context)
+  end
+end
+
 module Aws
   module CloudSearchDomain
     describe Client do

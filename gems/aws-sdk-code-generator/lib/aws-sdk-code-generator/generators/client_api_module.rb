@@ -25,6 +25,7 @@ module AwsSdkCodeGenerator
       SHAPE_KEYS = {
         # keep
         'flattened' => true,
+        'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
         # ignore
         'box' => false,
@@ -45,7 +46,6 @@ module AwsSdkCodeGenerator
         'payload' => false,
         'pattern' => false,
         'sensitive' => false,
-        'timestampFormat' => false,
         'min' => false,
         'max' => false,
         'wrapper' => false,
@@ -62,6 +62,7 @@ module AwsSdkCodeGenerator
         'targetPrefix' => true,
         'jsonVersion' => true,
         'errorPrefix' => true,
+        'timestampFormat' => true, # glacier api customization
         'xmlNamespace' => true,
 
         # ignore
@@ -69,7 +70,6 @@ module AwsSdkCodeGenerator
         'checksumFormat' => false,
         'globalEndpoint' => false,
         'serviceAbbreviation' => false,
-        'timestampFormat' => false,
       }
 
       def initialize(api:, paginators:)
@@ -115,6 +115,7 @@ module AwsSdkCodeGenerator
             c << "o.http_method = #{operation['http']['method'].inspect}"
             c << "o.http_request_uri = #{operation['http']['requestUri'].inspect}"
             c << "o.deprecated = true" if operation['deprecated']
+            c << "o['authtype'] = #{operation['authtype'].inspect}" if operation['authtype']
             %w(input output).each do |mode|
               c << "o.#{mode} = #{operation_shape_ref(operation[mode])}"
             end
