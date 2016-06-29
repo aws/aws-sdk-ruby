@@ -90,8 +90,6 @@ module Aws
   )
 
   @config = {}
-  @services = {}
-  @service_added_callbacks = []
 
   autoload :DefaultList, 'aws-sdk-core/default_list'
   autoload :DefaultMap, 'aws-sdk-core/default_map'
@@ -373,61 +371,6 @@ module Aws
       end
     end
 
-    # Yields to the given block for each service that has already been
-    # defined via {add_service}. Also yields to the given block for
-    # each new service added after the callback is registered.
-    # @api private
-    def service_added(&block)
-      callback = Proc.new
-      @services.each do |svc_name, (svc_module, options)|
-        yield(svc_name, svc_module, options)
-      end
-      @service_added_callbacks << callback
-    end
-
-    # Registers a new service.
-    #
-    #     Aws.add_service('SvcName',
-    #       api: '/path/to/svc.api.json',
-    #       paginators: '/path/to/svc.paginators.json',
-    #       waiters: '/path/to/svc.waiters.json',
-    #       resources: '/path/to/svc.resources.json')
-    #
-    #     Aws::SvcName::Client.new
-    #     #=> #<Aws::SvcName::Client>
-    #
-    # @param [String] svc_name The name of the service. This will also be
-    #   the namespace under {Aws}. This must be a valid constant name.
-    # @option options[required, String, Pathname] :api
-    # @option options[String,Pathname,Hash,nil] :paginators
-    # @option options[String,Pathname,Hash,nil] :waiters
-    # @option options[String,Pathname,Hash,nil] :resources
-    # @return [Module<Service>] Returns the new service module.
-    def add_service(svc_name, options = {})
-      require 'aws-sdk-code-generator'
-      options = options.inject({}) do |hash, (key, value)|
-        hash[key.to_sym] =
-          case value
-          when String, Pathname then Json.load_file(value.to_s)
-          when Hash then value
-          when nil then nil
-          else
-            msg = "expected :#{key} to be a String, Pathname, Hash, or nil, "
-            msg << "got #{value.class}"
-            raise ArgumentError, msg
-          end
-        hash
-      end
-      options[:module_names] = ['Aws', svc_name.to_s]
-      code = AwsSdkCodeGenerator::Generator.new(options).generate_src
-      Object.module_eval(code)
-      svc_module = Aws.const_get(svc_name)
-      @services[svc_name.to_s] = [svc_module, options]
-      @service_added_callbacks.each do |callback|
-        callback.call(svc_name.to_s, *@services[svc_name.to_s])
-      end
-      svc_module
-    end
   end
 
   Struct = Structure
