@@ -78,8 +78,10 @@ module Aws
     end
 
     def map(ref, values, errors, context)
-
-      return unless correct_type?(ref, values, errors, context)
+      unless Hash === values
+        errors << expected_got(context, "a hash", values)
+        return
+      end
 
       key_ref = ref.shape.key
       value_ref = ref.shape.value

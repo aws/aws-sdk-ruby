@@ -73,7 +73,7 @@ module Aws
         end
 
         it 'does not modify structs' do
-          value = Struct.new(:a).new(1)
+          value = ::Struct.new(:a).new(1)
           converted = ParamConverter.c(shape_class, value)
           expect(converted).to be(value)
         end
@@ -92,7 +92,7 @@ module Aws
         end
 
         it 'creates a hash from a struct' do
-          value = Struct.new(:a).new(1)
+          value = ::Struct.new(:a).new(1)
           converted = ParamConverter.c(shape_class, value)
           expect(converted).to eq(a: 1)
         end
