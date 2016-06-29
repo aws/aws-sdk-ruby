@@ -6,9 +6,15 @@ module Aws
 
       let(:shapes) { ApiHelper.sample_shapes }
 
-      let(:ref) {{ 'shape' => 'StructureShape', 'locationName' => 'xml' }}
+      let(:api) { ApiHelper.sample_api(shapes: shapes) }
 
-      let(:rules) { Api::ShapeMap.new(shapes).shape_ref(ref) }
+      let(:operation) {
+        operation = api.operation(:example_operation)
+        operation.input.location_name = 'xml'
+        operation
+      }
+
+      let(:rules) { operation.input }
 
       def xml(params)
         Builder.new(rules).to_xml(params)
@@ -265,8 +271,8 @@ module Aws
       describe 'namespaces' do
 
         it 'applies xml namespace to the root node' do
-          ref['locationName'] = 'Xml'
-          ref['xmlNamespace'] = { 'uri' => 'http://foo.com' }
+          operation.input.location_name = 'Xml'
+          operation.input['xmlNamespace'] = { 'uri' => 'http://foo.com' }
           expect(xml(string:'abc')).to eq(<<-XML)
 <Xml xmlns="http://foo.com">
   <String>abc</String>
