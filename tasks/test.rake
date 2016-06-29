@@ -1,36 +1,24 @@
 require 'rspec/core/rake_task'
 
-task 'test:unit' do
+task 'test:unit:each' do
   failures = []
   Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
-    lib_dir = "#{File.dirname(spec_dir)}/lib"
-    sh("bundle exec rspec -I #{spec_dir} #{spec_dir}") do |ok, _|
-      if !ok
-        failures << File.basename(File.dirname(spec_dir))
-      end
+    sh("bundle exec rspec #{spec_dir}") do |ok, _|
+      failures << File.basename(File.dirname(spec_dir)) if !ok
     end
   end
   abort("one or more test suites failed: %s" % [failures.join(', ')])
 end
 
 rule /test:unit:.+$/ do |task|
-  gem_dir = "#{$REPO_ROOT}/gems/#{task.name.split(':').last}"
-  lib_dir = "#{gem_dir}/lib"
-  spec_dir = "#{gem_dir}/spec"
-  sh("bundle exec rspec -I #{spec_dir} #{spec_dir}")
+  spec_dir = "#{$REPO_ROOT}/gems/#{task.name.split(':').last}/spec"
+  sh("bundle exec rspec #{spec_dir}")
 end
 
-task 'test:unit:combined' do
-  options = []
-  spec_dirs = []
-  Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
-    #options << "-I #{spec_dir} -r #{spec_dir}/spec_helper.rb"
-    spec_dirs << spec_dir
-  end
+task 'test:unit' do
   cmd = []
   cmd << 'bundle exec rspec'
-  cmd += options
-  cmd += spec_dirs
+  cmd += Dir.glob("#{$REPO_ROOT}/gems/*/spec")
   cmd = cmd.join(' ')
   sh(cmd)
 end
