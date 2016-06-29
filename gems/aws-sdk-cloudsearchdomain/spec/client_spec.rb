@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative 'spec_helper'
 
 # Simply returns the request context without any http response info.
 class NoSendHandler < Seahorse::Client::Handler

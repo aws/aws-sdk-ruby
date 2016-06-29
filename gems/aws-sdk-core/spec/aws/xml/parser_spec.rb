@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative '../../spec_helper'
 require 'time'
 
 # This engine behaves the same as the rexml parser, except it fires

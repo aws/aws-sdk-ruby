@@ -24,7 +24,7 @@ task 'test:unit:combined' do
   options = []
   spec_dirs = []
   Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
-    options << "-I #{spec_dir} -r #{spec_dir}/spec_helper.rb"
+    #options << "-I #{spec_dir} -r #{spec_dir}/spec_helper.rb"
     spec_dirs << spec_dir
   end
   cmd = []
