@@ -3,7 +3,7 @@ task 'update-global-config-plugin' => ['git:require-clean-workspace'] do
   ids = BuildTools::Services.map { |svc| ":#{svc.identifier}" }.sort
   ids = BuildTools.wrap_list(items: ids, indent: '        ')
 
-  filename = 'aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration.rb'
+  filename = 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration.rb'
 
   changed = BuildTools.replace_lines(
     filename: filename,
