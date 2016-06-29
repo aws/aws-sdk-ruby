@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::SNS - Updated the API, and documentation for Amazon Simple Notification Service.
+
 2.3.17 (2016-06-27)
 ------------------
 
