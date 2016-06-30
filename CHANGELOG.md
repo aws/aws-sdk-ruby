@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.19 (2016-06-30)
 ------------------
 
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
