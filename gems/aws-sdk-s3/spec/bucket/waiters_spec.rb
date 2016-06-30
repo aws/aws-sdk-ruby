@@ -15,9 +15,10 @@ module Aws
             context.http_response.signal_done
             Seahorse::Client::Response.new(context:context)
           end
-
           yielded = nil
-          bucket.wait_until_exists { |w| yielded = w }
+          expect {
+            bucket.wait_until_exists { |w| yielded = w }
+          }.to output("pass options to configure the waiter; yielding the waiter is deprecated\n").to_stderr
           expect(yielded).to be_kind_of(Aws::Waiters::Waiter)
         end
 
