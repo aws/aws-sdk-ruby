@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Management Service.
+
 2.3.18 (2016-06-28)
 ------------------
 
