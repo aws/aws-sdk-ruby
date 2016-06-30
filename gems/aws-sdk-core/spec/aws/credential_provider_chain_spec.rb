@@ -109,11 +109,10 @@ module Aws
         to_return(:status => 200, :body => resp)
       expect(credentials).to be_kind_of(InstanceProfileCredentials)
       expect(credentials.set?).to be(true)
-      expect {
-        expect(credentials.access_key_id).to eq('akid')
-        expect(credentials.secret_access_key).to eq('secret')
-        expect(credentials.session_token).to eq('token')
-      }.to output.to_stderr
+      creds = credentials.credentials
+      expect(creds.access_key_id).to eq('akid')
+      expect(creds.secret_access_key).to eq('secret')
+      expect(creds.session_token).to eq('token')
     end
 
     describe 'with config set to nil' do
