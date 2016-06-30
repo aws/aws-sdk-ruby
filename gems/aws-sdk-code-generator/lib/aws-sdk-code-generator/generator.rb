@@ -28,7 +28,7 @@ module AwsSdkCodeGenerator
       @waiters = waiters
       @resources = resources
       @examples = examples
-      @gem_requires = gem_requires.unshift('aws-sdk-core').uniq
+      @gem_requires = gem_requires
       @callback = block
     end
 

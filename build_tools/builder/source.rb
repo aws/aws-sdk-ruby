@@ -2,20 +2,20 @@ module BuildTools
   class Builder
     class Source
 
-      def initialize(service)
+      def initialize(service, &block)
         @service = service
-        @generator = AwsSdkCodeGenerator::Generator.new(generator_options) do |svc_module|
+        block ||= lambda do |svc_module|
           svc_module.top("\n# customizations for generated code")
           svc_module.require_relative("#{gem_name}/customizations.rb")
           svc_module.code("GEM_VERSION = '#{gem_version}'")
         end
+        @generator = AwsSdkCodeGenerator::Generator.new(generator_options, &block)
       end
 
       def build
-
         FileWriter.new(customizations_path).bootstrap('')
         @generator.generate_src_files(prefix: @service.gem_name).each do |path, contents|
-          FileWriter.new("gems/#{gem_name}/lib/#{path}").write(contents)
+          FileWriter.new("#{@service.gem_dir}/lib/#{path}").write(contents)
         end
       end
 

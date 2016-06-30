@@ -1,5 +1,5 @@
-require 'jmespath'
 require 'seahorse'
+require 'jmespath'
 require 'pathname'
 
 Seahorse::Util.irregular_inflections({
@@ -376,3 +376,5 @@ module Aws
   Struct = Structure
 
 end
+
+require 'aws-sdk-sts'

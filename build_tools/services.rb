@@ -16,7 +16,7 @@ module BuildTools
           svc.name = service_name
           svc.models = service_models(definition['models'])
           svc.gem_name = definition['gem'] || "aws-sdk-#{svc.identifier}"
-          svc.gem_dir = File.join('gems', svc.gem_name)
+          svc.gem_dir = definition['gem_dir'] || File.join('gems', svc.gem_name)
           svc.endpoints_key = definition['endpoint']
           svc.dependencies = {}
           svc.dependencies['aws-sdk-core'] = '~> 3.0'
