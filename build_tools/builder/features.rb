@@ -35,8 +35,8 @@ require 'aws-sdk-#{var_name}'
       def step_definitions
         <<-RUBY
 Before("@#{var_name}") do
-  @#{var_name} = Aws::#{mod_name}::Resource.new
-  @#{var_name}_client = @#{var_name}.client
+  @service = Aws::#{mod_name}::Resource.new
+  @client = @service.client
 end
 
 After("@#{var_name}") do
