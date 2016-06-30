@@ -16,10 +16,8 @@ rule /test:unit:.+$/ do |task|
 end
 
 task 'test:unit' do
-  cmd = []
-  cmd << 'bundle exec rspec'
-  cmd += Dir.glob("#{$REPO_ROOT}/gems/*/spec")
-  cmd = cmd.join(' ')
+  cmd = "bundle exec rspec "
+  cmd += Dir.glob("gems/*/spec").join(' ')
   sh(cmd)
 end
 
