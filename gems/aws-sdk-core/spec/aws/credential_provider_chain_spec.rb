@@ -93,15 +93,15 @@ module Aws
     it 'hydrates credentials from the instance profile service' do
       path = '/latest/meta-data/iam/security-credentials/'
       resp = <<-JSON.strip
-{
-"Code" : "Success",
-"LastUpdated" : "2013-11-22T20:03:48Z",
-"Type" : "AWS-HMAC",
-"AccessKeyId" : "akid",
-"SecretAccessKey" : "secret",
-"Token" : "token",
-"Expiration" : "#{Time.now.strftime('%Y-%m-%dT%H:%M:%SZ')}"
-}
+        {
+          "Code" : "Success",
+          "LastUpdated" : "2013-11-22T20:03:48Z",
+          "Type" : "AWS-HMAC",
+          "AccessKeyId" : "akid",
+          "SecretAccessKey" : "secret",
+          "Token" : "token",
+          "Expiration" : "#{Time.now.strftime('%Y-%m-%dT%H:%M:%SZ')}"
+        }
       JSON
       stub_request(:get, "http://169.254.169.254#{path}").
         to_return(:status => 200, :body => "profile-name\n")
