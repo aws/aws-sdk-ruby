@@ -2,7 +2,7 @@ require 'rspec/core/rake_task'
 
 task 'test:unit:each' do
   failures = []
-  Dir.glob("#{$REPO_ROOT}/gems/*/spec").each do |spec_dir|
+  Dir.glob("**/spec").each do |spec_dir|
     sh("bundle exec rspec #{spec_dir}") do |ok, _|
       failures << File.basename(File.dirname(spec_dir)) if !ok
     end
@@ -11,14 +11,12 @@ task 'test:unit:each' do
 end
 
 rule /test:unit:.+$/ do |task|
-  spec_dir = "#{$REPO_ROOT}/gems/#{task.name.split(':').last}/spec"
+  spec_dir = "gems/#{task.name.split(':').last}/spec"
   sh("bundle exec rspec #{spec_dir}")
 end
 
 task 'test:unit' do
-  cmd = "bundle exec rspec "
-  cmd += Dir.glob("gems/*/spec").join(' ')
-  sh(cmd)
+  sh("bundle exec rspec #{Dir.glob('**/spec').join(' ')}")
 end
 
 task 'test:coverage:clear' do
