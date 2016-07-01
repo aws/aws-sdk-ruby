@@ -4,7 +4,7 @@ require 'rspec/core/rake_task'
 ## spec / unit tests
 ##
 
-task 'test:unit:each' do
+task 'test:spec:each' do
   failures = []
   Dir.glob("**/spec").each do |spec_dir|
     sh("bundle exec rspec #{spec_dir}") do |ok, _|
@@ -14,12 +14,12 @@ task 'test:unit:each' do
   abort("one or more test suites failed: %s" % [failures.join(', ')])
 end
 
-rule /test:unit:.+$/ do |task|
+rule /test:spec:.+$/ do |task|
   spec_dir = "gems/#{task.name.split(':').last}/spec"
   sh("bundle exec rspec #{spec_dir}")
 end
 
-task 'test:unit' do
+task 'test:spec' do
   sh("bundle exec rspec #{Dir.glob('**/spec').join(' ')}")
 end
 
@@ -27,12 +27,12 @@ end
 ## feature / integration tests
 ##
 
-rule /^test:integration:.+$/ do |task|
+rule /^test:features:.+$/ do |task|
   dir = "gems/#{task.name.split(':').last}/features"
   sh("bundle exec cucumber -t ~@veryslow -r #{dir} #{dir}")
 end
 
-task 'test:integration' do
+task 'test:features' do
   failures = []
   Dir.glob('**/features').each do |dir|
     sh("bundle exec cucumber -t ~@veryslow -r #{dir} #{dir}") do |ok, _|
@@ -53,14 +53,14 @@ task 'test:coverage:clear' do
   sh("rm -rf #{File.join($REPO_ROOT, 'coverage')}")
 end
 
-desc 'Runs unit (unit) tests'
-task 'test:unit' => 'test:coverage:clear'
+desc 'Runs spec (unit) tests'
+task 'test:spec' => 'test:coverage:clear'
 
 desc 'Runs feature (integration) tests'
-task 'test:integration' => 'test:coverage:clear'
+task 'test:features' => 'test:coverage:clear'
 
 desc 'Runs unit and integration tests'
-task 'test' => ['test:unit', 'test:integration']
+task 'test' => ['test:spec', 'test:features']
 
 begin
   require 'coveralls/rake/task'
