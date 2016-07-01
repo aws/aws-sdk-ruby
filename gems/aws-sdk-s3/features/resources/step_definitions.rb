@@ -8,18 +8,8 @@ Before("@s3", "@resources") do
 end
 
 After("@s3", "@resources") do
-  #@created_buckets.each do |bucket|
-  #  bucket.delete!
-  #end
   @created_buckets.each do |bucket|
-    loop do
-      objects = @client.list_object_versions(bucket: bucket.name).data.versions.map do |v|
-        { key: v.key, version_id: v.version_id }
-      end
-      break if objects.empty?
-      @client.delete_objects(bucket: bucket.name, delete: { objects: objects })
-    end
-    @client.delete_bucket(bucket: bucket.name)
+    bucket.delete!
   end
 end
 
