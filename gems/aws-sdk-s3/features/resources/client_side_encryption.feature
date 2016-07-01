@@ -1,9 +1,9 @@
 # language: en
-@s3 @client-side-encryption
+@s3 @resources @client-side-encryption
 Feature: S3 Objects
 
  Background:
-    Given I create a bucket
+    Given I create a bucket resource
 
   Scenario: Encrypting client-side with GET and PUT
     Given I have an encryption client

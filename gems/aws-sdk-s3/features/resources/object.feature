@@ -3,7 +3,7 @@
 Feature: Aws::S3::Object
 
  Background:
-    Given I create a bucket
+    Given I create a bucket resource
 
   @slow
   Scenario: Uploading a large file

@@ -1,16 +1,14 @@
 # language: en
-@workspaces @client
+@smoke @workspaces
 Feature: Amazon WorkSpaces
 
-  Scenario: Making a basic request
-    When I call the "DescribeWorkspaces" API
-    Then the response should contain a list of "Workspaces"
+  I want to use Amazon WorkSpaces
 
-  Scenario: Error handling
+  Scenario: Making a request
+    When I call the "DescribeWorkspaces" API
+    Then the value at "Workspaces" should be a list
+
+  Scenario: Handling errors
     When I attempt to call the "DescribeWorkspaces" API with:
     | DirectoryId | fake-id |
     Then I expect the response error code to be "ValidationException"
-    And I expect the response error message to include:
-    """
-    Value 'fake-id' at 'directoryId' failed to satisfy constraint
-    """

@@ -1,5 +1,5 @@
 # language: en
-@s3 @objects
+@s3 @client @objects
 Feature: S3 Objects
 
  Background:

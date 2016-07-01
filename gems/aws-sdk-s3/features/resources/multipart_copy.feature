@@ -3,7 +3,7 @@
 Feature: Managed multipart copies
 
  Background:
-    Given I create a bucket
+    Given I create a bucket resource
 
   @slow
   Scenario: Copy-to across buckets
@@ -13,7 +13,7 @@ Feature: Managed multipart copies
 
   @slow
   Scenario: Copy object with space character
-    Given I create a bucket
+    Given I create a bucket resource
     And I have a 10MB file
     And I upload the file to the "test object" object
     Then I should be able to copy the object

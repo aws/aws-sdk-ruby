@@ -1,5 +1,5 @@
 # language: en
-@s3 @presigned
+@s3 @client @presigned
 Feature: S3 Presigned Operations
 
   Background:

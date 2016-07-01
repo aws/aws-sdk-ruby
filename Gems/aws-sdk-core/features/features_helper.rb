@@ -190,3 +190,7 @@ end
 Then(/^the response should contain a "(.*?)" member$/) do |member_name|
   expect(@response.data[underscore(member_name)]).not_to be_nil
 end
+
+Then(/^the value at "([^"]*)" should be a list$/) do |key|
+  expect(@response.data[underscore(key)]).to be_an(Array)
+end

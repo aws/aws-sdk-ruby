@@ -1,5 +1,5 @@
 # language: en
-@s3 @buckets
+@s3 @client @buckets
 Feature: S3 Buckets
 
   Scenario: CRUD buckets using the classic endpoint

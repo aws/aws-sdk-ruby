@@ -1,30 +1,29 @@
 require 'base64'
 require 'rest-client'
-require 'openssl'
 
-Before("@s3") do
+Before("@s3", "@resources") do
   @s3 = Aws::S3::Resource.new
   @client = @s3.client
   @created_buckets = []
 end
 
-After("@s3") do
+After("@s3", "@resources") do
   #@created_buckets.each do |bucket|
   #  bucket.delete!
   #end
   @created_buckets.each do |bucket|
     loop do
-      objects = @client.list_object_versions(bucket: bucket).data.versions.map do |v|
+      objects = @client.list_object_versions(bucket: bucket.name).data.versions.map do |v|
         { key: v.key, version_id: v.version_id }
       end
       break if objects.empty?
-      @client.delete_objects(bucket: bucket, delete: { objects: objects })
+      @client.delete_objects(bucket: bucket.name, delete: { objects: objects })
     end
-    @client.delete_bucket(bucket: bucket)
+    @client.delete_bucket(bucket: bucket.name)
   end
 end
 
-Given(/^I create a bucket$/) do
+Given(/^I create a bucket resource$/) do
   @bucket_name = "aws-sdk-resources-#{Time.now.to_i}-#{rand(1000)}"
   @bucket = @s3.create_bucket(bucket: @bucket_name)
   @created_buckets << @bucket
