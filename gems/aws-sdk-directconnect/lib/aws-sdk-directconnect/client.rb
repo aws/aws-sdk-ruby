@@ -1,0 +1,1024 @@
+# WARNING ABOUT GENERATED CODE
+#
+# The AWS SDK for Ruby is largely generated from JSON service definitions. Edits
+# made against this file will be lost the next time the SDK updates.  To resolve
+# an issue with generated code, a change is likely needed in the generator or
+# in one of the service JSON definitions.
+#
+# * https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-code-generator
+# * https://github.com/aws/aws-sdk-ruby/tree/master/apis
+#
+# Open a GitHub issue if you have questions before making changes.  Pull
+# requests against this file will be automatically closed.
+#
+# WARNING ABOUT GENERATED CODE
+module Aws
+  module DirectConnect
+    class Client < Seahorse::Client::Base
+
+      include Aws::ClientStubs
+      include Aws::ClientWaiters
+
+      @identifier = :directconnect
+
+      set_api(ClientApi::API)
+
+      add_plugin(Seahorse::Client::Plugins::ContentLength)
+      add_plugin(Aws::Plugins::Logging)
+      add_plugin(Aws::Plugins::ParamConverter)
+      add_plugin(Aws::Plugins::ParamValidator)
+      add_plugin(Aws::Plugins::UserAgent)
+      add_plugin(Aws::Plugins::RetryErrors)
+      add_plugin(Aws::Plugins::GlobalConfiguration)
+      add_plugin(Aws::Plugins::RegionalEndpoint)
+      add_plugin(Aws::Plugins::RequestSigner)
+      add_plugin(Aws::Plugins::ResponsePaging)
+      add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::Protocols::JsonRpc)
+
+      # @!group API Operations
+
+      # Creates a hosted connection on an interconnect.
+      #
+      # Allocates a VLAN number and a specified amount of bandwidth for use by
+      # a hosted connection on the given interconnect.
+      #
+      # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+      #
+      #  </note>
+      # @option params [required, String] :bandwidth
+      #   Bandwidth of the connection.
+      #
+      #   Example: \"*500Mbps*\"
+      #
+      #   Default: None
+      #
+      #   Values: 50M, 100M, 200M, 300M, 400M, or 500M
+      # @option params [required, String] :connection_name
+      #   Name of the provisioned connection.
+      #
+      #   Example: \"*500M Connection to AWS*\"
+      #
+      #   Default: None
+      # @option params [required, String] :owner_account
+      #   Numeric account Id of the customer for whom the connection will be
+      #   provisioned.
+      #
+      #   Example: 123443215678
+      #
+      #   Default: None
+      # @option params [required, String] :interconnect_id
+      #   ID of the interconnect on which the connection will be provisioned.
+      #
+      #   Example: dxcon-456abc78
+      #
+      #   Default: None
+      # @option params [required, Integer] :vlan
+      #   The dedicated VLAN provisioned to the connection.
+      #
+      #   Example: 101
+      #
+      #   Default: None
+      # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Connection#owner_account #ownerAccount} => String
+      #   * {Types::Connection#connection_id #connectionId} => String
+      #   * {Types::Connection#connection_name #connectionName} => String
+      #   * {Types::Connection#connection_state #connectionState} => String
+      #   * {Types::Connection#region #region} => String
+      #   * {Types::Connection#location #location} => String
+      #   * {Types::Connection#bandwidth #bandwidth} => String
+      #   * {Types::Connection#vlan #vlan} => Integer
+      #   * {Types::Connection#partner_name #partnerName} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.allocate_connection_on_interconnect({
+      #     bandwidth: "Bandwidth", # required
+      #     connection_name: "ConnectionName", # required
+      #     owner_account: "OwnerAccount", # required
+      #     interconnect_id: "InterconnectId", # required
+      #     vlan: 1, # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.owner_account #=> String
+      #   resp.connection_id #=> String
+      #   resp.connection_name #=> String
+      #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #   resp.region #=> String
+      #   resp.location #=> String
+      #   resp.bandwidth #=> String
+      #   resp.vlan #=> Integer
+      #   resp.partner_name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def allocate_connection_on_interconnect(params = {}, options = {})
+        req = build_request(:allocate_connection_on_interconnect, params)
+        req.send_request(options)
+      end
+
+      # Provisions a private virtual interface to be owned by a different
+      # customer.
+      #
+      # The owner of a connection calls this function to provision a private
+      # virtual interface which will be owned by another AWS customer.
+      #
+      # Virtual interfaces created using this function must be confirmed by
+      # the virtual interface owner by calling ConfirmPrivateVirtualInterface.
+      # Until this step has been completed, the virtual interface will be in
+      # \'Confirming\' state, and will not be available for handling traffic.
+      # @option params [required, String] :connection_id
+      #   The connection ID on which the private virtual interface is
+      #   provisioned.
+      #
+      #   Default: None
+      # @option params [required, String] :owner_account
+      #   The AWS account that will own the new private virtual interface.
+      #
+      #   Default: None
+      # @option params [required, Types::NewPrivateVirtualInterfaceAllocation] :new_private_virtual_interface_allocation
+      #   Detailed information for the private virtual interface to be
+      #   provisioned.
+      #
+      #   Default: None
+      # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#location #location} => String
+      #   * {Types::VirtualInterface#connection_id #connectionId} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#vlan #vlan} => Integer
+      #   * {Types::VirtualInterface#asn #asn} => Integer
+      #   * {Types::VirtualInterface#auth_key #authKey} => String
+      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
+      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
+      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.allocate_private_virtual_interface({
+      #     connection_id: "ConnectionId", # required
+      #     owner_account: "OwnerAccount", # required
+      #     new_private_virtual_interface_allocation: { # required
+      #       virtual_interface_name: "VirtualInterfaceName", # required
+      #       vlan: 1, # required
+      #       asn: 1, # required
+      #       auth_key: "BGPAuthKey",
+      #       amazon_address: "AmazonAddress",
+      #       customer_address: "CustomerAddress",
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.owner_account #=> String
+      #   resp.virtual_interface_id #=> String
+      #   resp.location #=> String
+      #   resp.connection_id #=> String
+      #   resp.virtual_interface_type #=> String
+      #   resp.virtual_interface_name #=> String
+      #   resp.vlan #=> Integer
+      #   resp.asn #=> Integer
+      #   resp.auth_key #=> String
+      #   resp.amazon_address #=> String
+      #   resp.customer_address #=> String
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.customer_router_config #=> String
+      #   resp.virtual_gateway_id #=> String
+      #   resp.route_filter_prefixes #=> Array
+      #   resp.route_filter_prefixes[0].cidr #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def allocate_private_virtual_interface(params = {}, options = {})
+        req = build_request(:allocate_private_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Provisions a public virtual interface to be owned by a different
+      # customer.
+      #
+      # The owner of a connection calls this function to provision a public
+      # virtual interface which will be owned by another AWS customer.
+      #
+      # Virtual interfaces created using this function must be confirmed by
+      # the virtual interface owner by calling ConfirmPublicVirtualInterface.
+      # Until this step has been completed, the virtual interface will be in
+      # \'Confirming\' state, and will not be available for handling traffic.
+      # @option params [required, String] :connection_id
+      #   The connection ID on which the public virtual interface is
+      #   provisioned.
+      #
+      #   Default: None
+      # @option params [required, String] :owner_account
+      #   The AWS account that will own the new public virtual interface.
+      #
+      #   Default: None
+      # @option params [required, Types::NewPublicVirtualInterfaceAllocation] :new_public_virtual_interface_allocation
+      #   Detailed information for the public virtual interface to be
+      #   provisioned.
+      #
+      #   Default: None
+      # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#location #location} => String
+      #   * {Types::VirtualInterface#connection_id #connectionId} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#vlan #vlan} => Integer
+      #   * {Types::VirtualInterface#asn #asn} => Integer
+      #   * {Types::VirtualInterface#auth_key #authKey} => String
+      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
+      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
+      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.allocate_public_virtual_interface({
+      #     connection_id: "ConnectionId", # required
+      #     owner_account: "OwnerAccount", # required
+      #     new_public_virtual_interface_allocation: { # required
+      #       virtual_interface_name: "VirtualInterfaceName", # required
+      #       vlan: 1, # required
+      #       asn: 1, # required
+      #       auth_key: "BGPAuthKey",
+      #       amazon_address: "AmazonAddress", # required
+      #       customer_address: "CustomerAddress", # required
+      #       route_filter_prefixes: [ # required
+      #         {
+      #           cidr: "CIDR",
+      #         },
+      #       ],
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.owner_account #=> String
+      #   resp.virtual_interface_id #=> String
+      #   resp.location #=> String
+      #   resp.connection_id #=> String
+      #   resp.virtual_interface_type #=> String
+      #   resp.virtual_interface_name #=> String
+      #   resp.vlan #=> Integer
+      #   resp.asn #=> Integer
+      #   resp.auth_key #=> String
+      #   resp.amazon_address #=> String
+      #   resp.customer_address #=> String
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.customer_router_config #=> String
+      #   resp.virtual_gateway_id #=> String
+      #   resp.route_filter_prefixes #=> Array
+      #   resp.route_filter_prefixes[0].cidr #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def allocate_public_virtual_interface(params = {}, options = {})
+        req = build_request(:allocate_public_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Confirm the creation of a hosted connection on an interconnect.
+      #
+      # Upon creation, the hosted connection is initially in the \'Ordering\'
+      # state, and will remain in this state until the owner calls
+      # ConfirmConnection to confirm creation of the hosted connection.
+      # @option params [required, String] :connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      # @return [Types::ConfirmConnectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ConfirmConnectionResponse#connection_state #connectionState} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.confirm_connection({
+      #     connection_id: "ConnectionId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def confirm_connection(params = {}, options = {})
+        req = build_request(:confirm_connection, params)
+        req.send_request(options)
+      end
+
+      # Accept ownership of a private virtual interface created by another
+      # customer.
+      #
+      # After the virtual interface owner calls this function, the virtual
+      # interface will be created and attached to the given virtual private
+      # gateway, and will be available for handling traffic.
+      # @option params [required, String] :virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      # @option params [required, String] :virtual_gateway_id
+      #   ID of the virtual private gateway that will be attached to the virtual
+      #   interface.
+      #
+      #   A virtual private gateway can be managed via the Amazon Virtual
+      #   Private Cloud (VPC) console or the [EC2 CreateVpnGateway][1] action.
+      #
+      #   Default: None
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
+      # @return [Types::ConfirmPrivateVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ConfirmPrivateVirtualInterfaceResponse#virtual_interface_state #virtualInterfaceState} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.confirm_private_virtual_interface({
+      #     virtual_interface_id: "VirtualInterfaceId", # required
+      #     virtual_gateway_id: "VirtualGatewayId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def confirm_private_virtual_interface(params = {}, options = {})
+        req = build_request(:confirm_private_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Accept ownership of a public virtual interface created by another
+      # customer.
+      #
+      # After the virtual interface owner calls this function, the specified
+      # virtual interface will be created and made available for handling
+      # traffic.
+      # @option params [required, String] :virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      # @return [Types::ConfirmPublicVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ConfirmPublicVirtualInterfaceResponse#virtual_interface_state #virtualInterfaceState} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.confirm_public_virtual_interface({
+      #     virtual_interface_id: "VirtualInterfaceId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def confirm_public_virtual_interface(params = {}, options = {})
+        req = build_request(:confirm_public_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Creates a new connection between the customer network and a specific
+      # AWS Direct Connect location.
+      #
+      # A connection links your internal network to an AWS Direct Connect
+      # location over a standard 1 gigabit or 10 gigabit Ethernet fiber-optic
+      # cable. One end of the cable is connected to your router, the other to
+      # an AWS Direct Connect router. An AWS Direct Connect location provides
+      # access to Amazon Web Services in the region it is associated with. You
+      # can establish connections with AWS Direct Connect locations in
+      # multiple regions, but a connection in one region does not provide
+      # connectivity to other regions.
+      # @option params [required, String] :location
+      #   Where the connection is located.
+      #
+      #   Example: EqSV5
+      #
+      #   Default: None
+      # @option params [required, String] :bandwidth
+      #   Bandwidth of the connection.
+      #
+      #   Example: 1Gbps
+      #
+      #   Default: None
+      # @option params [required, String] :connection_name
+      #   The name of the connection.
+      #
+      #   Example: \"*My Connection to AWS*\"
+      #
+      #   Default: None
+      # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Connection#owner_account #ownerAccount} => String
+      #   * {Types::Connection#connection_id #connectionId} => String
+      #   * {Types::Connection#connection_name #connectionName} => String
+      #   * {Types::Connection#connection_state #connectionState} => String
+      #   * {Types::Connection#region #region} => String
+      #   * {Types::Connection#location #location} => String
+      #   * {Types::Connection#bandwidth #bandwidth} => String
+      #   * {Types::Connection#vlan #vlan} => Integer
+      #   * {Types::Connection#partner_name #partnerName} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_connection({
+      #     location: "LocationCode", # required
+      #     bandwidth: "Bandwidth", # required
+      #     connection_name: "ConnectionName", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.owner_account #=> String
+      #   resp.connection_id #=> String
+      #   resp.connection_name #=> String
+      #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #   resp.region #=> String
+      #   resp.location #=> String
+      #   resp.bandwidth #=> String
+      #   resp.vlan #=> Integer
+      #   resp.partner_name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_connection(params = {}, options = {})
+        req = build_request(:create_connection, params)
+        req.send_request(options)
+      end
+
+      # Creates a new interconnect between a AWS Direct Connect partner\'s
+      # network and a specific AWS Direct Connect location.
+      #
+      # An interconnect is a connection which is capable of hosting other
+      # connections. The AWS Direct Connect partner can use an interconnect to
+      # provide sub-1Gbps AWS Direct Connect service to tier 2 customers who
+      # do not have their own connections. Like a standard connection, an
+      # interconnect links the AWS Direct Connect partner\'s network to an AWS
+      # Direct Connect location over a standard 1 Gbps or 10 Gbps Ethernet
+      # fiber-optic cable. One end is connected to the partner\'s router, the
+      # other to an AWS Direct Connect router.
+      #
+      # For each end customer, the AWS Direct Connect partner provisions a
+      # connection on their interconnect by calling
+      # AllocateConnectionOnInterconnect. The end customer can then connect to
+      # AWS resources by creating a virtual interface on their connection,
+      # using the VLAN assigned to them by the AWS Direct Connect partner.
+      #
+      # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+      #
+      #  </note>
+      # @option params [required, String] :interconnect_name
+      #   The name of the interconnect.
+      #
+      #   Example: \"*1G Interconnect to AWS*\"
+      #
+      #   Default: None
+      # @option params [required, String] :bandwidth
+      #   The port bandwidth
+      #
+      #   Example: 1Gbps
+      #
+      #   Default: None
+      #
+      #   Available values: 1Gbps,10Gbps
+      # @option params [required, String] :location
+      #   Where the interconnect is located
+      #
+      #   Example: EqSV5
+      #
+      #   Default: None
+      # @return [Types::Interconnect] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Interconnect#interconnect_id #interconnectId} => String
+      #   * {Types::Interconnect#interconnect_name #interconnectName} => String
+      #   * {Types::Interconnect#interconnect_state #interconnectState} => String
+      #   * {Types::Interconnect#region #region} => String
+      #   * {Types::Interconnect#location #location} => String
+      #   * {Types::Interconnect#bandwidth #bandwidth} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_interconnect({
+      #     interconnect_name: "InterconnectName", # required
+      #     bandwidth: "Bandwidth", # required
+      #     location: "LocationCode", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.interconnect_id #=> String
+      #   resp.interconnect_name #=> String
+      #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+      #   resp.region #=> String
+      #   resp.location #=> String
+      #   resp.bandwidth #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_interconnect(params = {}, options = {})
+        req = build_request(:create_interconnect, params)
+        req.send_request(options)
+      end
+
+      # Creates a new private virtual interface. A virtual interface is the
+      # VLAN that transports AWS Direct Connect traffic. A private virtual
+      # interface supports sending traffic to a single virtual private cloud
+      # (VPC).
+      # @option params [required, String] :connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      # @option params [required, Types::NewPrivateVirtualInterface] :new_private_virtual_interface
+      #   Detailed information for the private virtual interface to be created.
+      #
+      #   Default: None
+      # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#location #location} => String
+      #   * {Types::VirtualInterface#connection_id #connectionId} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#vlan #vlan} => Integer
+      #   * {Types::VirtualInterface#asn #asn} => Integer
+      #   * {Types::VirtualInterface#auth_key #authKey} => String
+      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
+      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
+      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_private_virtual_interface({
+      #     connection_id: "ConnectionId", # required
+      #     new_private_virtual_interface: { # required
+      #       virtual_interface_name: "VirtualInterfaceName", # required
+      #       vlan: 1, # required
+      #       asn: 1, # required
+      #       auth_key: "BGPAuthKey",
+      #       amazon_address: "AmazonAddress",
+      #       customer_address: "CustomerAddress",
+      #       virtual_gateway_id: "VirtualGatewayId", # required
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.owner_account #=> String
+      #   resp.virtual_interface_id #=> String
+      #   resp.location #=> String
+      #   resp.connection_id #=> String
+      #   resp.virtual_interface_type #=> String
+      #   resp.virtual_interface_name #=> String
+      #   resp.vlan #=> Integer
+      #   resp.asn #=> Integer
+      #   resp.auth_key #=> String
+      #   resp.amazon_address #=> String
+      #   resp.customer_address #=> String
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.customer_router_config #=> String
+      #   resp.virtual_gateway_id #=> String
+      #   resp.route_filter_prefixes #=> Array
+      #   resp.route_filter_prefixes[0].cidr #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_private_virtual_interface(params = {}, options = {})
+        req = build_request(:create_private_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Creates a new public virtual interface. A virtual interface is the
+      # VLAN that transports AWS Direct Connect traffic. A public virtual
+      # interface supports sending traffic to public services of AWS such as
+      # Amazon Simple Storage Service (Amazon S3).
+      # @option params [required, String] :connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      # @option params [required, Types::NewPublicVirtualInterface] :new_public_virtual_interface
+      #   Detailed information for the public virtual interface to be created.
+      #
+      #   Default: None
+      # @return [Types::VirtualInterface] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::VirtualInterface#owner_account #ownerAccount} => String
+      #   * {Types::VirtualInterface#virtual_interface_id #virtualInterfaceId} => String
+      #   * {Types::VirtualInterface#location #location} => String
+      #   * {Types::VirtualInterface#connection_id #connectionId} => String
+      #   * {Types::VirtualInterface#virtual_interface_type #virtualInterfaceType} => String
+      #   * {Types::VirtualInterface#virtual_interface_name #virtualInterfaceName} => String
+      #   * {Types::VirtualInterface#vlan #vlan} => Integer
+      #   * {Types::VirtualInterface#asn #asn} => Integer
+      #   * {Types::VirtualInterface#auth_key #authKey} => String
+      #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
+      #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
+      #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
+      #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
+      #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_public_virtual_interface({
+      #     connection_id: "ConnectionId", # required
+      #     new_public_virtual_interface: { # required
+      #       virtual_interface_name: "VirtualInterfaceName", # required
+      #       vlan: 1, # required
+      #       asn: 1, # required
+      #       auth_key: "BGPAuthKey",
+      #       amazon_address: "AmazonAddress", # required
+      #       customer_address: "CustomerAddress", # required
+      #       route_filter_prefixes: [ # required
+      #         {
+      #           cidr: "CIDR",
+      #         },
+      #       ],
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.owner_account #=> String
+      #   resp.virtual_interface_id #=> String
+      #   resp.location #=> String
+      #   resp.connection_id #=> String
+      #   resp.virtual_interface_type #=> String
+      #   resp.virtual_interface_name #=> String
+      #   resp.vlan #=> Integer
+      #   resp.asn #=> Integer
+      #   resp.auth_key #=> String
+      #   resp.amazon_address #=> String
+      #   resp.customer_address #=> String
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.customer_router_config #=> String
+      #   resp.virtual_gateway_id #=> String
+      #   resp.route_filter_prefixes #=> Array
+      #   resp.route_filter_prefixes[0].cidr #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_public_virtual_interface(params = {}, options = {})
+        req = build_request(:create_public_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Deletes the connection.
+      #
+      # Deleting a connection only stops the AWS Direct Connect port hour and
+      # data transfer charges. You need to cancel separately with the
+      # providers any services or charges for cross-connects or network
+      # circuits that connect you to the AWS Direct Connect location.
+      # @option params [required, String] :connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Connection#owner_account #ownerAccount} => String
+      #   * {Types::Connection#connection_id #connectionId} => String
+      #   * {Types::Connection#connection_name #connectionName} => String
+      #   * {Types::Connection#connection_state #connectionState} => String
+      #   * {Types::Connection#region #region} => String
+      #   * {Types::Connection#location #location} => String
+      #   * {Types::Connection#bandwidth #bandwidth} => String
+      #   * {Types::Connection#vlan #vlan} => Integer
+      #   * {Types::Connection#partner_name #partnerName} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_connection({
+      #     connection_id: "ConnectionId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.owner_account #=> String
+      #   resp.connection_id #=> String
+      #   resp.connection_name #=> String
+      #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #   resp.region #=> String
+      #   resp.location #=> String
+      #   resp.bandwidth #=> String
+      #   resp.vlan #=> Integer
+      #   resp.partner_name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_connection(params = {}, options = {})
+        req = build_request(:delete_connection, params)
+        req.send_request(options)
+      end
+
+      # Deletes the specified interconnect.
+      #
+      # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+      #
+      #  </note>
+      # @option params [required, String] :interconnect_id
+      #   The ID of the interconnect.
+      #
+      #   Example: dxcon-abc123
+      # @return [Types::DeleteInterconnectResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeleteInterconnectResponse#interconnect_state #interconnectState} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_interconnect({
+      #     interconnect_id: "InterconnectId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_interconnect(params = {}, options = {})
+        req = build_request(:delete_interconnect, params)
+        req.send_request(options)
+      end
+
+      # Deletes a virtual interface.
+      # @option params [required, String] :virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      # @return [Types::DeleteVirtualInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeleteVirtualInterfaceResponse#virtual_interface_state #virtualInterfaceState} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_virtual_interface({
+      #     virtual_interface_id: "VirtualInterfaceId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_virtual_interface(params = {}, options = {})
+        req = build_request(:delete_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Displays all connections in this region.
+      #
+      # If a connection ID is provided, the call returns only that particular
+      # connection.
+      # @option params [String] :connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_connections({
+      #     connection_id: "ConnectionId",
+      #   })
+      #
+      # @example Response structure
+      #   resp.connections #=> Array
+      #   resp.connections[0].owner_account #=> String
+      #   resp.connections[0].connection_id #=> String
+      #   resp.connections[0].connection_name #=> String
+      #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #   resp.connections[0].region #=> String
+      #   resp.connections[0].location #=> String
+      #   resp.connections[0].bandwidth #=> String
+      #   resp.connections[0].vlan #=> Integer
+      #   resp.connections[0].partner_name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_connections(params = {}, options = {})
+        req = build_request(:describe_connections, params)
+        req.send_request(options)
+      end
+
+      # Return a list of connections that have been provisioned on the given
+      # interconnect.
+      #
+      # <note markdown="1"> This is intended for use by AWS Direct Connect partners only.
+      #
+      #  </note>
+      # @option params [required, String] :interconnect_id
+      #   ID of the interconnect on which a list of connection is provisioned.
+      #
+      #   Example: dxcon-abc123
+      #
+      #   Default: None
+      # @return [Types::Connections] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Connections#connections #connections} => Array&lt;Types::Connection&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_connections_on_interconnect({
+      #     interconnect_id: "InterconnectId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.connections #=> Array
+      #   resp.connections[0].owner_account #=> String
+      #   resp.connections[0].connection_id #=> String
+      #   resp.connections[0].connection_name #=> String
+      #   resp.connections[0].connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #   resp.connections[0].region #=> String
+      #   resp.connections[0].location #=> String
+      #   resp.connections[0].bandwidth #=> String
+      #   resp.connections[0].vlan #=> Integer
+      #   resp.connections[0].partner_name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_connections_on_interconnect(params = {}, options = {})
+        req = build_request(:describe_connections_on_interconnect, params)
+        req.send_request(options)
+      end
+
+      # Returns a list of interconnects owned by the AWS account.
+      #
+      # If an interconnect ID is provided, it will only return this particular
+      # interconnect.
+      # @option params [String] :interconnect_id
+      #   The ID of the interconnect.
+      #
+      #   Example: dxcon-abc123
+      # @return [Types::Interconnects] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Interconnects#interconnects #interconnects} => Array&lt;Types::Interconnect&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_interconnects({
+      #     interconnect_id: "InterconnectId",
+      #   })
+      #
+      # @example Response structure
+      #   resp.interconnects #=> Array
+      #   resp.interconnects[0].interconnect_id #=> String
+      #   resp.interconnects[0].interconnect_name #=> String
+      #   resp.interconnects[0].interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+      #   resp.interconnects[0].region #=> String
+      #   resp.interconnects[0].location #=> String
+      #   resp.interconnects[0].bandwidth #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_interconnects(params = {}, options = {})
+        req = build_request(:describe_interconnects, params)
+        req.send_request(options)
+      end
+
+      # Returns the list of AWS Direct Connect locations in the current AWS
+      # region. These are the locations that may be selected when calling
+      # CreateConnection or CreateInterconnect.
+      # @return [Types::Locations] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Locations#locations #locations} => Array&lt;Types::Location&gt;
+      #
+      # @example Response structure
+      #   resp.locations #=> Array
+      #   resp.locations[0].location_code #=> String
+      #   resp.locations[0].location_name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_locations(params = {}, options = {})
+        req = build_request(:describe_locations, params)
+        req.send_request(options)
+      end
+
+      # Returns a list of virtual private gateways owned by the AWS account.
+      #
+      # You can create one or more AWS Direct Connect private virtual
+      # interfaces linking to a virtual private gateway. A virtual private
+      # gateway can be managed via Amazon Virtual Private Cloud (VPC) console
+      # or the [EC2 CreateVpnGateway][1] action.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
+      # @return [Types::VirtualGateways] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::VirtualGateways#virtual_gateways #virtualGateways} => Array&lt;Types::VirtualGateway&gt;
+      #
+      # @example Response structure
+      #   resp.virtual_gateways #=> Array
+      #   resp.virtual_gateways[0].virtual_gateway_id #=> String
+      #   resp.virtual_gateways[0].virtual_gateway_state #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_virtual_gateways(params = {}, options = {})
+        req = build_request(:describe_virtual_gateways, params)
+        req.send_request(options)
+      end
+
+      # Displays all virtual interfaces for an AWS account. Virtual interfaces
+      # deleted fewer than 15 minutes before DescribeVirtualInterfaces is
+      # called are also returned. If a connection ID is included then only
+      # virtual interfaces associated with this connection will be returned.
+      # If a virtual interface ID is included then only a single virtual
+      # interface will be returned.
+      #
+      # A virtual interface (VLAN) transmits the traffic between the AWS
+      # Direct Connect location and the customer.
+      #
+      # If a connection ID is provided, only virtual interfaces provisioned on
+      # the specified connection will be returned. If a virtual interface ID
+      # is provided, only this particular virtual interface will be returned.
+      # @option params [String] :connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      # @option params [String] :virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      # @return [Types::VirtualInterfaces] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::VirtualInterfaces#virtual_interfaces #virtualInterfaces} => Array&lt;Types::VirtualInterface&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_virtual_interfaces({
+      #     connection_id: "ConnectionId",
+      #     virtual_interface_id: "VirtualInterfaceId",
+      #   })
+      #
+      # @example Response structure
+      #   resp.virtual_interfaces #=> Array
+      #   resp.virtual_interfaces[0].owner_account #=> String
+      #   resp.virtual_interfaces[0].virtual_interface_id #=> String
+      #   resp.virtual_interfaces[0].location #=> String
+      #   resp.virtual_interfaces[0].connection_id #=> String
+      #   resp.virtual_interfaces[0].virtual_interface_type #=> String
+      #   resp.virtual_interfaces[0].virtual_interface_name #=> String
+      #   resp.virtual_interfaces[0].vlan #=> Integer
+      #   resp.virtual_interfaces[0].asn #=> Integer
+      #   resp.virtual_interfaces[0].auth_key #=> String
+      #   resp.virtual_interfaces[0].amazon_address #=> String
+      #   resp.virtual_interfaces[0].customer_address #=> String
+      #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interfaces[0].customer_router_config #=> String
+      #   resp.virtual_interfaces[0].virtual_gateway_id #=> String
+      #   resp.virtual_interfaces[0].route_filter_prefixes #=> Array
+      #   resp.virtual_interfaces[0].route_filter_prefixes[0].cidr #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_virtual_interfaces(params = {}, options = {})
+        req = build_request(:describe_virtual_interfaces, params)
+        req.send_request(options)
+      end
+
+      # @!endgroup
+
+      # @param [Symbol] waiter_name
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      # @option options [Integer] :max_attempts
+      # @option options [Integer] :delay
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def wait_until(waiter_name, params = {}, options = {})
+        w = waiter(waiter_name, options)
+        yield(w.waiter) if block_given? # deprecated
+        w.wait(params)
+      end
+
+      def waiter_names
+        waiters.keys
+      end
+
+      private
+
+      # @param [Symbol] waiter_name
+      # @param [Hash] options ({})
+      def waiter(waiter_name, options = {})
+        waiter_class = waiters[waiter_name]
+        if waiter_class
+          waiter_class.new(options.merge(client: self))
+        else
+          raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
+        end
+      end
+
+      def waiters
+        {}
+      end
+
+      # @api private
+      class << self
+
+        attr_reader :identifier
+
+        def errors_module
+          Errors
+        end
+
+      end
+    end
+  end
+end

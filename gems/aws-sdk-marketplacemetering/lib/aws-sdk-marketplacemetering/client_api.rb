@@ -1,0 +1,83 @@
+# WARNING ABOUT GENERATED CODE
+#
+# The AWS SDK for Ruby is largely generated from JSON service definitions. Edits
+# made against this file will be lost the next time the SDK updates.  To resolve
+# an issue with generated code, a change is likely needed in the generator or
+# in one of the service JSON definitions.
+#
+# * https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-code-generator
+# * https://github.com/aws/aws-sdk-ruby/tree/master/apis
+#
+# Open a GitHub issue if you have questions before making changes.  Pull
+# requests against this file will be automatically closed.
+#
+# WARNING ABOUT GENERATED CODE
+module Aws
+  module MarketplaceMetering
+    # @api private
+    module ClientApi
+
+      include Seahorse::Model
+
+      Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+      DuplicateRequestException = Shapes::StructureShape.new(name: 'DuplicateRequestException')
+      InternalServiceErrorException = Shapes::StructureShape.new(name: 'InternalServiceErrorException')
+      InvalidEndpointRegionException = Shapes::StructureShape.new(name: 'InvalidEndpointRegionException')
+      InvalidProductCodeException = Shapes::StructureShape.new(name: 'InvalidProductCodeException')
+      InvalidUsageDimensionException = Shapes::StructureShape.new(name: 'InvalidUsageDimensionException')
+      MeterUsageRequest = Shapes::StructureShape.new(name: 'MeterUsageRequest')
+      MeterUsageResult = Shapes::StructureShape.new(name: 'MeterUsageResult')
+      ProductCode = Shapes::StringShape.new(name: 'ProductCode')
+      String = Shapes::StringShape.new(name: 'String')
+      ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+      Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+      TimestampOutOfBoundsException = Shapes::StructureShape.new(name: 'TimestampOutOfBoundsException')
+      UsageDimension = Shapes::StringShape.new(name: 'UsageDimension')
+      UsageQuantity = Shapes::IntegerShape.new(name: 'UsageQuantity')
+      errorMessage = Shapes::StringShape.new(name: 'errorMessage')
+
+      MeterUsageRequest.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, required: true, location_name: "ProductCode"))
+      MeterUsageRequest.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+      MeterUsageRequest.add_member(:usage_dimension, Shapes::ShapeRef.new(shape: UsageDimension, required: true, location_name: "UsageDimension"))
+      MeterUsageRequest.add_member(:usage_quantity, Shapes::ShapeRef.new(shape: UsageQuantity, required: true, location_name: "UsageQuantity"))
+      MeterUsageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "DryRun"))
+      MeterUsageRequest.struct_class = Types::MeterUsageRequest
+
+      MeterUsageResult.add_member(:metering_record_id, Shapes::ShapeRef.new(shape: String, location_name: "MeteringRecordId"))
+      MeterUsageResult.struct_class = Types::MeterUsageResult
+
+
+      # @api private
+      API = Seahorse::Model::Api.new.tap do |api|
+
+        api.version = "2016-01-14"
+
+        api.metadata = {
+          "endpointPrefix" => "metering.marketplace",
+          "jsonVersion" => "1.1",
+          "protocol" => "json",
+          "serviceFullName" => "AWSMarketplace Metering",
+          "signatureVersion" => "v4",
+          "signingName" => "aws-marketplace",
+          "targetPrefix" => "AWSMPMeteringService",
+        }
+
+        api.add_operation(:meter_usage, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "MeterUsage"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: MeterUsageRequest)
+          o.output = Shapes::ShapeRef.new(shape: MeterUsageResult)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidProductCodeException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidUsageDimensionException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidEndpointRegionException)
+          o.errors << Shapes::ShapeRef.new(shape: TimestampOutOfBoundsException)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicateRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        end)
+      end
+
+    end
+  end
+end

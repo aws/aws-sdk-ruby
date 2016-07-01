@@ -1,22 +1,3 @@
-require 'openssl'
-
-Before("@s3") do
-  @client = Aws::S3::Client.new
-  @created_buckets = []
-end
-
-After("@s3") do
-  @created_buckets.each do |bucket|
-    loop do
-      objects = @client.list_object_versions(bucket: bucket).data.versions.map do |v|
-        { key: v.key, version_id: v.version_id }
-      end
-      break if objects.empty?
-      @client.delete_objects(bucket: bucket, delete: { objects: objects })
-    end
-    @client.delete_bucket(bucket: bucket)
-  end
-end
 
 def create_bucket(options = {})
   @bucket_name = "aws-sdk-test-#{Time.now.to_i}-#{rand(1000)}"

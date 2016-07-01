@@ -1,0 +1,504 @@
+# WARNING ABOUT GENERATED CODE
+#
+# The AWS SDK for Ruby is largely generated from JSON service definitions. Edits
+# made against this file will be lost the next time the SDK updates.  To resolve
+# an issue with generated code, a change is likely needed in the generator or
+# in one of the service JSON definitions.
+#
+# * https://github.com/aws/aws-sdk-ruby/tree/master/gems/aws-sdk-code-generator
+# * https://github.com/aws/aws-sdk-ruby/tree/master/apis
+#
+# Open a GitHub issue if you have questions before making changes.  Pull
+# requests against this file will be automatically closed.
+#
+# WARNING ABOUT GENERATED CODE
+module Aws
+  module S3
+    class Bucket
+
+      extend Aws::Deprecations
+
+      # @overload def initialize(name, options = {})
+      #   @param [String] name
+      #   @option options [Client] :client
+      # @overload def initialize(options = {})
+      #   @option options [required, String] :name
+      #   @option options [Client] :client
+      def initialize(*args)
+        options = Hash === args.last ? args.pop.dup : {}
+        @name = extract_name(args, options)
+        @data = options.delete(:data)
+        @client = options.delete(:client) || Client.new(options)
+      end
+
+      # @!group Read-Only Attributes
+
+      # @return [String]
+      def name
+        @name
+      end
+
+      # Date the bucket was created.
+      # @return [Time]
+      def creation_date
+        data.creation_date
+      end
+
+      # @!endgroup
+
+      # @return [Client]
+      def client
+        @client
+      end
+
+      # @raise [Errors::ResourceNotLoadable]
+      # @api private
+      def load
+        msg = "#load is not implemented, data only available via enumeration"
+        raise Errors::ResourceNotLoadable, msg
+      end
+      alias :reload :load
+
+      # @raise [Errors::ResourceNotLoadableError] Raises when {#data_loaded?} is `false`.
+      # @return [Types::Bucket]
+      #   Returns the data for this {Bucket}.
+      def data
+        load unless @data
+        @data
+      end
+
+      # @return [Boolean]
+      #   Returns `true` if this resource is loaded.  Accessing attributes or
+      #   {#data} on an unloaded resource will trigger a call to {#load}.
+      def data_loaded?
+        !!@data
+      end
+
+      # @return [Boolean]
+      #   Returns `true` if the Bucket exists.
+      def exists?
+        begin
+          wait_until_exists(max_attempts: 1)
+          true
+        rescue Aws::Waiters::Errors::UnexpectedError => e
+          raise e.error
+        rescue Aws::Waiters::Errors::WaiterFailed
+          false
+        end
+      end
+
+      # @param options ({})
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Float] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      # @return [Bucket]
+      def wait_until_exists(options = {})
+        waiter = Waiters::BucketExists.new(options.merge(client: @client))
+        yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+        waiter.wait(bucket: @name)
+        Bucket.new({
+          name: @name,
+          client: @client
+        })
+      end
+
+      # @param options ({})
+      # @option options [Integer] :max_attempts (20)
+      # @option options [Float] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      # @return [Bucket]
+      def wait_until_not_exists(options = {})
+        waiter = Waiters::BucketNotExists.new(options.merge(client: @client))
+        yield_waiter_and_warn(waiter, &Proc.new) if block_given?
+        waiter.wait(bucket: @name)
+        Bucket.new({
+          name: @name,
+          client: @client
+        })
+      end
+
+      # @!group Actions
+
+      # @param [Hash] options ({})
+      # @option options [String] :acl
+      #   The canned ACL to apply to the bucket.
+      # @option options [Types::CreateBucketConfiguration] :create_bucket_configuration
+      # @option options [String] :grant_full_control
+      #   Allows grantee the read, write, read ACP, and write ACP permissions on
+      #   the bucket.
+      # @option options [String] :grant_read
+      #   Allows grantee to list the objects in the bucket.
+      # @option options [String] :grant_read_acp
+      #   Allows grantee to read the bucket ACL.
+      # @option options [String] :grant_write
+      #   Allows grantee to create, overwrite, and delete any object in the
+      #   bucket.
+      # @option options [String] :grant_write_acp
+      #   Allows grantee to write the ACL for the applicable bucket.
+      # @return [Types::CreateBucketOutput]
+      def create(options = {})
+        options = options.merge(bucket: @name)
+        resp = @client.create_bucket(options)
+        resp.data
+      end
+
+      # @param [Hash] options ({})
+      # @return [EmptyStructure]
+      def delete(options = {})
+        options = options.merge(bucket: @name)
+        resp = @client.delete_bucket(options)
+        resp.data
+      end
+
+      # @param [Hash] options ({})
+      # @option options [required, Types::Delete] :delete
+      # @option options [String] :mfa
+      #   The concatenation of the authentication device\'s serial number, a
+      #   space, and the value that is displayed on your authentication device.
+      # @option options [String] :request_payer
+      #   Confirms that the requester knows that she or he will be charged for
+      #   the request. Bucket owners need not specify this parameter in their
+      #   requests. Documentation on downloading objects from requester pays
+      #   buckets can be found at
+      #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @return [Types::DeleteObjectsOutput]
+      def delete_objects(options = {})
+        options = options.merge(bucket: @name)
+        resp = @client.delete_objects(options)
+        resp.data
+      end
+
+      # @param [Hash] options ({})
+      # @option options [String] :acl
+      #   The canned ACL to apply to the object.
+      # @option options [String, IO] :body
+      #   Object data.
+      # @option options [String] :cache_control
+      #   Specifies caching behavior along the request/reply chain.
+      # @option options [String] :content_disposition
+      #   Specifies presentational information for the object.
+      # @option options [String] :content_encoding
+      #   Specifies what content encodings have been applied to the object and
+      #   thus what decoding mechanisms must be applied to obtain the media-type
+      #   referenced by the Content-Type header field.
+      # @option options [String] :content_language
+      #   The language the content is in.
+      # @option options [Integer] :content_length
+      #   Size of the body in bytes. This parameter is useful when the size of
+      #   the body cannot be determined automatically.
+      # @option options [String] :content_md5
+      #   The base64-encoded 128-bit MD5 digest of the part data.
+      # @option options [String] :content_type
+      #   A standard MIME type describing the format of the object data.
+      # @option options [Time,DateTime,Date,Integer,String] :expires
+      #   The date and time at which the object is no longer cacheable.
+      # @option options [String] :grant_full_control
+      #   Gives the grantee READ, READ\_ACP, and WRITE\_ACP permissions on the
+      #   object.
+      # @option options [String] :grant_read
+      #   Allows grantee to read the object data and its metadata.
+      # @option options [String] :grant_read_acp
+      #   Allows grantee to read the object ACL.
+      # @option options [String] :grant_write_acp
+      #   Allows grantee to write the ACL for the applicable object.
+      # @option options [required, String] :key
+      #   Object key for which the PUT operation was initiated.
+      # @option options [Hash<String,String>] :metadata
+      #   A map of metadata to store with the object in S3.
+      # @option options [String] :server_side_encryption
+      #   The Server-side encryption algorithm used when storing this object in
+      #   S3 (e.g., AES256, aws:kms).
+      # @option options [String] :storage_class
+      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      # @option options [String] :website_redirect_location
+      #   If the bucket is configured as a website, redirects requests for this
+      #   object to another object in the same bucket or to an external URL.
+      #   Amazon S3 stores the value of this header in the object metadata.
+      # @option options [String] :sse_customer_algorithm
+      #   Specifies the algorithm to use to when encrypting the object (e.g.,
+      #   AES256).
+      # @option options [String] :sse_customer_key
+      #   Specifies the customer-provided encryption key for Amazon S3 to use in
+      #   encrypting data. This value is used to store the object and then it is
+      #   discarded; Amazon does not store the encryption key. The key must be
+      #   appropriate for use with the algorithm specified in the
+      #   x-amz-server-side​-encryption​-customer-algorithm header.
+      # @option options [String] :sse_customer_key_md5
+      #   Specifies the 128-bit MD5 digest of the encryption key according to
+      #   RFC 1321. Amazon S3 uses this header for a message integrity check to
+      #   ensure the encryption key was transmitted without error.
+      # @option options [String] :ssekms_key_id
+      #   Specifies the AWS KMS key ID to use for object encryption. All GET and
+      #   PUT requests for an object protected by AWS KMS will fail if not made
+      #   via SSL or using SigV4. Documentation on configuring any of the
+      #   officially supported AWS SDKs and CLI can be found at
+      #   http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version
+      # @option options [String] :request_payer
+      #   Confirms that the requester knows that she or he will be charged for
+      #   the request. Bucket owners need not specify this parameter in their
+      #   requests. Documentation on downloading objects from requester pays
+      #   buckets can be found at
+      #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @return [Object]
+      def put_object(options = {})
+        options = options.merge(bucket: @name)
+        resp = @client.put_object(options)
+        Object.new(
+          bucket_name: @name,
+          key: options[:key],
+          client: @client
+        )
+      end
+
+      # @!group Associations
+
+      # @return [BucketAcl]
+      def acl
+        BucketAcl.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @return [BucketCors]
+      def cors
+        BucketCors.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @return [BucketLifecycle]
+      def lifecycle
+        BucketLifecycle.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @return [BucketLogging]
+      def logging
+        BucketLogging.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @param [Hash] options ({})
+      # @option options [String] :delimiter
+      #   Character you use to group keys.
+      # @option options [String] :encoding_type
+      #   Requests Amazon S3 to encode the object keys in the response and
+      #   specifies the encoding method to use. An object key may contain any
+      #   Unicode character; however, XML 1.0 parser cannot parse some
+      #   characters, such as characters with an ASCII value from 0 to 10. For
+      #   characters that are not supported in XML 1.0, you can add this
+      #   parameter to request that Amazon S3 encode the keys in the response.
+      # @option options [String] :key_marker
+      #   Together with upload-id-marker, this parameter specifies the multipart
+      #   upload after which listing should begin.
+      # @option options [String] :prefix
+      #   Lists in-progress uploads only for those keys that begin with the
+      #   specified prefix.
+      # @option options [String] :upload_id_marker
+      #   Together with key-marker, specifies the multipart upload after which
+      #   listing should begin. If key-marker is not specified, the
+      #   upload-id-marker parameter is ignored.
+      # @return [MultipartUpload::Collection]
+      def multipart_uploads(options = {})
+        batches = Enumerator.new do |y|
+          options = options.merge(bucket: @name)
+          resp = @client.list_multipart_uploads(options)
+          resp.each_page do |page|
+            batch = []
+            page.data.uploads.each do |u|
+              batch << MultipartUpload.new(
+                bucket_name: @name,
+                object_key: u.key,
+                id: u.upload_id,
+                data: u,
+                client: @client
+              )
+            end
+            y.yield(batch)
+          end
+        end
+        MultipartUpload::Collection.new(batches)
+      end
+
+      # @return [BucketNotification]
+      def notification
+        BucketNotification.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @param [String] key
+      # @return [Object]
+      def object(key)
+        Object.new(
+          bucket_name: @name,
+          key: key,
+          client: @client
+        )
+      end
+
+      # @param [Hash] options ({})
+      # @option options [String] :delimiter
+      #   A delimiter is a character you use to group keys.
+      # @option options [String] :encoding_type
+      #   Requests Amazon S3 to encode the object keys in the response and
+      #   specifies the encoding method to use. An object key may contain any
+      #   Unicode character; however, XML 1.0 parser cannot parse some
+      #   characters, such as characters with an ASCII value from 0 to 10. For
+      #   characters that are not supported in XML 1.0, you can add this
+      #   parameter to request that Amazon S3 encode the keys in the response.
+      # @option options [String] :key_marker
+      #   Specifies the key to start with when listing objects in a bucket.
+      # @option options [String] :prefix
+      #   Limits the response to keys that begin with the specified prefix.
+      # @option options [String] :version_id_marker
+      #   Specifies the object version you want to start listing from.
+      # @return [ObjectVersion::Collection]
+      def object_versions(options = {})
+        batches = Enumerator.new do |y|
+          options = options.merge(bucket: @name)
+          resp = @client.list_object_versions(options)
+          resp.each_page do |page|
+            batch = []
+            page.data.versions_delete_markers.each do |v|
+              batch << ObjectVersion.new(
+                bucket_name: @name,
+                object_key: v.key,
+                id: v.version_id,
+                data: v,
+                client: @client
+              )
+            end
+            y.yield(batch)
+          end
+        end
+        ObjectVersion::Collection.new(batches)
+      end
+
+      # @param [Hash] options ({})
+      # @option options [String] :delimiter
+      #   A delimiter is a character you use to group keys.
+      # @option options [String] :encoding_type
+      #   Requests Amazon S3 to encode the object keys in the response and
+      #   specifies the encoding method to use. An object key may contain any
+      #   Unicode character; however, XML 1.0 parser cannot parse some
+      #   characters, such as characters with an ASCII value from 0 to 10. For
+      #   characters that are not supported in XML 1.0, you can add this
+      #   parameter to request that Amazon S3 encode the keys in the response.
+      # @option options [String] :prefix
+      #   Limits the response to keys that begin with the specified prefix.
+      # @return [ObjectSummary::Collection]
+      def objects(options = {})
+        batches = Enumerator.new do |y|
+          options = options.merge(bucket: @name)
+          resp = @client.list_objects(options)
+          resp.each_page do |page|
+            batch = []
+            page.data.contents.each do |c|
+              batch << ObjectSummary.new(
+                bucket_name: @name,
+                key: c.key,
+                data: c,
+                client: @client
+              )
+            end
+            y.yield(batch)
+          end
+        end
+        ObjectSummary::Collection.new(batches)
+      end
+
+      # @return [BucketPolicy]
+      def policy
+        BucketPolicy.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @return [BucketRequestPayment]
+      def request_payment
+        BucketRequestPayment.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @return [BucketTagging]
+      def tagging
+        BucketTagging.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @return [BucketVersioning]
+      def versioning
+        BucketVersioning.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @return [BucketWebsite]
+      def website
+        BucketWebsite.new(
+          bucket_name: @name,
+          client: @client
+        )
+      end
+
+      # @deprecated
+      # @api private
+      def identifiers
+        { name: @name }
+      end
+      deprecated(:identifiers)
+
+      private
+
+      def extract_name(args, options)
+        value = args[0] || options.delete(:name)
+        case value
+        when String then value
+        when nil then raise ArgumentError, "missing required option :name"
+        else
+          msg = "expected :name to be a String, got #{value.class}"
+          raise ArgumentError, msg
+        end
+      end
+
+      def yield_waiter_and_warn(waiter, &block)
+        if !@waiter_block_warned
+          msg = "pass options to configure the waiter; "
+          msg << "yielding the waiter is deprecated"
+          warn(msg)
+          @waiter_block_warned = true
+        end
+        yield(waiter.waiter)
+      end
+
+      class Collection
+
+        include Aws::Resources::Collection
+
+        # @return [Enumerator<Bucket>]
+        def each(&block)
+          enum = super
+          enum.each(&block) if block
+          enum
+        end
+
+      end
+    end
+  end
+end
