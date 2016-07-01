@@ -331,21 +331,21 @@ module Aws
         # @!group Batch Actions
 
         # @return [void]
-        def batch_delete!
+        def batch_delete!(options = {})
           batches.each do |batch|
-            options = {
+            params = Aws::Util.deep_merge(options, {
               bucket: batch[0].bucket_name,
               delete: {
                 objects: []
               }
-            }
+            })
             batch.each do |item|
-              options[:delete][:objects] << {
+              params[:delete][:objects] << {
                 key: item.key,
                 version_id: item.version_id
               }
             end
-            batch[0].client.delete_objects(options)
+            batch[0].client.delete_objects(params)
           end
           nil
         end
