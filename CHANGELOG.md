@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::EFS - Updated the documentation for Amazon Elastic File System.
+
+* Feature - Aws::IAM - Updated the documentation, and API for AWS Identity and Access Management.
+
 2.3.19 (2016-06-30)
 ------------------
 
