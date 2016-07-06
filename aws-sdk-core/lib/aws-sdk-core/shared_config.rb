@@ -39,6 +39,7 @@ module Aws
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
         determine_credentials_path
+      @parsed_credenetials = {}
       load_credentials_file if loadable?(@credentials_path)
       if @config_enabled
         @config_path = options[:config_path] || determine_config_path
@@ -51,7 +52,7 @@ module Aws
       @profile_name = nil
       @credentials_path = nil
       @config_path = nil
-      @parsed_credentials = nil
+      @parsed_credentials = {}
       @parsed_config = nil
       @config_enabled = options[:config_enabled] ? true : false
       @profile_name = determine_profile(options)
@@ -72,6 +73,20 @@ module Aws
       !path.nil? && File.exist?(path) && File.readable?(path)
     end
 
+    # @return [Boolean] returns `true` if use of the shared config file is
+    #   enabled. Generally true if and only if the `AWS_SDK_LOAD_CONFIG` env
+    #   variable is set.
+    def config_enabled?
+      @config_enabled ? true : false
+    end
+
+    # Sources static credentials from shared credential/config files.
+    #
+    # @param [Hash] options
+    # @option options [String] :profile the name of the configuration file from
+    #   which credentials are being sourced.
+    # @return [Aws::Credentials] credentials sourced from configuration values,
+    #   or `nil` if no valid credentials were found.
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
       validate_profile_exists(p) if @parsed_credentials || @parsed_config
@@ -84,11 +99,16 @@ module Aws
       end
     end
 
-    # Currently assumes config is present.
+    # Attempts to assume a role from shared config or shared credentials file.
+    # Will always attempt first to assume a role from the shared credentials
+    # file, if present.
     def assume_role_credentials_from_config(opts = {})
       p = opts.delete(:profile) || @profile_name
-      credentials = assume_role_from_profile(@parsed_credentials, p, opts) ||
-        assume_role_from_profile(@parsed_config, p, opts)
+      credentials = assume_role_from_profile(@parsed_credentials, p, opts)
+      if @parsed_config
+        credentials ||= assume_role_from_profile(@parsed_config, p, opts)
+      end
+      credentials
     end
 
     def region(opts = {})
@@ -111,13 +131,25 @@ module Aws
       if cfg && prof_cfg = cfg[profile]
         opts[:source_profile] ||= prof_cfg["source_profile"]
         if opts[:source_profile]
-          opts[:role_session_name] ||= prof_cfg["role_session_name"]
-          opts[:role_session_name] ||= "default_session"
-          opts[:role_arn] ||= prof_cfg["role_arn"]
-          opts[:external_id] ||= prof_cfg["external_id"]
-          opts[:serial_number] ||= prof_cfg["mfa_serial"]
-          opts[:profile] = opts.delete(:source_profile)
-          AssumeRoleCredentials.new(opts)
+          opts[:credentials] = credentials(profile: opts[:source_profile])
+          if opts[:credentials]
+            opts[:role_session_name] ||= prof_cfg["role_session_name"]
+            opts[:role_session_name] ||= "default_session"
+            opts[:role_arn] ||= prof_cfg["role_arn"]
+            opts[:external_id] ||= prof_cfg["external_id"]
+            opts[:serial_number] ||= prof_cfg["mfa_serial"]
+            opts[:profile] = opts.delete(:source_profile)
+            AssumeRoleCredentials.new(opts)
+          else
+            raise Errors::NoSourceProfileError.new(
+              "Profile #{profile} has a role_arn, and source_profile, but the"\
+                " source_profile does not have credentials."
+            )
+          end
+        elsif prof_cfg["role_arn"]
+          raise Errors::NoSourceProfileError.new(
+            "Profile #{profile} has a role_arn, but no source_profile."
+          )
         else
           nil
         end
@@ -143,11 +175,20 @@ module Aws
     end
 
     def credentials_from_profile(prof_config)
-      Credentials.new(
+      creds = Credentials.new(
         prof_config['aws_access_key_id'],
         prof_config['aws_secret_access_key'],
         prof_config['aws_session_token']
       )
+      if credentials_complete(creds)
+        creds
+      else
+        nil
+      end
+    end
+
+    def credentials_complete(creds)
+      creds.set?
     end
 
     def load_credentials_file

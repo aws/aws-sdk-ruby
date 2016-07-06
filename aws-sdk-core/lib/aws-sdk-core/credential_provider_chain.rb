@@ -21,6 +21,7 @@ module Aws
       [
         [:static_credentials, {}],
         [:env_credentials, {}],
+        [:assume_role_credentials, {}],
         [:shared_credentials, {}],
         [:instance_profile_credentials, {
           retries: 0,
@@ -67,8 +68,27 @@ module Aws
       nil
     end
 
+    def assume_role_credentials(options)
+      if Aws.shared_config.config_enabled?
+        if options[:config]
+          assume_role_with_profile(options[:config].profile, options[:config].region)
+        else
+          assume_role_with_profile(nil)
+        end
+      else
+        nil
+      end
+    end
+
     def instance_profile_credentials(options)
       InstanceProfileCredentials.new(options)
+    end
+
+    def assume_role_with_profile(prof, region)
+      Aws.shared_config.assume_role_credentials_from_config(
+        profile: prof,
+        region: region
+      )
     end
 
   end
