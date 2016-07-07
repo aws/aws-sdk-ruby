@@ -234,6 +234,10 @@
     "models": "s3/2006-03-01",
     "endpoint": "s3"
   },
+  "ServiceCatalog": {
+    "models": "servicecatalog/2015-12-10",
+    "endpoint": "servicecatalog"
+  },
   "SES": {
     "models": "email/2010-12-01",
     "endpoint": "email"
