@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::OpsWorks - Updated the documentation, and waiters for AWS OpsWorks.
+
+* Feature - Aws::ServiceCatalog - Added support for a new service, AWS Service Catalog.
+
 2.3.20 (2016-07-05)
 ------------------
 

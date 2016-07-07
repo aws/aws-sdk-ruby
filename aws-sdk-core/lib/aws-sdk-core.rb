@@ -78,6 +78,7 @@ module Aws
     Route53
     Route53Domains
     S3
+    ServiceCatalog
     SES
     SimpleDB
     SNS
