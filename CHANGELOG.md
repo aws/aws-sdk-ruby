@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.21 (2016-07-07)
 ------------------
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
