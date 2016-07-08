@@ -12,6 +12,7 @@ if !ENV['PURE_RUBY']
   end
 end
 
+gem 'json', '1.8.3' if RUBY_VERSION == '1.9.3'
 gem 'ox' unless ENV['PURE_RUBY']
 gem 'libxml-ruby' unless ENV['PURE_RUBY']
 gem 'nokogiri' unless ENV['PURE_RUBY']
@@ -22,9 +23,12 @@ group :test do
   gem 'cucumber'
   gem 'webmock'
   gem 'simplecov', require: false
-  gem 'coveralls', require: false
+  gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'
   gem 'json-schema'
-  gem 'rest-client' # used for presigned-post integration test
+
+  # used in the cucumber feature tests to test
+  # the presigned-post utility.
+  gem 'rest-client' if RUBY_VERSION > '1.9.3'
 end
 
 group :docs do
