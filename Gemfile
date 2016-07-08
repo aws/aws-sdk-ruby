@@ -14,6 +14,7 @@ group :optionaldeps do
 
   # faster json libraries
   if !ENV['PURE_RUBY']
+    gem 'json', '1.8.3' if RUBY_VERSION == '1.9.3'
     if ENV['OLD_OJ']
       gem 'oj', '1.3.0'
     else
@@ -23,14 +24,18 @@ group :optionaldeps do
 
 end
 
+
 group :test do
   gem 'rspec'
   gem 'cucumber'
   gem 'webmock'
   gem 'simplecov', require: false
-  gem 'coveralls', require: false
+  gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'
   gem 'json-schema'
-  gem 'rest-client' # used for presigned-post integration test
+
+  # used in the cucumber feature tests to test
+  # the presigned-post utility.
+  gem 'rest-client' if RUBY_VERSION > '1.9.3'
 end
 
 group :build do

@@ -70,6 +70,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-route53', '~> 1.0')
   spec.add_dependency('aws-sdk-route53domains', '~> 1.0')
   spec.add_dependency('aws-sdk-s3', '~> 1.0')
+  spec.add_dependency('aws-sdk-servicecatalog', '~> 1.0')
   spec.add_dependency('aws-sdk-ses', '~> 1.0')
   spec.add_dependency('aws-sdk-simpledb', '~> 1.0')
   spec.add_dependency('aws-sdk-sns', '~> 1.0')

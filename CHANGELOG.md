@@ -1,6 +1,73 @@
 Unreleased Changes
 ------------------
 
+2.3.21 (2016-07-07)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::OpsWorks - Updated the documentation, and waiters for AWS OpsWorks.
+
+* Feature - Aws::ServiceCatalog - Added support for a new service, AWS Service Catalog.
+
+2.3.20 (2016-07-05)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::EFS - Updated the documentation for Amazon Elastic File System.
+
+* Feature - Aws::IAM - Updated the documentation, and API for AWS Identity and Access Management.
+
+2.3.19 (2016-06-30)
+------------------
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Management Service.
+
+2.3.18 (2016-06-28)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::SNS - Updated the API, and documentation for Amazon Simple Notification Service.
+
+2.3.17 (2016-06-27)
+------------------
+
+* Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
+
+2.3.16 (2016-06-23)
+------------------
+
+* Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::EC2 - Added support for the new 2016-04-01 API version of Amazon Elastic Compute Cloud.
+
+2.3.15 (2016-06-21)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
 * Feature - Aws::EC2 - Added two waiter methods to `Aws::EC2::VPC`:
 
   * `#wait_until_exists`
@@ -53,7 +120,7 @@ Unreleased Changes
 * Issue - Aws::S3 - Fix for `:start_after` option with the new
   `#list_objects_v2` operation.
 
-* Feature - Aws::CloudFront - Added support for singing CloudFront
+* Feature - Aws::CloudFront - Added support for signing CloudFront
   URLs:
 
   ```ruby
@@ -199,7 +266,7 @@ Unreleased Changes
   API to have filter on instance state.
 
 * Issue - Aws::Xml::Parser - Resolved an concurrency issue with the XML parser
-  related to chosing the default parsing engine.
+  related to choosing the default parsing engine.
 
   See related [GitHub issue #1135](https://github.com/aws/aws-sdk-ruby/issues/1135).
 

@@ -60,6 +60,7 @@ module Aws
   autoload :Route53, 'aws-sdk-route53'
   autoload :Route53Domains, 'aws-sdk-route53domains'
   autoload :S3, 'aws-sdk-s3'
+  autoload :ServiceCatalog, 'aws-sdk-servicecatalog'
   autoload :SES, 'aws-sdk-ses'
   autoload :SimpleDB, 'aws-sdk-simpledb'
   autoload :SNS, 'aws-sdk-sns'
