@@ -164,9 +164,9 @@ module Aws
     end
 
     # @api private
-    def next_stub(operation_name)
-      operation_name = operation_name.to_sym
-      @stub_mutex.synchronize do
+    def next_stub(context)
+      operation_name = context.operation_name.to_sym
+      stub = @stub_mutex.synchronize do
         stubs = @stubs[operation_name] || []
         case stubs.length
         when 0 then default_stub(operation_name)
@@ -174,6 +174,7 @@ module Aws
         else stubs.shift
         end
       end
+      Proc === stub ? convert_stub(operation_name, stub.call(context)) : stub
     end
 
     private
@@ -190,13 +191,18 @@ module Aws
     def apply_stubs(operation_name, stubs)
       @stub_mutex.synchronize do
         @stubs[operation_name.to_sym] = stubs.map do |stub|
-          case stub
-          when Exception, Class then { error: stub }
-          when String then service_error_stub(stub)
-          when Hash then http_response_stub(operation_name, stub)
-          else { data: stub }
-          end
+          convert_stub(operation_name, stub)
         end
+      end
+    end
+
+    def convert_stub(operation_name, stub)
+      case stub
+      when Proc then stub
+      when Exception, Class then { error: stub }
+      when String then service_error_stub(stub)
+      when Hash then http_response_stub(operation_name, stub)
+      else { data: stub }
       end
     end
 

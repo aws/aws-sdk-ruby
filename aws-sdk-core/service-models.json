@@ -111,7 +111,7 @@
     "endpoint": "streams.dynamodb"
   },
   "EC2": {
-    "models": "ec2/2015-10-01",
+    "models": "ec2/2016-04-01",
     "endpoint": "ec2"
   },
   "ECR": {
@@ -233,6 +233,10 @@
   "S3": {
     "models": "s3/2006-03-01",
     "endpoint": "s3"
+  },
+  "ServiceCatalog": {
+    "models": "servicecatalog/2015-12-10",
+    "endpoint": "servicecatalog"
   },
   "SES": {
     "models": "email/2010-12-01",

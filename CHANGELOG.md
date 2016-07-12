@@ -1,3 +1,110 @@
+Unreleased Changes
+------------------
+
+2.3.21 (2016-07-07)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::OpsWorks - Updated the documentation, and waiters for AWS OpsWorks.
+
+* Feature - Aws::ServiceCatalog - Added support for a new service, AWS Service Catalog.
+
+2.3.20 (2016-07-05)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::EFS - Updated the documentation for Amazon Elastic File System.
+
+* Feature - Aws::IAM - Updated the documentation, and API for AWS Identity and Access Management.
+
+2.3.19 (2016-06-30)
+------------------
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Management Service.
+
+2.3.18 (2016-06-28)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::EFS - Updated the API, and documentation for Amazon Elastic File System.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::SNS - Updated the API, and documentation for Amazon Simple Notification Service.
+
+2.3.17 (2016-06-27)
+------------------
+
+* Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
+
+2.3.16 (2016-06-23)
+------------------
+
+* Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::EC2 - Added support for the new 2016-04-01 API version of Amazon Elastic Compute Cloud.
+
+2.3.15 (2016-06-21)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
+* Feature - Aws::EC2 - Added two waiter methods to `Aws::EC2::VPC`:
+
+  * `#wait_until_exists`
+  * `#wait_until_available`
+
+  See related [GitHub pull request #1179](https://github.com/aws/aws-sdk-ruby/pull/1179).
+
+* Issue - Aws::S3 - Resolved an issue with `Aws::S3::Client#head_object` and
+  `#get_object` where an `ArgumentError` was raised if Amazon S3 responded with
+  an Expires header that contained an unparsable string.
+
+  The `#head_object` and `#get_object` response now return `nil` when the Expires
+  header contains an invalid value. You can now access the raw string value
+  of the Expires header with `#expires_string`.
+
+  ```ruby
+  # If Amazon S3 responds with `Expires: abc` as a header
+  resp = s3.head_object(bucket:'bucket', key:'key')
+  resp.expires #=> nil
+  resp.expires_string #=> "abc"
+  ```
+
+  See related [GitHub issue #1184](https://github.com/aws/aws-sdk-ruby/issues/1184).
+
+* Issue - Memory Usage - Added a pair of utility methods that perform more efficient
+  SHA4256 and MD5 checksums of file objects. Before this change, data was read in
+  1MB chunks. Now using the `OpenSSL::Digest.file` interface to reduce memory usage.
+
+  See related [GitHub issue #1098](https://github.com/aws/aws-sdk-ruby/issues/1098).
+
+* Issue - Aws::RDS - Resolved an issue with `Aws::RDS#db_engine_version`.
+
+  See related [GitHub issue #1138](https://github.com/aws/aws-sdk-ruby/issues/1138).
+
+* Issue - Aws::RDS - Resolved an issue with `Aws::RDS::DBInstance#pending_maintenance_actions`
+  that caused it to raise an error.
+
 2.3.14 (2016-06-14)
 ------------------
 
@@ -13,7 +120,7 @@
 * Issue - Aws::S3 - Fix for `:start_after` option with the new
   `#list_objects_v2` operation.
 
-* Feature - Aws::CloudFront - Added support for singing CloudFront
+* Feature - Aws::CloudFront - Added support for signing CloudFront
   URLs:
 
   ```ruby
@@ -159,7 +266,7 @@
   API to have filter on instance state.
 
 * Issue - Aws::Xml::Parser - Resolved an concurrency issue with the XML parser
-  related to chosing the default parsing engine.
+  related to choosing the default parsing engine.
 
   See related [GitHub issue #1135](https://github.com/aws/aws-sdk-ruby/issues/1135).
 

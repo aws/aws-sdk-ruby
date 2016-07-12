@@ -1,4 +1,5 @@
 require 'uri'
+require 'openssl'
 
 module Aws
   module Plugins
