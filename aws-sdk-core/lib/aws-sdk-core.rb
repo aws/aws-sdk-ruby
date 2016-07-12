@@ -108,6 +108,7 @@ module Aws
   autoload :Credentials, 'aws-sdk-core/credentials'
   autoload :Deprecations, 'aws-sdk-core/deprecations'
   autoload :EagerLoader, 'aws-sdk-core/eager_loader'
+  autoload :ECSCredentials, 'aws-sdk-core/ecs_credentials'
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
