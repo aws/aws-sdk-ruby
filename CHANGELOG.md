@@ -1,4 +1,4 @@
-Unreleased Changes
+2.3.22 (2016-07-13)
 ------------------
 
 * Feature - Aws::ECS - This change allows users to configure an IAM Role ARN that containers can assume in their tasks.
