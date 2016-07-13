@@ -68,7 +68,11 @@ module Aws
     end
 
     def instance_profile_credentials(options)
-      InstanceProfileCredentials.new(options)
+      if ENV["AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"]
+        ECSCredentials.new(options)
+      else
+        InstanceProfileCredentials.new(options)
+      end
     end
 
   end
