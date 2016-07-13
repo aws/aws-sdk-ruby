@@ -235,17 +235,6 @@ Unreleased Changes
 2.3.4 (2016-05-12)
 ------------------
 
-* Feature - Aws::CloudFront - Added support for signing CloudFront URLs.
-
-  ```ruby
-  signer = Aws::CloudFront::UrlSigner.new
-  signer.signed_url(url,
-    key_pair_id: "cf-keypair-id",
-    private_key_path: "./cf_private_key.pem"
-  )
-  #=> "http://..."
-  ```
-
 * Feature - Aws::ApplicationDiscoveryService - Added support for the new
   AWS Application Discovery Service.
 
