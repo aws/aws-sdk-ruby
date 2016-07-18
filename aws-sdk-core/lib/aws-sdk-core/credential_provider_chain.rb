@@ -70,11 +70,13 @@ module Aws
 
     def assume_role_credentials(options)
       if Aws.shared_config.config_enabled?
+        profile, region = nil, nil
         if options[:config]
+          profile = options[:config].profile
+          region = options[:config].region
           assume_role_with_profile(options[:config].profile, options[:config].region)
-        else
-          assume_role_with_profile(nil)
         end
+        assume_role_with_profile(profile, region)
       else
         nil
       end

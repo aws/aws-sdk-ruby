@@ -1,4 +1,6 @@
 module Aws
+
+  # @api private
   class SharedConfig
 
     # @return [String]
