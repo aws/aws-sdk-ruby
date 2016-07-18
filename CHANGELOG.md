@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SharedConfig - This change adds support for a selection of AWS
+  CLI configuration values that have potential uses within the AWS SDK for Ruby.
+  These features include "Assume Role" support in the default credential
+  provider chain using values from configuration, default region selection, and
+  loading configuration values from the `~/.aws/config` shared configuration
+  file. Since these features can change default behavior, you must opt-in to
+  these features by setting the `AWS_SDK_LOAD_CONFIG` environment variable.
+
 2.3.22 (2016-07-13)
 ------------------
 
