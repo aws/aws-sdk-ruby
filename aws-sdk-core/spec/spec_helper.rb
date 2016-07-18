@@ -26,6 +26,7 @@ RSpec.configure do |config|
     ec2_md_path = '/latest/meta-data/iam/security-credentials/'
     stub_request(:get, "http://169.254.169.254#{ec2_md_path}").to_raise(SocketError)
 
+    Aws.shared_config.fresh
   end
 end
 

@@ -42,6 +42,10 @@ module Aws
     # credentials profile does not exist.
     class NoSuchProfileError < RuntimeError; end
 
+    # Raised when a {Service} is constructed, where Assume Role credentials are
+    # expected, and there is no source profile specified.
+    class NoSourceProfileError < RuntimeError; end
+
     # Raised when a {Service} is constructed and credentials are not
     # set, or the set credentials are empty.
     class MissingCredentialsError < RuntimeError; end
