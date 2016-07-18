@@ -105,6 +105,29 @@ JSON
           }.to raise_error(Errors::NoSourceProfileError)
         end
 
+        it 'will assume a role from shared credentials before shared config' do
+          assume_role_stub(
+            "arn:aws:iam:123456789012:role/bar",
+            "ACCESS_KEY_1", # from 'fooprofile'
+            "AR_AKID",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
+          client = Aws::S3::Client.new(profile: "assumerole_sc", region: "us-east-1")
+          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        end
+
+        it 'will then try to assume a role from shared config' do
+          assume_role_stub(
+            "arn:aws:iam:123456789012:role/bar",
+            "ACCESS_KEY_ARPC", # from 'ar_from_self'
+            "AR_AKID",
+            "AR_SECRET",
+            "AR_TOKEN"
+          )
+          client = Aws::S3::Client.new(profile: "ar_from_self", region: "us-east-1")
+          expect(client.config.credentials.access_key_id).to eq("AR_AKID")
+        end
       end
     end
 
