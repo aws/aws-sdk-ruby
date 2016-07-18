@@ -194,7 +194,7 @@ module Aws
     end
 
     def load_credentials_file
-      @parsed_credentials = IniParser.ini_parse_ignore_ws(
+      @parsed_credentials = IniParser.ini_parse(
         File.read(@credentials_path)
       )
     end

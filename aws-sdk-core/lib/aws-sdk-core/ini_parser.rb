@@ -35,26 +35,6 @@ module Aws
         end
       end
 
-      def ini_parse_ignore_ws(raw)
-        current_profile = nil
-        raw.lines.inject({}) do |acc, line|
-          line = line.split(/^|\s;/).first # remove comments
-          profile = line.match(/^\s*\[([^\[\]]+)\]\s*(#.+)?$/) unless line.nil?
-          if profile
-            current_profile = profile[1]
-            named_profile = current_profile.match(/^profile\s+(.+?)$/)
-            current_profile = named_profile[1] if named_profile
-          elsif current_profile
-            item = line.match(/^\s*(.+?)\s*=\s*(.+?)\s*$/) unless line.nil?
-            if item
-              acc[current_profile] ||= {}
-              acc[current_profile][item[1]] = item[2]
-            end
-          end
-          acc
-        end
-      end
-
     end
   end
 end
