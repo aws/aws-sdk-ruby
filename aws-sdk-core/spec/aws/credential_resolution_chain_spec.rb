@@ -92,7 +92,6 @@ JSON
         expect(client.config.credentials.access_key_id).to eq("akid-md")
       end
 
-
       describe 'Assume Role Resolution' do
         it 'will not assume a role without source_profile present' do
           expect {
@@ -106,6 +105,74 @@ JSON
           }.to raise_error(Errors::NoSourceProfileError)
         end
 
+      end
+    end
+
+    describe "AWS_SDK_LOAD_CONFIG not set" do
+      before(:each) do
+        stub_const('ENV', {})
+        Aws.shared_config.fresh(
+          config_enabled: false,
+          credentials_path: mock_credential_file,
+          # The config file exists but should not be used.
+          config_path: mock_config_file
+        )
+      end
+
+      it 'prefers direct credentials above other sources' do
+        stub_const('ENV', {
+          "AWS_ACCESS_KEY_ID" => "AKID_ENV_STUB",
+          "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
+        })
+        client = Aws::S3::Client.new(
+          access_key_id: "ACCESS_DIRECT",
+          secret_access_key: "SECRET_DIRECT",
+          profile: "fooprofile",
+          region: "us-east-1"
+        )
+        expect(client.config.credentials.access_key_id).to eq("ACCESS_DIRECT")
+      end
+
+      it 'prefers ENV credentials over shared config' do
+        stub_const('ENV', {
+          "AWS_ACCESS_KEY_ID" => "AKID_ENV_STUB",
+          "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
+        })
+        client = Aws::S3::Client.new(profile: "fooprofile", region: "us-east-1")
+        expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
+      end
+
+      it 'will not load credentials from shared config' do
+        client = Aws::S3::Client.new(profile: "creds_from_cfg", region: "us-east-1")
+        expect(client.config.credentials).to eq(nil)
+      end
+
+      it 'will not attempt to assume a role' do
+        client = Aws::S3::Client.new(profile: "assumerole_sc", region: "us-east-1")
+        expect(client.config.credentials).to eq(nil)
+      end
+
+      it 'attempts to fetch metadata credentials last' do
+        stub_request(
+          :get,
+          "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
+        ).to_return(:status => 200, :body => "profile-name\n")
+        stub_request(
+          :get,
+          "http://169.254.169.254/latest/meta-data/iam/security-credentials/profile-name"
+        ).to_return(:status => 200, :body => <<-JSON.strip)
+{
+  "Code" : "Success",
+  "LastUpdated" : "2013-11-22T20:03:48Z",
+  "Type" : "AWS-HMAC",
+  "AccessKeyId" : "akid-md",
+  "SecretAccessKey" : "secret-md",
+  "Token" : "session-token-md",
+  "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+}
+JSON
+        client = Aws::S3::Client.new(profile: "nonexistant", region: "us-east-1")
+        expect(client.config.credentials.access_key_id).to eq("akid-md")
       end
     end
 
