@@ -1,4 +1,4 @@
-Unreleased Changes
+2.4.0 (2016-07-19)
 ------------------
 
 * Feature - Aws::SharedConfig - This change adds support for a selection of AWS
