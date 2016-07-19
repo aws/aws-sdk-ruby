@@ -53,6 +53,52 @@ module Aws
     # Raised when a {Service} is constructed and region is not specified.
     class MissingRegionError < ArgumentError; end
 
+    # Raised when attempting to connect to an endpoint and a `SocketError`
+    # is received from the HTTP client. This error is typically the result
+    # of configuring an invalid `:region`.
+    class NoSuchEndpointError < RuntimeError
+
+      def initialize(options = {})
+        @endpoint = options[:endpoint]
+        @original_error = options[:original_error]
+        super(<<-MSG)
+Encountered a `SocketError` while attempting to connect to:
+
+  #{endpoint.to_s}
+
+This is typically the result of an invalid `:region` option.
+
+* Not every service is available in every region.
+
+* Never suffix region names with availability zones.
+  Use "us-east-1", not "us-east-1a"
+
+* Avoid configuring the `:endpoint` option directly; This is reserved for
+  connecting to non-standard test endpoints.
+
+Known possible regions include:
+
+#{possible_regions}
+        MSG
+      end
+
+      attr_reader :endpoint
+
+      attr_reader :original_error
+
+      private
+
+      def possible_regions
+        Aws.partitions.inject([]) do |region_names, partition|
+          partition.regions.each do |region|
+            region_names << region.name
+          end
+          region_names
+        end.join("\n")
+      end
+
+    end
+
     # This module is mixed into another module, providing dynamic
     # error classes.  Error classes all inherit from {ServiceError}.
     #

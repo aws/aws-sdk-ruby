@@ -19,6 +19,48 @@ module Aws
         }.to raise_error(Aws::Errors::MissingRegionError)
       end
 
+      it 'raises a helpful error on possible incorrect regions' do
+
+        # simulate an error from connecting to an unknown endpoint
+        stub_request(:any, /.*/).
+          to_raise(SocketError.new("Failed to open TCP connection to s3.us-west-2a.amazonaws.com:443 (getaddrinfo: nodename nor servname provided, or not known"))
+
+        client = S3::Client.new(
+          region: 'us-west-2a',
+          credentials: Credentials.new('akid', 'secret')
+        )
+
+        error = nil
+        begin
+          client.list_buckets
+        rescue => e
+          error = e
+        end
+
+        expect(e).to be_kind_of(Errors::NoSuchEndpointError)
+        expect(e.message).to include('us-east-1')
+        expect(e.message).to include('us-west-1')
+        expect(e.message).to include('cn-north-1')
+        expect(e.message).to include(<<-MSG)
+Encountered a `SocketError` while attempting to connect to:
+
+  https://s3.us-west-2a.amazonaws.com/
+
+This is typically the result of an invalid `:region` option.
+
+* Not every service is available in every region.
+
+* Never suffix region names with availability zones.
+  Use "us-east-1", not "us-east-1a"
+
+* Avoid configuring the `:endpoint` option directly; This is reserved for
+  connecting to non-standard test endpoints.
+
+Known possible regions include:
+
+        MSG
+      end
+
       it 'skips the credential provider chain' do
         expect(Aws::CredentialProviderChain).not_to receive(:new)
         creds = S3::Client.new(stub_responses:true).config.credentials

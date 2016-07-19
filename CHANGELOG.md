@@ -6,6 +6,12 @@ Unreleased Changes
 
   See related [GitHub issue #1237](https://github.com/aws/aws-sdk-ruby/issues/1237).
 
+* Issue - Networking Errors - Now providing helpful error messages when recieving
+  a SocketError that appears to be caused by an invalid `:region` or `:endpoint`
+  option.
+
+  See related [GitHub pull request #1246](https://github.com/aws/aws-sdk-ruby/pull/1246).
+
 2.4.0 (2016-07-19)
 ------------------
 
