@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Issue - Configuration - Resolved an that caused a missing `:region` configuration
+  operation to raise an unhelpful `NoMethodError`.
+
+  See related [GitHub issue #1237](https://github.com/aws/aws-sdk-ruby/issues/1237).
+
 2.4.0 (2016-07-19)
 ------------------
 
