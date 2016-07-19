@@ -9,9 +9,9 @@ Unreleased Changes
   file. Since these features can change default behavior, you must opt-in to
   these features by setting the `AWS_SDK_LOAD_CONFIG` environment variable.
 
-* Feature - Aws::DeviceFarm - Updated the API, and documentation for AWS Device Farm.
+* Feature - Aws::DeviceFarm - Add support for managing remote access sessions.
 
-* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Management Service.
+* Feature - Aws::SSM - Added notification support.
 
 2.3.22 (2016-07-13)
 ------------------
