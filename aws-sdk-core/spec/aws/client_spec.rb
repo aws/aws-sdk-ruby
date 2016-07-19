@@ -13,6 +13,12 @@ module Aws
 
       let(:client) { S3::Client.new(options) }
 
+      it 'requires a region' do
+        expect {
+          S3::Client.new(access_key_id:'akid', secret_access_key: 'secret')
+        }.to raise_error(Aws::Errors::MissingRegionError)
+      end
+
       it 'skips the credential provider chain' do
         expect(Aws::CredentialProviderChain).not_to receive(:new)
         creds = S3::Client.new(stub_responses:true).config.credentials

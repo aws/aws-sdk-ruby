@@ -21,7 +21,8 @@ module Aws
       end
 
       option(:endpoint) do |cfg|
-        if endpoint_prefix = cfg.api.metadata['endpointPrefix']
+        endpoint_prefix = cfg.api.metadata['endpointPrefix']
+        if cfg.region && endpoint_prefix
           EndpointProvider.resolve(cfg.region, endpoint_prefix)
         end
       end
@@ -35,6 +36,7 @@ module Aws
       end
 
       private
+
       def self.resolve_region(cfg)
         keys = %w(AWS_REGION AMAZON_REGION AWS_DEFAULT_REGION)
         env_region = ENV.values_at(*keys).compact.first
