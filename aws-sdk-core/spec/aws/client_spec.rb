@@ -47,15 +47,17 @@ Encountered a `SocketError` while attempting to connect to:
 
   https://s3.us-west-2a.amazonaws.com/
 
-This is typically the result of an invalid `:region` option.
+This is typically the result of an invalid `:region` option or a
+poorly formatted `:endpoint` option.
+
+* Avoid configuring the `:endpoint` option directly. Endpoints are constructed
+  from the `:region`. The `:endpoint` option is reserved for connecting to
+  non-standard test endpoints.
 
 * Not every service is available in every region.
 
 * Never suffix region names with availability zones.
   Use "us-east-1", not "us-east-1a"
-
-* Avoid configuring the `:endpoint` option directly; This is reserved for
-  connecting to non-standard test endpoints.
 
 Known AWS regions include (not specific to this service):
 
