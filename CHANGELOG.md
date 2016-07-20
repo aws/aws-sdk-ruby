@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::SSM - Added missing paginator configuration for `Aws::SSM::Client#describe_instance_information`.
+
+  See related [GitHub issue #1249](https://github.com/aws/aws-sdk-ruby/issues/1249).
+
 * Issue - Configuration - Resolved an that caused a missing `:region` configuration
   operation to raise an unhelpful `NoMethodError`.
 
