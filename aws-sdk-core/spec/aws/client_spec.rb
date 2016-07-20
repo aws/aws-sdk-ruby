@@ -57,7 +57,7 @@ This is typically the result of an invalid `:region` option.
 * Avoid configuring the `:endpoint` option directly; This is reserved for
   connecting to non-standard test endpoints.
 
-Known possible regions include:
+Known AWS regions include (not specific to this service):
 
         MSG
       end
