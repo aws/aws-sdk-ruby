@@ -21,12 +21,13 @@ module Aws
         def socket_endpoint_error?(error)
           Seahorse::Client::NetworkingError === error &&
           SocketError === error.original_error &&
-          error.original_error.message.match(/failed to open tcp connection/i)
+          error.original_error.message.match(/failed to open tcp connection/i) &&
+          error.original_error.message.match(/getaddrinfo: nodename nor servname provided, or not known/i)
         end
 
         def no_such_endpoint_error(context, error)
           Errors::NoSuchEndpointError.new({
-            endpoint: context.http_request.endpoint,
+            context: context,
             original_error: error.original_error,
           })
         end

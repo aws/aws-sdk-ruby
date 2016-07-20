@@ -59,7 +59,8 @@ module Aws
     class NoSuchEndpointError < RuntimeError
 
       def initialize(options = {})
-        @endpoint = options[:endpoint]
+        @context = options[:context]
+        @endpoint = @context.http_request.endpoint
         @original_error = options[:original_error]
         super(<<-MSG)
 Encountered a `SocketError` while attempting to connect to:
@@ -81,6 +82,8 @@ Known possible regions include:
 #{possible_regions}
         MSG
       end
+
+      attr_reader :context
 
       attr_reader :endpoint
 
