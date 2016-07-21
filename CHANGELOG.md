@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::ElasticTranscoder - Updated the API, and documentation for Amazon Elastic Transcoder.
+
 * Issue - Aws::SSM - Added missing paginator configuration for `Aws::SSM::Client#describe_instance_information`.
 
   See related [GitHub issue #1249](https://github.com/aws/aws-sdk-ruby/issues/1249).
