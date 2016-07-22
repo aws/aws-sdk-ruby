@@ -4,15 +4,6 @@ module Aws
   module Partitions
     describe 'Partitions' do
 
-      let(:us_east_1_services) do
-        services = Aws::SERVICE_MODULE_NAMES.map.sort
-        services -= ['CloudSearchDomain'] # user endpoints only
-        services -= ['DeviceFarm'] # us-west-2 only
-        services -= ['ApplicationDiscoveryService'] # us-west-2 only
-        services -= ['EFS'] # us-west-2 only
-        services
-      end
-
       describe '.partition' do
 
         %w(aws aws-cn aws-us-gov).each do |p|
@@ -63,7 +54,7 @@ module Aws
 
           it 'returns a list of supported services with the region' do
             region = Aws.partition('aws').region('us-east-1')
-            expect(region.services.sort).to eq(us_east_1_services)
+            expect(region.services.sort).to include('DynamoDB')
           end
 
           it 'raises ArgumentError for unknown regions' do
@@ -159,7 +150,7 @@ module Aws
 
         it '#services returns the list of services available in region' do
           region = Aws.partition('aws').region('us-east-1')
-          expect(region.services.sort).to eq(us_east_1_services)
+          expect(region.services.sort).to include('DynamoDB')
         end
 
       end
