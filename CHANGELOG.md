@@ -1,4 +1,4 @@
-Unreleased Changes
+2.4.2 (2016-07-22)
 ------------------
 
 * Issue - Aws::SharedConfig - Code wasn't properly respecting the
