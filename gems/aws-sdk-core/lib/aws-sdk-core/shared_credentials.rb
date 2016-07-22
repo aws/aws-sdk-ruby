@@ -22,11 +22,21 @@ module Aws
     #   `ENV['AWS_PROFILE']`.
     #
     def initialize(options = {})
-      @path = options[:path] || default_path
+      shared_config = Aws.shared_config
+      @path = options[:path]
+      @path ||= shared_config.credentials_path
       @profile_name = options[:profile_name]
       @profile_name ||= ENV['AWS_PROFILE']
-      @profile_name ||= 'default'
-      load_from_path if loadable?
+      @profile_name ||= shared_config.profile_name
+      if @path && @path == shared_config.credentials_path
+        @credentials = shared_config.credentials(profile: @profile_name)
+      else
+        config = SharedConfig.new(
+          credentials_path: @path,
+          profile_name: @profile_name
+        )
+        @credentials = config.credentials(profile: @profile_name)
+      end
     end
 
     # @return [String]
@@ -48,62 +58,13 @@ module Aws
       "#<#{parts.join(' ')}>"
     end
 
+    # @deprecated This method is no longer used.
     # @return [Boolean] Returns `true` if a credential file
     #   exists and has appropriate read permissions at {#path}.
     # @note This method does not indicate if the file found at {#path}
     #   will be parsable, only if it can be read.
     def loadable?
       !path.nil? && File.exist?(path) && File.readable?(path)
-    end
-
-    private
-
-    def default_path
-      File.join(Dir.home, '.aws', 'credentials')
-    rescue ArgumentError
-      # Dir.home raises ArgumentError when ENV['home'] is not set
-      nil
-    end
-
-    def load_from_path
-      profile = load_profile
-      @credentials = Credentials.new(
-        profile['aws_access_key_id'],
-        profile['aws_secret_access_key'],
-        profile['aws_session_token']
-      )
-    end
-
-    def load_profile
-      if profile = profiles[profile_name]
-        profile
-      else
-        msg = "Profile `#{profile_name}' not found in #{path}"
-        raise Errors::NoSuchProfileError, msg
-      end
-    end
-
-    def profiles
-      ini_parse(File.read(path))
-    end
-
-    def ini_parse(file)
-      current_section = {}
-      map = {}
-      file.lines.each do |line|
-        line = line.split(/^|\s;/).first # remove comments
-        section = line.match(/^\s*\[([^\[\]]+)\]\s*(#.+)?$/) unless line.nil?
-        if section
-          current_section = section[1]
-        elsif current_section
-          item = line.match(/^\s*(.+?)\s*=\s*(.+?)\s*$/) unless line.nil?
-          if item
-            map[current_section] = map[current_section] || {}
-            map[current_section][item[1]] = item[2]
-          end
-        end
-      end
-      map
     end
 
   end

@@ -13,6 +13,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::ParamConverter',
         'Aws::Plugins::ParamValidator',
         'Aws::Plugins::UserAgent',
+        'Aws::Plugins::HelpfulSocketErrors',
         'Aws::Plugins::RetryErrors',
         'Aws::Plugins::GlobalConfiguration',
         'Aws::Plugins::RegionalEndpoint',

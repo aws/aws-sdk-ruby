@@ -1,6 +1,58 @@
 Unreleased Changes
 ------------------
 
+2.4.1 (2016-07-21)
+------------------
+
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::ElasticTranscoder - Updated the API, and documentation for Amazon Elastic Transcoder.
+
+* Issue - Aws::SSM - Added missing paginator configuration for `Aws::SSM::Client#describe_instance_information`.
+
+  See related [GitHub issue #1249](https://github.com/aws/aws-sdk-ruby/issues/1249).
+
+* Issue - Configuration - Resolved an that caused a missing `:region` configuration
+  operation to raise an unhelpful `NoMethodError`.
+
+  See related [GitHub issue #1237](https://github.com/aws/aws-sdk-ruby/issues/1237).
+
+* Issue - Networking Errors - Now providing helpful error messages when recieving
+  a SocketError that appears to be caused by an invalid `:region` or `:endpoint`
+  option.
+
+  See related [GitHub pull request #1246](https://github.com/aws/aws-sdk-ruby/pull/1246).
+
+2.4.0 (2016-07-19)
+------------------
+
+* Feature - Aws::SharedConfig - This change adds support for a selection of AWS
+  CLI configuration values that have potential uses within the AWS SDK for Ruby.
+  These features include "Assume Role" support in the default credential
+  provider chain using values from configuration, default region selection, and
+  loading configuration values from the `~/.aws/config` shared configuration
+  file. Since these features can change default behavior, you must opt-in to
+  these features by setting the `AWS_SDK_LOAD_CONFIG` environment variable.
+
+* Feature - Aws::DeviceFarm - Add support for managing remote access sessions.
+
+* Feature - Aws::SSM - Added notification support.
+
+2.3.22 (2016-07-13)
+------------------
+
+* Feature - Aws::ECS - This change allows users to configure an IAM Role ARN that containers can assume in their tasks.
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.3.21 (2016-07-07)
 ------------------
 
@@ -234,17 +286,6 @@ Unreleased Changes
 
 2.3.4 (2016-05-12)
 ------------------
-
-* Feature - Aws::CloudFront - Added support for signing CloudFront URLs.
-
-  ```ruby
-  signer = Aws::CloudFront::UrlSigner.new
-  signer.signed_url(url,
-    key_pair_id: "cf-keypair-id",
-    private_key_path: "./cf_private_key.pem"
-  )
-  #=> "http://..."
-  ```
 
 * Feature - Aws::ApplicationDiscoveryService - Added support for the new
   AWS Application Discovery Service.

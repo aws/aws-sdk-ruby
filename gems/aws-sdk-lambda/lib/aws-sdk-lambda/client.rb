@@ -28,6 +28,7 @@ module Aws
       add_plugin(Aws::Plugins::ParamConverter)
       add_plugin(Aws::Plugins::ParamValidator)
       add_plugin(Aws::Plugins::UserAgent)
+      add_plugin(Aws::Plugins::HelpfulSocketErrors)
       add_plugin(Aws::Plugins::RetryErrors)
       add_plugin(Aws::Plugins::GlobalConfiguration)
       add_plugin(Aws::Plugins::RegionalEndpoint)

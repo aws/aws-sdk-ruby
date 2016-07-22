@@ -21,6 +21,7 @@ module Aws
       [
         [:static_credentials, {}],
         [:env_credentials, {}],
+        [:assume_role_credentials, {}],
         [:shared_credentials, {}],
         [:instance_profile_credentials, {
           retries: 0,
@@ -67,8 +68,33 @@ module Aws
       nil
     end
 
+    def assume_role_credentials(options)
+      if Aws.shared_config.config_enabled?
+        profile, region = nil, nil
+        if options[:config]
+          profile = options[:config].profile
+          region = options[:config].region
+          assume_role_with_profile(options[:config].profile, options[:config].region)
+        end
+        assume_role_with_profile(profile, region)
+      else
+        nil
+      end
+    end
+
     def instance_profile_credentials(options)
-      InstanceProfileCredentials.new(options)
+      if ENV["AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"]
+        ECSCredentials.new(options)
+      else
+        InstanceProfileCredentials.new(options)
+      end
+    end
+
+    def assume_role_with_profile(prof, region)
+      Aws.shared_config.assume_role_credentials_from_config(
+        profile: prof,
+        region: region
+      )
     end
 
   end

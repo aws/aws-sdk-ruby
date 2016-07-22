@@ -181,18 +181,6 @@ Adding a retry limit for instance profile credentials might be a possible soluti
 
 See [related GitHub issue #717](https://github.com/aws/aws-sdk-ruby/issues/717).
 
-### Add Region Enumeration
-
-Add the ability to programmatically determine what region a specific service is available in. Some useful interfaces include:
-
-* pass the service name; return a list of supported regions
-* pass a region; return a list of supported services.
-* pass service_name and region; return true/false if region supports that service
-
-This feature would be an interface for the information provided here http://docs.aws.amazon.com/general/latest/gr/rande.html#ct_region
-
-See [related GitHub issue #926](https://github.com/aws/aws-sdk-ruby/issues/926).
-
 ### Progress callbacks for Amazon S3 Object uploads
 
 To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
@@ -204,12 +192,6 @@ See [related GitHub issue #648](https://github.com/aws/aws-sdk-ruby/issues/648#i
 The `#predict` operation of `Aws::MachineLearning::Client` accepts a map of string-to-strings. When a user wishes to provide a boolean value, the API expects the boolean to be "1" or "0". It would be helpful if a plugin were added that converted the boolean values of the record map from `true` and `false` to their expected string formats.
 
 See [related GitHub issue #878](https://github.com/aws/aws-sdk-ruby/issues/878).
-
-### Support Assume Role Credentials from Shared Credentials File
-
-You can currently only configure an access key id, secret access key, and session token in the shared credentials file, `~/.aws/credentials`. It would be useful if you could also specify a role to assume similar to how the CLI supports.
-
-See [related GitHub issue #910](https://github.com/aws/aws-sdk-ruby/issues/910).
 
 ### Support Raw credential objects from AWS API responses in config
 

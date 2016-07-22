@@ -28,6 +28,7 @@ module Aws
       add_plugin(Aws::Plugins::ParamConverter)
       add_plugin(Aws::Plugins::ParamValidator)
       add_plugin(Aws::Plugins::UserAgent)
+      add_plugin(Aws::Plugins::HelpfulSocketErrors)
       add_plugin(Aws::Plugins::RetryErrors)
       add_plugin(Aws::Plugins::GlobalConfiguration)
       add_plugin(Aws::Plugins::RegionalEndpoint)
@@ -5674,6 +5675,16 @@ module Aws
       #
       #   * {Types::DescribeInstancesResult#reservations #Reservations} => Array&lt;Types::Reservation&gt;
       #   * {Types::DescribeInstancesResult#next_token #NextToken} => String
+      #
+      # @example Filtering by tags examples
+      #   # filtering by tag keys "key1" or "key2"
+      #   ec2.describe_instances(filters:[{ name: 'tag-key', values: ['key1', 'key2'] }])
+      # 
+      #   # filtering by tag values "value1" or "value1"
+      #   ec2.describe_instances(filters:[{ name: 'tag-value', values: ['value1', 'value2'] }])
+      # 
+      #   # filtering by key and value, key equals "key1" and value equals "value1" or "value2"
+      #   ec2.describe_instances(filters:[{ name: "tag:key1", values: ['value1'] }])
       #
       # @example Request syntax with placeholder values
       #   resp = client.describe_instances({
