@@ -19,17 +19,4 @@ require 'rspec'
 require 'webmock/rspec'
 require 'aws-sdk-datapipeline'
 
-RSpec.configure do |config|
-  config.before(:each) do
-
-    stub_const('ENV', {})
-
-    # disable loading credentials from shared file
-    allow(Dir).to receive(:home).and_raise(ArgumentError)
-
-    # disable instance profile credentials
-    path = '/latest/meta-data/iam/security-credentials/'
-    stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
-
-  end
-end
+require_relative '../../aws-sdk-core/spec/shared_spec_helper'

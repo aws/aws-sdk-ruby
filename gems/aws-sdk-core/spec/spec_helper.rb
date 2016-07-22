@@ -9,30 +9,9 @@ require 'build_tools'
 require 'aws-sdk-code-generator'
 require 'api_helper'
 require 'aws-sdk-core'
+require 'shared_spec_helper'
 
 SimpleCov.command_name('test:unit:aws-sdk-core')
-
-# Prevent the SDK unit tests from loading actual credentials while under test.
-# By default the SDK attempts to load credentials from:
-#
-# * ENV, e.g. ENV['AWS_ACCESS_KEY_ID']
-# * Shared credentials file, e.g. ~/.aws/credentials
-# * EC2 instance metadata server running at 169.254.169.254
-#
-RSpec.configure do |config|
-  config.before(:each) do
-
-    stub_const('ENV', {})
-
-    # disable loading credentials from shared file
-    allow(Dir).to receive(:home).and_raise(ArgumentError)
-
-    # disable instance profile credentials
-    path = '/latest/meta-data/iam/security-credentials/'
-    stub_request(:get, "http://169.254.169.254#{path}").to_raise(SocketError)
-
-  end
-end
 
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
