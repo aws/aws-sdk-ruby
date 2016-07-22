@@ -104,8 +104,12 @@ module ApiHelper
       options[:api]['metadata'] ||= metadata(options)
       options[:module_names] = [module_name]
       g = AwsSdkCodeGenerator::Generator.new(options)
-      #puts(g.generate_src)
-      Object.module_eval(g.generate_src)
+      begin
+        Object.module_eval(g.generate_src)
+      rescue => err
+        puts(g.generate_src)
+        raise err
+      end
       Object.const_get(module_name)
     end
 

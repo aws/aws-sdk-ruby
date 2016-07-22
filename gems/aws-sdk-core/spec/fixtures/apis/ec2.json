@@ -1,13 +1,13 @@
 {
   "version":"2.0",
   "metadata":{
-    "apiVersion":"2015-10-01",
+    "apiVersion":"2016-04-01",
     "endpointPrefix":"ec2",
     "protocol":"ec2",
     "serviceAbbreviation":"Amazon EC2",
     "serviceFullName":"Amazon Elastic Compute Cloud",
     "signatureVersion":"v4",
-    "xmlNamespace":"http://ec2.amazonaws.com/doc/2015-10-01"
+    "xmlNamespace":"http://ec2.amazonaws.com/doc/2016-04-01"
   },
   "operations":{
     "AcceptVpcPeeringConnection":{
@@ -779,6 +779,15 @@
       "input":{"shape":"DescribeIdFormatRequest"},
       "output":{"shape":"DescribeIdFormatResult"}
     },
+    "DescribeIdentityIdFormat":{
+      "name":"DescribeIdentityIdFormat",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeIdentityIdFormatRequest"},
+      "output":{"shape":"DescribeIdentityIdFormatResult"}
+    },
     "DescribeImageAttribute":{
       "name":"DescribeImageAttribute",
       "http":{
@@ -1426,6 +1435,14 @@
         "requestUri":"/"
       },
       "input":{"shape":"ModifyIdFormatRequest"}
+    },
+    "ModifyIdentityIdFormat":{
+      "name":"ModifyIdentityIdFormat",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyIdentityIdFormatRequest"}
     },
     "ModifyImageAttribute":{
       "name":"ModifyImageAttribute",
@@ -4563,6 +4580,29 @@
         }
       }
     },
+    "DescribeIdentityIdFormatRequest":{
+      "type":"structure",
+      "required":["PrincipalArn"],
+      "members":{
+        "Resource":{
+          "shape":"String",
+          "locationName":"resource"
+        },
+        "PrincipalArn":{
+          "shape":"String",
+          "locationName":"principalArn"
+        }
+      }
+    },
+    "DescribeIdentityIdFormatResult":{
+      "type":"structure",
+      "members":{
+        "Statuses":{
+          "shape":"IdFormatList",
+          "locationName":"statusSet"
+        }
+      }
+    },
     "DescribeImageAttributeRequest":{
       "type":"structure",
       "required":[
@@ -6679,6 +6719,13 @@
         "locationName":"Filter"
       }
     },
+    "FleetType":{
+      "type":"string",
+      "enum":[
+        "request",
+        "maintain"
+      ]
+    },
     "Float":{"type":"float"},
     "FlowLog":{
       "type":"structure",
@@ -7108,6 +7155,10 @@
         "SriovNetSupport":{
           "shape":"String",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"Boolean",
+          "locationName":"enaSupport"
         },
         "StateReason":{
           "shape":"StateReason",
@@ -7841,6 +7892,10 @@
         "SriovNetSupport":{
           "shape":"String",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"Boolean",
+          "locationName":"enaSupport"
         }
       }
     },
@@ -7895,6 +7950,10 @@
           "shape":"AttributeValue",
           "locationName":"sriovNetSupport"
         },
+        "EnaSupport":{
+          "shape":"AttributeBooleanValue",
+          "locationName":"enaSupport"
+        },
         "SourceDestCheck":{
           "shape":"AttributeBooleanValue",
           "locationName":"sourceDestCheck"
@@ -7920,7 +7979,8 @@
         "sourceDestCheck",
         "groupSet",
         "ebsOptimized",
-        "sriovNetSupport"
+        "sriovNetSupport",
+        "enaSupport"
       ]
     },
     "InstanceBlockDeviceMapping":{
@@ -8413,6 +8473,11 @@
       "type":"string",
       "enum":[
         "t1.micro",
+        "t2.nano",
+        "t2.micro",
+        "t2.small",
+        "t2.medium",
+        "t2.large",
         "m1.small",
         "m1.medium",
         "m1.large",
@@ -8426,15 +8491,15 @@
         "m4.2xlarge",
         "m4.4xlarge",
         "m4.10xlarge",
-        "t2.nano",
-        "t2.micro",
-        "t2.small",
-        "t2.medium",
-        "t2.large",
         "m2.xlarge",
         "m2.2xlarge",
         "m2.4xlarge",
         "cr1.8xlarge",
+        "r3.large",
+        "r3.xlarge",
+        "r3.2xlarge",
+        "r3.4xlarge",
+        "r3.8xlarge",
         "x1.4xlarge",
         "x1.8xlarge",
         "x1.16xlarge",
@@ -8462,11 +8527,6 @@
         "g2.2xlarge",
         "g2.8xlarge",
         "cg1.4xlarge",
-        "r3.large",
-        "r3.xlarge",
-        "r3.2xlarge",
-        "r3.4xlarge",
-        "r3.8xlarge",
         "d2.xlarge",
         "d2.2xlarge",
         "d2.4xlarge",
@@ -8790,6 +8850,28 @@
         "UseLongIds":{"shape":"Boolean"}
       }
     },
+    "ModifyIdentityIdFormatRequest":{
+      "type":"structure",
+      "required":[
+        "Resource",
+        "UseLongIds",
+        "PrincipalArn"
+      ],
+      "members":{
+        "Resource":{
+          "shape":"String",
+          "locationName":"resource"
+        },
+        "UseLongIds":{
+          "shape":"Boolean",
+          "locationName":"useLongIds"
+        },
+        "PrincipalArn":{
+          "shape":"String",
+          "locationName":"principalArn"
+        }
+      }
+    },
     "ModifyImageAttributeRequest":{
       "type":"structure",
       "required":["ImageId"],
@@ -8878,6 +8960,10 @@
         "SriovNetSupport":{
           "shape":"AttributeValue",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"AttributeBooleanValue",
+          "locationName":"enaSupport"
         }
       }
     },
@@ -10228,6 +10314,10 @@
         "SriovNetSupport":{
           "shape":"String",
           "locationName":"sriovNetSupport"
+        },
+        "EnaSupport":{
+          "shape":"Boolean",
+          "locationName":"enaSupport"
         }
       }
     },
@@ -12284,6 +12374,14 @@
         "AllocationStrategy":{
           "shape":"AllocationStrategy",
           "locationName":"allocationStrategy"
+        },
+        "FulfilledCapacity":{
+          "shape":"Double",
+          "locationName":"fulfilledCapacity"
+        },
+        "Type":{
+          "shape":"FleetType",
+          "locationName":"type"
         }
       }
     },
@@ -12864,13 +12962,13 @@
       "type":"structure",
       "required":["Error"],
       "members":{
-        "Error":{
-          "shape":"UnsuccessfulItemError",
-          "locationName":"error"
-        },
         "ResourceId":{
           "shape":"String",
           "locationName":"resourceId"
+        },
+        "Error":{
+          "shape":"UnsuccessfulItemError",
+          "locationName":"error"
         }
       }
     },
