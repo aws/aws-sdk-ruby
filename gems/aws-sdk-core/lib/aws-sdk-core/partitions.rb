@@ -227,6 +227,7 @@ module Aws
             'SSM' => 'ssm',
             'STS' => 'sts',
             'SWF' => 'swf',
+            'ServiceCatalog' => 'servicecatalog',
             'SimpleDB' => 'sdb',
             'StorageGateway' => 'storagegateway',
             'Support' => 'support',
