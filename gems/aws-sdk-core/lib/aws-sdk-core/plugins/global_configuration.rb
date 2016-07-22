@@ -56,8 +56,9 @@ module Aws
         :importexport, :inspector, :iot, :iotdataplane, :kinesis, :kms,
         :lambda, :lambdapreview, :machinelearning,
         :marketplacecommerceanalytics, :marketplacemetering, :opsworks, :rds,
-        :redshift, :route53, :route53domains, :s3, :ses, :simpledb, :sns, :sqs,
-        :ssm, :storagegateway, :sts, :support, :swf, :waf, :workspaces
+        :redshift, :route53, :route53domains, :s3, :servicecatalog, :ses,
+        :simpledb, :sns, :sqs, :ssm, :storagegateway, :sts, :support, :swf,
+        :waf, :workspaces
       ])
       # end
 

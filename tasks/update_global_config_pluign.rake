@@ -29,8 +29,9 @@ task 'update-partition-service-list' => ['git:require-clean-workspace'] do
   service_ids << i + "}\n"
   service_ids = service_ids.join("\n")
 
+  filename = 'gems/aws-sdk-core/lib/aws-sdk-core/partitions.rb'
   changed = BuildTools.replace_lines(
-    filename: 'gems/aws-sdk-core/lib/aws-sdk-core/partitions.rb', 
+    filename: filename,
     start: /# service ids/,
     stop: /# end service ids/,
     new_lines: service_ids
