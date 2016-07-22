@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::SharedConfig - Code wasn't properly respecting the
+  `AWS_SDK_LOAD_CONFIG` flag.
+
 2.4.1 (2016-07-21)
 ------------------
 
