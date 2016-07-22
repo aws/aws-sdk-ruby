@@ -20,6 +20,8 @@ module Aws
       include Seahorse::Model
 
       AccessUrl = Shapes::StringShape.new(name: 'AccessUrl')
+      AddTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddTagsToResourceRequest')
+      AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
       AliasName = Shapes::StringShape.new(name: 'AliasName')
       Attribute = Shapes::StructureShape.new(name: 'Attribute')
       AttributeName = Shapes::StringShape.new(name: 'AttributeName')
@@ -118,6 +120,8 @@ module Aws
       LastUpdatedDateTime = Shapes::TimestampShape.new(name: 'LastUpdatedDateTime')
       LaunchTime = Shapes::TimestampShape.new(name: 'LaunchTime')
       Limit = Shapes::IntegerShape.new(name: 'Limit')
+      ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+      ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
       ManualSnapshotsLimitReached = Shapes::BooleanShape.new(name: 'ManualSnapshotsLimitReached')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
       OrganizationalUnitDN = Shapes::StringShape.new(name: 'OrganizationalUnitDN')
@@ -134,8 +138,11 @@ module Aws
       RegisterEventTopicResult = Shapes::StructureShape.new(name: 'RegisterEventTopicResult')
       RemoteDomainName = Shapes::StringShape.new(name: 'RemoteDomainName')
       RemoteDomainNames = Shapes::ListShape.new(name: 'RemoteDomainNames')
+      RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
+      RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
       ReplicationScope = Shapes::StringShape.new(name: 'ReplicationScope')
       RequestId = Shapes::StringShape.new(name: 'RequestId')
+      ResourceId = Shapes::StringShape.new(name: 'ResourceId')
       RestoreFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreFromSnapshotRequest')
       RestoreFromSnapshotResult = Shapes::StructureShape.new(name: 'RestoreFromSnapshotResult')
       SID = Shapes::StringShape.new(name: 'SID')
@@ -158,6 +165,12 @@ module Aws
       StateLastUpdatedDateTime = Shapes::TimestampShape.new(name: 'StateLastUpdatedDateTime')
       SubnetId = Shapes::StringShape.new(name: 'SubnetId')
       SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+      Tag = Shapes::StructureShape.new(name: 'Tag')
+      TagKey = Shapes::StringShape.new(name: 'TagKey')
+      TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+      TagLimitExceededException = Shapes::StructureShape.new(name: 'TagLimitExceededException')
+      TagValue = Shapes::StringShape.new(name: 'TagValue')
+      Tags = Shapes::ListShape.new(name: 'Tags')
       TopicArn = Shapes::StringShape.new(name: 'TopicArn')
       TopicName = Shapes::StringShape.new(name: 'TopicName')
       TopicNames = Shapes::ListShape.new(name: 'TopicNames')
@@ -181,6 +194,12 @@ module Aws
       VerifyTrustRequest = Shapes::StructureShape.new(name: 'VerifyTrustRequest')
       VerifyTrustResult = Shapes::StructureShape.new(name: 'VerifyTrustResult')
       VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+      AddTagsToResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+      AddTagsToResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+      AddTagsToResourceRequest.struct_class = Types::AddTagsToResourceRequest
+
+      AddTagsToResourceResult.struct_class = Types::AddTagsToResourceResult
 
       Attribute.add_member(:name, Shapes::ShapeRef.new(shape: AttributeName, location_name: "Name"))
       Attribute.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Value"))
@@ -459,6 +478,15 @@ module Aws
 
       IpAddrs.member = Shapes::ShapeRef.new(shape: IpAddr)
 
+      ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+      ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListTagsForResourceRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+      ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+      ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+      ListTagsForResourceResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
+
       RadiusSettings.add_member(:radius_servers, Shapes::ShapeRef.new(shape: Servers, location_name: "RadiusServers"))
       RadiusSettings.add_member(:radius_port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "RadiusPort"))
       RadiusSettings.add_member(:radius_timeout, Shapes::ShapeRef.new(shape: RadiusTimeout, location_name: "RadiusTimeout"))
@@ -476,6 +504,12 @@ module Aws
       RegisterEventTopicResult.struct_class = Types::RegisterEventTopicResult
 
       RemoteDomainNames.member = Shapes::ShapeRef.new(shape: RemoteDomainName)
+
+      RemoveTagsFromResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+      RemoveTagsFromResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
+      RemoveTagsFromResourceRequest.struct_class = Types::RemoveTagsFromResourceRequest
+
+      RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
 
       RestoreFromSnapshotRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, required: true, location_name: "SnapshotId"))
       RestoreFromSnapshotRequest.struct_class = Types::RestoreFromSnapshotRequest
@@ -502,6 +536,14 @@ module Aws
       Snapshots.member = Shapes::ShapeRef.new(shape: Snapshot)
 
       SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
+
+      Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+      Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+      Tag.struct_class = Types::Tag
+
+      TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+      Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
       TopicNames.member = Shapes::ShapeRef.new(shape: TopicName)
 
@@ -554,6 +596,19 @@ module Aws
           "signatureVersion" => "v4",
           "targetPrefix" => "DirectoryService_20150416",
         }
+
+        api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AddTagsToResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AddTagsToResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: AddTagsToResourceResult)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
 
         api.add_operation(:connect_directory, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ConnectDirectory"
@@ -863,12 +918,37 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         end)
 
+        api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListTagsForResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
+
         api.add_operation(:register_event_topic, Seahorse::Model::Operation.new.tap do |o|
           o.name = "RegisterEventTopic"
           o.http_method = "POST"
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: RegisterEventTopicRequest)
           o.output = Shapes::ShapeRef.new(shape: RegisterEventTopicResult)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
+
+        api.add_operation(:remove_tags_from_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "RemoveTagsFromResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceResult)
           o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: ClientException)

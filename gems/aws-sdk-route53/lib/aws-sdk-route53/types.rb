@@ -54,13 +54,6 @@ module Aws
       # * You can\'t create alias resource record sets for failover,
       #   geolocation, or latency resource record sets in a private hosted
       #   zone.
-      #
-      # For more information and an example, see [Example: Creating Alias
-      # Resource Record Sets][1] in the *Amazon Route 53 API Reference*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/CreateAliasRRSAPI.html
       # @note When making an API call, pass AliasTarget
       #   data as a hash:
       #
@@ -95,13 +88,9 @@ module Aws
         #     resource record set cannot reference a resource record set in a
         #     different hosted zone.)
         #
-        #   For more information and an example, see [Example: Creating Alias
-        #   Resource Record Sets][2] in the *Amazon Route 53 API Reference*.
-        #
         #
         #
         #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
-        #   [2]: http://docs.aws.amazon.com/Route53/latest/APIReference/CreateAliasRRSAPI.html
         #   @return [String]
 
         # @!attribute [rw] dns_name
@@ -140,15 +129,11 @@ module Aws
         #     of the `Name` element for a resource record set in the current
         #     hosted zone.
         #
-        #   For more information and an example, see [Example: Creating Alias
-        #   Resource Record Sets][4] in the *Amazon Route 53 API Reference*.
-        #
         #
         #
         #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html
         #   [2]: http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region
         #   [3]: http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
-        #   [4]: http://docs.aws.amazon.com/Route53/latest/APIReference/CreateAliasRRSAPI.html
         #   @return [String]
 
         # @!attribute [rw] evaluate_target_health
@@ -192,8 +177,7 @@ module Aws
         #     example, a group of weighted resource record sets), but it is not
         #     another alias resource record set, we recommend that you associate
         #     a health check with all of the resource record sets in the alias
-        #     target. For more information, see [What Happens When You Omit
-        #     Health Checks?][1] in the *Amazon Route 53 Developer Guide*.
+        #     target.
         #   * If you specify an ELB load balancer in `AliasTarget`, Elastic Load
         #     Balancing routes queries only to the healthy Amazon EC2 instances
         #     that are registered with the load balancer. If no Amazon EC2
@@ -207,21 +191,20 @@ module Aws
         #     Amazon Route 53 health checks for the Amazon EC2 instances that
         #     you register with an ELB load balancer. For more information, see
         #     [How Health Checks Work in More Complex Amazon Route 53
-        #     Configurations][2] in the *Amazon Route 53 Developer Guide*.
+        #     Configurations][1] in the *Amazon Route 53 Developer Guide*.
         #
         #   We recommend that you set `EvaluateTargetHealth` to `true` only when
         #   you have enough idle capacity to handle the failure of one or more
         #   endpoints.
         #
         #   For more information and examples, see [Amazon Route 53 Health
-        #   Checks and DNS Failover][3] in the *Amazon Route 53 Developer
+        #   Checks and DNS Failover][2] in the *Amazon Route 53 Developer
         #   Guide*.
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting
-        #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html
-        #   [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+        #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html
+        #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
         #   @return [Boolean]
 
       end
@@ -234,7 +217,7 @@ module Aws
       #       {
       #         hosted_zone_id: "ResourceId", # required
       #         vpc: { # required
-      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #           vpc_id: "VPCId",
       #         },
       #         comment: "AssociateVPCComment",
@@ -285,7 +268,7 @@ module Aws
       #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, PTR, SRV, SPF, AAAA
       #           set_identifier: "ResourceRecordSetIdentifier",
       #           weight: 1,
-      #           region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #           geo_location: {
       #             continent_code: "GeoLocationContinentCode",
       #             country_code: "GeoLocationCountryCode",
@@ -352,7 +335,7 @@ module Aws
       #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, PTR, SRV, SPF, AAAA
       #               set_identifier: "ResourceRecordSetIdentifier",
       #               weight: 1,
-      #               region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #               region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #               geo_location: {
       #                 continent_code: "GeoLocationContinentCode",
       #                 country_code: "GeoLocationCountryCode",
@@ -425,8 +408,8 @@ module Aws
         #   A complex type that describes change information about changes made
         #   to your hosted zone.
         #
-        #   This element contains an ID that you use when performing a GetChange
-        #   action to get detailed information about the change.
+        #   This element contains an ID that you use when performing a
+        #   `GetChange` action to get detailed information about the change.
         #   @return [String]
 
         # @!attribute [rw] submitter
@@ -442,7 +425,7 @@ module Aws
       # A complex type that describes change information about changes made to
       # your hosted zone.
       #
-      # This element contains an ID that you use when performing a GetChange
+      # This element contains an ID that you use when performing a `GetChange`
       # action to get detailed information about the change.
       class ChangeInfo < Aws::Structure.new(
         :id,
@@ -473,8 +456,8 @@ module Aws
         #   A complex type that describes change information about changes made
         #   to your hosted zone.
         #
-        #   This element contains an ID that you use when performing a GetChange
-        #   action to get detailed information about the change.
+        #   This element contains an ID that you use when performing a
+        #   `GetChange` action to get detailed information about the change.
         #   @return [String]
 
       end
@@ -495,7 +478,7 @@ module Aws
       #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, PTR, SRV, SPF, AAAA
       #                 set_identifier: "ResourceRecordSetIdentifier",
       #                 weight: 1,
-      #                 region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #                 region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #                 geo_location: {
       #                   continent_code: "GeoLocationContinentCode",
       #                   country_code: "GeoLocationCountryCode",
@@ -544,8 +527,8 @@ module Aws
         #   A complex type that contains information about changes made to your
         #   hosted zone.
         #
-        #   This element contains an ID that you use when performing a GetChange
-        #   action to get detailed information about the change.
+        #   This element contains an ID that you use when performing a
+        #   `GetChange` action to get detailed information about the change.
         #   @return [Types::ChangeInfo]
 
       end
@@ -748,7 +731,7 @@ module Aws
       #       {
       #         name: "DNSName", # required
       #         vpc: {
-      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #           vpc_id: "VPCId",
       #         },
       #         caller_reference: "Nonce", # required
@@ -826,7 +809,7 @@ module Aws
         # @!attribute [rw] change_info
         #   A complex type that contains information about the request to create
         #   a hosted zone. This includes an ID that you use when you call the
-        #   GetChange action to get the current status of the change request.
+        #   `GetChange` action to get the current status of the change request.
         #   @return [Types::ChangeInfo]
 
         # @!attribute [rw] delegation_set
@@ -974,7 +957,13 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] document
-        #   The definition of this traffic policy in JSON format.
+        #   The definition of this traffic policy in JSON format. For more
+        #   information, see [Traffic Policy Document Format][1] in the *Amazon
+        #   Route 53 API Reference*.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
         #   @return [String]
 
         # @!attribute [rw] comment
@@ -1022,7 +1011,12 @@ module Aws
         #   The definition of a new traffic policy version, in JSON format. You
         #   must specify the full definition of the new traffic policy. You
         #   cannot specify just the differences between the new version and a
-        #   previous version.
+        #   previous version. For more information, see [Traffic Policy Document
+        #   Format][1] in the *Amazon Route 53 API Reference*.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
         #   @return [String]
 
         # @!attribute [rw] comment
@@ -1206,7 +1200,7 @@ module Aws
       #       {
       #         hosted_zone_id: "ResourceId", # required
       #         vpc: { # required
-      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #           vpc_id: "VPCId",
       #         },
       #         comment: "DisassociateVPCComment",
@@ -1265,7 +1259,7 @@ module Aws
         #   Valid values: `AF` \| `AN` \| `AS` \| `EU` \| `OC` \| `NA` \| `SA`
         #
         #   Constraint: Specifying `ContinentCode` with either `CountryCode` or
-        #   `SubdivisionCode` returns an InvalidInput error.
+        #   `SubdivisionCode` returns an `InvalidInput` error.
         #   @return [String]
 
         # @!attribute [rw] country_code
@@ -1282,7 +1276,7 @@ module Aws
         #   A subdivision code is only valid with the appropriate country code.
         #
         #   Constraint: Specifying `SubdivisionCode` without `CountryCode`
-        #   returns an InvalidInput error.
+        #   returns an `InvalidInput` error.
         #   @return [String]
 
       end
@@ -1429,7 +1423,7 @@ module Aws
         #   Valid values: `AF` \| `AN` \| `AS` \| `EU` \| `OC` \| `NA` \| `SA`
         #
         #   Constraint: Specifying `ContinentCode` with either `CountryCode` or
-        #   `SubdivisionCode` returns an InvalidInput error.
+        #   `SubdivisionCode` returns an `InvalidInput` error.
         #   @return [String]
 
         # @!attribute [rw] country_code
@@ -1446,7 +1440,7 @@ module Aws
         #   A subdivision code is only valid with the appropriate country code.
         #
         #   Constraint: Specifying `SubdivisionCode` without `CountryCode`
-        #   returns an InvalidInput error.
+        #   returns an `InvalidInput` error.
         #   @return [String]
 
       end
@@ -1580,7 +1574,7 @@ module Aws
         #     alias, or failover alias resource record set, and you specify
         #     health check IDs for all of the resource record sets that are
         #     referenced by the alias resource record sets. For more information
-        #     about this configuration, see EvaluateTargetHealth.
+        #     about this configuration, see `EvaluateTargetHealth`.
         #
         #     Amazon Route 53 doesn\'t check the health of the endpoint
         #     specified in the resource record set, for example, the endpoint
@@ -2070,6 +2064,12 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] private_zone
+        #   `GetHostedZone` and `ListHostedZone` responses: A Boolean value that
+        #   indicates whether a hosted zone is private.
+        #
+        #   `CreateHostedZone` requests: When you\'re creating a private hosted
+        #   zone (when you specify values for VPCId and VPCRegion), you can
+        #   optionally specify true for PrivateZone.
         #   @return [Boolean]
 
       end
@@ -2256,7 +2256,7 @@ module Aws
         #   Valid values: `AF` \| `AN` \| `AS` \| `EU` \| `OC` \| `NA` \| `SA`
         #
         #   Constraint: Specifying `ContinentCode` with either `CountryCode` or
-        #   `SubdivisionCode` returns an InvalidInput error.
+        #   `SubdivisionCode` returns an `InvalidInput` error.
         #   @return [String]
 
         # @!attribute [rw] start_country_code
@@ -2272,7 +2272,7 @@ module Aws
         #   locations that you want the `ListGeoLocations` request to list.
         #
         #   Constraint: Specifying `SubdivisionCode` without `CountryCode`
-        #   returns an InvalidInput error.
+        #   returns an `InvalidInput` error.
         #   @return [String]
 
         # @!attribute [rw] max_items
@@ -2300,32 +2300,29 @@ module Aws
         #   A flag that indicates whether there are more geo locations to be
         #   listed. If your results were truncated, you can make a follow-up
         #   request for the next page of results by using the values included in
-        #   the ListGeoLocationsResponse$NextContinentCode,
-        #   ListGeoLocationsResponse$NextCountryCode and
-        #   ListGeoLocationsResponse$NextSubdivisionCode elements.
+        #   the `NextContinentCode`, `NextCountryCode`, and
+        #   `NextSubdivisionCode` elements.
         #
         #   Valid Values: `true` \| `false`
         #   @return [Boolean]
 
         # @!attribute [rw] next_continent_code
         #   If the results were truncated, the continent code of the next geo
-        #   location in the list. This element is present only if
-        #   ListGeoLocationsResponse$IsTruncated is true and the next geo
-        #   location to list is a continent location.
+        #   location in the list. This element is present only if `IsTruncated`
+        #   is true and the next geo location to list is a continent location.
         #   @return [String]
 
         # @!attribute [rw] next_country_code
         #   If the results were truncated, the country code of the next geo
-        #   location in the list. This element is present only if
-        #   ListGeoLocationsResponse$IsTruncated is true and the next geo
-        #   location to list is not a continent location.
+        #   location in the list. This element is present only if `IsTruncated`
+        #   is true and the next geo location to list is not a continent
+        #   location.
         #   @return [String]
 
         # @!attribute [rw] next_subdivision_code
         #   If the results were truncated, the subdivision code of the next geo
-        #   location in the list. This element is present only if
-        #   ListGeoLocationsResponse$IsTruncated is true and the next geo
-        #   location has a subdivision.
+        #   location in the list. This element is present only if `IsTruncated`
+        #   is true and the next geo location has a subdivision.
         #   @return [String]
 
         # @!attribute [rw] max_items
@@ -2397,21 +2394,19 @@ module Aws
         #   @return [Boolean]
 
         # @!attribute [rw] next_marker
-        #   Indicates where to continue listing health checks. If
-        #   ListHealthChecksResponse$IsTruncated is `true`, make another request
-        #   to `ListHealthChecks` and include the value of the `NextMarker`
-        #   element in the `Marker` element to get the next page of results.
+        #   Indicates where to continue listing health checks. If `IsTruncated`
+        #   is `true`, make another request to `ListHealthChecks` and include
+        #   the value of the `NextMarker` element in the `Marker` element to get
+        #   the next page of results.
         #   @return [String]
 
         # @!attribute [rw] max_items
         #   The maximum number of health checks to be included in the response
         #   body. If the number of health checks associated with this AWS
-        #   account exceeds `MaxItems`, the value of
-        #   ListHealthChecksResponse$IsTruncated in the response is `true`. Call
-        #   `ListHealthChecks` again and specify the value of
-        #   ListHealthChecksResponse$NextMarker in the
-        #   ListHostedZonesRequest$Marker element to get the next page of
-        #   results.
+        #   account exceeds `MaxItems`, the value of `IsTruncated` in the
+        #   response is `true`. Call `ListHealthChecks` again and specify the
+        #   value of `NextMarker` from the last response in the `Marker` element
+        #   of the next request to get the next page of results.
         #   @return [Integer]
 
       end
@@ -2425,14 +2420,6 @@ module Aws
       # page that is displayed by using the `MaxItems` parameter. You can use
       # the `DNSName` and `HostedZoneId` parameters to control the hosted zone
       # that the list begins with.
-      #
-      # For more information about listing hosted zones, see [Listing the
-      # Hosted Zones for an AWS Account][1] in the *Amazon Route 53 Developer
-      # Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ListInfoOnHostedZone.html
       # @note When making an API call, pass ListHostedZonesByNameRequest
       #   data as a hash:
       #
@@ -2503,36 +2490,31 @@ module Aws
         #   @return [Boolean]
 
         # @!attribute [rw] next_dns_name
-        #   If ListHostedZonesByNameResponse$IsTruncated is `true`, there are
-        #   more hosted zones associated with the current AWS account. To get
-        #   the next page of results, make another request to
-        #   `ListHostedZonesByName`. Specify the value of
-        #   ListHostedZonesByNameResponse$NextDNSName in the
-        #   ListHostedZonesByNameRequest$DNSName element and
-        #   ListHostedZonesByNameResponse$NextHostedZoneId in the
-        #   ListHostedZonesByNameRequest$HostedZoneId element.
+        #   If the value of `IsTruncated` in the `ListHostedZonesByNameResponse`
+        #   is `true`, there are more hosted zones associated with the current
+        #   AWS account. To get the next page of results, make another request
+        #   to `ListHostedZonesByName`. Specify the value of `NextDNSName` in
+        #   the `DNSName` parameter. Specify `NextHostedZoneId` in the
+        #   `HostedZoneId` parameter.
         #   @return [String]
 
         # @!attribute [rw] next_hosted_zone_id
-        #   If ListHostedZonesByNameResponse$IsTruncated is `true`, there are
-        #   more hosted zones associated with the current AWS account. To get
-        #   the next page of results, make another request to
-        #   `ListHostedZonesByName`. Specify the value of
-        #   ListHostedZonesByNameResponse$NextDNSName in the
-        #   ListHostedZonesByNameRequest$DNSName element and
-        #   ListHostedZonesByNameResponse$NextHostedZoneId in the
-        #   ListHostedZonesByNameRequest$HostedZoneId element.
+        #   If the value of `IsTruncated` in the `ListHostedZonesByNameResponse`
+        #   is `true`, there are more hosted zones associated with the current
+        #   AWS account. To get the next page of results, make another request
+        #   to `ListHostedZonesByName`. Specify the value of `NextDNSName` in
+        #   the `DNSName` parameter. Specify `NextHostedZoneId` in the
+        #   `HostedZoneId` parameter.
         #   @return [String]
 
         # @!attribute [rw] max_items
         #   The maximum number of hosted zones to be included in the response
         #   body. If the number of hosted zones associated with this AWS account
-        #   exceeds `MaxItems`, the value of
-        #   ListHostedZonesByNameResponse$IsTruncated in the response is `true`.
-        #   Call `ListHostedZonesByName` again and specify the value of
-        #   ListHostedZonesByNameResponse$NextDNSName and
-        #   ListHostedZonesByNameResponse$NextHostedZoneId elements respectively
-        #   to get the next page of results.
+        #   exceeds `MaxItems`, the value of `IsTruncated` in the
+        #   `ListHostedZonesByNameResponse` is `true`. Call
+        #   `ListHostedZonesByName` again and specify the value of `NextDNSName`
+        #   and `NextHostedZoneId` elements from the previous response to get
+        #   the next page of results.
         #   @return [Integer]
 
       end
@@ -2544,15 +2526,9 @@ module Aws
       # displayed on a single page. You can control the length of the page
       # that is displayed by using the `MaxItems` parameter. You can use the
       # `Marker` parameter to control the hosted zone that the list begins
-      # with. For more information about listing hosted zones, see [Listing
-      # the Hosted Zones for an AWS Account][1] in the *Amazon Route 53
-      # Developer Guide*.
+      # with.
       #
-      # <note> Amazon Route 53 returns a maximum of 100 items. If you set `MaxItems` to a value greater than 100, Amazon Route 53 returns only the first 100.</note>
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ListInfoOnHostedZone.html
+      # <note>Amazon Route 53 returns a maximum of 100 items. If you set `MaxItems` to a value greater than 100, Amazon Route 53 returns only the first 100.</note>
       # @note When making an API call, pass ListHostedZonesRequest
       #   data as a hash:
       #
@@ -2610,19 +2586,18 @@ module Aws
         #   @return [Boolean]
 
         # @!attribute [rw] next_marker
-        #   Indicates where to continue listing hosted zones. If
-        #   ListHostedZonesResponse$IsTruncated is `true`, make another request
-        #   to `ListHostedZones` and include the value of the `NextMarker`
-        #   element in the `Marker` element to get the next page of results.
+        #   Indicates where to continue listing hosted zones. If `IsTruncated`
+        #   is `true`, make another request to `ListHostedZones` and include the
+        #   value of the `NextMarker` element in the `Marker` element to get the
+        #   next page of results.
         #   @return [String]
 
         # @!attribute [rw] max_items
         #   The maximum number of hosted zones to be included in the response
         #   body. If the number of hosted zones associated with this AWS account
-        #   exceeds `MaxItems`, the value of ListHostedZonesResponse$IsTruncated
-        #   in the response is `true`. Call `ListHostedZones` again and specify
-        #   the value of ListHostedZonesResponse$NextMarker in the
-        #   ListHostedZonesRequest$Marker element to get the next page of
+        #   exceeds `MaxItems`, the value of `IsTruncated` in the response is
+        #   `true`. Call `ListHostedZones` again and specify the value of
+        #   `NextMarker` in the `Marker` parameter to get the next page of
         #   results.
         #   @return [Integer]
 
@@ -2671,15 +2646,14 @@ module Aws
         #   Values for Alias Resource Record Sets: `A` \| `AAAA`
         #
         #   Constraint: Specifying `type` without specifying `name` returns an
-        #   InvalidInput error.
+        #   `InvalidInput` error.
         #   @return [String]
 
         # @!attribute [rw] start_record_identifier
         #   *Weighted resource record sets only:* If results were truncated for
         #   a given DNS name and type, specify the value of
-        #   `ListResourceRecordSetsResponse$NextRecordIdentifier` from the
-        #   previous response to get the next resource record set that has the
-        #   current DNS name and type.
+        #   `NextRecordIdentifier` from the previous response to get the next
+        #   resource record set that has the current DNS name and type.
         #   @return [String]
 
         # @!attribute [rw] max_items
@@ -2707,22 +2681,20 @@ module Aws
         # @!attribute [rw] is_truncated
         #   A flag that indicates whether there are more resource record sets to
         #   be listed. If your results were truncated, you can make a follow-up
-        #   request for the next page of results by using the
-        #   ListResourceRecordSetsResponse$NextRecordName element.
+        #   request for the next page of results by using the `NextRecordName`
+        #   element.
         #
         #   Valid Values: `true` \| `false`
         #   @return [Boolean]
 
         # @!attribute [rw] next_record_name
         #   If the results were truncated, the name of the next record in the
-        #   list. This element is present only if
-        #   ListResourceRecordSetsResponse$IsTruncated is true.
+        #   list. This element is present only if `IsTruncated` is true.
         #   @return [String]
 
         # @!attribute [rw] next_record_type
         #   If the results were truncated, the type of the next record in the
-        #   list. This element is present only if
-        #   ListResourceRecordSetsResponse$IsTruncated is true.
+        #   list. This element is present only if `IsTruncated` is true.
         #   @return [String]
 
         # @!attribute [rw] next_record_identifier
@@ -2801,21 +2773,20 @@ module Aws
 
         # @!attribute [rw] next_marker
         #   Indicates where to continue listing reusable delegation sets. If
-        #   ListReusableDelegationSetsResponse$IsTruncated is `true`, make
-        #   another request to `ListReusableDelegationSets` and include the
-        #   value of the `NextMarker` element in the `Marker` element to get the
-        #   next page of results.
+        #   `IsTruncated` is `true`, make another request to
+        #   `ListReusableDelegationSets` and include the value of the
+        #   `NextMarker` element in the `Marker` element of the previous
+        #   response to get the next page of results.
         #   @return [String]
 
         # @!attribute [rw] max_items
         #   The maximum number of reusable delegation sets to be included in the
         #   response body. If the number of reusable delegation sets associated
-        #   with this AWS account exceeds `MaxItems`, the value of
-        #   ListReusablDelegationSetsResponse$IsTruncated in the response is
-        #   `true`. Call `ListReusableDelegationSets` again and specify the
-        #   value of ListReusableDelegationSetsResponse$NextMarker in the
-        #   ListReusableDelegationSetsRequest$Marker element to get the next
-        #   page of results.
+        #   with this AWS account exceeds `MaxItems`, the value of `IsTruncated`
+        #   in the response is `true`. To get the next page of results, call
+        #   `ListReusableDelegationSets` again and specify the value of
+        #   `NextMarker` from the previous response in the `Marker` element of
+        #   the request.
         #   @return [Integer]
 
       end
@@ -3480,7 +3451,7 @@ module Aws
       #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, PTR, SRV, SPF, AAAA
       #         set_identifier: "ResourceRecordSetIdentifier",
       #         weight: 1,
-      #         region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #         region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #         geo_location: {
       #           continent_code: "GeoLocationContinentCode",
       #           country_code: "GeoLocationCountryCode",
@@ -3739,6 +3710,8 @@ module Aws
         #   The cache time to live for the current resource record set. Note the
         #   following:
         #
+        #   * If you\'re creating a non-alias resource record set, `TTL` is
+        #     required.
         #   * If you\'re creating an alias resource record set, omit `TTL`.
         #     Amazon Route 53 uses the value of `TTL` for the alias target.
         #   * If you\'re associating this resource record set with a health
@@ -4242,7 +4215,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #         vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #         vpc_id: "VPCId",
       #       }
       class VPC < Aws::Structure.new(

@@ -42,19 +42,27 @@ module Aws
       # following:
       #
       # * `TopicArn` -- the topic\'s ARN
+      #
       # * `Owner` -- the AWS account ID of the topic\'s owner
+      #
       # * `Policy` -- the JSON serialization of the topic\'s access control
       #   policy
+      #
       # * `DisplayName` -- the human-readable name used in the \"From\" field
       #   for notifications to email and email-json endpoints
+      #
       # * `SubscriptionsPending` -- the number of subscriptions pending
       #   confirmation on this topic
+      #
       # * `SubscriptionsConfirmed` -- the number of confirmed subscriptions on
       #   this topic
+      #
       # * `SubscriptionsDeleted` -- the number of deleted subscriptions on
       #   this topic
+      #
       # * `DeliveryPolicy` -- the JSON serialization of the topic\'s delivery
       #   policy
+      #
       # * `EffectiveDeliveryPolicy` -- the JSON serialization of the effective
       #   delivery policy that takes into account system defaults
       # @return [Hash<String,String>]
@@ -147,6 +155,15 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :target_arn
       #   Either TopicArn or EndpointArn, but not both.
+      #
+      #   If you don\'t specify a value for the `TargetArn` parameter, you must
+      #   specify a value for the `PhoneNumber` or `TopicArn` parameters.
+      # @option options [String] :phone_number
+      #   The phone number to which you want to deliver an SMS message. Use
+      #   E.164 format.
+      #
+      #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+      #   must specify a value for the `TargetArn` or `TopicArn` parameters.
       # @option options [required, String] :message
       #   The message you want to send to the topic.
       #
@@ -161,21 +178,30 @@ module Aws
       #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB in
       #   size (262144 bytes, not 262144 characters).
       #
-      #   JSON-specific constraints: * Keys in the JSON object that correspond
-      #   to supported transport
+      #   JSON-specific constraints:
+      #
+      #   * Keys in the JSON object that correspond to supported transport
       #     protocols must have simple JSON string values.
+      #
       #   * The values will be parsed (unescaped) before they are used in
       #     outgoing messages.
+      #
       #   * Outbound notifications are JSON encoded (meaning that the characters
       #     will be reescaped for sending).
+      #
       #   * Values have a minimum length of 0 (the empty string, \"\", is
       #     allowed).
+      #
       #   * Values have a maximum length bounded by the overall message size
       #     (so, including multiple protocols may limit message sizes).
+      #
       #   * Non-string values will cause the key to be ignored.
+      #
       #   * Keys that do not correspond to supported transport protocols are
       #     ignored.
+      #
       #   * Duplicate keys are not allowed.
+      #
       #   * Failure to parse or validate any key or value in the message will
       #     cause the `Publish` call to return an error (no partial delivery).
       # @option options [String] :subject
@@ -194,6 +220,7 @@ module Aws
       #   the value of the `Message` parameter must:
       #
       #   * be a syntactically valid JSON object; and
+      #
       #   * contain at least a top-level JSON key of \"default\" with a value
       #     that is a string.
       #
@@ -249,29 +276,47 @@ module Aws
       #   The protocol you want to use. Supported protocols include:
       #
       #   * `http` -- delivery of JSON-encoded message via HTTP POST
+      #
       #   * `https` -- delivery of JSON-encoded message via HTTPS POST
+      #
       #   * `email` -- delivery of message via SMTP
+      #
       #   * `email-json` -- delivery of JSON-encoded message via SMTP
+      #
       #   * `sms` -- delivery of message via SMS
+      #
       #   * `sqs` -- delivery of JSON-encoded message to an Amazon SQS queue
+      #
       #   * `application` -- delivery of JSON-encoded message to an EndpointArn
       #     for a mobile app and device.
+      #
+      #   * `lambda` -- delivery of JSON-encoded message to an AWS Lambda
+      #     function.
       # @option options [String] :endpoint
       #   The endpoint that you want to receive notifications. Endpoints vary by
       #   protocol:
       #
       #   * For the `http` protocol, the endpoint is an URL beginning with
       #     \"http://\"
+      #
       #   * For the `https` protocol, the endpoint is a URL beginning with
       #     \"https://\"
+      #
       #   * For the `email` protocol, the endpoint is an email address
+      #
       #   * For the `email-json` protocol, the endpoint is an email address
+      #
       #   * For the `sms` protocol, the endpoint is a phone number of an
       #     SMS-enabled device
+      #
       #   * For the `sqs` protocol, the endpoint is the ARN of an Amazon SQS
       #     queue
+      #
       #   * For the `application` protocol, the endpoint is the EndpointArn of a
       #     mobile app and device.
+      #
+      #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
+      #     function.
       # @return [Subscription]
       def subscribe(options = {})
         options = options.merge(topic_arn: @arn)

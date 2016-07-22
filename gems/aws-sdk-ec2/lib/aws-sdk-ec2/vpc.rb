@@ -256,7 +256,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=<!\[CDATA\[&amp;\]\]>;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
       # @option options [required, String] :description
       #   A description for the security group. This is informational only.
       #
@@ -265,7 +265,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=<!\[CDATA\[&amp;\]\]>;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
       # @return [SecurityGroup]
       def create_security_group(options = {})
         options = options.merge(vpc_id: @id)

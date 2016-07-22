@@ -102,12 +102,12 @@ module Aws
       #
       #   Default: Amazon EC2 uses the default security group.
       # @option options [String] :user_data
-      #   Data to configure the instance, or a script to run during instance
-      #   launch. For more information, see [Running Commands on Your Linux
-      #   Instance at Launch][1] (Linux) and [Adding User Data][2] (Windows).
-      #   For API calls, the text must be base64-encoded. For command line
-      #   tools, the encoding is performed for you, and you can load the text
-      #   from a file.
+      #   The user data to make available to the instance. For more information,
+      #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
+      #   [Adding User Data][2] (Windows). If you are using an AWS SDK or
+      #   command line tool, Base64-encoding is performed for you, and you can
+      #   load the text from a file. Otherwise, you must provide Base64-encoded
+      #   text.
       #
       #
       #
@@ -372,7 +372,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=<!\[CDATA\[&amp;\]\]>;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
       # @option options [required, String] :description
       #   A description for the security group. This is informational only.
       #
@@ -381,7 +381,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=<!\[CDATA\[&amp;\]\]>;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
       # @option options [String] :vpc_id
       #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
       # @return [SecurityGroup]
@@ -651,10 +651,17 @@ module Aws
       #
       #   Default: `paravirtual`
       # @option options [String] :sriov_net_support
-      #   Set to `simple` to enable enhanced networking for the AMI and any
-      #   instances that you launch from the AMI.
+      #   Set to `simple` to enable enhanced networking with the Intel 82599
+      #   Virtual Function interface for the AMI and any instances that you
+      #   launch from the AMI.
       #
-      #   There is no way to disable enhanced networking at this time.
+      #   There is no way to disable `sriovNetSupport` at this time.
+      #
+      #   This option is supported only for HVM AMIs. Specifying this option
+      #   with a PV AMI can make instances launched from the AMI unreachable.
+      # @option options [Boolean] :ena_support
+      #   Set to `true` to enable enhanced networking with ENA for the AMI and
+      #   any instances that you launch from the AMI.
       #
       #   This option is supported only for HVM AMIs. Specifying this option
       #   with a PV AMI can make instances launched from the AMI unreachable.
@@ -2080,7 +2087,7 @@ module Aws
       #   * `expiration-time` - The expiration date and time for the VPC peering
       #     connection.
       #
-      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester's
+      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester\'s
       #     VPC.
       #
       #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of

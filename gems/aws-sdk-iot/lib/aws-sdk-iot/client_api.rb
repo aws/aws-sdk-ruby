@@ -94,6 +94,7 @@ module Aws
       DisableTopicRuleRequest = Shapes::StructureShape.new(name: 'DisableTopicRuleRequest')
       DynamoDBAction = Shapes::StructureShape.new(name: 'DynamoDBAction')
       DynamoKeyType = Shapes::StringShape.new(name: 'DynamoKeyType')
+      DynamoOperation = Shapes::StringShape.new(name: 'DynamoOperation')
       ElasticsearchAction = Shapes::StructureShape.new(name: 'ElasticsearchAction')
       ElasticsearchEndpoint = Shapes::StringShape.new(name: 'ElasticsearchEndpoint')
       ElasticsearchId = Shapes::StringShape.new(name: 'ElasticsearchId')
@@ -440,6 +441,7 @@ module Aws
 
       DynamoDBAction.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "tableName"))
       DynamoDBAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
+      DynamoDBAction.add_member(:operation, Shapes::ShapeRef.new(shape: DynamoOperation, location_name: "operation"))
       DynamoDBAction.add_member(:hash_key_field, Shapes::ShapeRef.new(shape: HashKeyField, required: true, location_name: "hashKeyField"))
       DynamoDBAction.add_member(:hash_key_value, Shapes::ShapeRef.new(shape: HashKeyValue, required: true, location_name: "hashKeyValue"))
       DynamoDBAction.add_member(:hash_key_type, Shapes::ShapeRef.new(shape: DynamoKeyType, location_name: "hashKeyType"))

@@ -66,7 +66,7 @@ module Aws
       #   resp = client.associate_vpc_with_hosted_zone({
       #     hosted_zone_id: "ResourceId", # required
       #     vpc: { # required
-      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #       vpc_id: "VPCId",
       #     },
       #     comment: "AssociateVPCComment",
@@ -137,7 +137,7 @@ module Aws
       #             type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, PTR, SRV, SPF, AAAA
       #             set_identifier: "ResourceRecordSetIdentifier",
       #             weight: 1,
-      #             region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #             region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #             geo_location: {
       #               continent_code: "GeoLocationContinentCode",
       #               country_code: "GeoLocationCountryCode",
@@ -375,7 +375,7 @@ module Aws
       #   resp = client.create_hosted_zone({
       #     name: "DNSName", # required
       #     vpc: {
-      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #       vpc_id: "VPCId",
       #     },
       #     caller_reference: "Nonce", # required
@@ -401,7 +401,7 @@ module Aws
       #   resp.delegation_set.caller_reference #=> String
       #   resp.delegation_set.name_servers #=> Array
       #   resp.delegation_set.name_servers[0] #=> String
-      #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
       #   resp.vpc.vpc_id #=> String
       #   resp.location #=> String
       # @param [Hash] params ({})
@@ -472,7 +472,13 @@ module Aws
       # @option params [required, String] :name
       #   The name of the traffic policy.
       # @option params [required, String] :document
-      #   The definition of this traffic policy in JSON format.
+      #   The definition of this traffic policy in JSON format. For more
+      #   information, see [Traffic Policy Document Format][1] in the *Amazon
+      #   Route 53 API Reference*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
       # @option params [String] :comment
       #   Any comments that you want to include about the traffic policy.
       # @return [Types::CreateTrafficPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -586,7 +592,12 @@ module Aws
       #   The definition of a new traffic policy version, in JSON format. You
       #   must specify the full definition of the new traffic policy. You cannot
       #   specify just the differences between the new version and a previous
-      #   version.
+      #   version. For more information, see [Traffic Policy Document Format][1]
+      #   in the *Amazon Route 53 API Reference*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
       # @option params [String] :comment
       #   Any comments that you want to include about the new traffic policy
       #   version.
@@ -621,7 +632,7 @@ module Aws
       # `DELETE` request to the `/Route 53 API version/healthcheck/health
       # check ID` resource.
       #
-      # <important> You can delete a health check only if there are no resource record sets associated with this health check. If resource record sets are associated with this health check, you must disassociate them before you can delete your health check. If you try to delete a health check that is associated with resource record sets, Amazon Route 53 will deny your request with a `HealthCheckInUse` error. For information about disassociating the records from your health check, see ChangeResourceRecordSets.</important>
+      # <important> You can delete a health check only if there are no resource record sets associated with this health check. If resource record sets are associated with this health check, you must disassociate them before you can delete your health check. If you try to delete a health check that is associated with resource record sets, Amazon Route 53 will deny your request with a `HealthCheckInUse` error. For information about disassociating the records from your health check, see `ChangeResourceRecordSets`.</important>
       # @option params [required, String] :health_check_id
       #   The ID of the health check to delete.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -641,14 +652,7 @@ module Aws
       # `DELETE` request to the `/Route 53 API version/hostedzone/hosted zone
       # ID` resource.
       #
-      # For more information about deleting a hosted zone, see [Deleting a
-      # Hosted Zone][1] in the *Amazon Route 53 Developer Guide*.
-      #
-      # <important> You can delete a hosted zone only if there are no resource record sets other than the default SOA record and NS resource record sets. If your hosted zone contains other resource record sets, you must delete them before you can delete your hosted zone. If you try to delete a hosted zone that contains other resource record sets, Amazon Route 53 will deny your request with a `HostedZoneNotEmpty` error. For information about deleting records from your hosted zone, see ChangeResourceRecordSets.</important>
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html
+      # <important>You can delete a hosted zone only if there are no resource record sets other than the default SOA record and NS resource record sets. If your hosted zone contains other resource record sets, you must delete them before you can delete your hosted zone. If you try to delete a hosted zone that contains other resource record sets, Amazon Route 53 will deny your request with a `HostedZoneNotEmpty` error. For information about deleting records from your hosted zone, see `ChangeResourceRecordSets`.</important>
       # @option params [required, String] :id
       #   The ID of the hosted zone you want to delete.
       # @return [Types::DeleteHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -764,7 +768,7 @@ module Aws
       #   resp = client.disassociate_vpc_from_hosted_zone({
       #     hosted_zone_id: "ResourceId", # required
       #     vpc: { # required
-      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #       vpc_id: "VPCId",
       #     },
       #     comment: "DisassociateVPCComment",
@@ -842,7 +846,7 @@ module Aws
       #   resp.change_batch_record.changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "PTR", "SRV", "SPF", "AAAA"
       #   resp.change_batch_record.changes[0].resource_record_set.set_identifier #=> String
       #   resp.change_batch_record.changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_record.changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.change_batch_record.changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.change_batch_record.changes[0].resource_record_set.geo_location.continent_code #=> String
       #   resp.change_batch_record.changes[0].resource_record_set.geo_location.country_code #=> String
       #   resp.change_batch_record.changes[0].resource_record_set.geo_location.subdivision_code #=> String
@@ -894,7 +898,7 @@ module Aws
       #   Valid values: `AF` \| `AN` \| `AS` \| `EU` \| `OC` \| `NA` \| `SA`
       #
       #   Constraint: Specifying `ContinentCode` with either `CountryCode` or
-      #   `SubdivisionCode` returns an InvalidInput error.
+      #   `SubdivisionCode` returns an `InvalidInput` error.
       # @option params [String] :country_code
       #   The code for a country geo location. The default location uses \'\*\'
       #   for the country code and will match all locations that are not matched
@@ -907,7 +911,7 @@ module Aws
       #   subdivision code is only valid with the appropriate country code.
       #
       #   Constraint: Specifying `SubdivisionCode` without `CountryCode` returns
-      #   an InvalidInput error.
+      #   an `InvalidInput` error.
       # @return [Types::GetGeoLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetGeoLocationResponse#geo_location_details #GeoLocationDetails} => Types::GeoLocationDetails
@@ -1067,7 +1071,7 @@ module Aws
       #     or failover alias resource record set, and you specify health check
       #     IDs for all of the resource record sets that are referenced by the
       #     alias resource record sets. For more information about this
-      #     configuration, see EvaluateTargetHealth.
+      #     configuration, see `EvaluateTargetHealth`.
       #
       #     Amazon Route 53 doesn\'t check the health of the endpoint specified
       #     in the resource record set, for example, the endpoint specified by
@@ -1148,7 +1152,7 @@ module Aws
       #   resp.delegation_set.name_servers #=> Array
       #   resp.delegation_set.name_servers[0] #=> String
       #   resp.vp_cs #=> Array
-      #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
       #   resp.vp_cs[0].vpc_id #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1238,7 +1242,7 @@ module Aws
       # To get information about the traffic policy instance, send a `GET`
       # request to the `/Route 53 API version/trafficpolicyinstance` resource.
       #
-      # <note>After you submit a `CreateTrafficPolicyInstance` or an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the State response element. </note>
+      # <note>After you submit a `CreateTrafficPolicyInstance` or an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the `State` response element.</note>
       # @option params [required, String] :id
       #   The ID of the traffic policy instance that you want to get information
       #   about.
@@ -1334,7 +1338,7 @@ module Aws
       #   resp.change_batch_records[0].changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "PTR", "SRV", "SPF", "AAAA"
       #   resp.change_batch_records[0].changes[0].resource_record_set.set_identifier #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.continent_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.country_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.subdivision_code #=> String
@@ -1409,7 +1413,7 @@ module Aws
       #   resp.change_batch_records[0].changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "PTR", "SRV", "SPF", "AAAA"
       #   resp.change_batch_records[0].changes[0].resource_record_set.set_identifier #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.continent_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.country_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.subdivision_code #=> String
@@ -1453,7 +1457,7 @@ module Aws
       #   Valid values: `AF` \| `AN` \| `AS` \| `EU` \| `OC` \| `NA` \| `SA`
       #
       #   Constraint: Specifying `ContinentCode` with either `CountryCode` or
-      #   `SubdivisionCode` returns an InvalidInput error.
+      #   `SubdivisionCode` returns an `InvalidInput` error.
       # @option params [String] :start_country_code
       #   The first country code in the lexicographic ordering of geo locations
       #   that you want the `ListGeoLocations` request to list.
@@ -1465,7 +1469,7 @@ module Aws
       #   locations that you want the `ListGeoLocations` request to list.
       #
       #   Constraint: Specifying `SubdivisionCode` without `CountryCode` returns
-      #   an InvalidInput error.
+      #   an `InvalidInput` error.
       # @option params [Integer] :max_items
       #   The maximum number of geo locations you want in the response body.
       # @return [Types::ListGeoLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1698,50 +1702,45 @@ module Aws
         req.send_request(options)
       end
 
-      # Imagine all the resource record sets in a zone listed out in front of
-      # you. Imagine them sorted lexicographically first by DNS name (with the
-      # labels reversed, like \"com.amazon.www\" for example), and
-      # secondarily, lexicographically by record type. This operation
-      # retrieves at most MaxItems resource record sets from this list, in
-      # order, starting at a position specified by the Name and Type
-      # arguments:
+      # List the resource record sets in a specified hosted zone. Send a GET
+      # request to the `2013-04-01/hostedzone/hosted zone ID/rrset` resource.
       #
-      # * If both Name and Type are omitted, this means start the results at
-      #   the first RRSET in the HostedZone.
-      # * If Name is specified but Type is omitted, this means start the
-      #   results at the first RRSET in the list whose name is greater than or
-      #   equal to Name.
-      # * If both Name and Type are specified, this means start the results at
-      #   the first RRSET in the list whose name is greater than or equal to
-      #   Name and whose type is greater than or equal to Type.
-      # * It is an error to specify the Type but not the Name.
+      # `ListResourceRecordSets` returns up to 100 resource record sets at a
+      # time in ASCII order, beginning at a position specified by the name and
+      # type elements. The action sorts results first by DNS name with the
+      # labels reversed, for example:
       #
-      # Use ListResourceRecordSets to retrieve a single known record set by
-      # specifying the record set\'s name and type, and setting MaxItems = 1
+      # `com.example.www.`
       #
-      # To retrieve all the records in a HostedZone, first pause any processes
-      # making calls to ChangeResourceRecordSets. Initially call
-      # ListResourceRecordSets without a Name and Type to get the first page
-      # of record sets. For subsequent calls, set Name and Type to the
-      # NextName and NextType values returned by the previous response.
+      # Note the trailing dot, which can change the sort order in some
+      # circumstances. When multiple records have the same DNS name, the
+      # action sorts results by the record type.
       #
-      # In the presence of concurrent ChangeResourceRecordSets calls, there is
-      # no consistency of results across calls to ListResourceRecordSets. The
-      # only way to get a consistent multi-page snapshot of all RRSETs in a
-      # zone is to stop making changes while pagination is in progress.
+      # You can use the name and type elements to adjust the beginning
+      # position of the list of resource record sets returned:
       #
-      # However, the results from ListResourceRecordSets are consistent within
-      # a page. If MakeChange calls are taking place concurrently, the result
-      # of each one will either be completely visible in your results or not
-      # at all. You will not see partial changes, or changes that do not
-      # ultimately succeed. (This follows from the fact that MakeChange is
-      # atomic)
+      # * **If you do not specify `Name` or `Type`**\: The results begin with
+      #   the first resource record set that the hosted zone contains.
+      # * **If you specify `Name` but not `Type`**\: The results begin with
+      #   the first resource record set in the list whose name is greater than
+      #   or equal to Name.
+      # * **If you specify `Type` but not `Name`**\: Amazon Route 53 returns
+      #   the `InvalidInput` error.
+      # * **If you specify both `Name` and `Type`**\: The results begin with
+      #   the first resource record set in the list whose name is greater than
+      #   or equal to `Name`, and whose type is greater than or equal to
+      #   `Type`.
       #
-      # The results from ListResourceRecordSets are strongly consistent with
-      # ChangeResourceRecordSets. To be precise, if a single process makes a
-      # call to ChangeResourceRecordSets and receives a successful response,
-      # the effects of that change will be visible in a subsequent call to
-      # ListResourceRecordSets by that process.
+      # This action returns the most current version of the records. This
+      # includes records that are `PENDING`, and that are not yet available on
+      # all Amazon Route 53 DNS servers.
+      #
+      # To ensure that you get an accurate listing of the resource record sets
+      # for a hosted zone at a point in time, do not submit a
+      # `ChangeResourceRecordSets` request while you are paging through the
+      # results of a `ListResourceRecordSets` request. If you do, some pages
+      # may display results without the latest changes while other pages
+      # display results with the latest changes.
       # @option params [required, String] :hosted_zone_id
       #   The ID of the hosted zone that contains the resource record sets that
       #   you want to get.
@@ -1763,13 +1762,12 @@ module Aws
       #   Values for Alias Resource Record Sets: `A` \| `AAAA`
       #
       #   Constraint: Specifying `type` without specifying `name` returns an
-      #   InvalidInput error.
+      #   `InvalidInput` error.
       # @option params [String] :start_record_identifier
       #   *Weighted resource record sets only:* If results were truncated for a
-      #   given DNS name and type, specify the value of
-      #   `ListResourceRecordSetsResponse$NextRecordIdentifier` from the
-      #   previous response to get the next resource record set that has the
-      #   current DNS name and type.
+      #   given DNS name and type, specify the value of `NextRecordIdentifier`
+      #   from the previous response to get the next resource record set that
+      #   has the current DNS name and type.
       # @option params [Integer] :max_items
       #   The maximum number of records you want in the response body.
       # @return [Types::ListResourceRecordSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1796,7 +1794,7 @@ module Aws
       #   resp.resource_record_sets[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "PTR", "SRV", "SPF", "AAAA"
       #   resp.resource_record_sets[0].set_identifier #=> String
       #   resp.resource_record_sets[0].weight #=> Integer
-      #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.resource_record_sets[0].geo_location.continent_code #=> String
       #   resp.resource_record_sets[0].geo_location.country_code #=> String
       #   resp.resource_record_sets[0].geo_location.subdivision_code #=> String
@@ -2019,7 +2017,7 @@ module Aws
       # Gets information about the traffic policy instances that you created
       # by using the current AWS account.
       #
-      # <note>After you submit an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the State response element.</note>
+      # <note>After you submit an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the `State` response element.</note>
       #
       # To get information about the traffic policy instances that are
       # associated with the current AWS account, send a `GET` request to the
@@ -2141,7 +2139,7 @@ module Aws
       # Gets information about the traffic policy instances that you created
       # in a specified hosted zone.
       #
-      # <note>After you submit an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the State response element.</note>
+      # <note>After you submit an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the `State` response element.</note>
       #
       # To get information about the traffic policy instances that you created
       # in a specified hosted zone, send a `GET` request to the `/Route 53 API
@@ -2249,7 +2247,7 @@ module Aws
       # Gets information about the traffic policy instances that you created
       # by using a specify traffic policy version.
       #
-      # <note>After you submit a `CreateTrafficPolicyInstance` or an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the State response element.</note>
+      # <note>After you submit a `CreateTrafficPolicyInstance` or an `UpdateTrafficPolicyInstance` request, there's a brief delay while Amazon Route 53 creates the resource record sets that are specified in the traffic policy definition. For more information, see the `State` response element.</note>
       #
       # To get information about the traffic policy instances that you created
       # by using a specify traffic policy version, send a `GET` request to the

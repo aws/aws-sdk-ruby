@@ -40,8 +40,6 @@ module Aws
 
       # Returns information about a specified job and whether that job has
       # been received by the job worker. Only used for custom actions.
-      #
-      # <examples />
       # @option params [required, String] :job_id
       #   The unique system-generated ID of the job for which you want to
       #   confirm receipt.
@@ -102,13 +100,14 @@ module Aws
 
       # Creates a new custom action that can be used in all pipelines
       # associated with the AWS account. Only used for custom actions.
-      #
-      # <examples />
       # @option params [required, String] :category
       #   The category of the custom action, such as a source action or a build
       #   action.
       #
-      #   <note>Although Source is listed as a valid value, it is not currently functional. This value is reserved for future use.</note>
+      #   <note markdown="1"> Although Source is listed as a valid value, it is not currently
+      #   functional. This value is reserved for future use.
+      #
+      #    </note>
       # @option params [required, String] :provider
       #   The provider of the service used in the custom action, such as AWS
       #   CodeDeploy.
@@ -119,7 +118,13 @@ module Aws
       # @option params [Array<Types::ActionConfigurationProperty>] :configuration_properties
       #   The configuration properties for the custom action.
       #
-      #   <note>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of \{Config:*name*\}, as long as the configuration property is both required and not secret. For more information, see [Create a Custom Action for a Pipeline][1].</note>
+      #   <note markdown="1"> You can refer to a name in the configuration properties of the custom
+      #   action within the URL templates by following the format of
+      #   \\\{Config:name\\}, as long as the configuration property is both
+      #   required and not secret. For more information, see [Create a Custom
+      #   Action for a Pipeline][1].
+      #
+      #    </note>
       #
       #
       #
@@ -134,7 +139,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_custom_action_type({
-      #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #     provider: "ActionProvider", # required
       #     version: "Version", # required
       #     settings: {
@@ -165,7 +170,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.action_type.id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.action_type.id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.action_type.id.provider #=> String
       #   resp.action_type.id.version #=> String
@@ -193,8 +198,6 @@ module Aws
       end
 
       # Creates a pipeline.
-      #
-      # <examples />
       # @option params [required, Types::PipelineDeclaration] :pipeline
       #   Represents the structure of actions and stages to be performed in the
       #   pipeline.
@@ -228,7 +231,7 @@ module Aws
       #             {
       #               name: "ActionName", # required
       #               action_type_id: { # required
-      #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #                 owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #                 provider: "ActionProvider", # required
       #                 version: "Version", # required
@@ -270,7 +273,7 @@ module Aws
       #   resp.pipeline.stages[0].blockers[0].type #=> String, one of "Schedule"
       #   resp.pipeline.stages[0].actions #=> Array
       #   resp.pipeline.stages[0].actions[0].name #=> String
-      #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.pipeline.stages[0].actions[0].action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.pipeline.stages[0].actions[0].action_type_id.provider #=> String
       #   resp.pipeline.stages[0].actions[0].action_type_id.version #=> String
@@ -294,12 +297,10 @@ module Aws
       # will fail after the action is marked for deletion. Only used for
       # custom actions.
       #
-      # <important markdown="1">You cannot recreate a custom action after it has been deleted unless
+      # <important markdown="1"> You cannot recreate a custom action after it has been deleted unless
       # you increase the version number of the action.
       #
-      # </important>
-      #
-      # <examples />
+      #  </important>
       # @option params [required, String] :category
       #   The category of the custom action that you want to delete, such as
       #   source or deploy.
@@ -312,7 +313,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_custom_action_type({
-      #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #     provider: "ActionProvider", # required
       #     version: "Version", # required
       #   })
@@ -324,8 +325,6 @@ module Aws
       end
 
       # Deletes the specified pipeline.
-      #
-      # <examples />
       # @option params [required, String] :name
       #   The name of the pipeline to be deleted.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -343,8 +342,6 @@ module Aws
 
       # Prevents artifacts in a pipeline from transitioning to the next stage
       # in the pipeline.
-      #
-      # <examples />
       # @option params [required, String] :pipeline_name
       #   The name of the pipeline in which you want to disable the flow of
       #   artifacts from one stage to another.
@@ -378,8 +375,6 @@ module Aws
 
       # Enables artifacts in a pipeline to transition to a stage in a
       # pipeline.
-      #
-      # <examples />
       # @option params [required, String] :pipeline_name
       #   The name of the pipeline in which you want to enable the flow of
       #   artifacts from one stage to another.
@@ -409,15 +404,13 @@ module Aws
 
       # Returns information about a job. Only used for custom actions.
       #
-      # <important markdown="1">When this API is called, AWS CodePipeline returns temporary
+      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts. Additionally, this API returns any secret
       # values defined for the action.
       #
-      # </important>
-      #
-      # <examples />
+      #  </important>
       # @option params [required, String] :job_id
       #   The unique system-generated ID for the job.
       # @return [Types::GetJobDetailsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -431,7 +424,7 @@ module Aws
       #
       # @example Response structure
       #   resp.job_details.id #=> String
-      #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.job_details.data.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.job_details.data.action_type_id.provider #=> String
       #   resp.job_details.data.action_type_id.version #=> String
@@ -470,8 +463,6 @@ module Aws
       # Can be used to return the entire structure of a pipeline in JSON
       # format, which can then be modified and used to update the pipeline
       # structure with UpdatePipeline.
-      #
-      # <examples />
       # @option params [required, String] :name
       #   The name of the pipeline for which you want to get information.
       #   Pipeline names must be unique under an Amazon Web Services (AWS) user
@@ -503,7 +494,7 @@ module Aws
       #   resp.pipeline.stages[0].blockers[0].type #=> String, one of "Schedule"
       #   resp.pipeline.stages[0].actions #=> Array
       #   resp.pipeline.stages[0].actions[0].name #=> String
-      #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.pipeline.stages[0].actions[0].action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.pipeline.stages[0].actions[0].action_type_id.provider #=> String
       #   resp.pipeline.stages[0].actions[0].action_type_id.version #=> String
@@ -524,9 +515,7 @@ module Aws
       end
 
       # Returns information about the state of a pipeline, including the
-      # stages, actions, and details about the last run of the pipeline.
-      #
-      # <examples />
+      # stages and actions.
       # @option params [required, String] :name
       #   The name of the pipeline about which you want to get information.
       # @return [Types::GetPipelineStateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -559,6 +548,8 @@ module Aws
       #   resp.stage_states[0].action_states[0].latest_execution.status #=> String, one of "InProgress", "Succeeded", "Failed"
       #   resp.stage_states[0].action_states[0].latest_execution.summary #=> String
       #   resp.stage_states[0].action_states[0].latest_execution.last_status_change #=> Time
+      #   resp.stage_states[0].action_states[0].latest_execution.token #=> String
+      #   resp.stage_states[0].action_states[0].latest_execution.last_updated_by #=> String
       #   resp.stage_states[0].action_states[0].latest_execution.external_execution_id #=> String
       #   resp.stage_states[0].action_states[0].latest_execution.external_execution_url #=> String
       #   resp.stage_states[0].action_states[0].latest_execution.percent_complete #=> Integer
@@ -566,6 +557,8 @@ module Aws
       #   resp.stage_states[0].action_states[0].latest_execution.error_details.message #=> String
       #   resp.stage_states[0].action_states[0].entity_url #=> String
       #   resp.stage_states[0].action_states[0].revision_url #=> String
+      #   resp.stage_states[0].latest_execution.pipeline_execution_id #=> String
+      #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Succeeded"
       #   resp.created #=> Time
       #   resp.updated #=> Time
       # @param [Hash] params ({})
@@ -578,13 +571,13 @@ module Aws
       # Requests the details of a job for a third party action. Only used for
       # partner actions.
       #
-      # <important markdown="1">When this API is called, AWS CodePipeline returns temporary
+      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts. Additionally, this API returns any secret
       # values defined for the action.
       #
-      # </important>
+      #  </important>
       # @option params [required, String] :job_id
       #   The unique system-generated ID used for identifying the job.
       # @option params [required, String] :client_token
@@ -603,7 +596,7 @@ module Aws
       #
       # @example Response structure
       #   resp.job_details.id #=> String
-      #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.job_details.data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.job_details.data.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.job_details.data.action_type_id.provider #=> String
       #   resp.job_details.data.action_type_id.version #=> String
@@ -660,7 +653,7 @@ module Aws
       #
       # @example Response structure
       #   resp.action_types #=> Array
-      #   resp.action_types[0].id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.action_types[0].id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.action_types[0].id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.action_types[0].id.provider #=> String
       #   resp.action_types[0].id.version #=> String
@@ -689,8 +682,6 @@ module Aws
       end
 
       # Gets a summary of all of the pipelines associated with your account.
-      #
-      # <examples />
       # @option params [String] :next_token
       #   An identifier that was returned from the previous list pipelines call,
       #   which can be used to return the next set of pipelines in the list.
@@ -720,15 +711,13 @@ module Aws
 
       # Returns information about any jobs for AWS CodePipeline to act upon.
       #
-      # <important markdown="1">When this API is called, AWS CodePipeline returns temporary
+      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts. Additionally, this API returns any secret
       # values defined for the action.
       #
-      # </important>
-      #
-      # <examples />
+      #  </important>
       # @option params [required, Types::ActionTypeId] :action_type_id
       #   Represents information about an action type.
       # @option params [Integer] :max_batch_size
@@ -746,7 +735,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.poll_for_jobs({
       #     action_type_id: { # required
-      #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #       owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #       provider: "ActionProvider", # required
       #       version: "Version", # required
@@ -760,7 +749,7 @@ module Aws
       # @example Response structure
       #   resp.jobs #=> Array
       #   resp.jobs[0].id #=> String
-      #   resp.jobs[0].data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.jobs[0].data.action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.jobs[0].data.action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.jobs[0].data.action_type_id.provider #=> String
       #   resp.jobs[0].data.action_type_id.version #=> String
@@ -799,12 +788,12 @@ module Aws
       # Determines whether there are any third party jobs for a job worker to
       # act on. Only used for partner actions.
       #
-      # <important markdown="1">When this API is called, AWS CodePipeline returns temporary
+      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts.
       #
-      # </important>
+      #  </important>
       # @option params [required, Types::ActionTypeId] :action_type_id
       #   Represents information about an action type.
       # @option params [Integer] :max_batch_size
@@ -816,7 +805,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.poll_for_third_party_jobs({
       #     action_type_id: { # required
-      #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #       category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #       owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #       provider: "ActionProvider", # required
       #       version: "Version", # required
@@ -871,6 +860,46 @@ module Aws
       # @param [Hash] options ({})
       def put_action_revision(params = {}, options = {})
         req = build_request(:put_action_revision, params)
+        req.send_request(options)
+      end
+
+      # Provides the response to a manual approval request to AWS
+      # CodePipeline. Valid responses include Approved and Rejected.
+      # @option params [required, String] :pipeline_name
+      #   The name of the pipeline that contains the action.
+      # @option params [required, String] :stage_name
+      #   The name of the stage that contains the action.
+      # @option params [required, String] :action_name
+      #   The name of the action for which approval is requested.
+      # @option params [required, Types::ApprovalResult] :result
+      #   Represents information about the result of the approval request.
+      # @option params [String] :token
+      #   The system-generated token used to identify a unique approval request.
+      #   The token for each open approval request can be obtained using the
+      #   GetPipelineState action and is used to validate that the approval
+      #   request corresponding to this token is still valid.
+      # @return [Types::PutApprovalResultOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::PutApprovalResultOutput#approved_at #approvedAt} => Time
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_approval_result({
+      #     pipeline_name: "PipelineName", # required
+      #     stage_name: "StageName", # required
+      #     action_name: "ActionName", # required
+      #     result: { # required
+      #       summary: "ApprovalSummary", # required
+      #       status: "Approved", # required, accepts Approved, Rejected
+      #     },
+      #     token: "ApprovalToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.approved_at #=> Time
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def put_approval_result(params = {}, options = {})
+        req = build_request(:put_approval_result, params)
         req.send_request(options)
       end
 
@@ -1016,11 +1045,43 @@ module Aws
         req.send_request(options)
       end
 
+      # Resumes the pipeline execution by retrying the last failed actions in
+      # a stage.
+      # @option params [required, String] :pipeline_name
+      #   The name of the pipeline that contains the failed stage.
+      # @option params [required, String] :stage_name
+      #   The name of the failed stage to be retried.
+      # @option params [required, String] :pipeline_execution_id
+      #   The ID of the pipeline execution in the failed stage to be retried.
+      #   Use the GetPipelineState action to retrieve the current
+      #   pipelineExecutionId of the failed stage
+      # @option params [required, String] :retry_mode
+      #   The scope of the retry attempt. Currently, the only supported value is
+      #   FAILED\_ACTIONS.
+      # @return [Types::RetryStageExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::RetryStageExecutionOutput#pipeline_execution_id #pipelineExecutionId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.retry_stage_execution({
+      #     pipeline_name: "PipelineName", # required
+      #     stage_name: "StageName", # required
+      #     pipeline_execution_id: "PipelineExecutionId", # required
+      #     retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS
+      #   })
+      #
+      # @example Response structure
+      #   resp.pipeline_execution_id #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def retry_stage_execution(params = {}, options = {})
+        req = build_request(:retry_stage_execution, params)
+        req.send_request(options)
+      end
+
       # Starts the specified pipeline. Specifically, it begins processing the
       # latest commit to the source location specified as part of the
       # pipeline.
-      #
-      # <examples />
       # @option params [required, String] :name
       #   The name of the pipeline to start.
       # @return [Types::StartPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1045,8 +1106,6 @@ module Aws
       # Use a JSON file with the pipeline structure in conjunction with
       # UpdatePipeline to provide the full structure of the pipeline. Updating
       # the pipeline increases the version number of the pipeline by 1.
-      #
-      # <examples />
       # @option params [required, Types::PipelineDeclaration] :pipeline
       #   The name of the pipeline to be updated.
       # @return [Types::UpdatePipelineOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1079,7 +1138,7 @@ module Aws
       #             {
       #               name: "ActionName", # required
       #               action_type_id: { # required
-      #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #                 category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #                 owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #                 provider: "ActionProvider", # required
       #                 version: "Version", # required
@@ -1121,7 +1180,7 @@ module Aws
       #   resp.pipeline.stages[0].blockers[0].type #=> String, one of "Schedule"
       #   resp.pipeline.stages[0].actions #=> Array
       #   resp.pipeline.stages[0].actions[0].name #=> String
-      #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke"
+      #   resp.pipeline.stages[0].actions[0].action_type_id.category #=> String, one of "Source", "Build", "Deploy", "Test", "Invoke", "Approval"
       #   resp.pipeline.stages[0].actions[0].action_type_id.owner #=> String, one of "AWS", "ThirdParty", "Custom"
       #   resp.pipeline.stages[0].actions[0].action_type_id.provider #=> String
       #   resp.pipeline.stages[0].actions[0].action_type_id.version #=> String

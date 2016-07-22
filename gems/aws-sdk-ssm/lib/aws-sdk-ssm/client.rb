@@ -38,6 +38,58 @@ module Aws
 
       # @!group API Operations
 
+      # Adds or overwrites one or more tags for the specified resource. Tags
+      # are metadata that you assign to your managed instances. Tags enable
+      # you to categorize your managed instances in different ways, for
+      # example, by purpose, owner, or environment. Each tag consists of a key
+      # and an optional value, both of which you define. For example, you
+      # could define a set of tags for your account\'s managed instances that
+      # helps you track each instance\'s owner and stack level. For example:
+      # Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and
+      # Value=Production, Pre-Production, or Test. Each resource can have a
+      # maximum of 10 tags.
+      #
+      # We recommend that you devise a set of tag keys that meets your needs
+      # for each resource type. Using a consistent set of tag keys makes it
+      # easier for you to manage your resources. You can search and filter the
+      # resources based on the tags you add. Tags don\'t have any semantic
+      # meaning to Amazon EC2 and are interpreted strictly as a string of
+      # characters.
+      #
+      # For more information about tags, see [Tagging Your Amazon EC2
+      # Resources][1] in the Amazon EC2 User Guide.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+      # @option params [required, String] :resource_type
+      #   Specifies the type of resource you are tagging.
+      # @option params [required, String] :resource_id
+      #   The resource ID you want to tag.
+      # @option params [required, Array<Types::Tag>] :tags
+      #   One or more tags. The value parameter is required, but if you don\'t
+      #   want the tag to have a value, specify the parameter with no value, and
+      #   we set the value to an empty string.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.add_tags_to_resource({
+      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #     resource_id: "ResourceId", # required
+      #     tags: [ # required
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       },
+      #     ],
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def add_tags_to_resource(params = {}, options = {})
+        req = build_request(:add_tags_to_resource, params)
+        req.send_request(options)
+      end
+
       # Attempts to cancel the command specified by the Command ID. There is
       # no guarantee that the command will be terminated and the underlying
       # process stopped.
@@ -58,6 +110,57 @@ module Aws
       # @param [Hash] options ({})
       def cancel_command(params = {}, options = {})
         req = build_request(:cancel_command, params)
+        req.send_request(options)
+      end
+
+      # Registers your on-premises server or virtual machine with Amazon EC2
+      # so that you can manage these resources using Run Command. An
+      # on-premises server or virtual machine that has been registered with
+      # EC2 is called a managed instance. For more information about
+      # activations, see [Setting Up Managed Instances (Linux)][1] or [Setting
+      # Up Managed Instances (Windows)][2] in the Amazon EC2 User Guide.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/managed-instances.html
+      # [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/managed-instances.html
+      # @option params [String] :description
+      #   A user-defined description of the resource that you want to register
+      #   with Amazon EC2.
+      # @option params [String] :default_instance_name
+      #   The name of the registered, managed instance as it will appear in the
+      #   Amazon EC2 console or when you use the AWS command line tools to list
+      #   EC2 resources.
+      # @option params [required, String] :iam_role
+      #   The Amazon Identity and Access Management (IAM) role that you want to
+      #   assign to the managed instance.
+      # @option params [Integer] :registration_limit
+      #   Specify the maximum number of managed instances you want to register.
+      #   The default value is 1 instance.
+      # @option params [Time,DateTime,Date,Integer,String] :expiration_date
+      #   The date by which this activation request should expire. The default
+      #   value is 24 hours.
+      # @return [Types::CreateActivationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateActivationResult#activation_id #ActivationId} => String
+      #   * {Types::CreateActivationResult#activation_code #ActivationCode} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_activation({
+      #     description: "ActivationDescription",
+      #     default_instance_name: "DefaultInstanceName",
+      #     iam_role: "IamRole", # required
+      #     registration_limit: 1,
+      #     expiration_date: Time.now,
+      #   })
+      #
+      # @example Response structure
+      #   resp.activation_id #=> String
+      #   resp.activation_code #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_activation(params = {}, options = {})
+        req = build_request(:create_activation, params)
         req.send_request(options)
       end
 
@@ -204,6 +307,26 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes an activation. You are not required to delete an activation.
+      # If you delete an activation, you can no longer use it to register
+      # additional managed instances. Deleting an activation does not
+      # de-register managed instances. You must manually de-register managed
+      # instances.
+      # @option params [required, String] :activation_id
+      #   The ID of the activation that you want to delete.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_activation({
+      #     activation_id: "ActivationId", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_activation(params = {}, options = {})
+        req = build_request(:delete_activation, params)
+        req.send_request(options)
+      end
+
       # Disassociates the specified SSM document from the specified instance.
       #
       # When you disassociate an SSM document from an instance, it does not
@@ -247,6 +370,75 @@ module Aws
       # @param [Hash] options ({})
       def delete_document(params = {}, options = {})
         req = build_request(:delete_document, params)
+        req.send_request(options)
+      end
+
+      # Removes the server or virtual machine from the list of registered
+      # servers. You can reregister the instance again at any time. If you
+      # don’t plan to use Run Command on the server, we suggest uninstalling
+      # the SSM agent first.
+      # @option params [required, String] :instance_id
+      #   The ID assigned to the managed instance when you registered it using
+      #   the activation process.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.deregister_managed_instance({
+      #     instance_id: "ManagedInstanceId", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def deregister_managed_instance(params = {}, options = {})
+        req = build_request(:deregister_managed_instance, params)
+        req.send_request(options)
+      end
+
+      # Details about the activation, including: the date and time the
+      # activation was created, the expiration date, the IAM role assigned to
+      # the instances in the activation, and the number of instances activated
+      # by this registration.
+      # @option params [Array<Types::DescribeActivationsFilter>] :filters
+      #   A filter to view information about your activations.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   A token to start the list. Use this token to get the next set of
+      #   results.
+      # @return [Types::DescribeActivationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeActivationsResult#activation_list #ActivationList} => Array&lt;Types::Activation&gt;
+      #   * {Types::DescribeActivationsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_activations({
+      #     filters: [
+      #       {
+      #         filter_key: "ActivationIds", # accepts ActivationIds, DefaultInstanceName, IamRole
+      #         filter_values: ["String"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.activation_list #=> Array
+      #   resp.activation_list[0].activation_id #=> String
+      #   resp.activation_list[0].description #=> String
+      #   resp.activation_list[0].default_instance_name #=> String
+      #   resp.activation_list[0].iam_role #=> String
+      #   resp.activation_list[0].registration_limit #=> Integer
+      #   resp.activation_list[0].registrations_count #=> Integer
+      #   resp.activation_list[0].expiration_date #=> Time
+      #   resp.activation_list[0].expired #=> Boolean
+      #   resp.activation_list[0].created_date #=> Time
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_activations(params = {}, options = {})
+        req = build_request(:describe_activations, params)
         req.send_request(options)
       end
 
@@ -373,7 +565,7 @@ module Aws
       #   resp = client.describe_instance_information({
       #     instance_information_filter_list: [
       #       {
-      #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes
+      #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType
       #         value_set: ["InstanceInformationFilterValue"], # required
       #       },
       #     ],
@@ -391,6 +583,13 @@ module Aws
       #   resp.instance_information_list[0].platform_type #=> String, one of "Windows", "Linux"
       #   resp.instance_information_list[0].platform_name #=> String
       #   resp.instance_information_list[0].platform_version #=> String
+      #   resp.instance_information_list[0].activation_id #=> String
+      #   resp.instance_information_list[0].iam_role #=> String
+      #   resp.instance_information_list[0].registration_date #=> Time
+      #   resp.instance_information_list[0].resource_type #=> String, one of "ManagedInstance", "Document", "EC2Instance"
+      #   resp.instance_information_list[0].name #=> String
+      #   resp.instance_information_list[0].ip_address #=> String
+      #   resp.instance_information_list[0].computer_name #=> String
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -523,6 +722,11 @@ module Aws
       #   resp.command_invocations[0].command_plugins[0].output #=> String
       #   resp.command_invocations[0].command_plugins[0].output_s3_bucket_name #=> String
       #   resp.command_invocations[0].command_plugins[0].output_s3_key_prefix #=> String
+      #   resp.command_invocations[0].service_role #=> String
+      #   resp.command_invocations[0].notification_config.notification_arn #=> String
+      #   resp.command_invocations[0].notification_config.notification_events #=> Array
+      #   resp.command_invocations[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.command_invocations[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -580,6 +784,11 @@ module Aws
       #   resp.commands[0].status #=> String, one of "Pending", "InProgress", "Cancelling", "Success", "TimedOut", "Cancelled", "Failed"
       #   resp.commands[0].output_s3_bucket_name #=> String
       #   resp.commands[0].output_s3_key_prefix #=> String
+      #   resp.commands[0].service_role #=> String
+      #   resp.commands[0].notification_config.notification_arn #=> String
+      #   resp.commands[0].notification_config.notification_events #=> Array
+      #   resp.commands[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.commands[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -630,6 +839,32 @@ module Aws
         req.send_request(options)
       end
 
+      # Returns a list of the tags assigned to the specified resource.
+      # @option params [required, String] :resource_type
+      #   Returns a list of tags for a specific resource type.
+      # @option params [required, String] :resource_id
+      #   The resource ID for which you want to see a list of tags.
+      # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListTagsForResourceResult#tag_list #TagList} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_tags_for_resource({
+      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #     resource_id: "ResourceId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.tag_list #=> Array
+      #   resp.tag_list[0].key #=> String
+      #   resp.tag_list[0].value #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_tags_for_resource(params = {}, options = {})
+        req = build_request(:list_tags_for_resource, params)
+        req.send_request(options)
+      end
+
       # Share a document publicly or privately. If you share a document
       # privately, you must specify the AWS user account IDs for those people
       # who can use the document. If you share a document publicly, you must
@@ -664,9 +899,32 @@ module Aws
         req.send_request(options)
       end
 
+      # Removes all tags from the specified resource.
+      # @option params [required, String] :resource_type
+      #   The type of resource of which you want to remove a tag.
+      # @option params [required, String] :resource_id
+      #   The resource ID for which you want to remove tags.
+      # @option params [required, Array<String>] :tag_keys
+      #   Tag keys that you want to remove from the specified resource.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.remove_tags_from_resource({
+      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #     resource_id: "ResourceId", # required
+      #     tag_keys: ["TagKey"], # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def remove_tags_from_resource(params = {}, options = {})
+        req = build_request(:remove_tags_from_resource, params)
+        req.send_request(options)
+      end
+
       # Executes commands on one or more remote instances.
       # @option params [required, Array<String>] :instance_ids
-      #   Required. The instance IDs where the command should execute.
+      #   Required. The instance IDs where the command should execute. You can
+      #   specify a maximum of 50 IDs.
       # @option params [required, String] :document_name
       #   Required. The name of the SSM document to execute. This can be an SSM
       #   public document or a custom document.
@@ -698,6 +956,10 @@ module Aws
       # @option params [String] :output_s3_key_prefix
       #   The directory structure within the S3 bucket where the responses
       #   should be stored.
+      # @option params [String] :service_role_arn
+      #   The IAM role that SSM uses to send notifications.
+      # @option params [Types::NotificationConfig] :notification_config
+      #   Configurations for sending notifications.
       # @return [Types::SendCommandResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SendCommandResult#command #Command} => Types::Command
@@ -715,6 +977,12 @@ module Aws
       #     },
       #     output_s3_bucket_name: "S3BucketName",
       #     output_s3_key_prefix: "S3KeyPrefix",
+      #     service_role_arn: "ServiceRole",
+      #     notification_config: {
+      #       notification_arn: "NotificationArn",
+      #       notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+      #       notification_type: "Command", # accepts Command, Invocation
+      #     },
       #   })
       #
       # @example Response structure
@@ -731,6 +999,11 @@ module Aws
       #   resp.command.status #=> String, one of "Pending", "InProgress", "Cancelling", "Success", "TimedOut", "Cancelled", "Failed"
       #   resp.command.output_s3_bucket_name #=> String
       #   resp.command.output_s3_key_prefix #=> String
+      #   resp.command.service_role #=> String
+      #   resp.command.notification_config.notification_arn #=> String
+      #   resp.command.notification_config.notification_events #=> Array
+      #   resp.command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.command.notification_config.notification_type #=> String, one of "Command", "Invocation"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def send_command(params = {}, options = {})
@@ -777,6 +1050,26 @@ module Aws
       # @param [Hash] options ({})
       def update_association_status(params = {}, options = {})
         req = build_request(:update_association_status, params)
+        req.send_request(options)
+      end
+
+      # Assigns or changes an Amazon Identity and Access Management (IAM) role
+      # to the managed instance.
+      # @option params [required, String] :instance_id
+      #   The ID of the managed instance where you want to update the role.
+      # @option params [required, String] :iam_role
+      #   The IAM role you want to assign or change.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_managed_instance_role({
+      #     instance_id: "ManagedInstanceId", # required
+      #     iam_role: "IamRole", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def update_managed_instance_role(params = {}, options = {})
+        req = build_request(:update_managed_instance_role, params)
         req.send_request(options)
       end
 

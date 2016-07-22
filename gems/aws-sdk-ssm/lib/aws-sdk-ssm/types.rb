@@ -16,6 +16,99 @@ module Aws
   module SSM
     module Types
 
+      # An activation registers one or more on-premises servers or virtual
+      # machines (VMs) with AWS so that you can configure those servers or VMs
+      # using Run Command. A server or VM that has been registered with AWS is
+      # called a managed instance.
+      class Activation < Aws::Structure.new(
+        :activation_id,
+        :description,
+        :default_instance_name,
+        :iam_role,
+        :registration_limit,
+        :registrations_count,
+        :expiration_date,
+        :expired,
+        :created_date)
+
+        # @!attribute [rw] activation_id
+        #   The ID created by SSM when you submitted the activation.
+        #   @return [String]
+
+        # @!attribute [rw] description
+        #   A user defined description of the activation.
+        #   @return [String]
+
+        # @!attribute [rw] default_instance_name
+        #   A name for the managed instance when it is created.
+        #   @return [String]
+
+        # @!attribute [rw] iam_role
+        #   The Amazon Identity and Access Management (IAM) role to assign to
+        #   the managed instance.
+        #   @return [String]
+
+        # @!attribute [rw] registration_limit
+        #   The maximum number of managed instances that can be registered using
+        #   this activation.
+        #   @return [Integer]
+
+        # @!attribute [rw] registrations_count
+        #   The number of managed instances already registered with this
+        #   activation.
+        #   @return [Integer]
+
+        # @!attribute [rw] expiration_date
+        #   The date when this activation can no longer be used to register
+        #   managed instances.
+        #   @return [Time]
+
+        # @!attribute [rw] expired
+        #   Whether or not the activation is expired.
+        #   @return [Boolean]
+
+        # @!attribute [rw] created_date
+        #   The date the activation was created.
+        #   @return [Time]
+
+      end
+
+      # @note When making an API call, pass AddTagsToResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #         resource_id: "ResourceId", # required
+      #         tags: [ # required
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue", # required
+      #           },
+      #         ],
+      #       }
+      class AddTagsToResourceRequest < Aws::Structure.new(
+        :resource_type,
+        :resource_id,
+        :tags)
+
+        # @!attribute [rw] resource_type
+        #   Specifies the type of resource you are tagging.
+        #   @return [String]
+
+        # @!attribute [rw] resource_id
+        #   The resource ID you want to tag.
+        #   @return [String]
+
+        # @!attribute [rw] tags
+        #   One or more tags. The value parameter is required, but if you don\'t
+        #   want the tag to have a value, specify the parameter with no value,
+        #   and we set the value to an empty string.
+        #   @return [Array<Types::Tag>]
+
+      end
+
+      class AddTagsToResourceResult < Aws::EmptyStructure; end
+
       # Describes an association of an SSM document and an instance.
       class Association < Aws::Structure.new(
         :name,
@@ -155,7 +248,9 @@ module Aws
         :requested_date_time,
         :status,
         :output_s3_bucket_name,
-        :output_s3_key_prefix)
+        :output_s3_key_prefix,
+        :service_role,
+        :notification_config)
 
         # @!attribute [rw] command_id
         #   A unique identifier for this command.
@@ -204,6 +299,16 @@ module Aws
         #   the command.
         #   @return [String]
 
+        # @!attribute [rw] service_role
+        #   The IAM service role that SSM uses to act on your behalf when
+        #   sending notifications about command status changes.
+        #   @return [String]
+
+        # @!attribute [rw] notification_config
+        #   Configurations for sending notifications about command status
+        #   changes.
+        #   @return [Types::NotificationConfig]
+
       end
 
       # Describes a command filter.
@@ -242,7 +347,9 @@ module Aws
         :requested_date_time,
         :status,
         :trace_output,
-        :command_plugins)
+        :command_plugins,
+        :service_role,
+        :notification_config)
 
         # @!attribute [rw] command_id
         #   The command against which this invocation was requested.
@@ -275,6 +382,17 @@ module Aws
 
         # @!attribute [rw] command_plugins
         #   @return [Array<Types::CommandPlugin>]
+
+        # @!attribute [rw] service_role
+        #   The IAM service role that SSM uses to act on your behalf when
+        #   sending notifications about command status changes on a per instance
+        #   basis.
+        #   @return [String]
+
+        # @!attribute [rw] notification_config
+        #   Configurations for sending notifications about command status
+        #   changes on a per instance basis.
+        #   @return [Types::NotificationConfig]
 
       end
 
@@ -327,6 +445,68 @@ module Aws
         #   The S3 directory path inside the bucket where the responses to the
         #   command executions should be stored. This was requested when issuing
         #   the command.
+        #   @return [String]
+
+      end
+
+      # @note When making an API call, pass CreateActivationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         description: "ActivationDescription",
+      #         default_instance_name: "DefaultInstanceName",
+      #         iam_role: "IamRole", # required
+      #         registration_limit: 1,
+      #         expiration_date: Time.now,
+      #       }
+      class CreateActivationRequest < Aws::Structure.new(
+        :description,
+        :default_instance_name,
+        :iam_role,
+        :registration_limit,
+        :expiration_date)
+
+        # @!attribute [rw] description
+        #   A user-defined description of the resource that you want to register
+        #   with Amazon EC2.
+        #   @return [String]
+
+        # @!attribute [rw] default_instance_name
+        #   The name of the registered, managed instance as it will appear in
+        #   the Amazon EC2 console or when you use the AWS command line tools to
+        #   list EC2 resources.
+        #   @return [String]
+
+        # @!attribute [rw] iam_role
+        #   The Amazon Identity and Access Management (IAM) role that you want
+        #   to assign to the managed instance.
+        #   @return [String]
+
+        # @!attribute [rw] registration_limit
+        #   Specify the maximum number of managed instances you want to
+        #   register. The default value is 1 instance.
+        #   @return [Integer]
+
+        # @!attribute [rw] expiration_date
+        #   The date by which this activation request should expire. The default
+        #   value is 24 hours.
+        #   @return [Time]
+
+      end
+
+      class CreateActivationResult < Aws::Structure.new(
+        :activation_id,
+        :activation_code)
+
+        # @!attribute [rw] activation_id
+        #   The ID number generated by the system when it processed the
+        #   activation. The activation ID functions like a user name.
+        #   @return [String]
+
+        # @!attribute [rw] activation_code
+        #   The code the system generates when it processes the activation. The
+        #   activation code functions like a password to validate the activation
+        #   ID.
         #   @return [String]
 
       end
@@ -466,6 +646,23 @@ module Aws
 
       end
 
+      # @note When making an API call, pass DeleteActivationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         activation_id: "ActivationId", # required
+      #       }
+      class DeleteActivationRequest < Aws::Structure.new(
+        :activation_id)
+
+        # @!attribute [rw] activation_id
+        #   The ID of the activation that you want to delete.
+        #   @return [String]
+
+      end
+
+      class DeleteActivationResult < Aws::EmptyStructure; end
+
       # @note When making an API call, pass DeleteAssociationRequest
       #   data as a hash:
       #
@@ -505,6 +702,96 @@ module Aws
       end
 
       class DeleteDocumentResult < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DeregisterManagedInstanceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         instance_id: "ManagedInstanceId", # required
+      #       }
+      class DeregisterManagedInstanceRequest < Aws::Structure.new(
+        :instance_id)
+
+        # @!attribute [rw] instance_id
+        #   The ID assigned to the managed instance when you registered it using
+        #   the activation process.
+        #   @return [String]
+
+      end
+
+      class DeregisterManagedInstanceResult < Aws::EmptyStructure; end
+
+      # Filter for the DescribeActivation API.
+      # @note When making an API call, pass DescribeActivationsFilter
+      #   data as a hash:
+      #
+      #       {
+      #         filter_key: "ActivationIds", # accepts ActivationIds, DefaultInstanceName, IamRole
+      #         filter_values: ["String"],
+      #       }
+      class DescribeActivationsFilter < Aws::Structure.new(
+        :filter_key,
+        :filter_values)
+
+        # @!attribute [rw] filter_key
+        #   The name of the filter.
+        #   @return [String]
+
+        # @!attribute [rw] filter_values
+        #   The filter values.
+        #   @return [Array<String>]
+
+      end
+
+      # @note When making an API call, pass DescribeActivationsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         filters: [
+      #           {
+      #             filter_key: "ActivationIds", # accepts ActivationIds, DefaultInstanceName, IamRole
+      #             filter_values: ["String"],
+      #           },
+      #         ],
+      #         max_results: 1,
+      #         next_token: "NextToken",
+      #       }
+      class DescribeActivationsRequest < Aws::Structure.new(
+        :filters,
+        :max_results,
+        :next_token)
+
+        # @!attribute [rw] filters
+        #   A filter to view information about your activations.
+        #   @return [Array<Types::DescribeActivationsFilter>]
+
+        # @!attribute [rw] max_results
+        #   The maximum number of items to return for this call. The call also
+        #   returns a token that you can specify in a subsequent call to get the
+        #   next set of results.
+        #   @return [Integer]
+
+        # @!attribute [rw] next_token
+        #   A token to start the list. Use this token to get the next set of
+        #   results.
+        #   @return [String]
+
+      end
+
+      class DescribeActivationsResult < Aws::Structure.new(
+        :activation_list,
+        :next_token)
+
+        # @!attribute [rw] activation_list
+        #   A list of activations for your AWS account.
+        #   @return [Array<Types::Activation>]
+
+        # @!attribute [rw] next_token
+        #   The token for the next set of items to return. Use this token to get
+        #   the next set of results.
+        #   @return [String]
+
+      end
 
       # @note When making an API call, pass DescribeAssociationRequest
       #   data as a hash:
@@ -598,7 +885,7 @@ module Aws
       #       {
       #         instance_information_filter_list: [
       #           {
-      #             key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes
+      #             key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType
       #             value_set: ["InstanceInformationFilterValue"], # required
       #           },
       #         ],
@@ -838,7 +1125,14 @@ module Aws
         :is_latest_version,
         :platform_type,
         :platform_name,
-        :platform_version)
+        :platform_version,
+        :activation_id,
+        :iam_role,
+        :registration_date,
+        :resource_type,
+        :name,
+        :ip_address,
+        :computer_name)
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -873,6 +1167,38 @@ module Aws
         #   The version of the OS platform running on your instance.
         #   @return [String]
 
+        # @!attribute [rw] activation_id
+        #   The activation ID created by SSM when the server or VM was
+        #   registered.
+        #   @return [String]
+
+        # @!attribute [rw] iam_role
+        #   The Amazon Identity and Access Management (IAM) role assigned to EC2
+        #   instances or managed instances.
+        #   @return [String]
+
+        # @!attribute [rw] registration_date
+        #   The date the server or VM was registered with AWS as a managed
+        #   instance.
+        #   @return [Time]
+
+        # @!attribute [rw] resource_type
+        #   The type of instance. Instances are either EC2 instances or managed
+        #   instances.
+        #   @return [String]
+
+        # @!attribute [rw] name
+        #   The name of the managed instance.
+        #   @return [String]
+
+        # @!attribute [rw] ip_address
+        #   The IP address of the managed instance.
+        #   @return [String]
+
+        # @!attribute [rw] computer_name
+        #   The fully qualified host name of the managed instance.
+        #   @return [String]
+
       end
 
       # Describes a filter for a specific list of instances.
@@ -880,7 +1206,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes
+      #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType
       #         value_set: ["InstanceInformationFilterValue"], # required
       #       }
       class InstanceInformationFilter < Aws::Structure.new(
@@ -1132,6 +1458,36 @@ module Aws
 
       end
 
+      # @note When making an API call, pass ListTagsForResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #         resource_id: "ResourceId", # required
+      #       }
+      class ListTagsForResourceRequest < Aws::Structure.new(
+        :resource_type,
+        :resource_id)
+
+        # @!attribute [rw] resource_type
+        #   Returns a list of tags for a specific resource type.
+        #   @return [String]
+
+        # @!attribute [rw] resource_id
+        #   The resource ID for which you want to see a list of tags.
+        #   @return [String]
+
+      end
+
+      class ListTagsForResourceResult < Aws::Structure.new(
+        :tag_list)
+
+        # @!attribute [rw] tag_list
+        #   A list of tags.
+        #   @return [Array<Types::Tag>]
+
+      end
+
       # @note When making an API call, pass ModifyDocumentPermissionRequest
       #   data as a hash:
       #
@@ -1173,6 +1529,76 @@ module Aws
 
       class ModifyDocumentPermissionResponse < Aws::EmptyStructure; end
 
+      # Configurations for sending notifications.
+      # @note When making an API call, pass NotificationConfig
+      #   data as a hash:
+      #
+      #       {
+      #         notification_arn: "NotificationArn",
+      #         notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+      #         notification_type: "Command", # accepts Command, Invocation
+      #       }
+      class NotificationConfig < Aws::Structure.new(
+        :notification_arn,
+        :notification_events,
+        :notification_type)
+
+        # @!attribute [rw] notification_arn
+        #   An Amazon Resource Name (ARN) for a Simple Notification Service
+        #   (SNS) topic. SSM pushes notifications about command status changes
+        #   to this topic.
+        #   @return [String]
+
+        # @!attribute [rw] notification_events
+        #   The different events for which you can receive notifications. These
+        #   events include the following: All (events), InProgress, Success,
+        #   TimedOut, Cancelled, Failed. To learn more about these events, see
+        #   [Monitoring Commands][1] in the <i>Amazon Elastic Compute Cloud User
+        #   Guide </i>.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitor-commands.html
+        #   @return [Array<String>]
+
+        # @!attribute [rw] notification_type
+        #   Command: Receive notification when the status of a command changes.
+        #   Invocation: For commands sent to multiple instances, receive
+        #   notification on a per-instance basis when the status of a command
+        #   changes.
+        #   @return [String]
+
+      end
+
+      # @note When making an API call, pass RemoveTagsFromResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #         resource_id: "ResourceId", # required
+      #         tag_keys: ["TagKey"], # required
+      #       }
+      class RemoveTagsFromResourceRequest < Aws::Structure.new(
+        :resource_type,
+        :resource_id,
+        :tag_keys)
+
+        # @!attribute [rw] resource_type
+        #   The type of resource of which you want to remove a tag.
+        #   @return [String]
+
+        # @!attribute [rw] resource_id
+        #   The resource ID for which you want to remove tags.
+        #   @return [String]
+
+        # @!attribute [rw] tag_keys
+        #   Tag keys that you want to remove from the specified resource.
+        #   @return [Array<String>]
+
+      end
+
+      class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
+
       # @note When making an API call, pass SendCommandRequest
       #   data as a hash:
       #
@@ -1188,6 +1614,12 @@ module Aws
       #         },
       #         output_s3_bucket_name: "S3BucketName",
       #         output_s3_key_prefix: "S3KeyPrefix",
+      #         service_role_arn: "ServiceRole",
+      #         notification_config: {
+      #           notification_arn: "NotificationArn",
+      #           notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
+      #           notification_type: "Command", # accepts Command, Invocation
+      #         },
       #       }
       class SendCommandRequest < Aws::Structure.new(
         :instance_ids,
@@ -1198,10 +1630,13 @@ module Aws
         :comment,
         :parameters,
         :output_s3_bucket_name,
-        :output_s3_key_prefix)
+        :output_s3_key_prefix,
+        :service_role_arn,
+        :notification_config)
 
         # @!attribute [rw] instance_ids
-        #   Required. The instance IDs where the command should execute.
+        #   Required. The instance IDs where the command should execute. You can
+        #   specify a maximum of 50 IDs.
         #   @return [Array<String>]
 
         # @!attribute [rw] document_name
@@ -1251,6 +1686,14 @@ module Aws
         #   should be stored.
         #   @return [String]
 
+        # @!attribute [rw] service_role_arn
+        #   The IAM role that SSM uses to send notifications.
+        #   @return [String]
+
+        # @!attribute [rw] notification_config
+        #   Configurations for sending notifications.
+        #   @return [Types::NotificationConfig]
+
       end
 
       class SendCommandResult < Aws::Structure.new(
@@ -1260,6 +1703,30 @@ module Aws
         #   The request as it was received by SSM. Also provides the command ID
         #   which can be used future references to this request.
         #   @return [Types::Command]
+
+      end
+
+      # Metadata that you assign to your managed instances. Tags enable you to
+      # categorize your managed instances in different ways, for example, by
+      # purpose, owner, or environment.
+      # @note When making an API call, pass Tag
+      #   data as a hash:
+      #
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       }
+      class Tag < Aws::Structure.new(
+        :key,
+        :value)
+
+        # @!attribute [rw] key
+        #   The name of the tag.
+        #   @return [String]
+
+        # @!attribute [rw] value
+        #   The value of the tag.
+        #   @return [String]
 
       end
 
@@ -1303,6 +1770,29 @@ module Aws
         #   @return [Types::AssociationDescription]
 
       end
+
+      # @note When making an API call, pass UpdateManagedInstanceRoleRequest
+      #   data as a hash:
+      #
+      #       {
+      #         instance_id: "ManagedInstanceId", # required
+      #         iam_role: "IamRole", # required
+      #       }
+      class UpdateManagedInstanceRoleRequest < Aws::Structure.new(
+        :instance_id,
+        :iam_role)
+
+        # @!attribute [rw] instance_id
+        #   The ID of the managed instance where you want to update the role.
+        #   @return [String]
+
+        # @!attribute [rw] iam_role
+        #   The IAM role you want to assign or change.
+        #   @return [String]
+
+      end
+
+      class UpdateManagedInstanceRoleResult < Aws::EmptyStructure; end
 
     end
   end

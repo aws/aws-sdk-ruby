@@ -38,6 +38,33 @@ module Aws
 
       # @!group API Operations
 
+      # Adds or overwrites one or more tags for the specified Amazon Directory
+      # Services directory. Each directory can have a maximum of 10 tags. Each
+      # tag consists of a key and optional value. Tag keys must be unique per
+      # resource.
+      # @option params [required, String] :resource_id
+      #   The ID of the directory to which to add the tag.
+      # @option params [required, Array<Types::Tag>] :tags
+      #   The tags to be assigned to the Amazon Directory Services directory.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.add_tags_to_resource({
+      #     resource_id: "ResourceId", # required
+      #     tags: [ # required
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       },
+      #     ],
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def add_tags_to_resource(params = {}, options = {})
+        req = build_request(:add_tags_to_resource, params)
+        req.send_request(options)
+      end
+
       # Creates an AD Connector to connect to an on-premises directory.
       # @option params [required, String] :name
       #   The fully-qualified name of the on-premises directory, such as
@@ -83,8 +110,7 @@ module Aws
 
       # Creates an alias for a directory and assigns the alias to the
       # directory. The alias is used to construct the access URL for the
-      # directory, such as
-      # `http://<![CDATA[<]]>alias<![CDATA[>]]>.awsapps.com`.
+      # directory, such as `http://<alias>.awsapps.com`.
       #
       # <important markdown="1"> After an alias has been created, it cannot be deleted or reused, so
       # this operation should only be used when absolutely necessary.
@@ -334,6 +360,8 @@ module Aws
       # @option params [String] :trust_type
       #   The trust relationship type.
       # @option params [Array<String>] :conditional_forwarder_ip_addrs
+      #   The IP addresses of the remote DNS server associated with
+      #   RemoteDomainName.
       # @return [Types::CreateTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateTrustResult#trust_id #TrustId} => String
@@ -425,6 +453,7 @@ module Aws
       # @option params [required, String] :trust_id
       #   The Trust ID of the trust relationship to be deleted.
       # @option params [Boolean] :delete_associated_conditional_forwarder
+      #   Delete a conditional forwarder as part of a DeleteTrustRequest.
       # @return [Types::DeleteTrustResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DeleteTrustResult#trust_id #TrustId} => String
@@ -893,6 +922,37 @@ module Aws
         req.send_request(options)
       end
 
+      # Lists all tags on an Amazon Directory Services directory.
+      # @option params [required, String] :resource_id
+      #   The ID of the directory for which you want to retrieve tags.
+      # @option params [String] :next_token
+      #   Reserved for future use.
+      # @option params [Integer] :limit
+      #   Reserved for future use.
+      # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListTagsForResourceResult#tags #Tags} => Array&lt;Types::Tag&gt;
+      #   * {Types::ListTagsForResourceResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_tags_for_resource({
+      #     resource_id: "ResourceId", # required
+      #     next_token: "NextToken",
+      #     limit: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.tags #=> Array
+      #   resp.tags[0].key #=> String
+      #   resp.tags[0].value #=> String
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_tags_for_resource(params = {}, options = {})
+        req = build_request(:list_tags_for_resource, params)
+        req.send_request(options)
+      end
+
       # Associates a directory with an SNS topic. This establishes the
       # directory as a publisher to the specified SNS topic. You can then
       # receive email or text (SMS) messages when the status of your directory
@@ -916,6 +976,25 @@ module Aws
       # @param [Hash] options ({})
       def register_event_topic(params = {}, options = {})
         req = build_request(:register_event_topic, params)
+        req.send_request(options)
+      end
+
+      # Removes tags from an Amazon Directory Services directory.
+      # @option params [required, String] :resource_id
+      #   The ID of the directory from which to remove the tag.
+      # @option params [required, Array<String>] :tag_keys
+      #   The tag key (name) of the tag to be removed.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.remove_tags_from_resource({
+      #     resource_id: "ResourceId", # required
+      #     tag_keys: ["TagKey"], # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def remove_tags_from_resource(params = {}, options = {})
+        req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)
       end
 

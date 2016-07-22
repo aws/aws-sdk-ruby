@@ -500,6 +500,7 @@ module Aws
       #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
       #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
       #   resp.task_definition.family #=> String
+      #   resp.task_definition.task_role_arn #=> String
       #   resp.task_definition.revision #=> Integer
       #   resp.task_definition.volumes #=> Array
       #   resp.task_definition.volumes[0].name #=> String
@@ -517,9 +518,9 @@ module Aws
 
       # Describes one or more of your clusters.
       # @option params [Array<String>] :clusters
-      #   A space-separated list of cluster names or full cluster Amazon
-      #   Resource Name (ARN) entries. If you do not specify a cluster, the
-      #   default cluster is assumed.
+      #   A space-separated list of up to 100 cluster names or full cluster
+      #   Amazon Resource Name (ARN) entries. If you do not specify a cluster,
+      #   the default cluster is assumed.
       # @return [Types::DescribeClustersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeClustersResponse#clusters #clusters} => Array&lt;Types::Cluster&gt;
@@ -744,6 +745,7 @@ module Aws
       #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
       #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
       #   resp.task_definition.family #=> String
+      #   resp.task_definition.task_role_arn #=> String
       #   resp.task_definition.revision #=> Integer
       #   resp.task_definition.volumes #=> Array
       #   resp.task_definition.volumes[0].name #=> String
@@ -791,6 +793,7 @@ module Aws
       #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
       #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
       #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+      #   resp.tasks[0].overrides.task_role_arn #=> String
       #   resp.tasks[0].last_status #=> String
       #   resp.tasks[0].desired_status #=> String
       #   resp.tasks[0].containers #=> Array
@@ -1144,6 +1147,10 @@ module Aws
       # results by family name, by a particular container instance, or by the
       # desired status of the task with the `family`, `containerInstance`, and
       # `desiredStatus` parameters.
+      #
+      # Recently-stopped tasks might appear in the returned results.
+      # Currently, stopped tasks appear in the returned results for at least
+      # one hour.
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the tasks to list. If you do not specify a cluster, the default
@@ -1191,7 +1198,15 @@ module Aws
       #   Specifying a `desiredStatus` of `STOPPED` limits the results to tasks
       #   that are in the `STOPPED` status, which can be useful for debugging
       #   tasks that are not starting properly or have died or finished. The
-      #   default status filter is `RUNNING`.
+      #   default status filter is status filter is `RUNNING`, which shows tasks
+      #   that ECS has set the desired status to `RUNNING`.
+      #
+      #   <note markdown="1"> Although you can filter results based on a desired status of
+      #   `PENDING`, this will not return any results because ECS never sets the
+      #   desired status of a task to that value (only a task\'s `lastStatus`
+      #   may have a value of `PENDING`).
+      #
+      #    </note>
       # @return [Types::ListTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListTasksResponse#task_arns #taskArns} => Array&lt;String&gt;
@@ -1328,14 +1343,26 @@ module Aws
       # task definition parameters and defaults, see [Amazon ECS Task
       # Definitions][1] in the *Amazon EC2 Container Service Developer Guide*.
       #
+      # You may also specify an IAM role for your task with the `taskRoleArn`
+      # parameter. When you specify an IAM role for a task, its containers can
+      # then use the latest versions of the AWS CLI or SDKs to make API
+      # requests to the AWS services that are specified in the IAM policy
+      # associated with the role. For more information, see [IAM Roles for
+      # Tasks][2] in the *Amazon EC2 Container Service Developer Guide*.
+      #
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
+      # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
       # @option params [required, String] :family
       #   You must specify a `family` for a task definition, which allows you to
       #   track multiple versions of the same task definition. The `family` is
       #   used as a name for your task definition. Up to 255 letters (uppercase
       #   and lowercase), numbers, hyphens, and underscores are allowed.
+      # @option params [String] :task_role_arn
+      #   The Amazon Resource Name (ARN) of the IAM role that containers in this
+      #   task can assume. All containers in this task are granted the
+      #   permissions that are specified in this role.
       # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
       #   A list of container definitions in JSON format that describe the
       #   different containers that make up your task.
@@ -1349,6 +1376,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.register_task_definition({
       #     family: "String", # required
+      #     task_role_arn: "String",
       #     container_definitions: [ # required
       #       {
       #         name: "String",
@@ -1481,6 +1509,7 @@ module Aws
       #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
       #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
       #   resp.task_definition.family #=> String
+      #   resp.task_definition.task_role_arn #=> String
       #   resp.task_definition.revision #=> Integer
       #   resp.task_definition.volumes #=> Array
       #   resp.task_definition.volumes[0].name #=> String
@@ -1565,6 +1594,7 @@ module Aws
       #           ],
       #         },
       #       ],
+      #       task_role_arn: "String",
       #     },
       #     count: 1,
       #     started_by: "String",
@@ -1583,6 +1613,7 @@ module Aws
       #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
       #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
       #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+      #   resp.tasks[0].overrides.task_role_arn #=> String
       #   resp.tasks[0].last_status #=> String
       #   resp.tasks[0].desired_status #=> String
       #   resp.tasks[0].containers #=> Array
@@ -1682,6 +1713,7 @@ module Aws
       #           ],
       #         },
       #       ],
+      #       task_role_arn: "String",
       #     },
       #     container_instances: ["String"], # required
       #     started_by: "String",
@@ -1700,6 +1732,7 @@ module Aws
       #   resp.tasks[0].overrides.container_overrides[0].environment #=> Array
       #   resp.tasks[0].overrides.container_overrides[0].environment[0].name #=> String
       #   resp.tasks[0].overrides.container_overrides[0].environment[0].value #=> String
+      #   resp.tasks[0].overrides.task_role_arn #=> String
       #   resp.tasks[0].last_status #=> String
       #   resp.tasks[0].desired_status #=> String
       #   resp.tasks[0].containers #=> Array
@@ -1773,6 +1806,7 @@ module Aws
       #   resp.task.overrides.container_overrides[0].environment #=> Array
       #   resp.task.overrides.container_overrides[0].environment[0].name #=> String
       #   resp.task.overrides.container_overrides[0].environment[0].value #=> String
+      #   resp.task.overrides.task_role_arn #=> String
       #   resp.task.last_status #=> String
       #   resp.task.desired_status #=> String
       #   resp.task.containers #=> Array

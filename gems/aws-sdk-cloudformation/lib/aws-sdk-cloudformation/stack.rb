@@ -266,23 +266,29 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html
       # @option options [Array<String>] :capabilities
-      #   A list of capabilities that you must specify before AWS CloudFormation
-      #   can update certain stacks. Some stack templates might include
-      #   resources that can affect permissions in your AWS account, for
-      #   example, by creating new AWS Identity and Access Management (IAM)
-      #   users. For those stacks, you must explicitly acknowledge their
-      #   capabilities by specifying this parameter.
+      #   A list of values that you must specify before AWS CloudFormation can
+      #   update certain stacks. Some stack templates might include resources
+      #   that can affect permissions in your AWS account, for example, by
+      #   creating new AWS Identity and Access Management (IAM) users. For those
+      #   stacks, you must explicitly acknowledge their capabilities by
+      #   specifying this parameter.
       #
-      #   Currently, the only valid value is `CAPABILITY_IAM`, which is required
-      #   for the following resources: [ AWS::IAM::AccessKey][1], [
-      #   AWS::IAM::Group][2], [ AWS::IAM::InstanceProfile][3], [
-      #   AWS::IAM::Policy][4], [ AWS::IAM::Role][5], [ AWS::IAM::User][6], and
-      #   [ AWS::IAM::UserToGroupAddition][7]. If your stack template contains
+      #   The only valid values are `CAPABILITY_IAM` and `CAPABILITY_NAMED_IAM`.
+      #   The following resources require you to specify this parameter: [
+      #   AWS::IAM::AccessKey][1], [ AWS::IAM::Group][2], [
+      #   AWS::IAM::InstanceProfile][3], [ AWS::IAM::Policy][4], [
+      #   AWS::IAM::Role][5], [ AWS::IAM::User][6], and [
+      #   AWS::IAM::UserToGroupAddition][7]. If your stack template contains
       #   these resources, we recommend that you review all permissions
-      #   associated with them and edit their permissions if necessary. If your
-      #   template contains any of the listed resources and you don\'t specify
-      #   this parameter, this action returns an `InsufficientCapabilities`
-      #   error.
+      #   associated with them and edit their permissions if necessary.
+      #
+      #   If you have IAM resources, you can specify either capability. If you
+      #   have IAM resources with custom names, you must specify
+      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   action returns an `InsufficientCapabilities` error.
+      #
+      #   For more information, see [Acknowledging IAM Resources in AWS
+      #   CloudFormation Templates][8].
       #
       #
       #
@@ -293,6 +299,7 @@ module Aws
       #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
       #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
       #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+      #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
       # @option options [Array<String>] :resource_types
       #   The template resource types that you have permissions to work with for
       #   this update stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,

@@ -16,6 +16,34 @@ module Aws
   module DirectoryService
     module Types
 
+      # @note When making an API call, pass AddTagsToResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_id: "ResourceId", # required
+      #         tags: [ # required
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue", # required
+      #           },
+      #         ],
+      #       }
+      class AddTagsToResourceRequest < Aws::Structure.new(
+        :resource_id,
+        :tags)
+
+        # @!attribute [rw] resource_id
+        #   The ID of the directory to which to add the tag.
+        #   @return [String]
+
+        # @!attribute [rw] tags
+        #   The tags to be assigned to the Amazon Directory Services directory.
+        #   @return [Array<Types::Tag>]
+
+      end
+
+      class AddTagsToResourceResult < Aws::EmptyStructure; end
+
       # Represents a named directory attribute.
       # @note When making an API call, pass Attribute
       #   data as a hash:
@@ -284,6 +312,7 @@ module Aws
 
       end
 
+      # The result of a CreateConditinalForwarder request.
       class CreateConditionalForwarderResult < Aws::EmptyStructure; end
 
       # Contains the inputs for the CreateDirectory operation.
@@ -400,6 +429,7 @@ module Aws
 
       end
 
+      # Result of a CreateMicrosoftAD request.
       class CreateMicrosoftADResult < Aws::Structure.new(
         :directory_id)
 
@@ -494,10 +524,13 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] conditional_forwarder_ip_addrs
+        #   The IP addresses of the remote DNS server associated with
+        #   RemoteDomainName.
         #   @return [Array<String>]
 
       end
 
+      # The result of a CreateTrust request.
       class CreateTrustResult < Aws::Structure.new(
         :trust_id)
 
@@ -507,6 +540,7 @@ module Aws
 
       end
 
+      # Deletes a conditional forwarder.
       # @note When making an API call, pass DeleteConditionalForwarderRequest
       #   data as a hash:
       #
@@ -530,6 +564,7 @@ module Aws
 
       end
 
+      # The result of a DeleteConditionalForwarder request.
       class DeleteConditionalForwarderResult < Aws::EmptyStructure; end
 
       # Contains the inputs for the DeleteDirectory operation.
@@ -602,10 +637,12 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] delete_associated_conditional_forwarder
+        #   Delete a conditional forwarder as part of a DeleteTrustRequest.
         #   @return [Boolean]
 
       end
 
+      # The result of a DeleteTrust request.
       class DeleteTrustResult < Aws::Structure.new(
         :trust_id)
 
@@ -640,8 +677,10 @@ module Aws
 
       end
 
+      # The result of a DeregisterEventTopic request.
       class DeregisterEventTopicResult < Aws::EmptyStructure; end
 
+      # Describes a conditional forwarder.
       # @note When making an API call, pass DescribeConditionalForwardersRequest
       #   data as a hash:
       #
@@ -666,6 +705,7 @@ module Aws
 
       end
 
+      # The result of a DescribeConditionalForwarder request.
       class DescribeConditionalForwardersResult < Aws::Structure.new(
         :conditional_forwarders)
 
@@ -733,6 +773,7 @@ module Aws
 
       end
 
+      # Describes event topics.
       # @note When making an API call, pass DescribeEventTopicsRequest
       #   data as a hash:
       #
@@ -761,6 +802,7 @@ module Aws
 
       end
 
+      # The result of a DescribeEventTopic request.
       class DescribeEventTopicsResult < Aws::Structure.new(
         :event_topics)
 
@@ -873,6 +915,7 @@ module Aws
 
       end
 
+      # The result of a DescribeTrust request.
       class DescribeTrustsResult < Aws::Structure.new(
         :trusts,
         :next_token)
@@ -931,7 +974,9 @@ module Aws
         #   privileges:
         #
         #   * Read users and groups
+        #
         #   * Create computer objects
+        #
         #   * Join computers to the domain
         #   @return [String]
 
@@ -1017,10 +1062,9 @@ module Aws
 
         # @!attribute [rw] access_url
         #   The access URL for the directory, such as
-        #   `http://<![CDATA[<]]>alias<![CDATA[>]]>.awsapps.com`. If no alias
-        #   has been created for the directory,
-        #   `<![CDATA[<]]>alias<![CDATA[>]]>` is the directory identifier, such
-        #   as `d-XXXXXXXXXX`.
+        #   `http://<alias>.awsapps.com`. If no alias has been created for the
+        #   directory, `<alias>` is the directory identifier, such as
+        #   `d-XXXXXXXXXX`.
         #   @return [String]
 
         # @!attribute [rw] description
@@ -1403,6 +1447,47 @@ module Aws
 
       end
 
+      # @note When making an API call, pass ListTagsForResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_id: "ResourceId", # required
+      #         next_token: "NextToken",
+      #         limit: 1,
+      #       }
+      class ListTagsForResourceRequest < Aws::Structure.new(
+        :resource_id,
+        :next_token,
+        :limit)
+
+        # @!attribute [rw] resource_id
+        #   The ID of the directory for which you want to retrieve tags.
+        #   @return [String]
+
+        # @!attribute [rw] next_token
+        #   Reserved for future use.
+        #   @return [String]
+
+        # @!attribute [rw] limit
+        #   Reserved for future use.
+        #   @return [Integer]
+
+      end
+
+      class ListTagsForResourceResult < Aws::Structure.new(
+        :tags,
+        :next_token)
+
+        # @!attribute [rw] tags
+        #   List of tags returned by the ListTagsForResource operation.
+        #   @return [Array<Types::Tag>]
+
+        # @!attribute [rw] next_token
+        #   Reserved for future use.
+        #   @return [String]
+
+      end
+
       # Contains information about a Remote Authentication Dial In User
       # Service (RADIUS) server.
       # @note When making an API call, pass RadiusSettings
@@ -1469,6 +1554,7 @@ module Aws
 
       end
 
+      # Registers a new event topic.
       # @note When making an API call, pass RegisterEventTopicRequest
       #   data as a hash:
       #
@@ -1492,7 +1578,31 @@ module Aws
 
       end
 
+      # The result of a RegisterEventTopic request.
       class RegisterEventTopicResult < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass RemoveTagsFromResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_id: "ResourceId", # required
+      #         tag_keys: ["TagKey"], # required
+      #       }
+      class RemoveTagsFromResourceRequest < Aws::Structure.new(
+        :resource_id,
+        :tag_keys)
+
+        # @!attribute [rw] resource_id
+        #   The ID of the directory from which to remove the tag.
+        #   @return [String]
+
+        # @!attribute [rw] tag_keys
+        #   The tag key (name) of the tag to be removed.
+        #   @return [Array<String>]
+
+      end
+
+      class RemoveTagsFromResourceResult < Aws::EmptyStructure; end
 
       # An object representing the inputs for the RestoreFromSnapshot
       # operation.
@@ -1569,6 +1679,38 @@ module Aws
 
       end
 
+      # Metadata assigned to an Amazon Directory Services directory consisting
+      # of a key-value pair.
+      # @note When making an API call, pass Tag
+      #   data as a hash:
+      #
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       }
+      class Tag < Aws::Structure.new(
+        :key,
+        :value)
+
+        # @!attribute [rw] key
+        #   A key is the required name of the tag. The string value can be from
+        #   1 to 128 Unicode characters in length and cannot be prefixed with
+        #   \"aws:\". The string can only contain only the set of Unicode
+        #   letters, digits, white-space, \'\_\', \'.\', \'/\', \'=\', \'+\',
+        #   \'-\' (Java regex:
+        #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+        #   @return [String]
+
+        # @!attribute [rw] value
+        #   A value is the optional value of the tag. The string value can be
+        #   from 1 to 256 Unicode characters in length. The string can only
+        #   contain only the set of Unicode letters, digits, white-space,
+        #   \'\_\', \'.\', \'/\', \'=\', \'+\', \'-\' (Java regex:
+        #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+        #   @return [String]
+
+      end
+
       # Describes a trust relationship between an Microsoft AD in the AWS
       # cloud and an external domain.
       class Trust < Aws::Structure.new(
@@ -1627,6 +1769,7 @@ module Aws
 
       end
 
+      # Updates a conditional forwarder.
       # @note When making an API call, pass UpdateConditionalForwarderRequest
       #   data as a hash:
       #
@@ -1657,6 +1800,7 @@ module Aws
 
       end
 
+      # The result of an UpdateConditionalForwarder request.
       class UpdateConditionalForwarderResult < Aws::EmptyStructure; end
 
       # Contains the inputs for the UpdateRadius operation.
@@ -1712,6 +1856,7 @@ module Aws
 
       end
 
+      # Result of a VerifyTrust request.
       class VerifyTrustResult < Aws::Structure.new(
         :trust_id)
 

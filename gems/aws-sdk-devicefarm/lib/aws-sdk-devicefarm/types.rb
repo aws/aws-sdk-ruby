@@ -194,7 +194,7 @@ module Aws
       #         description: "Message",
       #         rules: [ # required
       #           {
-      #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER
+      #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
       #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
       #             value: "String",
       #           },
@@ -260,6 +260,74 @@ module Aws
 
       end
 
+      # Creates the configuration settings for a remote access session,
+      # including the device model and type.
+      # @note When making an API call, pass CreateRemoteAccessSessionConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         billing_method: "METERED", # accepts METERED, UNMETERED
+      #       }
+      class CreateRemoteAccessSessionConfiguration < Aws::Structure.new(
+        :billing_method)
+
+        # @!attribute [rw] billing_method
+        #   Returns the billing method for purposes of configuring a remote
+        #   access session.
+        #   @return [String]
+
+      end
+
+      # Creates and submits a request to start a remote access session.
+      # @note When making an API call, pass CreateRemoteAccessSessionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         project_arn: "AmazonResourceName", # required
+      #         device_arn: "AmazonResourceName", # required
+      #         name: "Name",
+      #         configuration: {
+      #           billing_method: "METERED", # accepts METERED, UNMETERED
+      #         },
+      #       }
+      class CreateRemoteAccessSessionRequest < Aws::Structure.new(
+        :project_arn,
+        :device_arn,
+        :name,
+        :configuration)
+
+        # @!attribute [rw] project_arn
+        #   The Amazon Resource Name (ARN) of the project for which you want to
+        #   create a remote access session.
+        #   @return [String]
+
+        # @!attribute [rw] device_arn
+        #   The Amazon Resource Name (ARN) of the device for which you want to
+        #   create a remote access session.
+        #   @return [String]
+
+        # @!attribute [rw] name
+        #   The name of the remote access session that you wish to create.
+        #   @return [String]
+
+        # @!attribute [rw] configuration
+        #   The configuration information for the remote access session request.
+        #   @return [Types::CreateRemoteAccessSessionConfiguration]
+
+      end
+
+      # Represents the server response from a request to create a remote
+      # access session.
+      class CreateRemoteAccessSessionResult < Aws::Structure.new(
+        :remote_access_session)
+
+        # @!attribute [rw] remote_access_session
+        #   A container that describes the remote access session when the
+        #   request to create a remote access session is sent.
+        #   @return [Types::RemoteAccessSession]
+
+      end
+
       # Represents a request to the create upload operation.
       # @note When making an API call, pass CreateUploadRequest
       #   data as a hash:
@@ -281,7 +349,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] name
-        #   The upload\'s file name.
+        #   The upload\'s file name. The name should not contain the \'/\'
+        #   character.
         #   @return [String]
 
         # @!attribute [rw] type
@@ -388,6 +457,27 @@ module Aws
       # Represents the result of a delete project request.
       class DeleteProjectResult < Aws::EmptyStructure; end
 
+      # Represents the request to delete the specified remote access session.
+      # @note When making an API call, pass DeleteRemoteAccessSessionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         arn: "AmazonResourceName", # required
+      #       }
+      class DeleteRemoteAccessSessionRequest < Aws::Structure.new(
+        :arn)
+
+        # @!attribute [rw] arn
+        #   The Amazon Resource Name (ARN) of the sesssion for which you want to
+        #   delete remote access.
+        #   @return [String]
+
+      end
+
+      # The response from the server when a request is made to delete the
+      # remote access session.
+      class DeleteRemoteAccessSessionResult < Aws::EmptyStructure; end
+
       # Represents a request to the delete run operation.
       # @note When making an API call, pass DeleteRunRequest
       #   data as a hash:
@@ -442,7 +532,10 @@ module Aws
         :memory,
         :image,
         :carrier,
-        :radio)
+        :radio,
+        :remote_access_enabled,
+        :fleet_type,
+        :fleet_name)
 
         # @!attribute [rw] arn
         #   The device\'s ARN.
@@ -511,6 +604,20 @@ module Aws
 
         # @!attribute [rw] radio
         #   The device\'s radio.
+        #   @return [String]
+
+        # @!attribute [rw] remote_access_enabled
+        #   Specifies whether remote access has been enabled for the specified
+        #   device.
+        #   @return [Boolean]
+
+        # @!attribute [rw] fleet_type
+        #   The type of fleet to which this device belongs. Possible values for
+        #   fleet type are PRIVATE and PUBLIC.
+        #   @return [String]
+
+        # @!attribute [rw] fleet_name
+        #   The name of the fleet to which this device belongs.
         #   @return [String]
 
       end
@@ -836,6 +943,36 @@ module Aws
 
       end
 
+      # Represents the request to get information about the specified remote
+      # access session.
+      # @note When making an API call, pass GetRemoteAccessSessionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         arn: "AmazonResourceName", # required
+      #       }
+      class GetRemoteAccessSessionRequest < Aws::Structure.new(
+        :arn)
+
+        # @!attribute [rw] arn
+        #   The Amazon Resource Name (ARN) of the remote access session about
+        #   which you want to get session information.
+        #   @return [String]
+
+      end
+
+      # Represents the response from the server that lists detailed
+      # information about the remote access session.
+      class GetRemoteAccessSessionResult < Aws::Structure.new(
+        :remote_access_session)
+
+        # @!attribute [rw] remote_access_session
+        #   A container that lists detailed information about the remote access
+        #   session.
+        #   @return [Types::RemoteAccessSession]
+
+      end
+
       # Represents a request to the get run operation.
       # @note When making an API call, pass GetRunRequest
       #   data as a hash:
@@ -964,6 +1101,44 @@ module Aws
         #
         #   * PLATFORM: The platform (for example, Android or iOS).
         #   @return [String]
+
+      end
+
+      # Represents the request to install an Android application (in .apk
+      # format) or an iOS application (in .ipa format) as part of a remote
+      # access session.
+      # @note When making an API call, pass InstallToRemoteAccessSessionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         remote_access_session_arn: "AmazonResourceName", # required
+      #         app_arn: "AmazonResourceName", # required
+      #       }
+      class InstallToRemoteAccessSessionRequest < Aws::Structure.new(
+        :remote_access_session_arn,
+        :app_arn)
+
+        # @!attribute [rw] remote_access_session_arn
+        #   The Amazon Resource Name (ARN) of the remote access session about
+        #   which you are requesting information.
+        #   @return [String]
+
+        # @!attribute [rw] app_arn
+        #   The Amazon Resource Name (ARN) of the app about which you are
+        #   requesting information.
+        #   @return [String]
+
+      end
+
+      # Represents the response from the server after AWS Device Farm makes a
+      # request to install to a remote access session.
+      class InstallToRemoteAccessSessionResult < Aws::Structure.new(
+        :app_upload)
+
+        # @!attribute [rw] app_upload
+        #   An app or a set of one or more tests to upload or that have been
+        #   uploaded.
+        #   @return [Types::Upload]
 
       end
 
@@ -1404,6 +1579,51 @@ module Aws
         #   this is an identifier that is also returned, which can be used in a
         #   subsequent call to this operation to return the next set of items in
         #   the list.
+        #   @return [String]
+
+      end
+
+      # Represents the request to return information about the remote access
+      # session.
+      # @note When making an API call, pass ListRemoteAccessSessionsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         arn: "AmazonResourceName", # required
+      #         next_token: "PaginationToken",
+      #       }
+      class ListRemoteAccessSessionsRequest < Aws::Structure.new(
+        :arn,
+        :next_token)
+
+        # @!attribute [rw] arn
+        #   The Amazon Resource Name (ARN) of the remote access session about
+        #   which you are requesting information.
+        #   @return [String]
+
+        # @!attribute [rw] next_token
+        #   An identifier that was returned from the previous call to this
+        #   operation, which can be used to return the next set of items in the
+        #   list.
+        #   @return [String]
+
+      end
+
+      # Represents the response from the server after AWS Device Farm makes a
+      # request to return information about the remote access session.
+      class ListRemoteAccessSessionsResult < Aws::Structure.new(
+        :remote_access_sessions,
+        :next_token)
+
+        # @!attribute [rw] remote_access_sessions
+        #   A container representing the metadata from the service about each
+        #   remote access session you are requesting.
+        #   @return [Array<Types::RemoteAccessSession>]
+
+        # @!attribute [rw] next_token
+        #   An identifier that was returned from the previous call to this
+        #   operation, which can be used to return the next set of items in the
+        #   list.
         #   @return [String]
 
       end
@@ -1977,6 +2197,113 @@ module Aws
 
       end
 
+      # Represents information about the remote access session.
+      class RemoteAccessSession < Aws::Structure.new(
+        :arn,
+        :name,
+        :created,
+        :status,
+        :result,
+        :message,
+        :started,
+        :stopped,
+        :device,
+        :billing_method,
+        :device_minutes,
+        :endpoint)
+
+        # @!attribute [rw] arn
+        #   The Amazon Resource Name (ARN) of the remote access session.
+        #   @return [String]
+
+        # @!attribute [rw] name
+        #   The name of the remote access session.
+        #   @return [String]
+
+        # @!attribute [rw] created
+        #   The date and time the remote access session was created.
+        #   @return [Time]
+
+        # @!attribute [rw] status
+        #   The status of the remote access session. Can be any of the
+        #   following:
+        #
+        #   * PENDING: A pending status.
+        #
+        #   * PENDING\_CONCURRENCY: A pending concurrency status.
+        #
+        #   * PENDING\_DEVICE: A pending device status.
+        #
+        #   * PROCESSING: A processing status.
+        #
+        #   * SCHEDULING: A scheduling status.
+        #
+        #   * PREPARING: A preparing status.
+        #
+        #   * RUNNING: A running status.
+        #
+        #   * COMPLETED: A completed status.
+        #
+        #   * STOPPING: A stopping status.
+        #   @return [String]
+
+        # @!attribute [rw] result
+        #   The result of the remote access session. Can be any of the
+        #   following:
+        #
+        #   * PENDING: A pending condition.
+        #
+        #   * PASSED: A passing condition.
+        #
+        #   * WARNED: A warning condition.
+        #
+        #   * FAILED: A failed condition.
+        #
+        #   * SKIPPED: A skipped condition.
+        #
+        #   * ERRORED: An error condition.
+        #
+        #   * STOPPED: A stopped condition.
+        #   @return [String]
+
+        # @!attribute [rw] message
+        #   A message about the remote access session.
+        #   @return [String]
+
+        # @!attribute [rw] started
+        #   The date and time the remote access session was started.
+        #   @return [Time]
+
+        # @!attribute [rw] stopped
+        #   The date and time the remote access session was stopped.
+        #   @return [Time]
+
+        # @!attribute [rw] device
+        #   Represents a device type that an app is tested against.
+        #   @return [Types::Device]
+
+        # @!attribute [rw] billing_method
+        #   The billing method of the remote access session. Possible values
+        #   include `METERED` or `UNMETERED`. For more information about metered
+        #   devices, see [AWS Device Farm terminology][1].\"
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology
+        #   @return [String]
+
+        # @!attribute [rw] device_minutes
+        #   Represents the total (metered or unmetered) minutes used by the
+        #   resource to run tests. Contains the sum of minutes consumed by all
+        #   children.
+        #   @return [Types::DeviceMinutes]
+
+        # @!attribute [rw] endpoint
+        #   The endpoint for the remote access sesssion.
+        #   @return [String]
+
+      end
+
       # A request representing an offering renewal.
       # @note When making an API call, pass RenewOfferingRequest
       #   data as a hash:
@@ -2030,7 +2357,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER
+      #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
       #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
       #         value: "String",
       #       }
@@ -2510,6 +2837,35 @@ module Aws
 
       end
 
+      # Represents the request to stop the remote access session.
+      # @note When making an API call, pass StopRemoteAccessSessionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         arn: "AmazonResourceName", # required
+      #       }
+      class StopRemoteAccessSessionRequest < Aws::Structure.new(
+        :arn)
+
+        # @!attribute [rw] arn
+        #   The Amazon Resource Name (ARN) of the remote access session you wish
+        #   to stop.
+        #   @return [String]
+
+      end
+
+      # Represents the response from the server that describes the remote
+      # access session when AWS Device Farm stops the session.
+      class StopRemoteAccessSessionResult < Aws::Structure.new(
+        :remote_access_session)
+
+        # @!attribute [rw] remote_access_session
+        #   A container representing the metadata from the service about the
+        #   remote access session you are stopping.
+        #   @return [Types::RemoteAccessSession]
+
+      end
+
       # Represents the request to stop a specific run.
       # @note When making an API call, pass StopRunRequest
       #   data as a hash:
@@ -2823,7 +3179,7 @@ module Aws
       #         description: "Message",
       #         rules: [
       #           {
-      #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER
+      #             attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
       #             operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
       #             value: "String",
       #           },

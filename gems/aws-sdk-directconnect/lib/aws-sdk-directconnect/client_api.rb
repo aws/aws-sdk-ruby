@@ -49,8 +49,12 @@ module Aws
       DeleteInterconnectResponse = Shapes::StructureShape.new(name: 'DeleteInterconnectResponse')
       DeleteVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'DeleteVirtualInterfaceRequest')
       DeleteVirtualInterfaceResponse = Shapes::StructureShape.new(name: 'DeleteVirtualInterfaceResponse')
+      DescribeConnectionLoaRequest = Shapes::StructureShape.new(name: 'DescribeConnectionLoaRequest')
+      DescribeConnectionLoaResponse = Shapes::StructureShape.new(name: 'DescribeConnectionLoaResponse')
       DescribeConnectionsOnInterconnectRequest = Shapes::StructureShape.new(name: 'DescribeConnectionsOnInterconnectRequest')
       DescribeConnectionsRequest = Shapes::StructureShape.new(name: 'DescribeConnectionsRequest')
+      DescribeInterconnectLoaRequest = Shapes::StructureShape.new(name: 'DescribeInterconnectLoaRequest')
+      DescribeInterconnectLoaResponse = Shapes::StructureShape.new(name: 'DescribeInterconnectLoaResponse')
       DescribeInterconnectsRequest = Shapes::StructureShape.new(name: 'DescribeInterconnectsRequest')
       DescribeVirtualInterfacesRequest = Shapes::StructureShape.new(name: 'DescribeVirtualInterfacesRequest')
       DirectConnectClientException = Shapes::StructureShape.new(name: 'DirectConnectClientException')
@@ -62,6 +66,10 @@ module Aws
       InterconnectName = Shapes::StringShape.new(name: 'InterconnectName')
       InterconnectState = Shapes::StringShape.new(name: 'InterconnectState')
       Interconnects = Shapes::StructureShape.new(name: 'Interconnects')
+      Loa = Shapes::StructureShape.new(name: 'Loa')
+      LoaContent = Shapes::BlobShape.new(name: 'LoaContent')
+      LoaContentType = Shapes::StringShape.new(name: 'LoaContentType')
+      LoaIssueTime = Shapes::TimestampShape.new(name: 'LoaIssueTime')
       Location = Shapes::StructureShape.new(name: 'Location')
       LocationCode = Shapes::StringShape.new(name: 'LocationCode')
       LocationList = Shapes::ListShape.new(name: 'LocationList')
@@ -73,6 +81,7 @@ module Aws
       NewPublicVirtualInterfaceAllocation = Shapes::StructureShape.new(name: 'NewPublicVirtualInterfaceAllocation')
       OwnerAccount = Shapes::StringShape.new(name: 'OwnerAccount')
       PartnerName = Shapes::StringShape.new(name: 'PartnerName')
+      ProviderName = Shapes::StringShape.new(name: 'ProviderName')
       Region = Shapes::StringShape.new(name: 'Region')
       RouteFilterPrefix = Shapes::StructureShape.new(name: 'RouteFilterPrefix')
       RouteFilterPrefixList = Shapes::ListShape.new(name: 'RouteFilterPrefixList')
@@ -136,6 +145,7 @@ module Aws
       Connection.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, location_name: "bandwidth"))
       Connection.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, location_name: "vlan"))
       Connection.add_member(:partner_name, Shapes::ShapeRef.new(shape: PartnerName, location_name: "partnerName"))
+      Connection.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
       Connection.struct_class = Types::Connection
 
       ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
@@ -176,11 +186,27 @@ module Aws
       DeleteVirtualInterfaceResponse.add_member(:virtual_interface_state, Shapes::ShapeRef.new(shape: VirtualInterfaceState, location_name: "virtualInterfaceState"))
       DeleteVirtualInterfaceResponse.struct_class = Types::DeleteVirtualInterfaceResponse
 
+      DescribeConnectionLoaRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
+      DescribeConnectionLoaRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+      DescribeConnectionLoaRequest.add_member(:loa_content_type, Shapes::ShapeRef.new(shape: LoaContentType, location_name: "loaContentType"))
+      DescribeConnectionLoaRequest.struct_class = Types::DescribeConnectionLoaRequest
+
+      DescribeConnectionLoaResponse.add_member(:loa, Shapes::ShapeRef.new(shape: Loa, location_name: "loa"))
+      DescribeConnectionLoaResponse.struct_class = Types::DescribeConnectionLoaResponse
+
       DescribeConnectionsOnInterconnectRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, required: true, location_name: "interconnectId"))
       DescribeConnectionsOnInterconnectRequest.struct_class = Types::DescribeConnectionsOnInterconnectRequest
 
       DescribeConnectionsRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
       DescribeConnectionsRequest.struct_class = Types::DescribeConnectionsRequest
+
+      DescribeInterconnectLoaRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, required: true, location_name: "interconnectId"))
+      DescribeInterconnectLoaRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
+      DescribeInterconnectLoaRequest.add_member(:loa_content_type, Shapes::ShapeRef.new(shape: LoaContentType, location_name: "loaContentType"))
+      DescribeInterconnectLoaRequest.struct_class = Types::DescribeInterconnectLoaRequest
+
+      DescribeInterconnectLoaResponse.add_member(:loa, Shapes::ShapeRef.new(shape: Loa, location_name: "loa"))
+      DescribeInterconnectLoaResponse.struct_class = Types::DescribeInterconnectLoaResponse
 
       DescribeInterconnectsRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
       DescribeInterconnectsRequest.struct_class = Types::DescribeInterconnectsRequest
@@ -195,12 +221,17 @@ module Aws
       Interconnect.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
       Interconnect.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, location_name: "location"))
       Interconnect.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, location_name: "bandwidth"))
+      Interconnect.add_member(:loa_issue_time, Shapes::ShapeRef.new(shape: LoaIssueTime, location_name: "loaIssueTime"))
       Interconnect.struct_class = Types::Interconnect
 
       InterconnectList.member = Shapes::ShapeRef.new(shape: Interconnect)
 
       Interconnects.add_member(:interconnects, Shapes::ShapeRef.new(shape: InterconnectList, location_name: "interconnects"))
       Interconnects.struct_class = Types::Interconnects
+
+      Loa.add_member(:loa_content, Shapes::ShapeRef.new(shape: LoaContent, location_name: "loaContent"))
+      Loa.add_member(:loa_content_type, Shapes::ShapeRef.new(shape: LoaContentType, location_name: "loaContentType"))
+      Loa.struct_class = Types::Loa
 
       Location.add_member(:location_code, Shapes::ShapeRef.new(shape: LocationCode, location_name: "locationCode"))
       Location.add_member(:location_name, Shapes::ShapeRef.new(shape: LocationName, location_name: "locationName"))
@@ -427,6 +458,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
         end)
 
+        api.add_operation(:describe_connection_loa, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeConnectionLoa"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeConnectionLoaRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeConnectionLoaResponse)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+        end)
+
         api.add_operation(:describe_connections, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DescribeConnections"
           o.http_method = "POST"
@@ -447,6 +488,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
           o[:pager] = Aws::Pager.new("result_key" => "connections")
+        end)
+
+        api.add_operation(:describe_interconnect_loa, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeInterconnectLoa"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeInterconnectLoaRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeInterconnectLoaResponse)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
         end)
 
         api.add_operation(:describe_interconnects, Seahorse::Model::Operation.new.tap do |o|

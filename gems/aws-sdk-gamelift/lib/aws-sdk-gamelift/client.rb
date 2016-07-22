@@ -52,10 +52,10 @@ module Aws
       # including an alias ID, which you can reference when creating a game
       # session. To reassign the alias to another fleet ID, call UpdateAlias.
       # @option params [required, String] :name
-      #   Descriptive label associated with this alias. Alias names do not need
-      #   to be unique.
+      #   Descriptive label associated with an alias. Alias names do not need to
+      #   be unique.
       # @option params [String] :description
-      #   Human-readable description of the alias.
+      #   Human-readable description of an alias.
       # @option params [required, Types::RoutingStrategy] :routing_strategy
       #   Object specifying the fleet and routing type to use for the alias.
       # @return [Types::CreateAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -91,35 +91,35 @@ module Aws
 
       # Initializes a new build record and generates information required to
       # upload a game build to Amazon GameLift. Once the build record has been
-      # created and is in an INITIALIZED state, you can upload your game
+      # created and is in an `INITIALIZED` state, you can upload your game
       # build.
       #
-      # <important markdown="1">To create a build, use the CLI command `upload-build`, which creates a
-      # new build record and uploads the build files in one step. (See the
-      # [Amazon GameLift Developer Guide][1] for more details on the CLI and
-      # the upload process.) Call the `CreateBuild` action only if you have
-      # your own Amazon Simple Storage Service (Amazon S3) client and need to
-      # manually upload your build files.
+      # <important markdown="1"> Do not use this API action unless you are using your own Amazon Simple
+      # Storage Service (Amazon S3) client and need to manually upload your
+      # build files. Instead, to create a build, use the CLI command
+      # `upload-build`, which creates a new build record and uploads the build
+      # files in one step. (See the [Amazon GameLift Developer Guide][1] for
+      # more details on the CLI and the upload process.)
       #
-      # </important>
+      #  </important>
       #
       # To create a new build, optionally specify a build name and version.
       # This metadata is stored with other properties in the build record and
-      # is displayed in the GameLift console (but not visible to players). If
-      # successful, this action returns the newly created build record along
-      # with an Amazon S3 storage location and AWS account credentials. Use
-      # the location and credentials to upload your game build.
+      # is displayed in the GameLift console (it is not visible to players).
+      # If successful, this action returns the newly created build record
+      # along with the Amazon S3 storage location and AWS account credentials.
+      # Use the location and credentials to upload your game build.
       #
       #
       #
       # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/
       # @option params [String] :name
-      #   Descriptive label associated with this build. Build names do not need
-      #   to be unique. A build name can be changed later using UpdateBuild.
+      #   Descriptive label associated with a build. Build names do not need to
+      #   be unique. A build name can be changed later using `UpdateBuild`.
       # @option params [String] :version
       #   Version associated with this build. Version strings do not need to be
       #   unique to a build. A build version can be changed later using
-      #   UpdateBuild.
+      #   `UpdateBuild`.
       # @option params [Types::S3Location] :storage_location
       #   Location in Amazon Simple Storage Service (Amazon S3) where a build\'s
       #   files are stored. This location is assigned in response to a
@@ -167,92 +167,126 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a new fleet to host game servers. A fleet consists of a set of
-      # Amazon Elastic Compute Cloud (Amazon EC2) instances of a certain type,
-      # which defines the CPU, memory, storage, and networking capacity of
-      # each host in the fleet. See [Amazon EC2 Instance Types][1] for more
-      # information. Each instance in the fleet hosts a game server created
-      # from the specified game build. Once a fleet is in an ACTIVE state, it
-      # can begin hosting game sessions.
+      # Creates a new fleet to run your game servers. A fleet is a set of
+      # Amazon Elastic Compute Cloud (Amazon EC2) instances, each of which can
+      # run multiple server processes to host game sessions. You configure a
+      # fleet to create instances with certain hardware specifications (see
+      # [Amazon EC2 Instance Types][1] for more information), and deploy a
+      # specified game build to each instance. A newly created fleet passes
+      # through several states; once it reaches the `ACTIVE` state, it can
+      # begin hosting game sessions.
       #
-      # To create a new fleet, provide a name and the EC2 instance type for
-      # the new fleet, and specify the build and server launch path. Builds
-      # must be in a READY state before they can be used to build fleets. When
-      # configuring the new fleet, you can optionally (1) provide a set of
-      # launch parameters to be passed to a game server when activated; (2)
-      # limit incoming traffic to a specified range of IP addresses and port
-      # numbers; (3) set game session protection for all instances in the
-      # fleet, and (4) configure Amazon GameLift to store game session logs by
-      # specifying the path to the logs stored in your game server files. If
-      # the call is successful, Amazon GameLift performs the following tasks:
+      # To create a new fleet, provide a fleet name, an EC2 instance type, and
+      # a build ID of the game build to deploy. You can also configure the new
+      # fleet with the following settings: (1) a runtime configuration
+      # describing what server processes to run on each instance in the fleet
+      # (required to create fleet), (2) access permissions for inbound
+      # traffic, (3) fleet-wide game session protection, and (4) the location
+      # of default log files for GameLift to upload and store.
       #
-      # * Creates a fleet record and sets the state to NEW.
-      # * Sets the fleet\'s capacity to 1 \"desired\" and 1 \"active\" EC2
-      #   instance count.
-      # * Creates an EC2 instance and begins the process of initializing the
-      #   fleet and activating a game server on the instance.
+      # If the `CreateFleet` call is successful, Amazon GameLift performs the
+      # following tasks:
+      #
+      # * Creates a fleet record and sets the state to `NEW` (followed by
+      #   other states as the fleet is activated).
+      # * Sets the fleet\'s capacity to 1 \"desired\", which causes GameLift
+      #   to start one new EC2 instance.
+      # * Starts launching server processes on the instance. If the fleet is
+      #   configured to run multiple server processes per instance, GameLift
+      #   staggers each launch by a few seconds.
       # * Begins writing events to the fleet event log, which can be accessed
       #   in the GameLift console.
+      # * Sets the fleet\'s status to `ACTIVE` once one server process in the
+      #   fleet is ready to host a game session.
       #
-      # Once a fleet is created, use the following actions to change certain
-      # fleet properties (server launch parameters and log paths cannot be
-      # changed):
+      # After a fleet is created, use the following actions to change fleet
+      # properties and configuration:
       #
       # * UpdateFleetAttributes -- Update fleet metadata, including name and
       #   description.
       # * UpdateFleetCapacity -- Increase or decrease the number of instances
       #   you want the fleet to maintain.
-      # * UpdateFleetPortSettings -- Change the IP addresses and ports that
-      #   allow access to incoming traffic.
+      # * UpdateFleetPortSettings -- Change the IP address and port ranges
+      #   that allow access to incoming traffic.
+      # * UpdateRuntimeConfiguration -- Change how server processes are
+      #   launched in the fleet, including launch path, launch parameters, and
+      #   the number of concurrent processes.
       #
       #
       #
       # [1]: https://aws.amazon.com/ec2/instance-types/
       # @option params [required, String] :name
-      #   Descriptive label associated with this fleet. Fleet names do not need
-      #   to be unique.
+      #   Descriptive label associated with a fleet. Fleet names do not need to
+      #   be unique.
       # @option params [String] :description
-      #   Human-readable description of the fleet.
+      #   Human-readable description of a fleet.
       # @option params [required, String] :build_id
-      #   Unique identifier for the build you want the new fleet to use.
-      # @option params [required, String] :server_launch_path
-      #   Path to the launch executable for the game server. A game server is
-      #   built into a `C:\game` drive. This value must be expressed as
-      #   `C:\game\[launchpath]`. Example: If, when built, your game server
-      #   files are in a folder called \"MyGame\", your log path should be
-      #   `C:\game\MyGame\server.exe`.
+      #   Unique identifier of the build to be deployed on the new fleet. The
+      #   build must have been successfully uploaded to GameLift and be in a
+      #   `READY` state. This fleet setting cannot be changed once the fleet is
+      #   created.
+      # @option params [String] :server_launch_path
+      #   This parameter is no longer used. Instead, specify a server launch
+      #   path using the `RuntimeConfiguration` parameter. (Requests that
+      #   specify a server launch path and launch parameters instead of a
+      #   runtime configuration will continue to work.)
       # @option params [String] :server_launch_parameters
-      #   Parameters required to launch your game server. These parameters
-      #   should be expressed as a string of command-line parameters. Example:
-      #   \"+sv\_port 33435 +start\_lobby\".
+      #   This parameter is no longer used. Instead, specify server launch
+      #   parameters in the `RuntimeConfiguration` parameter. (Requests that
+      #   specify a server launch path and launch parameters instead of a
+      #   runtime configuration will continue to work.)
       # @option params [Array<String>] :log_paths
-      #   Path to game-session log files generated by your game server. Once a
-      #   game session has been terminated, Amazon GameLift captures and stores
-      #   the logs on Amazon S3. Use the GameLift console to access the stored
-      #   logs.
+      #   Location of default log files. When a server process is shut down,
+      #   Amazon GameLift captures and stores any log files in this location.
+      #   These logs are in addition to game session logs; see more on game
+      #   session logs in the [Amazon GameLift Developer Guide][1]. If no
+      #   default log path for a fleet is specified, GameLift will automatically
+      #   upload logs stored on each instance at `C:\game\logs`. Use the
+      #   GameLift console to access stored logs.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code
       # @option params [required, String] :ec2_instance_type
-      #   Type of EC2 instances used in the fleet. EC2 instance types define the
-      #   CPU, memory, storage, and networking capacity of the fleetaposs hosts.
-      #   Amazon GameLift supports the EC2 instance types listed below. See
-      #   [Amazon EC2 Instance Types][1] for detailed descriptions of each.
+      #   Name of an EC2 instance type that is supported in Amazon GameLift. A
+      #   fleet instance type determines the computing resources of each
+      #   instance in the fleet, including CPU, memory, storage, and networking
+      #   capacity. GameLift supports the following EC2 instance types. See
+      #   [Amazon EC2 Instance Types][1] for detailed descriptions.
       #
       #
       #
       #   [1]: https://aws.amazon.com/ec2/instance-types/
       # @option params [Array<Types::IpPermission>] :ec2_inbound_permissions
-      #   Access limits for incoming traffic. Setting these values limits game
-      #   server access to incoming traffic using specified IP ranges and port
-      #   numbers. Some ports in a range may be restricted. You can provide one
-      #   or more sets of permissions for the fleet.
+      #   Range of IP addresses and port settings that permit inbound traffic to
+      #   access server processes running on the fleet. If no inbound
+      #   permissions are set, including both IP address range and port range,
+      #   the server processes in the fleet cannot accept connections. You can
+      #   specify one or more sets of permissions for a fleet.
       # @option params [String] :new_game_session_protection_policy
-      #   Game session protection policy to apply to all instances created in
-      #   this fleet. If this parameter is not set, new instances in this fleet
-      #   will default to no protection. Protection can be set for individual
-      #   instances using UpdateGameSession. * NoProtection: The game session
-      #   can be terminated during a scale-down
-      #     event.
-      #   * FullProtection: If the game session is in an ACTIVE status, it
-      #     cannot be terminated during a scale-down event.
+      #   Game session protection policy to apply to all instances in this
+      #   fleet. If this parameter is not set, instances in this fleet default
+      #   to no protection. You can change a fleet\'s protection policy using
+      #   UpdateFleetAttributes, but this change will only affect sessions
+      #   created after the policy change. You can also set protection for
+      #   individual instances using UpdateGameSession. * **NoProtection** – The
+      #   game session can be terminated during a
+      #     scale-down event.
+      #   * **FullProtection** – If the game session is in an `ACTIVE` status,
+      #     it cannot be terminated during a scale-down event.
+      # @option params [Types::RuntimeConfiguration] :runtime_configuration
+      #   Instructions for launching server processes on each instance in the
+      #   fleet. The runtime configuration for a fleet has a collection of
+      #   server process configurations, one for each type of server process to
+      #   run on an instance. A server process configuration specifies the
+      #   location of the server executable, launch parameters, and the number
+      #   of concurrent processes with that configuration to maintain on each
+      #   instance. A `CreateFleet` request must include a runtime configuration
+      #   with at least one server process configuration; otherwise the request
+      #   will fail with an invalid request exception. (This parameter replaces
+      #   the parameters `ServerLaunchPath` and `ServerLaunchParameters`;
+      #   requests that contain values for these parameters instead of a runtime
+      #   configuration will continue to work.)
       # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateFleetOutput#fleet_attributes #FleetAttributes} => Types::FleetAttributes
@@ -262,7 +296,7 @@ module Aws
       #     name: "NonZeroAndMaxString", # required
       #     description: "NonZeroAndMaxString",
       #     build_id: "BuildId", # required
-      #     server_launch_path: "NonZeroAndMaxString", # required
+      #     server_launch_path: "NonZeroAndMaxString",
       #     server_launch_parameters: "NonZeroAndMaxString",
       #     log_paths: ["NonZeroAndMaxString"],
       #     ec2_instance_type: "t2.micro", # required, accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
@@ -275,6 +309,15 @@ module Aws
       #       },
       #     ],
       #     new_game_session_protection_policy: "NoProtection", # accepts NoProtection, FullProtection
+      #     runtime_configuration: {
+      #       server_processes: [
+      #         {
+      #           launch_path: "NonZeroAndMaxString", # required
+      #           parameters: "NonZeroAndMaxString",
+      #           concurrent_executions: 1, # required
+      #         },
+      #       ],
+      #     },
       #   })
       #
       # @example Response structure
@@ -299,9 +342,9 @@ module Aws
 
       # Creates a multiplayer game session for players. This action creates a
       # game session record and assigns the new session to an instance in the
-      # specified fleet, which activates the server initialization process in
-      # your game server. A fleet must be in an ACTIVE state before a game
-      # session can be created for it.
+      # specified fleet, which initializes a new server process to host the
+      # game session. A fleet must be in an `ACTIVE` state before a game
+      # session can be created in it.
       #
       # To create a game session, specify either a fleet ID or an alias ID and
       # indicate the maximum number of players the game session allows. You
@@ -320,11 +363,11 @@ module Aws
       #   Maximum number of players that can be connected simultaneously to the
       #   game session.
       # @option params [String] :name
-      #   Descriptive label associated with this game session. Session names do
-      #   not need to be unique.
+      #   Descriptive label associated with a game session. Session names do not
+      #   need to be unique.
       # @option params [Array<Types::GameProperty>] :game_properties
       #   Set of properties used to administer a game session. These properties
-      #   are passed to your game server.
+      #   are passed to the server process hosting it.
       # @return [Types::CreateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateGameSessionOutput#game_session #GameSession} => Types::GameSession
@@ -356,6 +399,7 @@ module Aws
       #   resp.game_session.game_properties[0].key #=> String
       #   resp.game_session.game_properties[0].value #=> String
       #   resp.game_session.ip_address #=> String
+      #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -365,8 +409,8 @@ module Aws
       end
 
       # Adds a player to a game session and creates a player session record. A
-      # game session must be in an ACTIVE state, have a creation policy of
-      # ALLOW\_ALL, and have an open player slot before players can be added
+      # game session must be in an `ACTIVE` state, have a creation policy of
+      # `ALLOW_ALL`, and have an open player slot before players can be added
       # to the session.
       #
       # To create a player session, specify a game session ID and player ID.
@@ -396,6 +440,7 @@ module Aws
       #   resp.player_session.termination_time #=> Time
       #   resp.player_session.status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
       #   resp.player_session.ip_address #=> String
+      #   resp.player_session.port #=> Integer
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_player_session(params = {}, options = {})
@@ -406,9 +451,9 @@ module Aws
       # Adds a group of players to a game session. Similar to
       # CreatePlayerSession, this action allows you to add multiple players in
       # a single call, which is useful for games that provide party and/or
-      # matchmaking features. A game session must be in an ACTIVE state, have
-      # a creation policy of ALLOW\_ALL, and have an open player slot before
-      # players can be added to the session.
+      # matchmaking features. A game session must be in an `ACTIVE` state,
+      # have a creation policy of `ALLOW_ALL`, and have an open player slot
+      # before players can be added to the session.
       #
       # To create player sessions, specify a game session ID and a list of
       # player IDs. If successful, the players are added to the game session
@@ -437,6 +482,7 @@ module Aws
       #   resp.player_sessions[0].termination_time #=> Time
       #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
       #   resp.player_sessions[0].ip_address #=> String
+      #   resp.player_sessions[0].port #=> Integer
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_player_sessions(params = {}, options = {})
@@ -445,7 +491,7 @@ module Aws
       end
 
       # Deletes an alias. This action removes all record of the alias; game
-      # clients attempting to access a game server using the deleted alias
+      # clients attempting to access a server process using the deleted alias
       # receive an error. To delete an alias, specify the alias ID to be
       # deleted.
       # @option params [required, String] :alias_id
@@ -468,8 +514,8 @@ module Aws
       # any uploaded build files.
       #
       # To delete a build, specify its ID. Deleting a build does not affect
-      # the status of any active fleets, but you can no longer create new
-      # fleets for the deleted build.
+      # the status of any active fleets using the build, but you can no longer
+      # create new fleets with the deleted build.
       # @option params [required, String] :build_id
       #   Unique identifier for the build you want to delete.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -511,7 +557,7 @@ module Aws
       # policy, specify both the scaling policy name and the fleet ID it is
       # associated with.
       # @option params [required, String] :name
-      #   Descriptive label associated with this scaling policy. Policy names do
+      #   Descriptive label associated with a scaling policy. Policy names do
       #   not need to be unique.
       # @option params [required, String] :fleet_id
       #   Unique identifier for a fleet.
@@ -563,7 +609,8 @@ module Aws
       # build ID. If successful, an object containing the build properties is
       # returned.
       # @option params [required, String] :build_id
-      #   Unique identifier for the build you want to retrieve properties for.
+      #   Unique identifier of the build that you want to retrieve properties
+      #   for.
       # @return [Types::DescribeBuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeBuildOutput#build #Build} => Types::Build
@@ -597,11 +644,12 @@ module Aws
       # GameLift can be found in the AWS Management Console for GameLift (see
       # the drop-down list in the upper right corner).
       # @option params [String] :ec2_instance_type
-      #   Type of EC2 instances used in the fleet. EC2 instance types define the
-      #   CPU, memory, storage, and networking capacity of the fleetaposs hosts.
-      #   Amazon GameLift supports the EC2 instance types listed below. See
-      #   [Amazon EC2 Instance Types][1] for detailed descriptions of each.
-      #   Leave this parameter blank to retrieve limits for all types.
+      #   Name of an EC2 instance type that is supported in Amazon GameLift. A
+      #   fleet instance type determines the computing resources of each
+      #   instance in the fleet, including CPU, memory, storage, and networking
+      #   capacity. GameLift supports the following EC2 instance types. See
+      #   [Amazon EC2 Instance Types][1] for detailed descriptions. Leave this
+      #   parameter blank to retrieve limits for all types.
       #
       #
       #
@@ -630,24 +678,24 @@ module Aws
       # Retrieves fleet properties, including metadata, status, and
       # configuration, for one or more fleets. You can request attributes for
       # all fleets, or specify a list of one or more fleet IDs. When
-      # requesting all fleets, use the pagination parameters to retrieve
+      # requesting multiple fleets, use the pagination parameters to retrieve
       # results as a set of sequential pages. If successful, a FleetAttributes
       # object is returned for each requested fleet ID. When specifying a list
       # of fleet IDs, attribute objects are returned only for fleets that
       # currently exist.
       #
-      # <note markdown="1">Some API actions may limit the number of fleet IDs allowed in one
+      # <note markdown="1"> Some API actions may limit the number of fleet IDs allowed in one
       # request. If a request exceeds this limit, the request fails and the
       # error message includes the maximum allowed.
       #
-      # </note>
+      #  </note>
       # @option params [Array<String>] :fleet_ids
       #   Unique identifiers for the fleet(s) that you want to retrieve
-      #   attributes for. Leave this parameter empty to retrieve attributes for
-      #   all fleets.
+      #   attributes for. To request attributes for all fleets, leave this
+      #   parameter empty.
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages. This
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
       # @option params [String] :next_token
@@ -694,23 +742,24 @@ module Aws
       # This information includes the number of instances that have been
       # requested for the fleet and the number currently active. You can
       # request capacity for all fleets, or specify a list of one or more
-      # fleet IDs. When requesting all fleets, use the pagination parameters
-      # to retrieve results as a set of sequential pages. If successful, a
-      # FleetCapacity object is returned for each requested fleet ID. When
-      # specifying a list of fleet IDs, attribute objects are returned only
-      # for fleets that currently exist.
+      # fleet IDs. When requesting multiple fleets, use the pagination
+      # parameters to retrieve results as a set of sequential pages. If
+      # successful, a FleetCapacity object is returned for each requested
+      # fleet ID. When specifying a list of fleet IDs, attribute objects are
+      # returned only for fleets that currently exist.
       #
-      # <note markdown="1">Some API actions may limit the number of fleet IDs allowed in one
+      # <note markdown="1"> Some API actions may limit the number of fleet IDs allowed in one
       # request. If a request exceeds this limit, the request fails and the
       # error message includes the maximum allowed.
       #
-      # </note>
+      #  </note>
       # @option params [Array<String>] :fleet_ids
       #   Unique identifier for the fleet(s) you want to retrieve capacity
-      #   information for.
+      #   information for. To request capacity information for all fleets, leave
+      #   this parameter empty.
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages. This
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
       # @option params [String] :next_token
@@ -750,10 +799,11 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves entries from the fleet event log. You can specify a time
-      # range to limit the result set. Use the pagination parameters to
-      # retrieve results as a set of sequential pages. If successful, a
-      # collection of event log entries matching the request are returned.
+      # Retrieves entries from the specified fleet\'s event log. You can
+      # specify a time range to limit the result set. Use the pagination
+      # parameters to retrieve results as a set of sequential pages. If
+      # successful, a collection of event log entries matching the request are
+      # returned.
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet to get event logs for.
       # @option params [Time,DateTime,Date,Integer,String] :start_time
@@ -767,8 +817,8 @@ module Aws
       #   to the present. Format is an integer representing the number of
       #   seconds since the Unix epoch (Unix time).
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages.
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
@@ -802,11 +852,13 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves the port settings for a fleet. Port settings are used to
-      # limit incoming traffic access to game servers in the fleet. To get a
-      # fleet\'s port settings, specify a fleet ID. If successful, an
-      # IpPermission object is returned for the requested fleet ID. If the
-      # requested fleet has been deleted, the result set will be empty.
+      # Retrieves the inbound connection permissions for a fleet. Connection
+      # permissions include a range of IP addresses and port settings that
+      # incoming traffic can use to access server processes in the fleet. To
+      # get a fleet\'s inbound connection permissions, specify a fleet ID. If
+      # successful, a collection of IpPermission objects is returned for the
+      # requested fleet ID. If the requested fleet has been deleted, the
+      # result set is empty.
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet you want to retrieve port settings
       #   for.
@@ -834,24 +886,24 @@ module Aws
 
       # Retrieves utilization statistics for one or more fleets. You can
       # request utilization data for all fleets, or specify a list of one or
-      # more fleet IDs. When requesting all fleets, use the pagination
+      # more fleet IDs. When requesting multiple fleets, use the pagination
       # parameters to retrieve results as a set of sequential pages. If
       # successful, a FleetUtilization object is returned for each requested
       # fleet ID. When specifying a list of fleet IDs, utilization objects are
       # returned only for fleets that currently exist.
       #
-      # <note markdown="1">Some API actions may limit the number of fleet IDs allowed in one
+      # <note markdown="1"> Some API actions may limit the number of fleet IDs allowed in one
       # request. If a request exceeds this limit, the request fails and the
       # error message includes the maximum allowed.
       #
-      # </note>
+      #  </note>
       # @option params [Array<String>] :fleet_ids
       #   Unique identifier for the fleet(s) you want to retrieve utilization
-      #   data for. Leave this parameter empty to retrieve utilization data for
-      #   all fleets.
+      #   data for. To request utilization data for all fleets, leave this
+      #   parameter empty.
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages. This
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages. This
       #   parameter is ignored when the request specifies one or a list of fleet
       #   IDs.
       # @option params [String] :next_token
@@ -875,6 +927,7 @@ module Aws
       # @example Response structure
       #   resp.fleet_utilization #=> Array
       #   resp.fleet_utilization[0].fleet_id #=> String
+      #   resp.fleet_utilization[0].active_server_process_count #=> Integer
       #   resp.fleet_utilization[0].active_game_session_count #=> Integer
       #   resp.fleet_utilization[0].current_player_session_count #=> Integer
       #   resp.fleet_utilization[0].maximum_player_session_count #=> Integer
@@ -888,8 +941,8 @@ module Aws
 
       # Retrieves properties, including the protection policy in force, for
       # one or more game sessions. This action can be used in several ways:
-      # (1) provide a *GameSessionId* to request details for a specific game
-      # session; (2) provide either a *FleetId* or an *AliasId* to request
+      # (1) provide a `GameSessionId` to request details for a specific game
+      # session; (2) provide either a `FleetId` or an `AliasId` to request
       # properties for all game sessions running on a fleet.
       #
       # To get game session record(s), specify just one of the following: game
@@ -908,11 +961,11 @@ module Aws
       #   information on all game sessions active on the fleet.
       # @option params [String] :status_filter
       #   Game session status to filter results on. Possible game session states
-      #   include ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two
-      #   are transitory).
+      #   include ACTIVE, `TERMINATED`, `ACTIVATING` and `TERMINATING` (the last
+      #   two are transitory).
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages.
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
@@ -946,6 +999,7 @@ module Aws
       #   resp.game_session_details[0].game_session.game_properties[0].key #=> String
       #   resp.game_session_details[0].game_session.game_properties[0].value #=> String
       #   resp.game_session_details[0].game_session.ip_address #=> String
+      #   resp.game_session_details[0].game_session.port #=> Integer
       #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.next_token #=> String
@@ -957,9 +1011,9 @@ module Aws
       end
 
       # Retrieves properties for one or more game sessions. This action can be
-      # used in several ways: (1) provide a *GameSessionId* to request
-      # properties for a specific game session; (2) provide a *FleetId* or an
-      # *AliasId* to request properties for all game sessions running on a
+      # used in several ways: (1) provide a `GameSessionId` to request
+      # properties for a specific game session; (2) provide a `FleetId` or an
+      # `AliasId` to request properties for all game sessions running on a
       # fleet.
       #
       # To get game session record(s), specify just one of the following: game
@@ -978,11 +1032,11 @@ module Aws
       #   information on all game sessions active on the fleet.
       # @option params [String] :status_filter
       #   Game session status to filter results on. Possible game session states
-      #   include ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two
-      #   are transitory).
+      #   include `ACTIVE`, `TERMINATED`, `ACTIVATING`, and `TERMINATING` (the
+      #   last two are transitory).
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages.
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
@@ -1016,6 +1070,7 @@ module Aws
       #   resp.game_sessions[0].game_properties[0].key #=> String
       #   resp.game_sessions[0].game_properties[0].value #=> String
       #   resp.game_sessions[0].ip_address #=> String
+      #   resp.game_sessions[0].port #=> Integer
       #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.next_token #=> String
       # @param [Hash] params ({})
@@ -1026,10 +1081,10 @@ module Aws
       end
 
       # Retrieves properties for one or more player sessions. This action can
-      # be used in several ways: (1) provide a *PlayerSessionId* parameter to
+      # be used in several ways: (1) provide a `PlayerSessionId` parameter to
       # request properties for a specific player session; (2) provide a
-      # *GameSessionId* parameter to request properties for all player
-      # sessions in the specified game session; (3) provide a *PlayerId*
+      # `GameSessionId` parameter to request properties for all player
+      # sessions in the specified game session; (3) provide a `PlayerId`
       # parameter to request properties for all player sessions of a specified
       # player.
       #
@@ -1047,19 +1102,19 @@ module Aws
       #   Unique identifier for a player session.
       # @option params [String] :player_session_status_filter
       #   Player session status to filter results on. Possible player session
-      #   states include: * RESERVED: The player session request has been
-      #   received, but the
-      #     player has not yet connected to the game server and/or been
+      #   states include the following: * **RESERVED** – The player session
+      #   request has been received, but the
+      #     player has not yet connected to the server process and/or been
       #     validated.
-      #   * ACTIVE: The player has been validated by the game server and is
-      #     currently connected.
-      #   * COMPLETED: The player connection has been dropped.
-      #   * TIMEDOUT: A player session request was received, but the player did
-      #     not connect and/or was not validated within the time-out limit (60
-      #     seconds).
+      #   * **ACTIVE** – The player has been validated by the server process and
+      #     is currently connected.
+      #   * **COMPLETED** – The player connection has been dropped.
+      #   * **TIMEDOUT** – A player session request was received, but the player
+      #     did not connect and/or was not validated within the time-out limit
+      #     (60 seconds).
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages. If a player
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages. If a player
       #   session ID is specified, this parameter is ignored.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
@@ -1091,11 +1146,38 @@ module Aws
       #   resp.player_sessions[0].termination_time #=> Time
       #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
       #   resp.player_sessions[0].ip_address #=> String
+      #   resp.player_sessions[0].port #=> Integer
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_player_sessions(params = {}, options = {})
         req = build_request(:describe_player_sessions, params)
+        req.send_request(options)
+      end
+
+      # Retrieves the current runtime configuration for the specified fleet.
+      # The runtime configuration tells GameLift how to launch server
+      # processes on instances in the fleet.
+      # @option params [required, String] :fleet_id
+      #   Unique identifier of the fleet to get the runtime configuration for.
+      # @return [Types::DescribeRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeRuntimeConfigurationOutput#runtime_configuration #RuntimeConfiguration} => Types::RuntimeConfiguration
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_runtime_configuration({
+      #     fleet_id: "FleetId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.runtime_configuration.server_processes #=> Array
+      #   resp.runtime_configuration.server_processes[0].launch_path #=> String
+      #   resp.runtime_configuration.server_processes[0].parameters #=> String
+      #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_runtime_configuration(params = {}, options = {})
+        req = build_request(:describe_runtime_configuration, params)
         req.send_request(options)
       end
 
@@ -1111,20 +1193,20 @@ module Aws
       #   policies for.
       # @option params [String] :status_filter
       #   Game session status to filter results on. A scaling policy is only in
-      #   force when in an Active state. * ACTIVE: The scaling policy is
+      #   force when in an Active state. * **ACTIVE** – The scaling policy is
       #   currently in force.
-      #   * UPDATEREQUESTED: A request to update the scaling policy has been
-      #     received.
-      #   * UPDATING: A change is being made to the scaling policy.
-      #   * DELETEREQUESTED: A request to delete the scaling policy has been
-      #     received.
-      #   * DELETING: The scaling policy is being deleted.
-      #   * DELETED: The scaling policy has been deleted.
-      #   * ERROR: An error occurred in creating the policy. It should be
+      #   * **UPDATEREQUESTED** – A request to update the scaling policy has
+      #     been received.
+      #   * **UPDATING** – A change is being made to the scaling policy.
+      #   * **DELETEREQUESTED** – A request to delete the scaling policy has
+      #     been received.
+      #   * **DELETING** – The scaling policy is being deleted.
+      #   * **DELETED** – The scaling policy has been deleted.
+      #   * **ERROR** – An error occurred in creating the policy. It should be
       #     removed and recreated.
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages.
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
@@ -1166,10 +1248,10 @@ module Aws
       # automatically stores the logs in Amazon S3. Use this URL to download
       # the logs.
       #
-      # <note markdown="1">See the [AWS Service Limits][1] page for maximum log file sizes. Log
+      # <note markdown="1"> See the [AWS Service Limits][1] page for maximum log file sizes. Log
       # files that exceed this limit are not saved.
       #
-      # </note>
+      #  </note>
       #
       #
       #
@@ -1199,25 +1281,25 @@ module Aws
       # filter the result set by alias name and/or routing strategy type. Use
       # the pagination parameters to retrieve results in sequential pages.
       #
-      # <note markdown="1">Aliases are not listed in any particular order.
+      # <note markdown="1"> Aliases are not listed in any particular order.
       #
-      # </note>
+      #  </note>
       # @option params [String] :routing_strategy_type
       #   Type of routing to filter results on. Use this parameter to retrieve
       #   only aliases of a certain type. To retrieve all aliases, leave this
-      #   parameter empty. Possible routing types include: * SIMPLE: The alias
-      #   resolves to one specific fleet. Use this type when
-      #     routing to active fleets.
-      #   * TERMINAL: The alias does not resolve to a fleet but instead can be
-      #     used to display a message to the user. A terminal alias throws a
+      #   parameter empty. Possible routing types include the following: *
+      #   **SIMPLE** – The alias resolves to one specific fleet. Use this type
+      #     when routing to active fleets.
+      #   * **TERMINAL** – The alias does not resolve to a fleet but instead can
+      #     be used to display a message to the user. A terminal alias throws a
       #     TerminalRoutingStrategyException with the RoutingStrategy message
       #     embedded.
       # @option params [String] :name
-      #   Descriptive label associated with this alias. Alias names do not need
-      #   to be unique.
+      #   Descriptive label associated with an alias. Alias names do not need to
+      #   be unique.
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages.
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
@@ -1253,28 +1335,28 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves build records for all builds associated with an AWS account.
-      # You can filter the result set by build status. Use the pagination
-      # parameters to retrieve results in a set of sequential pages.
+      # Retrieves build records for all builds associated with the AWS account
+      # in use. You can limit results to builds in a specific state using the
+      # `Status` parameter. Use the pagination parameters to retrieve results
+      # in a set of sequential pages.
       #
-      # <note markdown="1">Build records are not listed in any particular order.
+      # <note markdown="1"> Build records are not listed in any particular order.
       #
-      # </note>
+      #  </note>
       # @option params [String] :status
-      #   Build state to filter results on. Use this parameter to retrieve
-      #   builds in a certain state. To retrieve all builds, leave this
-      #   parameter empty. Possible build states include: * INITIALIZED: A new
-      #   build has been defined, but no files have been
-      #     uploaded. You cannot create fleets for builds that are in this
+      #   Build state to filter results by. To retrieve all builds, leave this
+      #   parameter empty. Possible build states include the following: *
+      #   **INITIALIZED** – A new build has been defined, but no files have
+      #     been uploaded. You cannot create fleets for builds that are in this
       #     state. When a build is successfully created, the build state is set
       #     to this value.
-      #   * READY: The game build has been successfully uploaded. You can now
-      #     create new fleets for this build.
-      #   * FAILED: The game build upload failed. You cannot create new fleets
-      #     for this build.
+      #   * **READY** – The game build has been successfully uploaded. You can
+      #     now create new fleets for this build.
+      #   * **FAILED** – The game build upload failed. You cannot create new
+      #     fleets for this build.
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages.
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
@@ -1311,16 +1393,16 @@ module Aws
       # filter the result set by build ID. Use the pagination parameters to
       # retrieve results in sequential pages.
       #
-      # <note markdown="1">Fleet records are not listed in any particular order.
+      # <note markdown="1"> Fleet records are not listed in any particular order.
       #
-      # </note>
+      #  </note>
       # @option params [String] :build_id
       #   Unique identifier of the build to return fleets for. Use this
       #   parameter to return only fleets using the specified build. To retrieve
       #   all fleets, leave this parameter empty.
       # @option params [Integer] :limit
-      #   Maximum number of results to return. You can use this parameter with
-      #   *NextToken* to get results as a set of sequential pages.
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
       # @option params [String] :next_token
       #   Token indicating the start of the next sequential page of results. Use
       #   the token that is returned with a previous call to this action. To
@@ -1349,16 +1431,16 @@ module Aws
       end
 
       # Creates or updates a scaling policy for a fleet. An active scaling
-      # policy prompts GameLift to track a certain metric for a fleet and
-      # automatically change the fleet\'s capacity in specific circumstances.
-      # Each scaling policy contains one rule statement. Fleets can have
-      # multiple scaling policies in force simultaneously.
+      # policy prompts Amazon GameLift to track a certain metric for a fleet
+      # and automatically change the fleet\'s capacity in specific
+      # circumstances. Each scaling policy contains one rule statement. Fleets
+      # can have multiple scaling policies in force simultaneously.
       #
       # A scaling policy rule statement has the following structure:
       #
-      # If *\[MetricName\]* is *\[ComparisonOperator\]* *\[Threshold\]* for
-      # *\[EvaluationPeriods\]* minutes, then *\[ScalingAdjustmentType\]*
-      # to/by *\[ScalingAdjustment\]*.
+      # If `[MetricName]` is `[ComparisonOperator]` `[Threshold]` for
+      # `[EvaluationPeriods]` minutes, then `[ScalingAdjustmentType]` to/by
+      # `[ScalingAdjustment]`.
       #
       # For example, this policy: \"If the number of idle instances exceeds 20
       # for more than 15 minutes, then reduce the fleet capacity by 10
@@ -1373,7 +1455,7 @@ module Aws
       # Scaling policies cannot be suspended or made inactive. To stop
       # enforcing a scaling policy, call DeleteScalingPolicy.
       # @option params [required, String] :name
-      #   Descriptive label associated with this scaling policy. Policy names do
+      #   Descriptive label associated with a scaling policy. Policy names do
       #   not need to be unique. A fleet can have only one scaling policy with
       #   the same name.
       # @option params [required, String] :fleet_id
@@ -1382,16 +1464,16 @@ module Aws
       #   Amount of adjustment to make, based on the scaling adjustment type.
       # @option params [required, String] :scaling_adjustment_type
       #   Type of adjustment to make to a fleet\'s instance count (see
-      #   FleetCapacity): * ChangeInCapacity: add (or subtract) the scaling
-      #   adjustment value
-      #     from the current instance count. Positive values scale up while
-      #     negative values scale down.
-      #   * ExactCapacity: set the instance count to the scaling adjustment
+      #   FleetCapacity): * **ChangeInCapacity** – add (or subtract) the scaling
+      #   adjustment
+      #     value from the current instance count. Positive values scale up
+      #     while negative values scale down.
+      #   * **ExactCapacity** – set the instance count to the scaling adjustment
       #     value.
-      #   * PercentChangeInCapacity: increase or reduce the current instance
-      #     count by the scaling adjustment, read as a percentage. Positive
-      #     values scale up while negative values scale down; for example, a
-      #     value of \"-10\" scales the fleet down by 10%.
+      #   * **PercentChangeInCapacity** – increase or reduce the current
+      #     instance count by the scaling adjustment, read as a percentage.
+      #     Positive values scale up while negative values scale down; for
+      #     example, a value of \"-10\" scales the fleet down by 10%.
       # @option params [required, Float] :threshold
       #   Metric value used to trigger a scaling event.
       # @option params [required, String] :comparison_operator
@@ -1401,23 +1483,23 @@ module Aws
       #   Length of time (in minutes) the metric must be at or beyond the
       #   threshold before a scaling event is triggered.
       # @option params [required, String] :metric_name
-      #   Name of the Service-defined metric that is used to trigger an
-      #   adjustment. * ActivatingGameSessions: number of game sessions in the
-      #   process of
-      #     being created (game session status = ACTIVATING).
-      #   * ActiveGameSessions: number of game sessions currently running (game
-      #     session status = ACTIVE).
-      #   * CurrentPlayerSessions: number of active or reserved player sessions
-      #     (player session status = ACTIVE or RESERVED).
-      #   * AvailablePlayerSessions: number of player session slots currently
-      #     available in active game sessions across the fleet, calculated by
-      #     subtracting a game session\'s current player session count from its
-      #     maximum player session count. This number includes game sessions
-      #     that are not currently accepting players (game session
-      #     PlayerSessionCreationPolicy = DENY\_ALL).
-      #   * ActiveInstances: number of instances currently running a game
+      #   Name of the Amazon GameLift-defined metric that is used to trigger an
+      #   adjustment. * **ActivatingGameSessions** – number of game sessions in
+      #   the process
+      #     of being created (game session status = `ACTIVATING`).
+      #   * **ActiveGameSessions** – number of game sessions currently running
+      #     (game session status = `ACTIVE`).
+      #   * **CurrentPlayerSessions** – number of active or reserved player
+      #     sessions (player session status = `ACTIVE` or `RESERVED`).
+      #   * **AvailablePlayerSessions** – number of player session slots
+      #     currently available in active game sessions across the fleet,
+      #     calculated by subtracting a game session\'s current player session
+      #     count from its maximum player session count. This number includes
+      #     game sessions that are not currently accepting players (game session
+      #     `PlayerSessionCreationPolicy` = `DENY_ALL`).
+      #   * **ActiveInstances** – number of instances currently running a game
       #     session.
-      #   * IdleInstances: number of instances not currently running a game
+      #   * **IdleInstances** – number of instances not currently running a game
       #     session.
       # @return [Types::PutScalingPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1448,16 +1530,16 @@ module Aws
       # storage location for a specific build. Valid credentials are required
       # to upload your game build files to Amazon S3.
       #
-      # <important markdown="1">Call this action only if you need credentials for a build created with
-      # CreateBuild. This is a rare situation; in most cases, builds are
+      # <important markdown="1"> Call this action only if you need credentials for a build created with
+      # `CreateBuild`. This is a rare situation; in most cases, builds are
       # created using the CLI command `upload-build`, which creates a build
       # record and also uploads build files.
       #
-      # </important>
+      #  </important>
       #
       # Upload credentials are returned when you create the build, but they
       # have a limited lifespan. You can get fresh credentials and use them to
-      # re-upload game files until the state of that build changes to READY.
+      # re-upload game files until the state of that build changes to `READY`.
       # Once this happens, you must create a brand new build.
       # @option params [required, String] :build_id
       #   Unique identifier for the build you want to get credentials for.
@@ -1515,10 +1597,10 @@ module Aws
       #   Unique identifier for a fleet alias. Specify the alias you want to
       #   update.
       # @option params [String] :name
-      #   Descriptive label associated with this alias. Alias names do not need
-      #   to be unique.
+      #   Descriptive label associated with an alias. Alias names do not need to
+      #   be unique.
       # @option params [String] :description
-      #   Human-readable description of the alias.
+      #   Human-readable description of an alias.
       # @option params [Types::RoutingStrategy] :routing_strategy
       #   Object specifying the fleet and routing type to use for the alias.
       # @return [Types::UpdateAliasOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1558,10 +1640,10 @@ module Aws
       # provide the new values. If successful, a build object containing the
       # updated metadata is returned.
       # @option params [required, String] :build_id
-      #   Unique identifier for the build you want to update.
+      #   Unique identifier of the build you want to update.
       # @option params [String] :name
-      #   Descriptive label associated with this build. Build names do not need
-      #   to be unique.
+      #   Descriptive label associated with a build. Build names do not need to
+      #   be unique.
       # @option params [String] :version
       #   Version associated with this build. Version strings do not need to be
       #   unique to a build.
@@ -1598,18 +1680,18 @@ module Aws
       #   Unique identifier for the fleet you want to update attribute metadata
       #   for.
       # @option params [String] :name
-      #   Descriptive label associated with this fleet. Fleet names do not need
-      #   to be unique.
+      #   Descriptive label associated with a fleet. Fleet names do not need to
+      #   be unique.
       # @option params [String] :description
-      #   Human-readable description of the fleet.
+      #   Human-readable description of a fleet.
       # @option params [String] :new_game_session_protection_policy
       #   Game session protection policy to apply to all new instances created
-      #   in this fleet. Instances that already exist will not be affected. You
-      #   can set protection for individual instances using UpdateGameSession. *
-      #   NoProtection: The game session can be terminated during a scale-down
-      #     event.
-      #   * FullProtection: If the game session is in an ACTIVE status, it
-      #     cannot be terminated during a scale-down event.
+      #   in this fleet. Instances that already exist are not affected. You can
+      #   set protection for individual instances using UpdateGameSession. *
+      #   **NoProtection** – The game session can be terminated during a
+      #     scale-down event.
+      #   * **FullProtection** – If the game session is in an `ACTIVE` status,
+      #     it cannot be terminated during a scale-down event.
       # @return [Types::UpdateFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateFleetAttributesOutput#fleet_id #FleetId} => String
@@ -1632,22 +1714,23 @@ module Aws
       end
 
       # Updates capacity settings for a fleet. Use this action to specify the
-      # number of EC2 instances (hosts) you want this fleet to contain. Before
-      # calling this action, you may want to call DescribeEC2InstanceLimits to
-      # get the maximum capacity based on the fleet\'s EC2 instance type.
+      # number of EC2 instances (hosts) that you want this fleet to contain.
+      # Before calling this action, you may want to call
+      # DescribeEC2InstanceLimits to get the maximum capacity based on the
+      # fleet\'s EC2 instance type.
       #
-      # If you\'re using auto-scaling (see PutScalingPolicy), you may want to
-      # specify a minimum and/or maximum capacity. If you don\'t provide these
-      # boundaries, auto-scaling can set capacity anywhere between zero and
-      # the [service limits][1].
+      # If you\'re using autoscaling (see PutScalingPolicy), you may want to
+      # specify a minimum and/or maximum capacity. If you don\'t provide
+      # these, autoscaling can set capacity anywhere between zero and the
+      # [service limits][1].
       #
-      # To update fleet capacity, specify the fleet ID and the desired number
-      # of instances. If successful, Amazon GameLift starts or terminates
-      # instances so that the fleet\'s active instance count matches the
-      # desired instance count. You can view a fleet\'s current capacity
-      # information by calling DescribeFleetCapacity. If the desired instance
-      # count is higher than the instance type\'s limit, the \"Limit
-      # Exceeded\" exception will occur.
+      # To update fleet capacity, specify the fleet ID and the number of
+      # instances you want the fleet to host. If successful, Amazon GameLift
+      # starts or terminates instances so that the fleet\'s active instance
+      # count matches the desired instance count. You can view a fleet\'s
+      # current capacity information by calling DescribeFleetCapacity. If the
+      # desired instance count is higher than the instance type\'s limit, the
+      # \"Limit Exceeded\" exception occurs.
       #
       #
       #
@@ -1686,8 +1769,8 @@ module Aws
       # Updates port settings for a fleet. To update settings, specify the
       # fleet ID to be updated and list the permissions you want to update.
       # List the permissions you want to add in
-      # *InboundPermissionAuthorizations*, and permissions you want to remove
-      # in *InboundPermissionRevocations*. Permissions to be removed must
+      # `InboundPermissionAuthorizations`, and permissions you want to remove
+      # in `InboundPermissionRevocations`. Permissions to be removed must
       # match existing fleet permissions. If successful, the fleet ID for the
       # updated fleet is returned.
       # @option params [required, String] :fleet_id
@@ -1744,17 +1827,17 @@ module Aws
       #   Maximum number of players that can be simultaneously connected to the
       #   game session.
       # @option params [String] :name
-      #   Descriptive label associated with this game session. Session names do
-      #   not need to be unique.
+      #   Descriptive label associated with a game session. Session names do not
+      #   need to be unique.
       # @option params [String] :player_session_creation_policy
       #   Policy determining whether or not the game session accepts new
       #   players.
       # @option params [String] :protection_policy
       #   Game session protection policy to apply to this game session only. *
-      #   NoProtection: The game session can be terminated during a scale-down
-      #     event.
-      #   * FullProtection: If the game session is in an ACTIVE status, it
-      #     cannot be terminated during a scale-down event.
+      #   **NoProtection** – The game session can be terminated during a
+      #     scale-down event.
+      #   * **FullProtection** – If the game session is in an `ACTIVE` status,
+      #     it cannot be terminated during a scale-down event.
       # @return [Types::UpdateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateGameSessionOutput#game_session #GameSession} => Types::GameSession
@@ -1781,11 +1864,70 @@ module Aws
       #   resp.game_session.game_properties[0].key #=> String
       #   resp.game_session.game_properties[0].value #=> String
       #   resp.game_session.ip_address #=> String
+      #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def update_game_session(params = {}, options = {})
         req = build_request(:update_game_session, params)
+        req.send_request(options)
+      end
+
+      # Updates the current runtime configuration for the specified fleet,
+      # which tells GameLift how to launch server processes on instances in
+      # the fleet. You can update a fleet\'s runtime configuration at any time
+      # after the fleet is created; it does not need to be in an `ACTIVE`
+      # state.
+      #
+      # To update runtime configuration, specify the fleet ID and provide a
+      # `RuntimeConfiguration` object with the updated collection of server
+      # process configurations.
+      #
+      # Each instance in a GameLift fleet checks regularly for an updated
+      # runtime configuration and changes how it launches server processes to
+      # comply with the latest version. Existing server processes are not
+      # affected by the update; they continue to run until they end, while
+      # GameLift simply adds new server processes to fit the current runtime
+      # configuration. As a result, the runtime configuration changes are
+      # applied gradually as existing processes shut down and new processes
+      # are launched in GameLift\'s normal process recycling activity.
+      # @option params [required, String] :fleet_id
+      #   Unique identifier of the fleet to update runtime configuration for.
+      # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
+      #   Instructions for launching server processes on each instance in the
+      #   fleet. The runtime configuration for a fleet has a collection of
+      #   server process configurations, one for each type of server process to
+      #   run on an instance. A server process configuration specifies the
+      #   location of the server executable, launch parameters, and the number
+      #   of concurrent processes with that configuration to maintain on each
+      #   instance.
+      # @return [Types::UpdateRuntimeConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateRuntimeConfigurationOutput#runtime_configuration #RuntimeConfiguration} => Types::RuntimeConfiguration
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_runtime_configuration({
+      #     fleet_id: "FleetId", # required
+      #     runtime_configuration: { # required
+      #       server_processes: [
+      #         {
+      #           launch_path: "NonZeroAndMaxString", # required
+      #           parameters: "NonZeroAndMaxString",
+      #           concurrent_executions: 1, # required
+      #         },
+      #       ],
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.runtime_configuration.server_processes #=> Array
+      #   resp.runtime_configuration.server_processes[0].launch_path #=> String
+      #   resp.runtime_configuration.server_processes[0].parameters #=> String
+      #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def update_runtime_configuration(params = {}, options = {})
+        req = build_request(:update_runtime_configuration, params)
         req.send_request(options)
       end
 

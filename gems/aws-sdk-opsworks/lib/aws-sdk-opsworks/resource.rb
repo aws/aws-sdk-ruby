@@ -45,6 +45,7 @@ module Aws
       #   You cannot change the ID later.
       #
       #   * If your account supports EC2-Classic, the default value is `no VPC`.
+      #
       #   * If your account does not support EC2-Classic, the default value is
       #     the default VPC for the specified region.
       #
@@ -59,6 +60,7 @@ module Aws
       #
       #   * It must belong to a VPC in your account that is in the specified
       #     region.
+      #
       #   * You must specify a value for `DefaultSubnetId`.
       #
       #   For more information on how to use AWS OpsWorks with a VPC, see
@@ -96,9 +98,22 @@ module Aws
       #   create the instance. You can specify one of the following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
-      #     `Amazon Linux 2015.03`, `Red Hat Enterprise Linux 7`, `Ubuntu 12.04
-      #     LTS`, or `Ubuntu 14.04 LTS`.
-      #   * `Microsoft Windows Server 2012 R2 Base`.
+      #     `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux
+      #     2015.03`.
+      #
+      #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
+      #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+      #
+      #   * `CentOS 7`
+      #
+      #   * `Red Hat Enterprise Linux 7`
+      #
+      #   * A supported Windows operating system, such as `Microsoft Windows
+      #     Server 2012 R2 Base`, `Microsoft Windows Server 2012 R2 with SQL
+      #     Server Express`, `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Web`.
+      #
       #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
       #     when you create instances. For more information, see [ Using Custom
       #     AMIs][1].
@@ -119,15 +134,25 @@ module Aws
       #   themes are:
       #
       #   * `Baked_Goods`
+      #
       #   * `Clouds`
+      #
       #   * `Europe_Cities`
+      #
       #   * `Fruits`
+      #
       #   * `Greek_Deities`
+      #
       #   * `Legendary_creatures_from_Japan`
+      #
       #   * `Planets_and_Moons`
+      #
       #   * `Roman_Deities`
+      #
       #   * `Scottish_Islands`
+      #
       #   * `US_Cities`
+      #
       #   * `Wild_Cats`
       #
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
@@ -193,6 +218,7 @@ module Aws
       #     built-in security group with each layer (default setting). You can
       #     associate additional security groups with a layer after you create
       #     it, but you cannot delete the built-in security group.
+      #
       #   * False - AWS OpsWorks does not associate built-in security groups
       #     with layers. You must create appropriate EC2 security groups and
       #     associate a security group with each layer that you create. However,
@@ -244,6 +270,7 @@ module Aws
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
       #     automatically installs new agent versions on the stack\'s instances
       #     as soon as they are available.
+      #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
@@ -254,7 +281,10 @@ module Aws
       #   not the abbreviated number shown on the console. For a list of
       #   available agent version numbers, call DescribeAgentVersions.
       #
-      #   <note>You can also specify an agent version when you create or update an instance, which overrides the stack's default setting.</note>
+      #   <note markdown="1"> You can also specify an agent version when you create or update an
+      #   instance, which overrides the stack\'s default setting.
+      #
+      #    </note>
       # @return [Stack]
       def create_stack(options = {})
         resp = @client.create_stack(options)

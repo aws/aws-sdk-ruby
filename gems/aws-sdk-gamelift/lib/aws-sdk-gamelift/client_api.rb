@@ -67,6 +67,8 @@ module Aws
       DescribeGameSessionsOutput = Shapes::StructureShape.new(name: 'DescribeGameSessionsOutput')
       DescribePlayerSessionsInput = Shapes::StructureShape.new(name: 'DescribePlayerSessionsInput')
       DescribePlayerSessionsOutput = Shapes::StructureShape.new(name: 'DescribePlayerSessionsOutput')
+      DescribeRuntimeConfigurationInput = Shapes::StructureShape.new(name: 'DescribeRuntimeConfigurationInput')
+      DescribeRuntimeConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeRuntimeConfigurationOutput')
       DescribeScalingPoliciesInput = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesInput')
       DescribeScalingPoliciesOutput = Shapes::StructureShape.new(name: 'DescribeScalingPoliciesOutput')
       Double = Shapes::FloatShape.new(name: 'Double')
@@ -140,11 +142,14 @@ module Aws
       ResolveAliasOutput = Shapes::StructureShape.new(name: 'ResolveAliasOutput')
       RoutingStrategy = Shapes::StructureShape.new(name: 'RoutingStrategy')
       RoutingStrategyType = Shapes::StringShape.new(name: 'RoutingStrategyType')
+      RuntimeConfiguration = Shapes::StructureShape.new(name: 'RuntimeConfiguration')
       S3Location = Shapes::StructureShape.new(name: 'S3Location')
       ScalingAdjustmentType = Shapes::StringShape.new(name: 'ScalingAdjustmentType')
       ScalingPolicy = Shapes::StructureShape.new(name: 'ScalingPolicy')
       ScalingPolicyList = Shapes::ListShape.new(name: 'ScalingPolicyList')
       ScalingStatusType = Shapes::StringShape.new(name: 'ScalingStatusType')
+      ServerProcess = Shapes::StructureShape.new(name: 'ServerProcess')
+      ServerProcessList = Shapes::ListShape.new(name: 'ServerProcessList')
       StringList = Shapes::ListShape.new(name: 'StringList')
       TerminalRoutingStrategyException = Shapes::StructureShape.new(name: 'TerminalRoutingStrategyException')
       Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -161,6 +166,8 @@ module Aws
       UpdateFleetPortSettingsOutput = Shapes::StructureShape.new(name: 'UpdateFleetPortSettingsOutput')
       UpdateGameSessionInput = Shapes::StructureShape.new(name: 'UpdateGameSessionInput')
       UpdateGameSessionOutput = Shapes::StructureShape.new(name: 'UpdateGameSessionOutput')
+      UpdateRuntimeConfigurationInput = Shapes::StructureShape.new(name: 'UpdateRuntimeConfigurationInput')
+      UpdateRuntimeConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateRuntimeConfigurationOutput')
       WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
 
       Alias.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
@@ -209,12 +216,13 @@ module Aws
       CreateFleetInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
       CreateFleetInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
       CreateFleetInput.add_member(:build_id, Shapes::ShapeRef.new(shape: BuildId, required: true, location_name: "BuildId"))
-      CreateFleetInput.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "ServerLaunchPath"))
+      CreateFleetInput.add_member(:server_launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchPath"))
       CreateFleetInput.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
       CreateFleetInput.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
       CreateFleetInput.add_member(:ec2_instance_type, Shapes::ShapeRef.new(shape: EC2InstanceType, required: true, location_name: "EC2InstanceType"))
       CreateFleetInput.add_member(:ec2_inbound_permissions, Shapes::ShapeRef.new(shape: IpPermissionsList, location_name: "EC2InboundPermissions"))
       CreateFleetInput.add_member(:new_game_session_protection_policy, Shapes::ShapeRef.new(shape: ProtectionPolicy, location_name: "NewGameSessionProtectionPolicy"))
+      CreateFleetInput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
       CreateFleetInput.struct_class = Types::CreateFleetInput
 
       CreateFleetOutput.add_member(:fleet_attributes, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "FleetAttributes"))
@@ -355,6 +363,12 @@ module Aws
       DescribePlayerSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
       DescribePlayerSessionsOutput.struct_class = Types::DescribePlayerSessionsOutput
 
+      DescribeRuntimeConfigurationInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+      DescribeRuntimeConfigurationInput.struct_class = Types::DescribeRuntimeConfigurationInput
+
+      DescribeRuntimeConfigurationOutput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
+      DescribeRuntimeConfigurationOutput.struct_class = Types::DescribeRuntimeConfigurationOutput
+
       DescribeScalingPoliciesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
       DescribeScalingPoliciesInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: ScalingStatusType, location_name: "StatusFilter"))
       DescribeScalingPoliciesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
@@ -415,6 +429,7 @@ module Aws
       FleetIdList.member = Shapes::ShapeRef.new(shape: FleetId)
 
       FleetUtilization.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+      FleetUtilization.add_member(:active_server_process_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "ActiveServerProcessCount"))
       FleetUtilization.add_member(:active_game_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "ActiveGameSessionCount"))
       FleetUtilization.add_member(:current_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "CurrentPlayerSessionCount"))
       FleetUtilization.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MaximumPlayerSessionCount"))
@@ -438,6 +453,7 @@ module Aws
       GameSession.add_member(:status, Shapes::ShapeRef.new(shape: GameSessionStatus, location_name: "Status"))
       GameSession.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
       GameSession.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+      GameSession.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
       GameSession.add_member(:player_session_creation_policy, Shapes::ShapeRef.new(shape: PlayerSessionCreationPolicy, location_name: "PlayerSessionCreationPolicy"))
       GameSession.struct_class = Types::GameSession
 
@@ -501,6 +517,7 @@ module Aws
       PlayerSession.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
       PlayerSession.add_member(:status, Shapes::ShapeRef.new(shape: PlayerSessionStatus, location_name: "Status"))
       PlayerSession.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+      PlayerSession.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
       PlayerSession.struct_class = Types::PlayerSession
 
       PlayerSessionList.member = Shapes::ShapeRef.new(shape: PlayerSession)
@@ -536,6 +553,9 @@ module Aws
       RoutingStrategy.add_member(:message, Shapes::ShapeRef.new(shape: FreeText, location_name: "Message"))
       RoutingStrategy.struct_class = Types::RoutingStrategy
 
+      RuntimeConfiguration.add_member(:server_processes, Shapes::ShapeRef.new(shape: ServerProcessList, location_name: "ServerProcesses"))
+      RuntimeConfiguration.struct_class = Types::RuntimeConfiguration
+
       S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Bucket"))
       S3Location.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Key"))
       S3Location.add_member(:role_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RoleArn"))
@@ -553,6 +573,13 @@ module Aws
       ScalingPolicy.struct_class = Types::ScalingPolicy
 
       ScalingPolicyList.member = Shapes::ShapeRef.new(shape: ScalingPolicy)
+
+      ServerProcess.add_member(:launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "LaunchPath"))
+      ServerProcess.add_member(:parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Parameters"))
+      ServerProcess.add_member(:concurrent_executions, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "ConcurrentExecutions"))
+      ServerProcess.struct_class = Types::ServerProcess
+
+      ServerProcessList.member = Shapes::ShapeRef.new(shape: ServerProcess)
 
       StringList.member = Shapes::ShapeRef.new(shape: NonZeroAndMaxString)
 
@@ -608,6 +635,13 @@ module Aws
 
       UpdateGameSessionOutput.add_member(:game_session, Shapes::ShapeRef.new(shape: GameSession, location_name: "GameSession"))
       UpdateGameSessionOutput.struct_class = Types::UpdateGameSessionOutput
+
+      UpdateRuntimeConfigurationInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+      UpdateRuntimeConfigurationInput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, required: true, location_name: "RuntimeConfiguration"))
+      UpdateRuntimeConfigurationInput.struct_class = Types::UpdateRuntimeConfigurationInput
+
+      UpdateRuntimeConfigurationOutput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
+      UpdateRuntimeConfigurationOutput.struct_class = Types::UpdateRuntimeConfigurationOutput
 
 
       # @api private
@@ -851,9 +885,6 @@ module Aws
             "exception" => true
           })
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
             "exception" => true
           })
         end)
@@ -1109,6 +1140,27 @@ module Aws
             "exception" => true
           })
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "exception" => true
+          })
+        end)
+
+        api.add_operation(:describe_runtime_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeRuntimeConfiguration"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeRuntimeConfigurationInput)
+          o.output = Shapes::ShapeRef.new(shape: DescribeRuntimeConfigurationOutput)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
             "exception" => true
           })
         end)
@@ -1433,6 +1485,30 @@ module Aws
             "exception" => true
           })
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "exception" => true
+          })
+        end)
+
+        api.add_operation(:update_runtime_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateRuntimeConfiguration"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: UpdateRuntimeConfigurationInput)
+          o.output = Shapes::ShapeRef.new(shape: UpdateRuntimeConfigurationOutput)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
             "exception" => true
           })
         end)

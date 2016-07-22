@@ -355,7 +355,7 @@ module Aws
         #   containers, see [https://docs.docker.com/userguide/dockerlinks/][1].
         #   This parameter maps to `Links` in the [Create a container][2]
         #   section of the [Docker Remote API][3] and the `--link` option to [
-        #   `docker run` ][4].
+        #   docker run ][4].
         #
         #   <important markdown="1"> Containers that are collocated on a single container instance may be
         #   able to communicate with each other without requiring links or host
@@ -1191,9 +1191,9 @@ module Aws
         :clusters)
 
         # @!attribute [rw] clusters
-        #   A space-separated list of cluster names or full cluster Amazon
-        #   Resource Name (ARN) entries. If you do not specify a cluster, the
-        #   default cluster is assumed.
+        #   A space-separated list of up to 100 cluster names or full cluster
+        #   Amazon Resource Name (ARN) entries. If you do not specify a cluster,
+        #   the default cluster is assumed.
         #   @return [Array<String>]
 
       end
@@ -1923,7 +1923,15 @@ module Aws
         #   Specifying a `desiredStatus` of `STOPPED` limits the results to
         #   tasks that are in the `STOPPED` status, which can be useful for
         #   debugging tasks that are not starting properly or have died or
-        #   finished. The default status filter is `RUNNING`.
+        #   finished. The default status filter is status filter is `RUNNING`,
+        #   which shows tasks that ECS has set the desired status to `RUNNING`.
+        #
+        #   <note markdown="1"> Although you can filter results based on a desired status of
+        #   `PENDING`, this will not return any results because ECS never sets
+        #   the desired status of a task to that value (only a task\'s
+        #   `lastStatus` may have a value of `PENDING`).
+        #
+        #    </note>
         #   @return [String]
 
       end
@@ -2258,6 +2266,7 @@ module Aws
       #
       #       {
       #         family: "String", # required
+      #         task_role_arn: "String",
       #         container_definitions: [ # required
       #           {
       #             name: "String",
@@ -2338,6 +2347,7 @@ module Aws
       #       }
       class RegisterTaskDefinitionRequest < Aws::Structure.new(
         :family,
+        :task_role_arn,
         :container_definitions,
         :volumes)
 
@@ -2347,6 +2357,12 @@ module Aws
         #   is used as a name for your task definition. Up to 255 letters
         #   (uppercase and lowercase), numbers, hyphens, and underscores are
         #   allowed.
+        #   @return [String]
+
+        # @!attribute [rw] task_role_arn
+        #   The Amazon Resource Name (ARN) of the IAM role that containers in
+        #   this task can assume. All containers in this task are granted the
+        #   permissions that are specified in this role.
         #   @return [String]
 
         # @!attribute [rw] container_definitions
@@ -2441,6 +2457,7 @@ module Aws
       #               ],
       #             },
       #           ],
+      #           task_role_arn: "String",
       #         },
       #         count: 1,
       #         started_by: "String",
@@ -2657,6 +2674,7 @@ module Aws
       #               ],
       #             },
       #           ],
+      #           task_role_arn: "String",
       #         },
       #         container_instances: ["String"], # required
       #         started_by: "String",
@@ -2977,6 +2995,7 @@ module Aws
         :task_definition_arn,
         :container_definitions,
         :family,
+        :task_role_arn,
         :revision,
         :volumes,
         :status,
@@ -3000,6 +3019,12 @@ module Aws
 
         # @!attribute [rw] family
         #   The family of your task definition, used as the definition name.
+        #   @return [String]
+
+        # @!attribute [rw] task_role_arn
+        #   The Amazon Resource Name (ARN) of the IAM role that containers in
+        #   this task can assume. All containers in this task are granted the
+        #   permissions that are specified in this role.
         #   @return [String]
 
         # @!attribute [rw] revision
@@ -3049,13 +3074,21 @@ module Aws
       #             ],
       #           },
       #         ],
+      #         task_role_arn: "String",
       #       }
       class TaskOverride < Aws::Structure.new(
-        :container_overrides)
+        :container_overrides,
+        :task_role_arn)
 
         # @!attribute [rw] container_overrides
         #   One or more container overrides sent to a task.
         #   @return [Array<Types::ContainerOverride>]
+
+        # @!attribute [rw] task_role_arn
+        #   The Amazon Resource Name (ARN) of the IAM role that containers in
+        #   this task can assume. All containers in this task are granted the
+        #   permissions that are specified in this role.
+        #   @return [String]
 
       end
 

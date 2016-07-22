@@ -200,7 +200,7 @@ module Aws
       end
 
       # Provides descriptive information for scaling activities with a
-      # specified service namespace.
+      # specified service namespace for the previous six weeks.
       #
       # You can filter the results in a service namespace with the
       # `ResourceId` and `ScalableDimension` parameters.
@@ -406,12 +406,14 @@ module Aws
       #   `ecs:service:DesiredCount` for the desired task count of an Amazon ECS
       #   service.
       # @option params [String] :policy_type
-      #   The policy type. This parameter is required if you are creating a new
-      #   policy.
+      #   The policy type. If you are creating a new policy, this parameter is
+      #   required. If you are updating an existing policy, this parameter is
+      #   not required.
       # @option params [Types::StepScalingPolicyConfiguration] :step_scaling_policy_configuration
-      #   The configuration for the step scaling policy. This parameter is
-      #   required if you are creating a new policy. For more information, see
-      #   StepScalingPolicyConfiguration and StepAdjustment.
+      #   The configuration for the step scaling policy. If you are creating a
+      #   new policy, this parameter is required. If you are updating an
+      #   existing policy, this parameter is not required. For more information,
+      #   see StepScalingPolicyConfiguration and StepAdjustment.
       # @return [Types::PutScalingPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::PutScalingPolicyResponse#policy_arn #PolicyARN} => String

@@ -43,10 +43,12 @@ module Aws
       # * `CustomUserData` -- arbitrary user data to associate with the
       #   endpoint. Amazon SNS does not use this data. The data must be in
       #   UTF-8 format and less than 2KB.
+      #
       # * `Enabled` -- flag that enables/disables delivery to the endpoint.
       #   Amazon SNS will set this to false when a notification service
       #   indicates to Amazon SNS that the endpoint is invalid. Users can set
       #   it back to true, typically after updating Token.
+      #
       # * `Token` -- device token, also referred to as a registration id, for
       #   an app and mobile device. This is returned from the notification
       #   service when an app and mobile device are registered with the
@@ -104,6 +106,15 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :topic_arn
       #   The topic you want to publish to.
+      #
+      #   If you don\'t specify a value for the `TopicArn` parameter, you must
+      #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
+      # @option options [String] :phone_number
+      #   The phone number to which you want to deliver an SMS message. Use
+      #   E.164 format.
+      #
+      #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+      #   must specify a value for the `TargetArn` or `TopicArn` parameters.
       # @option options [required, String] :message
       #   The message you want to send to the topic.
       #
@@ -118,21 +129,30 @@ module Aws
       #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB in
       #   size (262144 bytes, not 262144 characters).
       #
-      #   JSON-specific constraints: * Keys in the JSON object that correspond
-      #   to supported transport
+      #   JSON-specific constraints:
+      #
+      #   * Keys in the JSON object that correspond to supported transport
       #     protocols must have simple JSON string values.
+      #
       #   * The values will be parsed (unescaped) before they are used in
       #     outgoing messages.
+      #
       #   * Outbound notifications are JSON encoded (meaning that the characters
       #     will be reescaped for sending).
+      #
       #   * Values have a minimum length of 0 (the empty string, \"\", is
       #     allowed).
+      #
       #   * Values have a maximum length bounded by the overall message size
       #     (so, including multiple protocols may limit message sizes).
+      #
       #   * Non-string values will cause the key to be ignored.
+      #
       #   * Keys that do not correspond to supported transport protocols are
       #     ignored.
+      #
       #   * Duplicate keys are not allowed.
+      #
       #   * Failure to parse or validate any key or value in the message will
       #     cause the `Publish` call to return an error (no partial delivery).
       # @option options [String] :subject
@@ -151,6 +171,7 @@ module Aws
       #   the value of the `Message` parameter must:
       #
       #   * be a syntactically valid JSON object; and
+      #
       #   * contain at least a top-level JSON key of \"default\" with a value
       #     that is a string.
       #
@@ -184,10 +205,12 @@ module Aws
       #   * `CustomUserData` -- arbitrary user data to associate with the
       #     endpoint. Amazon SNS does not use this data. The data must be in
       #     UTF-8 format and less than 2KB.
+      #
       #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
       #     Amazon SNS will set this to false when a notification service
       #     indicates to Amazon SNS that the endpoint is invalid. Users can set
       #     it back to true, typically after updating Token.
+      #
       #   * `Token` -- device token, also referred to as a registration id, for
       #     an app and mobile device. This is returned from the notification
       #     service when an app and mobile device are registered with the

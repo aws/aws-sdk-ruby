@@ -227,6 +227,8 @@ module Aws
       DescribeHostsResult = Shapes::StructureShape.new(name: 'DescribeHostsResult')
       DescribeIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeIdFormatRequest')
       DescribeIdFormatResult = Shapes::StructureShape.new(name: 'DescribeIdFormatResult')
+      DescribeIdentityIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeIdentityIdFormatRequest')
+      DescribeIdentityIdFormatResult = Shapes::StructureShape.new(name: 'DescribeIdentityIdFormatResult')
       DescribeImageAttributeRequest = Shapes::StructureShape.new(name: 'DescribeImageAttributeRequest')
       DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
       DescribeImagesResult = Shapes::StructureShape.new(name: 'DescribeImagesResult')
@@ -498,6 +500,7 @@ module Aws
       ModifyHostsRequest = Shapes::StructureShape.new(name: 'ModifyHostsRequest')
       ModifyHostsResult = Shapes::StructureShape.new(name: 'ModifyHostsResult')
       ModifyIdFormatRequest = Shapes::StructureShape.new(name: 'ModifyIdFormatRequest')
+      ModifyIdentityIdFormatRequest = Shapes::StructureShape.new(name: 'ModifyIdentityIdFormatRequest')
       ModifyImageAttributeRequest = Shapes::StructureShape.new(name: 'ModifyImageAttributeRequest')
       ModifyInstanceAttributeRequest = Shapes::StructureShape.new(name: 'ModifyInstanceAttributeRequest')
       ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
@@ -1645,6 +1648,13 @@ module Aws
       DescribeIdFormatResult.add_member(:statuses, Shapes::ShapeRef.new(shape: IdFormatList, location_name: "statusSet"))
       DescribeIdFormatResult.struct_class = Types::DescribeIdFormatResult
 
+      DescribeIdentityIdFormatRequest.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+      DescribeIdentityIdFormatRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "principalArn"))
+      DescribeIdentityIdFormatRequest.struct_class = Types::DescribeIdentityIdFormatRequest
+
+      DescribeIdentityIdFormatResult.add_member(:statuses, Shapes::ShapeRef.new(shape: IdFormatList, location_name: "statusSet"))
+      DescribeIdentityIdFormatResult.struct_class = Types::DescribeIdentityIdFormatResult
+
       DescribeImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       DescribeImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
       DescribeImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: ImageAttributeName, required: true, location_name: "Attribute"))
@@ -2412,6 +2422,7 @@ module Aws
       Image.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: String, location_name: "ramdiskId"))
       Image.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformValues, location_name: "platform"))
       Image.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: String, location_name: "sriovNetSupport"))
+      Image.add_member(:ena_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSupport"))
       Image.add_member(:state_reason, Shapes::ShapeRef.new(shape: StateReason, location_name: "stateReason"))
       Image.add_member(:image_owner_alias, Shapes::ShapeRef.new(shape: String, location_name: "imageOwnerAlias"))
       Image.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -2613,6 +2624,7 @@ module Aws
       Instance.add_member(:iam_instance_profile, Shapes::ShapeRef.new(shape: IamInstanceProfile, location_name: "iamInstanceProfile"))
       Instance.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsOptimized"))
       Instance.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: String, location_name: "sriovNetSupport"))
+      Instance.add_member(:ena_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSupport"))
       Instance.struct_class = Types::Instance
 
       InstanceAttribute.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -2627,6 +2639,7 @@ module Aws
       InstanceAttribute.add_member(:product_codes, Shapes::ShapeRef.new(shape: ProductCodeList, location_name: "productCodes"))
       InstanceAttribute.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "ebsOptimized"))
       InstanceAttribute.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "sriovNetSupport"))
+      InstanceAttribute.add_member(:ena_support, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "enaSupport"))
       InstanceAttribute.add_member(:source_dest_check, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "sourceDestCheck"))
       InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
       InstanceAttribute.struct_class = Types::InstanceAttribute
@@ -2850,6 +2863,11 @@ module Aws
       ModifyIdFormatRequest.add_member(:use_long_ids, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "UseLongIds"))
       ModifyIdFormatRequest.struct_class = Types::ModifyIdFormatRequest
 
+      ModifyIdentityIdFormatRequest.add_member(:resource, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resource"))
+      ModifyIdentityIdFormatRequest.add_member(:use_long_ids, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "useLongIds"))
+      ModifyIdentityIdFormatRequest.add_member(:principal_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "principalArn"))
+      ModifyIdentityIdFormatRequest.struct_class = Types::ModifyIdentityIdFormatRequest
+
       ModifyImageAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       ModifyImageAttributeRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
       ModifyImageAttributeRequest.add_member(:attribute, Shapes::ShapeRef.new(shape: String, location_name: "Attribute"))
@@ -2877,6 +2895,7 @@ module Aws
       ModifyInstanceAttributeRequest.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdStringList, location_name: "GroupId"))
       ModifyInstanceAttributeRequest.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "ebsOptimized"))
       ModifyInstanceAttributeRequest.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "sriovNetSupport"))
+      ModifyInstanceAttributeRequest.add_member(:ena_support, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "enaSupport"))
       ModifyInstanceAttributeRequest.struct_class = Types::ModifyInstanceAttributeRequest
 
       ModifyInstancePlacementRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
@@ -3248,6 +3267,7 @@ module Aws
       RegisterImageRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingRequestList, location_name: "BlockDeviceMapping"))
       RegisterImageRequest.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: String, location_name: "virtualizationType"))
       RegisterImageRequest.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: String, location_name: "sriovNetSupport"))
+      RegisterImageRequest.add_member(:ena_support, Shapes::ShapeRef.new(shape: Boolean, location_name: "enaSupport"))
       RegisterImageRequest.struct_class = Types::RegisterImageRequest
 
       RegisterImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
@@ -3981,8 +4001,8 @@ module Aws
       UnmonitorInstancesResult.add_member(:instance_monitorings, Shapes::ShapeRef.new(shape: InstanceMonitoringList, location_name: "instancesSet"))
       UnmonitorInstancesResult.struct_class = Types::UnmonitorInstancesResult
 
-      UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, required: true, location_name: "error"))
       UnsuccessfulItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+      UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, required: true, location_name: "error"))
       UnsuccessfulItem.struct_class = Types::UnsuccessfulItem
 
       UnsuccessfulItemError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
@@ -4208,14 +4228,14 @@ module Aws
       # @api private
       API = Seahorse::Model::Api.new.tap do |api|
 
-        api.version = "2015-10-01"
+        api.version = "2016-04-01"
 
         api.metadata = {
           "endpointPrefix" => "ec2",
           "protocol" => "ec2",
           "serviceFullName" => "Amazon Elastic Compute Cloud",
           "signatureVersion" => "v4",
-          "xmlNamespace" => "http://ec2.amazonaws.com/doc/2015-10-01",
+          "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-04-01",
         }
 
         api.add_operation(:accept_vpc_peering_connection, Seahorse::Model::Operation.new.tap do |o|
@@ -4938,6 +4958,14 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeIdFormatResult)
         end)
 
+        api.add_operation(:describe_identity_id_format, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeIdentityIdFormat"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeIdentityIdFormatRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeIdentityIdFormatResult)
+        end)
+
         api.add_operation(:describe_image_attribute, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DescribeImageAttribute"
           o.http_method = "POST"
@@ -5595,6 +5623,14 @@ module Aws
           o.http_method = "POST"
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ModifyIdFormatRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
+        api.add_operation(:modify_identity_id_format, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ModifyIdentityIdFormat"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ModifyIdentityIdFormatRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 

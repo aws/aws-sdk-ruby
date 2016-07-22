@@ -364,6 +364,7 @@ module Aws
       #           dynamo_db: {
       #             table_name: "TableName", # required
       #             role_arn: "AwsArn", # required
+      #             operation: "DynamoOperation",
       #             hash_key_field: "HashKeyField", # required
       #             hash_key_value: "HashKeyValue", # required
       #             hash_key_type: "STRING", # accepts STRING, NUMBER
@@ -866,6 +867,7 @@ module Aws
       #   resp.rule.actions #=> Array
       #   resp.rule.actions[0].dynamo_db.table_name #=> String
       #   resp.rule.actions[0].dynamo_db.role_arn #=> String
+      #   resp.rule.actions[0].dynamo_db.operation #=> String
       #   resp.rule.actions[0].dynamo_db.hash_key_field #=> String
       #   resp.rule.actions[0].dynamo_db.hash_key_value #=> String
       #   resp.rule.actions[0].dynamo_db.hash_key_type #=> String, one of "STRING", "NUMBER"
@@ -1401,6 +1403,7 @@ module Aws
       #           dynamo_db: {
       #             table_name: "TableName", # required
       #             role_arn: "AwsArn", # required
+      #             operation: "DynamoOperation",
       #             hash_key_field: "HashKeyField", # required
       #             hash_key_value: "HashKeyValue", # required
       #             hash_key_type: "STRING", # accepts STRING, NUMBER

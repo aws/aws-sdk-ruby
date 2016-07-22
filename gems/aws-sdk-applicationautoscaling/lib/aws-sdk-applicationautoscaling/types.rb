@@ -434,14 +434,16 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] policy_type
-        #   The policy type. This parameter is required if you are creating a
-        #   new policy.
+        #   The policy type. If you are creating a new policy, this parameter is
+        #   required. If you are updating an existing policy, this parameter is
+        #   not required.
         #   @return [String]
 
         # @!attribute [rw] step_scaling_policy_configuration
-        #   The configuration for the step scaling policy. This parameter is
-        #   required if you are creating a new policy. For more information, see
-        #   StepScalingPolicyConfiguration and StepAdjustment.
+        #   The configuration for the step scaling policy. If you are creating a
+        #   new policy, this parameter is required. If you are updating an
+        #   existing policy, this parameter is not required. For more
+        #   information, see StepScalingPolicyConfiguration and StepAdjustment.
         #   @return [Types::StepScalingPolicyConfiguration]
 
       end

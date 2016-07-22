@@ -16,8 +16,8 @@ module Aws
   module CognitoIdentity
     module Types
 
-      # A provider representing a Cognito User Identity Pool and its client
-      # ID.
+      # A provider representing an Amazon Cognito Identity User Pool and its
+      # client ID.
       # @note When making an API call, pass CognitoIdentityProvider
       #   data as a hash:
       #
@@ -30,12 +30,12 @@ module Aws
         :client_id)
 
         # @!attribute [rw] provider_name
-        #   The provider name for a Cognito User Identity Pool. For example,
-        #   `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
+        #   The provider name for an Amazon Cognito Identity User Pool. For
+        #   example, `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`.
         #   @return [String]
 
         # @!attribute [rw] client_id
-        #   The client ID for the Cognito User Identity Pool.
+        #   The client ID for the Amazon Cognito Identity User Pool.
         #   @return [String]
 
       end
@@ -58,6 +58,7 @@ module Aws
       #             client_id: "CognitoIdentityProviderClientId",
       #           },
       #         ],
+      #         saml_provider_arns: ["ARNString"],
       #       }
       class CreateIdentityPoolInput < Aws::Structure.new(
         :identity_pool_name,
@@ -65,7 +66,8 @@ module Aws
         :supported_login_providers,
         :developer_provider_name,
         :open_id_connect_provider_arns,
-        :cognito_identity_providers)
+        :cognito_identity_providers,
+        :saml_provider_arns)
 
         # @!attribute [rw] identity_pool_name
         #   A string that you provide.
@@ -95,8 +97,13 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] cognito_identity_providers
-        #   A list representing a Cognito User Identity Pool and its client ID.
+        #   An array of Amazon Cognito Identity user pools.
         #   @return [Array<Types::CognitoIdentityProvider>]
+
+        # @!attribute [rw] saml_provider_arns
+        #   An array of Amazon Resource Names (ARNs) of the SAML provider for
+        #   your identity pool.
+        #   @return [Array<String>]
 
       end
 
@@ -209,10 +216,12 @@ module Aws
       #         logins: {
       #           "IdentityProviderName" => "IdentityProviderToken",
       #         },
+      #         custom_role_arn: "ARNString",
       #       }
       class GetCredentialsForIdentityInput < Aws::Structure.new(
         :identity_id,
-        :logins)
+        :logins,
+        :custom_role_arn)
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -222,6 +231,14 @@ module Aws
         #   A set of optional name-value pairs that map provider names to
         #   provider tokens.
         #   @return [Hash<String,String>]
+
+        # @!attribute [rw] custom_role_arn
+        #   The Amazon Resource Name (ARN) of the role to be assumed when
+        #   multiple roles were received in the token from the identity
+        #   provider. For example, a SAML-based identity provider. This
+        #   parameter is optional for identity providers that do not support
+        #   role customization.
+        #   @return [String]
 
       end
 
@@ -271,8 +288,6 @@ module Aws
         #
         #   The available provider names for `Logins` are as follows: *
         #   Facebook: `graph.facebook.com`
-        #   * Amazon Cognito Identity Provider:
-        #     `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`
         #   * Google: `accounts.google.com`
         #   * Amazon: `www.amazon.com`
         #   * Twitter: `api.twitter.com`
@@ -414,8 +429,8 @@ module Aws
         #   A set of optional name-value pairs that map provider names to
         #   provider tokens. When using graph.facebook.com and www.amazon.com,
         #   supply the access\_token returned from the provider\'s authflow. For
-        #   accounts.google.com, an Amazon Cognito Identity Provider, or any
-        #   other OpenId Connect provider, always include the `id_token`.
+        #   accounts.google.com or any other OpenId Connect provider, always
+        #   include the id\_token.
         #   @return [Hash<String,String>]
 
       end
@@ -481,6 +496,7 @@ module Aws
       #             client_id: "CognitoIdentityProviderClientId",
       #           },
       #         ],
+      #         saml_provider_arns: ["ARNString"],
       #       }
       class IdentityPool < Aws::Structure.new(
         :identity_pool_id,
@@ -489,7 +505,8 @@ module Aws
         :supported_login_providers,
         :developer_provider_name,
         :open_id_connect_provider_arns,
-        :cognito_identity_providers)
+        :cognito_identity_providers,
+        :saml_provider_arns)
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -516,8 +533,14 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] cognito_identity_providers
-        #   A list representing a Cognito User Identity Pool and its client ID.
+        #   A list representing an Amazon Cognito Identity User Pool and its
+        #   client ID.
         #   @return [Array<Types::CognitoIdentityProvider>]
+
+        # @!attribute [rw] saml_provider_arns
+        #   An array of Amazon Resource Names (ARNs) of the SAML provider for
+        #   your identity pool.
+        #   @return [Array<String>]
 
       end
 

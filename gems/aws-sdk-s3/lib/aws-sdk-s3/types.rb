@@ -810,7 +810,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+      #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
       #       }
       class CreateBucketConfiguration < Aws::Structure.new(
         :location_constraint)
@@ -837,7 +837,7 @@ module Aws
       #         acl: "private", # accepts private, public-read, public-read-write, authenticated-read
       #         bucket: "BucketName", # required
       #         create_bucket_configuration: {
-      #           location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+      #           location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
       #         },
       #         grant_full_control: "GrantFullControl",
       #         grant_read: "GrantRead",

@@ -182,12 +182,12 @@ module Aws
       #
       #   Default: Amazon EC2 uses the default security group.
       # @option options [String] :user_data
-      #   Data to configure the instance, or a script to run during instance
-      #   launch. For more information, see [Running Commands on Your Linux
-      #   Instance at Launch][1] (Linux) and [Adding User Data][2] (Windows).
-      #   For API calls, the text must be base64-encoded. For command line
-      #   tools, the encoding is performed for you, and you can load the text
-      #   from a file.
+      #   The user data to make available to the instance. For more information,
+      #   see [Running Commands on Your Linux Instance at Launch][1] (Linux) and
+      #   [Adding User Data][2] (Windows). If you are using an AWS SDK or
+      #   command line tool, Base64-encoding is performed for you, and you can
+      #   load the text from a file. Otherwise, you must provide Base64-encoded
+      #   text.
       #
       #
       #

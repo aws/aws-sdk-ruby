@@ -337,6 +337,88 @@ module Aws
 
       end
 
+      # @note When making an API call, pass CopyDBClusterParameterGroupMessage
+      #   data as a hash:
+      #
+      #       {
+      #         source_db_cluster_parameter_group_identifier: "String", # required
+      #         target_db_cluster_parameter_group_identifier: "String", # required
+      #         target_db_cluster_parameter_group_description: "String", # required
+      #         tags: [
+      #           {
+      #             key: "String",
+      #             value: "String",
+      #           },
+      #         ],
+      #       }
+      class CopyDBClusterParameterGroupMessage < Aws::Structure.new(
+        :source_db_cluster_parameter_group_identifier,
+        :target_db_cluster_parameter_group_identifier,
+        :target_db_cluster_parameter_group_description,
+        :tags)
+
+        # @!attribute [rw] source_db_cluster_parameter_group_identifier
+        #   The identifier or Amazon Resource Name (ARN) for the source DB
+        #   cluster parameter group. For information about creating an ARN, see
+        #   [ Constructing an RDS Amazon Resource Name (ARN)][1].
+        #
+        #   Constraints:
+        #
+        #   * Must specify a valid DB cluster parameter group.
+        #
+        #   * If the source DB cluster parameter group is in the same region as
+        #     the copy, specify a valid DB parameter group identifier, for
+        #     example `my-db-cluster-param-group`, or a valid ARN.
+        #
+        #   * If the source DB parameter group is in a different region than the
+        #     copy, specify a valid DB cluster parameter group ARN, for example
+        #     `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   @return [String]
+
+        # @!attribute [rw] target_db_cluster_parameter_group_identifier
+        #   The identifier for the copied DB cluster parameter group.
+        #
+        #   Constraints:
+        #
+        #   * Cannot be null, empty, or blank
+        #
+        #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+        #
+        #   * First character must be a letter
+        #
+        #   * Cannot end with a hyphen or contain two consecutive hyphens
+        #
+        #   Example: `my-cluster-param-group1`
+        #   @return [String]
+
+        # @!attribute [rw] target_db_cluster_parameter_group_description
+        #   A description for the copied DB cluster parameter group.
+        #   @return [String]
+
+        # @!attribute [rw] tags
+        #   A list of tags.
+        #   @return [Array<Types::Tag>]
+
+      end
+
+      class CopyDBClusterParameterGroupResult < Aws::Structure.new(
+        :db_cluster_parameter_group)
+
+        # @!attribute [rw] db_cluster_parameter_group
+        #   Contains the result of a successful invocation of the
+        #   CreateDBClusterParameterGroup or CopyDBClusterParameterGroup action.
+        #
+        #   This data type is used as a request parameter in the
+        #   DeleteDBClusterParameterGroup action, and as a response element in
+        #   the DescribeDBClusterParameterGroups action.
+        #   @return [Types::DBClusterParameterGroup]
+
+      end
+
       # @note When making an API call, pass CopyDBClusterSnapshotMessage
       #   data as a hash:
       #
@@ -693,8 +775,8 @@ module Aws
       #         engine: "String", # required
       #         engine_version: "String",
       #         port: 1,
-      #         master_username: "String", # required
-      #         master_user_password: "String", # required
+      #         master_username: "String",
+      #         master_user_password: "String",
       #         option_group_name: "String",
       #         preferred_backup_window: "String",
       #         preferred_maintenance_window: "String",
@@ -990,7 +1072,7 @@ module Aws
 
         # @!attribute [rw] db_cluster_parameter_group
         #   Contains the result of a successful invocation of the
-        #   CreateDBClusterParameterGroup action.
+        #   CreateDBClusterParameterGroup or CopyDBClusterParameterGroup action.
         #
         #   This data type is used as a request parameter in the
         #   DeleteDBClusterParameterGroup action, and as a response element in
@@ -1574,9 +1656,7 @@ module Aws
         # @!attribute [rw] multi_az
         #   Specifies if the DB instance is a Multi-AZ deployment. You cannot
         #   set the AvailabilityZone parameter if the MultiAZ parameter is set
-        #   to true. Do not set this value if you want a Multi-AZ deployment for
-        #   a SQL Server DB instance. Multi-AZ for SQL Server is set using the
-        #   Mirroring option in an option group.
+        #   to true.
         #   @return [Boolean]
 
         # @!attribute [rw] engine_version
@@ -1589,17 +1669,18 @@ module Aws
         #   **Amazon Aurora**
         #
         #   * **Version 5.6 (only available in AWS regions ap-northeast-1,
-        #     ap-northeast-2, ap-southeast-2, eu-west-1, us-east-1,
+        #     ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1,
         #     us-west-2):** ` 5.6.10a`
         #
         #   ^
         #
         #   **MariaDB**
         #
+        #   * **Version 10.1 (available in all AWS regions except
+        #     us-gov-west-1):** ` 10.1.14`
+        #
         #   * **Version 10.0 (available in all AWS regions):** ` 10.0.17 |
         #     10.0.24`
-        #
-        #   ^
         #
         #   **Microsoft SQL Server Enterprise Edition (sqlserver-ee)**
         #
@@ -1646,105 +1727,127 @@ module Aws
         #
         #   * **Version 5.7 (available in all AWS regions):** ` 5.7.10 | 5.7.11`
         #
-        #   * **Version 5.6 (available in all AWS regions except
+        #   * **Version 5.6 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b |
         #     5.6.22`
         #
-        #   * **Version 5.6 (available in all AWS regions):** ` 5.6.23 | 5.6.27
-        #     | 5.6.29`
+        #   * **Version 5.6 (available in all AWS regions except ap-south-1):**
+        #     ` 5.6.23`
         #
-        #   * **Version 5.5 (available in all AWS regions except eu-central-1,
-        #     ap-northeast-2):** ` 5.5.40 | 5.5.40a`
+        #   * **Version 5.6 (available in all AWS regions):** ` 5.6.27 | 5.6.29`
         #
-        #   * **Version 5.5 (available in all AWS regions except
+        #   * **Version 5.5 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+        #     us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40 | 5.5.40a`
+        #
+        #   * **Version 5.5 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 5.5.40b | 5.5.41`
         #
-        #   * **Version 5.5 (available in all AWS regions):** ` 5.5.42 | 5.5.46`
+        #   * **Version 5.5 (available in all AWS regions except ap-south-1):**
+        #     ` 5.5.42`
         #
-        #   * **Version 5.1 (available in all AWS regions except eu-central-1,
-        #     ap-northeast-2):** ` 5.1.73a | 5.1.73b`
+        #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
+        #
+        #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+        #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
         #
         #   **Oracle Database Enterprise Edition (oracle-ee)**
         #
-        #   * **Version 12.1 (available in all AWS regions except
+        #   * **Version 12.1 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
         #
-        #   * **Version 12.1 (available in all AWS regions except
-        #     ap-northeast-2, us-gov-west-1):** ` 12.1.0.1.v3 | 12.1.0.1.v4`
+        #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
+        #     12.1.0.1.v4 | 12.1.0.1.v5`
         #
         #   * **Version 12.1 (available in all AWS regions):** ` 12.1.0.2.v1`
         #
         #   * **Version 12.1 (available in all AWS regions except
-        #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3`
+        #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
         #
-        #   * **Version 11.2 (available in all AWS regions except eu-central-1,
-        #     ap-northeast-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 |
-        #     11.2.0.2.v6 | 11.2.0.2.v7`
+        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+        #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 |
+        #     11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
         #
-        #   * **Version 11.2 (available in all AWS regions except
+        #   * **Version 11.2 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
         #
-        #   * **Version 11.2 (available in all AWS regions except
-        #     ap-northeast-2, us-gov-west-1):** ` 11.2.0.3.v4`
+        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
         #
         #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
         #     11.2.0.4.v3 | 11.2.0.4.v4`
         #
         #   * **Version 11.2 (available in all AWS regions except
-        #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7`
+        #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+        #     11.2.0.4.v8`
         #
         #   **Oracle Database Standard Edition (oracle-se)**
         #
-        #   * **Version 12.1 (available in all AWS regions except
+        #   * **Version 12.1 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
         #
-        #   * **Version 12.1 (available in all AWS regions except
-        #     ap-northeast-2, us-gov-west-1):** ` 12.1.0.1.v3 | 12.1.0.1.v4`
+        #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
+        #     12.1.0.1.v4 | 12.1.0.1.v5`
         #
-        #   * **Version 11.2 (available in all AWS regions except eu-central-1,
-        #     ap-northeast-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 |
-        #     11.2.0.2.v6 | 11.2.0.2.v7`
+        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+        #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 |
+        #     11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
         #
-        #   * **Version 11.2 (available in all AWS regions except
+        #   * **Version 11.2 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
         #
-        #   * **Version 11.2 (available in all AWS regions except
-        #     ap-northeast-2, us-gov-west-1):** ` 11.2.0.3.v4`
+        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
         #
         #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
         #     11.2.0.4.v3 | 11.2.0.4.v4`
         #
         #   * **Version 11.2 (available in all AWS regions except
-        #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7`
+        #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+        #     11.2.0.4.v8`
         #
         #   **Oracle Database Standard Edition One (oracle-se1)**
         #
-        #   * **Version 12.1 (available in all AWS regions except
+        #   * **Version 12.1 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
         #
-        #   * **Version 12.1 (available in all AWS regions except
-        #     ap-northeast-2, us-gov-west-1):** ` 12.1.0.1.v3 | 12.1.0.1.v4`
+        #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
+        #     12.1.0.1.v4 | 12.1.0.1.v5`
         #
-        #   * **Version 11.2 (available in all AWS regions except eu-central-1,
-        #     ap-northeast-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4 | 11.2.0.2.v5 |
-        #     11.2.0.2.v6 | 11.2.0.2.v7`
+        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+        #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 |
+        #     11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
         #
-        #   * **Version 11.2 (available in all AWS regions except
+        #   * **Version 11.2 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
         #
-        #   * **Version 11.2 (available in all AWS regions except
-        #     ap-northeast-2, us-gov-west-1):** ` 11.2.0.3.v4`
+        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
         #
         #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
         #     11.2.0.4.v3 | 11.2.0.4.v4`
         #
         #   * **Version 11.2 (available in all AWS regions except
-        #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7`
+        #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
+        #     11.2.0.4.v8`
         #
         #   **Oracle Database Standard Edition Two (oracle-se2)**
         #
         #   * **Version 12.1 (available in all AWS regions except
-        #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3`
+        #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
         #
         #   ^
         #
@@ -1753,20 +1856,24 @@ module Aws
         #   * **Version 9.5 (available in all AWS regions except
         #     us-gov-west-1):** ` 9.5.2`
         #
-        #   * **Version 9.4 (available in all AWS regions):** ` 9.4.1 | 9.4.4 |
-        #     9.4.5`
+        #   * **Version 9.4 (available in all AWS regions except ap-south-1):**
+        #     ` 9.4.1 | 9.4.4`
+        #
+        #   * **Version 9.4 (available in all AWS regions):** ` 9.4.5`
         #
         #   * **Version 9.4 (available in all AWS regions except
         #     us-gov-west-1):** ` 9.4.7`
         #
-        #   * **Version 9.3 (available in all AWS regions except eu-central-1,
-        #     ap-northeast-2):** ` 9.3.1 | 9.3.2`
+        #   * **Version 9.3 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+        #     us-gov-west-1, us-west-1, us-west-2):** ` 9.3.1 | 9.3.2`
         #
-        #   * **Version 9.3 (available in all AWS regions except
+        #   * **Version 9.3 (available in all AWS regions except ap-south-1,
         #     ap-northeast-2):** ` 9.3.10 | 9.3.3 | 9.3.5 | 9.3.6 | 9.3.9`
         #
-        #   * **Version 9.3 (available in all AWS regions except ap-northeast-2,
-        #     us-gov-west-1):** ` 9.3.12`
+        #   * **Version 9.3 (only available in AWS regions ap-northeast-1,
+        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 9.3.12`
         #   @return [String]
 
         # @!attribute [rw] auto_minor_version_upgrade
@@ -2901,7 +3008,7 @@ module Aws
       end
 
       # Contains the result of a successful invocation of the
-      # CreateDBClusterParameterGroup action.
+      # CreateDBClusterParameterGroup or CopyDBClusterParameterGroup action.
       #
       # This data type is used as a request parameter in the
       # DeleteDBClusterParameterGroup action, and as a response element in the
@@ -6600,9 +6707,11 @@ module Aws
       #
       #       {
       #         db_cluster_identifier: "String",
+      #         target_db_instance_identifier: "String",
       #       }
       class FailoverDBClusterMessage < Aws::Structure.new(
-        :db_cluster_identifier)
+        :db_cluster_identifier,
+        :target_db_instance_identifier)
 
         # @!attribute [rw] db_cluster_identifier
         #   A DB cluster identifier to force a failover for. This parameter is
@@ -6615,6 +6724,13 @@ module Aws
         #   * First character must be a letter
         #
         #   * Cannot end with a hyphen or contain two consecutive hyphens
+        #   @return [String]
+
+        # @!attribute [rw] target_db_instance_identifier
+        #   The name of the instance to promote to the primary instance.
+        #
+        #   You must specify the instance identifier for an Aurora Replica in
+        #   the DB cluster. For example, `mydbcluster-replica1`.
         #   @return [String]
 
       end
@@ -7359,9 +7475,7 @@ module Aws
         #   parameter is set to `true` for this request.
         #
         #   Constraints: Cannot be specified if the DB instance is a Read
-        #   Replica. This parameter cannot be used with SQL Server DB instances.
-        #   Multi-AZ for SQL Server DB instances is set using the Mirroring
-        #   option in an option group associated with the DB instance.
+        #   Replica.
         #   @return [Boolean]
 
         # @!attribute [rw] engine_version
@@ -9381,7 +9495,7 @@ module Aws
 
         # @!attribute [rw] kms_key_id
         #   The KMS key identifier to use when restoring an encrypted DB cluster
-        #   from an encrypted DB cluster snapshot.
+        #   from a DB cluster snapshot.
         #
         #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
         #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -9397,11 +9511,7 @@ module Aws
         #     the DB cluster snapshot.
         #
         #   * If the DB cluster snapshot is not encrypted, then the restored DB
-        #     cluster is not encrypted.
-        #
-        #   If `SnapshotIdentifier` refers to a DB cluster snapshot that is not
-        #   encrypted, and you specify a value for the `KmsKeyId` parameter,
-        #   then the restore request is rejected.
+        #     cluster is encrypted using the specified encryption key.
         #   @return [String]
 
       end

@@ -473,6 +473,7 @@ module Aws
       RegisterContainerInstanceResponse.struct_class = Types::RegisterContainerInstanceResponse
 
       RegisterTaskDefinitionRequest.add_member(:family, Shapes::ShapeRef.new(shape: String, required: true, location_name: "family"))
+      RegisterTaskDefinitionRequest.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
       RegisterTaskDefinitionRequest.add_member(:container_definitions, Shapes::ShapeRef.new(shape: ContainerDefinitions, required: true, location_name: "containerDefinitions"))
       RegisterTaskDefinitionRequest.add_member(:volumes, Shapes::ShapeRef.new(shape: VolumeList, location_name: "volumes"))
       RegisterTaskDefinitionRequest.struct_class = Types::RegisterTaskDefinitionRequest
@@ -588,6 +589,7 @@ module Aws
       TaskDefinition.add_member(:task_definition_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskDefinitionArn"))
       TaskDefinition.add_member(:container_definitions, Shapes::ShapeRef.new(shape: ContainerDefinitions, location_name: "containerDefinitions"))
       TaskDefinition.add_member(:family, Shapes::ShapeRef.new(shape: String, location_name: "family"))
+      TaskDefinition.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
       TaskDefinition.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, location_name: "revision"))
       TaskDefinition.add_member(:volumes, Shapes::ShapeRef.new(shape: VolumeList, location_name: "volumes"))
       TaskDefinition.add_member(:status, Shapes::ShapeRef.new(shape: TaskDefinitionStatus, location_name: "status"))
@@ -595,6 +597,7 @@ module Aws
       TaskDefinition.struct_class = Types::TaskDefinition
 
       TaskOverride.add_member(:container_overrides, Shapes::ShapeRef.new(shape: ContainerOverrides, location_name: "containerOverrides"))
+      TaskOverride.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
       TaskOverride.struct_class = Types::TaskOverride
 
       Tasks.member = Shapes::ShapeRef.new(shape: Task)

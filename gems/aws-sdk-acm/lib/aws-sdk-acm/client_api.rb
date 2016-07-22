@@ -37,6 +37,7 @@ module Aws
       DomainValidationList = Shapes::ListShape.new(name: 'DomainValidationList')
       DomainValidationOption = Shapes::StructureShape.new(name: 'DomainValidationOption')
       DomainValidationOptionList = Shapes::ListShape.new(name: 'DomainValidationOptionList')
+      FailureReason = Shapes::StringShape.new(name: 'FailureReason')
       GetCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateRequest')
       GetCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateResponse')
       IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
@@ -91,6 +92,7 @@ module Aws
       CertificateDetail.add_member(:key_algorithm, Shapes::ShapeRef.new(shape: KeyAlgorithm, location_name: "KeyAlgorithm"))
       CertificateDetail.add_member(:signature_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "SignatureAlgorithm"))
       CertificateDetail.add_member(:in_use_by, Shapes::ShapeRef.new(shape: InUseList, location_name: "InUseBy"))
+      CertificateDetail.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
       CertificateDetail.struct_class = Types::CertificateDetail
 
       CertificateStatuses.member = Shapes::ShapeRef.new(shape: CertificateStatus)

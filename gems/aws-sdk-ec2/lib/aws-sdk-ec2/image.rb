@@ -110,10 +110,17 @@ module Aws
         data.platform
       end
 
-      # Specifies whether enhanced networking is enabled.
+      # Specifies whether enhanced networking with the Intel 82599 Virtual
+      # Function interface is enabled.
       # @return [String]
       def sriov_net_support
         data.sriov_net_support
+      end
+
+      # Specifies whether enhanced networking with ENA is enabled.
+      # @return [Boolean]
+      def ena_support
+        data.ena_support
       end
 
       # The reason for the state change.

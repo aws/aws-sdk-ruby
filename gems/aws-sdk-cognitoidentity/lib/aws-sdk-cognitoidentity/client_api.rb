@@ -89,6 +89,7 @@ module Aws
       ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
       RoleType = Shapes::StringShape.new(name: 'RoleType')
       RolesMap = Shapes::MapShape.new(name: 'RolesMap')
+      SAMLProviderList = Shapes::ListShape.new(name: 'SAMLProviderList')
       SecretKeyString = Shapes::StringShape.new(name: 'SecretKeyString')
       SessionTokenString = Shapes::StringShape.new(name: 'SessionTokenString')
       SetIdentityPoolRolesInput = Shapes::StructureShape.new(name: 'SetIdentityPoolRolesInput')
@@ -112,6 +113,7 @@ module Aws
       CreateIdentityPoolInput.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, location_name: "DeveloperProviderName"))
       CreateIdentityPoolInput.add_member(:open_id_connect_provider_arns, Shapes::ShapeRef.new(shape: OIDCProviderList, location_name: "OpenIdConnectProviderARNs"))
       CreateIdentityPoolInput.add_member(:cognito_identity_providers, Shapes::ShapeRef.new(shape: CognitoIdentityProviderList, location_name: "CognitoIdentityProviders"))
+      CreateIdentityPoolInput.add_member(:saml_provider_arns, Shapes::ShapeRef.new(shape: SAMLProviderList, location_name: "SamlProviderARNs"))
       CreateIdentityPoolInput.struct_class = Types::CreateIdentityPoolInput
 
       Credentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyString, location_name: "AccessKeyId"))
@@ -139,6 +141,7 @@ module Aws
 
       GetCredentialsForIdentityInput.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, required: true, location_name: "IdentityId"))
       GetCredentialsForIdentityInput.add_member(:logins, Shapes::ShapeRef.new(shape: LoginsMap, location_name: "Logins"))
+      GetCredentialsForIdentityInput.add_member(:custom_role_arn, Shapes::ShapeRef.new(shape: ARNString, location_name: "CustomRoleArn"))
       GetCredentialsForIdentityInput.struct_class = Types::GetCredentialsForIdentityInput
 
       GetCredentialsForIdentityResponse.add_member(:identity_id, Shapes::ShapeRef.new(shape: IdentityId, location_name: "IdentityId"))
@@ -195,6 +198,7 @@ module Aws
       IdentityPool.add_member(:developer_provider_name, Shapes::ShapeRef.new(shape: DeveloperProviderName, location_name: "DeveloperProviderName"))
       IdentityPool.add_member(:open_id_connect_provider_arns, Shapes::ShapeRef.new(shape: OIDCProviderList, location_name: "OpenIdConnectProviderARNs"))
       IdentityPool.add_member(:cognito_identity_providers, Shapes::ShapeRef.new(shape: CognitoIdentityProviderList, location_name: "CognitoIdentityProviders"))
+      IdentityPool.add_member(:saml_provider_arns, Shapes::ShapeRef.new(shape: SAMLProviderList, location_name: "SamlProviderARNs"))
       IdentityPool.struct_class = Types::IdentityPool
 
       IdentityPoolShortDescription.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, location_name: "IdentityPoolId"))
@@ -255,6 +259,8 @@ module Aws
 
       RolesMap.key = Shapes::ShapeRef.new(shape: RoleType)
       RolesMap.value = Shapes::ShapeRef.new(shape: ARNString)
+
+      SAMLProviderList.member = Shapes::ShapeRef.new(shape: ARNString)
 
       SetIdentityPoolRolesInput.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, required: true, location_name: "IdentityPoolId"))
       SetIdentityPoolRolesInput.add_member(:roles, Shapes::ShapeRef.new(shape: RolesMap, required: true, location_name: "Roles"))

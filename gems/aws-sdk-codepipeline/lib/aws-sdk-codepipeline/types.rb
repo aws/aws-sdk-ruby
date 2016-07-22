@@ -214,7 +214,7 @@ module Aws
       #       {
       #         name: "ActionName", # required
       #         action_type_id: { # required
-      #           category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #           category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #           owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #           provider: "ActionProvider", # required
       #           version: "Version", # required
@@ -277,11 +277,13 @@ module Aws
 
       end
 
-      # Represents information about how an action runs.
+      # Represents information about the run of an action.
       class ActionExecution < Aws::Structure.new(
         :status,
         :summary,
         :last_status_change,
+        :token,
+        :last_updated_by,
         :external_execution_id,
         :external_execution_url,
         :percent_complete,
@@ -299,6 +301,17 @@ module Aws
         # @!attribute [rw] last_status_change
         #   The last status change of the action.
         #   @return [Time]
+
+        # @!attribute [rw] token
+        #   The system-generated token used to identify a unique approval
+        #   request. The token for each open approval request can be obtained
+        #   using the GetPipelineState command and is used to validate that the
+        #   approval request corresponding to this token is still valid.
+        #   @return [String]
+
+        # @!attribute [rw] last_updated_by
+        #   The ARN of the user who last changed the pipeline.
+        #   @return [String]
 
         # @!attribute [rw] external_execution_id
         #   The external ID of the run of the action.
@@ -367,7 +380,7 @@ module Aws
         #   @return [Types::ActionRevision]
 
         # @!attribute [rw] latest_execution
-        #   Represents information about how an action runs.
+        #   Represents information about the run of an action.
         #   @return [Types::ActionExecution]
 
         # @!attribute [rw] entity_url
@@ -419,7 +432,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #         owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #         provider: "ActionProvider", # required
       #         version: "Version", # required
@@ -494,6 +507,29 @@ module Aws
         #   The URL returned to the AWS CodePipeline console that contains a
         #   link to the page where customers can update or change the
         #   configuration of the external action.
+        #   @return [String]
+
+      end
+
+      # Represents information about the result of an approval request.
+      # @note When making an API call, pass ApprovalResult
+      #   data as a hash:
+      #
+      #       {
+      #         summary: "ApprovalSummary", # required
+      #         status: "Approved", # required, accepts Approved, Rejected
+      #       }
+      class ApprovalResult < Aws::Structure.new(
+        :summary,
+        :status)
+
+        # @!attribute [rw] summary
+        #   The summary of the current status of the approval request.
+        #   @return [String]
+
+        # @!attribute [rw] status
+        #   The response submitted by a reviewer assigned to an approval action
+        #   request.
         #   @return [String]
 
       end
@@ -625,7 +661,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #         provider: "ActionProvider", # required
       #         version: "Version", # required
       #         settings: {
@@ -667,7 +703,10 @@ module Aws
         #   The category of the custom action, such as a source action or a
         #   build action.
         #
-        #   <note>Although Source is listed as a valid value, it is not currently functional. This value is reserved for future use.</note>
+        #   <note markdown="1"> Although Source is listed as a valid value, it is not currently
+        #   functional. This value is reserved for future use.
+        #
+        #    </note>
         #   @return [String]
 
         # @!attribute [rw] provider
@@ -686,7 +725,13 @@ module Aws
         # @!attribute [rw] configuration_properties
         #   The configuration properties for the custom action.
         #
-        #   <note>You can refer to a name in the configuration properties of the custom action within the URL templates by following the format of \{Config:*name*\}, as long as the configuration property is both required and not secret. For more information, see [Create a Custom Action for a Pipeline][1].</note>
+        #   <note markdown="1"> You can refer to a name in the configuration properties of the
+        #   custom action within the URL templates by following the format of
+        #   \\\{Config:name\\}, as long as the configuration property is both
+        #   required and not secret. For more information, see [Create a Custom
+        #   Action for a Pipeline][1].
+        #
+        #    </note>
         #
         #
         #
@@ -742,7 +787,7 @@ module Aws
       #                 {
       #                   name: "ActionName", # required
       #                   action_type_id: { # required
-      #                     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #                     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #                     owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #                     provider: "ActionProvider", # required
       #                     version: "Version", # required
@@ -818,7 +863,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #         category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #         provider: "ActionProvider", # required
       #         version: "Version", # required
       #       }
@@ -1132,7 +1177,9 @@ module Aws
         # @!attribute [rw] pipeline_version
         #   The version number of the pipeline.
         #
-        #   <note>A newly-created pipeline is always assigned a version number of `1`.</note>
+        #   <note markdown="1"> A newly-created pipeline is always assigned a version number of `1`.
+        #
+        #    </note>
         #   @return [Integer]
 
         # @!attribute [rw] stage_states
@@ -1466,7 +1513,7 @@ module Aws
       #               {
       #                 name: "ActionName", # required
       #                 action_type_id: { # required
-      #                   category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #                   category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #                   owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #                   provider: "ActionProvider", # required
       #                   version: "Version", # required
@@ -1564,7 +1611,7 @@ module Aws
       #
       #       {
       #         action_type_id: { # required
-      #           category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #           category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #           owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #           provider: "ActionProvider", # required
       #           version: "Version", # required
@@ -1613,7 +1660,7 @@ module Aws
       #
       #       {
       #         action_type_id: { # required
-      #           category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #           category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #           owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #           provider: "ActionProvider", # required
       #           version: "Version", # required
@@ -1697,6 +1744,62 @@ module Aws
         # @!attribute [rw] pipeline_execution_id
         #   The ID of the current workflow state of the pipeline.
         #   @return [String]
+
+      end
+
+      # Represents the input of a put approval result action.
+      # @note When making an API call, pass PutApprovalResultInput
+      #   data as a hash:
+      #
+      #       {
+      #         pipeline_name: "PipelineName", # required
+      #         stage_name: "StageName", # required
+      #         action_name: "ActionName", # required
+      #         result: { # required
+      #           summary: "ApprovalSummary", # required
+      #           status: "Approved", # required, accepts Approved, Rejected
+      #         },
+      #         token: "ApprovalToken",
+      #       }
+      class PutApprovalResultInput < Aws::Structure.new(
+        :pipeline_name,
+        :stage_name,
+        :action_name,
+        :result,
+        :token)
+
+        # @!attribute [rw] pipeline_name
+        #   The name of the pipeline that contains the action.
+        #   @return [String]
+
+        # @!attribute [rw] stage_name
+        #   The name of the stage that contains the action.
+        #   @return [String]
+
+        # @!attribute [rw] action_name
+        #   The name of the action for which approval is requested.
+        #   @return [String]
+
+        # @!attribute [rw] result
+        #   Represents information about the result of the approval request.
+        #   @return [Types::ApprovalResult]
+
+        # @!attribute [rw] token
+        #   The system-generated token used to identify a unique approval
+        #   request. The token for each open approval request can be obtained
+        #   using the GetPipelineState action and is used to validate that the
+        #   approval request corresponding to this token is still valid.
+        #   @return [String]
+
+      end
+
+      # Represents the output of a put approval result action.
+      class PutApprovalResultOutput < Aws::Structure.new(
+        :approved_at)
+
+        # @!attribute [rw] approved_at
+        #   The timestamp showing when the approval or rejection was submitted.
+        #   @return [Time]
 
       end
 
@@ -1869,6 +1972,53 @@ module Aws
 
       end
 
+      # Represents the input of a retry stage execution action.
+      # @note When making an API call, pass RetryStageExecutionInput
+      #   data as a hash:
+      #
+      #       {
+      #         pipeline_name: "PipelineName", # required
+      #         stage_name: "StageName", # required
+      #         pipeline_execution_id: "PipelineExecutionId", # required
+      #         retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS
+      #       }
+      class RetryStageExecutionInput < Aws::Structure.new(
+        :pipeline_name,
+        :stage_name,
+        :pipeline_execution_id,
+        :retry_mode)
+
+        # @!attribute [rw] pipeline_name
+        #   The name of the pipeline that contains the failed stage.
+        #   @return [String]
+
+        # @!attribute [rw] stage_name
+        #   The name of the failed stage to be retried.
+        #   @return [String]
+
+        # @!attribute [rw] pipeline_execution_id
+        #   The ID of the pipeline execution in the failed stage to be retried.
+        #   Use the GetPipelineState action to retrieve the current
+        #   pipelineExecutionId of the failed stage
+        #   @return [String]
+
+        # @!attribute [rw] retry_mode
+        #   The scope of the retry attempt. Currently, the only supported value
+        #   is FAILED\_ACTIONS.
+        #   @return [String]
+
+      end
+
+      # Represents the output of a retry stage execution action.
+      class RetryStageExecutionOutput < Aws::Structure.new(
+        :pipeline_execution_id)
+
+        # @!attribute [rw] pipeline_execution_id
+        #   The ID of the current workflow execution in the failed stage.
+        #   @return [String]
+
+      end
+
       # The location of the Amazon S3 bucket that contains a revision.
       class S3ArtifactLocation < Aws::Structure.new(
         :bucket_name,
@@ -1911,7 +2061,7 @@ module Aws
       #           {
       #             name: "ActionName", # required
       #             action_type_id: { # required
-      #               category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #               category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #               owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #               provider: "ActionProvider", # required
       #               version: "Version", # required
@@ -1953,11 +2103,28 @@ module Aws
 
       end
 
+      # Represents information about the run of a stage.
+      class StageExecution < Aws::Structure.new(
+        :pipeline_execution_id,
+        :status)
+
+        # @!attribute [rw] pipeline_execution_id
+        #   The ID of the pipeline execution associated with the stage.
+        #   @return [String]
+
+        # @!attribute [rw] status
+        #   The status of the stage, or for a completed stage, the last status
+        #   of the stage.
+        #   @return [String]
+
+      end
+
       # Represents information about the state of the stage.
       class StageState < Aws::Structure.new(
         :stage_name,
         :inbound_transition_state,
-        :action_states)
+        :action_states,
+        :latest_execution)
 
         # @!attribute [rw] stage_name
         #   The name of the stage.
@@ -1971,6 +2138,11 @@ module Aws
         # @!attribute [rw] action_states
         #   The state of the stage.
         #   @return [Array<Types::ActionState>]
+
+        # @!attribute [rw] latest_execution
+        #   Information about the latest execution in the stage, including its
+        #   ID and status.
+        #   @return [Types::StageExecution]
 
       end
 
@@ -2157,7 +2329,7 @@ module Aws
       #                 {
       #                   name: "ActionName", # required
       #                   action_type_id: { # required
-      #                     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke
+      #                     category: "Source", # required, accepts Source, Build, Deploy, Test, Invoke, Approval
       #                     owner: "AWS", # required, accepts AWS, ThirdParty, Custom
       #                     provider: "ActionProvider", # required
       #                     version: "Version", # required

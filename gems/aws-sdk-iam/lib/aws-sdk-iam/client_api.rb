@@ -1977,9 +1977,15 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
+            "limit_key" => "MaxItems",
             "more_results" => "IsTruncated",
-            "limit_key" => "MaxItems"
+            "output_token" => "Marker",
+            "result_key" => [
+              "UserDetailList",
+              "GroupDetailList",
+              "RoleDetailList",
+              "Policies"
+            ]
           )
         end)
 
@@ -2043,9 +2049,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Users"
           )
         end)
@@ -2194,9 +2200,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "AccessKeyMetadata"
           )
         end)
@@ -2210,9 +2216,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "AccountAliases"
           )
         end)
@@ -2228,9 +2234,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "AttachedPolicies"
           )
         end)
@@ -2246,9 +2252,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "AttachedPolicies"
           )
         end)
@@ -2264,9 +2270,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "AttachedPolicies"
           )
         end)
@@ -2282,9 +2288,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => [
               "PolicyGroups",
               "PolicyUsers",
@@ -2303,9 +2309,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "PolicyNames"
           )
         end)
@@ -2319,9 +2325,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Groups"
           )
         end)
@@ -2336,9 +2342,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Groups"
           )
         end)
@@ -2352,9 +2358,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "InstanceProfiles"
           )
         end)
@@ -2369,9 +2375,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "InstanceProfiles"
           )
         end)
@@ -2386,9 +2392,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "MFADevices"
           )
         end)
@@ -2411,9 +2417,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Policies"
           )
         end)
@@ -2429,9 +2435,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Versions"
           )
         end)
@@ -2446,9 +2452,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "PolicyNames"
           )
         end)
@@ -2462,9 +2468,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Roles"
           )
         end)
@@ -2486,6 +2492,13 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListSSHPublicKeysRequest)
           o.output = Shapes::ShapeRef.new(shape: ListSSHPublicKeysResponse)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "Marker",
+            "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
+            "result_key" => "SSHPublicKeys"
+          )
         end)
 
         api.add_operation(:list_server_certificates, Seahorse::Model::Operation.new.tap do |o|
@@ -2497,9 +2510,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "ServerCertificateMetadataList"
           )
         end)
@@ -2514,9 +2527,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Certificates"
           )
         end)
@@ -2531,9 +2544,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "PolicyNames"
           )
         end)
@@ -2547,9 +2560,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "Users"
           )
         end)
@@ -2562,9 +2575,9 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListVirtualMFADevicesResponse)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
-            "output_token" => "Marker",
-            "more_results" => "IsTruncated",
             "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
             "result_key" => "VirtualMFADevices"
           )
         end)
@@ -2670,6 +2683,13 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: SimulatePolicyResponse)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
           o.errors << Shapes::ShapeRef.new(shape: PolicyEvaluationException)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "Marker",
+            "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
+            "result_key" => "EvaluationResults"
+          )
         end)
 
         api.add_operation(:simulate_principal_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -2681,6 +2701,13 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NoSuchEntityException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
           o.errors << Shapes::ShapeRef.new(shape: PolicyEvaluationException)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "Marker",
+            "limit_key" => "MaxItems",
+            "more_results" => "IsTruncated",
+            "output_token" => "Marker",
+            "result_key" => "EvaluationResults"
+          )
         end)
 
         api.add_operation(:update_access_key, Seahorse::Model::Operation.new.tap do |o|

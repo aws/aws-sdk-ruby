@@ -66,6 +66,7 @@ module Aws
       NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
       NetworkInterfaceLimitExceeded = Shapes::StructureShape.new(name: 'NetworkInterfaceLimitExceeded')
       NoFreeAddressesInSubnet = Shapes::StructureShape.new(name: 'NoFreeAddressesInSubnet')
+      PerformanceMode = Shapes::StringShape.new(name: 'PerformanceMode')
       SecurityGroup = Shapes::StringShape.new(name: 'SecurityGroup')
       SecurityGroupLimitExceeded = Shapes::StructureShape.new(name: 'SecurityGroupLimitExceeded')
       SecurityGroupNotFound = Shapes::StructureShape.new(name: 'SecurityGroupNotFound')
@@ -81,6 +82,7 @@ module Aws
       UnsupportedAvailabilityZone = Shapes::StructureShape.new(name: 'UnsupportedAvailabilityZone')
 
       CreateFileSystemRequest.add_member(:creation_token, Shapes::ShapeRef.new(shape: CreationToken, required: true, location_name: "CreationToken"))
+      CreateFileSystemRequest.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, location_name: "PerformanceMode"))
       CreateFileSystemRequest.struct_class = Types::CreateFileSystemRequest
 
       CreateMountTargetRequest.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
@@ -149,6 +151,7 @@ module Aws
       FileSystemDescription.add_member(:name, Shapes::ShapeRef.new(shape: TagValue, location_name: "Name"))
       FileSystemDescription.add_member(:number_of_mount_targets, Shapes::ShapeRef.new(shape: MountTargetCount, required: true, location_name: "NumberOfMountTargets"))
       FileSystemDescription.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: FileSystemSize, required: true, location_name: "SizeInBytes"))
+      FileSystemDescription.add_member(:performance_mode, Shapes::ShapeRef.new(shape: PerformanceMode, required: true, location_name: "PerformanceMode"))
       FileSystemDescription.struct_class = Types::FileSystemDescription
 
       FileSystemDescriptions.member = Shapes::ShapeRef.new(shape: FileSystemDescription)
@@ -201,22 +204,10 @@ module Aws
           o.http_request_uri = "/2015-02-01/file-systems"
           o.input = Shapes::ShapeRef.new(shape: CreateFileSystemRequest)
           o.output = Shapes::ShapeRef.new(shape: FileSystemDescription)
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemAlreadyExists, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemLimitExceeded, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemAlreadyExists)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemLimitExceeded)
         end)
 
         api.add_operation(:create_mount_target, Seahorse::Model::Operation.new.tap do |o|
@@ -225,54 +216,18 @@ module Aws
           o.http_request_uri = "/2015-02-01/mount-targets"
           o.input = Shapes::ShapeRef.new(shape: CreateMountTargetRequest)
           o.output = Shapes::ShapeRef.new(shape: MountTargetDescription)
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MountTargetConflict, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: SubnetNotFound, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NoFreeAddressesInSubnet, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IpAddressInUse, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NetworkInterfaceLimitExceeded, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZone, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: IncorrectFileSystemLifeCycleState)
+          o.errors << Shapes::ShapeRef.new(shape: MountTargetConflict)
+          o.errors << Shapes::ShapeRef.new(shape: SubnetNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: NoFreeAddressesInSubnet)
+          o.errors << Shapes::ShapeRef.new(shape: IpAddressInUse)
+          o.errors << Shapes::ShapeRef.new(shape: NetworkInterfaceLimitExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedAvailabilityZone)
         end)
 
         api.add_operation(:create_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -281,18 +236,9 @@ module Aws
           o.http_request_uri = "/2015-02-01/create-tags/{FileSystemId}"
           o.input = Shapes::ShapeRef.new(shape: CreateTagsRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         end)
 
         api.add_operation(:delete_file_system, Seahorse::Model::Operation.new.tap do |o|
@@ -301,22 +247,10 @@ module Aws
           o.http_request_uri = "/2015-02-01/file-systems/{FileSystemId}"
           o.input = Shapes::ShapeRef.new(shape: DeleteFileSystemRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemInUse, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemInUse)
         end)
 
         api.add_operation(:delete_mount_target, Seahorse::Model::Operation.new.tap do |o|
@@ -325,22 +259,10 @@ module Aws
           o.http_request_uri = "/2015-02-01/mount-targets/{MountTargetId}"
           o.input = Shapes::ShapeRef.new(shape: DeleteMountTargetRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DependencyTimeout, metadata: {
-            "error" => {"httpStatusCode"=>504},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: DependencyTimeout)
+          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound)
         end)
 
         api.add_operation(:delete_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -349,18 +271,9 @@ module Aws
           o.http_request_uri = "/2015-02-01/delete-tags/{FileSystemId}"
           o.input = Shapes::ShapeRef.new(shape: DeleteTagsRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         end)
 
         api.add_operation(:describe_file_systems, Seahorse::Model::Operation.new.tap do |o|
@@ -369,18 +282,9 @@ module Aws
           o.http_request_uri = "/2015-02-01/file-systems"
           o.input = Shapes::ShapeRef.new(shape: DescribeFileSystemsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeFileSystemsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         end)
 
         api.add_operation(:describe_mount_target_security_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -389,22 +293,10 @@ module Aws
           o.http_request_uri = "/2015-02-01/mount-targets/{MountTargetId}/security-groups"
           o.input = Shapes::ShapeRef.new(shape: DescribeMountTargetSecurityGroupsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeMountTargetSecurityGroupsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState)
         end)
 
         api.add_operation(:describe_mount_targets, Seahorse::Model::Operation.new.tap do |o|
@@ -413,22 +305,10 @@ module Aws
           o.http_request_uri = "/2015-02-01/mount-targets"
           o.input = Shapes::ShapeRef.new(shape: DescribeMountTargetsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeMountTargetsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound)
         end)
 
         api.add_operation(:describe_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -437,18 +317,9 @@ module Aws
           o.http_request_uri = "/2015-02-01/tags/{FileSystemId}/"
           o.input = Shapes::ShapeRef.new(shape: DescribeTagsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTagsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         end)
 
         api.add_operation(:modify_mount_target_security_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -457,30 +328,12 @@ module Aws
           o.http_request_uri = "/2015-02-01/mount-targets/{MountTargetId}/security-groups"
           o.input = Shapes::ShapeRef.new(shape: ModifyMountTargetSecurityGroupsRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: BadRequest, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BadRequest)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: MountTargetNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: IncorrectMountTargetState)
+          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupLimitExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: SecurityGroupNotFound)
         end)
       end
 

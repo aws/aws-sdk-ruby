@@ -37,6 +37,9 @@ module Aws
       CreateDevicePoolResult = Shapes::StructureShape.new(name: 'CreateDevicePoolResult')
       CreateProjectRequest = Shapes::StructureShape.new(name: 'CreateProjectRequest')
       CreateProjectResult = Shapes::StructureShape.new(name: 'CreateProjectResult')
+      CreateRemoteAccessSessionConfiguration = Shapes::StructureShape.new(name: 'CreateRemoteAccessSessionConfiguration')
+      CreateRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'CreateRemoteAccessSessionRequest')
+      CreateRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'CreateRemoteAccessSessionResult')
       CreateUploadRequest = Shapes::StructureShape.new(name: 'CreateUploadRequest')
       CreateUploadResult = Shapes::StructureShape.new(name: 'CreateUploadResult')
       CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
@@ -45,6 +48,8 @@ module Aws
       DeleteDevicePoolResult = Shapes::StructureShape.new(name: 'DeleteDevicePoolResult')
       DeleteProjectRequest = Shapes::StructureShape.new(name: 'DeleteProjectRequest')
       DeleteProjectResult = Shapes::StructureShape.new(name: 'DeleteProjectResult')
+      DeleteRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'DeleteRemoteAccessSessionRequest')
+      DeleteRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'DeleteRemoteAccessSessionResult')
       DeleteRunRequest = Shapes::StructureShape.new(name: 'DeleteRunRequest')
       DeleteRunResult = Shapes::StructureShape.new(name: 'DeleteRunResult')
       DeleteUploadRequest = Shapes::StructureShape.new(name: 'DeleteUploadRequest')
@@ -78,6 +83,8 @@ module Aws
       GetOfferingStatusResult = Shapes::StructureShape.new(name: 'GetOfferingStatusResult')
       GetProjectRequest = Shapes::StructureShape.new(name: 'GetProjectRequest')
       GetProjectResult = Shapes::StructureShape.new(name: 'GetProjectResult')
+      GetRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'GetRemoteAccessSessionRequest')
+      GetRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'GetRemoteAccessSessionResult')
       GetRunRequest = Shapes::StructureShape.new(name: 'GetRunRequest')
       GetRunResult = Shapes::StructureShape.new(name: 'GetRunResult')
       GetSuiteRequest = Shapes::StructureShape.new(name: 'GetSuiteRequest')
@@ -89,6 +96,8 @@ module Aws
       IdempotencyException = Shapes::StructureShape.new(name: 'IdempotencyException')
       IncompatibilityMessage = Shapes::StructureShape.new(name: 'IncompatibilityMessage')
       IncompatibilityMessages = Shapes::ListShape.new(name: 'IncompatibilityMessages')
+      InstallToRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionRequest')
+      InstallToRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'InstallToRemoteAccessSessionResult')
       Integer = Shapes::IntegerShape.new(name: 'Integer')
       Job = Shapes::StructureShape.new(name: 'Job')
       Jobs = Shapes::ListShape.new(name: 'Jobs')
@@ -107,6 +116,8 @@ module Aws
       ListOfferingsResult = Shapes::StructureShape.new(name: 'ListOfferingsResult')
       ListProjectsRequest = Shapes::StructureShape.new(name: 'ListProjectsRequest')
       ListProjectsResult = Shapes::StructureShape.new(name: 'ListProjectsResult')
+      ListRemoteAccessSessionsRequest = Shapes::StructureShape.new(name: 'ListRemoteAccessSessionsRequest')
+      ListRemoteAccessSessionsResult = Shapes::StructureShape.new(name: 'ListRemoteAccessSessionsResult')
       ListRunsRequest = Shapes::StructureShape.new(name: 'ListRunsRequest')
       ListRunsResult = Shapes::StructureShape.new(name: 'ListRunsResult')
       ListSamplesRequest = Shapes::StructureShape.new(name: 'ListSamplesRequest')
@@ -149,6 +160,8 @@ module Aws
       RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
       RecurringChargeFrequency = Shapes::StringShape.new(name: 'RecurringChargeFrequency')
       RecurringCharges = Shapes::ListShape.new(name: 'RecurringCharges')
+      RemoteAccessSession = Shapes::StructureShape.new(name: 'RemoteAccessSession')
+      RemoteAccessSessions = Shapes::ListShape.new(name: 'RemoteAccessSessions')
       RenewOfferingRequest = Shapes::StructureShape.new(name: 'RenewOfferingRequest')
       RenewOfferingResult = Shapes::StructureShape.new(name: 'RenewOfferingResult')
       Resolution = Shapes::StructureShape.new(name: 'Resolution')
@@ -165,6 +178,8 @@ module Aws
       ScheduleRunResult = Shapes::StructureShape.new(name: 'ScheduleRunResult')
       ScheduleRunTest = Shapes::StructureShape.new(name: 'ScheduleRunTest')
       ServiceAccountException = Shapes::StructureShape.new(name: 'ServiceAccountException')
+      StopRemoteAccessSessionRequest = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionRequest')
+      StopRemoteAccessSessionResult = Shapes::StructureShape.new(name: 'StopRemoteAccessSessionResult')
       StopRunRequest = Shapes::StructureShape.new(name: 'StopRunRequest')
       StopRunResult = Shapes::StructureShape.new(name: 'StopRunResult')
       String = Shapes::StringShape.new(name: 'String')
@@ -233,6 +248,18 @@ module Aws
       CreateProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
       CreateProjectResult.struct_class = Types::CreateProjectResult
 
+      CreateRemoteAccessSessionConfiguration.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
+      CreateRemoteAccessSessionConfiguration.struct_class = Types::CreateRemoteAccessSessionConfiguration
+
+      CreateRemoteAccessSessionRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
+      CreateRemoteAccessSessionRequest.add_member(:device_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "deviceArn"))
+      CreateRemoteAccessSessionRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+      CreateRemoteAccessSessionRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: CreateRemoteAccessSessionConfiguration, location_name: "configuration"))
+      CreateRemoteAccessSessionRequest.struct_class = Types::CreateRemoteAccessSessionRequest
+
+      CreateRemoteAccessSessionResult.add_member(:remote_access_session, Shapes::ShapeRef.new(shape: RemoteAccessSession, location_name: "remoteAccessSession"))
+      CreateRemoteAccessSessionResult.struct_class = Types::CreateRemoteAccessSessionResult
+
       CreateUploadRequest.add_member(:project_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "projectArn"))
       CreateUploadRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
       CreateUploadRequest.add_member(:type, Shapes::ShapeRef.new(shape: UploadType, required: true, location_name: "type"))
@@ -251,6 +278,11 @@ module Aws
       DeleteProjectRequest.struct_class = Types::DeleteProjectRequest
 
       DeleteProjectResult.struct_class = Types::DeleteProjectResult
+
+      DeleteRemoteAccessSessionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+      DeleteRemoteAccessSessionRequest.struct_class = Types::DeleteRemoteAccessSessionRequest
+
+      DeleteRemoteAccessSessionResult.struct_class = Types::DeleteRemoteAccessSessionResult
 
       DeleteRunRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
       DeleteRunRequest.struct_class = Types::DeleteRunRequest
@@ -276,6 +308,9 @@ module Aws
       Device.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
       Device.add_member(:carrier, Shapes::ShapeRef.new(shape: String, location_name: "carrier"))
       Device.add_member(:radio, Shapes::ShapeRef.new(shape: String, location_name: "radio"))
+      Device.add_member(:remote_access_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "remoteAccessEnabled"))
+      Device.add_member(:fleet_type, Shapes::ShapeRef.new(shape: String, location_name: "fleetType"))
+      Device.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, location_name: "fleetName"))
       Device.struct_class = Types::Device
 
       DeviceMinutes.add_member(:total, Shapes::ShapeRef.new(shape: Double, location_name: "total"))
@@ -347,6 +382,12 @@ module Aws
       GetProjectResult.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "project"))
       GetProjectResult.struct_class = Types::GetProjectResult
 
+      GetRemoteAccessSessionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+      GetRemoteAccessSessionRequest.struct_class = Types::GetRemoteAccessSessionRequest
+
+      GetRemoteAccessSessionResult.add_member(:remote_access_session, Shapes::ShapeRef.new(shape: RemoteAccessSession, location_name: "remoteAccessSession"))
+      GetRemoteAccessSessionResult.struct_class = Types::GetRemoteAccessSessionResult
+
       GetRunRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
       GetRunRequest.struct_class = Types::GetRunRequest
 
@@ -376,6 +417,13 @@ module Aws
       IncompatibilityMessage.struct_class = Types::IncompatibilityMessage
 
       IncompatibilityMessages.member = Shapes::ShapeRef.new(shape: IncompatibilityMessage)
+
+      InstallToRemoteAccessSessionRequest.add_member(:remote_access_session_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "remoteAccessSessionArn"))
+      InstallToRemoteAccessSessionRequest.add_member(:app_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "appArn"))
+      InstallToRemoteAccessSessionRequest.struct_class = Types::InstallToRemoteAccessSessionRequest
+
+      InstallToRemoteAccessSessionResult.add_member(:app_upload, Shapes::ShapeRef.new(shape: Upload, location_name: "appUpload"))
+      InstallToRemoteAccessSessionResult.struct_class = Types::InstallToRemoteAccessSessionResult
 
       Job.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
       Job.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
@@ -448,6 +496,14 @@ module Aws
       ListProjectsResult.add_member(:projects, Shapes::ShapeRef.new(shape: Projects, location_name: "projects"))
       ListProjectsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
       ListProjectsResult.struct_class = Types::ListProjectsResult
+
+      ListRemoteAccessSessionsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+      ListRemoteAccessSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+      ListRemoteAccessSessionsRequest.struct_class = Types::ListRemoteAccessSessionsRequest
+
+      ListRemoteAccessSessionsResult.add_member(:remote_access_sessions, Shapes::ShapeRef.new(shape: RemoteAccessSessions, location_name: "remoteAccessSessions"))
+      ListRemoteAccessSessionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+      ListRemoteAccessSessionsResult.struct_class = Types::ListRemoteAccessSessionsResult
 
       ListRunsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
       ListRunsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -575,6 +631,22 @@ module Aws
 
       RecurringCharges.member = Shapes::ShapeRef.new(shape: RecurringCharge)
 
+      RemoteAccessSession.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "arn"))
+      RemoteAccessSession.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+      RemoteAccessSession.add_member(:created, Shapes::ShapeRef.new(shape: DateTime, location_name: "created"))
+      RemoteAccessSession.add_member(:status, Shapes::ShapeRef.new(shape: ExecutionStatus, location_name: "status"))
+      RemoteAccessSession.add_member(:result, Shapes::ShapeRef.new(shape: ExecutionResult, location_name: "result"))
+      RemoteAccessSession.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
+      RemoteAccessSession.add_member(:started, Shapes::ShapeRef.new(shape: DateTime, location_name: "started"))
+      RemoteAccessSession.add_member(:stopped, Shapes::ShapeRef.new(shape: DateTime, location_name: "stopped"))
+      RemoteAccessSession.add_member(:device, Shapes::ShapeRef.new(shape: Device, location_name: "device"))
+      RemoteAccessSession.add_member(:billing_method, Shapes::ShapeRef.new(shape: BillingMethod, location_name: "billingMethod"))
+      RemoteAccessSession.add_member(:device_minutes, Shapes::ShapeRef.new(shape: DeviceMinutes, location_name: "deviceMinutes"))
+      RemoteAccessSession.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "endpoint"))
+      RemoteAccessSession.struct_class = Types::RemoteAccessSession
+
+      RemoteAccessSessions.member = Shapes::ShapeRef.new(shape: RemoteAccessSession)
+
       RenewOfferingRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: OfferingIdentifier, location_name: "offeringId"))
       RenewOfferingRequest.add_member(:quantity, Shapes::ShapeRef.new(shape: Integer, location_name: "quantity"))
       RenewOfferingRequest.struct_class = Types::RenewOfferingRequest
@@ -644,6 +716,12 @@ module Aws
       ScheduleRunTest.add_member(:filter, Shapes::ShapeRef.new(shape: Filter, location_name: "filter"))
       ScheduleRunTest.add_member(:parameters, Shapes::ShapeRef.new(shape: TestParameters, location_name: "parameters"))
       ScheduleRunTest.struct_class = Types::ScheduleRunTest
+
+      StopRemoteAccessSessionRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
+      StopRemoteAccessSessionRequest.struct_class = Types::StopRemoteAccessSessionRequest
+
+      StopRemoteAccessSessionResult.add_member(:remote_access_session, Shapes::ShapeRef.new(shape: RemoteAccessSession, location_name: "remoteAccessSession"))
+      StopRemoteAccessSessionResult.struct_class = Types::StopRemoteAccessSessionResult
 
       StopRunRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "arn"))
       StopRunRequest.struct_class = Types::StopRunRequest
@@ -761,6 +839,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
         end)
 
+        api.add_operation(:create_remote_access_session, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateRemoteAccessSession"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateRemoteAccessSessionRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateRemoteAccessSessionResult)
+          o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        end)
+
         api.add_operation(:create_upload, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateUpload"
           o.http_method = "POST"
@@ -791,6 +881,18 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteProjectRequest)
           o.output = Shapes::ShapeRef.new(shape: DeleteProjectResult)
+          o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        end)
+
+        api.add_operation(:delete_remote_access_session, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteRemoteAccessSession"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteRemoteAccessSessionRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteRemoteAccessSessionResult)
           o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -914,6 +1016,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
         end)
 
+        api.add_operation(:get_remote_access_session, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetRemoteAccessSession"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: GetRemoteAccessSessionRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetRemoteAccessSessionResult)
+          o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        end)
+
         api.add_operation(:get_run, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetRun"
           o.http_method = "POST"
@@ -956,6 +1070,18 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetUploadRequest)
           o.output = Shapes::ShapeRef.new(shape: GetUploadResult)
+          o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        end)
+
+        api.add_operation(:install_to_remote_access_session, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "InstallToRemoteAccessSession"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: InstallToRemoteAccessSessionRequest)
+          o.output = Shapes::ShapeRef.new(shape: InstallToRemoteAccessSessionResult)
           o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1081,6 +1207,18 @@ module Aws
             "output_token" => "nextToken",
             "result_key" => "projects"
           )
+        end)
+
+        api.add_operation(:list_remote_access_sessions, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListRemoteAccessSessions"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListRemoteAccessSessionsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListRemoteAccessSessionsResult)
+          o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
         end)
 
         api.add_operation(:list_runs, Seahorse::Model::Operation.new.tap do |o|
@@ -1221,6 +1359,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: IdempotencyException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
+        end)
+
+        api.add_operation(:stop_remote_access_session, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "StopRemoteAccessSession"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: StopRemoteAccessSessionRequest)
+          o.output = Shapes::ShapeRef.new(shape: StopRemoteAccessSessionResult)
+          o.errors << Shapes::ShapeRef.new(shape: ArgumentException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
         end)
 

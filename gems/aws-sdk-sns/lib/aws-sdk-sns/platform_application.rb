@@ -42,10 +42,13 @@ module Aws
       #
       # * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
       #   notifications should be sent.
+      #
       # * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
       #   notifications should be sent.
+      #
       # * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
       #   notifications should be sent.
+      #
       # * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
       #   notifications should be sent upon Direct Publish delivery failure
       #   (permanent) to one of the application\'s endpoints.
@@ -133,21 +136,35 @@ module Aws
       #
       #   * `PlatformCredential` -- The credential received from the
       #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential is
-      #     \"private key\". For GCM, PlatformCredential is \"API key\". For
-      #     ADM, PlatformCredential is \"client secret\".
+      #     private key. For GCM, PlatformCredential is \"API key\". For ADM,
+      #     PlatformCredential is \"client secret\".
+      #
       #   * `PlatformPrincipal` -- The principal received from the notification
-      #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is \"SSL
-      #     certificate\". For GCM, PlatformPrincipal is not applicable. For
-      #     ADM, PlatformPrincipal is \"client id\".
+      #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
+      #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
+      #     PlatformPrincipal is \"client id\".
+      #
       #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
       #     notifications should be sent.
+      #
       #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
       #     notifications should be sent.
+      #
       #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
       #     notifications should be sent.
+      #
       #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
       #     notifications should be sent upon Direct Publish delivery failure
       #     (permanent) to one of the application\'s endpoints.
+      #
+      #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+      #     write access to use CloudWatch Logs on your behalf.
+      #
+      #   * `FailureFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+      #     write access to use CloudWatch Logs on your behalf.
+      #
+      #   * `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
+      #     successfully delivered messages.
       # @return [EmptyStructure]
       def set_attributes(options = {})
         options = options.merge(platform_application_arn: @arn)

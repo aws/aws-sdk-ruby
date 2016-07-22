@@ -21,6 +21,13 @@ module Aws
 
       AccountId = Shapes::StringShape.new(name: 'AccountId')
       AccountIdList = Shapes::ListShape.new(name: 'AccountIdList')
+      Activation = Shapes::StructureShape.new(name: 'Activation')
+      ActivationCode = Shapes::StringShape.new(name: 'ActivationCode')
+      ActivationDescription = Shapes::StringShape.new(name: 'ActivationDescription')
+      ActivationId = Shapes::StringShape.new(name: 'ActivationId')
+      ActivationList = Shapes::ListShape.new(name: 'ActivationList')
+      AddTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddTagsToResourceRequest')
+      AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
       AssociatedInstances = Shapes::StructureShape.new(name: 'AssociatedInstances')
       Association = Shapes::StructureShape.new(name: 'Association')
       AssociationAlreadyExists = Shapes::StructureShape.new(name: 'AssociationAlreadyExists')
@@ -57,6 +64,9 @@ module Aws
       CommandPluginStatus = Shapes::StringShape.new(name: 'CommandPluginStatus')
       CommandStatus = Shapes::StringShape.new(name: 'CommandStatus')
       Comment = Shapes::StringShape.new(name: 'Comment')
+      ComputerName = Shapes::StringShape.new(name: 'ComputerName')
+      CreateActivationRequest = Shapes::StructureShape.new(name: 'CreateActivationRequest')
+      CreateActivationResult = Shapes::StructureShape.new(name: 'CreateActivationResult')
       CreateAssociationBatchRequest = Shapes::StructureShape.new(name: 'CreateAssociationBatchRequest')
       CreateAssociationBatchRequestEntries = Shapes::ListShape.new(name: 'CreateAssociationBatchRequestEntries')
       CreateAssociationBatchRequestEntry = Shapes::StructureShape.new(name: 'CreateAssociationBatchRequestEntry')
@@ -65,11 +75,22 @@ module Aws
       CreateAssociationResult = Shapes::StructureShape.new(name: 'CreateAssociationResult')
       CreateDocumentRequest = Shapes::StructureShape.new(name: 'CreateDocumentRequest')
       CreateDocumentResult = Shapes::StructureShape.new(name: 'CreateDocumentResult')
+      CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
       DateTime = Shapes::TimestampShape.new(name: 'DateTime')
+      DefaultInstanceName = Shapes::StringShape.new(name: 'DefaultInstanceName')
+      DeleteActivationRequest = Shapes::StructureShape.new(name: 'DeleteActivationRequest')
+      DeleteActivationResult = Shapes::StructureShape.new(name: 'DeleteActivationResult')
       DeleteAssociationRequest = Shapes::StructureShape.new(name: 'DeleteAssociationRequest')
       DeleteAssociationResult = Shapes::StructureShape.new(name: 'DeleteAssociationResult')
       DeleteDocumentRequest = Shapes::StructureShape.new(name: 'DeleteDocumentRequest')
       DeleteDocumentResult = Shapes::StructureShape.new(name: 'DeleteDocumentResult')
+      DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
+      DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
+      DescribeActivationsFilter = Shapes::StructureShape.new(name: 'DescribeActivationsFilter')
+      DescribeActivationsFilterKeys = Shapes::StringShape.new(name: 'DescribeActivationsFilterKeys')
+      DescribeActivationsFilterList = Shapes::ListShape.new(name: 'DescribeActivationsFilterList')
+      DescribeActivationsRequest = Shapes::StructureShape.new(name: 'DescribeActivationsRequest')
+      DescribeActivationsResult = Shapes::StructureShape.new(name: 'DescribeActivationsResult')
       DescribeAssociationRequest = Shapes::StructureShape.new(name: 'DescribeAssociationRequest')
       DescribeAssociationResult = Shapes::StructureShape.new(name: 'DescribeAssociationResult')
       DescribeDocumentPermissionRequest = Shapes::StructureShape.new(name: 'DescribeDocumentPermissionRequest')
@@ -105,11 +126,14 @@ module Aws
       DocumentSha1 = Shapes::StringShape.new(name: 'DocumentSha1')
       DocumentStatus = Shapes::StringShape.new(name: 'DocumentStatus')
       DuplicateInstanceId = Shapes::StructureShape.new(name: 'DuplicateInstanceId')
+      ExpirationDate = Shapes::TimestampShape.new(name: 'ExpirationDate')
       FailedCreateAssociation = Shapes::StructureShape.new(name: 'FailedCreateAssociation')
       FailedCreateAssociationList = Shapes::ListShape.new(name: 'FailedCreateAssociationList')
       Fault = Shapes::StringShape.new(name: 'Fault')
       GetDocumentRequest = Shapes::StructureShape.new(name: 'GetDocumentRequest')
       GetDocumentResult = Shapes::StructureShape.new(name: 'GetDocumentResult')
+      IPAddress = Shapes::StringShape.new(name: 'IPAddress')
+      IamRole = Shapes::StringShape.new(name: 'IamRole')
       InstanceId = Shapes::StringShape.new(name: 'InstanceId')
       InstanceIdList = Shapes::ListShape.new(name: 'InstanceIdList')
       InstanceInformation = Shapes::StructureShape.new(name: 'InstanceInformation')
@@ -120,33 +144,48 @@ module Aws
       InstanceInformationFilterValueSet = Shapes::ListShape.new(name: 'InstanceInformationFilterValueSet')
       InstanceInformationList = Shapes::ListShape.new(name: 'InstanceInformationList')
       InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
+      InvalidActivation = Shapes::StructureShape.new(name: 'InvalidActivation')
+      InvalidActivationId = Shapes::StructureShape.new(name: 'InvalidActivationId')
       InvalidCommandId = Shapes::StructureShape.new(name: 'InvalidCommandId')
       InvalidDocument = Shapes::StructureShape.new(name: 'InvalidDocument')
       InvalidDocumentContent = Shapes::StructureShape.new(name: 'InvalidDocumentContent')
       InvalidDocumentOperation = Shapes::StructureShape.new(name: 'InvalidDocumentOperation')
+      InvalidFilter = Shapes::StructureShape.new(name: 'InvalidFilter')
       InvalidFilterKey = Shapes::StructureShape.new(name: 'InvalidFilterKey')
       InvalidInstanceId = Shapes::StructureShape.new(name: 'InvalidInstanceId')
       InvalidInstanceInformationFilterValue = Shapes::StructureShape.new(name: 'InvalidInstanceInformationFilterValue')
       InvalidNextToken = Shapes::StructureShape.new(name: 'InvalidNextToken')
+      InvalidNotificationConfig = Shapes::StructureShape.new(name: 'InvalidNotificationConfig')
       InvalidOutputFolder = Shapes::StructureShape.new(name: 'InvalidOutputFolder')
       InvalidParameters = Shapes::StructureShape.new(name: 'InvalidParameters')
       InvalidPermissionType = Shapes::StructureShape.new(name: 'InvalidPermissionType')
+      InvalidResourceId = Shapes::StructureShape.new(name: 'InvalidResourceId')
+      InvalidResourceType = Shapes::StructureShape.new(name: 'InvalidResourceType')
+      InvalidRole = Shapes::StructureShape.new(name: 'InvalidRole')
       InvocationTraceOutput = Shapes::StringShape.new(name: 'InvocationTraceOutput')
+      KeyList = Shapes::ListShape.new(name: 'KeyList')
       ListAssociationsRequest = Shapes::StructureShape.new(name: 'ListAssociationsRequest')
       ListAssociationsResult = Shapes::StructureShape.new(name: 'ListAssociationsResult')
       ListCommandInvocationsRequest = Shapes::StructureShape.new(name: 'ListCommandInvocationsRequest')
       ListCommandInvocationsResult = Shapes::StructureShape.new(name: 'ListCommandInvocationsResult')
       ListCommandsRequest = Shapes::StructureShape.new(name: 'ListCommandsRequest')
       ListCommandsResult = Shapes::StructureShape.new(name: 'ListCommandsResult')
-      ListDocumentsMaxResults = Shapes::IntegerShape.new(name: 'ListDocumentsMaxResults')
       ListDocumentsRequest = Shapes::StructureShape.new(name: 'ListDocumentsRequest')
       ListDocumentsResult = Shapes::StructureShape.new(name: 'ListDocumentsResult')
+      ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+      ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
+      ManagedInstanceId = Shapes::StringShape.new(name: 'ManagedInstanceId')
       MaxDocumentSizeExceeded = Shapes::StructureShape.new(name: 'MaxDocumentSizeExceeded')
       MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
       MaxResultsEC2Compatible = Shapes::IntegerShape.new(name: 'MaxResultsEC2Compatible')
       ModifyDocumentPermissionRequest = Shapes::StructureShape.new(name: 'ModifyDocumentPermissionRequest')
       ModifyDocumentPermissionResponse = Shapes::StructureShape.new(name: 'ModifyDocumentPermissionResponse')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
+      NotificationArn = Shapes::StringShape.new(name: 'NotificationArn')
+      NotificationConfig = Shapes::StructureShape.new(name: 'NotificationConfig')
+      NotificationEvent = Shapes::StringShape.new(name: 'NotificationEvent')
+      NotificationEventList = Shapes::ListShape.new(name: 'NotificationEventList')
+      NotificationType = Shapes::StringShape.new(name: 'NotificationType')
       ParameterName = Shapes::StringShape.new(name: 'ParameterName')
       ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
       ParameterValueList = Shapes::ListShape.new(name: 'ParameterValueList')
@@ -154,23 +193,58 @@ module Aws
       PingStatus = Shapes::StringShape.new(name: 'PingStatus')
       PlatformType = Shapes::StringShape.new(name: 'PlatformType')
       PlatformTypeList = Shapes::ListShape.new(name: 'PlatformTypeList')
+      RegistrationLimit = Shapes::IntegerShape.new(name: 'RegistrationLimit')
+      RegistrationsCount = Shapes::IntegerShape.new(name: 'RegistrationsCount')
+      RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
+      RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
+      ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+      ResourceType = Shapes::StringShape.new(name: 'ResourceType')
+      ResourceTypeForTagging = Shapes::StringShape.new(name: 'ResourceTypeForTagging')
       ResponseCode = Shapes::IntegerShape.new(name: 'ResponseCode')
       S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
       S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
       SendCommandRequest = Shapes::StructureShape.new(name: 'SendCommandRequest')
       SendCommandResult = Shapes::StructureShape.new(name: 'SendCommandResult')
+      ServiceRole = Shapes::StringShape.new(name: 'ServiceRole')
       StatusAdditionalInfo = Shapes::StringShape.new(name: 'StatusAdditionalInfo')
       StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
       StatusUnchanged = Shapes::StructureShape.new(name: 'StatusUnchanged')
       String = Shapes::StringShape.new(name: 'String')
+      StringList = Shapes::ListShape.new(name: 'StringList')
+      Tag = Shapes::StructureShape.new(name: 'Tag')
+      TagKey = Shapes::StringShape.new(name: 'TagKey')
+      TagList = Shapes::ListShape.new(name: 'TagList')
+      TagValue = Shapes::StringShape.new(name: 'TagValue')
       TimeoutSeconds = Shapes::IntegerShape.new(name: 'TimeoutSeconds')
       TooManyUpdates = Shapes::StructureShape.new(name: 'TooManyUpdates')
       UnsupportedPlatformType = Shapes::StructureShape.new(name: 'UnsupportedPlatformType')
       UpdateAssociationStatusRequest = Shapes::StructureShape.new(name: 'UpdateAssociationStatusRequest')
       UpdateAssociationStatusResult = Shapes::StructureShape.new(name: 'UpdateAssociationStatusResult')
+      UpdateManagedInstanceRoleRequest = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleRequest')
+      UpdateManagedInstanceRoleResult = Shapes::StructureShape.new(name: 'UpdateManagedInstanceRoleResult')
       Version = Shapes::StringShape.new(name: 'Version')
 
       AccountIdList.member = Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId")
+
+      Activation.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
+      Activation.add_member(:description, Shapes::ShapeRef.new(shape: ActivationDescription, location_name: "Description"))
+      Activation.add_member(:default_instance_name, Shapes::ShapeRef.new(shape: DefaultInstanceName, location_name: "DefaultInstanceName"))
+      Activation.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "IamRole"))
+      Activation.add_member(:registration_limit, Shapes::ShapeRef.new(shape: RegistrationLimit, location_name: "RegistrationLimit"))
+      Activation.add_member(:registrations_count, Shapes::ShapeRef.new(shape: RegistrationsCount, location_name: "RegistrationsCount"))
+      Activation.add_member(:expiration_date, Shapes::ShapeRef.new(shape: ExpirationDate, location_name: "ExpirationDate"))
+      Activation.add_member(:expired, Shapes::ShapeRef.new(shape: Boolean, location_name: "Expired"))
+      Activation.add_member(:created_date, Shapes::ShapeRef.new(shape: CreatedDate, location_name: "CreatedDate"))
+      Activation.struct_class = Types::Activation
+
+      ActivationList.member = Shapes::ShapeRef.new(shape: Activation)
+
+      AddTagsToResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceTypeForTagging, required: true, location_name: "ResourceType"))
+      AddTagsToResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+      AddTagsToResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "Tags"))
+      AddTagsToResourceRequest.struct_class = Types::AddTagsToResourceRequest
+
+      AddTagsToResourceResult.struct_class = Types::AddTagsToResourceResult
 
       Association.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, location_name: "Name"))
       Association.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
@@ -215,6 +289,8 @@ module Aws
       Command.add_member(:status, Shapes::ShapeRef.new(shape: CommandStatus, location_name: "Status"))
       Command.add_member(:output_s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "OutputS3BucketName"))
       Command.add_member(:output_s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "OutputS3KeyPrefix"))
+      Command.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRole"))
+      Command.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
       Command.struct_class = Types::Command
 
       CommandFilter.add_member(:key, Shapes::ShapeRef.new(shape: CommandFilterKey, required: true, location_name: "key"))
@@ -231,6 +307,8 @@ module Aws
       CommandInvocation.add_member(:status, Shapes::ShapeRef.new(shape: CommandInvocationStatus, location_name: "Status"))
       CommandInvocation.add_member(:trace_output, Shapes::ShapeRef.new(shape: InvocationTraceOutput, location_name: "TraceOutput"))
       CommandInvocation.add_member(:command_plugins, Shapes::ShapeRef.new(shape: CommandPluginList, location_name: "CommandPlugins"))
+      CommandInvocation.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRole"))
+      CommandInvocation.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
       CommandInvocation.struct_class = Types::CommandInvocation
 
       CommandInvocationList.member = Shapes::ShapeRef.new(shape: CommandInvocation)
@@ -248,6 +326,17 @@ module Aws
       CommandPlugin.struct_class = Types::CommandPlugin
 
       CommandPluginList.member = Shapes::ShapeRef.new(shape: CommandPlugin)
+
+      CreateActivationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ActivationDescription, location_name: "Description"))
+      CreateActivationRequest.add_member(:default_instance_name, Shapes::ShapeRef.new(shape: DefaultInstanceName, location_name: "DefaultInstanceName"))
+      CreateActivationRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "IamRole"))
+      CreateActivationRequest.add_member(:registration_limit, Shapes::ShapeRef.new(shape: RegistrationLimit, location_name: "RegistrationLimit", metadata: {"box"=>true}))
+      CreateActivationRequest.add_member(:expiration_date, Shapes::ShapeRef.new(shape: ExpirationDate, location_name: "ExpirationDate"))
+      CreateActivationRequest.struct_class = Types::CreateActivationRequest
+
+      CreateActivationResult.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
+      CreateActivationResult.add_member(:activation_code, Shapes::ShapeRef.new(shape: ActivationCode, location_name: "ActivationCode"))
+      CreateActivationResult.struct_class = Types::CreateActivationResult
 
       CreateAssociationBatchRequest.add_member(:entries, Shapes::ShapeRef.new(shape: CreateAssociationBatchRequestEntries, required: true, location_name: "Entries"))
       CreateAssociationBatchRequest.struct_class = Types::CreateAssociationBatchRequest
@@ -278,6 +367,11 @@ module Aws
       CreateDocumentResult.add_member(:document_description, Shapes::ShapeRef.new(shape: DocumentDescription, location_name: "DocumentDescription"))
       CreateDocumentResult.struct_class = Types::CreateDocumentResult
 
+      DeleteActivationRequest.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, required: true, location_name: "ActivationId"))
+      DeleteActivationRequest.struct_class = Types::DeleteActivationRequest
+
+      DeleteActivationResult.struct_class = Types::DeleteActivationResult
+
       DeleteAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
       DeleteAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
       DeleteAssociationRequest.struct_class = Types::DeleteAssociationRequest
@@ -288,6 +382,26 @@ module Aws
       DeleteDocumentRequest.struct_class = Types::DeleteDocumentRequest
 
       DeleteDocumentResult.struct_class = Types::DeleteDocumentResult
+
+      DeregisterManagedInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
+      DeregisterManagedInstanceRequest.struct_class = Types::DeregisterManagedInstanceRequest
+
+      DeregisterManagedInstanceResult.struct_class = Types::DeregisterManagedInstanceResult
+
+      DescribeActivationsFilter.add_member(:filter_key, Shapes::ShapeRef.new(shape: DescribeActivationsFilterKeys, location_name: "FilterKey"))
+      DescribeActivationsFilter.add_member(:filter_values, Shapes::ShapeRef.new(shape: StringList, location_name: "FilterValues"))
+      DescribeActivationsFilter.struct_class = Types::DescribeActivationsFilter
+
+      DescribeActivationsFilterList.member = Shapes::ShapeRef.new(shape: DescribeActivationsFilter)
+
+      DescribeActivationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeActivationsFilterList, location_name: "Filters"))
+      DescribeActivationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+      DescribeActivationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      DescribeActivationsRequest.struct_class = Types::DescribeActivationsRequest
+
+      DescribeActivationsResult.add_member(:activation_list, Shapes::ShapeRef.new(shape: ActivationList, location_name: "ActivationList"))
+      DescribeActivationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      DescribeActivationsResult.struct_class = Types::DescribeActivationsResult
 
       DescribeAssociationRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
       DescribeAssociationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -375,6 +489,13 @@ module Aws
       InstanceInformation.add_member(:platform_type, Shapes::ShapeRef.new(shape: PlatformType, location_name: "PlatformType"))
       InstanceInformation.add_member(:platform_name, Shapes::ShapeRef.new(shape: String, location_name: "PlatformName"))
       InstanceInformation.add_member(:platform_version, Shapes::ShapeRef.new(shape: String, location_name: "PlatformVersion"))
+      InstanceInformation.add_member(:activation_id, Shapes::ShapeRef.new(shape: ActivationId, location_name: "ActivationId"))
+      InstanceInformation.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, location_name: "IamRole"))
+      InstanceInformation.add_member(:registration_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "RegistrationDate", metadata: {"box"=>true}))
+      InstanceInformation.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+      InstanceInformation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+      InstanceInformation.add_member(:ip_address, Shapes::ShapeRef.new(shape: IPAddress, location_name: "IPAddress"))
+      InstanceInformation.add_member(:computer_name, Shapes::ShapeRef.new(shape: ComputerName, location_name: "ComputerName"))
       InstanceInformation.struct_class = Types::InstanceInformation
 
       InstanceInformationFilter.add_member(:key, Shapes::ShapeRef.new(shape: InstanceInformationFilterKey, required: true, location_name: "key"))
@@ -386,6 +507,8 @@ module Aws
       InstanceInformationFilterValueSet.member = Shapes::ShapeRef.new(shape: InstanceInformationFilterValue, location_name: "InstanceInformationFilterValue")
 
       InstanceInformationList.member = Shapes::ShapeRef.new(shape: InstanceInformation, location_name: "InstanceInformation")
+
+      KeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
       ListAssociationsRequest.add_member(:association_filter_list, Shapes::ShapeRef.new(shape: AssociationFilterList, required: true, location_name: "AssociationFilterList"))
       ListAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
@@ -420,13 +543,20 @@ module Aws
       ListCommandsResult.struct_class = Types::ListCommandsResult
 
       ListDocumentsRequest.add_member(:document_filter_list, Shapes::ShapeRef.new(shape: DocumentFilterList, location_name: "DocumentFilterList"))
-      ListDocumentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListDocumentsMaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+      ListDocumentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
       ListDocumentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
       ListDocumentsRequest.struct_class = Types::ListDocumentsRequest
 
       ListDocumentsResult.add_member(:document_identifiers, Shapes::ShapeRef.new(shape: DocumentIdentifierList, location_name: "DocumentIdentifiers"))
       ListDocumentsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
       ListDocumentsResult.struct_class = Types::ListDocumentsResult
+
+      ListTagsForResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceTypeForTagging, required: true, location_name: "ResourceType"))
+      ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+      ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+      ListTagsForResourceResult.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
+      ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
 
       ModifyDocumentPermissionRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
       ModifyDocumentPermissionRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: DocumentPermissionType, required: true, location_name: "PermissionType"))
@@ -436,12 +566,26 @@ module Aws
 
       ModifyDocumentPermissionResponse.struct_class = Types::ModifyDocumentPermissionResponse
 
+      NotificationConfig.add_member(:notification_arn, Shapes::ShapeRef.new(shape: NotificationArn, location_name: "NotificationArn"))
+      NotificationConfig.add_member(:notification_events, Shapes::ShapeRef.new(shape: NotificationEventList, location_name: "NotificationEvents"))
+      NotificationConfig.add_member(:notification_type, Shapes::ShapeRef.new(shape: NotificationType, location_name: "NotificationType"))
+      NotificationConfig.struct_class = Types::NotificationConfig
+
+      NotificationEventList.member = Shapes::ShapeRef.new(shape: NotificationEvent)
+
       ParameterValueList.member = Shapes::ShapeRef.new(shape: ParameterValue)
 
       Parameters.key = Shapes::ShapeRef.new(shape: ParameterName)
       Parameters.value = Shapes::ShapeRef.new(shape: ParameterValueList)
 
       PlatformTypeList.member = Shapes::ShapeRef.new(shape: PlatformType, location_name: "PlatformType")
+
+      RemoveTagsFromResourceRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceTypeForTagging, required: true, location_name: "ResourceType"))
+      RemoveTagsFromResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
+      RemoveTagsFromResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: KeyList, required: true, location_name: "TagKeys"))
+      RemoveTagsFromResourceRequest.struct_class = Types::RemoveTagsFromResourceRequest
+
+      RemoveTagsFromResourceResult.struct_class = Types::RemoveTagsFromResourceResult
 
       SendCommandRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdList, required: true, location_name: "InstanceIds"))
       SendCommandRequest.add_member(:document_name, Shapes::ShapeRef.new(shape: DocumentARN, required: true, location_name: "DocumentName"))
@@ -452,10 +596,20 @@ module Aws
       SendCommandRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
       SendCommandRequest.add_member(:output_s3_bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, location_name: "OutputS3BucketName"))
       SendCommandRequest.add_member(:output_s3_key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "OutputS3KeyPrefix"))
+      SendCommandRequest.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "ServiceRoleArn"))
+      SendCommandRequest.add_member(:notification_config, Shapes::ShapeRef.new(shape: NotificationConfig, location_name: "NotificationConfig"))
       SendCommandRequest.struct_class = Types::SendCommandRequest
 
       SendCommandResult.add_member(:command, Shapes::ShapeRef.new(shape: Command, location_name: "Command"))
       SendCommandResult.struct_class = Types::SendCommandResult
+
+      StringList.member = Shapes::ShapeRef.new(shape: String)
+
+      Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+      Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
+      Tag.struct_class = Types::Tag
+
+      TagList.member = Shapes::ShapeRef.new(shape: Tag)
 
       UpdateAssociationStatusRequest.add_member(:name, Shapes::ShapeRef.new(shape: DocumentName, required: true, location_name: "Name"))
       UpdateAssociationStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -464,6 +618,12 @@ module Aws
 
       UpdateAssociationStatusResult.add_member(:association_description, Shapes::ShapeRef.new(shape: AssociationDescription, location_name: "AssociationDescription"))
       UpdateAssociationStatusResult.struct_class = Types::UpdateAssociationStatusResult
+
+      UpdateManagedInstanceRoleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
+      UpdateManagedInstanceRoleRequest.add_member(:iam_role, Shapes::ShapeRef.new(shape: IamRole, required: true, location_name: "IamRole"))
+      UpdateManagedInstanceRoleRequest.struct_class = Types::UpdateManagedInstanceRoleRequest
+
+      UpdateManagedInstanceRoleResult.struct_class = Types::UpdateManagedInstanceRoleResult
 
 
       # @api private
@@ -480,6 +640,17 @@ module Aws
           "targetPrefix" => "AmazonSSM",
         }
 
+        api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AddTagsToResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AddTagsToResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: AddTagsToResourceResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        end)
+
         api.add_operation(:cancel_command, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CancelCommand"
           o.http_method = "POST"
@@ -490,6 +661,15 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidCommandId)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
           o.errors << Shapes::ShapeRef.new(shape: DuplicateInstanceId)
+        end)
+
+        api.add_operation(:create_activation, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateActivation"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateActivationRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateActivationResult)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         end)
 
         api.add_operation(:create_association, Seahorse::Model::Operation.new.tap do |o|
@@ -535,6 +715,17 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DocumentLimitExceeded)
         end)
 
+        api.add_operation(:delete_activation, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteActivation"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteActivationRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteActivationResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidActivationId)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidActivation)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        end)
+
         api.add_operation(:delete_association, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteAssociation"
           o.http_method = "POST"
@@ -558,6 +749,33 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidDocument)
           o.errors << Shapes::ShapeRef.new(shape: InvalidDocumentOperation)
           o.errors << Shapes::ShapeRef.new(shape: AssociatedInstances)
+        end)
+
+        api.add_operation(:deregister_managed_instance, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeregisterManagedInstance"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeregisterManagedInstanceRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeregisterManagedInstanceResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        end)
+
+        api.add_operation(:describe_activations, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeActivations"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeActivationsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeActivationsResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFilter)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "NextToken",
+            "output_token" => "NextToken",
+            "limit_key" => "MaxResults",
+            "result_key" => "ActivationList"
+          )
         end)
 
         api.add_operation(:describe_association, Seahorse::Model::Operation.new.tap do |o|
@@ -604,6 +822,12 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceInformationFilterValue)
           o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "NextToken",
+            "output_token" => "NextToken",
+            "limit_key" => "MaxResults",
+            "result_key" => "InstanceInformationList"
+          )
         end)
 
         api.add_operation(:get_document, Seahorse::Model::Operation.new.tap do |o|
@@ -687,6 +911,17 @@ module Aws
           )
         end)
 
+        api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListTagsForResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        end)
+
         api.add_operation(:modify_document_permission, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ModifyDocumentPermission"
           o.http_method = "POST"
@@ -698,6 +933,17 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidPermissionType)
           o.errors << Shapes::ShapeRef.new(shape: DocumentPermissionLimit)
           o.errors << Shapes::ShapeRef.new(shape: DocumentLimitExceeded)
+        end)
+
+        api.add_operation(:remove_tags_from_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "RemoveTagsFromResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: RemoveTagsFromResourceResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceType)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceId)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         end)
 
         api.add_operation(:send_command, Seahorse::Model::Operation.new.tap do |o|
@@ -714,6 +960,8 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameters)
           o.errors << Shapes::ShapeRef.new(shape: UnsupportedPlatformType)
           o.errors << Shapes::ShapeRef.new(shape: MaxDocumentSizeExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRole)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidNotificationConfig)
         end)
 
         api.add_operation(:update_association_status, Seahorse::Model::Operation.new.tap do |o|
@@ -728,6 +976,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: AssociationDoesNotExist)
           o.errors << Shapes::ShapeRef.new(shape: StatusUnchanged)
           o.errors << Shapes::ShapeRef.new(shape: TooManyUpdates)
+        end)
+
+        api.add_operation(:update_managed_instance_role, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateManagedInstanceRole"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: UpdateManagedInstanceRoleRequest)
+          o.output = Shapes::ShapeRef.new(shape: UpdateManagedInstanceRoleResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceId)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         end)
       end
 

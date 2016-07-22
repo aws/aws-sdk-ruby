@@ -46,6 +46,7 @@ module Aws
       #         dynamo_db: {
       #           table_name: "TableName", # required
       #           role_arn: "AwsArn", # required
+      #           operation: "DynamoOperation",
       #           hash_key_field: "HashKeyField", # required
       #           hash_key_value: "HashKeyValue", # required
       #           hash_key_type: "STRING", # accepts STRING, NUMBER
@@ -737,6 +738,7 @@ module Aws
       #               dynamo_db: {
       #                 table_name: "TableName", # required
       #                 role_arn: "AwsArn", # required
+      #                 operation: "DynamoOperation",
       #                 hash_key_field: "HashKeyField", # required
       #                 hash_key_value: "HashKeyValue", # required
       #                 hash_key_type: "STRING", # accepts STRING, NUMBER
@@ -1134,6 +1136,7 @@ module Aws
       #       {
       #         table_name: "TableName", # required
       #         role_arn: "AwsArn", # required
+      #         operation: "DynamoOperation",
       #         hash_key_field: "HashKeyField", # required
       #         hash_key_value: "HashKeyValue", # required
       #         hash_key_type: "STRING", # accepts STRING, NUMBER
@@ -1145,6 +1148,7 @@ module Aws
       class DynamoDBAction < Aws::Structure.new(
         :table_name,
         :role_arn,
+        :operation,
         :hash_key_field,
         :hash_key_value,
         :hash_key_type,
@@ -1159,6 +1163,12 @@ module Aws
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that grants access to the DynamoDB table.
+        #   @return [String]
+
+        # @!attribute [rw] operation
+        #   The type of operation to be performed. This follows the substitution
+        #   template, so it can be `$\{operation\}`, but the substitution must
+        #   result in one of the following: `INSERT`, `UPDATE`, or `DELETE`.
         #   @return [String]
 
         # @!attribute [rw] hash_key_field
@@ -2152,6 +2162,7 @@ module Aws
       #               dynamo_db: {
       #                 table_name: "TableName", # required
       #                 role_arn: "AwsArn", # required
+      #                 operation: "DynamoOperation",
       #                 hash_key_field: "HashKeyField", # required
       #                 hash_key_value: "HashKeyValue", # required
       #                 hash_key_type: "STRING", # accepts STRING, NUMBER
@@ -2486,6 +2497,7 @@ module Aws
       #             dynamo_db: {
       #               table_name: "TableName", # required
       #               role_arn: "AwsArn", # required
+      #               operation: "DynamoOperation",
       #               hash_key_field: "HashKeyField", # required
       #               hash_key_value: "HashKeyValue", # required
       #               hash_key_type: "STRING", # accepts STRING, NUMBER

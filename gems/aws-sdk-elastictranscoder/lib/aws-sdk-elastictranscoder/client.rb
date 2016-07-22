@@ -107,7 +107,7 @@ module Aws
       #   resp = client.create_job({
       #     pipeline_id: "Id", # required
       #     input: { # required
-      #       key: "Key",
+      #       key: "LongKey",
       #       frame_rate: "FrameRate",
       #       resolution: "Resolution",
       #       aspect_ratio: "AspectRatio",
@@ -182,7 +182,7 @@ module Aws
       #         merge_policy: "CaptionMergePolicy",
       #         caption_sources: [
       #           {
-      #             key: "Key",
+      #             key: "LongKey",
       #             language: "Key",
       #             time_offset: "TimeOffset",
       #             label: "Name",
@@ -270,7 +270,7 @@ module Aws
       #           merge_policy: "CaptionMergePolicy",
       #           caption_sources: [
       #             {
-      #               key: "Key",
+      #               key: "LongKey",
       #               language: "Key",
       #               time_offset: "TimeOffset",
       #               label: "Name",

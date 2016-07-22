@@ -34,7 +34,7 @@ module Aws
   # and return a response object.
   #
   #     ssm = Aws::SSM::Client.new
-  #     resp = ssm.cancel_command(params)
+  #     resp = ssm.add_tags_to_resource(params)
   #
   #
   # See {Client} for more information.

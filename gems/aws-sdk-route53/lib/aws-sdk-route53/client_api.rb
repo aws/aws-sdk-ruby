@@ -1125,6 +1125,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: HostedZoneNotEmpty)
           o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidDomainName)
         end)
 
         api.add_operation(:delete_reusable_delegation_set, Seahorse::Model::Operation.new.tap do |o|

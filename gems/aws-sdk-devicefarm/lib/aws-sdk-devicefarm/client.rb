@@ -58,7 +58,7 @@ module Aws
       #     description: "Message",
       #     rules: [ # required
       #       {
-      #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER
+      #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
       #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
       #         value: "String",
       #       },
@@ -71,7 +71,7 @@ module Aws
       #   resp.device_pool.description #=> String
       #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
       #   resp.device_pool.rules #=> Array
-      #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER"
+      #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
       # @param [Hash] params ({})
@@ -104,11 +104,78 @@ module Aws
         req.send_request(options)
       end
 
+      # Specifies and starts a remote access session.
+      # @option params [required, String] :project_arn
+      #   The Amazon Resource Name (ARN) of the project for which you want to
+      #   create a remote access session.
+      # @option params [required, String] :device_arn
+      #   The Amazon Resource Name (ARN) of the device for which you want to
+      #   create a remote access session.
+      # @option params [String] :name
+      #   The name of the remote access session that you wish to create.
+      # @option params [Types::CreateRemoteAccessSessionConfiguration] :configuration
+      #   The configuration information for the remote access session request.
+      # @return [Types::CreateRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateRemoteAccessSessionResult#remote_access_session #remoteAccessSession} => Types::RemoteAccessSession
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_remote_access_session({
+      #     project_arn: "AmazonResourceName", # required
+      #     device_arn: "AmazonResourceName", # required
+      #     name: "Name",
+      #     configuration: {
+      #       billing_method: "METERED", # accepts METERED, UNMETERED
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.remote_access_session.arn #=> String
+      #   resp.remote_access_session.name #=> String
+      #   resp.remote_access_session.created #=> Time
+      #   resp.remote_access_session.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
+      #   resp.remote_access_session.result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
+      #   resp.remote_access_session.message #=> String
+      #   resp.remote_access_session.started #=> Time
+      #   resp.remote_access_session.stopped #=> Time
+      #   resp.remote_access_session.device.arn #=> String
+      #   resp.remote_access_session.device.name #=> String
+      #   resp.remote_access_session.device.manufacturer #=> String
+      #   resp.remote_access_session.device.model #=> String
+      #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
+      #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
+      #   resp.remote_access_session.device.os #=> String
+      #   resp.remote_access_session.device.cpu.frequency #=> String
+      #   resp.remote_access_session.device.cpu.architecture #=> String
+      #   resp.remote_access_session.device.cpu.clock #=> Float
+      #   resp.remote_access_session.device.resolution.width #=> Integer
+      #   resp.remote_access_session.device.resolution.height #=> Integer
+      #   resp.remote_access_session.device.heap_size #=> Integer
+      #   resp.remote_access_session.device.memory #=> Integer
+      #   resp.remote_access_session.device.image #=> String
+      #   resp.remote_access_session.device.carrier #=> String
+      #   resp.remote_access_session.device.radio #=> String
+      #   resp.remote_access_session.device.remote_access_enabled #=> Boolean
+      #   resp.remote_access_session.device.fleet_type #=> String
+      #   resp.remote_access_session.device.fleet_name #=> String
+      #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
+      #   resp.remote_access_session.device_minutes.total #=> Float
+      #   resp.remote_access_session.device_minutes.metered #=> Float
+      #   resp.remote_access_session.device_minutes.unmetered #=> Float
+      #   resp.remote_access_session.endpoint #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_remote_access_session(params = {}, options = {})
+        req = build_request(:create_remote_access_session, params)
+        req.send_request(options)
+      end
+
       # Uploads an app or test scripts.
       # @option params [required, String] :project_arn
       #   The ARN of the project for the upload.
       # @option params [required, String] :name
-      #   The upload\'s file name.
+      #   The upload\'s file name. The name should not contain the \'/\'
+      #   character.
       # @option params [required, String] :type
       #   The upload\'s upload type.
       #
@@ -222,6 +289,23 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes a completed remote access session and its results.
+      # @option params [required, String] :arn
+      #   The Amazon Resource Name (ARN) of the sesssion for which you want to
+      #   delete remote access.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_remote_access_session({
+      #     arn: "AmazonResourceName", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_remote_access_session(params = {}, options = {})
+        req = build_request(:delete_remote_access_session, params)
+        req.send_request(options)
+      end
+
       # Deletes the run, given the run ARN.
       #
       # **Note** Deleting this resource does not stop an in-progress run.
@@ -309,6 +393,9 @@ module Aws
       #   resp.device.image #=> String
       #   resp.device.carrier #=> String
       #   resp.device.radio #=> String
+      #   resp.device.remote_access_enabled #=> Boolean
+      #   resp.device.fleet_type #=> String
+      #   resp.device.fleet_name #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def get_device(params = {}, options = {})
@@ -334,7 +421,7 @@ module Aws
       #   resp.device_pool.description #=> String
       #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
       #   resp.device_pool.rules #=> Array
-      #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER"
+      #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
       # @param [Hash] params ({})
@@ -414,10 +501,13 @@ module Aws
       #   resp.compatible_devices[0].device.image #=> String
       #   resp.compatible_devices[0].device.carrier #=> String
       #   resp.compatible_devices[0].device.radio #=> String
+      #   resp.compatible_devices[0].device.remote_access_enabled #=> Boolean
+      #   resp.compatible_devices[0].device.fleet_type #=> String
+      #   resp.compatible_devices[0].device.fleet_name #=> String
       #   resp.compatible_devices[0].compatible #=> Boolean
       #   resp.compatible_devices[0].incompatibility_messages #=> Array
       #   resp.compatible_devices[0].incompatibility_messages[0].message #=> String
-      #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER"
+      #   resp.compatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.incompatible_devices #=> Array
       #   resp.incompatible_devices[0].device.arn #=> String
       #   resp.incompatible_devices[0].device.name #=> String
@@ -436,10 +526,13 @@ module Aws
       #   resp.incompatible_devices[0].device.image #=> String
       #   resp.incompatible_devices[0].device.carrier #=> String
       #   resp.incompatible_devices[0].device.radio #=> String
+      #   resp.incompatible_devices[0].device.remote_access_enabled #=> Boolean
+      #   resp.incompatible_devices[0].device.fleet_type #=> String
+      #   resp.incompatible_devices[0].device.fleet_name #=> String
       #   resp.incompatible_devices[0].compatible #=> Boolean
       #   resp.incompatible_devices[0].incompatibility_messages #=> Array
       #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
-      #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER"
+      #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def get_device_pool_compatibility(params = {}, options = {})
@@ -493,6 +586,9 @@ module Aws
       #   resp.job.device.image #=> String
       #   resp.job.device.carrier #=> String
       #   resp.job.device.radio #=> String
+      #   resp.job.device.remote_access_enabled #=> Boolean
+      #   resp.job.device.fleet_type #=> String
+      #   resp.job.device.fleet_name #=> String
       #   resp.job.device_minutes.total #=> Float
       #   resp.job.device_minutes.metered #=> Float
       #   resp.job.device_minutes.unmetered #=> Float
@@ -578,6 +674,60 @@ module Aws
       # @param [Hash] options ({})
       def get_project(params = {}, options = {})
         req = build_request(:get_project, params)
+        req.send_request(options)
+      end
+
+      # Returns a link to a currently running remote access session.
+      # @option params [required, String] :arn
+      #   The Amazon Resource Name (ARN) of the remote access session about
+      #   which you want to get session information.
+      # @return [Types::GetRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetRemoteAccessSessionResult#remote_access_session #remoteAccessSession} => Types::RemoteAccessSession
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_remote_access_session({
+      #     arn: "AmazonResourceName", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.remote_access_session.arn #=> String
+      #   resp.remote_access_session.name #=> String
+      #   resp.remote_access_session.created #=> Time
+      #   resp.remote_access_session.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
+      #   resp.remote_access_session.result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
+      #   resp.remote_access_session.message #=> String
+      #   resp.remote_access_session.started #=> Time
+      #   resp.remote_access_session.stopped #=> Time
+      #   resp.remote_access_session.device.arn #=> String
+      #   resp.remote_access_session.device.name #=> String
+      #   resp.remote_access_session.device.manufacturer #=> String
+      #   resp.remote_access_session.device.model #=> String
+      #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
+      #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
+      #   resp.remote_access_session.device.os #=> String
+      #   resp.remote_access_session.device.cpu.frequency #=> String
+      #   resp.remote_access_session.device.cpu.architecture #=> String
+      #   resp.remote_access_session.device.cpu.clock #=> Float
+      #   resp.remote_access_session.device.resolution.width #=> Integer
+      #   resp.remote_access_session.device.resolution.height #=> Integer
+      #   resp.remote_access_session.device.heap_size #=> Integer
+      #   resp.remote_access_session.device.memory #=> Integer
+      #   resp.remote_access_session.device.image #=> String
+      #   resp.remote_access_session.device.carrier #=> String
+      #   resp.remote_access_session.device.radio #=> String
+      #   resp.remote_access_session.device.remote_access_enabled #=> Boolean
+      #   resp.remote_access_session.device.fleet_type #=> String
+      #   resp.remote_access_session.device.fleet_name #=> String
+      #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
+      #   resp.remote_access_session.device_minutes.total #=> Float
+      #   resp.remote_access_session.device_minutes.metered #=> Float
+      #   resp.remote_access_session.device_minutes.unmetered #=> Float
+      #   resp.remote_access_session.endpoint #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_remote_access_session(params = {}, options = {})
+        req = build_request(:get_remote_access_session, params)
         req.send_request(options)
       end
 
@@ -731,6 +881,42 @@ module Aws
         req.send_request(options)
       end
 
+      # Installs an application to the device in a remote access session. For
+      # Android applications, the file must be in .apk format. For iOS
+      # applications, the file must be in .ipa format.
+      # @option params [required, String] :remote_access_session_arn
+      #   The Amazon Resource Name (ARN) of the remote access session about
+      #   which you are requesting information.
+      # @option params [required, String] :app_arn
+      #   The Amazon Resource Name (ARN) of the app about which you are
+      #   requesting information.
+      # @return [Types::InstallToRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::InstallToRemoteAccessSessionResult#app_upload #appUpload} => Types::Upload
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.install_to_remote_access_session({
+      #     remote_access_session_arn: "AmazonResourceName", # required
+      #     app_arn: "AmazonResourceName", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.app_upload.arn #=> String
+      #   resp.app_upload.name #=> String
+      #   resp.app_upload.created #=> Time
+      #   resp.app_upload.type #=> String, one of "ANDROID_APP", "IOS_APP", "WEB_APP", "EXTERNAL_DATA", "APPIUM_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_PYTHON_TEST_PACKAGE", "APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE", "APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE", "APPIUM_WEB_PYTHON_TEST_PACKAGE", "CALABASH_TEST_PACKAGE", "INSTRUMENTATION_TEST_PACKAGE", "UIAUTOMATION_TEST_PACKAGE", "UIAUTOMATOR_TEST_PACKAGE", "XCTEST_TEST_PACKAGE", "XCTEST_UI_TEST_PACKAGE"
+      #   resp.app_upload.status #=> String, one of "INITIALIZED", "PROCESSING", "SUCCEEDED", "FAILED"
+      #   resp.app_upload.url #=> String
+      #   resp.app_upload.metadata #=> String
+      #   resp.app_upload.content_type #=> String
+      #   resp.app_upload.message #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def install_to_remote_access_session(params = {}, options = {})
+        req = build_request(:install_to_remote_access_session, params)
+        req.send_request(options)
+      end
+
       # Gets information about artifacts.
       # @option params [required, String] :arn
       #   The Run, Job, Suite, or Test ARN.
@@ -762,7 +948,7 @@ module Aws
       #   resp.artifacts #=> Array
       #   resp.artifacts[0].arn #=> String
       #   resp.artifacts[0].name #=> String
-      #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO"
+      #   resp.artifacts[0].type #=> String, one of "UNKNOWN", "SCREENSHOT", "DEVICE_LOG", "MESSAGE_LOG", "VIDEO_LOG", "RESULT_LOG", "SERVICE_LOG", "WEBKIT_LOG", "INSTRUMENTATION_OUTPUT", "EXERCISER_MONKEY_OUTPUT", "CALABASH_JSON_OUTPUT", "CALABASH_PRETTY_OUTPUT", "CALABASH_STANDARD_OUTPUT", "CALABASH_JAVA_XML_OUTPUT", "AUTOMATION_OUTPUT", "APPIUM_SERVER_OUTPUT", "APPIUM_JAVA_OUTPUT", "APPIUM_JAVA_XML_OUTPUT", "APPIUM_PYTHON_OUTPUT", "APPIUM_PYTHON_XML_OUTPUT", "EXPLORER_EVENT_LOG", "EXPLORER_SUMMARY_LOG", "APPLICATION_CRASH_REPORT", "XCTEST_LOG", "VIDEO"
       #   resp.artifacts[0].extension #=> String
       #   resp.artifacts[0].url #=> String
       #   resp.next_token #=> String
@@ -809,7 +995,7 @@ module Aws
       #   resp.device_pools[0].description #=> String
       #   resp.device_pools[0].type #=> String, one of "CURATED", "PRIVATE"
       #   resp.device_pools[0].rules #=> Array
-      #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER"
+      #   resp.device_pools[0].rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pools[0].rules[0].value #=> String
       #   resp.next_token #=> String
@@ -857,6 +1043,9 @@ module Aws
       #   resp.devices[0].image #=> String
       #   resp.devices[0].carrier #=> String
       #   resp.devices[0].radio #=> String
+      #   resp.devices[0].remote_access_enabled #=> Boolean
+      #   resp.devices[0].fleet_type #=> String
+      #   resp.devices[0].fleet_name #=> String
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -918,6 +1107,9 @@ module Aws
       #   resp.jobs[0].device.image #=> String
       #   resp.jobs[0].device.carrier #=> String
       #   resp.jobs[0].device.radio #=> String
+      #   resp.jobs[0].device.remote_access_enabled #=> Boolean
+      #   resp.jobs[0].device.fleet_type #=> String
+      #   resp.jobs[0].device.fleet_name #=> String
       #   resp.jobs[0].device_minutes.total #=> Float
       #   resp.jobs[0].device_minutes.metered #=> Float
       #   resp.jobs[0].device_minutes.unmetered #=> Float
@@ -1042,6 +1234,68 @@ module Aws
       # @param [Hash] options ({})
       def list_projects(params = {}, options = {})
         req = build_request(:list_projects, params)
+        req.send_request(options)
+      end
+
+      # Returns a list of all currently running remote access sessions.
+      # @option params [required, String] :arn
+      #   The Amazon Resource Name (ARN) of the remote access session about
+      #   which you are requesting information.
+      # @option params [String] :next_token
+      #   An identifier that was returned from the previous call to this
+      #   operation, which can be used to return the next set of items in the
+      #   list.
+      # @return [Types::ListRemoteAccessSessionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListRemoteAccessSessionsResult#remote_access_sessions #remoteAccessSessions} => Array&lt;Types::RemoteAccessSession&gt;
+      #   * {Types::ListRemoteAccessSessionsResult#next_token #nextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_remote_access_sessions({
+      #     arn: "AmazonResourceName", # required
+      #     next_token: "PaginationToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.remote_access_sessions #=> Array
+      #   resp.remote_access_sessions[0].arn #=> String
+      #   resp.remote_access_sessions[0].name #=> String
+      #   resp.remote_access_sessions[0].created #=> Time
+      #   resp.remote_access_sessions[0].status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
+      #   resp.remote_access_sessions[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
+      #   resp.remote_access_sessions[0].message #=> String
+      #   resp.remote_access_sessions[0].started #=> Time
+      #   resp.remote_access_sessions[0].stopped #=> Time
+      #   resp.remote_access_sessions[0].device.arn #=> String
+      #   resp.remote_access_sessions[0].device.name #=> String
+      #   resp.remote_access_sessions[0].device.manufacturer #=> String
+      #   resp.remote_access_sessions[0].device.model #=> String
+      #   resp.remote_access_sessions[0].device.form_factor #=> String, one of "PHONE", "TABLET"
+      #   resp.remote_access_sessions[0].device.platform #=> String, one of "ANDROID", "IOS"
+      #   resp.remote_access_sessions[0].device.os #=> String
+      #   resp.remote_access_sessions[0].device.cpu.frequency #=> String
+      #   resp.remote_access_sessions[0].device.cpu.architecture #=> String
+      #   resp.remote_access_sessions[0].device.cpu.clock #=> Float
+      #   resp.remote_access_sessions[0].device.resolution.width #=> Integer
+      #   resp.remote_access_sessions[0].device.resolution.height #=> Integer
+      #   resp.remote_access_sessions[0].device.heap_size #=> Integer
+      #   resp.remote_access_sessions[0].device.memory #=> Integer
+      #   resp.remote_access_sessions[0].device.image #=> String
+      #   resp.remote_access_sessions[0].device.carrier #=> String
+      #   resp.remote_access_sessions[0].device.radio #=> String
+      #   resp.remote_access_sessions[0].device.remote_access_enabled #=> Boolean
+      #   resp.remote_access_sessions[0].device.fleet_type #=> String
+      #   resp.remote_access_sessions[0].device.fleet_name #=> String
+      #   resp.remote_access_sessions[0].billing_method #=> String, one of "METERED", "UNMETERED"
+      #   resp.remote_access_sessions[0].device_minutes.total #=> Float
+      #   resp.remote_access_sessions[0].device_minutes.metered #=> Float
+      #   resp.remote_access_sessions[0].device_minutes.unmetered #=> Float
+      #   resp.remote_access_sessions[0].endpoint #=> String
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_remote_access_sessions(params = {}, options = {})
+        req = build_request(:list_remote_access_sessions, params)
         req.send_request(options)
       end
 
@@ -1269,6 +1523,9 @@ module Aws
       #   resp.unique_problems["ExecutionResult"][0].problems[0].device.image #=> String
       #   resp.unique_problems["ExecutionResult"][0].problems[0].device.carrier #=> String
       #   resp.unique_problems["ExecutionResult"][0].problems[0].device.radio #=> String
+      #   resp.unique_problems["ExecutionResult"][0].problems[0].device.remote_access_enabled #=> Boolean
+      #   resp.unique_problems["ExecutionResult"][0].problems[0].device.fleet_type #=> String
+      #   resp.unique_problems["ExecutionResult"][0].problems[0].device.fleet_name #=> String
       #   resp.unique_problems["ExecutionResult"][0].problems[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
       #   resp.unique_problems["ExecutionResult"][0].problems[0].message #=> String
       #   resp.next_token #=> String
@@ -1484,6 +1741,60 @@ module Aws
         req.send_request(options)
       end
 
+      # Ends a specified remote access session.
+      # @option params [required, String] :arn
+      #   The Amazon Resource Name (ARN) of the remote access session you wish
+      #   to stop.
+      # @return [Types::StopRemoteAccessSessionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::StopRemoteAccessSessionResult#remote_access_session #remoteAccessSession} => Types::RemoteAccessSession
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.stop_remote_access_session({
+      #     arn: "AmazonResourceName", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.remote_access_session.arn #=> String
+      #   resp.remote_access_session.name #=> String
+      #   resp.remote_access_session.created #=> Time
+      #   resp.remote_access_session.status #=> String, one of "PENDING", "PENDING_CONCURRENCY", "PENDING_DEVICE", "PROCESSING", "SCHEDULING", "PREPARING", "RUNNING", "COMPLETED", "STOPPING"
+      #   resp.remote_access_session.result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
+      #   resp.remote_access_session.message #=> String
+      #   resp.remote_access_session.started #=> Time
+      #   resp.remote_access_session.stopped #=> Time
+      #   resp.remote_access_session.device.arn #=> String
+      #   resp.remote_access_session.device.name #=> String
+      #   resp.remote_access_session.device.manufacturer #=> String
+      #   resp.remote_access_session.device.model #=> String
+      #   resp.remote_access_session.device.form_factor #=> String, one of "PHONE", "TABLET"
+      #   resp.remote_access_session.device.platform #=> String, one of "ANDROID", "IOS"
+      #   resp.remote_access_session.device.os #=> String
+      #   resp.remote_access_session.device.cpu.frequency #=> String
+      #   resp.remote_access_session.device.cpu.architecture #=> String
+      #   resp.remote_access_session.device.cpu.clock #=> Float
+      #   resp.remote_access_session.device.resolution.width #=> Integer
+      #   resp.remote_access_session.device.resolution.height #=> Integer
+      #   resp.remote_access_session.device.heap_size #=> Integer
+      #   resp.remote_access_session.device.memory #=> Integer
+      #   resp.remote_access_session.device.image #=> String
+      #   resp.remote_access_session.device.carrier #=> String
+      #   resp.remote_access_session.device.radio #=> String
+      #   resp.remote_access_session.device.remote_access_enabled #=> Boolean
+      #   resp.remote_access_session.device.fleet_type #=> String
+      #   resp.remote_access_session.device.fleet_name #=> String
+      #   resp.remote_access_session.billing_method #=> String, one of "METERED", "UNMETERED"
+      #   resp.remote_access_session.device_minutes.total #=> Float
+      #   resp.remote_access_session.device_minutes.metered #=> Float
+      #   resp.remote_access_session.device_minutes.unmetered #=> Float
+      #   resp.remote_access_session.endpoint #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def stop_remote_access_session(params = {}, options = {})
+        req = build_request(:stop_remote_access_session, params)
+        req.send_request(options)
+      end
+
       # Initiates a stop request for the current test run. AWS Device Farm
       # will immediately stop the run on devices where tests have not started
       # executing, and you will not be billed for these devices. On devices
@@ -1559,7 +1870,7 @@ module Aws
       #     description: "Message",
       #     rules: [
       #       {
-      #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER
+      #         attribute: "ARN", # accepts ARN, PLATFORM, FORM_FACTOR, MANUFACTURER, REMOTE_ACCESS_ENABLED
       #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
       #         value: "String",
       #       },
@@ -1572,7 +1883,7 @@ module Aws
       #   resp.device_pool.description #=> String
       #   resp.device_pool.type #=> String, one of "CURATED", "PRIVATE"
       #   resp.device_pool.rules #=> Array
-      #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER"
+      #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
       # @param [Hash] params ({})

@@ -53,6 +53,38 @@ module Aws
 
       end
 
+      # The input for the `CheckIfPhoneNumberIsOptedOut` action.
+      # @note When making an API call, pass CheckIfPhoneNumberIsOptedOutInput
+      #   data as a hash:
+      #
+      #       {
+      #         phone_number: "PhoneNumber", # required
+      #       }
+      class CheckIfPhoneNumberIsOptedOutInput < Aws::Structure.new(
+        :phone_number)
+
+        # @!attribute [rw] phone_number
+        #   The phone number for which you want to check the opt out status.
+        #   @return [String]
+
+      end
+
+      # The response from the `CheckIfPhoneNumberIsOptedOut` action.
+      class CheckIfPhoneNumberIsOptedOutResponse < Aws::Structure.new(
+        :is_opted_out)
+
+        # @!attribute [rw] is_opted_out
+        #   Indicates whether the phone number is opted out:
+        #
+        #   * `true` – The phone number is opted out, meaning you cannot publish
+        #     SMS messages to it.
+        #
+        #   * `false` – The phone number is opted in, meaning you can publish
+        #     SMS messages to it.
+        #   @return [Boolean]
+
+      end
+
       # Input for ConfirmSubscription action.
       # @note When making an API call, pass ConfirmSubscriptionInput
       #   data as a hash:
@@ -319,10 +351,12 @@ module Aws
         #   * `CustomUserData` -- arbitrary user data to associate with the
         #     endpoint. Amazon SNS does not use this data. The data must be in
         #     UTF-8 format and less than 2KB.
+        #
         #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
         #     Amazon SNS will set this to false when a notification service
         #     indicates to Amazon SNS that the endpoint is invalid. Users can
         #     set it back to true, typically after updating Token.
+        #
         #   * `Token` -- device token, also referred to as a registration id,
         #     for an app and mobile device. This is returned from the
         #     notification service when an app and mobile device are registered
@@ -356,13 +390,52 @@ module Aws
         #
         #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
         #     notifications should be sent.
+        #
         #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
         #     notifications should be sent.
+        #
         #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
         #     notifications should be sent.
+        #
         #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
         #     notifications should be sent upon Direct Publish delivery failure
         #     (permanent) to one of the application\'s endpoints.
+        #   @return [Hash<String,String>]
+
+      end
+
+      # The input for the `GetSMSAttributes` request.
+      # @note When making an API call, pass GetSMSAttributesInput
+      #   data as a hash:
+      #
+      #       {
+      #         attributes: ["String"],
+      #       }
+      class GetSMSAttributesInput < Aws::Structure.new(
+        :attributes)
+
+        # @!attribute [rw] attributes
+        #   A list of the individual attribute names, such as
+        #   `MonthlySpendLimit`, for which you want values.
+        #
+        #   For all attribute names, see [SetSMSAttributes][1].
+        #
+        #   If you don\'t use this parameter, Amazon SNS returns all SMS
+        #   attributes.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
+        #   @return [Array<String>]
+
+      end
+
+      # The response from the `GetSMSAttributes` request.
+      class GetSMSAttributesResponse < Aws::Structure.new(
+        :attributes)
+
+        # @!attribute [rw] attributes
+        #   The SMS attribute names and their values.
         #   @return [Hash<String,String>]
 
       end
@@ -392,13 +465,18 @@ module Aws
         #   include the following:
         #
         #   * `SubscriptionArn` -- the subscription\'s ARN
+        #
         #   * `TopicArn` -- the topic ARN that the subscription is associated
         #     with
+        #
         #   * `Owner` -- the AWS account ID of the subscription\'s owner
+        #
         #   * `ConfirmationWasAuthenticated` -- true if the subscription
         #     confirmation request was authenticated
+        #
         #   * `DeliveryPolicy` -- the JSON serialization of the subscription\'s
         #     delivery policy
+        #
         #   * `EffectiveDeliveryPolicy` -- the JSON serialization of the
         #     effective delivery policy that takes into account the topic
         #     delivery policy and account system defaults
@@ -431,19 +509,27 @@ module Aws
         #   following:
         #
         #   * `TopicArn` -- the topic\'s ARN
+        #
         #   * `Owner` -- the AWS account ID of the topic\'s owner
+        #
         #   * `Policy` -- the JSON serialization of the topic\'s access control
         #     policy
+        #
         #   * `DisplayName` -- the human-readable name used in the \"From\"
         #     field for notifications to email and email-json endpoints
+        #
         #   * `SubscriptionsPending` -- the number of subscriptions pending
         #     confirmation on this topic
+        #
         #   * `SubscriptionsConfirmed` -- the number of confirmed subscriptions
         #     on this topic
+        #
         #   * `SubscriptionsDeleted` -- the number of deleted subscriptions on
         #     this topic
+        #
         #   * `DeliveryPolicy` -- the JSON serialization of the topic\'s
         #     delivery policy
+        #
         #   * `EffectiveDeliveryPolicy` -- the JSON serialization of the
         #     effective delivery policy that takes into account system defaults
         #   @return [Hash<String,String>]
@@ -488,6 +574,43 @@ module Aws
         #   NextToken string is returned when calling
         #   ListEndpointsByPlatformApplication action if additional records are
         #   available after the first page results.
+        #   @return [String]
+
+      end
+
+      # The input for the `ListPhoneNumbersOptedOut` action.
+      # @note When making an API call, pass ListPhoneNumbersOptedOutInput
+      #   data as a hash:
+      #
+      #       {
+      #         next_token: "string",
+      #       }
+      class ListPhoneNumbersOptedOutInput < Aws::Structure.new(
+        :next_token)
+
+        # @!attribute [rw] next_token
+        #   A `NextToken` string is used when you call the
+        #   `ListPhoneNumbersOptedOut` action to retrieve additional records
+        #   that are available after the first page of results.
+        #   @return [String]
+
+      end
+
+      # The response from the `ListPhoneNumbersOptedOut` action.
+      class ListPhoneNumbersOptedOutResponse < Aws::Structure.new(
+        :phone_numbers,
+        :next_token)
+
+        # @!attribute [rw] phone_numbers
+        #   A list of phone numbers that are opted out of receiving SMS
+        #   messages. The list is paginated, and each page can contain up to 100
+        #   phone numbers.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] next_token
+        #   A `NextToken` string is returned when you call the
+        #   `ListPhoneNumbersOptedOut` action if additional records are
+        #   available after the first page of results.
         #   @return [String]
 
       end
@@ -684,6 +807,25 @@ module Aws
 
       end
 
+      # Input for the OptInPhoneNumber action.
+      # @note When making an API call, pass OptInPhoneNumberInput
+      #   data as a hash:
+      #
+      #       {
+      #         phone_number: "PhoneNumber", # required
+      #       }
+      class OptInPhoneNumberInput < Aws::Structure.new(
+        :phone_number)
+
+        # @!attribute [rw] phone_number
+        #   The phone number to opt in.
+        #   @return [String]
+
+      end
+
+      # The response for the OptInPhoneNumber action.
+      class OptInPhoneNumberResponse < Aws::EmptyStructure; end
+
       # Platform application object.
       class PlatformApplication < Aws::Structure.new(
         :platform_application_arn,
@@ -706,6 +848,7 @@ module Aws
       #       {
       #         topic_arn: "topicARN",
       #         target_arn: "String",
+      #         phone_number: "String",
       #         message: "message", # required
       #         subject: "subject",
       #         message_structure: "messageStructure",
@@ -720,6 +863,7 @@ module Aws
       class PublishInput < Aws::Structure.new(
         :topic_arn,
         :target_arn,
+        :phone_number,
         :message,
         :subject,
         :message_structure,
@@ -727,10 +871,24 @@ module Aws
 
         # @!attribute [rw] topic_arn
         #   The topic you want to publish to.
+        #
+        #   If you don\'t specify a value for the `TopicArn` parameter, you must
+        #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
         #   @return [String]
 
         # @!attribute [rw] target_arn
         #   Either TopicArn or EndpointArn, but not both.
+        #
+        #   If you don\'t specify a value for the `TargetArn` parameter, you
+        #   must specify a value for the `PhoneNumber` or `TopicArn` parameters.
+        #   @return [String]
+
+        # @!attribute [rw] phone_number
+        #   The phone number to which you want to deliver an SMS message. Use
+        #   E.164 format.
+        #
+        #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+        #   must specify a value for the `TargetArn` or `TopicArn` parameters.
         #   @return [String]
 
         # @!attribute [rw] message
@@ -747,21 +905,30 @@ module Aws
         #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB
         #   in size (262144 bytes, not 262144 characters).
         #
-        #   JSON-specific constraints: * Keys in the JSON object that correspond
-        #   to supported transport
+        #   JSON-specific constraints:
+        #
+        #   * Keys in the JSON object that correspond to supported transport
         #     protocols must have simple JSON string values.
+        #
         #   * The values will be parsed (unescaped) before they are used in
         #     outgoing messages.
+        #
         #   * Outbound notifications are JSON encoded (meaning that the
         #     characters will be reescaped for sending).
+        #
         #   * Values have a minimum length of 0 (the empty string, \"\", is
         #     allowed).
+        #
         #   * Values have a maximum length bounded by the overall message size
         #     (so, including multiple protocols may limit message sizes).
+        #
         #   * Non-string values will cause the key to be ignored.
+        #
         #   * Keys that do not correspond to supported transport protocols are
         #     ignored.
+        #
         #   * Duplicate keys are not allowed.
+        #
         #   * Failure to parse or validate any key or value in the message will
         #     cause the `Publish` call to return an error (no partial delivery).
         #   @return [String]
@@ -785,6 +952,7 @@ module Aws
         #   `json`, the value of the `Message` parameter must:
         #
         #   * be a syntactically valid JSON object; and
+        #
         #   * contain at least a top-level JSON key of \"default\" with a value
         #     that is a string.
         #
@@ -868,10 +1036,12 @@ module Aws
         #   * `CustomUserData` -- arbitrary user data to associate with the
         #     endpoint. Amazon SNS does not use this data. The data must be in
         #     UTF-8 format and less than 2KB.
+        #
         #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
         #     Amazon SNS will set this to false when a notification service
         #     indicates to Amazon SNS that the endpoint is invalid. Users can
         #     set it back to true, typically after updating Token.
+        #
         #   * `Token` -- device token, also referred to as a registration id,
         #     for an app and mobile device. This is returned from the
         #     notification service when an app and mobile device are registered
@@ -904,24 +1074,136 @@ module Aws
         #
         #   * `PlatformCredential` -- The credential received from the
         #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential
-        #     is \"private key\". For GCM, PlatformCredential is \"API key\".
-        #     For ADM, PlatformCredential is \"client secret\".
+        #     is private key. For GCM, PlatformCredential is \"API key\". For
+        #     ADM, PlatformCredential is \"client secret\".
+        #
         #   * `PlatformPrincipal` -- The principal received from the
         #     notification service. For APNS/APNS\_SANDBOX, PlatformPrincipal is
-        #     \"SSL certificate\". For GCM, PlatformPrincipal is not applicable.
-        #     For ADM, PlatformPrincipal is \"client id\".
+        #     SSL certificate. For GCM, PlatformPrincipal is not applicable. For
+        #     ADM, PlatformPrincipal is \"client id\".
+        #
         #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
         #     notifications should be sent.
+        #
         #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
         #     notifications should be sent.
+        #
         #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
         #     notifications should be sent.
+        #
         #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
         #     notifications should be sent upon Direct Publish delivery failure
         #     (permanent) to one of the application\'s endpoints.
+        #
+        #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+        #     write access to use CloudWatch Logs on your behalf.
+        #
+        #   * `FailureFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+        #     write access to use CloudWatch Logs on your behalf.
+        #
+        #   * `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
+        #     successfully delivered messages.
         #   @return [Hash<String,String>]
 
       end
+
+      # The input for the SetSMSAttributes action.
+      # @note When making an API call, pass SetSMSAttributesInput
+      #   data as a hash:
+      #
+      #       {
+      #         attributes: { # required
+      #           "String" => "String",
+      #         },
+      #       }
+      class SetSMSAttributesInput < Aws::Structure.new(
+        :attributes)
+
+        # @!attribute [rw] attributes
+        #   The default settings for sending SMS messages from your account. You
+        #   can set values for the following attribute names:
+        #
+        #   `MonthlySpendLimit` – The maximum amount in USD that you are willing
+        #   to spend each month to send SMS messages. When Amazon SNS determines
+        #   that sending an SMS message would incur a cost that exceeds this
+        #   limit, it stops sending SMS messages within minutes.
+        #
+        #   <important markdown="1"> Amazon SNS stops sending SMS messages within minutes of the limit
+        #   being crossed. During that interval, if you continue to send SMS
+        #   messages, you will incur costs that exceed your limit.
+        #
+        #    </important>
+        #
+        #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
+        #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
+        #   SMS message that you send, Amazon SNS writes a log that includes the
+        #   message price, the success or failure status, the reason for failure
+        #   (if the message failed), the message dwell time, and other
+        #   information.
+        #
+        #   `DeliveryStatusSuccessSamplingRate` – The percentage of successful
+        #   SMS deliveries for which Amazon SNS will write logs in CloudWatch
+        #   Logs. The value can be an integer from 0 - 100. For example, to
+        #   write logs only for failed deliveries, set this value to `0`. To
+        #   write logs for 10% of your successful deliveries, set it to `10`.
+        #
+        #   `DefaultSenderID` – A string, such as your business brand, that is
+        #   displayed as the sender on the receiving device. Support for sender
+        #   IDs varies by country. The sender ID can be 1 - 11 alphanumeric
+        #   characters, and it must contain at least one letter.
+        #
+        #   `DefaultSMSType` – The type of SMS message that you will send by
+        #   default. You can assign the following values:
+        #
+        #   * `Promotional` – Noncritical messages, such as marketing messages.
+        #     Amazon SNS optimizes the message delivery to incur the lowest
+        #     cost.
+        #
+        #   * `Transactional` – (Default) Critical messages that support
+        #     customer transactions, such as one-time passcodes for multi-factor
+        #     authentication. Amazon SNS optimizes the message delivery to
+        #     achieve the highest reliability.
+        #
+        #   `UsageReportS3Bucket` – The name of the Amazon S3 bucket to receive
+        #   daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will
+        #   deliver a usage report as a CSV file to the bucket. The report
+        #   includes the following information for each SMS message that was
+        #   successfully delivered by your account:
+        #
+        #   * Time that the message was published (in UTC)
+        #
+        #   * Message ID
+        #
+        #   * Destination phone number
+        #
+        #   * Message type
+        #
+        #   * Delivery status
+        #
+        #   * Message price (in USD)
+        #
+        #   * Part number (a message is split into multiple parts if it is too
+        #     long for a single message)
+        #
+        #   * Total number of parts
+        #
+        #   To receive the report, the bucket must have a policy that allows the
+        #   Amazon SNS service principle to perform the `s3:PutObject` and
+        #   `s3:GetBucketLocation` actions.
+        #
+        #   For an example bucket policy and usage report, see [Viewing
+        #   Statistics About SMS Message Delivery][1] in the *Amazon SNS
+        #   Developer Guide*.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
+        #   @return [Hash<String,String>]
+
+      end
+
+      # The response for the SetSMSAttributes action.
+      class SetSMSAttributesResponse < Aws::EmptyStructure; end
 
       # Input for SetSubscriptionAttributes action.
       # @note When making an API call, pass SetSubscriptionAttributesInput
@@ -1007,13 +1289,22 @@ module Aws
         #   The protocol you want to use. Supported protocols include:
         #
         #   * `http` -- delivery of JSON-encoded message via HTTP POST
+        #
         #   * `https` -- delivery of JSON-encoded message via HTTPS POST
+        #
         #   * `email` -- delivery of message via SMTP
+        #
         #   * `email-json` -- delivery of JSON-encoded message via SMTP
+        #
         #   * `sms` -- delivery of message via SMS
+        #
         #   * `sqs` -- delivery of JSON-encoded message to an Amazon SQS queue
+        #
         #   * `application` -- delivery of JSON-encoded message to an
         #     EndpointArn for a mobile app and device.
+        #
+        #   * `lambda` -- delivery of JSON-encoded message to an AWS Lambda
+        #     function.
         #   @return [String]
 
         # @!attribute [rw] endpoint
@@ -1022,16 +1313,25 @@ module Aws
         #
         #   * For the `http` protocol, the endpoint is an URL beginning with
         #     \"http://\"
+        #
         #   * For the `https` protocol, the endpoint is a URL beginning with
         #     \"https://\"
+        #
         #   * For the `email` protocol, the endpoint is an email address
+        #
         #   * For the `email-json` protocol, the endpoint is an email address
+        #
         #   * For the `sms` protocol, the endpoint is a phone number of an
         #     SMS-enabled device
+        #
         #   * For the `sqs` protocol, the endpoint is the ARN of an Amazon SQS
         #     queue
+        #
         #   * For the `application` protocol, the endpoint is the EndpointArn of
         #     a mobile app and device.
+        #
+        #   * For the `lambda` protocol, the endpoint is the ARN of an AWS
+        #     Lambda function.
         #   @return [String]
 
       end

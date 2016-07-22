@@ -42,12 +42,17 @@ module Aws
       # include the following:
       #
       # * `SubscriptionArn` -- the subscription\'s ARN
+      #
       # * `TopicArn` -- the topic ARN that the subscription is associated with
+      #
       # * `Owner` -- the AWS account ID of the subscription\'s owner
+      #
       # * `ConfirmationWasAuthenticated` -- true if the subscription
       #   confirmation request was authenticated
+      #
       # * `DeliveryPolicy` -- the JSON serialization of the subscription\'s
       #   delivery policy
+      #
       # * `EffectiveDeliveryPolicy` -- the JSON serialization of the effective
       #   delivery policy that takes into account the topic delivery policy
       #   and account system defaults

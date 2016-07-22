@@ -289,7 +289,7 @@ module Aws
       #   The tags to be assigned to the restored DB cluster.
       # @option options [String] :kms_key_id
       #   The KMS key identifier to use when restoring an encrypted DB cluster
-      #   from an encrypted DB cluster snapshot.
+      #   from a DB cluster snapshot.
       #
       #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
       #   encryption key. If you are restoring a DB cluster with the same AWS
@@ -305,11 +305,7 @@ module Aws
       #     DB cluster snapshot.
       #
       #   * If the DB cluster snapshot is not encrypted, then the restored DB
-      #     cluster is not encrypted.
-      #
-      #   If `SnapshotIdentifier` refers to a DB cluster snapshot that is not
-      #   encrypted, and you specify a value for the `KmsKeyId` parameter, then
-      #   the restore request is rejected.
+      #     cluster is encrypted using the specified encryption key.
       # @return [DBCluster]
       def restore(options = {})
         options = options.merge(snapshot_identifier: @snapshot_id)

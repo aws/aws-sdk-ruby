@@ -663,7 +663,7 @@ module Aws
 
       end
 
-      # The value to use when a resource attribute accepts a Boolean value.
+      # Describes a value for a resource attribute that is a Boolean value.
       # @note When making an API call, pass AttributeBooleanValue
       #   data as a hash:
       #
@@ -674,12 +674,12 @@ module Aws
         :value)
 
         # @!attribute [rw] value
-        #   Valid values are `true` or `false`.
+        #   The attribute value. The valid values are `true` or `false`.
         #   @return [Boolean]
 
       end
 
-      # The value to use for a resource attribute.
+      # Describes a value for a resource attribute that is a String.
       # @note When making an API call, pass AttributeValue
       #   data as a hash:
       #
@@ -690,7 +690,7 @@ module Aws
         :value)
 
         # @!attribute [rw] value
-        #   Valid values are case-sensitive and vary by action.
+        #   The attribute value. Note that the value is case-sensitive.
         #   @return [String]
 
       end
@@ -1809,13 +1809,13 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] encrypted
-        #   Specifies whether the destination snapshot should be encrypted.
-        #   There is no way to create an unencrypted snapshot copy from an
-        #   encrypted snapshot; however, you can encrypt a copy of an
-        #   unencrypted snapshot with this flag. The default CMK for EBS is used
-        #   unless a non-default AWS Key Management Service (AWS KMS) CMK is
-        #   specified with `KmsKeyId`. For more information, see [Amazon EBS
-        #   Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
+        #   Specifies whether the destination snapshot should be encrypted. You
+        #   can encrypt a copy of an unencrypted snapshot using this flag, but
+        #   you cannot use it to create an unencrypted copy from an encrypted
+        #   snapshot. Your default CMK for EBS is used unless a non-default AWS
+        #   Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`.
+        #   For more information, see [Amazon EBS Encryption][1] in the *Amazon
+        #   Elastic Compute Cloud User Guide*.
         #
         #
         #
@@ -2696,7 +2696,7 @@ module Aws
         #   Constraints for EC2-Classic: ASCII characters
         #
         #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-        #   .\_-:/()#,@\[\]+=<!\[CDATA\[&amp;\]\]>;\\\{\\}!$\*
+        #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
         #   @return [String]
 
         # @!attribute [rw] description
@@ -2707,7 +2707,7 @@ module Aws
         #   Constraints for EC2-Classic: ASCII characters
         #
         #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-        #   .\_-:/()#,@\[\]+=<!\[CDATA\[&amp;\]\]>;\\\{\\}!$\*
+        #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
         #   @return [String]
 
         # @!attribute [rw] vpc_id
@@ -3077,8 +3077,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] service_name
-        #   The AWS service name, in the form `com.amazonaws.region.service`. To
-        #   get a list of available services, use the
+        #   The AWS service name, in the form `com.amazonaws.region.service `.
+        #   To get a list of available services, use the
         #   DescribeVpcEndpointServices request.
         #   @return [String]
 
@@ -4798,6 +4798,39 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeIdentityIdFormat.
+      # @note When making an API call, pass DescribeIdentityIdFormatRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource: "String",
+      #         principal_arn: "String", # required
+      #       }
+      class DescribeIdentityIdFormatRequest < Aws::Structure.new(
+        :resource,
+        :principal_arn)
+
+        # @!attribute [rw] resource
+        #   The type of resource.
+        #   @return [String]
+
+        # @!attribute [rw] principal_arn
+        #   The ARN of the principal, which can be an IAM role, IAM user, or the
+        #   root user.
+        #   @return [String]
+
+      end
+
+      # Contains the output of DescribeIdentityIdFormat.
+      class DescribeIdentityIdFormatResult < Aws::Structure.new(
+        :statuses)
+
+        # @!attribute [rw] statuses
+        #   Information about the ID format for the resources.
+        #   @return [Array<Types::IdFormat>]
+
+      end
+
       # Contains the parameters for DescribeImageAttribute.
       # @note When making an API call, pass DescribeImageAttributeRequest
       #   data as a hash:
@@ -5124,7 +5157,7 @@ module Aws
       #       {
       #         dry_run: false,
       #         instance_id: "String", # required
-      #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport
+      #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
       #       }
       class DescribeInstanceAttributeRequest < Aws::Structure.new(
         :dry_run,
@@ -5144,6 +5177,8 @@ module Aws
 
         # @!attribute [rw] attribute
         #   The instance attribute.
+        #
+        #   Note: The `enaSupport` attribute is not supported at this time.
         #   @return [String]
 
       end
@@ -6521,7 +6556,7 @@ module Aws
       #       {
       #         dry_run: false,
       #         reserved_instances_offering_ids: ["String"],
-      #         instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         availability_zone: "String",
       #         product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
       #         filters: [
@@ -7844,7 +7879,7 @@ module Aws
       #         dry_run: false,
       #         start_time: Time.now,
       #         end_time: Time.now,
-      #         instance_types: ["t1.micro"], # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         product_descriptions: ["String"],
       #         filters: [
       #           {
@@ -8798,7 +8833,7 @@ module Aws
         #     peering connection.
         #
         #   * `requester-vpc-info.cidr-block` - The CIDR block of the
-        #     requester's VPC.
+        #     requester\'s VPC.
         #
         #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of
         #     the requester VPC.
@@ -9627,15 +9662,15 @@ module Aws
 
         # @!attribute [rw] iops
         #   The number of I/O operations per second (IOPS) that the volume
-        #   supports. For io1, this represents the number of IOPS that are
+        #   supports. For `io1`, this represents the number of IOPS that are
         #   provisioned for the volume. For `gp2`, this represents the baseline
         #   performance of the volume and the rate at which the volume
-        #   accumulates I/O credits for bursting. For more information on
+        #   accumulates I/O credits for bursting. For more information about
         #   General Purpose SSD baseline performance, I/O credits, and bursting,
         #   see [Amazon EBS Volume Types][1] in the *Amazon Elastic Compute
         #   Cloud User Guide*.
         #
-        #   Constraint: Range is 100-20000 IOPS for io1 volumes and 100-10000
+        #   Constraint: Range is 100-20000 IOPS for `io1` volumes and 100-10000
         #   IOPS for `gp2` volumes.
         #
         #   Condition: This parameter is required for requests to create `io1`
@@ -10109,8 +10144,8 @@ module Aws
         #   @return [Time]
 
         # @!attribute [rw] output
-        #   The console output, base64-encoded. If using a command line tool,
-        #   the tools decode the output for you.
+        #   The console output, Base64-encoded. If using a command line tool,
+        #   the tool decodes the output for you.
         #   @return [String]
 
       end
@@ -10458,6 +10493,7 @@ module Aws
         :ramdisk_id,
         :platform,
         :sriov_net_support,
+        :ena_support,
         :state_reason,
         :image_owner_alias,
         :name,
@@ -10523,8 +10559,13 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] sriov_net_support
-        #   Specifies whether enhanced networking is enabled.
+        #   Specifies whether enhanced networking with the Intel 82599 Virtual
+        #   Function interface is enabled.
         #   @return [String]
+
+        # @!attribute [rw] ena_support
+        #   Specifies whether enhanced networking with ENA is enabled.
+        #   @return [Boolean]
 
         # @!attribute [rw] state_reason
         #   The reason for the state change.
@@ -10607,7 +10648,8 @@ module Aws
         #   @return [Types::AttributeValue]
 
         # @!attribute [rw] sriov_net_support
-        #   The value to use for a resource attribute.
+        #   Indicates whether enhanced networking with the Intel 82599 Virtual
+        #   Function interface is enabled.
         #   @return [Types::AttributeValue]
 
         # @!attribute [rw] block_device_mappings
@@ -10914,7 +10956,7 @@ module Aws
       #         user_data: {
       #           data: "String",
       #         },
-      #         instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -10957,8 +10999,10 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] user_data
-        #   The Base64-encoded MIME user data to be made available to the
-        #   instance.
+        #   The user data to make available to the instance. If you are using an
+        #   AWS SDK or command line tool, Base64-encoding is performed for you,
+        #   and you can load the text from a file. Otherwise, you must provide
+        #   Base64-encoded text.
         #   @return [Types::UserData]
 
         # @!attribute [rw] instance_type
@@ -11011,7 +11055,7 @@ module Aws
       #           user_data: {
       #             data: "String",
       #           },
-      #           instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -11424,7 +11468,8 @@ module Aws
         :network_interfaces,
         :iam_instance_profile,
         :ebs_optimized,
-        :sriov_net_support)
+        :sriov_net_support,
+        :ena_support)
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -11597,8 +11642,13 @@ module Aws
         #   @return [Boolean]
 
         # @!attribute [rw] sriov_net_support
-        #   Specifies whether enhanced networking is enabled.
+        #   Specifies whether enhanced networking with the Intel 82599 Virtual
+        #   Function interface is enabled.
         #   @return [String]
+
+        # @!attribute [rw] ena_support
+        #   Specifies whether enhanced networking with ENA is enabled.
+        #   @return [Boolean]
 
       end
 
@@ -11616,6 +11666,7 @@ module Aws
         :product_codes,
         :ebs_optimized,
         :sriov_net_support,
+        :ena_support,
         :source_dest_check,
         :groups)
 
@@ -11636,7 +11687,7 @@ module Aws
         #   @return [Types::AttributeValue]
 
         # @!attribute [rw] user_data
-        #   The Base64-encoded MIME user data.
+        #   The user data.
         #   @return [Types::AttributeValue]
 
         # @!attribute [rw] disable_api_termination
@@ -11668,8 +11719,13 @@ module Aws
         #   @return [Types::AttributeBooleanValue]
 
         # @!attribute [rw] sriov_net_support
-        #   The value to use for a resource attribute.
+        #   Indicates whether enhanced networking with the Intel 82599 Virtual
+        #   Function interface is enabled.
         #   @return [Types::AttributeValue]
+
+        # @!attribute [rw] ena_support
+        #   Indicates whether enhanced networking with ENA is enabled.
+        #   @return [Types::AttributeBooleanValue]
 
         # @!attribute [rw] source_dest_check
         #   Indicates whether source/destination checking is enabled. A value of
@@ -12467,8 +12523,10 @@ module Aws
         #   @return [Array<Types::GroupIdentifier>]
 
         # @!attribute [rw] user_data
-        #   The Base64-encoded MIME user data to make available to the
-        #   instances.
+        #   The user data to make available to the instances. If you are using
+        #   an AWS SDK or command line tool, Base64-encoding is performed for
+        #   you, and you can load the text from a file. Otherwise, you must
+        #   provide Base64-encoded text.
         #   @return [String]
 
         # @!attribute [rw] addressing_type
@@ -12588,6 +12646,36 @@ module Aws
 
       end
 
+      # Contains the parameters of ModifyIdentityIdFormat.
+      # @note When making an API call, pass ModifyIdentityIdFormatRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource: "String", # required
+      #         use_long_ids: false, # required
+      #         principal_arn: "String", # required
+      #       }
+      class ModifyIdentityIdFormatRequest < Aws::Structure.new(
+        :resource,
+        :use_long_ids,
+        :principal_arn)
+
+        # @!attribute [rw] resource
+        #   The type of resource.
+        #   @return [String]
+
+        # @!attribute [rw] use_long_ids
+        #   Indicates whether the resource should use longer IDs (17-character
+        #   IDs)
+        #   @return [Boolean]
+
+        # @!attribute [rw] principal_arn
+        #   The ARN of the principal, which can be an IAM user, IAM role, or the
+        #   root user.
+        #   @return [String]
+
+      end
+
       # Contains the parameters for ModifyImageAttribute.
       # @note When making an API call, pass ModifyImageAttributeRequest
       #   data as a hash:
@@ -12686,7 +12774,7 @@ module Aws
       #       {
       #         dry_run: false,
       #         instance_id: "String", # required
-      #         attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport
+      #         attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
       #         value: "String",
       #         block_device_mappings: [
       #           {
@@ -12717,6 +12805,9 @@ module Aws
       #           value: false,
       #         },
       #         sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         ena_support: {
+      #           value: false,
+      #         },
       #       }
       class ModifyInstanceAttributeRequest < Aws::Structure.new(
         :dry_run,
@@ -12733,7 +12824,8 @@ module Aws
         :instance_initiated_shutdown_behavior,
         :groups,
         :ebs_optimized,
-        :sriov_net_support)
+        :sriov_net_support,
+        :ena_support)
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -12816,8 +12908,10 @@ module Aws
         #   @return [Types::AttributeValue]
 
         # @!attribute [rw] user_data
-        #   Changes the instance\'s user data to the specified base64-encoded
-        #   value. For command line tools, base64 encoding is performed for you.
+        #   Changes the instance\'s user data to the specified value. If you are
+        #   using an AWS SDK or command line tool, Base64-encoding is performed
+        #   for you, and you can load the text from a file. Otherwise, you must
+        #   provide Base64-encoded text.
         #   @return [Types::BlobAttributeValue]
 
         # @!attribute [rw] instance_initiated_shutdown_behavior
@@ -12843,13 +12937,23 @@ module Aws
         #   @return [Types::AttributeBooleanValue]
 
         # @!attribute [rw] sriov_net_support
-        #   Set to `simple` to enable enhanced networking for the instance.
+        #   Set to `simple` to enable enhanced networking with the Intel 82599
+        #   Virtual Function interface for the instance.
         #
-        #   There is no way to disable enhanced networking at this time.
+        #   There is no way to disable enhanced networking with the Intel 82599
+        #   Virtual Function interface at this time.
         #
         #   This option is supported only for HVM instances. Specifying this
         #   option with a PV instance can make it unreachable.
         #   @return [Types::AttributeValue]
+
+        # @!attribute [rw] ena_support
+        #   Set to `true` to enable enhanced networking with ENA for the
+        #   instance.
+        #
+        #   This option is supported only for HVM instances. Specifying this
+        #   option with a PV instance can make it unreachable.
+        #   @return [Types::AttributeBooleanValue]
 
       end
 
@@ -12978,7 +13082,7 @@ module Aws
       #             availability_zone: "String",
       #             platform: "String",
       #             instance_count: 1,
-      #             instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #           },
       #         ],
       #       }
@@ -14504,6 +14608,7 @@ module Aws
       #         ],
       #         virtualization_type: "String",
       #         sriov_net_support: "String",
+      #         ena_support: false,
       #       }
       class RegisterImageRequest < Aws::Structure.new(
         :dry_run,
@@ -14516,7 +14621,8 @@ module Aws
         :root_device_name,
         :block_device_mappings,
         :virtualization_type,
-        :sriov_net_support)
+        :sriov_net_support,
+        :ena_support)
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -14572,14 +14678,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] sriov_net_support
-        #   Set to `simple` to enable enhanced networking for the AMI and any
-        #   instances that you launch from the AMI.
+        #   Set to `simple` to enable enhanced networking with the Intel 82599
+        #   Virtual Function interface for the AMI and any instances that you
+        #   launch from the AMI.
         #
-        #   There is no way to disable enhanced networking at this time.
+        #   There is no way to disable `sriovNetSupport` at this time.
         #
         #   This option is supported only for HVM AMIs. Specifying this option
         #   with a PV AMI can make instances launched from the AMI unreachable.
         #   @return [String]
+
+        # @!attribute [rw] ena_support
+        #   Set to `true` to enable enhanced networking with ENA for the AMI and
+        #   any instances that you launch from the AMI.
+        #
+        #   This option is supported only for HVM AMIs. Specifying this option
+        #   with a PV AMI can make instances launched from the AMI unreachable.
+        #   @return [Boolean]
 
       end
 
@@ -15023,7 +15138,7 @@ module Aws
       #               ],
       #               user_data: "String",
       #               addressing_type: "String",
-      #               instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #               placement: {
       #                 availability_zone: "String",
       #                 group_name: "String",
@@ -15131,7 +15246,7 @@ module Aws
       #           security_groups: ["String"],
       #           user_data: "String",
       #           addressing_type: "String",
-      #           instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -15325,7 +15440,7 @@ module Aws
       #         security_groups: ["String"],
       #         user_data: "String",
       #         addressing_type: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -15407,8 +15522,10 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] user_data
-        #   The Base64-encoded MIME user data to make available to the
-        #   instances.
+        #   The user data to make available to the instances. If you are using
+        #   an AWS SDK or command line tool, Base64-encoding is performed for
+        #   you, and you can load the text from a file. Otherwise, you must
+        #   provide Base64-encoded text.
         #   @return [String]
 
         # @!attribute [rw] addressing_type
@@ -15621,7 +15738,7 @@ module Aws
       #         availability_zone: "String",
       #         platform: "String",
       #         instance_count: 1,
-      #         instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #       }
       class ReservedInstancesConfiguration < Aws::Structure.new(
         :availability_zone,
@@ -15908,7 +16025,7 @@ module Aws
       #       {
       #         dry_run: false,
       #         instance_id: "String", # required
-      #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport
+      #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
       #       }
       class ResetInstanceAttributeRequest < Aws::Structure.new(
         :dry_run,
@@ -15929,11 +16046,11 @@ module Aws
         # @!attribute [rw] attribute
         #   The attribute to reset.
         #
-        #   <important markdown="1">You can only reset the following attributes: `kernel` \| `ramdisk`
+        #   <important markdown="1"> You can only reset the following attributes: `kernel` \| `ramdisk`
         #   \| `sourceDestCheck`. To change an instance attribute, use
         #   ModifyInstanceAttribute.
         #
-        #   </important>
+        #    </important>
         #   @return [String]
 
       end
@@ -16424,7 +16541,7 @@ module Aws
       #         security_groups: ["String"],
       #         security_group_ids: ["String"],
       #         user_data: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -16576,12 +16693,12 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] user_data
-        #   Data to configure the instance, or a script to run during instance
-        #   launch. For more information, see [Running Commands on Your Linux
-        #   Instance at Launch][1] (Linux) and [Adding User Data][2] (Windows).
-        #   For API calls, the text must be base64-encoded. For command line
-        #   tools, the encoding is performed for you, and you can load the text
-        #   from a file.
+        #   The user data to make available to the instance. For more
+        #   information, see [Running Commands on Your Linux Instance at
+        #   Launch][1] (Linux) and [Adding User Data][2] (Windows). If you are
+        #   using an AWS SDK or command line tool, Base64-encoding is performed
+        #   for you, and you can load the text from a file. Otherwise, you must
+        #   provide Base64-encoded text.
         #
         #
         #
@@ -16872,13 +16989,12 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] upload_policy
-        #   A base64-encoded Amazon S3 upload policy that gives Amazon EC2
-        #   permission to upload items into Amazon S3 on your behalf. For
-        #   command line tools, base64 encoding is performed for you.
+        #   An Amazon S3 upload policy that gives Amazon EC2 permission to
+        #   upload items into Amazon S3 on your behalf.
         #   @return [String]
 
         # @!attribute [rw] upload_policy_signature
-        #   The signature of the Base64 encoded JSON document.
+        #   The signature of the JSON document.
         #   @return [String]
 
       end
@@ -17952,7 +18068,7 @@ module Aws
       #         ],
       #         user_data: "String",
       #         addressing_type: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -18040,8 +18156,10 @@ module Aws
         #   @return [Array<Types::GroupIdentifier>]
 
         # @!attribute [rw] user_data
-        #   The Base64-encoded MIME user data to make available to the
-        #   instances.
+        #   The user data to make available to the instances. If you are using
+        #   an AWS SDK or command line tool, Base64-encoding is performed for
+        #   you, and you can load the text from a file. Otherwise, you must
+        #   provide Base64-encoded text.
         #   @return [String]
 
         # @!attribute [rw] addressing_type
@@ -18184,7 +18302,7 @@ module Aws
       #             ],
       #             user_data: "String",
       #             addressing_type: "String",
-      #             instance_type: "t1.micro", # accepts t1.micro, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #             placement: {
       #               availability_zone: "String",
       #               group_name: "String",
@@ -18987,16 +19105,16 @@ module Aws
       # Information about items that were not successfully processed in a
       # batch call.
       class UnsuccessfulItem < Aws::Structure.new(
-        :error,
-        :resource_id)
-
-        # @!attribute [rw] error
-        #   Information about the error.
-        #   @return [Types::UnsuccessfulItemError]
+        :resource_id,
+        :error)
 
         # @!attribute [rw] resource_id
         #   The ID of the resource.
         #   @return [String]
+
+        # @!attribute [rw] error
+        #   Information about the error.
+        #   @return [Types::UnsuccessfulItemError]
 
       end
 
@@ -19057,7 +19175,7 @@ module Aws
 
       end
 
-      # Describes the user data to be made available to an instance.
+      # Describes the user data for an instance.
       # @note When making an API call, pass UserData
       #   data as a hash:
       #
@@ -19068,7 +19186,9 @@ module Aws
         :data)
 
         # @!attribute [rw] data
-        #   The Base64-encoded MIME user data for the instance.
+        #   The user data. If you are using an AWS SDK or command line tool,
+        #   Base64-encoding is performed for you, and you can load the text from
+        #   a file. Otherwise, you must provide Base64-encoded text.
         #   @return [String]
 
       end

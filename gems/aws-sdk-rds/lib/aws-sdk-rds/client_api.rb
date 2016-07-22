@@ -44,6 +44,8 @@ module Aws
       CertificateMessage = Shapes::StructureShape.new(name: 'CertificateMessage')
       CertificateNotFoundFault = Shapes::StructureShape.new(name: 'CertificateNotFoundFault')
       CharacterSet = Shapes::StructureShape.new(name: 'CharacterSet')
+      CopyDBClusterParameterGroupMessage = Shapes::StructureShape.new(name: 'CopyDBClusterParameterGroupMessage')
+      CopyDBClusterParameterGroupResult = Shapes::StructureShape.new(name: 'CopyDBClusterParameterGroupResult')
       CopyDBClusterSnapshotMessage = Shapes::StructureShape.new(name: 'CopyDBClusterSnapshotMessage')
       CopyDBClusterSnapshotResult = Shapes::StructureShape.new(name: 'CopyDBClusterSnapshotResult')
       CopyDBParameterGroupMessage = Shapes::StructureShape.new(name: 'CopyDBParameterGroupMessage')
@@ -431,6 +433,15 @@ module Aws
       CharacterSet.add_member(:character_set_description, Shapes::ShapeRef.new(shape: String, location_name: "CharacterSetDescription"))
       CharacterSet.struct_class = Types::CharacterSet
 
+      CopyDBClusterParameterGroupMessage.add_member(:source_db_cluster_parameter_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceDBClusterParameterGroupIdentifier"))
+      CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetDBClusterParameterGroupIdentifier"))
+      CopyDBClusterParameterGroupMessage.add_member(:target_db_cluster_parameter_group_description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetDBClusterParameterGroupDescription"))
+      CopyDBClusterParameterGroupMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+      CopyDBClusterParameterGroupMessage.struct_class = Types::CopyDBClusterParameterGroupMessage
+
+      CopyDBClusterParameterGroupResult.add_member(:db_cluster_parameter_group, Shapes::ShapeRef.new(shape: DBClusterParameterGroup, location_name: "DBClusterParameterGroup"))
+      CopyDBClusterParameterGroupResult.struct_class = Types::CopyDBClusterParameterGroupResult
+
       CopyDBClusterSnapshotMessage.add_member(:source_db_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceDBClusterSnapshotIdentifier"))
       CopyDBClusterSnapshotMessage.add_member(:target_db_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "TargetDBClusterSnapshotIdentifier"))
       CopyDBClusterSnapshotMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -478,8 +489,8 @@ module Aws
       CreateDBClusterMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
       CreateDBClusterMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
       CreateDBClusterMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
-      CreateDBClusterMessage.add_member(:master_username, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MasterUsername"))
-      CreateDBClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MasterUserPassword"))
+      CreateDBClusterMessage.add_member(:master_username, Shapes::ShapeRef.new(shape: String, location_name: "MasterUsername"))
+      CreateDBClusterMessage.add_member(:master_user_password, Shapes::ShapeRef.new(shape: String, location_name: "MasterUserPassword"))
       CreateDBClusterMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, location_name: "OptionGroupName"))
       CreateDBClusterMessage.add_member(:preferred_backup_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredBackupWindow"))
       CreateDBClusterMessage.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
@@ -1248,6 +1259,7 @@ module Aws
       EventsMessage.struct_class = Types::EventsMessage
 
       FailoverDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterIdentifier"))
+      FailoverDBClusterMessage.add_member(:target_db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "TargetDBInstanceIdentifier"))
       FailoverDBClusterMessage.struct_class = Types::FailoverDBClusterMessage
 
       FailoverDBClusterResult.add_member(:db_cluster, Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster"))
@@ -1823,6 +1835,17 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidDBSecurityGroupStateFault)
           o.errors << Shapes::ShapeRef.new(shape: AuthorizationAlreadyExistsFault)
           o.errors << Shapes::ShapeRef.new(shape: AuthorizationQuotaExceededFault)
+        end)
+
+        api.add_operation(:copy_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CopyDBClusterParameterGroup"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CopyDBClusterParameterGroupMessage)
+          o.output = Shapes::ShapeRef.new(shape: CopyDBClusterParameterGroupResult)
+          o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupQuotaExceededFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupAlreadyExistsFault)
         end)
 
         api.add_operation(:copy_db_cluster_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -2500,6 +2523,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: FailoverDBClusterResult)
           o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
         end)
 
         api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

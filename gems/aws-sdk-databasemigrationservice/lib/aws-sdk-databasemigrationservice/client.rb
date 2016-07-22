@@ -42,8 +42,6 @@ module Aws
       # endpoint, security group, and migration task. These tags can also be
       # used with cost allocation reporting to track cost associated with DMS
       # resources, or used in a Condition statement in an IAM policy for DMS.
-      #
-      # <note />
       # @option params [required, String] :resource_arn
       #   The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to
       #   be added to. AWS DMS resources include a replication instance,
@@ -70,8 +68,6 @@ module Aws
       end
 
       # Creates an endpoint using the provided settings.
-      #
-      # <note />
       # @option params [required, String] :endpoint_identifier
       #   The database endpoint identifier. Identifiers must begin with a
       #   letter; must contain only ASCII letters, digits, and hyphens; and must
@@ -80,7 +76,7 @@ module Aws
       #   The type of endpoint.
       # @option params [required, String] :engine_name
       #   The type of engine for the endpoint. Valid values include MYSQL,
-      #   ORACLE, POSTGRES, MARIADB, AURORA, SQLSERVER.
+      #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
       # @option params [required, String] :username
       #   The user name to be used to login to the endpoint database.
       # @option params [required, String] :password
@@ -101,6 +97,15 @@ module Aws
       #   different default encryption key for each AWS region.
       # @option params [Array<Types::Tag>] :tags
       #   Tags to be added to the endpoint.
+      # @option params [String] :certificate_arn
+      #   The Amazon Resource Number (ARN) for the certificate.
+      # @option params [String] :ssl_mode
+      #   The SSL mode to use for the SSL connection.
+      #
+      #   SSL mode can be one of four values: none, require, verify-ca,
+      #   verify-full.
+      #
+      #   The default value is none.
       # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateEndpointResponse#endpoint #Endpoint} => Types::Endpoint
@@ -123,6 +128,8 @@ module Aws
       #         value: "String",
       #       },
       #     ],
+      #     certificate_arn: "String",
+      #     ssl_mode: "none", # accepts none, require, verify-ca, verify-full
       #   })
       #
       # @example Response structure
@@ -137,6 +144,8 @@ module Aws
       #   resp.endpoint.status #=> String
       #   resp.endpoint.kms_key_id #=> String
       #   resp.endpoint.endpoint_arn #=> String
+      #   resp.endpoint.certificate_arn #=> String
+      #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_endpoint(params = {}, options = {})
@@ -145,8 +154,6 @@ module Aws
       end
 
       # Creates the replication instance using the specified parameters.
-      #
-      # <note />
       # @option params [required, String] :replication_instance_identifier
       #   The replication instance identifier. This parameter is stored as a
       #   lowercase string.
@@ -154,7 +161,9 @@ module Aws
       #   Constraints:
       #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #   Example: `myrepinstance`
@@ -168,6 +177,10 @@ module Aws
       #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
       #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
       #   dms.c4.4xlarge `
+      # @option params [Array<String>] :vpc_security_group_ids
+      #   Specifies the VPC security group to be used with the replication
+      #   instance. The VPC security group must work with the VPC containing the
+      #   replication instance.
       # @option params [String] :availability_zone
       #   The EC2 Availability Zone that the replication instance will be
       #   created in.
@@ -190,6 +203,10 @@ module Aws
       #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
       #
       #   Constraints: Minimum 30-minute window.
+      # @option params [Boolean] :multi_az
+      #   Specifies if the replication instance is a Multi-AZ deployment. You
+      #   cannot set the `AvailabilityZone` parameter if the Multi-AZ parameter
+      #   is set to `true`.
       # @option params [String] :engine_version
       #   The engine version number of the replication instance.
       # @option params [Boolean] :auto_minor_version_upgrade
@@ -219,9 +236,11 @@ module Aws
       #     replication_instance_identifier: "String", # required
       #     allocated_storage: 1,
       #     replication_instance_class: "String", # required
+      #     vpc_security_group_ids: ["String"],
       #     availability_zone: "String",
       #     replication_subnet_group_identifier: "String",
       #     preferred_maintenance_window: "String",
+      #     multi_az: false,
       #     engine_version: "String",
       #     auto_minor_version_upgrade: false,
       #     tags: [
@@ -240,6 +259,9 @@ module Aws
       #   resp.replication_instance.replication_instance_status #=> String
       #   resp.replication_instance.allocated_storage #=> Integer
       #   resp.replication_instance.instance_create_time #=> Time
+      #   resp.replication_instance.vpc_security_groups #=> Array
+      #   resp.replication_instance.vpc_security_groups[0].vpc_security_group_id #=> String
+      #   resp.replication_instance.vpc_security_groups[0].status #=> String
       #   resp.replication_instance.availability_zone #=> String
       #   resp.replication_instance.replication_subnet_group.replication_subnet_group_identifier #=> String
       #   resp.replication_instance.replication_subnet_group.replication_subnet_group_description #=> String
@@ -252,13 +274,19 @@ module Aws
       #   resp.replication_instance.preferred_maintenance_window #=> String
       #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
       #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
+      #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.replication_instance.pending_modified_values.engine_version #=> String
+      #   resp.replication_instance.multi_az #=> Boolean
       #   resp.replication_instance.engine_version #=> String
       #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
       #   resp.replication_instance.kms_key_id #=> String
       #   resp.replication_instance.replication_instance_arn #=> String
       #   resp.replication_instance.replication_instance_public_ip_address #=> String
       #   resp.replication_instance.replication_instance_private_ip_address #=> String
+      #   resp.replication_instance.replication_instance_public_ip_addresses #=> Array
+      #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
+      #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
+      #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instance.publicly_accessible #=> Boolean
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -269,8 +297,6 @@ module Aws
 
       # Creates a replication subnet group given a list of the subnet IDs in a
       # VPC.
-      #
-      # <note />
       # @option params [required, String] :replication_subnet_group_identifier
       #   The name for the replication subnet group. This value is stored as a
       #   lowercase string.
@@ -319,15 +345,15 @@ module Aws
       end
 
       # Creates a replication task using the specified parameters.
-      #
-      # <note />
       # @option params [required, String] :replication_task_identifier
       #   The replication task identifier.
       #
       #   Constraints:
       #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       # @option params [required, String] :source_endpoint_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -340,7 +366,10 @@ module Aws
       # @option params [required, String] :migration_type
       #   The migration type.
       # @option params [required, String] :table_mappings
-      #   The path of the JSON file that contains the table mappings.
+      #   The path of the JSON file that contains the table mappings. Preceed
+      #   the path with \"file://\".
+      #
+      #   For example, --table-mappings file://mappingfile.json
       # @option params [String] :replication_task_settings
       #   Settings for the task, such as target metadata settings.
       # @option params [Time,DateTime,Date,Integer,String] :cdc_start_time
@@ -395,9 +424,41 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes the specified certificate.
+      # @option params [required, String] :certificate_arn
+      #   the Amazon Resource Name (ARN) of the deleted certificate.
+      # @return [Types::DeleteCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeleteCertificateResponse#certificate #Certificate} => Types::Certificate
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_certificate({
+      #     certificate_arn: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.certificate.certificate_identifier #=> String
+      #   resp.certificate.certificate_creation_date #=> Time
+      #   resp.certificate.certificate_pem #=> String
+      #   resp.certificate.certificate_arn #=> String
+      #   resp.certificate.certificate_owner #=> String
+      #   resp.certificate.valid_from_date #=> Time
+      #   resp.certificate.valid_to_date #=> Time
+      #   resp.certificate.signing_algorithm #=> String
+      #   resp.certificate.key_length #=> Integer
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_certificate(params = {}, options = {})
+        req = build_request(:delete_certificate, params)
+        req.send_request(options)
+      end
+
       # Deletes the specified endpoint.
       #
-      # <note>All tasks associated with the endpoint must be deleted before you can delete the endpoint.</note>
+      # <note markdown="1"> All tasks associated with the endpoint must be deleted before you can
+      # delete the endpoint.
+      #
+      #  </note>
       # @option params [required, String] :endpoint_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the
       #   endpoint.
@@ -422,6 +483,8 @@ module Aws
       #   resp.endpoint.status #=> String
       #   resp.endpoint.kms_key_id #=> String
       #   resp.endpoint.endpoint_arn #=> String
+      #   resp.endpoint.certificate_arn #=> String
+      #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_endpoint(params = {}, options = {})
@@ -431,7 +494,10 @@ module Aws
 
       # Deletes the specified replication instance.
       #
-      # <note>You must delete any migration tasks that are associated with the replication instance before you can delete it.</note>
+      # <note markdown="1"> You must delete any migration tasks that are associated with the
+      # replication instance before you can delete it.
+      #
+      #  </note>
       # @option params [required, String] :replication_instance_arn
       #   The Amazon Resource Name (ARN) of the replication instance to be
       #   deleted.
@@ -450,6 +516,9 @@ module Aws
       #   resp.replication_instance.replication_instance_status #=> String
       #   resp.replication_instance.allocated_storage #=> Integer
       #   resp.replication_instance.instance_create_time #=> Time
+      #   resp.replication_instance.vpc_security_groups #=> Array
+      #   resp.replication_instance.vpc_security_groups[0].vpc_security_group_id #=> String
+      #   resp.replication_instance.vpc_security_groups[0].status #=> String
       #   resp.replication_instance.availability_zone #=> String
       #   resp.replication_instance.replication_subnet_group.replication_subnet_group_identifier #=> String
       #   resp.replication_instance.replication_subnet_group.replication_subnet_group_description #=> String
@@ -462,13 +531,19 @@ module Aws
       #   resp.replication_instance.preferred_maintenance_window #=> String
       #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
       #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
+      #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.replication_instance.pending_modified_values.engine_version #=> String
+      #   resp.replication_instance.multi_az #=> Boolean
       #   resp.replication_instance.engine_version #=> String
       #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
       #   resp.replication_instance.kms_key_id #=> String
       #   resp.replication_instance.replication_instance_arn #=> String
       #   resp.replication_instance.replication_instance_public_ip_address #=> String
       #   resp.replication_instance.replication_instance_private_ip_address #=> String
+      #   resp.replication_instance.replication_instance_public_ip_addresses #=> Array
+      #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
+      #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
+      #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instance.publicly_accessible #=> Boolean
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -478,8 +553,6 @@ module Aws
       end
 
       # Deletes a subnet group.
-      #
-      # <note />
       # @option params [required, String] :replication_subnet_group_identifier
       #   The subnet group name of the replication instance.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -496,8 +569,6 @@ module Aws
       end
 
       # Deletes the specified replication task.
-      #
-      # <note />
       # @option params [required, String] :replication_task_arn
       #   The Amazon Resource Name (ARN) of the replication task to be deleted.
       # @return [Types::DeleteReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -542,8 +613,6 @@ module Aws
       # maximum value.
       #
       # This command does not take any parameters.
-      #
-      # <note />
       # @return [Types::DescribeAccountAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeAccountAttributesResponse#account_quotas #AccountQuotas} => Array&lt;Types::AccountQuota&gt;
@@ -563,11 +632,60 @@ module Aws
         req.send_request(options)
       end
 
+      # Provides a description of the certificate.
+      # @option params [Array<Types::Filter>] :filters
+      #   Filters applied to the certificate described in the form of key-value
+      #   pairs.
+      # @option params [Integer] :max_records
+      #   The maximum number of records to include in the response. If more
+      #   records exist than the specified `MaxRecords` value, a pagination
+      #   token called a marker is included in the response so that the
+      #   remaining results can be retrieved.
+      #
+      #   Default: 10
+      # @option params [String] :marker
+      #   An optional pagination token provided by a previous request. If this
+      #   parameter is specified, the response includes only records beyond the
+      #   marker, up to the value specified by `MaxRecords`.
+      # @return [Types::DescribeCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeCertificatesResponse#marker #Marker} => String
+      #   * {Types::DescribeCertificatesResponse#certificates #Certificates} => Array&lt;Types::Certificate&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_certificates({
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     max_records: 1,
+      #     marker: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.marker #=> String
+      #   resp.certificates #=> Array
+      #   resp.certificates[0].certificate_identifier #=> String
+      #   resp.certificates[0].certificate_creation_date #=> Time
+      #   resp.certificates[0].certificate_pem #=> String
+      #   resp.certificates[0].certificate_arn #=> String
+      #   resp.certificates[0].certificate_owner #=> String
+      #   resp.certificates[0].valid_from_date #=> Time
+      #   resp.certificates[0].valid_to_date #=> Time
+      #   resp.certificates[0].signing_algorithm #=> String
+      #   resp.certificates[0].key_length #=> Integer
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_certificates(params = {}, options = {})
+        req = build_request(:describe_certificates, params)
+        req.send_request(options)
+      end
+
       # Describes the status of the connections that have been made between
       # the replication instance and an endpoint. Connections are created when
       # you test an endpoint.
-      #
-      # <note />
       # @option params [Array<Types::Filter>] :filters
       #   The filters applied to the connection.
       #
@@ -619,8 +737,6 @@ module Aws
       end
 
       # Returns information about the type of endpoints available.
-      #
-      # <note />
       # @option params [Array<Types::Filter>] :filters
       #   Filters applied to the describe action.
       #
@@ -670,8 +786,6 @@ module Aws
 
       # Returns information about the endpoints for your account in the
       # current region.
-      #
-      # <note />
       # @option params [Array<Types::Filter>] :filters
       #   Filters applied to the describe action.
       #
@@ -721,6 +835,8 @@ module Aws
       #   resp.endpoints[0].status #=> String
       #   resp.endpoints[0].kms_key_id #=> String
       #   resp.endpoints[0].endpoint_arn #=> String
+      #   resp.endpoints[0].certificate_arn #=> String
+      #   resp.endpoints[0].ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_endpoints(params = {}, options = {})
@@ -730,8 +846,6 @@ module Aws
 
       # Returns information about the replication instance types that can be
       # created in the specified region.
-      #
-      # <note />
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -774,8 +888,6 @@ module Aws
       end
 
       # Returns the status of the RefreshSchemas operation.
-      #
-      # <note />
       # @option params [required, String] :endpoint_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the
       #   endpoint.
@@ -803,8 +915,6 @@ module Aws
 
       # Returns information about replication instances for your account in
       # the current region.
-      #
-      # <note />
       # @option params [Array<Types::Filter>] :filters
       #   Filters applied to the describe action.
       #
@@ -849,6 +959,9 @@ module Aws
       #   resp.replication_instances[0].replication_instance_status #=> String
       #   resp.replication_instances[0].allocated_storage #=> Integer
       #   resp.replication_instances[0].instance_create_time #=> Time
+      #   resp.replication_instances[0].vpc_security_groups #=> Array
+      #   resp.replication_instances[0].vpc_security_groups[0].vpc_security_group_id #=> String
+      #   resp.replication_instances[0].vpc_security_groups[0].status #=> String
       #   resp.replication_instances[0].availability_zone #=> String
       #   resp.replication_instances[0].replication_subnet_group.replication_subnet_group_identifier #=> String
       #   resp.replication_instances[0].replication_subnet_group.replication_subnet_group_description #=> String
@@ -861,13 +974,19 @@ module Aws
       #   resp.replication_instances[0].preferred_maintenance_window #=> String
       #   resp.replication_instances[0].pending_modified_values.replication_instance_class #=> String
       #   resp.replication_instances[0].pending_modified_values.allocated_storage #=> Integer
+      #   resp.replication_instances[0].pending_modified_values.multi_az #=> Boolean
       #   resp.replication_instances[0].pending_modified_values.engine_version #=> String
+      #   resp.replication_instances[0].multi_az #=> Boolean
       #   resp.replication_instances[0].engine_version #=> String
       #   resp.replication_instances[0].auto_minor_version_upgrade #=> Boolean
       #   resp.replication_instances[0].kms_key_id #=> String
       #   resp.replication_instances[0].replication_instance_arn #=> String
       #   resp.replication_instances[0].replication_instance_public_ip_address #=> String
       #   resp.replication_instances[0].replication_instance_private_ip_address #=> String
+      #   resp.replication_instances[0].replication_instance_public_ip_addresses #=> Array
+      #   resp.replication_instances[0].replication_instance_public_ip_addresses[0] #=> String
+      #   resp.replication_instances[0].replication_instance_private_ip_addresses #=> Array
+      #   resp.replication_instances[0].replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instances[0].publicly_accessible #=> Boolean
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -877,8 +996,6 @@ module Aws
       end
 
       # Returns information about the replication subnet groups.
-      #
-      # <note />
       # @option params [Array<Types::Filter>] :filters
       #   Filters applied to the describe action.
       # @option params [Integer] :max_records
@@ -931,8 +1048,6 @@ module Aws
 
       # Returns information about replication tasks for your account in the
       # current region.
-      #
-      # <note />
       # @option params [Array<Types::Filter>] :filters
       #   Filters applied to the describe action.
       #
@@ -997,8 +1112,6 @@ module Aws
       end
 
       # Returns information about the schema for the specified endpoint.
-      #
-      # <note />
       # @option params [required, String] :endpoint_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the
       #   endpoint.
@@ -1040,8 +1153,6 @@ module Aws
 
       # Returns table statistics on the database migration task, including
       # table name, rows inserted, rows updated, and rows deleted.
-      #
-      # <note />
       # @option params [required, String] :replication_task_arn
       #   The Amazon Resource Name (ARN) of the replication task.
       # @option params [Integer] :max_records
@@ -1090,9 +1201,40 @@ module Aws
         req.send_request(options)
       end
 
-      # Lists all tags for an AWS DMS resource.
+      # Uploads the specified certificate.
+      # @option params [required, String] :certificate_identifier
+      #   The customer-assigned name of the certificate. Valid characters are
+      #   \[A-z\_0-9\].
+      # @option params [String] :certificate_pem
+      #   The contents of the .pem X.509 certificate file.
+      # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
-      # <note />
+      #   * {Types::ImportCertificateResponse#certificate #Certificate} => Types::Certificate
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.import_certificate({
+      #     certificate_identifier: "String", # required
+      #     certificate_pem: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.certificate.certificate_identifier #=> String
+      #   resp.certificate.certificate_creation_date #=> Time
+      #   resp.certificate.certificate_pem #=> String
+      #   resp.certificate.certificate_arn #=> String
+      #   resp.certificate.certificate_owner #=> String
+      #   resp.certificate.valid_from_date #=> Time
+      #   resp.certificate.valid_to_date #=> Time
+      #   resp.certificate.signing_algorithm #=> String
+      #   resp.certificate.key_length #=> Integer
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def import_certificate(params = {}, options = {})
+        req = build_request(:import_certificate, params)
+        req.send_request(options)
+      end
+
+      # Lists all tags for an AWS DMS resource.
       # @option params [required, String] :resource_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the AWS
       #   DMS resource.
@@ -1117,8 +1259,6 @@ module Aws
       end
 
       # Modifies the specified endpoint.
-      #
-      # <note />
       # @option params [required, String] :endpoint_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the
       #   endpoint.
@@ -1130,7 +1270,7 @@ module Aws
       #   The type of endpoint.
       # @option params [String] :engine_name
       #   The type of engine for the endpoint. Valid values include MYSQL,
-      #   ORACLE, POSTGRES.
+      #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
       # @option params [String] :username
       #   The user name to be used to login to the endpoint database.
       # @option params [String] :password
@@ -1143,6 +1283,16 @@ module Aws
       #   The name of the endpoint database.
       # @option params [String] :extra_connection_attributes
       #   Additional attributes associated with the connection.
+      # @option params [String] :certificate_arn
+      #   The Amazon Resource Name (ARN) of the certificate used for SSL
+      #   connection.
+      # @option params [String] :ssl_mode
+      #   The SSL mode to be used.
+      #
+      #   SSL mode can be one of four values: none, require, verify-ca,
+      #   verify-full.
+      #
+      #   The default value is none.
       # @return [Types::ModifyEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ModifyEndpointResponse#endpoint #Endpoint} => Types::Endpoint
@@ -1159,6 +1309,8 @@ module Aws
       #     port: 1,
       #     database_name: "String",
       #     extra_connection_attributes: "String",
+      #     certificate_arn: "String",
+      #     ssl_mode: "none", # accepts none, require, verify-ca, verify-full
       #   })
       #
       # @example Response structure
@@ -1173,6 +1325,8 @@ module Aws
       #   resp.endpoint.status #=> String
       #   resp.endpoint.kms_key_id #=> String
       #   resp.endpoint.endpoint_arn #=> String
+      #   resp.endpoint.certificate_arn #=> String
+      #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def modify_endpoint(params = {}, options = {})
@@ -1184,7 +1338,7 @@ module Aws
       # change one or more parameters by specifying these parameters and the
       # new values in the request.
       #
-      # <note>Some settings are applied during the maintenance window.</note>
+      # Some settings are applied during the maintenance window.
       # @option params [required, String] :replication_instance_arn
       #   The Amazon Resource Name (ARN) of the replication instance.
       # @option params [Integer] :allocated_storage
@@ -1199,6 +1353,10 @@ module Aws
       #   Valid Values: `dms.t2.micro | dms.t2.small | dms.t2.medium |
       #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
       #   dms.c4.4xlarge `
+      # @option params [Array<String>] :vpc_security_group_ids
+      #   Specifies the VPC security group to be used with the replication
+      #   instance. The VPC security group must work with the VPC containing the
+      #   replication instance.
       # @option params [String] :preferred_maintenance_window
       #   The weekly time range (in UTC) during which system maintenance can
       #   occur, which might result in an outage. Changing this parameter does
@@ -1215,6 +1373,10 @@ module Aws
       #   Valid Days: Mon \| Tue \| Wed \| Thu \| Fri \| Sat \| Sun
       #
       #   Constraints: Must be at least 30 minutes
+      # @option params [Boolean] :multi_az
+      #   Specifies if the replication instance is a Multi-AZ deployment. You
+      #   cannot set the `AvailabilityZone` parameter if the Multi-AZ parameter
+      #   is set to `true`.
       # @option params [String] :engine_version
       #   The engine version number of the replication instance.
       # @option params [Boolean] :allow_major_version_upgrade
@@ -1246,7 +1408,9 @@ module Aws
       #     allocated_storage: 1,
       #     apply_immediately: false,
       #     replication_instance_class: "String",
+      #     vpc_security_group_ids: ["String"],
       #     preferred_maintenance_window: "String",
+      #     multi_az: false,
       #     engine_version: "String",
       #     allow_major_version_upgrade: false,
       #     auto_minor_version_upgrade: false,
@@ -1259,6 +1423,9 @@ module Aws
       #   resp.replication_instance.replication_instance_status #=> String
       #   resp.replication_instance.allocated_storage #=> Integer
       #   resp.replication_instance.instance_create_time #=> Time
+      #   resp.replication_instance.vpc_security_groups #=> Array
+      #   resp.replication_instance.vpc_security_groups[0].vpc_security_group_id #=> String
+      #   resp.replication_instance.vpc_security_groups[0].status #=> String
       #   resp.replication_instance.availability_zone #=> String
       #   resp.replication_instance.replication_subnet_group.replication_subnet_group_identifier #=> String
       #   resp.replication_instance.replication_subnet_group.replication_subnet_group_description #=> String
@@ -1271,13 +1438,19 @@ module Aws
       #   resp.replication_instance.preferred_maintenance_window #=> String
       #   resp.replication_instance.pending_modified_values.replication_instance_class #=> String
       #   resp.replication_instance.pending_modified_values.allocated_storage #=> Integer
+      #   resp.replication_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.replication_instance.pending_modified_values.engine_version #=> String
+      #   resp.replication_instance.multi_az #=> Boolean
       #   resp.replication_instance.engine_version #=> String
       #   resp.replication_instance.auto_minor_version_upgrade #=> Boolean
       #   resp.replication_instance.kms_key_id #=> String
       #   resp.replication_instance.replication_instance_arn #=> String
       #   resp.replication_instance.replication_instance_public_ip_address #=> String
       #   resp.replication_instance.replication_instance_private_ip_address #=> String
+      #   resp.replication_instance.replication_instance_public_ip_addresses #=> Array
+      #   resp.replication_instance.replication_instance_public_ip_addresses[0] #=> String
+      #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
+      #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instance.publicly_accessible #=> Boolean
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1287,8 +1460,6 @@ module Aws
       end
 
       # Modifies the settings for the specified replication subnet group.
-      #
-      # <note />
       # @option params [required, String] :replication_subnet_group_identifier
       #   The name of the replication instance subnet group.
       # @option params [String] :replication_subnet_group_description
@@ -1326,8 +1497,6 @@ module Aws
       # asynchronous operation and can take several minutes. You can check the
       # status of this operation by calling the DescribeRefreshSchemasStatus
       # operation.
-      #
-      # <note />
       # @option params [required, String] :endpoint_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the
       #   endpoint.
@@ -1357,11 +1526,9 @@ module Aws
       end
 
       # Removes metadata tags from a DMS resource.
-      #
-      # <note />
       # @option params [required, String] :resource_arn
-      #   \>The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to
-      #   be removed from.
+      #   &gt;The Amazon Resource Name (ARN) of the AWS DMS resource the tag is
+      #   to be removed from.
       # @option params [required, Array<String>] :tag_keys
       #   The tag key (name) of the tag to be removed.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1379,8 +1546,6 @@ module Aws
       end
 
       # Starts the replication task.
-      #
-      # <note />
       # @option params [required, String] :replication_task_arn
       #   The Amazon Resource Number (ARN) of the replication task to be
       #   started.
@@ -1426,8 +1591,6 @@ module Aws
       end
 
       # Stops the replication task.
-      #
-      # <note />
       # @option params [required, String] :replication_task_arn
       #   The Amazon Resource Number(ARN) of the replication task to be stopped.
       # @return [Types::StopReplicationTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1467,10 +1630,8 @@ module Aws
 
       # Tests the connection between the replication instance and the
       # endpoint.
-      #
-      # <note />
       # @option params [required, String] :replication_instance_arn
-      #   The Amazon Resource Number (ARN) of the replication instance.
+      #   The Amazon Resource Name (ARN) of the replication instance.
       # @option params [required, String] :endpoint_arn
       #   The Amazon Resource Name (ARN) string that uniquely identifies the
       #   endpoint.

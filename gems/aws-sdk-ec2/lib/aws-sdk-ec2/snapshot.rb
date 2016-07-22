@@ -227,12 +227,12 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
       # @option options [Boolean] :encrypted
-      #   Specifies whether the destination snapshot should be encrypted. There
-      #   is no way to create an unencrypted snapshot copy from an encrypted
-      #   snapshot; however, you can encrypt a copy of an unencrypted snapshot
-      #   with this flag. The default CMK for EBS is used unless a non-default
-      #   AWS Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`.
-      #   For more information, see [Amazon EBS Encryption][1] in the *Amazon
+      #   Specifies whether the destination snapshot should be encrypted. You
+      #   can encrypt a copy of an unencrypted snapshot using this flag, but you
+      #   cannot use it to create an unencrypted copy from an encrypted
+      #   snapshot. Your default CMK for EBS is used unless a non-default AWS
+      #   Key Management Service (AWS KMS) CMK is specified with `KmsKeyId`. For
+      #   more information, see [Amazon EBS Encryption][1] in the *Amazon
       #   Elastic Compute Cloud User Guide*.
       #
       #

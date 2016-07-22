@@ -267,10 +267,17 @@ module Aws
         data.ebs_optimized
       end
 
-      # Specifies whether enhanced networking is enabled.
+      # Specifies whether enhanced networking with the Intel 82599 Virtual
+      # Function interface is enabled.
       # @return [String]
       def sriov_net_support
         data.sriov_net_support
+      end
+
+      # Specifies whether enhanced networking with ENA is enabled.
+      # @return [Boolean]
+      def ena_support
+        data.ena_support
       end
 
       # @!endgroup
@@ -507,6 +514,8 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, String] :attribute
       #   The instance attribute.
+      #
+      #   Note: The `enaSupport` attribute is not supported at this time.
       # @return [Types::InstanceAttribute]
       def describe_attribute(options = {})
         options = options.merge(instance_id: @id)
@@ -615,8 +624,10 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
       # @option options [Types::BlobAttributeValue] :user_data
-      #   Changes the instance\'s user data to the specified base64-encoded
-      #   value. For command line tools, base64 encoding is performed for you.
+      #   Changes the instance\'s user data to the specified value. If you are
+      #   using an AWS SDK or command line tool, Base64-encoding is performed
+      #   for you, and you can load the text from a file. Otherwise, you must
+      #   provide Base64-encoded text.
       # @option options [Types::AttributeValue] :instance_initiated_shutdown_behavior
       #   Specifies whether an instance stops or terminates when you initiate
       #   shutdown from the instance (using the operating system command for
@@ -633,9 +644,16 @@ module Aws
       #   This optimization isn\'t available with all instance types. Additional
       #   usage charges apply when using an EBS Optimized instance.
       # @option options [Types::AttributeValue] :sriov_net_support
-      #   Set to `simple` to enable enhanced networking for the instance.
+      #   Set to `simple` to enable enhanced networking with the Intel 82599
+      #   Virtual Function interface for the instance.
       #
-      #   There is no way to disable enhanced networking at this time.
+      #   There is no way to disable enhanced networking with the Intel 82599
+      #   Virtual Function interface at this time.
+      #
+      #   This option is supported only for HVM instances. Specifying this
+      #   option with a PV instance can make it unreachable.
+      # @option options [Types::AttributeBooleanValue] :ena_support
+      #   Set to `true` to enable enhanced networking with ENA for the instance.
       #
       #   This option is supported only for HVM instances. Specifying this
       #   option with a PV instance can make it unreachable.
@@ -743,11 +761,11 @@ module Aws
       # @option options [required, String] :attribute
       #   The attribute to reset.
       #
-      #   <important markdown="1">You can only reset the following attributes: `kernel` \| `ramdisk` \|
+      #   <important markdown="1"> You can only reset the following attributes: `kernel` \| `ramdisk` \|
       #   `sourceDestCheck`. To change an instance attribute, use
       #   ModifyInstanceAttribute.
       #
-      #   </important>
+      #    </important>
       # @return [EmptyStructure]
       def reset_attribute(options = {})
         options = options.merge(instance_id: @id)

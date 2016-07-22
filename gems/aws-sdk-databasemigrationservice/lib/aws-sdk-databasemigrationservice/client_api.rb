@@ -27,6 +27,8 @@ module Aws
       AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
       Boolean = Shapes::BooleanShape.new(name: 'Boolean')
       BooleanOptional = Shapes::BooleanShape.new(name: 'BooleanOptional')
+      Certificate = Shapes::StructureShape.new(name: 'Certificate')
+      CertificateList = Shapes::ListShape.new(name: 'CertificateList')
       Connection = Shapes::StructureShape.new(name: 'Connection')
       ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
       CreateEndpointMessage = Shapes::StructureShape.new(name: 'CreateEndpointMessage')
@@ -37,6 +39,8 @@ module Aws
       CreateReplicationSubnetGroupResponse = Shapes::StructureShape.new(name: 'CreateReplicationSubnetGroupResponse')
       CreateReplicationTaskMessage = Shapes::StructureShape.new(name: 'CreateReplicationTaskMessage')
       CreateReplicationTaskResponse = Shapes::StructureShape.new(name: 'CreateReplicationTaskResponse')
+      DeleteCertificateMessage = Shapes::StructureShape.new(name: 'DeleteCertificateMessage')
+      DeleteCertificateResponse = Shapes::StructureShape.new(name: 'DeleteCertificateResponse')
       DeleteEndpointMessage = Shapes::StructureShape.new(name: 'DeleteEndpointMessage')
       DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
       DeleteReplicationInstanceMessage = Shapes::StructureShape.new(name: 'DeleteReplicationInstanceMessage')
@@ -47,6 +51,8 @@ module Aws
       DeleteReplicationTaskResponse = Shapes::StructureShape.new(name: 'DeleteReplicationTaskResponse')
       DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
       DescribeAccountAttributesResponse = Shapes::StructureShape.new(name: 'DescribeAccountAttributesResponse')
+      DescribeCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeCertificatesMessage')
+      DescribeCertificatesResponse = Shapes::StructureShape.new(name: 'DescribeCertificatesResponse')
       DescribeConnectionsMessage = Shapes::StructureShape.new(name: 'DescribeConnectionsMessage')
       DescribeConnectionsResponse = Shapes::StructureShape.new(name: 'DescribeConnectionsResponse')
       DescribeEndpointTypesMessage = Shapes::StructureShape.new(name: 'DescribeEndpointTypesMessage')
@@ -67,15 +73,19 @@ module Aws
       DescribeSchemasResponse = Shapes::StructureShape.new(name: 'DescribeSchemasResponse')
       DescribeTableStatisticsMessage = Shapes::StructureShape.new(name: 'DescribeTableStatisticsMessage')
       DescribeTableStatisticsResponse = Shapes::StructureShape.new(name: 'DescribeTableStatisticsResponse')
+      DmsSslModeValue = Shapes::StringShape.new(name: 'DmsSslModeValue')
       Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
       EndpointList = Shapes::ListShape.new(name: 'EndpointList')
       ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
       Filter = Shapes::StructureShape.new(name: 'Filter')
       FilterList = Shapes::ListShape.new(name: 'FilterList')
       FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+      ImportCertificateMessage = Shapes::StructureShape.new(name: 'ImportCertificateMessage')
+      ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
       InsufficientResourceCapacityFault = Shapes::StructureShape.new(name: 'InsufficientResourceCapacityFault')
       Integer = Shapes::IntegerShape.new(name: 'Integer')
       IntegerOptional = Shapes::IntegerShape.new(name: 'IntegerOptional')
+      InvalidCertificateFault = Shapes::StructureShape.new(name: 'InvalidCertificateFault')
       InvalidResourceStateFault = Shapes::StructureShape.new(name: 'InvalidResourceStateFault')
       InvalidSubnet = Shapes::StructureShape.new(name: 'InvalidSubnet')
       KMSKeyNotAccessibleFault = Shapes::StructureShape.new(name: 'KMSKeyNotAccessibleFault')
@@ -101,6 +111,8 @@ module Aws
       ReplicationEndpointTypeValue = Shapes::StringShape.new(name: 'ReplicationEndpointTypeValue')
       ReplicationInstance = Shapes::StructureShape.new(name: 'ReplicationInstance')
       ReplicationInstanceList = Shapes::ListShape.new(name: 'ReplicationInstanceList')
+      ReplicationInstancePrivateIpAddressList = Shapes::ListShape.new(name: 'ReplicationInstancePrivateIpAddressList')
+      ReplicationInstancePublicIpAddressList = Shapes::ListShape.new(name: 'ReplicationInstancePublicIpAddressList')
       ReplicationPendingModifiedValues = Shapes::StructureShape.new(name: 'ReplicationPendingModifiedValues')
       ReplicationSubnetGroup = Shapes::StructureShape.new(name: 'ReplicationSubnetGroup')
       ReplicationSubnetGroupDoesNotCoverEnoughAZs = Shapes::StructureShape.new(name: 'ReplicationSubnetGroupDoesNotCoverEnoughAZs')
@@ -134,6 +146,9 @@ module Aws
       TestConnectionMessage = Shapes::StructureShape.new(name: 'TestConnectionMessage')
       TestConnectionResponse = Shapes::StructureShape.new(name: 'TestConnectionResponse')
       UpgradeDependencyFailureFault = Shapes::StructureShape.new(name: 'UpgradeDependencyFailureFault')
+      VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
+      VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
+      VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
 
       AccountQuota.add_member(:account_quota_name, Shapes::ShapeRef.new(shape: String, location_name: "AccountQuotaName"))
       AccountQuota.add_member(:used, Shapes::ShapeRef.new(shape: Long, location_name: "Used"))
@@ -150,6 +165,19 @@ module Aws
 
       AvailabilityZone.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
       AvailabilityZone.struct_class = Types::AvailabilityZone
+
+      Certificate.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, location_name: "CertificateIdentifier"))
+      Certificate.add_member(:certificate_creation_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CertificateCreationDate"))
+      Certificate.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
+      Certificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+      Certificate.add_member(:certificate_owner, Shapes::ShapeRef.new(shape: String, location_name: "CertificateOwner"))
+      Certificate.add_member(:valid_from_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidFromDate"))
+      Certificate.add_member(:valid_to_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "ValidToDate"))
+      Certificate.add_member(:signing_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "SigningAlgorithm"))
+      Certificate.add_member(:key_length, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "KeyLength"))
+      Certificate.struct_class = Types::Certificate
+
+      CertificateList.member = Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate")
 
       Connection.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceArn"))
       Connection.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "EndpointArn"))
@@ -172,6 +200,8 @@ module Aws
       CreateEndpointMessage.add_member(:extra_connection_attributes, Shapes::ShapeRef.new(shape: String, location_name: "ExtraConnectionAttributes"))
       CreateEndpointMessage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
       CreateEndpointMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+      CreateEndpointMessage.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+      CreateEndpointMessage.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
       CreateEndpointMessage.struct_class = Types::CreateEndpointMessage
 
       CreateEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -180,9 +210,11 @@ module Aws
       CreateReplicationInstanceMessage.add_member(:replication_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceIdentifier"))
       CreateReplicationInstanceMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
       CreateReplicationInstanceMessage.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ReplicationInstanceClass"))
+      CreateReplicationInstanceMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
       CreateReplicationInstanceMessage.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
       CreateReplicationInstanceMessage.add_member(:replication_subnet_group_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationSubnetGroupIdentifier"))
       CreateReplicationInstanceMessage.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
+      CreateReplicationInstanceMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
       CreateReplicationInstanceMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
       CreateReplicationInstanceMessage.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
       CreateReplicationInstanceMessage.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -216,6 +248,12 @@ module Aws
       CreateReplicationTaskResponse.add_member(:replication_task, Shapes::ShapeRef.new(shape: ReplicationTask, location_name: "ReplicationTask"))
       CreateReplicationTaskResponse.struct_class = Types::CreateReplicationTaskResponse
 
+      DeleteCertificateMessage.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateArn"))
+      DeleteCertificateMessage.struct_class = Types::DeleteCertificateMessage
+
+      DeleteCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+      DeleteCertificateResponse.struct_class = Types::DeleteCertificateResponse
+
       DeleteEndpointMessage.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EndpointArn"))
       DeleteEndpointMessage.struct_class = Types::DeleteEndpointMessage
 
@@ -243,6 +281,15 @@ module Aws
 
       DescribeAccountAttributesResponse.add_member(:account_quotas, Shapes::ShapeRef.new(shape: AccountQuotaList, location_name: "AccountQuotas"))
       DescribeAccountAttributesResponse.struct_class = Types::DescribeAccountAttributesResponse
+
+      DescribeCertificatesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
+      DescribeCertificatesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+      DescribeCertificatesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+      DescribeCertificatesMessage.struct_class = Types::DescribeCertificatesMessage
+
+      DescribeCertificatesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
+      DescribeCertificatesResponse.add_member(:certificates, Shapes::ShapeRef.new(shape: CertificateList, location_name: "Certificates"))
+      DescribeCertificatesResponse.struct_class = Types::DescribeCertificatesResponse
 
       DescribeConnectionsMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
       DescribeConnectionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
@@ -342,6 +389,8 @@ module Aws
       Endpoint.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
       Endpoint.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
       Endpoint.add_member(:endpoint_arn, Shapes::ShapeRef.new(shape: String, location_name: "EndpointArn"))
+      Endpoint.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+      Endpoint.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
       Endpoint.struct_class = Types::Endpoint
 
       EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint")
@@ -353,6 +402,13 @@ module Aws
       FilterList.member = Shapes::ShapeRef.new(shape: Filter, location_name: "Filter")
 
       FilterValueList.member = Shapes::ShapeRef.new(shape: String, location_name: "Value")
+
+      ImportCertificateMessage.add_member(:certificate_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateIdentifier"))
+      ImportCertificateMessage.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: String, location_name: "CertificatePem"))
+      ImportCertificateMessage.struct_class = Types::ImportCertificateMessage
+
+      ImportCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: Certificate, location_name: "Certificate"))
+      ImportCertificateResponse.struct_class = Types::ImportCertificateResponse
 
       KeyList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -372,6 +428,8 @@ module Aws
       ModifyEndpointMessage.add_member(:port, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "Port"))
       ModifyEndpointMessage.add_member(:database_name, Shapes::ShapeRef.new(shape: String, location_name: "DatabaseName"))
       ModifyEndpointMessage.add_member(:extra_connection_attributes, Shapes::ShapeRef.new(shape: String, location_name: "ExtraConnectionAttributes"))
+      ModifyEndpointMessage.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: String, location_name: "CertificateArn"))
+      ModifyEndpointMessage.add_member(:ssl_mode, Shapes::ShapeRef.new(shape: DmsSslModeValue, location_name: "SslMode"))
       ModifyEndpointMessage.struct_class = Types::ModifyEndpointMessage
 
       ModifyEndpointResponse.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
@@ -381,7 +439,9 @@ module Aws
       ModifyReplicationInstanceMessage.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
       ModifyReplicationInstanceMessage.add_member(:apply_immediately, Shapes::ShapeRef.new(shape: Boolean, location_name: "ApplyImmediately"))
       ModifyReplicationInstanceMessage.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceClass"))
+      ModifyReplicationInstanceMessage.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "VpcSecurityGroupIds"))
       ModifyReplicationInstanceMessage.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
+      ModifyReplicationInstanceMessage.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
       ModifyReplicationInstanceMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
       ModifyReplicationInstanceMessage.add_member(:allow_major_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowMajorVersionUpgrade"))
       ModifyReplicationInstanceMessage.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutoMinorVersionUpgrade"))
@@ -435,23 +495,32 @@ module Aws
       ReplicationInstance.add_member(:replication_instance_status, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceStatus"))
       ReplicationInstance.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: Integer, location_name: "AllocatedStorage"))
       ReplicationInstance.add_member(:instance_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "InstanceCreateTime"))
+      ReplicationInstance.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: VpcSecurityGroupMembershipList, location_name: "VpcSecurityGroups"))
       ReplicationInstance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
       ReplicationInstance.add_member(:replication_subnet_group, Shapes::ShapeRef.new(shape: ReplicationSubnetGroup, location_name: "ReplicationSubnetGroup"))
       ReplicationInstance.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: String, location_name: "PreferredMaintenanceWindow"))
       ReplicationInstance.add_member(:pending_modified_values, Shapes::ShapeRef.new(shape: ReplicationPendingModifiedValues, location_name: "PendingModifiedValues"))
+      ReplicationInstance.add_member(:multi_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAZ"))
       ReplicationInstance.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
       ReplicationInstance.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoMinorVersionUpgrade"))
       ReplicationInstance.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
       ReplicationInstance.add_member(:replication_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceArn"))
-      ReplicationInstance.add_member(:replication_instance_public_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstancePublicIpAddress"))
-      ReplicationInstance.add_member(:replication_instance_private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstancePrivateIpAddress"))
+      ReplicationInstance.add_member(:replication_instance_public_ip_address, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "ReplicationInstancePublicIpAddress"))
+      ReplicationInstance.add_member(:replication_instance_private_ip_address, Shapes::ShapeRef.new(shape: String, deprecated: true, location_name: "ReplicationInstancePrivateIpAddress"))
+      ReplicationInstance.add_member(:replication_instance_public_ip_addresses, Shapes::ShapeRef.new(shape: ReplicationInstancePublicIpAddressList, location_name: "ReplicationInstancePublicIpAddresses"))
+      ReplicationInstance.add_member(:replication_instance_private_ip_addresses, Shapes::ShapeRef.new(shape: ReplicationInstancePrivateIpAddressList, location_name: "ReplicationInstancePrivateIpAddresses"))
       ReplicationInstance.add_member(:publicly_accessible, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAccessible"))
       ReplicationInstance.struct_class = Types::ReplicationInstance
 
       ReplicationInstanceList.member = Shapes::ShapeRef.new(shape: ReplicationInstance, location_name: "ReplicationInstance")
 
+      ReplicationInstancePrivateIpAddressList.member = Shapes::ShapeRef.new(shape: String)
+
+      ReplicationInstancePublicIpAddressList.member = Shapes::ShapeRef.new(shape: String)
+
       ReplicationPendingModifiedValues.add_member(:replication_instance_class, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationInstanceClass"))
       ReplicationPendingModifiedValues.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "AllocatedStorage"))
+      ReplicationPendingModifiedValues.add_member(:multi_az, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "MultiAZ"))
       ReplicationPendingModifiedValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
       ReplicationPendingModifiedValues.struct_class = Types::ReplicationPendingModifiedValues
 
@@ -547,6 +616,14 @@ module Aws
       TestConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: Connection, location_name: "Connection"))
       TestConnectionResponse.struct_class = Types::TestConnectionResponse
 
+      VpcSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId")
+
+      VpcSecurityGroupMembership.add_member(:vpc_security_group_id, Shapes::ShapeRef.new(shape: String, location_name: "VpcSecurityGroupId"))
+      VpcSecurityGroupMembership.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+      VpcSecurityGroupMembership.struct_class = Types::VpcSecurityGroupMembership
+
+      VpcSecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: VpcSecurityGroupMembership, location_name: "VpcSecurityGroupMembership")
+
 
       # @api private
       API = Seahorse::Model::Api.new.tap do |api|
@@ -580,6 +657,8 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
           o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
           o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         end)
 
         api.add_operation(:create_replication_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -625,6 +704,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
           o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
+        end)
+
+        api.add_operation(:delete_certificate, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteCertificate"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteCertificateMessage)
+          o.output = Shapes::ShapeRef.new(shape: DeleteCertificateResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         end)
 
         api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -673,6 +762,15 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAccountAttributesMessage)
           o.output = Shapes::ShapeRef.new(shape: DescribeAccountAttributesResponse)
+        end)
+
+        api.add_operation(:describe_certificates, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeCertificates"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeCertificatesMessage)
+          o.output = Shapes::ShapeRef.new(shape: DescribeCertificatesResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
         end)
 
         api.add_operation(:describe_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -766,6 +864,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidResourceStateFault)
         end)
 
+        api.add_operation(:import_certificate, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ImportCertificate"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ImportCertificateMessage)
+          o.output = Shapes::ShapeRef.new(shape: ImportCertificateResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsFault)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidCertificateFault)
+        end)
+
         api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListTagsForResource"
           o.http_method = "POST"
@@ -807,6 +915,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ModifyReplicationSubnetGroupMessage)
           o.output = Shapes::ShapeRef.new(shape: ModifyReplicationSubnetGroupResponse)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedFault)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: ResourceQuotaExceededFault)
           o.errors << Shapes::ShapeRef.new(shape: SubnetAlreadyInUse)

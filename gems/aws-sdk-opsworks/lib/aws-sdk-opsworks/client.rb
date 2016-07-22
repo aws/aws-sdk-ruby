@@ -41,8 +41,10 @@ module Aws
       # Assign a registered instance to a layer.
       #
       # * You can assign registered on-premises instances to any layer type.
+      #
       # * You can assign registered Amazon EC2 instances only to custom
       #   layers.
+      #
       # * You cannot use this action with instances that were created with AWS
       #   OpsWorks.
       #
@@ -206,6 +208,7 @@ module Aws
       #   VPC, and you cannot change the ID later.
       #
       #   * If your account supports EC2 Classic, the default value is no VPC.
+      #
       #   * If your account does not support EC2 Classic, the default value is
       #     the default VPC for the specified region.
       #
@@ -220,6 +223,7 @@ module Aws
       #
       #   * It must belong to a VPC in your account that is in the specified
       #     region.
+      #
       #   * You must specify a value for `DefaultSubnetId`.
       #
       #   For more information on how to use AWS OpsWorks with a VPC, see
@@ -265,9 +269,21 @@ module Aws
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
-      #     `Amazon Linux 2015.03`, `Red Hat Enterprise Linux 7`, `Ubuntu 12.04
-      #     LTS`, or `Ubuntu 14.04 LTS`.
-      #   * `Microsoft Windows Server 2012 R2 Base`.
+      #     `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux
+      #     2015.03`.
+      #
+      #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
+      #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+      #
+      #   * `CentOS 7`
+      #
+      #   * `Red Hat Enterprise Linux 7`
+      #
+      #   * `Microsoft Windows Server 2012 R2 Base`, `Microsoft Windows Server
+      #     2012 R2 with SQL Server Express`, `Microsoft Windows Server 2012 R2
+      #     with SQL Server Standard`, or `Microsoft Windows Server 2012 R2 with
+      #     SQL Server Web`.
+      #
       #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
       #     when you create instances. For more information on how to use custom
       #     AMIs with OpsWorks, see [Using Custom AMIs][1].
@@ -276,7 +292,11 @@ module Aws
       #   information on the supported operating systems, see [AWS OpsWorks
       #   Operating Systems][2].
       #
-      #   <note>You can specify a different Linux operating system for the cloned stack, but you cannot change from Linux to Windows or Windows to Linux.</note>
+      #   <note markdown="1"> You can specify a different Linux operating system for the cloned
+      #   stack, but you cannot change from Linux to Windows or Windows to
+      #   Linux.
+      #
+      #    </note>
       #
       #
       #
@@ -290,15 +310,25 @@ module Aws
       #   themes are:
       #
       #   * `Baked_Goods`
+      #
       #   * `Clouds`
+      #
       #   * `Europe_Cities`
+      #
       #   * `Fruits`
+      #
       #   * `Greek_Deities`
+      #
       #   * `Legendary_creatures_from_Japan`
+      #
       #   * `Planets_and_Moons`
+      #
       #   * `Roman_Deities`
+      #
       #   * `Scottish_Islands`
+      #
       #   * `US_Cities`
+      #
       #   * `Wild_Cats`
       #
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
@@ -339,7 +369,7 @@ module Aws
       #   The configuration manager. When you clone a stack we recommend that
       #   you use the configuration manager to specify the Chef version: 12,
       #   11.10, or 11.4 for Linux stacks, or 12.2 for Windows stacks. The
-      #   default value for Linux stacks is currently 11.4.
+      #   default value for Linux stacks is currently 12.
       # @option params [Types::ChefConfiguration] :chef_configuration
       #   A `ChefConfiguration` object that specifies whether to enable
       #   Berkshelf and the Berkshelf version on Chef 11.10 stacks. For more
@@ -364,6 +394,7 @@ module Aws
       #     built-in security group with each layer (default setting). You can
       #     associate additional security groups with a layer after you create
       #     it but you cannot delete the built-in security group.
+      #
       #   * False - AWS OpsWorks does not associate built-in security groups
       #     with layers. You must create appropriate Amazon Elastic Compute
       #     Cloud (Amazon EC2) security groups and associate a security group
@@ -420,6 +451,7 @@ module Aws
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
       #     automatically installs new agent versions on the stack\'s instances
       #     as soon as they are available.
+      #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
@@ -430,7 +462,10 @@ module Aws
       #   the console. For a list of available agent version numbers, call
       #   DescribeAgentVersions.
       #
-      #   <note>You can also specify an agent version when you create or update an instance, which overrides the stack's default setting.</note>
+      #   <note markdown="1"> You can also specify an agent version when you create or update an
+      #   instance, which overrides the stack\'s default setting.
+      #
+      #    </note>
       # @return [Types::CloneStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CloneStackResult#stack_id #StackId} => String
@@ -539,7 +574,11 @@ module Aws
       #   all use cases. Exceeding it will cause an exception with the message,
       #   \"Environment: is too large (maximum is 10KB).\"
       #
-      #   <note>This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version.</note>
+      #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
+      #   specified one or more environment variables, you cannot modify the
+      #   stack\'s Chef version.
+      #
+      #    </note>
       #
       #
       #
@@ -706,9 +745,22 @@ module Aws
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
-      #     `Amazon Linux 2015.03`, `Red Hat Enterprise Linux 7`, `Ubuntu 12.04
-      #     LTS`, or `Ubuntu 14.04 LTS`.
-      #   * `Microsoft Windows Server 2012 R2 Base`.
+      #     `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux
+      #     2015.03`.
+      #
+      #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
+      #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+      #
+      #   * `CentOS 7`
+      #
+      #   * `Red Hat Enterprise Linux 7`
+      #
+      #   * A supported Windows operating system, such as `Microsoft Windows
+      #     Server 2012 R2 Base`, `Microsoft Windows Server 2012 R2 with SQL
+      #     Server Express`, `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Web`.
+      #
       #   * A custom AMI: `Custom`.
       #
       #   For more information on the supported operating systems, see [AWS
@@ -731,7 +783,9 @@ module Aws
       #   based on one of the supported operating systems. For more information,
       #   see [Using Custom AMIs][1].
       #
-      #   <note>If you specify a custom AMI, you must set `Os` to `Custom`.</note>
+      #   <note markdown="1"> If you specify a custom AMI, you must set `Os` to `Custom`.
+      #
+      #    </note>
       #
       #
       #
@@ -795,6 +849,7 @@ module Aws
       #   options:
       #
       #   * `INHERIT` - Use the stack\'s default agent version setting.
+      #
       #   * *version\_number* - Use the specified agent version. This value
       #     overrides the stack\'s default setting. To update the agent version,
       #     edit the instance configuration and specify a new version. AWS
@@ -817,9 +872,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://aws.amazon.com/ec2/dedicated-hosts/
+      #   [1]: http://aws.amazon.com/ec2/dedicated-hosts/
       #   [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/dedicated-instance.html
-      #   [3]: https://aws.amazon.com/ec2/purchasing-options/dedicated-instances/
+      #   [3]: http://aws.amazon.com/ec2/purchasing-options/dedicated-instances/
       # @return [Types::CreateInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateInstanceResult#instance_id #InstanceId} => String
@@ -892,7 +947,8 @@ module Aws
       #   The layer stack ID.
       # @option params [required, String] :type
       #   The layer type. A stack cannot have more than one built-in layer of
-      #   the same type. It can have any number of custom layers.
+      #   the same type. It can have any number of custom layers. Built-in
+      #   layers are not available in Chef 12 stacks.
       # @option params [required, String] :name
       #   The layer name, which is used by the console.
       # @option params [required, String] :shortname
@@ -1059,6 +1115,7 @@ module Aws
       #   You cannot change the ID later.
       #
       #   * If your account supports EC2-Classic, the default value is `no VPC`.
+      #
       #   * If your account does not support EC2-Classic, the default value is
       #     the default VPC for the specified region.
       #
@@ -1073,6 +1130,7 @@ module Aws
       #
       #   * It must belong to a VPC in your account that is in the specified
       #     region.
+      #
       #   * You must specify a value for `DefaultSubnetId`.
       #
       #   For more information on how to use AWS OpsWorks with a VPC, see
@@ -1110,9 +1168,22 @@ module Aws
       #   create the instance. You can specify one of the following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
-      #     `Amazon Linux 2015.03`, `Red Hat Enterprise Linux 7`, `Ubuntu 12.04
-      #     LTS`, or `Ubuntu 14.04 LTS`.
-      #   * `Microsoft Windows Server 2012 R2 Base`.
+      #     `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux
+      #     2015.03`.
+      #
+      #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
+      #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+      #
+      #   * `CentOS 7`
+      #
+      #   * `Red Hat Enterprise Linux 7`
+      #
+      #   * A supported Windows operating system, such as `Microsoft Windows
+      #     Server 2012 R2 Base`, `Microsoft Windows Server 2012 R2 with SQL
+      #     Server Express`, `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Web`.
+      #
       #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
       #     when you create instances. For more information, see [ Using Custom
       #     AMIs][1].
@@ -1133,15 +1204,25 @@ module Aws
       #   themes are:
       #
       #   * `Baked_Goods`
+      #
       #   * `Clouds`
+      #
       #   * `Europe_Cities`
+      #
       #   * `Fruits`
+      #
       #   * `Greek_Deities`
+      #
       #   * `Legendary_creatures_from_Japan`
+      #
       #   * `Planets_and_Moons`
+      #
       #   * `Roman_Deities`
+      #
       #   * `Scottish_Islands`
+      #
       #   * `US_Cities`
+      #
       #   * `Wild_Cats`
       #
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
@@ -1207,6 +1288,7 @@ module Aws
       #     built-in security group with each layer (default setting). You can
       #     associate additional security groups with a layer after you create
       #     it, but you cannot delete the built-in security group.
+      #
       #   * False - AWS OpsWorks does not associate built-in security groups
       #     with layers. You must create appropriate EC2 security groups and
       #     associate a security group with each layer that you create. However,
@@ -1258,6 +1340,7 @@ module Aws
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
       #     automatically installs new agent versions on the stack\'s instances
       #     as soon as they are available.
+      #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
@@ -1268,7 +1351,10 @@ module Aws
       #   not the abbreviated number shown on the console. For a list of
       #   available agent version numbers, call DescribeAgentVersions.
       #
-      #   <note>You can also specify an agent version when you create or update an instance, which overrides the stack's default setting.</note>
+      #   <note markdown="1"> You can also specify an agent version when you create or update an
+      #   instance, which overrides the stack\'s default setting.
+      #
+      #    </note>
       # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateStackResult#stack_id #StackId} => String
@@ -1514,7 +1600,8 @@ module Aws
       # **Required Permissions**\: To use this action, an IAM user must have a
       # Manage permissions level for the stack or an attached policy that
       # explicitly grants permissions. For more information on user
-      # permissions, see [][2].
+      # permissions, see
+      # [http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html][2].
       #
       #
       #
@@ -2869,7 +2956,9 @@ module Aws
         req.send_request(options)
       end
 
-      # <note>This action can be used only with Windows stacks.</note>
+      # <note markdown="1"> This action can be used only with Windows stacks.
+      #
+      #  </note>
       #
       # Grants RDP access to a Windows instance for a specified time period.
       # @option params [required, String] :instance_id
@@ -3006,7 +3095,15 @@ module Aws
       # Registers instances with a specified stack that were created outside
       # of AWS OpsWorks.
       #
-      # <note>We do not recommend using this action to register instances. The complete registration operation has two primary steps, installing the AWS OpsWorks agent on the instance and registering the instance with the stack. `RegisterInstance` handles only the second step. You should instead use the AWS CLI `register` command, which performs the entire registration operation. For more information, see [ Registering an Instance with an AWS OpsWorks Stack][1].</note>
+      # <note markdown="1"> We do not recommend using this action to register instances. The
+      # complete registration operation has two primary steps, installing the
+      # AWS OpsWorks agent on the instance and registering the instance with
+      # the stack. `RegisterInstance` handles only the second step. You should
+      # instead use the AWS CLI `register` command, which performs the entire
+      # registration operation. For more information, see [ Registering an
+      # Instance with an AWS OpsWorks Stack][1].
+      #
+      #  </note>
       #
       # **Required Permissions**\: To use this action, an IAM user must have a
       # Manage permissions level for the stack or an attached policy that
@@ -3220,9 +3317,13 @@ module Aws
       #   following strings. You cannot set your own permissions level.
       #
       #   * `deny`
+      #
       #   * `show`
+      #
       #   * `deploy`
+      #
       #   * `manage`
+      #
       #   * `iam_only`
       #
       #   For more information on the permissions associated with these levels,
@@ -3508,7 +3609,11 @@ module Aws
       #   all use cases. Exceeding it will cause an exception with the message,
       #   \"Environment: is too large (maximum is 10KB).\"
       #
-      #   <note>This parameter is supported only by Chef 11.10 stacks. If you have specified one or more environment variables, you cannot modify the stack's Chef version. </note>
+      #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
+      #   specified one or more environment variables, you cannot modify the
+      #   stack\'s Chef version.
+      #
+      #    </note>
       #
       #
       #
@@ -3627,9 +3732,22 @@ module Aws
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
-      #     `Amazon Linux 2015.03`, `Red Hat Enterprise Linux 7`, `Ubuntu 12.04
-      #     LTS`, or `Ubuntu 14.04 LTS`.
-      #   * `Microsoft Windows Server 2012 R2 Base`.
+      #     `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux
+      #     2015.03`.
+      #
+      #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
+      #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+      #
+      #   * `CentOS 7`
+      #
+      #   * `Red Hat Enterprise Linux 7`
+      #
+      #   * A supported Windows operating system, such as `Microsoft Windows
+      #     Server 2012 R2 Base`, `Microsoft Windows Server 2012 R2 with SQL
+      #     Server Express`, `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Web`.
+      #
       #   * A custom AMI: `Custom`.
       #
       #   For more information on the supported operating systems, see [AWS
@@ -3642,7 +3760,11 @@ module Aws
       #   information on how to use custom AMIs with OpsWorks, see [Using Custom
       #   AMIs][2].
       #
-      #   <note>You can specify a different Linux operating system for the updated stack, but you cannot change from Linux to Windows or Windows to Linux.</note>
+      #   <note markdown="1"> You can specify a different Linux operating system for the updated
+      #   stack, but you cannot change from Linux to Windows or Windows to
+      #   Linux.
+      #
+      #    </note>
       #
       #
       #
@@ -3653,7 +3775,9 @@ module Aws
       #   based on one of the supported operating systems. For more information,
       #   see [Instances][1]
       #
-      #   <note>If you specify a custom AMI, you must set `Os` to `Custom`.</note>
+      #   <note markdown="1"> If you specify a custom AMI, you must set `Os` to `Custom`.
+      #
+      #    </note>
       #
       #
       #
@@ -3687,6 +3811,7 @@ module Aws
       #   options:
       #
       #   * `INHERIT` - Use the stack\'s default agent version setting.
+      #
       #   * *version\_number* - Use the specified agent version. This value
       #     overrides the stack\'s default setting. To update the agent version,
       #     you must edit the instance configuration and specify a new version.
@@ -3949,9 +4074,22 @@ module Aws
       #   following:
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
-      #     `Amazon Linux 2015.03`, `Red Hat Enterprise Linux 7`, `Ubuntu 12.04
-      #     LTS`, or `Ubuntu 14.04 LTS`.
-      #   * `Microsoft Windows Server 2012 R2 Base`.
+      #     `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux
+      #     2015.03`.
+      #
+      #   * A supported Ubuntu operating system, such as `Ubuntu 16.04 LTS`,
+      #     `Ubuntu 14.04 LTS`, or `Ubuntu 12.04 LTS`.
+      #
+      #   * `CentOS 7`
+      #
+      #   * `Red Hat Enterprise Linux 7`
+      #
+      #   * A supported Windows operating system, such as `Microsoft Windows
+      #     Server 2012 R2 Base`, `Microsoft Windows Server 2012 R2 with SQL
+      #     Server Express`, `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
+      #     Web`.
+      #
       #   * A custom AMI: `Custom`. You specify the custom AMI you want to use
       #     when you create instances. For more information on how to use custom
       #     AMIs with OpsWorks, see [Using Custom AMIs][1].
@@ -3972,15 +4110,25 @@ module Aws
       #   themes are:
       #
       #   * `Baked_Goods`
+      #
       #   * `Clouds`
+      #
       #   * `Europe_Cities`
+      #
       #   * `Fruits`
+      #
       #   * `Greek_Deities`
+      #
       #   * `Legendary_creatures_from_Japan`
+      #
       #   * `Planets_and_Moons`
+      #
       #   * `Roman_Deities`
+      #
       #   * `Scottish_Islands`
+      #
       #   * `US_Cities`
+      #
       #   * `Wild_Cats`
       #
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
@@ -4076,6 +4224,7 @@ module Aws
       #     built-in security group with each layer (default setting). You can
       #     associate additional security groups with a layer after you create
       #     it, but you cannot delete the built-in security group.
+      #
       #   * False - AWS OpsWorks does not associate built-in security groups
       #     with layers. You must create appropriate EC2 security groups and
       #     associate a security group with each layer that you create. However,
@@ -4095,6 +4244,7 @@ module Aws
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
       #     automatically installs new agent versions on the stack\'s instances
       #     as soon as they are available.
+      #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
@@ -4105,7 +4255,10 @@ module Aws
       #   the console. For a list of available agent version numbers, call
       #   DescribeAgentVersions.
       #
-      #   <note>You can also specify an agent version when you create or update an instance, which overrides the stack's default setting.</note>
+      #   <note markdown="1"> You can also specify an agent version when you create or update an
+      #   instance, which overrides the stack\'s default setting.
+      #
+      #    </note>
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -4264,6 +4417,7 @@ module Aws
           app_exists: Waiters::AppExists,
           deployment_successful: Waiters::DeploymentSuccessful,
           instance_online: Waiters::InstanceOnline,
+          instance_registered: Waiters::InstanceRegistered,
           instance_stopped: Waiters::InstanceStopped,
           instance_terminated: Waiters::InstanceTerminated
         }

@@ -181,6 +181,7 @@ module Aws
       #   resp.certificate.signature_algorithm #=> String
       #   resp.certificate.in_use_by #=> Array
       #   resp.certificate.in_use_by[0] #=> String
+      #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "OTHER"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_certificate(params = {}, options = {})

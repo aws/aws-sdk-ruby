@@ -63,12 +63,38 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes the specified delivery channel.
+      # Deletes the configuration recorder.
       #
-      # The delivery channel cannot be deleted if it is the only delivery
-      # channel and the configuration recorder is still running. To delete the
-      # delivery channel, stop the running configuration recorder using the
-      # StopConfigurationRecorder action.
+      # After the configuration recorder is deleted, AWS Config will not
+      # record resource configuration changes until you create a new
+      # configuration recorder.
+      #
+      # This action does not delete the configuration information that was
+      # previously recorded. You will be able to access the previously
+      # recorded information by using the `GetResourceConfigHistory` action,
+      # but you will not be able to access this information in the AWS Config
+      # console until you create a new configuration recorder.
+      # @option params [required, String] :configuration_recorder_name
+      #   The name of the configuration recorder to be deleted. You can retrieve
+      #   the name of your configuration recorder by using the
+      #   `DescribeConfigurationRecorders` action.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_configuration_recorder({
+      #     configuration_recorder_name: "RecorderName", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_configuration_recorder(params = {}, options = {})
+        req = build_request(:delete_configuration_recorder, params)
+        req.send_request(options)
+      end
+
+      # Deletes the delivery channel.
+      #
+      # Before you can delete the delivery channel, you must stop the
+      # configuration recorder by using the StopConfigurationRecorder action.
       # @option params [required, String] :delivery_channel_name
       #   The name of the delivery channel to delete.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -81,6 +107,26 @@ module Aws
       # @param [Hash] options ({})
       def delete_delivery_channel(params = {}, options = {})
         req = build_request(:delete_delivery_channel, params)
+        req.send_request(options)
+      end
+
+      # Deletes the evaluation results for the specified Config rule. You can
+      # specify one Config rule per request. After you delete the evaluation
+      # results, you can call the StartConfigRulesEvaluation API to start
+      # evaluating your AWS resources against the rule.
+      # @option params [required, String] :config_rule_name
+      #   The name of the Config rule for which you want to delete the
+      #   evaluation results.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_evaluation_results({
+      #     config_rule_name: "StringWithCharLimit64", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_evaluation_results(params = {}, options = {})
+        req = build_request(:delete_evaluation_results, params)
         req.send_request(options)
       end
 
@@ -124,17 +170,17 @@ module Aws
       #
       # If AWS Config has no current evaluation results for the rule, it
       # returns `INSUFFICIENT_DATA`. This result might indicate one of the
-      # following conditions: * AWS Config has never invoked an evaluation for
-      # the rule. To check
+      # following conditions:
+      #
+      # * AWS Config has never invoked an evaluation for the rule. To check
       #   whether it has, use the `DescribeConfigRuleEvaluationStatus` action
       #   to get the `LastSuccessfulInvocationTime` and
       #   `LastFailedInvocationTime`.
       # * The rule\'s AWS Lambda function is failing to send evaluation
       #   results to AWS Config. Verify that the role that you assigned to
       #   your configuration recorder includes the `config:PutEvaluations`
-      #   permission. If the rule is a customer managed rule, verify that the
-      #   AWS Lambda execution role includes the `config:PutEvaluations`
-      #   permission.
+      #   permission. If the rule is a custom rule, verify that the AWS Lambda
+      #   execution role includes the `config:PutEvaluations` permission.
       # * The rule\'s AWS Lambda function has returned `NOT_APPLICABLE` for
       #   all evaluation results. This can occur if the resources were deleted
       #   or removed from the rule\'s scope.
@@ -185,17 +231,17 @@ module Aws
       #
       # If AWS Config has no current evaluation results for the resource, it
       # returns `INSUFFICIENT_DATA`. This result might indicate one of the
-      # following conditions about the rules that evaluate the resource: * AWS
-      # Config has never invoked an evaluation for the rule. To check
+      # following conditions about the rules that evaluate the resource:
+      #
+      # * AWS Config has never invoked an evaluation for the rule. To check
       #   whether it has, use the `DescribeConfigRuleEvaluationStatus` action
       #   to get the `LastSuccessfulInvocationTime` and
       #   `LastFailedInvocationTime`.
       # * The rule\'s AWS Lambda function is failing to send evaluation
       #   results to AWS Config. Verify that the role that you assigned to
       #   your configuration recorder includes the `config:PutEvaluations`
-      #   permission. If the rule is a customer managed rule, verify that the
-      #   AWS Lambda execution role includes the `config:PutEvaluations`
-      #   permission.
+      #   permission. If the rule is a custom rule, verify that the AWS Lambda
+      #   execution role includes the `config:PutEvaluations` permission.
       # * The rule\'s AWS Lambda function has returned `NOT_APPLICABLE` for
       #   all evaluation results. This can occur if the resources were deleted
       #   or removed from the rule\'s scope.
@@ -320,10 +366,11 @@ module Aws
       #   resp.config_rules[0].source.source_identifier #=> String
       #   resp.config_rules[0].source.source_details #=> Array
       #   resp.config_rules[0].source.source_details[0].event_source #=> String, one of "aws.config"
-      #   resp.config_rules[0].source.source_details[0].message_type #=> String, one of "ConfigurationItemChangeNotification", "ConfigurationSnapshotDeliveryCompleted"
+      #   resp.config_rules[0].source.source_details[0].message_type #=> String, one of "ConfigurationItemChangeNotification", "ConfigurationSnapshotDeliveryCompleted", "ScheduledNotification"
+      #   resp.config_rules[0].source.source_details[0].maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
       #   resp.config_rules[0].input_parameters #=> String
       #   resp.config_rules[0].maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
-      #   resp.config_rules[0].config_rule_state #=> String, one of "ACTIVE", "DELETING"
+      #   resp.config_rules[0].config_rule_state #=> String, one of "ACTIVE", "DELETING", "DELETING_RESULTS", "EVALUATING"
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -336,7 +383,10 @@ module Aws
       # a configuration recorder is not specified, this action returns the
       # status of all configuration recorder associated with the account.
       #
-      # <note>Currently, you can specify only one configuration recorder per account.</note>
+      # <note markdown="1"> Currently, you can specify only one configuration recorder per
+      # account.
+      #
+      #  </note>
       # @option params [Array<String>] :configuration_recorder_names
       #   The name(s) of the configuration recorder. If the name is not
       #   specified, the action returns the current status of all the
@@ -393,7 +443,7 @@ module Aws
       #   resp.configuration_recorders[0].recording_group.all_supported #=> Boolean
       #   resp.configuration_recorders[0].recording_group.include_global_resource_types #=> Boolean
       #   resp.configuration_recorders[0].recording_group.resource_types #=> Array
-      #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User"
+      #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_configuration_recorders(params = {}, options = {})
@@ -405,7 +455,9 @@ module Aws
       # delivery channel is not specified, this action returns the current
       # status of all delivery channels associated with the account.
       #
-      # <note>Currently, you can specify only one delivery channel per account.</note>
+      # <note markdown="1"> Currently, you can specify only one delivery channel per account.
+      #
+      #  </note>
       # @option params [Array<String>] :delivery_channel_names
       #   A list of delivery channel names.
       # @return [Types::DescribeDeliveryChannelStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -674,7 +726,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_resource_config_history({
-      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #     resource_id: "ResourceId", # required
       #     later_time: Time.now,
       #     earlier_time: Time.now,
@@ -692,7 +744,7 @@ module Aws
       #   resp.configuration_items[0].configuration_state_id #=> String
       #   resp.configuration_items[0].configuration_item_md5_hash #=> String
       #   resp.configuration_items[0].arn #=> String
-      #   resp.configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User"
+      #   resp.configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription"
       #   resp.configuration_items[0].resource_id #=> String
       #   resp.configuration_items[0].resource_name #=> String
       #   resp.configuration_items[0].aws_region #=> String
@@ -703,11 +755,13 @@ module Aws
       #   resp.configuration_items[0].related_events #=> Array
       #   resp.configuration_items[0].related_events[0] #=> String
       #   resp.configuration_items[0].relationships #=> Array
-      #   resp.configuration_items[0].relationships[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User"
+      #   resp.configuration_items[0].relationships[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription"
       #   resp.configuration_items[0].relationships[0].resource_id #=> String
       #   resp.configuration_items[0].relationships[0].resource_name #=> String
       #   resp.configuration_items[0].relationships[0].relationship_name #=> String
       #   resp.configuration_items[0].configuration #=> String
+      #   resp.configuration_items[0].supplementary_configuration #=> Hash
+      #   resp.configuration_items[0].supplementary_configuration["SupplementaryConfigurationName"] #=> String
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -724,7 +778,10 @@ module Aws
       # results to include only resources that have specific resource IDs or a
       # resource name.
       #
-      # <note>You can specify either resource IDs or a resource name but not both in the same request.</note>
+      # <note markdown="1"> You can specify either resource IDs or a resource name but not both in
+      # the same request.
+      #
+      #  </note>
       #
       # The response is paginated, and by default AWS Config lists 100
       # resource identifiers on each page. You can customize this number with
@@ -759,7 +816,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.list_discovered_resources({
-      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #     resource_ids: ["ResourceId"],
       #     resource_name: "ResourceName",
       #     limit: 1,
@@ -769,7 +826,7 @@ module Aws
       #
       # @example Response structure
       #   resp.resource_identifiers #=> Array
-      #   resp.resource_identifiers[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User"
+      #   resp.resource_identifiers[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription"
       #   resp.resource_identifiers[0].resource_id #=> String
       #   resp.resource_identifiers[0].resource_name #=> String
       #   resp.resource_identifiers[0].resource_deletion_time #=> Time
@@ -784,18 +841,18 @@ module Aws
       # Adds or updates an AWS Config rule for evaluating whether your AWS
       # resources comply with your desired configurations.
       #
-      # You can use this action for customer managed Config rules and AWS
-      # managed Config rules. A customer managed Config rule is a custom rule
-      # that you develop and maintain. An AWS managed Config rule is a
-      # customizable, predefined rule that is provided by AWS Config.
+      # You can use this action for custom Config rules and AWS managed Config
+      # rules. A custom Config rule is a rule that you develop and maintain.
+      # An AWS managed Config rule is a customizable, predefined rule that AWS
+      # Config provides.
       #
-      # If you are adding a new customer managed Config rule, you must first
-      # create the AWS Lambda function that the rule invokes to evaluate your
-      # resources. When you use the `PutConfigRule` action to add the rule to
-      # AWS Config, you must specify the Amazon Resource Name (ARN) that AWS
-      # Lambda assigns to the function. Specify the ARN for the
-      # `SourceIdentifier` key. This key is part of the `Source` object, which
-      # is part of the `ConfigRule` object.
+      # If you are adding a new custom Config rule, you must first create the
+      # AWS Lambda function that the rule invokes to evaluate your resources.
+      # When you use the `PutConfigRule` action to add the rule to AWS Config,
+      # you must specify the Amazon Resource Name (ARN) that AWS Lambda
+      # assigns to the function. Specify the ARN for the `SourceIdentifier`
+      # key. This key is part of the `Source` object, which is part of the
+      # `ConfigRule` object.
       #
       # If you are adding a new AWS managed Config rule, specify the rule\'s
       # identifier for the `SourceIdentifier` key. To reference AWS managed
@@ -826,8 +883,15 @@ module Aws
       #   An AWS Lambda function that evaluates configuration items to assess
       #   whether your AWS resources comply with your desired configurations.
       #   This function can run when AWS Config detects a configuration change
-      #   to an AWS resource, or when it delivers a configuration snapshot of
-      #   the resources in the account.
+      #   to an AWS resource and at a periodic frequency that you choose (for
+      #   example, every 24 hours).
+      #
+      #   <note markdown="1"> You can use the AWS CLI and AWS SDKs if you want to create a rule that
+      #   triggers evaluations for your resources when AWS Config delivers the
+      #   configuration snapshot. For more information, see
+      #   ConfigSnapshotDeliveryProperties.
+      #
+      #    </note>
       #
       #   For more information about developing and using AWS Config rules, see
       #   [Evaluating AWS Resource Configurations with AWS Config][1] in the
@@ -857,13 +921,14 @@ module Aws
       #         source_details: [
       #           {
       #             event_source: "aws.config", # accepts aws.config
-      #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted
+      #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+      #             maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #           },
       #         ],
       #       },
       #       input_parameters: "StringWithCharLimit256",
       #       maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-      #       config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING
+      #       config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #     },
       #   })
       # @param [Hash] params ({})
@@ -901,7 +966,7 @@ module Aws
       #       recording_group: {
       #         all_supported: false,
       #         include_global_resource_types: false,
-      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #       },
       #     },
       #   })
@@ -912,8 +977,11 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a new delivery channel object to deliver the configuration
-      # information to an Amazon S3 bucket, and to an Amazon SNS topic.
+      # Creates a delivery channel object to deliver configuration information
+      # to an Amazon S3 bucket and Amazon SNS topic.
+      #
+      # Before you can create a delivery channel, you must create a
+      # configuration recorder.
       #
       # You can use this action to change the Amazon S3 bucket or an Amazon
       # SNS topic of the existing delivery channel. To change the Amazon S3
@@ -922,7 +990,7 @@ module Aws
       # different value for either the S3 bucket or the SNS topic, this action
       # will keep the existing value for the parameter that is not changed.
       #
-      # <note markdown="1"> Currently, you can specify only one delivery channel per account.
+      # <note markdown="1"> You can have only one delivery channel per AWS account.
       #
       #  </note>
       # @option params [required, Types::DeliveryChannel] :delivery_channel
@@ -989,6 +1057,29 @@ module Aws
       # @param [Hash] options ({})
       def put_evaluations(params = {}, options = {})
         req = build_request(:put_evaluations, params)
+        req.send_request(options)
+      end
+
+      # Evaluates your resources against the specified Config rules. You can
+      # specify up to 25 Config rules per request.
+      #
+      # An existing StartConfigRulesEvaluation call must complete for the
+      # rules that you specified before you can call the API again. If you
+      # chose to have AWS Config stream to an Amazon SNS topic, you will
+      # receive a notification when the evaluation starts.
+      # @option params [Array<String>] :config_rule_names
+      #   The list of names of Config rules that you want to run evaluations
+      #   for.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.start_config_rules_evaluation({
+      #     config_rule_names: ["StringWithCharLimit64"],
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def start_config_rules_evaluation(params = {}, options = {})
+        req = build_request(:start_config_rules_evaluation, params)
         req.send_request(options)
       end
 

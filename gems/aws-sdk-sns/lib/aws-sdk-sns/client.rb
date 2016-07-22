@@ -68,6 +68,32 @@ module Aws
         req.send_request(options)
       end
 
+      # Accepts a phone number and indicates whether the phone holder has
+      # opted out of receiving SMS messages from your account. You cannot send
+      # SMS messages to a number that is opted out.
+      #
+      # To resume sending messages, you can opt in the number by using the
+      # `OptInPhoneNumber` action.
+      # @option params [required, String] :phone_number
+      #   The phone number for which you want to check the opt out status.
+      # @return [Types::CheckIfPhoneNumberIsOptedOutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CheckIfPhoneNumberIsOptedOutResponse#is_opted_out #isOptedOut} => Boolean
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.check_if_phone_number_is_opted_out({
+      #     phone_number: "PhoneNumber", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.is_opted_out #=> Boolean
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def check_if_phone_number_is_opted_out(params = {}, options = {})
+        req = build_request(:check_if_phone_number_is_opted_out, params)
+        req.send_request(options)
+      end
+
       # Verifies an endpoint owner\'s intent to receive messages by validating
       # the token sent to the endpoint by an earlier `Subscribe` action. If
       # the token is valid, the action creates a new subscription and returns
@@ -112,16 +138,35 @@ module Aws
       # PlatformPrincipal is \"SSL certificate\". For GCM, PlatformPrincipal
       # is not applicable. For ADM, PlatformPrincipal is \"client id\". The
       # PlatformCredential is also received from the notification service. For
-      # APNS/APNS\_SANDBOX, PlatformCredential is \"private key\". For GCM,
-      # PlatformCredential is \"API key\". For ADM, PlatformCredential is
-      # \"client secret\". The PlatformApplicationArn that is returned when
-      # using `CreatePlatformApplication` is then used as an attribute for the
-      # `CreatePlatformEndpoint` action. For more information, see [Using
-      # Amazon SNS Mobile Push Notifications][1].
+      # WNS, PlatformPrincipal is \"Package Security Identifier\". For MPNS,
+      # PlatformPrincipal is \"TLS certificate\". For Baidu, PlatformPrincipal
+      # is \"API key\".
+      #
+      # For APNS/APNS\_SANDBOX, PlatformCredential is \"private key\". For
+      # GCM, PlatformCredential is \"API key\". For ADM, PlatformCredential is
+      # \"client secret\". For WNS, PlatformCredential is \"secret key\". For
+      # MPNS, PlatformCredential is \"private key\". For Baidu,
+      # PlatformCredential is \"secret key\". The PlatformApplicationArn that
+      # is returned when using `CreatePlatformApplication` is then used as an
+      # attribute for the `CreatePlatformEndpoint` action. For more
+      # information, see [Using Amazon SNS Mobile Push Notifications][1]. For
+      # more information about obtaining the PlatformPrincipal and
+      # PlatformCredential for each of the supported push notification
+      # services, see [Getting Started with Apple Push Notification
+      # Service][2], [Getting Started with Amazon Device Messaging][3],
+      # [Getting Started with Baidu Cloud Push][4], [Getting Started with
+      # Google Cloud Messaging for Android][5], [Getting Started with
+      # MPNS][6], or [Getting Started with WNS][7].
       #
       #
       #
       # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+      # [2]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-apns.html
+      # [3]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-adm.html
+      # [4]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-baidu.html
+      # [5]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-gcm.html
+      # [6]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-mpns.html
+      # [7]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-wns.html
       # @option params [required, String] :name
       #   Application names must be made up of only uppercase and lowercase
       #   ASCII letters, numbers, underscores, hyphens, and periods, and must be
@@ -222,7 +267,7 @@ module Aws
       end
 
       # Creates a topic to which notifications can be published. Users can
-      # create at most 3000 topics. For more information, see
+      # create at most 100,000 topics. For more information, see
       # [http://aws.amazon.com/sns][1]. This action is idempotent, so if the
       # requester already owns a topic with the specified name, that topic\'s
       # ARN is returned without creating a new topic.
@@ -254,8 +299,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes the endpoint from Amazon SNS. This action is idempotent. For
-      # more information, see [Using Amazon SNS Mobile Push Notifications][1].
+      # Deletes the endpoint for a device and mobile app from Amazon SNS. This
+      # action is idempotent. For more information, see [Using Amazon SNS
+      # Mobile Push Notifications][1].
+      #
+      # When you delete an endpoint that is also subscribed to a topic, then
+      # you must also unsubscribe the endpoint from the topic.
       #
       #
       #
@@ -372,6 +421,40 @@ module Aws
         req.send_request(options)
       end
 
+      # Returns the settings for sending SMS messages from your account.
+      #
+      # These settings are set with the `SetSMSAttributes` action.
+      # @option params [Array<String>] :attributes
+      #   A list of the individual attribute names, such as `MonthlySpendLimit`,
+      #   for which you want values.
+      #
+      #   For all attribute names, see [SetSMSAttributes][1].
+      #
+      #   If you don\'t use this parameter, Amazon SNS returns all SMS
+      #   attributes.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html
+      # @return [Types::GetSMSAttributesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetSMSAttributesResponse#attributes #attributes} => Hash&lt;String,String&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_sms_attributes({
+      #     attributes: ["String"],
+      #   })
+      #
+      # @example Response structure
+      #   resp.attributes #=> Hash
+      #   resp.attributes["String"] #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_sms_attributes(params = {}, options = {})
+        req = build_request(:get_sms_attributes, params)
+        req.send_request(options)
+      end
+
       # Returns all of the properties of a subscription.
       # @option params [required, String] :subscription_arn
       #   The ARN of the subscription whose properties you want to get.
@@ -459,6 +542,41 @@ module Aws
       # @param [Hash] options ({})
       def list_endpoints_by_platform_application(params = {}, options = {})
         req = build_request(:list_endpoints_by_platform_application, params)
+        req.send_request(options)
+      end
+
+      # Returns a list of phone numbers that are opted out, meaning you cannot
+      # send SMS messages to them.
+      #
+      # The results for `ListPhoneNumbersOptedOut` are paginated, and each
+      # page returns up to 100 phone numbers. If additional phone numbers are
+      # available after the first page of results, then a `NextToken` string
+      # will be returned. To receive the next page, you call
+      # `ListPhoneNumbersOptedOut` again using the `NextToken` string received
+      # from the previous call. When there are no more records to return,
+      # `NextToken` will be null.
+      # @option params [String] :next_token
+      #   A `NextToken` string is used when you call the
+      #   `ListPhoneNumbersOptedOut` action to retrieve additional records that
+      #   are available after the first page of results.
+      # @return [Types::ListPhoneNumbersOptedOutResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListPhoneNumbersOptedOutResponse#phone_numbers #phoneNumbers} => Array&lt;String&gt;
+      #   * {Types::ListPhoneNumbersOptedOutResponse#next_token #nextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_phone_numbers_opted_out({
+      #     next_token: "string",
+      #   })
+      #
+      # @example Response structure
+      #   resp.phone_numbers #=> Array
+      #   resp.phone_numbers[0] #=> String
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_phone_numbers_opted_out(params = {}, options = {})
+        req = build_request(:list_phone_numbers_opted_out, params)
         req.send_request(options)
       end
 
@@ -595,22 +713,60 @@ module Aws
         req.send_request(options)
       end
 
+      # Use this request to opt in a phone number that is opted out, which
+      # enables you to resume sending SMS messages to the number.
+      #
+      # You can opt in a phone number only once every 30 days.
+      # @option params [required, String] :phone_number
+      #   The phone number to opt in.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.opt_in_phone_number({
+      #     phone_number: "PhoneNumber", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def opt_in_phone_number(params = {}, options = {})
+        req = build_request(:opt_in_phone_number, params)
+        req.send_request(options)
+      end
+
       # Sends a message to all of a topic\'s subscribed endpoints. When a
       # `messageId` is returned, the message has been saved and Amazon SNS
       # will attempt to deliver it to the topic\'s subscribers shortly. The
       # format of the outgoing message to each subscribed endpoint depends on
-      # the notification protocol selected.
+      # the notification protocol.
       #
       # To use the `Publish` action for sending a message to a mobile
       # endpoint, such as an app on a Kindle device or mobile phone, you must
-      # specify the EndpointArn. The EndpointArn is returned when making a
-      # call with the `CreatePlatformEndpoint` action. The second example
-      # below shows a request and response for publishing to a mobile
-      # endpoint.
+      # specify the EndpointArn for the TargetArn parameter. The EndpointArn
+      # is returned when making a call with the `CreatePlatformEndpoint`
+      # action. The second example below shows a request and response for
+      # publishing to a mobile endpoint.
+      #
+      # For more information about formatting messages, see [Send Custom
+      # Platform-Specific Payloads in Messages to Mobile Devices][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html
       # @option params [String] :topic_arn
       #   The topic you want to publish to.
+      #
+      #   If you don\'t specify a value for the `TopicArn` parameter, you must
+      #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
       # @option params [String] :target_arn
       #   Either TopicArn or EndpointArn, but not both.
+      #
+      #   If you don\'t specify a value for the `TargetArn` parameter, you must
+      #   specify a value for the `PhoneNumber` or `TopicArn` parameters.
+      # @option params [String] :phone_number
+      #   The phone number to which you want to deliver an SMS message. Use
+      #   E.164 format.
+      #
+      #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+      #   must specify a value for the `TargetArn` or `TopicArn` parameters.
       # @option params [required, String] :message
       #   The message you want to send to the topic.
       #
@@ -625,21 +781,30 @@ module Aws
       #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB in
       #   size (262144 bytes, not 262144 characters).
       #
-      #   JSON-specific constraints: * Keys in the JSON object that correspond
-      #   to supported transport
+      #   JSON-specific constraints:
+      #
+      #   * Keys in the JSON object that correspond to supported transport
       #     protocols must have simple JSON string values.
+      #
       #   * The values will be parsed (unescaped) before they are used in
       #     outgoing messages.
+      #
       #   * Outbound notifications are JSON encoded (meaning that the characters
       #     will be reescaped for sending).
+      #
       #   * Values have a minimum length of 0 (the empty string, \"\", is
       #     allowed).
+      #
       #   * Values have a maximum length bounded by the overall message size
       #     (so, including multiple protocols may limit message sizes).
+      #
       #   * Non-string values will cause the key to be ignored.
+      #
       #   * Keys that do not correspond to supported transport protocols are
       #     ignored.
+      #
       #   * Duplicate keys are not allowed.
+      #
       #   * Failure to parse or validate any key or value in the message will
       #     cause the `Publish` call to return an error (no partial delivery).
       # @option params [String] :subject
@@ -658,6 +823,7 @@ module Aws
       #   the value of the `Message` parameter must:
       #
       #   * be a syntactically valid JSON object; and
+      #
       #   * contain at least a top-level JSON key of \"default\" with a value
       #     that is a string.
       #
@@ -684,6 +850,7 @@ module Aws
       #   resp = client.publish({
       #     topic_arn: "topicARN",
       #     target_arn: "String",
+      #     phone_number: "String",
       #     message: "message", # required
       #     subject: "subject",
       #     message_structure: "messageStructure",
@@ -740,10 +907,12 @@ module Aws
       #   * `CustomUserData` -- arbitrary user data to associate with the
       #     endpoint. Amazon SNS does not use this data. The data must be in
       #     UTF-8 format and less than 2KB.
+      #
       #   * `Enabled` -- flag that enables/disables delivery to the endpoint.
       #     Amazon SNS will set this to false when a notification service
       #     indicates to Amazon SNS that the endpoint is invalid. Users can set
       #     it back to true, typically after updating Token.
+      #
       #   * `Token` -- device token, also referred to as a registration id, for
       #     an app and mobile device. This is returned from the notification
       #     service when an app and mobile device are registered with the
@@ -766,11 +935,15 @@ module Aws
 
       # Sets the attributes of the platform application object for the
       # supported push notification services, such as APNS and GCM. For more
-      # information, see [Using Amazon SNS Mobile Push Notifications][1].
+      # information, see [Using Amazon SNS Mobile Push Notifications][1]. For
+      # information on configuring attributes for message delivery status, see
+      # [Using Amazon SNS Application Attributes for Message Delivery
+      # Status][2].
       #
       #
       #
       # [1]: http://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
+      # [2]: http://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html
       # @option params [required, String] :platform_application_arn
       #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
       # @option params [required, Hash<String,String>] :attributes
@@ -779,21 +952,35 @@ module Aws
       #
       #   * `PlatformCredential` -- The credential received from the
       #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential is
-      #     \"private key\". For GCM, PlatformCredential is \"API key\". For
-      #     ADM, PlatformCredential is \"client secret\".
+      #     private key. For GCM, PlatformCredential is \"API key\". For ADM,
+      #     PlatformCredential is \"client secret\".
+      #
       #   * `PlatformPrincipal` -- The principal received from the notification
-      #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is \"SSL
-      #     certificate\". For GCM, PlatformPrincipal is not applicable. For
-      #     ADM, PlatformPrincipal is \"client id\".
+      #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
+      #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
+      #     PlatformPrincipal is \"client id\".
+      #
       #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
       #     notifications should be sent.
+      #
       #   * `EventEndpointDeleted` -- Topic ARN to which EndpointDeleted event
       #     notifications should be sent.
+      #
       #   * `EventEndpointUpdated` -- Topic ARN to which EndpointUpdate event
       #     notifications should be sent.
+      #
       #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
       #     notifications should be sent upon Direct Publish delivery failure
       #     (permanent) to one of the application\'s endpoints.
+      #
+      #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+      #     write access to use CloudWatch Logs on your behalf.
+      #
+      #   * `FailureFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+      #     write access to use CloudWatch Logs on your behalf.
+      #
+      #   * `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
+      #     successfully delivered messages.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -807,6 +994,109 @@ module Aws
       # @param [Hash] options ({})
       def set_platform_application_attributes(params = {}, options = {})
         req = build_request(:set_platform_application_attributes, params)
+        req.send_request(options)
+      end
+
+      # Use this request to set the default settings for sending SMS messages
+      # and receiving daily SMS usage reports.
+      #
+      # You can override some of these settings for a single message when you
+      # use the `Publish` action with the `MessageAttributes.entry.N`
+      # parameter. For more information, see [Sending an SMS Message][1] in
+      # the *Amazon SNS Developer Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html
+      # @option params [required, Hash<String,String>] :attributes
+      #   The default settings for sending SMS messages from your account. You
+      #   can set values for the following attribute names:
+      #
+      #   `MonthlySpendLimit` – The maximum amount in USD that you are willing
+      #   to spend each month to send SMS messages. When Amazon SNS determines
+      #   that sending an SMS message would incur a cost that exceeds this
+      #   limit, it stops sending SMS messages within minutes.
+      #
+      #   <important markdown="1"> Amazon SNS stops sending SMS messages within minutes of the limit
+      #   being crossed. During that interval, if you continue to send SMS
+      #   messages, you will incur costs that exceed your limit.
+      #
+      #    </important>
+      #
+      #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
+      #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
+      #   SMS message that you send, Amazon SNS writes a log that includes the
+      #   message price, the success or failure status, the reason for failure
+      #   (if the message failed), the message dwell time, and other
+      #   information.
+      #
+      #   `DeliveryStatusSuccessSamplingRate` – The percentage of successful SMS
+      #   deliveries for which Amazon SNS will write logs in CloudWatch Logs.
+      #   The value can be an integer from 0 - 100. For example, to write logs
+      #   only for failed deliveries, set this value to `0`. To write logs for
+      #   10% of your successful deliveries, set it to `10`.
+      #
+      #   `DefaultSenderID` – A string, such as your business brand, that is
+      #   displayed as the sender on the receiving device. Support for sender
+      #   IDs varies by country. The sender ID can be 1 - 11 alphanumeric
+      #   characters, and it must contain at least one letter.
+      #
+      #   `DefaultSMSType` – The type of SMS message that you will send by
+      #   default. You can assign the following values:
+      #
+      #   * `Promotional` – Noncritical messages, such as marketing messages.
+      #     Amazon SNS optimizes the message delivery to incur the lowest cost.
+      #
+      #   * `Transactional` – (Default) Critical messages that support customer
+      #     transactions, such as one-time passcodes for multi-factor
+      #     authentication. Amazon SNS optimizes the message delivery to achieve
+      #     the highest reliability.
+      #
+      #   `UsageReportS3Bucket` – The name of the Amazon S3 bucket to receive
+      #   daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will
+      #   deliver a usage report as a CSV file to the bucket. The report
+      #   includes the following information for each SMS message that was
+      #   successfully delivered by your account:
+      #
+      #   * Time that the message was published (in UTC)
+      #
+      #   * Message ID
+      #
+      #   * Destination phone number
+      #
+      #   * Message type
+      #
+      #   * Delivery status
+      #
+      #   * Message price (in USD)
+      #
+      #   * Part number (a message is split into multiple parts if it is too
+      #     long for a single message)
+      #
+      #   * Total number of parts
+      #
+      #   To receive the report, the bucket must have a policy that allows the
+      #   Amazon SNS service principle to perform the `s3:PutObject` and
+      #   `s3:GetBucketLocation` actions.
+      #
+      #   For an example bucket policy and usage report, see [Viewing Statistics
+      #   About SMS Message Delivery][1] in the *Amazon SNS Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.set_sms_attributes({
+      #     attributes: { # required
+      #       "String" => "String",
+      #     },
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def set_sms_attributes(params = {}, options = {})
+        req = build_request(:set_sms_attributes, params)
         req.send_request(options)
       end
 
@@ -872,29 +1162,47 @@ module Aws
       #   The protocol you want to use. Supported protocols include:
       #
       #   * `http` -- delivery of JSON-encoded message via HTTP POST
+      #
       #   * `https` -- delivery of JSON-encoded message via HTTPS POST
+      #
       #   * `email` -- delivery of message via SMTP
+      #
       #   * `email-json` -- delivery of JSON-encoded message via SMTP
+      #
       #   * `sms` -- delivery of message via SMS
+      #
       #   * `sqs` -- delivery of JSON-encoded message to an Amazon SQS queue
+      #
       #   * `application` -- delivery of JSON-encoded message to an EndpointArn
       #     for a mobile app and device.
+      #
+      #   * `lambda` -- delivery of JSON-encoded message to an AWS Lambda
+      #     function.
       # @option params [String] :endpoint
       #   The endpoint that you want to receive notifications. Endpoints vary by
       #   protocol:
       #
       #   * For the `http` protocol, the endpoint is an URL beginning with
       #     \"http://\"
+      #
       #   * For the `https` protocol, the endpoint is a URL beginning with
       #     \"https://\"
+      #
       #   * For the `email` protocol, the endpoint is an email address
+      #
       #   * For the `email-json` protocol, the endpoint is an email address
+      #
       #   * For the `sms` protocol, the endpoint is a phone number of an
       #     SMS-enabled device
+      #
       #   * For the `sqs` protocol, the endpoint is the ARN of an Amazon SQS
       #     queue
+      #
       #   * For the `application` protocol, the endpoint is the EndpointArn of a
       #     mobile app and device.
+      #
+      #   * For the `lambda` protocol, the endpoint is the ARN of an AWS Lambda
+      #     function.
       # @return [Types::SubscribeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SubscribeResponse#subscription_arn #SubscriptionArn} => String

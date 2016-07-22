@@ -232,7 +232,10 @@
   },
   "S3": {
     "models": "s3/2006-03-01",
-    "endpoint": "s3"
+    "endpoint": "s3",
+    "dependencies": {
+      "aws-sdk-kms": "~> 1.0"
+    }
   },
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10",
@@ -264,7 +267,8 @@
   },
   "STS": {
     "models": "sts/2011-06-15",
-    "endpoint": "sts"
+    "endpoint": "sts",
+    "gem_dir": "gems/aws-sdk-core"
   },
   "Support": {
     "models": "support/2013-04-15",

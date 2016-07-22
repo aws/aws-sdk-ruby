@@ -186,8 +186,15 @@ module Aws
       # An AWS Lambda function that evaluates configuration items to assess
       # whether your AWS resources comply with your desired configurations.
       # This function can run when AWS Config detects a configuration change
-      # to an AWS resource, or when it delivers a configuration snapshot of
-      # the resources in the account.
+      # to an AWS resource and at a periodic frequency that you choose (for
+      # example, every 24 hours).
+      #
+      # <note markdown="1"> You can use the AWS CLI and AWS SDKs if you want to create a rule that
+      # triggers evaluations for your resources when AWS Config delivers the
+      # configuration snapshot. For more information, see
+      # ConfigSnapshotDeliveryProperties.
+      #
+      #  </note>
       #
       # For more information about developing and using AWS Config rules, see
       # [Evaluating AWS Resource Configurations with AWS Config][1] in the
@@ -216,13 +223,14 @@ module Aws
       #           source_details: [
       #             {
       #               event_source: "aws.config", # accepts aws.config
-      #               message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted
+      #               message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+      #               maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #             },
       #           ],
       #         },
       #         input_parameters: "StringWithCharLimit256",
       #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-      #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING
+      #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #       }
       class ConfigRule < Aws::Structure.new(
         :config_rule_name,
@@ -264,7 +272,8 @@ module Aws
 
         # @!attribute [rw] source
         #   Provides the rule owner (AWS or customer), the rule identifier, and
-        #   the events that cause the function to evaluate your AWS resources.
+        #   the notifications that cause the function to evaluate your AWS
+        #   resources.
         #   @return [Types::Source]
 
         # @!attribute [rw] input_parameters
@@ -273,31 +282,43 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] maximum_execution_frequency
-        #   The maximum frequency at which the AWS Config rule runs evaluations.
+        #   If you want to create a rule that evaluates at a frequency that is
+        #   independent of the configuration snapshot delivery, use the
+        #   `MaximumExecutionFrequency` parameter in the SourceDetail object.
         #
-        #   If your rule is periodic, meaning it runs an evaluation when AWS
-        #   Config delivers a configuration snapshot, then it cannot run
-        #   evaluations more frequently than AWS Config delivers the snapshots.
-        #   For periodic rules, set the value of the `MaximumExecutionFrequency`
-        #   key to be equal to or greater than the value of the
-        #   `deliveryFrequency` key, which is part of
-        #   `ConfigSnapshotDeliveryProperties`. To update the frequency with
-        #   which AWS Config delivers your snapshots, use the
-        #   `PutDeliveryChannel` action.
+        #   <note markdown="1"> If you want to create a rule that triggers evaluations for your
+        #   resources when AWS Config delivers the configuration snapshot, see
+        #   the following:
+        #
+        #    </note>
+        #
+        #   A rule that runs an evaluation when AWS Config delivers a
+        #   configuration snapshot cannot run evaluations more frequently than
+        #   AWS Config delivers the snapshots. Set the value of the
+        #   `MaximumExecutionFrequency` to be equal to or greater than the value
+        #   of the `deliveryFrequency` key, which is part of
+        #   `ConfigSnapshotDeliveryProperties`.
+        #
+        #   For more information, see ConfigSnapshotDeliveryProperties.
         #   @return [String]
 
         # @!attribute [rw] config_rule_state
-        #   Indicates whether the AWS Config rule is active or currently being
-        #   deleted by AWS Config.
+        #   Indicates whether the AWS Config rule is active or is currently
+        #   being deleted by AWS Config. It can also indicate the evaluation
+        #   status for the Config rule.
+        #
+        #   AWS Config sets the state of the rule to `EVALUATING` temporarily
+        #   after you use the `StartConfigRulesEvaluation` request to evaluate
+        #   your resources against the Config rule.
+        #
+        #   AWS Config sets the state of the rule to `DELETING_RESULTS`
+        #   temporarily after you use the `DeleteEvaluationResults` request to
+        #   delete the current evaluation results for the Config rule.
         #
         #   AWS Config sets the state of a rule to `DELETING` temporarily after
         #   you use the `DeleteConfigRule` request to delete the rule. After AWS
-        #   Config finishes deleting a rule, the rule and all of its evaluations
-        #   are erased and no longer available.
-        #
-        #   You cannot add a rule to AWS Config that has the state set to
-        #   `DELETING`. If you want to delete a rule, you must use the
-        #   `DeleteConfigRule` request.
+        #   Config deletes the rule, the rule and all of its evaluations are
+        #   erased and are no longer available.
         #   @return [String]
 
       end
@@ -306,8 +327,8 @@ module Aws
       # includes information such as the last time the rule ran, the last time
       # it failed, and the related error for the last failure.
       #
-      # This action does not return status information about customer managed
-      # Config rules.
+      # This action does not return status information about custom Config
+      # rules.
       class ConfigRuleEvaluationStatus < Aws::Structure.new(
         :config_rule_name,
         :config_rule_arn,
@@ -378,8 +399,49 @@ module Aws
 
       end
 
-      # Options for how AWS Config delivers configuration snapshots to the
-      # Amazon S3 bucket in your delivery channel.
+      # Shows the options for how often AWS Config delivers configuration
+      # snapshots to the Amazon S3 bucket in your delivery channel.
+      #
+      # <note markdown="1"> If you want to create a rule that triggers evaluations for your
+      # resources when AWS Config delivers the configuration snapshot, see the
+      # following:
+      #
+      #  </note>
+      #
+      # The frequency for a rule that triggers evaluations for your resources
+      # when AWS Config delivers the configuration snapshot is set by one of
+      # two values, depending on which is less frequent:
+      #
+      # * The value for the `deliveryFrequency` parameter within the delivery
+      #   channel configuration, which sets how often AWS Config delivers
+      #   configuration snapshots. This value also sets how often AWS Config
+      #   invokes evaluations for Config rules.
+      #
+      # * The value for the `MaximumExecutionFrequency` parameter, which sets
+      #   the maximum frequency with which AWS Config invokes evaluations for
+      #   the rule. For more information, see ConfigRule.
+      #
+      # If the `deliveryFrequency` value is less frequent than the
+      # `MaximumExecutionFrequency` value for a rule, AWS Config invokes the
+      # rule only as often as the `deliveryFrequency` value.
+      #
+      # 1.  For example, you have a rule and you specify the
+      #     `MaximumExecutionFrequency` value to be `Six_Hours`.
+      #
+      # 2.  You then specify the delivery channel `deliveryFrequency` value to
+      #     `TwentyFour_Hours`.
+      #
+      # 3.  Because the value for `deliveryFrequency` is less frequent than
+      #     `MaximumExecutionFrequency`, AWS Config invokes evaluations for
+      #     the rule every 24 hours.
+      #
+      # You should set the `MaximumExecutionFrequency` value to be at least as
+      # frequent as the `deliveryFrequency` value. You can view the
+      # `deliveryFrequency` value by using the `DescribeDeliveryChannnels`
+      # action.
+      #
+      # To update the frequency with which AWS Config delivers your
+      # configuration snapshots, use the `PutDeliveryChannel` action.
       # @note When making an API call, pass ConfigSnapshotDeliveryProperties
       #   data as a hash:
       #
@@ -390,8 +452,8 @@ module Aws
         :delivery_frequency)
 
         # @!attribute [rw] delivery_frequency
-        #   The frequency with which a AWS Config recurringly delivers
-        #   configuration snapshots.
+        #   The frequency with which AWS Config delivers configuration
+        #   snapshots.
         #   @return [String]
 
       end
@@ -453,7 +515,8 @@ module Aws
         :tags,
         :related_events,
         :relationships,
-        :configuration)
+        :configuration,
+        :supplementary_configuration)
 
         # @!attribute [rw] version
         #   The version number of the resource configuration.
@@ -538,6 +601,12 @@ module Aws
         #   The description of the resource configuration.
         #   @return [String]
 
+        # @!attribute [rw] supplementary_configuration
+        #   Configuration attributes that AWS Config returns for certain
+        #   resource types to supplement the information returned for the
+        #   `configuration` parameter.
+        #   @return [Hash<String,String>]
+
       end
 
       # An object that represents the recording of configuration changes of an
@@ -551,7 +620,7 @@ module Aws
       #         recording_group: {
       #           all_supported: false,
       #           include_global_resource_types: false,
-      #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #         },
       #       }
       class ConfigurationRecorder < Aws::Structure.new(
@@ -637,6 +706,24 @@ module Aws
 
       end
 
+      # The request object for the `DeleteConfigurationRecorder` action.
+      # @note When making an API call, pass DeleteConfigurationRecorderRequest
+      #   data as a hash:
+      #
+      #       {
+      #         configuration_recorder_name: "RecorderName", # required
+      #       }
+      class DeleteConfigurationRecorderRequest < Aws::Structure.new(
+        :configuration_recorder_name)
+
+        # @!attribute [rw] configuration_recorder_name
+        #   The name of the configuration recorder to be deleted. You can
+        #   retrieve the name of your configuration recorder by using the
+        #   `DescribeConfigurationRecorders` action.
+        #   @return [String]
+
+      end
+
       # The input for the DeleteDeliveryChannel action. The action accepts the
       # following data in JSON format.
       # @note When making an API call, pass DeleteDeliveryChannelRequest
@@ -653,6 +740,26 @@ module Aws
         #   @return [String]
 
       end
+
+      # @note When making an API call, pass DeleteEvaluationResultsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         config_rule_name: "StringWithCharLimit64", # required
+      #       }
+      class DeleteEvaluationResultsRequest < Aws::Structure.new(
+        :config_rule_name)
+
+        # @!attribute [rw] config_rule_name
+        #   The name of the Config rule for which you want to delete the
+        #   evaluation results.
+        #   @return [String]
+
+      end
+
+      # The output when you delete the evaluation results for the specified
+      # Config rule.
+      class DeleteEvaluationResultsResponse < Aws::EmptyStructure; end
 
       # The input for the DeliverConfigSnapshot action.
       # @note When making an API call, pass DeliverConfigSnapshotRequest
@@ -681,8 +788,8 @@ module Aws
 
       end
 
-      # A logical container used for storing the configuration changes of an
-      # AWS resource.
+      # The channel through which AWS Config delivers notifications and
+      # updated configuration states.
       # @note When making an API call, pass DeliveryChannel
       #   data as a hash:
       #
@@ -703,14 +810,26 @@ module Aws
         :config_snapshot_delivery_properties)
 
         # @!attribute [rw] name
-        #   The name of the delivery channel. By default, AWS Config
-        #   automatically assigns the name "default" when creating the delivery
-        #   channel. You cannot change the assigned name.
+        #   The name of the delivery channel. By default, AWS Config assigns the
+        #   name "default" when creating the delivery channel. To change the
+        #   delivery channel name, you must use the DeleteDeliveryChannel action
+        #   to delete your current delivery channel, and then you must use the
+        #   PutDeliveryChannel command to create a delivery channel that has the
+        #   desired name.
         #   @return [String]
 
         # @!attribute [rw] s3_bucket_name
-        #   The name of the Amazon S3 bucket used to store configuration history
-        #   for the delivery channel.
+        #   The name of the Amazon S3 bucket to which AWS Config delivers
+        #   configuration snapshots and configuration history files.
+        #
+        #   If you specify a bucket that belongs to another AWS account, that
+        #   bucket must have policies that grant access permissions to AWS
+        #   Config. For more information, see [Permissions for the Amazon S3
+        #   Bucket][1] in the AWS Config Developer Guide.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html
         #   @return [String]
 
         # @!attribute [rw] s3_key_prefix
@@ -718,13 +837,63 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] sns_topic_arn
-        #   The Amazon Resource Name (ARN) of the SNS topic that AWS Config
-        #   delivers notifications to.
+        #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS
+        #   Config sends notifications about configuration changes.
+        #
+        #   If you choose a topic from another account, the topic must have
+        #   policies that grant access permissions to AWS Config. For more
+        #   information, see [Permissions for the Amazon SNS Topic][1] in the
+        #   AWS Config Developer Guide.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html
         #   @return [String]
 
         # @!attribute [rw] config_snapshot_delivery_properties
-        #   Options for how AWS Config delivers configuration snapshots to the
-        #   Amazon S3 bucket in your delivery channel.
+        #   Shows the options for how often AWS Config delivers configuration
+        #   snapshots to the Amazon S3 bucket in your delivery channel.
+        #
+        #   <note markdown="1"> If you want to create a rule that triggers evaluations for your
+        #   resources when AWS Config delivers the configuration snapshot, see
+        #   the following:
+        #
+        #    </note>
+        #
+        #   The frequency for a rule that triggers evaluations for your
+        #   resources when AWS Config delivers the configuration snapshot is set
+        #   by one of two values, depending on which is less frequent:
+        #
+        #   * The value for the `deliveryFrequency` parameter within the
+        #     delivery channel configuration, which sets how often AWS Config
+        #     delivers configuration snapshots. This value also sets how often
+        #     AWS Config invokes evaluations for Config rules.
+        #
+        #   * The value for the `MaximumExecutionFrequency` parameter, which
+        #     sets the maximum frequency with which AWS Config invokes
+        #     evaluations for the rule. For more information, see ConfigRule.
+        #
+        #   If the `deliveryFrequency` value is less frequent than the
+        #   `MaximumExecutionFrequency` value for a rule, AWS Config invokes the
+        #   rule only as often as the `deliveryFrequency` value.
+        #
+        #   1.  For example, you have a rule and you specify the
+        #       `MaximumExecutionFrequency` value to be `Six_Hours`.
+        #
+        #   2.  You then specify the delivery channel `deliveryFrequency` value
+        #       to `TwentyFour_Hours`.
+        #
+        #   3.  Because the value for `deliveryFrequency` is less frequent than
+        #       `MaximumExecutionFrequency`, AWS Config invokes evaluations for
+        #       the rule every 24 hours.
+        #
+        #   You should set the `MaximumExecutionFrequency` value to be at least
+        #   as frequent as the `deliveryFrequency` value. You can view the
+        #   `deliveryFrequency` value by using the `DescribeDeliveryChannnels`
+        #   action.
+        #
+        #   To update the frequency with which AWS Config delivers your
+        #   configuration snapshots, use the `PutDeliveryChannel` action.
         #   @return [Types::ConfigSnapshotDeliveryProperties]
 
       end
@@ -1350,7 +1519,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #         resource_id: "ResourceId", # required
       #         later_time: Time.now,
       #         earlier_time: Time.now,
@@ -1425,7 +1594,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #         resource_ids: ["ResourceId"],
       #         resource_name: "ResourceName",
       #         limit: 1,
@@ -1514,13 +1683,14 @@ module Aws
       #             source_details: [
       #               {
       #                 event_source: "aws.config", # accepts aws.config
-      #                 message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted
+      #                 message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+      #                 maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #               },
       #             ],
       #           },
       #           input_parameters: "StringWithCharLimit256",
       #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-      #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING
+      #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #         },
       #       }
       class PutConfigRuleRequest < Aws::Structure.new(
@@ -1530,8 +1700,15 @@ module Aws
         #   An AWS Lambda function that evaluates configuration items to assess
         #   whether your AWS resources comply with your desired configurations.
         #   This function can run when AWS Config detects a configuration change
-        #   to an AWS resource, or when it delivers a configuration snapshot of
-        #   the resources in the account.
+        #   to an AWS resource and at a periodic frequency that you choose (for
+        #   example, every 24 hours).
+        #
+        #   <note markdown="1"> You can use the AWS CLI and AWS SDKs if you want to create a rule
+        #   that triggers evaluations for your resources when AWS Config
+        #   delivers the configuration snapshot. For more information, see
+        #   ConfigSnapshotDeliveryProperties.
+        #
+        #    </note>
         #
         #   For more information about developing and using AWS Config rules,
         #   see [Evaluating AWS Resource Configurations with AWS Config][1] in
@@ -1555,7 +1732,7 @@ module Aws
       #           recording_group: {
       #             all_supported: false,
       #             include_global_resource_types: false,
-      #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #           },
       #         },
       #       }
@@ -1655,7 +1832,16 @@ module Aws
       # Global resources are not tied to an individual region and can be used
       # in all regions.
       #
-      # <important>The configuration details for any global resource are the same in all regions. If you customize AWS Config in multiple regions to record global resources, it will create multiple configuration items each time a global resource changes: one configuration item for each region. These configuration items will contain identical data. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources, unless you want the configuration items to be available in multiple regions.</important>
+      # <important markdown="1"> The configuration details for any global resource are the same in all
+      # regions. If you customize AWS Config in multiple regions to record
+      # global resources, it will create multiple configuration items each
+      # time a global resource changes: one configuration item for each
+      # region. These configuration items will contain identical data. To
+      # prevent duplicate configuration items, you should consider customizing
+      # AWS Config in only one region to record global resources, unless you
+      # want the configuration items to be available in multiple regions.
+      #
+      #  </important>
       #
       # If you don\'t want AWS Config to record all resources, you can specify
       # which types of resources it will record with the `resourceTypes`
@@ -1677,7 +1863,7 @@ module Aws
       #       {
       #         all_supported: false,
       #         include_global_resource_types: false,
-      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User
+      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
       #       }
       class RecordingGroup < Aws::Structure.new(
         :all_supported,
@@ -1847,7 +2033,8 @@ module Aws
       #         source_details: [
       #           {
       #             event_source: "aws.config", # accepts aws.config
-      #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted
+      #             message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+      #             maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #           },
       #         ],
       #       }
@@ -1865,8 +2052,8 @@ module Aws
         #   For AWS managed Config rules, a pre-defined identifier from a list.
         #   To reference the list, see [Using AWS Managed Config Rules][1].
         #
-        #   For customer managed Config rules, the identifier is the Amazon
-        #   Resource Name (ARN) of the rule\'s AWS Lambda function.
+        #   For custom Config rules, the identifier is the Amazon Resource Name
+        #   (ARN) of the rule\'s AWS Lambda function.
         #
         #
         #
@@ -1880,18 +2067,22 @@ module Aws
 
       end
 
-      # Provides the source and type of the event that triggers AWS Config to
-      # evaluate your AWS resources against a rule.
+      # Provides the source and the message type that trigger AWS Config to
+      # evaluate your AWS resources against a rule. It also provides the
+      # frequency with which you want AWS Config to run evaluations for the
+      # rule if the trigger type is periodic.
       # @note When making an API call, pass SourceDetail
       #   data as a hash:
       #
       #       {
       #         event_source: "aws.config", # accepts aws.config
-      #         message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted
+      #         message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
+      #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #       }
       class SourceDetail < Aws::Structure.new(
         :event_source,
-        :message_type)
+        :message_type,
+        :maximum_execution_frequency)
 
         # @!attribute [rw] event_source
         #   The source of the event, such as an AWS service, that triggers AWS
@@ -1900,14 +2091,48 @@ module Aws
 
         # @!attribute [rw] message_type
         #   The type of SNS message that triggers AWS Config to run an
-        #   evaluation. For evaluations that are initiated when AWS Config
-        #   delivers a configuration item change notification, you must use
-        #   `ConfigurationItemChangeNotification`. For evaluations that are
-        #   initiated when AWS Config delivers a configuration snapshot, you
-        #   must use `ConfigurationSnapshotDeliveryCompleted`.
+        #   evaluation.
+        #
+        #   For evaluations that are initiated when AWS Config delivers a
+        #   configuration item change notification, you must use
+        #   `ConfigurationItemChangeNotification`.
+        #
+        #   For evaluations that are initiated at a frequency that you choose
+        #   (for example, every 24 hours), you must use `ScheduledNotification`.
+        #
+        #   For evaluations that are initiated when AWS Config delivers a
+        #   configuration snapshot, you must use
+        #   `ConfigurationSnapshotDeliveryCompleted`.
+        #   @return [String]
+
+        # @!attribute [rw] maximum_execution_frequency
+        #   If the trigger type for your rule includes periodic, AWS Config runs
+        #   evaluations for the rule at a frequency that you choose. If you
+        #   specify a value for `MaximumExecutionFrequency`, then `MessageType`
+        #   must use the `ScheduledNotification` value.
         #   @return [String]
 
       end
+
+      # @note When making an API call, pass StartConfigRulesEvaluationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         config_rule_names: ["StringWithCharLimit64"],
+      #       }
+      class StartConfigRulesEvaluationRequest < Aws::Structure.new(
+        :config_rule_names)
+
+        # @!attribute [rw] config_rule_names
+        #   The list of names of Config rules that you want to run evaluations
+        #   for.
+        #   @return [Array<String>]
+
+      end
+
+      # The output when you start the evaluation for the specified Config
+      # rule.
+      class StartConfigRulesEvaluationResponse < Aws::EmptyStructure; end
 
       # The input for the StartConfigurationRecorder action.
       # @note When making an API call, pass StartConfigurationRecorderRequest

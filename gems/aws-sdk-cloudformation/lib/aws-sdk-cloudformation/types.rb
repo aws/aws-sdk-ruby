@@ -160,7 +160,7 @@ module Aws
       #             use_previous_value: false,
       #           },
       #         ],
-      #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM
+      #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
       #         resource_types: ["ResourceType"],
       #         notification_arns: ["NotificationARN"],
       #         tags: [
@@ -228,23 +228,30 @@ module Aws
         #   @return [Array<Types::Parameter>]
 
         # @!attribute [rw] capabilities
-        #   A list of capabilities that you must specify before AWS
-        #   CloudFormation can update certain stacks. Some stack templates might
-        #   include resources that can affect permissions in your AWS account,
-        #   for example, by creating new AWS Identity and Access Management
-        #   (IAM) users. For those stacks, you must explicitly acknowledge their
-        #   capabilities by specifying this parameter.
+        #   A list of values that you must specify before AWS CloudFormation can
+        #   update certain stacks. Some stack templates might include resources
+        #   that can affect permissions in your AWS account, for example, by
+        #   creating new AWS Identity and Access Management (IAM) users. For
+        #   those stacks, you must explicitly acknowledge their capabilities by
+        #   specifying this parameter.
         #
-        #   Currently, the only valid value is `CAPABILITY_IAM`, which is
-        #   required for the following resources: [ AWS::IAM::AccessKey][1], [
+        #   The only valid values are `CAPABILITY_IAM` and
+        #   `CAPABILITY_NAMED_IAM`. The following resources require you to
+        #   specify this parameter: [ AWS::IAM::AccessKey][1], [
         #   AWS::IAM::Group][2], [ AWS::IAM::InstanceProfile][3], [
         #   AWS::IAM::Policy][4], [ AWS::IAM::Role][5], [ AWS::IAM::User][6],
         #   and [ AWS::IAM::UserToGroupAddition][7]. If your stack template
         #   contains these resources, we recommend that you review all
         #   permissions associated with them and edit their permissions if
-        #   necessary. If your template contains any of the listed resources and
-        #   you don\'t specify this parameter, this action returns an
-        #   `InsufficientCapabilities` error.
+        #   necessary.
+        #
+        #   If you have IAM resources, you can specify either capability. If you
+        #   have IAM resources with custom names, you must specify
+        #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+        #   action returns an `InsufficientCapabilities` error.
+        #
+        #   For more information, see [Acknowledging IAM Resources in AWS
+        #   CloudFormation Templates][8].
         #
         #
         #
@@ -255,6 +262,7 @@ module Aws
         #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
         #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
         #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+        #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
         #   @return [Array<String>]
 
         # @!attribute [rw] resource_types
@@ -339,7 +347,7 @@ module Aws
       #         disable_rollback: false,
       #         timeout_in_minutes: 1,
       #         notification_arns: ["NotificationARN"],
-      #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM
+      #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
       #         resource_types: ["ResourceType"],
       #         on_failure: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK, DELETE
       #         stack_policy_body: "StackPolicyBody",
@@ -438,23 +446,30 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] capabilities
-        #   A list of capabilities that you must specify before AWS
-        #   CloudFormation can create certain stacks. Some stack templates might
-        #   include resources that can affect permissions in your AWS account,
-        #   for example, by creating new AWS Identity and Access Management
-        #   (IAM) users. For those stacks, you must explicitly acknowledge their
-        #   capabilities by specifying this parameter.
+        #   A list of values that you must specify before AWS CloudFormation can
+        #   create certain stacks. Some stack templates might include resources
+        #   that can affect permissions in your AWS account, for example, by
+        #   creating new AWS Identity and Access Management (IAM) users. For
+        #   those stacks, you must explicitly acknowledge their capabilities by
+        #   specifying this parameter.
         #
-        #   Currently, the only valid value is `CAPABILITY_IAM`, which is
-        #   required for the following resources: [ AWS::IAM::AccessKey][1], [
+        #   The only valid values are `CAPABILITY_IAM` and
+        #   `CAPABILITY_NAMED_IAM`. The following resources require you to
+        #   specify this parameter: [ AWS::IAM::AccessKey][1], [
         #   AWS::IAM::Group][2], [ AWS::IAM::InstanceProfile][3], [
         #   AWS::IAM::Policy][4], [ AWS::IAM::Role][5], [ AWS::IAM::User][6],
         #   and [ AWS::IAM::UserToGroupAddition][7]. If your stack template
         #   contains these resources, we recommend that you review all
         #   permissions associated with them and edit their permissions if
-        #   necessary. If your template contains any of the listed resources and
-        #   you don\'t specify this parameter, this action returns an
-        #   `InsufficientCapabilities` error.
+        #   necessary.
+        #
+        #   If you have IAM resources, you can specify either capability. If you
+        #   have IAM resources with custom names, you must specify
+        #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+        #   action returns an `InsufficientCapabilities` error.
+        #
+        #   For more information, see [Acknowledging IAM Resources in AWS
+        #   CloudFormation Templates][8].
         #
         #
         #
@@ -465,6 +480,7 @@ module Aws
         #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
         #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
         #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+        #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
         #   @return [Array<String>]
 
         # @!attribute [rw] resource_types
@@ -1195,12 +1211,18 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] capabilities
-        #   The capabilities found within the template. Currently, AWS
-        #   CloudFormation supports only the CAPABILITY\_IAM capability. If your
-        #   template contains IAM resources, you must specify the
-        #   CAPABILITY\_IAM value for this parameter when you use the
+        #   The capabilities found within the template. If your template
+        #   contains IAM resources, you must specify the CAPABILITY\_IAM or
+        #   CAPABILITY\_NAMED\_IAM value for this parameter when you use the
         #   CreateStack or UpdateStack actions with your template; otherwise,
         #   those actions return an InsufficientCapabilities error.
+        #
+        #   For more information, see [Acknowledging IAM Resources in AWS
+        #   CloudFormation Templates][1].
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
         #   @return [Array<String>]
 
         # @!attribute [rw] capabilities_reason
@@ -2134,7 +2156,7 @@ module Aws
       #             use_previous_value: false,
       #           },
       #         ],
-      #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM
+      #         capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
       #         resource_types: ["ResourceType"],
       #         stack_policy_body: "StackPolicyBody",
       #         stack_policy_url: "StackPolicyURL",
@@ -2231,23 +2253,30 @@ module Aws
         #   @return [Array<Types::Parameter>]
 
         # @!attribute [rw] capabilities
-        #   A list of capabilities that you must specify before AWS
-        #   CloudFormation can update certain stacks. Some stack templates might
-        #   include resources that can affect permissions in your AWS account,
-        #   for example, by creating new AWS Identity and Access Management
-        #   (IAM) users. For those stacks, you must explicitly acknowledge their
-        #   capabilities by specifying this parameter.
+        #   A list of values that you must specify before AWS CloudFormation can
+        #   update certain stacks. Some stack templates might include resources
+        #   that can affect permissions in your AWS account, for example, by
+        #   creating new AWS Identity and Access Management (IAM) users. For
+        #   those stacks, you must explicitly acknowledge their capabilities by
+        #   specifying this parameter.
         #
-        #   Currently, the only valid value is `CAPABILITY_IAM`, which is
-        #   required for the following resources: [ AWS::IAM::AccessKey][1], [
+        #   The only valid values are `CAPABILITY_IAM` and
+        #   `CAPABILITY_NAMED_IAM`. The following resources require you to
+        #   specify this parameter: [ AWS::IAM::AccessKey][1], [
         #   AWS::IAM::Group][2], [ AWS::IAM::InstanceProfile][3], [
         #   AWS::IAM::Policy][4], [ AWS::IAM::Role][5], [ AWS::IAM::User][6],
         #   and [ AWS::IAM::UserToGroupAddition][7]. If your stack template
         #   contains these resources, we recommend that you review all
         #   permissions associated with them and edit their permissions if
-        #   necessary. If your template contains any of the listed resources and
-        #   you don\'t specify this parameter, this action returns an
-        #   `InsufficientCapabilities` error.
+        #   necessary.
+        #
+        #   If you have IAM resources, you can specify either capability. If you
+        #   have IAM resources with custom names, you must specify
+        #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+        #   action returns an `InsufficientCapabilities` error.
+        #
+        #   For more information, see [Acknowledging IAM Resources in AWS
+        #   CloudFormation Templates][8].
         #
         #
         #
@@ -2258,6 +2287,7 @@ module Aws
         #   [5]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-iam-role.html
         #   [6]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-user.html
         #   [7]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-addusertogroup.html
+        #   [8]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
         #   @return [Array<String>]
 
         # @!attribute [rw] resource_types
@@ -2386,12 +2416,18 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] capabilities
-        #   The capabilities found within the template. Currently, AWS
-        #   CloudFormation supports only the CAPABILITY\_IAM capability. If your
-        #   template contains IAM resources, you must specify the
-        #   CAPABILITY\_IAM value for this parameter when you use the
+        #   The capabilities found within the template. If your template
+        #   contains IAM resources, you must specify the CAPABILITY\_IAM or
+        #   CAPABILITY\_NAMED\_IAM value for this parameter when you use the
         #   CreateStack or UpdateStack actions with your template; otherwise,
         #   those actions return an InsufficientCapabilities error.
+        #
+        #   For more information, see [Acknowledging IAM Resources in AWS
+        #   CloudFormation Templates][1].
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
         #   @return [Array<String>]
 
         # @!attribute [rw] capabilities_reason

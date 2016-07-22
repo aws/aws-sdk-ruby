@@ -62,7 +62,10 @@ module Aws
       ConfigurationStateId = Shapes::StringShape.new(name: 'ConfigurationStateId')
       Date = Shapes::TimestampShape.new(name: 'Date')
       DeleteConfigRuleRequest = Shapes::StructureShape.new(name: 'DeleteConfigRuleRequest')
+      DeleteConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationRecorderRequest')
       DeleteDeliveryChannelRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryChannelRequest')
+      DeleteEvaluationResultsRequest = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsRequest')
+      DeleteEvaluationResultsResponse = Shapes::StructureShape.new(name: 'DeleteEvaluationResultsResponse')
       DeliverConfigSnapshotRequest = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotRequest')
       DeliverConfigSnapshotResponse = Shapes::StructureShape.new(name: 'DeliverConfigSnapshotResponse')
       DeliveryChannel = Shapes::StructureShape.new(name: 'DeliveryChannel')
@@ -123,6 +126,7 @@ module Aws
       LastDeliveryChannelDeleteFailedException = Shapes::StructureShape.new(name: 'LastDeliveryChannelDeleteFailedException')
       LaterTime = Shapes::TimestampShape.new(name: 'LaterTime')
       Limit = Shapes::IntegerShape.new(name: 'Limit')
+      LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
       ListDiscoveredResourcesRequest = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesRequest')
       ListDiscoveredResourcesResponse = Shapes::StructureShape.new(name: 'ListDiscoveredResourcesResponse')
       MaxNumberOfConfigRulesExceededException = Shapes::StructureShape.new(name: 'MaxNumberOfConfigRulesExceededException')
@@ -149,6 +153,7 @@ module Aws
       RecorderName = Shapes::StringShape.new(name: 'RecorderName')
       RecorderStatus = Shapes::StringShape.new(name: 'RecorderStatus')
       RecordingGroup = Shapes::StructureShape.new(name: 'RecordingGroup')
+      ReevaluateConfigRuleNames = Shapes::ListShape.new(name: 'ReevaluateConfigRuleNames')
       RelatedEvent = Shapes::StringShape.new(name: 'RelatedEvent')
       RelatedEventList = Shapes::ListShape.new(name: 'RelatedEventList')
       Relationship = Shapes::StructureShape.new(name: 'Relationship')
@@ -170,12 +175,17 @@ module Aws
       Source = Shapes::StructureShape.new(name: 'Source')
       SourceDetail = Shapes::StructureShape.new(name: 'SourceDetail')
       SourceDetails = Shapes::ListShape.new(name: 'SourceDetails')
+      StartConfigRulesEvaluationRequest = Shapes::StructureShape.new(name: 'StartConfigRulesEvaluationRequest')
+      StartConfigRulesEvaluationResponse = Shapes::StructureShape.new(name: 'StartConfigRulesEvaluationResponse')
       StartConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StartConfigurationRecorderRequest')
       StopConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StopConfigurationRecorderRequest')
       String = Shapes::StringShape.new(name: 'String')
       StringWithCharLimit128 = Shapes::StringShape.new(name: 'StringWithCharLimit128')
       StringWithCharLimit256 = Shapes::StringShape.new(name: 'StringWithCharLimit256')
       StringWithCharLimit64 = Shapes::StringShape.new(name: 'StringWithCharLimit64')
+      SupplementaryConfiguration = Shapes::MapShape.new(name: 'SupplementaryConfiguration')
+      SupplementaryConfigurationName = Shapes::StringShape.new(name: 'SupplementaryConfigurationName')
+      SupplementaryConfigurationValue = Shapes::StringShape.new(name: 'SupplementaryConfigurationValue')
       Tags = Shapes::MapShape.new(name: 'Tags')
       ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
       Value = Shapes::StringShape.new(name: 'Value')
@@ -281,6 +291,7 @@ module Aws
       ConfigurationItem.add_member(:related_events, Shapes::ShapeRef.new(shape: RelatedEventList, location_name: "relatedEvents"))
       ConfigurationItem.add_member(:relationships, Shapes::ShapeRef.new(shape: RelationshipList, location_name: "relationships"))
       ConfigurationItem.add_member(:configuration, Shapes::ShapeRef.new(shape: Configuration, location_name: "configuration"))
+      ConfigurationItem.add_member(:supplementary_configuration, Shapes::ShapeRef.new(shape: SupplementaryConfiguration, location_name: "supplementaryConfiguration"))
       ConfigurationItem.struct_class = Types::ConfigurationItem
 
       ConfigurationItemList.member = Shapes::ShapeRef.new(shape: ConfigurationItem)
@@ -309,8 +320,16 @@ module Aws
       DeleteConfigRuleRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
       DeleteConfigRuleRequest.struct_class = Types::DeleteConfigRuleRequest
 
+      DeleteConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
+      DeleteConfigurationRecorderRequest.struct_class = Types::DeleteConfigurationRecorderRequest
+
       DeleteDeliveryChannelRequest.add_member(:delivery_channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "DeliveryChannelName"))
       DeleteDeliveryChannelRequest.struct_class = Types::DeleteDeliveryChannelRequest
+
+      DeleteEvaluationResultsRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: StringWithCharLimit64, required: true, location_name: "ConfigRuleName"))
+      DeleteEvaluationResultsRequest.struct_class = Types::DeleteEvaluationResultsRequest
+
+      DeleteEvaluationResultsResponse.struct_class = Types::DeleteEvaluationResultsResponse
 
       DeliverConfigSnapshotRequest.add_member(:delivery_channel_name, Shapes::ShapeRef.new(shape: ChannelName, required: true, location_name: "deliveryChannelName"))
       DeliverConfigSnapshotRequest.struct_class = Types::DeliverConfigSnapshotRequest
@@ -498,6 +517,8 @@ module Aws
       RecordingGroup.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypeList, location_name: "resourceTypes"))
       RecordingGroup.struct_class = Types::RecordingGroup
 
+      ReevaluateConfigRuleNames.member = Shapes::ShapeRef.new(shape: StringWithCharLimit64)
+
       RelatedEventList.member = Shapes::ShapeRef.new(shape: RelatedEvent)
 
       Relationship.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
@@ -535,15 +556,24 @@ module Aws
 
       SourceDetail.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, location_name: "EventSource"))
       SourceDetail.add_member(:message_type, Shapes::ShapeRef.new(shape: MessageType, location_name: "MessageType"))
+      SourceDetail.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
       SourceDetail.struct_class = Types::SourceDetail
 
       SourceDetails.member = Shapes::ShapeRef.new(shape: SourceDetail)
+
+      StartConfigRulesEvaluationRequest.add_member(:config_rule_names, Shapes::ShapeRef.new(shape: ReevaluateConfigRuleNames, location_name: "ConfigRuleNames"))
+      StartConfigRulesEvaluationRequest.struct_class = Types::StartConfigRulesEvaluationRequest
+
+      StartConfigRulesEvaluationResponse.struct_class = Types::StartConfigRulesEvaluationResponse
 
       StartConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
       StartConfigurationRecorderRequest.struct_class = Types::StartConfigurationRecorderRequest
 
       StopConfigurationRecorderRequest.add_member(:configuration_recorder_name, Shapes::ShapeRef.new(shape: RecorderName, required: true, location_name: "ConfigurationRecorderName"))
       StopConfigurationRecorderRequest.struct_class = Types::StopConfigurationRecorderRequest
+
+      SupplementaryConfiguration.key = Shapes::ShapeRef.new(shape: SupplementaryConfigurationName)
+      SupplementaryConfiguration.value = Shapes::ShapeRef.new(shape: SupplementaryConfigurationValue)
 
       Tags.key = Shapes::ShapeRef.new(shape: Name)
       Tags.value = Shapes::ShapeRef.new(shape: Value)
@@ -573,6 +603,15 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         end)
 
+        api.add_operation(:delete_configuration_recorder, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteConfigurationRecorder"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteConfigurationRecorderRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigurationRecorderException)
+        end)
+
         api.add_operation(:delete_delivery_channel, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteDeliveryChannel"
           o.http_method = "POST"
@@ -581,6 +620,16 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: NoSuchDeliveryChannelException)
           o.errors << Shapes::ShapeRef.new(shape: LastDeliveryChannelDeleteFailedException)
+        end)
+
+        api.add_operation(:delete_evaluation_results, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteEvaluationResults"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteEvaluationResultsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteEvaluationResultsResponse)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         end)
 
         api.add_operation(:deliver_config_snapshot, Seahorse::Model::Operation.new.tap do |o|
@@ -747,6 +796,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: MaxNumberOfConfigRulesExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
           o.errors << Shapes::ShapeRef.new(shape: InsufficientPermissionsException)
+          o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
         end)
 
         api.add_operation(:put_configuration_recorder, Seahorse::Model::Operation.new.tap do |o|
@@ -785,6 +835,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidResultTokenException)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+        end)
+
+        api.add_operation(:start_config_rules_evaluation, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "StartConfigRulesEvaluation"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: StartConfigRulesEvaluationRequest)
+          o.output = Shapes::ShapeRef.new(shape: StartConfigRulesEvaluationResponse)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         end)
 
         api.add_operation(:start_configuration_recorder, Seahorse::Model::Operation.new.tap do |o|

@@ -462,13 +462,13 @@ module Aws
         #     with the two- or three-letter code for the language of the caption
         #     in the output file names.
         #
-        #   If you don\'t include `\{language\}` in the file name pattern,
+        #   If you don't include `\{language\}` in the file name pattern,
         #   Elastic Transcoder automatically appends \"`\{language\}`\" to the
         #   value that you specify for the description. In addition, Elastic
         #   Transcoder automatically appends the count to the end of the segment
         #   files.
         #
-        #   For example, suppose you\'re transcoding into srt format. When you
+        #   For example, suppose you're transcoding into srt format. When you
         #   enter \"Sydney-\\\{language\\}-sunrise\", and the language of the
         #   captions is English (en), the name of the first caption file will be
         #   Sydney-en-sunrise00000.srt.
@@ -487,7 +487,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         key: "Key",
+      #         key: "LongKey",
       #         language: "Key",
       #         time_offset: "TimeOffset",
       #         label: "Name",
@@ -553,7 +553,7 @@ module Aws
       #         merge_policy: "CaptionMergePolicy",
       #         caption_sources: [
       #           {
-      #             key: "Key",
+      #             key: "LongKey",
       #             language: "Key",
       #             time_offset: "TimeOffset",
       #             label: "Name",
@@ -699,7 +699,7 @@ module Aws
       #           merge_policy: "CaptionMergePolicy",
       #           caption_sources: [
       #             {
-      #               key: "Key",
+      #               key: "LongKey",
       #               language: "Key",
       #               time_offset: "TimeOffset",
       #               label: "Name",
@@ -1031,7 +1031,7 @@ module Aws
       #       {
       #         pipeline_id: "Id", # required
       #         input: { # required
-      #           key: "Key",
+      #           key: "LongKey",
       #           frame_rate: "FrameRate",
       #           resolution: "Resolution",
       #           aspect_ratio: "AspectRatio",
@@ -1106,7 +1106,7 @@ module Aws
       #             merge_policy: "CaptionMergePolicy",
       #             caption_sources: [
       #               {
-      #                 key: "Key",
+      #                 key: "LongKey",
       #                 language: "Key",
       #                 time_offset: "TimeOffset",
       #                 label: "Name",
@@ -1194,7 +1194,7 @@ module Aws
       #               merge_policy: "CaptionMergePolicy",
       #               caption_sources: [
       #                 {
-      #                   key: "Key",
+      #                   key: "LongKey",
       #                   language: "Key",
       #                   time_offset: "TimeOffset",
       #                   label: "Name",
@@ -2139,7 +2139,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         key: "Key",
+      #         key: "LongKey",
       #         frame_rate: "FrameRate",
       #         resolution: "Resolution",
       #         aspect_ratio: "AspectRatio",
@@ -3164,7 +3164,7 @@ module Aws
         #   of the client manifest for Smooth Streaming outputs, and in the
         #   EXT-X-DXDRM and EXT-XDXDRMINFO metadata tags for HLS playlist
         #   outputs. An example URL looks like this:
-        #   <programlisting>https://www.example.com/exampleKey/</programlisting>
+        #   `https://www.example.com/exampleKey/`
         #   @return [String]
 
       end

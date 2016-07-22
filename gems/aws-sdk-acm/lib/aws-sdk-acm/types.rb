@@ -71,7 +71,8 @@ module Aws
         :not_after,
         :key_algorithm,
         :signature_algorithm,
-        :in_use_by)
+        :in_use_by,
+        :failure_reason)
 
         # @!attribute [rw] certificate_arn
         #   The Amazon Resource Name (ARN) of the certificate. For more
@@ -160,6 +161,17 @@ module Aws
         #   A list of ARNs for the resources that are using the certificate. An
         #   ACM Certificate can be used by multiple AWS resources.
         #   @return [Array<String>]
+
+        # @!attribute [rw] failure_reason
+        #   The reason the certificate request failed. This value exists only
+        #   when the structure\'s `Status` is `FAILED`. For more information,
+        #   see [Certificate Request Failed][1] in the *AWS Certificate Manager
+        #   User Guide*.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
+        #   @return [String]
 
       end
 

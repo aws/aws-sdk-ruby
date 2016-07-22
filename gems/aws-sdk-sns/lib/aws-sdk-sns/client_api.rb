@@ -23,6 +23,8 @@ module Aws
       AddPermissionInput = Shapes::StructureShape.new(name: 'AddPermissionInput')
       AuthorizationErrorException = Shapes::StructureShape.new(name: 'AuthorizationErrorException')
       Binary = Shapes::BlobShape.new(name: 'Binary')
+      CheckIfPhoneNumberIsOptedOutInput = Shapes::StructureShape.new(name: 'CheckIfPhoneNumberIsOptedOutInput')
+      CheckIfPhoneNumberIsOptedOutResponse = Shapes::StructureShape.new(name: 'CheckIfPhoneNumberIsOptedOutResponse')
       ConfirmSubscriptionInput = Shapes::StructureShape.new(name: 'ConfirmSubscriptionInput')
       ConfirmSubscriptionResponse = Shapes::StructureShape.new(name: 'ConfirmSubscriptionResponse')
       CreateEndpointResponse = Shapes::StructureShape.new(name: 'CreateEndpointResponse')
@@ -41,6 +43,8 @@ module Aws
       GetEndpointAttributesResponse = Shapes::StructureShape.new(name: 'GetEndpointAttributesResponse')
       GetPlatformApplicationAttributesInput = Shapes::StructureShape.new(name: 'GetPlatformApplicationAttributesInput')
       GetPlatformApplicationAttributesResponse = Shapes::StructureShape.new(name: 'GetPlatformApplicationAttributesResponse')
+      GetSMSAttributesInput = Shapes::StructureShape.new(name: 'GetSMSAttributesInput')
+      GetSMSAttributesResponse = Shapes::StructureShape.new(name: 'GetSMSAttributesResponse')
       GetSubscriptionAttributesInput = Shapes::StructureShape.new(name: 'GetSubscriptionAttributesInput')
       GetSubscriptionAttributesResponse = Shapes::StructureShape.new(name: 'GetSubscriptionAttributesResponse')
       GetTopicAttributesInput = Shapes::StructureShape.new(name: 'GetTopicAttributesInput')
@@ -52,8 +56,11 @@ module Aws
       ListEndpointsByPlatformApplicationResponse = Shapes::StructureShape.new(name: 'ListEndpointsByPlatformApplicationResponse')
       ListOfEndpoints = Shapes::ListShape.new(name: 'ListOfEndpoints')
       ListOfPlatformApplications = Shapes::ListShape.new(name: 'ListOfPlatformApplications')
+      ListPhoneNumbersOptedOutInput = Shapes::StructureShape.new(name: 'ListPhoneNumbersOptedOutInput')
+      ListPhoneNumbersOptedOutResponse = Shapes::StructureShape.new(name: 'ListPhoneNumbersOptedOutResponse')
       ListPlatformApplicationsInput = Shapes::StructureShape.new(name: 'ListPlatformApplicationsInput')
       ListPlatformApplicationsResponse = Shapes::StructureShape.new(name: 'ListPlatformApplicationsResponse')
+      ListString = Shapes::ListShape.new(name: 'ListString')
       ListSubscriptionsByTopicInput = Shapes::StructureShape.new(name: 'ListSubscriptionsByTopicInput')
       ListSubscriptionsByTopicResponse = Shapes::StructureShape.new(name: 'ListSubscriptionsByTopicResponse')
       ListSubscriptionsInput = Shapes::StructureShape.new(name: 'ListSubscriptionsInput')
@@ -64,6 +71,10 @@ module Aws
       MessageAttributeMap = Shapes::MapShape.new(name: 'MessageAttributeMap')
       MessageAttributeValue = Shapes::StructureShape.new(name: 'MessageAttributeValue')
       NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+      OptInPhoneNumberInput = Shapes::StructureShape.new(name: 'OptInPhoneNumberInput')
+      OptInPhoneNumberResponse = Shapes::StructureShape.new(name: 'OptInPhoneNumberResponse')
+      PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+      PhoneNumberList = Shapes::ListShape.new(name: 'PhoneNumberList')
       PlatformApplication = Shapes::StructureShape.new(name: 'PlatformApplication')
       PlatformApplicationDisabledException = Shapes::StructureShape.new(name: 'PlatformApplicationDisabledException')
       PublishInput = Shapes::StructureShape.new(name: 'PublishInput')
@@ -71,6 +82,8 @@ module Aws
       RemovePermissionInput = Shapes::StructureShape.new(name: 'RemovePermissionInput')
       SetEndpointAttributesInput = Shapes::StructureShape.new(name: 'SetEndpointAttributesInput')
       SetPlatformApplicationAttributesInput = Shapes::StructureShape.new(name: 'SetPlatformApplicationAttributesInput')
+      SetSMSAttributesInput = Shapes::StructureShape.new(name: 'SetSMSAttributesInput')
+      SetSMSAttributesResponse = Shapes::StructureShape.new(name: 'SetSMSAttributesResponse')
       SetSubscriptionAttributesInput = Shapes::StructureShape.new(name: 'SetSubscriptionAttributesInput')
       SetTopicAttributesInput = Shapes::StructureShape.new(name: 'SetTopicAttributesInput')
       String = Shapes::StringShape.new(name: 'String')
@@ -80,6 +93,7 @@ module Aws
       SubscriptionAttributesMap = Shapes::MapShape.new(name: 'SubscriptionAttributesMap')
       SubscriptionLimitExceededException = Shapes::StructureShape.new(name: 'SubscriptionLimitExceededException')
       SubscriptionsList = Shapes::ListShape.new(name: 'SubscriptionsList')
+      ThrottledException = Shapes::StructureShape.new(name: 'ThrottledException')
       Topic = Shapes::StructureShape.new(name: 'Topic')
       TopicAttributesMap = Shapes::MapShape.new(name: 'TopicAttributesMap')
       TopicLimitExceededException = Shapes::StructureShape.new(name: 'TopicLimitExceededException')
@@ -90,6 +104,7 @@ module Aws
       attributeName = Shapes::StringShape.new(name: 'attributeName')
       attributeValue = Shapes::StringShape.new(name: 'attributeValue')
       authenticateOnUnsubscribe = Shapes::StringShape.new(name: 'authenticateOnUnsubscribe')
+      boolean = Shapes::BooleanShape.new(name: 'boolean')
       delegate = Shapes::StringShape.new(name: 'delegate')
       endpoint = Shapes::StringShape.new(name: 'endpoint')
       label = Shapes::StringShape.new(name: 'label')
@@ -112,6 +127,12 @@ module Aws
       AddPermissionInput.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: DelegatesList, required: true, location_name: "AWSAccountId"))
       AddPermissionInput.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionsList, required: true, location_name: "ActionName"))
       AddPermissionInput.struct_class = Types::AddPermissionInput
+
+      CheckIfPhoneNumberIsOptedOutInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "phoneNumber"))
+      CheckIfPhoneNumberIsOptedOutInput.struct_class = Types::CheckIfPhoneNumberIsOptedOutInput
+
+      CheckIfPhoneNumberIsOptedOutResponse.add_member(:is_opted_out, Shapes::ShapeRef.new(shape: boolean, location_name: "isOptedOut"))
+      CheckIfPhoneNumberIsOptedOutResponse.struct_class = Types::CheckIfPhoneNumberIsOptedOutResponse
 
       ConfirmSubscriptionInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
       ConfirmSubscriptionInput.add_member(:token, Shapes::ShapeRef.new(shape: token, required: true, location_name: "Token"))
@@ -171,6 +192,12 @@ module Aws
       GetPlatformApplicationAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "Attributes"))
       GetPlatformApplicationAttributesResponse.struct_class = Types::GetPlatformApplicationAttributesResponse
 
+      GetSMSAttributesInput.add_member(:attributes, Shapes::ShapeRef.new(shape: ListString, location_name: "attributes"))
+      GetSMSAttributesInput.struct_class = Types::GetSMSAttributesInput
+
+      GetSMSAttributesResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "attributes"))
+      GetSMSAttributesResponse.struct_class = Types::GetSMSAttributesResponse
+
       GetSubscriptionAttributesInput.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: subscriptionARN, required: true, location_name: "SubscriptionArn"))
       GetSubscriptionAttributesInput.struct_class = Types::GetSubscriptionAttributesInput
 
@@ -195,12 +222,21 @@ module Aws
 
       ListOfPlatformApplications.member = Shapes::ShapeRef.new(shape: PlatformApplication)
 
+      ListPhoneNumbersOptedOutInput.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+      ListPhoneNumbersOptedOutInput.struct_class = Types::ListPhoneNumbersOptedOutInput
+
+      ListPhoneNumbersOptedOutResponse.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: PhoneNumberList, location_name: "phoneNumbers"))
+      ListPhoneNumbersOptedOutResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+      ListPhoneNumbersOptedOutResponse.struct_class = Types::ListPhoneNumbersOptedOutResponse
+
       ListPlatformApplicationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
       ListPlatformApplicationsInput.struct_class = Types::ListPlatformApplicationsInput
 
       ListPlatformApplicationsResponse.add_member(:platform_applications, Shapes::ShapeRef.new(shape: ListOfPlatformApplications, location_name: "PlatformApplications"))
       ListPlatformApplicationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
       ListPlatformApplicationsResponse.struct_class = Types::ListPlatformApplicationsResponse
+
+      ListString.member = Shapes::ShapeRef.new(shape: String)
 
       ListSubscriptionsByTopicInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, required: true, location_name: "TopicArn"))
       ListSubscriptionsByTopicInput.add_member(:next_token, Shapes::ShapeRef.new(shape: nextToken, location_name: "NextToken"))
@@ -235,12 +271,20 @@ module Aws
       MessageAttributeValue.add_member(:binary_value, Shapes::ShapeRef.new(shape: Binary, location_name: "BinaryValue"))
       MessageAttributeValue.struct_class = Types::MessageAttributeValue
 
+      OptInPhoneNumberInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: PhoneNumber, required: true, location_name: "phoneNumber"))
+      OptInPhoneNumberInput.struct_class = Types::OptInPhoneNumberInput
+
+      OptInPhoneNumberResponse.struct_class = Types::OptInPhoneNumberResponse
+
+      PhoneNumberList.member = Shapes::ShapeRef.new(shape: PhoneNumber)
+
       PlatformApplication.add_member(:platform_application_arn, Shapes::ShapeRef.new(shape: String, location_name: "PlatformApplicationArn"))
       PlatformApplication.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, location_name: "Attributes"))
       PlatformApplication.struct_class = Types::PlatformApplication
 
       PublishInput.add_member(:topic_arn, Shapes::ShapeRef.new(shape: topicARN, location_name: "TopicArn"))
       PublishInput.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "TargetArn"))
+      PublishInput.add_member(:phone_number, Shapes::ShapeRef.new(shape: String, location_name: "PhoneNumber"))
       PublishInput.add_member(:message, Shapes::ShapeRef.new(shape: message, required: true, location_name: "Message"))
       PublishInput.add_member(:subject, Shapes::ShapeRef.new(shape: subject, location_name: "Subject"))
       PublishInput.add_member(:message_structure, Shapes::ShapeRef.new(shape: messageStructure, location_name: "MessageStructure"))
@@ -261,6 +305,11 @@ module Aws
       SetPlatformApplicationAttributesInput.add_member(:platform_application_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PlatformApplicationArn"))
       SetPlatformApplicationAttributesInput.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, required: true, location_name: "Attributes"))
       SetPlatformApplicationAttributesInput.struct_class = Types::SetPlatformApplicationAttributesInput
+
+      SetSMSAttributesInput.add_member(:attributes, Shapes::ShapeRef.new(shape: MapStringToString, required: true, location_name: "attributes"))
+      SetSMSAttributesInput.struct_class = Types::SetSMSAttributesInput
+
+      SetSMSAttributesResponse.struct_class = Types::SetSMSAttributesResponse
 
       SetSubscriptionAttributesInput.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: subscriptionARN, required: true, location_name: "SubscriptionArn"))
       SetSubscriptionAttributesInput.add_member(:attribute_name, Shapes::ShapeRef.new(shape: attributeName, required: true, location_name: "AttributeName"))
@@ -323,23 +372,21 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AddPermissionInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        end)
+
+        api.add_operation(:check_if_phone_number_is_opted_out, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CheckIfPhoneNumberIsOptedOut"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CheckIfPhoneNumberIsOptedOutInput)
+          o.output = Shapes::ShapeRef.new(shape: CheckIfPhoneNumberIsOptedOutResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
         api.add_operation(:confirm_subscription, Seahorse::Model::Operation.new.tap do |o|
@@ -348,27 +395,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ConfirmSubscriptionInput)
           o.output = Shapes::ShapeRef.new(shape: ConfirmSubscriptionResponse)
-          o.errors << Shapes::ShapeRef.new(shape: SubscriptionLimitExceededException, metadata: {
-            "error" => {"code"=>"SubscriptionLimitExceeded", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: SubscriptionLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:create_platform_application, Seahorse::Model::Operation.new.tap do |o|
@@ -377,19 +408,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreatePlatformApplicationInput)
           o.output = Shapes::ShapeRef.new(shape: CreatePlatformApplicationResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:create_platform_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -398,23 +419,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreatePlatformEndpointInput)
           o.output = Shapes::ShapeRef.new(shape: CreateEndpointResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:create_topic, Seahorse::Model::Operation.new.tap do |o|
@@ -423,23 +431,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateTopicInput)
           o.output = Shapes::ShapeRef.new(shape: CreateTopicResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TopicLimitExceededException, metadata: {
-            "error" => {"code"=>"TopicLimitExceeded", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: TopicLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
@@ -448,19 +443,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteEndpointInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:delete_platform_application, Seahorse::Model::Operation.new.tap do |o|
@@ -469,19 +454,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeletePlatformApplicationInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:delete_topic, Seahorse::Model::Operation.new.tap do |o|
@@ -490,23 +465,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteTopicInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:get_endpoint_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -515,23 +477,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetEndpointAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: GetEndpointAttributesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:get_platform_application_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -540,23 +489,21 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetPlatformApplicationAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: GetPlatformApplicationAttributesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        end)
+
+        api.add_operation(:get_sms_attributes, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetSMSAttributes"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: GetSMSAttributesInput)
+          o.output = Shapes::ShapeRef.new(shape: GetSMSAttributesResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
         api.add_operation(:get_subscription_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -565,23 +512,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetSubscriptionAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: GetSubscriptionAttributesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:get_topic_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -590,23 +524,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetTopicAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: GetTopicAttributesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:list_endpoints_by_platform_application, Seahorse::Model::Operation.new.tap do |o|
@@ -615,28 +536,26 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListEndpointsByPlatformApplicationInput)
           o.output = Shapes::ShapeRef.new(shape: ListEndpointsByPlatformApplicationResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "NextToken",
             "output_token" => "NextToken",
             "result_key" => "Endpoints"
           )
+        end)
+
+        api.add_operation(:list_phone_numbers_opted_out, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListPhoneNumbersOptedOut"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListPhoneNumbersOptedOutInput)
+          o.output = Shapes::ShapeRef.new(shape: ListPhoneNumbersOptedOutResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
         api.add_operation(:list_platform_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -645,19 +564,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListPlatformApplicationsInput)
           o.output = Shapes::ShapeRef.new(shape: ListPlatformApplicationsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "NextToken",
             "output_token" => "NextToken",
@@ -671,19 +580,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListSubscriptionsInput)
           o.output = Shapes::ShapeRef.new(shape: ListSubscriptionsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "NextToken",
             "output_token" => "NextToken",
@@ -697,23 +596,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListSubscriptionsByTopicInput)
           o.output = Shapes::ShapeRef.new(shape: ListSubscriptionsByTopicResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "NextToken",
             "output_token" => "NextToken",
@@ -727,24 +613,25 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListTopicsInput)
           o.output = Shapes::ShapeRef.new(shape: ListTopicsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "NextToken",
             "output_token" => "NextToken",
             "result_key" => "Topics"
           )
+        end)
+
+        api.add_operation(:opt_in_phone_number, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "OptInPhoneNumber"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: OptInPhoneNumberInput)
+          o.output = Shapes::ShapeRef.new(shape: OptInPhoneNumberResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
         api.add_operation(:publish, Seahorse::Model::Operation.new.tap do |o|
@@ -753,35 +640,13 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: PublishInput)
           o.output = Shapes::ShapeRef.new(shape: PublishResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"code"=>"ParameterValueInvalid", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: EndpointDisabledException, metadata: {
-            "error" => {"code"=>"EndpointDisabled", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: PlatformApplicationDisabledException, metadata: {
-            "error" => {"code"=>"PlatformApplicationDisabled", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: EndpointDisabledException)
+          o.errors << Shapes::ShapeRef.new(shape: PlatformApplicationDisabledException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:remove_permission, Seahorse::Model::Operation.new.tap do |o|
@@ -790,23 +655,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: RemovePermissionInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:set_endpoint_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -815,23 +667,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SetEndpointAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:set_platform_application_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -840,23 +679,21 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SetPlatformApplicationAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        end)
+
+        api.add_operation(:set_sms_attributes, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "SetSMSAttributes"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: SetSMSAttributesInput)
+          o.output = Shapes::ShapeRef.new(shape: SetSMSAttributesResponse)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         end)
 
         api.add_operation(:set_subscription_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -865,23 +702,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SetSubscriptionAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:set_topic_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -890,23 +714,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SetTopicAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:subscribe, Seahorse::Model::Operation.new.tap do |o|
@@ -915,27 +726,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SubscribeInput)
           o.output = Shapes::ShapeRef.new(shape: SubscribeResponse)
-          o.errors << Shapes::ShapeRef.new(shape: SubscriptionLimitExceededException, metadata: {
-            "error" => {"code"=>"SubscriptionLimitExceeded", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: SubscriptionLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:unsubscribe, Seahorse::Model::Operation.new.tap do |o|
@@ -944,23 +739,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UnsubscribeInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException, metadata: {
-            "error" => {"code"=>"InvalidParameter", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException, metadata: {
-            "error" => {"code"=>"InternalError", "httpStatusCode"=>500},
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException, metadata: {
-            "error" => {"code"=>"AuthorizationError", "httpStatusCode"=>403, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "error" => {"code"=>"NotFound", "httpStatusCode"=>404, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
       end
 

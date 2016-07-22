@@ -112,6 +112,7 @@ module Aws
       ListPipelinesResponse = Shapes::StructureShape.new(name: 'ListPipelinesResponse')
       ListPresetsRequest = Shapes::StructureShape.new(name: 'ListPresetsRequest')
       ListPresetsResponse = Shapes::StructureShape.new(name: 'ListPresetsResponse')
+      LongKey = Shapes::StringShape.new(name: 'LongKey')
       MaxFrameRate = Shapes::StringShape.new(name: 'MaxFrameRate')
       MergePolicy = Shapes::StringShape.new(name: 'MergePolicy')
       Name = Shapes::StringShape.new(name: 'Name')
@@ -227,7 +228,7 @@ module Aws
 
       CaptionFormats.member = Shapes::ShapeRef.new(shape: CaptionFormat)
 
-      CaptionSource.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
+      CaptionSource.add_member(:key, Shapes::ShapeRef.new(shape: LongKey, location_name: "Key"))
       CaptionSource.add_member(:language, Shapes::ShapeRef.new(shape: Key, location_name: "Language"))
       CaptionSource.add_member(:time_offset, Shapes::ShapeRef.new(shape: TimeOffset, location_name: "TimeOffset"))
       CaptionSource.add_member(:label, Shapes::ShapeRef.new(shape: Name, location_name: "Label"))
@@ -361,7 +362,7 @@ module Aws
       JobAlbumArt.add_member(:artwork, Shapes::ShapeRef.new(shape: Artworks, location_name: "Artwork"))
       JobAlbumArt.struct_class = Types::JobAlbumArt
 
-      JobInput.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
+      JobInput.add_member(:key, Shapes::ShapeRef.new(shape: LongKey, location_name: "Key"))
       JobInput.add_member(:frame_rate, Shapes::ShapeRef.new(shape: FrameRate, location_name: "FrameRate"))
       JobInput.add_member(:resolution, Shapes::ShapeRef.new(shape: Resolution, location_name: "Resolution"))
       JobInput.add_member(:aspect_ratio, Shapes::ShapeRef.new(shape: AspectRatio, location_name: "AspectRatio"))
@@ -643,30 +644,12 @@ module Aws
           o.http_request_uri = "/2012-09-25/jobs/{Id}"
           o.input = Shapes::ShapeRef.new(shape: CancelJobRequest)
           o.output = Shapes::ShapeRef.new(shape: CancelJobResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
@@ -675,30 +658,12 @@ module Aws
           o.http_request_uri = "/2012-09-25/jobs"
           o.input = Shapes::ShapeRef.new(shape: CreateJobRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateJobResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>429},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:create_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -707,30 +672,12 @@ module Aws
           o.http_request_uri = "/2012-09-25/pipelines"
           o.input = Shapes::ShapeRef.new(shape: CreatePipelineRequest)
           o.output = Shapes::ShapeRef.new(shape: CreatePipelineResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>429},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:create_preset, Seahorse::Model::Operation.new.tap do |o|
@@ -739,26 +686,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/presets"
           o.input = Shapes::ShapeRef.new(shape: CreatePresetRequest)
           o.output = Shapes::ShapeRef.new(shape: CreatePresetResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>429},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:delete_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -767,30 +699,12 @@ module Aws
           o.http_request_uri = "/2012-09-25/pipelines/{Id}"
           o.input = Shapes::ShapeRef.new(shape: DeletePipelineRequest)
           o.output = Shapes::ShapeRef.new(shape: DeletePipelineResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:delete_preset, Seahorse::Model::Operation.new.tap do |o|
@@ -799,26 +713,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/presets/{Id}"
           o.input = Shapes::ShapeRef.new(shape: DeletePresetRequest)
           o.output = Shapes::ShapeRef.new(shape: DeletePresetResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:list_jobs_by_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -827,26 +726,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/jobsByPipeline/{PipelineId}"
           o.input = Shapes::ShapeRef.new(shape: ListJobsByPipelineRequest)
           o.output = Shapes::ShapeRef.new(shape: ListJobsByPipelineResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "PageToken",
             "output_token" => "NextPageToken",
@@ -860,26 +744,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/jobsByStatus/{Status}"
           o.input = Shapes::ShapeRef.new(shape: ListJobsByStatusRequest)
           o.output = Shapes::ShapeRef.new(shape: ListJobsByStatusResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "PageToken",
             "output_token" => "NextPageToken",
@@ -893,22 +762,10 @@ module Aws
           o.http_request_uri = "/2012-09-25/pipelines"
           o.input = Shapes::ShapeRef.new(shape: ListPipelinesRequest)
           o.output = Shapes::ShapeRef.new(shape: ListPipelinesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "PageToken",
             "output_token" => "NextPageToken",
@@ -922,22 +779,10 @@ module Aws
           o.http_request_uri = "/2012-09-25/presets"
           o.input = Shapes::ShapeRef.new(shape: ListPresetsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListPresetsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "PageToken",
             "output_token" => "NextPageToken",
@@ -951,26 +796,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/jobs/{Id}"
           o.input = Shapes::ShapeRef.new(shape: ReadJobRequest)
           o.output = Shapes::ShapeRef.new(shape: ReadJobResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:read_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -979,26 +809,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/pipelines/{Id}"
           o.input = Shapes::ShapeRef.new(shape: ReadPipelineRequest)
           o.output = Shapes::ShapeRef.new(shape: ReadPipelineResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:read_preset, Seahorse::Model::Operation.new.tap do |o|
@@ -1007,26 +822,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/presets/{Id}"
           o.input = Shapes::ShapeRef.new(shape: ReadPresetRequest)
           o.output = Shapes::ShapeRef.new(shape: ReadPresetResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:test_role, Seahorse::Model::Operation.new.tap do |o|
@@ -1035,26 +835,11 @@ module Aws
           o.http_request_uri = "/2012-09-25/roleTests"
           o.input = Shapes::ShapeRef.new(shape: TestRoleRequest)
           o.output = Shapes::ShapeRef.new(shape: TestRoleResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:update_pipeline, Seahorse::Model::Operation.new.tap do |o|
@@ -1063,30 +848,12 @@ module Aws
           o.http_request_uri = "/2012-09-25/pipelines/{Id}"
           o.input = Shapes::ShapeRef.new(shape: UpdatePipelineRequest)
           o.output = Shapes::ShapeRef.new(shape: UpdatePipelineResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:update_pipeline_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -1095,30 +862,12 @@ module Aws
           o.http_request_uri = "/2012-09-25/pipelines/{Id}/notifications"
           o.input = Shapes::ShapeRef.new(shape: UpdatePipelineNotificationsRequest)
           o.output = Shapes::ShapeRef.new(shape: UpdatePipelineNotificationsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:update_pipeline_status, Seahorse::Model::Operation.new.tap do |o|
@@ -1127,30 +876,12 @@ module Aws
           o.http_request_uri = "/2012-09-25/pipelines/{Id}/status"
           o.input = Shapes::ShapeRef.new(shape: UpdatePipelineStatusRequest)
           o.output = Shapes::ShapeRef.new(shape: UpdatePipelineStatusResponse)
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException, metadata: {
-            "error" => {"httpStatusCode"=>403},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersionException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
       end
 

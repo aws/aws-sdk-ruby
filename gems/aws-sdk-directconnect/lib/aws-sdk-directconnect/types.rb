@@ -376,7 +376,8 @@ module Aws
         :location,
         :bandwidth,
         :vlan,
-        :partner_name)
+        :partner_name,
+        :loa_issue_time)
 
         # @!attribute [rw] owner_account
         #   The AWS account that will own the new connection.
@@ -461,6 +462,11 @@ module Aws
         #   The name of the AWS Direct Connect service provider associated with
         #   the connection.
         #   @return [String]
+
+        # @!attribute [rw] loa_issue_time
+        #   The time of the most recent call to DescribeConnectionLoa for this
+        #   Connection.
+        #   @return [Time]
 
       end
 
@@ -760,6 +766,58 @@ module Aws
 
       end
 
+      # Container for the parameters to the DescribeConnectionLoa operation.
+      # @note When making an API call, pass DescribeConnectionLoaRequest
+      #   data as a hash:
+      #
+      #       {
+      #         connection_id: "ConnectionId", # required
+      #         provider_name: "ProviderName",
+      #         loa_content_type: "application/pdf", # accepts application/pdf
+      #       }
+      class DescribeConnectionLoaRequest < Aws::Structure.new(
+        :connection_id,
+        :provider_name,
+        :loa_content_type)
+
+        # @!attribute [rw] connection_id
+        #   ID of the connection.
+        #
+        #   Example: dxcon-fg5678gh
+        #
+        #   Default: None
+        #   @return [String]
+
+        # @!attribute [rw] provider_name
+        #   The name of the APN partner or service provider who establishes
+        #   connectivity on your behalf. If you supply this parameter, the
+        #   LOA-CFA lists the provider name alongside your company name as the
+        #   requester of the cross connect.
+        #
+        #   Default: None
+        #   @return [String]
+
+        # @!attribute [rw] loa_content_type
+        #   A standard media type indicating the content type of the LOA-CFA
+        #   document. Currently, the only supported value is
+        #   \"application/pdf\".
+        #
+        #   Default: application/pdf
+        #   @return [String]
+
+      end
+
+      # The response received when DescribeConnectionLoa is called.
+      class DescribeConnectionLoaResponse < Aws::Structure.new(
+        :loa)
+
+        # @!attribute [rw] loa
+        #   A structure containing the Letter of Authorization - Connecting
+        #   Facility Assignment (LOA-CFA) for a connection.
+        #   @return [Types::Loa]
+
+      end
+
       # Container for the parameters to the DescribeConnectionsOnInterconnect
       # operation.
       # @note When making an API call, pass DescribeConnectionsOnInterconnectRequest
@@ -798,6 +856,56 @@ module Aws
         #
         #   Default: None
         #   @return [String]
+
+      end
+
+      # Container for the parameters to the DescribeInterconnectLoa operation.
+      # @note When making an API call, pass DescribeInterconnectLoaRequest
+      #   data as a hash:
+      #
+      #       {
+      #         interconnect_id: "InterconnectId", # required
+      #         provider_name: "ProviderName",
+      #         loa_content_type: "application/pdf", # accepts application/pdf
+      #       }
+      class DescribeInterconnectLoaRequest < Aws::Structure.new(
+        :interconnect_id,
+        :provider_name,
+        :loa_content_type)
+
+        # @!attribute [rw] interconnect_id
+        #   The ID of the interconnect.
+        #
+        #   Example: dxcon-abc123
+        #   @return [String]
+
+        # @!attribute [rw] provider_name
+        #   The name of the service provider who establishes connectivity on
+        #   your behalf. If you supply this parameter, the LOA-CFA lists the
+        #   provider name alongside your company name as the requester of the
+        #   cross connect.
+        #
+        #   Default: None
+        #   @return [String]
+
+        # @!attribute [rw] loa_content_type
+        #   A standard media type indicating the content type of the LOA-CFA
+        #   document. Currently, the only supported value is
+        #   \"application/pdf\".
+        #
+        #   Default: application/pdf
+        #   @return [String]
+
+      end
+
+      # The response received when DescribeInterconnectLoa is called.
+      class DescribeInterconnectLoaResponse < Aws::Structure.new(
+        :loa)
+
+        # @!attribute [rw] loa
+        #   A structure containing the Letter of Authorization - Connecting
+        #   Facility Assignment (LOA-CFA) for a connection.
+        #   @return [Types::Loa]
 
       end
 
@@ -869,7 +977,8 @@ module Aws
         :interconnect_state,
         :region,
         :location,
-        :bandwidth)
+        :bandwidth,
+        :loa_issue_time)
 
         # @!attribute [rw] interconnect_id
         #   The ID of the interconnect.
@@ -928,6 +1037,11 @@ module Aws
         #   Default: None
         #   @return [String]
 
+        # @!attribute [rw] loa_issue_time
+        #   The time of the most recent call to DescribeInterconnectLoa for this
+        #   Interconnect.
+        #   @return [Time]
+
       end
 
       # A structure containing a list of interconnects.
@@ -937,6 +1051,26 @@ module Aws
         # @!attribute [rw] interconnects
         #   A list of interconnects.
         #   @return [Array<Types::Interconnect>]
+
+      end
+
+      # A structure containing the Letter of Authorization - Connecting
+      # Facility Assignment (LOA-CFA) for a connection.
+      class Loa < Aws::Structure.new(
+        :loa_content,
+        :loa_content_type)
+
+        # @!attribute [rw] loa_content
+        #   The binary contents of the LOA-CFA document.
+        #   @return [String]
+
+        # @!attribute [rw] loa_content_type
+        #   A standard media type indicating the content type of the LOA-CFA
+        #   document. Currently, the only supported value is
+        #   \"application/pdf\".
+        #
+        #   Default: application/pdf
+        #   @return [String]
 
       end
 

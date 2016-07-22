@@ -39,6 +39,7 @@ module Aws
       ActionDeclaration = Shapes::StructureShape.new(name: 'ActionDeclaration')
       ActionExecution = Shapes::StructureShape.new(name: 'ActionExecution')
       ActionExecutionStatus = Shapes::StringShape.new(name: 'ActionExecutionStatus')
+      ActionExecutionToken = Shapes::StringShape.new(name: 'ActionExecutionToken')
       ActionName = Shapes::StringShape.new(name: 'ActionName')
       ActionNotFoundException = Shapes::StructureShape.new(name: 'ActionNotFoundException')
       ActionOwner = Shapes::StringShape.new(name: 'ActionOwner')
@@ -52,6 +53,11 @@ module Aws
       ActionTypeList = Shapes::ListShape.new(name: 'ActionTypeList')
       ActionTypeNotFoundException = Shapes::StructureShape.new(name: 'ActionTypeNotFoundException')
       ActionTypeSettings = Shapes::StructureShape.new(name: 'ActionTypeSettings')
+      ApprovalAlreadyCompletedException = Shapes::StructureShape.new(name: 'ApprovalAlreadyCompletedException')
+      ApprovalResult = Shapes::StructureShape.new(name: 'ApprovalResult')
+      ApprovalStatus = Shapes::StringShape.new(name: 'ApprovalStatus')
+      ApprovalSummary = Shapes::StringShape.new(name: 'ApprovalSummary')
+      ApprovalToken = Shapes::StringShape.new(name: 'ApprovalToken')
       Artifact = Shapes::StructureShape.new(name: 'Artifact')
       ArtifactDetails = Shapes::StructureShape.new(name: 'ArtifactDetails')
       ArtifactList = Shapes::ListShape.new(name: 'ArtifactList')
@@ -101,6 +107,7 @@ module Aws
       InputArtifact = Shapes::StructureShape.new(name: 'InputArtifact')
       InputArtifactList = Shapes::ListShape.new(name: 'InputArtifactList')
       InvalidActionDeclarationException = Shapes::StructureShape.new(name: 'InvalidActionDeclarationException')
+      InvalidApprovalTokenException = Shapes::StructureShape.new(name: 'InvalidApprovalTokenException')
       InvalidBlockerDeclarationException = Shapes::StructureShape.new(name: 'InvalidBlockerDeclarationException')
       InvalidClientTokenException = Shapes::StructureShape.new(name: 'InvalidClientTokenException')
       InvalidJobException = Shapes::StructureShape.new(name: 'InvalidJobException')
@@ -118,6 +125,7 @@ module Aws
       JobStatus = Shapes::StringShape.new(name: 'JobStatus')
       LastChangedAt = Shapes::TimestampShape.new(name: 'LastChangedAt')
       LastChangedBy = Shapes::StringShape.new(name: 'LastChangedBy')
+      LastUpdatedBy = Shapes::StringShape.new(name: 'LastUpdatedBy')
       LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
       ListActionTypesInput = Shapes::StructureShape.new(name: 'ListActionTypesInput')
       ListActionTypesOutput = Shapes::StructureShape.new(name: 'ListActionTypesOutput')
@@ -129,6 +137,7 @@ module Aws
       MinimumArtifactCount = Shapes::IntegerShape.new(name: 'MinimumArtifactCount')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
       Nonce = Shapes::StringShape.new(name: 'Nonce')
+      NotLatestPipelineExecutionException = Shapes::StructureShape.new(name: 'NotLatestPipelineExecutionException')
       OutputArtifact = Shapes::StructureShape.new(name: 'OutputArtifact')
       OutputArtifactList = Shapes::ListShape.new(name: 'OutputArtifactList')
       Percentage = Shapes::IntegerShape.new(name: 'Percentage')
@@ -149,11 +158,15 @@ module Aws
       PollForThirdPartyJobsOutput = Shapes::StructureShape.new(name: 'PollForThirdPartyJobsOutput')
       PutActionRevisionInput = Shapes::StructureShape.new(name: 'PutActionRevisionInput')
       PutActionRevisionOutput = Shapes::StructureShape.new(name: 'PutActionRevisionOutput')
+      PutApprovalResultInput = Shapes::StructureShape.new(name: 'PutApprovalResultInput')
+      PutApprovalResultOutput = Shapes::StructureShape.new(name: 'PutApprovalResultOutput')
       PutJobFailureResultInput = Shapes::StructureShape.new(name: 'PutJobFailureResultInput')
       PutJobSuccessResultInput = Shapes::StructureShape.new(name: 'PutJobSuccessResultInput')
       PutThirdPartyJobFailureResultInput = Shapes::StructureShape.new(name: 'PutThirdPartyJobFailureResultInput')
       PutThirdPartyJobSuccessResultInput = Shapes::StructureShape.new(name: 'PutThirdPartyJobSuccessResultInput')
       QueryParamMap = Shapes::MapShape.new(name: 'QueryParamMap')
+      RetryStageExecutionInput = Shapes::StructureShape.new(name: 'RetryStageExecutionInput')
+      RetryStageExecutionOutput = Shapes::StructureShape.new(name: 'RetryStageExecutionOutput')
       Revision = Shapes::StringShape.new(name: 'Revision')
       RevisionChangeIdentifier = Shapes::StringShape.new(name: 'RevisionChangeIdentifier')
       RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -166,8 +179,12 @@ module Aws
       StageBlockerDeclarationList = Shapes::ListShape.new(name: 'StageBlockerDeclarationList')
       StageContext = Shapes::StructureShape.new(name: 'StageContext')
       StageDeclaration = Shapes::StructureShape.new(name: 'StageDeclaration')
+      StageExecution = Shapes::StructureShape.new(name: 'StageExecution')
+      StageExecutionStatus = Shapes::StringShape.new(name: 'StageExecutionStatus')
       StageName = Shapes::StringShape.new(name: 'StageName')
       StageNotFoundException = Shapes::StructureShape.new(name: 'StageNotFoundException')
+      StageNotRetryableException = Shapes::StructureShape.new(name: 'StageNotRetryableException')
+      StageRetryMode = Shapes::StringShape.new(name: 'StageRetryMode')
       StageState = Shapes::StructureShape.new(name: 'StageState')
       StageStateList = Shapes::ListShape.new(name: 'StageStateList')
       StageTransitionType = Shapes::StringShape.new(name: 'StageTransitionType')
@@ -239,6 +256,8 @@ module Aws
       ActionExecution.add_member(:status, Shapes::ShapeRef.new(shape: ActionExecutionStatus, location_name: "status"))
       ActionExecution.add_member(:summary, Shapes::ShapeRef.new(shape: ExecutionSummary, location_name: "summary"))
       ActionExecution.add_member(:last_status_change, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStatusChange"))
+      ActionExecution.add_member(:token, Shapes::ShapeRef.new(shape: ActionExecutionToken, location_name: "token"))
+      ActionExecution.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: LastUpdatedBy, location_name: "lastUpdatedBy"))
       ActionExecution.add_member(:external_execution_id, Shapes::ShapeRef.new(shape: ExecutionId, location_name: "externalExecutionId"))
       ActionExecution.add_member(:external_execution_url, Shapes::ShapeRef.new(shape: Url, location_name: "externalExecutionUrl"))
       ActionExecution.add_member(:percent_complete, Shapes::ShapeRef.new(shape: Percentage, location_name: "percentComplete"))
@@ -279,6 +298,10 @@ module Aws
       ActionTypeSettings.add_member(:execution_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "executionUrlTemplate"))
       ActionTypeSettings.add_member(:revision_url_template, Shapes::ShapeRef.new(shape: UrlTemplate, location_name: "revisionUrlTemplate"))
       ActionTypeSettings.struct_class = Types::ActionTypeSettings
+
+      ApprovalResult.add_member(:summary, Shapes::ShapeRef.new(shape: ApprovalSummary, required: true, location_name: "summary"))
+      ApprovalResult.add_member(:status, Shapes::ShapeRef.new(shape: ApprovalStatus, required: true, location_name: "status"))
+      ApprovalResult.struct_class = Types::ApprovalResult
 
       Artifact.add_member(:name, Shapes::ShapeRef.new(shape: ArtifactName, location_name: "name"))
       Artifact.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, location_name: "revision"))
@@ -488,6 +511,16 @@ module Aws
       PutActionRevisionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
       PutActionRevisionOutput.struct_class = Types::PutActionRevisionOutput
 
+      PutApprovalResultInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
+      PutApprovalResultInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
+      PutApprovalResultInput.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
+      PutApprovalResultInput.add_member(:result, Shapes::ShapeRef.new(shape: ApprovalResult, required: true, location_name: "result"))
+      PutApprovalResultInput.add_member(:token, Shapes::ShapeRef.new(shape: ApprovalToken, location_name: "token"))
+      PutApprovalResultInput.struct_class = Types::PutApprovalResultInput
+
+      PutApprovalResultOutput.add_member(:approved_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "approvedAt"))
+      PutApprovalResultOutput.struct_class = Types::PutApprovalResultOutput
+
       PutJobFailureResultInput.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "jobId"))
       PutJobFailureResultInput.add_member(:failure_details, Shapes::ShapeRef.new(shape: FailureDetails, required: true, location_name: "failureDetails"))
       PutJobFailureResultInput.struct_class = Types::PutJobFailureResultInput
@@ -513,6 +546,15 @@ module Aws
       QueryParamMap.key = Shapes::ShapeRef.new(shape: ActionConfigurationKey)
       QueryParamMap.value = Shapes::ShapeRef.new(shape: ActionConfigurationQueryableValue)
 
+      RetryStageExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
+      RetryStageExecutionInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
+      RetryStageExecutionInput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
+      RetryStageExecutionInput.add_member(:retry_mode, Shapes::ShapeRef.new(shape: StageRetryMode, required: true, location_name: "retryMode"))
+      RetryStageExecutionInput.struct_class = Types::RetryStageExecutionInput
+
+      RetryStageExecutionOutput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
+      RetryStageExecutionOutput.struct_class = Types::RetryStageExecutionOutput
+
       S3ArtifactLocation.add_member(:bucket_name, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "bucketName"))
       S3ArtifactLocation.add_member(:object_key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "objectKey"))
       S3ArtifactLocation.struct_class = Types::S3ArtifactLocation
@@ -529,9 +571,14 @@ module Aws
       StageDeclaration.add_member(:actions, Shapes::ShapeRef.new(shape: StageActionDeclarationList, required: true, location_name: "actions"))
       StageDeclaration.struct_class = Types::StageDeclaration
 
+      StageExecution.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
+      StageExecution.add_member(:status, Shapes::ShapeRef.new(shape: StageExecutionStatus, required: true, location_name: "status"))
+      StageExecution.struct_class = Types::StageExecution
+
       StageState.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, location_name: "stageName"))
       StageState.add_member(:inbound_transition_state, Shapes::ShapeRef.new(shape: TransitionState, location_name: "inboundTransitionState"))
       StageState.add_member(:action_states, Shapes::ShapeRef.new(shape: ActionStateList, location_name: "actionStates"))
+      StageState.add_member(:latest_execution, Shapes::ShapeRef.new(shape: StageExecution, location_name: "latestExecution"))
       StageState.struct_class = Types::StageState
 
       StageStateList.member = Shapes::ShapeRef.new(shape: StageState)
@@ -772,6 +819,20 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
 
+        api.add_operation(:put_approval_result, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PutApprovalResult"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: PutApprovalResultInput)
+          o.output = Shapes::ShapeRef.new(shape: PutApprovalResultOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidApprovalTokenException)
+          o.errors << Shapes::ShapeRef.new(shape: ApprovalAlreadyCompletedException)
+          o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: StageNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ActionNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        end)
+
         api.add_operation(:put_job_failure_result, Seahorse::Model::Operation.new.tap do |o|
           o.name = "PutJobFailureResult"
           o.http_method = "POST"
@@ -816,6 +877,19 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: JobNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidClientTokenException)
+        end)
+
+        api.add_operation(:retry_stage_execution, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "RetryStageExecution"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: RetryStageExecutionInput)
+          o.output = Shapes::ShapeRef.new(shape: RetryStageExecutionOutput)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: StageNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: StageNotRetryableException)
+          o.errors << Shapes::ShapeRef.new(shape: NotLatestPipelineExecutionException)
         end)
 
         api.add_operation(:start_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|

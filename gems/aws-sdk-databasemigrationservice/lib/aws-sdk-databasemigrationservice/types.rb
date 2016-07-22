@@ -76,6 +76,58 @@ module Aws
 
       end
 
+      # The SSL certificate that can be used to encrypt connections between
+      # the endpoints and the replication instance.
+      class Certificate < Aws::Structure.new(
+        :certificate_identifier,
+        :certificate_creation_date,
+        :certificate_pem,
+        :certificate_arn,
+        :certificate_owner,
+        :valid_from_date,
+        :valid_to_date,
+        :signing_algorithm,
+        :key_length)
+
+        # @!attribute [rw] certificate_identifier
+        #   The customer-assigned name of the certificate. Valid characters are
+        #   \[A-z\_0-9\].
+        #   @return [String]
+
+        # @!attribute [rw] certificate_creation_date
+        #   the date the certificate was created.
+        #   @return [Time]
+
+        # @!attribute [rw] certificate_pem
+        #   The contents of the .pem X.509 certificate file.
+        #   @return [String]
+
+        # @!attribute [rw] certificate_arn
+        #   The Amazon Resource Name (ARN) for the certificate.
+        #   @return [String]
+
+        # @!attribute [rw] certificate_owner
+        #   The owner of the certificate.
+        #   @return [String]
+
+        # @!attribute [rw] valid_from_date
+        #   The beginning date the certificate is valid.
+        #   @return [Time]
+
+        # @!attribute [rw] valid_to_date
+        #   the final date the certificate is valid.
+        #   @return [Time]
+
+        # @!attribute [rw] signing_algorithm
+        #   The signing algorithm for the certificate.
+        #   @return [String]
+
+        # @!attribute [rw] key_length
+        #   The key length of the cryptographic algorithm being used.
+        #   @return [Integer]
+
+      end
+
       class Connection < Aws::Structure.new(
         :replication_instance_arn,
         :endpoint_arn,
@@ -134,6 +186,8 @@ module Aws
       #             value: "String",
       #           },
       #         ],
+      #         certificate_arn: "String",
+      #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
       #       }
       class CreateEndpointMessage < Aws::Structure.new(
         :endpoint_identifier,
@@ -146,7 +200,9 @@ module Aws
         :database_name,
         :extra_connection_attributes,
         :kms_key_id,
-        :tags)
+        :tags,
+        :certificate_arn,
+        :ssl_mode)
 
         # @!attribute [rw] endpoint_identifier
         #   The database endpoint identifier. Identifiers must begin with a
@@ -160,7 +216,7 @@ module Aws
 
         # @!attribute [rw] engine_name
         #   The type of engine for the endpoint. Valid values include MYSQL,
-        #   ORACLE, POSTGRES, MARIADB, AURORA, SQLSERVER.
+        #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
         #   @return [String]
 
         # @!attribute [rw] username
@@ -200,6 +256,19 @@ module Aws
         #   Tags to be added to the endpoint.
         #   @return [Array<Types::Tag>]
 
+        # @!attribute [rw] certificate_arn
+        #   The Amazon Resource Number (ARN) for the certificate.
+        #   @return [String]
+
+        # @!attribute [rw] ssl_mode
+        #   The SSL mode to use for the SSL connection.
+        #
+        #   SSL mode can be one of four values: none, require, verify-ca,
+        #   verify-full.
+        #
+        #   The default value is none.
+        #   @return [String]
+
       end
 
       class CreateEndpointResponse < Aws::Structure.new(
@@ -218,9 +287,11 @@ module Aws
       #         replication_instance_identifier: "String", # required
       #         allocated_storage: 1,
       #         replication_instance_class: "String", # required
+      #         vpc_security_group_ids: ["String"],
       #         availability_zone: "String",
       #         replication_subnet_group_identifier: "String",
       #         preferred_maintenance_window: "String",
+      #         multi_az: false,
       #         engine_version: "String",
       #         auto_minor_version_upgrade: false,
       #         tags: [
@@ -236,9 +307,11 @@ module Aws
         :replication_instance_identifier,
         :allocated_storage,
         :replication_instance_class,
+        :vpc_security_group_ids,
         :availability_zone,
         :replication_subnet_group_identifier,
         :preferred_maintenance_window,
+        :multi_az,
         :engine_version,
         :auto_minor_version_upgrade,
         :tags,
@@ -252,7 +325,9 @@ module Aws
         #   Constraints:
         #
         #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+        #
         #   * First character must be a letter.
+        #
         #   * Cannot end with a hyphen or contain two consecutive hyphens.
         #
         #   Example: `myrepinstance`
@@ -271,6 +346,12 @@ module Aws
         #   dms.t2.large | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge |
         #   dms.c4.4xlarge `
         #   @return [String]
+
+        # @!attribute [rw] vpc_security_group_ids
+        #   Specifies the VPC security group to be used with the replication
+        #   instance. The VPC security group must work with the VPC containing
+        #   the replication instance.
+        #   @return [Array<String>]
 
         # @!attribute [rw] availability_zone
         #   The EC2 Availability Zone that the replication instance will be
@@ -299,6 +380,12 @@ module Aws
         #
         #   Constraints: Minimum 30-minute window.
         #   @return [String]
+
+        # @!attribute [rw] multi_az
+        #   Specifies if the replication instance is a Multi-AZ deployment. You
+        #   cannot set the `AvailabilityZone` parameter if the Multi-AZ
+        #   parameter is set to `true`.
+        #   @return [Boolean]
 
         # @!attribute [rw] engine_version
         #   The engine version number of the replication instance.
@@ -431,7 +518,9 @@ module Aws
         #   Constraints:
         #
         #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+        #
         #   * First character must be a letter.
+        #
         #   * Cannot end with a hyphen or contain two consecutive hyphens.
         #   @return [String]
 
@@ -454,7 +543,10 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] table_mappings
-        #   The path of the JSON file that contains the table mappings.
+        #   The path of the JSON file that contains the table mappings. Preceed
+        #   the path with \"file://\".
+        #
+        #   For example, --table-mappings file://mappingfile.json
         #   @return [String]
 
         # @!attribute [rw] replication_task_settings
@@ -477,6 +569,30 @@ module Aws
         # @!attribute [rw] replication_task
         #   The replication task that was created.
         #   @return [Types::ReplicationTask]
+
+      end
+
+      # @note When making an API call, pass DeleteCertificateMessage
+      #   data as a hash:
+      #
+      #       {
+      #         certificate_arn: "String", # required
+      #       }
+      class DeleteCertificateMessage < Aws::Structure.new(
+        :certificate_arn)
+
+        # @!attribute [rw] certificate_arn
+        #   the Amazon Resource Name (ARN) of the deleted certificate.
+        #   @return [String]
+
+      end
+
+      class DeleteCertificateResponse < Aws::Structure.new(
+        :certificate)
+
+        # @!attribute [rw] certificate
+        #   The SSL certificate.
+        #   @return [Types::Certificate]
 
       end
 
@@ -581,6 +697,60 @@ module Aws
         # @!attribute [rw] account_quotas
         #   Account quota information.
         #   @return [Array<Types::AccountQuota>]
+
+      end
+
+      # @note When making an API call, pass DescribeCertificatesMessage
+      #   data as a hash:
+      #
+      #       {
+      #         filters: [
+      #           {
+      #             name: "String", # required
+      #             values: ["String"], # required
+      #           },
+      #         ],
+      #         max_records: 1,
+      #         marker: "String",
+      #       }
+      class DescribeCertificatesMessage < Aws::Structure.new(
+        :filters,
+        :max_records,
+        :marker)
+
+        # @!attribute [rw] filters
+        #   Filters applied to the certificate described in the form of
+        #   key-value pairs.
+        #   @return [Array<Types::Filter>]
+
+        # @!attribute [rw] max_records
+        #   The maximum number of records to include in the response. If more
+        #   records exist than the specified `MaxRecords` value, a pagination
+        #   token called a marker is included in the response so that the
+        #   remaining results can be retrieved.
+        #
+        #   Default: 10
+        #   @return [Integer]
+
+        # @!attribute [rw] marker
+        #   An optional pagination token provided by a previous request. If this
+        #   parameter is specified, the response includes only records beyond
+        #   the marker, up to the value specified by `MaxRecords`.
+        #   @return [String]
+
+      end
+
+      class DescribeCertificatesResponse < Aws::Structure.new(
+        :marker,
+        :certificates)
+
+        # @!attribute [rw] marker
+        #   The pagination token.
+        #   @return [String]
+
+        # @!attribute [rw] certificates
+        #   The SSL certificates associated with the replication instance.
+        #   @return [Array<Types::Certificate>]
 
       end
 
@@ -1132,7 +1302,9 @@ module Aws
         :extra_connection_attributes,
         :status,
         :kms_key_id,
-        :endpoint_arn)
+        :endpoint_arn,
+        :certificate_arn,
+        :ssl_mode)
 
         # @!attribute [rw] endpoint_identifier
         #   The database endpoint identifier. Identifiers must begin with a
@@ -1186,6 +1358,20 @@ module Aws
         #   endpoint.
         #   @return [String]
 
+        # @!attribute [rw] certificate_arn
+        #   The Amazon Resource Name (ARN) used for SSL connection to the
+        #   endpoint.
+        #   @return [String]
+
+        # @!attribute [rw] ssl_mode
+        #   The SSL mode used to connect to the endpoint.
+        #
+        #   SSL mode can be one of four values: none, require, verify-ca,
+        #   verify-full.
+        #
+        #   The default value is none.
+        #   @return [String]
+
       end
 
       # @note When making an API call, pass Filter
@@ -1206,6 +1392,37 @@ module Aws
         # @!attribute [rw] values
         #   The filter value.
         #   @return [Array<String>]
+
+      end
+
+      # @note When making an API call, pass ImportCertificateMessage
+      #   data as a hash:
+      #
+      #       {
+      #         certificate_identifier: "String", # required
+      #         certificate_pem: "String",
+      #       }
+      class ImportCertificateMessage < Aws::Structure.new(
+        :certificate_identifier,
+        :certificate_pem)
+
+        # @!attribute [rw] certificate_identifier
+        #   The customer-assigned name of the certificate. Valid characters are
+        #   \[A-z\_0-9\].
+        #   @return [String]
+
+        # @!attribute [rw] certificate_pem
+        #   The contents of the .pem X.509 certificate file.
+        #   @return [String]
+
+      end
+
+      class ImportCertificateResponse < Aws::Structure.new(
+        :certificate)
+
+        # @!attribute [rw] certificate
+        #   The certificate to be uploaded.
+        #   @return [Types::Certificate]
 
       end
 
@@ -1248,6 +1465,8 @@ module Aws
       #         port: 1,
       #         database_name: "String",
       #         extra_connection_attributes: "String",
+      #         certificate_arn: "String",
+      #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
       #       }
       class ModifyEndpointMessage < Aws::Structure.new(
         :endpoint_arn,
@@ -1259,7 +1478,9 @@ module Aws
         :server_name,
         :port,
         :database_name,
-        :extra_connection_attributes)
+        :extra_connection_attributes,
+        :certificate_arn,
+        :ssl_mode)
 
         # @!attribute [rw] endpoint_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -1278,7 +1499,7 @@ module Aws
 
         # @!attribute [rw] engine_name
         #   The type of engine for the endpoint. Valid values include MYSQL,
-        #   ORACLE, POSTGRES.
+        #   ORACLE, POSTGRES, MARIADB, AURORA, REDSHIFT, and SQLSERVER.
         #   @return [String]
 
         # @!attribute [rw] username
@@ -1305,6 +1526,20 @@ module Aws
         #   Additional attributes associated with the connection.
         #   @return [String]
 
+        # @!attribute [rw] certificate_arn
+        #   The Amazon Resource Name (ARN) of the certificate used for SSL
+        #   connection.
+        #   @return [String]
+
+        # @!attribute [rw] ssl_mode
+        #   The SSL mode to be used.
+        #
+        #   SSL mode can be one of four values: none, require, verify-ca,
+        #   verify-full.
+        #
+        #   The default value is none.
+        #   @return [String]
+
       end
 
       class ModifyEndpointResponse < Aws::Structure.new(
@@ -1324,7 +1559,9 @@ module Aws
       #         allocated_storage: 1,
       #         apply_immediately: false,
       #         replication_instance_class: "String",
+      #         vpc_security_group_ids: ["String"],
       #         preferred_maintenance_window: "String",
+      #         multi_az: false,
       #         engine_version: "String",
       #         allow_major_version_upgrade: false,
       #         auto_minor_version_upgrade: false,
@@ -1335,7 +1572,9 @@ module Aws
         :allocated_storage,
         :apply_immediately,
         :replication_instance_class,
+        :vpc_security_group_ids,
         :preferred_maintenance_window,
+        :multi_az,
         :engine_version,
         :allow_major_version_upgrade,
         :auto_minor_version_upgrade,
@@ -1363,6 +1602,12 @@ module Aws
         #   dms.c4.4xlarge `
         #   @return [String]
 
+        # @!attribute [rw] vpc_security_group_ids
+        #   Specifies the VPC security group to be used with the replication
+        #   instance. The VPC security group must work with the VPC containing
+        #   the replication instance.
+        #   @return [Array<String>]
+
         # @!attribute [rw] preferred_maintenance_window
         #   The weekly time range (in UTC) during which system maintenance can
         #   occur, which might result in an outage. Changing this parameter does
@@ -1380,6 +1625,12 @@ module Aws
         #
         #   Constraints: Must be at least 30 minutes
         #   @return [String]
+
+        # @!attribute [rw] multi_az
+        #   Specifies if the replication instance is a Multi-AZ deployment. You
+        #   cannot set the `AvailabilityZone` parameter if the Multi-AZ
+        #   parameter is set to `true`.
+        #   @return [Boolean]
 
         # @!attribute [rw] engine_version
         #   The engine version number of the replication instance.
@@ -1577,8 +1828,8 @@ module Aws
         :tag_keys)
 
         # @!attribute [rw] resource_arn
-        #   \>The Amazon Resource Name (ARN) of the AWS DMS resource the tag is
-        #   to be removed from.
+        #   &gt;The Amazon Resource Name (ARN) of the AWS DMS resource the tag
+        #   is to be removed from.
         #   @return [String]
 
         # @!attribute [rw] tag_keys
@@ -1595,16 +1846,20 @@ module Aws
         :replication_instance_status,
         :allocated_storage,
         :instance_create_time,
+        :vpc_security_groups,
         :availability_zone,
         :replication_subnet_group,
         :preferred_maintenance_window,
         :pending_modified_values,
+        :multi_az,
         :engine_version,
         :auto_minor_version_upgrade,
         :kms_key_id,
         :replication_instance_arn,
         :replication_instance_public_ip_address,
         :replication_instance_private_ip_address,
+        :replication_instance_public_ip_addresses,
+        :replication_instance_private_ip_addresses,
         :publicly_accessible)
 
         # @!attribute [rw] replication_instance_identifier
@@ -1614,7 +1869,9 @@ module Aws
         #   Constraints:
         #
         #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+        #
         #   * First character must be a letter.
+        #
         #   * Cannot end with a hyphen or contain two consecutive hyphens.
         #
         #   Example: `myrepinstance`
@@ -1641,6 +1898,10 @@ module Aws
         #   The time the replication instance was created.
         #   @return [Time]
 
+        # @!attribute [rw] vpc_security_groups
+        #   The VPC security group for the instance.
+        #   @return [Array<Types::VpcSecurityGroupMembership>]
+
         # @!attribute [rw] availability_zone
         #   The Availability Zone for the instance.
         #   @return [String]
@@ -1656,6 +1917,12 @@ module Aws
         # @!attribute [rw] pending_modified_values
         #   The pending modification values.
         #   @return [Types::ReplicationPendingModifiedValues]
+
+        # @!attribute [rw] multi_az
+        #   Specifies if the replication instance is a Multi-AZ deployment. You
+        #   cannot set the `AvailabilityZone` parameter if the Multi-AZ
+        #   parameter is set to `true`.
+        #   @return [Boolean]
 
         # @!attribute [rw] engine_version
         #   The engine version number of the replication instance.
@@ -1687,6 +1954,14 @@ module Aws
         #   The private IP address of the replication instance.
         #   @return [String]
 
+        # @!attribute [rw] replication_instance_public_ip_addresses
+        #   The public IP address of the replication instance.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] replication_instance_private_ip_addresses
+        #   The private IP address of the replication instance.
+        #   @return [Array<String>]
+
         # @!attribute [rw] publicly_accessible
         #   Specifies the accessibility options for the replication instance. A
         #   value of `true` represents an instance with a public IP address. A
@@ -1699,6 +1974,7 @@ module Aws
       class ReplicationPendingModifiedValues < Aws::Structure.new(
         :replication_instance_class,
         :allocated_storage,
+        :multi_az,
         :engine_version)
 
         # @!attribute [rw] replication_instance_class
@@ -1713,6 +1989,12 @@ module Aws
         #   The amount of storage (in gigabytes) that is allocated for the
         #   replication instance.
         #   @return [Integer]
+
+        # @!attribute [rw] multi_az
+        #   Specifies if the replication instance is a Multi-AZ deployment. You
+        #   cannot set the `AvailabilityZone` parameter if the Multi-AZ
+        #   parameter is set to `true`.
+        #   @return [Boolean]
 
         # @!attribute [rw] engine_version
         #   The engine version number of the replication instance.
@@ -1770,7 +2052,9 @@ module Aws
         #   Constraints:
         #
         #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+        #
         #   * First character must be a letter.
+        #
         #   * Cannot end with a hyphen or contain two consecutive hyphens.
         #   @return [String]
 
@@ -2055,7 +2339,7 @@ module Aws
         :endpoint_arn)
 
         # @!attribute [rw] replication_instance_arn
-        #   The Amazon Resource Number (ARN) of the replication instance.
+        #   The Amazon Resource Name (ARN) of the replication instance.
         #   @return [String]
 
         # @!attribute [rw] endpoint_arn
@@ -2071,6 +2355,20 @@ module Aws
         # @!attribute [rw] connection
         #   The connection tested.
         #   @return [Types::Connection]
+
+      end
+
+      class VpcSecurityGroupMembership < Aws::Structure.new(
+        :vpc_security_group_id,
+        :status)
+
+        # @!attribute [rw] vpc_security_group_id
+        #   The VPC security group Id.
+        #   @return [String]
+
+        # @!attribute [rw] status
+        #   The status of the VPC security group.
+        #   @return [String]
 
       end
 

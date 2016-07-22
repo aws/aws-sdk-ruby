@@ -262,7 +262,8 @@ module Aws
       # @param [Hash] options ({})
       # @option options [required, String] :type
       #   The layer type. A stack cannot have more than one built-in layer of
-      #   the same type. It can have any number of custom layers.
+      #   the same type. It can have any number of custom layers. Built-in
+      #   layers are not available in Chef 12 stacks.
       # @option options [required, String] :name
       #   The layer name, which is used by the console.
       # @option options [required, String] :shortname

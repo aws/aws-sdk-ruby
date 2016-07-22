@@ -2143,8 +2143,9 @@ module Aws
       # You can paginate the results using the `MaxItems` and `Marker`
       # parameters.
       # @option params [Array<String>] :filter
-      #   A list of entity types (user, group, role, local managed policy, or
-      #   AWS managed policy) for filtering the results.
+      #   A list of entity types used to filter the results. Only the entities
+      #   that match the types you specify are included in the output. Use the
+      #   value `LocalManagedPolicy` to include customer managed policies.
       #
       #   The format for this parameter is a comma-separated (if more than one)
       #   list of strings. Each string value in the list must be one of the
@@ -2514,17 +2515,26 @@ module Aws
       # Retrieves the specified inline policy document that is embedded in the
       # specified IAM group.
       #
+      # <note markdown="1"> Policies returned by this API are URL-encoded compliant with [RFC
+      # 3986][1]. You can use a URL decoding method to convert the policy back
+      # to plain JSON text. For example, if you use Java, you can use the
+      # `decode` method of the `java.net.URLDecoder` utility class in the Java
+      # SDK. Other languages and SDKs provide similar functionality.
+      #
+      #  </note>
+      #
       # An IAM group can also have managed policies attached to it. To
       # retrieve a managed policy document that is attached to a group, use
       # GetPolicy to determine the policy\'s default version, then use
       # GetPolicyVersion to retrieve the policy document.
       #
       # For more information about policies, see [Managed Policies and Inline
-      # Policies][1] in the *IAM User Guide*.
+      # Policies][2] in the *IAM User Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+      # [1]: https://tools.ietf.org/html/rfc3986
+      # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
       # @option params [required, String] :group_name
       #   The name of the group the policy is associated with.
       #
@@ -2746,6 +2756,14 @@ module Aws
       # Retrieves information about the specified version of the specified
       # managed policy, including the policy document.
       #
+      # <note markdown="1"> Policies returned by this API are URL-encoded compliant with [RFC
+      # 3986][1]. You can use a URL decoding method to convert the policy back
+      # to plain JSON text. For example, if you use Java, you can use the
+      # `decode` method of the `java.net.URLDecoder` utility class in the Java
+      # SDK. Other languages and SDKs provide similar functionality.
+      #
+      #  </note>
+      #
       # To list the available versions for a policy, use ListPolicyVersions.
       #
       # This API retrieves information about managed policies. To retrieve
@@ -2753,15 +2771,16 @@ module Aws
       # or role, use the GetUserPolicy, GetGroupPolicy, or GetRolePolicy API.
       #
       # For more information about the types of policies, see [Managed
-      # Policies and Inline Policies][1] in the *IAM User Guide*.
+      # Policies and Inline Policies][2] in the *IAM User Guide*.
       #
       # For more information about managed policy versions, see [Versioning
-      # for Managed Policies][2] in the *IAM User Guide*.
+      # for Managed Policies][3] in the *IAM User Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+      # [1]: https://tools.ietf.org/html/rfc3986
+      # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+      # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
       # @option params [required, String] :policy_arn
       #   The Amazon Resource Name (ARN) of the managed policy that you want
       #   information about.
@@ -2810,9 +2829,18 @@ module Aws
       # to assume the role. For more information about roles, see [Working
       # with Roles][1].
       #
+      # <note markdown="1"> Policies returned by this API are URL-encoded compliant with [RFC
+      # 3986][2]. You can use a URL decoding method to convert the policy back
+      # to plain JSON text. For example, if you use Java, you can use the
+      # `decode` method of the `java.net.URLDecoder` utility class in the Java
+      # SDK. Other languages and SDKs provide similar functionality.
+      #
+      #  </note>
+      #
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html
+      # [2]: https://tools.ietf.org/html/rfc3986
       # @option params [required, String] :role_name
       #   The name of the IAM role to get information about.
       #
@@ -2849,21 +2877,30 @@ module Aws
       # Retrieves the specified inline policy document that is embedded with
       # the specified IAM role.
       #
+      # <note markdown="1"> Policies returned by this API are URL-encoded compliant with [RFC
+      # 3986][1]. You can use a URL decoding method to convert the policy back
+      # to plain JSON text. For example, if you use Java, you can use the
+      # `decode` method of the `java.net.URLDecoder` utility class in the Java
+      # SDK. Other languages and SDKs provide similar functionality.
+      #
+      #  </note>
+      #
       # An IAM role can also have managed policies attached to it. To retrieve
       # a managed policy document that is attached to a role, use GetPolicy to
       # determine the policy\'s default version, then use GetPolicyVersion to
       # retrieve the policy document.
       #
       # For more information about policies, see [Managed Policies and Inline
-      # Policies][1] in the *IAM User Guide*.
+      # Policies][2] in the *IAM User Guide*.
       #
       # For more information about roles, see [Using Roles to Delegate
-      # Permissions and Federate Identities][2].
+      # Permissions and Federate Identities][3].
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
+      # [1]: https://tools.ietf.org/html/rfc3986
+      # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+      # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html
       # @option params [required, String] :role_name
       #   The name of the role associated with the policy.
       #
@@ -3100,17 +3137,26 @@ module Aws
       # Retrieves the specified inline policy document that is embedded in the
       # specified IAM user.
       #
+      # <note markdown="1"> Policies returned by this API are URL-encoded compliant with [RFC
+      # 3986][1]. You can use a URL decoding method to convert the policy back
+      # to plain JSON text. For example, if you use Java, you can use the
+      # `decode` method of the `java.net.URLDecoder` utility class in the Java
+      # SDK. Other languages and SDKs provide similar functionality.
+      #
+      #  </note>
+      #
       # An IAM user can also have managed policies attached to it. To retrieve
       # a managed policy document that is attached to a user, use GetPolicy to
       # determine the policy\'s default version, then use GetPolicyVersion to
       # retrieve the policy document.
       #
       # For more information about policies, see [Managed Policies and Inline
-      # Policies][1] in the *IAM User Guide*.
+      # Policies][2] in the *IAM User Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
+      # [1]: https://tools.ietf.org/html/rfc3986
+      # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
       # @option params [required, String] :user_name
       #   The name of the user who the policy is associated with.
       #

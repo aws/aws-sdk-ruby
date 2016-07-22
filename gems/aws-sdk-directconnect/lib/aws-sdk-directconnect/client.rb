@@ -90,6 +90,7 @@ module Aws
       #   * {Types::Connection#bandwidth #bandwidth} => String
       #   * {Types::Connection#vlan #vlan} => Integer
       #   * {Types::Connection#partner_name #partnerName} => String
+      #   * {Types::Connection#loa_issue_time #loaIssueTime} => Time
       #
       # @example Request syntax with placeholder values
       #   resp = client.allocate_connection_on_interconnect({
@@ -110,6 +111,7 @@ module Aws
       #   resp.bandwidth #=> String
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
+      #   resp.loa_issue_time #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def allocate_connection_on_interconnect(params = {}, options = {})
@@ -185,7 +187,7 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
-      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
@@ -270,7 +272,7 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
-      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
@@ -346,7 +348,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def confirm_private_virtual_interface(params = {}, options = {})
@@ -376,7 +378,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def confirm_public_virtual_interface(params = {}, options = {})
@@ -424,6 +426,7 @@ module Aws
       #   * {Types::Connection#bandwidth #bandwidth} => String
       #   * {Types::Connection#vlan #vlan} => Integer
       #   * {Types::Connection#partner_name #partnerName} => String
+      #   * {Types::Connection#loa_issue_time #loaIssueTime} => Time
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_connection({
@@ -442,6 +445,7 @@ module Aws
       #   resp.bandwidth #=> String
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
+      #   resp.loa_issue_time #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_connection(params = {}, options = {})
@@ -498,6 +502,7 @@ module Aws
       #   * {Types::Interconnect#region #region} => String
       #   * {Types::Interconnect#location #location} => String
       #   * {Types::Interconnect#bandwidth #bandwidth} => String
+      #   * {Types::Interconnect#loa_issue_time #loaIssueTime} => Time
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_interconnect({
@@ -513,6 +518,7 @@ module Aws
       #   resp.region #=> String
       #   resp.location #=> String
       #   resp.bandwidth #=> String
+      #   resp.loa_issue_time #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_interconnect(params = {}, options = {})
@@ -578,7 +584,7 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
-      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
@@ -652,7 +658,7 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
-      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
@@ -687,6 +693,7 @@ module Aws
       #   * {Types::Connection#bandwidth #bandwidth} => String
       #   * {Types::Connection#vlan #vlan} => Integer
       #   * {Types::Connection#partner_name #partnerName} => String
+      #   * {Types::Connection#loa_issue_time #loaIssueTime} => Time
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_connection({
@@ -703,6 +710,7 @@ module Aws
       #   resp.bandwidth #=> String
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
+      #   resp.loa_issue_time #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_connection(params = {}, options = {})
@@ -754,11 +762,61 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_virtual_interface(params = {}, options = {})
         req = build_request(:delete_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Returns the LOA-CFA for a Connection.
+      #
+      # The Letter of Authorization - Connecting Facility Assignment (LOA-CFA)
+      # is a document that your APN partner or service provider uses when
+      # establishing your cross connect to AWS at the colocation facility. For
+      # more information, see [Requesting Cross Connects at AWS Direct Connect
+      # Locations][1] in the AWS Direct Connect user guide.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+      # @option params [required, String] :connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      # @option params [String] :provider_name
+      #   The name of the APN partner or service provider who establishes
+      #   connectivity on your behalf. If you supply this parameter, the LOA-CFA
+      #   lists the provider name alongside your company name as the requester
+      #   of the cross connect.
+      #
+      #   Default: None
+      # @option params [String] :loa_content_type
+      #   A standard media type indicating the content type of the LOA-CFA
+      #   document. Currently, the only supported value is \"application/pdf\".
+      #
+      #   Default: application/pdf
+      # @return [Types::DescribeConnectionLoaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeConnectionLoaResponse#loa #loa} => Types::Loa
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_connection_loa({
+      #     connection_id: "ConnectionId", # required
+      #     provider_name: "ProviderName",
+      #     loa_content_type: "application/pdf", # accepts application/pdf
+      #   })
+      #
+      # @example Response structure
+      #   resp.loa.loa_content #=> String
+      #   resp.loa.loa_content_type #=> String, one of "application/pdf"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_connection_loa(params = {}, options = {})
+        req = build_request(:describe_connection_loa, params)
         req.send_request(options)
       end
 
@@ -792,6 +850,7 @@ module Aws
       #   resp.connections[0].bandwidth #=> String
       #   resp.connections[0].vlan #=> Integer
       #   resp.connections[0].partner_name #=> String
+      #   resp.connections[0].loa_issue_time #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_connections(params = {}, options = {})
@@ -831,10 +890,59 @@ module Aws
       #   resp.connections[0].bandwidth #=> String
       #   resp.connections[0].vlan #=> Integer
       #   resp.connections[0].partner_name #=> String
+      #   resp.connections[0].loa_issue_time #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_connections_on_interconnect(params = {}, options = {})
         req = build_request(:describe_connections_on_interconnect, params)
+        req.send_request(options)
+      end
+
+      # Returns the LOA-CFA for an Interconnect.
+      #
+      # The Letter of Authorization - Connecting Facility Assignment (LOA-CFA)
+      # is a document that is used when establishing your cross connect to AWS
+      # at the colocation facility. For more information, see [Requesting
+      # Cross Connects at AWS Direct Connect Locations][1] in the AWS Direct
+      # Connect user guide.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
+      # @option params [required, String] :interconnect_id
+      #   The ID of the interconnect.
+      #
+      #   Example: dxcon-abc123
+      # @option params [String] :provider_name
+      #   The name of the service provider who establishes connectivity on your
+      #   behalf. If you supply this parameter, the LOA-CFA lists the provider
+      #   name alongside your company name as the requester of the cross
+      #   connect.
+      #
+      #   Default: None
+      # @option params [String] :loa_content_type
+      #   A standard media type indicating the content type of the LOA-CFA
+      #   document. Currently, the only supported value is \"application/pdf\".
+      #
+      #   Default: application/pdf
+      # @return [Types::DescribeInterconnectLoaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeInterconnectLoaResponse#loa #loa} => Types::Loa
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_interconnect_loa({
+      #     interconnect_id: "InterconnectId", # required
+      #     provider_name: "ProviderName",
+      #     loa_content_type: "application/pdf", # accepts application/pdf
+      #   })
+      #
+      # @example Response structure
+      #   resp.loa.loa_content #=> String
+      #   resp.loa.loa_content_type #=> String, one of "application/pdf"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_interconnect_loa(params = {}, options = {})
+        req = build_request(:describe_interconnect_loa, params)
         req.send_request(options)
       end
 
@@ -863,6 +971,7 @@ module Aws
       #   resp.interconnects[0].region #=> String
       #   resp.interconnects[0].location #=> String
       #   resp.interconnects[0].bandwidth #=> String
+      #   resp.interconnects[0].loa_issue_time #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_interconnects(params = {}, options = {})
@@ -961,7 +1070,7 @@ module Aws
       #   resp.virtual_interfaces[0].auth_key #=> String
       #   resp.virtual_interfaces[0].amazon_address #=> String
       #   resp.virtual_interfaces[0].customer_address #=> String
-      #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "deleting", "deleted", "rejected"
+      #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.virtual_interfaces[0].customer_router_config #=> String
       #   resp.virtual_interfaces[0].virtual_gateway_id #=> String
       #   resp.virtual_interfaces[0].route_filter_prefixes #=> Array

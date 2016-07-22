@@ -322,7 +322,7 @@ module Aws
       #   connections.
       #
       #   Default: `3306`
-      # @option options [required, String] :master_username
+      # @option options [String] :master_username
       #   The name of the master user for the client DB cluster.
       #
       #   Constraints:
@@ -332,7 +332,7 @@ module Aws
       #   * First character must be a letter.
       #
       #   * Cannot be a reserved word for the chosen database engine.
-      # @option options [required, String] :master_user_password
+      # @option options [String] :master_user_password
       #   The password for the master database user. This password can contain
       #   any printable ASCII character except \"/\", \"\"\", or \"@\".
       #
@@ -485,6 +485,11 @@ module Aws
       end
 
       # @param [Hash] options ({})
+      # @option options [String] :target_db_instance_identifier
+      #   The name of the instance to promote to the primary instance.
+      #
+      #   You must specify the instance identifier for an Aurora Replica in the
+      #   DB cluster. For example, `mydbcluster-replica1`.
       # @return [DBCluster]
       def failover(options = {})
         options = options.merge(db_cluster_identifier: @id)

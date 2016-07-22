@@ -67,7 +67,10 @@ module Aws
       # @option params [Array<String>] :open_id_connect_provider_arns
       #   A list of OpendID Connect provider ARNs.
       # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
-      #   A list representing a Cognito User Identity Pool and its client ID.
+      #   An array of Amazon Cognito Identity user pools.
+      # @option params [Array<String>] :saml_provider_arns
+      #   An array of Amazon Resource Names (ARNs) of the SAML provider for your
+      #   identity pool.
       # @return [Types::IdentityPool] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::IdentityPool#identity_pool_id #IdentityPoolId} => String
@@ -77,6 +80,7 @@ module Aws
       #   * {Types::IdentityPool#developer_provider_name #DeveloperProviderName} => String
       #   * {Types::IdentityPool#open_id_connect_provider_arns #OpenIdConnectProviderARNs} => Array&lt;String&gt;
       #   * {Types::IdentityPool#cognito_identity_providers #CognitoIdentityProviders} => Array&lt;Types::CognitoIdentityProvider&gt;
+      #   * {Types::IdentityPool#saml_provider_arns #SamlProviderARNs} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_identity_pool({
@@ -93,6 +97,7 @@ module Aws
       #         client_id: "CognitoIdentityProviderClientId",
       #       },
       #     ],
+      #     saml_provider_arns: ["ARNString"],
       #   })
       #
       # @example Response structure
@@ -107,6 +112,8 @@ module Aws
       #   resp.cognito_identity_providers #=> Array
       #   resp.cognito_identity_providers[0].provider_name #=> String
       #   resp.cognito_identity_providers[0].client_id #=> String
+      #   resp.saml_provider_arns #=> Array
+      #   resp.saml_provider_arns[0] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_identity_pool(params = {}, options = {})
@@ -205,6 +212,7 @@ module Aws
       #   * {Types::IdentityPool#developer_provider_name #DeveloperProviderName} => String
       #   * {Types::IdentityPool#open_id_connect_provider_arns #OpenIdConnectProviderARNs} => Array&lt;String&gt;
       #   * {Types::IdentityPool#cognito_identity_providers #CognitoIdentityProviders} => Array&lt;Types::CognitoIdentityProvider&gt;
+      #   * {Types::IdentityPool#saml_provider_arns #SamlProviderARNs} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.describe_identity_pool({
@@ -223,6 +231,8 @@ module Aws
       #   resp.cognito_identity_providers #=> Array
       #   resp.cognito_identity_providers[0].provider_name #=> String
       #   resp.cognito_identity_providers[0].client_id #=> String
+      #   resp.saml_provider_arns #=> Array
+      #   resp.saml_provider_arns[0] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_identity_pool(params = {}, options = {})
@@ -242,6 +252,11 @@ module Aws
       # @option params [Hash<String,String>] :logins
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens.
+      # @option params [String] :custom_role_arn
+      #   The Amazon Resource Name (ARN) of the role to be assumed when multiple
+      #   roles were received in the token from the identity provider. For
+      #   example, a SAML-based identity provider. This parameter is optional
+      #   for identity providers that do not support role customization.
       # @return [Types::GetCredentialsForIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetCredentialsForIdentityResponse#identity_id #IdentityId} => String
@@ -253,6 +268,7 @@ module Aws
       #     logins: {
       #       "IdentityProviderName" => "IdentityProviderToken",
       #     },
+      #     custom_role_arn: "ARNString",
       #   })
       #
       # @example Response structure
@@ -283,8 +299,6 @@ module Aws
       #
       #   The available provider names for `Logins` are as follows: * Facebook:
       #   `graph.facebook.com`
-      #   * Amazon Cognito Identity Provider:
-      #     `cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789`
       #   * Google: `accounts.google.com`
       #   * Amazon: `www.amazon.com`
       #   * Twitter: `api.twitter.com`
@@ -351,8 +365,8 @@ module Aws
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens. When using graph.facebook.com and www.amazon.com, supply the
       #   access\_token returned from the provider\'s authflow. For
-      #   accounts.google.com, an Amazon Cognito Identity Provider, or any other
-      #   OpenId Connect provider, always include the `id_token`.
+      #   accounts.google.com or any other OpenId Connect provider, always
+      #   include the id\_token.
       # @return [Types::GetOpenIdTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetOpenIdTokenResponse#identity_id #IdentityId} => String
@@ -724,7 +738,11 @@ module Aws
       # @option params [Array<String>] :open_id_connect_provider_arns
       #   A list of OpendID Connect provider ARNs.
       # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
-      #   A list representing a Cognito User Identity Pool and its client ID.
+      #   A list representing an Amazon Cognito Identity User Pool and its
+      #   client ID.
+      # @option params [Array<String>] :saml_provider_arns
+      #   An array of Amazon Resource Names (ARNs) of the SAML provider for your
+      #   identity pool.
       # @return [Types::IdentityPool] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::IdentityPool#identity_pool_id #IdentityPoolId} => String
@@ -734,6 +752,7 @@ module Aws
       #   * {Types::IdentityPool#developer_provider_name #DeveloperProviderName} => String
       #   * {Types::IdentityPool#open_id_connect_provider_arns #OpenIdConnectProviderARNs} => Array&lt;String&gt;
       #   * {Types::IdentityPool#cognito_identity_providers #CognitoIdentityProviders} => Array&lt;Types::CognitoIdentityProvider&gt;
+      #   * {Types::IdentityPool#saml_provider_arns #SamlProviderARNs} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_identity_pool({
@@ -751,6 +770,7 @@ module Aws
       #         client_id: "CognitoIdentityProviderClientId",
       #       },
       #     ],
+      #     saml_provider_arns: ["ARNString"],
       #   })
       #
       # @example Response structure
@@ -765,6 +785,8 @@ module Aws
       #   resp.cognito_identity_providers #=> Array
       #   resp.cognito_identity_providers[0].provider_name #=> String
       #   resp.cognito_identity_providers[0].client_id #=> String
+      #   resp.saml_provider_arns #=> Array
+      #   resp.saml_provider_arns[0] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def update_identity_pool(params = {}, options = {})

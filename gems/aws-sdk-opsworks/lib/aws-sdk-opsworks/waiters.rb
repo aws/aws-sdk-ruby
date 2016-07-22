@@ -186,6 +186,86 @@ module Aws
 
       end
 
+      class InstanceRegistered
+
+        # @option options [required, Client] :client
+        # @option options [Integer] :max_attempts (40)
+        # @option options [Integer] :delay (15)
+        # @option options [Proc] :before_attempt
+        # @option options [Proc] :before_wait
+        def initialize(options = {})
+          @client = options[:client]
+          @waiter = Aws::Waiters::Waiter.new({
+            max_attempts: 40,
+            delay: 15,
+            poller: Aws::Waiters::Poller.new(
+              "operation" => "DescribeInstances",
+              "description" => "Wait until OpsWorks instance is registered.",
+              "acceptors" => [
+                {
+                  "expected" => "registered",
+                  "matcher" => "pathAll",
+                  "state" => "success",
+                  "argument" => "Instances[].Status"
+                },
+                {
+                  "expected" => "setup_failed",
+                  "matcher" => "pathAny",
+                  "state" => "failure",
+                  "argument" => "Instances[].Status"
+                },
+                {
+                  "expected" => "shutting_down",
+                  "matcher" => "pathAny",
+                  "state" => "failure",
+                  "argument" => "Instances[].Status"
+                },
+                {
+                  "expected" => "stopped",
+                  "matcher" => "pathAny",
+                  "state" => "failure",
+                  "argument" => "Instances[].Status"
+                },
+                {
+                  "expected" => "stopping",
+                  "matcher" => "pathAny",
+                  "state" => "failure",
+                  "argument" => "Instances[].Status"
+                },
+                {
+                  "expected" => "terminating",
+                  "matcher" => "pathAny",
+                  "state" => "failure",
+                  "argument" => "Instances[].Status"
+                },
+                {
+                  "expected" => "terminated",
+                  "matcher" => "pathAny",
+                  "state" => "failure",
+                  "argument" => "Instances[].Status"
+                },
+                {
+                  "expected" => "stop_failed",
+                  "matcher" => "pathAny",
+                  "state" => "failure",
+                  "argument" => "Instances[].Status"
+                }
+              ]
+            )
+          }.merge(options))
+        end
+
+        # @option (see Client#describe_instances)
+        # @return (see Client#describe_instances)
+        def wait(params = {})
+          @waiter.wait(client: @client, params: params)
+        end
+
+        # @api private
+        attr_reader :waiter
+
+      end
+
       class InstanceStopped
 
         # @option options [required, Client] :client
