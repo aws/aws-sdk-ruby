@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::AutoScaling - Resolved an issue with the `:group_in_service` waiter.
+
+  See related [GitHub issue #1252](https://github.com/aws/aws-sdk-ruby/issues/1252).
+
 2.4.1 (2016-07-21)
 ------------------
 
