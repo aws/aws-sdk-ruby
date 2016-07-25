@@ -9,10 +9,12 @@ module Aws
 
     # Allows you to create signed URLs for Amazon CloudFront resources
     #
-    #     signer = Aws::CloudFront::UrlSigner.new
-    #     url = signer.signed_url(url,
+    #     signer = Aws::CloudFront::UrlSigner.new(
     #       key_pair_id: "cf-keypair-id",
     #       private_key_path: "./cf_private_key.pem"
+    #     )
+    #     url = signer.signed_url(url,
+    #       policy: policy.to_json
     #     )
     #
     class UrlSigner
