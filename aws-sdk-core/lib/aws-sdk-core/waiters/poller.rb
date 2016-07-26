@@ -95,7 +95,9 @@ module Aws
       end
 
       def path(acceptor)
-        acceptor['argument'].gsub(/\w+/) { |s| Seahorse::Util.underscore(s) }
+        acceptor['argument'].gsub(/(?<![`'])\b\w+\b(?![`'])/) do |str|
+          Seahorse::Util.underscore(str)
+        end
       end
 
       def non_empty_array(acceptor, response, &block)
