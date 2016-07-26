@@ -12,7 +12,7 @@ module Aws
       # @param [File, Tempfile, IO#read, String] value
       # @return [String<SHA256 Hexdigest>]
       def sha256_hexdigest(value)
-        if File === value || Tempfile === value
+        if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)
           OpenSSL::Digest::SHA256.file(value).hexdigest
         elsif value.respond_to?(:read)
           sha256 = OpenSSL::Digest::SHA256.new
@@ -26,7 +26,7 @@ module Aws
       # @param [File, Tempfile, IO#read, String] value
       # @return [String<MD5>]
       def md5(value)
-        if File === value || Tempfile === value
+        if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)
           Base64.encode64(OpenSSL::Digest::MD5.file(value).digest).strip
         elsif value.respond_to?(:read)
           md5 = OpenSSL::Digest::MD5.new

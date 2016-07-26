@@ -5,6 +5,18 @@ Unreleased Changes
 
   See related [GitHub issue #1252](https://github.com/aws/aws-sdk-ruby/issues/1252).
 
+* Issue - Aws::S3 - Resolved an issue with uploading unlinked Tempfile objects.
+
+  See related [GitHub issue #1232](https://github.com/aws/aws-sdk-ruby/issues/1232).
+
+  See related [GitHub pull request #1251](https://github.com/aws/aws-sdk-ruby/pull/1251).
+
+2.4.2 (2016-07-22)
+------------------
+
+* Issue - Aws::SharedConfig - Code wasn't properly respecting the
+  `AWS_SDK_LOAD_CONFIG` flag.
+
 2.4.1 (2016-07-21)
 ------------------
 
