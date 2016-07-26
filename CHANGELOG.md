@@ -1,4 +1,4 @@
-Unreleased Changes
+2.4.3 (2016-07-26)
 ------------------
 
 * Feature - Aws::IoT - This update adds support for thing types. Thing types are entities that store a description of common features of Things that are of the same logical type.
