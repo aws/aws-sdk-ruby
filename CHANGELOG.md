@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::IoT - This update adds support for thing types. Thing types are entities that store a description of common features of Things that are of the same logical type.
+
 * Issue - Aws::AutoScaling - Resolved an issue with the `:group_in_service` waiter.
 
   See related [GitHub issue #1252](https://github.com/aws/aws-sdk-ruby/issues/1252).
