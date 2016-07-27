@@ -79,6 +79,19 @@ module Aws
 
       end
 
+      describe 'unlinked tempfiles' do
+        it 'can put an unlinked file descriptor' do
+          data = '.' * 1024 * 1024
+          tmpfile = Tempfile.new('tmp')
+          tmpfile.write(data)
+          tmpfile.rewind
+          tmpfile.unlink
+          s3 = Client.new(stub_responses: true)
+          resp = s3.put_object(bucket:'bucket', key:'key', body: tmpfile)
+          expect(resp.context.http_request.body_contents).to eq(data)
+        end
+      end
+
       describe 'closed files' do
 
         it 'accepts closed File objects' do
@@ -104,6 +117,24 @@ module Aws
           expect(body.path).to eq(tmpfile.path)
           expect(body).not_to be(tmpfile)
           expect(body.closed?).to be(true)
+        end
+
+      end
+
+      describe 'empty body error responses' do
+
+        it 'creates an error class from empty body responses' do
+          client.handle(step: :send) do |context|
+            context.http_response.signal_done(
+              status_code: 500,
+              headers: {},
+              body: ''
+            )
+            Seahorse::Client::Response.new(context: context)
+          end
+          expect {
+            client.head_bucket(bucket:'aws-sdk')
+          }.to raise_error(S3::Errors::Http500Error)
         end
 
       end
