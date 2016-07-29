@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SES - Updated the documentation for Amazon Simple Email Service.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::CloudWatch - Updated the documentation for Amazon CloudWatch.
+
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
+* Feature - Aws::CodeDeploy - Updated the waiters for AWS CodeDeploy.
+
 2.4.3 (2016-07-26)
 ------------------
 
