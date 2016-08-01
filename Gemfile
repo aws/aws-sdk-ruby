@@ -32,7 +32,7 @@ group :test do
 end
 
 group :docs do
-  gem 'yard', :git => 'https://github.com/trevorrowe/yard.git', branch: 'frameless'
+  gem 'yard', '0.9.5'
   gem 'yard-sitemap', '~> 1.0'
   gem 'rdiscount'
   gem 'kramdown' # using this to fix poorly formatted HTML in API docs
