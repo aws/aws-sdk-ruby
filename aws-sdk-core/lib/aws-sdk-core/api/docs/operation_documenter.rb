@@ -45,7 +45,7 @@ module Aws
             req = ref.required ? 'required,' : ''
             type = input_type(ref)
             docstring = "@option #{@optname} [#{req}#{type}] :#{name}\n"
-            docstring += ref.documentation.lines.map { |line| "  #{line}" }.join
+            docstring += ref.documentation.to_s.lines.map { |line| "  #{line}" }.join
             tag(docstring)
           end
         end

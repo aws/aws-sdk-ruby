@@ -5,6 +5,8 @@ module Aws
     module Docs
       class Builder
 
+        DOC_SRC = File.expand_path('../../../../../../doc-src/', __FILE__)
+
         def self.document(svc_module)
           new(svc_module).document
         end
@@ -37,8 +39,8 @@ module Aws
         end
 
         def service_docstring
-          path = "doc-src/services/#{@svc_name}/service.md"
-          path = 'doc-src/services/default/service.md' unless File.exist?(path)
+          path = "#{DOC_SRC}/services/#{@svc_name}/service.md"
+          path = "#{DOC_SRC}/services/default/service.md" unless File.exist?(path)
           template = read(path)
           svc_name = @svc_name
           api = @api
@@ -61,8 +63,8 @@ module Aws
         end
 
         def errors_docstring
-          path = "doc-src/services/#{@svc_name}/errors.md"
-          path = 'doc-src/services/default/errors.md' unless File.exist?(path)
+          path = "#{DOC_SRC}/services/#{@svc_name}/errors.md"
+          path = "#{DOC_SRC}/services/default/errors.md" unless File.exist?(path)
           template = read(path)
           svc_name = @svc_name
           api = @api
@@ -89,8 +91,8 @@ module Aws
         end
 
         def client_docstring
-          path = "doc-src/services/#{@svc_name}/client.md"
-          path = 'doc-src/services/default/client.md' unless File.exist?(path)
+          path = "#{DOC_SRC}/services/#{@svc_name}/client.md"
+          path = "#{DOC_SRC}/services/default/client.md" unless File.exist?(path)
           render(path)
         end
 
@@ -98,7 +100,7 @@ module Aws
           svc_name = @svc_name
           api = @api
           full_name = @full_name
-          ERB.new(File.read(path)).result(binding)
+          ERB.new(read(path)).result(binding)
         end
 
         def document_client_constructor(namespace)
