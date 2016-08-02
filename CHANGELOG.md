@@ -1,6 +1,24 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::DirectoryService - Updated the documentation for AWS Directory Service.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::MachineLearning - Updated the API, and documentation for Amazon Machine Learning.
+
+* Feature - Aws::MarketplaceMetering - Updated the API for AWSMarketplace Metering.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Route53Domains - Updated the API, and documentation for Amazon Route 53 Domains.
+
 * Issue - Aws::SharedConfig - Moved from opt-in model to opt-out model. Now, the
   shared config behavior is the default behavior, and the `AWS_SDK_CONFIG_OPT_OUT`
   environment variable is used to return to the behavior for configuration loading,
