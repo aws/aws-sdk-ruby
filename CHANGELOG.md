@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::SharedConfig - Moved from opt-in model to opt-out model. Now, the
+  shared config behavior is the default behavior, and the `AWS_SDK_CONFIG_OPT_OUT`
+  environment variable is used to return to the behavior for configuration loading,
+  default region selection, and credential chain resolution that existed before
+  version `2.4.0` of the SDK.
+
 2.4.4 (2016-07-28)
 ------------------
 
