@@ -1,4 +1,4 @@
-Unreleased Changes
+2.5.0 (2016-08-02)
 ------------------
 
 * Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
