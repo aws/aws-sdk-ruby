@@ -109,6 +109,28 @@ module Aws
           expect(url).to match(/^http:/)
         end
 
+        it 'can whitelist headers in signing' do
+          signer = Presigner.new(client: client)
+          actual_url = signer.presigned_url(:put_object,
+            bucket: 'aws-sdk',
+            key: 'foo',
+            cache_control: 'max-age=20000',
+            whitelist_headers: [
+              'cache-control'
+            ]
+          )
+         expected_url = "https://aws-sdk.s3.amazonaws.com/foo?"\
+          "X-Amz-Algorithm=AWS4-HMAC-SHA256&"\
+          "X-Amz-Credential=AKIAIOSFODNN7EXAMPLE%2F20130524%2F"\
+          "us-east-1%2Fs3%2Faws4_request&"\
+          "X-Amz-Date=20130524T000000Z&"\
+          "X-Amz-Expires=900&"\
+          "X-Amz-SignedHeaders=cache-control%3Bhost&"\
+          "X-Amz-Signature=58bc17bb475505a1a2de9debf6bcccfbad8b22345f106c7a80bb76be1540c766"
+
+          expect(actual_url).to eq(expected_url)
+        end
+
       end
     end
   end

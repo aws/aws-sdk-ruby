@@ -179,6 +179,9 @@ module Aws
       #   temporary tokens generated for signing also have a default expiration
       #   which will affect the effective expiration of the pre-signed URL.
       #
+      # @option params [Array] :whitelist_headers ([]) header values that expected
+      #   to escape BLACKLIST_HEADER check when using V4 signer
+      #
       # @raise [ArgumentError] Raised if `:expires_in` exceeds one week
       #   (604800 seconds).
       #

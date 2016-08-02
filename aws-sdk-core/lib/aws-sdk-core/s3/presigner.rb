@@ -35,6 +35,9 @@ module Aws
       #   bucket name will be used as the hostname. This will cause
       #   the returned URL to be 'http' and not 'https'.
       #
+      # @option params [Array]  :whitelist_headers header([]) values to escape
+      #   BLACKLIST_HEADERS check in V4 signer
+      #
       # @raise [ArgumentError] Raises an ArgumentError if `:expires_in`
       #   exceeds one week.
       #
@@ -42,12 +45,17 @@ module Aws
         if params[:key].nil? or params[:key] == ''
           raise ArgumentError, ":key must not be blank"
         end
+
         virtual_host = !!params.delete(:virtual_host)
+        whitelist_headers = params.delete(:whitelist_headers)
         scheme = http_scheme(params, virtual_host)
 
         req = @client.build_request(method, params)
         use_bucket_as_hostname(req) if virtual_host
-        sign_but_dont_send(req, expires_in(params), scheme)
+        sign_but_dont_send(
+          req, expires_in(params),
+          scheme, whitelist_headers || []
+        )
         req.send_request.data
       end
 
@@ -85,7 +93,7 @@ module Aws
         end
       end
 
-      def sign_but_dont_send(req, expires_in, scheme)
+      def sign_but_dont_send(req, expires_in, scheme, whitelist_headers)
         req.handlers.remove(Plugins::S3RequestSigner::SigningHandler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handle(step: :send) do |context|
@@ -97,7 +105,7 @@ module Aws
           end
           signer = Signers::V4.new(
             context.config.credentials, 's3',
-            context.config.region
+            context.config.region, whitelist_headers
           )
           url = signer.presigned_url(
             context.http_request,
