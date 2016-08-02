@@ -110,9 +110,11 @@ module Aws
   autoload :Credentials, 'aws-sdk-core/credentials'
   autoload :Deprecations, 'aws-sdk-core/deprecations'
   autoload :EagerLoader, 'aws-sdk-core/eager_loader'
+  autoload :ECSCredentials, 'aws-sdk-core/ecs_credentials'
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
+  autoload :IniParser, 'aws-sdk-core/ini_parser'
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
   autoload :Json, 'aws-sdk-core/json'
   autoload :PageableResponse, 'aws-sdk-core/pageable_response'
@@ -122,6 +124,7 @@ module Aws
   autoload :Partitions, 'aws-sdk-core/partitions'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
   autoload :Service, 'aws-sdk-core/service'
+  autoload :SharedConfig, 'aws-sdk-core/shared_config'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :Structure, 'aws-sdk-core/structure'
   autoload :TreeHash, 'aws-sdk-core/tree_hash'
@@ -165,6 +168,7 @@ module Aws
     autoload :GlacierApiVersion, 'aws-sdk-core/plugins/glacier_api_version'
     autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
+    autoload :HelpfulSocketErrors, 'aws-sdk-core/plugins/helpful_socket_errors'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
@@ -272,6 +276,12 @@ module Aws
   end
 
   class << self
+
+    # @api private
+    def shared_config
+      enabled = ENV["AWS_SDK_CONFIG_OPT_OUT"] ? false : true
+      @shared_config ||= SharedConfig.new(config_enabled: enabled)
+    end
 
     # @return [Hash] Returns a hash of default configuration options shared
     #   by all constructed clients.
