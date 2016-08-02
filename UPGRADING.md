@@ -1,5 +1,18 @@
 # Upgrade Notes
 
+## `aws-sdk-core` - v2.5.0
+
+* Due to customer requests, and an analysis of the tradeoffs, we're changing the
+  shared configuration features from an opt-in feature to an opt-out feature.
+  With this version, the changes to default region support and to the default
+  credential provider chain are on by default, and the `AWS_SDK_LOAD_CONFIG`
+  environment variable will not be used for any purpose.
+
+  If you wish to opt-out of the new functionality for backwards compatibility
+  reasons, set the `AWS_SDK_CONFIG_OPT_OUT` environment variable to any value.
+  That will return shared configuration and credential provider chain behavior
+  to the behaviors present before version `2.4.0` of the SDK.
+
 ## `aws-sdk-core` - v2.4.0
 
 * We are adding support for the shared configuration file used by the CLI,
