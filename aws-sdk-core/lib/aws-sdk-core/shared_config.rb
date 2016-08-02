@@ -16,10 +16,11 @@ module Aws
     # credentials file, and optionally the shared configuration file, as ini
     # files which support profiles.
     #
-    # By default, only the shared credential file (the default path for which is
-    # `~/.aws/credentials`) is loaded. However, if you set the
-    # `ENV['AWS_SDK_LOAD_CONFIG']` environment variable, the shared config file
-    # will also be loaded (the default path for which is `~/.aws/config`).
+    # By default, the shared credential file (the default path for which is
+    # `~/.aws/credentials`) and the shared config file (the default path for
+    # which is `~/.aws/config`) are loaded. However, if you set the
+    # `ENV['AWS_SDK_CONFIG_OPT_OUT']` environment variable, only the shared
+    # credential file will be loaded.
     #
     # The default profile name is 'default'. You can specify the profile name
     # with the `ENV['AWS_PROFILE']` environment variable or with the
@@ -35,7 +36,7 @@ module Aws
     #   the fixed default value of 'default'.
     # @option options [Boolean] :config_enabled If true, loads the shared config
     #   file and enables new config values outside of the old shared credential
-    #   spec. Generally sourced from `ENV['AWS_SDK_LOAD_CONFIG']`.
+    #   spec.
     def initialize(options = {})
       @profile_name = determine_profile(options)
       @config_enabled = options[:config_enabled]
@@ -76,8 +77,7 @@ module Aws
     end
 
     # @return [Boolean] returns `true` if use of the shared config file is
-    #   enabled. Generally true if and only if the `AWS_SDK_LOAD_CONFIG` env
-    #   variable is set.
+    #   enabled.
     def config_enabled?
       @config_enabled ? true : false
     end
