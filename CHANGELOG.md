@@ -1,4 +1,4 @@
-Unreleased Changes
+2.5.1 (2016-08-04)
 ------------------
 
 * Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
