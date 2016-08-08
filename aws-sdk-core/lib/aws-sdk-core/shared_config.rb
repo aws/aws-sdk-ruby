@@ -42,7 +42,7 @@ module Aws
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
         determine_credentials_path
-      @parsed_credenetials = {}
+      @parsed_credentials = {}
       load_credentials_file if loadable?(@credentials_path)
       if @config_enabled
         @config_path = options[:config_path] || determine_config_path
@@ -91,7 +91,7 @@ module Aws
     #   or `nil` if no valid credentials were found.
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
-      validate_profile_exists(p) if @parsed_credentials || @parsed_config
+      validate_profile_exists(p) if credentials_present?
       if credentials = credentials_from_shared(p, opts)
         credentials
       elsif credentials = credentials_from_config(p, opts)
@@ -129,6 +129,10 @@ module Aws
     end
 
     private
+    def credentials_present?
+      (@parsed_credentials && !@parsed_credentials.empty?) ||
+        (@parsed_config && !@parsed_config.empty?)
+    end
     def assume_role_from_profile(cfg, profile, opts)
       if cfg && prof_cfg = cfg[profile]
         opts[:source_profile] ||= prof_cfg["source_profile"]
