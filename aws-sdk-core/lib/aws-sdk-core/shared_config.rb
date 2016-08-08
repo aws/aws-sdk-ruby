@@ -42,7 +42,7 @@ module Aws
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
         determine_credentials_path
-      @parsed_credenetials = {}
+      @parsed_credentials = nil
       load_credentials_file if loadable?(@credentials_path)
       if @config_enabled
         @config_path = options[:config_path] || determine_config_path
@@ -55,7 +55,7 @@ module Aws
       @profile_name = nil
       @credentials_path = nil
       @config_path = nil
-      @parsed_credentials = {}
+      @parsed_credentials = nil
       @parsed_config = nil
       @config_enabled = options[:config_enabled] ? true : false
       @profile_name = determine_profile(options)
