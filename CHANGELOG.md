@@ -1,4 +1,4 @@
-Unreleased Changes
+2.5.2 (2016-08-09)
 ------------------
 
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
