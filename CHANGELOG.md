@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RDS - Updated the waiters for Amazon Relational Database Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-08-01 API version of Amazon CloudFront.
+
 2.5.1 (2016-08-04)
 ------------------
 
