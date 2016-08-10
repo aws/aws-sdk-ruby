@@ -290,7 +290,7 @@ module Aws
       #   it is put back into the queue and can be received again.
       #   By default, the queue's
       #
-      # @option opitons [Array<String>] :attribute_names ([])
+      # @option options [Array<String>] :attribute_names ([])
       #   The list of attributes that need to be returned along with each
       #   message. Valid attribute names include:
       #
