@@ -91,6 +91,7 @@ module Aws
     WAF
     WorkSpaces
   )
+  # end services
 
   @config = {}
   @services = {}
