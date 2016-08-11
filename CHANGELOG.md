@@ -1,4 +1,4 @@
-Unreleased Changes
+2.5.3 (2016-08-11)
 ------------------
 
 * Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
