@@ -461,10 +461,7 @@
         },
         "elasticloadbalancingv2": {
           "defaults": {
-            "protocols": [
-              "http",
-              "https"
-            ]
+            "hostname": "elasticloadbalancing.{region}.{dnsSuffix}"
           },
           "endpoints": {
             "us-east-1": {},
@@ -1185,10 +1182,7 @@
         },
         "elasticloadbalancingv2": {
           "defaults": {
-            "protocols": [
-              "http",
-              "https"
-            ]
+            "hostname": "elasticloadbalancing.{region}.{dnsSuffix}"
           },
           "endpoints": {
             "cn-north-1": {}
