@@ -181,6 +181,7 @@ module Aws
     autoload :S3Accelerate, 'aws-sdk-core/plugins/s3_accelerate'
     autoload :S3BucketDns, 'aws-sdk-core/plugins/s3_bucket_dns'
     autoload :S3BucketNameRestrictions, 'aws-sdk-core/plugins/s3_bucket_name_restrictions'
+    autoload :S3Dualstack, 'aws-sdk-core/plugins/s3_dualstack'
     autoload :S3Expect100Continue, 'aws-sdk-core/plugins/s3_expect_100_continue'
     autoload :S3GetBucketLocationFix, 'aws-sdk-core/plugins/s3_get_bucket_location_fix'
     autoload :S3Http200Errors, 'aws-sdk-core/plugins/s3_http_200_errors'
