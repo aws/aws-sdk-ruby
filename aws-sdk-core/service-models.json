@@ -138,6 +138,10 @@
     "models": "elasticloadbalancing/2012-06-01",
     "endpoint": "elasticloadbalancing"
   },
+  "ElasticLoadBalancingV2": {
+    "models": "elasticloadbalancingv2/2015-12-01",
+    "endpoint": "elasticloadbalancing"
+  },
   "ElasticsearchService": {
     "models": "es/2015-01-01",
     "endpoint": "es"
@@ -185,6 +189,10 @@
   "Kinesis": {
     "models": "kinesis/2013-12-02",
     "endpoint": "kinesis"
+  },
+  "KinesisAnalytics": {
+    "models": "kinesisanalytics/2015-08-14",
+    "endpoint": "kinesisanalytics"
   },
   "KMS": {
     "models": "kms/2014-11-01",
@@ -249,6 +257,10 @@
   "SNS": {
     "models": "sns/2010-03-31",
     "endpoint": "sns"
+  },
+  "Snowball": {
+    "models": "snowball/2016-06-30",
+    "endpoint": "snowball"
   },
   "SQS": {
     "models": "sqs/2012-11-05",

@@ -54,6 +54,7 @@ module Aws
     ElastiCache
     ElasticBeanstalk
     ElasticLoadBalancing
+    ElasticLoadBalancingV2
     ElasticsearchService
     ElasticTranscoder
     EMR
@@ -66,6 +67,7 @@ module Aws
     IoT
     IoTDataPlane
     Kinesis
+    KinesisAnalytics
     KMS
     Lambda
     LambdaPreview
@@ -82,6 +84,7 @@ module Aws
     SES
     SimpleDB
     SNS
+    Snowball
     SQS
     SSM
     StorageGateway

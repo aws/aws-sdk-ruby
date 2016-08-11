@@ -1,6 +1,23 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElasticLoadBalancing - Updated the API, documentation, and waiters for Elastic Load Balancing.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Added support for a new service, Elastic Load Balancing v2.
+
+* Feature - Aws::KinesisAnalytics - Added support for a new service, Amazon Kinesis Analytics.
+
+* Feature - Aws::Snowball - Added support for a new service, Amazon Import/Export Snowball.
+
+* Feature - Aws::S3 - Add IPv6 support to the `Aws::S3` client. You can turn on
+  the IPv6-supported endpoint using the `:use_dualstack_endpoint` client option.
+
 2.5.2 (2016-08-09)
 ------------------
 
