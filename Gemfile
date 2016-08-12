@@ -25,10 +25,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'
   gem 'json-schema'
-
-  # used in the cucumber feature tests to test
-  # the presigned-post utility.
-  gem 'rest-client' if RUBY_VERSION > '1.9.3'
+  gem 'multipart-post'
 end
 
 group :docs do

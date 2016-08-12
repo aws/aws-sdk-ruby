@@ -1,5 +1,7 @@
 require 'base64'
-require 'rest-client'
+require 'net/https'
+require 'net/http/post/multipart'
+require 'uri'
 
 Before("@s3") do
   @s3 = Aws::S3::Resource.new
@@ -100,8 +102,15 @@ When(/^I create a presigned post$/) do
 end
 
 Then(/^I should be able to POST an object to the form url$/) do
-  r = RestClient.post(@post.url, @post.fields.merge(file: File.open(__FILE__, 'r')))
-  expect(r.code).to eq(201)
+  uri = URI.parse(@post.url)
+  req = Net::HTTP::Post::Multipart.new(uri.request_uri, @post.fields.merge(
+    "file" => UploadIO.new(File.open(__FILE__, 'r'), 'text/plain')
+  ))
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+  resp = http.request(req)
+  expect(resp.code.to_i).to eq(201)
 end
 
 Given(/^I have an encryption client configured to read a Java encrypted object$/) do
