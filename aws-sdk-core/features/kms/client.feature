@@ -10,8 +10,8 @@ Feature: Amazon Key Management Service
     When I attempt to call the "GetKeyPolicy" API with:
     | KeyId      | fake-key    |
     | PolicyName | fake-policy |
-    Then I expect the response error code to be "NotFoundException"
+    Then I expect the response error code to be "ValidationException"
     And I expect the response error message to include:
     """
-    does not exist
+    validation error
     """
