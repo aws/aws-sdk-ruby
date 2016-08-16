@@ -641,6 +641,13 @@
             "sa-east-1": {}
           }
         },
+        "kinesisanalytics": {
+          "endpoints": {
+            "us-east-1": {},
+            "us-west-2": {},
+            "eu-west-1": {}
+          }
+        },
         "kms": {
           "endpoints": {
             "us-east-1": {},
