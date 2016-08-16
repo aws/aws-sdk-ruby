@@ -1,4 +1,4 @@
-Unreleased Changes
+2.5.4 (2016-08-16)
 ------------------
 
 * Feature - Aws::ACM - Updated the API for AWS Certificate Manager.
