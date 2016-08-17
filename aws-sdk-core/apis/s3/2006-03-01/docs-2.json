@@ -1256,7 +1256,7 @@
         "ListMultipartUploadsOutput$KeyMarker": "The key at or after which the listing began.",
         "ListMultipartUploadsRequest$KeyMarker": "Together with upload-id-marker, this parameter specifies the multipart upload after which listing should begin.",
         "ListObjectVersionsOutput$KeyMarker": "Marks the last Key returned in a truncated response.",
-        "ListObjectVersionsRequest$KeyMarker": "Specifies the key to start with when listing objects in a bucket."
+        "ListObjectVersionsRequest$KeyMarker": "Specifies the key to start after when listing objects in a bucket."
       }
     },
     "KeyPrefixEquals": {
@@ -1415,7 +1415,7 @@
       "base": null,
       "refs": {
         "ListObjectsOutput$Marker": null,
-        "ListObjectsRequest$Marker": "Specifies the key to start with when listing objects in a bucket."
+        "ListObjectsRequest$Marker": "Specifies the key to start after when listing objects in a bucket."
       }
     },
     "MaxAgeSeconds": {
