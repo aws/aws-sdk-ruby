@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.5.5 (2016-08-18)
+------------------
+
 * Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
 
 * Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
