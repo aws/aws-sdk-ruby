@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Redshift - Updated the waiters for Amazon Redshift.
+
+* Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
+
 2.5.4 (2016-08-16)
 ------------------
 
