@@ -54,8 +54,8 @@ module AwsSdkCodeGenerator
         @code_objects << AutoloadStatement.new(const_name, path)
       end
 
-      def attr_reader(name, &block)
-        a = Dsl::AttributeReader.new(name)
+      def attr_reader(name, options = {}, &block)
+        a = Dsl::AttributeReader.new(name, options)
         yield(a) if block
         add(a)
       end

@@ -4,25 +4,30 @@ module AwsSdkCodeGenerator
 
       include Dsl::CodeObject
 
-      def initialize(name, &block)
+      def initialize(name, api_private: false, &block)
         @name = name
-        @return_tags = []
+        @tags = []
         yield(self) if block
+        api_private! if api_private
       end
 
       attr_reader :name
 
       def returns(type, docstring:nil)
-        @return_tags << ReturnTag.new(type:type, docstring:docstring)
+        @tags << ReturnTag.new(type:type, docstring:docstring)
+      end
+
+      def api_private!
+        @tags << "# @api private"
       end
 
       def documented?
-        !@return_tags.empty?
+        !@tags.empty?
       end
 
       def lines
         lines = []
-        @return_tags.each do |tag|
+        @tags.each do |tag|
           lines.concat(tag.lines)
         end
         lines + ["#{macro} :#{@name}"]
