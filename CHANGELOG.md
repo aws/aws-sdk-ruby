@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
 2.5.5 (2016-08-18)
 ------------------
 
