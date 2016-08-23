@@ -1,4 +1,4 @@
-Unreleased Changes
+2.5.6 (2016-08-23)
 ------------------
 
 * Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
