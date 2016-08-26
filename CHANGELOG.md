@@ -2845,7 +2845,7 @@ Unreleased Changes
   #=> "... cipher text ..."
   ```
 
-  You can configure a `:key_provider` to the encyrption client to allow
+  You can configure a `:key_provider` to the encryption client to allow
   for using multiple decryption keys. See the `Aws::S3::Encryption::Client`
   API documentation for more information.
 

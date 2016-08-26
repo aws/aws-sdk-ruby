@@ -73,7 +73,7 @@ When(/^I perform an encrypted PUT of the value "(.*?)"$/) do |value|
   @cse.put_object(bucket: @bucket_name, key: @key, body: @plain_text)
 end
 
-When(/^I GET the object with a non\-encyrption client$/) do
+When(/^I GET the object with a non\-encryption client$/) do
   @cipher_text = @s3.client.get_object(bucket: @bucket_name, key: @key).body.read
 end
 
