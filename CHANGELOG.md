@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.5.7 (2016-08-30)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
