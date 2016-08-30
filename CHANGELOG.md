@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::ECS - Updated the waiters for Amazon EC2 Container Service.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Management Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-08-20 API version of Amazon CloudFront.
+
+* Feature - Aws::ElasticLoadBalancing - Updated the documentation for Elastic Load Balancing.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
 2.5.6 (2016-08-23)
 ------------------
 
