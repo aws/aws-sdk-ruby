@@ -24,7 +24,7 @@
     "endpoint": "cloudformation"
   },
   "CloudFront": {
-    "models": "cloudfront/2016-08-01",
+    "models": "cloudfront/2016-08-20",
     "endpoint": "cloudfront"
   },
   "CloudHSM": {
