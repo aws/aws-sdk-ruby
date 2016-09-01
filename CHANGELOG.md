@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.5.8 (2016-09-01)
+------------------
+
 * Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
 
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
