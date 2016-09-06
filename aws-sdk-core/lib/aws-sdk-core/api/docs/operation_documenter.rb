@@ -86,19 +86,22 @@ module Aws
         end
 
         def shared_example(json_ex, method_name, operation)
-          input_comments = json_ex['comments']['input']
-          input = SharedExample.new(json_ex['input'], method_name, operation, input_comments).to_str_input
-          parts = []
-          parts << "@example Example: #{json_ex['title']}\n\n"
-          parts << "  # #{json_ex['description']}\n\n"
-          parts += input.lines.map { |line| "  " + line }
-          if json_ex['output']
-            output_comments = json_ex['comments']['output']
-            output = SharedExample.new(json_ex['output'], method_name, operation, output_comments).to_str_output
-            parts << "\n\n  # resp.to_h outputs the following:\n"
-            parts += output.lines.map { |line| "  " + line }
+          begin # disable broken examples
+            input_comments = json_ex['comments']['input']
+            input = SharedExample.new(json_ex['input'], method_name, operation, input_comments).to_str_input
+            parts = []
+            parts << "@example Example: #{json_ex['title']}\n\n"
+            parts << "  # #{json_ex['description']}\n\n"
+            parts += input.lines.map { |line| "  " + line }
+            if json_ex['output']
+              output_comments = json_ex['comments']['output']
+              output = SharedExample.new(json_ex['output'], method_name, operation, output_comments).to_str_output
+              parts << "\n\n  # resp.to_h outputs the following:\n"
+              parts += output.lines.map { |line| "  " + line }
+            end
+            tag(parts.join)
+          rescue
           end
-          tag(parts.join)
         end
 
         def examples_from_disk(method_name, operation)
