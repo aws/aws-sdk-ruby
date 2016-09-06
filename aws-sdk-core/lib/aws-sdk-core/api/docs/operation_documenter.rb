@@ -79,7 +79,7 @@ module Aws
           if operation['examples']
             operation['examples'].map do |example|
               shared_example(example, method_name, operation)
-            end
+            end.compact
           else
             []
           end
@@ -101,6 +101,7 @@ module Aws
             end
             tag(parts.join)
           rescue
+            nil
           end
         end
 
