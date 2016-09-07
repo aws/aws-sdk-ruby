@@ -4,9 +4,6 @@ Unreleased Changes
 2.5.10 (2016-09-07)
 ------------------
 
-2.5.9 (2016-09-06)
-------------------
-
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
