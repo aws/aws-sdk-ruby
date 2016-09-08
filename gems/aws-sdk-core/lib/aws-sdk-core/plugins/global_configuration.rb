@@ -51,14 +51,14 @@ module Aws
         :cognitosync, :configservice, :databasemigrationservice, :datapipeline,
         :devicefarm, :directconnect, :directoryservice, :dynamodb,
         :dynamodbstreams, :ec2, :ecr, :ecs, :efs, :elasticache,
-        :elasticbeanstalk, :elasticloadbalancing, :elasticsearchservice,
-        :elastictranscoder, :emr, :firehose, :gamelift, :glacier, :iam,
-        :importexport, :inspector, :iot, :iotdataplane, :kinesis, :kms,
-        :lambda, :lambdapreview, :machinelearning,
-        :marketplacecommerceanalytics, :marketplacemetering, :opsworks, :rds,
-        :redshift, :route53, :route53domains, :s3, :servicecatalog, :ses,
-        :simpledb, :sns, :sqs, :ssm, :storagegateway, :sts, :support, :swf,
-        :waf, :workspaces
+        :elasticbeanstalk, :elasticloadbalancing, :elasticloadbalancingv2,
+        :elasticsearchservice, :elastictranscoder, :emr, :firehose, :gamelift,
+        :glacier, :iam, :importexport, :inspector, :iot, :iotdataplane,
+        :kinesis, :kinesisanalytics, :kms, :lambda, :lambdapreview,
+        :machinelearning, :marketplacecommerceanalytics, :marketplacemetering,
+        :opsworks, :rds, :redshift, :route53, :route53domains, :s3,
+        :servicecatalog, :ses, :simpledb, :snowball, :sns, :sqs, :ssm,
+        :storagegateway, :sts, :support, :swf, :waf, :workspaces
       ])
       # end
 
