@@ -237,7 +237,7 @@ to be backwards compatible.
 | aws-sdk-applicationdiscoveryservice  | AWS Application Discovery Service        | Aws::ApplicationDiscoveryService  | 2015-11-01  |
 | aws-sdk-autoscaling                  | Auto Scaling                             | Aws::AutoScaling                  | 2011-01-01  |
 | aws-sdk-cloudformation               | AWS CloudFormation                       | Aws::CloudFormation               | 2010-05-15  |
-| aws-sdk-cloudfront                   | Amazon CloudFront                        | Aws::CloudFront                   | 2016-01-28  |
+| aws-sdk-cloudfront                   | Amazon CloudFront                        | Aws::CloudFront                   | 2016-08-20  |
 | aws-sdk-cloudhsm                     | Amazon CloudHSM                          | Aws::CloudHSM                     | 2014-05-30  |
 | aws-sdk-cloudsearch                  | Amazon CloudSearch                       | Aws::CloudSearch                  | 2013-01-01  |
 | aws-sdk-cloudsearchdomain            | Amazon CloudSearch Domain                | Aws::CloudSearchDomain            | 2013-01-01  |
@@ -266,6 +266,7 @@ to be backwards compatible.
 | aws-sdk-elasticache                  | Amazon ElastiCache                       | Aws::ElastiCache                  | 2015-02-02  |
 | aws-sdk-elasticbeanstalk             | AWS Elastic Beanstalk                    | Aws::ElasticBeanstalk             | 2010-12-01  |
 | aws-sdk-elasticloadbalancing         | Elastic Load Balancing                   | Aws::ElasticLoadBalancing         | 2012-06-01  |
+| aws-sdk-elasticloadbalancingv2       | Elastic Load Balancing                   | Aws::ElasticLoadBalancingV2       | 2015-12-01  |
 | aws-sdk-elasticsearchservice         | Amazon Elasticsearch Service             | Aws::ElasticsearchService         | 2015-01-01  |
 | aws-sdk-elastictranscoder            | Amazon Elastic Transcoder                | Aws::ElasticTranscoder            | 2012-09-25  |
 | aws-sdk-emr                          | Amazon Elastic MapReduce                 | Aws::EMR                          | 2009-03-31  |
@@ -278,6 +279,7 @@ to be backwards compatible.
 | aws-sdk-iot                          | AWS IoT                                  | Aws::IoT                          | 2015-05-28  |
 | aws-sdk-iotdataplane                 | AWS IoT Data Plane                       | Aws::IoTDataPlane                 | 2015-05-28  |
 | aws-sdk-kinesis                      | Amazon Kinesis                           | Aws::Kinesis                      | 2013-12-02  |
+| aws-sdk-kinesisanalytics             | Amazon Kinesis Analytics                 | Aws::KinesisAnalytics             | 2015-08-14  |
 | aws-sdk-kms                          | AWS Key Management Service               | Aws::KMS                          | 2014-11-01  |
 | aws-sdk-lambda                       | AWS Lambda                               | Aws::Lambda                       | 2015-03-31  |
 | aws-sdk-lambdapreview                | AWS Lambda                               | Aws::LambdaPreview                | 2014-11-11  |
@@ -293,6 +295,7 @@ to be backwards compatible.
 | aws-sdk-servicecatalog               | AWS Service Catalog                      | Aws::ServiceCatalog               | 2015-12-10  |
 | aws-sdk-ses                          | Amazon Simple Email Service              | Aws::SES                          | 2010-12-01  |
 | aws-sdk-simpledb                     | Amazon SimpleDB                          | Aws::SimpleDB                     | 2009-04-15  |
+| aws-sdk-snowball                     | Amazon Import/Export Snowball            | Aws::Snowball                     | 2016-06-30  |
 | aws-sdk-sns                          | Amazon Simple Notification Service       | Aws::SNS                          | 2010-03-31  |
 | aws-sdk-sqs                          | Amazon Simple Queue Service              | Aws::SQS                          | 2012-11-05  |
 | aws-sdk-ssm                          | Amazon Simple Systems Management Service | Aws::SSM                          | 2014-11-06  |

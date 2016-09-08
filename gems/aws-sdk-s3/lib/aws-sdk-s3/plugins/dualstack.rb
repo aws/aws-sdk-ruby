@@ -53,7 +53,7 @@ module Aws
 
           def use_bucket_dns?(bucket_name, context)
             ssl = context.http_request.endpoint.scheme == "https"
-            bucket_name && S3BucketDns.dns_compatible?(bucket_name, ssl) &&
+            bucket_name && BucketDns.dns_compatible?(bucket_name, ssl) &&
               !context.config.force_path_style
           end
         end
