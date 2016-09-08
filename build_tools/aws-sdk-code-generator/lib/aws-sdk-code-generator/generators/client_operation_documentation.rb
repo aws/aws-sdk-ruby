@@ -79,14 +79,22 @@ module AwsSdkCodeGenerator
 
       def apply_shared_examples(docstring)
         (@examples[@operation_name] || []).size.times do |n|
-          docstring.append(
-            SharedExample.new(
-              operation_name: @operation_name,
-              api: @api,
-              examples: @examples,
-              example: n
-            ).to_s
-          )
+          begin
+            # TODO : known issue with an ec2 shared example that
+            #        attempts to document a member that is not
+            #        present in the model any longer (intentionally
+            #        removed in customizations) - raises runtime
+            #        error. This should be cleaned up.
+            docstring.append(
+              SharedExample.new(
+                operation_name: @operation_name,
+                api: @api,
+                examples: @examples,
+                example: n
+              ).to_s
+            )
+          rescue
+          end
         end
       end
 

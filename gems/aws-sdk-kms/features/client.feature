@@ -1,13 +1,17 @@
 # language: en
-@smoke @kms
+@kms @client
 Feature: Amazon Key Management Service
 
-  Scenario: Making a request
+  Scenario: Making a basic request
     When I call the "ListAliases" API
-    Then the value at "Aliases" should be a list
+    Then the response should contain a list of "Aliases"
 
-  Scenario: Handling errors
+  Scenario: Error handling
     When I attempt to call the "GetKeyPolicy" API with:
-    | KeyId      | 12345678-1234-1234-1234-123456789012 |
-    | PolicyName | fake-policy                          |
+    | KeyId      | fake-key    |
+    | PolicyName | fake-policy |
     Then I expect the response error code to be "ValidationException"
+    And I expect the response error message to include:
+    """
+    validation error
+    """

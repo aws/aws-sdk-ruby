@@ -253,8 +253,8 @@ module Aws
 
     # @api private
     def shared_config
-      enabled = ENV["AWS_SDK_LOAD_CONFIG"] ? true : false
-      @shared_config ||= SharedConfig.new(config_enabled: true)
+      enabled = ENV["AWS_SDK_CONFIG_OPT_OUT"] ? false : true
+      @shared_config ||= SharedConfig.new(config_enabled: enabled)
     end
 
     # @return [Hash] Returns a hash of default configuration options shared

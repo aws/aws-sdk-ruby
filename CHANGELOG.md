@@ -1,6 +1,172 @@
 Unreleased Changes
 ------------------
 
+2.5.10 (2016-09-07)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ECR - Updated the documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::ECS - Updated the documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::SNS - Updated the API, and documentation for Amazon Simple Notification Service.
+
+2.5.8 (2016-09-01)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.5.7 (2016-08-30)
+------------------
+
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::ECS - Updated the waiters for Amazon EC2 Container Service.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::SSM - Updated the documentation for Amazon Simple Systems Management Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-08-20 API version of Amazon CloudFront.
+
+* Feature - Aws::ElasticLoadBalancing - Updated the documentation for Elastic Load Balancing.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
+2.5.6 (2016-08-23)
+------------------
+
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.5.5 (2016-08-18)
+------------------
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::IAM - Updated the documentation for AWS Identity and Access Management.
+
+* Feature - Aws::Redshift - Updated the waiters for Amazon Redshift.
+
+* Feature - Aws::WorkSpaces - Updated the API, and documentation for Amazon WorkSpaces.
+
+2.5.4 (2016-08-16)
+------------------
+
+* Feature - Aws::ACM - Updated the API for AWS Certificate Manager.
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
+* Feature - Aws::KMS - Updated the API for AWS Key Management Service.
+
+2.5.3 (2016-08-11)
+------------------
+
+* Feature - Aws::AutoScaling - Updated the API, and documentation for Auto Scaling.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+* Feature - Aws::ElasticLoadBalancing - Updated the API, documentation, and waiters for Elastic Load Balancing.
+
+* Feature - Aws::KMS - Updated the API, and documentation for AWS Key Management Service.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Added support for a new service, Elastic Load Balancing v2.
+
+* Feature - Aws::KinesisAnalytics - Added support for a new service, Amazon Kinesis Analytics.
+
+* Feature - Aws::Snowball - Added support for a new service, Amazon Import/Export Snowball.
+
+* Feature - Aws::S3 - Add IPv6 support to the `Aws::S3` client. You can turn on
+  the IPv6-supported endpoint using the `:use_dualstack_endpoint` client option.
+
+2.5.2 (2016-08-09)
+------------------
+
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RDS - Updated the waiters for Amazon Relational Database Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-08-01 API version of Amazon CloudFront.
+
+2.5.1 (2016-08-04)
+------------------
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.5.0 (2016-08-02)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the documentation for Application Auto Scaling.
+
+* Feature - Aws::DirectoryService - Updated the documentation for AWS Directory Service.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::MachineLearning - Updated the API, and documentation for Amazon Machine Learning.
+
+* Feature - Aws::MarketplaceMetering - Updated the API for AWSMarketplace Metering.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Route53Domains - Updated the API, and documentation for Amazon Route 53 Domains.
+
+* Issue - Aws::SharedConfig - Moved from opt-in model to opt-out model. Now, the
+  shared config behavior is the default behavior, and the `AWS_SDK_CONFIG_OPT_OUT`
+  environment variable is used to return to the behavior for configuration loading,
+  default region selection, and credential chain resolution that existed before
+  version `2.4.0` of the SDK.
+
+2.4.4 (2016-07-28)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::EC2 - Updated the API, and documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::SES - Updated the documentation for Amazon Simple Email Service.
+
+* Feature - Aws::ElasticsearchService - Updated the API, and documentation for Amazon Elasticsearch Service.
+
+* Feature - Aws::CloudWatch - Updated the documentation for Amazon CloudWatch.
+
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
+* Feature - Aws::CodeDeploy - Updated the waiters for AWS CodeDeploy.
+
 2.4.3 (2016-07-26)
 ------------------
 
@@ -2726,7 +2892,7 @@ Unreleased Changes
   #=> "... cipher text ..."
   ```
 
-  You can configure a `:key_provider` to the encyrption client to allow
+  You can configure a `:key_provider` to the encryption client to allow
   for using multiple decryption keys. See the `Aws::S3::Encryption::Client`
   API documentation for more information.
 

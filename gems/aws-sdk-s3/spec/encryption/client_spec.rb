@@ -322,7 +322,7 @@ module Aws
                 to_return(status: 404)
               expect {
                 client.get_object(bucket:'bucket', key:'key')
-              }.to raise_error(Errors::DecryptionError, 'unable to locate encyrption envelope')
+              }.to raise_error(Errors::DecryptionError, 'unable to locate encryption envelope')
             end
 
             it 'resets the cipher during decryption on error' do

@@ -13,10 +13,10 @@ module Aws
         '..', 'fixtures', 'credentials', 'mock_shared_config'))
     }
 
-    describe "AWS_SDK_LOAD_CONFIG set" do
+    describe "default behavior" do
       before(:each) do
         stub_const('ENV', {})
-        # Setting :config_enabled is the AWS_SDK_LOAD_CONFIG behavior.
+        # AWS_SDK_CONFIG_OPT_OUT not present
         Aws.shared_config.fresh(
           config_enabled: true,
           credentials_path: mock_credential_file,
@@ -131,7 +131,7 @@ JSON
       end
     end
 
-    describe "AWS_SDK_LOAD_CONFIG not set" do
+    describe "AWS_SDK_CONFIG_OPT_OUT set" do
       before(:each) do
         stub_const('ENV', {})
         Aws.shared_config.fresh(

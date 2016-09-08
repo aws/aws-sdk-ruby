@@ -39,15 +39,15 @@ You need to configure `:credentials` and a `:region` to make API calls. It is re
 The SDK searches the following locations for credentials:
 
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
-* If `ENV['AWS_SDK_LOAD_CONFIG']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will be checked for a `role_arn` and `source_profile`, which if present will be used to attempt to assume a role.
+* Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will be checked for a `role_arn` and `source_profile`, which if present will be used to attempt to assume a role.
 * The shared credentials ini file at `~/.aws/credentials` ([more information](http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs))
-    * If `ENV['AWS_SDK_LOAD_CONFIG']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
+    * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
 * From an instance profile when running on EC2, or from the ECS credential provider when running in an ECS container with that feature enabled.
 
 The SDK searches the following locations for a region:
 
 * `ENV['AWS_REGION']`
-* If `ENV['AWS_SDK_LOAD_CONFIG']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will also be checked for a region selection.
+* Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will also be checked for a region selection.
 
 **The region is used to construct an SSL endpoint**. If you need to connect to a non-standard endpoint, you may specify the `:endpoint` option.
 

@@ -1,14 +1,16 @@
 # language: en
-@smoke @workspaces
+@workspaces @client
 Feature: Amazon WorkSpaces
 
-  I want to use Amazon WorkSpaces
-
-  Scenario: Making a request
+  Scenario: Making a basic request
     When I call the "DescribeWorkspaces" API
-    Then the value at "Workspaces" should be a list
+    Then the response should contain a list of "Workspaces"
 
-  Scenario: Handling errors
+  Scenario: Error handling
     When I attempt to call the "DescribeWorkspaces" API with:
     | DirectoryId | fake-id |
     Then I expect the response error code to be "ValidationException"
+    And I expect the response error message to include:
+    """
+    request is invalid
+    """

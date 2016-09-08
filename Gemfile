@@ -24,7 +24,6 @@ group :optionaldeps do
 
 end
 
-
 group :test do
   gem 'rspec'
   gem 'cucumber'
@@ -32,10 +31,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'
   gem 'json-schema'
-
-  # used in the cucumber feature tests to test
-  # the presigned-post utility.
-  gem 'rest-client' if RUBY_VERSION > '1.9.3'
+  gem 'multipart-post'
 end
 
 group :build do
@@ -43,7 +39,7 @@ group :build do
 end
 
 group :docs do
-  gem 'yard', :git => 'https://github.com/trevorrowe/yard.git', branch: 'frameless'
+  gem 'yard', '0.9.5'
   gem 'yard-sitemap', '~> 1.0'
   gem 'rdiscount'
 end

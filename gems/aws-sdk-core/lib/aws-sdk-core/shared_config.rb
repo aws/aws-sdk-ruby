@@ -16,10 +16,11 @@ module Aws
     # credentials file, and optionally the shared configuration file, as ini
     # files which support profiles.
     #
-    # By default, only the shared credential file (the default path for which is
-    # `~/.aws/credentials`) is loaded. However, if you set the
-    # `ENV['AWS_SDK_LOAD_CONFIG']` environment variable, the shared config file
-    # will also be loaded (the default path for which is `~/.aws/config`).
+    # By default, the shared credential file (the default path for which is
+    # `~/.aws/credentials`) and the shared config file (the default path for
+    # which is `~/.aws/config`) are loaded. However, if you set the
+    # `ENV['AWS_SDK_CONFIG_OPT_OUT']` environment variable, only the shared
+    # credential file will be loaded.
     #
     # The default profile name is 'default'. You can specify the profile name
     # with the `ENV['AWS_PROFILE']` environment variable or with the
@@ -35,13 +36,13 @@ module Aws
     #   the fixed default value of 'default'.
     # @option options [Boolean] :config_enabled If true, loads the shared config
     #   file and enables new config values outside of the old shared credential
-    #   spec. Generally sourced from `ENV['AWS_SDK_LOAD_CONFIG']`.
+    #   spec.
     def initialize(options = {})
       @profile_name = determine_profile(options)
       @config_enabled = options[:config_enabled]
       @credentials_path = options[:credentials_path] ||
         determine_credentials_path
-      @parsed_credenetials = {}
+      @parsed_credentials = {}
       load_credentials_file if loadable?(@credentials_path)
       if @config_enabled
         @config_path = options[:config_path] || determine_config_path
@@ -76,8 +77,7 @@ module Aws
     end
 
     # @return [Boolean] returns `true` if use of the shared config file is
-    #   enabled. Generally true if and only if the `AWS_SDK_LOAD_CONFIG` env
-    #   variable is set.
+    #   enabled.
     def config_enabled?
       @config_enabled ? true : false
     end
@@ -91,7 +91,7 @@ module Aws
     #   or `nil` if no valid credentials were found.
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
-      validate_profile_exists(p) if @parsed_credentials || @parsed_config
+      validate_profile_exists(p) if credentials_present?
       if credentials = credentials_from_shared(p, opts)
         credentials
       elsif credentials = credentials_from_config(p, opts)
@@ -129,6 +129,10 @@ module Aws
     end
 
     private
+    def credentials_present?
+      (@parsed_credentials && !@parsed_credentials.empty?) ||
+        (@parsed_config && !@parsed_config.empty?)
+    end
     def assume_role_from_profile(cfg, profile, opts)
       if cfg && prof_cfg = cfg[profile]
         opts[:source_profile] ||= prof_cfg["source_profile"]

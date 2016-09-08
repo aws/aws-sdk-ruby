@@ -1,12 +1,16 @@
 # language: en
-@smoke @storagegateway
+@storagegateway @client
 Feature: AWS Storage Gateway
 
-  Scenario: Making a request
+  Scenario: Making a basic request
     When I call the "ListGateways" API
-    Then the value at "Gateways" should be a list
+    Then the response should contain a list of "Gateways"
 
-  Scenario: Handling errors
+  Scenario: Error handling
     When I attempt to call the "ListVolumes" API with:
-    | GatewayARN | fake_gateway_that_meets_the_minimum_length_restriction |
-    Then I expect the response error code to be "InvalidGatewayRequestException"
+    | GatewayARN | fake_gateway |
+    Then I expect the response error code to be "ValidationException"
+    And I expect the response error message to include:
+    """
+    invalid input
+    """

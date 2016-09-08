@@ -902,6 +902,38 @@
         }
       ]
     },
+    "SearchGameSessions":{
+      "name":"SearchGameSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SearchGameSessionsInput"},
+      "output":{"shape":"SearchGameSessionsOutput"},
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true
+        }
+      ]
+    },
     "UpdateAlias":{
       "name":"UpdateAlias",
       "http":{
@@ -1184,6 +1216,7 @@
         "Version":{"shape":"FreeText"},
         "Status":{"shape":"BuildStatus"},
         "SizeOnDisk":{"shape":"PositiveLong"},
+        "OperatingSystem":{"shape":"OperatingSystem"},
         "CreationTime":{"shape":"Timestamp"}
       }
     },
@@ -1242,7 +1275,8 @@
       "members":{
         "Name":{"shape":"NonZeroAndMaxString"},
         "Version":{"shape":"NonZeroAndMaxString"},
-        "StorageLocation":{"shape":"S3Location"}
+        "StorageLocation":{"shape":"S3Location"},
+        "OperatingSystem":{"shape":"OperatingSystem"}
       }
     },
     "CreateBuildOutput":{
@@ -1668,7 +1702,8 @@
         "ServerLaunchPath":{"shape":"NonZeroAndMaxString"},
         "ServerLaunchParameters":{"shape":"NonZeroAndMaxString"},
         "LogPaths":{"shape":"StringList"},
-        "NewGameSessionProtectionPolicy":{"shape":"ProtectionPolicy"}
+        "NewGameSessionProtectionPolicy":{"shape":"ProtectionPolicy"},
+        "OperatingSystem":{"shape":"OperatingSystem"}
       }
     },
     "FleetAttributesList":{
@@ -1963,6 +1998,13 @@
       },
       "exception":true
     },
+    "OperatingSystem":{
+      "type":"string",
+      "enum":[
+        "WINDOWS_2012",
+        "AMAZON_LINUX"
+      ]
+    },
     "PlayerIdList":{
       "type":"list",
       "member":{"shape":"NonZeroAndMaxString"},
@@ -2149,6 +2191,24 @@
         "DELETED",
         "ERROR"
       ]
+    },
+    "SearchGameSessionsInput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{"shape":"FleetId"},
+        "AliasId":{"shape":"AliasId"},
+        "FilterExpression":{"shape":"NonZeroAndMaxString"},
+        "SortExpression":{"shape":"NonZeroAndMaxString"},
+        "Limit":{"shape":"PositiveInteger"},
+        "NextToken":{"shape":"NonZeroAndMaxString"}
+      }
+    },
+    "SearchGameSessionsOutput":{
+      "type":"structure",
+      "members":{
+        "GameSessions":{"shape":"GameSessionList"},
+        "NextToken":{"shape":"NonZeroAndMaxString"}
+      }
     },
     "ServerProcess":{
       "type":"structure",

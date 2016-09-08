@@ -1,4 +1,5 @@
 require 'aws-sdk-s3/plugins/accelerate'
+require 'aws-sdk-s3/plugins/dualstack'
 require 'aws-sdk-s3/plugins/bucket_dns'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions'
 require 'aws-sdk-s3/plugins/expect_100_continue'
@@ -15,6 +16,7 @@ module Aws
   module S3
     class Client
       add_plugin(Plugins::Accelerate)
+      add_plugin(Plugins::Dualstack)
       add_plugin(Plugins::BucketDns)
       add_plugin(Plugins::Expect100Continue)
       add_plugin(Plugins::Http200Errors)

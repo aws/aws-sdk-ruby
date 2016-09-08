@@ -1,12 +1,16 @@
 # language: en
-@smoke @emr @client @elasticmapreduce
+@emr @client
 Feature: Amazon EMR
 
-  Scenario: Making a request
+  Scenario: Making a basic request
     When I call the "ListClusters" API
-    Then the value at "Clusters" should be a list
+    Then the response should contain a list of "Clusters"
 
-  Scenario: Handling errors
-    When I attempt to call the "DescribeCluster" API with:
-    | ClusterId | fake_cluster |
+  Scenario: Error handling
+    When I attempt to call the "ListClusters" API with:
+    | ClusterStates | ['bogus-state'] |
     Then I expect the response error code to be "InvalidRequestException"
+    And I expect the response error message to include:
+    """
+    not valid
+    """
