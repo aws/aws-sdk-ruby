@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.5.11 (2016-09-08)
+------------------
+
 * Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
 
 * Feature - Aws::Support - Updated the API, and documentation for AWS Support.
