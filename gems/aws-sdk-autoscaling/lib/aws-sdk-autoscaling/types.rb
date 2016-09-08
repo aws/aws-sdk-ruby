@@ -16,12 +16,14 @@ module Aws
   module AutoScaling
     module Types
 
+      # Contains the output of DescribeScalingActivities.
       class ActivitiesType < Aws::Structure.new(
         :activities,
         :next_token)
 
         # @!attribute [rw] activities
-        #   The scaling activities.
+        #   The scaling activities. Activities are sorted by start time.
+        #   Activities still in progress are described first.
         #   @return [Array<Types::Activity>]
 
         # @!attribute [rw] next_token
@@ -89,6 +91,7 @@ module Aws
 
       end
 
+      # Contains the output of TerminateInstancesInAutoScalingGroup.
       class ActivityType < Aws::Structure.new(
         :activity)
 
@@ -101,7 +104,7 @@ module Aws
       # Describes a policy adjustment type.
       #
       # For more information, see [Dynamic Scaling][1] in the *Auto Scaling
-      # Developer Guide*.
+      # User Guide*.
       #
       #
       #
@@ -131,6 +134,7 @@ module Aws
 
       end
 
+      # Contains the parameters for AttachInstances.
       # @note When making an API call, pass AttachInstancesQuery
       #   data as a hash:
       #
@@ -152,14 +156,40 @@ module Aws
 
       end
 
+      class AttachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure; end
+
+      # Contains the parameters for AttachLoadBalancerTargetGroups.
+      # @note When making an API call, pass AttachLoadBalancerTargetGroupsType
+      #   data as a hash:
+      #
+      #       {
+      #         auto_scaling_group_name: "ResourceName", # required
+      #         target_group_arns: ["XmlStringMaxLen511"], # required
+      #       }
+      class AttachLoadBalancerTargetGroupsType < Aws::Structure.new(
+        :auto_scaling_group_name,
+        :target_group_arns)
+
+        # @!attribute [rw] auto_scaling_group_name
+        #   The name of the Auto Scaling group.
+        #   @return [String]
+
+        # @!attribute [rw] target_group_arns
+        #   The Amazon Resource Names (ARN) of the target groups.
+        #   @return [Array<String>]
+
+      end
+
+      # Contains the output of AttachLoadBalancers.
       class AttachLoadBalancersResultType < Aws::EmptyStructure; end
 
+      # Contains the parameters for AttachLoadBalancers.
       # @note When making an API call, pass AttachLoadBalancersType
       #   data as a hash:
       #
       #       {
-      #         auto_scaling_group_name: "ResourceName",
-      #         load_balancer_names: ["XmlStringMaxLen255"],
+      #         auto_scaling_group_name: "ResourceName", # required
+      #         load_balancer_names: ["XmlStringMaxLen255"], # required
       #       }
       class AttachLoadBalancersType < Aws::Structure.new(
         :auto_scaling_group_name,
@@ -186,6 +216,7 @@ module Aws
         :default_cooldown,
         :availability_zones,
         :load_balancer_names,
+        :target_group_arns,
         :health_check_type,
         :health_check_grace_period,
         :instances,
@@ -234,6 +265,11 @@ module Aws
 
         # @!attribute [rw] load_balancer_names
         #   One or more load balancers associated with the group.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] target_group_arns
+        #   The Amazon Resource Names (ARN) of the target groups for your load
+        #   balancer.
         #   @return [Array<String>]
 
         # @!attribute [rw] health_check_type
@@ -301,6 +337,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeAutoScalingGroups.
       # @note When making an API call, pass AutoScalingGroupNamesType
       #   data as a hash:
       #
@@ -315,7 +352,8 @@ module Aws
         :max_records)
 
         # @!attribute [rw] auto_scaling_group_names
-        #   The group names.
+        #   The group names. If you omit this parameter, all Auto Scaling groups
+        #   are described.
         #   @return [Array<String>]
 
         # @!attribute [rw] next_token
@@ -329,6 +367,7 @@ module Aws
 
       end
 
+      # Contains the output for DescribeAutoScalingGroups.
       class AutoScalingGroupsType < Aws::Structure.new(
         :auto_scaling_groups,
         :next_token)
@@ -368,7 +407,7 @@ module Aws
 
         # @!attribute [rw] lifecycle_state
         #   The lifecycle state for the instance. For more information, see
-        #   [Auto Scaling Lifecycle][1] in the *Auto Scaling Developer Guide*.
+        #   [Auto Scaling Lifecycle][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -376,10 +415,10 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] health_status
-        #   The health status of this instance. \"Healthy\" means that the
-        #   instance is healthy and should remain in service. \"Unhealthy\"
-        #   means that the instance is unhealthy and Auto Scaling should
-        #   terminate and replace it.
+        #   The last reported health status of this instance. \"Healthy\" means
+        #   that the instance is healthy and should remain in service.
+        #   \"Unhealthy\" means that the instance is unhealthy and Auto Scaling
+        #   should terminate and replace it.
         #   @return [String]
 
         # @!attribute [rw] launch_configuration_name
@@ -393,6 +432,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeAutoScalingInstances.
       class AutoScalingInstancesType < Aws::Structure.new(
         :auto_scaling_instances,
         :next_token)
@@ -454,8 +494,10 @@ module Aws
 
       end
 
+      # Contains the output of CompleteLifecycleAction.
       class CompleteLifecycleActionAnswer < Aws::EmptyStructure; end
 
+      # Contains the parameters for CompleteLifecycleAction.
       # @note When making an API call, pass CompleteLifecycleActionType
       #   data as a hash:
       #
@@ -499,6 +541,7 @@ module Aws
 
       end
 
+      # Contains the parameters for CreateAutoScalingGroup.
       # @note When making an API call, pass CreateAutoScalingGroupType
       #   data as a hash:
       #
@@ -512,10 +555,11 @@ module Aws
       #         default_cooldown: 1,
       #         availability_zones: ["XmlStringMaxLen255"],
       #         load_balancer_names: ["XmlStringMaxLen255"],
+      #         target_group_arns: ["XmlStringMaxLen511"],
       #         health_check_type: "XmlStringMaxLen32",
       #         health_check_grace_period: 1,
       #         placement_group: "XmlStringMaxLen255",
-      #         vpc_zone_identifier: "XmlStringMaxLen255",
+      #         vpc_zone_identifier: "XmlStringMaxLen2047",
       #         termination_policies: ["XmlStringMaxLen1600"],
       #         new_instances_protected_from_scale_in: false,
       #         tags: [
@@ -538,6 +582,7 @@ module Aws
         :default_cooldown,
         :availability_zones,
         :load_balancer_names,
+        :target_group_arns,
         :health_check_type,
         :health_check_grace_period,
         :placement_group,
@@ -567,7 +612,7 @@ module Aws
         #   with the exception of the block device mapping.
         #
         #   For more information, see [Create an Auto Scaling Group Using an EC2
-        #   Instance][1] in the *Auto Scaling Developer Guide*.
+        #   Instance][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -593,7 +638,7 @@ module Aws
         #   before another scaling activity can start. The default is 300.
         #
         #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-        #   Scaling Developer Guide*.
+        #   Scaling User Guide*.
         #
         #
         #
@@ -606,14 +651,19 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] load_balancer_names
-        #   One or more load balancers.
+        #   One or more Classic load balancers. To specify an Application load
+        #   balancer, use `TargetGroupARNs` instead.
         #
         #   For more information, see [Using a Load Balancer With an Auto
-        #   Scaling Group][1] in the *Auto Scaling Developer Guide*.
+        #   Scaling Group][1] in the *Auto Scaling User Guide*.
         #
         #
         #
         #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html
+        #   @return [Array<String>]
+
+        # @!attribute [rw] target_group_arns
+        #   The Amazon Resource Names (ARN) of the target groups.
         #   @return [Array<String>]
 
         # @!attribute [rw] health_check_type
@@ -622,7 +672,7 @@ module Aws
         #
         #   By default, health checks use Amazon EC2 instance status checks to
         #   determine the health of an instance. For more information, see
-        #   [Health Checks][1] in the *Auto Scaling Developer Guide*.
+        #   [Health Checks][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -633,12 +683,12 @@ module Aws
         #   The amount of time, in seconds, that Auto Scaling waits before
         #   checking the health status of an EC2 instance that has come into
         #   service. During this time, any health check failures for the
-        #   instance are ignored. The default is 300.
+        #   instance are ignored. The default is 0.
         #
         #   This parameter is required if you are adding an `ELB` health check.
         #
         #   For more information, see [Health Checks][1] in the *Auto Scaling
-        #   Developer Guide*.
+        #   User Guide*.
         #
         #
         #
@@ -664,7 +714,7 @@ module Aws
         #   specified.
         #
         #   For more information, see [Launching Auto Scaling Instances in a
-        #   VPC][1] in the *Auto Scaling Developer Guide*.
+        #   VPC][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -677,8 +727,7 @@ module Aws
         #   listed.
         #
         #   For more information, see [Controlling Which Instances Auto Scaling
-        #   Terminates During Scale In][1] in the *Auto Scaling Developer
-        #   Guide*.
+        #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -694,7 +743,7 @@ module Aws
         #   One or more tags.
         #
         #   For more information, see [Tagging Auto Scaling Groups and
-        #   Instances][1] in the *Auto Scaling Developer Guide*.
+        #   Instances][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -703,6 +752,7 @@ module Aws
 
       end
 
+      # Contains the parameters for CreateLaunchConfiguration.
       # @note When making an API call, pass CreateLaunchConfigurationType
       #   data as a hash:
       #
@@ -849,7 +899,7 @@ module Aws
         #   same request.
         #
         #   For more information, see [Create a Launch Configuration Using an
-        #   EC2 Instance][1] in the *Auto Scaling Developer Guide*.
+        #   EC2 Instance][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -885,19 +935,8 @@ module Aws
         #   @return [Array<Types::BlockDeviceMapping>]
 
         # @!attribute [rw] instance_monitoring
-        #   Enables detailed monitoring if it is disabled. Detailed monitoring
-        #   is enabled by default.
-        #
-        #   When detailed monitoring is enabled, Amazon CloudWatch generates
-        #   metrics every minute and your account is charged a fee. When you
-        #   disable detailed monitoring, by specifying `False`, CloudWatch
-        #   generates metrics every 5 minutes. For more information, see
-        #   [Monitoring Your Auto Scaling Instances and Groups][1] in the *Auto
-        #   Scaling Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-instance-monitoring.html
+        #   Enables detailed monitoring (`true`) or basic monitoring (`false`)
+        #   for the Auto Scaling instances.
         #   @return [Types::InstanceMonitoring]
 
         # @!attribute [rw] spot_price
@@ -905,7 +944,7 @@ module Aws
         #   to fulfill the request. Spot Instances are launched when the price
         #   you specify exceeds the current Spot market price. For more
         #   information, see [Launching Spot Instances in Your Auto Scaling
-        #   Group][1] in the *Auto Scaling Developer Guide*.
+        #   Group][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -921,7 +960,7 @@ module Aws
         #   Scaling to automatically enable applications running on your EC2
         #   instances to securely access other AWS resources. For more
         #   information, see [Launch Auto Scaling Instances with an IAM Role][1]
-        #   in the *Auto Scaling Developer Guide*.
+        #   in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -946,7 +985,7 @@ module Aws
         #   Used for groups that launch instances into a virtual private cloud
         #   (VPC). Specifies whether to assign a public IP address to each
         #   instance. For more information, see [Launching Auto Scaling
-        #   Instances in a VPC][1] in the *Auto Scaling Developer Guide*.
+        #   Instances in a VPC][1] in the *Auto Scaling User Guide*.
         #
         #   If you specify this parameter, be sure to specify at least one
         #   subnet when you create your group.
@@ -975,7 +1014,7 @@ module Aws
         #   subnet when you create your group.
         #
         #   For more information, see [Launching Auto Scaling Instances in a
-        #   VPC][1] in the *Auto Scaling Developer Guide*.
+        #   VPC][1] in the *Auto Scaling User Guide*.
         #
         #   Valid values: `default` \| `dedicated`
         #
@@ -986,6 +1025,7 @@ module Aws
 
       end
 
+      # Contains the parameters for CreateOrUpdateTags.
       # @note When making an API call, pass CreateOrUpdateTagsType
       #   data as a hash:
       #
@@ -1009,6 +1049,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DeleteAutoScalingGroup.
       # @note When making an API call, pass DeleteAutoScalingGroupType
       #   data as a hash:
       #
@@ -1033,8 +1074,10 @@ module Aws
 
       end
 
+      # Contains the output of DeleteLifecycleHook.
       class DeleteLifecycleHookAnswer < Aws::EmptyStructure; end
 
+      # Contains the parameters for DeleteLifecycleHook.
       # @note When making an API call, pass DeleteLifecycleHookType
       #   data as a hash:
       #
@@ -1056,6 +1099,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DeleteNotificationConfiguration.
       # @note When making an API call, pass DeleteNotificationConfigurationType
       #   data as a hash:
       #
@@ -1078,6 +1122,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DeletePolicy.
       # @note When making an API call, pass DeletePolicyType
       #   data as a hash:
       #
@@ -1099,11 +1144,12 @@ module Aws
 
       end
 
+      # Contains the parameters for DeleteScheduledAction.
       # @note When making an API call, pass DeleteScheduledActionType
       #   data as a hash:
       #
       #       {
-      #         auto_scaling_group_name: "ResourceName",
+      #         auto_scaling_group_name: "ResourceName", # required
       #         scheduled_action_name: "ResourceName", # required
       #       }
       class DeleteScheduledActionType < Aws::Structure.new(
@@ -1120,6 +1166,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DeleteTags.
       # @note When making an API call, pass DeleteTagsType
       #   data as a hash:
       #
@@ -1143,6 +1190,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeAccountLimits.
       class DescribeAccountLimitsAnswer < Aws::Structure.new(
         :max_number_of_auto_scaling_groups,
         :max_number_of_launch_configurations,
@@ -1169,6 +1217,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeAdjustmentTypes.
       class DescribeAdjustmentTypesAnswer < Aws::Structure.new(
         :adjustment_types)
 
@@ -1178,6 +1227,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeAutoScalingInstances.
       # @note When making an API call, pass DescribeAutoScalingInstancesType
       #   data as a hash:
       #
@@ -1208,38 +1258,27 @@ module Aws
 
       end
 
+      # Contains the output of DescribeAutoScalingNotificationTypes.
       class DescribeAutoScalingNotificationTypesAnswer < Aws::Structure.new(
         :auto_scaling_notification_types)
 
         # @!attribute [rw] auto_scaling_notification_types
-        #   One or more of the following notification types:
-        #
-        #   * `autoscaling:EC2_INSTANCE_LAUNCH`
-        #
-        #   * `autoscaling:EC2_INSTANCE_LAUNCH_ERROR`
-        #
-        #   * `autoscaling:EC2_INSTANCE_TERMINATE`
-        #
-        #   * `autoscaling:EC2_INSTANCE_TERMINATE_ERROR`
-        #
-        #   * `autoscaling:TEST_NOTIFICATION`
+        #   The notification types.
         #   @return [Array<String>]
 
       end
 
+      # Contains the output of DescribeLifecycleHookTypes.
       class DescribeLifecycleHookTypesAnswer < Aws::Structure.new(
         :lifecycle_hook_types)
 
         # @!attribute [rw] lifecycle_hook_types
-        #   One or more of the following notification types:
-        #
-        #   * `autoscaling:EC2_INSTANCE_LAUNCHING`
-        #
-        #   * `autoscaling:EC2_INSTANCE_TERMINATING`
+        #   The lifecycle hook types.
         #   @return [Array<String>]
 
       end
 
+      # Contains the output of DescribeLifecycleHooks.
       class DescribeLifecycleHooksAnswer < Aws::Structure.new(
         :lifecycle_hooks)
 
@@ -1249,6 +1288,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeLifecycleHooks.
       # @note When making an API call, pass DescribeLifecycleHooksType
       #   data as a hash:
       #
@@ -1265,11 +1305,58 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] lifecycle_hook_names
-        #   The names of one or more lifecycle hooks.
+        #   The names of one or more lifecycle hooks. If you omit this
+        #   parameter, all lifecycle hooks are described.
         #   @return [Array<String>]
 
       end
 
+      # Contains the parameters for DescribeLoadBalancerTargetGroups.
+      # @note When making an API call, pass DescribeLoadBalancerTargetGroupsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         auto_scaling_group_name: "ResourceName", # required
+      #         next_token: "XmlString",
+      #         max_records: 1,
+      #       }
+      class DescribeLoadBalancerTargetGroupsRequest < Aws::Structure.new(
+        :auto_scaling_group_name,
+        :next_token,
+        :max_records)
+
+        # @!attribute [rw] auto_scaling_group_name
+        #   The name of the Auto Scaling group.
+        #   @return [String]
+
+        # @!attribute [rw] next_token
+        #   The token for the next set of items to return. (You received this
+        #   token from a previous call.)
+        #   @return [String]
+
+        # @!attribute [rw] max_records
+        #   The maximum number of items to return with this call.
+        #   @return [Integer]
+
+      end
+
+      # Contains the output of DescribeLoadBalancerTargetGroups.
+      class DescribeLoadBalancerTargetGroupsResponse < Aws::Structure.new(
+        :load_balancer_target_groups,
+        :next_token)
+
+        # @!attribute [rw] load_balancer_target_groups
+        #   Information about the target groups.
+        #   @return [Array<Types::LoadBalancerTargetGroupState>]
+
+        # @!attribute [rw] next_token
+        #   The token to use when requesting the next set of items. If there are
+        #   no additional items to return, the string is empty.
+        #   @return [String]
+
+      end
+
+      # Contains the parameters for DescribeLoadBalancers.
       # @note When making an API call, pass DescribeLoadBalancersRequest
       #   data as a hash:
       #
@@ -1298,6 +1385,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeLoadBalancers.
       class DescribeLoadBalancersResponse < Aws::Structure.new(
         :load_balancers,
         :next_token)
@@ -1313,6 +1401,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeMetricsCollectionTypes.
       class DescribeMetricCollectionTypesAnswer < Aws::Structure.new(
         :metrics,
         :granularities)
@@ -1327,6 +1416,7 @@ module Aws
 
       end
 
+      # Contains the output from DescribeNotificationConfigurations.
       class DescribeNotificationConfigurationsAnswer < Aws::Structure.new(
         :notification_configurations,
         :next_token)
@@ -1342,6 +1432,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeNotificationConfigurations.
       # @note When making an API call, pass DescribeNotificationConfigurationsType
       #   data as a hash:
       #
@@ -1370,6 +1461,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribePolicies.
       # @note When making an API call, pass DescribePoliciesType
       #   data as a hash:
       #
@@ -1393,7 +1485,7 @@ module Aws
 
         # @!attribute [rw] policy_names
         #   One or more policy names or policy ARNs to be described. If you omit
-        #   this list, all policy names are described. If an group name is
+        #   this parameter, all policy names are described. If an group name is
         #   provided, the results are limited to that group. This list is
         #   limited to 50 items. If you specify an unknown policy name, it is
         #   ignored with no error.
@@ -1415,6 +1507,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeScalingActivities.
       # @note When making an API call, pass DescribeScalingActivitiesType
       #   data as a hash:
       #
@@ -1431,11 +1524,12 @@ module Aws
         :next_token)
 
         # @!attribute [rw] activity_ids
-        #   The activity IDs of the desired scaling activities. If this list is
-        #   omitted, all activities are described. If you specify an Auto
-        #   Scaling group, the results are limited to that group. The list of
-        #   requested activities cannot contain more than 50 items. If unknown
-        #   activities are requested, they are ignored with no error.
+        #   The activity IDs of the desired scaling activities. If you omit this
+        #   parameter, all activities for the past six weeks are described. If
+        #   you specify an Auto Scaling group, the results are limited to that
+        #   group. The list of requested activities cannot contain more than 50
+        #   items. If unknown activities are requested, they are ignored with no
+        #   error.
         #   @return [Array<String>]
 
         # @!attribute [rw] auto_scaling_group_name
@@ -1453,6 +1547,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeScheduledActions.
       # @note When making an API call, pass DescribeScheduledActionsType
       #   data as a hash:
       #
@@ -1477,9 +1572,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] scheduled_action_names
-        #   Describes one or more scheduled actions. If you omit this list, the
-        #   call describes all scheduled actions. If you specify an unknown
-        #   scheduled action it is ignored with no error.
+        #   Describes one or more scheduled actions. If you omit this parameter,
+        #   all scheduled actions are described. If you specify an unknown
+        #   scheduled action, it is ignored with no error.
         #
         #   You can describe up to a maximum of 50 instances with a single call.
         #   If there are more items to return, the call returns a token. To get
@@ -1507,6 +1602,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeTags.
       # @note When making an API call, pass DescribeTagsType
       #   data as a hash:
       #
@@ -1540,6 +1636,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeTerminationPolicyTypes.
       class DescribeTerminationPolicyTypesAnswer < Aws::Structure.new(
         :termination_policy_types)
 
@@ -1551,6 +1648,7 @@ module Aws
 
       end
 
+      # Contains the output of DetachInstances.
       class DetachInstancesAnswer < Aws::Structure.new(
         :activities)
 
@@ -1561,6 +1659,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DetachInstances.
       # @note When making an API call, pass DetachInstancesQuery
       #   data as a hash:
       #
@@ -1589,21 +1688,46 @@ module Aws
 
       end
 
+      class DetachLoadBalancerTargetGroupsResultType < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DetachLoadBalancerTargetGroupsType
+      #   data as a hash:
+      #
+      #       {
+      #         auto_scaling_group_name: "ResourceName", # required
+      #         target_group_arns: ["XmlStringMaxLen511"], # required
+      #       }
+      class DetachLoadBalancerTargetGroupsType < Aws::Structure.new(
+        :auto_scaling_group_name,
+        :target_group_arns)
+
+        # @!attribute [rw] auto_scaling_group_name
+        #   The name of the Auto Scaling group.
+        #   @return [String]
+
+        # @!attribute [rw] target_group_arns
+        #   The Amazon Resource Names (ARN) of the target groups.
+        #   @return [Array<String>]
+
+      end
+
+      # Contains the output for DetachLoadBalancers.
       class DetachLoadBalancersResultType < Aws::EmptyStructure; end
 
+      # Contains the parameters for DetachLoadBalancers.
       # @note When making an API call, pass DetachLoadBalancersType
       #   data as a hash:
       #
       #       {
-      #         auto_scaling_group_name: "ResourceName",
-      #         load_balancer_names: ["XmlStringMaxLen255"],
+      #         auto_scaling_group_name: "ResourceName", # required
+      #         load_balancer_names: ["XmlStringMaxLen255"], # required
       #       }
       class DetachLoadBalancersType < Aws::Structure.new(
         :auto_scaling_group_name,
         :load_balancer_names)
 
         # @!attribute [rw] auto_scaling_group_name
-        #   The name of the group.
+        #   The name of the Auto Scaling group.
         #   @return [String]
 
         # @!attribute [rw] load_balancer_names
@@ -1612,6 +1736,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DisableMetricsCollection.
       # @note When making an API call, pass DisableMetricsCollectionQuery
       #   data as a hash:
       #
@@ -1727,6 +1852,7 @@ module Aws
 
       end
 
+      # Contains the parameters for EnableMetricsCollection.
       # @note When making an API call, pass EnableMetricsCollectionQuery
       #   data as a hash:
       #
@@ -1763,9 +1889,6 @@ module Aws
         #   * `GroupTerminatingInstances`
         #
         #   * `GroupTotalInstances`
-        #
-        #   Note that the `GroupStandbyInstances` metric is not enabled by
-        #   default. You must explicitly request this metric.
         #   @return [Array<String>]
 
         # @!attribute [rw] granularity
@@ -1806,6 +1929,7 @@ module Aws
 
       end
 
+      # Contains the output of EnterStandby.
       class EnterStandbyAnswer < Aws::Structure.new(
         :activities)
 
@@ -1815,6 +1939,7 @@ module Aws
 
       end
 
+      # Contains the parameters for EnteStandby.
       # @note When making an API call, pass EnterStandbyQuery
       #   data as a hash:
       #
@@ -1846,6 +1971,7 @@ module Aws
 
       end
 
+      # Contains the parameters for ExecutePolicy.
       # @note When making an API call, pass ExecutePolicyType
       #   data as a hash:
       #
@@ -1880,7 +2006,7 @@ module Aws
         #   This parameter is not supported if the policy type is `StepScaling`.
         #
         #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-        #   Scaling Developer Guide*.
+        #   Scaling User Guide*.
         #
         #
         #
@@ -1910,6 +2036,7 @@ module Aws
 
       end
 
+      # Contains the parameters for ExitStandby.
       class ExitStandbyAnswer < Aws::Structure.new(
         :activities)
 
@@ -1919,6 +2046,7 @@ module Aws
 
       end
 
+      # Contains the parameters for ExitStandby.
       # @note When making an API call, pass ExitStandbyQuery
       #   data as a hash:
       #
@@ -1987,10 +2115,10 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] health_status
-        #   The health status of the instance. \"Healthy\" means that the
-        #   instance is healthy and should remain in service. \"Unhealthy\"
-        #   means that the instance is unhealthy and Auto Scaling should
-        #   terminate and replace it.
+        #   The last reported health status of the instance. \"Healthy\" means
+        #   that the instance is healthy and should remain in service.
+        #   \"Unhealthy\" means that the instance is unhealthy and Auto Scaling
+        #   should terminate and replace it.
         #   @return [String]
 
         # @!attribute [rw] launch_configuration_name
@@ -2108,7 +2236,7 @@ module Aws
 
         # @!attribute [rw] instance_monitoring
         #   Controls whether instances in this group are launched with detailed
-        #   monitoring.
+        #   (`true`) or basic (`false`) monitoring.
         #   @return [Types::InstanceMonitoring]
 
         # @!attribute [rw] spot_price
@@ -2142,6 +2270,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DeleteLaunchConfiguration.
       # @note When making an API call, pass LaunchConfigurationNameType
       #   data as a hash:
       #
@@ -2157,6 +2286,7 @@ module Aws
 
       end
 
+      # Contains the parameters for DescribeLaunchConfigurations.
       # @note When making an API call, pass LaunchConfigurationNamesType
       #   data as a hash:
       #
@@ -2171,7 +2301,8 @@ module Aws
         :max_records)
 
         # @!attribute [rw] launch_configuration_names
-        #   The launch configuration names.
+        #   The launch configuration names. If you omit this parameter, all
+        #   launch configurations are described.
         #   @return [Array<String>]
 
         # @!attribute [rw] next_token
@@ -2186,6 +2317,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeLaunchConfigurations.
       class LaunchConfigurationsType < Aws::Structure.new(
         :launch_configurations,
         :next_token)
@@ -2207,11 +2339,12 @@ module Aws
       #
       # * Pause the instance after it launches, but before it is put into
       #   service
+      #
       # * Pause the instance as it terminates, but before it is fully
       #   terminated
       #
       # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -2248,11 +2381,17 @@ module Aws
         #   The notification message sent to the target includes the following:
         #
         #   * Lifecycle action token
+        #
         #   * User account ID
+        #
         #   * Name of the Auto Scaling group
+        #
         #   * Lifecycle hook name
+        #
         #   * EC2 instance ID
+        #
         #   * Lifecycle transition
+        #
         #   * Notification metadata
         #   @return [String]
 
@@ -2289,7 +2428,18 @@ module Aws
 
       end
 
-      # Describes the state of a load balancer.
+      # Describes the state of a Classic load balancer.
+      #
+      # If you specify a load balancer when creating the Auto Scaling group,
+      # the state of the load balancer is `InService`.
+      #
+      # If you attach a load balancer to an existing Auto Scaling group, the
+      # initial state is `Adding`. The state transitions to `Added` after all
+      # instances in the group are registered with the load balancer. If ELB
+      # health checks are enabled for the load balancer, the state transitions
+      # to `InService` after at least one instance in the group passes the
+      # health check. If EC2 health checks are enabled instead, the load
+      # balancer remains in the `Added` state.
       class LoadBalancerState < Aws::Structure.new(
         :load_balancer_name,
         :state)
@@ -2310,10 +2460,53 @@ module Aws
         #   * `InService` - At least one instance in the group passed an ELB
         #     health check.
         #
-        #   * `Removing` - The instances are being deregistered from the load
-        #     balancer. If connection draining is enabled, Elastic Load
-        #     Balancing waits for in-flight requests to complete before
+        #   * `Removing` - The instances in the group are being deregistered
+        #     from the load balancer. If connection draining is enabled, Elastic
+        #     Load Balancing waits for in-flight requests to complete before
         #     deregistering the instances.
+        #
+        #   * `Removed` - All instances in the group are deregistered from the
+        #     load balancer.
+        #   @return [String]
+
+      end
+
+      # Describes the state of a target group.
+      #
+      # If you attach a target group to an existing Auto Scaling group, the
+      # initial state is `Adding`. The state transitions to `Added` after all
+      # Auto Scaling instances are registered with the target group. If ELB
+      # health checks are enabled, the state transitions to `InService` after
+      # at least one Auto Scaling instance passes the health check. If EC2
+      # health checks are enabled instead, the target group remains in the
+      # `Added` state.
+      class LoadBalancerTargetGroupState < Aws::Structure.new(
+        :load_balancer_target_group_arn,
+        :state)
+
+        # @!attribute [rw] load_balancer_target_group_arn
+        #   The Amazon Resource Name (ARN) of the target group.
+        #   @return [String]
+
+        # @!attribute [rw] state
+        #   The state of the target group.
+        #
+        #   * `Adding` - The Auto Scaling instances are being registered with
+        #     the target group.
+        #
+        #   * `Added` - All Auto Scaling instances are registered with the
+        #     target group.
+        #
+        #   * `InService` - At least one Auto Scaling instance passed an ELB
+        #     health check.
+        #
+        #   * `Removing` - The Auto Scaling instances are being deregistered
+        #     from the target group. If connection draining is enabled, Elastic
+        #     Load Balancing waits for in-flight requests to complete before
+        #     deregistering the instances.
+        #
+        #   * `Removed` - All Auto Scaling instances are deregistered from the
+        #     target group.
         #   @return [String]
 
       end
@@ -2385,6 +2578,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribePolicies.
       class PoliciesType < Aws::Structure.new(
         :scaling_policies,
         :next_token)
@@ -2400,6 +2594,7 @@ module Aws
 
       end
 
+      # Contains the output of PutScalingPolicy.
       class PolicyARNType < Aws::Structure.new(
         :policy_arn)
 
@@ -2412,7 +2607,7 @@ module Aws
       # Describes a process type.
       #
       # For more information, see [Auto Scaling Processes][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -2442,6 +2637,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeScalingProcessTypes.
       class ProcessesType < Aws::Structure.new(
         :processes)
 
@@ -2451,8 +2647,10 @@ module Aws
 
       end
 
+      # Contains the output of PutLifecycleHook.
       class PutLifecycleHookAnswer < Aws::EmptyStructure; end
 
+      # Contains the parameters for PutLifecycleHook.
       # @note When making an API call, pass PutLifecycleHookType
       #   data as a hash:
       #
@@ -2512,11 +2710,17 @@ module Aws
         #   information:
         #
         #   * **AutoScalingGroupName**. The name of the Auto Scaling group.
+        #
         #   * **AccountId**. The AWS account ID.
+        #
         #   * **LifecycleTransition**. The lifecycle hook type.
+        #
         #   * **LifecycleActionToken**. The lifecycle action token.
+        #
         #   * **EC2InstanceId**. The EC2 instance ID.
+        #
         #   * **LifecycleHookName**. The name of the lifecycle hook.
+        #
         #   * **NotificationMetadata**. User-defined information.
         #
         #   This operation uses the JSON format when sending notifications to an
@@ -2550,6 +2754,7 @@ module Aws
 
       end
 
+      # Contains the parameters for PutNotificationConfiguration.
       # @note When making an API call, pass PutNotificationConfigurationType
       #   data as a hash:
       #
@@ -2580,6 +2785,7 @@ module Aws
 
       end
 
+      # Contains the parameters for PutScalingPolicy.
       # @note When making an API call, pass PutScalingPolicyType
       #   data as a hash:
       #
@@ -2633,7 +2839,7 @@ module Aws
         #   `ExactCapacity`, and `PercentChangeInCapacity`.
         #
         #   For more information, see [Dynamic Scaling][1] in the *Auto Scaling
-        #   Developer Guide*.
+        #   User Guide*.
         #
         #
         #
@@ -2670,7 +2876,7 @@ module Aws
         #   `SimpleScaling`.
         #
         #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-        #   Scaling Developer Guide*.
+        #   Scaling User Guide*.
         #
         #
         #
@@ -2705,6 +2911,7 @@ module Aws
 
       end
 
+      # Contains the parameters for PutScheduledUpdateGroupAction.
       # @note When making an API call, pass PutScheduledUpdateGroupActionType
       #   data as a hash:
       #
@@ -2785,8 +2992,10 @@ module Aws
 
       end
 
+      # Contains the output of RecordLifecycleActionHeartBeat.
       class RecordLifecycleActionHeartbeatAnswer < Aws::EmptyStructure; end
 
+      # Contains the parameters for RecordLifecycleActionHeartbeat.
       # @note When making an API call, pass RecordLifecycleActionHeartbeatType
       #   data as a hash:
       #
@@ -2906,6 +3115,7 @@ module Aws
 
       end
 
+      # Contains the parameters for SuspendProcesses and ResumeProcesses.
       # @note When making an API call, pass ScalingProcessQuery
       #   data as a hash:
       #
@@ -2922,7 +3132,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] scaling_processes
-        #   One or more of the following processes:
+        #   One or more of the following processes. If you omit this parameter,
+        #   all processes are specified.
         #
         #   * `Launch`
         #
@@ -2943,6 +3154,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeScheduledActions.
       class ScheduledActionsType < Aws::Structure.new(
         :scheduled_update_group_actions,
         :next_token)
@@ -3019,6 +3231,7 @@ module Aws
 
       end
 
+      # Contains the parameters for SetDesiredCapacity.
       # @note When making an API call, pass SetDesiredCapacityType
       #   data as a hash:
       #
@@ -3051,6 +3264,7 @@ module Aws
 
       end
 
+      # Contains the parameters for SetInstanceHealth.
       # @note When making an API call, pass SetInstanceHealthQuery
       #   data as a hash:
       #
@@ -3088,8 +3302,10 @@ module Aws
 
       end
 
+      # Contains the output of SetInstanceProtection.
       class SetInstanceProtectionAnswer < Aws::EmptyStructure; end
 
+      # Contains the parameters for SetInstanceProtection.
       # @note When making an API call, pass SetInstanceProtectionQuery
       #   data as a hash:
       #
@@ -3278,6 +3494,7 @@ module Aws
 
       end
 
+      # Contains the output of DescribeTags.
       class TagsType < Aws::Structure.new(
         :tags,
         :next_token)
@@ -3293,6 +3510,7 @@ module Aws
 
       end
 
+      # Contains the parameters for TerminateInstanceInAutoScalingGroup.
       # @note When making an API call, pass TerminateInstanceInAutoScalingGroupType
       #   data as a hash:
       #
@@ -3315,6 +3533,7 @@ module Aws
 
       end
 
+      # Contains the parameters for UpdateAutoScalingGroup.
       # @note When making an API call, pass UpdateAutoScalingGroupType
       #   data as a hash:
       #
@@ -3329,7 +3548,7 @@ module Aws
       #         health_check_type: "XmlStringMaxLen32",
       #         health_check_grace_period: 1,
       #         placement_group: "XmlStringMaxLen255",
-      #         vpc_zone_identifier: "XmlStringMaxLen255",
+      #         vpc_zone_identifier: "XmlStringMaxLen2047",
       #         termination_policies: ["XmlStringMaxLen1600"],
       #         new_instances_protected_from_scale_in: false,
       #       }
@@ -3376,7 +3595,7 @@ module Aws
         #   before another scaling activity can start. The default is 300.
         #
         #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-        #   Scaling Developer Guide*.
+        #   Scaling User Guide*.
         #
         #
         #
@@ -3395,10 +3614,10 @@ module Aws
         # @!attribute [rw] health_check_grace_period
         #   The amount of time, in seconds, that Auto Scaling waits before
         #   checking the health status of an EC2 instance that has come into
-        #   service. The default is 300.
+        #   service. The default is 0.
         #
         #   For more information, see [Health Checks][1] in the *Auto Scaling
-        #   Developer Guide*.
+        #   User Guide*.
         #
         #
         #
@@ -3424,7 +3643,7 @@ module Aws
         #   specify for `AvailabilityZones`.
         #
         #   For more information, see [Launching Auto Scaling Instances in a
-        #   VPC][1] in the *Auto Scaling Developer Guide*.
+        #   VPC][1] in the *Auto Scaling User Guide*.
         #
         #
         #
@@ -3437,8 +3656,7 @@ module Aws
         #   in the order that they are listed.
         #
         #   For more information, see [Controlling Which Instances Auto Scaling
-        #   Terminates During Scale In][1] in the *Auto Scaling Developer
-        #   Guide*.
+        #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
         #
         #
         #

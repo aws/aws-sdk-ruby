@@ -23,6 +23,7 @@ module Aws
       Action = Shapes::StructureShape.new(name: 'Action')
       ActionList = Shapes::ListShape.new(name: 'ActionList')
       AlarmName = Shapes::StringShape.new(name: 'AlarmName')
+      AllowAutoRegistration = Shapes::BooleanShape.new(name: 'AllowAutoRegistration')
       AscendingOrder = Shapes::BooleanShape.new(name: 'AscendingOrder')
       AttachPrincipalPolicyRequest = Shapes::StructureShape.new(name: 'AttachPrincipalPolicyRequest')
       AttachThingPrincipalRequest = Shapes::StructureShape.new(name: 'AttachThingPrincipalRequest')
@@ -31,9 +32,11 @@ module Aws
       AttributePayload = Shapes::StructureShape.new(name: 'AttributePayload')
       AttributeValue = Shapes::StringShape.new(name: 'AttributeValue')
       Attributes = Shapes::MapShape.new(name: 'Attributes')
+      AutoRegistrationStatus = Shapes::StringShape.new(name: 'AutoRegistrationStatus')
       AwsAccountId = Shapes::StringShape.new(name: 'AwsAccountId')
       AwsArn = Shapes::StringShape.new(name: 'AwsArn')
       AwsIotSqlVersion = Shapes::StringShape.new(name: 'AwsIotSqlVersion')
+      Boolean = Shapes::BooleanShape.new(name: 'Boolean')
       BucketName = Shapes::StringShape.new(name: 'BucketName')
       CACertificate = Shapes::StructureShape.new(name: 'CACertificate')
       CACertificateDescription = Shapes::StructureShape.new(name: 'CACertificateDescription')
@@ -64,8 +67,11 @@ module Aws
       CreatePolicyVersionResponse = Shapes::StructureShape.new(name: 'CreatePolicyVersionResponse')
       CreateThingRequest = Shapes::StructureShape.new(name: 'CreateThingRequest')
       CreateThingResponse = Shapes::StructureShape.new(name: 'CreateThingResponse')
+      CreateThingTypeRequest = Shapes::StructureShape.new(name: 'CreateThingTypeRequest')
+      CreateThingTypeResponse = Shapes::StructureShape.new(name: 'CreateThingTypeResponse')
       CreateTopicRuleRequest = Shapes::StructureShape.new(name: 'CreateTopicRuleRequest')
       CreatedAtDate = Shapes::TimestampShape.new(name: 'CreatedAtDate')
+      CreationDate = Shapes::TimestampShape.new(name: 'CreationDate')
       DateType = Shapes::TimestampShape.new(name: 'DateType')
       DeleteCACertificateRequest = Shapes::StructureShape.new(name: 'DeleteCACertificateRequest')
       DeleteCACertificateResponse = Shapes::StructureShape.new(name: 'DeleteCACertificateResponse')
@@ -77,8 +83,13 @@ module Aws
       DeleteRegistrationCodeResponse = Shapes::StructureShape.new(name: 'DeleteRegistrationCodeResponse')
       DeleteThingRequest = Shapes::StructureShape.new(name: 'DeleteThingRequest')
       DeleteThingResponse = Shapes::StructureShape.new(name: 'DeleteThingResponse')
+      DeleteThingTypeRequest = Shapes::StructureShape.new(name: 'DeleteThingTypeRequest')
+      DeleteThingTypeResponse = Shapes::StructureShape.new(name: 'DeleteThingTypeResponse')
       DeleteTopicRuleRequest = Shapes::StructureShape.new(name: 'DeleteTopicRuleRequest')
       DeliveryStreamName = Shapes::StringShape.new(name: 'DeliveryStreamName')
+      DeprecateThingTypeRequest = Shapes::StructureShape.new(name: 'DeprecateThingTypeRequest')
+      DeprecateThingTypeResponse = Shapes::StructureShape.new(name: 'DeprecateThingTypeResponse')
+      DeprecationDate = Shapes::TimestampShape.new(name: 'DeprecationDate')
       DescribeCACertificateRequest = Shapes::StructureShape.new(name: 'DescribeCACertificateRequest')
       DescribeCACertificateResponse = Shapes::StructureShape.new(name: 'DescribeCACertificateResponse')
       DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
@@ -87,6 +98,8 @@ module Aws
       DescribeEndpointResponse = Shapes::StructureShape.new(name: 'DescribeEndpointResponse')
       DescribeThingRequest = Shapes::StructureShape.new(name: 'DescribeThingRequest')
       DescribeThingResponse = Shapes::StructureShape.new(name: 'DescribeThingResponse')
+      DescribeThingTypeRequest = Shapes::StructureShape.new(name: 'DescribeThingTypeRequest')
+      DescribeThingTypeResponse = Shapes::StructureShape.new(name: 'DescribeThingTypeResponse')
       Description = Shapes::StringShape.new(name: 'Description')
       DetachPrincipalPolicyRequest = Shapes::StructureShape.new(name: 'DetachPrincipalPolicyRequest')
       DetachThingPrincipalRequest = Shapes::StructureShape.new(name: 'DetachThingPrincipalRequest')
@@ -103,6 +116,8 @@ module Aws
       EnableTopicRuleRequest = Shapes::StructureShape.new(name: 'EnableTopicRuleRequest')
       EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
       FirehoseAction = Shapes::StructureShape.new(name: 'FirehoseAction')
+      FirehoseSeparator = Shapes::StringShape.new(name: 'FirehoseSeparator')
+      Flag = Shapes::BooleanShape.new(name: 'Flag')
       FunctionArn = Shapes::StringShape.new(name: 'FunctionArn')
       GetLoggingOptionsRequest = Shapes::StructureShape.new(name: 'GetLoggingOptionsRequest')
       GetLoggingOptionsResponse = Shapes::StructureShape.new(name: 'GetLoggingOptionsResponse')
@@ -132,6 +147,8 @@ module Aws
       ListCertificatesByCAResponse = Shapes::StructureShape.new(name: 'ListCertificatesByCAResponse')
       ListCertificatesRequest = Shapes::StructureShape.new(name: 'ListCertificatesRequest')
       ListCertificatesResponse = Shapes::StructureShape.new(name: 'ListCertificatesResponse')
+      ListOutgoingCertificatesRequest = Shapes::StructureShape.new(name: 'ListOutgoingCertificatesRequest')
+      ListOutgoingCertificatesResponse = Shapes::StructureShape.new(name: 'ListOutgoingCertificatesResponse')
       ListPoliciesRequest = Shapes::StructureShape.new(name: 'ListPoliciesRequest')
       ListPoliciesResponse = Shapes::StructureShape.new(name: 'ListPoliciesResponse')
       ListPolicyPrincipalsRequest = Shapes::StructureShape.new(name: 'ListPolicyPrincipalsRequest')
@@ -144,6 +161,8 @@ module Aws
       ListPrincipalThingsResponse = Shapes::StructureShape.new(name: 'ListPrincipalThingsResponse')
       ListThingPrincipalsRequest = Shapes::StructureShape.new(name: 'ListThingPrincipalsRequest')
       ListThingPrincipalsResponse = Shapes::StructureShape.new(name: 'ListThingPrincipalsResponse')
+      ListThingTypesRequest = Shapes::StructureShape.new(name: 'ListThingTypesRequest')
+      ListThingTypesResponse = Shapes::StructureShape.new(name: 'ListThingTypesResponse')
       ListThingsRequest = Shapes::StructureShape.new(name: 'ListThingsRequest')
       ListThingsResponse = Shapes::StructureShape.new(name: 'ListThingsResponse')
       ListTopicRulesRequest = Shapes::StructureShape.new(name: 'ListTopicRulesRequest')
@@ -161,6 +180,9 @@ module Aws
       MetricUnit = Shapes::StringShape.new(name: 'MetricUnit')
       MetricValue = Shapes::StringShape.new(name: 'MetricValue')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
+      OptionalVersion = Shapes::IntegerShape.new(name: 'OptionalVersion')
+      OutgoingCertificate = Shapes::StructureShape.new(name: 'OutgoingCertificate')
+      OutgoingCertificates = Shapes::ListShape.new(name: 'OutgoingCertificates')
       PageSize = Shapes::IntegerShape.new(name: 'PageSize')
       PartitionKey = Shapes::StringShape.new(name: 'PartitionKey')
       PayloadField = Shapes::StringShape.new(name: 'PayloadField')
@@ -187,6 +209,7 @@ module Aws
       RegistrationCode = Shapes::StringShape.new(name: 'RegistrationCode')
       RegistrationCodeValidationException = Shapes::StructureShape.new(name: 'RegistrationCodeValidationException')
       RejectCertificateTransferRequest = Shapes::StructureShape.new(name: 'RejectCertificateTransferRequest')
+      RemoveThingType = Shapes::BooleanShape.new(name: 'RemoveThingType')
       ReplaceTopicRuleRequest = Shapes::StructureShape.new(name: 'ReplaceTopicRuleRequest')
       RepublishAction = Shapes::StructureShape.new(name: 'RepublishAction')
       ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
@@ -195,6 +218,7 @@ module Aws
       RuleName = Shapes::StringShape.new(name: 'RuleName')
       S3Action = Shapes::StructureShape.new(name: 'S3Action')
       SQL = Shapes::StringShape.new(name: 'SQL')
+      SearchableAttributes = Shapes::ListShape.new(name: 'SearchableAttributes')
       ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
       SetAsActive = Shapes::BooleanShape.new(name: 'SetAsActive')
       SetAsDefault = Shapes::BooleanShape.new(name: 'SetAsDefault')
@@ -212,6 +236,13 @@ module Aws
       ThingAttributeList = Shapes::ListShape.new(name: 'ThingAttributeList')
       ThingName = Shapes::StringShape.new(name: 'ThingName')
       ThingNameList = Shapes::ListShape.new(name: 'ThingNameList')
+      ThingTypeArn = Shapes::StringShape.new(name: 'ThingTypeArn')
+      ThingTypeDefinition = Shapes::StructureShape.new(name: 'ThingTypeDefinition')
+      ThingTypeDescription = Shapes::StringShape.new(name: 'ThingTypeDescription')
+      ThingTypeList = Shapes::ListShape.new(name: 'ThingTypeList')
+      ThingTypeMetadata = Shapes::StructureShape.new(name: 'ThingTypeMetadata')
+      ThingTypeName = Shapes::StringShape.new(name: 'ThingTypeName')
+      ThingTypeProperties = Shapes::StructureShape.new(name: 'ThingTypeProperties')
       ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
       Topic = Shapes::StringShape.new(name: 'Topic')
       TopicPattern = Shapes::StringShape.new(name: 'TopicPattern')
@@ -225,11 +256,14 @@ module Aws
       TransferConflictException = Shapes::StructureShape.new(name: 'TransferConflictException')
       TransferData = Shapes::StructureShape.new(name: 'TransferData')
       UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
+      UndoDeprecate = Shapes::BooleanShape.new(name: 'UndoDeprecate')
       UpdateCACertificateRequest = Shapes::StructureShape.new(name: 'UpdateCACertificateRequest')
       UpdateCertificateRequest = Shapes::StructureShape.new(name: 'UpdateCertificateRequest')
       UpdateThingRequest = Shapes::StructureShape.new(name: 'UpdateThingRequest')
       UpdateThingResponse = Shapes::StructureShape.new(name: 'UpdateThingResponse')
       UseBase64 = Shapes::BooleanShape.new(name: 'UseBase64')
+      Version = Shapes::IntegerShape.new(name: 'Version')
+      VersionConflictException = Shapes::StructureShape.new(name: 'VersionConflictException')
       VersionsLimitExceededException = Shapes::StructureShape.new(name: 'VersionsLimitExceededException')
       errorMessage = Shapes::StringShape.new(name: 'errorMessage')
 
@@ -263,6 +297,7 @@ module Aws
       AttachThingPrincipalResponse.struct_class = Types::AttachThingPrincipalResponse
 
       AttributePayload.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
+      AttributePayload.add_member(:merge, Shapes::ShapeRef.new(shape: Flag, location_name: "merge"))
       AttributePayload.struct_class = Types::AttributePayload
 
       Attributes.key = Shapes::ShapeRef.new(shape: AttributeName)
@@ -280,6 +315,7 @@ module Aws
       CACertificateDescription.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: CertificatePem, location_name: "certificatePem"))
       CACertificateDescription.add_member(:owned_by, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "ownedBy"))
       CACertificateDescription.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
+      CACertificateDescription.add_member(:auto_registration_status, Shapes::ShapeRef.new(shape: AutoRegistrationStatus, location_name: "autoRegistrationStatus"))
       CACertificateDescription.struct_class = Types::CACertificateDescription
 
       CACertificates.member = Shapes::ShapeRef.new(shape: CACertificate)
@@ -361,12 +397,21 @@ module Aws
       CreatePolicyVersionResponse.struct_class = Types::CreatePolicyVersionResponse
 
       CreateThingRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
+      CreateThingRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location_name: "thingTypeName"))
       CreateThingRequest.add_member(:attribute_payload, Shapes::ShapeRef.new(shape: AttributePayload, location_name: "attributePayload"))
       CreateThingRequest.struct_class = Types::CreateThingRequest
 
       CreateThingResponse.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))
       CreateThingResponse.add_member(:thing_arn, Shapes::ShapeRef.new(shape: ThingArn, location_name: "thingArn"))
       CreateThingResponse.struct_class = Types::CreateThingResponse
+
+      CreateThingTypeRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, required: true, location: "uri", location_name: "thingTypeName"))
+      CreateThingTypeRequest.add_member(:thing_type_properties, Shapes::ShapeRef.new(shape: ThingTypeProperties, location_name: "thingTypeProperties"))
+      CreateThingTypeRequest.struct_class = Types::CreateThingTypeRequest
+
+      CreateThingTypeResponse.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location_name: "thingTypeName"))
+      CreateThingTypeResponse.add_member(:thing_type_arn, Shapes::ShapeRef.new(shape: ThingTypeArn, location_name: "thingTypeArn"))
+      CreateThingTypeResponse.struct_class = Types::CreateThingTypeResponse
 
       CreateTopicRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location: "uri", location_name: "ruleName"))
       CreateTopicRuleRequest.add_member(:topic_rule_payload, Shapes::ShapeRef.new(shape: TopicRulePayload, required: true, location_name: "topicRulePayload"))
@@ -394,12 +439,24 @@ module Aws
       DeleteRegistrationCodeResponse.struct_class = Types::DeleteRegistrationCodeResponse
 
       DeleteThingRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
+      DeleteThingRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: OptionalVersion, location: "querystring", location_name: "expectedVersion"))
       DeleteThingRequest.struct_class = Types::DeleteThingRequest
 
       DeleteThingResponse.struct_class = Types::DeleteThingResponse
 
+      DeleteThingTypeRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, required: true, location: "uri", location_name: "thingTypeName"))
+      DeleteThingTypeRequest.struct_class = Types::DeleteThingTypeRequest
+
+      DeleteThingTypeResponse.struct_class = Types::DeleteThingTypeResponse
+
       DeleteTopicRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, required: true, location: "uri", location_name: "ruleName"))
       DeleteTopicRuleRequest.struct_class = Types::DeleteTopicRuleRequest
+
+      DeprecateThingTypeRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, required: true, location: "uri", location_name: "thingTypeName"))
+      DeprecateThingTypeRequest.add_member(:undo_deprecate, Shapes::ShapeRef.new(shape: UndoDeprecate, location_name: "undoDeprecate"))
+      DeprecateThingTypeRequest.struct_class = Types::DeprecateThingTypeRequest
+
+      DeprecateThingTypeResponse.struct_class = Types::DeprecateThingTypeResponse
 
       DescribeCACertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "caCertificateId"))
       DescribeCACertificateRequest.struct_class = Types::DescribeCACertificateRequest
@@ -423,8 +480,18 @@ module Aws
 
       DescribeThingResponse.add_member(:default_client_id, Shapes::ShapeRef.new(shape: ClientId, location_name: "defaultClientId"))
       DescribeThingResponse.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))
+      DescribeThingResponse.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location_name: "thingTypeName"))
       DescribeThingResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
+      DescribeThingResponse.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
       DescribeThingResponse.struct_class = Types::DescribeThingResponse
+
+      DescribeThingTypeRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, required: true, location: "uri", location_name: "thingTypeName"))
+      DescribeThingTypeRequest.struct_class = Types::DescribeThingTypeRequest
+
+      DescribeThingTypeResponse.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location_name: "thingTypeName"))
+      DescribeThingTypeResponse.add_member(:thing_type_properties, Shapes::ShapeRef.new(shape: ThingTypeProperties, location_name: "thingTypeProperties"))
+      DescribeThingTypeResponse.add_member(:thing_type_metadata, Shapes::ShapeRef.new(shape: ThingTypeMetadata, location_name: "thingTypeMetadata"))
+      DescribeThingTypeResponse.struct_class = Types::DescribeThingTypeResponse
 
       DetachPrincipalPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location: "uri", location_name: "policyName"))
       DetachPrincipalPolicyRequest.add_member(:principal, Shapes::ShapeRef.new(shape: Principal, required: true, location: "header", location_name: "x-amzn-iot-principal"))
@@ -463,6 +530,7 @@ module Aws
 
       FirehoseAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
       FirehoseAction.add_member(:delivery_stream_name, Shapes::ShapeRef.new(shape: DeliveryStreamName, required: true, location_name: "deliveryStreamName"))
+      FirehoseAction.add_member(:separator, Shapes::ShapeRef.new(shape: FirehoseSeparator, location_name: "separator"))
       FirehoseAction.struct_class = Types::FirehoseAction
 
       GetLoggingOptionsRequest.struct_class = Types::GetLoggingOptionsRequest
@@ -543,6 +611,15 @@ module Aws
       ListCertificatesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "nextMarker"))
       ListCertificatesResponse.struct_class = Types::ListCertificatesResponse
 
+      ListOutgoingCertificatesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location: "querystring", location_name: "pageSize"))
+      ListOutgoingCertificatesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "marker"))
+      ListOutgoingCertificatesRequest.add_member(:ascending_order, Shapes::ShapeRef.new(shape: AscendingOrder, location: "querystring", location_name: "isAscendingOrder"))
+      ListOutgoingCertificatesRequest.struct_class = Types::ListOutgoingCertificatesRequest
+
+      ListOutgoingCertificatesResponse.add_member(:outgoing_certificates, Shapes::ShapeRef.new(shape: OutgoingCertificates, location_name: "outgoingCertificates"))
+      ListOutgoingCertificatesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: Marker, location_name: "nextMarker"))
+      ListOutgoingCertificatesResponse.struct_class = Types::ListOutgoingCertificatesResponse
+
       ListPoliciesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location: "querystring", location_name: "marker"))
       ListPoliciesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location: "querystring", location_name: "pageSize"))
       ListPoliciesRequest.add_member(:ascending_order, Shapes::ShapeRef.new(shape: AscendingOrder, location: "querystring", location_name: "isAscendingOrder"))
@@ -593,10 +670,20 @@ module Aws
       ListThingPrincipalsResponse.add_member(:principals, Shapes::ShapeRef.new(shape: Principals, location_name: "principals"))
       ListThingPrincipalsResponse.struct_class = Types::ListThingPrincipalsResponse
 
+      ListThingTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+      ListThingTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+      ListThingTypesRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location: "querystring", location_name: "thingTypeName"))
+      ListThingTypesRequest.struct_class = Types::ListThingTypesRequest
+
+      ListThingTypesResponse.add_member(:thing_types, Shapes::ShapeRef.new(shape: ThingTypeList, location_name: "thingTypes"))
+      ListThingTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+      ListThingTypesResponse.struct_class = Types::ListThingTypesResponse
+
       ListThingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
       ListThingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
       ListThingsRequest.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeName, location: "querystring", location_name: "attributeName"))
       ListThingsRequest.add_member(:attribute_value, Shapes::ShapeRef.new(shape: AttributeValue, location: "querystring", location_name: "attributeValue"))
+      ListThingsRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location: "querystring", location_name: "thingTypeName"))
       ListThingsRequest.struct_class = Types::ListThingsRequest
 
       ListThingsResponse.add_member(:things, Shapes::ShapeRef.new(shape: ThingAttributeList, location_name: "things"))
@@ -617,6 +704,16 @@ module Aws
       LoggingOptionsPayload.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
       LoggingOptionsPayload.struct_class = Types::LoggingOptionsPayload
 
+      OutgoingCertificate.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
+      OutgoingCertificate.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, location_name: "certificateId"))
+      OutgoingCertificate.add_member(:transferred_to, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "transferredTo"))
+      OutgoingCertificate.add_member(:transfer_date, Shapes::ShapeRef.new(shape: DateType, location_name: "transferDate"))
+      OutgoingCertificate.add_member(:transfer_message, Shapes::ShapeRef.new(shape: Message, location_name: "transferMessage"))
+      OutgoingCertificate.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "creationDate"))
+      OutgoingCertificate.struct_class = Types::OutgoingCertificate
+
+      OutgoingCertificates.member = Shapes::ShapeRef.new(shape: OutgoingCertificate)
+
       Policies.member = Shapes::ShapeRef.new(shape: Policy)
 
       Policy.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "policyName"))
@@ -635,6 +732,7 @@ module Aws
       RegisterCACertificateRequest.add_member(:ca_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "caCertificate"))
       RegisterCACertificateRequest.add_member(:verification_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "verificationCertificate"))
       RegisterCACertificateRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActive, location: "querystring", location_name: "setAsActive"))
+      RegisterCACertificateRequest.add_member(:allow_auto_registration, Shapes::ShapeRef.new(shape: AllowAutoRegistration, location: "querystring", location_name: "allowAutoRegistration"))
       RegisterCACertificateRequest.struct_class = Types::RegisterCACertificateRequest
 
       RegisterCACertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
@@ -669,6 +767,8 @@ module Aws
       S3Action.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "key"))
       S3Action.struct_class = Types::S3Action
 
+      SearchableAttributes.member = Shapes::ShapeRef.new(shape: AttributeName)
+
       SetDefaultPolicyVersionRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location: "uri", location_name: "policyName"))
       SetDefaultPolicyVersionRequest.add_member(:policy_version_id, Shapes::ShapeRef.new(shape: PolicyVersionId, required: true, location: "uri", location_name: "policyVersionId"))
       SetDefaultPolicyVersionRequest.struct_class = Types::SetDefaultPolicyVersionRequest
@@ -689,12 +789,30 @@ module Aws
       SqsAction.struct_class = Types::SqsAction
 
       ThingAttribute.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, location_name: "thingName"))
+      ThingAttribute.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location_name: "thingTypeName"))
       ThingAttribute.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
+      ThingAttribute.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "version"))
       ThingAttribute.struct_class = Types::ThingAttribute
 
       ThingAttributeList.member = Shapes::ShapeRef.new(shape: ThingAttribute)
 
       ThingNameList.member = Shapes::ShapeRef.new(shape: ThingName)
+
+      ThingTypeDefinition.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location_name: "thingTypeName"))
+      ThingTypeDefinition.add_member(:thing_type_properties, Shapes::ShapeRef.new(shape: ThingTypeProperties, location_name: "thingTypeProperties"))
+      ThingTypeDefinition.add_member(:thing_type_metadata, Shapes::ShapeRef.new(shape: ThingTypeMetadata, location_name: "thingTypeMetadata"))
+      ThingTypeDefinition.struct_class = Types::ThingTypeDefinition
+
+      ThingTypeList.member = Shapes::ShapeRef.new(shape: ThingTypeDefinition)
+
+      ThingTypeMetadata.add_member(:deprecated, Shapes::ShapeRef.new(shape: Boolean, location_name: "deprecated"))
+      ThingTypeMetadata.add_member(:deprecation_date, Shapes::ShapeRef.new(shape: DeprecationDate, location_name: "deprecationDate"))
+      ThingTypeMetadata.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "creationDate"))
+      ThingTypeMetadata.struct_class = Types::ThingTypeMetadata
+
+      ThingTypeProperties.add_member(:thing_type_description, Shapes::ShapeRef.new(shape: ThingTypeDescription, location_name: "thingTypeDescription"))
+      ThingTypeProperties.add_member(:searchable_attributes, Shapes::ShapeRef.new(shape: SearchableAttributes, location_name: "searchableAttributes"))
+      ThingTypeProperties.struct_class = Types::ThingTypeProperties
 
       TopicRule.add_member(:rule_name, Shapes::ShapeRef.new(shape: RuleName, location_name: "ruleName"))
       TopicRule.add_member(:sql, Shapes::ShapeRef.new(shape: SQL, location_name: "sql"))
@@ -737,7 +855,8 @@ module Aws
       TransferData.struct_class = Types::TransferData
 
       UpdateCACertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "caCertificateId"))
-      UpdateCACertificateRequest.add_member(:new_status, Shapes::ShapeRef.new(shape: CACertificateStatus, required: true, location: "querystring", location_name: "newStatus"))
+      UpdateCACertificateRequest.add_member(:new_status, Shapes::ShapeRef.new(shape: CACertificateStatus, location: "querystring", location_name: "newStatus"))
+      UpdateCACertificateRequest.add_member(:new_auto_registration_status, Shapes::ShapeRef.new(shape: AutoRegistrationStatus, location: "querystring", location_name: "newAutoRegistrationStatus"))
       UpdateCACertificateRequest.struct_class = Types::UpdateCACertificateRequest
 
       UpdateCertificateRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
@@ -745,7 +864,10 @@ module Aws
       UpdateCertificateRequest.struct_class = Types::UpdateCertificateRequest
 
       UpdateThingRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: ThingName, required: true, location: "uri", location_name: "thingName"))
-      UpdateThingRequest.add_member(:attribute_payload, Shapes::ShapeRef.new(shape: AttributePayload, required: true, location_name: "attributePayload"))
+      UpdateThingRequest.add_member(:thing_type_name, Shapes::ShapeRef.new(shape: ThingTypeName, location_name: "thingTypeName"))
+      UpdateThingRequest.add_member(:attribute_payload, Shapes::ShapeRef.new(shape: AttributePayload, location_name: "attributePayload"))
+      UpdateThingRequest.add_member(:expected_version, Shapes::ShapeRef.new(shape: OptionalVersion, location_name: "expectedVersion"))
+      UpdateThingRequest.add_member(:remove_thing_type, Shapes::ShapeRef.new(shape: RemoveThingType, location_name: "removeThingType"))
       UpdateThingRequest.struct_class = Types::UpdateThingRequest
 
       UpdateThingResponse.struct_class = Types::UpdateThingResponse
@@ -1084,6 +1206,44 @@ module Aws
             "error" => {"httpStatusCode"=>409},
             "exception" => true
           })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
+            "error" => {"httpStatusCode"=>404},
+            "exception" => true
+          })
+        end)
+
+        api.add_operation(:create_thing_type, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateThingType"
+          o.http_method = "POST"
+          o.http_request_uri = "/thing-types/{thingTypeName}"
+          o.input = Shapes::ShapeRef.new(shape: CreateThingTypeRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateThingTypeResponse)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "error" => {"httpStatusCode"=>400},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ThrottlingException, metadata: {
+            "error" => {"httpStatusCode"=>429},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "error" => {"httpStatusCode"=>401},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
+            "error" => {"httpStatusCode"=>503},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalFailureException, metadata: {
+            "error" => {"httpStatusCode"=>500},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException, metadata: {
+            "error" => {"httpStatusCode"=>409},
+            "exception" => true
+          })
         end)
 
         api.add_operation(:create_topic_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -1312,6 +1472,44 @@ module Aws
             "error" => {"httpStatusCode"=>404},
             "exception" => true
           })
+          o.errors << Shapes::ShapeRef.new(shape: VersionConflictException, metadata: {
+            "error" => {"httpStatusCode"=>409},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "error" => {"httpStatusCode"=>400},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ThrottlingException, metadata: {
+            "error" => {"httpStatusCode"=>429},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "error" => {"httpStatusCode"=>401},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
+            "error" => {"httpStatusCode"=>503},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalFailureException, metadata: {
+            "error" => {"httpStatusCode"=>500},
+            "exception" => true,
+            "fault" => true
+          })
+        end)
+
+        api.add_operation(:delete_thing_type, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteThingType"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/thing-types/{thingTypeName}"
+          o.input = Shapes::ShapeRef.new(shape: DeleteThingTypeRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteThingTypeResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
+            "error" => {"httpStatusCode"=>404},
+            "exception" => true
+          })
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
             "error" => {"httpStatusCode"=>400},
             "exception" => true
@@ -1359,6 +1557,40 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
             "error" => {"httpStatusCode"=>401},
             "exception" => true
+          })
+        end)
+
+        api.add_operation(:deprecate_thing_type, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeprecateThingType"
+          o.http_method = "POST"
+          o.http_request_uri = "/thing-types/{thingTypeName}/deprecate"
+          o.input = Shapes::ShapeRef.new(shape: DeprecateThingTypeRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeprecateThingTypeResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
+            "error" => {"httpStatusCode"=>404},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "error" => {"httpStatusCode"=>400},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ThrottlingException, metadata: {
+            "error" => {"httpStatusCode"=>429},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "error" => {"httpStatusCode"=>401},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
+            "error" => {"httpStatusCode"=>503},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalFailureException, metadata: {
+            "error" => {"httpStatusCode"=>500},
+            "exception" => true,
+            "fault" => true
           })
         end)
 
@@ -1457,6 +1689,40 @@ module Aws
           o.http_request_uri = "/things/{thingName}"
           o.input = Shapes::ShapeRef.new(shape: DescribeThingRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeThingResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
+            "error" => {"httpStatusCode"=>404},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "error" => {"httpStatusCode"=>400},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ThrottlingException, metadata: {
+            "error" => {"httpStatusCode"=>429},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "error" => {"httpStatusCode"=>401},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
+            "error" => {"httpStatusCode"=>503},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalFailureException, metadata: {
+            "error" => {"httpStatusCode"=>500},
+            "exception" => true,
+            "fault" => true
+          })
+        end)
+
+        api.add_operation(:describe_thing_type, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeThingType"
+          o.http_method = "GET"
+          o.http_request_uri = "/thing-types/{thingTypeName}"
+          o.input = Shapes::ShapeRef.new(shape: DescribeThingTypeRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeThingTypeResponse)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
             "error" => {"httpStatusCode"=>404},
             "exception" => true
@@ -1841,6 +2107,36 @@ module Aws
           })
         end)
 
+        api.add_operation(:list_outgoing_certificates, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListOutgoingCertificates"
+          o.http_method = "GET"
+          o.http_request_uri = "/certificates-out-going"
+          o.input = Shapes::ShapeRef.new(shape: ListOutgoingCertificatesRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListOutgoingCertificatesResponse)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "error" => {"httpStatusCode"=>400},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ThrottlingException, metadata: {
+            "error" => {"httpStatusCode"=>429},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "error" => {"httpStatusCode"=>401},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
+            "error" => {"httpStatusCode"=>503},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalFailureException, metadata: {
+            "error" => {"httpStatusCode"=>500},
+            "exception" => true,
+            "fault" => true
+          })
+        end)
+
         api.add_operation(:list_policies, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListPolicies"
           o.http_method = "GET"
@@ -2001,6 +2297,10 @@ module Aws
             "exception" => true,
             "fault" => true
           })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
+            "error" => {"httpStatusCode"=>404},
+            "exception" => true
+          })
         end)
 
         api.add_operation(:list_thing_principals, Seahorse::Model::Operation.new.tap do |o|
@@ -2009,6 +2309,40 @@ module Aws
           o.http_request_uri = "/things/{thingName}/principals"
           o.input = Shapes::ShapeRef.new(shape: ListThingPrincipalsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListThingPrincipalsResponse)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "error" => {"httpStatusCode"=>400},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ThrottlingException, metadata: {
+            "error" => {"httpStatusCode"=>429},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "error" => {"httpStatusCode"=>401},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
+            "error" => {"httpStatusCode"=>503},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalFailureException, metadata: {
+            "error" => {"httpStatusCode"=>500},
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
+            "error" => {"httpStatusCode"=>404},
+            "exception" => true
+          })
+        end)
+
+        api.add_operation(:list_thing_types, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListThingTypes"
+          o.http_method = "GET"
+          o.http_request_uri = "/thing-types"
+          o.input = Shapes::ShapeRef.new(shape: ListThingTypesRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListThingTypesResponse)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
             "error" => {"httpStatusCode"=>400},
             "exception" => true
@@ -2423,6 +2757,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: UpdateThingResponse)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
             "error" => {"httpStatusCode"=>400},
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: VersionConflictException, metadata: {
+            "error" => {"httpStatusCode"=>409},
             "exception" => true
           })
           o.errors << Shapes::ShapeRef.new(shape: ThrottlingException, metadata: {

@@ -20,6 +20,7 @@ module Aws
       include Seahorse::Model
 
       AWSAccountIdType = Shapes::StringShape.new(name: 'AWSAccountIdType')
+      AlgorithmSpec = Shapes::StringShape.new(name: 'AlgorithmSpec')
       AliasList = Shapes::ListShape.new(name: 'AliasList')
       AliasListEntry = Shapes::StructureShape.new(name: 'AliasListEntry')
       AliasNameType = Shapes::StringShape.new(name: 'AliasNameType')
@@ -39,6 +40,7 @@ module Aws
       DecryptRequest = Shapes::StructureShape.new(name: 'DecryptRequest')
       DecryptResponse = Shapes::StructureShape.new(name: 'DecryptResponse')
       DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
+      DeleteImportedKeyMaterialRequest = Shapes::StructureShape.new(name: 'DeleteImportedKeyMaterialRequest')
       DependencyTimeoutException = Shapes::StructureShape.new(name: 'DependencyTimeoutException')
       DescribeKeyRequest = Shapes::StructureShape.new(name: 'DescribeKeyRequest')
       DescribeKeyResponse = Shapes::StructureShape.new(name: 'DescribeKeyResponse')
@@ -54,6 +56,8 @@ module Aws
       EncryptionContextType = Shapes::MapShape.new(name: 'EncryptionContextType')
       EncryptionContextValue = Shapes::StringShape.new(name: 'EncryptionContextValue')
       ErrorMessageType = Shapes::StringShape.new(name: 'ErrorMessageType')
+      ExpirationModelType = Shapes::StringShape.new(name: 'ExpirationModelType')
+      ExpiredImportTokenException = Shapes::StructureShape.new(name: 'ExpiredImportTokenException')
       GenerateDataKeyRequest = Shapes::StructureShape.new(name: 'GenerateDataKeyRequest')
       GenerateDataKeyResponse = Shapes::StructureShape.new(name: 'GenerateDataKeyResponse')
       GenerateDataKeyWithoutPlaintextRequest = Shapes::StructureShape.new(name: 'GenerateDataKeyWithoutPlaintextRequest')
@@ -64,6 +68,8 @@ module Aws
       GetKeyPolicyResponse = Shapes::StructureShape.new(name: 'GetKeyPolicyResponse')
       GetKeyRotationStatusRequest = Shapes::StructureShape.new(name: 'GetKeyRotationStatusRequest')
       GetKeyRotationStatusResponse = Shapes::StructureShape.new(name: 'GetKeyRotationStatusResponse')
+      GetParametersForImportRequest = Shapes::StructureShape.new(name: 'GetParametersForImportRequest')
+      GetParametersForImportResponse = Shapes::StructureShape.new(name: 'GetParametersForImportResponse')
       GrantConstraints = Shapes::StructureShape.new(name: 'GrantConstraints')
       GrantIdType = Shapes::StringShape.new(name: 'GrantIdType')
       GrantList = Shapes::ListShape.new(name: 'GrantList')
@@ -73,11 +79,15 @@ module Aws
       GrantOperationList = Shapes::ListShape.new(name: 'GrantOperationList')
       GrantTokenList = Shapes::ListShape.new(name: 'GrantTokenList')
       GrantTokenType = Shapes::StringShape.new(name: 'GrantTokenType')
+      ImportKeyMaterialRequest = Shapes::StructureShape.new(name: 'ImportKeyMaterialRequest')
+      ImportKeyMaterialResponse = Shapes::StructureShape.new(name: 'ImportKeyMaterialResponse')
+      IncorrectKeyMaterialException = Shapes::StructureShape.new(name: 'IncorrectKeyMaterialException')
       InvalidAliasNameException = Shapes::StructureShape.new(name: 'InvalidAliasNameException')
       InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
       InvalidCiphertextException = Shapes::StructureShape.new(name: 'InvalidCiphertextException')
       InvalidGrantIdException = Shapes::StructureShape.new(name: 'InvalidGrantIdException')
       InvalidGrantTokenException = Shapes::StructureShape.new(name: 'InvalidGrantTokenException')
+      InvalidImportTokenException = Shapes::StructureShape.new(name: 'InvalidImportTokenException')
       InvalidKeyUsageException = Shapes::StructureShape.new(name: 'InvalidKeyUsageException')
       InvalidMarkerException = Shapes::StructureShape.new(name: 'InvalidMarkerException')
       KMSInternalException = Shapes::StructureShape.new(name: 'KMSInternalException')
@@ -104,6 +114,7 @@ module Aws
       MarkerType = Shapes::StringShape.new(name: 'MarkerType')
       NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
       NumberOfBytesType = Shapes::IntegerShape.new(name: 'NumberOfBytesType')
+      OriginType = Shapes::StringShape.new(name: 'OriginType')
       PendingWindowInDaysType = Shapes::IntegerShape.new(name: 'PendingWindowInDaysType')
       PlaintextType = Shapes::BlobShape.new(name: 'PlaintextType')
       PolicyNameList = Shapes::ListShape.new(name: 'PolicyNameList')
@@ -120,6 +131,7 @@ module Aws
       UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
       UpdateAliasRequest = Shapes::StructureShape.new(name: 'UpdateAliasRequest')
       UpdateKeyDescriptionRequest = Shapes::StructureShape.new(name: 'UpdateKeyDescriptionRequest')
+      WrappingKeySpec = Shapes::StringShape.new(name: 'WrappingKeySpec')
 
       AliasList.member = Shapes::ShapeRef.new(shape: AliasListEntry)
 
@@ -154,6 +166,7 @@ module Aws
       CreateKeyRequest.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyType, location_name: "Policy"))
       CreateKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionType, location_name: "Description"))
       CreateKeyRequest.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageType, location_name: "KeyUsage"))
+      CreateKeyRequest.add_member(:origin, Shapes::ShapeRef.new(shape: OriginType, location_name: "Origin"))
       CreateKeyRequest.add_member(:bypass_policy_lockout_safety_check, Shapes::ShapeRef.new(shape: BooleanType, location_name: "BypassPolicyLockoutSafetyCheck"))
       CreateKeyRequest.struct_class = Types::CreateKeyRequest
 
@@ -171,6 +184,9 @@ module Aws
 
       DeleteAliasRequest.add_member(:alias_name, Shapes::ShapeRef.new(shape: AliasNameType, required: true, location_name: "AliasName"))
       DeleteAliasRequest.struct_class = Types::DeleteAliasRequest
+
+      DeleteImportedKeyMaterialRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+      DeleteImportedKeyMaterialRequest.struct_class = Types::DeleteImportedKeyMaterialRequest
 
       DescribeKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
       DescribeKeyRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
@@ -246,6 +262,17 @@ module Aws
       GetKeyRotationStatusResponse.add_member(:key_rotation_enabled, Shapes::ShapeRef.new(shape: BooleanType, location_name: "KeyRotationEnabled"))
       GetKeyRotationStatusResponse.struct_class = Types::GetKeyRotationStatusResponse
 
+      GetParametersForImportRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+      GetParametersForImportRequest.add_member(:wrapping_algorithm, Shapes::ShapeRef.new(shape: AlgorithmSpec, required: true, location_name: "WrappingAlgorithm"))
+      GetParametersForImportRequest.add_member(:wrapping_key_spec, Shapes::ShapeRef.new(shape: WrappingKeySpec, required: true, location_name: "WrappingKeySpec"))
+      GetParametersForImportRequest.struct_class = Types::GetParametersForImportRequest
+
+      GetParametersForImportResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+      GetParametersForImportResponse.add_member(:import_token, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "ImportToken"))
+      GetParametersForImportResponse.add_member(:public_key, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "PublicKey"))
+      GetParametersForImportResponse.add_member(:parameters_valid_to, Shapes::ShapeRef.new(shape: DateType, location_name: "ParametersValidTo"))
+      GetParametersForImportResponse.struct_class = Types::GetParametersForImportResponse
+
       GrantConstraints.add_member(:encryption_context_subset, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContextSubset"))
       GrantConstraints.add_member(:encryption_context_equals, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContextEquals"))
       GrantConstraints.struct_class = Types::GrantConstraints
@@ -267,6 +294,15 @@ module Aws
 
       GrantTokenList.member = Shapes::ShapeRef.new(shape: GrantTokenType)
 
+      ImportKeyMaterialRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+      ImportKeyMaterialRequest.add_member(:import_token, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "ImportToken"))
+      ImportKeyMaterialRequest.add_member(:encrypted_key_material, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "EncryptedKeyMaterial"))
+      ImportKeyMaterialRequest.add_member(:valid_to, Shapes::ShapeRef.new(shape: DateType, location_name: "ValidTo"))
+      ImportKeyMaterialRequest.add_member(:expiration_model, Shapes::ShapeRef.new(shape: ExpirationModelType, location_name: "ExpirationModel"))
+      ImportKeyMaterialRequest.struct_class = Types::ImportKeyMaterialRequest
+
+      ImportKeyMaterialResponse.struct_class = Types::ImportKeyMaterialResponse
+
       KeyList.member = Shapes::ShapeRef.new(shape: KeyListEntry)
 
       KeyListEntry.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
@@ -282,6 +318,9 @@ module Aws
       KeyMetadata.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsageType, location_name: "KeyUsage"))
       KeyMetadata.add_member(:key_state, Shapes::ShapeRef.new(shape: KeyState, location_name: "KeyState"))
       KeyMetadata.add_member(:deletion_date, Shapes::ShapeRef.new(shape: DateType, location_name: "DeletionDate"))
+      KeyMetadata.add_member(:valid_to, Shapes::ShapeRef.new(shape: DateType, location_name: "ValidTo"))
+      KeyMetadata.add_member(:origin, Shapes::ShapeRef.new(shape: OriginType, location_name: "Origin"))
+      KeyMetadata.add_member(:expiration_model, Shapes::ShapeRef.new(shape: ExpirationModelType, location_name: "ExpirationModel"))
       KeyMetadata.struct_class = Types::KeyMetadata
 
       ListAliasesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
@@ -473,6 +512,20 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         end)
 
+        api.add_operation(:delete_imported_key_material, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteImportedKeyMaterial"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteImportedKeyMaterialRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+          o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        end)
+
         api.add_operation(:describe_key, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DescribeKey"
           o.http_method = "POST"
@@ -510,6 +563,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         end)
 
         api.add_operation(:enable_key, Seahorse::Model::Operation.new.tap do |o|
@@ -538,6 +592,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
         end)
 
         api.add_operation(:encrypt, Seahorse::Model::Operation.new.tap do |o|
@@ -622,6 +677,39 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        end)
+
+        api.add_operation(:get_parameters_for_import, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetParametersForImport"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: GetParametersForImportRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetParametersForImportResponse)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+          o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        end)
+
+        api.add_operation(:import_key_material, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ImportKeyMaterial"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ImportKeyMaterialRequest)
+          o.output = Shapes::ShapeRef.new(shape: ImportKeyMaterialResponse)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+          o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidCiphertextException)
+          o.errors << Shapes::ShapeRef.new(shape: IncorrectKeyMaterialException)
+          o.errors << Shapes::ShapeRef.new(shape: ExpiredImportTokenException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidImportTokenException)
         end)
 
         api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|

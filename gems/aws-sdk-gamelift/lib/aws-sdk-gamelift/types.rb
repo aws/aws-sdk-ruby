@@ -43,15 +43,15 @@ module Aws
         #   @return [Types::RoutingStrategy]
 
         # @!attribute [rw] creation_time
-        #   Time stamp indicating when this object was created. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was created. Format is a
+        #   number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] last_updated_time
-        #   Time stamp indicating when this object was last modified. Format is
-        #   an integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was last modified.
+        #   Format is a number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
       end
@@ -86,6 +86,7 @@ module Aws
         :version,
         :status,
         :size_on_disk,
+        :operating_system,
         :creation_time)
 
         # @!attribute [rw] build_id
@@ -104,12 +105,14 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] status
-        #   Current status of the build. Possible build states include the
-        #   following: * **INITIALIZED** – A new build has been defined, but no
-        #   files have
+        #   Current status of the build.
+        #
+        #   Possible build statuses include the following:
+        #
+        #   * **INITIALIZED** – A new build has been defined, but no files have
         #     been uploaded. You cannot create fleets for builds that are in
-        #     this state. When a build is successfully created, the build state
-        #     is set to this value.
+        #     this status. When a build is successfully created, the build
+        #     status is set to this value.
         #   * **READY** – The game build has been successfully uploaded. You can
         #     now create new fleets for this build.
         #   * **FAILED** – The game build upload failed. You cannot create new
@@ -118,13 +121,19 @@ module Aws
 
         # @!attribute [rw] size_on_disk
         #   File size of the uploaded game build, expressed in bytes. When the
-        #   build state is `INITIALIZED`, this value is 0.
+        #   build status is `INITIALIZED`, this value is 0.
         #   @return [Integer]
 
+        # @!attribute [rw] operating_system
+        #   Operating system that the game server binaries are built to run on.
+        #   This value determines the type of fleet resources that you can use
+        #   for this build.
+        #   @return [String]
+
         # @!attribute [rw] creation_time
-        #   Time stamp indicating when this object was created. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was created. Format is a
+        #   number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
       end
@@ -184,11 +193,13 @@ module Aws
       #           key: "NonEmptyString",
       #           role_arn: "NonEmptyString",
       #         },
+      #         operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX
       #       }
       class CreateBuildInput < Aws::Structure.new(
         :name,
         :version,
-        :storage_location)
+        :storage_location,
+        :operating_system)
 
         # @!attribute [rw] name
         #   Descriptive label associated with a build. Build names do not need
@@ -212,6 +223,12 @@ module Aws
         #
         #   [1]: http://aws.amazon.com/documentation/s3/
         #   @return [Types::S3Location]
+
+        # @!attribute [rw] operating_system
+        #   Operating system that the game server binaries are built to run on.
+        #   This value determines the type of fleet resources that you can use
+        #   for this build.
+        #   @return [String]
 
       end
 
@@ -294,7 +311,7 @@ module Aws
         # @!attribute [rw] build_id
         #   Unique identifier of the build to be deployed on the new fleet. The
         #   build must have been successfully uploaded to GameLift and be in a
-        #   `READY` state. This fleet setting cannot be changed once the fleet
+        #   `READY` status. This fleet setting cannot be changed once the fleet
         #   is created.
         #   @return [String]
 
@@ -352,8 +369,9 @@ module Aws
         #   to no protection. You can change a fleet\'s protection policy using
         #   UpdateFleetAttributes, but this change will only affect sessions
         #   created after the policy change. You can also set protection for
-        #   individual instances using UpdateGameSession. * **NoProtection** –
-        #   The game session can be terminated during a
+        #   individual instances using UpdateGameSession.
+        #
+        #   * **NoProtection** – The game session can be terminated during a
         #     scale-down event.
         #   * **FullProtection** – If the game session is in an `ACTIVE` status,
         #     it cannot be terminated during a scale-down event.
@@ -822,15 +840,15 @@ module Aws
         # @!attribute [rw] start_time
         #   Earliest date to retrieve event logs for. If no start time is
         #   specified, this call returns entries starting from when the fleet
-        #   was created to the specified end time. Format is an integer
-        #   representing the number of seconds since the Unix epoch (Unix time).
+        #   was created to the specified end time. Format is a number expressed
+        #   in Unix time as milliseconds (ex: \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] end_time
         #   Most recent date to retrieve event logs for. If no end time is
         #   specified, this call returns entries from the specified start time
-        #   up to the present. Format is an integer representing the number of
-        #   seconds since the Unix epoch (Unix time).
+        #   up to the present. Format is a number expressed in Unix time as
+        #   milliseconds (ex: \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] limit
@@ -995,8 +1013,8 @@ module Aws
 
         # @!attribute [rw] status_filter
         #   Game session status to filter results on. Possible game session
-        #   states include ACTIVE, `TERMINATED`, `ACTIVATING` and `TERMINATING`
-        #   (the last two are transitory).
+        #   statuses include ACTIVE, `TERMINATED`, `ACTIVATING` and
+        #   `TERMINATING` (the last two are transitory).
         #   @return [String]
 
         # @!attribute [rw] limit
@@ -1074,7 +1092,7 @@ module Aws
 
         # @!attribute [rw] status_filter
         #   Game session status to filter results on. Possible game session
-        #   states include `ACTIVE`, `TERMINATED`, `ACTIVATING`, and
+        #   statuses include `ACTIVE`, `TERMINATED`, `ACTIVATING`, and
         #   `TERMINATING` (the last two are transitory).
         #   @return [String]
 
@@ -1148,9 +1166,11 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] player_session_status_filter
-        #   Player session status to filter results on. Possible player session
-        #   states include the following: * **RESERVED** – The player session
-        #   request has been received, but
+        #   Player session status to filter results on.
+        #
+        #   Possible player session statuses include the following:
+        #
+        #   * **RESERVED** – The player session request has been received, but
         #     the player has not yet connected to the server process and/or been
         #     validated.
         #   * **ACTIVE** – The player has been validated by the server process
@@ -1249,9 +1269,10 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] status_filter
-        #   Game session status to filter results on. A scaling policy is only
-        #   in force when in an Active state. * **ACTIVE** – The scaling policy
-        #   is currently in force.
+        #   Scaling policy status to filter results on. A scaling policy is only
+        #   in force when in an `ACTIVE` status.
+        #
+        #   * **ACTIVE** – The scaling policy is currently in force.
         #   * **UPDATEREQUESTED** – A request to update the scaling policy has
         #     been received.
         #   * **UPDATING** – A change is being made to the scaling policy.
@@ -1404,8 +1425,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] event_time
-        #   Time stamp indicating when this event occurred. Format is an integer
-        #   representing the number of seconds since the Unix epoch (Unix time).
+        #   Time stamp indicating when this event occurred. Format is a number
+        #   expressed in Unix time as milliseconds (ex: \"1469498468.057\".
         #   @return [Time]
 
       end
@@ -1422,7 +1443,8 @@ module Aws
         :server_launch_path,
         :server_launch_parameters,
         :log_paths,
-        :new_game_session_protection_policy)
+        :new_game_session_protection_policy,
+        :operating_system)
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet.
@@ -1438,21 +1460,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] creation_time
-        #   Time stamp indicating when this object was created. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was created. Format is a
+        #   number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] termination_time
-        #   Time stamp indicating when this fleet was terminated. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was terminated. Format
+        #   is a number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] status
-        #   Current status of the fleet. Possible fleet states include the
-        #   following: * **NEW** – A new fleet has been defined and desired
-        #   instances is
+        #   Current status of the fleet.
+        #
+        #   Possible fleet statuses include the following:
+        #
+        #   * **NEW** – A new fleet has been defined and desired instances is
         #     set to 1.
         #   * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** – GameLift is
         #     setting up the new fleet, creating new instances with the game
@@ -1469,13 +1493,17 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] server_launch_path
-        #   Deprecated. Server launch parameters are now set using a
-        #   `RuntimeConfiguration` object.
+        #   Path to a game server executable in the fleet\'s build, specified
+        #   for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16).
+        #   Server launch paths for fleets created after this date are specified
+        #   in the fleet\'s `RuntimeConfiguration`.
         #   @return [String]
 
         # @!attribute [rw] server_launch_parameters
-        #   Deprecated. Server launch parameters are now specified using a
-        #   `RuntimeConfiguration` object.
+        #   Game server launch parameters specified for fleets created prior to
+        #   2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for
+        #   fleets created after this date are specified in the fleet\'s
+        #   `RuntimeConfiguration`.
         #   @return [String]
 
         # @!attribute [rw] log_paths
@@ -1494,11 +1522,18 @@ module Aws
 
         # @!attribute [rw] new_game_session_protection_policy
         #   Type of game session protection to set for all new instances started
-        #   in the fleet. * **NoProtection** – The game session can be
-        #   terminated during a
+        #   in the fleet.
+        #
+        #   * **NoProtection** – The game session can be terminated during a
         #     scale-down event.
         #   * **FullProtection** – If the game session is in an `ACTIVE` status,
         #     it cannot be terminated during a scale-down event.
+        #   @return [String]
+
+        # @!attribute [rw] operating_system
+        #   Operating system of the fleet\'s computing resources. A fleet\'s
+        #   operating system depends on the OS specified for the build that is
+        #   deployed on this fleet.
         #   @return [String]
 
       end
@@ -1548,7 +1583,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] active_server_process_count
-        #   Number of server processes in an `ACTIVE` state currently running
+        #   Number of server processes in an `ACTIVE` status currently running
         #   across all instances in the fleet
         #   @return [Integer]
 
@@ -1625,15 +1660,15 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] creation_time
-        #   Time stamp indicating when this object was created. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was created. Format is a
+        #   number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] termination_time
-        #   Time stamp indicating when this fleet was terminated. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was terminated. Format
+        #   is a number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] current_player_session_count
@@ -1646,7 +1681,7 @@ module Aws
 
         # @!attribute [rw] status
         #   Current status of the game session. A game session must be in an
-        #   `ACTIVE` state to have player sessions.
+        #   `ACTIVE` status to have player sessions.
         #   @return [String]
 
         # @!attribute [rw] game_properties
@@ -1680,8 +1715,9 @@ module Aws
         #   @return [Types::GameSession]
 
         # @!attribute [rw] protection_policy
-        #   Current status of protection for the game session. *
-        #   **NoProtection** – The game session can be terminated during a
+        #   Current status of protection for the game session.
+        #
+        #   * **NoProtection** – The game session can be terminated during a
         #     scale-down event.
         #   * **FullProtection** – If the game session is in an `ACTIVE` status,
         #     it cannot be terminated during a scale-down event.
@@ -1780,8 +1816,11 @@ module Aws
         # @!attribute [rw] routing_strategy_type
         #   Type of routing to filter results on. Use this parameter to retrieve
         #   only aliases of a certain type. To retrieve all aliases, leave this
-        #   parameter empty. Possible routing types include the following: *
-        #   **SIMPLE** – The alias resolves to one specific fleet. Use this
+        #   parameter empty.
+        #
+        #   Possible routing types include the following:
+        #
+        #   * **SIMPLE** – The alias resolves to one specific fleet. Use this
         #     type when routing to active fleets.
         #   * **TERMINAL** – The alias does not resolve to a fleet but instead
         #     can be used to display a message to the user. A terminal alias
@@ -1845,12 +1884,15 @@ module Aws
         :next_token)
 
         # @!attribute [rw] status
-        #   Build state to filter results by. To retrieve all builds, leave this
-        #   parameter empty. Possible build states include the following: *
-        #   **INITIALIZED** – A new build has been defined, but no files have
+        #   Build status to filter results by. To retrieve all builds, leave
+        #   this parameter empty.
+        #
+        #   Possible build statuses include the following:
+        #
+        #   * **INITIALIZED** – A new build has been defined, but no files have
         #     been uploaded. You cannot create fleets for builds that are in
-        #     this state. When a build is successfully created, the build state
-        #     is set to this value.
+        #     this status. When a build is successfully created, the build
+        #     status is set to this value.
         #   * **READY** – The game build has been successfully uploaded. You can
         #     now create new fleets for this build.
         #   * **FAILED** – The game build upload failed. You cannot create new
@@ -1981,21 +2023,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] creation_time
-        #   Time stamp indicating when this object was created. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was created. Format is a
+        #   number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] termination_time
-        #   Time stamp indicating when this fleet was terminated. Format is an
-        #   integer representing the number of seconds since the Unix epoch
-        #   (Unix time).
+        #   Time stamp indicating when this data object was terminated. Format
+        #   is a number expressed in Unix time as milliseconds (ex:
+        #   \"1469498468.057\".
         #   @return [Time]
 
         # @!attribute [rw] status
-        #   Current status of the player session. Possible player session states
-        #   include the following: * **RESERVED** – The player session request
-        #   has been received, but
+        #   Current status of the player session.
+        #
+        #   Possible player session statuses include the following:
+        #
+        #   * **RESERVED** – The player session request has been received, but
         #     the player has not yet connected to the server process and/or been
         #     validated.
         #   * **ACTIVE** – The player has been validated by the server process
@@ -2058,8 +2102,9 @@ module Aws
 
         # @!attribute [rw] scaling_adjustment_type
         #   Type of adjustment to make to a fleet\'s instance count (see
-        #   FleetCapacity): * **ChangeInCapacity** – add (or subtract) the
-        #   scaling adjustment
+        #   FleetCapacity):
+        #
+        #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
         #     value from the current instance count. Positive values scale up
         #     while negative values scale down.
         #   * **ExactCapacity** – set the instance count to the scaling
@@ -2086,8 +2131,9 @@ module Aws
 
         # @!attribute [rw] metric_name
         #   Name of the Amazon GameLift-defined metric that is used to trigger
-        #   an adjustment. * **ActivatingGameSessions** – number of game
-        #   sessions in the
+        #   an adjustment.
+        #
+        #   * **ActivatingGameSessions** – number of game sessions in the
         #     process of being created (game session status = `ACTIVATING`).
         #   * **ActiveGameSessions** – number of game sessions currently running
         #     (game session status = `ACTIVE`).
@@ -2193,9 +2239,11 @@ module Aws
         :message)
 
         # @!attribute [rw] type
-        #   Type of routing strategy. Possible routing types include the
-        #   following: * **SIMPLE** – The alias resolves to one specific fleet.
-        #   Use this
+        #   Type of routing strategy.
+        #
+        #   Possible routing types include the following:
+        #
+        #   * **SIMPLE** – The alias resolves to one specific fleet. Use this
         #     type when routing to active fleets.
         #   * **TERMINAL** – The alias does not resolve to a fleet but instead
         #     can be used to display a message to the user. A terminal alias
@@ -2220,7 +2268,7 @@ module Aws
       # configuration and starts new server processes to match the latest
       # version.
       #
-      # The key purpose of a a runtime configuration with multiple server
+      # The key purpose of a runtime configuration with multiple server
       # process configurations is to be able to run more than one kind of game
       # server in a single fleet. You can include configurations for more than
       # one server executable in order to run two or more different programs
@@ -2316,12 +2364,13 @@ module Aws
 
         # @!attribute [rw] status
         #   Current status of the scaling policy. The scaling policy is only in
-        #   force when in an Active state. * **ACTIVE** – The scaling policy is
-        #   currently in force.
-        #   * **UPDATEREQUESTED** – A request to update the scaling policy has
+        #   force when in an `ACTIVE` status.
+        #
+        #   * **ACTIVE** – The scaling policy is currently in force.
+        #   * **UPDATE\_REQUESTED** – A request to update the scaling policy has
         #     been received.
         #   * **UPDATING** – A change is being made to the scaling policy.
-        #   * **DELETEREQUESTED** – A request to delete the scaling policy has
+        #   * **DELETE\_REQUESTED** – A request to delete the scaling policy has
         #     been received.
         #   * **DELETING** – The scaling policy is being deleted.
         #   * **DELETED** – The scaling policy has been deleted.
@@ -2335,8 +2384,9 @@ module Aws
 
         # @!attribute [rw] scaling_adjustment_type
         #   Type of adjustment to make to a fleet\'s instance count (see
-        #   FleetCapacity): * **ChangeInCapacity** – add (or subtract) the
-        #   scaling adjustment
+        #   FleetCapacity):
+        #
+        #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
         #     value from the current instance count. Positive values scale up
         #     while negative values scale down.
         #   * **ExactCapacity** – set the instance count to the scaling
@@ -2362,8 +2412,9 @@ module Aws
 
         # @!attribute [rw] metric_name
         #   Name of the GameLift-defined metric that is used to trigger an
-        #   adjustment. * **ActivatingGameSessions** – number of game sessions
-        #   in the
+        #   adjustment.
+        #
+        #   * **ActivatingGameSessions** – number of game sessions in the
         #     process of being created (game session status = `ACTIVATING`).
         #   * **ActiveGameSessions** – number of game sessions currently running
         #     (game session status = `ACTIVE`).
@@ -2379,6 +2430,132 @@ module Aws
         #     session.
         #   * **IdleInstances** – number of instances not currently running a
         #     game session.
+        #   @return [String]
+
+      end
+
+      # Represents the input for a request action.
+      # @note When making an API call, pass SearchGameSessionsInput
+      #   data as a hash:
+      #
+      #       {
+      #         fleet_id: "FleetId",
+      #         alias_id: "AliasId",
+      #         filter_expression: "NonZeroAndMaxString",
+      #         sort_expression: "NonZeroAndMaxString",
+      #         limit: 1,
+      #         next_token: "NonZeroAndMaxString",
+      #       }
+      class SearchGameSessionsInput < Aws::Structure.new(
+        :fleet_id,
+        :alias_id,
+        :filter_expression,
+        :sort_expression,
+        :limit,
+        :next_token)
+
+        # @!attribute [rw] fleet_id
+        #   Unique identifier for a fleet. Each request must reference either a
+        #   fleet ID or alias ID, but not both.
+        #   @return [String]
+
+        # @!attribute [rw] alias_id
+        #   Unique identifier for a fleet alias. Each request must reference
+        #   either a fleet ID or alias ID, but not both.
+        #   @return [String]
+
+        # @!attribute [rw] filter_expression
+        #   String containing the search criteria for the session search. If no
+        #   filter expression is included, the request returns results for all
+        #   game sessions in the fleet that are in ACTIVE status.
+        #
+        #   A filter expression can contain one or multiple conditions. Each
+        #   condition consists of the following:
+        #
+        #   * **Operand** -- Name of a game session attribute. Valid values are
+        #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
+        #     `playerSessionCount`, `maximumSessions`,
+        #     `hasAvailablePlayerSessions`.
+        #   * **Comparator** -- Valid comparators are: `=`, `&lt;&gt;`, `&lt;`,
+        #     `&gt;`, `&lt;=`, `&gt;=`.
+        #   * **Value** -- Value to be searched for. Values can be numbers,
+        #     boolean values (true/false) or strings. String values are case
+        #     sensitive, enclosed in single quotes. Special characters must be
+        #     escaped. Boolean and string values can only be used with the
+        #     comparators `=` and `&lt;&gt;`. For example, the following filter
+        #     expression searches on `gameSessionName`\: \"`FilterExpression":
+        #     "gameSessionName = 'Matt\\'s Awesome Game 1'"`.
+        #
+        #   To chain multiple conditions in a single expression, use the logical
+        #   keywords `AND`, `OR`, and `NOT` and parentheses as needed. For
+        #   example: `x AND y AND NOT z`, `NOT (x OR y)`.
+        #
+        #   Session search evaluates conditions from left to right using the
+        #   following precedence rules:
+        #
+        #   1.  `=`, `&lt;&gt;`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`
+        #   2.  Parentheses
+        #   3.  NOT
+        #   4.  AND
+        #   5.  OR
+        #
+        #   For example, this filter expression retrieves game sessions hosting
+        #   at least ten players that have an open player slot:
+        #   `"maximumSessions&gt;=10 AND hasAvailablePlayerSessions=true"`.
+        #   @return [String]
+
+        # @!attribute [rw] sort_expression
+        #   Instructions on how to sort the search results. If no sort
+        #   expression is included, the request returns results in random order.
+        #   A sort expression consists of the following elements:
+        #
+        #   * **Operand** -- Name of a game session attribute. Valid values are
+        #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
+        #     `playerSessionCount`, `maximumSessions`,
+        #     `hasAvailablePlayerSessions`.
+        #   * **Order** -- Valid sort orders are `ASC` (ascending) and `DESC`
+        #     (descending).
+        #
+        #   For example, this sort expression returns the oldest active sessions
+        #   first: `"SortExpression": "creationTimeMillis ASC"`. Results with a
+        #   null value for the sort operand are returned at the end of the list.
+        #   @return [String]
+
+        # @!attribute [rw] limit
+        #   Maximum number of results to return. Use this parameter with
+        #   `NextToken` to get results as a set of sequential pages. The maximum
+        #   number of results returned is 20, even if this value is not set or
+        #   is set higher than 20.
+        #   @return [Integer]
+
+        # @!attribute [rw] next_token
+        #   Token indicating the start of the next sequential page of results.
+        #   Use the token that is returned with a previous call to this action.
+        #   To specify the start of the result set, do not specify a value.
+        #   @return [String]
+
+      end
+
+      # Represents the returned data in response to a request action.
+      class SearchGameSessionsOutput < Aws::Structure.new(
+        :game_sessions,
+        :next_token)
+
+        # @!attribute [rw] game_sessions
+        #   Collection of objects containing game session properties for each
+        #   session matching the request.
+        #   @return [Array<Types::GameSession>]
+
+        # @!attribute [rw] next_token
+        #   Token indicating where to resume retrieving results on the next call
+        #   to this action. If no token is returned, these results represent the
+        #   end of the list.
+        #
+        #   <note markdown="1"> If a request has a limit that exactly matches the number of
+        #   remaining results, a token is returned even though there are no more
+        #   results to retrieve.
+        #
+        #    </note>
         #   @return [String]
 
       end
@@ -2545,6 +2722,7 @@ module Aws
         #   Game session protection policy to apply to all new instances created
         #   in this fleet. Instances that already exist are not affected. You
         #   can set protection for individual instances using UpdateGameSession.
+        #
         #   * **NoProtection** – The game session can be terminated during a
         #     scale-down event.
         #   * **FullProtection** – If the game session is in an `ACTIVE` status,
@@ -2701,8 +2879,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] protection_policy
-        #   Game session protection policy to apply to this game session only. *
-        #   **NoProtection** – The game session can be terminated during a
+        #   Game session protection policy to apply to this game session only.
+        #
+        #   * **NoProtection** – The game session can be terminated during a
         #     scale-down event.
         #   * **FullProtection** – If the game session is in an `ACTIVE` status,
         #     it cannot be terminated during a scale-down event.

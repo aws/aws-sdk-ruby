@@ -63,6 +63,12 @@ module Aws
         data.valid_till
       end
 
+      # The Amazon Resource Name (ARN) for the certificate.
+      # @return [String]
+      def certificate_arn
+        data.certificate_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

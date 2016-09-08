@@ -69,6 +69,12 @@ module Aws
         data.ip_ranges
       end
 
+      # The Amazon Resource Name (ARN) for the DB security group.
+      # @return [String]
+      def db_security_group_arn
+        data.db_security_group_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

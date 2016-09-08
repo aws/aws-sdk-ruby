@@ -85,6 +85,7 @@ module Aws
       #         firehose: {
       #           role_arn: "AwsArn", # required
       #           delivery_stream_name: "DeliveryStreamName", # required
+      #           separator: "FirehoseSeparator",
       #         },
       #         cloudwatch_metric: {
       #           role_arn: "AwsArn", # required
@@ -207,7 +208,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] principal
-        #   The principal (certificate or other credential).
+        #   The principal, such as a certificate or other credential.
         #   @return [String]
 
       end
@@ -215,9 +216,7 @@ module Aws
       # The output from the AttachThingPrincipal operation.
       class AttachThingPrincipalResponse < Aws::EmptyStructure; end
 
-      # The attribute payload, a JSON string containing up to three key-value
-      # pairs (for example,
-      # \\\{\\\"attributes\\\":\\\{\\\"string1\\\":\\\"string2\\\"\\}\\}).
+      # The attribute payload.
       # @note When making an API call, pass AttributePayload
       #   data as a hash:
       #
@@ -225,15 +224,31 @@ module Aws
       #         attributes: {
       #           "AttributeName" => "AttributeValue",
       #         },
+      #         merge: false,
       #       }
       class AttributePayload < Aws::Structure.new(
-        :attributes)
+        :attributes,
+        :merge)
 
         # @!attribute [rw] attributes
-        #   A JSON string containing up to three key-value pair in JSON format
-        #   (for example,
-        #   \\\{\\\"attributes\\\":\\\{\\\"string1\\\":\\\"string2\\\"\\}\\}).
+        #   A JSON string containing up to three key-value pair in JSON format.
+        #   For example:
+        #
+        #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
         #   @return [Hash<String,String>]
+
+        # @!attribute [rw] merge
+        #   Specifies whether the list of attributes provided in the
+        #   `AttributePayload` is merged with the attributes stored in the
+        #   registry, instead of overwriting them.
+        #
+        #   To remove an attribute, call `UpdateThing` with an empty attribute
+        #   value.
+        #
+        #   <note markdown="1"> The `merge` attribute is only valid when calling `UpdateThing`.
+        #
+        #    </note>
+        #   @return [Boolean]
 
       end
 
@@ -272,7 +287,8 @@ module Aws
         :status,
         :certificate_pem,
         :owned_by,
-        :creation_date)
+        :creation_date,
+        :auto_registration_status)
 
         # @!attribute [rw] certificate_arn
         #   The CA certificate ARN.
@@ -297,6 +313,11 @@ module Aws
         # @!attribute [rw] creation_date
         #   The date the CA certificate was created.
         #   @return [Time]
+
+        # @!attribute [rw] auto_registration_status
+        #   Whether the CA certificate configured for auto registration of
+        #   device certificates. Valid values are \"ENABLE\" and \"DISABLE\"
+        #   @return [String]
 
       end
 
@@ -687,24 +708,32 @@ module Aws
       #
       #       {
       #         thing_name: "ThingName", # required
+      #         thing_type_name: "ThingTypeName",
       #         attribute_payload: {
       #           attributes: {
       #             "AttributeName" => "AttributeValue",
       #           },
+      #           merge: false,
       #         },
       #       }
       class CreateThingRequest < Aws::Structure.new(
         :thing_name,
+        :thing_type_name,
         :attribute_payload)
 
         # @!attribute [rw] thing_name
-        #   The name of the thing.
+        #   The name of the thing to create.
+        #   @return [String]
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type associated with the new thing.
         #   @return [String]
 
         # @!attribute [rw] attribute_payload
-        #   The attribute payload, which consists of up to 3 name/value pairs in
-        #   a JSON document (for example,
-        #   \\\{\\\"attributes\\\":\\\{\\\"string1\\\":\\\"string2\\\"\\}\\}).
+        #   The attribute payload, which consists of up to three name/value
+        #   pairs in a JSON document. For example:
+        #
+        #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
         #   @return [Types::AttributePayload]
 
       end
@@ -715,11 +744,53 @@ module Aws
         :thing_arn)
 
         # @!attribute [rw] thing_name
-        #   The name of the thing.
+        #   The name of the new thing.
         #   @return [String]
 
         # @!attribute [rw] thing_arn
-        #   The thing ARN.
+        #   The ARN of the new thing.
+        #   @return [String]
+
+      end
+
+      # The input for the CreateThingType operation.
+      # @note When making an API call, pass CreateThingTypeRequest
+      #   data as a hash:
+      #
+      #       {
+      #         thing_type_name: "ThingTypeName", # required
+      #         thing_type_properties: {
+      #           thing_type_description: "ThingTypeDescription",
+      #           searchable_attributes: ["AttributeName"],
+      #         },
+      #       }
+      class CreateThingTypeRequest < Aws::Structure.new(
+        :thing_type_name,
+        :thing_type_properties)
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
+        #   @return [String]
+
+        # @!attribute [rw] thing_type_properties
+        #   The ThingTypeProperties for the thing type to create. It contains
+        #   information about the new thing type including a description, and a
+        #   list of searchable thing attribute names.
+        #   @return [Types::ThingTypeProperties]
+
+      end
+
+      # The output of the CreateThingType operation.
+      class CreateThingTypeResponse < Aws::Structure.new(
+        :thing_type_name,
+        :thing_type_arn)
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
+        #   @return [String]
+
+        # @!attribute [rw] thing_type_arn
+        #   The Amazon Resource Name (ARN) of the thing type.
         #   @return [String]
 
       end
@@ -777,6 +848,7 @@ module Aws
       #               firehose: {
       #                 role_arn: "AwsArn", # required
       #                 delivery_stream_name: "DeliveryStreamName", # required
+      #                 separator: "FirehoseSeparator",
       #               },
       #               cloudwatch_metric: {
       #                 role_arn: "AwsArn", # required
@@ -905,18 +977,46 @@ module Aws
       #
       #       {
       #         thing_name: "ThingName", # required
+      #         expected_version: 1,
       #       }
       class DeleteThingRequest < Aws::Structure.new(
-        :thing_name)
+        :thing_name,
+        :expected_version)
 
         # @!attribute [rw] thing_name
-        #   The thing name.
+        #   The name of the thing to delete.
         #   @return [String]
+
+        # @!attribute [rw] expected_version
+        #   The expected version of the thing record in the registry. If the
+        #   version of the record in the registry does not match the expected
+        #   version specified in the request, the `DeleteThing` request is
+        #   rejected with a `VersionConflictException`.
+        #   @return [Integer]
 
       end
 
       # The output of the DeleteThing operation.
       class DeleteThingResponse < Aws::EmptyStructure; end
+
+      # The input for the DeleteThingType operation.
+      # @note When making an API call, pass DeleteThingTypeRequest
+      #   data as a hash:
+      #
+      #       {
+      #         thing_type_name: "ThingTypeName", # required
+      #       }
+      class DeleteThingTypeRequest < Aws::Structure.new(
+        :thing_type_name)
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
+        #   @return [String]
+
+      end
+
+      # The output for the DeleteThingType operation.
+      class DeleteThingTypeResponse < Aws::EmptyStructure; end
 
       # The input for the DeleteTopicRule operation.
       # @note When making an API call, pass DeleteTopicRuleRequest
@@ -933,6 +1033,33 @@ module Aws
         #   @return [String]
 
       end
+
+      # The input for the DeprecateThingType operation.
+      # @note When making an API call, pass DeprecateThingTypeRequest
+      #   data as a hash:
+      #
+      #       {
+      #         thing_type_name: "ThingTypeName", # required
+      #         undo_deprecate: false,
+      #       }
+      class DeprecateThingTypeRequest < Aws::Structure.new(
+        :thing_type_name,
+        :undo_deprecate)
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type to deprecate.
+        #   @return [String]
+
+        # @!attribute [rw] undo_deprecate
+        #   Whether to undeprecate a deprecated thing type. If **true**, the
+        #   thing type will not be deprecated anymore and you can associate it
+        #   with things.
+        #   @return [Boolean]
+
+      end
+
+      # The output for the DeprecateThingType operation.
+      class DeprecateThingTypeResponse < Aws::EmptyStructure; end
 
       # The input for the DescribeCACertificate operation.
       # @note When making an API call, pass DescribeCACertificateRequest
@@ -1021,7 +1148,9 @@ module Aws
       class DescribeThingResponse < Aws::Structure.new(
         :default_client_id,
         :thing_name,
-        :attributes)
+        :thing_type_name,
+        :attributes,
+        :version)
 
         # @!attribute [rw] default_client_id
         #   The default client ID.
@@ -1031,13 +1160,64 @@ module Aws
         #   The name of the thing.
         #   @return [String]
 
+        # @!attribute [rw] thing_type_name
+        #   The thing type name.
+        #   @return [String]
+
         # @!attribute [rw] attributes
-        #   The attributes, which are name/value pairs in JSON format (for
-        #   example:
-        #   \\\{\\\"attributes\\\":\\\{\\\"some-name1\\\":\\\"some-value1\\\"\\},
-        #   \\\{\\\"some-name2\\\":\\\"some-value2\\\"\\},
-        #   \\\{\\\"some-name3\\\":\\\"some-value3\\\"\\}\\})
+        #   The thing attributes.
         #   @return [Hash<String,String>]
+
+        # @!attribute [rw] version
+        #   The current version of the thing record in the registry.
+        #
+        #   <note markdown="1"> To avoid unintentional changes to the information in the registry,
+        #   you can pass the version information in the `expectedVersion`
+        #   parameter of the `UpdateThing` and `DeleteThing` calls.
+        #
+        #    </note>
+        #   @return [Integer]
+
+      end
+
+      # The input for the DescribeThingType operation.
+      # @note When making an API call, pass DescribeThingTypeRequest
+      #   data as a hash:
+      #
+      #       {
+      #         thing_type_name: "ThingTypeName", # required
+      #       }
+      class DescribeThingTypeRequest < Aws::Structure.new(
+        :thing_type_name)
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
+        #   @return [String]
+
+      end
+
+      # The output for the DescribeThingType operation.
+      class DescribeThingTypeResponse < Aws::Structure.new(
+        :thing_type_name,
+        :thing_type_properties,
+        :thing_type_metadata)
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
+        #   @return [String]
+
+        # @!attribute [rw] thing_type_properties
+        #   The ThingTypeProperties contains information about the thing type
+        #   including description, and a list of searchable thing attribute
+        #   names.
+        #   @return [Types::ThingTypeProperties]
+
+        # @!attribute [rw] thing_type_metadata
+        #   The ThingTypeMetadata contains additional information about the
+        #   thing type including: creation date and time, a value indicating
+        #   whether the thing type is deprecated, and a date and time when time
+        #   was deprecated.
+        #   @return [Types::ThingTypeMetadata]
 
       end
 
@@ -1084,11 +1264,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] principal
-        #   The principal.
-        #
-        #   If the principal is a certificate, specify the certificate ARN. If
-        #   the principal is an Amazon Cognito identity, specify the identity
-        #   ID.
+        #   If the principal is a certificate, this value must be ARN of the
+        #   certificate. If the principal is an Amazon Cognito identity, this
+        #   value must be the ID of the Amazon Cognito identity.
         #   @return [String]
 
       end
@@ -1266,10 +1444,12 @@ module Aws
       #       {
       #         role_arn: "AwsArn", # required
       #         delivery_stream_name: "DeliveryStreamName", # required
+      #         separator: "FirehoseSeparator",
       #       }
       class FirehoseAction < Aws::Structure.new(
         :role_arn,
-        :delivery_stream_name)
+        :delivery_stream_name,
+        :separator)
 
         # @!attribute [rw] role_arn
         #   The IAM role that grants access to the Amazon Kinesis Firehost
@@ -1278,6 +1458,12 @@ module Aws
 
         # @!attribute [rw] delivery_stream_name
         #   The delivery stream name.
+        #   @return [String]
+
+        # @!attribute [rw] separator
+        #   A character separator that will be used to separate records written
+        #   to the firehose stream. Valid values are: \'\\n\' (newline), \'\\t\'
+        #   (tab), \'\\r\\n\' (Windows newline), \',\' (comma).
         #   @return [String]
 
       end
@@ -1640,6 +1826,50 @@ module Aws
 
       end
 
+      # The input to the ListOutgoingCertificates operation.
+      # @note When making an API call, pass ListOutgoingCertificatesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         page_size: 1,
+      #         marker: "Marker",
+      #         ascending_order: false,
+      #       }
+      class ListOutgoingCertificatesRequest < Aws::Structure.new(
+        :page_size,
+        :marker,
+        :ascending_order)
+
+        # @!attribute [rw] page_size
+        #   The result page size.
+        #   @return [Integer]
+
+        # @!attribute [rw] marker
+        #   The marker for the next set of results.
+        #   @return [String]
+
+        # @!attribute [rw] ascending_order
+        #   Specifies the order for results. If True, the results are returned
+        #   in ascending order, based on the creation date.
+        #   @return [Boolean]
+
+      end
+
+      # The output from the ListOutgoingCertificates operation.
+      class ListOutgoingCertificatesResponse < Aws::Structure.new(
+        :outgoing_certificates,
+        :next_marker)
+
+        # @!attribute [rw] outgoing_certificates
+        #   The certificates that are being transfered but not yet accepted.
+        #   @return [Array<Types::OutgoingCertificate>]
+
+        # @!attribute [rw] next_marker
+        #   The marker for the next set of results.
+        #   @return [String]
+
+      end
+
       # The input for the ListPolicies operation.
       # @note When making an API call, pass ListPoliciesRequest
       #   data as a hash:
@@ -1828,11 +2058,12 @@ module Aws
         :principal)
 
         # @!attribute [rw] next_token
-        #   A token used to retrieve the next value.
+        #   The token for the next set of results, or **null** if there are no
+        #   additional results.
         #   @return [String]
 
         # @!attribute [rw] max_results
-        #   The maximum number of principals to return.
+        #   The maximum number of results to return in this operation.
         #   @return [Integer]
 
         # @!attribute [rw] principal
@@ -1851,7 +2082,8 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] next_token
-        #   A token used to retrieve the next value.
+        #   The token for the next set of results, or **null** if there are no
+        #   additional results.
         #   @return [String]
 
       end
@@ -1877,8 +2109,53 @@ module Aws
         :principals)
 
         # @!attribute [rw] principals
-        #   The principals.
+        #   The principals associated with the thing.
         #   @return [Array<String>]
+
+      end
+
+      # The input for the ListThingTypes operation.
+      # @note When making an API call, pass ListThingTypesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         next_token: "NextToken",
+      #         max_results: 1,
+      #         thing_type_name: "ThingTypeName",
+      #       }
+      class ListThingTypesRequest < Aws::Structure.new(
+        :next_token,
+        :max_results,
+        :thing_type_name)
+
+        # @!attribute [rw] next_token
+        #   The token for the next set of results, or **null** if there are no
+        #   additional results.
+        #   @return [String]
+
+        # @!attribute [rw] max_results
+        #   The maximum number of results to return in this operation.
+        #   @return [Integer]
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
+        #   @return [String]
+
+      end
+
+      # The output for the ListThingTypes operation.
+      class ListThingTypesResponse < Aws::Structure.new(
+        :thing_types,
+        :next_token)
+
+        # @!attribute [rw] thing_types
+        #   The thing types.
+        #   @return [Array<Types::ThingTypeDefinition>]
+
+        # @!attribute [rw] next_token
+        #   The token for the next set of results, or **null** if there are no
+        #   additional results.
+        #   @return [String]
 
       end
 
@@ -1891,27 +2168,34 @@ module Aws
       #         max_results: 1,
       #         attribute_name: "AttributeName",
       #         attribute_value: "AttributeValue",
+      #         thing_type_name: "ThingTypeName",
       #       }
       class ListThingsRequest < Aws::Structure.new(
         :next_token,
         :max_results,
         :attribute_name,
-        :attribute_value)
+        :attribute_value,
+        :thing_type_name)
 
         # @!attribute [rw] next_token
-        #   The token for the next value.
+        #   The token for the next set of results, or **null** if there are no
+        #   additional results.
         #   @return [String]
 
         # @!attribute [rw] max_results
-        #   The maximum number of results.
+        #   The maximum number of results to return in this operation.
         #   @return [Integer]
 
         # @!attribute [rw] attribute_name
-        #   The attribute name.
+        #   The attribute name used to search for things.
         #   @return [String]
 
         # @!attribute [rw] attribute_value
-        #   The attribute value.
+        #   The attribute value used to search for things.
+        #   @return [String]
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type used to search for things.
         #   @return [String]
 
       end
@@ -1926,7 +2210,8 @@ module Aws
         #   @return [Array<Types::ThingAttribute>]
 
         # @!attribute [rw] next_token
-        #   A token used to retrieve the next value.
+        #   The token for the next set of results, or **null** if there are no
+        #   additional results.
         #   @return [String]
 
       end
@@ -2002,6 +2287,41 @@ module Aws
 
       end
 
+      # A certificate that has been transfered but not yet accepted.
+      class OutgoingCertificate < Aws::Structure.new(
+        :certificate_arn,
+        :certificate_id,
+        :transferred_to,
+        :transfer_date,
+        :transfer_message,
+        :creation_date)
+
+        # @!attribute [rw] certificate_arn
+        #   The certificate ARN.
+        #   @return [String]
+
+        # @!attribute [rw] certificate_id
+        #   The certificate ID.
+        #   @return [String]
+
+        # @!attribute [rw] transferred_to
+        #   The AWS account to which the transfer was made.
+        #   @return [String]
+
+        # @!attribute [rw] transfer_date
+        #   The date the transfer was initiated.
+        #   @return [Time]
+
+        # @!attribute [rw] transfer_message
+        #   The transfer message.
+        #   @return [String]
+
+        # @!attribute [rw] creation_date
+        #   The certificate creation date.
+        #   @return [Time]
+
+      end
+
       # Describes an AWS IoT policy.
       class Policy < Aws::Structure.new(
         :policy_name,
@@ -2045,11 +2365,13 @@ module Aws
       #         ca_certificate: "CertificatePem", # required
       #         verification_certificate: "CertificatePem", # required
       #         set_as_active: false,
+      #         allow_auto_registration: false,
       #       }
       class RegisterCACertificateRequest < Aws::Structure.new(
         :ca_certificate,
         :verification_certificate,
-        :set_as_active)
+        :set_as_active,
+        :allow_auto_registration)
 
         # @!attribute [rw] ca_certificate
         #   The CA certificate.
@@ -2062,6 +2384,11 @@ module Aws
         # @!attribute [rw] set_as_active
         #   A boolean value that specifies if the CA certificate is set to
         #   active.
+        #   @return [Boolean]
+
+        # @!attribute [rw] allow_auto_registration
+        #   Allows this CA certificate to be used for auto registration of
+        #   device certificates.
         #   @return [Boolean]
 
       end
@@ -2201,6 +2528,7 @@ module Aws
       #               firehose: {
       #                 role_arn: "AwsArn", # required
       #                 delivery_stream_name: "DeliveryStreamName", # required
+      #                 separator: "FirehoseSeparator",
       #               },
       #               cloudwatch_metric: {
       #                 role_arn: "AwsArn", # required
@@ -2399,18 +2727,102 @@ module Aws
 
       end
 
-      # Describes a thing attribute.
+      # The properties of the thing, including thing name, thing type name,
+      # and a list of thing attributes.
       class ThingAttribute < Aws::Structure.new(
         :thing_name,
-        :attributes)
+        :thing_type_name,
+        :attributes,
+        :version)
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
         #   @return [String]
 
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type, if the thing has been associated with a
+        #   type.
+        #   @return [String]
+
         # @!attribute [rw] attributes
-        #   The attributes.
+        #   A list of thing attributes which are name-value pairs.
         #   @return [Hash<String,String>]
+
+        # @!attribute [rw] version
+        #   The version of the thing record in the registry.
+        #   @return [Integer]
+
+      end
+
+      # The definition of the thing type, including thing type name and
+      # description.
+      class ThingTypeDefinition < Aws::Structure.new(
+        :thing_type_name,
+        :thing_type_properties,
+        :thing_type_metadata)
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
+        #   @return [String]
+
+        # @!attribute [rw] thing_type_properties
+        #   The ThingTypeProperties for the thing type.
+        #   @return [Types::ThingTypeProperties]
+
+        # @!attribute [rw] thing_type_metadata
+        #   The ThingTypeMetadata contains additional information about the
+        #   thing type including: creation date and time, a value indicating
+        #   whether the thing type is deprecated, and a date and time when time
+        #   was deprecated.
+        #   @return [Types::ThingTypeMetadata]
+
+      end
+
+      # The ThingTypeMetadata contains additional information about the thing
+      # type including: creation date and time, a value indicating whether the
+      # thing type is deprecated, and a date and time when time was
+      # deprecated.
+      class ThingTypeMetadata < Aws::Structure.new(
+        :deprecated,
+        :deprecation_date,
+        :creation_date)
+
+        # @!attribute [rw] deprecated
+        #   Whether the thing type is deprecated. If **true**, no new things
+        #   could be associated with this type.
+        #   @return [Boolean]
+
+        # @!attribute [rw] deprecation_date
+        #   The date and time when the thing type was deprecated.
+        #   @return [Time]
+
+        # @!attribute [rw] creation_date
+        #   The date and time when the thing type was created.
+        #   @return [Time]
+
+      end
+
+      # The ThingTypeProperties contains information about the thing type
+      # including: a thing type description, and a list of searchable thing
+      # attribute names.
+      # @note When making an API call, pass ThingTypeProperties
+      #   data as a hash:
+      #
+      #       {
+      #         thing_type_description: "ThingTypeDescription",
+      #         searchable_attributes: ["AttributeName"],
+      #       }
+      class ThingTypeProperties < Aws::Structure.new(
+        :thing_type_description,
+        :searchable_attributes)
+
+        # @!attribute [rw] thing_type_description
+        #   The description of the thing type.
+        #   @return [String]
+
+        # @!attribute [rw] searchable_attributes
+        #   A list of searchable thing attribute names.
+        #   @return [Array<String>]
 
       end
 
@@ -2536,6 +2948,7 @@ module Aws
       #             firehose: {
       #               role_arn: "AwsArn", # required
       #               delivery_stream_name: "DeliveryStreamName", # required
+      #               separator: "FirehoseSeparator",
       #             },
       #             cloudwatch_metric: {
       #               role_arn: "AwsArn", # required
@@ -2671,11 +3084,13 @@ module Aws
       #
       #       {
       #         certificate_id: "CertificateId", # required
-      #         new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+      #         new_status: "ACTIVE", # accepts ACTIVE, INACTIVE
+      #         new_auto_registration_status: "ENABLE", # accepts ENABLE, DISABLE
       #       }
       class UpdateCACertificateRequest < Aws::Structure.new(
         :certificate_id,
-        :new_status)
+        :new_status,
+        :new_auto_registration_status)
 
         # @!attribute [rw] certificate_id
         #   The CA certificate identifier.
@@ -2688,6 +3103,11 @@ module Aws
         #   should not be used.
         #   @return [String]
 
+        # @!attribute [rw] new_auto_registration_status
+        #   The new value for the auto registration status. Valid values are:
+        #   \"ENABLE\" or \"DISABLE\".
+        #   @return [String]
+
       end
 
       # The input for the UpdateCertificate operation.
@@ -2696,7 +3116,7 @@ module Aws
       #
       #       {
       #         certificate_id: "CertificateId", # required
-      #         new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE
+      #         new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
       #       }
       class UpdateCertificateRequest < Aws::Structure.new(
         :certificate_id,
@@ -2725,25 +3145,52 @@ module Aws
       #
       #       {
       #         thing_name: "ThingName", # required
-      #         attribute_payload: { # required
+      #         thing_type_name: "ThingTypeName",
+      #         attribute_payload: {
       #           attributes: {
       #             "AttributeName" => "AttributeValue",
       #           },
+      #           merge: false,
       #         },
+      #         expected_version: 1,
+      #         remove_thing_type: false,
       #       }
       class UpdateThingRequest < Aws::Structure.new(
         :thing_name,
-        :attribute_payload)
+        :thing_type_name,
+        :attribute_payload,
+        :expected_version,
+        :remove_thing_type)
 
         # @!attribute [rw] thing_name
-        #   The thing name.
+        #   The name of the thing to update.
+        #   @return [String]
+
+        # @!attribute [rw] thing_type_name
+        #   The name of the thing type.
         #   @return [String]
 
         # @!attribute [rw] attribute_payload
-        #   The attribute payload, a JSON string containing up to three
-        #   key-value pairs (for example,
-        #   \\\{\\\"attributes\\\":\\\{\\\"string1\\\":\\\"string2\\\"\\}\\}).
+        #   A list of thing attributes, a JSON string containing name-value
+        #   pairs. For example:
+        #
+        #   `\{\"attributes\":\{\"name1\":\"value2\"\}\})`
+        #
+        #   This data is used to add new attributes or update existing
+        #   attributes.
         #   @return [Types::AttributePayload]
+
+        # @!attribute [rw] expected_version
+        #   The expected version of the thing record in the registry. If the
+        #   version of the record in the registry does not match the expected
+        #   version specified in the request, the `UpdateThing` request is
+        #   rejected with a `VersionConflictException`.
+        #   @return [Integer]
+
+        # @!attribute [rw] remove_thing_type
+        #   Remove a thing type association. If **true**, the assocation is
+        #   removed.
+        #   @return [Boolean]
 
       end
 

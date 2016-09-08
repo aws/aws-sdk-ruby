@@ -2051,6 +2051,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

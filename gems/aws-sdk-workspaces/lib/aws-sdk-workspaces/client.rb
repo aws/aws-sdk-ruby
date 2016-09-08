@@ -86,6 +86,10 @@ module Aws
       #         volume_encryption_key: "VolumeEncryptionKey",
       #         user_volume_encryption_enabled: false,
       #         root_volume_encryption_enabled: false,
+      #         workspace_properties: {
+      #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
+      #           running_mode_auto_stop_timeout_in_minutes: 1,
+      #         },
       #         tags: [
       #           {
       #             key: "TagKey", # required
@@ -104,6 +108,8 @@ module Aws
       #   resp.failed_requests[0].workspace_request.volume_encryption_key #=> String
       #   resp.failed_requests[0].workspace_request.user_volume_encryption_enabled #=> Boolean
       #   resp.failed_requests[0].workspace_request.root_volume_encryption_enabled #=> Boolean
+      #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
+      #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
       #   resp.failed_requests[0].workspace_request.tags #=> Array
       #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
       #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -114,7 +120,7 @@ module Aws
       #   resp.pending_requests[0].directory_id #=> String
       #   resp.pending_requests[0].user_name #=> String
       #   resp.pending_requests[0].ip_address #=> String
-      #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "REBUILDING", "TERMINATING", "TERMINATED", "SUSPENDED", "ERROR"
+      #   resp.pending_requests[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "STOPPING", "STOPPED", "ERROR"
       #   resp.pending_requests[0].bundle_id #=> String
       #   resp.pending_requests[0].subnet_id #=> String
       #   resp.pending_requests[0].error_message #=> String
@@ -123,6 +129,8 @@ module Aws
       #   resp.pending_requests[0].volume_encryption_key #=> String
       #   resp.pending_requests[0].user_volume_encryption_enabled #=> Boolean
       #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
+      #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
+      #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_workspaces(params = {}, options = {})
@@ -192,9 +200,10 @@ module Aws
       #
       #   This contains one of the following values:
       #
-      #   * null - Retrieves the bundles that belong to the account making the
+      #   * null- Retrieves the bundles that belong to the account making the
       #     call.
-      #   * `AMAZON` - Retrieves the bundles that are provided by AWS.
+      #
+      #   * `AMAZON`- Retrieves the bundles that are provided by AWS.
       # @option params [String] :next_token
       #   The `NextToken` value from a previous call to this operation. Pass
       #   null if this is the first call.
@@ -295,9 +304,8 @@ module Aws
       #   any other filter parameter.
       #
       #   Because the CreateWorkspaces operation is asynchronous, the identifier
-      #   returned by CreateWorkspaces is not immediately available. If you
-      #   immediately call DescribeWorkspaces with this identifier, no
-      #   information will be returned.
+      #   it returns is not immediately available. If you immediately call
+      #   DescribeWorkspaces with this identifier, no information is returned.
       # @option params [String] :directory_id
       #   Specifies the directory identifier to which to limit the WorkSpaces.
       #   Optionally, you can specify a specific directory user with the
@@ -305,7 +313,7 @@ module Aws
       #   filter parameter.
       # @option params [String] :user_name
       #   Used with the `DirectoryId` parameter to specify the directory user
-      #   for which to obtain the WorkSpace.
+      #   for whom to obtain the WorkSpace.
       # @option params [String] :bundle_id
       #   The identifier of a bundle to obtain the WorkSpaces for. All
       #   WorkSpaces that are created from this bundle will be retrieved. This
@@ -336,7 +344,7 @@ module Aws
       #   resp.workspaces[0].directory_id #=> String
       #   resp.workspaces[0].user_name #=> String
       #   resp.workspaces[0].ip_address #=> String
-      #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "REBUILDING", "TERMINATING", "TERMINATED", "SUSPENDED", "ERROR"
+      #   resp.workspaces[0].state #=> String, one of "PENDING", "AVAILABLE", "IMPAIRED", "UNHEALTHY", "REBOOTING", "STARTING", "REBUILDING", "MAINTENANCE", "TERMINATING", "TERMINATED", "SUSPENDED", "STOPPING", "STOPPED", "ERROR"
       #   resp.workspaces[0].bundle_id #=> String
       #   resp.workspaces[0].subnet_id #=> String
       #   resp.workspaces[0].error_message #=> String
@@ -345,6 +353,8 @@ module Aws
       #   resp.workspaces[0].volume_encryption_key #=> String
       #   resp.workspaces[0].user_volume_encryption_enabled #=> Boolean
       #   resp.workspaces[0].root_volume_encryption_enabled #=> Boolean
+      #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
+      #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -353,13 +363,66 @@ module Aws
         req.send_request(options)
       end
 
+      # Describes the connection status of a specified WorkSpace.
+      # @option params [Array<String>] :workspace_ids
+      #   An array of strings that contain the identifiers of the WorkSpaces.
+      # @option params [String] :next_token
+      #   The next token of the request.
+      # @return [Types::DescribeWorkspacesConnectionStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeWorkspacesConnectionStatusResult#workspaces_connection_status #WorkspacesConnectionStatus} => Array&lt;Types::WorkspaceConnectionStatus&gt;
+      #   * {Types::DescribeWorkspacesConnectionStatusResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_workspaces_connection_status({
+      #     workspace_ids: ["WorkspaceId"],
+      #     next_token: "PaginationToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.workspaces_connection_status #=> Array
+      #   resp.workspaces_connection_status[0].workspace_id #=> String
+      #   resp.workspaces_connection_status[0].connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "UNKNOWN"
+      #   resp.workspaces_connection_status[0].connection_state_check_timestamp #=> Time
+      #   resp.workspaces_connection_status[0].last_known_user_connection_timestamp #=> Time
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_workspaces_connection_status(params = {}, options = {})
+        req = build_request(:describe_workspaces_connection_status, params)
+        req.send_request(options)
+      end
+
+      # Modifies the WorkSpace properties, including the RunningMode and
+      # AutoStop time.
+      # @option params [required, String] :workspace_id
+      #   The ID of the WorkSpace.
+      # @option params [required, Types::WorkspaceProperties] :workspace_properties
+      #   The WorkSpace properties of the request.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.modify_workspace_properties({
+      #     workspace_id: "WorkspaceId", # required
+      #     workspace_properties: { # required
+      #       running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
+      #       running_mode_auto_stop_timeout_in_minutes: 1,
+      #     },
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def modify_workspace_properties(params = {}, options = {})
+        req = build_request(:modify_workspace_properties, params)
+        req.send_request(options)
+      end
+
       # Reboots the specified WorkSpaces.
       #
       # To be able to reboot a WorkSpace, the WorkSpace must have a **State**
       # of `AVAILABLE`, `IMPAIRED`, or `INOPERABLE`.
       #
-      # <note markdown="1"> This operation is asynchronous and will return before the WorkSpaces
-      # have rebooted.
+      # <note markdown="1"> This operation is asynchronous and returns before the WorkSpaces have
+      # rebooted.
       #
       #  </note>
       # @option params [required, Array<Types::RebootRequest>] :reboot_workspace_requests
@@ -399,6 +462,7 @@ module Aws
       #   is created from. Any applications that have been installed, or
       #   system settings that have been made since the WorkSpace was created
       #   will be lost.
+      #
       # * The data drive (D drive) is re-created from the last automatic
       #   snapshot taken of the data drive. The current contents of the data
       #   drive are overwritten. Automatic snapshots of the data drive are
@@ -408,8 +472,8 @@ module Aws
       # To be able to rebuild a WorkSpace, the WorkSpace must have a **State**
       # of `AVAILABLE` or `ERROR`.
       #
-      # <note markdown="1"> This operation is asynchronous and will return before the WorkSpaces
-      # have been completely rebuilt.
+      # <note markdown="1"> This operation is asynchronous and returns before the WorkSpaces have
+      # been completely rebuilt.
       #
       #  </note>
       # @option params [required, Array<Types::RebuildRequest>] :rebuild_workspace_requests
@@ -439,6 +503,66 @@ module Aws
         req.send_request(options)
       end
 
+      # Starts the specified WorkSpaces. The API only works with WorkSpaces
+      # that have RunningMode configured as AutoStop and the State set to
+      # “STOPPED.”
+      # @option params [required, Array<Types::StartRequest>] :start_workspace_requests
+      #   The requests.
+      # @return [Types::StartWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::StartWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.start_workspaces({
+      #     start_workspace_requests: [ # required
+      #       {
+      #         workspace_id: "WorkspaceId",
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.failed_requests #=> Array
+      #   resp.failed_requests[0].workspace_id #=> String
+      #   resp.failed_requests[0].error_code #=> String
+      #   resp.failed_requests[0].error_message #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def start_workspaces(params = {}, options = {})
+        req = build_request(:start_workspaces, params)
+        req.send_request(options)
+      end
+
+      # Stops the specified WorkSpaces. The API only works with WorkSpaces
+      # that have RunningMode configured as AutoStop and the State set to
+      # AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
+      # @option params [required, Array<Types::StopRequest>] :stop_workspace_requests
+      #   The requests.
+      # @return [Types::StopWorkspacesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::StopWorkspacesResult#failed_requests #FailedRequests} => Array&lt;Types::FailedWorkspaceChangeRequest&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.stop_workspaces({
+      #     stop_workspace_requests: [ # required
+      #       {
+      #         workspace_id: "WorkspaceId",
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.failed_requests #=> Array
+      #   resp.failed_requests[0].workspace_id #=> String
+      #   resp.failed_requests[0].error_code #=> String
+      #   resp.failed_requests[0].error_message #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def stop_workspaces(params = {}, options = {})
+        req = build_request(:stop_workspaces, params)
+        req.send_request(options)
+      end
+
       # Terminates the specified WorkSpaces.
       #
       # Terminating a WorkSpace is a permanent action and cannot be undone.
@@ -448,8 +572,8 @@ module Aws
       #
       # You can terminate a WorkSpace that is in any state except `SUSPENDED`.
       #
-      # <note markdown="1"> This operation is asynchronous and will return before the WorkSpaces
-      # have been completely terminated.
+      # <note markdown="1"> This operation is asynchronous and returns before the WorkSpaces have
+      # been completely terminated.
       #
       #  </note>
       # @option params [required, Array<Types::TerminateRequest>] :terminate_workspace_requests
@@ -518,6 +642,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

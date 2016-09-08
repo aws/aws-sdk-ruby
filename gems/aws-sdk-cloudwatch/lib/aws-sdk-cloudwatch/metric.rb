@@ -102,7 +102,12 @@ module Aws
       #   time stamp specified. The time stamp must be in ISO 8601 UTC format
       #   (e.g., 2014-09-03T23:00:00Z).
       #
-      #   <note markdown="1"> The specified start time is rounded down to the nearest value. Datapoints are returned for start times up to two weeks in the past. Specified start times that are more than two weeks in the past will not return datapoints for metrics that are older than two weeks. Data that is timestamped 24 hours or more in the past may take in
+      #   <note markdown="1"> The specified start time is rounded down to the nearest value.
+      #   Datapoints are returned for start times up to two weeks in the past.
+      #   Specified start times that are more than two weeks in the past will
+      #   not return datapoints for metrics that are older than two weeks.
+      #
+      #    Data that is timestamped 24 hours or more in the past may take in
       #   excess of 48 hours to become available from submission time using
       #   `GetMetricStatistics`.
       #
@@ -113,9 +118,10 @@ module Aws
       #   to the time stamp specified. The time stamp must be in ISO 8601 UTC
       #   format (e.g., 2014-09-03T23:00:00Z).
       # @option options [required, Integer] :period
-      #   The granularity, in seconds, of the returned datapoints. `Period` must
-      #   be at least 60 seconds and must be a multiple of 60. The default value
-      #   is 60.
+      #   The granularity, in seconds, of the returned datapoints. A `Period`
+      #   can be as short as one minute (60 seconds) or as long as one day
+      #   (86,400 seconds), and must be a multiple of 60. The default value is
+      #   60.
       # @option options [required, Array<String>] :statistics
       #   The metric statistics to return. For information about specific
       #   statistics returned by GetMetricStatistics, see [Statistics][1] in the
@@ -125,7 +131,10 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Statistic
       # @option options [String] :unit
-      #   The unit for the metric.
+      #   The specific unit for a given metric. Metrics may be reported in
+      #   multiple units. Not supplying a unit results in all units being
+      #   returned. If the metric only ever reports one unit, specifying a unit
+      #   will have no effect.
       # @return [Types::GetMetricStatisticsOutput]
       def get_statistics(options = {})
         options = options.merge(

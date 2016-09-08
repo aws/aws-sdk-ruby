@@ -545,7 +545,7 @@ module Aws
       #
       # `CreateMLModel` requires a `DataSource` with computed statistics,
       # which can be created by setting `ComputeStatistics` to `true` in
-      # `CreateDataSourcceFromRDS`, `CreateDataSourceFromS3`, or
+      # `CreateDataSourceFromRDS`, `CreateDataSourceFromS3`, or
       # `CreateDataSourceFromRedshift` operations.
       # @option params [required, String] :ml_model_id
       #   A user-supplied ID that uniquely identifies the `MLModel`.
@@ -952,6 +952,11 @@ module Aws
       #   resp.results[0].status #=> String, one of "PENDING", "INPROGRESS", "FAILED", "COMPLETED", "DELETED"
       #   resp.results[0].output_uri #=> String
       #   resp.results[0].message #=> String
+      #   resp.results[0].compute_time #=> Integer
+      #   resp.results[0].finished_at #=> Time
+      #   resp.results[0].started_at #=> Time
+      #   resp.results[0].total_record_count #=> Integer
+      #   resp.results[0].invalid_record_count #=> Integer
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1070,6 +1075,9 @@ module Aws
       #   resp.results[0].rds_metadata.data_pipeline_id #=> String
       #   resp.results[0].role_arn #=> String
       #   resp.results[0].compute_statistics #=> Boolean
+      #   resp.results[0].compute_time #=> Integer
+      #   resp.results[0].finished_at #=> Time
+      #   resp.results[0].started_at #=> Time
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1181,6 +1189,9 @@ module Aws
       #   resp.results[0].performance_metrics.properties #=> Hash
       #   resp.results[0].performance_metrics.properties["PerformanceMetricsPropertyKey"] #=> String
       #   resp.results[0].message #=> String
+      #   resp.results[0].compute_time #=> Integer
+      #   resp.results[0].finished_at #=> Time
+      #   resp.results[0].started_at #=> Time
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1303,6 +1314,9 @@ module Aws
       #   resp.results[0].score_threshold #=> Float
       #   resp.results[0].score_threshold_last_updated_at #=> Time
       #   resp.results[0].message #=> String
+      #   resp.results[0].compute_time #=> Integer
+      #   resp.results[0].finished_at #=> Time
+      #   resp.results[0].started_at #=> Time
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1359,6 +1373,11 @@ module Aws
       #   * {Types::GetBatchPredictionOutput#output_uri #OutputUri} => String
       #   * {Types::GetBatchPredictionOutput#log_uri #LogUri} => String
       #   * {Types::GetBatchPredictionOutput#message #Message} => String
+      #   * {Types::GetBatchPredictionOutput#compute_time #ComputeTime} => Integer
+      #   * {Types::GetBatchPredictionOutput#finished_at #FinishedAt} => Time
+      #   * {Types::GetBatchPredictionOutput#started_at #StartedAt} => Time
+      #   * {Types::GetBatchPredictionOutput#total_record_count #TotalRecordCount} => Integer
+      #   * {Types::GetBatchPredictionOutput#invalid_record_count #InvalidRecordCount} => Integer
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_batch_prediction({
@@ -1378,6 +1397,11 @@ module Aws
       #   resp.output_uri #=> String
       #   resp.log_uri #=> String
       #   resp.message #=> String
+      #   resp.compute_time #=> Integer
+      #   resp.finished_at #=> Time
+      #   resp.started_at #=> Time
+      #   resp.total_record_count #=> Integer
+      #   resp.invalid_record_count #=> Integer
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def get_batch_prediction(params = {}, options = {})
@@ -1418,6 +1442,9 @@ module Aws
       #   * {Types::GetDataSourceOutput#rds_metadata #RDSMetadata} => Types::RDSMetadata
       #   * {Types::GetDataSourceOutput#role_arn #RoleARN} => String
       #   * {Types::GetDataSourceOutput#compute_statistics #ComputeStatistics} => Boolean
+      #   * {Types::GetDataSourceOutput#compute_time #ComputeTime} => Integer
+      #   * {Types::GetDataSourceOutput#finished_at #FinishedAt} => Time
+      #   * {Types::GetDataSourceOutput#started_at #StartedAt} => Time
       #   * {Types::GetDataSourceOutput#data_source_schema #DataSourceSchema} => String
       #
       # @example Request syntax with placeholder values
@@ -1452,6 +1479,9 @@ module Aws
       #   resp.rds_metadata.data_pipeline_id #=> String
       #   resp.role_arn #=> String
       #   resp.compute_statistics #=> Boolean
+      #   resp.compute_time #=> Integer
+      #   resp.finished_at #=> Time
+      #   resp.started_at #=> Time
       #   resp.data_source_schema #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1480,6 +1510,9 @@ module Aws
       #   * {Types::GetEvaluationOutput#performance_metrics #PerformanceMetrics} => Types::PerformanceMetrics
       #   * {Types::GetEvaluationOutput#log_uri #LogUri} => String
       #   * {Types::GetEvaluationOutput#message #Message} => String
+      #   * {Types::GetEvaluationOutput#compute_time #ComputeTime} => Integer
+      #   * {Types::GetEvaluationOutput#finished_at #FinishedAt} => Time
+      #   * {Types::GetEvaluationOutput#started_at #StartedAt} => Time
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_evaluation({
@@ -1500,6 +1533,9 @@ module Aws
       #   resp.performance_metrics.properties["PerformanceMetricsPropertyKey"] #=> String
       #   resp.log_uri #=> String
       #   resp.message #=> String
+      #   resp.compute_time #=> Integer
+      #   resp.finished_at #=> Time
+      #   resp.started_at #=> Time
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def get_evaluation(params = {}, options = {})
@@ -1537,6 +1573,9 @@ module Aws
       #   * {Types::GetMLModelOutput#score_threshold_last_updated_at #ScoreThresholdLastUpdatedAt} => Time
       #   * {Types::GetMLModelOutput#log_uri #LogUri} => String
       #   * {Types::GetMLModelOutput#message #Message} => String
+      #   * {Types::GetMLModelOutput#compute_time #ComputeTime} => Integer
+      #   * {Types::GetMLModelOutput#finished_at #FinishedAt} => Time
+      #   * {Types::GetMLModelOutput#started_at #StartedAt} => Time
       #   * {Types::GetMLModelOutput#recipe #Recipe} => String
       #   * {Types::GetMLModelOutput#schema #Schema} => String
       #
@@ -1567,6 +1606,9 @@ module Aws
       #   resp.score_threshold_last_updated_at #=> Time
       #   resp.log_uri #=> String
       #   resp.message #=> String
+      #   resp.compute_time #=> Integer
+      #   resp.finished_at #=> Time
+      #   resp.started_at #=> Time
       #   resp.recipe #=> String
       #   resp.schema #=> String
       # @param [Hash] params ({})
@@ -1779,6 +1821,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

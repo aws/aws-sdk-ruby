@@ -81,7 +81,8 @@ module Aws
       # In addition to maintaining the desired count of tasks in your service,
       # you can optionally run your service behind a load balancer. The load
       # balancer distributes traffic across the tasks that are associated with
-      # the service.
+      # the service. For more information, see [Service Load Balancing][1] in
+      # the *Amazon EC2 Container Service Developer Guide*.
       #
       # You can optionally specify a deployment configuration for your
       # service. During a deployment (which is triggered by changing the task
@@ -127,6 +128,10 @@ module Aws
       #   optimal Availability Zone (based on the previous steps), favoring
       #   container instances with the fewest number of running tasks for this
       #   service.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to run your service. If you do not specify a cluster, the
@@ -141,9 +146,24 @@ module Aws
       #   Resource Name (ARN) of the task definition to run in your service. If
       #   a `revision` is not specified, the latest `ACTIVE` revision is used.
       # @option params [Array<Types::LoadBalancer>] :load_balancers
-      #   A list of load balancer objects, containing the load balancer name,
-      #   the container name (as it appears in a container definition), and the
-      #   container port to access from the load balancer.
+      #   A load balancer object representing the load balancer to use with your
+      #   service. Currently, you are limited to one load balancer per service.
+      #   After you create a service, the load balancer name, container name,
+      #   and container port specified in the service definition are immutable.
+      #
+      #   For Elastic Load Balancing Classic load balancers, this object must
+      #   contain the load balancer name, the container name (as it appears in a
+      #   container definition), and the container port to access from the load
+      #   balancer. When a task from this service is placed on a container
+      #   instance, the container instance is registered with the load balancer
+      #   specified here.
+      #
+      #   For Elastic Load Balancing Application load balancers, this object
+      #   must contain the load balancer target group ARN, the container name
+      #   (as it appears in a container definition), and the container port to
+      #   access from the load balancer. When a task from this service is placed
+      #   on a container instance, the container instance and port combination
+      #   is registered as a target in the target group specified here.
       # @option params [required, Integer] :desired_count
       #   The number of instantiations of the specified task definition to place
       #   and keep running on your cluster.
@@ -181,6 +201,7 @@ module Aws
       #     task_definition: "String", # required
       #     load_balancers: [
       #       {
+      #         target_group_arn: "String",
       #         load_balancer_name: "String",
       #         container_name: "String",
       #         container_port: 1,
@@ -200,6 +221,7 @@ module Aws
       #   resp.service.service_name #=> String
       #   resp.service.cluster_arn #=> String
       #   resp.service.load_balancers #=> Array
+      #   resp.service.load_balancers[0].target_group_arn #=> String
       #   resp.service.load_balancers[0].load_balancer_name #=> String
       #   resp.service.load_balancers[0].container_name #=> String
       #   resp.service.load_balancers[0].container_port #=> Integer
@@ -301,6 +323,7 @@ module Aws
       #   resp.service.service_name #=> String
       #   resp.service.cluster_arn #=> String
       #   resp.service.load_balancers #=> Array
+      #   resp.service.load_balancers[0].target_group_arn #=> String
       #   resp.service.load_balancers[0].load_balancer_name #=> String
       #   resp.service.load_balancers[0].container_name #=> String
       #   resp.service.load_balancers[0].container_port #=> Integer
@@ -455,6 +478,7 @@ module Aws
       #   resp.task_definition.container_definitions[0].image #=> String
       #   resp.task_definition.container_definitions[0].cpu #=> Integer
       #   resp.task_definition.container_definitions[0].memory #=> Integer
+      #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
       #   resp.task_definition.container_definitions[0].links #=> Array
       #   resp.task_definition.container_definitions[0].links[0] #=> String
       #   resp.task_definition.container_definitions[0].port_mappings #=> Array
@@ -497,11 +521,12 @@ module Aws
       #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
       #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
       #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-      #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs"
+      #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
       #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
       #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
       #   resp.task_definition.family #=> String
       #   resp.task_definition.task_role_arn #=> String
+      #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "none"
       #   resp.task_definition.revision #=> Integer
       #   resp.task_definition.volumes #=> Array
       #   resp.task_definition.volumes[0].name #=> String
@@ -636,6 +661,7 @@ module Aws
       #   resp.services[0].service_name #=> String
       #   resp.services[0].cluster_arn #=> String
       #   resp.services[0].load_balancers #=> Array
+      #   resp.services[0].load_balancers[0].target_group_arn #=> String
       #   resp.services[0].load_balancers[0].load_balancer_name #=> String
       #   resp.services[0].load_balancers[0].container_name #=> String
       #   resp.services[0].load_balancers[0].container_port #=> Integer
@@ -700,6 +726,7 @@ module Aws
       #   resp.task_definition.container_definitions[0].image #=> String
       #   resp.task_definition.container_definitions[0].cpu #=> Integer
       #   resp.task_definition.container_definitions[0].memory #=> Integer
+      #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
       #   resp.task_definition.container_definitions[0].links #=> Array
       #   resp.task_definition.container_definitions[0].links[0] #=> String
       #   resp.task_definition.container_definitions[0].port_mappings #=> Array
@@ -742,11 +769,12 @@ module Aws
       #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
       #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
       #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-      #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs"
+      #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
       #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
       #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
       #   resp.task_definition.family #=> String
       #   resp.task_definition.task_role_arn #=> String
+      #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "none"
       #   resp.task_definition.revision #=> Integer
       #   resp.task_definition.volumes #=> Array
       #   resp.task_definition.volumes[0].name #=> String
@@ -1195,11 +1223,11 @@ module Aws
       #   Specifying a `serviceName` limits the results to tasks that belong to
       #   that service.
       # @option params [String] :desired_status
-      #   The task status with which to filter the `ListTasks` results.
+      #   The task desired status with which to filter the `ListTasks` results.
       #   Specifying a `desiredStatus` of `STOPPED` limits the results to tasks
-      #   that are in the `STOPPED` status, which can be useful for debugging
-      #   tasks that are not starting properly or have died or finished. The
-      #   default status filter is status filter is `RUNNING`, which shows tasks
+      #   that ECS has set the desired status to `STOPPED`, which can be useful
+      #   for debugging tasks that are not starting properly or have died or
+      #   finished. The default status filter is `RUNNING`, which shows tasks
       #   that ECS has set the desired status to `RUNNING`.
       #
       #   <note markdown="1"> Although you can filter results based on a desired status of
@@ -1344,17 +1372,23 @@ module Aws
       # task definition parameters and defaults, see [Amazon ECS Task
       # Definitions][1] in the *Amazon EC2 Container Service Developer Guide*.
       #
-      # You may also specify an IAM role for your task with the `taskRoleArn`
+      # You can specify an IAM role for your task with the `taskRoleArn`
       # parameter. When you specify an IAM role for a task, its containers can
       # then use the latest versions of the AWS CLI or SDKs to make API
       # requests to the AWS services that are specified in the IAM policy
       # associated with the role. For more information, see [IAM Roles for
       # Tasks][2] in the *Amazon EC2 Container Service Developer Guide*.
       #
+      # You can specify a Docker networking mode for the containers in your
+      # task definition with the `networkMode` parameter. The available
+      # network modes correspond to those described in [Network settings][3]
+      # in the Docker run reference.
+      #
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
       # [2]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+      # [3]: https://docs.docker.com/engine/reference/run/#/network-settings
       # @option params [required, String] :family
       #   You must specify a `family` for a task definition, which allows you to
       #   track multiple versions of the same task definition. The `family` is
@@ -1364,6 +1398,27 @@ module Aws
       #   The Amazon Resource Name (ARN) of the IAM role that containers in this
       #   task can assume. All containers in this task are granted the
       #   permissions that are specified in this role.
+      # @option params [String] :network_mode
+      #   The Docker networking mode to use for the containers in the task. The
+      #   valid values are `none`, `bridge`, and `host`.
+      #
+      #   The default Docker network mode is `bridge`. If the network mode is
+      #   set to `none`, you cannot specify port mappings in your container
+      #   definitions, and the task\'s containers do not have external
+      #   connectivity. The `host` network mode offers the highest networking
+      #   performance for containers because they use the host network stack
+      #   instead of the virtualized network stack provided by the `bridge`
+      #   mode; however, exposed container ports are mapped directly to the
+      #   corresponding host port, so you cannot take advantage of dynamic host
+      #   port mappings or run multiple instantiations of the same task on a
+      #   single container instance if port mappings are used.
+      #
+      #   For more information, see [Network settings][1] in the *Docker run
+      #   reference*.
+      #
+      #
+      #
+      #   [1]: https://docs.docker.com/engine/reference/run/#network-settings
       # @option params [required, Array<Types::ContainerDefinition>] :container_definitions
       #   A list of container definitions in JSON format that describe the
       #   different containers that make up your task.
@@ -1378,12 +1433,14 @@ module Aws
       #   resp = client.register_task_definition({
       #     family: "String", # required
       #     task_role_arn: "String",
+      #     network_mode: "bridge", # accepts bridge, host, none
       #     container_definitions: [ # required
       #       {
       #         name: "String",
       #         image: "String",
       #         cpu: 1,
       #         memory: 1,
+      #         memory_reservation: 1,
       #         links: ["String"],
       #         port_mappings: [
       #           {
@@ -1440,7 +1497,7 @@ module Aws
       #           },
       #         ],
       #         log_configuration: {
-      #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs
+      #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
       #           options: {
       #             "String" => "String",
       #           },
@@ -1464,6 +1521,7 @@ module Aws
       #   resp.task_definition.container_definitions[0].image #=> String
       #   resp.task_definition.container_definitions[0].cpu #=> Integer
       #   resp.task_definition.container_definitions[0].memory #=> Integer
+      #   resp.task_definition.container_definitions[0].memory_reservation #=> Integer
       #   resp.task_definition.container_definitions[0].links #=> Array
       #   resp.task_definition.container_definitions[0].links[0] #=> String
       #   resp.task_definition.container_definitions[0].port_mappings #=> Array
@@ -1506,11 +1564,12 @@ module Aws
       #   resp.task_definition.container_definitions[0].ulimits[0].name #=> String, one of "core", "cpu", "data", "fsize", "locks", "memlock", "msgqueue", "nice", "nofile", "nproc", "rss", "rtprio", "rttime", "sigpending", "stack"
       #   resp.task_definition.container_definitions[0].ulimits[0].soft_limit #=> Integer
       #   resp.task_definition.container_definitions[0].ulimits[0].hard_limit #=> Integer
-      #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs"
+      #   resp.task_definition.container_definitions[0].log_configuration.log_driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk"
       #   resp.task_definition.container_definitions[0].log_configuration.options #=> Hash
       #   resp.task_definition.container_definitions[0].log_configuration.options["String"] #=> String
       #   resp.task_definition.family #=> String
       #   resp.task_definition.task_role_arn #=> String
+      #   resp.task_definition.network_mode #=> String, one of "bridge", "host", "none"
       #   resp.task_definition.revision #=> Integer
       #   resp.task_definition.volumes #=> Array
       #   resp.task_definition.volumes[0].name #=> String
@@ -2094,6 +2153,7 @@ module Aws
       #   resp.service.service_name #=> String
       #   resp.service.cluster_arn #=> String
       #   resp.service.load_balancers #=> Array
+      #   resp.service.load_balancers[0].target_group_arn #=> String
       #   resp.service.load_balancers[0].load_balancer_name #=> String
       #   resp.service.load_balancers[0].container_name #=> String
       #   resp.service.load_balancers[0].container_port #=> Integer
@@ -2170,6 +2230,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

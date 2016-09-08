@@ -91,6 +91,7 @@ module Aws
 
       end
 
+      # Describes the inputs for DeleteAlarms.
       # @note When making an API call, pass DeleteAlarmsInput
       #   data as a hash:
       #
@@ -106,6 +107,7 @@ module Aws
 
       end
 
+      # Describes the inputs for DescribeAlarmHistory.
       # @note When making an API call, pass DescribeAlarmHistoryInput
       #   data as a hash:
       #
@@ -152,7 +154,7 @@ module Aws
 
       end
 
-      # The output for the DescribeAlarmHistory action.
+      # The output for DescribeAlarmHistory.
       class DescribeAlarmHistoryOutput < Aws::Structure.new(
         :alarm_history_items,
         :next_token)
@@ -167,6 +169,7 @@ module Aws
 
       end
 
+      # Describes the inputs for DescribeAlarmsForMetric.
       # @note When making an API call, pass DescribeAlarmsForMetricInput
       #   data as a hash:
       #
@@ -219,7 +222,7 @@ module Aws
 
       end
 
-      # The output for the DescribeAlarmsForMetric action.
+      # The output for DescribeAlarmsForMetric.
       class DescribeAlarmsForMetricOutput < Aws::Structure.new(
         :metric_alarms)
 
@@ -229,6 +232,7 @@ module Aws
 
       end
 
+      # Describes the inputs for DescribeAlarms.
       # @note When making an API call, pass DescribeAlarmsInput
       #   data as a hash:
       #
@@ -276,7 +280,7 @@ module Aws
 
       end
 
-      # The output for the DescribeAlarms action.
+      # The output for DescribeAlarms.
       class DescribeAlarmsOutput < Aws::Structure.new(
         :metric_alarms,
         :next_token)
@@ -335,7 +339,10 @@ module Aws
         # @!attribute [rw] value
         #   The value of the dimension to be matched.
         #
-        #   <note> Specifying a `Name` without specifying a `Value` returns all values associated with that `Name`. </note>
+        #   <note markdown="1"> Specifying a `Name` without specifying a `Value` returns all values
+        #   associated with that `Name`.
+        #
+        #    </note>
         #   @return [String]
 
       end
@@ -355,6 +362,7 @@ module Aws
 
       end
 
+      # Describes the inputs for EnableAlarmActions.
       # @note When making an API call, pass EnableAlarmActionsInput
       #   data as a hash:
       #
@@ -370,6 +378,7 @@ module Aws
 
       end
 
+      # Describes the inputs for GetMetricStatistics.
       # @note When making an API call, pass GetMetricStatisticsInput
       #   data as a hash:
       #
@@ -416,7 +425,12 @@ module Aws
         #   the time stamp specified. The time stamp must be in ISO 8601 UTC
         #   format (e.g., 2014-09-03T23:00:00Z).
         #
-        #   <note markdown="1"> The specified start time is rounded down to the nearest value. Datapoints are returned for start times up to two weeks in the past. Specified start times that are more than two weeks in the past will not return datapoints for metrics that are older than two weeks. Data that is timestamped 24 hours or more in the past may take in
+        #   <note markdown="1"> The specified start time is rounded down to the nearest value.
+        #   Datapoints are returned for start times up to two weeks in the past.
+        #   Specified start times that are more than two weeks in the past will
+        #   not return datapoints for metrics that are older than two weeks.
+        #
+        #    Data that is timestamped 24 hours or more in the past may take in
         #   excess of 48 hours to become available from submission time using
         #   `GetMetricStatistics`.
         #
@@ -431,9 +445,10 @@ module Aws
         #   @return [Time]
 
         # @!attribute [rw] period
-        #   The granularity, in seconds, of the returned datapoints. `Period`
-        #   must be at least 60 seconds and must be a multiple of 60. The
-        #   default value is 60.
+        #   The granularity, in seconds, of the returned datapoints. A `Period`
+        #   can be as short as one minute (60 seconds) or as long as one day
+        #   (86,400 seconds), and must be a multiple of 60. The default value is
+        #   60.
         #   @return [Integer]
 
         # @!attribute [rw] statistics
@@ -447,12 +462,15 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] unit
-        #   The unit for the metric.
+        #   The specific unit for a given metric. Metrics may be reported in
+        #   multiple units. Not supplying a unit results in all units being
+        #   returned. If the metric only ever reports one unit, specifying a
+        #   unit will have no effect.
         #   @return [String]
 
       end
 
-      # The output for the GetMetricStatistics action.
+      # The output for GetMetricStatistics.
       class GetMetricStatisticsOutput < Aws::Structure.new(
         :label,
         :datapoints)
@@ -467,6 +485,7 @@ module Aws
 
       end
 
+      # Describes the inputs for ListMetrics.
       # @note When making an API call, pass ListMetricsInput
       #   data as a hash:
       #
@@ -506,7 +525,7 @@ module Aws
 
       end
 
-      # The output for the ListMetrics action.
+      # The output for ListMetrics.
       class ListMetricsOutput < Aws::Structure.new(
         :metrics,
         :next_token)
@@ -610,7 +629,9 @@ module Aws
         #   `INSUFFICIENT_DATA` state from any other state. Each action is
         #   specified as an Amazon Resource Name (ARN).
         #
-        #   <important>The current WSDL lists this attribute as `UnknownActions`.</important>
+        #   <important markdown="1"> The current WSDL lists this attribute as `UnknownActions`.
+        #
+        #    </important>
         #   @return [Array<String>]
 
         # @!attribute [rw] state_value
@@ -723,7 +744,13 @@ module Aws
         # @!attribute [rw] value
         #   The value for the metric.
         #
-        #   <important>Although the `Value` parameter accepts numbers of type `Double`, Amazon CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (e.g., NaN, +Infinity, -Infinity) are not supported. </important>
+        #   <important markdown="1"> Although the `Value` parameter accepts numbers of type `Double`,
+        #   Amazon CloudWatch rejects values that are either too small or too
+        #   large. Values must be in the range of 8.515920e-109 to 1.174271e+108
+        #   (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
+        #   (e.g., NaN, +Infinity, -Infinity) are not supported.
+        #
+        #    </important>
         #   @return [Float]
 
         # @!attribute [rw] statistic_values
@@ -736,6 +763,7 @@ module Aws
 
       end
 
+      # Describes the inputs for PutMetricAlarm.
       # @note When making an API call, pass PutMetricAlarmInput
       #   data as a hash:
       #
@@ -912,6 +940,7 @@ module Aws
 
       end
 
+      # Describes the inputs for PutMetricData.
       # @note When making an API call, pass PutMetricDataInput
       #   data as a hash:
       #
@@ -945,7 +974,11 @@ module Aws
         # @!attribute [rw] namespace
         #   The namespace for the metric data.
         #
-        #   <note> You cannot specify a namespace that begins with "AWS/". Namespaces that begin with "AWS/" are reserved for other Amazon Web Services products that send metrics to Amazon CloudWatch. </note>
+        #   <note markdown="1"> You cannot specify a namespace that begins with \"AWS/\". Namespaces
+        #   that begin with \"AWS/\" are reserved for other Amazon Web Services
+        #   products that send metrics to Amazon CloudWatch.
+        #
+        #    </note>
         #   @return [String]
 
         # @!attribute [rw] metric_data
@@ -954,6 +987,7 @@ module Aws
 
       end
 
+      # Describes the inputs for SetAlarmState.
       # @note When making an API call, pass SetAlarmStateInput
       #   data as a hash:
       #

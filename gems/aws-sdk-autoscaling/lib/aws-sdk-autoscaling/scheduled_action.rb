@@ -136,7 +136,7 @@ module Aws
       # @!group Actions
 
       # @param [Hash] options ({})
-      # @option options [String] :auto_scaling_group_name
+      # @option options [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
       # @return [EmptyStructure]
       def delete(options = {})

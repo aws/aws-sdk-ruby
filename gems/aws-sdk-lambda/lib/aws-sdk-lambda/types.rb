@@ -59,8 +59,8 @@ module Aws
         # @!attribute [rw] action
         #   The AWS Lambda action you want to allow in this statement. Each
         #   Lambda action is a string starting with `lambda:` followed by the
-        #   API name (see Operations). For example, `lambda:CreateFunction`. You
-        #   can use wildcard (`lambda:*`) to grant permission for all AWS Lambda
+        #   API name . For example, `lambda:CreateFunction`. You can use
+        #   wildcard (`lambda:*`) to grant permission for all AWS Lambda
         #   actions.
         #   @return [String]
 
@@ -76,25 +76,34 @@ module Aws
 
         # @!attribute [rw] source_arn
         #   This is optional; however, when granting Amazon S3 permission to
-        #   invoke your function, you should specify this field with the bucket
-        #   Amazon Resource Name (ARN) as its value. This ensures that only
-        #   events generated from the specified bucket can invoke the function.
+        #   invoke your function, you should specify this field with the Amazon
+        #   Resource Name (ARN) as its value. This ensures that only events
+        #   generated from the specified source can invoke the function.
         #
-        #   <important>If you add a permission for the Amazon S3 principal without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function from Amazon S3.</important>
+        #   <important markdown="1">If you add a permission for the Amazon S3 principal without
+        #   providing the source ARN, any AWS account that creates a mapping to
+        #   your function ARN can send events to invoke your Lambda function
+        #   from Amazon S3.
+        #
+        #    </important>
         #   @return [String]
 
         # @!attribute [rw] source_account
-        #   The AWS account ID (without a hyphen) of the source owner. For
-        #   example, if the `SourceArn` identifies a bucket, then this is the
-        #   bucket owner\'s account ID. You can use this additional condition to
-        #   ensure the bucket you specify is owned by a specific account (it is
-        #   possible the bucket owner deleted the bucket and some other AWS
-        #   account created the bucket). You can also use this condition to
-        #   specify all sources (that is, you don\'t specify the `SourceArn`)
-        #   owned by a specific account.
+        #   This parameter is used for S3 and SES only. The AWS account ID
+        #   (without a hyphen) of the source owner. For example, if the
+        #   `SourceArn` identifies a bucket, then this is the bucket owner\'s
+        #   account ID. You can use this additional condition to ensure the
+        #   bucket you specify is owned by a specific account (it is possible
+        #   the bucket owner deleted the bucket and some other AWS account
+        #   created the bucket). You can also use this condition to specify all
+        #   sources (that is, you don\'t specify the `SourceArn`) owned by a
+        #   specific account.
         #   @return [String]
 
         # @!attribute [rw] event_source_token
+        #   A unique token that must be supplied by the principal invoking the
+        #   function. This is currently only used for Alexa Smart Home
+        #   functions.
         #   @return [String]
 
         # @!attribute [rw] qualifier
@@ -310,6 +319,9 @@ module Aws
 
         # @!attribute [rw] runtime
         #   The runtime environment for the Lambda function you are uploading.
+        #
+        #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
+        #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
         #   @return [String]
 
         # @!attribute [rw] role
@@ -529,11 +541,12 @@ module Aws
         :s3_object_version)
 
         # @!attribute [rw] zip_file
-        #   A zip file containing your deployment package. If you are using the
-        #   API directly, the zip file must be base64-encoded (if you are using
-        #   the AWS SDKs or the AWS CLI, the SDKs or CLI will do the encoding
-        #   for you). For more information about creating a .zip file, go to
-        #   [Execution Permissions][1] in the *AWS Lambda Developer Guide*.
+        #   The contents of your zip file containing your deployment package. If
+        #   you are using the web API directly, the contents of the zip file
+        #   must be base64-encoded. If you are using the AWS SDKs or the AWS
+        #   CLI, the SDKs or CLI will do the encoding for you. For more
+        #   information about creating a .zip file, go to [Execution
+        #   Permissions][1] in the *AWS Lambda Developer Guide*.
         #
         #
         #
@@ -600,6 +613,9 @@ module Aws
 
         # @!attribute [rw] runtime
         #   The runtime environment for the Lambda function.
+        #
+        #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
+        #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
         #   @return [String]
 
         # @!attribute [rw] role
@@ -764,7 +780,7 @@ module Aws
       end
 
       # This response contains the object for the Lambda function location
-      # (see API\_FunctionCodeLocation.
+      # (see .
       class GetFunctionResponse < Aws::Structure.new(
         :configuration,
         :code)
@@ -874,7 +890,7 @@ module Aws
         #   you specify the `InvocationType` parameter with value
         #   `RequestResponse`. In this case, AWS Lambda returns the
         #   base64-encoded last 4 KB of log data produced by your Lambda
-        #   function in the `x-amz-log-results` header.
+        #   function in the `x-amz-log-result` header.
         #   @return [String]
 
         # @!attribute [rw] client_context
@@ -1059,7 +1075,8 @@ module Aws
         :max_items)
 
         # @!attribute [rw] event_source_arn
-        #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream.
+        #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream. (This
+        #   parameter is optional.)
         #   @return [String]
 
         # @!attribute [rw] function_name
@@ -1090,8 +1107,7 @@ module Aws
 
       end
 
-      # Contains a list of event sources (see
-      # API\_EventSourceMappingConfiguration)
+      # Contains a list of event sources (see )
       class ListEventSourceMappingsResponse < Aws::Structure.new(
         :next_marker,
         :event_source_mappings)
@@ -1396,7 +1412,16 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] zip_file
-        #   Based64-encoded .zip file containing your packaged source code.
+        #   The contents of your zip file containing your deployment package. If
+        #   you are using the web API directly, the contents of the zip file
+        #   must be base64-encoded. If you are using the AWS SDKs or the AWS
+        #   CLI, the SDKs or CLI will do the encoding for you. For more
+        #   information about creating a .zip file, go to [Execution
+        #   Permissions][1] in the *AWS Lambda Developer Guide*.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html
         #   @return [String]
 
         # @!attribute [rw] s3_bucket
@@ -1499,6 +1524,10 @@ module Aws
         #   @return [Types::VpcConfig]
 
         # @!attribute [rw] runtime
+        #   The runtime environment for the Lambda function.
+        #
+        #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
+        #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
         #   @return [String]
 
       end

@@ -46,12 +46,12 @@ module Aws
       # same key is already associated with the load balancer, `AddTags`
       # updates its value.
       #
-      # For more information, see [Tag Your Load Balancer][1] in the *Elastic
-      # Load Balancing Developer Guide*.
+      # For more information, see [Tag Your Classic Load Balancer][1] in the
+      # *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/add-remove-tags.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
       # @option params [required, Array<String>] :load_balancer_names
       #   The name of the load balancer. You can specify one load balancer only.
       # @option params [required, Array<Types::Tag>] :tags
@@ -80,11 +80,11 @@ module Aws
       # the previously associated security groups.
       #
       # For more information, see [Security Groups for Load Balancers in a
-      # VPC][1] in the *Elastic Load Balancing Developer Guide*.
+      # VPC][1] in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-security-groups.html#elb-vpc-security-groups
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html#elb-vpc-security-groups
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Array<String>] :security_groups
@@ -115,17 +115,16 @@ module Aws
       #
       # The load balancer evenly distributes requests across all registered
       # subnets. For more information, see [Add or Remove Subnets for Your
-      # Load Balancer in a VPC][1] in the *Elastic Load Balancing Developer
-      # Guide*.
+      # Load Balancer in a VPC][1] in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-manage-subnets.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-manage-subnets.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Array<String>] :subnets
-      #   The IDs of the subnets to add for the load balancer. You can add only
-      #   one subnet per Availability Zone.
+      #   The IDs of the subnets to add. You can add only one subnet per
+      #   Availability Zone.
       # @return [Types::AttachLoadBalancerToSubnetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::AttachLoadBalancerToSubnetsOutput#subnets #Subnets} => Array&lt;String&gt;
@@ -147,18 +146,18 @@ module Aws
       end
 
       # Specifies the health check settings to use when evaluating the health
-      # state of your back-end instances.
+      # state of your EC2 instances.
       #
-      # For more information, see [Configure Health Checks][1] in the *Elastic
-      # Load Balancing Developer Guide*.
+      # For more information, see [Configure Health Checks for Your Load
+      # Balancer][1] in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-healthchecks.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-healthchecks.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Types::HealthCheck] :health_check
-      #   The configuration information for the new health check.
+      #   The configuration information.
       # @return [Types::ConfigureHealthCheckOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ConfigureHealthCheckOutput#health_check #HealthCheck} => Types::HealthCheck
@@ -203,11 +202,11 @@ module Aws
       # session stops being sticky until a new application cookie is issued.
       #
       # For more information, see [Application-Controlled Session
-      # Stickiness][1] in the *Elastic Load Balancing Developer Guide*.
+      # Stickiness][1] in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html#enable-sticky-sessions-application
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, String] :policy_name
@@ -236,12 +235,12 @@ module Aws
       # period. This policy can be associated only with HTTP/HTTPS listeners.
       #
       # When a load balancer implements this policy, the load balancer uses a
-      # special cookie to track the back-end server instance for each request.
-      # When the load balancer receives a request, it first checks to see if
-      # this cookie is present in the request. If so, the load balancer sends
-      # the request to the application server specified in the cookie. If not,
-      # the load balancer sends the request to a server that is chosen based
-      # on the existing load-balancing algorithm.
+      # special cookie to track the instance for each request. When the load
+      # balancer receives a request, it first checks to see if this cookie is
+      # present in the request. If so, the load balancer sends the request to
+      # the application server specified in the cookie. If not, the load
+      # balancer sends the request to a server that is chosen based on the
+      # existing load-balancing algorithm.
       #
       # A cookie is inserted into the response for binding subsequent requests
       # from the same user to that server. The validity of the cookie is based
@@ -249,11 +248,11 @@ module Aws
       # configuration.
       #
       # For more information, see [Duration-Based Session Stickiness][1] in
-      # the *Elastic Load Balancing Developer Guide*.
+      # the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-sticky-sessions.html#enable-sticky-sessions-duration
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, String] :policy_name
@@ -262,8 +261,9 @@ module Aws
       #   within the set of policies for this load balancer.
       # @option params [Integer] :cookie_expiration_period
       #   The time period, in seconds, after which the cookie should be
-      #   considered stale. If you do not specify this parameter, the sticky
-      #   session lasts for the duration of the browser session.
+      #   considered stale. If you do not specify this parameter, the default
+      #   value is 0, which indicates that the sticky session should last for
+      #   the duration of the browser session.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -279,23 +279,25 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a load balancer.
+      # Creates a Classic load balancer.
       #
-      # If the call completes successfully, a new load balancer is created
-      # with a unique Domain Name Service (DNS) name. The load balancer
-      # receives incoming traffic and routes it to the registered instances.
-      # For more information, see [How Elastic Load Balancing Works][1] in the
-      # *Elastic Load Balancing Developer Guide*.
+      # You can add listeners, security groups, subnets, and tags when you
+      # create your load balancer, or you can add them later using
+      # CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer,
+      # AttachLoadBalancerToSubnets, and AddTags.
+      #
+      # To describe your current load balancers, see DescribeLoadBalancers.
+      # When you are finished with a load balancer, you can delete it using
+      # DeleteLoadBalancer.
       #
       # You can create up to 20 load balancers per region per account. You can
       # request an increase for the number of load balancers for your account.
-      # For more information, see [Elastic Load Balancing Limits][2] in the
-      # *Elastic Load Balancing Developer Guide*.
+      # For more information, see [Limits for Your Classic Load Balancer][1]
+      # in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/how-elb-works.html
-      # [2]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-limits.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       #
@@ -306,16 +308,15 @@ module Aws
       # @option params [required, Array<Types::Listener>] :listeners
       #   The listeners.
       #
-      #   For more information, see [Listeners for Your Load Balancer][1] in the
-      #   *Elastic Load Balancing Developer Guide*.
+      #   For more information, see [Listeners for Your Classic Load
+      #   Balancer][1] in the *Classic Load Balancers Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/elb-listener-config.html
+      #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
       # @option params [Array<String>] :availability_zones
       #   One or more Availability Zones from the same region as the load
-      #   balancer. Traffic is equally distributed across all specified
-      #   Availability Zones.
+      #   balancer.
       #
       #   You must specify at least one Availability Zone.
       #
@@ -331,26 +332,26 @@ module Aws
       #   The type of a load balancer. Valid only for load balancers in a VPC.
       #
       #   By default, Elastic Load Balancing creates an Internet-facing load
-      #   balancer with a publicly resolvable DNS name, which resolves to public
-      #   IP addresses. For more information about Internet-facing and Internal
-      #   load balancers, see [Internet-facing and Internal Load Balancers][1]
-      #   in the *Elastic Load Balancing Developer Guide*.
+      #   balancer with a DNS name that resolves to public IP addresses. For
+      #   more information about Internet-facing and Internal load balancers,
+      #   see [Load Balancer Scheme][1] in the *Elastic Load Balancing User
+      #   Guide*.
       #
-      #   Specify `internal` to create an internal load balancer with a DNS name
-      #   that resolves to private IP addresses.
+      #   Specify `internal` to create a load balancer with a DNS name that
+      #   resolves to private IP addresses.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/vpc-loadbalancer-types.html
+      #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags to assign to the load balancer.
       #
-      #   For more information about tagging your load balancer, see
-      #   [Tagging][1] in the *Elastic Load Balancing Developer Guide*.
+      #   For more information about tagging your load balancer, see [Tag Your
+      #   Classic Load Balancer][1] in the *Classic Load Balancers Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#tagging-elb
+      #   [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
       # @return [Types::CreateAccessPointOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateAccessPointOutput#dns_name #DNSName} => String
@@ -393,12 +394,12 @@ module Aws
       # created; otherwise, the properties of the new listener must match the
       # properties of the existing listener.
       #
-      # For more information, see [Add a Listener to Your Load Balancer][1] in
-      # the *Elastic Load Balancing Developer Guide*.
+      # For more information, see [Listeners for Your Classic Load
+      # Balancer][1] in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/us-add-listener.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Array<Types::Listener>] :listeners
@@ -429,8 +430,8 @@ module Aws
       # balancer.
       #
       # Policies are settings that are saved for your load balancer and that
-      # can be applied to the front-end listener or the back-end application
-      # server, depending on the policy type.
+      # can be applied to the listener or the application server, depending on
+      # the policy type.
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, String] :policy_name
@@ -440,7 +441,7 @@ module Aws
       #   The name of the base policy type. To get the list of policy types, use
       #   DescribeLoadBalancerPolicyTypes.
       # @option params [Array<Types::PolicyAttribute>] :policy_attributes
-      #   The attributes for the policy.
+      #   The policy attributes.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -468,7 +469,7 @@ module Aws
       # reconfigure all settings. The DNS name associated with a deleted load
       # balancer are no longer usable. The name and associated DNS record of
       # the deleted load balancer no longer exist and traffic sent to any of
-      # its IP addresses is no longer delivered to back-end instances.
+      # its IP addresses is no longer delivered to your instances.
       #
       # If the load balancer does not exist or has already been deleted, the
       # call to `DeleteLoadBalancer` still succeeds.
@@ -533,12 +534,12 @@ module Aws
       # You can use DescribeLoadBalancers to verify that the instance is
       # deregistered from the load balancer.
       #
-      # For more information, see [Deregister and Register Amazon EC2
-      # Instances][1] in the *Elastic Load Balancing Developer Guide*.
+      # For more information, see [Register or De-Register EC2 Instances][1]
+      # in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_DeReg_Reg_Instances.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Array<Types::Instance>] :instances
@@ -672,10 +673,18 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes the specified load balancer policy types.
+      # Describes the specified load balancer policy types or all load
+      # balancer policy types.
       #
-      # You can use these policy types with CreateLoadBalancerPolicy to create
-      # policy configurations for a load balancer.
+      # The description of each type indicates how it can be used. For
+      # example, some policies can be used only with layer 7 listeners, some
+      # policies can be used only with layer 4 listeners, and some policies
+      # can be used only with your EC2 instances.
+      #
+      # You can use CreateLoadBalancerPolicy to create a policy configuration
+      # for any of these policy types. Then, depending on the policy type, use
+      # either SetLoadBalancerPoliciesOfListener or
+      # SetLoadBalancerPoliciesForBackendServer to set the policy.
       # @option params [Array<String>] :policy_type_names
       #   The names of the policy types. If no names are specified, describes
       #   all policy types defined by Elastic Load Balancing.
@@ -845,13 +854,12 @@ module Aws
       # balancer attempts to equally balance the traffic among its remaining
       # Availability Zones.
       #
-      # For more information, see [Disable an Availability Zone from a
-      # Load-Balanced Application][1] in the *Elastic Load Balancing Developer
-      # Guide*.
+      # For more information, see [Add or Remove Availability Zones][1] in the
+      # *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_ShrinkLBApp04.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Array<String>] :availability_zones
@@ -882,12 +890,12 @@ module Aws
       # The load balancer evenly distributes requests across all its
       # registered Availability Zones that contain instances.
       #
-      # For more information, see [Add Availability Zone][1] in the *Elastic
-      # Load Balancing Developer Guide*.
+      # For more information, see [Add or Remove Availability Zones][1] in the
+      # *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_AddLBAvailabilityZone.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Array<String>] :availability_zones
@@ -921,20 +929,23 @@ module Aws
       # `ConnectionSettings` by specifying an idle connection timeout value
       # for your load balancer.
       #
-      # For more information, see the following in the *Elastic Load Balancing
-      # Developer Guide*\:
+      # For more information, see the following in the *Classic Load Balancers
+      # Guide*\:
       #
       # * [Cross-Zone Load Balancing][1]
+      #
       # * [Connection Draining][2]
+      #
       # * [Access Logs][3]
+      #
       # * [Idle Connection Timeout][4]
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#request-routing
-      # [2]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#conn-drain
-      # [3]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/access-log-collection.html
-      # [4]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#idle-timeout
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html
+      # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html
+      # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html
+      # [4]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Types::LoadBalancerAttributes] :load_balancer_attributes
@@ -966,8 +977,8 @@ module Aws
       #       },
       #       additional_attributes: [
       #         {
-      #           key: "StringVal",
-      #           value: "StringVal",
+      #           key: "AdditionalAttributeKey",
+      #           value: "AdditionalAttributeValue",
       #         },
       #       ],
       #     },
@@ -1013,20 +1024,15 @@ module Aws
       # balancer later, any instances registered with the load balancer move
       # to the `InService` state.
       #
-      # If you stop an instance registered with a load balancer and then start
-      # it, the IP addresses associated with the instance changes. Elastic
-      # Load Balancing cannot recognize the new IP address, which prevents it
-      # from routing traffic to the instances. We recommend that you use the
-      # following sequence: stop the instance, deregister the instance, start
-      # the instance, and then register the instance. To deregister instances
-      # from a load balancer, use DeregisterInstancesFromLoadBalancer.
+      # To deregister instances from a load balancer, use
+      # DeregisterInstancesFromLoadBalancer.
       #
-      # For more information, see [Deregister and Register EC2 Instances][1]
-      # in the *Elastic Load Balancing Developer Guide*.
+      # For more information, see [Register or De-Register EC2 Instances][1]
+      # in the *Classic Load Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_DeReg_Reg_Instances.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Array<Types::Instance>] :instances
@@ -1083,13 +1089,13 @@ module Aws
       # connections. The specified certificate replaces any prior certificate
       # that was used on the same load balancer and port.
       #
-      # For more information about updating your SSL certificate, see
-      # [Updating an SSL Certificate for a Load Balancer][1] in the *Elastic
-      # Load Balancing Developer Guide*.
+      # For more information about updating your SSL certificate, see [Replace
+      # the SSL Certificate for Your Load Balancer][1] in the *Classic Load
+      # Balancers Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/US_UpdatingLoadBalancerSSL.html
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-update-ssl-cert.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Integer] :load_balancer_port
@@ -1112,9 +1118,9 @@ module Aws
       end
 
       # Replaces the set of policies associated with the specified port on
-      # which the back-end server is listening with a new set of policies. At
+      # which the EC2 instance is listening with a new set of policies. At
       # this time, only the back-end server authentication policy type can be
-      # applied to the back-end ports; this policy type is composed of
+      # applied to the instance ports; this policy type is composed of
       # multiple public key policies.
       #
       # Each time you use `SetLoadBalancerPoliciesForBackendServer` to enable
@@ -1122,14 +1128,25 @@ module Aws
       # that you want to enable.
       #
       # You can use DescribeLoadBalancers or DescribeLoadBalancerPolicies to
-      # verify that the policy is associated with the back-end server.
+      # verify that the policy is associated with the EC2 instance.
+      #
+      # For more information about enabling back-end instance authentication,
+      # see [Configure Back-end Instance Authentication][1] in the *Classic
+      # Load Balancers Guide*. For more information about Proxy Protocol, see
+      # [Configure Proxy Protocol Support][2] in the *Classic Load Balancers
+      # Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-create-https-ssl-load-balancer.html#configure_backendauth_clt
+      # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-proxy-protocol.html
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Integer] :instance_port
-      #   The port number associated with the back-end server.
+      #   The port number associated with the EC2 instance.
       # @option params [required, Array<String>] :policy_names
       #   The names of the policies. If the list is empty, then all current
-      #   polices are removed from the back-end server.
+      #   polices are removed from the EC2 instance.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1145,16 +1162,30 @@ module Aws
         req.send_request(options)
       end
 
-      # Associates, updates, or disables a policy with a listener for the
-      # specified load balancer. You can associate multiple policies with a
-      # listener.
+      # Replaces the current set of policies for the specified load balancer
+      # port with the specified set of policies.
+      #
+      # To enable back-end server authentication, use
+      # SetLoadBalancerPoliciesForBackendServer.
+      #
+      # For more information about setting policies, see [Update the SSL
+      # Negotiation Configuration][1], [Duration-Based Session Stickiness][2],
+      # and [Application-Controlled Session Stickiness][3] in the *Classic
+      # Load Balancers Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/ssl-config-update.html
+      # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
+      # [3]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
       # @option params [required, String] :load_balancer_name
       #   The name of the load balancer.
       # @option params [required, Integer] :load_balancer_port
-      #   The external port of the load balancer for the policy.
+      #   The external port of the load balancer.
       # @option params [required, Array<String>] :policy_names
-      #   The names of the policies. If the list is empty, the current policy is
-      #   removed from the listener.
+      #   The names of the policies. This list must include all policies to be
+      #   enabled. If you omit a policy that is currently enabled, it is
+      #   disabled. If the list is empty, all current policies are disabled.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1204,15 +1235,16 @@ module Aws
 
       def waiters
         {
-          instance_in_service: Waiters::InstanceInService,
           instance_deregistered: Waiters::InstanceDeregistered,
-          any_instance_in_service: Waiters::AnyInstanceInService
+          any_instance_in_service: Waiters::AnyInstanceInService,
+          instance_in_service: Waiters::InstanceInService
         }
       end
 
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

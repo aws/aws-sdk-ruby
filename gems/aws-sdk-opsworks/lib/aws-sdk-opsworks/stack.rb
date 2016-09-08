@@ -56,7 +56,7 @@ module Aws
         data.arn
       end
 
-      # The stack AWS region, such as \"us-east-1\". For more information
+      # The stack AWS region, such as \"ap-northeast-2\". For more information
       # about AWS regions, see [Regions and Endpoints][1].
       #
       #

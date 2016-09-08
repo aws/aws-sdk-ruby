@@ -1548,8 +1548,7 @@ module Aws
         # @!attribute [rw] data
         #   The raw data of the message. The client must ensure that the message
         #   format complies with Internet email standards regarding email header
-        #   fields, MIME types, MIME encoding, and base64 encoding (if
-        #   necessary).
+        #   fields, MIME types, MIME encoding, and base64 encoding.
         #
         #   The To:, CC:, and BCC: headers in the raw message can contain a
         #   group list.
@@ -2555,7 +2554,7 @@ module Aws
         #   * MIME content types must be among those supported by Amazon SES.
         #     For more information, go to the [Amazon SES Developer Guide][1].
         #
-        #   * Content must be base64-encoded, if MIME requires it.
+        #   * Must be base64-encoded.
         #
         #
         #

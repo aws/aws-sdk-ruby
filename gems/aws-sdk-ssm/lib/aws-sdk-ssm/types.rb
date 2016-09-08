@@ -1147,7 +1147,7 @@ module Aws
         #   @return [Time]
 
         # @!attribute [rw] agent_version
-        #   The version of the SSM agent running on your instance.
+        #   The version of the SSM agent running on your Linux instance.
         #   @return [String]
 
         # @!attribute [rw] is_latest_version

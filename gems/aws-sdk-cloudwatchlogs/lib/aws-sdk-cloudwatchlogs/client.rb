@@ -121,8 +121,10 @@ module Aws
       # group must be unique within a region for an AWS account. You can
       # create up to 500 log groups per account.
       #
-      # You must use the following guidelines when naming a log group: * Log
-      # group names can be between 1 and 512 characters long.
+      # You must use the following guidelines when naming a log group:
+      #
+      # * Log group names can be between 1 and 512 characters long.
+      #
       # * Allowed characters are a-z, A-Z, 0-9, \'\_\' (underscore), \'-\'
       #   (hyphen), \'/\' (forward slash), and \'.\' (period).
       # @option params [required, String] :log_group_name
@@ -144,8 +146,10 @@ module Aws
       # log stream must be unique within the log group. There is no limit on
       # the number of log streams that can exist in a log group.
       #
-      # You must use the following guidelines when naming a log stream: * Log
-      # stream names can be between 1 and 512 characters long.
+      # You must use the following guidelines when naming a log stream:
+      #
+      # * Log stream names can be between 1 and 512 characters long.
+      #
       # * The \':\' colon character is not allowed.
       # @option params [required, String] :log_group_name
       #   The name of the log group under which the log stream is to be created.
@@ -539,6 +543,7 @@ module Aws
       #   resp.metric_filters[0].metric_transformations[0].metric_name #=> String
       #   resp.metric_filters[0].metric_transformations[0].metric_namespace #=> String
       #   resp.metric_filters[0].metric_transformations[0].metric_value #=> String
+      #   resp.metric_filters[0].metric_transformations[0].default_value #=> Float
       #   resp.metric_filters[0].creation_time #=> Integer
       #   resp.next_token #=> String
       # @param [Hash] params ({})
@@ -611,7 +616,7 @@ module Aws
       # response will contain a list of `searchedLogStreams` that contains
       # information about which streams were searched in the request and
       # whether they have been searched completely or require further
-      # pagination. The `limit` parameter in the request. can be used to
+      # pagination. The `limit` parameter in the request can be used to
       # specify the maximum number of events to return in a page.
       # @option params [required, String] :log_group_name
       #   The name of the log group to query.
@@ -761,7 +766,7 @@ module Aws
       #   The ARN of an Amazon Kinesis stream to deliver matching log events to.
       # @option params [required, String] :role_arn
       #   The ARN of an IAM role that grants CloudWatch Logs permissions to do
-      #   Amazon Kinesis PutRecord requests on the desitnation stream.
+      #   Amazon Kinesis PutRecord requests on the destination stream.
       # @return [Types::PutDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::PutDestinationResponse#destination #destination} => Types::Destination
@@ -818,19 +823,26 @@ module Aws
       #
       # Every PutLogEvents request must include the `sequenceToken` obtained
       # from the response of the previous request. An upload in a newly
-      # created log stream does not require a `sequenceToken`.
+      # created log stream does not require a `sequenceToken`. You can also
+      # get the `sequenceToken` using DescribeLogStreams.
       #
-      # The batch of events must satisfy the following constraints: * The
-      # maximum batch size is 1,048,576 bytes, and this size is
+      # The batch of events must satisfy the following constraints:
+      #
+      # * The maximum batch size is 1,048,576 bytes, and this size is
       #   calculated as the sum of all event messages in UTF-8, plus 26 bytes
       #   for each log event.
+      #
       # * None of the log events in the batch can be more than 2 hours in the
       #   future.
+      #
       # * None of the log events in the batch can be older than 14 days or the
       #   retention period of the log group.
+      #
       # * The log events in the batch must be in chronological ordered by
       #   their `timestamp`.
+      #
       # * The maximum number of log events in a batch is 10,000.
+      #
       # * A batch of log events in a single PutLogEvents request cannot span
       #   more than 24 hours. Otherwise, the PutLogEvents operation will fail.
       # @option params [required, String] :log_group_name
@@ -901,6 +913,7 @@ module Aws
       #         metric_name: "MetricName", # required
       #         metric_namespace: "MetricNamespace", # required
       #         metric_value: "MetricValue", # required
+      #         default_value: 1.0,
       #       },
       #     ],
       #   })
@@ -938,13 +951,17 @@ module Aws
       # specified log group. Subscription filters allow you to subscribe to a
       # real-time stream of log events ingested through `PutLogEvents`
       # requests and have them delivered to a specific destination. Currently,
-      # the supported destinations are: * An Amazon Kinesis stream belonging
-      # to the same account as the
+      # the supported destinations are:
+      #
+      # * An Amazon Kinesis stream belonging to the same account as the
       #   subscription filter, for same-account delivery.
+      #
       # * A logical destination (used via an ARN of `Destination`) belonging
       #   to a different account, for cross-account delivery.
+      #
       # * An Amazon Kinesis Firehose stream belonging to the same account as
       #   the subscription filter, for same-account delivery.
+      #
       # * An AWS Lambda function belonging to the same account as the
       #   subscription filter, for same-account delivery.
       #
@@ -959,13 +976,17 @@ module Aws
       #   stream of log events.
       # @option params [required, String] :destination_arn
       #   The ARN of the destination to deliver matching log events to.
-      #   Currently, the supported destinations are: * An Amazon Kinesis stream
-      #   belonging to the same account as the
+      #   Currently, the supported destinations are:
+      #
+      #   * An Amazon Kinesis stream belonging to the same account as the
       #     subscription filter, for same-account delivery.
+      #
       #   * A logical destination (used via an ARN of `Destination`) belonging
       #     to a different account, for cross-account delivery.
+      #
       #   * An Amazon Kinesis Firehose stream belonging to the same account as
       #     the subscription filter, for same-account delivery.
+      #
       #   * An AWS Lambda function belonging to the same account as the
       #     subscription filter, for same-account delivery.
       # @option params [String] :role_arn
@@ -1062,6 +1083,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

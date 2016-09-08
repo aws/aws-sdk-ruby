@@ -21,7 +21,10 @@ module Aws
 
       Account = Shapes::StructureShape.new(name: 'Account')
       ApiKey = Shapes::StructureShape.new(name: 'ApiKey')
+      ApiKeyIds = Shapes::StructureShape.new(name: 'ApiKeyIds')
       ApiKeys = Shapes::StructureShape.new(name: 'ApiKeys')
+      ApiKeysFormat = Shapes::StringShape.new(name: 'ApiKeysFormat')
+      ApiStage = Shapes::StructureShape.new(name: 'ApiStage')
       Authorizer = Shapes::StructureShape.new(name: 'Authorizer')
       AuthorizerType = Shapes::StringShape.new(name: 'AuthorizerType')
       Authorizers = Shapes::StructureShape.new(name: 'Authorizers')
@@ -44,6 +47,8 @@ module Aws
       CreateResourceRequest = Shapes::StructureShape.new(name: 'CreateResourceRequest')
       CreateRestApiRequest = Shapes::StructureShape.new(name: 'CreateRestApiRequest')
       CreateStageRequest = Shapes::StructureShape.new(name: 'CreateStageRequest')
+      CreateUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'CreateUsagePlanKeyRequest')
+      CreateUsagePlanRequest = Shapes::StructureShape.new(name: 'CreateUsagePlanRequest')
       DeleteApiKeyRequest = Shapes::StructureShape.new(name: 'DeleteApiKeyRequest')
       DeleteAuthorizerRequest = Shapes::StructureShape.new(name: 'DeleteAuthorizerRequest')
       DeleteBasePathMappingRequest = Shapes::StructureShape.new(name: 'DeleteBasePathMappingRequest')
@@ -58,6 +63,8 @@ module Aws
       DeleteResourceRequest = Shapes::StructureShape.new(name: 'DeleteResourceRequest')
       DeleteRestApiRequest = Shapes::StructureShape.new(name: 'DeleteRestApiRequest')
       DeleteStageRequest = Shapes::StructureShape.new(name: 'DeleteStageRequest')
+      DeleteUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'DeleteUsagePlanKeyRequest')
+      DeleteUsagePlanRequest = Shapes::StructureShape.new(name: 'DeleteUsagePlanRequest')
       Deployment = Shapes::StructureShape.new(name: 'Deployment')
       Deployments = Shapes::StructureShape.new(name: 'Deployments')
       DomainName = Shapes::StructureShape.new(name: 'DomainName')
@@ -95,18 +102,27 @@ module Aws
       GetSdkRequest = Shapes::StructureShape.new(name: 'GetSdkRequest')
       GetStageRequest = Shapes::StructureShape.new(name: 'GetStageRequest')
       GetStagesRequest = Shapes::StructureShape.new(name: 'GetStagesRequest')
+      GetUsagePlanKeyRequest = Shapes::StructureShape.new(name: 'GetUsagePlanKeyRequest')
+      GetUsagePlanKeysRequest = Shapes::StructureShape.new(name: 'GetUsagePlanKeysRequest')
+      GetUsagePlanRequest = Shapes::StructureShape.new(name: 'GetUsagePlanRequest')
+      GetUsagePlansRequest = Shapes::StructureShape.new(name: 'GetUsagePlansRequest')
+      GetUsageRequest = Shapes::StructureShape.new(name: 'GetUsageRequest')
+      ImportApiKeysRequest = Shapes::StructureShape.new(name: 'ImportApiKeysRequest')
       ImportRestApiRequest = Shapes::StructureShape.new(name: 'ImportRestApiRequest')
       Integer = Shapes::IntegerShape.new(name: 'Integer')
       Integration = Shapes::StructureShape.new(name: 'Integration')
       IntegrationResponse = Shapes::StructureShape.new(name: 'IntegrationResponse')
       IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
       LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+      ListOfARNs = Shapes::ListShape.new(name: 'ListOfARNs')
       ListOfApiKey = Shapes::ListShape.new(name: 'ListOfApiKey')
+      ListOfApiStage = Shapes::ListShape.new(name: 'ListOfApiStage')
       ListOfAuthorizer = Shapes::ListShape.new(name: 'ListOfAuthorizer')
       ListOfBasePathMapping = Shapes::ListShape.new(name: 'ListOfBasePathMapping')
       ListOfClientCertificate = Shapes::ListShape.new(name: 'ListOfClientCertificate')
       ListOfDeployment = Shapes::ListShape.new(name: 'ListOfDeployment')
       ListOfDomainName = Shapes::ListShape.new(name: 'ListOfDomainName')
+      ListOfLong = Shapes::ListShape.new(name: 'ListOfLong')
       ListOfModel = Shapes::ListShape.new(name: 'ListOfModel')
       ListOfPatchOperation = Shapes::ListShape.new(name: 'ListOfPatchOperation')
       ListOfResource = Shapes::ListShape.new(name: 'ListOfResource')
@@ -114,9 +130,13 @@ module Aws
       ListOfStage = Shapes::ListShape.new(name: 'ListOfStage')
       ListOfStageKeys = Shapes::ListShape.new(name: 'ListOfStageKeys')
       ListOfString = Shapes::ListShape.new(name: 'ListOfString')
+      ListOfUsage = Shapes::ListShape.new(name: 'ListOfUsage')
+      ListOfUsagePlan = Shapes::ListShape.new(name: 'ListOfUsagePlan')
+      ListOfUsagePlanKey = Shapes::ListShape.new(name: 'ListOfUsagePlanKey')
       Long = Shapes::IntegerShape.new(name: 'Long')
       MapOfHeaderValues = Shapes::MapShape.new(name: 'MapOfHeaderValues')
       MapOfIntegrationResponse = Shapes::MapShape.new(name: 'MapOfIntegrationResponse')
+      MapOfKeyUsages = Shapes::MapShape.new(name: 'MapOfKeyUsages')
       MapOfMethod = Shapes::MapShape.new(name: 'MapOfMethod')
       MapOfMethodResponse = Shapes::MapShape.new(name: 'MapOfMethodResponse')
       MapOfMethodSettings = Shapes::MapShape.new(name: 'MapOfMethodSettings')
@@ -135,12 +155,15 @@ module Aws
       NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
       PatchOperation = Shapes::StructureShape.new(name: 'PatchOperation')
       PathToMapOfMethodSnapshot = Shapes::MapShape.new(name: 'PathToMapOfMethodSnapshot')
+      ProviderARN = Shapes::StringShape.new(name: 'ProviderARN')
       PutIntegrationRequest = Shapes::StructureShape.new(name: 'PutIntegrationRequest')
       PutIntegrationResponseRequest = Shapes::StructureShape.new(name: 'PutIntegrationResponseRequest')
       PutMethodRequest = Shapes::StructureShape.new(name: 'PutMethodRequest')
       PutMethodResponseRequest = Shapes::StructureShape.new(name: 'PutMethodResponseRequest')
       PutMode = Shapes::StringShape.new(name: 'PutMode')
       PutRestApiRequest = Shapes::StructureShape.new(name: 'PutRestApiRequest')
+      QuotaPeriodType = Shapes::StringShape.new(name: 'QuotaPeriodType')
+      QuotaSettings = Shapes::StructureShape.new(name: 'QuotaSettings')
       Resource = Shapes::StructureShape.new(name: 'Resource')
       Resources = Shapes::StructureShape.new(name: 'Resources')
       RestApi = Shapes::StructureShape.new(name: 'RestApi')
@@ -177,28 +200,48 @@ module Aws
       UpdateResourceRequest = Shapes::StructureShape.new(name: 'UpdateResourceRequest')
       UpdateRestApiRequest = Shapes::StructureShape.new(name: 'UpdateRestApiRequest')
       UpdateStageRequest = Shapes::StructureShape.new(name: 'UpdateStageRequest')
+      UpdateUsagePlanRequest = Shapes::StructureShape.new(name: 'UpdateUsagePlanRequest')
+      UpdateUsageRequest = Shapes::StructureShape.new(name: 'UpdateUsageRequest')
+      Usage = Shapes::StructureShape.new(name: 'Usage')
+      UsagePlan = Shapes::StructureShape.new(name: 'UsagePlan')
+      UsagePlanKey = Shapes::StructureShape.new(name: 'UsagePlanKey')
+      UsagePlanKeys = Shapes::StructureShape.new(name: 'UsagePlanKeys')
+      UsagePlans = Shapes::StructureShape.new(name: 'UsagePlans')
       op = Shapes::StringShape.new(name: 'op')
 
       Account.add_member(:cloudwatch_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "cloudwatchRoleArn"))
       Account.add_member(:throttle_settings, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttleSettings"))
+      Account.add_member(:features, Shapes::ShapeRef.new(shape: ListOfString, location_name: "features"))
+      Account.add_member(:api_key_version, Shapes::ShapeRef.new(shape: String, location_name: "apiKeyVersion"))
       Account.struct_class = Types::Account
 
       ApiKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+      ApiKey.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
       ApiKey.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
       ApiKey.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       ApiKey.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
-      ApiKey.add_member(:stage_keys, Shapes::ShapeRef.new(shape: ListOfString, location_name: "stageKeys"))
       ApiKey.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
       ApiKey.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
+      ApiKey.add_member(:stage_keys, Shapes::ShapeRef.new(shape: ListOfString, location_name: "stageKeys"))
       ApiKey.struct_class = Types::ApiKey
 
+      ApiKeyIds.add_member(:ids, Shapes::ShapeRef.new(shape: ListOfString, location_name: "ids"))
+      ApiKeyIds.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "warnings"))
+      ApiKeyIds.struct_class = Types::ApiKeyIds
+
+      ApiKeys.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "warnings"))
       ApiKeys.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
       ApiKeys.add_member(:items, Shapes::ShapeRef.new(shape: ListOfApiKey, location_name: "item"))
       ApiKeys.struct_class = Types::ApiKeys
 
+      ApiStage.add_member(:api_id, Shapes::ShapeRef.new(shape: String, location_name: "apiId"))
+      ApiStage.add_member(:stage, Shapes::ShapeRef.new(shape: String, location_name: "stage"))
+      ApiStage.struct_class = Types::ApiStage
+
       Authorizer.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
       Authorizer.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
       Authorizer.add_member(:type, Shapes::ShapeRef.new(shape: AuthorizerType, location_name: "type"))
+      Authorizer.add_member(:provider_arns, Shapes::ShapeRef.new(shape: ListOfARNs, location_name: "providerARNs"))
       Authorizer.add_member(:auth_type, Shapes::ShapeRef.new(shape: String, location_name: "authType"))
       Authorizer.add_member(:authorizer_uri, Shapes::ShapeRef.new(shape: String, location_name: "authorizerUri"))
       Authorizer.add_member(:authorizer_credentials, Shapes::ShapeRef.new(shape: String, location_name: "authorizerCredentials"))
@@ -234,14 +277,17 @@ module Aws
       CreateApiKeyRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
       CreateApiKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       CreateApiKeyRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+      CreateApiKeyRequest.add_member(:generate_distinct_id, Shapes::ShapeRef.new(shape: Boolean, location_name: "generateDistinctId"))
+      CreateApiKeyRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
       CreateApiKeyRequest.add_member(:stage_keys, Shapes::ShapeRef.new(shape: ListOfStageKeys, location_name: "stageKeys"))
       CreateApiKeyRequest.struct_class = Types::CreateApiKeyRequest
 
       CreateAuthorizerRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
       CreateAuthorizerRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
       CreateAuthorizerRequest.add_member(:type, Shapes::ShapeRef.new(shape: AuthorizerType, required: true, location_name: "type"))
+      CreateAuthorizerRequest.add_member(:provider_arns, Shapes::ShapeRef.new(shape: ListOfARNs, location_name: "providerARNs"))
       CreateAuthorizerRequest.add_member(:auth_type, Shapes::ShapeRef.new(shape: String, location_name: "authType"))
-      CreateAuthorizerRequest.add_member(:authorizer_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "authorizerUri"))
+      CreateAuthorizerRequest.add_member(:authorizer_uri, Shapes::ShapeRef.new(shape: String, location_name: "authorizerUri"))
       CreateAuthorizerRequest.add_member(:authorizer_credentials, Shapes::ShapeRef.new(shape: String, location_name: "authorizerCredentials"))
       CreateAuthorizerRequest.add_member(:identity_source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "identitySource"))
       CreateAuthorizerRequest.add_member(:identity_validation_expression, Shapes::ShapeRef.new(shape: String, location_name: "identityValidationExpression"))
@@ -295,6 +341,18 @@ module Aws
       CreateStageRequest.add_member(:cache_cluster_size, Shapes::ShapeRef.new(shape: CacheClusterSize, location_name: "cacheClusterSize"))
       CreateStageRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
       CreateStageRequest.struct_class = Types::CreateStageRequest
+
+      CreateUsagePlanKeyRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      CreateUsagePlanKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "keyId"))
+      CreateUsagePlanKeyRequest.add_member(:key_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "keyType"))
+      CreateUsagePlanKeyRequest.struct_class = Types::CreateUsagePlanKeyRequest
+
+      CreateUsagePlanRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
+      CreateUsagePlanRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+      CreateUsagePlanRequest.add_member(:api_stages, Shapes::ShapeRef.new(shape: ListOfApiStage, location_name: "apiStages"))
+      CreateUsagePlanRequest.add_member(:throttle, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttle"))
+      CreateUsagePlanRequest.add_member(:quota, Shapes::ShapeRef.new(shape: QuotaSettings, location_name: "quota"))
+      CreateUsagePlanRequest.struct_class = Types::CreateUsagePlanRequest
 
       DeleteApiKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "api_Key"))
       DeleteApiKeyRequest.struct_class = Types::DeleteApiKeyRequest
@@ -354,6 +412,13 @@ module Aws
       DeleteStageRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "stage_name"))
       DeleteStageRequest.struct_class = Types::DeleteStageRequest
 
+      DeleteUsagePlanKeyRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      DeleteUsagePlanKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "keyId"))
+      DeleteUsagePlanKeyRequest.struct_class = Types::DeleteUsagePlanKeyRequest
+
+      DeleteUsagePlanRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      DeleteUsagePlanRequest.struct_class = Types::DeleteUsagePlanRequest
+
       Deployment.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
       Deployment.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       Deployment.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
@@ -395,10 +460,13 @@ module Aws
       GetAccountRequest.struct_class = Types::GetAccountRequest
 
       GetApiKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "api_Key"))
+      GetApiKeyRequest.add_member(:include_value, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeValue"))
       GetApiKeyRequest.struct_class = Types::GetApiKeyRequest
 
       GetApiKeysRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
       GetApiKeysRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+      GetApiKeysRequest.add_member(:name_query, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "name"))
+      GetApiKeysRequest.add_member(:include_values, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeValues"))
       GetApiKeysRequest.struct_class = Types::GetApiKeysRequest
 
       GetAuthorizerRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -515,6 +583,39 @@ module Aws
       GetStagesRequest.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "deploymentId"))
       GetStagesRequest.struct_class = Types::GetStagesRequest
 
+      GetUsagePlanKeyRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      GetUsagePlanKeyRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "keyId"))
+      GetUsagePlanKeyRequest.struct_class = Types::GetUsagePlanKeyRequest
+
+      GetUsagePlanKeysRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      GetUsagePlanKeysRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+      GetUsagePlanKeysRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+      GetUsagePlanKeysRequest.add_member(:name_query, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "name"))
+      GetUsagePlanKeysRequest.struct_class = Types::GetUsagePlanKeysRequest
+
+      GetUsagePlanRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      GetUsagePlanRequest.struct_class = Types::GetUsagePlanRequest
+
+      GetUsagePlansRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+      GetUsagePlansRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "keyId"))
+      GetUsagePlansRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+      GetUsagePlansRequest.struct_class = Types::GetUsagePlansRequest
+
+      GetUsageRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      GetUsageRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "keyId"))
+      GetUsageRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "startDate"))
+      GetUsageRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: String, required: true, location: "querystring", location_name: "endDate"))
+      GetUsageRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+      GetUsageRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+      GetUsageRequest.struct_class = Types::GetUsageRequest
+
+      ImportApiKeysRequest.add_member(:body, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "body"))
+      ImportApiKeysRequest.add_member(:format, Shapes::ShapeRef.new(shape: ApiKeysFormat, required: true, location: "querystring", location_name: "format"))
+      ImportApiKeysRequest.add_member(:fail_on_warnings, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "failonwarnings"))
+      ImportApiKeysRequest.struct_class = Types::ImportApiKeysRequest
+      ImportApiKeysRequest[:payload] = :body
+      ImportApiKeysRequest[:payload_member] = ImportApiKeysRequest.member(:body)
+
       ImportRestApiRequest.add_member(:fail_on_warnings, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "failonwarnings"))
       ImportRestApiRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location: "querystring", location_name: "parameters"))
       ImportRestApiRequest.add_member(:body, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "body"))
@@ -540,7 +641,11 @@ module Aws
       IntegrationResponse.add_member(:response_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseTemplates"))
       IntegrationResponse.struct_class = Types::IntegrationResponse
 
+      ListOfARNs.member = Shapes::ShapeRef.new(shape: ProviderARN)
+
       ListOfApiKey.member = Shapes::ShapeRef.new(shape: ApiKey)
+
+      ListOfApiStage.member = Shapes::ShapeRef.new(shape: ApiStage)
 
       ListOfAuthorizer.member = Shapes::ShapeRef.new(shape: Authorizer)
 
@@ -551,6 +656,8 @@ module Aws
       ListOfDeployment.member = Shapes::ShapeRef.new(shape: Deployment)
 
       ListOfDomainName.member = Shapes::ShapeRef.new(shape: DomainName)
+
+      ListOfLong.member = Shapes::ShapeRef.new(shape: Long)
 
       ListOfModel.member = Shapes::ShapeRef.new(shape: Model)
 
@@ -566,11 +673,20 @@ module Aws
 
       ListOfString.member = Shapes::ShapeRef.new(shape: String)
 
+      ListOfUsage.member = Shapes::ShapeRef.new(shape: ListOfLong)
+
+      ListOfUsagePlan.member = Shapes::ShapeRef.new(shape: UsagePlan)
+
+      ListOfUsagePlanKey.member = Shapes::ShapeRef.new(shape: UsagePlanKey)
+
       MapOfHeaderValues.key = Shapes::ShapeRef.new(shape: String)
       MapOfHeaderValues.value = Shapes::ShapeRef.new(shape: String)
 
       MapOfIntegrationResponse.key = Shapes::ShapeRef.new(shape: String)
       MapOfIntegrationResponse.value = Shapes::ShapeRef.new(shape: IntegrationResponse)
+
+      MapOfKeyUsages.key = Shapes::ShapeRef.new(shape: String)
+      MapOfKeyUsages.value = Shapes::ShapeRef.new(shape: ListOfUsage)
 
       MapOfMethod.key = Shapes::ShapeRef.new(shape: String)
       MapOfMethod.value = Shapes::ShapeRef.new(shape: Method)
@@ -694,6 +810,11 @@ module Aws
       PutRestApiRequest[:payload] = :body
       PutRestApiRequest[:payload_member] = PutRestApiRequest.member(:body)
 
+      QuotaSettings.add_member(:limit, Shapes::ShapeRef.new(shape: Integer, location_name: "limit"))
+      QuotaSettings.add_member(:offset, Shapes::ShapeRef.new(shape: Integer, location_name: "offset"))
+      QuotaSettings.add_member(:period, Shapes::ShapeRef.new(shape: QuotaPeriodType, location_name: "period"))
+      QuotaSettings.struct_class = Types::QuotaSettings
+
       Resource.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
       Resource.add_member(:parent_id, Shapes::ShapeRef.new(shape: String, location_name: "parentId"))
       Resource.add_member(:path_part, Shapes::ShapeRef.new(shape: String, location_name: "pathPart"))
@@ -761,6 +882,7 @@ module Aws
       TestInvokeAuthorizerResponse.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location_name: "principalId"))
       TestInvokeAuthorizerResponse.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "policy"))
       TestInvokeAuthorizerResponse.add_member(:authorization, Shapes::ShapeRef.new(shape: MapOfStringToList, location_name: "authorization"))
+      TestInvokeAuthorizerResponse.add_member(:claims, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "claims"))
       TestInvokeAuthorizerResponse.struct_class = Types::TestInvokeAuthorizerResponse
 
       TestInvokeMethodRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -859,6 +981,44 @@ module Aws
       UpdateStageRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
       UpdateStageRequest.struct_class = Types::UpdateStageRequest
 
+      UpdateUsagePlanRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      UpdateUsagePlanRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
+      UpdateUsagePlanRequest.struct_class = Types::UpdateUsagePlanRequest
+
+      UpdateUsageRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
+      UpdateUsageRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "keyId"))
+      UpdateUsageRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
+      UpdateUsageRequest.struct_class = Types::UpdateUsageRequest
+
+      Usage.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, location_name: "usagePlanId"))
+      Usage.add_member(:start_date, Shapes::ShapeRef.new(shape: String, location_name: "startDate"))
+      Usage.add_member(:end_date, Shapes::ShapeRef.new(shape: String, location_name: "endDate"))
+      Usage.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+      Usage.add_member(:items, Shapes::ShapeRef.new(shape: MapOfKeyUsages, location_name: "values"))
+      Usage.struct_class = Types::Usage
+
+      UsagePlan.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+      UsagePlan.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+      UsagePlan.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+      UsagePlan.add_member(:api_stages, Shapes::ShapeRef.new(shape: ListOfApiStage, location_name: "apiStages"))
+      UsagePlan.add_member(:throttle, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttle"))
+      UsagePlan.add_member(:quota, Shapes::ShapeRef.new(shape: QuotaSettings, location_name: "quota"))
+      UsagePlan.struct_class = Types::UsagePlan
+
+      UsagePlanKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+      UsagePlanKey.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+      UsagePlanKey.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
+      UsagePlanKey.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+      UsagePlanKey.struct_class = Types::UsagePlanKey
+
+      UsagePlanKeys.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+      UsagePlanKeys.add_member(:items, Shapes::ShapeRef.new(shape: ListOfUsagePlanKey, location_name: "item"))
+      UsagePlanKeys.struct_class = Types::UsagePlanKeys
+
+      UsagePlans.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+      UsagePlans.add_member(:items, Shapes::ShapeRef.new(shape: ListOfUsagePlan, location_name: "item"))
+      UsagePlans.struct_class = Types::UsagePlans
+
 
       # @api private
       API = Seahorse::Model::Api.new.tap do |api|
@@ -883,6 +1043,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:create_authorizer, Seahorse::Model::Operation.new.tap do |o|
@@ -992,6 +1153,32 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         end)
 
+        api.add_operation(:create_usage_plan, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateUsagePlan"
+          o.http_method = "POST"
+          o.http_request_uri = "/usageplans"
+          o.input = Shapes::ShapeRef.new(shape: CreateUsagePlanRequest)
+          o.output = Shapes::ShapeRef.new(shape: UsagePlan)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        end)
+
+        api.add_operation(:create_usage_plan_key, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateUsagePlanKey"
+          o.http_method = "POST"
+          o.http_request_uri = "/usageplans/{usageplanId}/keys"
+          o.input = Shapes::ShapeRef.new(shape: CreateUsagePlanKeyRequest)
+          o.output = Shapes::ShapeRef.new(shape: UsagePlanKey)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
         api.add_operation(:delete_api_key, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteApiKey"
           o.http_method = "DELETE"
@@ -1071,6 +1258,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:delete_integration_response, Seahorse::Model::Operation.new.tap do |o|
@@ -1082,6 +1270,8 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:delete_method, Seahorse::Model::Operation.new.tap do |o|
@@ -1093,6 +1283,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:delete_method_response, Seahorse::Model::Operation.new.tap do |o|
@@ -1104,6 +1295,8 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:delete_model, Seahorse::Model::Operation.new.tap do |o|
@@ -1154,6 +1347,31 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        end)
+
+        api.add_operation(:delete_usage_plan, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteUsagePlan"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/usageplans/{usageplanId}"
+          o.input = Shapes::ShapeRef.new(shape: DeleteUsagePlanRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        end)
+
+        api.add_operation(:delete_usage_plan_key, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteUsagePlanKey"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/usageplans/{usageplanId}/keys/{keyId}"
+          o.input = Shapes::ShapeRef.new(shape: DeleteUsagePlanKeyRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         end)
 
         api.add_operation(:flush_stage_authorizers_cache, Seahorse::Model::Operation.new.tap do |o|
@@ -1556,6 +1774,98 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         end)
 
+        api.add_operation(:get_usage, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetUsage"
+          o.http_method = "GET"
+          o.http_request_uri = "/usageplans/{usageplanId}/usage"
+          o.input = Shapes::ShapeRef.new(shape: GetUsageRequest)
+          o.output = Shapes::ShapeRef.new(shape: Usage)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "position",
+            "output_token" => "position",
+            "limit_key" => "limit",
+            "result_key" => "items"
+          )
+        end)
+
+        api.add_operation(:get_usage_plan, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetUsagePlan"
+          o.http_method = "GET"
+          o.http_request_uri = "/usageplans/{usageplanId}"
+          o.input = Shapes::ShapeRef.new(shape: GetUsagePlanRequest)
+          o.output = Shapes::ShapeRef.new(shape: UsagePlan)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:get_usage_plan_key, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetUsagePlanKey"
+          o.http_method = "GET"
+          o.http_request_uri = "/usageplans/{usageplanId}/keys/{keyId}"
+          o.input = Shapes::ShapeRef.new(shape: GetUsagePlanKeyRequest)
+          o.output = Shapes::ShapeRef.new(shape: UsagePlanKey)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:get_usage_plan_keys, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetUsagePlanKeys"
+          o.http_method = "GET"
+          o.http_request_uri = "/usageplans/{usageplanId}/keys"
+          o.input = Shapes::ShapeRef.new(shape: GetUsagePlanKeysRequest)
+          o.output = Shapes::ShapeRef.new(shape: UsagePlanKeys)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "position",
+            "output_token" => "position",
+            "limit_key" => "limit",
+            "result_key" => "items"
+          )
+        end)
+
+        api.add_operation(:get_usage_plans, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetUsagePlans"
+          o.http_method = "GET"
+          o.http_request_uri = "/usageplans"
+          o.input = Shapes::ShapeRef.new(shape: GetUsagePlansRequest)
+          o.output = Shapes::ShapeRef.new(shape: UsagePlans)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o[:pager] = Aws::Pager.new(
+            "input_token" => "position",
+            "output_token" => "position",
+            "limit_key" => "limit",
+            "result_key" => "items"
+          )
+        end)
+
+        api.add_operation(:import_api_keys, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ImportApiKeys"
+          o.http_method = "POST"
+          o.http_request_uri = "/apikeys?mode=import"
+          o.input = Shapes::ShapeRef.new(shape: ImportApiKeysRequest)
+          o.output = Shapes::ShapeRef.new(shape: ApiKeyIds)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        end)
+
         api.add_operation(:import_rest_api, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ImportRestApi"
           o.http_method = "POST"
@@ -1566,6 +1876,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:put_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -1634,6 +1945,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:test_invoke_authorizer, Seahorse::Model::Operation.new.tap do |o|
@@ -1682,6 +1994,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
         api.add_operation(:update_authorizer, Seahorse::Model::Operation.new.tap do |o|
@@ -1850,6 +2163,31 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ConflictException)
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:update_usage, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateUsage"
+          o.http_method = "PATCH"
+          o.http_request_uri = "/usageplans/{usageplanId}/keys/{keyId}/usage"
+          o.input = Shapes::ShapeRef.new(shape: UpdateUsageRequest)
+          o.output = Shapes::ShapeRef.new(shape: Usage)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        end)
+
+        api.add_operation(:update_usage_plan, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateUsagePlan"
+          o.http_method = "PATCH"
+          o.http_request_uri = "/usageplans/{usageplanId}"
+          o.input = Shapes::ShapeRef.new(shape: UpdateUsagePlanRequest)
+          o.output = Shapes::ShapeRef.new(shape: UsagePlan)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
       end
 

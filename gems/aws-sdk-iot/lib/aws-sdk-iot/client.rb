@@ -87,7 +87,7 @@ module Aws
       # @option params [required, String] :thing_name
       #   The name of the thing.
       # @option params [required, String] :principal
-      #   The principal (certificate or other credential).
+      #   The principal, such as a certificate or other credential.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -313,13 +313,16 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a thing in the Thing Registry.
+      # Creates a thing record in the thing registry.
       # @option params [required, String] :thing_name
-      #   The name of the thing.
+      #   The name of the thing to create.
+      # @option params [String] :thing_type_name
+      #   The name of the thing type associated with the new thing.
       # @option params [Types::AttributePayload] :attribute_payload
-      #   The attribute payload, which consists of up to 3 name/value pairs in a
-      #   JSON document (for example,
-      #   \\\{\\\"attributes\\\":\\\{\\\"string1\\\":\\\"string2\\\"\\}\\}).
+      #   The attribute payload, which consists of up to three name/value pairs
+      #   in a JSON document. For example:
+      #
+      #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
       # @return [Types::CreateThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateThingResponse#thing_name #thingName} => String
@@ -328,10 +331,12 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.create_thing({
       #     thing_name: "ThingName", # required
+      #     thing_type_name: "ThingTypeName",
       #     attribute_payload: {
       #       attributes: {
       #         "AttributeName" => "AttributeValue",
       #       },
+      #       merge: false,
       #     },
       #   })
       #
@@ -342,6 +347,37 @@ module Aws
       # @param [Hash] options ({})
       def create_thing(params = {}, options = {})
         req = build_request(:create_thing, params)
+        req.send_request(options)
+      end
+
+      # Creates a new thing type.
+      # @option params [required, String] :thing_type_name
+      #   The name of the thing type.
+      # @option params [Types::ThingTypeProperties] :thing_type_properties
+      #   The ThingTypeProperties for the thing type to create. It contains
+      #   information about the new thing type including a description, and a
+      #   list of searchable thing attribute names.
+      # @return [Types::CreateThingTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateThingTypeResponse#thing_type_name #thingTypeName} => String
+      #   * {Types::CreateThingTypeResponse#thing_type_arn #thingTypeArn} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_thing_type({
+      #     thing_type_name: "ThingTypeName", # required
+      #     thing_type_properties: {
+      #       thing_type_description: "ThingTypeDescription",
+      #       searchable_attributes: ["AttributeName"],
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.thing_type_name #=> String
+      #   resp.thing_type_arn #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_thing_type(params = {}, options = {})
+        req = build_request(:create_thing_type, params)
         req.send_request(options)
       end
 
@@ -404,6 +440,7 @@ module Aws
       #           firehose: {
       #             role_arn: "AwsArn", # required
       #             delivery_stream_name: "DeliveryStreamName", # required
+      #             separator: "FirehoseSeparator",
       #           },
       #           cloudwatch_metric: {
       #             role_arn: "AwsArn", # required
@@ -538,19 +575,46 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes the specified thing from the Thing Registry.
+      # Deletes the specified thing.
       # @option params [required, String] :thing_name
-      #   The thing name.
+      #   The name of the thing to delete.
+      # @option params [Integer] :expected_version
+      #   The expected version of the thing record in the registry. If the
+      #   version of the record in the registry does not match the expected
+      #   version specified in the request, the `DeleteThing` request is
+      #   rejected with a `VersionConflictException`.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_thing({
       #     thing_name: "ThingName", # required
+      #     expected_version: 1,
       #   })
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_thing(params = {}, options = {})
         req = build_request(:delete_thing, params)
+        req.send_request(options)
+      end
+
+      # Deletes the specified thing type . You cannot delete a thing type if
+      # it has things associated with it. To delete a thing type, first mark
+      # it as deprecated by calling DeprecateThingType, then remove any
+      # associated things by calling UpdateThing to change the thing type on
+      # any associated thing, and finally use DeleteThingType to delete the
+      # thing type.
+      # @option params [required, String] :thing_type_name
+      #   The name of the thing type.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_thing_type({
+      #     thing_type_name: "ThingTypeName", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_thing_type(params = {}, options = {})
+        req = build_request(:delete_thing_type, params)
         req.send_request(options)
       end
 
@@ -567,6 +631,28 @@ module Aws
       # @param [Hash] options ({})
       def delete_topic_rule(params = {}, options = {})
         req = build_request(:delete_topic_rule, params)
+        req.send_request(options)
+      end
+
+      # Deprecates a thing type. You can not associate new things with
+      # deprecated thing type.
+      # @option params [required, String] :thing_type_name
+      #   The name of the thing type to deprecate.
+      # @option params [Boolean] :undo_deprecate
+      #   Whether to undeprecate a deprecated thing type. If **true**, the thing
+      #   type will not be deprecated anymore and you can associate it with
+      #   things.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.deprecate_thing_type({
+      #     thing_type_name: "ThingTypeName", # required
+      #     undo_deprecate: false,
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def deprecate_thing_type(params = {}, options = {})
+        req = build_request(:deprecate_thing_type, params)
         req.send_request(options)
       end
 
@@ -589,6 +675,7 @@ module Aws
       #   resp.certificate_description.certificate_pem #=> String
       #   resp.certificate_description.owned_by #=> String
       #   resp.certificate_description.creation_date #=> Time
+      #   resp.certificate_description.auto_registration_status #=> String, one of "ENABLE", "DISABLE"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_ca_certificate(params = {}, options = {})
@@ -612,7 +699,7 @@ module Aws
       #   resp.certificate_description.certificate_arn #=> String
       #   resp.certificate_description.certificate_id #=> String
       #   resp.certificate_description.ca_certificate_id #=> String
-      #   resp.certificate_description.status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE"
+      #   resp.certificate_description.status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
       #   resp.certificate_description.certificate_pem #=> String
       #   resp.certificate_description.owned_by #=> String
       #   resp.certificate_description.previous_owned_by #=> String
@@ -654,7 +741,9 @@ module Aws
       #
       #   * {Types::DescribeThingResponse#default_client_id #defaultClientId} => String
       #   * {Types::DescribeThingResponse#thing_name #thingName} => String
+      #   * {Types::DescribeThingResponse#thing_type_name #thingTypeName} => String
       #   * {Types::DescribeThingResponse#attributes #attributes} => Hash&lt;String,String&gt;
+      #   * {Types::DescribeThingResponse#version #version} => Integer
       #
       # @example Request syntax with placeholder values
       #   resp = client.describe_thing({
@@ -664,12 +753,43 @@ module Aws
       # @example Response structure
       #   resp.default_client_id #=> String
       #   resp.thing_name #=> String
+      #   resp.thing_type_name #=> String
       #   resp.attributes #=> Hash
       #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #   resp.version #=> Integer
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_thing(params = {}, options = {})
         req = build_request(:describe_thing, params)
+        req.send_request(options)
+      end
+
+      # Gets information about the specified thing type.
+      # @option params [required, String] :thing_type_name
+      #   The name of the thing type.
+      # @return [Types::DescribeThingTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeThingTypeResponse#thing_type_name #thingTypeName} => String
+      #   * {Types::DescribeThingTypeResponse#thing_type_properties #thingTypeProperties} => Types::ThingTypeProperties
+      #   * {Types::DescribeThingTypeResponse#thing_type_metadata #thingTypeMetadata} => Types::ThingTypeMetadata
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_thing_type({
+      #     thing_type_name: "ThingTypeName", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.thing_type_name #=> String
+      #   resp.thing_type_properties.thing_type_description #=> String
+      #   resp.thing_type_properties.searchable_attributes #=> Array
+      #   resp.thing_type_properties.searchable_attributes[0] #=> String
+      #   resp.thing_type_metadata.deprecated #=> Boolean
+      #   resp.thing_type_metadata.deprecation_date #=> Time
+      #   resp.thing_type_metadata.creation_date #=> Time
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_thing_type(params = {}, options = {})
+        req = build_request(:describe_thing_type, params)
         req.send_request(options)
       end
 
@@ -699,10 +819,9 @@ module Aws
       # @option params [required, String] :thing_name
       #   The name of the thing.
       # @option params [required, String] :principal
-      #   The principal.
-      #
-      #   If the principal is a certificate, specify the certificate ARN. If the
-      #   principal is an Amazon Cognito identity, specify the identity ID.
+      #   If the principal is a certificate, this value must be ARN of the
+      #   certificate. If the principal is an Amazon Cognito identity, this
+      #   value must be the ID of the Amazon Cognito identity.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -893,6 +1012,7 @@ module Aws
       #   resp.rule.actions[0].s3.key #=> String
       #   resp.rule.actions[0].firehose.role_arn #=> String
       #   resp.rule.actions[0].firehose.delivery_stream_name #=> String
+      #   resp.rule.actions[0].firehose.separator #=> String
       #   resp.rule.actions[0].cloudwatch_metric.role_arn #=> String
       #   resp.rule.actions[0].cloudwatch_metric.metric_namespace #=> String
       #   resp.rule.actions[0].cloudwatch_metric.metric_name #=> String
@@ -980,7 +1100,7 @@ module Aws
       #   resp.certificates #=> Array
       #   resp.certificates[0].certificate_arn #=> String
       #   resp.certificates[0].certificate_id #=> String
-      #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE"
+      #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
       #   resp.certificates[0].creation_date #=> Time
       #   resp.next_marker #=> String
       # @param [Hash] params ({})
@@ -1018,13 +1138,49 @@ module Aws
       #   resp.certificates #=> Array
       #   resp.certificates[0].certificate_arn #=> String
       #   resp.certificates[0].certificate_id #=> String
-      #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE"
+      #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
       #   resp.certificates[0].creation_date #=> Time
       #   resp.next_marker #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def list_certificates_by_ca(params = {}, options = {})
         req = build_request(:list_certificates_by_ca, params)
+        req.send_request(options)
+      end
+
+      # Lists certificates that are being transfered but not yet accepted.
+      # @option params [Integer] :page_size
+      #   The result page size.
+      # @option params [String] :marker
+      #   The marker for the next set of results.
+      # @option params [Boolean] :ascending_order
+      #   Specifies the order for results. If True, the results are returned in
+      #   ascending order, based on the creation date.
+      # @return [Types::ListOutgoingCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListOutgoingCertificatesResponse#outgoing_certificates #outgoingCertificates} => Array&lt;Types::OutgoingCertificate&gt;
+      #   * {Types::ListOutgoingCertificatesResponse#next_marker #nextMarker} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_outgoing_certificates({
+      #     page_size: 1,
+      #     marker: "Marker",
+      #     ascending_order: false,
+      #   })
+      #
+      # @example Response structure
+      #   resp.outgoing_certificates #=> Array
+      #   resp.outgoing_certificates[0].certificate_arn #=> String
+      #   resp.outgoing_certificates[0].certificate_id #=> String
+      #   resp.outgoing_certificates[0].transferred_to #=> String
+      #   resp.outgoing_certificates[0].transfer_date #=> Time
+      #   resp.outgoing_certificates[0].transfer_message #=> String
+      #   resp.outgoing_certificates[0].creation_date #=> Time
+      #   resp.next_marker #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_outgoing_certificates(params = {}, options = {})
+        req = build_request(:list_outgoing_certificates, params)
         req.send_request(options)
       end
 
@@ -1162,9 +1318,10 @@ module Aws
 
       # Lists the things associated with the specified principal.
       # @option params [String] :next_token
-      #   A token used to retrieve the next value.
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
       # @option params [Integer] :max_results
-      #   The maximum number of principals to return.
+      #   The maximum number of results to return in this operation.
       # @option params [required, String] :principal
       #   The principal.
       # @return [Types::ListPrincipalThingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1212,17 +1369,59 @@ module Aws
         req.send_request(options)
       end
 
-      # Lists your things. You can pass an AttributeName or AttributeValue to
-      # filter your things (for example, \"ListThings where
-      # AttributeName=Color and AttributeValue=Red\").
+      # Lists the existing thing types.
       # @option params [String] :next_token
-      #   The token for the next value.
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
       # @option params [Integer] :max_results
-      #   The maximum number of results.
+      #   The maximum number of results to return in this operation.
+      # @option params [String] :thing_type_name
+      #   The name of the thing type.
+      # @return [Types::ListThingTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListThingTypesResponse#thing_types #thingTypes} => Array&lt;Types::ThingTypeDefinition&gt;
+      #   * {Types::ListThingTypesResponse#next_token #nextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_thing_types({
+      #     next_token: "NextToken",
+      #     max_results: 1,
+      #     thing_type_name: "ThingTypeName",
+      #   })
+      #
+      # @example Response structure
+      #   resp.thing_types #=> Array
+      #   resp.thing_types[0].thing_type_name #=> String
+      #   resp.thing_types[0].thing_type_properties.thing_type_description #=> String
+      #   resp.thing_types[0].thing_type_properties.searchable_attributes #=> Array
+      #   resp.thing_types[0].thing_type_properties.searchable_attributes[0] #=> String
+      #   resp.thing_types[0].thing_type_metadata.deprecated #=> Boolean
+      #   resp.thing_types[0].thing_type_metadata.deprecation_date #=> Time
+      #   resp.thing_types[0].thing_type_metadata.creation_date #=> Time
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_thing_types(params = {}, options = {})
+        req = build_request(:list_thing_types, params)
+        req.send_request(options)
+      end
+
+      # Lists your things. Use the **attributeName** and **attributeValue**
+      # parameters to filter your things. For example, calling `ListThings`
+      # with attributeName=Color and attributeValue=Red retrieves all things
+      # in the registry that contain an attribute **Color** with the value
+      # **Red**.
+      # @option params [String] :next_token
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
+      # @option params [Integer] :max_results
+      #   The maximum number of results to return in this operation.
       # @option params [String] :attribute_name
-      #   The attribute name.
+      #   The attribute name used to search for things.
       # @option params [String] :attribute_value
-      #   The attribute value.
+      #   The attribute value used to search for things.
+      # @option params [String] :thing_type_name
+      #   The name of the thing type used to search for things.
       # @return [Types::ListThingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListThingsResponse#things #things} => Array&lt;Types::ThingAttribute&gt;
@@ -1234,13 +1433,16 @@ module Aws
       #     max_results: 1,
       #     attribute_name: "AttributeName",
       #     attribute_value: "AttributeValue",
+      #     thing_type_name: "ThingTypeName",
       #   })
       #
       # @example Response structure
       #   resp.things #=> Array
       #   resp.things[0].thing_name #=> String
+      #   resp.things[0].thing_type_name #=> String
       #   resp.things[0].attributes #=> Hash
       #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #   resp.things[0].version #=> Integer
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1300,6 +1502,9 @@ module Aws
       #   The private key verification certificate.
       # @option params [Boolean] :set_as_active
       #   A boolean value that specifies if the CA certificate is set to active.
+      # @option params [Boolean] :allow_auto_registration
+      #   Allows this CA certificate to be used for auto registration of device
+      #   certificates.
       # @return [Types::RegisterCACertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RegisterCACertificateResponse#certificate_arn #certificateArn} => String
@@ -1310,6 +1515,7 @@ module Aws
       #     ca_certificate: "CertificatePem", # required
       #     verification_certificate: "CertificatePem", # required
       #     set_as_active: false,
+      #     allow_auto_registration: false,
       #   })
       #
       # @example Response structure
@@ -1443,6 +1649,7 @@ module Aws
       #           firehose: {
       #             role_arn: "AwsArn", # required
       #             delivery_stream_name: "DeliveryStreamName", # required
+      #             separator: "FirehoseSeparator",
       #           },
       #           cloudwatch_metric: {
       #             role_arn: "AwsArn", # required
@@ -1560,17 +1767,21 @@ module Aws
       # Updates a registered CA certificate.
       # @option params [required, String] :certificate_id
       #   The CA certificate identifier.
-      # @option params [required, String] :new_status
+      # @option params [String] :new_status
       #   The updated status of the CA certificate.
       #
       #   **Note:** The status value REGISTER\_INACTIVE is deprecated and should
       #   not be used.
+      # @option params [String] :new_auto_registration_status
+      #   The new value for the auto registration status. Valid values are:
+      #   \"ENABLE\" or \"DISABLE\".
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_ca_certificate({
       #     certificate_id: "CertificateId", # required
-      #     new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE
+      #     new_status: "ACTIVE", # accepts ACTIVE, INACTIVE
+      #     new_auto_registration_status: "ENABLE", # accepts ENABLE, DISABLE
       #   })
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1604,7 +1815,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.update_certificate({
       #     certificate_id: "CertificateId", # required
-      #     new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE
+      #     new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
       #   })
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1615,21 +1826,38 @@ module Aws
 
       # Updates the data for a thing.
       # @option params [required, String] :thing_name
-      #   The thing name.
-      # @option params [required, Types::AttributePayload] :attribute_payload
-      #   The attribute payload, a JSON string containing up to three key-value
-      #   pairs (for example,
-      #   \\\{\\\"attributes\\\":\\\{\\\"string1\\\":\\\"string2\\\"\\}\\}).
+      #   The name of the thing to update.
+      # @option params [String] :thing_type_name
+      #   The name of the thing type.
+      # @option params [Types::AttributePayload] :attribute_payload
+      #   A list of thing attributes, a JSON string containing name-value pairs.
+      #   For example:
+      #
+      #   `\{\"attributes\":\{\"name1\":\"value2\"\}\})`
+      #
+      #   This data is used to add new attributes or update existing attributes.
+      # @option params [Integer] :expected_version
+      #   The expected version of the thing record in the registry. If the
+      #   version of the record in the registry does not match the expected
+      #   version specified in the request, the `UpdateThing` request is
+      #   rejected with a `VersionConflictException`.
+      # @option params [Boolean] :remove_thing_type
+      #   Remove a thing type association. If **true**, the assocation is
+      #   removed.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_thing({
       #     thing_name: "ThingName", # required
-      #     attribute_payload: { # required
+      #     thing_type_name: "ThingTypeName",
+      #     attribute_payload: {
       #       attributes: {
       #         "AttributeName" => "AttributeValue",
       #       },
+      #       merge: false,
       #     },
+      #     expected_version: 1,
+      #     remove_thing_type: false,
       #   })
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1677,6 +1905,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

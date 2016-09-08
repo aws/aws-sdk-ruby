@@ -67,12 +67,14 @@ module Aws
       #   resp.vpc_peering_connection.accepter_vpc_info.vpc_id #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.expiration_time #=> Time
       #   resp.vpc_peering_connection.requester_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.vpc_id #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.status.code #=> String, one of "initiating-request", "pending-acceptance", "active", "deleted", "rejected", "failed", "expired", "provisioning", "deleting"
       #   resp.vpc_peering_connection.status.message #=> String
       #   resp.vpc_peering_connection.tags #=> Array
@@ -127,12 +129,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Allocates a Dedicated host to your account. At minimum you need to
+      # Allocates a Dedicated Host to your account. At minimum you need to
       # specify the instance size type, Availability Zone, and quantity of
       # hosts you want to allocate.
       # @option params [String] :auto_placement
       #   This is enabled by default. This property allows instances to be
-      #   automatically placed onto available Dedicated hosts, when you are
+      #   automatically placed onto available Dedicated Hosts, when you are
       #   launching instances without specifying a host ID.
       #
       #   Default: Enabled
@@ -145,14 +147,14 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
       # @option params [required, String] :instance_type
-      #   Specify the instance type that you want your Dedicated hosts to be
+      #   Specify the instance type that you want your Dedicated Hosts to be
       #   configured for. When you specify the instance type, that is the only
       #   instance type that you can launch onto that host.
       # @option params [required, Integer] :quantity
-      #   The number of Dedicated hosts you want to allocate to your account
+      #   The number of Dedicated Hosts you want to allocate to your account
       #   with these parameters.
       # @option params [required, String] :availability_zone
-      #   The Availability Zone for the Dedicated hosts.
+      #   The Availability Zone for the Dedicated Hosts.
       # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::AllocateHostsResult#host_ids #HostIds} => Array&lt;String&gt;
@@ -771,7 +773,9 @@ module Aws
       #   protocol and port range, use a set of IP permissions instead.
       # @option params [String] :ip_protocol
       #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-      #   Numbers][1]). (VPC only) Use `-1` to specify all.
+      #   Numbers][1]). (VPC only) Use `-1` to specify all traffic. If you
+      #   specify `-1`, traffic on all ports is allowed, regardless of any ports
+      #   you specify.
       #
       #
       #
@@ -957,13 +961,12 @@ module Aws
       # conversion is complete or is in the process of transferring the final
       # disk image, the command fails and returns an exception.
       #
-      # For more information, see [Using the Command Line Tools to Import Your
-      # Virtual Machine to Amazon EC2][1] in the *Amazon Elastic Compute Cloud
-      # User Guide*.
+      # For more information, see [Importing a Virtual Machine Using the
+      # Amazon EC2 CLI][1].
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -1312,6 +1315,11 @@ module Aws
       #
       #  </note>
       #
+      # <note markdown="1"> Snapshots created by the CopySnapshot action have an arbitrary volume
+      # ID that should not be used for any purpose.
+      #
+      #  </note>
+      #
       # For more information, see [Copying an Amazon EBS Snapshot][1] in the
       # *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -1521,12 +1529,16 @@ module Aws
       #   servers, or AmazonProvidedDNS. The default DHCP option set specifies
       #   AmazonProvidedDNS. If specifying more than one domain name server,
       #   specify the IP addresses in a single parameter, separated by commas.
+      #   If you want your instance to receive a custom DNS hostname as
+      #   specified in `domain-name`, you must set `domain-name-servers` to a
+      #   custom DNS server.
       #
       # * `domain-name` - If you\'re using AmazonProvidedDNS in \"us-east-1\",
       #   specify \"ec2.internal\". If you\'re using AmazonProvidedDNS in
       #   another region, specify \"region.compute.internal\" (for example,
       #   \"ap-northeast-1.compute.internal\"). Otherwise, specify a domain
-      #   name (for example, \"MyCompany.com\"). **Important**\: Some Linux
+      #   name (for example, \"MyCompany.com\"). This value is used to
+      #   complete unqualified DNS hostnames. **Important**\: Some Linux
       #   operating systems accept multiple domain names separated by spaces.
       #   However, Windows and other Linux operating systems treat the value
       #   as a single domain, which results in unexpected behavior. If your
@@ -1736,12 +1748,12 @@ module Aws
       #
       # For information about the supported operating systems, image formats,
       # and known limitations for the types of instances you can export, see
-      # [Exporting EC2 Instances][1] in the *Amazon Elastic Compute Cloud User
-      # Guide*.
+      # [Exporting an Instance as a VM Using VM Import/Export][1] in the *VM
+      # Import/Export User Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ExportingEC2Instances.html
+      # [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmexport.html
       # @option params [String] :description
       #   A description for the conversion task or the resource being exported.
       #   The maximum length is 255 bytes.
@@ -2731,7 +2743,7 @@ module Aws
       end
 
       # Adds or overwrites one or more tags for the specified Amazon EC2
-      # resource or resources. Each resource can have a maximum of 10 tags.
+      # resource or resources. Each resource can have a maximum of 50 tags.
       # Each tag consists of a key and optional value. Tag keys must be unique
       # per resource.
       #
@@ -3092,12 +3104,14 @@ module Aws
       #   resp.vpc_peering_connection.accepter_vpc_info.vpc_id #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.expiration_time #=> Time
       #   resp.vpc_peering_connection.requester_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.vpc_id #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.status.code #=> String, one of "initiating-request", "pending-acceptance", "active", "deleted", "rejected", "failed", "expired", "provisioning", "deleting"
       #   resp.vpc_peering_connection.status.message #=> String
       #   resp.vpc_peering_connection.tags #=> Array
@@ -4316,15 +4330,14 @@ module Aws
       end
 
       # Describes one or more of your conversion tasks. For more information,
-      # see [Using the Command Line Tools to Import Your Virtual Machine to
-      # Amazon EC2][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      # see the [VM Import/Export User Guide][1].
       #
       # For information about the import manifest referenced by this API
       # action, see [VM Import Manifest][2].
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html
+      # [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/
       # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -4639,14 +4652,159 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes one or more of your Dedicated hosts.
+      # Describes the Dedicated Host Reservations that are available to
+      # purchase.
       #
-      # The results describe only the Dedicated hosts in the region you\'re
+      # The results describe all the Dedicated Host Reservation offerings,
+      # including offerings that may not match the instance family and region
+      # of your Dedicated Hosts. When purchasing an offering, ensure that the
+      # the instance family and region of the offering matches that of the
+      # Dedicated Host/s it will be associated with. For an overview of
+      # supported instance types, see [Dedicated Hosts Overview][1] in the
+      # *Amazon Elastic Compute Cloud User Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-overview.html
+      # @option params [String] :offering_id
+      #   The ID of the reservation offering.
+      # @option params [Integer] :min_duration
+      #   This is the minimum duration of the reservation you\'d like to
+      #   purchase, specified in seconds. Reservations are available in one-year
+      #   and three-year terms. The number of seconds specified must be the
+      #   number of seconds in a year (365x24x60x60) times one of the supported
+      #   durations (1 or 3). For example, specify 31536000 for one year.
+      # @option params [Integer] :max_duration
+      #   This is the maximum duration of the reservation you\'d like to
+      #   purchase, specified in seconds. Reservations are available in one-year
+      #   and three-year terms. The number of seconds specified must be the
+      #   number of seconds in a year (365x24x60x60) times one of the supported
+      #   durations (1 or 3). For example, specify 94608000 for three years.
+      # @option params [Array<Types::Filter>] :filter
+      #   One or more filters.
+      #
+      #   * `instance-family` - The instance family of the offering (e.g.,
+      #     `m4`).
+      #
+      #   * `payment-option` - The payment option (`No Upfront` \| `Partial
+      #     Upfront` \| `All Upfront`).
+      # @option params [Integer] :max_results
+      #   The maximum number of results to return for the request in a single
+      #   page. The remaining results can be seen by sending another request
+      #   with the returned `nextToken` value. This value can be between 5 and
+      #   500; if `maxResults` is given a larger value than 500, you will
+      #   receive an error.
+      # @option params [String] :next_token
+      #   The token to use to retrieve the next page of results.
+      # @return [Types::DescribeHostReservationOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeHostReservationOfferingsResult#offering_set #OfferingSet} => Array&lt;Types::HostOffering&gt;
+      #   * {Types::DescribeHostReservationOfferingsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_host_reservation_offerings({
+      #     offering_id: "String",
+      #     min_duration: 1,
+      #     max_duration: 1,
+      #     filter: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.offering_set #=> Array
+      #   resp.offering_set[0].offering_id #=> String
+      #   resp.offering_set[0].instance_family #=> String
+      #   resp.offering_set[0].payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
+      #   resp.offering_set[0].upfront_price #=> String
+      #   resp.offering_set[0].hourly_price #=> String
+      #   resp.offering_set[0].currency_code #=> String, one of "USD"
+      #   resp.offering_set[0].duration #=> Integer
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_host_reservation_offerings(params = {}, options = {})
+        req = build_request(:describe_host_reservation_offerings, params)
+        req.send_request(options)
+      end
+
+      # Describes Dedicated Host Reservations which are associated with
+      # Dedicated Hosts in your account.
+      # @option params [Array<String>] :host_reservation_id_set
+      #   One or more host reservation IDs.
+      # @option params [Array<Types::Filter>] :filter
+      #   One or more filters.
+      #
+      #   * `instance-family` - The instance family (e.g., `m4`).
+      #
+      #   * `payment-option` - The payment option (`No Upfront` \| `Partial
+      #     Upfront` \| `All Upfront`).
+      #
+      #   * `state` - The state of the reservation (`payment-pending` \|
+      #     `payment-failed` \| `active` \| `retired`).
+      # @option params [Integer] :max_results
+      #   The maximum number of results to return for the request in a single
+      #   page. The remaining results can be seen by sending another request
+      #   with the returned `nextToken` value. This value can be between 5 and
+      #   500; if `maxResults` is given a larger value than 500, you will
+      #   receive an error.
+      # @option params [String] :next_token
+      #   The token to use to retrieve the next page of results.
+      # @return [Types::DescribeHostReservationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeHostReservationsResult#host_reservation_set #HostReservationSet} => Array&lt;Types::HostReservation&gt;
+      #   * {Types::DescribeHostReservationsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_host_reservations({
+      #     host_reservation_id_set: ["String"],
+      #     filter: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.host_reservation_set #=> Array
+      #   resp.host_reservation_set[0].host_reservation_id #=> String
+      #   resp.host_reservation_set[0].host_id_set #=> Array
+      #   resp.host_reservation_set[0].host_id_set[0] #=> String
+      #   resp.host_reservation_set[0].offering_id #=> String
+      #   resp.host_reservation_set[0].instance_family #=> String
+      #   resp.host_reservation_set[0].payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
+      #   resp.host_reservation_set[0].hourly_price #=> String
+      #   resp.host_reservation_set[0].upfront_price #=> String
+      #   resp.host_reservation_set[0].currency_code #=> String, one of "USD"
+      #   resp.host_reservation_set[0].count #=> Integer
+      #   resp.host_reservation_set[0].duration #=> Integer
+      #   resp.host_reservation_set[0].end #=> Time
+      #   resp.host_reservation_set[0].start #=> Time
+      #   resp.host_reservation_set[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired"
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_host_reservations(params = {}, options = {})
+        req = build_request(:describe_host_reservations, params)
+        req.send_request(options)
+      end
+
+      # Describes one or more of your Dedicated Hosts.
+      #
+      # The results describe only the Dedicated Hosts in the region you\'re
       # currently using. All listed instances consume capacity on your
-      # Dedicated host. Dedicated hosts that have recently been released will
+      # Dedicated Host. Dedicated Hosts that have recently been released will
       # be listed with the state `released`.
       # @option params [Array<String>] :host_ids
-      #   The IDs of the Dedicated hosts. The IDs are used for targeted instance
+      #   The IDs of the Dedicated Hosts. The IDs are used for targeted instance
       #   launches.
       # @option params [String] :next_token
       #   The token to retrieve the next page of results.
@@ -4660,19 +4818,19 @@ module Aws
       # @option params [Array<Types::Filter>] :filter
       #   One or more filters.
       #
-      #   * `instance-type` - The instance type size that the Dedicated host is
+      #   * `instance-type` - The instance type size that the Dedicated Host is
       #     configured to support.
       #
       #   * `auto-placement` - Whether auto-placement is enabled or disabled
       #     (`on` \| `off`).
       #
-      #   * `host-reservation-id` - The ID of the reservation associated with
-      #     this host.
+      #   * `host-reservation-id` - The ID of the reservation assigned to this
+      #     host.
       #
       #   * `client-token` - The idempotency token you provided when you
       #     launched the instance
       #
-      #   * `state`- The allocation state of the Dedicated host (`available` \|
+      #   * `state`- The allocation state of the Dedicated Host (`available` \|
       #     `under-assessment` \| `permanent-failure` \| `released` \|
       #     `released-permanent-failure`).
       #
@@ -4740,7 +4898,8 @@ module Aws
       # settings and provided that they have permission to use the relevant
       # `Describe` command for the resource type.
       # @option params [String] :resource
-      #   The type of resource.
+      #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+      #   `volume`
       # @return [Types::DescribeIdFormatResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeIdFormatResult#statuses #Statuses} => Array&lt;Types::IdFormat&gt;
@@ -4780,7 +4939,8 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
       # @option params [String] :resource
-      #   The type of resource.
+      #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+      #   `volume`
       # @option params [required, String] :principal_arn
       #   The ARN of the principal, which can be an IAM role, IAM user, or the
       #   root user.
@@ -4888,11 +5048,11 @@ module Aws
       #
       #   Default: Describes all images available to you.
       # @option params [Array<String>] :owners
-      #   Filters the images by the owner. Specify an AWS account ID, `amazon`
-      #   (owner is Amazon), `aws-marketplace` (owner is AWS Marketplace),
-      #   `self` (owner is the sender of the request). Omitting this option
-      #   returns all images for which you have launch permissions, regardless
-      #   of ownership.
+      #   Filters the images by the owner. Specify an AWS account ID, `self`
+      #   (owner is the sender of the request), or an AWS owner alias (valid
+      #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
+      #   this option returns all images for which you have launch permissions,
+      #   regardless of ownership.
       # @option params [Array<String>] :executable_users
       #   Scopes the images by users with explicit launch permissions. Specify
       #   an AWS account ID, `self` (the sender of the request), or `all`
@@ -4935,7 +5095,10 @@ module Aws
       #
       #   * `name` - The name of the AMI (provided during image creation).
       #
-      #   * `owner-alias` - The AWS account alias (for example, `amazon`).
+      #   * `owner-alias` - String value from an Amazon-maintained list
+      #     (`amazon` \| `aws-marketplace` \| `microsoft`) of snapshot owners.
+      #     Not to be confused with the user-configured AWS account alias, which
+      #     is set from the IAM console.
       #
       #   * `owner-id` - The AWS account ID of the image owner.
       #
@@ -5415,7 +5578,7 @@ module Aws
       #   One or more filters.
       #
       #   * `affinity` - The affinity setting for an instance running on a
-      #     Dedicated host (`default` \| `host`).
+      #     Dedicated Host (`default` \| `host`).
       #
       #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
       #
@@ -5447,7 +5610,7 @@ module Aws
       #   * `group-name` - The name of the security group for the instance.
       #     EC2-Classic only.
       #
-      #   * `host-Id` - The ID of the Dedicated host on which the instance is
+      #   * `host-id` - The ID of the Dedicated Host on which the instance is
       #     running, if applicable.
       #
       #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
@@ -7636,8 +7799,10 @@ module Aws
       #
       #   * `description` - A description of the snapshot.
       #
-      #   * `owner-alias` - The AWS account alias (for example, `amazon`) that
-      #     owns the snapshot.
+      #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
+      #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
+      #     confused with the user-configured AWS account alias, which is set
+      #     from the IAM consolew.
       #
       #   * `owner-id` - The ID of the AWS account that owns the snapshot.
       #
@@ -7959,6 +8124,7 @@ module Aws
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.fulfilled_capacity #=> Float
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.type #=> String, one of "request", "maintain"
       #   resp.spot_fleet_request_configs[0].create_time #=> Time
+      #   resp.spot_fleet_request_configs[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
       #   resp.next_token #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -9187,12 +9353,14 @@ module Aws
       #   resp.vpc_peering_connections[0].accepter_vpc_info.vpc_id #=> String
       #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       #   resp.vpc_peering_connections[0].expiration_time #=> Time
       #   resp.vpc_peering_connections[0].requester_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connections[0].requester_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connections[0].requester_vpc_info.vpc_id #=> String
       #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       #   resp.vpc_peering_connections[0].status.code #=> String, one of "initiating-request", "pending-acceptance", "active", "deleted", "rejected", "failed", "expired", "provisioning", "deleting"
       #   resp.vpc_peering_connections[0].status.message #=> String
       #   resp.vpc_peering_connections[0].tags #=> Array
@@ -9558,12 +9726,12 @@ module Aws
 
       # Detaches an EBS volume from an instance. Make sure to unmount any file
       # systems on the device within your operating system before detaching
-      # the volume. Failure to do so results in the volume being stuck in a
-      # busy state while detaching.
-      #
-      # If an Amazon EBS volume is the root device of an instance, it can\'t
-      # be detached while the instance is running. To detach the root volume,
-      # stop the instance first.
+      # the volume. Failure to do so can result in the volume becoming stuck
+      # in the `busy` state while detaching. If this happens, detachment can
+      # be delayed indefinitely until you unmount the volume, force
+      # detachment, reboot the instance, or all three. If an EBS volume is the
+      # root device of an instance, it can\'t be detached while the instance
+      # is running. To detach the root volume, stop the instance first.
       #
       # When a volume with an AWS Marketplace product code is detached from an
       # instance, the product code is no longer associated with the instance.
@@ -10003,6 +10171,51 @@ module Aws
         req.send_request(options)
       end
 
+      # Preview a reservation purchase with configurations that match those of
+      # your Dedicated Host. You must have active Dedicated Hosts in your
+      # account before you purchase a reservation.
+      #
+      # This is a preview of the PurchaseHostReservation action and does not
+      # result in the offering being purchased.
+      # @option params [required, String] :offering_id
+      #   The offering ID of the reservation.
+      # @option params [required, Array<String>] :host_id_set
+      #   The ID/s of the Dedicated Host/s that the reservation will be
+      #   associated with.
+      # @return [Types::GetHostReservationPurchasePreviewResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetHostReservationPurchasePreviewResult#purchase #Purchase} => Array&lt;Types::Purchase&gt;
+      #   * {Types::GetHostReservationPurchasePreviewResult#total_upfront_price #TotalUpfrontPrice} => String
+      #   * {Types::GetHostReservationPurchasePreviewResult#total_hourly_price #TotalHourlyPrice} => String
+      #   * {Types::GetHostReservationPurchasePreviewResult#currency_code #CurrencyCode} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_host_reservation_purchase_preview({
+      #     offering_id: "String", # required
+      #     host_id_set: ["String"], # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.purchase #=> Array
+      #   resp.purchase[0].host_reservation_id #=> String
+      #   resp.purchase[0].host_id_set #=> Array
+      #   resp.purchase[0].host_id_set[0] #=> String
+      #   resp.purchase[0].instance_family #=> String
+      #   resp.purchase[0].payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
+      #   resp.purchase[0].upfront_price #=> String
+      #   resp.purchase[0].hourly_price #=> String
+      #   resp.purchase[0].currency_code #=> String, one of "USD"
+      #   resp.purchase[0].duration #=> Integer
+      #   resp.total_upfront_price #=> String
+      #   resp.total_hourly_price #=> String
+      #   resp.currency_code #=> String, one of "USD"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_host_reservation_purchase_preview(params = {}, options = {})
+        req = build_request(:get_host_reservation_purchase_preview, params)
+        req.send_request(options)
+      end
+
       # Retrieves the encrypted administrator password for an instance running
       # Windows.
       #
@@ -10050,7 +10263,13 @@ module Aws
       end
 
       # Import single or multi-volume disk images or EBS snapshots into an
-      # Amazon Machine Image (AMI).
+      # Amazon Machine Image (AMI). For more information, see [Importing a VM
+      # as an Image Using VM Import/Export][1] in the *VM Import/Export User
+      # Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -10066,14 +10285,14 @@ module Aws
       #
       #   **Note:** You may only use BYOL if you have existing licenses with
       #   rights to use these licenses in a third party cloud like AWS. For more
-      #   information, see [VM Import/Export Prerequisites][1] in the *Amazon
-      #   Elastic Compute Cloud User Guide*.
+      #   information, see [Prerequisites][1] in the VM Import/Export User
+      #   Guide.
       #
       #   Valid values: `AWS` \| `BYOL`
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html
+      #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image
       # @option params [String] :hypervisor
       #   The target hypervisor platform.
       #
@@ -10170,18 +10389,15 @@ module Aws
 
       # Creates an import instance task using metadata from the specified disk
       # image. `ImportInstance` only supports single-volume VMs. To import
-      # multi-volume VMs, use ImportImage. After importing the image, you then
-      # upload it using the `ec2-import-volume` command in the EC2 command
-      # line tools. For more information, see [Using the Command Line Tools to
-      # Import Your Virtual Machine to Amazon EC2][1] in the *Amazon Elastic
-      # Compute Cloud User Guide*.
+      # multi-volume VMs, use ImportImage. For more information, see
+      # [Importing a Virtual Machine Using the Amazon EC2 CLI][1].
       #
       # For information about the import manifest referenced by this API
       # action, see [VM Import Manifest][2].
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/ec2-cli-vmimport-export.html
       # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -10392,18 +10608,14 @@ module Aws
       end
 
       # Creates an import volume task using metadata from the specified disk
-      # image. After importing the image, you then upload it using the
-      # `ec2-import-volume` command in the Amazon EC2 command-line interface
-      # (CLI) tools. For more information, see [Using the Command Line Tools
-      # to Import Your Virtual Machine to Amazon EC2][1] in the *Amazon
-      # Elastic Compute Cloud User Guide*.
+      # image.For more information, see [Importing Disks to Amazon EBS][1].
       #
       # For information about the import manifest referenced by this API
       # action, see [VM Import Manifest][2].
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UploadingYourInstancesandVolumes.html
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/CommandLineReference/importing-your-volumes-into-amazon-ebs.html
       # [2]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -10476,16 +10688,16 @@ module Aws
         req.send_request(options)
       end
 
-      # Modify the auto-placement setting of a Dedicated host. When
+      # Modify the auto-placement setting of a Dedicated Host. When
       # auto-placement is enabled, AWS will place instances that you launch
       # with a tenancy of `host`, but without targeting a specific host ID,
-      # onto any available Dedicated host in your account which has
+      # onto any available Dedicated Host in your account which has
       # auto-placement enabled. When auto-placement is disabled, you need to
       # provide a host ID if you want the instance to launch onto a specific
       # host. If no host ID is provided, the instance will be launched onto a
       # suitable host which has auto-placement enabled.
       # @option params [required, Array<String>] :host_ids
-      #   The host IDs of the Dedicated hosts you want to modify.
+      #   The host IDs of the Dedicated Hosts you want to modify.
       # @option params [required, String] :auto_placement
       #   Specify whether to enable or disable auto-placement.
       # @return [Types::ModifyHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -10536,7 +10748,8 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
       # @option params [required, String] :resource
-      #   The type of resource.
+      #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+      #   `volume`
       # @option params [required, Boolean] :use_long_ids
       #   Indicate whether the resource should use longer IDs (17-character
       #   IDs).
@@ -10554,12 +10767,14 @@ module Aws
         req.send_request(options)
       end
 
-      # Modifies the ID format of a resource for the specified IAM user, IAM
-      # role, or root user. You can specify that resources should receive
-      # longer IDs (17-character IDs) when they are created. The following
-      # resource types support longer IDs: `instance` \| `reservation` \|
-      # `snapshot` \| `volume`. For more information, see [Resource IDs][1] in
-      # the *Amazon Elastic Compute Cloud User Guide*.
+      # Modifies the ID format of a resource for a specified IAM user, IAM
+      # role, or the root user for an account; or all IAM users, IAM roles,
+      # and the root user for an account. You can specify that resources
+      # should receive longer IDs (17-character IDs) when they are created.
+      #
+      # The following resource types support longer IDs: `instance` \|
+      # `reservation` \| `snapshot` \| `volume`. For more information, see
+      # [Resource IDs][1] in the *Amazon Elastic Compute Cloud User Guide*.
       #
       # This setting applies to the principal specified in the request; it
       # does not apply to the principal that makes the request.
@@ -10573,13 +10788,15 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resource-ids.html
       # @option params [required, String] :resource
-      #   The type of resource.
+      #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+      #   `volume`
       # @option params [required, Boolean] :use_long_ids
       #   Indicates whether the resource should use longer IDs (17-character
       #   IDs)
       # @option params [required, String] :principal_arn
       #   The ARN of the principal, which can be an IAM user, IAM role, or the
-      #   root user.
+      #   root user. Specify `all` to modify the ID format for all IAM users,
+      #   IAM roles, and the root user of the account.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -10600,6 +10817,13 @@ module Aws
       #
       # <note markdown="1"> AWS Marketplace product codes cannot be modified. Images with an AWS
       # Marketplace product code cannot be made public.
+      #
+      #  </note>
+      #
+      # <note markdown="1"> The SriovNetSupport enhanced networking attribute cannot be changed
+      # using this command. Instead, enable SriovNetSupport on an instance and
+      # create an AMI from the instance. This will result in an image with
+      # SriovNetSupport enabled.
       #
       #  </note>
       # @option params [Boolean] :dry_run
@@ -10821,7 +11045,7 @@ module Aws
       # modify the instance tenancy setting.
       #
       # Instance affinity is disabled by default. When instance affinity is
-      # `host` and it is not associated with a specific Dedicated host, the
+      # `host` and it is not associated with a specific Dedicated Host, the
       # next time it is launched it will automatically be associated with the
       # host it lands on. This relationship will persist if the instance is
       # stopped/started, or rebooted.
@@ -10844,7 +11068,7 @@ module Aws
       # @option params [String] :affinity
       #   The new affinity setting for the instance.
       # @option params [String] :host_id
-      #   The ID of the Dedicated host that the instance will have affinity
+      #   The ID of the Dedicated Host that the instance will have affinity
       #   with.
       # @return [Types::ModifyInstancePlacementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -11247,13 +11471,16 @@ module Aws
       #   instances in your VPC and an EC2-Classic instance that\'s linked to
       #   the peer VPC.
       #
+      # * Enable/disable a local VPC to resolve public DNS hostnames to
+      #   private IP addresses when queried from instances in the peer VPC.
+      #
       # If the peered VPCs are in different accounts, each owner must initiate
-      # a separate request to enable or disable communication in either
-      # direction, depending on whether their VPC was the requester or
-      # accepter for the VPC peering connection. If the peered VPCs are in the
-      # same account, you can modify the requester and accepter options in the
-      # same request. To confirm which VPC is the accepter and requester for a
-      # VPC peering connection, use the DescribeVpcPeeringConnections command.
+      # a separate request to modify the peering connection options, depending
+      # on whether their VPC was the requester or accepter for the VPC peering
+      # connection. If the peered VPCs are in the same account, you can modify
+      # the requester and accepter options in the same request. To confirm
+      # which VPC is the accepter and requester for a VPC peering connection,
+      # use the DescribeVpcPeeringConnections command.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the operation,
       #   without actually making the request, and provides an error response.
@@ -11275,20 +11502,24 @@ module Aws
       #     dry_run: false,
       #     vpc_peering_connection_id: "String", # required
       #     requester_peering_connection_options: {
-      #       allow_egress_from_local_classic_link_to_remote_vpc: false, # required
-      #       allow_egress_from_local_vpc_to_remote_classic_link: false, # required
+      #       allow_egress_from_local_classic_link_to_remote_vpc: false,
+      #       allow_egress_from_local_vpc_to_remote_classic_link: false,
+      #       allow_dns_resolution_from_remote_vpc: false,
       #     },
       #     accepter_peering_connection_options: {
-      #       allow_egress_from_local_classic_link_to_remote_vpc: false, # required
-      #       allow_egress_from_local_vpc_to_remote_classic_link: false, # required
+      #       allow_egress_from_local_classic_link_to_remote_vpc: false,
+      #       allow_egress_from_local_vpc_to_remote_classic_link: false,
+      #       allow_dns_resolution_from_remote_vpc: false,
       #     },
       #   })
       #
       # @example Response structure
       #   resp.requester_peering_connection_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.requester_peering_connection_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.requester_peering_connection_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       #   resp.accepter_peering_connection_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.accepter_peering_connection_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
+      #   resp.accepter_peering_connection_options.allow_dns_resolution_from_remote_vpc #=> Boolean
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def modify_vpc_peering_connection_options(params = {}, options = {})
@@ -11364,6 +11595,74 @@ module Aws
       # @param [Hash] options ({})
       def move_address_to_vpc(params = {}, options = {})
         req = build_request(:move_address_to_vpc, params)
+        req.send_request(options)
+      end
+
+      # Purchase a reservation with configurations that match those of your
+      # Dedicated Host. You must have active Dedicated Hosts in your account
+      # before you purchase a reservation. This action results in the
+      # specified reservation being purchased and charged to your account.
+      # @option params [required, String] :offering_id
+      #   The ID of the offering.
+      # @option params [required, Array<String>] :host_id_set
+      #   The ID/s of the Dedicated Host/s that the reservation will be
+      #   associated with.
+      # @option params [String] :limit_price
+      #   The specified limit is checked against the total upfront cost of the
+      #   reservation (calculated as the offering\'s upfront cost multiplied by
+      #   the host count). If the total upfront cost is greater than the
+      #   specified price limit, the request will fail. This is used to ensure
+      #   that the purchase does not exceed the expected upfront cost of the
+      #   purchase. At this time, the only supported currency is `USD`. For
+      #   example, to indicate a limit price of USD 100, specify 100.00.
+      # @option params [String] :currency_code
+      #   The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
+      #   `totalHourlyPrice` amounts are specified. At this time, the only
+      #   supported currency is `USD`.
+      # @option params [String] :client_token
+      #   Unique, case-sensitive identifier you provide to ensure idempotency of
+      #   the request. For more information, see [How to Ensure Idempotency][1]
+      #   in the *Amazon Elastic Compute Cloud User Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+      # @return [Types::PurchaseHostReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::PurchaseHostReservationResult#purchase #Purchase} => Array&lt;Types::Purchase&gt;
+      #   * {Types::PurchaseHostReservationResult#total_upfront_price #TotalUpfrontPrice} => String
+      #   * {Types::PurchaseHostReservationResult#total_hourly_price #TotalHourlyPrice} => String
+      #   * {Types::PurchaseHostReservationResult#currency_code #CurrencyCode} => String
+      #   * {Types::PurchaseHostReservationResult#client_token #ClientToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.purchase_host_reservation({
+      #     offering_id: "String", # required
+      #     host_id_set: ["String"], # required
+      #     limit_price: "String",
+      #     currency_code: "USD", # accepts USD
+      #     client_token: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.purchase #=> Array
+      #   resp.purchase[0].host_reservation_id #=> String
+      #   resp.purchase[0].host_id_set #=> Array
+      #   resp.purchase[0].host_id_set[0] #=> String
+      #   resp.purchase[0].instance_family #=> String
+      #   resp.purchase[0].payment_option #=> String, one of "AllUpfront", "PartialUpfront", "NoUpfront"
+      #   resp.purchase[0].upfront_price #=> String
+      #   resp.purchase[0].hourly_price #=> String
+      #   resp.purchase[0].currency_code #=> String, one of "USD"
+      #   resp.purchase[0].duration #=> Integer
+      #   resp.total_upfront_price #=> String
+      #   resp.total_hourly_price #=> String
+      #   resp.currency_code #=> String, one of "USD"
+      #   resp.client_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def purchase_host_reservation(params = {}, options = {})
+        req = build_request(:purchase_host_reservation, params)
         req.send_request(options)
       end
 
@@ -11737,20 +12036,21 @@ module Aws
         req.send_request(options)
       end
 
-      # When you no longer want to use a Dedicated host it can be released.
-      # On-Demand billing is stopped and the host goes into `released` state.
-      # The host ID of Dedicated hosts that have been released can no longer
-      # be specified in another request, e.g., ModifyHosts. You must stop or
-      # terminate all instances on a host before it can be released.
+      # When you no longer want to use an On-Demand Dedicated Host it can be
+      # released. On-Demand billing is stopped and the host goes into
+      # `released` state. The host ID of Dedicated Hosts that have been
+      # released can no longer be specified in another request, e.g.,
+      # ModifyHosts. You must stop or terminate all instances on a host before
+      # it can be released.
       #
-      # When Dedicated hosts are released, it make take some time for them to
+      # When Dedicated Hosts are released, it make take some time for them to
       # stop counting toward your limit and you may receive capacity errors
       # when trying to allocate new Dedicated hosts. Try waiting a few
       # minutes, and then try again.
       #
       # Released hosts will still appear in a DescribeHosts response.
       # @option params [required, Array<String>] :host_ids
-      #   The IDs of the Dedicated hosts you want to release.
+      #   The IDs of the Dedicated Hosts you want to release.
       # @return [Types::ReleaseHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ReleaseHostsResult#successful #Successful} => Array&lt;String&gt;
@@ -12923,6 +13223,15 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
       # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   The block device mapping.
+      #
+      #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments for
+      #   block-device mapping results in an error. This is because only blank
+      #   volumes can be encrypted on start, and these are not created from a
+      #   snapshot. If a snapshot is the basis for the volume, it contains data
+      #   by definition and its encryption status cannot be changed using this
+      #   action.
+      #
+      #    </important>
       # @option params [Types::RunInstancesMonitoringEnabled] :monitoring
       #   The monitoring for the instance.
       # @option params [String] :subnet_id
@@ -13190,7 +13499,9 @@ module Aws
       # @option params [required, String] :scheduled_instance_id
       #   The Scheduled Instance ID.
       # @option params [required, Types::ScheduledInstancesLaunchSpecification] :launch_specification
-      #   The launch specification.
+      #   The launch specification. You must match the instance type,
+      #   Availability Zone, network, and platform of the schedule that you
+      #   purchased.
       # @return [Types::RunScheduledInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RunScheduledInstancesResult#instance_id_set #InstanceIdSet} => Array&lt;String&gt;
@@ -13590,6 +13901,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

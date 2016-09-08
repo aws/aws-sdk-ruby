@@ -47,8 +47,13 @@ module Aws
       # of instances being attached plus the desired capacity of the group
       # exceeds the maximum size of the group, the operation fails.
       #
+      # If there is a Classic load balancer attached to your Auto Scaling
+      # group, the instances are also registered with the load balancer. If
+      # there are target groups attached to your Auto Scaling group, the
+      # instances are also registered with the target groups.
+      #
       # For more information, see [Attach EC2 Instances to Your Auto Scaling
-      # Group][1] in the *Auto Scaling Developer Guide*.
+      # Group][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -71,29 +76,63 @@ module Aws
         req.send_request(options)
       end
 
-      # Attaches one or more load balancers to the specified Auto Scaling
+      # Attaches one or more target groups to the specified Auto Scaling
       # group.
+      #
+      # To describe the target groups for an Auto Scaling group, use
+      # DescribeLoadBalancerTargetGroups. To detach the target group from the
+      # Auto Scaling group, use DetachLoadBalancerTargetGroups.
+      #
+      # For more information, see [Attach a Load Balancer to Your Auto Scaling
+      # Group][1] in the *Auto Scaling User Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-load-balancer-asg.html
+      # @option params [required, String] :auto_scaling_group_name
+      #   The name of the Auto Scaling group.
+      # @option params [required, Array<String>] :target_group_arns
+      #   The Amazon Resource Names (ARN) of the target groups.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.attach_load_balancer_target_groups({
+      #     auto_scaling_group_name: "ResourceName", # required
+      #     target_group_arns: ["XmlStringMaxLen511"], # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def attach_load_balancer_target_groups(params = {}, options = {})
+        req = build_request(:attach_load_balancer_target_groups, params)
+        req.send_request(options)
+      end
+
+      # Attaches one or more Classic load balancers to the specified Auto
+      # Scaling group.
+      #
+      # To attach an Application load balancer instead, see
+      # AttachLoadBalancerTargetGroups.
       #
       # To describe the load balancers for an Auto Scaling group, use
       # DescribeLoadBalancers. To detach the load balancer from the Auto
       # Scaling group, use DetachLoadBalancers.
       #
       # For more information, see [Attach a Load Balancer to Your Auto Scaling
-      # Group][1] in the *Auto Scaling Developer Guide*.
+      # Group][1] in the *Auto Scaling User Guide*.
       #
       #
       #
       # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-load-balancer-asg.html
-      # @option params [String] :auto_scaling_group_name
+      # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
-      # @option params [Array<String>] :load_balancer_names
+      # @option params [required, Array<String>] :load_balancer_names
       #   One or more load balancer names.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.attach_load_balancers({
-      #     auto_scaling_group_name: "ResourceName",
-      #     load_balancer_names: ["XmlStringMaxLen255"],
+      #     auto_scaling_group_name: "ResourceName", # required
+      #     load_balancer_names: ["XmlStringMaxLen255"], # required
       #   })
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -111,19 +150,23 @@ module Aws
       # 1.  (Optional) Create a Lambda function and a rule that allows
       #     CloudWatch Events to invoke your Lambda function when Auto Scaling
       #     launches or terminates instances.
+      #
       # 2.  (Optional) Create a notification target and an IAM role. The
       #     target can be either an Amazon SQS queue or an Amazon SNS topic.
       #     The role allows Auto Scaling to publish lifecycle notifications to
       #     the target.
+      #
       # 3.  Create the lifecycle hook. Specify whether the hook is used when
       #     the instances launch or terminate.
+      #
       # 4.  If you need more time, record the lifecycle action heartbeat to
       #     keep the instance in a pending state.
+      #
       # 5.  **If you finish before the timeout period ends, complete the
       #     lifecycle action.**
       #
       # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -166,7 +209,7 @@ module Aws
       # viewing and updating this limit, see DescribeAccountLimits.
       #
       # For more information, see [Auto Scaling Groups][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -188,7 +231,7 @@ module Aws
       #   the exception of the block device mapping.
       #
       #   For more information, see [Create an Auto Scaling Group Using an EC2
-      #   Instance][1] in the *Auto Scaling Developer Guide*.
+      #   Instance][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -206,7 +249,7 @@ module Aws
       #   before another scaling activity can start. The default is 300.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #
@@ -215,21 +258,24 @@ module Aws
       #   One or more Availability Zones for the group. This parameter is
       #   optional if you specify one or more subnets.
       # @option params [Array<String>] :load_balancer_names
-      #   One or more load balancers.
+      #   One or more Classic load balancers. To specify an Application load
+      #   balancer, use `TargetGroupARNs` instead.
       #
       #   For more information, see [Using a Load Balancer With an Auto Scaling
-      #   Group][1] in the *Auto Scaling Developer Guide*.
+      #   Group][1] in the *Auto Scaling User Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html
+      # @option params [Array<String>] :target_group_arns
+      #   The Amazon Resource Names (ARN) of the target groups.
       # @option params [String] :health_check_type
       #   The service to use for the health checks. The valid values are `EC2`
       #   and `ELB`.
       #
       #   By default, health checks use Amazon EC2 instance status checks to
       #   determine the health of an instance. For more information, see [Health
-      #   Checks][1] in the *Auto Scaling Developer Guide*.
+      #   Checks][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -238,12 +284,12 @@ module Aws
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
       #   service. During this time, any health check failures for the instance
-      #   are ignored. The default is 300.
+      #   are ignored. The default is 0.
       #
       #   This parameter is required if you are adding an `ELB` health check.
       #
-      #   For more information, see [Health Checks][1] in the *Auto Scaling
-      #   Developer Guide*.
+      #   For more information, see [Health Checks][1] in the *Auto Scaling User
+      #   Guide*.
       #
       #
       #
@@ -265,7 +311,7 @@ module Aws
       #   specified.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
-      #   VPC][1] in the *Auto Scaling Developer Guide*.
+      #   VPC][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -276,7 +322,7 @@ module Aws
       #   listed.
       #
       #   For more information, see [Controlling Which Instances Auto Scaling
-      #   Terminates During Scale In][1] in the *Auto Scaling Developer Guide*.
+      #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -288,7 +334,7 @@ module Aws
       #   One or more tags.
       #
       #   For more information, see [Tagging Auto Scaling Groups and
-      #   Instances][1] in the *Auto Scaling Developer Guide*.
+      #   Instances][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -306,10 +352,11 @@ module Aws
       #     default_cooldown: 1,
       #     availability_zones: ["XmlStringMaxLen255"],
       #     load_balancer_names: ["XmlStringMaxLen255"],
+      #     target_group_arns: ["XmlStringMaxLen511"],
       #     health_check_type: "XmlStringMaxLen32",
       #     health_check_grace_period: 1,
       #     placement_group: "XmlStringMaxLen255",
-      #     vpc_zone_identifier: "XmlStringMaxLen255",
+      #     vpc_zone_identifier: "XmlStringMaxLen2047",
       #     termination_policies: ["XmlStringMaxLen1600"],
       #     new_instances_protected_from_scale_in: false,
       #     tags: [
@@ -336,7 +383,7 @@ module Aws
       # viewing and updating this limit, see DescribeAccountLimits.
       #
       # For more information, see [Launch Configurations][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -413,7 +460,7 @@ module Aws
       #   same request.
       #
       #   For more information, see [Create a Launch Configuration Using an EC2
-      #   Instance][1] in the *Auto Scaling Developer Guide*.
+      #   Instance][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -439,25 +486,14 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
       # @option params [Types::InstanceMonitoring] :instance_monitoring
-      #   Enables detailed monitoring if it is disabled. Detailed monitoring is
-      #   enabled by default.
-      #
-      #   When detailed monitoring is enabled, Amazon CloudWatch generates
-      #   metrics every minute and your account is charged a fee. When you
-      #   disable detailed monitoring, by specifying `False`, CloudWatch
-      #   generates metrics every 5 minutes. For more information, see
-      #   [Monitoring Your Auto Scaling Instances and Groups][1] in the *Auto
-      #   Scaling Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-instance-monitoring.html
+      #   Enables detailed monitoring (`true`) or basic monitoring (`false`) for
+      #   the Auto Scaling instances.
       # @option params [String] :spot_price
       #   The maximum hourly price to be paid for any Spot Instance launched to
       #   fulfill the request. Spot Instances are launched when the price you
       #   specify exceeds the current Spot market price. For more information,
       #   see [Launching Spot Instances in Your Auto Scaling Group][1] in the
-      #   *Auto Scaling Developer Guide*.
+      #   *Auto Scaling User Guide*.
       #
       #
       #
@@ -471,7 +507,7 @@ module Aws
       #   Scaling to automatically enable applications running on your EC2
       #   instances to securely access other AWS resources. For more
       #   information, see [Launch Auto Scaling Instances with an IAM Role][1]
-      #   in the *Auto Scaling Developer Guide*.
+      #   in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -492,7 +528,7 @@ module Aws
       #   Used for groups that launch instances into a virtual private cloud
       #   (VPC). Specifies whether to assign a public IP address to each
       #   instance. For more information, see [Launching Auto Scaling Instances
-      #   in a VPC][1] in the *Auto Scaling Developer Guide*.
+      #   in a VPC][1] in the *Auto Scaling User Guide*.
       #
       #   If you specify this parameter, be sure to specify at least one subnet
       #   when you create your group.
@@ -518,7 +554,7 @@ module Aws
       #   when you create your group.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
-      #   VPC][1] in the *Auto Scaling Developer Guide*.
+      #   VPC][1] in the *Auto Scaling User Guide*.
       #
       #   Valid values: `default` \| `dedicated`
       #
@@ -578,7 +614,7 @@ module Aws
       # message.
       #
       # For more information, see [Tagging Auto Scaling Groups and
-      # Instances][1] in the *Auto Scaling Developer Guide*.
+      # Instances][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -730,7 +766,7 @@ module Aws
       end
 
       # Deletes the specified scheduled action.
-      # @option params [String] :auto_scaling_group_name
+      # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
       # @option params [required, String] :scheduled_action_name
       #   The name of the action to delete.
@@ -738,7 +774,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_scheduled_action({
-      #     auto_scaling_group_name: "ResourceName",
+      #     auto_scaling_group_name: "ResourceName", # required
       #     scheduled_action_name: "ResourceName", # required
       #   })
       # @param [Hash] params ({})
@@ -815,10 +851,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes one or more Auto Scaling groups. If a list of names is not
-      # provided, the call describes all Auto Scaling groups.
+      # Describes one or more Auto Scaling groups.
       # @option params [Array<String>] :auto_scaling_group_names
-      #   The group names.
+      #   The group names. If you omit this parameter, all Auto Scaling groups
+      #   are described.
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
@@ -849,6 +885,8 @@ module Aws
       #   resp.auto_scaling_groups[0].availability_zones[0] #=> String
       #   resp.auto_scaling_groups[0].load_balancer_names #=> Array
       #   resp.auto_scaling_groups[0].load_balancer_names[0] #=> String
+      #   resp.auto_scaling_groups[0].target_group_arns #=> Array
+      #   resp.auto_scaling_groups[0].target_group_arns[0] #=> String
       #   resp.auto_scaling_groups[0].health_check_type #=> String
       #   resp.auto_scaling_groups[0].health_check_grace_period #=> Integer
       #   resp.auto_scaling_groups[0].instances #=> Array
@@ -885,8 +923,7 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes one or more Auto Scaling instances. If a list is not
-      # provided, the call describes all instances.
+      # Describes one or more Auto Scaling instances.
       # @option params [Array<String>] :instance_ids
       #   The instances to describe; up to 50 instance IDs. If you omit this
       #   parameter, all Auto Scaling instances are described. If you specify an
@@ -940,10 +977,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes one or more launch configurations. If you omit the list of
-      # names, then the call describes all launch configurations.
+      # Describes one or more launch configurations.
       # @option params [Array<String>] :launch_configuration_names
-      #   The launch configuration names.
+      #   The launch configuration names. If you omit this parameter, all launch
+      #   configurations are described.
       # @option params [String] :next_token
       #   The token for the next set of items to return. (You received this
       #   token from a previous call.)
@@ -1021,7 +1058,8 @@ module Aws
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
       # @option params [Array<String>] :lifecycle_hook_names
-      #   The names of one or more lifecycle hooks.
+      #   The names of one or more lifecycle hooks. If you omit this parameter,
+      #   all lifecycle hooks are described.
       # @return [Types::DescribeLifecycleHooksAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeLifecycleHooksAnswer#lifecycle_hooks #LifecycleHooks} => Array&lt;Types::LifecycleHook&gt;
@@ -1050,7 +1088,43 @@ module Aws
         req.send_request(options)
       end
 
+      # Describes the target groups for the specified Auto Scaling group.
+      # @option params [required, String] :auto_scaling_group_name
+      #   The name of the Auto Scaling group.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @option params [Integer] :max_records
+      #   The maximum number of items to return with this call.
+      # @return [Types::DescribeLoadBalancerTargetGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeLoadBalancerTargetGroupsResponse#load_balancer_target_groups #LoadBalancerTargetGroups} => Array&lt;Types::LoadBalancerTargetGroupState&gt;
+      #   * {Types::DescribeLoadBalancerTargetGroupsResponse#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_load_balancer_target_groups({
+      #     auto_scaling_group_name: "ResourceName", # required
+      #     next_token: "XmlString",
+      #     max_records: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.load_balancer_target_groups #=> Array
+      #   resp.load_balancer_target_groups[0].load_balancer_target_group_arn #=> String
+      #   resp.load_balancer_target_groups[0].state #=> String
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_load_balancer_target_groups(params = {}, options = {})
+        req = build_request(:describe_load_balancer_target_groups, params)
+        req.send_request(options)
+      end
+
       # Describes the load balancers for the specified Auto Scaling group.
+      #
+      # Note that this operation describes only Classic load balancers. If you
+      # have Application load balancers, use DescribeLoadBalancerTargetGroups
+      # instead.
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
       # @option params [String] :next_token
@@ -1143,7 +1217,7 @@ module Aws
       #   The name of the group.
       # @option params [Array<String>] :policy_names
       #   One or more policy names or policy ARNs to be described. If you omit
-      #   this list, all policy names are described. If an group name is
+      #   this parameter, all policy names are described. If an group name is
       #   provided, the results are limited to that group. This list is limited
       #   to 50 items. If you specify an unknown policy name, it is ignored with
       #   no error.
@@ -1198,15 +1272,13 @@ module Aws
       end
 
       # Describes one or more scaling activities for the specified Auto
-      # Scaling group. If you omit the `ActivityIds`, the call returns all
-      # activities from the past six weeks. Activities are sorted by the start
-      # time. Activities still in progress appear first on the list.
+      # Scaling group.
       # @option params [Array<String>] :activity_ids
-      #   The activity IDs of the desired scaling activities. If this list is
-      #   omitted, all activities are described. If you specify an Auto Scaling
-      #   group, the results are limited to that group. The list of requested
-      #   activities cannot contain more than 50 items. If unknown activities
-      #   are requested, they are ignored with no error.
+      #   The activity IDs of the desired scaling activities. If you omit this
+      #   parameter, all activities for the past six weeks are described. If you
+      #   specify an Auto Scaling group, the results are limited to that group.
+      #   The list of requested activities cannot contain more than 50 items. If
+      #   unknown activities are requested, they are ignored with no error.
       # @option params [String] :auto_scaling_group_name
       #   The name of the group.
       # @option params [Integer] :max_records
@@ -1269,9 +1341,9 @@ module Aws
       # @option params [String] :auto_scaling_group_name
       #   The name of the group.
       # @option params [Array<String>] :scheduled_action_names
-      #   Describes one or more scheduled actions. If you omit this list, the
-      #   call describes all scheduled actions. If you specify an unknown
-      #   scheduled action it is ignored with no error.
+      #   Describes one or more scheduled actions. If you omit this parameter,
+      #   all scheduled actions are described. If you specify an unknown
+      #   scheduled action, it is ignored with no error.
       #
       #   You can describe up to a maximum of 50 instances with a single call.
       #   If there are more items to return, the call returns a token. To get
@@ -1394,8 +1466,13 @@ module Aws
       # If you do not specify the option to decrement the desired capacity,
       # Auto Scaling launches instances to replace the ones that are detached.
       #
+      # If there is a Classic load balancer attached to the Auto Scaling
+      # group, the instances are deregistered from the load balancer. If there
+      # are target groups attached to the Auto Scaling group, the instances
+      # are deregistered from the target groups.
+      #
       # For more information, see [Detach EC2 Instances from Your Auto Scaling
-      # Group][1] in the *Auto Scaling Developer Guide*.
+      # Group][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -1437,23 +1514,47 @@ module Aws
         req.send_request(options)
       end
 
-      # Removes one or more load balancers from the specified Auto Scaling
+      # Detaches one or more target groups from the specified Auto Scaling
       # group.
+      # @option params [required, String] :auto_scaling_group_name
+      #   The name of the Auto Scaling group.
+      # @option params [required, Array<String>] :target_group_arns
+      #   The Amazon Resource Names (ARN) of the target groups.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.detach_load_balancer_target_groups({
+      #     auto_scaling_group_name: "ResourceName", # required
+      #     target_group_arns: ["XmlStringMaxLen511"], # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def detach_load_balancer_target_groups(params = {}, options = {})
+        req = build_request(:detach_load_balancer_target_groups, params)
+        req.send_request(options)
+      end
+
+      # Detaches one or more Classic load balancers from the specified Auto
+      # Scaling group.
+      #
+      # Note that this operation detaches only Classic load balancers. If you
+      # have Application load balancers, use DetachLoadBalancerTargetGroups
+      # instead.
       #
       # When you detach a load balancer, it enters the `Removing` state while
       # deregistering the instances in the group. When all instances are
       # deregistered, then you can no longer describe the load balancer using
       # DescribeLoadBalancers. Note that the instances remain running.
-      # @option params [String] :auto_scaling_group_name
-      #   The name of the group.
-      # @option params [Array<String>] :load_balancer_names
+      # @option params [required, String] :auto_scaling_group_name
+      #   The name of the Auto Scaling group.
+      # @option params [required, Array<String>] :load_balancer_names
       #   One or more load balancer names.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.detach_load_balancers({
-      #     auto_scaling_group_name: "ResourceName",
-      #     load_balancer_names: ["XmlStringMaxLen255"],
+      #     auto_scaling_group_name: "ResourceName", # required
+      #     load_balancer_names: ["XmlStringMaxLen255"], # required
       #   })
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -1462,8 +1563,7 @@ module Aws
         req.send_request(options)
       end
 
-      # Disables monitoring of the specified metrics for the specified Auto
-      # Scaling group.
+      # Disables group metrics for the specified Auto Scaling group.
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the group.
       # @option params [Array<String>] :metrics
@@ -1499,11 +1599,13 @@ module Aws
         req.send_request(options)
       end
 
-      # Enables monitoring of the specified metrics for the specified Auto
-      # Scaling group.
+      # Enables group metrics for the specified Auto Scaling group. For more
+      # information, see [Monitoring Your Auto Scaling Groups and
+      # Instances][1] in the *Auto Scaling User Guide*.
       #
-      # You can only enable metrics collection if `InstanceMonitoring` in the
-      # launch configuration for the group is set to `True`.
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/userguide/as-instance-monitoring.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name or ARN of the Auto Scaling group.
       # @option params [Array<String>] :metrics
@@ -1525,9 +1627,6 @@ module Aws
       #   * `GroupTerminatingInstances`
       #
       #   * `GroupTotalInstances`
-      #
-      #   Note that the `GroupStandbyInstances` metric is not enabled by
-      #   default. You must explicitly request this metric.
       # @option params [required, String] :granularity
       #   The granularity to associate with the metrics to collect. The only
       #   valid value is `1Minute`.
@@ -1549,7 +1648,7 @@ module Aws
       # Moves the specified instances into `Standby` mode.
       #
       # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -1608,7 +1707,7 @@ module Aws
       #   This parameter is not supported if the policy type is `StepScaling`.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #
@@ -1650,7 +1749,7 @@ module Aws
       # Moves the specified instances out of `Standby` mode.
       #
       # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -1701,24 +1800,28 @@ module Aws
       # 1.  (Optional) Create a Lambda function and a rule that allows
       #     CloudWatch Events to invoke your Lambda function when Auto Scaling
       #     launches or terminates instances.
+      #
       # 2.  (Optional) Create a notification target and an IAM role. The
       #     target can be either an Amazon SQS queue or an Amazon SNS topic.
       #     The role allows Auto Scaling to publish lifecycle notifications to
       #     the target.
+      #
       # 3.  **Create the lifecycle hook. Specify whether the hook is used when
       #     the instances launch or terminate.**
+      #
       # 4.  If you need more time, record the lifecycle action heartbeat to
       #     keep the instance in a pending state.
+      #
       # 5.  If you finish before the timeout period ends, complete the
       #     lifecycle action.
       #
       # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       # If you exceed your maximum limit of lifecycle hooks, which by default
-      # is 50 per region, the call fails. For information about updating this
-      # limit, see [AWS Service Limits][2] in the *Amazon Web Services General
-      # Reference*.
+      # is 50 per Auto Scaling group, the call fails. For information about
+      # updating this limit, see [AWS Service Limits][2] in the *Amazon Web
+      # Services General Reference*.
       #
       #
       #
@@ -1751,11 +1854,17 @@ module Aws
       #   information:
       #
       #   * **AutoScalingGroupName**. The name of the Auto Scaling group.
+      #
       #   * **AccountId**. The AWS account ID.
+      #
       #   * **LifecycleTransition**. The lifecycle hook type.
+      #
       #   * **LifecycleActionToken**. The lifecycle action token.
+      #
       #   * **EC2InstanceId**. The EC2 instance ID.
+      #
       #   * **LifecycleHookName**. The name of the lifecycle hook.
+      #
       #   * **NotificationMetadata**. User-defined information.
       #
       #   This operation uses the JSON format when sending notifications to an
@@ -1800,13 +1909,14 @@ module Aws
       end
 
       # Configures an Auto Scaling group to send notifications when specified
-      # events take place. Subscribers to this topic can have messages for
-      # events delivered to an endpoint such as a web server or email address.
+      # events take place. Subscribers to the specified topic can have
+      # messages delivered to an endpoint such as a web server or an email
+      # address.
       #
-      # For more information see [Getting Notifications When Your Auto Scaling
-      # Group Changes][1] in the *Auto Scaling Developer Guide*.
+      # This configuration overwrites any existing configuration.
       #
-      # This configuration overwrites an existing configuration.
+      # For more information see [Getting SNS Notifications When Your Auto
+      # Scaling Group Scales][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -1860,7 +1970,7 @@ module Aws
       #   `ExactCapacity`, and `PercentChangeInCapacity`.
       #
       #   For more information, see [Dynamic Scaling][1] in the *Auto Scaling
-      #   Developer Guide*.
+      #   User Guide*.
       #
       #
       #
@@ -1889,7 +1999,7 @@ module Aws
       #   `SimpleScaling`.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #
@@ -1952,7 +2062,7 @@ module Aws
       # the affected Auto Scaling group.
       #
       # For more information, see [Scheduled Scaling][1] in the *Auto Scaling
-      # Developer Guide*.
+      # User Guide*.
       #
       #
       #
@@ -2022,19 +2132,23 @@ module Aws
       # 1.  (Optional) Create a Lambda function and a rule that allows
       #     CloudWatch Events to invoke your Lambda function when Auto Scaling
       #     launches or terminates instances.
+      #
       # 2.  (Optional) Create a notification target and an IAM role. The
       #     target can be either an Amazon SQS queue or an Amazon SNS topic.
       #     The role allows Auto Scaling to publish lifecycle notifications to
       #     the target.
+      #
       # 3.  Create the lifecycle hook. Specify whether the hook is used when
       #     the instances launch or terminate.
+      #
       # 4.  **If you need more time, record the lifecycle action heartbeat to
       #     keep the instance in a pending state.**
+      #
       # 5.  If you finish before the timeout period ends, complete the
       #     lifecycle action.
       #
       # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -2069,7 +2183,7 @@ module Aws
       # suspended process, for the specified Auto Scaling group.
       #
       # For more information, see [Suspending and Resuming Auto Scaling
-      # Processes][1] in the *Auto Scaling Developer Guide*.
+      # Processes][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -2077,7 +2191,8 @@ module Aws
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
       # @option params [Array<String>] :scaling_processes
-      #   One or more of the following processes:
+      #   One or more of the following processes. If you omit this parameter,
+      #   all processes are specified.
       #
       #   * `Launch`
       #
@@ -2111,7 +2226,7 @@ module Aws
       # Sets the size of the specified Auto Scaling group.
       #
       # For more information about desired capacity, see [What Is Auto
-      # Scaling?][1] in the *Auto Scaling Developer Guide*.
+      # Scaling?][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -2144,8 +2259,8 @@ module Aws
 
       # Sets the health status of the specified instance.
       #
-      # For more information, see [Health Checks][1] in the *Auto Scaling
-      # Developer Guide*.
+      # For more information, see [Health Checks][1] in the *Auto Scaling User
+      # Guide*.
       #
       #
       #
@@ -2183,7 +2298,7 @@ module Aws
       # Updates the instance protection settings of the specified instances.
       #
       # For more information, see [Instance Protection][1] in the *Auto
-      # Scaling Developer Guide*.
+      # Scaling User Guide*.
       #
       #
       #
@@ -2219,7 +2334,7 @@ module Aws
       # To resume processes that have been suspended, use ResumeProcesses.
       #
       # For more information, see [Suspending and Resuming Auto Scaling
-      # Processes][1] in the *Auto Scaling Developer Guide*.
+      # Processes][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -2227,7 +2342,8 @@ module Aws
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
       # @option params [Array<String>] :scaling_processes
-      #   One or more of the following processes:
+      #   One or more of the following processes. If you omit this parameter,
+      #   all processes are specified.
       #
       #   * `Launch`
       #
@@ -2339,7 +2455,7 @@ module Aws
       #   before another scaling activity can start. The default is 300.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #
@@ -2352,10 +2468,10 @@ module Aws
       # @option params [Integer] :health_check_grace_period
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
-      #   service. The default is 300.
+      #   service. The default is 0.
       #
-      #   For more information, see [Health Checks][1] in the *Auto Scaling
-      #   Developer Guide*.
+      #   For more information, see [Health Checks][1] in the *Auto Scaling User
+      #   Guide*.
       #
       #
       #
@@ -2377,7 +2493,7 @@ module Aws
       #   `AvailabilityZones`.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
-      #   VPC][1] in the *Auto Scaling Developer Guide*.
+      #   VPC][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -2388,7 +2504,7 @@ module Aws
       #   order that they are listed.
       #
       #   For more information, see [Controlling Which Instances Auto Scaling
-      #   Terminates During Scale In][1] in the *Auto Scaling Developer Guide*.
+      #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -2410,7 +2526,7 @@ module Aws
       #     health_check_type: "XmlStringMaxLen32",
       #     health_check_grace_period: 1,
       #     placement_group: "XmlStringMaxLen255",
-      #     vpc_zone_identifier: "XmlStringMaxLen255",
+      #     vpc_zone_identifier: "XmlStringMaxLen2047",
       #     termination_policies: ["XmlStringMaxLen1600"],
       #     new_instances_protected_from_scale_in: false,
       #   })
@@ -2464,6 +2580,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

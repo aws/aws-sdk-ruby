@@ -230,6 +230,15 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
       # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   The block device mapping.
+      #
+      #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments for
+      #   block-device mapping results in an error. This is because only blank
+      #   volumes can be encrypted on start, and these are not created from a
+      #   snapshot. If a snapshot is the basis for the volume, it contains data
+      #   by definition and its encryption status cannot be changed using this
+      #   action.
+      #
+      #    </important>
       # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
       #   The monitoring for the instance.
       # @option options [Boolean] :disable_api_termination

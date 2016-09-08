@@ -31,6 +31,8 @@ module Aws
       AddTagsInput = Shapes::StructureShape.new(name: 'AddTagsInput')
       AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
       AdditionalAttribute = Shapes::StructureShape.new(name: 'AdditionalAttribute')
+      AdditionalAttributeKey = Shapes::StringShape.new(name: 'AdditionalAttributeKey')
+      AdditionalAttributeValue = Shapes::StringShape.new(name: 'AdditionalAttributeValue')
       AdditionalAttributes = Shapes::ListShape.new(name: 'AdditionalAttributes')
       AppCookieStickinessPolicies = Shapes::ListShape.new(name: 'AppCookieStickinessPolicies')
       AppCookieStickinessPolicy = Shapes::StructureShape.new(name: 'AppCookieStickinessPolicy')
@@ -76,6 +78,7 @@ module Aws
       DeleteLoadBalancerListenerOutput = Shapes::StructureShape.new(name: 'DeleteLoadBalancerListenerOutput')
       DeleteLoadBalancerPolicyInput = Shapes::StructureShape.new(name: 'DeleteLoadBalancerPolicyInput')
       DeleteLoadBalancerPolicyOutput = Shapes::StructureShape.new(name: 'DeleteLoadBalancerPolicyOutput')
+      DependencyThrottleException = Shapes::StructureShape.new(name: 'DependencyThrottleException')
       DeregisterEndPointsInput = Shapes::StructureShape.new(name: 'DeregisterEndPointsInput')
       DeregisterEndPointsOutput = Shapes::StructureShape.new(name: 'DeregisterEndPointsOutput')
       DescribeAccessPointsInput = Shapes::StructureShape.new(name: 'DescribeAccessPointsInput')
@@ -173,7 +176,6 @@ module Aws
       SetLoadBalancerPoliciesOfListenerOutput = Shapes::StructureShape.new(name: 'SetLoadBalancerPoliciesOfListenerOutput')
       SourceSecurityGroup = Shapes::StructureShape.new(name: 'SourceSecurityGroup')
       State = Shapes::StringShape.new(name: 'State')
-      StringVal = Shapes::StringShape.new(name: 'StringVal')
       SubnetId = Shapes::StringShape.new(name: 'SubnetId')
       SubnetNotFoundException = Shapes::StructureShape.new(name: 'SubnetNotFoundException')
       Subnets = Shapes::ListShape.new(name: 'Subnets')
@@ -189,6 +191,7 @@ module Aws
       TooManyPoliciesException = Shapes::StructureShape.new(name: 'TooManyPoliciesException')
       TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
       UnhealthyThreshold = Shapes::IntegerShape.new(name: 'UnhealthyThreshold')
+      UnsupportedProtocolException = Shapes::StructureShape.new(name: 'UnsupportedProtocolException')
       VPCId = Shapes::StringShape.new(name: 'VPCId')
 
       AccessLog.add_member(:enabled, Shapes::ShapeRef.new(shape: AccessLogEnabled, required: true, location_name: "Enabled"))
@@ -210,8 +213,8 @@ module Aws
 
       AddTagsOutput.struct_class = Types::AddTagsOutput
 
-      AdditionalAttribute.add_member(:key, Shapes::ShapeRef.new(shape: StringVal, location_name: "Key"))
-      AdditionalAttribute.add_member(:value, Shapes::ShapeRef.new(shape: StringVal, location_name: "Value"))
+      AdditionalAttribute.add_member(:key, Shapes::ShapeRef.new(shape: AdditionalAttributeKey, location_name: "Key"))
+      AdditionalAttribute.add_member(:value, Shapes::ShapeRef.new(shape: AdditionalAttributeValue, location_name: "Value"))
       AdditionalAttribute.struct_class = Types::AdditionalAttribute
 
       AdditionalAttributes.member = Shapes::ShapeRef.new(shape: AdditionalAttribute)
@@ -585,18 +588,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AddTagsInput)
           o.output = Shapes::ShapeRef.new(shape: AddTagsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException, metadata: {
-            "error" => {"code"=>"TooManyTags", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException, metadata: {
-            "error" => {"code"=>"DuplicateTagKeys", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
         end)
 
         api.add_operation(:apply_security_groups_to_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -605,18 +599,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ApplySecurityGroupsToLoadBalancerInput)
           o.output = Shapes::ShapeRef.new(shape: ApplySecurityGroupsToLoadBalancerOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupException, metadata: {
-            "error" => {"code"=>"InvalidSecurityGroup", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupException)
         end)
 
         api.add_operation(:attach_load_balancer_to_subnets, Seahorse::Model::Operation.new.tap do |o|
@@ -625,22 +610,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AttachLoadBalancerToSubnetsInput)
           o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancerToSubnetsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: SubnetNotFoundException, metadata: {
-            "error" => {"code"=>"SubnetNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetException, metadata: {
-            "error" => {"code"=>"InvalidSubnet", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: SubnetNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetException)
         end)
 
         api.add_operation(:configure_health_check, Seahorse::Model::Operation.new.tap do |o|
@@ -649,10 +622,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ConfigureHealthCheckInput)
           o.output = Shapes::ShapeRef.new(shape: ConfigureHealthCheckOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
         end)
 
         api.add_operation(:create_app_cookie_stickiness_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -661,22 +631,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateAppCookieStickinessPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: CreateAppCookieStickinessPolicyOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DuplicatePolicyNameException, metadata: {
-            "error" => {"code"=>"DuplicatePolicyName", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TooManyPoliciesException, metadata: {
-            "error" => {"code"=>"TooManyPolicies", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicatePolicyNameException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyPoliciesException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:create_lb_cookie_stickiness_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -685,22 +643,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateLBCookieStickinessPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: CreateLBCookieStickinessPolicyOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DuplicatePolicyNameException, metadata: {
-            "error" => {"code"=>"DuplicatePolicyName", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TooManyPoliciesException, metadata: {
-            "error" => {"code"=>"TooManyPolicies", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicatePolicyNameException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyPoliciesException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:create_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -709,46 +655,17 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateAccessPointInput)
           o.output = Shapes::ShapeRef.new(shape: CreateAccessPointOutput)
-          o.errors << Shapes::ShapeRef.new(shape: DuplicateAccessPointNameException, metadata: {
-            "error" => {"code"=>"DuplicateLoadBalancerName", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TooManyAccessPointsException, metadata: {
-            "error" => {"code"=>"TooManyLoadBalancers", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException, metadata: {
-            "error" => {"code"=>"CertificateNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: SubnetNotFoundException, metadata: {
-            "error" => {"code"=>"SubnetNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetException, metadata: {
-            "error" => {"code"=>"InvalidSubnet", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupException, metadata: {
-            "error" => {"code"=>"InvalidSecurityGroup", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidSchemeException, metadata: {
-            "error" => {"code"=>"InvalidScheme", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException, metadata: {
-            "error" => {"code"=>"TooManyTags", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException, metadata: {
-            "error" => {"code"=>"DuplicateTagKeys", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: DuplicateAccessPointNameException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyAccessPointsException)
+          o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: SubnetNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidSchemeException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         end)
 
         api.add_operation(:create_load_balancer_listeners, Seahorse::Model::Operation.new.tap do |o|
@@ -757,22 +674,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateLoadBalancerListenerInput)
           o.output = Shapes::ShapeRef.new(shape: CreateLoadBalancerListenerOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DuplicateListenerException, metadata: {
-            "error" => {"code"=>"DuplicateListener", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException, metadata: {
-            "error" => {"code"=>"CertificateNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicateListenerException)
+          o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         end)
 
         api.add_operation(:create_load_balancer_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -781,26 +687,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateLoadBalancerPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: CreateLoadBalancerPolicyOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotFoundException, metadata: {
-            "error" => {"code"=>"PolicyTypeNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DuplicatePolicyNameException, metadata: {
-            "error" => {"code"=>"DuplicatePolicyName", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TooManyPoliciesException, metadata: {
-            "error" => {"code"=>"TooManyPolicies", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicatePolicyNameException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyPoliciesException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:delete_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -817,10 +708,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteLoadBalancerListenerInput)
           o.output = Shapes::ShapeRef.new(shape: DeleteLoadBalancerListenerOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
         end)
 
         api.add_operation(:delete_load_balancer_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -829,14 +717,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteLoadBalancerPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: DeleteLoadBalancerPolicyOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:deregister_instances_from_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -845,14 +727,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeregisterEndPointsInput)
           o.output = Shapes::ShapeRef.new(shape: DeregisterEndPointsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException, metadata: {
-            "error" => {"code"=>"InvalidInstance", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException)
         end)
 
         api.add_operation(:describe_instance_health, Seahorse::Model::Operation.new.tap do |o|
@@ -861,14 +737,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeEndPointStateInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeEndPointStateOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException, metadata: {
-            "error" => {"code"=>"InvalidInstance", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException)
           o[:pager] = Aws::Pager.new("result_key" => "InstanceStates")
         end)
 
@@ -878,14 +748,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeLoadBalancerAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerAttributesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LoadBalancerAttributeNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerAttributeNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LoadBalancerAttributeNotFoundException)
         end)
 
         api.add_operation(:describe_load_balancer_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -894,14 +758,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeLoadBalancerPoliciesInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerPoliciesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException, metadata: {
-            "error" => {"code"=>"PolicyNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
           o[:pager] = Aws::Pager.new("result_key" => "PolicyDescriptions")
         end)
 
@@ -911,10 +769,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeLoadBalancerPolicyTypesInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerPolicyTypesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotFoundException, metadata: {
-            "error" => {"code"=>"PolicyTypeNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotFoundException)
           o[:pager] = Aws::Pager.new("result_key" => "PolicyTypeDescriptions")
         end)
 
@@ -924,10 +779,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAccessPointsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeAccessPointsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: DependencyThrottleException)
           o[:pager] = Aws::Pager.new(
             "input_token" => "Marker",
             "output_token" => "NextMarker",
@@ -941,10 +794,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeTagsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeTagsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
         end)
 
         api.add_operation(:detach_load_balancer_from_subnets, Seahorse::Model::Operation.new.tap do |o|
@@ -953,14 +803,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DetachLoadBalancerFromSubnetsInput)
           o.output = Shapes::ShapeRef.new(shape: DetachLoadBalancerFromSubnetsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:disable_availability_zones_for_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -969,14 +813,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: RemoveAvailabilityZonesInput)
           o.output = Shapes::ShapeRef.new(shape: RemoveAvailabilityZonesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:enable_availability_zones_for_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -985,10 +823,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AddAvailabilityZonesInput)
           o.output = Shapes::ShapeRef.new(shape: AddAvailabilityZonesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
         end)
 
         api.add_operation(:modify_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -997,18 +832,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ModifyLoadBalancerAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: ModifyLoadBalancerAttributesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LoadBalancerAttributeNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerAttributeNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LoadBalancerAttributeNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:register_instances_with_load_balancer, Seahorse::Model::Operation.new.tap do |o|
@@ -1017,14 +843,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: RegisterEndPointsInput)
           o.output = Shapes::ShapeRef.new(shape: RegisterEndPointsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException, metadata: {
-            "error" => {"code"=>"InvalidInstance", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException)
         end)
 
         api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -1033,10 +853,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: RemoveTagsInput)
           o.output = Shapes::ShapeRef.new(shape: RemoveTagsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
         end)
 
         api.add_operation(:set_load_balancer_listener_ssl_certificate, Seahorse::Model::Operation.new.tap do |o|
@@ -1045,22 +862,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SetLoadBalancerListenerSSLCertificateInput)
           o.output = Shapes::ShapeRef.new(shape: SetLoadBalancerListenerSSLCertificateOutput)
-          o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException, metadata: {
-            "error" => {"code"=>"CertificateNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException, metadata: {
-            "error" => {"code"=>"ListenerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedProtocolException)
         end)
 
         api.add_operation(:set_load_balancer_policies_for_backend_server, Seahorse::Model::Operation.new.tap do |o|
@@ -1069,18 +875,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SetLoadBalancerPoliciesForBackendServerInput)
           o.output = Shapes::ShapeRef.new(shape: SetLoadBalancerPoliciesForBackendServerOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException, metadata: {
-            "error" => {"code"=>"PolicyNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
 
         api.add_operation(:set_load_balancer_policies_of_listener, Seahorse::Model::Operation.new.tap do |o|
@@ -1089,22 +886,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SetLoadBalancerPoliciesOfListenerInput)
           o.output = Shapes::ShapeRef.new(shape: SetLoadBalancerPoliciesOfListenerOutput)
-          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException, metadata: {
-            "error" => {"code"=>"LoadBalancerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException, metadata: {
-            "error" => {"code"=>"PolicyNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException, metadata: {
-            "error" => {"code"=>"ListenerNotFound", "httpStatusCode"=>400, "senderFault"=>true},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException, metadata: {
-            "error" => {"code"=>"InvalidConfigurationRequest", "httpStatusCode"=>409, "senderFault"=>true},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationRequestException)
         end)
       end
 

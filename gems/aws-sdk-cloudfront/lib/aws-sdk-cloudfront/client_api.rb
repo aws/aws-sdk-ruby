@@ -46,10 +46,14 @@ module Aws
       CreateCloudFrontOriginAccessIdentityResult = Shapes::StructureShape.new(name: 'CreateCloudFrontOriginAccessIdentityResult')
       CreateDistributionRequest = Shapes::StructureShape.new(name: 'CreateDistributionRequest')
       CreateDistributionResult = Shapes::StructureShape.new(name: 'CreateDistributionResult')
+      CreateDistributionWithTagsRequest = Shapes::StructureShape.new(name: 'CreateDistributionWithTagsRequest')
+      CreateDistributionWithTagsResult = Shapes::StructureShape.new(name: 'CreateDistributionWithTagsResult')
       CreateInvalidationRequest = Shapes::StructureShape.new(name: 'CreateInvalidationRequest')
       CreateInvalidationResult = Shapes::StructureShape.new(name: 'CreateInvalidationResult')
       CreateStreamingDistributionRequest = Shapes::StructureShape.new(name: 'CreateStreamingDistributionRequest')
       CreateStreamingDistributionResult = Shapes::StructureShape.new(name: 'CreateStreamingDistributionResult')
+      CreateStreamingDistributionWithTagsRequest = Shapes::StructureShape.new(name: 'CreateStreamingDistributionWithTagsRequest')
+      CreateStreamingDistributionWithTagsResult = Shapes::StructureShape.new(name: 'CreateStreamingDistributionWithTagsResult')
       CustomErrorResponse = Shapes::StructureShape.new(name: 'CustomErrorResponse')
       CustomErrorResponseList = Shapes::ListShape.new(name: 'CustomErrorResponseList')
       CustomErrorResponses = Shapes::StructureShape.new(name: 'CustomErrorResponses')
@@ -62,6 +66,7 @@ module Aws
       Distribution = Shapes::StructureShape.new(name: 'Distribution')
       DistributionAlreadyExists = Shapes::StructureShape.new(name: 'DistributionAlreadyExists')
       DistributionConfig = Shapes::StructureShape.new(name: 'DistributionConfig')
+      DistributionConfigWithTags = Shapes::StructureShape.new(name: 'DistributionConfigWithTags')
       DistributionList = Shapes::StructureShape.new(name: 'DistributionList')
       DistributionNotDisabled = Shapes::StructureShape.new(name: 'DistributionNotDisabled')
       DistributionSummary = Shapes::StructureShape.new(name: 'DistributionSummary')
@@ -99,10 +104,12 @@ module Aws
       InvalidOrigin = Shapes::StructureShape.new(name: 'InvalidOrigin')
       InvalidOriginAccessIdentity = Shapes::StructureShape.new(name: 'InvalidOriginAccessIdentity')
       InvalidProtocolSettings = Shapes::StructureShape.new(name: 'InvalidProtocolSettings')
+      InvalidQueryStringParameters = Shapes::StructureShape.new(name: 'InvalidQueryStringParameters')
       InvalidRelativePath = Shapes::StructureShape.new(name: 'InvalidRelativePath')
       InvalidRequiredProtocol = Shapes::StructureShape.new(name: 'InvalidRequiredProtocol')
       InvalidResponseCode = Shapes::StructureShape.new(name: 'InvalidResponseCode')
       InvalidTTLOrder = Shapes::StructureShape.new(name: 'InvalidTTLOrder')
+      InvalidTagging = Shapes::StructureShape.new(name: 'InvalidTagging')
       InvalidViewerCertificate = Shapes::StructureShape.new(name: 'InvalidViewerCertificate')
       InvalidWebACLId = Shapes::StructureShape.new(name: 'InvalidWebACLId')
       Invalidation = Shapes::StructureShape.new(name: 'Invalidation')
@@ -123,6 +130,8 @@ module Aws
       ListInvalidationsResult = Shapes::StructureShape.new(name: 'ListInvalidationsResult')
       ListStreamingDistributionsRequest = Shapes::StructureShape.new(name: 'ListStreamingDistributionsRequest')
       ListStreamingDistributionsResult = Shapes::StructureShape.new(name: 'ListStreamingDistributionsResult')
+      ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+      ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
       LocationList = Shapes::ListShape.new(name: 'LocationList')
       LoggingConfig = Shapes::StructureShape.new(name: 'LoggingConfig')
       Method = Shapes::StringShape.new(name: 'Method')
@@ -133,6 +142,7 @@ module Aws
       NoSuchDistribution = Shapes::StructureShape.new(name: 'NoSuchDistribution')
       NoSuchInvalidation = Shapes::StructureShape.new(name: 'NoSuchInvalidation')
       NoSuchOrigin = Shapes::StructureShape.new(name: 'NoSuchOrigin')
+      NoSuchResource = Shapes::StructureShape.new(name: 'NoSuchResource')
       NoSuchStreamingDistribution = Shapes::StructureShape.new(name: 'NoSuchStreamingDistribution')
       Origin = Shapes::StructureShape.new(name: 'Origin')
       OriginCustomHeader = Shapes::StructureShape.new(name: 'OriginCustomHeader')
@@ -145,6 +155,9 @@ module Aws
       Paths = Shapes::StructureShape.new(name: 'Paths')
       PreconditionFailed = Shapes::StructureShape.new(name: 'PreconditionFailed')
       PriceClass = Shapes::StringShape.new(name: 'PriceClass')
+      QueryStringCacheKeys = Shapes::StructureShape.new(name: 'QueryStringCacheKeys')
+      QueryStringCacheKeysList = Shapes::ListShape.new(name: 'QueryStringCacheKeysList')
+      ResourceARN = Shapes::StringShape.new(name: 'ResourceARN')
       Restrictions = Shapes::StructureShape.new(name: 'Restrictions')
       S3Origin = Shapes::StructureShape.new(name: 'S3Origin')
       S3OriginConfig = Shapes::StructureShape.new(name: 'S3OriginConfig')
@@ -156,11 +169,20 @@ module Aws
       StreamingDistribution = Shapes::StructureShape.new(name: 'StreamingDistribution')
       StreamingDistributionAlreadyExists = Shapes::StructureShape.new(name: 'StreamingDistributionAlreadyExists')
       StreamingDistributionConfig = Shapes::StructureShape.new(name: 'StreamingDistributionConfig')
+      StreamingDistributionConfigWithTags = Shapes::StructureShape.new(name: 'StreamingDistributionConfigWithTags')
       StreamingDistributionList = Shapes::StructureShape.new(name: 'StreamingDistributionList')
       StreamingDistributionNotDisabled = Shapes::StructureShape.new(name: 'StreamingDistributionNotDisabled')
       StreamingDistributionSummary = Shapes::StructureShape.new(name: 'StreamingDistributionSummary')
       StreamingDistributionSummaryList = Shapes::ListShape.new(name: 'StreamingDistributionSummaryList')
       StreamingLoggingConfig = Shapes::StructureShape.new(name: 'StreamingLoggingConfig')
+      Tag = Shapes::StructureShape.new(name: 'Tag')
+      TagKey = Shapes::StringShape.new(name: 'TagKey')
+      TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+      TagKeys = Shapes::StructureShape.new(name: 'TagKeys')
+      TagList = Shapes::ListShape.new(name: 'TagList')
+      TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+      TagValue = Shapes::StringShape.new(name: 'TagValue')
+      Tags = Shapes::StructureShape.new(name: 'Tags')
       TooManyCacheBehaviors = Shapes::StructureShape.new(name: 'TooManyCacheBehaviors')
       TooManyCertificates = Shapes::StructureShape.new(name: 'TooManyCertificates')
       TooManyCloudFrontOriginAccessIdentities = Shapes::StructureShape.new(name: 'TooManyCloudFrontOriginAccessIdentities')
@@ -171,11 +193,13 @@ module Aws
       TooManyInvalidationsInProgress = Shapes::StructureShape.new(name: 'TooManyInvalidationsInProgress')
       TooManyOriginCustomHeaders = Shapes::StructureShape.new(name: 'TooManyOriginCustomHeaders')
       TooManyOrigins = Shapes::StructureShape.new(name: 'TooManyOrigins')
+      TooManyQueryStringParameters = Shapes::StructureShape.new(name: 'TooManyQueryStringParameters')
       TooManyStreamingDistributionCNAMEs = Shapes::StructureShape.new(name: 'TooManyStreamingDistributionCNAMEs')
       TooManyStreamingDistributions = Shapes::StructureShape.new(name: 'TooManyStreamingDistributions')
       TooManyTrustedSigners = Shapes::StructureShape.new(name: 'TooManyTrustedSigners')
       TrustedSignerDoesNotExist = Shapes::StructureShape.new(name: 'TrustedSignerDoesNotExist')
       TrustedSigners = Shapes::StructureShape.new(name: 'TrustedSigners')
+      UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
       UpdateCloudFrontOriginAccessIdentityRequest = Shapes::StructureShape.new(name: 'UpdateCloudFrontOriginAccessIdentityRequest')
       UpdateCloudFrontOriginAccessIdentityResult = Shapes::StructureShape.new(name: 'UpdateCloudFrontOriginAccessIdentityResult')
       UpdateDistributionRequest = Shapes::StructureShape.new(name: 'UpdateDistributionRequest')
@@ -265,7 +289,7 @@ module Aws
       CookiePreference.add_member(:whitelisted_names, Shapes::ShapeRef.new(shape: CookieNames, location_name: "WhitelistedNames"))
       CookiePreference.struct_class = Types::CookiePreference
 
-      CreateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-01-28/"}}))
+      CreateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
       CreateCloudFrontOriginAccessIdentityRequest.struct_class = Types::CreateCloudFrontOriginAccessIdentityRequest
       CreateCloudFrontOriginAccessIdentityRequest[:payload] = :cloud_front_origin_access_identity_config
       CreateCloudFrontOriginAccessIdentityRequest[:payload_member] = CreateCloudFrontOriginAccessIdentityRequest.member(:cloud_front_origin_access_identity_config)
@@ -277,7 +301,7 @@ module Aws
       CreateCloudFrontOriginAccessIdentityResult[:payload] = :cloud_front_origin_access_identity
       CreateCloudFrontOriginAccessIdentityResult[:payload_member] = CreateCloudFrontOriginAccessIdentityResult.member(:cloud_front_origin_access_identity)
 
-      CreateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-01-28/"}}))
+      CreateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
       CreateDistributionRequest.struct_class = Types::CreateDistributionRequest
       CreateDistributionRequest[:payload] = :distribution_config
       CreateDistributionRequest[:payload_member] = CreateDistributionRequest.member(:distribution_config)
@@ -289,8 +313,20 @@ module Aws
       CreateDistributionResult[:payload] = :distribution
       CreateDistributionResult[:payload_member] = CreateDistributionResult.member(:distribution)
 
+      CreateDistributionWithTagsRequest.add_member(:distribution_config_with_tags, Shapes::ShapeRef.new(shape: DistributionConfigWithTags, required: true, location_name: "DistributionConfigWithTags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
+      CreateDistributionWithTagsRequest.struct_class = Types::CreateDistributionWithTagsRequest
+      CreateDistributionWithTagsRequest[:payload] = :distribution_config_with_tags
+      CreateDistributionWithTagsRequest[:payload_member] = CreateDistributionWithTagsRequest.member(:distribution_config_with_tags)
+
+      CreateDistributionWithTagsResult.add_member(:distribution, Shapes::ShapeRef.new(shape: Distribution, location_name: "Distribution"))
+      CreateDistributionWithTagsResult.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
+      CreateDistributionWithTagsResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+      CreateDistributionWithTagsResult.struct_class = Types::CreateDistributionWithTagsResult
+      CreateDistributionWithTagsResult[:payload] = :distribution
+      CreateDistributionWithTagsResult[:payload_member] = CreateDistributionWithTagsResult.member(:distribution)
+
       CreateInvalidationRequest.add_member(:distribution_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "DistributionId"))
-      CreateInvalidationRequest.add_member(:invalidation_batch, Shapes::ShapeRef.new(shape: InvalidationBatch, required: true, location_name: "InvalidationBatch", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-01-28/"}}))
+      CreateInvalidationRequest.add_member(:invalidation_batch, Shapes::ShapeRef.new(shape: InvalidationBatch, required: true, location_name: "InvalidationBatch", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
       CreateInvalidationRequest.struct_class = Types::CreateInvalidationRequest
       CreateInvalidationRequest[:payload] = :invalidation_batch
       CreateInvalidationRequest[:payload_member] = CreateInvalidationRequest.member(:invalidation_batch)
@@ -301,7 +337,7 @@ module Aws
       CreateInvalidationResult[:payload] = :invalidation
       CreateInvalidationResult[:payload_member] = CreateInvalidationResult.member(:invalidation)
 
-      CreateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-01-28/"}}))
+      CreateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
       CreateStreamingDistributionRequest.struct_class = Types::CreateStreamingDistributionRequest
       CreateStreamingDistributionRequest[:payload] = :streaming_distribution_config
       CreateStreamingDistributionRequest[:payload_member] = CreateStreamingDistributionRequest.member(:streaming_distribution_config)
@@ -312,6 +348,18 @@ module Aws
       CreateStreamingDistributionResult.struct_class = Types::CreateStreamingDistributionResult
       CreateStreamingDistributionResult[:payload] = :streaming_distribution
       CreateStreamingDistributionResult[:payload_member] = CreateStreamingDistributionResult.member(:streaming_distribution)
+
+      CreateStreamingDistributionWithTagsRequest.add_member(:streaming_distribution_config_with_tags, Shapes::ShapeRef.new(shape: StreamingDistributionConfigWithTags, required: true, location_name: "StreamingDistributionConfigWithTags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
+      CreateStreamingDistributionWithTagsRequest.struct_class = Types::CreateStreamingDistributionWithTagsRequest
+      CreateStreamingDistributionWithTagsRequest[:payload] = :streaming_distribution_config_with_tags
+      CreateStreamingDistributionWithTagsRequest[:payload_member] = CreateStreamingDistributionWithTagsRequest.member(:streaming_distribution_config_with_tags)
+
+      CreateStreamingDistributionWithTagsResult.add_member(:streaming_distribution, Shapes::ShapeRef.new(shape: StreamingDistribution, location_name: "StreamingDistribution"))
+      CreateStreamingDistributionWithTagsResult.add_member(:location, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "Location"))
+      CreateStreamingDistributionWithTagsResult.add_member(:etag, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "ETag"))
+      CreateStreamingDistributionWithTagsResult.struct_class = Types::CreateStreamingDistributionWithTagsResult
+      CreateStreamingDistributionWithTagsResult[:payload] = :streaming_distribution
+      CreateStreamingDistributionWithTagsResult[:payload_member] = CreateStreamingDistributionWithTagsResult.member(:streaming_distribution)
 
       CustomErrorResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "ErrorCode"))
       CustomErrorResponse.add_member(:response_page_path, Shapes::ShapeRef.new(shape: string, location_name: "ResponsePagePath"))
@@ -360,6 +408,7 @@ module Aws
       DeleteStreamingDistributionRequest.struct_class = Types::DeleteStreamingDistributionRequest
 
       Distribution.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+      Distribution.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
       Distribution.add_member(:status, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Status"))
       Distribution.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
       Distribution.add_member(:in_progress_invalidation_batches, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "InProgressInvalidationBatches"))
@@ -384,6 +433,10 @@ module Aws
       DistributionConfig.add_member(:web_acl_id, Shapes::ShapeRef.new(shape: string, location_name: "WebACLId"))
       DistributionConfig.struct_class = Types::DistributionConfig
 
+      DistributionConfigWithTags.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig"))
+      DistributionConfigWithTags.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+      DistributionConfigWithTags.struct_class = Types::DistributionConfigWithTags
+
       DistributionList.add_member(:marker, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Marker"))
       DistributionList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
       DistributionList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
@@ -393,6 +446,7 @@ module Aws
       DistributionList.struct_class = Types::DistributionList
 
       DistributionSummary.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+      DistributionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
       DistributionSummary.add_member(:status, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Status"))
       DistributionSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
       DistributionSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "DomainName"))
@@ -414,6 +468,7 @@ module Aws
       ForwardedValues.add_member(:query_string, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "QueryString"))
       ForwardedValues.add_member(:cookies, Shapes::ShapeRef.new(shape: CookiePreference, required: true, location_name: "Cookies"))
       ForwardedValues.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, location_name: "Headers"))
+      ForwardedValues.add_member(:query_string_cache_keys, Shapes::ShapeRef.new(shape: QueryStringCacheKeys, location_name: "QueryStringCacheKeys"))
       ForwardedValues.struct_class = Types::ForwardedValues
 
       GeoRestriction.add_member(:restriction_type, Shapes::ShapeRef.new(shape: GeoRestrictionType, required: true, location_name: "RestrictionType"))
@@ -568,6 +623,14 @@ module Aws
       ListStreamingDistributionsResult[:payload] = :streaming_distribution_list
       ListStreamingDistributionsResult[:payload_member] = ListStreamingDistributionsResult.member(:streaming_distribution_list)
 
+      ListTagsForResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "querystring", location_name: "Resource"))
+      ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+      ListTagsForResourceResult.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+      ListTagsForResourceResult.struct_class = Types::ListTagsForResourceResult
+      ListTagsForResourceResult[:payload] = :tags
+      ListTagsForResourceResult[:payload_member] = ListTagsForResourceResult.member(:tags)
+
       LocationList.member = Shapes::ShapeRef.new(shape: string, location_name: "Location")
 
       LoggingConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
@@ -608,6 +671,12 @@ module Aws
       Paths.add_member(:items, Shapes::ShapeRef.new(shape: PathList, location_name: "Items"))
       Paths.struct_class = Types::Paths
 
+      QueryStringCacheKeys.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
+      QueryStringCacheKeys.add_member(:items, Shapes::ShapeRef.new(shape: QueryStringCacheKeysList, location_name: "Items"))
+      QueryStringCacheKeys.struct_class = Types::QueryStringCacheKeys
+
+      QueryStringCacheKeysList.member = Shapes::ShapeRef.new(shape: string, location_name: "Name")
+
       Restrictions.add_member(:geo_restriction, Shapes::ShapeRef.new(shape: GeoRestriction, required: true, location_name: "GeoRestriction"))
       Restrictions.struct_class = Types::Restrictions
 
@@ -627,6 +696,7 @@ module Aws
       SslProtocolsList.member = Shapes::ShapeRef.new(shape: SslProtocol, location_name: "SslProtocol")
 
       StreamingDistribution.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+      StreamingDistribution.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
       StreamingDistribution.add_member(:status, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Status"))
       StreamingDistribution.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastModifiedTime"))
       StreamingDistribution.add_member(:domain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "DomainName"))
@@ -644,6 +714,10 @@ module Aws
       StreamingDistributionConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
       StreamingDistributionConfig.struct_class = Types::StreamingDistributionConfig
 
+      StreamingDistributionConfigWithTags.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig"))
+      StreamingDistributionConfigWithTags.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
+      StreamingDistributionConfigWithTags.struct_class = Types::StreamingDistributionConfigWithTags
+
       StreamingDistributionList.add_member(:marker, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Marker"))
       StreamingDistributionList.add_member(:next_marker, Shapes::ShapeRef.new(shape: string, location_name: "NextMarker"))
       StreamingDistributionList.add_member(:max_items, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "MaxItems"))
@@ -653,6 +727,7 @@ module Aws
       StreamingDistributionList.struct_class = Types::StreamingDistributionList
 
       StreamingDistributionSummary.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Id"))
+      StreamingDistributionSummary.add_member(:arn, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ARN"))
       StreamingDistributionSummary.add_member(:status, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Status"))
       StreamingDistributionSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastModifiedTime"))
       StreamingDistributionSummary.add_member(:domain_name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "DomainName"))
@@ -671,12 +746,38 @@ module Aws
       StreamingLoggingConfig.add_member(:prefix, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Prefix"))
       StreamingLoggingConfig.struct_class = Types::StreamingLoggingConfig
 
+      Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
+      Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
+      Tag.struct_class = Types::Tag
+
+      TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey, location_name: "Key")
+
+      TagKeys.add_member(:items, Shapes::ShapeRef.new(shape: TagKeyList, location_name: "Items"))
+      TagKeys.struct_class = Types::TagKeys
+
+      TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "Tag")
+
+      TagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "querystring", location_name: "Resource"))
+      TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
+      TagResourceRequest.struct_class = Types::TagResourceRequest
+      TagResourceRequest[:payload] = :tags
+      TagResourceRequest[:payload_member] = TagResourceRequest.member(:tags)
+
+      Tags.add_member(:items, Shapes::ShapeRef.new(shape: TagList, location_name: "Items"))
+      Tags.struct_class = Types::Tags
+
       TrustedSigners.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
       TrustedSigners.add_member(:quantity, Shapes::ShapeRef.new(shape: integer, required: true, location_name: "Quantity"))
       TrustedSigners.add_member(:items, Shapes::ShapeRef.new(shape: AwsAccountNumberList, location_name: "Items"))
       TrustedSigners.struct_class = Types::TrustedSigners
 
-      UpdateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-01-28/"}}))
+      UntagResourceRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceARN, required: true, location: "querystring", location_name: "Resource"))
+      UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
+      UntagResourceRequest.struct_class = Types::UntagResourceRequest
+      UntagResourceRequest[:payload] = :tag_keys
+      UntagResourceRequest[:payload_member] = UntagResourceRequest.member(:tag_keys)
+
+      UpdateCloudFrontOriginAccessIdentityRequest.add_member(:cloud_front_origin_access_identity_config, Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityConfig, required: true, location_name: "CloudFrontOriginAccessIdentityConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
       UpdateCloudFrontOriginAccessIdentityRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
       UpdateCloudFrontOriginAccessIdentityRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
       UpdateCloudFrontOriginAccessIdentityRequest.struct_class = Types::UpdateCloudFrontOriginAccessIdentityRequest
@@ -689,7 +790,7 @@ module Aws
       UpdateCloudFrontOriginAccessIdentityResult[:payload] = :cloud_front_origin_access_identity
       UpdateCloudFrontOriginAccessIdentityResult[:payload_member] = UpdateCloudFrontOriginAccessIdentityResult.member(:cloud_front_origin_access_identity)
 
-      UpdateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-01-28/"}}))
+      UpdateDistributionRequest.add_member(:distribution_config, Shapes::ShapeRef.new(shape: DistributionConfig, required: true, location_name: "DistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
       UpdateDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
       UpdateDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
       UpdateDistributionRequest.struct_class = Types::UpdateDistributionRequest
@@ -702,7 +803,7 @@ module Aws
       UpdateDistributionResult[:payload] = :distribution
       UpdateDistributionResult[:payload_member] = UpdateDistributionResult.member(:distribution)
 
-      UpdateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-01-28/"}}))
+      UpdateStreamingDistributionRequest.add_member(:streaming_distribution_config, Shapes::ShapeRef.new(shape: StreamingDistributionConfig, required: true, location_name: "StreamingDistributionConfig", metadata: {"xmlNamespace"=>{"uri"=>"http://cloudfront.amazonaws.com/doc/2016-08-20/"}}))
       UpdateStreamingDistributionRequest.add_member(:id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "Id"))
       UpdateStreamingDistributionRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "If-Match"))
       UpdateStreamingDistributionRequest.struct_class = Types::UpdateStreamingDistributionRequest
@@ -728,7 +829,7 @@ module Aws
       # @api private
       API = Seahorse::Model::Api.new.tap do |api|
 
-        api.version = "2016-01-28"
+        api.version = "2016-08-20"
 
         api.metadata = {
           "endpointPrefix" => "cloudfront",
@@ -740,7 +841,7 @@ module Aws
         api.add_operation(:create_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateCloudFrontOriginAccessIdentity"
           o.http_method = "POST"
-          o.http_request_uri = "/2016-01-28/origin-access-identity/cloudfront"
+          o.http_request_uri = "/2016-08-20/origin-access-identity/cloudfront"
           o.input = Shapes::ShapeRef.new(shape: CreateCloudFrontOriginAccessIdentityRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateCloudFrontOriginAccessIdentityResult)
           o.errors << Shapes::ShapeRef.new(shape: CloudFrontOriginAccessIdentityAlreadyExists)
@@ -753,7 +854,7 @@ module Aws
         api.add_operation(:create_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateDistribution"
           o.http_method = "POST"
-          o.http_request_uri = "/2016-01-28/distribution"
+          o.http_request_uri = "/2016-08-20/distribution"
           o.input = Shapes::ShapeRef.new(shape: CreateDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateDistributionResult)
           o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
@@ -789,12 +890,58 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
           o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
           o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
+        end)
+
+        api.add_operation(:create_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateDistributionWithTags"
+          o.http_method = "POST"
+          o.http_request_uri = "/2016-08-20/distribution?WithTags"
+          o.input = Shapes::ShapeRef.new(shape: CreateDistributionWithTagsRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateDistributionWithTagsResult)
+          o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+          o.errors << Shapes::ShapeRef.new(shape: DistributionAlreadyExists)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+          o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidViewerCertificate)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidMinimumProtocolVersion)
+          o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyDistributionCNAMEs)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyDistributions)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidDefaultRootObject)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRelativePath)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidErrorCode)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResponseCode)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequiredProtocol)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchOrigin)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyOrigins)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyCacheBehaviors)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyCookieNamesInWhiteList)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidForwardCookies)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyHeadersInForwardedValues)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidHeadersForS3Origin)
+          o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyCertificates)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidLocationCode)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidGeoRestrictionParameter)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidProtocolSettings)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
         end)
 
         api.add_operation(:create_invalidation, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateInvalidation"
           o.http_method = "POST"
-          o.http_request_uri = "/2016-01-28/distribution/{DistributionId}/invalidation"
+          o.http_request_uri = "/2016-08-20/distribution/{DistributionId}/invalidation"
           o.input = Shapes::ShapeRef.new(shape: CreateInvalidationRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateInvalidationResult)
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -809,7 +956,7 @@ module Aws
         api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateStreamingDistribution"
           o.http_method = "POST"
-          o.http_request_uri = "/2016-01-28/streaming-distribution"
+          o.http_request_uri = "/2016-08-20/streaming-distribution"
           o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateStreamingDistributionResult)
           o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
@@ -826,10 +973,31 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
         end)
 
+        api.add_operation(:create_streaming_distribution_with_tags, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateStreamingDistributionWithTags"
+          o.http_method = "POST"
+          o.http_request_uri = "/2016-08-20/streaming-distribution?WithTags"
+          o.input = Shapes::ShapeRef.new(shape: CreateStreamingDistributionWithTagsRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateStreamingDistributionWithTagsResult)
+          o.errors << Shapes::ShapeRef.new(shape: CNAMEAlreadyExists)
+          o.errors << Shapes::ShapeRef.new(shape: StreamingDistributionAlreadyExists)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidOrigin)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidOriginAccessIdentity)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyTrustedSigners)
+          o.errors << Shapes::ShapeRef.new(shape: TrustedSignerDoesNotExist)
+          o.errors << Shapes::ShapeRef.new(shape: MissingBody)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributionCNAMEs)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyStreamingDistributions)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+          o.errors << Shapes::ShapeRef.new(shape: InconsistentQuantities)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+        end)
+
         api.add_operation(:delete_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteCloudFrontOriginAccessIdentity"
           o.http_method = "DELETE"
-          o.http_request_uri = "/2016-01-28/origin-access-identity/cloudfront/{Id}"
+          o.http_request_uri = "/2016-08-20/origin-access-identity/cloudfront/{Id}"
           o.input = Shapes::ShapeRef.new(shape: DeleteCloudFrontOriginAccessIdentityRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -842,7 +1010,7 @@ module Aws
         api.add_operation(:delete_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteDistribution"
           o.http_method = "DELETE"
-          o.http_request_uri = "/2016-01-28/distribution/{Id}"
+          o.http_request_uri = "/2016-08-20/distribution/{Id}"
           o.input = Shapes::ShapeRef.new(shape: DeleteDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -855,7 +1023,7 @@ module Aws
         api.add_operation(:delete_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteStreamingDistribution"
           o.http_method = "DELETE"
-          o.http_request_uri = "/2016-01-28/streaming-distribution/{Id}"
+          o.http_request_uri = "/2016-08-20/streaming-distribution/{Id}"
           o.input = Shapes::ShapeRef.new(shape: DeleteStreamingDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -868,7 +1036,7 @@ module Aws
         api.add_operation(:get_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetCloudFrontOriginAccessIdentity"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/origin-access-identity/cloudfront/{Id}"
+          o.http_request_uri = "/2016-08-20/origin-access-identity/cloudfront/{Id}"
           o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityRequest)
           o.output = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityResult)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
@@ -878,7 +1046,7 @@ module Aws
         api.add_operation(:get_cloud_front_origin_access_identity_config, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetCloudFrontOriginAccessIdentityConfig"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/origin-access-identity/cloudfront/{Id}/config"
+          o.http_request_uri = "/2016-08-20/origin-access-identity/cloudfront/{Id}/config"
           o.input = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityConfigRequest)
           o.output = Shapes::ShapeRef.new(shape: GetCloudFrontOriginAccessIdentityConfigResult)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchCloudFrontOriginAccessIdentity)
@@ -888,7 +1056,7 @@ module Aws
         api.add_operation(:get_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetDistribution"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/distribution/{Id}"
+          o.http_request_uri = "/2016-08-20/distribution/{Id}"
           o.input = Shapes::ShapeRef.new(shape: GetDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: GetDistributionResult)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
@@ -898,7 +1066,7 @@ module Aws
         api.add_operation(:get_distribution_config, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetDistributionConfig"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/distribution/{Id}/config"
+          o.http_request_uri = "/2016-08-20/distribution/{Id}/config"
           o.input = Shapes::ShapeRef.new(shape: GetDistributionConfigRequest)
           o.output = Shapes::ShapeRef.new(shape: GetDistributionConfigResult)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
@@ -908,7 +1076,7 @@ module Aws
         api.add_operation(:get_invalidation, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetInvalidation"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/distribution/{DistributionId}/invalidation/{Id}"
+          o.http_request_uri = "/2016-08-20/distribution/{DistributionId}/invalidation/{Id}"
           o.input = Shapes::ShapeRef.new(shape: GetInvalidationRequest)
           o.output = Shapes::ShapeRef.new(shape: GetInvalidationResult)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchInvalidation)
@@ -919,7 +1087,7 @@ module Aws
         api.add_operation(:get_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetStreamingDistribution"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/streaming-distribution/{Id}"
+          o.http_request_uri = "/2016-08-20/streaming-distribution/{Id}"
           o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: GetStreamingDistributionResult)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
@@ -929,7 +1097,7 @@ module Aws
         api.add_operation(:get_streaming_distribution_config, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetStreamingDistributionConfig"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/streaming-distribution/{Id}/config"
+          o.http_request_uri = "/2016-08-20/streaming-distribution/{Id}/config"
           o.input = Shapes::ShapeRef.new(shape: GetStreamingDistributionConfigRequest)
           o.output = Shapes::ShapeRef.new(shape: GetStreamingDistributionConfigResult)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchStreamingDistribution)
@@ -939,7 +1107,7 @@ module Aws
         api.add_operation(:list_cloud_front_origin_access_identities, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListCloudFrontOriginAccessIdentities"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/origin-access-identity/cloudfront"
+          o.http_request_uri = "/2016-08-20/origin-access-identity/cloudfront"
           o.input = Shapes::ShapeRef.new(shape: ListCloudFrontOriginAccessIdentitiesRequest)
           o.output = Shapes::ShapeRef.new(shape: ListCloudFrontOriginAccessIdentitiesResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -955,7 +1123,7 @@ module Aws
         api.add_operation(:list_distributions, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListDistributions"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/distribution"
+          o.http_request_uri = "/2016-08-20/distribution"
           o.input = Shapes::ShapeRef.new(shape: ListDistributionsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListDistributionsResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -971,7 +1139,7 @@ module Aws
         api.add_operation(:list_distributions_by_web_acl_id, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListDistributionsByWebACLId"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/distributionsByWebACLId/{WebACLId}"
+          o.http_request_uri = "/2016-08-20/distributionsByWebACLId/{WebACLId}"
           o.input = Shapes::ShapeRef.new(shape: ListDistributionsByWebACLIdRequest)
           o.output = Shapes::ShapeRef.new(shape: ListDistributionsByWebACLIdResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -981,7 +1149,7 @@ module Aws
         api.add_operation(:list_invalidations, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListInvalidations"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/distribution/{DistributionId}/invalidation"
+          o.http_request_uri = "/2016-08-20/distribution/{DistributionId}/invalidation"
           o.input = Shapes::ShapeRef.new(shape: ListInvalidationsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListInvalidationsResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -999,7 +1167,7 @@ module Aws
         api.add_operation(:list_streaming_distributions, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListStreamingDistributions"
           o.http_method = "GET"
-          o.http_request_uri = "/2016-01-28/streaming-distribution"
+          o.http_request_uri = "/2016-08-20/streaming-distribution"
           o.input = Shapes::ShapeRef.new(shape: ListStreamingDistributionsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListStreamingDistributionsResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
@@ -1012,10 +1180,46 @@ module Aws
           )
         end)
 
+        api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListTagsForResource"
+          o.http_method = "GET"
+          o.http_request_uri = "/2016-08-20/tagging"
+          o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResult)
+          o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        end)
+
+        api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "TagResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/2016-08-20/tagging?Operation=Tag"
+          o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        end)
+
+        api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UntagResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/2016-08-20/tagging?Operation=Untag"
+          o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTagging)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchResource)
+        end)
+
         api.add_operation(:update_cloud_front_origin_access_identity, Seahorse::Model::Operation.new.tap do |o|
           o.name = "UpdateCloudFrontOriginAccessIdentity"
           o.http_method = "PUT"
-          o.http_request_uri = "/2016-01-28/origin-access-identity/cloudfront/{Id}/config"
+          o.http_request_uri = "/2016-08-20/origin-access-identity/cloudfront/{Id}/config"
           o.input = Shapes::ShapeRef.new(shape: UpdateCloudFrontOriginAccessIdentityRequest)
           o.output = Shapes::ShapeRef.new(shape: UpdateCloudFrontOriginAccessIdentityResult)
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1031,7 +1235,7 @@ module Aws
         api.add_operation(:update_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "UpdateDistribution"
           o.http_method = "PUT"
-          o.http_request_uri = "/2016-01-28/distribution/{Id}/config"
+          o.http_request_uri = "/2016-08-20/distribution/{Id}/config"
           o.input = Shapes::ShapeRef.new(shape: UpdateDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: UpdateDistributionResult)
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
@@ -1067,12 +1271,14 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidTTLOrder)
           o.errors << Shapes::ShapeRef.new(shape: InvalidWebACLId)
           o.errors << Shapes::ShapeRef.new(shape: TooManyOriginCustomHeaders)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyQueryStringParameters)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidQueryStringParameters)
         end)
 
         api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
           o.name = "UpdateStreamingDistribution"
           o.http_method = "PUT"
-          o.http_request_uri = "/2016-01-28/streaming-distribution/{Id}/config"
+          o.http_request_uri = "/2016-08-20/streaming-distribution/{Id}/config"
           o.input = Shapes::ShapeRef.new(shape: UpdateStreamingDistributionRequest)
           o.output = Shapes::ShapeRef.new(shape: UpdateStreamingDistributionResult)
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)

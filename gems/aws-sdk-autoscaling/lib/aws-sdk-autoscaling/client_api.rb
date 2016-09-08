@@ -32,6 +32,8 @@ module Aws
       AsciiStringMaxLen255 = Shapes::StringShape.new(name: 'AsciiStringMaxLen255')
       AssociatePublicIpAddress = Shapes::BooleanShape.new(name: 'AssociatePublicIpAddress')
       AttachInstancesQuery = Shapes::StructureShape.new(name: 'AttachInstancesQuery')
+      AttachLoadBalancerTargetGroupsResultType = Shapes::StructureShape.new(name: 'AttachLoadBalancerTargetGroupsResultType')
+      AttachLoadBalancerTargetGroupsType = Shapes::StructureShape.new(name: 'AttachLoadBalancerTargetGroupsType')
       AttachLoadBalancersResultType = Shapes::StructureShape.new(name: 'AttachLoadBalancersResultType')
       AttachLoadBalancersType = Shapes::StructureShape.new(name: 'AttachLoadBalancersType')
       AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
@@ -75,6 +77,8 @@ module Aws
       DescribeLifecycleHookTypesAnswer = Shapes::StructureShape.new(name: 'DescribeLifecycleHookTypesAnswer')
       DescribeLifecycleHooksAnswer = Shapes::StructureShape.new(name: 'DescribeLifecycleHooksAnswer')
       DescribeLifecycleHooksType = Shapes::StructureShape.new(name: 'DescribeLifecycleHooksType')
+      DescribeLoadBalancerTargetGroupsRequest = Shapes::StructureShape.new(name: 'DescribeLoadBalancerTargetGroupsRequest')
+      DescribeLoadBalancerTargetGroupsResponse = Shapes::StructureShape.new(name: 'DescribeLoadBalancerTargetGroupsResponse')
       DescribeLoadBalancersRequest = Shapes::StructureShape.new(name: 'DescribeLoadBalancersRequest')
       DescribeLoadBalancersResponse = Shapes::StructureShape.new(name: 'DescribeLoadBalancersResponse')
       DescribeMetricCollectionTypesAnswer = Shapes::StructureShape.new(name: 'DescribeMetricCollectionTypesAnswer')
@@ -87,6 +91,8 @@ module Aws
       DescribeTerminationPolicyTypesAnswer = Shapes::StructureShape.new(name: 'DescribeTerminationPolicyTypesAnswer')
       DetachInstancesAnswer = Shapes::StructureShape.new(name: 'DetachInstancesAnswer')
       DetachInstancesQuery = Shapes::StructureShape.new(name: 'DetachInstancesQuery')
+      DetachLoadBalancerTargetGroupsResultType = Shapes::StructureShape.new(name: 'DetachLoadBalancerTargetGroupsResultType')
+      DetachLoadBalancerTargetGroupsType = Shapes::StructureShape.new(name: 'DetachLoadBalancerTargetGroupsType')
       DetachLoadBalancersResultType = Shapes::StructureShape.new(name: 'DetachLoadBalancersResultType')
       DetachLoadBalancersType = Shapes::StructureShape.new(name: 'DetachLoadBalancersType')
       DisableMetricsCollectionQuery = Shapes::StructureShape.new(name: 'DisableMetricsCollectionQuery')
@@ -131,6 +137,8 @@ module Aws
       LoadBalancerNames = Shapes::ListShape.new(name: 'LoadBalancerNames')
       LoadBalancerState = Shapes::StructureShape.new(name: 'LoadBalancerState')
       LoadBalancerStates = Shapes::ListShape.new(name: 'LoadBalancerStates')
+      LoadBalancerTargetGroupState = Shapes::StructureShape.new(name: 'LoadBalancerTargetGroupState')
+      LoadBalancerTargetGroupStates = Shapes::ListShape.new(name: 'LoadBalancerTargetGroupStates')
       MaxNumberOfAutoScalingGroups = Shapes::IntegerShape.new(name: 'MaxNumberOfAutoScalingGroups')
       MaxNumberOfLaunchConfigurations = Shapes::IntegerShape.new(name: 'MaxNumberOfLaunchConfigurations')
       MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
@@ -199,6 +207,7 @@ module Aws
       TagValue = Shapes::StringShape.new(name: 'TagValue')
       Tags = Shapes::ListShape.new(name: 'Tags')
       TagsType = Shapes::StructureShape.new(name: 'TagsType')
+      TargetGroupARNs = Shapes::ListShape.new(name: 'TargetGroupARNs')
       TerminateInstanceInAutoScalingGroupType = Shapes::StructureShape.new(name: 'TerminateInstanceInAutoScalingGroupType')
       TerminationPolicies = Shapes::ListShape.new(name: 'TerminationPolicies')
       TimestampType = Shapes::TimestampShape.new(name: 'TimestampType')
@@ -208,8 +217,10 @@ module Aws
       XmlStringMaxLen1023 = Shapes::StringShape.new(name: 'XmlStringMaxLen1023')
       XmlStringMaxLen1600 = Shapes::StringShape.new(name: 'XmlStringMaxLen1600')
       XmlStringMaxLen19 = Shapes::StringShape.new(name: 'XmlStringMaxLen19')
+      XmlStringMaxLen2047 = Shapes::StringShape.new(name: 'XmlStringMaxLen2047')
       XmlStringMaxLen255 = Shapes::StringShape.new(name: 'XmlStringMaxLen255')
       XmlStringMaxLen32 = Shapes::StringShape.new(name: 'XmlStringMaxLen32')
+      XmlStringMaxLen511 = Shapes::StringShape.new(name: 'XmlStringMaxLen511')
       XmlStringMaxLen64 = Shapes::StringShape.new(name: 'XmlStringMaxLen64')
       XmlStringUserData = Shapes::StringShape.new(name: 'XmlStringUserData')
 
@@ -251,10 +262,16 @@ module Aws
       AttachInstancesQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
       AttachInstancesQuery.struct_class = Types::AttachInstancesQuery
 
+      AttachLoadBalancerTargetGroupsResultType.struct_class = Types::AttachLoadBalancerTargetGroupsResultType
+
+      AttachLoadBalancerTargetGroupsType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
+      AttachLoadBalancerTargetGroupsType.add_member(:target_group_arns, Shapes::ShapeRef.new(shape: TargetGroupARNs, required: true, location_name: "TargetGroupARNs"))
+      AttachLoadBalancerTargetGroupsType.struct_class = Types::AttachLoadBalancerTargetGroupsType
+
       AttachLoadBalancersResultType.struct_class = Types::AttachLoadBalancersResultType
 
-      AttachLoadBalancersType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AutoScalingGroupName"))
-      AttachLoadBalancersType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, location_name: "LoadBalancerNames"))
+      AttachLoadBalancersType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
+      AttachLoadBalancersType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, required: true, location_name: "LoadBalancerNames"))
       AttachLoadBalancersType.struct_class = Types::AttachLoadBalancersType
 
       AutoScalingGroup.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, required: true, location_name: "AutoScalingGroupName"))
@@ -266,13 +283,14 @@ module Aws
       AutoScalingGroup.add_member(:default_cooldown, Shapes::ShapeRef.new(shape: Cooldown, required: true, location_name: "DefaultCooldown"))
       AutoScalingGroup.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, required: true, location_name: "AvailabilityZones"))
       AutoScalingGroup.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, location_name: "LoadBalancerNames"))
+      AutoScalingGroup.add_member(:target_group_arns, Shapes::ShapeRef.new(shape: TargetGroupARNs, location_name: "TargetGroupARNs"))
       AutoScalingGroup.add_member(:health_check_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, required: true, location_name: "HealthCheckType"))
       AutoScalingGroup.add_member(:health_check_grace_period, Shapes::ShapeRef.new(shape: HealthCheckGracePeriod, location_name: "HealthCheckGracePeriod"))
       AutoScalingGroup.add_member(:instances, Shapes::ShapeRef.new(shape: Instances, location_name: "Instances"))
       AutoScalingGroup.add_member(:created_time, Shapes::ShapeRef.new(shape: TimestampType, required: true, location_name: "CreatedTime"))
       AutoScalingGroup.add_member(:suspended_processes, Shapes::ShapeRef.new(shape: SuspendedProcesses, location_name: "SuspendedProcesses"))
       AutoScalingGroup.add_member(:placement_group, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "PlacementGroup"))
-      AutoScalingGroup.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "VPCZoneIdentifier"))
+      AutoScalingGroup.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen2047, location_name: "VPCZoneIdentifier"))
       AutoScalingGroup.add_member(:enabled_metrics, Shapes::ShapeRef.new(shape: EnabledMetrics, location_name: "EnabledMetrics"))
       AutoScalingGroup.add_member(:status, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "Status"))
       AutoScalingGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagDescriptionList, location_name: "Tags"))
@@ -340,10 +358,11 @@ module Aws
       CreateAutoScalingGroupType.add_member(:default_cooldown, Shapes::ShapeRef.new(shape: Cooldown, location_name: "DefaultCooldown"))
       CreateAutoScalingGroupType.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
       CreateAutoScalingGroupType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, location_name: "LoadBalancerNames"))
+      CreateAutoScalingGroupType.add_member(:target_group_arns, Shapes::ShapeRef.new(shape: TargetGroupARNs, location_name: "TargetGroupARNs"))
       CreateAutoScalingGroupType.add_member(:health_check_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "HealthCheckType"))
       CreateAutoScalingGroupType.add_member(:health_check_grace_period, Shapes::ShapeRef.new(shape: HealthCheckGracePeriod, location_name: "HealthCheckGracePeriod"))
       CreateAutoScalingGroupType.add_member(:placement_group, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "PlacementGroup"))
-      CreateAutoScalingGroupType.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "VPCZoneIdentifier"))
+      CreateAutoScalingGroupType.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen2047, location_name: "VPCZoneIdentifier"))
       CreateAutoScalingGroupType.add_member(:termination_policies, Shapes::ShapeRef.new(shape: TerminationPolicies, location_name: "TerminationPolicies"))
       CreateAutoScalingGroupType.add_member(:new_instances_protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, location_name: "NewInstancesProtectedFromScaleIn"))
       CreateAutoScalingGroupType.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -390,7 +409,7 @@ module Aws
       DeletePolicyType.add_member(:policy_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "PolicyName"))
       DeletePolicyType.struct_class = Types::DeletePolicyType
 
-      DeleteScheduledActionType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AutoScalingGroupName"))
+      DeleteScheduledActionType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
       DeleteScheduledActionType.add_member(:scheduled_action_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ScheduledActionName"))
       DeleteScheduledActionType.struct_class = Types::DeleteScheduledActionType
 
@@ -423,6 +442,15 @@ module Aws
       DescribeLifecycleHooksType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
       DescribeLifecycleHooksType.add_member(:lifecycle_hook_names, Shapes::ShapeRef.new(shape: LifecycleHookNames, location_name: "LifecycleHookNames"))
       DescribeLifecycleHooksType.struct_class = Types::DescribeLifecycleHooksType
+
+      DescribeLoadBalancerTargetGroupsRequest.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
+      DescribeLoadBalancerTargetGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+      DescribeLoadBalancerTargetGroupsRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+      DescribeLoadBalancerTargetGroupsRequest.struct_class = Types::DescribeLoadBalancerTargetGroupsRequest
+
+      DescribeLoadBalancerTargetGroupsResponse.add_member(:load_balancer_target_groups, Shapes::ShapeRef.new(shape: LoadBalancerTargetGroupStates, location_name: "LoadBalancerTargetGroups"))
+      DescribeLoadBalancerTargetGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+      DescribeLoadBalancerTargetGroupsResponse.struct_class = Types::DescribeLoadBalancerTargetGroupsResponse
 
       DescribeLoadBalancersRequest.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
       DescribeLoadBalancersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
@@ -483,10 +511,16 @@ module Aws
       DetachInstancesQuery.add_member(:should_decrement_desired_capacity, Shapes::ShapeRef.new(shape: ShouldDecrementDesiredCapacity, required: true, location_name: "ShouldDecrementDesiredCapacity"))
       DetachInstancesQuery.struct_class = Types::DetachInstancesQuery
 
+      DetachLoadBalancerTargetGroupsResultType.struct_class = Types::DetachLoadBalancerTargetGroupsResultType
+
+      DetachLoadBalancerTargetGroupsType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
+      DetachLoadBalancerTargetGroupsType.add_member(:target_group_arns, Shapes::ShapeRef.new(shape: TargetGroupARNs, required: true, location_name: "TargetGroupARNs"))
+      DetachLoadBalancerTargetGroupsType.struct_class = Types::DetachLoadBalancerTargetGroupsType
+
       DetachLoadBalancersResultType.struct_class = Types::DetachLoadBalancersResultType
 
-      DetachLoadBalancersType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "AutoScalingGroupName"))
-      DetachLoadBalancersType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, location_name: "LoadBalancerNames"))
+      DetachLoadBalancersType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
+      DetachLoadBalancersType.add_member(:load_balancer_names, Shapes::ShapeRef.new(shape: LoadBalancerNames, required: true, location_name: "LoadBalancerNames"))
       DetachLoadBalancersType.struct_class = Types::DetachLoadBalancersType
 
       DisableMetricsCollectionQuery.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "AutoScalingGroupName"))
@@ -614,6 +648,12 @@ module Aws
       LoadBalancerState.struct_class = Types::LoadBalancerState
 
       LoadBalancerStates.member = Shapes::ShapeRef.new(shape: LoadBalancerState)
+
+      LoadBalancerTargetGroupState.add_member(:load_balancer_target_group_arn, Shapes::ShapeRef.new(shape: XmlStringMaxLen511, location_name: "LoadBalancerTargetGroupARN"))
+      LoadBalancerTargetGroupState.add_member(:state, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "State"))
+      LoadBalancerTargetGroupState.struct_class = Types::LoadBalancerTargetGroupState
+
+      LoadBalancerTargetGroupStates.member = Shapes::ShapeRef.new(shape: LoadBalancerTargetGroupState)
 
       MetricCollectionType.add_member(:metric, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "Metric"))
       MetricCollectionType.struct_class = Types::MetricCollectionType
@@ -799,6 +839,8 @@ module Aws
       TagsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
       TagsType.struct_class = Types::TagsType
 
+      TargetGroupARNs.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen511)
+
       TerminateInstanceInAutoScalingGroupType.add_member(:instance_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen19, required: true, location_name: "InstanceId"))
       TerminateInstanceInAutoScalingGroupType.add_member(:should_decrement_desired_capacity, Shapes::ShapeRef.new(shape: ShouldDecrementDesiredCapacity, required: true, location_name: "ShouldDecrementDesiredCapacity"))
       TerminateInstanceInAutoScalingGroupType.struct_class = Types::TerminateInstanceInAutoScalingGroupType
@@ -815,7 +857,7 @@ module Aws
       UpdateAutoScalingGroupType.add_member(:health_check_type, Shapes::ShapeRef.new(shape: XmlStringMaxLen32, location_name: "HealthCheckType"))
       UpdateAutoScalingGroupType.add_member(:health_check_grace_period, Shapes::ShapeRef.new(shape: HealthCheckGracePeriod, location_name: "HealthCheckGracePeriod"))
       UpdateAutoScalingGroupType.add_member(:placement_group, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "PlacementGroup"))
-      UpdateAutoScalingGroupType.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "VPCZoneIdentifier"))
+      UpdateAutoScalingGroupType.add_member(:vpc_zone_identifier, Shapes::ShapeRef.new(shape: XmlStringMaxLen2047, location_name: "VPCZoneIdentifier"))
       UpdateAutoScalingGroupType.add_member(:termination_policies, Shapes::ShapeRef.new(shape: TerminationPolicies, location_name: "TerminationPolicies"))
       UpdateAutoScalingGroupType.add_member(:new_instances_protected_from_scale_in, Shapes::ShapeRef.new(shape: InstanceProtected, location_name: "NewInstancesProtectedFromScaleIn"))
       UpdateAutoScalingGroupType.struct_class = Types::UpdateAutoScalingGroupType
@@ -842,6 +884,15 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AttachInstancesQuery)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        end)
+
+        api.add_operation(:attach_load_balancer_target_groups, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AttachLoadBalancerTargetGroups"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AttachLoadBalancerTargetGroupsType)
+          o.output = Shapes::ShapeRef.new(shape: AttachLoadBalancerTargetGroupsResultType)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         end)
 
@@ -1055,6 +1106,15 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         end)
 
+        api.add_operation(:describe_load_balancer_target_groups, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeLoadBalancerTargetGroups"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeLoadBalancerTargetGroupsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerTargetGroupsResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        end)
+
         api.add_operation(:describe_load_balancers, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DescribeLoadBalancers"
           o.http_method = "POST"
@@ -1177,6 +1237,15 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DetachInstancesQuery)
           o.output = Shapes::ShapeRef.new(shape: DetachInstancesAnswer)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
+        end)
+
+        api.add_operation(:detach_load_balancer_target_groups, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DetachLoadBalancerTargetGroups"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DetachLoadBalancerTargetGroupsType)
+          o.output = Shapes::ShapeRef.new(shape: DetachLoadBalancerTargetGroupsResultType)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         end)
 

@@ -222,6 +222,12 @@ module Aws
         data.db_cluster_resource_id
       end
 
+      # The Amazon Resource Name (ARN) for the DB cluster.
+      # @return [String]
+      def db_cluster_arn
+        data.db_cluster_arn
+      end
+
       # @!endgroup
 
       # @return [Client]
@@ -288,8 +294,8 @@ module Aws
       #   cluster you are creating.
       # @option options [String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to associate with this DB
-      #   cluster. If this argument is omitted, `default.aurora5.6` for the
-      #   specified engine will be used.
+      #   cluster. If this argument is omitted, `default.aurora5.6` will be
+      #   used.
       #
       #   Constraints:
       #
@@ -323,7 +329,7 @@ module Aws
       #
       #   Default: `3306`
       # @option options [String] :master_username
-      #   The name of the master user for the client DB cluster.
+      #   The name of the master user for the DB cluster.
       #
       #   Constraints:
       #

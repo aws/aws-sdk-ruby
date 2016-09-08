@@ -286,6 +286,7 @@ module Aws
       # following criteria are returned:
       #
       # * Job flows created and completed in the last two weeks
+      #
       # * Job flows created within the last two months that are in one of the
       #   following states: `RUNNING`, `WAITING`, `SHUTTING_DOWN`, `STARTING`
       #
@@ -410,6 +411,9 @@ module Aws
       #   resp.step.status.state #=> String, one of "PENDING", "RUNNING", "COMPLETED", "CANCELLED", "FAILED", "INTERRUPTED"
       #   resp.step.status.state_change_reason.code #=> String, one of "NONE"
       #   resp.step.status.state_change_reason.message #=> String
+      #   resp.step.status.failure_details.reason #=> String
+      #   resp.step.status.failure_details.message #=> String
+      #   resp.step.status.failure_details.log_file #=> String
       #   resp.step.status.timeline.creation_date_time #=> Time
       #   resp.step.status.timeline.start_date_time #=> Time
       #   resp.step.status.timeline.end_date_time #=> Time
@@ -653,6 +657,9 @@ module Aws
       #   resp.steps[0].status.state #=> String, one of "PENDING", "RUNNING", "COMPLETED", "CANCELLED", "FAILED", "INTERRUPTED"
       #   resp.steps[0].status.state_change_reason.code #=> String, one of "NONE"
       #   resp.steps[0].status.state_change_reason.message #=> String
+      #   resp.steps[0].status.failure_details.reason #=> String
+      #   resp.steps[0].status.failure_details.message #=> String
+      #   resp.steps[0].status.failure_details.log_file #=> String
       #   resp.steps[0].status.timeline.creation_date_time #=> Time
       #   resp.steps[0].status.timeline.start_date_time #=> Time
       #   resp.steps[0].status.timeline.end_date_time #=> Time
@@ -765,15 +772,17 @@ module Aws
       # @option params [String] :additional_info
       #   A JSON string for selecting additional features.
       # @option params [String] :ami_version
-      #   <note markdown="1">For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
+      #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
       #   greater, use ReleaseLabel.
       #
-      #   </note>
+      #    </note>
       #
       #   The version of the Amazon Machine Image (AMI) to use when launching
       #   Amazon EC2 instances in the job flow. The following values are valid:
       #
       #   * The version number of the AMI to use, for example, \"2.0.\"
+      #
+      #   ^
       #
       #   If the AMI supports multiple versions of Hadoop (for example, AMI 1.0
       #   supports both Hadoop 0.18 and 0.20) you can use the
@@ -788,9 +797,9 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported
       # @option params [String] :release_label
-      #   <note markdown="1">Amazon EMR releases 4.x or later.
+      #   <note markdown="1"> Amazon EMR releases 4.x or later.
       #
-      #   </note>
+      #    </note>
       #
       #   The release label for the Amazon EMR release. For Amazon EMR 3.x and
       #   2.x AMIs, use amiVersion instead instead of ReleaseLabel.
@@ -803,26 +812,27 @@ module Aws
       #   A list of bootstrap actions that will be run before Hadoop is started
       #   on the cluster nodes.
       # @option params [Array<String>] :supported_products
-      #   <note markdown="1">For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
+      #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
       #   greater, use Applications.
       #
-      #   </note>
+      #    </note>
       #
       #   A list of strings that indicates third-party software to use with the
       #   job flow. For more information, go to [Use Third Party Applications
       #   with Amazon EMR][1]. Currently supported values are:
       #
       #   * \"mapr-m3\" - launch the job flow using MapR M3 Edition.
+      #
       #   * \"mapr-m5\" - launch the job flow using MapR M5 Edition.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html
       # @option params [Array<Types::SupportedProductConfig>] :new_supported_products
-      #   <note markdown="1">For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
+      #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
       #   greater, use Applications.
       #
-      #   </note>
+      #    </note>
       #
       #   A list of strings that indicates third-party software to use with the
       #   job flow that accepts a user argument list. EMR accepts and forwards
@@ -832,15 +842,22 @@ module Aws
       #   values are:
       #
       #   * \"mapr-m3\" - launch the cluster using MapR M3 Edition.
+      #
       #   * \"mapr-m5\" - launch the cluster using MapR M5 Edition.
+      #
       #   * \"mapr\" with the user arguments specifying \"--edition,m3\" or
       #     \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition
       #     respectively.
+      #
       #   * \"mapr-m7\" - launch the cluster using MapR M7 Edition.
+      #
       #   * \"hunk\" - launch the cluster with the Hunk Big Data Analtics
       #     Platform.
+      #
       #   * \"hue\"- launch the cluster with Hue installed.
+      #
       #   * \"spark\" - launch the cluster with Apache Spark installed.
+      #
       #   * \"ganglia\" - launch the cluster with the Ganglia Monitoring System
       #     installed.
       #
@@ -848,17 +865,17 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-mapr.html
       # @option params [Array<Types::Application>] :applications
-      #   <note markdown="1">Amazon EMR releases 4.x or later.
+      #   <note markdown="1"> Amazon EMR releases 4.x or later.
       #
-      #   </note>
+      #    </note>
       #
       #   A list of applications for the cluster. Valid values are: \"Hadoop\",
       #   \"Hive\", \"Mahout\", \"Pig\", and \"Spark.\" They are case
       #   insensitive.
       # @option params [Array<Types::Configuration>] :configurations
-      #   <note markdown="1">Amazon EMR releases 4.x or later.
+      #   <note markdown="1"> Amazon EMR releases 4.x or later.
       #
-      #   </note>
+      #    </note>
       #
       #   The list of configurations supplied for the EMR cluster you are
       #   creating.
@@ -1159,6 +1176,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

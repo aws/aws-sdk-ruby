@@ -83,6 +83,12 @@ module Aws
         data.vpc_id
       end
 
+      # The Amazon Resource Name (ARN) for the option group.
+      # @return [String]
+      def option_group_arn
+        data.option_group_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

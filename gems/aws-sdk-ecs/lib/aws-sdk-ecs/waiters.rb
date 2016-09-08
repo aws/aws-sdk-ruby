@@ -136,7 +136,7 @@ module Aws
                   "expected" => true,
                   "matcher" => "path",
                   "state" => "success",
-                  "argument" => "services | [@[?length(deployments)!=`1`], @[?desiredCount!=runningCount]][] | length(@) == `0`"
+                  "argument" => "length(services[?!(length(deployments) == `1` && runningCount == desiredCount)]) == `0`"
                 }
               ]
             )

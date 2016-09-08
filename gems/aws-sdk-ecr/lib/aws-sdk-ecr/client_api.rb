@@ -85,6 +85,7 @@ module Aws
       LayerSizeInBytes = Shapes::IntegerShape.new(name: 'LayerSizeInBytes')
       LayersNotFoundException = Shapes::StructureShape.new(name: 'LayersNotFoundException')
       LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+      ListImagesFilter = Shapes::StructureShape.new(name: 'ListImagesFilter')
       ListImagesRequest = Shapes::StructureShape.new(name: 'ListImagesRequest')
       ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
       MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -106,6 +107,7 @@ module Aws
       ServerException = Shapes::StructureShape.new(name: 'ServerException')
       SetRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'SetRepositoryPolicyRequest')
       SetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'SetRepositoryPolicyResponse')
+      TagStatus = Shapes::StringShape.new(name: 'TagStatus')
       UploadId = Shapes::StringShape.new(name: 'UploadId')
       UploadLayerPartRequest = Shapes::StructureShape.new(name: 'UploadLayerPartRequest')
       UploadLayerPartResponse = Shapes::StructureShape.new(name: 'UploadLayerPartResponse')
@@ -264,10 +266,14 @@ module Aws
 
       LayerList.member = Shapes::ShapeRef.new(shape: Layer)
 
+      ListImagesFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
+      ListImagesFilter.struct_class = Types::ListImagesFilter
+
       ListImagesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
       ListImagesRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
       ListImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
       ListImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+      ListImagesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListImagesFilter, location_name: "filter"))
       ListImagesRequest.struct_class = Types::ListImagesRequest
 
       ListImagesResponse.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds"))
@@ -426,6 +432,12 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServerException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+          o[:pager] = Aws::Pager.new(
+            "result_key" => "repositories",
+            "input_token" => "nextToken",
+            "output_token" => "nextToken",
+            "limit_key" => "maxResults"
+          )
         end)
 
         api.add_operation(:get_authorization_token, Seahorse::Model::Operation.new.tap do |o|
@@ -483,6 +495,12 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServerException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+          o[:pager] = Aws::Pager.new(
+            "result_key" => "imageIds",
+            "input_token" => "nextToken",
+            "output_token" => "nextToken",
+            "limit_key" => "maxResults"
+          )
         end)
 
         api.add_operation(:put_image, Seahorse::Model::Operation.new.tap do |o|

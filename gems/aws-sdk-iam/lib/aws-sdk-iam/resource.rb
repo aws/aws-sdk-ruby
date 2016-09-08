@@ -155,7 +155,10 @@ module Aws
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of upper and lowercase alphanumeric characters with no
-      #   spaces. You can also include any of the following characters: =,.@-
+      #   spaces. You can also include any of the following characters: =,.@-.
+      #   The group name must be unique within the account. Group names are not
+      #   distinguished by case. For example, you cannot create groups named
+      #   both \"ADMINS\" and \"admins\".
       #
       #
       #
@@ -295,7 +298,9 @@ module Aws
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of upper and lowercase alphanumeric characters with no
-      #   spaces. You can also include any of the following characters: =,.@-
+      #   spaces. You can also include any of the following characters: =,.@-.
+      #   Role names are not distinguished by case. For example, you cannot
+      #   create roles named both \"PRODROLE\" and \"prodrole\".
       #
       #
       #
@@ -495,7 +500,9 @@ module Aws
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of upper and lowercase alphanumeric characters with no
-      #   spaces. You can also include any of the following characters: =,.@-
+      #   spaces. You can also include any of the following characters: =,.@-.
+      #   User names are not distinguished by case. For example, you cannot
+      #   create users named both \"TESTUSER\" and \"testuser\".
       #
       #
       #

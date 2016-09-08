@@ -386,6 +386,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: CheckIfPhoneNumberIsOptedOutResponse)
           o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
@@ -503,6 +504,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: GetSMSAttributesResponse)
           o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
@@ -555,6 +557,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListPhoneNumbersOptedOutResponse)
           o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
@@ -631,6 +634,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: OptInPhoneNumberResponse)
           o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         end)
 
@@ -694,6 +698,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: ThrottledException)
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+          o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
         end)
 
         api.add_operation(:set_subscription_attributes, Seahorse::Model::Operation.new.tap do |o|

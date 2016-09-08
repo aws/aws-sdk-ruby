@@ -122,7 +122,7 @@ module Aws
       end
 
       # Controls whether instances in this group are launched with detailed
-      # monitoring.
+      # (`true`) or basic (`false`) monitoring.
       # @return [Types::InstanceMonitoring]
       def instance_monitoring
         data.instance_monitoring

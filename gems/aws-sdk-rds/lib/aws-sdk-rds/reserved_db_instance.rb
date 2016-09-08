@@ -117,6 +117,12 @@ module Aws
         data.recurring_charges
       end
 
+      # The Amazon Resource Name (ARN) for the reserved DB instance.
+      # @return [String]
+      def reserved_db_instance_arn
+        data.reserved_db_instance_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

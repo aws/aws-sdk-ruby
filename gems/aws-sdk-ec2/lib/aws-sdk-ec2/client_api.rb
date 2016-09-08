@@ -29,6 +29,7 @@ module Aws
       AccountAttributeValueList = Shapes::ListShape.new(name: 'AccountAttributeValueList')
       ActiveInstance = Shapes::StructureShape.new(name: 'ActiveInstance')
       ActiveInstanceSet = Shapes::ListShape.new(name: 'ActiveInstanceSet')
+      ActivityStatus = Shapes::StringShape.new(name: 'ActivityStatus')
       Address = Shapes::StructureShape.new(name: 'Address')
       AddressList = Shapes::ListShape.new(name: 'AddressList')
       Affinity = Shapes::StringShape.new(name: 'Affinity')
@@ -223,6 +224,10 @@ module Aws
       DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
       DescribeFlowLogsRequest = Shapes::StructureShape.new(name: 'DescribeFlowLogsRequest')
       DescribeFlowLogsResult = Shapes::StructureShape.new(name: 'DescribeFlowLogsResult')
+      DescribeHostReservationOfferingsRequest = Shapes::StructureShape.new(name: 'DescribeHostReservationOfferingsRequest')
+      DescribeHostReservationOfferingsResult = Shapes::StructureShape.new(name: 'DescribeHostReservationOfferingsResult')
+      DescribeHostReservationsRequest = Shapes::StructureShape.new(name: 'DescribeHostReservationsRequest')
+      DescribeHostReservationsResult = Shapes::StructureShape.new(name: 'DescribeHostReservationsResult')
       DescribeHostsRequest = Shapes::StructureShape.new(name: 'DescribeHostsRequest')
       DescribeHostsResult = Shapes::StructureShape.new(name: 'DescribeHostsResult')
       DescribeIdFormatRequest = Shapes::StructureShape.new(name: 'DescribeIdFormatRequest')
@@ -386,6 +391,8 @@ module Aws
       GetConsoleOutputResult = Shapes::StructureShape.new(name: 'GetConsoleOutputResult')
       GetConsoleScreenshotRequest = Shapes::StructureShape.new(name: 'GetConsoleScreenshotRequest')
       GetConsoleScreenshotResult = Shapes::StructureShape.new(name: 'GetConsoleScreenshotResult')
+      GetHostReservationPurchasePreviewRequest = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewRequest')
+      GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
       GetPasswordDataRequest = Shapes::StructureShape.new(name: 'GetPasswordDataRequest')
       GetPasswordDataResult = Shapes::StructureShape.new(name: 'GetPasswordDataResult')
       GroupIdStringList = Shapes::ListShape.new(name: 'GroupIdStringList')
@@ -399,7 +406,12 @@ module Aws
       HostInstance = Shapes::StructureShape.new(name: 'HostInstance')
       HostInstanceList = Shapes::ListShape.new(name: 'HostInstanceList')
       HostList = Shapes::ListShape.new(name: 'HostList')
+      HostOffering = Shapes::StructureShape.new(name: 'HostOffering')
+      HostOfferingSet = Shapes::ListShape.new(name: 'HostOfferingSet')
       HostProperties = Shapes::StructureShape.new(name: 'HostProperties')
+      HostReservation = Shapes::StructureShape.new(name: 'HostReservation')
+      HostReservationIdSet = Shapes::ListShape.new(name: 'HostReservationIdSet')
+      HostReservationSet = Shapes::ListShape.new(name: 'HostReservationSet')
       HostTenancy = Shapes::StringShape.new(name: 'HostTenancy')
       HypervisorType = Shapes::StringShape.new(name: 'HypervisorType')
       IamInstanceProfile = Shapes::StructureShape.new(name: 'IamInstanceProfile')
@@ -557,6 +569,7 @@ module Aws
       OfferingTypeValues = Shapes::StringShape.new(name: 'OfferingTypeValues')
       OperationType = Shapes::StringShape.new(name: 'OperationType')
       OwnerStringList = Shapes::ListShape.new(name: 'OwnerStringList')
+      PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
       PeeringConnectionOptions = Shapes::StructureShape.new(name: 'PeeringConnectionOptions')
       PeeringConnectionOptionsRequest = Shapes::StructureShape.new(name: 'PeeringConnectionOptionsRequest')
       PermissionGroup = Shapes::StringShape.new(name: 'PermissionGroup')
@@ -592,12 +605,16 @@ module Aws
       PropagatingVgwList = Shapes::ListShape.new(name: 'PropagatingVgwList')
       ProvisionedBandwidth = Shapes::StructureShape.new(name: 'ProvisionedBandwidth')
       PublicIpStringList = Shapes::ListShape.new(name: 'PublicIpStringList')
+      Purchase = Shapes::StructureShape.new(name: 'Purchase')
+      PurchaseHostReservationRequest = Shapes::StructureShape.new(name: 'PurchaseHostReservationRequest')
+      PurchaseHostReservationResult = Shapes::StructureShape.new(name: 'PurchaseHostReservationResult')
       PurchaseRequest = Shapes::StructureShape.new(name: 'PurchaseRequest')
       PurchaseRequestSet = Shapes::ListShape.new(name: 'PurchaseRequestSet')
       PurchaseReservedInstancesOfferingRequest = Shapes::StructureShape.new(name: 'PurchaseReservedInstancesOfferingRequest')
       PurchaseReservedInstancesOfferingResult = Shapes::StructureShape.new(name: 'PurchaseReservedInstancesOfferingResult')
       PurchaseScheduledInstancesRequest = Shapes::StructureShape.new(name: 'PurchaseScheduledInstancesRequest')
       PurchaseScheduledInstancesResult = Shapes::StructureShape.new(name: 'PurchaseScheduledInstancesResult')
+      PurchaseSet = Shapes::ListShape.new(name: 'PurchaseSet')
       PurchasedScheduledInstanceSet = Shapes::ListShape.new(name: 'PurchasedScheduledInstanceSet')
       RIProductDescription = Shapes::StringShape.new(name: 'RIProductDescription')
       ReasonCodesList = Shapes::ListShape.new(name: 'ReasonCodesList')
@@ -625,6 +642,7 @@ module Aws
       ReportInstanceStatusRequest = Shapes::StructureShape.new(name: 'ReportInstanceStatusRequest')
       ReportStatusType = Shapes::StringShape.new(name: 'ReportStatusType')
       RequestHostIdList = Shapes::ListShape.new(name: 'RequestHostIdList')
+      RequestHostIdSet = Shapes::ListShape.new(name: 'RequestHostIdSet')
       RequestSpotFleetRequest = Shapes::StructureShape.new(name: 'RequestSpotFleetRequest')
       RequestSpotFleetResponse = Shapes::StructureShape.new(name: 'RequestSpotFleetResponse')
       RequestSpotInstancesRequest = Shapes::StructureShape.new(name: 'RequestSpotInstancesRequest')
@@ -632,6 +650,7 @@ module Aws
       RequestSpotLaunchSpecification = Shapes::StructureShape.new(name: 'RequestSpotLaunchSpecification')
       Reservation = Shapes::StructureShape.new(name: 'Reservation')
       ReservationList = Shapes::ListShape.new(name: 'ReservationList')
+      ReservationState = Shapes::StringShape.new(name: 'ReservationState')
       ReservedInstanceLimitPrice = Shapes::StructureShape.new(name: 'ReservedInstanceLimitPrice')
       ReservedInstanceState = Shapes::StringShape.new(name: 'ReservedInstanceState')
       ReservedInstances = Shapes::StructureShape.new(name: 'ReservedInstances')
@@ -659,6 +678,7 @@ module Aws
       ResourceIdList = Shapes::ListShape.new(name: 'ResourceIdList')
       ResourceType = Shapes::StringShape.new(name: 'ResourceType')
       ResponseHostIdList = Shapes::ListShape.new(name: 'ResponseHostIdList')
+      ResponseHostIdSet = Shapes::ListShape.new(name: 'ResponseHostIdSet')
       RestorableByStringList = Shapes::ListShape.new(name: 'RestorableByStringList')
       RestoreAddressToClassicRequest = Shapes::StructureShape.new(name: 'RestoreAddressToClassicRequest')
       RestoreAddressToClassicResult = Shapes::StructureShape.new(name: 'RestoreAddressToClassicResult')
@@ -1632,6 +1652,28 @@ module Aws
       DescribeFlowLogsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
       DescribeFlowLogsResult.struct_class = Types::DescribeFlowLogsResult
 
+      DescribeHostReservationOfferingsRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "OfferingId"))
+      DescribeHostReservationOfferingsRequest.add_member(:min_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "MinDuration"))
+      DescribeHostReservationOfferingsRequest.add_member(:max_duration, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxDuration"))
+      DescribeHostReservationOfferingsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+      DescribeHostReservationOfferingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+      DescribeHostReservationOfferingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      DescribeHostReservationOfferingsRequest.struct_class = Types::DescribeHostReservationOfferingsRequest
+
+      DescribeHostReservationOfferingsResult.add_member(:offering_set, Shapes::ShapeRef.new(shape: HostOfferingSet, location_name: "offeringSet"))
+      DescribeHostReservationOfferingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+      DescribeHostReservationOfferingsResult.struct_class = Types::DescribeHostReservationOfferingsResult
+
+      DescribeHostReservationsRequest.add_member(:host_reservation_id_set, Shapes::ShapeRef.new(shape: HostReservationIdSet, location_name: "HostReservationIdSet"))
+      DescribeHostReservationsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+      DescribeHostReservationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+      DescribeHostReservationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      DescribeHostReservationsRequest.struct_class = Types::DescribeHostReservationsRequest
+
+      DescribeHostReservationsResult.add_member(:host_reservation_set, Shapes::ShapeRef.new(shape: HostReservationSet, location_name: "hostReservationSet"))
+      DescribeHostReservationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+      DescribeHostReservationsResult.struct_class = Types::DescribeHostReservationsResult
+
       DescribeHostsRequest.add_member(:host_ids, Shapes::ShapeRef.new(shape: RequestHostIdList, location_name: "hostId"))
       DescribeHostsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
       DescribeHostsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "maxResults"))
@@ -2337,6 +2379,16 @@ module Aws
       GetConsoleScreenshotResult.add_member(:image_data, Shapes::ShapeRef.new(shape: String, location_name: "imageData"))
       GetConsoleScreenshotResult.struct_class = Types::GetConsoleScreenshotResult
 
+      GetHostReservationPurchasePreviewRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OfferingId"))
+      GetHostReservationPurchasePreviewRequest.add_member(:host_id_set, Shapes::ShapeRef.new(shape: RequestHostIdSet, required: true, location_name: "HostIdSet"))
+      GetHostReservationPurchasePreviewRequest.struct_class = Types::GetHostReservationPurchasePreviewRequest
+
+      GetHostReservationPurchasePreviewResult.add_member(:purchase, Shapes::ShapeRef.new(shape: PurchaseSet, location_name: "purchase"))
+      GetHostReservationPurchasePreviewResult.add_member(:total_upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "totalUpfrontPrice"))
+      GetHostReservationPurchasePreviewResult.add_member(:total_hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "totalHourlyPrice"))
+      GetHostReservationPurchasePreviewResult.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
+      GetHostReservationPurchasePreviewResult.struct_class = Types::GetHostReservationPurchasePreviewResult
+
       GetPasswordDataRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       GetPasswordDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstanceId"))
       GetPasswordDataRequest.struct_class = Types::GetPasswordDataRequest
@@ -2384,11 +2436,41 @@ module Aws
 
       HostList.member = Shapes::ShapeRef.new(shape: Host, location_name: "item")
 
+      HostOffering.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "offeringId"))
+      HostOffering.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
+      HostOffering.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "paymentOption"))
+      HostOffering.add_member(:upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "upfrontPrice"))
+      HostOffering.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
+      HostOffering.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
+      HostOffering.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
+      HostOffering.struct_class = Types::HostOffering
+
+      HostOfferingSet.member = Shapes::ShapeRef.new(shape: HostOffering)
+
       HostProperties.add_member(:sockets, Shapes::ShapeRef.new(shape: Integer, location_name: "sockets"))
       HostProperties.add_member(:cores, Shapes::ShapeRef.new(shape: Integer, location_name: "cores"))
       HostProperties.add_member(:total_v_cpus, Shapes::ShapeRef.new(shape: Integer, location_name: "totalVCpus"))
       HostProperties.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
       HostProperties.struct_class = Types::HostProperties
+
+      HostReservation.add_member(:host_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "hostReservationId"))
+      HostReservation.add_member(:host_id_set, Shapes::ShapeRef.new(shape: ResponseHostIdSet, location_name: "hostIdSet"))
+      HostReservation.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "offeringId"))
+      HostReservation.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
+      HostReservation.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "paymentOption"))
+      HostReservation.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
+      HostReservation.add_member(:upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "upfrontPrice"))
+      HostReservation.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
+      HostReservation.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "count"))
+      HostReservation.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
+      HostReservation.add_member(:end, Shapes::ShapeRef.new(shape: DateTime, location_name: "end"))
+      HostReservation.add_member(:start, Shapes::ShapeRef.new(shape: DateTime, location_name: "start"))
+      HostReservation.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
+      HostReservation.struct_class = Types::HostReservation
+
+      HostReservationIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+      HostReservationSet.member = Shapes::ShapeRef.new(shape: HostReservation)
 
       IamInstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
       IamInstanceProfile.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -3116,10 +3198,12 @@ module Aws
 
       PeeringConnectionOptions.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalClassicLinkToRemoteVpc"))
       PeeringConnectionOptions.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalVpcToRemoteClassicLink"))
+      PeeringConnectionOptions.add_member(:allow_dns_resolution_from_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowDnsResolutionFromRemoteVpc"))
       PeeringConnectionOptions.struct_class = Types::PeeringConnectionOptions
 
-      PeeringConnectionOptionsRequest.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "AllowEgressFromLocalClassicLinkToRemoteVpc"))
-      PeeringConnectionOptionsRequest.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "AllowEgressFromLocalVpcToRemoteClassicLink"))
+      PeeringConnectionOptionsRequest.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEgressFromLocalClassicLinkToRemoteVpc"))
+      PeeringConnectionOptionsRequest.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowEgressFromLocalVpcToRemoteClassicLink"))
+      PeeringConnectionOptionsRequest.add_member(:allow_dns_resolution_from_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowDnsResolutionFromRemoteVpc"))
       PeeringConnectionOptionsRequest.struct_class = Types::PeeringConnectionOptionsRequest
 
       Placement.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -3211,6 +3295,30 @@ module Aws
 
       PublicIpStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "PublicIp")
 
+      Purchase.add_member(:host_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "hostReservationId"))
+      Purchase.add_member(:host_id_set, Shapes::ShapeRef.new(shape: ResponseHostIdSet, location_name: "hostIdSet"))
+      Purchase.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
+      Purchase.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "paymentOption"))
+      Purchase.add_member(:upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "upfrontPrice"))
+      Purchase.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
+      Purchase.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
+      Purchase.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
+      Purchase.struct_class = Types::Purchase
+
+      PurchaseHostReservationRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OfferingId"))
+      PurchaseHostReservationRequest.add_member(:host_id_set, Shapes::ShapeRef.new(shape: RequestHostIdSet, required: true, location_name: "HostIdSet"))
+      PurchaseHostReservationRequest.add_member(:limit_price, Shapes::ShapeRef.new(shape: String, location_name: "LimitPrice"))
+      PurchaseHostReservationRequest.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "CurrencyCode"))
+      PurchaseHostReservationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+      PurchaseHostReservationRequest.struct_class = Types::PurchaseHostReservationRequest
+
+      PurchaseHostReservationResult.add_member(:purchase, Shapes::ShapeRef.new(shape: PurchaseSet, location_name: "purchase"))
+      PurchaseHostReservationResult.add_member(:total_upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "totalUpfrontPrice"))
+      PurchaseHostReservationResult.add_member(:total_hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "totalHourlyPrice"))
+      PurchaseHostReservationResult.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
+      PurchaseHostReservationResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+      PurchaseHostReservationResult.struct_class = Types::PurchaseHostReservationResult
+
       PurchaseRequest.add_member(:purchase_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "PurchaseToken"))
       PurchaseRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
       PurchaseRequest.struct_class = Types::PurchaseRequest
@@ -3233,6 +3341,8 @@ module Aws
 
       PurchaseScheduledInstancesResult.add_member(:scheduled_instance_set, Shapes::ShapeRef.new(shape: PurchasedScheduledInstanceSet, location_name: "scheduledInstanceSet"))
       PurchaseScheduledInstancesResult.struct_class = Types::PurchaseScheduledInstancesResult
+
+      PurchaseSet.member = Shapes::ShapeRef.new(shape: Purchase)
 
       PurchasedScheduledInstanceSet.member = Shapes::ShapeRef.new(shape: ScheduledInstance, location_name: "item")
 
@@ -3339,6 +3449,8 @@ module Aws
       ReportInstanceStatusRequest.struct_class = Types::ReportInstanceStatusRequest
 
       RequestHostIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+      RequestHostIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
       RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       RequestSpotFleetRequest.add_member(:spot_fleet_request_config, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigData, required: true, location_name: "spotFleetRequestConfig"))
@@ -3506,6 +3618,8 @@ module Aws
       ResourceIdList.member = Shapes::ShapeRef.new(shape: String)
 
       ResponseHostIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+      ResponseHostIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
       RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -3847,6 +3961,7 @@ module Aws
       SpotFleetRequestConfig.add_member(:spot_fleet_request_state, Shapes::ShapeRef.new(shape: BatchState, required: true, location_name: "spotFleetRequestState"))
       SpotFleetRequestConfig.add_member(:spot_fleet_request_config, Shapes::ShapeRef.new(shape: SpotFleetRequestConfigData, required: true, location_name: "spotFleetRequestConfig"))
       SpotFleetRequestConfig.add_member(:create_time, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "createTime"))
+      SpotFleetRequestConfig.add_member(:activity_status, Shapes::ShapeRef.new(shape: ActivityStatus, location_name: "activityStatus"))
       SpotFleetRequestConfig.struct_class = Types::SpotFleetRequestConfig
 
       SpotFleetRequestConfigData.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
@@ -4169,6 +4284,7 @@ module Aws
 
       VpcPeeringConnectionOptionsDescription.add_member(:allow_egress_from_local_classic_link_to_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalClassicLinkToRemoteVpc"))
       VpcPeeringConnectionOptionsDescription.add_member(:allow_egress_from_local_vpc_to_remote_classic_link, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowEgressFromLocalVpcToRemoteClassicLink"))
+      VpcPeeringConnectionOptionsDescription.add_member(:allow_dns_resolution_from_remote_vpc, Shapes::ShapeRef.new(shape: Boolean, location_name: "allowDnsResolutionFromRemoteVpc"))
       VpcPeeringConnectionOptionsDescription.struct_class = Types::VpcPeeringConnectionOptionsDescription
 
       VpcPeeringConnectionStateReason.add_member(:code, Shapes::ShapeRef.new(shape: VpcPeeringConnectionStateReasonCode, location_name: "code"))
@@ -4942,6 +5058,22 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeFlowLogsResult)
         end)
 
+        api.add_operation(:describe_host_reservation_offerings, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeHostReservationOfferings"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeHostReservationOfferingsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeHostReservationOfferingsResult)
+        end)
+
+        api.add_operation(:describe_host_reservations, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeHostReservations"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeHostReservationsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeHostReservationsResult)
+        end)
+
         api.add_operation(:describe_hosts, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DescribeHosts"
           o.http_method = "POST"
@@ -5562,6 +5694,14 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: GetConsoleScreenshotResult)
         end)
 
+        api.add_operation(:get_host_reservation_purchase_preview, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetHostReservationPurchasePreview"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: GetHostReservationPurchasePreviewRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetHostReservationPurchasePreviewResult)
+        end)
+
         api.add_operation(:get_password_data, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetPasswordData"
           o.http_method = "POST"
@@ -5744,6 +5884,14 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: MoveAddressToVpcRequest)
           o.output = Shapes::ShapeRef.new(shape: MoveAddressToVpcResult)
+        end)
+
+        api.add_operation(:purchase_host_reservation, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PurchaseHostReservation"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: PurchaseHostReservationRequest)
+          o.output = Shapes::ShapeRef.new(shape: PurchaseHostReservationResult)
         end)
 
         api.add_operation(:purchase_reserved_instances_offering, Seahorse::Model::Operation.new.tap do |o|

@@ -84,7 +84,9 @@ module Aws
       # `INSUFFICIENT_DATA` state from any other state. Each action is
       # specified as an Amazon Resource Name (ARN).
       #
-      # <important>The current WSDL lists this attribute as `UnknownActions`.</important>
+      # <important markdown="1"> The current WSDL lists this attribute as `UnknownActions`.
+      #
+      #  </important>
       # @return [Array<String>]
       def insufficient_data_actions
         data.insufficient_data_actions

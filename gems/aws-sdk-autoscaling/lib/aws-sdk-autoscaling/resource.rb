@@ -47,7 +47,7 @@ module Aws
       #   the exception of the block device mapping.
       #
       #   For more information, see [Create an Auto Scaling Group Using an EC2
-      #   Instance][1] in the *Auto Scaling Developer Guide*.
+      #   Instance][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -65,7 +65,7 @@ module Aws
       #   before another scaling activity can start. The default is 300.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #
@@ -74,21 +74,24 @@ module Aws
       #   One or more Availability Zones for the group. This parameter is
       #   optional if you specify one or more subnets.
       # @option options [Array<String>] :load_balancer_names
-      #   One or more load balancers.
+      #   One or more Classic load balancers. To specify an Application load
+      #   balancer, use `TargetGroupARNs` instead.
       #
       #   For more information, see [Using a Load Balancer With an Auto Scaling
-      #   Group][1] in the *Auto Scaling Developer Guide*.
+      #   Group][1] in the *Auto Scaling User Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html
+      # @option options [Array<String>] :target_group_arns
+      #   The Amazon Resource Names (ARN) of the target groups.
       # @option options [String] :health_check_type
       #   The service to use for the health checks. The valid values are `EC2`
       #   and `ELB`.
       #
       #   By default, health checks use Amazon EC2 instance status checks to
       #   determine the health of an instance. For more information, see [Health
-      #   Checks][1] in the *Auto Scaling Developer Guide*.
+      #   Checks][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -97,12 +100,12 @@ module Aws
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
       #   service. During this time, any health check failures for the instance
-      #   are ignored. The default is 300.
+      #   are ignored. The default is 0.
       #
       #   This parameter is required if you are adding an `ELB` health check.
       #
-      #   For more information, see [Health Checks][1] in the *Auto Scaling
-      #   Developer Guide*.
+      #   For more information, see [Health Checks][1] in the *Auto Scaling User
+      #   Guide*.
       #
       #
       #
@@ -124,7 +127,7 @@ module Aws
       #   specified.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
-      #   VPC][1] in the *Auto Scaling Developer Guide*.
+      #   VPC][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -135,7 +138,7 @@ module Aws
       #   listed.
       #
       #   For more information, see [Controlling Which Instances Auto Scaling
-      #   Terminates During Scale In][1] in the *Auto Scaling Developer Guide*.
+      #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -147,7 +150,7 @@ module Aws
       #   One or more tags.
       #
       #   For more information, see [Tagging Auto Scaling Groups and
-      #   Instances][1] in the *Auto Scaling Developer Guide*.
+      #   Instances][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -234,7 +237,7 @@ module Aws
       #   same request.
       #
       #   For more information, see [Create a Launch Configuration Using an EC2
-      #   Instance][1] in the *Auto Scaling Developer Guide*.
+      #   Instance][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -260,25 +263,14 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html
       # @option options [Types::InstanceMonitoring] :instance_monitoring
-      #   Enables detailed monitoring if it is disabled. Detailed monitoring is
-      #   enabled by default.
-      #
-      #   When detailed monitoring is enabled, Amazon CloudWatch generates
-      #   metrics every minute and your account is charged a fee. When you
-      #   disable detailed monitoring, by specifying `False`, CloudWatch
-      #   generates metrics every 5 minutes. For more information, see
-      #   [Monitoring Your Auto Scaling Instances and Groups][1] in the *Auto
-      #   Scaling Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-instance-monitoring.html
+      #   Enables detailed monitoring (`true`) or basic monitoring (`false`) for
+      #   the Auto Scaling instances.
       # @option options [String] :spot_price
       #   The maximum hourly price to be paid for any Spot Instance launched to
       #   fulfill the request. Spot Instances are launched when the price you
       #   specify exceeds the current Spot market price. For more information,
       #   see [Launching Spot Instances in Your Auto Scaling Group][1] in the
-      #   *Auto Scaling Developer Guide*.
+      #   *Auto Scaling User Guide*.
       #
       #
       #
@@ -292,7 +284,7 @@ module Aws
       #   Scaling to automatically enable applications running on your EC2
       #   instances to securely access other AWS resources. For more
       #   information, see [Launch Auto Scaling Instances with an IAM Role][1]
-      #   in the *Auto Scaling Developer Guide*.
+      #   in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -313,7 +305,7 @@ module Aws
       #   Used for groups that launch instances into a virtual private cloud
       #   (VPC). Specifies whether to assign a public IP address to each
       #   instance. For more information, see [Launching Auto Scaling Instances
-      #   in a VPC][1] in the *Auto Scaling Developer Guide*.
+      #   in a VPC][1] in the *Auto Scaling User Guide*.
       #
       #   If you specify this parameter, be sure to specify at least one subnet
       #   when you create your group.
@@ -339,7 +331,7 @@ module Aws
       #   when you create your group.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
-      #   VPC][1] in the *Auto Scaling Developer Guide*.
+      #   VPC][1] in the *Auto Scaling User Guide*.
       #
       #   Valid values: `default` \| `dedicated`
       #
@@ -359,11 +351,11 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :activity_ids
-      #   The activity IDs of the desired scaling activities. If this list is
-      #   omitted, all activities are described. If you specify an Auto Scaling
-      #   group, the results are limited to that group. The list of requested
-      #   activities cannot contain more than 50 items. If unknown activities
-      #   are requested, they are ignored with no error.
+      #   The activity IDs of the desired scaling activities. If you omit this
+      #   parameter, all activities for the past six weeks are described. If you
+      #   specify an Auto Scaling group, the results are limited to that group.
+      #   The list of requested activities cannot contain more than 50 items. If
+      #   unknown activities are requested, they are ignored with no error.
       # @option options [String] :auto_scaling_group_name
       #   The name of the group.
       # @return [Activity::Collection]
@@ -405,7 +397,8 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :auto_scaling_group_names
-      #   The group names.
+      #   The group names. If you omit this parameter, all Auto Scaling groups
+      #   are described.
       # @return [AutoScalingGroup::Collection]
       def groups(options = {})
         batches = Enumerator.new do |y|
@@ -461,7 +454,8 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :launch_configuration_names
-      #   The launch configuration names.
+      #   The launch configuration names. If you omit this parameter, all launch
+      #   configurations are described.
       # @return [LaunchConfiguration::Collection]
       def launch_configurations(options = {})
         batches = Enumerator.new do |y|
@@ -486,7 +480,7 @@ module Aws
       #   The name of the group.
       # @option options [Array<String>] :policy_names
       #   One or more policy names or policy ARNs to be described. If you omit
-      #   this list, all policy names are described. If an group name is
+      #   this parameter, all policy names are described. If an group name is
       #   provided, the results are limited to that group. This list is limited
       #   to 50 items. If you specify an unknown policy name, it is ignored with
       #   no error.
@@ -534,9 +528,9 @@ module Aws
       # @option options [String] :auto_scaling_group_name
       #   The name of the group.
       # @option options [Array<String>] :scheduled_action_names
-      #   Describes one or more scheduled actions. If you omit this list, the
-      #   call describes all scheduled actions. If you specify an unknown
-      #   scheduled action it is ignored with no error.
+      #   Describes one or more scheduled actions. If you omit this parameter,
+      #   all scheduled actions are described. If you specify an unknown
+      #   scheduled action, it is ignored with no error.
       #
       #   You can describe up to a maximum of 50 instances with a single call.
       #   If there are more items to return, the call returns a token. To get

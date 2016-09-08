@@ -447,7 +447,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] region
-        #   The cloned stack AWS region, such as \"us-east-1\". For more
+        #   The cloned stack AWS region, such as \"ap-northeast-2\". For more
         #   information about AWS regions, see [Regions and Endpoints][1].
         #
         #
@@ -1604,8 +1604,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] region
-        #   The stack\'s AWS region, such as \"us-east-1\". For more information
-        #   about Amazon regions, see [Regions and Endpoints][1].
+        #   The stack\'s AWS region, such as \"ap-south-1\". For more
+        #   information about Amazon regions, see [Regions and Endpoints][1].
         #
         #
         #
@@ -4863,8 +4863,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] region
-        #   The stack AWS region, such as \"us-east-1\". For more information
-        #   about AWS regions, see [Regions and Endpoints][1].
+        #   The stack AWS region, such as \"ap-northeast-2\". For more
+        #   information about AWS regions, see [Regions and Endpoints][1].
         #
         #
         #

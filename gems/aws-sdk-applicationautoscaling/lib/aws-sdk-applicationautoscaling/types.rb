@@ -37,9 +37,9 @@ module Aws
       #
       #       {
       #         policy_name: "ResourceIdMaxLen1600", # required
-      #         service_namespace: "ecs", # required, accepts ecs
+      #         service_namespace: "ecs", # required, accepts ecs, ec2
       #         resource_id: "ResourceIdMaxLen1600", # required
-      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount
+      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #       }
       class DeleteScalingPolicyRequest < Aws::Structure.new(
         :policy_name,
@@ -62,17 +62,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_id
-        #   The unique identifier string for the resource associated with the
-        #   scaling policy. For Amazon ECS services, this value is the resource
-        #   type, followed by the cluster name and service name, such as
-        #   `service/default/sample-webapp`.
+        #   The resource type and unique identifier string for the resource
+        #   associated with the scaling policy. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scaling policy. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request.
         #   @return [String]
 
       end
@@ -83,9 +89,9 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         service_namespace: "ecs", # required, accepts ecs
+      #         service_namespace: "ecs", # required, accepts ecs, ec2
       #         resource_id: "ResourceIdMaxLen1600", # required
-      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount
+      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #       }
       class DeregisterScalableTargetRequest < Aws::Structure.new(
         :service_namespace,
@@ -103,17 +109,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_id
-        #   The unique identifier string for the resource associated with the
-        #   scalable target. For Amazon ECS services, this value is the resource
-        #   type, followed by the cluster name and service name, such as
-        #   `service/default/sample-webapp`.
+        #   The resource type and unique identifier string for the resource
+        #   associated with the scalable target. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scalable target. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request.
         #   @return [String]
 
       end
@@ -124,9 +136,9 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         service_namespace: "ecs", # required, accepts ecs
+      #         service_namespace: "ecs", # required, accepts ecs, ec2
       #         resource_ids: ["ResourceIdMaxLen1600"],
-      #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount
+      #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #         max_results: 1,
       #         next_token: "XmlString",
       #       }
@@ -148,19 +160,26 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_ids
-        #   The unique identifier string for the resource associated with the
-        #   scalable target. For Amazon ECS services, this value is the resource
-        #   type, followed by the cluster name and service name, such as
-        #   `service/default/sample-webapp`. If you specify a scalable
-        #   dimension, you must also specify a resource ID.
+        #   The resource type and unique identifier string for the resource
+        #   associated with the scalable target. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`. If
+        #   you specify a scalable dimension, you must also specify a resource
+        #   ID.
         #   @return [Array<String>]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scalable target. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service. If you specify a
-        #   scalable dimension, you must also specify a resource ID.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request. If you specify a scalable
+        #   dimension, you must also specify a resource ID.
         #   @return [String]
 
         # @!attribute [rw] max_results
@@ -206,9 +225,9 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         service_namespace: "ecs", # required, accepts ecs
+      #         service_namespace: "ecs", # required, accepts ecs, ec2
       #         resource_id: "ResourceIdMaxLen1600",
-      #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount
+      #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #         max_results: 1,
       #         next_token: "XmlString",
       #       }
@@ -230,19 +249,26 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_id
-        #   The unique identifier string for the resource associated with the
-        #   scaling activity. For Amazon ECS services, this value is the
-        #   resource type, followed by the cluster name and service name, such
-        #   as `service/default/sample-webapp`. If you specify a scalable
-        #   dimension, you must also specify a resource ID.
+        #   The resource type and unique identifier string for the resource
+        #   associated with the scaling activity. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`. If
+        #   you specify a scalable dimension, you must also specify a resource
+        #   ID.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scaling activity. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service. If you specify a
-        #   scalable dimension, you must also specify a resource ID.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request. If you specify a scalable
+        #   dimension, you must also specify a resource ID.
         #   @return [String]
 
         # @!attribute [rw] max_results
@@ -289,9 +315,9 @@ module Aws
       #
       #       {
       #         policy_names: ["ResourceIdMaxLen1600"],
-      #         service_namespace: "ecs", # required, accepts ecs
+      #         service_namespace: "ecs", # required, accepts ecs, ec2
       #         resource_id: "ResourceIdMaxLen1600",
-      #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount
+      #         scalable_dimension: "ecs:service:DesiredCount", # accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #         max_results: 1,
       #         next_token: "XmlString",
       #       }
@@ -319,10 +345,15 @@ module Aws
 
         # @!attribute [rw] resource_id
         #   The unique resource identifier string of the scalable target that
-        #   the scaling policy is associated with. For Amazon ECS services, this
-        #   value is the resource type, followed by the cluster name and service
-        #   name, such as `service/default/sample-webapp`. If you specify a
-        #   scalable dimension, you must also specify a resource ID.
+        #   the scaling policy is associated with. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`. If
+        #   you specify a scalable dimension, you must also specify a resource
+        #   ID.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
@@ -330,8 +361,9 @@ module Aws
         #   policy is associated with. The scalable dimension contains the
         #   service namespace, resource type, and scaling property, such as
         #   `ecs:service:DesiredCount` for the desired task count of an Amazon
-        #   ECS service. If you specify a scalable dimension, you must also
-        #   specify a resource ID.
+        #   ECS service, or `ec2:spot-fleet-request:TargetCapacity` for the
+        #   target capacity of an Amazon EC2 Spot fleet request. If you specify
+        #   a scalable dimension, you must also specify a resource ID.
         #   @return [String]
 
         # @!attribute [rw] max_results
@@ -378,9 +410,9 @@ module Aws
       #
       #       {
       #         policy_name: "PolicyName", # required
-      #         service_namespace: "ecs", # required, accepts ecs
+      #         service_namespace: "ecs", # required, accepts ecs, ec2
       #         resource_id: "ResourceIdMaxLen1600", # required
-      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount
+      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #         policy_type: "StepScaling", # accepts StepScaling
       #         step_scaling_policy_configuration: {
       #           adjustment_type: "ChangeInCapacity", # accepts ChangeInCapacity, PercentChangeInCapacity, ExactCapacity
@@ -420,9 +452,13 @@ module Aws
 
         # @!attribute [rw] resource_id
         #   The unique resource identifier string for the scalable target that
-        #   this scaling policy applies to. For Amazon ECS services, this value
-        #   is the resource type, followed by the cluster name and service name,
-        #   such as `service/default/sample-webapp`.
+        #   this scaling policy applies to. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
@@ -430,7 +466,8 @@ module Aws
         #   policy applies to. The scalable dimension contains the service
         #   namespace, resource type, and scaling property, such as
         #   `ecs:service:DesiredCount` for the desired task count of an Amazon
-        #   ECS service.
+        #   ECS service, or `ec2:spot-fleet-request:TargetCapacity` for the
+        #   target capacity of an Amazon EC2 Spot fleet request.
         #   @return [String]
 
         # @!attribute [rw] policy_type
@@ -461,9 +498,9 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         service_namespace: "ecs", # required, accepts ecs
+      #         service_namespace: "ecs", # required, accepts ecs, ec2
       #         resource_id: "ResourceIdMaxLen1600", # required
-      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount
+      #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #         min_capacity: 1,
       #         max_capacity: 1,
       #         role_arn: "ResourceIdMaxLen1600",
@@ -488,17 +525,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_id
-        #   The unique identifier string for the resource to associate with the
-        #   scalable target. For Amazon ECS services, this value is the resource
-        #   type, followed by the cluster name and service name, such as
-        #   `service/default/sample-webapp`.
+        #   The resource type and unique identifier string for the resource to
+        #   associate with the scalable target. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scalable target. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request.
         #   @return [String]
 
         # @!attribute [rw] min_capacity
@@ -547,17 +590,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_id
-        #   The unique identifier string for the resource associated with the
-        #   scalable target. For Amazon ECS services, this value is the resource
-        #   type, followed by the cluster name and service name, such as
-        #   `service/default/sample-webapp`.
+        #   The resource type and unique identifier string for the resource
+        #   associated with the scalable target. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scalable target. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request.
         #   @return [String]
 
         # @!attribute [rw] min_capacity
@@ -610,17 +659,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_id
-        #   The unique identifier string for the resource associated with the
-        #   scaling activity. For Amazon ECS services, this value is the
-        #   resource type, followed by the cluster name and service name, such
-        #   as `service/default/sample-webapp`.
+        #   The resource type and unique identifier string for the resource
+        #   associated with the scaling activity. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scaling activity. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request.
         #   @return [String]
 
         # @!attribute [rw] description
@@ -685,17 +740,23 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_id
-        #   The unique identifier string for the resource associated with the
-        #   scaling policy. For Amazon ECS services, this value is the resource
-        #   type, followed by the cluster name and service name, such as
-        #   `service/default/sample-webapp`.
+        #   The resource type and unique identifier string for the resource
+        #   associated with the scaling policy. For Amazon ECS services, the
+        #   resource type is `services`, and the identifier is the cluster name
+        #   and service name; for example, `service/default/sample-webapp`. For
+        #   Amazon EC2 Spot fleet requests, the resource type is
+        #   `spot-fleet-request`, and the identifier is the Spot fleet request
+        #   ID; for example,
+        #   `spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE`.
         #   @return [String]
 
         # @!attribute [rw] scalable_dimension
         #   The scalable dimension associated with the scaling policy. The
         #   scalable dimension contains the service namespace, resource type,
         #   and scaling property, such as `ecs:service:DesiredCount` for the
-        #   desired task count of an Amazon ECS service.
+        #   desired task count of an Amazon ECS service, or
+        #   `ec2:spot-fleet-request:TargetCapacity` for the target capacity of
+        #   an Amazon EC2 Spot fleet request.
         #   @return [String]
 
         # @!attribute [rw] policy_type

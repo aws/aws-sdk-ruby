@@ -377,6 +377,12 @@ module Aws
         data.promotion_tier
       end
 
+      # The Amazon Resource Name (ARN) for the DB instance.
+      # @return [String]
+      def db_instance_arn
+        data.db_instance_arn
+      end
+
       # @!endgroup
 
       # @return [Client]
@@ -846,10 +852,6 @@ module Aws
       #
       #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
       #
-      #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
-      #
       #   **Oracle Database Enterprise Edition (oracle-ee)**
       #
       #   * **Version 12.1 (available in all AWS regions except ap-south-1,
@@ -864,18 +866,6 @@ module Aws
       #
       #   * **Version 12.1 (available in all AWS regions except
       #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
       #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -894,18 +884,6 @@ module Aws
       #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
       #     12.1.0.1.v5`
       #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
-      #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
       #
@@ -922,18 +900,6 @@ module Aws
       #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
       #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
       #     12.1.0.1.v5`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
       #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -1426,6 +1392,26 @@ module Aws
       #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
       #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
       #   db.t2.medium | db.t2.large`
+      # @option options [String] :db_subnet_group_name
+      #   The new DB subnet group for the DB instance. You can use this
+      #   parameter to move your DB instance to a different VPC, or to a
+      #   different subnet group in the same VPC. If your DB instance is not in
+      #   a VPC, you can also use this parameter to move your DB instance into a
+      #   VPC. For more information, see [Updating the VPC for a DB
+      #   Instance][1].
+      #
+      #   Changing the subnet group causes an outage during the change. The
+      #   change is applied during the next maintenance window, unless you
+      #   specify `true` for the `ApplyImmediately` parameter.
+      #
+      #   Constraints: Must contain no more than 255 alphanumeric characters,
+      #   periods, underscores, spaces, or hyphens.
+      #
+      #   Example: `mySubnetGroup`
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
       # @option options [Array<String>] :db_security_groups
       #   A list of DB security groups to authorize on this DB instance.
       #   Changing this setting does not result in an outage and the change is
@@ -1598,6 +1584,11 @@ module Aws
       #   result if this parameter is set to `true` during the maintenance
       #   window, and a newer minor version is available, and RDS has enabled
       #   auto patching for that engine version.
+      # @option options [String] :license_model
+      #   The license model for the DB instance.
+      #
+      #   Valid values: `license-included` \| `bring-your-own-license` \|
+      #   `general-public-license`
       # @option options [Integer] :iops
       #   The new Provisioned IOPS (I/O operations per second) value for the RDS
       #   instance. Changing this setting does not result in an outage and the
@@ -2299,10 +2290,11 @@ module Aws
       #   * `public` - Return all DB snapshots that have been marked as public.
       #
       #   If you don\'t specify a `SnapshotType` value, then both automated and
-      #   manual snapshots are returned. You can include shared snapshots with
-      #   these results by setting the `IncludeShared` parameter to `true`. You
-      #   can include public snapshots with these results by setting the
-      #   `IncludePublic` parameter to `true`.
+      #   manual snapshots are returned. Shared and public DB snapshots are not
+      #   included in the returned results by default. You can include shared
+      #   snapshots with these results by setting the `IncludeShared` parameter
+      #   to `true`. You can include public snapshots with these results by
+      #   setting the `IncludePublic` parameter to `true`.
       #
       #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`

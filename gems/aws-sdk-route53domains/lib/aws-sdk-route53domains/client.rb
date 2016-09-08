@@ -122,8 +122,6 @@ module Aws
 
       # This operation disables automatic renewal of domain registration for
       # the specified domain.
-      #
-      # <note>Caution! Amazon Route 53 doesn't have a manual renewal process, so if you disable automatic renewal, registration for the domain will not be renewed when the expiration date passes, and you will lose control of the domain name.</note>
       # @option params [required, String] :domain_name
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -393,6 +391,46 @@ module Aws
       # @param [Hash] options ({})
       def get_domain_detail(params = {}, options = {})
         req = build_request(:get_domain_detail, params)
+        req.send_request(options)
+      end
+
+      # The GetDomainSuggestions operation returns a list of suggested domain
+      # names given a string, which can either be a domain name or simply a
+      # word or phrase (without spaces).
+      #
+      # Parameters: * DomainName (string): The basis for your domain
+      # suggestion search, a
+      #   string with (or without) top-level domain specified.
+      # * SuggestionCount (int): The number of domain suggestions to be
+      #   returned, maximum 50, minimum 1.
+      # * OnlyAvailable (bool): If true, availability check will be performed
+      #   on suggestion results, and only available domains will be returned.
+      #   If false, suggestions will be returned without checking whether the
+      #   domain is actually available, and caller will have to call
+      #   checkDomainAvailability for each suggestion to determine
+      #   availability for registration.
+      # @option params [required, String] :domain_name
+      # @option params [required, Integer] :suggestion_count
+      # @option params [required, Boolean] :only_available
+      # @return [Types::GetDomainSuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetDomainSuggestionsResponse#suggestions_list #SuggestionsList} => Array&lt;Types::DomainSuggestion&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_domain_suggestions({
+      #     domain_name: "DomainName", # required
+      #     suggestion_count: 1, # required
+      #     only_available: false, # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.suggestions_list #=> Array
+      #   resp.suggestions_list[0].domain_name #=> String
+      #   resp.suggestions_list[0].availability #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_domain_suggestions(params = {}, options = {})
+        req = build_request(:get_domain_suggestions, params)
         req.send_request(options)
       end
 
@@ -784,6 +822,67 @@ module Aws
       # @param [Hash] options ({})
       def register_domain(params = {}, options = {})
         req = build_request(:register_domain, params)
+        req.send_request(options)
+      end
+
+      # This operation renews a domain for the specified number of years. The
+      # cost of renewing your domain is billed to your AWS account.
+      #
+      # We recommend that you renew your domain several weeks before the
+      # expiration date. Some TLD registries delete domains before the
+      # expiration date if you haven\'t renewed far enough in advance. For
+      # more information about renewing domain registration, see [Renewing
+      # Registration for a Domain][1] in the Amazon Route 53 documentation.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/console/route53/domain-renew
+      # @option params [required, String] :domain_name
+      # @option params [Integer] :duration_in_years
+      #   The number of years that you want to renew the domain for. The maximum
+      #   number of years depends on the top-level domain. For the range of
+      #   valid values for your domain, see [Domains that You Can Register with
+      #   Amazon Route 53][1] in the Amazon Route 53 documentation.
+      #
+      #   Type: Integer
+      #
+      #   Default: 1
+      #
+      #   Valid values: Integer from 1 to 10
+      #
+      #   Required: No
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/console/route53/domain-tld-list
+      # @option params [required, Integer] :current_expiry_year
+      #   The year when the registration for the domain is set to expire. This
+      #   value must match the current expiration date for the domain.
+      #
+      #   Type: Integer
+      #
+      #   Default: None
+      #
+      #   Valid values: Integer
+      #
+      #   Required: Yes
+      # @return [Types::RenewDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::RenewDomainResponse#operation_id #OperationId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.renew_domain({
+      #     domain_name: "DomainName", # required
+      #     duration_in_years: 1,
+      #     current_expiry_year: 1, # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.operation_id #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def renew_domain(params = {}, options = {})
+        req = build_request(:renew_domain, params)
         req.send_request(options)
       end
 
@@ -1453,6 +1552,81 @@ module Aws
         req.send_request(options)
       end
 
+      # This operation returns all the domain-related billing records for the
+      # current AWS account for a specified period
+      # @option params [Time,DateTime,Date,Integer,String] :start
+      #   The beginning date and time for the time period for which you want a
+      #   list of billing records. Specify the date in Unix time format.
+      #
+      #   Type: Double
+      #
+      #   Default: None
+      #
+      #   Required: Yes
+      # @option params [Time,DateTime,Date,Integer,String] :end
+      #   The end date and time for the time period for which you want a list of
+      #   billing records. Specify the date in Unix time format.
+      #
+      #   Type: Double
+      #
+      #   Default: None
+      #
+      #   Required: Yes
+      # @option params [String] :marker
+      #   For an initial request for a list of billing records, omit this
+      #   element. If the number of billing records that are associated with the
+      #   current AWS account during the specified period is greater than the
+      #   value that you specified for `MaxItems`, you can use `Marker` to
+      #   return additional billing records. Get the value of `NextPageMarker`
+      #   from the previous response, and submit another request that includes
+      #   the value of `NextPageMarker` in the `Marker` element.
+      #
+      #   Type: String
+      #
+      #   Default: None
+      #
+      #   Constraints: The marker must match the value of `NextPageMarker` that
+      #   was returned in the previous response.
+      #
+      #   Required: No
+      # @option params [Integer] :max_items
+      #   The number of billing records to be returned.
+      #
+      #   Type: Integer
+      #
+      #   Default: 20
+      #
+      #   Constraints: A value between 1 and 100.
+      #
+      #   Required: No
+      # @return [Types::ViewBillingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ViewBillingResponse#next_page_marker #NextPageMarker} => String
+      #   * {Types::ViewBillingResponse#billing_records #BillingRecords} => Array&lt;Types::BillingRecord&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.view_billing({
+      #     start: Time.now,
+      #     end: Time.now,
+      #     marker: "PageMarker",
+      #     max_items: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.next_page_marker #=> String
+      #   resp.billing_records #=> Array
+      #   resp.billing_records[0].domain_name #=> String
+      #   resp.billing_records[0].operation #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK"
+      #   resp.billing_records[0].invoice_id #=> String
+      #   resp.billing_records[0].bill_date #=> Time
+      #   resp.billing_records[0].price #=> Float
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def view_billing(params = {}, options = {})
+        req = build_request(:view_billing, params)
+        req.send_request(options)
+      end
+
       # @!endgroup
 
       # @param [Symbol] waiter_name
@@ -1492,6 +1666,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

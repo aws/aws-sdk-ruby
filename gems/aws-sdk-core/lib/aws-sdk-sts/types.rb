@@ -55,8 +55,8 @@ module Aws
         #
         #   The format for this parameter, as described by its regex pattern, is
         #   a string of characters consisting of upper- and lower-case
-        #   alphanumeric characters with no spaces. You can also include any of
-        #   the following characters: =,.@-
+        #   alphanumeric characters with no spaces. You can also include
+        #   underscores or any of the following characters: =,.@-
         #   @return [String]
 
         # @!attribute [rw] policy
@@ -98,6 +98,21 @@ module Aws
         #   The duration, in seconds, of the role session. The value can range
         #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
         #   the value is set to 3600 seconds.
+        #
+        #   <note markdown="1"> This is separate from the duration of a console session that you
+        #   might request using the returned credentials. The request to the
+        #   federation endpoint for a console sign-in token takes a
+        #   `SessionDuration` parameter that specifies the maximum length of the
+        #   console session, separately from the `DurationSeconds` parameter on
+        #   this API. For more information, see [Creating a URL that Enables
+        #   Federated Users to Access the AWS Management Console][1] in the *IAM
+        #   User Guide*.
+        #
+        #    </note>
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
         #   @return [Integer]
 
         # @!attribute [rw] external_id
@@ -114,8 +129,8 @@ module Aws
         #
         #   The format for this parameter, as described by its regex pattern, is
         #   a string of characters consisting of upper- and lower-case
-        #   alphanumeric characters with no spaces. You can also include any of
-        #   the following characters: =,.@:\\/-
+        #   alphanumeric characters with no spaces. You can also include
+        #   underscores or any of the following characters: =,.@:\\/-
         #
         #
         #
@@ -133,8 +148,8 @@ module Aws
         #
         #   The format for this parameter, as described by its regex pattern, is
         #   a string of characters consisting of upper- and lower-case
-        #   alphanumeric characters with no spaces. You can also include any of
-        #   the following characters: =,.@-
+        #   alphanumeric characters with no spaces. You can also include
+        #   underscores or any of the following characters: =,.@-
         #   @return [String]
 
         # @!attribute [rw] token_code
@@ -266,11 +281,20 @@ module Aws
         #   `SessionNotOnOrAfter` value. The actual expiration time is whichever
         #   value is shorter.
         #
-        #   <note markdown="1"> The maximum duration for a session is 1 hour, and the minimum
-        #   duration is 15 minutes, even if values outside this range are
-        #   specified.
+        #   <note markdown="1"> This is separate from the duration of a console session that you
+        #   might request using the returned credentials. The request to the
+        #   federation endpoint for a console sign-in token takes a
+        #   `SessionDuration` parameter that specifies the maximum length of the
+        #   console session, separately from the `DurationSeconds` parameter on
+        #   this API. For more information, see [Enabling SAML 2.0 Federated
+        #   Users to Access the AWS Management Console][1] in the *IAM User
+        #   Guide*.
         #
         #    </note>
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
         #   @return [Integer]
 
       end
@@ -385,8 +409,8 @@ module Aws
         #
         #   The format for this parameter, as described by its regex pattern, is
         #   a string of characters consisting of upper- and lower-case
-        #   alphanumeric characters with no spaces. You can also include any of
-        #   the following characters: =,.@-
+        #   alphanumeric characters with no spaces. You can also include
+        #   underscores or any of the following characters: =,.@-
         #   @return [String]
 
         # @!attribute [rw] web_identity_token
@@ -447,6 +471,21 @@ module Aws
         #   The duration, in seconds, of the role session. The value can range
         #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
         #   the value is set to 3600 seconds.
+        #
+        #   <note markdown="1"> This is separate from the duration of a console session that you
+        #   might request using the returned credentials. The request to the
+        #   federation endpoint for a console sign-in token takes a
+        #   `SessionDuration` parameter that specifies the maximum length of the
+        #   console session, separately from the `DurationSeconds` parameter on
+        #   this API. For more information, see [Creating a URL that Enables
+        #   Federated Users to Access the AWS Management Console][1] in the *IAM
+        #   User Guide*.
+        #
+        #    </note>
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
         #   @return [Integer]
 
       end
@@ -669,8 +708,8 @@ module Aws
         #
         #   The format for this parameter, as described by its regex pattern, is
         #   a string of characters consisting of upper- and lower-case
-        #   alphanumeric characters with no spaces. You can also include any of
-        #   the following characters: =,.@-
+        #   alphanumeric characters with no spaces. You can also include
+        #   underscores or any of the following characters: =,.@-
         #   @return [String]
 
         # @!attribute [rw] policy
@@ -796,8 +835,8 @@ module Aws
         #
         #   The format for this parameter, as described by its regex pattern, is
         #   a string of characters consisting of upper- and lower-case
-        #   alphanumeric characters with no spaces. You can also include any of
-        #   the following characters: =,.@-
+        #   alphanumeric characters with no spaces. You can also include
+        #   underscores or any of the following characters: =,.@-
         #   @return [String]
 
         # @!attribute [rw] token_code

@@ -100,6 +100,12 @@ module Aws
         data.enabled
       end
 
+      # The Amazon Resource Name (ARN) for the event subscription.
+      # @return [String]
+      def event_subscription_arn
+        data.event_subscription_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

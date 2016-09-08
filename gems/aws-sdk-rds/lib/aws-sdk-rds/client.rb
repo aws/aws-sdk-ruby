@@ -85,6 +85,7 @@ module Aws
       #   resp.event_subscription.event_categories_list #=> Array
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
+      #   resp.event_subscription.event_subscription_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def add_source_identifier_to_subscription(params = {}, options = {})
@@ -110,7 +111,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [required, Array<Types::Tag>] :tags
       #   The tags to be assigned to the Amazon RDS resource.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -141,7 +142,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [required, String] :apply_action
       #   The pending maintenance action to apply to this resource.
       #
@@ -253,6 +254,7 @@ module Aws
       #   resp.db_security_group.ip_ranges #=> Array
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
+      #   resp.db_security_group.db_security_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def authorize_db_security_group_ingress(params = {}, options = {})
@@ -280,7 +282,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [required, String] :target_db_cluster_parameter_group_identifier
       #   The identifier for the copied DB cluster parameter group.
       #
@@ -320,6 +322,7 @@ module Aws
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_name #=> String
       #   resp.db_cluster_parameter_group.db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_group.description #=> String
+      #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def copy_db_cluster_parameter_group(params = {}, options = {})
@@ -396,6 +399,7 @@ module Aws
       #   resp.db_cluster_snapshot.percent_progress #=> Integer
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
+      #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def copy_db_cluster_snapshot(params = {}, options = {})
@@ -413,17 +417,12 @@ module Aws
       #
       #   * Must specify a valid DB parameter group.
       #
-      #   * If the source DB parameter group is in the same region as the copy,
-      #     specify a valid DB parameter group identifier, for example
+      #   * Must specify a valid DB parameter group identifier, for example
       #     `my-db-param-group`, or a valid ARN.
       #
-      #   * If the source DB parameter group is in a different region than the
-      #     copy, specify a valid DB parameter group ARN, for example
-      #     `arn:aws:rds:us-west-2:123456789012:pg:special-parameters`.
       #
       #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [required, String] :target_db_parameter_group_identifier
       #   The identifier for the copied DB parameter group.
       #
@@ -463,6 +462,7 @@ module Aws
       #   resp.db_parameter_group.db_parameter_group_name #=> String
       #   resp.db_parameter_group.db_parameter_group_family #=> String
       #   resp.db_parameter_group.description #=> String
+      #   resp.db_parameter_group.db_parameter_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def copy_db_parameter_group(params = {}, options = {})
@@ -579,6 +579,7 @@ module Aws
       #   resp.db_snapshot.tde_credential_arn #=> String
       #   resp.db_snapshot.encrypted #=> Boolean
       #   resp.db_snapshot.kms_key_id #=> String
+      #   resp.db_snapshot.db_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def copy_db_snapshot(params = {}, options = {})
@@ -606,7 +607,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [required, String] :target_option_group_identifier
       #   The identifier for the copied option group.
       #
@@ -653,6 +654,7 @@ module Aws
       #   resp.option_group.options[0].persistent #=> Boolean
       #   resp.option_group.options[0].permanent #=> Boolean
       #   resp.option_group.options[0].port #=> Integer
+      #   resp.option_group.options[0].option_version #=> String
       #   resp.option_group.options[0].option_settings #=> Array
       #   resp.option_group.options[0].option_settings[0].name #=> String
       #   resp.option_group.options[0].option_settings[0].value #=> String
@@ -671,6 +673,7 @@ module Aws
       #   resp.option_group.options[0].vpc_security_group_memberships[0].status #=> String
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
+      #   resp.option_group.option_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def copy_option_group(params = {}, options = {})
@@ -730,8 +733,8 @@ module Aws
       #   Example: `my-cluster1`
       # @option params [String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to associate with this DB
-      #   cluster. If this argument is omitted, `default.aurora5.6` for the
-      #   specified engine will be used.
+      #   cluster. If this argument is omitted, `default.aurora5.6` will be
+      #   used.
       #
       #   Constraints:
       #
@@ -765,7 +768,7 @@ module Aws
       #
       #   Default: `3306`
       # @option params [String] :master_username
-      #   The name of the master user for the client DB cluster.
+      #   The name of the master user for the DB cluster.
       #
       #   Constraints:
       #
@@ -919,6 +922,7 @@ module Aws
       #   resp.db_cluster.storage_encrypted #=> Boolean
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_cluster(params = {}, options = {})
@@ -1008,6 +1012,7 @@ module Aws
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_name #=> String
       #   resp.db_cluster_parameter_group.db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_group.description #=> String
+      #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_cluster_parameter_group(params = {}, options = {})
@@ -1084,6 +1089,7 @@ module Aws
       #   resp.db_cluster_snapshot.percent_progress #=> Integer
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
+      #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_cluster_snapshot(params = {}, options = {})
@@ -1537,10 +1543,6 @@ module Aws
       #
       #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
       #
-      #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
-      #
       #   **Oracle Database Enterprise Edition (oracle-ee)**
       #
       #   * **Version 12.1 (available in all AWS regions except ap-south-1,
@@ -1555,18 +1557,6 @@ module Aws
       #
       #   * **Version 12.1 (available in all AWS regions except
       #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
       #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -1585,18 +1575,6 @@ module Aws
       #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
       #     12.1.0.1.v5`
       #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
-      #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
       #
@@ -1613,18 +1591,6 @@ module Aws
       #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
       #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
       #     12.1.0.1.v5`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
       #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -1879,6 +1845,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -1887,10 +1854,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -1929,6 +1898,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_instance(params = {}, options = {})
@@ -1978,7 +1948,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [String] :db_instance_class
       #   The compute and memory capacity of the Read Replica.
       #
@@ -2160,6 +2130,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -2168,10 +2139,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -2210,6 +2183,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_instance_read_replica(params = {}, options = {})
@@ -2290,6 +2264,7 @@ module Aws
       #   resp.db_parameter_group.db_parameter_group_name #=> String
       #   resp.db_parameter_group.db_parameter_group_family #=> String
       #   resp.db_parameter_group.description #=> String
+      #   resp.db_parameter_group.db_parameter_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_parameter_group(params = {}, options = {})
@@ -2312,8 +2287,6 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   * Must not be \"Default\"
-      #
-      #   * Cannot contain spaces
       #
       #   Example: `mysecuritygroup`
       # @option params [required, String] :db_security_group_description
@@ -2349,6 +2322,7 @@ module Aws
       #   resp.db_security_group.ip_ranges #=> Array
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
+      #   resp.db_security_group.db_security_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_security_group(params = {}, options = {})
@@ -2425,6 +2399,7 @@ module Aws
       #   resp.db_snapshot.tde_credential_arn #=> String
       #   resp.db_snapshot.encrypted #=> Boolean
       #   resp.db_snapshot.kms_key_id #=> String
+      #   resp.db_snapshot.db_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_snapshot(params = {}, options = {})
@@ -2438,9 +2413,8 @@ module Aws
       #   The name for the DB subnet group. This value is stored as a lowercase
       #   string.
       #
-      #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Cannot contain periods, underscores, spaces, or hyphens. Must not be
-      #   `default`.
+      #   Constraints: Must contain no more than 255 alphanumeric characters,
+      #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
       # @option params [required, String] :db_subnet_group_description
@@ -2475,6 +2449,7 @@ module Aws
       #   resp.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_subnet_group.db_subnet_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_db_subnet_group(params = {}, options = {})
@@ -2587,6 +2562,7 @@ module Aws
       #   resp.event_subscription.event_categories_list #=> Array
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
+      #   resp.event_subscription.event_subscription_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_event_subscription(params = {}, options = {})
@@ -2646,6 +2622,7 @@ module Aws
       #   resp.option_group.options[0].persistent #=> Boolean
       #   resp.option_group.options[0].permanent #=> Boolean
       #   resp.option_group.options[0].port #=> Integer
+      #   resp.option_group.options[0].option_version #=> String
       #   resp.option_group.options[0].option_settings #=> Array
       #   resp.option_group.options[0].option_settings[0].name #=> String
       #   resp.option_group.options[0].option_settings[0].value #=> String
@@ -2664,6 +2641,7 @@ module Aws
       #   resp.option_group.options[0].vpc_security_group_memberships[0].status #=> String
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
+      #   resp.option_group.option_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_option_group(params = {}, options = {})
@@ -2773,6 +2751,7 @@ module Aws
       #   resp.db_cluster.storage_encrypted #=> Boolean
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_db_cluster(params = {}, options = {})
@@ -2860,6 +2839,7 @@ module Aws
       #   resp.db_cluster_snapshot.percent_progress #=> Integer
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
+      #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_db_cluster_snapshot(params = {}, options = {})
@@ -2987,6 +2967,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -2995,10 +2976,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -3037,6 +3020,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_db_instance(params = {}, options = {})
@@ -3091,8 +3075,6 @@ module Aws
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   * Must not be \"Default\"
-      #
-      #   * Cannot contain spaces
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -3150,6 +3132,7 @@ module Aws
       #   resp.db_snapshot.tde_credential_arn #=> String
       #   resp.db_snapshot.encrypted #=> Boolean
       #   resp.db_snapshot.kms_key_id #=> String
+      #   resp.db_snapshot.db_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_db_snapshot(params = {}, options = {})
@@ -3214,6 +3197,7 @@ module Aws
       #   resp.event_subscription.event_categories_list #=> Array
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
+      #   resp.event_subscription.event_subscription_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def delete_event_subscription(params = {}, options = {})
@@ -3321,6 +3305,7 @@ module Aws
       #   resp.certificates[0].thumbprint #=> String
       #   resp.certificates[0].valid_from #=> Time
       #   resp.certificates[0].valid_till #=> Time
+      #   resp.certificates[0].certificate_arn #=> String
       #   resp.marker #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -3391,6 +3376,7 @@ module Aws
       #   resp.db_cluster_parameter_groups[0].db_cluster_parameter_group_name #=> String
       #   resp.db_cluster_parameter_groups[0].db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_groups[0].description #=> String
+      #   resp.db_cluster_parameter_groups[0].db_cluster_parameter_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_cluster_parameter_groups(params = {}, options = {})
@@ -3654,6 +3640,7 @@ module Aws
       #   resp.db_cluster_snapshots[0].percent_progress #=> Integer
       #   resp.db_cluster_snapshots[0].storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshots[0].kms_key_id #=> String
+      #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_cluster_snapshots(params = {}, options = {})
@@ -3756,6 +3743,7 @@ module Aws
       #   resp.db_clusters[0].storage_encrypted #=> Boolean
       #   resp.db_clusters[0].kms_key_id #=> String
       #   resp.db_clusters[0].db_cluster_resource_id #=> String
+      #   resp.db_clusters[0].db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_clusters(params = {}, options = {})
@@ -3933,6 +3921,7 @@ module Aws
       #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instances[0].db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instances[0].preferred_maintenance_window #=> String
       #   resp.db_instances[0].pending_modified_values.db_instance_class #=> String
       #   resp.db_instances[0].pending_modified_values.allocated_storage #=> Integer
@@ -3941,10 +3930,12 @@ module Aws
       #   resp.db_instances[0].pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instances[0].pending_modified_values.multi_az #=> Boolean
       #   resp.db_instances[0].pending_modified_values.engine_version #=> String
+      #   resp.db_instances[0].pending_modified_values.license_model #=> String
       #   resp.db_instances[0].pending_modified_values.iops #=> Integer
       #   resp.db_instances[0].pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instances[0].pending_modified_values.storage_type #=> String
       #   resp.db_instances[0].pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instances[0].pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instances[0].latest_restorable_time #=> Time
       #   resp.db_instances[0].multi_az #=> Boolean
       #   resp.db_instances[0].engine_version #=> String
@@ -3983,6 +3974,7 @@ module Aws
       #   resp.db_instances[0].enhanced_monitoring_resource_arn #=> String
       #   resp.db_instances[0].monitoring_role_arn #=> String
       #   resp.db_instances[0].promotion_tier #=> Integer
+      #   resp.db_instances[0].db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_instances(params = {}, options = {})
@@ -4109,6 +4101,7 @@ module Aws
       #   resp.db_parameter_groups[0].db_parameter_group_name #=> String
       #   resp.db_parameter_groups[0].db_parameter_group_family #=> String
       #   resp.db_parameter_groups[0].description #=> String
+      #   resp.db_parameter_groups[0].db_parameter_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_parameter_groups(params = {}, options = {})
@@ -4243,6 +4236,7 @@ module Aws
       #   resp.db_security_groups[0].ip_ranges #=> Array
       #   resp.db_security_groups[0].ip_ranges[0].status #=> String
       #   resp.db_security_groups[0].ip_ranges[0].cidrip #=> String
+      #   resp.db_security_groups[0].db_security_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_security_groups(params = {}, options = {})
@@ -4332,10 +4326,11 @@ module Aws
       #   * `public` - Return all DB snapshots that have been marked as public.
       #
       #   If you don\'t specify a `SnapshotType` value, then both automated and
-      #   manual snapshots are returned. You can include shared snapshots with
-      #   these results by setting the `IncludeShared` parameter to `true`. You
-      #   can include public snapshots with these results by setting the
-      #   `IncludePublic` parameter to `true`.
+      #   manual snapshots are returned. Shared and public DB snapshots are not
+      #   included in the returned results by default. You can include shared
+      #   snapshots with these results by setting the `IncludeShared` parameter
+      #   to `true`. You can include public snapshots with these results by
+      #   setting the `IncludePublic` parameter to `true`.
       #
       #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`
@@ -4422,6 +4417,7 @@ module Aws
       #   resp.db_snapshots[0].tde_credential_arn #=> String
       #   resp.db_snapshots[0].encrypted #=> Boolean
       #   resp.db_snapshots[0].kms_key_id #=> String
+      #   resp.db_snapshots[0].db_snapshot_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_snapshots(params = {}, options = {})
@@ -4485,6 +4481,7 @@ module Aws
       #   resp.db_subnet_groups[0].subnets[0].subnet_identifier #=> String
       #   resp.db_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
+      #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_db_subnet_groups(params = {}, options = {})
@@ -4715,6 +4712,7 @@ module Aws
       #   resp.event_subscriptions_list[0].event_categories_list #=> Array
       #   resp.event_subscriptions_list[0].event_categories_list[0] #=> String
       #   resp.event_subscriptions_list[0].enabled #=> Boolean
+      #   resp.event_subscriptions_list[0].event_subscription_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_event_subscriptions(params = {}, options = {})
@@ -4825,6 +4823,7 @@ module Aws
       #   resp.events[0].event_categories #=> Array
       #   resp.events[0].event_categories[0] #=> String
       #   resp.events[0].date #=> Time
+      #   resp.events[0].source_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_events(params = {}, options = {})
@@ -4884,6 +4883,8 @@ module Aws
       #   resp.option_group_options[0].default_port #=> Integer
       #   resp.option_group_options[0].options_depended_on #=> Array
       #   resp.option_group_options[0].options_depended_on[0] #=> String
+      #   resp.option_group_options[0].options_conflicts_with #=> Array
+      #   resp.option_group_options[0].options_conflicts_with[0] #=> String
       #   resp.option_group_options[0].persistent #=> Boolean
       #   resp.option_group_options[0].permanent #=> Boolean
       #   resp.option_group_options[0].option_group_option_settings #=> Array
@@ -4893,6 +4894,9 @@ module Aws
       #   resp.option_group_options[0].option_group_option_settings[0].apply_type #=> String
       #   resp.option_group_options[0].option_group_option_settings[0].allowed_values #=> String
       #   resp.option_group_options[0].option_group_option_settings[0].is_modifiable #=> Boolean
+      #   resp.option_group_options[0].option_group_option_versions #=> Array
+      #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
+      #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
       #   resp.marker #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -4960,6 +4964,7 @@ module Aws
       #   resp.option_groups_list[0].options[0].persistent #=> Boolean
       #   resp.option_groups_list[0].options[0].permanent #=> Boolean
       #   resp.option_groups_list[0].options[0].port #=> Integer
+      #   resp.option_groups_list[0].options[0].option_version #=> String
       #   resp.option_groups_list[0].options[0].option_settings #=> Array
       #   resp.option_groups_list[0].options[0].option_settings[0].name #=> String
       #   resp.option_groups_list[0].options[0].option_settings[0].value #=> String
@@ -4978,6 +4983,7 @@ module Aws
       #   resp.option_groups_list[0].options[0].vpc_security_group_memberships[0].status #=> String
       #   resp.option_groups_list[0].allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_groups_list[0].vpc_id #=> String
+      #   resp.option_groups_list[0].option_group_arn #=> String
       #   resp.marker #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
@@ -5216,6 +5222,7 @@ module Aws
       #   resp.reserved_db_instances[0].recurring_charges #=> Array
       #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_frequency #=> String
+      #   resp.reserved_db_instances[0].reserved_db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_reserved_db_instances(params = {}, options = {})
@@ -5306,6 +5313,64 @@ module Aws
       # @param [Hash] options ({})
       def describe_reserved_db_instances_offerings(params = {}, options = {})
         req = build_request(:describe_reserved_db_instances_offerings, params)
+        req.send_request(options)
+      end
+
+      # Returns a list that includes the status of each source AWS Region that
+      # the current region can get a Read Replica or a DB snapshot from. This
+      # API action supports pagination.
+      # @option params [String] :region_name
+      #   The source region name, for example US West (Oregon).
+      #
+      #   Constraints:
+      #
+      #   * Must specify a valid AWS Region name, for example US West (Oregon).
+      #
+      #   ^
+      # @option params [Integer] :max_records
+      #   The maximum number of records to include in the response. If more
+      #   records exist than the specified `MaxRecords` value, a pagination
+      #   token called a marker is included in the response so that the
+      #   remaining results can be retrieved.
+      #
+      #   Default: 100
+      #
+      #   Constraints: Minimum 20, maximum 100.
+      # @option params [String] :marker
+      #   An optional pagination token provided by a previous
+      #   DescribeSourceRegions request. If this parameter is specified, the
+      #   response includes only records beyond the marker, up to the value
+      #   specified by `MaxRecords`.
+      # @option params [Array<Types::Filter>] :filters
+      #   This parameter is not currently supported.
+      # @return [Types::SourceRegionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::SourceRegionMessage#marker #Marker} => String
+      #   * {Types::SourceRegionMessage#source_regions #SourceRegions} => Array&lt;Types::SourceRegion&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_source_regions({
+      #     region_name: "String",
+      #     max_records: 1,
+      #     marker: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.marker #=> String
+      #   resp.source_regions #=> Array
+      #   resp.source_regions[0].region_name #=> String
+      #   resp.source_regions[0].endpoint #=> String
+      #   resp.source_regions[0].status #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def describe_source_regions(params = {}, options = {})
+        req = build_request(:describe_source_regions, params)
         req.send_request(options)
       end
 
@@ -5462,6 +5527,7 @@ module Aws
       #   resp.db_cluster.storage_encrypted #=> Boolean
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def failover_db_cluster(params = {}, options = {})
@@ -5484,7 +5550,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
       # @return [Types::TagListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5701,6 +5767,7 @@ module Aws
       #   resp.db_cluster.storage_encrypted #=> Boolean
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def modify_db_cluster(params = {}, options = {})
@@ -5847,9 +5914,9 @@ module Aws
         req.send_request(options)
       end
 
-      # Modify settings for a DB instance. You can change one or more database
-      # configuration parameters by specifying these parameters and the new
-      # values in the request.
+      # Modifies settings for a DB instance. You can change one or more
+      # database configuration parameters by specifying these parameters and
+      # the new values in the request.
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier. This value is stored as a lowercase
       #   string.
@@ -5956,6 +6023,26 @@ module Aws
       #   db.m4.10xlarge | db.r3.large | db.r3.xlarge | db.r3.2xlarge |
       #   db.r3.4xlarge | db.r3.8xlarge | db.t2.micro | db.t2.small |
       #   db.t2.medium | db.t2.large`
+      # @option params [String] :db_subnet_group_name
+      #   The new DB subnet group for the DB instance. You can use this
+      #   parameter to move your DB instance to a different VPC, or to a
+      #   different subnet group in the same VPC. If your DB instance is not in
+      #   a VPC, you can also use this parameter to move your DB instance into a
+      #   VPC. For more information, see [Updating the VPC for a DB
+      #   Instance][1].
+      #
+      #   Changing the subnet group causes an outage during the change. The
+      #   change is applied during the next maintenance window, unless you
+      #   specify `true` for the `ApplyImmediately` parameter.
+      #
+      #   Constraints: Must contain no more than 255 alphanumeric characters,
+      #   periods, underscores, spaces, or hyphens.
+      #
+      #   Example: `mySubnetGroup`
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
       # @option params [Array<String>] :db_security_groups
       #   A list of DB security groups to authorize on this DB instance.
       #   Changing this setting does not result in an outage and the change is
@@ -6128,6 +6215,11 @@ module Aws
       #   result if this parameter is set to `true` during the maintenance
       #   window, and a newer minor version is available, and RDS has enabled
       #   auto patching for that engine version.
+      # @option params [String] :license_model
+      #   The license model for the DB instance.
+      #
+      #   Valid values: `license-included` \| `bring-your-own-license` \|
+      #   `general-public-license`
       # @option params [Integer] :iops
       #   The new Provisioned IOPS (I/O operations per second) value for the RDS
       #   instance. Changing this setting does not result in an outage and the
@@ -6331,6 +6423,7 @@ module Aws
       #     db_instance_identifier: "String", # required
       #     allocated_storage: 1,
       #     db_instance_class: "String",
+      #     db_subnet_group_name: "String",
       #     db_security_groups: ["String"],
       #     vpc_security_group_ids: ["String"],
       #     apply_immediately: false,
@@ -6343,6 +6436,7 @@ module Aws
       #     engine_version: "String",
       #     allow_major_version_upgrade: false,
       #     auto_minor_version_upgrade: false,
+      #     license_model: "String",
       #     iops: 1,
       #     option_group_name: "String",
       #     new_db_instance_identifier: "String",
@@ -6392,6 +6486,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -6400,10 +6495,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -6442,6 +6539,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def modify_db_instance(params = {}, options = {})
@@ -6638,6 +6736,7 @@ module Aws
       #   resp.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_subnet_group.db_subnet_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def modify_db_subnet_group(params = {}, options = {})
@@ -6708,6 +6807,7 @@ module Aws
       #   resp.event_subscription.event_categories_list #=> Array
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
+      #   resp.event_subscription.event_subscription_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def modify_event_subscription(params = {}, options = {})
@@ -6744,6 +6844,7 @@ module Aws
       #       {
       #         option_name: "String", # required
       #         port: 1,
+      #         option_version: "String",
       #         db_security_group_memberships: ["String"],
       #         vpc_security_group_memberships: ["String"],
       #         option_settings: [
@@ -6776,6 +6877,7 @@ module Aws
       #   resp.option_group.options[0].persistent #=> Boolean
       #   resp.option_group.options[0].permanent #=> Boolean
       #   resp.option_group.options[0].port #=> Integer
+      #   resp.option_group.options[0].option_version #=> String
       #   resp.option_group.options[0].option_settings #=> Array
       #   resp.option_group.options[0].option_settings[0].name #=> String
       #   resp.option_group.options[0].option_settings[0].value #=> String
@@ -6794,6 +6896,7 @@ module Aws
       #   resp.option_group.options[0].vpc_security_group_memberships[0].status #=> String
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
+      #   resp.option_group.option_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def modify_option_group(params = {}, options = {})
@@ -6901,6 +7004,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -6909,10 +7013,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -6951,6 +7057,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def promote_read_replica(params = {}, options = {})
@@ -7020,6 +7127,7 @@ module Aws
       #   resp.db_cluster.storage_encrypted #=> Boolean
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def promote_read_replica_db_cluster(params = {}, options = {})
@@ -7076,6 +7184,7 @@ module Aws
       #   resp.reserved_db_instance.recurring_charges #=> Array
       #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_frequency #=> String
+      #   resp.reserved_db_instance.reserved_db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def purchase_reserved_db_instances_offering(params = {}, options = {})
@@ -7160,6 +7269,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -7168,10 +7278,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -7210,6 +7322,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def reboot_db_instance(params = {}, options = {})
@@ -7248,6 +7361,7 @@ module Aws
       #   resp.event_subscription.event_categories_list #=> Array
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
+      #   resp.event_subscription.event_subscription_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def remove_source_identifier_from_subscription(params = {}, options = {})
@@ -7270,7 +7384,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
       # @option params [required, Array<String>] :tag_keys
       #   The tag key (name) of the tag to be removed.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -7430,6 +7544,272 @@ module Aws
         req.send_request(options)
       end
 
+      # Creates an Amazon Aurora DB cluster from data stored in an Amazon S3
+      # bucket. Amazon RDS must be authorized to access the Amazon S3 bucket
+      # and the data must be created using the Percona XtraBackup utility as
+      # described in [Migrating Data from an External MySQL Database to an
+      # Amazon Aurora DB Cluster][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.html
+      # @option params [Array<String>] :availability_zones
+      #   A list of EC2 Availability Zones that instances in the restored DB
+      #   cluster can be created in.
+      # @option params [Integer] :backup_retention_period
+      #   The number of days for which automated backups of the restored DB
+      #   cluster are retained. You must specify a minimum value of 1.
+      #
+      #   Default: 1
+      #
+      #   Constraints:
+      #
+      #   * Must be a value from 1 to 35
+      #
+      #   ^
+      # @option params [String] :character_set_name
+      #   A value that indicates that the restored DB cluster should be
+      #   associated with the specified CharacterSet.
+      # @option params [String] :database_name
+      #   The database name for the restored DB cluster.
+      # @option params [required, String] :db_cluster_identifier
+      #   The name of the DB cluster to create from the source data in the S3
+      #   bucket. This parameter is isn\'t case-sensitive.
+      #
+      #   Constraints:
+      #
+      #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
+      #   * First character must be a letter.
+      #
+      #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
+      #   Example: `my-cluster1`
+      # @option params [String] :db_cluster_parameter_group_name
+      #   The name of the DB cluster parameter group to associate with the
+      #   restored DB cluster. If this argument is omitted, `default.aurora5.6`
+      #   will be used.
+      #
+      #   Constraints:
+      #
+      #   * Must be 1 to 255 alphanumeric characters
+      #
+      #   * First character must be a letter
+      #
+      #   * Cannot end with a hyphen or contain two consecutive hyphens
+      # @option params [Array<String>] :vpc_security_group_ids
+      #   A list of EC2 VPC security groups to associate with the restored DB
+      #   cluster.
+      # @option params [String] :db_subnet_group_name
+      #   A DB subnet group to associate with the restored DB cluster.
+      #
+      #   Constraints: Must contain no more than 255 alphanumeric characters,
+      #   periods, underscores, spaces, or hyphens. Must not be default.
+      #
+      #   Example: `mySubnetgroup`
+      # @option params [required, String] :engine
+      #   The name of the database engine to be used for the restored DB
+      #   cluster.
+      #
+      #   Valid Values: `aurora`
+      # @option params [String] :engine_version
+      #   The version number of the database engine to use.
+      #
+      #   **Aurora**
+      #
+      #   Example: `5.6.10a`
+      # @option params [Integer] :port
+      #   The port number on which the instances in the restored DB cluster
+      #   accept connections.
+      #
+      #   Default: `3306`
+      # @option params [required, String] :master_username
+      #   The name of the master user for the restored DB cluster.
+      #
+      #   Constraints:
+      #
+      #   * Must be 1 to 16 alphanumeric characters.
+      #
+      #   * First character must be a letter.
+      #
+      #   * Cannot be a reserved word for the chosen database engine.
+      # @option params [required, String] :master_user_password
+      #   The password for the master database user. This password can contain
+      #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #
+      #   Constraints: Must contain from 8 to 41 characters.
+      # @option params [String] :option_group_name
+      #   A value that indicates that the restored DB cluster should be
+      #   associated with the specified option group.
+      #
+      #   Permanent options cannot be removed from an option group. An option
+      #   group cannot be removed from a DB cluster once it is associated with a
+      #   DB cluster.
+      # @option params [String] :preferred_backup_window
+      #   The daily time range during which automated backups are created if
+      #   automated backups are enabled using the `BackupRetentionPeriod`
+      #   parameter.
+      #
+      #   Default: A 30-minute window selected at random from an 8-hour block of
+      #   time per region. To see the time blocks available, see [ Adjusting the
+      #   Preferred Maintenance Window][1] in the *Amazon RDS User Guide.*
+      #
+      #   Constraints:
+      #
+      #   * Must be in the format `hh24:mi-hh24:mi`.
+      #
+      #   * Times should be in Universal Coordinated Time (UTC).
+      #
+      #   * Must not conflict with the preferred maintenance window.
+      #
+      #   * Must be at least 30 minutes.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      # @option params [String] :preferred_maintenance_window
+      #   The weekly time range during which system maintenance can occur, in
+      #   Universal Coordinated Time (UTC).
+      #
+      #   Format: `ddd:hh24:mi-ddd:hh24:mi`
+      #
+      #   Default: A 30-minute window selected at random from an 8-hour block of
+      #   time per region, occurring on a random day of the week. To see the
+      #   time blocks available, see [ Adjusting the Preferred Maintenance
+      #   Window][1] in the *Amazon RDS User Guide.*
+      #
+      #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+      #
+      #   Constraints: Minimum 30-minute window.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+      # @option params [Array<Types::Tag>] :tags
+      #   A list of tags.
+      # @option params [Boolean] :storage_encrypted
+      #   Specifies whether the restored DB cluster is encrypted.
+      # @option params [String] :kms_key_id
+      #   The KMS key identifier for an encrypted DB cluster.
+      #
+      #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+      #   encryption key. If you are creating a DB cluster with the same AWS
+      #   account that owns the KMS encryption key used to encrypt the new DB
+      #   cluster, then you can use the KMS key alias instead of the ARN for the
+      #   KM encryption key.
+      #
+      #   If the `StorageEncrypted` parameter is true, and you do not specify a
+      #   value for the `KmsKeyId` parameter, then Amazon RDS will use your
+      #   default encryption key. AWS KMS creates the default encryption key for
+      #   your AWS account. Your AWS account has a different default encryption
+      #   key for each AWS region.
+      # @option params [required, String] :source_engine
+      #   The identifier for the database engine that was backed up to create
+      #   the files stored in the Amazon S3 bucket.
+      #
+      #   Valid values: `mysql`
+      # @option params [required, String] :source_engine_version
+      #   The version of the database that the backup files were created from.
+      #
+      #   MySQL version 5.5 and 5.6 are supported.
+      #
+      #   Example: `5.6.22`
+      # @option params [required, String] :s3_bucket_name
+      #   The name of the Amazon S3 bucket that contains the data used to create
+      #   the Amazon Aurora DB cluster.
+      # @option params [String] :s3_prefix
+      #   The prefix for all of the file names that contain the data used to
+      #   create the Amazon Aurora DB cluster. If you do not specify a
+      #   **SourceS3Prefix** value, then the Amazon Aurora DB cluster is created
+      #   by using all of the files in the Amazon S3 bucket.
+      # @option params [required, String] :s3_ingestion_role_arn
+      #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+      #   Management (IAM) role that authorizes Amazon RDS to access the Amazon
+      #   S3 bucket on your behalf.
+      # @return [Types::RestoreDBClusterFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::RestoreDBClusterFromS3Result#db_cluster #DBCluster} => Types::DBCluster
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.restore_db_cluster_from_s3({
+      #     availability_zones: ["String"],
+      #     backup_retention_period: 1,
+      #     character_set_name: "String",
+      #     database_name: "String",
+      #     db_cluster_identifier: "String", # required
+      #     db_cluster_parameter_group_name: "String",
+      #     vpc_security_group_ids: ["String"],
+      #     db_subnet_group_name: "String",
+      #     engine: "String", # required
+      #     engine_version: "String",
+      #     port: 1,
+      #     master_username: "String", # required
+      #     master_user_password: "String", # required
+      #     option_group_name: "String",
+      #     preferred_backup_window: "String",
+      #     preferred_maintenance_window: "String",
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     storage_encrypted: false,
+      #     kms_key_id: "String",
+      #     source_engine: "String", # required
+      #     source_engine_version: "String", # required
+      #     s3_bucket_name: "String", # required
+      #     s3_prefix: "String",
+      #     s3_ingestion_role_arn: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.db_cluster.allocated_storage #=> Integer
+      #   resp.db_cluster.availability_zones #=> Array
+      #   resp.db_cluster.availability_zones[0] #=> String
+      #   resp.db_cluster.backup_retention_period #=> Integer
+      #   resp.db_cluster.character_set_name #=> String
+      #   resp.db_cluster.database_name #=> String
+      #   resp.db_cluster.db_cluster_identifier #=> String
+      #   resp.db_cluster.db_cluster_parameter_group #=> String
+      #   resp.db_cluster.db_subnet_group #=> String
+      #   resp.db_cluster.status #=> String
+      #   resp.db_cluster.percent_progress #=> String
+      #   resp.db_cluster.earliest_restorable_time #=> Time
+      #   resp.db_cluster.endpoint #=> String
+      #   resp.db_cluster.engine #=> String
+      #   resp.db_cluster.engine_version #=> String
+      #   resp.db_cluster.latest_restorable_time #=> Time
+      #   resp.db_cluster.port #=> Integer
+      #   resp.db_cluster.master_username #=> String
+      #   resp.db_cluster.db_cluster_option_group_memberships #=> Array
+      #   resp.db_cluster.db_cluster_option_group_memberships[0].db_cluster_option_group_name #=> String
+      #   resp.db_cluster.db_cluster_option_group_memberships[0].status #=> String
+      #   resp.db_cluster.preferred_backup_window #=> String
+      #   resp.db_cluster.preferred_maintenance_window #=> String
+      #   resp.db_cluster.replication_source_identifier #=> String
+      #   resp.db_cluster.read_replica_identifiers #=> Array
+      #   resp.db_cluster.read_replica_identifiers[0] #=> String
+      #   resp.db_cluster.db_cluster_members #=> Array
+      #   resp.db_cluster.db_cluster_members[0].db_instance_identifier #=> String
+      #   resp.db_cluster.db_cluster_members[0].is_cluster_writer #=> Boolean
+      #   resp.db_cluster.db_cluster_members[0].db_cluster_parameter_group_status #=> String
+      #   resp.db_cluster.db_cluster_members[0].promotion_tier #=> Integer
+      #   resp.db_cluster.vpc_security_groups #=> Array
+      #   resp.db_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+      #   resp.db_cluster.vpc_security_groups[0].status #=> String
+      #   resp.db_cluster.hosted_zone_id #=> String
+      #   resp.db_cluster.storage_encrypted #=> Boolean
+      #   resp.db_cluster.kms_key_id #=> String
+      #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def restore_db_cluster_from_s3(params = {}, options = {})
+        req = build_request(:restore_db_cluster_from_s3, params)
+        req.send_request(options)
+      end
+
       # Creates a new DB cluster from a DB cluster snapshot. The target DB
       # cluster is created from the source DB cluster restore point with the
       # same configuration as the original source DB cluster, except that the
@@ -7579,6 +7959,7 @@ module Aws
       #   resp.db_cluster.storage_encrypted #=> Boolean
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def restore_db_cluster_from_snapshot(params = {}, options = {})
@@ -7750,6 +8131,7 @@ module Aws
       #   resp.db_cluster.storage_encrypted #=> Boolean
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
+      #   resp.db_cluster.db_cluster_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def restore_db_cluster_to_point_in_time(params = {}, options = {})
@@ -7876,7 +8258,8 @@ module Aws
       # @option params [String] :db_name
       #   The database name for the restored DB instance.
       #
-      #   <note markdown="1"> This parameter doesn\'t apply to the MySQL or MariaDB engines.
+      #   <note markdown="1"> This parameter doesn\'t apply to the MySQL, PostgreSQL, or MariaDB
+      #   engines.
       #
       #    </note>
       # @option params [String] :engine
@@ -8003,6 +8386,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -8011,10 +8395,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -8053,6 +8439,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def restore_db_instance_from_db_snapshot(params = {}, options = {})
@@ -8312,6 +8699,7 @@ module Aws
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
+      #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
       #   resp.db_instance.preferred_maintenance_window #=> String
       #   resp.db_instance.pending_modified_values.db_instance_class #=> String
       #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -8320,10 +8708,12 @@ module Aws
       #   resp.db_instance.pending_modified_values.backup_retention_period #=> Integer
       #   resp.db_instance.pending_modified_values.multi_az #=> Boolean
       #   resp.db_instance.pending_modified_values.engine_version #=> String
+      #   resp.db_instance.pending_modified_values.license_model #=> String
       #   resp.db_instance.pending_modified_values.iops #=> Integer
       #   resp.db_instance.pending_modified_values.db_instance_identifier #=> String
       #   resp.db_instance.pending_modified_values.storage_type #=> String
       #   resp.db_instance.pending_modified_values.ca_certificate_identifier #=> String
+      #   resp.db_instance.pending_modified_values.db_subnet_group_name #=> String
       #   resp.db_instance.latest_restorable_time #=> Time
       #   resp.db_instance.multi_az #=> Boolean
       #   resp.db_instance.engine_version #=> String
@@ -8362,6 +8752,7 @@ module Aws
       #   resp.db_instance.enhanced_monitoring_resource_arn #=> String
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
+      #   resp.db_instance.db_instance_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def restore_db_instance_to_point_in_time(params = {}, options = {})
@@ -8423,6 +8814,7 @@ module Aws
       #   resp.db_security_group.ip_ranges #=> Array
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
+      #   resp.db_security_group.db_security_group_arn #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def revoke_db_security_group_ingress(params = {}, options = {})
@@ -8472,6 +8864,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

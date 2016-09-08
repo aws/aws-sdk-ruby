@@ -1463,12 +1463,15 @@ module Aws
       end
 
       def waiters
-        {}
+        {
+          deployment_successful: Waiters::DeploymentSuccessful
+        }
       end
 
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

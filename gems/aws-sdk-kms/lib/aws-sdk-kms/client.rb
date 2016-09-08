@@ -287,7 +287,9 @@ module Aws
       # @option params [String] :policy
       #   The key policy to attach to the CMK.
       #
-      #   If you specify a key policy, it must meet the following criteria:
+      #   If you specify a policy and do not set
+      #   `BypassPolicyLockoutSafetyCheck` to true, the policy must meet the
+      #   following criteria:
       #
       #   * It must allow the principal making the `CreateKey` request to make a
       #     subsequent PutKeyPolicy request on the CMK. This reduces the
@@ -323,6 +325,21 @@ module Aws
       #   The intended use of the CMK.
       #
       #   You can use CMKs only for symmetric encryption and decryption.
+      # @option params [String] :origin
+      #   The source of the CMK\'s key material.
+      #
+      #   The default is `AWS_KMS`, which means AWS KMS creates the key
+      #   material. When this parameter is set to `EXTERNAL`, the request
+      #   creates a CMK without key material so that you can import key material
+      #   from your existing key management infrastructure. For more information
+      #   about importing key material into AWS KMS, see [Importing Key
+      #   Material][1] in the *AWS Key Management Service Developer Guide*.
+      #
+      #   The CMK\'s `Origin` is immutable and is set when the CMK is created.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
       # @option params [Boolean] :bypass_policy_lockout_safety_check
       #   A flag to indicate whether to bypass the key policy lockout safety
       #   check.
@@ -354,6 +371,7 @@ module Aws
       #     policy: "PolicyType",
       #     description: "DescriptionType",
       #     key_usage: "ENCRYPT_DECRYPT", # accepts ENCRYPT_DECRYPT
+      #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL
       #     bypass_policy_lockout_safety_check: false,
       #   })
       #
@@ -365,8 +383,11 @@ module Aws
       #   resp.key_metadata.enabled #=> Boolean
       #   resp.key_metadata.description #=> String
       #   resp.key_metadata.key_usage #=> String, one of "ENCRYPT_DECRYPT"
-      #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion"
+      #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport"
       #   resp.key_metadata.deletion_date #=> Time
+      #   resp.key_metadata.valid_to #=> Time
+      #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
+      #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_key(params = {}, options = {})
@@ -454,6 +475,45 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes key material that you previously imported and makes the
+      # specified customer master key (CMK) unusable. For more information
+      # about importing key material into AWS KMS, see [Importing Key
+      # Material][1] in the *AWS Key Management Service Developer Guide*.
+      #
+      # When the specified CMK is in the `PendingDeletion` state, this
+      # operation does not change the CMK\'s state. Otherwise, it changes the
+      # CMK\'s state to `PendingImport`.
+      #
+      # After you delete key material, you can use ImportKeyMaterial to
+      # reimport the same key material into the CMK.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+      # @option params [required, String] :key_id
+      #   The identifier of the CMK whose key material to delete. The CMK\'s
+      #   `Origin` must be `EXTERNAL`.
+      #
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+      #
+      #   * Key ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_imported_key_material({
+      #     key_id: "KeyIdType", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_imported_key_material(params = {}, options = {})
+        req = build_request(:delete_imported_key_material, params)
+        req.send_request(options)
+      end
+
       # Provides detailed information about the specified customer master key.
       # @option params [required, String] :key_id
       #   A unique identifier for the customer master key. This value can be a
@@ -497,8 +557,11 @@ module Aws
       #   resp.key_metadata.enabled #=> Boolean
       #   resp.key_metadata.description #=> String
       #   resp.key_metadata.key_usage #=> String, one of "ENCRYPT_DECRYPT"
-      #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion"
+      #   resp.key_metadata.key_state #=> String, one of "Enabled", "Disabled", "PendingDeletion", "PendingImport"
       #   resp.key_metadata.deletion_date #=> Time
+      #   resp.key_metadata.valid_to #=> Time
+      #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
+      #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def describe_key(params = {}, options = {})
@@ -943,6 +1006,152 @@ module Aws
         req.send_request(options)
       end
 
+      # Returns the items you need in order to import key material into AWS
+      # KMS from your existing key management infrastructure. For more
+      # information about importing key material into AWS KMS, see [Importing
+      # Key Material][1] in the *AWS Key Management Service Developer Guide*.
+      #
+      # You must specify the key ID of the customer master key (CMK) into
+      # which you will import key material. This CMK\'s `Origin` must be
+      # `EXTERNAL`. You must also specify the wrapping algorithm and type of
+      # wrapping key (public key) that you will use to encrypt the key
+      # material.
+      #
+      # This operation returns a public key and an import token. Use the
+      # public key to encrypt the key material. Store the import token to send
+      # with a subsequent ImportKeyMaterial request. The public key and import
+      # token from the same response must be used together. These items are
+      # valid for 24 hours, after which they cannot be used for a subsequent
+      # ImportKeyMaterial request. To retrieve new ones, send another
+      # `GetParametersForImport` request.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+      # @option params [required, String] :key_id
+      #   The identifier of the CMK into which you will import key material. The
+      #   CMK\'s `Origin` must be `EXTERNAL`.
+      #
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+      #
+      #   * Key ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+      # @option params [required, String] :wrapping_algorithm
+      #   The algorithm you will use to encrypt the key material before
+      #   importing it with ImportKeyMaterial. For more information, see
+      #   [Encrypt the Key Material][1] in the *AWS Key Management Service
+      #   Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html
+      # @option params [required, String] :wrapping_key_spec
+      #   The type of wrapping key (public key) to return in the response. Only
+      #   2048-bit RSA public keys are supported.
+      # @return [Types::GetParametersForImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetParametersForImportResponse#key_id #KeyId} => String
+      #   * {Types::GetParametersForImportResponse#import_token #ImportToken} => String
+      #   * {Types::GetParametersForImportResponse#public_key #PublicKey} => String
+      #   * {Types::GetParametersForImportResponse#parameters_valid_to #ParametersValidTo} => Time
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_parameters_for_import({
+      #     key_id: "KeyIdType", # required
+      #     wrapping_algorithm: "RSAES_PKCS1_V1_5", # required, accepts RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
+      #     wrapping_key_spec: "RSA_2048", # required, accepts RSA_2048
+      #   })
+      #
+      # @example Response structure
+      #   resp.key_id #=> String
+      #   resp.import_token #=> String
+      #   resp.public_key #=> String
+      #   resp.parameters_valid_to #=> Time
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_parameters_for_import(params = {}, options = {})
+        req = build_request(:get_parameters_for_import, params)
+        req.send_request(options)
+      end
+
+      # Imports key material into an AWS KMS customer master key (CMK) from
+      # your existing key management infrastructure. For more information
+      # about importing key material into AWS KMS, see [Importing Key
+      # Material][1] in the *AWS Key Management Service Developer Guide*.
+      #
+      # You must specify the key ID of the CMK to import the key material
+      # into. This CMK\'s `Origin` must be `EXTERNAL`. You must also send an
+      # import token and the encrypted key material. Send the import token
+      # that you received in the same GetParametersForImport response that
+      # contained the public key that you used to encrypt the key material.
+      # You must also specify whether the key material expires and if so,
+      # when. When the key material expires, AWS KMS deletes the key material
+      # and the CMK becomes unusable. To use the CMK again, you can reimport
+      # the same key material. If you set an expiration date, you can change
+      # it only by reimporting the same key material and specifying a new
+      # expiration date.
+      #
+      # When this operation is successful, the specified CMK\'s key state
+      # changes to `Enabled`, and you can use the CMK.
+      #
+      # After you successfully import key material into a CMK, you can
+      # reimport the same key material into that CMK, but you cannot import
+      # different key material.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+      # @option params [required, String] :key_id
+      #   The identifier of the CMK to import the key material into. The CMK\'s
+      #   `Origin` must be `EXTERNAL`.
+      #
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+      #
+      #   * Key ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+      # @option params [required, String, IO] :import_token
+      #   The import token that you received in the response to a previous
+      #   GetParametersForImport request. It must be from the same response that
+      #   contained the public key that you used to encrypt the key material.
+      # @option params [required, String, IO] :encrypted_key_material
+      #   The encrypted key material to import. It must be encrypted with the
+      #   public key that you received in the response to a previous
+      #   GetParametersForImport request, using the wrapping algorithm that you
+      #   specified in that request.
+      # @option params [Time,DateTime,Date,Integer,String] :valid_to
+      #   The time at which the imported key material expires. When the key
+      #   material expires, AWS KMS deletes the key material and the CMK becomes
+      #   unusable. You must omit this parameter when the `ExpirationModel`
+      #   parameter is set to `KEY_MATERIAL_DOES_NOT_EXPIRE`. Otherwise it is
+      #   required.
+      # @option params [String] :expiration_model
+      #   Specifies whether the key material expires. The default is
+      #   `KEY_MATERIAL_EXPIRES`, in which case you must include the `ValidTo`
+      #   parameter. When this parameter is set to
+      #   `KEY_MATERIAL_DOES_NOT_EXPIRE`, you must omit the `ValidTo` parameter.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.import_key_material({
+      #     key_id: "KeyIdType", # required
+      #     import_token: "data", # required
+      #     encrypted_key_material: "data", # required
+      #     valid_to: Time.now,
+      #     expiration_model: "KEY_MATERIAL_EXPIRES", # accepts KEY_MATERIAL_EXPIRES, KEY_MATERIAL_DOES_NOT_EXPIRE
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def import_key_material(params = {}, options = {})
+        req = build_request(:import_key_material, params)
+        req.send_request(options)
+      end
+
       # Lists all of the key aliases in the account.
       # @option params [Integer] :limit
       #   When paginating results, specify the maximum number of items to return
@@ -1229,7 +1438,8 @@ module Aws
       # @option params [required, String] :policy
       #   The key policy to attach to the CMK.
       #
-      #   The key policy must meet the following criteria:
+      #   If you do not set `BypassPolicyLockoutSafetyCheck` to true, the policy
+      #   must meet the following criteria:
       #
       #   * It must allow the principal making the `PutKeyPolicy` request to
       #     make a subsequent `PutKeyPolicy` request on the CMK. This reduces
@@ -1616,6 +1826,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

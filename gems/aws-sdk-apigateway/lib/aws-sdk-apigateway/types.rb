@@ -17,19 +17,71 @@ module Aws
     module Types
 
       # Represents an AWS account that is associated with Amazon API Gateway.
+      #
+      # <div class="remarks" markdown="1">
+      # To view the account info, call `GET` on this resource.
+      #
+      # #### Error Codes
+      #
+      # The following exception may be thrown when the request fails.
+      #
+      # * UnauthorizedException
+      # * NotFoundException
+      # * TooManyRequestsException
+      #
+      # For detailed error code information, including the corresponding HTTP
+      # Status Codes, see [API Gateway Error Codes][1]
+      #
+      # #### Example: Get the information about an account.
+      #
+      # ##### Request
+      #
+      #     GET /account HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160531T184618Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+      #
+      # ##### Response
+      #
+      # The successful response returns a `200 OK` status code and a payload
+      # similar to the following:
+      #
+      #     \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-\{rel\}.html", "name": "account", "templated": true \}, "self": \{ "href": "/account" \}, "account:update": \{ "href": "/account" \} \}, "cloudwatchRoleArn": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "throttleSettings": \{ "rateLimit": 500, "burstLimit": 1000 \} \}
+      #
+      # In addition to making the REST API call directly, you can use the AWS
+      # CLI and an AWS SDK to access this resource.
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [API Gateway Limits][2] [Developer Guide][3], [AWS CLI][4]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/api-reference/handling-errors/#api-error-codes
+      # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html
+      # [3]: http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html
+      # [4]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html
       class Account < Aws::Structure.new(
         :cloudwatch_role_arn,
-        :throttle_settings)
+        :throttle_settings,
+        :features,
+        :api_key_version)
 
         # @!attribute [rw] cloudwatch_role_arn
-        #   Specifies the Amazon resource name (ARN) of an Amazon CloudWatch
-        #   role for the current Account resource.
+        #   The ARN of an Amazon CloudWatch role for the current Account.
         #   @return [String]
 
         # @!attribute [rw] throttle_settings
-        #   Specifies the application programming interface (API) throttle
-        #   settings for the current Account resource.
+        #   Specifies the API request limits configured for the current Account.
         #   @return [Types::ThrottleSettings]
+
+        # @!attribute [rw] features
+        #   A list of features supported for the account. When usage plans are
+        #   enabled, the features list will include an entry of `"UsagePlans"`.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] api_key_version
+        #   The version of the API keys used for the account.
+        #   @return [String]
 
       end
 
@@ -37,17 +89,30 @@ module Aws
       # resources that require an API key. API keys can be mapped to any Stage
       # on any RestApi, which indicates that the callers with the API key can
       # make requests to that stage.
+      #
+      # <div class="seeAlso">
+      # [Use API Keys][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
       class ApiKey < Aws::Structure.new(
         :id,
+        :value,
         :name,
         :description,
         :enabled,
-        :stage_keys,
         :created_date,
-        :last_updated_date)
+        :last_updated_date,
+        :stage_keys)
 
         # @!attribute [rw] id
         #   The identifier of the API Key.
+        #   @return [String]
+
+        # @!attribute [rw] value
+        #   The value of the API Key.
         #   @return [String]
 
         # @!attribute [rw] name
@@ -62,11 +127,6 @@ module Aws
         #   Specifies whether the API Key can be used by callers.
         #   @return [Boolean]
 
-        # @!attribute [rw] stage_keys
-        #   A list of Stage resources that are associated with the ApiKey
-        #   resource.
-        #   @return [Array<String>]
-
         # @!attribute [rw] created_date
         #   The date when the API Key was created, in [ISO 8601 format][1].
         #
@@ -79,12 +139,48 @@ module Aws
         #   When the API Key was last updated, in ISO 8601 format.
         #   @return [Time]
 
+        # @!attribute [rw] stage_keys
+        #   A list of Stage resources that are associated with the ApiKey
+        #   resource.
+        #   @return [Array<String>]
+
       end
 
-      # Represents a collection of ApiKey resources.
+      # The identifier of an API key used to reference an API key in a usage
+      # plan.
+      class ApiKeyIds < Aws::Structure.new(
+        :ids,
+        :warnings)
+
+        # @!attribute [rw] ids
+        #   A list of all the ApiKey identifiers.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] warnings
+        #   A list of warning messages.
+        #   @return [Array<String>]
+
+      end
+
+      # Represents a collection of API keys as represented by an ApiKeys
+      # resource.
+      #
+      # <div class="seeAlso">
+      # [Use API Keys][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
       class ApiKeys < Aws::Structure.new(
+        :warnings,
         :position,
         :items)
+
+        # @!attribute [rw] warnings
+        #   A list of warning messages logged during the import of API keys when
+        #   the `failOnWarnings` option is set to true.
+        #   @return [Array<String>]
 
         # @!attribute [rw] position
         #   @return [String]
@@ -96,13 +192,44 @@ module Aws
 
       end
 
+      # API stage name of the associated API stage in a usage plan.
+      # @note When making an API call, pass ApiStage
+      #   data as a hash:
+      #
+      #       {
+      #         api_id: "String",
+      #         stage: "String",
+      #       }
+      class ApiStage < Aws::Structure.new(
+        :api_id,
+        :stage)
+
+        # @!attribute [rw] api_id
+        #   API Id of the associated API stage in a usage plan.
+        #   @return [String]
+
+        # @!attribute [rw] stage
+        #   API stage name of the associated API stage in a usage plan.
+        #   @return [String]
+
+      end
+
       # Represents an authorization layer for methods. If enabled on a method,
       # API Gateway will activate the authorizer when a client calls the
       # method.
+      #
+      # <div class="seeAlso">
+      # [Enable custom authorization][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
       class Authorizer < Aws::Structure.new(
         :id,
         :name,
         :type,
+        :provider_arns,
         :auth_type,
         :authorizer_uri,
         :authorizer_credentials,
@@ -123,6 +250,10 @@ module Aws
         #   type is TOKEN.
         #   @return [String]
 
+        # @!attribute [rw] provider_arns
+        #   A list of the provider ARNs of the authorizer.
+        #   @return [Array<String>]
+
         # @!attribute [rw] auth_type
         #   Optional customer-defined field, used in Swagger imports/exports.
         #   Has no functional impact.
@@ -142,7 +273,7 @@ module Aws
 
         # @!attribute [rw] authorizer_credentials
         #   Specifies the credentials required for the authorizer, if any. Two
-        #   options are available. To specify an IAM Role for Amazon API Gateway
+        #   options are available. To specify an IAM role for Amazon API Gateway
         #   to assume, use the role\'s Amazon Resource Name (ARN). To use
         #   resource-based permissions on the Lambda function, specify null.
         #   @return [String]
@@ -173,6 +304,14 @@ module Aws
       end
 
       # Represents a collection of Authorizer resources.
+      #
+      # <div class="seeAlso">
+      # [Enable custom authorization][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
       class Authorizers < Aws::Structure.new(
         :position,
         :items)
@@ -186,8 +325,21 @@ module Aws
 
       end
 
-      # Represents the base path that callers of the API that must provide as
-      # part of the URL after the domain name.
+      # Represents the base path that callers of the API must provide as part
+      # of the URL after the domain name.
+      #
+      # <div class="remarks">
+      # A custom domain name plus a `BasePathMapping` specification identifies
+      # a deployed RestApi in a given stage of the owner Account.
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Use Custom Domain Names][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
       class BasePathMapping < Aws::Structure.new(
         :base_path,
         :rest_api_id,
@@ -209,6 +361,14 @@ module Aws
       end
 
       # Represents a collection of BasePathMapping resources.
+      #
+      # <div class="seeAlso">
+      # [Use Custom Domain Names][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
       class BasePathMappings < Aws::Structure.new(
         :position,
         :items)
@@ -223,8 +383,22 @@ module Aws
 
       end
 
-      # Represents a Client Certificate used to configure client-side SSL
+      # Represents a client certificate used to configure client-side SSL
       # authentication while sending requests to the integration endpoint.
+      #
+      # <div class="remarks">
+      # Client certificates are used authenticate an API by the back-end
+      # server. To authenticate an API client (or user), use a custom
+      # Authorizer.
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Use Client-Side Certificate][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
       class ClientCertificate < Aws::Structure.new(
         :client_certificate_id,
         :description,
@@ -233,21 +407,21 @@ module Aws
         :expiration_date)
 
         # @!attribute [rw] client_certificate_id
-        #   The identifier of the Client Certificate.
+        #   The identifier of the client certificate.
         #   @return [String]
 
         # @!attribute [rw] description
-        #   The description of the Client Certificate.
+        #   The description of the client certificate.
         #   @return [String]
 
         # @!attribute [rw] pem_encoded_certificate
-        #   The PEM-encoded public key of the Client Certificate, that can be
+        #   The PEM-encoded public key of the client certificate, which can be
         #   used to configure certificate authentication in the integration
         #   endpoint .
         #   @return [String]
 
         # @!attribute [rw] created_date
-        #   The date when the Client Certificate was created, in [ISO 8601
+        #   The date when the client certificate was created, in [ISO 8601
         #   format][1].
         #
         #
@@ -256,7 +430,7 @@ module Aws
         #   @return [Time]
 
         # @!attribute [rw] expiration_date
-        #   The date when the Client Certificate will expire, in [ISO 8601
+        #   The date when the client certificate will expire, in [ISO 8601
         #   format][1].
         #
         #
@@ -267,6 +441,14 @@ module Aws
       end
 
       # Represents a collection of ClientCertificate resources.
+      #
+      # <div class="seeAlso">
+      # [Use Client-Side Certificate][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
       class ClientCertificates < Aws::Structure.new(
         :position,
         :items)
@@ -289,6 +471,8 @@ module Aws
       #         name: "String",
       #         description: "String",
       #         enabled: false,
+      #         generate_distinct_id: false,
+      #         value: "String",
       #         stage_keys: [
       #           {
       #             rest_api_id: "String",
@@ -300,6 +484,8 @@ module Aws
         :name,
         :description,
         :enabled,
+        :generate_distinct_id,
+        :value,
         :stage_keys)
 
         # @!attribute [rw] name
@@ -314,8 +500,18 @@ module Aws
         #   Specifies whether the ApiKey can be used by callers.
         #   @return [Boolean]
 
+        # @!attribute [rw] generate_distinct_id
+        #   Specifies whether (`true`) or not (`false`) the key identifier is
+        #   distinct from the created API key value.
+        #   @return [Boolean]
+
+        # @!attribute [rw] value
+        #   Specifies a value of the API key.
+        #   @return [String]
+
         # @!attribute [rw] stage_keys
-        #   Specifies whether the ApiKey can be used by callers.
+        #   DEPRECATED FOR USAGE PLANS - Specifies stages associated with the
+        #   API key.
         #   @return [Array<Types::StageKey>]
 
       end
@@ -327,9 +523,10 @@ module Aws
       #       {
       #         rest_api_id: "String", # required
       #         name: "String", # required
-      #         type: "TOKEN", # required, accepts TOKEN
+      #         type: "TOKEN", # required, accepts TOKEN, COGNITO_USER_POOLS
+      #         provider_arns: ["ProviderARN"],
       #         auth_type: "String",
-      #         authorizer_uri: "String", # required
+      #         authorizer_uri: "String",
       #         authorizer_credentials: "String",
       #         identity_source: "String", # required
       #         identity_validation_expression: "String",
@@ -339,6 +536,7 @@ module Aws
         :rest_api_id,
         :name,
         :type,
+        :provider_arns,
         :auth_type,
         :authorizer_uri,
         :authorizer_credentials,
@@ -357,6 +555,10 @@ module Aws
         # @!attribute [rw] type
         #   \[Required\] The type of the authorizer.
         #   @return [String]
+
+        # @!attribute [rw] provider_arns
+        #   A list of the Cognito Your User Pool authorizer\'s provider ARNs.
+        #   @return [Array<String>]
 
         # @!attribute [rw] auth_type
         #   Optional customer-defined field, used in Swagger imports/exports.
@@ -481,7 +683,7 @@ module Aws
         # @!attribute [rw] variables
         #   A map that defines the stage variables for the Stage resource that
         #   is associated with the new deployment. Variable names can have
-        #   alphanumeric characters, and the values must match
+        #   alphanumeric and underscore characters, and the values must match
         #   `[A-Za-z0-9-._~:/?#&=,]+`.
         #   @return [Hash<String,String>]
 
@@ -630,7 +832,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] clone_from
-        #   The Id of the RestApi that you want to clone from.
+        #   The ID of the RestApi that you want to clone from.
         #   @return [String]
 
       end
@@ -686,9 +888,94 @@ module Aws
 
         # @!attribute [rw] variables
         #   A map that defines the stage variables for the new Stage resource.
-        #   Variable names can have alphanumeric characters, and the values must
-        #   match `[A-Za-z0-9-._~:/?#&=,]+`.
+        #   Variable names can have alphanumeric and underscore characters, and
+        #   the values must match `[A-Za-z0-9-._~:/?#&=,]+`.
         #   @return [Hash<String,String>]
+
+      end
+
+      # The POST request to create a usage plan key for adding an existing API
+      # key to a usage plan.
+      # @note When making an API call, pass CreateUsagePlanKeyRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #         key_id: "String", # required
+      #         key_type: "String", # required
+      #       }
+      class CreateUsagePlanKeyRequest < Aws::Structure.new(
+        :usage_plan_id,
+        :key_id,
+        :key_type)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the UsagePlan resource representing the usage plan
+        #   containing the to-be-created UsagePlanKey resource representing a
+        #   plan customer.
+        #   @return [String]
+
+        # @!attribute [rw] key_id
+        #   The identifier of a UsagePlanKey resource for a plan customer.
+        #   @return [String]
+
+        # @!attribute [rw] key_type
+        #   The type of a UsagePlanKey resource for a plan customer.
+        #   @return [String]
+
+      end
+
+      # The POST request to create a usage plan with the name, description,
+      # throttle limits and quota limits, as well as the associated API
+      # stages, specified in the payload.
+      # @note When making an API call, pass CreateUsagePlanRequest
+      #   data as a hash:
+      #
+      #       {
+      #         name: "String", # required
+      #         description: "String",
+      #         api_stages: [
+      #           {
+      #             api_id: "String",
+      #             stage: "String",
+      #           },
+      #         ],
+      #         throttle: {
+      #           burst_limit: 1,
+      #           rate_limit: 1.0,
+      #         },
+      #         quota: {
+      #           limit: 1,
+      #           offset: 1,
+      #           period: "DAY", # accepts DAY, WEEK, MONTH
+      #         },
+      #       }
+      class CreateUsagePlanRequest < Aws::Structure.new(
+        :name,
+        :description,
+        :api_stages,
+        :throttle,
+        :quota)
+
+        # @!attribute [rw] name
+        #   The name of the usage plan.
+        #   @return [String]
+
+        # @!attribute [rw] description
+        #   The description of the usage plan.
+        #   @return [String]
+
+        # @!attribute [rw] api_stages
+        #   The associated API stages of the usage plan.
+        #   @return [Array<Types::ApiStage>]
+
+        # @!attribute [rw] throttle
+        #   The throttling limits of the usage plan.
+        #   @return [Types::ThrottleSettings]
+
+        # @!attribute [rw] quota
+        #   The quota of the usage plan.
+        #   @return [Types::QuotaSettings]
 
       end
 
@@ -893,7 +1180,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   The HTTP verb that identifies the Method resource.
+        #   The HTTP verb of the Method resource.
         #   @return [String]
 
       end
@@ -923,7 +1210,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   The HTTP verb identifier for the parent Method resource.
+        #   The HTTP verb of the Method resource.
         #   @return [String]
 
         # @!attribute [rw] status_code
@@ -1015,9 +1302,66 @@ module Aws
 
       end
 
+      # The DELETE request to delete a usage plan key and remove the
+      # underlying API key from the associated usage plan.
+      # @note When making an API call, pass DeleteUsagePlanKeyRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #         key_id: "String", # required
+      #       }
+      class DeleteUsagePlanKeyRequest < Aws::Structure.new(
+        :usage_plan_id,
+        :key_id)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the UsagePlan resource representing the usage plan
+        #   containing the to-be-deleted UsagePlanKey resource representing a
+        #   plan customer.
+        #   @return [String]
+
+        # @!attribute [rw] key_id
+        #   The Id of the UsagePlanKey resource to be deleted.
+        #   @return [String]
+
+      end
+
+      # The DELETE request to delete a uasge plan of a given plan Id.
+      # @note When making an API call, pass DeleteUsagePlanRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #       }
+      class DeleteUsagePlanRequest < Aws::Structure.new(
+        :usage_plan_id)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the to-be-deleted usage plan.
+        #   @return [String]
+
+      end
+
       # An immutable representation of a RestApi resource that can be called
       # by users using Stages. A deployment must be associated with a Stage
       # for it to be callable over the Internet.
+      #
+      # <div class="remarks">
+      # To create a deployment, call `POST` on the Deployments resource of a
+      # RestApi. To view, update, or delete a deployment, call `GET`, `PATCH`,
+      # or `DELETE` on the specified deployment resource
+      # (`/restapis/\{restapi_id\}/deployments/\{deployment_id\}`).
+      # </div>
+      #
+      # <div class="seeAlso">
+      # RestApi, Deployments, Stage, [AWS CLI][1], [AWS SDKs][2]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
+      # [2]: https://aws.amazon.com/tools/
       class Deployment < Aws::Structure.new(
         :id,
         :description,
@@ -1037,16 +1381,33 @@ module Aws
         #   @return [Time]
 
         # @!attribute [rw] api_summary
-        #   Gets a summary of the RestApi at the date and time that the
-        #   deployment resource was created.
+        #   A summary of the RestApi at the date and time that the deployment
+        #   resource was created.
         #   @return [Hash<String,Hash<String,Types::MethodSnapshot>>]
 
       end
 
       # Represents a collection resource that contains zero or more references
-      # to your existing deployments, and links that guide you on ways to
+      # to your existing deployments, and links that guide you on how to
       # interact with your collection. The collection offers a paginated view
       # of the contained deployments.
+      #
+      # <div class="remarks">
+      # To create a new deployment of a RestApi, make a `POST` request against
+      # this resource. To view, update, or delete an existing deployment, make
+      # a `GET`, `PATCH`, or `DELETE` request, respectively, on a specified
+      # Deployment resource.
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Deploying an API][1], [AWS CLI][2], [AWS SDKs][3]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
+      # [2]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
+      # [3]: https://aws.amazon.com/tools/
       class Deployments < Aws::Structure.new(
         :position,
         :items)
@@ -1063,6 +1424,14 @@ module Aws
 
       # Represents a domain name that is contained in a simpler, more
       # intuitive URL that can be called.
+      #
+      # <div class="seeAlso">
+      # [Use Client-Side Certificate][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
       class DomainName < Aws::Structure.new(
         :domain_name,
         :certificate_name,
@@ -1097,6 +1466,14 @@ module Aws
       end
 
       # Represents a collection of DomainName resources.
+      #
+      # <div class="seeAlso">
+      # [Use Client-Side Certificate][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
       class DomainNames < Aws::Structure.new(
         :position,
         :items)
@@ -1124,7 +1501,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] content_disposition
-        #   The content-disposition header value in the HTTP reseponse.
+        #   The content-disposition header value in the HTTP response.
         #   @return [String]
 
         # @!attribute [rw] body
@@ -1204,13 +1581,20 @@ module Aws
       #
       #       {
       #         api_key: "String", # required
+      #         include_value: false,
       #       }
       class GetApiKeyRequest < Aws::Structure.new(
-        :api_key)
+        :api_key,
+        :include_value)
 
         # @!attribute [rw] api_key
         #   The identifier of the ApiKey resource.
         #   @return [String]
+
+        # @!attribute [rw] include_value
+        #   A boolean flag to specify whether (`true`) or not (`false`) the
+        #   result contains the key value.
+        #   @return [Boolean]
 
       end
 
@@ -1221,10 +1605,14 @@ module Aws
       #       {
       #         position: "String",
       #         limit: 1,
+      #         name_query: "String",
+      #         include_values: false,
       #       }
       class GetApiKeysRequest < Aws::Structure.new(
         :position,
-        :limit)
+        :limit,
+        :name_query,
+        :include_values)
 
         # @!attribute [rw] position
         #   The position of the current ApiKeys resource to get information
@@ -1234,6 +1622,15 @@ module Aws
         # @!attribute [rw] limit
         #   The maximum number of ApiKeys to get information about.
         #   @return [Integer]
+
+        # @!attribute [rw] name_query
+        #   The name of queried API keys.
+        #   @return [String]
+
+        # @!attribute [rw] include_values
+        #   A boolean flag to specify whether (`true`) or not (`false`) the
+        #   result contains key values.
+        #   @return [Boolean]
 
       end
 
@@ -1279,7 +1676,7 @@ module Aws
 
         # @!attribute [rw] position
         #   If not all Authorizer resources in the response were present, the
-        #   position will specificy where to start the next page of results.
+        #   position will specify where to start the next page of results.
         #   @return [String]
 
         # @!attribute [rw] limit
@@ -1519,20 +1916,20 @@ module Aws
 
         # @!attribute [rw] parameters
         #   A key-value map of query string parameters that specify properties
-        #   of the export, depending on the requested exportType. For exportType
-        #   \'swagger\', any combination of the following parameters are
-        #   supported: \'integrations\' will export
-        #   x-amazon-apigateway-integration extensions \'authorizers\' will
-        #   export x-amazon-apigateway-authorizer extensions \'postman\' will
-        #   export with Postman extensions, allowing for import to the Postman
-        #   tool
+        #   of the export, depending on the requested `exportType`. For
+        #   `exportType` `swagger`, any combination of the following parameters
+        #   are supported: `integrations` will export the API with
+        #   x-amazon-apigateway-integration extensions. `authorizers` will
+        #   export the API with x-amazon-apigateway-authorizer extensions.
+        #   `postman` will export the API with Postman extensions, allowing for
+        #   import to the Postman tool
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] accepts
-        #   The content-type of the export, for example \'application/json\'.
-        #   Currently \'application/json\' and \'application/yaml\' are
-        #   supported for exportType \'swagger\'. Should be specifed in the
-        #   \'Accept\' header for direct API requests.
+        #   The content-type of the export, for example `application/json`.
+        #   Currently `application/json` and `application/yaml` are supported
+        #   for `exportType` of `swagger`. This should be specified in the
+        #   `Accept` header for direct API requests.
         #   @return [String]
 
       end
@@ -1622,7 +2019,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   Specifies the put method request\'s HTTP method type.
+        #   Specifies the method request\'s HTTP method type.
         #   @return [String]
 
       end
@@ -1652,11 +2049,11 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   The HTTP verb identifier for the parent Method resource.
+        #   The HTTP verb of the Method resource.
         #   @return [String]
 
         # @!attribute [rw] status_code
-        #   The status code identifier for the MethodResponse resource.
+        #   The status code for the MethodResponse resource.
         #   @return [String]
 
       end
@@ -1685,8 +2082,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] flatten
-        #   Resolves all external model references and returns a flattened model
-        #   schema.
+        #   A query parameter of a Boolean value to resolve (`true`) all
+        #   external model references and returns a flattened model schema or
+        #   not (`false`) The default is `false`.
         #   @return [Boolean]
 
       end
@@ -1867,16 +2265,16 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] sdk_type
-        #   The language for the generated SDK. Currently javascript, android,
-        #   and objectivec (for iOS) are supported.
+        #   The language for the generated SDK. Currently `javascript`,
+        #   `android`, and `objectivec` (for iOS) are supported.
         #   @return [String]
 
         # @!attribute [rw] parameters
         #   A key-value map of query string parameters that specify properties
-        #   of the SDK, depending on the requested sdkType. For sdkType
-        #   \'objectivec\', a parameter named \"classPrefix\" is required. For
-        #   sdkType \'android\', parameters named \"groupId\", \"artifactId\",
-        #   \"artifactVersion\", and \"invokerPackage\" are required.
+        #   of the SDK, depending on the requested `sdkType`. For `sdkType` of
+        #   `objectivec`, a parameter named `classPrefix` is required. For
+        #   `sdkType` of `android`, parameters named `groupId`, `artifactId`,
+        #   `artifactVersion`, and `invokerPackage` are required.
         #   @return [Hash<String,String>]
 
       end
@@ -1927,6 +2325,199 @@ module Aws
 
       end
 
+      # The GET request to get a usage plan key of a given key identifier.
+      # @note When making an API call, pass GetUsagePlanKeyRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #         key_id: "String", # required
+      #       }
+      class GetUsagePlanKeyRequest < Aws::Structure.new(
+        :usage_plan_id,
+        :key_id)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the UsagePlan resource representing the usage plan
+        #   containing the to-be-retrieved UsagePlanKey resource representing a
+        #   plan customer.
+        #   @return [String]
+
+        # @!attribute [rw] key_id
+        #   The key Id of the to-be-retrieved UsagePlanKey resource representing
+        #   a plan customer.
+        #   @return [String]
+
+      end
+
+      # The GET request to get all the usage plan keys representing the API
+      # keys added to a specified usage plan.
+      # @note When making an API call, pass GetUsagePlanKeysRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #         position: "String",
+      #         limit: 1,
+      #         name_query: "String",
+      #       }
+      class GetUsagePlanKeysRequest < Aws::Structure.new(
+        :usage_plan_id,
+        :position,
+        :limit,
+        :name_query)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the UsagePlan resource representing the usage plan
+        #   containing the to-be-retrieved UsagePlanKey resource representing a
+        #   plan customer.
+        #   @return [String]
+
+        # @!attribute [rw] position
+        #   A query parameter specifying the zero-based index specifying the
+        #   position of a usage plan key.
+        #   @return [String]
+
+        # @!attribute [rw] limit
+        #   A query parameter specifying the maximum number usage plan keys
+        #   returned by the GET request.
+        #   @return [Integer]
+
+        # @!attribute [rw] name_query
+        #   A query parameter specifying the name of the to-be-returned usage
+        #   plan keys.
+        #   @return [String]
+
+      end
+
+      # The GET request to get a usage plan of a given plan identifier.
+      # @note When making an API call, pass GetUsagePlanRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #       }
+      class GetUsagePlanRequest < Aws::Structure.new(
+        :usage_plan_id)
+
+        # @!attribute [rw] usage_plan_id
+        #   The identifier of the UsagePlan resource to be retrieved.
+        #   @return [String]
+
+      end
+
+      # The GET request to get all the usage plans of the caller\'s account.
+      # @note When making an API call, pass GetUsagePlansRequest
+      #   data as a hash:
+      #
+      #       {
+      #         position: "String",
+      #         key_id: "String",
+      #         limit: 1,
+      #       }
+      class GetUsagePlansRequest < Aws::Structure.new(
+        :position,
+        :key_id,
+        :limit)
+
+        # @!attribute [rw] position
+        #   The zero-based array index specifying the position of the
+        #   to-be-retrieved UsagePlan resource.
+        #   @return [String]
+
+        # @!attribute [rw] key_id
+        #   The identifier of the API key associated with the usage plans.
+        #   @return [String]
+
+        # @!attribute [rw] limit
+        #   The number of UsagePlan resources to be returned as the result.
+        #   @return [Integer]
+
+      end
+
+      # The GET request to get the usage data of a usage plan in a specified
+      # time interval.
+      # @note When making an API call, pass GetUsageRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #         key_id: "String",
+      #         start_date: "String", # required
+      #         end_date: "String", # required
+      #         position: "String",
+      #         limit: 1,
+      #       }
+      class GetUsageRequest < Aws::Structure.new(
+        :usage_plan_id,
+        :key_id,
+        :start_date,
+        :end_date,
+        :position,
+        :limit)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the usage plan associated with the usage data.
+        #   @return [String]
+
+        # @!attribute [rw] key_id
+        #   The Id of the API key associated with the resultant usage data.
+        #   @return [String]
+
+        # @!attribute [rw] start_date
+        #   The starting date (e.g., 2016-01-01) of the usage data.
+        #   @return [String]
+
+        # @!attribute [rw] end_date
+        #   The ending date (e.g., 2016-12-31) of the usage data.
+        #   @return [String]
+
+        # @!attribute [rw] position
+        #   Position
+        #   @return [String]
+
+        # @!attribute [rw] limit
+        #   The maximum number of results to be returned.
+        #   @return [Integer]
+
+      end
+
+      # The POST request to import API keys from an external source, such as a
+      # CSV-formatted file.
+      # @note When making an API call, pass ImportApiKeysRequest
+      #   data as a hash:
+      #
+      #       {
+      #         body: "data", # required
+      #         format: "csv", # required, accepts csv
+      #         fail_on_warnings: false,
+      #       }
+      class ImportApiKeysRequest < Aws::Structure.new(
+        :body,
+        :format,
+        :fail_on_warnings)
+
+        # @!attribute [rw] body
+        #   The payload of the POST request to import API keys. For the payload
+        #   format, see [API Key File Format][1].
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
+        #   @return [String]
+
+        # @!attribute [rw] format
+        #   A query parameter to specify the input format to imported API keys.
+        #   Currently, only the `csv` format is supported.
+        #   @return [String]
+
+        # @!attribute [rw] fail_on_warnings
+        #   A query parameter to indicate whether to rollback ApiKey importation
+        #   (`true`) or not (`false`) when error is encountered.
+        #   @return [Boolean]
+
+      end
+
       # A POST request to import an API to Amazon API Gateway using an input
       # of an API definition file.
       # @note When making an API call, pass ImportRestApiRequest
@@ -1961,7 +2552,20 @@ module Aws
 
       end
 
-      # Represents a HTTP, AWS, or Mock integration.
+      # Represents an HTTP, AWS, or Mock integration.
+      #
+      # <div class="remarks">
+      # In the API Gateway console, the built-in Lambda integration is an AWS
+      # integration.
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Creating an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       class Integration < Aws::Structure.new(
         :type,
         :http_method,
@@ -2012,16 +2616,15 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] request_parameters
-        #   Represents requests parameters that are sent with the backend
-        #   request. Request parameters are represented as a key/value map, with
-        #   a destination as the key and a source as the value. A source must
-        #   match an existing method request parameter, or a static value.
-        #   Static values must be enclosed with single quotes, and be
-        #   pre-encoded based on their destination in the request. The
-        #   destination must match the pattern
-        #   `integration.request.\{location\}.\{name\}`, where `location` is
-        #   either querystring, path, or header. `name` must be a valid, unique
-        #   parameter name.
+        #   A key-value map specifying request parameters that are passed from
+        #   the method request to the back end. The key is an integration
+        #   request parameter name and the associated value is a method request
+        #   parameter value or static value that must be enclosed within single
+        #   quotes and pre-encoded as required by the back end. The method
+        #   request parameter value must match the pattern of
+        #   `method.request.\{location\}.\{name\}`, where `location` is
+        #   `querystring`, `path`, or `header` and `name` must be a valid and
+        #   unique method request parameter name.
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] request_templates
@@ -2032,23 +2635,33 @@ module Aws
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] passthrough_behavior
-        #   Specifies the pass-through behavior for incoming requests based on
-        #   the Content-Type header in the request, and the available
-        #   requestTemplates defined on the Integration. There are three valid
-        #   values: `WHEN_NO_MATCH`, `WHEN_NO_TEMPLATES`, and `NEVER`.
+        #   <div markdown="1">
+        #   Specifies how the method request body of an unmapped content type
+        #   will be passed through the integration request to the back end
+        #   without transformation. A content type is unmapped if no mapping
+        #   template is defined in the integration or the content type does not
+        #   match any of the mapped content types, as specified in
+        #   `requestTemplates`. There are three valid values: `WHEN_NO_MATCH`,
+        #   `WHEN_NO_TEMPLATES`, and `NEVER`.
         #
+        #   * `WHEN_NO_MATCH` passes the method request body through the
+        #     integration request to the back end without transformation when
+        #     the method request content type does not match any content type
+        #     associated with the mapping templates defined in the integration
+        #     request.
+        #   * `WHEN_NO_TEMPLATES` passes the method request body through the
+        #     integration request to the back end without transformation when no
+        #     mapping template is defined in the integration request. If a
+        #     template is defined when this option is selected, the method
+        #     request of an unmapped content-type will be rejected with an HTTP
+        #     `415 Unsupported Media Type` response.
+        #   * `NEVER` rejects the method request with an HTTP `415 Unsupported
+        #     Media Type` response when either the method request content type
+        #     does not match any content type associated with the mapping
+        #     templates defined in the integration request or no mapping
+        #     template is defined in the integration request.
         #
-        #
-        #   `WHEN_NO_MATCH` passes the request body for unmapped content types
-        #   through to the Integration backend without transformation.
-        #
-        #   `NEVER` rejects unmapped content types with an HTTP 415
-        #   \'Unsupported Media Type\' response.
-        #
-        #   `WHEN_NO_TEMPLATES` will allow pass-through when the Integration has
-        #   NO content types mapped to templates. However if there is at least
-        #   one content type defined, unmapped content types will be rejected
-        #   with the same 415 response.
+        #   </div>
         #   @return [String]
 
         # @!attribute [rw] cache_namespace
@@ -2061,13 +2674,51 @@ module Aws
 
         # @!attribute [rw] integration_responses
         #   Specifies the integration\'s responses.
+        #
+        #   <div class="remarks" markdown="1">
+        #
+        #
+        #   #### Example: Get integration responses of a method
+        #
+        #   ##### Request
+        #
+        #
+        #
+        #       GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20160607/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+        #
+        #   ##### Response
+        #
+        #   The successful response returns `200 OK` status and a payload as
+        #   follows:
+        #
+        #       \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" \}, "statusCode": "200" \}
+        #
+        #
+        #
+        #   </div>
+        #
+        #   <div class="seeAlso">
+        #   [Creating an API][1]
+        #   </div>
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
         #   @return [Hash<String,Types::IntegrationResponse>]
 
       end
 
       # Represents an integration response. The status code must map to an
       # existing MethodResponse, and parameters and templates can be used to
-      # transform the backend response.
+      # transform the back-end response.
+      #
+      # <div class="seeAlso">
+      # [Creating an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       class IntegrationResponse < Aws::Structure.new(
         :status_code,
         :selection_pattern,
@@ -2081,21 +2732,29 @@ module Aws
 
         # @!attribute [rw] selection_pattern
         #   Specifies the regular expression (regex) pattern used to choose an
-        #   integration response based on the response from the backend. If the
-        #   backend is an AWS Lambda function, the AWS Lambda function error
-        #   header is matched. For all other HTTP and AWS backends, the HTTP
-        #   status code is matched.
+        #   integration response based on the response from the back end. For
+        #   example, if the success response returns nothing and the error
+        #   response returns some string, you could use the `.+` regex to match
+        #   error response. However, make sure that the error response does not
+        #   contain any newline (`\n`) character in such cases. If the back end
+        #   is an AWS Lambda function, the AWS Lambda function error header is
+        #   matched. For all other HTTP and AWS back ends, the HTTP status code
+        #   is matched.
         #   @return [String]
 
         # @!attribute [rw] response_parameters
-        #   Represents response parameters that can be read from the backend
-        #   response. Response parameters are represented as a key/value map,
-        #   with a destination as the key and a source as the value. A
-        #   destination must match an existing response parameter in the
-        #   MethodResponse. The source can be a header from the backend
-        #   response, or a static value. Static values are specified using
-        #   enclosing single quotes, and backend response headers can be read
-        #   using the pattern `integration.response.header.\{name\}`.
+        #   A key-value map specifying response parameters that are passed to
+        #   the method response from the back end. The key is a method response
+        #   header parameter name and the mapped value is an integration
+        #   response header value, a static value enclosed within a pair of
+        #   single quotes, or a JSON expression from the integration response
+        #   body. The mapping key must match the pattern of
+        #   `method.response.header.\{name\}`, where `name` is a valid and
+        #   unique header name. The mapped non-static value must match the
+        #   pattern of `integration.response.header.\{name\}` or
+        #   `integration.response.body.\{JSON-expression\}`, where `name` is a
+        #   valid and unique response header name and `JSON-expression` is a
+        #   valid JSON expression without the `$` prefix.
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] response_templates
@@ -2106,7 +2765,55 @@ module Aws
 
       end
 
-      # Represents a method.
+      # Represents a client-facing interface by which the client calls the API
+      # to access back-end resources. A **Method** resource is integrated with
+      # an Integration resource. Both consist of a request and one or more
+      # responses. The method request takes the client input that is passed to
+      # the back end through the integration request. A method response
+      # returns the output from the back end to the client through an
+      # integration response. A method request is embodied in a **Method**
+      # resource, whereas an integration request is embodied in an Integration
+      # resource. On the other hand, a method response is represented by a
+      # MethodResponse resource, whereas an integration response is
+      # represented by an IntegrationResponse resource.
+      #
+      # <div class="remarks" markdown="1">
+      #
+      #
+      # #### Example: Retrive the GET method on a specified resource
+      #
+      # ##### Request
+      #
+      # The following example request retrieves the information about the GET
+      # method on an API resource (`3kzxbg5sa2`) of an API (`fugvjdxtri`).
+      #
+      #     GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160603T210259Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20160603/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+      #
+      # ##### Response
+      #
+      # The successful response returns a `200 OK` status code and a payload
+      # similar to the following:
+      #
+      #     \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": true, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E\")" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+      #
+      # In the example above, the response template for the `200 OK` response
+      # maps the JSON output from the `ListStreams` action in the back end to
+      # an XML output. The mapping template is URL-encoded as
+      # `%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E`
+      # and the output is decoded using the [$util.urlDecode()][1] helper
+      # function.
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # MethodResponse, Integration, IntegrationResponse, Resource, [Set up an
+      # API's method][2]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference
+      # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html
       class Method < Aws::Structure.new(
         :http_method,
         :authorization_type,
@@ -2118,7 +2825,7 @@ module Aws
         :method_integration)
 
         # @!attribute [rw] http_method
-        #   The HTTP method.
+        #   The method\'s HTTP verb.
         #   @return [String]
 
         # @!attribute [rw] authorization_type
@@ -2126,48 +2833,144 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] authorizer_id
-        #   Specifies the identifier of an Authorizer to use on this Method. The
-        #   authorizationType must be CUSTOM.
+        #   The identifier of an Authorizer to use on this method. The
+        #   `authorizationType` must be `CUSTOM`.
         #   @return [String]
 
         # @!attribute [rw] api_key_required
-        #   Specifies whether the method requires a valid ApiKey.
+        #   A boolean flag specifying whether a valid ApiKey is required to
+        #   invoke this method.
         #   @return [Boolean]
 
         # @!attribute [rw] request_parameters
-        #   Represents request parameters that can be accepted by Amazon API
-        #   Gateway. Request parameters are represented as a key/value map, with
-        #   a source as the key and a Boolean flag as the value. The Boolean
-        #   flag is used to specify whether the parameter is required. A source
-        #   must match the pattern `method.request.\{location\}.\{name\}`, where
-        #   `location` is either querystring, path, or header. `name` is a
-        #   valid, unique parameter name. Sources specified here are available
-        #   to the integration for mapping to integration request parameters or
-        #   templates.
+        #   A key-value map defining required or optional method request
+        #   parameters that can be accepted by Amazon API Gateway. A key is a
+        #   method request parameter name matching the pattern of
+        #   `method.request.\{location\}.\{name\}`, where `location` is
+        #   `querystring`, `path`, or `header` and `name` is a valid and unique
+        #   parameter name. The value associated with the key is a Boolean flag
+        #   indicating whether the parameter is required (`true`) or optional
+        #   (`false`). The method request parameter names defined here are
+        #   available in Integration to be mapped to integration request
+        #   parameters or templates.
         #   @return [Hash<String,Boolean>]
 
         # @!attribute [rw] request_models
-        #   Specifies the Model resources used for the request\'s content type.
-        #   Request models are represented as a key/value map, with a content
-        #   type as the key and a Model name as the value.
+        #   A key-value map specifying data schemas, represented by Model
+        #   resources, (as the mapped value) of the request payloads of given
+        #   content types (as the mapping key).
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] method_responses
-        #   Represents available responses that can be sent to the caller.
-        #   Method responses are represented as a key/value map, with an HTTP
-        #   status code as the key and a MethodResponse as the value. The status
-        #   codes are available for the Integration responses to map to.
+        #   Gets a method response associated with a given HTTP status code.
+        #
+        #   <div class="remarks" markdown="1">
+        #   The collection of method responses are encapsulated in a key-value
+        #   map, where the key is a response\'s HTTP status code and the value
+        #   is a MethodResponse resource that specifies the response returned to
+        #   the caller from the back end through the integration response.
+        #
+        #   #### Example: Get a 200 OK response of a GET method
+        #
+        #   ##### Request
+        #
+        #
+        #
+        #       GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com Content-Length: 117 X-Amz-Date: 20160613T215008Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20160613/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+        #
+        #   ##### Response
+        #
+        #   The successful response returns a `200 OK` status code and a payload
+        #   similar to the following:
+        #
+        #       \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.operator": false, "method.response.header.operand_2": false, "method.response.header.operand_1": false \}, "statusCode": "200" \}
+        #
+        #
+        #
+        #   </div>
+        #
+        #   <div class="seeAlso">
+        #   [AWS CLI][1]
+        #   </div>
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html
         #   @return [Hash<String,Types::MethodResponse>]
 
         # @!attribute [rw] method_integration
-        #   The method\'s integration.
+        #   Gets the method\'s integration responsible for passing the
+        #   client-submitted request to the back end and performing necessary
+        #   transformations to make the request compliant with the back end.
+        #
+        #   <div class="remarks" markdown="1">
+        #
+        #
+        #   #### Example:
+        #
+        #   ##### Request
+        #
+        #
+        #
+        #       GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com Content-Length: 117 X-Amz-Date: 20160613T213210Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20160613/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+        #
+        #   ##### Response
+        #
+        #   The successful response returns a `200 OK` status code and a payload
+        #   similar to the following:
+        #
+        #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \} ], "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "0cjtch", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": \{ "application/json": "\{\n \"a\": \"$input.params('operand1')\",\n \"b\": \"$input.params('operand2')\", \n \"op\": \"$input.params('operator')\" \n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.operator": "integration.response.body.op", "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1": "integration.response.body.a" \}, "responseTemplates": \{ "application/json": "#set($res = $input.path('$'))\n\{\n \"result\": \"$res.a, $res.b, $res.op => $res.c\",\n \"a\" : \"$res.a\",\n \"b\" : \"$res.b\",\n \"op\" : \"$res.op\",\n \"c\" : \"$res.c\"\n\}" \}, "selectionPattern": "", "statusCode": "200" \} \} \}
+        #
+        #
+        #
+        #   </div>
+        #
+        #   <div class="seeAlso">
+        #   [AWS CLI][1]
+        #   </div>
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html
         #   @return [Types::Integration]
 
       end
 
-      # Represents a method response. Amazon API Gateway sends back the status
-      # code to the caller as the HTTP status code. Parameters and models can
-      # be used to transform the response from the method\'s integration.
+      # Represents a method response of a given HTTP status code returned to
+      # the client. The method response is passed from the back end through
+      # the associated integration response that can be transformed using a
+      # mapping template.
+      #
+      # <div class="remarks" markdown="1">
+      #
+      #
+      # #### Example: A **MethodResponse** instance of an API
+      #
+      # ##### Request
+      #
+      # The example request retrieves a **MethodResponse** of the 200 status
+      # code.
+      #
+      #     GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200 HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160603T222952Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20160603/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+      #
+      # ##### Response
+      #
+      # The successful response returns `200 OK` status and a payload as
+      # follows:
+      #
+      #     \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \}
+      #
+      #
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # Method, IntegrationResponse, Integration [Creating an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       class MethodResponse < Aws::Structure.new(
         :status_code,
         :response_parameters,
@@ -2178,14 +2981,22 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] response_parameters
-        #   Represents response parameters that can be sent back to the caller
-        #   by Amazon API Gateway. Response parameters are represented as a
-        #   key/value map, with a destination as the key and a boolean flag as
-        #   the value, which is used to specify whether the parameter is
-        #   required. A destination must match the pattern
-        #   `method.response.header.\{name\}`, where `name` is a valid, unique
-        #   header name. Destinations specified here are available to the
-        #   integration for mapping from integration response parameters.
+        #   A key-value map specifying required or optional response parameters
+        #   that Amazon API Gateway can send back to the caller. A key defines a
+        #   method response header and the value specifies whether the
+        #   associated method response header is required or not. The expression
+        #   of the key must match the pattern `method.response.header.\{name\}`,
+        #   where `name` is a valid and unique header name. Amazon API Gateway
+        #   passes certain integration response data to the method response
+        #   headers specified here according to the mapping you prescribe in the
+        #   API\'s IntegrationResponse. The integration response data that can
+        #   be mapped include an integration response header expressed in
+        #   `integration.response.header.\{name\}`, a static value enclosed
+        #   within a pair of single quotes (e.g., `'application/json'`), or a
+        #   JSON expression from the back-end response payload in the form of
+        #   `integration.response.body.\{JSON-expression\}`, where
+        #   `JSON-expression` is a valid JSON expression without the `$`
+        #   prefix.)
         #   @return [Hash<String,Boolean>]
 
         # @!attribute [rw] response_models
@@ -2224,7 +3035,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] data_trace_enabled
-        #   Specifies the whether data trace logging is enabled for this method,
+        #   Specifies whether data trace logging is enabled for this method,
         #   which effects the log entries pushed to Amazon CloudWatch Logs. The
         #   PATCH path for this setting is
         #   `/\{method_setting_key\}/logging/dataTrace`, and the value is a
@@ -2252,8 +3063,8 @@ module Aws
         #   @return [Boolean]
 
         # @!attribute [rw] cache_ttl_in_seconds
-        #   Specifies the time to live (TTL) in seconds, for cached responses.
-        #   The higher a the TTL, the longer the response will be cached. The
+        #   Specifies the time to live (TTL), in seconds, for cached responses.
+        #   The higher the TTL, the longer the response will be cached. The
         #   PATCH path for this setting is
         #   `/\{method_setting_key\}/caching/ttlInSeconds`, and the value is an
         #   integer.
@@ -2273,8 +3084,8 @@ module Aws
         #   @return [Boolean]
 
         # @!attribute [rw] unauthorized_cache_control_header_strategy
-        #   Specifies the strategy on how to handle the unauthorized requests
-        #   for cache invalidation. The PATCH path for this setting is
+        #   Specifies how to handle unauthorized requests for cache
+        #   invalidation. The PATCH path for this setting is
         #   `/\{method_setting_key\}/caching/unauthorizedCacheControlHeaderStrategy`,
         #   and the available values are `FAIL_WITH_403`,
         #   `SUCCEED_WITH_RESPONSE_HEADER`, `SUCCEED_WITHOUT_RESPONSE_HEADER`.
@@ -2298,8 +3109,28 @@ module Aws
 
       end
 
-      # Represents the structure of a request or response payload for a
-      # method.
+      # Represents the data structure of a method\'s request or response
+      # payload.
+      #
+      # <div class="remarks" markdown="1">
+      # A request model defines the data structure of the client-supplied
+      # request payload. A response model defines the data structure of the
+      # response payload returned by the back end. Although not required,
+      # models are useful for mapping payloads between the front end and back
+      # end.
+      #
+      # A model is used for generating an API\'s SDK, validating the input
+      # request body, and creating a skeletal mapping template.
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # Method, MethodResponse, [Models and Mappings][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
       class Model < Aws::Structure.new(
         :id,
         :name,
@@ -2321,7 +3152,11 @@ module Aws
 
         # @!attribute [rw] schema
         #   The schema for the model. For `application/json` models, this should
-        #   be [JSON-schema draft v4][1] model.
+        #   be [JSON-schema draft v4][1] model. Do not include \"\\\*/\"
+        #   characters in the description of any properties because such
+        #   \"\\\*/\" characters may be interpreted as the closing marker for
+        #   comments in some languages, such as Java or JavaScript, causing the
+        #   installation of your API\'s SDK generated by API Gateway to fail.
         #
         #
         #
@@ -2335,6 +3170,14 @@ module Aws
       end
 
       # Represents a collection of Model resources.
+      #
+      # <div class="seeAlso">
+      # Method, MethodResponse, [Models and Mappings][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
       class Models < Aws::Structure.new(
         :position,
         :items)
@@ -2367,27 +3210,37 @@ module Aws
         :from)
 
         # @!attribute [rw] op
-        #   A patch operation whose value indicates the operation to perform.
-        #   Its value MUST be one of \"add\", \"remove\", \"replace\", \"move\",
-        #   \"copy\", or \"test\"; other values are errors.
+        #   An update operation to be performed with this PATCH request. The
+        #   valid value can be \"add\", \"remove\", or \"replace\". Not all
+        #   valid operations are supported for a given resource. Support of the
+        #   operations depends on specific operational contexts. Attempts to
+        #   apply an unsupported operation on a resource will return an error
+        #   message.
         #   @return [String]
 
         # @!attribute [rw] path
-        #   Operation objects MUST have exactly one \"path\" member. That
-        #   member\'s value is a string containing a \`JSON-Pointer\` value that
-        #   references a location within the target document (the \"target
-        #   location\") where the operation is performed.
+        #   The `op` operation\'s target, as identified by a [JSON Pointer][1]
+        #   value that references a location within the targeted resource. For
+        #   example, if the target resource has an updateable property of
+        #   `\{"name":"value"\}`, the path for this property is `/name`. If the
+        #   `name` property value is a JSON object (e.g., `\{"name":
+        #   \{"child/name": "child-value"\}\}`), the path for the `child/name`
+        #   property will be `/name/child~1name`. Any slash (\"/\") character
+        #   appearing in path names must be escaped with \"~1\", as shown in the
+        #   example above. Each `op` operation can have only one `path`
+        #   associated with it.
+        #
+        #
+        #
+        #   [1]: https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08
         #   @return [String]
 
         # @!attribute [rw] value
-        #   The actual value content.
+        #   The new target value of the update operation.
         #   @return [String]
 
         # @!attribute [rw] from
-        #   The \"move\" and \"copy\" operation object MUST contain a \"from\"
-        #   member, which is a string containing a `JSON Pointer` value that
-        #   references the location in the target document to move the value
-        #   from.
+        #   Not supported.
         #   @return [String]
 
       end
@@ -2463,16 +3316,15 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] request_parameters
-        #   Represents request parameters that are sent with the backend
-        #   request. Request parameters are represented as a key/value map, with
-        #   a destination as the key and a source as the value. A source must
-        #   match an existing method request parameter, or a static value.
-        #   Static values must be enclosed with single quotes, and be
-        #   pre-encoded based on their destination in the request. The
-        #   destination must match the pattern
-        #   `integration.request.\{location\}.\{name\}`, where `location` is
-        #   either querystring, path, or header. `name` must be a valid, unique
-        #   parameter name.
+        #   A key-value map specifying request parameters that are passed from
+        #   the method request to the back end. The key is an integration
+        #   request parameter name and the associated value is a method request
+        #   parameter value or static value that must be enclosed within single
+        #   quotes and pre-encoded as required by the back end. The method
+        #   request parameter value must match the pattern of
+        #   `method.request.\{location\}.\{name\}`, where `location` is
+        #   `querystring`, `path`, or `header` and `name` must be a valid and
+        #   unique method request parameter name.
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] request_templates
@@ -2484,22 +3336,21 @@ module Aws
 
         # @!attribute [rw] passthrough_behavior
         #   Specifies the pass-through behavior for incoming requests based on
-        #   the Content-Type header in the request, and the available
-        #   requestTemplates defined on the Integration. There are three valid
-        #   values: `WHEN_NO_MATCH`, `WHEN_NO_TEMPLATES`, and `NEVER`.
+        #   the Content-Type header in the request, and the available mapping
+        #   templates specified as the `requestTemplates` property on the
+        #   Integration resource. There are three valid values: `WHEN_NO_MATCH`,
+        #   `WHEN_NO_TEMPLATES`, and `NEVER`.
         #
+        #   * `WHEN_NO_MATCH` passes the request body for unmapped content types
+        #     through to the integration back end without transformation.
         #
+        #   * `NEVER` rejects unmapped content types with an HTTP 415
+        #     \'Unsupported Media Type\' response.
         #
-        #   `WHEN_NO_MATCH` passes the request body for unmapped content types
-        #   through to the Integration backend without transformation.
-        #
-        #   `NEVER` rejects unmapped content types with an HTTP 415
-        #   \'Unsupported Media Type\' response.
-        #
-        #   `WHEN_NO_TEMPLATES` will allow pass-through when the Integration has
-        #   NO content types mapped to templates. However if there is at least
-        #   one content type defined, unmapped content types will be rejected
-        #   with the same 415 response.
+        #   * `WHEN_NO_TEMPLATES` allows pass-through when the integration has
+        #     NO content types mapped to templates. However if there is at least
+        #     one content type defined, unmapped content types will be rejected
+        #     with the same 415 response.
         #   @return [String]
 
         # @!attribute [rw] cache_namespace
@@ -2560,14 +3411,18 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] response_parameters
-        #   Represents response parameters that can be read from the backend
-        #   response. Response parameters are represented as a key/value map,
-        #   with a destination as the key and a source as the value. A
-        #   destination must match an existing response parameter in the Method.
-        #   The source can be a header from the backend response, or a static
-        #   value. Static values are specified using enclosing single quotes,
-        #   and backend response headers can be read using the pattern
-        #   `integration.response.header.\{name\}`.
+        #   A key-value map specifying response parameters that are passed to
+        #   the method response from the back end. The key is a method response
+        #   header parameter name and the mapped value is an integration
+        #   response header value, a static value enclosed within a pair of
+        #   single quotes, or a JSON expression from the integration response
+        #   body. The mapping key must match the pattern of
+        #   `method.response.header.\{name\}`, where `name` is a valid and
+        #   unique header name. The mapped non-static value must match the
+        #   pattern of `integration.response.header.\{name\}` or
+        #   `integration.response.body.\{JSON-expression\}`, where `name` must
+        #   be a valid and unique response header name and `JSON-expression` a
+        #   valid JSON expression without the `$` prefix.
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] response_templates
@@ -2613,7 +3468,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   Specifies the put method request\'s HTTP method type.
+        #   Specifies the method request\'s HTTP method type.
         #   @return [String]
 
         # @!attribute [rw] authorization_type
@@ -2630,16 +3485,16 @@ module Aws
         #   @return [Boolean]
 
         # @!attribute [rw] request_parameters
-        #   Represents requests parameters that are sent with the backend
-        #   request. Request parameters are represented as a key/value map, with
-        #   a destination as the key and a source as the value. A source must
-        #   match an existing method request parameter, or a static value.
-        #   Static values must be enclosed with single quotes, and be
-        #   pre-encoded based on their destination in the request. The
-        #   destination must match the pattern
-        #   `integration.request.\{location\}.\{name\}`, where `location` is
-        #   either querystring, path, or header. `name` must be a valid, unique
-        #   parameter name.
+        #   A key-value map defining required or optional method request
+        #   parameters that can be accepted by Amazon API Gateway. A key defines
+        #   a method request parameter name matching the pattern of
+        #   `method.request.\{location\}.\{name\}`, where `location` is
+        #   `querystring`, `path`, or `header` and `name` is a valid and unique
+        #   parameter name. The value associated with the key is a Boolean flag
+        #   indicating whether the parameter is required (`true`) or optional
+        #   (`false`). The method request parameter names defined here are
+        #   available in Integration to be mapped to integration request
+        #   parameters or body-mapping templates.
         #   @return [Hash<String,Boolean>]
 
         # @!attribute [rw] request_models
@@ -2683,7 +3538,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   The HTTP verb that identifies the Method resource.
+        #   The HTTP verb of the Method resource.
         #   @return [String]
 
         # @!attribute [rw] status_code
@@ -2691,14 +3546,21 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] response_parameters
-        #   Represents response parameters that can be sent back to the caller
-        #   by Amazon API Gateway. Response parameters are represented as a
-        #   key/value map, with a destination as the key and a Boolean flag as
-        #   the value. The Boolean flag is used to specify whether the parameter
-        #   is required. A destination must match the pattern
-        #   `method.response.header.\{name\}`, where `name` is a valid, unique
-        #   header name. Destinations specified here are available to the
-        #   integration for mapping from integration response parameters.
+        #   A key-value map specifying required or optional response parameters
+        #   that Amazon API Gateway can send back to the caller. A key defines a
+        #   method response header name and the associated value is a Boolean
+        #   flag indicating whether the method response parameter is required or
+        #   not. The method response header names must match the pattern of
+        #   `method.response.header.\{name\}`, where `name` is a valid and
+        #   unique header name. The response parameter names defined here are
+        #   available in the integration response to be mapped from an
+        #   integration response header expressed in
+        #   `integration.response.header.\{name\}`, a static value enclosed
+        #   within a pair of single quotes (e.g., `'application/json'`), or a
+        #   JSON expression from the back-end response payload in the form of
+        #   `integration.response.body.\{JSON-expression\}`, where
+        #   `JSON-expression` is a valid JSON expression without the `$`
+        #   prefix.)
         #   @return [Hash<String,Boolean>]
 
         # @!attribute [rw] response_models
@@ -2757,7 +3619,46 @@ module Aws
 
       end
 
-      # Represents a resource.
+      # Quotas configured for a usage plan.
+      # @note When making an API call, pass QuotaSettings
+      #   data as a hash:
+      #
+      #       {
+      #         limit: 1,
+      #         offset: 1,
+      #         period: "DAY", # accepts DAY, WEEK, MONTH
+      #       }
+      class QuotaSettings < Aws::Structure.new(
+        :limit,
+        :offset,
+        :period)
+
+        # @!attribute [rw] limit
+        #   The maximum number of requests that can be made in a given time
+        #   period.
+        #   @return [Integer]
+
+        # @!attribute [rw] offset
+        #   The number of requests subtracted from the given limit in the
+        #   initial time period.
+        #   @return [Integer]
+
+        # @!attribute [rw] period
+        #   The time period in which the limit applies. Valid values are
+        #   \"DAY\", \"WEEK\" or \"MONTH\".
+        #   @return [String]
+
+      end
+
+      # Represents an API resource.
+      #
+      # <div class="seeAlso">
+      # [Create an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       class Resource < Aws::Structure.new(
         :id,
         :parent_id,
@@ -2782,13 +3683,46 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] resource_methods
-        #   Map of methods for this resource, which is included only if the
-        #   request uses the **embed** query option.
+        #   Gets an API resource\'s method of a given HTTP verb.
+        #
+        #   <div class="remarks" markdown="1">
+        #   The resource methods are a map of methods indexed by methods\' HTTP
+        #   verbs enabled on the resource. This method map is included in the
+        #   `200 OK` response of the `GET
+        #   /restapis/\{restapi_id\}/resources/\{resource_id\}` or `GET
+        #   /restapis/\{restapi_id\}/resources/\{resource_id\}?embed=methods`
+        #   request.
+        #
+        #   #### Example: Get the GET method of an API resource
+        #
+        #   ##### Request
+        #
+        #       GET /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com X-Amz-Date: 20160608T031827Z Authorization: AWS4-HMAC-SHA256 Credential=\{access_key_ID\}/20160608/us-east-1/apigateway/aws4_request, SignedHeaders=content-type;host;x-amz-date, Signature=\{sig4_hash\}
+        #
+        #   ##### Response
+        #
+        #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+        #
+        #   If the `OPTIONS` is enabled on the resource, you can follow the
+        #   example here to get that method. Just replace the `GET` of the last
+        #   path segment in the request URL with `OPTIONS`.
+        #
+        #   </div>
+        #
+        #   <div class="seeAlso"></div>
         #   @return [Hash<String,Types::Method>]
 
       end
 
       # Represents a collection of Resource resources.
+      #
+      # <div class="seeAlso">
+      # [Create an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       class Resources < Aws::Structure.new(
         :position,
         :items)
@@ -2803,6 +3737,14 @@ module Aws
       end
 
       # Represents a REST API.
+      #
+      # <div class="seeAlso">
+      # [Create an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       class RestApi < Aws::Structure.new(
         :id,
         :name,
@@ -2832,13 +3774,23 @@ module Aws
         #   @return [Time]
 
         # @!attribute [rw] warnings
+        #   The warning messages reported when `failonwarnings` is turned on
+        #   during API import.
         #   @return [Array<String>]
 
       end
 
-      # Contains references to your APIs and links that guide you in ways to
+      # Contains references to your APIs and links that guide you in how to
       # interact with your collection. A collection offers a paginated view of
       # your APIs.
+      #
+      # <div class="seeAlso">
+      # [Create an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       class RestApis < Aws::Structure.new(
         :position,
         :items)
@@ -2863,7 +3815,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] content_disposition
-        #   The content-disposition header value in the HTTP reseponse.
+        #   The content-disposition header value in the HTTP response.
         #   @return [String]
 
         # @!attribute [rw] body
@@ -2875,6 +3827,14 @@ module Aws
 
       # Represents a unique identifier for a version of a deployed RestApi
       # that is callable by users.
+      #
+      # <div class="seeAlso">
+      # [Deploy an API][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
       class Stage < Aws::Structure.new(
         :deployment_id,
         :client_certificate_id,
@@ -2893,6 +3853,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] client_certificate_id
+        #   The identifier of a client certificate for an API stage.
         #   @return [String]
 
         # @!attribute [rw] stage_name
@@ -2918,15 +3879,18 @@ module Aws
 
         # @!attribute [rw] method_settings
         #   A map that defines the method settings for a Stage resource. Keys
-        #   are defined as `\{resource_path\}/\{http_method\}` for an individual
-        #   method override, or `\*/\*` for the settings applied to all methods
-        #   in the stage.
+        #   (designated as `/\{method_setting_key` below) are method paths
+        #   defined as `\{resource_path\}/\{http_method\}` for an individual
+        #   method override, or `/\*/\*` for overriding all methods in the
+        #   stage. Any forward slash (\"/\") characters in the `resource_path`
+        #   part must be encoded as \"~1\" as in, for example,
+        #   `~1resource~1sub-resource/GET`.
         #   @return [Hash<String,Types::MethodSetting>]
 
         # @!attribute [rw] variables
         #   A map that defines the stage variables for a Stage resource.
-        #   Variable names can have alphanumeric characters, and the values must
-        #   match `[A-Za-z0-9-._~:/?#&=,]+`.
+        #   Variable names can have alphanumeric and underscore characters, and
+        #   the values must match `[A-Za-z0-9-._~:/?#&=,]+`.
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] created_date
@@ -2973,7 +3937,16 @@ module Aws
 
       end
 
-      # A list of Stage resource that are associated with the ApiKey resource.
+      # A list of Stage resources that are associated with the ApiKey
+      # resource.
+      #
+      # <div class="seeAlso">
+      # [Deploying API in Stages][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html
       class Stages < Aws::Structure.new(
         :item)
 
@@ -2984,6 +3957,14 @@ module Aws
       end
 
       # Represents a mapping template used to transform a payload.
+      #
+      # <div class="seeAlso">
+      # [Mapping Templates][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings
       class Template < Aws::Structure.new(
         :value)
 
@@ -3062,7 +4043,7 @@ module Aws
 
       end
 
-      # Represents the response of the test invoke request in for a custom
+      # Represents the response of the test invoke request for a custom
       # Authorizer
       class TestInvokeAuthorizerResponse < Aws::Structure.new(
         :client_status,
@@ -3070,7 +4051,8 @@ module Aws
         :latency,
         :principal_id,
         :policy,
-        :authorization)
+        :authorization,
+        :claims)
 
         # @!attribute [rw] client_status
         #   The HTTP status code that the client would have received. Value is 0
@@ -3083,7 +4065,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] latency
-        #   The execution latency of the test authorizer request
+        #   The execution latency of the test authorizer request.
         #   @return [Integer]
 
         # @!attribute [rw] principal_id
@@ -3091,11 +4073,20 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] policy
-        #   The policy JSON document returned by the Authorizer
+        #   The JSON policy document returned by the Authorizer
         #   @return [String]
 
         # @!attribute [rw] authorization
         #   @return [Hash<String,Array<String>>]
+
+        # @!attribute [rw] claims
+        #   The [open identity claims][1], with any supported custom attributes,
+        #   returned from the Cognito Your User Pool configured for the API.
+        #
+        #
+        #
+        #   [1]: http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
+        #   @return [Hash<String,String>]
 
       end
 
@@ -3156,8 +4147,8 @@ module Aws
 
         # @!attribute [rw] client_certificate_id
         #   A ClientCertificate identifier to use in the test invocation. API
-        #   Gateway will use use the certificate when making the HTTPS request
-        #   to the defined backend endpoint.
+        #   Gateway will use the certificate when making the HTTPS request to
+        #   the defined back-end endpoint.
         #   @return [String]
 
         # @!attribute [rw] stage_variables
@@ -3167,7 +4158,15 @@ module Aws
 
       end
 
-      # Represents the response of the test invoke request in HTTP method.
+      # Represents the response of the test invoke request in the HTTP method.
+      #
+      # <div class="seeAlso">
+      # [Test API using the API Gateway console][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console
       class TestInvokeMethodResponse < Aws::Structure.new(
         :status,
         :body,
@@ -3180,11 +4179,11 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] body
-        #   The body of HTTP response.
+        #   The body of the HTTP response.
         #   @return [String]
 
         # @!attribute [rw] headers
-        #   The headers of HTTP response.
+        #   The headers of the HTTP response.
         #   @return [Hash<String,String>]
 
         # @!attribute [rw] log
@@ -3197,17 +4196,26 @@ module Aws
 
       end
 
-      # Returns the throttle settings.
+      # The API request rate limits.
+      # @note When making an API call, pass ThrottleSettings
+      #   data as a hash:
+      #
+      #       {
+      #         burst_limit: 1,
+      #         rate_limit: 1.0,
+      #       }
       class ThrottleSettings < Aws::Structure.new(
         :burst_limit,
         :rate_limit)
 
         # @!attribute [rw] burst_limit
-        #   Returns the burstLimit when **ThrottleSettings** is called.
+        #   The API request burst limit, the maximum rate limit over a time
+        #   ranging from one to a few seconds, depending upon whether the
+        #   underlying token bucket is at its full capacity.
         #   @return [Integer]
 
         # @!attribute [rw] rate_limit
-        #   Returns the rateLimit when **ThrottleSettings** is called.
+        #   The API request steady-state rate limit.
         #   @return [Float]
 
       end
@@ -3231,9 +4239,8 @@ module Aws
         :patch_operations)
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3262,9 +4269,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3299,9 +4305,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3336,9 +4341,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3367,9 +4371,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3402,14 +4405,13 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] deployment_id
-        #   The replacment identifier for the Deployment resource to change
+        #   The replacement identifier for the Deployment resource to change
         #   information about.
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3438,9 +4440,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3481,9 +4482,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3531,9 +4531,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3570,13 +4569,12 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   The HTTP verb that identifies the Method resource.
+        #   The HTTP verb of the Method resource.
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3615,17 +4613,16 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] http_method
-        #   The HTTP verb identifier for the parent Method resource.
+        #   The HTTP verb of the Method resource.
         #   @return [String]
 
         # @!attribute [rw] status_code
-        #   The status code identifier for the MethodResponse resource.
+        #   The status code for the MethodResponse resource.
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3660,9 +4657,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3697,9 +4693,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3728,9 +4723,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
 
       end
@@ -3767,10 +4761,259 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] patch_operations
-        #   A list of operations describing the updates to apply to the
-        #   specified resource. The patches are applied in the order specified
-        #   in the list.
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
         #   @return [Array<Types::PatchOperation>]
+
+      end
+
+      # The PATCH request to update a usage plan of a given plan Id.
+      # @note When making an API call, pass UpdateUsagePlanRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #         patch_operations: [
+      #           {
+      #             op: "add", # accepts add, remove, replace, move, copy, test
+      #             path: "String",
+      #             value: "String",
+      #             from: "String",
+      #           },
+      #         ],
+      #       }
+      class UpdateUsagePlanRequest < Aws::Structure.new(
+        :usage_plan_id,
+        :patch_operations)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the to-be-updated usage plan.
+        #   @return [String]
+
+        # @!attribute [rw] patch_operations
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
+        #   @return [Array<Types::PatchOperation>]
+
+      end
+
+      # The PATCH request to grant a temporary extension to the reamining
+      # quota of a usage plan associated with a specified API key.
+      # @note When making an API call, pass UpdateUsageRequest
+      #   data as a hash:
+      #
+      #       {
+      #         usage_plan_id: "String", # required
+      #         key_id: "String", # required
+      #         patch_operations: [
+      #           {
+      #             op: "add", # accepts add, remove, replace, move, copy, test
+      #             path: "String",
+      #             value: "String",
+      #             from: "String",
+      #           },
+      #         ],
+      #       }
+      class UpdateUsageRequest < Aws::Structure.new(
+        :usage_plan_id,
+        :key_id,
+        :patch_operations)
+
+        # @!attribute [rw] usage_plan_id
+        #   The Id of the usage plan associated with the usage data.
+        #   @return [String]
+
+        # @!attribute [rw] key_id
+        #   The identifier of the API key associated with the usage plan in
+        #   which a temporary extension is granted to the remaining quota.
+        #   @return [String]
+
+        # @!attribute [rw] patch_operations
+        #   A list of update operations to be applied to the specified resource
+        #   and in the order specified in this list.
+        #   @return [Array<Types::PatchOperation>]
+
+      end
+
+      # Represents the usage data of a usage plan.
+      #
+      # <div class="remarks"></div>
+      #
+      # <div class="seeAlso">
+      # [Create and Use Usage Plans][1], [Manage Usage in a Usage Plan][2]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+      # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage
+      class Usage < Aws::Structure.new(
+        :usage_plan_id,
+        :start_date,
+        :end_date,
+        :position,
+        :items)
+
+        # @!attribute [rw] usage_plan_id
+        #   The plan Id associated with this usage data.
+        #   @return [String]
+
+        # @!attribute [rw] start_date
+        #   The starting date of the usage data.
+        #   @return [String]
+
+        # @!attribute [rw] end_date
+        #   The ending date of the usage data.
+        #   @return [String]
+
+        # @!attribute [rw] position
+        #   @return [String]
+
+        # @!attribute [rw] items
+        #   The usage data, as daily logs of used and remaining quotas, over the
+        #   specified time interval indexed over the API keys in a usage plan.
+        #   For example, `\{..., "values" : \{ "\{api_key\}" : [ [0, 100], [10,
+        #   90], [100, 10]]\}`, where `\{api_key\}` stands for an API key value
+        #   and the daily log entry is of the format `[used quota, remaining
+        #   quota]`.
+        #   @return [Hash<String,Array<Array<Integer>>>]
+
+      end
+
+      # Represents a usage plan than can specify who can assess associated API
+      # stages with specified request limits and quotas.
+      #
+      # <div class="remarks" markdown="1">
+      # In a usage plan, you associate an API by specifying the API\'s Id and
+      # a stage name of the specified API. You add plan customers by adding
+      # API keys to the plan.
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Create and Use Usage Plans][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+      class UsagePlan < Aws::Structure.new(
+        :id,
+        :name,
+        :description,
+        :api_stages,
+        :throttle,
+        :quota)
+
+        # @!attribute [rw] id
+        #   The identifier of a UsagePlan resource.
+        #   @return [String]
+
+        # @!attribute [rw] name
+        #   The name of a usage plan.
+        #   @return [String]
+
+        # @!attribute [rw] description
+        #   The description of a usage plan.
+        #   @return [String]
+
+        # @!attribute [rw] api_stages
+        #   The associated API stages of a usage plan.
+        #   @return [Array<Types::ApiStage>]
+
+        # @!attribute [rw] throttle
+        #   The request throttle limits of a usage plan.
+        #   @return [Types::ThrottleSettings]
+
+        # @!attribute [rw] quota
+        #   The maximum number of permitted requests per a given unit time
+        #   interval.
+        #   @return [Types::QuotaSettings]
+
+      end
+
+      # Represents a usage plan key to identify a plan customer.
+      #
+      # <div class="remarks" markdown="1">
+      # To associate an API stage with a selected API key in a usage plan, you
+      # must create a UsagePlanKey resource to represent the selected ApiKey.
+      #
+      # </div>
+      #
+      # \" <div class="seeAlso">
+      # [Create and Use Usage Plans][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+      class UsagePlanKey < Aws::Structure.new(
+        :id,
+        :type,
+        :value,
+        :name)
+
+        # @!attribute [rw] id
+        #   The Id of a usage plan key.
+        #   @return [String]
+
+        # @!attribute [rw] type
+        #   The type of a usage plan key. Currently, the valid key type is
+        #   `API_KEY`.
+        #   @return [String]
+
+        # @!attribute [rw] value
+        #   The value of a usage plan key.
+        #   @return [String]
+
+        # @!attribute [rw] name
+        #   The name of a usage plan key.
+        #   @return [String]
+
+      end
+
+      # Represents the collection of usage plan keys added to usage plans for
+      # the associated API keys and, possibly, other types of keys.
+      #
+      # <div class="seeAlso">
+      # [Create and Use Usage Plans][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+      class UsagePlanKeys < Aws::Structure.new(
+        :position,
+        :items)
+
+        # @!attribute [rw] position
+        #   @return [String]
+
+        # @!attribute [rw] items
+        #   Gets the current item of the usage plan keys collection.
+        #   @return [Array<Types::UsagePlanKey>]
+
+      end
+
+      # Represents a collection of usage plans for an AWS account.
+      #
+      # <div class="seeAlso">
+      # [Create and Use Usage Plans][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+      class UsagePlans < Aws::Structure.new(
+        :position,
+        :items)
+
+        # @!attribute [rw] position
+        #   @return [String]
+
+        # @!attribute [rw] items
+        #   Gets the current item when enumerating the collection of UsagePlan.
+        #   @return [Array<Types::UsagePlan>]
 
       end
 

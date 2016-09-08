@@ -53,6 +53,12 @@ module Aws
         data.description
       end
 
+      # The Amazon Resource Name (ARN) for the DB parameter group.
+      # @return [String]
+      def db_parameter_group_arn
+        data.db_parameter_group_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

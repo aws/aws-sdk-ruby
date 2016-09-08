@@ -34,7 +34,7 @@ module Aws
   # and return a response object.
   #
   #     directoryservice = Aws::DirectoryService::Client.new
-  #     resp = directoryservice.add_tags_to_resource(params)
+  #     resp = directoryservice.add_ip_routes(params)
   #
   #
   # See {Client} for more information.

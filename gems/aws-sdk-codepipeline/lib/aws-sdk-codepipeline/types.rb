@@ -593,6 +593,51 @@ module Aws
 
       end
 
+      # Represents revision details of an artifact.
+      class ArtifactRevision < Aws::Structure.new(
+        :name,
+        :revision_id,
+        :revision_change_identifier,
+        :revision_summary,
+        :created,
+        :revision_url)
+
+        # @!attribute [rw] name
+        #   The name of an artifact. This name might be system-generated, such
+        #   as \"MyApp\", or might be defined by the user when an action is
+        #   created.
+        #   @return [String]
+
+        # @!attribute [rw] revision_id
+        #   The revision ID of the artifact.
+        #   @return [String]
+
+        # @!attribute [rw] revision_change_identifier
+        #   An additional identifier for a revision, such as a commit date or,
+        #   for artifacts stored in Amazon S3 buckets, the ETag value.
+        #   @return [String]
+
+        # @!attribute [rw] revision_summary
+        #   Summary information about the most recent revision of the artifact.
+        #   For GitHub and AWS CodeCommit repositories, the commit message. For
+        #   Amazon S3 buckets or actions, the user-provided content of a
+        #   `codepipeline-artifact-revision-summary` key specified in the object
+        #   metadata.
+        #   @return [String]
+
+        # @!attribute [rw] created
+        #   The date and time when the most recent revision of the artifact was
+        #   created, in timestamp format.
+        #   @return [Time]
+
+        # @!attribute [rw] revision_url
+        #   The commit ID for the artifact revision. For artifacts stored in
+        #   GitHub or AWS CodeCommit repositories, the commit ID is linked to a
+        #   commit details page.
+        #   @return [String]
+
+      end
+
       # The Amazon S3 location where artifacts are stored for the pipeline. If
       # this Amazon S3 bucket is created manually, it must meet the
       # requirements for AWS CodePipeline. For more information, see the
@@ -842,10 +887,14 @@ module Aws
       #       {
       #         revision: "Revision", # required
       #         change_identifier: "RevisionChangeIdentifier", # required
+      #         created: Time.now,
+      #         revision_summary: "RevisionSummary",
       #       }
       class CurrentRevision < Aws::Structure.new(
         :revision,
-        :change_identifier)
+        :change_identifier,
+        :created,
+        :revision_summary)
 
         # @!attribute [rw] revision
         #   The revision ID of the current version of an artifact.
@@ -853,6 +902,15 @@ module Aws
 
         # @!attribute [rw] change_identifier
         #   The change identifier for the current revision.
+        #   @return [String]
+
+        # @!attribute [rw] created
+        #   The date and time when the most recent revision of the artifact was
+        #   created, in timestamp format.
+        #   @return [Time]
+
+        # @!attribute [rw] revision_summary
+        #   The summary of the most recent revision of the artifact.
         #   @return [String]
 
       end
@@ -1107,6 +1165,40 @@ module Aws
         #
         #    </note>
         #   @return [Types::JobDetails]
+
+      end
+
+      # Represents the input of a get pipeline execution action.
+      # @note When making an API call, pass GetPipelineExecutionInput
+      #   data as a hash:
+      #
+      #       {
+      #         pipeline_name: "PipelineName", # required
+      #         pipeline_execution_id: "PipelineExecutionId", # required
+      #       }
+      class GetPipelineExecutionInput < Aws::Structure.new(
+        :pipeline_name,
+        :pipeline_execution_id)
+
+        # @!attribute [rw] pipeline_name
+        #   The name of the pipeline about which you want to get execution
+        #   details.
+        #   @return [String]
+
+        # @!attribute [rw] pipeline_execution_id
+        #   The ID of the pipeline execution about which you want to get
+        #   execution details.
+        #   @return [String]
+
+      end
+
+      # Represents the output of a get pipeline execution action.
+      class GetPipelineExecutionOutput < Aws::Structure.new(
+        :pipeline_execution)
+
+        # @!attribute [rw] pipeline_execution
+        #   Represents information about the execution of a pipeline.
+        #   @return [Types::PipelineExecution]
 
       end
 
@@ -1579,6 +1671,46 @@ module Aws
 
       end
 
+      # Represents information about an execution of a pipeline.
+      class PipelineExecution < Aws::Structure.new(
+        :pipeline_name,
+        :pipeline_version,
+        :pipeline_execution_id,
+        :status,
+        :artifact_revisions)
+
+        # @!attribute [rw] pipeline_name
+        #   The name of the pipeline that was executed.
+        #   @return [String]
+
+        # @!attribute [rw] pipeline_version
+        #   The version number of the pipeline that was executed.
+        #   @return [Integer]
+
+        # @!attribute [rw] pipeline_execution_id
+        #   The ID of the pipeline execution.
+        #   @return [String]
+
+        # @!attribute [rw] status
+        #   The status of the pipeline execution.
+        #
+        #   * InProgress: The pipeline execution is currently running.
+        #
+        #   * Succeeded: The pipeline execution completed successfully.
+        #
+        #   * Superseded: While this pipeline execution was waiting for the next
+        #     stage to be completed, a newer pipeline execution caught up and
+        #     continued through the pipeline instead.
+        #
+        #   * Failed: The pipeline did not complete successfully.
+        #   @return [String]
+
+        # @!attribute [rw] artifact_revisions
+        #   A list of ArtifactRevision objects included in a pipeline execution.
+        #   @return [Array<Types::ArtifactRevision>]
+
+      end
+
       # Returns a summary of a pipeline.
       class PipelineSummary < Aws::Structure.new(
         :name,
@@ -1737,8 +1869,8 @@ module Aws
         :pipeline_execution_id)
 
         # @!attribute [rw] new_revision
-        #   The new revision number or ID for the revision after the action
-        #   completes.
+        #   Indicates whether the artifact revision was previously used in an
+        #   execution of the specified pipeline.
         #   @return [Boolean]
 
         # @!attribute [rw] pipeline_execution_id
@@ -1759,7 +1891,7 @@ module Aws
       #           summary: "ApprovalSummary", # required
       #           status: "Approved", # required, accepts Approved, Rejected
       #         },
-      #         token: "ApprovalToken",
+      #         token: "ApprovalToken", # required
       #       }
       class PutApprovalResultInput < Aws::Structure.new(
         :pipeline_name,
@@ -1839,6 +1971,8 @@ module Aws
       #         current_revision: {
       #           revision: "Revision", # required
       #           change_identifier: "RevisionChangeIdentifier", # required
+      #           created: Time.now,
+      #           revision_summary: "RevisionSummary",
       #         },
       #         continuation_token: "ContinuationToken",
       #         execution_details: {
@@ -1925,6 +2059,8 @@ module Aws
       #         current_revision: {
       #           revision: "Revision", # required
       #           change_identifier: "RevisionChangeIdentifier", # required
+      #           created: Time.now,
+      #           revision_summary: "RevisionSummary",
       #         },
       #         continuation_token: "ContinuationToken",
       #         execution_details: {
@@ -2167,7 +2303,8 @@ module Aws
         :pipeline_execution_id)
 
         # @!attribute [rw] pipeline_execution_id
-        #   The unique system-generated ID of the pipeline that was started.
+        #   The unique system-generated ID of the pipeline execution that was
+        #   started.
         #   @return [String]
 
       end

@@ -90,8 +90,8 @@ module Aws
                   "argument" => "Clusters[].ClusterStatus"
                 },
                 {
-                  "expected" => "pathAny",
-                  "matcher" => "pathList",
+                  "expected" => "modifying",
+                  "matcher" => "pathAny",
                   "state" => "failure",
                   "argument" => "Clusters[].ClusterStatus"
                 }

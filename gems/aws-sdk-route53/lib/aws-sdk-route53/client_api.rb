@@ -60,6 +60,7 @@ module Aws
       CreateTrafficPolicyVersionRequest = Shapes::StructureShape.new(name: 'CreateTrafficPolicyVersionRequest')
       CreateTrafficPolicyVersionResponse = Shapes::StructureShape.new(name: 'CreateTrafficPolicyVersionResponse')
       DNSName = Shapes::StringShape.new(name: 'DNSName')
+      DNSRCode = Shapes::StringShape.new(name: 'DNSRCode')
       Date = Shapes::StringShape.new(name: 'Date')
       DelegationSet = Shapes::StructureShape.new(name: 'DelegationSet')
       DelegationSetAlreadyCreated = Shapes::StructureShape.new(name: 'DelegationSetAlreadyCreated')
@@ -199,6 +200,7 @@ module Aws
       MeasureLatency = Shapes::BooleanShape.new(name: 'MeasureLatency')
       Message = Shapes::StringShape.new(name: 'Message')
       MetricName = Shapes::StringShape.new(name: 'MetricName')
+      Nameserver = Shapes::StringShape.new(name: 'Nameserver')
       Namespace = Shapes::StringShape.new(name: 'Namespace')
       NoSuchChange = Shapes::StructureShape.new(name: 'NoSuchChange')
       NoSuchDelegationSet = Shapes::StructureShape.new(name: 'NoSuchDelegationSet')
@@ -217,6 +219,8 @@ module Aws
       PublicZoneVPCAssociation = Shapes::StructureShape.new(name: 'PublicZoneVPCAssociation')
       RData = Shapes::StringShape.new(name: 'RData')
       RRType = Shapes::StringShape.new(name: 'RRType')
+      RecordData = Shapes::ListShape.new(name: 'RecordData')
+      RecordDataEntry = Shapes::StringShape.new(name: 'RecordDataEntry')
       RequestInterval = Shapes::IntegerShape.new(name: 'RequestInterval')
       ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
       ResourceId = Shapes::StringShape.new(name: 'ResourceId')
@@ -236,6 +240,7 @@ module Aws
       Statistic = Shapes::StringShape.new(name: 'Statistic')
       Status = Shapes::StringShape.new(name: 'Status')
       StatusReport = Shapes::StructureShape.new(name: 'StatusReport')
+      SubnetMask = Shapes::StringShape.new(name: 'SubnetMask')
       TTL = Shapes::IntegerShape.new(name: 'TTL')
       Tag = Shapes::StructureShape.new(name: 'Tag')
       TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -245,6 +250,8 @@ module Aws
       TagResourceIdList = Shapes::ListShape.new(name: 'TagResourceIdList')
       TagResourceType = Shapes::StringShape.new(name: 'TagResourceType')
       TagValue = Shapes::StringShape.new(name: 'TagValue')
+      TestDNSAnswerRequest = Shapes::StructureShape.new(name: 'TestDNSAnswerRequest')
+      TestDNSAnswerResponse = Shapes::StructureShape.new(name: 'TestDNSAnswerResponse')
       Threshold = Shapes::FloatShape.new(name: 'Threshold')
       ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
       TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
@@ -270,6 +277,7 @@ module Aws
       TrafficPolicySummary = Shapes::StructureShape.new(name: 'TrafficPolicySummary')
       TrafficPolicyVersion = Shapes::IntegerShape.new(name: 'TrafficPolicyVersion')
       TrafficPolicyVersionMarker = Shapes::StringShape.new(name: 'TrafficPolicyVersionMarker')
+      TransportProtocol = Shapes::StringShape.new(name: 'TransportProtocol')
       UpdateHealthCheckRequest = Shapes::StructureShape.new(name: 'UpdateHealthCheckRequest')
       UpdateHealthCheckResponse = Shapes::StructureShape.new(name: 'UpdateHealthCheckResponse')
       UpdateHostedZoneCommentRequest = Shapes::StructureShape.new(name: 'UpdateHostedZoneCommentRequest')
@@ -802,6 +810,8 @@ module Aws
       ListTrafficPolicyVersionsResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
       ListTrafficPolicyVersionsResponse.struct_class = Types::ListTrafficPolicyVersionsResponse
 
+      RecordData.member = Shapes::ShapeRef.new(shape: RecordDataEntry, location_name: "RecordDataEntry")
+
       ResourceRecord.add_member(:value, Shapes::ShapeRef.new(shape: RData, required: true, location_name: "Value"))
       ResourceRecord.struct_class = Types::ResourceRecord
 
@@ -843,6 +853,22 @@ module Aws
       TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "Tag")
 
       TagResourceIdList.member = Shapes::ShapeRef.new(shape: TagResourceId, location_name: "ResourceId")
+
+      TestDNSAnswerRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "querystring", location_name: "hostedzoneid"))
+      TestDNSAnswerRequest.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, required: true, location: "querystring", location_name: "recordname"))
+      TestDNSAnswerRequest.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, required: true, location: "querystring", location_name: "recordtype"))
+      TestDNSAnswerRequest.add_member(:resolver_ip, Shapes::ShapeRef.new(shape: IPAddress, location: "querystring", location_name: "resolverip"))
+      TestDNSAnswerRequest.add_member(:edns0_client_subnet_ip, Shapes::ShapeRef.new(shape: IPAddress, location: "querystring", location_name: "edns0clientsubnetip"))
+      TestDNSAnswerRequest.add_member(:edns0_client_subnet_mask, Shapes::ShapeRef.new(shape: SubnetMask, location: "querystring", location_name: "edns0clientsubnetmask"))
+      TestDNSAnswerRequest.struct_class = Types::TestDNSAnswerRequest
+
+      TestDNSAnswerResponse.add_member(:nameserver, Shapes::ShapeRef.new(shape: Nameserver, required: true, location_name: "Nameserver"))
+      TestDNSAnswerResponse.add_member(:record_name, Shapes::ShapeRef.new(shape: DNSName, required: true, location_name: "RecordName"))
+      TestDNSAnswerResponse.add_member(:record_type, Shapes::ShapeRef.new(shape: RRType, required: true, location_name: "RecordType"))
+      TestDNSAnswerResponse.add_member(:record_data, Shapes::ShapeRef.new(shape: RecordData, required: true, location_name: "RecordData"))
+      TestDNSAnswerResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: DNSRCode, required: true, location_name: "ResponseCode"))
+      TestDNSAnswerResponse.add_member(:protocol, Shapes::ShapeRef.new(shape: TransportProtocol, required: true, location_name: "Protocol"))
+      TestDNSAnswerResponse.struct_class = Types::TestDNSAnswerResponse
 
       TrafficPolicies.member = Shapes::ShapeRef.new(shape: TrafficPolicy, location_name: "TrafficPolicy")
 
@@ -1507,6 +1533,16 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListTrafficPolicyVersionsResponse)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchTrafficPolicy)
+        end)
+
+        api.add_operation(:test_dns_answer, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "TestDNSAnswer"
+          o.http_method = "GET"
+          o.http_request_uri = "/2013-04-01/testdnsanswer"
+          o.input = Shapes::ShapeRef.new(shape: TestDNSAnswerRequest)
+          o.output = Shapes::ShapeRef.new(shape: TestDNSAnswerResponse)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         end)
 
         api.add_operation(:update_health_check, Seahorse::Model::Operation.new.tap do |o|

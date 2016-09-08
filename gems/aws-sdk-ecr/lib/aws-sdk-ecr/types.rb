@@ -273,7 +273,7 @@ module Aws
         :repository)
 
         # @!attribute [rw] repository
-        #   Object representing a repository.
+        #   An object representing a repository.
         #   @return [Types::Repository]
 
       end
@@ -354,7 +354,7 @@ module Aws
         :repository)
 
         # @!attribute [rw] repository
-        #   Object representing a repository.
+        #   An object representing a repository.
         #   @return [Types::Repository]
 
       end
@@ -392,6 +392,12 @@ module Aws
         #   from the end of the previous results that returned the `nextToken`
         #   value. This value is `null` when there are no more results to
         #   return.
+        #
+        #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+        #   used to retrieve the next items in a list and not for other
+        #   programmatic purposes.
+        #
+        #    </note>
         #   @return [String]
 
         # @!attribute [rw] max_results
@@ -539,7 +545,7 @@ module Aws
 
       end
 
-      # Object representing an image.
+      # An object representing an Amazon ECR image.
       class Image < Aws::Structure.new(
         :registry_id,
         :repository_name,
@@ -566,6 +572,7 @@ module Aws
 
       end
 
+      # An object representing an Amazon ECR image failure.
       class ImageFailure < Aws::Structure.new(
         :image_id,
         :failure_code,
@@ -585,6 +592,7 @@ module Aws
 
       end
 
+      # An object with identifying information for an Amazon ECR image.
       # @note When making an API call, pass ImageIdentifier
       #   data as a hash:
       #
@@ -645,6 +653,7 @@ module Aws
 
       end
 
+      # An object representing an Amazon ECR image layer.
       class Layer < Aws::Structure.new(
         :layer_digest,
         :layer_availability,
@@ -665,6 +674,7 @@ module Aws
 
       end
 
+      # An object representing an Amazon ECR image layer failure.
       class LayerFailure < Aws::Structure.new(
         :layer_digest,
         :failure_code,
@@ -684,6 +694,23 @@ module Aws
 
       end
 
+      # An object representing a filter on a ListImages operation.
+      # @note When making an API call, pass ListImagesFilter
+      #   data as a hash:
+      #
+      #       {
+      #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+      #       }
+      class ListImagesFilter < Aws::Structure.new(
+        :tag_status)
+
+        # @!attribute [rw] tag_status
+        #   The tag status with which to filter your ListImages results. You can
+        #   filter results based on whether they are `TAGGED` or `UNTAGGED`.
+        #   @return [String]
+
+      end
+
       # @note When making an API call, pass ListImagesRequest
       #   data as a hash:
       #
@@ -692,12 +719,16 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         next_token: "NextToken",
       #         max_results: 1,
+      #         filter: {
+      #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+      #         },
       #       }
       class ListImagesRequest < Aws::Structure.new(
         :registry_id,
         :repository_name,
         :next_token,
-        :max_results)
+        :max_results,
+        :filter)
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -715,6 +746,12 @@ module Aws
         #   exceeded the value of that parameter. Pagination continues from the
         #   end of the previous results that returned the `nextToken` value.
         #   This value is `null` when there are no more results to return.
+        #
+        #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+        #   used to retrieve the next items in a list and not for other
+        #   programmatic purposes.
+        #
+        #    </note>
         #   @return [String]
 
         # @!attribute [rw] max_results
@@ -727,6 +764,11 @@ module Aws
         #   this parameter is not used, then `ListImages` returns up to 100
         #   results and a `nextToken` value, if applicable.
         #   @return [Integer]
+
+        # @!attribute [rw] filter
+        #   The filter key and value with which to filter your `ListImages`
+        #   results.
+        #   @return [Types::ListImagesFilter]
 
       end
 
@@ -785,7 +827,7 @@ module Aws
 
       end
 
-      # Object representing a repository.
+      # An object representing a repository.
       class Repository < Aws::Structure.new(
         :repository_arn,
         :registry_id,

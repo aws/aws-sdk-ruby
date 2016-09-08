@@ -20,8 +20,11 @@ module Aws
       include Seahorse::Model
 
       AccessUrl = Shapes::StringShape.new(name: 'AccessUrl')
+      AddIpRoutesRequest = Shapes::StructureShape.new(name: 'AddIpRoutesRequest')
+      AddIpRoutesResult = Shapes::StructureShape.new(name: 'AddIpRoutesResult')
       AddTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddTagsToResourceRequest')
       AddTagsToResourceResult = Shapes::StructureShape.new(name: 'AddTagsToResourceResult')
+      AddedDateTime = Shapes::TimestampShape.new(name: 'AddedDateTime')
       AliasName = Shapes::StringShape.new(name: 'AliasName')
       Attribute = Shapes::StructureShape.new(name: 'Attribute')
       AttributeName = Shapes::StringShape.new(name: 'AttributeName')
@@ -30,6 +33,8 @@ module Aws
       AuthenticationFailedException = Shapes::StructureShape.new(name: 'AuthenticationFailedException')
       AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
       AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+      CidrIp = Shapes::StringShape.new(name: 'CidrIp')
+      CidrIps = Shapes::ListShape.new(name: 'CidrIps')
       ClientException = Shapes::StructureShape.new(name: 'ClientException')
       CloudOnlyDirectoriesLimitReached = Shapes::BooleanShape.new(name: 'CloudOnlyDirectoriesLimitReached')
       Computer = Shapes::StructureShape.new(name: 'Computer')
@@ -117,9 +122,18 @@ module Aws
       InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
       IpAddr = Shapes::StringShape.new(name: 'IpAddr')
       IpAddrs = Shapes::ListShape.new(name: 'IpAddrs')
+      IpRoute = Shapes::StructureShape.new(name: 'IpRoute')
+      IpRouteInfo = Shapes::StructureShape.new(name: 'IpRouteInfo')
+      IpRouteLimitExceededException = Shapes::StructureShape.new(name: 'IpRouteLimitExceededException')
+      IpRouteStatusMsg = Shapes::StringShape.new(name: 'IpRouteStatusMsg')
+      IpRouteStatusReason = Shapes::StringShape.new(name: 'IpRouteStatusReason')
+      IpRoutes = Shapes::ListShape.new(name: 'IpRoutes')
+      IpRoutesInfo = Shapes::ListShape.new(name: 'IpRoutesInfo')
       LastUpdatedDateTime = Shapes::TimestampShape.new(name: 'LastUpdatedDateTime')
       LaunchTime = Shapes::TimestampShape.new(name: 'LaunchTime')
       Limit = Shapes::IntegerShape.new(name: 'Limit')
+      ListIpRoutesRequest = Shapes::StructureShape.new(name: 'ListIpRoutesRequest')
+      ListIpRoutesResult = Shapes::StructureShape.new(name: 'ListIpRoutesResult')
       ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
       ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
       ManualSnapshotsLimitReached = Shapes::BooleanShape.new(name: 'ManualSnapshotsLimitReached')
@@ -138,6 +152,8 @@ module Aws
       RegisterEventTopicResult = Shapes::StructureShape.new(name: 'RegisterEventTopicResult')
       RemoteDomainName = Shapes::StringShape.new(name: 'RemoteDomainName')
       RemoteDomainNames = Shapes::ListShape.new(name: 'RemoteDomainNames')
+      RemoveIpRoutesRequest = Shapes::StructureShape.new(name: 'RemoveIpRoutesRequest')
+      RemoveIpRoutesResult = Shapes::StructureShape.new(name: 'RemoveIpRoutesResult')
       RemoveTagsFromResourceRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceRequest')
       RemoveTagsFromResourceResult = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceResult')
       ReplicationScope = Shapes::StringShape.new(name: 'ReplicationScope')
@@ -189,11 +205,19 @@ module Aws
       UpdateConditionalForwarderResult = Shapes::StructureShape.new(name: 'UpdateConditionalForwarderResult')
       UpdateRadiusRequest = Shapes::StructureShape.new(name: 'UpdateRadiusRequest')
       UpdateRadiusResult = Shapes::StructureShape.new(name: 'UpdateRadiusResult')
+      UpdateSecurityGroupForDirectoryControllers = Shapes::BooleanShape.new(name: 'UpdateSecurityGroupForDirectoryControllers')
       UseSameUsername = Shapes::BooleanShape.new(name: 'UseSameUsername')
       UserName = Shapes::StringShape.new(name: 'UserName')
       VerifyTrustRequest = Shapes::StructureShape.new(name: 'VerifyTrustRequest')
       VerifyTrustResult = Shapes::StructureShape.new(name: 'VerifyTrustResult')
       VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+      AddIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+      AddIpRoutesRequest.add_member(:ip_routes, Shapes::ShapeRef.new(shape: IpRoutes, required: true, location_name: "IpRoutes"))
+      AddIpRoutesRequest.add_member(:update_security_group_for_directory_controllers, Shapes::ShapeRef.new(shape: UpdateSecurityGroupForDirectoryControllers, location_name: "UpdateSecurityGroupForDirectoryControllers"))
+      AddIpRoutesRequest.struct_class = Types::AddIpRoutesRequest
+
+      AddIpRoutesResult.struct_class = Types::AddIpRoutesResult
 
       AddTagsToResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
       AddTagsToResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "Tags"))
@@ -208,6 +232,8 @@ module Aws
       Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
       AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
+
+      CidrIps.member = Shapes::ShapeRef.new(shape: CidrIp)
 
       Computer.add_member(:computer_id, Shapes::ShapeRef.new(shape: SID, location_name: "ComputerId"))
       Computer.add_member(:computer_name, Shapes::ShapeRef.new(shape: ComputerName, location_name: "ComputerName"))
@@ -478,6 +504,31 @@ module Aws
 
       IpAddrs.member = Shapes::ShapeRef.new(shape: IpAddr)
 
+      IpRoute.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: CidrIp, location_name: "CidrIp"))
+      IpRoute.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+      IpRoute.struct_class = Types::IpRoute
+
+      IpRouteInfo.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+      IpRouteInfo.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: CidrIp, location_name: "CidrIp"))
+      IpRouteInfo.add_member(:ip_route_status_msg, Shapes::ShapeRef.new(shape: IpRouteStatusMsg, location_name: "IpRouteStatusMsg"))
+      IpRouteInfo.add_member(:added_date_time, Shapes::ShapeRef.new(shape: AddedDateTime, location_name: "AddedDateTime"))
+      IpRouteInfo.add_member(:ip_route_status_reason, Shapes::ShapeRef.new(shape: IpRouteStatusReason, location_name: "IpRouteStatusReason"))
+      IpRouteInfo.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+      IpRouteInfo.struct_class = Types::IpRouteInfo
+
+      IpRoutes.member = Shapes::ShapeRef.new(shape: IpRoute)
+
+      IpRoutesInfo.member = Shapes::ShapeRef.new(shape: IpRouteInfo)
+
+      ListIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+      ListIpRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListIpRoutesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+      ListIpRoutesRequest.struct_class = Types::ListIpRoutesRequest
+
+      ListIpRoutesResult.add_member(:ip_routes_info, Shapes::ShapeRef.new(shape: IpRoutesInfo, location_name: "IpRoutesInfo"))
+      ListIpRoutesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListIpRoutesResult.struct_class = Types::ListIpRoutesResult
+
       ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
       ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
       ListTagsForResourceRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -504,6 +555,12 @@ module Aws
       RegisterEventTopicResult.struct_class = Types::RegisterEventTopicResult
 
       RemoteDomainNames.member = Shapes::ShapeRef.new(shape: RemoteDomainName)
+
+      RemoveIpRoutesRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+      RemoveIpRoutesRequest.add_member(:cidr_ips, Shapes::ShapeRef.new(shape: CidrIps, required: true, location_name: "CidrIps"))
+      RemoveIpRoutesRequest.struct_class = Types::RemoveIpRoutesRequest
+
+      RemoveIpRoutesResult.struct_class = Types::RemoveIpRoutesResult
 
       RemoveTagsFromResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
       RemoveTagsFromResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "TagKeys"))
@@ -596,6 +653,21 @@ module Aws
           "signatureVersion" => "v4",
           "targetPrefix" => "DirectoryService_20150416",
         }
+
+        api.add_operation(:add_ip_routes, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AddIpRoutes"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AddIpRoutesRequest)
+          o.output = Shapes::ShapeRef.new(shape: AddIpRoutesResult)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: EntityAlreadyExistsException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+          o.errors << Shapes::ShapeRef.new(shape: IpRouteLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
 
         api.add_operation(:add_tags_to_resource, Seahorse::Model::Operation.new.tap do |o|
           o.name = "AddTagsToResource"
@@ -918,6 +990,19 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         end)
 
+        api.add_operation(:list_ip_routes, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListIpRoutes"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListIpRoutesRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListIpRoutesResult)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
+
         api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListTagsForResource"
           o.http_method = "POST"
@@ -939,6 +1024,19 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: RegisterEventTopicResult)
           o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
+
+        api.add_operation(:remove_ip_routes, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "RemoveIpRoutes"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: RemoveIpRoutesRequest)
+          o.output = Shapes::ShapeRef.new(shape: RemoveIpRoutesResult)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
           o.errors << Shapes::ShapeRef.new(shape: ClientException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         end)

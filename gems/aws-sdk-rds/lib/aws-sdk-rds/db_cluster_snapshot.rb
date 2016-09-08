@@ -145,6 +145,12 @@ module Aws
         data.kms_key_id
       end
 
+      # The Amazon Resource Name (ARN) for the DB cluster snapshot.
+      # @return [String]
+      def db_cluster_snapshot_arn
+        data.db_cluster_snapshot_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

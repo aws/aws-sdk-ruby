@@ -33,7 +33,7 @@ module Aws
       # @option options [required, String] :name
       #   The stack name.
       # @option options [required, String] :region
-      #   The stack\'s AWS region, such as \"us-east-1\". For more information
+      #   The stack\'s AWS region, such as \"ap-south-1\". For more information
       #   about Amazon regions, see [Regions and Endpoints][1].
       #
       #

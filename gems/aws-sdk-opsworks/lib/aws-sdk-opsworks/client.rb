@@ -197,7 +197,7 @@ module Aws
       # @option params [String] :name
       #   The cloned stack name.
       # @option params [String] :region
-      #   The cloned stack AWS region, such as \"us-east-1\". For more
+      #   The cloned stack AWS region, such as \"ap-northeast-2\". For more
       #   information about AWS regions, see [Regions and Endpoints][1].
       #
       #
@@ -1104,7 +1104,7 @@ module Aws
       # @option params [required, String] :name
       #   The stack name.
       # @option params [required, String] :region
-      #   The stack\'s AWS region, such as \"us-east-1\". For more information
+      #   The stack\'s AWS region, such as \"ap-south-1\". For more information
       #   about Amazon regions, see [Regions and Endpoints][1].
       #
       #
@@ -4427,6 +4427,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

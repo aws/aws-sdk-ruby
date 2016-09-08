@@ -62,11 +62,17 @@ module Aws
       # notification message sent to the target includes the following:
       #
       # * Lifecycle action token
+      #
       # * User account ID
+      #
       # * Name of the Auto Scaling group
+      #
       # * Lifecycle hook name
+      #
       # * EC2 instance ID
+      #
       # * Lifecycle transition
+      #
       # * Notification metadata
       # @return [String]
       def notification_target_arn
@@ -209,11 +215,17 @@ module Aws
       #   information:
       #
       #   * **AutoScalingGroupName**. The name of the Auto Scaling group.
+      #
       #   * **AccountId**. The AWS account ID.
+      #
       #   * **LifecycleTransition**. The lifecycle hook type.
+      #
       #   * **LifecycleActionToken**. The lifecycle action token.
+      #
       #   * **EC2InstanceId**. The EC2 instance ID.
+      #
       #   * **LifecycleHookName**. The name of the lifecycle hook.
+      #
       #   * **NotificationMetadata**. User-defined information.
       #
       #   This operation uses the JSON format when sending notifications to an

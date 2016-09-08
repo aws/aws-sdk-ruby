@@ -1347,6 +1347,8 @@ module Aws
       #   group list. Note that each recipient in a group list counts towards
       #   the 50-recipient limit.
       #
+      # * Amazon SES overrides any Message-ID and Date headers you provide.
+      #
       # * For every message that you send, the total number of recipients
       #   (To:, CC: and BCC:) is counted against your sending quota - the
       #   maximum number of emails you can send in a 24-hour period. For
@@ -1422,7 +1424,7 @@ module Aws
       #   * MIME content types must be among those supported by Amazon SES. For
       #     more information, go to the [Amazon SES Developer Guide][1].
       #
-      #   * Content must be base64-encoded, if MIME requires it.
+      #   * Must be base64-encoded.
       #
       #
       #
@@ -2042,6 +2044,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

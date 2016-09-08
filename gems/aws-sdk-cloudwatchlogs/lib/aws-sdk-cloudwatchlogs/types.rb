@@ -1068,28 +1068,31 @@ module Aws
       #         metric_name: "MetricName", # required
       #         metric_namespace: "MetricNamespace", # required
       #         metric_value: "MetricValue", # required
+      #         default_value: 1.0,
       #       }
       class MetricTransformation < Aws::Structure.new(
         :metric_name,
         :metric_namespace,
-        :metric_value)
+        :metric_value,
+        :default_value)
 
         # @!attribute [rw] metric_name
-        #   The name of the CloudWatch metric to which the monitored log
-        #   information should be published. For example, you may publish to a
-        #   metric called ErrorCount.
+        #   Name of the metric.
         #   @return [String]
 
         # @!attribute [rw] metric_namespace
-        #   The destination namespace of the new CloudWatch metric.
+        #   Namespace to which the metric belongs.
         #   @return [String]
 
         # @!attribute [rw] metric_value
-        #   What to publish to the metric. For example, if you\'re counting the
-        #   occurrences of a particular term like \"Error\", the value will be
-        #   \"1\" for each occurrence. If you\'re counting the bytes transferred
-        #   the published value will be the value in the log event.
+        #   A string representing a value to publish to this metric when a
+        #   filter pattern matches a log event.
         #   @return [String]
+
+        # @!attribute [rw] default_value
+        #   (Optional) A default value to emit when a filter pattern does not
+        #   match a log event. Can be null.
+        #   @return [Float]
 
       end
 
@@ -1159,7 +1162,7 @@ module Aws
 
         # @!attribute [rw] role_arn
         #   The ARN of an IAM role that grants CloudWatch Logs permissions to do
-        #   Amazon Kinesis PutRecord requests on the desitnation stream.
+        #   Amazon Kinesis PutRecord requests on the destination stream.
         #   @return [String]
 
       end
@@ -1241,6 +1244,7 @@ module Aws
       #             metric_name: "MetricName", # required
       #             metric_namespace: "MetricNamespace", # required
       #             metric_value: "MetricValue", # required
+      #             default_value: 1.0,
       #           },
       #         ],
       #       }
@@ -1325,13 +1329,17 @@ module Aws
 
         # @!attribute [rw] destination_arn
         #   The ARN of the destination to deliver matching log events to.
-        #   Currently, the supported destinations are: * An Amazon Kinesis
-        #   stream belonging to the same account as the
+        #   Currently, the supported destinations are:
+        #
+        #   * An Amazon Kinesis stream belonging to the same account as the
         #     subscription filter, for same-account delivery.
+        #
         #   * A logical destination (used via an ARN of `Destination`) belonging
         #     to a different account, for cross-account delivery.
+        #
         #   * An Amazon Kinesis Firehose stream belonging to the same account as
         #     the subscription filter, for same-account delivery.
+        #
         #   * An AWS Lambda function belonging to the same account as the
         #     subscription filter, for same-account delivery.
         #   @return [String]

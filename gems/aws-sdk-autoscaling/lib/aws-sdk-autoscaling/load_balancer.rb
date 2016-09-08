@@ -58,10 +58,13 @@ module Aws
       # * `InService` - At least one instance in the group passed an ELB
       #   health check.
       #
-      # * `Removing` - The instances are being deregistered from the load
-      #   balancer. If connection draining is enabled, Elastic Load Balancing
-      #   waits for in-flight requests to complete before deregistering the
-      #   instances.
+      # * `Removing` - The instances in the group are being deregistered from
+      #   the load balancer. If connection draining is enabled, Elastic Load
+      #   Balancing waits for in-flight requests to complete before
+      #   deregistering the instances.
+      #
+      # * `Removed` - All instances in the group are deregistered from the
+      #   load balancer.
       # @return [String]
       def state
         data.state

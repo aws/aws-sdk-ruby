@@ -63,6 +63,12 @@ module Aws
         data.subnets
       end
 
+      # The Amazon Resource Name (ARN) for the DB subnet group.
+      # @return [String]
+      def db_subnet_group_arn
+        data.db_subnet_group_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

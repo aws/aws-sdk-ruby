@@ -83,6 +83,15 @@ module Aws
       #   region. Domain names must start with a letter or number and can
       #   contain the following characters: a-z (lowercase), 0-9, and -
       #   (hyphen).
+      # @option params [String] :elasticsearch_version
+      #   String of format X.Y to specify version for the Elasticsearch domain
+      #   eg. \"1.5\" or \"2.3\". For more information, see [Creating
+      #   Elasticsearch Domains][1] in the *Amazon Elasticsearch Service
+      #   Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains
       # @option params [Types::ElasticsearchClusterConfig] :elasticsearch_cluster_config
       #   Configuration options for an Elasticsearch domain. Specifies the
       #   instance type and number of instances in the domain cluster.
@@ -110,12 +119,13 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.create_elasticsearch_domain({
       #     domain_name: "DomainName", # required
+      #     elasticsearch_version: "ElasticsearchVersionString",
       #     elasticsearch_cluster_config: {
-      #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #       instance_count: 1,
       #       dedicated_master_enabled: false,
       #       zone_awareness_enabled: false,
-      #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #       dedicated_master_count: 1,
       #     },
       #     ebs_options: {
@@ -141,11 +151,12 @@ module Aws
       #   resp.domain_status.deleted #=> Boolean
       #   resp.domain_status.endpoint #=> String
       #   resp.domain_status.processing #=> Boolean
-      #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status.elasticsearch_version #=> String
+      #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
       #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
       #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-      #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_count #=> Integer
       #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
       #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
@@ -184,11 +195,12 @@ module Aws
       #   resp.domain_status.deleted #=> Boolean
       #   resp.domain_status.endpoint #=> String
       #   resp.domain_status.processing #=> Boolean
-      #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status.elasticsearch_version #=> String
+      #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
       #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
       #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-      #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_count #=> Integer
       #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
       #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
@@ -227,11 +239,12 @@ module Aws
       #   resp.domain_status.deleted #=> Boolean
       #   resp.domain_status.endpoint #=> String
       #   resp.domain_status.processing #=> Boolean
-      #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status.elasticsearch_version #=> String
+      #   resp.domain_status.elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status.elasticsearch_cluster_config.instance_count #=> Integer
       #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
       #   resp.domain_status.elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-      #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status.elasticsearch_cluster_config.dedicated_master_count #=> Integer
       #   resp.domain_status.ebs_options.ebs_enabled #=> Boolean
       #   resp.domain_status.ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
@@ -263,11 +276,17 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_config.elasticsearch_version.options #=> String
+      #   resp.domain_config.elasticsearch_version.status.creation_date #=> Time
+      #   resp.domain_config.elasticsearch_version.status.update_date #=> Time
+      #   resp.domain_config.elasticsearch_version.status.update_version #=> Integer
+      #   resp.domain_config.elasticsearch_version.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+      #   resp.domain_config.elasticsearch_version.status.pending_deletion #=> Boolean
+      #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_config.elasticsearch_cluster_config.options.instance_count #=> Integer
       #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_enabled #=> Boolean
       #   resp.domain_config.elasticsearch_cluster_config.options.zone_awareness_enabled #=> Boolean
-      #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_count #=> Integer
       #   resp.domain_config.elasticsearch_cluster_config.status.creation_date #=> Time
       #   resp.domain_config.elasticsearch_cluster_config.status.update_date #=> Time
@@ -332,11 +351,12 @@ module Aws
       #   resp.domain_status_list[0].deleted #=> Boolean
       #   resp.domain_status_list[0].endpoint #=> String
       #   resp.domain_status_list[0].processing #=> Boolean
-      #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status_list[0].elasticsearch_version #=> String
+      #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status_list[0].elasticsearch_cluster_config.instance_count #=> Integer
       #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_enabled #=> Boolean
       #   resp.domain_status_list[0].elasticsearch_cluster_config.zone_awareness_enabled #=> Boolean
-      #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_status_list[0].elasticsearch_cluster_config.dedicated_master_count #=> Integer
       #   resp.domain_status_list[0].ebs_options.ebs_enabled #=> Boolean
       #   resp.domain_status_list[0].ebs_options.volume_type #=> String, one of "standard", "gp2", "io1"
@@ -447,11 +467,11 @@ module Aws
       #   resp = client.update_elasticsearch_domain_config({
       #     domain_name: "DomainName", # required
       #     elasticsearch_cluster_config: {
-      #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #       instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #       instance_count: 1,
       #       dedicated_master_enabled: false,
       #       zone_awareness_enabled: false,
-      #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #       dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #       dedicated_master_count: 1,
       #     },
       #     ebs_options: {
@@ -470,11 +490,17 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_config.elasticsearch_version.options #=> String
+      #   resp.domain_config.elasticsearch_version.status.creation_date #=> Time
+      #   resp.domain_config.elasticsearch_version.status.update_date #=> Time
+      #   resp.domain_config.elasticsearch_version.status.update_version #=> Integer
+      #   resp.domain_config.elasticsearch_version.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+      #   resp.domain_config.elasticsearch_version.status.pending_deletion #=> Boolean
+      #   resp.domain_config.elasticsearch_cluster_config.options.instance_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_config.elasticsearch_cluster_config.options.instance_count #=> Integer
       #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_enabled #=> Boolean
       #   resp.domain_config.elasticsearch_cluster_config.options.zone_awareness_enabled #=> Boolean
-      #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
+      #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_type #=> String, one of "m3.medium.elasticsearch", "m3.large.elasticsearch", "m3.xlarge.elasticsearch", "m3.2xlarge.elasticsearch", "m4.large.elasticsearch", "m4.xlarge.elasticsearch", "m4.2xlarge.elasticsearch", "m4.4xlarge.elasticsearch", "m4.10xlarge.elasticsearch", "t2.micro.elasticsearch", "t2.small.elasticsearch", "t2.medium.elasticsearch", "r3.large.elasticsearch", "r3.xlarge.elasticsearch", "r3.2xlarge.elasticsearch", "r3.4xlarge.elasticsearch", "r3.8xlarge.elasticsearch", "i2.xlarge.elasticsearch", "i2.2xlarge.elasticsearch"
       #   resp.domain_config.elasticsearch_cluster_config.options.dedicated_master_count #=> Integer
       #   resp.domain_config.elasticsearch_cluster_config.status.creation_date #=> Time
       #   resp.domain_config.elasticsearch_cluster_config.status.update_date #=> Time
@@ -555,6 +581,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

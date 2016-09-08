@@ -214,7 +214,7 @@ module Aws
 
         # @!attribute [rw] auto_placement
         #   This is enabled by default. This property allows instances to be
-        #   automatically placed onto available Dedicated hosts, when you are
+        #   automatically placed onto available Dedicated Hosts, when you are
         #   launching instances without specifying a host ID.
         #
         #   Default: Enabled
@@ -231,18 +231,18 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] instance_type
-        #   Specify the instance type that you want your Dedicated hosts to be
+        #   Specify the instance type that you want your Dedicated Hosts to be
         #   configured for. When you specify the instance type, that is the only
         #   instance type that you can launch onto that host.
         #   @return [String]
 
         # @!attribute [rw] quantity
-        #   The number of Dedicated hosts you want to allocate to your account
+        #   The number of Dedicated Hosts you want to allocate to your account
         #   with these parameters.
         #   @return [Integer]
 
         # @!attribute [rw] availability_zone
-        #   The Availability Zone for the Dedicated hosts.
+        #   The Availability Zone for the Dedicated Hosts.
         #   @return [String]
 
       end
@@ -252,7 +252,7 @@ module Aws
         :host_ids)
 
         # @!attribute [rw] host_ids
-        #   The ID of the allocated Dedicated host. This is used when you want
+        #   The ID of the allocated Dedicated Host. This is used when you want
         #   to launch an instance onto a specific host.
         #   @return [Array<String>]
 
@@ -892,7 +892,9 @@ module Aws
 
         # @!attribute [rw] ip_protocol
         #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-        #   Numbers][1]). (VPC only) Use `-1` to specify all.
+        #   Numbers][1]). (VPC only) Use `-1` to specify all traffic. If you
+        #   specify `-1`, traffic on all ports is allowed, regardless of any
+        #   ports you specify.
         #
         #
         #
@@ -959,17 +961,17 @@ module Aws
       end
 
       # The capacity information for instances launched onto the Dedicated
-      # host.
+      # Host.
       class AvailableCapacity < Aws::Structure.new(
         :available_instance_capacity,
         :available_v_cpus)
 
         # @!attribute [rw] available_instance_capacity
-        #   The total number of instances that the Dedicated host supports.
+        #   The total number of instances that the Dedicated Host supports.
         #   @return [Array<Types::InstanceCapacity>]
 
         # @!attribute [rw] available_v_cpus
-        #   The number of vCPUs available on the Dedicated host.
+        #   The number of vCPUs available on the Dedicated Host.
         #   @return [Integer]
 
       end
@@ -4693,6 +4695,156 @@ module Aws
 
       end
 
+      # @note When making an API call, pass DescribeHostReservationOfferingsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         offering_id: "String",
+      #         min_duration: 1,
+      #         max_duration: 1,
+      #         filter: [
+      #           {
+      #             name: "String",
+      #             values: ["String"],
+      #           },
+      #         ],
+      #         max_results: 1,
+      #         next_token: "String",
+      #       }
+      class DescribeHostReservationOfferingsRequest < Aws::Structure.new(
+        :offering_id,
+        :min_duration,
+        :max_duration,
+        :filter,
+        :max_results,
+        :next_token)
+
+        # @!attribute [rw] offering_id
+        #   The ID of the reservation offering.
+        #   @return [String]
+
+        # @!attribute [rw] min_duration
+        #   This is the minimum duration of the reservation you\'d like to
+        #   purchase, specified in seconds. Reservations are available in
+        #   one-year and three-year terms. The number of seconds specified must
+        #   be the number of seconds in a year (365x24x60x60) times one of the
+        #   supported durations (1 or 3). For example, specify 31536000 for one
+        #   year.
+        #   @return [Integer]
+
+        # @!attribute [rw] max_duration
+        #   This is the maximum duration of the reservation you\'d like to
+        #   purchase, specified in seconds. Reservations are available in
+        #   one-year and three-year terms. The number of seconds specified must
+        #   be the number of seconds in a year (365x24x60x60) times one of the
+        #   supported durations (1 or 3). For example, specify 94608000 for
+        #   three years.
+        #   @return [Integer]
+
+        # @!attribute [rw] filter
+        #   One or more filters.
+        #
+        #   * `instance-family` - The instance family of the offering (e.g.,
+        #     `m4`).
+        #
+        #   * `payment-option` - The payment option (`No Upfront` \| `Partial
+        #     Upfront` \| `All Upfront`).
+        #   @return [Array<Types::Filter>]
+
+        # @!attribute [rw] max_results
+        #   The maximum number of results to return for the request in a single
+        #   page. The remaining results can be seen by sending another request
+        #   with the returned `nextToken` value. This value can be between 5 and
+        #   500; if `maxResults` is given a larger value than 500, you will
+        #   receive an error.
+        #   @return [Integer]
+
+        # @!attribute [rw] next_token
+        #   The token to use to retrieve the next page of results.
+        #   @return [String]
+
+      end
+
+      class DescribeHostReservationOfferingsResult < Aws::Structure.new(
+        :offering_set,
+        :next_token)
+
+        # @!attribute [rw] offering_set
+        #   Information about the offerings.
+        #   @return [Array<Types::HostOffering>]
+
+        # @!attribute [rw] next_token
+        #   The token to use to retrieve the next page of results. This value is
+        #   `null` when there are no more results to return.
+        #   @return [String]
+
+      end
+
+      # @note When making an API call, pass DescribeHostReservationsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         host_reservation_id_set: ["String"],
+      #         filter: [
+      #           {
+      #             name: "String",
+      #             values: ["String"],
+      #           },
+      #         ],
+      #         max_results: 1,
+      #         next_token: "String",
+      #       }
+      class DescribeHostReservationsRequest < Aws::Structure.new(
+        :host_reservation_id_set,
+        :filter,
+        :max_results,
+        :next_token)
+
+        # @!attribute [rw] host_reservation_id_set
+        #   One or more host reservation IDs.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] filter
+        #   One or more filters.
+        #
+        #   * `instance-family` - The instance family (e.g., `m4`).
+        #
+        #   * `payment-option` - The payment option (`No Upfront` \| `Partial
+        #     Upfront` \| `All Upfront`).
+        #
+        #   * `state` - The state of the reservation (`payment-pending` \|
+        #     `payment-failed` \| `active` \| `retired`).
+        #   @return [Array<Types::Filter>]
+
+        # @!attribute [rw] max_results
+        #   The maximum number of results to return for the request in a single
+        #   page. The remaining results can be seen by sending another request
+        #   with the returned `nextToken` value. This value can be between 5 and
+        #   500; if `maxResults` is given a larger value than 500, you will
+        #   receive an error.
+        #   @return [Integer]
+
+        # @!attribute [rw] next_token
+        #   The token to use to retrieve the next page of results.
+        #   @return [String]
+
+      end
+
+      class DescribeHostReservationsResult < Aws::Structure.new(
+        :host_reservation_set,
+        :next_token)
+
+        # @!attribute [rw] host_reservation_set
+        #   Details about the reservation\'s configuration.
+        #   @return [Array<Types::HostReservation>]
+
+        # @!attribute [rw] next_token
+        #   The token to use to retrieve the next page of results. This value is
+        #   `null` when there are no more results to return.
+        #   @return [String]
+
+      end
+
       # Contains the parameters for DescribeHosts.
       # @note When making an API call, pass DescribeHostsRequest
       #   data as a hash:
@@ -4715,7 +4867,7 @@ module Aws
         :filter)
 
         # @!attribute [rw] host_ids
-        #   The IDs of the Dedicated hosts. The IDs are used for targeted
+        #   The IDs of the Dedicated Hosts. The IDs are used for targeted
         #   instance launches.
         #   @return [Array<String>]
 
@@ -4735,19 +4887,19 @@ module Aws
         # @!attribute [rw] filter
         #   One or more filters.
         #
-        #   * `instance-type` - The instance type size that the Dedicated host
+        #   * `instance-type` - The instance type size that the Dedicated Host
         #     is configured to support.
         #
         #   * `auto-placement` - Whether auto-placement is enabled or disabled
         #     (`on` \| `off`).
         #
-        #   * `host-reservation-id` - The ID of the reservation associated with
-        #     this host.
+        #   * `host-reservation-id` - The ID of the reservation assigned to this
+        #     host.
         #
         #   * `client-token` - The idempotency token you provided when you
         #     launched the instance
         #
-        #   * `state`- The allocation state of the Dedicated host (`available`
+        #   * `state`- The allocation state of the Dedicated Host (`available`
         #     \| `under-assessment` \| `permanent-failure` \| `released` \|
         #     `released-permanent-failure`).
         #
@@ -4762,7 +4914,7 @@ module Aws
         :next_token)
 
         # @!attribute [rw] hosts
-        #   Information about the Dedicated hosts.
+        #   Information about the Dedicated Hosts.
         #   @return [Array<Types::Host>]
 
         # @!attribute [rw] next_token
@@ -4783,7 +4935,8 @@ module Aws
         :resource)
 
         # @!attribute [rw] resource
-        #   The type of resource.
+        #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+        #   `volume`
         #   @return [String]
 
       end
@@ -4811,7 +4964,8 @@ module Aws
         :principal_arn)
 
         # @!attribute [rw] resource
-        #   The type of resource.
+        #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+        #   `volume`
         #   @return [String]
 
         # @!attribute [rw] principal_arn
@@ -4904,11 +5058,11 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] owners
-        #   Filters the images by the owner. Specify an AWS account ID, `amazon`
-        #   (owner is Amazon), `aws-marketplace` (owner is AWS Marketplace),
-        #   `self` (owner is the sender of the request). Omitting this option
-        #   returns all images for which you have launch permissions, regardless
-        #   of ownership.
+        #   Filters the images by the owner. Specify an AWS account ID, `self`
+        #   (owner is the sender of the request), or an AWS owner alias (valid
+        #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
+        #   this option returns all images for which you have launch
+        #   permissions, regardless of ownership.
         #   @return [Array<String>]
 
         # @!attribute [rw] executable_users
@@ -4957,7 +5111,10 @@ module Aws
         #
         #   * `name` - The name of the AMI (provided during image creation).
         #
-        #   * `owner-alias` - The AWS account alias (for example, `amazon`).
+        #   * `owner-alias` - String value from an Amazon-maintained list
+        #     (`amazon` \| `aws-marketplace` \| `microsoft`) of snapshot owners.
+        #     Not to be confused with the user-configured AWS account alias,
+        #     which is set from the IAM console.
         #
         #   * `owner-id` - The AWS account ID of the image owner.
         #
@@ -5344,7 +5501,7 @@ module Aws
         #   One or more filters.
         #
         #   * `affinity` - The affinity setting for an instance running on a
-        #     Dedicated host (`default` \| `host`).
+        #     Dedicated Host (`default` \| `host`).
         #
         #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
         #
@@ -5378,7 +5535,7 @@ module Aws
         #   * `group-name` - The name of the security group for the instance.
         #     EC2-Classic only.
         #
-        #   * `host-Id` - The ID of the Dedicated host on which the instance is
+        #   * `host-id` - The ID of the Dedicated Host on which the instance is
         #     running, if applicable.
         #
         #   * `hypervisor` - The hypervisor type of the instance (`ovm` \|
@@ -7384,8 +7541,10 @@ module Aws
         #
         #   * `description` - A description of the snapshot.
         #
-        #   * `owner-alias` - The AWS account alias (for example, `amazon`) that
-        #     owns the snapshot.
+        #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
+        #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
+        #     confused with the user-configured AWS account alias, which is set
+        #     from the IAM consolew.
         #
         #   * `owner-id` - The ID of the AWS account that owns the snapshot.
         #
@@ -10197,6 +10356,55 @@ module Aws
 
       end
 
+      # @note When making an API call, pass GetHostReservationPurchasePreviewRequest
+      #   data as a hash:
+      #
+      #       {
+      #         offering_id: "String", # required
+      #         host_id_set: ["String"], # required
+      #       }
+      class GetHostReservationPurchasePreviewRequest < Aws::Structure.new(
+        :offering_id,
+        :host_id_set)
+
+        # @!attribute [rw] offering_id
+        #   The offering ID of the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] host_id_set
+        #   The ID/s of the Dedicated Host/s that the reservation will be
+        #   associated with.
+        #   @return [Array<String>]
+
+      end
+
+      class GetHostReservationPurchasePreviewResult < Aws::Structure.new(
+        :purchase,
+        :total_upfront_price,
+        :total_hourly_price,
+        :currency_code)
+
+        # @!attribute [rw] purchase
+        #   The purchase information of the Dedicated Host Reservation and the
+        #   Dedicated Hosts associated with it.
+        #   @return [Array<Types::Purchase>]
+
+        # @!attribute [rw] total_upfront_price
+        #   The potential total upfront price. This is billed immediately.
+        #   @return [String]
+
+        # @!attribute [rw] total_hourly_price
+        #   The potential total hourly price of the reservation per hour.
+        #   @return [String]
+
+        # @!attribute [rw] currency_code
+        #   The currency in which the `totalUpfrontPrice` and `totalHourlyPrice`
+        #   amounts are specified. At this time, the only supported currency is
+        #   `USD`.
+        #   @return [String]
+
+      end
+
       # Contains the parameters for GetPasswordData.
       # @note When making an API call, pass GetPasswordDataRequest
       #   data as a hash:
@@ -10293,7 +10501,7 @@ module Aws
 
       end
 
-      # Describes the properties of the Dedicated host.
+      # Describes the properties of the Dedicated Host.
       class Host < Aws::Structure.new(
         :host_id,
         :auto_placement,
@@ -10306,7 +10514,7 @@ module Aws
         :available_capacity)
 
         # @!attribute [rw] host_id
-        #   The ID of the Dedicated host.
+        #   The ID of the Dedicated Host.
         #   @return [String]
 
         # @!attribute [rw] auto_placement
@@ -10314,8 +10522,8 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] host_reservation_id
-        #   The reservation ID of the Dedicated host. This returns a `null`
-        #   response if the Dedicated host doesn\'t have an associated
+        #   The reservation ID of the Dedicated Host. This returns a `null`
+        #   response if the Dedicated Host doesn\'t have an associated
         #   reservation.
         #   @return [String]
 
@@ -10330,46 +10538,87 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] host_properties
-        #   The hardware specifications of the Dedicated host.
+        #   The hardware specifications of the Dedicated Host.
         #   @return [Types::HostProperties]
 
         # @!attribute [rw] state
-        #   The Dedicated host\'s state.
+        #   The Dedicated Host\'s state.
         #   @return [String]
 
         # @!attribute [rw] availability_zone
-        #   The Availability Zone of the Dedicated host.
+        #   The Availability Zone of the Dedicated Host.
         #   @return [String]
 
         # @!attribute [rw] instances
         #   The IDs and instance type that are currently running on the
-        #   Dedicated host.
+        #   Dedicated Host.
         #   @return [Array<Types::HostInstance>]
 
         # @!attribute [rw] available_capacity
         #   The number of new instances that can be launched onto the Dedicated
-        #   host.
+        #   Host.
         #   @return [Types::AvailableCapacity]
 
       end
 
-      # Describes an instance running on a Dedicated host.
+      # Describes an instance running on a Dedicated Host.
       class HostInstance < Aws::Structure.new(
         :instance_id,
         :instance_type)
 
         # @!attribute [rw] instance_id
-        #   the IDs of instances that are running on the Dedicated host.
+        #   the IDs of instances that are running on the Dedicated Host.
         #   @return [String]
 
         # @!attribute [rw] instance_type
-        #   The instance type size (for example, m3.medium) of the running
+        #   The instance type size (for example, `m3.medium`) of the running
         #   instance.
         #   @return [String]
 
       end
 
-      # Describes properties of a Dedicated host.
+      # Details about the Dedicated Host Reservation offering.
+      class HostOffering < Aws::Structure.new(
+        :offering_id,
+        :instance_family,
+        :payment_option,
+        :upfront_price,
+        :hourly_price,
+        :currency_code,
+        :duration)
+
+        # @!attribute [rw] offering_id
+        #   The ID of the offering.
+        #   @return [String]
+
+        # @!attribute [rw] instance_family
+        #   The instance family of the offering.
+        #   @return [String]
+
+        # @!attribute [rw] payment_option
+        #   The available payment option.
+        #   @return [String]
+
+        # @!attribute [rw] upfront_price
+        #   The upfront price of the offering. Does not apply to No Upfront
+        #   offerings.
+        #   @return [String]
+
+        # @!attribute [rw] hourly_price
+        #   The hourly price of the offering.
+        #   @return [String]
+
+        # @!attribute [rw] currency_code
+        #   The currency of the offering.
+        #   @return [String]
+
+        # @!attribute [rw] duration
+        #   The duration of the offering (in seconds).
+        #   @return [Integer]
+
+      end
+
+      # Describes properties of a Dedicated Host.
       class HostProperties < Aws::Structure.new(
         :sockets,
         :cores,
@@ -10377,20 +10626,97 @@ module Aws
         :instance_type)
 
         # @!attribute [rw] sockets
-        #   The number of sockets on the Dedicated host.
+        #   The number of sockets on the Dedicated Host.
         #   @return [Integer]
 
         # @!attribute [rw] cores
-        #   The number of cores on the Dedicated host.
+        #   The number of cores on the Dedicated Host.
         #   @return [Integer]
 
         # @!attribute [rw] total_v_cpus
-        #   The number of vCPUs on the Dedicated host.
+        #   The number of vCPUs on the Dedicated Host.
         #   @return [Integer]
 
         # @!attribute [rw] instance_type
-        #   The instance type size that the Dedicated host supports (for
-        #   example, m3.medium).
+        #   The instance type size that the Dedicated Host supports (for
+        #   example, `m3.medium`).
+        #   @return [String]
+
+      end
+
+      # Details about the Dedicated Host Reservation and associated Dedicated
+      # Hosts.
+      class HostReservation < Aws::Structure.new(
+        :host_reservation_id,
+        :host_id_set,
+        :offering_id,
+        :instance_family,
+        :payment_option,
+        :hourly_price,
+        :upfront_price,
+        :currency_code,
+        :count,
+        :duration,
+        :end,
+        :start,
+        :state)
+
+        # @!attribute [rw] host_reservation_id
+        #   The ID of the reservation that specifies the associated Dedicated
+        #   Hosts.
+        #   @return [String]
+
+        # @!attribute [rw] host_id_set
+        #   The IDs of the Dedicated Hosts associated with the reservation.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] offering_id
+        #   The ID of the reservation. This remains the same regardless of which
+        #   Dedicated Hosts are associated with it.
+        #   @return [String]
+
+        # @!attribute [rw] instance_family
+        #   The instance family of the Dedicated Host Reservation. The instance
+        #   family on the Dedicated Host must be the same in order for it to
+        #   benefit from the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] payment_option
+        #   The payment option selected for this reservation.
+        #   @return [String]
+
+        # @!attribute [rw] hourly_price
+        #   The hourly price of the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] upfront_price
+        #   The upfront price of the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] currency_code
+        #   The currency in which the `upfrontPrice` and `hourlyPrice` amounts
+        #   are specified. At this time, the only supported currency is `USD`.
+        #   @return [String]
+
+        # @!attribute [rw] count
+        #   The number of Dedicated Hosts the reservation is associated with.
+        #   @return [Integer]
+
+        # @!attribute [rw] duration
+        #   The length of the reservation\'s term, specified in seconds. Can be
+        #   `31536000 (1 year)` \| `94608000 (3 years)`.
+        #   @return [Integer]
+
+        # @!attribute [rw] end
+        #   The date and time that the reservation ends.
+        #   @return [Time]
+
+        # @!attribute [rw] start
+        #   The date and time that the reservation started.
+        #   @return [Time]
+
+        # @!attribute [rw] state
+        #   The state of the reservation.
         #   @return [String]
 
       end
@@ -10776,14 +11102,14 @@ module Aws
         #
         #   **Note:** You may only use BYOL if you have existing licenses with
         #   rights to use these licenses in a third party cloud like AWS. For
-        #   more information, see [VM Import/Export Prerequisites][1] in the
-        #   *Amazon Elastic Compute Cloud User Guide*.
+        #   more information, see [Prerequisites][1] in the VM Import/Export
+        #   User Guide.
         #
         #   Valid values: `AWS` \| `BYOL`
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html
+        #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image
         #   @return [String]
 
         # @!attribute [rw] hypervisor
@@ -11007,12 +11333,12 @@ module Aws
 
         # @!attribute [rw] instance_type
         #   The instance type. For more information about the instance types
-        #   that you can import, see [Before You Get Started][1] in the Amazon
-        #   Elastic Compute Cloud User Guide.
+        #   that you can import, see [Instance Types][1] in the VM Import/Export
+        #   User Guide.
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/VMImportPrerequisites.html
+        #   [1]: http://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#vmimport-instance-types
         #   @return [String]
 
         # @!attribute [rw] placement
@@ -11796,24 +12122,24 @@ module Aws
 
       end
 
-      # Information about the instance type that the Dedicated host supports.
+      # Information about the instance type that the Dedicated Host supports.
       class InstanceCapacity < Aws::Structure.new(
         :instance_type,
         :available_capacity,
         :total_capacity)
 
         # @!attribute [rw] instance_type
-        #   The instance type size supported by the Dedicated host.
+        #   The instance type size supported by the Dedicated Host.
         #   @return [String]
 
         # @!attribute [rw] available_capacity
         #   The number of instances that can still be launched onto the
-        #   Dedicated host.
+        #   Dedicated Host.
         #   @return [Integer]
 
         # @!attribute [rw] total_capacity
         #   The total number of instances that can be launched onto the
-        #   Dedicated host.
+        #   Dedicated Host.
         #   @return [Integer]
 
       end
@@ -12598,7 +12924,7 @@ module Aws
         :auto_placement)
 
         # @!attribute [rw] host_ids
-        #   The host IDs of the Dedicated hosts you want to modify.
+        #   The host IDs of the Dedicated Hosts you want to modify.
         #   @return [Array<String>]
 
         # @!attribute [rw] auto_placement
@@ -12613,11 +12939,11 @@ module Aws
         :unsuccessful)
 
         # @!attribute [rw] successful
-        #   The IDs of the Dedicated hosts that were successfully modified.
+        #   The IDs of the Dedicated Hosts that were successfully modified.
         #   @return [Array<String>]
 
         # @!attribute [rw] unsuccessful
-        #   The IDs of the Dedicated hosts that could not be modified. Check
+        #   The IDs of the Dedicated Hosts that could not be modified. Check
         #   whether the setting you requested can be used.
         #   @return [Array<Types::UnsuccessfulItem>]
 
@@ -12636,7 +12962,8 @@ module Aws
         :use_long_ids)
 
         # @!attribute [rw] resource
-        #   The type of resource.
+        #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+        #   `volume`
         #   @return [String]
 
         # @!attribute [rw] use_long_ids
@@ -12661,7 +12988,8 @@ module Aws
         :principal_arn)
 
         # @!attribute [rw] resource
-        #   The type of resource.
+        #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
+        #   `volume`
         #   @return [String]
 
         # @!attribute [rw] use_long_ids
@@ -12671,7 +12999,8 @@ module Aws
 
         # @!attribute [rw] principal_arn
         #   The ARN of the principal, which can be an IAM user, IAM role, or the
-        #   root user.
+        #   root user. Specify `all` to modify the ID format for all IAM users,
+        #   IAM roles, and the root user of the account.
         #   @return [String]
 
       end
@@ -12986,7 +13315,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] host_id
-        #   The ID of the Dedicated host that the instance will have affinity
+        #   The ID of the Dedicated Host that the instance will have affinity
         #   with.
         #   @return [String]
 
@@ -13408,12 +13737,14 @@ module Aws
       #         dry_run: false,
       #         vpc_peering_connection_id: "String", # required
       #         requester_peering_connection_options: {
-      #           allow_egress_from_local_classic_link_to_remote_vpc: false, # required
-      #           allow_egress_from_local_vpc_to_remote_classic_link: false, # required
+      #           allow_egress_from_local_classic_link_to_remote_vpc: false,
+      #           allow_egress_from_local_vpc_to_remote_classic_link: false,
+      #           allow_dns_resolution_from_remote_vpc: false,
       #         },
       #         accepter_peering_connection_options: {
-      #           allow_egress_from_local_classic_link_to_remote_vpc: false, # required
-      #           allow_egress_from_local_vpc_to_remote_classic_link: false, # required
+      #           allow_egress_from_local_classic_link_to_remote_vpc: false,
+      #           allow_egress_from_local_vpc_to_remote_classic_link: false,
+      #           allow_dns_resolution_from_remote_vpc: false,
       #         },
       #       }
       class ModifyVpcPeeringConnectionOptionsRequest < Aws::Structure.new(
@@ -14034,7 +14365,8 @@ module Aws
       # Describes the VPC peering connection options.
       class PeeringConnectionOptions < Aws::Structure.new(
         :allow_egress_from_local_classic_link_to_remote_vpc,
-        :allow_egress_from_local_vpc_to_remote_classic_link)
+        :allow_egress_from_local_vpc_to_remote_classic_link,
+        :allow_dns_resolution_from_remote_vpc)
 
         # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
         #   If true, enables outbound communication from an EC2-Classic instance
@@ -14046,6 +14378,11 @@ module Aws
         #   If true, enables outbound communication from instances in a local
         #   VPC to an EC2-Classic instance that\'s linked to a peer VPC via
         #   ClassicLink.
+        #   @return [Boolean]
+
+        # @!attribute [rw] allow_dns_resolution_from_remote_vpc
+        #   If true, enables a local VPC to resolve public DNS hostnames to
+        #   private IP addresses when queried from instances in the peer VPC.
         #   @return [Boolean]
 
       end
@@ -14055,12 +14392,14 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         allow_egress_from_local_classic_link_to_remote_vpc: false, # required
-      #         allow_egress_from_local_vpc_to_remote_classic_link: false, # required
+      #         allow_egress_from_local_classic_link_to_remote_vpc: false,
+      #         allow_egress_from_local_vpc_to_remote_classic_link: false,
+      #         allow_dns_resolution_from_remote_vpc: false,
       #       }
       class PeeringConnectionOptionsRequest < Aws::Structure.new(
         :allow_egress_from_local_classic_link_to_remote_vpc,
-        :allow_egress_from_local_vpc_to_remote_classic_link)
+        :allow_egress_from_local_vpc_to_remote_classic_link,
+        :allow_dns_resolution_from_remote_vpc)
 
         # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
         #   If true, enables outbound communication from an EC2-Classic instance
@@ -14072,6 +14411,11 @@ module Aws
         #   If true, enables outbound communication from instances in a local
         #   VPC to an EC2-Classic instance that\'s linked to a peer VPC via
         #   ClassicLink.
+        #   @return [Boolean]
+
+        # @!attribute [rw] allow_dns_resolution_from_remote_vpc
+        #   If true, enables a local VPC to resolve public DNS hostnames to
+        #   private IP addresses when queried from instances in the peer VPC.
         #   @return [Boolean]
 
       end
@@ -14116,7 +14460,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] affinity
-        #   The affinity setting for the instance on the Dedicated host. This
+        #   The affinity setting for the instance on the Dedicated Host. This
         #   parameter is not supported for the ImportInstance command.
         #   @return [String]
 
@@ -14394,6 +14738,145 @@ module Aws
         #
         #   [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
         #   [2]: https://console.aws.amazon.com/support/home?
+        #   @return [String]
+
+      end
+
+      # Describes the result of the purchase.
+      class Purchase < Aws::Structure.new(
+        :host_reservation_id,
+        :host_id_set,
+        :instance_family,
+        :payment_option,
+        :upfront_price,
+        :hourly_price,
+        :currency_code,
+        :duration)
+
+        # @!attribute [rw] host_reservation_id
+        #   The ID of the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] host_id_set
+        #   The IDs of the Dedicated Hosts associated with the reservation.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] instance_family
+        #   The instance family on the Dedicated Host that the reservation can
+        #   be associated with.
+        #   @return [String]
+
+        # @!attribute [rw] payment_option
+        #   The payment option for the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] upfront_price
+        #   The upfront price of the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] hourly_price
+        #   The hourly price of the reservation per hour.
+        #   @return [String]
+
+        # @!attribute [rw] currency_code
+        #   The currency in which the `UpfrontPrice` and `HourlyPrice` amounts
+        #   are specified. At this time, the only supported currency is `USD`.
+        #   @return [String]
+
+        # @!attribute [rw] duration
+        #   The duration of the reservation\'s term in seconds.
+        #   @return [Integer]
+
+      end
+
+      # @note When making an API call, pass PurchaseHostReservationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         offering_id: "String", # required
+      #         host_id_set: ["String"], # required
+      #         limit_price: "String",
+      #         currency_code: "USD", # accepts USD
+      #         client_token: "String",
+      #       }
+      class PurchaseHostReservationRequest < Aws::Structure.new(
+        :offering_id,
+        :host_id_set,
+        :limit_price,
+        :currency_code,
+        :client_token)
+
+        # @!attribute [rw] offering_id
+        #   The ID of the offering.
+        #   @return [String]
+
+        # @!attribute [rw] host_id_set
+        #   The ID/s of the Dedicated Host/s that the reservation will be
+        #   associated with.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] limit_price
+        #   The specified limit is checked against the total upfront cost of the
+        #   reservation (calculated as the offering\'s upfront cost multiplied
+        #   by the host count). If the total upfront cost is greater than the
+        #   specified price limit, the request will fail. This is used to ensure
+        #   that the purchase does not exceed the expected upfront cost of the
+        #   purchase. At this time, the only supported currency is `USD`. For
+        #   example, to indicate a limit price of USD 100, specify 100.00.
+        #   @return [String]
+
+        # @!attribute [rw] currency_code
+        #   The currency in which the `totalUpfrontPrice`, `LimitPrice`, and
+        #   `totalHourlyPrice` amounts are specified. At this time, the only
+        #   supported currency is `USD`.
+        #   @return [String]
+
+        # @!attribute [rw] client_token
+        #   Unique, case-sensitive identifier you provide to ensure idempotency
+        #   of the request. For more information, see [How to Ensure
+        #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+        #   @return [String]
+
+      end
+
+      class PurchaseHostReservationResult < Aws::Structure.new(
+        :purchase,
+        :total_upfront_price,
+        :total_hourly_price,
+        :currency_code,
+        :client_token)
+
+        # @!attribute [rw] purchase
+        #   Describes the details of the purchase.
+        #   @return [Array<Types::Purchase>]
+
+        # @!attribute [rw] total_upfront_price
+        #   The total amount that will be charged to your account when you
+        #   purchase the reservation.
+        #   @return [String]
+
+        # @!attribute [rw] total_hourly_price
+        #   The total hourly price of the reservation calculated per hour.
+        #   @return [String]
+
+        # @!attribute [rw] currency_code
+        #   The currency in which the `totalUpfrontPrice` and `totalHourlyPrice`
+        #   amounts are specified. At this time, the only supported currency is
+        #   `USD`.
+        #   @return [String]
+
+        # @!attribute [rw] client_token
+        #   Unique, case-sensitive identifier you provide to ensure idempotency
+        #   of the request. For more information, see [How to Ensure
+        #   Idempotency][1] in the *Amazon Elastic Compute Cloud User Guide*
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
         #   @return [String]
 
       end
@@ -14786,7 +15269,7 @@ module Aws
         :host_ids)
 
         # @!attribute [rw] host_ids
-        #   The IDs of the Dedicated hosts you want to release.
+        #   The IDs of the Dedicated Hosts you want to release.
         #   @return [Array<String>]
 
       end
@@ -14797,11 +15280,11 @@ module Aws
         :unsuccessful)
 
         # @!attribute [rw] successful
-        #   The IDs of the Dedicated hosts that were successfully released.
+        #   The IDs of the Dedicated Hosts that were successfully released.
         #   @return [Array<String>]
 
         # @!attribute [rw] unsuccessful
-        #   The IDs of the Dedicated hosts that could not be released, including
+        #   The IDs of the Dedicated Hosts that could not be released, including
         #   an error message.
         #   @return [Array<Types::UnsuccessfulItem>]
 
@@ -16751,6 +17234,15 @@ module Aws
 
         # @!attribute [rw] block_device_mappings
         #   The block device mapping.
+        #
+        #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments
+        #   for block-device mapping results in an error. This is because only
+        #   blank volumes can be encrypted on start, and these are not created
+        #   from a snapshot. If a snapshot is the basis for the volume, it
+        #   contains data by definition and its encryption status cannot be
+        #   changed using this action.
+        #
+        #    </important>
         #   @return [Array<Types::BlockDeviceMapping>]
 
         # @!attribute [rw] monitoring
@@ -16933,7 +17425,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] launch_specification
-        #   The launch specification.
+        #   The launch specification. You must match the instance type,
+        #   Availability Zone, network, and platform of the schedule that you
+        #   purchased.
         #   @return [Types::ScheduledInstancesLaunchSpecification]
 
       end
@@ -17810,7 +18304,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] volume_id
-        #   The ID of the volume that was used to create the snapshot.
+        #   The ID of the volume that was used to create the snapshot. Snapshots
+        #   created by the CopySnapshot action have an arbitrary volume ID that
+        #   should not be used for any purpose.
         #   @return [String]
 
         # @!attribute [rw] state
@@ -17847,8 +18343,10 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] owner_alias
-        #   The AWS account alias (for example, `amazon`, `self`) or AWS account
-        #   ID that owns the snapshot.
+        #   Value from an Amazon-maintained list (`amazon` \| `aws-marketplace`
+        #   \| `microsoft`) of snapshot owners. Not to be confused with the
+        #   user-configured AWS account alias, which is set from the IAM
+        #   console.
         #   @return [String]
 
         # @!attribute [rw] tags
@@ -18258,7 +18756,8 @@ module Aws
         :spot_fleet_request_id,
         :spot_fleet_request_state,
         :spot_fleet_request_config,
-        :create_time)
+        :create_time,
+        :activity_status)
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -18275,6 +18774,15 @@ module Aws
         # @!attribute [rw] create_time
         #   The creation date and time of the request.
         #   @return [Time]
+
+        # @!attribute [rw] activity_status
+        #   The progress of the Spot fleet request. If there is an error, the
+        #   status is `error`. After all bids are placed, the status is
+        #   `pending_fulfillment`. If the size of the fleet is equal to or
+        #   greater than its target capacity, the status is `fulfilled`. If the
+        #   size of the fleet is decreased, the status is `pending_termination`
+        #   while Spot instances are terminating.
+        #   @return [String]
 
       end
 
@@ -19686,7 +20194,8 @@ module Aws
       # Describes the VPC peering connection options.
       class VpcPeeringConnectionOptionsDescription < Aws::Structure.new(
         :allow_egress_from_local_classic_link_to_remote_vpc,
-        :allow_egress_from_local_vpc_to_remote_classic_link)
+        :allow_egress_from_local_vpc_to_remote_classic_link,
+        :allow_dns_resolution_from_remote_vpc)
 
         # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
         #   Indicates whether a local ClassicLink connection can communicate
@@ -19696,6 +20205,11 @@ module Aws
         # @!attribute [rw] allow_egress_from_local_vpc_to_remote_classic_link
         #   Indicates whether a local VPC can communicate with a ClassicLink
         #   connection in the peer VPC over the VPC peering connection.
+        #   @return [Boolean]
+
+        # @!attribute [rw] allow_dns_resolution_from_remote_vpc
+        #   Indicates whether a local VPC can resolve public DNS hostnames to
+        #   private IP addresses when queried from instances in a peer VPC.
         #   @return [Boolean]
 
       end

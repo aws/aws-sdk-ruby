@@ -65,6 +65,12 @@ module Aws
         data.event_categories
       end
 
+      # The Amazon Resource Name (ARN) for the event.
+      # @return [String]
+      def source_arn
+        data.source_arn
+      end
+
       # @!endgroup
 
       # @return [Client]

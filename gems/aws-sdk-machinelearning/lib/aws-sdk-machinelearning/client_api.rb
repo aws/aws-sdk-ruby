@@ -192,6 +192,11 @@ module Aws
       BatchPrediction.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
       BatchPrediction.add_member(:output_uri, Shapes::ShapeRef.new(shape: S3Url, location_name: "OutputUri"))
       BatchPrediction.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+      BatchPrediction.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      BatchPrediction.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      BatchPrediction.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
+      BatchPrediction.add_member(:total_record_count, Shapes::ShapeRef.new(shape: LongType, location_name: "TotalRecordCount"))
+      BatchPrediction.add_member(:invalid_record_count, Shapes::ShapeRef.new(shape: LongType, location_name: "InvalidRecordCount"))
       BatchPrediction.struct_class = Types::BatchPrediction
 
       BatchPredictions.member = Shapes::ShapeRef.new(shape: BatchPrediction)
@@ -278,6 +283,9 @@ module Aws
       DataSource.add_member(:rds_metadata, Shapes::ShapeRef.new(shape: RDSMetadata, location_name: "RDSMetadata"))
       DataSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
       DataSource.add_member(:compute_statistics, Shapes::ShapeRef.new(shape: ComputeStatistics, location_name: "ComputeStatistics"))
+      DataSource.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      DataSource.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      DataSource.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
       DataSource.struct_class = Types::DataSource
 
       DataSources.member = Shapes::ShapeRef.new(shape: DataSource)
@@ -415,6 +423,9 @@ module Aws
       Evaluation.add_member(:status, Shapes::ShapeRef.new(shape: EntityStatus, location_name: "Status"))
       Evaluation.add_member(:performance_metrics, Shapes::ShapeRef.new(shape: PerformanceMetrics, location_name: "PerformanceMetrics"))
       Evaluation.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+      Evaluation.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      Evaluation.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      Evaluation.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
       Evaluation.struct_class = Types::Evaluation
 
       Evaluations.member = Shapes::ShapeRef.new(shape: Evaluation)
@@ -434,6 +445,11 @@ module Aws
       GetBatchPredictionOutput.add_member(:output_uri, Shapes::ShapeRef.new(shape: S3Url, location_name: "OutputUri"))
       GetBatchPredictionOutput.add_member(:log_uri, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "LogUri"))
       GetBatchPredictionOutput.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+      GetBatchPredictionOutput.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      GetBatchPredictionOutput.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      GetBatchPredictionOutput.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
+      GetBatchPredictionOutput.add_member(:total_record_count, Shapes::ShapeRef.new(shape: LongType, location_name: "TotalRecordCount"))
+      GetBatchPredictionOutput.add_member(:invalid_record_count, Shapes::ShapeRef.new(shape: LongType, location_name: "InvalidRecordCount"))
       GetBatchPredictionOutput.struct_class = Types::GetBatchPredictionOutput
 
       GetDataSourceInput.add_member(:data_source_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "DataSourceId"))
@@ -456,6 +472,9 @@ module Aws
       GetDataSourceOutput.add_member(:rds_metadata, Shapes::ShapeRef.new(shape: RDSMetadata, location_name: "RDSMetadata"))
       GetDataSourceOutput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
       GetDataSourceOutput.add_member(:compute_statistics, Shapes::ShapeRef.new(shape: ComputeStatistics, location_name: "ComputeStatistics"))
+      GetDataSourceOutput.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      GetDataSourceOutput.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      GetDataSourceOutput.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
       GetDataSourceOutput.add_member(:data_source_schema, Shapes::ShapeRef.new(shape: DataSchema, location_name: "DataSourceSchema"))
       GetDataSourceOutput.struct_class = Types::GetDataSourceOutput
 
@@ -474,6 +493,9 @@ module Aws
       GetEvaluationOutput.add_member(:performance_metrics, Shapes::ShapeRef.new(shape: PerformanceMetrics, location_name: "PerformanceMetrics"))
       GetEvaluationOutput.add_member(:log_uri, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "LogUri"))
       GetEvaluationOutput.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+      GetEvaluationOutput.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      GetEvaluationOutput.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      GetEvaluationOutput.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
       GetEvaluationOutput.struct_class = Types::GetEvaluationOutput
 
       GetMLModelInput.add_member(:ml_model_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "MLModelId"))
@@ -496,6 +518,9 @@ module Aws
       GetMLModelOutput.add_member(:score_threshold_last_updated_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "ScoreThresholdLastUpdatedAt"))
       GetMLModelOutput.add_member(:log_uri, Shapes::ShapeRef.new(shape: PresignedS3Url, location_name: "LogUri"))
       GetMLModelOutput.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+      GetMLModelOutput.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      GetMLModelOutput.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      GetMLModelOutput.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
       GetMLModelOutput.add_member(:recipe, Shapes::ShapeRef.new(shape: Recipe, location_name: "Recipe"))
       GetMLModelOutput.add_member(:schema, Shapes::ShapeRef.new(shape: DataSchema, location_name: "Schema"))
       GetMLModelOutput.struct_class = Types::GetMLModelOutput
@@ -516,6 +541,9 @@ module Aws
       MLModel.add_member(:score_threshold, Shapes::ShapeRef.new(shape: ScoreThreshold, location_name: "ScoreThreshold"))
       MLModel.add_member(:score_threshold_last_updated_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "ScoreThresholdLastUpdatedAt"))
       MLModel.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+      MLModel.add_member(:compute_time, Shapes::ShapeRef.new(shape: LongType, location_name: "ComputeTime"))
+      MLModel.add_member(:finished_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "FinishedAt"))
+      MLModel.add_member(:started_at, Shapes::ShapeRef.new(shape: EpochTime, location_name: "StartedAt"))
       MLModel.struct_class = Types::MLModel
 
       MLModels.member = Shapes::ShapeRef.new(shape: MLModel)

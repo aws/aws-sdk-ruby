@@ -40,29 +40,46 @@ module Aws
       # @!group API Operations
 
       # Create an ApiKey resource.
+      #
+      # <div class="seeAlso">
+      # [AWS CLI][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-api-key.html
       # @option params [String] :name
       #   The name of the ApiKey.
       # @option params [String] :description
       #   The description of the ApiKey.
       # @option params [Boolean] :enabled
       #   Specifies whether the ApiKey can be used by callers.
+      # @option params [Boolean] :generate_distinct_id
+      #   Specifies whether (`true`) or not (`false`) the key identifier is
+      #   distinct from the created API key value.
+      # @option params [String] :value
+      #   Specifies a value of the API key.
       # @option params [Array<Types::StageKey>] :stage_keys
-      #   Specifies whether the ApiKey can be used by callers.
+      #   DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API
+      #   key.
       # @return [Types::ApiKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ApiKey#id #id} => String
+      #   * {Types::ApiKey#value #value} => String
       #   * {Types::ApiKey#name #name} => String
       #   * {Types::ApiKey#description #description} => String
       #   * {Types::ApiKey#enabled #enabled} => Boolean
-      #   * {Types::ApiKey#stage_keys #stageKeys} => Array&lt;String&gt;
       #   * {Types::ApiKey#created_date #createdDate} => Time
       #   * {Types::ApiKey#last_updated_date #lastUpdatedDate} => Time
+      #   * {Types::ApiKey#stage_keys #stageKeys} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_api_key({
       #     name: "String",
       #     description: "String",
       #     enabled: false,
+      #     generate_distinct_id: false,
+      #     value: "String",
       #     stage_keys: [
       #       {
       #         rest_api_id: "String",
@@ -73,13 +90,14 @@ module Aws
       #
       # @example Response structure
       #   resp.id #=> String
+      #   resp.value #=> String
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.enabled #=> Boolean
-      #   resp.stage_keys #=> Array
-      #   resp.stage_keys[0] #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
+      #   resp.stage_keys #=> Array
+      #   resp.stage_keys[0] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def create_api_key(params = {}, options = {})
@@ -88,16 +106,26 @@ module Aws
       end
 
       # Adds a new Authorizer resource to an existing RestApi resource.
+      #
+      # <div class="seeAlso">
+      # [AWS CLI][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/create-authorizer.html
       # @option params [required, String] :rest_api_id
       #   The RestApi identifier under which the Authorizer will be created.
       # @option params [required, String] :name
       #   \[Required\] The name of the authorizer.
       # @option params [required, String] :type
       #   \[Required\] The type of the authorizer.
+      # @option params [Array<String>] :provider_arns
+      #   A list of the Cognito Your User Pool authorizer\'s provider ARNs.
       # @option params [String] :auth_type
       #   Optional customer-defined field, used in Swagger imports/exports. Has
       #   no functional impact.
-      # @option params [required, String] :authorizer_uri
+      # @option params [String] :authorizer_uri
       #   \[Required\] Specifies the authorizer\'s Uniform Resource Identifier
       #   (URI).
       # @option params [String] :authorizer_credentials
@@ -113,6 +141,7 @@ module Aws
       #   * {Types::Authorizer#id #id} => String
       #   * {Types::Authorizer#name #name} => String
       #   * {Types::Authorizer#type #type} => String
+      #   * {Types::Authorizer#provider_arns #providerARNs} => Array&lt;String&gt;
       #   * {Types::Authorizer#auth_type #authType} => String
       #   * {Types::Authorizer#authorizer_uri #authorizerUri} => String
       #   * {Types::Authorizer#authorizer_credentials #authorizerCredentials} => String
@@ -124,9 +153,10 @@ module Aws
       #   resp = client.create_authorizer({
       #     rest_api_id: "String", # required
       #     name: "String", # required
-      #     type: "TOKEN", # required, accepts TOKEN
+      #     type: "TOKEN", # required, accepts TOKEN, COGNITO_USER_POOLS
+      #     provider_arns: ["ProviderARN"],
       #     auth_type: "String",
-      #     authorizer_uri: "String", # required
+      #     authorizer_uri: "String",
       #     authorizer_credentials: "String",
       #     identity_source: "String", # required
       #     identity_validation_expression: "String",
@@ -136,7 +166,9 @@ module Aws
       # @example Response structure
       #   resp.id #=> String
       #   resp.name #=> String
-      #   resp.type #=> String, one of "TOKEN"
+      #   resp.type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+      #   resp.provider_arns #=> Array
+      #   resp.provider_arns[0] #=> String
       #   resp.auth_type #=> String
       #   resp.authorizer_uri #=> String
       #   resp.authorizer_credentials #=> String
@@ -208,7 +240,7 @@ module Aws
       # @option params [Hash<String,String>] :variables
       #   A map that defines the stage variables for the Stage resource that is
       #   associated with the new deployment. Variable names can have
-      #   alphanumeric characters, and the values must match
+      #   alphanumeric and underscore characters, and the values must match
       #   `[A-Za-z0-9-._~:/?#&=,]+`.
       # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -410,7 +442,7 @@ module Aws
       # @option params [String] :description
       #   The description of the RestApi.
       # @option params [String] :clone_from
-      #   The Id of the RestApi that you want to clone from.
+      #   The ID of the RestApi that you want to clone from.
       # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RestApi#id #id} => String
@@ -457,8 +489,8 @@ module Aws
       #   The stage\'s cache cluster size.
       # @option params [Hash<String,String>] :variables
       #   A map that defines the stage variables for the new Stage resource.
-      #   Variable names can have alphanumeric characters, and the values must
-      #   match `[A-Za-z0-9-._~:/?#&=,]+`.
+      #   Variable names can have alphanumeric and underscore characters, and
+      #   the values must match `[A-Za-z0-9-._~:/?#&=,]+`.
       # @return [Types::Stage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Stage#deployment_id #deploymentId} => String
@@ -516,6 +548,103 @@ module Aws
         req.send_request(options)
       end
 
+      # Creates a usage plan with the throttle and quota limits, as well as
+      # the associated API stages, specified in the payload.
+      # @option params [required, String] :name
+      #   The name of the usage plan.
+      # @option params [String] :description
+      #   The description of the usage plan.
+      # @option params [Array<Types::ApiStage>] :api_stages
+      #   The associated API stages of the usage plan.
+      # @option params [Types::ThrottleSettings] :throttle
+      #   The throttling limits of the usage plan.
+      # @option params [Types::QuotaSettings] :quota
+      #   The quota of the usage plan.
+      # @return [Types::UsagePlan] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UsagePlan#id #id} => String
+      #   * {Types::UsagePlan#name #name} => String
+      #   * {Types::UsagePlan#description #description} => String
+      #   * {Types::UsagePlan#api_stages #apiStages} => Array&lt;Types::ApiStage&gt;
+      #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
+      #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_usage_plan({
+      #     name: "String", # required
+      #     description: "String",
+      #     api_stages: [
+      #       {
+      #         api_id: "String",
+      #         stage: "String",
+      #       },
+      #     ],
+      #     throttle: {
+      #       burst_limit: 1,
+      #       rate_limit: 1.0,
+      #     },
+      #     quota: {
+      #       limit: 1,
+      #       offset: 1,
+      #       period: "DAY", # accepts DAY, WEEK, MONTH
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.name #=> String
+      #   resp.description #=> String
+      #   resp.api_stages #=> Array
+      #   resp.api_stages[0].api_id #=> String
+      #   resp.api_stages[0].stage #=> String
+      #   resp.throttle.burst_limit #=> Integer
+      #   resp.throttle.rate_limit #=> Float
+      #   resp.quota.limit #=> Integer
+      #   resp.quota.offset #=> Integer
+      #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_usage_plan(params = {}, options = {})
+        req = build_request(:create_usage_plan, params)
+        req.send_request(options)
+      end
+
+      # Creates a usage plan key for adding an existing API key to a usage
+      # plan.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the UsagePlan resource representing the usage plan
+      #   containing the to-be-created UsagePlanKey resource representing a plan
+      #   customer.
+      # @option params [required, String] :key_id
+      #   The identifier of a UsagePlanKey resource for a plan customer.
+      # @option params [required, String] :key_type
+      #   The type of a UsagePlanKey resource for a plan customer.
+      # @return [Types::UsagePlanKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UsagePlanKey#id #id} => String
+      #   * {Types::UsagePlanKey#type #type} => String
+      #   * {Types::UsagePlanKey#value #value} => String
+      #   * {Types::UsagePlanKey#name #name} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_usage_plan_key({
+      #     usage_plan_id: "String", # required
+      #     key_id: "String", # required
+      #     key_type: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.type #=> String
+      #   resp.value #=> String
+      #   resp.name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_usage_plan_key(params = {}, options = {})
+        req = build_request(:create_usage_plan_key, params)
+        req.send_request(options)
+      end
+
       # Deletes the ApiKey resource.
       # @option params [required, String] :api_key
       #   The identifier of the ApiKey resource to be deleted.
@@ -533,6 +662,14 @@ module Aws
       end
 
       # Deletes an existing Authorizer resource.
+      #
+      # <div class="seeAlso">
+      # [AWS CLI][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/delete-authorizer.html
       # @option params [required, String] :rest_api_id
       #   The RestApi identifier for the Authorizer resource.
       # @option params [required, String] :authorizer_id
@@ -677,7 +814,7 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the Method resource.
       # @option params [required, String] :http_method
-      #   The HTTP verb that identifies the Method resource.
+      #   The HTTP verb of the Method resource.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -699,7 +836,7 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the MethodResponse resource.
       # @option params [required, String] :http_method
-      #   The HTTP verb identifier for the parent Method resource.
+      #   The HTTP verb of the Method resource.
       # @option params [required, String] :status_code
       #   The status code identifier for the MethodResponse resource.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -792,6 +929,44 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes a usage plan of a given plan Id.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the to-be-deleted usage plan.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_usage_plan({
+      #     usage_plan_id: "String", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_usage_plan(params = {}, options = {})
+        req = build_request(:delete_usage_plan, params)
+        req.send_request(options)
+      end
+
+      # Deletes a usage plan key and remove the underlying API key from the
+      # associated usage plan.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the UsagePlan resource representing the usage plan
+      #   containing the to-be-deleted UsagePlanKey resource representing a plan
+      #   customer.
+      # @option params [required, String] :key_id
+      #   The Id of the UsagePlanKey resource to be deleted.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_usage_plan_key({
+      #     usage_plan_id: "String", # required
+      #     key_id: "String", # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def delete_usage_plan_key(params = {}, options = {})
+        req = build_request(:delete_usage_plan_key, params)
+        req.send_request(options)
+      end
+
       # Flushes all authorizer cache entries on a stage.
       # @option params [required, String] :rest_api_id
       #   The API identifier of the stage to flush.
@@ -864,6 +1039,8 @@ module Aws
       #
       #   * {Types::Account#cloudwatch_role_arn #cloudwatchRoleArn} => String
       #   * {Types::Account#throttle_settings #throttleSettings} => Types::ThrottleSettings
+      #   * {Types::Account#features #features} => Array&lt;String&gt;
+      #   * {Types::Account#api_key_version #apiKeyVersion} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_account()
@@ -872,6 +1049,9 @@ module Aws
       #   resp.cloudwatch_role_arn #=> String
       #   resp.throttle_settings.burst_limit #=> Integer
       #   resp.throttle_settings.rate_limit #=> Float
+      #   resp.features #=> Array
+      #   resp.features[0] #=> String
+      #   resp.api_key_version #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def get_account(params = {}, options = {})
@@ -882,30 +1062,36 @@ module Aws
       # Gets information about the current ApiKey resource.
       # @option params [required, String] :api_key
       #   The identifier of the ApiKey resource.
+      # @option params [Boolean] :include_value
+      #   A boolean flag to specify whether (`true`) or not (`false`) the result
+      #   contains the key value.
       # @return [Types::ApiKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ApiKey#id #id} => String
+      #   * {Types::ApiKey#value #value} => String
       #   * {Types::ApiKey#name #name} => String
       #   * {Types::ApiKey#description #description} => String
       #   * {Types::ApiKey#enabled #enabled} => Boolean
-      #   * {Types::ApiKey#stage_keys #stageKeys} => Array&lt;String&gt;
       #   * {Types::ApiKey#created_date #createdDate} => Time
       #   * {Types::ApiKey#last_updated_date #lastUpdatedDate} => Time
+      #   * {Types::ApiKey#stage_keys #stageKeys} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_api_key({
       #     api_key: "String", # required
+      #     include_value: false,
       #   })
       #
       # @example Response structure
       #   resp.id #=> String
+      #   resp.value #=> String
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.enabled #=> Boolean
-      #   resp.stage_keys #=> Array
-      #   resp.stage_keys[0] #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
+      #   resp.stage_keys #=> Array
+      #   resp.stage_keys[0] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def get_api_key(params = {}, options = {})
@@ -918,8 +1104,14 @@ module Aws
       #   The position of the current ApiKeys resource to get information about.
       # @option params [Integer] :limit
       #   The maximum number of ApiKeys to get information about.
+      # @option params [String] :name_query
+      #   The name of queried API keys.
+      # @option params [Boolean] :include_values
+      #   A boolean flag to specify whether (`true`) or not (`false`) the result
+      #   contains key values.
       # @return [Types::ApiKeys] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
+      #   * {Types::ApiKeys#warnings #warnings} => Array&lt;String&gt;
       #   * {Types::ApiKeys#position #position} => String
       #   * {Types::ApiKeys#items #items} => Array&lt;Types::ApiKey&gt;
       #
@@ -927,19 +1119,24 @@ module Aws
       #   resp = client.get_api_keys({
       #     position: "String",
       #     limit: 1,
+      #     name_query: "String",
+      #     include_values: false,
       #   })
       #
       # @example Response structure
+      #   resp.warnings #=> Array
+      #   resp.warnings[0] #=> String
       #   resp.position #=> String
       #   resp.items #=> Array
       #   resp.items[0].id #=> String
+      #   resp.items[0].value #=> String
       #   resp.items[0].name #=> String
       #   resp.items[0].description #=> String
       #   resp.items[0].enabled #=> Boolean
-      #   resp.items[0].stage_keys #=> Array
-      #   resp.items[0].stage_keys[0] #=> String
       #   resp.items[0].created_date #=> Time
       #   resp.items[0].last_updated_date #=> Time
+      #   resp.items[0].stage_keys #=> Array
+      #   resp.items[0].stage_keys[0] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def get_api_keys(params = {}, options = {})
@@ -948,6 +1145,14 @@ module Aws
       end
 
       # Describe an existing Authorizer resource.
+      #
+      # <div class="seeAlso">
+      # [AWS CLI][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizer.html
       # @option params [required, String] :rest_api_id
       #   The RestApi identifier for the Authorizer resource.
       # @option params [required, String] :authorizer_id
@@ -957,6 +1162,7 @@ module Aws
       #   * {Types::Authorizer#id #id} => String
       #   * {Types::Authorizer#name #name} => String
       #   * {Types::Authorizer#type #type} => String
+      #   * {Types::Authorizer#provider_arns #providerARNs} => Array&lt;String&gt;
       #   * {Types::Authorizer#auth_type #authType} => String
       #   * {Types::Authorizer#authorizer_uri #authorizerUri} => String
       #   * {Types::Authorizer#authorizer_credentials #authorizerCredentials} => String
@@ -973,7 +1179,9 @@ module Aws
       # @example Response structure
       #   resp.id #=> String
       #   resp.name #=> String
-      #   resp.type #=> String, one of "TOKEN"
+      #   resp.type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+      #   resp.provider_arns #=> Array
+      #   resp.provider_arns[0] #=> String
       #   resp.auth_type #=> String
       #   resp.authorizer_uri #=> String
       #   resp.authorizer_credentials #=> String
@@ -988,11 +1196,19 @@ module Aws
       end
 
       # Describe an existing Authorizers resource.
+      #
+      # <div class="seeAlso">
+      # [AWS CLI][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-authorizers.html
       # @option params [required, String] :rest_api_id
       #   The RestApi identifier for the Authorizers resource.
       # @option params [String] :position
       #   If not all Authorizer resources in the response were present, the
-      #   position will specificy where to start the next page of results.
+      #   position will specify where to start the next page of results.
       # @option params [Integer] :limit
       #   Limit the number of Authorizer resources in the response.
       # @return [Types::Authorizers] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1012,7 +1228,9 @@ module Aws
       #   resp.items #=> Array
       #   resp.items[0].id #=> String
       #   resp.items[0].name #=> String
-      #   resp.items[0].type #=> String, one of "TOKEN"
+      #   resp.items[0].type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+      #   resp.items[0].provider_arns #=> Array
+      #   resp.items[0].provider_arns[0] #=> String
       #   resp.items[0].auth_type #=> String
       #   resp.items[0].authorizer_uri #=> String
       #   resp.items[0].authorizer_credentials #=> String
@@ -1298,16 +1516,17 @@ module Aws
       #   The type of export. Currently only \'swagger\' is supported.
       # @option params [Hash<String,String>] :parameters
       #   A key-value map of query string parameters that specify properties of
-      #   the export, depending on the requested exportType. For exportType
-      #   \'swagger\', any combination of the following parameters are
-      #   supported: \'integrations\' will export
-      #   x-amazon-apigateway-integration extensions \'authorizers\' will export
-      #   x-amazon-apigateway-authorizer extensions \'postman\' will export with
-      #   Postman extensions, allowing for import to the Postman tool
+      #   the export, depending on the requested `exportType`. For `exportType`
+      #   `swagger`, any combination of the following parameters are supported:
+      #   `integrations` will export the API with
+      #   x-amazon-apigateway-integration extensions. `authorizers` will export
+      #   the API with x-amazon-apigateway-authorizer extensions. `postman` will
+      #   export the API with Postman extensions, allowing for import to the
+      #   Postman tool
       # @option params [String] :accepts
-      #   The content-type of the export, for example \'application/json\'.
-      #   Currently \'application/json\' and \'application/yaml\' are supported
-      #   for exportType \'swagger\'. Should be specifed in the \'Accept\'
+      #   The content-type of the export, for example `application/json`.
+      #   Currently `application/json` and `application/yaml` are supported for
+      #   `exportType` of `swagger`. This should be specified in the `Accept`
       #   header for direct API requests.
       # @return [Types::ExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1435,7 +1654,7 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the Method resource.
       # @option params [required, String] :http_method
-      #   Specifies the put method request\'s HTTP method type.
+      #   Specifies the method request\'s HTTP method type.
       # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Method#http_method #httpMethod} => String
@@ -1501,9 +1720,9 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the MethodResponse resource.
       # @option params [required, String] :http_method
-      #   The HTTP verb identifier for the parent Method resource.
+      #   The HTTP verb of the Method resource.
       # @option params [required, String] :status_code
-      #   The status code identifier for the MethodResponse resource.
+      #   The status code for the MethodResponse resource.
       # @return [Types::MethodResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::MethodResponse#status_code #statusCode} => String
@@ -1537,8 +1756,9 @@ module Aws
       # @option params [required, String] :model_name
       #   The name of the model as an identifier.
       # @option params [Boolean] :flatten
-      #   Resolves all external model references and returns a flattened model
-      #   schema.
+      #   A query parameter of a Boolean value to resolve (`true`) all external
+      #   model references and returns a flattened model schema or not (`false`)
+      #   The default is `false`.
       # @return [Types::Model] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Model#id #id} => String
@@ -1835,14 +2055,14 @@ module Aws
       # @option params [required, String] :stage_name
       #   The name of the Stage that the SDK will use.
       # @option params [required, String] :sdk_type
-      #   The language for the generated SDK. Currently javascript, android, and
-      #   objectivec (for iOS) are supported.
+      #   The language for the generated SDK. Currently `javascript`, `android`,
+      #   and `objectivec` (for iOS) are supported.
       # @option params [Hash<String,String>] :parameters
       #   A key-value map of query string parameters that specify properties of
-      #   the SDK, depending on the requested sdkType. For sdkType
-      #   \'objectivec\', a parameter named \"classPrefix\" is required. For
-      #   sdkType \'android\', parameters named \"groupId\", \"artifactId\",
-      #   \"artifactVersion\", and \"invokerPackage\" are required.
+      #   the SDK, depending on the requested `sdkType`. For `sdkType` of
+      #   `objectivec`, a parameter named `classPrefix` is required. For
+      #   `sdkType` of `android`, parameters named `groupId`, `artifactId`,
+      #   `artifactVersion`, and `invokerPackage` are required.
       # @return [Types::SdkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SdkResponse#content_type #contentType} => String
@@ -1972,6 +2192,243 @@ module Aws
         req.send_request(options)
       end
 
+      # Gets the usage data of a usage plan in a specified time interval.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the usage plan associated with the usage data.
+      # @option params [String] :key_id
+      #   The Id of the API key associated with the resultant usage data.
+      # @option params [required, String] :start_date
+      #   The starting date (e.g., 2016-01-01) of the usage data.
+      # @option params [required, String] :end_date
+      #   The ending date (e.g., 2016-12-31) of the usage data.
+      # @option params [String] :position
+      #   Position
+      # @option params [Integer] :limit
+      #   The maximum number of results to be returned.
+      # @return [Types::Usage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Usage#usage_plan_id #usagePlanId} => String
+      #   * {Types::Usage#start_date #startDate} => String
+      #   * {Types::Usage#end_date #endDate} => String
+      #   * {Types::Usage#position #position} => String
+      #   * {Types::Usage#items #items} => Hash&lt;String,Array&lt;Array&lt;Integer&gt;&gt;&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_usage({
+      #     usage_plan_id: "String", # required
+      #     key_id: "String",
+      #     start_date: "String", # required
+      #     end_date: "String", # required
+      #     position: "String",
+      #     limit: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.usage_plan_id #=> String
+      #   resp.start_date #=> String
+      #   resp.end_date #=> String
+      #   resp.position #=> String
+      #   resp.items #=> Hash
+      #   resp.items["String"] #=> Array
+      #   resp.items["String"][0] #=> Array
+      #   resp.items["String"][0][0] #=> Integer
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_usage(params = {}, options = {})
+        req = build_request(:get_usage, params)
+        req.send_request(options)
+      end
+
+      # Gets a usage plan of a given plan identifier.
+      # @option params [required, String] :usage_plan_id
+      #   The identifier of the UsagePlan resource to be retrieved.
+      # @return [Types::UsagePlan] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UsagePlan#id #id} => String
+      #   * {Types::UsagePlan#name #name} => String
+      #   * {Types::UsagePlan#description #description} => String
+      #   * {Types::UsagePlan#api_stages #apiStages} => Array&lt;Types::ApiStage&gt;
+      #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
+      #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_usage_plan({
+      #     usage_plan_id: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.name #=> String
+      #   resp.description #=> String
+      #   resp.api_stages #=> Array
+      #   resp.api_stages[0].api_id #=> String
+      #   resp.api_stages[0].stage #=> String
+      #   resp.throttle.burst_limit #=> Integer
+      #   resp.throttle.rate_limit #=> Float
+      #   resp.quota.limit #=> Integer
+      #   resp.quota.offset #=> Integer
+      #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_usage_plan(params = {}, options = {})
+        req = build_request(:get_usage_plan, params)
+        req.send_request(options)
+      end
+
+      # Gets a usage plan key of a given key identifier.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the UsagePlan resource representing the usage plan
+      #   containing the to-be-retrieved UsagePlanKey resource representing a
+      #   plan customer.
+      # @option params [required, String] :key_id
+      #   The key Id of the to-be-retrieved UsagePlanKey resource representing a
+      #   plan customer.
+      # @return [Types::UsagePlanKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UsagePlanKey#id #id} => String
+      #   * {Types::UsagePlanKey#type #type} => String
+      #   * {Types::UsagePlanKey#value #value} => String
+      #   * {Types::UsagePlanKey#name #name} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_usage_plan_key({
+      #     usage_plan_id: "String", # required
+      #     key_id: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.type #=> String
+      #   resp.value #=> String
+      #   resp.name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_usage_plan_key(params = {}, options = {})
+        req = build_request(:get_usage_plan_key, params)
+        req.send_request(options)
+      end
+
+      # Gets all the usage plan keys representing the API keys added to a
+      # specified usage plan.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the UsagePlan resource representing the usage plan
+      #   containing the to-be-retrieved UsagePlanKey resource representing a
+      #   plan customer.
+      # @option params [String] :position
+      #   A query parameter specifying the zero-based index specifying the
+      #   position of a usage plan key.
+      # @option params [Integer] :limit
+      #   A query parameter specifying the maximum number usage plan keys
+      #   returned by the GET request.
+      # @option params [String] :name_query
+      #   A query parameter specifying the name of the to-be-returned usage plan
+      #   keys.
+      # @return [Types::UsagePlanKeys] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UsagePlanKeys#position #position} => String
+      #   * {Types::UsagePlanKeys#items #items} => Array&lt;Types::UsagePlanKey&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_usage_plan_keys({
+      #     usage_plan_id: "String", # required
+      #     position: "String",
+      #     limit: 1,
+      #     name_query: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.position #=> String
+      #   resp.items #=> Array
+      #   resp.items[0].id #=> String
+      #   resp.items[0].type #=> String
+      #   resp.items[0].value #=> String
+      #   resp.items[0].name #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_usage_plan_keys(params = {}, options = {})
+        req = build_request(:get_usage_plan_keys, params)
+        req.send_request(options)
+      end
+
+      # Gets all the usage plans of the caller\'s account.
+      # @option params [String] :position
+      #   The zero-based array index specifying the position of the
+      #   to-be-retrieved UsagePlan resource.
+      # @option params [String] :key_id
+      #   The identifier of the API key associated with the usage plans.
+      # @option params [Integer] :limit
+      #   The number of UsagePlan resources to be returned as the result.
+      # @return [Types::UsagePlans] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UsagePlans#position #position} => String
+      #   * {Types::UsagePlans#items #items} => Array&lt;Types::UsagePlan&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_usage_plans({
+      #     position: "String",
+      #     key_id: "String",
+      #     limit: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.position #=> String
+      #   resp.items #=> Array
+      #   resp.items[0].id #=> String
+      #   resp.items[0].name #=> String
+      #   resp.items[0].description #=> String
+      #   resp.items[0].api_stages #=> Array
+      #   resp.items[0].api_stages[0].api_id #=> String
+      #   resp.items[0].api_stages[0].stage #=> String
+      #   resp.items[0].throttle.burst_limit #=> Integer
+      #   resp.items[0].throttle.rate_limit #=> Float
+      #   resp.items[0].quota.limit #=> Integer
+      #   resp.items[0].quota.offset #=> Integer
+      #   resp.items[0].quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_usage_plans(params = {}, options = {})
+        req = build_request(:get_usage_plans, params)
+        req.send_request(options)
+      end
+
+      # Import API keys from an external source, such as a CSV-formatted file.
+      # @option params [required, String, IO] :body
+      #   The payload of the POST request to import API keys. For the payload
+      #   format, see [API Key File Format][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html
+      # @option params [required, String] :format
+      #   A query parameter to specify the input format to imported API keys.
+      #   Currently, only the `csv` format is supported.
+      # @option params [Boolean] :fail_on_warnings
+      #   A query parameter to indicate whether to rollback ApiKey importation
+      #   (`true`) or not (`false`) when error is encountered.
+      # @return [Types::ApiKeyIds] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ApiKeyIds#ids #ids} => Array&lt;String&gt;
+      #   * {Types::ApiKeyIds#warnings #warnings} => Array&lt;String&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.import_api_keys({
+      #     body: "data", # required
+      #     format: "csv", # required, accepts csv
+      #     fail_on_warnings: false,
+      #   })
+      #
+      # @example Response structure
+      #   resp.ids #=> Array
+      #   resp.ids[0] #=> String
+      #   resp.warnings #=> Array
+      #   resp.warnings[0] #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def import_api_keys(params = {}, options = {})
+        req = build_request(:import_api_keys, params)
+        req.send_request(options)
+      end
+
       # A feature of the Amazon API Gateway control service for creating a new
       # API from an external API definition file.
       # @option params [Boolean] :fail_on_warnings
@@ -2036,15 +2493,15 @@ module Aws
       # @option params [String] :credentials
       #   Specifies whether credentials are required for a put integration.
       # @option params [Hash<String,String>] :request_parameters
-      #   Represents request parameters that are sent with the backend request.
-      #   Request parameters are represented as a key/value map, with a
-      #   destination as the key and a source as the value. A source must match
-      #   an existing method request parameter, or a static value. Static values
-      #   must be enclosed with single quotes, and be pre-encoded based on their
-      #   destination in the request. The destination must match the pattern
-      #   `integration.request.\{location\}.\{name\}`, where `location` is
-      #   either querystring, path, or header. `name` must be a valid, unique
-      #   parameter name.
+      #   A key-value map specifying request parameters that are passed from the
+      #   method request to the back end. The key is an integration request
+      #   parameter name and the associated value is a method request parameter
+      #   value or static value that must be enclosed within single quotes and
+      #   pre-encoded as required by the back end. The method request parameter
+      #   value must match the pattern of
+      #   `method.request.\{location\}.\{name\}`, where `location` is
+      #   `querystring`, `path`, or `header` and `name` must be a valid and
+      #   unique method request parameter name.
       # @option params [Hash<String,String>] :request_templates
       #   Represents a map of Velocity templates that are applied on the request
       #   payload based on the value of the Content-Type header sent by the
@@ -2052,22 +2509,21 @@ module Aws
       #   template (as a String) is the value.
       # @option params [String] :passthrough_behavior
       #   Specifies the pass-through behavior for incoming requests based on the
-      #   Content-Type header in the request, and the available requestTemplates
-      #   defined on the Integration. There are three valid values:
-      #   `WHEN_NO_MATCH`, `WHEN_NO_TEMPLATES`, and `NEVER`.
+      #   Content-Type header in the request, and the available mapping
+      #   templates specified as the `requestTemplates` property on the
+      #   Integration resource. There are three valid values: `WHEN_NO_MATCH`,
+      #   `WHEN_NO_TEMPLATES`, and `NEVER`.
       #
+      #   * `WHEN_NO_MATCH` passes the request body for unmapped content types
+      #     through to the integration back end without transformation.
       #
+      #   * `NEVER` rejects unmapped content types with an HTTP 415
+      #     \'Unsupported Media Type\' response.
       #
-      #   `WHEN_NO_MATCH` passes the request body for unmapped content types
-      #   through to the Integration backend without transformation.
-      #
-      #   `NEVER` rejects unmapped content types with an HTTP 415 \'Unsupported
-      #   Media Type\' response.
-      #
-      #   `WHEN_NO_TEMPLATES` will allow pass-through when the Integration has
-      #   NO content types mapped to templates. However if there is at least one
-      #   content type defined, unmapped content types will be rejected with the
-      #   same 415 response.
+      #   * `WHEN_NO_TEMPLATES` allows pass-through when the integration has NO
+      #     content types mapped to templates. However if there is at least one
+      #     content type defined, unmapped content types will be rejected with
+      #     the same 415 response.
       # @option params [String] :cache_namespace
       #   Specifies a put integration input\'s cache namespace.
       # @option params [Array<String>] :cache_key_parameters
@@ -2145,14 +2601,17 @@ module Aws
       # @option params [String] :selection_pattern
       #   Specifies the selection pattern of a put integration response.
       # @option params [Hash<String,String>] :response_parameters
-      #   Represents response parameters that can be read from the backend
-      #   response. Response parameters are represented as a key/value map, with
-      #   a destination as the key and a source as the value. A destination must
-      #   match an existing response parameter in the Method. The source can be
-      #   a header from the backend response, or a static value. Static values
-      #   are specified using enclosing single quotes, and backend response
-      #   headers can be read using the pattern
-      #   `integration.response.header.\{name\}`.
+      #   A key-value map specifying response parameters that are passed to the
+      #   method response from the back end. The key is a method response header
+      #   parameter name and the mapped value is an integration response header
+      #   value, a static value enclosed within a pair of single quotes, or a
+      #   JSON expression from the integration response body. The mapping key
+      #   must match the pattern of `method.response.header.\{name\}`, where
+      #   `name` is a valid and unique header name. The mapped non-static value
+      #   must match the pattern of `integration.response.header.\{name\}` or
+      #   `integration.response.body.\{JSON-expression\}`, where `name` must be
+      #   a valid and unique response header name and `JSON-expression` a valid
+      #   JSON expression without the `$` prefix.
       # @option params [Hash<String,String>] :response_templates
       #   Specifies a put integration response\'s templates.
       # @return [Types::IntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2197,7 +2656,7 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the new Method resource.
       # @option params [required, String] :http_method
-      #   Specifies the put method request\'s HTTP method type.
+      #   Specifies the method request\'s HTTP method type.
       # @option params [required, String] :authorization_type
       #   Specifies the type of authorization used for the method.
       # @option params [String] :authorizer_id
@@ -2206,15 +2665,16 @@ module Aws
       # @option params [Boolean] :api_key_required
       #   Specifies whether the method required a valid ApiKey.
       # @option params [Hash<String,Boolean>] :request_parameters
-      #   Represents requests parameters that are sent with the backend request.
-      #   Request parameters are represented as a key/value map, with a
-      #   destination as the key and a source as the value. A source must match
-      #   an existing method request parameter, or a static value. Static values
-      #   must be enclosed with single quotes, and be pre-encoded based on their
-      #   destination in the request. The destination must match the pattern
-      #   `integration.request.\{location\}.\{name\}`, where `location` is
-      #   either querystring, path, or header. `name` must be a valid, unique
-      #   parameter name.
+      #   A key-value map defining required or optional method request
+      #   parameters that can be accepted by Amazon API Gateway. A key defines a
+      #   method request parameter name matching the pattern of
+      #   `method.request.\{location\}.\{name\}`, where `location` is
+      #   `querystring`, `path`, or `header` and `name` is a valid and unique
+      #   parameter name. The value associated with the key is a Boolean flag
+      #   indicating whether the parameter is required (`true`) or optional
+      #   (`false`). The method request parameter names defined here are
+      #   available in Integration to be mapped to integration request
+      #   parameters or body-mapping templates.
       # @option params [Hash<String,String>] :request_models
       #   Specifies the Model resources used for the request\'s content type.
       #   Request models are represented as a key/value map, with a content type
@@ -2293,18 +2753,24 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the Method resource.
       # @option params [required, String] :http_method
-      #   The HTTP verb that identifies the Method resource.
+      #   The HTTP verb of the Method resource.
       # @option params [required, String] :status_code
       #   The method response\'s status code.
       # @option params [Hash<String,Boolean>] :response_parameters
-      #   Represents response parameters that can be sent back to the caller by
-      #   Amazon API Gateway. Response parameters are represented as a key/value
-      #   map, with a destination as the key and a Boolean flag as the value.
-      #   The Boolean flag is used to specify whether the parameter is required.
-      #   A destination must match the pattern
-      #   `method.response.header.\{name\}`, where `name` is a valid, unique
-      #   header name. Destinations specified here are available to the
-      #   integration for mapping from integration response parameters.
+      #   A key-value map specifying required or optional response parameters
+      #   that Amazon API Gateway can send back to the caller. A key defines a
+      #   method response header name and the associated value is a Boolean flag
+      #   indicating whether the method response parameter is required or not.
+      #   The method response header names must match the pattern of
+      #   `method.response.header.\{name\}`, where `name` is a valid and unique
+      #   header name. The response parameter names defined here are available
+      #   in the integration response to be mapped from an integration response
+      #   header expressed in `integration.response.header.\{name\}`, a static
+      #   value enclosed within a pair of single quotes (e.g.,
+      #   `'application/json'`), or a JSON expression from the back-end response
+      #   payload in the form of
+      #   `integration.response.body.\{JSON-expression\}`, where
+      #   `JSON-expression` is a valid JSON expression without the `$` prefix.)
       # @option params [Hash<String,String>] :response_models
       #   Specifies the Model resources used for the response\'s content type.
       #   Response models are represented as a key/value map, with a content
@@ -2396,6 +2862,14 @@ module Aws
 
       # Simulate the execution of an Authorizer in your RestApi with headers,
       # parameters, and an incoming request body.
+      #
+      # <div class="seeAlso">
+      # [Enable custom authorizers][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
       # @option params [required, String] :rest_api_id
       #   Specifies a test invoke authorizer request\'s RestApi identifier.
       # @option params [required, String] :authorizer_id
@@ -2424,6 +2898,7 @@ module Aws
       #   * {Types::TestInvokeAuthorizerResponse#principal_id #principalId} => String
       #   * {Types::TestInvokeAuthorizerResponse#policy #policy} => String
       #   * {Types::TestInvokeAuthorizerResponse#authorization #authorization} => Hash&lt;String,Array&lt;String&gt;&gt;
+      #   * {Types::TestInvokeAuthorizerResponse#claims #claims} => Hash&lt;String,String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.test_invoke_authorizer({
@@ -2451,6 +2926,8 @@ module Aws
       #   resp.authorization #=> Hash
       #   resp.authorization["String"] #=> Array
       #   resp.authorization["String"][0] #=> String
+      #   resp.claims #=> Hash
+      #   resp.claims["String"] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def test_invoke_authorizer(params = {}, options = {})
@@ -2476,8 +2953,8 @@ module Aws
       #   A key-value map of headers to simulate an incoming invocation request.
       # @option params [String] :client_certificate_id
       #   A ClientCertificate identifier to use in the test invocation. API
-      #   Gateway will use use the certificate when making the HTTPS request to
-      #   the defined backend endpoint.
+      #   Gateway will use the certificate when making the HTTPS request to the
+      #   defined back-end endpoint.
       # @option params [Hash<String,String>] :stage_variables
       #   A key-value map of stage variables to simulate an invocation on a
       #   deployed Stage.
@@ -2521,12 +2998,14 @@ module Aws
 
       # Changes information about the current Account resource.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Account] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Account#cloudwatch_role_arn #cloudwatchRoleArn} => String
       #   * {Types::Account#throttle_settings #throttleSettings} => Types::ThrottleSettings
+      #   * {Types::Account#features #features} => Array&lt;String&gt;
+      #   * {Types::Account#api_key_version #apiKeyVersion} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_account({
@@ -2544,6 +3023,9 @@ module Aws
       #   resp.cloudwatch_role_arn #=> String
       #   resp.throttle_settings.burst_limit #=> Integer
       #   resp.throttle_settings.rate_limit #=> Float
+      #   resp.features #=> Array
+      #   resp.features[0] #=> String
+      #   resp.api_key_version #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def update_account(params = {}, options = {})
@@ -2555,17 +3037,18 @@ module Aws
       # @option params [required, String] :api_key
       #   The identifier of the ApiKey resource to be updated.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::ApiKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ApiKey#id #id} => String
+      #   * {Types::ApiKey#value #value} => String
       #   * {Types::ApiKey#name #name} => String
       #   * {Types::ApiKey#description #description} => String
       #   * {Types::ApiKey#enabled #enabled} => Boolean
-      #   * {Types::ApiKey#stage_keys #stageKeys} => Array&lt;String&gt;
       #   * {Types::ApiKey#created_date #createdDate} => Time
       #   * {Types::ApiKey#last_updated_date #lastUpdatedDate} => Time
+      #   * {Types::ApiKey#stage_keys #stageKeys} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_api_key({
@@ -2582,13 +3065,14 @@ module Aws
       #
       # @example Response structure
       #   resp.id #=> String
+      #   resp.value #=> String
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.enabled #=> Boolean
-      #   resp.stage_keys #=> Array
-      #   resp.stage_keys[0] #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
+      #   resp.stage_keys #=> Array
+      #   resp.stage_keys[0] #=> String
       # @param [Hash] params ({})
       # @param [Hash] options ({})
       def update_api_key(params = {}, options = {})
@@ -2597,18 +3081,27 @@ module Aws
       end
 
       # Updates an existing Authorizer resource.
+      #
+      # <div class="seeAlso">
+      # [AWS CLI][1]
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/update-authorizer.html
       # @option params [required, String] :rest_api_id
       #   The RestApi identifier for the Authorizer resource.
       # @option params [required, String] :authorizer_id
       #   The identifier of the Authorizer resource.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Authorizer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Authorizer#id #id} => String
       #   * {Types::Authorizer#name #name} => String
       #   * {Types::Authorizer#type #type} => String
+      #   * {Types::Authorizer#provider_arns #providerARNs} => Array&lt;String&gt;
       #   * {Types::Authorizer#auth_type #authType} => String
       #   * {Types::Authorizer#authorizer_uri #authorizerUri} => String
       #   * {Types::Authorizer#authorizer_credentials #authorizerCredentials} => String
@@ -2633,7 +3126,9 @@ module Aws
       # @example Response structure
       #   resp.id #=> String
       #   resp.name #=> String
-      #   resp.type #=> String, one of "TOKEN"
+      #   resp.type #=> String, one of "TOKEN", "COGNITO_USER_POOLS"
+      #   resp.provider_arns #=> Array
+      #   resp.provider_arns[0] #=> String
       #   resp.auth_type #=> String
       #   resp.authorizer_uri #=> String
       #   resp.authorizer_credentials #=> String
@@ -2653,8 +3148,8 @@ module Aws
       # @option params [required, String] :base_path
       #   The base path of the BasePathMapping resource to change.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::BasePathMapping] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::BasePathMapping#base_path #basePath} => String
@@ -2690,8 +3185,8 @@ module Aws
       # @option params [required, String] :client_certificate_id
       #   The identifier of the ClientCertificate resource to be updated.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::ClientCertificate] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ClientCertificate#client_certificate_id #clientCertificateId} => String
@@ -2731,11 +3226,11 @@ module Aws
       #   The replacement identifier of the RestApi resource for the Deployment
       #   resource to change information about.
       # @option params [required, String] :deployment_id
-      #   The replacment identifier for the Deployment resource to change
+      #   The replacement identifier for the Deployment resource to change
       #   information about.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Deployment] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Deployment#id #id} => String
@@ -2776,8 +3271,8 @@ module Aws
       # @option params [required, String] :domain_name
       #   The name of the DomainName resource to be changed.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::DomainName] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DomainName#domain_name #domainName} => String
@@ -2818,8 +3313,8 @@ module Aws
       # @option params [required, String] :http_method
       #   Represents an update integration request\'s HTTP method.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Integration#type #type} => String
@@ -2886,8 +3381,8 @@ module Aws
       # @option params [required, String] :status_code
       #   Specifies an update integration response request\'s status code.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::IntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::IntegrationResponse#status_code #statusCode} => String
@@ -2931,10 +3426,10 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the Method resource.
       # @option params [required, String] :http_method
-      #   The HTTP verb that identifies the Method resource.
+      #   The HTTP verb of the Method resource.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Method#http_method #httpMethod} => String
@@ -3008,12 +3503,12 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the MethodResponse resource.
       # @option params [required, String] :http_method
-      #   The HTTP verb identifier for the parent Method resource.
+      #   The HTTP verb of the Method resource.
       # @option params [required, String] :status_code
-      #   The status code identifier for the MethodResponse resource.
+      #   The status code for the MethodResponse resource.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::MethodResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::MethodResponse#status_code #statusCode} => String
@@ -3055,8 +3550,8 @@ module Aws
       # @option params [required, String] :model_name
       #   The name of the model to update.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Model] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Model#id #id} => String
@@ -3098,8 +3593,8 @@ module Aws
       # @option params [required, String] :resource_id
       #   The identifier of the Resource resource.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Resource] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Resource#id #id} => String
@@ -3172,8 +3667,8 @@ module Aws
       # @option params [required, String] :rest_api_id
       #   The ID of the RestApi you want to update.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RestApi#id #id} => String
@@ -3216,8 +3711,8 @@ module Aws
       # @option params [required, String] :stage_name
       #   The name of the Stage resource to change information about.
       # @option params [Array<Types::PatchOperation>] :patch_operations
-      #   A list of operations describing the updates to apply to the specified
-      #   resource. The patches are applied in the order specified in the list.
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
       # @return [Types::Stage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Stage#deployment_id #deploymentId} => String
@@ -3276,6 +3771,101 @@ module Aws
         req.send_request(options)
       end
 
+      # Grants a temporary extension to the reamining quota of a usage plan
+      # associated with a specified API key.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the usage plan associated with the usage data.
+      # @option params [required, String] :key_id
+      #   The identifier of the API key associated with the usage plan in which
+      #   a temporary extension is granted to the remaining quota.
+      # @option params [Array<Types::PatchOperation>] :patch_operations
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
+      # @return [Types::Usage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::Usage#usage_plan_id #usagePlanId} => String
+      #   * {Types::Usage#start_date #startDate} => String
+      #   * {Types::Usage#end_date #endDate} => String
+      #   * {Types::Usage#position #position} => String
+      #   * {Types::Usage#items #items} => Hash&lt;String,Array&lt;Array&lt;Integer&gt;&gt;&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_usage({
+      #     usage_plan_id: "String", # required
+      #     key_id: "String", # required
+      #     patch_operations: [
+      #       {
+      #         op: "add", # accepts add, remove, replace, move, copy, test
+      #         path: "String",
+      #         value: "String",
+      #         from: "String",
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.usage_plan_id #=> String
+      #   resp.start_date #=> String
+      #   resp.end_date #=> String
+      #   resp.position #=> String
+      #   resp.items #=> Hash
+      #   resp.items["String"] #=> Array
+      #   resp.items["String"][0] #=> Array
+      #   resp.items["String"][0][0] #=> Integer
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def update_usage(params = {}, options = {})
+        req = build_request(:update_usage, params)
+        req.send_request(options)
+      end
+
+      # Updates a usage plan of a given plan Id.
+      # @option params [required, String] :usage_plan_id
+      #   The Id of the to-be-updated usage plan.
+      # @option params [Array<Types::PatchOperation>] :patch_operations
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
+      # @return [Types::UsagePlan] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UsagePlan#id #id} => String
+      #   * {Types::UsagePlan#name #name} => String
+      #   * {Types::UsagePlan#description #description} => String
+      #   * {Types::UsagePlan#api_stages #apiStages} => Array&lt;Types::ApiStage&gt;
+      #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
+      #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_usage_plan({
+      #     usage_plan_id: "String", # required
+      #     patch_operations: [
+      #       {
+      #         op: "add", # accepts add, remove, replace, move, copy, test
+      #         path: "String",
+      #         value: "String",
+      #         from: "String",
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.name #=> String
+      #   resp.description #=> String
+      #   resp.api_stages #=> Array
+      #   resp.api_stages[0].api_id #=> String
+      #   resp.api_stages[0].stage #=> String
+      #   resp.throttle.burst_limit #=> Integer
+      #   resp.throttle.rate_limit #=> Float
+      #   resp.quota.limit #=> Integer
+      #   resp.quota.offset #=> Integer
+      #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def update_usage_plan(params = {}, options = {})
+        req = build_request(:update_usage_plan, params)
+        req.send_request(options)
+      end
+
       # @!endgroup
 
       # @param [Symbol] waiter_name
@@ -3315,6 +3905,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

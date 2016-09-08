@@ -64,6 +64,8 @@ module Aws
       ArtifactLocation = Shapes::StructureShape.new(name: 'ArtifactLocation')
       ArtifactLocationType = Shapes::StringShape.new(name: 'ArtifactLocationType')
       ArtifactName = Shapes::StringShape.new(name: 'ArtifactName')
+      ArtifactRevision = Shapes::StructureShape.new(name: 'ArtifactRevision')
+      ArtifactRevisionList = Shapes::ListShape.new(name: 'ArtifactRevisionList')
       ArtifactStore = Shapes::StructureShape.new(name: 'ArtifactStore')
       ArtifactStoreLocation = Shapes::StringShape.new(name: 'ArtifactStoreLocation')
       ArtifactStoreType = Shapes::StringShape.new(name: 'ArtifactStoreType')
@@ -98,6 +100,8 @@ module Aws
       FailureType = Shapes::StringShape.new(name: 'FailureType')
       GetJobDetailsInput = Shapes::StructureShape.new(name: 'GetJobDetailsInput')
       GetJobDetailsOutput = Shapes::StructureShape.new(name: 'GetJobDetailsOutput')
+      GetPipelineExecutionInput = Shapes::StructureShape.new(name: 'GetPipelineExecutionInput')
+      GetPipelineExecutionOutput = Shapes::StructureShape.new(name: 'GetPipelineExecutionOutput')
       GetPipelineInput = Shapes::StructureShape.new(name: 'GetPipelineInput')
       GetPipelineOutput = Shapes::StructureShape.new(name: 'GetPipelineOutput')
       GetPipelineStateInput = Shapes::StructureShape.new(name: 'GetPipelineStateInput')
@@ -143,7 +147,10 @@ module Aws
       Percentage = Shapes::IntegerShape.new(name: 'Percentage')
       PipelineContext = Shapes::StructureShape.new(name: 'PipelineContext')
       PipelineDeclaration = Shapes::StructureShape.new(name: 'PipelineDeclaration')
+      PipelineExecution = Shapes::StructureShape.new(name: 'PipelineExecution')
       PipelineExecutionId = Shapes::StringShape.new(name: 'PipelineExecutionId')
+      PipelineExecutionNotFoundException = Shapes::StructureShape.new(name: 'PipelineExecutionNotFoundException')
+      PipelineExecutionStatus = Shapes::StringShape.new(name: 'PipelineExecutionStatus')
       PipelineList = Shapes::ListShape.new(name: 'PipelineList')
       PipelineName = Shapes::StringShape.new(name: 'PipelineName')
       PipelineNameInUseException = Shapes::StructureShape.new(name: 'PipelineNameInUseException')
@@ -169,6 +176,7 @@ module Aws
       RetryStageExecutionOutput = Shapes::StructureShape.new(name: 'RetryStageExecutionOutput')
       Revision = Shapes::StringShape.new(name: 'Revision')
       RevisionChangeIdentifier = Shapes::StringShape.new(name: 'RevisionChangeIdentifier')
+      RevisionSummary = Shapes::StringShape.new(name: 'RevisionSummary')
       RoleArn = Shapes::StringShape.new(name: 'RoleArn')
       S3ArtifactLocation = Shapes::StructureShape.new(name: 'S3ArtifactLocation')
       S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
@@ -195,6 +203,7 @@ module Aws
       ThirdPartyJobDetails = Shapes::StructureShape.new(name: 'ThirdPartyJobDetails')
       ThirdPartyJobId = Shapes::StringShape.new(name: 'ThirdPartyJobId')
       ThirdPartyJobList = Shapes::ListShape.new(name: 'ThirdPartyJobList')
+      Time = Shapes::TimestampShape.new(name: 'Time')
       Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
       TransitionState = Shapes::StructureShape.new(name: 'TransitionState')
       UpdatePipelineInput = Shapes::StructureShape.new(name: 'UpdatePipelineInput')
@@ -318,6 +327,16 @@ module Aws
       ArtifactLocation.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3ArtifactLocation, location_name: "s3Location"))
       ArtifactLocation.struct_class = Types::ArtifactLocation
 
+      ArtifactRevision.add_member(:name, Shapes::ShapeRef.new(shape: ArtifactName, location_name: "name"))
+      ArtifactRevision.add_member(:revision_id, Shapes::ShapeRef.new(shape: Revision, location_name: "revisionId"))
+      ArtifactRevision.add_member(:revision_change_identifier, Shapes::ShapeRef.new(shape: RevisionChangeIdentifier, location_name: "revisionChangeIdentifier"))
+      ArtifactRevision.add_member(:revision_summary, Shapes::ShapeRef.new(shape: RevisionSummary, location_name: "revisionSummary"))
+      ArtifactRevision.add_member(:created, Shapes::ShapeRef.new(shape: Timestamp, location_name: "created"))
+      ArtifactRevision.add_member(:revision_url, Shapes::ShapeRef.new(shape: Url, location_name: "revisionUrl"))
+      ArtifactRevision.struct_class = Types::ArtifactRevision
+
+      ArtifactRevisionList.member = Shapes::ShapeRef.new(shape: ArtifactRevision)
+
       ArtifactStore.add_member(:type, Shapes::ShapeRef.new(shape: ArtifactStoreType, required: true, location_name: "type"))
       ArtifactStore.add_member(:location, Shapes::ShapeRef.new(shape: ArtifactStoreLocation, required: true, location_name: "location"))
       ArtifactStore.add_member(:encryption_key, Shapes::ShapeRef.new(shape: EncryptionKey, location_name: "encryptionKey"))
@@ -347,6 +366,8 @@ module Aws
 
       CurrentRevision.add_member(:revision, Shapes::ShapeRef.new(shape: Revision, required: true, location_name: "revision"))
       CurrentRevision.add_member(:change_identifier, Shapes::ShapeRef.new(shape: RevisionChangeIdentifier, required: true, location_name: "changeIdentifier"))
+      CurrentRevision.add_member(:created, Shapes::ShapeRef.new(shape: Time, location_name: "created"))
+      CurrentRevision.add_member(:revision_summary, Shapes::ShapeRef.new(shape: RevisionSummary, location_name: "revisionSummary"))
       CurrentRevision.struct_class = Types::CurrentRevision
 
       DeleteCustomActionTypeInput.add_member(:category, Shapes::ShapeRef.new(shape: ActionCategory, required: true, location_name: "category"))
@@ -391,6 +412,13 @@ module Aws
 
       GetJobDetailsOutput.add_member(:job_details, Shapes::ShapeRef.new(shape: JobDetails, location_name: "jobDetails"))
       GetJobDetailsOutput.struct_class = Types::GetJobDetailsOutput
+
+      GetPipelineExecutionInput.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "pipelineName"))
+      GetPipelineExecutionInput.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, required: true, location_name: "pipelineExecutionId"))
+      GetPipelineExecutionInput.struct_class = Types::GetPipelineExecutionInput
+
+      GetPipelineExecutionOutput.add_member(:pipeline_execution, Shapes::ShapeRef.new(shape: PipelineExecution, location_name: "pipelineExecution"))
+      GetPipelineExecutionOutput.struct_class = Types::GetPipelineExecutionOutput
 
       GetPipelineInput.add_member(:name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "name"))
       GetPipelineInput.add_member(:version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "version"))
@@ -476,6 +504,13 @@ module Aws
       PipelineDeclaration.add_member(:version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "version"))
       PipelineDeclaration.struct_class = Types::PipelineDeclaration
 
+      PipelineExecution.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "pipelineName"))
+      PipelineExecution.add_member(:pipeline_version, Shapes::ShapeRef.new(shape: PipelineVersion, location_name: "pipelineVersion"))
+      PipelineExecution.add_member(:pipeline_execution_id, Shapes::ShapeRef.new(shape: PipelineExecutionId, location_name: "pipelineExecutionId"))
+      PipelineExecution.add_member(:status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "status"))
+      PipelineExecution.add_member(:artifact_revisions, Shapes::ShapeRef.new(shape: ArtifactRevisionList, location_name: "artifactRevisions"))
+      PipelineExecution.struct_class = Types::PipelineExecution
+
       PipelineList.member = Shapes::ShapeRef.new(shape: PipelineSummary)
 
       PipelineStageDeclarationList.member = Shapes::ShapeRef.new(shape: StageDeclaration)
@@ -515,7 +550,7 @@ module Aws
       PutApprovalResultInput.add_member(:stage_name, Shapes::ShapeRef.new(shape: StageName, required: true, location_name: "stageName"))
       PutApprovalResultInput.add_member(:action_name, Shapes::ShapeRef.new(shape: ActionName, required: true, location_name: "actionName"))
       PutApprovalResultInput.add_member(:result, Shapes::ShapeRef.new(shape: ApprovalResult, required: true, location_name: "result"))
-      PutApprovalResultInput.add_member(:token, Shapes::ShapeRef.new(shape: ApprovalToken, location_name: "token"))
+      PutApprovalResultInput.add_member(:token, Shapes::ShapeRef.new(shape: ApprovalToken, required: true, location_name: "token"))
       PutApprovalResultInput.struct_class = Types::PutApprovalResultInput
 
       PutApprovalResultOutput.add_member(:approved_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "approvedAt"))
@@ -744,6 +779,17 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: PipelineVersionNotFoundException)
+        end)
+
+        api.add_operation(:get_pipeline_execution, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetPipelineExecution"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: GetPipelineExecutionInput)
+          o.output = Shapes::ShapeRef.new(shape: GetPipelineExecutionOutput)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: PipelineNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: PipelineExecutionNotFoundException)
         end)
 
         api.add_operation(:get_pipeline_state, Seahorse::Model::Operation.new.tap do |o|

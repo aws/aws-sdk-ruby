@@ -183,7 +183,7 @@ module Aws
       #   This parameter is not supported if the policy type is `StepScaling`.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #

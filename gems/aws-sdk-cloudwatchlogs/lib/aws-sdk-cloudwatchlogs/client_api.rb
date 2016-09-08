@@ -28,6 +28,7 @@ module Aws
       CreateLogStreamRequest = Shapes::StructureShape.new(name: 'CreateLogStreamRequest')
       DataAlreadyAcceptedException = Shapes::StructureShape.new(name: 'DataAlreadyAcceptedException')
       Days = Shapes::IntegerShape.new(name: 'Days')
+      DefaultValue = Shapes::FloatShape.new(name: 'DefaultValue')
       DeleteDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDestinationRequest')
       DeleteLogGroupRequest = Shapes::StructureShape.new(name: 'DeleteLogGroupRequest')
       DeleteLogStreamRequest = Shapes::StructureShape.new(name: 'DeleteLogStreamRequest')
@@ -357,6 +358,7 @@ module Aws
       MetricTransformation.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "metricName"))
       MetricTransformation.add_member(:metric_namespace, Shapes::ShapeRef.new(shape: MetricNamespace, required: true, location_name: "metricNamespace"))
       MetricTransformation.add_member(:metric_value, Shapes::ShapeRef.new(shape: MetricValue, required: true, location_name: "metricValue"))
+      MetricTransformation.add_member(:default_value, Shapes::ShapeRef.new(shape: DefaultValue, location_name: "defaultValue"))
       MetricTransformation.struct_class = Types::MetricTransformation
 
       MetricTransformations.member = Shapes::ShapeRef.new(shape: MetricTransformation)
@@ -737,7 +739,6 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidSequenceTokenException)
           o.errors << Shapes::ShapeRef.new(shape: DataAlreadyAcceptedException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o.errors << Shapes::ShapeRef.new(shape: OperationAbortedException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 

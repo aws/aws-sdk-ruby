@@ -80,7 +80,12 @@ module Aws
         :name,
         :status,
         :output_uri,
-        :message)
+        :message,
+        :compute_time,
+        :finished_at,
+        :started_at,
+        :total_record_count,
+        :invalid_record_count)
 
         # @!attribute [rw] batch_prediction_id
         #   The ID assigned to the `BatchPrediction` at creation. This value
@@ -148,6 +153,26 @@ module Aws
         #   A description of the most recent details about processing the batch
         #   prediction request.
         #   @return [String]
+
+        # @!attribute [rw] compute_time
+        #   Long integer type that is a 64-bit signed number.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
+
+        # @!attribute [rw] total_record_count
+        #   Long integer type that is a 64-bit signed number.
+        #   @return [Integer]
+
+        # @!attribute [rw] invalid_record_count
+        #   Long integer type that is a 64-bit signed number.
+        #   @return [Integer]
 
       end
 
@@ -780,7 +805,10 @@ module Aws
         :redshift_metadata,
         :rds_metadata,
         :role_arn,
-        :compute_statistics)
+        :compute_statistics,
+        :compute_time,
+        :finished_at,
+        :started_at)
 
         # @!attribute [rw] data_source_id
         #   The ID that is assigned to the `DataSource` during creation.
@@ -864,6 +892,18 @@ module Aws
         #   The parameter is `true` if statistics need to be generated from the
         #   observation data.
         #   @return [Boolean]
+
+        # @!attribute [rw] compute_time
+        #   Long integer type that is a 64-bit signed number.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
 
       end
 
@@ -1674,7 +1714,10 @@ module Aws
         :name,
         :status,
         :performance_metrics,
-        :message)
+        :message,
+        :compute_time,
+        :finished_at,
+        :started_at)
 
         # @!attribute [rw] evaluation_id
         #   The ID that is assigned to the `Evaluation` at creation.
@@ -1756,6 +1799,18 @@ module Aws
         #   `MLModel`.
         #   @return [String]
 
+        # @!attribute [rw] compute_time
+        #   Long integer type that is a 64-bit signed number.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
+
       end
 
       # @note When making an API call, pass GetBatchPredictionInput
@@ -1787,7 +1842,12 @@ module Aws
         :status,
         :output_uri,
         :log_uri,
-        :message)
+        :message,
+        :compute_time,
+        :finished_at,
+        :started_at,
+        :total_record_count,
+        :invalid_record_count)
 
         # @!attribute [rw] batch_prediction_id
         #   An ID assigned to the `BatchPrediction` at creation. This value
@@ -1859,6 +1919,36 @@ module Aws
         #   prediction request.
         #   @return [String]
 
+        # @!attribute [rw] compute_time
+        #   The approximate CPU time in milliseconds that Amazon Machine
+        #   Learning spent processing the `BatchPrediction`, normalized and
+        #   scaled on computation resources. `ComputeTime` is only available if
+        #   the `BatchPrediction` is in the `COMPLETED` state.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   The epoch time when Amazon Machine Learning marked the
+        #   `BatchPrediction` as `COMPLETED` or `FAILED`. `FinishedAt` is only
+        #   available when the `BatchPrediction` is in the `COMPLETED` or
+        #   `FAILED` state.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   The epoch time when Amazon Machine Learning marked the
+        #   `BatchPrediction` as `INPROGRESS`. `StartedAt` isn\'t available if
+        #   the `BatchPrediction` is in the `PENDING` state.
+        #   @return [Time]
+
+        # @!attribute [rw] total_record_count
+        #   The number of total records that Amazon Machine Learning saw while
+        #   processing the `BatchPrediction`.
+        #   @return [Integer]
+
+        # @!attribute [rw] invalid_record_count
+        #   The number of invalid records that Amazon Machine Learning saw while
+        #   processing the `BatchPrediction`.
+        #   @return [Integer]
+
       end
 
       # @note When making an API call, pass GetDataSourceInput
@@ -1906,6 +1996,9 @@ module Aws
         :rds_metadata,
         :role_arn,
         :compute_statistics,
+        :compute_time,
+        :finished_at,
+        :started_at,
         :data_source_schema)
 
         # @!attribute [rw] data_source_id
@@ -1997,6 +2090,26 @@ module Aws
         #   observation data.
         #   @return [Boolean]
 
+        # @!attribute [rw] compute_time
+        #   The approximate CPU time in milliseconds that Amazon Machine
+        #   Learning spent processing the `DataSource`, normalized and scaled on
+        #   computation resources. `ComputeTime` is only available if the
+        #   `DataSource` is in the `COMPLETED` state and the `ComputeStatistics`
+        #   is set to true.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   The epoch time when Amazon Machine Learning marked the `DataSource`
+        #   as `COMPLETED` or `FAILED`. `FinishedAt` is only available when the
+        #   `DataSource` is in the `COMPLETED` or `FAILED` state.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   The epoch time when Amazon Machine Learning marked the `DataSource`
+        #   as `INPROGRESS`. `StartedAt` isn\'t available if the `DataSource` is
+        #   in the `PENDING` state.
+        #   @return [Time]
+
         # @!attribute [rw] data_source_schema
         #   The schema used by all of the data files of this `DataSource`.
         #
@@ -2038,7 +2151,10 @@ module Aws
         :status,
         :performance_metrics,
         :log_uri,
-        :message)
+        :message,
+        :compute_time,
+        :finished_at,
+        :started_at)
 
         # @!attribute [rw] evaluation_id
         #   The evaluation ID which is same as the `EvaluationId` in the
@@ -2070,8 +2186,8 @@ module Aws
         #   @return [Time]
 
         # @!attribute [rw] last_updated_at
-        #   The time of the most recent edit to the `BatchPrediction`. The time
-        #   is expressed in epoch time.
+        #   The time of the most recent edit to the `Evaluation`. The time is
+        #   expressed in epoch time.
         #   @return [Time]
 
         # @!attribute [rw] name
@@ -2126,6 +2242,25 @@ module Aws
         #   `MLModel`.
         #   @return [String]
 
+        # @!attribute [rw] compute_time
+        #   The approximate CPU time in milliseconds that Amazon Machine
+        #   Learning spent processing the `Evaluation`, normalized and scaled on
+        #   computation resources. `ComputeTime` is only available if the
+        #   `Evaluation` is in the `COMPLETED` state.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   The epoch time when Amazon Machine Learning marked the `Evaluation`
+        #   as `COMPLETED` or `FAILED`. `FinishedAt` is only available when the
+        #   `Evaluation` is in the `COMPLETED` or `FAILED` state.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   The epoch time when Amazon Machine Learning marked the `Evaluation`
+        #   as `INPROGRESS`. `StartedAt` isn\'t available if the `Evaluation` is
+        #   in the `PENDING` state.
+        #   @return [Time]
+
       end
 
       # @note When making an API call, pass GetMLModelInput
@@ -2172,6 +2307,9 @@ module Aws
         :score_threshold_last_updated_at,
         :log_uri,
         :message,
+        :compute_time,
+        :finished_at,
+        :started_at,
         :recipe,
         :schema)
 
@@ -2316,6 +2454,25 @@ module Aws
         #   `MLModel`.
         #   @return [String]
 
+        # @!attribute [rw] compute_time
+        #   The approximate CPU time in milliseconds that Amazon Machine
+        #   Learning spent processing the `MLModel`, normalized and scaled on
+        #   computation resources. `ComputeTime` is only available if the
+        #   `MLModel` is in the `COMPLETED` state.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   The epoch time when Amazon Machine Learning marked the `MLModel` as
+        #   `COMPLETED` or `FAILED`. `FinishedAt` is only available when the
+        #   `MLModel` is in the `COMPLETED` or `FAILED` state.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   The epoch time when Amazon Machine Learning marked the `MLModel` as
+        #   `INPROGRESS`. `StartedAt` isn\'t available if the `MLModel` is in
+        #   the `PENDING` state.
+        #   @return [Time]
+
         # @!attribute [rw] recipe
         #   The recipe to use when training the `MLModel`. The `Recipe` provides
         #   detailed information about the observation data to use during
@@ -2358,7 +2515,10 @@ module Aws
         :ml_model_type,
         :score_threshold,
         :score_threshold_last_updated_at,
-        :message)
+        :message,
+        :compute_time,
+        :finished_at,
+        :started_at)
 
         # @!attribute [rw] ml_model_id
         #   The ID assigned to the `MLModel` at creation.
@@ -2495,6 +2655,18 @@ module Aws
         #   A description of the most recent details about accessing the
         #   `MLModel`.
         #   @return [String]
+
+        # @!attribute [rw] compute_time
+        #   Long integer type that is a 64-bit signed number.
+        #   @return [Integer]
+
+        # @!attribute [rw] finished_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
+
+        # @!attribute [rw] started_at
+        #   A timestamp represented in epoch time.
+        #   @return [Time]
 
       end
 
@@ -2652,8 +2824,8 @@ module Aws
         :security_group_ids)
 
         # @!attribute [rw] database_information
-        #   Describes the `DatabaseName` and `InstanceIdentifier` of an an
-        #   Amazon RDS database.
+        #   Describes the `DatabaseName` and `InstanceIdentifier` of an Amazon
+        #   RDS database.
         #   @return [Types::RDSDatabase]
 
         # @!attribute [rw] select_sql_query

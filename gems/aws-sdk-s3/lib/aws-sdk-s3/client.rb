@@ -966,7 +966,7 @@ module Aws
         req.send_request(options)
       end
 
-      # Deprecated, see the GetBucketReplicationConfiguration operation.
+      # Returns the replication configuration of a bucket.
       # @option params [required, String] :bucket
       # @return [Types::GetBucketReplicationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -2887,6 +2887,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

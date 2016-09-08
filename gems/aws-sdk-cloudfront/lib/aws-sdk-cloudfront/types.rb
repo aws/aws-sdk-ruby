@@ -155,6 +155,10 @@ module Aws
       #             quantity: 1, # required
       #             items: ["string"],
       #           },
+      #           query_string_cache_keys: {
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
       #         },
       #         trusted_signers: { # required
       #           enabled: false, # required
@@ -333,6 +337,10 @@ module Aws
       #                 },
       #               },
       #               headers: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #               query_string_cache_keys: {
       #                 quantity: 1, # required
       #                 items: ["string"],
       #               },
@@ -684,6 +692,10 @@ module Aws
       #                 quantity: 1, # required
       #                 items: ["string"],
       #               },
+      #               query_string_cache_keys: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
       #             },
       #             trusted_signers: { # required
       #               enabled: false, # required
@@ -721,6 +733,10 @@ module Aws
       #                     },
       #                   },
       #                   headers: {
+      #                     quantity: 1, # required
+      #                     items: ["string"],
+      #                   },
+      #                   query_string_cache_keys: {
       #                     quantity: 1, # required
       #                     items: ["string"],
       #                   },
@@ -797,6 +813,215 @@ module Aws
 
       # The returned result of the corresponding request.
       class CreateDistributionResult < Aws::Structure.new(
+        :distribution,
+        :location,
+        :etag)
+
+        # @!attribute [rw] distribution
+        #   The distribution\'s information.
+        #   @return [Types::Distribution]
+
+        # @!attribute [rw] location
+        #   The fully qualified URI of the new distribution resource just
+        #   created. For example:
+        #   https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5.
+        #   @return [String]
+
+        # @!attribute [rw] etag
+        #   The current version of the distribution created.
+        #   @return [String]
+
+      end
+
+      # The request to create a new distribution with tags
+      # @note When making an API call, pass CreateDistributionWithTagsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         distribution_config_with_tags: { # required
+      #           distribution_config: { # required
+      #             caller_reference: "string", # required
+      #             aliases: {
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
+      #             default_root_object: "string",
+      #             origins: { # required
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   id: "string", # required
+      #                   domain_name: "string", # required
+      #                   origin_path: "string",
+      #                   custom_headers: {
+      #                     quantity: 1, # required
+      #                     items: [
+      #                       {
+      #                         header_name: "string", # required
+      #                         header_value: "string", # required
+      #                       },
+      #                     ],
+      #                   },
+      #                   s3_origin_config: {
+      #                     origin_access_identity: "string", # required
+      #                   },
+      #                   custom_origin_config: {
+      #                     http_port: 1, # required
+      #                     https_port: 1, # required
+      #                     origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+      #                     origin_ssl_protocols: {
+      #                       quantity: 1, # required
+      #                       items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+      #                     },
+      #                   },
+      #                 },
+      #               ],
+      #             },
+      #             default_cache_behavior: { # required
+      #               target_origin_id: "string", # required
+      #               forwarded_values: { # required
+      #                 query_string: false, # required
+      #                 cookies: { # required
+      #                   forward: "none", # required, accepts none, whitelist, all
+      #                   whitelisted_names: {
+      #                     quantity: 1, # required
+      #                     items: ["string"],
+      #                   },
+      #                 },
+      #                 headers: {
+      #                   quantity: 1, # required
+      #                   items: ["string"],
+      #                 },
+      #                 query_string_cache_keys: {
+      #                   quantity: 1, # required
+      #                   items: ["string"],
+      #                 },
+      #               },
+      #               trusted_signers: { # required
+      #                 enabled: false, # required
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+      #               min_ttl: 1, # required
+      #               allowed_methods: {
+      #                 quantity: 1, # required
+      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                 cached_methods: {
+      #                   quantity: 1, # required
+      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                 },
+      #               },
+      #               smooth_streaming: false,
+      #               default_ttl: 1,
+      #               max_ttl: 1,
+      #               compress: false,
+      #             },
+      #             cache_behaviors: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   path_pattern: "string", # required
+      #                   target_origin_id: "string", # required
+      #                   forwarded_values: { # required
+      #                     query_string: false, # required
+      #                     cookies: { # required
+      #                       forward: "none", # required, accepts none, whitelist, all
+      #                       whitelisted_names: {
+      #                         quantity: 1, # required
+      #                         items: ["string"],
+      #                       },
+      #                     },
+      #                     headers: {
+      #                       quantity: 1, # required
+      #                       items: ["string"],
+      #                     },
+      #                     query_string_cache_keys: {
+      #                       quantity: 1, # required
+      #                       items: ["string"],
+      #                     },
+      #                   },
+      #                   trusted_signers: { # required
+      #                     enabled: false, # required
+      #                     quantity: 1, # required
+      #                     items: ["string"],
+      #                   },
+      #                   viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+      #                   min_ttl: 1, # required
+      #                   allowed_methods: {
+      #                     quantity: 1, # required
+      #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                     cached_methods: {
+      #                       quantity: 1, # required
+      #                       items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                     },
+      #                   },
+      #                   smooth_streaming: false,
+      #                   default_ttl: 1,
+      #                   max_ttl: 1,
+      #                   compress: false,
+      #                 },
+      #               ],
+      #             },
+      #             custom_error_responses: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   error_code: 1, # required
+      #                   response_page_path: "string",
+      #                   response_code: "string",
+      #                   error_caching_min_ttl: 1,
+      #                 },
+      #               ],
+      #             },
+      #             comment: "string", # required
+      #             logging: {
+      #               enabled: false, # required
+      #               include_cookies: false, # required
+      #               bucket: "string", # required
+      #               prefix: "string", # required
+      #             },
+      #             price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+      #             enabled: false, # required
+      #             viewer_certificate: {
+      #               cloud_front_default_certificate: false,
+      #               iam_certificate_id: "string",
+      #               acm_certificate_arn: "string",
+      #               ssl_support_method: "sni-only", # accepts sni-only, vip
+      #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+      #               certificate: "string",
+      #               certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+      #             },
+      #             restrictions: {
+      #               geo_restriction: { # required
+      #                 restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #             },
+      #             web_acl_id: "string",
+      #           },
+      #           tags: { # required
+      #             items: [
+      #               {
+      #                 key: "TagKey", # required
+      #                 value: "TagValue",
+      #               },
+      #             ],
+      #           },
+      #         },
+      #       }
+      class CreateDistributionWithTagsRequest < Aws::Structure.new(
+        :distribution_config_with_tags)
+
+        # @!attribute [rw] distribution_config_with_tags
+        #   The distribution\'s configuration information.
+        #   @return [Types::DistributionConfigWithTags]
+
+      end
+
+      # The returned result of the corresponding request.
+      class CreateDistributionWithTagsResult < Aws::Structure.new(
         :distribution,
         :location,
         :etag)
@@ -902,6 +1127,77 @@ module Aws
 
       # The returned result of the corresponding request.
       class CreateStreamingDistributionResult < Aws::Structure.new(
+        :streaming_distribution,
+        :location,
+        :etag)
+
+        # @!attribute [rw] streaming_distribution
+        #   The streaming distribution\'s information.
+        #   @return [Types::StreamingDistribution]
+
+        # @!attribute [rw] location
+        #   The fully qualified URI of the new streaming distribution resource
+        #   just created. For example:
+        #   https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8.
+        #   @return [String]
+
+        # @!attribute [rw] etag
+        #   The current version of the streaming distribution created.
+        #   @return [String]
+
+      end
+
+      # The request to create a new streaming distribution with tags.
+      # @note When making an API call, pass CreateStreamingDistributionWithTagsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         streaming_distribution_config_with_tags: { # required
+      #           streaming_distribution_config: { # required
+      #             caller_reference: "string", # required
+      #             s3_origin: { # required
+      #               domain_name: "string", # required
+      #               origin_access_identity: "string", # required
+      #             },
+      #             aliases: {
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
+      #             comment: "string", # required
+      #             logging: {
+      #               enabled: false, # required
+      #               bucket: "string", # required
+      #               prefix: "string", # required
+      #             },
+      #             trusted_signers: { # required
+      #               enabled: false, # required
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
+      #             price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+      #             enabled: false, # required
+      #           },
+      #           tags: { # required
+      #             items: [
+      #               {
+      #                 key: "TagKey", # required
+      #                 value: "TagValue",
+      #               },
+      #             ],
+      #           },
+      #         },
+      #       }
+      class CreateStreamingDistributionWithTagsRequest < Aws::Structure.new(
+        :streaming_distribution_config_with_tags)
+
+        # @!attribute [rw] streaming_distribution_config_with_tags
+        #   The streaming distribution\'s configuration information.
+        #   @return [Types::StreamingDistributionConfigWithTags]
+
+      end
+
+      # The returned result of the corresponding request.
+      class CreateStreamingDistributionWithTagsResult < Aws::Structure.new(
         :streaming_distribution,
         :location,
         :etag)
@@ -1096,6 +1392,10 @@ module Aws
       #             },
       #           },
       #           headers: {
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
+      #           query_string_cache_keys: {
       #             quantity: 1, # required
       #             items: ["string"],
       #           },
@@ -1317,6 +1617,7 @@ module Aws
       # A distribution.
       class Distribution < Aws::Structure.new(
         :id,
+        :arn,
         :status,
         :last_modified_time,
         :in_progress_invalidation_batches,
@@ -1326,6 +1627,12 @@ module Aws
 
         # @!attribute [rw] id
         #   The identifier for the distribution. For example: EDFDVBD632BHDS5.
+        #   @return [String]
+
+        # @!attribute [rw] arn
+        #   The ARN (Amazon Resource Name) for the distribution. For example:
+        #   arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
+        #   123456789012 is your AWS account Id.
         #   @return [String]
 
         # @!attribute [rw] status
@@ -1423,6 +1730,10 @@ module Aws
       #               quantity: 1, # required
       #               items: ["string"],
       #             },
+      #             query_string_cache_keys: {
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
       #           },
       #           trusted_signers: { # required
       #             enabled: false, # required
@@ -1460,6 +1771,10 @@ module Aws
       #                   },
       #                 },
       #                 headers: {
+      #                   quantity: 1, # required
+      #                   items: ["string"],
+      #                 },
+      #                 query_string_cache_keys: {
       #                   quantity: 1, # required
       #                   items: ["string"],
       #                 },
@@ -1631,6 +1946,197 @@ module Aws
 
       end
 
+      # A distribution Configuration and a list of tags to be associated with
+      # the distribution.
+      # @note When making an API call, pass DistributionConfigWithTags
+      #   data as a hash:
+      #
+      #       {
+      #         distribution_config: { # required
+      #           caller_reference: "string", # required
+      #           aliases: {
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
+      #           default_root_object: "string",
+      #           origins: { # required
+      #             quantity: 1, # required
+      #             items: [
+      #               {
+      #                 id: "string", # required
+      #                 domain_name: "string", # required
+      #                 origin_path: "string",
+      #                 custom_headers: {
+      #                   quantity: 1, # required
+      #                   items: [
+      #                     {
+      #                       header_name: "string", # required
+      #                       header_value: "string", # required
+      #                     },
+      #                   ],
+      #                 },
+      #                 s3_origin_config: {
+      #                   origin_access_identity: "string", # required
+      #                 },
+      #                 custom_origin_config: {
+      #                   http_port: 1, # required
+      #                   https_port: 1, # required
+      #                   origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+      #                   origin_ssl_protocols: {
+      #                     quantity: 1, # required
+      #                     items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+      #                   },
+      #                 },
+      #               },
+      #             ],
+      #           },
+      #           default_cache_behavior: { # required
+      #             target_origin_id: "string", # required
+      #             forwarded_values: { # required
+      #               query_string: false, # required
+      #               cookies: { # required
+      #                 forward: "none", # required, accepts none, whitelist, all
+      #                 whitelisted_names: {
+      #                   quantity: 1, # required
+      #                   items: ["string"],
+      #                 },
+      #               },
+      #               headers: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #               query_string_cache_keys: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #             },
+      #             trusted_signers: { # required
+      #               enabled: false, # required
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
+      #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+      #             min_ttl: 1, # required
+      #             allowed_methods: {
+      #               quantity: 1, # required
+      #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #               cached_methods: {
+      #                 quantity: 1, # required
+      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #               },
+      #             },
+      #             smooth_streaming: false,
+      #             default_ttl: 1,
+      #             max_ttl: 1,
+      #             compress: false,
+      #           },
+      #           cache_behaviors: {
+      #             quantity: 1, # required
+      #             items: [
+      #               {
+      #                 path_pattern: "string", # required
+      #                 target_origin_id: "string", # required
+      #                 forwarded_values: { # required
+      #                   query_string: false, # required
+      #                   cookies: { # required
+      #                     forward: "none", # required, accepts none, whitelist, all
+      #                     whitelisted_names: {
+      #                       quantity: 1, # required
+      #                       items: ["string"],
+      #                     },
+      #                   },
+      #                   headers: {
+      #                     quantity: 1, # required
+      #                     items: ["string"],
+      #                   },
+      #                   query_string_cache_keys: {
+      #                     quantity: 1, # required
+      #                     items: ["string"],
+      #                   },
+      #                 },
+      #                 trusted_signers: { # required
+      #                   enabled: false, # required
+      #                   quantity: 1, # required
+      #                   items: ["string"],
+      #                 },
+      #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+      #                 min_ttl: 1, # required
+      #                 allowed_methods: {
+      #                   quantity: 1, # required
+      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                   cached_methods: {
+      #                     quantity: 1, # required
+      #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                   },
+      #                 },
+      #                 smooth_streaming: false,
+      #                 default_ttl: 1,
+      #                 max_ttl: 1,
+      #                 compress: false,
+      #               },
+      #             ],
+      #           },
+      #           custom_error_responses: {
+      #             quantity: 1, # required
+      #             items: [
+      #               {
+      #                 error_code: 1, # required
+      #                 response_page_path: "string",
+      #                 response_code: "string",
+      #                 error_caching_min_ttl: 1,
+      #               },
+      #             ],
+      #           },
+      #           comment: "string", # required
+      #           logging: {
+      #             enabled: false, # required
+      #             include_cookies: false, # required
+      #             bucket: "string", # required
+      #             prefix: "string", # required
+      #           },
+      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+      #           enabled: false, # required
+      #           viewer_certificate: {
+      #             cloud_front_default_certificate: false,
+      #             iam_certificate_id: "string",
+      #             acm_certificate_arn: "string",
+      #             ssl_support_method: "sni-only", # accepts sni-only, vip
+      #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+      #             certificate: "string",
+      #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+      #           },
+      #           restrictions: {
+      #             geo_restriction: { # required
+      #               restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
+      #           },
+      #           web_acl_id: "string",
+      #         },
+      #         tags: { # required
+      #           items: [
+      #             {
+      #               key: "TagKey", # required
+      #               value: "TagValue",
+      #             },
+      #           ],
+      #         },
+      #       }
+      class DistributionConfigWithTags < Aws::Structure.new(
+        :distribution_config,
+        :tags)
+
+        # @!attribute [rw] distribution_config
+        #   A distribution Configuration.
+        #   @return [Types::DistributionConfig]
+
+        # @!attribute [rw] tags
+        #   A complex type that contains zero or more Tag elements.
+        #   @return [Types::Tags]
+
+      end
+
       # A distribution list.
       class DistributionList < Aws::Structure.new(
         :marker,
@@ -1676,6 +2182,7 @@ module Aws
       # A summary of the information for an Amazon CloudFront distribution.
       class DistributionSummary < Aws::Structure.new(
         :id,
+        :arn,
         :status,
         :last_modified_time,
         :domain_name,
@@ -1693,6 +2200,12 @@ module Aws
 
         # @!attribute [rw] id
         #   The identifier for the distribution. For example: EDFDVBD632BHDS5.
+        #   @return [String]
+
+        # @!attribute [rw] arn
+        #   The ARN (Amazon Resource Name) for the distribution. For example:
+        #   arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
+        #   123456789012 is your AWS account Id.
         #   @return [String]
 
         # @!attribute [rw] status
@@ -1783,16 +2296,37 @@ module Aws
       #           quantity: 1, # required
       #           items: ["string"],
       #         },
+      #         query_string_cache_keys: {
+      #           quantity: 1, # required
+      #           items: ["string"],
+      #         },
       #       }
       class ForwardedValues < Aws::Structure.new(
         :query_string,
         :cookies,
-        :headers)
+        :headers,
+        :query_string_cache_keys)
 
         # @!attribute [rw] query_string
         #   Indicates whether you want CloudFront to forward query strings to
-        #   the origin that is associated with this cache behavior. If so,
-        #   specify true; if not, specify false.
+        #   the origin that is associated with this cache behavior and cache
+        #   based on the query string parameters. CloudFront behavior depends on
+        #   the value of QueryString and on the values that you specify for
+        #   QueryStringCacheKeys, if any:
+        #
+        #   * If you specify true for QueryString and you don\'t specify any
+        #     values for QueryStringCacheKeys, CloudFront forwards all query
+        #     string parameters to the origin and caches based on all query
+        #     string parameters. Depending on how many query string parameters
+        #     and values you have, this can adversely affect performance because
+        #     CloudFront must forward more requests to the origin.
+        #   * If you specify true for QueryString and you specify one or more
+        #     values for QueryStringCacheKeys, CloudFront forwards all query
+        #     string parameters to the origin, but it only caches based on the
+        #     query string parameters that you specify.
+        #   * If you specify false for QueryString, CloudFront doesn\'t forward
+        #     any query string parameters to the origin, and doesn\'t cache
+        #     based on query string parameters.
         #   @return [Boolean]
 
         # @!attribute [rw] cookies
@@ -1803,6 +2337,12 @@ module Aws
         #   A complex type that specifies the Headers, if any, that you want
         #   CloudFront to vary upon for this cache behavior.
         #   @return [Types::Headers]
+
+        # @!attribute [rw] query_string_cache_keys
+        #   A complex type that contains information about the query string
+        #   parameters that you want CloudFront to use for caching for this
+        #   cache behavior.
+        #   @return [Types::QueryStringCacheKeys]
 
       end
 
@@ -2475,6 +3015,32 @@ module Aws
 
       end
 
+      # The request to list tags for a CloudFront resource.
+      # @note When making an API call, pass ListTagsForResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource: "ResourceARN", # required
+      #       }
+      class ListTagsForResourceRequest < Aws::Structure.new(
+        :resource)
+
+        # @!attribute [rw] resource
+        #   An ARN of a CloudFront resource.
+        #   @return [String]
+
+      end
+
+      # The returned result of the corresponding request.
+      class ListTagsForResourceResult < Aws::Structure.new(
+        :tags)
+
+        # @!attribute [rw] tags
+        #   A complex type that contains zero or more Tag elements.
+        #   @return [Types::Tags]
+
+      end
+
       # A complex type that controls whether access logs are written for the
       # distribution.
       # @note When making an API call, pass LoggingConfig
@@ -2731,6 +3297,30 @@ module Aws
 
       end
 
+      # @note When making an API call, pass QueryStringCacheKeys
+      #   data as a hash:
+      #
+      #       {
+      #         quantity: 1, # required
+      #         items: ["string"],
+      #       }
+      class QueryStringCacheKeys < Aws::Structure.new(
+        :quantity,
+        :items)
+
+        # @!attribute [rw] quantity
+        #   The number of whitelisted query string parameters for this cache
+        #   behavior.
+        #   @return [Integer]
+
+        # @!attribute [rw] items
+        #   Optional: A list that contains the query string parameters that you
+        #   want CloudFront to use as a basis for caching for this cache
+        #   behavior. If Quantity is 0, you can omit Items.
+        #   @return [Array<String>]
+
+      end
+
       # A complex type that identifies ways in which you want to restrict
       # distribution of your content.
       # @note When making an API call, pass Restrictions
@@ -2836,6 +3426,7 @@ module Aws
       # A streaming distribution.
       class StreamingDistribution < Aws::Structure.new(
         :id,
+        :arn,
         :status,
         :last_modified_time,
         :domain_name,
@@ -2845,6 +3436,13 @@ module Aws
         # @!attribute [rw] id
         #   The identifier for the streaming distribution. For example:
         #   EGTXBD79H29TRA8.
+        #   @return [String]
+
+        # @!attribute [rw] arn
+        #   The ARN (Amazon Resource Name) for the streaming distribution. For
+        #   example:
+        #   arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5,
+        #   where 123456789012 is your AWS account Id.
         #   @return [String]
 
         # @!attribute [rw] status
@@ -2982,6 +3580,59 @@ module Aws
 
       end
 
+      # A streaming distribution Configuration and a list of tags to be
+      # associated with the streaming distribution.
+      # @note When making an API call, pass StreamingDistributionConfigWithTags
+      #   data as a hash:
+      #
+      #       {
+      #         streaming_distribution_config: { # required
+      #           caller_reference: "string", # required
+      #           s3_origin: { # required
+      #             domain_name: "string", # required
+      #             origin_access_identity: "string", # required
+      #           },
+      #           aliases: {
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
+      #           comment: "string", # required
+      #           logging: {
+      #             enabled: false, # required
+      #             bucket: "string", # required
+      #             prefix: "string", # required
+      #           },
+      #           trusted_signers: { # required
+      #             enabled: false, # required
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
+      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+      #           enabled: false, # required
+      #         },
+      #         tags: { # required
+      #           items: [
+      #             {
+      #               key: "TagKey", # required
+      #               value: "TagValue",
+      #             },
+      #           ],
+      #         },
+      #       }
+      class StreamingDistributionConfigWithTags < Aws::Structure.new(
+        :streaming_distribution_config,
+        :tags)
+
+        # @!attribute [rw] streaming_distribution_config
+        #   A streaming distribution Configuration.
+        #   @return [Types::StreamingDistributionConfig]
+
+        # @!attribute [rw] tags
+        #   A complex type that contains zero or more Tag elements.
+        #   @return [Types::Tags]
+
+      end
+
       # A streaming distribution list.
       class StreamingDistributionList < Aws::Structure.new(
         :marker,
@@ -3029,6 +3680,7 @@ module Aws
       # distribution.
       class StreamingDistributionSummary < Aws::Structure.new(
         :id,
+        :arn,
         :status,
         :last_modified_time,
         :domain_name,
@@ -3041,6 +3693,13 @@ module Aws
 
         # @!attribute [rw] id
         #   The identifier for the distribution. For example: EDFDVBD632BHDS5.
+        #   @return [String]
+
+        # @!attribute [rw] arn
+        #   The ARN (Amazon Resource Name) for the streaming distribution. For
+        #   example:
+        #   arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5,
+        #   where 123456789012 is your AWS account Id.
         #   @return [String]
 
         # @!attribute [rw] status
@@ -3139,6 +3798,98 @@ module Aws
 
       end
 
+      # A complex type that contains Tag key and Tag value.
+      # @note When making an API call, pass Tag
+      #   data as a hash:
+      #
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue",
+      #       }
+      class Tag < Aws::Structure.new(
+        :key,
+        :value)
+
+        # @!attribute [rw] key
+        #   A string that contains Tag key. The string length should be between
+        #   1 and 128 characters. Valid characters include a-z, A-Z, 0-9, space,
+        #   and the special characters \_ - . : / = + @.
+        #   @return [String]
+
+        # @!attribute [rw] value
+        #   A string that contains an optional Tag value. The string length
+        #   should be between 0 and 256 characters. Valid characters include
+        #   a-z, A-Z, 0-9, space, and the special characters \_ - . : / = + @.
+        #   @return [String]
+
+      end
+
+      # A complex type that contains zero or more Tag elements.
+      # @note When making an API call, pass TagKeys
+      #   data as a hash:
+      #
+      #       {
+      #         items: ["TagKey"],
+      #       }
+      class TagKeys < Aws::Structure.new(
+        :items)
+
+        # @!attribute [rw] items
+        #   A complex type that contains Tag key elements
+        #   @return [Array<String>]
+
+      end
+
+      # The request to add tags to a CloudFront resource.
+      # @note When making an API call, pass TagResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource: "ResourceARN", # required
+      #         tags: { # required
+      #           items: [
+      #             {
+      #               key: "TagKey", # required
+      #               value: "TagValue",
+      #             },
+      #           ],
+      #         },
+      #       }
+      class TagResourceRequest < Aws::Structure.new(
+        :resource,
+        :tags)
+
+        # @!attribute [rw] resource
+        #   An ARN of a CloudFront resource.
+        #   @return [String]
+
+        # @!attribute [rw] tags
+        #   A complex type that contains zero or more Tag elements.
+        #   @return [Types::Tags]
+
+      end
+
+      # A complex type that contains zero or more Tag elements.
+      # @note When making an API call, pass Tags
+      #   data as a hash:
+      #
+      #       {
+      #         items: [
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue",
+      #           },
+      #         ],
+      #       }
+      class Tags < Aws::Structure.new(
+        :items)
+
+        # @!attribute [rw] items
+        #   A complex type that contains Tag elements
+        #   @return [Array<Types::Tag>]
+
+      end
+
       # A complex type that specifies the AWS accounts, if any, that you want
       # to allow to create signed URLs for private content. If you want to
       # require signed URLs in requests for objects in the target origin that
@@ -3178,6 +3929,30 @@ module Aws
         #   Optional: A complex type that contains trusted signers for this
         #   cache behavior. If Quantity is 0, you can omit Items.
         #   @return [Array<String>]
+
+      end
+
+      # The request to remove tags from a CloudFront resource.
+      # @note When making an API call, pass UntagResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource: "ResourceARN", # required
+      #         tag_keys: { # required
+      #           items: ["TagKey"],
+      #         },
+      #       }
+      class UntagResourceRequest < Aws::Structure.new(
+        :resource,
+        :tag_keys)
+
+        # @!attribute [rw] resource
+        #   An ARN of a CloudFront resource.
+        #   @return [String]
+
+        # @!attribute [rw] tag_keys
+        #   A complex type that contains zero or more Tag key elements.
+        #   @return [Types::TagKeys]
 
       end
 
@@ -3287,6 +4062,10 @@ module Aws
       #                 quantity: 1, # required
       #                 items: ["string"],
       #               },
+      #               query_string_cache_keys: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
       #             },
       #             trusted_signers: { # required
       #               enabled: false, # required
@@ -3324,6 +4103,10 @@ module Aws
       #                     },
       #                   },
       #                   headers: {
+      #                     quantity: 1, # required
+      #                     items: ["string"],
+      #                   },
+      #                   query_string_cache_keys: {
       #                     quantity: 1, # required
       #                     items: ["string"],
       #                   },

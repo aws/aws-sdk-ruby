@@ -26,6 +26,7 @@ module Aws
       DestinationS3BucketName = Shapes::StringShape.new(name: 'DestinationS3BucketName')
       DestinationS3Prefix = Shapes::StringShape.new(name: 'DestinationS3Prefix')
       ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
+      FromDate = Shapes::TimestampShape.new(name: 'FromDate')
       GenerateDataSetRequest = Shapes::StructureShape.new(name: 'GenerateDataSetRequest')
       GenerateDataSetResult = Shapes::StructureShape.new(name: 'GenerateDataSetResult')
       MarketplaceCommerceAnalyticsException = Shapes::StructureShape.new(name: 'MarketplaceCommerceAnalyticsException')
@@ -33,6 +34,9 @@ module Aws
       OptionalValue = Shapes::StringShape.new(name: 'OptionalValue')
       RoleNameArn = Shapes::StringShape.new(name: 'RoleNameArn')
       SnsTopicArn = Shapes::StringShape.new(name: 'SnsTopicArn')
+      StartSupportDataExportRequest = Shapes::StructureShape.new(name: 'StartSupportDataExportRequest')
+      StartSupportDataExportResult = Shapes::StructureShape.new(name: 'StartSupportDataExportResult')
+      SupportDataSetType = Shapes::StringShape.new(name: 'SupportDataSetType')
 
       CustomerDefinedValues.key = Shapes::ShapeRef.new(shape: OptionalKey)
       CustomerDefinedValues.value = Shapes::ShapeRef.new(shape: OptionalValue)
@@ -48,6 +52,18 @@ module Aws
 
       GenerateDataSetResult.add_member(:data_set_request_id, Shapes::ShapeRef.new(shape: DataSetRequestId, location_name: "dataSetRequestId"))
       GenerateDataSetResult.struct_class = Types::GenerateDataSetResult
+
+      StartSupportDataExportRequest.add_member(:data_set_type, Shapes::ShapeRef.new(shape: SupportDataSetType, required: true, location_name: "dataSetType"))
+      StartSupportDataExportRequest.add_member(:from_date, Shapes::ShapeRef.new(shape: FromDate, required: true, location_name: "fromDate"))
+      StartSupportDataExportRequest.add_member(:role_name_arn, Shapes::ShapeRef.new(shape: RoleNameArn, required: true, location_name: "roleNameArn"))
+      StartSupportDataExportRequest.add_member(:destination_s3_bucket_name, Shapes::ShapeRef.new(shape: DestinationS3BucketName, required: true, location_name: "destinationS3BucketName"))
+      StartSupportDataExportRequest.add_member(:destination_s3_prefix, Shapes::ShapeRef.new(shape: DestinationS3Prefix, location_name: "destinationS3Prefix"))
+      StartSupportDataExportRequest.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SnsTopicArn, required: true, location_name: "snsTopicArn"))
+      StartSupportDataExportRequest.add_member(:customer_defined_values, Shapes::ShapeRef.new(shape: CustomerDefinedValues, location_name: "customerDefinedValues"))
+      StartSupportDataExportRequest.struct_class = Types::StartSupportDataExportRequest
+
+      StartSupportDataExportResult.add_member(:data_set_request_id, Shapes::ShapeRef.new(shape: DataSetRequestId, location_name: "dataSetRequestId"))
+      StartSupportDataExportResult.struct_class = Types::StartSupportDataExportResult
 
 
       # @api private
@@ -71,6 +87,15 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GenerateDataSetRequest)
           o.output = Shapes::ShapeRef.new(shape: GenerateDataSetResult)
+          o.errors << Shapes::ShapeRef.new(shape: MarketplaceCommerceAnalyticsException)
+        end)
+
+        api.add_operation(:start_support_data_export, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "StartSupportDataExport"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: StartSupportDataExportRequest)
+          o.output = Shapes::ShapeRef.new(shape: StartSupportDataExportResult)
           o.errors << Shapes::ShapeRef.new(shape: MarketplaceCommerceAnalyticsException)
         end)
       end

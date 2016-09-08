@@ -67,6 +67,7 @@ module Aws
       Ec2InstanceAttributes = Shapes::StructureShape.new(name: 'Ec2InstanceAttributes')
       ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
       ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+      FailureDetails = Shapes::StructureShape.new(name: 'FailureDetails')
       HadoopJarStepConfig = Shapes::StructureShape.new(name: 'HadoopJarStepConfig')
       HadoopStepConfig = Shapes::StructureShape.new(name: 'HadoopStepConfig')
       Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -321,6 +322,11 @@ module Aws
       Ec2InstanceAttributes.add_member(:additional_master_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "AdditionalMasterSecurityGroups"))
       Ec2InstanceAttributes.add_member(:additional_slave_security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "AdditionalSlaveSecurityGroups"))
       Ec2InstanceAttributes.struct_class = Types::Ec2InstanceAttributes
+
+      FailureDetails.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "Reason"))
+      FailureDetails.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+      FailureDetails.add_member(:log_file, Shapes::ShapeRef.new(shape: String, location_name: "LogFile"))
+      FailureDetails.struct_class = Types::FailureDetails
 
       HadoopJarStepConfig.add_member(:properties, Shapes::ShapeRef.new(shape: KeyValueList, location_name: "Properties"))
       HadoopJarStepConfig.add_member(:jar, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Jar"))
@@ -642,6 +648,7 @@ module Aws
 
       StepStatus.add_member(:state, Shapes::ShapeRef.new(shape: StepState, location_name: "State"))
       StepStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: StepStateChangeReason, location_name: "StateChangeReason"))
+      StepStatus.add_member(:failure_details, Shapes::ShapeRef.new(shape: FailureDetails, location_name: "FailureDetails"))
       StepStatus.add_member(:timeline, Shapes::ShapeRef.new(shape: StepTimeline, location_name: "Timeline"))
       StepStatus.struct_class = Types::StepStatus
 

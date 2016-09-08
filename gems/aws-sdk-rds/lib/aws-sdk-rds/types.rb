@@ -121,7 +121,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] tags
@@ -150,7 +150,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] apply_action
@@ -279,7 +279,8 @@ module Aws
         :certificate_type,
         :thumbprint,
         :valid_from,
-        :valid_till)
+        :valid_till,
+        :certificate_arn)
 
         # @!attribute [rw] certificate_identifier
         #   The unique key that identifies a certificate.
@@ -300,6 +301,10 @@ module Aws
         # @!attribute [rw] valid_till
         #   The final date that the certificate continues to be valid.
         #   @return [Time]
+
+        # @!attribute [rw] certificate_arn
+        #   The Amazon Resource Name (ARN) for the certificate.
+        #   @return [String]
 
       end
 
@@ -376,7 +381,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] target_db_cluster_parameter_group_identifier
@@ -519,17 +524,12 @@ module Aws
         #
         #   * Must specify a valid DB parameter group.
         #
-        #   * If the source DB parameter group is in the same region as the
-        #     copy, specify a valid DB parameter group identifier, for example
+        #   * Must specify a valid DB parameter group identifier, for example
         #     `my-db-param-group`, or a valid ARN.
         #
-        #   * If the source DB parameter group is in a different region than the
-        #     copy, specify a valid DB parameter group ARN, for example
-        #     `arn:aws:rds:us-west-2:123456789012:pg:special-parameters`.
         #
         #
-        #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] target_db_parameter_group_identifier
@@ -723,7 +723,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] target_option_group_identifier
@@ -863,8 +863,8 @@ module Aws
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of the DB cluster parameter group to associate with this DB
-        #   cluster. If this argument is omitted, `default.aurora5.6` for the
-        #   specified engine will be used.
+        #   cluster. If this argument is omitted, `default.aurora5.6` will be
+        #   used.
         #
         #   Constraints:
         #
@@ -910,7 +910,7 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] master_username
-        #   The name of the master user for the client DB cluster.
+        #   The name of the master user for the DB cluster.
         #
         #   Constraints:
         #
@@ -1748,10 +1748,6 @@ module Aws
         #
         #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
         #
-        #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
-        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-        #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
-        #
         #   **Oracle Database Enterprise Edition (oracle-ee)**
         #
         #   * **Version 12.1 (available in all AWS regions except ap-south-1,
@@ -1766,18 +1762,6 @@ module Aws
         #
         #   * **Version 12.1 (available in all AWS regions except
         #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-        #
-        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-        #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 |
-        #     11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-        #
-        #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-        #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-        #
-        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
         #
         #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
         #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -1796,18 +1780,6 @@ module Aws
         #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
         #     12.1.0.1.v4 | 12.1.0.1.v5`
         #
-        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-        #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 |
-        #     11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-        #
-        #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-        #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-        #
-        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
-        #
         #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
         #     11.2.0.4.v3 | 11.2.0.4.v4`
         #
@@ -1824,18 +1796,6 @@ module Aws
         #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
         #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
         #     12.1.0.1.v4 | 12.1.0.1.v5`
-        #
-        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-        #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-        #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 |
-        #     11.2.0.2.v4 | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-        #
-        #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-        #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-        #
-        #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-        #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-        #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
         #
         #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
         #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -2126,7 +2086,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] db_instance_class
@@ -2416,8 +2376,6 @@ module Aws
         #
         #   * Must not be \"Default\"
         #
-        #   * Cannot contain spaces
-        #
         #   Example: `mysecuritygroup`
         #   @return [String]
 
@@ -2546,9 +2504,8 @@ module Aws
         #   The name for the DB subnet group. This value is stored as a
         #   lowercase string.
         #
-        #   Constraints: Must contain no more than 255 alphanumeric characters.
-        #   Cannot contain periods, underscores, spaces, or hyphens. Must not be
-        #   `default`.
+        #   Constraints: Must contain no more than 255 alphanumeric characters,
+        #   periods, underscores, spaces, or hyphens. Must not be default.
         #
         #   Example: `mySubnetgroup`
         #   @return [String]
@@ -2801,7 +2758,8 @@ module Aws
         :hosted_zone_id,
         :storage_encrypted,
         :kms_key_id,
-        :db_cluster_resource_id)
+        :db_cluster_resource_id,
+        :db_cluster_arn)
 
         # @!attribute [rw] allocated_storage
         #   Specifies the allocated storage size in gigabytes (GB).
@@ -2939,6 +2897,10 @@ module Aws
         #   key for the DB cluster is accessed.
         #   @return [String]
 
+        # @!attribute [rw] db_cluster_arn
+        #   The Amazon Resource Name (ARN) for the DB cluster.
+        #   @return [String]
+
       end
 
       # Contains information about an instance that is part of a DB cluster.
@@ -3016,7 +2978,8 @@ module Aws
       class DBClusterParameterGroup < Aws::Structure.new(
         :db_cluster_parameter_group_name,
         :db_parameter_group_family,
-        :description)
+        :description,
+        :db_cluster_parameter_group_arn)
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   Provides the name of the DB cluster parameter group.
@@ -3030,6 +2993,10 @@ module Aws
         # @!attribute [rw] description
         #   Provides the customer-specified description for this DB cluster
         #   parameter group.
+        #   @return [String]
+
+        # @!attribute [rw] db_cluster_parameter_group_arn
+        #   The Amazon Resource Name (ARN) for the DB cluster parameter group.
         #   @return [String]
 
       end
@@ -3117,7 +3084,8 @@ module Aws
         :snapshot_type,
         :percent_progress,
         :storage_encrypted,
-        :kms_key_id)
+        :kms_key_id,
+        :db_cluster_snapshot_arn)
 
         # @!attribute [rw] availability_zones
         #   Provides the list of EC2 Availability Zones that instances in the DB
@@ -3193,6 +3161,10 @@ module Aws
         # @!attribute [rw] kms_key_id
         #   If `StorageEncrypted` is true, the KMS key identifier for the
         #   encrypted DB cluster snapshot.
+        #   @return [String]
+
+        # @!attribute [rw] db_cluster_snapshot_arn
+        #   The Amazon Resource Name (ARN) for the DB cluster snapshot.
         #   @return [String]
 
       end
@@ -3393,7 +3365,8 @@ module Aws
         :monitoring_interval,
         :enhanced_monitoring_resource_arn,
         :monitoring_role_arn,
-        :promotion_tier)
+        :promotion_tier,
+        :db_instance_arn)
 
         # @!attribute [rw] db_instance_identifier
         #   Contains a user-supplied database identifier. This identifier is the
@@ -3653,6 +3626,10 @@ module Aws
         #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
         #   @return [Integer]
 
+        # @!attribute [rw] db_instance_arn
+        #   The Amazon Resource Name (ARN) for the DB instance.
+        #   @return [String]
+
       end
 
       # Contains the result of a successful invocation of the
@@ -3710,7 +3687,8 @@ module Aws
       class DBParameterGroup < Aws::Structure.new(
         :db_parameter_group_name,
         :db_parameter_group_family,
-        :description)
+        :description,
+        :db_parameter_group_arn)
 
         # @!attribute [rw] db_parameter_group_name
         #   Provides the name of the DB parameter group.
@@ -3724,6 +3702,10 @@ module Aws
         # @!attribute [rw] description
         #   Provides the customer-specified description for this DB parameter
         #   group.
+        #   @return [String]
+
+        # @!attribute [rw] db_parameter_group_arn
+        #   The Amazon Resource Name (ARN) for the DB parameter group.
         #   @return [String]
 
       end
@@ -3823,7 +3805,8 @@ module Aws
         :db_security_group_description,
         :vpc_id,
         :ec2_security_groups,
-        :ip_ranges)
+        :ip_ranges,
+        :db_security_group_arn)
 
         # @!attribute [rw] owner_id
         #   Provides the AWS ID of the owner of a specific DB security group.
@@ -3848,6 +3831,10 @@ module Aws
         # @!attribute [rw] ip_ranges
         #   Contains a list of IPRange elements.
         #   @return [Array<Types::IPRange>]
+
+        # @!attribute [rw] db_security_group_arn
+        #   The Amazon Resource Name (ARN) for the DB security group.
+        #   @return [String]
 
       end
 
@@ -3924,7 +3911,8 @@ module Aws
         :storage_type,
         :tde_credential_arn,
         :encrypted,
-        :kms_key_id)
+        :kms_key_id,
+        :db_snapshot_arn)
 
         # @!attribute [rw] db_snapshot_identifier
         #   Specifies the identifier for the DB snapshot.
@@ -4027,6 +4015,10 @@ module Aws
         #   snapshot.
         #   @return [String]
 
+        # @!attribute [rw] db_snapshot_arn
+        #   The Amazon Resource Name (ARN) for the DB snapshot.
+        #   @return [String]
+
       end
 
       # Contains the name and values of a manual DB snapshot attribute
@@ -4116,7 +4108,8 @@ module Aws
         :db_subnet_group_description,
         :vpc_id,
         :subnet_group_status,
-        :subnets)
+        :subnets,
+        :db_subnet_group_arn)
 
         # @!attribute [rw] db_subnet_group_name
         #   The name of the DB subnet group.
@@ -4137,6 +4130,10 @@ module Aws
         # @!attribute [rw] subnets
         #   Contains a list of Subnet elements.
         #   @return [Array<Types::Subnet>]
+
+        # @!attribute [rw] db_subnet_group_arn
+        #   The Amazon Resource Name (ARN) for the DB subnet group.
+        #   @return [String]
 
       end
 
@@ -4437,8 +4434,6 @@ module Aws
         #   * Cannot end with a hyphen or contain two consecutive hyphens
         #
         #   * Must not be \"Default\"
-        #
-        #   * Cannot contain spaces
         #   @return [String]
 
       end
@@ -5483,10 +5478,11 @@ module Aws
         #     public.
         #
         #   If you don\'t specify a `SnapshotType` value, then both automated
-        #   and manual snapshots are returned. You can include shared snapshots
-        #   with these results by setting the `IncludeShared` parameter to
-        #   `true`. You can include public snapshots with these results by
-        #   setting the `IncludePublic` parameter to `true`.
+        #   and manual snapshots are returned. Shared and public DB snapshots
+        #   are not included in the returned results by default. You can include
+        #   shared snapshots with these results by setting the `IncludeShared`
+        #   parameter to `true`. You can include public snapshots with these
+        #   results by setting the `IncludePublic` parameter to `true`.
         #
         #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
         #   `SnapshotType` values of `manual` or `automated`. The
@@ -6342,6 +6338,61 @@ module Aws
 
       end
 
+      # @note When making an API call, pass DescribeSourceRegionsMessage
+      #   data as a hash:
+      #
+      #       {
+      #         region_name: "String",
+      #         max_records: 1,
+      #         marker: "String",
+      #         filters: [
+      #           {
+      #             name: "String", # required
+      #             values: ["String"], # required
+      #           },
+      #         ],
+      #       }
+      class DescribeSourceRegionsMessage < Aws::Structure.new(
+        :region_name,
+        :max_records,
+        :marker,
+        :filters)
+
+        # @!attribute [rw] region_name
+        #   The source region name, for example US West (Oregon).
+        #
+        #   Constraints:
+        #
+        #   * Must specify a valid AWS Region name, for example US West
+        #     (Oregon).
+        #
+        #   ^
+        #   @return [String]
+
+        # @!attribute [rw] max_records
+        #   The maximum number of records to include in the response. If more
+        #   records exist than the specified `MaxRecords` value, a pagination
+        #   token called a marker is included in the response so that the
+        #   remaining results can be retrieved.
+        #
+        #   Default: 100
+        #
+        #   Constraints: Minimum 20, maximum 100.
+        #   @return [Integer]
+
+        # @!attribute [rw] marker
+        #   An optional pagination token provided by a previous
+        #   DescribeSourceRegions request. If this parameter is specified, the
+        #   response includes only records beyond the marker, up to the value
+        #   specified by `MaxRecords`.
+        #   @return [String]
+
+        # @!attribute [rw] filters
+        #   This parameter is not currently supported.
+        #   @return [Array<Types::Filter>]
+
+      end
+
       # An Active Directory Domain membership record associated with the DB
       # instance.
       class DomainMembership < Aws::Structure.new(
@@ -6552,7 +6603,8 @@ module Aws
         :source_type,
         :message,
         :event_categories,
-        :date)
+        :date,
+        :source_arn)
 
         # @!attribute [rw] source_identifier
         #   Provides the identifier for the source of the event.
@@ -6573,6 +6625,10 @@ module Aws
         # @!attribute [rw] date
         #   Specifies the date and time of the event.
         #   @return [Time]
+
+        # @!attribute [rw] source_arn
+        #   The Amazon Resource Name (ARN) for the event.
+        #   @return [String]
 
       end
 
@@ -6613,7 +6669,8 @@ module Aws
         :source_type,
         :source_ids_list,
         :event_categories_list,
-        :enabled)
+        :enabled,
+        :event_subscription_arn)
 
         # @!attribute [rw] customer_aws_id
         #   The AWS customer account associated with the RDS event notification
@@ -6663,6 +6720,10 @@ module Aws
         #   A Boolean value indicating if the subscription is enabled. True
         #   indicates the subscription is enabled.
         #   @return [Boolean]
+
+        # @!attribute [rw] event_subscription_arn
+        #   The Amazon Resource Name (ARN) for the event subscription.
+        #   @return [String]
 
       end
 
@@ -6822,7 +6883,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] filters
@@ -7143,6 +7204,7 @@ module Aws
       #         db_instance_identifier: "String", # required
       #         allocated_storage: 1,
       #         db_instance_class: "String",
+      #         db_subnet_group_name: "String",
       #         db_security_groups: ["String"],
       #         vpc_security_group_ids: ["String"],
       #         apply_immediately: false,
@@ -7155,6 +7217,7 @@ module Aws
       #         engine_version: "String",
       #         allow_major_version_upgrade: false,
       #         auto_minor_version_upgrade: false,
+      #         license_model: "String",
       #         iops: 1,
       #         option_group_name: "String",
       #         new_db_instance_identifier: "String",
@@ -7175,6 +7238,7 @@ module Aws
         :db_instance_identifier,
         :allocated_storage,
         :db_instance_class,
+        :db_subnet_group_name,
         :db_security_groups,
         :vpc_security_group_ids,
         :apply_immediately,
@@ -7187,6 +7251,7 @@ module Aws
         :engine_version,
         :allow_major_version_upgrade,
         :auto_minor_version_upgrade,
+        :license_model,
         :iops,
         :option_group_name,
         :new_db_instance_identifier,
@@ -7313,6 +7378,28 @@ module Aws
         #   db.m4.4xlarge | db.m4.10xlarge | db.r3.large | db.r3.xlarge |
         #   db.r3.2xlarge | db.r3.4xlarge | db.r3.8xlarge | db.t2.micro |
         #   db.t2.small | db.t2.medium | db.t2.large`
+        #   @return [String]
+
+        # @!attribute [rw] db_subnet_group_name
+        #   The new DB subnet group for the DB instance. You can use this
+        #   parameter to move your DB instance to a different VPC, or to a
+        #   different subnet group in the same VPC. If your DB instance is not
+        #   in a VPC, you can also use this parameter to move your DB instance
+        #   into a VPC. For more information, see [Updating the VPC for a DB
+        #   Instance][1].
+        #
+        #   Changing the subnet group causes an outage during the change. The
+        #   change is applied during the next maintenance window, unless you
+        #   specify `true` for the `ApplyImmediately` parameter.
+        #
+        #   Constraints: Must contain no more than 255 alphanumeric characters,
+        #   periods, underscores, spaces, or hyphens.
+        #
+        #   Example: `mySubnetGroup`
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC
         #   @return [String]
 
         # @!attribute [rw] db_security_groups
@@ -7512,6 +7599,13 @@ module Aws
         #   maintenance window, and a newer minor version is available, and RDS
         #   has enabled auto patching for that engine version.
         #   @return [Boolean]
+
+        # @!attribute [rw] license_model
+        #   The license model for the DB instance.
+        #
+        #   Valid values: `license-included` \| `bring-your-own-license` \|
+        #   `general-public-license`
+        #   @return [String]
 
         # @!attribute [rw] iops
         #   The new Provisioned IOPS (I/O operations per second) value for the
@@ -8009,6 +8103,7 @@ module Aws
       #           {
       #             option_name: "String", # required
       #             port: 1,
+      #             option_version: "String",
       #             db_security_group_memberships: ["String"],
       #             vpc_security_group_memberships: ["String"],
       #             option_settings: [
@@ -8077,6 +8172,7 @@ module Aws
         :persistent,
         :permanent,
         :port,
+        :option_version,
         :option_settings,
         :db_security_group_memberships,
         :vpc_security_group_memberships)
@@ -8101,6 +8197,10 @@ module Aws
         #   If required, the port configured for this option to use.
         #   @return [Integer]
 
+        # @!attribute [rw] option_version
+        #   The version of the option.
+        #   @return [String]
+
         # @!attribute [rw] option_settings
         #   The option settings for this option.
         #   @return [Array<Types::OptionSetting>]
@@ -8124,6 +8224,7 @@ module Aws
       #       {
       #         option_name: "String", # required
       #         port: 1,
+      #         option_version: "String",
       #         db_security_group_memberships: ["String"],
       #         vpc_security_group_memberships: ["String"],
       #         option_settings: [
@@ -8143,6 +8244,7 @@ module Aws
       class OptionConfiguration < Aws::Structure.new(
         :option_name,
         :port,
+        :option_version,
         :db_security_group_memberships,
         :vpc_security_group_memberships,
         :option_settings)
@@ -8154,6 +8256,10 @@ module Aws
         # @!attribute [rw] port
         #   The optional port for the option.
         #   @return [Integer]
+
+        # @!attribute [rw] option_version
+        #   The version for the option.
+        #   @return [String]
 
         # @!attribute [rw] db_security_group_memberships
         #   A list of DBSecurityGroupMemebrship name strings used for this
@@ -8178,7 +8284,8 @@ module Aws
         :major_engine_version,
         :options,
         :allows_vpc_and_non_vpc_instance_memberships,
-        :vpc_id)
+        :vpc_id,
+        :option_group_arn)
 
         # @!attribute [rw] option_group_name
         #   Specifies the name of the option group.
@@ -8217,6 +8324,10 @@ module Aws
         #   indicated by this field.
         #   @return [String]
 
+        # @!attribute [rw] option_group_arn
+        #   The Amazon Resource Name (ARN) for the option group.
+        #   @return [String]
+
       end
 
       # Provides information on the option groups the DB instance is a member
@@ -8248,9 +8359,11 @@ module Aws
         :port_required,
         :default_port,
         :options_depended_on,
+        :options_conflicts_with,
         :persistent,
         :permanent,
-        :option_group_option_settings)
+        :option_group_option_settings,
+        :option_group_option_versions)
 
         # @!attribute [rw] name
         #   The name of the option.
@@ -8282,26 +8395,34 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] options_depended_on
-        #   List of all options that are prerequisites for this option.
+        #   The options that are prerequisites for this option.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] options_conflicts_with
+        #   The options that conflict with this option.
         #   @return [Array<String>]
 
         # @!attribute [rw] persistent
-        #   A persistent option cannot be removed from the option group once the
-        #   option group is used, but this option can be removed from the db
-        #   instance while modifying the related data and assigning another
-        #   option group without this option.
+        #   Persistent options can\'t be removed from an option group while DB
+        #   instances are associated with the option group. If you disassociate
+        #   all DB instances from the option group, your can remove the
+        #   persistent option from the option group.
         #   @return [Boolean]
 
         # @!attribute [rw] permanent
-        #   A permanent option cannot be removed from the option group once the
-        #   option group is used, and it cannot be removed from the db instance
-        #   after assigning an option group with this permanent option.
+        #   Permanent options can never be removed from an option group. An
+        #   option group containing a permanent option can\'t be removed from a
+        #   DB instance.
         #   @return [Boolean]
 
         # @!attribute [rw] option_group_option_settings
-        #   Specifies the option settings that are available (and the default
-        #   value) for each option in an option group.
+        #   The option settings that are available (and the default value) for
+        #   each option in an option group.
         #   @return [Array<Types::OptionGroupOptionSetting>]
+
+        # @!attribute [rw] option_group_option_versions
+        #   The versions that are available for the option.
+        #   @return [Array<Types::OptionVersion>]
 
       end
 
@@ -8441,6 +8562,23 @@ module Aws
 
         # @!attribute [rw] is_collection
         #   Indicates if the option setting is part of a collection.
+        #   @return [Boolean]
+
+      end
+
+      # The version for an option. Option group option versions are returned
+      # by the DescribeOptionGroupOptions action.
+      class OptionVersion < Aws::Structure.new(
+        :version,
+        :is_default)
+
+        # @!attribute [rw] version
+        #   The version of the option.
+        #   @return [String]
+
+        # @!attribute [rw] is_default
+        #   True if the version is the default version of the option; otherwise,
+        #   false.
         #   @return [Boolean]
 
       end
@@ -8690,10 +8828,12 @@ module Aws
         :backup_retention_period,
         :multi_az,
         :engine_version,
+        :license_model,
         :iops,
         :db_instance_identifier,
         :storage_type,
-        :ca_certificate_identifier)
+        :ca_certificate_identifier,
+        :db_subnet_group_name)
 
         # @!attribute [rw] db_instance_class
         #   Contains the new `DBInstanceClass` for the DB instance that will be
@@ -8728,6 +8868,13 @@ module Aws
         #   Indicates the database engine version.
         #   @return [String]
 
+        # @!attribute [rw] license_model
+        #   The license model for the DB instance.
+        #
+        #   Valid values: `license-included` \| `bring-your-own-license` \|
+        #   `general-public-license`
+        #   @return [String]
+
         # @!attribute [rw] iops
         #   Specifies the new Provisioned IOPS value for the DB instance that
         #   will be applied or is being applied.
@@ -8744,6 +8891,10 @@ module Aws
 
         # @!attribute [rw] ca_certificate_identifier
         #   Specifies the identifier of the CA certificate for the DB instance.
+        #   @return [String]
+
+        # @!attribute [rw] db_subnet_group_name
+        #   The new DB subnet group for the DB instance.
         #   @return [String]
 
       end
@@ -9066,7 +9217,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.ARN
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing
         #   @return [String]
 
         # @!attribute [rw] tag_keys
@@ -9092,7 +9243,8 @@ module Aws
         :offering_type,
         :multi_az,
         :state,
-        :recurring_charges)
+        :recurring_charges,
+        :reserved_db_instance_arn)
 
         # @!attribute [rw] reserved_db_instance_id
         #   The unique identifier for the reservation.
@@ -9149,6 +9301,10 @@ module Aws
         # @!attribute [rw] recurring_charges
         #   The recurring price charged to run this reserved DB instance.
         #   @return [Array<Types::RecurringCharge>]
+
+        # @!attribute [rw] reserved_db_instance_arn
+        #   The Amazon Resource Name (ARN) for the reserved DB instance.
+        #   @return [String]
 
       end
 
@@ -9376,6 +9532,315 @@ module Aws
         #   A list that provides details about the pending maintenance actions
         #   for the resource.
         #   @return [Array<Types::PendingMaintenanceAction>]
+
+      end
+
+      # @note When making an API call, pass RestoreDBClusterFromS3Message
+      #   data as a hash:
+      #
+      #       {
+      #         availability_zones: ["String"],
+      #         backup_retention_period: 1,
+      #         character_set_name: "String",
+      #         database_name: "String",
+      #         db_cluster_identifier: "String", # required
+      #         db_cluster_parameter_group_name: "String",
+      #         vpc_security_group_ids: ["String"],
+      #         db_subnet_group_name: "String",
+      #         engine: "String", # required
+      #         engine_version: "String",
+      #         port: 1,
+      #         master_username: "String", # required
+      #         master_user_password: "String", # required
+      #         option_group_name: "String",
+      #         preferred_backup_window: "String",
+      #         preferred_maintenance_window: "String",
+      #         tags: [
+      #           {
+      #             key: "String",
+      #             value: "String",
+      #           },
+      #         ],
+      #         storage_encrypted: false,
+      #         kms_key_id: "String",
+      #         source_engine: "String", # required
+      #         source_engine_version: "String", # required
+      #         s3_bucket_name: "String", # required
+      #         s3_prefix: "String",
+      #         s3_ingestion_role_arn: "String", # required
+      #       }
+      class RestoreDBClusterFromS3Message < Aws::Structure.new(
+        :availability_zones,
+        :backup_retention_period,
+        :character_set_name,
+        :database_name,
+        :db_cluster_identifier,
+        :db_cluster_parameter_group_name,
+        :vpc_security_group_ids,
+        :db_subnet_group_name,
+        :engine,
+        :engine_version,
+        :port,
+        :master_username,
+        :master_user_password,
+        :option_group_name,
+        :preferred_backup_window,
+        :preferred_maintenance_window,
+        :tags,
+        :storage_encrypted,
+        :kms_key_id,
+        :source_engine,
+        :source_engine_version,
+        :s3_bucket_name,
+        :s3_prefix,
+        :s3_ingestion_role_arn)
+
+        # @!attribute [rw] availability_zones
+        #   A list of EC2 Availability Zones that instances in the restored DB
+        #   cluster can be created in.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] backup_retention_period
+        #   The number of days for which automated backups of the restored DB
+        #   cluster are retained. You must specify a minimum value of 1.
+        #
+        #   Default: 1
+        #
+        #   Constraints:
+        #
+        #   * Must be a value from 1 to 35
+        #
+        #   ^
+        #   @return [Integer]
+
+        # @!attribute [rw] character_set_name
+        #   A value that indicates that the restored DB cluster should be
+        #   associated with the specified CharacterSet.
+        #   @return [String]
+
+        # @!attribute [rw] database_name
+        #   The database name for the restored DB cluster.
+        #   @return [String]
+
+        # @!attribute [rw] db_cluster_identifier
+        #   The name of the DB cluster to create from the source data in the S3
+        #   bucket. This parameter is isn\'t case-sensitive.
+        #
+        #   Constraints:
+        #
+        #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+        #
+        #   * First character must be a letter.
+        #
+        #   * Cannot end with a hyphen or contain two consecutive hyphens.
+        #
+        #   Example: `my-cluster1`
+        #   @return [String]
+
+        # @!attribute [rw] db_cluster_parameter_group_name
+        #   The name of the DB cluster parameter group to associate with the
+        #   restored DB cluster. If this argument is omitted,
+        #   `default.aurora5.6` will be used.
+        #
+        #   Constraints:
+        #
+        #   * Must be 1 to 255 alphanumeric characters
+        #
+        #   * First character must be a letter
+        #
+        #   * Cannot end with a hyphen or contain two consecutive hyphens
+        #   @return [String]
+
+        # @!attribute [rw] vpc_security_group_ids
+        #   A list of EC2 VPC security groups to associate with the restored DB
+        #   cluster.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] db_subnet_group_name
+        #   A DB subnet group to associate with the restored DB cluster.
+        #
+        #   Constraints: Must contain no more than 255 alphanumeric characters,
+        #   periods, underscores, spaces, or hyphens. Must not be default.
+        #
+        #   Example: `mySubnetgroup`
+        #   @return [String]
+
+        # @!attribute [rw] engine
+        #   The name of the database engine to be used for the restored DB
+        #   cluster.
+        #
+        #   Valid Values: `aurora`
+        #   @return [String]
+
+        # @!attribute [rw] engine_version
+        #   The version number of the database engine to use.
+        #
+        #   **Aurora**
+        #
+        #   Example: `5.6.10a`
+        #   @return [String]
+
+        # @!attribute [rw] port
+        #   The port number on which the instances in the restored DB cluster
+        #   accept connections.
+        #
+        #   Default: `3306`
+        #   @return [Integer]
+
+        # @!attribute [rw] master_username
+        #   The name of the master user for the restored DB cluster.
+        #
+        #   Constraints:
+        #
+        #   * Must be 1 to 16 alphanumeric characters.
+        #
+        #   * First character must be a letter.
+        #
+        #   * Cannot be a reserved word for the chosen database engine.
+        #   @return [String]
+
+        # @!attribute [rw] master_user_password
+        #   The password for the master database user. This password can contain
+        #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+        #
+        #   Constraints: Must contain from 8 to 41 characters.
+        #   @return [String]
+
+        # @!attribute [rw] option_group_name
+        #   A value that indicates that the restored DB cluster should be
+        #   associated with the specified option group.
+        #
+        #   Permanent options cannot be removed from an option group. An option
+        #   group cannot be removed from a DB cluster once it is associated with
+        #   a DB cluster.
+        #   @return [String]
+
+        # @!attribute [rw] preferred_backup_window
+        #   The daily time range during which automated backups are created if
+        #   automated backups are enabled using the `BackupRetentionPeriod`
+        #   parameter.
+        #
+        #   Default: A 30-minute window selected at random from an 8-hour block
+        #   of time per region. To see the time blocks available, see [
+        #   Adjusting the Preferred Maintenance Window][1] in the *Amazon RDS
+        #   User Guide.*
+        #
+        #   Constraints:
+        #
+        #   * Must be in the format `hh24:mi-hh24:mi`.
+        #
+        #   * Times should be in Universal Coordinated Time (UTC).
+        #
+        #   * Must not conflict with the preferred maintenance window.
+        #
+        #   * Must be at least 30 minutes.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+        #   @return [String]
+
+        # @!attribute [rw] preferred_maintenance_window
+        #   The weekly time range during which system maintenance can occur, in
+        #   Universal Coordinated Time (UTC).
+        #
+        #   Format: `ddd:hh24:mi-ddd:hh24:mi`
+        #
+        #   Default: A 30-minute window selected at random from an 8-hour block
+        #   of time per region, occurring on a random day of the week. To see
+        #   the time blocks available, see [ Adjusting the Preferred Maintenance
+        #   Window][1] in the *Amazon RDS User Guide.*
+        #
+        #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+        #
+        #   Constraints: Minimum 30-minute window.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html
+        #   @return [String]
+
+        # @!attribute [rw] tags
+        #   A list of tags.
+        #   @return [Array<Types::Tag>]
+
+        # @!attribute [rw] storage_encrypted
+        #   Specifies whether the restored DB cluster is encrypted.
+        #   @return [Boolean]
+
+        # @!attribute [rw] kms_key_id
+        #   The KMS key identifier for an encrypted DB cluster.
+        #
+        #   The KMS key identifier is the Amazon Resource Name (ARN) for the KMS
+        #   encryption key. If you are creating a DB cluster with the same AWS
+        #   account that owns the KMS encryption key used to encrypt the new DB
+        #   cluster, then you can use the KMS key alias instead of the ARN for
+        #   the KM encryption key.
+        #
+        #   If the `StorageEncrypted` parameter is true, and you do not specify
+        #   a value for the `KmsKeyId` parameter, then Amazon RDS will use your
+        #   default encryption key. AWS KMS creates the default encryption key
+        #   for your AWS account. Your AWS account has a different default
+        #   encryption key for each AWS region.
+        #   @return [String]
+
+        # @!attribute [rw] source_engine
+        #   The identifier for the database engine that was backed up to create
+        #   the files stored in the Amazon S3 bucket.
+        #
+        #   Valid values: `mysql`
+        #   @return [String]
+
+        # @!attribute [rw] source_engine_version
+        #   The version of the database that the backup files were created from.
+        #
+        #   MySQL version 5.5 and 5.6 are supported.
+        #
+        #   Example: `5.6.22`
+        #   @return [String]
+
+        # @!attribute [rw] s3_bucket_name
+        #   The name of the Amazon S3 bucket that contains the data used to
+        #   create the Amazon Aurora DB cluster.
+        #   @return [String]
+
+        # @!attribute [rw] s3_prefix
+        #   The prefix for all of the file names that contain the data used to
+        #   create the Amazon Aurora DB cluster. If you do not specify a
+        #   **SourceS3Prefix** value, then the Amazon Aurora DB cluster is
+        #   created by using all of the files in the Amazon S3 bucket.
+        #   @return [String]
+
+        # @!attribute [rw] s3_ingestion_role_arn
+        #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+        #   Management (IAM) role that authorizes Amazon RDS to access the
+        #   Amazon S3 bucket on your behalf.
+        #   @return [String]
+
+      end
+
+      class RestoreDBClusterFromS3Result < Aws::Structure.new(
+        :db_cluster)
+
+        # @!attribute [rw] db_cluster
+        #   Contains the result of a successful invocation of the following
+        #   actions:
+        #
+        #   * CreateDBCluster
+        #
+        #   * DeleteDBCluster
+        #
+        #   * FailoverDBCluster
+        #
+        #   * ModifyDBCluster
+        #
+        #   * RestoreDBClusterFromSnapshot
+        #
+        #   * RestoreDBClusterToPointInTime
+        #
+        #   This data type is used as a response element in the
+        #   DescribeDBClusters action.
+        #   @return [Types::DBCluster]
 
       end
 
@@ -9881,7 +10346,8 @@ module Aws
         # @!attribute [rw] db_name
         #   The database name for the restored DB instance.
         #
-        #   <note markdown="1"> This parameter doesn\'t apply to the MySQL or MariaDB engines.
+        #   <note markdown="1"> This parameter doesn\'t apply to the MySQL, PostgreSQL, or MariaDB
+        #   engines.
         #
         #    </note>
         #   @return [String]
@@ -10354,6 +10820,47 @@ module Aws
         #   This data type is used as a response element in the
         #   DescribeDBSecurityGroups action.
         #   @return [Types::DBSecurityGroup]
+
+      end
+
+      # Contains an AWS Region name as the result of a successful call to the
+      # DescribeSourceRegions action.
+      class SourceRegion < Aws::Structure.new(
+        :region_name,
+        :endpoint,
+        :status)
+
+        # @!attribute [rw] region_name
+        #   The source region name.
+        #   @return [String]
+
+        # @!attribute [rw] endpoint
+        #   The source region endpoint.
+        #   @return [String]
+
+        # @!attribute [rw] status
+        #   The status of the source region.
+        #   @return [String]
+
+      end
+
+      # Contains the result of a successful invocation of the
+      # DescribeSourceRegions action.
+      class SourceRegionMessage < Aws::Structure.new(
+        :marker,
+        :source_regions)
+
+        # @!attribute [rw] marker
+        #   An optional pagination token provided by a previous request. If this
+        #   parameter is specified, the response includes only records beyond
+        #   the marker, up to the value specified by `MaxRecords`.
+        #   @return [String]
+
+        # @!attribute [rw] source_regions
+        #   A list of SourceRegion instances that contains each source AWS
+        #   Region that the current region can get a Read Replica or a DB
+        #   snapshot from.
+        #   @return [Array<Types::SourceRegion>]
 
       end
 

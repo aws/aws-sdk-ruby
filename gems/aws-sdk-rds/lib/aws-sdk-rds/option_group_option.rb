@@ -75,34 +75,46 @@ module Aws
         data.default_port
       end
 
-      # List of all options that are prerequisites for this option.
+      # The options that are prerequisites for this option.
       # @return [Array<String>]
       def options_depended_on
         data.options_depended_on
       end
 
-      # A persistent option cannot be removed from the option group once the
-      # option group is used, but this option can be removed from the db
-      # instance while modifying the related data and assigning another option
-      # group without this option.
+      # The options that conflict with this option.
+      # @return [Array<String>]
+      def options_conflicts_with
+        data.options_conflicts_with
+      end
+
+      # Persistent options can\'t be removed from an option group while DB
+      # instances are associated with the option group. If you disassociate
+      # all DB instances from the option group, your can remove the persistent
+      # option from the option group.
       # @return [Boolean]
       def persistent
         data.persistent
       end
 
-      # A permanent option cannot be removed from the option group once the
-      # option group is used, and it cannot be removed from the db instance
-      # after assigning an option group with this permanent option.
+      # Permanent options can never be removed from an option group. An option
+      # group containing a permanent option can\'t be removed from a DB
+      # instance.
       # @return [Boolean]
       def permanent
         data.permanent
       end
 
-      # Specifies the option settings that are available (and the default
-      # value) for each option in an option group.
+      # The option settings that are available (and the default value) for
+      # each option in an option group.
       # @return [Array<Types::OptionGroupOptionSetting>]
       def option_group_option_settings
         data.option_group_option_settings
+      end
+
+      # The versions that are available for the option.
+      # @return [Array<Types::OptionVersion>]
+      def option_group_option_versions
+        data.option_group_option_versions
       end
 
       # @!endgroup

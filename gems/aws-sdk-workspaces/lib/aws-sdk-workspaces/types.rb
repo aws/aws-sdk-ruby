@@ -26,7 +26,7 @@ module Aws
 
       end
 
-      # The request of the create tags action.
+      # The request of the CreateTags operation.
       # @note When making an API call, pass CreateTagsRequest
       #   data as a hash:
       #
@@ -53,7 +53,7 @@ module Aws
 
       end
 
-      # The result of the create tags action.
+      # The result of the CreateTags operation.
       class CreateTagsResult < Aws::EmptyStructure; end
 
       # Contains the inputs for the CreateWorkspaces operation.
@@ -69,6 +69,10 @@ module Aws
       #             volume_encryption_key: "VolumeEncryptionKey",
       #             user_volume_encryption_enabled: false,
       #             root_volume_encryption_enabled: false,
+      #             workspace_properties: {
+      #               running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
+      #               running_mode_auto_stop_timeout_in_minutes: 1,
+      #             },
       #             tags: [
       #               {
       #                 key: "TagKey", # required
@@ -142,7 +146,7 @@ module Aws
 
       end
 
-      # The request of the delete tags action.
+      # The request of the DeleteTags operation.
       # @note When making an API call, pass DeleteTagsRequest
       #   data as a hash:
       #
@@ -164,10 +168,10 @@ module Aws
 
       end
 
-      # The result of the delete tags action.
+      # The result of the DeleteTags operation.
       class DeleteTagsResult < Aws::EmptyStructure; end
 
-      # The request of the describe tags action.
+      # The request of the DescribeTags operation.
       # @note When making an API call, pass DescribeTagsRequest
       #   data as a hash:
       #
@@ -183,7 +187,7 @@ module Aws
 
       end
 
-      # The result of the describe tags action.
+      # The result of the DescribeTags operation.
       class DescribeTagsResult < Aws::Structure.new(
         :tag_list)
 
@@ -219,9 +223,10 @@ module Aws
         #
         #   This contains one of the following values:
         #
-        #   * null - Retrieves the bundles that belong to the account making the
+        #   * null- Retrieves the bundles that belong to the account making the
         #     call.
-        #   * `AMAZON` - Retrieves the bundles that are provided by AWS.
+        #
+        #   * `AMAZON`- Retrieves the bundles that are provided by AWS.
         #   @return [String]
 
         # @!attribute [rw] next_token
@@ -244,7 +249,7 @@ module Aws
         #   If not null, more results are available. Pass this value for the
         #   `NextToken` parameter in a subsequent call to this operation to
         #   retrieve the next set of items. This token is valid for one day and
-        #   must be used within that timeframe.
+        #   must be used within that time frame.
         #   @return [String]
 
       end
@@ -288,7 +293,42 @@ module Aws
         #   If not null, more results are available. Pass this value for the
         #   `NextToken` parameter in a subsequent call to this operation to
         #   retrieve the next set of items. This token is valid for one day and
-        #   must be used within that timeframe.
+        #   must be used within that time frame.
+        #   @return [String]
+
+      end
+
+      # @note When making an API call, pass DescribeWorkspacesConnectionStatusRequest
+      #   data as a hash:
+      #
+      #       {
+      #         workspace_ids: ["WorkspaceId"],
+      #         next_token: "PaginationToken",
+      #       }
+      class DescribeWorkspacesConnectionStatusRequest < Aws::Structure.new(
+        :workspace_ids,
+        :next_token)
+
+        # @!attribute [rw] workspace_ids
+        #   An array of strings that contain the identifiers of the WorkSpaces.
+        #   @return [Array<String>]
+
+        # @!attribute [rw] next_token
+        #   The next token of the request.
+        #   @return [String]
+
+      end
+
+      class DescribeWorkspacesConnectionStatusResult < Aws::Structure.new(
+        :workspaces_connection_status,
+        :next_token)
+
+        # @!attribute [rw] workspaces_connection_status
+        #   The connection status of the WorkSpace.
+        #   @return [Array<Types::WorkspaceConnectionStatus>]
+
+        # @!attribute [rw] next_token
+        #   The next token of the result.
         #   @return [String]
 
       end
@@ -319,9 +359,9 @@ module Aws
         #   with any other filter parameter.
         #
         #   Because the CreateWorkspaces operation is asynchronous, the
-        #   identifier returned by CreateWorkspaces is not immediately
-        #   available. If you immediately call DescribeWorkspaces with this
-        #   identifier, no information will be returned.
+        #   identifier it returns is not immediately available. If you
+        #   immediately call DescribeWorkspaces with this identifier, no
+        #   information is returned.
         #   @return [Array<String>]
 
         # @!attribute [rw] directory_id
@@ -333,7 +373,7 @@ module Aws
 
         # @!attribute [rw] user_name
         #   Used with the `DirectoryId` parameter to specify the directory user
-        #   for which to obtain the WorkSpace.
+        #   for whom to obtain the WorkSpace.
         #   @return [String]
 
         # @!attribute [rw] bundle_id
@@ -370,7 +410,7 @@ module Aws
         #   If not null, more results are available. Pass this value for the
         #   `NextToken` parameter in a subsequent call to this operation to
         #   retrieve the next set of items. This token is valid for one day and
-        #   must be used within that timeframe.
+        #   must be used within that time frame.
         #   @return [String]
 
       end
@@ -382,8 +422,8 @@ module Aws
         :error_message)
 
         # @!attribute [rw] workspace_request
-        #   A WorkspaceRequest object that contains the information about the
-        #   WorkSpace that could not be created.
+        #   A FailedCreateWorkspaceRequest$WorkspaceRequest object that contains
+        #   the information about the WorkSpace that could not be created.
         #   @return [Types::WorkspaceRequest]
 
         # @!attribute [rw] error_code
@@ -397,8 +437,9 @@ module Aws
       end
 
       # Contains information about a WorkSpace that could not be rebooted
-      # (RebootWorkspaces), rebuilt (RebuildWorkspaces), or terminated
-      # (TerminateWorkspaces).
+      # (RebootWorkspaces), rebuilt (RebuildWorkspaces), terminated
+      # (TerminateWorkspaces), started (StartWorkspaces), or stopped
+      # (StopWorkspaces).
       class FailedWorkspaceChangeRequest < Aws::Structure.new(
         :workspace_id,
         :error_code,
@@ -417,6 +458,32 @@ module Aws
         #   @return [String]
 
       end
+
+      # @note When making an API call, pass ModifyWorkspacePropertiesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         workspace_id: "WorkspaceId", # required
+      #         workspace_properties: { # required
+      #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
+      #           running_mode_auto_stop_timeout_in_minutes: 1,
+      #         },
+      #       }
+      class ModifyWorkspacePropertiesRequest < Aws::Structure.new(
+        :workspace_id,
+        :workspace_properties)
+
+        # @!attribute [rw] workspace_id
+        #   The ID of the WorkSpace.
+        #   @return [String]
+
+        # @!attribute [rw] workspace_properties
+        #   The WorkSpace properties of the request.
+        #   @return [Types::WorkspaceProperties]
+
+      end
+
+      class ModifyWorkspacePropertiesResult < Aws::EmptyStructure; end
 
       # Contains information used with the RebootWorkspaces operation to
       # reboot a WorkSpace.
@@ -460,8 +527,8 @@ module Aws
         :failed_requests)
 
         # @!attribute [rw] failed_requests
-        #   An array of structures that represent any WorkSpaces that could not
-        #   be rebooted.
+        #   An array of structures representing any WorkSpaces that could not be
+        #   rebooted.
         #   @return [Array<Types::FailedWorkspaceChangeRequest>]
 
       end
@@ -508,8 +575,96 @@ module Aws
         :failed_requests)
 
         # @!attribute [rw] failed_requests
-        #   An array of structures that represent any WorkSpaces that could not
-        #   be rebuilt.
+        #   An array of structures representing any WorkSpaces that could not be
+        #   rebuilt.
+        #   @return [Array<Types::FailedWorkspaceChangeRequest>]
+
+      end
+
+      # Describes the start request.
+      # @note When making an API call, pass StartRequest
+      #   data as a hash:
+      #
+      #       {
+      #         workspace_id: "WorkspaceId",
+      #       }
+      class StartRequest < Aws::Structure.new(
+        :workspace_id)
+
+        # @!attribute [rw] workspace_id
+        #   The ID of the WorkSpace.
+        #   @return [String]
+
+      end
+
+      # @note When making an API call, pass StartWorkspacesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         start_workspace_requests: [ # required
+      #           {
+      #             workspace_id: "WorkspaceId",
+      #           },
+      #         ],
+      #       }
+      class StartWorkspacesRequest < Aws::Structure.new(
+        :start_workspace_requests)
+
+        # @!attribute [rw] start_workspace_requests
+        #   The requests.
+        #   @return [Array<Types::StartRequest>]
+
+      end
+
+      class StartWorkspacesResult < Aws::Structure.new(
+        :failed_requests)
+
+        # @!attribute [rw] failed_requests
+        #   The failed requests.
+        #   @return [Array<Types::FailedWorkspaceChangeRequest>]
+
+      end
+
+      # Describes the stop request.
+      # @note When making an API call, pass StopRequest
+      #   data as a hash:
+      #
+      #       {
+      #         workspace_id: "WorkspaceId",
+      #       }
+      class StopRequest < Aws::Structure.new(
+        :workspace_id)
+
+        # @!attribute [rw] workspace_id
+        #   The ID of the WorkSpace.
+        #   @return [String]
+
+      end
+
+      # @note When making an API call, pass StopWorkspacesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         stop_workspace_requests: [ # required
+      #           {
+      #             workspace_id: "WorkspaceId",
+      #           },
+      #         ],
+      #       }
+      class StopWorkspacesRequest < Aws::Structure.new(
+        :stop_workspace_requests)
+
+        # @!attribute [rw] stop_workspace_requests
+        #   The requests.
+        #   @return [Array<Types::StopRequest>]
+
+      end
+
+      class StopWorkspacesResult < Aws::Structure.new(
+        :failed_requests)
+
+        # @!attribute [rw] failed_requests
+        #   The failed requests.
         #   @return [Array<Types::FailedWorkspaceChangeRequest>]
 
       end
@@ -578,8 +733,8 @@ module Aws
         :failed_requests)
 
         # @!attribute [rw] failed_requests
-        #   An array of structures that represent any WorkSpaces that could not
-        #   be terminated.
+        #   An array of structures representing any WorkSpaces that could not be
+        #   terminated.
         #   @return [Array<Types::FailedWorkspaceChangeRequest>]
 
       end
@@ -608,7 +763,8 @@ module Aws
         :computer_name,
         :volume_encryption_key,
         :user_volume_encryption_enabled,
-        :root_volume_encryption_enabled)
+        :root_volume_encryption_enabled,
+        :workspace_properties)
 
         # @!attribute [rw] workspace_id
         #   The identifier of the WorkSpace.
@@ -666,6 +822,10 @@ module Aws
         #   is encrypted.
         #   @return [Boolean]
 
+        # @!attribute [rw] workspace_properties
+        #   Describes the properties of a WorkSpace.
+        #   @return [Types::WorkspaceProperties]
+
       end
 
       # Contains information about a WorkSpace bundle.
@@ -702,6 +862,32 @@ module Aws
         # @!attribute [rw] compute_type
         #   A ComputeType object that specifies the compute type for the bundle.
         #   @return [Types::ComputeType]
+
+      end
+
+      # Describes the connection status of a WorkSpace.
+      class WorkspaceConnectionStatus < Aws::Structure.new(
+        :workspace_id,
+        :connection_state,
+        :connection_state_check_timestamp,
+        :last_known_user_connection_timestamp)
+
+        # @!attribute [rw] workspace_id
+        #   The ID of the WorkSpace.
+        #   @return [String]
+
+        # @!attribute [rw] connection_state
+        #   The connection state of the WorkSpace. Returns UNKOWN if the
+        #   WorkSpace is in a Stopped state.
+        #   @return [String]
+
+        # @!attribute [rw] connection_state_check_timestamp
+        #   The timestamp of the connection state check.
+        #   @return [Time]
+
+        # @!attribute [rw] last_known_user_connection_timestamp
+        #   The timestamp of the last known user connection.
+        #   @return [Time]
 
       end
 
@@ -779,6 +965,31 @@ module Aws
 
       end
 
+      # Describes the properties of a WorkSpace.
+      # @note When making an API call, pass WorkspaceProperties
+      #   data as a hash:
+      #
+      #       {
+      #         running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
+      #         running_mode_auto_stop_timeout_in_minutes: 1,
+      #       }
+      class WorkspaceProperties < Aws::Structure.new(
+        :running_mode,
+        :running_mode_auto_stop_timeout_in_minutes)
+
+        # @!attribute [rw] running_mode
+        #   The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed
+        #   monthly. AutoStop WorkSpaces are billed by the hour and stopped when
+        #   no longer being used in order to save on costs.
+        #   @return [String]
+
+        # @!attribute [rw] running_mode_auto_stop_timeout_in_minutes
+        #   The time after a user logs off when WorkSpaces are automatically
+        #   stopped. Configured in 60 minute intervals.
+        #   @return [Integer]
+
+      end
+
       # Contains information about a WorkSpace creation request.
       # @note When making an API call, pass WorkspaceRequest
       #   data as a hash:
@@ -790,6 +1001,10 @@ module Aws
       #         volume_encryption_key: "VolumeEncryptionKey",
       #         user_volume_encryption_enabled: false,
       #         root_volume_encryption_enabled: false,
+      #         workspace_properties: {
+      #           running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
+      #           running_mode_auto_stop_timeout_in_minutes: 1,
+      #         },
       #         tags: [
       #           {
       #             key: "TagKey", # required
@@ -804,6 +1019,7 @@ module Aws
         :volume_encryption_key,
         :user_volume_encryption_enabled,
         :root_volume_encryption_enabled,
+        :workspace_properties,
         :tags)
 
         # @!attribute [rw] directory_id
@@ -837,6 +1053,10 @@ module Aws
         #   Specifies whether the data stored on the root volume, or C: drive,
         #   is encrypted.
         #   @return [Boolean]
+
+        # @!attribute [rw] workspace_properties
+        #   Describes the properties of a WorkSpace.
+        #   @return [Types::WorkspaceProperties]
 
         # @!attribute [rw] tags
         #   The tags of the WorkSpace request.

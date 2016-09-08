@@ -124,6 +124,7 @@ module Aws
       NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
       NonZeroAndMaxString = Shapes::StringShape.new(name: 'NonZeroAndMaxString')
       NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+      OperatingSystem = Shapes::StringShape.new(name: 'OperatingSystem')
       PlayerIdList = Shapes::ListShape.new(name: 'PlayerIdList')
       PlayerSession = Shapes::StructureShape.new(name: 'PlayerSession')
       PlayerSessionCreationPolicy = Shapes::StringShape.new(name: 'PlayerSessionCreationPolicy')
@@ -148,6 +149,8 @@ module Aws
       ScalingPolicy = Shapes::StructureShape.new(name: 'ScalingPolicy')
       ScalingPolicyList = Shapes::ListShape.new(name: 'ScalingPolicyList')
       ScalingStatusType = Shapes::StringShape.new(name: 'ScalingStatusType')
+      SearchGameSessionsInput = Shapes::StructureShape.new(name: 'SearchGameSessionsInput')
+      SearchGameSessionsOutput = Shapes::StructureShape.new(name: 'SearchGameSessionsOutput')
       ServerProcess = Shapes::StructureShape.new(name: 'ServerProcess')
       ServerProcessList = Shapes::ListShape.new(name: 'ServerProcessList')
       StringList = Shapes::ListShape.new(name: 'StringList')
@@ -190,6 +193,7 @@ module Aws
       Build.add_member(:version, Shapes::ShapeRef.new(shape: FreeText, location_name: "Version"))
       Build.add_member(:status, Shapes::ShapeRef.new(shape: BuildStatus, location_name: "Status"))
       Build.add_member(:size_on_disk, Shapes::ShapeRef.new(shape: PositiveLong, location_name: "SizeOnDisk"))
+      Build.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
       Build.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
       Build.struct_class = Types::Build
 
@@ -206,6 +210,7 @@ module Aws
       CreateBuildInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
       CreateBuildInput.add_member(:version, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Version"))
       CreateBuildInput.add_member(:storage_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "StorageLocation"))
+      CreateBuildInput.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
       CreateBuildInput.struct_class = Types::CreateBuildInput
 
       CreateBuildOutput.add_member(:build, Shapes::ShapeRef.new(shape: Build, location_name: "Build"))
@@ -415,6 +420,7 @@ module Aws
       FleetAttributes.add_member(:server_launch_parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "ServerLaunchParameters"))
       FleetAttributes.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
       FleetAttributes.add_member(:new_game_session_protection_policy, Shapes::ShapeRef.new(shape: ProtectionPolicy, location_name: "NewGameSessionProtectionPolicy"))
+      FleetAttributes.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
       FleetAttributes.struct_class = Types::FleetAttributes
 
       FleetAttributesList.member = Shapes::ShapeRef.new(shape: FleetAttributes)
@@ -573,6 +579,18 @@ module Aws
       ScalingPolicy.struct_class = Types::ScalingPolicy
 
       ScalingPolicyList.member = Shapes::ShapeRef.new(shape: ScalingPolicy)
+
+      SearchGameSessionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+      SearchGameSessionsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
+      SearchGameSessionsInput.add_member(:filter_expression, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "FilterExpression"))
+      SearchGameSessionsInput.add_member(:sort_expression, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "SortExpression"))
+      SearchGameSessionsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
+      SearchGameSessionsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+      SearchGameSessionsInput.struct_class = Types::SearchGameSessionsInput
+
+      SearchGameSessionsOutput.add_member(:game_sessions, Shapes::ShapeRef.new(shape: GameSessionList, location_name: "GameSessions"))
+      SearchGameSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+      SearchGameSessionsOutput.struct_class = Types::SearchGameSessionsOutput
 
       ServerProcess.add_member(:launch_path, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "LaunchPath"))
       ServerProcess.add_member(:parameters, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Parameters"))
@@ -1327,6 +1345,30 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
             "exception" => true,
             "fault" => true
+          })
+        end)
+
+        api.add_operation(:search_game_sessions, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "SearchGameSessions"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: SearchGameSessionsInput)
+          o.output = Shapes::ShapeRef.new(shape: SearchGameSessionsOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
+            "exception" => true,
+            "fault" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
+            "exception" => true
+          })
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
+            "exception" => true
           })
         end)
 

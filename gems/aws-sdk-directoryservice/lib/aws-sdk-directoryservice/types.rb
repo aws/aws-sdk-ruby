@@ -16,6 +16,104 @@ module Aws
   module DirectoryService
     module Types
 
+      # @note When making an API call, pass AddIpRoutesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         directory_id: "DirectoryId", # required
+      #         ip_routes: [ # required
+      #           {
+      #             cidr_ip: "CidrIp",
+      #             description: "Description",
+      #           },
+      #         ],
+      #         update_security_group_for_directory_controllers: false,
+      #       }
+      class AddIpRoutesRequest < Aws::Structure.new(
+        :directory_id,
+        :ip_routes,
+        :update_security_group_for_directory_controllers)
+
+        # @!attribute [rw] directory_id
+        #   Identifier (ID) of the directory to which to add the address block.
+        #   @return [String]
+
+        # @!attribute [rw] ip_routes
+        #   IP address blocks, using CIDR format, of the traffic to route. This
+        #   is often the IP address block of the DNS server used for your
+        #   on-premises domain.
+        #   @return [Array<Types::IpRoute>]
+
+        # @!attribute [rw] update_security_group_for_directory_controllers
+        #   If set to true, updates the inbound and outbound rules of the
+        #   security group that has the description: \"AWS created security
+        #   group for *directory ID* directory controllers.\" Following are the
+        #   new rules:
+        #
+        #   Inbound:
+        #
+        #   * Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0
+        #
+        #   * Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0
+        #
+        #   * Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
+        #     0.0.0.0/0
+        #
+        #   * Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0
+        #
+        #   * Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0
+        #
+        #   * Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0
+        #
+        #   * Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0
+        #
+        #
+        #
+        #   Outbound:
+        #
+        #   * Type: All traffic, Protocol: All, Range: All, Destination:
+        #     0.0.0.0/0
+        #
+        #   ^
+        #
+        #   These security rules impact an internal network interface that is
+        #   not exposed publicly.
+        #   @return [Boolean]
+
+      end
+
+      class AddIpRoutesResult < Aws::EmptyStructure; end
+
       # @note When making an API call, pass AddTagsToResourceRequest
       #   data as a hash:
       #
@@ -33,7 +131,7 @@ module Aws
         :tags)
 
         # @!attribute [rw] resource_id
-        #   The ID of the directory to which to add the tag.
+        #   Identifier (ID) for the directory to which to add the tag.
         #   @return [String]
 
         # @!attribute [rw] tags
@@ -1447,6 +1545,114 @@ module Aws
 
       end
 
+      # IP address block. This is often the address block of the DNS server
+      # used for your on-premises domain.
+      # @note When making an API call, pass IpRoute
+      #   data as a hash:
+      #
+      #       {
+      #         cidr_ip: "CidrIp",
+      #         description: "Description",
+      #       }
+      class IpRoute < Aws::Structure.new(
+        :cidr_ip,
+        :description)
+
+        # @!attribute [rw] cidr_ip
+        #   IP address block using CIDR format, for example 10.0.0.0/24. This is
+        #   often the address block of the DNS server used for your on-premises
+        #   domain. For a single IP address use a CIDR address block with /32.
+        #   For example 10.0.0.0/32.
+        #   @return [String]
+
+        # @!attribute [rw] description
+        #   Description of the address block.
+        #   @return [String]
+
+      end
+
+      # Information about one or more IP address blocks.
+      class IpRouteInfo < Aws::Structure.new(
+        :directory_id,
+        :cidr_ip,
+        :ip_route_status_msg,
+        :added_date_time,
+        :ip_route_status_reason,
+        :description)
+
+        # @!attribute [rw] directory_id
+        #   Identifier (ID) of the directory associated with the IP addresses.
+        #   @return [String]
+
+        # @!attribute [rw] cidr_ip
+        #   IP address block in the IpRoute.
+        #   @return [String]
+
+        # @!attribute [rw] ip_route_status_msg
+        #   The status of the IP address block.
+        #   @return [String]
+
+        # @!attribute [rw] added_date_time
+        #   The date and time the address block was added to the directory.
+        #   @return [Time]
+
+        # @!attribute [rw] ip_route_status_reason
+        #   The reason for the IpRouteStatusMsg.
+        #   @return [String]
+
+        # @!attribute [rw] description
+        #   Description of the IpRouteInfo.
+        #   @return [String]
+
+      end
+
+      # @note When making an API call, pass ListIpRoutesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         directory_id: "DirectoryId", # required
+      #         next_token: "NextToken",
+      #         limit: 1,
+      #       }
+      class ListIpRoutesRequest < Aws::Structure.new(
+        :directory_id,
+        :next_token,
+        :limit)
+
+        # @!attribute [rw] directory_id
+        #   Identifier (ID) of the directory for which you want to retrieve the
+        #   IP addresses.
+        #   @return [String]
+
+        # @!attribute [rw] next_token
+        #   The *ListIpRoutes.NextToken* value from a previous call to
+        #   ListIpRoutes. Pass null if this is the first call.
+        #   @return [String]
+
+        # @!attribute [rw] limit
+        #   Maximum number of items to return. If this value is zero, the
+        #   maximum number of items is specified by the limitations of the
+        #   operation.
+        #   @return [Integer]
+
+      end
+
+      class ListIpRoutesResult < Aws::Structure.new(
+        :ip_routes_info,
+        :next_token)
+
+        # @!attribute [rw] ip_routes_info
+        #   A list of IpRoutes.
+        #   @return [Array<Types::IpRouteInfo>]
+
+        # @!attribute [rw] next_token
+        #   If not null, more results are available. Pass this value for the
+        #   *NextToken* parameter in a subsequent call to ListIpRoutes to
+        #   retrieve the next set of items.
+        #   @return [String]
+
+      end
+
       # @note When making an API call, pass ListTagsForResourceRequest
       #   data as a hash:
       #
@@ -1461,7 +1667,8 @@ module Aws
         :limit)
 
         # @!attribute [rw] resource_id
-        #   The ID of the directory for which you want to retrieve tags.
+        #   Identifier (ID) of the directory for which you want to retrieve
+        #   tags.
         #   @return [String]
 
         # @!attribute [rw] next_token
@@ -1536,8 +1743,7 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] shared_secret
-        #   The shared secret code that was specified when your RADIUS endpoints
-        #   were created.
+        #   Not currently used.
         #   @return [String]
 
         # @!attribute [rw] authentication_protocol
@@ -1581,6 +1787,30 @@ module Aws
       # The result of a RegisterEventTopic request.
       class RegisterEventTopicResult < Aws::EmptyStructure; end
 
+      # @note When making an API call, pass RemoveIpRoutesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         directory_id: "DirectoryId", # required
+      #         cidr_ips: ["CidrIp"], # required
+      #       }
+      class RemoveIpRoutesRequest < Aws::Structure.new(
+        :directory_id,
+        :cidr_ips)
+
+        # @!attribute [rw] directory_id
+        #   Identifier (ID) of the directory from which you want to remove the
+        #   IP addresses.
+        #   @return [String]
+
+        # @!attribute [rw] cidr_ips
+        #   IP address blocks that you want to remove.
+        #   @return [Array<String>]
+
+      end
+
+      class RemoveIpRoutesResult < Aws::EmptyStructure; end
+
       # @note When making an API call, pass RemoveTagsFromResourceRequest
       #   data as a hash:
       #
@@ -1593,7 +1823,7 @@ module Aws
         :tag_keys)
 
         # @!attribute [rw] resource_id
-        #   The ID of the directory from which to remove the tag.
+        #   Identifier (ID) of the directory from which to remove the tag.
         #   @return [String]
 
         # @!attribute [rw] tag_keys
@@ -1693,19 +1923,18 @@ module Aws
         :value)
 
         # @!attribute [rw] key
-        #   A key is the required name of the tag. The string value can be from
-        #   1 to 128 Unicode characters in length and cannot be prefixed with
-        #   \"aws:\". The string can only contain only the set of Unicode
-        #   letters, digits, white-space, \'\_\', \'.\', \'/\', \'=\', \'+\',
-        #   \'-\' (Java regex:
+        #   Required name of the tag. The string value can be Unicode characters
+        #   and cannot be prefixed with \"aws:\". The string can contain only
+        #   the set of Unicode letters, digits, white-space, \'\_\', \'.\',
+        #   \'/\', \'=\', \'+\', \'-\' (Java regex:
         #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
         #   @return [String]
 
         # @!attribute [rw] value
-        #   A value is the optional value of the tag. The string value can be
-        #   from 1 to 256 Unicode characters in length. The string can only
-        #   contain only the set of Unicode letters, digits, white-space,
-        #   \'\_\', \'.\', \'/\', \'=\', \'+\', \'-\' (Java regex:
+        #   The optional value of the tag. The string value can be Unicode
+        #   characters. The string can contain only the set of Unicode letters,
+        #   digits, white-space, \'\_\', \'.\', \'/\', \'=\', \'+\', \'-\' (Java
+        #   regex:
         #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
         #   @return [String]
 

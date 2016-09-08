@@ -16,6 +16,52 @@ module Aws
   module Route53Domains
     module Types
 
+      class BillingRecord < Aws::Structure.new(
+        :domain_name,
+        :operation,
+        :invoice_id,
+        :bill_date,
+        :price)
+
+        # @!attribute [rw] domain_name
+        #   The name of a domain.
+        #
+        #   Type: String
+        #   @return [String]
+
+        # @!attribute [rw] operation
+        #   The operation that you were charged for.
+        #
+        #   Type: String
+        #
+        #   Valid values: * `REGISTER_DOMAIN`
+        #   * `TRANSFER_IN_DOMAIN`
+        #   * `RENEW_DOMAIN`
+        #   * `CHANGE_DOMAIN_OWNER`
+        #   @return [String]
+
+        # @!attribute [rw] invoice_id
+        #   The ID of the invoice that is associated with the billing record.
+        #
+        #   Type: String
+        #   @return [String]
+
+        # @!attribute [rw] bill_date
+        #   The date that the operation was billed, in Unix format.
+        #
+        #   Type: Double
+        #   @return [Time]
+
+        # @!attribute [rw] price
+        #   The price that you were charged for the operation, in US dollars.
+        #
+        #   Type: Double
+        #
+        #   Example value: 12.0
+        #   @return [Float]
+
+      end
+
       # The CheckDomainAvailability request contains the following elements.
       # @note When making an API call, pass CheckDomainAvailabilityRequest
       #   data as a hash:
@@ -439,6 +485,18 @@ module Aws
 
       end
 
+      class DomainSuggestion < Aws::Structure.new(
+        :domain_name,
+        :availability)
+
+        # @!attribute [rw] domain_name
+        #   @return [String]
+
+        # @!attribute [rw] availability
+        #   @return [String]
+
+      end
+
       class DomainSummary < Aws::Structure.new(
         :domain_name,
         :auto_renew,
@@ -847,6 +905,38 @@ module Aws
         #
         #   [1]: https://www.icann.org/
         #   @return [Array<String>]
+
+      end
+
+      # @note When making an API call, pass GetDomainSuggestionsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         domain_name: "DomainName", # required
+      #         suggestion_count: 1, # required
+      #         only_available: false, # required
+      #       }
+      class GetDomainSuggestionsRequest < Aws::Structure.new(
+        :domain_name,
+        :suggestion_count,
+        :only_available)
+
+        # @!attribute [rw] domain_name
+        #   @return [String]
+
+        # @!attribute [rw] suggestion_count
+        #   @return [Integer]
+
+        # @!attribute [rw] only_available
+        #   @return [Boolean]
+
+      end
+
+      class GetDomainSuggestionsResponse < Aws::Structure.new(
+        :suggestions_list)
+
+        # @!attribute [rw] suggestions_list
+        #   @return [Array<Types::DomainSuggestion>]
 
       end
 
@@ -1405,6 +1495,67 @@ module Aws
         #   Default: None
         #
         #   Constraints: Maximum 255 characters.
+        #   @return [String]
+
+      end
+
+      # A `RenewDomain` request includes the number of years that you want to
+      # renew for and the current expiration year.
+      # @note When making an API call, pass RenewDomainRequest
+      #   data as a hash:
+      #
+      #       {
+      #         domain_name: "DomainName", # required
+      #         duration_in_years: 1,
+      #         current_expiry_year: 1, # required
+      #       }
+      class RenewDomainRequest < Aws::Structure.new(
+        :domain_name,
+        :duration_in_years,
+        :current_expiry_year)
+
+        # @!attribute [rw] domain_name
+        #   @return [String]
+
+        # @!attribute [rw] duration_in_years
+        #   The number of years that you want to renew the domain for. The
+        #   maximum number of years depends on the top-level domain. For the
+        #   range of valid values for your domain, see [Domains that You Can
+        #   Register with Amazon Route 53][1] in the Amazon Route 53
+        #   documentation.
+        #
+        #   Type: Integer
+        #
+        #   Default: 1
+        #
+        #   Valid values: Integer from 1 to 10
+        #
+        #   Required: No
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/console/route53/domain-tld-list
+        #   @return [Integer]
+
+        # @!attribute [rw] current_expiry_year
+        #   The year when the registration for the domain is set to expire. This
+        #   value must match the current expiration date for the domain.
+        #
+        #   Type: Integer
+        #
+        #   Default: None
+        #
+        #   Valid values: Integer
+        #
+        #   Required: Yes
+        #   @return [Integer]
+
+      end
+
+      class RenewDomainResponse < Aws::Structure.new(
+        :operation_id)
+
+        # @!attribute [rw] operation_id
         #   @return [String]
 
       end
@@ -2191,6 +2342,103 @@ module Aws
       end
 
       class UpdateTagsForDomainResponse < Aws::EmptyStructure; end
+
+      # The ViewBilling request includes the following elements.
+      # @note When making an API call, pass ViewBillingRequest
+      #   data as a hash:
+      #
+      #       {
+      #         start: Time.now,
+      #         end: Time.now,
+      #         marker: "PageMarker",
+      #         max_items: 1,
+      #       }
+      class ViewBillingRequest < Aws::Structure.new(
+        :start,
+        :end,
+        :marker,
+        :max_items)
+
+        # @!attribute [rw] start
+        #   The beginning date and time for the time period for which you want a
+        #   list of billing records. Specify the date in Unix time format.
+        #
+        #   Type: Double
+        #
+        #   Default: None
+        #
+        #   Required: Yes
+        #   @return [Time]
+
+        # @!attribute [rw] end
+        #   The end date and time for the time period for which you want a list
+        #   of billing records. Specify the date in Unix time format.
+        #
+        #   Type: Double
+        #
+        #   Default: None
+        #
+        #   Required: Yes
+        #   @return [Time]
+
+        # @!attribute [rw] marker
+        #   For an initial request for a list of billing records, omit this
+        #   element. If the number of billing records that are associated with
+        #   the current AWS account during the specified period is greater than
+        #   the value that you specified for `MaxItems`, you can use `Marker` to
+        #   return additional billing records. Get the value of `NextPageMarker`
+        #   from the previous response, and submit another request that includes
+        #   the value of `NextPageMarker` in the `Marker` element.
+        #
+        #   Type: String
+        #
+        #   Default: None
+        #
+        #   Constraints: The marker must match the value of `NextPageMarker`
+        #   that was returned in the previous response.
+        #
+        #   Required: No
+        #   @return [String]
+
+        # @!attribute [rw] max_items
+        #   The number of billing records to be returned.
+        #
+        #   Type: Integer
+        #
+        #   Default: 20
+        #
+        #   Constraints: A value between 1 and 100.
+        #
+        #   Required: No
+        #   @return [Integer]
+
+      end
+
+      # The ViewBilling response includes the following elements.
+      class ViewBillingResponse < Aws::Structure.new(
+        :next_page_marker,
+        :billing_records)
+
+        # @!attribute [rw] next_page_marker
+        #   If there are more billing records than you specified for `MaxItems`
+        #   in the request, submit another request and include the value of
+        #   `NextPageMarker` in the value of `Marker`.
+        #
+        #   Type: String
+        #
+        #   Parent: `BillingRecords`
+        #   @return [String]
+
+        # @!attribute [rw] billing_records
+        #   A summary of billing records.
+        #
+        #   Type: Complex type containing a list of billing record summaries.
+        #
+        #   Children: `DomainName`, `Operation`, `InvoiceId`, `BillDate` and
+        #   `Price`
+        #   @return [Array<Types::BillingRecord>]
+
+      end
 
     end
   end

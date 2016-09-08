@@ -77,9 +77,9 @@ module Aws
       #   A unique statement identifier.
       # @option params [required, String] :action
       #   The AWS Lambda action you want to allow in this statement. Each Lambda
-      #   action is a string starting with `lambda:` followed by the API name
-      #   (see Operations). For example, `lambda:CreateFunction`. You can use
-      #   wildcard (`lambda:*`) to grant permission for all AWS Lambda actions.
+      #   action is a string starting with `lambda:` followed by the API name .
+      #   For example, `lambda:CreateFunction`. You can use wildcard
+      #   (`lambda:*`) to grant permission for all AWS Lambda actions.
       # @option params [required, String] :principal
       #   The principal who is getting this permission. It can be Amazon S3
       #   service Principal (`s3.amazonaws.com`) if you want Amazon S3 to invoke
@@ -90,21 +90,28 @@ module Aws
       #   invoking your function.
       # @option params [String] :source_arn
       #   This is optional; however, when granting Amazon S3 permission to
-      #   invoke your function, you should specify this field with the bucket
-      #   Amazon Resource Name (ARN) as its value. This ensures that only events
-      #   generated from the specified bucket can invoke the function.
+      #   invoke your function, you should specify this field with the Amazon
+      #   Resource Name (ARN) as its value. This ensures that only events
+      #   generated from the specified source can invoke the function.
       #
-      #   <important>If you add a permission for the Amazon S3 principal without providing the source ARN, any AWS account that creates a mapping to your function ARN can send events to invoke your Lambda function from Amazon S3.</important>
+      #   <important markdown="1">If you add a permission for the Amazon S3 principal without providing
+      #   the source ARN, any AWS account that creates a mapping to your
+      #   function ARN can send events to invoke your Lambda function from
+      #   Amazon S3.
+      #
+      #    </important>
       # @option params [String] :source_account
-      #   The AWS account ID (without a hyphen) of the source owner. For
-      #   example, if the `SourceArn` identifies a bucket, then this is the
-      #   bucket owner\'s account ID. You can use this additional condition to
-      #   ensure the bucket you specify is owned by a specific account (it is
-      #   possible the bucket owner deleted the bucket and some other AWS
-      #   account created the bucket). You can also use this condition to
-      #   specify all sources (that is, you don\'t specify the `SourceArn`)
-      #   owned by a specific account.
+      #   This parameter is used for S3 and SES only. The AWS account ID
+      #   (without a hyphen) of the source owner. For example, if the
+      #   `SourceArn` identifies a bucket, then this is the bucket owner\'s
+      #   account ID. You can use this additional condition to ensure the bucket
+      #   you specify is owned by a specific account (it is possible the bucket
+      #   owner deleted the bucket and some other AWS account created the
+      #   bucket). You can also use this condition to specify all sources (that
+      #   is, you don\'t specify the `SourceArn`) owned by a specific account.
       # @option params [String] :event_source_token
+      #   A unique token that must be supplied by the principal invoking the
+      #   function. This is currently only used for Alexa Smart Home functions.
       # @option params [String] :qualifier
       #   You can use this optional query parameter to describe a qualified ARN
       #   using a function version or an alias name. The permission will then
@@ -151,7 +158,8 @@ module Aws
       # Creates an alias that points to the specified Lambda function version.
       # For more information, see [Introduction to AWS Lambda Aliases][1].
       #
-      #  Alias names are unique for a given function. This requires permission for the lambda:CreateAlias action.
+      # Alias names are unique for a given function. This requires permission
+      # for the lambda:CreateAlias action.
       #
       #
       #
@@ -199,7 +207,11 @@ module Aws
       # This association between a stream source and a Lambda function is
       # called the event source mapping.
       #
-      # <important>This event source mapping is relevant only in the AWS Lambda pull model, where AWS Lambda invokes the function. For more information, go to [AWS Lambda: How it Works][1] in the *AWS Lambda Developer Guide*.</important>
+      # <important markdown="1">This event source mapping is relevant only in the AWS Lambda pull
+      # model, where AWS Lambda invokes the function. For more information, go
+      # to [AWS Lambda: How it Works][1] in the *AWS Lambda Developer Guide*.
+      #
+      #  </important>
       #
       # You provide mapping information (for example, which stream to read
       # from and which Lambda function to invoke) in the request body.
@@ -325,6 +337,9 @@ module Aws
       #   other AWS Lambda APIs, such as Invoke.
       # @option params [required, String] :runtime
       #   The runtime environment for the Lambda function you are uploading.
+      #
+      #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
+      #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
       # @option params [required, String] :role
       #   The Amazon Resource Name (ARN) of the IAM role that Lambda assumes
       #   when it executes your function to access any other Amazon Web Services
@@ -859,9 +874,10 @@ module Aws
       # function version by providing function version or alias name that is
       # pointing to the function version using the `Qualifier` parameter in
       # the request. If you don\'t provide the `Qualifier` parameter, the
-      # `$LATEST` version of the Lambda function is invoked. For information
-      # about the versioning feature, see [AWS Lambda Function Versioning and
-      # Aliases][1].
+      # `$LATEST` version of the Lambda function is invoked. Invocations occur
+      # at least once in response to an event and functions must be idempotent
+      # to handle this. For information about the versioning feature, see [AWS
+      # Lambda Function Versioning and Aliases][1].
       #
       # This operation requires permission for the `lambda:InvokeFunction`
       # action.
@@ -894,7 +910,7 @@ module Aws
       #   you specify the `InvocationType` parameter with value
       #   `RequestResponse`. In this case, AWS Lambda returns the base64-encoded
       #   last 4 KB of log data produced by your Lambda function in the
-      #   `x-amz-log-results` header.
+      #   `x-amz-log-result` header.
       # @option params [String] :client_context
       #   Using the `ClientContext` you can pass client-specific information to
       #   the Lambda function you are invoking. You can then process the client
@@ -947,7 +963,10 @@ module Aws
         req.send_request(options)
       end
 
-      # <important>This API is deprecated. We recommend you use `Invoke` API (see Invoke).</important>
+      # <important markdown="1">This API is deprecated. We recommend you use `Invoke` API (see
+      # Invoke).
+      #
+      #  </important>
       #
       # Submits an invocation request to AWS Lambda. Upon receiving the
       # request, Lambda executes the specified function asynchronously. To see
@@ -1049,7 +1068,8 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
       # @option params [String] :event_source_arn
-      #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream.
+      #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream. (This
+      #   parameter is optional.)
       # @option params [String] :function_name
       #   The name of the Lambda function.
       #
@@ -1506,7 +1526,16 @@ module Aws
       #   to the ARN. If you specify only the function name, it is limited to 64
       #   character in length.
       # @option params [String, IO] :zip_file
-      #   Based64-encoded .zip file containing your packaged source code.
+      #   The contents of your zip file containing your deployment package. If
+      #   you are using the web API directly, the contents of the zip file must
+      #   be base64-encoded. If you are using the AWS SDKs or the AWS CLI, the
+      #   SDKs or CLI will do the encoding for you. For more information about
+      #   creating a .zip file, go to [Execution Permissions][1] in the *AWS
+      #   Lambda Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role.html
       # @option params [String] :s3_bucket
       #   Amazon S3 bucket name where the .zip file containing your deployment
       #   package is stored. This bucket must reside in the same AWS region
@@ -1625,6 +1654,10 @@ module Aws
       #   These must belong to the same VPC. You must provide at least one
       #   security group and one subnet ID.
       # @option params [String] :runtime
+      #   The runtime environment for the Lambda function.
+      #
+      #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
+      #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
@@ -1720,6 +1753,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

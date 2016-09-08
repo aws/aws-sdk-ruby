@@ -101,6 +101,7 @@ module Aws
       MountPointList = Shapes::ListShape.new(name: 'MountPointList')
       NetworkBinding = Shapes::StructureShape.new(name: 'NetworkBinding')
       NetworkBindings = Shapes::ListShape.new(name: 'NetworkBindings')
+      NetworkMode = Shapes::StringShape.new(name: 'NetworkMode')
       NoUpdateAvailableException = Shapes::StructureShape.new(name: 'NoUpdateAvailableException')
       PortMapping = Shapes::StructureShape.new(name: 'PortMapping')
       PortMappingList = Shapes::ListShape.new(name: 'PortMappingList')
@@ -182,7 +183,8 @@ module Aws
       ContainerDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
       ContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
       ContainerDefinition.add_member(:cpu, Shapes::ShapeRef.new(shape: Integer, location_name: "cpu"))
-      ContainerDefinition.add_member(:memory, Shapes::ShapeRef.new(shape: Integer, location_name: "memory"))
+      ContainerDefinition.add_member(:memory, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memory"))
+      ContainerDefinition.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "memoryReservation"))
       ContainerDefinition.add_member(:links, Shapes::ShapeRef.new(shape: StringList, location_name: "links"))
       ContainerDefinition.add_member(:port_mappings, Shapes::ShapeRef.new(shape: PortMappingList, location_name: "portMappings"))
       ContainerDefinition.add_member(:essential, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "essential"))
@@ -424,6 +426,7 @@ module Aws
       ListTasksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
       ListTasksResponse.struct_class = Types::ListTasksResponse
 
+      LoadBalancer.add_member(:target_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetGroupArn"))
       LoadBalancer.add_member(:load_balancer_name, Shapes::ShapeRef.new(shape: String, location_name: "loadBalancerName"))
       LoadBalancer.add_member(:container_name, Shapes::ShapeRef.new(shape: String, location_name: "containerName"))
       LoadBalancer.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
@@ -453,8 +456,8 @@ module Aws
 
       NetworkBindings.member = Shapes::ShapeRef.new(shape: NetworkBinding)
 
-      PortMapping.add_member(:container_port, Shapes::ShapeRef.new(shape: Integer, location_name: "containerPort"))
-      PortMapping.add_member(:host_port, Shapes::ShapeRef.new(shape: Integer, location_name: "hostPort"))
+      PortMapping.add_member(:container_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerPort"))
+      PortMapping.add_member(:host_port, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "hostPort"))
       PortMapping.add_member(:protocol, Shapes::ShapeRef.new(shape: TransportProtocol, location_name: "protocol"))
       PortMapping.struct_class = Types::PortMapping
 
@@ -474,6 +477,7 @@ module Aws
 
       RegisterTaskDefinitionRequest.add_member(:family, Shapes::ShapeRef.new(shape: String, required: true, location_name: "family"))
       RegisterTaskDefinitionRequest.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
+      RegisterTaskDefinitionRequest.add_member(:network_mode, Shapes::ShapeRef.new(shape: NetworkMode, location_name: "networkMode"))
       RegisterTaskDefinitionRequest.add_member(:container_definitions, Shapes::ShapeRef.new(shape: ContainerDefinitions, required: true, location_name: "containerDefinitions"))
       RegisterTaskDefinitionRequest.add_member(:volumes, Shapes::ShapeRef.new(shape: VolumeList, location_name: "volumes"))
       RegisterTaskDefinitionRequest.struct_class = Types::RegisterTaskDefinitionRequest
@@ -590,6 +594,7 @@ module Aws
       TaskDefinition.add_member(:container_definitions, Shapes::ShapeRef.new(shape: ContainerDefinitions, location_name: "containerDefinitions"))
       TaskDefinition.add_member(:family, Shapes::ShapeRef.new(shape: String, location_name: "family"))
       TaskDefinition.add_member(:task_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "taskRoleArn"))
+      TaskDefinition.add_member(:network_mode, Shapes::ShapeRef.new(shape: NetworkMode, location_name: "networkMode"))
       TaskDefinition.add_member(:revision, Shapes::ShapeRef.new(shape: Integer, location_name: "revision"))
       TaskDefinition.add_member(:volumes, Shapes::ShapeRef.new(shape: VolumeList, location_name: "volumes"))
       TaskDefinition.add_member(:status, Shapes::ShapeRef.new(shape: TaskDefinitionStatus, location_name: "status"))

@@ -150,6 +150,15 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedkernels.html
       # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   The block device mapping.
+      #
+      #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments for
+      #   block-device mapping results in an error. This is because only blank
+      #   volumes can be encrypted on start, and these are not created from a
+      #   snapshot. If a snapshot is the basis for the volume, it contains data
+      #   by definition and its encryption status cannot be changed using this
+      #   action.
+      #
+      #    </important>
       # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
       #   The monitoring for the instance.
       # @option options [String] :subnet_id
@@ -789,11 +798,11 @@ module Aws
       #
       #   Default: Describes all images available to you.
       # @option options [Array<String>] :owners
-      #   Filters the images by the owner. Specify an AWS account ID, `amazon`
-      #   (owner is Amazon), `aws-marketplace` (owner is AWS Marketplace),
-      #   `self` (owner is the sender of the request). Omitting this option
-      #   returns all images for which you have launch permissions, regardless
-      #   of ownership.
+      #   Filters the images by the owner. Specify an AWS account ID, `self`
+      #   (owner is the sender of the request), or an AWS owner alias (valid
+      #   values are `amazon` \| `aws-marketplace` \| `microsoft`). Omitting
+      #   this option returns all images for which you have launch permissions,
+      #   regardless of ownership.
       # @option options [Array<String>] :executable_users
       #   Scopes the images by users with explicit launch permissions. Specify
       #   an AWS account ID, `self` (the sender of the request), or `all`
@@ -836,7 +845,10 @@ module Aws
       #
       #   * `name` - The name of the AMI (provided during image creation).
       #
-      #   * `owner-alias` - The AWS account alias (for example, `amazon`).
+      #   * `owner-alias` - String value from an Amazon-maintained list
+      #     (`amazon` \| `aws-marketplace` \| `microsoft`) of snapshot owners.
+      #     Not to be confused with the user-configured AWS account alias, which
+      #     is set from the IAM console.
       #
       #   * `owner-id` - The AWS account ID of the image owner.
       #
@@ -919,7 +931,7 @@ module Aws
       #   One or more filters.
       #
       #   * `affinity` - The affinity setting for an instance running on a
-      #     Dedicated host (`default` \| `host`).
+      #     Dedicated Host (`default` \| `host`).
       #
       #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
       #
@@ -951,7 +963,7 @@ module Aws
       #   * `group-name` - The name of the security group for the instance.
       #     EC2-Classic only.
       #
-      #   * `host-Id` - The ID of the Dedicated host on which the instance is
+      #   * `host-id` - The ID of the Dedicated Host on which the instance is
       #     running, if applicable.
       #
       #   * `hypervisor` - The hypervisor type of the instance (`ovm` \| `xen`).
@@ -1799,8 +1811,10 @@ module Aws
       #
       #   * `description` - A description of the snapshot.
       #
-      #   * `owner-alias` - The AWS account alias (for example, `amazon`) that
-      #     owns the snapshot.
+      #   * `owner-alias` - Value from an Amazon-maintained list (`amazon` \|
+      #     `aws-marketplace` \| `microsoft`) of snapshot owners. Not to be
+      #     confused with the user-configured AWS account alias, which is set
+      #     from the IAM consolew.
       #
       #   * `owner-id` - The ID of the AWS account that owns the snapshot.
       #

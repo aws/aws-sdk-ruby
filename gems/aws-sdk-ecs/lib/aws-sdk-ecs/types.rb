@@ -144,6 +144,7 @@ module Aws
       #         image: "String",
       #         cpu: 1,
       #         memory: 1,
+      #         memory_reservation: 1,
       #         links: ["String"],
       #         port_mappings: [
       #           {
@@ -200,7 +201,7 @@ module Aws
       #           },
       #         ],
       #         log_configuration: {
-      #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs
+      #           log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
       #           options: {
       #             "String" => "String",
       #           },
@@ -211,6 +212,7 @@ module Aws
         :image,
         :cpu,
         :memory,
+        :memory_reservation,
         :links,
         :port_mappings,
         :essential,
@@ -244,8 +246,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [String]
 
@@ -270,8 +272,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [String]
 
@@ -321,27 +323,68 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   [4]: http://aws.amazon.com/ec2/instance-types/
         #   [5]: https://docs.docker.com/reference/run/#cpu-share-constraint
         #   @return [Integer]
 
         # @!attribute [rw] memory
-        #   The number of MiB of memory to reserve for the container. You must
-        #   specify a non-zero integer for this parameter; the Docker daemon
-        #   reserves a minimum of 4 MiB of memory for a container, so you should
-        #   not specify fewer than 4 MiB of memory for your containers. If your
-        #   container attempts to exceed the memory allocated here, the
+        #   The hard limit (in MiB) of memory to present to the container. If
+        #   your container attempts to exceed the memory specified here, the
         #   container is killed. This parameter maps to `Memory` in the [Create
         #   a container][1] section of the [Docker Remote API][2] and the
         #   `--memory` option to [docker run][3].
         #
+        #   You must specify a non-zero integer for one or both of `memory` or
+        #   `memoryReservation` in container definitions. If you specify both,
+        #   `memory` must be greater than `memoryReservation`. If you specify
+        #   `memoryReservation`, then that value is subtracted from the
+        #   available memory resources for the container instance on which the
+        #   container is placed; otherwise, the value of `memory` is used.
+        #
+        #   The Docker daemon reserves a minimum of 4 MiB of memory for a
+        #   container, so you should not specify fewer than 4 MiB of memory for
+        #   your containers.
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
+        #   [3]: https://docs.docker.com/reference/commandline/run/
+        #   @return [Integer]
+
+        # @!attribute [rw] memory_reservation
+        #   The soft limit (in MiB) of memory to reserve for the container. When
+        #   system memory is under heavy contention, Docker attempts to keep the
+        #   container memory to this soft limit; however, your container can
+        #   consume more memory when it needs to, up to either the hard limit
+        #   specified with the `memory` parameter (if applicable), or all of the
+        #   available memory on the container instance, whichever comes first.
+        #   This parameter maps to `MemoryReservation` in the [Create a
+        #   container][1] section of the [Docker Remote API][2] and the
+        #   `--memory-reservation` option to [docker run][3].
+        #
+        #   You must specify a non-zero integer for one or both of `memory` or
+        #   `memoryReservation` in container definitions. If you specify both,
+        #   `memory` must be greater than `memoryReservation`. If you specify
+        #   `memoryReservation`, then that value is subtracted from the
+        #   available memory resources for the container instance on which the
+        #   container is placed; otherwise, the value of `memory` is used.
+        #
+        #   For example, if your container normally uses 128 MiB of memory, but
+        #   occasionally bursts to 256 MiB of memory for short periods of time,
+        #   you can set a `memoryReservation` of 128 MiB, and a `memory` hard
+        #   limit of 300 MiB. This configuration would allow the container to
+        #   only reserve 128 MiB of memory from the remaining resources on the
+        #   container instance, but also allow the container to consume more
+        #   memory resources when needed.
+        #
+        #
+        #
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Integer]
 
@@ -354,8 +397,8 @@ module Aws
         #   `name` and `alias`. For more information on linking Docker
         #   containers, see [https://docs.docker.com/userguide/dockerlinks/][1].
         #   This parameter maps to `Links` in the [Create a container][2]
-        #   section of the [Docker Remote API][3] and the `--link` option to [
-        #   docker run ][4].
+        #   section of the [Docker Remote API][3] and the `--link` option to
+        #   [docker run][4].
         #
         #   <important markdown="1"> Containers that are collocated on a single container instance may be
         #   able to communicate with each other without requiring links or host
@@ -367,8 +410,8 @@ module Aws
         #
         #
         #   [1]: https://docs.docker.com/userguide/dockerlinks/
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [3]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [3]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [4]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<String>]
 
@@ -377,7 +420,11 @@ module Aws
         #   containers to access ports on the host container instance to send or
         #   receive traffic. This parameter maps to `PortBindings` in the
         #   [Create a container][1] section of the [Docker Remote API][2] and
-        #   the `--publish` option to [docker run][3].
+        #   the `--publish` option to [docker run][3]. If the network mode of a
+        #   task definition is set to `none`, then you cannot specify port
+        #   mappings. If the network mode of a task definition is set to `host`,
+        #   then host ports must either be undefined or they must match the
+        #   container port in the port mapping.
         #
         #   <note markdown="1"> After a task reaches the `RUNNING` status, manual and automatic host
         #   and container port assignments are visible in the **Network
@@ -389,8 +436,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<Types::PortMapping>]
 
@@ -430,8 +477,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   [4]: https://docs.docker.com/reference/builder/#entrypoint
         #   @return [Array<String>]
@@ -445,8 +492,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   [4]: https://docs.docker.com/reference/builder/#cmd
         #   @return [Array<String>]
@@ -463,8 +510,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<Types::KeyValuePair>]
 
@@ -475,8 +522,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<Types::MountPoint>]
 
@@ -487,8 +534,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<Types::VolumeFrom>]
 
@@ -499,8 +546,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [String]
 
@@ -511,8 +558,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [String]
 
@@ -524,8 +571,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [String]
 
@@ -536,8 +583,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   @return [Boolean]
 
         # @!attribute [rw] privileged
@@ -549,8 +596,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Boolean]
 
@@ -562,8 +609,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   @return [Boolean]
 
         # @!attribute [rw] dns_servers
@@ -574,8 +621,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<String>]
 
@@ -587,8 +634,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<String>]
 
@@ -600,8 +647,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<Types::HostEntry>]
 
@@ -622,8 +669,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
         #   @return [Array<String>]
@@ -640,8 +687,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Hash<String,String>]
 
@@ -657,8 +704,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   @return [Array<Types::Ulimit>]
 
@@ -701,8 +748,8 @@ module Aws
         #
         #
         #
-        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/#create-a-container
-        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.19/
+        #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
+        #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
         #   [3]: https://docs.docker.com/reference/commandline/run/
         #   [4]: https://docs.docker.com/engine/admin/logging/overview/
         #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
@@ -862,6 +909,7 @@ module Aws
       #         task_definition: "String", # required
       #         load_balancers: [
       #           {
+      #             target_group_arn: "String",
       #             load_balancer_name: "String",
       #             container_name: "String",
       #             container_port: 1,
@@ -907,9 +955,26 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] load_balancers
-        #   A list of load balancer objects, containing the load balancer name,
-        #   the container name (as it appears in a container definition), and
-        #   the container port to access from the load balancer.
+        #   A load balancer object representing the load balancer to use with
+        #   your service. Currently, you are limited to one load balancer per
+        #   service. After you create a service, the load balancer name,
+        #   container name, and container port specified in the service
+        #   definition are immutable.
+        #
+        #   For Elastic Load Balancing Classic load balancers, this object must
+        #   contain the load balancer name, the container name (as it appears in
+        #   a container definition), and the container port to access from the
+        #   load balancer. When a task from this service is placed on a
+        #   container instance, the container instance is registered with the
+        #   load balancer specified here.
+        #
+        #   For Elastic Load Balancing Application load balancers, this object
+        #   must contain the load balancer target group ARN, the container name
+        #   (as it appears in a container definition), and the container port to
+        #   access from the load balancer. When a task from this service is
+        #   placed on a container instance, the container instance and port
+        #   combination is registered as a target in the target group specified
+        #   here.
         #   @return [Array<Types::LoadBalancer>]
 
         # @!attribute [rw] desired_count
@@ -1059,13 +1124,11 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] created_at
-        #   The Unix time in seconds and milliseconds when the service was
-        #   created.
+        #   The Unix timestamp for when the service was created.
         #   @return [Time]
 
         # @!attribute [rw] updated_at
-        #   The Unix time in seconds and milliseconds when the service was last
-        #   updated.
+        #   The Unix timestamp for when the service was last updated.
         #   @return [Time]
 
       end
@@ -1919,12 +1982,13 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] desired_status
-        #   The task status with which to filter the `ListTasks` results.
-        #   Specifying a `desiredStatus` of `STOPPED` limits the results to
-        #   tasks that are in the `STOPPED` status, which can be useful for
-        #   debugging tasks that are not starting properly or have died or
-        #   finished. The default status filter is status filter is `RUNNING`,
-        #   which shows tasks that ECS has set the desired status to `RUNNING`.
+        #   The task desired status with which to filter the `ListTasks`
+        #   results. Specifying a `desiredStatus` of `STOPPED` limits the
+        #   results to tasks that ECS has set the desired status to `STOPPED`,
+        #   which can be useful for debugging tasks that are not starting
+        #   properly or have died or finished. The default status filter is
+        #   `RUNNING`, which shows tasks that ECS has set the desired status to
+        #   `RUNNING`.
         #
         #   <note markdown="1"> Although you can filter results based on a desired status of
         #   `PENDING`, this will not return any results because ECS never sets
@@ -1959,14 +2023,21 @@ module Aws
       #   data as a hash:
       #
       #       {
+      #         target_group_arn: "String",
       #         load_balancer_name: "String",
       #         container_name: "String",
       #         container_port: 1,
       #       }
       class LoadBalancer < Aws::Structure.new(
+        :target_group_arn,
         :load_balancer_name,
         :container_name,
         :container_port)
+
+        # @!attribute [rw] target_group_arn
+        #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
+        #   target group associated with a service.
+        #   @return [String]
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1992,7 +2063,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs
+      #         log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
       #         options: {
       #           "String" => "String",
       #         },
@@ -2267,12 +2338,14 @@ module Aws
       #       {
       #         family: "String", # required
       #         task_role_arn: "String",
+      #         network_mode: "bridge", # accepts bridge, host, none
       #         container_definitions: [ # required
       #           {
       #             name: "String",
       #             image: "String",
       #             cpu: 1,
       #             memory: 1,
+      #             memory_reservation: 1,
       #             links: ["String"],
       #             port_mappings: [
       #               {
@@ -2329,7 +2402,7 @@ module Aws
       #               },
       #             ],
       #             log_configuration: {
-      #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs
+      #               log_driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk
       #               options: {
       #                 "String" => "String",
       #               },
@@ -2348,6 +2421,7 @@ module Aws
       class RegisterTaskDefinitionRequest < Aws::Structure.new(
         :family,
         :task_role_arn,
+        :network_mode,
         :container_definitions,
         :volumes)
 
@@ -2363,6 +2437,29 @@ module Aws
         #   The Amazon Resource Name (ARN) of the IAM role that containers in
         #   this task can assume. All containers in this task are granted the
         #   permissions that are specified in this role.
+        #   @return [String]
+
+        # @!attribute [rw] network_mode
+        #   The Docker networking mode to use for the containers in the task.
+        #   The valid values are `none`, `bridge`, and `host`.
+        #
+        #   The default Docker network mode is `bridge`. If the network mode is
+        #   set to `none`, you cannot specify port mappings in your container
+        #   definitions, and the task\'s containers do not have external
+        #   connectivity. The `host` network mode offers the highest networking
+        #   performance for containers because they use the host network stack
+        #   instead of the virtualized network stack provided by the `bridge`
+        #   mode; however, exposed container ports are mapped directly to the
+        #   corresponding host port, so you cannot take advantage of dynamic
+        #   host port mappings or run multiple instantiations of the same task
+        #   on a single container instance if port mappings are used.
+        #
+        #   For more information, see [Network settings][1] in the *Docker run
+        #   reference*.
+        #
+        #
+        #
+        #   [1]: https://docs.docker.com/engine/reference/run/#network-settings
         #   @return [String]
 
         # @!attribute [rw] container_definitions
@@ -2575,9 +2672,10 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] load_balancers
-        #   A list of load balancer objects, containing the load balancer name,
-        #   the container name (as it appears in a container definition), and
-        #   the container port to access from the load balancer.
+        #   A list of Elastic Load Balancing load balancer objects, containing
+        #   the load balancer name, the container name (as it appears in a
+        #   container definition), and the container port to access from the
+        #   load balancer.
         #   @return [Array<Types::LoadBalancer>]
 
         # @!attribute [rw] status
@@ -2619,7 +2717,7 @@ module Aws
         # @!attribute [rw] role_arn
         #   The Amazon Resource Name (ARN) of the IAM role associated with the
         #   service that allows the Amazon ECS container agent to register
-        #   container instances with a load balancer.
+        #   container instances with an Elastic Load Balancing load balancer.
         #   @return [String]
 
         # @!attribute [rw] events
@@ -2628,8 +2726,7 @@ module Aws
         #   @return [Array<Types::ServiceEvent>]
 
         # @!attribute [rw] created_at
-        #   The Unix time in seconds and milliseconds when the service was
-        #   created.
+        #   The Unix timestamp for when the service was created.
         #   @return [Time]
 
       end
@@ -2645,8 +2742,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] created_at
-        #   The Unix time in seconds and milliseconds when the event was
-        #   triggered.
+        #   The Unix timestamp for when the event was triggered.
         #   @return [Time]
 
         # @!attribute [rw] message
@@ -2972,20 +3068,18 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] created_at
-        #   The Unix time in seconds and milliseconds when the task was created
-        #   (the task entered the `PENDING` state).
+        #   The Unix timestamp for when the task was created (the task entered
+        #   the `PENDING` state).
         #   @return [Time]
 
         # @!attribute [rw] started_at
-        #   The Unix time in seconds and milliseconds when the task was started
-        #   (the task transitioned from the `PENDING` state to the `RUNNING`
-        #   state).
+        #   The Unix timestamp for when the task was started (the task
+        #   transitioned from the `PENDING` state to the `RUNNING` state).
         #   @return [Time]
 
         # @!attribute [rw] stopped_at
-        #   The Unix time in seconds and milliseconds when the task was stopped
-        #   (the task transitioned from the `RUNNING` state to the `STOPPED`
-        #   state).
+        #   The Unix timestamp for when the task was stopped (the task
+        #   transitioned from the `RUNNING` state to the `STOPPED` state).
         #   @return [Time]
 
       end
@@ -2996,6 +3090,7 @@ module Aws
         :container_definitions,
         :family,
         :task_role_arn,
+        :network_mode,
         :revision,
         :volumes,
         :status,
@@ -3014,7 +3109,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonECS/latest/developerguidetask_defintions.html
+        #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
         #   @return [Array<Types::ContainerDefinition>]
 
         # @!attribute [rw] family
@@ -3025,6 +3120,24 @@ module Aws
         #   The Amazon Resource Name (ARN) of the IAM role that containers in
         #   this task can assume. All containers in this task are granted the
         #   permissions that are specified in this role.
+        #   @return [String]
+
+        # @!attribute [rw] network_mode
+        #   The Docker networking mode to use for the containers in the task.
+        #   The valid values are `none`, `bridge`, and `host`.
+        #
+        #   If the network mode is `none`, the containers do not have external
+        #   connectivity. The default Docker network mode is `bridge`. The
+        #   `host` network mode offers the highest networking performance for
+        #   containers because it uses the host network stack instead of the
+        #   virtualized network stack provided by the `bridge` mode.
+        #
+        #   For more information, see [Network settings][1] in the *Docker run
+        #   reference*.
+        #
+        #
+        #
+        #   [1]: https://docs.docker.com/engine/reference/run/#network-settings
         #   @return [String]
 
         # @!attribute [rw] revision
@@ -3044,7 +3157,7 @@ module Aws
         #
         #
         #
-        #   [1]: http://docs.aws.amazon.com/http:/docs.aws.amazon.com/AmazonECS/latest/developerguidetask_defintions.html
+        #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html
         #   @return [Array<Types::Volume>]
 
         # @!attribute [rw] status

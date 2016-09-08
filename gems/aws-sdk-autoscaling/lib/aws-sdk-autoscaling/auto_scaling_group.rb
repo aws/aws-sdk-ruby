@@ -88,6 +88,13 @@ module Aws
         data.load_balancer_names
       end
 
+      # The Amazon Resource Names (ARN) of the target groups for your load
+      # balancer.
+      # @return [Array<String>]
+      def target_group_arns
+        data.target_group_arns
+      end
+
       # The service to use for the health checks. The valid values are `EC2`
       # and `ELB`.
       # @return [String]
@@ -352,9 +359,6 @@ module Aws
       #   * `GroupTerminatingInstances`
       #
       #   * `GroupTotalInstances`
-      #
-      #   Note that the `GroupStandbyInstances` metric is not enabled by
-      #   default. You must explicitly request this metric.
       # @option options [required, String] :granularity
       #   The granularity to associate with the metrics to collect. The only
       #   valid value is `1Minute`.
@@ -376,7 +380,7 @@ module Aws
       #   `ExactCapacity`, and `PercentChangeInCapacity`.
       #
       #   For more information, see [Dynamic Scaling][1] in the *Auto Scaling
-      #   Developer Guide*.
+      #   User Guide*.
       #
       #
       #
@@ -405,7 +409,7 @@ module Aws
       #   `SimpleScaling`.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #
@@ -483,7 +487,8 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :scaling_processes
-      #   One or more of the following processes:
+      #   One or more of the following processes. If you omit this parameter,
+      #   all processes are specified.
       #
       #   * `Launch`
       #
@@ -526,7 +531,8 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :scaling_processes
-      #   One or more of the following processes:
+      #   One or more of the following processes. If you omit this parameter,
+      #   all processes are specified.
       #
       #   * `Launch`
       #
@@ -566,7 +572,7 @@ module Aws
       #   before another scaling activity can start. The default is 300.
       #
       #   For more information, see [Auto Scaling Cooldowns][1] in the *Auto
-      #   Scaling Developer Guide*.
+      #   Scaling User Guide*.
       #
       #
       #
@@ -579,10 +585,10 @@ module Aws
       # @option options [Integer] :health_check_grace_period
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
-      #   service. The default is 300.
+      #   service. The default is 0.
       #
-      #   For more information, see [Health Checks][1] in the *Auto Scaling
-      #   Developer Guide*.
+      #   For more information, see [Health Checks][1] in the *Auto Scaling User
+      #   Guide*.
       #
       #
       #
@@ -604,7 +610,7 @@ module Aws
       #   `AvailabilityZones`.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
-      #   VPC][1] in the *Auto Scaling Developer Guide*.
+      #   VPC][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -615,7 +621,7 @@ module Aws
       #   order that they are listed.
       #
       #   For more information, see [Controlling Which Instances Auto Scaling
-      #   Terminates During Scale In][1] in the *Auto Scaling Developer Guide*.
+      #   Terminates During Scale In][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -637,11 +643,11 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :activity_ids
-      #   The activity IDs of the desired scaling activities. If this list is
-      #   omitted, all activities are described. If you specify an Auto Scaling
-      #   group, the results are limited to that group. The list of requested
-      #   activities cannot contain more than 50 items. If unknown activities
-      #   are requested, they are ignored with no error.
+      #   The activity IDs of the desired scaling activities. If you omit this
+      #   parameter, all activities for the past six weeks are described. If you
+      #   specify an Auto Scaling group, the results are limited to that group.
+      #   The list of requested activities cannot contain more than 50 items. If
+      #   unknown activities are requested, they are ignored with no error.
       # @return [Activity::Collection]
       def activities(options = {})
         batches = Enumerator.new do |y|
@@ -700,7 +706,8 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :lifecycle_hook_names
-      #   The names of one or more lifecycle hooks.
+      #   The names of one or more lifecycle hooks. If you omit this parameter,
+      #   all lifecycle hooks are described.
       # @return [LifecycleHook::Collection]
       def lifecycle_hooks(options = {})
         batches = Enumerator.new do |y|
@@ -781,7 +788,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [Array<String>] :policy_names
       #   One or more policy names or policy ARNs to be described. If you omit
-      #   this list, all policy names are described. If an group name is
+      #   this parameter, all policy names are described. If an group name is
       #   provided, the results are limited to that group. This list is limited
       #   to 50 items. If you specify an unknown policy name, it is ignored with
       #   no error.
@@ -810,9 +817,9 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [Array<String>] :scheduled_action_names
-      #   Describes one or more scheduled actions. If you omit this list, the
-      #   call describes all scheduled actions. If you specify an unknown
-      #   scheduled action it is ignored with no error.
+      #   Describes one or more scheduled actions. If you omit this parameter,
+      #   all scheduled actions are described. If you specify an unknown
+      #   scheduled action, it is ignored with no error.
       #
       #   You can describe up to a maximum of 50 instances with a single call.
       #   If there are more items to return, the call returns a token. To get

@@ -39,7 +39,9 @@ module Aws
       end
       alias :snapshot_id :id
 
-      # The ID of the volume that was used to create the snapshot.
+      # The ID of the volume that was used to create the snapshot. Snapshots
+      # created by the CopySnapshot action have an arbitrary volume ID that
+      # should not be used for any purpose.
       # @return [String]
       def volume_id
         data.volume_id
@@ -92,8 +94,9 @@ module Aws
         data.volume_size
       end
 
-      # The AWS account alias (for example, `amazon`, `self`) or AWS account
-      # ID that owns the snapshot.
+      # Value from an Amazon-maintained list (`amazon` \| `aws-marketplace` \|
+      # `microsoft`) of snapshot owners. Not to be confused with the
+      # user-configured AWS account alias, which is set from the IAM console.
       # @return [String]
       def owner_alias
         data.owner_alias

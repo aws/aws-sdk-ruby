@@ -899,8 +899,7 @@ module Aws
         #
         #   If you want to send different messages for each transport protocol,
         #   set the value of the `MessageStructure` parameter to `json` and use
-        #   a JSON object for the `Message` parameter. See the Examples section
-        #   for the format of the JSON object.
+        #   a JSON object for the `Message` parameter.
         #
         #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB
         #   in size (262144 bytes, not 262144 characters).
@@ -1191,9 +1190,8 @@ module Aws
         #   Amazon SNS service principle to perform the `s3:PutObject` and
         #   `s3:GetBucketLocation` actions.
         #
-        #   For an example bucket policy and usage report, see [Viewing
-        #   Statistics About SMS Message Delivery][1] in the *Amazon SNS
-        #   Developer Guide*.
+        #   For an example bucket policy and usage report, see [Monitoring SMS
+        #   Activity][1] in the *Amazon SNS Developer Guide*.
         #
         #
         #

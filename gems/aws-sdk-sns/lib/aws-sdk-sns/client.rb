@@ -743,8 +743,7 @@ module Aws
       # endpoint, such as an app on a Kindle device or mobile phone, you must
       # specify the EndpointArn for the TargetArn parameter. The EndpointArn
       # is returned when making a call with the `CreatePlatformEndpoint`
-      # action. The second example below shows a request and response for
-      # publishing to a mobile endpoint.
+      # action.
       #
       # For more information about formatting messages, see [Send Custom
       # Platform-Specific Payloads in Messages to Mobile Devices][1].
@@ -776,8 +775,7 @@ module Aws
       #
       #   If you want to send different messages for each transport protocol,
       #   set the value of the `MessageStructure` parameter to `json` and use a
-      #   JSON object for the `Message` parameter. See the Examples section for
-      #   the format of the JSON object.
+      #   JSON object for the `Message` parameter.
       #
       #   Constraints: Messages must be UTF-8 encoded strings at most 256 KB in
       #   size (262144 bytes, not 262144 characters).
@@ -1080,8 +1078,8 @@ module Aws
       #   Amazon SNS service principle to perform the `s3:PutObject` and
       #   `s3:GetBucketLocation` actions.
       #
-      #   For an example bucket policy and usage report, see [Viewing Statistics
-      #   About SMS Message Delivery][1] in the *Amazon SNS Developer Guide*.
+      #   For an example bucket policy and usage report, see [Monitoring SMS
+      #   Activity][1] in the *Amazon SNS Developer Guide*.
       #
       #
       #
@@ -1285,6 +1283,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

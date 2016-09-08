@@ -178,16 +178,18 @@ module Aws
       # for Hadoop][1]. Currently supported values are:
       #
       # * \"mapr-m3\" - launch the job flow using MapR M3 Edition.
+      #
       # * \"mapr-m5\" - launch the job flow using MapR M5 Edition.
+      #
       # * \"mapr\" with the user arguments specifying \"--edition,m3\" or
       #   \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition,
       #   respectively.
       #
-      # <note markdown="1">In Amazon EMR releases 4.0 and greater, the only accepted parameter is
+      # <note markdown="1"> In Amazon EMR releases 4.0 and greater, the only accepted parameter is
       # the application name. To pass arguments to applications, you supply a
       # configuration for each application.
       #
-      # </note>
+      #  </note>
       #
       #
       #
@@ -369,9 +371,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] configurations
-        #   <note markdown="1">Amazon EMR releases 4.x or later.
+        #   <note markdown="1"> Amazon EMR releases 4.x or later.
         #
-        #   </note>
+        #    </note>
         #
         #   The list of Configurations supplied to the EMR cluster.
         #   @return [Array<Types::Configuration>]
@@ -485,9 +487,9 @@ module Aws
 
       end
 
-      # <note markdown="1">Amazon EMR releases 4.x or later.
+      # <note markdown="1"> Amazon EMR releases 4.x or later.
       #
-      # </note>
+      #  </note>
       #
       # Specifies a hardware and software configuration of the EMR cluster.
       # This includes configurations for applications and software bundled
@@ -797,6 +799,32 @@ module Aws
 
       end
 
+      # The details of the step failure. The service attempts to detect the
+      # root cause for many common failures.
+      class FailureDetails < Aws::Structure.new(
+        :reason,
+        :message,
+        :log_file)
+
+        # @!attribute [rw] reason
+        #   The reason for the step failure. In the case where the service
+        #   cannot successfully determine the root cause of the failure, it
+        #   returns \"Unknown Error\" as a reason.
+        #   @return [String]
+
+        # @!attribute [rw] message
+        #   The descriptive message including the error the EMR service has
+        #   identified as the cause of step failure. This is text from an error
+        #   log that describes the root cause of the failure.
+        #   @return [String]
+
+        # @!attribute [rw] log_file
+        #   The path to the log file where the step failure root cause was
+        #   originally recorded.
+        #   @return [String]
+
+      end
+
       # A job flow step consisting of a JAR file whose main function will be
       # executed. The main function submits a job for Hadoop to execute and
       # waits for the job to finish or fail.
@@ -981,9 +1009,9 @@ module Aws
         #   @return [Types::InstanceGroupStatus]
 
         # @!attribute [rw] configurations
-        #   <note markdown="1">Amazon EMR releases 4.x or later.
+        #   <note markdown="1"> Amazon EMR releases 4.x or later.
         #
-        #   </note>
+        #    </note>
         #
         #   The list of configurations supplied for an EMR cluster instance
         #   group. You can specify a separate configuration for each instance
@@ -995,7 +1023,7 @@ module Aws
         #   @return [Array<Types::EbsBlockDevice>]
 
         # @!attribute [rw] ebs_optimized
-        #   If the instance group is EBS-optimized. An Amazon EBS–optimized
+        #   If the instance group is EBS-optimized. An Amazon EBS-optimized
         #   instance uses an optimized configuration stack and provides
         #   additional, dedicated capacity for Amazon EBS I/O.
         #   @return [Boolean]
@@ -1080,9 +1108,9 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] configurations
-        #   <note markdown="1">Amazon EMR releases 4.x or later.
+        #   <note markdown="1"> Amazon EMR releases 4.x or later.
         #
-        #   </note>
+        #    </note>
         #
         #   The list of configurations supplied for an EMR cluster instance
         #   group. You can specify a separate configuration for each instance
@@ -2218,16 +2246,18 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] ami_version
-        #   <note markdown="1">For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
+        #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
         #   greater, use ReleaseLabel.
         #
-        #   </note>
+        #    </note>
         #
         #   The version of the Amazon Machine Image (AMI) to use when launching
         #   Amazon EC2 instances in the job flow. The following values are
         #   valid:
         #
         #   * The version number of the AMI to use, for example, \"2.0.\"
+        #
+        #   ^
         #
         #   If the AMI supports multiple versions of Hadoop (for example, AMI
         #   1.0 supports both Hadoop 0.18 and 0.20) you can use the
@@ -2244,9 +2274,9 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] release_label
-        #   <note markdown="1">Amazon EMR releases 4.x or later.
+        #   <note markdown="1"> Amazon EMR releases 4.x or later.
         #
-        #   </note>
+        #    </note>
         #
         #   The release label for the Amazon EMR release. For Amazon EMR 3.x and
         #   2.x AMIs, use amiVersion instead instead of ReleaseLabel.
@@ -2267,16 +2297,17 @@ module Aws
         #   @return [Array<Types::BootstrapActionConfig>]
 
         # @!attribute [rw] supported_products
-        #   <note markdown="1">For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
+        #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
         #   greater, use Applications.
         #
-        #   </note>
+        #    </note>
         #
         #   A list of strings that indicates third-party software to use with
         #   the job flow. For more information, go to [Use Third Party
         #   Applications with Amazon EMR][1]. Currently supported values are:
         #
         #   * \"mapr-m3\" - launch the job flow using MapR M3 Edition.
+        #
         #   * \"mapr-m5\" - launch the job flow using MapR M5 Edition.
         #
         #
@@ -2285,10 +2316,10 @@ module Aws
         #   @return [Array<String>]
 
         # @!attribute [rw] new_supported_products
-        #   <note markdown="1">For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
+        #   <note markdown="1"> For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and
         #   greater, use Applications.
         #
-        #   </note>
+        #    </note>
         #
         #   A list of strings that indicates third-party software to use with
         #   the job flow that accepts a user argument list. EMR accepts and
@@ -2298,15 +2329,22 @@ module Aws
         #   supported values are:
         #
         #   * \"mapr-m3\" - launch the cluster using MapR M3 Edition.
+        #
         #   * \"mapr-m5\" - launch the cluster using MapR M5 Edition.
+        #
         #   * \"mapr\" with the user arguments specifying \"--edition,m3\" or
         #     \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition
         #     respectively.
+        #
         #   * \"mapr-m7\" - launch the cluster using MapR M7 Edition.
+        #
         #   * \"hunk\" - launch the cluster with the Hunk Big Data Analtics
         #     Platform.
+        #
         #   * \"hue\"- launch the cluster with Hue installed.
+        #
         #   * \"spark\" - launch the cluster with Apache Spark installed.
+        #
         #   * \"ganglia\" - launch the cluster with the Ganglia Monitoring
         #     System installed.
         #
@@ -2316,9 +2354,9 @@ module Aws
         #   @return [Array<Types::SupportedProductConfig>]
 
         # @!attribute [rw] applications
-        #   <note markdown="1">Amazon EMR releases 4.x or later.
+        #   <note markdown="1"> Amazon EMR releases 4.x or later.
         #
-        #   </note>
+        #    </note>
         #
         #   A list of applications for the cluster. Valid values are:
         #   \"Hadoop\", \"Hive\", \"Mahout\", \"Pig\", and \"Spark.\" They are
@@ -2326,9 +2364,9 @@ module Aws
         #   @return [Array<Types::Application>]
 
         # @!attribute [rw] configurations
-        #   <note markdown="1">Amazon EMR releases 4.x or later.
+        #   <note markdown="1"> Amazon EMR releases 4.x or later.
         #
-        #   </note>
+        #    </note>
         #
         #   The list of configurations supplied for the EMR cluster you are
         #   creating.
@@ -2613,6 +2651,7 @@ module Aws
       class StepStatus < Aws::Structure.new(
         :state,
         :state_change_reason,
+        :failure_details,
         :timeline)
 
         # @!attribute [rw] state
@@ -2622,6 +2661,11 @@ module Aws
         # @!attribute [rw] state_change_reason
         #   The reason for the step execution status change.
         #   @return [Types::StepStateChangeReason]
+
+        # @!attribute [rw] failure_details
+        #   The details for the step failure including reason, message, and log
+        #   file path where the root cause was identified.
+        #   @return [Types::FailureDetails]
 
         # @!attribute [rw] timeline
         #   The timeline of the cluster step status over time.
@@ -2789,7 +2833,7 @@ module Aws
         #   @return [Integer]
 
         # @!attribute [rw] size_in_gb
-        #   The volume size, in gibibytes (GiB). This can be a number from 1 –
+        #   The volume size, in gibibytes (GiB). This can be a number from 1 -
         #   1024. If the volume type is EBS-optimized, the minimum value is 10.
         #   @return [Integer]
 

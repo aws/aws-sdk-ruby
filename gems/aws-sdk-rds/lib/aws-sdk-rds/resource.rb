@@ -71,8 +71,8 @@ module Aws
       #   Example: `my-cluster1`
       # @option options [String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group to associate with this DB
-      #   cluster. If this argument is omitted, `default.aurora5.6` for the
-      #   specified engine will be used.
+      #   cluster. If this argument is omitted, `default.aurora5.6` will be
+      #   used.
       #
       #   Constraints:
       #
@@ -106,7 +106,7 @@ module Aws
       #
       #   Default: `3306`
       # @option options [String] :master_username
-      #   The name of the master user for the client DB cluster.
+      #   The name of the master user for the DB cluster.
       #
       #   Constraints:
       #
@@ -679,10 +679,6 @@ module Aws
       #
       #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
       #
-      #   * **Version 5.1 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 5.1.73a | 5.1.73b`
-      #
       #   **Oracle Database Enterprise Edition (oracle-ee)**
       #
       #   * **Version 12.1 (available in all AWS regions except ap-south-1,
@@ -697,18 +693,6 @@ module Aws
       #
       #   * **Version 12.1 (available in all AWS regions except
       #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
       #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -727,18 +711,6 @@ module Aws
       #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
       #     12.1.0.1.v5`
       #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
-      #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
       #
@@ -755,18 +727,6 @@ module Aws
       #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
       #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 |
       #     12.1.0.1.v5`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 11.2.0.2.v3 | 11.2.0.2.v4
-      #     | 11.2.0.2.v5 | 11.2.0.2.v6 | 11.2.0.2.v7`
-      #
-      #   * **Version 11.2 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 11.2.0.3.v1 | 11.2.0.3.v2 | 11.2.0.3.v3`
-      #
-      #   * **Version 11.2 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 11.2.0.3.v4`
       #
       #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
       #     11.2.0.4.v3 | 11.2.0.4.v4`
@@ -998,8 +958,6 @@ module Aws
       #
       #   * Must not be \"Default\"
       #
-      #   * Cannot contain spaces
-      #
       #   Example: `mysecuritygroup`
       # @option options [required, String] :db_security_group_description
       #   The description for the DB security group.
@@ -1020,9 +978,8 @@ module Aws
       #   The name for the DB subnet group. This value is stored as a lowercase
       #   string.
       #
-      #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Cannot contain periods, underscores, spaces, or hyphens. Must not be
-      #   `default`.
+      #   Constraints: Must contain no more than 255 alphanumeric characters,
+      #   periods, underscores, spaces, or hyphens. Must not be default.
       #
       #   Example: `mySubnetgroup`
       # @option options [required, String] :db_subnet_group_description
@@ -1557,10 +1514,11 @@ module Aws
       #   * `public` - Return all DB snapshots that have been marked as public.
       #
       #   If you don\'t specify a `SnapshotType` value, then both automated and
-      #   manual snapshots are returned. You can include shared snapshots with
-      #   these results by setting the `IncludeShared` parameter to `true`. You
-      #   can include public snapshots with these results by setting the
-      #   `IncludePublic` parameter to `true`.
+      #   manual snapshots are returned. Shared and public DB snapshots are not
+      #   included in the returned results by default. You can include shared
+      #   snapshots with these results by setting the `IncludeShared` parameter
+      #   to `true`. You can include public snapshots with these results by
+      #   setting the `IncludePublic` parameter to `true`.
       #
       #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`

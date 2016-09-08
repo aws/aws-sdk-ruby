@@ -68,6 +68,7 @@ module Aws
       InvalidRequestContentException = Shapes::StructureShape.new(name: 'InvalidRequestContentException')
       InvalidSecurityGroupIDException = Shapes::StructureShape.new(name: 'InvalidSecurityGroupIDException')
       InvalidSubnetIDException = Shapes::StructureShape.new(name: 'InvalidSubnetIDException')
+      InvalidZipFileException = Shapes::StructureShape.new(name: 'InvalidZipFileException')
       InvocationRequest = Shapes::StructureShape.new(name: 'InvocationRequest')
       InvocationResponse = Shapes::StructureShape.new(name: 'InvocationResponse')
       InvocationType = Shapes::StringShape.new(name: 'InvocationType')
@@ -107,6 +108,7 @@ module Aws
       SubnetIPAddressLimitReachedException = Shapes::StructureShape.new(name: 'SubnetIPAddressLimitReachedException')
       SubnetId = Shapes::StringShape.new(name: 'SubnetId')
       SubnetIds = Shapes::ListShape.new(name: 'SubnetIds')
+      ThrottleReason = Shapes::StringShape.new(name: 'ThrottleReason')
       Timeout = Shapes::IntegerShape.new(name: 'Timeout')
       Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
       TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
@@ -542,6 +544,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: EC2AccessDeniedException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidZipFileException)
         end)
 
         api.add_operation(:invoke_async, Seahorse::Model::Operation.new.tap do |o|

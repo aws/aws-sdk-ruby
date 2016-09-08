@@ -103,12 +103,13 @@ module Aws
       #
       #       {
       #         domain_name: "DomainName", # required
+      #         elasticsearch_version: "ElasticsearchVersionString",
       #         elasticsearch_cluster_config: {
-      #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #           instance_count: 1,
       #           dedicated_master_enabled: false,
       #           zone_awareness_enabled: false,
-      #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #           dedicated_master_count: 1,
       #         },
       #         ebs_options: {
@@ -127,6 +128,7 @@ module Aws
       #       }
       class CreateElasticsearchDomainRequest < Aws::Structure.new(
         :domain_name,
+        :elasticsearch_version,
         :elasticsearch_cluster_config,
         :ebs_options,
         :access_policies,
@@ -139,6 +141,17 @@ module Aws
         #   AWS region. Domain names must start with a letter or number and can
         #   contain the following characters: a-z (lowercase), 0-9, and -
         #   (hyphen).
+        #   @return [String]
+
+        # @!attribute [rw] elasticsearch_version
+        #   String of format X.Y to specify version for the Elasticsearch domain
+        #   eg. \"1.5\" or \"2.3\". For more information, see [Creating
+        #   Elasticsearch Domains][1] in the *Amazon Elasticsearch Service
+        #   Developer Guide*.
+        #
+        #
+        #
+        #   [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains
         #   @return [String]
 
         # @!attribute [rw] elasticsearch_cluster_config
@@ -374,11 +387,11 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #         instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #         instance_count: 1,
       #         dedicated_master_enabled: false,
       #         zone_awareness_enabled: false,
-      #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #         dedicated_master_count: 1,
       #       }
       class ElasticsearchClusterConfig < Aws::Structure.new(
@@ -446,11 +459,17 @@ module Aws
 
       # The configuration of an Elasticsearch domain.
       class ElasticsearchDomainConfig < Aws::Structure.new(
+        :elasticsearch_version,
         :elasticsearch_cluster_config,
         :ebs_options,
         :access_policies,
         :snapshot_options,
         :advanced_options)
+
+        # @!attribute [rw] elasticsearch_version
+        #   String of format X.Y to specify version for the Elasticsearch
+        #   domain.
+        #   @return [Types::ElasticsearchVersionStatus]
 
         # @!attribute [rw] elasticsearch_cluster_config
         #   Specifies the `ElasticsearchClusterConfig` for the Elasticsearch
@@ -489,6 +508,7 @@ module Aws
         :deleted,
         :endpoint,
         :processing,
+        :elasticsearch_version,
         :elasticsearch_cluster_config,
         :ebs_options,
         :access_policies,
@@ -540,6 +560,9 @@ module Aws
         #   `False` if the configuration is active.
         #   @return [Boolean]
 
+        # @!attribute [rw] elasticsearch_version
+        #   @return [String]
+
         # @!attribute [rw] elasticsearch_cluster_config
         #   The type and number of instances in the domain cluster.
         #   @return [Types::ElasticsearchClusterConfig]
@@ -564,6 +587,24 @@ module Aws
         # @!attribute [rw] advanced_options
         #   Specifies the status of the `AdvancedOptions`
         #   @return [Hash<String,String>]
+
+      end
+
+      # Status of the Elasticsearch version options for the specified
+      # Elasticsearch domain.
+      class ElasticsearchVersionStatus < Aws::Structure.new(
+        :options,
+        :status)
+
+        # @!attribute [rw] options
+        #   Specifies the Elasticsearch version for the specified Elasticsearch
+        #   domain.
+        #   @return [String]
+
+        # @!attribute [rw] status
+        #   Specifies the status of the Elasticsearch version options for the
+        #   specified Elasticsearch domain.
+        #   @return [Types::OptionStatus]
 
       end
 
@@ -735,11 +776,11 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #         elasticsearch_cluster_config: {
-      #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #           instance_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #           instance_count: 1,
       #           dedicated_master_enabled: false,
       #           zone_awareness_enabled: false,
-      #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
+      #           dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #           dedicated_master_count: 1,
       #         },
       #         ebs_options: {

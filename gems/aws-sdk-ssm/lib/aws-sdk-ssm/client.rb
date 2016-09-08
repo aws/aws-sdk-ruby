@@ -168,8 +168,9 @@ module Aws
       # Associates the specified SSM document with the specified instance.
       #
       # When you associate an SSM document with an instance, the configuration
-      # agent on the instance processes the document and configures the
-      # instance as specified.
+      # agent on the instance (SSM agent for Linux and EC2Config service for
+      # Windows) processes the document and configures the instance as
+      # specified.
       #
       # If you associate a document with an instance that already has an
       # associated document, the system throws the AssociationAlreadyExists
@@ -214,8 +215,9 @@ module Aws
       # Associates the specified SSM document with the specified instances.
       #
       # When you associate an SSM document with an instance, the configuration
-      # agent on the instance processes the document and configures the
-      # instance as specified.
+      # agent on the instance (SSM agent for Linux and EC2Config service for
+      # Windows) processes the document and configures the instance as
+      # specified.
       #
       # If you associate a document with an instance that already has an
       # associated document, the system throws the AssociationAlreadyExists
@@ -542,11 +544,11 @@ module Aws
 
       # Describes one or more of your instances. You can use this to get
       # information about instances like the operating system platform, the
-      # SSM agent version, status etc. If you specify one or more instance
-      # IDs, it returns information for those instances. If you do not specify
-      # instance IDs, it returns information for all your instances. If you
-      # specify an instance ID that is not valid or an instance that you do
-      # not own, you receive an error.
+      # SSM agent version (Linux), status etc. If you specify one or more
+      # instance IDs, it returns information for those instances. If you do
+      # not specify instance IDs, it returns information for all your
+      # instances. If you specify an instance ID that is not valid or an
+      # instance that you do not own, you receive an error.
       # @option params [Array<Types::InstanceInformationFilter>] :instance_information_filter_list
       #   One or more filters. Use a filter to return a more specific list of
       #   instances.
@@ -1113,6 +1115,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

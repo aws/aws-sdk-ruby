@@ -50,6 +50,8 @@ module Aws
       ElasticsearchDomainConfig = Shapes::StructureShape.new(name: 'ElasticsearchDomainConfig')
       ElasticsearchDomainStatus = Shapes::StructureShape.new(name: 'ElasticsearchDomainStatus')
       ElasticsearchDomainStatusList = Shapes::ListShape.new(name: 'ElasticsearchDomainStatusList')
+      ElasticsearchVersionStatus = Shapes::StructureShape.new(name: 'ElasticsearchVersionStatus')
+      ElasticsearchVersionString = Shapes::StringShape.new(name: 'ElasticsearchVersionString')
       ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
       IntegerClass = Shapes::IntegerShape.new(name: 'IntegerClass')
       InternalException = Shapes::StructureShape.new(name: 'InternalException')
@@ -96,6 +98,7 @@ module Aws
       AdvancedOptionsStatus.struct_class = Types::AdvancedOptionsStatus
 
       CreateElasticsearchDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+      CreateElasticsearchDomainRequest.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "ElasticsearchVersion"))
       CreateElasticsearchDomainRequest.add_member(:elasticsearch_cluster_config, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, location_name: "ElasticsearchClusterConfig"))
       CreateElasticsearchDomainRequest.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptions, location_name: "EBSOptions"))
       CreateElasticsearchDomainRequest.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
@@ -159,6 +162,7 @@ module Aws
       ElasticsearchClusterConfigStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
       ElasticsearchClusterConfigStatus.struct_class = Types::ElasticsearchClusterConfigStatus
 
+      ElasticsearchDomainConfig.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionStatus, location_name: "ElasticsearchVersion"))
       ElasticsearchDomainConfig.add_member(:elasticsearch_cluster_config, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfigStatus, location_name: "ElasticsearchClusterConfig"))
       ElasticsearchDomainConfig.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptionsStatus, location_name: "EBSOptions"))
       ElasticsearchDomainConfig.add_member(:access_policies, Shapes::ShapeRef.new(shape: AccessPoliciesStatus, location_name: "AccessPolicies"))
@@ -173,6 +177,7 @@ module Aws
       ElasticsearchDomainStatus.add_member(:deleted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Deleted"))
       ElasticsearchDomainStatus.add_member(:endpoint, Shapes::ShapeRef.new(shape: ServiceUrl, location_name: "Endpoint"))
       ElasticsearchDomainStatus.add_member(:processing, Shapes::ShapeRef.new(shape: Boolean, location_name: "Processing"))
+      ElasticsearchDomainStatus.add_member(:elasticsearch_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "ElasticsearchVersion"))
       ElasticsearchDomainStatus.add_member(:elasticsearch_cluster_config, Shapes::ShapeRef.new(shape: ElasticsearchClusterConfig, required: true, location_name: "ElasticsearchClusterConfig"))
       ElasticsearchDomainStatus.add_member(:ebs_options, Shapes::ShapeRef.new(shape: EBSOptions, location_name: "EBSOptions"))
       ElasticsearchDomainStatus.add_member(:access_policies, Shapes::ShapeRef.new(shape: PolicyDocument, location_name: "AccessPolicies"))
@@ -181,6 +186,10 @@ module Aws
       ElasticsearchDomainStatus.struct_class = Types::ElasticsearchDomainStatus
 
       ElasticsearchDomainStatusList.member = Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus)
+
+      ElasticsearchVersionStatus.add_member(:options, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, required: true, location_name: "Options"))
+      ElasticsearchVersionStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+      ElasticsearchVersionStatus.struct_class = Types::ElasticsearchVersionStatus
 
       ListDomainNamesResponse.add_member(:domain_names, Shapes::ShapeRef.new(shape: DomainInfoList, location_name: "DomainNames"))
       ListDomainNamesResponse.struct_class = Types::ListDomainNamesResponse
@@ -247,21 +256,10 @@ module Aws
           o.http_request_uri = "/2015-01-01/tags"
           o.input = Shapes::ShapeRef.new(shape: AddTagsRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
         end)
 
         api.add_operation(:create_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -270,33 +268,13 @@ module Aws
           o.http_request_uri = "/2015-01-01/es/domain"
           o.input = Shapes::ShapeRef.new(shape: CreateElasticsearchDomainRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateElasticsearchDomainResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
 
         api.add_operation(:delete_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -305,21 +283,10 @@ module Aws
           o.http_request_uri = "/2015-01-01/es/domain/{DomainName}"
           o.input = Shapes::ShapeRef.new(shape: DeleteElasticsearchDomainRequest)
           o.output = Shapes::ShapeRef.new(shape: DeleteElasticsearchDomainResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
 
         api.add_operation(:describe_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -328,21 +295,10 @@ module Aws
           o.http_request_uri = "/2015-01-01/es/domain/{DomainName}"
           o.input = Shapes::ShapeRef.new(shape: DescribeElasticsearchDomainRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeElasticsearchDomainResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
 
         api.add_operation(:describe_elasticsearch_domain_config, Seahorse::Model::Operation.new.tap do |o|
@@ -351,21 +307,10 @@ module Aws
           o.http_request_uri = "/2015-01-01/es/domain/{DomainName}/config"
           o.input = Shapes::ShapeRef.new(shape: DescribeElasticsearchDomainConfigRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeElasticsearchDomainConfigResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
 
         api.add_operation(:describe_elasticsearch_domains, Seahorse::Model::Operation.new.tap do |o|
@@ -374,17 +319,9 @@ module Aws
           o.http_request_uri = "/2015-01-01/es/domain-info"
           o.input = Shapes::ShapeRef.new(shape: DescribeElasticsearchDomainsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeElasticsearchDomainsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
 
         api.add_operation(:list_domain_names, Seahorse::Model::Operation.new.tap do |o|
@@ -393,13 +330,8 @@ module Aws
           o.http_request_uri = "/2015-01-01/domain"
           o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.output = Shapes::ShapeRef.new(shape: ListDomainNamesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
 
         api.add_operation(:list_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -408,21 +340,10 @@ module Aws
           o.http_request_uri = "/2015-01-01/tags/"
           o.input = Shapes::ShapeRef.new(shape: ListTagsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListTagsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
         end)
 
         api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -431,17 +352,9 @@ module Aws
           o.http_request_uri = "/2015-01-01/tags-removal"
           o.input = Shapes::ShapeRef.new(shape: RemoveTagsRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
         end)
 
         api.add_operation(:update_elasticsearch_domain_config, Seahorse::Model::Operation.new.tap do |o|
@@ -450,29 +363,12 @@ module Aws
           o.http_request_uri = "/2015-01-01/es/domain/{DomainName}/config"
           o.input = Shapes::ShapeRef.new(shape: UpdateElasticsearchDomainConfigRequest)
           o.output = Shapes::ShapeRef.new(shape: UpdateElasticsearchDomainConfigResponse)
-          o.errors << Shapes::ShapeRef.new(shape: BaseException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>409},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ValidationException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: BaseException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidTypeException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         end)
       end
 

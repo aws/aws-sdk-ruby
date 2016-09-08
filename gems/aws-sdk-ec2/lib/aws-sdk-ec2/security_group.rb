@@ -183,7 +183,9 @@ module Aws
       #   protocol and port range, use a set of IP permissions instead.
       # @option options [String] :ip_protocol
       #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-      #   Numbers][1]). (VPC only) Use `-1` to specify all.
+      #   Numbers][1]). (VPC only) Use `-1` to specify all traffic. If you
+      #   specify `-1`, traffic on all ports is allowed, regardless of any ports
+      #   you specify.
       #
       #
       #

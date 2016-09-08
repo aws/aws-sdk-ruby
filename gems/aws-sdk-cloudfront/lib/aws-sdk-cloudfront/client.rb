@@ -134,6 +134,10 @@ module Aws
       #             quantity: 1, # required
       #             items: ["string"],
       #           },
+      #           query_string_cache_keys: {
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
       #         },
       #         trusted_signers: { # required
       #           enabled: false, # required
@@ -171,6 +175,10 @@ module Aws
       #                 },
       #               },
       #               headers: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #               query_string_cache_keys: {
       #                 quantity: 1, # required
       #                 items: ["string"],
       #               },
@@ -239,6 +247,7 @@ module Aws
       #
       # @example Response structure
       #   resp.distribution.id #=> String
+      #   resp.distribution.arn #=> String
       #   resp.distribution.status #=> String
       #   resp.distribution.last_modified_time #=> Time
       #   resp.distribution.in_progress_invalidation_batches #=> Integer
@@ -280,6 +289,9 @@ module Aws
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.quantity #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items #=> Array
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
@@ -308,6 +320,9 @@ module Aws
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items #=> Array
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
@@ -355,6 +370,319 @@ module Aws
       # @param [Hash] options ({})
       def create_distribution(params = {}, options = {})
         req = build_request(:create_distribution, params)
+        req.send_request(options)
+      end
+
+      # Create a new distribution with tags.
+      # @option params [required, Types::DistributionConfigWithTags] :distribution_config_with_tags
+      #   The distribution\'s configuration information.
+      # @return [Types::CreateDistributionWithTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateDistributionWithTagsResult#distribution #Distribution} => Types::Distribution
+      #   * {Types::CreateDistributionWithTagsResult#location #Location} => String
+      #   * {Types::CreateDistributionWithTagsResult#etag #ETag} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_distribution_with_tags({
+      #     distribution_config_with_tags: { # required
+      #       distribution_config: { # required
+      #         caller_reference: "string", # required
+      #         aliases: {
+      #           quantity: 1, # required
+      #           items: ["string"],
+      #         },
+      #         default_root_object: "string",
+      #         origins: { # required
+      #           quantity: 1, # required
+      #           items: [
+      #             {
+      #               id: "string", # required
+      #               domain_name: "string", # required
+      #               origin_path: "string",
+      #               custom_headers: {
+      #                 quantity: 1, # required
+      #                 items: [
+      #                   {
+      #                     header_name: "string", # required
+      #                     header_value: "string", # required
+      #                   },
+      #                 ],
+      #               },
+      #               s3_origin_config: {
+      #                 origin_access_identity: "string", # required
+      #               },
+      #               custom_origin_config: {
+      #                 http_port: 1, # required
+      #                 https_port: 1, # required
+      #                 origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+      #                 origin_ssl_protocols: {
+      #                   quantity: 1, # required
+      #                   items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+      #                 },
+      #               },
+      #             },
+      #           ],
+      #         },
+      #         default_cache_behavior: { # required
+      #           target_origin_id: "string", # required
+      #           forwarded_values: { # required
+      #             query_string: false, # required
+      #             cookies: { # required
+      #               forward: "none", # required, accepts none, whitelist, all
+      #               whitelisted_names: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #             },
+      #             headers: {
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
+      #             query_string_cache_keys: {
+      #               quantity: 1, # required
+      #               items: ["string"],
+      #             },
+      #           },
+      #           trusted_signers: { # required
+      #             enabled: false, # required
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
+      #           viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+      #           min_ttl: 1, # required
+      #           allowed_methods: {
+      #             quantity: 1, # required
+      #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #             cached_methods: {
+      #               quantity: 1, # required
+      #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #             },
+      #           },
+      #           smooth_streaming: false,
+      #           default_ttl: 1,
+      #           max_ttl: 1,
+      #           compress: false,
+      #         },
+      #         cache_behaviors: {
+      #           quantity: 1, # required
+      #           items: [
+      #             {
+      #               path_pattern: "string", # required
+      #               target_origin_id: "string", # required
+      #               forwarded_values: { # required
+      #                 query_string: false, # required
+      #                 cookies: { # required
+      #                   forward: "none", # required, accepts none, whitelist, all
+      #                   whitelisted_names: {
+      #                     quantity: 1, # required
+      #                     items: ["string"],
+      #                   },
+      #                 },
+      #                 headers: {
+      #                   quantity: 1, # required
+      #                   items: ["string"],
+      #                 },
+      #                 query_string_cache_keys: {
+      #                   quantity: 1, # required
+      #                   items: ["string"],
+      #                 },
+      #               },
+      #               trusted_signers: { # required
+      #                 enabled: false, # required
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+      #               min_ttl: 1, # required
+      #               allowed_methods: {
+      #                 quantity: 1, # required
+      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                 cached_methods: {
+      #                   quantity: 1, # required
+      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+      #                 },
+      #               },
+      #               smooth_streaming: false,
+      #               default_ttl: 1,
+      #               max_ttl: 1,
+      #               compress: false,
+      #             },
+      #           ],
+      #         },
+      #         custom_error_responses: {
+      #           quantity: 1, # required
+      #           items: [
+      #             {
+      #               error_code: 1, # required
+      #               response_page_path: "string",
+      #               response_code: "string",
+      #               error_caching_min_ttl: 1,
+      #             },
+      #           ],
+      #         },
+      #         comment: "string", # required
+      #         logging: {
+      #           enabled: false, # required
+      #           include_cookies: false, # required
+      #           bucket: "string", # required
+      #           prefix: "string", # required
+      #         },
+      #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+      #         enabled: false, # required
+      #         viewer_certificate: {
+      #           cloud_front_default_certificate: false,
+      #           iam_certificate_id: "string",
+      #           acm_certificate_arn: "string",
+      #           ssl_support_method: "sni-only", # accepts sni-only, vip
+      #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+      #           certificate: "string",
+      #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+      #         },
+      #         restrictions: {
+      #           geo_restriction: { # required
+      #             restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
+      #         },
+      #         web_acl_id: "string",
+      #       },
+      #       tags: { # required
+      #         items: [
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue",
+      #           },
+      #         ],
+      #       },
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.distribution.id #=> String
+      #   resp.distribution.arn #=> String
+      #   resp.distribution.status #=> String
+      #   resp.distribution.last_modified_time #=> Time
+      #   resp.distribution.in_progress_invalidation_batches #=> Integer
+      #   resp.distribution.domain_name #=> String
+      #   resp.distribution.active_trusted_signers.enabled #=> Boolean
+      #   resp.distribution.active_trusted_signers.quantity #=> Integer
+      #   resp.distribution.active_trusted_signers.items #=> Array
+      #   resp.distribution.active_trusted_signers.items[0].aws_account_number #=> String
+      #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
+      #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
+      #   resp.distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+      #   resp.distribution.distribution_config.caller_reference #=> String
+      #   resp.distribution.distribution_config.aliases.quantity #=> Integer
+      #   resp.distribution.distribution_config.aliases.items #=> Array
+      #   resp.distribution.distribution_config.aliases.items[0] #=> String
+      #   resp.distribution.distribution_config.default_root_object #=> String
+      #   resp.distribution.distribution_config.origins.quantity #=> Integer
+      #   resp.distribution.distribution_config.origins.items #=> Array
+      #   resp.distribution.distribution_config.origins.items[0].id #=> String
+      #   resp.distribution.distribution_config.origins.items[0].domain_name #=> String
+      #   resp.distribution.distribution_config.origins.items[0].origin_path #=> String
+      #   resp.distribution.distribution_config.origins.items[0].custom_headers.quantity #=> Integer
+      #   resp.distribution.distribution_config.origins.items[0].custom_headers.items #=> Array
+      #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_name #=> String
+      #   resp.distribution.distribution_config.origins.items[0].custom_headers.items[0].header_value #=> String
+      #   resp.distribution.distribution_config.origins.items[0].s3_origin_config.origin_access_identity #=> String
+      #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.http_port #=> Integer
+      #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.https_port #=> Integer
+      #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_protocol_policy #=> String, one of "http-only", "match-viewer", "https-only"
+      #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.quantity #=> Integer
+      #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items #=> Array
+      #   resp.distribution.distribution_config.origins.items[0].custom_origin_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+      #   resp.distribution.distribution_config.default_cache_behavior.target_origin_id #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string #=> Boolean
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.cookies.whitelisted_names.items[0] #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
+      #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items[0] #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+      #   resp.distribution.distribution_config.default_cache_behavior.min_ttl #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+      #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+      #   resp.distribution.distribution_config.default_cache_behavior.smooth_streaming #=> Boolean
+      #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].target_origin_id #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.forward #=> String, one of "none", "whitelist", "all"
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.cookies.whitelisted_names.items[0] #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items[0] #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].viewer_protocol_policy #=> String, one of "allow-all", "https-only", "redirect-to-https"
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].min_ttl #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].allowed_methods.cached_methods.items[0] #=> String, one of "GET", "HEAD", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].smooth_streaming #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
+      #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
+      #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
+      #   resp.distribution.distribution_config.custom_error_responses.items[0].response_page_path #=> String
+      #   resp.distribution.distribution_config.custom_error_responses.items[0].response_code #=> String
+      #   resp.distribution.distribution_config.custom_error_responses.items[0].error_caching_min_ttl #=> Integer
+      #   resp.distribution.distribution_config.comment #=> String
+      #   resp.distribution.distribution_config.logging.enabled #=> Boolean
+      #   resp.distribution.distribution_config.logging.include_cookies #=> Boolean
+      #   resp.distribution.distribution_config.logging.bucket #=> String
+      #   resp.distribution.distribution_config.logging.prefix #=> String
+      #   resp.distribution.distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+      #   resp.distribution.distribution_config.enabled #=> Boolean
+      #   resp.distribution.distribution_config.viewer_certificate.cloud_front_default_certificate #=> Boolean
+      #   resp.distribution.distribution_config.viewer_certificate.iam_certificate_id #=> String
+      #   resp.distribution.distribution_config.viewer_certificate.acm_certificate_arn #=> String
+      #   resp.distribution.distribution_config.viewer_certificate.ssl_support_method #=> String, one of "sni-only", "vip"
+      #   resp.distribution.distribution_config.viewer_certificate.minimum_protocol_version #=> String, one of "SSLv3", "TLSv1"
+      #   resp.distribution.distribution_config.viewer_certificate.certificate #=> String
+      #   resp.distribution.distribution_config.viewer_certificate.certificate_source #=> String, one of "cloudfront", "iam", "acm"
+      #   resp.distribution.distribution_config.restrictions.geo_restriction.restriction_type #=> String, one of "blacklist", "whitelist", "none"
+      #   resp.distribution.distribution_config.restrictions.geo_restriction.quantity #=> Integer
+      #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
+      #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
+      #   resp.distribution.distribution_config.web_acl_id #=> String
+      #   resp.location #=> String
+      #   resp.etag #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_distribution_with_tags(params = {}, options = {})
+        req = build_request(:create_distribution_with_tags, params)
         req.send_request(options)
       end
 
@@ -435,6 +763,7 @@ module Aws
       #
       # @example Response structure
       #   resp.streaming_distribution.id #=> String
+      #   resp.streaming_distribution.arn #=> String
       #   resp.streaming_distribution.status #=> String
       #   resp.streaming_distribution.last_modified_time #=> Time
       #   resp.streaming_distribution.domain_name #=> String
@@ -467,6 +796,91 @@ module Aws
       # @param [Hash] options ({})
       def create_streaming_distribution(params = {}, options = {})
         req = build_request(:create_streaming_distribution, params)
+        req.send_request(options)
+      end
+
+      # Create a new streaming distribution with tags.
+      # @option params [required, Types::StreamingDistributionConfigWithTags] :streaming_distribution_config_with_tags
+      #   The streaming distribution\'s configuration information.
+      # @return [Types::CreateStreamingDistributionWithTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateStreamingDistributionWithTagsResult#streaming_distribution #StreamingDistribution} => Types::StreamingDistribution
+      #   * {Types::CreateStreamingDistributionWithTagsResult#location #Location} => String
+      #   * {Types::CreateStreamingDistributionWithTagsResult#etag #ETag} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_streaming_distribution_with_tags({
+      #     streaming_distribution_config_with_tags: { # required
+      #       streaming_distribution_config: { # required
+      #         caller_reference: "string", # required
+      #         s3_origin: { # required
+      #           domain_name: "string", # required
+      #           origin_access_identity: "string", # required
+      #         },
+      #         aliases: {
+      #           quantity: 1, # required
+      #           items: ["string"],
+      #         },
+      #         comment: "string", # required
+      #         logging: {
+      #           enabled: false, # required
+      #           bucket: "string", # required
+      #           prefix: "string", # required
+      #         },
+      #         trusted_signers: { # required
+      #           enabled: false, # required
+      #           quantity: 1, # required
+      #           items: ["string"],
+      #         },
+      #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+      #         enabled: false, # required
+      #       },
+      #       tags: { # required
+      #         items: [
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue",
+      #           },
+      #         ],
+      #       },
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.streaming_distribution.id #=> String
+      #   resp.streaming_distribution.arn #=> String
+      #   resp.streaming_distribution.status #=> String
+      #   resp.streaming_distribution.last_modified_time #=> Time
+      #   resp.streaming_distribution.domain_name #=> String
+      #   resp.streaming_distribution.active_trusted_signers.enabled #=> Boolean
+      #   resp.streaming_distribution.active_trusted_signers.quantity #=> Integer
+      #   resp.streaming_distribution.active_trusted_signers.items #=> Array
+      #   resp.streaming_distribution.active_trusted_signers.items[0].aws_account_number #=> String
+      #   resp.streaming_distribution.active_trusted_signers.items[0].key_pair_ids.quantity #=> Integer
+      #   resp.streaming_distribution.active_trusted_signers.items[0].key_pair_ids.items #=> Array
+      #   resp.streaming_distribution.active_trusted_signers.items[0].key_pair_ids.items[0] #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.caller_reference #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.s3_origin.domain_name #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.s3_origin.origin_access_identity #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.aliases.quantity #=> Integer
+      #   resp.streaming_distribution.streaming_distribution_config.aliases.items #=> Array
+      #   resp.streaming_distribution.streaming_distribution_config.aliases.items[0] #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.comment #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.logging.enabled #=> Boolean
+      #   resp.streaming_distribution.streaming_distribution_config.logging.bucket #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.logging.prefix #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.enabled #=> Boolean
+      #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.quantity #=> Integer
+      #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items #=> Array
+      #   resp.streaming_distribution.streaming_distribution_config.trusted_signers.items[0] #=> String
+      #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
+      #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
+      #   resp.location #=> String
+      #   resp.etag #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def create_streaming_distribution_with_tags(params = {}, options = {})
+        req = build_request(:create_streaming_distribution_with_tags, params)
         req.send_request(options)
       end
 
@@ -595,6 +1009,7 @@ module Aws
       #
       # @example Response structure
       #   resp.distribution.id #=> String
+      #   resp.distribution.arn #=> String
       #   resp.distribution.status #=> String
       #   resp.distribution.last_modified_time #=> Time
       #   resp.distribution.in_progress_invalidation_batches #=> Integer
@@ -636,6 +1051,9 @@ module Aws
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.quantity #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items #=> Array
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
@@ -664,6 +1082,9 @@ module Aws
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items #=> Array
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
@@ -757,6 +1178,9 @@ module Aws
       #   resp.distribution_config.default_cache_behavior.forwarded_values.headers.quantity #=> Integer
       #   resp.distribution_config.default_cache_behavior.forwarded_values.headers.items #=> Array
       #   resp.distribution_config.default_cache_behavior.forwarded_values.headers.items[0] #=> String
+      #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
       #   resp.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
       #   resp.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
@@ -785,6 +1209,9 @@ module Aws
       #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
       #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items #=> Array
       #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+      #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
       #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
       #   resp.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
@@ -879,6 +1306,7 @@ module Aws
       #
       # @example Response structure
       #   resp.streaming_distribution.id #=> String
+      #   resp.streaming_distribution.arn #=> String
       #   resp.streaming_distribution.status #=> String
       #   resp.streaming_distribution.last_modified_time #=> Time
       #   resp.streaming_distribution.domain_name #=> String
@@ -1017,6 +1445,7 @@ module Aws
       #   resp.distribution_list.quantity #=> Integer
       #   resp.distribution_list.items #=> Array
       #   resp.distribution_list.items[0].id #=> String
+      #   resp.distribution_list.items[0].arn #=> String
       #   resp.distribution_list.items[0].status #=> String
       #   resp.distribution_list.items[0].last_modified_time #=> Time
       #   resp.distribution_list.items[0].domain_name #=> String
@@ -1048,6 +1477,9 @@ module Aws
       #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.quantity #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items #=> Array
       #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items[0] #=> String
+      #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
       #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
@@ -1076,6 +1508,9 @@ module Aws
       #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items #=> Array
       #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
       #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
@@ -1156,6 +1591,7 @@ module Aws
       #   resp.distribution_list.quantity #=> Integer
       #   resp.distribution_list.items #=> Array
       #   resp.distribution_list.items[0].id #=> String
+      #   resp.distribution_list.items[0].arn #=> String
       #   resp.distribution_list.items[0].status #=> String
       #   resp.distribution_list.items[0].last_modified_time #=> Time
       #   resp.distribution_list.items[0].domain_name #=> String
@@ -1187,6 +1623,9 @@ module Aws
       #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.quantity #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items #=> Array
       #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.headers.items[0] #=> String
+      #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution_list.items[0].default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.enabled #=> Boolean
       #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.quantity #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.trusted_signers.items #=> Array
@@ -1215,6 +1654,9 @@ module Aws
       #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items #=> Array
       #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
       #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.quantity #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].trusted_signers.items #=> Array
@@ -1330,6 +1772,7 @@ module Aws
       #   resp.streaming_distribution_list.quantity #=> Integer
       #   resp.streaming_distribution_list.items #=> Array
       #   resp.streaming_distribution_list.items[0].id #=> String
+      #   resp.streaming_distribution_list.items[0].arn #=> String
       #   resp.streaming_distribution_list.items[0].status #=> String
       #   resp.streaming_distribution_list.items[0].last_modified_time #=> Time
       #   resp.streaming_distribution_list.items[0].domain_name #=> String
@@ -1349,6 +1792,76 @@ module Aws
       # @param [Hash] options ({})
       def list_streaming_distributions(params = {}, options = {})
         req = build_request(:list_streaming_distributions, params)
+        req.send_request(options)
+      end
+
+      # List tags for a CloudFront resource.
+      # @option params [required, String] :resource
+      #   An ARN of a CloudFront resource.
+      # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListTagsForResourceResult#tags #Tags} => Types::Tags
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_tags_for_resource({
+      #     resource: "ResourceARN", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.tags.items #=> Array
+      #   resp.tags.items[0].key #=> String
+      #   resp.tags.items[0].value #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_tags_for_resource(params = {}, options = {})
+        req = build_request(:list_tags_for_resource, params)
+        req.send_request(options)
+      end
+
+      # Add tags to a CloudFront resource.
+      # @option params [required, String] :resource
+      #   An ARN of a CloudFront resource.
+      # @option params [required, Types::Tags] :tags
+      #   A complex type that contains zero or more Tag elements.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.tag_resource({
+      #     resource: "ResourceARN", # required
+      #     tags: { # required
+      #       items: [
+      #         {
+      #           key: "TagKey", # required
+      #           value: "TagValue",
+      #         },
+      #       ],
+      #     },
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def tag_resource(params = {}, options = {})
+        req = build_request(:tag_resource, params)
+        req.send_request(options)
+      end
+
+      # Remove tags from a CloudFront resource.
+      # @option params [required, String] :resource
+      #   An ARN of a CloudFront resource.
+      # @option params [required, Types::TagKeys] :tag_keys
+      #   A complex type that contains zero or more Tag key elements.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.untag_resource({
+      #     resource: "ResourceARN", # required
+      #     tag_keys: { # required
+      #       items: ["TagKey"],
+      #     },
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def untag_resource(params = {}, options = {})
+        req = build_request(:untag_resource, params)
         req.send_request(options)
       end
 
@@ -1456,6 +1969,10 @@ module Aws
       #             quantity: 1, # required
       #             items: ["string"],
       #           },
+      #           query_string_cache_keys: {
+      #             quantity: 1, # required
+      #             items: ["string"],
+      #           },
       #         },
       #         trusted_signers: { # required
       #           enabled: false, # required
@@ -1493,6 +2010,10 @@ module Aws
       #                 },
       #               },
       #               headers: {
+      #                 quantity: 1, # required
+      #                 items: ["string"],
+      #               },
+      #               query_string_cache_keys: {
       #                 quantity: 1, # required
       #                 items: ["string"],
       #               },
@@ -1563,6 +2084,7 @@ module Aws
       #
       # @example Response structure
       #   resp.distribution.id #=> String
+      #   resp.distribution.arn #=> String
       #   resp.distribution.status #=> String
       #   resp.distribution.last_modified_time #=> Time
       #   resp.distribution.in_progress_invalidation_batches #=> Integer
@@ -1604,6 +2126,9 @@ module Aws
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.quantity #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items #=> Array
       #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.enabled #=> Boolean
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.quantity #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.trusted_signers.items #=> Array
@@ -1632,6 +2157,9 @@ module Aws
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items #=> Array
       #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.headers.items[0] #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].forwarded_values.query_string_cache_keys.items[0] #=> String
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.enabled #=> Boolean
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].trusted_signers.items #=> Array
@@ -1726,6 +2254,7 @@ module Aws
       #
       # @example Response structure
       #   resp.streaming_distribution.id #=> String
+      #   resp.streaming_distribution.arn #=> String
       #   resp.streaming_distribution.status #=> String
       #   resp.streaming_distribution.last_modified_time #=> Time
       #   resp.streaming_distribution.domain_name #=> String
@@ -1803,6 +2332,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

@@ -65,18 +65,6 @@ module Aws
                   "matcher" => "pathAny",
                   "state" => "failure",
                   "argument" => "DBInstances[].DBInstanceStatus"
-                },
-                {
-                  "expected" => "incompatible-parameters",
-                  "matcher" => "pathAny",
-                  "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
-                },
-                {
-                  "expected" => "incompatible-restore",
-                  "matcher" => "pathAny",
-                  "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
                 }
               ]
             )

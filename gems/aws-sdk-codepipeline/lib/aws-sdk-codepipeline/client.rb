@@ -515,6 +515,44 @@ module Aws
         req.send_request(options)
       end
 
+      # Returns information about an execution of a pipeline, including
+      # details about artifacts, the pipeline execution ID, and the name,
+      # version, and status of the pipeline.
+      # @option params [required, String] :pipeline_name
+      #   The name of the pipeline about which you want to get execution
+      #   details.
+      # @option params [required, String] :pipeline_execution_id
+      #   The ID of the pipeline execution about which you want to get execution
+      #   details.
+      # @return [Types::GetPipelineExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetPipelineExecutionOutput#pipeline_execution #pipelineExecution} => Types::PipelineExecution
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_pipeline_execution({
+      #     pipeline_name: "PipelineName", # required
+      #     pipeline_execution_id: "PipelineExecutionId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.pipeline_execution.pipeline_name #=> String
+      #   resp.pipeline_execution.pipeline_version #=> Integer
+      #   resp.pipeline_execution.pipeline_execution_id #=> String
+      #   resp.pipeline_execution.status #=> String, one of "InProgress", "Succeeded", "Superseded", "Failed"
+      #   resp.pipeline_execution.artifact_revisions #=> Array
+      #   resp.pipeline_execution.artifact_revisions[0].name #=> String
+      #   resp.pipeline_execution.artifact_revisions[0].revision_id #=> String
+      #   resp.pipeline_execution.artifact_revisions[0].revision_change_identifier #=> String
+      #   resp.pipeline_execution.artifact_revisions[0].revision_summary #=> String
+      #   resp.pipeline_execution.artifact_revisions[0].created #=> Time
+      #   resp.pipeline_execution.artifact_revisions[0].revision_url #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def get_pipeline_execution(params = {}, options = {})
+        req = build_request(:get_pipeline_execution, params)
+        req.send_request(options)
+      end
+
       # Returns information about the state of a pipeline, including the
       # stages and actions.
       # @option params [required, String] :name
@@ -874,7 +912,7 @@ module Aws
       #   The name of the action for which approval is requested.
       # @option params [required, Types::ApprovalResult] :result
       #   Represents information about the result of the approval request.
-      # @option params [String] :token
+      # @option params [required, String] :token
       #   The system-generated token used to identify a unique approval request.
       #   The token for each open approval request can be obtained using the
       #   GetPipelineState action and is used to validate that the approval
@@ -892,7 +930,7 @@ module Aws
       #       summary: "ApprovalSummary", # required
       #       status: "Approved", # required, accepts Approved, Rejected
       #     },
-      #     token: "ApprovalToken",
+      #     token: "ApprovalToken", # required
       #   })
       #
       # @example Response structure
@@ -955,6 +993,8 @@ module Aws
       #     current_revision: {
       #       revision: "Revision", # required
       #       change_identifier: "RevisionChangeIdentifier", # required
+      #       created: Time.now,
+      #       revision_summary: "RevisionSummary",
       #     },
       #     continuation_token: "ContinuationToken",
       #     execution_details: {
@@ -1031,6 +1071,8 @@ module Aws
       #     current_revision: {
       #       revision: "Revision", # required
       #       change_identifier: "RevisionChangeIdentifier", # required
+      #       created: Time.now,
+      #       revision_summary: "RevisionSummary",
       #     },
       #     continuation_token: "ContinuationToken",
       #     execution_details: {
@@ -1240,6 +1282,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

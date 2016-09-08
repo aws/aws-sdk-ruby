@@ -331,6 +331,12 @@ module Aws
       #   results exceeded the value of that parameter. Pagination continues
       #   from the end of the previous results that returned the `nextToken`
       #   value. This value is `null` when there are no more results to return.
+      #
+      #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+      #   to retrieve the next items in a list and not for other programmatic
+      #   purposes.
+      #
+      #    </note>
       # @option params [Integer] :max_results
       #   The maximum number of repository results returned by
       #   `DescribeRepositories` in paginated output. When this parameter is
@@ -507,6 +513,13 @@ module Aws
       end
 
       # Lists all the image IDs for a given repository.
+      #
+      # You can filter images based on whether or not they are tagged by
+      # setting the `tagStatus` parameter to `TAGGED` or `UNTAGGED`. For
+      # example, you can filter your results to return only `UNTAGGED` images
+      # and then pipe that result to a BatchDeleteImage operation to delete
+      # them. Or, you can filter your results to return only `TAGGED` images
+      # to list all of the tags in your repository.
       # @option params [String] :registry_id
       #   The AWS account ID associated with the registry that contains the
       #   repository to list images in. If you do not specify a registry, the
@@ -519,6 +532,12 @@ module Aws
       #   of that parameter. Pagination continues from the end of the previous
       #   results that returned the `nextToken` value. This value is `null` when
       #   there are no more results to return.
+      #
+      #   <note markdown="1"> This token should be treated as an opaque identifier that is only used
+      #   to retrieve the next items in a list and not for other programmatic
+      #   purposes.
+      #
+      #    </note>
       # @option params [Integer] :max_results
       #   The maximum number of image results returned by `ListImages` in
       #   paginated output. When this parameter is used, `ListImages` only
@@ -528,6 +547,9 @@ module Aws
       #   `nextToken` value. This value can be between 1 and 100. If this
       #   parameter is not used, then `ListImages` returns up to 100 results and
       #   a `nextToken` value, if applicable.
+      # @option params [Types::ListImagesFilter] :filter
+      #   The filter key and value with which to filter your `ListImages`
+      #   results.
       # @return [Types::ListImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListImagesResponse#image_ids #imageIds} => Array&lt;Types::ImageIdentifier&gt;
@@ -539,6 +561,9 @@ module Aws
       #     repository_name: "RepositoryName", # required
       #     next_token: "NextToken",
       #     max_results: 1,
+      #     filter: {
+      #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+      #     },
       #   })
       #
       # @example Response structure
@@ -722,6 +747,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

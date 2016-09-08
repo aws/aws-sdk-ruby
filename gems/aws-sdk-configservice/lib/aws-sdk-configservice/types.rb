@@ -183,11 +183,13 @@ module Aws
 
       end
 
-      # An AWS Lambda function that evaluates configuration items to assess
-      # whether your AWS resources comply with your desired configurations.
-      # This function can run when AWS Config detects a configuration change
-      # to an AWS resource and at a periodic frequency that you choose (for
-      # example, every 24 hours).
+      # An AWS Config rule represents an AWS Lambda function that you create
+      # for a custom rule or a predefined function for an AWS managed rule.
+      # The function evaluates configuration items to assess whether your AWS
+      # resources comply with your desired configurations. This function can
+      # run when AWS Config detects a configuration change to an AWS resource
+      # and at a periodic frequency that you choose (for example, every 24
+      # hours).
       #
       # <note markdown="1"> You can use the AWS CLI and AWS SDKs if you want to create a rule that
       # triggers evaluations for your resources when AWS Config delivers the
@@ -282,22 +284,14 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] maximum_execution_frequency
-        #   If you want to create a rule that evaluates at a frequency that is
-        #   independent of the configuration snapshot delivery, use the
-        #   `MaximumExecutionFrequency` parameter in the SourceDetail object.
+        #   The maximum frequency with which AWS Config runs evaluations for a
+        #   rule. You can specify a value for `MaximumExecutionFrequency` when:
         #
-        #   <note markdown="1"> If you want to create a rule that triggers evaluations for your
-        #   resources when AWS Config delivers the configuration snapshot, see
-        #   the following:
+        #   * You are using an AWS managed rule that is triggered at a periodic
+        #     frequency.
         #
-        #    </note>
-        #
-        #   A rule that runs an evaluation when AWS Config delivers a
-        #   configuration snapshot cannot run evaluations more frequently than
-        #   AWS Config delivers the snapshots. Set the value of the
-        #   `MaximumExecutionFrequency` to be equal to or greater than the value
-        #   of the `deliveryFrequency` key, which is part of
-        #   `ConfigSnapshotDeliveryProperties`.
+        #   * Your custom rule is triggered when AWS Config delivers the
+        #     configuration snapshot.
         #
         #   For more information, see ConfigSnapshotDeliveryProperties.
         #   @return [String]
@@ -399,7 +393,7 @@ module Aws
 
       end
 
-      # Shows the options for how often AWS Config delivers configuration
+      # Provides options for how often AWS Config delivers configuration
       # snapshots to the Amazon S3 bucket in your delivery channel.
       #
       # <note markdown="1"> If you want to create a rule that triggers evaluations for your
@@ -425,13 +419,15 @@ module Aws
       # `MaximumExecutionFrequency` value for a rule, AWS Config invokes the
       # rule only as often as the `deliveryFrequency` value.
       #
-      # 1.  For example, you have a rule and you specify the
-      #     `MaximumExecutionFrequency` value to be `Six_Hours`.
+      # 1.  For example, you want your rule to run evaluations when AWS Config
+      #     delivers the configuration snapshot.
       #
-      # 2.  You then specify the delivery channel `deliveryFrequency` value to
-      #     `TwentyFour_Hours`.
+      # 2.  You specify the `MaximumExecutionFrequency` value for `Six_Hours`.
       #
-      # 3.  Because the value for `deliveryFrequency` is less frequent than
+      # 3.  You then specify the delivery channel `deliveryFrequency` value
+      #     for `TwentyFour_Hours`.
+      #
+      # 4.  Because the value for `deliveryFrequency` is less frequent than
       #     `MaximumExecutionFrequency`, AWS Config invokes evaluations for
       #     the rule every 24 hours.
       #
@@ -440,7 +436,7 @@ module Aws
       # `deliveryFrequency` value by using the `DescribeDeliveryChannnels`
       # action.
       #
-      # To update the frequency with which AWS Config delivers your
+      # To update the `deliveryFrequency` with which AWS Config delivers your
       # configuration snapshots, use the `PutDeliveryChannel` action.
       # @note When making an API call, pass ConfigSnapshotDeliveryProperties
       #   data as a hash:
@@ -620,7 +616,7 @@ module Aws
       #         recording_group: {
       #           all_supported: false,
       #           include_global_resource_types: false,
-      #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
+      #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
       #         },
       #       }
       class ConfigurationRecorder < Aws::Structure.new(
@@ -851,7 +847,7 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] config_snapshot_delivery_properties
-        #   Shows the options for how often AWS Config delivers configuration
+        #   Provides options for how often AWS Config delivers configuration
         #   snapshots to the Amazon S3 bucket in your delivery channel.
         #
         #   <note markdown="1"> If you want to create a rule that triggers evaluations for your
@@ -877,13 +873,16 @@ module Aws
         #   `MaximumExecutionFrequency` value for a rule, AWS Config invokes the
         #   rule only as often as the `deliveryFrequency` value.
         #
-        #   1.  For example, you have a rule and you specify the
-        #       `MaximumExecutionFrequency` value to be `Six_Hours`.
+        #   1.  For example, you want your rule to run evaluations when AWS
+        #       Config delivers the configuration snapshot.
         #
-        #   2.  You then specify the delivery channel `deliveryFrequency` value
-        #       to `TwentyFour_Hours`.
+        #   2.  You specify the `MaximumExecutionFrequency` value for
+        #       `Six_Hours`.
         #
-        #   3.  Because the value for `deliveryFrequency` is less frequent than
+        #   3.  You then specify the delivery channel `deliveryFrequency` value
+        #       for `TwentyFour_Hours`.
+        #
+        #   4.  Because the value for `deliveryFrequency` is less frequent than
         #       `MaximumExecutionFrequency`, AWS Config invokes evaluations for
         #       the rule every 24 hours.
         #
@@ -892,8 +891,8 @@ module Aws
         #   `deliveryFrequency` value by using the `DescribeDeliveryChannnels`
         #   action.
         #
-        #   To update the frequency with which AWS Config delivers your
-        #   configuration snapshots, use the `PutDeliveryChannel` action.
+        #   To update the `deliveryFrequency` with which AWS Config delivers
+        #   your configuration snapshots, use the `PutDeliveryChannel` action.
         #   @return [Types::ConfigSnapshotDeliveryProperties]
 
       end
@@ -1519,7 +1518,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
+      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
       #         resource_id: "ResourceId", # required
       #         later_time: Time.now,
       #         earlier_time: Time.now,
@@ -1594,7 +1593,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
+      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
       #         resource_ids: ["ResourceId"],
       #         resource_name: "ResourceName",
       #         limit: 1,
@@ -1697,11 +1696,13 @@ module Aws
         :config_rule)
 
         # @!attribute [rw] config_rule
-        #   An AWS Lambda function that evaluates configuration items to assess
-        #   whether your AWS resources comply with your desired configurations.
-        #   This function can run when AWS Config detects a configuration change
-        #   to an AWS resource and at a periodic frequency that you choose (for
-        #   example, every 24 hours).
+        #   An AWS Config rule represents an AWS Lambda function that you create
+        #   for a custom rule or a predefined function for an AWS managed rule.
+        #   The function evaluates configuration items to assess whether your
+        #   AWS resources comply with your desired configurations. This function
+        #   can run when AWS Config detects a configuration change to an AWS
+        #   resource and at a periodic frequency that you choose (for example,
+        #   every 24 hours).
         #
         #   <note markdown="1"> You can use the AWS CLI and AWS SDKs if you want to create a rule
         #   that triggers evaluations for your resources when AWS Config
@@ -1732,7 +1733,7 @@ module Aws
       #           recording_group: {
       #             all_supported: false,
       #             include_global_resource_types: false,
-      #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
+      #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
       #           },
       #         },
       #       }
@@ -1863,7 +1864,7 @@ module Aws
       #       {
       #         all_supported: false,
       #         include_global_resource_types: false,
-      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription
+      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
       #       }
       class RecordingGroup < Aws::Structure.new(
         :all_supported,
@@ -2067,10 +2068,11 @@ module Aws
 
       end
 
-      # Provides the source and the message type that trigger AWS Config to
+      # Provides the source and the message types that trigger AWS Config to
       # evaluate your AWS resources against a rule. It also provides the
       # frequency with which you want AWS Config to run evaluations for the
-      # rule if the trigger type is periodic.
+      # rule if the trigger type is periodic. You can specify the parameter
+      # values for `SourceDetail` only for custom rules.
       # @note When making an API call, pass SourceDetail
       #   data as a hash:
       #
@@ -2090,26 +2092,24 @@ module Aws
         #   @return [String]
 
         # @!attribute [rw] message_type
-        #   The type of SNS message that triggers AWS Config to run an
-        #   evaluation.
+        #   The type of notification that triggers AWS Config to run an
+        #   evaluation. You can specify the following notification types:
         #
-        #   For evaluations that are initiated when AWS Config delivers a
-        #   configuration item change notification, you must use
-        #   `ConfigurationItemChangeNotification`.
+        #   `ConfigurationItemChangeNotification` - Triggers an evaluation when
+        #   AWS Config delivers a configuration item change notification.
         #
-        #   For evaluations that are initiated at a frequency that you choose
-        #   (for example, every 24 hours), you must use `ScheduledNotification`.
+        #   `ScheduledNotification` - Triggers a periodic evaluation at the
+        #   frequency specified for `MaximumExecutionFrequency`.
         #
-        #   For evaluations that are initiated when AWS Config delivers a
-        #   configuration snapshot, you must use
-        #   `ConfigurationSnapshotDeliveryCompleted`.
+        #   `ConfigurationSnapshotDeliveryCompleted` - Triggers a periodic
+        #   evaluation when AWS Config delivers a configuration snapshot.
         #   @return [String]
 
         # @!attribute [rw] maximum_execution_frequency
-        #   If the trigger type for your rule includes periodic, AWS Config runs
-        #   evaluations for the rule at a frequency that you choose. If you
-        #   specify a value for `MaximumExecutionFrequency`, then `MessageType`
-        #   must use the `ScheduledNotification` value.
+        #   The frequency that you want AWS Config to run evaluations for a rule
+        #   that is triggered periodically. If you specify a value for
+        #   `MaximumExecutionFrequency`, then `MessageType` must use the
+        #   `ScheduledNotification` value.
         #   @return [String]
 
       end

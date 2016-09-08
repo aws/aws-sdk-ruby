@@ -182,6 +182,12 @@ module Aws
         data.kms_key_id
       end
 
+      # The Amazon Resource Name (ARN) for the DB snapshot.
+      # @return [String]
+      def db_snapshot_arn
+        data.db_snapshot_arn
+      end
+
       # @!endgroup
 
       # @return [Client]
@@ -385,7 +391,8 @@ module Aws
       # @option options [String] :db_name
       #   The database name for the restored DB instance.
       #
-      #   <note markdown="1"> This parameter doesn\'t apply to the MySQL or MariaDB engines.
+      #   <note markdown="1"> This parameter doesn\'t apply to the MySQL, PostgreSQL, or MariaDB
+      #   engines.
       #
       #    </note>
       # @option options [String] :engine

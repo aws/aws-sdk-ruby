@@ -55,7 +55,7 @@ module Aws
       end
 
       # The lifecycle state for the instance. For more information, see [Auto
-      # Scaling Lifecycle][1] in the *Auto Scaling Developer Guide*.
+      # Scaling Lifecycle][1] in the *Auto Scaling User Guide*.
       #
       #
       #
@@ -65,10 +65,10 @@ module Aws
         data.lifecycle_state
       end
 
-      # The health status of this instance. \"Healthy\" means that the
-      # instance is healthy and should remain in service. \"Unhealthy\" means
-      # that the instance is unhealthy and Auto Scaling should terminate and
-      # replace it.
+      # The last reported health status of this instance. \"Healthy\" means
+      # that the instance is healthy and should remain in service.
+      # \"Unhealthy\" means that the instance is unhealthy and Auto Scaling
+      # should terminate and replace it.
       # @return [String]
       def health_status
         data.health_status

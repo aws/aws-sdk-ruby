@@ -148,6 +148,84 @@ module Aws
         req.send_request(options)
       end
 
+      # Given a data set type and a from date, asynchronously publishes the
+      # requested customer support data to the specified S3 bucket and
+      # notifies the specified SNS topic once the data is available. Returns a
+      # unique request identifier that can be used to correlate requests with
+      # notifications from the SNS topic. Data sets will be published in
+      # comma-separated values (CSV) format with the file name
+      # \\\{data\_set\_type\\}\_YYYY-MM-DD\'T\'HH-mm-ss\'Z\'.csv. If a file
+      # with the same name already exists (e.g. if the same data set is
+      # requested twice), the original file will be overwritten by the new
+      # file. Requires a Role with an attached permissions policy providing
+      # Allow permissions for the following actions: s3:PutObject,
+      # s3:GetBucketLocation, sns:GetTopicAttributes, sns:Publish,
+      # iam:GetRolePolicy.
+      # @option params [required, String] :data_set_type
+      #   Specifies the data set type to be written to the output csv file. The
+      #   data set types customer\_support\_contacts\_data and
+      #   test\_customer\_support\_contacts\_data both result in a csv file
+      #   containing the following fields: Product Id, Customer Guid,
+      #   Subscription Guid, Subscription Start Date, Organization, AWS Account
+      #   Id, Given Name, Surname, Telephone Number, Email, Title, Country Code,
+      #   ZIP Code, Operation Type, and Operation Time. Currently, only the
+      #   test\_customer\_support\_contacts\_data value is supported
+      #
+      #   * *customer\_support\_contacts\_data* Customer support contact data.
+      #     The data set will contain all changes (Creates, Updates, and
+      #     Deletes) to customer support contact data from the date specified in
+      #     the from\_date parameter.
+      #   * *test\_customer\_support\_contacts\_data* An example data set
+      #     containing static test data in the same format as
+      #     customer\_support\_contacts\_data
+      # @option params [required, Time,DateTime,Date,Integer,String] :from_date
+      #   The start date from which to retrieve the data set. This parameter
+      #   only affects the customer\_support\_contacts\_data data set type.
+      # @option params [required, String] :role_name_arn
+      #   The Amazon Resource Name (ARN) of the Role with an attached
+      #   permissions policy to interact with the provided AWS services.
+      # @option params [required, String] :destination_s3_bucket_name
+      #   The name (friendly name, not ARN) of the destination S3 bucket.
+      # @option params [String] :destination_s3_prefix
+      #   (Optional) The desired S3 prefix for the published data set, similar
+      #   to a directory path in standard file systems. For example, if given
+      #   the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\",
+      #   the output file \"outputfile\" would be published to
+      #   \"s3://mybucket/myprefix/mydatasets/outputfile\". If the prefix
+      #   directory structure does not exist, it will be created. If no prefix
+      #   is provided, the data set will be published to the S3 bucket root.
+      # @option params [required, String] :sns_topic_arn
+      #   Amazon Resource Name (ARN) for the SNS Topic that will be notified
+      #   when the data set has been published or if an error has occurred.
+      # @option params [Hash<String,String>] :customer_defined_values
+      #   (Optional) Key-value pairs which will be returned, unmodified, in the
+      #   Amazon SNS notification message and the data set metadata file.
+      # @return [Types::StartSupportDataExportResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::StartSupportDataExportResult#data_set_request_id #dataSetRequestId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.start_support_data_export({
+      #     data_set_type: "customer_support_contacts_data", # required, accepts customer_support_contacts_data, test_customer_support_contacts_data
+      #     from_date: Time.now, # required
+      #     role_name_arn: "RoleNameArn", # required
+      #     destination_s3_bucket_name: "DestinationS3BucketName", # required
+      #     destination_s3_prefix: "DestinationS3Prefix",
+      #     sns_topic_arn: "SnsTopicArn", # required
+      #     customer_defined_values: {
+      #       "OptionalKey" => "OptionalValue",
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.data_set_request_id #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def start_support_data_export(params = {}, options = {})
+        req = build_request(:start_support_data_export, params)
+        req.send_request(options)
+      end
+
       # @!endgroup
 
       # @param [Symbol] waiter_name
@@ -187,6 +265,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

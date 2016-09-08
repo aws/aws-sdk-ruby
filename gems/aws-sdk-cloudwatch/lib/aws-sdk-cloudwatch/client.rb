@@ -60,7 +60,10 @@ module Aws
       # or item type. If an alarm name is not specified, Amazon CloudWatch
       # returns histories for all of the owner\'s alarms.
       #
-      # <note> Amazon CloudWatch retains the history of an alarm for two weeks, whether or not you delete the alarm. </note>
+      # <note markdown="1"> Amazon CloudWatch retains the history of an alarm for two weeks,
+      # whether or not you delete the alarm.
+      #
+      #  </note>
       # @option params [String] :alarm_name
       #   The name of the alarm.
       # @option params [String] :history_item_type
@@ -284,10 +287,11 @@ module Aws
       # `GetMetricStatistics` request is 1,440. If you make a request that
       # generates more than 1,440 data points, Amazon CloudWatch returns an
       # error. In such a case, you can alter the request by narrowing the
-      # specified time range or increasing the specified period.
-      # Alternatively, you can make multiple requests across adjacent time
-      # ranges. `GetMetricStatistics` does not return the data in
-      # chronological order.
+      # specified time range or increasing the specified period. A period can
+      # be as short as one minute (60 seconds) or as long as one day (86,400
+      # seconds). Alternatively, you can make multiple requests across
+      # adjacent time ranges. `GetMetricStatistics` does not return the data
+      # in chronological order.
       #
       # Amazon CloudWatch aggregates data points based on the length of the
       # `period` that you specify. For example, if you request statistics with
@@ -301,7 +305,9 @@ module Aws
       # Amazon EC2 instances with detailed (one-minute) monitoring enabled:
       #
       # * Statistics for up to 400 instances for a span of one hour
+      #
       # * Statistics for up to 35 instances over a span of 24 hours
+      #
       # * Statistics for up to 2 instances over a span of 2 weeks
       #
       # For information about the namespace, metric names, and dimensions that
@@ -324,7 +330,12 @@ module Aws
       #   time stamp specified. The time stamp must be in ISO 8601 UTC format
       #   (e.g., 2014-09-03T23:00:00Z).
       #
-      #   <note markdown="1"> The specified start time is rounded down to the nearest value. Datapoints are returned for start times up to two weeks in the past. Specified start times that are more than two weeks in the past will not return datapoints for metrics that are older than two weeks. Data that is timestamped 24 hours or more in the past may take in
+      #   <note markdown="1"> The specified start time is rounded down to the nearest value.
+      #   Datapoints are returned for start times up to two weeks in the past.
+      #   Specified start times that are more than two weeks in the past will
+      #   not return datapoints for metrics that are older than two weeks.
+      #
+      #    Data that is timestamped 24 hours or more in the past may take in
       #   excess of 48 hours to become available from submission time using
       #   `GetMetricStatistics`.
       #
@@ -335,9 +346,10 @@ module Aws
       #   to the time stamp specified. The time stamp must be in ISO 8601 UTC
       #   format (e.g., 2014-09-03T23:00:00Z).
       # @option params [required, Integer] :period
-      #   The granularity, in seconds, of the returned datapoints. `Period` must
-      #   be at least 60 seconds and must be a multiple of 60. The default value
-      #   is 60.
+      #   The granularity, in seconds, of the returned datapoints. A `Period`
+      #   can be as short as one minute (60 seconds) or as long as one day
+      #   (86,400 seconds), and must be a multiple of 60. The default value is
+      #   60.
       # @option params [required, Array<String>] :statistics
       #   The metric statistics to return. For information about specific
       #   statistics returned by GetMetricStatistics, see [Statistics][1] in the
@@ -347,7 +359,10 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Statistic
       # @option params [String] :unit
-      #   The unit for the metric.
+      #   The specific unit for a given metric. Metrics may be reported in
+      #   multiple units. Not supplying a unit results in all units being
+      #   returned. If the metric only ever reports one unit, specifying a unit
+      #   will have no effect.
       # @return [Types::GetMetricStatisticsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetMetricStatisticsOutput#label #Label} => String
@@ -391,9 +406,17 @@ module Aws
       # Returned metrics can be used with GetMetricStatistics to obtain
       # statistical data for a given metric.
       #
-      # <note> Up to 500 results are returned for any one call. To retrieve further results, use returned `NextToken` values with subsequent `ListMetrics` operations. </note>
+      # <note markdown="1"> Up to 500 results are returned for any one call. To retrieve further
+      # results, use returned `NextToken` values with subsequent `ListMetrics`
+      # operations.
       #
-      # <note> If you create a metric with the PutMetricData action, allow up to fifteen minutes for the metric to appear in calls to the `ListMetrics` action. Statistics about the metric, however, are available sooner using GetMetricStatistics. </note>
+      #  </note>
+      #
+      # <note markdown="1"> If you create a metric with PutMetricData, allow up to fifteen minutes
+      # for the metric to appear in calls to `ListMetrics`. Statistics about
+      # the metric, however, are available sooner using GetMetricStatistics.
+      #
+      #  </note>
       # @option params [String] :namespace
       #   The namespace to filter against.
       # @option params [String] :metric_name
@@ -438,19 +461,29 @@ module Aws
 
       # Creates or updates an alarm and associates it with the specified
       # Amazon CloudWatch metric. Optionally, this operation can associate one
-      # or more Amazon Simple Notification Service resources with the alarm.
+      # or more Amazon SNS resources with the alarm.
       #
       # When this operation creates an alarm, the alarm state is immediately
       # set to `INSUFFICIENT_DATA`. The alarm is evaluated and its
       # `StateValue` is set appropriately. Any actions associated with the
-      # `StateValue` is then executed.
+      # `StateValue` are then executed.
       #
-      # <note> When updating an existing alarm, its `StateValue` is left unchanged. </note>
+      # <note markdown="1"> When updating an existing alarm, its `StateValue` is left unchanged,
+      # but it completely overwrites the alarm\'s previous configuration.
       #
-      # <note markdown="1"> If you are using an AWS Identity and Access Management (IAM) account to create or modify an alarm, you must have the following Amazon EC2 permissions: * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
+      #  </note>
+      #
+      # <note markdown="1"> If you are using an AWS Identity and Access Management (IAM) account
+      # to create or modify an alarm, you must have the following Amazon EC2
+      # permissions:
+      #
+      #  * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
       #   alarms on Amazon EC2 instance status metrics.
+      #
       # * `ec2:StopInstances` for alarms with stop actions.
+      #
       # * `ec2:TerminateInstances` for alarms with terminate actions.
+      #
       # * `ec2:DescribeInstanceRecoveryAttribute`, and `ec2:RecoverInstances`
       #   for alarms with recover actions.
       #
@@ -475,7 +508,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com//IAM/latest/UserGuide/PermissionsAndPolicies.html
+      # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html
       # @option params [required, String] :alarm_name
       #   The descriptive name for the alarm. This name must be unique within
       #   the user\'s AWS account
@@ -613,12 +646,18 @@ module Aws
       # associates the data points with the specified metric. If the specified
       # metric does not exist, Amazon CloudWatch creates the metric. When
       # Amazon CloudWatch creates a metric, it can take up to fifteen minutes
-      # for the metric to appear in calls to the ListMetrics action.
+      # for the metric to appear in calls to ListMetrics.
       #
       # Each `PutMetricData` request is limited to 8 KB in size for HTTP GET
       # requests and is limited to 40 KB in size for HTTP POST requests.
       #
-      # <important>Although the `Value` parameter accepts numbers of type `Double`, Amazon CloudWatch rejects values that are either too small or too large. Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values (e.g., NaN, +Infinity, -Infinity) are not supported. </important>
+      # <important markdown="1"> Although the `Value` parameter accepts numbers of type `Double`,
+      # Amazon CloudWatch rejects values that are either too small or too
+      # large. Values must be in the range of 8.515920e-109 to 1.174271e+108
+      # (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
+      # (e.g., NaN, +Infinity, -Infinity) are not supported.
+      #
+      #  </important>
       #
       # Data that is timestamped 24 hours or more in the past may take in
       # excess of 48 hours to become available from submission time using
@@ -626,7 +665,11 @@ module Aws
       # @option params [required, String] :namespace
       #   The namespace for the metric data.
       #
-      #   <note> You cannot specify a namespace that begins with "AWS/". Namespaces that begin with "AWS/" are reserved for other Amazon Web Services products that send metrics to Amazon CloudWatch. </note>
+      #   <note markdown="1"> You cannot specify a namespace that begins with \"AWS/\". Namespaces
+      #   that begin with \"AWS/\" are reserved for other Amazon Web Services
+      #   products that send metrics to Amazon CloudWatch.
+      #
+      #    </note>
       # @option params [required, Array<Types::MetricDatum>] :metric_data
       #   A list of data describing the metric.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -662,16 +705,15 @@ module Aws
         req.send_request(options)
       end
 
-      # Temporarily sets the state of an alarm. When the updated `StateValue`
-      # differs from the previous value, the action configured for the
-      # appropriate state is invoked. For example, if your alarm is configured
-      # to send an Amazon SNS message when an alarm is triggered, temporarily
-      # changing the alarm\'s state to **ALARM** will send an Amazon SNS
-      # message. This is not a permanent change. The next periodic alarm check
-      # (in about a minute) will set the alarm to its actual state. Because
-      # the alarm state change happens very quickly, it is typically only
-      # visibile in the alarm\'s **History** tab in the Amazon CloudWatch
-      # console or through `DescribeAlarmHistory`.
+      # Temporarily sets the state of an alarm for testing purposes. When the
+      # updated `StateValue` differs from the previous value, the action
+      # configured for the appropriate state is invoked. For example, if your
+      # alarm is configured to send an Amazon SNS message when an alarm is
+      # triggered, temporarily changing the alarm\'s state to **ALARM** sends
+      # an Amazon SNS message. The alarm returns to its actual state (often
+      # within seconds). Because the alarm state change happens very quickly,
+      # it is typically only visible in the alarm\'s **History** tab in the
+      # Amazon CloudWatch console or through `DescribeAlarmHistory`.
       # @option params [required, String] :alarm_name
       #   The descriptive name for the alarm. This name must be unique within
       #   the user\'s AWS account. The maximum length is 255 characters.
@@ -740,6 +782,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module

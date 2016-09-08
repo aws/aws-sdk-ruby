@@ -39,12 +39,97 @@ module Aws
 
       # @!group API Operations
 
+      # If the DNS server for your on-premises domain uses a publicly
+      # addressable IP address, you must add a CIDR address block to correctly
+      # route traffic to and from your Microsoft AD on Amazon Web Services.
+      # *AddIpRoutes* adds this address block. You can also use *AddIpRoutes*
+      # to facilitate routing traffic that uses public IP ranges from your
+      # Microsoft AD on AWS to a peer VPC.
+      # @option params [required, String] :directory_id
+      #   Identifier (ID) of the directory to which to add the address block.
+      # @option params [required, Array<Types::IpRoute>] :ip_routes
+      #   IP address blocks, using CIDR format, of the traffic to route. This is
+      #   often the IP address block of the DNS server used for your on-premises
+      #   domain.
+      # @option params [Boolean] :update_security_group_for_directory_controllers
+      #   If set to true, updates the inbound and outbound rules of the security
+      #   group that has the description: \"AWS created security group for
+      #   *directory ID* directory controllers.\" Following are the new rules:
+      #
+      #   Inbound:
+      #
+      #   * Type: Custom UDP Rule, Protocol: UDP, Range: 88, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom UDP Rule, Protocol: UDP, Range: 123, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom UDP Rule, Protocol: UDP, Range: 138, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom UDP Rule, Protocol: UDP, Range: 389, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0
+      #
+      #   * Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
+      #     0.0.0.0/0
+      #
+      #   * Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
+      #     0.0.0.0/0
+      #
+      #   * Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0
+      #
+      #   * Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0
+      #
+      #   * Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0
+      #
+      #   * Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0
+      #
+      #
+      #
+      #   Outbound:
+      #
+      #   * Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0
+      #
+      #   ^
+      #
+      #   These security rules impact an internal network interface that is not
+      #   exposed publicly.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.add_ip_routes({
+      #     directory_id: "DirectoryId", # required
+      #     ip_routes: [ # required
+      #       {
+      #         cidr_ip: "CidrIp",
+      #         description: "Description",
+      #       },
+      #     ],
+      #     update_security_group_for_directory_controllers: false,
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def add_ip_routes(params = {}, options = {})
+        req = build_request(:add_ip_routes, params)
+        req.send_request(options)
+      end
+
       # Adds or overwrites one or more tags for the specified Amazon Directory
       # Services directory. Each directory can have a maximum of 10 tags. Each
-      # tag consists of a key and optional value. Tag keys must be unique per
-      # resource.
+      # tag consists of a key and optional value. Tag keys must be unique to
+      # each resource.
       # @option params [required, String] :resource_id
-      #   The ID of the directory to which to add the tag.
+      #   Identifier (ID) for the directory to which to add the tag.
       # @option params [required, Array<Types::Tag>] :tags
       #   The tags to be assigned to the Amazon Directory Services directory.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -923,9 +1008,47 @@ module Aws
         req.send_request(options)
       end
 
+      # Lists the address blocks that you have added to a directory.
+      # @option params [required, String] :directory_id
+      #   Identifier (ID) of the directory for which you want to retrieve the IP
+      #   addresses.
+      # @option params [String] :next_token
+      #   The *ListIpRoutes.NextToken* value from a previous call to
+      #   ListIpRoutes. Pass null if this is the first call.
+      # @option params [Integer] :limit
+      #   Maximum number of items to return. If this value is zero, the maximum
+      #   number of items is specified by the limitations of the operation.
+      # @return [Types::ListIpRoutesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListIpRoutesResult#ip_routes_info #IpRoutesInfo} => Array&lt;Types::IpRouteInfo&gt;
+      #   * {Types::ListIpRoutesResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_ip_routes({
+      #     directory_id: "DirectoryId", # required
+      #     next_token: "NextToken",
+      #     limit: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.ip_routes_info #=> Array
+      #   resp.ip_routes_info[0].directory_id #=> String
+      #   resp.ip_routes_info[0].cidr_ip #=> String
+      #   resp.ip_routes_info[0].ip_route_status_msg #=> String, one of "Adding", "Added", "Removing", "Removed", "AddFailed", "RemoveFailed"
+      #   resp.ip_routes_info[0].added_date_time #=> Time
+      #   resp.ip_routes_info[0].ip_route_status_reason #=> String
+      #   resp.ip_routes_info[0].description #=> String
+      #   resp.next_token #=> String
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def list_ip_routes(params = {}, options = {})
+        req = build_request(:list_ip_routes, params)
+        req.send_request(options)
+      end
+
       # Lists all tags on an Amazon Directory Services directory.
       # @option params [required, String] :resource_id
-      #   The ID of the directory for which you want to retrieve tags.
+      #   Identifier (ID) of the directory for which you want to retrieve tags.
       # @option params [String] :next_token
       #   Reserved for future use.
       # @option params [Integer] :limit
@@ -980,9 +1103,29 @@ module Aws
         req.send_request(options)
       end
 
+      # Removes IP address blocks from a directory.
+      # @option params [required, String] :directory_id
+      #   Identifier (ID) of the directory from which you want to remove the IP
+      #   addresses.
+      # @option params [required, Array<String>] :cidr_ips
+      #   IP address blocks that you want to remove.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.remove_ip_routes({
+      #     directory_id: "DirectoryId", # required
+      #     cidr_ips: ["CidrIp"], # required
+      #   })
+      # @param [Hash] params ({})
+      # @param [Hash] options ({})
+      def remove_ip_routes(params = {}, options = {})
+        req = build_request(:remove_ip_routes, params)
+        req.send_request(options)
+      end
+
       # Removes tags from an Amazon Directory Services directory.
       # @option params [required, String] :resource_id
-      #   The ID of the directory from which to remove the tag.
+      #   Identifier (ID) of the directory from which to remove the tag.
       # @option params [required, Array<String>] :tag_keys
       #   The tag key (name) of the tag to be removed.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1145,6 +1288,7 @@ module Aws
       # @api private
       class << self
 
+        # @api private
         attr_reader :identifier
 
         def errors_module
