@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
+
+* Feature - Aws::Support - Updated the API, and documentation for AWS Support.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-09-07 API version of Amazon CloudFront.
+
 2.5.10 (2016-09-07)
 ------------------
 

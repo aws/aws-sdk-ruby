@@ -261,7 +261,7 @@ to be backwards compatible.
 | AWS WAF                                  | WAF                          | 2015-08-24  |
 | AWSMarketplace Metering                  | MarketplaceMetering          | 2016-01-14  |
 | Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
-| Amazon CloudFront                        | CloudFront                   | 2016-08-20  |
+| Amazon CloudFront                        | CloudFront                   | 2016-09-07  |
 | Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain                | CloudSearchDomain            | 2013-01-01  |
