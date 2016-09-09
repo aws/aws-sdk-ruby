@@ -3,14 +3,7 @@ require 'stringio'
 
 module Aws
   describe ParamConverter do
-
     describe 'convert' do
-
-      let(:shapes) { ApiHelper.sample_shapes }
-
-      let(:rules) {
-        Api::ShapeMap.new(shapes).shape_ref('shape' => 'StructureShape')
-      }
 
       it 'performs a deeply nested conversion of values' do
 
@@ -28,6 +21,7 @@ module Aws
           unknown: data
         })
 
+        rules = ApiHelper.sample_api.operation(:example_operation).input
         converted = ParamConverter.convert(rules, params)
         expect(converted.to_h).to eq({
           boolean: true,

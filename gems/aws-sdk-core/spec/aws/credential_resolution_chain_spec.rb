@@ -29,7 +29,7 @@ module Aws
           "AWS_ACCESS_KEY_ID" => "AKID_ENV_STUB",
           "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
         })
-        client = Aws::S3::Client.new(
+        client = ApiHelper.sample_rest_xml::Client.new(
           access_key_id: "ACCESS_DIRECT",
           secret_access_key: "SECRET_DIRECT",
           profile: "fooprofile",
@@ -43,7 +43,7 @@ module Aws
           "AWS_ACCESS_KEY_ID" => "AKID_ENV_STUB",
           "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
         })
-        client = Aws::S3::Client.new(profile: "assumerole_sc", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "assumerole_sc", region: "us-east-1")
         expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
       end
 
@@ -55,17 +55,17 @@ module Aws
           "AR_SECRET",
           "AR_TOKEN"
         )
-        client = Aws::S3::Client.new(profile: "ar_plus_creds", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_plus_creds", region: "us-east-1")
         expect(client.config.credentials.access_key_id).to eq("AR_AKID")
       end
 
       it 'prefers shared credential file static credentials over shared config' do
-        client = Aws::S3::Client.new(profile: "credentials_first", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "credentials_first", region: "us-east-1")
         expect(client.config.credentials.access_key_id).to eq("ACCESS_KEY_CRD")
       end
 
       it 'will source static credentials from shared config after shared credentials' do
-        client = Aws::S3::Client.new(profile: "incomplete_cred", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "incomplete_cred", region: "us-east-1")
         expect(client.config.credentials.access_key_id).to eq("ACCESS_KEY_SC1")
       end
 
@@ -88,20 +88,20 @@ module Aws
   "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
 }
 JSON
-        client = Aws::S3::Client.new(profile: "nonexistant", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "nonexistant", region: "us-east-1")
         expect(client.config.credentials.access_key_id).to eq("akid-md")
       end
 
       describe 'Assume Role Resolution' do
         it 'will not assume a role without source_profile present' do
           expect {
-            Aws::S3::Client.new(profile: "ar_no_src", region: "us-east-1")
+            ApiHelper.sample_rest_xml::Client.new(profile: "ar_no_src", region: "us-east-1")
           }.to raise_error(Errors::NoSourceProfileError)
         end
 
         it 'will explicitly raise if source_profile is present but invalid' do
           expect {
-            Aws::S3::Client.new(profile: "ar_bad_src", region: "us-east-1")
+            ApiHelper.sample_rest_xml::Client.new(profile: "ar_bad_src", region: "us-east-1")
           }.to raise_error(Errors::NoSourceProfileError)
         end
 
@@ -113,7 +113,7 @@ JSON
             "AR_SECRET",
             "AR_TOKEN"
           )
-          client = Aws::S3::Client.new(profile: "assumerole_sc", region: "us-east-1")
+          client = ApiHelper.sample_rest_xml::Client.new(profile: "assumerole_sc", region: "us-east-1")
           expect(client.config.credentials.access_key_id).to eq("AR_AKID")
         end
 
@@ -125,7 +125,7 @@ JSON
             "AR_SECRET",
             "AR_TOKEN"
           )
-          client = Aws::S3::Client.new(profile: "ar_from_self", region: "us-east-1")
+          client = ApiHelper.sample_rest_xml::Client.new(profile: "ar_from_self", region: "us-east-1")
           expect(client.config.credentials.access_key_id).to eq("AR_AKID")
         end
       end
@@ -147,7 +147,7 @@ JSON
           "AWS_ACCESS_KEY_ID" => "AKID_ENV_STUB",
           "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
         })
-        client = Aws::S3::Client.new(
+        client = ApiHelper.sample_rest_xml::Client.new(
           access_key_id: "ACCESS_DIRECT",
           secret_access_key: "SECRET_DIRECT",
           profile: "fooprofile",
@@ -161,17 +161,17 @@ JSON
           "AWS_ACCESS_KEY_ID" => "AKID_ENV_STUB",
           "AWS_SECRET_ACCESS_KEY" => "SECRET_ENV_STUB"
         })
-        client = Aws::S3::Client.new(profile: "fooprofile", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "fooprofile", region: "us-east-1")
         expect(client.config.credentials.access_key_id).to eq("AKID_ENV_STUB")
       end
 
       it 'will not load credentials from shared config' do
-        client = Aws::S3::Client.new(profile: "creds_from_cfg", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "creds_from_cfg", region: "us-east-1")
         expect(client.config.credentials).to eq(nil)
       end
 
       it 'will not attempt to assume a role' do
-        client = Aws::S3::Client.new(profile: "assumerole_sc", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "assumerole_sc", region: "us-east-1")
         expect(client.config.credentials).to eq(nil)
       end
 
@@ -194,7 +194,7 @@ JSON
   "Expiration" : "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
 }
 JSON
-        client = Aws::S3::Client.new(profile: "nonexistant", region: "us-east-1")
+        client = ApiHelper.sample_rest_xml::Client.new(profile: "nonexistant", region: "us-east-1")
         expect(client.config.credentials.access_key_id).to eq("akid-md")
       end
     end

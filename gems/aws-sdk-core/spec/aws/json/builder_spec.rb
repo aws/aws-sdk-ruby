@@ -7,7 +7,9 @@ module Aws
       let(:shapes) { ApiHelper.sample_shapes }
 
       let(:rules) {
-        Api::ShapeMap.new(shapes).shape_ref('shape' => 'StructureShape')
+        ApiHelper.sample_api(shapes:shapes).
+          operation(:example_operation).
+          input
       }
 
       def json(params)

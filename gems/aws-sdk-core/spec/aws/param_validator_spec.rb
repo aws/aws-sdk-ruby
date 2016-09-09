@@ -5,9 +5,10 @@ module Aws
 
     let(:shapes) { ApiHelper.sample_shapes }
 
+    let(:api) { ApiHelper.sample_api(shapes: shapes) }
+
     def validate(params, expected_errors = [])
-      shape_map = Api::ShapeMap.new(shapes)
-      rules = shape_map.shape_ref('shape' => 'StructureShape')
+      rules = api.operation(:example_operation).input
       if expected_errors.empty?
         ParamValidator.new(rules).validate!(params)
       else
