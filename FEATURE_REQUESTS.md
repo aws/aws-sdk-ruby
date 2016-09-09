@@ -10,6 +10,10 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Handle S3 #exists? Edge Cases
+
+See [related GitHub issue #1267](https://github.com/aws/aws-sdk-ruby/issues/1267).
+
 ### Retry S3 Transfers on BadDigest Error
 
 See [related GitHub issue #1264](https://github.com/aws/aws-sdk-ruby/issues/1264).
