@@ -1,13 +1,15 @@
 module Aws
   module S3
     module Plugins
-
-      # @seahorse.client.option [Boolean] :follow_redirects (true)
-      #   When `true`, this client will follow 307 redirects returned
-      #   by Amazon S3.
       class Redirects < Seahorse::Client::Plugin
 
-        option(:follow_redirects, true)
+        option(:follow_redirects,
+          default: true,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS)
+When `true`, this client will follow 307 redirects returned
+by Amazon S3.
+          DOCS
 
         # @api private
         class Handler < Seahorse::Client::Handler

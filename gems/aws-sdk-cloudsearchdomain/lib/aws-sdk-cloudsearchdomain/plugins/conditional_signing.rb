@@ -12,7 +12,7 @@ module Aws
         # this client.
         option(:region)
 
-        option(:sigv4_region, doc_type: String, docstring: <<-DOCS) do
+        option(:sigv4_region, doc_type: String, docstring: <<-DOCS) do |cfg|
 Only needed when sending authenticated/signed requests to a Cloud
 Search domain and the endpoint does not contain the region name.
         DOCS

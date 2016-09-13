@@ -3,12 +3,6 @@ require 'openssl'
 module Aws
   module SQS
     module Plugins
-
-      # @seahorse.client.option [Boolean] :verify_checksums (true)
-      #   When `true` MD5 checksums will be computed for messages sent to
-      #   an SQS queue and matched against MD5 checksums returned by Amazon SQS.
-      #   `Aws::Errors::Checksum` errors are raised for cases where checksums do
-      #   not match.
       class Md5s < Seahorse::Client::Plugin
 
         # @api private
@@ -135,7 +129,16 @@ module Aws
           end
         end
 
-        option(:verify_checksums) do |config|
+        option(:verify_checksums,
+          doc_default: true,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS
+When `true` MD5 checksums will be computed for messages sent to
+an SQS queue and matched against MD5 checksums returned by Amazon SQS.
+`Aws::Errors::Checksum` errors are raised for cases where checksums do
+not match.
+          DOCS
+        ) do |config|
           # By default, we will disable checksum verification when response
           # stubbing is enable. If a user decides to enable both features,
           # then they will need to stub the MD5s in the response.

@@ -1,23 +1,31 @@
+require 'seahorse/client/net_http/handler'
+
 module Seahorse
   module Client
     module Plugins
-
-      # @seahorse.client.option [String] :http_proxy
-      # @seahorse.client.option [Integer] :http_open_timeout (15)
-      # @seahorse.client.option [Integer] :http_read_timeout (60)
-      # @seahorse.client.option [Integer] :http_idle_timeout (5)
-      # @seahorse.client.option [Float] :http_continue_timeout (1)
-      # @seahorse.client.option [Boolean] :http_wire_trace (false)
-      # @seahorse.client.option [Logger] :logger (nil)
-      # @seahorse.client.option [Boolean] :ssl_verify_peer (true)
-      # @seahorse.client.option [String] :ssl_ca_bundle
-      # @seahorse.client.option [String] :ssl_ca_directory
-      # @seahorse.client.option [String] :ssl_ca_store
       class NetHttp < Plugin
 
-        Client::NetHttp::ConnectionPool::OPTIONS.each_pair do |name, default|
-          option(name, default)
-        end
+        option(:http_proxy, default: nil, doc_type: String, docstring: '')
+
+        option(:http_open_timeout, default: 15, doc_type: Integer, docstring: '')
+
+        option(:http_read_timeout, default: 60, doc_type: Integer, docstring: '')
+
+        option(:http_idle_timeout, default: 5, doc_type: Integer, docstring: '')
+
+        option(:http_continue_timeout, default: 1, doc_type: Integer, docstring: '')
+
+        option(:http_wire_trace, default: false, doc_type: 'Boolean', docstring: '')
+
+        option(:ssl_verify_peer, default: true, doc_type: 'Boolean', docstring: '')
+
+        option(:ssl_ca_bundle, default: nil, doc_type: String, docstring: '')
+
+        option(:ssl_ca_directory, default: nil, doc_type: String, docstring: '')
+
+        option(:ssl_ca_store, default: nil, doc_type: String, docstring: '')
+
+        option(:logger) # for backwards compat
 
         handler(Client::NetHttp::Handler, step: :send)
 

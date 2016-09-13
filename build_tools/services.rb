@@ -65,8 +65,14 @@ module BuildTools
       # @return [String] The name/key used in endpoints.json.
       attr_accessor :endpoints_key
 
-      # @return [Array<String>] A list of plugin class names to apply.
-      attr_accessor :plugins
+      # @return [Hash<String,String>] A hash of plugins to add to the client.
+      #   Hash keys are plugin class names, hash values are string paths to
+      #   the plugin definition.
+      attr_accessor :add_plugins
+
+      # @return [Array<String>] A list of default plugin class names to
+      #   not remove from the generated client.
+      attr_accessor :remove_plugins
 
       # @return [Hash]
       def api
@@ -124,7 +130,8 @@ module BuildTools
           svc.dependencies = {}
           svc.dependencies['aws-sdk-core'] = '~> 3.0'
           svc.dependencies.update(definition['dependencies'] || {})
-          svc.plugins = plugins(svc, definition)
+          svc.add_plugins = add_plugins(svc, definition)
+          svc.remove_plugins = Array(definition['removePlugins'])
           svc
         end
 
@@ -149,21 +156,10 @@ module BuildTools
           end
         end
 
-        def plugins(svc, definition)
-          plugins = {}
-          plugins.update(default_plugins)
-          plugins.update(protocol_plugins(svc.protocol))
-          plugins.update(add_plugins(svc, definition))
-          Array(definition['removePlugins']).each do |class_name|
-            plugins.delete(class_name)
-          end
-          plugins
-        end
-
         def add_plugins(svc, definition)
-          Array(definition['addPlugins']).inject({}) do |plugins, plugin_name|
-            plugins[plugin_name] = plugin_path(svc, plugin_name)
-            plugins
+          Array(definition['addPlugins']).inject({}) do |hash, plugin_name|
+            hash[plugin_name] = plugin_path(svc, plugin_name)
+            hash
           end
         end
 
@@ -171,34 +167,6 @@ module BuildTools
           filename = plugin_name.split('::').last
           filename = AwsSdkCodeGenerator::Underscore.underscore(filename)
           "gems/#{svc.gem_name}/lib/#{svc.gem_name}/plugins/#{filename}.rb"
-        end
-
-        def default_plugins
-          {
-            'Seahorse::Client::Plugins::ContentLength' => 'gems/aws-sdk-core/lib/seahorse/client/plugins/content_length.rb',
-            'Aws::Plugins::Logging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/logging.rb',
-            'Aws::Plugins::ParamConverter' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_converter.rb',
-            'Aws::Plugins::ParamValidator' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_validator.rb',
-            'Aws::Plugins::UserAgent' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent.rb',
-            'Aws::Plugins::HelpfulSocketErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/helpful_socket_errors.rb',
-            'Aws::Plugins::RetryErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/retry_errors.rb',
-            'Aws::Plugins::GlobalConfiguration' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration.rb',
-            'Aws::Plugins::RegionalEndpoint' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/regional_endpoint.rb',
-            'Aws::Plugins::RequestSigner' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/request_signer.rb',
-            'Aws::Plugins::ResponsePaging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/response_paging.rb',
-            'Aws::Plugins::StubResponses' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/stub_responses.rb',
-          }
-        end
-
-        def protocol_plugins(protocol)
-          {
-            'json'      => { 'Aws::Plugins::Protocols::JsonRpc' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/json_rpc.rb' },
-            'rest-json' => { 'Aws::Plugins::Protocols::RestJson' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/rest_json.rb' },
-            'rest-xml'  => { 'Aws::Plugins::Protocols::RestXml' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/rest_xml.rb' },
-            'query'     => { 'Aws::Plugins::Protocols::Query' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/query.rb' },
-            'ec2'       => { 'Aws::Plugins::Protocols::EC2' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/ec2.rb' },
-            nil         => {}
-          }[protocol]
         end
 
       end

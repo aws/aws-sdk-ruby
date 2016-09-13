@@ -1,18 +1,19 @@
 module Aws
   module Plugins
-
-    # @seahorse.client.option [Boolean] :stub_responses (false)
-    #   Causes the client to return stubbed responses. By default
-    #   fake responses are generated and returned. You can specify
-    #   the response data to return or errors to raise by calling
-    #   {ClientStubs#stub_responses}. See {ClientStubs} for more information.
-    #
-    #   ** Please note ** When response stubbing is enabled, no HTTP
-    #   requests are made, and retries are disabled.
-    #
     class StubResponses < Seahorse::Client::Plugin
 
-      option(:stub_responses, false)
+      option(:stub_responses,
+        default: false,
+        doc_type: 'Boolean',
+        docstring: <<-DOCS)
+Causes the client to return stubbed responses. By default
+fake responses are generated and returned. You can specify
+the response data to return or errors to raise by calling
+{ClientStubs#stub_responses}. See {ClientStubs} for more information.
+
+** Please note ** When response stubbing is enabled, no HTTP
+requests are made, and retries are disabled.
+        DOCS
 
       option(:region) do |config|
         'us-stubbed-1' if config.stub_responses

@@ -45,7 +45,7 @@ module Seahorse
         # @override option(name, options = {}, &block)
         # @option options [Object] :default Can also be set by passing a block.
         # @option options [String] :doc_default
-        # @option options [Boolean] :doc_required
+        # @option options [Boolean] :required
         # @option options [String] :doc_type
         # @option options [String] :docs
         # @return [void]
@@ -109,7 +109,6 @@ module Seahorse
 
         def initialize(name, options = {})
           @name = name
-          @required = false
           options.each_pair do |opt_name, opt_value|
             self.send("#{opt_name}=", opt_value)
           end
@@ -118,7 +117,7 @@ module Seahorse
         attr_reader :name
         attr_accessor :default
         attr_accessor :default_block
-        attr_accessor :doc_required
+        attr_accessor :required
         attr_accessor :doc_type
         attr_accessor :doc_default
         attr_accessor :docstring

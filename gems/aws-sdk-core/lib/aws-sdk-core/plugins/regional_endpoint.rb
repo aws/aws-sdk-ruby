@@ -1,14 +1,5 @@
 module Aws
   module Plugins
-
-    # @seahorse.client.option [required, String] :region
-    #   The AWS region to connect to.  The region is used to construct
-    #   the client endpoint.  Defaults to `ENV['AWS_REGION']`.
-    #   Also checks `AMAZON_REGION` and `AWS_DEFAULT_REGION`.
-    #
-    # @seahorse.client.option [String] :endpoint A default endpoint is
-    #   constructed from the `:region`.
-    #
     class RegionalEndpoint < Seahorse::Client::Plugin
 
       # raised when region is not configured
@@ -16,11 +7,35 @@ module Aws
 
       option(:profile)
 
-      option(:region) do |cfg|
+      option(:region,
+        required: true,
+        doc_type: String,
+        docstring: <<-DOCS) do |cfg|
+The AWS region to connect to.  The configured `:region` is
+used to determine the service `:endpoint`. When not passed,
+a default `:region` is search for in the following locations:
+
+* `Aws.config[:region]`
+* `ENV['AWS_REGION']`
+* `ENV['AMAZON_REGION']`
+* `ENV['AWS_DEFAULT_REGION']`
+* `~/.aws/credentials`
+* `~/.aws/config`
+        DOCS
         resolve_region(cfg)
       end
 
-      option(:endpoint) do |cfg|
+    # @seahorse.client.option [required, String] :region
+    #
+    # @seahorse.client.option [String] :endpoint A default endpoint is
+    #   constructed from the `:region`.
+    #
+
+      option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
+The client endpoint is normally constructed from the `:region`
+option. You should only configure an `:endpoint` when connecting
+to test endpoints. This should be avalid HTTP(S) URI.
+        DOCS
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
           EndpointProvider.resolve(cfg.region, endpoint_prefix)

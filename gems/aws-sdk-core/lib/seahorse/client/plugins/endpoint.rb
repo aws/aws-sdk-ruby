@@ -1,17 +1,22 @@
 module Seahorse
   module Client
     module Plugins
-      # @seahorse.client.option [String] :endpoint
-      #    The HTTP or HTTPS endpoint to send requests to.
-      #    For example:
-      #
-      #        'http://example.com'
-      #        'https://example.com'
-      #        'http://example.com:123'
-      #
       class Endpoint < Plugin
 
-        option(:endpoint)
+        option(:endpoint,
+          doc_type: 'String, URI::HTTPS, URI::HTTP',
+          docstring: <<-DOCS)
+Normally you should not configure the `:endpoint` option
+directly. This is normally constructed from the `:region`
+option. Configuring `:endpoint` is normally reserved for
+connecting to test endpoints. The endpoint should be a URI
+formatted like:
+
+    'http://example.com'
+    'https://example.com'
+    'http://example.com:123'
+
+          DOCS
 
         def add_handlers(handlers, config)
           handlers.add(Handler, priority: 90)

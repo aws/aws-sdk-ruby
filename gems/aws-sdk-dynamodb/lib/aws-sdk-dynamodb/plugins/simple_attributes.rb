@@ -87,17 +87,22 @@ module Aws
       #     #   ...
       #     # }
       #
-      # @seahorse.client.option [Boolean] :simple_attributes (true)
-      #   Enables working with DynamoDB attribute values using
-      #   hashes, arrays, sets, integers, floats, booleans, and nil.
-      #
-      #   Disabling this option requires that all attribute values have
-      #   their types specified, e.g. `{ s: 'abc' }` instead of simply
-      #   `'abc'`.
-      #
       class SimpleAttributes < Seahorse::Client::Plugin
 
-        option(:simple_attributes) { |config| !config.simple_json }
+        option(:simple_attributes,
+          doc_default: true,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS
+Enables working with DynamoDB attribute values using
+hashes, arrays, sets, integers, floats, booleans, and nil.
+
+Disabling this option requires that all attribute values have
+their types specified, e.g. `{ s: 'abc' }` instead of simply
+`'abc'`.
+        DOCS
+        ) do |config|
+          !config.simple_json
+        end
 
         def add_handlers(handlers, config)
           if config.simple_attributes

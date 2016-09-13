@@ -8,12 +8,13 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(parent:, identifier:, api:, waiters:, examples:, plugins:)
+      def initialize(parent:, identifier:, api:, waiters:, examples:, add_plugins:{}, remove_plugins:[])
         @identifier = identifier
         @api = api
         @waiters = waiters
         @examples = examples
-        @plugins = plugins
+        @add_plugins = add_plugins
+        @remove_plugins = remove_plugins
         super('Client', extends: 'Seahorse::Client::Base', parent: parent)
         apply_modules(self)
         apply_identifier(self)
@@ -35,7 +36,14 @@ module AwsSdkCodeGenerator
 
       def client_plugins
         @client_plugins ||= begin
-          @plugins.map do |class_name, path|
+          plugins = {}
+          plugins.update(default_plugins)
+          plugins.update(protocol_plugins(@api['metadata']['protocol']))
+          plugins.update(@add_plugins)
+          @remove_plugins.each do |plugin_name|
+            plugins.delete(plugin_name)
+          end
+          plugins.map do |class_name, path|
             path = "./#{path}" unless path[0] == '/'
             Kernel.require(path)
             ClientPlugin.new(
@@ -47,7 +55,9 @@ module AwsSdkCodeGenerator
       end
 
       def documented_plugin_options
-        client_plugins.map(&:options).flatten.select(&:documented?)
+        client_plugins.map(&:options).flatten.select(&:documented?).sort_by do |opt|
+          [opt.required ? 'a' : 'b', opt.name]
+        end
       end
 
       def apply_modules(klass)
@@ -80,12 +90,12 @@ module AwsSdkCodeGenerator
             m.option(
               name: option.name,
               type: option.doc_type,
-              required: option.doc_required,
+              required: option.required,
               default: option.doc_default,
               docstring: option.docstring
             )
           end
-          m.param('**args')
+          m.param('*args')
           m.code('super')
         end
       end
@@ -166,6 +176,34 @@ end
           m.code(waiters)
         end)
 
+      end
+
+      def default_plugins
+        {
+          'Seahorse::Client::Plugins::ContentLength' => 'gems/aws-sdk-core/lib/seahorse/client/plugins/content_length.rb',
+          'Aws::Plugins::Logging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/logging.rb',
+          'Aws::Plugins::ParamConverter' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_converter.rb',
+          'Aws::Plugins::ParamValidator' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_validator.rb',
+          'Aws::Plugins::UserAgent' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent.rb',
+          'Aws::Plugins::HelpfulSocketErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/helpful_socket_errors.rb',
+          'Aws::Plugins::RetryErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/retry_errors.rb',
+          'Aws::Plugins::GlobalConfiguration' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration.rb',
+          'Aws::Plugins::RegionalEndpoint' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/regional_endpoint.rb',
+          'Aws::Plugins::RequestSigner' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/request_signer.rb',
+          'Aws::Plugins::ResponsePaging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/response_paging.rb',
+          'Aws::Plugins::StubResponses' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/stub_responses.rb',
+        }
+      end
+
+      def protocol_plugins(protocol)
+        {
+          'json'      => { 'Aws::Plugins::Protocols::JsonRpc' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/json_rpc.rb' },
+          'rest-json' => { 'Aws::Plugins::Protocols::RestJson' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/rest_json.rb' },
+          'rest-xml'  => { 'Aws::Plugins::Protocols::RestXml' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/rest_xml.rb' },
+          'query'     => { 'Aws::Plugins::Protocols::Query' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/query.rb' },
+          'ec2'       => { 'Aws::Plugins::Protocols::EC2' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/ec2.rb' },
+          nil         => {}
+        }[protocol]
       end
 
       # @api private

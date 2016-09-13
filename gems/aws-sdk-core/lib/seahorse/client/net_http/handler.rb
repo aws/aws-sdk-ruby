@@ -1,3 +1,4 @@
+require 'net/https'
 require 'openssl'
 
 module Seahorse

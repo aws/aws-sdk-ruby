@@ -2,16 +2,18 @@ require 'set'
 
 module Aws
   module Plugins
-
-    # @seahorse.client.option [Integer] :retry_limit (3)
-    #   The maximum number of times to retry failed requests.  Only
-    #   ~ 500 level server errors and certain ~ 400 level client errors
-    #   are retried.  Generally, these are throttling errors, data
-    #   checksum errors, networking errors, timeout errors and auth
-    #   errors from expired credentials.
     class RetryErrors < Seahorse::Client::Plugin
 
-      option(:retry_limit, 3)
+      option(:retry_limit,
+        default: 3,
+        doc_type: Integer,
+        docstring: <<-DOCS)
+The maximum number of times to retry failed requests.  Only
+~ 500 level server errors and certain ~ 400 level client errors
+are retried.  Generally, these are throttling errors, data
+checksum errors, networking errors, timeout errors and auth
+errors from expired credentials.
+        DOCS
 
       option(:retry_backoff, lambda { |c| Kernel.sleep(2 ** c.retries * 0.3) })
 

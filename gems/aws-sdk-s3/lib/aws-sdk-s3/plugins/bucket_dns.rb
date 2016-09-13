@@ -4,11 +4,6 @@ module Aws
 
       # Amazon S3 requires DNS style addressing for buckets outside of
       # the classic region when possible.
-      #
-      # @seahorse.client.option [Boolean] :force_path_style (false)
-      #   When set to `true`, the bucket name is always left in the
-      #   request URI and never moved to the host as a sub-domain.
-      #
       class BucketDns < Seahorse::Client::Plugin
 
         # When set to `false` DNS compatible bucket names are moved from
@@ -18,7 +13,13 @@ module Aws
         # When set to `true`, the bucket name is always forced to be part
         # of the request URI path.  This will not work with buckets outside
         # the classic region.
-        option(:force_path_style, false)
+        option(:force_path_style,
+          default: false,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS)
+When set to `true`, the bucket name is always left in the
+request URI and never moved to the host as a sub-domain.
+          DOCS
 
         def add_handlers(handlers, config)
           handlers.add(Handler) unless config.force_path_style

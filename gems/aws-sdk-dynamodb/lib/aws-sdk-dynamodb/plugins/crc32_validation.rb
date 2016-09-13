@@ -1,15 +1,17 @@
 module Aws
   module DynamoDB
     module Plugins
-
-      # @seahorse.client.option [Boolean] :compute_checksums (true)
-      #   When `true`, a CRC32 checksum is computed of every HTTP
-      #   response body and compared against the `X-Amz-Crc32` header.
-      #   If the checksums do not match, the request is re-sent.
-      #   Failures can be retried up to `:retry_limit` times.
       class CRC32Validation < Seahorse::Client::Plugin
 
-        option(:compute_checksums, true)
+        option(:compute_checksums,
+          default: true,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS)
+When `true`, a CRC32 checksum is computed of every HTTP
+response body and compared against the `X-Amz-Crc32` header.
+If the checksums do not match, the request is re-sent.
+Failures can be retried up to `:retry_limit` times.
+          DOCS
 
         def add_handlers(handlers, config)
           if config.compute_checksums

@@ -4,14 +4,16 @@ require 'openssl'
 module Aws
   module S3
     module Plugins
-
-      # @seahorse.client.option [Boolean] :require_https_for_sse_cpk (true)
-      #   When `true`, the endpoint **must** be HTTPS for all operations
-      #   where server-side-encryption is used with customer-provided keys.
-      #   This should only be disabled for local testing.
       class SseCpk < Seahorse::Client::Plugin
 
-        option(:require_https_for_sse_cpk, true)
+        option(:require_https_for_sse_cpk,
+          default: true,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS)
+When `true`, the endpoint **must** be HTTPS for all operations
+where server-side-encryption is used with customer-provided keys.
+This should only be disabled for local testing.
+          DOCS
 
         class Handler < Seahorse::Client::Handler
 

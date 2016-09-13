@@ -19,7 +19,8 @@ module AwsSdkCodeGenerator
       resources: nil,
       examples: nil,
       gem_requires:[],
-      plugins:{},
+      add_plugins:{},
+      remove_plugins:[],
       &block
     )
       @module_names = module_names
@@ -30,7 +31,8 @@ module AwsSdkCodeGenerator
       @resources = resources
       @examples = examples
       @gem_requires = gem_requires
-      @plugins = plugins
+      @add_plugins = add_plugins
+      @remove_plugins = remove_plugins
       @callback = block
     end
 
@@ -116,7 +118,8 @@ module AwsSdkCodeGenerator
         api: @api,
         waiters: @waiters,
         examples: @examples,
-        plugins: @plugins
+        add_plugins: @add_plugins,
+        remove_plugins: @remove_plugins,
       )
       svc_mod.add(klass)
       klass

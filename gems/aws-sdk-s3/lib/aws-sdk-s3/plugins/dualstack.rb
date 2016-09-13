@@ -1,14 +1,16 @@
 module Aws
   module S3
     module Plugins
-
       # @api private
-      # @seahorse.client.option [Boolean] :use_dualstack_endpoint (false)
-      #   When set to `true`, IPv6-compatible bucket endpoints will be used
-      #   for all operations.
       class Dualstack < Seahorse::Client::Plugin
 
-        option(:use_dualstack_endpoint, false)
+        option(:use_dualstack_endpoint,
+          default: false,
+          doc_type: 'Boolean',
+          docstring: <<-DOCS)
+When set to `true`, IPv6-compatible bucket endpoints will be used
+for all operations.
+          DOCS
 
         def add_handlers(handlers, config)
           handlers.add(OptionHandler, step: :initialize)

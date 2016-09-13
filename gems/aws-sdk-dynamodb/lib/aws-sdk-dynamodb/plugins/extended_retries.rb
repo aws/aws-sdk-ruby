@@ -5,7 +5,7 @@ module Aws
 
         option(:retry_limit,
           default: 10,
-          doc_required: false,
+          required: false,
           doc_type: Integer,
           docstring: <<-DOCS)
 The maximum number of times to retry failed requests.  Only

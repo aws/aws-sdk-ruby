@@ -1,12 +1,14 @@
 module Aws
   module Plugins
-
-    # @seahorse.client.option [Boolean] :validate_params (true)
-    #   When `true`, request parameters are validated before
-    #   sending the request.
     class ParamValidator < Seahorse::Client::Plugin
 
-      option(:validate_params, true)
+      option(:validate_params,
+        default: true,
+        doc_type: 'Boolean',
+        docstring: <<-DOCS)
+When `true`, request parameters are validated before
+sending the request.
+      DOCS
 
       def add_handlers(handlers, config)
         if config.validate_params

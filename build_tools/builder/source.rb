@@ -29,7 +29,8 @@ module BuildTools
           options[model_name] = load_model(@service.name, model_name, model_path)
         end
         options[:gem_requires] = @service.dependencies.keys
-        options[:plugins] = @service.plugins
+        options[:add_plugins] = @service.add_plugins
+        options[:remove_plugins] = @service.remove_plugins
         options
       end
 
