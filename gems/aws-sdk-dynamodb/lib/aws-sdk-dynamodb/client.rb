@@ -1,11 +1,27 @@
 # WARNING ABOUT GENERATED CODE
 #
-# This file is generated from a JSON service definition. See the contributing
-# guide for more information:
-#
+# This file is generated. See the contributing for info on making contributions:
 # https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
+
+require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/logging.rb'
+require 'aws-sdk-core/plugins/param_converter.rb'
+require 'aws-sdk-core/plugins/param_validator.rb'
+require 'aws-sdk-core/plugins/user_agent.rb'
+require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
+require 'aws-sdk-core/plugins/retry_errors.rb'
+require 'aws-sdk-core/plugins/global_configuration.rb'
+require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/request_signer.rb'
+require 'aws-sdk-core/plugins/response_paging.rb'
+require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-dynamodb/plugins/extended_retries.rb'
+require 'aws-sdk-dynamodb/plugins/simple_attributes.rb'
+require 'aws-sdk-dynamodb/plugins/crc32_validation.rb'
+
 module Aws
   module DynamoDB
     class Client < Seahorse::Client::Base
@@ -30,6 +46,29 @@ module Aws
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
+      add_plugin(Aws::DynamoDB::Plugins::ExtendedRetries)
+      add_plugin(Aws::DynamoDB::Plugins::SimpleAttributes)
+      add_plugin(Aws::DynamoDB::Plugins::CRC32Validation)
+
+      # @option options [Logger] :logger
+      #   The Logger instance to send log messages to.  If this option
+      #   is not set, logging will be disabled.
+      # @option options [Symbol] :log_level (:info)
+      #   The log level to send messages to the `:logger` at.
+      # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+      #   The log formatter.
+      # @option options [Boolean] :convert_params (true)
+      #   When `true`, an attempt is made to coerce request parameters into
+      #   the required types.
+      # @option options [Integer] :retry_limit (10)
+      #   The maximum number of times to retry failed requests.  Only
+      #   ~ 500 level server errors and certain ~ 400 level client errors
+      #   are retried.  Generally, these are throttling errors, data
+      #   checksum errors, networking errors, timeout errors and auth
+      #   errors from expired credentials.
+      def initialize(**args)
+        super
+      end
 
       # @!group API Operations
 

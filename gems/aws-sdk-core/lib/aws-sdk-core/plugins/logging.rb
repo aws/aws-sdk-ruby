@@ -5,24 +5,27 @@ module Aws
     # your logging device, the log format and the level to log messages at.
     #
     # @see Log::Formatter
-    #
-    # @seahorse.client.option [Logger] :logger (nil) The Logger instance
-    #   to send log messages to.  If this option is not set, logging
-    #   will be disabled.
-    #
-    # @seahorse.client.option [Symbol] :log_level (:info) The log level
-    #   to send messages to the logger at.
-    #
-    # @seahorse.client.option [Logging::LogFormatter] :log_formatter The log
-    #   formatter.  Defaults to {Seahorse::Client::Logging::Formatter.default}.
-    #
     class Logging < Seahorse::Client::Plugin
 
-      option(:logger)
+      option(:logger,
+        doc_type: 'Logger',
+        docstring: <<-DOCS
+The Logger instance to send log messages to.  If this option
+is not set, logging will be disabled.
+        DOCS
+      )
 
-      option(:log_level, :info)
+      option(:log_level,
+        default: :info,
+        doc_type: Symbol,
+        docstring: 'The log level to send messages to the `:logger` at.'
+      )
 
-      option(:log_formatter) do |config|
+      option(:log_formatter,
+        doc_type: 'Aws::Log::Formatter',
+        doc_default: literal('Aws::Log::Formatter.default'),
+        docstring: 'The log formatter.'
+      ) do |config|
         Log::Formatter.default if config.logger
       end
 

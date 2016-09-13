@@ -1,22 +1,17 @@
 # WARNING ABOUT GENERATED CODE
 #
-# This file is generated from a JSON service definition. See the contributing
-# guide for more information:
-#
+# This file is generated. See the contributing for info on making contributions:
 # https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
-require 'aws-sdk-core'
 
+require 'aws-sdk-core'
 require_relative 'aws-sdk-codepipeline/types'
 require_relative 'aws-sdk-codepipeline/client_api'
 require_relative 'aws-sdk-codepipeline/client'
 require_relative 'aws-sdk-codepipeline/errors'
 require_relative 'aws-sdk-codepipeline/waiters'
 require_relative 'aws-sdk-codepipeline/resource'
-
-# customizations for generated code
-require_relative 'aws-sdk-codepipeline/customizations.rb'
 
 module Aws
   # This module provides support for AWS CodePipeline.

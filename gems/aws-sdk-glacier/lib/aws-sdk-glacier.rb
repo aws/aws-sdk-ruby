@@ -1,13 +1,11 @@
 # WARNING ABOUT GENERATED CODE
 #
-# This file is generated from a JSON service definition. See the contributing
-# guide for more information:
-#
+# This file is generated. See the contributing for info on making contributions:
 # https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
-require 'aws-sdk-core'
 
+require 'aws-sdk-core'
 require_relative 'aws-sdk-glacier/types'
 require_relative 'aws-sdk-glacier/client_api'
 require_relative 'aws-sdk-glacier/client'
@@ -20,9 +18,6 @@ require_relative 'aws-sdk-glacier/job'
 require_relative 'aws-sdk-glacier/multipart_upload'
 require_relative 'aws-sdk-glacier/notification'
 require_relative 'aws-sdk-glacier/vault'
-
-# customizations for generated code
-require_relative 'aws-sdk-glacier/customizations.rb'
 
 module Aws
   # This module provides support for Amazon Glacier.

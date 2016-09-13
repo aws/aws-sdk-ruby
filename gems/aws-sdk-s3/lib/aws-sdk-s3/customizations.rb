@@ -12,7 +12,6 @@ require 'aws-sdk-s3/presigned_post'
 require 'aws-sdk-s3/presigner'
 
 # customizations to generated classes
-require 'aws-sdk-s3/customizations/client'
 require 'aws-sdk-s3/customizations/bucket'
 require 'aws-sdk-s3/customizations/object'
 require 'aws-sdk-s3/customizations/object_summary'

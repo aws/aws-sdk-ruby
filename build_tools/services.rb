@@ -168,9 +168,9 @@ module BuildTools
         end
 
         def plugin_path(svc, plugin_name)
-          path = plugin_name.split('::').last
-          path = AwsSdkCodeGenerator::Underscore.underscore(path) + '.rb'
-          path = "gems/#{svc.gem_name}/lib/#{svc.gem_name}/plugins/#{path}"
+          filename = plugin_name.split('::').last
+          filename = AwsSdkCodeGenerator::Underscore.underscore(filename)
+          "gems/#{svc.gem_name}/lib/#{svc.gem_name}/plugins/#{filename}.rb"
         end
 
         def default_plugins

@@ -1,11 +1,37 @@
 # WARNING ABOUT GENERATED CODE
 #
-# This file is generated from a JSON service definition. See the contributing
-# guide for more information:
-#
+# This file is generated. See the contributing for info on making contributions:
 # https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
+
+require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/logging.rb'
+require 'aws-sdk-core/plugins/param_converter.rb'
+require 'aws-sdk-core/plugins/param_validator.rb'
+require 'aws-sdk-core/plugins/user_agent.rb'
+require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
+require 'aws-sdk-core/plugins/retry_errors.rb'
+require 'aws-sdk-core/plugins/global_configuration.rb'
+require 'aws-sdk-core/plugins/regional_endpoint.rb'
+require 'aws-sdk-core/plugins/request_signer.rb'
+require 'aws-sdk-core/plugins/response_paging.rb'
+require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
+require 'aws-sdk-s3/plugins/accelerate.rb'
+require 'aws-sdk-s3/plugins/dualstack.rb'
+require 'aws-sdk-s3/plugins/bucket_dns.rb'
+require 'aws-sdk-s3/plugins/expect_100_continue.rb'
+require 'aws-sdk-s3/plugins/http_200_errors.rb'
+require 'aws-sdk-s3/plugins/get_bucket_location_fix.rb'
+require 'aws-sdk-s3/plugins/location_constraint.rb'
+require 'aws-sdk-s3/plugins/md5s.rb'
+require 'aws-sdk-s3/plugins/redirects.rb'
+require 'aws-sdk-s3/plugins/sse_cpk.rb'
+require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
+require 'aws-sdk-s3/plugins/request_signer.rb'
+require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
+
 module Aws
   module S3
     class Client < Seahorse::Client::Base
@@ -30,6 +56,33 @@ module Aws
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
       add_plugin(Aws::Plugins::Protocols::RestXml)
+      add_plugin(Aws::S3::Plugins::Accelerate)
+      add_plugin(Aws::S3::Plugins::Dualstack)
+      add_plugin(Aws::S3::Plugins::BucketDns)
+      add_plugin(Aws::S3::Plugins::Expect100Continue)
+      add_plugin(Aws::S3::Plugins::Http200Errors)
+      add_plugin(Aws::S3::Plugins::GetBucketLocationFix)
+      add_plugin(Aws::S3::Plugins::LocationConstraint)
+      add_plugin(Aws::S3::Plugins::Md5s)
+      add_plugin(Aws::S3::Plugins::Redirects)
+      add_plugin(Aws::S3::Plugins::SseCpk)
+      add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
+      add_plugin(Aws::S3::Plugins::RequestSigner)
+      add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
+
+      # @option options [Logger] :logger
+      #   The Logger instance to send log messages to.  If this option
+      #   is not set, logging will be disabled.
+      # @option options [Symbol] :log_level (:info)
+      #   The log level to send messages to the `:logger` at.
+      # @option options [Aws::Log::Formatter] :log_formatter (Aws::Log::Formatter.default)
+      #   The log formatter.
+      # @option options [Boolean] :convert_params (true)
+      #   When `true`, an attempt is made to coerce request parameters into
+      #   the required types.
+      def initialize(**args)
+        super
+      end
 
       # @!group API Operations
 

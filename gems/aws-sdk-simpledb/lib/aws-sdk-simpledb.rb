@@ -1,22 +1,17 @@
 # WARNING ABOUT GENERATED CODE
 #
-# This file is generated from a JSON service definition. See the contributing
-# guide for more information:
-#
+# This file is generated. See the contributing for info on making contributions:
 # https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
-require 'aws-sdk-core'
 
+require 'aws-sdk-core'
 require_relative 'aws-sdk-simpledb/types'
 require_relative 'aws-sdk-simpledb/client_api'
 require_relative 'aws-sdk-simpledb/client'
 require_relative 'aws-sdk-simpledb/errors'
 require_relative 'aws-sdk-simpledb/waiters'
 require_relative 'aws-sdk-simpledb/resource'
-
-# customizations for generated code
-require_relative 'aws-sdk-simpledb/customizations.rb'
 
 module Aws
   # This module provides support for Amazon SimpleDB.

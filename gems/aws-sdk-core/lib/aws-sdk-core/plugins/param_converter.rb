@@ -1,12 +1,15 @@
 module Aws
   module Plugins
-
-    # @seahorse.client.option [Boolean] :convert_params (true)
-    #   When `true`, an attempt is made to coerce request parameters
-    #   into the required types.
     class ParamConverter < Seahorse::Client::Plugin
 
-      option(:convert_params, true)
+      option(:convert_params,
+         default: true,
+         doc_type: 'Boolean',
+         docstring: <<-DOCS
+When `true`, an attempt is made to coerce request parameters into
+the required types.
+         DOCS
+      )
 
       def add_handlers(handlers, config)
         handlers.add(Handler, step: :initialize) if config.convert_params

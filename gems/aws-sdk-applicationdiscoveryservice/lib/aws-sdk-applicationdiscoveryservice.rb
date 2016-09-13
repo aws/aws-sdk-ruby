@@ -1,22 +1,17 @@
 # WARNING ABOUT GENERATED CODE
 #
-# This file is generated from a JSON service definition. See the contributing
-# guide for more information:
-#
+# This file is generated. See the contributing for info on making contributions:
 # https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
-require 'aws-sdk-core'
 
+require 'aws-sdk-core'
 require_relative 'aws-sdk-applicationdiscoveryservice/types'
 require_relative 'aws-sdk-applicationdiscoveryservice/client_api'
 require_relative 'aws-sdk-applicationdiscoveryservice/client'
 require_relative 'aws-sdk-applicationdiscoveryservice/errors'
 require_relative 'aws-sdk-applicationdiscoveryservice/waiters'
 require_relative 'aws-sdk-applicationdiscoveryservice/resource'
-
-# customizations for generated code
-require_relative 'aws-sdk-applicationdiscoveryservice/customizations.rb'
 
 module Aws
   # This module provides support for AWS Application Discovery Service.

@@ -1,14 +1,6 @@
-require 'aws-sdk-dynamodb/plugins/extended_retries'
-require 'aws-sdk-dynamodb/plugins/simple_attributes'
-require 'aws-sdk-dynamodb/plugins/crc32_validation'
-
 module Aws
   module DynamoDB
     class Client
-
-      add_plugin(Plugins::ExtendedRetries)
-      add_plugin(Plugins::SimpleAttributes)
-      add_plugin(Plugins::CRC32Validation)
 
       def stub_data(operation_name, data = {})
         if config.simple_attributes

@@ -1,22 +1,17 @@
 # WARNING ABOUT GENERATED CODE
 #
-# This file is generated from a JSON service definition. See the contributing
-# guide for more information:
-#
+# This file is generated. See the contributing for info on making contributions:
 # https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
 #
 # WARNING ABOUT GENERATED CODE
-require 'aws-sdk-core'
 
+require 'aws-sdk-core'
 require_relative 'aws-sdk-cognitoidentity/types'
 require_relative 'aws-sdk-cognitoidentity/client_api'
 require_relative 'aws-sdk-cognitoidentity/client'
 require_relative 'aws-sdk-cognitoidentity/errors'
 require_relative 'aws-sdk-cognitoidentity/waiters'
 require_relative 'aws-sdk-cognitoidentity/resource'
-
-# customizations for generated code
-require_relative 'aws-sdk-cognitoidentity/customizations.rb'
 
 module Aws
   # This module provides support for Amazon Cognito Identity.

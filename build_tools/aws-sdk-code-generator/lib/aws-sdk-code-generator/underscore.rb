@@ -29,6 +29,7 @@ module AwsSdkCodeGenerator
       'ElastiCache' => 'elasticache',
       'iSCSI' => 'iscsi',
       'ACLs' => 'acls',
+      'Md5s' => 'md5s',
       #'SSEKMS' => 'sse_kms',
     })
 
