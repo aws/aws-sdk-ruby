@@ -5,7 +5,10 @@
   },
   "APIGateway": {
     "models": "apigateway/2015-07-09",
-    "endpoint": "apigateway"
+    "endpoint": "apigateway",
+    "addPlugins": [
+      "Aws::APIGateway::Plugins::ApplyContentTypeHeader"
+    ]
   },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
@@ -36,7 +39,13 @@
     "endpoint": "cloudsearch"
   },
   "CloudSearchDomain": {
-    "models": "cloudsearchdomain/2013-01-01"
+    "models": "cloudsearchdomain/2013-01-01",
+    "addPlugins":[
+      "Aws::CloudSearchDomain::Plugins::ConditionalSigning"
+    ],
+    "removePlugins": [
+      "Aws::Plugins::RegionalEndpoint"
+    ]
   },
   "CloudTrail": {
     "models": "cloudtrail/2013-11-01",
@@ -104,7 +113,12 @@
   },
   "DynamoDB": {
     "models": "dynamodb/2012-08-10",
-    "endpoint": "dynamodb"
+    "endpoint": "dynamodb",
+    "addPlugins": [
+      "Aws::DynamoDB::Plugins::ExtendedRetries",
+      "Aws::DynamoDB::Plugins::SimpleAttributes",
+      "Aws::DynamoDB::Plugins::CRC32Validation"
+    ]
   },
   "DynamoDBStreams": {
     "models": "streams.dynamodb/2012-08-10",
@@ -112,7 +126,11 @@
   },
   "EC2": {
     "models": "ec2/2016-04-01",
-    "endpoint": "ec2"
+    "endpoint": "ec2",
+    "addPlugins": [
+      "Aws::EC2::Plugins::CopyEncryptedSnapshot",
+      "Aws::EC2::Plugins::RegionValidation"
+    ]
   },
   "ECR": {
     "models": "ecr/2015-09-21",
@@ -164,7 +182,12 @@
   },
   "Glacier": {
     "models": "glacier/2012-06-01",
-    "endpoint": "glacier"
+    "endpoint": "glacier",
+    "addPlugins": [
+      "Aws::Glacier::Plugins::AccountId",
+      "Aws::Glacier::Plugins::ApiVersion",
+      "Aws::Glacier::Plugins::Checksums"
+    ]
   },
   "IAM": {
     "models": "iam/2010-05-08",
@@ -208,7 +231,10 @@
   },
   "MachineLearning": {
     "models": "machinelearning/2014-12-12",
-    "endpoint": "machinelearning"
+    "endpoint": "machinelearning",
+    "addPlugins": [
+      "Aws::MachineLearning::Plugins::PredictEndpoint"
+    ]
   },
   "MarketplaceCommerceAnalytics": {
     "models": "marketplacecommerceanalytics/2015-07-01",
@@ -232,7 +258,10 @@
   },
   "Route53": {
     "models": "route53/2013-04-01",
-    "endpoint": "route53"
+    "endpoint": "route53",
+    "addPlugins": [
+      "Aws::Route53::Plugins::IdFix"
+    ]
   },
   "Route53Domains": {
     "models": "route53domains/2014-05-15",
@@ -243,7 +272,22 @@
     "endpoint": "s3",
     "dependencies": {
       "aws-sdk-kms": "~> 1.0"
-    }
+    },
+    "addPlugins": [
+      "Aws::S3::Plugins::Accelerate",
+      "Aws::S3::Plugins::Dualstack",
+      "Aws::S3::Plugins::BucketDns",
+      "Aws::S3::Plugins::Expect100Continue",
+      "Aws::S3::Plugins::Http200Errors",
+      "Aws::S3::Plugins::GetBucketLocationFix",
+      "Aws::S3::Plugins::LocationConstraint",
+      "Aws::S3::Plugins::Md5s",
+      "Aws::S3::Plugins::Redirects",
+      "Aws::S3::Plugins::SseCpk",
+      "Aws::S3::Plugins::UrlEncodedKeys",
+      "Aws::S3::Plugins::RequestSigner",
+      "Aws::S3::Plugins::BucketNameRestrictions"
+    ]
   },
   "ServiceCatalog": {
     "models": "servicecatalog/2015-12-10",
@@ -267,7 +311,11 @@
   },
   "SQS": {
     "models": "sqs/2012-11-05",
-    "endpoint": "sqs"
+    "endpoint": "sqs",
+    "addPlugins": [
+      "Aws::SQS::Plugins::QueueUrls",
+      "Aws::SQS::Plugins::Md5s"
+    ]
   },
   "SSM": {
     "models": "ssm/2014-11-06",
@@ -288,7 +336,10 @@
   },
   "SWF": {
     "models": "swf/2012-01-25",
-    "endpoint": "swf"
+    "endpoint": "swf",
+    "addPlugins": [
+      "Aws::SWF::Plugins::ReadTimeouts"
+    ]
   },
   "WAF": {
     "models": "waf/2015-08-24",

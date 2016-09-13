@@ -19,6 +19,7 @@ module BuildTools
       def gemspec
         <<-GEMSPEC
 #{GENERATED_SRC_WARNING}
+
 Gem::Specification.new do |spec|
 
   spec.name          = '#{gem_name}'

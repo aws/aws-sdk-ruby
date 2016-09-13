@@ -5,10 +5,13 @@ task 'build' do
   end
 end
 
+desc 'Build one service gem, eg `build:dynamodb`'
+task 'build:*'
+
 # Build a single service gem; invoke like `rake build:s3`
 rule /^build:\w+$/ do |task|
   identifier = task.name.split(':').last
-  BuildTools::Services.service(identifier).build
+  BuildTools::Services[identifier].build
 end
 
 # Aws::STS is generated directly into the `aws-sdk-core` gem.

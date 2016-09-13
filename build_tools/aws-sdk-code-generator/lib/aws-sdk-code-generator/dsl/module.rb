@@ -4,11 +4,11 @@ module AwsSdkCodeGenerator
 
       include Dsl::CodeObject
 
-      def initialize(name, root:nil, &block)
+      def initialize(name, parent:nil, &block)
         @name = name
         @code_objects = []
         @access = :public
-        @root = root
+        @parent = parent
         @docstring = Dsl::Docstring.new(nil)
         yield(self) if block
       end
@@ -27,7 +27,7 @@ module AwsSdkCodeGenerator
       end
 
       def require(path)
-        @root.require(path)
+        root.require(path)
       end
 
       def docstring(docstring = nil)
@@ -37,7 +37,7 @@ module AwsSdkCodeGenerator
       end
 
       def require_relative(path)
-        @root.require_relative(path)
+        root.require_relative(path)
       end
 
       def constructor(**options, &block)

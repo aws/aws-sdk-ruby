@@ -25,10 +25,12 @@ module BuildTools
     # @return [void]
     def write(data)
       log(File.exists?(path) ? REPLACE : NEW)
-      if ruby_file?
-        _write(GENERATED_SRC_WARNING + data)
-      else
-        _write(data)
+      open_file do |file|
+        if ruby_file?
+          file.write(GENERATED_SRC_WARNING)
+          file.write("\n\n")
+        end
+        file.write(data)
       end
     end
 
@@ -50,10 +52,10 @@ module BuildTools
       @logger.info("#{mode} #{path}\n")
     end
 
-    def _write(data)
+    def open_file(&block)
       FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'wb') do |file|
-        file.write(data)
+        yield(file)
       end
     end
 

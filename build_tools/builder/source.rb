@@ -5,15 +5,16 @@ module BuildTools
       def initialize(service, &block)
         @service = service
         block ||= lambda do |svc_module|
-          svc_module.top("\n# customizations for generated code")
-          svc_module.require_relative("#{gem_name}/customizations.rb")
+          if File.exists?(customizations_path)
+            svc_module.top("\n# customizations for generated code")
+            svc_module.require_relative("#{gem_name}/customizations.rb")
+          end
           svc_module.code("GEM_VERSION = '#{gem_version}'")
         end
         @generator = AwsSdkCodeGenerator::Generator.new(generator_options, &block)
       end
 
       def build
-        FileWriter.new(customizations_path).bootstrap('')
         @generator.generate_src_files(prefix: @service.gem_name).each do |path, contents|
           FileWriter.new("#{@service.gem_dir}/lib/#{path}").write(contents)
         end
@@ -28,6 +29,7 @@ module BuildTools
           options[model_name] = load_model(@service.name, model_name, model_path)
         end
         options[:gem_requires] = @service.dependencies.keys
+        options[:plugins] = @service.plugins
         options
       end
 

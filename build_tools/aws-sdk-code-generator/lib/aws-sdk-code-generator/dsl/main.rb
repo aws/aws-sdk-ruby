@@ -4,12 +4,22 @@ module AwsSdkCodeGenerator
 
       include Dsl::CodeObject
 
-      def initialize(root:nil, &block)
+      def initialize(parent:nil, &block)
         @comments = Docstring.new(nil)
         @top_content = []
         @code_objects = []
-        @root = self
+        @parent = parent
         yield(self) if block
+      end
+
+      # @return [nil, CodeObject]
+      attr_accessor :parent
+
+      # @return [nil, CodeObject]
+      def root
+        root = self
+        root = root.parent while root && root.parent
+        root
       end
 
       def add(*code_objects)
@@ -42,7 +52,7 @@ module AwsSdkCodeGenerator
 
       # Allows inserting top-of document content.
       def top(string)
-        @root.instance_variable_get("@top_content") << string
+        root.instance_variable_get("@top_content") << string
       end
 
       def require_relative(path)
@@ -56,14 +66,14 @@ module AwsSdkCodeGenerator
       end
 
       def module(name, &block)
-        m = Dsl::Module.new(name, root: @root)
+        m = Dsl::Module.new(name, parent: self)
         yield(m) if block
         add(m)
         m
       end
 
       def class(name, **options, &block)
-        c = Dsl::Class.new(name, root: @root, **options)
+        c = Dsl::Class.new(name, parent: self, **options)
         yield(c) if block
         add(c)
         c

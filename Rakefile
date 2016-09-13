@@ -8,7 +8,6 @@ end
 
 require 'build_tools'
 require 'aws-sdk-code-generator'
-require 'aws-sdk'
 
 Dir.glob('**/*.rake').each do |task_file|
   load task_file

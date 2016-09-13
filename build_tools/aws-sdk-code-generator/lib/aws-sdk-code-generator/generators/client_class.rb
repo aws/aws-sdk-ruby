@@ -1,4 +1,6 @@
 require 'set'
+require 'pp'
+require 'seahorse/client/plugin'
 
 module AwsSdkCodeGenerator
   module Generators
@@ -6,42 +8,18 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      # @api private
-      DEFAULT_PLUGINS = [
-        'Seahorse::Client::Plugins::ContentLength',
-        'Aws::Plugins::Logging',
-        'Aws::Plugins::ParamConverter',
-        'Aws::Plugins::ParamValidator',
-        'Aws::Plugins::UserAgent',
-        'Aws::Plugins::HelpfulSocketErrors',
-        'Aws::Plugins::RetryErrors',
-        'Aws::Plugins::GlobalConfiguration',
-        'Aws::Plugins::RegionalEndpoint',
-        'Aws::Plugins::RequestSigner',
-        'Aws::Plugins::ResponsePaging',
-        'Aws::Plugins::StubResponses',
-      ]
-
-      # @api private
-      PROTOCOL_PLUGINS = Hash.new(DEFAULT_PLUGINS).merge({
-        'json'      => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::JsonRpc),
-        'rest-json' => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::RestJson),
-        'rest-xml'  => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::RestXml),
-        'query'     => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::Query),
-        'ec2'       => DEFAULT_PLUGINS + %w(Aws::Plugins::Protocols::EC2),
-        nil         => DEFAULT_PLUGINS,
-      })
-
-      def initialize(identifier:, api:, waiters:, examples:)
+      def initialize(parent:, identifier:, api:, waiters:, examples:, plugins:)
         @identifier = identifier
         @api = api
         @waiters = waiters
         @examples = examples
-        super('Client', extends: 'Seahorse::Client::Base')
+        @plugins = plugins
+        super('Client', extends: 'Seahorse::Client::Base', parent: parent)
         apply_modules(self)
         apply_identifier(self)
         apply_api(self)
         apply_plugins(self)
+        apply_initialize_method(self)
         apply_operations(self)
         apply_waiter_methods(self)
         eigenclass do |eigenclass|
@@ -54,6 +32,23 @@ module AwsSdkCodeGenerator
       end
 
       private
+
+      def client_plugins
+        @client_plugins ||= begin
+          @plugins.map do |class_name, path|
+            path = "./#{path}" unless path[0] == '/'
+            Kernel.require(path)
+            ClientPlugin.new(
+              class_name: class_name,
+              options: Kernel.const_get(class_name).options,
+              path: path)
+          end
+        end
+      end
+
+      def documented_plugin_options
+        client_plugins.map(&:options).flatten.select(&:documented?)
+      end
 
       def apply_modules(klass)
         klass.include('Aws::ClientStubs')
@@ -71,12 +66,27 @@ module AwsSdkCodeGenerator
       end
 
       def apply_plugins(klass)
-        protocol = (@api['metadata'] || {})['protocol']
-        plugins = PROTOCOL_PLUGINS[protocol]
         klass.code do |c|
-          plugins.each do |plugin|
-            c << "add_plugin(#{plugin})"
+          client_plugins.each do |plugin|
+            klass.top("require '#{plugin.require_path}'")
+            c << "add_plugin(#{plugin.class_name})"
           end
+        end
+      end
+
+      def apply_initialize_method(klass)
+        klass.method(:initialize) do |m|
+          documented_plugin_options.each do |option|
+            m.option(
+              name: option.name,
+              type: option.doc_type,
+              required: option.doc_required,
+              default: option.doc_default,
+              docstring: option.docstring
+            )
+          end
+          m.param('**args')
+          m.code('super')
         end
       end
 
@@ -155,6 +165,26 @@ end
         klass.add(Dsl::Method.new('waiters', access: :private) do |m|
           m.code(waiters)
         end)
+
+      end
+
+      # @api private
+      class ClientPlugin
+
+        def initialize(class_name:, options:, path:)
+          @class_name = class_name
+          @options = options
+          @require_path = path.split('/lib/').last
+        end
+
+        # @return [String]
+        attr_reader :class_name
+
+        # @return [Array<Seahorse::Client::Plugin::PluginOption>]
+        attr_reader :options
+
+        # @return [String]
+        attr_reader :require_path
 
       end
     end

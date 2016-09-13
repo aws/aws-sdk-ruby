@@ -19,6 +19,7 @@ module AwsSdkCodeGenerator
       resources: nil,
       examples: nil,
       gem_requires:[],
+      plugins:{},
       &block
     )
       @module_names = module_names
@@ -29,27 +30,32 @@ module AwsSdkCodeGenerator
       @resources = resources
       @examples = examples
       @gem_requires = gem_requires
+      @plugins = plugins
       @callback = block
     end
 
     def generate_src
-      root_mod, svc_mod = build_modules
-      @gem_requires.each { |gem_name| root_mod.require(gem_name) }
-      root_mod.top(:newline)
+      svc_mod = new_svc_module
+      @gem_requires.each { |gem_name| svc_mod.require(gem_name) }
       svc_mod.docstring(service_docstring)
       each_module do |mod|
         svc_mod.add(mod)
       end
       @callback.call(svc_mod) if @callback
-      root_mod.to_s
+      svc_mod.root.to_s
     end
 
     def generate_src_files(prefix: nil)
       prefix ||= @module_names.map { |n| underscore(n) }.join('/')
       Enumerator.new do |y|
         y.yield("#{prefix}.rb", service_module(prefix))
-        each_module do |mod|
-          y.yield(File.join(prefix, underscore(mod.name) + '.rb'), wrap(mod))
+        each_module do |mod, is_client|
+          filename = File.join(prefix, underscore(mod.name) + '.rb')
+          if is_client
+            y.yield(filename, mod.root.to_s)
+          else
+            y.yield(filename, wrap(mod))
+          end
         end
       end
     end
@@ -59,7 +65,7 @@ module AwsSdkCodeGenerator
     def each_module(&block)
       yield(types_module)
       yield(client_api_module)
-      yield(client_class)
+      yield(client_class, true)
       yield(errors_module)
       yield(waiters_module)
       yield(root_resource_class)
@@ -70,18 +76,16 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def build_modules
-      root_mod = Dsl::Main.new
-      svc_mod = @module_names.inject(root_mod) do |mod, module_name|
+    def new_svc_module
+      @module_names.inject(Dsl::Main.new) do |mod, module_name|
         mod.module(module_name)
       end
-      [root_mod, svc_mod]
     end
 
     def wrap(mod)
-      root_mod, svc_mod = build_modules
+      svc_mod = new_svc_module
       svc_mod.add(mod)
-      root_mod.to_s
+      svc_mod.root.to_s
     end
 
     def service_module(autoload_prefix)
@@ -89,13 +93,12 @@ module AwsSdkCodeGenerator
         prefix: autoload_prefix,
         resources: @resources
       )
-      root_mod, svc_mod = build_modules
-      @gem_requires.each { |gem_name| root_mod.require(gem_name) }
-      root_mod.top(:newline)
+      svc_mod = new_svc_module
+      @gem_requires.each { |gem_name| svc_mod.require(gem_name) }
       svc_mod.docstring(service_docstring)
       autoloads.apply(svc_mod)
       @callback.call(svc_mod) if @callback
-      root_mod.to_s
+      svc_mod.root.to_s
     end
 
     def types_module
@@ -106,13 +109,17 @@ module AwsSdkCodeGenerator
       Generators::ClientApiModule.new(api: @api, paginators:@paginators)
     end
 
-    def client_class
-      Generators::ClientClass.new(
+    def client_class(svc_mod = new_svc_module)
+      klass = Generators::ClientClass.new(
+        parent: svc_mod,
         identifier: @module_names.last.downcase,
         api: @api,
         waiters: @waiters,
-        examples: @examples
+        examples: @examples,
+        plugins: @plugins
       )
+      svc_mod.add(klass)
+      klass
     end
 
     def errors_module
