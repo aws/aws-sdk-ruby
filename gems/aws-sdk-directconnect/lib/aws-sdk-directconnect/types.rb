@@ -21,58 +21,55 @@ module Aws
       #         interconnect_id: "InterconnectId", # required
       #         vlan: 1, # required
       #       }
+      # @!attribute [rw] bandwidth
+      #   Bandwidth of the connection.
+      #
+      #   Example: \"*500Mbps*\"
+      #
+      #   Default: None
+      #
+      #   Values: 50M, 100M, 200M, 300M, 400M, or 500M
+      #   @return [String]
+      #
+      # @!attribute [rw] connection_name
+      #   Name of the provisioned connection.
+      #
+      #   Example: \"*500M Connection to AWS*\"
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] owner_account
+      #   Numeric account Id of the customer for whom the connection will be
+      #   provisioned.
+      #
+      #   Example: 123443215678
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] interconnect_id
+      #   ID of the interconnect on which the connection will be provisioned.
+      #
+      #   Example: dxcon-456abc78
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] vlan
+      #   The dedicated VLAN provisioned to the connection.
+      #
+      #   Example: 101
+      #
+      #   Default: None
+      #   @return [Integer]
       class AllocateConnectionOnInterconnectRequest < Struct.new(
         :bandwidth,
         :connection_name,
         :owner_account,
         :interconnect_id,
         :vlan)
-
         include Aws::Structure
-
-        # @!attribute [rw] bandwidth
-        #   Bandwidth of the connection.
-        #
-        #   Example: \"*500Mbps*\"
-        #
-        #   Default: None
-        #
-        #   Values: 50M, 100M, 200M, 300M, 400M, or 500M
-        #   @return [String]
-
-        # @!attribute [rw] connection_name
-        #   Name of the provisioned connection.
-        #
-        #   Example: \"*500M Connection to AWS*\"
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] owner_account
-        #   Numeric account Id of the customer for whom the connection will be
-        #   provisioned.
-        #
-        #   Example: 123443215678
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] interconnect_id
-        #   ID of the interconnect on which the connection will be provisioned.
-        #
-        #   Example: dxcon-456abc78
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] vlan
-        #   The dedicated VLAN provisioned to the connection.
-        #
-        #   Example: 101
-        #
-        #   Default: None
-        #   @return [Integer]
-
       end
 
       # Container for the parameters to the AllocatePrivateVirtualInterface
@@ -92,33 +89,30 @@ module Aws
       #           customer_address: "CustomerAddress",
       #         },
       #       }
+      # @!attribute [rw] connection_id
+      #   The connection ID on which the private virtual interface is
+      #   provisioned.
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] owner_account
+      #   The AWS account that will own the new private virtual interface.
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] new_private_virtual_interface_allocation
+      #   Detailed information for the private virtual interface to be
+      #   provisioned.
+      #
+      #   Default: None
+      #   @return [Types::NewPrivateVirtualInterfaceAllocation]
       class AllocatePrivateVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :owner_account,
         :new_private_virtual_interface_allocation)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   The connection ID on which the private virtual interface is
-        #   provisioned.
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] owner_account
-        #   The AWS account that will own the new private virtual interface.
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] new_private_virtual_interface_allocation
-        #   Detailed information for the private virtual interface to be
-        #   provisioned.
-        #
-        #   Default: None
-        #   @return [Types::NewPrivateVirtualInterfaceAllocation]
-
       end
 
       # Container for the parameters to the AllocatePublicVirtualInterface
@@ -143,33 +137,30 @@ module Aws
       #           ],
       #         },
       #       }
+      # @!attribute [rw] connection_id
+      #   The connection ID on which the public virtual interface is
+      #   provisioned.
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] owner_account
+      #   The AWS account that will own the new public virtual interface.
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] new_public_virtual_interface_allocation
+      #   Detailed information for the public virtual interface to be
+      #   provisioned.
+      #
+      #   Default: None
+      #   @return [Types::NewPublicVirtualInterfaceAllocation]
       class AllocatePublicVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :owner_account,
         :new_public_virtual_interface_allocation)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   The connection ID on which the public virtual interface is
-        #   provisioned.
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] owner_account
-        #   The AWS account that will own the new public virtual interface.
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] new_public_virtual_interface_allocation
-        #   Detailed information for the public virtual interface to be
-        #   provisioned.
-        #
-        #   Default: None
-        #   @return [Types::NewPublicVirtualInterfaceAllocation]
-
       end
 
       # Container for the parameters to the ConfirmConnection operation.
@@ -179,55 +170,49 @@ module Aws
       #       {
       #         connection_id: "ConnectionId", # required
       #       }
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
       class ConfirmConnectionRequest < Struct.new(
         :connection_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # The response received when ConfirmConnection is called.
+      # @!attribute [rw] connection_state
+      #   State of the connection.
+      #
+      #   * **Ordering**\: The initial state of a hosted connection
+      #     provisioned on an interconnect. The connection stays in the
+      #     ordering state until the owner of the hosted connection confirms
+      #     or declines the connection order.
+      #
+      #   * **Requested**\: The initial state of a standard connection. The
+      #     connection stays in the requested state until the Letter of
+      #     Authorization (LOA) is sent to the customer.
+      #
+      #   * **Pending**\: The connection has been approved, and is being
+      #     initialized.
+      #
+      #   * **Available**\: The network link is up, and the connection is
+      #     ready for use.
+      #
+      #   * **Down**\: The network link is down.
+      #
+      #   * **Deleting**\: The connection is in the process of being deleted.
+      #
+      #   * **Deleted**\: The connection has been deleted.
+      #
+      #   * **Rejected**\: A hosted connection in the \'Ordering\' state will
+      #     enter the \'Rejected\' state if it is deleted by the end customer.
+      #   @return [String]
       class ConfirmConnectionResponse < Struct.new(
         :connection_state)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_state
-        #   State of the connection.
-        #
-        #   * **Ordering**\: The initial state of a hosted connection
-        #     provisioned on an interconnect. The connection stays in the
-        #     ordering state until the owner of the hosted connection confirms
-        #     or declines the connection order.
-        #
-        #   * **Requested**\: The initial state of a standard connection. The
-        #     connection stays in the requested state until the Letter of
-        #     Authorization (LOA) is sent to the customer.
-        #
-        #   * **Pending**\: The connection has been approved, and is being
-        #     initialized.
-        #
-        #   * **Available**\: The network link is up, and the connection is
-        #     ready for use.
-        #
-        #   * **Down**\: The network link is down.
-        #
-        #   * **Deleting**\: The connection is in the process of being deleted.
-        #
-        #   * **Deleted**\: The connection has been deleted.
-        #
-        #   * **Rejected**\: A hosted connection in the \'Ordering\' state will
-        #     enter the \'Rejected\' state if it is deleted by the end customer.
-        #   @return [String]
-
       end
 
       # Container for the parameters to the ConfirmPrivateVirtualInterface
@@ -239,76 +224,70 @@ module Aws
       #         virtual_interface_id: "VirtualInterfaceId", # required
       #         virtual_gateway_id: "VirtualGatewayId", # required
       #       }
+      # @!attribute [rw] virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_gateway_id
+      #   ID of the virtual private gateway that will be attached to the
+      #   virtual interface.
+      #
+      #   A virtual private gateway can be managed via the Amazon Virtual
+      #   Private Cloud (VPC) console or the [EC2 CreateVpnGateway][1] action.
+      #
+      #   Default: None
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
+      #   @return [String]
       class ConfirmPrivateVirtualInterfaceRequest < Struct.new(
         :virtual_interface_id,
         :virtual_gateway_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_id
-        #   ID of the virtual interface.
-        #
-        #   Example: dxvif-123dfg56
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] virtual_gateway_id
-        #   ID of the virtual private gateway that will be attached to the
-        #   virtual interface.
-        #
-        #   A virtual private gateway can be managed via the Amazon Virtual
-        #   Private Cloud (VPC) console or the [EC2 CreateVpnGateway][1] action.
-        #
-        #   Default: None
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
-        #   @return [String]
-
       end
 
       # The response received when ConfirmPrivateVirtualInterface is called.
+      # @!attribute [rw] virtual_interface_state
+      #   State of the virtual interface.
+      #
+      #   * **Confirming**\: The creation of the virtual interface is pending
+      #     confirmation from the virtual interface owner. If the owner of the
+      #     virtual interface is different from the owner of the connection on
+      #     which it is provisioned, then the virtual interface will remain in
+      #     this state until it is confirmed by the virtual interface owner.
+      #
+      #   * **Verifying**\: This state only applies to public virtual
+      #     interfaces. Each public virtual interface needs validation before
+      #     the virtual interface can be created.
+      #
+      #   * **Pending**\: A virtual interface is in this state from the time
+      #     that it is created until the virtual interface is ready to forward
+      #     traffic.
+      #
+      #   * **Available**\: A virtual interface that is able to forward
+      #     traffic.
+      #
+      #   * **Down**\: A virtual interface that is BGP down.
+      #
+      #   * **Deleting**\: A virtual interface is in this state immediately
+      #     after calling *DeleteVirtualInterface* until it can no longer
+      #     forward traffic.
+      #
+      #   * **Deleted**\: A virtual interface that cannot forward traffic.
+      #
+      #   * **Rejected**\: The virtual interface owner has declined creation
+      #     of the virtual interface. If a virtual interface in the
+      #     \'Confirming\' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the \'Rejected\' state.
+      #   @return [String]
       class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_state
-        #   State of the virtual interface.
-        #
-        #   * **Confirming**\: The creation of the virtual interface is pending
-        #     confirmation from the virtual interface owner. If the owner of the
-        #     virtual interface is different from the owner of the connection on
-        #     which it is provisioned, then the virtual interface will remain in
-        #     this state until it is confirmed by the virtual interface owner.
-        #
-        #   * **Verifying**\: This state only applies to public virtual
-        #     interfaces. Each public virtual interface needs validation before
-        #     the virtual interface can be created.
-        #
-        #   * **Pending**\: A virtual interface is in this state from the time
-        #     that it is created until the virtual interface is ready to forward
-        #     traffic.
-        #
-        #   * **Available**\: A virtual interface that is able to forward
-        #     traffic.
-        #
-        #   * **Down**\: A virtual interface that is BGP down.
-        #
-        #   * **Deleting**\: A virtual interface is in this state immediately
-        #     after calling *DeleteVirtualInterface* until it can no longer
-        #     forward traffic.
-        #
-        #   * **Deleted**\: A virtual interface that cannot forward traffic.
-        #
-        #   * **Rejected**\: The virtual interface owner has declined creation
-        #     of the virtual interface. If a virtual interface in the
-        #     \'Confirming\' state is deleted by the virtual interface owner,
-        #     the virtual interface will enter the \'Rejected\' state.
-        #   @return [String]
-
       end
 
       # Container for the parameters to the ConfirmPublicVirtualInterface
@@ -319,65 +298,147 @@ module Aws
       #       {
       #         virtual_interface_id: "VirtualInterfaceId", # required
       #       }
+      # @!attribute [rw] virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      #   @return [String]
       class ConfirmPublicVirtualInterfaceRequest < Struct.new(
         :virtual_interface_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_id
-        #   ID of the virtual interface.
-        #
-        #   Example: dxvif-123dfg56
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # The response received when ConfirmPublicVirtualInterface is called.
+      # @!attribute [rw] virtual_interface_state
+      #   State of the virtual interface.
+      #
+      #   * **Confirming**\: The creation of the virtual interface is pending
+      #     confirmation from the virtual interface owner. If the owner of the
+      #     virtual interface is different from the owner of the connection on
+      #     which it is provisioned, then the virtual interface will remain in
+      #     this state until it is confirmed by the virtual interface owner.
+      #
+      #   * **Verifying**\: This state only applies to public virtual
+      #     interfaces. Each public virtual interface needs validation before
+      #     the virtual interface can be created.
+      #
+      #   * **Pending**\: A virtual interface is in this state from the time
+      #     that it is created until the virtual interface is ready to forward
+      #     traffic.
+      #
+      #   * **Available**\: A virtual interface that is able to forward
+      #     traffic.
+      #
+      #   * **Down**\: A virtual interface that is BGP down.
+      #
+      #   * **Deleting**\: A virtual interface is in this state immediately
+      #     after calling *DeleteVirtualInterface* until it can no longer
+      #     forward traffic.
+      #
+      #   * **Deleted**\: A virtual interface that cannot forward traffic.
+      #
+      #   * **Rejected**\: The virtual interface owner has declined creation
+      #     of the virtual interface. If a virtual interface in the
+      #     \'Confirming\' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the \'Rejected\' state.
+      #   @return [String]
       class ConfirmPublicVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_state
-        #   State of the virtual interface.
-        #
-        #   * **Confirming**\: The creation of the virtual interface is pending
-        #     confirmation from the virtual interface owner. If the owner of the
-        #     virtual interface is different from the owner of the connection on
-        #     which it is provisioned, then the virtual interface will remain in
-        #     this state until it is confirmed by the virtual interface owner.
-        #
-        #   * **Verifying**\: This state only applies to public virtual
-        #     interfaces. Each public virtual interface needs validation before
-        #     the virtual interface can be created.
-        #
-        #   * **Pending**\: A virtual interface is in this state from the time
-        #     that it is created until the virtual interface is ready to forward
-        #     traffic.
-        #
-        #   * **Available**\: A virtual interface that is able to forward
-        #     traffic.
-        #
-        #   * **Down**\: A virtual interface that is BGP down.
-        #
-        #   * **Deleting**\: A virtual interface is in this state immediately
-        #     after calling *DeleteVirtualInterface* until it can no longer
-        #     forward traffic.
-        #
-        #   * **Deleted**\: A virtual interface that cannot forward traffic.
-        #
-        #   * **Rejected**\: The virtual interface owner has declined creation
-        #     of the virtual interface. If a virtual interface in the
-        #     \'Confirming\' state is deleted by the virtual interface owner,
-        #     the virtual interface will enter the \'Rejected\' state.
-        #   @return [String]
-
       end
 
       # A connection represents the physical network connection between the
       # AWS Direct Connect location and the customer.
+      # @!attribute [rw] owner_account
+      #   The AWS account that will own the new connection.
+      #   @return [String]
+      #
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] connection_name
+      #   The name of the connection.
+      #
+      #   Example: \"*My Connection to AWS*\"
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] connection_state
+      #   State of the connection.
+      #
+      #   * **Ordering**\: The initial state of a hosted connection
+      #     provisioned on an interconnect. The connection stays in the
+      #     ordering state until the owner of the hosted connection confirms
+      #     or declines the connection order.
+      #
+      #   * **Requested**\: The initial state of a standard connection. The
+      #     connection stays in the requested state until the Letter of
+      #     Authorization (LOA) is sent to the customer.
+      #
+      #   * **Pending**\: The connection has been approved, and is being
+      #     initialized.
+      #
+      #   * **Available**\: The network link is up, and the connection is
+      #     ready for use.
+      #
+      #   * **Down**\: The network link is down.
+      #
+      #   * **Deleting**\: The connection is in the process of being deleted.
+      #
+      #   * **Deleted**\: The connection has been deleted.
+      #
+      #   * **Rejected**\: A hosted connection in the \'Ordering\' state will
+      #     enter the \'Rejected\' state if it is deleted by the end customer.
+      #   @return [String]
+      #
+      # @!attribute [rw] region
+      #   The AWS region where the connection is located.
+      #
+      #   Example: us-east-1
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   Where the connection is located.
+      #
+      #   Example: EqSV5
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] bandwidth
+      #   Bandwidth of the connection.
+      #
+      #   Example: 1Gbps (for regular connections), or 500Mbps (for hosted
+      #   connections)
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] vlan
+      #   The VLAN ID.
+      #
+      #   Example: 101
+      #   @return [Integer]
+      #
+      # @!attribute [rw] partner_name
+      #   The name of the AWS Direct Connect service provider associated with
+      #   the connection.
+      #   @return [String]
+      #
+      # @!attribute [rw] loa_issue_time
+      #   The time of the most recent call to DescribeConnectionLoa for this
+      #   Connection.
+      #   @return [Time]
       class Connection < Struct.new(
         :owner_account,
         :connection_id,
@@ -389,110 +450,16 @@ module Aws
         :vlan,
         :partner_name,
         :loa_issue_time)
-
         include Aws::Structure
-
-        # @!attribute [rw] owner_account
-        #   The AWS account that will own the new connection.
-        #   @return [String]
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] connection_name
-        #   The name of the connection.
-        #
-        #   Example: \"*My Connection to AWS*\"
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] connection_state
-        #   State of the connection.
-        #
-        #   * **Ordering**\: The initial state of a hosted connection
-        #     provisioned on an interconnect. The connection stays in the
-        #     ordering state until the owner of the hosted connection confirms
-        #     or declines the connection order.
-        #
-        #   * **Requested**\: The initial state of a standard connection. The
-        #     connection stays in the requested state until the Letter of
-        #     Authorization (LOA) is sent to the customer.
-        #
-        #   * **Pending**\: The connection has been approved, and is being
-        #     initialized.
-        #
-        #   * **Available**\: The network link is up, and the connection is
-        #     ready for use.
-        #
-        #   * **Down**\: The network link is down.
-        #
-        #   * **Deleting**\: The connection is in the process of being deleted.
-        #
-        #   * **Deleted**\: The connection has been deleted.
-        #
-        #   * **Rejected**\: A hosted connection in the \'Ordering\' state will
-        #     enter the \'Rejected\' state if it is deleted by the end customer.
-        #   @return [String]
-
-        # @!attribute [rw] region
-        #   The AWS region where the connection is located.
-        #
-        #   Example: us-east-1
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] location
-        #   Where the connection is located.
-        #
-        #   Example: EqSV5
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] bandwidth
-        #   Bandwidth of the connection.
-        #
-        #   Example: 1Gbps (for regular connections), or 500Mbps (for hosted
-        #   connections)
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] vlan
-        #   The VLAN ID.
-        #
-        #   Example: 101
-        #   @return [Integer]
-
-        # @!attribute [rw] partner_name
-        #   The name of the AWS Direct Connect service provider associated with
-        #   the connection.
-        #   @return [String]
-
-        # @!attribute [rw] loa_issue_time
-        #   The time of the most recent call to DescribeConnectionLoa for this
-        #   Connection.
-        #   @return [Time]
-
       end
 
       # A structure containing a list of connections.
+      # @!attribute [rw] connections
+      #   A list of connections.
+      #   @return [Array<Types::Connection>]
       class Connections < Struct.new(
         :connections)
-
         include Aws::Structure
-
-        # @!attribute [rw] connections
-        #   A list of connections.
-        #   @return [Array<Types::Connection>]
-
       end
 
       # Container for the parameters to the CreateConnection operation.
@@ -504,37 +471,34 @@ module Aws
       #         bandwidth: "Bandwidth", # required
       #         connection_name: "ConnectionName", # required
       #       }
+      # @!attribute [rw] location
+      #   Where the connection is located.
+      #
+      #   Example: EqSV5
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] bandwidth
+      #   Bandwidth of the connection.
+      #
+      #   Example: 1Gbps
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] connection_name
+      #   The name of the connection.
+      #
+      #   Example: \"*My Connection to AWS*\"
+      #
+      #   Default: None
+      #   @return [String]
       class CreateConnectionRequest < Struct.new(
         :location,
         :bandwidth,
         :connection_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] location
-        #   Where the connection is located.
-        #
-        #   Example: EqSV5
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] bandwidth
-        #   Bandwidth of the connection.
-        #
-        #   Example: 1Gbps
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] connection_name
-        #   The name of the connection.
-        #
-        #   Example: \"*My Connection to AWS*\"
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # Container for the parameters to the CreateInterconnect operation.
@@ -546,39 +510,36 @@ module Aws
       #         bandwidth: "Bandwidth", # required
       #         location: "LocationCode", # required
       #       }
+      # @!attribute [rw] interconnect_name
+      #   The name of the interconnect.
+      #
+      #   Example: \"*1G Interconnect to AWS*\"
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] bandwidth
+      #   The port bandwidth
+      #
+      #   Example: 1Gbps
+      #
+      #   Default: None
+      #
+      #   Available values: 1Gbps,10Gbps
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   Where the interconnect is located
+      #
+      #   Example: EqSV5
+      #
+      #   Default: None
+      #   @return [String]
       class CreateInterconnectRequest < Struct.new(
         :interconnect_name,
         :bandwidth,
         :location)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnect_name
-        #   The name of the interconnect.
-        #
-        #   Example: \"*1G Interconnect to AWS*\"
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] bandwidth
-        #   The port bandwidth
-        #
-        #   Example: 1Gbps
-        #
-        #   Default: None
-        #
-        #   Available values: 1Gbps,10Gbps
-        #   @return [String]
-
-        # @!attribute [rw] location
-        #   Where the interconnect is located
-        #
-        #   Example: EqSV5
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # Container for the parameters to the CreatePrivateVirtualInterface
@@ -598,27 +559,24 @@ module Aws
       #           virtual_gateway_id: "VirtualGatewayId", # required
       #         },
       #       }
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] new_private_virtual_interface
+      #   Detailed information for the private virtual interface to be
+      #   created.
+      #
+      #   Default: None
+      #   @return [Types::NewPrivateVirtualInterface]
       class CreatePrivateVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :new_private_virtual_interface)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] new_private_virtual_interface
-        #   Detailed information for the private virtual interface to be
-        #   created.
-        #
-        #   Default: None
-        #   @return [Types::NewPrivateVirtualInterface]
-
       end
 
       # Container for the parameters to the CreatePublicVirtualInterface
@@ -642,26 +600,23 @@ module Aws
       #           ],
       #         },
       #       }
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] new_public_virtual_interface
+      #   Detailed information for the public virtual interface to be created.
+      #
+      #   Default: None
+      #   @return [Types::NewPublicVirtualInterface]
       class CreatePublicVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :new_public_virtual_interface)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] new_public_virtual_interface
-        #   Detailed information for the public virtual interface to be created.
-        #
-        #   Default: None
-        #   @return [Types::NewPublicVirtualInterface]
-
       end
 
       # Container for the parameters to the DeleteConnection operation.
@@ -671,19 +626,16 @@ module Aws
       #       {
       #         connection_id: "ConnectionId", # required
       #       }
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
       class DeleteConnectionRequest < Struct.new(
         :connection_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # Container for the parameters to the DeleteInterconnect operation.
@@ -693,46 +645,40 @@ module Aws
       #       {
       #         interconnect_id: "InterconnectId", # required
       #       }
+      # @!attribute [rw] interconnect_id
+      #   The ID of the interconnect.
+      #
+      #   Example: dxcon-abc123
+      #   @return [String]
       class DeleteInterconnectRequest < Struct.new(
         :interconnect_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnect_id
-        #   The ID of the interconnect.
-        #
-        #   Example: dxcon-abc123
-        #   @return [String]
-
       end
 
       # The response received when DeleteInterconnect is called.
+      # @!attribute [rw] interconnect_state
+      #   State of the interconnect.
+      #
+      #   * **Requested**\: The initial state of an interconnect. The
+      #     interconnect stays in the requested state until the Letter of
+      #     Authorization (LOA) is sent to the customer.
+      #
+      #   * **Pending**&gt;\: The interconnect has been approved, and is being
+      #     initialized.
+      #
+      #   * **Available**\: The network link is up, and the interconnect is
+      #     ready for use.
+      #
+      #   * **Down**\: The network link is down.
+      #
+      #   * **Deleting**\: The interconnect is in the process of being
+      #     deleted.
+      #
+      #   * **Deleted**\: The interconnect has been deleted.
+      #   @return [String]
       class DeleteInterconnectResponse < Struct.new(
         :interconnect_state)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnect_state
-        #   State of the interconnect.
-        #
-        #   * **Requested**\: The initial state of an interconnect. The
-        #     interconnect stays in the requested state until the Letter of
-        #     Authorization (LOA) is sent to the customer.
-        #
-        #   * **Pending**&gt;\: The interconnect has been approved, and is being
-        #     initialized.
-        #
-        #   * **Available**\: The network link is up, and the interconnect is
-        #     ready for use.
-        #
-        #   * **Down**\: The network link is down.
-        #
-        #   * **Deleting**\: The interconnect is in the process of being
-        #     deleted.
-        #
-        #   * **Deleted**\: The interconnect has been deleted.
-        #   @return [String]
-
       end
 
       # Container for the parameters to the DeleteVirtualInterface operation.
@@ -742,61 +688,55 @@ module Aws
       #       {
       #         virtual_interface_id: "VirtualInterfaceId", # required
       #       }
+      # @!attribute [rw] virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      #   @return [String]
       class DeleteVirtualInterfaceRequest < Struct.new(
         :virtual_interface_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_id
-        #   ID of the virtual interface.
-        #
-        #   Example: dxvif-123dfg56
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # The response received when DeleteVirtualInterface is called.
+      # @!attribute [rw] virtual_interface_state
+      #   State of the virtual interface.
+      #
+      #   * **Confirming**\: The creation of the virtual interface is pending
+      #     confirmation from the virtual interface owner. If the owner of the
+      #     virtual interface is different from the owner of the connection on
+      #     which it is provisioned, then the virtual interface will remain in
+      #     this state until it is confirmed by the virtual interface owner.
+      #
+      #   * **Verifying**\: This state only applies to public virtual
+      #     interfaces. Each public virtual interface needs validation before
+      #     the virtual interface can be created.
+      #
+      #   * **Pending**\: A virtual interface is in this state from the time
+      #     that it is created until the virtual interface is ready to forward
+      #     traffic.
+      #
+      #   * **Available**\: A virtual interface that is able to forward
+      #     traffic.
+      #
+      #   * **Down**\: A virtual interface that is BGP down.
+      #
+      #   * **Deleting**\: A virtual interface is in this state immediately
+      #     after calling *DeleteVirtualInterface* until it can no longer
+      #     forward traffic.
+      #
+      #   * **Deleted**\: A virtual interface that cannot forward traffic.
+      #
+      #   * **Rejected**\: The virtual interface owner has declined creation
+      #     of the virtual interface. If a virtual interface in the
+      #     \'Confirming\' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the \'Rejected\' state.
+      #   @return [String]
       class DeleteVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_state
-        #   State of the virtual interface.
-        #
-        #   * **Confirming**\: The creation of the virtual interface is pending
-        #     confirmation from the virtual interface owner. If the owner of the
-        #     virtual interface is different from the owner of the connection on
-        #     which it is provisioned, then the virtual interface will remain in
-        #     this state until it is confirmed by the virtual interface owner.
-        #
-        #   * **Verifying**\: This state only applies to public virtual
-        #     interfaces. Each public virtual interface needs validation before
-        #     the virtual interface can be created.
-        #
-        #   * **Pending**\: A virtual interface is in this state from the time
-        #     that it is created until the virtual interface is ready to forward
-        #     traffic.
-        #
-        #   * **Available**\: A virtual interface that is able to forward
-        #     traffic.
-        #
-        #   * **Down**\: A virtual interface that is BGP down.
-        #
-        #   * **Deleting**\: A virtual interface is in this state immediately
-        #     after calling *DeleteVirtualInterface* until it can no longer
-        #     forward traffic.
-        #
-        #   * **Deleted**\: A virtual interface that cannot forward traffic.
-        #
-        #   * **Rejected**\: The virtual interface owner has declined creation
-        #     of the virtual interface. If a virtual interface in the
-        #     \'Confirming\' state is deleted by the virtual interface owner,
-        #     the virtual interface will enter the \'Rejected\' state.
-        #   @return [String]
-
       end
 
       # Container for the parameters to the DescribeConnectionLoa operation.
@@ -808,51 +748,45 @@ module Aws
       #         provider_name: "ProviderName",
       #         loa_content_type: "application/pdf", # accepts application/pdf
       #       }
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] provider_name
+      #   The name of the APN partner or service provider who establishes
+      #   connectivity on your behalf. If you supply this parameter, the
+      #   LOA-CFA lists the provider name alongside your company name as the
+      #   requester of the cross connect.
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] loa_content_type
+      #   A standard media type indicating the content type of the LOA-CFA
+      #   document. Currently, the only supported value is
+      #   \"application/pdf\".
+      #
+      #   Default: application/pdf
+      #   @return [String]
       class DescribeConnectionLoaRequest < Struct.new(
         :connection_id,
         :provider_name,
         :loa_content_type)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] provider_name
-        #   The name of the APN partner or service provider who establishes
-        #   connectivity on your behalf. If you supply this parameter, the
-        #   LOA-CFA lists the provider name alongside your company name as the
-        #   requester of the cross connect.
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] loa_content_type
-        #   A standard media type indicating the content type of the LOA-CFA
-        #   document. Currently, the only supported value is
-        #   \"application/pdf\".
-        #
-        #   Default: application/pdf
-        #   @return [String]
-
       end
 
       # The response received when DescribeConnectionLoa is called.
+      # @!attribute [rw] loa
+      #   A structure containing the Letter of Authorization - Connecting
+      #   Facility Assignment (LOA-CFA) for a connection.
+      #   @return [Types::Loa]
       class DescribeConnectionLoaResponse < Struct.new(
         :loa)
-
         include Aws::Structure
-
-        # @!attribute [rw] loa
-        #   A structure containing the Letter of Authorization - Connecting
-        #   Facility Assignment (LOA-CFA) for a connection.
-        #   @return [Types::Loa]
-
       end
 
       # Container for the parameters to the DescribeConnectionsOnInterconnect
@@ -863,19 +797,16 @@ module Aws
       #       {
       #         interconnect_id: "InterconnectId", # required
       #       }
+      # @!attribute [rw] interconnect_id
+      #   ID of the interconnect on which a list of connection is provisioned.
+      #
+      #   Example: dxcon-abc123
+      #
+      #   Default: None
+      #   @return [String]
       class DescribeConnectionsOnInterconnectRequest < Struct.new(
         :interconnect_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnect_id
-        #   ID of the interconnect on which a list of connection is provisioned.
-        #
-        #   Example: dxcon-abc123
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # Container for the parameters to the DescribeConnections operation.
@@ -885,19 +816,16 @@ module Aws
       #       {
       #         connection_id: "ConnectionId",
       #       }
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
       class DescribeConnectionsRequest < Struct.new(
         :connection_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # Container for the parameters to the DescribeInterconnectLoa operation.
@@ -909,49 +837,43 @@ module Aws
       #         provider_name: "ProviderName",
       #         loa_content_type: "application/pdf", # accepts application/pdf
       #       }
+      # @!attribute [rw] interconnect_id
+      #   The ID of the interconnect.
+      #
+      #   Example: dxcon-abc123
+      #   @return [String]
+      #
+      # @!attribute [rw] provider_name
+      #   The name of the service provider who establishes connectivity on
+      #   your behalf. If you supply this parameter, the LOA-CFA lists the
+      #   provider name alongside your company name as the requester of the
+      #   cross connect.
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] loa_content_type
+      #   A standard media type indicating the content type of the LOA-CFA
+      #   document. Currently, the only supported value is
+      #   \"application/pdf\".
+      #
+      #   Default: application/pdf
+      #   @return [String]
       class DescribeInterconnectLoaRequest < Struct.new(
         :interconnect_id,
         :provider_name,
         :loa_content_type)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnect_id
-        #   The ID of the interconnect.
-        #
-        #   Example: dxcon-abc123
-        #   @return [String]
-
-        # @!attribute [rw] provider_name
-        #   The name of the service provider who establishes connectivity on
-        #   your behalf. If you supply this parameter, the LOA-CFA lists the
-        #   provider name alongside your company name as the requester of the
-        #   cross connect.
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] loa_content_type
-        #   A standard media type indicating the content type of the LOA-CFA
-        #   document. Currently, the only supported value is
-        #   \"application/pdf\".
-        #
-        #   Default: application/pdf
-        #   @return [String]
-
       end
 
       # The response received when DescribeInterconnectLoa is called.
+      # @!attribute [rw] loa
+      #   A structure containing the Letter of Authorization - Connecting
+      #   Facility Assignment (LOA-CFA) for a connection.
+      #   @return [Types::Loa]
       class DescribeInterconnectLoaResponse < Struct.new(
         :loa)
-
         include Aws::Structure
-
-        # @!attribute [rw] loa
-        #   A structure containing the Letter of Authorization - Connecting
-        #   Facility Assignment (LOA-CFA) for a connection.
-        #   @return [Types::Loa]
-
       end
 
       # Container for the parameters to the DescribeInterconnects operation.
@@ -961,17 +883,14 @@ module Aws
       #       {
       #         interconnect_id: "InterconnectId",
       #       }
+      # @!attribute [rw] interconnect_id
+      #   The ID of the interconnect.
+      #
+      #   Example: dxcon-abc123
+      #   @return [String]
       class DescribeInterconnectsRequest < Struct.new(
         :interconnect_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnect_id
-        #   The ID of the interconnect.
-        #
-        #   Example: dxcon-abc123
-        #   @return [String]
-
       end
 
       # Container for the parameters to the DescribeVirtualInterfaces
@@ -983,28 +902,25 @@ module Aws
       #         connection_id: "ConnectionId",
       #         virtual_interface_id: "VirtualInterfaceId",
       #       }
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      #   @return [String]
       class DescribeVirtualInterfacesRequest < Struct.new(
         :connection_id,
         :virtual_interface_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] virtual_interface_id
-        #   ID of the virtual interface.
-        #
-        #   Example: dxvif-123dfg56
-        #
-        #   Default: None
-        #   @return [String]
-
       end
 
       # An interconnect is a connection that can host other connections.
@@ -1020,6 +936,67 @@ module Aws
       # numbers, are shared by all of the hosted connections on the
       # interconnect, and the owner of the interconnect determines how these
       # resources are assigned.
+      # @!attribute [rw] interconnect_id
+      #   The ID of the interconnect.
+      #
+      #   Example: dxcon-abc123
+      #   @return [String]
+      #
+      # @!attribute [rw] interconnect_name
+      #   The name of the interconnect.
+      #
+      #   Example: \"*1G Interconnect to AWS*\"
+      #   @return [String]
+      #
+      # @!attribute [rw] interconnect_state
+      #   State of the interconnect.
+      #
+      #   * **Requested**\: The initial state of an interconnect. The
+      #     interconnect stays in the requested state until the Letter of
+      #     Authorization (LOA) is sent to the customer.
+      #
+      #   * **Pending**&gt;\: The interconnect has been approved, and is being
+      #     initialized.
+      #
+      #   * **Available**\: The network link is up, and the interconnect is
+      #     ready for use.
+      #
+      #   * **Down**\: The network link is down.
+      #
+      #   * **Deleting**\: The interconnect is in the process of being
+      #     deleted.
+      #
+      #   * **Deleted**\: The interconnect has been deleted.
+      #   @return [String]
+      #
+      # @!attribute [rw] region
+      #   The AWS region where the connection is located.
+      #
+      #   Example: us-east-1
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   Where the connection is located.
+      #
+      #   Example: EqSV5
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] bandwidth
+      #   Bandwidth of the connection.
+      #
+      #   Example: 1Gbps
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] loa_issue_time
+      #   The time of the most recent call to DescribeInterconnectLoa for this
+      #   Interconnect.
+      #   @return [Time]
       class Interconnect < Struct.new(
         :interconnect_id,
         :interconnect_name,
@@ -1028,124 +1005,51 @@ module Aws
         :location,
         :bandwidth,
         :loa_issue_time)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnect_id
-        #   The ID of the interconnect.
-        #
-        #   Example: dxcon-abc123
-        #   @return [String]
-
-        # @!attribute [rw] interconnect_name
-        #   The name of the interconnect.
-        #
-        #   Example: \"*1G Interconnect to AWS*\"
-        #   @return [String]
-
-        # @!attribute [rw] interconnect_state
-        #   State of the interconnect.
-        #
-        #   * **Requested**\: The initial state of an interconnect. The
-        #     interconnect stays in the requested state until the Letter of
-        #     Authorization (LOA) is sent to the customer.
-        #
-        #   * **Pending**&gt;\: The interconnect has been approved, and is being
-        #     initialized.
-        #
-        #   * **Available**\: The network link is up, and the interconnect is
-        #     ready for use.
-        #
-        #   * **Down**\: The network link is down.
-        #
-        #   * **Deleting**\: The interconnect is in the process of being
-        #     deleted.
-        #
-        #   * **Deleted**\: The interconnect has been deleted.
-        #   @return [String]
-
-        # @!attribute [rw] region
-        #   The AWS region where the connection is located.
-        #
-        #   Example: us-east-1
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] location
-        #   Where the connection is located.
-        #
-        #   Example: EqSV5
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] bandwidth
-        #   Bandwidth of the connection.
-        #
-        #   Example: 1Gbps
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] loa_issue_time
-        #   The time of the most recent call to DescribeInterconnectLoa for this
-        #   Interconnect.
-        #   @return [Time]
-
       end
 
       # A structure containing a list of interconnects.
+      # @!attribute [rw] interconnects
+      #   A list of interconnects.
+      #   @return [Array<Types::Interconnect>]
       class Interconnects < Struct.new(
         :interconnects)
-
         include Aws::Structure
-
-        # @!attribute [rw] interconnects
-        #   A list of interconnects.
-        #   @return [Array<Types::Interconnect>]
-
       end
 
       # A structure containing the Letter of Authorization - Connecting
       # Facility Assignment (LOA-CFA) for a connection.
+      # @!attribute [rw] loa_content
+      #   The binary contents of the LOA-CFA document.
+      #   @return [String]
+      #
+      # @!attribute [rw] loa_content_type
+      #   A standard media type indicating the content type of the LOA-CFA
+      #   document. Currently, the only supported value is
+      #   \"application/pdf\".
+      #
+      #   Default: application/pdf
+      #   @return [String]
       class Loa < Struct.new(
         :loa_content,
         :loa_content_type)
-
         include Aws::Structure
-
-        # @!attribute [rw] loa_content
-        #   The binary contents of the LOA-CFA document.
-        #   @return [String]
-
-        # @!attribute [rw] loa_content_type
-        #   A standard media type indicating the content type of the LOA-CFA
-        #   document. Currently, the only supported value is
-        #   \"application/pdf\".
-        #
-        #   Default: application/pdf
-        #   @return [String]
-
       end
 
       # An AWS Direct Connect location where connections and interconnects can
       # be requested.
+      # @!attribute [rw] location_code
+      #   The code used to indicate the AWS Direct Connect location.
+      #   @return [String]
+      #
+      # @!attribute [rw] location_name
+      #   The name of the AWS Direct Connect location. The name includes the
+      #   colocation partner name and the physical site of the lit building.
+      #   @return [String]
       class Location < Struct.new(
         :location_code,
         :location_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] location_code
-        #   The code used to indicate the AWS Direct Connect location.
-        #   @return [String]
-
-        # @!attribute [rw] location_name
-        #   The name of the AWS Direct Connect location. The name includes the
-        #   colocation partner name and the physical site of the lit building.
-        #   @return [String]
-
       end
 
       # A location is a network facility where AWS Direct Connect routers are
@@ -1153,16 +1057,13 @@ module Aws
       # many network providers have equipment, and where cross connects can be
       # delivered. Locations include a name and facility code, and must be
       # provided when creating a connection.
+      # @!attribute [rw] locations
+      #   A list of colocation hubs where network providers have equipment.
+      #   Most regions have multiple locations available.
+      #   @return [Array<Types::Location>]
       class Locations < Struct.new(
         :locations)
-
         include Aws::Structure
-
-        # @!attribute [rw] locations
-        #   A list of colocation hubs where network providers have equipment.
-        #   Most regions have multiple locations available.
-        #   @return [Array<Types::Location>]
-
       end
 
       # A structure containing information about a new private virtual
@@ -1179,6 +1080,49 @@ module Aws
       #         customer_address: "CustomerAddress",
       #         virtual_gateway_id: "VirtualGatewayId", # required
       #       }
+      # @!attribute [rw] virtual_interface_name
+      #   The name of the virtual interface assigned by the customer.
+      #
+      #   Example: \"My VPC\"
+      #   @return [String]
+      #
+      # @!attribute [rw] vlan
+      #   The VLAN ID.
+      #
+      #   Example: 101
+      #   @return [Integer]
+      #
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] auth_key
+      #   Authentication key for BGP configuration.
+      #
+      #   Example: asdf34example
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_address
+      #   IP address assigned to the Amazon interface.
+      #
+      #   Example: 192.168.1.1/30
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_gateway_id
+      #   The ID of the virtual private gateway to a VPC. This only applies to
+      #   private virtual interfaces.
+      #
+      #   Example: vgw-123er56
+      #   @return [String]
       class NewPrivateVirtualInterface < Struct.new(
         :virtual_interface_name,
         :vlan,
@@ -1187,53 +1131,7 @@ module Aws
         :amazon_address,
         :customer_address,
         :virtual_gateway_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_name
-        #   The name of the virtual interface assigned by the customer.
-        #
-        #   Example: \"My VPC\"
-        #   @return [String]
-
-        # @!attribute [rw] vlan
-        #   The VLAN ID.
-        #
-        #   Example: 101
-        #   @return [Integer]
-
-        # @!attribute [rw] asn
-        #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
-        #   configuration.
-        #
-        #   Example: 65000
-        #   @return [Integer]
-
-        # @!attribute [rw] auth_key
-        #   Authentication key for BGP configuration.
-        #
-        #   Example: asdf34example
-        #   @return [String]
-
-        # @!attribute [rw] amazon_address
-        #   IP address assigned to the Amazon interface.
-        #
-        #   Example: 192.168.1.1/30
-        #   @return [String]
-
-        # @!attribute [rw] customer_address
-        #   IP address assigned to the customer interface.
-        #
-        #   Example: 192.168.1.2/30
-        #   @return [String]
-
-        # @!attribute [rw] virtual_gateway_id
-        #   The ID of the virtual private gateway to a VPC. This only applies to
-        #   private virtual interfaces.
-        #
-        #   Example: vgw-123er56
-        #   @return [String]
-
       end
 
       # A structure containing information about a private virtual interface
@@ -1249,6 +1147,42 @@ module Aws
       #         amazon_address: "AmazonAddress",
       #         customer_address: "CustomerAddress",
       #       }
+      # @!attribute [rw] virtual_interface_name
+      #   The name of the virtual interface assigned by the customer.
+      #
+      #   Example: \"My VPC\"
+      #   @return [String]
+      #
+      # @!attribute [rw] vlan
+      #   The VLAN ID.
+      #
+      #   Example: 101
+      #   @return [Integer]
+      #
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] auth_key
+      #   Authentication key for BGP configuration.
+      #
+      #   Example: asdf34example
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_address
+      #   IP address assigned to the Amazon interface.
+      #
+      #   Example: 192.168.1.1/30
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30
+      #   @return [String]
       class NewPrivateVirtualInterfaceAllocation < Struct.new(
         :virtual_interface_name,
         :vlan,
@@ -1256,46 +1190,7 @@ module Aws
         :auth_key,
         :amazon_address,
         :customer_address)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_name
-        #   The name of the virtual interface assigned by the customer.
-        #
-        #   Example: \"My VPC\"
-        #   @return [String]
-
-        # @!attribute [rw] vlan
-        #   The VLAN ID.
-        #
-        #   Example: 101
-        #   @return [Integer]
-
-        # @!attribute [rw] asn
-        #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
-        #   configuration.
-        #
-        #   Example: 65000
-        #   @return [Integer]
-
-        # @!attribute [rw] auth_key
-        #   Authentication key for BGP configuration.
-        #
-        #   Example: asdf34example
-        #   @return [String]
-
-        # @!attribute [rw] amazon_address
-        #   IP address assigned to the Amazon interface.
-        #
-        #   Example: 192.168.1.1/30
-        #   @return [String]
-
-        # @!attribute [rw] customer_address
-        #   IP address assigned to the customer interface.
-        #
-        #   Example: 192.168.1.2/30
-        #   @return [String]
-
       end
 
       # A structure containing information about a new public virtual
@@ -1316,6 +1211,47 @@ module Aws
       #           },
       #         ],
       #       }
+      # @!attribute [rw] virtual_interface_name
+      #   The name of the virtual interface assigned by the customer.
+      #
+      #   Example: \"My VPC\"
+      #   @return [String]
+      #
+      # @!attribute [rw] vlan
+      #   The VLAN ID.
+      #
+      #   Example: 101
+      #   @return [Integer]
+      #
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] auth_key
+      #   Authentication key for BGP configuration.
+      #
+      #   Example: asdf34example
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_address
+      #   IP address assigned to the Amazon interface.
+      #
+      #   Example: 192.168.1.1/30
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30
+      #   @return [String]
+      #
+      # @!attribute [rw] route_filter_prefixes
+      #   A list of routes to be advertised to the AWS network in this region
+      #   (public virtual interface).
+      #   @return [Array<Types::RouteFilterPrefix>]
       class NewPublicVirtualInterface < Struct.new(
         :virtual_interface_name,
         :vlan,
@@ -1324,51 +1260,7 @@ module Aws
         :amazon_address,
         :customer_address,
         :route_filter_prefixes)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_name
-        #   The name of the virtual interface assigned by the customer.
-        #
-        #   Example: \"My VPC\"
-        #   @return [String]
-
-        # @!attribute [rw] vlan
-        #   The VLAN ID.
-        #
-        #   Example: 101
-        #   @return [Integer]
-
-        # @!attribute [rw] asn
-        #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
-        #   configuration.
-        #
-        #   Example: 65000
-        #   @return [Integer]
-
-        # @!attribute [rw] auth_key
-        #   Authentication key for BGP configuration.
-        #
-        #   Example: asdf34example
-        #   @return [String]
-
-        # @!attribute [rw] amazon_address
-        #   IP address assigned to the Amazon interface.
-        #
-        #   Example: 192.168.1.1/30
-        #   @return [String]
-
-        # @!attribute [rw] customer_address
-        #   IP address assigned to the customer interface.
-        #
-        #   Example: 192.168.1.2/30
-        #   @return [String]
-
-        # @!attribute [rw] route_filter_prefixes
-        #   A list of routes to be advertised to the AWS network in this region
-        #   (public virtual interface).
-        #   @return [Array<Types::RouteFilterPrefix>]
-
       end
 
       # A structure containing information about a public virtual interface
@@ -1389,6 +1281,47 @@ module Aws
       #           },
       #         ],
       #       }
+      # @!attribute [rw] virtual_interface_name
+      #   The name of the virtual interface assigned by the customer.
+      #
+      #   Example: \"My VPC\"
+      #   @return [String]
+      #
+      # @!attribute [rw] vlan
+      #   The VLAN ID.
+      #
+      #   Example: 101
+      #   @return [Integer]
+      #
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] auth_key
+      #   Authentication key for BGP configuration.
+      #
+      #   Example: asdf34example
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_address
+      #   IP address assigned to the Amazon interface.
+      #
+      #   Example: 192.168.1.1/30
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30
+      #   @return [String]
+      #
+      # @!attribute [rw] route_filter_prefixes
+      #   A list of routes to be advertised to the AWS network in this region
+      #   (public virtual interface).
+      #   @return [Array<Types::RouteFilterPrefix>]
       class NewPublicVirtualInterfaceAllocation < Struct.new(
         :virtual_interface_name,
         :vlan,
@@ -1397,51 +1330,7 @@ module Aws
         :amazon_address,
         :customer_address,
         :route_filter_prefixes)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interface_name
-        #   The name of the virtual interface assigned by the customer.
-        #
-        #   Example: \"My VPC\"
-        #   @return [String]
-
-        # @!attribute [rw] vlan
-        #   The VLAN ID.
-        #
-        #   Example: 101
-        #   @return [Integer]
-
-        # @!attribute [rw] asn
-        #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
-        #   configuration.
-        #
-        #   Example: 65000
-        #   @return [Integer]
-
-        # @!attribute [rw] auth_key
-        #   Authentication key for BGP configuration.
-        #
-        #   Example: asdf34example
-        #   @return [String]
-
-        # @!attribute [rw] amazon_address
-        #   IP address assigned to the Amazon interface.
-        #
-        #   Example: 192.168.1.1/30
-        #   @return [String]
-
-        # @!attribute [rw] customer_address
-        #   IP address assigned to the customer interface.
-        #
-        #   Example: 192.168.1.2/30
-        #   @return [String]
-
-        # @!attribute [rw] route_filter_prefixes
-        #   A list of routes to be advertised to the AWS network in this region
-        #   (public virtual interface).
-        #   @return [Array<Types::RouteFilterPrefix>]
-
       end
 
       # A route filter prefix that the customer can advertise through Border
@@ -1452,18 +1341,15 @@ module Aws
       #       {
       #         cidr: "CIDR",
       #       }
+      # @!attribute [rw] cidr
+      #   CIDR notation for the advertised route. Multiple routes are
+      #   separated by commas.
+      #
+      #   Example: 10.10.10.0/24,10.10.11.0/24
+      #   @return [String]
       class RouteFilterPrefix < Struct.new(
         :cidr)
-
         include Aws::Structure
-
-        # @!attribute [rw] cidr
-        #   CIDR notation for the advertised route. Multiple routes are
-        #   separated by commas.
-        #
-        #   Example: 10.10.10.0/24,10.10.11.0/24
-        #   @return [String]
-
       end
 
       # You can create one or more AWS Direct Connect private virtual
@@ -1476,50 +1362,165 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
+      # @!attribute [rw] virtual_gateway_id
+      #   The ID of the virtual private gateway to a VPC. This only applies to
+      #   private virtual interfaces.
+      #
+      #   Example: vgw-123er56
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_gateway_state
+      #   State of the virtual private gateway.
+      #
+      #   * **Pending**\: This is the initial state after calling
+      #     *CreateVpnGateway*.
+      #
+      #   * **Available**\: Ready for use by a private virtual interface.
+      #
+      #   * **Deleting**\: This is the initial state after calling
+      #     *DeleteVpnGateway*.
+      #
+      #   * **Deleted**\: In this state, a private virtual interface is unable
+      #     to send traffic over this gateway.
+      #   @return [String]
       class VirtualGateway < Struct.new(
         :virtual_gateway_id,
         :virtual_gateway_state)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_gateway_id
-        #   The ID of the virtual private gateway to a VPC. This only applies to
-        #   private virtual interfaces.
-        #
-        #   Example: vgw-123er56
-        #   @return [String]
-
-        # @!attribute [rw] virtual_gateway_state
-        #   State of the virtual private gateway.
-        #
-        #   * **Pending**\: This is the initial state after calling
-        #     *CreateVpnGateway*.
-        #
-        #   * **Available**\: Ready for use by a private virtual interface.
-        #
-        #   * **Deleting**\: This is the initial state after calling
-        #     *DeleteVpnGateway*.
-        #
-        #   * **Deleted**\: In this state, a private virtual interface is unable
-        #     to send traffic over this gateway.
-        #   @return [String]
-
       end
 
       # A structure containing a list of virtual private gateways.
+      # @!attribute [rw] virtual_gateways
+      #   A list of virtual private gateways.
+      #   @return [Array<Types::VirtualGateway>]
       class VirtualGateways < Struct.new(
         :virtual_gateways)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_gateways
-        #   A list of virtual private gateways.
-        #   @return [Array<Types::VirtualGateway>]
-
       end
 
       # A virtual interface (VLAN) transmits the traffic between the AWS
       # Direct Connect location and the customer.
+      # @!attribute [rw] owner_account
+      #   The AWS account that will own the new virtual interface.
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_interface_id
+      #   ID of the virtual interface.
+      #
+      #   Example: dxvif-123dfg56
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   Where the connection is located.
+      #
+      #   Example: EqSV5
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] connection_id
+      #   ID of the connection.
+      #
+      #   Example: dxcon-fg5678gh
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_interface_type
+      #   The type of virtual interface.
+      #
+      #   Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB,
+      #   and so on.)
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_interface_name
+      #   The name of the virtual interface assigned by the customer.
+      #
+      #   Example: \"My VPC\"
+      #   @return [String]
+      #
+      # @!attribute [rw] vlan
+      #   The VLAN ID.
+      #
+      #   Example: 101
+      #   @return [Integer]
+      #
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] auth_key
+      #   Authentication key for BGP configuration.
+      #
+      #   Example: asdf34example
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_address
+      #   IP address assigned to the Amazon interface.
+      #
+      #   Example: 192.168.1.1/30
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_interface_state
+      #   State of the virtual interface.
+      #
+      #   * **Confirming**\: The creation of the virtual interface is pending
+      #     confirmation from the virtual interface owner. If the owner of the
+      #     virtual interface is different from the owner of the connection on
+      #     which it is provisioned, then the virtual interface will remain in
+      #     this state until it is confirmed by the virtual interface owner.
+      #
+      #   * **Verifying**\: This state only applies to public virtual
+      #     interfaces. Each public virtual interface needs validation before
+      #     the virtual interface can be created.
+      #
+      #   * **Pending**\: A virtual interface is in this state from the time
+      #     that it is created until the virtual interface is ready to forward
+      #     traffic.
+      #
+      #   * **Available**\: A virtual interface that is able to forward
+      #     traffic.
+      #
+      #   * **Down**\: A virtual interface that is BGP down.
+      #
+      #   * **Deleting**\: A virtual interface is in this state immediately
+      #     after calling *DeleteVirtualInterface* until it can no longer
+      #     forward traffic.
+      #
+      #   * **Deleted**\: A virtual interface that cannot forward traffic.
+      #
+      #   * **Rejected**\: The virtual interface owner has declined creation
+      #     of the virtual interface. If a virtual interface in the
+      #     \'Confirming\' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the \'Rejected\' state.
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_router_config
+      #   Information for generating the customer router configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] virtual_gateway_id
+      #   The ID of the virtual private gateway to a VPC. This only applies to
+      #   private virtual interfaces.
+      #
+      #   Example: vgw-123er56
+      #   @return [String]
+      #
+      # @!attribute [rw] route_filter_prefixes
+      #   A list of routes to be advertised to the AWS network in this region
+      #   (public virtual interface).
+      #   @return [Array<Types::RouteFilterPrefix>]
       class VirtualInterface < Struct.new(
         :owner_account,
         :virtual_interface_id,
@@ -1536,143 +1537,16 @@ module Aws
         :customer_router_config,
         :virtual_gateway_id,
         :route_filter_prefixes)
-
         include Aws::Structure
-
-        # @!attribute [rw] owner_account
-        #   The AWS account that will own the new virtual interface.
-        #   @return [String]
-
-        # @!attribute [rw] virtual_interface_id
-        #   ID of the virtual interface.
-        #
-        #   Example: dxvif-123dfg56
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] location
-        #   Where the connection is located.
-        #
-        #   Example: EqSV5
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] connection_id
-        #   ID of the connection.
-        #
-        #   Example: dxcon-fg5678gh
-        #
-        #   Default: None
-        #   @return [String]
-
-        # @!attribute [rw] virtual_interface_type
-        #   The type of virtual interface.
-        #
-        #   Example: private (Amazon VPC) or public (Amazon S3, Amazon DynamoDB,
-        #   and so on.)
-        #   @return [String]
-
-        # @!attribute [rw] virtual_interface_name
-        #   The name of the virtual interface assigned by the customer.
-        #
-        #   Example: \"My VPC\"
-        #   @return [String]
-
-        # @!attribute [rw] vlan
-        #   The VLAN ID.
-        #
-        #   Example: 101
-        #   @return [Integer]
-
-        # @!attribute [rw] asn
-        #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
-        #   configuration.
-        #
-        #   Example: 65000
-        #   @return [Integer]
-
-        # @!attribute [rw] auth_key
-        #   Authentication key for BGP configuration.
-        #
-        #   Example: asdf34example
-        #   @return [String]
-
-        # @!attribute [rw] amazon_address
-        #   IP address assigned to the Amazon interface.
-        #
-        #   Example: 192.168.1.1/30
-        #   @return [String]
-
-        # @!attribute [rw] customer_address
-        #   IP address assigned to the customer interface.
-        #
-        #   Example: 192.168.1.2/30
-        #   @return [String]
-
-        # @!attribute [rw] virtual_interface_state
-        #   State of the virtual interface.
-        #
-        #   * **Confirming**\: The creation of the virtual interface is pending
-        #     confirmation from the virtual interface owner. If the owner of the
-        #     virtual interface is different from the owner of the connection on
-        #     which it is provisioned, then the virtual interface will remain in
-        #     this state until it is confirmed by the virtual interface owner.
-        #
-        #   * **Verifying**\: This state only applies to public virtual
-        #     interfaces. Each public virtual interface needs validation before
-        #     the virtual interface can be created.
-        #
-        #   * **Pending**\: A virtual interface is in this state from the time
-        #     that it is created until the virtual interface is ready to forward
-        #     traffic.
-        #
-        #   * **Available**\: A virtual interface that is able to forward
-        #     traffic.
-        #
-        #   * **Down**\: A virtual interface that is BGP down.
-        #
-        #   * **Deleting**\: A virtual interface is in this state immediately
-        #     after calling *DeleteVirtualInterface* until it can no longer
-        #     forward traffic.
-        #
-        #   * **Deleted**\: A virtual interface that cannot forward traffic.
-        #
-        #   * **Rejected**\: The virtual interface owner has declined creation
-        #     of the virtual interface. If a virtual interface in the
-        #     \'Confirming\' state is deleted by the virtual interface owner,
-        #     the virtual interface will enter the \'Rejected\' state.
-        #   @return [String]
-
-        # @!attribute [rw] customer_router_config
-        #   Information for generating the customer router configuration.
-        #   @return [String]
-
-        # @!attribute [rw] virtual_gateway_id
-        #   The ID of the virtual private gateway to a VPC. This only applies to
-        #   private virtual interfaces.
-        #
-        #   Example: vgw-123er56
-        #   @return [String]
-
-        # @!attribute [rw] route_filter_prefixes
-        #   A list of routes to be advertised to the AWS network in this region
-        #   (public virtual interface).
-        #   @return [Array<Types::RouteFilterPrefix>]
-
       end
 
       # A structure containing a list of virtual interfaces.
+      # @!attribute [rw] virtual_interfaces
+      #   A list of virtual interfaces.
+      #   @return [Array<Types::VirtualInterface>]
       class VirtualInterfaces < Struct.new(
         :virtual_interfaces)
-
         include Aws::Structure
-
-        # @!attribute [rw] virtual_interfaces
-        #   A list of virtual interfaces.
-        #   @return [Array<Types::VirtualInterface>]
-
       end
 
     end

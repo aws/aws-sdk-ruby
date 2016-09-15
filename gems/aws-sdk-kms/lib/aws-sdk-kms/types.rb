@@ -10,25 +10,22 @@ module Aws
     module Types
 
       # Contains information about an alias.
+      # @!attribute [rw] alias_name
+      #   String that contains the alias.
+      #   @return [String]
+      #
+      # @!attribute [rw] alias_arn
+      #   String that contains the key ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] target_key_id
+      #   String that contains the key identifier pointed to by the alias.
+      #   @return [String]
       class AliasListEntry < Struct.new(
         :alias_name,
         :alias_arn,
         :target_key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] alias_name
-        #   String that contains the alias.
-        #   @return [String]
-
-        # @!attribute [rw] alias_arn
-        #   String that contains the key ARN.
-        #   @return [String]
-
-        # @!attribute [rw] target_key_id
-        #   String that contains the key identifier pointed to by the alias.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass CancelKeyDeletionRequest
@@ -37,39 +34,33 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   The unique identifier for the customer master key (CMK) for which to
+      #   cancel deletion.
+      #
+      #   To specify this value, use the unique key ID or the Amazon Resource
+      #   Name (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+      #
+      #   * Key ARN:
+      #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+      #
+      #   To obtain the unique key ID and key ARN for a given CMK, use
+      #   ListKeys or DescribeKey.
+      #   @return [String]
       class CancelKeyDeletionRequest < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The unique identifier for the customer master key (CMK) for which to
-        #   cancel deletion.
-        #
-        #   To specify this value, use the unique key ID or the Amazon Resource
-        #   Name (ARN) of the CMK. Examples:
-        #
-        #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-        #
-        #   * Key ARN:
-        #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-        #
-        #   To obtain the unique key ID and key ARN for a given CMK, use
-        #   ListKeys or DescribeKey.
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] key_id
+      #   The unique identifier of the master key for which deletion is
+      #   canceled.
+      #   @return [String]
       class CancelKeyDeletionResponse < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The unique identifier of the master key for which deletion is
-        #   canceled.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass CreateAliasRequest
@@ -79,30 +70,27 @@ module Aws
       #         alias_name: "AliasNameType", # required
       #         target_key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] alias_name
+      #   String that contains the display name. The name must start with the
+      #   word \"alias\" followed by a forward slash (alias/). Aliases that
+      #   begin with \"alias/AWS\" are reserved.
+      #   @return [String]
+      #
+      # @!attribute [rw] target_key_id
+      #   An identifier of the key for which you are creating the alias. This
+      #   value cannot be another alias but can be a globally unique
+      #   identifier or a fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
       class CreateAliasRequest < Struct.new(
         :alias_name,
         :target_key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] alias_name
-        #   String that contains the display name. The name must start with the
-        #   word \"alias\" followed by a forward slash (alias/). Aliases that
-        #   begin with \"alias/AWS\" are reserved.
-        #   @return [String]
-
-        # @!attribute [rw] target_key_id
-        #   An identifier of the key for which you are creating the alias. This
-        #   value cannot be another alias but can be a globally unique
-        #   identifier or a fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass CreateGrantRequest
@@ -124,6 +112,121 @@ module Aws
       #         grant_tokens: ["GrantTokenType"],
       #         name: "GrantNameType",
       #       }
+      # @!attribute [rw] key_id
+      #   The unique identifier for the customer master key (CMK) that the
+      #   grant applies to.
+      #
+      #   To specify this value, use the globally unique key ID or the Amazon
+      #   Resource Name (ARN) of the key. Examples:
+      #
+      #   * Globally unique key ID: 12345678-1234-1234-1234-123456789012
+      #
+      #   * Key ARN:
+      #     arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012
+      #   @return [String]
+      #
+      # @!attribute [rw] grantee_principal
+      #   The principal that is given permission to perform the operations
+      #   that the grant permits.
+      #
+      #   To specify the principal, use the [Amazon Resource Name (ARN)][1] of
+      #   an AWS principal. Valid AWS principals include AWS accounts (root),
+      #   IAM users, federated users, and assumed role users. For examples of
+      #   the ARN syntax to use for specifying a principal, see [AWS Identity
+      #   and Access Management (IAM)][2] in the Example ARNs section of the
+      #   *AWS General Reference*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
+      #   @return [String]
+      #
+      # @!attribute [rw] retiring_principal
+      #   The principal that is given permission to retire the grant by using
+      #   RetireGrant operation.
+      #
+      #   To specify the principal, use the [Amazon Resource Name (ARN)][1] of
+      #   an AWS principal. Valid AWS principals include AWS accounts (root),
+      #   IAM users, federated users, and assumed role users. For examples of
+      #   the ARN syntax to use for specifying a principal, see [AWS Identity
+      #   and Access Management (IAM)][2] in the Example ARNs section of the
+      #   *AWS General Reference*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
+      #   @return [String]
+      #
+      # @!attribute [rw] operations
+      #   A list of operations that the grant permits. The list can contain
+      #   any combination of one or more of the following values:
+      #
+      #   * Decrypt
+      #
+      #   * Encrypt
+      #
+      #   * GenerateDataKey
+      #
+      #   * GenerateDataKeyWithoutPlaintext
+      #
+      #   * [ReEncryptFrom][1]
+      #
+      #   * [ReEncryptTo][1]
+      #
+      #   * CreateGrant
+      #
+      #   * RetireGrant
+      #
+      #   * DescribeKey
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_ReEncrypt.html
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] constraints
+      #   The conditions under which the operations permitted by the grant are
+      #   allowed.
+      #
+      #   You can use this value to allow the operations permitted by the
+      #   grant only when a specified encryption context is present. For more
+      #   information, see [Encryption Context][1] in the *AWS Key Management
+      #   Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
+      #   @return [Types::GrantConstraints]
+      #
+      # @!attribute [rw] grant_tokens
+      #   A list of grant tokens.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] name
+      #   A friendly name for identifying the grant. Use this value to prevent
+      #   unintended creation of duplicate grants when retrying this request.
+      #
+      #   When this value is absent, all `CreateGrant` requests result in a
+      #   new grant with a unique `GrantId` even if all the supplied
+      #   parameters are identical. This can result in unintended duplicates
+      #   when you retry the `CreateGrant` request.
+      #
+      #   When this value is present, you can retry a `CreateGrant` request
+      #   with identical parameters; if the grant already exists, the original
+      #   `GrantId` is returned without creating a new grant. Note that the
+      #   returned grant token is unique with every `CreateGrant` request,
+      #   even when a duplicate `GrantId` is returned. All grant tokens
+      #   obtained in this way can be used interchangeably.
+      #   @return [String]
       class CreateGrantRequest < Struct.new(
         :key_id,
         :grantee_principal,
@@ -132,151 +235,30 @@ module Aws
         :constraints,
         :grant_tokens,
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The unique identifier for the customer master key (CMK) that the
-        #   grant applies to.
-        #
-        #   To specify this value, use the globally unique key ID or the Amazon
-        #   Resource Name (ARN) of the key. Examples:
-        #
-        #   * Globally unique key ID: 12345678-1234-1234-1234-123456789012
-        #
-        #   * Key ARN:
-        #     arn:aws:kms:us-west-2:123456789012:key/12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
-        # @!attribute [rw] grantee_principal
-        #   The principal that is given permission to perform the operations
-        #   that the grant permits.
-        #
-        #   To specify the principal, use the [Amazon Resource Name (ARN)][1] of
-        #   an AWS principal. Valid AWS principals include AWS accounts (root),
-        #   IAM users, federated users, and assumed role users. For examples of
-        #   the ARN syntax to use for specifying a principal, see [AWS Identity
-        #   and Access Management (IAM)][2] in the Example ARNs section of the
-        #   *AWS General Reference*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-        #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
-        #   @return [String]
-
-        # @!attribute [rw] retiring_principal
-        #   The principal that is given permission to retire the grant by using
-        #   RetireGrant operation.
-        #
-        #   To specify the principal, use the [Amazon Resource Name (ARN)][1] of
-        #   an AWS principal. Valid AWS principals include AWS accounts (root),
-        #   IAM users, federated users, and assumed role users. For examples of
-        #   the ARN syntax to use for specifying a principal, see [AWS Identity
-        #   and Access Management (IAM)][2] in the Example ARNs section of the
-        #   *AWS General Reference*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-        #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
-        #   @return [String]
-
-        # @!attribute [rw] operations
-        #   A list of operations that the grant permits. The list can contain
-        #   any combination of one or more of the following values:
-        #
-        #   * Decrypt
-        #
-        #   * Encrypt
-        #
-        #   * GenerateDataKey
-        #
-        #   * GenerateDataKeyWithoutPlaintext
-        #
-        #   * [ReEncryptFrom][1]
-        #
-        #   * [ReEncryptTo][1]
-        #
-        #   * CreateGrant
-        #
-        #   * RetireGrant
-        #
-        #   * DescribeKey
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_ReEncrypt.html
-        #   @return [Array<String>]
-
-        # @!attribute [rw] constraints
-        #   The conditions under which the operations permitted by the grant are
-        #   allowed.
-        #
-        #   You can use this value to allow the operations permitted by the
-        #   grant only when a specified encryption context is present. For more
-        #   information, see [Encryption Context][1] in the *AWS Key Management
-        #   Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
-        #   @return [Types::GrantConstraints]
-
-        # @!attribute [rw] grant_tokens
-        #   A list of grant tokens.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [Array<String>]
-
-        # @!attribute [rw] name
-        #   A friendly name for identifying the grant. Use this value to prevent
-        #   unintended creation of duplicate grants when retrying this request.
-        #
-        #   When this value is absent, all `CreateGrant` requests result in a
-        #   new grant with a unique `GrantId` even if all the supplied
-        #   parameters are identical. This can result in unintended duplicates
-        #   when you retry the `CreateGrant` request.
-        #
-        #   When this value is present, you can retry a `CreateGrant` request
-        #   with identical parameters; if the grant already exists, the original
-        #   `GrantId` is returned without creating a new grant. Note that the
-        #   returned grant token is unique with every `CreateGrant` request,
-        #   even when a duplicate `GrantId` is returned. All grant tokens
-        #   obtained in this way can be used interchangeably.
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] grant_token
+      #   The grant token.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [String]
+      #
+      # @!attribute [rw] grant_id
+      #   The unique identifier for the grant.
+      #
+      #   You can use the `GrantId` in a subsequent RetireGrant or RevokeGrant
+      #   operation.
+      #   @return [String]
       class CreateGrantResponse < Struct.new(
         :grant_token,
         :grant_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] grant_token
-        #   The grant token.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [String]
-
-        # @!attribute [rw] grant_id
-        #   The unique identifier for the grant.
-        #
-        #   You can use the `GrantId` in a subsequent RetireGrant or RevokeGrant
-        #   operation.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass CreateKeyRequest
@@ -289,116 +271,110 @@ module Aws
       #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL
       #         bypass_policy_lockout_safety_check: false,
       #       }
+      # @!attribute [rw] policy
+      #   The key policy to attach to the CMK.
+      #
+      #   If you specify a policy and do not set
+      #   `BypassPolicyLockoutSafetyCheck` to true, the policy must meet the
+      #   following criteria:
+      #
+      #   * It must allow the principal making the `CreateKey` request to make
+      #     a subsequent PutKeyPolicy request on the CMK. This reduces the
+      #     likelihood that the CMK becomes unmanageable. For more
+      #     information, refer to the scenario in the [Default Key Policy][1]
+      #     section in the *AWS Key Management Service Developer Guide*.
+      #
+      #   * The principal(s) specified in the key policy must exist and be
+      #     visible to AWS KMS. When you create a new AWS principal (for
+      #     example, an IAM user or role), you might need to enforce a delay
+      #     before specifying the new principal in a key policy because the
+      #     new principal might not immediately be visible to AWS KMS. For
+      #     more information, see [Changes that I make are not always
+      #     immediately visible][2] in the *IAM User Guide*.
+      #
+      #   If you do not specify a policy, AWS KMS attaches a default key
+      #   policy to the CMK. For more information, see [Default Key Policy][3]
+      #   in the *AWS Key Management Service Developer Guide*.
+      #
+      #   The policy size limit is 32 KiB (32768 bytes).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+      #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+      #   [3]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   A description of the CMK.
+      #
+      #   Use a description that helps you decide whether the CMK is
+      #   appropriate for a task.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_usage
+      #   The intended use of the CMK.
+      #
+      #   You can use CMKs only for symmetric encryption and decryption.
+      #   @return [String]
+      #
+      # @!attribute [rw] origin
+      #   The source of the CMK\'s key material.
+      #
+      #   The default is `AWS_KMS`, which means AWS KMS creates the key
+      #   material. When this parameter is set to `EXTERNAL`, the request
+      #   creates a CMK without key material so that you can import key
+      #   material from your existing key management infrastructure. For more
+      #   information about importing key material into AWS KMS, see
+      #   [Importing Key Material][1] in the *AWS Key Management Service
+      #   Developer Guide*.
+      #
+      #   The CMK\'s `Origin` is immutable and is set when the CMK is created.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+      #   @return [String]
+      #
+      # @!attribute [rw] bypass_policy_lockout_safety_check
+      #   A flag to indicate whether to bypass the key policy lockout safety
+      #   check.
+      #
+      #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
+      #   becomes unmanageable. Do not set this value to true
+      #   indiscriminately.
+      #
+      #    For more information, refer to the scenario in the [Default Key
+      #   Policy][1] section in the *AWS Key Management Service Developer
+      #   Guide*.
+      #
+      #    </important>
+      #
+      #   Use this parameter only when you include a policy in the request and
+      #   you intend to prevent the principal making the request from making a
+      #   subsequent PutKeyPolicy request on the CMK.
+      #
+      #   The default value is false.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+      #   @return [Boolean]
       class CreateKeyRequest < Struct.new(
         :policy,
         :description,
         :key_usage,
         :origin,
         :bypass_policy_lockout_safety_check)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy
-        #   The key policy to attach to the CMK.
-        #
-        #   If you specify a policy and do not set
-        #   `BypassPolicyLockoutSafetyCheck` to true, the policy must meet the
-        #   following criteria:
-        #
-        #   * It must allow the principal making the `CreateKey` request to make
-        #     a subsequent PutKeyPolicy request on the CMK. This reduces the
-        #     likelihood that the CMK becomes unmanageable. For more
-        #     information, refer to the scenario in the [Default Key Policy][1]
-        #     section in the *AWS Key Management Service Developer Guide*.
-        #
-        #   * The principal(s) specified in the key policy must exist and be
-        #     visible to AWS KMS. When you create a new AWS principal (for
-        #     example, an IAM user or role), you might need to enforce a delay
-        #     before specifying the new principal in a key policy because the
-        #     new principal might not immediately be visible to AWS KMS. For
-        #     more information, see [Changes that I make are not always
-        #     immediately visible][2] in the *IAM User Guide*.
-        #
-        #   If you do not specify a policy, AWS KMS attaches a default key
-        #   policy to the CMK. For more information, see [Default Key Policy][3]
-        #   in the *AWS Key Management Service Developer Guide*.
-        #
-        #   The policy size limit is 32 KiB (32768 bytes).
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-        #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-        #   [3]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
-        #   @return [String]
-
-        # @!attribute [rw] description
-        #   A description of the CMK.
-        #
-        #   Use a description that helps you decide whether the CMK is
-        #   appropriate for a task.
-        #   @return [String]
-
-        # @!attribute [rw] key_usage
-        #   The intended use of the CMK.
-        #
-        #   You can use CMKs only for symmetric encryption and decryption.
-        #   @return [String]
-
-        # @!attribute [rw] origin
-        #   The source of the CMK\'s key material.
-        #
-        #   The default is `AWS_KMS`, which means AWS KMS creates the key
-        #   material. When this parameter is set to `EXTERNAL`, the request
-        #   creates a CMK without key material so that you can import key
-        #   material from your existing key management infrastructure. For more
-        #   information about importing key material into AWS KMS, see
-        #   [Importing Key Material][1] in the *AWS Key Management Service
-        #   Developer Guide*.
-        #
-        #   The CMK\'s `Origin` is immutable and is set when the CMK is created.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-        #   @return [String]
-
-        # @!attribute [rw] bypass_policy_lockout_safety_check
-        #   A flag to indicate whether to bypass the key policy lockout safety
-        #   check.
-        #
-        #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
-        #   becomes unmanageable. Do not set this value to true
-        #   indiscriminately.
-        #
-        #    For more information, refer to the scenario in the [Default Key
-        #   Policy][1] section in the *AWS Key Management Service Developer
-        #   Guide*.
-        #
-        #    </important>
-        #
-        #   Use this parameter only when you include a policy in the request and
-        #   you intend to prevent the principal making the request from making a
-        #   subsequent PutKeyPolicy request on the CMK.
-        #
-        #   The default value is false.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-        #   @return [Boolean]
-
       end
 
+      # @!attribute [rw] key_metadata
+      #   Metadata associated with the CMK.
+      #   @return [Types::KeyMetadata]
       class CreateKeyResponse < Struct.new(
         :key_metadata)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_metadata
-        #   Metadata associated with the CMK.
-        #   @return [Types::KeyMetadata]
-
       end
 
       # @note When making an API call, pass DecryptRequest
@@ -411,57 +387,51 @@ module Aws
       #         },
       #         grant_tokens: ["GrantTokenType"],
       #       }
+      # @!attribute [rw] ciphertext_blob
+      #   Ciphertext to be decrypted. The blob includes metadata.
+      #   @return [String]
+      #
+      # @!attribute [rw] encryption_context
+      #   The encryption context. If this was specified in the Encrypt
+      #   function, it must be specified here or the decryption operation will
+      #   fail. For more information, see [Encryption Context][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] grant_tokens
+      #   A list of grant tokens.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [Array<String>]
       class DecryptRequest < Struct.new(
         :ciphertext_blob,
         :encryption_context,
         :grant_tokens)
-
         include Aws::Structure
-
-        # @!attribute [rw] ciphertext_blob
-        #   Ciphertext to be decrypted. The blob includes metadata.
-        #   @return [String]
-
-        # @!attribute [rw] encryption_context
-        #   The encryption context. If this was specified in the Encrypt
-        #   function, it must be specified here or the decryption operation will
-        #   fail. For more information, see [Encryption Context][1].
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] grant_tokens
-        #   A list of grant tokens.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [Array<String>]
-
       end
 
+      # @!attribute [rw] key_id
+      #   ARN of the key used to perform the decryption. This value is
+      #   returned if no errors are encountered during the operation.
+      #   @return [String]
+      #
+      # @!attribute [rw] plaintext
+      #   Decrypted plaintext data. This value may not be returned if the
+      #   customer master key is not available or if you didn\'t have
+      #   permission to use it.
+      #   @return [String]
       class DecryptResponse < Struct.new(
         :key_id,
         :plaintext)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   ARN of the key used to perform the decryption. This value is
-        #   returned if no errors are encountered during the operation.
-        #   @return [String]
-
-        # @!attribute [rw] plaintext
-        #   Decrypted plaintext data. This value may not be returned if the
-        #   customer master key is not available or if you didn\'t have
-        #   permission to use it.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass DeleteAliasRequest
@@ -470,17 +440,14 @@ module Aws
       #       {
       #         alias_name: "AliasNameType", # required
       #       }
+      # @!attribute [rw] alias_name
+      #   The alias to be deleted. The name must start with the word \"alias\"
+      #   followed by a forward slash (alias/). Aliases that begin with
+      #   \"alias/AWS\" are reserved.
+      #   @return [String]
       class DeleteAliasRequest < Struct.new(
         :alias_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] alias_name
-        #   The alias to be deleted. The name must start with the word \"alias\"
-        #   followed by a forward slash (alias/). Aliases that begin with
-        #   \"alias/AWS\" are reserved.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass DeleteImportedKeyMaterialRequest
@@ -489,24 +456,21 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   The identifier of the CMK whose key material to delete. The CMK\'s
+      #   `Origin` must be `EXTERNAL`.
+      #
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+      #
+      #   * Key ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+      #   @return [String]
       class DeleteImportedKeyMaterialRequest < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The identifier of the CMK whose key material to delete. The CMK\'s
-        #   `Origin` must be `EXTERNAL`.
-        #
-        #   A valid identifier is the unique key ID or the Amazon Resource Name
-        #   (ARN) of the CMK. Examples:
-        #
-        #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
-        #
-        #   * Key ARN:
-        #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass DescribeKeyRequest
@@ -516,51 +480,45 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         grant_tokens: ["GrantTokenType"],
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier, a fully specified ARN to either an alias
+      #   or a key, or an alias name prefixed by \"alias/\".
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias Name Example - alias/MyAliasName
+      #   @return [String]
+      #
+      # @!attribute [rw] grant_tokens
+      #   A list of grant tokens.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [Array<String>]
       class DescribeKeyRequest < Struct.new(
         :key_id,
         :grant_tokens)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier, a fully specified ARN to either an alias
-        #   or a key, or an alias name prefixed by \"alias/\".
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias Name Example - alias/MyAliasName
-        #   @return [String]
-
-        # @!attribute [rw] grant_tokens
-        #   A list of grant tokens.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [Array<String>]
-
       end
 
+      # @!attribute [rw] key_metadata
+      #   Metadata associated with the key.
+      #   @return [Types::KeyMetadata]
       class DescribeKeyResponse < Struct.new(
         :key_metadata)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_metadata
-        #   Metadata associated with the key.
-        #   @return [Types::KeyMetadata]
-
       end
 
       # @note When making an API call, pass DisableKeyRequest
@@ -569,23 +527,20 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the CMK.
+      #
+      #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
+      #   For example:
+      #
+      #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+      #
+      #   * ARN:
+      #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+      #   @return [String]
       class DisableKeyRequest < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the CMK.
-        #
-        #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
-        #   For example:
-        #
-        #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-        #
-        #   * ARN:
-        #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass DisableKeyRotationRequest
@@ -594,22 +549,19 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier or the fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
       class DisableKeyRotationRequest < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier or the fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass EnableKeyRequest
@@ -618,22 +570,19 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier or the fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
       class EnableKeyRequest < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier or the fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass EnableKeyRotationRequest
@@ -642,22 +591,19 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier or the fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
       class EnableKeyRotationRequest < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier or the fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass EncryptRequest
@@ -671,74 +617,68 @@ module Aws
       #         },
       #         grant_tokens: ["GrantTokenType"],
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier, a fully specified ARN to either an alias
+      #   or a key, or an alias name prefixed by \"alias/\".
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias Name Example - alias/MyAliasName
+      #   @return [String]
+      #
+      # @!attribute [rw] plaintext
+      #   Data to be encrypted.
+      #   @return [String]
+      #
+      # @!attribute [rw] encryption_context
+      #   Name/value pair that specifies the encryption context to be used for
+      #   authenticated encryption. If used here, the same value must be
+      #   supplied to the `Decrypt` API or decryption will fail. For more
+      #   information, see [Encryption Context][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] grant_tokens
+      #   A list of grant tokens.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [Array<String>]
       class EncryptRequest < Struct.new(
         :key_id,
         :plaintext,
         :encryption_context,
         :grant_tokens)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier, a fully specified ARN to either an alias
-        #   or a key, or an alias name prefixed by \"alias/\".
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias Name Example - alias/MyAliasName
-        #   @return [String]
-
-        # @!attribute [rw] plaintext
-        #   Data to be encrypted.
-        #   @return [String]
-
-        # @!attribute [rw] encryption_context
-        #   Name/value pair that specifies the encryption context to be used for
-        #   authenticated encryption. If used here, the same value must be
-        #   supplied to the `Decrypt` API or decryption will fail. For more
-        #   information, see [Encryption Context][1].
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] grant_tokens
-        #   A list of grant tokens.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [Array<String>]
-
       end
 
+      # @!attribute [rw] ciphertext_blob
+      #   The encrypted plaintext. If you are using the CLI, the value is
+      #   Base64 encoded. Otherwise, it is not encoded.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_id
+      #   The ID of the key used during encryption.
+      #   @return [String]
       class EncryptResponse < Struct.new(
         :ciphertext_blob,
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] ciphertext_blob
-        #   The encrypted plaintext. If you are using the CLI, the value is
-        #   Base64 encoded. Otherwise, it is not encoded.
-        #   @return [String]
-
-        # @!attribute [rw] key_id
-        #   The ID of the key used during encryption.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass GenerateDataKeyRequest
@@ -753,92 +693,86 @@ module Aws
       #         key_spec: "AES_256", # accepts AES_256, AES_128
       #         grant_tokens: ["GrantTokenType"],
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier, a fully specified ARN to either an alias
+      #   or a key, or an alias name prefixed by \"alias/\".
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias Name Example - alias/MyAliasName
+      #   @return [String]
+      #
+      # @!attribute [rw] encryption_context
+      #   Name/value pair that contains additional data to be authenticated
+      #   during the encryption and decryption processes that use the key.
+      #   This value is logged by AWS CloudTrail to provide context around the
+      #   data encrypted by the key.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] number_of_bytes
+      #   Integer that contains the number of bytes to generate. Common values
+      #   are 128, 256, 512, and 1024. 1024 is the current limit. We recommend
+      #   that you use the `KeySpec` parameter instead.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] key_spec
+      #   Value that identifies the encryption algorithm and key size to
+      #   generate a data key for. Currently this can be AES\_128 or AES\_256.
+      #   @return [String]
+      #
+      # @!attribute [rw] grant_tokens
+      #   A list of grant tokens.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [Array<String>]
       class GenerateDataKeyRequest < Struct.new(
         :key_id,
         :encryption_context,
         :number_of_bytes,
         :key_spec,
         :grant_tokens)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier, a fully specified ARN to either an alias
-        #   or a key, or an alias name prefixed by \"alias/\".
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias Name Example - alias/MyAliasName
-        #   @return [String]
-
-        # @!attribute [rw] encryption_context
-        #   Name/value pair that contains additional data to be authenticated
-        #   during the encryption and decryption processes that use the key.
-        #   This value is logged by AWS CloudTrail to provide context around the
-        #   data encrypted by the key.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] number_of_bytes
-        #   Integer that contains the number of bytes to generate. Common values
-        #   are 128, 256, 512, and 1024. 1024 is the current limit. We recommend
-        #   that you use the `KeySpec` parameter instead.
-        #   @return [Integer]
-
-        # @!attribute [rw] key_spec
-        #   Value that identifies the encryption algorithm and key size to
-        #   generate a data key for. Currently this can be AES\_128 or AES\_256.
-        #   @return [String]
-
-        # @!attribute [rw] grant_tokens
-        #   A list of grant tokens.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [Array<String>]
-
       end
 
+      # @!attribute [rw] ciphertext_blob
+      #   Ciphertext that contains the encrypted data key. You must store the
+      #   blob and enough information to reconstruct the encryption context so
+      #   that the data encrypted by using the key can later be decrypted. You
+      #   must provide both the ciphertext blob and the encryption context to
+      #   the Decrypt API to recover the plaintext data key and decrypt the
+      #   object.
+      #
+      #   If you are using the CLI, the value is Base64 encoded. Otherwise, it
+      #   is not encoded.
+      #   @return [String]
+      #
+      # @!attribute [rw] plaintext
+      #   Plaintext that contains the data key. Use this for encryption and
+      #   decryption and then remove it from memory as soon as possible.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_id
+      #   System generated unique identifier of the key to be used to decrypt
+      #   the encrypted copy of the data key.
+      #   @return [String]
       class GenerateDataKeyResponse < Struct.new(
         :ciphertext_blob,
         :plaintext,
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] ciphertext_blob
-        #   Ciphertext that contains the encrypted data key. You must store the
-        #   blob and enough information to reconstruct the encryption context so
-        #   that the data encrypted by using the key can later be decrypted. You
-        #   must provide both the ciphertext blob and the encryption context to
-        #   the Decrypt API to recover the plaintext data key and decrypt the
-        #   object.
-        #
-        #   If you are using the CLI, the value is Base64 encoded. Otherwise, it
-        #   is not encoded.
-        #   @return [String]
-
-        # @!attribute [rw] plaintext
-        #   Plaintext that contains the data key. Use this for encryption and
-        #   decryption and then remove it from memory as soon as possible.
-        #   @return [String]
-
-        # @!attribute [rw] key_id
-        #   System generated unique identifier of the key to be used to decrypt
-        #   the encrypted copy of the data key.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass GenerateDataKeyWithoutPlaintextRequest
@@ -853,81 +787,75 @@ module Aws
       #         number_of_bytes: 1,
       #         grant_tokens: ["GrantTokenType"],
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier, a fully specified ARN to either an alias
+      #   or a key, or an alias name prefixed by \"alias/\".
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias Name Example - alias/MyAliasName
+      #   @return [String]
+      #
+      # @!attribute [rw] encryption_context
+      #   Name:value pair that contains additional data to be authenticated
+      #   during the encryption and decryption processes.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] key_spec
+      #   Value that identifies the encryption algorithm and key size.
+      #   Currently this can be AES\_128 or AES\_256.
+      #   @return [String]
+      #
+      # @!attribute [rw] number_of_bytes
+      #   Integer that contains the number of bytes to generate. Common values
+      #   are 128, 256, 512, 1024 and so on. We recommend that you use the
+      #   `KeySpec` parameter instead.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] grant_tokens
+      #   A list of grant tokens.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [Array<String>]
       class GenerateDataKeyWithoutPlaintextRequest < Struct.new(
         :key_id,
         :encryption_context,
         :key_spec,
         :number_of_bytes,
         :grant_tokens)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier, a fully specified ARN to either an alias
-        #   or a key, or an alias name prefixed by \"alias/\".
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias Name Example - alias/MyAliasName
-        #   @return [String]
-
-        # @!attribute [rw] encryption_context
-        #   Name:value pair that contains additional data to be authenticated
-        #   during the encryption and decryption processes.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] key_spec
-        #   Value that identifies the encryption algorithm and key size.
-        #   Currently this can be AES\_128 or AES\_256.
-        #   @return [String]
-
-        # @!attribute [rw] number_of_bytes
-        #   Integer that contains the number of bytes to generate. Common values
-        #   are 128, 256, 512, 1024 and so on. We recommend that you use the
-        #   `KeySpec` parameter instead.
-        #   @return [Integer]
-
-        # @!attribute [rw] grant_tokens
-        #   A list of grant tokens.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [Array<String>]
-
       end
 
+      # @!attribute [rw] ciphertext_blob
+      #   Ciphertext that contains the wrapped data key. You must store the
+      #   blob and encryption context so that the key can be used in a future
+      #   decrypt operation.
+      #
+      #   If you are using the CLI, the value is Base64 encoded. Otherwise, it
+      #   is not encoded.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_id
+      #   System generated unique identifier of the key to be used to decrypt
+      #   the encrypted copy of the data key.
+      #   @return [String]
       class GenerateDataKeyWithoutPlaintextResponse < Struct.new(
         :ciphertext_blob,
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] ciphertext_blob
-        #   Ciphertext that contains the wrapped data key. You must store the
-        #   blob and encryption context so that the key can be used in a future
-        #   decrypt operation.
-        #
-        #   If you are using the CLI, the value is Base64 encoded. Otherwise, it
-        #   is not encoded.
-        #   @return [String]
-
-        # @!attribute [rw] key_id
-        #   System generated unique identifier of the key to be used to decrypt
-        #   the encrypted copy of the data key.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass GenerateRandomRequest
@@ -936,27 +864,21 @@ module Aws
       #       {
       #         number_of_bytes: 1,
       #       }
+      # @!attribute [rw] number_of_bytes
+      #   Integer that contains the number of bytes to generate. Common values
+      #   are 128, 256, 512, 1024 and so on. The current limit is 1024 bytes.
+      #   @return [Integer]
       class GenerateRandomRequest < Struct.new(
         :number_of_bytes)
-
         include Aws::Structure
-
-        # @!attribute [rw] number_of_bytes
-        #   Integer that contains the number of bytes to generate. Common values
-        #   are 128, 256, 512, 1024 and so on. The current limit is 1024 bytes.
-        #   @return [Integer]
-
       end
 
+      # @!attribute [rw] plaintext
+      #   Plaintext that contains the unpredictable byte string.
+      #   @return [String]
       class GenerateRandomResponse < Struct.new(
         :plaintext)
-
         include Aws::Structure
-
-        # @!attribute [rw] plaintext
-        #   Plaintext that contains the unpredictable byte string.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass GetKeyPolicyRequest
@@ -966,40 +888,34 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         policy_name: "PolicyNameType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier or the fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_name
+      #   String that contains the name of the policy. Currently, this must be
+      #   \"default\". Policy names can be discovered by calling
+      #   ListKeyPolicies.
+      #   @return [String]
       class GetKeyPolicyRequest < Struct.new(
         :key_id,
         :policy_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier or the fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
-        # @!attribute [rw] policy_name
-        #   String that contains the name of the policy. Currently, this must be
-        #   \"default\". Policy names can be discovered by calling
-        #   ListKeyPolicies.
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] policy
+      #   A policy document in JSON format.
+      #   @return [String]
       class GetKeyPolicyResponse < Struct.new(
         :policy)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy
-        #   A policy document in JSON format.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass GetKeyRotationStatusRequest
@@ -1008,33 +924,27 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier or the fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
       class GetKeyRotationStatusRequest < Struct.new(
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier or the fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] key_rotation_enabled
+      #   A Boolean value that specifies whether key rotation is enabled.
+      #   @return [Boolean]
       class GetKeyRotationStatusResponse < Struct.new(
         :key_rotation_enabled)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_rotation_enabled
-        #   A Boolean value that specifies whether key rotation is enabled.
-        #   @return [Boolean]
-
       end
 
       # @note When making an API call, pass GetParametersForImportRequest
@@ -1045,74 +955,68 @@ module Aws
       #         wrapping_algorithm: "RSAES_PKCS1_V1_5", # required, accepts RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
       #         wrapping_key_spec: "RSA_2048", # required, accepts RSA_2048
       #       }
+      # @!attribute [rw] key_id
+      #   The identifier of the CMK into which you will import key material.
+      #   The CMK\'s `Origin` must be `EXTERNAL`.
+      #
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+      #
+      #   * Key ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+      #   @return [String]
+      #
+      # @!attribute [rw] wrapping_algorithm
+      #   The algorithm you will use to encrypt the key material before
+      #   importing it with ImportKeyMaterial. For more information, see
+      #   [Encrypt the Key Material][1] in the *AWS Key Management Service
+      #   Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html
+      #   @return [String]
+      #
+      # @!attribute [rw] wrapping_key_spec
+      #   The type of wrapping key (public key) to return in the response.
+      #   Only 2048-bit RSA public keys are supported.
+      #   @return [String]
       class GetParametersForImportRequest < Struct.new(
         :key_id,
         :wrapping_algorithm,
         :wrapping_key_spec)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The identifier of the CMK into which you will import key material.
-        #   The CMK\'s `Origin` must be `EXTERNAL`.
-        #
-        #   A valid identifier is the unique key ID or the Amazon Resource Name
-        #   (ARN) of the CMK. Examples:
-        #
-        #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
-        #
-        #   * Key ARN:
-        #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
-        #   @return [String]
-
-        # @!attribute [rw] wrapping_algorithm
-        #   The algorithm you will use to encrypt the key material before
-        #   importing it with ImportKeyMaterial. For more information, see
-        #   [Encrypt the Key Material][1] in the *AWS Key Management Service
-        #   Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-encrypt-key-material.html
-        #   @return [String]
-
-        # @!attribute [rw] wrapping_key_spec
-        #   The type of wrapping key (public key) to return in the response.
-        #   Only 2048-bit RSA public keys are supported.
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] key_id
+      #   The identifier of the CMK to use in a subsequent ImportKeyMaterial
+      #   request. This is the same CMK specified in the
+      #   `GetParametersForImport` request.
+      #   @return [String]
+      #
+      # @!attribute [rw] import_token
+      #   The import token to send in a subsequent ImportKeyMaterial request.
+      #   @return [String]
+      #
+      # @!attribute [rw] public_key
+      #   The public key to use to encrypt the key material before importing
+      #   it with ImportKeyMaterial.
+      #   @return [String]
+      #
+      # @!attribute [rw] parameters_valid_to
+      #   The time at which the import token and public key are no longer
+      #   valid. After this time, you cannot use them to make an
+      #   ImportKeyMaterial request and you must send another
+      #   `GetParametersForImport` request to retrieve new ones.
+      #   @return [Time]
       class GetParametersForImportResponse < Struct.new(
         :key_id,
         :import_token,
         :public_key,
         :parameters_valid_to)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The identifier of the CMK to use in a subsequent ImportKeyMaterial
-        #   request. This is the same CMK specified in the
-        #   `GetParametersForImport` request.
-        #   @return [String]
-
-        # @!attribute [rw] import_token
-        #   The import token to send in a subsequent ImportKeyMaterial request.
-        #   @return [String]
-
-        # @!attribute [rw] public_key
-        #   The public key to use to encrypt the key material before importing
-        #   it with ImportKeyMaterial.
-        #   @return [String]
-
-        # @!attribute [rw] parameters_valid_to
-        #   The time at which the import token and public key are no longer
-        #   valid. After this time, you cannot use them to make an
-        #   ImportKeyMaterial request and you must send another
-        #   `GetParametersForImport` request to retrieve new ones.
-        #   @return [Time]
-
       end
 
       # A structure for specifying the conditions under which the operations
@@ -1137,32 +1041,67 @@ module Aws
       #           "EncryptionContextKey" => "EncryptionContextValue",
       #         },
       #       }
+      # @!attribute [rw] encryption_context_subset
+      #   Contains a list of key-value pairs, a subset of which must be
+      #   present in the encryption context of a subsequent operation
+      #   permitted by the grant. When a subsequent operation permitted by the
+      #   grant includes an encryption context that matches this list or is a
+      #   subset of this list, the grant allows the operation. Otherwise, the
+      #   operation is not allowed.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] encryption_context_equals
+      #   Contains a list of key-value pairs that must be present in the
+      #   encryption context of a subsequent operation permitted by the grant.
+      #   When a subsequent operation permitted by the grant includes an
+      #   encryption context that matches this list, the grant allows the
+      #   operation. Otherwise, the operation is not allowed.
+      #   @return [Hash<String,String>]
       class GrantConstraints < Struct.new(
         :encryption_context_subset,
         :encryption_context_equals)
-
         include Aws::Structure
-
-        # @!attribute [rw] encryption_context_subset
-        #   Contains a list of key-value pairs, a subset of which must be
-        #   present in the encryption context of a subsequent operation
-        #   permitted by the grant. When a subsequent operation permitted by the
-        #   grant includes an encryption context that matches this list or is a
-        #   subset of this list, the grant allows the operation. Otherwise, the
-        #   operation is not allowed.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] encryption_context_equals
-        #   Contains a list of key-value pairs that must be present in the
-        #   encryption context of a subsequent operation permitted by the grant.
-        #   When a subsequent operation permitted by the grant includes an
-        #   encryption context that matches this list, the grant allows the
-        #   operation. Otherwise, the operation is not allowed.
-        #   @return [Hash<String,String>]
-
       end
 
       # Contains information about an entry in a list of grants.
+      # @!attribute [rw] key_id
+      #   The unique identifier for the customer master key (CMK) to which the
+      #   grant applies.
+      #   @return [String]
+      #
+      # @!attribute [rw] grant_id
+      #   The unique identifier for the grant.
+      #   @return [String]
+      #
+      # @!attribute [rw] name
+      #   The friendly name that identifies the grant. If a name was provided
+      #   in the CreateGrant request, that name is returned. Otherwise this
+      #   value is null.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The date and time when the grant was created.
+      #   @return [Time]
+      #
+      # @!attribute [rw] grantee_principal
+      #   The principal that receives the grant\'s permissions.
+      #   @return [String]
+      #
+      # @!attribute [rw] retiring_principal
+      #   The principal that can retire the grant.
+      #   @return [String]
+      #
+      # @!attribute [rw] issuing_account
+      #   The AWS account under which the grant was issued.
+      #   @return [String]
+      #
+      # @!attribute [rw] operations
+      #   The list of operations permitted by the grant.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] constraints
+      #   The conditions under which the grant\'s operations are allowed.
+      #   @return [Types::GrantConstraints]
       class GrantListEntry < Struct.new(
         :key_id,
         :grant_id,
@@ -1173,48 +1112,7 @@ module Aws
         :issuing_account,
         :operations,
         :constraints)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The unique identifier for the customer master key (CMK) to which the
-        #   grant applies.
-        #   @return [String]
-
-        # @!attribute [rw] grant_id
-        #   The unique identifier for the grant.
-        #   @return [String]
-
-        # @!attribute [rw] name
-        #   The friendly name that identifies the grant. If a name was provided
-        #   in the CreateGrant request, that name is returned. Otherwise this
-        #   value is null.
-        #   @return [String]
-
-        # @!attribute [rw] creation_date
-        #   The date and time when the grant was created.
-        #   @return [Time]
-
-        # @!attribute [rw] grantee_principal
-        #   The principal that receives the grant\'s permissions.
-        #   @return [String]
-
-        # @!attribute [rw] retiring_principal
-        #   The principal that can retire the grant.
-        #   @return [String]
-
-        # @!attribute [rw] issuing_account
-        #   The AWS account under which the grant was issued.
-        #   @return [String]
-
-        # @!attribute [rw] operations
-        #   The list of operations permitted by the grant.
-        #   @return [Array<String>]
-
-        # @!attribute [rw] constraints
-        #   The conditions under which the grant\'s operations are allowed.
-        #   @return [Types::GrantConstraints]
-
       end
 
       # @note When making an API call, pass ImportKeyMaterialRequest
@@ -1227,83 +1125,152 @@ module Aws
       #         valid_to: Time.now,
       #         expiration_model: "KEY_MATERIAL_EXPIRES", # accepts KEY_MATERIAL_EXPIRES, KEY_MATERIAL_DOES_NOT_EXPIRE
       #       }
+      # @!attribute [rw] key_id
+      #   The identifier of the CMK to import the key material into. The
+      #   CMK\'s `Origin` must be `EXTERNAL`.
+      #
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+      #
+      #   * Key ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+      #   @return [String]
+      #
+      # @!attribute [rw] import_token
+      #   The import token that you received in the response to a previous
+      #   GetParametersForImport request. It must be from the same response
+      #   that contained the public key that you used to encrypt the key
+      #   material.
+      #   @return [String]
+      #
+      # @!attribute [rw] encrypted_key_material
+      #   The encrypted key material to import. It must be encrypted with the
+      #   public key that you received in the response to a previous
+      #   GetParametersForImport request, using the wrapping algorithm that
+      #   you specified in that request.
+      #   @return [String]
+      #
+      # @!attribute [rw] valid_to
+      #   The time at which the imported key material expires. When the key
+      #   material expires, AWS KMS deletes the key material and the CMK
+      #   becomes unusable. You must omit this parameter when the
+      #   `ExpirationModel` parameter is set to
+      #   `KEY_MATERIAL_DOES_NOT_EXPIRE`. Otherwise it is required.
+      #   @return [Time]
+      #
+      # @!attribute [rw] expiration_model
+      #   Specifies whether the key material expires. The default is
+      #   `KEY_MATERIAL_EXPIRES`, in which case you must include the `ValidTo`
+      #   parameter. When this parameter is set to
+      #   `KEY_MATERIAL_DOES_NOT_EXPIRE`, you must omit the `ValidTo`
+      #   parameter.
+      #   @return [String]
       class ImportKeyMaterialRequest < Struct.new(
         :key_id,
         :import_token,
         :encrypted_key_material,
         :valid_to,
         :expiration_model)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The identifier of the CMK to import the key material into. The
-        #   CMK\'s `Origin` must be `EXTERNAL`.
-        #
-        #   A valid identifier is the unique key ID or the Amazon Resource Name
-        #   (ARN) of the CMK. Examples:
-        #
-        #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
-        #
-        #   * Key ARN:
-        #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
-        #   @return [String]
-
-        # @!attribute [rw] import_token
-        #   The import token that you received in the response to a previous
-        #   GetParametersForImport request. It must be from the same response
-        #   that contained the public key that you used to encrypt the key
-        #   material.
-        #   @return [String]
-
-        # @!attribute [rw] encrypted_key_material
-        #   The encrypted key material to import. It must be encrypted with the
-        #   public key that you received in the response to a previous
-        #   GetParametersForImport request, using the wrapping algorithm that
-        #   you specified in that request.
-        #   @return [String]
-
-        # @!attribute [rw] valid_to
-        #   The time at which the imported key material expires. When the key
-        #   material expires, AWS KMS deletes the key material and the CMK
-        #   becomes unusable. You must omit this parameter when the
-        #   `ExpirationModel` parameter is set to
-        #   `KEY_MATERIAL_DOES_NOT_EXPIRE`. Otherwise it is required.
-        #   @return [Time]
-
-        # @!attribute [rw] expiration_model
-        #   Specifies whether the key material expires. The default is
-        #   `KEY_MATERIAL_EXPIRES`, in which case you must include the `ValidTo`
-        #   parameter. When this parameter is set to
-        #   `KEY_MATERIAL_DOES_NOT_EXPIRE`, you must omit the `ValidTo`
-        #   parameter.
-        #   @return [String]
-
       end
 
       class ImportKeyMaterialResponse < Aws::EmptyStructure; end
 
       # Contains information about each entry in the key list.
+      # @!attribute [rw] key_id
+      #   Unique identifier of the key.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_arn
+      #   ARN of the key.
+      #   @return [String]
       class KeyListEntry < Struct.new(
         :key_id,
         :key_arn)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   Unique identifier of the key.
-        #   @return [String]
-
-        # @!attribute [rw] key_arn
-        #   ARN of the key.
-        #   @return [String]
-
       end
 
       # Contains metadata about a customer master key (CMK).
       #
       # This data type is used as a response element for the CreateKey and
       # DescribeKey operations.
+      # @!attribute [rw] aws_account_id
+      #   The twelve-digit account ID of the AWS account that owns the CMK.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_id
+      #   The globally unique identifier for the CMK.
+      #   @return [String]
+      #
+      # @!attribute [rw] arn
+      #   The Amazon Resource Name (ARN) of the CMK. For examples, see [AWS
+      #   Key Management Service (AWS KMS)][1] in the Example ARNs section of
+      #   the *AWS General Reference*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The date and time when the CMK was created.
+      #   @return [Time]
+      #
+      # @!attribute [rw] enabled
+      #   Specifies whether the CMK is enabled. When `KeyState` is `Enabled`
+      #   this value is true, otherwise it is false.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] description
+      #   The description of the CMK.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_usage
+      #   The cryptographic operations for which you can use the CMK.
+      #   Currently the only allowed value is `ENCRYPT_DECRYPT`, which means
+      #   you can use the CMK for the Encrypt and Decrypt operations.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_state
+      #   The state of the CMK.
+      #
+      #   For more information about how key state affects the use of a CMK,
+      #   see [How Key State Affects the Use of a Customer Master Key][1] in
+      #   the *AWS Key Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+      #   @return [String]
+      #
+      # @!attribute [rw] deletion_date
+      #   The date and time after which AWS KMS deletes the CMK. This value is
+      #   present only when `KeyState` is `PendingDeletion`, otherwise this
+      #   value is omitted.
+      #   @return [Time]
+      #
+      # @!attribute [rw] valid_to
+      #   The time at which the imported key material expires. When the key
+      #   material expires, AWS KMS deletes the key material and the CMK
+      #   becomes unusable. This value is present only for CMKs whose `Origin`
+      #   is `EXTERNAL` and whose `ExpirationModel` is `KEY_MATERIAL_EXPIRES`,
+      #   otherwise this value is omitted.
+      #   @return [Time]
+      #
+      # @!attribute [rw] origin
+      #   The source of the CMK\'s key material. When this value is `AWS_KMS`,
+      #   AWS KMS created the key material. When this value is `EXTERNAL`, the
+      #   key material was imported from your existing key management
+      #   infrastructure or the CMK lacks key material.
+      #   @return [String]
+      #
+      # @!attribute [rw] expiration_model
+      #   Specifies whether the CMK\'s key material expires. This value is
+      #   present only when `Origin` is `EXTERNAL`, otherwise this value is
+      #   omitted.
+      #   @return [String]
       class KeyMetadata < Struct.new(
         :aws_account_id,
         :key_id,
@@ -1317,85 +1284,7 @@ module Aws
         :valid_to,
         :origin,
         :expiration_model)
-
         include Aws::Structure
-
-        # @!attribute [rw] aws_account_id
-        #   The twelve-digit account ID of the AWS account that owns the CMK.
-        #   @return [String]
-
-        # @!attribute [rw] key_id
-        #   The globally unique identifier for the CMK.
-        #   @return [String]
-
-        # @!attribute [rw] arn
-        #   The Amazon Resource Name (ARN) of the CMK. For examples, see [AWS
-        #   Key Management Service (AWS KMS)][1] in the Example ARNs section of
-        #   the *AWS General Reference*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms
-        #   @return [String]
-
-        # @!attribute [rw] creation_date
-        #   The date and time when the CMK was created.
-        #   @return [Time]
-
-        # @!attribute [rw] enabled
-        #   Specifies whether the CMK is enabled. When `KeyState` is `Enabled`
-        #   this value is true, otherwise it is false.
-        #   @return [Boolean]
-
-        # @!attribute [rw] description
-        #   The description of the CMK.
-        #   @return [String]
-
-        # @!attribute [rw] key_usage
-        #   The cryptographic operations for which you can use the CMK.
-        #   Currently the only allowed value is `ENCRYPT_DECRYPT`, which means
-        #   you can use the CMK for the Encrypt and Decrypt operations.
-        #   @return [String]
-
-        # @!attribute [rw] key_state
-        #   The state of the CMK.
-        #
-        #   For more information about how key state affects the use of a CMK,
-        #   see [How Key State Affects the Use of a Customer Master Key][1] in
-        #   the *AWS Key Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-        #   @return [String]
-
-        # @!attribute [rw] deletion_date
-        #   The date and time after which AWS KMS deletes the CMK. This value is
-        #   present only when `KeyState` is `PendingDeletion`, otherwise this
-        #   value is omitted.
-        #   @return [Time]
-
-        # @!attribute [rw] valid_to
-        #   The time at which the imported key material expires. When the key
-        #   material expires, AWS KMS deletes the key material and the CMK
-        #   becomes unusable. This value is present only for CMKs whose `Origin`
-        #   is `EXTERNAL` and whose `ExpirationModel` is `KEY_MATERIAL_EXPIRES`,
-        #   otherwise this value is omitted.
-        #   @return [Time]
-
-        # @!attribute [rw] origin
-        #   The source of the CMK\'s key material. When this value is `AWS_KMS`,
-        #   AWS KMS created the key material. When this value is `EXTERNAL`, the
-        #   key material was imported from your existing key management
-        #   infrastructure or the CMK lacks key material.
-        #   @return [String]
-
-        # @!attribute [rw] expiration_model
-        #   Specifies whether the CMK\'s key material expires. This value is
-        #   present only when `Origin` is `EXTERNAL`, otherwise this value is
-        #   omitted.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass ListAliasesRequest
@@ -1405,55 +1294,49 @@ module Aws
       #         limit: 1,
       #         marker: "MarkerType",
       #       }
+      # @!attribute [rw] limit
+      #   When paginating results, specify the maximum number of items to
+      #   return in the response. If additional items exist beyond the number
+      #   you specify, the `Truncated` element in the response is set to true.
+      #
+      #   This value is optional. If you include a value, it must be between 1
+      #   and 100, inclusive. If you do not include a value, it defaults to
+      #   50.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   Use this parameter only when paginating results and only in a
+      #   subsequent request after you receive a response with truncated
+      #   results. Set it to the value of `NextMarker` from the response you
+      #   just received.
+      #   @return [String]
       class ListAliasesRequest < Struct.new(
         :limit,
         :marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] limit
-        #   When paginating results, specify the maximum number of items to
-        #   return in the response. If additional items exist beyond the number
-        #   you specify, the `Truncated` element in the response is set to true.
-        #
-        #   This value is optional. If you include a value, it must be between 1
-        #   and 100, inclusive. If you do not include a value, it defaults to
-        #   50.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   Use this parameter only when paginating results and only in a
-        #   subsequent request after you receive a response with truncated
-        #   results. Set it to the value of `NextMarker` from the response you
-        #   just received.
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] aliases
+      #   A list of key aliases in the user\'s account.
+      #   @return [Array<Types::AliasListEntry>]
+      #
+      # @!attribute [rw] next_marker
+      #   When `Truncated` is true, this value is present and contains the
+      #   value to use for the `Marker` parameter in a subsequent pagination
+      #   request.
+      #   @return [String]
+      #
+      # @!attribute [rw] truncated
+      #   A flag that indicates whether there are more items in the list. If
+      #   your results were truncated, you can use the `Marker` parameter to
+      #   make a subsequent pagination request to retrieve more items in the
+      #   list.
+      #   @return [Boolean]
       class ListAliasesResponse < Struct.new(
         :aliases,
         :next_marker,
         :truncated)
-
         include Aws::Structure
-
-        # @!attribute [rw] aliases
-        #   A list of key aliases in the user\'s account.
-        #   @return [Array<Types::AliasListEntry>]
-
-        # @!attribute [rw] next_marker
-        #   When `Truncated` is true, this value is present and contains the
-        #   value to use for the `Marker` parameter in a subsequent pagination
-        #   request.
-        #   @return [String]
-
-        # @!attribute [rw] truncated
-        #   A flag that indicates whether there are more items in the list. If
-        #   your results were truncated, you can use the `Marker` parameter to
-        #   make a subsequent pagination request to retrieve more items in the
-        #   list.
-        #   @return [Boolean]
-
       end
 
       # @note When making an API call, pass ListGrantsRequest
@@ -1464,67 +1347,61 @@ module Aws
       #         marker: "MarkerType",
       #         key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] limit
+      #   When paginating results, specify the maximum number of items to
+      #   return in the response. If additional items exist beyond the number
+      #   you specify, the `Truncated` element in the response is set to true.
+      #
+      #   This value is optional. If you include a value, it must be between 1
+      #   and 100, inclusive. If you do not include a value, it defaults to
+      #   50.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   Use this parameter only when paginating results and only in a
+      #   subsequent request after you receive a response with truncated
+      #   results. Set it to the value of `NextMarker` from the response you
+      #   just received.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier or the fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
       class ListGrantsRequest < Struct.new(
         :limit,
         :marker,
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] limit
-        #   When paginating results, specify the maximum number of items to
-        #   return in the response. If additional items exist beyond the number
-        #   you specify, the `Truncated` element in the response is set to true.
-        #
-        #   This value is optional. If you include a value, it must be between 1
-        #   and 100, inclusive. If you do not include a value, it defaults to
-        #   50.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   Use this parameter only when paginating results and only in a
-        #   subsequent request after you receive a response with truncated
-        #   results. Set it to the value of `NextMarker` from the response you
-        #   just received.
-        #   @return [String]
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier or the fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] grants
+      #   A list of grants.
+      #   @return [Array<Types::GrantListEntry>]
+      #
+      # @!attribute [rw] next_marker
+      #   When `Truncated` is true, this value is present and contains the
+      #   value to use for the `Marker` parameter in a subsequent pagination
+      #   request.
+      #   @return [String]
+      #
+      # @!attribute [rw] truncated
+      #   A flag that indicates whether there are more items in the list. If
+      #   your results were truncated, you can use the `Marker` parameter to
+      #   make a subsequent pagination request to retrieve more items in the
+      #   list.
+      #   @return [Boolean]
       class ListGrantsResponse < Struct.new(
         :grants,
         :next_marker,
         :truncated)
-
         include Aws::Structure
-
-        # @!attribute [rw] grants
-        #   A list of grants.
-        #   @return [Array<Types::GrantListEntry>]
-
-        # @!attribute [rw] next_marker
-        #   When `Truncated` is true, this value is present and contains the
-        #   value to use for the `Marker` parameter in a subsequent pagination
-        #   request.
-        #   @return [String]
-
-        # @!attribute [rw] truncated
-        #   A flag that indicates whether there are more items in the list. If
-        #   your results were truncated, you can use the `Marker` parameter to
-        #   make a subsequent pagination request to retrieve more items in the
-        #   list.
-        #   @return [Boolean]
-
       end
 
       # @note When making an API call, pass ListKeyPoliciesRequest
@@ -1535,76 +1412,70 @@ module Aws
       #         limit: 1,
       #         marker: "MarkerType",
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier, a fully specified ARN to either an alias
+      #   or a key, or an alias name prefixed by \"alias/\".
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias Name Example - alias/MyAliasName
+      #   @return [String]
+      #
+      # @!attribute [rw] limit
+      #   When paginating results, specify the maximum number of items to
+      #   return in the response. If additional items exist beyond the number
+      #   you specify, the `Truncated` element in the response is set to true.
+      #
+      #   This value is optional. If you include a value, it must be between 1
+      #   and 1000, inclusive. If you do not include a value, it defaults to
+      #   100.
+      #
+      #   Currently only 1 policy can be attached to a key.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   Use this parameter only when paginating results and only in a
+      #   subsequent request after you receive a response with truncated
+      #   results. Set it to the value of `NextMarker` from the response you
+      #   just received.
+      #   @return [String]
       class ListKeyPoliciesRequest < Struct.new(
         :key_id,
         :limit,
         :marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier, a fully specified ARN to either an alias
-        #   or a key, or an alias name prefixed by \"alias/\".
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias Name Example - alias/MyAliasName
-        #   @return [String]
-
-        # @!attribute [rw] limit
-        #   When paginating results, specify the maximum number of items to
-        #   return in the response. If additional items exist beyond the number
-        #   you specify, the `Truncated` element in the response is set to true.
-        #
-        #   This value is optional. If you include a value, it must be between 1
-        #   and 1000, inclusive. If you do not include a value, it defaults to
-        #   100.
-        #
-        #   Currently only 1 policy can be attached to a key.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   Use this parameter only when paginating results and only in a
-        #   subsequent request after you receive a response with truncated
-        #   results. Set it to the value of `NextMarker` from the response you
-        #   just received.
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] policy_names
+      #   A list of policy names. Currently, there is only one policy and it
+      #   is named \"Default\".
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] next_marker
+      #   When `Truncated` is true, this value is present and contains the
+      #   value to use for the `Marker` parameter in a subsequent pagination
+      #   request.
+      #   @return [String]
+      #
+      # @!attribute [rw] truncated
+      #   A flag that indicates whether there are more items in the list. If
+      #   your results were truncated, you can use the `Marker` parameter to
+      #   make a subsequent pagination request to retrieve more items in the
+      #   list.
+      #   @return [Boolean]
       class ListKeyPoliciesResponse < Struct.new(
         :policy_names,
         :next_marker,
         :truncated)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_names
-        #   A list of policy names. Currently, there is only one policy and it
-        #   is named \"Default\".
-        #   @return [Array<String>]
-
-        # @!attribute [rw] next_marker
-        #   When `Truncated` is true, this value is present and contains the
-        #   value to use for the `Marker` parameter in a subsequent pagination
-        #   request.
-        #   @return [String]
-
-        # @!attribute [rw] truncated
-        #   A flag that indicates whether there are more items in the list. If
-        #   your results were truncated, you can use the `Marker` parameter to
-        #   make a subsequent pagination request to retrieve more items in the
-        #   list.
-        #   @return [Boolean]
-
       end
 
       # @note When making an API call, pass ListKeysRequest
@@ -1614,55 +1485,49 @@ module Aws
       #         limit: 1,
       #         marker: "MarkerType",
       #       }
+      # @!attribute [rw] limit
+      #   When paginating results, specify the maximum number of items to
+      #   return in the response. If additional items exist beyond the number
+      #   you specify, the `Truncated` element in the response is set to true.
+      #
+      #   This value is optional. If you include a value, it must be between 1
+      #   and 1000, inclusive. If you do not include a value, it defaults to
+      #   100.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   Use this parameter only when paginating results and only in a
+      #   subsequent request after you receive a response with truncated
+      #   results. Set it to the value of `NextMarker` from the response you
+      #   just received.
+      #   @return [String]
       class ListKeysRequest < Struct.new(
         :limit,
         :marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] limit
-        #   When paginating results, specify the maximum number of items to
-        #   return in the response. If additional items exist beyond the number
-        #   you specify, the `Truncated` element in the response is set to true.
-        #
-        #   This value is optional. If you include a value, it must be between 1
-        #   and 1000, inclusive. If you do not include a value, it defaults to
-        #   100.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   Use this parameter only when paginating results and only in a
-        #   subsequent request after you receive a response with truncated
-        #   results. Set it to the value of `NextMarker` from the response you
-        #   just received.
-        #   @return [String]
-
       end
 
+      # @!attribute [rw] keys
+      #   A list of keys.
+      #   @return [Array<Types::KeyListEntry>]
+      #
+      # @!attribute [rw] next_marker
+      #   When `Truncated` is true, this value is present and contains the
+      #   value to use for the `Marker` parameter in a subsequent pagination
+      #   request.
+      #   @return [String]
+      #
+      # @!attribute [rw] truncated
+      #   A flag that indicates whether there are more items in the list. If
+      #   your results were truncated, you can use the `Marker` parameter to
+      #   make a subsequent pagination request to retrieve more items in the
+      #   list.
+      #   @return [Boolean]
       class ListKeysResponse < Struct.new(
         :keys,
         :next_marker,
         :truncated)
-
         include Aws::Structure
-
-        # @!attribute [rw] keys
-        #   A list of keys.
-        #   @return [Array<Types::KeyListEntry>]
-
-        # @!attribute [rw] next_marker
-        #   When `Truncated` is true, this value is present and contains the
-        #   value to use for the `Marker` parameter in a subsequent pagination
-        #   request.
-        #   @return [String]
-
-        # @!attribute [rw] truncated
-        #   A flag that indicates whether there are more items in the list. If
-        #   your results were truncated, you can use the `Marker` parameter to
-        #   make a subsequent pagination request to retrieve more items in the
-        #   list.
-        #   @return [Boolean]
-
       end
 
       # @note When making an API call, pass ListRetirableGrantsRequest
@@ -1673,46 +1538,43 @@ module Aws
       #         marker: "MarkerType",
       #         retiring_principal: "PrincipalIdType", # required
       #       }
+      # @!attribute [rw] limit
+      #   When paginating results, specify the maximum number of items to
+      #   return in the response. If additional items exist beyond the number
+      #   you specify, the `Truncated` element in the response is set to true.
+      #
+      #   This value is optional. If you include a value, it must be between 1
+      #   and 100, inclusive. If you do not include a value, it defaults to
+      #   50.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   Use this parameter only when paginating results and only in a
+      #   subsequent request after you receive a response with truncated
+      #   results. Set it to the value of `NextMarker` from the response you
+      #   just received.
+      #   @return [String]
+      #
+      # @!attribute [rw] retiring_principal
+      #   The retiring principal for which to list grants.
+      #
+      #   To specify the retiring principal, use the [Amazon Resource Name
+      #   (ARN)][1] of an AWS principal. Valid AWS principals include AWS
+      #   accounts (root), IAM users, federated users, and assumed role users.
+      #   For examples of the ARN syntax for specifying a principal, see [AWS
+      #   Identity and Access Management (IAM)][2] in the Example ARNs section
+      #   of the *Amazon Web Services General Reference*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
+      #   @return [String]
       class ListRetirableGrantsRequest < Struct.new(
         :limit,
         :marker,
         :retiring_principal)
-
         include Aws::Structure
-
-        # @!attribute [rw] limit
-        #   When paginating results, specify the maximum number of items to
-        #   return in the response. If additional items exist beyond the number
-        #   you specify, the `Truncated` element in the response is set to true.
-        #
-        #   This value is optional. If you include a value, it must be between 1
-        #   and 100, inclusive. If you do not include a value, it defaults to
-        #   50.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   Use this parameter only when paginating results and only in a
-        #   subsequent request after you receive a response with truncated
-        #   results. Set it to the value of `NextMarker` from the response you
-        #   just received.
-        #   @return [String]
-
-        # @!attribute [rw] retiring_principal
-        #   The retiring principal for which to list grants.
-        #
-        #   To specify the retiring principal, use the [Amazon Resource Name
-        #   (ARN)][1] of an AWS principal. Valid AWS principals include AWS
-        #   accounts (root), IAM users, federated users, and assumed role users.
-        #   For examples of the ARN syntax for specifying a principal, see [AWS
-        #   Identity and Access Management (IAM)][2] in the Example ARNs section
-        #   of the *Amazon Web Services General Reference*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-        #   [2]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass PutKeyPolicyRequest
@@ -1724,85 +1586,82 @@ module Aws
       #         policy: "PolicyType", # required
       #         bypass_policy_lockout_safety_check: false,
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the CMK.
+      #
+      #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
+      #   For example:
+      #
+      #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+      #
+      #   * ARN:
+      #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_name
+      #   The name of the key policy.
+      #
+      #   This value must be `default`.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy
+      #   The key policy to attach to the CMK.
+      #
+      #   If you do not set `BypassPolicyLockoutSafetyCheck` to true, the
+      #   policy must meet the following criteria:
+      #
+      #   * It must allow the principal making the `PutKeyPolicy` request to
+      #     make a subsequent `PutKeyPolicy` request on the CMK. This reduces
+      #     the likelihood that the CMK becomes unmanageable. For more
+      #     information, refer to the scenario in the [Default Key Policy][1]
+      #     section in the *AWS Key Management Service Developer Guide*.
+      #
+      #   * The principal(s) specified in the key policy must exist and be
+      #     visible to AWS KMS. When you create a new AWS principal (for
+      #     example, an IAM user or role), you might need to enforce a delay
+      #     before specifying the new principal in a key policy because the
+      #     new principal might not immediately be visible to AWS KMS. For
+      #     more information, see [Changes that I make are not always
+      #     immediately visible][2] in the *IAM User Guide*.
+      #
+      #   The policy size limit is 32 KiB (32768 bytes).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+      #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
+      #   @return [String]
+      #
+      # @!attribute [rw] bypass_policy_lockout_safety_check
+      #   A flag to indicate whether to bypass the key policy lockout safety
+      #   check.
+      #
+      #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
+      #   becomes unmanageable. Do not set this value to true
+      #   indiscriminately.
+      #
+      #    For more information, refer to the scenario in the [Default Key
+      #   Policy][1] section in the *AWS Key Management Service Developer
+      #   Guide*.
+      #
+      #    </important>
+      #
+      #   Use this parameter only when you intend to prevent the principal
+      #   making the request from making a subsequent `PutKeyPolicy` request
+      #   on the CMK.
+      #
+      #   The default value is false.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+      #   @return [Boolean]
       class PutKeyPolicyRequest < Struct.new(
         :key_id,
         :policy_name,
         :policy,
         :bypass_policy_lockout_safety_check)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the CMK.
-        #
-        #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
-        #   For example:
-        #
-        #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-        #
-        #   * ARN:
-        #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-        #   @return [String]
-
-        # @!attribute [rw] policy_name
-        #   The name of the key policy.
-        #
-        #   This value must be `default`.
-        #   @return [String]
-
-        # @!attribute [rw] policy
-        #   The key policy to attach to the CMK.
-        #
-        #   If you do not set `BypassPolicyLockoutSafetyCheck` to true, the
-        #   policy must meet the following criteria:
-        #
-        #   * It must allow the principal making the `PutKeyPolicy` request to
-        #     make a subsequent `PutKeyPolicy` request on the CMK. This reduces
-        #     the likelihood that the CMK becomes unmanageable. For more
-        #     information, refer to the scenario in the [Default Key Policy][1]
-        #     section in the *AWS Key Management Service Developer Guide*.
-        #
-        #   * The principal(s) specified in the key policy must exist and be
-        #     visible to AWS KMS. When you create a new AWS principal (for
-        #     example, an IAM user or role), you might need to enforce a delay
-        #     before specifying the new principal in a key policy because the
-        #     new principal might not immediately be visible to AWS KMS. For
-        #     more information, see [Changes that I make are not always
-        #     immediately visible][2] in the *IAM User Guide*.
-        #
-        #   The policy size limit is 32 KiB (32768 bytes).
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-        #   [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-        #   @return [String]
-
-        # @!attribute [rw] bypass_policy_lockout_safety_check
-        #   A flag to indicate whether to bypass the key policy lockout safety
-        #   check.
-        #
-        #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
-        #   becomes unmanageable. Do not set this value to true
-        #   indiscriminately.
-        #
-        #    For more information, refer to the scenario in the [Default Key
-        #   Policy][1] section in the *AWS Key Management Service Developer
-        #   Guide*.
-        #
-        #    </important>
-        #
-        #   Use this parameter only when you intend to prevent the principal
-        #   making the request from making a subsequent `PutKeyPolicy` request
-        #   on the CMK.
-        #
-        #   The default value is false.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-        #   @return [Boolean]
-
       end
 
       # @note When making an API call, pass ReEncryptRequest
@@ -1819,79 +1678,73 @@ module Aws
       #         },
       #         grant_tokens: ["GrantTokenType"],
       #       }
+      # @!attribute [rw] ciphertext_blob
+      #   Ciphertext of the data to re-encrypt.
+      #   @return [String]
+      #
+      # @!attribute [rw] source_encryption_context
+      #   Encryption context used to encrypt and decrypt the data specified in
+      #   the `CiphertextBlob` parameter.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] destination_key_id
+      #   A unique identifier for the customer master key used to re-encrypt
+      #   the data. This value can be a globally unique identifier, a fully
+      #   specified ARN to either an alias or a key, or an alias name prefixed
+      #   by \"alias/\".
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #
+      #   * Alias Name Example - alias/MyAliasName
+      #   @return [String]
+      #
+      # @!attribute [rw] destination_encryption_context
+      #   Encryption context to be used when the data is re-encrypted.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] grant_tokens
+      #   A list of grant tokens.
+      #
+      #   For more information, see [Grant Tokens][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
+      #   @return [Array<String>]
       class ReEncryptRequest < Struct.new(
         :ciphertext_blob,
         :source_encryption_context,
         :destination_key_id,
         :destination_encryption_context,
         :grant_tokens)
-
         include Aws::Structure
-
-        # @!attribute [rw] ciphertext_blob
-        #   Ciphertext of the data to re-encrypt.
-        #   @return [String]
-
-        # @!attribute [rw] source_encryption_context
-        #   Encryption context used to encrypt and decrypt the data specified in
-        #   the `CiphertextBlob` parameter.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] destination_key_id
-        #   A unique identifier for the customer master key used to re-encrypt
-        #   the data. This value can be a globally unique identifier, a fully
-        #   specified ARN to either an alias or a key, or an alias name prefixed
-        #   by \"alias/\".
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #
-        #   * Alias Name Example - alias/MyAliasName
-        #   @return [String]
-
-        # @!attribute [rw] destination_encryption_context
-        #   Encryption context to be used when the data is re-encrypted.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] grant_tokens
-        #   A list of grant tokens.
-        #
-        #   For more information, see [Grant Tokens][1] in the *AWS Key
-        #   Management Service Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token
-        #   @return [Array<String>]
-
       end
 
+      # @!attribute [rw] ciphertext_blob
+      #   The re-encrypted data. If you are using the CLI, the value is Base64
+      #   encoded. Otherwise, it is not encoded.
+      #   @return [String]
+      #
+      # @!attribute [rw] source_key_id
+      #   Unique identifier of the key used to originally encrypt the data.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_id
+      #   Unique identifier of the key used to re-encrypt the data.
+      #   @return [String]
       class ReEncryptResponse < Struct.new(
         :ciphertext_blob,
         :source_key_id,
         :key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] ciphertext_blob
-        #   The re-encrypted data. If you are using the CLI, the value is Base64
-        #   encoded. Otherwise, it is not encoded.
-        #   @return [String]
-
-        # @!attribute [rw] source_key_id
-        #   Unique identifier of the key used to originally encrypt the data.
-        #   @return [String]
-
-        # @!attribute [rw] key_id
-        #   Unique identifier of the key used to re-encrypt the data.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass RetireGrantRequest
@@ -1902,39 +1755,36 @@ module Aws
       #         key_id: "KeyIdType",
       #         grant_id: "GrantIdType",
       #       }
+      # @!attribute [rw] grant_token
+      #   Token that identifies the grant to be retired.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key associated with the
+      #   grant. This value can be a globally unique identifier or a fully
+      #   specified ARN of the key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
+      #
+      # @!attribute [rw] grant_id
+      #   Unique identifier of the grant to be retired. The grant ID is
+      #   returned by the `CreateGrant` function.
+      #
+      #   * Grant ID Example -
+      #     0123456789012345678901234567890123456789012345678901234567890123
+      #
+      #   ^
+      #   @return [String]
       class RetireGrantRequest < Struct.new(
         :grant_token,
         :key_id,
         :grant_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] grant_token
-        #   Token that identifies the grant to be retired.
-        #   @return [String]
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key associated with the
-        #   grant. This value can be a globally unique identifier or a fully
-        #   specified ARN of the key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
-        # @!attribute [rw] grant_id
-        #   Unique identifier of the grant to be retired. The grant ID is
-        #   returned by the `CreateGrant` function.
-        #
-        #   * Grant ID Example -
-        #     0123456789012345678901234567890123456789012345678901234567890123
-        #
-        #   ^
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass RevokeGrantRequest
@@ -1944,28 +1794,25 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         grant_id: "GrantIdType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key associated with the
+      #   grant. This value can be a globally unique identifier or the fully
+      #   specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
+      #
+      # @!attribute [rw] grant_id
+      #   Identifier of the grant to be revoked.
+      #   @return [String]
       class RevokeGrantRequest < Struct.new(
         :key_id,
         :grant_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key associated with the
-        #   grant. This value can be a globally unique identifier or the fully
-        #   specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
-        # @!attribute [rw] grant_id
-        #   Identifier of the grant to be revoked.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass ScheduleKeyDeletionRequest
@@ -1975,53 +1822,47 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         pending_window_in_days: 1,
       #       }
+      # @!attribute [rw] key_id
+      #   The unique identifier for the customer master key (CMK) to delete.
+      #
+      #   To specify this value, use the unique key ID or the Amazon Resource
+      #   Name (ARN) of the CMK. Examples:
+      #
+      #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+      #
+      #   * Key ARN:
+      #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+      #
+      #   To obtain the unique key ID and key ARN for a given CMK, use
+      #   ListKeys or DescribeKey.
+      #   @return [String]
+      #
+      # @!attribute [rw] pending_window_in_days
+      #   The waiting period, specified in number of days. After the waiting
+      #   period ends, AWS KMS deletes the customer master key (CMK).
+      #
+      #   This value is optional. If you include a value, it must be between 7
+      #   and 30, inclusive. If you do not include a value, it defaults to 30.
+      #   @return [Integer]
       class ScheduleKeyDeletionRequest < Struct.new(
         :key_id,
         :pending_window_in_days)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The unique identifier for the customer master key (CMK) to delete.
-        #
-        #   To specify this value, use the unique key ID or the Amazon Resource
-        #   Name (ARN) of the CMK. Examples:
-        #
-        #   * Unique key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-        #
-        #   * Key ARN:
-        #     arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-        #
-        #   To obtain the unique key ID and key ARN for a given CMK, use
-        #   ListKeys or DescribeKey.
-        #   @return [String]
-
-        # @!attribute [rw] pending_window_in_days
-        #   The waiting period, specified in number of days. After the waiting
-        #   period ends, AWS KMS deletes the customer master key (CMK).
-        #
-        #   This value is optional. If you include a value, it must be between 7
-        #   and 30, inclusive. If you do not include a value, it defaults to 30.
-        #   @return [Integer]
-
       end
 
+      # @!attribute [rw] key_id
+      #   The unique identifier of the customer master key (CMK) for which
+      #   deletion is scheduled.
+      #   @return [String]
+      #
+      # @!attribute [rw] deletion_date
+      #   The date and time after which AWS KMS deletes the customer master
+      #   key (CMK).
+      #   @return [Time]
       class ScheduleKeyDeletionResponse < Struct.new(
         :key_id,
         :deletion_date)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   The unique identifier of the customer master key (CMK) for which
-        #   deletion is scheduled.
-        #   @return [String]
-
-        # @!attribute [rw] deletion_date
-        #   The date and time after which AWS KMS deletes the customer master
-        #   key (CMK).
-        #   @return [Time]
-
       end
 
       # @note When making an API call, pass UpdateAliasRequest
@@ -2031,33 +1872,30 @@ module Aws
       #         alias_name: "AliasNameType", # required
       #         target_key_id: "KeyIdType", # required
       #       }
+      # @!attribute [rw] alias_name
+      #   String that contains the name of the alias to be modified. The name
+      #   must start with the word \"alias\" followed by a forward slash
+      #   (alias/). Aliases that begin with \"alias/aws\" are reserved.
+      #   @return [String]
+      #
+      # @!attribute [rw] target_key_id
+      #   Unique identifier of the customer master key to be mapped to the
+      #   alias. This value can be a globally unique identifier or the fully
+      #   specified ARN of a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #
+      #   You can call ListAliases to verify that the alias is mapped to the
+      #   correct `TargetKeyId`.
+      #   @return [String]
       class UpdateAliasRequest < Struct.new(
         :alias_name,
         :target_key_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] alias_name
-        #   String that contains the name of the alias to be modified. The name
-        #   must start with the word \"alias\" followed by a forward slash
-        #   (alias/). Aliases that begin with \"alias/aws\" are reserved.
-        #   @return [String]
-
-        # @!attribute [rw] target_key_id
-        #   Unique identifier of the customer master key to be mapped to the
-        #   alias. This value can be a globally unique identifier or the fully
-        #   specified ARN of a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #
-        #   You can call ListAliases to verify that the alias is mapped to the
-        #   correct `TargetKeyId`.
-        #   @return [String]
-
       end
 
       # @note When making an API call, pass UpdateKeyDescriptionRequest
@@ -2067,27 +1905,24 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         description: "DescriptionType", # required
       #       }
+      # @!attribute [rw] key_id
+      #   A unique identifier for the customer master key. This value can be a
+      #   globally unique identifier or the fully specified ARN to a key.
+      #
+      #   * Key ARN Example -
+      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #
+      #   * Globally Unique Key ID Example -
+      #     12345678-1234-1234-1234-123456789012
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   New description for the key.
+      #   @return [String]
       class UpdateKeyDescriptionRequest < Struct.new(
         :key_id,
         :description)
-
         include Aws::Structure
-
-        # @!attribute [rw] key_id
-        #   A unique identifier for the customer master key. This value can be a
-        #   globally unique identifier or the fully specified ARN to a key.
-        #
-        #   * Key ARN Example -
-        #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
-        #
-        #   * Globally Unique Key ID Example -
-        #     12345678-1234-1234-1234-123456789012
-        #   @return [String]
-
-        # @!attribute [rw] description
-        #   New description for the key.
-        #   @return [String]
-
       end
 
     end

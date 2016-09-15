@@ -16,7 +16,7 @@ module AwsSdkCodeGenerator
         apply_class_docs
         apply_input_example if used_as_input
         apply_returned_by
-
+        document_members
         if @shape['members'].empty?
           apply_empty_structure
         else
@@ -61,17 +61,14 @@ module AwsSdkCodeGenerator
           comma = n == @shape['members'].size - 1 ? ')' : ','
           append("  :#{underscore(member_name)}#{comma}")
         end
-        append("\n")
         append("  include Aws::Structure")
-        append("\n")
-        document_members
         append("end")
       end
 
       def document_members
-        @shape['members'].each do |member_name, member_ref|
-          indent(Dsl::Docstring.new(attribute_macro(member_name, member_ref)).to_s)
-          append("\n")
+        @shape['members'].each.with_index do |(name, ref), n|
+          append("#") unless n == 0
+          append(Dsl::Docstring.new(attribute_macro(name, ref)).to_s)
         end
       end
 

@@ -14,25 +14,22 @@ module Aws
       # (STS). They can be used to access input and output artifacts in the
       # Amazon S3 bucket used to store artifact for the pipeline in AWS
       # CodePipeline.
+      # @!attribute [rw] access_key_id
+      #   The access key for the session.
+      #   @return [String]
+      #
+      # @!attribute [rw] secret_access_key
+      #   The secret access key for the session.
+      #   @return [String]
+      #
+      # @!attribute [rw] session_token
+      #   The token for the session.
+      #   @return [String]
       class AWSSessionCredentials < Struct.new(
         :access_key_id,
         :secret_access_key,
         :session_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] access_key_id
-        #   The access key for the session.
-        #   @return [String]
-
-        # @!attribute [rw] secret_access_key
-        #   The secret access key for the session.
-        #   @return [String]
-
-        # @!attribute [rw] session_token
-        #   The token for the session.
-        #   @return [String]
-
       end
 
       # Represents the input of an acknowledge job action.
@@ -43,35 +40,29 @@ module Aws
       #         job_id: "JobId", # required
       #         nonce: "Nonce", # required
       #       }
+      # @!attribute [rw] job_id
+      #   The unique system-generated ID of the job for which you want to
+      #   confirm receipt.
+      #   @return [String]
+      #
+      # @!attribute [rw] nonce
+      #   A system-generated random number that AWS CodePipeline uses to
+      #   ensure that the job is being worked on by only one job worker. This
+      #   number must be returned in the response.
+      #   @return [String]
       class AcknowledgeJobInput < Struct.new(
         :job_id,
         :nonce)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The unique system-generated ID of the job for which you want to
-        #   confirm receipt.
-        #   @return [String]
-
-        # @!attribute [rw] nonce
-        #   A system-generated random number that AWS CodePipeline uses to
-        #   ensure that the job is being worked on by only one job worker. This
-        #   number must be returned in the response.
-        #   @return [String]
-
       end
 
       # Represents the output of an acknowledge job action.
+      # @!attribute [rw] status
+      #   Whether the job worker has received the specified job.
+      #   @return [String]
       class AcknowledgeJobOutput < Struct.new(
         :status)
-
         include Aws::Structure
-
-        # @!attribute [rw] status
-        #   Whether the job worker has received the specified job.
-        #   @return [String]
-
       end
 
       # Represents the input of an acknowledge third party job action.
@@ -83,53 +74,44 @@ module Aws
       #         nonce: "Nonce", # required
       #         client_token: "ClientToken", # required
       #       }
+      # @!attribute [rw] job_id
+      #   The unique system-generated ID of the job.
+      #   @return [String]
+      #
+      # @!attribute [rw] nonce
+      #   A system-generated random number that AWS CodePipeline uses to
+      #   ensure that the job is being worked on by only one job worker. This
+      #   number must be returned in the response.
+      #   @return [String]
+      #
+      # @!attribute [rw] client_token
+      #   The clientToken portion of the clientId and clientToken pair used to
+      #   verify that the calling entity is allowed access to the job and its
+      #   details.
+      #   @return [String]
       class AcknowledgeThirdPartyJobInput < Struct.new(
         :job_id,
         :nonce,
         :client_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The unique system-generated ID of the job.
-        #   @return [String]
-
-        # @!attribute [rw] nonce
-        #   A system-generated random number that AWS CodePipeline uses to
-        #   ensure that the job is being worked on by only one job worker. This
-        #   number must be returned in the response.
-        #   @return [String]
-
-        # @!attribute [rw] client_token
-        #   The clientToken portion of the clientId and clientToken pair used to
-        #   verify that the calling entity is allowed access to the job and its
-        #   details.
-        #   @return [String]
-
       end
 
       # Represents the output of an acknowledge third party job action.
+      # @!attribute [rw] status
+      #   The status information for the third party job, if any.
+      #   @return [String]
       class AcknowledgeThirdPartyJobOutput < Struct.new(
         :status)
-
         include Aws::Structure
-
-        # @!attribute [rw] status
-        #   The status information for the third party job, if any.
-        #   @return [String]
-
       end
 
       # Represents information about an action configuration.
+      # @!attribute [rw] configuration
+      #   The configuration data for the action.
+      #   @return [Hash<String,String>]
       class ActionConfiguration < Struct.new(
         :configuration)
-
         include Aws::Structure
-
-        # @!attribute [rw] configuration
-        #   The configuration data for the action.
-        #   @return [Hash<String,String>]
-
       end
 
       # Represents information about an action configuration property.
@@ -145,6 +127,50 @@ module Aws
       #         description: "Description",
       #         type: "String", # accepts String, Number, Boolean
       #       }
+      # @!attribute [rw] name
+      #   The name of the action configuration property.
+      #   @return [String]
+      #
+      # @!attribute [rw] required
+      #   Whether the configuration property is a required value.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] key
+      #   Whether the configuration property is a key.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] secret
+      #   Whether the configuration property is secret. Secrets are hidden
+      #   from all calls except for GetJobDetails, GetThirdPartyJobDetails,
+      #   PollForJobs, and PollForThirdPartyJobs.
+      #
+      #   When updating a pipeline, passing \* \* \* \* \* without changing
+      #   any other values of the action will preserve the prior value of the
+      #   secret.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] queryable
+      #   Indicates that the proprety will be used in conjunction with
+      #   PollForJobs. When creating a custom action, an action can have up to
+      #   one queryable property. If it has one, that property must be both
+      #   required and not secret.
+      #
+      #   If you create a pipeline with a custom action type, and that custom
+      #   action contains a queryable property, the value for that
+      #   configuration property is subject to additional restrictions. The
+      #   value must be less than or equal to twenty (20) characters. The
+      #   value can contain only alphanumeric characters, underscores, and
+      #   hyphens.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] description
+      #   The description of the action configuration property that will be
+      #   displayed to users.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The type of the configuration property.
+      #   @return [String]
       class ActionConfigurationProperty < Struct.new(
         :name,
         :required,
@@ -153,67 +179,17 @@ module Aws
         :queryable,
         :description,
         :type)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the action configuration property.
-        #   @return [String]
-
-        # @!attribute [rw] required
-        #   Whether the configuration property is a required value.
-        #   @return [Boolean]
-
-        # @!attribute [rw] key
-        #   Whether the configuration property is a key.
-        #   @return [Boolean]
-
-        # @!attribute [rw] secret
-        #   Whether the configuration property is secret. Secrets are hidden
-        #   from all calls except for GetJobDetails, GetThirdPartyJobDetails,
-        #   PollForJobs, and PollForThirdPartyJobs.
-        #
-        #   When updating a pipeline, passing \* \* \* \* \* without changing
-        #   any other values of the action will preserve the prior value of the
-        #   secret.
-        #   @return [Boolean]
-
-        # @!attribute [rw] queryable
-        #   Indicates that the proprety will be used in conjunction with
-        #   PollForJobs. When creating a custom action, an action can have up to
-        #   one queryable property. If it has one, that property must be both
-        #   required and not secret.
-        #
-        #   If you create a pipeline with a custom action type, and that custom
-        #   action contains a queryable property, the value for that
-        #   configuration property is subject to additional restrictions. The
-        #   value must be less than or equal to twenty (20) characters. The
-        #   value can contain only alphanumeric characters, underscores, and
-        #   hyphens.
-        #   @return [Boolean]
-
-        # @!attribute [rw] description
-        #   The description of the action configuration property that will be
-        #   displayed to users.
-        #   @return [String]
-
-        # @!attribute [rw] type
-        #   The type of the configuration property.
-        #   @return [String]
-
       end
 
       # Represents the context of an action within the stage of a pipeline to
       # a job worker.
+      # @!attribute [rw] name
+      #   The name of the action within the context of a job.
+      #   @return [String]
       class ActionContext < Struct.new(
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the action within the context of a job.
-        #   @return [String]
-
       end
 
       # Represents information about an action declaration.
@@ -244,6 +220,36 @@ module Aws
       #         ],
       #         role_arn: "RoleArn",
       #       }
+      # @!attribute [rw] name
+      #   The action declaration\'s name.
+      #   @return [String]
+      #
+      # @!attribute [rw] action_type_id
+      #   The configuration information for the action type.
+      #   @return [Types::ActionTypeId]
+      #
+      # @!attribute [rw] run_order
+      #   The order in which actions are run.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] configuration
+      #   The action declaration\'s configuration.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] output_artifacts
+      #   The name or ID of the result of the action declaration, such as a
+      #   test or build artifact.
+      #   @return [Array<Types::OutputArtifact>]
+      #
+      # @!attribute [rw] input_artifacts
+      #   The name or ID of the artifact consumed by the action, such as a
+      #   test or build artifact.
+      #   @return [Array<Types::InputArtifact>]
+      #
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM service role that will perform the declared
+      #   action. This is assumed through the roleArn for the pipeline.
+      #   @return [String]
       class ActionDeclaration < Struct.new(
         :name,
         :action_type_id,
@@ -252,43 +258,50 @@ module Aws
         :output_artifacts,
         :input_artifacts,
         :role_arn)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The action declaration\'s name.
-        #   @return [String]
-
-        # @!attribute [rw] action_type_id
-        #   The configuration information for the action type.
-        #   @return [Types::ActionTypeId]
-
-        # @!attribute [rw] run_order
-        #   The order in which actions are run.
-        #   @return [Integer]
-
-        # @!attribute [rw] configuration
-        #   The action declaration\'s configuration.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] output_artifacts
-        #   The name or ID of the result of the action declaration, such as a
-        #   test or build artifact.
-        #   @return [Array<Types::OutputArtifact>]
-
-        # @!attribute [rw] input_artifacts
-        #   The name or ID of the artifact consumed by the action, such as a
-        #   test or build artifact.
-        #   @return [Array<Types::InputArtifact>]
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM service role that will perform the declared
-        #   action. This is assumed through the roleArn for the pipeline.
-        #   @return [String]
-
       end
 
       # Represents information about the run of an action.
+      # @!attribute [rw] status
+      #   The status of the action, or for a completed action, the last status
+      #   of the action.
+      #   @return [String]
+      #
+      # @!attribute [rw] summary
+      #   A summary of the run of the action.
+      #   @return [String]
+      #
+      # @!attribute [rw] last_status_change
+      #   The last status change of the action.
+      #   @return [Time]
+      #
+      # @!attribute [rw] token
+      #   The system-generated token used to identify a unique approval
+      #   request. The token for each open approval request can be obtained
+      #   using the GetPipelineState command and is used to validate that the
+      #   approval request corresponding to this token is still valid.
+      #   @return [String]
+      #
+      # @!attribute [rw] last_updated_by
+      #   The ARN of the user who last changed the pipeline.
+      #   @return [String]
+      #
+      # @!attribute [rw] external_execution_id
+      #   The external ID of the run of the action.
+      #   @return [String]
+      #
+      # @!attribute [rw] external_execution_url
+      #   The URL of a resource external to AWS that will be used when running
+      #   the action, for example an external repository URL.
+      #   @return [String]
+      #
+      # @!attribute [rw] percent_complete
+      #   A percentage of completeness of the action as it runs.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] error_details
+      #   The details of an error returned by a URL external to AWS.
+      #   @return [Types::ErrorDetails]
       class ActionExecution < Struct.new(
         :status,
         :summary,
@@ -299,50 +312,7 @@ module Aws
         :external_execution_url,
         :percent_complete,
         :error_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] status
-        #   The status of the action, or for a completed action, the last status
-        #   of the action.
-        #   @return [String]
-
-        # @!attribute [rw] summary
-        #   A summary of the run of the action.
-        #   @return [String]
-
-        # @!attribute [rw] last_status_change
-        #   The last status change of the action.
-        #   @return [Time]
-
-        # @!attribute [rw] token
-        #   The system-generated token used to identify a unique approval
-        #   request. The token for each open approval request can be obtained
-        #   using the GetPipelineState command and is used to validate that the
-        #   approval request corresponding to this token is still valid.
-        #   @return [String]
-
-        # @!attribute [rw] last_updated_by
-        #   The ARN of the user who last changed the pipeline.
-        #   @return [String]
-
-        # @!attribute [rw] external_execution_id
-        #   The external ID of the run of the action.
-        #   @return [String]
-
-        # @!attribute [rw] external_execution_url
-        #   The URL of a resource external to AWS that will be used when running
-        #   the action, for example an external repository URL.
-        #   @return [String]
-
-        # @!attribute [rw] percent_complete
-        #   A percentage of completeness of the action as it runs.
-        #   @return [Integer]
-
-        # @!attribute [rw] error_details
-        #   The details of an error returned by a URL external to AWS.
-        #   @return [Types::ErrorDetails]
-
       end
 
       # Represents information about the version (or revision) of an action.
@@ -354,96 +324,87 @@ module Aws
       #         revision_change_id: "RevisionChangeIdentifier", # required
       #         created: Time.now, # required
       #       }
+      # @!attribute [rw] revision_id
+      #   The system-generated unique ID that identifies the revision number
+      #   of the action.
+      #   @return [String]
+      #
+      # @!attribute [rw] revision_change_id
+      #   The unique identifier of the change that set the state to this
+      #   revision, for example a deployment ID or timestamp.
+      #   @return [String]
+      #
+      # @!attribute [rw] created
+      #   The date and time when the most recent version of the action was
+      #   created, in timestamp format.
+      #   @return [Time]
       class ActionRevision < Struct.new(
         :revision_id,
         :revision_change_id,
         :created)
-
         include Aws::Structure
-
-        # @!attribute [rw] revision_id
-        #   The system-generated unique ID that identifies the revision number
-        #   of the action.
-        #   @return [String]
-
-        # @!attribute [rw] revision_change_id
-        #   The unique identifier of the change that set the state to this
-        #   revision, for example a deployment ID or timestamp.
-        #   @return [String]
-
-        # @!attribute [rw] created
-        #   The date and time when the most recent version of the action was
-        #   created, in timestamp format.
-        #   @return [Time]
-
       end
 
       # Represents information about the state of an action.
+      # @!attribute [rw] action_name
+      #   The name of the action.
+      #   @return [String]
+      #
+      # @!attribute [rw] current_revision
+      #   Represents information about the version (or revision) of an action.
+      #   @return [Types::ActionRevision]
+      #
+      # @!attribute [rw] latest_execution
+      #   Represents information about the run of an action.
+      #   @return [Types::ActionExecution]
+      #
+      # @!attribute [rw] entity_url
+      #   A URL link for more information about the state of the action, such
+      #   as a deployment group details page.
+      #   @return [String]
+      #
+      # @!attribute [rw] revision_url
+      #   A URL link for more information about the revision, such as a commit
+      #   details page.
+      #   @return [String]
       class ActionState < Struct.new(
         :action_name,
         :current_revision,
         :latest_execution,
         :entity_url,
         :revision_url)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_name
-        #   The name of the action.
-        #   @return [String]
-
-        # @!attribute [rw] current_revision
-        #   Represents information about the version (or revision) of an action.
-        #   @return [Types::ActionRevision]
-
-        # @!attribute [rw] latest_execution
-        #   Represents information about the run of an action.
-        #   @return [Types::ActionExecution]
-
-        # @!attribute [rw] entity_url
-        #   A URL link for more information about the state of the action, such
-        #   as a deployment group details page.
-        #   @return [String]
-
-        # @!attribute [rw] revision_url
-        #   A URL link for more information about the revision, such as a commit
-        #   details page.
-        #   @return [String]
-
       end
 
       # Returns information about the details of an action type.
+      # @!attribute [rw] id
+      #   Represents information about an action type.
+      #   @return [Types::ActionTypeId]
+      #
+      # @!attribute [rw] settings
+      #   The settings for the action type.
+      #   @return [Types::ActionTypeSettings]
+      #
+      # @!attribute [rw] action_configuration_properties
+      #   The configuration properties for the action type.
+      #   @return [Array<Types::ActionConfigurationProperty>]
+      #
+      # @!attribute [rw] input_artifact_details
+      #   The details of the input artifact for the action, such as its commit
+      #   ID.
+      #   @return [Types::ArtifactDetails]
+      #
+      # @!attribute [rw] output_artifact_details
+      #   The details of the output artifact of the action, such as its commit
+      #   ID.
+      #   @return [Types::ArtifactDetails]
       class ActionType < Struct.new(
         :id,
         :settings,
         :action_configuration_properties,
         :input_artifact_details,
         :output_artifact_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] id
-        #   Represents information about an action type.
-        #   @return [Types::ActionTypeId]
-
-        # @!attribute [rw] settings
-        #   The settings for the action type.
-        #   @return [Types::ActionTypeSettings]
-
-        # @!attribute [rw] action_configuration_properties
-        #   The configuration properties for the action type.
-        #   @return [Array<Types::ActionConfigurationProperty>]
-
-        # @!attribute [rw] input_artifact_details
-        #   The details of the input artifact for the action, such as its commit
-        #   ID.
-        #   @return [Types::ArtifactDetails]
-
-        # @!attribute [rw] output_artifact_details
-        #   The details of the output artifact of the action, such as its commit
-        #   ID.
-        #   @return [Types::ArtifactDetails]
-
       end
 
       # Represents information about an action type.
@@ -456,35 +417,32 @@ module Aws
       #         provider: "ActionProvider", # required
       #         version: "Version", # required
       #       }
+      # @!attribute [rw] category
+      #   A category defines what kind of action can be taken in the stage,
+      #   and constrains the provider type for the action. Valid categories
+      #   are limited to one of the values below.
+      #   @return [String]
+      #
+      # @!attribute [rw] owner
+      #   The creator of the action being called.
+      #   @return [String]
+      #
+      # @!attribute [rw] provider
+      #   The provider of the service being called by the action. Valid
+      #   providers are determined by the action category. For example, an
+      #   action in the Deploy category type might have a provider of AWS
+      #   CodeDeploy, which would be specified as CodeDeploy.
+      #   @return [String]
+      #
+      # @!attribute [rw] version
+      #   A string that identifies the action type.
+      #   @return [String]
       class ActionTypeId < Struct.new(
         :category,
         :owner,
         :provider,
         :version)
-
         include Aws::Structure
-
-        # @!attribute [rw] category
-        #   A category defines what kind of action can be taken in the stage,
-        #   and constrains the provider type for the action. Valid categories
-        #   are limited to one of the values below.
-        #   @return [String]
-
-        # @!attribute [rw] owner
-        #   The creator of the action being called.
-        #   @return [String]
-
-        # @!attribute [rw] provider
-        #   The provider of the service being called by the action. Valid
-        #   providers are determined by the action category. For example, an
-        #   action in the Deploy category type might have a provider of AWS
-        #   CodeDeploy, which would be specified as CodeDeploy.
-        #   @return [String]
-
-        # @!attribute [rw] version
-        #   A string that identifies the action type.
-        #   @return [String]
-
       end
 
       # Returns information about the settings for an action type.
@@ -497,41 +455,38 @@ module Aws
       #         execution_url_template: "UrlTemplate",
       #         revision_url_template: "UrlTemplate",
       #       }
+      # @!attribute [rw] third_party_configuration_url
+      #   The URL of a sign-up page where users can sign up for an external
+      #   service and perform initial configuration of the action provided by
+      #   that service.
+      #   @return [String]
+      #
+      # @!attribute [rw] entity_url_template
+      #   The URL returned to the AWS CodePipeline console that provides a
+      #   deep link to the resources of the external system, such as the
+      #   configuration page for an AWS CodeDeploy deployment group. This link
+      #   is provided as part of the action display within the pipeline.
+      #   @return [String]
+      #
+      # @!attribute [rw] execution_url_template
+      #   The URL returned to the AWS CodePipeline console that contains a
+      #   link to the top-level landing page for the external system, such as
+      #   console page for AWS CodeDeploy. This link is shown on the pipeline
+      #   view page in the AWS CodePipeline console and provides a link to the
+      #   execution entity of the external action.
+      #   @return [String]
+      #
+      # @!attribute [rw] revision_url_template
+      #   The URL returned to the AWS CodePipeline console that contains a
+      #   link to the page where customers can update or change the
+      #   configuration of the external action.
+      #   @return [String]
       class ActionTypeSettings < Struct.new(
         :third_party_configuration_url,
         :entity_url_template,
         :execution_url_template,
         :revision_url_template)
-
         include Aws::Structure
-
-        # @!attribute [rw] third_party_configuration_url
-        #   The URL of a sign-up page where users can sign up for an external
-        #   service and perform initial configuration of the action provided by
-        #   that service.
-        #   @return [String]
-
-        # @!attribute [rw] entity_url_template
-        #   The URL returned to the AWS CodePipeline console that provides a
-        #   deep link to the resources of the external system, such as the
-        #   configuration page for an AWS CodeDeploy deployment group. This link
-        #   is provided as part of the action display within the pipeline.
-        #   @return [String]
-
-        # @!attribute [rw] execution_url_template
-        #   The URL returned to the AWS CodePipeline console that contains a
-        #   link to the top-level landing page for the external system, such as
-        #   console page for AWS CodeDeploy. This link is shown on the pipeline
-        #   view page in the AWS CodePipeline console and provides a link to the
-        #   execution entity of the external action.
-        #   @return [String]
-
-        # @!attribute [rw] revision_url_template
-        #   The URL returned to the AWS CodePipeline console that contains a
-        #   link to the page where customers can update or change the
-        #   configuration of the external action.
-        #   @return [String]
-
       end
 
       # Represents information about the result of an approval request.
@@ -542,45 +497,39 @@ module Aws
       #         summary: "ApprovalSummary", # required
       #         status: "Approved", # required, accepts Approved, Rejected
       #       }
+      # @!attribute [rw] summary
+      #   The summary of the current status of the approval request.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The response submitted by a reviewer assigned to an approval action
+      #   request.
+      #   @return [String]
       class ApprovalResult < Struct.new(
         :summary,
         :status)
-
         include Aws::Structure
-
-        # @!attribute [rw] summary
-        #   The summary of the current status of the approval request.
-        #   @return [String]
-
-        # @!attribute [rw] status
-        #   The response submitted by a reviewer assigned to an approval action
-        #   request.
-        #   @return [String]
-
       end
 
       # Represents information about an artifact that will be worked upon by
       # actions in the pipeline.
+      # @!attribute [rw] name
+      #   The artifact\'s name.
+      #   @return [String]
+      #
+      # @!attribute [rw] revision
+      #   The artifact\'s revision ID. Depending on the type of object, this
+      #   could be a commit ID (GitHub) or a revision ID (Amazon S3).
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   The location of an artifact.
+      #   @return [Types::ArtifactLocation]
       class Artifact < Struct.new(
         :name,
         :revision,
         :location)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The artifact\'s name.
-        #   @return [String]
-
-        # @!attribute [rw] revision
-        #   The artifact\'s revision ID. Depending on the type of object, this
-        #   could be a commit ID (GitHub) or a revision ID (Amazon S3).
-        #   @return [String]
-
-        # @!attribute [rw] location
-        #   The location of an artifact.
-        #   @return [Types::ArtifactLocation]
-
       end
 
       # Returns information about the details of an artifact.
@@ -591,40 +540,67 @@ module Aws
       #         minimum_count: 1, # required
       #         maximum_count: 1, # required
       #       }
+      # @!attribute [rw] minimum_count
+      #   The minimum number of artifacts allowed for the action type.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] maximum_count
+      #   The maximum number of artifacts allowed for the action type.
+      #   @return [Integer]
       class ArtifactDetails < Struct.new(
         :minimum_count,
         :maximum_count)
-
         include Aws::Structure
-
-        # @!attribute [rw] minimum_count
-        #   The minimum number of artifacts allowed for the action type.
-        #   @return [Integer]
-
-        # @!attribute [rw] maximum_count
-        #   The maximum number of artifacts allowed for the action type.
-        #   @return [Integer]
-
       end
 
       # Represents information about the location of an artifact.
+      # @!attribute [rw] type
+      #   The type of artifact in the location.
+      #   @return [String]
+      #
+      # @!attribute [rw] s3_location
+      #   The Amazon S3 bucket that contains the artifact.
+      #   @return [Types::S3ArtifactLocation]
       class ArtifactLocation < Struct.new(
         :type,
         :s3_location)
-
         include Aws::Structure
-
-        # @!attribute [rw] type
-        #   The type of artifact in the location.
-        #   @return [String]
-
-        # @!attribute [rw] s3_location
-        #   The Amazon S3 bucket that contains the artifact.
-        #   @return [Types::S3ArtifactLocation]
-
       end
 
       # Represents revision details of an artifact.
+      # @!attribute [rw] name
+      #   The name of an artifact. This name might be system-generated, such
+      #   as \"MyApp\", or might be defined by the user when an action is
+      #   created.
+      #   @return [String]
+      #
+      # @!attribute [rw] revision_id
+      #   The revision ID of the artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] revision_change_identifier
+      #   An additional identifier for a revision, such as a commit date or,
+      #   for artifacts stored in Amazon S3 buckets, the ETag value.
+      #   @return [String]
+      #
+      # @!attribute [rw] revision_summary
+      #   Summary information about the most recent revision of the artifact.
+      #   For GitHub and AWS CodeCommit repositories, the commit message. For
+      #   Amazon S3 buckets or actions, the user-provided content of a
+      #   `codepipeline-artifact-revision-summary` key specified in the object
+      #   metadata.
+      #   @return [String]
+      #
+      # @!attribute [rw] created
+      #   The date and time when the most recent revision of the artifact was
+      #   created, in timestamp format.
+      #   @return [Time]
+      #
+      # @!attribute [rw] revision_url
+      #   The commit ID for the artifact revision. For artifacts stored in
+      #   GitHub or AWS CodeCommit repositories, the commit ID is linked to a
+      #   commit details page.
+      #   @return [String]
       class ArtifactRevision < Struct.new(
         :name,
         :revision_id,
@@ -632,43 +608,7 @@ module Aws
         :revision_summary,
         :created,
         :revision_url)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of an artifact. This name might be system-generated, such
-        #   as \"MyApp\", or might be defined by the user when an action is
-        #   created.
-        #   @return [String]
-
-        # @!attribute [rw] revision_id
-        #   The revision ID of the artifact.
-        #   @return [String]
-
-        # @!attribute [rw] revision_change_identifier
-        #   An additional identifier for a revision, such as a commit date or,
-        #   for artifacts stored in Amazon S3 buckets, the ETag value.
-        #   @return [String]
-
-        # @!attribute [rw] revision_summary
-        #   Summary information about the most recent revision of the artifact.
-        #   For GitHub and AWS CodeCommit repositories, the commit message. For
-        #   Amazon S3 buckets or actions, the user-provided content of a
-        #   `codepipeline-artifact-revision-summary` key specified in the object
-        #   metadata.
-        #   @return [String]
-
-        # @!attribute [rw] created
-        #   The date and time when the most recent revision of the artifact was
-        #   created, in timestamp format.
-        #   @return [Time]
-
-        # @!attribute [rw] revision_url
-        #   The commit ID for the artifact revision. For artifacts stored in
-        #   GitHub or AWS CodeCommit repositories, the commit ID is linked to a
-        #   commit details page.
-        #   @return [String]
-
       end
 
       # The Amazon S3 location where artifacts are stored for the pipeline. If
@@ -690,28 +630,25 @@ module Aws
       #           type: "KMS", # required, accepts KMS
       #         },
       #       }
+      # @!attribute [rw] type
+      #   The type of the artifact store, such as S3.
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   The location for storing the artifacts for a pipeline, such as an S3
+      #   bucket or folder.
+      #   @return [String]
+      #
+      # @!attribute [rw] encryption_key
+      #   The encryption key used to encrypt the data in the artifact store,
+      #   such as an AWS Key Management Service (AWS KMS) key. If this is
+      #   undefined, the default key for Amazon S3 is used.
+      #   @return [Types::EncryptionKey]
       class ArtifactStore < Struct.new(
         :type,
         :location,
         :encryption_key)
-
         include Aws::Structure
-
-        # @!attribute [rw] type
-        #   The type of the artifact store, such as S3.
-        #   @return [String]
-
-        # @!attribute [rw] location
-        #   The location for storing the artifacts for a pipeline, such as an S3
-        #   bucket or folder.
-        #   @return [String]
-
-        # @!attribute [rw] encryption_key
-        #   The encryption key used to encrypt the data in the artifact store,
-        #   such as an AWS Key Management Service (AWS KMS) key. If this is
-        #   undefined, the default key for Amazon S3 is used.
-        #   @return [Types::EncryptionKey]
-
       end
 
       # Reserved for future use.
@@ -722,20 +659,17 @@ module Aws
       #         name: "BlockerName", # required
       #         type: "Schedule", # required, accepts Schedule
       #       }
+      # @!attribute [rw] name
+      #   Reserved for future use.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   Reserved for future use.
+      #   @return [String]
       class BlockerDeclaration < Struct.new(
         :name,
         :type)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   Reserved for future use.
-        #   @return [String]
-
-        # @!attribute [rw] type
-        #   Reserved for future use.
-        #   @return [String]
-
       end
 
       # Represents the input of a create custom action operation.
@@ -772,6 +706,52 @@ module Aws
       #           maximum_count: 1, # required
       #         },
       #       }
+      # @!attribute [rw] category
+      #   The category of the custom action, such as a source action or a
+      #   build action.
+      #
+      #   <note markdown="1"> Although Source is listed as a valid value, it is not currently
+      #   functional. This value is reserved for future use.
+      #
+      #    </note>
+      #   @return [String]
+      #
+      # @!attribute [rw] provider
+      #   The provider of the service used in the custom action, such as AWS
+      #   CodeDeploy.
+      #   @return [String]
+      #
+      # @!attribute [rw] version
+      #   The version number of the custom action.
+      #   @return [String]
+      #
+      # @!attribute [rw] settings
+      #   Returns information about the settings for an action type.
+      #   @return [Types::ActionTypeSettings]
+      #
+      # @!attribute [rw] configuration_properties
+      #   The configuration properties for the custom action.
+      #
+      #   <note markdown="1"> You can refer to a name in the configuration properties of the
+      #   custom action within the URL templates by following the format of
+      #   \\\{Config:name\\}, as long as the configuration property is both
+      #   required and not secret. For more information, see [Create a Custom
+      #   Action for a Pipeline][1].
+      #
+      #    </note>
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
+      #   @return [Array<Types::ActionConfigurationProperty>]
+      #
+      # @!attribute [rw] input_artifact_details
+      #   Returns information about the details of an artifact.
+      #   @return [Types::ArtifactDetails]
+      #
+      # @!attribute [rw] output_artifact_details
+      #   Returns information about the details of an artifact.
+      #   @return [Types::ArtifactDetails]
       class CreateCustomActionTypeInput < Struct.new(
         :category,
         :provider,
@@ -780,68 +760,16 @@ module Aws
         :configuration_properties,
         :input_artifact_details,
         :output_artifact_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] category
-        #   The category of the custom action, such as a source action or a
-        #   build action.
-        #
-        #   <note markdown="1"> Although Source is listed as a valid value, it is not currently
-        #   functional. This value is reserved for future use.
-        #
-        #    </note>
-        #   @return [String]
-
-        # @!attribute [rw] provider
-        #   The provider of the service used in the custom action, such as AWS
-        #   CodeDeploy.
-        #   @return [String]
-
-        # @!attribute [rw] version
-        #   The version number of the custom action.
-        #   @return [String]
-
-        # @!attribute [rw] settings
-        #   Returns information about the settings for an action type.
-        #   @return [Types::ActionTypeSettings]
-
-        # @!attribute [rw] configuration_properties
-        #   The configuration properties for the custom action.
-        #
-        #   <note markdown="1"> You can refer to a name in the configuration properties of the
-        #   custom action within the URL templates by following the format of
-        #   \\\{Config:name\\}, as long as the configuration property is both
-        #   required and not secret. For more information, see [Create a Custom
-        #   Action for a Pipeline][1].
-        #
-        #    </note>
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html
-        #   @return [Array<Types::ActionConfigurationProperty>]
-
-        # @!attribute [rw] input_artifact_details
-        #   Returns information about the details of an artifact.
-        #   @return [Types::ArtifactDetails]
-
-        # @!attribute [rw] output_artifact_details
-        #   Returns information about the details of an artifact.
-        #   @return [Types::ArtifactDetails]
-
       end
 
       # Represents the output of a create custom action operation.
+      # @!attribute [rw] action_type
+      #   Returns information about the details of an action type.
+      #   @return [Types::ActionType]
       class CreateCustomActionTypeOutput < Struct.new(
         :action_type)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_type
-        #   Returns information about the details of an action type.
-        #   @return [Types::ActionType]
-
       end
 
       # Represents the input of a create pipeline action.
@@ -900,29 +828,23 @@ module Aws
       #           version: 1,
       #         },
       #       }
+      # @!attribute [rw] pipeline
+      #   Represents the structure of actions and stages to be performed in
+      #   the pipeline.
+      #   @return [Types::PipelineDeclaration]
       class CreatePipelineInput < Struct.new(
         :pipeline)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline
-        #   Represents the structure of actions and stages to be performed in
-        #   the pipeline.
-        #   @return [Types::PipelineDeclaration]
-
       end
 
       # Represents the output of a create pipeline action.
+      # @!attribute [rw] pipeline
+      #   Represents the structure of actions and stages to be performed in
+      #   the pipeline.
+      #   @return [Types::PipelineDeclaration]
       class CreatePipelineOutput < Struct.new(
         :pipeline)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline
-        #   Represents the structure of actions and stages to be performed in
-        #   the pipeline.
-        #   @return [Types::PipelineDeclaration]
-
       end
 
       # Represents information about a current revision.
@@ -935,31 +857,28 @@ module Aws
       #         created: Time.now,
       #         revision_summary: "RevisionSummary",
       #       }
+      # @!attribute [rw] revision
+      #   The revision ID of the current version of an artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] change_identifier
+      #   The change identifier for the current revision.
+      #   @return [String]
+      #
+      # @!attribute [rw] created
+      #   The date and time when the most recent revision of the artifact was
+      #   created, in timestamp format.
+      #   @return [Time]
+      #
+      # @!attribute [rw] revision_summary
+      #   The summary of the most recent revision of the artifact.
+      #   @return [String]
       class CurrentRevision < Struct.new(
         :revision,
         :change_identifier,
         :created,
         :revision_summary)
-
         include Aws::Structure
-
-        # @!attribute [rw] revision
-        #   The revision ID of the current version of an artifact.
-        #   @return [String]
-
-        # @!attribute [rw] change_identifier
-        #   The change identifier for the current revision.
-        #   @return [String]
-
-        # @!attribute [rw] created
-        #   The date and time when the most recent revision of the artifact was
-        #   created, in timestamp format.
-        #   @return [Time]
-
-        # @!attribute [rw] revision_summary
-        #   The summary of the most recent revision of the artifact.
-        #   @return [String]
-
       end
 
       # Represents the input of a delete custom action operation. The custom
@@ -972,27 +891,24 @@ module Aws
       #         provider: "ActionProvider", # required
       #         version: "Version", # required
       #       }
+      # @!attribute [rw] category
+      #   The category of the custom action that you want to delete, such as
+      #   source or deploy.
+      #   @return [String]
+      #
+      # @!attribute [rw] provider
+      #   The provider of the service used in the custom action, such as AWS
+      #   CodeDeploy.
+      #   @return [String]
+      #
+      # @!attribute [rw] version
+      #   The version of the custom action to delete.
+      #   @return [String]
       class DeleteCustomActionTypeInput < Struct.new(
         :category,
         :provider,
         :version)
-
         include Aws::Structure
-
-        # @!attribute [rw] category
-        #   The category of the custom action that you want to delete, such as
-        #   source or deploy.
-        #   @return [String]
-
-        # @!attribute [rw] provider
-        #   The provider of the service used in the custom action, such as AWS
-        #   CodeDeploy.
-        #   @return [String]
-
-        # @!attribute [rw] version
-        #   The version of the custom action to delete.
-        #   @return [String]
-
       end
 
       # Represents the input of a delete pipeline action.
@@ -1002,15 +918,12 @@ module Aws
       #       {
       #         name: "PipelineName", # required
       #       }
+      # @!attribute [rw] name
+      #   The name of the pipeline to be deleted.
+      #   @return [String]
       class DeletePipelineInput < Struct.new(
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the pipeline to be deleted.
-        #   @return [String]
-
       end
 
       # Represents the input of a disable stage transition input action.
@@ -1023,37 +936,34 @@ module Aws
       #         transition_type: "Inbound", # required, accepts Inbound, Outbound
       #         reason: "DisabledReason", # required
       #       }
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline in which you want to disable the flow of
+      #   artifacts from one stage to another.
+      #   @return [String]
+      #
+      # @!attribute [rw] stage_name
+      #   The name of the stage where you want to disable the inbound or
+      #   outbound transition of artifacts.
+      #   @return [String]
+      #
+      # @!attribute [rw] transition_type
+      #   Specifies whether artifacts will be prevented from transitioning
+      #   into the stage and being processed by the actions in that stage
+      #   (inbound), or prevented from transitioning from the stage after they
+      #   have been processed by the actions in that stage (outbound).
+      #   @return [String]
+      #
+      # @!attribute [rw] reason
+      #   The reason given to the user why a stage is disabled, such as
+      #   waiting for manual approval or manual tests. This message is
+      #   displayed in the pipeline console UI.
+      #   @return [String]
       class DisableStageTransitionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :transition_type,
         :reason)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline in which you want to disable the flow of
-        #   artifacts from one stage to another.
-        #   @return [String]
-
-        # @!attribute [rw] stage_name
-        #   The name of the stage where you want to disable the inbound or
-        #   outbound transition of artifacts.
-        #   @return [String]
-
-        # @!attribute [rw] transition_type
-        #   Specifies whether artifacts will be prevented from transitioning
-        #   into the stage and being processed by the actions in that stage
-        #   (inbound), or prevented from transitioning from the stage after they
-        #   have been processed by the actions in that stage (outbound).
-        #   @return [String]
-
-        # @!attribute [rw] reason
-        #   The reason given to the user why a stage is disabled, such as
-        #   waiting for manual approval or manual tests. This message is
-        #   displayed in the pipeline console UI.
-        #   @return [String]
-
       end
 
       # Represents the input of an enable stage transition action.
@@ -1065,31 +975,28 @@ module Aws
       #         stage_name: "StageName", # required
       #         transition_type: "Inbound", # required, accepts Inbound, Outbound
       #       }
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline in which you want to enable the flow of
+      #   artifacts from one stage to another.
+      #   @return [String]
+      #
+      # @!attribute [rw] stage_name
+      #   The name of the stage where you want to enable the transition of
+      #   artifacts, either into the stage (inbound) or from that stage to the
+      #   next stage (outbound).
+      #   @return [String]
+      #
+      # @!attribute [rw] transition_type
+      #   Specifies whether artifacts will be allowed to enter the stage and
+      #   be processed by the actions in that stage (inbound) or whether
+      #   already-processed artifacts will be allowed to transition to the
+      #   next stage (outbound).
+      #   @return [String]
       class EnableStageTransitionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :transition_type)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline in which you want to enable the flow of
-        #   artifacts from one stage to another.
-        #   @return [String]
-
-        # @!attribute [rw] stage_name
-        #   The name of the stage where you want to enable the transition of
-        #   artifacts, either into the stage (inbound) or from that stage to the
-        #   next stage (outbound).
-        #   @return [String]
-
-        # @!attribute [rw] transition_type
-        #   Specifies whether artifacts will be allowed to enter the stage and
-        #   be processed by the actions in that stage (inbound) or whether
-        #   already-processed artifacts will be allowed to transition to the
-        #   next stage (outbound).
-        #   @return [String]
-
       end
 
       # Represents information about the key used to encrypt data in the
@@ -1101,40 +1008,34 @@ module Aws
       #         id: "EncryptionKeyId", # required
       #         type: "KMS", # required, accepts KMS
       #       }
+      # @!attribute [rw] id
+      #   The ID used to identify the key. For an AWS KMS key, this is the key
+      #   ID or key ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The type of encryption key, such as an AWS Key Management Service
+      #   (AWS KMS) key. When creating or updating a pipeline, the value must
+      #   be set to \'KMS\'.
+      #   @return [String]
       class EncryptionKey < Struct.new(
         :id,
         :type)
-
         include Aws::Structure
-
-        # @!attribute [rw] id
-        #   The ID used to identify the key. For an AWS KMS key, this is the key
-        #   ID or key ARN.
-        #   @return [String]
-
-        # @!attribute [rw] type
-        #   The type of encryption key, such as an AWS Key Management Service
-        #   (AWS KMS) key. When creating or updating a pipeline, the value must
-        #   be set to \'KMS\'.
-        #   @return [String]
-
       end
 
       # Represents information about an error in AWS CodePipeline.
+      # @!attribute [rw] code
+      #   The system ID or error number code of the error.
+      #   @return [String]
+      #
+      # @!attribute [rw] message
+      #   The text of the error message.
+      #   @return [String]
       class ErrorDetails < Struct.new(
         :code,
         :message)
-
         include Aws::Structure
-
-        # @!attribute [rw] code
-        #   The system ID or error number code of the error.
-        #   @return [String]
-
-        # @!attribute [rw] message
-        #   The text of the error message.
-        #   @return [String]
-
       end
 
       # The details of the actions taken and results produced on an artifact
@@ -1147,27 +1048,24 @@ module Aws
       #         external_execution_id: "ExecutionId",
       #         percent_complete: 1,
       #       }
+      # @!attribute [rw] summary
+      #   The summary of the current status of the actions.
+      #   @return [String]
+      #
+      # @!attribute [rw] external_execution_id
+      #   The system-generated unique ID of this action used to identify this
+      #   job worker in any external systems, such as AWS CodeDeploy.
+      #   @return [String]
+      #
+      # @!attribute [rw] percent_complete
+      #   The percentage of work completed on the action, represented on a
+      #   scale of zero to one hundred percent.
+      #   @return [Integer]
       class ExecutionDetails < Struct.new(
         :summary,
         :external_execution_id,
         :percent_complete)
-
         include Aws::Structure
-
-        # @!attribute [rw] summary
-        #   The summary of the current status of the actions.
-        #   @return [String]
-
-        # @!attribute [rw] external_execution_id
-        #   The system-generated unique ID of this action used to identify this
-        #   job worker in any external systems, such as AWS CodeDeploy.
-        #   @return [String]
-
-        # @!attribute [rw] percent_complete
-        #   The percentage of work completed on the action, represented on a
-        #   scale of zero to one hundred percent.
-        #   @return [Integer]
-
       end
 
       # Represents information about failure details.
@@ -1179,25 +1077,22 @@ module Aws
       #         message: "Message", # required
       #         external_execution_id: "ExecutionId",
       #       }
+      # @!attribute [rw] type
+      #   The type of the failure.
+      #   @return [String]
+      #
+      # @!attribute [rw] message
+      #   The message about the failure.
+      #   @return [String]
+      #
+      # @!attribute [rw] external_execution_id
+      #   The external ID of the run of the action that failed.
+      #   @return [String]
       class FailureDetails < Struct.new(
         :type,
         :message,
         :external_execution_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] type
-        #   The type of the failure.
-        #   @return [String]
-
-        # @!attribute [rw] message
-        #   The message about the failure.
-        #   @return [String]
-
-        # @!attribute [rw] external_execution_id
-        #   The external ID of the run of the action that failed.
-        #   @return [String]
-
       end
 
       # Represents the input of a get job details action.
@@ -1207,32 +1102,26 @@ module Aws
       #       {
       #         job_id: "JobId", # required
       #       }
+      # @!attribute [rw] job_id
+      #   The unique system-generated ID for the job.
+      #   @return [String]
       class GetJobDetailsInput < Struct.new(
         :job_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The unique system-generated ID for the job.
-        #   @return [String]
-
       end
 
       # Represents the output of a get job details action.
+      # @!attribute [rw] job_details
+      #   The details of the job.
+      #
+      #   <note markdown="1"> If AWSSessionCredentials is used, a long-running job can call
+      #   GetJobDetails again to obtain new credentials.
+      #
+      #    </note>
+      #   @return [Types::JobDetails]
       class GetJobDetailsOutput < Struct.new(
         :job_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_details
-        #   The details of the job.
-        #
-        #   <note markdown="1"> If AWSSessionCredentials is used, a long-running job can call
-        #   GetJobDetails again to obtain new credentials.
-        #
-        #    </note>
-        #   @return [Types::JobDetails]
-
       end
 
       # Represents the input of a get pipeline execution action.
@@ -1243,34 +1132,28 @@ module Aws
       #         pipeline_name: "PipelineName", # required
       #         pipeline_execution_id: "PipelineExecutionId", # required
       #       }
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline about which you want to get execution
+      #   details.
+      #   @return [String]
+      #
+      # @!attribute [rw] pipeline_execution_id
+      #   The ID of the pipeline execution about which you want to get
+      #   execution details.
+      #   @return [String]
       class GetPipelineExecutionInput < Struct.new(
         :pipeline_name,
         :pipeline_execution_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline about which you want to get execution
-        #   details.
-        #   @return [String]
-
-        # @!attribute [rw] pipeline_execution_id
-        #   The ID of the pipeline execution about which you want to get
-        #   execution details.
-        #   @return [String]
-
       end
 
       # Represents the output of a get pipeline execution action.
+      # @!attribute [rw] pipeline_execution
+      #   Represents information about the execution of a pipeline.
+      #   @return [Types::PipelineExecution]
       class GetPipelineExecutionOutput < Struct.new(
         :pipeline_execution)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_execution
-        #   Represents information about the execution of a pipeline.
-        #   @return [Types::PipelineExecution]
-
       end
 
       # Represents the input of a get pipeline action.
@@ -1281,36 +1164,30 @@ module Aws
       #         name: "PipelineName", # required
       #         version: 1,
       #       }
+      # @!attribute [rw] name
+      #   The name of the pipeline for which you want to get information.
+      #   Pipeline names must be unique under an Amazon Web Services (AWS)
+      #   user account.
+      #   @return [String]
+      #
+      # @!attribute [rw] version
+      #   The version number of the pipeline. If you do not specify a version,
+      #   defaults to the most current version.
+      #   @return [Integer]
       class GetPipelineInput < Struct.new(
         :name,
         :version)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the pipeline for which you want to get information.
-        #   Pipeline names must be unique under an Amazon Web Services (AWS)
-        #   user account.
-        #   @return [String]
-
-        # @!attribute [rw] version
-        #   The version number of the pipeline. If you do not specify a version,
-        #   defaults to the most current version.
-        #   @return [Integer]
-
       end
 
       # Represents the output of a get pipeline action.
+      # @!attribute [rw] pipeline
+      #   Represents the structure of actions and stages to be performed in
+      #   the pipeline.
+      #   @return [Types::PipelineDeclaration]
       class GetPipelineOutput < Struct.new(
         :pipeline)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline
-        #   Represents the structure of actions and stages to be performed in
-        #   the pipeline.
-        #   @return [Types::PipelineDeclaration]
-
       end
 
       # Represents the input of a get pipeline state action.
@@ -1320,54 +1197,48 @@ module Aws
       #       {
       #         name: "PipelineName", # required
       #       }
+      # @!attribute [rw] name
+      #   The name of the pipeline about which you want to get information.
+      #   @return [String]
       class GetPipelineStateInput < Struct.new(
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the pipeline about which you want to get information.
-        #   @return [String]
-
       end
 
       # Represents the output of a get pipeline state action.
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline for which you want to get the state.
+      #   @return [String]
+      #
+      # @!attribute [rw] pipeline_version
+      #   The version number of the pipeline.
+      #
+      #   <note markdown="1"> A newly-created pipeline is always assigned a version number of `1`.
+      #
+      #    </note>
+      #   @return [Integer]
+      #
+      # @!attribute [rw] stage_states
+      #   A list of the pipeline stage output information, including stage
+      #   name, state, most recent run details, whether the stage is disabled,
+      #   and other data.
+      #   @return [Array<Types::StageState>]
+      #
+      # @!attribute [rw] created
+      #   The date and time the pipeline was created, in timestamp format.
+      #   @return [Time]
+      #
+      # @!attribute [rw] updated
+      #   The date and time the pipeline was last updated, in timestamp
+      #   format.
+      #   @return [Time]
       class GetPipelineStateOutput < Struct.new(
         :pipeline_name,
         :pipeline_version,
         :stage_states,
         :created,
         :updated)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline for which you want to get the state.
-        #   @return [String]
-
-        # @!attribute [rw] pipeline_version
-        #   The version number of the pipeline.
-        #
-        #   <note markdown="1"> A newly-created pipeline is always assigned a version number of `1`.
-        #
-        #    </note>
-        #   @return [Integer]
-
-        # @!attribute [rw] stage_states
-        #   A list of the pipeline stage output information, including stage
-        #   name, state, most recent run details, whether the stage is disabled,
-        #   and other data.
-        #   @return [Array<Types::StageState>]
-
-        # @!attribute [rw] created
-        #   The date and time the pipeline was created, in timestamp format.
-        #   @return [Time]
-
-        # @!attribute [rw] updated
-        #   The date and time the pipeline was last updated, in timestamp
-        #   format.
-        #   @return [Time]
-
       end
 
       # Represents the input of a get third party job details action.
@@ -1378,35 +1249,29 @@ module Aws
       #         job_id: "ThirdPartyJobId", # required
       #         client_token: "ClientToken", # required
       #       }
+      # @!attribute [rw] job_id
+      #   The unique system-generated ID used for identifying the job.
+      #   @return [String]
+      #
+      # @!attribute [rw] client_token
+      #   The clientToken portion of the clientId and clientToken pair used to
+      #   verify that the calling entity is allowed access to the job and its
+      #   details.
+      #   @return [String]
       class GetThirdPartyJobDetailsInput < Struct.new(
         :job_id,
         :client_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The unique system-generated ID used for identifying the job.
-        #   @return [String]
-
-        # @!attribute [rw] client_token
-        #   The clientToken portion of the clientId and clientToken pair used to
-        #   verify that the calling entity is allowed access to the job and its
-        #   details.
-        #   @return [String]
-
       end
 
       # Represents the output of a get third party job details action.
+      # @!attribute [rw] job_details
+      #   The details of the job, including any protected values defined for
+      #   the job.
+      #   @return [Types::ThirdPartyJobDetails]
       class GetThirdPartyJobDetailsOutput < Struct.new(
         :job_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_details
-        #   The details of the job, including any protected values defined for
-        #   the job.
-        #   @return [Types::ThirdPartyJobDetails]
-
       end
 
       # Represents information about an artifact to be worked on, such as a
@@ -1417,55 +1282,86 @@ module Aws
       #       {
       #         name: "ArtifactName", # required
       #       }
+      # @!attribute [rw] name
+      #   The name of the artifact to be worked on, for example, \"My App\".
+      #
+      #   The input artifact of an action must exactly match the output
+      #   artifact declared in a preceding action, but the input artifact does
+      #   not have to be the next action in strict sequence from the action
+      #   that provided the output artifact. Actions in parallel can declare
+      #   different output artifacts, which are in turn consumed by different
+      #   following actions.
+      #   @return [String]
       class InputArtifact < Struct.new(
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the artifact to be worked on, for example, \"My App\".
-        #
-        #   The input artifact of an action must exactly match the output
-        #   artifact declared in a preceding action, but the input artifact does
-        #   not have to be the next action in strict sequence from the action
-        #   that provided the output artifact. Actions in parallel can declare
-        #   different output artifacts, which are in turn consumed by different
-        #   following actions.
-        #   @return [String]
-
       end
 
       # Represents information about a job.
+      # @!attribute [rw] id
+      #   The unique system-generated ID of the job.
+      #   @return [String]
+      #
+      # @!attribute [rw] data
+      #   Additional data about a job.
+      #   @return [Types::JobData]
+      #
+      # @!attribute [rw] nonce
+      #   A system-generated random number that AWS CodePipeline uses to
+      #   ensure that the job is being worked on by only one job worker. This
+      #   number must be returned in the response.
+      #   @return [String]
+      #
+      # @!attribute [rw] account_id
+      #   The ID of the AWS account to use when performing the job.
+      #   @return [String]
       class Job < Struct.new(
         :id,
         :data,
         :nonce,
         :account_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] id
-        #   The unique system-generated ID of the job.
-        #   @return [String]
-
-        # @!attribute [rw] data
-        #   Additional data about a job.
-        #   @return [Types::JobData]
-
-        # @!attribute [rw] nonce
-        #   A system-generated random number that AWS CodePipeline uses to
-        #   ensure that the job is being worked on by only one job worker. This
-        #   number must be returned in the response.
-        #   @return [String]
-
-        # @!attribute [rw] account_id
-        #   The ID of the AWS account to use when performing the job.
-        #   @return [String]
-
       end
 
       # Represents additional information about a job required for a job
       # worker to complete the job.
+      # @!attribute [rw] action_type_id
+      #   Represents information about an action type.
+      #   @return [Types::ActionTypeId]
+      #
+      # @!attribute [rw] action_configuration
+      #   Represents information about an action configuration.
+      #   @return [Types::ActionConfiguration]
+      #
+      # @!attribute [rw] pipeline_context
+      #   Represents information about a pipeline to a job worker.
+      #   @return [Types::PipelineContext]
+      #
+      # @!attribute [rw] input_artifacts
+      #   The artifact supplied to the job.
+      #   @return [Array<Types::Artifact>]
+      #
+      # @!attribute [rw] output_artifacts
+      #   The output of the job.
+      #   @return [Array<Types::Artifact>]
+      #
+      # @!attribute [rw] artifact_credentials
+      #   Represents an AWS session credentials object. These credentials are
+      #   temporary credentials that are issued by AWS Secure Token Service
+      #   (STS). They can be used to access input and output artifacts in the
+      #   Amazon S3 bucket used to store artifact for the pipeline in AWS
+      #   CodePipeline.
+      #   @return [Types::AWSSessionCredentials]
+      #
+      # @!attribute [rw] continuation_token
+      #   A system-generated token, such as a AWS CodeDeploy deployment ID,
+      #   that a job requires in order to continue the job asynchronously.
+      #   @return [String]
+      #
+      # @!attribute [rw] encryption_key
+      #   Represents information about the key used to encrypt data in the
+      #   artifact store, such as an AWS Key Management Service (AWS KMS) key.
+      #   @return [Types::EncryptionKey]
       class JobData < Struct.new(
         :action_type_id,
         :action_configuration,
@@ -1475,70 +1371,27 @@ module Aws
         :artifact_credentials,
         :continuation_token,
         :encryption_key)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_type_id
-        #   Represents information about an action type.
-        #   @return [Types::ActionTypeId]
-
-        # @!attribute [rw] action_configuration
-        #   Represents information about an action configuration.
-        #   @return [Types::ActionConfiguration]
-
-        # @!attribute [rw] pipeline_context
-        #   Represents information about a pipeline to a job worker.
-        #   @return [Types::PipelineContext]
-
-        # @!attribute [rw] input_artifacts
-        #   The artifact supplied to the job.
-        #   @return [Array<Types::Artifact>]
-
-        # @!attribute [rw] output_artifacts
-        #   The output of the job.
-        #   @return [Array<Types::Artifact>]
-
-        # @!attribute [rw] artifact_credentials
-        #   Represents an AWS session credentials object. These credentials are
-        #   temporary credentials that are issued by AWS Secure Token Service
-        #   (STS). They can be used to access input and output artifacts in the
-        #   Amazon S3 bucket used to store artifact for the pipeline in AWS
-        #   CodePipeline.
-        #   @return [Types::AWSSessionCredentials]
-
-        # @!attribute [rw] continuation_token
-        #   A system-generated token, such as a AWS CodeDeploy deployment ID,
-        #   that a job requires in order to continue the job asynchronously.
-        #   @return [String]
-
-        # @!attribute [rw] encryption_key
-        #   Represents information about the key used to encrypt data in the
-        #   artifact store, such as an AWS Key Management Service (AWS KMS) key.
-        #   @return [Types::EncryptionKey]
-
       end
 
       # Represents information about the details of a job.
+      # @!attribute [rw] id
+      #   The unique system-generated ID of the job.
+      #   @return [String]
+      #
+      # @!attribute [rw] data
+      #   Represents additional information about a job required for a job
+      #   worker to complete the job.
+      #   @return [Types::JobData]
+      #
+      # @!attribute [rw] account_id
+      #   The AWS account ID associated with the job.
+      #   @return [String]
       class JobDetails < Struct.new(
         :id,
         :data,
         :account_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] id
-        #   The unique system-generated ID of the job.
-        #   @return [String]
-
-        # @!attribute [rw] data
-        #   Represents additional information about a job required for a job
-        #   worker to complete the job.
-        #   @return [Types::JobData]
-
-        # @!attribute [rw] account_id
-        #   The AWS account ID associated with the job.
-        #   @return [String]
-
       end
 
       # Represents the input of a list action types action.
@@ -1549,43 +1402,37 @@ module Aws
       #         action_owner_filter: "AWS", # accepts AWS, ThirdParty, Custom
       #         next_token: "NextToken",
       #       }
+      # @!attribute [rw] action_owner_filter
+      #   Filters the list of action types to those created by a specified
+      #   entity.
+      #   @return [String]
+      #
+      # @!attribute [rw] next_token
+      #   An identifier that was returned from the previous list action types
+      #   call, which can be used to return the next set of action types in
+      #   the list.
+      #   @return [String]
       class ListActionTypesInput < Struct.new(
         :action_owner_filter,
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_owner_filter
-        #   Filters the list of action types to those created by a specified
-        #   entity.
-        #   @return [String]
-
-        # @!attribute [rw] next_token
-        #   An identifier that was returned from the previous list action types
-        #   call, which can be used to return the next set of action types in
-        #   the list.
-        #   @return [String]
-
       end
 
       # Represents the output of a list action types action.
+      # @!attribute [rw] action_types
+      #   Provides details of the action types.
+      #   @return [Array<Types::ActionType>]
+      #
+      # @!attribute [rw] next_token
+      #   If the amount of returned information is significantly large, an
+      #   identifier is also returned which can be used in a subsequent list
+      #   action types call to return the next set of action types in the
+      #   list.
+      #   @return [String]
       class ListActionTypesOutput < Struct.new(
         :action_types,
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_types
-        #   Provides details of the action types.
-        #   @return [Array<Types::ActionType>]
-
-        # @!attribute [rw] next_token
-        #   If the amount of returned information is significantly large, an
-        #   identifier is also returned which can be used in a subsequent list
-        #   action types call to return the next set of action types in the
-        #   list.
-        #   @return [String]
-
       end
 
       # Represents the input of a list pipelines action.
@@ -1595,36 +1442,30 @@ module Aws
       #       {
       #         next_token: "NextToken",
       #       }
+      # @!attribute [rw] next_token
+      #   An identifier that was returned from the previous list pipelines
+      #   call, which can be used to return the next set of pipelines in the
+      #   list.
+      #   @return [String]
       class ListPipelinesInput < Struct.new(
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] next_token
-        #   An identifier that was returned from the previous list pipelines
-        #   call, which can be used to return the next set of pipelines in the
-        #   list.
-        #   @return [String]
-
       end
 
       # Represents the output of a list pipelines action.
+      # @!attribute [rw] pipelines
+      #   The list of pipelines.
+      #   @return [Array<Types::PipelineSummary>]
+      #
+      # @!attribute [rw] next_token
+      #   If the amount of returned information is significantly large, an
+      #   identifier is also returned which can be used in a subsequent list
+      #   pipelines call to return the next set of pipelines in the list.
+      #   @return [String]
       class ListPipelinesOutput < Struct.new(
         :pipelines,
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipelines
-        #   The list of pipelines.
-        #   @return [Array<Types::PipelineSummary>]
-
-        # @!attribute [rw] next_token
-        #   If the amount of returned information is significantly large, an
-        #   identifier is also returned which can be used in a subsequent list
-        #   pipelines call to return the next set of pipelines in the list.
-        #   @return [String]
-
       end
 
       # Represents information about the output of an action.
@@ -1634,49 +1475,43 @@ module Aws
       #       {
       #         name: "ArtifactName", # required
       #       }
+      # @!attribute [rw] name
+      #   The name of the output of an artifact, such as \"My App\".
+      #
+      #   The input artifact of an action must exactly match the output
+      #   artifact declared in a preceding action, but the input artifact does
+      #   not have to be the next action in strict sequence from the action
+      #   that provided the output artifact. Actions in parallel can declare
+      #   different output artifacts, which are in turn consumed by different
+      #   following actions.
+      #
+      #   Output artifact names must be unique within a pipeline.
+      #   @return [String]
       class OutputArtifact < Struct.new(
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the output of an artifact, such as \"My App\".
-        #
-        #   The input artifact of an action must exactly match the output
-        #   artifact declared in a preceding action, but the input artifact does
-        #   not have to be the next action in strict sequence from the action
-        #   that provided the output artifact. Actions in parallel can declare
-        #   different output artifacts, which are in turn consumed by different
-        #   following actions.
-        #
-        #   Output artifact names must be unique within a pipeline.
-        #   @return [String]
-
       end
 
       # Represents information about a pipeline to a job worker.
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline. This is a user-specified value. Pipeline
+      #   names must be unique across all pipeline names under an Amazon Web
+      #   Services account.
+      #   @return [String]
+      #
+      # @!attribute [rw] stage
+      #   The stage of the pipeline.
+      #   @return [Types::StageContext]
+      #
+      # @!attribute [rw] action
+      #   Represents the context of an action within the stage of a pipeline
+      #   to a job worker.
+      #   @return [Types::ActionContext]
       class PipelineContext < Struct.new(
         :pipeline_name,
         :stage,
         :action)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline. This is a user-specified value. Pipeline
-        #   names must be unique across all pipeline names under an Amazon Web
-        #   Services account.
-        #   @return [String]
-
-        # @!attribute [rw] stage
-        #   The stage of the pipeline.
-        #   @return [Types::StageContext]
-
-        # @!attribute [rw] action
-        #   Represents the context of an action within the stage of a pipeline
-        #   to a job worker.
-        #   @return [Types::ActionContext]
-
       end
 
       # Represents the structure of actions and stages to be performed in the
@@ -1734,116 +1569,107 @@ module Aws
       #         ],
       #         version: 1,
       #       }
+      # @!attribute [rw] name
+      #   The name of the action to be performed.
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The Amazon Resource Name (ARN) for AWS CodePipeline to use to either
+      #   perform actions with no actionRoleArn, or to use to assume roles for
+      #   actions with an actionRoleArn.
+      #   @return [String]
+      #
+      # @!attribute [rw] artifact_store
+      #   The Amazon S3 location where artifacts are stored for the pipeline.
+      #   If this Amazon S3 bucket is created manually, it must meet the
+      #   requirements for AWS CodePipeline. For more information, see the
+      #   [Concepts][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#CPS3Bucket
+      #   @return [Types::ArtifactStore]
+      #
+      # @!attribute [rw] stages
+      #   The stage in which to perform the action.
+      #   @return [Array<Types::StageDeclaration>]
+      #
+      # @!attribute [rw] version
+      #   The version number of the pipeline. A new pipeline always has a
+      #   version number of 1. This number is automatically incremented when a
+      #   pipeline is updated.
+      #   @return [Integer]
       class PipelineDeclaration < Struct.new(
         :name,
         :role_arn,
         :artifact_store,
         :stages,
         :version)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the action to be performed.
-        #   @return [String]
-
-        # @!attribute [rw] role_arn
-        #   The Amazon Resource Name (ARN) for AWS CodePipeline to use to either
-        #   perform actions with no actionRoleArn, or to use to assume roles for
-        #   actions with an actionRoleArn.
-        #   @return [String]
-
-        # @!attribute [rw] artifact_store
-        #   The Amazon S3 location where artifacts are stored for the pipeline.
-        #   If this Amazon S3 bucket is created manually, it must meet the
-        #   requirements for AWS CodePipeline. For more information, see the
-        #   [Concepts][1].
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/codepipeline/latest/userguide/concepts.html#CPS3Bucket
-        #   @return [Types::ArtifactStore]
-
-        # @!attribute [rw] stages
-        #   The stage in which to perform the action.
-        #   @return [Array<Types::StageDeclaration>]
-
-        # @!attribute [rw] version
-        #   The version number of the pipeline. A new pipeline always has a
-        #   version number of 1. This number is automatically incremented when a
-        #   pipeline is updated.
-        #   @return [Integer]
-
       end
 
       # Represents information about an execution of a pipeline.
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline that was executed.
+      #   @return [String]
+      #
+      # @!attribute [rw] pipeline_version
+      #   The version number of the pipeline that was executed.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] pipeline_execution_id
+      #   The ID of the pipeline execution.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the pipeline execution.
+      #
+      #   * InProgress: The pipeline execution is currently running.
+      #
+      #   * Succeeded: The pipeline execution completed successfully.
+      #
+      #   * Superseded: While this pipeline execution was waiting for the next
+      #     stage to be completed, a newer pipeline execution caught up and
+      #     continued through the pipeline instead.
+      #
+      #   * Failed: The pipeline did not complete successfully.
+      #   @return [String]
+      #
+      # @!attribute [rw] artifact_revisions
+      #   A list of ArtifactRevision objects included in a pipeline execution.
+      #   @return [Array<Types::ArtifactRevision>]
       class PipelineExecution < Struct.new(
         :pipeline_name,
         :pipeline_version,
         :pipeline_execution_id,
         :status,
         :artifact_revisions)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline that was executed.
-        #   @return [String]
-
-        # @!attribute [rw] pipeline_version
-        #   The version number of the pipeline that was executed.
-        #   @return [Integer]
-
-        # @!attribute [rw] pipeline_execution_id
-        #   The ID of the pipeline execution.
-        #   @return [String]
-
-        # @!attribute [rw] status
-        #   The status of the pipeline execution.
-        #
-        #   * InProgress: The pipeline execution is currently running.
-        #
-        #   * Succeeded: The pipeline execution completed successfully.
-        #
-        #   * Superseded: While this pipeline execution was waiting for the next
-        #     stage to be completed, a newer pipeline execution caught up and
-        #     continued through the pipeline instead.
-        #
-        #   * Failed: The pipeline did not complete successfully.
-        #   @return [String]
-
-        # @!attribute [rw] artifact_revisions
-        #   A list of ArtifactRevision objects included in a pipeline execution.
-        #   @return [Array<Types::ArtifactRevision>]
-
       end
 
       # Returns a summary of a pipeline.
+      # @!attribute [rw] name
+      #   The name of the pipeline.
+      #   @return [String]
+      #
+      # @!attribute [rw] version
+      #   The version number of the pipeline.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] created
+      #   The date and time the pipeline was created, in timestamp format.
+      #   @return [Time]
+      #
+      # @!attribute [rw] updated
+      #   The date and time of the last update to the pipeline, in timestamp
+      #   format.
+      #   @return [Time]
       class PipelineSummary < Struct.new(
         :name,
         :version,
         :created,
         :updated)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the pipeline.
-        #   @return [String]
-
-        # @!attribute [rw] version
-        #   The version number of the pipeline.
-        #   @return [Integer]
-
-        # @!attribute [rw] created
-        #   The date and time the pipeline was created, in timestamp format.
-        #   @return [Time]
-
-        # @!attribute [rw] updated
-        #   The date and time of the last update to the pipeline, in timestamp
-        #   format.
-        #   @return [Time]
-
       end
 
       # Represents the input of a poll for jobs action.
@@ -1862,41 +1688,35 @@ module Aws
       #           "ActionConfigurationKey" => "ActionConfigurationQueryableValue",
       #         },
       #       }
+      # @!attribute [rw] action_type_id
+      #   Represents information about an action type.
+      #   @return [Types::ActionTypeId]
+      #
+      # @!attribute [rw] max_batch_size
+      #   The maximum number of jobs to return in a poll for jobs call.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] query_param
+      #   A map of property names and values. For an action type with no
+      #   queryable properties, this value must be null or an empty map. For
+      #   an action type with a queryable property, you must supply that
+      #   property as a key in the map. Only jobs whose action configuration
+      #   matches the mapped value will be returned.
+      #   @return [Hash<String,String>]
       class PollForJobsInput < Struct.new(
         :action_type_id,
         :max_batch_size,
         :query_param)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_type_id
-        #   Represents information about an action type.
-        #   @return [Types::ActionTypeId]
-
-        # @!attribute [rw] max_batch_size
-        #   The maximum number of jobs to return in a poll for jobs call.
-        #   @return [Integer]
-
-        # @!attribute [rw] query_param
-        #   A map of property names and values. For an action type with no
-        #   queryable properties, this value must be null or an empty map. For
-        #   an action type with a queryable property, you must supply that
-        #   property as a key in the map. Only jobs whose action configuration
-        #   matches the mapped value will be returned.
-        #   @return [Hash<String,String>]
-
       end
 
       # Represents the output of a poll for jobs action.
+      # @!attribute [rw] jobs
+      #   Information about the jobs to take action on.
+      #   @return [Array<Types::Job>]
       class PollForJobsOutput < Struct.new(
         :jobs)
-
         include Aws::Structure
-
-        # @!attribute [rw] jobs
-        #   Information about the jobs to take action on.
-        #   @return [Array<Types::Job>]
-
       end
 
       # Represents the input of a poll for third party jobs action.
@@ -1912,32 +1732,26 @@ module Aws
       #         },
       #         max_batch_size: 1,
       #       }
+      # @!attribute [rw] action_type_id
+      #   Represents information about an action type.
+      #   @return [Types::ActionTypeId]
+      #
+      # @!attribute [rw] max_batch_size
+      #   The maximum number of jobs to return in a poll for jobs call.
+      #   @return [Integer]
       class PollForThirdPartyJobsInput < Struct.new(
         :action_type_id,
         :max_batch_size)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_type_id
-        #   Represents information about an action type.
-        #   @return [Types::ActionTypeId]
-
-        # @!attribute [rw] max_batch_size
-        #   The maximum number of jobs to return in a poll for jobs call.
-        #   @return [Integer]
-
       end
 
       # Represents the output of a poll for third party jobs action.
+      # @!attribute [rw] jobs
+      #   Information about the jobs to take action on.
+      #   @return [Array<Types::ThirdPartyJob>]
       class PollForThirdPartyJobsOutput < Struct.new(
         :jobs)
-
         include Aws::Structure
-
-        # @!attribute [rw] jobs
-        #   Information about the jobs to take action on.
-        #   @return [Array<Types::ThirdPartyJob>]
-
       end
 
       # Represents the input of a put action revision action.
@@ -1954,50 +1768,44 @@ module Aws
       #           created: Time.now, # required
       #         },
       #       }
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline that will start processing the revision to
+      #   the source.
+      #   @return [String]
+      #
+      # @!attribute [rw] stage_name
+      #   The name of the stage that contains the action that will act upon
+      #   the revision.
+      #   @return [String]
+      #
+      # @!attribute [rw] action_name
+      #   The name of the action that will process the revision.
+      #   @return [String]
+      #
+      # @!attribute [rw] action_revision
+      #   Represents information about the version (or revision) of an action.
+      #   @return [Types::ActionRevision]
       class PutActionRevisionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :action_name,
         :action_revision)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline that will start processing the revision to
-        #   the source.
-        #   @return [String]
-
-        # @!attribute [rw] stage_name
-        #   The name of the stage that contains the action that will act upon
-        #   the revision.
-        #   @return [String]
-
-        # @!attribute [rw] action_name
-        #   The name of the action that will process the revision.
-        #   @return [String]
-
-        # @!attribute [rw] action_revision
-        #   Represents information about the version (or revision) of an action.
-        #   @return [Types::ActionRevision]
-
       end
 
       # Represents the output of a put action revision action.
+      # @!attribute [rw] new_revision
+      #   Indicates whether the artifact revision was previously used in an
+      #   execution of the specified pipeline.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] pipeline_execution_id
+      #   The ID of the current workflow state of the pipeline.
+      #   @return [String]
       class PutActionRevisionOutput < Struct.new(
         :new_revision,
         :pipeline_execution_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] new_revision
-        #   Indicates whether the artifact revision was previously used in an
-        #   execution of the specified pipeline.
-        #   @return [Boolean]
-
-        # @!attribute [rw] pipeline_execution_id
-        #   The ID of the current workflow state of the pipeline.
-        #   @return [String]
-
       end
 
       # Represents the input of a put approval result action.
@@ -2014,50 +1822,44 @@ module Aws
       #         },
       #         token: "ApprovalToken", # required
       #       }
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline that contains the action.
+      #   @return [String]
+      #
+      # @!attribute [rw] stage_name
+      #   The name of the stage that contains the action.
+      #   @return [String]
+      #
+      # @!attribute [rw] action_name
+      #   The name of the action for which approval is requested.
+      #   @return [String]
+      #
+      # @!attribute [rw] result
+      #   Represents information about the result of the approval request.
+      #   @return [Types::ApprovalResult]
+      #
+      # @!attribute [rw] token
+      #   The system-generated token used to identify a unique approval
+      #   request. The token for each open approval request can be obtained
+      #   using the GetPipelineState action and is used to validate that the
+      #   approval request corresponding to this token is still valid.
+      #   @return [String]
       class PutApprovalResultInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :action_name,
         :result,
         :token)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline that contains the action.
-        #   @return [String]
-
-        # @!attribute [rw] stage_name
-        #   The name of the stage that contains the action.
-        #   @return [String]
-
-        # @!attribute [rw] action_name
-        #   The name of the action for which approval is requested.
-        #   @return [String]
-
-        # @!attribute [rw] result
-        #   Represents information about the result of the approval request.
-        #   @return [Types::ApprovalResult]
-
-        # @!attribute [rw] token
-        #   The system-generated token used to identify a unique approval
-        #   request. The token for each open approval request can be obtained
-        #   using the GetPipelineState action and is used to validate that the
-        #   approval request corresponding to this token is still valid.
-        #   @return [String]
-
       end
 
       # Represents the output of a put approval result action.
+      # @!attribute [rw] approved_at
+      #   The timestamp showing when the approval or rejection was submitted.
+      #   @return [Time]
       class PutApprovalResultOutput < Struct.new(
         :approved_at)
-
         include Aws::Structure
-
-        # @!attribute [rw] approved_at
-        #   The timestamp showing when the approval or rejection was submitted.
-        #   @return [Time]
-
       end
 
       # Represents the input of a put job failure result action.
@@ -2072,21 +1874,18 @@ module Aws
       #           external_execution_id: "ExecutionId",
       #         },
       #       }
+      # @!attribute [rw] job_id
+      #   The unique system-generated ID of the job that failed. This is the
+      #   same ID returned from PollForJobs.
+      #   @return [String]
+      #
+      # @!attribute [rw] failure_details
+      #   The details about the failure of a job.
+      #   @return [Types::FailureDetails]
       class PutJobFailureResultInput < Struct.new(
         :job_id,
         :failure_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The unique system-generated ID of the job that failed. This is the
-        #   same ID returned from PollForJobs.
-        #   @return [String]
-
-        # @!attribute [rw] failure_details
-        #   The details about the failure of a job.
-        #   @return [Types::FailureDetails]
-
       end
 
       # Represents the input of a put job success result action.
@@ -2108,39 +1907,36 @@ module Aws
       #           percent_complete: 1,
       #         },
       #       }
+      # @!attribute [rw] job_id
+      #   The unique system-generated ID of the job that succeeded. This is
+      #   the same ID returned from PollForJobs.
+      #   @return [String]
+      #
+      # @!attribute [rw] current_revision
+      #   The ID of the current revision of the artifact successfully worked
+      #   upon by the job.
+      #   @return [Types::CurrentRevision]
+      #
+      # @!attribute [rw] continuation_token
+      #   A token generated by a job worker, such as an AWS CodeDeploy
+      #   deployment ID, that a successful job provides to identify a custom
+      #   action in progress. Future jobs will use this token in order to
+      #   identify the running instance of the action. It can be reused to
+      #   return additional information about the progress of the custom
+      #   action. When the action is complete, no continuation token should be
+      #   supplied.
+      #   @return [String]
+      #
+      # @!attribute [rw] execution_details
+      #   The execution details of the successful job, such as the actions
+      #   taken by the job worker.
+      #   @return [Types::ExecutionDetails]
       class PutJobSuccessResultInput < Struct.new(
         :job_id,
         :current_revision,
         :continuation_token,
         :execution_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The unique system-generated ID of the job that succeeded. This is
-        #   the same ID returned from PollForJobs.
-        #   @return [String]
-
-        # @!attribute [rw] current_revision
-        #   The ID of the current revision of the artifact successfully worked
-        #   upon by the job.
-        #   @return [Types::CurrentRevision]
-
-        # @!attribute [rw] continuation_token
-        #   A token generated by a job worker, such as an AWS CodeDeploy
-        #   deployment ID, that a successful job provides to identify a custom
-        #   action in progress. Future jobs will use this token in order to
-        #   identify the running instance of the action. It can be reused to
-        #   return additional information about the progress of the custom
-        #   action. When the action is complete, no continuation token should be
-        #   supplied.
-        #   @return [String]
-
-        # @!attribute [rw] execution_details
-        #   The execution details of the successful job, such as the actions
-        #   taken by the job worker.
-        #   @return [Types::ExecutionDetails]
-
       end
 
       # Represents the input of a third party job failure result action.
@@ -2156,28 +1952,25 @@ module Aws
       #           external_execution_id: "ExecutionId",
       #         },
       #       }
+      # @!attribute [rw] job_id
+      #   The ID of the job that failed. This is the same ID returned from
+      #   PollForThirdPartyJobs.
+      #   @return [String]
+      #
+      # @!attribute [rw] client_token
+      #   The clientToken portion of the clientId and clientToken pair used to
+      #   verify that the calling entity is allowed access to the job and its
+      #   details.
+      #   @return [String]
+      #
+      # @!attribute [rw] failure_details
+      #   Represents information about failure details.
+      #   @return [Types::FailureDetails]
       class PutThirdPartyJobFailureResultInput < Struct.new(
         :job_id,
         :client_token,
         :failure_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The ID of the job that failed. This is the same ID returned from
-        #   PollForThirdPartyJobs.
-        #   @return [String]
-
-        # @!attribute [rw] client_token
-        #   The clientToken portion of the clientId and clientToken pair used to
-        #   verify that the calling entity is allowed access to the job and its
-        #   details.
-        #   @return [String]
-
-        # @!attribute [rw] failure_details
-        #   Represents information about failure details.
-        #   @return [Types::FailureDetails]
-
       end
 
       # Represents the input of a put third party job success result action.
@@ -2200,45 +1993,42 @@ module Aws
       #           percent_complete: 1,
       #         },
       #       }
+      # @!attribute [rw] job_id
+      #   The ID of the job that successfully completed. This is the same ID
+      #   returned from PollForThirdPartyJobs.
+      #   @return [String]
+      #
+      # @!attribute [rw] client_token
+      #   The clientToken portion of the clientId and clientToken pair used to
+      #   verify that the calling entity is allowed access to the job and its
+      #   details.
+      #   @return [String]
+      #
+      # @!attribute [rw] current_revision
+      #   Represents information about a current revision.
+      #   @return [Types::CurrentRevision]
+      #
+      # @!attribute [rw] continuation_token
+      #   A token generated by a job worker, such as an AWS CodeDeploy
+      #   deployment ID, that a successful job provides to identify a partner
+      #   action in progress. Future jobs will use this token in order to
+      #   identify the running instance of the action. It can be reused to
+      #   return additional information about the progress of the partner
+      #   action. When the action is complete, no continuation token should be
+      #   supplied.
+      #   @return [String]
+      #
+      # @!attribute [rw] execution_details
+      #   The details of the actions taken and results produced on an artifact
+      #   as it passes through stages in the pipeline.
+      #   @return [Types::ExecutionDetails]
       class PutThirdPartyJobSuccessResultInput < Struct.new(
         :job_id,
         :client_token,
         :current_revision,
         :continuation_token,
         :execution_details)
-
         include Aws::Structure
-
-        # @!attribute [rw] job_id
-        #   The ID of the job that successfully completed. This is the same ID
-        #   returned from PollForThirdPartyJobs.
-        #   @return [String]
-
-        # @!attribute [rw] client_token
-        #   The clientToken portion of the clientId and clientToken pair used to
-        #   verify that the calling entity is allowed access to the job and its
-        #   details.
-        #   @return [String]
-
-        # @!attribute [rw] current_revision
-        #   Represents information about a current revision.
-        #   @return [Types::CurrentRevision]
-
-        # @!attribute [rw] continuation_token
-        #   A token generated by a job worker, such as an AWS CodeDeploy
-        #   deployment ID, that a successful job provides to identify a partner
-        #   action in progress. Future jobs will use this token in order to
-        #   identify the running instance of the action. It can be reused to
-        #   return additional information about the progress of the partner
-        #   action. When the action is complete, no continuation token should be
-        #   supplied.
-        #   @return [String]
-
-        # @!attribute [rw] execution_details
-        #   The details of the actions taken and results produced on an artifact
-        #   as it passes through stages in the pipeline.
-        #   @return [Types::ExecutionDetails]
-
       end
 
       # Represents the input of a retry stage execution action.
@@ -2251,75 +2041,63 @@ module Aws
       #         pipeline_execution_id: "PipelineExecutionId", # required
       #         retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS
       #       }
+      # @!attribute [rw] pipeline_name
+      #   The name of the pipeline that contains the failed stage.
+      #   @return [String]
+      #
+      # @!attribute [rw] stage_name
+      #   The name of the failed stage to be retried.
+      #   @return [String]
+      #
+      # @!attribute [rw] pipeline_execution_id
+      #   The ID of the pipeline execution in the failed stage to be retried.
+      #   Use the GetPipelineState action to retrieve the current
+      #   pipelineExecutionId of the failed stage
+      #   @return [String]
+      #
+      # @!attribute [rw] retry_mode
+      #   The scope of the retry attempt. Currently, the only supported value
+      #   is FAILED\_ACTIONS.
+      #   @return [String]
       class RetryStageExecutionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :pipeline_execution_id,
         :retry_mode)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_name
-        #   The name of the pipeline that contains the failed stage.
-        #   @return [String]
-
-        # @!attribute [rw] stage_name
-        #   The name of the failed stage to be retried.
-        #   @return [String]
-
-        # @!attribute [rw] pipeline_execution_id
-        #   The ID of the pipeline execution in the failed stage to be retried.
-        #   Use the GetPipelineState action to retrieve the current
-        #   pipelineExecutionId of the failed stage
-        #   @return [String]
-
-        # @!attribute [rw] retry_mode
-        #   The scope of the retry attempt. Currently, the only supported value
-        #   is FAILED\_ACTIONS.
-        #   @return [String]
-
       end
 
       # Represents the output of a retry stage execution action.
+      # @!attribute [rw] pipeline_execution_id
+      #   The ID of the current workflow execution in the failed stage.
+      #   @return [String]
       class RetryStageExecutionOutput < Struct.new(
         :pipeline_execution_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_execution_id
-        #   The ID of the current workflow execution in the failed stage.
-        #   @return [String]
-
       end
 
       # The location of the Amazon S3 bucket that contains a revision.
+      # @!attribute [rw] bucket_name
+      #   The name of the Amazon S3 bucket.
+      #   @return [String]
+      #
+      # @!attribute [rw] object_key
+      #   The key of the object in the Amazon S3 bucket, which uniquely
+      #   identifies the object in the bucket.
+      #   @return [String]
       class S3ArtifactLocation < Struct.new(
         :bucket_name,
         :object_key)
-
         include Aws::Structure
-
-        # @!attribute [rw] bucket_name
-        #   The name of the Amazon S3 bucket.
-        #   @return [String]
-
-        # @!attribute [rw] object_key
-        #   The key of the object in the Amazon S3 bucket, which uniquely
-        #   identifies the object in the bucket.
-        #   @return [String]
-
       end
 
       # Represents information about a stage to a job worker.
+      # @!attribute [rw] name
+      #   The name of the stage.
+      #   @return [String]
       class StageContext < Struct.new(
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the stage.
-        #   @return [String]
-
       end
 
       # Represents information about a stage and its definition.
@@ -2361,72 +2139,63 @@ module Aws
       #           },
       #         ],
       #       }
+      # @!attribute [rw] name
+      #   The name of the stage.
+      #   @return [String]
+      #
+      # @!attribute [rw] blockers
+      #   Reserved for future use.
+      #   @return [Array<Types::BlockerDeclaration>]
+      #
+      # @!attribute [rw] actions
+      #   The actions included in a stage.
+      #   @return [Array<Types::ActionDeclaration>]
       class StageDeclaration < Struct.new(
         :name,
         :blockers,
         :actions)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the stage.
-        #   @return [String]
-
-        # @!attribute [rw] blockers
-        #   Reserved for future use.
-        #   @return [Array<Types::BlockerDeclaration>]
-
-        # @!attribute [rw] actions
-        #   The actions included in a stage.
-        #   @return [Array<Types::ActionDeclaration>]
-
       end
 
       # Represents information about the run of a stage.
+      # @!attribute [rw] pipeline_execution_id
+      #   The ID of the pipeline execution associated with the stage.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the stage, or for a completed stage, the last status
+      #   of the stage.
+      #   @return [String]
       class StageExecution < Struct.new(
         :pipeline_execution_id,
         :status)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_execution_id
-        #   The ID of the pipeline execution associated with the stage.
-        #   @return [String]
-
-        # @!attribute [rw] status
-        #   The status of the stage, or for a completed stage, the last status
-        #   of the stage.
-        #   @return [String]
-
       end
 
       # Represents information about the state of the stage.
+      # @!attribute [rw] stage_name
+      #   The name of the stage.
+      #   @return [String]
+      #
+      # @!attribute [rw] inbound_transition_state
+      #   The state of the inbound transition, which is either enabled or
+      #   disabled.
+      #   @return [Types::TransitionState]
+      #
+      # @!attribute [rw] action_states
+      #   The state of the stage.
+      #   @return [Array<Types::ActionState>]
+      #
+      # @!attribute [rw] latest_execution
+      #   Information about the latest execution in the stage, including its
+      #   ID and status.
+      #   @return [Types::StageExecution]
       class StageState < Struct.new(
         :stage_name,
         :inbound_transition_state,
         :action_states,
         :latest_execution)
-
         include Aws::Structure
-
-        # @!attribute [rw] stage_name
-        #   The name of the stage.
-        #   @return [String]
-
-        # @!attribute [rw] inbound_transition_state
-        #   The state of the inbound transition, which is either enabled or
-        #   disabled.
-        #   @return [Types::TransitionState]
-
-        # @!attribute [rw] action_states
-        #   The state of the stage.
-        #   @return [Array<Types::ActionState>]
-
-        # @!attribute [rw] latest_execution
-        #   Information about the latest execution in the stage, including its
-        #   ID and status.
-        #   @return [Types::StageExecution]
-
       end
 
       # Represents the input of a start pipeline execution action.
@@ -2436,52 +2205,87 @@ module Aws
       #       {
       #         name: "PipelineName", # required
       #       }
+      # @!attribute [rw] name
+      #   The name of the pipeline to start.
+      #   @return [String]
       class StartPipelineExecutionInput < Struct.new(
         :name)
-
         include Aws::Structure
-
-        # @!attribute [rw] name
-        #   The name of the pipeline to start.
-        #   @return [String]
-
       end
 
       # Represents the output of a start pipeline execution action.
+      # @!attribute [rw] pipeline_execution_id
+      #   The unique system-generated ID of the pipeline execution that was
+      #   started.
+      #   @return [String]
       class StartPipelineExecutionOutput < Struct.new(
         :pipeline_execution_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline_execution_id
-        #   The unique system-generated ID of the pipeline execution that was
-        #   started.
-        #   @return [String]
-
       end
 
       # A response to a PollForThirdPartyJobs request returned by AWS
       # CodePipeline when there is a job to be worked upon by a partner
       # action.
+      # @!attribute [rw] client_id
+      #   The clientToken portion of the clientId and clientToken pair used to
+      #   verify that the calling entity is allowed access to the job and its
+      #   details.
+      #   @return [String]
+      #
+      # @!attribute [rw] job_id
+      #   The identifier used to identify the job in AWS CodePipeline.
+      #   @return [String]
       class ThirdPartyJob < Struct.new(
         :client_id,
         :job_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] client_id
-        #   The clientToken portion of the clientId and clientToken pair used to
-        #   verify that the calling entity is allowed access to the job and its
-        #   details.
-        #   @return [String]
-
-        # @!attribute [rw] job_id
-        #   The identifier used to identify the job in AWS CodePipeline.
-        #   @return [String]
-
       end
 
       # Represents information about the job data for a partner action.
+      # @!attribute [rw] action_type_id
+      #   Represents information about an action type.
+      #   @return [Types::ActionTypeId]
+      #
+      # @!attribute [rw] action_configuration
+      #   Represents information about an action configuration.
+      #   @return [Types::ActionConfiguration]
+      #
+      # @!attribute [rw] pipeline_context
+      #   Represents information about a pipeline to a job worker.
+      #   @return [Types::PipelineContext]
+      #
+      # @!attribute [rw] input_artifacts
+      #   The name of the artifact that will be worked upon by the action, if
+      #   any. This name might be system-generated, such as \"MyApp\", or
+      #   might be defined by the user when the action is created. The input
+      #   artifact name must match the name of an output artifact generated by
+      #   an action in an earlier action or stage of the pipeline.
+      #   @return [Array<Types::Artifact>]
+      #
+      # @!attribute [rw] output_artifacts
+      #   The name of the artifact that will be the result of the action, if
+      #   any. This name might be system-generated, such as \"MyBuiltApp\", or
+      #   might be defined by the user when the action is created.
+      #   @return [Array<Types::Artifact>]
+      #
+      # @!attribute [rw] artifact_credentials
+      #   Represents an AWS session credentials object. These credentials are
+      #   temporary credentials that are issued by AWS Secure Token Service
+      #   (STS). They can be used to access input and output artifacts in the
+      #   Amazon S3 bucket used to store artifact for the pipeline in AWS
+      #   CodePipeline.
+      #   @return [Types::AWSSessionCredentials]
+      #
+      # @!attribute [rw] continuation_token
+      #   A system-generated token, such as a AWS CodeDeploy deployment ID,
+      #   that a job requires in order to continue the job asynchronously.
+      #   @return [String]
+      #
+      # @!attribute [rw] encryption_key
+      #   The encryption key used to encrypt and decrypt data in the artifact
+      #   store for the pipeline, such as an AWS Key Management Service (AWS
+      #   KMS) key. This is optional and might not be present.
+      #   @return [Types::EncryptionKey]
       class ThirdPartyJobData < Struct.new(
         :action_type_id,
         :action_configuration,
@@ -2491,109 +2295,56 @@ module Aws
         :artifact_credentials,
         :continuation_token,
         :encryption_key)
-
         include Aws::Structure
-
-        # @!attribute [rw] action_type_id
-        #   Represents information about an action type.
-        #   @return [Types::ActionTypeId]
-
-        # @!attribute [rw] action_configuration
-        #   Represents information about an action configuration.
-        #   @return [Types::ActionConfiguration]
-
-        # @!attribute [rw] pipeline_context
-        #   Represents information about a pipeline to a job worker.
-        #   @return [Types::PipelineContext]
-
-        # @!attribute [rw] input_artifacts
-        #   The name of the artifact that will be worked upon by the action, if
-        #   any. This name might be system-generated, such as \"MyApp\", or
-        #   might be defined by the user when the action is created. The input
-        #   artifact name must match the name of an output artifact generated by
-        #   an action in an earlier action or stage of the pipeline.
-        #   @return [Array<Types::Artifact>]
-
-        # @!attribute [rw] output_artifacts
-        #   The name of the artifact that will be the result of the action, if
-        #   any. This name might be system-generated, such as \"MyBuiltApp\", or
-        #   might be defined by the user when the action is created.
-        #   @return [Array<Types::Artifact>]
-
-        # @!attribute [rw] artifact_credentials
-        #   Represents an AWS session credentials object. These credentials are
-        #   temporary credentials that are issued by AWS Secure Token Service
-        #   (STS). They can be used to access input and output artifacts in the
-        #   Amazon S3 bucket used to store artifact for the pipeline in AWS
-        #   CodePipeline.
-        #   @return [Types::AWSSessionCredentials]
-
-        # @!attribute [rw] continuation_token
-        #   A system-generated token, such as a AWS CodeDeploy deployment ID,
-        #   that a job requires in order to continue the job asynchronously.
-        #   @return [String]
-
-        # @!attribute [rw] encryption_key
-        #   The encryption key used to encrypt and decrypt data in the artifact
-        #   store for the pipeline, such as an AWS Key Management Service (AWS
-        #   KMS) key. This is optional and might not be present.
-        #   @return [Types::EncryptionKey]
-
       end
 
       # The details of a job sent in response to a GetThirdPartyJobDetails
       # request.
+      # @!attribute [rw] id
+      #   The identifier used to identify the job details in AWS CodePipeline.
+      #   @return [String]
+      #
+      # @!attribute [rw] data
+      #   The data to be returned by the third party job worker.
+      #   @return [Types::ThirdPartyJobData]
+      #
+      # @!attribute [rw] nonce
+      #   A system-generated random number that AWS CodePipeline uses to
+      #   ensure that the job is being worked on by only one job worker. This
+      #   number must be returned in the response.
+      #   @return [String]
       class ThirdPartyJobDetails < Struct.new(
         :id,
         :data,
         :nonce)
-
         include Aws::Structure
-
-        # @!attribute [rw] id
-        #   The identifier used to identify the job details in AWS CodePipeline.
-        #   @return [String]
-
-        # @!attribute [rw] data
-        #   The data to be returned by the third party job worker.
-        #   @return [Types::ThirdPartyJobData]
-
-        # @!attribute [rw] nonce
-        #   A system-generated random number that AWS CodePipeline uses to
-        #   ensure that the job is being worked on by only one job worker. This
-        #   number must be returned in the response.
-        #   @return [String]
-
       end
 
       # Represents information about the state of transitions between one
       # stage and another stage.
+      # @!attribute [rw] enabled
+      #   Whether the transition between stages is enabled (true) or disabled
+      #   (false).
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] last_changed_by
+      #   The ID of the user who last changed the transition state.
+      #   @return [String]
+      #
+      # @!attribute [rw] last_changed_at
+      #   The timestamp when the transition state was last changed.
+      #   @return [Time]
+      #
+      # @!attribute [rw] disabled_reason
+      #   The user-specified reason why the transition between two stages of a
+      #   pipeline was disabled.
+      #   @return [String]
       class TransitionState < Struct.new(
         :enabled,
         :last_changed_by,
         :last_changed_at,
         :disabled_reason)
-
         include Aws::Structure
-
-        # @!attribute [rw] enabled
-        #   Whether the transition between stages is enabled (true) or disabled
-        #   (false).
-        #   @return [Boolean]
-
-        # @!attribute [rw] last_changed_by
-        #   The ID of the user who last changed the transition state.
-        #   @return [String]
-
-        # @!attribute [rw] last_changed_at
-        #   The timestamp when the transition state was last changed.
-        #   @return [Time]
-
-        # @!attribute [rw] disabled_reason
-        #   The user-specified reason why the transition between two stages of a
-        #   pipeline was disabled.
-        #   @return [String]
-
       end
 
       # Represents the input of an update pipeline action.
@@ -2652,27 +2403,21 @@ module Aws
       #           version: 1,
       #         },
       #       }
+      # @!attribute [rw] pipeline
+      #   The name of the pipeline to be updated.
+      #   @return [Types::PipelineDeclaration]
       class UpdatePipelineInput < Struct.new(
         :pipeline)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline
-        #   The name of the pipeline to be updated.
-        #   @return [Types::PipelineDeclaration]
-
       end
 
       # Represents the output of an update pipeline action.
+      # @!attribute [rw] pipeline
+      #   The structure of the updated pipeline.
+      #   @return [Types::PipelineDeclaration]
       class UpdatePipelineOutput < Struct.new(
         :pipeline)
-
         include Aws::Structure
-
-        # @!attribute [rw] pipeline
-        #   The structure of the updated pipeline.
-        #   @return [Types::PipelineDeclaration]
-
       end
 
     end

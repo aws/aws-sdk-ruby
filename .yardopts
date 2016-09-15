@@ -6,5 +6,7 @@
 --hide-api private
 --plugin sitemap
 --asset doc-src/images:images
+--exclude \/client_api.rb$
+--no-progress
 -e doc-src/plugins/apis.rb
 gems/**/lib/**/*.rb

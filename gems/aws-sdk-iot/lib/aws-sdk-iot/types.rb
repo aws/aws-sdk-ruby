@@ -17,20 +17,17 @@ module Aws
       #         certificate_id: "CertificateId", # required
       #         set_as_active: false,
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] set_as_active
+      #   Specifies whether the certificate is active.
+      #   @return [Boolean]
       class AcceptCertificateTransferRequest < Struct.new(
         :certificate_id,
         :set_as_active)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] set_as_active
-        #   Specifies whether the certificate is active.
-        #   @return [Boolean]
-
       end
 
       # Describes the actions associated with a rule.
@@ -104,6 +101,49 @@ module Aws
       #           id: "ElasticsearchId", # required
       #         },
       #       }
+      # @!attribute [rw] dynamo_db
+      #   Write to a DynamoDB table.
+      #   @return [Types::DynamoDBAction]
+      #
+      # @!attribute [rw] lambda
+      #   Invoke a Lambda function.
+      #   @return [Types::LambdaAction]
+      #
+      # @!attribute [rw] sns
+      #   Publish to an Amazon SNS topic.
+      #   @return [Types::SnsAction]
+      #
+      # @!attribute [rw] sqs
+      #   Publish to an Amazon SQS queue.
+      #   @return [Types::SqsAction]
+      #
+      # @!attribute [rw] kinesis
+      #   Write data to an Amazon Kinesis stream.
+      #   @return [Types::KinesisAction]
+      #
+      # @!attribute [rw] republish
+      #   Publish to another MQTT topic.
+      #   @return [Types::RepublishAction]
+      #
+      # @!attribute [rw] s3
+      #   Write to an Amazon S3 bucket.
+      #   @return [Types::S3Action]
+      #
+      # @!attribute [rw] firehose
+      #   Write to an Amazon Kinesis Firehose stream.
+      #   @return [Types::FirehoseAction]
+      #
+      # @!attribute [rw] cloudwatch_metric
+      #   Capture a CloudWatch metric.
+      #   @return [Types::CloudwatchMetricAction]
+      #
+      # @!attribute [rw] cloudwatch_alarm
+      #   Change the state of a CloudWatch alarm.
+      #   @return [Types::CloudwatchAlarmAction]
+      #
+      # @!attribute [rw] elasticsearch
+      #   Write data to an Amazon Elasticsearch Service; domain.
+      #   @return [Types::ElasticsearchAction]
       class Action < Struct.new(
         :dynamo_db,
         :lambda,
@@ -116,53 +156,7 @@ module Aws
         :cloudwatch_metric,
         :cloudwatch_alarm,
         :elasticsearch)
-
         include Aws::Structure
-
-        # @!attribute [rw] dynamo_db
-        #   Write to a DynamoDB table.
-        #   @return [Types::DynamoDBAction]
-
-        # @!attribute [rw] lambda
-        #   Invoke a Lambda function.
-        #   @return [Types::LambdaAction]
-
-        # @!attribute [rw] sns
-        #   Publish to an Amazon SNS topic.
-        #   @return [Types::SnsAction]
-
-        # @!attribute [rw] sqs
-        #   Publish to an Amazon SQS queue.
-        #   @return [Types::SqsAction]
-
-        # @!attribute [rw] kinesis
-        #   Write data to an Amazon Kinesis stream.
-        #   @return [Types::KinesisAction]
-
-        # @!attribute [rw] republish
-        #   Publish to another MQTT topic.
-        #   @return [Types::RepublishAction]
-
-        # @!attribute [rw] s3
-        #   Write to an Amazon S3 bucket.
-        #   @return [Types::S3Action]
-
-        # @!attribute [rw] firehose
-        #   Write to an Amazon Kinesis Firehose stream.
-        #   @return [Types::FirehoseAction]
-
-        # @!attribute [rw] cloudwatch_metric
-        #   Capture a CloudWatch metric.
-        #   @return [Types::CloudwatchMetricAction]
-
-        # @!attribute [rw] cloudwatch_alarm
-        #   Change the state of a CloudWatch alarm.
-        #   @return [Types::CloudwatchAlarmAction]
-
-        # @!attribute [rw] elasticsearch
-        #   Write data to an Amazon Elasticsearch Service; domain.
-        #   @return [Types::ElasticsearchAction]
-
       end
 
       # The input for the AttachPrincipalPolicy operation.
@@ -173,21 +167,18 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         principal: "Principal", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] principal
+      #   The principal, which can be a certificate ARN (as returned from the
+      #   CreateCertificate operation) or an Amazon Cognito ID.
+      #   @return [String]
       class AttachPrincipalPolicyRequest < Struct.new(
         :policy_name,
         :principal)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] principal
-        #   The principal, which can be a certificate ARN (as returned from the
-        #   CreateCertificate operation) or an Amazon Cognito ID.
-        #   @return [String]
-
       end
 
       # The input for the AttachThingPrincipal operation.
@@ -198,20 +189,17 @@ module Aws
       #         thing_name: "ThingName", # required
       #         principal: "Principal", # required
       #       }
+      # @!attribute [rw] thing_name
+      #   The name of the thing.
+      #   @return [String]
+      #
+      # @!attribute [rw] principal
+      #   The principal, such as a certificate or other credential.
+      #   @return [String]
       class AttachThingPrincipalRequest < Struct.new(
         :thing_name,
         :principal)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing.
-        #   @return [String]
-
-        # @!attribute [rw] principal
-        #   The principal, such as a certificate or other credential.
-        #   @return [String]
-
       end
 
       # The output from the AttachThingPrincipal operation.
@@ -227,65 +215,87 @@ module Aws
       #         },
       #         merge: false,
       #       }
+      # @!attribute [rw] attributes
+      #   A JSON string containing up to three key-value pair in JSON format.
+      #   For example:
+      #
+      #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] merge
+      #   Specifies whether the list of attributes provided in the
+      #   `AttributePayload` is merged with the attributes stored in the
+      #   registry, instead of overwriting them.
+      #
+      #   To remove an attribute, call `UpdateThing` with an empty attribute
+      #   value.
+      #
+      #   <note markdown="1"> The `merge` attribute is only valid when calling `UpdateThing`.
+      #
+      #    </note>
+      #   @return [Boolean]
       class AttributePayload < Struct.new(
         :attributes,
         :merge)
-
         include Aws::Structure
-
-        # @!attribute [rw] attributes
-        #   A JSON string containing up to three key-value pair in JSON format.
-        #   For example:
-        #
-        #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] merge
-        #   Specifies whether the list of attributes provided in the
-        #   `AttributePayload` is merged with the attributes stored in the
-        #   registry, instead of overwriting them.
-        #
-        #   To remove an attribute, call `UpdateThing` with an empty attribute
-        #   value.
-        #
-        #   <note markdown="1"> The `merge` attribute is only valid when calling `UpdateThing`.
-        #
-        #    </note>
-        #   @return [Boolean]
-
       end
 
       # A CA certificate.
+      # @!attribute [rw] certificate_arn
+      #   The ARN of the CA certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The ID of the CA certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the CA certificate.
+      #
+      #   The status value REGISTER\_INACTIVE is deprecated and should not be
+      #   used.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The date the CA certificate was created.
+      #   @return [Time]
       class CACertificate < Struct.new(
         :certificate_arn,
         :certificate_id,
         :status,
         :creation_date)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The ARN of the CA certificate.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the CA certificate.
-        #   @return [String]
-
-        # @!attribute [rw] status
-        #   The status of the CA certificate.
-        #
-        #   The status value REGISTER\_INACTIVE is deprecated and should not be
-        #   used.
-        #   @return [String]
-
-        # @!attribute [rw] creation_date
-        #   The date the CA certificate was created.
-        #   @return [Time]
-
       end
 
       # Describes a CA certificate.
+      # @!attribute [rw] certificate_arn
+      #   The CA certificate ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The CA certificate ID.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of a CA certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_pem
+      #   The CA certificate data, in PEM format.
+      #   @return [String]
+      #
+      # @!attribute [rw] owned_by
+      #   The owner of the CA certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The date the CA certificate was created.
+      #   @return [Time]
+      #
+      # @!attribute [rw] auto_registration_status
+      #   Whether the CA certificate configured for auto registration of
+      #   device certificates. Valid values are \"ENABLE\" and \"DISABLE\"
+      #   @return [String]
       class CACertificateDescription < Struct.new(
         :certificate_arn,
         :certificate_id,
@@ -294,38 +304,7 @@ module Aws
         :owned_by,
         :creation_date,
         :auto_registration_status)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The CA certificate ARN.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The CA certificate ID.
-        #   @return [String]
-
-        # @!attribute [rw] status
-        #   The status of a CA certificate.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_pem
-        #   The CA certificate data, in PEM format.
-        #   @return [String]
-
-        # @!attribute [rw] owned_by
-        #   The owner of the CA certificate.
-        #   @return [String]
-
-        # @!attribute [rw] creation_date
-        #   The date the CA certificate was created.
-        #   @return [Time]
-
-        # @!attribute [rw] auto_registration_status
-        #   Whether the CA certificate configured for auto registration of
-        #   device certificates. Valid values are \"ENABLE\" and \"DISABLE\"
-        #   @return [String]
-
       end
 
       # The input for the CancelCertificateTransfer operation.
@@ -335,48 +314,82 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
       class CancelCertificateTransferRequest < Struct.new(
         :certificate_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
       end
 
       # Information about a certificate.
+      # @!attribute [rw] certificate_arn
+      #   The ARN of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the certificate.
+      #
+      #   The status value REGISTER\_INACTIVE is deprecated and should not be
+      #   used.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The date and time the certificate was created.
+      #   @return [Time]
       class Certificate < Struct.new(
         :certificate_arn,
         :certificate_id,
         :status,
         :creation_date)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The ARN of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] status
-        #   The status of the certificate.
-        #
-        #   The status value REGISTER\_INACTIVE is deprecated and should not be
-        #   used.
-        #   @return [String]
-
-        # @!attribute [rw] creation_date
-        #   The date and time the certificate was created.
-        #   @return [Time]
-
       end
 
       # Describes a certificate.
+      # @!attribute [rw] certificate_arn
+      #   The ARN of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] ca_certificate_id
+      #   The certificate ID of the CA certificate used to sign this
+      #   certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_pem
+      #   The certificate data, in PEM format.
+      #   @return [String]
+      #
+      # @!attribute [rw] owned_by
+      #   The ID of the AWS account that owns the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] previous_owned_by
+      #   The ID of the AWS account of the previous owner of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The date and time the certificate was created.
+      #   @return [Time]
+      #
+      # @!attribute [rw] last_modified_date
+      #   The date and time the certificate was last modified.
+      #   @return [Time]
+      #
+      # @!attribute [rw] transfer_data
+      #   The transfer data.
+      #   @return [Types::TransferData]
       class CertificateDescription < Struct.new(
         :certificate_arn,
         :certificate_id,
@@ -388,50 +401,7 @@ module Aws
         :creation_date,
         :last_modified_date,
         :transfer_data)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The ARN of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] ca_certificate_id
-        #   The certificate ID of the CA certificate used to sign this
-        #   certificate.
-        #   @return [String]
-
-        # @!attribute [rw] status
-        #   The status of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_pem
-        #   The certificate data, in PEM format.
-        #   @return [String]
-
-        # @!attribute [rw] owned_by
-        #   The ID of the AWS account that owns the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] previous_owned_by
-        #   The ID of the AWS account of the previous owner of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] creation_date
-        #   The date and time the certificate was created.
-        #   @return [Time]
-
-        # @!attribute [rw] last_modified_date
-        #   The date and time the certificate was last modified.
-        #   @return [Time]
-
-        # @!attribute [rw] transfer_data
-        #   The transfer data.
-        #   @return [Types::TransferData]
-
       end
 
       # Describes an action that updates a CloudWatch alarm.
@@ -444,31 +414,28 @@ module Aws
       #         state_reason: "StateReason", # required
       #         state_value: "StateValue", # required
       #       }
+      # @!attribute [rw] role_arn
+      #   The IAM role that allows access to the CloudWatch alarm.
+      #   @return [String]
+      #
+      # @!attribute [rw] alarm_name
+      #   The CloudWatch alarm name.
+      #   @return [String]
+      #
+      # @!attribute [rw] state_reason
+      #   The reason for the alarm change.
+      #   @return [String]
+      #
+      # @!attribute [rw] state_value
+      #   The value of the alarm state. Acceptable values are: OK, ALARM,
+      #   INSUFFICIENT\_DATA.
+      #   @return [String]
       class CloudwatchAlarmAction < Struct.new(
         :role_arn,
         :alarm_name,
         :state_reason,
         :state_value)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The IAM role that allows access to the CloudWatch alarm.
-        #   @return [String]
-
-        # @!attribute [rw] alarm_name
-        #   The CloudWatch alarm name.
-        #   @return [String]
-
-        # @!attribute [rw] state_reason
-        #   The reason for the alarm change.
-        #   @return [String]
-
-        # @!attribute [rw] state_value
-        #   The value of the alarm state. Acceptable values are: OK, ALARM,
-        #   INSUFFICIENT\_DATA.
-        #   @return [String]
-
       end
 
       # Describes an action that captures a CloudWatch metric.
@@ -483,6 +450,37 @@ module Aws
       #         metric_unit: "MetricUnit", # required
       #         metric_timestamp: "MetricTimestamp",
       #       }
+      # @!attribute [rw] role_arn
+      #   The IAM role that allows access to the CloudWatch metric.
+      #   @return [String]
+      #
+      # @!attribute [rw] metric_namespace
+      #   The CloudWatch metric namespace name.
+      #   @return [String]
+      #
+      # @!attribute [rw] metric_name
+      #   The CloudWatch metric name.
+      #   @return [String]
+      #
+      # @!attribute [rw] metric_value
+      #   The CloudWatch metric value.
+      #   @return [String]
+      #
+      # @!attribute [rw] metric_unit
+      #   The [metric unit][1] supported by CloudWatch.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit
+      #   @return [String]
+      #
+      # @!attribute [rw] metric_timestamp
+      #   An optional [Unix timestamp][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp
+      #   @return [String]
       class CloudwatchMetricAction < Struct.new(
         :role_arn,
         :metric_namespace,
@@ -490,41 +488,7 @@ module Aws
         :metric_value,
         :metric_unit,
         :metric_timestamp)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The IAM role that allows access to the CloudWatch metric.
-        #   @return [String]
-
-        # @!attribute [rw] metric_namespace
-        #   The CloudWatch metric namespace name.
-        #   @return [String]
-
-        # @!attribute [rw] metric_name
-        #   The CloudWatch metric name.
-        #   @return [String]
-
-        # @!attribute [rw] metric_value
-        #   The CloudWatch metric value.
-        #   @return [String]
-
-        # @!attribute [rw] metric_unit
-        #   The [metric unit][1] supported by CloudWatch.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit
-        #   @return [String]
-
-        # @!attribute [rw] metric_timestamp
-        #   An optional [Unix timestamp][1].
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp
-        #   @return [String]
-
       end
 
       # The input for the CreateCertificateFromCsr operation.
@@ -535,44 +499,38 @@ module Aws
       #         certificate_signing_request: "CertificateSigningRequest", # required
       #         set_as_active: false,
       #       }
+      # @!attribute [rw] certificate_signing_request
+      #   The certificate signing request (CSR).
+      #   @return [String]
+      #
+      # @!attribute [rw] set_as_active
+      #   Specifies whether the certificate is active.
+      #   @return [Boolean]
       class CreateCertificateFromCsrRequest < Struct.new(
         :certificate_signing_request,
         :set_as_active)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_signing_request
-        #   The certificate signing request (CSR).
-        #   @return [String]
-
-        # @!attribute [rw] set_as_active
-        #   Specifies whether the certificate is active.
-        #   @return [Boolean]
-
       end
 
       # The output from the CreateCertificateFromCsr operation.
+      # @!attribute [rw] certificate_arn
+      #   The Amazon Resource Name (ARN) of the certificate. You can use the
+      #   ARN as a principal for policy operations.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate. Certificate management operations only
+      #   take a certificateId.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_pem
+      #   The certificate data, in PEM format.
+      #   @return [String]
       class CreateCertificateFromCsrResponse < Struct.new(
         :certificate_arn,
         :certificate_id,
         :certificate_pem)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The Amazon Resource Name (ARN) of the certificate. You can use the
-        #   ARN as a principal for policy operations.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate. Certificate management operations only
-        #   take a certificateId.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_pem
-        #   The certificate data, in PEM format.
-        #   @return [String]
-
       end
 
       # The input for the CreateKeysAndCertificate operation.
@@ -582,43 +540,37 @@ module Aws
       #       {
       #         set_as_active: false,
       #       }
+      # @!attribute [rw] set_as_active
+      #   Specifies whether the certificate is active.
+      #   @return [Boolean]
       class CreateKeysAndCertificateRequest < Struct.new(
         :set_as_active)
-
         include Aws::Structure
-
-        # @!attribute [rw] set_as_active
-        #   Specifies whether the certificate is active.
-        #   @return [Boolean]
-
       end
 
       # The output of the CreateKeysAndCertificate operation.
+      # @!attribute [rw] certificate_arn
+      #   The ARN of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate. AWS IoT issues a default subject name for
+      #   the certificate (for example, AWS IoT Certificate).
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_pem
+      #   The certificate data, in PEM format.
+      #   @return [String]
+      #
+      # @!attribute [rw] key_pair
+      #   The generated key pair.
+      #   @return [Types::KeyPair]
       class CreateKeysAndCertificateResponse < Struct.new(
         :certificate_arn,
         :certificate_id,
         :certificate_pem,
         :key_pair)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The ARN of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate. AWS IoT issues a default subject name for
-        #   the certificate (for example, AWS IoT Certificate).
-        #   @return [String]
-
-        # @!attribute [rw] certificate_pem
-        #   The certificate data, in PEM format.
-        #   @return [String]
-
-        # @!attribute [rw] key_pair
-        #   The generated key pair.
-        #   @return [Types::KeyPair]
-
       end
 
       # The input for the CreatePolicy operation.
@@ -629,49 +581,43 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_document: "PolicyDocument", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_document
+      #   The JSON document that describes the policy. **policyDocument** must
+      #   have a minimum length of 1, with a maximum length of 2048, excluding
+      #   whitespace.
+      #   @return [String]
       class CreatePolicyRequest < Struct.new(
         :policy_name,
         :policy_document)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] policy_document
-        #   The JSON document that describes the policy. **policyDocument** must
-        #   have a minimum length of 1, with a maximum length of 2048, excluding
-        #   whitespace.
-        #   @return [String]
-
       end
 
       # The output from the CreatePolicy operation.
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_arn
+      #   The policy ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_document
+      #   The JSON document that describes the policy.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_version_id
+      #   The policy version ID.
+      #   @return [String]
       class CreatePolicyResponse < Struct.new(
         :policy_name,
         :policy_arn,
         :policy_document,
         :policy_version_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] policy_arn
-        #   The policy ARN.
-        #   @return [String]
-
-        # @!attribute [rw] policy_document
-        #   The JSON document that describes the policy.
-        #   @return [String]
-
-        # @!attribute [rw] policy_version_id
-        #   The policy version ID.
-        #   @return [String]
-
       end
 
       # The input for the CreatePolicyVersion operation.
@@ -683,56 +629,50 @@ module Aws
       #         policy_document: "PolicyDocument", # required
       #         set_as_default: false,
       #       }
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_document
+      #   The JSON document that describes the policy. Minimum length of 1.
+      #   Maximum length of 2048, excluding whitespaces
+      #   @return [String]
+      #
+      # @!attribute [rw] set_as_default
+      #   Specifies whether the policy version is set as the default. When
+      #   this parameter is true, the new policy version becomes the operative
+      #   version (that is, the version that is in effect for the certificates
+      #   to which the policy is attached).
+      #   @return [Boolean]
       class CreatePolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_document,
         :set_as_default)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] policy_document
-        #   The JSON document that describes the policy. Minimum length of 1.
-        #   Maximum length of 2048, excluding whitespaces
-        #   @return [String]
-
-        # @!attribute [rw] set_as_default
-        #   Specifies whether the policy version is set as the default. When
-        #   this parameter is true, the new policy version becomes the operative
-        #   version (that is, the version that is in effect for the certificates
-        #   to which the policy is attached).
-        #   @return [Boolean]
-
       end
 
       # The output of the CreatePolicyVersion operation.
+      # @!attribute [rw] policy_arn
+      #   The policy ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_document
+      #   The JSON document that describes the policy.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_version_id
+      #   The policy version ID.
+      #   @return [String]
+      #
+      # @!attribute [rw] is_default_version
+      #   Specifies whether the policy version is the default.
+      #   @return [Boolean]
       class CreatePolicyVersionResponse < Struct.new(
         :policy_arn,
         :policy_document,
         :policy_version_id,
         :is_default_version)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_arn
-        #   The policy ARN.
-        #   @return [String]
-
-        # @!attribute [rw] policy_document
-        #   The JSON document that describes the policy.
-        #   @return [String]
-
-        # @!attribute [rw] policy_version_id
-        #   The policy version ID.
-        #   @return [String]
-
-        # @!attribute [rw] is_default_version
-        #   Specifies whether the policy version is the default.
-        #   @return [Boolean]
-
       end
 
       # The input for the CreateThing operation.
@@ -749,45 +689,39 @@ module Aws
       #           merge: false,
       #         },
       #       }
+      # @!attribute [rw] thing_name
+      #   The name of the thing to create.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type associated with the new thing.
+      #   @return [String]
+      #
+      # @!attribute [rw] attribute_payload
+      #   The attribute payload, which consists of up to three name/value
+      #   pairs in a JSON document. For example:
+      #
+      #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
+      #   @return [Types::AttributePayload]
       class CreateThingRequest < Struct.new(
         :thing_name,
         :thing_type_name,
         :attribute_payload)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing to create.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type associated with the new thing.
-        #   @return [String]
-
-        # @!attribute [rw] attribute_payload
-        #   The attribute payload, which consists of up to three name/value
-        #   pairs in a JSON document. For example:
-        #
-        #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
-        #   @return [Types::AttributePayload]
-
       end
 
       # The output of the CreateThing operation.
+      # @!attribute [rw] thing_name
+      #   The name of the new thing.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_arn
+      #   The ARN of the new thing.
+      #   @return [String]
       class CreateThingResponse < Struct.new(
         :thing_name,
         :thing_arn)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the new thing.
-        #   @return [String]
-
-        # @!attribute [rw] thing_arn
-        #   The ARN of the new thing.
-        #   @return [String]
-
       end
 
       # The input for the CreateThingType operation.
@@ -801,39 +735,33 @@ module Aws
       #           searchable_attributes: ["AttributeName"],
       #         },
       #       }
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_properties
+      #   The ThingTypeProperties for the thing type to create. It contains
+      #   information about the new thing type including a description, and a
+      #   list of searchable thing attribute names.
+      #   @return [Types::ThingTypeProperties]
       class CreateThingTypeRequest < Struct.new(
         :thing_type_name,
         :thing_type_properties)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_properties
-        #   The ThingTypeProperties for the thing type to create. It contains
-        #   information about the new thing type including a description, and a
-        #   list of searchable thing attribute names.
-        #   @return [Types::ThingTypeProperties]
-
       end
 
       # The output of the CreateThingType operation.
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_arn
+      #   The Amazon Resource Name (ARN) of the thing type.
+      #   @return [String]
       class CreateThingTypeResponse < Struct.new(
         :thing_type_name,
         :thing_type_arn)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_arn
-        #   The Amazon Resource Name (ARN) of the thing type.
-        #   @return [String]
-
       end
 
       # The input for the CreateTopicRule operation.
@@ -918,20 +846,17 @@ module Aws
       #           aws_iot_sql_version: "AwsIotSqlVersion",
       #         },
       #       }
+      # @!attribute [rw] rule_name
+      #   The name of the rule.
+      #   @return [String]
+      #
+      # @!attribute [rw] topic_rule_payload
+      #   The rule payload.
+      #   @return [Types::TopicRulePayload]
       class CreateTopicRuleRequest < Struct.new(
         :rule_name,
         :topic_rule_payload)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_name
-        #   The name of the rule.
-        #   @return [String]
-
-        # @!attribute [rw] topic_rule_payload
-        #   The rule payload.
-        #   @return [Types::TopicRulePayload]
-
       end
 
       # Input for the DeleteCACertificate operation.
@@ -941,15 +866,12 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate to delete.
+      #   @return [String]
       class DeleteCACertificateRequest < Struct.new(
         :certificate_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate to delete.
-        #   @return [String]
-
       end
 
       # The output for the DeleteCACertificate operation.
@@ -962,15 +884,12 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
       class DeleteCertificateRequest < Struct.new(
         :certificate_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
       end
 
       # The input for the DeletePolicy operation.
@@ -980,15 +899,12 @@ module Aws
       #       {
       #         policy_name: "PolicyName", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The name of the policy to delete.
+      #   @return [String]
       class DeletePolicyRequest < Struct.new(
         :policy_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The name of the policy to delete.
-        #   @return [String]
-
       end
 
       # The input for the DeletePolicyVersion operation.
@@ -999,20 +915,17 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_version_id: "PolicyVersionId", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The name of the policy.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_version_id
+      #   The policy version ID.
+      #   @return [String]
       class DeletePolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_version_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The name of the policy.
-        #   @return [String]
-
-        # @!attribute [rw] policy_version_id
-        #   The policy version ID.
-        #   @return [String]
-
       end
 
       # The input for the DeleteRegistrationCode operation.
@@ -1030,23 +943,20 @@ module Aws
       #         thing_name: "ThingName", # required
       #         expected_version: 1,
       #       }
+      # @!attribute [rw] thing_name
+      #   The name of the thing to delete.
+      #   @return [String]
+      #
+      # @!attribute [rw] expected_version
+      #   The expected version of the thing record in the registry. If the
+      #   version of the record in the registry does not match the expected
+      #   version specified in the request, the `DeleteThing` request is
+      #   rejected with a `VersionConflictException`.
+      #   @return [Integer]
       class DeleteThingRequest < Struct.new(
         :thing_name,
         :expected_version)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing to delete.
-        #   @return [String]
-
-        # @!attribute [rw] expected_version
-        #   The expected version of the thing record in the registry. If the
-        #   version of the record in the registry does not match the expected
-        #   version specified in the request, the `DeleteThing` request is
-        #   rejected with a `VersionConflictException`.
-        #   @return [Integer]
-
       end
 
       # The output of the DeleteThing operation.
@@ -1059,15 +969,12 @@ module Aws
       #       {
       #         thing_type_name: "ThingTypeName", # required
       #       }
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
       class DeleteThingTypeRequest < Struct.new(
         :thing_type_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
       end
 
       # The output for the DeleteThingType operation.
@@ -1080,15 +987,12 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
+      # @!attribute [rw] rule_name
+      #   The name of the rule.
+      #   @return [String]
       class DeleteTopicRuleRequest < Struct.new(
         :rule_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_name
-        #   The name of the rule.
-        #   @return [String]
-
       end
 
       # The input for the DeprecateThingType operation.
@@ -1099,22 +1003,19 @@ module Aws
       #         thing_type_name: "ThingTypeName", # required
       #         undo_deprecate: false,
       #       }
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type to deprecate.
+      #   @return [String]
+      #
+      # @!attribute [rw] undo_deprecate
+      #   Whether to undeprecate a deprecated thing type. If **true**, the
+      #   thing type will not be deprecated anymore and you can associate it
+      #   with things.
+      #   @return [Boolean]
       class DeprecateThingTypeRequest < Struct.new(
         :thing_type_name,
         :undo_deprecate)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type to deprecate.
-        #   @return [String]
-
-        # @!attribute [rw] undo_deprecate
-        #   Whether to undeprecate a deprecated thing type. If **true**, the
-        #   thing type will not be deprecated anymore and you can associate it
-        #   with things.
-        #   @return [Boolean]
-
       end
 
       # The output for the DeprecateThingType operation.
@@ -1127,27 +1028,21 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
+      # @!attribute [rw] certificate_id
+      #   The CA certificate identifier.
+      #   @return [String]
       class DescribeCACertificateRequest < Struct.new(
         :certificate_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The CA certificate identifier.
-        #   @return [String]
-
       end
 
       # The output from the DescribeCACertificate operation.
+      # @!attribute [rw] certificate_description
+      #   The CA certificate description.
+      #   @return [Types::CACertificateDescription]
       class DescribeCACertificateResponse < Struct.new(
         :certificate_description)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_description
-        #   The CA certificate description.
-        #   @return [Types::CACertificateDescription]
-
       end
 
       # The input for the DescribeCertificate operation.
@@ -1157,27 +1052,21 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
       class DescribeCertificateRequest < Struct.new(
         :certificate_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
       end
 
       # The output of the DescribeCertificate operation.
+      # @!attribute [rw] certificate_description
+      #   The description of the certificate.
+      #   @return [Types::CertificateDescription]
       class DescribeCertificateResponse < Struct.new(
         :certificate_description)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_description
-        #   The description of the certificate.
-        #   @return [Types::CertificateDescription]
-
       end
 
       # The input for the DescribeEndpoint operation.
@@ -1185,16 +1074,13 @@ module Aws
       class DescribeEndpointRequest < Aws::EmptyStructure; end
 
       # The output from the DescribeEndpoint operation.
+      # @!attribute [rw] endpoint_address
+      #   The endpoint. The format of the endpoint is as follows:
+      #   *identifier*.iot.*region*.amazonaws.com.
+      #   @return [String]
       class DescribeEndpointResponse < Struct.new(
         :endpoint_address)
-
         include Aws::Structure
-
-        # @!attribute [rw] endpoint_address
-        #   The endpoint. The format of the endpoint is as follows:
-        #   *identifier*.iot.*region*.amazonaws.com.
-        #   @return [String]
-
       end
 
       # The input for the DescribeThing operation.
@@ -1204,53 +1090,47 @@ module Aws
       #       {
       #         thing_name: "ThingName", # required
       #       }
+      # @!attribute [rw] thing_name
+      #   The name of the thing.
+      #   @return [String]
       class DescribeThingRequest < Struct.new(
         :thing_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing.
-        #   @return [String]
-
       end
 
       # The output from the DescribeThing operation.
+      # @!attribute [rw] default_client_id
+      #   The default client ID.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_name
+      #   The name of the thing.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_name
+      #   The thing type name.
+      #   @return [String]
+      #
+      # @!attribute [rw] attributes
+      #   The thing attributes.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] version
+      #   The current version of the thing record in the registry.
+      #
+      #   <note markdown="1"> To avoid unintentional changes to the information in the registry,
+      #   you can pass the version information in the `expectedVersion`
+      #   parameter of the `UpdateThing` and `DeleteThing` calls.
+      #
+      #    </note>
+      #   @return [Integer]
       class DescribeThingResponse < Struct.new(
         :default_client_id,
         :thing_name,
         :thing_type_name,
         :attributes,
         :version)
-
         include Aws::Structure
-
-        # @!attribute [rw] default_client_id
-        #   The default client ID.
-        #   @return [String]
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_name
-        #   The thing type name.
-        #   @return [String]
-
-        # @!attribute [rw] attributes
-        #   The thing attributes.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] version
-        #   The current version of the thing record in the registry.
-        #
-        #   <note markdown="1"> To avoid unintentional changes to the information in the registry,
-        #   you can pass the version information in the `expectedVersion`
-        #   parameter of the `UpdateThing` and `DeleteThing` calls.
-        #
-        #    </note>
-        #   @return [Integer]
-
       end
 
       # The input for the DescribeThingType operation.
@@ -1260,42 +1140,36 @@ module Aws
       #       {
       #         thing_type_name: "ThingTypeName", # required
       #       }
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
       class DescribeThingTypeRequest < Struct.new(
         :thing_type_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
       end
 
       # The output for the DescribeThingType operation.
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_properties
+      #   The ThingTypeProperties contains information about the thing type
+      #   including description, and a list of searchable thing attribute
+      #   names.
+      #   @return [Types::ThingTypeProperties]
+      #
+      # @!attribute [rw] thing_type_metadata
+      #   The ThingTypeMetadata contains additional information about the
+      #   thing type including: creation date and time, a value indicating
+      #   whether the thing type is deprecated, and a date and time when time
+      #   was deprecated.
+      #   @return [Types::ThingTypeMetadata]
       class DescribeThingTypeResponse < Struct.new(
         :thing_type_name,
         :thing_type_properties,
         :thing_type_metadata)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_properties
-        #   The ThingTypeProperties contains information about the thing type
-        #   including description, and a list of searchable thing attribute
-        #   names.
-        #   @return [Types::ThingTypeProperties]
-
-        # @!attribute [rw] thing_type_metadata
-        #   The ThingTypeMetadata contains additional information about the
-        #   thing type including: creation date and time, a value indicating
-        #   whether the thing type is deprecated, and a date and time when time
-        #   was deprecated.
-        #   @return [Types::ThingTypeMetadata]
-
       end
 
       # The input for the DetachPrincipalPolicy operation.
@@ -1306,24 +1180,21 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         principal: "Principal", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The name of the policy to detach.
+      #   @return [String]
+      #
+      # @!attribute [rw] principal
+      #   The principal.
+      #
+      #   If the principal is a certificate, specify the certificate ARN. If
+      #   the principal is an Amazon Cognito identity, specify the identity
+      #   ID.
+      #   @return [String]
       class DetachPrincipalPolicyRequest < Struct.new(
         :policy_name,
         :principal)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The name of the policy to detach.
-        #   @return [String]
-
-        # @!attribute [rw] principal
-        #   The principal.
-        #
-        #   If the principal is a certificate, specify the certificate ARN. If
-        #   the principal is an Amazon Cognito identity, specify the identity
-        #   ID.
-        #   @return [String]
-
       end
 
       # The input for the DetachThingPrincipal operation.
@@ -1334,22 +1205,19 @@ module Aws
       #         thing_name: "ThingName", # required
       #         principal: "Principal", # required
       #       }
+      # @!attribute [rw] thing_name
+      #   The name of the thing.
+      #   @return [String]
+      #
+      # @!attribute [rw] principal
+      #   If the principal is a certificate, this value must be ARN of the
+      #   certificate. If the principal is an Amazon Cognito identity, this
+      #   value must be the ID of the Amazon Cognito identity.
+      #   @return [String]
       class DetachThingPrincipalRequest < Struct.new(
         :thing_name,
         :principal)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing.
-        #   @return [String]
-
-        # @!attribute [rw] principal
-        #   If the principal is a certificate, this value must be ARN of the
-        #   certificate. If the principal is an Amazon Cognito identity, this
-        #   value must be the ID of the Amazon Cognito identity.
-        #   @return [String]
-
       end
 
       # The output from the DetachThingPrincipal operation.
@@ -1362,15 +1230,12 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
+      # @!attribute [rw] rule_name
+      #   The name of the rule to disable.
+      #   @return [String]
       class DisableTopicRuleRequest < Struct.new(
         :rule_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_name
-        #   The name of the rule to disable.
-        #   @return [String]
-
       end
 
       # Describes an action to write to a DynamoDB table.
@@ -1406,6 +1271,47 @@ module Aws
       #         range_key_type: "STRING", # accepts STRING, NUMBER
       #         payload_field: "PayloadField",
       #       }
+      # @!attribute [rw] table_name
+      #   The name of the DynamoDB table.
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access to the DynamoDB table.
+      #   @return [String]
+      #
+      # @!attribute [rw] operation
+      #   The type of operation to be performed. This follows the substitution
+      #   template, so it can be `$\{operation\}`, but the substitution must
+      #   result in one of the following: `INSERT`, `UPDATE`, or `DELETE`.
+      #   @return [String]
+      #
+      # @!attribute [rw] hash_key_field
+      #   The hash key name.
+      #   @return [String]
+      #
+      # @!attribute [rw] hash_key_value
+      #   The hash key value.
+      #   @return [String]
+      #
+      # @!attribute [rw] hash_key_type
+      #   The hash key type. Valid values are \"STRING\" or \"NUMBER\"
+      #   @return [String]
+      #
+      # @!attribute [rw] range_key_field
+      #   The range key name.
+      #   @return [String]
+      #
+      # @!attribute [rw] range_key_value
+      #   The range key value.
+      #   @return [String]
+      #
+      # @!attribute [rw] range_key_type
+      #   The range key type. Valid values are \"STRING\" or \"NUMBER\"
+      #   @return [String]
+      #
+      # @!attribute [rw] payload_field
+      #   The action payload. This name can be customized.
+      #   @return [String]
       class DynamoDBAction < Struct.new(
         :table_name,
         :role_arn,
@@ -1417,51 +1323,7 @@ module Aws
         :range_key_value,
         :range_key_type,
         :payload_field)
-
         include Aws::Structure
-
-        # @!attribute [rw] table_name
-        #   The name of the DynamoDB table.
-        #   @return [String]
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access to the DynamoDB table.
-        #   @return [String]
-
-        # @!attribute [rw] operation
-        #   The type of operation to be performed. This follows the substitution
-        #   template, so it can be `$\{operation\}`, but the substitution must
-        #   result in one of the following: `INSERT`, `UPDATE`, or `DELETE`.
-        #   @return [String]
-
-        # @!attribute [rw] hash_key_field
-        #   The hash key name.
-        #   @return [String]
-
-        # @!attribute [rw] hash_key_value
-        #   The hash key value.
-        #   @return [String]
-
-        # @!attribute [rw] hash_key_type
-        #   The hash key type. Valid values are \"STRING\" or \"NUMBER\"
-        #   @return [String]
-
-        # @!attribute [rw] range_key_field
-        #   The range key name.
-        #   @return [String]
-
-        # @!attribute [rw] range_key_value
-        #   The range key value.
-        #   @return [String]
-
-        # @!attribute [rw] range_key_type
-        #   The range key type. Valid values are \"STRING\" or \"NUMBER\"
-        #   @return [String]
-
-        # @!attribute [rw] payload_field
-        #   The action payload. This name can be customized.
-        #   @return [String]
-
       end
 
       # Describes an action that writes data to an Amazon Elasticsearch
@@ -1476,35 +1338,32 @@ module Aws
       #         type: "ElasticsearchType", # required
       #         id: "ElasticsearchId", # required
       #       }
+      # @!attribute [rw] role_arn
+      #   The IAM role ARN that has access to Elasticsearch.
+      #   @return [String]
+      #
+      # @!attribute [rw] endpoint
+      #   The endpoint of your Elasticsearch domain.
+      #   @return [String]
+      #
+      # @!attribute [rw] index
+      #   The Elasticsearch index where you want to store your data.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The type of document you are storing.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The unique identifier for the document you are storing.
+      #   @return [String]
       class ElasticsearchAction < Struct.new(
         :role_arn,
         :endpoint,
         :index,
         :type,
         :id)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The IAM role ARN that has access to Elasticsearch.
-        #   @return [String]
-
-        # @!attribute [rw] endpoint
-        #   The endpoint of your Elasticsearch domain.
-        #   @return [String]
-
-        # @!attribute [rw] index
-        #   The Elasticsearch index where you want to store your data.
-        #   @return [String]
-
-        # @!attribute [rw] type
-        #   The type of document you are storing.
-        #   @return [String]
-
-        # @!attribute [rw] id
-        #   The unique identifier for the document you are storing.
-        #   @return [String]
-
       end
 
       # The input for the EnableTopicRuleRequest operation.
@@ -1514,15 +1373,12 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
+      # @!attribute [rw] rule_name
+      #   The name of the topic rule to enable.
+      #   @return [String]
       class EnableTopicRuleRequest < Struct.new(
         :rule_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_name
-        #   The name of the topic rule to enable.
-        #   @return [String]
-
       end
 
       # Describes an action that writes data to an Amazon Kinesis Firehose
@@ -1535,28 +1391,25 @@ module Aws
       #         delivery_stream_name: "DeliveryStreamName", # required
       #         separator: "FirehoseSeparator",
       #       }
+      # @!attribute [rw] role_arn
+      #   The IAM role that grants access to the Amazon Kinesis Firehost
+      #   stream.
+      #   @return [String]
+      #
+      # @!attribute [rw] delivery_stream_name
+      #   The delivery stream name.
+      #   @return [String]
+      #
+      # @!attribute [rw] separator
+      #   A character separator that will be used to separate records written
+      #   to the firehose stream. Valid values are: \'\\n\' (newline), \'\\t\'
+      #   (tab), \'\\r\\n\' (Windows newline), \',\' (comma).
+      #   @return [String]
       class FirehoseAction < Struct.new(
         :role_arn,
         :delivery_stream_name,
         :separator)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The IAM role that grants access to the Amazon Kinesis Firehost
-        #   stream.
-        #   @return [String]
-
-        # @!attribute [rw] delivery_stream_name
-        #   The delivery stream name.
-        #   @return [String]
-
-        # @!attribute [rw] separator
-        #   A character separator that will be used to separate records written
-        #   to the firehose stream. Valid values are: \'\\n\' (newline), \'\\t\'
-        #   (tab), \'\\r\\n\' (Windows newline), \',\' (comma).
-        #   @return [String]
-
       end
 
       # The input for the GetLoggingOptions operation.
@@ -1564,20 +1417,17 @@ module Aws
       class GetLoggingOptionsRequest < Aws::EmptyStructure; end
 
       # The output from the GetLoggingOptions operation.
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access.
+      #   @return [String]
+      #
+      # @!attribute [rw] log_level
+      #   The logging level.
+      #   @return [String]
       class GetLoggingOptionsResponse < Struct.new(
         :role_arn,
         :log_level)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access.
-        #   @return [String]
-
-        # @!attribute [rw] log_level
-        #   The logging level.
-        #   @return [String]
-
       end
 
       # The input for the GetPolicy operation.
@@ -1587,42 +1437,36 @@ module Aws
       #       {
       #         policy_name: "PolicyName", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The name of the policy.
+      #   @return [String]
       class GetPolicyRequest < Struct.new(
         :policy_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The name of the policy.
-        #   @return [String]
-
       end
 
       # The output from the GetPolicy operation.
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_arn
+      #   The policy ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_document
+      #   The JSON document that describes the policy.
+      #   @return [String]
+      #
+      # @!attribute [rw] default_version_id
+      #   The default policy version ID.
+      #   @return [String]
       class GetPolicyResponse < Struct.new(
         :policy_name,
         :policy_arn,
         :policy_document,
         :default_version_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] policy_arn
-        #   The policy ARN.
-        #   @return [String]
-
-        # @!attribute [rw] policy_document
-        #   The JSON document that describes the policy.
-        #   @return [String]
-
-        # @!attribute [rw] default_version_id
-        #   The default policy version ID.
-        #   @return [String]
-
       end
 
       # The input for the GetPolicyVersion operation.
@@ -1633,52 +1477,46 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_version_id: "PolicyVersionId", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The name of the policy.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_version_id
+      #   The policy version ID.
+      #   @return [String]
       class GetPolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_version_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The name of the policy.
-        #   @return [String]
-
-        # @!attribute [rw] policy_version_id
-        #   The policy version ID.
-        #   @return [String]
-
       end
 
       # The output from the GetPolicyVersion operation.
+      # @!attribute [rw] policy_arn
+      #   The policy ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_document
+      #   The JSON document that describes the policy.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_version_id
+      #   The policy version ID.
+      #   @return [String]
+      #
+      # @!attribute [rw] is_default_version
+      #   Specifies whether the policy version is the default.
+      #   @return [Boolean]
       class GetPolicyVersionResponse < Struct.new(
         :policy_arn,
         :policy_name,
         :policy_document,
         :policy_version_id,
         :is_default_version)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_arn
-        #   The policy ARN.
-        #   @return [String]
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] policy_document
-        #   The JSON document that describes the policy.
-        #   @return [String]
-
-        # @!attribute [rw] policy_version_id
-        #   The policy version ID.
-        #   @return [String]
-
-        # @!attribute [rw] is_default_version
-        #   Specifies whether the policy version is the default.
-        #   @return [Boolean]
-
       end
 
       # The input to the GetRegistrationCode operation.
@@ -1686,15 +1524,12 @@ module Aws
       class GetRegistrationCodeRequest < Aws::EmptyStructure; end
 
       # The output from the GetRegistrationCode operation.
+      # @!attribute [rw] registration_code
+      #   The CA certificate registration code.
+      #   @return [String]
       class GetRegistrationCodeResponse < Struct.new(
         :registration_code)
-
         include Aws::Structure
-
-        # @!attribute [rw] registration_code
-        #   The CA certificate registration code.
-        #   @return [String]
-
       end
 
       # The input for the GetTopicRule operation.
@@ -1704,49 +1539,40 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
+      # @!attribute [rw] rule_name
+      #   The name of the rule.
+      #   @return [String]
       class GetTopicRuleRequest < Struct.new(
         :rule_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_name
-        #   The name of the rule.
-        #   @return [String]
-
       end
 
       # The output from the GetTopicRule operation.
+      # @!attribute [rw] rule_arn
+      #   The rule ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] rule
+      #   The rule.
+      #   @return [Types::TopicRule]
       class GetTopicRuleResponse < Struct.new(
         :rule_arn,
         :rule)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_arn
-        #   The rule ARN.
-        #   @return [String]
-
-        # @!attribute [rw] rule
-        #   The rule.
-        #   @return [Types::TopicRule]
-
       end
 
       # Describes a key pair.
+      # @!attribute [rw] public_key
+      #   The public key.
+      #   @return [String]
+      #
+      # @!attribute [rw] private_key
+      #   The private key.
+      #   @return [String]
       class KeyPair < Struct.new(
         :public_key,
         :private_key)
-
         include Aws::Structure
-
-        # @!attribute [rw] public_key
-        #   The public key.
-        #   @return [String]
-
-        # @!attribute [rw] private_key
-        #   The private key.
-        #   @return [String]
-
       end
 
       # Describes an action to write data to an Amazon Kinesis stream.
@@ -1758,26 +1584,23 @@ module Aws
       #         stream_name: "StreamName", # required
       #         partition_key: "PartitionKey",
       #       }
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access to the Amazon Kinesis
+      #   stream.
+      #   @return [String]
+      #
+      # @!attribute [rw] stream_name
+      #   The name of the Amazon Kinesis stream.
+      #   @return [String]
+      #
+      # @!attribute [rw] partition_key
+      #   The partition key.
+      #   @return [String]
       class KinesisAction < Struct.new(
         :role_arn,
         :stream_name,
         :partition_key)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access to the Amazon Kinesis
-        #   stream.
-        #   @return [String]
-
-        # @!attribute [rw] stream_name
-        #   The name of the Amazon Kinesis stream.
-        #   @return [String]
-
-        # @!attribute [rw] partition_key
-        #   The partition key.
-        #   @return [String]
-
       end
 
       # Describes an action to invoke a Lambda function.
@@ -1787,15 +1610,12 @@ module Aws
       #       {
       #         function_arn: "FunctionArn", # required
       #       }
+      # @!attribute [rw] function_arn
+      #   The ARN of the Lambda function.
+      #   @return [String]
       class LambdaAction < Struct.new(
         :function_arn)
-
         include Aws::Structure
-
-        # @!attribute [rw] function_arn
-        #   The ARN of the Lambda function.
-        #   @return [String]
-
       end
 
       # Input for the ListCACertificates operation.
@@ -1807,42 +1627,36 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
+      # @!attribute [rw] page_size
+      #   The result page size.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   The marker for the next set of results.
+      #   @return [String]
+      #
+      # @!attribute [rw] ascending_order
+      #   Determines the order of the results.
+      #   @return [Boolean]
       class ListCACertificatesRequest < Struct.new(
         :page_size,
         :marker,
         :ascending_order)
-
         include Aws::Structure
-
-        # @!attribute [rw] page_size
-        #   The result page size.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
-        # @!attribute [rw] ascending_order
-        #   Determines the order of the results.
-        #   @return [Boolean]
-
       end
 
       # The output from the ListCACertificates operation.
+      # @!attribute [rw] certificates
+      #   The CA certificates registered in your AWS account.
+      #   @return [Array<Types::CACertificate>]
+      #
+      # @!attribute [rw] next_marker
+      #   The current position within the list of CA certificates.
+      #   @return [String]
       class ListCACertificatesResponse < Struct.new(
         :certificates,
         :next_marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificates
-        #   The CA certificates registered in your AWS account.
-        #   @return [Array<Types::CACertificate>]
-
-        # @!attribute [rw] next_marker
-        #   The current position within the list of CA certificates.
-        #   @return [String]
-
       end
 
       # The input to the ListCertificatesByCA operation.
@@ -1855,51 +1669,45 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
+      # @!attribute [rw] ca_certificate_id
+      #   The ID of the CA certificate. This operation will list all
+      #   registered device certificate that were signed by this CA
+      #   certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The result page size.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   The marker for the next set of results.
+      #   @return [String]
+      #
+      # @!attribute [rw] ascending_order
+      #   Specifies the order for results. If True, the results are returned
+      #   in ascending order, based on the creation date.
+      #   @return [Boolean]
       class ListCertificatesByCARequest < Struct.new(
         :ca_certificate_id,
         :page_size,
         :marker,
         :ascending_order)
-
         include Aws::Structure
-
-        # @!attribute [rw] ca_certificate_id
-        #   The ID of the CA certificate. This operation will list all
-        #   registered device certificate that were signed by this CA
-        #   certificate.
-        #   @return [String]
-
-        # @!attribute [rw] page_size
-        #   The result page size.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
-        # @!attribute [rw] ascending_order
-        #   Specifies the order for results. If True, the results are returned
-        #   in ascending order, based on the creation date.
-        #   @return [Boolean]
-
       end
 
       # The output of the ListCertificatesByCA operation.
+      # @!attribute [rw] certificates
+      #   The device certificates signed by the specified CA certificate.
+      #   @return [Array<Types::Certificate>]
+      #
+      # @!attribute [rw] next_marker
+      #   The marker for the next set of results, or null if there are no
+      #   additional results.
+      #   @return [String]
       class ListCertificatesByCAResponse < Struct.new(
         :certificates,
         :next_marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificates
-        #   The device certificates signed by the specified CA certificate.
-        #   @return [Array<Types::Certificate>]
-
-        # @!attribute [rw] next_marker
-        #   The marker for the next set of results, or null if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input for the ListCertificates operation.
@@ -1911,44 +1719,38 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
+      # @!attribute [rw] page_size
+      #   The result page size.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   The marker for the next set of results.
+      #   @return [String]
+      #
+      # @!attribute [rw] ascending_order
+      #   Specifies the order for results. If True, the results are returned
+      #   in ascending order, based on the creation date.
+      #   @return [Boolean]
       class ListCertificatesRequest < Struct.new(
         :page_size,
         :marker,
         :ascending_order)
-
         include Aws::Structure
-
-        # @!attribute [rw] page_size
-        #   The result page size.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
-        # @!attribute [rw] ascending_order
-        #   Specifies the order for results. If True, the results are returned
-        #   in ascending order, based on the creation date.
-        #   @return [Boolean]
-
       end
 
       # The output of the ListCertificates operation.
+      # @!attribute [rw] certificates
+      #   The descriptions of the certificates.
+      #   @return [Array<Types::Certificate>]
+      #
+      # @!attribute [rw] next_marker
+      #   The marker for the next set of results, or null if there are no
+      #   additional results.
+      #   @return [String]
       class ListCertificatesResponse < Struct.new(
         :certificates,
         :next_marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificates
-        #   The descriptions of the certificates.
-        #   @return [Array<Types::Certificate>]
-
-        # @!attribute [rw] next_marker
-        #   The marker for the next set of results, or null if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input to the ListOutgoingCertificates operation.
@@ -1960,43 +1762,37 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
+      # @!attribute [rw] page_size
+      #   The result page size.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] marker
+      #   The marker for the next set of results.
+      #   @return [String]
+      #
+      # @!attribute [rw] ascending_order
+      #   Specifies the order for results. If True, the results are returned
+      #   in ascending order, based on the creation date.
+      #   @return [Boolean]
       class ListOutgoingCertificatesRequest < Struct.new(
         :page_size,
         :marker,
         :ascending_order)
-
         include Aws::Structure
-
-        # @!attribute [rw] page_size
-        #   The result page size.
-        #   @return [Integer]
-
-        # @!attribute [rw] marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
-        # @!attribute [rw] ascending_order
-        #   Specifies the order for results. If True, the results are returned
-        #   in ascending order, based on the creation date.
-        #   @return [Boolean]
-
       end
 
       # The output from the ListOutgoingCertificates operation.
+      # @!attribute [rw] outgoing_certificates
+      #   The certificates that are being transfered but not yet accepted.
+      #   @return [Array<Types::OutgoingCertificate>]
+      #
+      # @!attribute [rw] next_marker
+      #   The marker for the next set of results.
+      #   @return [String]
       class ListOutgoingCertificatesResponse < Struct.new(
         :outgoing_certificates,
         :next_marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] outgoing_certificates
-        #   The certificates that are being transfered but not yet accepted.
-        #   @return [Array<Types::OutgoingCertificate>]
-
-        # @!attribute [rw] next_marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
       end
 
       # The input for the ListPolicies operation.
@@ -2008,44 +1804,38 @@ module Aws
       #         page_size: 1,
       #         ascending_order: false,
       #       }
+      # @!attribute [rw] marker
+      #   The marker for the next set of results.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The result page size.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] ascending_order
+      #   Specifies the order for results. If true, the results are returned
+      #   in ascending creation order.
+      #   @return [Boolean]
       class ListPoliciesRequest < Struct.new(
         :marker,
         :page_size,
         :ascending_order)
-
         include Aws::Structure
-
-        # @!attribute [rw] marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
-        # @!attribute [rw] page_size
-        #   The result page size.
-        #   @return [Integer]
-
-        # @!attribute [rw] ascending_order
-        #   Specifies the order for results. If true, the results are returned
-        #   in ascending creation order.
-        #   @return [Boolean]
-
       end
 
       # The output from the ListPolicies operation.
+      # @!attribute [rw] policies
+      #   The descriptions of the policies.
+      #   @return [Array<Types::Policy>]
+      #
+      # @!attribute [rw] next_marker
+      #   The marker for the next set of results, or null if there are no
+      #   additional results.
+      #   @return [String]
       class ListPoliciesResponse < Struct.new(
         :policies,
         :next_marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] policies
-        #   The descriptions of the policies.
-        #   @return [Array<Types::Policy>]
-
-        # @!attribute [rw] next_marker
-        #   The marker for the next set of results, or null if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input for the ListPolicyPrincipals operation.
@@ -2058,49 +1848,43 @@ module Aws
       #         page_size: 1,
       #         ascending_order: false,
       #       }
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] marker
+      #   The marker for the next set of results.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The result page size.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] ascending_order
+      #   Specifies the order for results. If true, the results are returned
+      #   in ascending creation order.
+      #   @return [Boolean]
       class ListPolicyPrincipalsRequest < Struct.new(
         :policy_name,
         :marker,
         :page_size,
         :ascending_order)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
-        # @!attribute [rw] page_size
-        #   The result page size.
-        #   @return [Integer]
-
-        # @!attribute [rw] ascending_order
-        #   Specifies the order for results. If true, the results are returned
-        #   in ascending creation order.
-        #   @return [Boolean]
-
       end
 
       # The output from the ListPolicyPrincipals operation.
+      # @!attribute [rw] principals
+      #   The descriptions of the principals.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] next_marker
+      #   The marker for the next set of results, or null if there are no
+      #   additional results.
+      #   @return [String]
       class ListPolicyPrincipalsResponse < Struct.new(
         :principals,
         :next_marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] principals
-        #   The descriptions of the principals.
-        #   @return [Array<String>]
-
-        # @!attribute [rw] next_marker
-        #   The marker for the next set of results, or null if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input for the ListPolicyVersions operation.
@@ -2110,27 +1894,21 @@ module Aws
       #       {
       #         policy_name: "PolicyName", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
       class ListPolicyVersionsRequest < Struct.new(
         :policy_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
       end
 
       # The output from the ListPolicyVersions operation.
+      # @!attribute [rw] policy_versions
+      #   The policy versions.
+      #   @return [Array<Types::PolicyVersion>]
       class ListPolicyVersionsResponse < Struct.new(
         :policy_versions)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_versions
-        #   The policy versions.
-        #   @return [Array<Types::PolicyVersion>]
-
       end
 
       # The input for the ListPrincipalPolicies operation.
@@ -2143,49 +1921,43 @@ module Aws
       #         page_size: 1,
       #         ascending_order: false,
       #       }
+      # @!attribute [rw] principal
+      #   The principal.
+      #   @return [String]
+      #
+      # @!attribute [rw] marker
+      #   The marker for the next set of results.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The result page size.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] ascending_order
+      #   Specifies the order for results. If true, results are returned in
+      #   ascending creation order.
+      #   @return [Boolean]
       class ListPrincipalPoliciesRequest < Struct.new(
         :principal,
         :marker,
         :page_size,
         :ascending_order)
-
         include Aws::Structure
-
-        # @!attribute [rw] principal
-        #   The principal.
-        #   @return [String]
-
-        # @!attribute [rw] marker
-        #   The marker for the next set of results.
-        #   @return [String]
-
-        # @!attribute [rw] page_size
-        #   The result page size.
-        #   @return [Integer]
-
-        # @!attribute [rw] ascending_order
-        #   Specifies the order for results. If true, results are returned in
-        #   ascending creation order.
-        #   @return [Boolean]
-
       end
 
       # The output from the ListPrincipalPolicies operation.
+      # @!attribute [rw] policies
+      #   The policies.
+      #   @return [Array<Types::Policy>]
+      #
+      # @!attribute [rw] next_marker
+      #   The marker for the next set of results, or null if there are no
+      #   additional results.
+      #   @return [String]
       class ListPrincipalPoliciesResponse < Struct.new(
         :policies,
         :next_marker)
-
         include Aws::Structure
-
-        # @!attribute [rw] policies
-        #   The policies.
-        #   @return [Array<Types::Policy>]
-
-        # @!attribute [rw] next_marker
-        #   The marker for the next set of results, or null if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input for the ListPrincipalThings operation.
@@ -2197,44 +1969,38 @@ module Aws
       #         max_results: 1,
       #         principal: "Principal", # required
       #       }
+      # @!attribute [rw] next_token
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_results
+      #   The maximum number of results to return in this operation.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] principal
+      #   The principal.
+      #   @return [String]
       class ListPrincipalThingsRequest < Struct.new(
         :next_token,
         :max_results,
         :principal)
-
         include Aws::Structure
-
-        # @!attribute [rw] next_token
-        #   The token for the next set of results, or **null** if there are no
-        #   additional results.
-        #   @return [String]
-
-        # @!attribute [rw] max_results
-        #   The maximum number of results to return in this operation.
-        #   @return [Integer]
-
-        # @!attribute [rw] principal
-        #   The principal.
-        #   @return [String]
-
       end
 
       # The output from the ListPrincipalThings operation.
+      # @!attribute [rw] things
+      #   The things.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] next_token
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
+      #   @return [String]
       class ListPrincipalThingsResponse < Struct.new(
         :things,
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] things
-        #   The things.
-        #   @return [Array<String>]
-
-        # @!attribute [rw] next_token
-        #   The token for the next set of results, or **null** if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input for the ListThingPrincipal operation.
@@ -2244,27 +2010,21 @@ module Aws
       #       {
       #         thing_name: "ThingName", # required
       #       }
+      # @!attribute [rw] thing_name
+      #   The name of the thing.
+      #   @return [String]
       class ListThingPrincipalsRequest < Struct.new(
         :thing_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing.
-        #   @return [String]
-
       end
 
       # The output from the ListThingPrincipals operation.
+      # @!attribute [rw] principals
+      #   The principals associated with the thing.
+      #   @return [Array<String>]
       class ListThingPrincipalsResponse < Struct.new(
         :principals)
-
         include Aws::Structure
-
-        # @!attribute [rw] principals
-        #   The principals associated with the thing.
-        #   @return [Array<String>]
-
       end
 
       # The input for the ListThingTypes operation.
@@ -2276,44 +2036,38 @@ module Aws
       #         max_results: 1,
       #         thing_type_name: "ThingTypeName",
       #       }
+      # @!attribute [rw] next_token
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_results
+      #   The maximum number of results to return in this operation.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
       class ListThingTypesRequest < Struct.new(
         :next_token,
         :max_results,
         :thing_type_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] next_token
-        #   The token for the next set of results, or **null** if there are no
-        #   additional results.
-        #   @return [String]
-
-        # @!attribute [rw] max_results
-        #   The maximum number of results to return in this operation.
-        #   @return [Integer]
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
       end
 
       # The output for the ListThingTypes operation.
+      # @!attribute [rw] thing_types
+      #   The thing types.
+      #   @return [Array<Types::ThingTypeDefinition>]
+      #
+      # @!attribute [rw] next_token
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
+      #   @return [String]
       class ListThingTypesResponse < Struct.new(
         :thing_types,
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_types
-        #   The thing types.
-        #   @return [Array<Types::ThingTypeDefinition>]
-
-        # @!attribute [rw] next_token
-        #   The token for the next set of results, or **null** if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input for the ListThings operation.
@@ -2327,54 +2081,48 @@ module Aws
       #         attribute_value: "AttributeValue",
       #         thing_type_name: "ThingTypeName",
       #       }
+      # @!attribute [rw] next_token
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_results
+      #   The maximum number of results to return in this operation.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] attribute_name
+      #   The attribute name used to search for things.
+      #   @return [String]
+      #
+      # @!attribute [rw] attribute_value
+      #   The attribute value used to search for things.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type used to search for things.
+      #   @return [String]
       class ListThingsRequest < Struct.new(
         :next_token,
         :max_results,
         :attribute_name,
         :attribute_value,
         :thing_type_name)
-
         include Aws::Structure
-
-        # @!attribute [rw] next_token
-        #   The token for the next set of results, or **null** if there are no
-        #   additional results.
-        #   @return [String]
-
-        # @!attribute [rw] max_results
-        #   The maximum number of results to return in this operation.
-        #   @return [Integer]
-
-        # @!attribute [rw] attribute_name
-        #   The attribute name used to search for things.
-        #   @return [String]
-
-        # @!attribute [rw] attribute_value
-        #   The attribute value used to search for things.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type used to search for things.
-        #   @return [String]
-
       end
 
       # The output from the ListThings operation.
+      # @!attribute [rw] things
+      #   The things.
+      #   @return [Array<Types::ThingAttribute>]
+      #
+      # @!attribute [rw] next_token
+      #   The token for the next set of results, or **null** if there are no
+      #   additional results.
+      #   @return [String]
       class ListThingsResponse < Struct.new(
         :things,
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] things
-        #   The things.
-        #   @return [Array<Types::ThingAttribute>]
-
-        # @!attribute [rw] next_token
-        #   The token for the next set of results, or **null** if there are no
-        #   additional results.
-        #   @return [String]
-
       end
 
       # The input for the ListTopicRules operation.
@@ -2387,47 +2135,41 @@ module Aws
       #         next_token: "NextToken",
       #         rule_disabled: false,
       #       }
+      # @!attribute [rw] topic
+      #   The topic.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_results
+      #   The maximum number of results to return.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] next_token
+      #   A token used to retrieve the next value.
+      #   @return [String]
+      #
+      # @!attribute [rw] rule_disabled
+      #   Specifies whether the rule is disabled.
+      #   @return [Boolean]
       class ListTopicRulesRequest < Struct.new(
         :topic,
         :max_results,
         :next_token,
         :rule_disabled)
-
         include Aws::Structure
-
-        # @!attribute [rw] topic
-        #   The topic.
-        #   @return [String]
-
-        # @!attribute [rw] max_results
-        #   The maximum number of results to return.
-        #   @return [Integer]
-
-        # @!attribute [rw] next_token
-        #   A token used to retrieve the next value.
-        #   @return [String]
-
-        # @!attribute [rw] rule_disabled
-        #   Specifies whether the rule is disabled.
-        #   @return [Boolean]
-
       end
 
       # The output from the ListTopicRules operation.
+      # @!attribute [rw] rules
+      #   The rules.
+      #   @return [Array<Types::TopicRuleListItem>]
+      #
+      # @!attribute [rw] next_token
+      #   A token used to retrieve the next value.
+      #   @return [String]
       class ListTopicRulesResponse < Struct.new(
         :rules,
         :next_token)
-
         include Aws::Structure
-
-        # @!attribute [rw] rules
-        #   The rules.
-        #   @return [Array<Types::TopicRuleListItem>]
-
-        # @!attribute [rw] next_token
-        #   A token used to retrieve the next value.
-        #   @return [String]
-
       end
 
       # Describes the logging options payload.
@@ -2438,23 +2180,43 @@ module Aws
       #         role_arn: "AwsArn", # required
       #         log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
       #       }
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access.
+      #   @return [String]
+      #
+      # @!attribute [rw] log_level
+      #   The logging level.
+      #   @return [String]
       class LoggingOptionsPayload < Struct.new(
         :role_arn,
         :log_level)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access.
-        #   @return [String]
-
-        # @!attribute [rw] log_level
-        #   The logging level.
-        #   @return [String]
-
       end
 
       # A certificate that has been transfered but not yet accepted.
+      # @!attribute [rw] certificate_arn
+      #   The certificate ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The certificate ID.
+      #   @return [String]
+      #
+      # @!attribute [rw] transferred_to
+      #   The AWS account to which the transfer was made.
+      #   @return [String]
+      #
+      # @!attribute [rw] transfer_date
+      #   The date the transfer was initiated.
+      #   @return [Time]
+      #
+      # @!attribute [rw] transfer_message
+      #   The transfer message.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The certificate creation date.
+      #   @return [Time]
       class OutgoingCertificate < Struct.new(
         :certificate_arn,
         :certificate_id,
@@ -2462,72 +2224,40 @@ module Aws
         :transfer_date,
         :transfer_message,
         :creation_date)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The certificate ARN.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The certificate ID.
-        #   @return [String]
-
-        # @!attribute [rw] transferred_to
-        #   The AWS account to which the transfer was made.
-        #   @return [String]
-
-        # @!attribute [rw] transfer_date
-        #   The date the transfer was initiated.
-        #   @return [Time]
-
-        # @!attribute [rw] transfer_message
-        #   The transfer message.
-        #   @return [String]
-
-        # @!attribute [rw] creation_date
-        #   The certificate creation date.
-        #   @return [Time]
-
       end
 
       # Describes an AWS IoT policy.
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_arn
+      #   The policy ARN.
+      #   @return [String]
       class Policy < Struct.new(
         :policy_name,
         :policy_arn)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] policy_arn
-        #   The policy ARN.
-        #   @return [String]
-
       end
 
       # Describes a policy version.
+      # @!attribute [rw] version_id
+      #   The policy version ID.
+      #   @return [String]
+      #
+      # @!attribute [rw] is_default_version
+      #   Specifies whether the policy version is the default.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] create_date
+      #   The date and time the policy was created.
+      #   @return [Time]
       class PolicyVersion < Struct.new(
         :version_id,
         :is_default_version,
         :create_date)
-
         include Aws::Structure
-
-        # @!attribute [rw] version_id
-        #   The policy version ID.
-        #   @return [String]
-
-        # @!attribute [rw] is_default_version
-        #   Specifies whether the policy version is the default.
-        #   @return [Boolean]
-
-        # @!attribute [rw] create_date
-        #   The date and time the policy was created.
-        #   @return [Time]
-
       end
 
       # The input to the RegisterCACertificate operation.
@@ -2540,49 +2270,43 @@ module Aws
       #         set_as_active: false,
       #         allow_auto_registration: false,
       #       }
+      # @!attribute [rw] ca_certificate
+      #   The CA certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] verification_certificate
+      #   The private key verification certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] set_as_active
+      #   A boolean value that specifies if the CA certificate is set to
+      #   active.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] allow_auto_registration
+      #   Allows this CA certificate to be used for auto registration of
+      #   device certificates.
+      #   @return [Boolean]
       class RegisterCACertificateRequest < Struct.new(
         :ca_certificate,
         :verification_certificate,
         :set_as_active,
         :allow_auto_registration)
-
         include Aws::Structure
-
-        # @!attribute [rw] ca_certificate
-        #   The CA certificate.
-        #   @return [String]
-
-        # @!attribute [rw] verification_certificate
-        #   The private key verification certificate.
-        #   @return [String]
-
-        # @!attribute [rw] set_as_active
-        #   A boolean value that specifies if the CA certificate is set to
-        #   active.
-        #   @return [Boolean]
-
-        # @!attribute [rw] allow_auto_registration
-        #   Allows this CA certificate to be used for auto registration of
-        #   device certificates.
-        #   @return [Boolean]
-
       end
 
       # The output from the RegisterCACertificateResponse operation.
+      # @!attribute [rw] certificate_arn
+      #   The CA certificate ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The CA certificate identifier.
+      #   @return [String]
       class RegisterCACertificateResponse < Struct.new(
         :certificate_arn,
         :certificate_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The CA certificate ARN.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The CA certificate identifier.
-        #   @return [String]
-
       end
 
       # The input to the RegisterCertificate operation.
@@ -2594,44 +2318,38 @@ module Aws
       #         ca_certificate_pem: "CertificatePem",
       #         set_as_active: false,
       #       }
+      # @!attribute [rw] certificate_pem
+      #   The certificate data, in PEM format.
+      #   @return [String]
+      #
+      # @!attribute [rw] ca_certificate_pem
+      #   The CA certificate used to sign the device certificate being
+      #   registered.
+      #   @return [String]
+      #
+      # @!attribute [rw] set_as_active
+      #   A boolean value that specifies if the CA certificate is set to
+      #   active.
+      #   @return [Boolean]
       class RegisterCertificateRequest < Struct.new(
         :certificate_pem,
         :ca_certificate_pem,
         :set_as_active)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_pem
-        #   The certificate data, in PEM format.
-        #   @return [String]
-
-        # @!attribute [rw] ca_certificate_pem
-        #   The CA certificate used to sign the device certificate being
-        #   registered.
-        #   @return [String]
-
-        # @!attribute [rw] set_as_active
-        #   A boolean value that specifies if the CA certificate is set to
-        #   active.
-        #   @return [Boolean]
-
       end
 
       # The output from the RegisterCertificate operation.
+      # @!attribute [rw] certificate_arn
+      #   The certificate ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_id
+      #   The certificate identifier.
+      #   @return [String]
       class RegisterCertificateResponse < Struct.new(
         :certificate_arn,
         :certificate_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_arn
-        #   The certificate ARN.
-        #   @return [String]
-
-        # @!attribute [rw] certificate_id
-        #   The certificate identifier.
-        #   @return [String]
-
       end
 
       # The input for the RejectCertificateTransfer operation.
@@ -2642,20 +2360,17 @@ module Aws
       #         certificate_id: "CertificateId", # required
       #         reject_reason: "Message",
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] reject_reason
+      #   The reason the certificate transfer was rejected.
+      #   @return [String]
       class RejectCertificateTransferRequest < Struct.new(
         :certificate_id,
         :reject_reason)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] reject_reason
-        #   The reason the certificate transfer was rejected.
-        #   @return [String]
-
       end
 
       # The input for the ReplaceTopicRule operation.
@@ -2740,20 +2455,17 @@ module Aws
       #           aws_iot_sql_version: "AwsIotSqlVersion",
       #         },
       #       }
+      # @!attribute [rw] rule_name
+      #   The name of the rule.
+      #   @return [String]
+      #
+      # @!attribute [rw] topic_rule_payload
+      #   The rule payload.
+      #   @return [Types::TopicRulePayload]
       class ReplaceTopicRuleRequest < Struct.new(
         :rule_name,
         :topic_rule_payload)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_name
-        #   The name of the rule.
-        #   @return [String]
-
-        # @!attribute [rw] topic_rule_payload
-        #   The rule payload.
-        #   @return [Types::TopicRulePayload]
-
       end
 
       # Describes an action to republish to another topic.
@@ -2764,20 +2476,17 @@ module Aws
       #         role_arn: "AwsArn", # required
       #         topic: "TopicPattern", # required
       #       }
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access.
+      #   @return [String]
+      #
+      # @!attribute [rw] topic
+      #   The name of the MQTT topic.
+      #   @return [String]
       class RepublishAction < Struct.new(
         :role_arn,
         :topic)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access.
-        #   @return [String]
-
-        # @!attribute [rw] topic
-        #   The name of the MQTT topic.
-        #   @return [String]
-
       end
 
       # Describes an action to write data to an Amazon S3 bucket.
@@ -2789,25 +2498,22 @@ module Aws
       #         bucket_name: "BucketName", # required
       #         key: "Key", # required
       #       }
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access.
+      #   @return [String]
+      #
+      # @!attribute [rw] bucket_name
+      #   The Amazon S3 bucket.
+      #   @return [String]
+      #
+      # @!attribute [rw] key
+      #   The object key.
+      #   @return [String]
       class S3Action < Struct.new(
         :role_arn,
         :bucket_name,
         :key)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access.
-        #   @return [String]
-
-        # @!attribute [rw] bucket_name
-        #   The Amazon S3 bucket.
-        #   @return [String]
-
-        # @!attribute [rw] key
-        #   The object key.
-        #   @return [String]
-
       end
 
       # The input for the SetDefaultPolicyVersion operation.
@@ -2818,20 +2524,17 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_version_id: "PolicyVersionId", # required
       #       }
+      # @!attribute [rw] policy_name
+      #   The policy name.
+      #   @return [String]
+      #
+      # @!attribute [rw] policy_version_id
+      #   The policy version ID.
+      #   @return [String]
       class SetDefaultPolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_version_id)
-
         include Aws::Structure
-
-        # @!attribute [rw] policy_name
-        #   The policy name.
-        #   @return [String]
-
-        # @!attribute [rw] policy_version_id
-        #   The policy version ID.
-        #   @return [String]
-
       end
 
       # The input for the SetLoggingOptions operation.
@@ -2844,15 +2547,12 @@ module Aws
       #           log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
       #         },
       #       }
+      # @!attribute [rw] logging_options_payload
+      #   The logging options payload.
+      #   @return [Types::LoggingOptionsPayload]
       class SetLoggingOptionsRequest < Struct.new(
         :logging_options_payload)
-
         include Aws::Structure
-
-        # @!attribute [rw] logging_options_payload
-        #   The logging options payload.
-        #   @return [Types::LoggingOptionsPayload]
-
       end
 
       # Describes an action to publish to an Amazon SNS topic.
@@ -2864,34 +2564,31 @@ module Aws
       #         role_arn: "AwsArn", # required
       #         message_format: "RAW", # accepts RAW, JSON
       #       }
+      # @!attribute [rw] target_arn
+      #   The ARN of the SNS topic.
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access.
+      #   @return [String]
+      #
+      # @!attribute [rw] message_format
+      #   The message format of the message to publish. Optional. Accepted
+      #   values are \"JSON\" and \"RAW\". The default value of the attribute
+      #   is \"RAW\". SNS uses this setting to determine if the payload should
+      #   be parsed and relevant platform-specific bits of the payload should
+      #   be extracted. To read more about SNS message formats, see [][1]
+      #   refer to their official documentation.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/sns/latest/dg/json-formats.html
+      #   @return [String]
       class SnsAction < Struct.new(
         :target_arn,
         :role_arn,
         :message_format)
-
         include Aws::Structure
-
-        # @!attribute [rw] target_arn
-        #   The ARN of the SNS topic.
-        #   @return [String]
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access.
-        #   @return [String]
-
-        # @!attribute [rw] message_format
-        #   The message format of the message to publish. Optional. Accepted
-        #   values are \"JSON\" and \"RAW\". The default value of the attribute
-        #   is \"RAW\". SNS uses this setting to determine if the payload should
-        #   be parsed and relevant platform-specific bits of the payload should
-        #   be extracted. To read more about SNS message formats, see [][1]
-        #   refer to their official documentation.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/sns/latest/dg/json-formats.html
-        #   @return [String]
-
       end
 
       # Describes an action to publish data to an Amazon SQS queue.
@@ -2903,106 +2600,94 @@ module Aws
       #         queue_url: "QueueUrl", # required
       #         use_base_64: false,
       #       }
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access.
+      #   @return [String]
+      #
+      # @!attribute [rw] queue_url
+      #   The URL of the Amazon SQS queue.
+      #   @return [String]
+      #
+      # @!attribute [rw] use_base_64
+      #   Specifies whether to use Base64 encoding.
+      #   @return [Boolean]
       class SqsAction < Struct.new(
         :role_arn,
         :queue_url,
         :use_base_64)
-
         include Aws::Structure
-
-        # @!attribute [rw] role_arn
-        #   The ARN of the IAM role that grants access.
-        #   @return [String]
-
-        # @!attribute [rw] queue_url
-        #   The URL of the Amazon SQS queue.
-        #   @return [String]
-
-        # @!attribute [rw] use_base_64
-        #   Specifies whether to use Base64 encoding.
-        #   @return [Boolean]
-
       end
 
       # The properties of the thing, including thing name, thing type name,
       # and a list of thing attributes.
+      # @!attribute [rw] thing_name
+      #   The name of the thing.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type, if the thing has been associated with a
+      #   type.
+      #   @return [String]
+      #
+      # @!attribute [rw] attributes
+      #   A list of thing attributes which are name-value pairs.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] version
+      #   The version of the thing record in the registry.
+      #   @return [Integer]
       class ThingAttribute < Struct.new(
         :thing_name,
         :thing_type_name,
         :attributes,
         :version)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type, if the thing has been associated with a
-        #   type.
-        #   @return [String]
-
-        # @!attribute [rw] attributes
-        #   A list of thing attributes which are name-value pairs.
-        #   @return [Hash<String,String>]
-
-        # @!attribute [rw] version
-        #   The version of the thing record in the registry.
-        #   @return [Integer]
-
       end
 
       # The definition of the thing type, including thing type name and
       # description.
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_properties
+      #   The ThingTypeProperties for the thing type.
+      #   @return [Types::ThingTypeProperties]
+      #
+      # @!attribute [rw] thing_type_metadata
+      #   The ThingTypeMetadata contains additional information about the
+      #   thing type including: creation date and time, a value indicating
+      #   whether the thing type is deprecated, and a date and time when time
+      #   was deprecated.
+      #   @return [Types::ThingTypeMetadata]
       class ThingTypeDefinition < Struct.new(
         :thing_type_name,
         :thing_type_properties,
         :thing_type_metadata)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_properties
-        #   The ThingTypeProperties for the thing type.
-        #   @return [Types::ThingTypeProperties]
-
-        # @!attribute [rw] thing_type_metadata
-        #   The ThingTypeMetadata contains additional information about the
-        #   thing type including: creation date and time, a value indicating
-        #   whether the thing type is deprecated, and a date and time when time
-        #   was deprecated.
-        #   @return [Types::ThingTypeMetadata]
-
       end
 
       # The ThingTypeMetadata contains additional information about the thing
       # type including: creation date and time, a value indicating whether the
       # thing type is deprecated, and a date and time when time was
       # deprecated.
+      # @!attribute [rw] deprecated
+      #   Whether the thing type is deprecated. If **true**, no new things
+      #   could be associated with this type.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] deprecation_date
+      #   The date and time when the thing type was deprecated.
+      #   @return [Time]
+      #
+      # @!attribute [rw] creation_date
+      #   The date and time when the thing type was created.
+      #   @return [Time]
       class ThingTypeMetadata < Struct.new(
         :deprecated,
         :deprecation_date,
         :creation_date)
-
         include Aws::Structure
-
-        # @!attribute [rw] deprecated
-        #   Whether the thing type is deprecated. If **true**, no new things
-        #   could be associated with this type.
-        #   @return [Boolean]
-
-        # @!attribute [rw] deprecation_date
-        #   The date and time when the thing type was deprecated.
-        #   @return [Time]
-
-        # @!attribute [rw] creation_date
-        #   The date and time when the thing type was created.
-        #   @return [Time]
-
       end
 
       # The ThingTypeProperties contains information about the thing type
@@ -3015,23 +2700,48 @@ module Aws
       #         thing_type_description: "ThingTypeDescription",
       #         searchable_attributes: ["AttributeName"],
       #       }
+      # @!attribute [rw] thing_type_description
+      #   The description of the thing type.
+      #   @return [String]
+      #
+      # @!attribute [rw] searchable_attributes
+      #   A list of searchable thing attribute names.
+      #   @return [Array<String>]
       class ThingTypeProperties < Struct.new(
         :thing_type_description,
         :searchable_attributes)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_type_description
-        #   The description of the thing type.
-        #   @return [String]
-
-        # @!attribute [rw] searchable_attributes
-        #   A list of searchable thing attribute names.
-        #   @return [Array<String>]
-
       end
 
       # Describes a rule.
+      # @!attribute [rw] rule_name
+      #   The name of the rule.
+      #   @return [String]
+      #
+      # @!attribute [rw] sql
+      #   The SQL statement used to query the topic. When using a SQL query
+      #   with multiple lines, be sure to escape the newline characters.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The description of the rule.
+      #   @return [String]
+      #
+      # @!attribute [rw] created_at
+      #   The date and time the rule was created.
+      #   @return [Time]
+      #
+      # @!attribute [rw] actions
+      #   The actions associated with the rule.
+      #   @return [Array<Types::Action>]
+      #
+      # @!attribute [rw] rule_disabled
+      #   Specifies whether the rule is disabled.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] aws_iot_sql_version
+      #   The version of the SQL rules engine to use when evaluating the rule.
+      #   @return [String]
       class TopicRule < Struct.new(
         :rule_name,
         :sql,
@@ -3040,70 +2750,36 @@ module Aws
         :actions,
         :rule_disabled,
         :aws_iot_sql_version)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_name
-        #   The name of the rule.
-        #   @return [String]
-
-        # @!attribute [rw] sql
-        #   The SQL statement used to query the topic. When using a SQL query
-        #   with multiple lines, be sure to escape the newline characters.
-        #   @return [String]
-
-        # @!attribute [rw] description
-        #   The description of the rule.
-        #   @return [String]
-
-        # @!attribute [rw] created_at
-        #   The date and time the rule was created.
-        #   @return [Time]
-
-        # @!attribute [rw] actions
-        #   The actions associated with the rule.
-        #   @return [Array<Types::Action>]
-
-        # @!attribute [rw] rule_disabled
-        #   Specifies whether the rule is disabled.
-        #   @return [Boolean]
-
-        # @!attribute [rw] aws_iot_sql_version
-        #   The version of the SQL rules engine to use when evaluating the rule.
-        #   @return [String]
-
       end
 
       # Describes a rule.
+      # @!attribute [rw] rule_arn
+      #   The rule ARN.
+      #   @return [String]
+      #
+      # @!attribute [rw] rule_name
+      #   The name of the rule.
+      #   @return [String]
+      #
+      # @!attribute [rw] topic_pattern
+      #   The pattern for the topic names that apply.
+      #   @return [String]
+      #
+      # @!attribute [rw] created_at
+      #   The date and time the rule was created.
+      #   @return [Time]
+      #
+      # @!attribute [rw] rule_disabled
+      #   Specifies whether the rule is disabled.
+      #   @return [Boolean]
       class TopicRuleListItem < Struct.new(
         :rule_arn,
         :rule_name,
         :topic_pattern,
         :created_at,
         :rule_disabled)
-
         include Aws::Structure
-
-        # @!attribute [rw] rule_arn
-        #   The rule ARN.
-        #   @return [String]
-
-        # @!attribute [rw] rule_name
-        #   The name of the rule.
-        #   @return [String]
-
-        # @!attribute [rw] topic_pattern
-        #   The pattern for the topic names that apply.
-        #   @return [String]
-
-        # @!attribute [rw] created_at
-        #   The date and time the rule was created.
-        #   @return [Time]
-
-        # @!attribute [rw] rule_disabled
-        #   Specifies whether the rule is disabled.
-        #   @return [Boolean]
-
       end
 
       # Describes a rule.
@@ -3185,40 +2861,37 @@ module Aws
       #         rule_disabled: false,
       #         aws_iot_sql_version: "AwsIotSqlVersion",
       #       }
+      # @!attribute [rw] sql
+      #   The SQL statement used to query the topic. For more information, see
+      #   [AWS IoT SQL Reference][1] in the *AWS IoT Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The description of the rule.
+      #   @return [String]
+      #
+      # @!attribute [rw] actions
+      #   The actions associated with the rule.
+      #   @return [Array<Types::Action>]
+      #
+      # @!attribute [rw] rule_disabled
+      #   Specifies whether the rule is disabled.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] aws_iot_sql_version
+      #   The version of the SQL rules engine to use when evaluating the rule.
+      #   @return [String]
       class TopicRulePayload < Struct.new(
         :sql,
         :description,
         :actions,
         :rule_disabled,
         :aws_iot_sql_version)
-
         include Aws::Structure
-
-        # @!attribute [rw] sql
-        #   The SQL statement used to query the topic. For more information, see
-        #   [AWS IoT SQL Reference][1] in the *AWS IoT Developer Guide*.
-        #
-        #
-        #
-        #   [1]: http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference
-        #   @return [String]
-
-        # @!attribute [rw] description
-        #   The description of the rule.
-        #   @return [String]
-
-        # @!attribute [rw] actions
-        #   The actions associated with the rule.
-        #   @return [Array<Types::Action>]
-
-        # @!attribute [rw] rule_disabled
-        #   Specifies whether the rule is disabled.
-        #   @return [Boolean]
-
-        # @!attribute [rw] aws_iot_sql_version
-        #   The version of the SQL rules engine to use when evaluating the rule.
-        #   @return [String]
-
       end
 
       # The input for the TransferCertificate operation.
@@ -3230,69 +2903,60 @@ module Aws
       #         target_aws_account: "AwsAccountId", # required
       #         transfer_message: "Message",
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] target_aws_account
+      #   The AWS account.
+      #   @return [String]
+      #
+      # @!attribute [rw] transfer_message
+      #   The transfer message.
+      #   @return [String]
       class TransferCertificateRequest < Struct.new(
         :certificate_id,
         :target_aws_account,
         :transfer_message)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] target_aws_account
-        #   The AWS account.
-        #   @return [String]
-
-        # @!attribute [rw] transfer_message
-        #   The transfer message.
-        #   @return [String]
-
       end
 
       # The output from the TransferCertificate operation.
+      # @!attribute [rw] transferred_certificate_arn
+      #   The ARN of the certificate.
+      #   @return [String]
       class TransferCertificateResponse < Struct.new(
         :transferred_certificate_arn)
-
         include Aws::Structure
-
-        # @!attribute [rw] transferred_certificate_arn
-        #   The ARN of the certificate.
-        #   @return [String]
-
       end
 
       # Data used to transfer a certificate to an AWS account.
+      # @!attribute [rw] transfer_message
+      #   The transfer message.
+      #   @return [String]
+      #
+      # @!attribute [rw] reject_reason
+      #   The reason why the transfer was rejected.
+      #   @return [String]
+      #
+      # @!attribute [rw] transfer_date
+      #   The date the transfer took place.
+      #   @return [Time]
+      #
+      # @!attribute [rw] accept_date
+      #   The date the transfer was accepted.
+      #   @return [Time]
+      #
+      # @!attribute [rw] reject_date
+      #   The date the transfer was rejected.
+      #   @return [Time]
       class TransferData < Struct.new(
         :transfer_message,
         :reject_reason,
         :transfer_date,
         :accept_date,
         :reject_date)
-
         include Aws::Structure
-
-        # @!attribute [rw] transfer_message
-        #   The transfer message.
-        #   @return [String]
-
-        # @!attribute [rw] reject_reason
-        #   The reason why the transfer was rejected.
-        #   @return [String]
-
-        # @!attribute [rw] transfer_date
-        #   The date the transfer took place.
-        #   @return [Time]
-
-        # @!attribute [rw] accept_date
-        #   The date the transfer was accepted.
-        #   @return [Time]
-
-        # @!attribute [rw] reject_date
-        #   The date the transfer was rejected.
-        #   @return [Time]
-
       end
 
       # The input to the UpdateCACertificate operation.
@@ -3304,29 +2968,26 @@ module Aws
       #         new_status: "ACTIVE", # accepts ACTIVE, INACTIVE
       #         new_auto_registration_status: "ENABLE", # accepts ENABLE, DISABLE
       #       }
+      # @!attribute [rw] certificate_id
+      #   The CA certificate identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] new_status
+      #   The updated status of the CA certificate.
+      #
+      #   **Note:** The status value REGISTER\_INACTIVE is deprecated and
+      #   should not be used.
+      #   @return [String]
+      #
+      # @!attribute [rw] new_auto_registration_status
+      #   The new value for the auto registration status. Valid values are:
+      #   \"ENABLE\" or \"DISABLE\".
+      #   @return [String]
       class UpdateCACertificateRequest < Struct.new(
         :certificate_id,
         :new_status,
         :new_auto_registration_status)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The CA certificate identifier.
-        #   @return [String]
-
-        # @!attribute [rw] new_status
-        #   The updated status of the CA certificate.
-        #
-        #   **Note:** The status value REGISTER\_INACTIVE is deprecated and
-        #   should not be used.
-        #   @return [String]
-
-        # @!attribute [rw] new_auto_registration_status
-        #   The new value for the auto registration status. Valid values are:
-        #   \"ENABLE\" or \"DISABLE\".
-        #   @return [String]
-
       end
 
       # The input for the UpdateCertificate operation.
@@ -3337,27 +2998,24 @@ module Aws
       #         certificate_id: "CertificateId", # required
       #         new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
       #       }
+      # @!attribute [rw] certificate_id
+      #   The ID of the certificate.
+      #   @return [String]
+      #
+      # @!attribute [rw] new_status
+      #   The new status.
+      #
+      #   **Note:** Setting the status to PENDING\_TRANSFER will result in an
+      #   exception being thrown. PENDING\_TRANSFER is a status used
+      #   internally by AWS IoT. It is not intended for developer use.
+      #
+      #   **Note:** The status value REGISTER\_INACTIVE is deprecated and
+      #   should not be used.
+      #   @return [String]
       class UpdateCertificateRequest < Struct.new(
         :certificate_id,
         :new_status)
-
         include Aws::Structure
-
-        # @!attribute [rw] certificate_id
-        #   The ID of the certificate.
-        #   @return [String]
-
-        # @!attribute [rw] new_status
-        #   The new status.
-        #
-        #   **Note:** Setting the status to PENDING\_TRANSFER will result in an
-        #   exception being thrown. PENDING\_TRANSFER is a status used
-        #   internally by AWS IoT. It is not intended for developer use.
-        #
-        #   **Note:** The status value REGISTER\_INACTIVE is deprecated and
-        #   should not be used.
-        #   @return [String]
-
       end
 
       # The input for the UpdateThing operation.
@@ -3376,45 +3034,42 @@ module Aws
       #         expected_version: 1,
       #         remove_thing_type: false,
       #       }
+      # @!attribute [rw] thing_name
+      #   The name of the thing to update.
+      #   @return [String]
+      #
+      # @!attribute [rw] thing_type_name
+      #   The name of the thing type.
+      #   @return [String]
+      #
+      # @!attribute [rw] attribute_payload
+      #   A list of thing attributes, a JSON string containing name-value
+      #   pairs. For example:
+      #
+      #   `\{\"attributes\":\{\"name1\":\"value2\"\}\})`
+      #
+      #   This data is used to add new attributes or update existing
+      #   attributes.
+      #   @return [Types::AttributePayload]
+      #
+      # @!attribute [rw] expected_version
+      #   The expected version of the thing record in the registry. If the
+      #   version of the record in the registry does not match the expected
+      #   version specified in the request, the `UpdateThing` request is
+      #   rejected with a `VersionConflictException`.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] remove_thing_type
+      #   Remove a thing type association. If **true**, the assocation is
+      #   removed.
+      #   @return [Boolean]
       class UpdateThingRequest < Struct.new(
         :thing_name,
         :thing_type_name,
         :attribute_payload,
         :expected_version,
         :remove_thing_type)
-
         include Aws::Structure
-
-        # @!attribute [rw] thing_name
-        #   The name of the thing to update.
-        #   @return [String]
-
-        # @!attribute [rw] thing_type_name
-        #   The name of the thing type.
-        #   @return [String]
-
-        # @!attribute [rw] attribute_payload
-        #   A list of thing attributes, a JSON string containing name-value
-        #   pairs. For example:
-        #
-        #   `\{\"attributes\":\{\"name1\":\"value2\"\}\})`
-        #
-        #   This data is used to add new attributes or update existing
-        #   attributes.
-        #   @return [Types::AttributePayload]
-
-        # @!attribute [rw] expected_version
-        #   The expected version of the thing record in the registry. If the
-        #   version of the record in the registry does not match the expected
-        #   version specified in the request, the `UpdateThing` request is
-        #   rejected with a `VersionConflictException`.
-        #   @return [Integer]
-
-        # @!attribute [rw] remove_thing_type
-        #   Remove a thing type association. If **true**, the assocation is
-        #   removed.
-        #   @return [Boolean]
-
       end
 
       # The output from the UpdateThing operation.
