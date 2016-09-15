@@ -11,9 +11,11 @@ module Aws
 
       # The configured access rules for the domain\'s document and search
       # endpoints, and the current status of those rules.
-      class AccessPoliciesStatus < Aws::Structure.new(
+      class AccessPoliciesStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Access rules for a domain\'s document or search service endpoints.
@@ -44,12 +46,14 @@ module Aws
       #         japanese_tokenization_dictionary: "String",
       #         algorithmic_stemming: "none", # accepts none, minimal, light, full
       #       }
-      class AnalysisOptions < Aws::Structure.new(
+      class AnalysisOptions < Struct.new(
         :synonyms,
         :stopwords,
         :stemming_dictionary,
         :japanese_tokenization_dictionary,
         :algorithmic_stemming)
+
+        include Aws::Structure
 
         # @!attribute [rw] synonyms
         #   A JSON object that defines synonym groups and aliases. A synonym
@@ -125,10 +129,12 @@ module Aws
       #           algorithmic_stemming: "none", # accepts none, minimal, light, full
       #         },
       #       }
-      class AnalysisScheme < Aws::Structure.new(
+      class AnalysisScheme < Struct.new(
         :analysis_scheme_name,
         :analysis_scheme_language,
         :analysis_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] analysis_scheme_name
         #   Names must begin with a letter and can contain the following
@@ -151,9 +157,11 @@ module Aws
       end
 
       # The status and configuration of an `AnalysisScheme`.
-      class AnalysisSchemeStatus < Aws::Structure.new(
+      class AnalysisSchemeStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Configuration information for an analysis scheme. Each analysis
@@ -170,9 +178,11 @@ module Aws
       end
 
       # The status and configuration of the domain\'s availability options.
-      class AvailabilityOptionsStatus < Aws::Structure.new(
+      class AvailabilityOptionsStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   The availability options configured for the domain.
@@ -192,8 +202,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class BuildSuggestersRequest < Aws::Structure.new(
+      class BuildSuggestersRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -206,8 +218,10 @@ module Aws
 
       # The result of a `BuildSuggester` request. Contains a list of the
       # fields used for suggestions.
-      class BuildSuggestersResponse < Aws::Structure.new(
+      class BuildSuggestersResponse < Struct.new(
         :field_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] field_names
         #   A list of field names.
@@ -223,8 +237,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class CreateDomainRequest < Aws::Structure.new(
+      class CreateDomainRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A name for the domain you are creating. Allowed characters are a-z
@@ -237,8 +253,10 @@ module Aws
 
       # The result of a `CreateDomainRequest`. Contains the status of a newly
       # created domain.
-      class CreateDomainResponse < Aws::Structure.new(
+      class CreateDomainResponse < Struct.new(
         :domain_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_status
         #   The current status of the search domain.
@@ -259,12 +277,14 @@ module Aws
       #         search_enabled: false,
       #         return_enabled: false,
       #       }
-      class DateArrayOptions < Aws::Structure.new(
+      class DateArrayOptions < Struct.new(
         :default_value,
         :source_fields,
         :facet_enabled,
         :search_enabled,
         :return_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -305,13 +325,15 @@ module Aws
       #         return_enabled: false,
       #         sort_enabled: false,
       #       }
-      class DateOptions < Aws::Structure.new(
+      class DateOptions < Struct.new(
         :default_value,
         :source_field,
         :facet_enabled,
         :search_enabled,
         :return_enabled,
         :sort_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -376,9 +398,11 @@ module Aws
       #           },
       #         },
       #       }
-      class DefineAnalysisSchemeRequest < Aws::Structure.new(
+      class DefineAnalysisSchemeRequest < Struct.new(
         :domain_name,
         :analysis_scheme)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -399,8 +423,10 @@ module Aws
 
       # The result of a `DefineAnalysisScheme` request. Contains the status of
       # the newly-configured analysis scheme.
-      class DefineAnalysisSchemeResponse < Aws::Structure.new(
+      class DefineAnalysisSchemeResponse < Struct.new(
         :analysis_scheme)
+
+        include Aws::Structure
 
         # @!attribute [rw] analysis_scheme
         #   The status and configuration of an `AnalysisScheme`.
@@ -421,9 +447,11 @@ module Aws
       #           expression_value: "ExpressionValue", # required
       #         },
       #       }
-      class DefineExpressionRequest < Aws::Structure.new(
+      class DefineExpressionRequest < Struct.new(
         :domain_name,
         :expression)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -442,8 +470,10 @@ module Aws
 
       # The result of a `DefineExpression` request. Contains the status of the
       # newly-configured expression.
-      class DefineExpressionResponse < Aws::Structure.new(
+      class DefineExpressionResponse < Struct.new(
         :expression)
+
+        include Aws::Structure
 
         # @!attribute [rw] expression
         #   The value of an `Expression` and its current status.
@@ -547,9 +577,11 @@ module Aws
       #           },
       #         },
       #       }
-      class DefineIndexFieldRequest < Aws::Structure.new(
+      class DefineIndexFieldRequest < Struct.new(
         :domain_name,
         :index_field)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -566,8 +598,10 @@ module Aws
 
       # The result of a `DefineIndexField` request. Contains the status of the
       # newly-configured index field.
-      class DefineIndexFieldResponse < Aws::Structure.new(
+      class DefineIndexFieldResponse < Struct.new(
         :index_field)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_field
         #   The value of an `IndexField` and its current status.
@@ -592,9 +626,11 @@ module Aws
       #           },
       #         },
       #       }
-      class DefineSuggesterRequest < Aws::Structure.new(
+      class DefineSuggesterRequest < Struct.new(
         :domain_name,
         :suggester)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -614,8 +650,10 @@ module Aws
 
       # The result of a `DefineSuggester` request. Contains the status of the
       # newly-configured suggester.
-      class DefineSuggesterResponse < Aws::Structure.new(
+      class DefineSuggesterResponse < Struct.new(
         :suggester)
+
+        include Aws::Structure
 
         # @!attribute [rw] suggester
         #   The value of a `Suggester` and its current status.
@@ -633,9 +671,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         analysis_scheme_name: "StandardName", # required
       #       }
-      class DeleteAnalysisSchemeRequest < Aws::Structure.new(
+      class DeleteAnalysisSchemeRequest < Struct.new(
         :domain_name,
         :analysis_scheme_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -652,8 +692,10 @@ module Aws
 
       # The result of a `DeleteAnalysisScheme` request. Contains the status of
       # the deleted analysis scheme.
-      class DeleteAnalysisSchemeResponse < Aws::Structure.new(
+      class DeleteAnalysisSchemeResponse < Struct.new(
         :analysis_scheme)
+
+        include Aws::Structure
 
         # @!attribute [rw] analysis_scheme
         #   The status of the analysis scheme being deleted.
@@ -669,8 +711,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class DeleteDomainRequest < Aws::Structure.new(
+      class DeleteDomainRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain you want to permanently delete.
@@ -681,8 +725,10 @@ module Aws
       # The result of a `DeleteDomain` request. Contains the status of a newly
       # deleted domain, or no status if the domain has already been completely
       # deleted.
-      class DeleteDomainResponse < Aws::Structure.new(
+      class DeleteDomainResponse < Struct.new(
         :domain_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_status
         #   The current status of the search domain.
@@ -700,9 +746,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         expression_name: "StandardName", # required
       #       }
-      class DeleteExpressionRequest < Aws::Structure.new(
+      class DeleteExpressionRequest < Struct.new(
         :domain_name,
         :expression_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -719,8 +767,10 @@ module Aws
 
       # The result of a `DeleteExpression` request. Specifies the expression
       # being deleted.
-      class DeleteExpressionResponse < Aws::Structure.new(
+      class DeleteExpressionResponse < Struct.new(
         :expression)
+
+        include Aws::Structure
 
         # @!attribute [rw] expression
         #   The status of the expression being deleted.
@@ -738,9 +788,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         index_field_name: "DynamicFieldName", # required
       #       }
-      class DeleteIndexFieldRequest < Aws::Structure.new(
+      class DeleteIndexFieldRequest < Struct.new(
         :domain_name,
         :index_field_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -757,8 +809,10 @@ module Aws
       end
 
       # The result of a `DeleteIndexField` request.
-      class DeleteIndexFieldResponse < Aws::Structure.new(
+      class DeleteIndexFieldResponse < Struct.new(
         :index_field)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_field
         #   The status of the index field being deleted.
@@ -776,9 +830,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         suggester_name: "StandardName", # required
       #       }
-      class DeleteSuggesterRequest < Aws::Structure.new(
+      class DeleteSuggesterRequest < Struct.new(
         :domain_name,
         :suggester_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -795,8 +851,10 @@ module Aws
 
       # The result of a `DeleteSuggester` request. Contains the status of the
       # deleted suggester.
-      class DeleteSuggesterResponse < Aws::Structure.new(
+      class DeleteSuggesterResponse < Struct.new(
         :suggester)
+
+        include Aws::Structure
 
         # @!attribute [rw] suggester
         #   The status of the suggester being deleted.
@@ -818,10 +876,12 @@ module Aws
       #         analysis_scheme_names: ["StandardName"],
       #         deployed: false,
       #       }
-      class DescribeAnalysisSchemesRequest < Aws::Structure.new(
+      class DescribeAnalysisSchemesRequest < Struct.new(
         :domain_name,
         :analysis_scheme_names,
         :deployed)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain you want to describe.
@@ -840,8 +900,10 @@ module Aws
 
       # The result of a `DescribeAnalysisSchemes` request. Contains the
       # analysis schemes configured for the domain specified in the request.
-      class DescribeAnalysisSchemesResponse < Aws::Structure.new(
+      class DescribeAnalysisSchemesResponse < Struct.new(
         :analysis_schemes)
+
+        include Aws::Structure
 
         # @!attribute [rw] analysis_schemes
         #   The analysis scheme descriptions.
@@ -860,9 +922,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         deployed: false,
       #       }
-      class DescribeAvailabilityOptionsRequest < Aws::Structure.new(
+      class DescribeAvailabilityOptionsRequest < Struct.new(
         :domain_name,
         :deployed)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain you want to describe.
@@ -878,8 +942,10 @@ module Aws
       # The result of a `DescribeAvailabilityOptions` request. Indicates
       # whether or not the Multi-AZ option is enabled for the domain specified
       # in the request.
-      class DescribeAvailabilityOptionsResponse < Aws::Structure.new(
+      class DescribeAvailabilityOptionsResponse < Struct.new(
         :availability_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_options
         #   The availability options configured for the domain. Indicates
@@ -898,8 +964,10 @@ module Aws
       #       {
       #         domain_names: ["DomainName"],
       #       }
-      class DescribeDomainsRequest < Aws::Structure.new(
+      class DescribeDomainsRequest < Struct.new(
         :domain_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_names
         #   The names of the domains you want to include in the response.
@@ -909,8 +977,10 @@ module Aws
 
       # The result of a `DescribeDomains` request. Contains the status of the
       # domains specified in the request or all domains owned by the account.
-      class DescribeDomainsResponse < Aws::Structure.new(
+      class DescribeDomainsResponse < Struct.new(
         :domain_status_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_status_list
         #   A list that contains the status of each requested domain.
@@ -931,10 +1001,12 @@ module Aws
       #         expression_names: ["StandardName"],
       #         deployed: false,
       #       }
-      class DescribeExpressionsRequest < Aws::Structure.new(
+      class DescribeExpressionsRequest < Struct.new(
         :domain_name,
         :expression_names,
         :deployed)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain you want to describe.
@@ -954,8 +1026,10 @@ module Aws
 
       # The result of a `DescribeExpressions` request. Contains the
       # expressions configured for the domain specified in the request.
-      class DescribeExpressionsResponse < Aws::Structure.new(
+      class DescribeExpressionsResponse < Struct.new(
         :expressions)
+
+        include Aws::Structure
 
         # @!attribute [rw] expressions
         #   The expressions configured for the domain.
@@ -976,10 +1050,12 @@ module Aws
       #         field_names: ["DynamicFieldName"],
       #         deployed: false,
       #       }
-      class DescribeIndexFieldsRequest < Aws::Structure.new(
+      class DescribeIndexFieldsRequest < Struct.new(
         :domain_name,
         :field_names,
         :deployed)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain you want to describe.
@@ -999,8 +1075,10 @@ module Aws
 
       # The result of a `DescribeIndexFields` request. Contains the index
       # fields configured for the domain specified in the request.
-      class DescribeIndexFieldsResponse < Aws::Structure.new(
+      class DescribeIndexFieldsResponse < Struct.new(
         :index_fields)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_fields
         #   The index fields configured for the domain.
@@ -1016,8 +1094,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class DescribeScalingParametersRequest < Aws::Structure.new(
+      class DescribeScalingParametersRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -1030,8 +1110,10 @@ module Aws
 
       # The result of a `DescribeScalingParameters` request. Contains the
       # scaling parameters configured for the domain specified in the request.
-      class DescribeScalingParametersResponse < Aws::Structure.new(
+      class DescribeScalingParametersResponse < Struct.new(
         :scaling_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] scaling_parameters
         #   The status and configuration of a search domain\'s scaling
@@ -1051,9 +1133,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         deployed: false,
       #       }
-      class DescribeServiceAccessPoliciesRequest < Aws::Structure.new(
+      class DescribeServiceAccessPoliciesRequest < Struct.new(
         :domain_name,
         :deployed)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain you want to describe.
@@ -1067,8 +1151,10 @@ module Aws
       end
 
       # The result of a `DescribeServiceAccessPolicies` request.
-      class DescribeServiceAccessPoliciesResponse < Aws::Structure.new(
+      class DescribeServiceAccessPoliciesResponse < Struct.new(
         :access_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_policies
         #   The access rules configured for the domain specified in the request.
@@ -1089,10 +1175,12 @@ module Aws
       #         suggester_names: ["StandardName"],
       #         deployed: false,
       #       }
-      class DescribeSuggestersRequest < Aws::Structure.new(
+      class DescribeSuggestersRequest < Struct.new(
         :domain_name,
         :suggester_names,
         :deployed)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain you want to describe.
@@ -1110,8 +1198,10 @@ module Aws
       end
 
       # The result of a `DescribeSuggesters` request.
-      class DescribeSuggestersResponse < Aws::Structure.new(
+      class DescribeSuggestersResponse < Struct.new(
         :suggesters)
+
+        include Aws::Structure
 
         # @!attribute [rw] suggesters
         #   The suggesters configured for the domain specified in the request.
@@ -1128,10 +1218,12 @@ module Aws
       #         fuzzy_matching: "none", # accepts none, low, high
       #         sort_expression: "String",
       #       }
-      class DocumentSuggesterOptions < Aws::Structure.new(
+      class DocumentSuggesterOptions < Struct.new(
         :source_field,
         :fuzzy_matching,
         :sort_expression)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_field
         #   The name of the index field you want to use for suggestions.
@@ -1159,7 +1251,7 @@ module Aws
       end
 
       # The current status of the search domain.
-      class DomainStatus < Aws::Structure.new(
+      class DomainStatus < Struct.new(
         :domain_id,
         :domain_name,
         :arn,
@@ -1173,6 +1265,8 @@ module Aws
         :search_partition_count,
         :search_instance_count,
         :limits)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_id
         #   An internally generated unique identifier for a domain.
@@ -1260,12 +1354,14 @@ module Aws
       #         search_enabled: false,
       #         return_enabled: false,
       #       }
-      class DoubleArrayOptions < Aws::Structure.new(
+      class DoubleArrayOptions < Struct.new(
         :default_value,
         :source_fields,
         :facet_enabled,
         :search_enabled,
         :return_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -1305,13 +1401,15 @@ module Aws
       #         return_enabled: false,
       #         sort_enabled: false,
       #       }
-      class DoubleOptions < Aws::Structure.new(
+      class DoubleOptions < Struct.new(
         :default_value,
         :source_field,
         :facet_enabled,
         :search_enabled,
         :return_enabled,
         :sort_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -1352,9 +1450,11 @@ module Aws
       #         expression_name: "StandardName", # required
       #         expression_value: "ExpressionValue", # required
       #       }
-      class Expression < Aws::Structure.new(
+      class Expression < Struct.new(
         :expression_name,
         :expression_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] expression_name
         #   Names must begin with a letter and can contain the following
@@ -1375,9 +1475,11 @@ module Aws
       end
 
       # The value of an `Expression` and its current status.
-      class ExpressionStatus < Aws::Structure.new(
+      class ExpressionStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   The expression that is evaluated for sorting while processing a
@@ -1398,8 +1500,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class IndexDocumentsRequest < Aws::Structure.new(
+      class IndexDocumentsRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -1412,8 +1516,10 @@ module Aws
 
       # The result of an `IndexDocuments` request. Contains the status of the
       # indexing operation, including the fields being indexed.
-      class IndexDocumentsResponse < Aws::Structure.new(
+      class IndexDocumentsResponse < Struct.new(
         :field_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] field_names
         #   The names of the fields that are currently being indexed.
@@ -1514,7 +1620,7 @@ module Aws
       #           return_enabled: false,
       #         },
       #       }
-      class IndexField < Aws::Structure.new(
+      class IndexField < Struct.new(
         :index_field_name,
         :index_field_type,
         :int_options,
@@ -1528,6 +1634,8 @@ module Aws
         :literal_array_options,
         :text_array_options,
         :date_array_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_field_name
         #   A string that represents the name of an index field. CloudSearch
@@ -1631,9 +1739,11 @@ module Aws
       end
 
       # The value of an `IndexField` and its current status.
-      class IndexFieldStatus < Aws::Structure.new(
+      class IndexFieldStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Configuration information for a field in the index, including its
@@ -1660,12 +1770,14 @@ module Aws
       #         search_enabled: false,
       #         return_enabled: false,
       #       }
-      class IntArrayOptions < Aws::Structure.new(
+      class IntArrayOptions < Struct.new(
         :default_value,
         :source_fields,
         :facet_enabled,
         :search_enabled,
         :return_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -1705,13 +1817,15 @@ module Aws
       #         return_enabled: false,
       #         sort_enabled: false,
       #       }
-      class IntOptions < Aws::Structure.new(
+      class IntOptions < Struct.new(
         :default_value,
         :source_field,
         :facet_enabled,
         :search_enabled,
         :return_enabled,
         :sort_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -1757,13 +1871,15 @@ module Aws
       #         return_enabled: false,
       #         sort_enabled: false,
       #       }
-      class LatLonOptions < Aws::Structure.new(
+      class LatLonOptions < Struct.new(
         :default_value,
         :source_field,
         :facet_enabled,
         :search_enabled,
         :return_enabled,
         :sort_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -1808,9 +1924,11 @@ module Aws
 
       end
 
-      class Limits < Aws::Structure.new(
+      class Limits < Struct.new(
         :maximum_replication_count,
         :maximum_partition_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] maximum_replication_count
         #   @return [Integer]
@@ -1822,8 +1940,10 @@ module Aws
 
       # The result of a `ListDomainNames` request. Contains a list of the
       # domains owned by an account.
-      class ListDomainNamesResponse < Aws::Structure.new(
+      class ListDomainNamesResponse < Struct.new(
         :domain_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_names
         #   The names of the search domains owned by an account.
@@ -1844,12 +1964,14 @@ module Aws
       #         search_enabled: false,
       #         return_enabled: false,
       #       }
-      class LiteralArrayOptions < Aws::Structure.new(
+      class LiteralArrayOptions < Struct.new(
         :default_value,
         :source_fields,
         :facet_enabled,
         :search_enabled,
         :return_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -1888,13 +2010,15 @@ module Aws
       #         return_enabled: false,
       #         sort_enabled: false,
       #       }
-      class LiteralOptions < Aws::Structure.new(
+      class LiteralOptions < Struct.new(
         :default_value,
         :source_field,
         :facet_enabled,
         :search_enabled,
         :return_enabled,
         :sort_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -1940,12 +2064,14 @@ module Aws
       end
 
       # The status of domain configuration option.
-      class OptionStatus < Aws::Structure.new(
+      class OptionStatus < Struct.new(
         :creation_date,
         :update_date,
         :update_version,
         :state,
         :pending_deletion)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_date
         #   A timestamp for when this option was created.
@@ -1991,10 +2117,12 @@ module Aws
       #         desired_replication_count: 1,
       #         desired_partition_count: 1,
       #       }
-      class ScalingParameters < Aws::Structure.new(
+      class ScalingParameters < Struct.new(
         :desired_instance_type,
         :desired_replication_count,
         :desired_partition_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] desired_instance_type
         #   The instance type that you want to preconfigure for your domain. For
@@ -2015,9 +2143,11 @@ module Aws
       end
 
       # The status and configuration of a search domain\'s scaling parameters.
-      class ScalingParametersStatus < Aws::Structure.new(
+      class ScalingParametersStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   The desired instance type and desired number of replicas of each
@@ -2031,8 +2161,10 @@ module Aws
       end
 
       # The endpoint to which service requests can be submitted.
-      class ServiceEndpoint < Aws::Structure.new(
+      class ServiceEndpoint < Struct.new(
         :endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint
         #   The endpoint to which service requests can be submitted. For
@@ -2059,9 +2191,11 @@ module Aws
       #           sort_expression: "String",
       #         },
       #       }
-      class Suggester < Aws::Structure.new(
+      class Suggester < Struct.new(
         :suggester_name,
         :document_suggester_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] suggester_name
         #   Names must begin with a letter and can contain the following
@@ -2075,9 +2209,11 @@ module Aws
       end
 
       # The value of a `Suggester` and its current status.
-      class SuggesterStatus < Aws::Structure.new(
+      class SuggesterStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Configuration information for a search suggester. Each suggester has
@@ -2106,12 +2242,14 @@ module Aws
       #         highlight_enabled: false,
       #         analysis_scheme: "Word",
       #       }
-      class TextArrayOptions < Aws::Structure.new(
+      class TextArrayOptions < Struct.new(
         :default_value,
         :source_fields,
         :return_enabled,
         :highlight_enabled,
         :analysis_scheme)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -2151,13 +2289,15 @@ module Aws
       #         highlight_enabled: false,
       #         analysis_scheme: "Word",
       #       }
-      class TextOptions < Aws::Structure.new(
+      class TextOptions < Struct.new(
         :default_value,
         :source_field,
         :return_enabled,
         :sort_enabled,
         :highlight_enabled,
         :analysis_scheme)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_value
         #   A value to use for the field if the field isn\'t specified for a
@@ -2212,9 +2352,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         multi_az: false, # required
       #       }
-      class UpdateAvailabilityOptionsRequest < Aws::Structure.new(
+      class UpdateAvailabilityOptionsRequest < Struct.new(
         :domain_name,
         :multi_az)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -2234,8 +2376,10 @@ module Aws
 
       # The result of a `UpdateAvailabilityOptions` request. Contains the
       # status of the domain\'s availability options.
-      class UpdateAvailabilityOptionsResponse < Aws::Structure.new(
+      class UpdateAvailabilityOptionsResponse < Struct.new(
         :availability_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_options
         #   The newly-configured availability options. Indicates whether
@@ -2258,9 +2402,11 @@ module Aws
       #           desired_partition_count: 1,
       #         },
       #       }
-      class UpdateScalingParametersRequest < Aws::Structure.new(
+      class UpdateScalingParametersRequest < Struct.new(
         :domain_name,
         :scaling_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -2278,8 +2424,10 @@ module Aws
 
       # The result of a `UpdateScalingParameters` request. Contains the status
       # of the newly-configured scaling parameters.
-      class UpdateScalingParametersResponse < Aws::Structure.new(
+      class UpdateScalingParametersResponse < Struct.new(
         :scaling_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] scaling_parameters
         #   The status and configuration of a search domain\'s scaling
@@ -2298,9 +2446,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         access_policies: "PolicyDocument", # required
       #       }
-      class UpdateServiceAccessPoliciesRequest < Aws::Structure.new(
+      class UpdateServiceAccessPoliciesRequest < Struct.new(
         :domain_name,
         :access_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   A string that represents the name of a domain. Domain names are
@@ -2318,8 +2468,10 @@ module Aws
 
       # The result of an `UpdateServiceAccessPolicies` request. Contains the
       # new access policies.
-      class UpdateServiceAccessPoliciesResponse < Aws::Structure.new(
+      class UpdateServiceAccessPoliciesResponse < Struct.new(
         :access_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_policies
         #   The access rules configured for the domain.

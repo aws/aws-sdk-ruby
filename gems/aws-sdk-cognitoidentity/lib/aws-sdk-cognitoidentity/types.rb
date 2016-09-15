@@ -18,9 +18,11 @@ module Aws
       #         provider_name: "CognitoIdentityProviderName",
       #         client_id: "CognitoIdentityProviderClientId",
       #       }
-      class CognitoIdentityProvider < Aws::Structure.new(
+      class CognitoIdentityProvider < Struct.new(
         :provider_name,
         :client_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] provider_name
         #   The provider name for an Amazon Cognito Identity User Pool. For
@@ -53,7 +55,7 @@ module Aws
       #         ],
       #         saml_provider_arns: ["ARNString"],
       #       }
-      class CreateIdentityPoolInput < Aws::Structure.new(
+      class CreateIdentityPoolInput < Struct.new(
         :identity_pool_name,
         :allow_unauthenticated_identities,
         :supported_login_providers,
@@ -61,6 +63,8 @@ module Aws
         :open_id_connect_provider_arns,
         :cognito_identity_providers,
         :saml_provider_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_name
         #   A string that you provide.
@@ -101,11 +105,13 @@ module Aws
       end
 
       # Credentials for the provided identity ID.
-      class Credentials < Aws::Structure.new(
+      class Credentials < Struct.new(
         :access_key_id,
         :secret_key,
         :session_token,
         :expiration)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_key_id
         #   The Access Key portion of the credentials.
@@ -132,8 +138,10 @@ module Aws
       #       {
       #         identity_ids_to_delete: ["IdentityId"], # required
       #       }
-      class DeleteIdentitiesInput < Aws::Structure.new(
+      class DeleteIdentitiesInput < Struct.new(
         :identity_ids_to_delete)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_ids_to_delete
         #   A list of 1-60 identities that you want to delete.
@@ -142,8 +150,10 @@ module Aws
       end
 
       # Returned in response to a successful `DeleteIdentities` operation.
-      class DeleteIdentitiesResponse < Aws::Structure.new(
+      class DeleteIdentitiesResponse < Struct.new(
         :unprocessed_identity_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] unprocessed_identity_ids
         #   An array of UnprocessedIdentityId objects, each of which contains an
@@ -159,8 +169,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class DeleteIdentityPoolInput < Aws::Structure.new(
+      class DeleteIdentityPoolInput < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -175,8 +187,10 @@ module Aws
       #       {
       #         identity_id: "IdentityId", # required
       #       }
-      class DescribeIdentityInput < Aws::Structure.new(
+      class DescribeIdentityInput < Struct.new(
         :identity_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -191,8 +205,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class DescribeIdentityPoolInput < Aws::Structure.new(
+      class DescribeIdentityPoolInput < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -211,10 +227,12 @@ module Aws
       #         },
       #         custom_role_arn: "ARNString",
       #       }
-      class GetCredentialsForIdentityInput < Aws::Structure.new(
+      class GetCredentialsForIdentityInput < Struct.new(
         :identity_id,
         :logins,
         :custom_role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -237,9 +255,11 @@ module Aws
 
       # Returned in response to a successful `GetCredentialsForIdentity`
       # operation.
-      class GetCredentialsForIdentityResponse < Aws::Structure.new(
+      class GetCredentialsForIdentityResponse < Struct.new(
         :identity_id,
         :credentials)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -262,10 +282,12 @@ module Aws
       #           "IdentityProviderName" => "IdentityProviderToken",
       #         },
       #       }
-      class GetIdInput < Aws::Structure.new(
+      class GetIdInput < Struct.new(
         :account_id,
         :identity_pool_id,
         :logins)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   A standard AWS account ID (9+ digits).
@@ -290,8 +312,10 @@ module Aws
       end
 
       # Returned in response to a GetId request.
-      class GetIdResponse < Aws::Structure.new(
+      class GetIdResponse < Struct.new(
         :identity_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -306,8 +330,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class GetIdentityPoolRolesInput < Aws::Structure.new(
+      class GetIdentityPoolRolesInput < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -316,9 +342,11 @@ module Aws
       end
 
       # Returned in response to a successful `GetIdentityPoolRoles` operation.
-      class GetIdentityPoolRolesResponse < Aws::Structure.new(
+      class GetIdentityPoolRolesResponse < Struct.new(
         :identity_pool_id,
         :roles)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -343,11 +371,13 @@ module Aws
       #         },
       #         token_duration: 1,
       #       }
-      class GetOpenIdTokenForDeveloperIdentityInput < Aws::Structure.new(
+      class GetOpenIdTokenForDeveloperIdentityInput < Struct.new(
         :identity_pool_id,
         :identity_id,
         :logins,
         :token_duration)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -386,9 +416,11 @@ module Aws
 
       # Returned in response to a successful
       # `GetOpenIdTokenForDeveloperIdentity` request.
-      class GetOpenIdTokenForDeveloperIdentityResponse < Aws::Structure.new(
+      class GetOpenIdTokenForDeveloperIdentityResponse < Struct.new(
         :identity_id,
         :token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -410,9 +442,11 @@ module Aws
       #           "IdentityProviderName" => "IdentityProviderToken",
       #         },
       #       }
-      class GetOpenIdTokenInput < Aws::Structure.new(
+      class GetOpenIdTokenInput < Struct.new(
         :identity_id,
         :logins)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -429,9 +463,11 @@ module Aws
       end
 
       # Returned in response to a successful GetOpenIdToken request.
-      class GetOpenIdTokenResponse < Aws::Structure.new(
+      class GetOpenIdTokenResponse < Struct.new(
         :identity_id,
         :token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID. Note that the
@@ -445,11 +481,13 @@ module Aws
       end
 
       # A description of the identity.
-      class IdentityDescription < Aws::Structure.new(
+      class IdentityDescription < Struct.new(
         :identity_id,
         :logins,
         :creation_date,
         :last_modified_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -491,7 +529,7 @@ module Aws
       #         ],
       #         saml_provider_arns: ["ARNString"],
       #       }
-      class IdentityPool < Aws::Structure.new(
+      class IdentityPool < Struct.new(
         :identity_pool_id,
         :identity_pool_name,
         :allow_unauthenticated_identities,
@@ -500,6 +538,8 @@ module Aws
         :open_id_connect_provider_arns,
         :cognito_identity_providers,
         :saml_provider_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -538,9 +578,11 @@ module Aws
       end
 
       # A description of the identity pool.
-      class IdentityPoolShortDescription < Aws::Structure.new(
+      class IdentityPoolShortDescription < Struct.new(
         :identity_pool_id,
         :identity_pool_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -562,11 +604,13 @@ module Aws
       #         next_token: "PaginationKey",
       #         hide_disabled: false,
       #       }
-      class ListIdentitiesInput < Aws::Structure.new(
+      class ListIdentitiesInput < Struct.new(
         :identity_pool_id,
         :max_results,
         :next_token,
         :hide_disabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -589,10 +633,12 @@ module Aws
       end
 
       # The response to a ListIdentities request.
-      class ListIdentitiesResponse < Aws::Structure.new(
+      class ListIdentitiesResponse < Struct.new(
         :identity_pool_id,
         :identities,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -616,9 +662,11 @@ module Aws
       #         max_results: 1, # required
       #         next_token: "PaginationKey",
       #       }
-      class ListIdentityPoolsInput < Aws::Structure.new(
+      class ListIdentityPoolsInput < Struct.new(
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_results
         #   The maximum number of identities to return.
@@ -631,9 +679,11 @@ module Aws
       end
 
       # The result of a successful ListIdentityPools action.
-      class ListIdentityPoolsResponse < Aws::Structure.new(
+      class ListIdentityPoolsResponse < Struct.new(
         :identity_pools,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pools
         #   The identity pools returned by the ListIdentityPools action.
@@ -656,12 +706,14 @@ module Aws
       #         max_results: 1,
       #         next_token: "PaginationKey",
       #       }
-      class LookupDeveloperIdentityInput < Aws::Structure.new(
+      class LookupDeveloperIdentityInput < Struct.new(
         :identity_pool_id,
         :identity_id,
         :developer_user_identifier,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -694,10 +746,12 @@ module Aws
       end
 
       # Returned in response to a successful `LookupDeveloperIdentity` action.
-      class LookupDeveloperIdentityResponse < Aws::Structure.new(
+      class LookupDeveloperIdentityResponse < Struct.new(
         :identity_id,
         :developer_user_identifier_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -731,11 +785,13 @@ module Aws
       #         developer_provider_name: "DeveloperProviderName", # required
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class MergeDeveloperIdentitiesInput < Aws::Structure.new(
+      class MergeDeveloperIdentitiesInput < Struct.new(
         :source_user_identifier,
         :destination_user_identifier,
         :developer_provider_name,
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_user_identifier
         #   User identifier for the source user. The value should be a
@@ -764,8 +820,10 @@ module Aws
 
       # Returned in response to a successful `MergeDeveloperIdentities`
       # action.
-      class MergeDeveloperIdentitiesResponse < Aws::Structure.new(
+      class MergeDeveloperIdentitiesResponse < Struct.new(
         :identity_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -783,9 +841,11 @@ module Aws
       #           "RoleType" => "ARNString",
       #         },
       #       }
-      class SetIdentityPoolRolesInput < Aws::Structure.new(
+      class SetIdentityPoolRolesInput < Struct.new(
         :identity_pool_id,
         :roles)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   An identity pool ID in the format REGION:GUID.
@@ -809,11 +869,13 @@ module Aws
       #         developer_provider_name: "DeveloperProviderName", # required
       #         developer_user_identifier: "DeveloperUserIdentifier", # required
       #       }
-      class UnlinkDeveloperIdentityInput < Aws::Structure.new(
+      class UnlinkDeveloperIdentityInput < Struct.new(
         :identity_id,
         :identity_pool_id,
         :developer_provider_name,
         :developer_user_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -845,10 +907,12 @@ module Aws
       #         },
       #         logins_to_remove: ["IdentityProviderName"], # required
       #       }
-      class UnlinkIdentityInput < Aws::Structure.new(
+      class UnlinkIdentityInput < Struct.new(
         :identity_id,
         :logins,
         :logins_to_remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.
@@ -867,9 +931,11 @@ module Aws
 
       # An array of UnprocessedIdentityId objects, each of which contains an
       # ErrorCode and IdentityId.
-      class UnprocessedIdentityId < Aws::Structure.new(
+      class UnprocessedIdentityId < Struct.new(
         :identity_id,
         :error_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A unique identifier in the format REGION:GUID.

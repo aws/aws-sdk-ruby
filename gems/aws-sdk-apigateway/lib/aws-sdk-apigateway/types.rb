@@ -53,11 +53,13 @@ module Aws
       # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-limits.html
       # [3]: http://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html
       # [4]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html
-      class Account < Aws::Structure.new(
+      class Account < Struct.new(
         :cloudwatch_role_arn,
         :throttle_settings,
         :features,
         :api_key_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloudwatch_role_arn
         #   The ARN of an Amazon CloudWatch role for the current Account.
@@ -90,7 +92,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
-      class ApiKey < Aws::Structure.new(
+      class ApiKey < Struct.new(
         :id,
         :value,
         :name,
@@ -99,6 +101,8 @@ module Aws
         :created_date,
         :last_updated_date,
         :stage_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the API Key.
@@ -141,9 +145,11 @@ module Aws
 
       # The identifier of an API key used to reference an API key in a usage
       # plan.
-      class ApiKeyIds < Aws::Structure.new(
+      class ApiKeyIds < Struct.new(
         :ids,
         :warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] ids
         #   A list of all the ApiKey identifiers.
@@ -165,10 +171,12 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html
-      class ApiKeys < Aws::Structure.new(
+      class ApiKeys < Struct.new(
         :warnings,
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] warnings
         #   A list of warning messages logged during the import of API keys when
@@ -193,9 +201,11 @@ module Aws
       #         api_id: "String",
       #         stage: "String",
       #       }
-      class ApiStage < Aws::Structure.new(
+      class ApiStage < Struct.new(
         :api_id,
         :stage)
+
+        include Aws::Structure
 
         # @!attribute [rw] api_id
         #   API Id of the associated API stage in a usage plan.
@@ -218,7 +228,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
-      class Authorizer < Aws::Structure.new(
+      class Authorizer < Struct.new(
         :id,
         :name,
         :type,
@@ -229,6 +239,8 @@ module Aws
         :identity_source,
         :identity_validation_expression,
         :authorizer_result_ttl_in_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the authorizer resource.
@@ -305,9 +317,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
-      class Authorizers < Aws::Structure.new(
+      class Authorizers < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -333,10 +347,12 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
-      class BasePathMapping < Aws::Structure.new(
+      class BasePathMapping < Struct.new(
         :base_path,
         :rest_api_id,
         :stage)
+
+        include Aws::Structure
 
         # @!attribute [rw] base_path
         #   The base path name that callers of the API must provide as part of
@@ -362,9 +378,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
-      class BasePathMappings < Aws::Structure.new(
+      class BasePathMappings < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -392,12 +410,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
-      class ClientCertificate < Aws::Structure.new(
+      class ClientCertificate < Struct.new(
         :client_certificate_id,
         :description,
         :pem_encoded_certificate,
         :created_date,
         :expiration_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_certificate_id
         #   The identifier of the client certificate.
@@ -442,9 +462,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html
-      class ClientCertificates < Aws::Structure.new(
+      class ClientCertificates < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -473,13 +495,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateApiKeyRequest < Aws::Structure.new(
+      class CreateApiKeyRequest < Struct.new(
         :name,
         :description,
         :enabled,
         :generate_distinct_id,
         :value,
         :stage_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the ApiKey.
@@ -525,7 +549,7 @@ module Aws
       #         identity_validation_expression: "String",
       #         authorizer_result_ttl_in_seconds: 1,
       #       }
-      class CreateAuthorizerRequest < Aws::Structure.new(
+      class CreateAuthorizerRequest < Struct.new(
         :rest_api_id,
         :name,
         :type,
@@ -536,6 +560,8 @@ module Aws
         :identity_source,
         :identity_validation_expression,
         :authorizer_result_ttl_in_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier under which the Authorizer will be created.
@@ -591,11 +617,13 @@ module Aws
       #         rest_api_id: "String", # required
       #         stage: "String",
       #       }
-      class CreateBasePathMappingRequest < Aws::Structure.new(
+      class CreateBasePathMappingRequest < Struct.new(
         :domain_name,
         :base_path,
         :rest_api_id,
         :stage)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain name of the BasePathMapping resource to create.
@@ -635,7 +663,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class CreateDeploymentRequest < Aws::Structure.new(
+      class CreateDeploymentRequest < Struct.new(
         :rest_api_id,
         :stage_name,
         :stage_description,
@@ -643,6 +671,8 @@ module Aws
         :cache_cluster_enabled,
         :cache_cluster_size,
         :variables)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi resource identifier for the Deployment resource to
@@ -693,12 +723,14 @@ module Aws
       #         certificate_private_key: "String", # required
       #         certificate_chain: "String", # required
       #       }
-      class CreateDomainNameRequest < Aws::Structure.new(
+      class CreateDomainNameRequest < Struct.new(
         :domain_name,
         :certificate_name,
         :certificate_body,
         :certificate_private_key,
         :certificate_chain)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the DomainName resource.
@@ -740,12 +772,14 @@ module Aws
       #         schema: "String",
       #         content_type: "String", # required
       #       }
-      class CreateModelRequest < Aws::Structure.new(
+      class CreateModelRequest < Struct.new(
         :rest_api_id,
         :name,
         :description,
         :schema,
         :content_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier under which the Model will be created.
@@ -783,10 +817,12 @@ module Aws
       #         parent_id: "String", # required
       #         path_part: "String", # required
       #       }
-      class CreateResourceRequest < Aws::Structure.new(
+      class CreateResourceRequest < Struct.new(
         :rest_api_id,
         :parent_id,
         :path_part)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi for the resource.
@@ -811,10 +847,12 @@ module Aws
       #         description: "String",
       #         clone_from: "String",
       #       }
-      class CreateRestApiRequest < Aws::Structure.new(
+      class CreateRestApiRequest < Struct.new(
         :name,
         :description,
         :clone_from)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the RestApi.
@@ -845,7 +883,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class CreateStageRequest < Aws::Structure.new(
+      class CreateStageRequest < Struct.new(
         :rest_api_id,
         :stage_name,
         :deployment_id,
@@ -853,6 +891,8 @@ module Aws
         :cache_cluster_enabled,
         :cache_cluster_size,
         :variables)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource for the Stage resource to
@@ -897,10 +937,12 @@ module Aws
       #         key_id: "String", # required
       #         key_type: "String", # required
       #       }
-      class CreateUsagePlanKeyRequest < Aws::Structure.new(
+      class CreateUsagePlanKeyRequest < Struct.new(
         :usage_plan_id,
         :key_id,
         :key_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the UsagePlan resource representing the usage plan
@@ -943,12 +985,14 @@ module Aws
       #           period: "DAY", # accepts DAY, WEEK, MONTH
       #         },
       #       }
-      class CreateUsagePlanRequest < Aws::Structure.new(
+      class CreateUsagePlanRequest < Struct.new(
         :name,
         :description,
         :api_stages,
         :throttle,
         :quota)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the usage plan.
@@ -979,8 +1023,10 @@ module Aws
       #       {
       #         api_key: "String", # required
       #       }
-      class DeleteApiKeyRequest < Aws::Structure.new(
+      class DeleteApiKeyRequest < Struct.new(
         :api_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] api_key
         #   The identifier of the ApiKey resource to be deleted.
@@ -996,9 +1042,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         authorizer_id: "String", # required
       #       }
-      class DeleteAuthorizerRequest < Aws::Structure.new(
+      class DeleteAuthorizerRequest < Struct.new(
         :rest_api_id,
         :authorizer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Authorizer resource.
@@ -1018,9 +1066,11 @@ module Aws
       #         domain_name: "String", # required
       #         base_path: "String", # required
       #       }
-      class DeleteBasePathMappingRequest < Aws::Structure.new(
+      class DeleteBasePathMappingRequest < Struct.new(
         :domain_name,
         :base_path)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain name of the BasePathMapping resource to delete.
@@ -1039,8 +1089,10 @@ module Aws
       #       {
       #         client_certificate_id: "String", # required
       #       }
-      class DeleteClientCertificateRequest < Aws::Structure.new(
+      class DeleteClientCertificateRequest < Struct.new(
         :client_certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_certificate_id
         #   The identifier of the ClientCertificate resource to be deleted.
@@ -1056,9 +1108,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         deployment_id: "String", # required
       #       }
-      class DeleteDeploymentRequest < Aws::Structure.new(
+      class DeleteDeploymentRequest < Struct.new(
         :rest_api_id,
         :deployment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource for the Deployment resource
@@ -1078,8 +1132,10 @@ module Aws
       #       {
       #         domain_name: "String", # required
       #       }
-      class DeleteDomainNameRequest < Aws::Structure.new(
+      class DeleteDomainNameRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the DomainName resource to be deleted.
@@ -1096,10 +1152,12 @@ module Aws
       #         resource_id: "String", # required
       #         http_method: "String", # required
       #       }
-      class DeleteIntegrationRequest < Aws::Structure.new(
+      class DeleteIntegrationRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a delete integration request\'s API identifier.
@@ -1125,11 +1183,13 @@ module Aws
       #         http_method: "String", # required
       #         status_code: "StatusCode", # required
       #       }
-      class DeleteIntegrationResponseRequest < Aws::Structure.new(
+      class DeleteIntegrationResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :status_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a delete integration response request\'s API identifier.
@@ -1159,10 +1219,12 @@ module Aws
       #         resource_id: "String", # required
       #         http_method: "String", # required
       #       }
-      class DeleteMethodRequest < Aws::Structure.new(
+      class DeleteMethodRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Method resource.
@@ -1188,11 +1250,13 @@ module Aws
       #         http_method: "String", # required
       #         status_code: "StatusCode", # required
       #       }
-      class DeleteMethodResponseRequest < Aws::Structure.new(
+      class DeleteMethodResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :status_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the MethodResponse resource.
@@ -1220,9 +1284,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         model_name: "String", # required
       #       }
-      class DeleteModelRequest < Aws::Structure.new(
+      class DeleteModelRequest < Struct.new(
         :rest_api_id,
         :model_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi under which the model will be deleted.
@@ -1242,9 +1308,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         resource_id: "String", # required
       #       }
-      class DeleteResourceRequest < Aws::Structure.new(
+      class DeleteResourceRequest < Struct.new(
         :rest_api_id,
         :resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Resource resource.
@@ -1263,8 +1331,10 @@ module Aws
       #       {
       #         rest_api_id: "String", # required
       #       }
-      class DeleteRestApiRequest < Aws::Structure.new(
+      class DeleteRestApiRequest < Struct.new(
         :rest_api_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The ID of the RestApi you want to delete.
@@ -1280,9 +1350,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         stage_name: "String", # required
       #       }
-      class DeleteStageRequest < Aws::Structure.new(
+      class DeleteStageRequest < Struct.new(
         :rest_api_id,
         :stage_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource for the Stage resource to
@@ -1304,9 +1376,11 @@ module Aws
       #         usage_plan_id: "String", # required
       #         key_id: "String", # required
       #       }
-      class DeleteUsagePlanKeyRequest < Aws::Structure.new(
+      class DeleteUsagePlanKeyRequest < Struct.new(
         :usage_plan_id,
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the UsagePlan resource representing the usage plan
@@ -1327,8 +1401,10 @@ module Aws
       #       {
       #         usage_plan_id: "String", # required
       #       }
-      class DeleteUsagePlanRequest < Aws::Structure.new(
+      class DeleteUsagePlanRequest < Struct.new(
         :usage_plan_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the to-be-deleted usage plan.
@@ -1355,11 +1431,13 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
       # [2]: https://aws.amazon.com/tools/
-      class Deployment < Aws::Structure.new(
+      class Deployment < Struct.new(
         :id,
         :description,
         :created_date,
         :api_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the deployment resource.
@@ -1401,9 +1479,11 @@ module Aws
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
       # [2]: http://docs.aws.amazon.com/cli/latest/reference/apigateway/get-deployment.html
       # [3]: https://aws.amazon.com/tools/
-      class Deployments < Aws::Structure.new(
+      class Deployments < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -1425,11 +1505,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
-      class DomainName < Aws::Structure.new(
+      class DomainName < Struct.new(
         :domain_name,
         :certificate_name,
         :certificate_upload_date,
         :distribution_domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the DomainName resource.
@@ -1467,9 +1549,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html
-      class DomainNames < Aws::Structure.new(
+      class DomainNames < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -1483,10 +1567,12 @@ module Aws
 
       # The binary blob response to GetExport, which contains the generated
       # SDK.
-      class ExportResponse < Aws::Structure.new(
+      class ExportResponse < Struct.new(
         :content_type,
         :content_disposition,
         :body)
+
+        include Aws::Structure
 
         # @!attribute [rw] content_type
         #   The content-type header value in the HTTP response. This will
@@ -1511,9 +1597,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         stage_name: "String", # required
       #       }
-      class FlushStageAuthorizersCacheRequest < Aws::Structure.new(
+      class FlushStageAuthorizersCacheRequest < Struct.new(
         :rest_api_id,
         :stage_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The API identifier of the stage to flush.
@@ -1533,9 +1621,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         stage_name: "String", # required
       #       }
-      class FlushStageCacheRequest < Aws::Structure.new(
+      class FlushStageCacheRequest < Struct.new(
         :rest_api_id,
         :stage_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The API identifier of the stage to flush its cache.
@@ -1554,8 +1644,10 @@ module Aws
       #       {
       #         description: "String",
       #       }
-      class GenerateClientCertificateRequest < Aws::Structure.new(
+      class GenerateClientCertificateRequest < Struct.new(
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] description
         #   The description of the ClientCertificate.
@@ -1576,9 +1668,11 @@ module Aws
       #         api_key: "String", # required
       #         include_value: false,
       #       }
-      class GetApiKeyRequest < Aws::Structure.new(
+      class GetApiKeyRequest < Struct.new(
         :api_key,
         :include_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] api_key
         #   The identifier of the ApiKey resource.
@@ -1601,11 +1695,13 @@ module Aws
       #         name_query: "String",
       #         include_values: false,
       #       }
-      class GetApiKeysRequest < Aws::Structure.new(
+      class GetApiKeysRequest < Struct.new(
         :position,
         :limit,
         :name_query,
         :include_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   The position of the current ApiKeys resource to get information
@@ -1635,9 +1731,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         authorizer_id: "String", # required
       #       }
-      class GetAuthorizerRequest < Aws::Structure.new(
+      class GetAuthorizerRequest < Struct.new(
         :rest_api_id,
         :authorizer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Authorizer resource.
@@ -1658,10 +1756,12 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetAuthorizersRequest < Aws::Structure.new(
+      class GetAuthorizersRequest < Struct.new(
         :rest_api_id,
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Authorizers resource.
@@ -1686,9 +1786,11 @@ module Aws
       #         domain_name: "String", # required
       #         base_path: "String", # required
       #       }
-      class GetBasePathMappingRequest < Aws::Structure.new(
+      class GetBasePathMappingRequest < Struct.new(
         :domain_name,
         :base_path)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain name of the BasePathMapping resource to be described.
@@ -1713,10 +1815,12 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetBasePathMappingsRequest < Aws::Structure.new(
+      class GetBasePathMappingsRequest < Struct.new(
         :domain_name,
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain name of a BasePathMapping resource.
@@ -1743,8 +1847,10 @@ module Aws
       #       {
       #         client_certificate_id: "String", # required
       #       }
-      class GetClientCertificateRequest < Aws::Structure.new(
+      class GetClientCertificateRequest < Struct.new(
         :client_certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_certificate_id
         #   The identifier of the ClientCertificate resource to be described.
@@ -1761,9 +1867,11 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetClientCertificatesRequest < Aws::Structure.new(
+      class GetClientCertificatesRequest < Struct.new(
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   The position of the current ClientCertificate resource in the
@@ -1787,9 +1895,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         deployment_id: "String", # required
       #       }
-      class GetDeploymentRequest < Aws::Structure.new(
+      class GetDeploymentRequest < Struct.new(
         :rest_api_id,
         :deployment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource for the Deployment resource
@@ -1812,10 +1922,12 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetDeploymentsRequest < Aws::Structure.new(
+      class GetDeploymentsRequest < Struct.new(
         :rest_api_id,
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource for the collection of
@@ -1842,8 +1954,10 @@ module Aws
       #       {
       #         domain_name: "String", # required
       #       }
-      class GetDomainNameRequest < Aws::Structure.new(
+      class GetDomainNameRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the DomainName resource.
@@ -1859,9 +1973,11 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetDomainNamesRequest < Aws::Structure.new(
+      class GetDomainNamesRequest < Struct.new(
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   The position of the current domain names to get information about.
@@ -1888,12 +2004,14 @@ module Aws
       #         },
       #         accepts: "String",
       #       }
-      class GetExportRequest < Aws::Structure.new(
+      class GetExportRequest < Struct.new(
         :rest_api_id,
         :stage_name,
         :export_type,
         :parameters,
         :accepts)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi to be exported.
@@ -1936,10 +2054,12 @@ module Aws
       #         resource_id: "String", # required
       #         http_method: "String", # required
       #       }
-      class GetIntegrationRequest < Aws::Structure.new(
+      class GetIntegrationRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a get integration request\'s API identifier.
@@ -1965,11 +2085,13 @@ module Aws
       #         http_method: "String", # required
       #         status_code: "StatusCode", # required
       #       }
-      class GetIntegrationResponseRequest < Aws::Structure.new(
+      class GetIntegrationResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :status_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a get integration response request\'s API identifier.
@@ -1998,10 +2120,12 @@ module Aws
       #         resource_id: "String", # required
       #         http_method: "String", # required
       #       }
-      class GetMethodRequest < Aws::Structure.new(
+      class GetMethodRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Method resource.
@@ -2027,11 +2151,13 @@ module Aws
       #         http_method: "String", # required
       #         status_code: "StatusCode", # required
       #       }
-      class GetMethodResponseRequest < Aws::Structure.new(
+      class GetMethodResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :status_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the MethodResponse resource.
@@ -2061,10 +2187,12 @@ module Aws
       #         model_name: "String", # required
       #         flatten: false,
       #       }
-      class GetModelRequest < Aws::Structure.new(
+      class GetModelRequest < Struct.new(
         :rest_api_id,
         :model_name,
         :flatten)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier under which the Model exists.
@@ -2091,9 +2219,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         model_name: "String", # required
       #       }
-      class GetModelTemplateRequest < Aws::Structure.new(
+      class GetModelTemplateRequest < Struct.new(
         :rest_api_id,
         :model_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The ID of the RestApi under which the model exists.
@@ -2114,10 +2244,12 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetModelsRequest < Aws::Structure.new(
+      class GetModelsRequest < Struct.new(
         :rest_api_id,
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier.
@@ -2144,9 +2276,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         resource_id: "String", # required
       #       }
-      class GetResourceRequest < Aws::Structure.new(
+      class GetResourceRequest < Struct.new(
         :rest_api_id,
         :resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the resource.
@@ -2167,10 +2301,12 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetResourcesRequest < Aws::Structure.new(
+      class GetResourcesRequest < Struct.new(
         :rest_api_id,
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Resource.
@@ -2197,8 +2333,10 @@ module Aws
       #       {
       #         rest_api_id: "String", # required
       #       }
-      class GetRestApiRequest < Aws::Structure.new(
+      class GetRestApiRequest < Struct.new(
         :rest_api_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource.
@@ -2214,9 +2352,11 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetRestApisRequest < Aws::Structure.new(
+      class GetRestApisRequest < Struct.new(
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   The position of the current RestApis resource in the collection to
@@ -2243,11 +2383,13 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class GetSdkRequest < Aws::Structure.new(
+      class GetSdkRequest < Struct.new(
         :rest_api_id,
         :stage_name,
         :sdk_type,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi that the SDK will use.
@@ -2280,9 +2422,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         stage_name: "String", # required
       #       }
-      class GetStageRequest < Aws::Structure.new(
+      class GetStageRequest < Struct.new(
         :rest_api_id,
         :stage_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource for the Stage resource to get
@@ -2304,9 +2448,11 @@ module Aws
       #         rest_api_id: "String", # required
       #         deployment_id: "String",
       #       }
-      class GetStagesRequest < Aws::Structure.new(
+      class GetStagesRequest < Struct.new(
         :rest_api_id,
         :deployment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The stages\' API identifiers.
@@ -2326,9 +2472,11 @@ module Aws
       #         usage_plan_id: "String", # required
       #         key_id: "String", # required
       #       }
-      class GetUsagePlanKeyRequest < Aws::Structure.new(
+      class GetUsagePlanKeyRequest < Struct.new(
         :usage_plan_id,
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the UsagePlan resource representing the usage plan
@@ -2354,11 +2502,13 @@ module Aws
       #         limit: 1,
       #         name_query: "String",
       #       }
-      class GetUsagePlanKeysRequest < Aws::Structure.new(
+      class GetUsagePlanKeysRequest < Struct.new(
         :usage_plan_id,
         :position,
         :limit,
         :name_query)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the UsagePlan resource representing the usage plan
@@ -2390,8 +2540,10 @@ module Aws
       #       {
       #         usage_plan_id: "String", # required
       #       }
-      class GetUsagePlanRequest < Aws::Structure.new(
+      class GetUsagePlanRequest < Struct.new(
         :usage_plan_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The identifier of the UsagePlan resource to be retrieved.
@@ -2408,10 +2560,12 @@ module Aws
       #         key_id: "String",
       #         limit: 1,
       #       }
-      class GetUsagePlansRequest < Aws::Structure.new(
+      class GetUsagePlansRequest < Struct.new(
         :position,
         :key_id,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   The zero-based array index specifying the position of the
@@ -2441,13 +2595,15 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #       }
-      class GetUsageRequest < Aws::Structure.new(
+      class GetUsageRequest < Struct.new(
         :usage_plan_id,
         :key_id,
         :start_date,
         :end_date,
         :position,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the usage plan associated with the usage data.
@@ -2485,10 +2641,12 @@ module Aws
       #         format: "csv", # required, accepts csv
       #         fail_on_warnings: false,
       #       }
-      class ImportApiKeysRequest < Aws::Structure.new(
+      class ImportApiKeysRequest < Struct.new(
         :body,
         :format,
         :fail_on_warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] body
         #   The payload of the POST request to import API keys. For the payload
@@ -2523,10 +2681,12 @@ module Aws
       #         },
       #         body: "data", # required
       #       }
-      class ImportRestApiRequest < Aws::Structure.new(
+      class ImportRestApiRequest < Struct.new(
         :fail_on_warnings,
         :parameters,
         :body)
+
+        include Aws::Structure
 
         # @!attribute [rw] fail_on_warnings
         #   A query parameter to indicate whether to rollback the API creation
@@ -2559,7 +2719,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-      class Integration < Aws::Structure.new(
+      class Integration < Struct.new(
         :type,
         :http_method,
         :uri,
@@ -2570,6 +2730,8 @@ module Aws
         :cache_namespace,
         :cache_key_parameters,
         :integration_responses)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   Specifies the integration\'s type. The valid value is `HTTP`, `AWS`,
@@ -2712,11 +2874,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-      class IntegrationResponse < Aws::Structure.new(
+      class IntegrationResponse < Struct.new(
         :status_code,
         :selection_pattern,
         :response_parameters,
         :response_templates)
+
+        include Aws::Structure
 
         # @!attribute [rw] status_code
         #   Specifies the status code that is used to map the integration
@@ -2807,7 +2971,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference
       # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html
-      class Method < Aws::Structure.new(
+      class Method < Struct.new(
         :http_method,
         :authorization_type,
         :authorizer_id,
@@ -2816,6 +2980,8 @@ module Aws
         :request_models,
         :method_responses,
         :method_integration)
+
+        include Aws::Structure
 
         # @!attribute [rw] http_method
         #   The method\'s HTTP verb.
@@ -2964,10 +3130,12 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-      class MethodResponse < Aws::Structure.new(
+      class MethodResponse < Struct.new(
         :status_code,
         :response_parameters,
         :response_models)
+
+        include Aws::Structure
 
         # @!attribute [rw] status_code
         #   The method response\'s status code.
@@ -3001,7 +3169,7 @@ module Aws
       end
 
       # Specifies the method setting properties.
-      class MethodSetting < Aws::Structure.new(
+      class MethodSetting < Struct.new(
         :metrics_enabled,
         :logging_level,
         :data_trace_enabled,
@@ -3012,6 +3180,8 @@ module Aws
         :cache_data_encrypted,
         :require_authorization_for_cache_control,
         :unauthorized_cache_control_header_strategy)
+
+        include Aws::Structure
 
         # @!attribute [rw] metrics_enabled
         #   Specifies whether Amazon CloudWatch metrics are enabled for this
@@ -3088,9 +3258,11 @@ module Aws
 
       # Represents a summary of a Method resource, given a particular date and
       # time.
-      class MethodSnapshot < Aws::Structure.new(
+      class MethodSnapshot < Struct.new(
         :authorization_type,
         :api_key_required)
+
+        include Aws::Structure
 
         # @!attribute [rw] authorization_type
         #   Specifies the type of authorization used for the method.
@@ -3124,12 +3296,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
-      class Model < Aws::Structure.new(
+      class Model < Struct.new(
         :id,
         :name,
         :description,
         :schema,
         :content_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the model resource.
@@ -3171,9 +3345,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
-      class Models < Aws::Structure.new(
+      class Models < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -3196,11 +3372,13 @@ module Aws
       #         value: "String",
       #         from: "String",
       #       }
-      class PatchOperation < Aws::Structure.new(
+      class PatchOperation < Struct.new(
         :op,
         :path,
         :value,
         :from)
+
+        include Aws::Structure
 
         # @!attribute [rw] op
         #   An update operation to be performed with this PATCH request. The
@@ -3260,7 +3438,7 @@ module Aws
       #         cache_namespace: "String",
       #         cache_key_parameters: ["String"],
       #       }
-      class PutIntegrationRequest < Aws::Structure.new(
+      class PutIntegrationRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
@@ -3273,6 +3451,8 @@ module Aws
         :passthrough_behavior,
         :cache_namespace,
         :cache_key_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a put integration request\'s API identifier.
@@ -3373,7 +3553,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class PutIntegrationResponseRequest < Aws::Structure.new(
+      class PutIntegrationResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
@@ -3381,6 +3561,8 @@ module Aws
         :selection_pattern,
         :response_parameters,
         :response_templates)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a put integration response request\'s API identifier.
@@ -3442,7 +3624,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class PutMethodRequest < Aws::Structure.new(
+      class PutMethodRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
@@ -3451,6 +3633,8 @@ module Aws
         :api_key_required,
         :request_parameters,
         :request_models)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the new Method resource.
@@ -3514,13 +3698,15 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class PutMethodResponseRequest < Aws::Structure.new(
+      class PutMethodResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :status_code,
         :response_parameters,
         :response_models)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Method resource.
@@ -3578,12 +3764,14 @@ module Aws
       #         },
       #         body: "data", # required
       #       }
-      class PutRestApiRequest < Aws::Structure.new(
+      class PutRestApiRequest < Struct.new(
         :rest_api_id,
         :mode,
         :fail_on_warnings,
         :parameters,
         :body)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi to be updated.
@@ -3621,10 +3809,12 @@ module Aws
       #         offset: 1,
       #         period: "DAY", # accepts DAY, WEEK, MONTH
       #       }
-      class QuotaSettings < Aws::Structure.new(
+      class QuotaSettings < Struct.new(
         :limit,
         :offset,
         :period)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   The maximum number of requests that can be made in a given time
@@ -3652,12 +3842,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-      class Resource < Aws::Structure.new(
+      class Resource < Struct.new(
         :id,
         :parent_id,
         :path_part,
         :path,
         :resource_methods)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The resource\'s identifier.
@@ -3716,9 +3908,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-      class Resources < Aws::Structure.new(
+      class Resources < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -3738,12 +3932,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-      class RestApi < Aws::Structure.new(
+      class RestApi < Struct.new(
         :id,
         :name,
         :description,
         :created_date,
         :warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The API\'s identifier. This identifier is unique across all of your
@@ -3784,9 +3980,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
-      class RestApis < Aws::Structure.new(
+      class RestApis < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -3798,10 +3996,12 @@ module Aws
       end
 
       # The binary blob response to GetSdk, which contains the generated SDK.
-      class SdkResponse < Aws::Structure.new(
+      class SdkResponse < Struct.new(
         :content_type,
         :content_disposition,
         :body)
+
+        include Aws::Structure
 
         # @!attribute [rw] content_type
         #   The content-type header value in the HTTP response.
@@ -3828,7 +4028,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html
-      class Stage < Aws::Structure.new(
+      class Stage < Struct.new(
         :deployment_id,
         :client_certificate_id,
         :stage_name,
@@ -3840,6 +4040,8 @@ module Aws
         :variables,
         :created_date,
         :last_updated_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The identifier of the Deployment that the stage points to.
@@ -3915,9 +4117,11 @@ module Aws
       #         rest_api_id: "String",
       #         stage_name: "String",
       #       }
-      class StageKey < Aws::Structure.new(
+      class StageKey < Struct.new(
         :rest_api_id,
         :stage_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   A list of Stage resources that are associated with the ApiKey
@@ -3940,8 +4144,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/stages.html
-      class Stages < Aws::Structure.new(
+      class Stages < Struct.new(
         :item)
+
+        include Aws::Structure
 
         # @!attribute [rw] item
         #   An individual Stage resource.
@@ -3958,8 +4164,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html#models-mappings-mappings
-      class Template < Aws::Structure.new(
+      class Template < Struct.new(
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The Apache [Velocity Template Language (VTL)][1] template content
@@ -3991,7 +4199,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class TestInvokeAuthorizerRequest < Aws::Structure.new(
+      class TestInvokeAuthorizerRequest < Struct.new(
         :rest_api_id,
         :authorizer_id,
         :headers,
@@ -3999,6 +4207,8 @@ module Aws
         :body,
         :stage_variables,
         :additional_context)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a test invoke authorizer request\'s RestApi identifier.
@@ -4038,7 +4248,7 @@ module Aws
 
       # Represents the response of the test invoke request for a custom
       # Authorizer
-      class TestInvokeAuthorizerResponse < Aws::Structure.new(
+      class TestInvokeAuthorizerResponse < Struct.new(
         :client_status,
         :log,
         :latency,
@@ -4046,6 +4256,8 @@ module Aws
         :policy,
         :authorization,
         :claims)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_status
         #   The HTTP status code that the client would have received. Value is 0
@@ -4101,7 +4313,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class TestInvokeMethodRequest < Aws::Structure.new(
+      class TestInvokeMethodRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
@@ -4110,6 +4322,8 @@ module Aws
         :headers,
         :client_certificate_id,
         :stage_variables)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies a test invoke method request\'s API identifier.
@@ -4160,12 +4374,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console
-      class TestInvokeMethodResponse < Aws::Structure.new(
+      class TestInvokeMethodResponse < Struct.new(
         :status,
         :body,
         :headers,
         :log,
         :latency)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The HTTP status code.
@@ -4197,9 +4413,11 @@ module Aws
       #         burst_limit: 1,
       #         rate_limit: 1.0,
       #       }
-      class ThrottleSettings < Aws::Structure.new(
+      class ThrottleSettings < Struct.new(
         :burst_limit,
         :rate_limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] burst_limit
         #   The API request burst limit, the maximum rate limit over a time
@@ -4228,8 +4446,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateAccountRequest < Aws::Structure.new(
+      class UpdateAccountRequest < Struct.new(
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] patch_operations
         #   A list of update operations to be applied to the specified resource
@@ -4253,9 +4473,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateApiKeyRequest < Aws::Structure.new(
+      class UpdateApiKeyRequest < Struct.new(
         :api_key,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] api_key
         #   The identifier of the ApiKey resource to be updated.
@@ -4284,10 +4506,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateAuthorizerRequest < Aws::Structure.new(
+      class UpdateAuthorizerRequest < Struct.new(
         :rest_api_id,
         :authorizer_id,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Authorizer resource.
@@ -4320,10 +4544,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateBasePathMappingRequest < Aws::Structure.new(
+      class UpdateBasePathMappingRequest < Struct.new(
         :domain_name,
         :base_path,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain name of the BasePathMapping resource to change.
@@ -4355,9 +4581,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateClientCertificateRequest < Aws::Structure.new(
+      class UpdateClientCertificateRequest < Struct.new(
         :client_certificate_id,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_certificate_id
         #   The identifier of the ClientCertificate resource to be updated.
@@ -4387,10 +4615,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateDeploymentRequest < Aws::Structure.new(
+      class UpdateDeploymentRequest < Struct.new(
         :rest_api_id,
         :deployment_id,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The replacement identifier of the RestApi resource for the
@@ -4424,9 +4654,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateDomainNameRequest < Aws::Structure.new(
+      class UpdateDomainNameRequest < Struct.new(
         :domain_name,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the DomainName resource to be changed.
@@ -4456,11 +4688,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateIntegrationRequest < Aws::Structure.new(
+      class UpdateIntegrationRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Represents an update integration request\'s API identifier.
@@ -4499,12 +4733,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateIntegrationResponseRequest < Aws::Structure.new(
+      class UpdateIntegrationResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :status_code,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   Specifies an update integration response request\'s API identifier.
@@ -4547,11 +4783,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateMethodRequest < Aws::Structure.new(
+      class UpdateMethodRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Method resource.
@@ -4590,12 +4828,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateMethodResponseRequest < Aws::Structure.new(
+      class UpdateMethodResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :http_method,
         :status_code,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the MethodResponse resource.
@@ -4636,10 +4876,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateModelRequest < Aws::Structure.new(
+      class UpdateModelRequest < Struct.new(
         :rest_api_id,
         :model_name,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier under which the model exists.
@@ -4672,10 +4914,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateResourceRequest < Aws::Structure.new(
+      class UpdateResourceRequest < Struct.new(
         :rest_api_id,
         :resource_id,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The RestApi identifier for the Resource resource.
@@ -4707,9 +4951,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateRestApiRequest < Aws::Structure.new(
+      class UpdateRestApiRequest < Struct.new(
         :rest_api_id,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The ID of the RestApi you want to update.
@@ -4739,10 +4985,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateStageRequest < Aws::Structure.new(
+      class UpdateStageRequest < Struct.new(
         :rest_api_id,
         :stage_name,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] rest_api_id
         #   The identifier of the RestApi resource for the Stage resource to
@@ -4775,9 +5023,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateUsagePlanRequest < Aws::Structure.new(
+      class UpdateUsagePlanRequest < Struct.new(
         :usage_plan_id,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the to-be-updated usage plan.
@@ -4807,10 +5057,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateUsageRequest < Aws::Structure.new(
+      class UpdateUsageRequest < Struct.new(
         :usage_plan_id,
         :key_id,
         :patch_operations)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The Id of the usage plan associated with the usage data.
@@ -4840,12 +5092,14 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
       # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-create-usage-plans-with-console.html#api-gateway-usage-plan-manage-usage
-      class Usage < Aws::Structure.new(
+      class Usage < Struct.new(
         :usage_plan_id,
         :start_date,
         :end_date,
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] usage_plan_id
         #   The plan Id associated with this usage data.
@@ -4890,13 +5144,15 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
-      class UsagePlan < Aws::Structure.new(
+      class UsagePlan < Struct.new(
         :id,
         :name,
         :description,
         :api_stages,
         :throttle,
         :quota)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of a UsagePlan resource.
@@ -4940,11 +5196,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
-      class UsagePlanKey < Aws::Structure.new(
+      class UsagePlanKey < Struct.new(
         :id,
         :type,
         :value,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The Id of a usage plan key.
@@ -4975,9 +5233,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
-      class UsagePlanKeys < Aws::Structure.new(
+      class UsagePlanKeys < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]
@@ -4997,9 +5257,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
-      class UsagePlans < Aws::Structure.new(
+      class UsagePlans < Struct.new(
         :position,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] position
         #   @return [String]

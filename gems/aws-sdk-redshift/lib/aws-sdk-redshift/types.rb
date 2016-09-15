@@ -10,8 +10,10 @@ module Aws
     module Types
 
       # Describes an AWS customer account authorized to restore a snapshot.
-      class AccountWithRestoreAccess < Aws::Structure.new(
+      class AccountWithRestoreAccess < Struct.new(
         :account_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The identifier of an AWS customer account authorized to restore a
@@ -29,11 +31,13 @@ module Aws
       #         ec2_security_group_name: "String",
       #         ec2_security_group_owner_id: "String",
       #       }
-      class AuthorizeClusterSecurityGroupIngressMessage < Aws::Structure.new(
+      class AuthorizeClusterSecurityGroupIngressMessage < Struct.new(
         :cluster_security_group_name,
         :cidrip,
         :ec2_security_group_name,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group_name
         #   The name of the security group to which the ingress rule is added.
@@ -58,8 +62,10 @@ module Aws
 
       end
 
-      class AuthorizeClusterSecurityGroupIngressResult < Aws::Structure.new(
+      class AuthorizeClusterSecurityGroupIngressResult < Struct.new(
         :cluster_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group
         #   Describes a security group.
@@ -75,10 +81,12 @@ module Aws
       #         snapshot_cluster_identifier: "String",
       #         account_with_restore_access: "String", # required
       #       }
-      class AuthorizeSnapshotAccessMessage < Aws::Structure.new(
+      class AuthorizeSnapshotAccessMessage < Struct.new(
         :snapshot_identifier,
         :snapshot_cluster_identifier,
         :account_with_restore_access)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_identifier
         #   The identifier of the snapshot the account is authorized to restore.
@@ -98,8 +106,10 @@ module Aws
 
       end
 
-      class AuthorizeSnapshotAccessResult < Aws::Structure.new(
+      class AuthorizeSnapshotAccessResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Describes a snapshot.
@@ -108,8 +118,10 @@ module Aws
       end
 
       # Describes an availability zone.
-      class AvailabilityZone < Aws::Structure.new(
+      class AvailabilityZone < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the availability zone.
@@ -118,7 +130,7 @@ module Aws
       end
 
       # Describes a cluster.
-      class Cluster < Aws::Structure.new(
+      class Cluster < Struct.new(
         :cluster_identifier,
         :node_type,
         :cluster_status,
@@ -151,6 +163,8 @@ module Aws
         :tags,
         :kms_key_id,
         :iam_roles)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of the cluster.
@@ -327,9 +341,11 @@ module Aws
 
       # An AWS Identity and Access Management (IAM) role that can be used by
       # the associated Amazon Redshift cluster to access other AWS services.
-      class ClusterIamRole < Aws::Structure.new(
+      class ClusterIamRole < Struct.new(
         :iam_role_arn,
         :apply_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_role_arn
         #   The Amazon Resource Name (ARN) of the IAM role. For example,
@@ -351,10 +367,12 @@ module Aws
       end
 
       # The identifier of a node in a cluster.
-      class ClusterNode < Aws::Structure.new(
+      class ClusterNode < Struct.new(
         :node_role,
         :private_ip_address,
         :public_ip_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] node_role
         #   Whether the node is a leader node or a compute node.
@@ -371,11 +389,13 @@ module Aws
       end
 
       # Describes a parameter group.
-      class ClusterParameterGroup < Aws::Structure.new(
+      class ClusterParameterGroup < Struct.new(
         :parameter_group_name,
         :parameter_group_family,
         :description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of the cluster parameter group.
@@ -397,9 +417,11 @@ module Aws
       end
 
       # Contains the output from the DescribeClusterParameters action.
-      class ClusterParameterGroupDetails < Aws::Structure.new(
+      class ClusterParameterGroupDetails < Struct.new(
         :parameters,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameters
         #   A list of Parameter instances. Each instance lists the parameters of
@@ -417,9 +439,11 @@ module Aws
 
       end
 
-      class ClusterParameterGroupNameMessage < Aws::Structure.new(
+      class ClusterParameterGroupNameMessage < Struct.new(
         :parameter_group_name,
         :parameter_group_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of the cluster parameter group.
@@ -434,10 +458,12 @@ module Aws
       end
 
       # Describes the status of a parameter group.
-      class ClusterParameterGroupStatus < Aws::Structure.new(
+      class ClusterParameterGroupStatus < Struct.new(
         :parameter_group_name,
         :parameter_apply_status,
         :cluster_parameter_status_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of the cluster parameter group.
@@ -462,9 +488,11 @@ module Aws
       end
 
       # Contains the output from the DescribeClusterParameterGroups action.
-      class ClusterParameterGroupsMessage < Aws::Structure.new(
+      class ClusterParameterGroupsMessage < Struct.new(
         :marker,
         :parameter_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -483,10 +511,12 @@ module Aws
       end
 
       # Describes the status of a parameter group.
-      class ClusterParameterStatus < Aws::Structure.new(
+      class ClusterParameterStatus < Struct.new(
         :parameter_name,
         :parameter_apply_status,
         :parameter_apply_error_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_name
         #   The name of the parameter.
@@ -520,12 +550,14 @@ module Aws
       end
 
       # Describes a security group.
-      class ClusterSecurityGroup < Aws::Structure.new(
+      class ClusterSecurityGroup < Struct.new(
         :cluster_security_group_name,
         :description,
         :ec2_security_groups,
         :ip_ranges,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group_name
         #   The name of the cluster security group to which the operation was
@@ -553,9 +585,11 @@ module Aws
       end
 
       # Describes a cluster security group.
-      class ClusterSecurityGroupMembership < Aws::Structure.new(
+      class ClusterSecurityGroupMembership < Struct.new(
         :cluster_security_group_name,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group_name
         #   The name of the cluster security group.
@@ -567,9 +601,11 @@ module Aws
 
       end
 
-      class ClusterSecurityGroupMessage < Aws::Structure.new(
+      class ClusterSecurityGroupMessage < Struct.new(
         :marker,
         :cluster_security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -588,10 +624,12 @@ module Aws
 
       # Returns the destination region and retention period that are
       # configured for cross-region snapshot copy.
-      class ClusterSnapshotCopyStatus < Aws::Structure.new(
+      class ClusterSnapshotCopyStatus < Struct.new(
         :destination_region,
         :retention_period,
         :snapshot_copy_grant_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_region
         #   The destination region that snapshots are automatically copied to
@@ -610,13 +648,15 @@ module Aws
       end
 
       # Describes a subnet group.
-      class ClusterSubnetGroup < Aws::Structure.new(
+      class ClusterSubnetGroup < Struct.new(
         :cluster_subnet_group_name,
         :description,
         :vpc_id,
         :subnet_group_status,
         :subnets,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_subnet_group_name
         #   The name of the cluster subnet group.
@@ -646,9 +686,11 @@ module Aws
       end
 
       # Contains the output from the DescribeClusterSubnetGroups action.
-      class ClusterSubnetGroupMessage < Aws::Structure.new(
+      class ClusterSubnetGroupMessage < Struct.new(
         :marker,
         :cluster_subnet_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -667,10 +709,12 @@ module Aws
 
       # Describes a cluster version, including the parameter group family and
       # description of the version.
-      class ClusterVersion < Aws::Structure.new(
+      class ClusterVersion < Struct.new(
         :cluster_version,
         :cluster_parameter_group_family,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_version
         #   The version number used by the cluster.
@@ -687,9 +731,11 @@ module Aws
       end
 
       # Contains the output from the DescribeClusterVersions action.
-      class ClusterVersionsMessage < Aws::Structure.new(
+      class ClusterVersionsMessage < Struct.new(
         :marker,
         :cluster_versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -707,9 +753,11 @@ module Aws
       end
 
       # Contains the output from the DescribeClusters action.
-      class ClustersMessage < Aws::Structure.new(
+      class ClustersMessage < Struct.new(
         :marker,
         :clusters)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -735,10 +783,12 @@ module Aws
       #         source_snapshot_cluster_identifier: "String",
       #         target_snapshot_identifier: "String", # required
       #       }
-      class CopyClusterSnapshotMessage < Aws::Structure.new(
+      class CopyClusterSnapshotMessage < Struct.new(
         :source_snapshot_identifier,
         :source_snapshot_cluster_identifier,
         :target_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_snapshot_identifier
         #   The identifier for the source snapshot.
@@ -774,8 +824,10 @@ module Aws
 
       end
 
-      class CopyClusterSnapshotResult < Aws::Structure.new(
+      class CopyClusterSnapshotResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Describes a snapshot.
@@ -819,7 +871,7 @@ module Aws
       #         additional_info: "String",
       #         iam_roles: ["String"],
       #       }
-      class CreateClusterMessage < Aws::Structure.new(
+      class CreateClusterMessage < Struct.new(
         :db_name,
         :cluster_identifier,
         :cluster_type,
@@ -846,6 +898,8 @@ module Aws
         :kms_key_id,
         :additional_info,
         :iam_roles)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_name
         #   The name of the first database to be created when the cluster is
@@ -1161,11 +1215,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateClusterParameterGroupMessage < Aws::Structure.new(
+      class CreateClusterParameterGroupMessage < Struct.new(
         :parameter_group_name,
         :parameter_group_family,
         :description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of the cluster parameter group.
@@ -1204,8 +1260,10 @@ module Aws
 
       end
 
-      class CreateClusterParameterGroupResult < Aws::Structure.new(
+      class CreateClusterParameterGroupResult < Struct.new(
         :cluster_parameter_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_parameter_group
         #   Describes a parameter group.
@@ -1213,8 +1271,10 @@ module Aws
 
       end
 
-      class CreateClusterResult < Aws::Structure.new(
+      class CreateClusterResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -1235,10 +1295,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateClusterSecurityGroupMessage < Aws::Structure.new(
+      class CreateClusterSecurityGroupMessage < Struct.new(
         :cluster_security_group_name,
         :description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group_name
         #   The name for the security group. Amazon Redshift stores the value as
@@ -1264,8 +1326,10 @@ module Aws
 
       end
 
-      class CreateClusterSecurityGroupResult < Aws::Structure.new(
+      class CreateClusterSecurityGroupResult < Struct.new(
         :cluster_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group
         #   Describes a security group.
@@ -1286,10 +1350,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateClusterSnapshotMessage < Aws::Structure.new(
+      class CreateClusterSnapshotMessage < Struct.new(
         :snapshot_identifier,
         :cluster_identifier,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_identifier
         #   A unique identifier for the snapshot that you are requesting. This
@@ -1315,8 +1381,10 @@ module Aws
 
       end
 
-      class CreateClusterSnapshotResult < Aws::Structure.new(
+      class CreateClusterSnapshotResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Describes a snapshot.
@@ -1338,11 +1406,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateClusterSubnetGroupMessage < Aws::Structure.new(
+      class CreateClusterSubnetGroupMessage < Struct.new(
         :cluster_subnet_group_name,
         :description,
         :subnet_ids,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_subnet_group_name
         #   The name for the subnet group. Amazon Redshift stores the value as a
@@ -1373,8 +1443,10 @@ module Aws
 
       end
 
-      class CreateClusterSubnetGroupResult < Aws::Structure.new(
+      class CreateClusterSubnetGroupResult < Struct.new(
         :cluster_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_subnet_group
         #   Describes a subnet group.
@@ -1400,7 +1472,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateEventSubscriptionMessage < Aws::Structure.new(
+      class CreateEventSubscriptionMessage < Struct.new(
         :subscription_name,
         :sns_topic_arn,
         :source_type,
@@ -1409,6 +1481,8 @@ module Aws
         :severity,
         :enabled,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the event subscription to be created.
@@ -1477,8 +1551,10 @@ module Aws
 
       end
 
-      class CreateEventSubscriptionResult < Aws::Structure.new(
+      class CreateEventSubscriptionResult < Struct.new(
         :event_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_subscription
         #   Describes event subscriptions.
@@ -1498,9 +1574,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateHsmClientCertificateMessage < Aws::Structure.new(
+      class CreateHsmClientCertificateMessage < Struct.new(
         :hsm_client_certificate_identifier,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_client_certificate_identifier
         #   The identifier to be assigned to the new HSM client certificate that
@@ -1514,8 +1592,10 @@ module Aws
 
       end
 
-      class CreateHsmClientCertificateResult < Aws::Structure.new(
+      class CreateHsmClientCertificateResult < Struct.new(
         :hsm_client_certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_client_certificate
         #   Returns information about an HSM client certificate. The certificate
@@ -1542,7 +1622,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateHsmConfigurationMessage < Aws::Structure.new(
+      class CreateHsmConfigurationMessage < Struct.new(
         :hsm_configuration_identifier,
         :description,
         :hsm_ip_address,
@@ -1550,6 +1630,8 @@ module Aws
         :hsm_partition_password,
         :hsm_server_public_certificate,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_configuration_identifier
         #   The identifier to be assigned to the new Amazon Redshift HSM
@@ -1585,8 +1667,10 @@ module Aws
 
       end
 
-      class CreateHsmConfigurationResult < Aws::Structure.new(
+      class CreateHsmConfigurationResult < Struct.new(
         :hsm_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_configuration
         #   Returns information about an HSM configuration, which is an object
@@ -1611,10 +1695,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateSnapshotCopyGrantMessage < Aws::Structure.new(
+      class CreateSnapshotCopyGrantMessage < Struct.new(
         :snapshot_copy_grant_name,
         :kms_key_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_copy_grant_name
         #   The name of the snapshot copy grant. This name must be unique in the
@@ -1641,8 +1727,10 @@ module Aws
 
       end
 
-      class CreateSnapshotCopyGrantResult < Aws::Structure.new(
+      class CreateSnapshotCopyGrantResult < Struct.new(
         :snapshot_copy_grant)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_copy_grant
         #   The snapshot copy grant that grants Amazon Redshift permission to
@@ -1673,9 +1761,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateTagsMessage < Aws::Structure.new(
+      class CreateTagsMessage < Struct.new(
         :resource_name,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon Resource Name (ARN) to which you want to add the tag or
@@ -1696,10 +1786,12 @@ module Aws
       end
 
       # Describes the default cluster parameters for a parameter group family.
-      class DefaultClusterParameters < Aws::Structure.new(
+      class DefaultClusterParameters < Struct.new(
         :parameter_group_family,
         :marker,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_family
         #   The name of the cluster parameter group family to which the engine
@@ -1729,10 +1821,12 @@ module Aws
       #         skip_final_cluster_snapshot: false,
       #         final_cluster_snapshot_identifier: "String",
       #       }
-      class DeleteClusterMessage < Aws::Structure.new(
+      class DeleteClusterMessage < Struct.new(
         :cluster_identifier,
         :skip_final_cluster_snapshot,
         :final_cluster_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The identifier of the cluster to be deleted.
@@ -1776,8 +1870,10 @@ module Aws
       #       {
       #         parameter_group_name: "String", # required
       #       }
-      class DeleteClusterParameterGroupMessage < Aws::Structure.new(
+      class DeleteClusterParameterGroupMessage < Struct.new(
         :parameter_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of the parameter group to be deleted.
@@ -1790,8 +1886,10 @@ module Aws
 
       end
 
-      class DeleteClusterResult < Aws::Structure.new(
+      class DeleteClusterResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -1805,8 +1903,10 @@ module Aws
       #       {
       #         cluster_security_group_name: "String", # required
       #       }
-      class DeleteClusterSecurityGroupMessage < Aws::Structure.new(
+      class DeleteClusterSecurityGroupMessage < Struct.new(
         :cluster_security_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group_name
         #   The name of the cluster security group to be deleted.
@@ -1821,9 +1921,11 @@ module Aws
       #         snapshot_identifier: "String", # required
       #         snapshot_cluster_identifier: "String",
       #       }
-      class DeleteClusterSnapshotMessage < Aws::Structure.new(
+      class DeleteClusterSnapshotMessage < Struct.new(
         :snapshot_identifier,
         :snapshot_cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_identifier
         #   The unique identifier of the manual snapshot to be deleted.
@@ -1843,8 +1945,10 @@ module Aws
 
       end
 
-      class DeleteClusterSnapshotResult < Aws::Structure.new(
+      class DeleteClusterSnapshotResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Describes a snapshot.
@@ -1858,8 +1962,10 @@ module Aws
       #       {
       #         cluster_subnet_group_name: "String", # required
       #       }
-      class DeleteClusterSubnetGroupMessage < Aws::Structure.new(
+      class DeleteClusterSubnetGroupMessage < Struct.new(
         :cluster_subnet_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_subnet_group_name
         #   The name of the cluster subnet group name to be deleted.
@@ -1873,8 +1979,10 @@ module Aws
       #       {
       #         subscription_name: "String", # required
       #       }
-      class DeleteEventSubscriptionMessage < Aws::Structure.new(
+      class DeleteEventSubscriptionMessage < Struct.new(
         :subscription_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the Amazon Redshift event notification subscription to
@@ -1889,8 +1997,10 @@ module Aws
       #       {
       #         hsm_client_certificate_identifier: "String", # required
       #       }
-      class DeleteHsmClientCertificateMessage < Aws::Structure.new(
+      class DeleteHsmClientCertificateMessage < Struct.new(
         :hsm_client_certificate_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_client_certificate_identifier
         #   The identifier of the HSM client certificate to be deleted.
@@ -1904,8 +2014,10 @@ module Aws
       #       {
       #         hsm_configuration_identifier: "String", # required
       #       }
-      class DeleteHsmConfigurationMessage < Aws::Structure.new(
+      class DeleteHsmConfigurationMessage < Struct.new(
         :hsm_configuration_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_configuration_identifier
         #   The identifier of the Amazon Redshift HSM configuration to be
@@ -1921,8 +2033,10 @@ module Aws
       #       {
       #         snapshot_copy_grant_name: "String", # required
       #       }
-      class DeleteSnapshotCopyGrantMessage < Aws::Structure.new(
+      class DeleteSnapshotCopyGrantMessage < Struct.new(
         :snapshot_copy_grant_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_copy_grant_name
         #   The name of the snapshot copy grant to delete.
@@ -1938,9 +2052,11 @@ module Aws
       #         resource_name: "String", # required
       #         tag_keys: ["String"], # required
       #       }
-      class DeleteTagsMessage < Aws::Structure.new(
+      class DeleteTagsMessage < Struct.new(
         :resource_name,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon Resource Name (ARN) from which you want to remove the tag
@@ -1964,12 +2080,14 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeClusterParameterGroupsMessage < Aws::Structure.new(
+      class DescribeClusterParameterGroupsMessage < Struct.new(
         :parameter_group_name,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of a specific parameter group for which to return details.
@@ -2030,11 +2148,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeClusterParametersMessage < Aws::Structure.new(
+      class DescribeClusterParametersMessage < Struct.new(
         :parameter_group_name,
         :source,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of a cluster parameter group for which to return details.
@@ -2085,12 +2205,14 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeClusterSecurityGroupsMessage < Aws::Structure.new(
+      class DescribeClusterSecurityGroupsMessage < Struct.new(
         :cluster_security_group_name,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group_name
         #   The name of a cluster security group for which you are requesting
@@ -2162,7 +2284,7 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeClusterSnapshotsMessage < Aws::Structure.new(
+      class DescribeClusterSnapshotsMessage < Struct.new(
         :cluster_identifier,
         :snapshot_identifier,
         :snapshot_type,
@@ -2173,6 +2295,8 @@ module Aws
         :owner_account,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The identifier of the cluster for which information about snapshots
@@ -2278,12 +2402,14 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeClusterSubnetGroupsMessage < Aws::Structure.new(
+      class DescribeClusterSubnetGroupsMessage < Struct.new(
         :cluster_subnet_group_name,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_subnet_group_name
         #   The name of the cluster subnet group for which information is
@@ -2343,11 +2469,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeClusterVersionsMessage < Aws::Structure.new(
+      class DescribeClusterVersionsMessage < Struct.new(
         :cluster_version,
         :cluster_parameter_group_family,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_version
         #   The specific cluster version to return.
@@ -2400,12 +2528,14 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeClustersMessage < Aws::Structure.new(
+      class DescribeClustersMessage < Struct.new(
         :cluster_identifier,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of a cluster whose properties you are
@@ -2468,10 +2598,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDefaultClusterParametersMessage < Aws::Structure.new(
+      class DescribeDefaultClusterParametersMessage < Struct.new(
         :parameter_group_family,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_family
         #   The name of the cluster parameter group family.
@@ -2501,8 +2633,10 @@ module Aws
 
       end
 
-      class DescribeDefaultClusterParametersResult < Aws::Structure.new(
+      class DescribeDefaultClusterParametersResult < Struct.new(
         :default_cluster_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_cluster_parameters
         #   Describes the default cluster parameters for a parameter group
@@ -2517,8 +2651,10 @@ module Aws
       #       {
       #         source_type: "String",
       #       }
-      class DescribeEventCategoriesMessage < Aws::Structure.new(
+      class DescribeEventCategoriesMessage < Struct.new(
         :source_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_type
         #   The source type, such as cluster or parameter group, to which the
@@ -2538,10 +2674,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEventSubscriptionsMessage < Aws::Structure.new(
+      class DescribeEventSubscriptionsMessage < Struct.new(
         :subscription_name,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the Amazon Redshift event notification subscription to
@@ -2584,7 +2722,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEventsMessage < Aws::Structure.new(
+      class DescribeEventsMessage < Struct.new(
         :source_identifier,
         :source_type,
         :start_time,
@@ -2592,6 +2730,8 @@ module Aws
         :duration,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_identifier
         #   The identifier of the event source for which events will be
@@ -2696,12 +2836,14 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeHsmClientCertificatesMessage < Aws::Structure.new(
+      class DescribeHsmClientCertificatesMessage < Struct.new(
         :hsm_client_certificate_identifier,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_client_certificate_identifier
         #   The identifier of a specific HSM client certificate for which you
@@ -2764,12 +2906,14 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeHsmConfigurationsMessage < Aws::Structure.new(
+      class DescribeHsmConfigurationsMessage < Struct.new(
         :hsm_configuration_identifier,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_configuration_identifier
         #   The identifier of a specific Amazon Redshift HSM configuration to be
@@ -2827,8 +2971,10 @@ module Aws
       #       {
       #         cluster_identifier: "String", # required
       #       }
-      class DescribeLoggingStatusMessage < Aws::Structure.new(
+      class DescribeLoggingStatusMessage < Struct.new(
         :cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The identifier of the cluster from which to get the logging status.
@@ -2847,11 +2993,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeOrderableClusterOptionsMessage < Aws::Structure.new(
+      class DescribeOrderableClusterOptionsMessage < Struct.new(
         :cluster_version,
         :node_type,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_version
         #   The version filter value. Specify this parameter to show only the
@@ -2900,10 +3048,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReservedNodeOfferingsMessage < Aws::Structure.new(
+      class DescribeReservedNodeOfferingsMessage < Struct.new(
         :reserved_node_offering_id,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_node_offering_id
         #   The unique identifier for the offering.
@@ -2941,10 +3091,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReservedNodesMessage < Aws::Structure.new(
+      class DescribeReservedNodesMessage < Struct.new(
         :reserved_node_id,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_node_id
         #   Identifier for the node reservation.
@@ -2979,8 +3131,10 @@ module Aws
       #       {
       #         cluster_identifier: "String", # required
       #       }
-      class DescribeResizeMessage < Aws::Structure.new(
+      class DescribeResizeMessage < Struct.new(
         :cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of a cluster whose resize progress you are
@@ -3003,12 +3157,14 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeSnapshotCopyGrantsMessage < Aws::Structure.new(
+      class DescribeSnapshotCopyGrantsMessage < Struct.new(
         :snapshot_copy_grant_name,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_copy_grant_name
         #   The name of the snapshot copy grant.
@@ -3069,11 +3225,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeTableRestoreStatusMessage < Aws::Structure.new(
+      class DescribeTableRestoreStatusMessage < Struct.new(
         :cluster_identifier,
         :table_restore_request_id,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The Amazon Redshift cluster that the table is being restored to.
@@ -3113,13 +3271,15 @@ module Aws
       #         tag_keys: ["String"],
       #         tag_values: ["String"],
       #       }
-      class DescribeTagsMessage < Aws::Structure.new(
+      class DescribeTagsMessage < Struct.new(
         :resource_name,
         :resource_type,
         :max_records,
         :marker,
         :tag_keys,
         :tag_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon Resource Name (ARN) for which you want to describe the
@@ -3194,8 +3354,10 @@ module Aws
       #       {
       #         cluster_identifier: "String", # required
       #       }
-      class DisableLoggingMessage < Aws::Structure.new(
+      class DisableLoggingMessage < Struct.new(
         :cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The identifier of the cluster on which logging is to be stopped.
@@ -3211,8 +3373,10 @@ module Aws
       #       {
       #         cluster_identifier: "String", # required
       #       }
-      class DisableSnapshotCopyMessage < Aws::Structure.new(
+      class DisableSnapshotCopyMessage < Struct.new(
         :cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of the source cluster that you want to disable
@@ -3224,8 +3388,10 @@ module Aws
 
       end
 
-      class DisableSnapshotCopyResult < Aws::Structure.new(
+      class DisableSnapshotCopyResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -3234,11 +3400,13 @@ module Aws
       end
 
       # Describes an Amazon EC2 security group.
-      class EC2SecurityGroup < Aws::Structure.new(
+      class EC2SecurityGroup < Struct.new(
         :status,
         :ec2_security_group_name,
         :ec2_security_group_owner_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the EC2 security group.
@@ -3260,9 +3428,11 @@ module Aws
       end
 
       # Describes the status of the elastic IP (EIP) address.
-      class ElasticIpStatus < Aws::Structure.new(
+      class ElasticIpStatus < Struct.new(
         :elastic_ip,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ip
         #   The elastic IP (EIP) address for the cluster.
@@ -3282,10 +3452,12 @@ module Aws
       #         bucket_name: "String", # required
       #         s3_key_prefix: "String",
       #       }
-      class EnableLoggingMessage < Aws::Structure.new(
+      class EnableLoggingMessage < Struct.new(
         :cluster_identifier,
         :bucket_name,
         :s3_key_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The identifier of the cluster on which logging is to be started.
@@ -3330,11 +3502,13 @@ module Aws
       #         retention_period: 1,
       #         snapshot_copy_grant_name: "String",
       #       }
-      class EnableSnapshotCopyMessage < Aws::Structure.new(
+      class EnableSnapshotCopyMessage < Struct.new(
         :cluster_identifier,
         :destination_region,
         :retention_period,
         :snapshot_copy_grant_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of the source cluster to copy snapshots from.
@@ -3371,8 +3545,10 @@ module Aws
 
       end
 
-      class EnableSnapshotCopyResult < Aws::Structure.new(
+      class EnableSnapshotCopyResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -3381,9 +3557,11 @@ module Aws
       end
 
       # Describes a connection endpoint.
-      class Endpoint < Aws::Structure.new(
+      class Endpoint < Struct.new(
         :address,
         :port)
+
+        include Aws::Structure
 
         # @!attribute [rw] address
         #   The DNS address of the Cluster.
@@ -3396,7 +3574,7 @@ module Aws
       end
 
       # Describes an event.
-      class Event < Aws::Structure.new(
+      class Event < Struct.new(
         :source_identifier,
         :source_type,
         :message,
@@ -3404,6 +3582,8 @@ module Aws
         :severity,
         :date,
         :event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_identifier
         #   The identifier for the source of the event.
@@ -3440,9 +3620,11 @@ module Aws
       end
 
       # Describes event categories.
-      class EventCategoriesMap < Aws::Structure.new(
+      class EventCategoriesMap < Struct.new(
         :source_type,
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_type
         #   The source type, such as cluster or cluster-snapshot, that the
@@ -3455,8 +3637,10 @@ module Aws
 
       end
 
-      class EventCategoriesMessage < Aws::Structure.new(
+      class EventCategoriesMessage < Struct.new(
         :event_categories_map_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_categories_map_list
         #   A list of event categories descriptions.
@@ -3465,11 +3649,13 @@ module Aws
       end
 
       # Describes event information.
-      class EventInfoMap < Aws::Structure.new(
+      class EventInfoMap < Struct.new(
         :event_id,
         :event_categories,
         :event_description,
         :severity)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_id
         #   The identifier of an Amazon Redshift event.
@@ -3492,7 +3678,7 @@ module Aws
       end
 
       # Describes event subscriptions.
-      class EventSubscription < Aws::Structure.new(
+      class EventSubscription < Struct.new(
         :customer_aws_id,
         :cust_subscription_id,
         :sns_topic_arn,
@@ -3504,6 +3690,8 @@ module Aws
         :severity,
         :enabled,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] customer_aws_id
         #   The AWS customer account associated with the Amazon Redshift event
@@ -3572,9 +3760,11 @@ module Aws
 
       end
 
-      class EventSubscriptionsMessage < Aws::Structure.new(
+      class EventSubscriptionsMessage < Struct.new(
         :marker,
         :event_subscriptions_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -3591,9 +3781,11 @@ module Aws
 
       end
 
-      class EventsMessage < Aws::Structure.new(
+      class EventsMessage < Struct.new(
         :marker,
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -3613,10 +3805,12 @@ module Aws
       # Returns information about an HSM client certificate. The certificate
       # is stored in a secure Hardware Storage Module (HSM), and used by the
       # Amazon Redshift cluster to encrypt data files.
-      class HsmClientCertificate < Aws::Structure.new(
+      class HsmClientCertificate < Struct.new(
         :hsm_client_certificate_identifier,
         :hsm_client_certificate_public_key,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_client_certificate_identifier
         #   The identifier of the HSM client certificate.
@@ -3633,9 +3827,11 @@ module Aws
 
       end
 
-      class HsmClientCertificateMessage < Aws::Structure.new(
+      class HsmClientCertificateMessage < Struct.new(
         :marker,
         :hsm_client_certificates)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -3658,12 +3854,14 @@ module Aws
       # that describes to Amazon Redshift clusters the information they
       # require to connect to an HSM where they can store database encryption
       # keys.
-      class HsmConfiguration < Aws::Structure.new(
+      class HsmConfiguration < Struct.new(
         :hsm_configuration_identifier,
         :description,
         :hsm_ip_address,
         :hsm_partition_name,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_configuration_identifier
         #   The name of the Amazon Redshift HSM configuration.
@@ -3689,9 +3887,11 @@ module Aws
 
       end
 
-      class HsmConfigurationMessage < Aws::Structure.new(
+      class HsmConfigurationMessage < Struct.new(
         :marker,
         :hsm_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -3709,10 +3909,12 @@ module Aws
       end
 
       # Describes the status of changes to HSM settings.
-      class HsmStatus < Aws::Structure.new(
+      class HsmStatus < Struct.new(
         :hsm_client_certificate_identifier,
         :hsm_configuration_identifier,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_client_certificate_identifier
         #   Specifies the name of the HSM client certificate the Amazon Redshift
@@ -3735,10 +3937,12 @@ module Aws
       end
 
       # Describes an IP range used in a security group.
-      class IPRange < Aws::Structure.new(
+      class IPRange < Struct.new(
         :status,
         :cidrip,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the IP range, for example, \"authorized\".
@@ -3755,13 +3959,15 @@ module Aws
       end
 
       # Describes the status of logging for a cluster.
-      class LoggingStatus < Aws::Structure.new(
+      class LoggingStatus < Struct.new(
         :logging_enabled,
         :bucket_name,
         :s3_key_prefix,
         :last_successful_delivery_time,
         :last_failure_time,
         :last_failure_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] logging_enabled
         #   `true` if logging is on, `false` if logging is off.
@@ -3797,10 +4003,12 @@ module Aws
       #         add_iam_roles: ["String"],
       #         remove_iam_roles: ["String"],
       #       }
-      class ModifyClusterIamRolesMessage < Aws::Structure.new(
+      class ModifyClusterIamRolesMessage < Struct.new(
         :cluster_identifier,
         :add_iam_roles,
         :remove_iam_roles)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of the cluster for which you want to associate
@@ -3821,8 +4029,10 @@ module Aws
 
       end
 
-      class ModifyClusterIamRolesResult < Aws::Structure.new(
+      class ModifyClusterIamRolesResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -3852,7 +4062,7 @@ module Aws
       #         publicly_accessible: false,
       #         elastic_ip: "String",
       #       }
-      class ModifyClusterMessage < Aws::Structure.new(
+      class ModifyClusterMessage < Struct.new(
         :cluster_identifier,
         :cluster_type,
         :node_type,
@@ -3870,6 +4080,8 @@ module Aws
         :new_cluster_identifier,
         :publicly_accessible,
         :elastic_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of the cluster to be modified.
@@ -4098,9 +4310,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyClusterParameterGroupMessage < Aws::Structure.new(
+      class ModifyClusterParameterGroupMessage < Struct.new(
         :parameter_group_name,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of the parameter group to be modified.
@@ -4120,8 +4334,10 @@ module Aws
 
       end
 
-      class ModifyClusterResult < Aws::Structure.new(
+      class ModifyClusterResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -4137,10 +4353,12 @@ module Aws
       #         description: "String",
       #         subnet_ids: ["String"], # required
       #       }
-      class ModifyClusterSubnetGroupMessage < Aws::Structure.new(
+      class ModifyClusterSubnetGroupMessage < Struct.new(
         :cluster_subnet_group_name,
         :description,
         :subnet_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_subnet_group_name
         #   The name of the subnet group to be modified.
@@ -4157,8 +4375,10 @@ module Aws
 
       end
 
-      class ModifyClusterSubnetGroupResult < Aws::Structure.new(
+      class ModifyClusterSubnetGroupResult < Struct.new(
         :cluster_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_subnet_group
         #   Describes a subnet group.
@@ -4178,7 +4398,7 @@ module Aws
       #         severity: "String",
       #         enabled: false,
       #       }
-      class ModifyEventSubscriptionMessage < Aws::Structure.new(
+      class ModifyEventSubscriptionMessage < Struct.new(
         :subscription_name,
         :sns_topic_arn,
         :source_type,
@@ -4186,6 +4406,8 @@ module Aws
         :event_categories,
         :severity,
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the modified Amazon Redshift event notification
@@ -4243,8 +4465,10 @@ module Aws
 
       end
 
-      class ModifyEventSubscriptionResult < Aws::Structure.new(
+      class ModifyEventSubscriptionResult < Struct.new(
         :event_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_subscription
         #   Describes event subscriptions.
@@ -4259,9 +4483,11 @@ module Aws
       #         cluster_identifier: "String", # required
       #         retention_period: 1, # required
       #       }
-      class ModifySnapshotCopyRetentionPeriodMessage < Aws::Structure.new(
+      class ModifySnapshotCopyRetentionPeriodMessage < Struct.new(
         :cluster_identifier,
         :retention_period)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of the cluster for which you want to change
@@ -4286,8 +4512,10 @@ module Aws
 
       end
 
-      class ModifySnapshotCopyRetentionPeriodResult < Aws::Structure.new(
+      class ModifySnapshotCopyRetentionPeriodResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -4296,11 +4524,13 @@ module Aws
       end
 
       # Describes an orderable cluster option.
-      class OrderableClusterOption < Aws::Structure.new(
+      class OrderableClusterOption < Struct.new(
         :cluster_version,
         :cluster_type,
         :node_type,
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_version
         #   The version of the orderable cluster.
@@ -4321,9 +4551,11 @@ module Aws
       end
 
       # Contains the output from the DescribeOrderableClusterOptions action.
-      class OrderableClusterOptionsMessage < Aws::Structure.new(
+      class OrderableClusterOptionsMessage < Struct.new(
         :orderable_cluster_options,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] orderable_cluster_options
         #   An `OrderableClusterOption` structure containing information about
@@ -4356,7 +4588,7 @@ module Aws
       #         is_modifiable: false,
       #         minimum_engine_version: "String",
       #       }
-      class Parameter < Aws::Structure.new(
+      class Parameter < Struct.new(
         :parameter_name,
         :parameter_value,
         :description,
@@ -4366,6 +4598,8 @@ module Aws
         :apply_type,
         :is_modifiable,
         :minimum_engine_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_name
         #   The name of the parameter.
@@ -4420,7 +4654,7 @@ module Aws
       # Describes cluster attributes that are in a pending state. A change to
       # one or more the attributes was requested and is in progress or will be
       # applied.
-      class PendingModifiedValues < Aws::Structure.new(
+      class PendingModifiedValues < Struct.new(
         :master_user_password,
         :node_type,
         :number_of_nodes,
@@ -4429,6 +4663,8 @@ module Aws
         :automated_snapshot_retention_period,
         :cluster_identifier,
         :publicly_accessible)
+
+        include Aws::Structure
 
         # @!attribute [rw] master_user_password
         #   The pending or in-progress change of the master user password for
@@ -4476,9 +4712,11 @@ module Aws
       #         reserved_node_offering_id: "String", # required
       #         node_count: 1,
       #       }
-      class PurchaseReservedNodeOfferingMessage < Aws::Structure.new(
+      class PurchaseReservedNodeOfferingMessage < Struct.new(
         :reserved_node_offering_id,
         :node_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_node_offering_id
         #   The unique identifier of the reserved node offering you want to
@@ -4493,8 +4731,10 @@ module Aws
 
       end
 
-      class PurchaseReservedNodeOfferingResult < Aws::Structure.new(
+      class PurchaseReservedNodeOfferingResult < Struct.new(
         :reserved_node)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_node
         #   Describes a reserved node. You can call the
@@ -4510,8 +4750,10 @@ module Aws
       #       {
       #         cluster_identifier: "String", # required
       #       }
-      class RebootClusterMessage < Aws::Structure.new(
+      class RebootClusterMessage < Struct.new(
         :cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The cluster identifier.
@@ -4519,8 +4761,10 @@ module Aws
 
       end
 
-      class RebootClusterResult < Aws::Structure.new(
+      class RebootClusterResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -4529,9 +4773,11 @@ module Aws
       end
 
       # Describes a recurring charge.
-      class RecurringCharge < Aws::Structure.new(
+      class RecurringCharge < Struct.new(
         :recurring_charge_amount,
         :recurring_charge_frequency)
+
+        include Aws::Structure
 
         # @!attribute [rw] recurring_charge_amount
         #   The amount charged per the period of time specified by the recurring
@@ -4547,7 +4793,7 @@ module Aws
       # Describes a reserved node. You can call the
       # DescribeReservedNodeOfferings API to obtain the available reserved
       # node offerings.
-      class ReservedNode < Aws::Structure.new(
+      class ReservedNode < Struct.new(
         :reserved_node_id,
         :reserved_node_offering_id,
         :node_type,
@@ -4560,6 +4806,8 @@ module Aws
         :state,
         :offering_type,
         :recurring_charges)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_node_id
         #   The unique identifier for the reservation.
@@ -4623,7 +4871,7 @@ module Aws
       end
 
       # Describes a reserved node offering.
-      class ReservedNodeOffering < Aws::Structure.new(
+      class ReservedNodeOffering < Struct.new(
         :reserved_node_offering_id,
         :node_type,
         :duration,
@@ -4632,6 +4880,8 @@ module Aws
         :currency_code,
         :offering_type,
         :recurring_charges)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_node_offering_id
         #   The offering identifier.
@@ -4673,9 +4923,11 @@ module Aws
 
       end
 
-      class ReservedNodeOfferingsMessage < Aws::Structure.new(
+      class ReservedNodeOfferingsMessage < Struct.new(
         :marker,
         :reserved_node_offerings)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -4692,9 +4944,11 @@ module Aws
 
       end
 
-      class ReservedNodesMessage < Aws::Structure.new(
+      class ReservedNodesMessage < Struct.new(
         :marker,
         :reserved_nodes)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -4731,10 +4985,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class ResetClusterParameterGroupMessage < Aws::Structure.new(
+      class ResetClusterParameterGroupMessage < Struct.new(
         :parameter_group_name,
         :reset_all_parameters,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_group_name
         #   The name of the cluster parameter group to be reset.
@@ -4759,7 +5015,7 @@ module Aws
       end
 
       # Describes the result of a cluster resize operation.
-      class ResizeProgressMessage < Aws::Structure.new(
+      class ResizeProgressMessage < Struct.new(
         :target_node_type,
         :target_number_of_nodes,
         :target_cluster_type,
@@ -4772,6 +5028,8 @@ module Aws
         :progress_in_mega_bytes,
         :elapsed_time_in_seconds,
         :estimated_time_to_completion_in_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_node_type
         #   The node type that the cluster will have after the resize operation
@@ -4875,7 +5133,7 @@ module Aws
       #         additional_info: "String",
       #         iam_roles: ["String"],
       #       }
-      class RestoreFromClusterSnapshotMessage < Aws::Structure.new(
+      class RestoreFromClusterSnapshotMessage < Struct.new(
         :cluster_identifier,
         :snapshot_identifier,
         :snapshot_cluster_identifier,
@@ -4897,6 +5155,8 @@ module Aws
         :node_type,
         :additional_info,
         :iam_roles)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The identifier of the cluster that will be created from restoring
@@ -5090,8 +5350,10 @@ module Aws
 
       end
 
-      class RestoreFromClusterSnapshotResult < Aws::Structure.new(
+      class RestoreFromClusterSnapshotResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -5101,13 +5363,15 @@ module Aws
 
       # Describes the status of a cluster restore action. Returns null if the
       # cluster was not created by restoring a snapshot.
-      class RestoreStatus < Aws::Structure.new(
+      class RestoreStatus < Struct.new(
         :status,
         :current_restore_rate_in_mega_bytes_per_second,
         :snapshot_size_in_mega_bytes,
         :progress_in_mega_bytes,
         :elapsed_time_in_seconds,
         :estimated_time_to_completion_in_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the restore action. Returns starting, restoring,
@@ -5153,7 +5417,7 @@ module Aws
       #         target_schema_name: "String",
       #         new_table_name: "String", # required
       #       }
-      class RestoreTableFromClusterSnapshotMessage < Aws::Structure.new(
+      class RestoreTableFromClusterSnapshotMessage < Struct.new(
         :cluster_identifier,
         :snapshot_identifier,
         :source_database_name,
@@ -5162,6 +5426,8 @@ module Aws
         :target_database_name,
         :target_schema_name,
         :new_table_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The identifier of the Amazon Redshift cluster to restore the table
@@ -5203,8 +5469,10 @@ module Aws
 
       end
 
-      class RestoreTableFromClusterSnapshotResult < Aws::Structure.new(
+      class RestoreTableFromClusterSnapshotResult < Struct.new(
         :table_restore_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_restore_status
         #   Describes the status of a RestoreTableFromClusterSnapshot operation.
@@ -5221,11 +5489,13 @@ module Aws
       #         ec2_security_group_name: "String",
       #         ec2_security_group_owner_id: "String",
       #       }
-      class RevokeClusterSecurityGroupIngressMessage < Aws::Structure.new(
+      class RevokeClusterSecurityGroupIngressMessage < Struct.new(
         :cluster_security_group_name,
         :cidrip,
         :ec2_security_group_name,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group_name
         #   The name of the security Group from which to revoke the ingress
@@ -5257,8 +5527,10 @@ module Aws
 
       end
 
-      class RevokeClusterSecurityGroupIngressResult < Aws::Structure.new(
+      class RevokeClusterSecurityGroupIngressResult < Struct.new(
         :cluster_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_security_group
         #   Describes a security group.
@@ -5274,10 +5546,12 @@ module Aws
       #         snapshot_cluster_identifier: "String",
       #         account_with_restore_access: "String", # required
       #       }
-      class RevokeSnapshotAccessMessage < Aws::Structure.new(
+      class RevokeSnapshotAccessMessage < Struct.new(
         :snapshot_identifier,
         :snapshot_cluster_identifier,
         :account_with_restore_access)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_identifier
         #   The identifier of the snapshot that the account can no longer
@@ -5298,8 +5572,10 @@ module Aws
 
       end
 
-      class RevokeSnapshotAccessResult < Aws::Structure.new(
+      class RevokeSnapshotAccessResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Describes a snapshot.
@@ -5313,8 +5589,10 @@ module Aws
       #       {
       #         cluster_identifier: "String", # required
       #       }
-      class RotateEncryptionKeyMessage < Aws::Structure.new(
+      class RotateEncryptionKeyMessage < Struct.new(
         :cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_identifier
         #   The unique identifier of the cluster that you want to rotate the
@@ -5326,8 +5604,10 @@ module Aws
 
       end
 
-      class RotateEncryptionKeyResult < Aws::Structure.new(
+      class RotateEncryptionKeyResult < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   Describes a cluster.
@@ -5336,7 +5616,7 @@ module Aws
       end
 
       # Describes a snapshot.
-      class Snapshot < Aws::Structure.new(
+      class Snapshot < Struct.new(
         :snapshot_identifier,
         :cluster_identifier,
         :snapshot_create_time,
@@ -5365,6 +5645,8 @@ module Aws
         :source_region,
         :tags,
         :restorable_node_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_identifier
         #   The snapshot identifier that is provided in the request.
@@ -5517,10 +5799,12 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
-      class SnapshotCopyGrant < Aws::Structure.new(
+      class SnapshotCopyGrant < Struct.new(
         :snapshot_copy_grant_name,
         :kms_key_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_copy_grant_name
         #   The name of the snapshot copy grant.
@@ -5537,9 +5821,11 @@ module Aws
 
       end
 
-      class SnapshotCopyGrantMessage < Aws::Structure.new(
+      class SnapshotCopyGrantMessage < Struct.new(
         :marker,
         :snapshot_copy_grants)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional parameter that specifies the starting point to return a
@@ -5561,9 +5847,11 @@ module Aws
       end
 
       # Contains the output from the DescribeClusterSnapshots action.
-      class SnapshotMessage < Aws::Structure.new(
+      class SnapshotMessage < Struct.new(
         :marker,
         :snapshots)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A value that indicates the starting point for the next set of
@@ -5581,10 +5869,12 @@ module Aws
       end
 
       # Describes a subnet.
-      class Subnet < Aws::Structure.new(
+      class Subnet < Struct.new(
         :subnet_identifier,
         :subnet_availability_zone,
         :subnet_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_identifier
         #   The identifier of the subnet.
@@ -5601,7 +5891,7 @@ module Aws
       end
 
       # Describes the status of a RestoreTableFromClusterSnapshot operation.
-      class TableRestoreStatus < Aws::Structure.new(
+      class TableRestoreStatus < Struct.new(
         :table_restore_request_id,
         :status,
         :message,
@@ -5616,6 +5906,8 @@ module Aws
         :target_database_name,
         :target_schema_name,
         :new_table_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_restore_request_id
         #   The unique identifier for the table restore request.
@@ -5689,9 +5981,11 @@ module Aws
 
       end
 
-      class TableRestoreStatusMessage < Aws::Structure.new(
+      class TableRestoreStatusMessage < Struct.new(
         :table_restore_status_details,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_restore_status_details
         #   A list of status details for one or more table restore requests.
@@ -5712,9 +6006,11 @@ module Aws
       #         key: "String",
       #         value: "String",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key, or name, for the resource tag.
@@ -5727,10 +6023,12 @@ module Aws
       end
 
       # A tag and its associated resource.
-      class TaggedResource < Aws::Structure.new(
+      class TaggedResource < Struct.new(
         :tag,
         :resource_name,
         :resource_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag
         #   The tag for the resource.
@@ -5765,9 +6063,11 @@ module Aws
 
       end
 
-      class TaggedResourceListMessage < Aws::Structure.new(
+      class TaggedResourceListMessage < Struct.new(
         :tagged_resources,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] tagged_resources
         #   A list of tags with their associated resources.
@@ -5785,9 +6085,11 @@ module Aws
       end
 
       # Describes the members of a VPC security group.
-      class VpcSecurityGroupMembership < Aws::Structure.new(
+      class VpcSecurityGroupMembership < Struct.new(
         :vpc_security_group_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_security_group_id
         #   The identifier of the VPC security group.

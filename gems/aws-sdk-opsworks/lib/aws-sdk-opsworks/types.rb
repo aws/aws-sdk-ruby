@@ -10,9 +10,11 @@ module Aws
     module Types
 
       # Describes an agent version.
-      class AgentVersion < Aws::Structure.new(
+      class AgentVersion < Struct.new(
         :version,
         :configuration_manager)
+
+        include Aws::Structure
 
         # @!attribute [rw] version
         #   The agent version.
@@ -25,7 +27,7 @@ module Aws
       end
 
       # A description of the app.
-      class App < Aws::Structure.new(
+      class App < Struct.new(
         :app_id,
         :stack_id,
         :shortname,
@@ -40,6 +42,8 @@ module Aws
         :attributes,
         :created_at,
         :environment)
+
+        include Aws::Structure
 
         # @!attribute [rw] app_id
         #   The app ID.
@@ -124,9 +128,11 @@ module Aws
       #         instance_id: "String", # required
       #         layer_ids: ["String"], # required
       #       }
-      class AssignInstanceRequest < Aws::Structure.new(
+      class AssignInstanceRequest < Struct.new(
         :instance_id,
         :layer_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -146,9 +152,11 @@ module Aws
       #         volume_id: "String", # required
       #         instance_id: "String",
       #       }
-      class AssignVolumeRequest < Aws::Structure.new(
+      class AssignVolumeRequest < Struct.new(
         :volume_id,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The volume ID.
@@ -167,9 +175,11 @@ module Aws
       #         elastic_ip: "String", # required
       #         instance_id: "String",
       #       }
-      class AssociateElasticIpRequest < Aws::Structure.new(
+      class AssociateElasticIpRequest < Struct.new(
         :elastic_ip,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ip
         #   The Elastic IP address.
@@ -188,9 +198,11 @@ module Aws
       #         elastic_load_balancer_name: "String", # required
       #         layer_id: "String", # required
       #       }
-      class AttachElasticLoadBalancerRequest < Aws::Structure.new(
+      class AttachElasticLoadBalancerRequest < Struct.new(
         :elastic_load_balancer_name,
         :layer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_load_balancer_name
         #   The Elastic Load Balancing instance\'s name.
@@ -218,7 +230,7 @@ module Aws
       #         load_threshold: 1.0,
       #         alarms: ["String"],
       #       }
-      class AutoScalingThresholds < Aws::Structure.new(
+      class AutoScalingThresholds < Struct.new(
         :instance_count,
         :thresholds_wait_time,
         :ignore_metrics_time,
@@ -226,6 +238,8 @@ module Aws
         :memory_threshold,
         :load_threshold,
         :alarms)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_count
         #   The number of instances to add or remove when the load exceeds a
@@ -309,11 +323,13 @@ module Aws
       #           delete_on_termination: false,
       #         },
       #       }
-      class BlockDeviceMapping < Aws::Structure.new(
+      class BlockDeviceMapping < Struct.new(
         :device_name,
         :no_device,
         :virtual_name,
         :ebs)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_name
         #   The device name that is exposed to the instance, such as `/dev/sdh`.
@@ -351,9 +367,11 @@ module Aws
       #         manage_berkshelf: false,
       #         berkshelf_version: "String",
       #       }
-      class ChefConfiguration < Aws::Structure.new(
+      class ChefConfiguration < Struct.new(
         :manage_berkshelf,
         :berkshelf_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] manage_berkshelf
         #   Whether to enable Berkshelf.
@@ -407,7 +425,7 @@ module Aws
       #         default_root_device_type: "ebs", # accepts ebs, instance-store
       #         agent_version: "String",
       #       }
-      class CloneStackRequest < Aws::Structure.new(
+      class CloneStackRequest < Struct.new(
         :source_stack_id,
         :name,
         :region,
@@ -430,6 +448,8 @@ module Aws
         :clone_app_ids,
         :default_root_device_type,
         :agent_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_stack_id
         #   The source stack ID.
@@ -753,8 +773,10 @@ module Aws
       end
 
       # Contains the response to a `CloneStack` request.
-      class CloneStackResult < Aws::Structure.new(
+      class CloneStackResult < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The cloned stack ID.
@@ -763,7 +785,7 @@ module Aws
       end
 
       # Describes a command.
-      class Command < Aws::Structure.new(
+      class Command < Struct.new(
         :command_id,
         :instance_id,
         :deployment_id,
@@ -774,6 +796,8 @@ module Aws
         :exit_code,
         :log_url,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] command_id
         #   The command ID.
@@ -887,7 +911,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateAppRequest < Aws::Structure.new(
+      class CreateAppRequest < Struct.new(
         :stack_id,
         :shortname,
         :name,
@@ -900,6 +924,8 @@ module Aws
         :ssl_configuration,
         :attributes,
         :environment)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -979,8 +1005,10 @@ module Aws
       end
 
       # Contains the response to a `CreateApp` request.
-      class CreateAppResult < Aws::Structure.new(
+      class CreateAppResult < Struct.new(
         :app_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] app_id
         #   The app ID.
@@ -1005,7 +1033,7 @@ module Aws
       #         comment: "String",
       #         custom_json: "String",
       #       }
-      class CreateDeploymentRequest < Aws::Structure.new(
+      class CreateDeploymentRequest < Struct.new(
         :stack_id,
         :app_id,
         :instance_ids,
@@ -1013,6 +1041,8 @@ module Aws
         :command,
         :comment,
         :custom_json)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -1059,8 +1089,10 @@ module Aws
       end
 
       # Contains the response to a `CreateDeployment` request.
-      class CreateDeploymentResult < Aws::Structure.new(
+      class CreateDeploymentResult < Struct.new(
         :deployment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The deployment ID, which can be used with other requests to identify
@@ -1105,7 +1137,7 @@ module Aws
       #         agent_version: "String",
       #         tenancy: "String",
       #       }
-      class CreateInstanceRequest < Aws::Structure.new(
+      class CreateInstanceRequest < Struct.new(
         :stack_id,
         :layer_ids,
         :instance_type,
@@ -1124,6 +1156,8 @@ module Aws
         :ebs_optimized,
         :agent_version,
         :tenancy)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -1323,8 +1357,10 @@ module Aws
       end
 
       # Contains the response to a `CreateInstance` request.
-      class CreateInstanceResult < Aws::Structure.new(
+      class CreateInstanceResult < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -1376,7 +1412,7 @@ module Aws
       #           },
       #         },
       #       }
-      class CreateLayerRequest < Aws::Structure.new(
+      class CreateLayerRequest < Struct.new(
         :stack_id,
         :type,
         :name,
@@ -1394,6 +1430,8 @@ module Aws
         :install_updates_on_boot,
         :use_ebs_optimized_instances,
         :lifecycle_event_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The layer stack ID.
@@ -1523,8 +1561,10 @@ module Aws
       end
 
       # Contains the response to a `CreateLayer` request.
-      class CreateLayerResult < Aws::Structure.new(
+      class CreateLayerResult < Struct.new(
         :layer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_id
         #   The layer ID.
@@ -1571,7 +1611,7 @@ module Aws
       #         default_root_device_type: "ebs", # accepts ebs, instance-store
       #         agent_version: "String",
       #       }
-      class CreateStackRequest < Aws::Structure.new(
+      class CreateStackRequest < Struct.new(
         :name,
         :region,
         :vpc_id,
@@ -1591,6 +1631,8 @@ module Aws
         :default_ssh_key_name,
         :default_root_device_type,
         :agent_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The stack name.
@@ -1889,8 +1931,10 @@ module Aws
       end
 
       # Contains the response to a `CreateStack` request.
-      class CreateStackResult < Aws::Structure.new(
+      class CreateStackResult < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID, which is an opaque string that you use to identify the
@@ -1908,11 +1952,13 @@ module Aws
       #         ssh_public_key: "String",
       #         allow_self_management: false,
       #       }
-      class CreateUserProfileRequest < Aws::Structure.new(
+      class CreateUserProfileRequest < Struct.new(
         :iam_user_arn,
         :ssh_username,
         :ssh_public_key,
         :allow_self_management)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arn
         #   The user\'s IAM ARN.
@@ -1943,8 +1989,10 @@ module Aws
       end
 
       # Contains the response to a `CreateUserProfile` request.
-      class CreateUserProfileResult < Aws::Structure.new(
+      class CreateUserProfileResult < Struct.new(
         :iam_user_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arn
         #   The user\'s IAM ARN.
@@ -1961,10 +2009,12 @@ module Aws
       #         arn: "String",
       #         database_name: "String",
       #       }
-      class DataSource < Aws::Structure.new(
+      class DataSource < Struct.new(
         :type,
         :arn,
         :database_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The data source\'s type, `AutoSelectOpsworksMysqlInstance`,
@@ -1987,8 +2037,10 @@ module Aws
       #       {
       #         app_id: "String", # required
       #       }
-      class DeleteAppRequest < Aws::Structure.new(
+      class DeleteAppRequest < Struct.new(
         :app_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] app_id
         #   The app ID.
@@ -2004,10 +2056,12 @@ module Aws
       #         delete_elastic_ip: false,
       #         delete_volumes: false,
       #       }
-      class DeleteInstanceRequest < Aws::Structure.new(
+      class DeleteInstanceRequest < Struct.new(
         :instance_id,
         :delete_elastic_ip,
         :delete_volumes)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -2029,8 +2083,10 @@ module Aws
       #       {
       #         layer_id: "String", # required
       #       }
-      class DeleteLayerRequest < Aws::Structure.new(
+      class DeleteLayerRequest < Struct.new(
         :layer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_id
         #   The layer ID.
@@ -2044,8 +2100,10 @@ module Aws
       #       {
       #         stack_id: "String", # required
       #       }
-      class DeleteStackRequest < Aws::Structure.new(
+      class DeleteStackRequest < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -2059,8 +2117,10 @@ module Aws
       #       {
       #         iam_user_arn: "String", # required
       #       }
-      class DeleteUserProfileRequest < Aws::Structure.new(
+      class DeleteUserProfileRequest < Struct.new(
         :iam_user_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arn
         #   The user\'s IAM ARN.
@@ -2069,7 +2129,7 @@ module Aws
       end
 
       # Describes a deployment of a stack or app.
-      class Deployment < Aws::Structure.new(
+      class Deployment < Struct.new(
         :deployment_id,
         :stack_id,
         :app_id,
@@ -2082,6 +2142,8 @@ module Aws
         :status,
         :custom_json,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The deployment ID.
@@ -2161,9 +2223,11 @@ module Aws
       #           "String" => ["String"],
       #         },
       #       }
-      class DeploymentCommand < Aws::Structure.new(
+      class DeploymentCommand < Struct.new(
         :name,
         :args)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the operation. You can specify only one command.
@@ -2242,8 +2306,10 @@ module Aws
       #       {
       #         ecs_cluster_arn: "String", # required
       #       }
-      class DeregisterEcsClusterRequest < Aws::Structure.new(
+      class DeregisterEcsClusterRequest < Struct.new(
         :ecs_cluster_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] ecs_cluster_arn
         #   The cluster\'s ARN.
@@ -2257,8 +2323,10 @@ module Aws
       #       {
       #         elastic_ip: "String", # required
       #       }
-      class DeregisterElasticIpRequest < Aws::Structure.new(
+      class DeregisterElasticIpRequest < Struct.new(
         :elastic_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ip
         #   The Elastic IP address.
@@ -2272,8 +2340,10 @@ module Aws
       #       {
       #         instance_id: "String", # required
       #       }
-      class DeregisterInstanceRequest < Aws::Structure.new(
+      class DeregisterInstanceRequest < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -2287,8 +2357,10 @@ module Aws
       #       {
       #         rds_db_instance_arn: "String", # required
       #       }
-      class DeregisterRdsDbInstanceRequest < Aws::Structure.new(
+      class DeregisterRdsDbInstanceRequest < Struct.new(
         :rds_db_instance_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] rds_db_instance_arn
         #   The Amazon RDS instance\'s ARN.
@@ -2302,8 +2374,10 @@ module Aws
       #       {
       #         volume_id: "String", # required
       #       }
-      class DeregisterVolumeRequest < Aws::Structure.new(
+      class DeregisterVolumeRequest < Struct.new(
         :volume_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The AWS OpsWorks volume ID, which is the GUID that AWS OpsWorks
@@ -2323,9 +2397,11 @@ module Aws
       #           version: "String",
       #         },
       #       }
-      class DescribeAgentVersionsRequest < Aws::Structure.new(
+      class DescribeAgentVersionsRequest < Struct.new(
         :stack_id,
         :configuration_manager)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -2338,8 +2414,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeAgentVersions` request.
-      class DescribeAgentVersionsResult < Aws::Structure.new(
+      class DescribeAgentVersionsResult < Struct.new(
         :agent_versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_versions
         #   The agent versions for the specified stack or configuration manager.
@@ -2356,9 +2434,11 @@ module Aws
       #         stack_id: "String",
       #         app_ids: ["String"],
       #       }
-      class DescribeAppsRequest < Aws::Structure.new(
+      class DescribeAppsRequest < Struct.new(
         :stack_id,
         :app_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The app stack ID. If you use this parameter, `DescribeApps` returns
@@ -2374,8 +2454,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeApps` request.
-      class DescribeAppsResult < Aws::Structure.new(
+      class DescribeAppsResult < Struct.new(
         :apps)
+
+        include Aws::Structure
 
         # @!attribute [rw] apps
         #   An array of `App` objects that describe the specified apps.
@@ -2391,10 +2473,12 @@ module Aws
       #         instance_id: "String",
       #         command_ids: ["String"],
       #       }
-      class DescribeCommandsRequest < Aws::Structure.new(
+      class DescribeCommandsRequest < Struct.new(
         :deployment_id,
         :instance_id,
         :command_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The deployment ID. If you include this parameter, `DescribeCommands`
@@ -2417,8 +2501,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeCommands` request.
-      class DescribeCommandsResult < Aws::Structure.new(
+      class DescribeCommandsResult < Struct.new(
         :commands)
+
+        include Aws::Structure
 
         # @!attribute [rw] commands
         #   An array of `Command` objects that describe each of the specified
@@ -2435,10 +2521,12 @@ module Aws
       #         app_id: "String",
       #         deployment_ids: ["String"],
       #       }
-      class DescribeDeploymentsRequest < Aws::Structure.new(
+      class DescribeDeploymentsRequest < Struct.new(
         :stack_id,
         :app_id,
         :deployment_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID. If you include this parameter, `DescribeDeployments`
@@ -2462,8 +2550,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeDeployments` request.
-      class DescribeDeploymentsResult < Aws::Structure.new(
+      class DescribeDeploymentsResult < Struct.new(
         :deployments)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployments
         #   An array of `Deployment` objects that describe the deployments.
@@ -2480,11 +2570,13 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeEcsClustersRequest < Aws::Structure.new(
+      class DescribeEcsClustersRequest < Struct.new(
         :ecs_cluster_arns,
         :stack_id,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] ecs_cluster_arns
         #   A list of ARNs, one for each cluster to be described.
@@ -2516,9 +2608,11 @@ module Aws
       end
 
       # Contains the response to a `DescribeEcsClusters` request.
-      class DescribeEcsClustersResult < Aws::Structure.new(
+      class DescribeEcsClustersResult < Struct.new(
         :ecs_clusters,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] ecs_clusters
         #   A list of `EcsCluster` objects containing the cluster descriptions.
@@ -2542,10 +2636,12 @@ module Aws
       #         stack_id: "String",
       #         ips: ["String"],
       #       }
-      class DescribeElasticIpsRequest < Aws::Structure.new(
+      class DescribeElasticIpsRequest < Struct.new(
         :instance_id,
         :stack_id,
         :ips)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID. If you include this parameter, `DescribeElasticIps`
@@ -2569,8 +2665,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeElasticIps` request.
-      class DescribeElasticIpsResult < Aws::Structure.new(
+      class DescribeElasticIpsResult < Struct.new(
         :elastic_ips)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ips
         #   An `ElasticIps` object that describes the specified Elastic IP
@@ -2586,9 +2684,11 @@ module Aws
       #         stack_id: "String",
       #         layer_ids: ["String"],
       #       }
-      class DescribeElasticLoadBalancersRequest < Aws::Structure.new(
+      class DescribeElasticLoadBalancersRequest < Struct.new(
         :stack_id,
         :layer_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   A stack ID. The action describes the stack\'s Elastic Load Balancing
@@ -2603,8 +2703,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeElasticLoadBalancers` request.
-      class DescribeElasticLoadBalancersResult < Aws::Structure.new(
+      class DescribeElasticLoadBalancersResult < Struct.new(
         :elastic_load_balancers)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_load_balancers
         #   A list of `ElasticLoadBalancer` objects that describe the specified
@@ -2621,10 +2723,12 @@ module Aws
       #         layer_id: "String",
       #         instance_ids: ["String"],
       #       }
-      class DescribeInstancesRequest < Aws::Structure.new(
+      class DescribeInstancesRequest < Struct.new(
         :stack_id,
         :layer_id,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   A stack ID. If you use this parameter, `DescribeInstances` returns
@@ -2645,8 +2749,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeInstances` request.
-      class DescribeInstancesResult < Aws::Structure.new(
+      class DescribeInstancesResult < Struct.new(
         :instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances
         #   An array of `Instance` objects that describe the instances.
@@ -2661,9 +2767,11 @@ module Aws
       #         stack_id: "String",
       #         layer_ids: ["String"],
       #       }
-      class DescribeLayersRequest < Aws::Structure.new(
+      class DescribeLayersRequest < Struct.new(
         :stack_id,
         :layer_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -2678,8 +2786,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeLayers` request.
-      class DescribeLayersResult < Aws::Structure.new(
+      class DescribeLayersResult < Struct.new(
         :layers)
+
+        include Aws::Structure
 
         # @!attribute [rw] layers
         #   An array of `Layer` objects that describe the layers.
@@ -2693,8 +2803,10 @@ module Aws
       #       {
       #         layer_ids: ["String"], # required
       #       }
-      class DescribeLoadBasedAutoScalingRequest < Aws::Structure.new(
+      class DescribeLoadBasedAutoScalingRequest < Struct.new(
         :layer_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_ids
         #   An array of layer IDs.
@@ -2703,8 +2815,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeLoadBasedAutoScaling` request.
-      class DescribeLoadBasedAutoScalingResult < Aws::Structure.new(
+      class DescribeLoadBasedAutoScalingResult < Struct.new(
         :load_based_auto_scaling_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_based_auto_scaling_configurations
         #   An array of `LoadBasedAutoScalingConfiguration` objects that
@@ -2714,8 +2828,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeMyUserProfile` request.
-      class DescribeMyUserProfileResult < Aws::Structure.new(
+      class DescribeMyUserProfileResult < Struct.new(
         :user_profile)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_profile
         #   A `UserProfile` object that describes the user\'s SSH information.
@@ -2730,9 +2846,11 @@ module Aws
       #         iam_user_arn: "String",
       #         stack_id: "String",
       #       }
-      class DescribePermissionsRequest < Aws::Structure.new(
+      class DescribePermissionsRequest < Struct.new(
         :iam_user_arn,
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arn
         #   The user\'s IAM ARN. For more information about IAM ARNs, see [Using
@@ -2750,8 +2868,10 @@ module Aws
       end
 
       # Contains the response to a `DescribePermissions` request.
-      class DescribePermissionsResult < Aws::Structure.new(
+      class DescribePermissionsResult < Struct.new(
         :permissions)
+
+        include Aws::Structure
 
         # @!attribute [rw] permissions
         #   An array of `Permission` objects that describe the stack
@@ -2780,10 +2900,12 @@ module Aws
       #         stack_id: "String",
       #         raid_array_ids: ["String"],
       #       }
-      class DescribeRaidArraysRequest < Aws::Structure.new(
+      class DescribeRaidArraysRequest < Struct.new(
         :instance_id,
         :stack_id,
         :raid_array_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID. If you use this parameter, `DescribeRaidArrays`
@@ -2804,8 +2926,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeRaidArrays` request.
-      class DescribeRaidArraysResult < Aws::Structure.new(
+      class DescribeRaidArraysResult < Struct.new(
         :raid_arrays)
+
+        include Aws::Structure
 
         # @!attribute [rw] raid_arrays
         #   A `RaidArrays` object that describes the specified RAID arrays.
@@ -2820,9 +2944,11 @@ module Aws
       #         stack_id: "String", # required
       #         rds_db_instance_arns: ["String"],
       #       }
-      class DescribeRdsDbInstancesRequest < Aws::Structure.new(
+      class DescribeRdsDbInstancesRequest < Struct.new(
         :stack_id,
         :rds_db_instance_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID that the instances are registered with. The operation
@@ -2836,8 +2962,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeRdsDbInstances` request.
-      class DescribeRdsDbInstancesResult < Aws::Structure.new(
+      class DescribeRdsDbInstancesResult < Struct.new(
         :rds_db_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] rds_db_instances
         #   An a array of `RdsDbInstance` objects that describe the instances.
@@ -2853,10 +2981,12 @@ module Aws
       #         instance_id: "String",
       #         service_error_ids: ["String"],
       #       }
-      class DescribeServiceErrorsRequest < Aws::Structure.new(
+      class DescribeServiceErrorsRequest < Struct.new(
         :stack_id,
         :instance_id,
         :service_error_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID. If you use this parameter, `DescribeServiceErrors`
@@ -2879,8 +3009,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeServiceErrors` request.
-      class DescribeServiceErrorsResult < Aws::Structure.new(
+      class DescribeServiceErrorsResult < Struct.new(
         :service_errors)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_errors
         #   An array of `ServiceError` objects that describe the specified
@@ -2895,8 +3027,10 @@ module Aws
       #       {
       #         stack_id: "String", # required
       #       }
-      class DescribeStackProvisioningParametersRequest < Aws::Structure.new(
+      class DescribeStackProvisioningParametersRequest < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID
@@ -2906,9 +3040,11 @@ module Aws
 
       # Contains the response to a `DescribeStackProvisioningParameters`
       # request.
-      class DescribeStackProvisioningParametersResult < Aws::Structure.new(
+      class DescribeStackProvisioningParametersResult < Struct.new(
         :agent_installer_url,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_installer_url
         #   The AWS OpsWorks agent installer\'s URL.
@@ -2926,8 +3062,10 @@ module Aws
       #       {
       #         stack_id: "String", # required
       #       }
-      class DescribeStackSummaryRequest < Aws::Structure.new(
+      class DescribeStackSummaryRequest < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -2936,8 +3074,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeStackSummary` request.
-      class DescribeStackSummaryResult < Aws::Structure.new(
+      class DescribeStackSummaryResult < Struct.new(
         :stack_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_summary
         #   A `StackSummary` object that contains the results.
@@ -2951,8 +3091,10 @@ module Aws
       #       {
       #         stack_ids: ["String"],
       #       }
-      class DescribeStacksRequest < Aws::Structure.new(
+      class DescribeStacksRequest < Struct.new(
         :stack_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_ids
         #   An array of stack IDs that specify the stacks to be described. If
@@ -2963,8 +3105,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeStacks` request.
-      class DescribeStacksResult < Aws::Structure.new(
+      class DescribeStacksResult < Struct.new(
         :stacks)
+
+        include Aws::Structure
 
         # @!attribute [rw] stacks
         #   An array of `Stack` objects that describe the stacks.
@@ -2978,8 +3122,10 @@ module Aws
       #       {
       #         instance_ids: ["String"], # required
       #       }
-      class DescribeTimeBasedAutoScalingRequest < Aws::Structure.new(
+      class DescribeTimeBasedAutoScalingRequest < Struct.new(
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   An array of instance IDs.
@@ -2988,8 +3134,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeTimeBasedAutoScaling` request.
-      class DescribeTimeBasedAutoScalingResult < Aws::Structure.new(
+      class DescribeTimeBasedAutoScalingResult < Struct.new(
         :time_based_auto_scaling_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] time_based_auto_scaling_configurations
         #   An array of `TimeBasedAutoScalingConfiguration` objects that
@@ -3004,8 +3152,10 @@ module Aws
       #       {
       #         iam_user_arns: ["String"],
       #       }
-      class DescribeUserProfilesRequest < Aws::Structure.new(
+      class DescribeUserProfilesRequest < Struct.new(
         :iam_user_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arns
         #   An array of IAM user ARNs that identify the users to be described.
@@ -3014,8 +3164,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeUserProfiles` request.
-      class DescribeUserProfilesResult < Aws::Structure.new(
+      class DescribeUserProfilesResult < Struct.new(
         :user_profiles)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_profiles
         #   A `Users` object that describes the specified users.
@@ -3032,11 +3184,13 @@ module Aws
       #         raid_array_id: "String",
       #         volume_ids: ["String"],
       #       }
-      class DescribeVolumesRequest < Aws::Structure.new(
+      class DescribeVolumesRequest < Struct.new(
         :instance_id,
         :stack_id,
         :raid_array_id,
         :volume_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID. If you use this parameter, `DescribeVolumes`
@@ -3064,8 +3218,10 @@ module Aws
       end
 
       # Contains the response to a `DescribeVolumes` request.
-      class DescribeVolumesResult < Aws::Structure.new(
+      class DescribeVolumesResult < Struct.new(
         :volumes)
+
+        include Aws::Structure
 
         # @!attribute [rw] volumes
         #   An array of volume IDs.
@@ -3080,9 +3236,11 @@ module Aws
       #         elastic_load_balancer_name: "String", # required
       #         layer_id: "String", # required
       #       }
-      class DetachElasticLoadBalancerRequest < Aws::Structure.new(
+      class DetachElasticLoadBalancerRequest < Struct.new(
         :elastic_load_balancer_name,
         :layer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_load_balancer_name
         #   The Elastic Load Balancing instance\'s name.
@@ -3101,8 +3259,10 @@ module Aws
       #       {
       #         elastic_ip: "String", # required
       #       }
-      class DisassociateElasticIpRequest < Aws::Structure.new(
+      class DisassociateElasticIpRequest < Struct.new(
         :elastic_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ip
         #   The Elastic IP address.
@@ -3126,12 +3286,14 @@ module Aws
       #         volume_type: "gp2", # accepts gp2, io1, standard
       #         delete_on_termination: false,
       #       }
-      class EbsBlockDevice < Aws::Structure.new(
+      class EbsBlockDevice < Struct.new(
         :snapshot_id,
         :iops,
         :volume_size,
         :volume_type,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The snapshot ID.
@@ -3167,11 +3329,13 @@ module Aws
       end
 
       # Describes a registered Amazon ECS cluster.
-      class EcsCluster < Aws::Structure.new(
+      class EcsCluster < Struct.new(
         :ecs_cluster_arn,
         :ecs_cluster_name,
         :stack_id,
         :registered_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] ecs_cluster_arn
         #   The cluster\'s ARN.
@@ -3192,12 +3356,14 @@ module Aws
       end
 
       # Describes an Elastic IP address.
-      class ElasticIp < Aws::Structure.new(
+      class ElasticIp < Struct.new(
         :ip,
         :name,
         :domain,
         :region,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip
         #   The IP address.
@@ -3227,7 +3393,7 @@ module Aws
       end
 
       # Describes an Elastic Load Balancing instance.
-      class ElasticLoadBalancer < Aws::Structure.new(
+      class ElasticLoadBalancer < Struct.new(
         :elastic_load_balancer_name,
         :region,
         :dns_name,
@@ -3237,6 +3403,8 @@ module Aws
         :availability_zones,
         :subnet_ids,
         :ec2_instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_load_balancer_name
         #   The Elastic Load Balancing instance\'s name.
@@ -3286,10 +3454,12 @@ module Aws
       #         value: "String", # required
       #         secure: false,
       #       }
-      class EnvironmentVariable < Aws::Structure.new(
+      class EnvironmentVariable < Struct.new(
         :key,
         :value,
         :secure)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   (Required) The environment variable\'s name, which can consist of up
@@ -3320,8 +3490,10 @@ module Aws
       #       {
       #         layer_id: "String", # required
       #       }
-      class GetHostnameSuggestionRequest < Aws::Structure.new(
+      class GetHostnameSuggestionRequest < Struct.new(
         :layer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_id
         #   The layer ID.
@@ -3330,9 +3502,11 @@ module Aws
       end
 
       # Contains the response to a `GetHostnameSuggestion` request.
-      class GetHostnameSuggestionResult < Aws::Structure.new(
+      class GetHostnameSuggestionResult < Struct.new(
         :layer_id,
         :hostname)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_id
         #   The layer ID.
@@ -3351,9 +3525,11 @@ module Aws
       #         instance_id: "String", # required
       #         valid_for_in_minutes: 1,
       #       }
-      class GrantAccessRequest < Aws::Structure.new(
+      class GrantAccessRequest < Struct.new(
         :instance_id,
         :valid_for_in_minutes)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance\'s AWS OpsWorks ID.
@@ -3369,8 +3545,10 @@ module Aws
       end
 
       # Contains the response to a `GrantAccess` request.
-      class GrantAccessResult < Aws::Structure.new(
+      class GrantAccessResult < Struct.new(
         :temporary_credential)
+
+        include Aws::Structure
 
         # @!attribute [rw] temporary_credential
         #   A `TemporaryCredential` object that contains the data needed to log
@@ -3381,7 +3559,7 @@ module Aws
       end
 
       # Describes an instance.
-      class Instance < Aws::Structure.new(
+      class Instance < Struct.new(
         :agent_version,
         :ami_id,
         :architecture,
@@ -3422,6 +3600,8 @@ module Aws
         :subnet_id,
         :tenancy,
         :virtualization_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_version
         #   The agent version. This parameter is set to `INHERIT` if the
@@ -3669,9 +3849,11 @@ module Aws
       #         document: "String",
       #         signature: "String",
       #       }
-      class InstanceIdentity < Aws::Structure.new(
+      class InstanceIdentity < Struct.new(
         :document,
         :signature)
+
+        include Aws::Structure
 
         # @!attribute [rw] document
         #   A JSON document that contains the metadata.
@@ -3685,7 +3867,7 @@ module Aws
       end
 
       # Describes how many instances a stack has for each status.
-      class InstancesCount < Aws::Structure.new(
+      class InstancesCount < Struct.new(
         :assigning,
         :booting,
         :connection_lost,
@@ -3705,6 +3887,8 @@ module Aws
         :terminated,
         :terminating,
         :unassigning)
+
+        include Aws::Structure
 
         # @!attribute [rw] assigning
         #   The number of instances in the Assigning state.
@@ -3785,7 +3969,7 @@ module Aws
       end
 
       # Describes a layer.
-      class Layer < Aws::Structure.new(
+      class Layer < Struct.new(
         :stack_id,
         :layer_id,
         :type,
@@ -3807,6 +3991,8 @@ module Aws
         :install_updates_on_boot,
         :use_ebs_optimized_instances,
         :lifecycle_event_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The layer stack ID.
@@ -3957,8 +4143,10 @@ module Aws
       #           delay_until_elb_connections_drained: false,
       #         },
       #       }
-      class LifecycleEventConfiguration < Aws::Structure.new(
+      class LifecycleEventConfiguration < Struct.new(
         :shutdown)
+
+        include Aws::Structure
 
         # @!attribute [rw] shutdown
         #   A `ShutdownEventConfiguration` object that specifies the Shutdown
@@ -3968,11 +4156,13 @@ module Aws
       end
 
       # Describes a layer\'s load-based auto scaling configuration.
-      class LoadBasedAutoScalingConfiguration < Aws::Structure.new(
+      class LoadBasedAutoScalingConfiguration < Struct.new(
         :layer_id,
         :enable,
         :up_scaling,
         :down_scaling)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_id
         #   The layer ID.
@@ -3997,12 +4187,14 @@ module Aws
       end
 
       # Describes stack or user permissions.
-      class Permission < Aws::Structure.new(
+      class Permission < Struct.new(
         :stack_id,
         :iam_user_arn,
         :allow_ssh,
         :allow_sudo,
         :level)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   A stack ID.
@@ -4050,7 +4242,7 @@ module Aws
       end
 
       # Describes an instance\'s RAID array.
-      class RaidArray < Aws::Structure.new(
+      class RaidArray < Struct.new(
         :raid_array_id,
         :instance_id,
         :name,
@@ -4064,6 +4256,8 @@ module Aws
         :stack_id,
         :volume_type,
         :iops)
+
+        include Aws::Structure
 
         # @!attribute [rw] raid_array_id
         #   The array ID.
@@ -4129,7 +4323,7 @@ module Aws
       end
 
       # Describes an Amazon RDS instance.
-      class RdsDbInstance < Aws::Structure.new(
+      class RdsDbInstance < Struct.new(
         :rds_db_instance_arn,
         :db_instance_identifier,
         :db_user,
@@ -4139,6 +4333,8 @@ module Aws
         :engine,
         :stack_id,
         :missing_on_rds)
+
+        include Aws::Structure
 
         # @!attribute [rw] rds_db_instance_arn
         #   The instance\'s ARN.
@@ -4188,8 +4384,10 @@ module Aws
       #       {
       #         instance_id: "String", # required
       #       }
-      class RebootInstanceRequest < Aws::Structure.new(
+      class RebootInstanceRequest < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -4221,12 +4419,14 @@ module Aws
       #         undeploy: ["String"],
       #         shutdown: ["String"],
       #       }
-      class Recipes < Aws::Structure.new(
+      class Recipes < Struct.new(
         :setup,
         :configure,
         :deploy,
         :undeploy,
         :shutdown)
+
+        include Aws::Structure
 
         # @!attribute [rw] setup
         #   An array of custom recipe names to be run following a `setup` event.
@@ -4261,9 +4461,11 @@ module Aws
       #         ecs_cluster_arn: "String", # required
       #         stack_id: "String", # required
       #       }
-      class RegisterEcsClusterRequest < Aws::Structure.new(
+      class RegisterEcsClusterRequest < Struct.new(
         :ecs_cluster_arn,
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ecs_cluster_arn
         #   The cluster\'s ARN.
@@ -4276,8 +4478,10 @@ module Aws
       end
 
       # Contains the response to a `RegisterEcsCluster` request.
-      class RegisterEcsClusterResult < Aws::Structure.new(
+      class RegisterEcsClusterResult < Struct.new(
         :ecs_cluster_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] ecs_cluster_arn
         #   The cluster\'s ARN.
@@ -4292,9 +4496,11 @@ module Aws
       #         elastic_ip: "String", # required
       #         stack_id: "String", # required
       #       }
-      class RegisterElasticIpRequest < Aws::Structure.new(
+      class RegisterElasticIpRequest < Struct.new(
         :elastic_ip,
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ip
         #   The Elastic IP address.
@@ -4307,8 +4513,10 @@ module Aws
       end
 
       # Contains the response to a `RegisterElasticIp` request.
-      class RegisterElasticIpResult < Aws::Structure.new(
+      class RegisterElasticIpResult < Struct.new(
         :elastic_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ip
         #   The Elastic IP address.
@@ -4331,7 +4539,7 @@ module Aws
       #           signature: "String",
       #         },
       #       }
-      class RegisterInstanceRequest < Aws::Structure.new(
+      class RegisterInstanceRequest < Struct.new(
         :stack_id,
         :hostname,
         :public_ip,
@@ -4339,6 +4547,8 @@ module Aws
         :rsa_public_key,
         :rsa_public_key_fingerprint,
         :instance_identity)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The ID of the stack that the instance is to be registered with.
@@ -4372,8 +4582,10 @@ module Aws
       end
 
       # Contains the response to a `RegisterInstanceResult` request.
-      class RegisterInstanceResult < Aws::Structure.new(
+      class RegisterInstanceResult < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The registered instance\'s AWS OpsWorks ID.
@@ -4390,11 +4602,13 @@ module Aws
       #         db_user: "String", # required
       #         db_password: "String", # required
       #       }
-      class RegisterRdsDbInstanceRequest < Aws::Structure.new(
+      class RegisterRdsDbInstanceRequest < Struct.new(
         :stack_id,
         :rds_db_instance_arn,
         :db_user,
         :db_password)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -4421,9 +4635,11 @@ module Aws
       #         ec2_volume_id: "String",
       #         stack_id: "String", # required
       #       }
-      class RegisterVolumeRequest < Aws::Structure.new(
+      class RegisterVolumeRequest < Struct.new(
         :ec2_volume_id,
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ec2_volume_id
         #   The Amazon EBS volume ID.
@@ -4436,8 +4652,10 @@ module Aws
       end
 
       # Contains the response to a `RegisterVolume` request.
-      class RegisterVolumeResult < Aws::Structure.new(
+      class RegisterVolumeResult < Struct.new(
         :volume_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The volume ID.
@@ -4446,10 +4664,12 @@ module Aws
       end
 
       # A registered instance\'s reported operating system.
-      class ReportedOs < Aws::Structure.new(
+      class ReportedOs < Struct.new(
         :family,
         :name,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] family
         #   The operating system family.
@@ -4466,11 +4686,13 @@ module Aws
       end
 
       # Describes a user\'s SSH information.
-      class SelfUserProfile < Aws::Structure.new(
+      class SelfUserProfile < Struct.new(
         :iam_user_arn,
         :name,
         :ssh_username,
         :ssh_public_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arn
         #   The user\'s IAM ARN.
@@ -4491,13 +4713,15 @@ module Aws
       end
 
       # Describes an AWS OpsWorks service error.
-      class ServiceError < Aws::Structure.new(
+      class ServiceError < Struct.new(
         :service_error_id,
         :stack_id,
         :instance_id,
         :type,
         :message,
         :created_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_error_id
         #   The error ID.
@@ -4550,11 +4774,13 @@ module Aws
       #           alarms: ["String"],
       #         },
       #       }
-      class SetLoadBasedAutoScalingRequest < Aws::Structure.new(
+      class SetLoadBasedAutoScalingRequest < Struct.new(
         :layer_id,
         :enable,
         :up_scaling,
         :down_scaling)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_id
         #   The layer ID.
@@ -4589,12 +4815,14 @@ module Aws
       #         allow_sudo: false,
       #         level: "String",
       #       }
-      class SetPermissionRequest < Aws::Structure.new(
+      class SetPermissionRequest < Struct.new(
         :stack_id,
         :iam_user_arn,
         :allow_ssh,
         :allow_sudo,
         :level)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -4665,9 +4893,11 @@ module Aws
       #           },
       #         },
       #       }
-      class SetTimeBasedAutoScalingRequest < Aws::Structure.new(
+      class SetTimeBasedAutoScalingRequest < Struct.new(
         :instance_id,
         :auto_scaling_schedule)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -4687,9 +4917,11 @@ module Aws
       #         execution_timeout: 1,
       #         delay_until_elb_connections_drained: false,
       #       }
-      class ShutdownEventConfiguration < Aws::Structure.new(
+      class ShutdownEventConfiguration < Struct.new(
         :execution_timeout,
         :delay_until_elb_connections_drained)
+
+        include Aws::Structure
 
         # @!attribute [rw] execution_timeout
         #   The time, in seconds, that AWS OpsWorks will wait after triggering a
@@ -4726,13 +4958,15 @@ module Aws
       #         ssh_key: "String",
       #         revision: "String",
       #       }
-      class Source < Aws::Structure.new(
+      class Source < Struct.new(
         :type,
         :url,
         :username,
         :password,
         :ssh_key,
         :revision)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The repository type.
@@ -4798,10 +5032,12 @@ module Aws
       #         private_key: "String", # required
       #         chain: "String",
       #       }
-      class SslConfiguration < Aws::Structure.new(
+      class SslConfiguration < Struct.new(
         :certificate,
         :private_key,
         :chain)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate
         #   The contents of the certificate\'s domain.crt file.
@@ -4819,7 +5055,7 @@ module Aws
       end
 
       # Describes a stack.
-      class Stack < Aws::Structure.new(
+      class Stack < Struct.new(
         :stack_id,
         :name,
         :arn,
@@ -4842,6 +5078,8 @@ module Aws
         :created_at,
         :default_root_device_type,
         :agent_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -4995,9 +5233,11 @@ module Aws
       #         name: "String",
       #         version: "String",
       #       }
-      class StackConfigurationManager < Aws::Structure.new(
+      class StackConfigurationManager < Struct.new(
         :name,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name. This parameter must be set to \"Chef\".
@@ -5012,13 +5252,15 @@ module Aws
       end
 
       # Summarizes the number of layers, instances, and apps in a stack.
-      class StackSummary < Aws::Structure.new(
+      class StackSummary < Struct.new(
         :stack_id,
         :name,
         :arn,
         :layers_count,
         :apps_count,
         :instances_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -5053,8 +5295,10 @@ module Aws
       #       {
       #         instance_id: "String", # required
       #       }
-      class StartInstanceRequest < Aws::Structure.new(
+      class StartInstanceRequest < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -5068,8 +5312,10 @@ module Aws
       #       {
       #         stack_id: "String", # required
       #       }
-      class StartStackRequest < Aws::Structure.new(
+      class StartStackRequest < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -5083,8 +5329,10 @@ module Aws
       #       {
       #         instance_id: "String", # required
       #       }
-      class StopInstanceRequest < Aws::Structure.new(
+      class StopInstanceRequest < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -5098,8 +5346,10 @@ module Aws
       #       {
       #         stack_id: "String", # required
       #       }
-      class StopStackRequest < Aws::Structure.new(
+      class StopStackRequest < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -5109,11 +5359,13 @@ module Aws
 
       # Contains the data needed by RDP clients such as the Microsoft Remote
       # Desktop Connection to log in to the instance.
-      class TemporaryCredential < Aws::Structure.new(
+      class TemporaryCredential < Struct.new(
         :username,
         :password,
         :valid_for_in_minutes,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] username
         #   The user name.
@@ -5137,9 +5389,11 @@ module Aws
       end
 
       # Describes an instance\'s time-based auto scaling configuration.
-      class TimeBasedAutoScalingConfiguration < Aws::Structure.new(
+      class TimeBasedAutoScalingConfiguration < Struct.new(
         :instance_id,
         :auto_scaling_schedule)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -5157,8 +5411,10 @@ module Aws
       #       {
       #         instance_id: "String", # required
       #       }
-      class UnassignInstanceRequest < Aws::Structure.new(
+      class UnassignInstanceRequest < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -5172,8 +5428,10 @@ module Aws
       #       {
       #         volume_id: "String", # required
       #       }
-      class UnassignVolumeRequest < Aws::Structure.new(
+      class UnassignVolumeRequest < Struct.new(
         :volume_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The volume ID.
@@ -5222,7 +5480,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateAppRequest < Aws::Structure.new(
+      class UpdateAppRequest < Struct.new(
         :app_id,
         :name,
         :description,
@@ -5234,6 +5492,8 @@ module Aws
         :ssl_configuration,
         :attributes,
         :environment)
+
+        include Aws::Structure
 
         # @!attribute [rw] app_id
         #   The app ID.
@@ -5310,9 +5570,11 @@ module Aws
       #         elastic_ip: "String", # required
       #         name: "String",
       #       }
-      class UpdateElasticIpRequest < Aws::Structure.new(
+      class UpdateElasticIpRequest < Struct.new(
         :elastic_ip,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] elastic_ip
         #   The address.
@@ -5341,7 +5603,7 @@ module Aws
       #         ebs_optimized: false,
       #         agent_version: "String",
       #       }
-      class UpdateInstanceRequest < Aws::Structure.new(
+      class UpdateInstanceRequest < Struct.new(
         :instance_id,
         :layer_ids,
         :instance_type,
@@ -5354,6 +5616,8 @@ module Aws
         :install_updates_on_boot,
         :ebs_optimized,
         :agent_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -5541,7 +5805,7 @@ module Aws
       #           },
       #         },
       #       }
-      class UpdateLayerRequest < Aws::Structure.new(
+      class UpdateLayerRequest < Struct.new(
         :layer_id,
         :name,
         :shortname,
@@ -5558,6 +5822,8 @@ module Aws
         :install_updates_on_boot,
         :use_ebs_optimized_instances,
         :lifecycle_event_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_id
         #   The layer ID.
@@ -5679,8 +5945,10 @@ module Aws
       #       {
       #         ssh_public_key: "String",
       #       }
-      class UpdateMyUserProfileRequest < Aws::Structure.new(
+      class UpdateMyUserProfileRequest < Struct.new(
         :ssh_public_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] ssh_public_key
         #   The user\'s SSH public key.
@@ -5696,10 +5964,12 @@ module Aws
       #         db_user: "String",
       #         db_password: "String",
       #       }
-      class UpdateRdsDbInstanceRequest < Aws::Structure.new(
+      class UpdateRdsDbInstanceRequest < Struct.new(
         :rds_db_instance_arn,
         :db_user,
         :db_password)
+
+        include Aws::Structure
 
         # @!attribute [rw] rds_db_instance_arn
         #   The Amazon RDS instance\'s ARN.
@@ -5753,7 +6023,7 @@ module Aws
       #         use_opsworks_security_groups: false,
       #         agent_version: "String",
       #       }
-      class UpdateStackRequest < Aws::Structure.new(
+      class UpdateStackRequest < Struct.new(
         :stack_id,
         :name,
         :attributes,
@@ -5772,6 +6042,8 @@ module Aws
         :default_root_device_type,
         :use_opsworks_security_groups,
         :agent_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The stack ID.
@@ -6030,11 +6302,13 @@ module Aws
       #         ssh_public_key: "String",
       #         allow_self_management: false,
       #       }
-      class UpdateUserProfileRequest < Aws::Structure.new(
+      class UpdateUserProfileRequest < Struct.new(
         :iam_user_arn,
         :ssh_username,
         :ssh_public_key,
         :allow_self_management)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arn
         #   The user IAM ARN.
@@ -6072,10 +6346,12 @@ module Aws
       #         name: "String",
       #         mount_point: "String",
       #       }
-      class UpdateVolumeRequest < Aws::Structure.new(
+      class UpdateVolumeRequest < Struct.new(
         :volume_id,
         :name,
         :mount_point)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The volume ID.
@@ -6092,12 +6368,14 @@ module Aws
       end
 
       # Describes a user\'s SSH information.
-      class UserProfile < Aws::Structure.new(
+      class UserProfile < Struct.new(
         :iam_user_arn,
         :name,
         :ssh_username,
         :ssh_public_key,
         :allow_self_management)
+
+        include Aws::Structure
 
         # @!attribute [rw] iam_user_arn
         #   The user\'s IAM ARN.
@@ -6128,7 +6406,7 @@ module Aws
       end
 
       # Describes an instance\'s Amazon EBS volume.
-      class Volume < Aws::Structure.new(
+      class Volume < Struct.new(
         :volume_id,
         :ec2_volume_id,
         :name,
@@ -6142,6 +6420,8 @@ module Aws
         :availability_zone,
         :volume_type,
         :iops)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The volume ID.
@@ -6223,13 +6503,15 @@ module Aws
       #         volume_type: "String",
       #         iops: 1,
       #       }
-      class VolumeConfiguration < Aws::Structure.new(
+      class VolumeConfiguration < Struct.new(
         :mount_point,
         :raid_level,
         :number_of_disks,
         :size,
         :volume_type,
         :iops)
+
+        include Aws::Structure
 
         # @!attribute [rw] mount_point
         #   The volume mount point. For example \"/dev/sdh\".
@@ -6312,7 +6594,7 @@ module Aws
       #           "Hour" => "Switch",
       #         },
       #       }
-      class WeeklyAutoScalingSchedule < Aws::Structure.new(
+      class WeeklyAutoScalingSchedule < Struct.new(
         :monday,
         :tuesday,
         :wednesday,
@@ -6320,6 +6602,8 @@ module Aws
         :friday,
         :saturday,
         :sunday)
+
+        include Aws::Structure
 
         # @!attribute [rw] monday
         #   The schedule for Monday.

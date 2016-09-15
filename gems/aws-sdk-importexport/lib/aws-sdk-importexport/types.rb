@@ -11,9 +11,11 @@ module Aws
 
       # A discrete item that contains the description and URL of an artifact
       # (such as a PDF).
-      class Artifact < Aws::Structure.new(
+      class Artifact < Struct.new(
         :description,
         :url)
+
+        include Aws::Structure
 
         # @!attribute [rw] description
         #   The associated description for this object.
@@ -33,9 +35,11 @@ module Aws
       #         job_id: "JobId", # required
       #         api_version: "APIVersion",
       #       }
-      class CancelJobInput < Aws::Structure.new(
+      class CancelJobInput < Struct.new(
         :job_id,
         :api_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   A unique identifier which refers to a particular job.
@@ -48,8 +52,10 @@ module Aws
       end
 
       # Output structure for the CancelJob operation.
-      class CancelJobOutput < Aws::Structure.new(
+      class CancelJobOutput < Struct.new(
         :success)
+
+        include Aws::Structure
 
         # @!attribute [rw] success
         #   Specifies whether (true) or not (false) AWS Import/Export updated
@@ -69,12 +75,14 @@ module Aws
       #         validate_only: false, # required
       #         api_version: "APIVersion",
       #       }
-      class CreateJobInput < Aws::Structure.new(
+      class CreateJobInput < Struct.new(
         :job_type,
         :manifest,
         :manifest_addendum,
         :validate_only,
         :api_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_type
         #   Specifies whether the job to initiate is an import or export job.
@@ -100,13 +108,15 @@ module Aws
       end
 
       # Output structure for the CreateJob operation.
-      class CreateJobOutput < Aws::Structure.new(
+      class CreateJobOutput < Struct.new(
         :job_id,
         :job_type,
         :signature,
         :signature_file_contents,
         :warning_message,
         :artifact_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   A unique identifier which refers to a particular job.
@@ -155,7 +165,7 @@ module Aws
       #         street3: "street3",
       #         api_version: "APIVersion",
       #       }
-      class GetShippingLabelInput < Aws::Structure.new(
+      class GetShippingLabelInput < Struct.new(
         :job_ids,
         :name,
         :company,
@@ -168,6 +178,8 @@ module Aws
         :street2,
         :street3,
         :api_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_ids
         #   @return [Array<String>]
@@ -224,9 +236,11 @@ module Aws
 
       end
 
-      class GetShippingLabelOutput < Aws::Structure.new(
+      class GetShippingLabelOutput < Struct.new(
         :shipping_label_url,
         :warning)
+
+        include Aws::Structure
 
         # @!attribute [rw] shipping_label_url
         #   @return [String]
@@ -244,9 +258,11 @@ module Aws
       #         job_id: "JobId", # required
       #         api_version: "APIVersion",
       #       }
-      class GetStatusInput < Aws::Structure.new(
+      class GetStatusInput < Struct.new(
         :job_id,
         :api_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   A unique identifier which refers to a particular job.
@@ -259,7 +275,7 @@ module Aws
       end
 
       # Output structure for the GetStatus operation.
-      class GetStatusOutput < Aws::Structure.new(
+      class GetStatusOutput < Struct.new(
         :job_id,
         :job_type,
         :location_code,
@@ -276,6 +292,8 @@ module Aws
         :current_manifest,
         :creation_date,
         :artifact_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   A unique identifier which refers to a particular job.
@@ -357,11 +375,13 @@ module Aws
       end
 
       # Representation of a job returned by the ListJobs operation.
-      class Job < Aws::Structure.new(
+      class Job < Struct.new(
         :job_id,
         :creation_date,
         :is_canceled,
         :job_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   A unique identifier which refers to a particular job.
@@ -391,10 +411,12 @@ module Aws
       #         marker: "Marker",
       #         api_version: "APIVersion",
       #       }
-      class ListJobsInput < Aws::Structure.new(
+      class ListJobsInput < Struct.new(
         :max_jobs,
         :marker,
         :api_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_jobs
         #   Sets the maximum number of jobs returned in the response. If there
@@ -417,9 +439,11 @@ module Aws
       end
 
       # Output structure for the ListJobs operation.
-      class ListJobsOutput < Aws::Structure.new(
+      class ListJobsOutput < Struct.new(
         :jobs,
         :is_truncated)
+
+        include Aws::Structure
 
         # @!attribute [rw] jobs
         #   A list container for Jobs returned by the ListJobs operation.
@@ -443,12 +467,14 @@ module Aws
       #         validate_only: false, # required
       #         api_version: "APIVersion",
       #       }
-      class UpdateJobInput < Aws::Structure.new(
+      class UpdateJobInput < Struct.new(
         :job_id,
         :manifest,
         :job_type,
         :validate_only,
         :api_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   A unique identifier which refers to a particular job.
@@ -474,10 +500,12 @@ module Aws
       end
 
       # Output structure for the UpateJob operation.
-      class UpdateJobOutput < Aws::Structure.new(
+      class UpdateJobOutput < Struct.new(
         :success,
         :warning_message,
         :artifact_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] success
         #   Specifies whether (true) or not (false) AWS Import/Export updated

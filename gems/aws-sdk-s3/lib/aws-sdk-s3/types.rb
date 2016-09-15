@@ -18,8 +18,10 @@ module Aws
       #       {
       #         days_after_initiation: 1,
       #       }
-      class AbortIncompleteMultipartUpload < Aws::Structure.new(
+      class AbortIncompleteMultipartUpload < Struct.new(
         :days_after_initiation)
+
+        include Aws::Structure
 
         # @!attribute [rw] days_after_initiation
         #   Indicates the number of days that must pass since initiation for
@@ -28,8 +30,10 @@ module Aws
 
       end
 
-      class AbortMultipartUploadOutput < Aws::Structure.new(
+      class AbortMultipartUploadOutput < Struct.new(
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] request_charged
         #   If present, indicates that the requester was successfully charged
@@ -47,11 +51,13 @@ module Aws
       #         upload_id: "MultipartUploadId", # required
       #         request_payer: "requester", # accepts requester
       #       }
-      class AbortMultipartUploadRequest < Aws::Structure.new(
+      class AbortMultipartUploadRequest < Struct.new(
         :bucket,
         :key,
         :upload_id,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -78,8 +84,10 @@ module Aws
       #       {
       #         status: "Enabled", # accepts Enabled, Suspended
       #       }
-      class AccelerateConfiguration < Aws::Structure.new(
+      class AccelerateConfiguration < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The accelerate configuration of the bucket.
@@ -108,9 +116,11 @@ module Aws
       #           id: "ID",
       #         },
       #       }
-      class AccessControlPolicy < Aws::Structure.new(
+      class AccessControlPolicy < Struct.new(
         :grants,
         :owner)
+
+        include Aws::Structure
 
         # @!attribute [rw] grants
         #   A list of grants.
@@ -121,9 +131,11 @@ module Aws
 
       end
 
-      class Bucket < Aws::Structure.new(
+      class Bucket < Struct.new(
         :name,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the bucket.
@@ -171,8 +183,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class BucketLifecycleConfiguration < Aws::Structure.new(
+      class BucketLifecycleConfiguration < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   @return [Array<Types::LifecycleRule>]
@@ -200,8 +214,10 @@ module Aws
       #           target_prefix: "TargetPrefix",
       #         },
       #       }
-      class BucketLoggingStatus < Aws::Structure.new(
+      class BucketLoggingStatus < Struct.new(
         :logging_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] logging_enabled
         #   @return [Types::LoggingEnabled]
@@ -222,8 +238,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class CORSConfiguration < Aws::Structure.new(
+      class CORSConfiguration < Struct.new(
         :cors_rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] cors_rules
         #   @return [Array<Types::CORSRule>]
@@ -240,12 +258,14 @@ module Aws
       #         expose_headers: ["ExposeHeader"],
       #         max_age_seconds: 1,
       #       }
-      class CORSRule < Aws::Structure.new(
+      class CORSRule < Struct.new(
         :allowed_headers,
         :allowed_methods,
         :allowed_origins,
         :expose_headers,
         :max_age_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] allowed_headers
         #   Specifies which headers are allowed in a pre-flight OPTIONS request.
@@ -284,12 +304,14 @@ module Aws
       #         cloud_function: "CloudFunction",
       #         invocation_role: "CloudFunctionInvocationRole",
       #       }
-      class CloudFunctionConfiguration < Aws::Structure.new(
+      class CloudFunctionConfiguration < Struct.new(
         :id,
         :event,
         :events,
         :cloud_function,
         :invocation_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Optional unique identifier for configurations in a notification
@@ -312,15 +334,17 @@ module Aws
 
       end
 
-      class CommonPrefix < Aws::Structure.new(
+      class CommonPrefix < Struct.new(
         :prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] prefix
         #   @return [String]
 
       end
 
-      class CompleteMultipartUploadOutput < Aws::Structure.new(
+      class CompleteMultipartUploadOutput < Struct.new(
         :location,
         :bucket,
         :key,
@@ -330,6 +354,8 @@ module Aws
         :version_id,
         :ssekms_key_id,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   @return [String]
@@ -388,12 +414,14 @@ module Aws
       #         upload_id: "MultipartUploadId", # required
       #         request_payer: "requester", # accepts requester
       #       }
-      class CompleteMultipartUploadRequest < Aws::Structure.new(
+      class CompleteMultipartUploadRequest < Struct.new(
         :bucket,
         :key,
         :multipart_upload,
         :upload_id,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -428,8 +456,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class CompletedMultipartUpload < Aws::Structure.new(
+      class CompletedMultipartUpload < Struct.new(
         :parts)
+
+        include Aws::Structure
 
         # @!attribute [rw] parts
         #   @return [Array<Types::CompletedPart>]
@@ -443,9 +473,11 @@ module Aws
       #         etag: "ETag",
       #         part_number: 1,
       #       }
-      class CompletedPart < Aws::Structure.new(
+      class CompletedPart < Struct.new(
         :etag,
         :part_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] etag
         #   Entity tag returned when the part was uploaded.
@@ -465,9 +497,11 @@ module Aws
       #         http_error_code_returned_equals: "HttpErrorCodeReturnedEquals",
       #         key_prefix_equals: "KeyPrefixEquals",
       #       }
-      class Condition < Aws::Structure.new(
+      class Condition < Struct.new(
         :http_error_code_returned_equals,
         :key_prefix_equals)
+
+        include Aws::Structure
 
         # @!attribute [rw] http_error_code_returned_equals
         #   The HTTP error code when the redirect is applied. In the event of an
@@ -490,7 +524,7 @@ module Aws
 
       end
 
-      class CopyObjectOutput < Aws::Structure.new(
+      class CopyObjectOutput < Struct.new(
         :copy_object_result,
         :expiration,
         :copy_source_version_id,
@@ -500,6 +534,8 @@ module Aws
         :sse_customer_key_md5,
         :ssekms_key_id,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] copy_object_result
         #   @return [Types::CopyObjectResult]
@@ -584,7 +620,7 @@ module Aws
       #         copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
       #       }
-      class CopyObjectRequest < Aws::Structure.new(
+      class CopyObjectRequest < Struct.new(
         :acl,
         :bucket,
         :cache_control,
@@ -616,6 +652,8 @@ module Aws
         :copy_source_sse_customer_key,
         :copy_source_sse_customer_key_md5,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] acl
         #   The canned ACL to apply to the object.
@@ -773,9 +811,11 @@ module Aws
 
       end
 
-      class CopyObjectResult < Aws::Structure.new(
+      class CopyObjectResult < Struct.new(
         :etag,
         :last_modified)
+
+        include Aws::Structure
 
         # @!attribute [rw] etag
         #   @return [String]
@@ -785,9 +825,11 @@ module Aws
 
       end
 
-      class CopyPartResult < Aws::Structure.new(
+      class CopyPartResult < Struct.new(
         :etag,
         :last_modified)
+
+        include Aws::Structure
 
         # @!attribute [rw] etag
         #   Entity tag of the object.
@@ -805,8 +847,10 @@ module Aws
       #       {
       #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
       #       }
-      class CreateBucketConfiguration < Aws::Structure.new(
+      class CreateBucketConfiguration < Struct.new(
         :location_constraint)
+
+        include Aws::Structure
 
         # @!attribute [rw] location_constraint
         #   Specifies the region where the bucket will be created. If you don\'t
@@ -815,8 +859,10 @@ module Aws
 
       end
 
-      class CreateBucketOutput < Aws::Structure.new(
+      class CreateBucketOutput < Struct.new(
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   @return [String]
@@ -838,7 +884,7 @@ module Aws
       #         grant_write: "GrantWrite",
       #         grant_write_acp: "GrantWriteACP",
       #       }
-      class CreateBucketRequest < Aws::Structure.new(
+      class CreateBucketRequest < Struct.new(
         :acl,
         :bucket,
         :create_bucket_configuration,
@@ -847,6 +893,8 @@ module Aws
         :grant_read_acp,
         :grant_write,
         :grant_write_acp)
+
+        include Aws::Structure
 
         # @!attribute [rw] acl
         #   The canned ACL to apply to the bucket.
@@ -882,7 +930,7 @@ module Aws
 
       end
 
-      class CreateMultipartUploadOutput < Aws::Structure.new(
+      class CreateMultipartUploadOutput < Struct.new(
         :abort_date,
         :abort_rule_id,
         :bucket,
@@ -893,6 +941,8 @@ module Aws
         :sse_customer_key_md5,
         :ssekms_key_id,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] abort_date
         #   Date when multipart upload will become eligible for abort operation
@@ -975,7 +1025,7 @@ module Aws
       #         ssekms_key_id: "SSEKMSKeyId",
       #         request_payer: "requester", # accepts requester
       #       }
-      class CreateMultipartUploadRequest < Aws::Structure.new(
+      class CreateMultipartUploadRequest < Struct.new(
         :acl,
         :bucket,
         :cache_control,
@@ -998,6 +1048,8 @@ module Aws
         :sse_customer_key_md5,
         :ssekms_key_id,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] acl
         #   The canned ACL to apply to the object.
@@ -1121,9 +1173,11 @@ module Aws
       #         ],
       #         quiet: false,
       #       }
-      class Delete < Aws::Structure.new(
+      class Delete < Struct.new(
         :objects,
         :quiet)
+
+        include Aws::Structure
 
         # @!attribute [rw] objects
         #   @return [Array<Types::ObjectIdentifier>]
@@ -1141,8 +1195,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class DeleteBucketCorsRequest < Aws::Structure.new(
+      class DeleteBucketCorsRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1155,8 +1211,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class DeleteBucketLifecycleRequest < Aws::Structure.new(
+      class DeleteBucketLifecycleRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1169,8 +1227,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class DeleteBucketPolicyRequest < Aws::Structure.new(
+      class DeleteBucketPolicyRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1183,8 +1243,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class DeleteBucketReplicationRequest < Aws::Structure.new(
+      class DeleteBucketReplicationRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1197,8 +1259,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class DeleteBucketRequest < Aws::Structure.new(
+      class DeleteBucketRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1211,8 +1275,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class DeleteBucketTaggingRequest < Aws::Structure.new(
+      class DeleteBucketTaggingRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1225,20 +1291,24 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class DeleteBucketWebsiteRequest < Aws::Structure.new(
+      class DeleteBucketWebsiteRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class DeleteMarkerEntry < Aws::Structure.new(
+      class DeleteMarkerEntry < Struct.new(
         :owner,
         :key,
         :version_id,
         :is_latest,
         :last_modified)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner
         #   @return [Types::Owner]
@@ -1262,10 +1332,12 @@ module Aws
 
       end
 
-      class DeleteObjectOutput < Aws::Structure.new(
+      class DeleteObjectOutput < Struct.new(
         :delete_marker,
         :version_id,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] delete_marker
         #   Specifies whether the versioned object that was permanently deleted
@@ -1294,12 +1366,14 @@ module Aws
       #         version_id: "ObjectVersionId",
       #         request_payer: "requester", # accepts requester
       #       }
-      class DeleteObjectRequest < Aws::Structure.new(
+      class DeleteObjectRequest < Struct.new(
         :bucket,
         :key,
         :mfa,
         :version_id,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1327,10 +1401,12 @@ module Aws
 
       end
 
-      class DeleteObjectsOutput < Aws::Structure.new(
+      class DeleteObjectsOutput < Struct.new(
         :deleted,
         :request_charged,
         :errors)
+
+        include Aws::Structure
 
         # @!attribute [rw] deleted
         #   @return [Array<Types::DeletedObject>]
@@ -1362,11 +1438,13 @@ module Aws
       #         mfa: "MFA",
       #         request_payer: "requester", # accepts requester
       #       }
-      class DeleteObjectsRequest < Aws::Structure.new(
+      class DeleteObjectsRequest < Struct.new(
         :bucket,
         :delete,
         :mfa,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1390,11 +1468,13 @@ module Aws
 
       end
 
-      class DeletedObject < Aws::Structure.new(
+      class DeletedObject < Struct.new(
         :key,
         :version_id,
         :delete_marker,
         :delete_marker_version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   @return [String]
@@ -1417,9 +1497,11 @@ module Aws
       #         bucket: "BucketName", # required
       #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
       #       }
-      class Destination < Aws::Structure.new(
+      class Destination < Struct.new(
         :bucket,
         :storage_class)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   Amazon resource name (ARN) of the bucket where you want Amazon S3 to
@@ -1432,11 +1514,13 @@ module Aws
 
       end
 
-      class Error < Aws::Structure.new(
+      class Error < Struct.new(
         :key,
         :version_id,
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   @return [String]
@@ -1458,8 +1542,10 @@ module Aws
       #       {
       #         key: "ObjectKey", # required
       #       }
-      class ErrorDocument < Aws::Structure.new(
+      class ErrorDocument < Struct.new(
         :key)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The object key name to use when a 4XX class error occurs.
@@ -1476,9 +1562,11 @@ module Aws
       #         name: "prefix", # accepts prefix, suffix
       #         value: "FilterRuleValue",
       #       }
-      class FilterRule < Aws::Structure.new(
+      class FilterRule < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Object key name prefix or suffix identifying one or more objects to
@@ -1498,8 +1586,10 @@ module Aws
 
       end
 
-      class GetBucketAccelerateConfigurationOutput < Aws::Structure.new(
+      class GetBucketAccelerateConfigurationOutput < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The accelerate configuration of the bucket.
@@ -1513,8 +1603,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketAccelerateConfigurationRequest < Aws::Structure.new(
+      class GetBucketAccelerateConfigurationRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   Name of the bucket for which the accelerate configuration is
@@ -1523,9 +1615,11 @@ module Aws
 
       end
 
-      class GetBucketAclOutput < Aws::Structure.new(
+      class GetBucketAclOutput < Struct.new(
         :owner,
         :grants)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner
         #   @return [Types::Owner]
@@ -1542,16 +1636,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketAclRequest < Aws::Structure.new(
+      class GetBucketAclRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketCorsOutput < Aws::Structure.new(
+      class GetBucketCorsOutput < Struct.new(
         :cors_rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] cors_rules
         #   @return [Array<Types::CORSRule>]
@@ -1564,16 +1662,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketCorsRequest < Aws::Structure.new(
+      class GetBucketCorsRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketLifecycleConfigurationOutput < Aws::Structure.new(
+      class GetBucketLifecycleConfigurationOutput < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   @return [Array<Types::LifecycleRule>]
@@ -1586,16 +1688,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketLifecycleConfigurationRequest < Aws::Structure.new(
+      class GetBucketLifecycleConfigurationRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketLifecycleOutput < Aws::Structure.new(
+      class GetBucketLifecycleOutput < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   @return [Array<Types::Rule>]
@@ -1608,16 +1714,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketLifecycleRequest < Aws::Structure.new(
+      class GetBucketLifecycleRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketLocationOutput < Aws::Structure.new(
+      class GetBucketLocationOutput < Struct.new(
         :location_constraint)
+
+        include Aws::Structure
 
         # @!attribute [rw] location_constraint
         #   @return [String]
@@ -1630,16 +1740,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketLocationRequest < Aws::Structure.new(
+      class GetBucketLocationRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketLoggingOutput < Aws::Structure.new(
+      class GetBucketLoggingOutput < Struct.new(
         :logging_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] logging_enabled
         #   @return [Types::LoggingEnabled]
@@ -1652,8 +1766,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketLoggingRequest < Aws::Structure.new(
+      class GetBucketLoggingRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1666,8 +1782,10 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketNotificationConfigurationRequest < Aws::Structure.new(
+      class GetBucketNotificationConfigurationRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   Name of the bucket to get the notification configuration for.
@@ -1675,8 +1793,10 @@ module Aws
 
       end
 
-      class GetBucketPolicyOutput < Aws::Structure.new(
+      class GetBucketPolicyOutput < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   The bucket policy as a JSON document.
@@ -1690,16 +1810,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketPolicyRequest < Aws::Structure.new(
+      class GetBucketPolicyRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketReplicationOutput < Aws::Structure.new(
+      class GetBucketReplicationOutput < Struct.new(
         :replication_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_configuration
         #   Container for replication rules. You can add as many as 1,000 rules.
@@ -1714,16 +1838,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketReplicationRequest < Aws::Structure.new(
+      class GetBucketReplicationRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketRequestPaymentOutput < Aws::Structure.new(
+      class GetBucketRequestPaymentOutput < Struct.new(
         :payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] payer
         #   Specifies who pays for the download and request fees.
@@ -1737,16 +1865,20 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketRequestPaymentRequest < Aws::Structure.new(
+      class GetBucketRequestPaymentRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketTaggingOutput < Aws::Structure.new(
+      class GetBucketTaggingOutput < Struct.new(
         :tag_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_set
         #   @return [Array<Types::Tag>]
@@ -1759,17 +1891,21 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketTaggingRequest < Aws::Structure.new(
+      class GetBucketTaggingRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketVersioningOutput < Aws::Structure.new(
+      class GetBucketVersioningOutput < Struct.new(
         :status,
         :mfa_delete)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The versioning state of the bucket.
@@ -1790,19 +1926,23 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketVersioningRequest < Aws::Structure.new(
+      class GetBucketVersioningRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetBucketWebsiteOutput < Aws::Structure.new(
+      class GetBucketWebsiteOutput < Struct.new(
         :redirect_all_requests_to,
         :index_document,
         :error_document,
         :routing_rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] redirect_all_requests_to
         #   @return [Types::RedirectAllRequestsTo]
@@ -1824,18 +1964,22 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class GetBucketWebsiteRequest < Aws::Structure.new(
+      class GetBucketWebsiteRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class GetObjectAclOutput < Aws::Structure.new(
+      class GetObjectAclOutput < Struct.new(
         :owner,
         :grants,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner
         #   @return [Types::Owner]
@@ -1860,11 +2004,13 @@ module Aws
       #         version_id: "ObjectVersionId",
       #         request_payer: "requester", # accepts requester
       #       }
-      class GetObjectAclRequest < Aws::Structure.new(
+      class GetObjectAclRequest < Struct.new(
         :bucket,
         :key,
         :version_id,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -1886,7 +2032,7 @@ module Aws
 
       end
 
-      class GetObjectOutput < Aws::Structure.new(
+      class GetObjectOutput < Struct.new(
         :body,
         :delete_marker,
         :accept_ranges,
@@ -1914,6 +2060,8 @@ module Aws
         :storage_class,
         :request_charged,
         :replication_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] body
         #   Object data.
@@ -2068,7 +2216,7 @@ module Aws
       #         sse_customer_key_md5: "SSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
       #       }
-      class GetObjectRequest < Aws::Structure.new(
+      class GetObjectRequest < Struct.new(
         :bucket,
         :if_match,
         :if_modified_since,
@@ -2087,6 +2235,8 @@ module Aws
         :sse_customer_key,
         :sse_customer_key_md5,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -2177,9 +2327,11 @@ module Aws
 
       end
 
-      class GetObjectTorrentOutput < Aws::Structure.new(
+      class GetObjectTorrentOutput < Struct.new(
         :body,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] body
         #   @return [IO]
@@ -2199,10 +2351,12 @@ module Aws
       #         key: "ObjectKey", # required
       #         request_payer: "requester", # accepts requester
       #       }
-      class GetObjectTorrentRequest < Aws::Structure.new(
+      class GetObjectTorrentRequest < Struct.new(
         :bucket,
         :key,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -2233,9 +2387,11 @@ module Aws
       #         },
       #         permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
       #       }
-      class Grant < Aws::Structure.new(
+      class Grant < Struct.new(
         :grantee,
         :permission)
+
+        include Aws::Structure
 
         # @!attribute [rw] grantee
         #   @return [Types::Grantee]
@@ -2256,12 +2412,14 @@ module Aws
       #         type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
       #         uri: "URI",
       #       }
-      class Grantee < Aws::Structure.new(
+      class Grantee < Struct.new(
         :display_name,
         :email_address,
         :id,
         :type,
         :uri)
+
+        include Aws::Structure
 
         # @!attribute [rw] display_name
         #   Screen name of the grantee.
@@ -2291,15 +2449,17 @@ module Aws
       #       {
       #         bucket: "BucketName", # required
       #       }
-      class HeadBucketRequest < Aws::Structure.new(
+      class HeadBucketRequest < Struct.new(
         :bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
 
       end
 
-      class HeadObjectOutput < Aws::Structure.new(
+      class HeadObjectOutput < Struct.new(
         :delete_marker,
         :accept_ranges,
         :expiration,
@@ -2325,6 +2485,8 @@ module Aws
         :storage_class,
         :request_charged,
         :replication_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] delete_marker
         #   Specifies whether the object retrieved was (true) or was not (false)
@@ -2465,7 +2627,7 @@ module Aws
       #         sse_customer_key_md5: "SSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
       #       }
-      class HeadObjectRequest < Aws::Structure.new(
+      class HeadObjectRequest < Struct.new(
         :bucket,
         :if_match,
         :if_modified_since,
@@ -2478,6 +2640,8 @@ module Aws
         :sse_customer_key,
         :sse_customer_key_md5,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -2550,8 +2714,10 @@ module Aws
       #       {
       #         suffix: "Suffix", # required
       #       }
-      class IndexDocument < Aws::Structure.new(
+      class IndexDocument < Struct.new(
         :suffix)
+
+        include Aws::Structure
 
         # @!attribute [rw] suffix
         #   A suffix that is appended to a request that is for a directory on
@@ -2563,9 +2729,11 @@ module Aws
 
       end
 
-      class Initiator < Aws::Structure.new(
+      class Initiator < Struct.new(
         :id,
         :display_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   If the principal is an AWS account, it provides the Canonical User
@@ -2597,11 +2765,13 @@ module Aws
       #           },
       #         },
       #       }
-      class LambdaFunctionConfiguration < Aws::Structure.new(
+      class LambdaFunctionConfiguration < Struct.new(
         :id,
         :lambda_function_arn,
         :events,
         :filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Optional unique identifier for configurations in a notification
@@ -2661,8 +2831,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class LifecycleConfiguration < Aws::Structure.new(
+      class LifecycleConfiguration < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   @return [Array<Types::Rule>]
@@ -2677,10 +2849,12 @@ module Aws
       #         days: 1,
       #         expired_object_delete_marker: false,
       #       }
-      class LifecycleExpiration < Aws::Structure.new(
+      class LifecycleExpiration < Struct.new(
         :date,
         :days,
         :expired_object_delete_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] date
         #   Indicates at what date the object is to be moved or deleted. Should
@@ -2733,7 +2907,7 @@ module Aws
       #           days_after_initiation: 1,
       #         },
       #       }
-      class LifecycleRule < Aws::Structure.new(
+      class LifecycleRule < Struct.new(
         :expiration,
         :id,
         :prefix,
@@ -2742,6 +2916,8 @@ module Aws
         :noncurrent_version_transitions,
         :noncurrent_version_expiration,
         :abort_incomplete_multipart_upload)
+
+        include Aws::Structure
 
         # @!attribute [rw] expiration
         #   @return [Types::LifecycleExpiration]
@@ -2783,9 +2959,11 @@ module Aws
 
       end
 
-      class ListBucketsOutput < Aws::Structure.new(
+      class ListBucketsOutput < Struct.new(
         :buckets,
         :owner)
+
+        include Aws::Structure
 
         # @!attribute [rw] buckets
         #   @return [Array<Types::Bucket>]
@@ -2795,7 +2973,7 @@ module Aws
 
       end
 
-      class ListMultipartUploadsOutput < Aws::Structure.new(
+      class ListMultipartUploadsOutput < Struct.new(
         :bucket,
         :key_marker,
         :upload_id_marker,
@@ -2808,6 +2986,8 @@ module Aws
         :uploads,
         :common_prefixes,
         :encoding_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   Name of the bucket to which the multipart upload was initiated.
@@ -2879,7 +3059,7 @@ module Aws
       #         prefix: "Prefix",
       #         upload_id_marker: "UploadIdMarker",
       #       }
-      class ListMultipartUploadsRequest < Aws::Structure.new(
+      class ListMultipartUploadsRequest < Struct.new(
         :bucket,
         :delimiter,
         :encoding_type,
@@ -2887,6 +3067,8 @@ module Aws
         :max_uploads,
         :prefix,
         :upload_id_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -2928,7 +3110,7 @@ module Aws
 
       end
 
-      class ListObjectVersionsOutput < Aws::Structure.new(
+      class ListObjectVersionsOutput < Struct.new(
         :is_truncated,
         :key_marker,
         :version_id_marker,
@@ -2942,6 +3124,8 @@ module Aws
         :max_keys,
         :common_prefixes,
         :encoding_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] is_truncated
         #   A flag that indicates whether or not Amazon S3 returned all of the
@@ -3008,7 +3192,7 @@ module Aws
       #         prefix: "Prefix",
       #         version_id_marker: "VersionIdMarker",
       #       }
-      class ListObjectVersionsRequest < Aws::Structure.new(
+      class ListObjectVersionsRequest < Struct.new(
         :bucket,
         :delimiter,
         :encoding_type,
@@ -3016,6 +3200,8 @@ module Aws
         :max_keys,
         :prefix,
         :version_id_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -3052,7 +3238,7 @@ module Aws
 
       end
 
-      class ListObjectsOutput < Aws::Structure.new(
+      class ListObjectsOutput < Struct.new(
         :is_truncated,
         :marker,
         :next_marker,
@@ -3063,6 +3249,8 @@ module Aws
         :max_keys,
         :common_prefixes,
         :encoding_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] is_truncated
         #   A flag that indicates whether or not Amazon S3 returned all of the
@@ -3119,13 +3307,15 @@ module Aws
       #         max_keys: 1,
       #         prefix: "Prefix",
       #       }
-      class ListObjectsRequest < Aws::Structure.new(
+      class ListObjectsRequest < Struct.new(
         :bucket,
         :delimiter,
         :encoding_type,
         :marker,
         :max_keys,
         :prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -3158,7 +3348,7 @@ module Aws
 
       end
 
-      class ListObjectsV2Output < Aws::Structure.new(
+      class ListObjectsV2Output < Struct.new(
         :is_truncated,
         :contents,
         :name,
@@ -3171,6 +3361,8 @@ module Aws
         :continuation_token,
         :next_continuation_token,
         :start_after)
+
+        include Aws::Structure
 
         # @!attribute [rw] is_truncated
         #   A flag that indicates whether or not Amazon S3 returned all of the
@@ -3249,7 +3441,7 @@ module Aws
       #         fetch_owner: false,
       #         start_after: "StartAfter",
       #       }
-      class ListObjectsV2Request < Aws::Structure.new(
+      class ListObjectsV2Request < Struct.new(
         :bucket,
         :delimiter,
         :encoding_type,
@@ -3258,6 +3450,8 @@ module Aws
         :continuation_token,
         :fetch_owner,
         :start_after)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   Name of the bucket to list.
@@ -3301,7 +3495,7 @@ module Aws
 
       end
 
-      class ListPartsOutput < Aws::Structure.new(
+      class ListPartsOutput < Struct.new(
         :abort_date,
         :abort_rule_id,
         :bucket,
@@ -3316,6 +3510,8 @@ module Aws
         :owner,
         :storage_class,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] abort_date
         #   Date when multipart upload will become eligible for abort operation
@@ -3390,13 +3586,15 @@ module Aws
       #         upload_id: "MultipartUploadId", # required
       #         request_payer: "requester", # accepts requester
       #       }
-      class ListPartsRequest < Aws::Structure.new(
+      class ListPartsRequest < Struct.new(
         :bucket,
         :key,
         :max_parts,
         :part_number_marker,
         :upload_id,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -3447,10 +3645,12 @@ module Aws
       #         ],
       #         target_prefix: "TargetPrefix",
       #       }
-      class LoggingEnabled < Aws::Structure.new(
+      class LoggingEnabled < Struct.new(
         :target_bucket,
         :target_grants,
         :target_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_bucket
         #   Specifies the bucket where you want Amazon S3 to store server access
@@ -3472,13 +3672,15 @@ module Aws
 
       end
 
-      class MultipartUpload < Aws::Structure.new(
+      class MultipartUpload < Struct.new(
         :upload_id,
         :key,
         :initiated,
         :storage_class,
         :owner,
         :initiator)
+
+        include Aws::Structure
 
         # @!attribute [rw] upload_id
         #   Upload ID that identifies the multipart upload.
@@ -3516,8 +3718,10 @@ module Aws
       #       {
       #         noncurrent_days: 1,
       #       }
-      class NoncurrentVersionExpiration < Aws::Structure.new(
+      class NoncurrentVersionExpiration < Struct.new(
         :noncurrent_days)
+
+        include Aws::Structure
 
         # @!attribute [rw] noncurrent_days
         #   Specifies the number of days an object is noncurrent before Amazon
@@ -3546,9 +3750,11 @@ module Aws
       #         noncurrent_days: 1,
       #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
       #       }
-      class NoncurrentVersionTransition < Aws::Structure.new(
+      class NoncurrentVersionTransition < Struct.new(
         :noncurrent_days,
         :storage_class)
+
+        include Aws::Structure
 
         # @!attribute [rw] noncurrent_days
         #   Specifies the number of days an object is noncurrent before Amazon
@@ -3626,10 +3832,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class NotificationConfiguration < Aws::Structure.new(
+      class NotificationConfiguration < Struct.new(
         :topic_configurations,
         :queue_configurations,
         :lambda_function_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_configurations
         #   @return [Array<Types::TopicConfiguration>]
@@ -3666,10 +3874,12 @@ module Aws
       #           invocation_role: "CloudFunctionInvocationRole",
       #         },
       #       }
-      class NotificationConfigurationDeprecated < Aws::Structure.new(
+      class NotificationConfigurationDeprecated < Struct.new(
         :topic_configuration,
         :queue_configuration,
         :cloud_function_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_configuration
         #   @return [Types::TopicConfigurationDeprecated]
@@ -3702,8 +3912,10 @@ module Aws
       #           ],
       #         },
       #       }
-      class NotificationConfigurationFilter < Aws::Structure.new(
+      class NotificationConfigurationFilter < Struct.new(
         :key)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   Container for object key name prefix and suffix filtering rules.
@@ -3711,13 +3923,15 @@ module Aws
 
       end
 
-      class Object < Aws::Structure.new(
+      class Object < Struct.new(
         :key,
         :last_modified,
         :etag,
         :size,
         :storage_class,
         :owner)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   @return [String]
@@ -3747,9 +3961,11 @@ module Aws
       #         key: "ObjectKey", # required
       #         version_id: "ObjectVersionId",
       #       }
-      class ObjectIdentifier < Aws::Structure.new(
+      class ObjectIdentifier < Struct.new(
         :key,
         :version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   Key name of the object to delete.
@@ -3761,7 +3977,7 @@ module Aws
 
       end
 
-      class ObjectVersion < Aws::Structure.new(
+      class ObjectVersion < Struct.new(
         :etag,
         :size,
         :storage_class,
@@ -3770,6 +3986,8 @@ module Aws
         :is_latest,
         :last_modified,
         :owner)
+
+        include Aws::Structure
 
         # @!attribute [rw] etag
         #   @return [String]
@@ -3811,9 +4029,11 @@ module Aws
       #         display_name: "DisplayName",
       #         id: "ID",
       #       }
-      class Owner < Aws::Structure.new(
+      class Owner < Struct.new(
         :display_name,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] display_name
         #   @return [String]
@@ -3823,11 +4043,13 @@ module Aws
 
       end
 
-      class Part < Aws::Structure.new(
+      class Part < Struct.new(
         :part_number,
         :last_modified,
         :etag,
         :size)
+
+        include Aws::Structure
 
         # @!attribute [rw] part_number
         #   Part number identifying the part. This is a positive integer between
@@ -3857,9 +4079,11 @@ module Aws
       #           status: "Enabled", # accepts Enabled, Suspended
       #         },
       #       }
-      class PutBucketAccelerateConfigurationRequest < Aws::Structure.new(
+      class PutBucketAccelerateConfigurationRequest < Struct.new(
         :bucket,
         :accelerate_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   Name of the bucket for which the accelerate configuration is set.
@@ -3903,7 +4127,7 @@ module Aws
       #         grant_write: "GrantWrite",
       #         grant_write_acp: "GrantWriteACP",
       #       }
-      class PutBucketAclRequest < Aws::Structure.new(
+      class PutBucketAclRequest < Struct.new(
         :acl,
         :access_control_policy,
         :bucket,
@@ -3913,6 +4137,8 @@ module Aws
         :grant_read_acp,
         :grant_write,
         :grant_write_acp)
+
+        include Aws::Structure
 
         # @!attribute [rw] acl
         #   The canned ACL to apply to the bucket.
@@ -3969,10 +4195,12 @@ module Aws
       #         },
       #         content_md5: "ContentMD5",
       #       }
-      class PutBucketCorsRequest < Aws::Structure.new(
+      class PutBucketCorsRequest < Struct.new(
         :bucket,
         :cors_configuration,
         :content_md5)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4024,9 +4252,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class PutBucketLifecycleConfigurationRequest < Aws::Structure.new(
+      class PutBucketLifecycleConfigurationRequest < Struct.new(
         :bucket,
         :lifecycle_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4072,10 +4302,12 @@ module Aws
       #           ],
       #         },
       #       }
-      class PutBucketLifecycleRequest < Aws::Structure.new(
+      class PutBucketLifecycleRequest < Struct.new(
         :bucket,
         :content_md5,
         :lifecycle_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4113,10 +4345,12 @@ module Aws
       #         },
       #         content_md5: "ContentMD5",
       #       }
-      class PutBucketLoggingRequest < Aws::Structure.new(
+      class PutBucketLoggingRequest < Struct.new(
         :bucket,
         :bucket_logging_status,
         :content_md5)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4188,9 +4422,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class PutBucketNotificationConfigurationRequest < Aws::Structure.new(
+      class PutBucketNotificationConfigurationRequest < Struct.new(
         :bucket,
         :notification_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4231,10 +4467,12 @@ module Aws
       #           },
       #         },
       #       }
-      class PutBucketNotificationRequest < Aws::Structure.new(
+      class PutBucketNotificationRequest < Struct.new(
         :bucket,
         :content_md5,
         :notification_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4255,10 +4493,12 @@ module Aws
       #         content_md5: "ContentMD5",
       #         policy: "Policy", # required
       #       }
-      class PutBucketPolicyRequest < Aws::Structure.new(
+      class PutBucketPolicyRequest < Struct.new(
         :bucket,
         :content_md5,
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4293,10 +4533,12 @@ module Aws
       #           ],
       #         },
       #       }
-      class PutBucketReplicationRequest < Aws::Structure.new(
+      class PutBucketReplicationRequest < Struct.new(
         :bucket,
         :content_md5,
         :replication_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4321,10 +4563,12 @@ module Aws
       #           payer: "Requester", # required, accepts Requester, BucketOwner
       #         },
       #       }
-      class PutBucketRequestPaymentRequest < Aws::Structure.new(
+      class PutBucketRequestPaymentRequest < Struct.new(
         :bucket,
         :content_md5,
         :request_payment_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4352,10 +4596,12 @@ module Aws
       #           ],
       #         },
       #       }
-      class PutBucketTaggingRequest < Aws::Structure.new(
+      class PutBucketTaggingRequest < Struct.new(
         :bucket,
         :content_md5,
         :tagging)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4380,11 +4626,13 @@ module Aws
       #           status: "Enabled", # accepts Enabled, Suspended
       #         },
       #       }
-      class PutBucketVersioningRequest < Aws::Structure.new(
+      class PutBucketVersioningRequest < Struct.new(
         :bucket,
         :content_md5,
         :mfa,
         :versioning_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4437,10 +4685,12 @@ module Aws
       #           ],
       #         },
       #       }
-      class PutBucketWebsiteRequest < Aws::Structure.new(
+      class PutBucketWebsiteRequest < Struct.new(
         :bucket,
         :content_md5,
         :website_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -4453,8 +4703,10 @@ module Aws
 
       end
 
-      class PutObjectAclOutput < Aws::Structure.new(
+      class PutObjectAclOutput < Struct.new(
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] request_charged
         #   If present, indicates that the requester was successfully charged
@@ -4497,7 +4749,7 @@ module Aws
       #         request_payer: "requester", # accepts requester
       #         version_id: "ObjectVersionId",
       #       }
-      class PutObjectAclRequest < Aws::Structure.new(
+      class PutObjectAclRequest < Struct.new(
         :acl,
         :access_control_policy,
         :bucket,
@@ -4510,6 +4762,8 @@ module Aws
         :key,
         :request_payer,
         :version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] acl
         #   The canned ACL to apply to the object.
@@ -4563,7 +4817,7 @@ module Aws
 
       end
 
-      class PutObjectOutput < Aws::Structure.new(
+      class PutObjectOutput < Struct.new(
         :expiration,
         :etag,
         :server_side_encryption,
@@ -4572,6 +4826,8 @@ module Aws
         :sse_customer_key_md5,
         :ssekms_key_id,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] expiration
         #   If the object expiration is configured, this will contain the
@@ -4649,7 +4905,7 @@ module Aws
       #         ssekms_key_id: "SSEKMSKeyId",
       #         request_payer: "requester", # accepts requester
       #       }
-      class PutObjectRequest < Aws::Structure.new(
+      class PutObjectRequest < Struct.new(
         :acl,
         :body,
         :bucket,
@@ -4675,6 +4931,8 @@ module Aws
         :sse_customer_key_md5,
         :ssekms_key_id,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] acl
         #   The canned ACL to apply to the object.
@@ -4821,11 +5079,13 @@ module Aws
       #           },
       #         },
       #       }
-      class QueueConfiguration < Aws::Structure.new(
+      class QueueConfiguration < Struct.new(
         :id,
         :queue_arn,
         :events,
         :filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Optional unique identifier for configurations in a notification
@@ -4862,11 +5122,13 @@ module Aws
       #         events: ["s3:ReducedRedundancyLostObject"], # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
       #         queue: "QueueArn",
       #       }
-      class QueueConfigurationDeprecated < Aws::Structure.new(
+      class QueueConfigurationDeprecated < Struct.new(
         :id,
         :event,
         :events,
         :queue)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Optional unique identifier for configurations in a notification
@@ -4896,12 +5158,14 @@ module Aws
       #         replace_key_prefix_with: "ReplaceKeyPrefixWith",
       #         replace_key_with: "ReplaceKeyWith",
       #       }
-      class Redirect < Aws::Structure.new(
+      class Redirect < Struct.new(
         :host_name,
         :http_redirect_code,
         :protocol,
         :replace_key_prefix_with,
         :replace_key_with)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_name
         #   The host name to use in the redirect request.
@@ -4943,9 +5207,11 @@ module Aws
       #         host_name: "HostName", # required
       #         protocol: "http", # accepts http, https
       #       }
-      class RedirectAllRequestsTo < Aws::Structure.new(
+      class RedirectAllRequestsTo < Struct.new(
         :host_name,
         :protocol)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_name
         #   Name of the host where requests will be redirected.
@@ -4977,9 +5243,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ReplicationConfiguration < Aws::Structure.new(
+      class ReplicationConfiguration < Struct.new(
         :role,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] role
         #   Amazon Resource Name (ARN) of an IAM role for Amazon S3 to assume
@@ -5006,11 +5274,13 @@ module Aws
       #           storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
       #         },
       #       }
-      class ReplicationRule < Aws::Structure.new(
+      class ReplicationRule < Struct.new(
         :id,
         :prefix,
         :status,
         :destination)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Unique identifier for the rule. The value cannot be longer than 255
@@ -5038,8 +5308,10 @@ module Aws
       #       {
       #         payer: "Requester", # required, accepts Requester, BucketOwner
       #       }
-      class RequestPaymentConfiguration < Aws::Structure.new(
+      class RequestPaymentConfiguration < Struct.new(
         :payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] payer
         #   Specifies who pays for the download and request fees.
@@ -5047,8 +5319,10 @@ module Aws
 
       end
 
-      class RestoreObjectOutput < Aws::Structure.new(
+      class RestoreObjectOutput < Struct.new(
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] request_charged
         #   If present, indicates that the requester was successfully charged
@@ -5069,12 +5343,14 @@ module Aws
       #         },
       #         request_payer: "requester", # accepts requester
       #       }
-      class RestoreObjectRequest < Aws::Structure.new(
+      class RestoreObjectRequest < Struct.new(
         :bucket,
         :key,
         :version_id,
         :restore_request,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -5104,8 +5380,10 @@ module Aws
       #       {
       #         days: 1, # required
       #       }
-      class RestoreRequest < Aws::Structure.new(
+      class RestoreRequest < Struct.new(
         :days)
+
+        include Aws::Structure
 
         # @!attribute [rw] days
         #   Lifetime of the active copy in days
@@ -5129,9 +5407,11 @@ module Aws
       #           replace_key_with: "ReplaceKeyWith",
       #         },
       #       }
-      class RoutingRule < Aws::Structure.new(
+      class RoutingRule < Struct.new(
         :condition,
         :redirect)
+
+        include Aws::Structure
 
         # @!attribute [rw] condition
         #   A container for describing a condition that must be met for the
@@ -5178,7 +5458,7 @@ module Aws
       #           days_after_initiation: 1,
       #         },
       #       }
-      class Rule < Aws::Structure.new(
+      class Rule < Struct.new(
         :expiration,
         :id,
         :prefix,
@@ -5187,6 +5467,8 @@ module Aws
         :noncurrent_version_transition,
         :noncurrent_version_expiration,
         :abort_incomplete_multipart_upload)
+
+        include Aws::Structure
 
         # @!attribute [rw] expiration
         #   @return [Types::LifecycleExpiration]
@@ -5246,8 +5528,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class S3KeyFilter < Aws::Structure.new(
+      class S3KeyFilter < Struct.new(
         :filter_rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_rules
         #   A list of containers for key value pair that defines the criteria
@@ -5263,9 +5547,11 @@ module Aws
       #         key: "ObjectKey", # required
       #         value: "Value", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   Name of the tag.
@@ -5288,8 +5574,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class Tagging < Aws::Structure.new(
+      class Tagging < Struct.new(
         :tag_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_set
         #   @return [Array<Types::Tag>]
@@ -5309,9 +5597,11 @@ module Aws
       #         },
       #         permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE
       #       }
-      class TargetGrant < Aws::Structure.new(
+      class TargetGrant < Struct.new(
         :grantee,
         :permission)
+
+        include Aws::Structure
 
         # @!attribute [rw] grantee
         #   @return [Types::Grantee]
@@ -5343,11 +5633,13 @@ module Aws
       #           },
       #         },
       #       }
-      class TopicConfiguration < Aws::Structure.new(
+      class TopicConfiguration < Struct.new(
         :id,
         :topic_arn,
         :events,
         :filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Optional unique identifier for configurations in a notification
@@ -5384,11 +5676,13 @@ module Aws
       #         event: "s3:ReducedRedundancyLostObject", # accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
       #         topic: "TopicArn",
       #       }
-      class TopicConfigurationDeprecated < Aws::Structure.new(
+      class TopicConfigurationDeprecated < Struct.new(
         :id,
         :events,
         :event,
         :topic)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Optional unique identifier for configurations in a notification
@@ -5418,10 +5712,12 @@ module Aws
       #         days: 1,
       #         storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
       #       }
-      class Transition < Aws::Structure.new(
+      class Transition < Struct.new(
         :date,
         :days,
         :storage_class)
+
+        include Aws::Structure
 
         # @!attribute [rw] date
         #   Indicates at what date the object is to be moved or deleted. Should
@@ -5439,7 +5735,7 @@ module Aws
 
       end
 
-      class UploadPartCopyOutput < Aws::Structure.new(
+      class UploadPartCopyOutput < Struct.new(
         :copy_source_version_id,
         :copy_part_result,
         :server_side_encryption,
@@ -5447,6 +5743,8 @@ module Aws
         :sse_customer_key_md5,
         :ssekms_key_id,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] copy_source_version_id
         #   The version of the source object that was copied, if you have
@@ -5508,7 +5806,7 @@ module Aws
       #         copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
       #       }
-      class UploadPartCopyRequest < Aws::Structure.new(
+      class UploadPartCopyRequest < Struct.new(
         :bucket,
         :copy_source,
         :copy_source_if_match,
@@ -5526,6 +5824,8 @@ module Aws
         :copy_source_sse_customer_key,
         :copy_source_sse_customer_key_md5,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   @return [String]
@@ -5623,13 +5923,15 @@ module Aws
 
       end
 
-      class UploadPartOutput < Aws::Structure.new(
+      class UploadPartOutput < Struct.new(
         :server_side_encryption,
         :etag,
         :sse_customer_algorithm,
         :sse_customer_key_md5,
         :ssekms_key_id,
         :request_charged)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_side_encryption
         #   The Server-side encryption algorithm used when storing this object
@@ -5681,7 +5983,7 @@ module Aws
       #         sse_customer_key_md5: "SSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
       #       }
-      class UploadPartRequest < Aws::Structure.new(
+      class UploadPartRequest < Struct.new(
         :body,
         :bucket,
         :content_length,
@@ -5693,6 +5995,8 @@ module Aws
         :sse_customer_key,
         :sse_customer_key_md5,
         :request_payer)
+
+        include Aws::Structure
 
         # @!attribute [rw] body
         #   Object data.
@@ -5763,9 +6067,11 @@ module Aws
       #         mfa_delete: "Enabled", # accepts Enabled, Disabled
       #         status: "Enabled", # accepts Enabled, Suspended
       #       }
-      class VersioningConfiguration < Aws::Structure.new(
+      class VersioningConfiguration < Struct.new(
         :mfa_delete,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] mfa_delete
         #   Specifies whether MFA delete is enabled in the bucket versioning
@@ -5810,11 +6116,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class WebsiteConfiguration < Aws::Structure.new(
+      class WebsiteConfiguration < Struct.new(
         :error_document,
         :index_document,
         :redirect_all_requests_to,
         :routing_rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] error_document
         #   @return [Types::ErrorDocument]

@@ -13,7 +13,7 @@ module Aws
       # machines (VMs) with AWS so that you can configure those servers or VMs
       # using Run Command. A server or VM that has been registered with AWS is
       # called a managed instance.
-      class Activation < Aws::Structure.new(
+      class Activation < Struct.new(
         :activation_id,
         :description,
         :default_instance_name,
@@ -23,6 +23,8 @@ module Aws
         :expiration_date,
         :expired,
         :created_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] activation_id
         #   The ID created by SSM when you submitted the activation.
@@ -79,10 +81,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToResourceRequest < Aws::Structure.new(
+      class AddTagsToResourceRequest < Struct.new(
         :resource_type,
         :resource_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   Specifies the type of resource you are tagging.
@@ -103,9 +107,11 @@ module Aws
       class AddTagsToResourceResult < Aws::EmptyStructure; end
 
       # Describes an association of an SSM document and an instance.
-      class Association < Aws::Structure.new(
+      class Association < Struct.new(
         :name,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -118,12 +124,14 @@ module Aws
       end
 
       # Describes the parameters for a document.
-      class AssociationDescription < Aws::Structure.new(
+      class AssociationDescription < Struct.new(
         :name,
         :instance_id,
         :date,
         :status,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -155,9 +163,11 @@ module Aws
       #         key: "InstanceId", # required, accepts InstanceId, Name
       #         value: "AssociationFilterValue", # required
       #       }
-      class AssociationFilter < Aws::Structure.new(
+      class AssociationFilter < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the filter.
@@ -179,11 +189,13 @@ module Aws
       #         message: "StatusMessage", # required
       #         additional_info: "StatusAdditionalInfo",
       #       }
-      class AssociationStatus < Aws::Structure.new(
+      class AssociationStatus < Struct.new(
         :date,
         :name,
         :message,
         :additional_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] date
         #   The date when the status changed.
@@ -210,9 +222,11 @@ module Aws
       #         command_id: "CommandId", # required
       #         instance_ids: ["InstanceId"],
       #       }
-      class CancelCommandRequest < Aws::Structure.new(
+      class CancelCommandRequest < Struct.new(
         :command_id,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] command_id
         #   The ID of the command you want to cancel.
@@ -231,7 +245,7 @@ module Aws
       class CancelCommandResult < Aws::EmptyStructure; end
 
       # Describes a command request.
-      class Command < Aws::Structure.new(
+      class Command < Struct.new(
         :command_id,
         :document_name,
         :comment,
@@ -244,6 +258,8 @@ module Aws
         :output_s3_key_prefix,
         :service_role,
         :notification_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] command_id
         #   A unique identifier for this command.
@@ -312,9 +328,11 @@ module Aws
       #         key: "InvokedAfter", # required, accepts InvokedAfter, InvokedBefore, Status
       #         value: "CommandFilterValue", # required
       #       }
-      class CommandFilter < Aws::Structure.new(
+      class CommandFilter < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the filter. For example, requested date and time.
@@ -332,7 +350,7 @@ module Aws
       # against three instances, then a command invocation is created for each
       # requested instance ID. A command invocation returns status and detail
       # information about a command you executed.
-      class CommandInvocation < Aws::Structure.new(
+      class CommandInvocation < Struct.new(
         :command_id,
         :instance_id,
         :comment,
@@ -343,6 +361,8 @@ module Aws
         :command_plugins,
         :service_role,
         :notification_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] command_id
         #   The command against which this invocation was requested.
@@ -390,7 +410,7 @@ module Aws
       end
 
       # Describes plugin details.
-      class CommandPlugin < Aws::Structure.new(
+      class CommandPlugin < Struct.new(
         :name,
         :status,
         :response_code,
@@ -399,6 +419,8 @@ module Aws
         :output,
         :output_s3_bucket_name,
         :output_s3_key_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the plugin. Must be one of the following:
@@ -452,12 +474,14 @@ module Aws
       #         registration_limit: 1,
       #         expiration_date: Time.now,
       #       }
-      class CreateActivationRequest < Aws::Structure.new(
+      class CreateActivationRequest < Struct.new(
         :description,
         :default_instance_name,
         :iam_role,
         :registration_limit,
         :expiration_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] description
         #   A user-defined description of the resource that you want to register
@@ -487,9 +511,11 @@ module Aws
 
       end
 
-      class CreateActivationResult < Aws::Structure.new(
+      class CreateActivationResult < Struct.new(
         :activation_id,
         :activation_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] activation_id
         #   The ID number generated by the system when it processed the
@@ -518,8 +544,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateAssociationBatchRequest < Aws::Structure.new(
+      class CreateAssociationBatchRequest < Struct.new(
         :entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] entries
         #   One or more associations.
@@ -538,10 +566,12 @@ module Aws
       #           "ParameterName" => ["ParameterValue"],
       #         },
       #       }
-      class CreateAssociationBatchRequestEntry < Aws::Structure.new(
+      class CreateAssociationBatchRequestEntry < Struct.new(
         :name,
         :instance_id,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the configuration document.
@@ -557,9 +587,11 @@ module Aws
 
       end
 
-      class CreateAssociationBatchResult < Aws::Structure.new(
+      class CreateAssociationBatchResult < Struct.new(
         :successful,
         :failed)
+
+        include Aws::Structure
 
         # @!attribute [rw] successful
         #   Information about the associations that succeeded.
@@ -581,10 +613,12 @@ module Aws
       #           "ParameterName" => ["ParameterValue"],
       #         },
       #       }
-      class CreateAssociationRequest < Aws::Structure.new(
+      class CreateAssociationRequest < Struct.new(
         :name,
         :instance_id,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -600,8 +634,10 @@ module Aws
 
       end
 
-      class CreateAssociationResult < Aws::Structure.new(
+      class CreateAssociationResult < Struct.new(
         :association_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] association_description
         #   Information about the association.
@@ -616,9 +652,11 @@ module Aws
       #         content: "DocumentContent", # required
       #         name: "DocumentName", # required
       #       }
-      class CreateDocumentRequest < Aws::Structure.new(
+      class CreateDocumentRequest < Struct.new(
         :content,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] content
         #   A valid JSON string.
@@ -630,8 +668,10 @@ module Aws
 
       end
 
-      class CreateDocumentResult < Aws::Structure.new(
+      class CreateDocumentResult < Struct.new(
         :document_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] document_description
         #   Information about the SSM document.
@@ -645,8 +685,10 @@ module Aws
       #       {
       #         activation_id: "ActivationId", # required
       #       }
-      class DeleteActivationRequest < Aws::Structure.new(
+      class DeleteActivationRequest < Struct.new(
         :activation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] activation_id
         #   The ID of the activation that you want to delete.
@@ -663,9 +705,11 @@ module Aws
       #         name: "DocumentName", # required
       #         instance_id: "InstanceId", # required
       #       }
-      class DeleteAssociationRequest < Aws::Structure.new(
+      class DeleteAssociationRequest < Struct.new(
         :name,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -685,8 +729,10 @@ module Aws
       #       {
       #         name: "DocumentName", # required
       #       }
-      class DeleteDocumentRequest < Aws::Structure.new(
+      class DeleteDocumentRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -702,8 +748,10 @@ module Aws
       #       {
       #         instance_id: "ManagedInstanceId", # required
       #       }
-      class DeregisterManagedInstanceRequest < Aws::Structure.new(
+      class DeregisterManagedInstanceRequest < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID assigned to the managed instance when you registered it using
@@ -722,9 +770,11 @@ module Aws
       #         filter_key: "ActivationIds", # accepts ActivationIds, DefaultInstanceName, IamRole
       #         filter_values: ["String"],
       #       }
-      class DescribeActivationsFilter < Aws::Structure.new(
+      class DescribeActivationsFilter < Struct.new(
         :filter_key,
         :filter_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_key
         #   The name of the filter.
@@ -749,10 +799,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeActivationsRequest < Aws::Structure.new(
+      class DescribeActivationsRequest < Struct.new(
         :filters,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   A filter to view information about your activations.
@@ -771,9 +823,11 @@ module Aws
 
       end
 
-      class DescribeActivationsResult < Aws::Structure.new(
+      class DescribeActivationsResult < Struct.new(
         :activation_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] activation_list
         #   A list of activations for your AWS account.
@@ -793,9 +847,11 @@ module Aws
       #         name: "DocumentName", # required
       #         instance_id: "InstanceId", # required
       #       }
-      class DescribeAssociationRequest < Aws::Structure.new(
+      class DescribeAssociationRequest < Struct.new(
         :name,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -807,8 +863,10 @@ module Aws
 
       end
 
-      class DescribeAssociationResult < Aws::Structure.new(
+      class DescribeAssociationResult < Struct.new(
         :association_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] association_description
         #   Information about the association.
@@ -823,9 +881,11 @@ module Aws
       #         name: "DocumentName", # required
       #         permission_type: "Share", # required, accepts Share
       #       }
-      class DescribeDocumentPermissionRequest < Aws::Structure.new(
+      class DescribeDocumentPermissionRequest < Struct.new(
         :name,
         :permission_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the document for which you are the owner.
@@ -838,8 +898,10 @@ module Aws
 
       end
 
-      class DescribeDocumentPermissionResponse < Aws::Structure.new(
+      class DescribeDocumentPermissionResponse < Struct.new(
         :account_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_ids
         #   The account IDs that have permission to use this document. The ID
@@ -854,8 +916,10 @@ module Aws
       #       {
       #         name: "DocumentARN", # required
       #       }
-      class DescribeDocumentRequest < Aws::Structure.new(
+      class DescribeDocumentRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -863,8 +927,10 @@ module Aws
 
       end
 
-      class DescribeDocumentResult < Aws::Structure.new(
+      class DescribeDocumentResult < Struct.new(
         :document)
+
+        include Aws::Structure
 
         # @!attribute [rw] document
         #   Information about the SSM document.
@@ -885,10 +951,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeInstanceInformationRequest < Aws::Structure.new(
+      class DescribeInstanceInformationRequest < Struct.new(
         :instance_information_filter_list,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_information_filter_list
         #   One or more filters. Use a filter to return a more specific list of
@@ -908,9 +976,11 @@ module Aws
 
       end
 
-      class DescribeInstanceInformationResult < Aws::Structure.new(
+      class DescribeInstanceInformationResult < Struct.new(
         :instance_information_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_information_list
         #   The instance information list.
@@ -924,7 +994,7 @@ module Aws
       end
 
       # Describes an SSM document.
-      class DocumentDescription < Aws::Structure.new(
+      class DocumentDescription < Struct.new(
         :sha_1,
         :hash,
         :hash_type,
@@ -935,6 +1005,8 @@ module Aws
         :description,
         :parameters,
         :platform_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] sha_1
         #   The SHA1 hash of the document, which you can use for verification
@@ -996,9 +1068,11 @@ module Aws
       #         key: "Name", # required, accepts Name, Owner, PlatformTypes
       #         value: "DocumentFilterValue", # required
       #       }
-      class DocumentFilter < Aws::Structure.new(
+      class DocumentFilter < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the filter.
@@ -1011,10 +1085,12 @@ module Aws
       end
 
       # Describes the name of an SSM document.
-      class DocumentIdentifier < Aws::Structure.new(
+      class DocumentIdentifier < Struct.new(
         :name,
         :owner,
         :platform_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -1032,11 +1108,13 @@ module Aws
 
       # Parameters specified in the SSM document that execute on the server
       # when the command is run.
-      class DocumentParameter < Aws::Structure.new(
+      class DocumentParameter < Struct.new(
         :name,
         :type,
         :description,
         :default_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the parameter.
@@ -1061,10 +1139,12 @@ module Aws
       end
 
       # Describes a failed association.
-      class FailedCreateAssociation < Aws::Structure.new(
+      class FailedCreateAssociation < Struct.new(
         :entry,
         :message,
         :fault)
+
+        include Aws::Structure
 
         # @!attribute [rw] entry
         #   The association.
@@ -1086,8 +1166,10 @@ module Aws
       #       {
       #         name: "DocumentARN", # required
       #       }
-      class GetDocumentRequest < Aws::Structure.new(
+      class GetDocumentRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -1095,9 +1177,11 @@ module Aws
 
       end
 
-      class GetDocumentResult < Aws::Structure.new(
+      class GetDocumentResult < Struct.new(
         :name,
         :content)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -1110,7 +1194,7 @@ module Aws
       end
 
       # Describes a filter for a specific list of instances.
-      class InstanceInformation < Aws::Structure.new(
+      class InstanceInformation < Struct.new(
         :instance_id,
         :ping_status,
         :last_ping_date_time,
@@ -1126,6 +1210,8 @@ module Aws
         :name,
         :ip_address,
         :computer_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -1202,9 +1288,11 @@ module Aws
       #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType
       #         value_set: ["InstanceInformationFilterValue"], # required
       #       }
-      class InstanceInformationFilter < Aws::Structure.new(
+      class InstanceInformationFilter < Struct.new(
         :key,
         :value_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the filter.
@@ -1229,10 +1317,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class ListAssociationsRequest < Aws::Structure.new(
+      class ListAssociationsRequest < Struct.new(
         :association_filter_list,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] association_filter_list
         #   One or more filters. Use a filter to return a more specific list of
@@ -1252,9 +1342,11 @@ module Aws
 
       end
 
-      class ListAssociationsResult < Aws::Structure.new(
+      class ListAssociationsResult < Struct.new(
         :associations,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] associations
         #   The associations.
@@ -1283,13 +1375,15 @@ module Aws
       #         ],
       #         details: false,
       #       }
-      class ListCommandInvocationsRequest < Aws::Structure.new(
+      class ListCommandInvocationsRequest < Struct.new(
         :command_id,
         :instance_id,
         :max_results,
         :next_token,
         :filters,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] command_id
         #   (Optional) The invocations for a specific command ID.
@@ -1322,9 +1416,11 @@ module Aws
 
       end
 
-      class ListCommandInvocationsResult < Aws::Structure.new(
+      class ListCommandInvocationsResult < Struct.new(
         :command_invocations,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] command_invocations
         #   (Optional) A list of all invocations.
@@ -1352,12 +1448,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class ListCommandsRequest < Aws::Structure.new(
+      class ListCommandsRequest < Struct.new(
         :command_id,
         :instance_id,
         :max_results,
         :next_token,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] command_id
         #   (Optional) If provided, lists only the specified command.
@@ -1385,9 +1483,11 @@ module Aws
 
       end
 
-      class ListCommandsResult < Aws::Structure.new(
+      class ListCommandsResult < Struct.new(
         :commands,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] commands
         #   (Optional) The list of commands requested by the user.
@@ -1413,10 +1513,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class ListDocumentsRequest < Aws::Structure.new(
+      class ListDocumentsRequest < Struct.new(
         :document_filter_list,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] document_filter_list
         #   One or more filters. Use a filter to return a more specific list of
@@ -1436,9 +1538,11 @@ module Aws
 
       end
 
-      class ListDocumentsResult < Aws::Structure.new(
+      class ListDocumentsResult < Struct.new(
         :document_identifiers,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] document_identifiers
         #   The names of the SSM documents.
@@ -1458,9 +1562,11 @@ module Aws
       #         resource_type: "ManagedInstance", # required, accepts ManagedInstance
       #         resource_id: "ResourceId", # required
       #       }
-      class ListTagsForResourceRequest < Aws::Structure.new(
+      class ListTagsForResourceRequest < Struct.new(
         :resource_type,
         :resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   Returns a list of tags for a specific resource type.
@@ -1472,8 +1578,10 @@ module Aws
 
       end
 
-      class ListTagsForResourceResult < Aws::Structure.new(
+      class ListTagsForResourceResult < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   A list of tags.
@@ -1490,11 +1598,13 @@ module Aws
       #         account_ids_to_add: ["AccountId"],
       #         account_ids_to_remove: ["AccountId"],
       #       }
-      class ModifyDocumentPermissionRequest < Aws::Structure.new(
+      class ModifyDocumentPermissionRequest < Struct.new(
         :name,
         :permission_type,
         :account_ids_to_add,
         :account_ids_to_remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the document that you want to share.
@@ -1531,10 +1641,12 @@ module Aws
       #         notification_events: ["All"], # accepts All, InProgress, Success, TimedOut, Cancelled, Failed
       #         notification_type: "Command", # accepts Command, Invocation
       #       }
-      class NotificationConfig < Aws::Structure.new(
+      class NotificationConfig < Struct.new(
         :notification_arn,
         :notification_events,
         :notification_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] notification_arn
         #   An Amazon Resource Name (ARN) for a Simple Notification Service
@@ -1571,10 +1683,12 @@ module Aws
       #         resource_id: "ResourceId", # required
       #         tag_keys: ["TagKey"], # required
       #       }
-      class RemoveTagsFromResourceRequest < Aws::Structure.new(
+      class RemoveTagsFromResourceRequest < Struct.new(
         :resource_type,
         :resource_id,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of resource of which you want to remove a tag.
@@ -1614,7 +1728,7 @@ module Aws
       #           notification_type: "Command", # accepts Command, Invocation
       #         },
       #       }
-      class SendCommandRequest < Aws::Structure.new(
+      class SendCommandRequest < Struct.new(
         :instance_ids,
         :document_name,
         :document_hash,
@@ -1626,6 +1740,8 @@ module Aws
         :output_s3_key_prefix,
         :service_role_arn,
         :notification_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   Required. The instance IDs where the command should execute. You can
@@ -1689,8 +1805,10 @@ module Aws
 
       end
 
-      class SendCommandResult < Aws::Structure.new(
+      class SendCommandResult < Struct.new(
         :command)
+
+        include Aws::Structure
 
         # @!attribute [rw] command
         #   The request as it was received by SSM. Also provides the command ID
@@ -1709,9 +1827,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the tag.
@@ -1736,10 +1856,12 @@ module Aws
       #           additional_info: "StatusAdditionalInfo",
       #         },
       #       }
-      class UpdateAssociationStatusRequest < Aws::Structure.new(
+      class UpdateAssociationStatusRequest < Struct.new(
         :name,
         :instance_id,
         :association_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the SSM document.
@@ -1755,8 +1877,10 @@ module Aws
 
       end
 
-      class UpdateAssociationStatusResult < Aws::Structure.new(
+      class UpdateAssociationStatusResult < Struct.new(
         :association_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] association_description
         #   Information about the association.
@@ -1771,9 +1895,11 @@ module Aws
       #         instance_id: "ManagedInstanceId", # required
       #         iam_role: "IamRole", # required
       #       }
-      class UpdateManagedInstanceRoleRequest < Aws::Structure.new(
+      class UpdateManagedInstanceRoleRequest < Struct.new(
         :instance_id,
         :iam_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the managed instance where you want to update the role.

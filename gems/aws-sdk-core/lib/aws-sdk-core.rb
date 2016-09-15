@@ -382,9 +382,6 @@ module Aws
     end
 
   end
-
-  Struct = Structure
-
 end
 
 require 'aws-sdk-sts'

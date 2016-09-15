@@ -33,7 +33,7 @@ module Aws
       #         postal_code: "String",
       #         phone_number: "String",
       #       }
-      class Address < Aws::Structure.new(
+      class Address < Struct.new(
         :address_id,
         :name,
         :company,
@@ -47,6 +47,8 @@ module Aws
         :country,
         :postal_code,
         :phone_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] address_id
         #   The unique ID for an address.
@@ -115,8 +117,10 @@ module Aws
       #       {
       #         job_id: "JobId", # required
       #       }
-      class CancelJobRequest < Aws::Structure.new(
+      class CancelJobRequest < Struct.new(
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The 39 character job ID for the job that you want to cancel, for
@@ -147,8 +151,10 @@ module Aws
       #           phone_number: "String",
       #         },
       #       }
-      class CreateAddressRequest < Aws::Structure.new(
+      class CreateAddressRequest < Struct.new(
         :address)
+
+        include Aws::Structure
 
         # @!attribute [rw] address
         #   The address that you want the Snowball shipped to.
@@ -156,8 +162,10 @@ module Aws
 
       end
 
-      class CreateAddressResult < Aws::Structure.new(
+      class CreateAddressResult < Struct.new(
         :address_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] address_id
         #   The automatically generated ID for a specific address. You\'ll use
@@ -195,7 +203,7 @@ module Aws
       #           notify_all: false,
       #         },
       #       }
-      class CreateJobRequest < Aws::Structure.new(
+      class CreateJobRequest < Struct.new(
         :job_type,
         :resources,
         :description,
@@ -205,6 +213,8 @@ module Aws
         :snowball_capacity_preference,
         :shipping_option,
         :notification)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_type
         #   Defines the type of job that you\'re creating.
@@ -286,8 +296,10 @@ module Aws
 
       end
 
-      class CreateJobResult < Aws::Structure.new(
+      class CreateJobResult < Struct.new(
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The automatically generated ID for a job, for example
@@ -300,11 +312,13 @@ module Aws
       # appliance is at AWS. Note that this data is only available while a job
       # has a `JobState` value of `InProgress`, for both import and export
       # jobs.
-      class DataTransfer < Aws::Structure.new(
+      class DataTransfer < Struct.new(
         :bytes_transferred,
         :objects_transferred,
         :total_bytes,
         :total_objects)
+
+        include Aws::Structure
 
         # @!attribute [rw] bytes_transferred
         #   The number of bytes transferred between a Snowball and Amazon S3.
@@ -334,8 +348,10 @@ module Aws
       #       {
       #         address_id: "AddressId", # required
       #       }
-      class DescribeAddressRequest < Aws::Structure.new(
+      class DescribeAddressRequest < Struct.new(
         :address_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] address_id
         #   The automatically generated ID for a specific address.
@@ -343,8 +359,10 @@ module Aws
 
       end
 
-      class DescribeAddressResult < Aws::Structure.new(
+      class DescribeAddressResult < Struct.new(
         :address)
+
+        include Aws::Structure
 
         # @!attribute [rw] address
         #   The address that you want the Snowball or Snowballs associated with
@@ -360,9 +378,11 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeAddressesRequest < Aws::Structure.new(
+      class DescribeAddressesRequest < Struct.new(
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_results
         #   The number of `ADDRESS` objects to return.
@@ -377,9 +397,11 @@ module Aws
 
       end
 
-      class DescribeAddressesResult < Aws::Structure.new(
+      class DescribeAddressesResult < Struct.new(
         :addresses,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] addresses
         #   The Snowball shipping addresses that were created for this account.
@@ -399,8 +421,10 @@ module Aws
       #       {
       #         job_id: "JobId", # required
       #       }
-      class DescribeJobRequest < Aws::Structure.new(
+      class DescribeJobRequest < Struct.new(
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The automatically generated ID for a job, for example
@@ -409,9 +433,11 @@ module Aws
 
       end
 
-      class DescribeJobResult < Aws::Structure.new(
+      class DescribeJobResult < Struct.new(
         :job_metadata,
         :sub_job_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_metadata
         #   Information about a specific job, including shipping information,
@@ -432,8 +458,10 @@ module Aws
       #       {
       #         job_id: "JobId", # required
       #       }
-      class GetJobManifestRequest < Aws::Structure.new(
+      class GetJobManifestRequest < Struct.new(
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The ID for a job that you want to get the manifest file for, for
@@ -442,8 +470,10 @@ module Aws
 
       end
 
-      class GetJobManifestResult < Aws::Structure.new(
+      class GetJobManifestResult < Struct.new(
         :manifest_uri)
+
+        include Aws::Structure
 
         # @!attribute [rw] manifest_uri
         #   The Amazon S3 presigned URL for the manifest file associated with
@@ -458,8 +488,10 @@ module Aws
       #       {
       #         job_id: "JobId", # required
       #       }
-      class GetJobUnlockCodeRequest < Aws::Structure.new(
+      class GetJobUnlockCodeRequest < Struct.new(
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The ID for the job that you want to get the `UnlockCode` value for,
@@ -468,8 +500,10 @@ module Aws
 
       end
 
-      class GetJobUnlockCodeResult < Aws::Structure.new(
+      class GetJobUnlockCodeResult < Struct.new(
         :unlock_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] unlock_code
         #   The `UnlockCode` value for the specified job. The `UnlockCode` value
@@ -481,9 +515,11 @@ module Aws
       # @api private
       class GetSnowballUsageRequest < Aws::EmptyStructure; end
 
-      class GetSnowballUsageResult < Aws::Structure.new(
+      class GetSnowballUsageResult < Struct.new(
         :snowball_limit,
         :snowballs_in_use)
+
+        include Aws::Structure
 
         # @!attribute [rw] snowball_limit
         #   The service limit for number of Snowballs this account can have at
@@ -499,10 +535,12 @@ module Aws
       # Each `JobListEntry` object contains a job\'s state, a job\'s ID, and a
       # value that indicates whether the job is a job part, in the case of an
       # export job.
-      class JobListEntry < Aws::Structure.new(
+      class JobListEntry < Struct.new(
         :job_id,
         :job_state,
         :is_master)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The automatically generated ID for a job, for example
@@ -547,10 +585,12 @@ module Aws
       # The logs are saved in comma-separated value (CSV) format, and the name
       # of each log includes the ID of the job or job part that the log
       # describes.
-      class JobLogs < Aws::Structure.new(
+      class JobLogs < Struct.new(
         :job_completion_report_uri,
         :job_success_log_uri,
         :job_failure_log_uri)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_completion_report_uri
         #   A link to an Amazon S3 presigned URL where the job completion report
@@ -573,7 +613,7 @@ module Aws
       # information, job status, and other important metadata. This
       # information is returned as a part of the response syntax of the
       # `DescribeJob` action.
-      class JobMetadata < Aws::Structure.new(
+      class JobMetadata < Struct.new(
         :job_id,
         :job_state,
         :job_type,
@@ -588,6 +628,8 @@ module Aws
         :notification,
         :data_transfer_progress,
         :job_log_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The automatically generated ID for a job, for example
@@ -684,8 +726,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class JobResource < Aws::Structure.new(
+      class JobResource < Struct.new(
         :s3_resources)
+
+        include Aws::Structure
 
         # @!attribute [rw] s3_resources
         #   An array of `S3Resource` objects.
@@ -704,9 +748,11 @@ module Aws
       #         begin_marker: "String",
       #         end_marker: "String",
       #       }
-      class KeyRange < Aws::Structure.new(
+      class KeyRange < Struct.new(
         :begin_marker,
         :end_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] begin_marker
         #   The key that starts an optional key range for an export job. Ranges
@@ -727,9 +773,11 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class ListJobsRequest < Aws::Structure.new(
+      class ListJobsRequest < Struct.new(
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_results
         #   The number of `JobListEntry` objects to return.
@@ -743,9 +791,11 @@ module Aws
 
       end
 
-      class ListJobsResult < Aws::Structure.new(
+      class ListJobsResult < Struct.new(
         :job_list_entries,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_list_entries
         #   Each `JobListEntry` object contains a job\'s state, a job\'s ID, and
@@ -779,10 +829,12 @@ module Aws
       #         job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
       #         notify_all: false,
       #       }
-      class Notification < Aws::Structure.new(
+      class Notification < Struct.new(
         :sns_topic_arn,
         :job_states_to_notify,
         :notify_all)
+
+        include Aws::Structure
 
         # @!attribute [rw] sns_topic_arn
         #   The new SNS `TopicArn` that you want to associate with this job. You
@@ -826,9 +878,11 @@ module Aws
       #           end_marker: "String",
       #         },
       #       }
-      class S3Resource < Aws::Structure.new(
+      class S3Resource < Struct.new(
         :bucket_arn,
         :key_range)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket_arn
         #   The Amazon Resource Name (ARN) of an Amazon S3 bucket.
@@ -845,9 +899,11 @@ module Aws
 
       # The `Status` and `TrackingNumber` information for an inbound or
       # outbound shipment.
-      class Shipment < Aws::Structure.new(
+      class Shipment < Struct.new(
         :status,
         :tracking_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   Status information for a shipment. Valid statuses include `NEW`,
@@ -867,10 +923,12 @@ module Aws
 
       # A job\'s shipping information, including inbound and outbound tracking
       # numbers and shipping speed options.
-      class ShippingDetails < Aws::Structure.new(
+      class ShippingDetails < Struct.new(
         :shipping_option,
         :inbound_shipment,
         :outbound_shipment)
+
+        include Aws::Structure
 
         # @!attribute [rw] shipping_option
         #   The shipping speed for a particular job. Note that this speed does
@@ -932,7 +990,7 @@ module Aws
       #         description: "String",
       #         snowball_capacity_preference: "T50", # accepts T50, T80, NoPreference
       #       }
-      class UpdateJobRequest < Aws::Structure.new(
+      class UpdateJobRequest < Struct.new(
         :job_id,
         :role_arn,
         :notification,
@@ -941,6 +999,8 @@ module Aws
         :shipping_option,
         :description,
         :snowball_capacity_preference)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The job ID of the job that you want to update, for example

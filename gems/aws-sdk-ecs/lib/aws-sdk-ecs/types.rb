@@ -18,9 +18,11 @@ module Aws
       #         name: "String", # required
       #         value: "String",
       #       }
-      class Attribute < Aws::Structure.new(
+      class Attribute < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the container instance attribute.
@@ -39,7 +41,7 @@ module Aws
       # first time you use the Amazon ECS service, but you may also create
       # other clusters. Clusters may contain more than one instance type
       # simultaneously.
-      class Cluster < Aws::Structure.new(
+      class Cluster < Struct.new(
         :cluster_arn,
         :cluster_name,
         :status,
@@ -47,6 +49,8 @@ module Aws
         :running_tasks_count,
         :pending_tasks_count,
         :active_services_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_arn
         #   The Amazon Resource Name (ARN) that identifies the cluster. The ARN
@@ -87,7 +91,7 @@ module Aws
       end
 
       # A Docker container that is part of a task.
-      class Container < Aws::Structure.new(
+      class Container < Struct.new(
         :container_arn,
         :task_arn,
         :name,
@@ -95,6 +99,8 @@ module Aws
         :exit_code,
         :reason,
         :network_bindings)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_arn
         #   The Amazon Resource Name (ARN) of the container.
@@ -200,7 +206,7 @@ module Aws
       #           },
       #         },
       #       }
-      class ContainerDefinition < Aws::Structure.new(
+      class ContainerDefinition < Struct.new(
         :name,
         :image,
         :cpu,
@@ -227,6 +233,8 @@ module Aws
         :docker_labels,
         :ulimits,
         :log_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of a container. If you are linking multiple containers
@@ -752,7 +760,7 @@ module Aws
 
       # An EC2 instance that is running the Amazon ECS agent and has been
       # registered with a cluster.
-      class ContainerInstance < Aws::Structure.new(
+      class ContainerInstance < Struct.new(
         :container_instance_arn,
         :ec2_instance_id,
         :version_info,
@@ -764,6 +772,8 @@ module Aws
         :pending_tasks_count,
         :agent_update_status,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_instance_arn
         #   The Amazon Resource Name (ARN) of the container instance. The ARN
@@ -843,10 +853,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class ContainerOverride < Aws::Structure.new(
+      class ContainerOverride < Struct.new(
         :name,
         :command,
         :environment)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the container that receives the override.
@@ -872,8 +884,10 @@ module Aws
       #       {
       #         cluster_name: "String",
       #       }
-      class CreateClusterRequest < Aws::Structure.new(
+      class CreateClusterRequest < Struct.new(
         :cluster_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_name
         #   The name of your cluster. If you do not specify a name for your
@@ -884,8 +898,10 @@ module Aws
 
       end
 
-      class CreateClusterResponse < Aws::Structure.new(
+      class CreateClusterResponse < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The full description of your new cluster.
@@ -916,7 +932,7 @@ module Aws
       #           minimum_healthy_percent: 1,
       #         },
       #       }
-      class CreateServiceRequest < Aws::Structure.new(
+      class CreateServiceRequest < Struct.new(
         :cluster,
         :service_name,
         :task_definition,
@@ -925,6 +941,8 @@ module Aws
         :client_token,
         :role,
         :deployment_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -1008,8 +1026,10 @@ module Aws
 
       end
 
-      class CreateServiceResponse < Aws::Structure.new(
+      class CreateServiceResponse < Struct.new(
         :service)
+
+        include Aws::Structure
 
         # @!attribute [rw] service
         #   The full description of your service following the create call.
@@ -1023,8 +1043,10 @@ module Aws
       #       {
       #         cluster: "String", # required
       #       }
-      class DeleteClusterRequest < Aws::Structure.new(
+      class DeleteClusterRequest < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster to
@@ -1033,8 +1055,10 @@ module Aws
 
       end
 
-      class DeleteClusterResponse < Aws::Structure.new(
+      class DeleteClusterResponse < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The full description of the deleted cluster.
@@ -1049,9 +1073,11 @@ module Aws
       #         cluster: "String",
       #         service: "String", # required
       #       }
-      class DeleteServiceRequest < Aws::Structure.new(
+      class DeleteServiceRequest < Struct.new(
         :cluster,
         :service)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The name of the cluster that hosts the service to delete. If you do
@@ -1064,8 +1090,10 @@ module Aws
 
       end
 
-      class DeleteServiceResponse < Aws::Structure.new(
+      class DeleteServiceResponse < Struct.new(
         :service)
+
+        include Aws::Structure
 
         # @!attribute [rw] service
         #   The full description of the deleted service.
@@ -1074,7 +1102,7 @@ module Aws
       end
 
       # The details of an Amazon ECS service deployment.
-      class Deployment < Aws::Structure.new(
+      class Deployment < Struct.new(
         :id,
         :status,
         :task_definition,
@@ -1083,6 +1111,8 @@ module Aws
         :running_count,
         :created_at,
         :updated_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the deployment.
@@ -1135,9 +1165,11 @@ module Aws
       #         maximum_percent: 1,
       #         minimum_healthy_percent: 1,
       #       }
-      class DeploymentConfiguration < Aws::Structure.new(
+      class DeploymentConfiguration < Struct.new(
         :maximum_percent,
         :minimum_healthy_percent)
+
+        include Aws::Structure
 
         # @!attribute [rw] maximum_percent
         #   The upper limit (as a percentage of the service\'s `desiredCount`)
@@ -1166,10 +1198,12 @@ module Aws
       #         container_instance: "String", # required
       #         force: false,
       #       }
-      class DeregisterContainerInstanceRequest < Aws::Structure.new(
+      class DeregisterContainerInstanceRequest < Struct.new(
         :cluster,
         :container_instance,
         :force)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -1201,8 +1235,10 @@ module Aws
 
       end
 
-      class DeregisterContainerInstanceResponse < Aws::Structure.new(
+      class DeregisterContainerInstanceResponse < Struct.new(
         :container_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_instance
         #   An EC2 instance that is running the Amazon ECS agent and has been
@@ -1217,8 +1253,10 @@ module Aws
       #       {
       #         task_definition: "String", # required
       #       }
-      class DeregisterTaskDefinitionRequest < Aws::Structure.new(
+      class DeregisterTaskDefinitionRequest < Struct.new(
         :task_definition)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_definition
         #   The `family` and `revision` (`family:revision`) or full Amazon
@@ -1228,8 +1266,10 @@ module Aws
 
       end
 
-      class DeregisterTaskDefinitionResponse < Aws::Structure.new(
+      class DeregisterTaskDefinitionResponse < Struct.new(
         :task_definition)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_definition
         #   The full description of the deregistered task.
@@ -1243,8 +1283,10 @@ module Aws
       #       {
       #         clusters: ["String"],
       #       }
-      class DescribeClustersRequest < Aws::Structure.new(
+      class DescribeClustersRequest < Struct.new(
         :clusters)
+
+        include Aws::Structure
 
         # @!attribute [rw] clusters
         #   A space-separated list of up to 100 cluster names or full cluster
@@ -1254,9 +1296,11 @@ module Aws
 
       end
 
-      class DescribeClustersResponse < Aws::Structure.new(
+      class DescribeClustersResponse < Struct.new(
         :clusters,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] clusters
         #   The list of clusters.
@@ -1275,9 +1319,11 @@ module Aws
       #         cluster: "String",
       #         container_instances: ["String"], # required
       #       }
-      class DescribeContainerInstancesRequest < Aws::Structure.new(
+      class DescribeContainerInstancesRequest < Struct.new(
         :cluster,
         :container_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -1292,9 +1338,11 @@ module Aws
 
       end
 
-      class DescribeContainerInstancesResponse < Aws::Structure.new(
+      class DescribeContainerInstancesResponse < Struct.new(
         :container_instances,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_instances
         #   The list of container instances.
@@ -1313,9 +1361,11 @@ module Aws
       #         cluster: "String",
       #         services: ["String"], # required
       #       }
-      class DescribeServicesRequest < Aws::Structure.new(
+      class DescribeServicesRequest < Struct.new(
         :cluster,
         :services)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The name of the cluster that hosts the service to describe. If you
@@ -1328,9 +1378,11 @@ module Aws
 
       end
 
-      class DescribeServicesResponse < Aws::Structure.new(
+      class DescribeServicesResponse < Struct.new(
         :services,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] services
         #   The list of services described.
@@ -1348,8 +1400,10 @@ module Aws
       #       {
       #         task_definition: "String", # required
       #       }
-      class DescribeTaskDefinitionRequest < Aws::Structure.new(
+      class DescribeTaskDefinitionRequest < Struct.new(
         :task_definition)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_definition
         #   The `family` for the latest `ACTIVE` revision, `family` and
@@ -1360,8 +1414,10 @@ module Aws
 
       end
 
-      class DescribeTaskDefinitionResponse < Aws::Structure.new(
+      class DescribeTaskDefinitionResponse < Struct.new(
         :task_definition)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_definition
         #   The full task definition description.
@@ -1376,9 +1432,11 @@ module Aws
       #         cluster: "String",
       #         tasks: ["String"], # required
       #       }
-      class DescribeTasksRequest < Aws::Structure.new(
+      class DescribeTasksRequest < Struct.new(
         :cluster,
         :tasks)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -1393,9 +1451,11 @@ module Aws
 
       end
 
-      class DescribeTasksResponse < Aws::Structure.new(
+      class DescribeTasksResponse < Struct.new(
         :tasks,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] tasks
         #   The list of tasks.
@@ -1414,9 +1474,11 @@ module Aws
       #         container_instance: "String",
       #         cluster: "String",
       #       }
-      class DiscoverPollEndpointRequest < Aws::Structure.new(
+      class DiscoverPollEndpointRequest < Struct.new(
         :container_instance,
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_instance
         #   The container instance ID or full Amazon Resource Name (ARN) of the
@@ -1434,9 +1496,11 @@ module Aws
 
       end
 
-      class DiscoverPollEndpointResponse < Aws::Structure.new(
+      class DiscoverPollEndpointResponse < Struct.new(
         :endpoint,
         :telemetry_endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint
         #   The endpoint for the Amazon ECS agent to poll.
@@ -1449,9 +1513,11 @@ module Aws
       end
 
       # A failed resource.
-      class Failure < Aws::Structure.new(
+      class Failure < Struct.new(
         :arn,
         :reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the failed resource.
@@ -1473,9 +1539,11 @@ module Aws
       #         hostname: "String", # required
       #         ip_address: "String", # required
       #       }
-      class HostEntry < Aws::Structure.new(
+      class HostEntry < Struct.new(
         :hostname,
         :ip_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] hostname
         #   The hostname to use in the `/etc/hosts` entry.
@@ -1494,8 +1562,10 @@ module Aws
       #       {
       #         source_path: "String",
       #       }
-      class HostVolumeProperties < Aws::Structure.new(
+      class HostVolumeProperties < Struct.new(
         :source_path)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_path
         #   The path on the host container instance that is presented to the
@@ -1518,9 +1588,11 @@ module Aws
       #         name: "String",
       #         value: "String",
       #       }
-      class KeyValuePair < Aws::Structure.new(
+      class KeyValuePair < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the key value pair. For environment variables, this is
@@ -1541,9 +1613,11 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class ListClustersRequest < Aws::Structure.new(
+      class ListClustersRequest < Struct.new(
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The `nextToken` value returned from a previous paginated
@@ -1572,9 +1646,11 @@ module Aws
 
       end
 
-      class ListClustersResponse < Aws::Structure.new(
+      class ListClustersResponse < Struct.new(
         :cluster_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_arns
         #   The list of full Amazon Resource Name (ARN) entries for each cluster
@@ -1598,10 +1674,12 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class ListContainerInstancesRequest < Aws::Structure.new(
+      class ListContainerInstancesRequest < Struct.new(
         :cluster,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -1638,9 +1716,11 @@ module Aws
 
       end
 
-      class ListContainerInstancesResponse < Aws::Structure.new(
+      class ListContainerInstancesResponse < Struct.new(
         :container_instance_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_instance_arns
         #   The list of container instances with full Amazon Resource Name (ARN)
@@ -1666,10 +1746,12 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class ListServicesRequest < Aws::Structure.new(
+      class ListServicesRequest < Struct.new(
         :cluster,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -1704,9 +1786,11 @@ module Aws
 
       end
 
-      class ListServicesResponse < Aws::Structure.new(
+      class ListServicesResponse < Struct.new(
         :service_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_arns
         #   The list of full Amazon Resource Name (ARN) entries for each service
@@ -1731,11 +1815,13 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class ListTaskDefinitionFamiliesRequest < Aws::Structure.new(
+      class ListTaskDefinitionFamiliesRequest < Struct.new(
         :family_prefix,
         :status,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] family_prefix
         #   The `familyPrefix` is a string that is used to filter the results of
@@ -1785,9 +1871,11 @@ module Aws
 
       end
 
-      class ListTaskDefinitionFamiliesResponse < Aws::Structure.new(
+      class ListTaskDefinitionFamiliesResponse < Struct.new(
         :families,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] families
         #   The list of task definition family names that match the
@@ -1814,12 +1902,14 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class ListTaskDefinitionsRequest < Aws::Structure.new(
+      class ListTaskDefinitionsRequest < Struct.new(
         :family_prefix,
         :status,
         :sort,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] family_prefix
         #   The full family name with which to filter the `ListTaskDefinitions`
@@ -1876,9 +1966,11 @@ module Aws
 
       end
 
-      class ListTaskDefinitionsResponse < Aws::Structure.new(
+      class ListTaskDefinitionsResponse < Struct.new(
         :task_definition_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_definition_arns
         #   The list of task definition Amazon Resource Name (ARN) entries for
@@ -1908,7 +2000,7 @@ module Aws
       #         service_name: "String",
       #         desired_status: "RUNNING", # accepts RUNNING, PENDING, STOPPED
       #       }
-      class ListTasksRequest < Aws::Structure.new(
+      class ListTasksRequest < Struct.new(
         :cluster,
         :container_instance,
         :family,
@@ -1917,6 +2009,8 @@ module Aws
         :started_by,
         :service_name,
         :desired_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -1993,9 +2087,11 @@ module Aws
 
       end
 
-      class ListTasksResponse < Aws::Structure.new(
+      class ListTasksResponse < Struct.new(
         :task_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_arns
         #   The list of task Amazon Resource Name (ARN) entries for the
@@ -2021,11 +2117,13 @@ module Aws
       #         container_name: "String",
       #         container_port: 1,
       #       }
-      class LoadBalancer < Aws::Structure.new(
+      class LoadBalancer < Struct.new(
         :target_group_arn,
         :load_balancer_name,
         :container_name,
         :container_port)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The full Amazon Resource Name (ARN) of the Elastic Load Balancing
@@ -2061,9 +2159,11 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class LogConfiguration < Aws::Structure.new(
+      class LogConfiguration < Struct.new(
         :log_driver,
         :options)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_driver
         #   The log driver to use for the container. The valid values listed for
@@ -2111,10 +2211,12 @@ module Aws
       #         container_path: "String",
       #         read_only: false,
       #       }
-      class MountPoint < Aws::Structure.new(
+      class MountPoint < Struct.new(
         :source_volume,
         :container_path,
         :read_only)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_volume
         #   The name of the volume to mount.
@@ -2145,11 +2247,13 @@ module Aws
       #         host_port: 1,
       #         protocol: "tcp", # accepts tcp, udp
       #       }
-      class NetworkBinding < Aws::Structure.new(
+      class NetworkBinding < Struct.new(
         :bind_ip,
         :container_port,
         :host_port,
         :protocol)
+
+        include Aws::Structure
 
         # @!attribute [rw] bind_ip
         #   The IP address that the container is bound to on the container
@@ -2185,10 +2289,12 @@ module Aws
       #         host_port: 1,
       #         protocol: "tcp", # accepts tcp, udp
       #       }
-      class PortMapping < Aws::Structure.new(
+      class PortMapping < Struct.new(
         :container_port,
         :host_port,
         :protocol)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_port
         #   The port number on the container that is bound to the user-specified
@@ -2265,7 +2371,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class RegisterContainerInstanceRequest < Aws::Structure.new(
+      class RegisterContainerInstanceRequest < Struct.new(
         :cluster,
         :instance_identity_document,
         :instance_identity_document_signature,
@@ -2273,6 +2379,8 @@ module Aws
         :version_info,
         :container_instance_arn,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -2315,8 +2423,10 @@ module Aws
 
       end
 
-      class RegisterContainerInstanceResponse < Aws::Structure.new(
+      class RegisterContainerInstanceResponse < Struct.new(
         :container_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_instance
         #   An EC2 instance that is running the Amazon ECS agent and has been
@@ -2411,12 +2521,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class RegisterTaskDefinitionRequest < Aws::Structure.new(
+      class RegisterTaskDefinitionRequest < Struct.new(
         :family,
         :task_role_arn,
         :network_mode,
         :container_definitions,
         :volumes)
+
+        include Aws::Structure
 
         # @!attribute [rw] family
         #   You must specify a `family` for a task definition, which allows you
@@ -2467,8 +2579,10 @@ module Aws
 
       end
 
-      class RegisterTaskDefinitionResponse < Aws::Structure.new(
+      class RegisterTaskDefinitionResponse < Struct.new(
         :task_definition)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_definition
         #   The full description of the registered task definition.
@@ -2488,13 +2602,15 @@ module Aws
       #         integer_value: 1,
       #         string_set_value: ["String"],
       #       }
-      class Resource < Aws::Structure.new(
+      class Resource < Struct.new(
         :name,
         :type,
         :double_value,
         :long_value,
         :integer_value,
         :string_set_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the resource, such as `CPU`, `MEMORY`, `PORTS`, or a
@@ -2552,12 +2668,14 @@ module Aws
       #         count: 1,
       #         started_by: "String",
       #       }
-      class RunTaskRequest < Aws::Structure.new(
+      class RunTaskRequest < Struct.new(
         :cluster,
         :task_definition,
         :overrides,
         :count,
         :started_by)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -2611,9 +2729,11 @@ module Aws
 
       end
 
-      class RunTaskResponse < Aws::Structure.new(
+      class RunTaskResponse < Struct.new(
         :tasks,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] tasks
         #   A full description of the tasks that were run. Each task that was
@@ -2627,7 +2747,7 @@ module Aws
       end
 
       # Details on a service within a cluster
-      class Service < Aws::Structure.new(
+      class Service < Struct.new(
         :service_arn,
         :service_name,
         :cluster_arn,
@@ -2642,6 +2762,8 @@ module Aws
         :role_arn,
         :events,
         :created_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_arn
         #   The Amazon Resource Name (ARN) that identifies the service. The ARN
@@ -2725,10 +2847,12 @@ module Aws
       end
 
       # Details on an event associated with a service.
-      class ServiceEvent < Aws::Structure.new(
+      class ServiceEvent < Struct.new(
         :id,
         :created_at,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID string of the event.
@@ -2768,12 +2892,14 @@ module Aws
       #         container_instances: ["String"], # required
       #         started_by: "String",
       #       }
-      class StartTaskRequest < Aws::Structure.new(
+      class StartTaskRequest < Struct.new(
         :cluster,
         :task_definition,
         :overrides,
         :container_instances,
         :started_by)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster on
@@ -2828,9 +2954,11 @@ module Aws
 
       end
 
-      class StartTaskResponse < Aws::Structure.new(
+      class StartTaskResponse < Struct.new(
         :tasks,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] tasks
         #   A full description of the tasks that were started. Each task that
@@ -2852,10 +2980,12 @@ module Aws
       #         task: "String", # required
       #         reason: "String",
       #       }
-      class StopTaskRequest < Aws::Structure.new(
+      class StopTaskRequest < Struct.new(
         :cluster,
         :task,
         :reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -2878,8 +3008,10 @@ module Aws
 
       end
 
-      class StopTaskResponse < Aws::Structure.new(
+      class StopTaskResponse < Struct.new(
         :task)
+
+        include Aws::Structure
 
         # @!attribute [rw] task
         #   Details on a task in a cluster.
@@ -2906,7 +3038,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class SubmitContainerStateChangeRequest < Aws::Structure.new(
+      class SubmitContainerStateChangeRequest < Struct.new(
         :cluster,
         :task,
         :container_name,
@@ -2914,6 +3046,8 @@ module Aws
         :exit_code,
         :reason,
         :network_bindings)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -2947,8 +3081,10 @@ module Aws
 
       end
 
-      class SubmitContainerStateChangeResponse < Aws::Structure.new(
+      class SubmitContainerStateChangeResponse < Struct.new(
         :acknowledgment)
+
+        include Aws::Structure
 
         # @!attribute [rw] acknowledgment
         #   Acknowledgement of the state change.
@@ -2965,11 +3101,13 @@ module Aws
       #         status: "String",
       #         reason: "String",
       #       }
-      class SubmitTaskStateChangeRequest < Aws::Structure.new(
+      class SubmitTaskStateChangeRequest < Struct.new(
         :cluster,
         :task,
         :status,
         :reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -2991,8 +3129,10 @@ module Aws
 
       end
 
-      class SubmitTaskStateChangeResponse < Aws::Structure.new(
+      class SubmitTaskStateChangeResponse < Struct.new(
         :acknowledgment)
+
+        include Aws::Structure
 
         # @!attribute [rw] acknowledgment
         #   Acknowledgement of the state change.
@@ -3001,7 +3141,7 @@ module Aws
       end
 
       # Details on a task in a cluster.
-      class Task < Aws::Structure.new(
+      class Task < Struct.new(
         :task_arn,
         :cluster_arn,
         :task_definition_arn,
@@ -3015,6 +3155,8 @@ module Aws
         :created_at,
         :started_at,
         :stopped_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_arn
         #   The Amazon Resource Name (ARN) of the task.
@@ -3078,7 +3220,7 @@ module Aws
       end
 
       # Details of a task definition.
-      class TaskDefinition < Aws::Structure.new(
+      class TaskDefinition < Struct.new(
         :task_definition_arn,
         :container_definitions,
         :family,
@@ -3088,6 +3230,8 @@ module Aws
         :volumes,
         :status,
         :requires_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_definition_arn
         #   The full Amazon Resource Name (ARN) of the task definition.
@@ -3182,9 +3326,11 @@ module Aws
       #         ],
       #         task_role_arn: "String",
       #       }
-      class TaskOverride < Aws::Structure.new(
+      class TaskOverride < Struct.new(
         :container_overrides,
         :task_role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_overrides
         #   One or more container overrides sent to a task.
@@ -3207,10 +3353,12 @@ module Aws
       #         soft_limit: 1, # required
       #         hard_limit: 1, # required
       #       }
-      class Ulimit < Aws::Structure.new(
+      class Ulimit < Struct.new(
         :name,
         :soft_limit,
         :hard_limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The `type` of the `ulimit`.
@@ -3233,9 +3381,11 @@ module Aws
       #         cluster: "String",
       #         container_instance: "String", # required
       #       }
-      class UpdateContainerAgentRequest < Aws::Structure.new(
+      class UpdateContainerAgentRequest < Struct.new(
         :cluster,
         :container_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -3251,8 +3401,10 @@ module Aws
 
       end
 
-      class UpdateContainerAgentResponse < Aws::Structure.new(
+      class UpdateContainerAgentResponse < Struct.new(
         :container_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] container_instance
         #   An EC2 instance that is running the Amazon ECS agent and has been
@@ -3274,12 +3426,14 @@ module Aws
       #           minimum_healthy_percent: 1,
       #         },
       #       }
-      class UpdateServiceRequest < Aws::Structure.new(
+      class UpdateServiceRequest < Struct.new(
         :cluster,
         :service,
         :desired_count,
         :task_definition,
         :deployment_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   The short name or full Amazon Resource Name (ARN) of the cluster
@@ -3313,8 +3467,10 @@ module Aws
 
       end
 
-      class UpdateServiceResponse < Aws::Structure.new(
+      class UpdateServiceResponse < Struct.new(
         :service)
+
+        include Aws::Structure
 
         # @!attribute [rw] service
         #   The full description of your service following the update call.
@@ -3332,10 +3488,12 @@ module Aws
       #         agent_hash: "String",
       #         docker_version: "String",
       #       }
-      class VersionInfo < Aws::Structure.new(
+      class VersionInfo < Struct.new(
         :agent_version,
         :agent_hash,
         :docker_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_version
         #   The version number of the Amazon ECS container agent.
@@ -3366,9 +3524,11 @@ module Aws
       #           source_path: "String",
       #         },
       #       }
-      class Volume < Aws::Structure.new(
+      class Volume < Struct.new(
         :name,
         :host)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the volume. Up to 255 letters (uppercase and lowercase),
@@ -3396,9 +3556,11 @@ module Aws
       #         source_container: "String",
       #         read_only: false,
       #       }
-      class VolumeFrom < Aws::Structure.new(
+      class VolumeFrom < Struct.new(
         :source_container,
         :read_only)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_container
         #   The name of the container to mount volumes from.

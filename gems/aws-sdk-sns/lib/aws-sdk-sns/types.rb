@@ -18,11 +18,13 @@ module Aws
       #         aws_account_id: ["delegate"], # required
       #         action_name: ["action"], # required
       #       }
-      class AddPermissionInput < Aws::Structure.new(
+      class AddPermissionInput < Struct.new(
         :topic_arn,
         :label,
         :aws_account_id,
         :action_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic whose access control policy you wish to modify.
@@ -53,8 +55,10 @@ module Aws
       #       {
       #         phone_number: "PhoneNumber", # required
       #       }
-      class CheckIfPhoneNumberIsOptedOutInput < Aws::Structure.new(
+      class CheckIfPhoneNumberIsOptedOutInput < Struct.new(
         :phone_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] phone_number
         #   The phone number for which you want to check the opt out status.
@@ -63,8 +67,10 @@ module Aws
       end
 
       # The response from the `CheckIfPhoneNumberIsOptedOut` action.
-      class CheckIfPhoneNumberIsOptedOutResponse < Aws::Structure.new(
+      class CheckIfPhoneNumberIsOptedOutResponse < Struct.new(
         :is_opted_out)
+
+        include Aws::Structure
 
         # @!attribute [rw] is_opted_out
         #   Indicates whether the phone number is opted out:
@@ -87,10 +93,12 @@ module Aws
       #         token: "token", # required
       #         authenticate_on_unsubscribe: "authenticateOnUnsubscribe",
       #       }
-      class ConfirmSubscriptionInput < Aws::Structure.new(
+      class ConfirmSubscriptionInput < Struct.new(
         :topic_arn,
         :token,
         :authenticate_on_unsubscribe)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic for which you wish to confirm a subscription.
@@ -111,8 +119,10 @@ module Aws
       end
 
       # Response for ConfirmSubscriptions action.
-      class ConfirmSubscriptionResponse < Aws::Structure.new(
+      class ConfirmSubscriptionResponse < Struct.new(
         :subscription_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_arn
         #   The ARN of the created subscription.
@@ -121,8 +131,10 @@ module Aws
       end
 
       # Response from CreateEndpoint action.
-      class CreateEndpointResponse < Aws::Structure.new(
+      class CreateEndpointResponse < Struct.new(
         :endpoint_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   EndpointArn returned from CreateEndpoint action.
@@ -141,10 +153,12 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class CreatePlatformApplicationInput < Aws::Structure.new(
+      class CreatePlatformApplicationInput < Struct.new(
         :name,
         :platform,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Application names must be made up of only uppercase and lowercase
@@ -169,8 +183,10 @@ module Aws
       end
 
       # Response from CreatePlatformApplication action.
-      class CreatePlatformApplicationResponse < Aws::Structure.new(
+      class CreatePlatformApplicationResponse < Struct.new(
         :platform_application_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_application_arn
         #   PlatformApplicationArn is returned.
@@ -190,11 +206,13 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class CreatePlatformEndpointInput < Aws::Structure.new(
+      class CreatePlatformEndpointInput < Struct.new(
         :platform_application_arn,
         :token,
         :custom_user_data,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_application_arn
         #   PlatformApplicationArn returned from CreatePlatformApplication is
@@ -233,8 +251,10 @@ module Aws
       #       {
       #         name: "topicName", # required
       #       }
-      class CreateTopicInput < Aws::Structure.new(
+      class CreateTopicInput < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the topic you want to create.
@@ -247,8 +267,10 @@ module Aws
       end
 
       # Response from CreateTopic action.
-      class CreateTopicResponse < Aws::Structure.new(
+      class CreateTopicResponse < Struct.new(
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The Amazon Resource Name (ARN) assigned to the created topic.
@@ -263,8 +285,10 @@ module Aws
       #       {
       #         endpoint_arn: "String", # required
       #       }
-      class DeleteEndpointInput < Aws::Structure.new(
+      class DeleteEndpointInput < Struct.new(
         :endpoint_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   EndpointArn of endpoint to delete.
@@ -279,8 +303,10 @@ module Aws
       #       {
       #         platform_application_arn: "String", # required
       #       }
-      class DeletePlatformApplicationInput < Aws::Structure.new(
+      class DeletePlatformApplicationInput < Struct.new(
         :platform_application_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_application_arn
         #   PlatformApplicationArn of platform application object to delete.
@@ -294,8 +320,10 @@ module Aws
       #       {
       #         topic_arn: "topicARN", # required
       #       }
-      class DeleteTopicInput < Aws::Structure.new(
+      class DeleteTopicInput < Struct.new(
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic you want to delete.
@@ -304,9 +332,11 @@ module Aws
       end
 
       # Endpoint for mobile app and device.
-      class Endpoint < Aws::Structure.new(
+      class Endpoint < Struct.new(
         :endpoint_arn,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   EndpointArn for mobile app and device.
@@ -325,8 +355,10 @@ module Aws
       #       {
       #         endpoint_arn: "String", # required
       #       }
-      class GetEndpointAttributesInput < Aws::Structure.new(
+      class GetEndpointAttributesInput < Struct.new(
         :endpoint_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   EndpointArn for GetEndpointAttributes input.
@@ -335,8 +367,10 @@ module Aws
       end
 
       # Response from GetEndpointAttributes of the EndpointArn.
-      class GetEndpointAttributesResponse < Aws::Structure.new(
+      class GetEndpointAttributesResponse < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   Attributes include the following:
@@ -365,8 +399,10 @@ module Aws
       #       {
       #         platform_application_arn: "String", # required
       #       }
-      class GetPlatformApplicationAttributesInput < Aws::Structure.new(
+      class GetPlatformApplicationAttributesInput < Struct.new(
         :platform_application_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_application_arn
         #   PlatformApplicationArn for GetPlatformApplicationAttributesInput.
@@ -375,8 +411,10 @@ module Aws
       end
 
       # Response for GetPlatformApplicationAttributes action.
-      class GetPlatformApplicationAttributesResponse < Aws::Structure.new(
+      class GetPlatformApplicationAttributesResponse < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   Attributes include the following:
@@ -404,8 +442,10 @@ module Aws
       #       {
       #         attributes: ["String"],
       #       }
-      class GetSMSAttributesInput < Aws::Structure.new(
+      class GetSMSAttributesInput < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   A list of the individual attribute names, such as
@@ -424,8 +464,10 @@ module Aws
       end
 
       # The response from the `GetSMSAttributes` request.
-      class GetSMSAttributesResponse < Aws::Structure.new(
+      class GetSMSAttributesResponse < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   The SMS attribute names and their values.
@@ -440,8 +482,10 @@ module Aws
       #       {
       #         subscription_arn: "subscriptionARN", # required
       #       }
-      class GetSubscriptionAttributesInput < Aws::Structure.new(
+      class GetSubscriptionAttributesInput < Struct.new(
         :subscription_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_arn
         #   The ARN of the subscription whose properties you want to get.
@@ -450,8 +494,10 @@ module Aws
       end
 
       # Response for GetSubscriptionAttributes action.
-      class GetSubscriptionAttributesResponse < Aws::Structure.new(
+      class GetSubscriptionAttributesResponse < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   A map of the subscription\'s attributes. Attributes in this map
@@ -484,8 +530,10 @@ module Aws
       #       {
       #         topic_arn: "topicARN", # required
       #       }
-      class GetTopicAttributesInput < Aws::Structure.new(
+      class GetTopicAttributesInput < Struct.new(
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic whose properties you want to get.
@@ -494,8 +542,10 @@ module Aws
       end
 
       # Response for GetTopicAttributes action.
-      class GetTopicAttributesResponse < Aws::Structure.new(
+      class GetTopicAttributesResponse < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   A map of the topic\'s attributes. Attributes in this map include the
@@ -537,9 +587,11 @@ module Aws
       #         platform_application_arn: "String", # required
       #         next_token: "String",
       #       }
-      class ListEndpointsByPlatformApplicationInput < Aws::Structure.new(
+      class ListEndpointsByPlatformApplicationInput < Struct.new(
         :platform_application_arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_application_arn
         #   PlatformApplicationArn for ListEndpointsByPlatformApplicationInput
@@ -555,9 +607,11 @@ module Aws
       end
 
       # Response for ListEndpointsByPlatformApplication action.
-      class ListEndpointsByPlatformApplicationResponse < Aws::Structure.new(
+      class ListEndpointsByPlatformApplicationResponse < Struct.new(
         :endpoints,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoints
         #   Endpoints returned for ListEndpointsByPlatformApplication action.
@@ -578,8 +632,10 @@ module Aws
       #       {
       #         next_token: "string",
       #       }
-      class ListPhoneNumbersOptedOutInput < Aws::Structure.new(
+      class ListPhoneNumbersOptedOutInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   A `NextToken` string is used when you call the
@@ -590,9 +646,11 @@ module Aws
       end
 
       # The response from the `ListPhoneNumbersOptedOut` action.
-      class ListPhoneNumbersOptedOutResponse < Aws::Structure.new(
+      class ListPhoneNumbersOptedOutResponse < Struct.new(
         :phone_numbers,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] phone_numbers
         #   A list of phone numbers that are opted out of receiving SMS
@@ -615,8 +673,10 @@ module Aws
       #       {
       #         next_token: "String",
       #       }
-      class ListPlatformApplicationsInput < Aws::Structure.new(
+      class ListPlatformApplicationsInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   NextToken string is used when calling ListPlatformApplications
@@ -627,9 +687,11 @@ module Aws
       end
 
       # Response for ListPlatformApplications action.
-      class ListPlatformApplicationsResponse < Aws::Structure.new(
+      class ListPlatformApplicationsResponse < Struct.new(
         :platform_applications,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_applications
         #   Platform applications returned when calling ListPlatformApplications
@@ -652,9 +714,11 @@ module Aws
       #         topic_arn: "topicARN", # required
       #         next_token: "nextToken",
       #       }
-      class ListSubscriptionsByTopicInput < Aws::Structure.new(
+      class ListSubscriptionsByTopicInput < Struct.new(
         :topic_arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic for which you wish to find subscriptions.
@@ -667,9 +731,11 @@ module Aws
       end
 
       # Response for ListSubscriptionsByTopic action.
-      class ListSubscriptionsByTopicResponse < Aws::Structure.new(
+      class ListSubscriptionsByTopicResponse < Struct.new(
         :subscriptions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscriptions
         #   A list of subscriptions.
@@ -690,8 +756,10 @@ module Aws
       #       {
       #         next_token: "nextToken",
       #       }
-      class ListSubscriptionsInput < Aws::Structure.new(
+      class ListSubscriptionsInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   Token returned by the previous `ListSubscriptions` request.
@@ -700,9 +768,11 @@ module Aws
       end
 
       # Response for ListSubscriptions action
-      class ListSubscriptionsResponse < Aws::Structure.new(
+      class ListSubscriptionsResponse < Struct.new(
         :subscriptions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscriptions
         #   A list of subscriptions.
@@ -721,8 +791,10 @@ module Aws
       #       {
       #         next_token: "nextToken",
       #       }
-      class ListTopicsInput < Aws::Structure.new(
+      class ListTopicsInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   Token returned by the previous `ListTopics` request.
@@ -731,9 +803,11 @@ module Aws
       end
 
       # Response for ListTopics action.
-      class ListTopicsResponse < Aws::Structure.new(
+      class ListTopicsResponse < Struct.new(
         :topics,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] topics
         #   A list of topic ARNs.
@@ -768,10 +842,12 @@ module Aws
       #         string_value: "String",
       #         binary_value: "data",
       #       }
-      class MessageAttributeValue < Aws::Structure.new(
+      class MessageAttributeValue < Struct.new(
         :data_type,
         :string_value,
         :binary_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_type
         #   Amazon SNS supports the following logical data types: String,
@@ -807,8 +883,10 @@ module Aws
       #       {
       #         phone_number: "PhoneNumber", # required
       #       }
-      class OptInPhoneNumberInput < Aws::Structure.new(
+      class OptInPhoneNumberInput < Struct.new(
         :phone_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] phone_number
         #   The phone number to opt in.
@@ -820,9 +898,11 @@ module Aws
       class OptInPhoneNumberResponse < Aws::EmptyStructure; end
 
       # Platform application object.
-      class PlatformApplication < Aws::Structure.new(
+      class PlatformApplication < Struct.new(
         :platform_application_arn,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_application_arn
         #   PlatformApplicationArn for platform application object.
@@ -853,7 +933,7 @@ module Aws
       #           },
       #         },
       #       }
-      class PublishInput < Aws::Structure.new(
+      class PublishInput < Struct.new(
         :topic_arn,
         :target_arn,
         :phone_number,
@@ -861,6 +941,8 @@ module Aws
         :subject,
         :message_structure,
         :message_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The topic you want to publish to.
@@ -970,8 +1052,10 @@ module Aws
       end
 
       # Response for Publish action.
-      class PublishResponse < Aws::Structure.new(
+      class PublishResponse < Struct.new(
         :message_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] message_id
         #   Unique identifier assigned to the published message.
@@ -989,9 +1073,11 @@ module Aws
       #         topic_arn: "topicARN", # required
       #         label: "label", # required
       #       }
-      class RemovePermissionInput < Aws::Structure.new(
+      class RemovePermissionInput < Struct.new(
         :topic_arn,
         :label)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic whose access control policy you wish to modify.
@@ -1013,9 +1099,11 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class SetEndpointAttributesInput < Aws::Structure.new(
+      class SetEndpointAttributesInput < Struct.new(
         :endpoint_arn,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   EndpointArn used for SetEndpointAttributes action.
@@ -1052,9 +1140,11 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class SetPlatformApplicationAttributesInput < Aws::Structure.new(
+      class SetPlatformApplicationAttributesInput < Struct.new(
         :platform_application_arn,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] platform_application_arn
         #   PlatformApplicationArn for SetPlatformApplicationAttributes action.
@@ -1108,8 +1198,10 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class SetSMSAttributesInput < Aws::Structure.new(
+      class SetSMSAttributesInput < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   The default settings for sending SMS messages from your account. You
@@ -1205,10 +1297,12 @@ module Aws
       #         attribute_name: "attributeName", # required
       #         attribute_value: "attributeValue",
       #       }
-      class SetSubscriptionAttributesInput < Aws::Structure.new(
+      class SetSubscriptionAttributesInput < Struct.new(
         :subscription_arn,
         :attribute_name,
         :attribute_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_arn
         #   The ARN of the subscription to modify.
@@ -1236,10 +1330,12 @@ module Aws
       #         attribute_name: "attributeName", # required
       #         attribute_value: "attributeValue",
       #       }
-      class SetTopicAttributesInput < Aws::Structure.new(
+      class SetTopicAttributesInput < Struct.new(
         :topic_arn,
         :attribute_name,
         :attribute_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic to modify.
@@ -1267,10 +1363,12 @@ module Aws
       #         protocol: "protocol", # required
       #         endpoint: "endpoint",
       #       }
-      class SubscribeInput < Aws::Structure.new(
+      class SubscribeInput < Struct.new(
         :topic_arn,
         :protocol,
         :endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the topic you want to subscribe to.
@@ -1328,8 +1426,10 @@ module Aws
       end
 
       # Response for Subscribe action.
-      class SubscribeResponse < Aws::Structure.new(
+      class SubscribeResponse < Struct.new(
         :subscription_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_arn
         #   The ARN of the subscription, if the service was able to create a
@@ -1340,12 +1440,14 @@ module Aws
       end
 
       # A wrapper type for the attributes of an Amazon SNS subscription.
-      class Subscription < Aws::Structure.new(
+      class Subscription < Struct.new(
         :subscription_arn,
         :owner,
         :protocol,
         :endpoint,
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_arn
         #   The subscription\'s ARN.
@@ -1371,8 +1473,10 @@ module Aws
 
       # A wrapper type for the topic\'s Amazon Resource Name (ARN). To
       # retrieve a topic\'s attributes, use `GetTopicAttributes`.
-      class Topic < Aws::Structure.new(
+      class Topic < Struct.new(
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The topic\'s ARN.
@@ -1387,8 +1491,10 @@ module Aws
       #       {
       #         subscription_arn: "subscriptionARN", # required
       #       }
-      class UnsubscribeInput < Aws::Structure.new(
+      class UnsubscribeInput < Struct.new(
         :subscription_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_arn
         #   The ARN of the subscription to be deleted.

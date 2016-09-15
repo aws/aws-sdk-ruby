@@ -33,9 +33,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddCustomAttributesRequest < Aws::Structure.new(
+      class AddCustomAttributesRequest < Struct.new(
         :user_pool_id,
         :custom_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to add custom
@@ -60,9 +62,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminConfirmSignUpRequest < Aws::Structure.new(
+      class AdminConfirmSignUpRequest < Struct.new(
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for which you want to confirm user registration.
@@ -87,10 +91,12 @@ module Aws
       #         username: "UsernameType", # required
       #         user_attribute_names: ["AttributeNameType"], # required
       #       }
-      class AdminDeleteUserAttributesRequest < Aws::Structure.new(
+      class AdminDeleteUserAttributesRequest < Struct.new(
         :user_pool_id,
         :username,
         :user_attribute_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to delete user
@@ -121,9 +127,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminDeleteUserRequest < Aws::Structure.new(
+      class AdminDeleteUserRequest < Struct.new(
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to delete the
@@ -144,9 +152,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminDisableUserRequest < Aws::Structure.new(
+      class AdminDisableUserRequest < Struct.new(
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to disable the
@@ -171,9 +181,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminEnableUserRequest < Aws::Structure.new(
+      class AdminEnableUserRequest < Struct.new(
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to enable the
@@ -199,10 +211,12 @@ module Aws
       #         username: "UsernameType", # required
       #         device_key: "DeviceKeyType", # required
       #       }
-      class AdminForgetDeviceRequest < Aws::Structure.new(
+      class AdminForgetDeviceRequest < Struct.new(
         :user_pool_id,
         :username,
         :device_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID.
@@ -227,10 +241,12 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminGetDeviceRequest < Aws::Structure.new(
+      class AdminGetDeviceRequest < Struct.new(
         :device_key,
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_key
         #   The device key.
@@ -247,8 +263,10 @@ module Aws
       end
 
       # Gets the device response, as an administrator.
-      class AdminGetDeviceResponse < Aws::Structure.new(
+      class AdminGetDeviceResponse < Struct.new(
         :device)
+
+        include Aws::Structure
 
         # @!attribute [rw] device
         #   The device.
@@ -264,9 +282,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminGetUserRequest < Aws::Structure.new(
+      class AdminGetUserRequest < Struct.new(
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to get information
@@ -281,7 +301,7 @@ module Aws
 
       # Represents the response from the server from the request to get the
       # specified user as an administrator.
-      class AdminGetUserResponse < Aws::Structure.new(
+      class AdminGetUserResponse < Struct.new(
         :username,
         :user_attributes,
         :user_create_date,
@@ -289,6 +309,8 @@ module Aws
         :enabled,
         :user_status,
         :mfa_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] username
         #   The user name of the user about whom you are receiving information.
@@ -341,12 +363,14 @@ module Aws
       #           "StringType" => "StringType",
       #         },
       #       }
-      class AdminInitiateAuthRequest < Aws::Structure.new(
+      class AdminInitiateAuthRequest < Struct.new(
         :user_pool_id,
         :client_id,
         :auth_flow,
         :auth_parameters,
         :client_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The ID of the Amazon Cognito user pool.
@@ -371,11 +395,13 @@ module Aws
       end
 
       # Initiates the authentication response, as an administrator.
-      class AdminInitiateAuthResponse < Aws::Structure.new(
+      class AdminInitiateAuthResponse < Struct.new(
         :challenge_name,
         :session,
         :challenge_parameters,
         :authentication_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] challenge_name
         #   The name of the challenge.
@@ -405,11 +431,13 @@ module Aws
       #         limit: 1,
       #         pagination_token: "SearchPaginationTokenType",
       #       }
-      class AdminListDevicesRequest < Aws::Structure.new(
+      class AdminListDevicesRequest < Struct.new(
         :user_pool_id,
         :username,
         :limit,
         :pagination_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID.
@@ -430,9 +458,11 @@ module Aws
       end
 
       # Lists the device\'s response, as an administrator.
-      class AdminListDevicesResponse < Aws::Structure.new(
+      class AdminListDevicesResponse < Struct.new(
         :devices,
         :pagination_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] devices
         #   The devices in the list of devices response.
@@ -453,9 +483,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminResetUserPasswordRequest < Aws::Structure.new(
+      class AdminResetUserPasswordRequest < Struct.new(
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to reset the
@@ -486,12 +518,14 @@ module Aws
       #         },
       #         session: "SessionType",
       #       }
-      class AdminRespondToAuthChallengeRequest < Aws::Structure.new(
+      class AdminRespondToAuthChallengeRequest < Struct.new(
         :user_pool_id,
         :client_id,
         :challenge_name,
         :challenge_responses,
         :session)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The ID of the Amazon Cognito user pool.
@@ -516,11 +550,13 @@ module Aws
       end
 
       # Responds to the authentication challenge, as an administrator.
-      class AdminRespondToAuthChallengeResponse < Aws::Structure.new(
+      class AdminRespondToAuthChallengeResponse < Struct.new(
         :challenge_name,
         :session,
         :challenge_parameters,
         :authentication_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] challenge_name
         #   The name of the challenge.
@@ -554,10 +590,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class AdminSetUserSettingsRequest < Aws::Structure.new(
+      class AdminSetUserSettingsRequest < Struct.new(
         :user_pool_id,
         :username,
         :mfa_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to set the user\'s
@@ -588,11 +626,13 @@ module Aws
       #         device_key: "DeviceKeyType", # required
       #         device_remembered_status: "remembered", # accepts remembered, not_remembered
       #       }
-      class AdminUpdateDeviceStatusRequest < Aws::Structure.new(
+      class AdminUpdateDeviceStatusRequest < Struct.new(
         :user_pool_id,
         :username,
         :device_key,
         :device_remembered_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID>
@@ -631,10 +671,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class AdminUpdateUserAttributesRequest < Aws::Structure.new(
+      class AdminUpdateUserAttributesRequest < Struct.new(
         :user_pool_id,
         :username,
         :user_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to update user
@@ -664,9 +706,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         username: "UsernameType", # required
       #       }
-      class AdminUserGlobalSignOutRequest < Aws::Structure.new(
+      class AdminUserGlobalSignOutRequest < Struct.new(
         :user_pool_id,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID.
@@ -689,9 +733,11 @@ module Aws
       #         name: "AttributeNameType", # required
       #         value: "AttributeValueType",
       #       }
-      class AttributeType < Aws::Structure.new(
+      class AttributeType < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the attribute.
@@ -704,13 +750,15 @@ module Aws
       end
 
       # The result type of the authentication result.
-      class AuthenticationResultType < Aws::Structure.new(
+      class AuthenticationResultType < Struct.new(
         :access_token,
         :expires_in,
         :token_type,
         :refresh_token,
         :id_token,
         :new_device_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token of the authentication result.
@@ -747,10 +795,12 @@ module Aws
       #         proposed_password: "PasswordType", # required
       #         access_token: "TokenModelType",
       #       }
-      class ChangePasswordRequest < Aws::Structure.new(
+      class ChangePasswordRequest < Struct.new(
         :previous_password,
         :proposed_password,
         :access_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] previous_password
         #   The old password in the change password request.
@@ -770,10 +820,12 @@ module Aws
       class ChangePasswordResponse < Aws::EmptyStructure; end
 
       # The type of code delivery details being returned from the server.
-      class CodeDeliveryDetailsType < Aws::Structure.new(
+      class CodeDeliveryDetailsType < Struct.new(
         :destination,
         :delivery_medium,
         :attribute_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination
         #   The destination for the code delivery details.
@@ -802,11 +854,13 @@ module Aws
       #         },
       #         device_name: "DeviceNameType",
       #       }
-      class ConfirmDeviceRequest < Aws::Structure.new(
+      class ConfirmDeviceRequest < Struct.new(
         :access_token,
         :device_key,
         :device_secret_verifier_config,
         :device_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token.
@@ -827,8 +881,10 @@ module Aws
       end
 
       # Confirms the device response.
-      class ConfirmDeviceResponse < Aws::Structure.new(
+      class ConfirmDeviceResponse < Struct.new(
         :user_confirmation_necessary)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_confirmation_necessary
         #   Indicates whether the user confirmation is necessary to confirm the
@@ -848,12 +904,14 @@ module Aws
       #         confirmation_code: "ConfirmationCodeType", # required
       #         password: "PasswordType", # required
       #       }
-      class ConfirmForgotPasswordRequest < Aws::Structure.new(
+      class ConfirmForgotPasswordRequest < Struct.new(
         :client_id,
         :secret_hash,
         :username,
         :confirmation_code,
         :password)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The ID of the client associated with the user pool.
@@ -897,12 +955,14 @@ module Aws
       #         confirmation_code: "ConfirmationCodeType", # required
       #         force_alias_creation: false,
       #       }
-      class ConfirmSignUpRequest < Aws::Structure.new(
+      class ConfirmSignUpRequest < Struct.new(
         :client_id,
         :secret_hash,
         :username,
         :confirmation_code,
         :force_alias_creation)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The ID of the client associated with the user pool.
@@ -948,10 +1008,12 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         cloud_watch_logs_role_arn: "ArnType", # required
       #       }
-      class CreateUserImportJobRequest < Aws::Structure.new(
+      class CreateUserImportJobRequest < Struct.new(
         :job_name,
         :user_pool_id,
         :cloud_watch_logs_role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_name
         #   The job name for the user import job.
@@ -971,8 +1033,10 @@ module Aws
 
       # Represents the response from the server to the request to create the
       # user import job.
-      class CreateUserImportJobResponse < Aws::Structure.new(
+      class CreateUserImportJobResponse < Struct.new(
         :user_import_job)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_import_job
         #   The job object that represents the user import job.
@@ -993,7 +1057,7 @@ module Aws
       #         write_attributes: ["ClientPermissionType"],
       #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY
       #       }
-      class CreateUserPoolClientRequest < Aws::Structure.new(
+      class CreateUserPoolClientRequest < Struct.new(
         :user_pool_id,
         :client_name,
         :generate_secret,
@@ -1001,6 +1065,8 @@ module Aws
         :read_attributes,
         :write_attributes,
         :explicit_auth_flows)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to create a user
@@ -1035,8 +1101,10 @@ module Aws
       end
 
       # Represents the response from the server to create a user pool client.
-      class CreateUserPoolClientResponse < Aws::Structure.new(
+      class CreateUserPoolClientResponse < Struct.new(
         :user_pool_client)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_client
         #   The user pool client that was just created.
@@ -1089,7 +1157,7 @@ module Aws
       #           external_id: "StringType",
       #         },
       #       }
-      class CreateUserPoolRequest < Aws::Structure.new(
+      class CreateUserPoolRequest < Struct.new(
         :pool_name,
         :policies,
         :lambda_config,
@@ -1103,6 +1171,8 @@ module Aws
         :device_configuration,
         :email_configuration,
         :sms_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] pool_name
         #   A string used to name the user pool.
@@ -1162,8 +1232,10 @@ module Aws
 
       # Represents the response from the server for the request to create a
       # user pool.
-      class CreateUserPoolResponse < Aws::Structure.new(
+      class CreateUserPoolResponse < Struct.new(
         :user_pool)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool
         #   A container for the user pool details.
@@ -1179,9 +1251,11 @@ module Aws
       #         user_attribute_names: ["AttributeNameType"], # required
       #         access_token: "TokenModelType",
       #       }
-      class DeleteUserAttributesRequest < Aws::Structure.new(
+      class DeleteUserAttributesRequest < Struct.new(
         :user_attribute_names,
         :access_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_attribute_names
         #   An array of strings representing the user attribute names you wish
@@ -1205,9 +1279,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         client_id: "ClientIdType", # required
       #       }
-      class DeleteUserPoolClientRequest < Aws::Structure.new(
+      class DeleteUserPoolClientRequest < Struct.new(
         :user_pool_id,
         :client_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to delete the
@@ -1227,8 +1303,10 @@ module Aws
       #       {
       #         user_pool_id: "UserPoolIdType", # required
       #       }
-      class DeleteUserPoolRequest < Aws::Structure.new(
+      class DeleteUserPoolRequest < Struct.new(
         :user_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool you want to delete.
@@ -1243,8 +1321,10 @@ module Aws
       #       {
       #         access_token: "TokenModelType",
       #       }
-      class DeleteUserRequest < Aws::Structure.new(
+      class DeleteUserRequest < Struct.new(
         :access_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token from a request to delete a user.
@@ -1260,9 +1340,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         job_id: "UserImportJobIdType", # required
       #       }
-      class DescribeUserImportJobRequest < Aws::Structure.new(
+      class DescribeUserImportJobRequest < Struct.new(
         :user_pool_id,
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool that the users are being imported
@@ -1277,8 +1359,10 @@ module Aws
 
       # Represents the response from the server to the request to describe the
       # user import job.
-      class DescribeUserImportJobResponse < Aws::Structure.new(
+      class DescribeUserImportJobResponse < Struct.new(
         :user_import_job)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_import_job
         #   The job object that represents the user import job.
@@ -1294,9 +1378,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         client_id: "ClientIdType", # required
       #       }
-      class DescribeUserPoolClientRequest < Aws::Structure.new(
+      class DescribeUserPoolClientRequest < Struct.new(
         :user_pool_id,
         :client_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool you want to describe.
@@ -1310,8 +1396,10 @@ module Aws
 
       # Represents the response from the server from a request to describe the
       # user pool client.
-      class DescribeUserPoolClientResponse < Aws::Structure.new(
+      class DescribeUserPoolClientResponse < Struct.new(
         :user_pool_client)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_client
         #   The user pool client from a server response to describe the user
@@ -1327,8 +1415,10 @@ module Aws
       #       {
       #         user_pool_id: "UserPoolIdType", # required
       #       }
-      class DescribeUserPoolRequest < Aws::Structure.new(
+      class DescribeUserPoolRequest < Struct.new(
         :user_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool you want to describe.
@@ -1337,8 +1427,10 @@ module Aws
       end
 
       # Represents the response to describe the user pool.
-      class DescribeUserPoolResponse < Aws::Structure.new(
+      class DescribeUserPoolResponse < Struct.new(
         :user_pool)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool
         #   The container of metadata returned by the server to describe the
@@ -1355,9 +1447,11 @@ module Aws
       #         challenge_required_on_new_device: false,
       #         device_only_remembered_on_user_prompt: false,
       #       }
-      class DeviceConfigurationType < Aws::Structure.new(
+      class DeviceConfigurationType < Struct.new(
         :challenge_required_on_new_device,
         :device_only_remembered_on_user_prompt)
+
+        include Aws::Structure
 
         # @!attribute [rw] challenge_required_on_new_device
         #   Indicates whether a challenge is required on a new device. Only
@@ -1378,9 +1472,11 @@ module Aws
       #         password_verifier: "StringType",
       #         salt: "StringType",
       #       }
-      class DeviceSecretVerifierConfigType < Aws::Structure.new(
+      class DeviceSecretVerifierConfigType < Struct.new(
         :password_verifier,
         :salt)
+
+        include Aws::Structure
 
         # @!attribute [rw] password_verifier
         #   The password verifier.
@@ -1393,12 +1489,14 @@ module Aws
       end
 
       # The device type.
-      class DeviceType < Aws::Structure.new(
+      class DeviceType < Struct.new(
         :device_key,
         :device_attributes,
         :device_create_date,
         :device_last_modified_date,
         :device_last_authenticated_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_key
         #   The device key.
@@ -1430,9 +1528,11 @@ module Aws
       #         source_arn: "ArnType",
       #         reply_to_email_address: "EmailAddressType",
       #       }
-      class EmailConfigurationType < Aws::Structure.new(
+      class EmailConfigurationType < Struct.new(
         :source_arn,
         :reply_to_email_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_arn
         #   The Amazon Resource Name (ARN) of the email source.
@@ -1452,9 +1552,11 @@ module Aws
       #         access_token: "TokenModelType",
       #         device_key: "DeviceKeyType", # required
       #       }
-      class ForgetDeviceRequest < Aws::Structure.new(
+      class ForgetDeviceRequest < Struct.new(
         :access_token,
         :device_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token for the forgotten device request.
@@ -1475,10 +1577,12 @@ module Aws
       #         secret_hash: "SecretHashType",
       #         username: "UsernameType", # required
       #       }
-      class ForgotPasswordRequest < Aws::Structure.new(
+      class ForgotPasswordRequest < Struct.new(
         :client_id,
         :secret_hash,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The ID of the client associated with the user pool.
@@ -1499,8 +1603,10 @@ module Aws
 
       # Respresents the response from the server regarding the request to
       # reset a password.
-      class ForgotPasswordResponse < Aws::Structure.new(
+      class ForgotPasswordResponse < Struct.new(
         :code_delivery_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] code_delivery_details
         #   The type of code delivery details being returned from the server.
@@ -1516,8 +1622,10 @@ module Aws
       #       {
       #         user_pool_id: "UserPoolIdType", # required
       #       }
-      class GetCSVHeaderRequest < Aws::Structure.new(
+      class GetCSVHeaderRequest < Struct.new(
         :user_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool that the users are to be imported
@@ -1528,9 +1636,11 @@ module Aws
 
       # Represents the response from the server to the request to get the
       # header information for the .csv file for the user import job.
-      class GetCSVHeaderResponse < Aws::Structure.new(
+      class GetCSVHeaderResponse < Struct.new(
         :user_pool_id,
         :csv_header)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool that the users are to be imported
@@ -1551,9 +1661,11 @@ module Aws
       #         device_key: "DeviceKeyType", # required
       #         access_token: "TokenModelType",
       #       }
-      class GetDeviceRequest < Aws::Structure.new(
+      class GetDeviceRequest < Struct.new(
         :device_key,
         :access_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_key
         #   The device key.
@@ -1566,8 +1678,10 @@ module Aws
       end
 
       # Gets the device response.
-      class GetDeviceResponse < Aws::Structure.new(
+      class GetDeviceResponse < Struct.new(
         :device)
+
+        include Aws::Structure
 
         # @!attribute [rw] device
         #   The device.
@@ -1583,9 +1697,11 @@ module Aws
       #         access_token: "TokenModelType",
       #         attribute_name: "AttributeNameType", # required
       #       }
-      class GetUserAttributeVerificationCodeRequest < Aws::Structure.new(
+      class GetUserAttributeVerificationCodeRequest < Struct.new(
         :access_token,
         :attribute_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token returned by the server response to get the user
@@ -1601,8 +1717,10 @@ module Aws
 
       # The verification code response returned by the server response to get
       # the user attribute verification code.
-      class GetUserAttributeVerificationCodeResponse < Aws::Structure.new(
+      class GetUserAttributeVerificationCodeResponse < Struct.new(
         :code_delivery_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] code_delivery_details
         #   The code delivery details returned by the server response to get the
@@ -1618,8 +1736,10 @@ module Aws
       #       {
       #         access_token: "TokenModelType",
       #       }
-      class GetUserRequest < Aws::Structure.new(
+      class GetUserRequest < Struct.new(
         :access_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token returned by the server response to get information
@@ -1630,10 +1750,12 @@ module Aws
 
       # Represents the response from the server from the request to get
       # information about the user.
-      class GetUserResponse < Aws::Structure.new(
+      class GetUserResponse < Struct.new(
         :username,
         :user_attributes,
         :mfa_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] username
         #   The user name of the user you wish to retrieve from the get user
@@ -1657,8 +1779,10 @@ module Aws
       #       {
       #         access_token: "TokenModelType",
       #       }
-      class GlobalSignOutRequest < Aws::Structure.new(
+      class GlobalSignOutRequest < Struct.new(
         :access_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token.
@@ -1683,11 +1807,13 @@ module Aws
       #         },
       #         client_id: "ClientIdType", # required
       #       }
-      class InitiateAuthRequest < Aws::Structure.new(
+      class InitiateAuthRequest < Struct.new(
         :auth_flow,
         :auth_parameters,
         :client_metadata,
         :client_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] auth_flow
         #   The authentication flow.
@@ -1708,11 +1834,13 @@ module Aws
       end
 
       # Initiates the authentication response.
-      class InitiateAuthResponse < Aws::Structure.new(
+      class InitiateAuthResponse < Struct.new(
         :challenge_name,
         :session,
         :challenge_parameters,
         :authentication_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] challenge_name
         #   The name of the challenge.
@@ -1746,7 +1874,7 @@ module Aws
       #         create_auth_challenge: "ArnType",
       #         verify_auth_challenge_response: "ArnType",
       #       }
-      class LambdaConfigType < Aws::Structure.new(
+      class LambdaConfigType < Struct.new(
         :pre_sign_up,
         :custom_message,
         :post_confirmation,
@@ -1755,6 +1883,8 @@ module Aws
         :define_auth_challenge,
         :create_auth_challenge,
         :verify_auth_challenge_response)
+
+        include Aws::Structure
 
         # @!attribute [rw] pre_sign_up
         #   A pre-registration AWS Lambda trigger.
@@ -1799,10 +1929,12 @@ module Aws
       #         limit: 1,
       #         pagination_token: "SearchPaginationTokenType",
       #       }
-      class ListDevicesRequest < Aws::Structure.new(
+      class ListDevicesRequest < Struct.new(
         :access_token,
         :limit,
         :pagination_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access tokens for the request to list devices.
@@ -1819,9 +1951,11 @@ module Aws
       end
 
       # Represents the response to list devices.
-      class ListDevicesResponse < Aws::Structure.new(
+      class ListDevicesResponse < Struct.new(
         :devices,
         :pagination_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] devices
         #   The devices returned in the list devices response.
@@ -1842,10 +1976,12 @@ module Aws
       #         max_results: 1, # required
       #         pagination_token: "PaginationKeyType",
       #       }
-      class ListUserImportJobsRequest < Aws::Structure.new(
+      class ListUserImportJobsRequest < Struct.new(
         :user_pool_id,
         :max_results,
         :pagination_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool that the users are being imported
@@ -1866,9 +2002,11 @@ module Aws
 
       # Represents the response from the server to the request to list the
       # user import jobs.
-      class ListUserImportJobsResponse < Aws::Structure.new(
+      class ListUserImportJobsResponse < Struct.new(
         :user_import_jobs,
         :pagination_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_import_jobs
         #   The user import jobs.
@@ -1890,10 +2028,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "PaginationKey",
       #       }
-      class ListUserPoolClientsRequest < Aws::Structure.new(
+      class ListUserPoolClientsRequest < Struct.new(
         :user_pool_id,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to list user pool
@@ -1914,9 +2054,11 @@ module Aws
       end
 
       # Represents the response from the server that lists user pool clients.
-      class ListUserPoolClientsResponse < Aws::Structure.new(
+      class ListUserPoolClientsResponse < Struct.new(
         :user_pool_clients,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_clients
         #   The user pool clients in the response that lists user pool clients.
@@ -1938,9 +2080,11 @@ module Aws
       #         next_token: "PaginationKeyType",
       #         max_results: 1, # required
       #       }
-      class ListUserPoolsRequest < Aws::Structure.new(
+      class ListUserPoolsRequest < Struct.new(
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An identifier that was returned from the previous call to this
@@ -1956,9 +2100,11 @@ module Aws
       end
 
       # Represents the response to list user pools.
-      class ListUserPoolsResponse < Aws::Structure.new(
+      class ListUserPoolsResponse < Struct.new(
         :user_pools,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pools
         #   The user pools from the response to list users.
@@ -1983,12 +2129,14 @@ module Aws
       #         pagination_token: "SearchPaginationTokenType",
       #         filter: "UserFilterType",
       #       }
-      class ListUsersRequest < Aws::Structure.new(
+      class ListUsersRequest < Struct.new(
         :user_pool_id,
         :attributes_to_get,
         :limit,
         :pagination_token,
         :filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for which you want to list users.
@@ -2015,9 +2163,11 @@ module Aws
       end
 
       # The response from the request to list users.
-      class ListUsersResponse < Aws::Structure.new(
+      class ListUsersResponse < Struct.new(
         :users,
         :pagination_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] users
         #   The users returned in the request to list users.
@@ -2040,9 +2190,11 @@ module Aws
       #         delivery_medium: "SMS", # accepts SMS, EMAIL
       #         attribute_name: "AttributeNameType",
       #       }
-      class MFAOptionType < Aws::Structure.new(
+      class MFAOptionType < Struct.new(
         :delivery_medium,
         :attribute_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_medium
         #   The delivery medium (email message or SMS message) to send the MFA
@@ -2056,9 +2208,11 @@ module Aws
       end
 
       # The new device metadata type.
-      class NewDeviceMetadataType < Aws::Structure.new(
+      class NewDeviceMetadataType < Struct.new(
         :device_key,
         :device_group_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_key
         #   The device key.
@@ -2079,9 +2233,11 @@ module Aws
       #         min_value: "StringType",
       #         max_value: "StringType",
       #       }
-      class NumberAttributeConstraintsType < Aws::Structure.new(
+      class NumberAttributeConstraintsType < Struct.new(
         :min_value,
         :max_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] min_value
         #   The minimum value of an attribute that is of the number data type.
@@ -2104,12 +2260,14 @@ module Aws
       #         require_numbers: false,
       #         require_symbols: false,
       #       }
-      class PasswordPolicyType < Aws::Structure.new(
+      class PasswordPolicyType < Struct.new(
         :minimum_length,
         :require_uppercase,
         :require_lowercase,
         :require_numbers,
         :require_symbols)
+
+        include Aws::Structure
 
         # @!attribute [rw] minimum_length
         #   The minimum length of the password policy that you have set. Cannot
@@ -2149,10 +2307,12 @@ module Aws
       #         secret_hash: "SecretHashType",
       #         username: "UsernameType", # required
       #       }
-      class ResendConfirmationCodeRequest < Aws::Structure.new(
+      class ResendConfirmationCodeRequest < Struct.new(
         :client_id,
         :secret_hash,
         :username)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The ID of the client associated with the user pool.
@@ -2173,8 +2333,10 @@ module Aws
 
       # The response from the server when the Amazon Cognito service makes the
       # request to resend a confirmation code.
-      class ResendConfirmationCodeResponse < Aws::Structure.new(
+      class ResendConfirmationCodeResponse < Struct.new(
         :code_delivery_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] code_delivery_details
         #   The type of code delivery details being returned from the server.
@@ -2194,11 +2356,13 @@ module Aws
       #           "StringType" => "StringType",
       #         },
       #       }
-      class RespondToAuthChallengeRequest < Aws::Structure.new(
+      class RespondToAuthChallengeRequest < Struct.new(
         :client_id,
         :challenge_name,
         :session,
         :challenge_responses)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The client ID.
@@ -2219,11 +2383,13 @@ module Aws
       end
 
       # The response to respond to the authentication challenge.
-      class RespondToAuthChallengeResponse < Aws::Structure.new(
+      class RespondToAuthChallengeResponse < Struct.new(
         :challenge_name,
         :session,
         :challenge_parameters,
         :authentication_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] challenge_name
         #   The challenge name.
@@ -2262,7 +2428,7 @@ module Aws
       #           max_length: "StringType",
       #         },
       #       }
-      class SchemaAttributeType < Aws::Structure.new(
+      class SchemaAttributeType < Struct.new(
         :name,
         :attribute_data_type,
         :developer_only_attribute,
@@ -2270,6 +2436,8 @@ module Aws
         :required,
         :number_attribute_constraints,
         :string_attribute_constraints)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A schema attribute of the name type.
@@ -2317,9 +2485,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class SetUserSettingsRequest < Aws::Structure.new(
+      class SetUserSettingsRequest < Struct.new(
         :access_token,
         :mfa_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token for the set user settings request.
@@ -2356,13 +2526,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class SignUpRequest < Aws::Structure.new(
+      class SignUpRequest < Struct.new(
         :client_id,
         :secret_hash,
         :username,
         :password,
         :user_attributes,
         :validation_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The ID of the client associated with the user pool.
@@ -2393,9 +2565,11 @@ module Aws
       end
 
       # The response from the server for a registration request.
-      class SignUpResponse < Aws::Structure.new(
+      class SignUpResponse < Struct.new(
         :user_confirmed,
         :code_delivery_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_confirmed
         #   A response from the server indicating that a user registration has
@@ -2416,9 +2590,11 @@ module Aws
       #         sns_caller_arn: "ArnType",
       #         external_id: "StringType",
       #       }
-      class SmsConfigurationType < Aws::Structure.new(
+      class SmsConfigurationType < Struct.new(
         :sns_caller_arn,
         :external_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] sns_caller_arn
         #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
@@ -2439,9 +2615,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         job_id: "UserImportJobIdType", # required
       #       }
-      class StartUserImportJobRequest < Aws::Structure.new(
+      class StartUserImportJobRequest < Struct.new(
         :user_pool_id,
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool that the users are being imported
@@ -2456,8 +2634,10 @@ module Aws
 
       # Represents the response from the server to the request to start the
       # user import job.
-      class StartUserImportJobResponse < Aws::Structure.new(
+      class StartUserImportJobResponse < Struct.new(
         :user_import_job)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_import_job
         #   The job object that represents the user import job.
@@ -2473,9 +2653,11 @@ module Aws
       #         user_pool_id: "UserPoolIdType", # required
       #         job_id: "UserImportJobIdType", # required
       #       }
-      class StopUserImportJobRequest < Aws::Structure.new(
+      class StopUserImportJobRequest < Struct.new(
         :user_pool_id,
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool that the users are being imported
@@ -2490,8 +2672,10 @@ module Aws
 
       # Represents the response from the server to the request to stop the
       # user import job.
-      class StopUserImportJobResponse < Aws::Structure.new(
+      class StopUserImportJobResponse < Struct.new(
         :user_import_job)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_import_job
         #   The job object that represents the user import job.
@@ -2508,9 +2692,11 @@ module Aws
       #         min_length: "StringType",
       #         max_length: "StringType",
       #       }
-      class StringAttributeConstraintsType < Aws::Structure.new(
+      class StringAttributeConstraintsType < Struct.new(
         :min_length,
         :max_length)
+
+        include Aws::Structure
 
         # @!attribute [rw] min_length
         #   The minimum length of an attribute value of the string type.
@@ -2531,10 +2717,12 @@ module Aws
       #         device_key: "DeviceKeyType", # required
       #         device_remembered_status: "remembered", # accepts remembered, not_remembered
       #       }
-      class UpdateDeviceStatusRequest < Aws::Structure.new(
+      class UpdateDeviceStatusRequest < Struct.new(
         :access_token,
         :device_key,
         :device_remembered_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   The access token.
@@ -2566,9 +2754,11 @@ module Aws
       #         ],
       #         access_token: "TokenModelType",
       #       }
-      class UpdateUserAttributesRequest < Aws::Structure.new(
+      class UpdateUserAttributesRequest < Struct.new(
         :user_attributes,
         :access_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_attributes
         #   An array of name-value pairs representing user attributes.
@@ -2582,8 +2772,10 @@ module Aws
 
       # Represents the response from the server for the request to update user
       # attributes.
-      class UpdateUserAttributesResponse < Aws::Structure.new(
+      class UpdateUserAttributesResponse < Struct.new(
         :code_delivery_details_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] code_delivery_details_list
         #   The code delivery details list from the server for the request to
@@ -2605,7 +2797,7 @@ module Aws
       #         write_attributes: ["ClientPermissionType"],
       #         explicit_auth_flows: ["ADMIN_NO_SRP_AUTH"], # accepts ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY
       #       }
-      class UpdateUserPoolClientRequest < Aws::Structure.new(
+      class UpdateUserPoolClientRequest < Struct.new(
         :user_pool_id,
         :client_id,
         :client_name,
@@ -2613,6 +2805,8 @@ module Aws
         :read_attributes,
         :write_attributes,
         :explicit_auth_flows)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool where you want to update the user
@@ -2647,8 +2841,10 @@ module Aws
 
       # Represents the response from the server to the request to update the
       # user pool client.
-      class UpdateUserPoolClientResponse < Aws::Structure.new(
+      class UpdateUserPoolClientResponse < Struct.new(
         :user_pool_client)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_client
         #   The user pool client value from the response from the server when an
@@ -2701,7 +2897,7 @@ module Aws
       #           external_id: "StringType",
       #         },
       #       }
-      class UpdateUserPoolRequest < Aws::Structure.new(
+      class UpdateUserPoolRequest < Struct.new(
         :user_pool_id,
         :policies,
         :lambda_config,
@@ -2714,6 +2910,8 @@ module Aws
         :device_configuration,
         :email_configuration,
         :sms_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool you want to update.
@@ -2779,7 +2977,7 @@ module Aws
       class UpdateUserPoolResponse < Aws::EmptyStructure; end
 
       # The user import job type.
-      class UserImportJobType < Aws::Structure.new(
+      class UserImportJobType < Struct.new(
         :job_name,
         :job_id,
         :user_pool_id,
@@ -2793,6 +2991,8 @@ module Aws
         :skipped_users,
         :failed_users,
         :completion_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_name
         #   The job name for the user import job.
@@ -2866,10 +3066,12 @@ module Aws
       end
 
       # The description of the user poool client.
-      class UserPoolClientDescription < Aws::Structure.new(
+      class UserPoolClientDescription < Struct.new(
         :client_id,
         :user_pool_id,
         :client_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The ID of the client associated with the user pool.
@@ -2887,7 +3089,7 @@ module Aws
       end
 
       # A user pool of the client type.
-      class UserPoolClientType < Aws::Structure.new(
+      class UserPoolClientType < Struct.new(
         :user_pool_id,
         :client_name,
         :client_id,
@@ -2898,6 +3100,8 @@ module Aws
         :read_attributes,
         :write_attributes,
         :explicit_auth_flows)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_pool_id
         #   The user pool ID for the user pool client.
@@ -2943,13 +3147,15 @@ module Aws
       end
 
       # A user pool description.
-      class UserPoolDescriptionType < Aws::Structure.new(
+      class UserPoolDescriptionType < Struct.new(
         :id,
         :name,
         :lambda_config,
         :status,
         :last_modified_date,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID in a user pool description.
@@ -2990,8 +3196,10 @@ module Aws
       #           require_symbols: false,
       #         },
       #       }
-      class UserPoolPolicyType < Aws::Structure.new(
+      class UserPoolPolicyType < Struct.new(
         :password_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] password_policy
         #   A container with information about the user pool password policy.
@@ -3000,7 +3208,7 @@ module Aws
       end
 
       # A container with information about the user pool type.
-      class UserPoolType < Aws::Structure.new(
+      class UserPoolType < Struct.new(
         :id,
         :name,
         :policies,
@@ -3022,6 +3230,8 @@ module Aws
         :sms_configuration,
         :sms_configuration_failure,
         :email_configuration_failure)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the user pool.
@@ -3120,13 +3330,15 @@ module Aws
       end
 
       # The user type.
-      class UserType < Aws::Structure.new(
+      class UserType < Struct.new(
         :username,
         :attributes,
         :user_create_date,
         :user_last_modified_date,
         :enabled,
         :user_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] username
         #   The user name of the user you wish to describe.
@@ -3169,10 +3381,12 @@ module Aws
       #         attribute_name: "AttributeNameType", # required
       #         code: "ConfirmationCodeType", # required
       #       }
-      class VerifyUserAttributeRequest < Aws::Structure.new(
+      class VerifyUserAttributeRequest < Struct.new(
         :access_token,
         :attribute_name,
         :code)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_token
         #   Represents the access token of the request to verify user

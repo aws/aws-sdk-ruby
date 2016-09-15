@@ -19,11 +19,13 @@ module Aws
       #         emit_interval: 1,
       #         s3_bucket_prefix: "AccessLogPrefix",
       #       }
-      class AccessLog < Aws::Structure.new(
+      class AccessLog < Struct.new(
         :enabled,
         :s3_bucket_name,
         :emit_interval,
         :s3_bucket_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Specifies whether access logs are enabled for the load balancer.
@@ -56,9 +58,11 @@ module Aws
       #         load_balancer_name: "AccessPointName", # required
       #         availability_zones: ["AvailabilityZone"], # required
       #       }
-      class AddAvailabilityZonesInput < Aws::Structure.new(
+      class AddAvailabilityZonesInput < Struct.new(
         :load_balancer_name,
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -72,8 +76,10 @@ module Aws
       end
 
       # Contains the output of EnableAvailabilityZonesForLoadBalancer.
-      class AddAvailabilityZonesOutput < Aws::Structure.new(
+      class AddAvailabilityZonesOutput < Struct.new(
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   The updated list of Availability Zones for the load balancer.
@@ -94,9 +100,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsInput < Aws::Structure.new(
+      class AddTagsInput < Struct.new(
         :load_balancer_names,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_names
         #   The name of the load balancer. You can specify one load balancer
@@ -120,9 +128,11 @@ module Aws
       #         key: "AdditionalAttributeKey",
       #         value: "AdditionalAttributeValue",
       #       }
-      class AdditionalAttribute < Aws::Structure.new(
+      class AdditionalAttribute < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   This parameter is reserved.
@@ -136,9 +146,11 @@ module Aws
 
       # Information about a policy for application-controlled session
       # stickiness.
-      class AppCookieStickinessPolicy < Aws::Structure.new(
+      class AppCookieStickinessPolicy < Struct.new(
         :policy_name,
         :cookie_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The mnemonic name for the policy being created. The name must be
@@ -159,9 +171,11 @@ module Aws
       #         load_balancer_name: "AccessPointName", # required
       #         security_groups: ["SecurityGroupId"], # required
       #       }
-      class ApplySecurityGroupsToLoadBalancerInput < Aws::Structure.new(
+      class ApplySecurityGroupsToLoadBalancerInput < Struct.new(
         :load_balancer_name,
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -175,8 +189,10 @@ module Aws
       end
 
       # Contains the output of ApplySecurityGroupsToLoadBalancer.
-      class ApplySecurityGroupsToLoadBalancerOutput < Aws::Structure.new(
+      class ApplySecurityGroupsToLoadBalancerOutput < Struct.new(
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] security_groups
         #   The IDs of the security groups associated with the load balancer.
@@ -192,9 +208,11 @@ module Aws
       #         load_balancer_name: "AccessPointName", # required
       #         subnets: ["SubnetId"], # required
       #       }
-      class AttachLoadBalancerToSubnetsInput < Aws::Structure.new(
+      class AttachLoadBalancerToSubnetsInput < Struct.new(
         :load_balancer_name,
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -208,8 +226,10 @@ module Aws
       end
 
       # Contains the output of AttachLoadBalancerToSubnets.
-      class AttachLoadBalancerToSubnetsOutput < Aws::Structure.new(
+      class AttachLoadBalancerToSubnetsOutput < Struct.new(
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnets
         #   The IDs of the subnets attached to the load balancer.
@@ -218,9 +238,11 @@ module Aws
       end
 
       # Information about the configuration of an EC2 instance.
-      class BackendServerDescription < Aws::Structure.new(
+      class BackendServerDescription < Struct.new(
         :instance_port,
         :policy_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_port
         #   The port on which the EC2 instance is listening.
@@ -246,9 +268,11 @@ module Aws
       #           healthy_threshold: 1, # required
       #         },
       #       }
-      class ConfigureHealthCheckInput < Aws::Structure.new(
+      class ConfigureHealthCheckInput < Struct.new(
         :load_balancer_name,
         :health_check)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -261,8 +285,10 @@ module Aws
       end
 
       # Contains the output of ConfigureHealthCheck.
-      class ConfigureHealthCheckOutput < Aws::Structure.new(
+      class ConfigureHealthCheckOutput < Struct.new(
         :health_check)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check
         #   The updated health check.
@@ -278,9 +304,11 @@ module Aws
       #         enabled: false, # required
       #         timeout: 1,
       #       }
-      class ConnectionDraining < Aws::Structure.new(
+      class ConnectionDraining < Struct.new(
         :enabled,
         :timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Specifies whether connection draining is enabled for the load
@@ -301,8 +329,10 @@ module Aws
       #       {
       #         idle_timeout: 1, # required
       #       }
-      class ConnectionSettings < Aws::Structure.new(
+      class ConnectionSettings < Struct.new(
         :idle_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] idle_timeout
         #   The time, in seconds, that the connection is allowed to be idle (no
@@ -338,7 +368,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateAccessPointInput < Aws::Structure.new(
+      class CreateAccessPointInput < Struct.new(
         :load_balancer_name,
         :listeners,
         :availability_zones,
@@ -346,6 +376,8 @@ module Aws
         :security_groups,
         :scheme,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -418,8 +450,10 @@ module Aws
       end
 
       # Contains the output for CreateLoadBalancer.
-      class CreateAccessPointOutput < Aws::Structure.new(
+      class CreateAccessPointOutput < Struct.new(
         :dns_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] dns_name
         #   The DNS name of the load balancer.
@@ -436,10 +470,12 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         cookie_name: "CookieName", # required
       #       }
-      class CreateAppCookieStickinessPolicyInput < Aws::Structure.new(
+      class CreateAppCookieStickinessPolicyInput < Struct.new(
         :load_balancer_name,
         :policy_name,
         :cookie_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -469,10 +505,12 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         cookie_expiration_period: 1,
       #       }
-      class CreateLBCookieStickinessPolicyInput < Aws::Structure.new(
+      class CreateLBCookieStickinessPolicyInput < Struct.new(
         :load_balancer_name,
         :policy_name,
         :cookie_expiration_period)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -512,9 +550,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateLoadBalancerListenerInput < Aws::Structure.new(
+      class CreateLoadBalancerListenerInput < Struct.new(
         :load_balancer_name,
         :listeners)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -544,11 +584,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateLoadBalancerPolicyInput < Aws::Structure.new(
+      class CreateLoadBalancerPolicyInput < Struct.new(
         :load_balancer_name,
         :policy_name,
         :policy_type_name,
         :policy_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -580,8 +622,10 @@ module Aws
       #       {
       #         enabled: false, # required
       #       }
-      class CrossZoneLoadBalancing < Aws::Structure.new(
+      class CrossZoneLoadBalancing < Struct.new(
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Specifies whether cross-zone load balancing is enabled for the load
@@ -597,8 +641,10 @@ module Aws
       #       {
       #         load_balancer_name: "AccessPointName", # required
       #       }
-      class DeleteAccessPointInput < Aws::Structure.new(
+      class DeleteAccessPointInput < Struct.new(
         :load_balancer_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -617,9 +663,11 @@ module Aws
       #         load_balancer_name: "AccessPointName", # required
       #         load_balancer_ports: [1], # required
       #       }
-      class DeleteLoadBalancerListenerInput < Aws::Structure.new(
+      class DeleteLoadBalancerListenerInput < Struct.new(
         :load_balancer_name,
         :load_balancer_ports)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -642,9 +690,11 @@ module Aws
       #         load_balancer_name: "AccessPointName", # required
       #         policy_name: "PolicyName", # required
       #       }
-      class DeleteLoadBalancerPolicyInput < Aws::Structure.new(
+      class DeleteLoadBalancerPolicyInput < Struct.new(
         :load_balancer_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -671,9 +721,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DeregisterEndPointsInput < Aws::Structure.new(
+      class DeregisterEndPointsInput < Struct.new(
         :load_balancer_name,
         :instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -686,8 +738,10 @@ module Aws
       end
 
       # Contains the output of DeregisterInstancesFromLoadBalancer.
-      class DeregisterEndPointsOutput < Aws::Structure.new(
+      class DeregisterEndPointsOutput < Struct.new(
         :instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances
         #   The remaining instances registered with the load balancer.
@@ -704,10 +758,12 @@ module Aws
       #         marker: "Marker",
       #         page_size: 1,
       #       }
-      class DescribeAccessPointsInput < Aws::Structure.new(
+      class DescribeAccessPointsInput < Struct.new(
         :load_balancer_names,
         :marker,
         :page_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_names
         #   The names of the load balancers.
@@ -726,9 +782,11 @@ module Aws
       end
 
       # Contains the parameters for DescribeLoadBalancers.
-      class DescribeAccessPointsOutput < Aws::Structure.new(
+      class DescribeAccessPointsOutput < Struct.new(
         :load_balancer_descriptions,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_descriptions
         #   Information about the load balancers.
@@ -753,9 +811,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeEndPointStateInput < Aws::Structure.new(
+      class DescribeEndPointStateInput < Struct.new(
         :load_balancer_name,
         :instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -768,8 +828,10 @@ module Aws
       end
 
       # Contains the output for DescribeInstanceHealth.
-      class DescribeEndPointStateOutput < Aws::Structure.new(
+      class DescribeEndPointStateOutput < Struct.new(
         :instance_states)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_states
         #   Information about the health of the instances.
@@ -784,8 +846,10 @@ module Aws
       #       {
       #         load_balancer_name: "AccessPointName", # required
       #       }
-      class DescribeLoadBalancerAttributesInput < Aws::Structure.new(
+      class DescribeLoadBalancerAttributesInput < Struct.new(
         :load_balancer_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -794,8 +858,10 @@ module Aws
       end
 
       # Contains the output of DescribeLoadBalancerAttributes.
-      class DescribeLoadBalancerAttributesOutput < Aws::Structure.new(
+      class DescribeLoadBalancerAttributesOutput < Struct.new(
         :load_balancer_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_attributes
         #   Information about the load balancer attributes.
@@ -811,9 +877,11 @@ module Aws
       #         load_balancer_name: "AccessPointName",
       #         policy_names: ["PolicyName"],
       #       }
-      class DescribeLoadBalancerPoliciesInput < Aws::Structure.new(
+      class DescribeLoadBalancerPoliciesInput < Struct.new(
         :load_balancer_name,
         :policy_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -826,8 +894,10 @@ module Aws
       end
 
       # Contains the output of DescribeLoadBalancerPolicies.
-      class DescribeLoadBalancerPoliciesOutput < Aws::Structure.new(
+      class DescribeLoadBalancerPoliciesOutput < Struct.new(
         :policy_descriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_descriptions
         #   Information about the policies.
@@ -842,8 +912,10 @@ module Aws
       #       {
       #         policy_type_names: ["PolicyTypeName"],
       #       }
-      class DescribeLoadBalancerPolicyTypesInput < Aws::Structure.new(
+      class DescribeLoadBalancerPolicyTypesInput < Struct.new(
         :policy_type_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_type_names
         #   The names of the policy types. If no names are specified, describes
@@ -853,8 +925,10 @@ module Aws
       end
 
       # Contains the output of DescribeLoadBalancerPolicyTypes.
-      class DescribeLoadBalancerPolicyTypesOutput < Aws::Structure.new(
+      class DescribeLoadBalancerPolicyTypesOutput < Struct.new(
         :policy_type_descriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_type_descriptions
         #   Information about the policy types.
@@ -869,8 +943,10 @@ module Aws
       #       {
       #         load_balancer_names: ["AccessPointName"], # required
       #       }
-      class DescribeTagsInput < Aws::Structure.new(
+      class DescribeTagsInput < Struct.new(
         :load_balancer_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_names
         #   The names of the load balancers.
@@ -879,8 +955,10 @@ module Aws
       end
 
       # Contains the output for DescribeTags.
-      class DescribeTagsOutput < Aws::Structure.new(
+      class DescribeTagsOutput < Struct.new(
         :tag_descriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_descriptions
         #   Information about the tags.
@@ -896,9 +974,11 @@ module Aws
       #         load_balancer_name: "AccessPointName", # required
       #         subnets: ["SubnetId"], # required
       #       }
-      class DetachLoadBalancerFromSubnetsInput < Aws::Structure.new(
+      class DetachLoadBalancerFromSubnetsInput < Struct.new(
         :load_balancer_name,
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -911,8 +991,10 @@ module Aws
       end
 
       # Contains the output of DetachLoadBalancerFromSubnets.
-      class DetachLoadBalancerFromSubnetsOutput < Aws::Structure.new(
+      class DetachLoadBalancerFromSubnetsOutput < Struct.new(
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnets
         #   The IDs of the remaining subnets for the load balancer.
@@ -931,12 +1013,14 @@ module Aws
       #         unhealthy_threshold: 1, # required
       #         healthy_threshold: 1, # required
       #       }
-      class HealthCheck < Aws::Structure.new(
+      class HealthCheck < Struct.new(
         :target,
         :interval,
         :timeout,
         :unhealthy_threshold,
         :healthy_threshold)
+
+        include Aws::Structure
 
         # @!attribute [rw] target
         #   The instance being checked. The protocol is either TCP, HTTP, HTTPS,
@@ -991,8 +1075,10 @@ module Aws
       #       {
       #         instance_id: "InstanceId",
       #       }
-      class Instance < Aws::Structure.new(
+      class Instance < Struct.new(
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The instance ID.
@@ -1001,11 +1087,13 @@ module Aws
       end
 
       # Information about the state of an EC2 instance.
-      class InstanceState < Aws::Structure.new(
+      class InstanceState < Struct.new(
         :instance_id,
         :state,
         :reason_code,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -1060,9 +1148,11 @@ module Aws
       end
 
       # Information about a policy for duration-based session stickiness.
-      class LBCookieStickinessPolicy < Aws::Structure.new(
+      class LBCookieStickinessPolicy < Struct.new(
         :policy_name,
         :cookie_expiration_period)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy. This name must be unique within the set of
@@ -1096,12 +1186,14 @@ module Aws
       #         instance_port: 1, # required
       #         ssl_certificate_id: "SSLCertificateId",
       #       }
-      class Listener < Aws::Structure.new(
+      class Listener < Struct.new(
         :protocol,
         :load_balancer_port,
         :instance_protocol,
         :instance_port,
         :ssl_certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] protocol
         #   The load balancer transport protocol to use for routing: HTTP,
@@ -1142,9 +1234,11 @@ module Aws
       end
 
       # The policies enabled for a listener.
-      class ListenerDescription < Aws::Structure.new(
+      class ListenerDescription < Struct.new(
         :listener,
         :policy_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] listener
         #   Information about a listener.
@@ -1192,12 +1286,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class LoadBalancerAttributes < Aws::Structure.new(
+      class LoadBalancerAttributes < Struct.new(
         :cross_zone_load_balancing,
         :access_log,
         :connection_draining,
         :connection_settings,
         :additional_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] cross_zone_load_balancing
         #   If enabled, the load balancer routes the request traffic evenly
@@ -1258,7 +1354,7 @@ module Aws
       end
 
       # Information about a load balancer.
-      class LoadBalancerDescription < Aws::Structure.new(
+      class LoadBalancerDescription < Struct.new(
         :load_balancer_name,
         :dns_name,
         :canonical_hosted_zone_name,
@@ -1275,6 +1371,8 @@ module Aws
         :security_groups,
         :created_time,
         :scheme)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1390,9 +1488,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class ModifyLoadBalancerAttributesInput < Aws::Structure.new(
+      class ModifyLoadBalancerAttributesInput < Struct.new(
         :load_balancer_name,
         :load_balancer_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1405,9 +1505,11 @@ module Aws
       end
 
       # Contains the output of ModifyLoadBalancerAttributes.
-      class ModifyLoadBalancerAttributesOutput < Aws::Structure.new(
+      class ModifyLoadBalancerAttributesOutput < Struct.new(
         :load_balancer_name,
         :load_balancer_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1420,10 +1522,12 @@ module Aws
       end
 
       # The policies for a load balancer.
-      class Policies < Aws::Structure.new(
+      class Policies < Struct.new(
         :app_cookie_stickiness_policies,
         :lb_cookie_stickiness_policies,
         :other_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] app_cookie_stickiness_policies
         #   The stickiness policies created using
@@ -1449,9 +1553,11 @@ module Aws
       #         attribute_name: "AttributeName",
       #         attribute_value: "AttributeValue",
       #       }
-      class PolicyAttribute < Aws::Structure.new(
+      class PolicyAttribute < Struct.new(
         :attribute_name,
         :attribute_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of the attribute.
@@ -1464,9 +1570,11 @@ module Aws
       end
 
       # Information about a policy attribute.
-      class PolicyAttributeDescription < Aws::Structure.new(
+      class PolicyAttributeDescription < Struct.new(
         :attribute_name,
         :attribute_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of the attribute.
@@ -1479,12 +1587,14 @@ module Aws
       end
 
       # Information about a policy attribute type.
-      class PolicyAttributeTypeDescription < Aws::Structure.new(
+      class PolicyAttributeTypeDescription < Struct.new(
         :attribute_name,
         :attribute_type,
         :description,
         :default_value,
         :cardinality)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of the attribute.
@@ -1519,10 +1629,12 @@ module Aws
       end
 
       # Information about a policy.
-      class PolicyDescription < Aws::Structure.new(
+      class PolicyDescription < Struct.new(
         :policy_name,
         :policy_type_name,
         :policy_attribute_descriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy.
@@ -1539,10 +1651,12 @@ module Aws
       end
 
       # Information about a policy type.
-      class PolicyTypeDescription < Aws::Structure.new(
+      class PolicyTypeDescription < Struct.new(
         :policy_type_name,
         :description,
         :policy_attribute_type_descriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_type_name
         #   The name of the policy type.
@@ -1571,9 +1685,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class RegisterEndPointsInput < Aws::Structure.new(
+      class RegisterEndPointsInput < Struct.new(
         :load_balancer_name,
         :instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1586,8 +1702,10 @@ module Aws
       end
 
       # Contains the output of RegisterInstancesWithLoadBalancer.
-      class RegisterEndPointsOutput < Aws::Structure.new(
+      class RegisterEndPointsOutput < Struct.new(
         :instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances
         #   The updated list of instances for the load balancer.
@@ -1603,9 +1721,11 @@ module Aws
       #         load_balancer_name: "AccessPointName", # required
       #         availability_zones: ["AvailabilityZone"], # required
       #       }
-      class RemoveAvailabilityZonesInput < Aws::Structure.new(
+      class RemoveAvailabilityZonesInput < Struct.new(
         :load_balancer_name,
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1618,8 +1738,10 @@ module Aws
       end
 
       # Contains the output for DisableAvailabilityZonesForLoadBalancer.
-      class RemoveAvailabilityZonesOutput < Aws::Structure.new(
+      class RemoveAvailabilityZonesOutput < Struct.new(
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   The remaining Availability Zones for the load balancer.
@@ -1639,9 +1761,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class RemoveTagsInput < Aws::Structure.new(
+      class RemoveTagsInput < Struct.new(
         :load_balancer_names,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_names
         #   The name of the load balancer. You can specify a maximum of one load
@@ -1666,10 +1790,12 @@ module Aws
       #         load_balancer_port: 1, # required
       #         ssl_certificate_id: "SSLCertificateId", # required
       #       }
-      class SetLoadBalancerListenerSSLCertificateInput < Aws::Structure.new(
+      class SetLoadBalancerListenerSSLCertificateInput < Struct.new(
         :load_balancer_name,
         :load_balancer_port,
         :ssl_certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1697,10 +1823,12 @@ module Aws
       #         instance_port: 1, # required
       #         policy_names: ["PolicyName"], # required
       #       }
-      class SetLoadBalancerPoliciesForBackendServerInput < Aws::Structure.new(
+      class SetLoadBalancerPoliciesForBackendServerInput < Struct.new(
         :load_balancer_name,
         :instance_port,
         :policy_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1729,10 +1857,12 @@ module Aws
       #         load_balancer_port: 1, # required
       #         policy_names: ["PolicyName"], # required
       #       }
-      class SetLoadBalancerPoliciesOfListenerInput < Aws::Structure.new(
+      class SetLoadBalancerPoliciesOfListenerInput < Struct.new(
         :load_balancer_name,
         :load_balancer_port,
         :policy_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1754,9 +1884,11 @@ module Aws
       class SetLoadBalancerPoliciesOfListenerOutput < Aws::EmptyStructure; end
 
       # Information about a source security group.
-      class SourceSecurityGroup < Aws::Structure.new(
+      class SourceSecurityGroup < Struct.new(
         :owner_alias,
         :group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_alias
         #   The owner of the security group.
@@ -1776,9 +1908,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key of the tag.
@@ -1791,9 +1925,11 @@ module Aws
       end
 
       # The tags associated with a load balancer.
-      class TagDescription < Aws::Structure.new(
+      class TagDescription < Struct.new(
         :load_balancer_name,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -1812,8 +1948,10 @@ module Aws
       #       {
       #         key: "TagKey",
       #       }
-      class TagKeyOnly < Aws::Structure.new(
+      class TagKeyOnly < Struct.new(
         :key)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the key.

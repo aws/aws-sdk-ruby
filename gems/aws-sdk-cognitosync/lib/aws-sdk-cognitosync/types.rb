@@ -16,8 +16,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class BulkPublishRequest < Aws::Structure.new(
+      class BulkPublishRequest < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -28,8 +30,10 @@ module Aws
       end
 
       # The output for the BulkPublish operation.
-      class BulkPublishResponse < Aws::Structure.new(
+      class BulkPublishResponse < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -48,10 +52,12 @@ module Aws
       #         role_arn: "AssumeRoleArn",
       #         streaming_status: "ENABLED", # accepts ENABLED, DISABLED
       #       }
-      class CognitoStreams < Aws::Structure.new(
+      class CognitoStreams < Struct.new(
         :stream_name,
         :role_arn,
         :streaming_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the Cognito stream to receive updates. This stream must
@@ -80,7 +86,7 @@ module Aws
       # game). Datasets are automatically created if they don\'t exist. Data
       # is synced by dataset, and a dataset can hold up to 1MB of key-value
       # pairs.
-      class Dataset < Aws::Structure.new(
+      class Dataset < Struct.new(
         :identity_id,
         :dataset_name,
         :creation_date,
@@ -88,6 +94,8 @@ module Aws
         :last_modified_by,
         :data_storage,
         :num_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A name-spaced GUID (for example,
@@ -131,10 +139,12 @@ module Aws
       #         identity_id: "IdentityId", # required
       #         dataset_name: "DatasetName", # required
       #       }
-      class DeleteDatasetRequest < Aws::Structure.new(
+      class DeleteDatasetRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :dataset_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -156,8 +166,10 @@ module Aws
       end
 
       # Response to a successful DeleteDataset request.
-      class DeleteDatasetResponse < Aws::Structure.new(
+      class DeleteDatasetResponse < Struct.new(
         :dataset)
+
+        include Aws::Structure
 
         # @!attribute [rw] dataset
         #   A collection of data for an identity pool. An identity pool can have
@@ -180,10 +192,12 @@ module Aws
       #         identity_id: "IdentityId", # required
       #         dataset_name: "DatasetName", # required
       #       }
-      class DescribeDatasetRequest < Aws::Structure.new(
+      class DescribeDatasetRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :dataset_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -205,8 +219,10 @@ module Aws
       end
 
       # Response to a successful DescribeDataset request.
-      class DescribeDatasetResponse < Aws::Structure.new(
+      class DescribeDatasetResponse < Struct.new(
         :dataset)
+
+        include Aws::Structure
 
         # @!attribute [rw] dataset
         #   Meta data for a collection of data for an identity. An identity can
@@ -225,8 +241,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class DescribeIdentityPoolUsageRequest < Aws::Structure.new(
+      class DescribeIdentityPoolUsageRequest < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -237,8 +255,10 @@ module Aws
       end
 
       # Response to a successful DescribeIdentityPoolUsage request.
-      class DescribeIdentityPoolUsageResponse < Aws::Structure.new(
+      class DescribeIdentityPoolUsageResponse < Struct.new(
         :identity_pool_usage)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_usage
         #   Information about the usage of the identity pool.
@@ -254,9 +274,11 @@ module Aws
       #         identity_pool_id: "IdentityPoolId", # required
       #         identity_id: "IdentityId", # required
       #       }
-      class DescribeIdentityUsageRequest < Aws::Structure.new(
+      class DescribeIdentityUsageRequest < Struct.new(
         :identity_pool_id,
         :identity_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -273,8 +295,10 @@ module Aws
       end
 
       # The response to a successful DescribeIdentityUsage request.
-      class DescribeIdentityUsageResponse < Aws::Structure.new(
+      class DescribeIdentityUsageResponse < Struct.new(
         :identity_usage)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_usage
         #   Usage information for the identity.
@@ -289,8 +313,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class GetBulkPublishDetailsRequest < Aws::Structure.new(
+      class GetBulkPublishDetailsRequest < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -301,12 +327,14 @@ module Aws
       end
 
       # The output for the GetBulkPublishDetails operation.
-      class GetBulkPublishDetailsResponse < Aws::Structure.new(
+      class GetBulkPublishDetailsResponse < Struct.new(
         :identity_pool_id,
         :bulk_publish_start_time,
         :bulk_publish_complete_time,
         :bulk_publish_status,
         :failure_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -350,8 +378,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class GetCognitoEventsRequest < Aws::Structure.new(
+      class GetCognitoEventsRequest < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   The Cognito Identity Pool ID for the request
@@ -360,8 +390,10 @@ module Aws
       end
 
       # The response from the GetCognitoEvents request
-      class GetCognitoEventsResponse < Aws::Structure.new(
+      class GetCognitoEventsResponse < Struct.new(
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] events
         #   The Cognito Events returned from the GetCognitoEvents request
@@ -376,8 +408,10 @@ module Aws
       #       {
       #         identity_pool_id: "IdentityPoolId", # required
       #       }
-      class GetIdentityPoolConfigurationRequest < Aws::Structure.new(
+      class GetIdentityPoolConfigurationRequest < Struct.new(
         :identity_pool_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -389,10 +423,12 @@ module Aws
       end
 
       # The output for the GetIdentityPoolConfiguration operation.
-      class GetIdentityPoolConfigurationResponse < Aws::Structure.new(
+      class GetIdentityPoolConfigurationResponse < Struct.new(
         :identity_pool_id,
         :push_sync,
         :cognito_streams)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -411,11 +447,13 @@ module Aws
       end
 
       # Usage information for the identity pool.
-      class IdentityPoolUsage < Aws::Structure.new(
+      class IdentityPoolUsage < Struct.new(
         :identity_pool_id,
         :sync_sessions_count,
         :data_storage,
         :last_modified_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -438,12 +476,14 @@ module Aws
       end
 
       # Usage information for the identity.
-      class IdentityUsage < Aws::Structure.new(
+      class IdentityUsage < Struct.new(
         :identity_id,
         :identity_pool_id,
         :last_modified_date,
         :dataset_count,
         :data_storage)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_id
         #   A name-spaced GUID (for example,
@@ -481,11 +521,13 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class ListDatasetsRequest < Aws::Structure.new(
+      class ListDatasetsRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -510,10 +552,12 @@ module Aws
       end
 
       # Returned for a successful ListDatasets request.
-      class ListDatasetsResponse < Aws::Structure.new(
+      class ListDatasetsResponse < Struct.new(
         :datasets,
         :count,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] datasets
         #   A set of datasets.
@@ -537,9 +581,11 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class ListIdentityPoolUsageRequest < Aws::Structure.new(
+      class ListIdentityPoolUsageRequest < Struct.new(
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   A pagination token for obtaining the next page of results.
@@ -552,11 +598,13 @@ module Aws
       end
 
       # Returned for a successful ListIdentityPoolUsage request.
-      class ListIdentityPoolUsageResponse < Aws::Structure.new(
+      class ListIdentityPoolUsageResponse < Struct.new(
         :identity_pool_usages,
         :max_results,
         :count,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_usages
         #   Usage information for the identity pools.
@@ -589,7 +637,7 @@ module Aws
       #         max_results: 1,
       #         sync_session_token: "SyncSessionToken",
       #       }
-      class ListRecordsRequest < Aws::Structure.new(
+      class ListRecordsRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :dataset_name,
@@ -597,6 +645,8 @@ module Aws
         :next_token,
         :max_results,
         :sync_session_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -634,7 +684,7 @@ module Aws
       end
 
       # Returned for a successful ListRecordsRequest.
-      class ListRecordsResponse < Aws::Structure.new(
+      class ListRecordsResponse < Struct.new(
         :records,
         :next_token,
         :count,
@@ -644,6 +694,8 @@ module Aws
         :dataset_exists,
         :dataset_deleted_after_requested_sync_count,
         :sync_session_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] records
         #   A list of all records.
@@ -691,9 +743,11 @@ module Aws
       #         application_arns: ["ApplicationArn"],
       #         role_arn: "AssumeRoleArn",
       #       }
-      class PushSync < Aws::Structure.new(
+      class PushSync < Struct.new(
         :application_arns,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_arns
         #   List of SNS platform application ARNs that could be used by clients.
@@ -707,13 +761,15 @@ module Aws
       end
 
       # The basic data structure of a dataset.
-      class Record < Aws::Structure.new(
+      class Record < Struct.new(
         :key,
         :value,
         :sync_count,
         :last_modified_date,
         :last_modified_by,
         :device_last_modified_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key for the record.
@@ -752,12 +808,14 @@ module Aws
       #         sync_count: 1, # required
       #         device_last_modified_date: Time.now,
       #       }
-      class RecordPatch < Aws::Structure.new(
+      class RecordPatch < Struct.new(
         :op,
         :key,
         :value,
         :sync_count,
         :device_last_modified_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] op
         #   An operation, either replace or remove.
@@ -791,11 +849,13 @@ module Aws
       #         platform: "APNS", # required, accepts APNS, APNS_SANDBOX, GCM, ADM
       #         token: "PushToken", # required
       #       }
-      class RegisterDeviceRequest < Aws::Structure.new(
+      class RegisterDeviceRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :platform,
         :token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -818,8 +878,10 @@ module Aws
       end
 
       # Response to a RegisterDevice request.
-      class RegisterDeviceResponse < Aws::Structure.new(
+      class RegisterDeviceResponse < Struct.new(
         :device_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_id
         #   The unique ID generated for this device by Cognito.
@@ -839,9 +901,11 @@ module Aws
       #           "CognitoEventType" => "LambdaFunctionArn",
       #         },
       #       }
-      class SetCognitoEventsRequest < Aws::Structure.new(
+      class SetCognitoEventsRequest < Struct.new(
         :identity_pool_id,
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   The Cognito Identity Pool to use when configuring Cognito Events
@@ -869,10 +933,12 @@ module Aws
       #           streaming_status: "ENABLED", # accepts ENABLED, DISABLED
       #         },
       #       }
-      class SetIdentityPoolConfigurationRequest < Aws::Structure.new(
+      class SetIdentityPoolConfigurationRequest < Struct.new(
         :identity_pool_id,
         :push_sync,
         :cognito_streams)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -891,10 +957,12 @@ module Aws
       end
 
       # The output for the SetIdentityPoolConfiguration operation
-      class SetIdentityPoolConfigurationResponse < Aws::Structure.new(
+      class SetIdentityPoolConfigurationResponse < Struct.new(
         :identity_pool_id,
         :push_sync,
         :cognito_streams)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -922,11 +990,13 @@ module Aws
       #         dataset_name: "DatasetName", # required
       #         device_id: "DeviceId", # required
       #       }
-      class SubscribeToDatasetRequest < Aws::Structure.new(
+      class SubscribeToDatasetRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :dataset_name,
         :device_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -961,11 +1031,13 @@ module Aws
       #         dataset_name: "DatasetName", # required
       #         device_id: "DeviceId", # required
       #       }
-      class UnsubscribeFromDatasetRequest < Aws::Structure.new(
+      class UnsubscribeFromDatasetRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :dataset_name,
         :device_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -1012,7 +1084,7 @@ module Aws
       #         sync_session_token: "SyncSessionToken", # required
       #         client_context: "ClientContext",
       #       }
-      class UpdateRecordsRequest < Aws::Structure.new(
+      class UpdateRecordsRequest < Struct.new(
         :identity_pool_id,
         :identity_id,
         :dataset_name,
@@ -1020,6 +1092,8 @@ module Aws
         :record_patches,
         :sync_session_token,
         :client_context)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_pool_id
         #   A name-spaced GUID (for example,
@@ -1060,8 +1134,10 @@ module Aws
       end
 
       # Returned for a successful UpdateRecordsRequest.
-      class UpdateRecordsResponse < Aws::Structure.new(
+      class UpdateRecordsResponse < Struct.new(
         :records)
+
+        include Aws::Structure
 
         # @!attribute [rw] records
         #   A list of records that have been updated.

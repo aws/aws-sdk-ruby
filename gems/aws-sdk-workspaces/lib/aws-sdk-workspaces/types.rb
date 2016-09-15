@@ -10,8 +10,10 @@ module Aws
     module Types
 
       # Contains information about the compute type of a WorkSpace bundle.
-      class ComputeType < Aws::Structure.new(
+      class ComputeType < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the compute type for the bundle.
@@ -32,9 +34,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateTagsRequest < Aws::Structure.new(
+      class CreateTagsRequest < Struct.new(
         :resource_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The resource ID of the request.
@@ -75,8 +79,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateWorkspacesRequest < Aws::Structure.new(
+      class CreateWorkspacesRequest < Struct.new(
         :workspaces)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspaces
         #   An array of structures that specify the WorkSpaces to create.
@@ -85,9 +91,11 @@ module Aws
       end
 
       # Contains the result of the CreateWorkspaces operation.
-      class CreateWorkspacesResult < Aws::Structure.new(
+      class CreateWorkspacesResult < Struct.new(
         :failed_requests,
         :pending_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_requests
         #   An array of structures that represent the WorkSpaces that could not
@@ -107,12 +115,14 @@ module Aws
       end
 
       # Contains default WorkSpace creation information.
-      class DefaultWorkspaceCreationProperties < Aws::Structure.new(
+      class DefaultWorkspaceCreationProperties < Struct.new(
         :enable_work_docs,
         :enable_internet_access,
         :default_ou,
         :custom_security_group_id,
         :user_enabled_as_local_administrator)
+
+        include Aws::Structure
 
         # @!attribute [rw] enable_work_docs
         #   Specifies if the directory is enabled for Amazon WorkDocs.
@@ -147,9 +157,11 @@ module Aws
       #         resource_id: "NonEmptyString", # required
       #         tag_keys: ["NonEmptyString"], # required
       #       }
-      class DeleteTagsRequest < Aws::Structure.new(
+      class DeleteTagsRequest < Struct.new(
         :resource_id,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The resource ID of the request.
@@ -171,8 +183,10 @@ module Aws
       #       {
       #         resource_id: "NonEmptyString", # required
       #       }
-      class DescribeTagsRequest < Aws::Structure.new(
+      class DescribeTagsRequest < Struct.new(
         :resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The resource ID of the request.
@@ -181,8 +195,10 @@ module Aws
       end
 
       # The result of the DescribeTags operation.
-      class DescribeTagsResult < Aws::Structure.new(
+      class DescribeTagsResult < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   The list of tags.
@@ -199,10 +215,12 @@ module Aws
       #         owner: "BundleOwner",
       #         next_token: "PaginationToken",
       #       }
-      class DescribeWorkspaceBundlesRequest < Aws::Structure.new(
+      class DescribeWorkspaceBundlesRequest < Struct.new(
         :bundle_ids,
         :owner,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] bundle_ids
         #   An array of strings that contains the identifiers of the bundles to
@@ -230,9 +248,11 @@ module Aws
       end
 
       # Contains the results of the DescribeWorkspaceBundles operation.
-      class DescribeWorkspaceBundlesResult < Aws::Structure.new(
+      class DescribeWorkspaceBundlesResult < Struct.new(
         :bundles,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] bundles
         #   An array of structures that contain information about the bundles.
@@ -255,9 +275,11 @@ module Aws
       #         directory_ids: ["DirectoryId"],
       #         next_token: "PaginationToken",
       #       }
-      class DescribeWorkspaceDirectoriesRequest < Aws::Structure.new(
+      class DescribeWorkspaceDirectoriesRequest < Struct.new(
         :directory_ids,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_ids
         #   An array of strings that contains the directory identifiers to
@@ -273,9 +295,11 @@ module Aws
       end
 
       # Contains the results of the DescribeWorkspaceDirectories operation.
-      class DescribeWorkspaceDirectoriesResult < Aws::Structure.new(
+      class DescribeWorkspaceDirectoriesResult < Struct.new(
         :directories,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] directories
         #   An array of structures that contain information about the
@@ -298,9 +322,11 @@ module Aws
       #         workspace_ids: ["WorkspaceId"],
       #         next_token: "PaginationToken",
       #       }
-      class DescribeWorkspacesConnectionStatusRequest < Aws::Structure.new(
+      class DescribeWorkspacesConnectionStatusRequest < Struct.new(
         :workspace_ids,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_ids
         #   An array of strings that contain the identifiers of the WorkSpaces.
@@ -312,9 +338,11 @@ module Aws
 
       end
 
-      class DescribeWorkspacesConnectionStatusResult < Aws::Structure.new(
+      class DescribeWorkspacesConnectionStatusResult < Struct.new(
         :workspaces_connection_status,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspaces_connection_status
         #   The connection status of the WorkSpace.
@@ -338,13 +366,15 @@ module Aws
       #         limit: 1,
       #         next_token: "PaginationToken",
       #       }
-      class DescribeWorkspacesRequest < Aws::Structure.new(
+      class DescribeWorkspacesRequest < Struct.new(
         :workspace_ids,
         :directory_id,
         :user_name,
         :bundle_id,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_ids
         #   An array of strings that contain the identifiers of the WorkSpaces
@@ -387,9 +417,11 @@ module Aws
       end
 
       # Contains the results for the DescribeWorkspaces operation.
-      class DescribeWorkspacesResult < Aws::Structure.new(
+      class DescribeWorkspacesResult < Struct.new(
         :workspaces,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspaces
         #   An array of structures that contain the information about the
@@ -409,10 +441,12 @@ module Aws
       end
 
       # Contains information about a WorkSpace that could not be created.
-      class FailedCreateWorkspaceRequest < Aws::Structure.new(
+      class FailedCreateWorkspaceRequest < Struct.new(
         :workspace_request,
         :error_code,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_request
         #   A FailedCreateWorkspaceRequest$WorkspaceRequest object that contains
@@ -433,10 +467,12 @@ module Aws
       # (RebootWorkspaces), rebuilt (RebuildWorkspaces), terminated
       # (TerminateWorkspaces), started (StartWorkspaces), or stopped
       # (StopWorkspaces).
-      class FailedWorkspaceChangeRequest < Aws::Structure.new(
+      class FailedWorkspaceChangeRequest < Struct.new(
         :workspace_id,
         :error_code,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The identifier of the WorkSpace.
@@ -462,9 +498,11 @@ module Aws
       #           running_mode_auto_stop_timeout_in_minutes: 1,
       #         },
       #       }
-      class ModifyWorkspacePropertiesRequest < Aws::Structure.new(
+      class ModifyWorkspacePropertiesRequest < Struct.new(
         :workspace_id,
         :workspace_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The ID of the WorkSpace.
@@ -486,8 +524,10 @@ module Aws
       #       {
       #         workspace_id: "WorkspaceId", # required
       #       }
-      class RebootRequest < Aws::Structure.new(
+      class RebootRequest < Struct.new(
         :workspace_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The identifier of the WorkSpace to reboot.
@@ -506,8 +546,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class RebootWorkspacesRequest < Aws::Structure.new(
+      class RebootWorkspacesRequest < Struct.new(
         :reboot_workspace_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] reboot_workspace_requests
         #   An array of structures that specify the WorkSpaces to reboot.
@@ -516,8 +558,10 @@ module Aws
       end
 
       # Contains the results of the RebootWorkspaces operation.
-      class RebootWorkspacesResult < Aws::Structure.new(
+      class RebootWorkspacesResult < Struct.new(
         :failed_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_requests
         #   An array of structures representing any WorkSpaces that could not be
@@ -534,8 +578,10 @@ module Aws
       #       {
       #         workspace_id: "WorkspaceId", # required
       #       }
-      class RebuildRequest < Aws::Structure.new(
+      class RebuildRequest < Struct.new(
         :workspace_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The identifier of the WorkSpace to rebuild.
@@ -554,8 +600,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class RebuildWorkspacesRequest < Aws::Structure.new(
+      class RebuildWorkspacesRequest < Struct.new(
         :rebuild_workspace_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] rebuild_workspace_requests
         #   An array of structures that specify the WorkSpaces to rebuild.
@@ -564,8 +612,10 @@ module Aws
       end
 
       # Contains the results of the RebuildWorkspaces operation.
-      class RebuildWorkspacesResult < Aws::Structure.new(
+      class RebuildWorkspacesResult < Struct.new(
         :failed_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_requests
         #   An array of structures representing any WorkSpaces that could not be
@@ -581,8 +631,10 @@ module Aws
       #       {
       #         workspace_id: "WorkspaceId",
       #       }
-      class StartRequest < Aws::Structure.new(
+      class StartRequest < Struct.new(
         :workspace_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The ID of the WorkSpace.
@@ -600,8 +652,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class StartWorkspacesRequest < Aws::Structure.new(
+      class StartWorkspacesRequest < Struct.new(
         :start_workspace_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] start_workspace_requests
         #   The requests.
@@ -609,8 +663,10 @@ module Aws
 
       end
 
-      class StartWorkspacesResult < Aws::Structure.new(
+      class StartWorkspacesResult < Struct.new(
         :failed_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_requests
         #   The failed requests.
@@ -625,8 +681,10 @@ module Aws
       #       {
       #         workspace_id: "WorkspaceId",
       #       }
-      class StopRequest < Aws::Structure.new(
+      class StopRequest < Struct.new(
         :workspace_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The ID of the WorkSpace.
@@ -644,8 +702,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class StopWorkspacesRequest < Aws::Structure.new(
+      class StopWorkspacesRequest < Struct.new(
         :stop_workspace_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] stop_workspace_requests
         #   The requests.
@@ -653,8 +713,10 @@ module Aws
 
       end
 
-      class StopWorkspacesResult < Aws::Structure.new(
+      class StopWorkspacesResult < Struct.new(
         :failed_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_requests
         #   The failed requests.
@@ -670,9 +732,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key of the tag.
@@ -692,8 +756,10 @@ module Aws
       #       {
       #         workspace_id: "WorkspaceId", # required
       #       }
-      class TerminateRequest < Aws::Structure.new(
+      class TerminateRequest < Struct.new(
         :workspace_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The identifier of the WorkSpace to terminate.
@@ -712,8 +778,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class TerminateWorkspacesRequest < Aws::Structure.new(
+      class TerminateWorkspacesRequest < Struct.new(
         :terminate_workspace_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] terminate_workspace_requests
         #   An array of structures that specify the WorkSpaces to terminate.
@@ -722,8 +790,10 @@ module Aws
       end
 
       # Contains the results of the TerminateWorkspaces operation.
-      class TerminateWorkspacesResult < Aws::Structure.new(
+      class TerminateWorkspacesResult < Struct.new(
         :failed_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_requests
         #   An array of structures representing any WorkSpaces that could not be
@@ -733,8 +803,10 @@ module Aws
       end
 
       # Contains information about the user storage for a WorkSpace bundle.
-      class UserStorage < Aws::Structure.new(
+      class UserStorage < Struct.new(
         :capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] capacity
         #   The amount of user storage for the bundle.
@@ -743,7 +815,7 @@ module Aws
       end
 
       # Contains information about a WorkSpace.
-      class Workspace < Aws::Structure.new(
+      class Workspace < Struct.new(
         :workspace_id,
         :directory_id,
         :user_name,
@@ -758,6 +830,8 @@ module Aws
         :user_volume_encryption_enabled,
         :root_volume_encryption_enabled,
         :workspace_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The identifier of the WorkSpace.
@@ -822,13 +896,15 @@ module Aws
       end
 
       # Contains information about a WorkSpace bundle.
-      class WorkspaceBundle < Aws::Structure.new(
+      class WorkspaceBundle < Struct.new(
         :bundle_id,
         :name,
         :owner,
         :description,
         :user_storage,
         :compute_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] bundle_id
         #   The bundle identifier.
@@ -859,11 +935,13 @@ module Aws
       end
 
       # Describes the connection status of a WorkSpace.
-      class WorkspaceConnectionStatus < Aws::Structure.new(
+      class WorkspaceConnectionStatus < Struct.new(
         :workspace_id,
         :connection_state,
         :connection_state_check_timestamp,
         :last_known_user_connection_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] workspace_id
         #   The ID of the WorkSpace.
@@ -886,7 +964,7 @@ module Aws
 
       # Contains information about an AWS Directory Service directory for use
       # with Amazon WorkSpaces.
-      class WorkspaceDirectory < Aws::Structure.new(
+      class WorkspaceDirectory < Struct.new(
         :directory_id,
         :alias,
         :directory_name,
@@ -899,6 +977,8 @@ module Aws
         :workspace_security_group_id,
         :state,
         :workspace_creation_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory identifier.
@@ -966,9 +1046,11 @@ module Aws
       #         running_mode: "AUTO_STOP", # accepts AUTO_STOP, ALWAYS_ON
       #         running_mode_auto_stop_timeout_in_minutes: 1,
       #       }
-      class WorkspaceProperties < Aws::Structure.new(
+      class WorkspaceProperties < Struct.new(
         :running_mode,
         :running_mode_auto_stop_timeout_in_minutes)
+
+        include Aws::Structure
 
         # @!attribute [rw] running_mode
         #   The running mode of the WorkSpace. AlwaysOn WorkSpaces are billed
@@ -1005,7 +1087,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class WorkspaceRequest < Aws::Structure.new(
+      class WorkspaceRequest < Struct.new(
         :directory_id,
         :user_name,
         :bundle_id,
@@ -1014,6 +1096,8 @@ module Aws
         :root_volume_encryption_enabled,
         :workspace_properties,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the AWS Directory Service directory to create the

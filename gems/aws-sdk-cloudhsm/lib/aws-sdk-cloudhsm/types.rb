@@ -21,9 +21,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToResourceRequest < Aws::Structure.new(
+      class AddTagsToResourceRequest < Struct.new(
         :resource_arn,
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
@@ -35,8 +37,10 @@ module Aws
 
       end
 
-      class AddTagsToResourceResponse < Aws::Structure.new(
+      class AddTagsToResourceResponse < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the operation.
@@ -51,8 +55,10 @@ module Aws
       #       {
       #         label: "Label", # required
       #       }
-      class CreateHapgRequest < Aws::Structure.new(
+      class CreateHapgRequest < Struct.new(
         :label)
+
+        include Aws::Structure
 
         # @!attribute [rw] label
         #   The label of the new high-availability partition group.
@@ -61,8 +67,10 @@ module Aws
       end
 
       # Contains the output of the CreateHAPartitionGroup action.
-      class CreateHapgResponse < Aws::Structure.new(
+      class CreateHapgResponse < Struct.new(
         :hapg_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] hapg_arn
         #   The ARN of the high-availability partition group.
@@ -84,7 +92,7 @@ module Aws
       #         client_token: "ClientToken",
       #         syslog_ip: "IpAddress",
       #       }
-      class CreateHsmRequest < Aws::Structure.new(
+      class CreateHsmRequest < Struct.new(
         :subnet_id,
         :ssh_key,
         :eni_ip,
@@ -93,6 +101,8 @@ module Aws
         :subscription_type,
         :client_token,
         :syslog_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_id
         #   The identifier of the subnet in your VPC in which to place the HSM.
@@ -139,8 +149,10 @@ module Aws
       end
 
       # Contains the output of the CreateHsm operation.
-      class CreateHsmResponse < Aws::Structure.new(
+      class CreateHsmResponse < Struct.new(
         :hsm_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_arn
         #   The ARN of the HSM.
@@ -156,9 +168,11 @@ module Aws
       #         label: "ClientLabel",
       #         certificate: "Certificate", # required
       #       }
-      class CreateLunaClientRequest < Aws::Structure.new(
+      class CreateLunaClientRequest < Struct.new(
         :label,
         :certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] label
         #   The label for the client.
@@ -172,8 +186,10 @@ module Aws
       end
 
       # Contains the output of the CreateLunaClient action.
-      class CreateLunaClientResponse < Aws::Structure.new(
+      class CreateLunaClientResponse < Struct.new(
         :client_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_arn
         #   The ARN of the client.
@@ -188,8 +204,10 @@ module Aws
       #       {
       #         hapg_arn: "HapgArn", # required
       #       }
-      class DeleteHapgRequest < Aws::Structure.new(
+      class DeleteHapgRequest < Struct.new(
         :hapg_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] hapg_arn
         #   The ARN of the high-availability partition group to delete.
@@ -198,8 +216,10 @@ module Aws
       end
 
       # Contains the output of the DeleteHapg action.
-      class DeleteHapgResponse < Aws::Structure.new(
+      class DeleteHapgResponse < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the action.
@@ -214,8 +234,10 @@ module Aws
       #       {
       #         hsm_arn: "HsmArn", # required
       #       }
-      class DeleteHsmRequest < Aws::Structure.new(
+      class DeleteHsmRequest < Struct.new(
         :hsm_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_arn
         #   The ARN of the HSM to delete.
@@ -224,8 +246,10 @@ module Aws
       end
 
       # Contains the output of the DeleteHsm operation.
-      class DeleteHsmResponse < Aws::Structure.new(
+      class DeleteHsmResponse < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the operation.
@@ -239,8 +263,10 @@ module Aws
       #       {
       #         client_arn: "ClientArn", # required
       #       }
-      class DeleteLunaClientRequest < Aws::Structure.new(
+      class DeleteLunaClientRequest < Struct.new(
         :client_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_arn
         #   The ARN of the client to delete.
@@ -248,8 +274,10 @@ module Aws
 
       end
 
-      class DeleteLunaClientResponse < Aws::Structure.new(
+      class DeleteLunaClientResponse < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the action.
@@ -264,8 +292,10 @@ module Aws
       #       {
       #         hapg_arn: "HapgArn", # required
       #       }
-      class DescribeHapgRequest < Aws::Structure.new(
+      class DescribeHapgRequest < Struct.new(
         :hapg_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] hapg_arn
         #   The ARN of the high-availability partition group to describe.
@@ -274,7 +304,7 @@ module Aws
       end
 
       # Contains the output of the DescribeHapg action.
-      class DescribeHapgResponse < Aws::Structure.new(
+      class DescribeHapgResponse < Struct.new(
         :hapg_arn,
         :hapg_serial,
         :hsms_last_action_failed,
@@ -284,6 +314,8 @@ module Aws
         :last_modified_timestamp,
         :partition_serial_list,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] hapg_arn
         #   The ARN of the high-availability partition group.
@@ -333,9 +365,11 @@ module Aws
       #         hsm_arn: "HsmArn",
       #         hsm_serial_number: "HsmSerialNumber",
       #       }
-      class DescribeHsmRequest < Aws::Structure.new(
+      class DescribeHsmRequest < Struct.new(
         :hsm_arn,
         :hsm_serial_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_arn
         #   The ARN of the HSM. Either the *HsmArn* or the *SerialNumber*
@@ -350,7 +384,7 @@ module Aws
       end
 
       # Contains the output of the DescribeHsm operation.
-      class DescribeHsmResponse < Aws::Structure.new(
+      class DescribeHsmResponse < Struct.new(
         :hsm_arn,
         :status,
         :status_details,
@@ -372,6 +406,8 @@ module Aws
         :server_cert_uri,
         :server_cert_last_updated,
         :partitions)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_arn
         #   The ARN of the HSM.
@@ -471,9 +507,11 @@ module Aws
       #         client_arn: "ClientArn",
       #         certificate_fingerprint: "CertificateFingerprint",
       #       }
-      class DescribeLunaClientRequest < Aws::Structure.new(
+      class DescribeLunaClientRequest < Struct.new(
         :client_arn,
         :certificate_fingerprint)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_arn
         #   The ARN of the client.
@@ -485,12 +523,14 @@ module Aws
 
       end
 
-      class DescribeLunaClientResponse < Aws::Structure.new(
+      class DescribeLunaClientResponse < Struct.new(
         :client_arn,
         :certificate,
         :certificate_fingerprint,
         :last_modified_timestamp,
         :label)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_arn
         #   The ARN of the client.
@@ -522,10 +562,12 @@ module Aws
       #         client_version: "5.1", # required, accepts 5.1, 5.3
       #         hapg_list: ["HapgArn"], # required
       #       }
-      class GetConfigRequest < Aws::Structure.new(
+      class GetConfigRequest < Struct.new(
         :client_arn,
         :client_version,
         :hapg_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_arn
         #   The ARN of the client.
@@ -542,10 +584,12 @@ module Aws
 
       end
 
-      class GetConfigResponse < Aws::Structure.new(
+      class GetConfigResponse < Struct.new(
         :config_type,
         :config_file,
         :config_cred)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_type
         #   The type of credentials.
@@ -565,8 +609,10 @@ module Aws
       # @api private
       class ListAvailableZonesRequest < Aws::EmptyStructure; end
 
-      class ListAvailableZonesResponse < Aws::Structure.new(
+      class ListAvailableZonesResponse < Struct.new(
         :az_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] az_list
         #   The list of Availability Zones that have available AWS CloudHSM
@@ -581,8 +627,10 @@ module Aws
       #       {
       #         next_token: "PaginationToken",
       #       }
-      class ListHapgsRequest < Aws::Structure.new(
+      class ListHapgsRequest < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The *NextToken* value from a previous call to ListHapgs. Pass null
@@ -591,9 +639,11 @@ module Aws
 
       end
 
-      class ListHapgsResponse < Aws::Structure.new(
+      class ListHapgsResponse < Struct.new(
         :hapg_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] hapg_list
         #   The list of high-availability partition groups.
@@ -612,8 +662,10 @@ module Aws
       #       {
       #         next_token: "PaginationToken",
       #       }
-      class ListHsmsRequest < Aws::Structure.new(
+      class ListHsmsRequest < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The *NextToken* value from a previous call to ListHsms. Pass null if
@@ -623,9 +675,11 @@ module Aws
       end
 
       # Contains the output of the ListHsms operation.
-      class ListHsmsResponse < Aws::Structure.new(
+      class ListHsmsResponse < Struct.new(
         :hsm_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_list
         #   The list of ARNs that identify the HSMs.
@@ -644,8 +698,10 @@ module Aws
       #       {
       #         next_token: "PaginationToken",
       #       }
-      class ListLunaClientsRequest < Aws::Structure.new(
+      class ListLunaClientsRequest < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The *NextToken* value from a previous call to ListLunaClients. Pass
@@ -654,9 +710,11 @@ module Aws
 
       end
 
-      class ListLunaClientsResponse < Aws::Structure.new(
+      class ListLunaClientsResponse < Struct.new(
         :client_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_list
         #   The list of clients.
@@ -675,8 +733,10 @@ module Aws
       #       {
       #         resource_arn: "String", # required
       #       }
-      class ListTagsForResourceRequest < Aws::Structure.new(
+      class ListTagsForResourceRequest < Struct.new(
         :resource_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
@@ -684,8 +744,10 @@ module Aws
 
       end
 
-      class ListTagsForResourceResponse < Aws::Structure.new(
+      class ListTagsForResourceResponse < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   One or more tags.
@@ -701,10 +763,12 @@ module Aws
       #         label: "Label",
       #         partition_serial_list: ["PartitionSerial"],
       #       }
-      class ModifyHapgRequest < Aws::Structure.new(
+      class ModifyHapgRequest < Struct.new(
         :hapg_arn,
         :label,
         :partition_serial_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] hapg_arn
         #   The ARN of the high-availability partition group to modify.
@@ -721,8 +785,10 @@ module Aws
 
       end
 
-      class ModifyHapgResponse < Aws::Structure.new(
+      class ModifyHapgResponse < Struct.new(
         :hapg_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] hapg_arn
         #   The ARN of the high-availability partition group.
@@ -742,13 +808,15 @@ module Aws
       #         external_id: "ExternalId",
       #         syslog_ip: "IpAddress",
       #       }
-      class ModifyHsmRequest < Aws::Structure.new(
+      class ModifyHsmRequest < Struct.new(
         :hsm_arn,
         :subnet_id,
         :eni_ip,
         :iam_role_arn,
         :external_id,
         :syslog_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_arn
         #   The ARN of the HSM to modify.
@@ -784,8 +852,10 @@ module Aws
       end
 
       # Contains the output of the ModifyHsm operation.
-      class ModifyHsmResponse < Aws::Structure.new(
+      class ModifyHsmResponse < Struct.new(
         :hsm_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] hsm_arn
         #   The ARN of the HSM.
@@ -800,9 +870,11 @@ module Aws
       #         client_arn: "ClientArn", # required
       #         certificate: "Certificate", # required
       #       }
-      class ModifyLunaClientRequest < Aws::Structure.new(
+      class ModifyLunaClientRequest < Struct.new(
         :client_arn,
         :certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_arn
         #   The ARN of the client.
@@ -814,8 +886,10 @@ module Aws
 
       end
 
-      class ModifyLunaClientResponse < Aws::Structure.new(
+      class ModifyLunaClientResponse < Struct.new(
         :client_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_arn
         #   The ARN of the client.
@@ -830,9 +904,11 @@ module Aws
       #         resource_arn: "String", # required
       #         tag_key_list: ["TagKey"], # required
       #       }
-      class RemoveTagsFromResourceRequest < Aws::Structure.new(
+      class RemoveTagsFromResourceRequest < Struct.new(
         :resource_arn,
         :tag_key_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
@@ -847,8 +923,10 @@ module Aws
 
       end
 
-      class RemoveTagsFromResourceResponse < Aws::Structure.new(
+      class RemoveTagsFromResourceResponse < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the operation.
@@ -865,9 +943,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key of the tag.

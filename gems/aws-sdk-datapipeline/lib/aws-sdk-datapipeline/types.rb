@@ -23,10 +23,12 @@ module Aws
       #         ],
       #         start_timestamp: Time.now,
       #       }
-      class ActivatePipelineInput < Aws::Structure.new(
+      class ActivatePipelineInput < Struct.new(
         :pipeline_id,
         :parameter_values,
         :start_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -59,9 +61,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsInput < Aws::Structure.new(
+      class AddTagsInput < Struct.new(
         :pipeline_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -91,11 +95,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreatePipelineInput < Aws::Structure.new(
+      class CreatePipelineInput < Struct.new(
         :name,
         :unique_id,
         :description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name for the pipeline. You can use the same name for multiple
@@ -137,8 +143,10 @@ module Aws
       end
 
       # Contains the output of CreatePipeline.
-      class CreatePipelineOutput < Aws::Structure.new(
+      class CreatePipelineOutput < Struct.new(
         :pipeline_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID that AWS Data Pipeline assigns the newly created pipeline.
@@ -155,9 +163,11 @@ module Aws
       #         pipeline_id: "id", # required
       #         cancel_active: false,
       #       }
-      class DeactivatePipelineInput < Aws::Structure.new(
+      class DeactivatePipelineInput < Struct.new(
         :pipeline_id,
         :cancel_active)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -182,8 +192,10 @@ module Aws
       #       {
       #         pipeline_id: "id", # required
       #       }
-      class DeletePipelineInput < Aws::Structure.new(
+      class DeletePipelineInput < Struct.new(
         :pipeline_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -201,11 +213,13 @@ module Aws
       #         evaluate_expressions: false,
       #         marker: "string",
       #       }
-      class DescribeObjectsInput < Aws::Structure.new(
+      class DescribeObjectsInput < Struct.new(
         :pipeline_id,
         :object_ids,
         :evaluate_expressions,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline that contains the object definitions.
@@ -232,10 +246,12 @@ module Aws
       end
 
       # Contains the output of DescribeObjects.
-      class DescribeObjectsOutput < Aws::Structure.new(
+      class DescribeObjectsOutput < Struct.new(
         :pipeline_objects,
         :marker,
         :has_more_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_objects
         #   An array of object definitions.
@@ -260,8 +276,10 @@ module Aws
       #       {
       #         pipeline_ids: ["id"], # required
       #       }
-      class DescribePipelinesInput < Aws::Structure.new(
+      class DescribePipelinesInput < Struct.new(
         :pipeline_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_ids
         #   The IDs of the pipelines to describe. You can pass as many as 25
@@ -272,8 +290,10 @@ module Aws
       end
 
       # Contains the output of DescribePipelines.
-      class DescribePipelinesOutput < Aws::Structure.new(
+      class DescribePipelinesOutput < Struct.new(
         :pipeline_description_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_description_list
         #   An array of descriptions for the specified pipelines.
@@ -290,10 +310,12 @@ module Aws
       #         object_id: "id", # required
       #         expression: "longString", # required
       #       }
-      class EvaluateExpressionInput < Aws::Structure.new(
+      class EvaluateExpressionInput < Struct.new(
         :pipeline_id,
         :object_id,
         :expression)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -310,8 +332,10 @@ module Aws
       end
 
       # Contains the output of EvaluateExpression.
-      class EvaluateExpressionOutput < Aws::Structure.new(
+      class EvaluateExpressionOutput < Struct.new(
         :evaluated_expression)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluated_expression
         #   The evaluated expression.
@@ -330,10 +354,12 @@ module Aws
       #         string_value: "fieldStringValue",
       #         ref_value: "fieldNameString",
       #       }
-      class Field < Aws::Structure.new(
+      class Field < Struct.new(
         :key,
         :string_value,
         :ref_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The field identifier.
@@ -357,9 +383,11 @@ module Aws
       #         pipeline_id: "id", # required
       #         version: "string",
       #       }
-      class GetPipelineDefinitionInput < Aws::Structure.new(
+      class GetPipelineDefinitionInput < Struct.new(
         :pipeline_id,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -375,10 +403,12 @@ module Aws
       end
 
       # Contains the output of GetPipelineDefinition.
-      class GetPipelineDefinitionOutput < Aws::Structure.new(
+      class GetPipelineDefinitionOutput < Struct.new(
         :pipeline_objects,
         :parameter_objects,
         :parameter_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_objects
         #   The objects defined in the pipeline.
@@ -412,9 +442,11 @@ module Aws
       #         document: "string",
       #         signature: "string",
       #       }
-      class InstanceIdentity < Aws::Structure.new(
+      class InstanceIdentity < Struct.new(
         :document,
         :signature)
+
+        include Aws::Structure
 
         # @!attribute [rw] document
         #   A description of an EC2 instance that is generated when the instance
@@ -437,8 +469,10 @@ module Aws
       #       {
       #         marker: "string",
       #       }
-      class ListPipelinesInput < Aws::Structure.new(
+      class ListPipelinesInput < Struct.new(
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   The starting point for the results to be returned. For the first
@@ -450,10 +484,12 @@ module Aws
       end
 
       # Contains the output of ListPipelines.
-      class ListPipelinesOutput < Aws::Structure.new(
+      class ListPipelinesOutput < Struct.new(
         :pipeline_id_list,
         :marker,
         :has_more_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id_list
         #   The pipeline identifiers. If you require additional information
@@ -483,9 +519,11 @@ module Aws
       #         type: "EQ", # accepts EQ, REF_EQ, LE, GE, BETWEEN
       #         values: ["string"],
       #       }
-      class Operator < Aws::Structure.new(
+      class Operator < Struct.new(
         :type,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The logical operation to be performed: equal (`EQ`), equal reference
@@ -537,9 +575,11 @@ module Aws
       #         key: "attributeNameString", # required
       #         string_value: "attributeValueString", # required
       #       }
-      class ParameterAttribute < Aws::Structure.new(
+      class ParameterAttribute < Struct.new(
         :key,
         :string_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The field identifier.
@@ -564,9 +604,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ParameterObject < Aws::Structure.new(
+      class ParameterObject < Struct.new(
         :id,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the parameter object.
@@ -586,9 +628,11 @@ module Aws
       #         id: "fieldNameString", # required
       #         string_value: "fieldStringValue", # required
       #       }
-      class ParameterValue < Aws::Structure.new(
+      class ParameterValue < Struct.new(
         :id,
         :string_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the parameter value.
@@ -601,12 +645,14 @@ module Aws
       end
 
       # Contains pipeline metadata.
-      class PipelineDescription < Aws::Structure.new(
+      class PipelineDescription < Struct.new(
         :pipeline_id,
         :name,
         :fields,
         :description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The pipeline identifier that was assigned by AWS Data Pipeline. This
@@ -639,9 +685,11 @@ module Aws
       end
 
       # Contains the name and identifier of a pipeline.
-      class PipelineIdName < Aws::Structure.new(
+      class PipelineIdName < Struct.new(
         :id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the pipeline that was assigned by AWS Data Pipeline. This
@@ -671,10 +719,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class PipelineObject < Aws::Structure.new(
+      class PipelineObject < Struct.new(
         :id,
         :name,
         :fields)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the object.
@@ -702,10 +752,12 @@ module Aws
       #           signature: "string",
       #         },
       #       }
-      class PollForTaskInput < Aws::Structure.new(
+      class PollForTaskInput < Struct.new(
         :worker_group,
         :hostname,
         :instance_identity)
+
+        include Aws::Structure
 
         # @!attribute [rw] worker_group
         #   The type of task the task runner is configured to accept and
@@ -737,8 +789,10 @@ module Aws
       end
 
       # Contains the output of PollForTask.
-      class PollForTaskOutput < Aws::Structure.new(
+      class PollForTaskOutput < Struct.new(
         :task_object)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_object
         #   The information needed to complete the task that is being assigned
@@ -787,11 +841,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class PutPipelineDefinitionInput < Aws::Structure.new(
+      class PutPipelineDefinitionInput < Struct.new(
         :pipeline_id,
         :pipeline_objects,
         :parameter_objects,
         :parameter_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -813,10 +869,12 @@ module Aws
       end
 
       # Contains the output of PutPipelineDefinition.
-      class PutPipelineDefinitionOutput < Aws::Structure.new(
+      class PutPipelineDefinitionOutput < Struct.new(
         :validation_errors,
         :validation_warnings,
         :errored)
+
+        include Aws::Structure
 
         # @!attribute [rw] validation_errors
         #   The validation errors that are associated with the objects defined
@@ -852,8 +910,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class Query < Aws::Structure.new(
+      class Query < Struct.new(
         :selectors)
+
+        include Aws::Structure
 
         # @!attribute [rw] selectors
         #   List of selectors that define the query. An object must satisfy all
@@ -883,12 +943,14 @@ module Aws
       #         marker: "string",
       #         limit: 1,
       #       }
-      class QueryObjectsInput < Aws::Structure.new(
+      class QueryObjectsInput < Struct.new(
         :pipeline_id,
         :query,
         :sphere,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -921,10 +983,12 @@ module Aws
       end
 
       # Contains the output of QueryObjects.
-      class QueryObjectsOutput < Aws::Structure.new(
+      class QueryObjectsOutput < Struct.new(
         :ids,
         :marker,
         :has_more_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] ids
         #   The identifiers that match the query selectors.
@@ -951,9 +1015,11 @@ module Aws
       #         pipeline_id: "id", # required
       #         tag_keys: ["string"], # required
       #       }
-      class RemoveTagsInput < Aws::Structure.new(
+      class RemoveTagsInput < Struct.new(
         :pipeline_id,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -982,9 +1048,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ReportTaskProgressInput < Aws::Structure.new(
+      class ReportTaskProgressInput < Struct.new(
         :task_id,
         :fields)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_id
         #   The ID of the task assigned to the task runner. This value is
@@ -999,8 +1067,10 @@ module Aws
       end
 
       # Contains the output of ReportTaskProgress.
-      class ReportTaskProgressOutput < Aws::Structure.new(
+      class ReportTaskProgressOutput < Struct.new(
         :canceled)
+
+        include Aws::Structure
 
         # @!attribute [rw] canceled
         #   If true, the calling task runner should cancel processing of the
@@ -1019,10 +1089,12 @@ module Aws
       #         worker_group: "string",
       #         hostname: "id",
       #       }
-      class ReportTaskRunnerHeartbeatInput < Aws::Structure.new(
+      class ReportTaskRunnerHeartbeatInput < Struct.new(
         :taskrunner_id,
         :worker_group,
         :hostname)
+
+        include Aws::Structure
 
         # @!attribute [rw] taskrunner_id
         #   The ID of the task runner. This value should be unique across your
@@ -1048,8 +1120,10 @@ module Aws
       end
 
       # Contains the output of ReportTaskRunnerHeartbeat.
-      class ReportTaskRunnerHeartbeatOutput < Aws::Structure.new(
+      class ReportTaskRunnerHeartbeatOutput < Struct.new(
         :terminate)
+
+        include Aws::Structure
 
         # @!attribute [rw] terminate
         #   Indicates whether the calling task runner should terminate.
@@ -1069,9 +1143,11 @@ module Aws
       #           values: ["string"],
       #         },
       #       }
-      class Selector < Aws::Structure.new(
+      class Selector < Struct.new(
         :field_name,
         :operator)
+
+        include Aws::Structure
 
         # @!attribute [rw] field_name
         #   The name of the field that the operator will be applied to. The
@@ -1096,10 +1172,12 @@ module Aws
       #         object_ids: ["id"], # required
       #         status: "string", # required
       #       }
-      class SetStatusInput < Aws::Structure.new(
+      class SetStatusInput < Struct.new(
         :pipeline_id,
         :object_ids,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline that contains the objects.
@@ -1129,12 +1207,14 @@ module Aws
       #         error_message: "errorMessage",
       #         error_stack_trace: "string",
       #       }
-      class SetTaskStatusInput < Aws::Structure.new(
+      class SetTaskStatusInput < Struct.new(
         :task_id,
         :task_status,
         :error_id,
         :error_message,
         :error_stack_trace)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_id
         #   The ID of the task assigned to the task runner. This value is
@@ -1187,9 +1267,11 @@ module Aws
       #         key: "tagKey", # required
       #         value: "tagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key name of a tag defined by a user. For more information, see
@@ -1215,11 +1297,13 @@ module Aws
 
       # Contains information about a pipeline task that is assigned to a task
       # runner.
-      class TaskObject < Aws::Structure.new(
+      class TaskObject < Struct.new(
         :task_id,
         :pipeline_id,
         :attempt_id,
         :objects)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_id
         #   An internal identifier for the task. This ID is passed to the
@@ -1279,11 +1363,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class ValidatePipelineDefinitionInput < Aws::Structure.new(
+      class ValidatePipelineDefinitionInput < Struct.new(
         :pipeline_id,
         :pipeline_objects,
         :parameter_objects,
         :parameter_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline.
@@ -1305,10 +1391,12 @@ module Aws
       end
 
       # Contains the output of ValidatePipelineDefinition.
-      class ValidatePipelineDefinitionOutput < Aws::Structure.new(
+      class ValidatePipelineDefinitionOutput < Struct.new(
         :validation_errors,
         :validation_warnings,
         :errored)
+
+        include Aws::Structure
 
         # @!attribute [rw] validation_errors
         #   Any validation errors that were found.
@@ -1327,9 +1415,11 @@ module Aws
       # Defines a validation error. Validation errors prevent pipeline
       # activation. The set of validation errors that can be returned are
       # defined by AWS Data Pipeline.
-      class ValidationError < Aws::Structure.new(
+      class ValidationError < Struct.new(
         :id,
         :errors)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the object that contains the validation error.
@@ -1344,9 +1434,11 @@ module Aws
       # Defines a validation warning. Validation warnings do not prevent
       # pipeline activation. The set of validation warnings that can be
       # returned are defined by AWS Data Pipeline.
-      class ValidationWarning < Aws::Structure.new(
+      class ValidationWarning < Struct.new(
         :id,
         :warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the object that contains the validation warning.

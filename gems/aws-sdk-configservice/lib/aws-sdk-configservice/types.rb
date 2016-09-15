@@ -11,9 +11,11 @@ module Aws
 
       # Indicates whether an AWS resource or AWS Config rule is compliant and
       # provides the number of contributors that affect the compliance.
-      class Compliance < Aws::Structure.new(
+      class Compliance < Struct.new(
         :compliance_type,
         :compliance_contributor_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliance_type
         #   Indicates whether an AWS resource or AWS Config rule is compliant.
@@ -45,9 +47,11 @@ module Aws
       # Indicates whether an AWS Config rule is compliant. A rule is compliant
       # if all of the resources that the rule evaluated comply with it, and it
       # is noncompliant if any of these resources do not comply.
-      class ComplianceByConfigRule < Aws::Structure.new(
+      class ComplianceByConfigRule < Struct.new(
         :config_rule_name,
         :compliance)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_name
         #   The name of the AWS Config rule.
@@ -63,10 +67,12 @@ module Aws
       # or more AWS Config rules is compliant. A resource is compliant if it
       # complies with all of the rules that evaluate it, and it is
       # noncompliant if it does not comply with one or more of these rules.
-      class ComplianceByResource < Aws::Structure.new(
+      class ComplianceByResource < Struct.new(
         :resource_type,
         :resource_id,
         :compliance)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of the AWS resource that was evaluated.
@@ -85,9 +91,11 @@ module Aws
 
       # The number of AWS resources or AWS Config rules responsible for the
       # current compliance of the item, up to a maximum number.
-      class ComplianceContributorCount < Aws::Structure.new(
+      class ComplianceContributorCount < Struct.new(
         :capped_count,
         :cap_exceeded)
+
+        include Aws::Structure
 
         # @!attribute [rw] capped_count
         #   The number of AWS resources or AWS Config rules responsible for the
@@ -102,10 +110,12 @@ module Aws
 
       # The number of AWS Config rules or AWS resources that are compliant and
       # noncompliant, up to a maximum.
-      class ComplianceSummary < Aws::Structure.new(
+      class ComplianceSummary < Struct.new(
         :compliant_resource_count,
         :non_compliant_resource_count,
         :compliance_summary_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliant_resource_count
         #   The number of AWS Config rules or AWS resources that are compliant,
@@ -125,9 +135,11 @@ module Aws
 
       # The number of AWS resources of a specific type that are compliant or
       # noncompliant, up to a maximum of 100 for each compliance.
-      class ComplianceSummaryByResourceType < Aws::Structure.new(
+      class ComplianceSummaryByResourceType < Struct.new(
         :resource_type,
         :compliance_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of AWS resource.
@@ -142,13 +154,15 @@ module Aws
 
       # A list that contains the status of the delivery of either the snapshot
       # or the configuration history to the specified Amazon S3 bucket.
-      class ConfigExportDeliveryInfo < Aws::Structure.new(
+      class ConfigExportDeliveryInfo < Struct.new(
         :last_status,
         :last_error_code,
         :last_error_message,
         :last_attempt_time,
         :last_successful_time,
         :next_delivery_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] last_status
         #   Status of the last attempted delivery.
@@ -227,7 +241,7 @@ module Aws
       #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #       }
-      class ConfigRule < Aws::Structure.new(
+      class ConfigRule < Struct.new(
         :config_rule_name,
         :config_rule_arn,
         :config_rule_id,
@@ -237,6 +251,8 @@ module Aws
         :input_parameters,
         :maximum_execution_frequency,
         :config_rule_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_name
         #   The name that you assign to the AWS Config rule. The name is
@@ -316,7 +332,7 @@ module Aws
       #
       # This action does not return status information about custom Config
       # rules.
-      class ConfigRuleEvaluationStatus < Aws::Structure.new(
+      class ConfigRuleEvaluationStatus < Struct.new(
         :config_rule_name,
         :config_rule_arn,
         :config_rule_id,
@@ -328,6 +344,8 @@ module Aws
         :last_error_code,
         :last_error_message,
         :first_evaluation_started)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_name
         #   The name of the AWS Config rule.
@@ -437,8 +455,10 @@ module Aws
       #       {
       #         delivery_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #       }
-      class ConfigSnapshotDeliveryProperties < Aws::Structure.new(
+      class ConfigSnapshotDeliveryProperties < Struct.new(
         :delivery_frequency)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_frequency
         #   The frequency with which AWS Config delivers configuration
@@ -449,11 +469,13 @@ module Aws
 
       # A list that contains the status of the delivery of the configuration
       # stream notification to the Amazon SNS topic.
-      class ConfigStreamDeliveryInfo < Aws::Structure.new(
+      class ConfigStreamDeliveryInfo < Struct.new(
         :last_status,
         :last_error_code,
         :last_error_message,
         :last_status_change_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] last_status
         #   Status of the last attempted delivery.
@@ -487,7 +509,7 @@ module Aws
       # components (for example, applications on your Amazon EC2 instances).
       #
       #  </note>
-      class ConfigurationItem < Aws::Structure.new(
+      class ConfigurationItem < Struct.new(
         :version,
         :account_id,
         :configuration_item_capture_time,
@@ -506,6 +528,8 @@ module Aws
         :relationships,
         :configuration,
         :supplementary_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] version
         #   The version number of the resource configuration.
@@ -612,10 +636,12 @@ module Aws
       #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
       #         },
       #       }
-      class ConfigurationRecorder < Aws::Structure.new(
+      class ConfigurationRecorder < Struct.new(
         :name,
         :role_arn,
         :recording_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the recorder. By default, AWS Config automatically
@@ -636,7 +662,7 @@ module Aws
       end
 
       # The current status of the configuration recorder.
-      class ConfigurationRecorderStatus < Aws::Structure.new(
+      class ConfigurationRecorderStatus < Struct.new(
         :name,
         :last_start_time,
         :last_stop_time,
@@ -645,6 +671,8 @@ module Aws
         :last_error_code,
         :last_error_message,
         :last_status_change_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the configuration recorder.
@@ -686,8 +714,10 @@ module Aws
       #       {
       #         config_rule_name: "StringWithCharLimit64", # required
       #       }
-      class DeleteConfigRuleRequest < Aws::Structure.new(
+      class DeleteConfigRuleRequest < Struct.new(
         :config_rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_name
         #   The name of the AWS Config rule that you want to delete.
@@ -702,8 +732,10 @@ module Aws
       #       {
       #         configuration_recorder_name: "RecorderName", # required
       #       }
-      class DeleteConfigurationRecorderRequest < Aws::Structure.new(
+      class DeleteConfigurationRecorderRequest < Struct.new(
         :configuration_recorder_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorder_name
         #   The name of the configuration recorder to be deleted. You can
@@ -721,8 +753,10 @@ module Aws
       #       {
       #         delivery_channel_name: "ChannelName", # required
       #       }
-      class DeleteDeliveryChannelRequest < Aws::Structure.new(
+      class DeleteDeliveryChannelRequest < Struct.new(
         :delivery_channel_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_channel_name
         #   The name of the delivery channel to delete.
@@ -736,8 +770,10 @@ module Aws
       #       {
       #         config_rule_name: "StringWithCharLimit64", # required
       #       }
-      class DeleteEvaluationResultsRequest < Aws::Structure.new(
+      class DeleteEvaluationResultsRequest < Struct.new(
         :config_rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_name
         #   The name of the Config rule for which you want to delete the
@@ -757,8 +793,10 @@ module Aws
       #       {
       #         delivery_channel_name: "ChannelName", # required
       #       }
-      class DeliverConfigSnapshotRequest < Aws::Structure.new(
+      class DeliverConfigSnapshotRequest < Struct.new(
         :delivery_channel_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_channel_name
         #   The name of the delivery channel through which the snapshot is
@@ -768,8 +806,10 @@ module Aws
       end
 
       # The output for the DeliverConfigSnapshot action in JSON format.
-      class DeliverConfigSnapshotResponse < Aws::Structure.new(
+      class DeliverConfigSnapshotResponse < Struct.new(
         :config_snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_snapshot_id
         #   The ID of the snapshot that is being created.
@@ -791,12 +831,14 @@ module Aws
       #           delivery_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #         },
       #       }
-      class DeliveryChannel < Aws::Structure.new(
+      class DeliveryChannel < Struct.new(
         :name,
         :s3_bucket_name,
         :s3_key_prefix,
         :sns_topic_arn,
         :config_snapshot_delivery_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the delivery channel. By default, AWS Config assigns the
@@ -893,11 +935,13 @@ module Aws
       # The status of a specified delivery channel.
       #
       # Valid values: `Success` \| `Failure`
-      class DeliveryChannelStatus < Aws::Structure.new(
+      class DeliveryChannelStatus < Struct.new(
         :name,
         :config_snapshot_delivery_info,
         :config_history_delivery_info,
         :config_stream_delivery_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the delivery channel.
@@ -928,10 +972,12 @@ module Aws
       #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
       #         next_token: "String",
       #       }
-      class DescribeComplianceByConfigRuleRequest < Aws::Structure.new(
+      class DescribeComplianceByConfigRuleRequest < Struct.new(
         :config_rule_names,
         :compliance_types,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_names
         #   Specify one or more AWS Config rule names to filter the results by
@@ -952,9 +998,11 @@ module Aws
 
       end
 
-      class DescribeComplianceByConfigRuleResponse < Aws::Structure.new(
+      class DescribeComplianceByConfigRuleResponse < Struct.new(
         :compliance_by_config_rules,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliance_by_config_rules
         #   Indicates whether each of the specified AWS Config rules is
@@ -978,12 +1026,14 @@ module Aws
       #         limit: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeComplianceByResourceRequest < Aws::Structure.new(
+      class DescribeComplianceByResourceRequest < Struct.new(
         :resource_type,
         :resource_id,
         :compliance_types,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The types of AWS resources for which you want compliance
@@ -1018,9 +1068,11 @@ module Aws
 
       end
 
-      class DescribeComplianceByResourceResponse < Aws::Structure.new(
+      class DescribeComplianceByResourceResponse < Struct.new(
         :compliance_by_resources,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliance_by_resources
         #   Indicates whether the specified AWS resource complies with all of
@@ -1040,8 +1092,10 @@ module Aws
       #       {
       #         config_rule_names: ["StringWithCharLimit64"],
       #       }
-      class DescribeConfigRuleEvaluationStatusRequest < Aws::Structure.new(
+      class DescribeConfigRuleEvaluationStatusRequest < Struct.new(
         :config_rule_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_names
         #   The name of the AWS managed Config rules for which you want status
@@ -1051,8 +1105,10 @@ module Aws
 
       end
 
-      class DescribeConfigRuleEvaluationStatusResponse < Aws::Structure.new(
+      class DescribeConfigRuleEvaluationStatusResponse < Struct.new(
         :config_rules_evaluation_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rules_evaluation_status
         #   Status information about your AWS managed Config rules.
@@ -1067,9 +1123,11 @@ module Aws
       #         config_rule_names: ["StringWithCharLimit64"],
       #         next_token: "String",
       #       }
-      class DescribeConfigRulesRequest < Aws::Structure.new(
+      class DescribeConfigRulesRequest < Struct.new(
         :config_rule_names,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_names
         #   The names of the AWS Config rules for which you want details. If you
@@ -1084,9 +1142,11 @@ module Aws
 
       end
 
-      class DescribeConfigRulesResponse < Aws::Structure.new(
+      class DescribeConfigRulesResponse < Struct.new(
         :config_rules,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rules
         #   The details about your AWS Config rules.
@@ -1106,8 +1166,10 @@ module Aws
       #       {
       #         configuration_recorder_names: ["RecorderName"],
       #       }
-      class DescribeConfigurationRecorderStatusRequest < Aws::Structure.new(
+      class DescribeConfigurationRecorderStatusRequest < Struct.new(
         :configuration_recorder_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorder_names
         #   The name(s) of the configuration recorder. If the name is not
@@ -1119,8 +1181,10 @@ module Aws
 
       # The output for the DescribeConfigurationRecorderStatus action in JSON
       # format.
-      class DescribeConfigurationRecorderStatusResponse < Aws::Structure.new(
+      class DescribeConfigurationRecorderStatusResponse < Struct.new(
         :configuration_recorders_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorders_status
         #   A list that contains status of the specified recorders.
@@ -1135,8 +1199,10 @@ module Aws
       #       {
       #         configuration_recorder_names: ["RecorderName"],
       #       }
-      class DescribeConfigurationRecordersRequest < Aws::Structure.new(
+      class DescribeConfigurationRecordersRequest < Struct.new(
         :configuration_recorder_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorder_names
         #   A list of configuration recorder names.
@@ -1145,8 +1211,10 @@ module Aws
       end
 
       # The output for the DescribeConfigurationRecorders action.
-      class DescribeConfigurationRecordersResponse < Aws::Structure.new(
+      class DescribeConfigurationRecordersResponse < Struct.new(
         :configuration_recorders)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorders
         #   A list that contains the descriptions of the specified configuration
@@ -1162,8 +1230,10 @@ module Aws
       #       {
       #         delivery_channel_names: ["ChannelName"],
       #       }
-      class DescribeDeliveryChannelStatusRequest < Aws::Structure.new(
+      class DescribeDeliveryChannelStatusRequest < Struct.new(
         :delivery_channel_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_channel_names
         #   A list of delivery channel names.
@@ -1172,8 +1242,10 @@ module Aws
       end
 
       # The output for the DescribeDeliveryChannelStatus action.
-      class DescribeDeliveryChannelStatusResponse < Aws::Structure.new(
+      class DescribeDeliveryChannelStatusResponse < Struct.new(
         :delivery_channels_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_channels_status
         #   A list that contains the status of a specified delivery channel.
@@ -1188,8 +1260,10 @@ module Aws
       #       {
       #         delivery_channel_names: ["ChannelName"],
       #       }
-      class DescribeDeliveryChannelsRequest < Aws::Structure.new(
+      class DescribeDeliveryChannelsRequest < Struct.new(
         :delivery_channel_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_channel_names
         #   A list of delivery channel names.
@@ -1198,8 +1272,10 @@ module Aws
       end
 
       # The output for the DescribeDeliveryChannels action.
-      class DescribeDeliveryChannelsResponse < Aws::Structure.new(
+      class DescribeDeliveryChannelsResponse < Struct.new(
         :delivery_channels)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_channels
         #   A list that contains the descriptions of the specified delivery
@@ -1220,12 +1296,14 @@ module Aws
       #         annotation: "StringWithCharLimit256",
       #         ordering_timestamp: Time.now, # required
       #       }
-      class Evaluation < Aws::Structure.new(
+      class Evaluation < Struct.new(
         :compliance_resource_type,
         :compliance_resource_id,
         :compliance_type,
         :annotation,
         :ordering_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliance_resource_type
         #   The type of AWS resource that was evaluated.
@@ -1268,13 +1346,15 @@ module Aws
       # The details of an AWS Config evaluation. Provides the AWS resource
       # that was evaluated, the compliance of the resource, related
       # timestamps, and supplementary information.
-      class EvaluationResult < Aws::Structure.new(
+      class EvaluationResult < Struct.new(
         :evaluation_result_identifier,
         :compliance_type,
         :result_recorded_time,
         :config_rule_invoked_time,
         :annotation,
         :result_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_result_identifier
         #   Uniquely identifies the evaluation result.
@@ -1312,9 +1392,11 @@ module Aws
       end
 
       # Uniquely identifies an evaluation result.
-      class EvaluationResultIdentifier < Aws::Structure.new(
+      class EvaluationResultIdentifier < Struct.new(
         :evaluation_result_qualifier,
         :ordering_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_result_qualifier
         #   Identifies an AWS Config rule used to evaluate an AWS resource, and
@@ -1333,10 +1415,12 @@ module Aws
 
       # Identifies an AWS Config rule that evaluated an AWS resource, and
       # provides the type and ID of the resource that the rule evaluated.
-      class EvaluationResultQualifier < Aws::Structure.new(
+      class EvaluationResultQualifier < Struct.new(
         :config_rule_name,
         :resource_type,
         :resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_name
         #   The name of the AWS Config rule that was used in the evaluation.
@@ -1361,11 +1445,13 @@ module Aws
       #         limit: 1,
       #         next_token: "NextToken",
       #       }
-      class GetComplianceDetailsByConfigRuleRequest < Aws::Structure.new(
+      class GetComplianceDetailsByConfigRuleRequest < Struct.new(
         :config_rule_name,
         :compliance_types,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_name
         #   The name of the AWS Config rule for which you want compliance
@@ -1392,9 +1478,11 @@ module Aws
 
       end
 
-      class GetComplianceDetailsByConfigRuleResponse < Aws::Structure.new(
+      class GetComplianceDetailsByConfigRuleResponse < Struct.new(
         :evaluation_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_results
         #   Indicates whether the AWS resource complies with the specified AWS
@@ -1417,11 +1505,13 @@ module Aws
       #         compliance_types: ["COMPLIANT"], # accepts COMPLIANT, NON_COMPLIANT, NOT_APPLICABLE, INSUFFICIENT_DATA
       #         next_token: "String",
       #       }
-      class GetComplianceDetailsByResourceRequest < Aws::Structure.new(
+      class GetComplianceDetailsByResourceRequest < Struct.new(
         :resource_type,
         :resource_id,
         :compliance_types,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of the AWS resource for which you want compliance
@@ -1447,9 +1537,11 @@ module Aws
 
       end
 
-      class GetComplianceDetailsByResourceResponse < Aws::Structure.new(
+      class GetComplianceDetailsByResourceResponse < Struct.new(
         :evaluation_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_results
         #   Indicates whether the specified AWS resource complies each AWS
@@ -1463,8 +1555,10 @@ module Aws
 
       end
 
-      class GetComplianceSummaryByConfigRuleResponse < Aws::Structure.new(
+      class GetComplianceSummaryByConfigRuleResponse < Struct.new(
         :compliance_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliance_summary
         #   The number of AWS Config rules that are compliant and the number
@@ -1479,8 +1573,10 @@ module Aws
       #       {
       #         resource_types: ["StringWithCharLimit256"],
       #       }
-      class GetComplianceSummaryByResourceTypeRequest < Aws::Structure.new(
+      class GetComplianceSummaryByResourceTypeRequest < Struct.new(
         :resource_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_types
         #   Specify one or more resource types to get the number of resources
@@ -1494,8 +1590,10 @@ module Aws
 
       end
 
-      class GetComplianceSummaryByResourceTypeResponse < Aws::Structure.new(
+      class GetComplianceSummaryByResourceTypeResponse < Struct.new(
         :compliance_summaries_by_resource_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliance_summaries_by_resource_type
         #   The number of resources that are compliant and the number that are
@@ -1519,7 +1617,7 @@ module Aws
       #         limit: 1,
       #         next_token: "NextToken",
       #       }
-      class GetResourceConfigHistoryRequest < Aws::Structure.new(
+      class GetResourceConfigHistoryRequest < Struct.new(
         :resource_type,
         :resource_id,
         :later_time,
@@ -1527,6 +1625,8 @@ module Aws
         :chronological_order,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The resource type.
@@ -1566,9 +1666,11 @@ module Aws
       end
 
       # The output for the GetResourceConfigHistory action.
-      class GetResourceConfigHistoryResponse < Aws::Structure.new(
+      class GetResourceConfigHistoryResponse < Struct.new(
         :configuration_items,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_items
         #   A list that contains the configuration history of one or more
@@ -1593,13 +1695,15 @@ module Aws
       #         include_deleted_resources: false,
       #         next_token: "NextToken",
       #       }
-      class ListDiscoveredResourcesRequest < Aws::Structure.new(
+      class ListDiscoveredResourcesRequest < Struct.new(
         :resource_type,
         :resource_ids,
         :resource_name,
         :limit,
         :include_deleted_resources,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of resources that you want AWS Config to list in the
@@ -1637,9 +1741,11 @@ module Aws
 
       end
 
-      class ListDiscoveredResourcesResponse < Aws::Structure.new(
+      class ListDiscoveredResourcesResponse < Struct.new(
         :resource_identifiers,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_identifiers
         #   The details that identify a resource that is discovered by AWS
@@ -1685,8 +1791,10 @@ module Aws
       #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #         },
       #       }
-      class PutConfigRuleRequest < Aws::Structure.new(
+      class PutConfigRuleRequest < Struct.new(
         :config_rule)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule
         #   An AWS Config rule represents an AWS Lambda function that you create
@@ -1730,8 +1838,10 @@ module Aws
       #           },
       #         },
       #       }
-      class PutConfigurationRecorderRequest < Aws::Structure.new(
+      class PutConfigurationRecorderRequest < Struct.new(
         :configuration_recorder)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorder
         #   The configuration recorder object that records each configuration
@@ -1755,8 +1865,10 @@ module Aws
       #           },
       #         },
       #       }
-      class PutDeliveryChannelRequest < Aws::Structure.new(
+      class PutDeliveryChannelRequest < Struct.new(
         :delivery_channel)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_channel
         #   The configuration delivery channel object that delivers the
@@ -1781,9 +1893,11 @@ module Aws
       #         ],
       #         result_token: "String", # required
       #       }
-      class PutEvaluationsRequest < Aws::Structure.new(
+      class PutEvaluationsRequest < Struct.new(
         :evaluations,
         :result_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluations
         #   The assessments that the AWS Lambda function performs. Each
@@ -1800,8 +1914,10 @@ module Aws
 
       end
 
-      class PutEvaluationsResponse < Aws::Structure.new(
+      class PutEvaluationsResponse < Struct.new(
         :failed_evaluations)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_evaluations
         #   Requests that failed because of a client or server error.
@@ -1859,10 +1975,12 @@ module Aws
       #         include_global_resource_types: false,
       #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
       #       }
-      class RecordingGroup < Aws::Structure.new(
+      class RecordingGroup < Struct.new(
         :all_supported,
         :include_global_resource_types,
         :resource_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] all_supported
         #   Specifies whether AWS Config records configuration changes for every
@@ -1917,11 +2035,13 @@ module Aws
       end
 
       # The relationship of the related resource to the main resource.
-      class Relationship < Aws::Structure.new(
+      class Relationship < Struct.new(
         :resource_type,
         :resource_id,
         :resource_name,
         :relationship_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The resource type of the related resource.
@@ -1944,11 +2064,13 @@ module Aws
       # The details that identify a resource that is discovered by AWS Config,
       # including the resource type, ID, and (if available) the custom
       # resource name.
-      class ResourceIdentifier < Aws::Structure.new(
+      class ResourceIdentifier < Struct.new(
         :resource_type,
         :resource_id,
         :resource_name,
         :resource_deletion_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of resource.
@@ -1984,11 +2106,13 @@ module Aws
       #         tag_value: "StringWithCharLimit256",
       #         compliance_resource_id: "StringWithCharLimit256",
       #       }
-      class Scope < Aws::Structure.new(
+      class Scope < Struct.new(
         :compliance_resource_types,
         :tag_key,
         :tag_value,
         :compliance_resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] compliance_resource_types
         #   The resource types of only those AWS resources that you want to
@@ -2032,10 +2156,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class Source < Aws::Structure.new(
+      class Source < Struct.new(
         :owner,
         :source_identifier,
         :source_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner
         #   Indicates whether AWS or the customer owns and manages the AWS
@@ -2074,10 +2200,12 @@ module Aws
       #         message_type: "ConfigurationItemChangeNotification", # accepts ConfigurationItemChangeNotification, ConfigurationSnapshotDeliveryCompleted, ScheduledNotification
       #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #       }
-      class SourceDetail < Aws::Structure.new(
+      class SourceDetail < Struct.new(
         :event_source,
         :message_type,
         :maximum_execution_frequency)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_source
         #   The source of the event, such as an AWS service, that triggers AWS
@@ -2113,8 +2241,10 @@ module Aws
       #       {
       #         config_rule_names: ["StringWithCharLimit64"],
       #       }
-      class StartConfigRulesEvaluationRequest < Aws::Structure.new(
+      class StartConfigRulesEvaluationRequest < Struct.new(
         :config_rule_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] config_rule_names
         #   The list of names of Config rules that you want to run evaluations
@@ -2134,8 +2264,10 @@ module Aws
       #       {
       #         configuration_recorder_name: "RecorderName", # required
       #       }
-      class StartConfigurationRecorderRequest < Aws::Structure.new(
+      class StartConfigurationRecorderRequest < Struct.new(
         :configuration_recorder_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorder_name
         #   The name of the recorder object that records each configuration
@@ -2151,8 +2283,10 @@ module Aws
       #       {
       #         configuration_recorder_name: "RecorderName", # required
       #       }
-      class StopConfigurationRecorderRequest < Aws::Structure.new(
+      class StopConfigurationRecorderRequest < Struct.new(
         :configuration_recorder_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_recorder_name
         #   The name of the recorder object that records each configuration

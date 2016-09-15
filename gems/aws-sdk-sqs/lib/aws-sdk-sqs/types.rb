@@ -18,11 +18,13 @@ module Aws
       #         aws_account_ids: ["String"], # required
       #         actions: ["String"], # required
       #       }
-      class AddPermissionRequest < Aws::Structure.new(
+      class AddPermissionRequest < Struct.new(
         :queue_url,
         :label,
         :aws_account_ids,
         :actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -72,11 +74,13 @@ module Aws
 
       # This is used in the responses of batch API to give a detailed
       # description of the result of an action on each entry in the request.
-      class BatchResultErrorEntry < Aws::Structure.new(
+      class BatchResultErrorEntry < Struct.new(
         :id,
         :sender_fault,
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The id of an entry in a batch request.
@@ -109,9 +113,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ChangeMessageVisibilityBatchRequest < Aws::Structure.new(
+      class ChangeMessageVisibilityBatchRequest < Struct.new(
         :queue_url,
         :entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -149,10 +155,12 @@ module Aws
       #         receipt_handle: "String", # required
       #         visibility_timeout: 1,
       #       }
-      class ChangeMessageVisibilityBatchRequestEntry < Aws::Structure.new(
+      class ChangeMessageVisibilityBatchRequestEntry < Struct.new(
         :id,
         :receipt_handle,
         :visibility_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   An identifier for this particular receipt handle. This is used to
@@ -173,9 +181,11 @@ module Aws
       # For each message in the batch, the response contains a
       # ChangeMessageVisibilityBatchResultEntry tag if the message succeeds or
       # a BatchResultErrorEntry tag if the message fails.
-      class ChangeMessageVisibilityBatchResult < Aws::Structure.new(
+      class ChangeMessageVisibilityBatchResult < Struct.new(
         :successful,
         :failed)
+
+        include Aws::Structure
 
         # @!attribute [rw] successful
         #   A list of ChangeMessageVisibilityBatchResultEntry items.
@@ -188,8 +198,10 @@ module Aws
       end
 
       # Encloses the id of an entry in ChangeMessageVisibilityBatch.
-      class ChangeMessageVisibilityBatchResultEntry < Aws::Structure.new(
+      class ChangeMessageVisibilityBatchResultEntry < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Represents a message whose visibility timeout has been changed
@@ -206,10 +218,12 @@ module Aws
       #         receipt_handle: "String", # required
       #         visibility_timeout: 1, # required
       #       }
-      class ChangeMessageVisibilityRequest < Aws::Structure.new(
+      class ChangeMessageVisibilityRequest < Struct.new(
         :queue_url,
         :receipt_handle,
         :visibility_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -239,9 +253,11 @@ module Aws
       #           "Policy" => "String",
       #         },
       #       }
-      class CreateQueueRequest < Aws::Structure.new(
+      class CreateQueueRequest < Struct.new(
         :queue_name,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_name
         #   The name for the queue to be created.
@@ -303,8 +319,10 @@ module Aws
       end
 
       # Returns the QueueUrl element of the created queue.
-      class CreateQueueResult < Aws::Structure.new(
+      class CreateQueueResult < Struct.new(
         :queue_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL for the created Amazon SQS queue.
@@ -324,9 +342,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DeleteMessageBatchRequest < Aws::Structure.new(
+      class DeleteMessageBatchRequest < Struct.new(
         :queue_url,
         :entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -348,9 +368,11 @@ module Aws
       #         id: "String", # required
       #         receipt_handle: "String", # required
       #       }
-      class DeleteMessageBatchRequestEntry < Aws::Structure.new(
+      class DeleteMessageBatchRequestEntry < Struct.new(
         :id,
         :receipt_handle)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   An identifier for this particular receipt handle. This is used to
@@ -367,9 +389,11 @@ module Aws
       # For each message in the batch, the response contains a
       # DeleteMessageBatchResultEntry tag if the message is deleted or a
       # BatchResultErrorEntry tag if the message cannot be deleted.
-      class DeleteMessageBatchResult < Aws::Structure.new(
+      class DeleteMessageBatchResult < Struct.new(
         :successful,
         :failed)
+
+        include Aws::Structure
 
         # @!attribute [rw] successful
         #   A list of DeleteMessageBatchResultEntry items.
@@ -382,8 +406,10 @@ module Aws
       end
 
       # Encloses the id an entry in DeleteMessageBatch.
-      class DeleteMessageBatchResultEntry < Aws::Structure.new(
+      class DeleteMessageBatchResultEntry < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Represents a successfully deleted message.
@@ -398,9 +424,11 @@ module Aws
       #         queue_url: "String", # required
       #         receipt_handle: "String", # required
       #       }
-      class DeleteMessageRequest < Aws::Structure.new(
+      class DeleteMessageRequest < Struct.new(
         :queue_url,
         :receipt_handle)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -420,8 +448,10 @@ module Aws
       #       {
       #         queue_url: "String", # required
       #       }
-      class DeleteQueueRequest < Aws::Structure.new(
+      class DeleteQueueRequest < Struct.new(
         :queue_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -438,9 +468,11 @@ module Aws
       #         queue_url: "String", # required
       #         attribute_names: ["Policy"], # accepts Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy
       #       }
-      class GetQueueAttributesRequest < Aws::Structure.new(
+      class GetQueueAttributesRequest < Struct.new(
         :queue_url,
         :attribute_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -514,8 +546,10 @@ module Aws
       end
 
       # A list of returned queue attributes.
-      class GetQueueAttributesResult < Aws::Structure.new(
+      class GetQueueAttributesResult < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   A map of attributes to the respective values.
@@ -530,9 +564,11 @@ module Aws
       #         queue_name: "String", # required
       #         queue_owner_aws_account_id: "String",
       #       }
-      class GetQueueUrlRequest < Aws::Structure.new(
+      class GetQueueUrlRequest < Struct.new(
         :queue_name,
         :queue_owner_aws_account_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_name
         #   The name of the queue whose URL must be fetched. Maximum 80
@@ -554,8 +590,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/UnderstandingResponses.html
-      class GetQueueUrlResult < Aws::Structure.new(
+      class GetQueueUrlResult < Struct.new(
         :queue_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL for the queue.
@@ -569,8 +607,10 @@ module Aws
       #       {
       #         queue_url: "String", # required
       #       }
-      class ListDeadLetterSourceQueuesRequest < Aws::Structure.new(
+      class ListDeadLetterSourceQueuesRequest < Struct.new(
         :queue_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The queue URL of a dead letter queue.
@@ -581,8 +621,10 @@ module Aws
       end
 
       # A list of your dead letter source queues.
-      class ListDeadLetterSourceQueuesResult < Aws::Structure.new(
+      class ListDeadLetterSourceQueuesResult < Struct.new(
         :queue_urls)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_urls
         #   A list of source queue URLs that have the RedrivePolicy queue
@@ -597,8 +639,10 @@ module Aws
       #       {
       #         queue_name_prefix: "String",
       #       }
-      class ListQueuesRequest < Aws::Structure.new(
+      class ListQueuesRequest < Struct.new(
         :queue_name_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_name_prefix
         #   A string to use for filtering the list results. Only those queues
@@ -610,8 +654,10 @@ module Aws
       end
 
       # A list of your queues.
-      class ListQueuesResult < Aws::Structure.new(
+      class ListQueuesResult < Struct.new(
         :queue_urls)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_urls
         #   A list of queue URLs, up to 1000 entries.
@@ -620,7 +666,7 @@ module Aws
       end
 
       # An Amazon SQS message.
-      class Message < Aws::Structure.new(
+      class Message < Struct.new(
         :message_id,
         :receipt_handle,
         :md5_of_body,
@@ -628,6 +674,8 @@ module Aws
         :attributes,
         :md5_of_message_attributes,
         :message_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] message_id
         #   A unique identifier for the message. Message IDs are considered
@@ -705,12 +753,14 @@ module Aws
       #         binary_list_values: ["data"],
       #         data_type: "String", # required
       #       }
-      class MessageAttributeValue < Aws::Structure.new(
+      class MessageAttributeValue < Struct.new(
         :string_value,
         :binary_value,
         :string_list_values,
         :binary_list_values,
         :data_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] string_value
         #   Strings are Unicode with UTF8 binary encoding. For a list of code
@@ -756,8 +806,10 @@ module Aws
       #       {
       #         queue_url: "String", # required
       #       }
-      class PurgeQueueRequest < Aws::Structure.new(
+      class PurgeQueueRequest < Struct.new(
         :queue_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The queue URL of the queue to delete the messages from when using
@@ -779,13 +831,15 @@ module Aws
       #         visibility_timeout: 1,
       #         wait_time_seconds: 1,
       #       }
-      class ReceiveMessageRequest < Aws::Structure.new(
+      class ReceiveMessageRequest < Struct.new(
         :queue_url,
         :attribute_names,
         :message_attribute_names,
         :max_number_of_messages,
         :visibility_timeout,
         :wait_time_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -862,8 +916,10 @@ module Aws
       end
 
       # A list of received messages.
-      class ReceiveMessageResult < Aws::Structure.new(
+      class ReceiveMessageResult < Struct.new(
         :messages)
+
+        include Aws::Structure
 
         # @!attribute [rw] messages
         #   A list of messages.
@@ -878,9 +934,11 @@ module Aws
       #         queue_url: "String", # required
       #         label: "String", # required
       #       }
-      class RemovePermissionRequest < Aws::Structure.new(
+      class RemovePermissionRequest < Struct.new(
         :queue_url,
         :label)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -917,9 +975,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class SendMessageBatchRequest < Aws::Structure.new(
+      class SendMessageBatchRequest < Struct.new(
         :queue_url,
         :entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -951,11 +1011,13 @@ module Aws
       #           },
       #         },
       #       }
-      class SendMessageBatchRequestEntry < Aws::Structure.new(
+      class SendMessageBatchRequestEntry < Struct.new(
         :id,
         :message_body,
         :delay_seconds,
         :message_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   An identifier for the message in this batch. This is used to
@@ -985,9 +1047,11 @@ module Aws
       # For each message in the batch, the response contains a
       # SendMessageBatchResultEntry tag if the message succeeds or a
       # BatchResultErrorEntry tag if the message fails.
-      class SendMessageBatchResult < Aws::Structure.new(
+      class SendMessageBatchResult < Struct.new(
         :successful,
         :failed)
+
+        include Aws::Structure
 
         # @!attribute [rw] successful
         #   A list of SendMessageBatchResultEntry items.
@@ -1002,11 +1066,13 @@ module Aws
 
       # Encloses a message ID for successfully enqueued message of a
       # SendMessageBatch.
-      class SendMessageBatchResultEntry < Aws::Structure.new(
+      class SendMessageBatchResultEntry < Struct.new(
         :id,
         :message_id,
         :md5_of_message_body,
         :md5_of_message_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   An identifier for the message in this batch.
@@ -1059,11 +1125,13 @@ module Aws
       #           },
       #         },
       #       }
-      class SendMessageRequest < Aws::Structure.new(
+      class SendMessageRequest < Struct.new(
         :queue_url,
         :message_body,
         :delay_seconds,
         :message_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.
@@ -1095,10 +1163,12 @@ module Aws
       end
 
       # The MD5OfMessageBody and MessageId elements.
-      class SendMessageResult < Aws::Structure.new(
+      class SendMessageResult < Struct.new(
         :md5_of_message_body,
         :md5_of_message_attributes,
         :message_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] md5_of_message_body
         #   An MD5 digest of the non-URL-encoded message body string. This can
@@ -1145,9 +1215,11 @@ module Aws
       #           "Policy" => "String",
       #         },
       #       }
-      class SetQueueAttributesRequest < Aws::Structure.new(
+      class SetQueueAttributesRequest < Struct.new(
         :queue_url,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] queue_url
         #   The URL of the Amazon SQS queue to take action on.

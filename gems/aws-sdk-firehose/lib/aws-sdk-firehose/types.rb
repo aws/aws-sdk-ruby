@@ -20,9 +20,11 @@ module Aws
       #         size_in_m_bs: 1,
       #         interval_in_seconds: 1,
       #       }
-      class BufferingHints < Aws::Structure.new(
+      class BufferingHints < Struct.new(
         :size_in_m_bs,
         :interval_in_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_in_m_bs
         #   Buffer incoming data to the specified size, in MBs, before
@@ -50,10 +52,12 @@ module Aws
       #         log_group_name: "LogGroupName",
       #         log_stream_name: "LogStreamName",
       #       }
-      class CloudWatchLoggingOptions < Aws::Structure.new(
+      class CloudWatchLoggingOptions < Struct.new(
         :enabled,
         :log_group_name,
         :log_stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Enables or disables CloudWatch logging.
@@ -80,10 +84,12 @@ module Aws
       #         data_table_columns: "DataTableColumns",
       #         copy_options: "CopyOptions",
       #       }
-      class CopyCommand < Aws::Structure.new(
+      class CopyCommand < Struct.new(
         :data_table_name,
         :data_table_columns,
         :copy_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_table_name
         #   The name of the target table. The table must already exist in the
@@ -235,11 +241,13 @@ module Aws
       #           },
       #         },
       #       }
-      class CreateDeliveryStreamInput < Aws::Structure.new(
+      class CreateDeliveryStreamInput < Struct.new(
         :delivery_stream_name,
         :s3_destination_configuration,
         :redshift_destination_configuration,
         :elasticsearch_destination_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_name
         #   The name of the delivery stream.
@@ -267,8 +275,10 @@ module Aws
       end
 
       # Contains the output of CreateDeliveryStream.
-      class CreateDeliveryStreamOutput < Aws::Structure.new(
+      class CreateDeliveryStreamOutput < Struct.new(
         :delivery_stream_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_arn
         #   The ARN of the delivery stream.
@@ -283,8 +293,10 @@ module Aws
       #       {
       #         delivery_stream_name: "DeliveryStreamName", # required
       #       }
-      class DeleteDeliveryStreamInput < Aws::Structure.new(
+      class DeleteDeliveryStreamInput < Struct.new(
         :delivery_stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_name
         #   The name of the delivery stream.
@@ -296,7 +308,7 @@ module Aws
       class DeleteDeliveryStreamOutput < Aws::EmptyStructure; end
 
       # Contains information about a delivery stream.
-      class DeliveryStreamDescription < Aws::Structure.new(
+      class DeliveryStreamDescription < Struct.new(
         :delivery_stream_name,
         :delivery_stream_arn,
         :delivery_stream_status,
@@ -305,6 +317,8 @@ module Aws
         :last_update_timestamp,
         :destinations,
         :has_more_destinations)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_name
         #   The name of the delivery stream.
@@ -353,10 +367,12 @@ module Aws
       #         limit: 1,
       #         exclusive_start_destination_id: "DestinationId",
       #       }
-      class DescribeDeliveryStreamInput < Aws::Structure.new(
+      class DescribeDeliveryStreamInput < Struct.new(
         :delivery_stream_name,
         :limit,
         :exclusive_start_destination_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_name
         #   The name of the delivery stream.
@@ -376,8 +392,10 @@ module Aws
       end
 
       # Contains the output of DescribeDeliveryStream.
-      class DescribeDeliveryStreamOutput < Aws::Structure.new(
+      class DescribeDeliveryStreamOutput < Struct.new(
         :delivery_stream_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_description
         #   Information about the delivery stream.
@@ -386,11 +404,13 @@ module Aws
       end
 
       # Describes the destination for a delivery stream.
-      class DestinationDescription < Aws::Structure.new(
+      class DestinationDescription < Struct.new(
         :destination_id,
         :s3_destination_description,
         :redshift_destination_description,
         :elasticsearch_destination_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_id
         #   The ID of the destination.
@@ -419,9 +439,11 @@ module Aws
       #         interval_in_seconds: 1,
       #         size_in_m_bs: 1,
       #       }
-      class ElasticsearchBufferingHints < Aws::Structure.new(
+      class ElasticsearchBufferingHints < Struct.new(
         :interval_in_seconds,
         :size_in_m_bs)
+
+        include Aws::Structure
 
         # @!attribute [rw] interval_in_seconds
         #   Buffer incoming data for the specified period of time, in seconds,
@@ -486,7 +508,7 @@ module Aws
       #           log_stream_name: "LogStreamName",
       #         },
       #       }
-      class ElasticsearchDestinationConfiguration < Aws::Structure.new(
+      class ElasticsearchDestinationConfiguration < Struct.new(
         :role_arn,
         :domain_arn,
         :index_name,
@@ -497,6 +519,8 @@ module Aws
         :s3_backup_mode,
         :s3_configuration,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role to be assumed by Firehose for calling the
@@ -570,7 +594,7 @@ module Aws
       end
 
       # The destination description in Amazon ES.
-      class ElasticsearchDestinationDescription < Aws::Structure.new(
+      class ElasticsearchDestinationDescription < Struct.new(
         :role_arn,
         :domain_arn,
         :index_name,
@@ -581,6 +605,8 @@ module Aws
         :s3_backup_mode,
         :s3_destination_description,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the AWS credentials.
@@ -668,7 +694,7 @@ module Aws
       #           log_stream_name: "LogStreamName",
       #         },
       #       }
-      class ElasticsearchDestinationUpdate < Aws::Structure.new(
+      class ElasticsearchDestinationUpdate < Struct.new(
         :role_arn,
         :domain_arn,
         :index_name,
@@ -678,6 +704,8 @@ module Aws
         :retry_options,
         :s3_update,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role to be assumed by Firehose for calling the
@@ -742,8 +770,10 @@ module Aws
       #       {
       #         duration_in_seconds: 1,
       #       }
-      class ElasticsearchRetryOptions < Aws::Structure.new(
+      class ElasticsearchRetryOptions < Struct.new(
         :duration_in_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] duration_in_seconds
         #   After an initial failure to deliver to Amazon ES, the total amount
@@ -765,9 +795,11 @@ module Aws
       #           awskms_key_arn: "AWSKMSKeyARN", # required
       #         },
       #       }
-      class EncryptionConfiguration < Aws::Structure.new(
+      class EncryptionConfiguration < Struct.new(
         :no_encryption_config,
         :kms_encryption_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] no_encryption_config
         #   Specifically override existing encryption information to ensure no
@@ -787,8 +819,10 @@ module Aws
       #       {
       #         awskms_key_arn: "AWSKMSKeyARN", # required
       #       }
-      class KMSEncryptionConfig < Aws::Structure.new(
+      class KMSEncryptionConfig < Struct.new(
         :awskms_key_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] awskms_key_arn
         #   The ARN of the encryption key. Must belong to the same region as the
@@ -805,9 +839,11 @@ module Aws
       #         limit: 1,
       #         exclusive_start_delivery_stream_name: "DeliveryStreamName",
       #       }
-      class ListDeliveryStreamsInput < Aws::Structure.new(
+      class ListDeliveryStreamsInput < Struct.new(
         :limit,
         :exclusive_start_delivery_stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   The maximum number of delivery streams to list.
@@ -820,9 +856,11 @@ module Aws
       end
 
       # Contains the output of ListDeliveryStreams.
-      class ListDeliveryStreamsOutput < Aws::Structure.new(
+      class ListDeliveryStreamsOutput < Struct.new(
         :delivery_stream_names,
         :has_more_delivery_streams)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_names
         #   The names of the delivery streams.
@@ -846,9 +884,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class PutRecordBatchInput < Aws::Structure.new(
+      class PutRecordBatchInput < Struct.new(
         :delivery_stream_name,
         :records)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_name
         #   The name of the delivery stream.
@@ -861,9 +901,11 @@ module Aws
       end
 
       # Contains the output of PutRecordBatch.
-      class PutRecordBatchOutput < Aws::Structure.new(
+      class PutRecordBatchOutput < Struct.new(
         :failed_put_count,
         :request_responses)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_put_count
         #   The number of unsuccessfully written records.
@@ -881,10 +923,12 @@ module Aws
       # it receives a record ID. If the record fails to be added to your
       # delivery stream, the result includes an error code and an error
       # message.
-      class PutRecordBatchResponseEntry < Aws::Structure.new(
+      class PutRecordBatchResponseEntry < Struct.new(
         :record_id,
         :error_code,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_id
         #   The ID of the record.
@@ -910,9 +954,11 @@ module Aws
       #           data: "data", # required
       #         },
       #       }
-      class PutRecordInput < Aws::Structure.new(
+      class PutRecordInput < Struct.new(
         :delivery_stream_name,
         :record)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_name
         #   The name of the delivery stream.
@@ -925,8 +971,10 @@ module Aws
       end
 
       # Contains the output of PutRecord.
-      class PutRecordOutput < Aws::Structure.new(
+      class PutRecordOutput < Struct.new(
         :record_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_id
         #   The ID of the record.
@@ -941,8 +989,10 @@ module Aws
       #       {
       #         data: "data", # required
       #       }
-      class Record < Aws::Structure.new(
+      class Record < Struct.new(
         :data)
+
+        include Aws::Structure
 
         # @!attribute [rw] data
         #   The data blob, which is base64-encoded when the blob is serialized.
@@ -996,7 +1046,7 @@ module Aws
       #           log_stream_name: "LogStreamName",
       #         },
       #       }
-      class RedshiftDestinationConfiguration < Aws::Structure.new(
+      class RedshiftDestinationConfiguration < Struct.new(
         :role_arn,
         :cluster_jdbcurl,
         :copy_command,
@@ -1005,6 +1055,8 @@ module Aws
         :retry_options,
         :s3_configuration,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the AWS credentials.
@@ -1050,7 +1102,7 @@ module Aws
       end
 
       # Describes a destination in Amazon Redshift.
-      class RedshiftDestinationDescription < Aws::Structure.new(
+      class RedshiftDestinationDescription < Struct.new(
         :role_arn,
         :cluster_jdbcurl,
         :copy_command,
@@ -1058,6 +1110,8 @@ module Aws
         :retry_options,
         :s3_destination_description,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the AWS credentials.
@@ -1135,7 +1189,7 @@ module Aws
       #           log_stream_name: "LogStreamName",
       #         },
       #       }
-      class RedshiftDestinationUpdate < Aws::Structure.new(
+      class RedshiftDestinationUpdate < Struct.new(
         :role_arn,
         :cluster_jdbcurl,
         :copy_command,
@@ -1144,6 +1198,8 @@ module Aws
         :retry_options,
         :s3_update,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the AWS credentials.
@@ -1194,8 +1250,10 @@ module Aws
       #       {
       #         duration_in_seconds: 1,
       #       }
-      class RedshiftRetryOptions < Aws::Structure.new(
+      class RedshiftRetryOptions < Struct.new(
         :duration_in_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] duration_in_seconds
         #   The length of time during which Firehose retries delivery after a
@@ -1232,7 +1290,7 @@ module Aws
       #           log_stream_name: "LogStreamName",
       #         },
       #       }
-      class S3DestinationConfiguration < Aws::Structure.new(
+      class S3DestinationConfiguration < Struct.new(
         :role_arn,
         :bucket_arn,
         :prefix,
@@ -1240,6 +1298,8 @@ module Aws
         :compression_format,
         :encryption_configuration,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the AWS credentials.
@@ -1289,7 +1349,7 @@ module Aws
       end
 
       # Describes a destination in Amazon S3.
-      class S3DestinationDescription < Aws::Structure.new(
+      class S3DestinationDescription < Struct.new(
         :role_arn,
         :bucket_arn,
         :prefix,
@@ -1297,6 +1357,8 @@ module Aws
         :compression_format,
         :encryption_configuration,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the AWS credentials.
@@ -1366,7 +1428,7 @@ module Aws
       #           log_stream_name: "LogStreamName",
       #         },
       #       }
-      class S3DestinationUpdate < Aws::Structure.new(
+      class S3DestinationUpdate < Struct.new(
         :role_arn,
         :bucket_arn,
         :prefix,
@@ -1374,6 +1436,8 @@ module Aws
         :compression_format,
         :encryption_configuration,
         :cloud_watch_logging_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the AWS credentials.
@@ -1532,13 +1596,15 @@ module Aws
       #           },
       #         },
       #       }
-      class UpdateDestinationInput < Aws::Structure.new(
+      class UpdateDestinationInput < Struct.new(
         :delivery_stream_name,
         :current_delivery_stream_version_id,
         :destination_id,
         :s3_destination_update,
         :redshift_destination_update,
         :elasticsearch_destination_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] delivery_stream_name
         #   The name of the delivery stream.

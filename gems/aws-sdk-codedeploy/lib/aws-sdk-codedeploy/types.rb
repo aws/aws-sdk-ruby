@@ -23,9 +23,11 @@ module Aws
       #         ],
       #         instance_names: ["InstanceName"], # required
       #       }
-      class AddTagsToOnPremisesInstancesInput < Aws::Structure.new(
+      class AddTagsToOnPremisesInstancesInput < Struct.new(
         :tags,
         :instance_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   The tag key-value pairs to add to the on-premises instances.
@@ -41,11 +43,13 @@ module Aws
       end
 
       # Information about an application.
-      class ApplicationInfo < Aws::Structure.new(
+      class ApplicationInfo < Struct.new(
         :application_id,
         :application_name,
         :create_time,
         :linked_to_git_hub)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_id
         #   The application ID.
@@ -67,9 +71,11 @@ module Aws
       end
 
       # Information about an Auto Scaling group.
-      class AutoScalingGroup < Aws::Structure.new(
+      class AutoScalingGroup < Struct.new(
         :name,
         :hook)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The Auto Scaling group name.
@@ -104,9 +110,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class BatchGetApplicationRevisionsInput < Aws::Structure.new(
+      class BatchGetApplicationRevisionsInput < Struct.new(
         :application_name,
         :revisions)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application about which to get
@@ -121,10 +129,12 @@ module Aws
       end
 
       # Represents the output of a batch get application revisions operation.
-      class BatchGetApplicationRevisionsOutput < Aws::Structure.new(
+      class BatchGetApplicationRevisionsOutput < Struct.new(
         :application_name,
         :error_message,
         :revisions)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application that corresponds to the revisions.
@@ -148,8 +158,10 @@ module Aws
       #       {
       #         application_names: ["ApplicationName"],
       #       }
-      class BatchGetApplicationsInput < Aws::Structure.new(
+      class BatchGetApplicationsInput < Struct.new(
         :application_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_names
         #   A list of application names separated by spaces.
@@ -158,8 +170,10 @@ module Aws
       end
 
       # Represents the output of a batch get applications operation.
-      class BatchGetApplicationsOutput < Aws::Structure.new(
+      class BatchGetApplicationsOutput < Struct.new(
         :applications_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] applications_info
         #   Information about the applications.
@@ -175,9 +189,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         deployment_group_names: ["DeploymentGroupName"], # required
       #       }
-      class BatchGetDeploymentGroupsInput < Aws::Structure.new(
+      class BatchGetDeploymentGroupsInput < Struct.new(
         :application_name,
         :deployment_group_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -191,9 +207,11 @@ module Aws
       end
 
       # Represents the output of a batch get deployment groups operation.
-      class BatchGetDeploymentGroupsOutput < Aws::Structure.new(
+      class BatchGetDeploymentGroupsOutput < Struct.new(
         :deployment_groups_info,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_groups_info
         #   Information about the deployment groups.
@@ -213,9 +231,11 @@ module Aws
       #         deployment_id: "DeploymentId", # required
       #         instance_ids: ["InstanceId"], # required
       #       }
-      class BatchGetDeploymentInstancesInput < Aws::Structure.new(
+      class BatchGetDeploymentInstancesInput < Struct.new(
         :deployment_id,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The unique ID of a deployment.
@@ -228,9 +248,11 @@ module Aws
       end
 
       # Represents the output of a batch get deployment instance operation.
-      class BatchGetDeploymentInstancesOutput < Aws::Structure.new(
+      class BatchGetDeploymentInstancesOutput < Struct.new(
         :instances_summary,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances_summary
         #   Information about the instance.
@@ -249,8 +271,10 @@ module Aws
       #       {
       #         deployment_ids: ["DeploymentId"],
       #       }
-      class BatchGetDeploymentsInput < Aws::Structure.new(
+      class BatchGetDeploymentsInput < Struct.new(
         :deployment_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_ids
         #   A list of deployment IDs, separated by spaces.
@@ -259,8 +283,10 @@ module Aws
       end
 
       # Represents the output of a batch get deployments operation.
-      class BatchGetDeploymentsOutput < Aws::Structure.new(
+      class BatchGetDeploymentsOutput < Struct.new(
         :deployments_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployments_info
         #   Information about the deployments.
@@ -275,8 +301,10 @@ module Aws
       #       {
       #         instance_names: ["InstanceName"],
       #       }
-      class BatchGetOnPremisesInstancesInput < Aws::Structure.new(
+      class BatchGetOnPremisesInstancesInput < Struct.new(
         :instance_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_names
         #   The names of the on-premises instances about which to get
@@ -286,8 +314,10 @@ module Aws
       end
 
       # Represents the output of a batch get on-premises instances operation.
-      class BatchGetOnPremisesInstancesOutput < Aws::Structure.new(
+      class BatchGetOnPremisesInstancesOutput < Struct.new(
         :instance_infos)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_infos
         #   Information about the on-premises instances.
@@ -302,8 +332,10 @@ module Aws
       #       {
       #         application_name: "ApplicationName", # required
       #       }
-      class CreateApplicationInput < Aws::Structure.new(
+      class CreateApplicationInput < Struct.new(
         :application_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application. This name must be unique with the
@@ -313,8 +345,10 @@ module Aws
       end
 
       # Represents the output of a create application operation.
-      class CreateApplicationOutput < Aws::Structure.new(
+      class CreateApplicationOutput < Struct.new(
         :application_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_id
         #   A unique application ID.
@@ -333,9 +367,11 @@ module Aws
       #           type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
       #         },
       #       }
-      class CreateDeploymentConfigInput < Aws::Structure.new(
+      class CreateDeploymentConfigInput < Struct.new(
         :deployment_config_name,
         :minimum_healthy_hosts)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_config_name
         #   The name of the deployment configuration to create.
@@ -366,8 +402,10 @@ module Aws
       end
 
       # Represents the output of a create deployment configuration operation.
-      class CreateDeploymentConfigOutput < Aws::Structure.new(
+      class CreateDeploymentConfigOutput < Struct.new(
         :deployment_config_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_config_id
         #   A unique deployment configuration ID.
@@ -407,7 +445,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDeploymentGroupInput < Aws::Structure.new(
+      class CreateDeploymentGroupInput < Struct.new(
         :application_name,
         :deployment_group_name,
         :deployment_config_name,
@@ -416,6 +454,8 @@ module Aws
         :auto_scaling_groups,
         :service_role_arn,
         :trigger_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -516,8 +556,10 @@ module Aws
       end
 
       # Represents the output of a create deployment group operation.
-      class CreateDeploymentGroupOutput < Aws::Structure.new(
+      class CreateDeploymentGroupOutput < Struct.new(
         :deployment_group_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_group_id
         #   A unique deployment group ID.
@@ -550,13 +592,15 @@ module Aws
       #         description: "Description",
       #         ignore_application_stop_failures: false,
       #       }
-      class CreateDeploymentInput < Aws::Structure.new(
+      class CreateDeploymentInput < Struct.new(
         :application_name,
         :deployment_group_name,
         :revision,
         :deployment_config_name,
         :description,
         :ignore_application_stop_failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -601,8 +645,10 @@ module Aws
       end
 
       # Represents the output of a create deployment operation.
-      class CreateDeploymentOutput < Aws::Structure.new(
+      class CreateDeploymentOutput < Struct.new(
         :deployment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   A unique deployment ID.
@@ -617,8 +663,10 @@ module Aws
       #       {
       #         application_name: "ApplicationName", # required
       #       }
-      class DeleteApplicationInput < Aws::Structure.new(
+      class DeleteApplicationInput < Struct.new(
         :application_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -634,8 +682,10 @@ module Aws
       #       {
       #         deployment_config_name: "DeploymentConfigName", # required
       #       }
-      class DeleteDeploymentConfigInput < Aws::Structure.new(
+      class DeleteDeploymentConfigInput < Struct.new(
         :deployment_config_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_config_name
         #   The name of a deployment configuration associated with the
@@ -652,9 +702,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         deployment_group_name: "DeploymentGroupName", # required
       #       }
-      class DeleteDeploymentGroupInput < Aws::Structure.new(
+      class DeleteDeploymentGroupInput < Struct.new(
         :application_name,
         :deployment_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -669,8 +721,10 @@ module Aws
       end
 
       # Represents the output of a delete deployment group operation.
-      class DeleteDeploymentGroupOutput < Aws::Structure.new(
+      class DeleteDeploymentGroupOutput < Struct.new(
         :hooks_not_cleaned_up)
+
+        include Aws::Structure
 
         # @!attribute [rw] hooks_not_cleaned_up
         #   If the output contains no data, and the corresponding deployment
@@ -685,11 +739,13 @@ module Aws
       end
 
       # Information about a deployment configuration.
-      class DeploymentConfigInfo < Aws::Structure.new(
+      class DeploymentConfigInfo < Struct.new(
         :deployment_config_id,
         :deployment_config_name,
         :minimum_healthy_hosts,
         :create_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_config_id
         #   The deployment configuration ID.
@@ -711,7 +767,7 @@ module Aws
       end
 
       # Information about a deployment group.
-      class DeploymentGroupInfo < Aws::Structure.new(
+      class DeploymentGroupInfo < Struct.new(
         :application_name,
         :deployment_group_id,
         :deployment_group_name,
@@ -722,6 +778,8 @@ module Aws
         :service_role_arn,
         :target_revision,
         :trigger_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The application name.
@@ -767,7 +825,7 @@ module Aws
       end
 
       # Information about a deployment.
-      class DeploymentInfo < Aws::Structure.new(
+      class DeploymentInfo < Struct.new(
         :application_name,
         :deployment_group_name,
         :deployment_config_name,
@@ -782,6 +840,8 @@ module Aws
         :description,
         :creator,
         :ignore_application_stop_failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The application name.
@@ -863,12 +923,14 @@ module Aws
 
       # Information about the deployment status of the instances in the
       # deployment.
-      class DeploymentOverview < Aws::Structure.new(
+      class DeploymentOverview < Struct.new(
         :pending,
         :in_progress,
         :succeeded,
         :failed,
         :skipped)
+
+        include Aws::Structure
 
         # @!attribute [rw] pending
         #   The number of instances in the deployment in a pending state.
@@ -900,8 +962,10 @@ module Aws
       #       {
       #         instance_name: "InstanceName", # required
       #       }
-      class DeregisterOnPremisesInstanceInput < Aws::Structure.new(
+      class DeregisterOnPremisesInstanceInput < Struct.new(
         :instance_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_name
         #   The name of the on-premises instance to deregister.
@@ -911,11 +975,13 @@ module Aws
 
       # Diagnostic information about executable scripts that are part of a
       # deployment.
-      class Diagnostics < Aws::Structure.new(
+      class Diagnostics < Struct.new(
         :error_code,
         :script_name,
         :message,
         :log_tail)
+
+        include Aws::Structure
 
         # @!attribute [rw] error_code
         #   The associated error code:
@@ -958,10 +1024,12 @@ module Aws
       #         value: "Value",
       #         type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
       #       }
-      class EC2TagFilter < Aws::Structure.new(
+      class EC2TagFilter < Struct.new(
         :key,
         :value,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The tag filter key.
@@ -982,9 +1050,11 @@ module Aws
       end
 
       # Information about a deployment error.
-      class ErrorInformation < Aws::Structure.new(
+      class ErrorInformation < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The error code:
@@ -1024,12 +1094,14 @@ module Aws
       end
 
       # Information about an application revision.
-      class GenericRevisionInfo < Aws::Structure.new(
+      class GenericRevisionInfo < Struct.new(
         :description,
         :deployment_groups,
         :first_used_time,
         :last_used_time,
         :register_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] description
         #   A comment about the revision.
@@ -1060,8 +1132,10 @@ module Aws
       #       {
       #         application_name: "ApplicationName", # required
       #       }
-      class GetApplicationInput < Aws::Structure.new(
+      class GetApplicationInput < Struct.new(
         :application_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -1071,8 +1145,10 @@ module Aws
       end
 
       # Represents the output of a get application operation.
-      class GetApplicationOutput < Aws::Structure.new(
+      class GetApplicationOutput < Struct.new(
         :application)
+
+        include Aws::Structure
 
         # @!attribute [rw] application
         #   Information about the application.
@@ -1101,9 +1177,11 @@ module Aws
       #           },
       #         },
       #       }
-      class GetApplicationRevisionInput < Aws::Structure.new(
+      class GetApplicationRevisionInput < Struct.new(
         :application_name,
         :revision)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application that corresponds to the revision.
@@ -1117,10 +1195,12 @@ module Aws
       end
 
       # Represents the output of a get application revision operation.
-      class GetApplicationRevisionOutput < Aws::Structure.new(
+      class GetApplicationRevisionOutput < Struct.new(
         :application_name,
         :revision,
         :revision_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application that corresponds to the revision.
@@ -1144,8 +1224,10 @@ module Aws
       #       {
       #         deployment_config_name: "DeploymentConfigName", # required
       #       }
-      class GetDeploymentConfigInput < Aws::Structure.new(
+      class GetDeploymentConfigInput < Struct.new(
         :deployment_config_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_config_name
         #   The name of a deployment configuration associated with the
@@ -1155,8 +1237,10 @@ module Aws
       end
 
       # Represents the output of a get deployment configuration operation.
-      class GetDeploymentConfigOutput < Aws::Structure.new(
+      class GetDeploymentConfigOutput < Struct.new(
         :deployment_config_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_config_info
         #   Information about the deployment configuration.
@@ -1172,9 +1256,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         deployment_group_name: "DeploymentGroupName", # required
       #       }
-      class GetDeploymentGroupInput < Aws::Structure.new(
+      class GetDeploymentGroupInput < Struct.new(
         :application_name,
         :deployment_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -1189,8 +1275,10 @@ module Aws
       end
 
       # Represents the output of a get deployment group operation.
-      class GetDeploymentGroupOutput < Aws::Structure.new(
+      class GetDeploymentGroupOutput < Struct.new(
         :deployment_group_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_group_info
         #   Information about the deployment group.
@@ -1205,8 +1293,10 @@ module Aws
       #       {
       #         deployment_id: "DeploymentId", # required
       #       }
-      class GetDeploymentInput < Aws::Structure.new(
+      class GetDeploymentInput < Struct.new(
         :deployment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   A deployment ID associated with the applicable IAM user or AWS
@@ -1223,9 +1313,11 @@ module Aws
       #         deployment_id: "DeploymentId", # required
       #         instance_id: "InstanceId", # required
       #       }
-      class GetDeploymentInstanceInput < Aws::Structure.new(
+      class GetDeploymentInstanceInput < Struct.new(
         :deployment_id,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The unique ID of a deployment.
@@ -1238,8 +1330,10 @@ module Aws
       end
 
       # Represents the output of a get deployment instance operation.
-      class GetDeploymentInstanceOutput < Aws::Structure.new(
+      class GetDeploymentInstanceOutput < Struct.new(
         :instance_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_summary
         #   Information about the instance.
@@ -1248,8 +1342,10 @@ module Aws
       end
 
       # Represents the output of a get deployment operation.
-      class GetDeploymentOutput < Aws::Structure.new(
+      class GetDeploymentOutput < Struct.new(
         :deployment_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_info
         #   Information about the deployment.
@@ -1264,8 +1360,10 @@ module Aws
       #       {
       #         instance_name: "InstanceName", # required
       #       }
-      class GetOnPremisesInstanceInput < Aws::Structure.new(
+      class GetOnPremisesInstanceInput < Struct.new(
         :instance_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_name
         #   The name of the on-premises instance about which to get information.
@@ -1274,8 +1372,10 @@ module Aws
       end
 
       # Represents the output of a get on-premises instance operation.
-      class GetOnPremisesInstanceOutput < Aws::Structure.new(
+      class GetOnPremisesInstanceOutput < Struct.new(
         :instance_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_info
         #   Information about the on-premises instance.
@@ -1292,9 +1392,11 @@ module Aws
       #         repository: "Repository",
       #         commit_id: "CommitId",
       #       }
-      class GitHubLocation < Aws::Structure.new(
+      class GitHubLocation < Struct.new(
         :repository,
         :commit_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository
         #   The GitHub account and repository pair that stores a reference to
@@ -1312,13 +1414,15 @@ module Aws
       end
 
       # Information about an on-premises instance.
-      class InstanceInfo < Aws::Structure.new(
+      class InstanceInfo < Struct.new(
         :instance_name,
         :iam_user_arn,
         :instance_arn,
         :register_time,
         :deregister_time,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_name
         #   The name of the on-premises instance.
@@ -1348,12 +1452,14 @@ module Aws
       end
 
       # Information about an instance in a deployment.
-      class InstanceSummary < Aws::Structure.new(
+      class InstanceSummary < Struct.new(
         :deployment_id,
         :instance_id,
         :status,
         :last_updated_at,
         :lifecycle_events)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The deployment ID.
@@ -1386,12 +1492,14 @@ module Aws
       end
 
       # Information about a deployment lifecycle event.
-      class LifecycleEvent < Aws::Structure.new(
+      class LifecycleEvent < Struct.new(
         :lifecycle_event_name,
         :diagnostics,
         :start_time,
         :end_time,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_event_name
         #   The deployment lifecycle event name, such as ApplicationStop,
@@ -1436,7 +1544,7 @@ module Aws
       #         deployed: "include", # accepts include, exclude, ignore
       #         next_token: "NextToken",
       #       }
-      class ListApplicationRevisionsInput < Aws::Structure.new(
+      class ListApplicationRevisionsInput < Struct.new(
         :application_name,
         :sort_by,
         :sort_order,
@@ -1444,6 +1552,8 @@ module Aws
         :s3_key_prefix,
         :deployed,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -1506,9 +1616,11 @@ module Aws
       end
 
       # Represents the output of a list application revisions operation.
-      class ListApplicationRevisionsOutput < Aws::Structure.new(
+      class ListApplicationRevisionsOutput < Struct.new(
         :revisions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] revisions
         #   A list of locations that contain the matching revisions.
@@ -1530,8 +1642,10 @@ module Aws
       #       {
       #         next_token: "NextToken",
       #       }
-      class ListApplicationsInput < Aws::Structure.new(
+      class ListApplicationsInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An identifier returned from the previous list applications call. It
@@ -1541,9 +1655,11 @@ module Aws
       end
 
       # Represents the output of a list applications operation.
-      class ListApplicationsOutput < Aws::Structure.new(
+      class ListApplicationsOutput < Struct.new(
         :applications,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] applications
         #   A list of application names.
@@ -1565,8 +1681,10 @@ module Aws
       #       {
       #         next_token: "NextToken",
       #       }
-      class ListDeploymentConfigsInput < Aws::Structure.new(
+      class ListDeploymentConfigsInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An identifier returned from the previous list deployment
@@ -1577,9 +1695,11 @@ module Aws
       end
 
       # Represents the output of a list deployment configurations operation.
-      class ListDeploymentConfigsOutput < Aws::Structure.new(
+      class ListDeploymentConfigsOutput < Struct.new(
         :deployment_configs_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_configs_list
         #   A list of deployment configurations, including built-in
@@ -1603,9 +1723,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         next_token: "NextToken",
       #       }
-      class ListDeploymentGroupsInput < Aws::Structure.new(
+      class ListDeploymentGroupsInput < Struct.new(
         :application_name,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -1621,10 +1743,12 @@ module Aws
       end
 
       # Represents the output of a list deployment groups operation.
-      class ListDeploymentGroupsOutput < Aws::Structure.new(
+      class ListDeploymentGroupsOutput < Struct.new(
         :application_name,
         :deployment_groups,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The application name.
@@ -1651,10 +1775,12 @@ module Aws
       #         next_token: "NextToken",
       #         instance_status_filter: ["Pending"], # accepts Pending, InProgress, Succeeded, Failed, Skipped, Unknown
       #       }
-      class ListDeploymentInstancesInput < Aws::Structure.new(
+      class ListDeploymentInstancesInput < Struct.new(
         :deployment_id,
         :next_token,
         :instance_status_filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The unique ID of a deployment.
@@ -1682,9 +1808,11 @@ module Aws
       end
 
       # Represents the output of a list deployment instances operation.
-      class ListDeploymentInstancesOutput < Aws::Structure.new(
+      class ListDeploymentInstancesOutput < Struct.new(
         :instances_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances_list
         #   A list of instance IDs.
@@ -1712,12 +1840,14 @@ module Aws
       #         },
       #         next_token: "NextToken",
       #       }
-      class ListDeploymentsInput < Aws::Structure.new(
+      class ListDeploymentsInput < Struct.new(
         :application_name,
         :deployment_group_name,
         :include_only_statuses,
         :create_time_range,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -1754,9 +1884,11 @@ module Aws
       end
 
       # Represents the output of a list deployments operation.
-      class ListDeploymentsOutput < Aws::Structure.new(
+      class ListDeploymentsOutput < Struct.new(
         :deployments,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployments
         #   A list of deployment IDs.
@@ -1787,10 +1919,12 @@ module Aws
       #         ],
       #         next_token: "NextToken",
       #       }
-      class ListOnPremisesInstancesInput < Aws::Structure.new(
+      class ListOnPremisesInstancesInput < Struct.new(
         :registration_status,
         :tag_filters,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] registration_status
         #   The registration status of the on-premises instances:
@@ -1815,9 +1949,11 @@ module Aws
       end
 
       # Represents the output of list on-premises instances operation.
-      class ListOnPremisesInstancesOutput < Aws::Structure.new(
+      class ListOnPremisesInstancesOutput < Struct.new(
         :instance_names,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_names
         #   The list of matching on-premises instance names.
@@ -1839,9 +1975,11 @@ module Aws
       #         value: 1,
       #         type: "HOST_COUNT", # accepts HOST_COUNT, FLEET_PERCENT
       #       }
-      class MinimumHealthyHosts < Aws::Structure.new(
+      class MinimumHealthyHosts < Struct.new(
         :value,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The minimum healthy instance value.
@@ -1890,10 +2028,12 @@ module Aws
       #           },
       #         },
       #       }
-      class RegisterApplicationRevisionInput < Aws::Structure.new(
+      class RegisterApplicationRevisionInput < Struct.new(
         :application_name,
         :description,
         :revision)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of an AWS CodeDeploy application associated with the
@@ -1919,9 +2059,11 @@ module Aws
       #         instance_name: "InstanceName", # required
       #         iam_user_arn: "IamUserArn", # required
       #       }
-      class RegisterOnPremisesInstanceInput < Aws::Structure.new(
+      class RegisterOnPremisesInstanceInput < Struct.new(
         :instance_name,
         :iam_user_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_name
         #   The name of the on-premises instance to register.
@@ -1947,9 +2089,11 @@ module Aws
       #         ],
       #         instance_names: ["InstanceName"], # required
       #       }
-      class RemoveTagsFromOnPremisesInstancesInput < Aws::Structure.new(
+      class RemoveTagsFromOnPremisesInstancesInput < Struct.new(
         :tags,
         :instance_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   The tag key-value pairs to remove from the on-premises instances.
@@ -1962,9 +2106,11 @@ module Aws
       end
 
       # Information about an application revision.
-      class RevisionInfo < Aws::Structure.new(
+      class RevisionInfo < Struct.new(
         :revision_location,
         :generic_revision_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] revision_location
         #   Information about the location of an application revision.
@@ -1994,10 +2140,12 @@ module Aws
       #           commit_id: "CommitId",
       #         },
       #       }
-      class RevisionLocation < Aws::Structure.new(
+      class RevisionLocation < Struct.new(
         :revision_type,
         :s3_location,
         :git_hub_location)
+
+        include Aws::Structure
 
         # @!attribute [rw] revision_type
         #   The type of application revision:
@@ -2030,12 +2178,14 @@ module Aws
       #         version: "VersionId",
       #         e_tag: "ETag",
       #       }
-      class S3Location < Aws::Structure.new(
+      class S3Location < Struct.new(
         :bucket,
         :key,
         :bundle_type,
         :version,
         :e_tag)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   The name of the Amazon S3 bucket where the application revision is
@@ -2081,8 +2231,10 @@ module Aws
       #       {
       #         deployment_id: "DeploymentId", # required
       #       }
-      class StopDeploymentInput < Aws::Structure.new(
+      class StopDeploymentInput < Struct.new(
         :deployment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] deployment_id
         #   The unique ID of a deployment.
@@ -2091,9 +2243,11 @@ module Aws
       end
 
       # Represents the output of a stop deployment operation.
-      class StopDeploymentOutput < Aws::Structure.new(
+      class StopDeploymentOutput < Struct.new(
         :status,
         :status_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the stop deployment operation:
@@ -2116,9 +2270,11 @@ module Aws
       #         key: "Key",
       #         value: "Value",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The tag\'s key.
@@ -2139,10 +2295,12 @@ module Aws
       #         value: "Value",
       #         type: "KEY_ONLY", # accepts KEY_ONLY, VALUE_ONLY, KEY_AND_VALUE
       #       }
-      class TagFilter < Aws::Structure.new(
+      class TagFilter < Struct.new(
         :key,
         :value,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The on-premises instance tag filter key.
@@ -2170,9 +2328,11 @@ module Aws
       #         start: Time.now,
       #         end: Time.now,
       #       }
-      class TimeRange < Aws::Structure.new(
+      class TimeRange < Struct.new(
         :start,
         :end)
+
+        include Aws::Structure
 
         # @!attribute [rw] start
         #   The start time of the time range.
@@ -2197,10 +2357,12 @@ module Aws
       #         trigger_target_arn: "TriggerTargetArn",
       #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, InstanceStart, InstanceSuccess, InstanceFailure
       #       }
-      class TriggerConfig < Aws::Structure.new(
+      class TriggerConfig < Struct.new(
         :trigger_name,
         :trigger_target_arn,
         :trigger_events)
+
+        include Aws::Structure
 
         # @!attribute [rw] trigger_name
         #   The name of the notification trigger.
@@ -2235,9 +2397,11 @@ module Aws
       #         application_name: "ApplicationName",
       #         new_application_name: "ApplicationName",
       #       }
-      class UpdateApplicationInput < Aws::Structure.new(
+      class UpdateApplicationInput < Struct.new(
         :application_name,
         :new_application_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The current name of the application you want to change.
@@ -2282,7 +2446,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateDeploymentGroupInput < Aws::Structure.new(
+      class UpdateDeploymentGroupInput < Struct.new(
         :application_name,
         :current_deployment_group_name,
         :new_deployment_group_name,
@@ -2292,6 +2456,8 @@ module Aws
         :auto_scaling_groups,
         :service_role_arn,
         :trigger_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The application name corresponding to the deployment group to
@@ -2342,8 +2508,10 @@ module Aws
       end
 
       # Represents the output of an update deployment group operation.
-      class UpdateDeploymentGroupOutput < Aws::Structure.new(
+      class UpdateDeploymentGroupOutput < Struct.new(
         :hooks_not_cleaned_up)
+
+        include Aws::Structure
 
         # @!attribute [rw] hooks_not_cleaned_up
         #   If the output contains no data, and the corresponding deployment

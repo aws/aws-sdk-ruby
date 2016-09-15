@@ -16,8 +16,10 @@ module Aws
       #       {
       #         name: "RuleName", # required
       #       }
-      class DeleteRuleRequest < Aws::Structure.new(
+      class DeleteRuleRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the rule to be deleted.
@@ -32,8 +34,10 @@ module Aws
       #       {
       #         name: "RuleName", # required
       #       }
-      class DescribeRuleRequest < Aws::Structure.new(
+      class DescribeRuleRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the rule you want to describe details for.
@@ -42,7 +46,7 @@ module Aws
       end
 
       # The result of the DescribeRule operation.
-      class DescribeRuleResponse < Aws::Structure.new(
+      class DescribeRuleResponse < Struct.new(
         :name,
         :arn,
         :event_pattern,
@@ -50,6 +54,8 @@ module Aws
         :state,
         :description,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The rule\'s name.
@@ -90,8 +96,10 @@ module Aws
       #       {
       #         name: "RuleName", # required
       #       }
-      class DisableRuleRequest < Aws::Structure.new(
+      class DisableRuleRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the rule you want to disable.
@@ -106,8 +114,10 @@ module Aws
       #       {
       #         name: "RuleName", # required
       #       }
-      class EnableRuleRequest < Aws::Structure.new(
+      class EnableRuleRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the rule that you want to enable.
@@ -124,10 +134,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class ListRuleNamesByTargetRequest < Aws::Structure.new(
+      class ListRuleNamesByTargetRequest < Struct.new(
         :target_arn,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the target resource that you want
@@ -146,9 +158,11 @@ module Aws
       end
 
       # The result of the ListRuleNamesByTarget operation.
-      class ListRuleNamesByTargetResponse < Aws::Structure.new(
+      class ListRuleNamesByTargetResponse < Struct.new(
         :rule_names,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_names
         #   List of rules names that can invoke the given target.
@@ -169,10 +183,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class ListRulesRequest < Aws::Structure.new(
+      class ListRulesRequest < Struct.new(
         :name_prefix,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] name_prefix
         #   The prefix matching the rule name.
@@ -190,9 +206,11 @@ module Aws
       end
 
       # The result of the ListRules operation.
-      class ListRulesResponse < Aws::Structure.new(
+      class ListRulesResponse < Struct.new(
         :rules,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   List of rules matching the specified criteria.
@@ -213,10 +231,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class ListTargetsByRuleRequest < Aws::Structure.new(
+      class ListTargetsByRuleRequest < Struct.new(
         :rule,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule
         #   The name of the rule whose targets you want to list.
@@ -234,9 +254,11 @@ module Aws
       end
 
       # The result of the ListTargetsByRule operation.
-      class ListTargetsByRuleResponse < Aws::Structure.new(
+      class ListTargetsByRuleResponse < Struct.new(
         :targets,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] targets
         #   Lists the targets assigned to the rule.
@@ -263,8 +285,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class PutEventsRequest < Aws::Structure.new(
+      class PutEventsRequest < Struct.new(
         :entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] entries
         #   The entry that defines an event in your system. You can specify
@@ -285,12 +309,14 @@ module Aws
       #         detail_type: "String",
       #         detail: "String",
       #       }
-      class PutEventsRequestEntry < Aws::Structure.new(
+      class PutEventsRequestEntry < Struct.new(
         :time,
         :source,
         :resources,
         :detail_type,
         :detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] time
         #   Timestamp of event, per [RFC3339][1]. If no timestamp is provided,
@@ -325,9 +351,11 @@ module Aws
       end
 
       # The result of the PutEvents operation.
-      class PutEventsResponse < Aws::Structure.new(
+      class PutEventsResponse < Struct.new(
         :failed_entry_count,
         :entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_entry_count
         #   The number of failed entries.
@@ -343,10 +371,12 @@ module Aws
       end
 
       # A PutEventsResult contains a list of PutEventsResultEntry.
-      class PutEventsResultEntry < Aws::Structure.new(
+      class PutEventsResultEntry < Struct.new(
         :event_id,
         :error_code,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_id
         #   The ID of the event submitted to Amazon CloudWatch Events.
@@ -376,13 +406,15 @@ module Aws
       #         description: "RuleDescription",
       #         role_arn: "RoleArn",
       #       }
-      class PutRuleRequest < Aws::Structure.new(
+      class PutRuleRequest < Struct.new(
         :name,
         :schedule_expression,
         :event_pattern,
         :state,
         :description,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the rule that you are creating or updating.
@@ -413,8 +445,10 @@ module Aws
       end
 
       # The result of the PutRule operation.
-      class PutRuleResponse < Aws::Structure.new(
+      class PutRuleResponse < Struct.new(
         :rule_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_arn
         #   The Amazon Resource Name (ARN) that identifies the rule.
@@ -437,9 +471,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class PutTargetsRequest < Aws::Structure.new(
+      class PutTargetsRequest < Struct.new(
         :rule,
         :targets)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule
         #   The name of the rule you want to add targets to.
@@ -452,9 +488,11 @@ module Aws
       end
 
       # The result of the PutTargets operation.
-      class PutTargetsResponse < Aws::Structure.new(
+      class PutTargetsResponse < Struct.new(
         :failed_entry_count,
         :failed_entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_entry_count
         #   The number of failed entries.
@@ -467,10 +505,12 @@ module Aws
       end
 
       # A PutTargetsResult contains a list of PutTargetsResultEntry.
-      class PutTargetsResultEntry < Aws::Structure.new(
+      class PutTargetsResultEntry < Struct.new(
         :target_id,
         :error_code,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_id
         #   The ID of the target submitted to Amazon CloudWatch Events.
@@ -496,9 +536,11 @@ module Aws
       #         rule: "RuleName", # required
       #         ids: ["TargetId"], # required
       #       }
-      class RemoveTargetsRequest < Aws::Structure.new(
+      class RemoveTargetsRequest < Struct.new(
         :rule,
         :ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule
         #   The name of the rule you want to remove targets from.
@@ -511,9 +553,11 @@ module Aws
       end
 
       # The result of the RemoveTargets operation.
-      class RemoveTargetsResponse < Aws::Structure.new(
+      class RemoveTargetsResponse < Struct.new(
         :failed_entry_count,
         :failed_entries)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_entry_count
         #   The number of failed entries.
@@ -527,10 +571,12 @@ module Aws
 
       # The ID of the target requested to be removed from the rule by Amazon
       # CloudWatch Events.
-      class RemoveTargetsResultEntry < Aws::Structure.new(
+      class RemoveTargetsResultEntry < Struct.new(
         :target_id,
         :error_code,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_id
         #   The ID of the target requested to be removed by Amazon CloudWatch
@@ -551,7 +597,7 @@ module Aws
 
       # Contains information about a rule in Amazon CloudWatch Events. A
       # ListRulesResult contains a list of Rules.
-      class Rule < Aws::Structure.new(
+      class Rule < Struct.new(
         :name,
         :arn,
         :event_pattern,
@@ -559,6 +605,8 @@ module Aws
         :description,
         :schedule_expression,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The rule\'s name.
@@ -617,11 +665,13 @@ module Aws
       #         input: "TargetInput",
       #         input_path: "TargetInputPath",
       #       }
-      class Target < Aws::Structure.new(
+      class Target < Struct.new(
         :id,
         :arn,
         :input,
         :input_path)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique target assignment ID.
@@ -661,9 +711,11 @@ module Aws
       #         event_pattern: "EventPattern", # required
       #         event: "String", # required
       #       }
-      class TestEventPatternRequest < Aws::Structure.new(
+      class TestEventPatternRequest < Struct.new(
         :event_pattern,
         :event)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_pattern
         #   The event pattern you want to test.
@@ -676,8 +728,10 @@ module Aws
       end
 
       # The result of the TestEventPattern operation.
-      class TestEventPatternResponse < Aws::Structure.new(
+      class TestEventPatternResponse < Struct.new(
         :result)
+
+        include Aws::Structure
 
         # @!attribute [rw] result
         #   Indicates whether the event matches the event pattern.

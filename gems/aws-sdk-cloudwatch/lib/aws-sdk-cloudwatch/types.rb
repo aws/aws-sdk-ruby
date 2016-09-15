@@ -13,12 +13,14 @@ module Aws
       # about the history of a specific alarm. If you call
       # DescribeAlarmHistory, Amazon CloudWatch returns this data type as part
       # of the DescribeAlarmHistoryResult data type.
-      class AlarmHistoryItem < Aws::Structure.new(
+      class AlarmHistoryItem < Struct.new(
         :alarm_name,
         :timestamp,
         :history_item_type,
         :history_summary,
         :history_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_name
         #   The descriptive name for the alarm.
@@ -44,7 +46,7 @@ module Aws
 
       # The `Datapoint` data type encapsulates the statistical data that
       # Amazon CloudWatch computes from metric data.
-      class Datapoint < Aws::Structure.new(
+      class Datapoint < Struct.new(
         :timestamp,
         :sample_count,
         :average,
@@ -52,6 +54,8 @@ module Aws
         :minimum,
         :maximum,
         :unit)
+
+        include Aws::Structure
 
         # @!attribute [rw] timestamp
         #   The time stamp used for the datapoint.
@@ -91,8 +95,10 @@ module Aws
       #       {
       #         alarm_names: ["AlarmName"], # required
       #       }
-      class DeleteAlarmsInput < Aws::Structure.new(
+      class DeleteAlarmsInput < Struct.new(
         :alarm_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_names
         #   A list of alarms to be deleted.
@@ -112,13 +118,15 @@ module Aws
       #         max_records: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeAlarmHistoryInput < Aws::Structure.new(
+      class DescribeAlarmHistoryInput < Struct.new(
         :alarm_name,
         :history_item_type,
         :start_date,
         :end_date,
         :max_records,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_name
         #   The name of the alarm.
@@ -148,9 +156,11 @@ module Aws
       end
 
       # The output for DescribeAlarmHistory.
-      class DescribeAlarmHistoryOutput < Aws::Structure.new(
+      class DescribeAlarmHistoryOutput < Struct.new(
         :alarm_history_items,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_history_items
         #   A list of alarm histories in JSON format.
@@ -179,13 +189,15 @@ module Aws
       #         period: 1,
       #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
       #       }
-      class DescribeAlarmsForMetricInput < Aws::Structure.new(
+      class DescribeAlarmsForMetricInput < Struct.new(
         :metric_name,
         :namespace,
         :statistic,
         :dimensions,
         :period,
         :unit)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_name
         #   The name of the metric.
@@ -216,8 +228,10 @@ module Aws
       end
 
       # The output for DescribeAlarmsForMetric.
-      class DescribeAlarmsForMetricOutput < Aws::Structure.new(
+      class DescribeAlarmsForMetricOutput < Struct.new(
         :metric_alarms)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_alarms
         #   A list of information for each alarm with the specified metric.
@@ -237,13 +251,15 @@ module Aws
       #         max_records: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeAlarmsInput < Aws::Structure.new(
+      class DescribeAlarmsInput < Struct.new(
         :alarm_names,
         :alarm_name_prefix,
         :state_value,
         :action_prefix,
         :max_records,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_names
         #   A list of alarm names to retrieve information for.
@@ -274,9 +290,11 @@ module Aws
       end
 
       # The output for DescribeAlarms.
-      class DescribeAlarmsOutput < Aws::Structure.new(
+      class DescribeAlarmsOutput < Struct.new(
         :metric_alarms,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_alarms
         #   A list of information for the specified alarms.
@@ -299,9 +317,11 @@ module Aws
       #         name: "DimensionName", # required
       #         value: "DimensionValue", # required
       #       }
-      class Dimension < Aws::Structure.new(
+      class Dimension < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the dimension.
@@ -321,9 +341,11 @@ module Aws
       #         name: "DimensionName", # required
       #         value: "DimensionValue",
       #       }
-      class DimensionFilter < Aws::Structure.new(
+      class DimensionFilter < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The dimension name to be matched.
@@ -346,8 +368,10 @@ module Aws
       #       {
       #         alarm_names: ["AlarmName"], # required
       #       }
-      class DisableAlarmActionsInput < Aws::Structure.new(
+      class DisableAlarmActionsInput < Struct.new(
         :alarm_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_names
         #   The names of the alarms to disable actions for.
@@ -362,8 +386,10 @@ module Aws
       #       {
       #         alarm_names: ["AlarmName"], # required
       #       }
-      class EnableAlarmActionsInput < Aws::Structure.new(
+      class EnableAlarmActionsInput < Struct.new(
         :alarm_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_names
         #   The names of the alarms to enable actions for.
@@ -390,7 +416,7 @@ module Aws
       #         statistics: ["SampleCount"], # required, accepts SampleCount, Average, Sum, Minimum, Maximum
       #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
       #       }
-      class GetMetricStatisticsInput < Aws::Structure.new(
+      class GetMetricStatisticsInput < Struct.new(
         :namespace,
         :metric_name,
         :dimensions,
@@ -399,6 +425,8 @@ module Aws
         :period,
         :statistics,
         :unit)
+
+        include Aws::Structure
 
         # @!attribute [rw] namespace
         #   The namespace of the metric, with or without spaces.
@@ -464,9 +492,11 @@ module Aws
       end
 
       # The output for GetMetricStatistics.
-      class GetMetricStatisticsOutput < Aws::Structure.new(
+      class GetMetricStatisticsOutput < Struct.new(
         :label,
         :datapoints)
+
+        include Aws::Structure
 
         # @!attribute [rw] label
         #   A label describing the specified metric.
@@ -493,11 +523,13 @@ module Aws
       #         ],
       #         next_token: "NextToken",
       #       }
-      class ListMetricsInput < Aws::Structure.new(
+      class ListMetricsInput < Struct.new(
         :namespace,
         :metric_name,
         :dimensions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] namespace
         #   The namespace to filter against.
@@ -519,9 +551,11 @@ module Aws
       end
 
       # The output for ListMetrics.
-      class ListMetricsOutput < Aws::Structure.new(
+      class ListMetricsOutput < Struct.new(
         :metrics,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] metrics
         #   A list of metrics used to generate statistics for an AWS account.
@@ -540,10 +574,12 @@ module Aws
       # The example in the Examples section publishes two metrics named
       # buffers and latency. Both metrics are in the examples namespace. Both
       # metrics have two dimensions, InstanceID and InstanceType.
-      class Metric < Aws::Structure.new(
+      class Metric < Struct.new(
         :namespace,
         :metric_name,
         :dimensions)
+
+        include Aws::Structure
 
         # @!attribute [rw] namespace
         #   The namespace of the metric.
@@ -561,7 +597,7 @@ module Aws
 
       # The MetricAlarm data type represents an alarm. You can use
       # PutMetricAlarm to create or update an alarm.
-      class MetricAlarm < Aws::Structure.new(
+      class MetricAlarm < Struct.new(
         :alarm_name,
         :alarm_arn,
         :alarm_description,
@@ -583,6 +619,8 @@ module Aws
         :evaluation_periods,
         :threshold,
         :comparison_operator)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_name
         #   The name of the alarm.
@@ -710,13 +748,15 @@ module Aws
       #         },
       #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
       #       }
-      class MetricDatum < Aws::Structure.new(
+      class MetricDatum < Struct.new(
         :metric_name,
         :dimensions,
         :timestamp,
         :value,
         :statistic_values,
         :unit)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_name
         #   The name of the metric.
@@ -782,7 +822,7 @@ module Aws
       #         threshold: 1.0, # required
       #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
       #       }
-      class PutMetricAlarmInput < Aws::Structure.new(
+      class PutMetricAlarmInput < Struct.new(
         :alarm_name,
         :alarm_description,
         :actions_enabled,
@@ -798,6 +838,8 @@ module Aws
         :evaluation_periods,
         :threshold,
         :comparison_operator)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_name
         #   The descriptive name for the alarm. This name must be unique within
@@ -960,9 +1002,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class PutMetricDataInput < Aws::Structure.new(
+      class PutMetricDataInput < Struct.new(
         :namespace,
         :metric_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] namespace
         #   The namespace for the metric data.
@@ -990,11 +1034,13 @@ module Aws
       #         state_reason: "StateReason", # required
       #         state_reason_data: "StateReasonData",
       #       }
-      class SetAlarmStateInput < Aws::Structure.new(
+      class SetAlarmStateInput < Struct.new(
         :alarm_name,
         :state_value,
         :state_reason,
         :state_reason_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_name
         #   The descriptive name for the alarm. This name must be unique within
@@ -1029,11 +1075,13 @@ module Aws
       #         minimum: 1.0, # required
       #         maximum: 1.0, # required
       #       }
-      class StatisticSet < Aws::Structure.new(
+      class StatisticSet < Struct.new(
         :sample_count,
         :sum,
         :minimum,
         :maximum)
+
+        include Aws::Structure
 
         # @!attribute [rw] sample_count
         #   The number of samples used for the statistic set.

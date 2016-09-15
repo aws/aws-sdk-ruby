@@ -10,10 +10,12 @@ module Aws
     module Types
 
       # An object representing authorization data for an Amazon ECR registry.
-      class AuthorizationData < Aws::Structure.new(
+      class AuthorizationData < Struct.new(
         :authorization_token,
         :expires_at,
         :proxy_endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] authorization_token
         #   A base64-encoded string that contains authorization data for the
@@ -44,10 +46,12 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         layer_digests: ["BatchedOperationLayerDigest"], # required
       #       }
-      class BatchCheckLayerAvailabilityRequest < Aws::Structure.new(
+      class BatchCheckLayerAvailabilityRequest < Struct.new(
         :registry_id,
         :repository_name,
         :layer_digests)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -66,9 +70,11 @@ module Aws
 
       end
 
-      class BatchCheckLayerAvailabilityResponse < Aws::Structure.new(
+      class BatchCheckLayerAvailabilityResponse < Struct.new(
         :layers,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] layers
         #   A list of image layer objects corresponding to the image layer
@@ -96,10 +102,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class BatchDeleteImageRequest < Aws::Structure.new(
+      class BatchDeleteImageRequest < Struct.new(
         :registry_id,
         :repository_name,
         :image_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -119,9 +127,11 @@ module Aws
 
       end
 
-      class BatchDeleteImageResponse < Aws::Structure.new(
+      class BatchDeleteImageResponse < Struct.new(
         :image_ids,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_ids
         #   The image IDs of the deleted images.
@@ -146,10 +156,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class BatchGetImageRequest < Aws::Structure.new(
+      class BatchGetImageRequest < Struct.new(
         :registry_id,
         :repository_name,
         :image_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -169,9 +181,11 @@ module Aws
 
       end
 
-      class BatchGetImageResponse < Aws::Structure.new(
+      class BatchGetImageResponse < Struct.new(
         :images,
         :failures)
+
+        include Aws::Structure
 
         # @!attribute [rw] images
         #   A list of image objects corresponding to the image references in the
@@ -193,11 +207,13 @@ module Aws
       #         upload_id: "UploadId", # required
       #         layer_digests: ["LayerDigest"], # required
       #       }
-      class CompleteLayerUploadRequest < Aws::Structure.new(
+      class CompleteLayerUploadRequest < Struct.new(
         :registry_id,
         :repository_name,
         :upload_id,
         :layer_digests)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry to which to upload
@@ -220,11 +236,13 @@ module Aws
 
       end
 
-      class CompleteLayerUploadResponse < Aws::Structure.new(
+      class CompleteLayerUploadResponse < Struct.new(
         :registry_id,
         :repository_name,
         :upload_id,
         :layer_digest)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The registry ID associated with the request.
@@ -250,8 +268,10 @@ module Aws
       #       {
       #         repository_name: "RepositoryName", # required
       #       }
-      class CreateRepositoryRequest < Aws::Structure.new(
+      class CreateRepositoryRequest < Struct.new(
         :repository_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name to use for the repository. The repository name may be
@@ -262,8 +282,10 @@ module Aws
 
       end
 
-      class CreateRepositoryResponse < Aws::Structure.new(
+      class CreateRepositoryResponse < Struct.new(
         :repository)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository
         #   An object representing a repository.
@@ -278,9 +300,11 @@ module Aws
       #         registry_id: "RegistryId",
       #         repository_name: "RepositoryName", # required
       #       }
-      class DeleteRepositoryPolicyRequest < Aws::Structure.new(
+      class DeleteRepositoryPolicyRequest < Struct.new(
         :registry_id,
         :repository_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -295,10 +319,12 @@ module Aws
 
       end
 
-      class DeleteRepositoryPolicyResponse < Aws::Structure.new(
+      class DeleteRepositoryPolicyResponse < Struct.new(
         :registry_id,
         :repository_name,
         :policy_text)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The registry ID associated with the request.
@@ -322,10 +348,12 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         force: false,
       #       }
-      class DeleteRepositoryRequest < Aws::Structure.new(
+      class DeleteRepositoryRequest < Struct.new(
         :registry_id,
         :repository_name,
         :force)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -343,8 +371,10 @@ module Aws
 
       end
 
-      class DeleteRepositoryResponse < Aws::Structure.new(
+      class DeleteRepositoryResponse < Struct.new(
         :repository)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository
         #   An object representing a repository.
@@ -361,11 +391,13 @@ module Aws
       #         next_token: "NextToken",
       #         max_results: 1,
       #       }
-      class DescribeRepositoriesRequest < Aws::Structure.new(
+      class DescribeRepositoriesRequest < Struct.new(
         :registry_id,
         :repository_names,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -407,9 +439,11 @@ module Aws
 
       end
 
-      class DescribeRepositoriesResponse < Aws::Structure.new(
+      class DescribeRepositoriesResponse < Struct.new(
         :repositories,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] repositories
         #   A list of repository objects corresponding to valid repositories.
@@ -431,8 +465,10 @@ module Aws
       #       {
       #         registry_ids: ["RegistryId"],
       #       }
-      class GetAuthorizationTokenRequest < Aws::Structure.new(
+      class GetAuthorizationTokenRequest < Struct.new(
         :registry_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_ids
         #   A list of AWS account IDs that are associated with the registries
@@ -442,8 +478,10 @@ module Aws
 
       end
 
-      class GetAuthorizationTokenResponse < Aws::Structure.new(
+      class GetAuthorizationTokenResponse < Struct.new(
         :authorization_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] authorization_data
         #   A list of authorization token data objects that correspond to the
@@ -460,10 +498,12 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         layer_digest: "LayerDigest", # required
       #       }
-      class GetDownloadUrlForLayerRequest < Aws::Structure.new(
+      class GetDownloadUrlForLayerRequest < Struct.new(
         :registry_id,
         :repository_name,
         :layer_digest)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -482,9 +522,11 @@ module Aws
 
       end
 
-      class GetDownloadUrlForLayerResponse < Aws::Structure.new(
+      class GetDownloadUrlForLayerResponse < Struct.new(
         :download_url,
         :layer_digest)
+
+        include Aws::Structure
 
         # @!attribute [rw] download_url
         #   The pre-signed Amazon S3 download URL for the requested layer.
@@ -503,9 +545,11 @@ module Aws
       #         registry_id: "RegistryId",
       #         repository_name: "RepositoryName", # required
       #       }
-      class GetRepositoryPolicyRequest < Aws::Structure.new(
+      class GetRepositoryPolicyRequest < Struct.new(
         :registry_id,
         :repository_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -519,10 +563,12 @@ module Aws
 
       end
 
-      class GetRepositoryPolicyResponse < Aws::Structure.new(
+      class GetRepositoryPolicyResponse < Struct.new(
         :registry_id,
         :repository_name,
         :policy_text)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The registry ID associated with the request.
@@ -539,11 +585,13 @@ module Aws
       end
 
       # An object representing an Amazon ECR image.
-      class Image < Aws::Structure.new(
+      class Image < Struct.new(
         :registry_id,
         :repository_name,
         :image_id,
         :image_manifest)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry containing the
@@ -566,10 +614,12 @@ module Aws
       end
 
       # An object representing an Amazon ECR image failure.
-      class ImageFailure < Aws::Structure.new(
+      class ImageFailure < Struct.new(
         :image_id,
         :failure_code,
         :failure_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The image ID associated with the failure.
@@ -593,9 +643,11 @@ module Aws
       #         image_digest: "ImageDigest",
       #         image_tag: "ImageTag",
       #       }
-      class ImageIdentifier < Aws::Structure.new(
+      class ImageIdentifier < Struct.new(
         :image_digest,
         :image_tag)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_digest
         #   The `sha256` digest of the image manifest.
@@ -614,9 +666,11 @@ module Aws
       #         registry_id: "RegistryId",
       #         repository_name: "RepositoryName", # required
       #       }
-      class InitiateLayerUploadRequest < Aws::Structure.new(
+      class InitiateLayerUploadRequest < Struct.new(
         :registry_id,
         :repository_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that you intend to
@@ -630,9 +684,11 @@ module Aws
 
       end
 
-      class InitiateLayerUploadResponse < Aws::Structure.new(
+      class InitiateLayerUploadResponse < Struct.new(
         :upload_id,
         :part_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] upload_id
         #   The upload ID for the layer upload. This parameter is passed to
@@ -647,10 +703,12 @@ module Aws
       end
 
       # An object representing an Amazon ECR image layer.
-      class Layer < Aws::Structure.new(
+      class Layer < Struct.new(
         :layer_digest,
         :layer_availability,
         :layer_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_digest
         #   The `sha256` digest of the image layer.
@@ -668,10 +726,12 @@ module Aws
       end
 
       # An object representing an Amazon ECR image layer failure.
-      class LayerFailure < Aws::Structure.new(
+      class LayerFailure < Struct.new(
         :layer_digest,
         :failure_code,
         :failure_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] layer_digest
         #   The layer digest associated with the failure.
@@ -694,8 +754,10 @@ module Aws
       #       {
       #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
       #       }
-      class ListImagesFilter < Aws::Structure.new(
+      class ListImagesFilter < Struct.new(
         :tag_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_status
         #   The tag status with which to filter your ListImages results. You can
@@ -716,12 +778,14 @@ module Aws
       #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
       #         },
       #       }
-      class ListImagesRequest < Aws::Structure.new(
+      class ListImagesRequest < Struct.new(
         :registry_id,
         :repository_name,
         :next_token,
         :max_results,
         :filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -765,9 +829,11 @@ module Aws
 
       end
 
-      class ListImagesResponse < Aws::Structure.new(
+      class ListImagesResponse < Struct.new(
         :image_ids,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_ids
         #   The list of image IDs for the requested repository.
@@ -790,10 +856,12 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         image_manifest: "ImageManifest", # required
       #       }
-      class PutImageRequest < Aws::Structure.new(
+      class PutImageRequest < Struct.new(
         :registry_id,
         :repository_name,
         :image_manifest)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -811,8 +879,10 @@ module Aws
 
       end
 
-      class PutImageResponse < Aws::Structure.new(
+      class PutImageResponse < Struct.new(
         :image)
+
+        include Aws::Structure
 
         # @!attribute [rw] image
         #   Details of the image uploaded.
@@ -821,11 +891,13 @@ module Aws
       end
 
       # An object representing a repository.
-      class Repository < Aws::Structure.new(
+      class Repository < Struct.new(
         :repository_arn,
         :registry_id,
         :repository_name,
         :repository_uri)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_arn
         #   The Amazon Resource Name (ARN) that identifies the repository. The
@@ -860,11 +932,13 @@ module Aws
       #         policy_text: "RepositoryPolicyText", # required
       #         force: false,
       #       }
-      class SetRepositoryPolicyRequest < Aws::Structure.new(
+      class SetRepositoryPolicyRequest < Struct.new(
         :registry_id,
         :repository_name,
         :policy_text,
         :force)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that contains the
@@ -889,10 +963,12 @@ module Aws
 
       end
 
-      class SetRepositoryPolicyResponse < Aws::Structure.new(
+      class SetRepositoryPolicyResponse < Struct.new(
         :registry_id,
         :repository_name,
         :policy_text)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The registry ID associated with the request.
@@ -919,13 +995,15 @@ module Aws
       #         part_last_byte: 1, # required
       #         layer_part_blob: "data", # required
       #       }
-      class UploadLayerPartRequest < Aws::Structure.new(
+      class UploadLayerPartRequest < Struct.new(
         :registry_id,
         :repository_name,
         :upload_id,
         :part_first_byte,
         :part_last_byte,
         :layer_part_blob)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The AWS account ID associated with the registry that you are
@@ -956,11 +1034,13 @@ module Aws
 
       end
 
-      class UploadLayerPartResponse < Aws::Structure.new(
+      class UploadLayerPartResponse < Struct.new(
         :registry_id,
         :repository_name,
         :upload_id,
         :last_byte_received)
+
+        include Aws::Structure
 
         # @!attribute [rw] registry_id
         #   The registry ID associated with the request.

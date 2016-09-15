@@ -10,9 +10,11 @@ module Aws
     module Types
 
       # The AccountLimit data type.
-      class AccountLimit < Aws::Structure.new(
+      class AccountLimit < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the account limit. Currently, the only account limit is
@@ -32,8 +34,10 @@ module Aws
       #       {
       #         stack_name: "StackName", # required
       #       }
-      class CancelUpdateStackInput < Aws::Structure.new(
+      class CancelUpdateStackInput < Struct.new(
         :stack_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack.
@@ -43,9 +47,11 @@ module Aws
 
       # The `Change` structure describes the changes AWS CloudFormation will
       # perform if you execute the change set.
-      class Change < Aws::Structure.new(
+      class Change < Struct.new(
         :type,
         :resource_change)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The type of entity that AWS CloudFormation changes. Currently, the
@@ -61,7 +67,7 @@ module Aws
 
       # The `ChangeSetSummary` structure describes a change set, its status,
       # and the stack with which it\'s associated.
-      class ChangeSetSummary < Aws::Structure.new(
+      class ChangeSetSummary < Struct.new(
         :stack_id,
         :stack_name,
         :change_set_id,
@@ -71,6 +77,8 @@ module Aws
         :status_reason,
         :creation_time,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The ID of the stack with which the change set is associated.
@@ -124,8 +132,10 @@ module Aws
       #       {
       #         stack_name: "StackNameOrId", # required
       #       }
-      class ContinueUpdateRollbackInput < Aws::Structure.new(
+      class ContinueUpdateRollbackInput < Struct.new(
         :stack_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique ID of the stack that you want to continue
@@ -166,7 +176,7 @@ module Aws
       #         client_token: "ClientToken",
       #         description: "Description",
       #       }
-      class CreateChangeSetInput < Aws::Structure.new(
+      class CreateChangeSetInput < Struct.new(
         :stack_name,
         :template_body,
         :template_url,
@@ -179,6 +189,8 @@ module Aws
         :change_set_name,
         :client_token,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique ID of the stack for which you are creating a
@@ -313,8 +325,10 @@ module Aws
       end
 
       # The output for the CreateChangeSet action.
-      class CreateChangeSetOutput < Aws::Structure.new(
+      class CreateChangeSetOutput < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The Amazon Resource Name (ARN) of the change set.
@@ -352,7 +366,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateStackInput < Aws::Structure.new(
+      class CreateStackInput < Struct.new(
         :stack_name,
         :template_body,
         :template_url,
@@ -366,6 +380,8 @@ module Aws
         :stack_policy_body,
         :stack_policy_url,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name that is associated with the stack. The name must be unique
@@ -535,8 +551,10 @@ module Aws
       end
 
       # The output for a CreateStack action.
-      class CreateStackOutput < Aws::Structure.new(
+      class CreateStackOutput < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   Unique identifier of the stack.
@@ -552,9 +570,11 @@ module Aws
       #         change_set_name: "ChangeSetNameOrId", # required
       #         stack_name: "StackNameOrId",
       #       }
-      class DeleteChangeSetInput < Aws::Structure.new(
+      class DeleteChangeSetInput < Struct.new(
         :change_set_name,
         :stack_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_set_name
         #   The name or Amazon Resource Name (ARN) of the change set that you
@@ -579,9 +599,11 @@ module Aws
       #         stack_name: "StackName", # required
       #         retain_resources: ["LogicalResourceId"],
       #       }
-      class DeleteStackInput < Aws::Structure.new(
+      class DeleteStackInput < Struct.new(
         :stack_name,
         :retain_resources)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack.
@@ -606,8 +628,10 @@ module Aws
       #       {
       #         next_token: "NextToken",
       #       }
-      class DescribeAccountLimitsInput < Aws::Structure.new(
+      class DescribeAccountLimitsInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   A string that identifies the next page of limits that you want to
@@ -617,9 +641,11 @@ module Aws
       end
 
       # The output for the DescribeAccountLimits action.
-      class DescribeAccountLimitsOutput < Aws::Structure.new(
+      class DescribeAccountLimitsOutput < Struct.new(
         :account_limits,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_limits
         #   An account limit structure that contain a list of AWS CloudFormation
@@ -643,10 +669,12 @@ module Aws
       #         stack_name: "StackNameOrId",
       #         next_token: "NextToken",
       #       }
-      class DescribeChangeSetInput < Aws::Structure.new(
+      class DescribeChangeSetInput < Struct.new(
         :change_set_name,
         :stack_name,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_set_name
         #   The name or Amazon Resource Name (ARN) of the change set that you
@@ -666,7 +694,7 @@ module Aws
       end
 
       # The output for the DescribeChangeSet action.
-      class DescribeChangeSetOutput < Aws::Structure.new(
+      class DescribeChangeSetOutput < Struct.new(
         :change_set_name,
         :change_set_id,
         :stack_id,
@@ -682,6 +710,8 @@ module Aws
         :tags,
         :changes,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_set_name
         #   The name of the change set.
@@ -772,9 +802,11 @@ module Aws
       #         stack_name: "StackName",
       #         next_token: "NextToken",
       #       }
-      class DescribeStackEventsInput < Aws::Structure.new(
+      class DescribeStackEventsInput < Struct.new(
         :stack_name,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack,
@@ -796,9 +828,11 @@ module Aws
       end
 
       # The output for a DescribeStackEvents action.
-      class DescribeStackEventsOutput < Aws::Structure.new(
+      class DescribeStackEventsOutput < Struct.new(
         :stack_events,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_events
         #   A list of `StackEvents` structures.
@@ -820,9 +854,11 @@ module Aws
       #         stack_name: "StackName", # required
       #         logical_resource_id: "LogicalResourceId", # required
       #       }
-      class DescribeStackResourceInput < Aws::Structure.new(
+      class DescribeStackResourceInput < Struct.new(
         :stack_name,
         :logical_resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack,
@@ -845,8 +881,10 @@ module Aws
       end
 
       # The output for a DescribeStackResource action.
-      class DescribeStackResourceOutput < Aws::Structure.new(
+      class DescribeStackResourceOutput < Struct.new(
         :stack_resource_detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_resource_detail
         #   A `StackResourceDetail` structure containing the description of the
@@ -864,10 +902,12 @@ module Aws
       #         logical_resource_id: "LogicalResourceId",
       #         physical_resource_id: "PhysicalResourceId",
       #       }
-      class DescribeStackResourcesInput < Aws::Structure.new(
+      class DescribeStackResourcesInput < Struct.new(
         :stack_name,
         :logical_resource_id,
         :physical_resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack,
@@ -909,8 +949,10 @@ module Aws
       end
 
       # The output for a DescribeStackResources action.
-      class DescribeStackResourcesOutput < Aws::Structure.new(
+      class DescribeStackResourcesOutput < Struct.new(
         :stack_resources)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_resources
         #   A list of `StackResource` structures.
@@ -926,9 +968,11 @@ module Aws
       #         stack_name: "StackName",
       #         next_token: "NextToken",
       #       }
-      class DescribeStacksInput < Aws::Structure.new(
+      class DescribeStacksInput < Struct.new(
         :stack_name,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack,
@@ -950,9 +994,11 @@ module Aws
       end
 
       # The output for a DescribeStacks action.
-      class DescribeStacksOutput < Aws::Structure.new(
+      class DescribeStacksOutput < Struct.new(
         :stacks,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stacks
         #   A list of stack structures.
@@ -981,10 +1027,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class EstimateTemplateCostInput < Aws::Structure.new(
+      class EstimateTemplateCostInput < Struct.new(
         :template_body,
         :template_url,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] template_body
         #   Structure containing the template body with a minimum length of 1
@@ -1020,8 +1068,10 @@ module Aws
       end
 
       # The output for a EstimateTemplateCost action.
-      class EstimateTemplateCostOutput < Aws::Structure.new(
+      class EstimateTemplateCostOutput < Struct.new(
         :url)
+
+        include Aws::Structure
 
         # @!attribute [rw] url
         #   An AWS Simple Monthly Calculator URL with a query string that
@@ -1038,9 +1088,11 @@ module Aws
       #         change_set_name: "ChangeSetNameOrId", # required
       #         stack_name: "StackNameOrId",
       #       }
-      class ExecuteChangeSetInput < Aws::Structure.new(
+      class ExecuteChangeSetInput < Struct.new(
         :change_set_name,
         :stack_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_set_name
         #   The name or ARN of the change set that you want use to update the
@@ -1064,8 +1116,10 @@ module Aws
       #       {
       #         stack_name: "StackName", # required
       #       }
-      class GetStackPolicyInput < Aws::Structure.new(
+      class GetStackPolicyInput < Struct.new(
         :stack_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or unique stack ID that is associated with the stack whose
@@ -1075,8 +1129,10 @@ module Aws
       end
 
       # The output for the GetStackPolicy action.
-      class GetStackPolicyOutput < Aws::Structure.new(
+      class GetStackPolicyOutput < Struct.new(
         :stack_policy_body)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_policy_body
         #   Structure containing the stack policy body. (For more information,
@@ -1097,8 +1153,10 @@ module Aws
       #       {
       #         stack_name: "StackName", # required
       #       }
-      class GetTemplateInput < Aws::Structure.new(
+      class GetTemplateInput < Struct.new(
         :stack_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack,
@@ -1115,8 +1173,10 @@ module Aws
       end
 
       # The output for GetTemplate action.
-      class GetTemplateOutput < Aws::Structure.new(
+      class GetTemplateOutput < Struct.new(
         :template_body)
+
+        include Aws::Structure
 
         # @!attribute [rw] template_body
         #   Structure containing the template body. (For more information, go to
@@ -1138,10 +1198,12 @@ module Aws
       #         template_url: "TemplateURL",
       #         stack_name: "StackNameOrId",
       #       }
-      class GetTemplateSummaryInput < Aws::Structure.new(
+      class GetTemplateSummaryInput < Struct.new(
         :template_body,
         :template_url,
         :stack_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] template_body
         #   Structure containing the template body with a minimum length of 1
@@ -1184,7 +1246,7 @@ module Aws
       end
 
       # The output for the GetTemplateSummary action.
-      class GetTemplateSummaryOutput < Aws::Structure.new(
+      class GetTemplateSummaryOutput < Struct.new(
         :parameters,
         :description,
         :capabilities,
@@ -1192,6 +1254,8 @@ module Aws
         :resource_types,
         :version,
         :metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameters
         #   A list of parameter declarations that describe various properties
@@ -1249,9 +1313,11 @@ module Aws
       #         stack_name: "StackNameOrId", # required
       #         next_token: "NextToken",
       #       }
-      class ListChangeSetsInput < Aws::Structure.new(
+      class ListChangeSetsInput < Struct.new(
         :stack_name,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the Amazon Resource Name (ARN) of the stack for which
@@ -1266,9 +1332,11 @@ module Aws
       end
 
       # The output for the ListChangeSets action.
-      class ListChangeSetsOutput < Aws::Structure.new(
+      class ListChangeSetsOutput < Struct.new(
         :summaries,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] summaries
         #   A list of `ChangeSetSummary` structures that provides the ID and
@@ -1290,9 +1358,11 @@ module Aws
       #         stack_name: "StackName", # required
       #         next_token: "NextToken",
       #       }
-      class ListStackResourcesInput < Aws::Structure.new(
+      class ListStackResourcesInput < Struct.new(
         :stack_name,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or the unique stack ID that is associated with the stack,
@@ -1314,9 +1384,11 @@ module Aws
       end
 
       # The output for a ListStackResources action.
-      class ListStackResourcesOutput < Aws::Structure.new(
+      class ListStackResourcesOutput < Struct.new(
         :stack_resource_summaries,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_resource_summaries
         #   A list of `StackResourceSummary` structures.
@@ -1338,9 +1410,11 @@ module Aws
       #         next_token: "NextToken",
       #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE
       #       }
-      class ListStacksInput < Aws::Structure.new(
+      class ListStacksInput < Struct.new(
         :next_token,
         :stack_status_filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   A string that identifies the next page of stacks that you want to
@@ -1357,9 +1431,11 @@ module Aws
       end
 
       # The output for ListStacks action.
-      class ListStacksOutput < Aws::Structure.new(
+      class ListStacksOutput < Struct.new(
         :stack_summaries,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_summaries
         #   A list of `StackSummary` structures containing information about the
@@ -1375,10 +1451,12 @@ module Aws
       end
 
       # The Output data type.
-      class Output < Aws::Structure.new(
+      class Output < Struct.new(
         :output_key,
         :output_value,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] output_key
         #   The key associated with the output.
@@ -1403,10 +1481,12 @@ module Aws
       #         parameter_value: "ParameterValue",
       #         use_previous_value: false,
       #       }
-      class Parameter < Aws::Structure.new(
+      class Parameter < Struct.new(
         :parameter_key,
         :parameter_value,
         :use_previous_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_key
         #   The key associated with the parameter. If you don\'t specify a key
@@ -1430,8 +1510,10 @@ module Aws
       # values. Although other constraints might be defined in the stack
       # template, AWS CloudFormation returns only the `AllowedValues`
       # property.
-      class ParameterConstraints < Aws::Structure.new(
+      class ParameterConstraints < Struct.new(
         :allowed_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] allowed_values
         #   A list of values that are permitted for a parameter.
@@ -1440,13 +1522,15 @@ module Aws
       end
 
       # The ParameterDeclaration data type.
-      class ParameterDeclaration < Aws::Structure.new(
+      class ParameterDeclaration < Struct.new(
         :parameter_key,
         :default_value,
         :parameter_type,
         :no_echo,
         :description,
         :parameter_constraints)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_key
         #   The name that is associated with the parameter.
@@ -1479,7 +1563,7 @@ module Aws
       # The `ResourceChange` structure describes the resource and the action
       # that AWS CloudFormation will perform on it if you execute this change
       # set.
-      class ResourceChange < Aws::Structure.new(
+      class ResourceChange < Struct.new(
         :action,
         :logical_resource_id,
         :physical_resource_id,
@@ -1487,6 +1571,8 @@ module Aws
         :replacement,
         :scope,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   The action that AWS CloudFormation takes on the resource, such as
@@ -1541,11 +1627,13 @@ module Aws
       # For a resource with `Modify` as the action, the `ResourceChange`
       # structure describes the changes AWS CloudFormation will make to that
       # resource.
-      class ResourceChangeDetail < Aws::Structure.new(
+      class ResourceChangeDetail < Struct.new(
         :target,
         :evaluation,
         :change_source,
         :causing_entity)
+
+        include Aws::Structure
 
         # @!attribute [rw] target
         #   A `ResourceTargetDefinition` structure that describes the field that
@@ -1617,10 +1705,12 @@ module Aws
 
       # The field that AWS CloudFormation will change, such as the name of a
       # resource\'s property, and whether the resource will be recreated.
-      class ResourceTargetDefinition < Aws::Structure.new(
+      class ResourceTargetDefinition < Struct.new(
         :attribute,
         :name,
         :requires_recreation)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute
         #   Indicates which resource attribute is triggering this update, such
@@ -1656,10 +1746,12 @@ module Aws
       #         stack_policy_body: "StackPolicyBody",
       #         stack_policy_url: "StackPolicyURL",
       #       }
-      class SetStackPolicyInput < Aws::Structure.new(
+      class SetStackPolicyInput < Struct.new(
         :stack_name,
         :stack_policy_body,
         :stack_policy_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or unique stack ID that you want to associate a policy
@@ -1696,11 +1788,13 @@ module Aws
       #         unique_id: "ResourceSignalUniqueId", # required
       #         status: "SUCCESS", # required, accepts SUCCESS, FAILURE
       #       }
-      class SignalResourceInput < Aws::Structure.new(
+      class SignalResourceInput < Struct.new(
         :stack_name,
         :logical_resource_id,
         :unique_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The stack name or unique stack ID that includes the resource that
@@ -1729,7 +1823,7 @@ module Aws
       end
 
       # The Stack data type.
-      class Stack < Aws::Structure.new(
+      class Stack < Struct.new(
         :stack_id,
         :stack_name,
         :description,
@@ -1744,6 +1838,8 @@ module Aws
         :capabilities,
         :outputs,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   Unique identifier of the stack.
@@ -1809,7 +1905,7 @@ module Aws
       end
 
       # The StackEvent data type.
-      class StackEvent < Aws::Structure.new(
+      class StackEvent < Struct.new(
         :stack_id,
         :event_id,
         :stack_name,
@@ -1820,6 +1916,8 @@ module Aws
         :resource_status,
         :resource_status_reason,
         :resource_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   The unique ID name of the instance of the stack.
@@ -1870,7 +1968,7 @@ module Aws
       end
 
       # The StackResource data type.
-      class StackResource < Aws::Structure.new(
+      class StackResource < Struct.new(
         :stack_name,
         :stack_id,
         :logical_resource_id,
@@ -1880,6 +1978,8 @@ module Aws
         :resource_status,
         :resource_status_reason,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name associated with the stack.
@@ -1926,7 +2026,7 @@ module Aws
       end
 
       # Contains detailed information about the specified stack resource.
-      class StackResourceDetail < Aws::Structure.new(
+      class StackResourceDetail < Struct.new(
         :stack_name,
         :stack_id,
         :logical_resource_id,
@@ -1937,6 +2037,8 @@ module Aws
         :resource_status_reason,
         :description,
         :metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name associated with the stack.
@@ -1993,13 +2095,15 @@ module Aws
       end
 
       # Contains high-level information about the specified stack resource.
-      class StackResourceSummary < Aws::Structure.new(
+      class StackResourceSummary < Struct.new(
         :logical_resource_id,
         :physical_resource_id,
         :resource_type,
         :last_updated_timestamp,
         :resource_status,
         :resource_status_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] logical_resource_id
         #   The logical name of the resource specified in the template.
@@ -2034,7 +2138,7 @@ module Aws
       end
 
       # The StackSummary Data Type
-      class StackSummary < Aws::Structure.new(
+      class StackSummary < Struct.new(
         :stack_id,
         :stack_name,
         :template_description,
@@ -2043,6 +2147,8 @@ module Aws
         :deletion_time,
         :stack_status,
         :stack_status_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   Unique stack identifier.
@@ -2088,9 +2194,11 @@ module Aws
       #         key: "TagKey",
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   *Required*. A string used to identify this tag. You can specify a
@@ -2106,11 +2214,13 @@ module Aws
       end
 
       # The TemplateParameter data type.
-      class TemplateParameter < Aws::Structure.new(
+      class TemplateParameter < Struct.new(
         :parameter_key,
         :default_value,
         :no_echo,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_key
         #   The name associated with the parameter.
@@ -2161,7 +2271,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateStackInput < Aws::Structure.new(
+      class UpdateStackInput < Struct.new(
         :stack_name,
         :template_body,
         :template_url,
@@ -2175,6 +2285,8 @@ module Aws
         :stack_policy_url,
         :notification_arns,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_name
         #   The name or unique stack ID of the stack to update.
@@ -2343,8 +2455,10 @@ module Aws
       end
 
       # The output for an UpdateStack action.
-      class UpdateStackOutput < Aws::Structure.new(
+      class UpdateStackOutput < Struct.new(
         :stack_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stack_id
         #   Unique identifier of the stack.
@@ -2360,9 +2474,11 @@ module Aws
       #         template_body: "TemplateBody",
       #         template_url: "TemplateURL",
       #       }
-      class ValidateTemplateInput < Aws::Structure.new(
+      class ValidateTemplateInput < Struct.new(
         :template_body,
         :template_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] template_body
         #   Structure containing the template body with a minimum length of 1
@@ -2394,11 +2510,13 @@ module Aws
       end
 
       # The output for ValidateTemplate action.
-      class ValidateTemplateOutput < Aws::Structure.new(
+      class ValidateTemplateOutput < Struct.new(
         :parameters,
         :description,
         :capabilities,
         :capabilities_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameters
         #   A list of `TemplateParameter` structures.

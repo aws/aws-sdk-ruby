@@ -10,9 +10,11 @@ module Aws
     module Types
 
       # A container for facet information.
-      class Bucket < Aws::Structure.new(
+      class Bucket < Struct.new(
         :value,
         :count)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The facet value being counted.
@@ -26,8 +28,10 @@ module Aws
       end
 
       # A container for the calculated facet values and counts.
-      class BucketInfo < Aws::Structure.new(
+      class BucketInfo < Struct.new(
         :buckets)
+
+        include Aws::Structure
 
         # @!attribute [rw] buckets
         #   A list of the calculated facet values and counts.
@@ -37,8 +41,10 @@ module Aws
 
       # A warning returned by the document service when an issue is discovered
       # while processing an upload request.
-      class DocumentServiceWarning < Aws::Structure.new(
+      class DocumentServiceWarning < Struct.new(
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] message
         #   The description for a warning returned by the document service.
@@ -47,7 +53,7 @@ module Aws
       end
 
       # The statistics for a field calculated in the request.
-      class FieldStats < Aws::Structure.new(
+      class FieldStats < Struct.new(
         :min,
         :max,
         :count,
@@ -56,6 +62,8 @@ module Aws
         :sum_of_squares,
         :mean,
         :stddev)
+
+        include Aws::Structure
 
         # @!attribute [rw] min
         #   The minimum value found in the specified field in the result set.
@@ -130,11 +138,13 @@ module Aws
       end
 
       # Information about a document that matches the search request.
-      class Hit < Aws::Structure.new(
+      class Hit < Struct.new(
         :id,
         :fields,
         :exprs,
         :highlights)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The document ID of a document that matches the search request.
@@ -157,11 +167,13 @@ module Aws
       end
 
       # The collection of documents that match the search request.
-      class Hits < Aws::Structure.new(
+      class Hits < Struct.new(
         :found,
         :start,
         :cursor,
         :hit)
+
+        include Aws::Structure
 
         # @!attribute [rw] found
         #   The total number of documents that match the search request.
@@ -202,7 +214,7 @@ module Aws
       #         start: 1,
       #         stats: "Stat",
       #       }
-      class SearchRequest < Aws::Structure.new(
+      class SearchRequest < Struct.new(
         :cursor,
         :expr,
         :facet,
@@ -217,6 +229,8 @@ module Aws
         :sort,
         :start,
         :stats)
+
+        include Aws::Structure
 
         # @!attribute [rw] cursor
         #   Retrieves a cursor value you can use to page through large result
@@ -604,11 +618,13 @@ module Aws
       # The result of a `Search` request. Contains the documents that match
       # the specified search criteria and any requested fields, highlights,
       # and facet information.
-      class SearchResponse < Aws::Structure.new(
+      class SearchResponse < Struct.new(
         :status,
         :hits,
         :facets,
         :stats)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status information returned for the search request.
@@ -630,9 +646,11 @@ module Aws
 
       # Contains the resource id (`rid`) and the time it took to process the
       # request (`timems`).
-      class SearchStatus < Aws::Structure.new(
+      class SearchStatus < Struct.new(
         :timems,
         :rid)
+
+        include Aws::Structure
 
         # @!attribute [rw] timems
         #   How long it took to process the request, in milliseconds.
@@ -646,10 +664,12 @@ module Aws
 
       # Container for the suggestion information returned in a
       # `SuggestResponse`.
-      class SuggestModel < Aws::Structure.new(
+      class SuggestModel < Struct.new(
         :query,
         :found,
         :suggestions)
+
+        include Aws::Structure
 
         # @!attribute [rw] query
         #   The query string specified in the suggest request.
@@ -674,10 +694,12 @@ module Aws
       #         suggester: "Suggester", # required
       #         size: 1,
       #       }
-      class SuggestRequest < Aws::Structure.new(
+      class SuggestRequest < Struct.new(
         :query,
         :suggester,
         :size)
+
+        include Aws::Structure
 
         # @!attribute [rw] query
         #   Specifies the string for which you want to get suggestions.
@@ -695,9 +717,11 @@ module Aws
       end
 
       # Contains the response to a `Suggest` request.
-      class SuggestResponse < Aws::Structure.new(
+      class SuggestResponse < Struct.new(
         :status,
         :suggest)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of a `SuggestRequest`. Contains the resource ID (`rid`)
@@ -712,9 +736,11 @@ module Aws
 
       # Contains the resource id (`rid`) and the time it took to process the
       # request (`timems`).
-      class SuggestStatus < Aws::Structure.new(
+      class SuggestStatus < Struct.new(
         :timems,
         :rid)
+
+        include Aws::Structure
 
         # @!attribute [rw] timems
         #   How long it took to process the request, in milliseconds.
@@ -728,10 +754,12 @@ module Aws
 
       # An autocomplete suggestion that matches the query string specified in
       # a `SuggestRequest`.
-      class SuggestionMatch < Aws::Structure.new(
+      class SuggestionMatch < Struct.new(
         :suggestion,
         :score,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] suggestion
         #   The string that matches the query string specified in the
@@ -756,9 +784,11 @@ module Aws
       #         documents: "data", # required
       #         content_type: "application/json", # required, accepts application/json, application/xml
       #       }
-      class UploadDocumentsRequest < Aws::Structure.new(
+      class UploadDocumentsRequest < Struct.new(
         :documents,
         :content_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] documents
         #   A batch of documents formatted in JSON or HTML.
@@ -775,11 +805,13 @@ module Aws
       end
 
       # Contains the response to an `UploadDocuments` request.
-      class UploadDocumentsResponse < Aws::Structure.new(
+      class UploadDocumentsResponse < Struct.new(
         :status,
         :adds,
         :deletes,
         :warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of an `UploadDocumentsRequest`.

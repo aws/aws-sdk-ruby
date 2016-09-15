@@ -52,10 +52,12 @@ module Aws
       #           },
       #         },
       #       }
-      class AddApplicationInputRequest < Aws::Structure.new(
+      class AddApplicationInputRequest < Struct.new(
         :application_name,
         :current_application_version_id,
         :input)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of your existing Amazon Kinesis Analytics application to which
@@ -104,10 +106,12 @@ module Aws
       #           },
       #         },
       #       }
-      class AddApplicationOutputRequest < Aws::Structure.new(
+      class AddApplicationOutputRequest < Struct.new(
         :application_name,
         :current_application_version_id,
         :output)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the application to which you want to add the output
@@ -170,10 +174,12 @@ module Aws
       #           },
       #         },
       #       }
-      class AddApplicationReferenceDataSourceRequest < Aws::Structure.new(
+      class AddApplicationReferenceDataSourceRequest < Struct.new(
         :application_name,
         :current_application_version_id,
         :reference_data_source)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of an existing application.
@@ -203,7 +209,7 @@ module Aws
       # Provides a description of the application, including the application
       # Amazon Resource Name (ARN), status, latest version, and input and
       # output configuration.
-      class ApplicationDetail < Aws::Structure.new(
+      class ApplicationDetail < Struct.new(
         :application_name,
         :application_description,
         :application_arn,
@@ -215,6 +221,8 @@ module Aws
         :reference_data_source_descriptions,
         :application_code,
         :application_version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the application.
@@ -280,10 +288,12 @@ module Aws
 
       # Provides application summary information, including the application
       # Amazon Resource Name (ARN), name, and status.
-      class ApplicationSummary < Aws::Structure.new(
+      class ApplicationSummary < Struct.new(
         :application_name,
         :application_arn,
         :application_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the application.
@@ -396,11 +406,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class ApplicationUpdate < Aws::Structure.new(
+      class ApplicationUpdate < Struct.new(
         :input_updates,
         :application_code_update,
         :output_updates,
         :reference_data_source_updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] input_updates
         #   Describes application input configuration updates.
@@ -435,9 +447,11 @@ module Aws
       #         record_row_delimiter: "RecordRowDelimiter", # required
       #         record_column_delimiter: "RecordColumnDelimiter", # required
       #       }
-      class CSVMappingParameters < Aws::Structure.new(
+      class CSVMappingParameters < Struct.new(
         :record_row_delimiter,
         :record_column_delimiter)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_row_delimiter
         #   Row delimiter. For example, in a CSV format, *\'\\n\'* is the
@@ -514,12 +528,14 @@ module Aws
       #         ],
       #         application_code: "ApplicationCode",
       #       }
-      class CreateApplicationRequest < Aws::Structure.new(
+      class CreateApplicationRequest < Struct.new(
         :application_name,
         :application_description,
         :inputs,
         :outputs,
         :application_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of your Amazon Kinesis Analytics application (for example,
@@ -588,8 +604,10 @@ module Aws
       end
 
       # TBD
-      class CreateApplicationResponse < Aws::Structure.new(
+      class CreateApplicationResponse < Struct.new(
         :application_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_summary
         #   In response to your `CreateApplication` request, Amazon Kinesis
@@ -608,10 +626,12 @@ module Aws
       #         current_application_version_id: 1, # required
       #         output_id: "Id", # required
       #       }
-      class DeleteApplicationOutputRequest < Aws::Structure.new(
+      class DeleteApplicationOutputRequest < Struct.new(
         :application_name,
         :current_application_version_id,
         :output_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Amazon Kinesis Analytics application name.
@@ -646,10 +666,12 @@ module Aws
       #         current_application_version_id: 1, # required
       #         reference_id: "Id", # required
       #       }
-      class DeleteApplicationReferenceDataSourceRequest < Aws::Structure.new(
+      class DeleteApplicationReferenceDataSourceRequest < Struct.new(
         :application_name,
         :current_application_version_id,
         :reference_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of an existing application.
@@ -681,9 +703,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         create_timestamp: Time.now, # required
       #       }
-      class DeleteApplicationRequest < Aws::Structure.new(
+      class DeleteApplicationRequest < Struct.new(
         :application_name,
         :create_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the Amazon Kinesis Analytics application to delete.
@@ -703,8 +727,10 @@ module Aws
       #       {
       #         application_name: "ApplicationName", # required
       #       }
-      class DescribeApplicationRequest < Aws::Structure.new(
+      class DescribeApplicationRequest < Struct.new(
         :application_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the application.
@@ -712,8 +738,10 @@ module Aws
 
       end
 
-      class DescribeApplicationResponse < Aws::Structure.new(
+      class DescribeApplicationResponse < Struct.new(
         :application_detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_detail
         #   Provides a description of the application, such as the application
@@ -735,8 +763,10 @@ module Aws
       #       {
       #         record_format_type: "JSON", # accepts JSON, CSV
       #       }
-      class DestinationSchema < Aws::Structure.new(
+      class DestinationSchema < Struct.new(
         :record_format_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_format_type
         #   Specifies the format of the records on the output stream.
@@ -754,10 +784,12 @@ module Aws
       #           input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
       #         },
       #       }
-      class DiscoverInputSchemaRequest < Aws::Structure.new(
+      class DiscoverInputSchemaRequest < Struct.new(
         :resource_arn,
         :role_arn,
         :input_starting_position_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   Amazon Resource Name (ARN) of the streaming source.
@@ -775,10 +807,12 @@ module Aws
 
       end
 
-      class DiscoverInputSchemaResponse < Aws::Structure.new(
+      class DiscoverInputSchemaResponse < Struct.new(
         :input_schema,
         :parsed_input_records,
         :raw_input_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] input_schema
         #   Schema inferred from the streaming source. It identifies the format
@@ -845,12 +879,14 @@ module Aws
       #           ],
       #         },
       #       }
-      class Input < Aws::Structure.new(
+      class Input < Struct.new(
         :name_prefix,
         :kinesis_streams_input,
         :kinesis_firehose_input,
         :input_parallelism,
         :input_schema)
+
+        include Aws::Structure
 
         # @!attribute [rw] name_prefix
         #   Name prefix to use when creating in-application stream. Suppose you
@@ -909,9 +945,11 @@ module Aws
       #           input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
       #         },
       #       }
-      class InputConfiguration < Aws::Structure.new(
+      class InputConfiguration < Struct.new(
         :id,
         :input_starting_position_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Input source ID. You can get this ID by calling the
@@ -931,7 +969,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
-      class InputDescription < Aws::Structure.new(
+      class InputDescription < Struct.new(
         :input_id,
         :name_prefix,
         :in_app_stream_names,
@@ -940,6 +978,8 @@ module Aws
         :input_schema,
         :input_parallelism,
         :input_starting_position_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] input_id
         #   Input ID associated with the application input. This is the ID that
@@ -1000,8 +1040,10 @@ module Aws
       #       {
       #         count: 1,
       #       }
-      class InputParallelism < Aws::Structure.new(
+      class InputParallelism < Struct.new(
         :count)
+
+        include Aws::Structure
 
         # @!attribute [rw] count
         #   Number of in-application streams to create. For more information,
@@ -1021,8 +1063,10 @@ module Aws
       #       {
       #         count_update: 1,
       #       }
-      class InputParallelismUpdate < Aws::Structure.new(
+      class InputParallelismUpdate < Struct.new(
         :count_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] count_update
         #   Number of in-application streams to create for the specified
@@ -1057,10 +1101,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class InputSchemaUpdate < Aws::Structure.new(
+      class InputSchemaUpdate < Struct.new(
         :record_format_update,
         :record_encoding_update,
         :record_column_updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_format_update
         #   Specifies the format of the records on the streaming source.
@@ -1087,8 +1133,10 @@ module Aws
       #       {
       #         input_starting_position: "NOW", # accepts NOW, TRIM_HORIZON, LAST_STOPPED_POINT
       #       }
-      class InputStartingPositionConfiguration < Aws::Structure.new(
+      class InputStartingPositionConfiguration < Struct.new(
         :input_starting_position)
+
+        include Aws::Structure
 
         # @!attribute [rw] input_starting_position
         #   The starting position on the stream.
@@ -1149,13 +1197,15 @@ module Aws
       #           count_update: 1,
       #         },
       #       }
-      class InputUpdate < Aws::Structure.new(
+      class InputUpdate < Struct.new(
         :input_id,
         :name_prefix_update,
         :kinesis_streams_input_update,
         :kinesis_firehose_input_update,
         :input_schema_update,
         :input_parallelism_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] input_id
         #   Input ID of the application input to be updated.
@@ -1198,8 +1248,10 @@ module Aws
       #       {
       #         record_row_path: "RecordRowPath", # required
       #       }
-      class JSONMappingParameters < Aws::Structure.new(
+      class JSONMappingParameters < Struct.new(
         :record_row_path)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_row_path
         #   Path to the top-level parent that contains the records.
@@ -1224,9 +1276,11 @@ module Aws
       #         resource_arn: "ResourceARN", # required
       #         role_arn: "RoleARN", # required
       #       }
-      class KinesisFirehoseInput < Aws::Structure.new(
+      class KinesisFirehoseInput < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   ARN of the input Firehose delivery stream.
@@ -1243,9 +1297,11 @@ module Aws
       # Describes the Amazon Kinesis Firehose delivery stream that is
       # configured as the streaming source in the application input
       # configuration.
-      class KinesisFirehoseInputDescription < Aws::Structure.new(
+      class KinesisFirehoseInputDescription < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery
@@ -1269,9 +1325,11 @@ module Aws
       #         resource_arn_update: "ResourceARN",
       #         role_arn_update: "RoleARN",
       #       }
-      class KinesisFirehoseInputUpdate < Aws::Structure.new(
+      class KinesisFirehoseInputUpdate < Struct.new(
         :resource_arn_update,
         :role_arn_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn_update
         #   ARN of the input Amazon Kinesis Firehose delivery stream to read.
@@ -1296,9 +1354,11 @@ module Aws
       #         resource_arn: "ResourceARN", # required
       #         role_arn: "RoleARN", # required
       #       }
-      class KinesisFirehoseOutput < Aws::Structure.new(
+      class KinesisFirehoseOutput < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   ARN of the destination Amazon Kinesis Firehose delivery stream to
@@ -1315,9 +1375,11 @@ module Aws
 
       # For an application output, describes the Amazon Kinesis Firehose
       # delivery stream configured as its destination.
-      class KinesisFirehoseOutputDescription < Aws::Structure.new(
+      class KinesisFirehoseOutputDescription < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery
@@ -1341,9 +1403,11 @@ module Aws
       #         resource_arn_update: "ResourceARN",
       #         role_arn_update: "RoleARN",
       #       }
-      class KinesisFirehoseOutputUpdate < Aws::Structure.new(
+      class KinesisFirehoseOutputUpdate < Struct.new(
         :resource_arn_update,
         :role_arn_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn_update
         #   Amazon Resource Name (ARN) of the Amazon Kinesis Firehose delivery
@@ -1368,9 +1432,11 @@ module Aws
       #         resource_arn: "ResourceARN", # required
       #         role_arn: "RoleARN", # required
       #       }
-      class KinesisStreamsInput < Aws::Structure.new(
+      class KinesisStreamsInput < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   ARN of the input Amazon Kinesis stream to read.
@@ -1386,9 +1452,11 @@ module Aws
 
       # Describes the Amazon Kinesis stream that is configured as the
       # streaming source in the application input configuration.
-      class KinesisStreamsInputDescription < Aws::Structure.new(
+      class KinesisStreamsInputDescription < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   Amazon Resource Name (ARN) of the Amazon Kinesis stream.
@@ -1410,9 +1478,11 @@ module Aws
       #         resource_arn_update: "ResourceARN",
       #         role_arn_update: "RoleARN",
       #       }
-      class KinesisStreamsInputUpdate < Aws::Structure.new(
+      class KinesisStreamsInputUpdate < Struct.new(
         :resource_arn_update,
         :role_arn_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn_update
         #   Amazon Resource Name (ARN) of the input Amazon Kinesis stream to
@@ -1438,9 +1508,11 @@ module Aws
       #         resource_arn: "ResourceARN", # required
       #         role_arn: "RoleARN", # required
       #       }
-      class KinesisStreamsOutput < Aws::Structure.new(
+      class KinesisStreamsOutput < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   ARN of the destination Amazon Kinesis stream to write to.
@@ -1456,9 +1528,11 @@ module Aws
 
       # For an application output, describes the Amazon Kinesis stream
       # configured as its destination.
-      class KinesisStreamsOutputDescription < Aws::Structure.new(
+      class KinesisStreamsOutputDescription < Struct.new(
         :resource_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   Amazon Resource Name (ARN) of the Amazon Kinesis stream.
@@ -1481,9 +1555,11 @@ module Aws
       #         resource_arn_update: "ResourceARN",
       #         role_arn_update: "RoleARN",
       #       }
-      class KinesisStreamsOutputUpdate < Aws::Structure.new(
+      class KinesisStreamsOutputUpdate < Struct.new(
         :resource_arn_update,
         :role_arn_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn_update
         #   Amazon Resource Name (ARN) of the Amazon Kinesis stream where you
@@ -1505,9 +1581,11 @@ module Aws
       #         limit: 1,
       #         exclusive_start_application_name: "ApplicationName",
       #       }
-      class ListApplicationsRequest < Aws::Structure.new(
+      class ListApplicationsRequest < Struct.new(
         :limit,
         :exclusive_start_application_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   Maximum number of applications to list.
@@ -1523,9 +1601,11 @@ module Aws
 
       end
 
-      class ListApplicationsResponse < Aws::Structure.new(
+      class ListApplicationsResponse < Struct.new(
         :application_summaries,
         :has_more_applications)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_summaries
         #   List of `ApplicationSummary` objects.
@@ -1553,9 +1633,11 @@ module Aws
       #           record_column_delimiter: "RecordColumnDelimiter", # required
       #         },
       #       }
-      class MappingParameters < Aws::Structure.new(
+      class MappingParameters < Struct.new(
         :json_mapping_parameters,
         :csv_mapping_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] json_mapping_parameters
         #   Provides additional mapping information when JSON is the record
@@ -1595,11 +1677,13 @@ module Aws
       #           record_format_type: "JSON", # accepts JSON, CSV
       #         },
       #       }
-      class Output < Aws::Structure.new(
+      class Output < Struct.new(
         :name,
         :kinesis_streams_output,
         :kinesis_firehose_output,
         :destination_schema)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Name of the in-application stream.
@@ -1630,12 +1714,14 @@ module Aws
       # in-application stream name and the destination where the stream data
       # is written. The destination can be an Amazon Kinesis stream or an
       # Amazon Kinesis Firehose delivery stream.
-      class OutputDescription < Aws::Structure.new(
+      class OutputDescription < Struct.new(
         :output_id,
         :name,
         :kinesis_streams_output_description,
         :kinesis_firehose_output_description,
         :destination_schema)
+
+        include Aws::Structure
 
         # @!attribute [rw] output_id
         #   A unique identifier for the output configuration.
@@ -1681,12 +1767,14 @@ module Aws
       #           record_format_type: "JSON", # accepts JSON, CSV
       #         },
       #       }
-      class OutputUpdate < Aws::Structure.new(
+      class OutputUpdate < Struct.new(
         :output_id,
         :name_update,
         :kinesis_streams_output_update,
         :kinesis_firehose_output_update,
         :destination_schema_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] output_id
         #   Identifies the specific output configuration that you want to
@@ -1733,10 +1821,12 @@ module Aws
       #         mapping: "RecordColumnMapping",
       #         sql_type: "RecordColumnSqlType", # required
       #       }
-      class RecordColumn < Aws::Structure.new(
+      class RecordColumn < Struct.new(
         :name,
         :mapping,
         :sql_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Name of the column created in the in-application input stream or
@@ -1772,9 +1862,11 @@ module Aws
       #           },
       #         },
       #       }
-      class RecordFormat < Aws::Structure.new(
+      class RecordFormat < Struct.new(
         :record_format_type,
         :mapping_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_format_type
         #   The type of record format.
@@ -1827,10 +1919,12 @@ module Aws
       #           ],
       #         },
       #       }
-      class ReferenceDataSource < Aws::Structure.new(
+      class ReferenceDataSource < Struct.new(
         :table_name,
         :s3_reference_data_source,
         :reference_schema)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   Name of the in-application table to create.
@@ -1855,11 +1949,13 @@ module Aws
       end
 
       # Describes the reference data source configured for an application.
-      class ReferenceDataSourceDescription < Aws::Structure.new(
+      class ReferenceDataSourceDescription < Struct.new(
         :reference_id,
         :table_name,
         :s3_reference_data_source_description,
         :reference_schema)
+
+        include Aws::Structure
 
         # @!attribute [rw] reference_id
         #   ID of the reference data source. This is the ID that Amazon Kinesis
@@ -1927,11 +2023,13 @@ module Aws
       #           ],
       #         },
       #       }
-      class ReferenceDataSourceUpdate < Aws::Structure.new(
+      class ReferenceDataSourceUpdate < Struct.new(
         :reference_id,
         :table_name_update,
         :s3_reference_data_source_update,
         :reference_schema_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] reference_id
         #   ID of the reference data source being updated. You can use the
@@ -1971,10 +2069,12 @@ module Aws
       #         file_key: "FileKey", # required
       #         reference_role_arn: "RoleARN", # required
       #       }
-      class S3ReferenceDataSource < Aws::Structure.new(
+      class S3ReferenceDataSource < Struct.new(
         :bucket_arn,
         :file_key,
         :reference_role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket_arn
         #   Amazon Resource Name (ARN) of the S3 bucket.
@@ -1995,10 +2095,12 @@ module Aws
 
       # Provides the bucket name and object key name that stores the reference
       # data.
-      class S3ReferenceDataSourceDescription < Aws::Structure.new(
+      class S3ReferenceDataSourceDescription < Struct.new(
         :bucket_arn,
         :file_key,
         :reference_role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket_arn
         #   Amazon Resource Name (ARN) of the S3 bucket.
@@ -2027,10 +2129,12 @@ module Aws
       #         file_key_update: "FileKey",
       #         reference_role_arn_update: "RoleARN",
       #       }
-      class S3ReferenceDataSourceUpdate < Aws::Structure.new(
+      class S3ReferenceDataSourceUpdate < Struct.new(
         :bucket_arn_update,
         :file_key_update,
         :reference_role_arn_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket_arn_update
         #   Amazon Resource Name (ARN) of the S3 bucket.
@@ -2075,10 +2179,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class SourceSchema < Aws::Structure.new(
+      class SourceSchema < Struct.new(
         :record_format,
         :record_encoding,
         :record_columns)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_format
         #   Specifies the format of the records on the streaming source.
@@ -2109,9 +2215,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class StartApplicationRequest < Aws::Structure.new(
+      class StartApplicationRequest < Struct.new(
         :application_name,
         :input_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the application.
@@ -2134,8 +2242,10 @@ module Aws
       #       {
       #         application_name: "ApplicationName", # required
       #       }
-      class StopApplicationRequest < Aws::Structure.new(
+      class StopApplicationRequest < Struct.new(
         :application_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the running application to stop.
@@ -2244,10 +2354,12 @@ module Aws
       #           ],
       #         },
       #       }
-      class UpdateApplicationRequest < Aws::Structure.new(
+      class UpdateApplicationRequest < Struct.new(
         :application_name,
         :current_application_version_id,
         :application_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   Name of the Kinesis Analytics application to update.

@@ -11,9 +11,11 @@ module Aws
 
       # An object representing a CloudWatch alarm associated with a scaling
       # policy.
-      class Alarm < Aws::Structure.new(
+      class Alarm < Struct.new(
         :alarm_name,
         :alarm_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_name
         #   The name of the alarm.
@@ -34,11 +36,13 @@ module Aws
       #         resource_id: "ResourceIdMaxLen1600", # required
       #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #       }
-      class DeleteScalingPolicyRequest < Aws::Structure.new(
+      class DeleteScalingPolicyRequest < Struct.new(
         :policy_name,
         :service_namespace,
         :resource_id,
         :scalable_dimension)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the scaling policy to delete.
@@ -86,10 +90,12 @@ module Aws
       #         resource_id: "ResourceIdMaxLen1600", # required
       #         scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #       }
-      class DeregisterScalableTargetRequest < Aws::Structure.new(
+      class DeregisterScalableTargetRequest < Struct.new(
         :service_namespace,
         :resource_id,
         :scalable_dimension)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_namespace
         #   The namespace for the AWS service that the scalable target is
@@ -135,12 +141,14 @@ module Aws
       #         max_results: 1,
       #         next_token: "XmlString",
       #       }
-      class DescribeScalableTargetsRequest < Aws::Structure.new(
+      class DescribeScalableTargetsRequest < Struct.new(
         :service_namespace,
         :resource_ids,
         :scalable_dimension,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_namespace
         #   The namespace for the AWS service that the scalable target is
@@ -196,9 +204,11 @@ module Aws
 
       end
 
-      class DescribeScalableTargetsResponse < Aws::Structure.new(
+      class DescribeScalableTargetsResponse < Struct.new(
         :scalable_targets,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] scalable_targets
         #   The list of scalable targets that matches the request parameters.
@@ -224,12 +234,14 @@ module Aws
       #         max_results: 1,
       #         next_token: "XmlString",
       #       }
-      class DescribeScalingActivitiesRequest < Aws::Structure.new(
+      class DescribeScalingActivitiesRequest < Struct.new(
         :service_namespace,
         :resource_id,
         :scalable_dimension,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_namespace
         #   The namespace for the AWS service that the scaling activity is
@@ -285,9 +297,11 @@ module Aws
 
       end
 
-      class DescribeScalingActivitiesResponse < Aws::Structure.new(
+      class DescribeScalingActivitiesResponse < Struct.new(
         :scaling_activities,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] scaling_activities
         #   A list of scaling activity objects.
@@ -314,13 +328,15 @@ module Aws
       #         max_results: 1,
       #         next_token: "XmlString",
       #       }
-      class DescribeScalingPoliciesRequest < Aws::Structure.new(
+      class DescribeScalingPoliciesRequest < Struct.new(
         :policy_names,
         :service_namespace,
         :resource_id,
         :scalable_dimension,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_names
         #   The names of the scaling policies to describe.
@@ -380,9 +396,11 @@ module Aws
 
       end
 
-      class DescribeScalingPoliciesResponse < Aws::Structure.new(
+      class DescribeScalingPoliciesResponse < Struct.new(
         :scaling_policies,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] scaling_policies
         #   A list of scaling policy objects.
@@ -421,13 +439,15 @@ module Aws
       #           metric_aggregation_type: "Average", # accepts Average, Minimum, Maximum
       #         },
       #       }
-      class PutScalingPolicyRequest < Aws::Structure.new(
+      class PutScalingPolicyRequest < Struct.new(
         :policy_name,
         :service_namespace,
         :resource_id,
         :scalable_dimension,
         :policy_type,
         :step_scaling_policy_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the scaling policy.
@@ -478,8 +498,10 @@ module Aws
 
       end
 
-      class PutScalingPolicyResponse < Aws::Structure.new(
+      class PutScalingPolicyResponse < Struct.new(
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the resulting scaling policy.
@@ -498,13 +520,15 @@ module Aws
       #         max_capacity: 1,
       #         role_arn: "ResourceIdMaxLen1600",
       #       }
-      class RegisterScalableTargetRequest < Aws::Structure.new(
+      class RegisterScalableTargetRequest < Struct.new(
         :service_namespace,
         :resource_id,
         :scalable_dimension,
         :min_capacity,
         :max_capacity,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_namespace
         #   The namespace for the AWS service that the scalable target is
@@ -563,7 +587,7 @@ module Aws
       class RegisterScalableTargetResponse < Aws::EmptyStructure; end
 
       # An object representing a scalable target.
-      class ScalableTarget < Aws::Structure.new(
+      class ScalableTarget < Struct.new(
         :service_namespace,
         :resource_id,
         :scalable_dimension,
@@ -571,6 +595,8 @@ module Aws
         :max_capacity,
         :role_arn,
         :creation_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_namespace
         #   The namespace for the AWS service that the scalable target is
@@ -624,7 +650,7 @@ module Aws
       end
 
       # An object representing a scaling activity.
-      class ScalingActivity < Aws::Structure.new(
+      class ScalingActivity < Struct.new(
         :activity_id,
         :service_namespace,
         :resource_id,
@@ -636,6 +662,8 @@ module Aws
         :status_code,
         :status_message,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_id
         #   The unique identifier string for the scaling activity.
@@ -703,7 +731,7 @@ module Aws
       end
 
       # An object representing a scaling policy.
-      class ScalingPolicy < Aws::Structure.new(
+      class ScalingPolicy < Struct.new(
         :policy_arn,
         :policy_name,
         :service_namespace,
@@ -713,6 +741,8 @@ module Aws
         :step_scaling_policy_configuration,
         :alarms,
         :creation_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the scaling policy.
@@ -808,10 +838,12 @@ module Aws
       #         metric_interval_upper_bound: 1.0,
       #         scaling_adjustment: 1, # required
       #       }
-      class StepAdjustment < Aws::Structure.new(
+      class StepAdjustment < Struct.new(
         :metric_interval_lower_bound,
         :metric_interval_upper_bound,
         :scaling_adjustment)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_interval_lower_bound
         #   The lower bound for the difference between the alarm threshold and
@@ -858,12 +890,14 @@ module Aws
       #         cooldown: 1,
       #         metric_aggregation_type: "Average", # accepts Average, Minimum, Maximum
       #       }
-      class StepScalingPolicyConfiguration < Aws::Structure.new(
+      class StepScalingPolicyConfiguration < Struct.new(
         :adjustment_type,
         :step_adjustments,
         :min_adjustment_magnitude,
         :cooldown,
         :metric_aggregation_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] adjustment_type
         #   The adjustment type, which specifies how the `ScalingAdjustment`

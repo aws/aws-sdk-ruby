@@ -28,10 +28,12 @@ module Aws
       #         vault_name: "string", # required
       #         upload_id: "string", # required
       #       }
-      class AbortMultipartUploadInput < Aws::Structure.new(
+      class AbortMultipartUploadInput < Struct.new(
         :account_id,
         :vault_name,
         :upload_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -60,9 +62,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class AbortVaultLockInput < Aws::Structure.new(
+      class AbortVaultLockInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID. This value must match
@@ -91,10 +95,12 @@ module Aws
       #           "TagKey" => "TagValue",
       #         },
       #       }
-      class AddTagsToVaultInput < Aws::Structure.new(
+      class AddTagsToVaultInput < Struct.new(
         :account_id,
         :vault_name,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -126,10 +132,12 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/amazonglacier/latest/dev/api-archive-post.html
       # [2]: http://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
-      class ArchiveCreationOutput < Aws::Structure.new(
+      class ArchiveCreationOutput < Struct.new(
         :location,
         :checksum,
         :archive_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   The relative URI path of the newly added archive resource.
@@ -161,12 +169,14 @@ module Aws
       #         archive_size: 1,
       #         checksum: "string",
       #       }
-      class CompleteMultipartUploadInput < Aws::Structure.new(
+      class CompleteMultipartUploadInput < Struct.new(
         :account_id,
         :vault_name,
         :upload_id,
         :archive_size,
         :checksum)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -210,10 +220,12 @@ module Aws
       #         vault_name: "string", # required
       #         lock_id: "string", # required
       #       }
-      class CompleteVaultLockInput < Aws::Structure.new(
+      class CompleteVaultLockInput < Struct.new(
         :account_id,
         :vault_name,
         :lock_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID. This value must match
@@ -244,9 +256,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class CreateVaultInput < Aws::Structure.new(
+      class CreateVaultInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID. This value must match
@@ -265,8 +279,10 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class CreateVaultOutput < Aws::Structure.new(
+      class CreateVaultOutput < Struct.new(
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   The URI of the vault that was created.
@@ -286,8 +302,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class DataRetrievalPolicy < Aws::Structure.new(
+      class DataRetrievalPolicy < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   The policy rule. Although this is a list type, currently there must
@@ -305,9 +323,11 @@ module Aws
       #         strategy: "string",
       #         bytes_per_hour: 1,
       #       }
-      class DataRetrievalRule < Aws::Structure.new(
+      class DataRetrievalRule < Struct.new(
         :strategy,
         :bytes_per_hour)
+
+        include Aws::Structure
 
         # @!attribute [rw] strategy
         #   The type of data retrieval policy to set.
@@ -334,10 +354,12 @@ module Aws
       #         vault_name: "string", # required
       #         archive_id: "string", # required
       #       }
-      class DeleteArchiveInput < Aws::Structure.new(
+      class DeleteArchiveInput < Struct.new(
         :account_id,
         :vault_name,
         :archive_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -366,9 +388,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class DeleteVaultAccessPolicyInput < Aws::Structure.new(
+      class DeleteVaultAccessPolicyInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -393,9 +417,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class DeleteVaultInput < Aws::Structure.new(
+      class DeleteVaultInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -421,9 +447,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class DeleteVaultNotificationsInput < Aws::Structure.new(
+      class DeleteVaultNotificationsInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -449,10 +477,12 @@ module Aws
       #         vault_name: "string", # required
       #         job_id: "string", # required
       #       }
-      class DescribeJobInput < Aws::Structure.new(
+      class DescribeJobInput < Struct.new(
         :account_id,
         :vault_name,
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -482,9 +512,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class DescribeVaultInput < Aws::Structure.new(
+      class DescribeVaultInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -502,13 +534,15 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class DescribeVaultOutput < Aws::Structure.new(
+      class DescribeVaultOutput < Struct.new(
         :vault_arn,
         :vault_name,
         :creation_date,
         :last_inventory_date,
         :number_of_archives,
         :size_in_bytes)
+
+        include Aws::Structure
 
         # @!attribute [rw] vault_arn
         #   The Amazon Resource Name (ARN) of the vault.
@@ -550,8 +584,10 @@ module Aws
       #       {
       #         account_id: "string", # required
       #       }
-      class GetDataRetrievalPolicyInput < Aws::Structure.new(
+      class GetDataRetrievalPolicyInput < Struct.new(
         :account_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID. This value must match
@@ -567,8 +603,10 @@ module Aws
 
       # Contains the Amazon Glacier response to the `GetDataRetrievalPolicy`
       # request.
-      class GetDataRetrievalPolicyOutput < Aws::Structure.new(
+      class GetDataRetrievalPolicyOutput < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   Contains the returned data retrieval policy in JSON format.
@@ -586,11 +624,13 @@ module Aws
       #         job_id: "string", # required
       #         range: "string",
       #       }
-      class GetJobOutputInput < Aws::Structure.new(
+      class GetJobOutputInput < Struct.new(
         :account_id,
         :vault_name,
         :job_id,
         :range)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -619,7 +659,7 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class GetJobOutputOutput < Aws::Structure.new(
+      class GetJobOutputOutput < Struct.new(
         :body,
         :checksum,
         :status,
@@ -627,6 +667,8 @@ module Aws
         :accept_ranges,
         :content_type,
         :archive_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] body
         #   The job data, either archive data or inventory data.
@@ -693,9 +735,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class GetVaultAccessPolicyInput < Aws::Structure.new(
+      class GetVaultAccessPolicyInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -713,8 +757,10 @@ module Aws
       end
 
       # Output for GetVaultAccessPolicy.
-      class GetVaultAccessPolicyOutput < Aws::Structure.new(
+      class GetVaultAccessPolicyOutput < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   Contains the returned vault access policy as a JSON string.
@@ -730,9 +776,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class GetVaultLockInput < Aws::Structure.new(
+      class GetVaultLockInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -750,11 +798,13 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class GetVaultLockOutput < Aws::Structure.new(
+      class GetVaultLockOutput < Struct.new(
         :policy,
         :state,
         :expiration_date,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   The vault lock policy as a JSON string, which uses \"\\\" as an
@@ -786,9 +836,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class GetVaultNotificationsInput < Aws::Structure.new(
+      class GetVaultNotificationsInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -806,8 +858,10 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class GetVaultNotificationsOutput < Aws::Structure.new(
+      class GetVaultNotificationsOutput < Struct.new(
         :vault_notification_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] vault_notification_config
         #   Returns the notification configuration set on the vault.
@@ -816,7 +870,7 @@ module Aws
       end
 
       # Describes an Amazon Glacier job.
-      class GlacierJobDescription < Aws::Structure.new(
+      class GlacierJobDescription < Struct.new(
         :job_id,
         :job_description,
         :action,
@@ -834,6 +888,8 @@ module Aws
         :archive_sha256_tree_hash,
         :retrieval_byte_range,
         :inventory_retrieval_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   An opaque string that identifies an Amazon Glacier job.
@@ -965,10 +1021,12 @@ module Aws
       #           },
       #         },
       #       }
-      class InitiateJobInput < Aws::Structure.new(
+      class InitiateJobInput < Struct.new(
         :account_id,
         :vault_name,
         :job_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -990,9 +1048,11 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class InitiateJobOutput < Aws::Structure.new(
+      class InitiateJobOutput < Struct.new(
         :location,
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   The relative URI path of the job.
@@ -1015,11 +1075,13 @@ module Aws
       #         archive_description: "string",
       #         part_size: 1,
       #       }
-      class InitiateMultipartUploadInput < Aws::Structure.new(
+      class InitiateMultipartUploadInput < Struct.new(
         :account_id,
         :vault_name,
         :archive_description,
         :part_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1051,9 +1113,11 @@ module Aws
       end
 
       # The Amazon Glacier response to your request.
-      class InitiateMultipartUploadOutput < Aws::Structure.new(
+      class InitiateMultipartUploadOutput < Struct.new(
         :location,
         :upload_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   The relative URI path of the multipart upload ID Amazon Glacier
@@ -1078,10 +1142,12 @@ module Aws
       #           policy: "string",
       #         },
       #       }
-      class InitiateVaultLockInput < Aws::Structure.new(
+      class InitiateVaultLockInput < Struct.new(
         :account_id,
         :vault_name,
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID. This value must match
@@ -1105,8 +1171,10 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class InitiateVaultLockOutput < Aws::Structure.new(
+      class InitiateVaultLockOutput < Struct.new(
         :lock_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] lock_id
         #   The lock ID, which is used to complete the vault locking process.
@@ -1115,12 +1183,14 @@ module Aws
       end
 
       # Describes the options for a range inventory retrieval job.
-      class InventoryRetrievalJobDescription < Aws::Structure.new(
+      class InventoryRetrievalJobDescription < Struct.new(
         :format,
         :start_date,
         :end_date,
         :limit,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] format
         #   The output format for the vault inventory list, which is set by the
@@ -1171,11 +1241,13 @@ module Aws
       #         limit: "string",
       #         marker: "string",
       #       }
-      class InventoryRetrievalJobInput < Aws::Structure.new(
+      class InventoryRetrievalJobInput < Struct.new(
         :start_date,
         :end_date,
         :limit,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] start_date
         #   The start of the date range in UTC for vault inventory retrieval
@@ -1223,7 +1295,7 @@ module Aws
       #           marker: "string",
       #         },
       #       }
-      class JobParameters < Aws::Structure.new(
+      class JobParameters < Struct.new(
         :format,
         :type,
         :archive_id,
@@ -1231,6 +1303,8 @@ module Aws
         :sns_topic,
         :retrieval_byte_range,
         :inventory_retrieval_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] format
         #   When initiating a job to retrieve a vault inventory, you can
@@ -1300,13 +1374,15 @@ module Aws
       #         statuscode: "string",
       #         completed: "string",
       #       }
-      class ListJobsInput < Aws::Structure.new(
+      class ListJobsInput < Struct.new(
         :account_id,
         :vault_name,
         :limit,
         :marker,
         :statuscode,
         :completed)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1348,9 +1424,11 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class ListJobsOutput < Aws::Structure.new(
+      class ListJobsOutput < Struct.new(
         :job_list,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_list
         #   A list of job objects. Each job object contains metadata describing
@@ -1377,11 +1455,13 @@ module Aws
       #         marker: "string",
       #         limit: 1,
       #       }
-      class ListMultipartUploadsInput < Aws::Structure.new(
+      class ListMultipartUploadsInput < Struct.new(
         :account_id,
         :vault_name,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1413,9 +1493,11 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class ListMultipartUploadsOutput < Aws::Structure.new(
+      class ListMultipartUploadsOutput < Struct.new(
         :uploads_list,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] uploads_list
         #   A list of in-progress multipart uploads.
@@ -1442,12 +1524,14 @@ module Aws
       #         marker: "string",
       #         limit: 1,
       #       }
-      class ListPartsInput < Aws::Structure.new(
+      class ListPartsInput < Struct.new(
         :account_id,
         :vault_name,
         :upload_id,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1483,7 +1567,7 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class ListPartsOutput < Aws::Structure.new(
+      class ListPartsOutput < Struct.new(
         :multipart_upload_id,
         :vault_arn,
         :archive_description,
@@ -1491,6 +1575,8 @@ module Aws
         :creation_date,
         :parts,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] multipart_upload_id
         #   The ID of the upload to which the parts are associated.
@@ -1535,9 +1621,11 @@ module Aws
       #         account_id: "string", # required
       #         vault_name: "string", # required
       #       }
-      class ListTagsForVaultInput < Aws::Structure.new(
+      class ListTagsForVaultInput < Struct.new(
         :account_id,
         :vault_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1555,8 +1643,10 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class ListTagsForVaultOutput < Aws::Structure.new(
+      class ListTagsForVaultOutput < Struct.new(
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   The tags attached to the vault. Each tag is composed of a key and a
@@ -1576,10 +1666,12 @@ module Aws
       #         marker: "string",
       #         limit: 1,
       #       }
-      class ListVaultsInput < Aws::Structure.new(
+      class ListVaultsInput < Struct.new(
         :account_id,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID. This value must match
@@ -1605,9 +1697,11 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class ListVaultsOutput < Aws::Structure.new(
+      class ListVaultsOutput < Struct.new(
         :vault_list,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] vault_list
         #   List of vaults.
@@ -1622,9 +1716,11 @@ module Aws
       end
 
       # A list of the part sizes of the multipart upload.
-      class PartListElement < Aws::Structure.new(
+      class PartListElement < Struct.new(
         :range_in_bytes,
         :sha256_tree_hash)
+
+        include Aws::Structure
 
         # @!attribute [rw] range_in_bytes
         #   The byte range of a part, inclusive of the upper value of the range.
@@ -1646,10 +1742,12 @@ module Aws
       #         vault_name: "string", # required
       #         tag_keys: ["string"],
       #       }
-      class RemoveTagsFromVaultInput < Aws::Structure.new(
+      class RemoveTagsFromVaultInput < Struct.new(
         :account_id,
         :vault_name,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1686,9 +1784,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class SetDataRetrievalPolicyInput < Aws::Structure.new(
+      class SetDataRetrievalPolicyInput < Struct.new(
         :account_id,
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID. This value must match
@@ -1717,10 +1817,12 @@ module Aws
       #           policy: "string",
       #         },
       #       }
-      class SetVaultAccessPolicyInput < Aws::Structure.new(
+      class SetVaultAccessPolicyInput < Struct.new(
         :account_id,
         :vault_name,
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1754,10 +1856,12 @@ module Aws
       #           events: ["string"],
       #         },
       #       }
-      class SetVaultNotificationsInput < Aws::Structure.new(
+      class SetVaultNotificationsInput < Struct.new(
         :account_id,
         :vault_name,
         :vault_notification_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1789,12 +1893,14 @@ module Aws
       #         checksum: "string",
       #         body: "data",
       #       }
-      class UploadArchiveInput < Aws::Structure.new(
+      class UploadArchiveInput < Struct.new(
         :vault_name,
         :account_id,
         :archive_description,
         :checksum,
         :body)
+
+        include Aws::Structure
 
         # @!attribute [rw] vault_name
         #   The name of the vault.
@@ -1824,12 +1930,14 @@ module Aws
       end
 
       # A list of in-progress multipart uploads for a vault.
-      class UploadListElement < Aws::Structure.new(
+      class UploadListElement < Struct.new(
         :multipart_upload_id,
         :vault_arn,
         :archive_description,
         :part_size_in_bytes,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] multipart_upload_id
         #   The ID of a multipart upload.
@@ -1870,13 +1978,15 @@ module Aws
       #         range: "string",
       #         body: "data",
       #       }
-      class UploadMultipartPartInput < Aws::Structure.new(
+      class UploadMultipartPartInput < Struct.new(
         :account_id,
         :vault_name,
         :upload_id,
         :checksum,
         :range,
         :body)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The `AccountId` value is the AWS account ID of the account that owns
@@ -1914,8 +2024,10 @@ module Aws
       end
 
       # Contains the Amazon Glacier response to your request.
-      class UploadMultipartPartOutput < Aws::Structure.new(
+      class UploadMultipartPartOutput < Struct.new(
         :checksum)
+
+        include Aws::Structure
 
         # @!attribute [rw] checksum
         #   The SHA256 tree hash that Amazon Glacier computed for the uploaded
@@ -1931,8 +2043,10 @@ module Aws
       #       {
       #         policy: "string",
       #       }
-      class VaultAccessPolicy < Aws::Structure.new(
+      class VaultAccessPolicy < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   The vault access policy.
@@ -1947,8 +2061,10 @@ module Aws
       #       {
       #         policy: "string",
       #       }
-      class VaultLockPolicy < Aws::Structure.new(
+      class VaultLockPolicy < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   The vault lock policy.
@@ -1964,9 +2080,11 @@ module Aws
       #         sns_topic: "string",
       #         events: ["string"],
       #       }
-      class VaultNotificationConfig < Aws::Structure.new(
+      class VaultNotificationConfig < Struct.new(
         :sns_topic,
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] sns_topic
         #   The Amazon Simple Notification Service (Amazon SNS) topic Amazon

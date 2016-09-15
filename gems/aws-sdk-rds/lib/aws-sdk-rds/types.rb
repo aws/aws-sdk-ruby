@@ -10,8 +10,10 @@ module Aws
     module Types
 
       # Data returned by the **DescribeAccountAttributes** action.
-      class AccountAttributesMessage < Aws::Structure.new(
+      class AccountAttributesMessage < Struct.new(
         :account_quotas)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_quotas
         #   A list of AccountQuota objects. Within this list, each quota has a
@@ -23,10 +25,12 @@ module Aws
 
       # Describes a quota for an AWS account, for example, the number of DB
       # instances allowed.
-      class AccountQuota < Aws::Structure.new(
+      class AccountQuota < Struct.new(
         :account_quota_name,
         :used,
         :max)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_quota_name
         #   The name of the Amazon RDS quota for this AWS account.
@@ -49,9 +53,11 @@ module Aws
       #         subscription_name: "String", # required
       #         source_identifier: "String", # required
       #       }
-      class AddSourceIdentifierToSubscriptionMessage < Aws::Structure.new(
+      class AddSourceIdentifierToSubscriptionMessage < Struct.new(
         :subscription_name,
         :source_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the RDS event notification subscription you want to add
@@ -81,8 +87,10 @@ module Aws
 
       end
 
-      class AddSourceIdentifierToSubscriptionResult < Aws::Structure.new(
+      class AddSourceIdentifierToSubscriptionResult < Struct.new(
         :event_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_subscription
         #   Contains the results of a successful invocation of the
@@ -103,9 +111,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToResourceMessage < Aws::Structure.new(
+      class AddTagsToResourceMessage < Struct.new(
         :resource_name,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon RDS resource the tags will be added to. This value is an
@@ -131,10 +141,12 @@ module Aws
       #         apply_action: "String", # required
       #         opt_in_type: "String", # required
       #       }
-      class ApplyPendingMaintenanceActionMessage < Aws::Structure.new(
+      class ApplyPendingMaintenanceActionMessage < Struct.new(
         :resource_identifier,
         :apply_action,
         :opt_in_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_identifier
         #   The RDS Amazon Resource Name (ARN) of the resource that the pending
@@ -170,8 +182,10 @@ module Aws
 
       end
 
-      class ApplyPendingMaintenanceActionResult < Aws::Structure.new(
+      class ApplyPendingMaintenanceActionResult < Struct.new(
         :resource_pending_maintenance_actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_pending_maintenance_actions
         #   Describes the pending maintenance actions for a resource.
@@ -189,12 +203,14 @@ module Aws
       #         ec2_security_group_id: "String",
       #         ec2_security_group_owner_id: "String",
       #       }
-      class AuthorizeDBSecurityGroupIngressMessage < Aws::Structure.new(
+      class AuthorizeDBSecurityGroupIngressMessage < Struct.new(
         :db_security_group_name,
         :cidrip,
         :ec2_security_group_name,
         :ec2_security_group_id,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group_name
         #   The name of the DB security group to add authorization to.
@@ -229,8 +245,10 @@ module Aws
 
       end
 
-      class AuthorizeDBSecurityGroupIngressResult < Aws::Structure.new(
+      class AuthorizeDBSecurityGroupIngressResult < Struct.new(
         :db_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group
         #   Contains the result of a successful invocation of the following
@@ -257,8 +275,10 @@ module Aws
       # * OrderableDBInstanceOption
       #
       # ^
-      class AvailabilityZone < Aws::Structure.new(
+      class AvailabilityZone < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the availability zone.
@@ -267,13 +287,15 @@ module Aws
       end
 
       # A CA certificate for an AWS account.
-      class Certificate < Aws::Structure.new(
+      class Certificate < Struct.new(
         :certificate_identifier,
         :certificate_type,
         :thumbprint,
         :valid_from,
         :valid_till,
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_identifier
         #   The unique key that identifies a certificate.
@@ -302,9 +324,11 @@ module Aws
       end
 
       # Data returned by the **DescribeCertificates** action.
-      class CertificateMessage < Aws::Structure.new(
+      class CertificateMessage < Struct.new(
         :certificates,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificates
         #   The list of Certificate objects for the AWS account.
@@ -321,9 +345,11 @@ module Aws
 
       # This data type is used as a response element in the action
       # DescribeDBEngineVersions.
-      class CharacterSet < Aws::Structure.new(
+      class CharacterSet < Struct.new(
         :character_set_name,
         :character_set_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] character_set_name
         #   The name of the character set.
@@ -349,11 +375,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CopyDBClusterParameterGroupMessage < Aws::Structure.new(
+      class CopyDBClusterParameterGroupMessage < Struct.new(
         :source_db_cluster_parameter_group_identifier,
         :target_db_cluster_parameter_group_identifier,
         :target_db_cluster_parameter_group_description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_db_cluster_parameter_group_identifier
         #   The identifier or Amazon Resource Name (ARN) for the source DB
@@ -403,8 +431,10 @@ module Aws
 
       end
 
-      class CopyDBClusterParameterGroupResult < Aws::Structure.new(
+      class CopyDBClusterParameterGroupResult < Struct.new(
         :db_cluster_parameter_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group
         #   Contains the result of a successful invocation of the
@@ -430,10 +460,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CopyDBClusterSnapshotMessage < Aws::Structure.new(
+      class CopyDBClusterSnapshotMessage < Struct.new(
         :source_db_cluster_snapshot_identifier,
         :target_db_cluster_snapshot_identifier,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_db_cluster_snapshot_identifier
         #   The identifier of the DB cluster snapshot to copy. This parameter is
@@ -471,8 +503,10 @@ module Aws
 
       end
 
-      class CopyDBClusterSnapshotResult < Aws::Structure.new(
+      class CopyDBClusterSnapshotResult < Struct.new(
         :db_cluster_snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot
         #   Contains the result of a successful invocation of the following
@@ -502,11 +536,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CopyDBParameterGroupMessage < Aws::Structure.new(
+      class CopyDBParameterGroupMessage < Struct.new(
         :source_db_parameter_group_identifier,
         :target_db_parameter_group_identifier,
         :target_db_parameter_group_description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_db_parameter_group_identifier
         #   The identifier or ARN for the source DB parameter group. For
@@ -551,8 +587,10 @@ module Aws
 
       end
 
-      class CopyDBParameterGroupResult < Aws::Structure.new(
+      class CopyDBParameterGroupResult < Struct.new(
         :db_parameter_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group
         #   Contains the result of a successful invocation of the
@@ -580,12 +618,14 @@ module Aws
       #         ],
       #         copy_tags: false,
       #       }
-      class CopyDBSnapshotMessage < Aws::Structure.new(
+      class CopyDBSnapshotMessage < Struct.new(
         :source_db_snapshot_identifier,
         :target_db_snapshot_identifier,
         :kms_key_id,
         :tags,
         :copy_tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_db_snapshot_identifier
         #   The identifier for the source DB snapshot.
@@ -660,8 +700,10 @@ module Aws
 
       end
 
-      class CopyDBSnapshotResult < Aws::Structure.new(
+      class CopyDBSnapshotResult < Struct.new(
         :db_snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot
         #   Contains the result of a successful invocation of the following
@@ -691,11 +733,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CopyOptionGroupMessage < Aws::Structure.new(
+      class CopyOptionGroupMessage < Struct.new(
         :source_option_group_identifier,
         :target_option_group_identifier,
         :target_option_group_description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_option_group_identifier
         #   The identifier or ARN for the source option group. For information
@@ -745,8 +789,10 @@ module Aws
 
       end
 
-      class CopyOptionGroupResult < Aws::Structure.new(
+      class CopyOptionGroupResult < Struct.new(
         :option_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group
         #   @return [Types::OptionGroup]
@@ -783,7 +829,7 @@ module Aws
       #         storage_encrypted: false,
       #         kms_key_id: "String",
       #       }
-      class CreateDBClusterMessage < Aws::Structure.new(
+      class CreateDBClusterMessage < Struct.new(
         :availability_zones,
         :backup_retention_period,
         :character_set_name,
@@ -804,6 +850,8 @@ module Aws
         :tags,
         :storage_encrypted,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   A list of EC2 Availability Zones that instances in the DB cluster
@@ -1020,11 +1068,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDBClusterParameterGroupMessage < Aws::Structure.new(
+      class CreateDBClusterParameterGroupMessage < Struct.new(
         :db_cluster_parameter_group_name,
         :db_parameter_group_family,
         :description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of the DB cluster parameter group.
@@ -1060,8 +1110,10 @@ module Aws
 
       end
 
-      class CreateDBClusterParameterGroupResult < Aws::Structure.new(
+      class CreateDBClusterParameterGroupResult < Struct.new(
         :db_cluster_parameter_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group
         #   Contains the result of a successful invocation of the
@@ -1074,8 +1126,10 @@ module Aws
 
       end
 
-      class CreateDBClusterResult < Aws::Structure.new(
+      class CreateDBClusterResult < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -1112,10 +1166,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDBClusterSnapshotMessage < Aws::Structure.new(
+      class CreateDBClusterSnapshotMessage < Struct.new(
         :db_cluster_snapshot_identifier,
         :db_cluster_identifier,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot_identifier
         #   The identifier of the DB cluster snapshot. This parameter is stored
@@ -1153,8 +1209,10 @@ module Aws
 
       end
 
-      class CreateDBClusterSnapshotResult < Aws::Structure.new(
+      class CreateDBClusterSnapshotResult < Struct.new(
         :db_cluster_snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot
         #   Contains the result of a successful invocation of the following
@@ -1217,7 +1275,7 @@ module Aws
       #         domain_iam_role_name: "String",
       #         promotion_tier: 1,
       #       }
-      class CreateDBInstanceMessage < Aws::Structure.new(
+      class CreateDBInstanceMessage < Struct.new(
         :db_name,
         :db_instance_identifier,
         :allocated_storage,
@@ -1255,6 +1313,8 @@ module Aws
         :monitoring_role_arn,
         :domain_iam_role_name,
         :promotion_tier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_name
         #   The meaning of this parameter differs according to the database
@@ -2028,7 +2088,7 @@ module Aws
       #         monitoring_interval: 1,
       #         monitoring_role_arn: "String",
       #       }
-      class CreateDBInstanceReadReplicaMessage < Aws::Structure.new(
+      class CreateDBInstanceReadReplicaMessage < Struct.new(
         :db_instance_identifier,
         :source_db_instance_identifier,
         :db_instance_class,
@@ -2044,6 +2104,8 @@ module Aws
         :copy_tags_to_snapshot,
         :monitoring_interval,
         :monitoring_role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The DB instance identifier of the Read Replica. This identifier is
@@ -2232,8 +2294,10 @@ module Aws
 
       end
 
-      class CreateDBInstanceReadReplicaResult < Aws::Structure.new(
+      class CreateDBInstanceReadReplicaResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -2251,8 +2315,10 @@ module Aws
 
       end
 
-      class CreateDBInstanceResult < Aws::Structure.new(
+      class CreateDBInstanceResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -2284,11 +2350,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDBParameterGroupMessage < Aws::Structure.new(
+      class CreateDBParameterGroupMessage < Struct.new(
         :db_parameter_group_name,
         :db_parameter_group_family,
         :description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   The name of the DB parameter group.
@@ -2323,8 +2391,10 @@ module Aws
 
       end
 
-      class CreateDBParameterGroupResult < Aws::Structure.new(
+      class CreateDBParameterGroupResult < Struct.new(
         :db_parameter_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group
         #   Contains the result of a successful invocation of the
@@ -2350,10 +2420,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDBSecurityGroupMessage < Aws::Structure.new(
+      class CreateDBSecurityGroupMessage < Struct.new(
         :db_security_group_name,
         :db_security_group_description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group_name
         #   The name for the DB security group. This value is stored as a
@@ -2382,8 +2454,10 @@ module Aws
 
       end
 
-      class CreateDBSecurityGroupResult < Aws::Structure.new(
+      class CreateDBSecurityGroupResult < Struct.new(
         :db_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group
         #   Contains the result of a successful invocation of the following
@@ -2416,10 +2490,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDBSnapshotMessage < Aws::Structure.new(
+      class CreateDBSnapshotMessage < Struct.new(
         :db_snapshot_identifier,
         :db_instance_identifier,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_identifier
         #   The identifier for the DB snapshot.
@@ -2456,8 +2532,10 @@ module Aws
 
       end
 
-      class CreateDBSnapshotResult < Aws::Structure.new(
+      class CreateDBSnapshotResult < Struct.new(
         :db_snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot
         #   Contains the result of a successful invocation of the following
@@ -2487,11 +2565,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDBSubnetGroupMessage < Aws::Structure.new(
+      class CreateDBSubnetGroupMessage < Struct.new(
         :db_subnet_group_name,
         :db_subnet_group_description,
         :subnet_ids,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_subnet_group_name
         #   The name for the DB subnet group. This value is stored as a
@@ -2517,8 +2597,10 @@ module Aws
 
       end
 
-      class CreateDBSubnetGroupResult < Aws::Structure.new(
+      class CreateDBSubnetGroupResult < Struct.new(
         :db_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_subnet_group
         #   Contains the result of a successful invocation of the following
@@ -2555,7 +2637,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateEventSubscriptionMessage < Aws::Structure.new(
+      class CreateEventSubscriptionMessage < Struct.new(
         :subscription_name,
         :sns_topic_arn,
         :source_type,
@@ -2563,6 +2645,8 @@ module Aws
         :source_ids,
         :enabled,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the subscription.
@@ -2632,8 +2716,10 @@ module Aws
 
       end
 
-      class CreateEventSubscriptionResult < Aws::Structure.new(
+      class CreateEventSubscriptionResult < Struct.new(
         :event_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_subscription
         #   Contains the results of a successful invocation of the
@@ -2657,12 +2743,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateOptionGroupMessage < Aws::Structure.new(
+      class CreateOptionGroupMessage < Struct.new(
         :option_group_name,
         :engine_name,
         :major_engine_version,
         :option_group_description,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group_name
         #   Specifies the name of the option group to be created.
@@ -2698,8 +2786,10 @@ module Aws
 
       end
 
-      class CreateOptionGroupResult < Aws::Structure.new(
+      class CreateOptionGroupResult < Struct.new(
         :option_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group
         #   @return [Types::OptionGroup]
@@ -2723,7 +2813,7 @@ module Aws
       #
       # This data type is used as a response element in the DescribeDBClusters
       # action.
-      class DBCluster < Aws::Structure.new(
+      class DBCluster < Struct.new(
         :allocated_storage,
         :availability_zones,
         :backup_retention_period,
@@ -2753,6 +2843,8 @@ module Aws
         :kms_key_id,
         :db_cluster_resource_id,
         :db_cluster_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] allocated_storage
         #   Specifies the allocated storage size in gigabytes (GB).
@@ -2897,11 +2989,13 @@ module Aws
       end
 
       # Contains information about an instance that is part of a DB cluster.
-      class DBClusterMember < Aws::Structure.new(
+      class DBClusterMember < Struct.new(
         :db_instance_identifier,
         :is_cluster_writer,
         :db_cluster_parameter_group_status,
         :promotion_tier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   Specifies the instance identifier for this member of the DB cluster.
@@ -2932,9 +3026,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBClusters action.
-      class DBClusterMessage < Aws::Structure.new(
+      class DBClusterMessage < Struct.new(
         :marker,
         :db_clusters)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   A pagination token that can be used in a subsequent
@@ -2948,9 +3044,11 @@ module Aws
       end
 
       # Contains status information for a DB cluster option group.
-      class DBClusterOptionGroupStatus < Aws::Structure.new(
+      class DBClusterOptionGroupStatus < Struct.new(
         :db_cluster_option_group_name,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_option_group_name
         #   Specifies the name of the DB cluster option group.
@@ -2968,11 +3066,13 @@ module Aws
       # This data type is used as a request parameter in the
       # DeleteDBClusterParameterGroup action, and as a response element in the
       # DescribeDBClusterParameterGroups action.
-      class DBClusterParameterGroup < Aws::Structure.new(
+      class DBClusterParameterGroup < Struct.new(
         :db_cluster_parameter_group_name,
         :db_parameter_group_family,
         :description,
         :db_cluster_parameter_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   Provides the name of the DB cluster parameter group.
@@ -2996,9 +3096,11 @@ module Aws
 
       # Provides details about a DB cluster parameter group including the
       # parameters in the DB cluster parameter group.
-      class DBClusterParameterGroupDetails < Aws::Structure.new(
+      class DBClusterParameterGroupDetails < Struct.new(
         :parameters,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameters
         #   Provides a list of parameters for the DB cluster parameter group.
@@ -3013,8 +3115,10 @@ module Aws
 
       end
 
-      class DBClusterParameterGroupNameMessage < Aws::Structure.new(
+      class DBClusterParameterGroupNameMessage < Struct.new(
         :db_cluster_parameter_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of the DB cluster parameter group.
@@ -3034,9 +3138,11 @@ module Aws
 
       end
 
-      class DBClusterParameterGroupsMessage < Aws::Structure.new(
+      class DBClusterParameterGroupsMessage < Struct.new(
         :marker,
         :db_cluster_parameter_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous
@@ -3060,7 +3166,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # DescribeDBClusterSnapshots action.
-      class DBClusterSnapshot < Aws::Structure.new(
+      class DBClusterSnapshot < Struct.new(
         :availability_zones,
         :db_cluster_snapshot_identifier,
         :db_cluster_identifier,
@@ -3079,6 +3185,8 @@ module Aws
         :storage_encrypted,
         :kms_key_id,
         :db_cluster_snapshot_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   Provides the list of EC2 Availability Zones that instances in the DB
@@ -3168,9 +3276,11 @@ module Aws
       # Manual DB cluster snapshot attributes are used to authorize other AWS
       # accounts to restore a manual DB cluster snapshot. For more
       # information, see the ModifyDBClusterSnapshotAttribute API action.
-      class DBClusterSnapshotAttribute < Aws::Structure.new(
+      class DBClusterSnapshotAttribute < Struct.new(
         :attribute_name,
         :attribute_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of the manual DB cluster snapshot attribute.
@@ -3199,9 +3309,11 @@ module Aws
       # Manual DB cluster snapshot attributes are used to authorize other AWS
       # accounts to copy or restore a manual DB cluster snapshot. For more
       # information, see the ModifyDBClusterSnapshotAttribute API action.
-      class DBClusterSnapshotAttributesResult < Aws::Structure.new(
+      class DBClusterSnapshotAttributesResult < Struct.new(
         :db_cluster_snapshot_identifier,
         :db_cluster_snapshot_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot_identifier
         #   The identifier of the manual DB cluster snapshot that the attributes
@@ -3217,9 +3329,11 @@ module Aws
 
       # Provides a list of DB cluster snapshots for the user as the result of
       # a call to the DescribeDBClusterSnapshots action.
-      class DBClusterSnapshotMessage < Aws::Structure.new(
+      class DBClusterSnapshotMessage < Struct.new(
         :marker,
         :db_cluster_snapshots)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous
@@ -3236,7 +3350,7 @@ module Aws
 
       # This data type is used as a response element in the action
       # DescribeDBEngineVersions.
-      class DBEngineVersion < Aws::Structure.new(
+      class DBEngineVersion < Struct.new(
         :engine,
         :engine_version,
         :db_parameter_group_family,
@@ -3245,6 +3359,8 @@ module Aws
         :default_character_set,
         :supported_character_sets,
         :valid_upgrade_target)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine
         #   The name of the database engine.
@@ -3286,9 +3402,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBEngineVersions action.
-      class DBEngineVersionMessage < Aws::Structure.new(
+      class DBEngineVersionMessage < Struct.new(
         :marker,
         :db_engine_versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -3313,7 +3431,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # DescribeDBInstances action.
-      class DBInstance < Aws::Structure.new(
+      class DBInstance < Struct.new(
         :db_instance_identifier,
         :db_instance_class,
         :engine,
@@ -3360,6 +3478,8 @@ module Aws
         :monitoring_role_arn,
         :promotion_tier,
         :db_instance_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   Contains a user-supplied database identifier. This identifier is the
@@ -3627,9 +3747,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBInstances action.
-      class DBInstanceMessage < Aws::Structure.new(
+      class DBInstanceMessage < Struct.new(
         :marker,
         :db_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -3644,11 +3766,13 @@ module Aws
       end
 
       # Provides a list of status information for a DB instance.
-      class DBInstanceStatusInfo < Aws::Structure.new(
+      class DBInstanceStatusInfo < Struct.new(
         :status_type,
         :normal,
         :status,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] status_type
         #   This value is currently \"read replication.\"
@@ -3677,11 +3801,13 @@ module Aws
       # This data type is used as a request parameter in the
       # DeleteDBParameterGroup action, and as a response element in the
       # DescribeDBParameterGroups action.
-      class DBParameterGroup < Aws::Structure.new(
+      class DBParameterGroup < Struct.new(
         :db_parameter_group_name,
         :db_parameter_group_family,
         :description,
         :db_parameter_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   Provides the name of the DB parameter group.
@@ -3705,9 +3831,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBParameters action.
-      class DBParameterGroupDetails < Aws::Structure.new(
+      class DBParameterGroupDetails < Struct.new(
         :parameters,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameters
         #   A list of Parameter values.
@@ -3723,8 +3851,10 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # ModifyDBParameterGroup or ResetDBParameterGroup action.
-      class DBParameterGroupNameMessage < Aws::Structure.new(
+      class DBParameterGroupNameMessage < Struct.new(
         :db_parameter_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   Provides the name of the DB parameter group.
@@ -3747,9 +3877,11 @@ module Aws
       # * RebootDBInstance
       #
       # * RestoreDBInstanceFromDBSnapshot
-      class DBParameterGroupStatus < Aws::Structure.new(
+      class DBParameterGroupStatus < Struct.new(
         :db_parameter_group_name,
         :parameter_apply_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   The name of the DP parameter group.
@@ -3763,9 +3895,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBParameterGroups action.
-      class DBParameterGroupsMessage < Aws::Structure.new(
+      class DBParameterGroupsMessage < Struct.new(
         :marker,
         :db_parameter_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -3792,7 +3926,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # DescribeDBSecurityGroups action.
-      class DBSecurityGroup < Aws::Structure.new(
+      class DBSecurityGroup < Struct.new(
         :owner_id,
         :db_security_group_name,
         :db_security_group_description,
@@ -3800,6 +3934,8 @@ module Aws
         :ec2_security_groups,
         :ip_ranges,
         :db_security_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_id
         #   Provides the AWS ID of the owner of a specific DB security group.
@@ -3840,9 +3976,11 @@ module Aws
       # * RestoreDBInstanceFromDBSnapshot
       #
       # * RestoreDBInstanceToPointInTime
-      class DBSecurityGroupMembership < Aws::Structure.new(
+      class DBSecurityGroupMembership < Struct.new(
         :db_security_group_name,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group_name
         #   The name of the DB security group.
@@ -3856,9 +3994,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBSecurityGroups action.
-      class DBSecurityGroupMessage < Aws::Structure.new(
+      class DBSecurityGroupMessage < Struct.new(
         :marker,
         :db_security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -3881,7 +4021,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # DescribeDBSnapshots action.
-      class DBSnapshot < Aws::Structure.new(
+      class DBSnapshot < Struct.new(
         :db_snapshot_identifier,
         :db_instance_identifier,
         :snapshot_create_time,
@@ -3906,6 +4046,8 @@ module Aws
         :encrypted,
         :kms_key_id,
         :db_snapshot_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_identifier
         #   Specifies the identifier for the DB snapshot.
@@ -4019,9 +4161,11 @@ module Aws
       # Manual DB snapshot attributes are used to authorize other AWS accounts
       # to restore a manual DB snapshot. For more information, see the
       # ModifyDBSnapshotAttribute API.
-      class DBSnapshotAttribute < Aws::Structure.new(
+      class DBSnapshotAttribute < Struct.new(
         :attribute_name,
         :attribute_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of the manual DB snapshot attribute.
@@ -4050,9 +4194,11 @@ module Aws
       # Manual DB snapshot attributes are used to authorize other AWS accounts
       # to copy or restore a manual DB snapshot. For more information, see the
       # ModifyDBSnapshotAttribute API action.
-      class DBSnapshotAttributesResult < Aws::Structure.new(
+      class DBSnapshotAttributesResult < Struct.new(
         :db_snapshot_identifier,
         :db_snapshot_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_identifier
         #   The identifier of the manual DB snapshot that the attributes apply
@@ -4067,9 +4213,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBSnapshots action.
-      class DBSnapshotMessage < Aws::Structure.new(
+      class DBSnapshotMessage < Struct.new(
         :marker,
         :db_snapshots)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -4096,13 +4244,15 @@ module Aws
       #
       # This data type is used as a response element in the
       # DescribeDBSubnetGroups action.
-      class DBSubnetGroup < Aws::Structure.new(
+      class DBSubnetGroup < Struct.new(
         :db_subnet_group_name,
         :db_subnet_group_description,
         :vpc_id,
         :subnet_group_status,
         :subnets,
         :db_subnet_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_subnet_group_name
         #   The name of the DB subnet group.
@@ -4132,9 +4282,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeDBSubnetGroups action.
-      class DBSubnetGroupMessage < Aws::Structure.new(
+      class DBSubnetGroupMessage < Struct.new(
         :marker,
         :db_subnet_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -4156,10 +4308,12 @@ module Aws
       #         skip_final_snapshot: false,
       #         final_db_snapshot_identifier: "String",
       #       }
-      class DeleteDBClusterMessage < Aws::Structure.new(
+      class DeleteDBClusterMessage < Struct.new(
         :db_cluster_identifier,
         :skip_final_snapshot,
         :final_db_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_identifier
         #   The DB cluster identifier for the DB cluster to be deleted. This
@@ -4214,8 +4368,10 @@ module Aws
       #       {
       #         db_cluster_parameter_group_name: "String", # required
       #       }
-      class DeleteDBClusterParameterGroupMessage < Aws::Structure.new(
+      class DeleteDBClusterParameterGroupMessage < Struct.new(
         :db_cluster_parameter_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of the DB cluster parameter group.
@@ -4231,8 +4387,10 @@ module Aws
 
       end
 
-      class DeleteDBClusterResult < Aws::Structure.new(
+      class DeleteDBClusterResult < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -4262,8 +4420,10 @@ module Aws
       #       {
       #         db_cluster_snapshot_identifier: "String", # required
       #       }
-      class DeleteDBClusterSnapshotMessage < Aws::Structure.new(
+      class DeleteDBClusterSnapshotMessage < Struct.new(
         :db_cluster_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot_identifier
         #   The identifier of the DB cluster snapshot to delete.
@@ -4274,8 +4434,10 @@ module Aws
 
       end
 
-      class DeleteDBClusterSnapshotResult < Aws::Structure.new(
+      class DeleteDBClusterSnapshotResult < Struct.new(
         :db_cluster_snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot
         #   Contains the result of a successful invocation of the following
@@ -4299,10 +4461,12 @@ module Aws
       #         skip_final_snapshot: false,
       #         final_db_snapshot_identifier: "String",
       #       }
-      class DeleteDBInstanceMessage < Aws::Structure.new(
+      class DeleteDBInstanceMessage < Struct.new(
         :db_instance_identifier,
         :skip_final_snapshot,
         :final_db_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The DB instance identifier for the DB instance to be deleted. This
@@ -4360,8 +4524,10 @@ module Aws
 
       end
 
-      class DeleteDBInstanceResult < Aws::Structure.new(
+      class DeleteDBInstanceResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -4385,8 +4551,10 @@ module Aws
       #       {
       #         db_parameter_group_name: "String", # required
       #       }
-      class DeleteDBParameterGroupMessage < Aws::Structure.new(
+      class DeleteDBParameterGroupMessage < Struct.new(
         :db_parameter_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   The name of the DB parameter group.
@@ -4408,8 +4576,10 @@ module Aws
       #       {
       #         db_security_group_name: "String", # required
       #       }
-      class DeleteDBSecurityGroupMessage < Aws::Structure.new(
+      class DeleteDBSecurityGroupMessage < Struct.new(
         :db_security_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group_name
         #   The name of the DB security group to delete.
@@ -4437,8 +4607,10 @@ module Aws
       #       {
       #         db_snapshot_identifier: "String", # required
       #       }
-      class DeleteDBSnapshotMessage < Aws::Structure.new(
+      class DeleteDBSnapshotMessage < Struct.new(
         :db_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_identifier
         #   The DBSnapshot identifier.
@@ -4449,8 +4621,10 @@ module Aws
 
       end
 
-      class DeleteDBSnapshotResult < Aws::Structure.new(
+      class DeleteDBSnapshotResult < Struct.new(
         :db_snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot
         #   Contains the result of a successful invocation of the following
@@ -4472,8 +4646,10 @@ module Aws
       #       {
       #         db_subnet_group_name: "String", # required
       #       }
-      class DeleteDBSubnetGroupMessage < Aws::Structure.new(
+      class DeleteDBSubnetGroupMessage < Struct.new(
         :db_subnet_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_subnet_group_name
         #   The name of the database subnet group to delete.
@@ -4498,8 +4674,10 @@ module Aws
       #       {
       #         subscription_name: "String", # required
       #       }
-      class DeleteEventSubscriptionMessage < Aws::Structure.new(
+      class DeleteEventSubscriptionMessage < Struct.new(
         :subscription_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the RDS event notification subscription you want to
@@ -4508,8 +4686,10 @@ module Aws
 
       end
 
-      class DeleteEventSubscriptionResult < Aws::Structure.new(
+      class DeleteEventSubscriptionResult < Struct.new(
         :event_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_subscription
         #   Contains the results of a successful invocation of the
@@ -4524,8 +4704,10 @@ module Aws
       #       {
       #         option_group_name: "String", # required
       #       }
-      class DeleteOptionGroupMessage < Aws::Structure.new(
+      class DeleteOptionGroupMessage < Struct.new(
         :option_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group_name
         #   The name of the option group to be deleted.
@@ -4554,11 +4736,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeCertificatesMessage < Aws::Structure.new(
+      class DescribeCertificatesMessage < Struct.new(
         :certificate_identifier,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_identifier
         #   The user-supplied certificate identifier. If this parameter is
@@ -4612,11 +4796,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBClusterParameterGroupsMessage < Aws::Structure.new(
+      class DescribeDBClusterParameterGroupsMessage < Struct.new(
         :db_cluster_parameter_group_name,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of a specific DB cluster parameter group to return details
@@ -4670,12 +4856,14 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBClusterParametersMessage < Aws::Structure.new(
+      class DescribeDBClusterParametersMessage < Struct.new(
         :db_cluster_parameter_group_name,
         :source,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of a specific DB cluster parameter group to return
@@ -4725,8 +4913,10 @@ module Aws
       #       {
       #         db_cluster_snapshot_identifier: "String", # required
       #       }
-      class DescribeDBClusterSnapshotAttributesMessage < Aws::Structure.new(
+      class DescribeDBClusterSnapshotAttributesMessage < Struct.new(
         :db_cluster_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot_identifier
         #   The identifier for the DB cluster snapshot to describe the
@@ -4735,8 +4925,10 @@ module Aws
 
       end
 
-      class DescribeDBClusterSnapshotAttributesResult < Aws::Structure.new(
+      class DescribeDBClusterSnapshotAttributesResult < Struct.new(
         :db_cluster_snapshot_attributes_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot_attributes_result
         #   Contains the results of a successful call to the
@@ -4768,7 +4960,7 @@ module Aws
       #         include_shared: false,
       #         include_public: false,
       #       }
-      class DescribeDBClusterSnapshotsMessage < Aws::Structure.new(
+      class DescribeDBClusterSnapshotsMessage < Struct.new(
         :db_cluster_identifier,
         :db_cluster_snapshot_identifier,
         :snapshot_type,
@@ -4777,6 +4969,8 @@ module Aws
         :marker,
         :include_shared,
         :include_public)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_identifier
         #   The ID of the DB cluster to retrieve the list of DB cluster
@@ -4900,11 +5094,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBClustersMessage < Aws::Structure.new(
+      class DescribeDBClustersMessage < Struct.new(
         :db_cluster_identifier,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_identifier
         #   The user-supplied DB cluster identifier. If this parameter is
@@ -4962,7 +5158,7 @@ module Aws
       #         default_only: false,
       #         list_supported_character_sets: false,
       #       }
-      class DescribeDBEngineVersionsMessage < Aws::Structure.new(
+      class DescribeDBEngineVersionsMessage < Struct.new(
         :engine,
         :engine_version,
         :db_parameter_group_family,
@@ -4971,6 +5167,8 @@ module Aws
         :marker,
         :default_only,
         :list_supported_character_sets)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine
         #   The database engine to return.
@@ -5043,11 +5241,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBInstancesMessage < Aws::Structure.new(
+      class DescribeDBInstancesMessage < Struct.new(
         :db_instance_identifier,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The user-supplied instance identifier. If this parameter is
@@ -5088,10 +5288,12 @@ module Aws
       end
 
       # This data type is used as a response element to DescribeDBLogFiles.
-      class DescribeDBLogFilesDetails < Aws::Structure.new(
+      class DescribeDBLogFilesDetails < Struct.new(
         :log_file_name,
         :last_written,
         :size)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_file_name
         #   The name of the log file for the specified DB instance.
@@ -5124,7 +5326,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBLogFilesMessage < Aws::Structure.new(
+      class DescribeDBLogFilesMessage < Struct.new(
         :db_instance_identifier,
         :filename_contains,
         :file_last_written,
@@ -5132,6 +5334,8 @@ module Aws
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The customer-assigned name of the DB instance that contains the log
@@ -5181,9 +5385,11 @@ module Aws
       end
 
       # The response from a call to DescribeDBLogFiles.
-      class DescribeDBLogFilesResponse < Aws::Structure.new(
+      class DescribeDBLogFilesResponse < Struct.new(
         :describe_db_log_files,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] describe_db_log_files
         #   The DB log files returned.
@@ -5210,11 +5416,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBParameterGroupsMessage < Aws::Structure.new(
+      class DescribeDBParameterGroupsMessage < Struct.new(
         :db_parameter_group_name,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   The name of a specific DB parameter group to return details for.
@@ -5267,12 +5475,14 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBParametersMessage < Aws::Structure.new(
+      class DescribeDBParametersMessage < Struct.new(
         :db_parameter_group_name,
         :source,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   The name of a specific DB parameter group to return details for.
@@ -5332,11 +5542,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBSecurityGroupsMessage < Aws::Structure.new(
+      class DescribeDBSecurityGroupsMessage < Struct.new(
         :db_security_group_name,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group_name
         #   The name of the DB security group to return details for.
@@ -5372,8 +5584,10 @@ module Aws
       #       {
       #         db_snapshot_identifier: "String", # required
       #       }
-      class DescribeDBSnapshotAttributesMessage < Aws::Structure.new(
+      class DescribeDBSnapshotAttributesMessage < Struct.new(
         :db_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_identifier
         #   The identifier for the DB snapshot to describe the attributes for.
@@ -5381,8 +5595,10 @@ module Aws
 
       end
 
-      class DescribeDBSnapshotAttributesResult < Aws::Structure.new(
+      class DescribeDBSnapshotAttributesResult < Struct.new(
         :db_snapshot_attributes_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_attributes_result
         #   Contains the results of a successful call to the
@@ -5413,7 +5629,7 @@ module Aws
       #         include_shared: false,
       #         include_public: false,
       #       }
-      class DescribeDBSnapshotsMessage < Aws::Structure.new(
+      class DescribeDBSnapshotsMessage < Struct.new(
         :db_instance_identifier,
         :db_snapshot_identifier,
         :snapshot_type,
@@ -5422,6 +5638,8 @@ module Aws
         :marker,
         :include_shared,
         :include_public)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The ID of the DB instance to retrieve the list of DB snapshots for.
@@ -5542,11 +5760,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeDBSubnetGroupsMessage < Aws::Structure.new(
+      class DescribeDBSubnetGroupsMessage < Struct.new(
         :db_subnet_group_name,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_subnet_group_name
         #   The name of the DB subnet group to return details for.
@@ -5590,11 +5810,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEngineDefaultClusterParametersMessage < Aws::Structure.new(
+      class DescribeEngineDefaultClusterParametersMessage < Struct.new(
         :db_parameter_group_family,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_family
         #   The name of the DB cluster parameter group family to return engine
@@ -5625,8 +5847,10 @@ module Aws
 
       end
 
-      class DescribeEngineDefaultClusterParametersResult < Aws::Structure.new(
+      class DescribeEngineDefaultClusterParametersResult < Struct.new(
         :engine_defaults)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine_defaults
         #   Contains the result of a successful invocation of the
@@ -5649,11 +5873,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEngineDefaultParametersMessage < Aws::Structure.new(
+      class DescribeEngineDefaultParametersMessage < Struct.new(
         :db_parameter_group_family,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_family
         #   The name of the DB parameter group family.
@@ -5683,8 +5909,10 @@ module Aws
 
       end
 
-      class DescribeEngineDefaultParametersResult < Aws::Structure.new(
+      class DescribeEngineDefaultParametersResult < Struct.new(
         :engine_defaults)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine_defaults
         #   Contains the result of a successful invocation of the
@@ -5705,9 +5933,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeEventCategoriesMessage < Aws::Structure.new(
+      class DescribeEventCategoriesMessage < Struct.new(
         :source_type,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_type
         #   The type of source that will be generating the events.
@@ -5736,11 +5966,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEventSubscriptionsMessage < Aws::Structure.new(
+      class DescribeEventSubscriptionsMessage < Struct.new(
         :subscription_name,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the RDS event notification subscription you want to
@@ -5790,7 +6022,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEventsMessage < Aws::Structure.new(
+      class DescribeEventsMessage < Struct.new(
         :source_identifier,
         :source_type,
         :start_time,
@@ -5800,6 +6032,8 @@ module Aws
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_identifier
         #   The identifier of the event source for which events will be
@@ -5904,12 +6138,14 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeOptionGroupOptionsMessage < Aws::Structure.new(
+      class DescribeOptionGroupOptionsMessage < Struct.new(
         :engine_name,
         :major_engine_version,
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine_name
         #   A required parameter. Options available for the given engine name
@@ -5960,13 +6196,15 @@ module Aws
       #         engine_name: "String",
       #         major_engine_version: "String",
       #       }
-      class DescribeOptionGroupsMessage < Aws::Structure.new(
+      class DescribeOptionGroupsMessage < Struct.new(
         :option_group_name,
         :filters,
         :marker,
         :max_records,
         :engine_name,
         :major_engine_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group_name
         #   The name of the option group to describe. Cannot be supplied
@@ -6026,7 +6264,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeOrderableDBInstanceOptionsMessage < Aws::Structure.new(
+      class DescribeOrderableDBInstanceOptionsMessage < Struct.new(
         :engine,
         :engine_version,
         :db_instance_class,
@@ -6035,6 +6273,8 @@ module Aws
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine
         #   The name of the engine to retrieve DB instance options for.
@@ -6099,11 +6339,13 @@ module Aws
       #         marker: "String",
       #         max_records: 1,
       #       }
-      class DescribePendingMaintenanceActionsMessage < Aws::Structure.new(
+      class DescribePendingMaintenanceActionsMessage < Struct.new(
         :resource_identifier,
         :filters,
         :marker,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_identifier
         #   The ARN of a resource to return pending maintenance actions for.
@@ -6163,7 +6405,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReservedDBInstancesMessage < Aws::Structure.new(
+      class DescribeReservedDBInstancesMessage < Struct.new(
         :reserved_db_instance_id,
         :reserved_db_instances_offering_id,
         :db_instance_class,
@@ -6174,6 +6416,8 @@ module Aws
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_db_instance_id
         #   The reserved DB instance identifier filter value. Specify this
@@ -6258,7 +6502,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReservedDBInstancesOfferingsMessage < Aws::Structure.new(
+      class DescribeReservedDBInstancesOfferingsMessage < Struct.new(
         :reserved_db_instances_offering_id,
         :db_instance_class,
         :duration,
@@ -6268,6 +6512,8 @@ module Aws
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_db_instances_offering_id
         #   The offering identifier filter value. Specify this parameter to show
@@ -6345,11 +6591,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeSourceRegionsMessage < Aws::Structure.new(
+      class DescribeSourceRegionsMessage < Struct.new(
         :region_name,
         :max_records,
         :marker,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] region_name
         #   The source region name, for example US West (Oregon).
@@ -6388,11 +6636,13 @@ module Aws
 
       # An Active Directory Domain membership record associated with the DB
       # instance.
-      class DomainMembership < Aws::Structure.new(
+      class DomainMembership < Struct.new(
         :domain,
         :status,
         :fqdn,
         :iam_role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The identifier of the Active Directory Domain.
@@ -6416,10 +6666,12 @@ module Aws
 
       # This data type is used as a response element to
       # DownloadDBLogFilePortion.
-      class DownloadDBLogFilePortionDetails < Aws::Structure.new(
+      class DownloadDBLogFilePortionDetails < Struct.new(
         :log_file_data,
         :marker,
         :additional_data_pending)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_file_data
         #   Entries from the specified log file.
@@ -6446,11 +6698,13 @@ module Aws
       #         marker: "String",
       #         number_of_lines: 1,
       #       }
-      class DownloadDBLogFilePortionMessage < Aws::Structure.new(
+      class DownloadDBLogFilePortionMessage < Struct.new(
         :db_instance_identifier,
         :log_file_name,
         :marker,
         :number_of_lines)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The customer-assigned name of the DB instance that contains the log
@@ -6511,11 +6765,13 @@ module Aws
       # * DescribeDBSecurityGroups
       #
       # * RevokeDBSecurityGroupIngress
-      class EC2SecurityGroup < Aws::Structure.new(
+      class EC2SecurityGroup < Struct.new(
         :status,
         :ec2_security_group_name,
         :ec2_security_group_id,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   Provides the status of the EC2 security group. Status can be
@@ -6544,10 +6800,12 @@ module Aws
       # * DescribeDBInstances
       #
       # * DeleteDBInstance
-      class Endpoint < Aws::Structure.new(
+      class Endpoint < Struct.new(
         :address,
         :port,
         :hosted_zone_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] address
         #   Specifies the DNS address of the DB instance.
@@ -6566,10 +6824,12 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeEngineDefaultParameters action.
-      class EngineDefaults < Aws::Structure.new(
+      class EngineDefaults < Struct.new(
         :db_parameter_group_family,
         :marker,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_family
         #   Specifies the name of the DB parameter group family that the engine
@@ -6591,13 +6851,15 @@ module Aws
 
       # This data type is used as a response element in the DescribeEvents
       # action.
-      class Event < Aws::Structure.new(
+      class Event < Struct.new(
         :source_identifier,
         :source_type,
         :message,
         :event_categories,
         :date,
         :source_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_identifier
         #   Provides the identifier for the source of the event.
@@ -6627,9 +6889,11 @@ module Aws
 
       # Contains the results of a successful invocation of the
       # DescribeEventCategories action.
-      class EventCategoriesMap < Aws::Structure.new(
+      class EventCategoriesMap < Struct.new(
         :source_type,
         :event_categories)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_type
         #   The source type that the returned categories belong to
@@ -6642,8 +6906,10 @@ module Aws
       end
 
       # Data returned from the **DescribeEventCategories** action.
-      class EventCategoriesMessage < Aws::Structure.new(
+      class EventCategoriesMessage < Struct.new(
         :event_categories_map_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_categories_map_list
         #   A list of EventCategoriesMap data types.
@@ -6653,7 +6919,7 @@ module Aws
 
       # Contains the results of a successful invocation of the
       # DescribeEventSubscriptions action.
-      class EventSubscription < Aws::Structure.new(
+      class EventSubscription < Struct.new(
         :customer_aws_id,
         :cust_subscription_id,
         :sns_topic_arn,
@@ -6664,6 +6930,8 @@ module Aws
         :event_categories_list,
         :enabled,
         :event_subscription_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] customer_aws_id
         #   The AWS customer account associated with the RDS event notification
@@ -6721,9 +6989,11 @@ module Aws
       end
 
       # Data returned by the **DescribeEventSubscriptions** action.
-      class EventSubscriptionsMessage < Aws::Structure.new(
+      class EventSubscriptionsMessage < Struct.new(
         :marker,
         :event_subscriptions_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous
@@ -6740,9 +7010,11 @@ module Aws
 
       # Contains the result of a successful invocation of the DescribeEvents
       # action.
-      class EventsMessage < Aws::Structure.new(
+      class EventsMessage < Struct.new(
         :marker,
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous Events request.
@@ -6763,9 +7035,11 @@ module Aws
       #         db_cluster_identifier: "String",
       #         target_db_instance_identifier: "String",
       #       }
-      class FailoverDBClusterMessage < Aws::Structure.new(
+      class FailoverDBClusterMessage < Struct.new(
         :db_cluster_identifier,
         :target_db_instance_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_identifier
         #   A DB cluster identifier to force a failover for. This parameter is
@@ -6789,8 +7063,10 @@ module Aws
 
       end
 
-      class FailoverDBClusterResult < Aws::Structure.new(
+      class FailoverDBClusterResult < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -6822,9 +7098,11 @@ module Aws
       #         name: "String", # required
       #         values: ["String"], # required
       #       }
-      class Filter < Aws::Structure.new(
+      class Filter < Struct.new(
         :name,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   This parameter is not currently supported.
@@ -6838,9 +7116,11 @@ module Aws
 
       # This data type is used as a response element in the
       # DescribeDBSecurityGroups action.
-      class IPRange < Aws::Structure.new(
+      class IPRange < Struct.new(
         :status,
         :cidrip)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   Specifies the status of the IP range. Status can be \"authorizing\",
@@ -6865,9 +7145,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ListTagsForResourceMessage < Aws::Structure.new(
+      class ListTagsForResourceMessage < Struct.new(
         :resource_name,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon RDS resource with tags to be listed. This value is an
@@ -6901,7 +7183,7 @@ module Aws
       #         preferred_backup_window: "String",
       #         preferred_maintenance_window: "String",
       #       }
-      class ModifyDBClusterMessage < Aws::Structure.new(
+      class ModifyDBClusterMessage < Struct.new(
         :db_cluster_identifier,
         :new_db_cluster_identifier,
         :apply_immediately,
@@ -6913,6 +7195,8 @@ module Aws
         :option_group_name,
         :preferred_backup_window,
         :preferred_maintenance_window)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_identifier
         #   The DB cluster identifier for the cluster being modified. This
@@ -7082,9 +7366,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyDBClusterParameterGroupMessage < Aws::Structure.new(
+      class ModifyDBClusterParameterGroupMessage < Struct.new(
         :db_cluster_parameter_group_name,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of the DB cluster parameter group to modify.
@@ -7096,8 +7382,10 @@ module Aws
 
       end
 
-      class ModifyDBClusterResult < Aws::Structure.new(
+      class ModifyDBClusterResult < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -7130,11 +7418,13 @@ module Aws
       #         values_to_add: ["String"],
       #         values_to_remove: ["String"],
       #       }
-      class ModifyDBClusterSnapshotAttributeMessage < Aws::Structure.new(
+      class ModifyDBClusterSnapshotAttributeMessage < Struct.new(
         :db_cluster_snapshot_identifier,
         :attribute_name,
         :values_to_add,
         :values_to_remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot_identifier
         #   The identifier for the DB cluster snapshot to modify the attributes
@@ -7175,8 +7465,10 @@ module Aws
 
       end
 
-      class ModifyDBClusterSnapshotAttributeResult < Aws::Structure.new(
+      class ModifyDBClusterSnapshotAttributeResult < Struct.new(
         :db_cluster_snapshot_attributes_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_snapshot_attributes_result
         #   Contains the results of a successful call to the
@@ -7227,7 +7519,7 @@ module Aws
       #         domain_iam_role_name: "String",
       #         promotion_tier: 1,
       #       }
-      class ModifyDBInstanceMessage < Aws::Structure.new(
+      class ModifyDBInstanceMessage < Struct.new(
         :db_instance_identifier,
         :allocated_storage,
         :db_instance_class,
@@ -7260,6 +7552,8 @@ module Aws
         :monitoring_role_arn,
         :domain_iam_role_name,
         :promotion_tier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The DB instance identifier. This value is stored as a lowercase
@@ -7827,8 +8121,10 @@ module Aws
 
       end
 
-      class ModifyDBInstanceResult < Aws::Structure.new(
+      class ModifyDBInstanceResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -7866,9 +8162,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyDBParameterGroupMessage < Aws::Structure.new(
+      class ModifyDBParameterGroupMessage < Struct.new(
         :db_parameter_group_name,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   The name of the DB parameter group.
@@ -7912,11 +8210,13 @@ module Aws
       #         values_to_add: ["String"],
       #         values_to_remove: ["String"],
       #       }
-      class ModifyDBSnapshotAttributeMessage < Aws::Structure.new(
+      class ModifyDBSnapshotAttributeMessage < Struct.new(
         :db_snapshot_identifier,
         :attribute_name,
         :values_to_add,
         :values_to_remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_identifier
         #   The identifier for the DB snapshot to modify the attributes for.
@@ -7955,8 +8255,10 @@ module Aws
 
       end
 
-      class ModifyDBSnapshotAttributeResult < Aws::Structure.new(
+      class ModifyDBSnapshotAttributeResult < Struct.new(
         :db_snapshot_attributes_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_snapshot_attributes_result
         #   Contains the results of a successful call to the
@@ -7977,10 +8279,12 @@ module Aws
       #         db_subnet_group_description: "String",
       #         subnet_ids: ["String"], # required
       #       }
-      class ModifyDBSubnetGroupMessage < Aws::Structure.new(
+      class ModifyDBSubnetGroupMessage < Struct.new(
         :db_subnet_group_name,
         :db_subnet_group_description,
         :subnet_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_subnet_group_name
         #   The name for the DB subnet group. This value is stored as a
@@ -8002,8 +8306,10 @@ module Aws
 
       end
 
-      class ModifyDBSubnetGroupResult < Aws::Structure.new(
+      class ModifyDBSubnetGroupResult < Struct.new(
         :db_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_subnet_group
         #   Contains the result of a successful invocation of the following
@@ -8033,12 +8339,14 @@ module Aws
       #         event_categories: ["String"],
       #         enabled: false,
       #       }
-      class ModifyEventSubscriptionMessage < Aws::Structure.new(
+      class ModifyEventSubscriptionMessage < Struct.new(
         :subscription_name,
         :sns_topic_arn,
         :source_type,
         :event_categories,
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the RDS event notification subscription.
@@ -8077,8 +8385,10 @@ module Aws
 
       end
 
-      class ModifyEventSubscriptionResult < Aws::Structure.new(
+      class ModifyEventSubscriptionResult < Struct.new(
         :event_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_subscription
         #   Contains the results of a successful invocation of the
@@ -8117,11 +8427,13 @@ module Aws
       #         options_to_remove: ["String"],
       #         apply_immediately: false,
       #       }
-      class ModifyOptionGroupMessage < Aws::Structure.new(
+      class ModifyOptionGroupMessage < Struct.new(
         :option_group_name,
         :options_to_include,
         :options_to_remove,
         :apply_immediately)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group_name
         #   The name of the option group to be modified.
@@ -8150,8 +8462,10 @@ module Aws
 
       end
 
-      class ModifyOptionGroupResult < Aws::Structure.new(
+      class ModifyOptionGroupResult < Struct.new(
         :option_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group
         #   @return [Types::OptionGroup]
@@ -8159,7 +8473,7 @@ module Aws
       end
 
       # Option details.
-      class Option < Aws::Structure.new(
+      class Option < Struct.new(
         :option_name,
         :option_description,
         :persistent,
@@ -8169,6 +8483,8 @@ module Aws
         :option_settings,
         :db_security_group_memberships,
         :vpc_security_group_memberships)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_name
         #   The name of the option.
@@ -8234,13 +8550,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class OptionConfiguration < Aws::Structure.new(
+      class OptionConfiguration < Struct.new(
         :option_name,
         :port,
         :option_version,
         :db_security_group_memberships,
         :vpc_security_group_memberships,
         :option_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_name
         #   The configuration of options to include in a group.
@@ -8270,7 +8588,7 @@ module Aws
 
       end
 
-      class OptionGroup < Aws::Structure.new(
+      class OptionGroup < Struct.new(
         :option_group_name,
         :option_group_description,
         :engine_name,
@@ -8279,6 +8597,8 @@ module Aws
         :allows_vpc_and_non_vpc_instance_memberships,
         :vpc_id,
         :option_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group_name
         #   Specifies the name of the option group.
@@ -8325,9 +8645,11 @@ module Aws
 
       # Provides information on the option groups the DB instance is a member
       # of.
-      class OptionGroupMembership < Aws::Structure.new(
+      class OptionGroupMembership < Struct.new(
         :option_group_name,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group_name
         #   The name of the option group that the instance belongs to.
@@ -8343,7 +8665,7 @@ module Aws
       end
 
       # Available option.
-      class OptionGroupOption < Aws::Structure.new(
+      class OptionGroupOption < Struct.new(
         :name,
         :description,
         :engine_name,
@@ -8357,6 +8679,8 @@ module Aws
         :permanent,
         :option_group_option_settings,
         :option_group_option_versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the option.
@@ -8422,13 +8746,15 @@ module Aws
       # Option group option settings are used to display settings available
       # for each option with their default values and other information. These
       # values are used with the DescribeOptionGroupOptions action.
-      class OptionGroupOptionSetting < Aws::Structure.new(
+      class OptionGroupOptionSetting < Struct.new(
         :setting_name,
         :setting_description,
         :default_value,
         :apply_type,
         :allowed_values,
         :is_modifiable)
+
+        include Aws::Structure
 
         # @!attribute [rw] setting_name
         #   The name of the option group option.
@@ -8457,9 +8783,11 @@ module Aws
 
       end
 
-      class OptionGroupOptionsMessage < Aws::Structure.new(
+      class OptionGroupOptionsMessage < Struct.new(
         :option_group_options,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_group_options
         #   List of available option group options.
@@ -8474,9 +8802,11 @@ module Aws
       end
 
       # List of option groups.
-      class OptionGroups < Aws::Structure.new(
+      class OptionGroups < Struct.new(
         :option_groups_list,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] option_groups_list
         #   List of option groups.
@@ -8509,7 +8839,7 @@ module Aws
       #         is_modifiable: false,
       #         is_collection: false,
       #       }
-      class OptionSetting < Aws::Structure.new(
+      class OptionSetting < Struct.new(
         :name,
         :value,
         :default_value,
@@ -8519,6 +8849,8 @@ module Aws
         :allowed_values,
         :is_modifiable,
         :is_collection)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the option that has settings that you can set.
@@ -8561,9 +8893,11 @@ module Aws
 
       # The version for an option. Option group option versions are returned
       # by the DescribeOptionGroupOptions action.
-      class OptionVersion < Aws::Structure.new(
+      class OptionVersion < Struct.new(
         :version,
         :is_default)
+
+        include Aws::Structure
 
         # @!attribute [rw] version
         #   The version of the option.
@@ -8580,7 +8914,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # DescribeOrderableDBInstanceOptions action.
-      class OrderableDBInstanceOption < Aws::Structure.new(
+      class OrderableDBInstanceOption < Struct.new(
         :engine,
         :engine_version,
         :db_instance_class,
@@ -8593,6 +8927,8 @@ module Aws
         :storage_type,
         :supports_iops,
         :supports_enhanced_monitoring)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine
         #   The engine type of the orderable DB instance.
@@ -8650,9 +8986,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeOrderableDBInstanceOptions action.
-      class OrderableDBInstanceOptionsMessage < Aws::Structure.new(
+      class OrderableDBInstanceOptionsMessage < Struct.new(
         :orderable_db_instance_options,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] orderable_db_instance_options
         #   An OrderableDBInstanceOption structure containing information about
@@ -8688,7 +9026,7 @@ module Aws
       #         minimum_engine_version: "String",
       #         apply_method: "immediate", # accepts immediate, pending-reboot
       #       }
-      class Parameter < Aws::Structure.new(
+      class Parameter < Struct.new(
         :parameter_name,
         :parameter_value,
         :description,
@@ -8699,6 +9037,8 @@ module Aws
         :is_modifiable,
         :minimum_engine_version,
         :apply_method)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_name
         #   Specifies the name of the parameter.
@@ -8746,13 +9086,15 @@ module Aws
 
       # Provides information about a pending maintenance action for a
       # resource.
-      class PendingMaintenanceAction < Aws::Structure.new(
+      class PendingMaintenanceAction < Struct.new(
         :action,
         :auto_applied_after_date,
         :forced_apply_date,
         :opt_in_status,
         :current_apply_date,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   The type of pending maintenance action that is available for the
@@ -8794,9 +9136,11 @@ module Aws
       end
 
       # Data returned from the **DescribePendingMaintenanceActions** action.
-      class PendingMaintenanceActionsMessage < Aws::Structure.new(
+      class PendingMaintenanceActionsMessage < Struct.new(
         :pending_maintenance_actions,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] pending_maintenance_actions
         #   A list of the pending maintenance actions for the resource.
@@ -8813,7 +9157,7 @@ module Aws
 
       # This data type is used as a response element in the ModifyDBInstance
       # action.
-      class PendingModifiedValues < Aws::Structure.new(
+      class PendingModifiedValues < Struct.new(
         :db_instance_class,
         :allocated_storage,
         :master_user_password,
@@ -8827,6 +9171,8 @@ module Aws
         :storage_type,
         :ca_certificate_identifier,
         :db_subnet_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_class
         #   Contains the new `DBInstanceClass` for the DB instance that will be
@@ -8898,8 +9244,10 @@ module Aws
       #       {
       #         db_cluster_identifier: "String", # required
       #       }
-      class PromoteReadReplicaDBClusterMessage < Aws::Structure.new(
+      class PromoteReadReplicaDBClusterMessage < Struct.new(
         :db_cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_identifier
         #   The identifier of the DB cluster Read Replica to promote. This
@@ -8918,8 +9266,10 @@ module Aws
 
       end
 
-      class PromoteReadReplicaDBClusterResult < Aws::Structure.new(
+      class PromoteReadReplicaDBClusterResult < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -8951,10 +9301,12 @@ module Aws
       #         backup_retention_period: 1,
       #         preferred_backup_window: "String",
       #       }
-      class PromoteReadReplicaMessage < Aws::Structure.new(
+      class PromoteReadReplicaMessage < Struct.new(
         :db_instance_identifier,
         :backup_retention_period,
         :preferred_backup_window)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The DB instance identifier. This value is stored as a lowercase
@@ -9014,8 +9366,10 @@ module Aws
 
       end
 
-      class PromoteReadReplicaResult < Aws::Structure.new(
+      class PromoteReadReplicaResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -9047,11 +9401,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class PurchaseReservedDBInstancesOfferingMessage < Aws::Structure.new(
+      class PurchaseReservedDBInstancesOfferingMessage < Struct.new(
         :reserved_db_instances_offering_id,
         :reserved_db_instance_id,
         :db_instance_count,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_db_instances_offering_id
         #   The ID of the Reserved DB instance offering to purchase.
@@ -9077,8 +9433,10 @@ module Aws
 
       end
 
-      class PurchaseReservedDBInstancesOfferingResult < Aws::Structure.new(
+      class PurchaseReservedDBInstancesOfferingResult < Struct.new(
         :reserved_db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_db_instance
         #   This data type is used as a response element in the
@@ -9095,9 +9453,11 @@ module Aws
       #         db_instance_identifier: "String", # required
       #         force_failover: false,
       #       }
-      class RebootDBInstanceMessage < Aws::Structure.new(
+      class RebootDBInstanceMessage < Struct.new(
         :db_instance_identifier,
         :force_failover)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   The DB instance identifier. This parameter is stored as a lowercase
@@ -9122,8 +9482,10 @@ module Aws
 
       end
 
-      class RebootDBInstanceResult < Aws::Structure.new(
+      class RebootDBInstanceResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -9144,9 +9506,11 @@ module Aws
       # This data type is used as a response element in the
       # DescribeReservedDBInstances and DescribeReservedDBInstancesOfferings
       # actions.
-      class RecurringCharge < Aws::Structure.new(
+      class RecurringCharge < Struct.new(
         :recurring_charge_amount,
         :recurring_charge_frequency)
+
+        include Aws::Structure
 
         # @!attribute [rw] recurring_charge_amount
         #   The amount of the recurring charge.
@@ -9165,9 +9529,11 @@ module Aws
       #         subscription_name: "String", # required
       #         source_identifier: "String", # required
       #       }
-      class RemoveSourceIdentifierFromSubscriptionMessage < Aws::Structure.new(
+      class RemoveSourceIdentifierFromSubscriptionMessage < Struct.new(
         :subscription_name,
         :source_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_name
         #   The name of the RDS event notification subscription you want to
@@ -9182,8 +9548,10 @@ module Aws
 
       end
 
-      class RemoveSourceIdentifierFromSubscriptionResult < Aws::Structure.new(
+      class RemoveSourceIdentifierFromSubscriptionResult < Struct.new(
         :event_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_subscription
         #   Contains the results of a successful invocation of the
@@ -9199,9 +9567,11 @@ module Aws
       #         resource_name: "String", # required
       #         tag_keys: ["String"], # required
       #       }
-      class RemoveTagsFromResourceMessage < Aws::Structure.new(
+      class RemoveTagsFromResourceMessage < Struct.new(
         :resource_name,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon RDS resource the tags will be removed from. This value is
@@ -9222,7 +9592,7 @@ module Aws
       # This data type is used as a response element in the
       # DescribeReservedDBInstances and PurchaseReservedDBInstancesOffering
       # actions.
-      class ReservedDBInstance < Aws::Structure.new(
+      class ReservedDBInstance < Struct.new(
         :reserved_db_instance_id,
         :reserved_db_instances_offering_id,
         :db_instance_class,
@@ -9238,6 +9608,8 @@ module Aws
         :state,
         :recurring_charges,
         :reserved_db_instance_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_db_instance_id
         #   The unique identifier for the reservation.
@@ -9303,9 +9675,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeReservedDBInstances action.
-      class ReservedDBInstanceMessage < Aws::Structure.new(
+      class ReservedDBInstanceMessage < Struct.new(
         :marker,
         :reserved_db_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -9321,7 +9695,7 @@ module Aws
 
       # This data type is used as a response element in the
       # DescribeReservedDBInstancesOfferings action.
-      class ReservedDBInstancesOffering < Aws::Structure.new(
+      class ReservedDBInstancesOffering < Struct.new(
         :reserved_db_instances_offering_id,
         :db_instance_class,
         :duration,
@@ -9332,6 +9706,8 @@ module Aws
         :offering_type,
         :multi_az,
         :recurring_charges)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_db_instances_offering_id
         #   The offering identifier.
@@ -9377,9 +9753,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeReservedDBInstancesOfferings action.
-      class ReservedDBInstancesOfferingMessage < Aws::Structure.new(
+      class ReservedDBInstancesOfferingMessage < Struct.new(
         :marker,
         :reserved_db_instances_offerings)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -9414,10 +9792,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class ResetDBClusterParameterGroupMessage < Aws::Structure.new(
+      class ResetDBClusterParameterGroupMessage < Struct.new(
         :db_cluster_parameter_group_name,
         :reset_all_parameters,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_parameter_group_name
         #   The name of the DB cluster parameter group to reset.
@@ -9459,10 +9839,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class ResetDBParameterGroupMessage < Aws::Structure.new(
+      class ResetDBParameterGroupMessage < Struct.new(
         :db_parameter_group_name,
         :reset_all_parameters,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_parameter_group_name
         #   The name of the DB parameter group.
@@ -9513,9 +9895,11 @@ module Aws
       end
 
       # Describes the pending maintenance actions for a resource.
-      class ResourcePendingMaintenanceActions < Aws::Structure.new(
+      class ResourcePendingMaintenanceActions < Struct.new(
         :resource_identifier,
         :pending_maintenance_action_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_identifier
         #   The ARN of the resource that has pending maintenance actions.
@@ -9562,7 +9946,7 @@ module Aws
       #         s3_prefix: "String",
       #         s3_ingestion_role_arn: "String", # required
       #       }
-      class RestoreDBClusterFromS3Message < Aws::Structure.new(
+      class RestoreDBClusterFromS3Message < Struct.new(
         :availability_zones,
         :backup_retention_period,
         :character_set_name,
@@ -9587,6 +9971,8 @@ module Aws
         :s3_bucket_name,
         :s3_prefix,
         :s3_ingestion_role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   A list of EC2 Availability Zones that instances in the restored DB
@@ -9812,8 +10198,10 @@ module Aws
 
       end
 
-      class RestoreDBClusterFromS3Result < Aws::Structure.new(
+      class RestoreDBClusterFromS3Result < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -9859,7 +10247,7 @@ module Aws
       #         ],
       #         kms_key_id: "String",
       #       }
-      class RestoreDBClusterFromSnapshotMessage < Aws::Structure.new(
+      class RestoreDBClusterFromSnapshotMessage < Struct.new(
         :availability_zones,
         :db_cluster_identifier,
         :snapshot_identifier,
@@ -9872,6 +10260,8 @@ module Aws
         :vpc_security_group_ids,
         :tags,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   Provides the list of EC2 Availability Zones that instances in the
@@ -9974,8 +10364,10 @@ module Aws
 
       end
 
-      class RestoreDBClusterFromSnapshotResult < Aws::Structure.new(
+      class RestoreDBClusterFromSnapshotResult < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -10019,7 +10411,7 @@ module Aws
       #         ],
       #         kms_key_id: "String",
       #       }
-      class RestoreDBClusterToPointInTimeMessage < Aws::Structure.new(
+      class RestoreDBClusterToPointInTimeMessage < Struct.new(
         :db_cluster_identifier,
         :source_db_cluster_identifier,
         :restore_to_time,
@@ -10030,6 +10422,8 @@ module Aws
         :vpc_security_group_ids,
         :tags,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster_identifier
         #   The name of the new DB cluster to be created.
@@ -10142,8 +10536,10 @@ module Aws
 
       end
 
-      class RestoreDBClusterToPointInTimeResult < Aws::Structure.new(
+      class RestoreDBClusterToPointInTimeResult < Struct.new(
         :db_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_cluster
         #   Contains the result of a successful invocation of the following
@@ -10198,7 +10594,7 @@ module Aws
       #         copy_tags_to_snapshot: false,
       #         domain_iam_role_name: "String",
       #       }
-      class RestoreDBInstanceFromDBSnapshotMessage < Aws::Structure.new(
+      class RestoreDBInstanceFromDBSnapshotMessage < Struct.new(
         :db_instance_identifier,
         :db_snapshot_identifier,
         :db_instance_class,
@@ -10220,6 +10616,8 @@ module Aws
         :domain,
         :copy_tags_to_snapshot,
         :domain_iam_role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance_identifier
         #   Name of the DB instance to create from the DB snapshot. This
@@ -10426,8 +10824,10 @@ module Aws
 
       end
 
-      class RestoreDBInstanceFromDBSnapshotResult < Aws::Structure.new(
+      class RestoreDBInstanceFromDBSnapshotResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -10478,7 +10878,7 @@ module Aws
       #         domain: "String",
       #         domain_iam_role_name: "String",
       #       }
-      class RestoreDBInstanceToPointInTimeMessage < Aws::Structure.new(
+      class RestoreDBInstanceToPointInTimeMessage < Struct.new(
         :source_db_instance_identifier,
         :target_db_instance_identifier,
         :restore_time,
@@ -10502,6 +10902,8 @@ module Aws
         :tde_credential_password,
         :domain,
         :domain_iam_role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_db_instance_identifier
         #   The identifier of the source DB instance from which to restore.
@@ -10724,8 +11126,10 @@ module Aws
 
       end
 
-      class RestoreDBInstanceToPointInTimeResult < Aws::Structure.new(
+      class RestoreDBInstanceToPointInTimeResult < Struct.new(
         :db_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_instance
         #   Contains the result of a successful invocation of the following
@@ -10753,12 +11157,14 @@ module Aws
       #         ec2_security_group_id: "String",
       #         ec2_security_group_owner_id: "String",
       #       }
-      class RevokeDBSecurityGroupIngressMessage < Aws::Structure.new(
+      class RevokeDBSecurityGroupIngressMessage < Struct.new(
         :db_security_group_name,
         :cidrip,
         :ec2_security_group_name,
         :ec2_security_group_id,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group_name
         #   The name of the DB security group to revoke ingress from.
@@ -10795,8 +11201,10 @@ module Aws
 
       end
 
-      class RevokeDBSecurityGroupIngressResult < Aws::Structure.new(
+      class RevokeDBSecurityGroupIngressResult < Struct.new(
         :db_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] db_security_group
         #   Contains the result of a successful invocation of the following
@@ -10818,10 +11226,12 @@ module Aws
 
       # Contains an AWS Region name as the result of a successful call to the
       # DescribeSourceRegions action.
-      class SourceRegion < Aws::Structure.new(
+      class SourceRegion < Struct.new(
         :region_name,
         :endpoint,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] region_name
         #   The source region name.
@@ -10839,9 +11249,11 @@ module Aws
 
       # Contains the result of a successful invocation of the
       # DescribeSourceRegions action.
-      class SourceRegionMessage < Aws::Structure.new(
+      class SourceRegionMessage < Struct.new(
         :marker,
         :source_regions)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -10859,10 +11271,12 @@ module Aws
 
       # This data type is used as a response element in the
       # DescribeDBSubnetGroups action.
-      class Subnet < Aws::Structure.new(
+      class Subnet < Struct.new(
         :subnet_identifier,
         :subnet_availability_zone,
         :subnet_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_identifier
         #   Specifies the identifier of the subnet.
@@ -10893,9 +11307,11 @@ module Aws
       #         key: "String",
       #         value: "String",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A key is the required name of the tag. The string value can be from
@@ -10917,8 +11333,10 @@ module Aws
 
       end
 
-      class TagListMessage < Aws::Structure.new(
+      class TagListMessage < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   List of tags returned by the ListTagsForResource operation.
@@ -10928,12 +11346,14 @@ module Aws
 
       # The version of the database engine that a DB instance can be upgraded
       # to.
-      class UpgradeTarget < Aws::Structure.new(
+      class UpgradeTarget < Struct.new(
         :engine,
         :engine_version,
         :description,
         :auto_upgrade,
         :is_major_version_upgrade)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine
         #   The name of the upgrade target database engine.
@@ -10963,9 +11383,11 @@ module Aws
 
       # This data type is used as a response element for queries on VPC
       # security group membership.
-      class VpcSecurityGroupMembership < Aws::Structure.new(
+      class VpcSecurityGroupMembership < Struct.new(
         :vpc_security_group_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_security_group_id
         #   The name of the VPC security group.

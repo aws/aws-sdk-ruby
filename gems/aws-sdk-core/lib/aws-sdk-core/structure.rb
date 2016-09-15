@@ -1,6 +1,6 @@
 module Aws
   # @api private
-  class Structure < Struct
+  module Structure
 
     def initialize(values = {})
       values.each do |k, v|
@@ -45,19 +45,22 @@ module Aws
     end
     alias to_hash to_h
 
-    undef_method :each
-
     class << self
 
       # @api private
       def new(*args)
-        if args == ['AwsEmptyStructure']
-          super
-        elsif args.empty?
-          EmptyStructure
+        if args.empty?
+          Aws::EmptyStruct
         else
-          super(*args)
+          struct = Struct.new(*args)
+          struct.send(:include, Aws::Structure)
+          struct
         end
+      end
+
+      # @api private
+      def self.included(base_class)
+        base_class.send(:undef_method, :each)
       end
 
     end

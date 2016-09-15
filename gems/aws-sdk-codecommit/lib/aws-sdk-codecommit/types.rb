@@ -16,8 +16,10 @@ module Aws
       #       {
       #         repository_names: ["RepositoryName"], # required
       #       }
-      class BatchGetRepositoriesInput < Aws::Structure.new(
+      class BatchGetRepositoriesInput < Struct.new(
         :repository_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_names
         #   The names of the repositories to get information about.
@@ -26,9 +28,11 @@ module Aws
       end
 
       # Represents the output of a batch get repositories operation.
-      class BatchGetRepositoriesOutput < Aws::Structure.new(
+      class BatchGetRepositoriesOutput < Struct.new(
         :repositories,
         :repositories_not_found)
+
+        include Aws::Structure
 
         # @!attribute [rw] repositories
         #   A list of repositories returned by the batch get repositories
@@ -43,9 +47,11 @@ module Aws
       end
 
       # Returns information about a branch.
-      class BranchInfo < Aws::Structure.new(
+      class BranchInfo < Struct.new(
         :branch_name,
         :commit_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] branch_name
         #   The name of the branch.
@@ -58,13 +64,15 @@ module Aws
       end
 
       # Returns information about a specific commit.
-      class Commit < Aws::Structure.new(
+      class Commit < Struct.new(
         :tree_id,
         :parents,
         :message,
         :author,
         :committer,
         :additional_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] tree_id
         #   Tree information for the specified commit.
@@ -108,10 +116,12 @@ module Aws
       #         branch_name: "BranchName", # required
       #         commit_id: "CommitId", # required
       #       }
-      class CreateBranchInput < Aws::Structure.new(
+      class CreateBranchInput < Struct.new(
         :repository_name,
         :branch_name,
         :commit_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository in which you want to create the new
@@ -136,9 +146,11 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         repository_description: "RepositoryDescription",
       #       }
-      class CreateRepositoryInput < Aws::Structure.new(
+      class CreateRepositoryInput < Struct.new(
         :repository_name,
         :repository_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the new repository to be created.
@@ -173,8 +185,10 @@ module Aws
       end
 
       # Represents the output of a create repository operation.
-      class CreateRepositoryOutput < Aws::Structure.new(
+      class CreateRepositoryOutput < Struct.new(
         :repository_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_metadata
         #   Information about the newly created repository.
@@ -189,8 +203,10 @@ module Aws
       #       {
       #         repository_name: "RepositoryName", # required
       #       }
-      class DeleteRepositoryInput < Aws::Structure.new(
+      class DeleteRepositoryInput < Struct.new(
         :repository_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository to delete.
@@ -199,8 +215,10 @@ module Aws
       end
 
       # Represents the output of a delete repository operation.
-      class DeleteRepositoryOutput < Aws::Structure.new(
+      class DeleteRepositoryOutput < Struct.new(
         :repository_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_id
         #   The ID of the repository that was deleted.
@@ -216,9 +234,11 @@ module Aws
       #         repository_name: "RepositoryName",
       #         branch_name: "BranchName",
       #       }
-      class GetBranchInput < Aws::Structure.new(
+      class GetBranchInput < Struct.new(
         :repository_name,
         :branch_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository that contains the branch for which you
@@ -232,8 +252,10 @@ module Aws
       end
 
       # Represents the output of a get branch operation.
-      class GetBranchOutput < Aws::Structure.new(
+      class GetBranchOutput < Struct.new(
         :branch)
+
+        include Aws::Structure
 
         # @!attribute [rw] branch
         #   The name of the branch.
@@ -249,9 +271,11 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         commit_id: "ObjectId", # required
       #       }
-      class GetCommitInput < Aws::Structure.new(
+      class GetCommitInput < Struct.new(
         :repository_name,
         :commit_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository to which the commit was made.
@@ -264,8 +288,10 @@ module Aws
       end
 
       # Represents the output of a get commit operation.
-      class GetCommitOutput < Aws::Structure.new(
+      class GetCommitOutput < Struct.new(
         :commit)
+
+        include Aws::Structure
 
         # @!attribute [rw] commit
         #   Information about the specified commit.
@@ -280,8 +306,10 @@ module Aws
       #       {
       #         repository_name: "RepositoryName", # required
       #       }
-      class GetRepositoryInput < Aws::Structure.new(
+      class GetRepositoryInput < Struct.new(
         :repository_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository to get information about.
@@ -290,8 +318,10 @@ module Aws
       end
 
       # Represents the output of a get repository operation.
-      class GetRepositoryOutput < Aws::Structure.new(
+      class GetRepositoryOutput < Struct.new(
         :repository_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_metadata
         #   Information about the repository.
@@ -306,8 +336,10 @@ module Aws
       #       {
       #         repository_name: "RepositoryName",
       #       }
-      class GetRepositoryTriggersInput < Aws::Structure.new(
+      class GetRepositoryTriggersInput < Struct.new(
         :repository_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository for which the trigger is configured.
@@ -316,9 +348,11 @@ module Aws
       end
 
       # Represents the output of a get repository triggers operation.
-      class GetRepositoryTriggersOutput < Aws::Structure.new(
+      class GetRepositoryTriggersOutput < Struct.new(
         :configuration_id,
         :triggers)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_id
         #   The system-generated unique ID for the trigger.
@@ -338,9 +372,11 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         next_token: "NextToken",
       #       }
-      class ListBranchesInput < Aws::Structure.new(
+      class ListBranchesInput < Struct.new(
         :repository_name,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository that contains the branches.
@@ -353,9 +389,11 @@ module Aws
       end
 
       # Represents the output of a list branches operation.
-      class ListBranchesOutput < Aws::Structure.new(
+      class ListBranchesOutput < Struct.new(
         :branches,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] branches
         #   The list of branch names.
@@ -376,10 +414,12 @@ module Aws
       #         sort_by: "repositoryName", # accepts repositoryName, lastModifiedDate
       #         order: "ascending", # accepts ascending, descending
       #       }
-      class ListRepositoriesInput < Aws::Structure.new(
+      class ListRepositoriesInput < Struct.new(
         :next_token,
         :sort_by,
         :order)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An enumeration token that allows the operation to batch the results
@@ -401,9 +441,11 @@ module Aws
       end
 
       # Represents the output of a list repositories operation.
-      class ListRepositoriesOutput < Aws::Structure.new(
+      class ListRepositoriesOutput < Struct.new(
         :repositories,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] repositories
         #   Lists the repositories called by the list repositories operation.
@@ -434,9 +476,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class PutRepositoryTriggersInput < Aws::Structure.new(
+      class PutRepositoryTriggersInput < Struct.new(
         :repository_name,
         :triggers)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository where you want to create or update the
@@ -450,8 +494,10 @@ module Aws
       end
 
       # Represents the output of a put repository triggers operation.
-      class PutRepositoryTriggersOutput < Aws::Structure.new(
+      class PutRepositoryTriggersOutput < Struct.new(
         :configuration_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_id
         #   The system-generated unique ID for the create or update operation.
@@ -460,7 +506,7 @@ module Aws
       end
 
       # Information about a repository.
-      class RepositoryMetadata < Aws::Structure.new(
+      class RepositoryMetadata < Struct.new(
         :account_id,
         :repository_id,
         :repository_name,
@@ -471,6 +517,8 @@ module Aws
         :clone_url_http,
         :clone_url_ssh,
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_id
         #   The ID of the AWS account associated with the repository.
@@ -516,9 +564,11 @@ module Aws
       end
 
       # Information about a repository name and ID.
-      class RepositoryNameIdPair < Aws::Structure.new(
+      class RepositoryNameIdPair < Struct.new(
         :repository_name,
         :repository_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name associated with the repository.
@@ -541,12 +591,14 @@ module Aws
       #         branches: ["BranchName"],
       #         events: ["all"], # accepts all, updateReference, createReference, deleteReference
       #       }
-      class RepositoryTrigger < Aws::Structure.new(
+      class RepositoryTrigger < Struct.new(
         :name,
         :destination_arn,
         :custom_data,
         :branches,
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the trigger.
@@ -578,9 +630,11 @@ module Aws
       end
 
       # A trigger failed to run.
-      class RepositoryTriggerExecutionFailure < Aws::Structure.new(
+      class RepositoryTriggerExecutionFailure < Struct.new(
         :trigger,
         :failure_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] trigger
         #   The name of the trigger that did not run.
@@ -608,9 +662,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class TestRepositoryTriggersInput < Aws::Structure.new(
+      class TestRepositoryTriggersInput < Struct.new(
         :repository_name,
         :triggers)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository in which to test the triggers.
@@ -623,9 +679,11 @@ module Aws
       end
 
       # Represents the output of a test repository triggers operation.
-      class TestRepositoryTriggersOutput < Aws::Structure.new(
+      class TestRepositoryTriggersOutput < Struct.new(
         :successful_executions,
         :failed_executions)
+
+        include Aws::Structure
 
         # @!attribute [rw] successful_executions
         #   The list of triggers that were successfully tested. This list
@@ -649,9 +707,11 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         default_branch_name: "BranchName", # required
       #       }
-      class UpdateDefaultBranchInput < Aws::Structure.new(
+      class UpdateDefaultBranchInput < Struct.new(
         :repository_name,
         :default_branch_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository to set or change the default branch for.
@@ -671,9 +731,11 @@ module Aws
       #         repository_name: "RepositoryName", # required
       #         repository_description: "RepositoryDescription",
       #       }
-      class UpdateRepositoryDescriptionInput < Aws::Structure.new(
+      class UpdateRepositoryDescriptionInput < Struct.new(
         :repository_name,
         :repository_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_name
         #   The name of the repository to set or change the comment or
@@ -695,9 +757,11 @@ module Aws
       #         old_name: "RepositoryName", # required
       #         new_name: "RepositoryName", # required
       #       }
-      class UpdateRepositoryNameInput < Aws::Structure.new(
+      class UpdateRepositoryNameInput < Struct.new(
         :old_name,
         :new_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] old_name
         #   The existing name of the repository.
@@ -710,10 +774,12 @@ module Aws
       end
 
       # Information about the user who made a specified commit.
-      class UserInfo < Aws::Structure.new(
+      class UserInfo < Struct.new(
         :name,
         :email,
         :date)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the user who made the specified commit.

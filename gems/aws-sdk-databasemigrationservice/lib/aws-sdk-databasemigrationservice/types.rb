@@ -11,10 +11,12 @@ module Aws
 
       # Describes a quota for an AWS account, for example, the number of
       # replication instances allowed.
-      class AccountQuota < Aws::Structure.new(
+      class AccountQuota < Struct.new(
         :account_quota_name,
         :used,
         :max)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_quota_name
         #   The name of the AWS DMS quota for this AWS account.
@@ -42,9 +44,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToResourceMessage < Aws::Structure.new(
+      class AddTagsToResourceMessage < Struct.new(
         :resource_arn,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the AWS DMS resource the tag is to
@@ -60,8 +64,10 @@ module Aws
 
       class AddTagsToResourceResponse < Aws::EmptyStructure; end
 
-      class AvailabilityZone < Aws::Structure.new(
+      class AvailabilityZone < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the availability zone.
@@ -71,7 +77,7 @@ module Aws
 
       # The SSL certificate that can be used to encrypt connections between
       # the endpoints and the replication instance.
-      class Certificate < Aws::Structure.new(
+      class Certificate < Struct.new(
         :certificate_identifier,
         :certificate_creation_date,
         :certificate_pem,
@@ -81,6 +87,8 @@ module Aws
         :valid_to_date,
         :signing_algorithm,
         :key_length)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_identifier
         #   The customer-assigned name of the certificate. Valid characters are
@@ -121,13 +129,15 @@ module Aws
 
       end
 
-      class Connection < Aws::Structure.new(
+      class Connection < Struct.new(
         :replication_instance_arn,
         :endpoint_arn,
         :status,
         :last_failure_message,
         :endpoint_identifier,
         :replication_instance_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance_arn
         #   The Amazon Resource Name (ARN) of the replication instance.
@@ -182,7 +192,7 @@ module Aws
       #         certificate_arn: "String",
       #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
       #       }
-      class CreateEndpointMessage < Aws::Structure.new(
+      class CreateEndpointMessage < Struct.new(
         :endpoint_identifier,
         :endpoint_type,
         :engine_name,
@@ -196,6 +206,8 @@ module Aws
         :tags,
         :certificate_arn,
         :ssl_mode)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_identifier
         #   The database endpoint identifier. Identifiers must begin with a
@@ -264,8 +276,10 @@ module Aws
 
       end
 
-      class CreateEndpointResponse < Aws::Structure.new(
+      class CreateEndpointResponse < Struct.new(
         :endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint
         #   The endpoint that was created.
@@ -296,7 +310,7 @@ module Aws
       #         kms_key_id: "String",
       #         publicly_accessible: false,
       #       }
-      class CreateReplicationInstanceMessage < Aws::Structure.new(
+      class CreateReplicationInstanceMessage < Struct.new(
         :replication_instance_identifier,
         :allocated_storage,
         :replication_instance_class,
@@ -310,6 +324,8 @@ module Aws
         :tags,
         :kms_key_id,
         :publicly_accessible)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance_identifier
         #   The replication instance identifier. This parameter is stored as a
@@ -413,8 +429,10 @@ module Aws
 
       end
 
-      class CreateReplicationInstanceResponse < Aws::Structure.new(
+      class CreateReplicationInstanceResponse < Struct.new(
         :replication_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance
         #   The replication instance that was created.
@@ -436,11 +454,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateReplicationSubnetGroupMessage < Aws::Structure.new(
+      class CreateReplicationSubnetGroupMessage < Struct.new(
         :replication_subnet_group_identifier,
         :replication_subnet_group_description,
         :subnet_ids,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_subnet_group_identifier
         #   The name for the replication subnet group. This value is stored as a
@@ -466,8 +486,10 @@ module Aws
 
       end
 
-      class CreateReplicationSubnetGroupResponse < Aws::Structure.new(
+      class CreateReplicationSubnetGroupResponse < Struct.new(
         :replication_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_subnet_group
         #   The replication subnet group that was created.
@@ -494,7 +516,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateReplicationTaskMessage < Aws::Structure.new(
+      class CreateReplicationTaskMessage < Struct.new(
         :replication_task_identifier,
         :source_endpoint_arn,
         :target_endpoint_arn,
@@ -504,6 +526,8 @@ module Aws
         :replication_task_settings,
         :cdc_start_time,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task_identifier
         #   The replication task identifier.
@@ -556,8 +580,10 @@ module Aws
 
       end
 
-      class CreateReplicationTaskResponse < Aws::Structure.new(
+      class CreateReplicationTaskResponse < Struct.new(
         :replication_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task
         #   The replication task that was created.
@@ -571,8 +597,10 @@ module Aws
       #       {
       #         certificate_arn: "String", # required
       #       }
-      class DeleteCertificateMessage < Aws::Structure.new(
+      class DeleteCertificateMessage < Struct.new(
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   the Amazon Resource Name (ARN) of the deleted certificate.
@@ -580,8 +608,10 @@ module Aws
 
       end
 
-      class DeleteCertificateResponse < Aws::Structure.new(
+      class DeleteCertificateResponse < Struct.new(
         :certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate
         #   The SSL certificate.
@@ -595,8 +625,10 @@ module Aws
       #       {
       #         endpoint_arn: "String", # required
       #       }
-      class DeleteEndpointMessage < Aws::Structure.new(
+      class DeleteEndpointMessage < Struct.new(
         :endpoint_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -605,8 +637,10 @@ module Aws
 
       end
 
-      class DeleteEndpointResponse < Aws::Structure.new(
+      class DeleteEndpointResponse < Struct.new(
         :endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint
         #   The endpoint that was deleted.
@@ -620,8 +654,10 @@ module Aws
       #       {
       #         replication_instance_arn: "String", # required
       #       }
-      class DeleteReplicationInstanceMessage < Aws::Structure.new(
+      class DeleteReplicationInstanceMessage < Struct.new(
         :replication_instance_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance_arn
         #   The Amazon Resource Name (ARN) of the replication instance to be
@@ -630,8 +666,10 @@ module Aws
 
       end
 
-      class DeleteReplicationInstanceResponse < Aws::Structure.new(
+      class DeleteReplicationInstanceResponse < Struct.new(
         :replication_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance
         #   The replication instance that was deleted.
@@ -645,8 +683,10 @@ module Aws
       #       {
       #         replication_subnet_group_identifier: "String", # required
       #       }
-      class DeleteReplicationSubnetGroupMessage < Aws::Structure.new(
+      class DeleteReplicationSubnetGroupMessage < Struct.new(
         :replication_subnet_group_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_subnet_group_identifier
         #   The subnet group name of the replication instance.
@@ -662,8 +702,10 @@ module Aws
       #       {
       #         replication_task_arn: "String", # required
       #       }
-      class DeleteReplicationTaskMessage < Aws::Structure.new(
+      class DeleteReplicationTaskMessage < Struct.new(
         :replication_task_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task_arn
         #   The Amazon Resource Name (ARN) of the replication task to be
@@ -672,8 +714,10 @@ module Aws
 
       end
 
-      class DeleteReplicationTaskResponse < Aws::Structure.new(
+      class DeleteReplicationTaskResponse < Struct.new(
         :replication_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task
         #   The deleted replication task.
@@ -684,8 +728,10 @@ module Aws
       # @api private
       class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
 
-      class DescribeAccountAttributesResponse < Aws::Structure.new(
+      class DescribeAccountAttributesResponse < Struct.new(
         :account_quotas)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_quotas
         #   Account quota information.
@@ -706,10 +752,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeCertificatesMessage < Aws::Structure.new(
+      class DescribeCertificatesMessage < Struct.new(
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   Filters applied to the certificate described in the form of
@@ -733,9 +781,11 @@ module Aws
 
       end
 
-      class DescribeCertificatesResponse < Aws::Structure.new(
+      class DescribeCertificatesResponse < Struct.new(
         :marker,
         :certificates)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   The pagination token.
@@ -760,10 +810,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeConnectionsMessage < Aws::Structure.new(
+      class DescribeConnectionsMessage < Struct.new(
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   The filters applied to the connection.
@@ -790,9 +842,11 @@ module Aws
 
       end
 
-      class DescribeConnectionsResponse < Aws::Structure.new(
+      class DescribeConnectionsResponse < Struct.new(
         :marker,
         :connections)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -819,10 +873,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEndpointTypesMessage < Aws::Structure.new(
+      class DescribeEndpointTypesMessage < Struct.new(
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   Filters applied to the describe action.
@@ -849,9 +905,11 @@ module Aws
 
       end
 
-      class DescribeEndpointTypesResponse < Aws::Structure.new(
+      class DescribeEndpointTypesResponse < Struct.new(
         :marker,
         :supported_endpoint_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -878,10 +936,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEndpointsMessage < Aws::Structure.new(
+      class DescribeEndpointsMessage < Struct.new(
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   Filters applied to the describe action.
@@ -909,9 +969,11 @@ module Aws
 
       end
 
-      class DescribeEndpointsResponse < Aws::Structure.new(
+      class DescribeEndpointsResponse < Struct.new(
         :marker,
         :endpoints)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -932,9 +994,11 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeOrderableReplicationInstancesMessage < Aws::Structure.new(
+      class DescribeOrderableReplicationInstancesMessage < Struct.new(
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_records
         #   The maximum number of records to include in the response. If more
@@ -955,9 +1019,11 @@ module Aws
 
       end
 
-      class DescribeOrderableReplicationInstancesResponse < Aws::Structure.new(
+      class DescribeOrderableReplicationInstancesResponse < Struct.new(
         :orderable_replication_instances,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] orderable_replication_instances
         #   The order-able replication instances available.
@@ -977,8 +1043,10 @@ module Aws
       #       {
       #         endpoint_arn: "String", # required
       #       }
-      class DescribeRefreshSchemasStatusMessage < Aws::Structure.new(
+      class DescribeRefreshSchemasStatusMessage < Struct.new(
         :endpoint_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -987,8 +1055,10 @@ module Aws
 
       end
 
-      class DescribeRefreshSchemasStatusResponse < Aws::Structure.new(
+      class DescribeRefreshSchemasStatusResponse < Struct.new(
         :refresh_schemas_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] refresh_schemas_status
         #   The status of the schema.
@@ -1009,10 +1079,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReplicationInstancesMessage < Aws::Structure.new(
+      class DescribeReplicationInstancesMessage < Struct.new(
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   Filters applied to the describe action.
@@ -1041,9 +1113,11 @@ module Aws
 
       end
 
-      class DescribeReplicationInstancesResponse < Aws::Structure.new(
+      class DescribeReplicationInstancesResponse < Struct.new(
         :marker,
         :replication_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -1070,10 +1144,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReplicationSubnetGroupsMessage < Aws::Structure.new(
+      class DescribeReplicationSubnetGroupsMessage < Struct.new(
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   Filters applied to the describe action.
@@ -1098,9 +1174,11 @@ module Aws
 
       end
 
-      class DescribeReplicationSubnetGroupsResponse < Aws::Structure.new(
+      class DescribeReplicationSubnetGroupsResponse < Struct.new(
         :marker,
         :replication_subnet_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -1127,10 +1205,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReplicationTasksMessage < Aws::Structure.new(
+      class DescribeReplicationTasksMessage < Struct.new(
         :filters,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   Filters applied to the describe action.
@@ -1158,9 +1238,11 @@ module Aws
 
       end
 
-      class DescribeReplicationTasksResponse < Aws::Structure.new(
+      class DescribeReplicationTasksResponse < Struct.new(
         :marker,
         :replication_tasks)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -1182,10 +1264,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeSchemasMessage < Aws::Structure.new(
+      class DescribeSchemasMessage < Struct.new(
         :endpoint_arn,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -1211,9 +1295,11 @@ module Aws
 
       end
 
-      class DescribeSchemasResponse < Aws::Structure.new(
+      class DescribeSchemasResponse < Struct.new(
         :marker,
         :schemas)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional pagination token provided by a previous request. If this
@@ -1235,10 +1321,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeTableStatisticsMessage < Aws::Structure.new(
+      class DescribeTableStatisticsMessage < Struct.new(
         :replication_task_arn,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task_arn
         #   The Amazon Resource Name (ARN) of the replication task.
@@ -1263,10 +1351,12 @@ module Aws
 
       end
 
-      class DescribeTableStatisticsResponse < Aws::Structure.new(
+      class DescribeTableStatisticsResponse < Struct.new(
         :replication_task_arn,
         :table_statistics,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task_arn
         #   The Amazon Resource Name (ARN) of the replication task.
@@ -1284,7 +1374,7 @@ module Aws
 
       end
 
-      class Endpoint < Aws::Structure.new(
+      class Endpoint < Struct.new(
         :endpoint_identifier,
         :endpoint_type,
         :engine_name,
@@ -1298,6 +1388,8 @@ module Aws
         :endpoint_arn,
         :certificate_arn,
         :ssl_mode)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_identifier
         #   The database endpoint identifier. Identifiers must begin with a
@@ -1374,9 +1466,11 @@ module Aws
       #         name: "String", # required
       #         values: ["String"], # required
       #       }
-      class Filter < Aws::Structure.new(
+      class Filter < Struct.new(
         :name,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the filter.
@@ -1395,9 +1489,11 @@ module Aws
       #         certificate_identifier: "String", # required
       #         certificate_pem: "String",
       #       }
-      class ImportCertificateMessage < Aws::Structure.new(
+      class ImportCertificateMessage < Struct.new(
         :certificate_identifier,
         :certificate_pem)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_identifier
         #   The customer-assigned name of the certificate. Valid characters are
@@ -1410,8 +1506,10 @@ module Aws
 
       end
 
-      class ImportCertificateResponse < Aws::Structure.new(
+      class ImportCertificateResponse < Struct.new(
         :certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate
         #   The certificate to be uploaded.
@@ -1425,8 +1523,10 @@ module Aws
       #       {
       #         resource_arn: "String", # required
       #       }
-      class ListTagsForResourceMessage < Aws::Structure.new(
+      class ListTagsForResourceMessage < Struct.new(
         :resource_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -1435,8 +1535,10 @@ module Aws
 
       end
 
-      class ListTagsForResourceResponse < Aws::Structure.new(
+      class ListTagsForResourceResponse < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   A list of tags for the resource.
@@ -1461,7 +1563,7 @@ module Aws
       #         certificate_arn: "String",
       #         ssl_mode: "none", # accepts none, require, verify-ca, verify-full
       #       }
-      class ModifyEndpointMessage < Aws::Structure.new(
+      class ModifyEndpointMessage < Struct.new(
         :endpoint_arn,
         :endpoint_identifier,
         :endpoint_type,
@@ -1474,6 +1576,8 @@ module Aws
         :extra_connection_attributes,
         :certificate_arn,
         :ssl_mode)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -1535,8 +1639,10 @@ module Aws
 
       end
 
-      class ModifyEndpointResponse < Aws::Structure.new(
+      class ModifyEndpointResponse < Struct.new(
         :endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint
         #   The modified endpoint.
@@ -1560,7 +1666,7 @@ module Aws
       #         auto_minor_version_upgrade: false,
       #         replication_instance_identifier: "String",
       #       }
-      class ModifyReplicationInstanceMessage < Aws::Structure.new(
+      class ModifyReplicationInstanceMessage < Struct.new(
         :replication_instance_arn,
         :allocated_storage,
         :apply_immediately,
@@ -1572,6 +1678,8 @@ module Aws
         :allow_major_version_upgrade,
         :auto_minor_version_upgrade,
         :replication_instance_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance_arn
         #   The Amazon Resource Name (ARN) of the replication instance.
@@ -1656,8 +1764,10 @@ module Aws
 
       end
 
-      class ModifyReplicationInstanceResponse < Aws::Structure.new(
+      class ModifyReplicationInstanceResponse < Struct.new(
         :replication_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance
         #   The modified replication instance.
@@ -1673,10 +1783,12 @@ module Aws
       #         replication_subnet_group_description: "String",
       #         subnet_ids: ["String"], # required
       #       }
-      class ModifyReplicationSubnetGroupMessage < Aws::Structure.new(
+      class ModifyReplicationSubnetGroupMessage < Struct.new(
         :replication_subnet_group_identifier,
         :replication_subnet_group_description,
         :subnet_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_subnet_group_identifier
         #   The name of the replication instance subnet group.
@@ -1692,8 +1804,10 @@ module Aws
 
       end
 
-      class ModifyReplicationSubnetGroupResponse < Aws::Structure.new(
+      class ModifyReplicationSubnetGroupResponse < Struct.new(
         :replication_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_subnet_group
         #   The modified replication subnet group.
@@ -1701,7 +1815,7 @@ module Aws
 
       end
 
-      class OrderableReplicationInstance < Aws::Structure.new(
+      class OrderableReplicationInstance < Struct.new(
         :engine_version,
         :replication_instance_class,
         :storage_type,
@@ -1709,6 +1823,8 @@ module Aws
         :max_allocated_storage,
         :default_allocated_storage,
         :included_allocated_storage)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine_version
         #   The version of the replication engine.
@@ -1755,9 +1871,11 @@ module Aws
       #         endpoint_arn: "String", # required
       #         replication_instance_arn: "String", # required
       #       }
-      class RefreshSchemasMessage < Aws::Structure.new(
+      class RefreshSchemasMessage < Struct.new(
         :endpoint_arn,
         :replication_instance_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -1770,8 +1888,10 @@ module Aws
 
       end
 
-      class RefreshSchemasResponse < Aws::Structure.new(
+      class RefreshSchemasResponse < Struct.new(
         :refresh_schemas_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] refresh_schemas_status
         #   The status of the refreshed schema.
@@ -1779,12 +1899,14 @@ module Aws
 
       end
 
-      class RefreshSchemasStatus < Aws::Structure.new(
+      class RefreshSchemasStatus < Struct.new(
         :endpoint_arn,
         :replication_instance_arn,
         :status,
         :last_refresh_date,
         :last_failure_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_arn
         #   The Amazon Resource Name (ARN) string that uniquely identifies the
@@ -1816,9 +1938,11 @@ module Aws
       #         resource_arn: "String", # required
       #         tag_keys: ["String"], # required
       #       }
-      class RemoveTagsFromResourceMessage < Aws::Structure.new(
+      class RemoveTagsFromResourceMessage < Struct.new(
         :resource_arn,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   &gt;The Amazon Resource Name (ARN) of the AWS DMS resource the tag
@@ -1833,7 +1957,7 @@ module Aws
 
       class RemoveTagsFromResourceResponse < Aws::EmptyStructure; end
 
-      class ReplicationInstance < Aws::Structure.new(
+      class ReplicationInstance < Struct.new(
         :replication_instance_identifier,
         :replication_instance_class,
         :replication_instance_status,
@@ -1854,6 +1978,8 @@ module Aws
         :replication_instance_public_ip_addresses,
         :replication_instance_private_ip_addresses,
         :publicly_accessible)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance_identifier
         #   The replication instance identifier. This parameter is stored as a
@@ -1964,11 +2090,13 @@ module Aws
 
       end
 
-      class ReplicationPendingModifiedValues < Aws::Structure.new(
+      class ReplicationPendingModifiedValues < Struct.new(
         :replication_instance_class,
         :allocated_storage,
         :multi_az,
         :engine_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance_class
         #   The compute and memory capacity of the replication instance.
@@ -1995,12 +2123,14 @@ module Aws
 
       end
 
-      class ReplicationSubnetGroup < Aws::Structure.new(
+      class ReplicationSubnetGroup < Struct.new(
         :replication_subnet_group_identifier,
         :replication_subnet_group_description,
         :vpc_id,
         :subnet_group_status,
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_subnet_group_identifier
         #   The identifier of the replication instance subnet group.
@@ -2024,7 +2154,7 @@ module Aws
 
       end
 
-      class ReplicationTask < Aws::Structure.new(
+      class ReplicationTask < Struct.new(
         :replication_task_identifier,
         :source_endpoint_arn,
         :target_endpoint_arn,
@@ -2038,6 +2168,8 @@ module Aws
         :replication_task_start_date,
         :replication_task_arn,
         :replication_task_stats)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task_identifier
         #   The replication task identifier.
@@ -2105,13 +2237,15 @@ module Aws
 
       end
 
-      class ReplicationTaskStats < Aws::Structure.new(
+      class ReplicationTaskStats < Struct.new(
         :full_load_progress_percent,
         :elapsed_time_millis,
         :tables_loaded,
         :tables_loading,
         :tables_queued,
         :tables_errored)
+
+        include Aws::Structure
 
         # @!attribute [rw] full_load_progress_percent
         #   The percent complete for the full load migration task.
@@ -2147,10 +2281,12 @@ module Aws
       #         start_replication_task_type: "start-replication", # required, accepts start-replication, resume-processing, reload-target
       #         cdc_start_time: Time.now,
       #       }
-      class StartReplicationTaskMessage < Aws::Structure.new(
+      class StartReplicationTaskMessage < Struct.new(
         :replication_task_arn,
         :start_replication_task_type,
         :cdc_start_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task_arn
         #   The Amazon Resource Number (ARN) of the replication task to be
@@ -2167,8 +2303,10 @@ module Aws
 
       end
 
-      class StartReplicationTaskResponse < Aws::Structure.new(
+      class StartReplicationTaskResponse < Struct.new(
         :replication_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task
         #   The replication task started.
@@ -2182,8 +2320,10 @@ module Aws
       #       {
       #         replication_task_arn: "String", # required
       #       }
-      class StopReplicationTaskMessage < Aws::Structure.new(
+      class StopReplicationTaskMessage < Struct.new(
         :replication_task_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task_arn
         #   The Amazon Resource Number(ARN) of the replication task to be
@@ -2192,8 +2332,10 @@ module Aws
 
       end
 
-      class StopReplicationTaskResponse < Aws::Structure.new(
+      class StopReplicationTaskResponse < Struct.new(
         :replication_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_task
         #   The replication task stopped.
@@ -2201,10 +2343,12 @@ module Aws
 
       end
 
-      class Subnet < Aws::Structure.new(
+      class Subnet < Struct.new(
         :subnet_identifier,
         :subnet_availability_zone,
         :subnet_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_identifier
         #   The subnet identifier.
@@ -2220,10 +2364,12 @@ module Aws
 
       end
 
-      class SupportedEndpointType < Aws::Structure.new(
+      class SupportedEndpointType < Struct.new(
         :engine_name,
         :supports_cdc,
         :endpoint_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine_name
         #   The database engine name.
@@ -2239,7 +2385,7 @@ module Aws
 
       end
 
-      class TableStatistics < Aws::Structure.new(
+      class TableStatistics < Struct.new(
         :schema_name,
         :table_name,
         :inserts,
@@ -2249,6 +2395,8 @@ module Aws
         :full_load_rows,
         :last_update_time,
         :table_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] schema_name
         #   The schema name.
@@ -2296,9 +2444,11 @@ module Aws
       #         key: "String",
       #         value: "String",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A key is the required name of the tag. The string value can be from
@@ -2327,9 +2477,11 @@ module Aws
       #         replication_instance_arn: "String", # required
       #         endpoint_arn: "String", # required
       #       }
-      class TestConnectionMessage < Aws::Structure.new(
+      class TestConnectionMessage < Struct.new(
         :replication_instance_arn,
         :endpoint_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_instance_arn
         #   The Amazon Resource Name (ARN) of the replication instance.
@@ -2342,8 +2494,10 @@ module Aws
 
       end
 
-      class TestConnectionResponse < Aws::Structure.new(
+      class TestConnectionResponse < Struct.new(
         :connection)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection
         #   The connection tested.
@@ -2351,9 +2505,11 @@ module Aws
 
       end
 
-      class VpcSecurityGroupMembership < Aws::Structure.new(
+      class VpcSecurityGroupMembership < Struct.new(
         :vpc_security_group_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_security_group_id
         #   The VPC security group Id.

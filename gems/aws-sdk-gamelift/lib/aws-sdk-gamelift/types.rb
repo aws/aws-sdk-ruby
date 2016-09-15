@@ -10,13 +10,15 @@ module Aws
     module Types
 
       # Properties describing a fleet alias.
-      class Alias < Aws::Structure.new(
+      class Alias < Struct.new(
         :alias_id,
         :name,
         :description,
         :routing_strategy,
         :creation_time,
         :last_updated_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_id
         #   Unique identifier for a fleet alias.
@@ -53,10 +55,12 @@ module Aws
       # GameLift. These credentials are generated with CreateBuild, and are
       # valid for a limited time. If they expire before you upload your game
       # build, get a new set by calling RequestUploadCredentials.
-      class AwsCredentials < Aws::Structure.new(
+      class AwsCredentials < Struct.new(
         :access_key_id,
         :secret_access_key,
         :session_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_key_id
         #   Access key for an AWS account.
@@ -73,7 +77,7 @@ module Aws
       end
 
       # Properties describing a game build.
-      class Build < Aws::Structure.new(
+      class Build < Struct.new(
         :build_id,
         :name,
         :version,
@@ -81,6 +85,8 @@ module Aws
         :size_on_disk,
         :operating_system,
         :creation_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] build_id
         #   Unique identifier for a build.
@@ -144,10 +150,12 @@ module Aws
       #           message: "FreeText",
       #         },
       #       }
-      class CreateAliasInput < Aws::Structure.new(
+      class CreateAliasInput < Struct.new(
         :name,
         :description,
         :routing_strategy)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Descriptive label associated with an alias. Alias names do not need
@@ -165,8 +173,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class CreateAliasOutput < Aws::Structure.new(
+      class CreateAliasOutput < Struct.new(
         :alias)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias
         #   Object containing the newly created alias record.
@@ -188,11 +198,13 @@ module Aws
       #         },
       #         operating_system: "WINDOWS_2012", # accepts WINDOWS_2012, AMAZON_LINUX
       #       }
-      class CreateBuildInput < Aws::Structure.new(
+      class CreateBuildInput < Struct.new(
         :name,
         :version,
         :storage_location,
         :operating_system)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Descriptive label associated with a build. Build names do not need
@@ -226,10 +238,12 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class CreateBuildOutput < Aws::Structure.new(
+      class CreateBuildOutput < Struct.new(
         :build,
         :upload_credentials,
         :storage_location)
+
+        include Aws::Structure
 
         # @!attribute [rw] build
         #   Set of properties for the newly created build.
@@ -280,7 +294,7 @@ module Aws
       #           ],
       #         },
       #       }
-      class CreateFleetInput < Aws::Structure.new(
+      class CreateFleetInput < Struct.new(
         :name,
         :description,
         :build_id,
@@ -291,6 +305,8 @@ module Aws
         :ec2_inbound_permissions,
         :new_game_session_protection_policy,
         :runtime_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Descriptive label associated with a fleet. Fleet names do not need
@@ -389,8 +405,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class CreateFleetOutput < Aws::Structure.new(
+      class CreateFleetOutput < Struct.new(
         :fleet_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_attributes
         #   Properties for the newly created fleet.
@@ -414,12 +432,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateGameSessionInput < Aws::Structure.new(
+      class CreateGameSessionInput < Struct.new(
         :fleet_id,
         :alias_id,
         :maximum_player_session_count,
         :name,
         :game_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet. Each request must reference either a
@@ -449,8 +469,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class CreateGameSessionOutput < Aws::Structure.new(
+      class CreateGameSessionOutput < Struct.new(
         :game_session)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session
         #   Object containing the newly created game session record.
@@ -466,9 +488,11 @@ module Aws
       #         game_session_id: "GameSessionId", # required
       #         player_id: "NonZeroAndMaxString", # required
       #       }
-      class CreatePlayerSessionInput < Aws::Structure.new(
+      class CreatePlayerSessionInput < Struct.new(
         :game_session_id,
         :player_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session_id
         #   Unique identifier for a game session. Specify the game session you
@@ -482,8 +506,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class CreatePlayerSessionOutput < Aws::Structure.new(
+      class CreatePlayerSessionOutput < Struct.new(
         :player_session)
+
+        include Aws::Structure
 
         # @!attribute [rw] player_session
         #   Object containing the newly created player session record.
@@ -499,9 +525,11 @@ module Aws
       #         game_session_id: "GameSessionId", # required
       #         player_ids: ["NonZeroAndMaxString"], # required
       #       }
-      class CreatePlayerSessionsInput < Aws::Structure.new(
+      class CreatePlayerSessionsInput < Struct.new(
         :game_session_id,
         :player_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session_id
         #   Unique identifier for a game session.
@@ -514,8 +542,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class CreatePlayerSessionsOutput < Aws::Structure.new(
+      class CreatePlayerSessionsOutput < Struct.new(
         :player_sessions)
+
+        include Aws::Structure
 
         # @!attribute [rw] player_sessions
         #   Collection of player session objects created for the added players.
@@ -530,8 +560,10 @@ module Aws
       #       {
       #         alias_id: "AliasId", # required
       #       }
-      class DeleteAliasInput < Aws::Structure.new(
+      class DeleteAliasInput < Struct.new(
         :alias_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_id
         #   Unique identifier for a fleet alias. Specify the alias you want to
@@ -547,8 +579,10 @@ module Aws
       #       {
       #         build_id: "BuildId", # required
       #       }
-      class DeleteBuildInput < Aws::Structure.new(
+      class DeleteBuildInput < Struct.new(
         :build_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] build_id
         #   Unique identifier for the build you want to delete.
@@ -563,8 +597,10 @@ module Aws
       #       {
       #         fleet_id: "FleetId", # required
       #       }
-      class DeleteFleetInput < Aws::Structure.new(
+      class DeleteFleetInput < Struct.new(
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the fleet you want to delete.
@@ -580,9 +616,11 @@ module Aws
       #         name: "NonZeroAndMaxString", # required
       #         fleet_id: "FleetId", # required
       #       }
-      class DeleteScalingPolicyInput < Aws::Structure.new(
+      class DeleteScalingPolicyInput < Struct.new(
         :name,
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Descriptive label associated with a scaling policy. Policy names do
@@ -602,8 +640,10 @@ module Aws
       #       {
       #         alias_id: "AliasId", # required
       #       }
-      class DescribeAliasInput < Aws::Structure.new(
+      class DescribeAliasInput < Struct.new(
         :alias_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_id
         #   Unique identifier for a fleet alias. Specify the alias you want to
@@ -613,8 +653,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeAliasOutput < Aws::Structure.new(
+      class DescribeAliasOutput < Struct.new(
         :alias)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias
         #   Object containing the requested alias.
@@ -629,8 +671,10 @@ module Aws
       #       {
       #         build_id: "BuildId", # required
       #       }
-      class DescribeBuildInput < Aws::Structure.new(
+      class DescribeBuildInput < Struct.new(
         :build_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] build_id
         #   Unique identifier of the build that you want to retrieve properties
@@ -640,8 +684,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeBuildOutput < Aws::Structure.new(
+      class DescribeBuildOutput < Struct.new(
         :build)
+
+        include Aws::Structure
 
         # @!attribute [rw] build
         #   Set of properties describing the requested build.
@@ -656,8 +702,10 @@ module Aws
       #       {
       #         ec2_instance_type: "t2.micro", # accepts t2.micro, t2.small, t2.medium, t2.large, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge
       #       }
-      class DescribeEC2InstanceLimitsInput < Aws::Structure.new(
+      class DescribeEC2InstanceLimitsInput < Struct.new(
         :ec2_instance_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] ec2_instance_type
         #   Name of an EC2 instance type that is supported in Amazon GameLift. A
@@ -675,8 +723,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeEC2InstanceLimitsOutput < Aws::Structure.new(
+      class DescribeEC2InstanceLimitsOutput < Struct.new(
         :ec2_instance_limits)
+
+        include Aws::Structure
 
         # @!attribute [rw] ec2_instance_limits
         #   Object containing the maximum number of instances for the specified
@@ -694,10 +744,12 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribeFleetAttributesInput < Aws::Structure.new(
+      class DescribeFleetAttributesInput < Struct.new(
         :fleet_ids,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_ids
         #   Unique identifiers for the fleet(s) that you want to retrieve
@@ -723,9 +775,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeFleetAttributesOutput < Aws::Structure.new(
+      class DescribeFleetAttributesOutput < Struct.new(
         :fleet_attributes,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_attributes
         #   Collection of objects containing attribute metadata for each
@@ -755,10 +809,12 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribeFleetCapacityInput < Aws::Structure.new(
+      class DescribeFleetCapacityInput < Struct.new(
         :fleet_ids,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_ids
         #   Unique identifier for the fleet(s) you want to retrieve capacity
@@ -784,9 +840,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeFleetCapacityOutput < Aws::Structure.new(
+      class DescribeFleetCapacityOutput < Struct.new(
         :fleet_capacity,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_capacity
         #   Collection of objects containing capacity information for each
@@ -819,12 +877,14 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribeFleetEventsInput < Aws::Structure.new(
+      class DescribeFleetEventsInput < Struct.new(
         :fleet_id,
         :start_time,
         :end_time,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the fleet to get event logs for.
@@ -858,9 +918,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeFleetEventsOutput < Aws::Structure.new(
+      class DescribeFleetEventsOutput < Struct.new(
         :events,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] events
         #   Collection of objects containing event log entries for the specified
@@ -888,8 +950,10 @@ module Aws
       #       {
       #         fleet_id: "FleetId", # required
       #       }
-      class DescribeFleetPortSettingsInput < Aws::Structure.new(
+      class DescribeFleetPortSettingsInput < Struct.new(
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the fleet you want to retrieve port settings
@@ -899,8 +963,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeFleetPortSettingsOutput < Aws::Structure.new(
+      class DescribeFleetPortSettingsOutput < Struct.new(
         :inbound_permissions)
+
+        include Aws::Structure
 
         # @!attribute [rw] inbound_permissions
         #   Object containing port settings for the requested fleet ID.
@@ -917,10 +983,12 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribeFleetUtilizationInput < Aws::Structure.new(
+      class DescribeFleetUtilizationInput < Struct.new(
         :fleet_ids,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_ids
         #   Unique identifier for the fleet(s) you want to retrieve utilization
@@ -946,9 +1014,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeFleetUtilizationOutput < Aws::Structure.new(
+      class DescribeFleetUtilizationOutput < Struct.new(
         :fleet_utilization,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_utilization
         #   Collection of objects containing utilization information for each
@@ -981,13 +1051,15 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribeGameSessionDetailsInput < Aws::Structure.new(
+      class DescribeGameSessionDetailsInput < Struct.new(
         :fleet_id,
         :game_session_id,
         :alias_id,
         :status_filter,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet. Specify a fleet to retrieve
@@ -1024,9 +1096,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeGameSessionDetailsOutput < Aws::Structure.new(
+      class DescribeGameSessionDetailsOutput < Struct.new(
         :game_session_details,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session_details
         #   Collection of objects containing game session properties and the
@@ -1060,13 +1134,15 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribeGameSessionsInput < Aws::Structure.new(
+      class DescribeGameSessionsInput < Struct.new(
         :fleet_id,
         :game_session_id,
         :alias_id,
         :status_filter,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet. Specify a fleet to retrieve
@@ -1103,9 +1179,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeGameSessionsOutput < Aws::Structure.new(
+      class DescribeGameSessionsOutput < Struct.new(
         :game_sessions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_sessions
         #   Collection of objects containing game session properties for each
@@ -1138,13 +1216,15 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribePlayerSessionsInput < Aws::Structure.new(
+      class DescribePlayerSessionsInput < Struct.new(
         :game_session_id,
         :player_id,
         :player_session_id,
         :player_session_status_filter,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session_id
         #   Unique identifier for a game session.
@@ -1190,9 +1270,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribePlayerSessionsOutput < Aws::Structure.new(
+      class DescribePlayerSessionsOutput < Struct.new(
         :player_sessions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] player_sessions
         #   Collection of objects containing properties for each player session
@@ -1220,8 +1302,10 @@ module Aws
       #       {
       #         fleet_id: "FleetId", # required
       #       }
-      class DescribeRuntimeConfigurationInput < Aws::Structure.new(
+      class DescribeRuntimeConfigurationInput < Struct.new(
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier of the fleet to get the runtime configuration for.
@@ -1230,8 +1314,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeRuntimeConfigurationOutput < Aws::Structure.new(
+      class DescribeRuntimeConfigurationOutput < Struct.new(
         :runtime_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] runtime_configuration
         #   Instructions describing how server processes should be launched and
@@ -1250,11 +1336,13 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class DescribeScalingPoliciesInput < Aws::Structure.new(
+      class DescribeScalingPoliciesInput < Struct.new(
         :fleet_id,
         :status_filter,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet. Specify the fleet to retrieve scaling
@@ -1291,9 +1379,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class DescribeScalingPoliciesOutput < Aws::Structure.new(
+      class DescribeScalingPoliciesOutput < Struct.new(
         :scaling_policies,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] scaling_policies
         #   Collection of objects containing the scaling policies matching the
@@ -1319,7 +1409,7 @@ module Aws
       # instances. Pending and terminating counts are non-zero only if fleet
       # capacity is adjusting to an UpdateFleetCapacity request, or if access
       # to resources is temporarily affected.
-      class EC2InstanceCounts < Aws::Structure.new(
+      class EC2InstanceCounts < Struct.new(
         :desired,
         :minimum,
         :maximum,
@@ -1327,6 +1417,8 @@ module Aws
         :active,
         :idle,
         :terminating)
+
+        include Aws::Structure
 
         # @!attribute [rw] desired
         #   Ideal number of active instances in the fleet.
@@ -1364,10 +1456,12 @@ module Aws
       # Maximum number of instances allowed based on the Amazon Elastic
       # Compute Cloud (Amazon EC2) instance type. Instance limits can be
       # retrieved by calling DescribeEC2InstanceLimits.
-      class EC2InstanceLimit < Aws::Structure.new(
+      class EC2InstanceLimit < Struct.new(
         :ec2_instance_type,
         :current_instances,
         :instance_limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] ec2_instance_type
         #   Name of an EC2 instance type that is supported in Amazon GameLift. A
@@ -1394,12 +1488,14 @@ module Aws
 
       # Log entry describing an event involving an Amazon GameLift resource
       # (such as a fleet).
-      class Event < Aws::Structure.new(
+      class Event < Struct.new(
         :event_id,
         :resource_id,
         :event_code,
         :message,
         :event_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_id
         #   Unique identifier for a fleet event.
@@ -1425,7 +1521,7 @@ module Aws
       end
 
       # General properties describing a fleet.
-      class FleetAttributes < Aws::Structure.new(
+      class FleetAttributes < Struct.new(
         :fleet_id,
         :description,
         :name,
@@ -1438,6 +1534,8 @@ module Aws
         :log_paths,
         :new_game_session_protection_policy,
         :operating_system)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet.
@@ -1535,10 +1633,12 @@ module Aws
       # EC2 instances. By default, new fleets have a capacity of one instance,
       # but can be updated as needed. The maximum number of instances for a
       # fleet is determined by the fleet\'s instance type.
-      class FleetCapacity < Aws::Structure.new(
+      class FleetCapacity < Struct.new(
         :fleet_id,
         :instance_type,
         :instance_counts)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet.
@@ -1564,12 +1664,14 @@ module Aws
 
       # Current status of fleet utilization, including the number of game and
       # player sessions being hosted.
-      class FleetUtilization < Aws::Structure.new(
+      class FleetUtilization < Struct.new(
         :fleet_id,
         :active_server_process_count,
         :active_game_session_count,
         :current_player_session_count,
         :maximum_player_session_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet.
@@ -1612,9 +1714,11 @@ module Aws
       #         key: "GamePropertyKey", # required
       #         value: "GamePropertyValue", # required
       #       }
-      class GameProperty < Aws::Structure.new(
+      class GameProperty < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   @return [String]
@@ -1625,7 +1729,7 @@ module Aws
       end
 
       # Properties describing a game session.
-      class GameSession < Aws::Structure.new(
+      class GameSession < Struct.new(
         :game_session_id,
         :name,
         :fleet_id,
@@ -1638,6 +1742,8 @@ module Aws
         :ip_address,
         :port,
         :player_session_creation_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session_id
         #   Unique identifier for a game session.
@@ -1699,9 +1805,11 @@ module Aws
 
       # A game session\'s properties and the protection policy currently in
       # force.
-      class GameSessionDetail < Aws::Structure.new(
+      class GameSessionDetail < Struct.new(
         :game_session,
         :protection_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session
         #   Properties describing a game session.
@@ -1725,8 +1833,10 @@ module Aws
       #       {
       #         game_session_id: "GameSessionId", # required
       #       }
-      class GetGameSessionLogUrlInput < Aws::Structure.new(
+      class GetGameSessionLogUrlInput < Struct.new(
         :game_session_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session_id
         #   Unique identifier for a game session. Specify the game session you
@@ -1736,8 +1846,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class GetGameSessionLogUrlOutput < Aws::Structure.new(
+      class GetGameSessionLogUrlOutput < Struct.new(
         :pre_signed_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] pre_signed_url
         #   Location of the requested game session logs, available for download.
@@ -1759,11 +1871,13 @@ module Aws
       #         ip_range: "NonBlankString", # required
       #         protocol: "TCP", # required, accepts TCP, UDP
       #       }
-      class IpPermission < Aws::Structure.new(
+      class IpPermission < Struct.new(
         :from_port,
         :to_port,
         :ip_range,
         :protocol)
+
+        include Aws::Structure
 
         # @!attribute [rw] from_port
         #   Starting value for a range of allowed port numbers.
@@ -1800,11 +1914,13 @@ module Aws
       #         limit: 1,
       #         next_token: "NonEmptyString",
       #       }
-      class ListAliasesInput < Aws::Structure.new(
+      class ListAliasesInput < Struct.new(
         :routing_strategy_type,
         :name,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] routing_strategy_type
         #   Type of routing to filter results on. Use this parameter to retrieve
@@ -1840,9 +1956,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class ListAliasesOutput < Aws::Structure.new(
+      class ListAliasesOutput < Struct.new(
         :aliases,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] aliases
         #   Collection of alias records that match the list request.
@@ -1871,10 +1989,12 @@ module Aws
       #         limit: 1,
       #         next_token: "NonEmptyString",
       #       }
-      class ListBuildsInput < Aws::Structure.new(
+      class ListBuildsInput < Struct.new(
         :status,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   Build status to filter results by. To retrieve all builds, leave
@@ -1906,9 +2026,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class ListBuildsOutput < Aws::Structure.new(
+      class ListBuildsOutput < Struct.new(
         :builds,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] builds
         #   Collection of build records that match the request.
@@ -1937,10 +2059,12 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class ListFleetsInput < Aws::Structure.new(
+      class ListFleetsInput < Struct.new(
         :build_id,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] build_id
         #   Unique identifier of the build to return fleets for. Use this
@@ -1962,9 +2086,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class ListFleetsOutput < Aws::Structure.new(
+      class ListFleetsOutput < Struct.new(
         :fleet_ids,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_ids
         #   Set of fleet IDs matching the list request. You can retrieve
@@ -1988,7 +2114,7 @@ module Aws
       end
 
       # Properties describing a player session.
-      class PlayerSession < Aws::Structure.new(
+      class PlayerSession < Struct.new(
         :player_session_id,
         :player_id,
         :game_session_id,
@@ -1998,6 +2124,8 @@ module Aws
         :status,
         :ip_address,
         :port)
+
+        include Aws::Structure
 
         # @!attribute [rw] player_session_id
         #   Unique identifier for a player session.
@@ -2069,7 +2197,7 @@ module Aws
       #         evaluation_periods: 1, # required
       #         metric_name: "ActivatingGameSessions", # required, accepts ActivatingGameSessions, ActiveGameSessions, ActiveInstances, AvailablePlayerSessions, CurrentPlayerSessions, IdleInstances
       #       }
-      class PutScalingPolicyInput < Aws::Structure.new(
+      class PutScalingPolicyInput < Struct.new(
         :name,
         :fleet_id,
         :scaling_adjustment,
@@ -2078,6 +2206,8 @@ module Aws
         :comparison_operator,
         :evaluation_periods,
         :metric_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Descriptive label associated with a scaling policy. Policy names do
@@ -2147,8 +2277,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class PutScalingPolicyOutput < Aws::Structure.new(
+      class PutScalingPolicyOutput < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Descriptive label associated with a scaling policy. Policy names do
@@ -2164,8 +2296,10 @@ module Aws
       #       {
       #         build_id: "BuildId", # required
       #       }
-      class RequestUploadCredentialsInput < Aws::Structure.new(
+      class RequestUploadCredentialsInput < Struct.new(
         :build_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] build_id
         #   Unique identifier for the build you want to get credentials for.
@@ -2174,9 +2308,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class RequestUploadCredentialsOutput < Aws::Structure.new(
+      class RequestUploadCredentialsOutput < Struct.new(
         :upload_credentials,
         :storage_location)
+
+        include Aws::Structure
 
         # @!attribute [rw] upload_credentials
         #   AWS credentials required when uploading a game build to the storage
@@ -2198,8 +2334,10 @@ module Aws
       #       {
       #         alias_id: "AliasId", # required
       #       }
-      class ResolveAliasInput < Aws::Structure.new(
+      class ResolveAliasInput < Struct.new(
         :alias_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_id
         #   Unique identifier for the alias you want to resolve.
@@ -2208,8 +2346,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class ResolveAliasOutput < Aws::Structure.new(
+      class ResolveAliasOutput < Struct.new(
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Fleet ID associated with the requested alias.
@@ -2226,10 +2366,12 @@ module Aws
       #         fleet_id: "FleetId",
       #         message: "FreeText",
       #       }
-      class RoutingStrategy < Aws::Structure.new(
+      class RoutingStrategy < Struct.new(
         :type,
         :fleet_id,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   Type of routing strategy.
@@ -2286,8 +2428,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class RuntimeConfiguration < Aws::Structure.new(
+      class RuntimeConfiguration < Struct.new(
         :server_processes)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_processes
         #   Collection of server process configurations describing what server
@@ -2313,10 +2457,12 @@ module Aws
       #         key: "NonEmptyString",
       #         role_arn: "NonEmptyString",
       #       }
-      class S3Location < Aws::Structure.new(
+      class S3Location < Struct.new(
         :bucket,
         :key,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   Amazon S3 bucket identifier.
@@ -2335,7 +2481,7 @@ module Aws
 
       # Rule that controls how a fleet is scaled. Scaling policies are
       # uniquely identified by the combination of name and fleet ID.
-      class ScalingPolicy < Aws::Structure.new(
+      class ScalingPolicy < Struct.new(
         :fleet_id,
         :name,
         :status,
@@ -2345,6 +2491,8 @@ module Aws
         :threshold,
         :evaluation_periods,
         :metric_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identity for the fleet associated with this scaling policy.
@@ -2439,13 +2587,15 @@ module Aws
       #         limit: 1,
       #         next_token: "NonZeroAndMaxString",
       #       }
-      class SearchGameSessionsInput < Aws::Structure.new(
+      class SearchGameSessionsInput < Struct.new(
         :fleet_id,
         :alias_id,
         :filter_expression,
         :sort_expression,
         :limit,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for a fleet. Each request must reference either a
@@ -2530,9 +2680,11 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class SearchGameSessionsOutput < Aws::Structure.new(
+      class SearchGameSessionsOutput < Struct.new(
         :game_sessions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_sessions
         #   Collection of objects containing game session properties for each
@@ -2567,10 +2719,12 @@ module Aws
       #         parameters: "NonZeroAndMaxString",
       #         concurrent_executions: 1, # required
       #       }
-      class ServerProcess < Aws::Structure.new(
+      class ServerProcess < Struct.new(
         :launch_path,
         :parameters,
         :concurrent_executions)
+
+        include Aws::Structure
 
         # @!attribute [rw] launch_path
         #   Location in the game build of the server executable. All game builds
@@ -2605,11 +2759,13 @@ module Aws
       #           message: "FreeText",
       #         },
       #       }
-      class UpdateAliasInput < Aws::Structure.new(
+      class UpdateAliasInput < Struct.new(
         :alias_id,
         :name,
         :description,
         :routing_strategy)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_id
         #   Unique identifier for a fleet alias. Specify the alias you want to
@@ -2632,8 +2788,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class UpdateAliasOutput < Aws::Structure.new(
+      class UpdateAliasOutput < Struct.new(
         :alias)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias
         #   Object containing the updated alias configuration.
@@ -2650,10 +2808,12 @@ module Aws
       #         name: "NonZeroAndMaxString",
       #         version: "NonZeroAndMaxString",
       #       }
-      class UpdateBuildInput < Aws::Structure.new(
+      class UpdateBuildInput < Struct.new(
         :build_id,
         :name,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] build_id
         #   Unique identifier of the build you want to update.
@@ -2672,8 +2832,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class UpdateBuildOutput < Aws::Structure.new(
+      class UpdateBuildOutput < Struct.new(
         :build)
+
+        include Aws::Structure
 
         # @!attribute [rw] build
         #   Object containing the updated build record.
@@ -2691,11 +2853,13 @@ module Aws
       #         description: "NonZeroAndMaxString",
       #         new_game_session_protection_policy: "NoProtection", # accepts NoProtection, FullProtection
       #       }
-      class UpdateFleetAttributesInput < Aws::Structure.new(
+      class UpdateFleetAttributesInput < Struct.new(
         :fleet_id,
         :name,
         :description,
         :new_game_session_protection_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the fleet you want to update attribute
@@ -2725,8 +2889,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class UpdateFleetAttributesOutput < Aws::Structure.new(
+      class UpdateFleetAttributesOutput < Struct.new(
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the updated fleet.
@@ -2744,11 +2910,13 @@ module Aws
       #         min_size: 1,
       #         max_size: 1,
       #       }
-      class UpdateFleetCapacityInput < Aws::Structure.new(
+      class UpdateFleetCapacityInput < Struct.new(
         :fleet_id,
         :desired_instances,
         :min_size,
         :max_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the fleet you want to update capacity for.
@@ -2771,8 +2939,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class UpdateFleetCapacityOutput < Aws::Structure.new(
+      class UpdateFleetCapacityOutput < Struct.new(
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the updated fleet.
@@ -2803,10 +2973,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateFleetPortSettingsInput < Aws::Structure.new(
+      class UpdateFleetPortSettingsInput < Struct.new(
         :fleet_id,
         :inbound_permission_authorizations,
         :inbound_permission_revocations)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the fleet you want to update port settings
@@ -2824,8 +2996,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class UpdateFleetPortSettingsOutput < Aws::Structure.new(
+      class UpdateFleetPortSettingsOutput < Struct.new(
         :fleet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier for the updated fleet.
@@ -2844,12 +3018,14 @@ module Aws
       #         player_session_creation_policy: "ACCEPT_ALL", # accepts ACCEPT_ALL, DENY_ALL
       #         protection_policy: "NoProtection", # accepts NoProtection, FullProtection
       #       }
-      class UpdateGameSessionInput < Aws::Structure.new(
+      class UpdateGameSessionInput < Struct.new(
         :game_session_id,
         :maximum_player_session_count,
         :name,
         :player_session_creation_policy,
         :protection_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session_id
         #   Unique identifier for a game session. Specify the game session you
@@ -2883,8 +3059,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class UpdateGameSessionOutput < Aws::Structure.new(
+      class UpdateGameSessionOutput < Struct.new(
         :game_session)
+
+        include Aws::Structure
 
         # @!attribute [rw] game_session
         #   Object containing the updated game session metadata.
@@ -2908,9 +3086,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class UpdateRuntimeConfigurationInput < Aws::Structure.new(
+      class UpdateRuntimeConfigurationInput < Struct.new(
         :fleet_id,
         :runtime_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] fleet_id
         #   Unique identifier of the fleet to update runtime configuration for.
@@ -2929,8 +3109,10 @@ module Aws
       end
 
       # Represents the returned data in response to a request action.
-      class UpdateRuntimeConfigurationOutput < Aws::Structure.new(
+      class UpdateRuntimeConfigurationOutput < Struct.new(
         :runtime_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] runtime_configuration
         #   The runtime configuration currently in force. If the update was

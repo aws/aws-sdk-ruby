@@ -36,7 +36,7 @@ module Aws
       #         tape_drive_type: "TapeDriveType",
       #         medium_changer_type: "MediumChangerType",
       #       }
-      class ActivateGatewayInput < Aws::Structure.new(
+      class ActivateGatewayInput < Struct.new(
         :activation_key,
         :gateway_name,
         :gateway_timezone,
@@ -44,6 +44,8 @@ module Aws
         :gateway_type,
         :tape_drive_type,
         :medium_changer_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] activation_key
         #   Your gateway activation key. You can obtain the activation key by
@@ -117,8 +119,10 @@ module Aws
       # name of the gateway has no effect on the gateway ARN.
       #
       #  </note>
-      class ActivateGatewayOutput < Aws::Structure.new(
+      class ActivateGatewayOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -134,9 +138,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         disk_ids: ["DiskId"], # required
       #       }
-      class AddCacheInput < Aws::Structure.new(
+      class AddCacheInput < Struct.new(
         :gateway_arn,
         :disk_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -148,8 +154,10 @@ module Aws
 
       end
 
-      class AddCacheOutput < Aws::Structure.new(
+      class AddCacheOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -171,9 +179,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToResourceInput < Aws::Structure.new(
+      class AddTagsToResourceInput < Struct.new(
         :resource_arn,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the resource you want to add tags
@@ -194,8 +204,10 @@ module Aws
       end
 
       # AddTagsToResourceOutput
-      class AddTagsToResourceOutput < Aws::Structure.new(
+      class AddTagsToResourceOutput < Struct.new(
         :resource_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the resource you want to add tags
@@ -211,9 +223,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         disk_ids: ["DiskId"], # required
       #       }
-      class AddUploadBufferInput < Aws::Structure.new(
+      class AddUploadBufferInput < Struct.new(
         :gateway_arn,
         :disk_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -225,8 +239,10 @@ module Aws
 
       end
 
-      class AddUploadBufferOutput < Aws::Structure.new(
+      class AddUploadBufferOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -247,9 +263,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         disk_ids: ["DiskId"], # required
       #       }
-      class AddWorkingStorageInput < Aws::Structure.new(
+      class AddWorkingStorageInput < Struct.new(
         :gateway_arn,
         :disk_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -266,8 +284,10 @@ module Aws
 
       # A JSON object containing the of the gateway for which working storage
       # was configured.
-      class AddWorkingStorageOutput < Aws::Structure.new(
+      class AddWorkingStorageOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -276,7 +296,7 @@ module Aws
 
       end
 
-      class CachediSCSIVolume < Aws::Structure.new(
+      class CachediSCSIVolume < Struct.new(
         :volume_arn,
         :volume_id,
         :volume_type,
@@ -285,6 +305,8 @@ module Aws
         :volume_progress,
         :source_snapshot_id,
         :volume_iscsi_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -321,9 +343,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         tape_arn: "TapeARN", # required
       #       }
-      class CancelArchivalInput < Aws::Structure.new(
+      class CancelArchivalInput < Struct.new(
         :gateway_arn,
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -338,8 +362,10 @@ module Aws
       end
 
       # CancelArchivalOutput
-      class CancelArchivalOutput < Aws::Structure.new(
+      class CancelArchivalOutput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape for which
@@ -356,9 +382,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         tape_arn: "TapeARN", # required
       #       }
-      class CancelRetrievalInput < Aws::Structure.new(
+      class CancelRetrievalInput < Struct.new(
         :gateway_arn,
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -373,8 +401,10 @@ module Aws
       end
 
       # CancelRetrievalOutput
-      class CancelRetrievalOutput < Aws::Structure.new(
+      class CancelRetrievalOutput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape for which
@@ -386,11 +416,13 @@ module Aws
       # Describes Challenge-Handshake Authentication Protocol (CHAP)
       # information that supports authentication between your gateway and
       # iSCSI initiators.
-      class ChapInfo < Aws::Structure.new(
+      class ChapInfo < Struct.new(
         :target_arn,
         :secret_to_authenticate_initiator,
         :initiator_name,
         :secret_to_authenticate_target)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the volume.
@@ -426,13 +458,15 @@ module Aws
       #         network_interface_id: "NetworkInterfaceId", # required
       #         client_token: "ClientToken", # required
       #       }
-      class CreateCachediSCSIVolumeInput < Aws::Structure.new(
+      class CreateCachediSCSIVolumeInput < Struct.new(
         :gateway_arn,
         :volume_size_in_bytes,
         :snapshot_id,
         :target_name,
         :network_interface_id,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -456,9 +490,11 @@ module Aws
 
       end
 
-      class CreateCachediSCSIVolumeOutput < Aws::Structure.new(
+      class CreateCachediSCSIVolumeOutput < Struct.new(
         :volume_arn,
         :target_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -475,9 +511,11 @@ module Aws
       #         volume_arn: "VolumeARN", # required
       #         snapshot_description: "SnapshotDescription", # required
       #       }
-      class CreateSnapshotFromVolumeRecoveryPointInput < Aws::Structure.new(
+      class CreateSnapshotFromVolumeRecoveryPointInput < Struct.new(
         :volume_arn,
         :snapshot_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -487,10 +525,12 @@ module Aws
 
       end
 
-      class CreateSnapshotFromVolumeRecoveryPointOutput < Aws::Structure.new(
+      class CreateSnapshotFromVolumeRecoveryPointOutput < Struct.new(
         :snapshot_id,
         :volume_arn,
         :volume_recovery_point_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   @return [String]
@@ -515,9 +555,11 @@ module Aws
       #         volume_arn: "VolumeARN", # required
       #         snapshot_description: "SnapshotDescription", # required
       #       }
-      class CreateSnapshotInput < Aws::Structure.new(
+      class CreateSnapshotInput < Struct.new(
         :volume_arn,
         :snapshot_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -534,9 +576,11 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class CreateSnapshotOutput < Aws::Structure.new(
+      class CreateSnapshotOutput < Struct.new(
         :volume_arn,
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the volume of which the snapshot
@@ -574,13 +618,15 @@ module Aws
       #         target_name: "TargetName", # required
       #         network_interface_id: "NetworkInterfaceId", # required
       #       }
-      class CreateStorediSCSIVolumeInput < Aws::Structure.new(
+      class CreateStorediSCSIVolumeInput < Struct.new(
         :gateway_arn,
         :disk_id,
         :snapshot_id,
         :preserve_existing_data,
         :target_name,
         :network_interface_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -638,10 +684,12 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class CreateStorediSCSIVolumeOutput < Aws::Structure.new(
+      class CreateStorediSCSIVolumeOutput < Struct.new(
         :volume_arn,
         :volume_size_in_bytes,
         :target_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the configured volume.
@@ -667,10 +715,12 @@ module Aws
       #         tape_size_in_bytes: 1, # required
       #         tape_barcode: "TapeBarcode", # required
       #       }
-      class CreateTapeWithBarcodeInput < Aws::Structure.new(
+      class CreateTapeWithBarcodeInput < Struct.new(
         :gateway_arn,
         :tape_size_in_bytes,
         :tape_barcode)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The unique Amazon Resource Name (ARN) that represents the gateway to
@@ -693,8 +743,10 @@ module Aws
       end
 
       # CreateTapeOutput
-      class CreateTapeWithBarcodeOutput < Aws::Structure.new(
+      class CreateTapeWithBarcodeOutput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   A unique Amazon Resource Name (ARN) that represents the virtual tape
@@ -714,12 +766,14 @@ module Aws
       #         num_tapes_to_create: 1, # required
       #         tape_barcode_prefix: "TapeBarcodePrefix", # required
       #       }
-      class CreateTapesInput < Aws::Structure.new(
+      class CreateTapesInput < Struct.new(
         :gateway_arn,
         :tape_size_in_bytes,
         :client_token,
         :num_tapes_to_create,
         :tape_barcode_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The unique Amazon Resource Name (ARN) that represents the gateway to
@@ -763,8 +817,10 @@ module Aws
       end
 
       # CreateTapeOutput
-      class CreateTapesOutput < Aws::Structure.new(
+      class CreateTapesOutput < Struct.new(
         :tape_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arns
         #   A list of unique Amazon Resource Names (ARNs) that represents the
@@ -780,9 +836,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         bandwidth_type: "BandwidthType", # required
       #       }
-      class DeleteBandwidthRateLimitInput < Aws::Structure.new(
+      class DeleteBandwidthRateLimitInput < Struct.new(
         :gateway_arn,
         :bandwidth_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -796,8 +854,10 @@ module Aws
 
       # A JSON object containing the of the gateway whose bandwidth rate
       # information was deleted.
-      class DeleteBandwidthRateLimitOutput < Aws::Structure.new(
+      class DeleteBandwidthRateLimitOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -818,9 +878,11 @@ module Aws
       #         target_arn: "TargetARN", # required
       #         initiator_name: "IqnName", # required
       #       }
-      class DeleteChapCredentialsInput < Aws::Structure.new(
+      class DeleteChapCredentialsInput < Struct.new(
         :target_arn,
         :initiator_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -835,9 +897,11 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class DeleteChapCredentialsOutput < Aws::Structure.new(
+      class DeleteChapCredentialsOutput < Struct.new(
         :target_arn,
         :initiator_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the target.
@@ -856,8 +920,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DeleteGatewayInput < Aws::Structure.new(
+      class DeleteGatewayInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -867,8 +933,10 @@ module Aws
       end
 
       # A JSON object containing the id of the deleted gateway.
-      class DeleteGatewayOutput < Aws::Structure.new(
+      class DeleteGatewayOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -883,16 +951,20 @@ module Aws
       #       {
       #         volume_arn: "VolumeARN", # required
       #       }
-      class DeleteSnapshotScheduleInput < Aws::Structure.new(
+      class DeleteSnapshotScheduleInput < Struct.new(
         :volume_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
 
       end
 
-      class DeleteSnapshotScheduleOutput < Aws::Structure.new(
+      class DeleteSnapshotScheduleOutput < Struct.new(
         :volume_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -906,8 +978,10 @@ module Aws
       #       {
       #         tape_arn: "TapeARN", # required
       #       }
-      class DeleteTapeArchiveInput < Aws::Structure.new(
+      class DeleteTapeArchiveInput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape to delete from
@@ -917,8 +991,10 @@ module Aws
       end
 
       # DeleteTapeArchiveOutput
-      class DeleteTapeArchiveOutput < Aws::Structure.new(
+      class DeleteTapeArchiveOutput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape that was deleted
@@ -935,9 +1011,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         tape_arn: "TapeARN", # required
       #       }
-      class DeleteTapeInput < Aws::Structure.new(
+      class DeleteTapeInput < Struct.new(
         :gateway_arn,
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The unique Amazon Resource Name (ARN) of the gateway that the
@@ -952,8 +1030,10 @@ module Aws
       end
 
       # DeleteTapeOutput
-      class DeleteTapeOutput < Aws::Structure.new(
+      class DeleteTapeOutput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the deleted virtual tape.
@@ -968,8 +1048,10 @@ module Aws
       #       {
       #         volume_arn: "VolumeARN", # required
       #       }
-      class DeleteVolumeInput < Aws::Structure.new(
+      class DeleteVolumeInput < Struct.new(
         :volume_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -979,8 +1061,10 @@ module Aws
       end
 
       # A JSON object containing the of the storage volume that was deleted
-      class DeleteVolumeOutput < Aws::Structure.new(
+      class DeleteVolumeOutput < Struct.new(
         :volume_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the storage volume that was
@@ -996,8 +1080,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DescribeBandwidthRateLimitInput < Aws::Structure.new(
+      class DescribeBandwidthRateLimitInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1007,10 +1093,12 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class DescribeBandwidthRateLimitOutput < Aws::Structure.new(
+      class DescribeBandwidthRateLimitOutput < Struct.new(
         :gateway_arn,
         :average_upload_rate_limit_in_bits_per_sec,
         :average_download_rate_limit_in_bits_per_sec)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1037,8 +1125,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DescribeCacheInput < Aws::Structure.new(
+      class DescribeCacheInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1047,7 +1137,7 @@ module Aws
 
       end
 
-      class DescribeCacheOutput < Aws::Structure.new(
+      class DescribeCacheOutput < Struct.new(
         :gateway_arn,
         :disk_ids,
         :cache_allocated_in_bytes,
@@ -1055,6 +1145,8 @@ module Aws
         :cache_dirty_percentage,
         :cache_hit_percentage,
         :cache_miss_percentage)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1087,8 +1179,10 @@ module Aws
       #       {
       #         volume_arns: ["VolumeARN"], # required
       #       }
-      class DescribeCachediSCSIVolumesInput < Aws::Structure.new(
+      class DescribeCachediSCSIVolumesInput < Struct.new(
         :volume_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arns
         #   @return [Array<String>]
@@ -1096,8 +1190,10 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class DescribeCachediSCSIVolumesOutput < Aws::Structure.new(
+      class DescribeCachediSCSIVolumesOutput < Struct.new(
         :cached_iscsi_volumes)
+
+        include Aws::Structure
 
         # @!attribute [rw] cached_iscsi_volumes
         #   An array of objects where each object contains metadata about one
@@ -1114,8 +1210,10 @@ module Aws
       #       {
       #         target_arn: "TargetARN", # required
       #       }
-      class DescribeChapCredentialsInput < Aws::Structure.new(
+      class DescribeChapCredentialsInput < Struct.new(
         :target_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -1126,8 +1224,10 @@ module Aws
       end
 
       # A JSON object containing a .
-      class DescribeChapCredentialsOutput < Aws::Structure.new(
+      class DescribeChapCredentialsOutput < Struct.new(
         :chap_credentials)
+
+        include Aws::Structure
 
         # @!attribute [rw] chap_credentials
         #   An array of ChapInfo objects that represent CHAP credentials. Each
@@ -1160,8 +1260,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DescribeGatewayInformationInput < Aws::Structure.new(
+      class DescribeGatewayInformationInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1171,7 +1273,7 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class DescribeGatewayInformationOutput < Aws::Structure.new(
+      class DescribeGatewayInformationOutput < Struct.new(
         :gateway_arn,
         :gateway_id,
         :gateway_name,
@@ -1181,6 +1283,8 @@ module Aws
         :gateway_type,
         :next_update_availability_date,
         :last_software_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1235,8 +1339,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DescribeMaintenanceStartTimeInput < Aws::Structure.new(
+      class DescribeMaintenanceStartTimeInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1245,12 +1351,14 @@ module Aws
 
       end
 
-      class DescribeMaintenanceStartTimeOutput < Aws::Structure.new(
+      class DescribeMaintenanceStartTimeOutput < Struct.new(
         :gateway_arn,
         :hour_of_day,
         :minute_of_hour,
         :day_of_week,
         :timezone)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1279,8 +1387,10 @@ module Aws
       #       {
       #         volume_arn: "VolumeARN", # required
       #       }
-      class DescribeSnapshotScheduleInput < Aws::Structure.new(
+      class DescribeSnapshotScheduleInput < Struct.new(
         :volume_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -1289,12 +1399,14 @@ module Aws
 
       end
 
-      class DescribeSnapshotScheduleOutput < Aws::Structure.new(
+      class DescribeSnapshotScheduleOutput < Struct.new(
         :volume_arn,
         :start_at,
         :recurrence_in_hours,
         :description,
         :timezone)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -1321,8 +1433,10 @@ module Aws
       #       {
       #         volume_arns: ["VolumeARN"], # required
       #       }
-      class DescribeStorediSCSIVolumesInput < Aws::Structure.new(
+      class DescribeStorediSCSIVolumesInput < Struct.new(
         :volume_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arns
         #   An array of strings where each string represents the Amazon Resource
@@ -1333,8 +1447,10 @@ module Aws
 
       end
 
-      class DescribeStorediSCSIVolumesOutput < Aws::Structure.new(
+      class DescribeStorediSCSIVolumesOutput < Struct.new(
         :stored_iscsi_volumes)
+
+        include Aws::Structure
 
         # @!attribute [rw] stored_iscsi_volumes
         #   @return [Array<Types::StorediSCSIVolume>]
@@ -1350,10 +1466,12 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class DescribeTapeArchivesInput < Aws::Structure.new(
+      class DescribeTapeArchivesInput < Struct.new(
         :tape_arns,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arns
         #   Specifies one or more unique Amazon Resource Names (ARNs) that
@@ -1373,9 +1491,11 @@ module Aws
       end
 
       # DescribeTapeArchivesOutput
-      class DescribeTapeArchivesOutput < Aws::Structure.new(
+      class DescribeTapeArchivesOutput < Struct.new(
         :tape_archives,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_archives
         #   An array of virtual tape objects in the virtual tape shelf (VTS).
@@ -1404,10 +1524,12 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class DescribeTapeRecoveryPointsInput < Aws::Structure.new(
+      class DescribeTapeRecoveryPointsInput < Struct.new(
         :gateway_arn,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1427,10 +1549,12 @@ module Aws
       end
 
       # DescribeTapeRecoveryPointsOutput
-      class DescribeTapeRecoveryPointsOutput < Aws::Structure.new(
+      class DescribeTapeRecoveryPointsOutput < Struct.new(
         :gateway_arn,
         :tape_recovery_point_infos,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1463,11 +1587,13 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class DescribeTapesInput < Aws::Structure.new(
+      class DescribeTapesInput < Struct.new(
         :gateway_arn,
         :tape_arns,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1501,9 +1627,11 @@ module Aws
       end
 
       # DescribeTapesOutput
-      class DescribeTapesOutput < Aws::Structure.new(
+      class DescribeTapesOutput < Struct.new(
         :tapes,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] tapes
         #   An array of virtual tape descriptions.
@@ -1525,8 +1653,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DescribeUploadBufferInput < Aws::Structure.new(
+      class DescribeUploadBufferInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1535,11 +1665,13 @@ module Aws
 
       end
 
-      class DescribeUploadBufferOutput < Aws::Structure.new(
+      class DescribeUploadBufferOutput < Struct.new(
         :gateway_arn,
         :disk_ids,
         :upload_buffer_used_in_bytes,
         :upload_buffer_allocated_in_bytes)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1567,11 +1699,13 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class DescribeVTLDevicesInput < Aws::Structure.new(
+      class DescribeVTLDevicesInput < Struct.new(
         :gateway_arn,
         :vtl_device_arns,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1602,10 +1736,12 @@ module Aws
       end
 
       # DescribeVTLDevicesOutput
-      class DescribeVTLDevicesOutput < Aws::Structure.new(
+      class DescribeVTLDevicesOutput < Struct.new(
         :gateway_arn,
         :vtl_devices,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1634,8 +1770,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DescribeWorkingStorageInput < Aws::Structure.new(
+      class DescribeWorkingStorageInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1645,11 +1783,13 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class DescribeWorkingStorageOutput < Aws::Structure.new(
+      class DescribeWorkingStorageOutput < Struct.new(
         :gateway_arn,
         :disk_ids,
         :working_storage_used_in_bytes,
         :working_storage_allocated_in_bytes)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1676,11 +1816,13 @@ module Aws
       end
 
       # Lists iSCSI information about a VTL device.
-      class DeviceiSCSIAttributes < Aws::Structure.new(
+      class DeviceiSCSIAttributes < Struct.new(
         :target_arn,
         :network_interface_id,
         :network_interface_port,
         :chap_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   Specifies the unique Amazon Resource Name(ARN) that encodes the
@@ -1708,8 +1850,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class DisableGatewayInput < Aws::Structure.new(
+      class DisableGatewayInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1719,8 +1863,10 @@ module Aws
       end
 
       # DisableGatewayOutput
-      class DisableGatewayOutput < Aws::Structure.new(
+      class DisableGatewayOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The unique Amazon Resource Name of the disabled gateway.
@@ -1728,7 +1874,7 @@ module Aws
 
       end
 
-      class Disk < Aws::Structure.new(
+      class Disk < Struct.new(
         :disk_id,
         :disk_path,
         :disk_node,
@@ -1736,6 +1882,8 @@ module Aws
         :disk_size_in_bytes,
         :disk_allocation_type,
         :disk_allocation_resource)
+
+        include Aws::Structure
 
         # @!attribute [rw] disk_id
         #   @return [String]
@@ -1761,12 +1909,14 @@ module Aws
       end
 
       # Describes a gateway object.
-      class GatewayInfo < Aws::Structure.new(
+      class GatewayInfo < Struct.new(
         :gateway_id,
         :gateway_arn,
         :gateway_type,
         :gateway_operational_state,
         :gateway_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_id
         #   The unique identifier assigned to your gateway during activation.
@@ -1807,9 +1957,11 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class ListGatewaysInput < Aws::Structure.new(
+      class ListGatewaysInput < Struct.new(
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An opaque string that indicates the position at which to begin the
@@ -1823,9 +1975,11 @@ module Aws
 
       end
 
-      class ListGatewaysOutput < Aws::Structure.new(
+      class ListGatewaysOutput < Struct.new(
         :gateways,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateways
         #   @return [Array<Types::GatewayInfo>]
@@ -1842,8 +1996,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class ListLocalDisksInput < Aws::Structure.new(
+      class ListLocalDisksInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1852,9 +2008,11 @@ module Aws
 
       end
 
-      class ListLocalDisksOutput < Aws::Structure.new(
+      class ListLocalDisksOutput < Struct.new(
         :gateway_arn,
         :disks)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -1875,10 +2033,12 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class ListTagsForResourceInput < Aws::Structure.new(
+      class ListTagsForResourceInput < Struct.new(
         :resource_arn,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the resource for which you want to
@@ -1898,10 +2058,12 @@ module Aws
       end
 
       # ListTagsForResourceOutput
-      class ListTagsForResourceOutput < Aws::Structure.new(
+      class ListTagsForResourceOutput < Struct.new(
         :resource_arn,
         :marker,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   he Amazon Resource Name (ARN) of the resource for which you want to
@@ -1934,10 +2096,12 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class ListTapesInput < Aws::Structure.new(
+      class ListTapesInput < Struct.new(
         :tape_arns,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arns
         #   The Amazon Resource Name (ARN) of each of the tapes you want to
@@ -1962,9 +2126,11 @@ module Aws
       # * ListTapesOutput$Marker
       #
       # * ListTapesOutput$VolumeInfos
-      class ListTapesOutput < Aws::Structure.new(
+      class ListTapesOutput < Struct.new(
         :tape_infos,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_infos
         #   An array of TapeInfo objects, where each object describes an a
@@ -1988,8 +2154,10 @@ module Aws
       #       {
       #         volume_arn: "VolumeARN", # required
       #       }
-      class ListVolumeInitiatorsInput < Aws::Structure.new(
+      class ListVolumeInitiatorsInput < Struct.new(
         :volume_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -1999,8 +2167,10 @@ module Aws
       end
 
       # ListVolumeInitiatorsOutput
-      class ListVolumeInitiatorsOutput < Aws::Structure.new(
+      class ListVolumeInitiatorsOutput < Struct.new(
         :initiators)
+
+        include Aws::Structure
 
         # @!attribute [rw] initiators
         #   The host names and port numbers of all iSCSI initiators that are
@@ -2015,8 +2185,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class ListVolumeRecoveryPointsInput < Aws::Structure.new(
+      class ListVolumeRecoveryPointsInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2025,9 +2197,11 @@ module Aws
 
       end
 
-      class ListVolumeRecoveryPointsOutput < Aws::Structure.new(
+      class ListVolumeRecoveryPointsOutput < Struct.new(
         :gateway_arn,
         :volume_recovery_point_infos)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2052,10 +2226,12 @@ module Aws
       #         marker: "Marker",
       #         limit: 1,
       #       }
-      class ListVolumesInput < Aws::Structure.new(
+      class ListVolumesInput < Struct.new(
         :gateway_arn,
         :marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2075,10 +2251,12 @@ module Aws
 
       end
 
-      class ListVolumesOutput < Aws::Structure.new(
+      class ListVolumesOutput < Struct.new(
         :gateway_arn,
         :marker,
         :volume_infos)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2094,10 +2272,12 @@ module Aws
       end
 
       # Describes a gateway\'s network interface.
-      class NetworkInterface < Aws::Structure.new(
+      class NetworkInterface < Struct.new(
         :ipv_4_address,
         :mac_address,
         :ipv_6_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] ipv_4_address
         #   The Internet Protocol version 4 (IPv4) address of the interface.
@@ -2126,9 +2306,11 @@ module Aws
       #         resource_arn: "ResourceARN", # required
       #         tag_keys: ["TagKey"], # required
       #       }
-      class RemoveTagsFromResourceInput < Aws::Structure.new(
+      class RemoveTagsFromResourceInput < Struct.new(
         :resource_arn,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the resource you want to remove
@@ -2143,8 +2325,10 @@ module Aws
       end
 
       # RemoveTagsFromResourceOutput
-      class RemoveTagsFromResourceOutput < Aws::Structure.new(
+      class RemoveTagsFromResourceOutput < Struct.new(
         :resource_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the resource that the tags were
@@ -2159,8 +2343,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class ResetCacheInput < Aws::Structure.new(
+      class ResetCacheInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2169,8 +2355,10 @@ module Aws
 
       end
 
-      class ResetCacheOutput < Aws::Structure.new(
+      class ResetCacheOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2187,9 +2375,11 @@ module Aws
       #         tape_arn: "TapeARN", # required
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class RetrieveTapeArchiveInput < Aws::Structure.new(
+      class RetrieveTapeArchiveInput < Struct.new(
         :tape_arn,
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape you want to
@@ -2208,8 +2398,10 @@ module Aws
       end
 
       # RetrieveTapeArchiveOutput
-      class RetrieveTapeArchiveOutput < Aws::Structure.new(
+      class RetrieveTapeArchiveOutput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the retrieved virtual tape.
@@ -2225,9 +2417,11 @@ module Aws
       #         tape_arn: "TapeARN", # required
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class RetrieveTapeRecoveryPointInput < Aws::Structure.new(
+      class RetrieveTapeRecoveryPointInput < Struct.new(
         :tape_arn,
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape for which you
@@ -2242,8 +2436,10 @@ module Aws
       end
 
       # RetrieveTapeRecoveryPointOutput
-      class RetrieveTapeRecoveryPointOutput < Aws::Structure.new(
+      class RetrieveTapeRecoveryPointOutput < Struct.new(
         :tape_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape for which the
@@ -2260,9 +2456,11 @@ module Aws
       #         gateway_arn: "GatewayARN", # required
       #         local_console_password: "LocalConsolePassword", # required
       #       }
-      class SetLocalConsolePasswordInput < Aws::Structure.new(
+      class SetLocalConsolePasswordInput < Struct.new(
         :gateway_arn,
         :local_console_password)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2275,8 +2473,10 @@ module Aws
 
       end
 
-      class SetLocalConsolePasswordOutput < Aws::Structure.new(
+      class SetLocalConsolePasswordOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2292,8 +2492,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class ShutdownGatewayInput < Aws::Structure.new(
+      class ShutdownGatewayInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2303,8 +2505,10 @@ module Aws
       end
 
       # A JSON object containing the of the gateway that was shut down.
-      class ShutdownGatewayOutput < Aws::Structure.new(
+      class ShutdownGatewayOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2320,8 +2524,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class StartGatewayInput < Aws::Structure.new(
+      class StartGatewayInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2331,8 +2537,10 @@ module Aws
       end
 
       # A JSON object containing the of the gateway that was restarted.
-      class StartGatewayOutput < Aws::Structure.new(
+      class StartGatewayOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2344,9 +2552,11 @@ module Aws
       # Provides additional information about an error that was returned by
       # the service as an or. See the `errorCode` and `errorDetails` members
       # for more information about the error.
-      class StorageGatewayError < Aws::Structure.new(
+      class StorageGatewayError < Struct.new(
         :error_code,
         :error_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] error_code
         #   Additional information about the error.
@@ -2359,7 +2569,7 @@ module Aws
 
       end
 
-      class StorediSCSIVolume < Aws::Structure.new(
+      class StorediSCSIVolume < Struct.new(
         :volume_arn,
         :volume_id,
         :volume_type,
@@ -2370,6 +2580,8 @@ module Aws
         :source_snapshot_id,
         :preserved_existing_data,
         :volume_iscsi_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -2411,9 +2623,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   @return [String]
@@ -2424,13 +2638,15 @@ module Aws
       end
 
       # Describes a virtual tape object.
-      class Tape < Aws::Structure.new(
+      class Tape < Struct.new(
         :tape_arn,
         :tape_barcode,
         :tape_size_in_bytes,
         :tape_status,
         :vtl_device,
         :progress)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape.
@@ -2464,13 +2680,15 @@ module Aws
 
       # Represents a virtual tape that is archived in the virtual tape shelf
       # (VTS).
-      class TapeArchive < Aws::Structure.new(
+      class TapeArchive < Struct.new(
         :tape_arn,
         :tape_barcode,
         :tape_size_in_bytes,
         :completion_time,
         :retrieved_to,
         :tape_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of an archived virtual tape.
@@ -2505,12 +2723,14 @@ module Aws
       end
 
       # Describes a virtual tape.
-      class TapeInfo < Aws::Structure.new(
+      class TapeInfo < Struct.new(
         :tape_arn,
         :tape_barcode,
         :tape_size_in_bytes,
         :tape_status,
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of a virtual tape.
@@ -2536,11 +2756,13 @@ module Aws
       end
 
       # Describes a recovery point.
-      class TapeRecoveryPointInfo < Aws::Structure.new(
+      class TapeRecoveryPointInfo < Struct.new(
         :tape_arn,
         :tape_recovery_point_time,
         :tape_size_in_bytes,
         :tape_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] tape_arn
         #   The Amazon Resource Name (ARN) of the virtual tape.
@@ -2576,10 +2798,12 @@ module Aws
       #         average_upload_rate_limit_in_bits_per_sec: 1,
       #         average_download_rate_limit_in_bits_per_sec: 1,
       #       }
-      class UpdateBandwidthRateLimitInput < Aws::Structure.new(
+      class UpdateBandwidthRateLimitInput < Struct.new(
         :gateway_arn,
         :average_upload_rate_limit_in_bits_per_sec,
         :average_download_rate_limit_in_bits_per_sec)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2598,8 +2822,10 @@ module Aws
 
       # A JSON object containing the of the gateway whose throttle information
       # was updated.
-      class UpdateBandwidthRateLimitOutput < Aws::Structure.new(
+      class UpdateBandwidthRateLimitOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2626,11 +2852,13 @@ module Aws
       #         initiator_name: "IqnName", # required
       #         secret_to_authenticate_target: "ChapSecret",
       #       }
-      class UpdateChapCredentialsInput < Aws::Structure.new(
+      class UpdateChapCredentialsInput < Struct.new(
         :target_arn,
         :secret_to_authenticate_initiator,
         :initiator_name,
         :secret_to_authenticate_target)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
@@ -2667,9 +2895,11 @@ module Aws
       end
 
       # A JSON object containing the following fields:
-      class UpdateChapCredentialsOutput < Aws::Structure.new(
+      class UpdateChapCredentialsOutput < Struct.new(
         :target_arn,
         :initiator_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the target. This is the same
@@ -2691,10 +2921,12 @@ module Aws
       #         gateway_name: "GatewayName",
       #         gateway_timezone: "GatewayTimezone",
       #       }
-      class UpdateGatewayInformationInput < Aws::Structure.new(
+      class UpdateGatewayInformationInput < Struct.new(
         :gateway_arn,
         :gateway_name,
         :gateway_timezone)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2711,9 +2943,11 @@ module Aws
       end
 
       # A JSON object containing the ARN of the gateway that was updated.
-      class UpdateGatewayInformationOutput < Aws::Structure.new(
+      class UpdateGatewayInformationOutput < Struct.new(
         :gateway_arn,
         :gateway_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2732,8 +2966,10 @@ module Aws
       #       {
       #         gateway_arn: "GatewayARN", # required
       #       }
-      class UpdateGatewaySoftwareNowInput < Aws::Structure.new(
+      class UpdateGatewaySoftwareNowInput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2743,8 +2979,10 @@ module Aws
       end
 
       # A JSON object containing the of the gateway that was updated.
-      class UpdateGatewaySoftwareNowOutput < Aws::Structure.new(
+      class UpdateGatewaySoftwareNowOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2769,11 +3007,13 @@ module Aws
       #         minute_of_hour: 1, # required
       #         day_of_week: 1, # required
       #       }
-      class UpdateMaintenanceStartTimeInput < Aws::Structure.new(
+      class UpdateMaintenanceStartTimeInput < Struct.new(
         :gateway_arn,
         :hour_of_day,
         :minute_of_hour,
         :day_of_week)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2800,8 +3040,10 @@ module Aws
 
       # A JSON object containing the of the gateway whose maintenance start
       # time is updated.
-      class UpdateMaintenanceStartTimeOutput < Aws::Structure.new(
+      class UpdateMaintenanceStartTimeOutput < Struct.new(
         :gateway_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_arn
         #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
@@ -2828,11 +3070,13 @@ module Aws
       #         recurrence_in_hours: 1, # required
       #         description: "Description",
       #       }
-      class UpdateSnapshotScheduleInput < Aws::Structure.new(
+      class UpdateSnapshotScheduleInput < Struct.new(
         :volume_arn,
         :start_at,
         :recurrence_in_hours,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) of the volume. Use the ListVolumes
@@ -2858,8 +3102,10 @@ module Aws
       end
 
       # A JSON object containing the of the updated storage volume.
-      class UpdateSnapshotScheduleOutput < Aws::Structure.new(
+      class UpdateSnapshotScheduleOutput < Struct.new(
         :volume_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -2873,9 +3119,11 @@ module Aws
       #         vtl_device_arn: "VTLDeviceARN", # required
       #         device_type: "DeviceType", # required
       #       }
-      class UpdateVTLDeviceTypeInput < Aws::Structure.new(
+      class UpdateVTLDeviceTypeInput < Struct.new(
         :vtl_device_arn,
         :device_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] vtl_device_arn
         #   The Amazon Resource Name (ARN) of the medium changer you want to
@@ -2891,8 +3139,10 @@ module Aws
       end
 
       # UpdateVTLDeviceTypeOutput
-      class UpdateVTLDeviceTypeOutput < Aws::Structure.new(
+      class UpdateVTLDeviceTypeOutput < Struct.new(
         :vtl_device_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] vtl_device_arn
         #   The Amazon Resource Name (ARN) of the medium changer you have
@@ -2902,12 +3152,14 @@ module Aws
       end
 
       # Represents a device object associated with a gateway-VTL.
-      class VTLDevice < Aws::Structure.new(
+      class VTLDevice < Struct.new(
         :vtl_device_arn,
         :vtl_device_type,
         :vtl_device_vendor,
         :vtl_device_product_identifier,
         :device_iscsi_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] vtl_device_arn
         #   Specifies the unique Amazon Resource Name (ARN) of the device (tape
@@ -2930,13 +3182,15 @@ module Aws
       end
 
       # Describes a storage volume object.
-      class VolumeInfo < Aws::Structure.new(
+      class VolumeInfo < Struct.new(
         :volume_arn,
         :volume_id,
         :gateway_arn,
         :gateway_id,
         :volume_type,
         :volume_size_in_bytes)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   The Amazon Resource Name (ARN) for the storage volume. For example,
@@ -2983,11 +3237,13 @@ module Aws
 
       end
 
-      class VolumeRecoveryPointInfo < Aws::Structure.new(
+      class VolumeRecoveryPointInfo < Struct.new(
         :volume_arn,
         :volume_size_in_bytes,
         :volume_usage_in_bytes,
         :volume_recovery_point_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_arn
         #   @return [String]
@@ -3004,12 +3260,14 @@ module Aws
       end
 
       # Lists iSCSI information about a volume.
-      class VolumeiSCSIAttributes < Aws::Structure.new(
+      class VolumeiSCSIAttributes < Struct.new(
         :target_arn,
         :network_interface_id,
         :network_interface_port,
         :lun_number,
         :chap_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The Amazon Resource Name (ARN) of the volume target.

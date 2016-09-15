@@ -11,9 +11,11 @@ module Aws
 
       # The configured access rules for the domain\'s document and search
       # endpoints, and the current status of those rules.
-      class AccessPoliciesStatus < Aws::Structure.new(
+      class AccessPoliciesStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   The access policy configured for the Elasticsearch domain. Access
@@ -46,9 +48,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsRequest < Aws::Structure.new(
+      class AddTagsRequest < Struct.new(
         :arn,
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   Specify the `ARN` for which you want to add the tags.
@@ -75,9 +79,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options
-      class AdvancedOptionsStatus < Aws::Structure.new(
+      class AdvancedOptionsStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Specifies the status of advanced options for the specified
@@ -119,7 +125,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class CreateElasticsearchDomainRequest < Aws::Structure.new(
+      class CreateElasticsearchDomainRequest < Struct.new(
         :domain_name,
         :elasticsearch_version,
         :elasticsearch_cluster_config,
@@ -127,6 +133,8 @@ module Aws
         :access_policies,
         :snapshot_options,
         :advanced_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the Elasticsearch domain that you are creating. Domain
@@ -181,8 +189,10 @@ module Aws
 
       # The result of a `CreateElasticsearchDomain` operation. Contains the
       # status of the newly created Elasticsearch domain.
-      class CreateElasticsearchDomainResponse < Aws::Structure.new(
+      class CreateElasticsearchDomainResponse < Struct.new(
         :domain_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_status
         #   The status of the newly created Elasticsearch domain.
@@ -199,8 +209,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class DeleteElasticsearchDomainRequest < Aws::Structure.new(
+      class DeleteElasticsearchDomainRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the Elasticsearch domain that you want to permanently
@@ -212,8 +224,10 @@ module Aws
       # The result of a `DeleteElasticsearchDomain` request. Contains the
       # status of the pending deletion, or no status if the domain and all of
       # its resources have been deleted.
-      class DeleteElasticsearchDomainResponse < Aws::Structure.new(
+      class DeleteElasticsearchDomainResponse < Struct.new(
         :domain_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_status
         #   The status of the Elasticsearch domain being deleted.
@@ -230,8 +244,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class DescribeElasticsearchDomainConfigRequest < Aws::Structure.new(
+      class DescribeElasticsearchDomainConfigRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The Elasticsearch domain that you want to get information about.
@@ -241,8 +257,10 @@ module Aws
 
       # The result of a `DescribeElasticsearchDomainConfig` request. Contains
       # the configuration information of the requested domain.
-      class DescribeElasticsearchDomainConfigResponse < Aws::Structure.new(
+      class DescribeElasticsearchDomainConfigResponse < Struct.new(
         :domain_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_config
         #   The configuration information of the domain requested in the
@@ -259,8 +277,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class DescribeElasticsearchDomainRequest < Aws::Structure.new(
+      class DescribeElasticsearchDomainRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the Elasticsearch domain for which you want information.
@@ -270,8 +290,10 @@ module Aws
 
       # The result of a `DescribeElasticsearchDomain` request. Contains the
       # status of the domain specified in the request.
-      class DescribeElasticsearchDomainResponse < Aws::Structure.new(
+      class DescribeElasticsearchDomainResponse < Struct.new(
         :domain_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_status
         #   The current status of the Elasticsearch domain.
@@ -288,8 +310,10 @@ module Aws
       #       {
       #         domain_names: ["DomainName"], # required
       #       }
-      class DescribeElasticsearchDomainsRequest < Aws::Structure.new(
+      class DescribeElasticsearchDomainsRequest < Struct.new(
         :domain_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_names
         #   The Elasticsearch domains for which you want information.
@@ -299,8 +323,10 @@ module Aws
 
       # The result of a `DescribeElasticsearchDomains` request. Contains the
       # status of the specified domains or all domains owned by the account.
-      class DescribeElasticsearchDomainsResponse < Aws::Structure.new(
+      class DescribeElasticsearchDomainsResponse < Struct.new(
         :domain_status_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_status_list
         #   The status of the domains requested in the
@@ -309,8 +335,10 @@ module Aws
 
       end
 
-      class DomainInfo < Aws::Structure.new(
+      class DomainInfo < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   Specifies the `DomainName`.
@@ -334,11 +362,13 @@ module Aws
       #         volume_size: 1,
       #         iops: 1,
       #       }
-      class EBSOptions < Aws::Structure.new(
+      class EBSOptions < Struct.new(
         :ebs_enabled,
         :volume_type,
         :volume_size,
         :iops)
+
+        include Aws::Structure
 
         # @!attribute [rw] ebs_enabled
         #   Specifies whether EBS-based storage is enabled.
@@ -359,9 +389,11 @@ module Aws
       end
 
       # Status of the EBS options for the specified Elasticsearch domain.
-      class EBSOptionsStatus < Aws::Structure.new(
+      class EBSOptionsStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Specifies the EBS options for the specified Elasticsearch domain.
@@ -387,13 +419,15 @@ module Aws
       #         dedicated_master_type: "m3.medium.elasticsearch", # accepts m3.medium.elasticsearch, m3.large.elasticsearch, m3.xlarge.elasticsearch, m3.2xlarge.elasticsearch, m4.large.elasticsearch, m4.xlarge.elasticsearch, m4.2xlarge.elasticsearch, m4.4xlarge.elasticsearch, m4.10xlarge.elasticsearch, t2.micro.elasticsearch, t2.small.elasticsearch, t2.medium.elasticsearch, r3.large.elasticsearch, r3.xlarge.elasticsearch, r3.2xlarge.elasticsearch, r3.4xlarge.elasticsearch, r3.8xlarge.elasticsearch, i2.xlarge.elasticsearch, i2.2xlarge.elasticsearch
       #         dedicated_master_count: 1,
       #       }
-      class ElasticsearchClusterConfig < Aws::Structure.new(
+      class ElasticsearchClusterConfig < Struct.new(
         :instance_type,
         :instance_count,
         :dedicated_master_enabled,
         :zone_awareness_enabled,
         :dedicated_master_type,
         :dedicated_master_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_type
         #   The instance type for an Elasticsearch cluster.
@@ -434,9 +468,11 @@ module Aws
 
       # Specifies the configuration status for the specified Elasticsearch
       # domain.
-      class ElasticsearchClusterConfigStatus < Aws::Structure.new(
+      class ElasticsearchClusterConfigStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Specifies the cluster configuration for the specified Elasticsearch
@@ -451,13 +487,15 @@ module Aws
       end
 
       # The configuration of an Elasticsearch domain.
-      class ElasticsearchDomainConfig < Aws::Structure.new(
+      class ElasticsearchDomainConfig < Struct.new(
         :elasticsearch_version,
         :elasticsearch_cluster_config,
         :ebs_options,
         :access_policies,
         :snapshot_options,
         :advanced_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] elasticsearch_version
         #   String of format X.Y to specify version for the Elasticsearch
@@ -493,7 +531,7 @@ module Aws
       end
 
       # The current status of an Elasticsearch domain.
-      class ElasticsearchDomainStatus < Aws::Structure.new(
+      class ElasticsearchDomainStatus < Struct.new(
         :domain_id,
         :domain_name,
         :arn,
@@ -507,6 +545,8 @@ module Aws
         :access_policies,
         :snapshot_options,
         :advanced_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_id
         #   The unique identifier for the specified Elasticsearch domain.
@@ -585,9 +625,11 @@ module Aws
 
       # Status of the Elasticsearch version options for the specified
       # Elasticsearch domain.
-      class ElasticsearchVersionStatus < Aws::Structure.new(
+      class ElasticsearchVersionStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Specifies the Elasticsearch version for the specified Elasticsearch
@@ -603,8 +645,10 @@ module Aws
 
       # The result of a `ListDomainNames` operation. Contains the names of all
       # Elasticsearch domains owned by this account.
-      class ListDomainNamesResponse < Aws::Structure.new(
+      class ListDomainNamesResponse < Struct.new(
         :domain_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_names
         #   List of Elasticsearch domain names.
@@ -621,8 +665,10 @@ module Aws
       #       {
       #         arn: "ARN", # required
       #       }
-      class ListTagsRequest < Aws::Structure.new(
+      class ListTagsRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   Specify the `ARN` for the Elasticsearch domain to which the tags are
@@ -633,8 +679,10 @@ module Aws
 
       # The result of a `ListTags` operation. Contains tags for all requested
       # Elasticsearch domains.
-      class ListTagsResponse < Aws::Structure.new(
+      class ListTagsResponse < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   List of `Tag` for the requested Elasticsearch domain.
@@ -643,12 +691,14 @@ module Aws
       end
 
       # Provides the current status of the entity.
-      class OptionStatus < Aws::Structure.new(
+      class OptionStatus < Struct.new(
         :creation_date,
         :update_date,
         :update_version,
         :state,
         :pending_deletion)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_date
         #   Timestamp which tells the creation date for the entity.
@@ -682,9 +732,11 @@ module Aws
       #         arn: "ARN", # required
       #         tag_keys: ["String"], # required
       #       }
-      class RemoveTagsRequest < Aws::Structure.new(
+      class RemoveTagsRequest < Struct.new(
         :arn,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   Specifies the `ARN` for the Elasticsearch domain from which you want
@@ -707,8 +759,10 @@ module Aws
       #       {
       #         automated_snapshot_start_hour: 1,
       #       }
-      class SnapshotOptions < Aws::Structure.new(
+      class SnapshotOptions < Struct.new(
         :automated_snapshot_start_hour)
+
+        include Aws::Structure
 
         # @!attribute [rw] automated_snapshot_start_hour
         #   Specifies the time, in UTC format, when the service takes a daily
@@ -719,9 +773,11 @@ module Aws
       end
 
       # Status of a daily automated snapshot.
-      class SnapshotOptionsStatus < Aws::Structure.new(
+      class SnapshotOptionsStatus < Struct.new(
         :options,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] options
         #   Specifies the daily snapshot options specified for the Elasticsearch
@@ -742,9 +798,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   Specifies the `TagKey`, the name of the tag. Tag keys must be unique
@@ -790,13 +848,15 @@ module Aws
       #         },
       #         access_policies: "PolicyDocument",
       #       }
-      class UpdateElasticsearchDomainConfigRequest < Aws::Structure.new(
+      class UpdateElasticsearchDomainConfigRequest < Struct.new(
         :domain_name,
         :elasticsearch_cluster_config,
         :ebs_options,
         :snapshot_options,
         :advanced_options,
         :access_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the Elasticsearch domain that you are updating.
@@ -835,8 +895,10 @@ module Aws
 
       # The result of an `UpdateElasticsearchDomain` request. Contains the
       # status of the Elasticsearch domain being updated.
-      class UpdateElasticsearchDomainConfigResponse < Aws::Structure.new(
+      class UpdateElasticsearchDomainConfigResponse < Struct.new(
         :domain_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_config
         #   The status of the updated Elasticsearch domain.

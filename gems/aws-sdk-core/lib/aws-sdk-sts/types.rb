@@ -21,7 +21,7 @@ module Aws
       #         serial_number: "serialNumberType",
       #         token_code: "tokenCodeType",
       #       }
-      class AssumeRoleRequest < Aws::Structure.new(
+      class AssumeRoleRequest < Struct.new(
         :role_arn,
         :role_session_name,
         :policy,
@@ -29,6 +29,8 @@ module Aws
         :external_id,
         :serial_number,
         :token_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The Amazon Resource Name (ARN) of the role to assume.
@@ -160,10 +162,12 @@ module Aws
 
       # Contains the response to a successful AssumeRole request, including
       # temporary AWS credentials that can be used to make AWS requests.
-      class AssumeRoleResponse < Aws::Structure.new(
+      class AssumeRoleResponse < Struct.new(
         :credentials,
         :assumed_role_user,
         :packed_policy_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] credentials
         #   The temporary security credentials, which include an access key ID,
@@ -203,12 +207,14 @@ module Aws
       #         policy: "sessionPolicyDocumentType",
       #         duration_seconds: 1,
       #       }
-      class AssumeRoleWithSAMLRequest < Aws::Structure.new(
+      class AssumeRoleWithSAMLRequest < Struct.new(
         :role_arn,
         :principal_arn,
         :saml_assertion,
         :policy,
         :duration_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -295,7 +301,7 @@ module Aws
       # Contains the response to a successful AssumeRoleWithSAML request,
       # including temporary AWS credentials that can be used to make AWS
       # requests.
-      class AssumeRoleWithSAMLResponse < Aws::Structure.new(
+      class AssumeRoleWithSAMLResponse < Struct.new(
         :credentials,
         :assumed_role_user,
         :packed_policy_size,
@@ -304,6 +310,8 @@ module Aws
         :issuer,
         :audience,
         :name_qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] credentials
         #   The temporary security credentials, which include an access key ID,
@@ -379,13 +387,15 @@ module Aws
       #         policy: "sessionPolicyDocumentType",
       #         duration_seconds: 1,
       #       }
-      class AssumeRoleWithWebIdentityRequest < Aws::Structure.new(
+      class AssumeRoleWithWebIdentityRequest < Struct.new(
         :role_arn,
         :role_session_name,
         :web_identity_token,
         :provider_id,
         :policy,
         :duration_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -486,13 +496,15 @@ module Aws
       # Contains the response to a successful AssumeRoleWithWebIdentity
       # request, including temporary AWS credentials that can be used to make
       # AWS requests.
-      class AssumeRoleWithWebIdentityResponse < Aws::Structure.new(
+      class AssumeRoleWithWebIdentityResponse < Struct.new(
         :credentials,
         :subject_from_web_identity_token,
         :assumed_role_user,
         :packed_policy_size,
         :provider,
         :audience)
+
+        include Aws::Structure
 
         # @!attribute [rw] credentials
         #   The temporary security credentials, which include an access key ID,
@@ -548,9 +560,11 @@ module Aws
 
       # The identifiers for the temporary security credentials that the
       # operation returns.
-      class AssumedRoleUser < Aws::Structure.new(
+      class AssumedRoleUser < Struct.new(
         :assumed_role_id,
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assumed_role_id
         #   A unique identifier that contains the role ID and the role session
@@ -571,11 +585,13 @@ module Aws
       end
 
       # AWS credentials for API authentication.
-      class Credentials < Aws::Structure.new(
+      class Credentials < Struct.new(
         :access_key_id,
         :secret_access_key,
         :session_token,
         :expiration)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_key_id
         #   The access key ID that identifies the temporary security
@@ -603,8 +619,10 @@ module Aws
       #       {
       #         encoded_message: "encodedMessageType", # required
       #       }
-      class DecodeAuthorizationMessageRequest < Aws::Structure.new(
+      class DecodeAuthorizationMessageRequest < Struct.new(
         :encoded_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] encoded_message
         #   The encoded message that was returned with the response.
@@ -615,8 +633,10 @@ module Aws
       # A document that contains additional information about the
       # authorization status of a request from an encoded message that is
       # returned in response to an AWS request.
-      class DecodeAuthorizationMessageResponse < Aws::Structure.new(
+      class DecodeAuthorizationMessageResponse < Struct.new(
         :decoded_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] decoded_message
         #   An XML document that contains the decoded message.
@@ -626,9 +646,11 @@ module Aws
 
       # Identifiers for the federated user that is associated with the
       # credentials.
-      class FederatedUser < Aws::Structure.new(
+      class FederatedUser < Struct.new(
         :federated_user_id,
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] federated_user_id
         #   The string that identifies the federated user associated with the
@@ -652,10 +674,12 @@ module Aws
 
       # Contains the response to a successful GetCallerIdentity request,
       # including information about the entity making the request.
-      class GetCallerIdentityResponse < Aws::Structure.new(
+      class GetCallerIdentityResponse < Struct.new(
         :user_id,
         :account,
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_id
         #   The unique identifier of the calling entity. The exact value depends
@@ -688,10 +712,12 @@ module Aws
       #         policy: "sessionPolicyDocumentType",
       #         duration_seconds: 1,
       #       }
-      class GetFederationTokenRequest < Aws::Structure.new(
+      class GetFederationTokenRequest < Struct.new(
         :name,
         :policy,
         :duration_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the federated user. The name is used as an identifier
@@ -762,10 +788,12 @@ module Aws
       # Contains the response to a successful GetFederationToken request,
       # including temporary AWS credentials that can be used to make AWS
       # requests.
-      class GetFederationTokenResponse < Aws::Structure.new(
+      class GetFederationTokenResponse < Struct.new(
         :credentials,
         :federated_user,
         :packed_policy_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] credentials
         #   The temporary security credentials, which include an access key ID,
@@ -801,10 +829,12 @@ module Aws
       #         serial_number: "serialNumberType",
       #         token_code: "tokenCodeType",
       #       }
-      class GetSessionTokenRequest < Aws::Structure.new(
+      class GetSessionTokenRequest < Struct.new(
         :duration_seconds,
         :serial_number,
         :token_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] duration_seconds
         #   The duration, in seconds, that the credentials should remain valid.
@@ -849,8 +879,10 @@ module Aws
       # Contains the response to a successful GetSessionToken request,
       # including temporary AWS credentials that can be used to make AWS
       # requests.
-      class GetSessionTokenResponse < Aws::Structure.new(
+      class GetSessionTokenResponse < Struct.new(
         :credentials)
+
+        include Aws::Structure
 
         # @!attribute [rw] credentials
         #   The temporary security credentials, which include an access key ID,

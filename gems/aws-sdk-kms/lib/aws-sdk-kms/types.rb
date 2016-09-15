@@ -10,10 +10,12 @@ module Aws
     module Types
 
       # Contains information about an alias.
-      class AliasListEntry < Aws::Structure.new(
+      class AliasListEntry < Struct.new(
         :alias_name,
         :alias_arn,
         :target_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_name
         #   String that contains the alias.
@@ -35,8 +37,10 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
-      class CancelKeyDeletionRequest < Aws::Structure.new(
+      class CancelKeyDeletionRequest < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The unique identifier for the customer master key (CMK) for which to
@@ -56,8 +60,10 @@ module Aws
 
       end
 
-      class CancelKeyDeletionResponse < Aws::Structure.new(
+      class CancelKeyDeletionResponse < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The unique identifier of the master key for which deletion is
@@ -73,9 +79,11 @@ module Aws
       #         alias_name: "AliasNameType", # required
       #         target_key_id: "KeyIdType", # required
       #       }
-      class CreateAliasRequest < Aws::Structure.new(
+      class CreateAliasRequest < Struct.new(
         :alias_name,
         :target_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_name
         #   String that contains the display name. The name must start with the
@@ -116,7 +124,7 @@ module Aws
       #         grant_tokens: ["GrantTokenType"],
       #         name: "GrantNameType",
       #       }
-      class CreateGrantRequest < Aws::Structure.new(
+      class CreateGrantRequest < Struct.new(
         :key_id,
         :grantee_principal,
         :retiring_principal,
@@ -124,6 +132,8 @@ module Aws
         :constraints,
         :grant_tokens,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The unique identifier for the customer master key (CMK) that the
@@ -243,9 +253,11 @@ module Aws
 
       end
 
-      class CreateGrantResponse < Aws::Structure.new(
+      class CreateGrantResponse < Struct.new(
         :grant_token,
         :grant_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] grant_token
         #   The grant token.
@@ -277,12 +289,14 @@ module Aws
       #         origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL
       #         bypass_policy_lockout_safety_check: false,
       #       }
-      class CreateKeyRequest < Aws::Structure.new(
+      class CreateKeyRequest < Struct.new(
         :policy,
         :description,
         :key_usage,
         :origin,
         :bypass_policy_lockout_safety_check)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   The key policy to attach to the CMK.
@@ -376,8 +390,10 @@ module Aws
 
       end
 
-      class CreateKeyResponse < Aws::Structure.new(
+      class CreateKeyResponse < Struct.new(
         :key_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_metadata
         #   Metadata associated with the CMK.
@@ -395,10 +411,12 @@ module Aws
       #         },
       #         grant_tokens: ["GrantTokenType"],
       #       }
-      class DecryptRequest < Aws::Structure.new(
+      class DecryptRequest < Struct.new(
         :ciphertext_blob,
         :encryption_context,
         :grant_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] ciphertext_blob
         #   Ciphertext to be decrypted. The blob includes metadata.
@@ -427,9 +445,11 @@ module Aws
 
       end
 
-      class DecryptResponse < Aws::Structure.new(
+      class DecryptResponse < Struct.new(
         :key_id,
         :plaintext)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   ARN of the key used to perform the decryption. This value is
@@ -450,8 +470,10 @@ module Aws
       #       {
       #         alias_name: "AliasNameType", # required
       #       }
-      class DeleteAliasRequest < Aws::Structure.new(
+      class DeleteAliasRequest < Struct.new(
         :alias_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_name
         #   The alias to be deleted. The name must start with the word \"alias\"
@@ -467,8 +489,10 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
-      class DeleteImportedKeyMaterialRequest < Aws::Structure.new(
+      class DeleteImportedKeyMaterialRequest < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The identifier of the CMK whose key material to delete. The CMK\'s
@@ -492,9 +516,11 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         grant_tokens: ["GrantTokenType"],
       #       }
-      class DescribeKeyRequest < Aws::Structure.new(
+      class DescribeKeyRequest < Struct.new(
         :key_id,
         :grant_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -526,8 +552,10 @@ module Aws
 
       end
 
-      class DescribeKeyResponse < Aws::Structure.new(
+      class DescribeKeyResponse < Struct.new(
         :key_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_metadata
         #   Metadata associated with the key.
@@ -541,8 +569,10 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
-      class DisableKeyRequest < Aws::Structure.new(
+      class DisableKeyRequest < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the CMK.
@@ -564,8 +594,10 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
-      class DisableKeyRotationRequest < Aws::Structure.new(
+      class DisableKeyRotationRequest < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -586,8 +618,10 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
-      class EnableKeyRequest < Aws::Structure.new(
+      class EnableKeyRequest < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -608,8 +642,10 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
-      class EnableKeyRotationRequest < Aws::Structure.new(
+      class EnableKeyRotationRequest < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -635,11 +671,13 @@ module Aws
       #         },
       #         grant_tokens: ["GrantTokenType"],
       #       }
-      class EncryptRequest < Aws::Structure.new(
+      class EncryptRequest < Struct.new(
         :key_id,
         :plaintext,
         :encryption_context,
         :grant_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -686,9 +724,11 @@ module Aws
 
       end
 
-      class EncryptResponse < Aws::Structure.new(
+      class EncryptResponse < Struct.new(
         :ciphertext_blob,
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ciphertext_blob
         #   The encrypted plaintext. If you are using the CLI, the value is
@@ -713,12 +753,14 @@ module Aws
       #         key_spec: "AES_256", # accepts AES_256, AES_128
       #         grant_tokens: ["GrantTokenType"],
       #       }
-      class GenerateDataKeyRequest < Aws::Structure.new(
+      class GenerateDataKeyRequest < Struct.new(
         :key_id,
         :encryption_context,
         :number_of_bytes,
         :key_spec,
         :grant_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -768,10 +810,12 @@ module Aws
 
       end
 
-      class GenerateDataKeyResponse < Aws::Structure.new(
+      class GenerateDataKeyResponse < Struct.new(
         :ciphertext_blob,
         :plaintext,
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ciphertext_blob
         #   Ciphertext that contains the encrypted data key. You must store the
@@ -809,12 +853,14 @@ module Aws
       #         number_of_bytes: 1,
       #         grant_tokens: ["GrantTokenType"],
       #       }
-      class GenerateDataKeyWithoutPlaintextRequest < Aws::Structure.new(
+      class GenerateDataKeyWithoutPlaintextRequest < Struct.new(
         :key_id,
         :encryption_context,
         :key_spec,
         :number_of_bytes,
         :grant_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -862,9 +908,11 @@ module Aws
 
       end
 
-      class GenerateDataKeyWithoutPlaintextResponse < Aws::Structure.new(
+      class GenerateDataKeyWithoutPlaintextResponse < Struct.new(
         :ciphertext_blob,
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ciphertext_blob
         #   Ciphertext that contains the wrapped data key. You must store the
@@ -888,8 +936,10 @@ module Aws
       #       {
       #         number_of_bytes: 1,
       #       }
-      class GenerateRandomRequest < Aws::Structure.new(
+      class GenerateRandomRequest < Struct.new(
         :number_of_bytes)
+
+        include Aws::Structure
 
         # @!attribute [rw] number_of_bytes
         #   Integer that contains the number of bytes to generate. Common values
@@ -898,8 +948,10 @@ module Aws
 
       end
 
-      class GenerateRandomResponse < Aws::Structure.new(
+      class GenerateRandomResponse < Struct.new(
         :plaintext)
+
+        include Aws::Structure
 
         # @!attribute [rw] plaintext
         #   Plaintext that contains the unpredictable byte string.
@@ -914,9 +966,11 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         policy_name: "PolicyNameType", # required
       #       }
-      class GetKeyPolicyRequest < Aws::Structure.new(
+      class GetKeyPolicyRequest < Struct.new(
         :key_id,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -937,8 +991,10 @@ module Aws
 
       end
 
-      class GetKeyPolicyResponse < Aws::Structure.new(
+      class GetKeyPolicyResponse < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   A policy document in JSON format.
@@ -952,8 +1008,10 @@ module Aws
       #       {
       #         key_id: "KeyIdType", # required
       #       }
-      class GetKeyRotationStatusRequest < Aws::Structure.new(
+      class GetKeyRotationStatusRequest < Struct.new(
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -968,8 +1026,10 @@ module Aws
 
       end
 
-      class GetKeyRotationStatusResponse < Aws::Structure.new(
+      class GetKeyRotationStatusResponse < Struct.new(
         :key_rotation_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_rotation_enabled
         #   A Boolean value that specifies whether key rotation is enabled.
@@ -985,10 +1045,12 @@ module Aws
       #         wrapping_algorithm: "RSAES_PKCS1_V1_5", # required, accepts RSAES_PKCS1_V1_5, RSAES_OAEP_SHA_1, RSAES_OAEP_SHA_256
       #         wrapping_key_spec: "RSA_2048", # required, accepts RSA_2048
       #       }
-      class GetParametersForImportRequest < Aws::Structure.new(
+      class GetParametersForImportRequest < Struct.new(
         :key_id,
         :wrapping_algorithm,
         :wrapping_key_spec)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The identifier of the CMK into which you will import key material.
@@ -1021,11 +1083,13 @@ module Aws
 
       end
 
-      class GetParametersForImportResponse < Aws::Structure.new(
+      class GetParametersForImportResponse < Struct.new(
         :key_id,
         :import_token,
         :public_key,
         :parameters_valid_to)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The identifier of the CMK to use in a subsequent ImportKeyMaterial
@@ -1073,9 +1137,11 @@ module Aws
       #           "EncryptionContextKey" => "EncryptionContextValue",
       #         },
       #       }
-      class GrantConstraints < Aws::Structure.new(
+      class GrantConstraints < Struct.new(
         :encryption_context_subset,
         :encryption_context_equals)
+
+        include Aws::Structure
 
         # @!attribute [rw] encryption_context_subset
         #   Contains a list of key-value pairs, a subset of which must be
@@ -1097,7 +1163,7 @@ module Aws
       end
 
       # Contains information about an entry in a list of grants.
-      class GrantListEntry < Aws::Structure.new(
+      class GrantListEntry < Struct.new(
         :key_id,
         :grant_id,
         :name,
@@ -1107,6 +1173,8 @@ module Aws
         :issuing_account,
         :operations,
         :constraints)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The unique identifier for the customer master key (CMK) to which the
@@ -1159,12 +1227,14 @@ module Aws
       #         valid_to: Time.now,
       #         expiration_model: "KEY_MATERIAL_EXPIRES", # accepts KEY_MATERIAL_EXPIRES, KEY_MATERIAL_DOES_NOT_EXPIRE
       #       }
-      class ImportKeyMaterialRequest < Aws::Structure.new(
+      class ImportKeyMaterialRequest < Struct.new(
         :key_id,
         :import_token,
         :encrypted_key_material,
         :valid_to,
         :expiration_model)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The identifier of the CMK to import the key material into. The
@@ -1214,9 +1284,11 @@ module Aws
       class ImportKeyMaterialResponse < Aws::EmptyStructure; end
 
       # Contains information about each entry in the key list.
-      class KeyListEntry < Aws::Structure.new(
+      class KeyListEntry < Struct.new(
         :key_id,
         :key_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   Unique identifier of the key.
@@ -1232,7 +1304,7 @@ module Aws
       #
       # This data type is used as a response element for the CreateKey and
       # DescribeKey operations.
-      class KeyMetadata < Aws::Structure.new(
+      class KeyMetadata < Struct.new(
         :aws_account_id,
         :key_id,
         :arn,
@@ -1245,6 +1317,8 @@ module Aws
         :valid_to,
         :origin,
         :expiration_model)
+
+        include Aws::Structure
 
         # @!attribute [rw] aws_account_id
         #   The twelve-digit account ID of the AWS account that owns the CMK.
@@ -1331,9 +1405,11 @@ module Aws
       #         limit: 1,
       #         marker: "MarkerType",
       #       }
-      class ListAliasesRequest < Aws::Structure.new(
+      class ListAliasesRequest < Struct.new(
         :limit,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   When paginating results, specify the maximum number of items to
@@ -1354,10 +1430,12 @@ module Aws
 
       end
 
-      class ListAliasesResponse < Aws::Structure.new(
+      class ListAliasesResponse < Struct.new(
         :aliases,
         :next_marker,
         :truncated)
+
+        include Aws::Structure
 
         # @!attribute [rw] aliases
         #   A list of key aliases in the user\'s account.
@@ -1386,10 +1464,12 @@ module Aws
       #         marker: "MarkerType",
       #         key_id: "KeyIdType", # required
       #       }
-      class ListGrantsRequest < Aws::Structure.new(
+      class ListGrantsRequest < Struct.new(
         :limit,
         :marker,
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   When paginating results, specify the maximum number of items to
@@ -1421,10 +1501,12 @@ module Aws
 
       end
 
-      class ListGrantsResponse < Aws::Structure.new(
+      class ListGrantsResponse < Struct.new(
         :grants,
         :next_marker,
         :truncated)
+
+        include Aws::Structure
 
         # @!attribute [rw] grants
         #   A list of grants.
@@ -1453,10 +1535,12 @@ module Aws
       #         limit: 1,
       #         marker: "MarkerType",
       #       }
-      class ListKeyPoliciesRequest < Aws::Structure.new(
+      class ListKeyPoliciesRequest < Struct.new(
         :key_id,
         :limit,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a
@@ -1496,10 +1580,12 @@ module Aws
 
       end
 
-      class ListKeyPoliciesResponse < Aws::Structure.new(
+      class ListKeyPoliciesResponse < Struct.new(
         :policy_names,
         :next_marker,
         :truncated)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_names
         #   A list of policy names. Currently, there is only one policy and it
@@ -1528,9 +1614,11 @@ module Aws
       #         limit: 1,
       #         marker: "MarkerType",
       #       }
-      class ListKeysRequest < Aws::Structure.new(
+      class ListKeysRequest < Struct.new(
         :limit,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   When paginating results, specify the maximum number of items to
@@ -1551,10 +1639,12 @@ module Aws
 
       end
 
-      class ListKeysResponse < Aws::Structure.new(
+      class ListKeysResponse < Struct.new(
         :keys,
         :next_marker,
         :truncated)
+
+        include Aws::Structure
 
         # @!attribute [rw] keys
         #   A list of keys.
@@ -1583,10 +1673,12 @@ module Aws
       #         marker: "MarkerType",
       #         retiring_principal: "PrincipalIdType", # required
       #       }
-      class ListRetirableGrantsRequest < Aws::Structure.new(
+      class ListRetirableGrantsRequest < Struct.new(
         :limit,
         :marker,
         :retiring_principal)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   When paginating results, specify the maximum number of items to
@@ -1632,11 +1724,13 @@ module Aws
       #         policy: "PolicyType", # required
       #         bypass_policy_lockout_safety_check: false,
       #       }
-      class PutKeyPolicyRequest < Aws::Structure.new(
+      class PutKeyPolicyRequest < Struct.new(
         :key_id,
         :policy_name,
         :policy,
         :bypass_policy_lockout_safety_check)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the CMK.
@@ -1725,12 +1819,14 @@ module Aws
       #         },
       #         grant_tokens: ["GrantTokenType"],
       #       }
-      class ReEncryptRequest < Aws::Structure.new(
+      class ReEncryptRequest < Struct.new(
         :ciphertext_blob,
         :source_encryption_context,
         :destination_key_id,
         :destination_encryption_context,
         :grant_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] ciphertext_blob
         #   Ciphertext of the data to re-encrypt.
@@ -1776,10 +1872,12 @@ module Aws
 
       end
 
-      class ReEncryptResponse < Aws::Structure.new(
+      class ReEncryptResponse < Struct.new(
         :ciphertext_blob,
         :source_key_id,
         :key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ciphertext_blob
         #   The re-encrypted data. If you are using the CLI, the value is Base64
@@ -1804,10 +1902,12 @@ module Aws
       #         key_id: "KeyIdType",
       #         grant_id: "GrantIdType",
       #       }
-      class RetireGrantRequest < Aws::Structure.new(
+      class RetireGrantRequest < Struct.new(
         :grant_token,
         :key_id,
         :grant_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] grant_token
         #   Token that identifies the grant to be retired.
@@ -1844,9 +1944,11 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         grant_id: "GrantIdType", # required
       #       }
-      class RevokeGrantRequest < Aws::Structure.new(
+      class RevokeGrantRequest < Struct.new(
         :key_id,
         :grant_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key associated with the
@@ -1873,9 +1975,11 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         pending_window_in_days: 1,
       #       }
-      class ScheduleKeyDeletionRequest < Aws::Structure.new(
+      class ScheduleKeyDeletionRequest < Struct.new(
         :key_id,
         :pending_window_in_days)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The unique identifier for the customer master key (CMK) to delete.
@@ -1902,9 +2006,11 @@ module Aws
 
       end
 
-      class ScheduleKeyDeletionResponse < Aws::Structure.new(
+      class ScheduleKeyDeletionResponse < Struct.new(
         :key_id,
         :deletion_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   The unique identifier of the customer master key (CMK) for which
@@ -1925,9 +2031,11 @@ module Aws
       #         alias_name: "AliasNameType", # required
       #         target_key_id: "KeyIdType", # required
       #       }
-      class UpdateAliasRequest < Aws::Structure.new(
+      class UpdateAliasRequest < Struct.new(
         :alias_name,
         :target_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_name
         #   String that contains the name of the alias to be modified. The name
@@ -1959,9 +2067,11 @@ module Aws
       #         key_id: "KeyIdType", # required
       #         description: "DescriptionType", # required
       #       }
-      class UpdateKeyDescriptionRequest < Aws::Structure.new(
+      class UpdateKeyDescriptionRequest < Struct.new(
         :key_id,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_id
         #   A unique identifier for the customer master key. This value can be a

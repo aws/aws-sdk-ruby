@@ -14,10 +14,12 @@ module Aws
       # (STS). They can be used to access input and output artifacts in the
       # Amazon S3 bucket used to store artifact for the pipeline in AWS
       # CodePipeline.
-      class AWSSessionCredentials < Aws::Structure.new(
+      class AWSSessionCredentials < Struct.new(
         :access_key_id,
         :secret_access_key,
         :session_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_key_id
         #   The access key for the session.
@@ -41,9 +43,11 @@ module Aws
       #         job_id: "JobId", # required
       #         nonce: "Nonce", # required
       #       }
-      class AcknowledgeJobInput < Aws::Structure.new(
+      class AcknowledgeJobInput < Struct.new(
         :job_id,
         :nonce)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The unique system-generated ID of the job for which you want to
@@ -59,8 +63,10 @@ module Aws
       end
 
       # Represents the output of an acknowledge job action.
-      class AcknowledgeJobOutput < Aws::Structure.new(
+      class AcknowledgeJobOutput < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   Whether the job worker has received the specified job.
@@ -77,10 +83,12 @@ module Aws
       #         nonce: "Nonce", # required
       #         client_token: "ClientToken", # required
       #       }
-      class AcknowledgeThirdPartyJobInput < Aws::Structure.new(
+      class AcknowledgeThirdPartyJobInput < Struct.new(
         :job_id,
         :nonce,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The unique system-generated ID of the job.
@@ -101,8 +109,10 @@ module Aws
       end
 
       # Represents the output of an acknowledge third party job action.
-      class AcknowledgeThirdPartyJobOutput < Aws::Structure.new(
+      class AcknowledgeThirdPartyJobOutput < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status information for the third party job, if any.
@@ -111,8 +121,10 @@ module Aws
       end
 
       # Represents information about an action configuration.
-      class ActionConfiguration < Aws::Structure.new(
+      class ActionConfiguration < Struct.new(
         :configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration
         #   The configuration data for the action.
@@ -133,7 +145,7 @@ module Aws
       #         description: "Description",
       #         type: "String", # accepts String, Number, Boolean
       #       }
-      class ActionConfigurationProperty < Aws::Structure.new(
+      class ActionConfigurationProperty < Struct.new(
         :name,
         :required,
         :key,
@@ -141,6 +153,8 @@ module Aws
         :queryable,
         :description,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the action configuration property.
@@ -191,8 +205,10 @@ module Aws
 
       # Represents the context of an action within the stage of a pipeline to
       # a job worker.
-      class ActionContext < Aws::Structure.new(
+      class ActionContext < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the action within the context of a job.
@@ -228,7 +244,7 @@ module Aws
       #         ],
       #         role_arn: "RoleArn",
       #       }
-      class ActionDeclaration < Aws::Structure.new(
+      class ActionDeclaration < Struct.new(
         :name,
         :action_type_id,
         :run_order,
@@ -236,6 +252,8 @@ module Aws
         :output_artifacts,
         :input_artifacts,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The action declaration\'s name.
@@ -271,7 +289,7 @@ module Aws
       end
 
       # Represents information about the run of an action.
-      class ActionExecution < Aws::Structure.new(
+      class ActionExecution < Struct.new(
         :status,
         :summary,
         :last_status_change,
@@ -281,6 +299,8 @@ module Aws
         :external_execution_url,
         :percent_complete,
         :error_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the action, or for a completed action, the last status
@@ -334,10 +354,12 @@ module Aws
       #         revision_change_id: "RevisionChangeIdentifier", # required
       #         created: Time.now, # required
       #       }
-      class ActionRevision < Aws::Structure.new(
+      class ActionRevision < Struct.new(
         :revision_id,
         :revision_change_id,
         :created)
+
+        include Aws::Structure
 
         # @!attribute [rw] revision_id
         #   The system-generated unique ID that identifies the revision number
@@ -357,12 +379,14 @@ module Aws
       end
 
       # Represents information about the state of an action.
-      class ActionState < Aws::Structure.new(
+      class ActionState < Struct.new(
         :action_name,
         :current_revision,
         :latest_execution,
         :entity_url,
         :revision_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_name
         #   The name of the action.
@@ -389,12 +413,14 @@ module Aws
       end
 
       # Returns information about the details of an action type.
-      class ActionType < Aws::Structure.new(
+      class ActionType < Struct.new(
         :id,
         :settings,
         :action_configuration_properties,
         :input_artifact_details,
         :output_artifact_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Represents information about an action type.
@@ -430,11 +456,13 @@ module Aws
       #         provider: "ActionProvider", # required
       #         version: "Version", # required
       #       }
-      class ActionTypeId < Aws::Structure.new(
+      class ActionTypeId < Struct.new(
         :category,
         :owner,
         :provider,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] category
         #   A category defines what kind of action can be taken in the stage,
@@ -469,11 +497,13 @@ module Aws
       #         execution_url_template: "UrlTemplate",
       #         revision_url_template: "UrlTemplate",
       #       }
-      class ActionTypeSettings < Aws::Structure.new(
+      class ActionTypeSettings < Struct.new(
         :third_party_configuration_url,
         :entity_url_template,
         :execution_url_template,
         :revision_url_template)
+
+        include Aws::Structure
 
         # @!attribute [rw] third_party_configuration_url
         #   The URL of a sign-up page where users can sign up for an external
@@ -512,9 +542,11 @@ module Aws
       #         summary: "ApprovalSummary", # required
       #         status: "Approved", # required, accepts Approved, Rejected
       #       }
-      class ApprovalResult < Aws::Structure.new(
+      class ApprovalResult < Struct.new(
         :summary,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] summary
         #   The summary of the current status of the approval request.
@@ -529,10 +561,12 @@ module Aws
 
       # Represents information about an artifact that will be worked upon by
       # actions in the pipeline.
-      class Artifact < Aws::Structure.new(
+      class Artifact < Struct.new(
         :name,
         :revision,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The artifact\'s name.
@@ -557,9 +591,11 @@ module Aws
       #         minimum_count: 1, # required
       #         maximum_count: 1, # required
       #       }
-      class ArtifactDetails < Aws::Structure.new(
+      class ArtifactDetails < Struct.new(
         :minimum_count,
         :maximum_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] minimum_count
         #   The minimum number of artifacts allowed for the action type.
@@ -572,9 +608,11 @@ module Aws
       end
 
       # Represents information about the location of an artifact.
-      class ArtifactLocation < Aws::Structure.new(
+      class ArtifactLocation < Struct.new(
         :type,
         :s3_location)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The type of artifact in the location.
@@ -587,13 +625,15 @@ module Aws
       end
 
       # Represents revision details of an artifact.
-      class ArtifactRevision < Aws::Structure.new(
+      class ArtifactRevision < Struct.new(
         :name,
         :revision_id,
         :revision_change_identifier,
         :revision_summary,
         :created,
         :revision_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of an artifact. This name might be system-generated, such
@@ -650,10 +690,12 @@ module Aws
       #           type: "KMS", # required, accepts KMS
       #         },
       #       }
-      class ArtifactStore < Aws::Structure.new(
+      class ArtifactStore < Struct.new(
         :type,
         :location,
         :encryption_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The type of the artifact store, such as S3.
@@ -680,9 +722,11 @@ module Aws
       #         name: "BlockerName", # required
       #         type: "Schedule", # required, accepts Schedule
       #       }
-      class BlockerDeclaration < Aws::Structure.new(
+      class BlockerDeclaration < Struct.new(
         :name,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Reserved for future use.
@@ -728,7 +772,7 @@ module Aws
       #           maximum_count: 1, # required
       #         },
       #       }
-      class CreateCustomActionTypeInput < Aws::Structure.new(
+      class CreateCustomActionTypeInput < Struct.new(
         :category,
         :provider,
         :version,
@@ -736,6 +780,8 @@ module Aws
         :configuration_properties,
         :input_artifact_details,
         :output_artifact_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] category
         #   The category of the custom action, such as a source action or a
@@ -787,8 +833,10 @@ module Aws
       end
 
       # Represents the output of a create custom action operation.
-      class CreateCustomActionTypeOutput < Aws::Structure.new(
+      class CreateCustomActionTypeOutput < Struct.new(
         :action_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_type
         #   Returns information about the details of an action type.
@@ -852,8 +900,10 @@ module Aws
       #           version: 1,
       #         },
       #       }
-      class CreatePipelineInput < Aws::Structure.new(
+      class CreatePipelineInput < Struct.new(
         :pipeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   Represents the structure of actions and stages to be performed in
@@ -863,8 +913,10 @@ module Aws
       end
 
       # Represents the output of a create pipeline action.
-      class CreatePipelineOutput < Aws::Structure.new(
+      class CreatePipelineOutput < Struct.new(
         :pipeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   Represents the structure of actions and stages to be performed in
@@ -883,11 +935,13 @@ module Aws
       #         created: Time.now,
       #         revision_summary: "RevisionSummary",
       #       }
-      class CurrentRevision < Aws::Structure.new(
+      class CurrentRevision < Struct.new(
         :revision,
         :change_identifier,
         :created,
         :revision_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] revision
         #   The revision ID of the current version of an artifact.
@@ -918,10 +972,12 @@ module Aws
       #         provider: "ActionProvider", # required
       #         version: "Version", # required
       #       }
-      class DeleteCustomActionTypeInput < Aws::Structure.new(
+      class DeleteCustomActionTypeInput < Struct.new(
         :category,
         :provider,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] category
         #   The category of the custom action that you want to delete, such as
@@ -946,8 +1002,10 @@ module Aws
       #       {
       #         name: "PipelineName", # required
       #       }
-      class DeletePipelineInput < Aws::Structure.new(
+      class DeletePipelineInput < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the pipeline to be deleted.
@@ -965,11 +1023,13 @@ module Aws
       #         transition_type: "Inbound", # required, accepts Inbound, Outbound
       #         reason: "DisabledReason", # required
       #       }
-      class DisableStageTransitionInput < Aws::Structure.new(
+      class DisableStageTransitionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :transition_type,
         :reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline in which you want to disable the flow of
@@ -1005,10 +1065,12 @@ module Aws
       #         stage_name: "StageName", # required
       #         transition_type: "Inbound", # required, accepts Inbound, Outbound
       #       }
-      class EnableStageTransitionInput < Aws::Structure.new(
+      class EnableStageTransitionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :transition_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline in which you want to enable the flow of
@@ -1039,9 +1101,11 @@ module Aws
       #         id: "EncryptionKeyId", # required
       #         type: "KMS", # required, accepts KMS
       #       }
-      class EncryptionKey < Aws::Structure.new(
+      class EncryptionKey < Struct.new(
         :id,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID used to identify the key. For an AWS KMS key, this is the key
@@ -1057,9 +1121,11 @@ module Aws
       end
 
       # Represents information about an error in AWS CodePipeline.
-      class ErrorDetails < Aws::Structure.new(
+      class ErrorDetails < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The system ID or error number code of the error.
@@ -1081,10 +1147,12 @@ module Aws
       #         external_execution_id: "ExecutionId",
       #         percent_complete: 1,
       #       }
-      class ExecutionDetails < Aws::Structure.new(
+      class ExecutionDetails < Struct.new(
         :summary,
         :external_execution_id,
         :percent_complete)
+
+        include Aws::Structure
 
         # @!attribute [rw] summary
         #   The summary of the current status of the actions.
@@ -1111,10 +1179,12 @@ module Aws
       #         message: "Message", # required
       #         external_execution_id: "ExecutionId",
       #       }
-      class FailureDetails < Aws::Structure.new(
+      class FailureDetails < Struct.new(
         :type,
         :message,
         :external_execution_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The type of the failure.
@@ -1137,8 +1207,10 @@ module Aws
       #       {
       #         job_id: "JobId", # required
       #       }
-      class GetJobDetailsInput < Aws::Structure.new(
+      class GetJobDetailsInput < Struct.new(
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The unique system-generated ID for the job.
@@ -1147,8 +1219,10 @@ module Aws
       end
 
       # Represents the output of a get job details action.
-      class GetJobDetailsOutput < Aws::Structure.new(
+      class GetJobDetailsOutput < Struct.new(
         :job_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_details
         #   The details of the job.
@@ -1169,9 +1243,11 @@ module Aws
       #         pipeline_name: "PipelineName", # required
       #         pipeline_execution_id: "PipelineExecutionId", # required
       #       }
-      class GetPipelineExecutionInput < Aws::Structure.new(
+      class GetPipelineExecutionInput < Struct.new(
         :pipeline_name,
         :pipeline_execution_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline about which you want to get execution
@@ -1186,8 +1262,10 @@ module Aws
       end
 
       # Represents the output of a get pipeline execution action.
-      class GetPipelineExecutionOutput < Aws::Structure.new(
+      class GetPipelineExecutionOutput < Struct.new(
         :pipeline_execution)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_execution
         #   Represents information about the execution of a pipeline.
@@ -1203,9 +1281,11 @@ module Aws
       #         name: "PipelineName", # required
       #         version: 1,
       #       }
-      class GetPipelineInput < Aws::Structure.new(
+      class GetPipelineInput < Struct.new(
         :name,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the pipeline for which you want to get information.
@@ -1221,8 +1301,10 @@ module Aws
       end
 
       # Represents the output of a get pipeline action.
-      class GetPipelineOutput < Aws::Structure.new(
+      class GetPipelineOutput < Struct.new(
         :pipeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   Represents the structure of actions and stages to be performed in
@@ -1238,8 +1320,10 @@ module Aws
       #       {
       #         name: "PipelineName", # required
       #       }
-      class GetPipelineStateInput < Aws::Structure.new(
+      class GetPipelineStateInput < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the pipeline about which you want to get information.
@@ -1248,12 +1332,14 @@ module Aws
       end
 
       # Represents the output of a get pipeline state action.
-      class GetPipelineStateOutput < Aws::Structure.new(
+      class GetPipelineStateOutput < Struct.new(
         :pipeline_name,
         :pipeline_version,
         :stage_states,
         :created,
         :updated)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline for which you want to get the state.
@@ -1292,9 +1378,11 @@ module Aws
       #         job_id: "ThirdPartyJobId", # required
       #         client_token: "ClientToken", # required
       #       }
-      class GetThirdPartyJobDetailsInput < Aws::Structure.new(
+      class GetThirdPartyJobDetailsInput < Struct.new(
         :job_id,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The unique system-generated ID used for identifying the job.
@@ -1309,8 +1397,10 @@ module Aws
       end
 
       # Represents the output of a get third party job details action.
-      class GetThirdPartyJobDetailsOutput < Aws::Structure.new(
+      class GetThirdPartyJobDetailsOutput < Struct.new(
         :job_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_details
         #   The details of the job, including any protected values defined for
@@ -1327,8 +1417,10 @@ module Aws
       #       {
       #         name: "ArtifactName", # required
       #       }
-      class InputArtifact < Aws::Structure.new(
+      class InputArtifact < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the artifact to be worked on, for example, \"My App\".
@@ -1344,11 +1436,13 @@ module Aws
       end
 
       # Represents information about a job.
-      class Job < Aws::Structure.new(
+      class Job < Struct.new(
         :id,
         :data,
         :nonce,
         :account_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique system-generated ID of the job.
@@ -1372,7 +1466,7 @@ module Aws
 
       # Represents additional information about a job required for a job
       # worker to complete the job.
-      class JobData < Aws::Structure.new(
+      class JobData < Struct.new(
         :action_type_id,
         :action_configuration,
         :pipeline_context,
@@ -1381,6 +1475,8 @@ module Aws
         :artifact_credentials,
         :continuation_token,
         :encryption_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_type_id
         #   Represents information about an action type.
@@ -1423,10 +1519,12 @@ module Aws
       end
 
       # Represents information about the details of a job.
-      class JobDetails < Aws::Structure.new(
+      class JobDetails < Struct.new(
         :id,
         :data,
         :account_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique system-generated ID of the job.
@@ -1451,9 +1549,11 @@ module Aws
       #         action_owner_filter: "AWS", # accepts AWS, ThirdParty, Custom
       #         next_token: "NextToken",
       #       }
-      class ListActionTypesInput < Aws::Structure.new(
+      class ListActionTypesInput < Struct.new(
         :action_owner_filter,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_owner_filter
         #   Filters the list of action types to those created by a specified
@@ -1469,9 +1569,11 @@ module Aws
       end
 
       # Represents the output of a list action types action.
-      class ListActionTypesOutput < Aws::Structure.new(
+      class ListActionTypesOutput < Struct.new(
         :action_types,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_types
         #   Provides details of the action types.
@@ -1493,8 +1595,10 @@ module Aws
       #       {
       #         next_token: "NextToken",
       #       }
-      class ListPipelinesInput < Aws::Structure.new(
+      class ListPipelinesInput < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An identifier that was returned from the previous list pipelines
@@ -1505,9 +1609,11 @@ module Aws
       end
 
       # Represents the output of a list pipelines action.
-      class ListPipelinesOutput < Aws::Structure.new(
+      class ListPipelinesOutput < Struct.new(
         :pipelines,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipelines
         #   The list of pipelines.
@@ -1528,8 +1634,10 @@ module Aws
       #       {
       #         name: "ArtifactName", # required
       #       }
-      class OutputArtifact < Aws::Structure.new(
+      class OutputArtifact < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the output of an artifact, such as \"My App\".
@@ -1547,10 +1655,12 @@ module Aws
       end
 
       # Represents information about a pipeline to a job worker.
-      class PipelineContext < Aws::Structure.new(
+      class PipelineContext < Struct.new(
         :pipeline_name,
         :stage,
         :action)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline. This is a user-specified value. Pipeline
@@ -1624,12 +1734,14 @@ module Aws
       #         ],
       #         version: 1,
       #       }
-      class PipelineDeclaration < Aws::Structure.new(
+      class PipelineDeclaration < Struct.new(
         :name,
         :role_arn,
         :artifact_store,
         :stages,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the action to be performed.
@@ -1665,12 +1777,14 @@ module Aws
       end
 
       # Represents information about an execution of a pipeline.
-      class PipelineExecution < Aws::Structure.new(
+      class PipelineExecution < Struct.new(
         :pipeline_name,
         :pipeline_version,
         :pipeline_execution_id,
         :status,
         :artifact_revisions)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline that was executed.
@@ -1705,11 +1819,13 @@ module Aws
       end
 
       # Returns a summary of a pipeline.
-      class PipelineSummary < Aws::Structure.new(
+      class PipelineSummary < Struct.new(
         :name,
         :version,
         :created,
         :updated)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the pipeline.
@@ -1746,10 +1862,12 @@ module Aws
       #           "ActionConfigurationKey" => "ActionConfigurationQueryableValue",
       #         },
       #       }
-      class PollForJobsInput < Aws::Structure.new(
+      class PollForJobsInput < Struct.new(
         :action_type_id,
         :max_batch_size,
         :query_param)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_type_id
         #   Represents information about an action type.
@@ -1770,8 +1888,10 @@ module Aws
       end
 
       # Represents the output of a poll for jobs action.
-      class PollForJobsOutput < Aws::Structure.new(
+      class PollForJobsOutput < Struct.new(
         :jobs)
+
+        include Aws::Structure
 
         # @!attribute [rw] jobs
         #   Information about the jobs to take action on.
@@ -1792,9 +1912,11 @@ module Aws
       #         },
       #         max_batch_size: 1,
       #       }
-      class PollForThirdPartyJobsInput < Aws::Structure.new(
+      class PollForThirdPartyJobsInput < Struct.new(
         :action_type_id,
         :max_batch_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_type_id
         #   Represents information about an action type.
@@ -1807,8 +1929,10 @@ module Aws
       end
 
       # Represents the output of a poll for third party jobs action.
-      class PollForThirdPartyJobsOutput < Aws::Structure.new(
+      class PollForThirdPartyJobsOutput < Struct.new(
         :jobs)
+
+        include Aws::Structure
 
         # @!attribute [rw] jobs
         #   Information about the jobs to take action on.
@@ -1830,11 +1954,13 @@ module Aws
       #           created: Time.now, # required
       #         },
       #       }
-      class PutActionRevisionInput < Aws::Structure.new(
+      class PutActionRevisionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :action_name,
         :action_revision)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline that will start processing the revision to
@@ -1857,9 +1983,11 @@ module Aws
       end
 
       # Represents the output of a put action revision action.
-      class PutActionRevisionOutput < Aws::Structure.new(
+      class PutActionRevisionOutput < Struct.new(
         :new_revision,
         :pipeline_execution_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] new_revision
         #   Indicates whether the artifact revision was previously used in an
@@ -1886,12 +2014,14 @@ module Aws
       #         },
       #         token: "ApprovalToken", # required
       #       }
-      class PutApprovalResultInput < Aws::Structure.new(
+      class PutApprovalResultInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :action_name,
         :result,
         :token)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline that contains the action.
@@ -1919,8 +2049,10 @@ module Aws
       end
 
       # Represents the output of a put approval result action.
-      class PutApprovalResultOutput < Aws::Structure.new(
+      class PutApprovalResultOutput < Struct.new(
         :approved_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] approved_at
         #   The timestamp showing when the approval or rejection was submitted.
@@ -1940,9 +2072,11 @@ module Aws
       #           external_execution_id: "ExecutionId",
       #         },
       #       }
-      class PutJobFailureResultInput < Aws::Structure.new(
+      class PutJobFailureResultInput < Struct.new(
         :job_id,
         :failure_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The unique system-generated ID of the job that failed. This is the
@@ -1974,11 +2108,13 @@ module Aws
       #           percent_complete: 1,
       #         },
       #       }
-      class PutJobSuccessResultInput < Aws::Structure.new(
+      class PutJobSuccessResultInput < Struct.new(
         :job_id,
         :current_revision,
         :continuation_token,
         :execution_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The unique system-generated ID of the job that succeeded. This is
@@ -2020,10 +2156,12 @@ module Aws
       #           external_execution_id: "ExecutionId",
       #         },
       #       }
-      class PutThirdPartyJobFailureResultInput < Aws::Structure.new(
+      class PutThirdPartyJobFailureResultInput < Struct.new(
         :job_id,
         :client_token,
         :failure_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The ID of the job that failed. This is the same ID returned from
@@ -2062,12 +2200,14 @@ module Aws
       #           percent_complete: 1,
       #         },
       #       }
-      class PutThirdPartyJobSuccessResultInput < Aws::Structure.new(
+      class PutThirdPartyJobSuccessResultInput < Struct.new(
         :job_id,
         :client_token,
         :current_revision,
         :continuation_token,
         :execution_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_id
         #   The ID of the job that successfully completed. This is the same ID
@@ -2111,11 +2251,13 @@ module Aws
       #         pipeline_execution_id: "PipelineExecutionId", # required
       #         retry_mode: "FAILED_ACTIONS", # required, accepts FAILED_ACTIONS
       #       }
-      class RetryStageExecutionInput < Aws::Structure.new(
+      class RetryStageExecutionInput < Struct.new(
         :pipeline_name,
         :stage_name,
         :pipeline_execution_id,
         :retry_mode)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_name
         #   The name of the pipeline that contains the failed stage.
@@ -2139,8 +2281,10 @@ module Aws
       end
 
       # Represents the output of a retry stage execution action.
-      class RetryStageExecutionOutput < Aws::Structure.new(
+      class RetryStageExecutionOutput < Struct.new(
         :pipeline_execution_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_execution_id
         #   The ID of the current workflow execution in the failed stage.
@@ -2149,9 +2293,11 @@ module Aws
       end
 
       # The location of the Amazon S3 bucket that contains a revision.
-      class S3ArtifactLocation < Aws::Structure.new(
+      class S3ArtifactLocation < Struct.new(
         :bucket_name,
         :object_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket_name
         #   The name of the Amazon S3 bucket.
@@ -2165,8 +2311,10 @@ module Aws
       end
 
       # Represents information about a stage to a job worker.
-      class StageContext < Aws::Structure.new(
+      class StageContext < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the stage.
@@ -2213,10 +2361,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class StageDeclaration < Aws::Structure.new(
+      class StageDeclaration < Struct.new(
         :name,
         :blockers,
         :actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the stage.
@@ -2233,9 +2383,11 @@ module Aws
       end
 
       # Represents information about the run of a stage.
-      class StageExecution < Aws::Structure.new(
+      class StageExecution < Struct.new(
         :pipeline_execution_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_execution_id
         #   The ID of the pipeline execution associated with the stage.
@@ -2249,11 +2401,13 @@ module Aws
       end
 
       # Represents information about the state of the stage.
-      class StageState < Aws::Structure.new(
+      class StageState < Struct.new(
         :stage_name,
         :inbound_transition_state,
         :action_states,
         :latest_execution)
+
+        include Aws::Structure
 
         # @!attribute [rw] stage_name
         #   The name of the stage.
@@ -2282,8 +2436,10 @@ module Aws
       #       {
       #         name: "PipelineName", # required
       #       }
-      class StartPipelineExecutionInput < Aws::Structure.new(
+      class StartPipelineExecutionInput < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the pipeline to start.
@@ -2292,8 +2448,10 @@ module Aws
       end
 
       # Represents the output of a start pipeline execution action.
-      class StartPipelineExecutionOutput < Aws::Structure.new(
+      class StartPipelineExecutionOutput < Struct.new(
         :pipeline_execution_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_execution_id
         #   The unique system-generated ID of the pipeline execution that was
@@ -2305,9 +2463,11 @@ module Aws
       # A response to a PollForThirdPartyJobs request returned by AWS
       # CodePipeline when there is a job to be worked upon by a partner
       # action.
-      class ThirdPartyJob < Aws::Structure.new(
+      class ThirdPartyJob < Struct.new(
         :client_id,
         :job_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_id
         #   The clientToken portion of the clientId and clientToken pair used to
@@ -2322,7 +2482,7 @@ module Aws
       end
 
       # Represents information about the job data for a partner action.
-      class ThirdPartyJobData < Aws::Structure.new(
+      class ThirdPartyJobData < Struct.new(
         :action_type_id,
         :action_configuration,
         :pipeline_context,
@@ -2331,6 +2491,8 @@ module Aws
         :artifact_credentials,
         :continuation_token,
         :encryption_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_type_id
         #   Represents information about an action type.
@@ -2381,10 +2543,12 @@ module Aws
 
       # The details of a job sent in response to a GetThirdPartyJobDetails
       # request.
-      class ThirdPartyJobDetails < Aws::Structure.new(
+      class ThirdPartyJobDetails < Struct.new(
         :id,
         :data,
         :nonce)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier used to identify the job details in AWS CodePipeline.
@@ -2404,11 +2568,13 @@ module Aws
 
       # Represents information about the state of transitions between one
       # stage and another stage.
-      class TransitionState < Aws::Structure.new(
+      class TransitionState < Struct.new(
         :enabled,
         :last_changed_by,
         :last_changed_at,
         :disabled_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Whether the transition between stages is enabled (true) or disabled
@@ -2486,8 +2652,10 @@ module Aws
       #           version: 1,
       #         },
       #       }
-      class UpdatePipelineInput < Aws::Structure.new(
+      class UpdatePipelineInput < Struct.new(
         :pipeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   The name of the pipeline to be updated.
@@ -2496,8 +2664,10 @@ module Aws
       end
 
       # Represents the output of an update pipeline action.
-      class UpdatePipelineOutput < Aws::Structure.new(
+      class UpdatePipelineOutput < Struct.new(
         :pipeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   The structure of the updated pipeline.

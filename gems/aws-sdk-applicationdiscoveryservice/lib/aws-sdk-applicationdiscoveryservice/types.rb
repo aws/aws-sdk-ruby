@@ -12,10 +12,12 @@ module Aws
       # Information about agents that were instructed to start collecting
       # data. Information includes the agent ID, a description of the
       # operation, and whether or not the agent configuration was updated.
-      class AgentConfigurationStatus < Aws::Structure.new(
+      class AgentConfigurationStatus < Struct.new(
         :agent_id,
         :operation_succeeded,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_id
         #   The agent ID.
@@ -38,13 +40,15 @@ module Aws
       # Information includes agent IDs, IP addresses, media access control
       # (MAC) addresses, agent health, hostname where the agent resides, and
       # agent version for each agent.
-      class AgentInfo < Aws::Structure.new(
+      class AgentInfo < Struct.new(
         :agent_id,
         :host_name,
         :agent_network_info_list,
         :connector_id,
         :version,
         :health)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_id
         #   The agent ID.
@@ -74,9 +78,11 @@ module Aws
       end
 
       # Network details about the host where the agent resides.
-      class AgentNetworkInfo < Aws::Structure.new(
+      class AgentNetworkInfo < Struct.new(
         :ip_address,
         :mac_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_address
         #   The IP address for the host where the agent resides.
@@ -90,12 +96,14 @@ module Aws
 
       # Tags for a configuration item. Tags are metadata that help you
       # categorize IT assets.
-      class ConfigurationTag < Aws::Structure.new(
+      class ConfigurationTag < Struct.new(
         :configuration_type,
         :configuration_id,
         :key,
         :value,
         :time_of_creation)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_type
         #   A type of IT asset that you want to tag.
@@ -134,9 +142,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateTagsRequest < Aws::Structure.new(
+      class CreateTagsRequest < Struct.new(
         :configuration_ids,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_ids
         #   A list of configuration items that you want to tag.
@@ -166,9 +176,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DeleteTagsRequest < Aws::Structure.new(
+      class DeleteTagsRequest < Struct.new(
         :configuration_ids,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_ids
         #   A list of configuration items with tags that you want to delete.
@@ -194,10 +206,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeAgentsRequest < Aws::Structure.new(
+      class DescribeAgentsRequest < Struct.new(
         :agent_ids,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_ids
         #   The agent IDs for which you want information. If you specify no IDs,
@@ -216,9 +230,11 @@ module Aws
 
       end
 
-      class DescribeAgentsResponse < Aws::Structure.new(
+      class DescribeAgentsResponse < Struct.new(
         :agents_info,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] agents_info
         #   Lists AWS agents by ID or lists all agents associated with your user
@@ -241,8 +257,10 @@ module Aws
       #       {
       #         configuration_ids: ["ConfigurationId"], # required
       #       }
-      class DescribeConfigurationsRequest < Aws::Structure.new(
+      class DescribeConfigurationsRequest < Struct.new(
         :configuration_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_ids
         #   One or more configuration IDs.
@@ -250,8 +268,10 @@ module Aws
 
       end
 
-      class DescribeConfigurationsResponse < Aws::Structure.new(
+      class DescribeConfigurationsResponse < Struct.new(
         :configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] configurations
         #   A key in the response map. The value is an array of data.
@@ -267,10 +287,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeExportConfigurationsRequest < Aws::Structure.new(
+      class DescribeExportConfigurationsRequest < Struct.new(
         :export_ids,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_ids
         #   A unique identifier that you can use to query the export status.
@@ -292,9 +314,11 @@ module Aws
 
       end
 
-      class DescribeExportConfigurationsResponse < Aws::Structure.new(
+      class DescribeExportConfigurationsResponse < Struct.new(
         :exports_info,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] exports_info
         #   Returns export details. When the status is complete, the response
@@ -326,10 +350,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeTagsRequest < Aws::Structure.new(
+      class DescribeTagsRequest < Struct.new(
         :filters,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   You can filter the list using a *key*-*value* format. You can
@@ -348,9 +374,11 @@ module Aws
 
       end
 
-      class DescribeTagsResponse < Aws::Structure.new(
+      class DescribeTagsResponse < Struct.new(
         :tags,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   Depending on the input, this is a list of configuration items tagged
@@ -365,8 +393,10 @@ module Aws
 
       end
 
-      class ExportConfigurationsResponse < Aws::Structure.new(
+      class ExportConfigurationsResponse < Struct.new(
         :export_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_id
         #   A unique identifier that you can use to query the export status.
@@ -376,12 +406,14 @@ module Aws
 
       # Information regarding the export status of the discovered data. The
       # value is an array of objects.
-      class ExportInfo < Aws::Structure.new(
+      class ExportInfo < Struct.new(
         :export_id,
         :export_status,
         :status_message,
         :configurations_download_url,
         :export_request_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_id
         #   A unique identifier that you can use to query the export.
@@ -418,10 +450,12 @@ module Aws
       #         values: ["FilterValue"], # required
       #         condition: "Condition", # required
       #       }
-      class Filter < Aws::Structure.new(
+      class Filter < Struct.new(
         :name,
         :values,
         :condition)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the filter. The following filter names are allowed for
@@ -540,11 +574,13 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class ListConfigurationsRequest < Aws::Structure.new(
+      class ListConfigurationsRequest < Struct.new(
         :configuration_type,
         :filters,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_type
         #   A valid configuration identified by the Discovery Service.
@@ -569,9 +605,11 @@ module Aws
 
       end
 
-      class ListConfigurationsResponse < Aws::Structure.new(
+      class ListConfigurationsResponse < Struct.new(
         :configurations,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] configurations
         #   Returns configuration details, including the configuration ID,
@@ -591,8 +629,10 @@ module Aws
       #       {
       #         agent_ids: ["AgentId"], # required
       #       }
-      class StartDataCollectionByAgentIdsRequest < Aws::Structure.new(
+      class StartDataCollectionByAgentIdsRequest < Struct.new(
         :agent_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_ids
         #   The IDs of the agents that you want to start collecting data. If you
@@ -607,8 +647,10 @@ module Aws
 
       end
 
-      class StartDataCollectionByAgentIdsResponse < Aws::Structure.new(
+      class StartDataCollectionByAgentIdsResponse < Struct.new(
         :agents_configuration_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] agents_configuration_status
         #   Information about agents that were instructed to start collecting
@@ -625,8 +667,10 @@ module Aws
       #       {
       #         agent_ids: ["AgentId"], # required
       #       }
-      class StopDataCollectionByAgentIdsRequest < Aws::Structure.new(
+      class StopDataCollectionByAgentIdsRequest < Struct.new(
         :agent_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_ids
         #   The IDs of the agents that you want to stop collecting data.
@@ -634,8 +678,10 @@ module Aws
 
       end
 
-      class StopDataCollectionByAgentIdsResponse < Aws::Structure.new(
+      class StopDataCollectionByAgentIdsResponse < Struct.new(
         :agents_configuration_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] agents_configuration_status
         #   Information about agents that were instructed to stop collecting
@@ -654,9 +700,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A type of tag to filter on.
@@ -677,9 +725,11 @@ module Aws
       #         name: "FilterName", # required
       #         values: ["FilterValue"], # required
       #       }
-      class TagFilter < Aws::Structure.new(
+      class TagFilter < Struct.new(
         :name,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A name of a tag filter.

@@ -10,13 +10,15 @@ module Aws
     module Types
 
       # Unit of work sent to an activity worker.
-      class ActivityTask < Aws::Structure.new(
+      class ActivityTask < Struct.new(
         :task_token,
         :activity_id,
         :started_event_id,
         :workflow_execution,
         :activity_type,
         :input)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_token
         #   The opaque string used as a handle on the task. This token is used
@@ -49,9 +51,11 @@ module Aws
       end
 
       # Provides details of the `ActivityTaskCancelRequested` event.
-      class ActivityTaskCancelRequestedEventAttributes < Aws::Structure.new(
+      class ActivityTaskCancelRequestedEventAttributes < Struct.new(
         :decision_task_completed_event_id,
         :activity_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] decision_task_completed_event_id
         #   The ID of the `DecisionTaskCompleted` event corresponding to the
@@ -68,11 +72,13 @@ module Aws
       end
 
       # Provides details of the `ActivityTaskCanceled` event.
-      class ActivityTaskCanceledEventAttributes < Aws::Structure.new(
+      class ActivityTaskCanceledEventAttributes < Struct.new(
         :details,
         :scheduled_event_id,
         :started_event_id,
         :latest_cancel_requested_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] details
         #   Details of the cancellation (if any).
@@ -102,10 +108,12 @@ module Aws
       end
 
       # Provides details of the `ActivityTaskCompleted` event.
-      class ActivityTaskCompletedEventAttributes < Aws::Structure.new(
+      class ActivityTaskCompletedEventAttributes < Struct.new(
         :result,
         :scheduled_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] result
         #   The results of the activity task (if any).
@@ -128,11 +136,13 @@ module Aws
       end
 
       # Provides details of the `ActivityTaskFailed` event.
-      class ActivityTaskFailedEventAttributes < Aws::Structure.new(
+      class ActivityTaskFailedEventAttributes < Struct.new(
         :reason,
         :details,
         :scheduled_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] reason
         #   The reason provided for the failure (if any).
@@ -159,7 +169,7 @@ module Aws
       end
 
       # Provides details of the `ActivityTaskScheduled` event.
-      class ActivityTaskScheduledEventAttributes < Aws::Structure.new(
+      class ActivityTaskScheduledEventAttributes < Struct.new(
         :activity_type,
         :activity_id,
         :input,
@@ -171,6 +181,8 @@ module Aws
         :task_priority,
         :decision_task_completed_event_id,
         :heartbeat_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_type
         #   The type of the activity task.
@@ -243,9 +255,11 @@ module Aws
       end
 
       # Provides details of the `ActivityTaskStarted` event.
-      class ActivityTaskStartedEventAttributes < Aws::Structure.new(
+      class ActivityTaskStartedEventAttributes < Struct.new(
         :identity,
         :scheduled_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   Identity of the worker that was assigned this task. This aids
@@ -263,8 +277,10 @@ module Aws
       end
 
       # Status information about an activity task.
-      class ActivityTaskStatus < Aws::Structure.new(
+      class ActivityTaskStatus < Struct.new(
         :cancel_requested)
+
+        include Aws::Structure
 
         # @!attribute [rw] cancel_requested
         #   Set to `true` if cancellation of the task is requested.
@@ -273,11 +289,13 @@ module Aws
       end
 
       # Provides details of the `ActivityTaskTimedOut` event.
-      class ActivityTaskTimedOutEventAttributes < Aws::Structure.new(
+      class ActivityTaskTimedOutEventAttributes < Struct.new(
         :timeout_type,
         :scheduled_event_id,
         :started_event_id,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] timeout_type
         #   The type of the timeout that caused this event.
@@ -312,9 +330,11 @@ module Aws
       #         name: "Name", # required
       #         version: "Version", # required
       #       }
-      class ActivityType < Aws::Structure.new(
+      class ActivityType < Struct.new(
         :name,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of this activity.
@@ -331,13 +351,15 @@ module Aws
       end
 
       # Configuration settings registered with the activity type.
-      class ActivityTypeConfiguration < Aws::Structure.new(
+      class ActivityTypeConfiguration < Struct.new(
         :default_task_start_to_close_timeout,
         :default_task_heartbeat_timeout,
         :default_task_list,
         :default_task_priority,
         :default_task_schedule_to_start_timeout,
         :default_task_schedule_to_close_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_task_start_to_close_timeout
         #   *Optional.* The default maximum duration for tasks of an activity
@@ -419,9 +441,11 @@ module Aws
       end
 
       # Detailed information about an activity type.
-      class ActivityTypeDetail < Aws::Structure.new(
+      class ActivityTypeDetail < Struct.new(
         :type_info,
         :configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] type_info
         #   General information about the activity type.
@@ -444,12 +468,14 @@ module Aws
       end
 
       # Detailed information about an activity type.
-      class ActivityTypeInfo < Aws::Structure.new(
+      class ActivityTypeInfo < Struct.new(
         :activity_type,
         :status,
         :description,
         :creation_date,
         :deprecation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_type
         #   The ActivityType type structure representing the activity type.
@@ -476,9 +502,11 @@ module Aws
       end
 
       # Contains a paginated list of activity type information structures.
-      class ActivityTypeInfos < Aws::Structure.new(
+      class ActivityTypeInfos < Struct.new(
         :type_infos,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] type_infos
         #   List of activity type information.
@@ -525,8 +553,10 @@ module Aws
       #       {
       #         timer_id: "TimerId", # required
       #       }
-      class CancelTimerDecisionAttributes < Aws::Structure.new(
+      class CancelTimerDecisionAttributes < Struct.new(
         :timer_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] timer_id
         #   **Required.** The unique ID of the timer to cancel.
@@ -535,10 +565,12 @@ module Aws
       end
 
       # Provides details of the `CancelTimerFailed` event.
-      class CancelTimerFailedEventAttributes < Aws::Structure.new(
+      class CancelTimerFailedEventAttributes < Struct.new(
         :timer_id,
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] timer_id
         #   The timerId provided in the `CancelTimer` decision that failed.
@@ -593,8 +625,10 @@ module Aws
       #       {
       #         details: "Data",
       #       }
-      class CancelWorkflowExecutionDecisionAttributes < Aws::Structure.new(
+      class CancelWorkflowExecutionDecisionAttributes < Struct.new(
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] details
         #   *Optional.* details of the cancellation.
@@ -603,9 +637,11 @@ module Aws
       end
 
       # Provides details of the `CancelWorkflowExecutionFailed` event.
-      class CancelWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class CancelWorkflowExecutionFailedEventAttributes < Struct.new(
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cause
         #   The cause of the failure. This information is generated by the
@@ -629,12 +665,14 @@ module Aws
       end
 
       # Provide details of the `ChildWorkflowExecutionCanceled` event.
-      class ChildWorkflowExecutionCanceledEventAttributes < Aws::Structure.new(
+      class ChildWorkflowExecutionCanceledEventAttributes < Struct.new(
         :workflow_execution,
         :workflow_type,
         :details,
         :initiated_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The child workflow execution that was canceled.
@@ -666,12 +704,14 @@ module Aws
       end
 
       # Provides details of the `ChildWorkflowExecutionCompleted` event.
-      class ChildWorkflowExecutionCompletedEventAttributes < Aws::Structure.new(
+      class ChildWorkflowExecutionCompletedEventAttributes < Struct.new(
         :workflow_execution,
         :workflow_type,
         :result,
         :initiated_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The child workflow execution that was completed.
@@ -703,13 +743,15 @@ module Aws
       end
 
       # Provides details of the `ChildWorkflowExecutionFailed` event.
-      class ChildWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class ChildWorkflowExecutionFailedEventAttributes < Struct.new(
         :workflow_execution,
         :workflow_type,
         :reason,
         :details,
         :initiated_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The child workflow execution that failed.
@@ -745,10 +787,12 @@ module Aws
       end
 
       # Provides details of the `ChildWorkflowExecutionStarted` event.
-      class ChildWorkflowExecutionStartedEventAttributes < Aws::Structure.new(
+      class ChildWorkflowExecutionStartedEventAttributes < Struct.new(
         :workflow_execution,
         :workflow_type,
         :initiated_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The child workflow execution that was started.
@@ -769,11 +813,13 @@ module Aws
       end
 
       # Provides details of the `ChildWorkflowExecutionTerminated` event.
-      class ChildWorkflowExecutionTerminatedEventAttributes < Aws::Structure.new(
+      class ChildWorkflowExecutionTerminatedEventAttributes < Struct.new(
         :workflow_execution,
         :workflow_type,
         :initiated_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The child workflow execution that was terminated.
@@ -801,12 +847,14 @@ module Aws
       end
 
       # Provides details of the `ChildWorkflowExecutionTimedOut` event.
-      class ChildWorkflowExecutionTimedOutEventAttributes < Aws::Structure.new(
+      class ChildWorkflowExecutionTimedOutEventAttributes < Struct.new(
         :workflow_execution,
         :workflow_type,
         :timeout_type,
         :initiated_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The child workflow execution that timed out.
@@ -846,8 +894,10 @@ module Aws
       #       {
       #         status: "COMPLETED", # required, accepts COMPLETED, FAILED, CANCELED, TERMINATED, CONTINUED_AS_NEW, TIMED_OUT
       #       }
-      class CloseStatusFilter < Aws::Structure.new(
+      class CloseStatusFilter < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   **Required.** The close status that must match the close status of
@@ -885,8 +935,10 @@ module Aws
       #       {
       #         result: "Data",
       #       }
-      class CompleteWorkflowExecutionDecisionAttributes < Aws::Structure.new(
+      class CompleteWorkflowExecutionDecisionAttributes < Struct.new(
         :result)
+
+        include Aws::Structure
 
         # @!attribute [rw] result
         #   The result of the workflow execution. The form of the result is
@@ -896,9 +948,11 @@ module Aws
       end
 
       # Provides details of the `CompleteWorkflowExecutionFailed` event.
-      class CompleteWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class CompleteWorkflowExecutionFailedEventAttributes < Struct.new(
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cause
         #   The cause of the failure. This information is generated by the
@@ -965,7 +1019,7 @@ module Aws
       #         workflow_type_version: "Version",
       #         lambda_role: "Arn",
       #       }
-      class ContinueAsNewWorkflowExecutionDecisionAttributes < Aws::Structure.new(
+      class ContinueAsNewWorkflowExecutionDecisionAttributes < Struct.new(
         :input,
         :execution_start_to_close_timeout,
         :task_list,
@@ -975,6 +1029,8 @@ module Aws
         :tag_list,
         :workflow_type_version,
         :lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] input
         #   The input provided to the new workflow execution.
@@ -1066,9 +1122,11 @@ module Aws
       end
 
       # Provides details of the `ContinueAsNewWorkflowExecutionFailed` event.
-      class ContinueAsNewWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class ContinueAsNewWorkflowExecutionFailedEventAttributes < Struct.new(
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cause
         #   The cause of the failure. This information is generated by the
@@ -1118,7 +1176,7 @@ module Aws
       #           status: "COMPLETED", # required, accepts COMPLETED, FAILED, CANCELED, TERMINATED, CONTINUED_AS_NEW, TIMED_OUT
       #         },
       #       }
-      class CountClosedWorkflowExecutionsInput < Aws::Structure.new(
+      class CountClosedWorkflowExecutionsInput < Struct.new(
         :domain,
         :start_time_filter,
         :close_time_filter,
@@ -1126,6 +1184,8 @@ module Aws
         :type_filter,
         :tag_filter,
         :close_status_filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain containing the workflow executions to count.
@@ -1196,12 +1256,14 @@ module Aws
       #           workflow_id: "WorkflowId", # required
       #         },
       #       }
-      class CountOpenWorkflowExecutionsInput < Aws::Structure.new(
+      class CountOpenWorkflowExecutionsInput < Struct.new(
         :domain,
         :start_time_filter,
         :type_filter,
         :tag_filter,
         :execution_filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain containing the workflow executions to count.
@@ -1243,9 +1305,11 @@ module Aws
       #           name: "Name", # required
       #         },
       #       }
-      class CountPendingActivityTasksInput < Aws::Structure.new(
+      class CountPendingActivityTasksInput < Struct.new(
         :domain,
         :task_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain that contains the task list.
@@ -1266,9 +1330,11 @@ module Aws
       #           name: "Name", # required
       #         },
       #       }
-      class CountPendingDecisionTasksInput < Aws::Structure.new(
+      class CountPendingDecisionTasksInput < Struct.new(
         :domain,
         :task_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain that contains the task list.
@@ -1516,7 +1582,7 @@ module Aws
       #           start_to_close_timeout: "DurationInSecondsOptional",
       #         },
       #       }
-      class Decision < Aws::Structure.new(
+      class Decision < Struct.new(
         :decision_type,
         :schedule_activity_task_decision_attributes,
         :request_cancel_activity_task_decision_attributes,
@@ -1531,6 +1597,8 @@ module Aws
         :request_cancel_external_workflow_execution_decision_attributes,
         :start_child_workflow_execution_decision_attributes,
         :schedule_lambda_function_decision_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] decision_type
         #   Specifies the type of the decision.
@@ -1632,7 +1700,7 @@ module Aws
 
       # A structure that represents a decision task. Decision tasks are sent
       # to deciders in order for them to make decisions.
-      class DecisionTask < Aws::Structure.new(
+      class DecisionTask < Struct.new(
         :task_token,
         :started_event_id,
         :workflow_execution,
@@ -1640,6 +1708,8 @@ module Aws
         :events,
         :next_page_token,
         :previous_started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_token
         #   The opaque string used as a handle on the task. This token is used
@@ -1685,10 +1755,12 @@ module Aws
       end
 
       # Provides details of the `DecisionTaskCompleted` event.
-      class DecisionTaskCompletedEventAttributes < Aws::Structure.new(
+      class DecisionTaskCompletedEventAttributes < Struct.new(
         :execution_context,
         :scheduled_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] execution_context
         #   User defined context for the workflow execution.
@@ -1711,10 +1783,12 @@ module Aws
       end
 
       # Provides details about the `DecisionTaskScheduled` event.
-      class DecisionTaskScheduledEventAttributes < Aws::Structure.new(
+      class DecisionTaskScheduledEventAttributes < Struct.new(
         :task_list,
         :task_priority,
         :start_to_close_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_list
         #   The name of the task list in which the decision task was scheduled.
@@ -1746,9 +1820,11 @@ module Aws
       end
 
       # Provides details of the `DecisionTaskStarted` event.
-      class DecisionTaskStartedEventAttributes < Aws::Structure.new(
+      class DecisionTaskStartedEventAttributes < Struct.new(
         :identity,
         :scheduled_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   Identity of the decider making the request. This enables diagnostic
@@ -1766,10 +1842,12 @@ module Aws
       end
 
       # Provides details of the `DecisionTaskTimedOut` event.
-      class DecisionTaskTimedOutEventAttributes < Aws::Structure.new(
+      class DecisionTaskTimedOutEventAttributes < Struct.new(
         :timeout_type,
         :scheduled_event_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] timeout_type
         #   The type of timeout that expired before the decision task could be
@@ -1802,9 +1880,11 @@ module Aws
       #           version: "Version", # required
       #         },
       #       }
-      class DeprecateActivityTypeInput < Aws::Structure.new(
+      class DeprecateActivityTypeInput < Struct.new(
         :domain,
         :activity_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which the activity type is registered.
@@ -1822,8 +1902,10 @@ module Aws
       #       {
       #         name: "DomainName", # required
       #       }
-      class DeprecateDomainInput < Aws::Structure.new(
+      class DeprecateDomainInput < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the domain to deprecate.
@@ -1841,9 +1923,11 @@ module Aws
       #           version: "Version", # required
       #         },
       #       }
-      class DeprecateWorkflowTypeInput < Aws::Structure.new(
+      class DeprecateWorkflowTypeInput < Struct.new(
         :domain,
         :workflow_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which the workflow type is registered.
@@ -1865,9 +1949,11 @@ module Aws
       #           version: "Version", # required
       #         },
       #       }
-      class DescribeActivityTypeInput < Aws::Structure.new(
+      class DescribeActivityTypeInput < Struct.new(
         :domain,
         :activity_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which the activity type is registered.
@@ -1887,8 +1973,10 @@ module Aws
       #       {
       #         name: "DomainName", # required
       #       }
-      class DescribeDomainInput < Aws::Structure.new(
+      class DescribeDomainInput < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the domain to describe.
@@ -1906,9 +1994,11 @@ module Aws
       #           run_id: "RunId", # required
       #         },
       #       }
-      class DescribeWorkflowExecutionInput < Aws::Structure.new(
+      class DescribeWorkflowExecutionInput < Struct.new(
         :domain,
         :execution)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain containing the workflow execution.
@@ -1930,9 +2020,11 @@ module Aws
       #           version: "Version", # required
       #         },
       #       }
-      class DescribeWorkflowTypeInput < Aws::Structure.new(
+      class DescribeWorkflowTypeInput < Struct.new(
         :domain,
         :workflow_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which this workflow type is registered.
@@ -1945,8 +2037,10 @@ module Aws
       end
 
       # Contains the configuration settings of a domain.
-      class DomainConfiguration < Aws::Structure.new(
+      class DomainConfiguration < Struct.new(
         :workflow_execution_retention_period_in_days)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution_retention_period_in_days
         #   The retention period for workflow executions in this domain.
@@ -1955,9 +2049,11 @@ module Aws
       end
 
       # Contains details of a domain.
-      class DomainDetail < Aws::Structure.new(
+      class DomainDetail < Struct.new(
         :domain_info,
         :configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_info
         #   Contains general information about a domain.
@@ -1970,10 +2066,12 @@ module Aws
       end
 
       # Contains general information about a domain.
-      class DomainInfo < Aws::Structure.new(
+      class DomainInfo < Struct.new(
         :name,
         :status,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the domain. This name is unique within the account.
@@ -1997,9 +2095,11 @@ module Aws
       end
 
       # Contains a paginated collection of DomainInfo structures.
-      class DomainInfos < Aws::Structure.new(
+      class DomainInfos < Struct.new(
         :domain_infos,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_infos
         #   A list of DomainInfo structures.
@@ -2033,9 +2133,11 @@ module Aws
       #         oldest_date: Time.now, # required
       #         latest_date: Time.now,
       #       }
-      class ExecutionTimeFilter < Aws::Structure.new(
+      class ExecutionTimeFilter < Struct.new(
         :oldest_date,
         :latest_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] oldest_date
         #   Specifies the oldest start or close date and time to return.
@@ -2049,9 +2151,11 @@ module Aws
 
       # Provides details of the `ExternalWorkflowExecutionCancelRequested`
       # event.
-      class ExternalWorkflowExecutionCancelRequestedEventAttributes < Aws::Structure.new(
+      class ExternalWorkflowExecutionCancelRequestedEventAttributes < Struct.new(
         :workflow_execution,
         :initiated_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The external workflow execution to which the cancellation request
@@ -2069,9 +2173,11 @@ module Aws
       end
 
       # Provides details of the `ExternalWorkflowExecutionSignaled` event.
-      class ExternalWorkflowExecutionSignaledEventAttributes < Aws::Structure.new(
+      class ExternalWorkflowExecutionSignaledEventAttributes < Struct.new(
         :workflow_execution,
         :initiated_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_execution
         #   The external workflow execution that the signal was delivered to.
@@ -2117,9 +2223,11 @@ module Aws
       #         reason: "FailureReason",
       #         details: "Data",
       #       }
-      class FailWorkflowExecutionDecisionAttributes < Aws::Structure.new(
+      class FailWorkflowExecutionDecisionAttributes < Struct.new(
         :reason,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] reason
         #   A descriptive reason for the failure that may help in diagnostics.
@@ -2132,9 +2240,11 @@ module Aws
       end
 
       # Provides details of the `FailWorkflowExecutionFailed` event.
-      class FailWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class FailWorkflowExecutionFailedEventAttributes < Struct.new(
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cause
         #   The cause of the failure. This information is generated by the
@@ -2170,12 +2280,14 @@ module Aws
       #         maximum_page_size: 1,
       #         reverse_order: false,
       #       }
-      class GetWorkflowExecutionHistoryInput < Aws::Structure.new(
+      class GetWorkflowExecutionHistoryInput < Struct.new(
         :domain,
         :execution,
         :next_page_token,
         :maximum_page_size,
         :reverse_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain containing the workflow execution.
@@ -2217,9 +2329,11 @@ module Aws
       # execution. This is the up to date, complete and authoritative record
       # of the events related to all tasks and events in the life of the
       # workflow execution.
-      class History < Aws::Structure.new(
+      class History < Struct.new(
         :events,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] events
         #   The list of history events.
@@ -2350,7 +2464,7 @@ module Aws
       #   function in the AWS Lambda service. This happens when the AWS Lambda
       #   service is not available in the current region, or received too many
       #   requests.
-      class HistoryEvent < Aws::Structure.new(
+      class HistoryEvent < Struct.new(
         :event_timestamp,
         :event_type,
         :event_id,
@@ -2408,6 +2522,8 @@ module Aws
         :lambda_function_timed_out_event_attributes,
         :schedule_lambda_function_failed_event_attributes,
         :start_lambda_function_failed_event_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_timestamp
         #   The date and time when the event occurred.
@@ -2737,10 +2853,12 @@ module Aws
       end
 
       # Provides details for the `LambdaFunctionCompleted` event.
-      class LambdaFunctionCompletedEventAttributes < Aws::Structure.new(
+      class LambdaFunctionCompletedEventAttributes < Struct.new(
         :scheduled_event_id,
         :started_event_id,
         :result)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_event_id
         #   The ID of the `LambdaFunctionScheduled` event that was recorded when
@@ -2760,11 +2878,13 @@ module Aws
       end
 
       # Provides details for the `LambdaFunctionFailed` event.
-      class LambdaFunctionFailedEventAttributes < Aws::Structure.new(
+      class LambdaFunctionFailedEventAttributes < Struct.new(
         :scheduled_event_id,
         :started_event_id,
         :reason,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_event_id
         #   The ID of the `LambdaFunctionScheduled` event that was recorded when
@@ -2788,12 +2908,14 @@ module Aws
       end
 
       # Provides details for the `LambdaFunctionScheduled` event.
-      class LambdaFunctionScheduledEventAttributes < Aws::Structure.new(
+      class LambdaFunctionScheduledEventAttributes < Struct.new(
         :id,
         :name,
         :input,
         :start_to_close_timeout,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique Amazon SWF ID for the AWS Lambda task.
@@ -2822,8 +2944,10 @@ module Aws
       end
 
       # Provides details for the `LambdaFunctionStarted` event.
-      class LambdaFunctionStartedEventAttributes < Aws::Structure.new(
+      class LambdaFunctionStartedEventAttributes < Struct.new(
         :scheduled_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_event_id
         #   The ID of the `LambdaFunctionScheduled` event that was recorded when
@@ -2835,10 +2959,12 @@ module Aws
       end
 
       # Provides details for the `LambdaFunctionTimedOut` event.
-      class LambdaFunctionTimedOutEventAttributes < Aws::Structure.new(
+      class LambdaFunctionTimedOutEventAttributes < Struct.new(
         :scheduled_event_id,
         :started_event_id,
         :timeout_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_event_id
         #   The ID of the `LambdaFunctionScheduled` event that was recorded when
@@ -2868,13 +2994,15 @@ module Aws
       #         maximum_page_size: 1,
       #         reverse_order: false,
       #       }
-      class ListActivityTypesInput < Aws::Structure.new(
+      class ListActivityTypesInput < Struct.new(
         :domain,
         :name,
         :registration_status,
         :next_page_token,
         :maximum_page_size,
         :reverse_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which the activity types have been
@@ -2947,7 +3075,7 @@ module Aws
       #         maximum_page_size: 1,
       #         reverse_order: false,
       #       }
-      class ListClosedWorkflowExecutionsInput < Aws::Structure.new(
+      class ListClosedWorkflowExecutionsInput < Struct.new(
         :domain,
         :start_time_filter,
         :close_time_filter,
@@ -2958,6 +3086,8 @@ module Aws
         :next_page_token,
         :maximum_page_size,
         :reverse_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain that contains the workflow executions to
@@ -3047,11 +3177,13 @@ module Aws
       #         maximum_page_size: 1,
       #         reverse_order: false,
       #       }
-      class ListDomainsInput < Aws::Structure.new(
+      class ListDomainsInput < Struct.new(
         :next_page_token,
         :registration_status,
         :maximum_page_size,
         :reverse_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_page_token
         #   If a `NextPageToken` was returned by a previous call, there are more
@@ -3108,7 +3240,7 @@ module Aws
       #           workflow_id: "WorkflowId", # required
       #         },
       #       }
-      class ListOpenWorkflowExecutionsInput < Aws::Structure.new(
+      class ListOpenWorkflowExecutionsInput < Struct.new(
         :domain,
         :start_time_filter,
         :type_filter,
@@ -3117,6 +3249,8 @@ module Aws
         :maximum_page_size,
         :reverse_order,
         :execution_filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain that contains the workflow executions to
@@ -3188,13 +3322,15 @@ module Aws
       #         maximum_page_size: 1,
       #         reverse_order: false,
       #       }
-      class ListWorkflowTypesInput < Aws::Structure.new(
+      class ListWorkflowTypesInput < Struct.new(
         :domain,
         :name,
         :registration_status,
         :next_page_token,
         :maximum_page_size,
         :reverse_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which the workflow types have been
@@ -3238,10 +3374,12 @@ module Aws
       end
 
       # Provides details of the `MarkerRecorded` event.
-      class MarkerRecordedEventAttributes < Aws::Structure.new(
+      class MarkerRecordedEventAttributes < Struct.new(
         :marker_name,
         :details,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker_name
         #   The name of the marker.
@@ -3262,9 +3400,11 @@ module Aws
       end
 
       # Contains the count of tasks in a task list.
-      class PendingTaskCount < Aws::Structure.new(
+      class PendingTaskCount < Struct.new(
         :count,
         :truncated)
+
+        include Aws::Structure
 
         # @!attribute [rw] count
         #   The number of tasks in the task list.
@@ -3288,10 +3428,12 @@ module Aws
       #         },
       #         identity: "Identity",
       #       }
-      class PollForActivityTaskInput < Aws::Structure.new(
+      class PollForActivityTaskInput < Struct.new(
         :domain,
         :task_list,
         :identity)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain that contains the task lists being polled.
@@ -3328,13 +3470,15 @@ module Aws
       #         maximum_page_size: 1,
       #         reverse_order: false,
       #       }
-      class PollForDecisionTaskInput < Aws::Structure.new(
+      class PollForDecisionTaskInput < Struct.new(
         :domain,
         :task_list,
         :identity,
         :next_page_token,
         :maximum_page_size,
         :reverse_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain containing the task lists to poll.
@@ -3395,9 +3539,11 @@ module Aws
       #         task_token: "TaskToken", # required
       #         details: "LimitedData",
       #       }
-      class RecordActivityTaskHeartbeatInput < Aws::Structure.new(
+      class RecordActivityTaskHeartbeatInput < Struct.new(
         :task_token,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_token
         #   The `taskToken` of the ActivityTask.
@@ -3441,9 +3587,11 @@ module Aws
       #         marker_name: "MarkerName", # required
       #         details: "Data",
       #       }
-      class RecordMarkerDecisionAttributes < Aws::Structure.new(
+      class RecordMarkerDecisionAttributes < Struct.new(
         :marker_name,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker_name
         #   **Required.** The name of the marker.
@@ -3456,10 +3604,12 @@ module Aws
       end
 
       # Provides details of the `RecordMarkerFailed` event.
-      class RecordMarkerFailedEventAttributes < Aws::Structure.new(
+      class RecordMarkerFailedEventAttributes < Struct.new(
         :marker_name,
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker_name
         #   The marker\'s name.
@@ -3503,7 +3653,7 @@ module Aws
       #         default_task_schedule_to_start_timeout: "DurationInSecondsOptional",
       #         default_task_schedule_to_close_timeout: "DurationInSecondsOptional",
       #       }
-      class RegisterActivityTypeInput < Aws::Structure.new(
+      class RegisterActivityTypeInput < Struct.new(
         :domain,
         :name,
         :version,
@@ -3514,6 +3664,8 @@ module Aws
         :default_task_priority,
         :default_task_schedule_to_start_timeout,
         :default_task_schedule_to_close_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which this activity is to be registered.
@@ -3624,10 +3776,12 @@ module Aws
       #         description: "Description",
       #         workflow_execution_retention_period_in_days: "DurationInDays", # required
       #       }
-      class RegisterDomainInput < Aws::Structure.new(
+      class RegisterDomainInput < Struct.new(
         :name,
         :description,
         :workflow_execution_retention_period_in_days)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Name of the domain to register. The name must be unique in the
@@ -3682,7 +3836,7 @@ module Aws
       #         default_child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
       #         default_lambda_role: "Arn",
       #       }
-      class RegisterWorkflowTypeInput < Aws::Structure.new(
+      class RegisterWorkflowTypeInput < Struct.new(
         :domain,
         :name,
         :version,
@@ -3693,6 +3847,8 @@ module Aws
         :default_task_priority,
         :default_child_policy,
         :default_lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which to register the workflow type.
@@ -3831,8 +3987,10 @@ module Aws
       #       {
       #         activity_id: "ActivityId", # required
       #       }
-      class RequestCancelActivityTaskDecisionAttributes < Aws::Structure.new(
+      class RequestCancelActivityTaskDecisionAttributes < Struct.new(
         :activity_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_id
         #   The `activityId` of the activity task to be canceled.
@@ -3841,10 +3999,12 @@ module Aws
       end
 
       # Provides details of the `RequestCancelActivityTaskFailed` event.
-      class RequestCancelActivityTaskFailedEventAttributes < Aws::Structure.new(
+      class RequestCancelActivityTaskFailedEventAttributes < Struct.new(
         :activity_id,
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_id
         #   The activityId provided in the `RequestCancelActivityTask` decision
@@ -3904,10 +4064,12 @@ module Aws
       #         run_id: "RunIdOptional",
       #         control: "Data",
       #       }
-      class RequestCancelExternalWorkflowExecutionDecisionAttributes < Aws::Structure.new(
+      class RequestCancelExternalWorkflowExecutionDecisionAttributes < Struct.new(
         :workflow_id,
         :run_id,
         :control)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   **Required.** The `workflowId` of the external workflow execution to
@@ -3927,13 +4089,15 @@ module Aws
 
       # Provides details of the `RequestCancelExternalWorkflowExecutionFailed`
       # event.
-      class RequestCancelExternalWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class RequestCancelExternalWorkflowExecutionFailedEventAttributes < Struct.new(
         :workflow_id,
         :run_id,
         :cause,
         :initiated_event_id,
         :decision_task_completed_event_id,
         :control)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   The `workflowId` of the external workflow to which the cancel
@@ -3979,11 +4143,13 @@ module Aws
 
       # Provides details of the
       # `RequestCancelExternalWorkflowExecutionInitiated` event.
-      class RequestCancelExternalWorkflowExecutionInitiatedEventAttributes < Aws::Structure.new(
+      class RequestCancelExternalWorkflowExecutionInitiatedEventAttributes < Struct.new(
         :workflow_id,
         :run_id,
         :decision_task_completed_event_id,
         :control)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   The `workflowId` of the external workflow execution to be canceled.
@@ -4017,10 +4183,12 @@ module Aws
       #         workflow_id: "WorkflowId", # required
       #         run_id: "RunIdOptional",
       #       }
-      class RequestCancelWorkflowExecutionInput < Aws::Structure.new(
+      class RequestCancelWorkflowExecutionInput < Struct.new(
         :domain,
         :workflow_id,
         :run_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain containing the workflow execution to cancel.
@@ -4043,9 +4211,11 @@ module Aws
       #         task_token: "TaskToken", # required
       #         details: "Data",
       #       }
-      class RespondActivityTaskCanceledInput < Aws::Structure.new(
+      class RespondActivityTaskCanceledInput < Struct.new(
         :task_token,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_token
         #   The `taskToken` of the ActivityTask.
@@ -4066,9 +4236,11 @@ module Aws
       #         task_token: "TaskToken", # required
       #         result: "Data",
       #       }
-      class RespondActivityTaskCompletedInput < Aws::Structure.new(
+      class RespondActivityTaskCompletedInput < Struct.new(
         :task_token,
         :result)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_token
         #   The `taskToken` of the ActivityTask.
@@ -4091,10 +4263,12 @@ module Aws
       #         reason: "FailureReason",
       #         details: "Data",
       #       }
-      class RespondActivityTaskFailedInput < Aws::Structure.new(
+      class RespondActivityTaskFailedInput < Struct.new(
         :task_token,
         :reason,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_token
         #   The `taskToken` of the ActivityTask.
@@ -4215,10 +4389,12 @@ module Aws
       #         ],
       #         execution_context: "Data",
       #       }
-      class RespondDecisionTaskCompletedInput < Aws::Structure.new(
+      class RespondDecisionTaskCompletedInput < Struct.new(
         :task_token,
         :decisions,
         :execution_context)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_token
         #   The `taskToken` from the DecisionTask.
@@ -4239,8 +4415,10 @@ module Aws
       end
 
       # Specifies the `runId` of a workflow execution.
-      class Run < Aws::Structure.new(
+      class Run < Struct.new(
         :run_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] run_id
         #   The `runId` of a workflow execution. This ID is generated by the
@@ -4299,7 +4477,7 @@ module Aws
       #         start_to_close_timeout: "DurationInSecondsOptional",
       #         heartbeat_timeout: "DurationInSecondsOptional",
       #       }
-      class ScheduleActivityTaskDecisionAttributes < Aws::Structure.new(
+      class ScheduleActivityTaskDecisionAttributes < Struct.new(
         :activity_type,
         :activity_id,
         :control,
@@ -4310,6 +4488,8 @@ module Aws
         :schedule_to_start_timeout,
         :start_to_close_timeout,
         :heartbeat_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_type
         #   **Required.** The type of the activity task to schedule.
@@ -4417,11 +4597,13 @@ module Aws
       end
 
       # Provides details of the `ScheduleActivityTaskFailed` event.
-      class ScheduleActivityTaskFailedEventAttributes < Aws::Structure.new(
+      class ScheduleActivityTaskFailedEventAttributes < Struct.new(
         :activity_type,
         :activity_id,
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_type
         #   The activity type provided in the `ScheduleActivityTask` decision
@@ -4491,11 +4673,13 @@ module Aws
       #         input: "FunctionInput",
       #         start_to_close_timeout: "DurationInSecondsOptional",
       #       }
-      class ScheduleLambdaFunctionDecisionAttributes < Aws::Structure.new(
+      class ScheduleLambdaFunctionDecisionAttributes < Struct.new(
         :id,
         :name,
         :input,
         :start_to_close_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   **Required.** The SWF `id` of the AWS Lambda task.
@@ -4522,11 +4706,13 @@ module Aws
       end
 
       # Provides details for the `ScheduleLambdaFunctionFailed` event.
-      class ScheduleLambdaFunctionFailedEventAttributes < Aws::Structure.new(
+      class ScheduleLambdaFunctionFailedEventAttributes < Struct.new(
         :id,
         :name,
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique Amazon SWF ID of the AWS Lambda task.
@@ -4589,12 +4775,14 @@ module Aws
       #         input: "Data",
       #         control: "Data",
       #       }
-      class SignalExternalWorkflowExecutionDecisionAttributes < Aws::Structure.new(
+      class SignalExternalWorkflowExecutionDecisionAttributes < Struct.new(
         :workflow_id,
         :run_id,
         :signal_name,
         :input,
         :control)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   **Required.** The `workflowId` of the workflow execution to be
@@ -4624,13 +4812,15 @@ module Aws
       end
 
       # Provides details of the `SignalExternalWorkflowExecutionFailed` event.
-      class SignalExternalWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class SignalExternalWorkflowExecutionFailedEventAttributes < Struct.new(
         :workflow_id,
         :run_id,
         :cause,
         :initiated_event_id,
         :decision_task_completed_event_id,
         :control)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   The `workflowId` of the external workflow execution that the signal
@@ -4676,13 +4866,15 @@ module Aws
 
       # Provides details of the `SignalExternalWorkflowExecutionInitiated`
       # event.
-      class SignalExternalWorkflowExecutionInitiatedEventAttributes < Aws::Structure.new(
+      class SignalExternalWorkflowExecutionInitiatedEventAttributes < Struct.new(
         :workflow_id,
         :run_id,
         :signal_name,
         :input,
         :decision_task_completed_event_id,
         :control)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   The `workflowId` of the external workflow execution.
@@ -4726,12 +4918,14 @@ module Aws
       #         signal_name: "SignalName", # required
       #         input: "Data",
       #       }
-      class SignalWorkflowExecutionInput < Aws::Structure.new(
+      class SignalWorkflowExecutionInput < Struct.new(
         :domain,
         :workflow_id,
         :run_id,
         :signal_name,
         :input)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain containing the workflow execution to signal.
@@ -4809,7 +5003,7 @@ module Aws
       #         tag_list: ["Tag"],
       #         lambda_role: "Arn",
       #       }
-      class StartChildWorkflowExecutionDecisionAttributes < Aws::Structure.new(
+      class StartChildWorkflowExecutionDecisionAttributes < Struct.new(
         :workflow_type,
         :workflow_id,
         :control,
@@ -4821,6 +5015,8 @@ module Aws
         :child_policy,
         :tag_list,
         :lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_type
         #   **Required.** The type of the workflow execution to be started.
@@ -4937,13 +5133,15 @@ module Aws
       end
 
       # Provides details of the `StartChildWorkflowExecutionFailed` event.
-      class StartChildWorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class StartChildWorkflowExecutionFailedEventAttributes < Struct.new(
         :workflow_type,
         :cause,
         :workflow_id,
         :initiated_event_id,
         :decision_task_completed_event_id,
         :control)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_type
         #   The workflow type provided in the `StartChildWorkflowExecution`
@@ -4987,7 +5185,7 @@ module Aws
       end
 
       # Provides details of the `StartChildWorkflowExecutionInitiated` event.
-      class StartChildWorkflowExecutionInitiatedEventAttributes < Aws::Structure.new(
+      class StartChildWorkflowExecutionInitiatedEventAttributes < Struct.new(
         :workflow_id,
         :workflow_type,
         :control,
@@ -5000,6 +5198,8 @@ module Aws
         :task_start_to_close_timeout,
         :tag_list,
         :lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   The `workflowId` of the child workflow execution.
@@ -5094,10 +5294,12 @@ module Aws
       end
 
       # Provides details for the `StartLambdaFunctionFailed` event.
-      class StartLambdaFunctionFailedEventAttributes < Aws::Structure.new(
+      class StartLambdaFunctionFailedEventAttributes < Struct.new(
         :scheduled_event_id,
         :cause,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_event_id
         #   The ID of the `LambdaFunctionScheduled` event that was recorded when
@@ -5154,10 +5356,12 @@ module Aws
       #         control: "Data",
       #         start_to_fire_timeout: "DurationInSeconds", # required
       #       }
-      class StartTimerDecisionAttributes < Aws::Structure.new(
+      class StartTimerDecisionAttributes < Struct.new(
         :timer_id,
         :control,
         :start_to_fire_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] timer_id
         #   **Required.** The unique ID of the timer.
@@ -5183,10 +5387,12 @@ module Aws
       end
 
       # Provides details of the `StartTimerFailed` event.
-      class StartTimerFailedEventAttributes < Aws::Structure.new(
+      class StartTimerFailedEventAttributes < Struct.new(
         :timer_id,
         :cause,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] timer_id
         #   The timerId provided in the `StartTimer` decision that failed.
@@ -5234,7 +5440,7 @@ module Aws
       #         child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
       #         lambda_role: "Arn",
       #       }
-      class StartWorkflowExecutionInput < Aws::Structure.new(
+      class StartWorkflowExecutionInput < Struct.new(
         :domain,
         :workflow_id,
         :workflow_type,
@@ -5246,6 +5452,8 @@ module Aws
         :task_start_to_close_timeout,
         :child_policy,
         :lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain in which the workflow execution is created.
@@ -5380,8 +5588,10 @@ module Aws
       #       {
       #         tag: "Tag", # required
       #       }
-      class TagFilter < Aws::Structure.new(
+      class TagFilter < Struct.new(
         :tag)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag
         #   **Required.** Specifies the tag that must be associated with the
@@ -5397,8 +5607,10 @@ module Aws
       #       {
       #         name: "Name", # required
       #       }
-      class TaskList < Aws::Structure.new(
+      class TaskList < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the task list.
@@ -5417,13 +5629,15 @@ module Aws
       #         details: "Data",
       #         child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
       #       }
-      class TerminateWorkflowExecutionInput < Aws::Structure.new(
+      class TerminateWorkflowExecutionInput < Struct.new(
         :domain,
         :workflow_id,
         :run_id,
         :reason,
         :details,
         :child_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The domain of the workflow execution to terminate.
@@ -5469,10 +5683,12 @@ module Aws
       end
 
       # Provides details of the `TimerCanceled` event.
-      class TimerCanceledEventAttributes < Aws::Structure.new(
+      class TimerCanceledEventAttributes < Struct.new(
         :timer_id,
         :started_event_id,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] timer_id
         #   The unique ID of the timer that was canceled.
@@ -5494,9 +5710,11 @@ module Aws
       end
 
       # Provides details of the `TimerFired` event.
-      class TimerFiredEventAttributes < Aws::Structure.new(
+      class TimerFiredEventAttributes < Struct.new(
         :timer_id,
         :started_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] timer_id
         #   The unique ID of the timer that fired.
@@ -5511,11 +5729,13 @@ module Aws
       end
 
       # Provides details of the `TimerStarted` event.
-      class TimerStartedEventAttributes < Aws::Structure.new(
+      class TimerStartedEventAttributes < Struct.new(
         :timer_id,
         :control,
         :start_to_fire_timeout,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] timer_id
         #   The unique ID of the timer that was started.
@@ -5551,9 +5771,11 @@ module Aws
       #         workflow_id: "WorkflowId", # required
       #         run_id: "RunId", # required
       #       }
-      class WorkflowExecution < Aws::Structure.new(
+      class WorkflowExecution < Struct.new(
         :workflow_id,
         :run_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   The user defined identifier associated with the workflow execution.
@@ -5566,10 +5788,12 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionCancelRequested` event.
-      class WorkflowExecutionCancelRequestedEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionCancelRequestedEventAttributes < Struct.new(
         :external_workflow_execution,
         :external_initiated_event_id,
         :cause)
+
+        include Aws::Structure
 
         # @!attribute [rw] external_workflow_execution
         #   The external workflow execution for which the cancellation was
@@ -5595,9 +5819,11 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionCanceled` event.
-      class WorkflowExecutionCanceledEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionCanceledEventAttributes < Struct.new(
         :details,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] details
         #   Details for the cancellation (if any).
@@ -5614,9 +5840,11 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionCompleted` event.
-      class WorkflowExecutionCompletedEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionCompletedEventAttributes < Struct.new(
         :result,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] result
         #   The result produced by the workflow execution upon successful
@@ -5637,13 +5865,15 @@ module Aws
       # values, tasklist etc. These configuration settings are determined from
       # the defaults specified when registering the workflow type and those
       # specified when starting the workflow execution.
-      class WorkflowExecutionConfiguration < Aws::Structure.new(
+      class WorkflowExecutionConfiguration < Struct.new(
         :task_start_to_close_timeout,
         :execution_start_to_close_timeout,
         :task_list,
         :task_priority,
         :child_policy,
         :lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_start_to_close_timeout
         #   The maximum duration allowed for decision tasks for this workflow
@@ -5706,7 +5936,7 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionContinuedAsNew` event.
-      class WorkflowExecutionContinuedAsNewEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionContinuedAsNewEventAttributes < Struct.new(
         :input,
         :decision_task_completed_event_id,
         :new_execution_run_id,
@@ -5718,6 +5948,8 @@ module Aws
         :tag_list,
         :workflow_type,
         :lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] input
         #   The input provided to the new workflow execution.
@@ -5794,9 +6026,11 @@ module Aws
 
       # Contains the count of workflow executions returned from
       # CountOpenWorkflowExecutions or CountClosedWorkflowExecutions
-      class WorkflowExecutionCount < Aws::Structure.new(
+      class WorkflowExecutionCount < Struct.new(
         :count,
         :truncated)
+
+        include Aws::Structure
 
         # @!attribute [rw] count
         #   The number of workflow executions.
@@ -5811,12 +6045,14 @@ module Aws
       end
 
       # Contains details about a workflow execution.
-      class WorkflowExecutionDetail < Aws::Structure.new(
+      class WorkflowExecutionDetail < Struct.new(
         :execution_info,
         :execution_configuration,
         :open_counts,
         :latest_activity_task_timestamp,
         :latest_execution_context)
+
+        include Aws::Structure
 
         # @!attribute [rw] execution_info
         #   Information about the workflow execution.
@@ -5849,10 +6085,12 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionFailed` event.
-      class WorkflowExecutionFailedEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionFailedEventAttributes < Struct.new(
         :reason,
         :details,
         :decision_task_completed_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] reason
         #   The descriptive reason provided for the failure (if any).
@@ -5880,8 +6118,10 @@ module Aws
       #       {
       #         workflow_id: "WorkflowId", # required
       #       }
-      class WorkflowExecutionFilter < Aws::Structure.new(
+      class WorkflowExecutionFilter < Struct.new(
         :workflow_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_id
         #   The workflowId to pass of match the criteria of this filter.
@@ -5890,7 +6130,7 @@ module Aws
       end
 
       # Contains information about a workflow execution.
-      class WorkflowExecutionInfo < Aws::Structure.new(
+      class WorkflowExecutionInfo < Struct.new(
         :execution,
         :workflow_type,
         :start_timestamp,
@@ -5900,6 +6140,8 @@ module Aws
         :parent,
         :tag_list,
         :cancel_requested)
+
+        include Aws::Structure
 
         # @!attribute [rw] execution
         #   The workflow execution this information is about.
@@ -5959,9 +6201,11 @@ module Aws
       end
 
       # Contains a paginated list of information about workflow executions.
-      class WorkflowExecutionInfos < Aws::Structure.new(
+      class WorkflowExecutionInfos < Struct.new(
         :execution_infos,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] execution_infos
         #   The list of workflow information structures.
@@ -5981,12 +6225,14 @@ module Aws
 
       # Contains the counts of open tasks, child workflow executions and
       # timers for a workflow execution.
-      class WorkflowExecutionOpenCounts < Aws::Structure.new(
+      class WorkflowExecutionOpenCounts < Struct.new(
         :open_activity_tasks,
         :open_decision_tasks,
         :open_timers,
         :open_child_workflow_executions,
         :open_lambda_functions)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_activity_tasks
         #   The count of activity tasks whose status is OPEN.
@@ -6013,11 +6259,13 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionSignaled` event.
-      class WorkflowExecutionSignaledEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionSignaledEventAttributes < Struct.new(
         :signal_name,
         :input,
         :external_workflow_execution,
         :external_initiated_event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] signal_name
         #   The name of the signal received. The decider can use the signal name
@@ -6047,7 +6295,7 @@ module Aws
       end
 
       # Provides details of `WorkflowExecutionStarted` event.
-      class WorkflowExecutionStartedEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionStartedEventAttributes < Struct.new(
         :input,
         :execution_start_to_close_timeout,
         :task_start_to_close_timeout,
@@ -6060,6 +6308,8 @@ module Aws
         :parent_workflow_execution,
         :parent_initiated_event_id,
         :lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] input
         #   The input provided to the workflow execution (if any).
@@ -6145,11 +6395,13 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionTerminated` event.
-      class WorkflowExecutionTerminatedEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionTerminatedEventAttributes < Struct.new(
         :reason,
         :details,
         :child_policy,
         :cause)
+
+        include Aws::Structure
 
         # @!attribute [rw] reason
         #   The reason provided for the termination (if any).
@@ -6185,9 +6437,11 @@ module Aws
       end
 
       # Provides details of the `WorkflowExecutionTimedOut` event.
-      class WorkflowExecutionTimedOutEventAttributes < Aws::Structure.new(
+      class WorkflowExecutionTimedOutEventAttributes < Struct.new(
         :timeout_type,
         :child_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] timeout_type
         #   The type of timeout that caused this event.
@@ -6219,9 +6473,11 @@ module Aws
       #         name: "Name", # required
       #         version: "Version", # required
       #       }
-      class WorkflowType < Aws::Structure.new(
+      class WorkflowType < Struct.new(
         :name,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   **Required.** The name of the workflow type.
@@ -6238,13 +6494,15 @@ module Aws
       end
 
       # The configuration settings of a workflow type.
-      class WorkflowTypeConfiguration < Aws::Structure.new(
+      class WorkflowTypeConfiguration < Struct.new(
         :default_task_start_to_close_timeout,
         :default_execution_start_to_close_timeout,
         :default_task_list,
         :default_task_priority,
         :default_child_policy,
         :default_lambda_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_task_start_to_close_timeout
         #   *Optional.* The default maximum duration, specified when registering
@@ -6329,9 +6587,11 @@ module Aws
       end
 
       # Contains details about a workflow type.
-      class WorkflowTypeDetail < Aws::Structure.new(
+      class WorkflowTypeDetail < Struct.new(
         :type_info,
         :configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] type_info
         #   General information about the workflow type.
@@ -6364,9 +6624,11 @@ module Aws
       #         name: "Name", # required
       #         version: "VersionOptional",
       #       }
-      class WorkflowTypeFilter < Aws::Structure.new(
+      class WorkflowTypeFilter < Struct.new(
         :name,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   **Required.** Name of the workflow type.
@@ -6379,12 +6641,14 @@ module Aws
       end
 
       # Contains information about a workflow type.
-      class WorkflowTypeInfo < Aws::Structure.new(
+      class WorkflowTypeInfo < Struct.new(
         :workflow_type,
         :status,
         :description,
         :creation_date,
         :deprecation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] workflow_type
         #   The workflow type this information is about.
@@ -6411,9 +6675,11 @@ module Aws
 
       # Contains a paginated list of information structures about workflow
       # types.
-      class WorkflowTypeInfos < Aws::Structure.new(
+      class WorkflowTypeInfos < Struct.new(
         :type_infos,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] type_infos
         #   The list of workflow type information.

@@ -26,10 +26,12 @@ module Aws
       #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
       #         },
       #       }
-      class ActivatedRule < Aws::Structure.new(
+      class ActivatedRule < Struct.new(
         :priority,
         :rule_id,
         :action)
+
+        include Aws::Structure
 
         # @!attribute [rw] priority
         #   Specifies the order in which the `Rules` in a `WebACL` are
@@ -73,10 +75,12 @@ module Aws
       # contains more than one `ByteMatchTuple` object, a request needs to
       # match the settings in only one `ByteMatchTuple` to be considered a
       # match.
-      class ByteMatchSet < Aws::Structure.new(
+      class ByteMatchSet < Struct.new(
         :byte_match_set_id,
         :name,
         :byte_match_tuples)
+
+        include Aws::Structure
 
         # @!attribute [rw] byte_match_set_id
         #   The `ByteMatchSetId` for a `ByteMatchSet`. You use `ByteMatchSetId`
@@ -106,9 +110,11 @@ module Aws
 
       # Returned by ListByteMatchSets. Each `ByteMatchSetSummary` object
       # includes the `Name` and `ByteMatchSetId` for one ByteMatchSet.
-      class ByteMatchSetSummary < Aws::Structure.new(
+      class ByteMatchSetSummary < Struct.new(
         :byte_match_set_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] byte_match_set_id
         #   The `ByteMatchSetId` for a `ByteMatchSet`. You use `ByteMatchSetId`
@@ -145,9 +151,11 @@ module Aws
       #           positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
       #         },
       #       }
-      class ByteMatchSetUpdate < Aws::Structure.new(
+      class ByteMatchSetUpdate < Struct.new(
         :action,
         :byte_match_tuple)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   Specifies whether to insert or delete a ByteMatchTuple.
@@ -178,11 +186,13 @@ module Aws
       #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
       #         positional_constraint: "EXACTLY", # required, accepts EXACTLY, STARTS_WITH, ENDS_WITH, CONTAINS, CONTAINS_WORD
       #       }
-      class ByteMatchTuple < Aws::Structure.new(
+      class ByteMatchTuple < Struct.new(
         :field_to_match,
         :target_string,
         :text_transformation,
         :positional_constraint)
+
+        include Aws::Structure
 
         # @!attribute [rw] field_to_match
         #   The part of a web request that you want AWS WAF to search, such as a
@@ -357,9 +367,11 @@ module Aws
       #         name: "ResourceName", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class CreateByteMatchSetRequest < Aws::Structure.new(
+      class CreateByteMatchSetRequest < Struct.new(
         :name,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A friendly name or description of the ByteMatchSet. You can\'t
@@ -372,9 +384,11 @@ module Aws
 
       end
 
-      class CreateByteMatchSetResponse < Aws::Structure.new(
+      class CreateByteMatchSetResponse < Struct.new(
         :byte_match_set,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] byte_match_set
         #   A ByteMatchSet that contains no `ByteMatchTuple` objects.
@@ -395,9 +409,11 @@ module Aws
       #         name: "ResourceName", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class CreateIPSetRequest < Aws::Structure.new(
+      class CreateIPSetRequest < Struct.new(
         :name,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A friendly name or description of the IPSet. You can\'t change
@@ -410,9 +426,11 @@ module Aws
 
       end
 
-      class CreateIPSetResponse < Aws::Structure.new(
+      class CreateIPSetResponse < Struct.new(
         :ip_set,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_set
         #   The IPSet returned in the `CreateIPSet` response.
@@ -434,10 +452,12 @@ module Aws
       #         metric_name: "MetricName", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class CreateRuleRequest < Aws::Structure.new(
+      class CreateRuleRequest < Struct.new(
         :name,
         :metric_name,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A friendly name or description of the Rule. You can\'t change the
@@ -457,9 +477,11 @@ module Aws
 
       end
 
-      class CreateRuleResponse < Aws::Structure.new(
+      class CreateRuleResponse < Struct.new(
         :rule,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule
         #   The Rule returned in the `CreateRule` response.
@@ -480,9 +502,11 @@ module Aws
       #         name: "ResourceName", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class CreateSizeConstraintSetRequest < Aws::Structure.new(
+      class CreateSizeConstraintSetRequest < Struct.new(
         :name,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A friendly name or description of the SizeConstraintSet. You can\'t
@@ -495,9 +519,11 @@ module Aws
 
       end
 
-      class CreateSizeConstraintSetResponse < Aws::Structure.new(
+      class CreateSizeConstraintSetResponse < Struct.new(
         :size_constraint_set,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_constraint_set
         #   A SizeConstraintSet that contains no `SizeConstraint` objects.
@@ -520,9 +546,11 @@ module Aws
       #         name: "ResourceName", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class CreateSqlInjectionMatchSetRequest < Aws::Structure.new(
+      class CreateSqlInjectionMatchSetRequest < Struct.new(
         :name,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A friendly name or description for the SqlInjectionMatchSet that
@@ -537,9 +565,11 @@ module Aws
       end
 
       # The response to a `CreateSqlInjectionMatchSet` request.
-      class CreateSqlInjectionMatchSetResponse < Aws::Structure.new(
+      class CreateSqlInjectionMatchSetResponse < Struct.new(
         :sql_injection_match_set,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql_injection_match_set
         #   A SqlInjectionMatchSet.
@@ -565,11 +595,13 @@ module Aws
       #         },
       #         change_token: "ChangeToken", # required
       #       }
-      class CreateWebACLRequest < Aws::Structure.new(
+      class CreateWebACLRequest < Struct.new(
         :name,
         :metric_name,
         :default_action,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A friendly name or description of the WebACL. You can\'t change
@@ -595,9 +627,11 @@ module Aws
 
       end
 
-      class CreateWebACLResponse < Aws::Structure.new(
+      class CreateWebACLResponse < Struct.new(
         :web_acl,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl
         #   The WebACL returned in the `CreateWebACL` response.
@@ -619,9 +653,11 @@ module Aws
       #         name: "ResourceName", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class CreateXssMatchSetRequest < Aws::Structure.new(
+      class CreateXssMatchSetRequest < Struct.new(
         :name,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   A friendly name or description for the XssMatchSet that you\'re
@@ -636,9 +672,11 @@ module Aws
       end
 
       # The response to a `CreateXssMatchSet` request.
-      class CreateXssMatchSetResponse < Aws::Structure.new(
+      class CreateXssMatchSetResponse < Struct.new(
         :xss_match_set,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] xss_match_set
         #   An XssMatchSet.
@@ -659,9 +697,11 @@ module Aws
       #         byte_match_set_id: "ResourceId", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class DeleteByteMatchSetRequest < Aws::Structure.new(
+      class DeleteByteMatchSetRequest < Struct.new(
         :byte_match_set_id,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] byte_match_set_id
         #   The `ByteMatchSetId` of the ByteMatchSet that you want to delete.
@@ -675,8 +715,10 @@ module Aws
 
       end
 
-      class DeleteByteMatchSetResponse < Aws::Structure.new(
+      class DeleteByteMatchSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `DeleteByteMatchSet`
@@ -693,9 +735,11 @@ module Aws
       #         ip_set_id: "ResourceId", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class DeleteIPSetRequest < Aws::Structure.new(
+      class DeleteIPSetRequest < Struct.new(
         :ip_set_id,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_set_id
         #   The `IPSetId` of the IPSet that you want to delete. `IPSetId` is
@@ -708,8 +752,10 @@ module Aws
 
       end
 
-      class DeleteIPSetResponse < Aws::Structure.new(
+      class DeleteIPSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `DeleteIPSet` request.
@@ -726,9 +772,11 @@ module Aws
       #         rule_id: "ResourceId", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class DeleteRuleRequest < Aws::Structure.new(
+      class DeleteRuleRequest < Struct.new(
         :rule_id,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_id
         #   The `RuleId` of the Rule that you want to delete. `RuleId` is
@@ -741,8 +789,10 @@ module Aws
 
       end
 
-      class DeleteRuleResponse < Aws::Structure.new(
+      class DeleteRuleResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `DeleteRule` request.
@@ -759,9 +809,11 @@ module Aws
       #         size_constraint_set_id: "ResourceId", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class DeleteSizeConstraintSetRequest < Aws::Structure.new(
+      class DeleteSizeConstraintSetRequest < Struct.new(
         :size_constraint_set_id,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_constraint_set_id
         #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -775,8 +827,10 @@ module Aws
 
       end
 
-      class DeleteSizeConstraintSetResponse < Aws::Structure.new(
+      class DeleteSizeConstraintSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the
@@ -795,9 +849,11 @@ module Aws
       #         sql_injection_match_set_id: "ResourceId", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class DeleteSqlInjectionMatchSetRequest < Aws::Structure.new(
+      class DeleteSqlInjectionMatchSetRequest < Struct.new(
         :sql_injection_match_set_id,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql_injection_match_set_id
         #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you
@@ -813,8 +869,10 @@ module Aws
 
       # The response to a request to delete a SqlInjectionMatchSet from AWS
       # WAF.
-      class DeleteSqlInjectionMatchSetResponse < Aws::Structure.new(
+      class DeleteSqlInjectionMatchSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the
@@ -832,9 +890,11 @@ module Aws
       #         web_acl_id: "ResourceId", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class DeleteWebACLRequest < Aws::Structure.new(
+      class DeleteWebACLRequest < Struct.new(
         :web_acl_id,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl_id
         #   The `WebACLId` of the WebACL that you want to delete. `WebACLId` is
@@ -847,8 +907,10 @@ module Aws
 
       end
 
-      class DeleteWebACLResponse < Aws::Structure.new(
+      class DeleteWebACLResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `DeleteWebACL`
@@ -866,9 +928,11 @@ module Aws
       #         xss_match_set_id: "ResourceId", # required
       #         change_token: "ChangeToken", # required
       #       }
-      class DeleteXssMatchSetRequest < Aws::Structure.new(
+      class DeleteXssMatchSetRequest < Struct.new(
         :xss_match_set_id,
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] xss_match_set_id
         #   The `XssMatchSetId` of the XssMatchSet that you want to delete.
@@ -883,8 +947,10 @@ module Aws
       end
 
       # The response to a request to delete an XssMatchSet from AWS WAF.
-      class DeleteXssMatchSetResponse < Aws::Structure.new(
+      class DeleteXssMatchSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `DeleteXssMatchSet`
@@ -902,9 +968,11 @@ module Aws
       #         type: "URI", # required, accepts URI, QUERY_STRING, HEADER, METHOD, BODY
       #         data: "MatchFieldData",
       #       }
-      class FieldToMatch < Aws::Structure.new(
+      class FieldToMatch < Struct.new(
         :type,
         :data)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The part of the web request that you want AWS WAF to search for a
@@ -948,8 +1016,10 @@ module Aws
       #       {
       #         byte_match_set_id: "ResourceId", # required
       #       }
-      class GetByteMatchSetRequest < Aws::Structure.new(
+      class GetByteMatchSetRequest < Struct.new(
         :byte_match_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] byte_match_set_id
         #   The `ByteMatchSetId` of the ByteMatchSet that you want to get.
@@ -959,8 +1029,10 @@ module Aws
 
       end
 
-      class GetByteMatchSetResponse < Aws::Structure.new(
+      class GetByteMatchSetResponse < Struct.new(
         :byte_match_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] byte_match_set
         #   Information about the ByteMatchSet that you specified in the
@@ -980,8 +1052,10 @@ module Aws
       # @api private
       class GetChangeTokenRequest < Aws::EmptyStructure; end
 
-      class GetChangeTokenResponse < Aws::Structure.new(
+      class GetChangeTokenResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used in the request. Use this value in a
@@ -997,8 +1071,10 @@ module Aws
       #       {
       #         change_token: "ChangeToken", # required
       #       }
-      class GetChangeTokenStatusRequest < Aws::Structure.new(
+      class GetChangeTokenStatusRequest < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The change token for which you want to get the status. This change
@@ -1007,8 +1083,10 @@ module Aws
 
       end
 
-      class GetChangeTokenStatusResponse < Aws::Structure.new(
+      class GetChangeTokenStatusResponse < Struct.new(
         :change_token_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token_status
         #   The status of the change token.
@@ -1022,8 +1100,10 @@ module Aws
       #       {
       #         ip_set_id: "ResourceId", # required
       #       }
-      class GetIPSetRequest < Aws::Structure.new(
+      class GetIPSetRequest < Struct.new(
         :ip_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_set_id
         #   The `IPSetId` of the IPSet that you want to get. `IPSetId` is
@@ -1032,8 +1112,10 @@ module Aws
 
       end
 
-      class GetIPSetResponse < Aws::Structure.new(
+      class GetIPSetResponse < Struct.new(
         :ip_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_set
         #   Information about the IPSet that you specified in the `GetIPSet`
@@ -1052,8 +1134,10 @@ module Aws
       #       {
       #         rule_id: "ResourceId", # required
       #       }
-      class GetRuleRequest < Aws::Structure.new(
+      class GetRuleRequest < Struct.new(
         :rule_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_id
         #   The `RuleId` of the Rule that you want to get. `RuleId` is returned
@@ -1062,8 +1146,10 @@ module Aws
 
       end
 
-      class GetRuleResponse < Aws::Structure.new(
+      class GetRuleResponse < Struct.new(
         :rule)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule
         #   Information about the Rule that you specified in the `GetRule`
@@ -1089,11 +1175,13 @@ module Aws
       #         },
       #         max_items: 1, # required
       #       }
-      class GetSampledRequestsRequest < Aws::Structure.new(
+      class GetSampledRequestsRequest < Struct.new(
         :web_acl_id,
         :rule_id,
         :time_window,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl_id
         #   The `WebACLId` of the `WebACL` for which you want
@@ -1127,10 +1215,12 @@ module Aws
 
       end
 
-      class GetSampledRequestsResponse < Aws::Structure.new(
+      class GetSampledRequestsResponse < Struct.new(
         :sampled_requests,
         :population_size,
         :time_window)
+
+        include Aws::Structure
 
         # @!attribute [rw] sampled_requests
         #   A complex type that contains detailed information about each of the
@@ -1160,8 +1250,10 @@ module Aws
       #       {
       #         size_constraint_set_id: "ResourceId", # required
       #       }
-      class GetSizeConstraintSetRequest < Aws::Structure.new(
+      class GetSizeConstraintSetRequest < Struct.new(
         :size_constraint_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_constraint_set_id
         #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -1171,8 +1263,10 @@ module Aws
 
       end
 
-      class GetSizeConstraintSetResponse < Aws::Structure.new(
+      class GetSizeConstraintSetResponse < Struct.new(
         :size_constraint_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_constraint_set
         #   Information about the SizeConstraintSet that you specified in the
@@ -1196,8 +1290,10 @@ module Aws
       #       {
       #         sql_injection_match_set_id: "ResourceId", # required
       #       }
-      class GetSqlInjectionMatchSetRequest < Aws::Structure.new(
+      class GetSqlInjectionMatchSetRequest < Struct.new(
         :sql_injection_match_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql_injection_match_set_id
         #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you
@@ -1208,8 +1304,10 @@ module Aws
       end
 
       # The response to a GetSqlInjectionMatchSet request.
-      class GetSqlInjectionMatchSetResponse < Aws::Structure.new(
+      class GetSqlInjectionMatchSetResponse < Struct.new(
         :sql_injection_match_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql_injection_match_set
         #   Information about the SqlInjectionMatchSet that you specified in the
@@ -1231,8 +1329,10 @@ module Aws
       #       {
       #         web_acl_id: "ResourceId", # required
       #       }
-      class GetWebACLRequest < Aws::Structure.new(
+      class GetWebACLRequest < Struct.new(
         :web_acl_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl_id
         #   The `WebACLId` of the WebACL that you want to get. `WebACLId` is
@@ -1241,8 +1341,10 @@ module Aws
 
       end
 
-      class GetWebACLResponse < Aws::Structure.new(
+      class GetWebACLResponse < Struct.new(
         :web_acl)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl
         #   Information about the WebACL that you specified in the `GetWebACL`
@@ -1265,8 +1367,10 @@ module Aws
       #       {
       #         xss_match_set_id: "ResourceId", # required
       #       }
-      class GetXssMatchSetRequest < Aws::Structure.new(
+      class GetXssMatchSetRequest < Struct.new(
         :xss_match_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] xss_match_set_id
         #   The `XssMatchSetId` of the XssMatchSet that you want to get.
@@ -1277,8 +1381,10 @@ module Aws
       end
 
       # The response to a GetXssMatchSet request.
-      class GetXssMatchSetResponse < Aws::Structure.new(
+      class GetXssMatchSetResponse < Struct.new(
         :xss_match_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] xss_match_set
         #   Information about the XssMatchSet that you specified in the
@@ -1299,9 +1405,11 @@ module Aws
       # syntax. `HTTPHeader` contains the names and values of all of the
       # headers that appear in one of the web requests that were returned by
       # `GetSampledRequests`.
-      class HTTPHeader < Aws::Structure.new(
+      class HTTPHeader < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of one of the headers in the sampled web request.
@@ -1317,13 +1425,15 @@ module Aws
       # `HTTPRequest` complex type that appears as `Request` in the response
       # syntax. `HTTPRequest` contains information about one of the web
       # requests that were returned by `GetSampledRequests`.
-      class HTTPRequest < Aws::Structure.new(
+      class HTTPRequest < Struct.new(
         :client_ip,
         :country,
         :uri,
         :method,
         :http_version,
         :headers)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_ip
         #   The IP address that the request originated from. If the `WebACL` is
@@ -1377,10 +1487,12 @@ module Aws
       # addresses, you can specify a `/24`, a `/16`, or a `/8` CIDR. For more
       # information about CIDR notation, perform an Internet search on `cidr
       # notation`.
-      class IPSet < Aws::Structure.new(
+      class IPSet < Struct.new(
         :ip_set_id,
         :name,
         :ip_set_descriptors)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_set_id
         #   The `IPSetId` for an `IPSet`. You use `IPSetId` to get information
@@ -1420,9 +1532,11 @@ module Aws
       #         type: "IPV4", # required, accepts IPV4
       #         value: "IPSetDescriptorValue", # required
       #       }
-      class IPSetDescriptor < Aws::Structure.new(
+      class IPSetDescriptor < Struct.new(
         :type,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   Specify `IPV4`.
@@ -1451,9 +1565,11 @@ module Aws
       end
 
       # Contains the identifier and the name of the `IPSet`.
-      class IPSetSummary < Aws::Structure.new(
+      class IPSetSummary < Struct.new(
         :ip_set_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_set_id
         #   The `IPSetId` for an IPSet. You can use `IPSetId` in a GetIPSet
@@ -1478,9 +1594,11 @@ module Aws
       #           value: "IPSetDescriptorValue", # required
       #         },
       #       }
-      class IPSetUpdate < Aws::Structure.new(
+      class IPSetUpdate < Struct.new(
         :action,
         :ip_set_descriptor)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   Specifies whether to insert or delete an IP address with
@@ -1501,9 +1619,11 @@ module Aws
       #         next_marker: "NextMarker",
       #         limit: 1, # required
       #       }
-      class ListByteMatchSetsRequest < Aws::Structure.new(
+      class ListByteMatchSetsRequest < Struct.new(
         :next_marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you specify a value for `Limit` and you have more `ByteMatchSets`
@@ -1524,9 +1644,11 @@ module Aws
 
       end
 
-      class ListByteMatchSetsResponse < Aws::Structure.new(
+      class ListByteMatchSetsResponse < Struct.new(
         :next_marker,
         :byte_match_sets)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you have more `ByteMatchSet` objects than the number that you
@@ -1550,9 +1672,11 @@ module Aws
       #         next_marker: "NextMarker",
       #         limit: 1, # required
       #       }
-      class ListIPSetsRequest < Aws::Structure.new(
+      class ListIPSetsRequest < Struct.new(
         :next_marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you specify a value for `Limit` and you have more `IPSets` than
@@ -1572,9 +1696,11 @@ module Aws
 
       end
 
-      class ListIPSetsResponse < Aws::Structure.new(
+      class ListIPSetsResponse < Struct.new(
         :next_marker,
         :ip_sets)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you have more `IPSet` objects than the number that you specified
@@ -1597,9 +1723,11 @@ module Aws
       #         next_marker: "NextMarker",
       #         limit: 1, # required
       #       }
-      class ListRulesRequest < Aws::Structure.new(
+      class ListRulesRequest < Struct.new(
         :next_marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you specify a value for `Limit` and you have more `Rules` than
@@ -1619,9 +1747,11 @@ module Aws
 
       end
 
-      class ListRulesResponse < Aws::Structure.new(
+      class ListRulesResponse < Struct.new(
         :next_marker,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you have more `Rules` than the number that you specified for
@@ -1644,9 +1774,11 @@ module Aws
       #         next_marker: "NextMarker",
       #         limit: 1, # required
       #       }
-      class ListSizeConstraintSetsRequest < Aws::Structure.new(
+      class ListSizeConstraintSetsRequest < Struct.new(
         :next_marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you specify a value for `Limit` and you have more
@@ -1668,9 +1800,11 @@ module Aws
 
       end
 
-      class ListSizeConstraintSetsResponse < Aws::Structure.new(
+      class ListSizeConstraintSetsResponse < Struct.new(
         :next_marker,
         :size_constraint_sets)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you have more `SizeConstraintSet` objects than the number that
@@ -1696,9 +1830,11 @@ module Aws
       #         next_marker: "NextMarker",
       #         limit: 1, # required
       #       }
-      class ListSqlInjectionMatchSetsRequest < Aws::Structure.new(
+      class ListSqlInjectionMatchSetsRequest < Struct.new(
         :next_marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you specify a value for `Limit` and you have more
@@ -1721,9 +1857,11 @@ module Aws
       end
 
       # The response to a ListSqlInjectionMatchSets request.
-      class ListSqlInjectionMatchSetsResponse < Aws::Structure.new(
+      class ListSqlInjectionMatchSetsResponse < Struct.new(
         :next_marker,
         :sql_injection_match_sets)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you have more SqlInjectionMatchSet objects than the number that
@@ -1747,9 +1885,11 @@ module Aws
       #         next_marker: "NextMarker",
       #         limit: 1, # required
       #       }
-      class ListWebACLsRequest < Aws::Structure.new(
+      class ListWebACLsRequest < Struct.new(
         :next_marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you specify a value for `Limit` and you have more `WebACL`
@@ -1771,9 +1911,11 @@ module Aws
 
       end
 
-      class ListWebACLsResponse < Aws::Structure.new(
+      class ListWebACLsResponse < Struct.new(
         :next_marker,
         :web_acls)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you have more `WebACL` objects than the number that you specified
@@ -1798,9 +1940,11 @@ module Aws
       #         next_marker: "NextMarker",
       #         limit: 1, # required
       #       }
-      class ListXssMatchSetsRequest < Aws::Structure.new(
+      class ListXssMatchSetsRequest < Struct.new(
         :next_marker,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you specify a value for `Limit` and you have more XssMatchSet
@@ -1821,9 +1965,11 @@ module Aws
       end
 
       # The response to a ListXssMatchSets request.
-      class ListXssMatchSetsResponse < Aws::Structure.new(
+      class ListXssMatchSetsResponse < Struct.new(
         :next_marker,
         :xss_match_sets)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   If you have more XssMatchSet objects than the number that you
@@ -1853,10 +1999,12 @@ module Aws
       #         type: "IPMatch", # required, accepts IPMatch, ByteMatch, SqlInjectionMatch, SizeConstraint, XssMatch
       #         data_id: "ResourceId", # required
       #       }
-      class Predicate < Aws::Structure.new(
+      class Predicate < Struct.new(
         :negated,
         :type,
         :data_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] negated
         #   Set `Negated` to `False` if you want AWS WAF to allow, block, or
@@ -1899,11 +2047,13 @@ module Aws
       # To match the settings in this `Rule`, a request must originate from
       # `192.0.2.44` AND include a `User-Agent` header for which the value is
       # `BadBot`.
-      class Rule < Aws::Structure.new(
+      class Rule < Struct.new(
         :rule_id,
         :name,
         :metric_name,
         :predicates)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_id
         #   A unique identifier for a `Rule`. You use `RuleId` to get more
@@ -1933,9 +2083,11 @@ module Aws
 
       # Contains the identifier and the friendly name or description of the
       # `Rule`.
-      class RuleSummary < Aws::Structure.new(
+      class RuleSummary < Struct.new(
         :rule_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_id
         #   A unique identifier for a `Rule`. You use `RuleId` to get more
@@ -1967,9 +2119,11 @@ module Aws
       #           data_id: "ResourceId", # required
       #         },
       #       }
-      class RuleUpdate < Aws::Structure.new(
+      class RuleUpdate < Struct.new(
         :action,
         :predicate)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   Specify `INSERT` to add a `Predicate` to a `Rule`. Use `DELETE` to
@@ -1988,11 +2142,13 @@ module Aws
       # in the response syntax. `SampledHTTPRequests` contains one
       # `SampledHTTPRequest` object for each web request that is returned by
       # `GetSampledRequests`.
-      class SampledHTTPRequest < Aws::Structure.new(
+      class SampledHTTPRequest < Struct.new(
         :request,
         :weight,
         :timestamp,
         :action)
+
+        include Aws::Structure
 
         # @!attribute [rw] request
         #   A complex type that contains detailed information about the request.
@@ -2034,11 +2190,13 @@ module Aws
       #         comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
       #         size: 1, # required
       #       }
-      class SizeConstraint < Aws::Structure.new(
+      class SizeConstraint < Struct.new(
         :field_to_match,
         :text_transformation,
         :comparison_operator,
         :size)
+
+        include Aws::Structure
 
         # @!attribute [rw] field_to_match
         #   Specifies where in a web request to look for `TargetString`.
@@ -2158,10 +2316,12 @@ module Aws
       # of. If a `SizeConstraintSet` contains more than one `SizeConstraint`
       # object, a request only needs to match one constraint to be considered
       # a match.
-      class SizeConstraintSet < Aws::Structure.new(
+      class SizeConstraintSet < Struct.new(
         :size_constraint_set_id,
         :name,
         :size_constraints)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_constraint_set_id
         #   A unique identifier for a `SizeConstraintSet`. You use
@@ -2187,9 +2347,11 @@ module Aws
       end
 
       # The `Id` and `Name` of a `SizeConstraintSet`.
-      class SizeConstraintSetSummary < Aws::Structure.new(
+      class SizeConstraintSetSummary < Struct.new(
         :size_constraint_set_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_constraint_set_id
         #   A unique identifier for a `SizeConstraintSet`. You use
@@ -2227,9 +2389,11 @@ module Aws
       #           size: 1, # required
       #         },
       #       }
-      class SizeConstraintSetUpdate < Aws::Structure.new(
+      class SizeConstraintSetUpdate < Struct.new(
         :action,
         :size_constraint)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   Specify `INSERT` to add a SizeConstraintSetUpdate to a
@@ -2254,10 +2418,12 @@ module Aws
       # more than one `SqlInjectionMatchTuple` object, a request needs to
       # include snippets of SQL code in only one of the specified parts of the
       # request to be considered a match.
-      class SqlInjectionMatchSet < Aws::Structure.new(
+      class SqlInjectionMatchSet < Struct.new(
         :sql_injection_match_set_id,
         :name,
         :sql_injection_match_tuples)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql_injection_match_set_id
         #   A unique identifier for a `SqlInjectionMatchSet`. You use
@@ -2284,9 +2450,11 @@ module Aws
       end
 
       # The `Id` and `Name` of a `SqlInjectionMatchSet`.
-      class SqlInjectionMatchSetSummary < Aws::Structure.new(
+      class SqlInjectionMatchSetSummary < Struct.new(
         :sql_injection_match_set_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql_injection_match_set_id
         #   A unique identifier for a `SqlInjectionMatchSet`. You use
@@ -2324,9 +2492,11 @@ module Aws
       #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
       #         },
       #       }
-      class SqlInjectionMatchSetUpdate < Aws::Structure.new(
+      class SqlInjectionMatchSetUpdate < Struct.new(
         :action,
         :sql_injection_match_tuple)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   Specify `INSERT` to add a SqlInjectionMatchSetUpdate to a
@@ -2355,9 +2525,11 @@ module Aws
       #         },
       #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
       #       }
-      class SqlInjectionMatchTuple < Aws::Structure.new(
+      class SqlInjectionMatchTuple < Struct.new(
         :field_to_match,
         :text_transformation)
+
+        include Aws::Structure
 
         # @!attribute [rw] field_to_match
         #   Specifies where in a web request to look for `TargetString`.
@@ -2446,9 +2618,11 @@ module Aws
       #         start_time: Time.now, # required
       #         end_time: Time.now, # required
       #       }
-      class TimeWindow < Aws::Structure.new(
+      class TimeWindow < Struct.new(
         :start_time,
         :end_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] start_time
         #   The beginning of the time range from which you want
@@ -2486,10 +2660,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateByteMatchSetRequest < Aws::Structure.new(
+      class UpdateByteMatchSetRequest < Struct.new(
         :byte_match_set_id,
         :change_token,
         :updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] byte_match_set_id
         #   The `ByteMatchSetId` of the ByteMatchSet that you want to update.
@@ -2514,8 +2690,10 @@ module Aws
 
       end
 
-      class UpdateByteMatchSetResponse < Aws::Structure.new(
+      class UpdateByteMatchSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `UpdateByteMatchSet`
@@ -2541,10 +2719,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateIPSetRequest < Aws::Structure.new(
+      class UpdateIPSetRequest < Struct.new(
         :ip_set_id,
         :change_token,
         :updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_set_id
         #   The `IPSetId` of the IPSet that you want to update. `IPSetId` is
@@ -2566,8 +2746,10 @@ module Aws
 
       end
 
-      class UpdateIPSetResponse < Aws::Structure.new(
+      class UpdateIPSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `UpdateIPSet` request.
@@ -2594,10 +2776,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateRuleRequest < Aws::Structure.new(
+      class UpdateRuleRequest < Struct.new(
         :rule_id,
         :change_token,
         :updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_id
         #   The `RuleId` of the `Rule` that you want to update. `RuleId` is
@@ -2620,8 +2804,10 @@ module Aws
 
       end
 
-      class UpdateRuleResponse < Aws::Structure.new(
+      class UpdateRuleResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `UpdateRule` request.
@@ -2652,10 +2838,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateSizeConstraintSetRequest < Aws::Structure.new(
+      class UpdateSizeConstraintSetRequest < Struct.new(
         :size_constraint_set_id,
         :change_token,
         :updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] size_constraint_set_id
         #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -2680,8 +2868,10 @@ module Aws
 
       end
 
-      class UpdateSizeConstraintSetResponse < Aws::Structure.new(
+      class UpdateSizeConstraintSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the
@@ -2712,10 +2902,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateSqlInjectionMatchSetRequest < Aws::Structure.new(
+      class UpdateSqlInjectionMatchSetRequest < Struct.new(
         :sql_injection_match_set_id,
         :change_token,
         :updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql_injection_match_set_id
         #   The `SqlInjectionMatchSetId` of the `SqlInjectionMatchSet` that you
@@ -2742,8 +2934,10 @@ module Aws
       end
 
       # The response to an UpdateSqlInjectionMatchSets request.
-      class UpdateSqlInjectionMatchSetResponse < Aws::Structure.new(
+      class UpdateSqlInjectionMatchSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the
@@ -2776,11 +2970,13 @@ module Aws
       #           type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
       #         },
       #       }
-      class UpdateWebACLRequest < Aws::Structure.new(
+      class UpdateWebACLRequest < Struct.new(
         :web_acl_id,
         :change_token,
         :updates,
         :default_action)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl_id
         #   The `WebACLId` of the WebACL that you want to update. `WebACLId` is
@@ -2814,8 +3010,10 @@ module Aws
 
       end
 
-      class UpdateWebACLResponse < Aws::Structure.new(
+      class UpdateWebACLResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `UpdateWebACL`
@@ -2845,10 +3043,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateXssMatchSetRequest < Aws::Structure.new(
+      class UpdateXssMatchSetRequest < Struct.new(
         :xss_match_set_id,
         :change_token,
         :updates)
+
+        include Aws::Structure
 
         # @!attribute [rw] xss_match_set_id
         #   The `XssMatchSetId` of the `XssMatchSet` that you want to update.
@@ -2873,8 +3073,10 @@ module Aws
       end
 
       # The response to an UpdateXssMatchSets request.
-      class UpdateXssMatchSetResponse < Aws::Structure.new(
+      class UpdateXssMatchSetResponse < Struct.new(
         :change_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_token
         #   The `ChangeToken` that you used to submit the `UpdateXssMatchSet`
@@ -2896,8 +3098,10 @@ module Aws
       #       {
       #         type: "BLOCK", # required, accepts BLOCK, ALLOW, COUNT
       #       }
-      class WafAction < Aws::Structure.new(
+      class WafAction < Struct.new(
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   Specifies how you want AWS WAF to respond to requests that match the
@@ -2924,12 +3128,14 @@ module Aws
       # `Rule` to a `WebACL`, a request needs to match only one of the
       # specifications to be allowed, blocked, or counted. For more
       # information, see UpdateWebACL.
-      class WebACL < Aws::Structure.new(
+      class WebACL < Struct.new(
         :web_acl_id,
         :name,
         :metric_name,
         :default_action,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl_id
         #   A unique identifier for a `WebACL`. You use `WebACLId` to get
@@ -2961,9 +3167,11 @@ module Aws
       end
 
       # Contains the identifier and the name or description of the WebACL.
-      class WebACLSummary < Aws::Structure.new(
+      class WebACLSummary < Struct.new(
         :web_acl_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] web_acl_id
         #   A unique identifier for a `WebACL`. You use `WebACLId` to get
@@ -2996,9 +3204,11 @@ module Aws
       #           },
       #         },
       #       }
-      class WebACLUpdate < Aws::Structure.new(
+      class WebACLUpdate < Struct.new(
         :action,
         :activated_rule)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   Specifies whether to insert a `Rule` into or delete a `Rule` from a
@@ -3024,10 +3234,12 @@ module Aws
       # one `XssMatchTuple` object, a request needs to include cross-site
       # scripting attacks in only one of the specified parts of the request to
       # be considered a match.
-      class XssMatchSet < Aws::Structure.new(
+      class XssMatchSet < Struct.new(
         :xss_match_set_id,
         :name,
         :xss_match_tuples)
+
+        include Aws::Structure
 
         # @!attribute [rw] xss_match_set_id
         #   A unique identifier for an `XssMatchSet`. You use `XssMatchSetId` to
@@ -3052,9 +3264,11 @@ module Aws
       end
 
       # The `Id` and `Name` of an `XssMatchSet`.
-      class XssMatchSetSummary < Aws::Structure.new(
+      class XssMatchSetSummary < Struct.new(
         :xss_match_set_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] xss_match_set_id
         #   A unique identifier for an `XssMatchSet`. You use `XssMatchSetId` to
@@ -3089,9 +3303,11 @@ module Aws
       #           text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
       #         },
       #       }
-      class XssMatchSetUpdate < Aws::Structure.new(
+      class XssMatchSetUpdate < Struct.new(
         :action,
         :xss_match_tuple)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   Specify `INSERT` to add a XssMatchSetUpdate to an XssMatchSet. Use
@@ -3119,9 +3335,11 @@ module Aws
       #         },
       #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
       #       }
-      class XssMatchTuple < Aws::Structure.new(
+      class XssMatchTuple < Struct.new(
         :field_to_match,
         :text_transformation)
+
+        include Aws::Structure
 
         # @!attribute [rw] field_to_match
         #   Specifies where in a web request to look for `TargetString`.

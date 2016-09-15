@@ -17,9 +17,11 @@ module Aws
       #         dry_run: false,
       #         vpc_peering_connection_id: "String",
       #       }
-      class AcceptVpcPeeringConnectionRequest < Aws::Structure.new(
+      class AcceptVpcPeeringConnectionRequest < Struct.new(
         :dry_run,
         :vpc_peering_connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -35,8 +37,10 @@ module Aws
       end
 
       # Contains the output of AcceptVpcPeeringConnection.
-      class AcceptVpcPeeringConnectionResult < Aws::Structure.new(
+      class AcceptVpcPeeringConnectionResult < Struct.new(
         :vpc_peering_connection)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_peering_connection
         #   Information about the VPC peering connection.
@@ -45,9 +49,11 @@ module Aws
       end
 
       # Describes an account attribute.
-      class AccountAttribute < Aws::Structure.new(
+      class AccountAttribute < Struct.new(
         :attribute_name,
         :attribute_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of the account attribute.
@@ -60,8 +66,10 @@ module Aws
       end
 
       # Describes a value of an account attribute.
-      class AccountAttributeValue < Aws::Structure.new(
+      class AccountAttributeValue < Struct.new(
         :attribute_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_value
         #   The value of the attribute.
@@ -70,10 +78,12 @@ module Aws
       end
 
       # Describes a running instance in a Spot fleet.
-      class ActiveInstance < Aws::Structure.new(
+      class ActiveInstance < Struct.new(
         :instance_type,
         :instance_id,
         :spot_instance_request_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_type
         #   The instance type.
@@ -90,7 +100,7 @@ module Aws
       end
 
       # Describes an Elastic IP address.
-      class Address < Aws::Structure.new(
+      class Address < Struct.new(
         :instance_id,
         :public_ip,
         :allocation_id,
@@ -99,6 +109,8 @@ module Aws
         :network_interface_id,
         :network_interface_owner_id,
         :private_ip_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance that the address is associated with (if any).
@@ -145,9 +157,11 @@ module Aws
       #         dry_run: false,
       #         domain: "vpc", # accepts vpc, standard
       #       }
-      class AllocateAddressRequest < Aws::Structure.new(
+      class AllocateAddressRequest < Struct.new(
         :dry_run,
         :domain)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -166,10 +180,12 @@ module Aws
       end
 
       # Contains the output of AllocateAddress.
-      class AllocateAddressResult < Aws::Structure.new(
+      class AllocateAddressResult < Struct.new(
         :public_ip,
         :domain,
         :allocation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] public_ip
         #   The Elastic IP address.
@@ -198,12 +214,14 @@ module Aws
       #         quantity: 1, # required
       #         availability_zone: "String", # required
       #       }
-      class AllocateHostsRequest < Aws::Structure.new(
+      class AllocateHostsRequest < Struct.new(
         :auto_placement,
         :client_token,
         :instance_type,
         :quantity,
         :availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_placement
         #   This is enabled by default. This property allows instances to be
@@ -241,8 +259,10 @@ module Aws
       end
 
       # Contains the output of AllocateHosts.
-      class AllocateHostsResult < Aws::Structure.new(
+      class AllocateHostsResult < Struct.new(
         :host_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_ids
         #   The ID of the allocated Dedicated Host. This is used when you want
@@ -261,11 +281,13 @@ module Aws
       #         secondary_private_ip_address_count: 1,
       #         allow_reassignment: false,
       #       }
-      class AssignPrivateIpAddressesRequest < Aws::Structure.new(
+      class AssignPrivateIpAddressesRequest < Struct.new(
         :network_interface_id,
         :private_ip_addresses,
         :secondary_private_ip_address_count,
         :allow_reassignment)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface_id
         #   The ID of the network interface.
@@ -307,7 +329,7 @@ module Aws
       #         private_ip_address: "String",
       #         allow_reassociation: false,
       #       }
-      class AssociateAddressRequest < Aws::Structure.new(
+      class AssociateAddressRequest < Struct.new(
         :dry_run,
         :instance_id,
         :public_ip,
@@ -315,6 +337,8 @@ module Aws
         :network_interface_id,
         :private_ip_address,
         :allow_reassociation)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -364,8 +388,10 @@ module Aws
       end
 
       # Contains the output of AssociateAddress.
-      class AssociateAddressResult < Aws::Structure.new(
+      class AssociateAddressResult < Struct.new(
         :association_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] association_id
         #   \[EC2-VPC\] The ID that represents the association of the Elastic IP
@@ -383,10 +409,12 @@ module Aws
       #         dhcp_options_id: "String", # required
       #         vpc_id: "String", # required
       #       }
-      class AssociateDhcpOptionsRequest < Aws::Structure.new(
+      class AssociateDhcpOptionsRequest < Struct.new(
         :dry_run,
         :dhcp_options_id,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -415,10 +443,12 @@ module Aws
       #         subnet_id: "String", # required
       #         route_table_id: "String", # required
       #       }
-      class AssociateRouteTableRequest < Aws::Structure.new(
+      class AssociateRouteTableRequest < Struct.new(
         :dry_run,
         :subnet_id,
         :route_table_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -438,8 +468,10 @@ module Aws
       end
 
       # Contains the output of AssociateRouteTable.
-      class AssociateRouteTableResult < Aws::Structure.new(
+      class AssociateRouteTableResult < Struct.new(
         :association_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] association_id
         #   The route table association ID (needed to disassociate the route
@@ -458,11 +490,13 @@ module Aws
       #         vpc_id: "String", # required
       #         groups: ["String"], # required
       #       }
-      class AttachClassicLinkVpcRequest < Aws::Structure.new(
+      class AttachClassicLinkVpcRequest < Struct.new(
         :dry_run,
         :instance_id,
         :vpc_id,
         :groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -488,8 +522,10 @@ module Aws
       end
 
       # Contains the output of AttachClassicLinkVpc.
-      class AttachClassicLinkVpcResult < Aws::Structure.new(
+      class AttachClassicLinkVpcResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -507,10 +543,12 @@ module Aws
       #         internet_gateway_id: "String", # required
       #         vpc_id: "String", # required
       #       }
-      class AttachInternetGatewayRequest < Aws::Structure.new(
+      class AttachInternetGatewayRequest < Struct.new(
         :dry_run,
         :internet_gateway_id,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -539,11 +577,13 @@ module Aws
       #         instance_id: "String", # required
       #         device_index: 1, # required
       #       }
-      class AttachNetworkInterfaceRequest < Aws::Structure.new(
+      class AttachNetworkInterfaceRequest < Struct.new(
         :dry_run,
         :network_interface_id,
         :instance_id,
         :device_index)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -567,8 +607,10 @@ module Aws
       end
 
       # Contains the output of AttachNetworkInterface.
-      class AttachNetworkInterfaceResult < Aws::Structure.new(
+      class AttachNetworkInterfaceResult < Struct.new(
         :attachment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_id
         #   The ID of the network interface attachment.
@@ -586,11 +628,13 @@ module Aws
       #         instance_id: "String", # required
       #         device: "String", # required
       #       }
-      class AttachVolumeRequest < Aws::Structure.new(
+      class AttachVolumeRequest < Struct.new(
         :dry_run,
         :volume_id,
         :instance_id,
         :device)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -624,10 +668,12 @@ module Aws
       #         vpn_gateway_id: "String", # required
       #         vpc_id: "String", # required
       #       }
-      class AttachVpnGatewayRequest < Aws::Structure.new(
+      class AttachVpnGatewayRequest < Struct.new(
         :dry_run,
         :vpn_gateway_id,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -647,8 +693,10 @@ module Aws
       end
 
       # Contains the output of AttachVpnGateway.
-      class AttachVpnGatewayResult < Aws::Structure.new(
+      class AttachVpnGatewayResult < Struct.new(
         :vpc_attachment)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_attachment
         #   Information about the attachment.
@@ -663,8 +711,10 @@ module Aws
       #       {
       #         value: false,
       #       }
-      class AttributeBooleanValue < Aws::Structure.new(
+      class AttributeBooleanValue < Struct.new(
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The attribute value. The valid values are `true` or `false`.
@@ -679,8 +729,10 @@ module Aws
       #       {
       #         value: "String",
       #       }
-      class AttributeValue < Aws::Structure.new(
+      class AttributeValue < Struct.new(
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The attribute value. Note that the value is case-sensitive.
@@ -729,7 +781,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class AuthorizeSecurityGroupEgressRequest < Aws::Structure.new(
+      class AuthorizeSecurityGroupEgressRequest < Struct.new(
         :dry_run,
         :group_id,
         :source_security_group_name,
@@ -739,6 +791,8 @@ module Aws
         :to_port,
         :cidr_ip,
         :ip_permissions)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -834,7 +888,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class AuthorizeSecurityGroupIngressRequest < Aws::Structure.new(
+      class AuthorizeSecurityGroupIngressRequest < Struct.new(
         :dry_run,
         :group_name,
         :group_id,
@@ -845,6 +899,8 @@ module Aws
         :to_port,
         :cidr_ip,
         :ip_permissions)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -919,11 +975,13 @@ module Aws
       end
 
       # Describes an Availability Zone.
-      class AvailabilityZone < Aws::Structure.new(
+      class AvailabilityZone < Struct.new(
         :zone_name,
         :state,
         :region_name,
         :messages)
+
+        include Aws::Structure
 
         # @!attribute [rw] zone_name
         #   The name of the Availability Zone.
@@ -944,8 +1002,10 @@ module Aws
       end
 
       # Describes a message about an Availability Zone.
-      class AvailabilityZoneMessage < Aws::Structure.new(
+      class AvailabilityZoneMessage < Struct.new(
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] message
         #   The message about the Availability Zone.
@@ -955,9 +1015,11 @@ module Aws
 
       # The capacity information for instances launched onto the Dedicated
       # Host.
-      class AvailableCapacity < Aws::Structure.new(
+      class AvailableCapacity < Struct.new(
         :available_instance_capacity,
         :available_v_cpus)
+
+        include Aws::Structure
 
         # @!attribute [rw] available_instance_capacity
         #   The total number of instances that the Dedicated Host supports.
@@ -975,8 +1037,10 @@ module Aws
       #       {
       #         value: "data",
       #       }
-      class BlobAttributeValue < Aws::Structure.new(
+      class BlobAttributeValue < Struct.new(
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   @return [String]
@@ -1000,11 +1064,13 @@ module Aws
       #         },
       #         no_device: "String",
       #       }
-      class BlockDeviceMapping < Aws::Structure.new(
+      class BlockDeviceMapping < Struct.new(
         :virtual_name,
         :device_name,
         :ebs,
         :no_device)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_name
         #   The virtual device name (`ephemeral`N). Instance store volumes are
@@ -1054,10 +1120,12 @@ module Aws
       #           },
       #         },
       #       }
-      class BundleInstanceRequest < Aws::Structure.new(
+      class BundleInstanceRequest < Struct.new(
         :dry_run,
         :instance_id,
         :storage)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1086,8 +1154,10 @@ module Aws
       end
 
       # Contains the output of BundleInstance.
-      class BundleInstanceResult < Aws::Structure.new(
+      class BundleInstanceResult < Struct.new(
         :bundle_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] bundle_task
         #   Information about the bundle task.
@@ -1096,7 +1166,7 @@ module Aws
       end
 
       # Describes a bundle task.
-      class BundleTask < Aws::Structure.new(
+      class BundleTask < Struct.new(
         :instance_id,
         :bundle_id,
         :state,
@@ -1105,6 +1175,8 @@ module Aws
         :storage,
         :progress,
         :bundle_task_error)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance associated with this bundle task.
@@ -1141,9 +1213,11 @@ module Aws
       end
 
       # Describes an error for BundleInstance.
-      class BundleTaskError < Aws::Structure.new(
+      class BundleTaskError < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The error code.
@@ -1163,9 +1237,11 @@ module Aws
       #         dry_run: false,
       #         bundle_id: "String", # required
       #       }
-      class CancelBundleTaskRequest < Aws::Structure.new(
+      class CancelBundleTaskRequest < Struct.new(
         :dry_run,
         :bundle_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1181,8 +1257,10 @@ module Aws
       end
 
       # Contains the output of CancelBundleTask.
-      class CancelBundleTaskResult < Aws::Structure.new(
+      class CancelBundleTaskResult < Struct.new(
         :bundle_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] bundle_task
         #   Information about the bundle task.
@@ -1199,10 +1277,12 @@ module Aws
       #         conversion_task_id: "String", # required
       #         reason_message: "String",
       #       }
-      class CancelConversionRequest < Aws::Structure.new(
+      class CancelConversionRequest < Struct.new(
         :dry_run,
         :conversion_task_id,
         :reason_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1228,8 +1308,10 @@ module Aws
       #       {
       #         export_task_id: "String", # required
       #       }
-      class CancelExportTaskRequest < Aws::Structure.new(
+      class CancelExportTaskRequest < Struct.new(
         :export_task_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_task_id
         #   The ID of the export task. This is the ID returned by
@@ -1247,10 +1329,12 @@ module Aws
       #         import_task_id: "String",
       #         cancel_reason: "String",
       #       }
-      class CancelImportTaskRequest < Aws::Structure.new(
+      class CancelImportTaskRequest < Struct.new(
         :dry_run,
         :import_task_id,
         :cancel_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1270,10 +1354,12 @@ module Aws
       end
 
       # Contains the output for CancelImportTask.
-      class CancelImportTaskResult < Aws::Structure.new(
+      class CancelImportTaskResult < Struct.new(
         :import_task_id,
         :state,
         :previous_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] import_task_id
         #   The ID of the task being canceled.
@@ -1296,8 +1382,10 @@ module Aws
       #       {
       #         reserved_instances_listing_id: "String", # required
       #       }
-      class CancelReservedInstancesListingRequest < Aws::Structure.new(
+      class CancelReservedInstancesListingRequest < Struct.new(
         :reserved_instances_listing_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_listing_id
         #   The ID of the Reserved Instance listing.
@@ -1306,8 +1394,10 @@ module Aws
       end
 
       # Contains the output of CancelReservedInstancesListing.
-      class CancelReservedInstancesListingResult < Aws::Structure.new(
+      class CancelReservedInstancesListingResult < Struct.new(
         :reserved_instances_listings)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_listings
         #   The Reserved Instance listing.
@@ -1316,9 +1406,11 @@ module Aws
       end
 
       # Describes a Spot fleet error.
-      class CancelSpotFleetRequestsError < Aws::Structure.new(
+      class CancelSpotFleetRequestsError < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The error code.
@@ -1331,9 +1423,11 @@ module Aws
       end
 
       # Describes a Spot fleet request that was not successfully canceled.
-      class CancelSpotFleetRequestsErrorItem < Aws::Structure.new(
+      class CancelSpotFleetRequestsErrorItem < Struct.new(
         :spot_fleet_request_id,
         :error)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -1354,10 +1448,12 @@ module Aws
       #         spot_fleet_request_ids: ["String"], # required
       #         terminate_instances: false, # required
       #       }
-      class CancelSpotFleetRequestsRequest < Aws::Structure.new(
+      class CancelSpotFleetRequestsRequest < Struct.new(
         :dry_run,
         :spot_fleet_request_ids,
         :terminate_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1378,9 +1474,11 @@ module Aws
       end
 
       # Contains the output of CancelSpotFleetRequests.
-      class CancelSpotFleetRequestsResponse < Aws::Structure.new(
+      class CancelSpotFleetRequestsResponse < Struct.new(
         :unsuccessful_fleet_requests,
         :successful_fleet_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] unsuccessful_fleet_requests
         #   Information about the Spot fleet requests that are not successfully
@@ -1395,10 +1493,12 @@ module Aws
       end
 
       # Describes a Spot fleet request that was successfully canceled.
-      class CancelSpotFleetRequestsSuccessItem < Aws::Structure.new(
+      class CancelSpotFleetRequestsSuccessItem < Struct.new(
         :spot_fleet_request_id,
         :current_spot_fleet_request_state,
         :previous_spot_fleet_request_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -1422,9 +1522,11 @@ module Aws
       #         dry_run: false,
       #         spot_instance_request_ids: ["String"], # required
       #       }
-      class CancelSpotInstanceRequestsRequest < Aws::Structure.new(
+      class CancelSpotInstanceRequestsRequest < Struct.new(
         :dry_run,
         :spot_instance_request_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1440,8 +1542,10 @@ module Aws
       end
 
       # Contains the output of CancelSpotInstanceRequests.
-      class CancelSpotInstanceRequestsResult < Aws::Structure.new(
+      class CancelSpotInstanceRequestsResult < Struct.new(
         :cancelled_spot_instance_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] cancelled_spot_instance_requests
         #   One or more Spot instance requests.
@@ -1450,9 +1554,11 @@ module Aws
       end
 
       # Describes a request to cancel a Spot instance.
-      class CancelledSpotInstanceRequest < Aws::Structure.new(
+      class CancelledSpotInstanceRequest < Struct.new(
         :spot_instance_request_id,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_instance_request_id
         #   The ID of the Spot instance request.
@@ -1465,9 +1571,11 @@ module Aws
       end
 
       # Describes the ClassicLink DNS support status of a VPC.
-      class ClassicLinkDnsSupport < Aws::Structure.new(
+      class ClassicLinkDnsSupport < Struct.new(
         :vpc_id,
         :classic_link_dns_supported)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -1480,11 +1588,13 @@ module Aws
       end
 
       # Describes a linked EC2-Classic instance.
-      class ClassicLinkInstance < Aws::Structure.new(
+      class ClassicLinkInstance < Struct.new(
         :instance_id,
         :vpc_id,
         :groups,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -1514,11 +1624,13 @@ module Aws
       #         upload_size: 1.0,
       #         comment: "String",
       #       }
-      class ClientData < Aws::Structure.new(
+      class ClientData < Struct.new(
         :upload_start,
         :upload_end,
         :upload_size,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] upload_start
         #   The time that the disk upload starts.
@@ -1547,10 +1659,12 @@ module Aws
       #         product_code: "String", # required
       #         instance_id: "String", # required
       #       }
-      class ConfirmProductInstanceRequest < Aws::Structure.new(
+      class ConfirmProductInstanceRequest < Struct.new(
         :dry_run,
         :product_code,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1570,9 +1684,11 @@ module Aws
       end
 
       # Contains the output of ConfirmProductInstance.
-      class ConfirmProductInstanceResult < Aws::Structure.new(
+      class ConfirmProductInstanceResult < Struct.new(
         :owner_id,
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_id
         #   The AWS account ID of the instance owner. This is only present if
@@ -1588,7 +1704,7 @@ module Aws
       end
 
       # Describes a conversion task.
-      class ConversionTask < Aws::Structure.new(
+      class ConversionTask < Struct.new(
         :conversion_task_id,
         :expiration_time,
         :import_instance,
@@ -1596,6 +1712,8 @@ module Aws
         :state,
         :status_message,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] conversion_task_id
         #   The ID of the conversion task.
@@ -1644,7 +1762,7 @@ module Aws
       #         encrypted: false,
       #         kms_key_id: "String",
       #       }
-      class CopyImageRequest < Aws::Structure.new(
+      class CopyImageRequest < Struct.new(
         :dry_run,
         :source_region,
         :source_image_id,
@@ -1653,6 +1771,8 @@ module Aws
         :client_token,
         :encrypted,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1716,8 +1836,10 @@ module Aws
       end
 
       # Contains the output of CopyImage.
-      class CopyImageResult < Aws::Structure.new(
+      class CopyImageResult < Struct.new(
         :image_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the new AMI.
@@ -1739,7 +1861,7 @@ module Aws
       #         encrypted: false,
       #         kms_key_id: "String",
       #       }
-      class CopySnapshotRequest < Aws::Structure.new(
+      class CopySnapshotRequest < Struct.new(
         :dry_run,
         :source_region,
         :source_snapshot_id,
@@ -1748,6 +1870,8 @@ module Aws
         :presigned_url,
         :encrypted,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1834,8 +1958,10 @@ module Aws
       end
 
       # Contains the output of CopySnapshot.
-      class CopySnapshotResult < Aws::Structure.new(
+      class CopySnapshotResult < Struct.new(
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The ID of the new snapshot.
@@ -1853,11 +1979,13 @@ module Aws
       #         public_ip: "String", # required
       #         bgp_asn: 1, # required
       #       }
-      class CreateCustomerGatewayRequest < Aws::Structure.new(
+      class CreateCustomerGatewayRequest < Struct.new(
         :dry_run,
         :type,
         :public_ip,
         :bgp_asn)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1885,8 +2013,10 @@ module Aws
       end
 
       # Contains the output of CreateCustomerGateway.
-      class CreateCustomerGatewayResult < Aws::Structure.new(
+      class CreateCustomerGatewayResult < Struct.new(
         :customer_gateway)
+
+        include Aws::Structure
 
         # @!attribute [rw] customer_gateway
         #   Information about the customer gateway.
@@ -1907,9 +2037,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDhcpOptionsRequest < Aws::Structure.new(
+      class CreateDhcpOptionsRequest < Struct.new(
         :dry_run,
         :dhcp_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -1925,8 +2057,10 @@ module Aws
       end
 
       # Contains the output of CreateDhcpOptions.
-      class CreateDhcpOptionsResult < Aws::Structure.new(
+      class CreateDhcpOptionsResult < Struct.new(
         :dhcp_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] dhcp_options
         #   A set of DHCP options.
@@ -1946,13 +2080,15 @@ module Aws
       #         deliver_logs_permission_arn: "String", # required
       #         client_token: "String",
       #       }
-      class CreateFlowLogsRequest < Aws::Structure.new(
+      class CreateFlowLogsRequest < Struct.new(
         :resource_ids,
         :resource_type,
         :traffic_type,
         :log_group_name,
         :deliver_logs_permission_arn,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_ids
         #   One or more subnet, network interface, or VPC IDs.
@@ -1990,10 +2126,12 @@ module Aws
       end
 
       # Contains the output of CreateFlowLogs.
-      class CreateFlowLogsResult < Aws::Structure.new(
+      class CreateFlowLogsResult < Struct.new(
         :flow_log_ids,
         :client_token,
         :unsuccessful)
+
+        include Aws::Structure
 
         # @!attribute [rw] flow_log_ids
         #   The IDs of the flow logs.
@@ -2037,13 +2175,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateImageRequest < Aws::Structure.new(
+      class CreateImageRequest < Struct.new(
         :dry_run,
         :instance_id,
         :name,
         :description,
         :no_reboot,
         :block_device_mappings)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2083,8 +2223,10 @@ module Aws
       end
 
       # Contains the output of CreateImage.
-      class CreateImageResult < Aws::Structure.new(
+      class CreateImageResult < Struct.new(
         :image_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the new AMI.
@@ -2107,11 +2249,13 @@ module Aws
       #           s3_prefix: "String",
       #         },
       #       }
-      class CreateInstanceExportTaskRequest < Aws::Structure.new(
+      class CreateInstanceExportTaskRequest < Struct.new(
         :description,
         :instance_id,
         :target_environment,
         :export_to_s3_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] description
         #   A description for the conversion task or the resource being
@@ -2133,8 +2277,10 @@ module Aws
       end
 
       # Contains the output for CreateInstanceExportTask.
-      class CreateInstanceExportTaskResult < Aws::Structure.new(
+      class CreateInstanceExportTaskResult < Struct.new(
         :export_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_task
         #   Information about the instance export task.
@@ -2149,8 +2295,10 @@ module Aws
       #       {
       #         dry_run: false,
       #       }
-      class CreateInternetGatewayRequest < Aws::Structure.new(
+      class CreateInternetGatewayRequest < Struct.new(
         :dry_run)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2162,8 +2310,10 @@ module Aws
       end
 
       # Contains the output of CreateInternetGateway.
-      class CreateInternetGatewayResult < Aws::Structure.new(
+      class CreateInternetGatewayResult < Struct.new(
         :internet_gateway)
+
+        include Aws::Structure
 
         # @!attribute [rw] internet_gateway
         #   Information about the Internet gateway.
@@ -2179,9 +2329,11 @@ module Aws
       #         dry_run: false,
       #         key_name: "String", # required
       #       }
-      class CreateKeyPairRequest < Aws::Structure.new(
+      class CreateKeyPairRequest < Struct.new(
         :dry_run,
         :key_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2207,10 +2359,12 @@ module Aws
       #         allocation_id: "String", # required
       #         client_token: "String",
       #       }
-      class CreateNatGatewayRequest < Aws::Structure.new(
+      class CreateNatGatewayRequest < Struct.new(
         :subnet_id,
         :allocation_id,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_id
         #   The subnet in which to create the NAT gateway.
@@ -2237,9 +2391,11 @@ module Aws
       end
 
       # Contains the output of CreateNatGateway.
-      class CreateNatGatewayResult < Aws::Structure.new(
+      class CreateNatGatewayResult < Struct.new(
         :nat_gateway,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] nat_gateway
         #   Information about the NAT gateway.
@@ -2274,7 +2430,7 @@ module Aws
       #           to: 1,
       #         },
       #       }
-      class CreateNetworkAclEntryRequest < Aws::Structure.new(
+      class CreateNetworkAclEntryRequest < Struct.new(
         :dry_run,
         :network_acl_id,
         :rule_number,
@@ -2284,6 +2440,8 @@ module Aws
         :cidr_block,
         :icmp_type_code,
         :port_range)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2342,9 +2500,11 @@ module Aws
       #         dry_run: false,
       #         vpc_id: "String", # required
       #       }
-      class CreateNetworkAclRequest < Aws::Structure.new(
+      class CreateNetworkAclRequest < Struct.new(
         :dry_run,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2360,8 +2520,10 @@ module Aws
       end
 
       # Contains the output of CreateNetworkAcl.
-      class CreateNetworkAclResult < Aws::Structure.new(
+      class CreateNetworkAclResult < Struct.new(
         :network_acl)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_acl
         #   Information about the network ACL.
@@ -2387,7 +2549,7 @@ module Aws
       #         secondary_private_ip_address_count: 1,
       #         dry_run: false,
       #       }
-      class CreateNetworkInterfaceRequest < Aws::Structure.new(
+      class CreateNetworkInterfaceRequest < Struct.new(
         :subnet_id,
         :description,
         :private_ip_address,
@@ -2395,6 +2557,8 @@ module Aws
         :private_ip_addresses,
         :secondary_private_ip_address_count,
         :dry_run)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_id
         #   The ID of the subnet to associate with the network interface.
@@ -2447,8 +2611,10 @@ module Aws
       end
 
       # Contains the output of CreateNetworkInterface.
-      class CreateNetworkInterfaceResult < Aws::Structure.new(
+      class CreateNetworkInterfaceResult < Struct.new(
         :network_interface)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface
         #   Information about the network interface.
@@ -2465,10 +2631,12 @@ module Aws
       #         group_name: "String", # required
       #         strategy: "cluster", # required, accepts cluster
       #       }
-      class CreatePlacementGroupRequest < Aws::Structure.new(
+      class CreatePlacementGroupRequest < Struct.new(
         :dry_run,
         :group_name,
         :strategy)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2505,11 +2673,13 @@ module Aws
       #         ],
       #         client_token: "String", # required
       #       }
-      class CreateReservedInstancesListingRequest < Aws::Structure.new(
+      class CreateReservedInstancesListingRequest < Struct.new(
         :reserved_instances_id,
         :instance_count,
         :price_schedules,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_id
         #   The ID of the active Reserved Instance.
@@ -2540,8 +2710,10 @@ module Aws
       end
 
       # Contains the output of CreateReservedInstancesListing.
-      class CreateReservedInstancesListingResult < Aws::Structure.new(
+      class CreateReservedInstancesListingResult < Struct.new(
         :reserved_instances_listings)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_listings
         #   Information about the Reserved Instance listing.
@@ -2563,7 +2735,7 @@ module Aws
       #         vpc_peering_connection_id: "String",
       #         nat_gateway_id: "String",
       #       }
-      class CreateRouteRequest < Aws::Structure.new(
+      class CreateRouteRequest < Struct.new(
         :dry_run,
         :route_table_id,
         :destination_cidr_block,
@@ -2572,6 +2744,8 @@ module Aws
         :network_interface_id,
         :vpc_peering_connection_id,
         :nat_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2615,8 +2789,10 @@ module Aws
       end
 
       # Contains the output of CreateRoute.
-      class CreateRouteResult < Aws::Structure.new(
+      class CreateRouteResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -2633,9 +2809,11 @@ module Aws
       #         dry_run: false,
       #         vpc_id: "String", # required
       #       }
-      class CreateRouteTableRequest < Aws::Structure.new(
+      class CreateRouteTableRequest < Struct.new(
         :dry_run,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2651,8 +2829,10 @@ module Aws
       end
 
       # Contains the output of CreateRouteTable.
-      class CreateRouteTableResult < Aws::Structure.new(
+      class CreateRouteTableResult < Struct.new(
         :route_table)
+
+        include Aws::Structure
 
         # @!attribute [rw] route_table
         #   Information about the route table.
@@ -2670,11 +2850,13 @@ module Aws
       #         description: "String", # required
       #         vpc_id: "String",
       #       }
-      class CreateSecurityGroupRequest < Aws::Structure.new(
+      class CreateSecurityGroupRequest < Struct.new(
         :dry_run,
         :group_name,
         :description,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2712,8 +2894,10 @@ module Aws
       end
 
       # Contains the output of CreateSecurityGroup.
-      class CreateSecurityGroupResult < Aws::Structure.new(
+      class CreateSecurityGroupResult < Struct.new(
         :group_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_id
         #   The ID of the security group.
@@ -2730,10 +2914,12 @@ module Aws
       #         volume_id: "String", # required
       #         description: "String",
       #       }
-      class CreateSnapshotRequest < Aws::Structure.new(
+      class CreateSnapshotRequest < Struct.new(
         :dry_run,
         :volume_id,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2761,10 +2947,12 @@ module Aws
       #         bucket: "String", # required
       #         prefix: "String",
       #       }
-      class CreateSpotDatafeedSubscriptionRequest < Aws::Structure.new(
+      class CreateSpotDatafeedSubscriptionRequest < Struct.new(
         :dry_run,
         :bucket,
         :prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2784,8 +2972,10 @@ module Aws
       end
 
       # Contains the output of CreateSpotDatafeedSubscription.
-      class CreateSpotDatafeedSubscriptionResult < Aws::Structure.new(
+      class CreateSpotDatafeedSubscriptionResult < Struct.new(
         :spot_datafeed_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_datafeed_subscription
         #   The Spot instance data feed subscription.
@@ -2803,11 +2993,13 @@ module Aws
       #         cidr_block: "String", # required
       #         availability_zone: "String",
       #       }
-      class CreateSubnetRequest < Aws::Structure.new(
+      class CreateSubnetRequest < Struct.new(
         :dry_run,
         :vpc_id,
         :cidr_block,
         :availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2836,8 +3028,10 @@ module Aws
       end
 
       # Contains the output of CreateSubnet.
-      class CreateSubnetResult < Aws::Structure.new(
+      class CreateSubnetResult < Struct.new(
         :subnet)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet
         #   Information about the subnet.
@@ -2859,10 +3053,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateTagsRequest < Aws::Structure.new(
+      class CreateTagsRequest < Struct.new(
         :dry_run,
         :resources,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -2892,9 +3088,11 @@ module Aws
       #         user_id: "String",
       #         group: "all", # accepts all
       #       }
-      class CreateVolumePermission < Aws::Structure.new(
+      class CreateVolumePermission < Struct.new(
         :user_id,
         :group)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_id
         #   The specific AWS account ID that is to be added or removed from a
@@ -2926,9 +3124,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateVolumePermissionModifications < Aws::Structure.new(
+      class CreateVolumePermissionModifications < Struct.new(
         :add,
         :remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] add
         #   Adds a specific AWS account ID or group to a volume\'s list of
@@ -2956,7 +3156,7 @@ module Aws
       #         encrypted: false,
       #         kms_key_id: "String",
       #       }
-      class CreateVolumeRequest < Aws::Structure.new(
+      class CreateVolumeRequest < Struct.new(
         :dry_run,
         :size,
         :snapshot_id,
@@ -2965,6 +3165,8 @@ module Aws
         :iops,
         :encrypted,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3052,13 +3254,15 @@ module Aws
       #         route_table_ids: ["String"],
       #         client_token: "String",
       #       }
-      class CreateVpcEndpointRequest < Aws::Structure.new(
+      class CreateVpcEndpointRequest < Struct.new(
         :dry_run,
         :vpc_id,
         :service_name,
         :policy_document,
         :route_table_ids,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3101,9 +3305,11 @@ module Aws
       end
 
       # Contains the output of CreateVpcEndpoint.
-      class CreateVpcEndpointResult < Aws::Structure.new(
+      class CreateVpcEndpointResult < Struct.new(
         :vpc_endpoint,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_endpoint
         #   Information about the endpoint.
@@ -3126,11 +3332,13 @@ module Aws
       #         peer_vpc_id: "String",
       #         peer_owner_id: "String",
       #       }
-      class CreateVpcPeeringConnectionRequest < Aws::Structure.new(
+      class CreateVpcPeeringConnectionRequest < Struct.new(
         :dry_run,
         :vpc_id,
         :peer_vpc_id,
         :peer_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3157,8 +3365,10 @@ module Aws
       end
 
       # Contains the output of CreateVpcPeeringConnection.
-      class CreateVpcPeeringConnectionResult < Aws::Structure.new(
+      class CreateVpcPeeringConnectionResult < Struct.new(
         :vpc_peering_connection)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_peering_connection
         #   Information about the VPC peering connection.
@@ -3175,10 +3385,12 @@ module Aws
       #         cidr_block: "String", # required
       #         instance_tenancy: "default", # accepts default, dedicated, host
       #       }
-      class CreateVpcRequest < Aws::Structure.new(
+      class CreateVpcRequest < Struct.new(
         :dry_run,
         :cidr_block,
         :instance_tenancy)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3209,8 +3421,10 @@ module Aws
       end
 
       # Contains the output of CreateVpc.
-      class CreateVpcResult < Aws::Structure.new(
+      class CreateVpcResult < Struct.new(
         :vpc)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc
         #   Information about the VPC.
@@ -3231,12 +3445,14 @@ module Aws
       #           static_routes_only: false,
       #         },
       #       }
-      class CreateVpnConnectionRequest < Aws::Structure.new(
+      class CreateVpnConnectionRequest < Struct.new(
         :dry_run,
         :type,
         :customer_gateway_id,
         :vpn_gateway_id,
         :options)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3268,8 +3484,10 @@ module Aws
       end
 
       # Contains the output of CreateVpnConnection.
-      class CreateVpnConnectionResult < Aws::Structure.new(
+      class CreateVpnConnectionResult < Struct.new(
         :vpn_connection)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_connection
         #   Information about the VPN connection.
@@ -3285,9 +3503,11 @@ module Aws
       #         vpn_connection_id: "String", # required
       #         destination_cidr_block: "String", # required
       #       }
-      class CreateVpnConnectionRouteRequest < Aws::Structure.new(
+      class CreateVpnConnectionRouteRequest < Struct.new(
         :vpn_connection_id,
         :destination_cidr_block)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_connection_id
         #   The ID of the VPN connection.
@@ -3309,10 +3529,12 @@ module Aws
       #         type: "ipsec.1", # required, accepts ipsec.1
       #         availability_zone: "String",
       #       }
-      class CreateVpnGatewayRequest < Aws::Structure.new(
+      class CreateVpnGatewayRequest < Struct.new(
         :dry_run,
         :type,
         :availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3332,8 +3554,10 @@ module Aws
       end
 
       # Contains the output of CreateVpnGateway.
-      class CreateVpnGatewayResult < Aws::Structure.new(
+      class CreateVpnGatewayResult < Struct.new(
         :vpn_gateway)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_gateway
         #   Information about the virtual private gateway.
@@ -3342,13 +3566,15 @@ module Aws
       end
 
       # Describes a customer gateway.
-      class CustomerGateway < Aws::Structure.new(
+      class CustomerGateway < Struct.new(
         :customer_gateway_id,
         :state,
         :type,
         :ip_address,
         :bgp_asn,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] customer_gateway_id
         #   The ID of the customer gateway.
@@ -3388,9 +3614,11 @@ module Aws
       #         dry_run: false,
       #         customer_gateway_id: "String", # required
       #       }
-      class DeleteCustomerGatewayRequest < Aws::Structure.new(
+      class DeleteCustomerGatewayRequest < Struct.new(
         :dry_run,
         :customer_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3413,9 +3641,11 @@ module Aws
       #         dry_run: false,
       #         dhcp_options_id: "String", # required
       #       }
-      class DeleteDhcpOptionsRequest < Aws::Structure.new(
+      class DeleteDhcpOptionsRequest < Struct.new(
         :dry_run,
         :dhcp_options_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3437,8 +3667,10 @@ module Aws
       #       {
       #         flow_log_ids: ["String"], # required
       #       }
-      class DeleteFlowLogsRequest < Aws::Structure.new(
+      class DeleteFlowLogsRequest < Struct.new(
         :flow_log_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] flow_log_ids
         #   One or more flow log IDs.
@@ -3447,8 +3679,10 @@ module Aws
       end
 
       # Contains the output of DeleteFlowLogs.
-      class DeleteFlowLogsResult < Aws::Structure.new(
+      class DeleteFlowLogsResult < Struct.new(
         :unsuccessful)
+
+        include Aws::Structure
 
         # @!attribute [rw] unsuccessful
         #   Information about the flow logs that could not be deleted
@@ -3465,9 +3699,11 @@ module Aws
       #         dry_run: false,
       #         internet_gateway_id: "String", # required
       #       }
-      class DeleteInternetGatewayRequest < Aws::Structure.new(
+      class DeleteInternetGatewayRequest < Struct.new(
         :dry_run,
         :internet_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3490,9 +3726,11 @@ module Aws
       #         dry_run: false,
       #         key_name: "String", # required
       #       }
-      class DeleteKeyPairRequest < Aws::Structure.new(
+      class DeleteKeyPairRequest < Struct.new(
         :dry_run,
         :key_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3514,8 +3752,10 @@ module Aws
       #       {
       #         nat_gateway_id: "String", # required
       #       }
-      class DeleteNatGatewayRequest < Aws::Structure.new(
+      class DeleteNatGatewayRequest < Struct.new(
         :nat_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] nat_gateway_id
         #   The ID of the NAT gateway.
@@ -3524,8 +3764,10 @@ module Aws
       end
 
       # Contains the output of DeleteNatGateway.
-      class DeleteNatGatewayResult < Aws::Structure.new(
+      class DeleteNatGatewayResult < Struct.new(
         :nat_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] nat_gateway_id
         #   The ID of the NAT gateway.
@@ -3543,11 +3785,13 @@ module Aws
       #         rule_number: 1, # required
       #         egress: false, # required
       #       }
-      class DeleteNetworkAclEntryRequest < Aws::Structure.new(
+      class DeleteNetworkAclEntryRequest < Struct.new(
         :dry_run,
         :network_acl_id,
         :rule_number,
         :egress)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3578,9 +3822,11 @@ module Aws
       #         dry_run: false,
       #         network_acl_id: "String", # required
       #       }
-      class DeleteNetworkAclRequest < Aws::Structure.new(
+      class DeleteNetworkAclRequest < Struct.new(
         :dry_run,
         :network_acl_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3603,9 +3849,11 @@ module Aws
       #         dry_run: false,
       #         network_interface_id: "String", # required
       #       }
-      class DeleteNetworkInterfaceRequest < Aws::Structure.new(
+      class DeleteNetworkInterfaceRequest < Struct.new(
         :dry_run,
         :network_interface_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3628,9 +3876,11 @@ module Aws
       #         dry_run: false,
       #         group_name: "String", # required
       #       }
-      class DeletePlacementGroupRequest < Aws::Structure.new(
+      class DeletePlacementGroupRequest < Struct.new(
         :dry_run,
         :group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3654,10 +3904,12 @@ module Aws
       #         route_table_id: "String", # required
       #         destination_cidr_block: "String", # required
       #       }
-      class DeleteRouteRequest < Aws::Structure.new(
+      class DeleteRouteRequest < Struct.new(
         :dry_run,
         :route_table_id,
         :destination_cidr_block)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3685,9 +3937,11 @@ module Aws
       #         dry_run: false,
       #         route_table_id: "String", # required
       #       }
-      class DeleteRouteTableRequest < Aws::Structure.new(
+      class DeleteRouteTableRequest < Struct.new(
         :dry_run,
         :route_table_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3711,10 +3965,12 @@ module Aws
       #         group_name: "String",
       #         group_id: "String",
       #       }
-      class DeleteSecurityGroupRequest < Aws::Structure.new(
+      class DeleteSecurityGroupRequest < Struct.new(
         :dry_run,
         :group_name,
         :group_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3742,9 +3998,11 @@ module Aws
       #         dry_run: false,
       #         snapshot_id: "String", # required
       #       }
-      class DeleteSnapshotRequest < Aws::Structure.new(
+      class DeleteSnapshotRequest < Struct.new(
         :dry_run,
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3766,8 +4024,10 @@ module Aws
       #       {
       #         dry_run: false,
       #       }
-      class DeleteSpotDatafeedSubscriptionRequest < Aws::Structure.new(
+      class DeleteSpotDatafeedSubscriptionRequest < Struct.new(
         :dry_run)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3786,9 +4046,11 @@ module Aws
       #         dry_run: false,
       #         subnet_id: "String", # required
       #       }
-      class DeleteSubnetRequest < Aws::Structure.new(
+      class DeleteSubnetRequest < Struct.new(
         :dry_run,
         :subnet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3817,10 +4079,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DeleteTagsRequest < Aws::Structure.new(
+      class DeleteTagsRequest < Struct.new(
         :dry_run,
         :resources,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3851,9 +4115,11 @@ module Aws
       #         dry_run: false,
       #         volume_id: "String", # required
       #       }
-      class DeleteVolumeRequest < Aws::Structure.new(
+      class DeleteVolumeRequest < Struct.new(
         :dry_run,
         :volume_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3876,9 +4142,11 @@ module Aws
       #         dry_run: false,
       #         vpc_endpoint_ids: ["String"], # required
       #       }
-      class DeleteVpcEndpointsRequest < Aws::Structure.new(
+      class DeleteVpcEndpointsRequest < Struct.new(
         :dry_run,
         :vpc_endpoint_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3894,8 +4162,10 @@ module Aws
       end
 
       # Contains the output of DeleteVpcEndpoints.
-      class DeleteVpcEndpointsResult < Aws::Structure.new(
+      class DeleteVpcEndpointsResult < Struct.new(
         :unsuccessful)
+
+        include Aws::Structure
 
         # @!attribute [rw] unsuccessful
         #   Information about the endpoints that were not successfully deleted.
@@ -3911,9 +4181,11 @@ module Aws
       #         dry_run: false,
       #         vpc_peering_connection_id: "String", # required
       #       }
-      class DeleteVpcPeeringConnectionRequest < Aws::Structure.new(
+      class DeleteVpcPeeringConnectionRequest < Struct.new(
         :dry_run,
         :vpc_peering_connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3929,8 +4201,10 @@ module Aws
       end
 
       # Contains the output of DeleteVpcPeeringConnection.
-      class DeleteVpcPeeringConnectionResult < Aws::Structure.new(
+      class DeleteVpcPeeringConnectionResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -3947,9 +4221,11 @@ module Aws
       #         dry_run: false,
       #         vpc_id: "String", # required
       #       }
-      class DeleteVpcRequest < Aws::Structure.new(
+      class DeleteVpcRequest < Struct.new(
         :dry_run,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3972,9 +4248,11 @@ module Aws
       #         dry_run: false,
       #         vpn_connection_id: "String", # required
       #       }
-      class DeleteVpnConnectionRequest < Aws::Structure.new(
+      class DeleteVpnConnectionRequest < Struct.new(
         :dry_run,
         :vpn_connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -3997,9 +4275,11 @@ module Aws
       #         vpn_connection_id: "String", # required
       #         destination_cidr_block: "String", # required
       #       }
-      class DeleteVpnConnectionRouteRequest < Aws::Structure.new(
+      class DeleteVpnConnectionRouteRequest < Struct.new(
         :vpn_connection_id,
         :destination_cidr_block)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_connection_id
         #   The ID of the VPN connection.
@@ -4020,9 +4300,11 @@ module Aws
       #         dry_run: false,
       #         vpn_gateway_id: "String", # required
       #       }
-      class DeleteVpnGatewayRequest < Aws::Structure.new(
+      class DeleteVpnGatewayRequest < Struct.new(
         :dry_run,
         :vpn_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4045,9 +4327,11 @@ module Aws
       #         dry_run: false,
       #         image_id: "String", # required
       #       }
-      class DeregisterImageRequest < Aws::Structure.new(
+      class DeregisterImageRequest < Struct.new(
         :dry_run,
         :image_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4070,9 +4354,11 @@ module Aws
       #         dry_run: false,
       #         attribute_names: ["supported-platforms"], # accepts supported-platforms, default-vpc
       #       }
-      class DescribeAccountAttributesRequest < Aws::Structure.new(
+      class DescribeAccountAttributesRequest < Struct.new(
         :dry_run,
         :attribute_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4088,8 +4374,10 @@ module Aws
       end
 
       # Contains the output of DescribeAccountAttributes.
-      class DescribeAccountAttributesResult < Aws::Structure.new(
+      class DescribeAccountAttributesResult < Struct.new(
         :account_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_attributes
         #   Information about one or more account attributes.
@@ -4112,11 +4400,13 @@ module Aws
       #         ],
       #         allocation_ids: ["String"],
       #       }
-      class DescribeAddressesRequest < Aws::Structure.new(
+      class DescribeAddressesRequest < Struct.new(
         :dry_run,
         :public_ips,
         :filters,
         :allocation_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4164,8 +4454,10 @@ module Aws
       end
 
       # Contains the output of DescribeAddresses.
-      class DescribeAddressesResult < Aws::Structure.new(
+      class DescribeAddressesResult < Struct.new(
         :addresses)
+
+        include Aws::Structure
 
         # @!attribute [rw] addresses
         #   Information about one or more Elastic IP addresses.
@@ -4187,10 +4479,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeAvailabilityZonesRequest < Aws::Structure.new(
+      class DescribeAvailabilityZonesRequest < Struct.new(
         :dry_run,
         :zone_names,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4221,8 +4515,10 @@ module Aws
       end
 
       # Contains the output of DescribeAvailabiltyZones.
-      class DescribeAvailabilityZonesResult < Aws::Structure.new(
+      class DescribeAvailabilityZonesResult < Struct.new(
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   Information about one or more Availability Zones.
@@ -4244,10 +4540,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeBundleTasksRequest < Aws::Structure.new(
+      class DescribeBundleTasksRequest < Struct.new(
         :dry_run,
         :bundle_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4293,8 +4591,10 @@ module Aws
       end
 
       # Contains the output of DescribeBundleTasks.
-      class DescribeBundleTasksResult < Aws::Structure.new(
+      class DescribeBundleTasksResult < Struct.new(
         :bundle_tasks)
+
+        include Aws::Structure
 
         # @!attribute [rw] bundle_tasks
         #   Information about one or more bundle tasks.
@@ -4318,12 +4618,14 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeClassicLinkInstancesRequest < Aws::Structure.new(
+      class DescribeClassicLinkInstancesRequest < Struct.new(
         :dry_run,
         :instance_ids,
         :filters,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4382,9 +4684,11 @@ module Aws
       end
 
       # Contains the output of DescribeClassicLinkInstances.
-      class DescribeClassicLinkInstancesResult < Aws::Structure.new(
+      class DescribeClassicLinkInstancesResult < Struct.new(
         :instances,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances
         #   Information about one or more linked EC2-Classic instances.
@@ -4411,10 +4715,12 @@ module Aws
       #         ],
       #         conversion_task_ids: ["String"],
       #       }
-      class DescribeConversionTasksRequest < Aws::Structure.new(
+      class DescribeConversionTasksRequest < Struct.new(
         :dry_run,
         :filters,
         :conversion_task_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4434,8 +4740,10 @@ module Aws
       end
 
       # Contains the output for DescribeConversionTasks.
-      class DescribeConversionTasksResult < Aws::Structure.new(
+      class DescribeConversionTasksResult < Struct.new(
         :conversion_tasks)
+
+        include Aws::Structure
 
         # @!attribute [rw] conversion_tasks
         #   Information about the conversion tasks.
@@ -4457,10 +4765,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeCustomerGatewaysRequest < Aws::Structure.new(
+      class DescribeCustomerGatewaysRequest < Struct.new(
         :dry_run,
         :customer_gateway_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4511,8 +4821,10 @@ module Aws
       end
 
       # Contains the output of DescribeCustomerGateways.
-      class DescribeCustomerGatewaysResult < Aws::Structure.new(
+      class DescribeCustomerGatewaysResult < Struct.new(
         :customer_gateways)
+
+        include Aws::Structure
 
         # @!attribute [rw] customer_gateways
         #   Information about one or more customer gateways.
@@ -4534,10 +4846,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeDhcpOptionsRequest < Aws::Structure.new(
+      class DescribeDhcpOptionsRequest < Struct.new(
         :dry_run,
         :dhcp_options_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -4581,8 +4895,10 @@ module Aws
       end
 
       # Contains the output of DescribeDhcpOptions.
-      class DescribeDhcpOptionsResult < Aws::Structure.new(
+      class DescribeDhcpOptionsResult < Struct.new(
         :dhcp_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] dhcp_options
         #   Information about one or more DHCP options sets.
@@ -4597,8 +4913,10 @@ module Aws
       #       {
       #         export_task_ids: ["String"],
       #       }
-      class DescribeExportTasksRequest < Aws::Structure.new(
+      class DescribeExportTasksRequest < Struct.new(
         :export_task_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_task_ids
         #   One or more export task IDs.
@@ -4607,8 +4925,10 @@ module Aws
       end
 
       # Contains the output for DescribeExportTasks.
-      class DescribeExportTasksResult < Aws::Structure.new(
+      class DescribeExportTasksResult < Struct.new(
         :export_tasks)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_tasks
         #   Information about the export tasks.
@@ -4631,11 +4951,13 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeFlowLogsRequest < Aws::Structure.new(
+      class DescribeFlowLogsRequest < Struct.new(
         :flow_log_ids,
         :filter,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] flow_log_ids
         #   One or more flow log IDs.
@@ -4673,9 +4995,11 @@ module Aws
       end
 
       # Contains the output of DescribeFlowLogs.
-      class DescribeFlowLogsResult < Aws::Structure.new(
+      class DescribeFlowLogsResult < Struct.new(
         :flow_logs,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] flow_logs
         #   Information about the flow logs.
@@ -4704,13 +5028,15 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeHostReservationOfferingsRequest < Aws::Structure.new(
+      class DescribeHostReservationOfferingsRequest < Struct.new(
         :offering_id,
         :min_duration,
         :max_duration,
         :filter,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_id
         #   The ID of the reservation offering.
@@ -4758,9 +5084,11 @@ module Aws
 
       end
 
-      class DescribeHostReservationOfferingsResult < Aws::Structure.new(
+      class DescribeHostReservationOfferingsResult < Struct.new(
         :offering_set,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_set
         #   Information about the offerings.
@@ -4787,11 +5115,13 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeHostReservationsRequest < Aws::Structure.new(
+      class DescribeHostReservationsRequest < Struct.new(
         :host_reservation_id_set,
         :filter,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_reservation_id_set
         #   One or more host reservation IDs.
@@ -4823,9 +5153,11 @@ module Aws
 
       end
 
-      class DescribeHostReservationsResult < Aws::Structure.new(
+      class DescribeHostReservationsResult < Struct.new(
         :host_reservation_set,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_reservation_set
         #   Details about the reservation\'s configuration.
@@ -4853,11 +5185,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeHostsRequest < Aws::Structure.new(
+      class DescribeHostsRequest < Struct.new(
         :host_ids,
         :next_token,
         :max_results,
         :filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_ids
         #   The IDs of the Dedicated Hosts. The IDs are used for targeted
@@ -4902,9 +5236,11 @@ module Aws
       end
 
       # Contains the output of DescribeHosts.
-      class DescribeHostsResult < Aws::Structure.new(
+      class DescribeHostsResult < Struct.new(
         :hosts,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosts
         #   Information about the Dedicated Hosts.
@@ -4924,8 +5260,10 @@ module Aws
       #       {
       #         resource: "String",
       #       }
-      class DescribeIdFormatRequest < Aws::Structure.new(
+      class DescribeIdFormatRequest < Struct.new(
         :resource)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
@@ -4935,8 +5273,10 @@ module Aws
       end
 
       # Contains the output of DescribeIdFormat.
-      class DescribeIdFormatResult < Aws::Structure.new(
+      class DescribeIdFormatResult < Struct.new(
         :statuses)
+
+        include Aws::Structure
 
         # @!attribute [rw] statuses
         #   Information about the ID format for the resource.
@@ -4952,9 +5292,11 @@ module Aws
       #         resource: "String",
       #         principal_arn: "String", # required
       #       }
-      class DescribeIdentityIdFormatRequest < Aws::Structure.new(
+      class DescribeIdentityIdFormatRequest < Struct.new(
         :resource,
         :principal_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
@@ -4969,8 +5311,10 @@ module Aws
       end
 
       # Contains the output of DescribeIdentityIdFormat.
-      class DescribeIdentityIdFormatResult < Aws::Structure.new(
+      class DescribeIdentityIdFormatResult < Struct.new(
         :statuses)
+
+        include Aws::Structure
 
         # @!attribute [rw] statuses
         #   Information about the ID format for the resources.
@@ -4987,10 +5331,12 @@ module Aws
       #         image_id: "String", # required
       #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
       #       }
-      class DescribeImageAttributeRequest < Aws::Structure.new(
+      class DescribeImageAttributeRequest < Struct.new(
         :dry_run,
         :image_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5030,12 +5376,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeImagesRequest < Aws::Structure.new(
+      class DescribeImagesRequest < Struct.new(
         :dry_run,
         :image_ids,
         :owners,
         :executable_users,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5156,8 +5504,10 @@ module Aws
       end
 
       # Contains the output of DescribeImages.
-      class DescribeImagesResult < Aws::Structure.new(
+      class DescribeImagesResult < Struct.new(
         :images)
+
+        include Aws::Structure
 
         # @!attribute [rw] images
         #   Information about one or more images.
@@ -5181,12 +5531,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeImportImageTasksRequest < Aws::Structure.new(
+      class DescribeImportImageTasksRequest < Struct.new(
         :dry_run,
         :import_task_ids,
         :next_token,
         :max_results,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5217,9 +5569,11 @@ module Aws
       end
 
       # Contains the output for DescribeImportImageTasks.
-      class DescribeImportImageTasksResult < Aws::Structure.new(
+      class DescribeImportImageTasksResult < Struct.new(
         :import_image_tasks,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] import_image_tasks
         #   A list of zero or more import image tasks that are currently active
@@ -5249,12 +5603,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeImportSnapshotTasksRequest < Aws::Structure.new(
+      class DescribeImportSnapshotTasksRequest < Struct.new(
         :dry_run,
         :import_task_ids,
         :next_token,
         :max_results,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5284,9 +5640,11 @@ module Aws
       end
 
       # Contains the output for DescribeImportSnapshotTasks.
-      class DescribeImportSnapshotTasksResult < Aws::Structure.new(
+      class DescribeImportSnapshotTasksResult < Struct.new(
         :import_snapshot_tasks,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] import_snapshot_tasks
         #   A list of zero or more import snapshot tasks that are currently
@@ -5309,10 +5667,12 @@ module Aws
       #         instance_id: "String", # required
       #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
       #       }
-      class DescribeInstanceAttributeRequest < Aws::Structure.new(
+      class DescribeInstanceAttributeRequest < Struct.new(
         :dry_run,
         :instance_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5350,13 +5710,15 @@ module Aws
       #         max_results: 1,
       #         include_all_instances: false,
       #       }
-      class DescribeInstanceStatusRequest < Aws::Structure.new(
+      class DescribeInstanceStatusRequest < Struct.new(
         :dry_run,
         :instance_ids,
         :filters,
         :next_token,
         :max_results,
         :include_all_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5439,9 +5801,11 @@ module Aws
       end
 
       # Contains the output of DescribeInstanceStatus.
-      class DescribeInstanceStatusResult < Aws::Structure.new(
+      class DescribeInstanceStatusResult < Struct.new(
         :instance_statuses,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_statuses
         #   One or more instance status descriptions.
@@ -5470,12 +5834,14 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeInstancesRequest < Aws::Structure.new(
+      class DescribeInstancesRequest < Struct.new(
         :dry_run,
         :instance_ids,
         :filters,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5768,9 +6134,11 @@ module Aws
       end
 
       # Contains the output of DescribeInstances.
-      class DescribeInstancesResult < Aws::Structure.new(
+      class DescribeInstancesResult < Struct.new(
         :reservations,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] reservations
         #   Zero or more reservations.
@@ -5797,10 +6165,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeInternetGatewaysRequest < Aws::Structure.new(
+      class DescribeInternetGatewaysRequest < Struct.new(
         :dry_run,
         :internet_gateway_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5845,8 +6215,10 @@ module Aws
       end
 
       # Contains the output of DescribeInternetGateways.
-      class DescribeInternetGatewaysResult < Aws::Structure.new(
+      class DescribeInternetGatewaysResult < Struct.new(
         :internet_gateways)
+
+        include Aws::Structure
 
         # @!attribute [rw] internet_gateways
         #   Information about one or more Internet gateways.
@@ -5868,10 +6240,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeKeyPairsRequest < Aws::Structure.new(
+      class DescribeKeyPairsRequest < Struct.new(
         :dry_run,
         :key_names,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5897,8 +6271,10 @@ module Aws
       end
 
       # Contains the output of DescribeKeyPairs.
-      class DescribeKeyPairsResult < Aws::Structure.new(
+      class DescribeKeyPairsResult < Struct.new(
         :key_pairs)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_pairs
         #   Information about one or more key pairs.
@@ -5922,12 +6298,14 @@ module Aws
       #         ],
       #         max_results: 1,
       #       }
-      class DescribeMovingAddressesRequest < Aws::Structure.new(
+      class DescribeMovingAddressesRequest < Struct.new(
         :dry_run,
         :public_ips,
         :next_token,
         :filters,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -5966,9 +6344,11 @@ module Aws
       end
 
       # Contains the output of DescribeMovingAddresses.
-      class DescribeMovingAddressesResult < Aws::Structure.new(
+      class DescribeMovingAddressesResult < Struct.new(
         :moving_address_statuses,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] moving_address_statuses
         #   The status for each Elastic IP address.
@@ -5996,11 +6376,13 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeNatGatewaysRequest < Aws::Structure.new(
+      class DescribeNatGatewaysRequest < Struct.new(
         :nat_gateway_ids,
         :filter,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] nat_gateway_ids
         #   One or more NAT gateway IDs.
@@ -6036,9 +6418,11 @@ module Aws
       end
 
       # Contains the output of DescribeNatGateways.
-      class DescribeNatGatewaysResult < Aws::Structure.new(
+      class DescribeNatGatewaysResult < Struct.new(
         :nat_gateways,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] nat_gateways
         #   Information about the NAT gateways.
@@ -6065,10 +6449,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeNetworkAclsRequest < Aws::Structure.new(
+      class DescribeNetworkAclsRequest < Struct.new(
         :dry_run,
         :network_acl_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6145,8 +6531,10 @@ module Aws
       end
 
       # Contains the output of DescribeNetworkAcls.
-      class DescribeNetworkAclsResult < Aws::Structure.new(
+      class DescribeNetworkAclsResult < Struct.new(
         :network_acls)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_acls
         #   Information about one or more network ACLs.
@@ -6163,10 +6551,12 @@ module Aws
       #         network_interface_id: "String", # required
       #         attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
       #       }
-      class DescribeNetworkInterfaceAttributeRequest < Aws::Structure.new(
+      class DescribeNetworkInterfaceAttributeRequest < Struct.new(
         :dry_run,
         :network_interface_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6186,12 +6576,14 @@ module Aws
       end
 
       # Contains the output of DescribeNetworkInterfaceAttribute.
-      class DescribeNetworkInterfaceAttributeResult < Aws::Structure.new(
+      class DescribeNetworkInterfaceAttributeResult < Struct.new(
         :network_interface_id,
         :description,
         :source_dest_check,
         :groups,
         :attachment)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface_id
         #   The ID of the network interface.
@@ -6229,10 +6621,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeNetworkInterfacesRequest < Aws::Structure.new(
+      class DescribeNetworkInterfacesRequest < Struct.new(
         :dry_run,
         :network_interface_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6366,8 +6760,10 @@ module Aws
       end
 
       # Contains the output of DescribeNetworkInterfaces.
-      class DescribeNetworkInterfacesResult < Aws::Structure.new(
+      class DescribeNetworkInterfacesResult < Struct.new(
         :network_interfaces)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interfaces
         #   Information about one or more network interfaces.
@@ -6389,10 +6785,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribePlacementGroupsRequest < Aws::Structure.new(
+      class DescribePlacementGroupsRequest < Struct.new(
         :dry_run,
         :group_names,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6422,8 +6820,10 @@ module Aws
       end
 
       # Contains the output of DescribePlacementGroups.
-      class DescribePlacementGroupsResult < Aws::Structure.new(
+      class DescribePlacementGroupsResult < Struct.new(
         :placement_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] placement_groups
         #   One or more placement groups.
@@ -6447,12 +6847,14 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribePrefixListsRequest < Aws::Structure.new(
+      class DescribePrefixListsRequest < Struct.new(
         :dry_run,
         :prefix_list_ids,
         :filters,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6490,9 +6892,11 @@ module Aws
       end
 
       # Contains the output of DescribePrefixLists.
-      class DescribePrefixListsResult < Aws::Structure.new(
+      class DescribePrefixListsResult < Struct.new(
         :prefix_lists,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] prefix_lists
         #   All available prefix lists.
@@ -6519,10 +6923,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeRegionsRequest < Aws::Structure.new(
+      class DescribeRegionsRequest < Struct.new(
         :dry_run,
         :region_names,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6547,8 +6953,10 @@ module Aws
       end
 
       # Contains the output of DescribeRegions.
-      class DescribeRegionsResult < Aws::Structure.new(
+      class DescribeRegionsResult < Struct.new(
         :regions)
+
+        include Aws::Structure
 
         # @!attribute [rw] regions
         #   Information about one or more regions.
@@ -6570,10 +6978,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeReservedInstancesListingsRequest < Aws::Structure.new(
+      class DescribeReservedInstancesListingsRequest < Struct.new(
         :reserved_instances_id,
         :reserved_instances_listing_id,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_id
         #   One or more Reserved Instance IDs.
@@ -6600,8 +7010,10 @@ module Aws
       end
 
       # Contains the output of DescribeReservedInstancesListings.
-      class DescribeReservedInstancesListingsResult < Aws::Structure.new(
+      class DescribeReservedInstancesListingsResult < Struct.new(
         :reserved_instances_listings)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_listings
         #   Information about the Reserved Instance listing.
@@ -6623,10 +7035,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeReservedInstancesModificationsRequest < Aws::Structure.new(
+      class DescribeReservedInstancesModificationsRequest < Struct.new(
         :reserved_instances_modification_ids,
         :next_token,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_modification_ids
         #   IDs for the submitted modification request.
@@ -6684,9 +7098,11 @@ module Aws
       end
 
       # Contains the output of DescribeReservedInstancesModifications.
-      class DescribeReservedInstancesModificationsResult < Aws::Structure.new(
+      class DescribeReservedInstancesModificationsResult < Struct.new(
         :reserved_instances_modifications,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_modifications
         #   The Reserved Instance modification information.
@@ -6724,7 +7140,7 @@ module Aws
       #         max_duration: 1,
       #         max_instance_count: 1,
       #       }
-      class DescribeReservedInstancesOfferingsRequest < Aws::Structure.new(
+      class DescribeReservedInstancesOfferingsRequest < Struct.new(
         :dry_run,
         :reserved_instances_offering_ids,
         :instance_type,
@@ -6739,6 +7155,8 @@ module Aws
         :min_duration,
         :max_duration,
         :max_instance_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6865,9 +7283,11 @@ module Aws
       end
 
       # Contains the output of DescribeReservedInstancesOfferings.
-      class DescribeReservedInstancesOfferingsResult < Aws::Structure.new(
+      class DescribeReservedInstancesOfferingsResult < Struct.new(
         :reserved_instances_offerings,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_offerings
         #   A list of Reserved Instances offerings.
@@ -6895,11 +7315,13 @@ module Aws
       #         ],
       #         offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
       #       }
-      class DescribeReservedInstancesRequest < Aws::Structure.new(
+      class DescribeReservedInstancesRequest < Struct.new(
         :dry_run,
         :reserved_instances_ids,
         :filters,
         :offering_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -6981,8 +7403,10 @@ module Aws
       end
 
       # Contains the output for DescribeReservedInstances.
-      class DescribeReservedInstancesResult < Aws::Structure.new(
+      class DescribeReservedInstancesResult < Struct.new(
         :reserved_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances
         #   A list of Reserved Instances.
@@ -7004,10 +7428,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeRouteTablesRequest < Aws::Structure.new(
+      class DescribeRouteTablesRequest < Struct.new(
         :dry_run,
         :route_table_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7090,8 +7516,10 @@ module Aws
       end
 
       # Contains the output of DescribeRouteTables.
-      class DescribeRouteTablesResult < Aws::Structure.new(
+      class DescribeRouteTablesResult < Struct.new(
         :route_tables)
+
+        include Aws::Structure
 
         # @!attribute [rw] route_tables
         #   Information about one or more route tables.
@@ -7127,7 +7555,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeScheduledInstanceAvailabilityRequest < Aws::Structure.new(
+      class DescribeScheduledInstanceAvailabilityRequest < Struct.new(
         :dry_run,
         :recurrence,
         :first_slot_start_time_range,
@@ -7136,6 +7564,8 @@ module Aws
         :next_token,
         :max_results,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7192,9 +7622,11 @@ module Aws
       end
 
       # Contains the output of DescribeScheduledInstanceAvailability.
-      class DescribeScheduledInstanceAvailabilityResult < Aws::Structure.new(
+      class DescribeScheduledInstanceAvailabilityResult < Struct.new(
         :next_token,
         :scheduled_instance_availability_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The token required to retrieve the next set of results. This value
@@ -7227,13 +7659,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeScheduledInstancesRequest < Aws::Structure.new(
+      class DescribeScheduledInstancesRequest < Struct.new(
         :dry_run,
         :scheduled_instance_ids,
         :slot_start_time_range,
         :next_token,
         :max_results,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7278,9 +7712,11 @@ module Aws
       end
 
       # Contains the output of DescribeScheduledInstances.
-      class DescribeScheduledInstancesResult < Aws::Structure.new(
+      class DescribeScheduledInstancesResult < Struct.new(
         :next_token,
         :scheduled_instance_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The token required to retrieve the next set of results. This value
@@ -7300,9 +7736,11 @@ module Aws
       #         dry_run: false,
       #         group_id: ["String"], # required
       #       }
-      class DescribeSecurityGroupReferencesRequest < Aws::Structure.new(
+      class DescribeSecurityGroupReferencesRequest < Struct.new(
         :dry_run,
         :group_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the operation,
@@ -7317,8 +7755,10 @@ module Aws
 
       end
 
-      class DescribeSecurityGroupReferencesResult < Aws::Structure.new(
+      class DescribeSecurityGroupReferencesResult < Struct.new(
         :security_group_reference_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] security_group_reference_set
         #   Information about the VPCs with the referencing security groups.
@@ -7341,11 +7781,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeSecurityGroupsRequest < Aws::Structure.new(
+      class DescribeSecurityGroupsRequest < Struct.new(
         :dry_run,
         :group_names,
         :group_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7419,8 +7861,10 @@ module Aws
       end
 
       # Contains the output of DescribeSecurityGroups.
-      class DescribeSecurityGroupsResult < Aws::Structure.new(
+      class DescribeSecurityGroupsResult < Struct.new(
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] security_groups
         #   Information about one or more security groups.
@@ -7437,10 +7881,12 @@ module Aws
       #         snapshot_id: "String", # required
       #         attribute: "productCodes", # required, accepts productCodes, createVolumePermission
       #       }
-      class DescribeSnapshotAttributeRequest < Aws::Structure.new(
+      class DescribeSnapshotAttributeRequest < Struct.new(
         :dry_run,
         :snapshot_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7460,10 +7906,12 @@ module Aws
       end
 
       # Contains the output of DescribeSnapshotAttribute.
-      class DescribeSnapshotAttributeResult < Aws::Structure.new(
+      class DescribeSnapshotAttributeResult < Struct.new(
         :snapshot_id,
         :create_volume_permissions,
         :product_codes)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The ID of the EBS snapshot.
@@ -7497,7 +7945,7 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeSnapshotsRequest < Aws::Structure.new(
+      class DescribeSnapshotsRequest < Struct.new(
         :dry_run,
         :snapshot_ids,
         :owner_ids,
@@ -7505,6 +7953,8 @@ module Aws
         :filters,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7597,9 +8047,11 @@ module Aws
       end
 
       # Contains the output of DescribeSnapshots.
-      class DescribeSnapshotsResult < Aws::Structure.new(
+      class DescribeSnapshotsResult < Struct.new(
         :snapshots,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshots
         #   Information about the snapshots.
@@ -7622,8 +8074,10 @@ module Aws
       #       {
       #         dry_run: false,
       #       }
-      class DescribeSpotDatafeedSubscriptionRequest < Aws::Structure.new(
+      class DescribeSpotDatafeedSubscriptionRequest < Struct.new(
         :dry_run)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7635,8 +8089,10 @@ module Aws
       end
 
       # Contains the output of DescribeSpotDatafeedSubscription.
-      class DescribeSpotDatafeedSubscriptionResult < Aws::Structure.new(
+      class DescribeSpotDatafeedSubscriptionResult < Struct.new(
         :spot_datafeed_subscription)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_datafeed_subscription
         #   The Spot instance data feed subscription.
@@ -7654,11 +8110,13 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeSpotFleetInstancesRequest < Aws::Structure.new(
+      class DescribeSpotFleetInstancesRequest < Struct.new(
         :dry_run,
         :spot_fleet_request_id,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7685,10 +8143,12 @@ module Aws
       end
 
       # Contains the output of DescribeSpotFleetInstances.
-      class DescribeSpotFleetInstancesResponse < Aws::Structure.new(
+      class DescribeSpotFleetInstancesResponse < Struct.new(
         :spot_fleet_request_id,
         :active_instances,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -7718,13 +8178,15 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeSpotFleetRequestHistoryRequest < Aws::Structure.new(
+      class DescribeSpotFleetRequestHistoryRequest < Struct.new(
         :dry_run,
         :spot_fleet_request_id,
         :event_type,
         :start_time,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7761,12 +8223,14 @@ module Aws
       end
 
       # Contains the output of DescribeSpotFleetRequestHistory.
-      class DescribeSpotFleetRequestHistoryResponse < Aws::Structure.new(
+      class DescribeSpotFleetRequestHistoryResponse < Struct.new(
         :spot_fleet_request_id,
         :start_time,
         :last_evaluated_time,
         :history_records,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -7808,11 +8272,13 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeSpotFleetRequestsRequest < Aws::Structure.new(
+      class DescribeSpotFleetRequestsRequest < Struct.new(
         :dry_run,
         :spot_fleet_request_ids,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -7839,9 +8305,11 @@ module Aws
       end
 
       # Contains the output of DescribeSpotFleetRequests.
-      class DescribeSpotFleetRequestsResponse < Aws::Structure.new(
+      class DescribeSpotFleetRequestsResponse < Struct.new(
         :spot_fleet_request_configs,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_configs
         #   Information about the configuration of your Spot fleet.
@@ -7868,10 +8336,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeSpotInstanceRequestsRequest < Aws::Structure.new(
+      class DescribeSpotInstanceRequestsRequest < Struct.new(
         :dry_run,
         :spot_instance_request_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8014,8 +8484,10 @@ module Aws
       end
 
       # Contains the output of DescribeSpotInstanceRequests.
-      class DescribeSpotInstanceRequestsResult < Aws::Structure.new(
+      class DescribeSpotInstanceRequestsResult < Struct.new(
         :spot_instance_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_instance_requests
         #   One or more Spot instance requests.
@@ -8043,7 +8515,7 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeSpotPriceHistoryRequest < Aws::Structure.new(
+      class DescribeSpotPriceHistoryRequest < Struct.new(
         :dry_run,
         :start_time,
         :end_time,
@@ -8053,6 +8525,8 @@ module Aws
         :availability_zone,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8121,9 +8595,11 @@ module Aws
       end
 
       # Contains the output of DescribeSpotPriceHistory.
-      class DescribeSpotPriceHistoryResult < Aws::Structure.new(
+      class DescribeSpotPriceHistoryResult < Struct.new(
         :spot_price_history,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_price_history
         #   The historical Spot prices.
@@ -8145,11 +8621,13 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeStaleSecurityGroupsRequest < Aws::Structure.new(
+      class DescribeStaleSecurityGroupsRequest < Struct.new(
         :dry_run,
         :vpc_id,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the operation,
@@ -8175,9 +8653,11 @@ module Aws
 
       end
 
-      class DescribeStaleSecurityGroupsResult < Aws::Structure.new(
+      class DescribeStaleSecurityGroupsResult < Struct.new(
         :stale_security_group_set,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] stale_security_group_set
         #   Information about the stale security groups.
@@ -8204,10 +8684,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeSubnetsRequest < Aws::Structure.new(
+      class DescribeSubnetsRequest < Struct.new(
         :dry_run,
         :subnet_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8265,8 +8747,10 @@ module Aws
       end
 
       # Contains the output of DescribeSubnets.
-      class DescribeSubnetsResult < Aws::Structure.new(
+      class DescribeSubnetsResult < Struct.new(
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnets
         #   Information about one or more subnets.
@@ -8289,11 +8773,13 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeTagsRequest < Aws::Structure.new(
+      class DescribeTagsRequest < Struct.new(
         :dry_run,
         :filters,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8332,9 +8818,11 @@ module Aws
       end
 
       # Contains the output of DescribeTags.
-      class DescribeTagsResult < Aws::Structure.new(
+      class DescribeTagsResult < Struct.new(
         :tags,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   A list of tags.
@@ -8356,10 +8844,12 @@ module Aws
       #         volume_id: "String", # required
       #         attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
       #       }
-      class DescribeVolumeAttributeRequest < Aws::Structure.new(
+      class DescribeVolumeAttributeRequest < Struct.new(
         :dry_run,
         :volume_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8379,10 +8869,12 @@ module Aws
       end
 
       # Contains the output of DescribeVolumeAttribute.
-      class DescribeVolumeAttributeResult < Aws::Structure.new(
+      class DescribeVolumeAttributeResult < Struct.new(
         :volume_id,
         :auto_enable_io,
         :product_codes)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The ID of the volume.
@@ -8414,12 +8906,14 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeVolumeStatusRequest < Aws::Structure.new(
+      class DescribeVolumeStatusRequest < Struct.new(
         :dry_run,
         :volume_ids,
         :filters,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8493,9 +8987,11 @@ module Aws
       end
 
       # Contains the output of DescribeVolumeStatus.
-      class DescribeVolumeStatusResult < Aws::Structure.new(
+      class DescribeVolumeStatusResult < Struct.new(
         :volume_statuses,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_statuses
         #   A list of volumes.
@@ -8524,12 +9020,14 @@ module Aws
       #         next_token: "String",
       #         max_results: 1,
       #       }
-      class DescribeVolumesRequest < Aws::Structure.new(
+      class DescribeVolumesRequest < Struct.new(
         :dry_run,
         :volume_ids,
         :filters,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8622,9 +9120,11 @@ module Aws
       end
 
       # Contains the output of DescribeVolumes.
-      class DescribeVolumesResult < Aws::Structure.new(
+      class DescribeVolumesResult < Struct.new(
         :volumes,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] volumes
         #   Information about the volumes.
@@ -8649,10 +9149,12 @@ module Aws
       #         vpc_id: "String", # required
       #         attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames
       #       }
-      class DescribeVpcAttributeRequest < Aws::Structure.new(
+      class DescribeVpcAttributeRequest < Struct.new(
         :dry_run,
         :vpc_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8672,10 +9174,12 @@ module Aws
       end
 
       # Contains the output of DescribeVpcAttribute.
-      class DescribeVpcAttributeResult < Aws::Structure.new(
+      class DescribeVpcAttributeResult < Struct.new(
         :vpc_id,
         :enable_dns_support,
         :enable_dns_hostnames)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -8705,10 +9209,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class DescribeVpcClassicLinkDnsSupportRequest < Aws::Structure.new(
+      class DescribeVpcClassicLinkDnsSupportRequest < Struct.new(
         :vpc_ids,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_ids
         #   One or more VPC IDs.
@@ -8728,9 +9234,11 @@ module Aws
       end
 
       # Contains the output of DescribeVpcClassicLinkDnsSupport.
-      class DescribeVpcClassicLinkDnsSupportResult < Aws::Structure.new(
+      class DescribeVpcClassicLinkDnsSupportResult < Struct.new(
         :vpcs,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpcs
         #   Information about the ClassicLink DNS support status of the VPCs.
@@ -8756,10 +9264,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeVpcClassicLinkRequest < Aws::Structure.new(
+      class DescribeVpcClassicLinkRequest < Struct.new(
         :dry_run,
         :vpc_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8798,8 +9308,10 @@ module Aws
       end
 
       # Contains the output of DescribeVpcClassicLink.
-      class DescribeVpcClassicLinkResult < Aws::Structure.new(
+      class DescribeVpcClassicLinkResult < Struct.new(
         :vpcs)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpcs
         #   The ClassicLink status of one or more VPCs.
@@ -8816,10 +9328,12 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeVpcEndpointServicesRequest < Aws::Structure.new(
+      class DescribeVpcEndpointServicesRequest < Struct.new(
         :dry_run,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8845,9 +9359,11 @@ module Aws
       end
 
       # Contains the output of DescribeVpcEndpointServices.
-      class DescribeVpcEndpointServicesResult < Aws::Structure.new(
+      class DescribeVpcEndpointServicesResult < Struct.new(
         :service_names,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_names
         #   A list of supported AWS services.
@@ -8876,12 +9392,14 @@ module Aws
       #         max_results: 1,
       #         next_token: "String",
       #       }
-      class DescribeVpcEndpointsRequest < Aws::Structure.new(
+      class DescribeVpcEndpointsRequest < Struct.new(
         :dry_run,
         :vpc_endpoint_ids,
         :filters,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -8924,9 +9442,11 @@ module Aws
       end
 
       # Contains the output of DescribeVpcEndpoints.
-      class DescribeVpcEndpointsResult < Aws::Structure.new(
+      class DescribeVpcEndpointsResult < Struct.new(
         :vpc_endpoints,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_endpoints
         #   Information about the endpoints.
@@ -8953,10 +9473,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeVpcPeeringConnectionsRequest < Aws::Structure.new(
+      class DescribeVpcPeeringConnectionsRequest < Struct.new(
         :dry_run,
         :vpc_peering_connection_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9021,8 +9543,10 @@ module Aws
       end
 
       # Contains the output of DescribeVpcPeeringConnections.
-      class DescribeVpcPeeringConnectionsResult < Aws::Structure.new(
+      class DescribeVpcPeeringConnectionsResult < Struct.new(
         :vpc_peering_connections)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_peering_connections
         #   Information about the VPC peering connections.
@@ -9044,10 +9568,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeVpcsRequest < Aws::Structure.new(
+      class DescribeVpcsRequest < Struct.new(
         :dry_run,
         :vpc_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9097,8 +9623,10 @@ module Aws
       end
 
       # Contains the output of DescribeVpcs.
-      class DescribeVpcsResult < Aws::Structure.new(
+      class DescribeVpcsResult < Struct.new(
         :vpcs)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpcs
         #   Information about one or more VPCs.
@@ -9120,10 +9648,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeVpnConnectionsRequest < Aws::Structure.new(
+      class DescribeVpnConnectionsRequest < Struct.new(
         :dry_run,
         :vpn_connection_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9187,8 +9717,10 @@ module Aws
       end
 
       # Contains the output of DescribeVpnConnections.
-      class DescribeVpnConnectionsResult < Aws::Structure.new(
+      class DescribeVpnConnectionsResult < Struct.new(
         :vpn_connections)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_connections
         #   Information about one or more VPN connections.
@@ -9210,10 +9742,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeVpnGatewaysRequest < Aws::Structure.new(
+      class DescribeVpnGatewaysRequest < Struct.new(
         :dry_run,
         :vpn_gateway_ids,
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9267,8 +9801,10 @@ module Aws
       end
 
       # Contains the output of DescribeVpnGateways.
-      class DescribeVpnGatewaysResult < Aws::Structure.new(
+      class DescribeVpnGatewaysResult < Struct.new(
         :vpn_gateways)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_gateways
         #   Information about one or more virtual private gateways.
@@ -9285,10 +9821,12 @@ module Aws
       #         instance_id: "String", # required
       #         vpc_id: "String", # required
       #       }
-      class DetachClassicLinkVpcRequest < Aws::Structure.new(
+      class DetachClassicLinkVpcRequest < Struct.new(
         :dry_run,
         :instance_id,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9308,8 +9846,10 @@ module Aws
       end
 
       # Contains the output of DetachClassicLinkVpc.
-      class DetachClassicLinkVpcResult < Aws::Structure.new(
+      class DetachClassicLinkVpcResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -9327,10 +9867,12 @@ module Aws
       #         internet_gateway_id: "String", # required
       #         vpc_id: "String", # required
       #       }
-      class DetachInternetGatewayRequest < Aws::Structure.new(
+      class DetachInternetGatewayRequest < Struct.new(
         :dry_run,
         :internet_gateway_id,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9358,10 +9900,12 @@ module Aws
       #         attachment_id: "String", # required
       #         force: false,
       #       }
-      class DetachNetworkInterfaceRequest < Aws::Structure.new(
+      class DetachNetworkInterfaceRequest < Struct.new(
         :dry_run,
         :attachment_id,
         :force)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9391,12 +9935,14 @@ module Aws
       #         device: "String",
       #         force: false,
       #       }
-      class DetachVolumeRequest < Aws::Structure.new(
+      class DetachVolumeRequest < Struct.new(
         :dry_run,
         :volume_id,
         :instance_id,
         :device,
         :force)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9439,10 +9985,12 @@ module Aws
       #         vpn_gateway_id: "String", # required
       #         vpc_id: "String", # required
       #       }
-      class DetachVpnGatewayRequest < Aws::Structure.new(
+      class DetachVpnGatewayRequest < Struct.new(
         :dry_run,
         :vpn_gateway_id,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9462,9 +10010,11 @@ module Aws
       end
 
       # Describes a DHCP configuration option.
-      class DhcpConfiguration < Aws::Structure.new(
+      class DhcpConfiguration < Struct.new(
         :key,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of a DHCP option.
@@ -9477,10 +10027,12 @@ module Aws
       end
 
       # Describes a set of DHCP options.
-      class DhcpOptions < Aws::Structure.new(
+      class DhcpOptions < Struct.new(
         :dhcp_options_id,
         :dhcp_configurations,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] dhcp_options_id
         #   The ID of the set of DHCP options.
@@ -9504,9 +10056,11 @@ module Aws
       #         route_table_id: "String", # required
       #         gateway_id: "String", # required
       #       }
-      class DisableVgwRoutePropagationRequest < Aws::Structure.new(
+      class DisableVgwRoutePropagationRequest < Struct.new(
         :route_table_id,
         :gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] route_table_id
         #   The ID of the route table.
@@ -9525,8 +10079,10 @@ module Aws
       #       {
       #         vpc_id: "String",
       #       }
-      class DisableVpcClassicLinkDnsSupportRequest < Aws::Structure.new(
+      class DisableVpcClassicLinkDnsSupportRequest < Struct.new(
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -9535,8 +10091,10 @@ module Aws
       end
 
       # Contains the output of DisableVpcClassicLinkDnsSupport.
-      class DisableVpcClassicLinkDnsSupportResult < Aws::Structure.new(
+      class DisableVpcClassicLinkDnsSupportResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -9553,9 +10111,11 @@ module Aws
       #         dry_run: false,
       #         vpc_id: "String", # required
       #       }
-      class DisableVpcClassicLinkRequest < Aws::Structure.new(
+      class DisableVpcClassicLinkRequest < Struct.new(
         :dry_run,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9571,8 +10131,10 @@ module Aws
       end
 
       # Contains the output of DisableVpcClassicLink.
-      class DisableVpcClassicLinkResult < Aws::Structure.new(
+      class DisableVpcClassicLinkResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -9590,10 +10152,12 @@ module Aws
       #         public_ip: "String",
       #         association_id: "String",
       #       }
-      class DisassociateAddressRequest < Aws::Structure.new(
+      class DisassociateAddressRequest < Struct.new(
         :dry_run,
         :public_ip,
         :association_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9620,9 +10184,11 @@ module Aws
       #         dry_run: false,
       #         association_id: "String", # required
       #       }
-      class DisassociateRouteTableRequest < Aws::Structure.new(
+      class DisassociateRouteTableRequest < Struct.new(
         :dry_run,
         :association_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9653,10 +10219,12 @@ module Aws
       #           size: 1, # required
       #         },
       #       }
-      class DiskImage < Aws::Structure.new(
+      class DiskImage < Struct.new(
         :image,
         :description,
         :volume)
+
+        include Aws::Structure
 
         # @!attribute [rw] image
         #   Information about the disk image.
@@ -9673,11 +10241,13 @@ module Aws
       end
 
       # Describes a disk image.
-      class DiskImageDescription < Aws::Structure.new(
+      class DiskImageDescription < Struct.new(
         :format,
         :size,
         :import_manifest_url,
         :checksum)
+
+        include Aws::Structure
 
         # @!attribute [rw] format
         #   The disk image format.
@@ -9718,10 +10288,12 @@ module Aws
       #         bytes: 1, # required
       #         import_manifest_url: "String", # required
       #       }
-      class DiskImageDetail < Aws::Structure.new(
+      class DiskImageDetail < Struct.new(
         :format,
         :bytes,
         :import_manifest_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] format
         #   The disk image format.
@@ -9751,9 +10323,11 @@ module Aws
       end
 
       # Describes a disk image volume.
-      class DiskImageVolumeDescription < Aws::Structure.new(
+      class DiskImageVolumeDescription < Struct.new(
         :size,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] size
         #   The size of the volume, in GiB.
@@ -9777,13 +10351,15 @@ module Aws
       #         iops: 1,
       #         encrypted: false,
       #       }
-      class EbsBlockDevice < Aws::Structure.new(
+      class EbsBlockDevice < Struct.new(
         :snapshot_id,
         :volume_size,
         :delete_on_termination,
         :volume_type,
         :iops,
         :encrypted)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The ID of the snapshot.
@@ -9844,11 +10420,13 @@ module Aws
 
       # Describes a parameter used to set up an EBS volume in a block device
       # mapping.
-      class EbsInstanceBlockDevice < Aws::Structure.new(
+      class EbsInstanceBlockDevice < Struct.new(
         :volume_id,
         :status,
         :attach_time,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The ID of the EBS volume.
@@ -9877,9 +10455,11 @@ module Aws
       #         volume_id: "String",
       #         delete_on_termination: false,
       #       }
-      class EbsInstanceBlockDeviceSpecification < Aws::Structure.new(
+      class EbsInstanceBlockDeviceSpecification < Struct.new(
         :volume_id,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The ID of the EBS volume.
@@ -9899,9 +10479,11 @@ module Aws
       #         route_table_id: "String", # required
       #         gateway_id: "String", # required
       #       }
-      class EnableVgwRoutePropagationRequest < Aws::Structure.new(
+      class EnableVgwRoutePropagationRequest < Struct.new(
         :route_table_id,
         :gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] route_table_id
         #   The ID of the route table.
@@ -9921,9 +10503,11 @@ module Aws
       #         dry_run: false,
       #         volume_id: "String", # required
       #       }
-      class EnableVolumeIORequest < Aws::Structure.new(
+      class EnableVolumeIORequest < Struct.new(
         :dry_run,
         :volume_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9945,8 +10529,10 @@ module Aws
       #       {
       #         vpc_id: "String",
       #       }
-      class EnableVpcClassicLinkDnsSupportRequest < Aws::Structure.new(
+      class EnableVpcClassicLinkDnsSupportRequest < Struct.new(
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -9955,8 +10541,10 @@ module Aws
       end
 
       # Contains the output of EnableVpcClassicLinkDnsSupport.
-      class EnableVpcClassicLinkDnsSupportResult < Aws::Structure.new(
+      class EnableVpcClassicLinkDnsSupportResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -9973,9 +10561,11 @@ module Aws
       #         dry_run: false,
       #         vpc_id: "String", # required
       #       }
-      class EnableVpcClassicLinkRequest < Aws::Structure.new(
+      class EnableVpcClassicLinkRequest < Struct.new(
         :dry_run,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -9991,8 +10581,10 @@ module Aws
       end
 
       # Contains the output of EnableVpcClassicLink.
-      class EnableVpcClassicLinkResult < Aws::Structure.new(
+      class EnableVpcClassicLinkResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -10002,10 +10594,12 @@ module Aws
       end
 
       # Describes a Spot fleet event.
-      class EventInformation < Aws::Structure.new(
+      class EventInformation < Struct.new(
         :instance_id,
         :event_sub_type,
         :event_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance. This information is available only for
@@ -10076,13 +10670,15 @@ module Aws
       end
 
       # Describes an instance export task.
-      class ExportTask < Aws::Structure.new(
+      class ExportTask < Struct.new(
         :export_task_id,
         :description,
         :state,
         :status_message,
         :instance_export_details,
         :export_to_s3_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_task_id
         #   The ID of the export task.
@@ -10111,11 +10707,13 @@ module Aws
       end
 
       # Describes the format and location for an instance export task.
-      class ExportToS3Task < Aws::Structure.new(
+      class ExportToS3Task < Struct.new(
         :disk_image_format,
         :container_format,
         :s3_bucket,
         :s3_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] disk_image_format
         #   The format for the exported image.
@@ -10148,11 +10746,13 @@ module Aws
       #         s3_bucket: "String",
       #         s3_prefix: "String",
       #       }
-      class ExportToS3TaskSpecification < Aws::Structure.new(
+      class ExportToS3TaskSpecification < Struct.new(
         :disk_image_format,
         :container_format,
         :s3_bucket,
         :s3_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] disk_image_format
         #   The format for the exported image.
@@ -10186,9 +10786,11 @@ module Aws
       #         name: "String",
       #         values: ["String"],
       #       }
-      class Filter < Aws::Structure.new(
+      class Filter < Struct.new(
         :name,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the filter. Filter names are case-sensitive.
@@ -10201,7 +10803,7 @@ module Aws
       end
 
       # Describes a flow log.
-      class FlowLog < Aws::Structure.new(
+      class FlowLog < Struct.new(
         :creation_time,
         :flow_log_id,
         :flow_log_status,
@@ -10211,6 +10813,8 @@ module Aws
         :deliver_logs_status,
         :deliver_logs_error_message,
         :deliver_logs_permission_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_time
         #   The date and time the flow log was created.
@@ -10264,9 +10868,11 @@ module Aws
       #         dry_run: false,
       #         instance_id: "String", # required
       #       }
-      class GetConsoleOutputRequest < Aws::Structure.new(
+      class GetConsoleOutputRequest < Struct.new(
         :dry_run,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -10282,10 +10888,12 @@ module Aws
       end
 
       # Contains the output of GetConsoleOutput.
-      class GetConsoleOutputResult < Aws::Structure.new(
+      class GetConsoleOutputResult < Struct.new(
         :instance_id,
         :timestamp,
         :output)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -10311,10 +10919,12 @@ module Aws
       #         instance_id: "String", # required
       #         wake_up: false,
       #       }
-      class GetConsoleScreenshotRequest < Aws::Structure.new(
+      class GetConsoleScreenshotRequest < Struct.new(
         :dry_run,
         :instance_id,
         :wake_up)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -10335,9 +10945,11 @@ module Aws
       end
 
       # Contains the output of the request.
-      class GetConsoleScreenshotResult < Aws::Structure.new(
+      class GetConsoleScreenshotResult < Struct.new(
         :instance_id,
         :image_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -10356,9 +10968,11 @@ module Aws
       #         offering_id: "String", # required
       #         host_id_set: ["String"], # required
       #       }
-      class GetHostReservationPurchasePreviewRequest < Aws::Structure.new(
+      class GetHostReservationPurchasePreviewRequest < Struct.new(
         :offering_id,
         :host_id_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_id
         #   The offering ID of the reservation.
@@ -10371,11 +10985,13 @@ module Aws
 
       end
 
-      class GetHostReservationPurchasePreviewResult < Aws::Structure.new(
+      class GetHostReservationPurchasePreviewResult < Struct.new(
         :purchase,
         :total_upfront_price,
         :total_hourly_price,
         :currency_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] purchase
         #   The purchase information of the Dedicated Host Reservation and the
@@ -10406,9 +11022,11 @@ module Aws
       #         dry_run: false,
       #         instance_id: "String", # required
       #       }
-      class GetPasswordDataRequest < Aws::Structure.new(
+      class GetPasswordDataRequest < Struct.new(
         :dry_run,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -10424,10 +11042,12 @@ module Aws
       end
 
       # Contains the output of GetPasswordData.
-      class GetPasswordDataResult < Aws::Structure.new(
+      class GetPasswordDataResult < Struct.new(
         :instance_id,
         :timestamp,
         :password_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the Windows instance.
@@ -10451,9 +11071,11 @@ module Aws
       #         group_name: "String",
       #         group_id: "String",
       #       }
-      class GroupIdentifier < Aws::Structure.new(
+      class GroupIdentifier < Struct.new(
         :group_name,
         :group_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the security group.
@@ -10466,10 +11088,12 @@ module Aws
       end
 
       # Describes an event in the history of the Spot fleet request.
-      class HistoryRecord < Aws::Structure.new(
+      class HistoryRecord < Struct.new(
         :timestamp,
         :event_type,
         :event_information)
+
+        include Aws::Structure
 
         # @!attribute [rw] timestamp
         #   The date and time of the event, in UTC format (for example,
@@ -10495,7 +11119,7 @@ module Aws
       end
 
       # Describes the properties of the Dedicated Host.
-      class Host < Aws::Structure.new(
+      class Host < Struct.new(
         :host_id,
         :auto_placement,
         :host_reservation_id,
@@ -10505,6 +11129,8 @@ module Aws
         :availability_zone,
         :instances,
         :available_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_id
         #   The ID of the Dedicated Host.
@@ -10555,9 +11181,11 @@ module Aws
       end
 
       # Describes an instance running on a Dedicated Host.
-      class HostInstance < Aws::Structure.new(
+      class HostInstance < Struct.new(
         :instance_id,
         :instance_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   the IDs of instances that are running on the Dedicated Host.
@@ -10571,7 +11199,7 @@ module Aws
       end
 
       # Details about the Dedicated Host Reservation offering.
-      class HostOffering < Aws::Structure.new(
+      class HostOffering < Struct.new(
         :offering_id,
         :instance_family,
         :payment_option,
@@ -10579,6 +11207,8 @@ module Aws
         :hourly_price,
         :currency_code,
         :duration)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_id
         #   The ID of the offering.
@@ -10612,11 +11242,13 @@ module Aws
       end
 
       # Describes properties of a Dedicated Host.
-      class HostProperties < Aws::Structure.new(
+      class HostProperties < Struct.new(
         :sockets,
         :cores,
         :total_v_cpus,
         :instance_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] sockets
         #   The number of sockets on the Dedicated Host.
@@ -10639,7 +11271,7 @@ module Aws
 
       # Details about the Dedicated Host Reservation and associated Dedicated
       # Hosts.
-      class HostReservation < Aws::Structure.new(
+      class HostReservation < Struct.new(
         :host_reservation_id,
         :host_id_set,
         :offering_id,
@@ -10653,6 +11285,8 @@ module Aws
         :end,
         :start,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_reservation_id
         #   The ID of the reservation that specifies the associated Dedicated
@@ -10715,9 +11349,11 @@ module Aws
       end
 
       # Describes an IAM instance profile.
-      class IamInstanceProfile < Aws::Structure.new(
+      class IamInstanceProfile < Struct.new(
         :arn,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the instance profile.
@@ -10737,9 +11373,11 @@ module Aws
       #         arn: "String",
       #         name: "String",
       #       }
-      class IamInstanceProfileSpecification < Aws::Structure.new(
+      class IamInstanceProfileSpecification < Struct.new(
         :arn,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the instance profile.
@@ -10759,9 +11397,11 @@ module Aws
       #         type: 1,
       #         code: 1,
       #       }
-      class IcmpTypeCode < Aws::Structure.new(
+      class IcmpTypeCode < Struct.new(
         :type,
         :code)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The ICMP code. A value of -1 means all codes for the specified ICMP
@@ -10775,10 +11415,12 @@ module Aws
       end
 
       # Describes the ID format for a resource.
-      class IdFormat < Aws::Structure.new(
+      class IdFormat < Struct.new(
         :resource,
         :use_long_ids,
         :deadline)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   The type of resource.
@@ -10798,7 +11440,7 @@ module Aws
       end
 
       # Describes an image.
-      class Image < Aws::Structure.new(
+      class Image < Struct.new(
         :image_id,
         :image_location,
         :state,
@@ -10823,6 +11465,8 @@ module Aws
         :virtualization_type,
         :tags,
         :hypervisor)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the AMI.
@@ -10932,7 +11576,7 @@ module Aws
       end
 
       # Describes an image attribute.
-      class ImageAttribute < Aws::Structure.new(
+      class ImageAttribute < Struct.new(
         :image_id,
         :launch_permissions,
         :product_codes,
@@ -10941,6 +11585,8 @@ module Aws
         :description,
         :sriov_net_support,
         :block_device_mappings)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the AMI.
@@ -10992,13 +11638,15 @@ module Aws
       #         device_name: "String",
       #         snapshot_id: "String",
       #       }
-      class ImageDiskContainer < Aws::Structure.new(
+      class ImageDiskContainer < Struct.new(
         :description,
         :format,
         :url,
         :user_bucket,
         :device_name,
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] description
         #   The description of the disk image.
@@ -11062,7 +11710,7 @@ module Aws
       #         client_token: "String",
       #         role_name: "String",
       #       }
-      class ImportImageRequest < Aws::Structure.new(
+      class ImportImageRequest < Struct.new(
         :dry_run,
         :description,
         :disk_containers,
@@ -11073,6 +11721,8 @@ module Aws
         :client_data,
         :client_token,
         :role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -11139,7 +11789,7 @@ module Aws
       end
 
       # Contains the output for ImportImage.
-      class ImportImageResult < Aws::Structure.new(
+      class ImportImageResult < Struct.new(
         :import_task_id,
         :architecture,
         :license_type,
@@ -11151,6 +11801,8 @@ module Aws
         :progress,
         :status_message,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] import_task_id
         #   The task ID of the import image task.
@@ -11199,7 +11851,7 @@ module Aws
       end
 
       # Describes an import image task.
-      class ImportImageTask < Aws::Structure.new(
+      class ImportImageTask < Struct.new(
         :import_task_id,
         :architecture,
         :license_type,
@@ -11211,6 +11863,8 @@ module Aws
         :progress,
         :status_message,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] import_task_id
         #   The ID of the import image task.
@@ -11288,7 +11942,7 @@ module Aws
       #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
       #         private_ip_address: "String",
       #       }
-      class ImportInstanceLaunchSpecification < Aws::Structure.new(
+      class ImportInstanceLaunchSpecification < Struct.new(
         :architecture,
         :group_names,
         :group_ids,
@@ -11300,6 +11954,8 @@ module Aws
         :subnet_id,
         :instance_initiated_shutdown_behavior,
         :private_ip_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] architecture
         #   The architecture of the instance.
@@ -11402,12 +12058,14 @@ module Aws
       #         ],
       #         platform: "Windows", # required, accepts Windows
       #       }
-      class ImportInstanceRequest < Aws::Structure.new(
+      class ImportInstanceRequest < Struct.new(
         :dry_run,
         :description,
         :launch_specification,
         :disk_images,
         :platform)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -11435,8 +12093,10 @@ module Aws
       end
 
       # Contains the output for ImportInstance.
-      class ImportInstanceResult < Aws::Structure.new(
+      class ImportInstanceResult < Struct.new(
         :conversion_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] conversion_task
         #   Information about the conversion task.
@@ -11445,11 +12105,13 @@ module Aws
       end
 
       # Describes an import instance task.
-      class ImportInstanceTaskDetails < Aws::Structure.new(
+      class ImportInstanceTaskDetails < Struct.new(
         :volumes,
         :instance_id,
         :platform,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] volumes
         #   One or more volumes.
@@ -11470,7 +12132,7 @@ module Aws
       end
 
       # Describes an import volume task.
-      class ImportInstanceVolumeDetailItem < Aws::Structure.new(
+      class ImportInstanceVolumeDetailItem < Struct.new(
         :bytes_converted,
         :availability_zone,
         :image,
@@ -11478,6 +12140,8 @@ module Aws
         :status,
         :status_message,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] bytes_converted
         #   The number of bytes converted so far.
@@ -11518,10 +12182,12 @@ module Aws
       #         key_name: "String", # required
       #         public_key_material: "data", # required
       #       }
-      class ImportKeyPairRequest < Aws::Structure.new(
+      class ImportKeyPairRequest < Struct.new(
         :dry_run,
         :key_name,
         :public_key_material)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -11542,9 +12208,11 @@ module Aws
       end
 
       # Contains the output of ImportKeyPair.
-      class ImportKeyPairResult < Aws::Structure.new(
+      class ImportKeyPairResult < Struct.new(
         :key_name,
         :key_fingerprint)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_name
         #   The key pair name you provided.
@@ -11582,13 +12250,15 @@ module Aws
       #         client_token: "String",
       #         role_name: "String",
       #       }
-      class ImportSnapshotRequest < Aws::Structure.new(
+      class ImportSnapshotRequest < Struct.new(
         :dry_run,
         :description,
         :disk_container,
         :client_data,
         :client_token,
         :role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -11621,10 +12291,12 @@ module Aws
       end
 
       # Contains the output for ImportSnapshot.
-      class ImportSnapshotResult < Aws::Structure.new(
+      class ImportSnapshotResult < Struct.new(
         :import_task_id,
         :snapshot_task_detail,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] import_task_id
         #   The ID of the import snapshot task.
@@ -11641,10 +12313,12 @@ module Aws
       end
 
       # Describes an import snapshot task.
-      class ImportSnapshotTask < Aws::Structure.new(
+      class ImportSnapshotTask < Struct.new(
         :import_task_id,
         :snapshot_task_detail,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] import_task_id
         #   The ID of the import snapshot task.
@@ -11677,12 +12351,14 @@ module Aws
       #           size: 1, # required
       #         },
       #       }
-      class ImportVolumeRequest < Aws::Structure.new(
+      class ImportVolumeRequest < Struct.new(
         :dry_run,
         :availability_zone,
         :image,
         :description,
         :volume)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -11710,8 +12386,10 @@ module Aws
       end
 
       # Contains the output for ImportVolume.
-      class ImportVolumeResult < Aws::Structure.new(
+      class ImportVolumeResult < Struct.new(
         :conversion_task)
+
+        include Aws::Structure
 
         # @!attribute [rw] conversion_task
         #   Information about the conversion task.
@@ -11720,12 +12398,14 @@ module Aws
       end
 
       # Describes an import volume task.
-      class ImportVolumeTaskDetails < Aws::Structure.new(
+      class ImportVolumeTaskDetails < Struct.new(
         :bytes_converted,
         :availability_zone,
         :description,
         :image,
         :volume)
+
+        include Aws::Structure
 
         # @!attribute [rw] bytes_converted
         #   The number of bytes converted so far.
@@ -11750,7 +12430,7 @@ module Aws
       end
 
       # Describes an instance.
-      class Instance < Aws::Structure.new(
+      class Instance < Struct.new(
         :instance_id,
         :image_id,
         :state,
@@ -11789,6 +12469,8 @@ module Aws
         :ebs_optimized,
         :sriov_net_support,
         :ena_support)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -11972,7 +12654,7 @@ module Aws
       end
 
       # Describes an instance attribute.
-      class InstanceAttribute < Aws::Structure.new(
+      class InstanceAttribute < Struct.new(
         :instance_id,
         :instance_type,
         :kernel_id,
@@ -11988,6 +12670,8 @@ module Aws
         :ena_support,
         :source_dest_check,
         :groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -12060,9 +12744,11 @@ module Aws
       end
 
       # Describes a block device mapping.
-      class InstanceBlockDeviceMapping < Aws::Structure.new(
+      class InstanceBlockDeviceMapping < Struct.new(
         :device_name,
         :ebs)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_name
         #   The device name exposed to the instance (for example, `/dev/sdh` or
@@ -12089,11 +12775,13 @@ module Aws
       #         virtual_name: "String",
       #         no_device: "String",
       #       }
-      class InstanceBlockDeviceMappingSpecification < Aws::Structure.new(
+      class InstanceBlockDeviceMappingSpecification < Struct.new(
         :device_name,
         :ebs,
         :virtual_name,
         :no_device)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_name
         #   The device name exposed to the instance (for example, `/dev/sdh` or
@@ -12116,10 +12804,12 @@ module Aws
       end
 
       # Information about the instance type that the Dedicated Host supports.
-      class InstanceCapacity < Aws::Structure.new(
+      class InstanceCapacity < Struct.new(
         :instance_type,
         :available_capacity,
         :total_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_type
         #   The instance type size supported by the Dedicated Host.
@@ -12138,9 +12828,11 @@ module Aws
       end
 
       # Describes a Reserved Instance listing state.
-      class InstanceCount < Aws::Structure.new(
+      class InstanceCount < Struct.new(
         :state,
         :instance_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The states of the listed Reserved Instances.
@@ -12154,9 +12846,11 @@ module Aws
       end
 
       # Describes an instance to export.
-      class InstanceExportDetails < Aws::Structure.new(
+      class InstanceExportDetails < Struct.new(
         :instance_id,
         :target_environment)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the resource being exported.
@@ -12169,9 +12863,11 @@ module Aws
       end
 
       # Describes the monitoring information of the instance.
-      class InstanceMonitoring < Aws::Structure.new(
+      class InstanceMonitoring < Struct.new(
         :instance_id,
         :monitoring)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -12184,7 +12880,7 @@ module Aws
       end
 
       # Describes a network interface.
-      class InstanceNetworkInterface < Aws::Structure.new(
+      class InstanceNetworkInterface < Struct.new(
         :network_interface_id,
         :subnet_id,
         :vpc_id,
@@ -12199,6 +12895,8 @@ module Aws
         :attachment,
         :association,
         :private_ip_addresses)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface_id
         #   The ID of the network interface.
@@ -12261,10 +12959,12 @@ module Aws
       end
 
       # Describes association information for an Elastic IP address.
-      class InstanceNetworkInterfaceAssociation < Aws::Structure.new(
+      class InstanceNetworkInterfaceAssociation < Struct.new(
         :public_ip,
         :public_dns_name,
         :ip_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] public_ip
         #   The public IP address or Elastic IP address bound to the network
@@ -12282,12 +12982,14 @@ module Aws
       end
 
       # Describes a network interface attachment.
-      class InstanceNetworkInterfaceAttachment < Aws::Structure.new(
+      class InstanceNetworkInterfaceAttachment < Struct.new(
         :attachment_id,
         :device_index,
         :status,
         :attach_time,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_id
         #   The ID of the network interface attachment.
@@ -12334,7 +13036,7 @@ module Aws
       #         secondary_private_ip_address_count: 1,
       #         associate_public_ip_address: false,
       #       }
-      class InstanceNetworkInterfaceSpecification < Aws::Structure.new(
+      class InstanceNetworkInterfaceSpecification < Struct.new(
         :network_interface_id,
         :device_index,
         :subnet_id,
@@ -12345,6 +13047,8 @@ module Aws
         :private_ip_addresses,
         :secondary_private_ip_address_count,
         :associate_public_ip_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface_id
         #   The ID of the network interface.
@@ -12405,11 +13109,13 @@ module Aws
       end
 
       # Describes a private IP address.
-      class InstancePrivateIpAddress < Aws::Structure.new(
+      class InstancePrivateIpAddress < Struct.new(
         :private_ip_address,
         :private_dns_name,
         :primary,
         :association)
+
+        include Aws::Structure
 
         # @!attribute [rw] private_ip_address
         #   The private IP address of the network interface.
@@ -12432,9 +13138,11 @@ module Aws
       end
 
       # Describes the current state of the instance.
-      class InstanceState < Aws::Structure.new(
+      class InstanceState < Struct.new(
         :code,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The low byte represents the state. The high byte is an opaque
@@ -12460,10 +13168,12 @@ module Aws
       end
 
       # Describes an instance state change.
-      class InstanceStateChange < Aws::Structure.new(
+      class InstanceStateChange < Struct.new(
         :instance_id,
         :current_state,
         :previous_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -12480,13 +13190,15 @@ module Aws
       end
 
       # Describes the status of an instance.
-      class InstanceStatus < Aws::Structure.new(
+      class InstanceStatus < Struct.new(
         :instance_id,
         :availability_zone,
         :events,
         :instance_state,
         :system_status,
         :instance_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -12519,10 +13231,12 @@ module Aws
       end
 
       # Describes the instance status.
-      class InstanceStatusDetails < Aws::Structure.new(
+      class InstanceStatusDetails < Struct.new(
         :name,
         :status,
         :impaired_since)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The type of instance status.
@@ -12541,11 +13255,13 @@ module Aws
       end
 
       # Describes a scheduled event for an instance.
-      class InstanceStatusEvent < Aws::Structure.new(
+      class InstanceStatusEvent < Struct.new(
         :code,
         :description,
         :not_before,
         :not_after)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The event code.
@@ -12570,9 +13286,11 @@ module Aws
       end
 
       # Describes the status of an instance.
-      class InstanceStatusSummary < Aws::Structure.new(
+      class InstanceStatusSummary < Struct.new(
         :status,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status.
@@ -12585,10 +13303,12 @@ module Aws
       end
 
       # Describes an Internet gateway.
-      class InternetGateway < Aws::Structure.new(
+      class InternetGateway < Struct.new(
         :internet_gateway_id,
         :attachments,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] internet_gateway_id
         #   The ID of the Internet gateway.
@@ -12605,9 +13325,11 @@ module Aws
       end
 
       # Describes the attachment of a VPC to an Internet gateway.
-      class InternetGatewayAttachment < Aws::Structure.new(
+      class InternetGatewayAttachment < Struct.new(
         :vpc_id,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -12648,13 +13370,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class IpPermission < Aws::Structure.new(
+      class IpPermission < Struct.new(
         :ip_protocol,
         :from_port,
         :to_port,
         :user_id_group_pairs,
         :ip_ranges,
         :prefix_list_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_protocol
         #   The IP protocol name (for `tcp`, `udp`, and `icmp`) or number (see
@@ -12704,8 +13428,10 @@ module Aws
       #       {
       #         cidr_ip: "String",
       #       }
-      class IpRange < Aws::Structure.new(
+      class IpRange < Struct.new(
         :cidr_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] cidr_ip
         #   The CIDR range. You can either specify a CIDR range or a source
@@ -12715,10 +13441,12 @@ module Aws
       end
 
       # Describes a key pair.
-      class KeyPair < Aws::Structure.new(
+      class KeyPair < Struct.new(
         :key_name,
         :key_fingerprint,
         :key_material)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_name
         #   The name of the key pair.
@@ -12735,9 +13463,11 @@ module Aws
       end
 
       # Describes a key pair.
-      class KeyPairInfo < Aws::Structure.new(
+      class KeyPairInfo < Struct.new(
         :key_name,
         :key_fingerprint)
+
+        include Aws::Structure
 
         # @!attribute [rw] key_name
         #   The name of the key pair.
@@ -12760,9 +13490,11 @@ module Aws
       #         user_id: "String",
       #         group: "all", # accepts all
       #       }
-      class LaunchPermission < Aws::Structure.new(
+      class LaunchPermission < Struct.new(
         :user_id,
         :group)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_id
         #   The AWS account ID.
@@ -12792,9 +13524,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class LaunchPermissionModifications < Aws::Structure.new(
+      class LaunchPermissionModifications < Struct.new(
         :add,
         :remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] add
         #   The AWS account ID to add to the list of launch permissions for the
@@ -12809,7 +13543,7 @@ module Aws
       end
 
       # Describes the launch specification for an instance.
-      class LaunchSpecification < Aws::Structure.new(
+      class LaunchSpecification < Struct.new(
         :image_id,
         :key_name,
         :security_groups,
@@ -12825,6 +13559,8 @@ module Aws
         :iam_instance_profile,
         :ebs_optimized,
         :monitoring)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the AMI.
@@ -12912,9 +13648,11 @@ module Aws
       #         host_ids: ["String"], # required
       #         auto_placement: "on", # required, accepts on, off
       #       }
-      class ModifyHostsRequest < Aws::Structure.new(
+      class ModifyHostsRequest < Struct.new(
         :host_ids,
         :auto_placement)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_ids
         #   The host IDs of the Dedicated Hosts you want to modify.
@@ -12927,9 +13665,11 @@ module Aws
       end
 
       # Contains the output of ModifyHosts.
-      class ModifyHostsResult < Aws::Structure.new(
+      class ModifyHostsResult < Struct.new(
         :successful,
         :unsuccessful)
+
+        include Aws::Structure
 
         # @!attribute [rw] successful
         #   The IDs of the Dedicated Hosts that were successfully modified.
@@ -12950,9 +13690,11 @@ module Aws
       #         resource: "String", # required
       #         use_long_ids: false, # required
       #       }
-      class ModifyIdFormatRequest < Aws::Structure.new(
+      class ModifyIdFormatRequest < Struct.new(
         :resource,
         :use_long_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
@@ -12975,10 +13717,12 @@ module Aws
       #         use_long_ids: false, # required
       #         principal_arn: "String", # required
       #       }
-      class ModifyIdentityIdFormatRequest < Aws::Structure.new(
+      class ModifyIdentityIdFormatRequest < Struct.new(
         :resource,
         :use_long_ids,
         :principal_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   The type of resource: `instance` \| `reservation` \| `snapshot` \|
@@ -13027,7 +13771,7 @@ module Aws
       #         },
       #         description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #       }
-      class ModifyImageAttributeRequest < Aws::Structure.new(
+      class ModifyImageAttributeRequest < Struct.new(
         :dry_run,
         :image_id,
         :attribute,
@@ -13038,6 +13782,8 @@ module Aws
         :value,
         :launch_permission,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13131,7 +13877,7 @@ module Aws
       #           value: false,
       #         },
       #       }
-      class ModifyInstanceAttributeRequest < Aws::Structure.new(
+      class ModifyInstanceAttributeRequest < Struct.new(
         :dry_run,
         :instance_id,
         :attribute,
@@ -13148,6 +13894,8 @@ module Aws
         :ebs_optimized,
         :sriov_net_support,
         :ena_support)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13289,11 +14037,13 @@ module Aws
       #         affinity: "default", # accepts default, host
       #         host_id: "String",
       #       }
-      class ModifyInstancePlacementRequest < Aws::Structure.new(
+      class ModifyInstancePlacementRequest < Struct.new(
         :instance_id,
         :tenancy,
         :affinity,
         :host_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance that you are modifying.
@@ -13315,8 +14065,10 @@ module Aws
       end
 
       # Contains the output of ModifyInstancePlacement.
-      class ModifyInstancePlacementResult < Aws::Structure.new(
+      class ModifyInstancePlacementResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Is `true` if the request succeeds, and an error otherwise.
@@ -13341,13 +14093,15 @@ module Aws
       #           delete_on_termination: false,
       #         },
       #       }
-      class ModifyNetworkInterfaceAttributeRequest < Aws::Structure.new(
+      class ModifyNetworkInterfaceAttributeRequest < Struct.new(
         :dry_run,
         :network_interface_id,
         :description,
         :source_dest_check,
         :groups,
         :attachment)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13408,10 +14162,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyReservedInstancesRequest < Aws::Structure.new(
+      class ModifyReservedInstancesRequest < Struct.new(
         :client_token,
         :reserved_instances_ids,
         :target_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_token
         #   A unique, case-sensitive token you provide to ensure idempotency of
@@ -13434,8 +14190,10 @@ module Aws
       end
 
       # Contains the output of ModifyReservedInstances.
-      class ModifyReservedInstancesResult < Aws::Structure.new(
+      class ModifyReservedInstancesResult < Struct.new(
         :reserved_instances_modification_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_modification_id
         #   The ID for the modification.
@@ -13469,7 +14227,7 @@ module Aws
       #           ],
       #         },
       #       }
-      class ModifySnapshotAttributeRequest < Aws::Structure.new(
+      class ModifySnapshotAttributeRequest < Struct.new(
         :dry_run,
         :snapshot_id,
         :attribute,
@@ -13477,6 +14235,8 @@ module Aws
         :user_ids,
         :group_names,
         :create_volume_permission)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13525,10 +14285,12 @@ module Aws
       #         target_capacity: 1,
       #         excess_capacity_termination_policy: "noTermination", # accepts noTermination, default
       #       }
-      class ModifySpotFleetRequestRequest < Aws::Structure.new(
+      class ModifySpotFleetRequestRequest < Struct.new(
         :spot_fleet_request_id,
         :target_capacity,
         :excess_capacity_termination_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -13547,8 +14309,10 @@ module Aws
       end
 
       # Contains the output of ModifySpotFleetRequest.
-      class ModifySpotFleetRequestResponse < Aws::Structure.new(
+      class ModifySpotFleetRequestResponse < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Is `true` if the request succeeds, and an error otherwise.
@@ -13566,9 +14330,11 @@ module Aws
       #           value: false,
       #         },
       #       }
-      class ModifySubnetAttributeRequest < Aws::Structure.new(
+      class ModifySubnetAttributeRequest < Struct.new(
         :subnet_id,
         :map_public_ip_on_launch)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_id
         #   The ID of the subnet.
@@ -13592,10 +14358,12 @@ module Aws
       #           value: false,
       #         },
       #       }
-      class ModifyVolumeAttributeRequest < Aws::Structure.new(
+      class ModifyVolumeAttributeRequest < Struct.new(
         :dry_run,
         :volume_id,
         :auto_enable_io)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13628,10 +14396,12 @@ module Aws
       #           value: false,
       #         },
       #       }
-      class ModifyVpcAttributeRequest < Aws::Structure.new(
+      class ModifyVpcAttributeRequest < Struct.new(
         :vpc_id,
         :enable_dns_support,
         :enable_dns_hostnames)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -13673,13 +14443,15 @@ module Aws
       #         add_route_table_ids: ["String"],
       #         remove_route_table_ids: ["String"],
       #       }
-      class ModifyVpcEndpointRequest < Aws::Structure.new(
+      class ModifyVpcEndpointRequest < Struct.new(
         :dry_run,
         :vpc_endpoint_id,
         :reset_policy,
         :policy_document,
         :add_route_table_ids,
         :remove_route_table_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13713,8 +14485,10 @@ module Aws
       end
 
       # Contains the output of ModifyVpcEndpoint.
-      class ModifyVpcEndpointResult < Aws::Structure.new(
+      class ModifyVpcEndpointResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -13740,11 +14514,13 @@ module Aws
       #           allow_dns_resolution_from_remote_vpc: false,
       #         },
       #       }
-      class ModifyVpcPeeringConnectionOptionsRequest < Aws::Structure.new(
+      class ModifyVpcPeeringConnectionOptionsRequest < Struct.new(
         :dry_run,
         :vpc_peering_connection_id,
         :requester_peering_connection_options,
         :accepter_peering_connection_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the operation,
@@ -13767,9 +14543,11 @@ module Aws
 
       end
 
-      class ModifyVpcPeeringConnectionOptionsResult < Aws::Structure.new(
+      class ModifyVpcPeeringConnectionOptionsResult < Struct.new(
         :requester_peering_connection_options,
         :accepter_peering_connection_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] requester_peering_connection_options
         #   Information about the VPC peering connection options for the
@@ -13791,9 +14569,11 @@ module Aws
       #         dry_run: false,
       #         instance_ids: ["String"], # required
       #       }
-      class MonitorInstancesRequest < Aws::Structure.new(
+      class MonitorInstancesRequest < Struct.new(
         :dry_run,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13809,8 +14589,10 @@ module Aws
       end
 
       # Contains the output of MonitorInstances.
-      class MonitorInstancesResult < Aws::Structure.new(
+      class MonitorInstancesResult < Struct.new(
         :instance_monitorings)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_monitorings
         #   Monitoring information for one or more instances.
@@ -13819,8 +14601,10 @@ module Aws
       end
 
       # Describes the monitoring for the instance.
-      class Monitoring < Aws::Structure.new(
+      class Monitoring < Struct.new(
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   Indicates whether monitoring is enabled for the instance.
@@ -13836,9 +14620,11 @@ module Aws
       #         dry_run: false,
       #         public_ip: "String", # required
       #       }
-      class MoveAddressToVpcRequest < Aws::Structure.new(
+      class MoveAddressToVpcRequest < Struct.new(
         :dry_run,
         :public_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -13854,9 +14640,11 @@ module Aws
       end
 
       # Contains the output of MoveAddressToVpc.
-      class MoveAddressToVpcResult < Aws::Structure.new(
+      class MoveAddressToVpcResult < Struct.new(
         :allocation_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] allocation_id
         #   The allocation ID for the Elastic IP address.
@@ -13869,9 +14657,11 @@ module Aws
       end
 
       # Describes the status of a moving Elastic IP address.
-      class MovingAddressStatus < Aws::Structure.new(
+      class MovingAddressStatus < Struct.new(
         :public_ip,
         :move_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] public_ip
         #   The Elastic IP address.
@@ -13885,7 +14675,7 @@ module Aws
       end
 
       # Describes a NAT gateway.
-      class NatGateway < Aws::Structure.new(
+      class NatGateway < Struct.new(
         :vpc_id,
         :subnet_id,
         :nat_gateway_id,
@@ -13896,6 +14686,8 @@ module Aws
         :failure_code,
         :failure_message,
         :provisioned_bandwidth)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC in which the NAT gateway is located.
@@ -13988,11 +14780,13 @@ module Aws
 
       # Describes the IP addresses and network interface associated with a NAT
       # gateway.
-      class NatGatewayAddress < Aws::Structure.new(
+      class NatGatewayAddress < Struct.new(
         :public_ip,
         :allocation_id,
         :private_ip,
         :network_interface_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] public_ip
         #   The Elastic IP address associated with the NAT gateway.
@@ -14014,13 +14808,15 @@ module Aws
       end
 
       # Describes a network ACL.
-      class NetworkAcl < Aws::Structure.new(
+      class NetworkAcl < Struct.new(
         :network_acl_id,
         :vpc_id,
         :is_default,
         :entries,
         :associations,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_acl_id
         #   The ID of the network ACL.
@@ -14049,10 +14845,12 @@ module Aws
       end
 
       # Describes an association between a network ACL and a subnet.
-      class NetworkAclAssociation < Aws::Structure.new(
+      class NetworkAclAssociation < Struct.new(
         :network_acl_association_id,
         :network_acl_id,
         :subnet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_acl_association_id
         #   The ID of the association between a network ACL and a subnet.
@@ -14069,7 +14867,7 @@ module Aws
       end
 
       # Describes an entry in a network ACL.
-      class NetworkAclEntry < Aws::Structure.new(
+      class NetworkAclEntry < Struct.new(
         :rule_number,
         :protocol,
         :rule_action,
@@ -14077,6 +14875,8 @@ module Aws
         :cidr_block,
         :icmp_type_code,
         :port_range)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_number
         #   The rule number for the entry. ACL entries are processed in
@@ -14112,7 +14912,7 @@ module Aws
       end
 
       # Describes a network interface.
-      class NetworkInterface < Aws::Structure.new(
+      class NetworkInterface < Struct.new(
         :network_interface_id,
         :subnet_id,
         :vpc_id,
@@ -14132,6 +14932,8 @@ module Aws
         :tag_set,
         :private_ip_addresses,
         :interface_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface_id
         #   The ID of the network interface.
@@ -14214,12 +15016,14 @@ module Aws
       end
 
       # Describes association information for an Elastic IP address.
-      class NetworkInterfaceAssociation < Aws::Structure.new(
+      class NetworkInterfaceAssociation < Struct.new(
         :public_ip,
         :public_dns_name,
         :ip_owner_id,
         :allocation_id,
         :association_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] public_ip
         #   The address of the Elastic IP address bound to the network
@@ -14245,7 +15049,7 @@ module Aws
       end
 
       # Describes a network interface attachment.
-      class NetworkInterfaceAttachment < Aws::Structure.new(
+      class NetworkInterfaceAttachment < Struct.new(
         :attachment_id,
         :instance_id,
         :instance_owner_id,
@@ -14253,6 +15057,8 @@ module Aws
         :status,
         :attach_time,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_id
         #   The ID of the network interface attachment.
@@ -14294,9 +15100,11 @@ module Aws
       #         attachment_id: "String",
       #         delete_on_termination: false,
       #       }
-      class NetworkInterfaceAttachmentChanges < Aws::Structure.new(
+      class NetworkInterfaceAttachmentChanges < Struct.new(
         :attachment_id,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_id
         #   The ID of the network interface attachment.
@@ -14310,11 +15118,13 @@ module Aws
       end
 
       # Describes the private IP address of a network interface.
-      class NetworkInterfacePrivateIpAddress < Aws::Structure.new(
+      class NetworkInterfacePrivateIpAddress < Struct.new(
         :private_ip_address,
         :private_dns_name,
         :primary,
         :association)
+
+        include Aws::Structure
 
         # @!attribute [rw] private_ip_address
         #   The private IP address.
@@ -14343,9 +15153,11 @@ module Aws
       #         key: "String",
       #         values: ["String"],
       #       }
-      class NewDhcpConfiguration < Aws::Structure.new(
+      class NewDhcpConfiguration < Struct.new(
         :key,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   @return [String]
@@ -14356,10 +15168,12 @@ module Aws
       end
 
       # Describes the VPC peering connection options.
-      class PeeringConnectionOptions < Aws::Structure.new(
+      class PeeringConnectionOptions < Struct.new(
         :allow_egress_from_local_classic_link_to_remote_vpc,
         :allow_egress_from_local_vpc_to_remote_classic_link,
         :allow_dns_resolution_from_remote_vpc)
+
+        include Aws::Structure
 
         # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
         #   If true, enables outbound communication from an EC2-Classic instance
@@ -14389,10 +15203,12 @@ module Aws
       #         allow_egress_from_local_vpc_to_remote_classic_link: false,
       #         allow_dns_resolution_from_remote_vpc: false,
       #       }
-      class PeeringConnectionOptionsRequest < Aws::Structure.new(
+      class PeeringConnectionOptionsRequest < Struct.new(
         :allow_egress_from_local_classic_link_to_remote_vpc,
         :allow_egress_from_local_vpc_to_remote_classic_link,
         :allow_dns_resolution_from_remote_vpc)
+
+        include Aws::Structure
 
         # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
         #   If true, enables outbound communication from an EC2-Classic instance
@@ -14424,12 +15240,14 @@ module Aws
       #         host_id: "String",
       #         affinity: "String",
       #       }
-      class Placement < Aws::Structure.new(
+      class Placement < Struct.new(
         :availability_zone,
         :group_name,
         :tenancy,
         :host_id,
         :affinity)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zone
         #   The Availability Zone of the instance.
@@ -14460,10 +15278,12 @@ module Aws
       end
 
       # Describes a placement group.
-      class PlacementGroup < Aws::Structure.new(
+      class PlacementGroup < Struct.new(
         :group_name,
         :strategy,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the placement group.
@@ -14487,9 +15307,11 @@ module Aws
       #         from: 1,
       #         to: 1,
       #       }
-      class PortRange < Aws::Structure.new(
+      class PortRange < Struct.new(
         :from,
         :to)
+
+        include Aws::Structure
 
         # @!attribute [rw] from
         #   The first port in the range.
@@ -14502,10 +15324,12 @@ module Aws
       end
 
       # Describes prefixes for AWS services.
-      class PrefixList < Aws::Structure.new(
+      class PrefixList < Struct.new(
         :prefix_list_id,
         :prefix_list_name,
         :cidrs)
+
+        include Aws::Structure
 
         # @!attribute [rw] prefix_list_id
         #   The ID of the prefix.
@@ -14528,8 +15352,10 @@ module Aws
       #       {
       #         prefix_list_id: "String",
       #       }
-      class PrefixListId < Aws::Structure.new(
+      class PrefixListId < Struct.new(
         :prefix_list_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] prefix_list_id
         #   The ID of the prefix.
@@ -14538,11 +15364,13 @@ module Aws
       end
 
       # Describes the price for a Reserved Instance.
-      class PriceSchedule < Aws::Structure.new(
+      class PriceSchedule < Struct.new(
         :term,
         :price,
         :currency_code,
         :active)
+
+        include Aws::Structure
 
         # @!attribute [rw] term
         #   The number of months remaining in the reservation. For example, 2 is
@@ -14584,10 +15412,12 @@ module Aws
       #         price: 1.0,
       #         currency_code: "USD", # accepts USD
       #       }
-      class PriceScheduleSpecification < Aws::Structure.new(
+      class PriceScheduleSpecification < Struct.new(
         :term,
         :price,
         :currency_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] term
         #   The number of months remaining in the reservation. For example, 2 is
@@ -14607,9 +15437,11 @@ module Aws
       end
 
       # Describes a Reserved Instance offering.
-      class PricingDetail < Aws::Structure.new(
+      class PricingDetail < Struct.new(
         :price,
         :count)
+
+        include Aws::Structure
 
         # @!attribute [rw] price
         #   The price per instance.
@@ -14629,9 +15461,11 @@ module Aws
       #         private_ip_address: "String", # required
       #         primary: false,
       #       }
-      class PrivateIpAddressSpecification < Aws::Structure.new(
+      class PrivateIpAddressSpecification < Struct.new(
         :private_ip_address,
         :primary)
+
+        include Aws::Structure
 
         # @!attribute [rw] private_ip_address
         #   The private IP addresses.
@@ -14645,9 +15479,11 @@ module Aws
       end
 
       # Describes a product code.
-      class ProductCode < Aws::Structure.new(
+      class ProductCode < Struct.new(
         :product_code_id,
         :product_code_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] product_code_id
         #   The product code.
@@ -14660,8 +15496,10 @@ module Aws
       end
 
       # Describes a virtual private gateway propagating route.
-      class PropagatingVgw < Aws::Structure.new(
+      class PropagatingVgw < Struct.new(
         :gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] gateway_id
         #   The ID of the virtual private gateway (VGW).
@@ -14676,12 +15514,14 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html
       # [2]: https://console.aws.amazon.com/support/home?
-      class ProvisionedBandwidth < Aws::Structure.new(
+      class ProvisionedBandwidth < Struct.new(
         :provisioned,
         :requested,
         :request_time,
         :provision_time,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] provisioned
         #   Reserved. If you need to sustain traffic greater than the
@@ -14736,7 +15576,7 @@ module Aws
       end
 
       # Describes the result of the purchase.
-      class Purchase < Aws::Structure.new(
+      class Purchase < Struct.new(
         :host_reservation_id,
         :host_id_set,
         :instance_family,
@@ -14745,6 +15585,8 @@ module Aws
         :hourly_price,
         :currency_code,
         :duration)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_reservation_id
         #   The ID of the reservation.
@@ -14792,12 +15634,14 @@ module Aws
       #         currency_code: "USD", # accepts USD
       #         client_token: "String",
       #       }
-      class PurchaseHostReservationRequest < Aws::Structure.new(
+      class PurchaseHostReservationRequest < Struct.new(
         :offering_id,
         :host_id_set,
         :limit_price,
         :currency_code,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_id
         #   The ID of the offering.
@@ -14836,12 +15680,14 @@ module Aws
 
       end
 
-      class PurchaseHostReservationResult < Aws::Structure.new(
+      class PurchaseHostReservationResult < Struct.new(
         :purchase,
         :total_upfront_price,
         :total_hourly_price,
         :currency_code,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] purchase
         #   Describes the details of the purchase.
@@ -14882,9 +15728,11 @@ module Aws
       #         purchase_token: "String", # required
       #         instance_count: 1, # required
       #       }
-      class PurchaseRequest < Aws::Structure.new(
+      class PurchaseRequest < Struct.new(
         :purchase_token,
         :instance_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] purchase_token
         #   The purchase token.
@@ -14909,11 +15757,13 @@ module Aws
       #           currency_code: "USD", # accepts USD
       #         },
       #       }
-      class PurchaseReservedInstancesOfferingRequest < Aws::Structure.new(
+      class PurchaseReservedInstancesOfferingRequest < Struct.new(
         :dry_run,
         :reserved_instances_offering_id,
         :instance_count,
         :limit_price)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -14939,8 +15789,10 @@ module Aws
       end
 
       # Contains the output of PurchaseReservedInstancesOffering.
-      class PurchaseReservedInstancesOfferingResult < Aws::Structure.new(
+      class PurchaseReservedInstancesOfferingResult < Struct.new(
         :reserved_instances_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_id
         #   The IDs of the purchased Reserved Instances.
@@ -14962,10 +15814,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class PurchaseScheduledInstancesRequest < Aws::Structure.new(
+      class PurchaseScheduledInstancesRequest < Struct.new(
         :dry_run,
         :client_token,
         :purchase_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -14990,8 +15844,10 @@ module Aws
       end
 
       # Contains the output of PurchaseScheduledInstances.
-      class PurchaseScheduledInstancesResult < Aws::Structure.new(
+      class PurchaseScheduledInstancesResult < Struct.new(
         :scheduled_instance_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_instance_set
         #   Information about the Scheduled Instances.
@@ -15007,9 +15863,11 @@ module Aws
       #         dry_run: false,
       #         instance_ids: ["String"], # required
       #       }
-      class RebootInstancesRequest < Aws::Structure.new(
+      class RebootInstancesRequest < Struct.new(
         :dry_run,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15025,9 +15883,11 @@ module Aws
       end
 
       # Describes a recurring charge.
-      class RecurringCharge < Aws::Structure.new(
+      class RecurringCharge < Struct.new(
         :frequency,
         :amount)
+
+        include Aws::Structure
 
         # @!attribute [rw] frequency
         #   The frequency of the recurring charge.
@@ -15040,9 +15900,11 @@ module Aws
       end
 
       # Describes a region.
-      class Region < Aws::Structure.new(
+      class Region < Struct.new(
         :region_name,
         :endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] region_name
         #   The name of the region.
@@ -15086,7 +15948,7 @@ module Aws
       #         sriov_net_support: "String",
       #         ena_support: false,
       #       }
-      class RegisterImageRequest < Aws::Structure.new(
+      class RegisterImageRequest < Struct.new(
         :dry_run,
         :image_location,
         :name,
@@ -15099,6 +15961,8 @@ module Aws
         :virtualization_type,
         :sriov_net_support,
         :ena_support)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15175,8 +16039,10 @@ module Aws
       end
 
       # Contains the output of RegisterImage.
-      class RegisterImageResult < Aws::Structure.new(
+      class RegisterImageResult < Struct.new(
         :image_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the newly registered AMI.
@@ -15192,9 +16058,11 @@ module Aws
       #         dry_run: false,
       #         vpc_peering_connection_id: "String", # required
       #       }
-      class RejectVpcPeeringConnectionRequest < Aws::Structure.new(
+      class RejectVpcPeeringConnectionRequest < Struct.new(
         :dry_run,
         :vpc_peering_connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15210,8 +16078,10 @@ module Aws
       end
 
       # Contains the output of RejectVpcPeeringConnection.
-      class RejectVpcPeeringConnectionResult < Aws::Structure.new(
+      class RejectVpcPeeringConnectionResult < Struct.new(
         :return)
+
+        include Aws::Structure
 
         # @!attribute [rw] return
         #   Returns `true` if the request succeeds; otherwise, it returns an
@@ -15229,10 +16099,12 @@ module Aws
       #         public_ip: "String",
       #         allocation_id: "String",
       #       }
-      class ReleaseAddressRequest < Aws::Structure.new(
+      class ReleaseAddressRequest < Struct.new(
         :dry_run,
         :public_ip,
         :allocation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15258,8 +16130,10 @@ module Aws
       #       {
       #         host_ids: ["String"], # required
       #       }
-      class ReleaseHostsRequest < Aws::Structure.new(
+      class ReleaseHostsRequest < Struct.new(
         :host_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] host_ids
         #   The IDs of the Dedicated Hosts you want to release.
@@ -15268,9 +16142,11 @@ module Aws
       end
 
       # Contains the output of ReleaseHosts.
-      class ReleaseHostsResult < Aws::Structure.new(
+      class ReleaseHostsResult < Struct.new(
         :successful,
         :unsuccessful)
+
+        include Aws::Structure
 
         # @!attribute [rw] successful
         #   The IDs of the Dedicated Hosts that were successfully released.
@@ -15292,10 +16168,12 @@ module Aws
       #         association_id: "String", # required
       #         network_acl_id: "String", # required
       #       }
-      class ReplaceNetworkAclAssociationRequest < Aws::Structure.new(
+      class ReplaceNetworkAclAssociationRequest < Struct.new(
         :dry_run,
         :association_id,
         :network_acl_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15316,8 +16194,10 @@ module Aws
       end
 
       # Contains the output of ReplaceNetworkAclAssociation.
-      class ReplaceNetworkAclAssociationResult < Aws::Structure.new(
+      class ReplaceNetworkAclAssociationResult < Struct.new(
         :new_association_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] new_association_id
         #   The ID of the new association.
@@ -15346,7 +16226,7 @@ module Aws
       #           to: 1,
       #         },
       #       }
-      class ReplaceNetworkAclEntryRequest < Aws::Structure.new(
+      class ReplaceNetworkAclEntryRequest < Struct.new(
         :dry_run,
         :network_acl_id,
         :rule_number,
@@ -15356,6 +16236,8 @@ module Aws
         :cidr_block,
         :icmp_type_code,
         :port_range)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15418,7 +16300,7 @@ module Aws
       #         vpc_peering_connection_id: "String",
       #         nat_gateway_id: "String",
       #       }
-      class ReplaceRouteRequest < Aws::Structure.new(
+      class ReplaceRouteRequest < Struct.new(
         :dry_run,
         :route_table_id,
         :destination_cidr_block,
@@ -15427,6 +16309,8 @@ module Aws
         :network_interface_id,
         :vpc_peering_connection_id,
         :nat_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15475,10 +16359,12 @@ module Aws
       #         association_id: "String", # required
       #         route_table_id: "String", # required
       #       }
-      class ReplaceRouteTableAssociationRequest < Aws::Structure.new(
+      class ReplaceRouteTableAssociationRequest < Struct.new(
         :dry_run,
         :association_id,
         :route_table_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15498,8 +16384,10 @@ module Aws
       end
 
       # Contains the output of ReplaceRouteTableAssociation.
-      class ReplaceRouteTableAssociationResult < Aws::Structure.new(
+      class ReplaceRouteTableAssociationResult < Struct.new(
         :new_association_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] new_association_id
         #   The ID of the new association.
@@ -15520,7 +16408,7 @@ module Aws
       #         reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
       #         description: "String",
       #       }
-      class ReportInstanceStatusRequest < Aws::Structure.new(
+      class ReportInstanceStatusRequest < Struct.new(
         :dry_run,
         :instances,
         :status,
@@ -15528,6 +16416,8 @@ module Aws
         :end_time,
         :reason_codes,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15674,9 +16564,11 @@ module Aws
       #           type: "request", # accepts request, maintain
       #         },
       #       }
-      class RequestSpotFleetRequest < Aws::Structure.new(
+      class RequestSpotFleetRequest < Struct.new(
         :dry_run,
         :spot_fleet_request_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15692,8 +16584,10 @@ module Aws
       end
 
       # Contains the output of RequestSpotFleet.
-      class RequestSpotFleetResponse < Aws::Structure.new(
+      class RequestSpotFleetResponse < Struct.new(
         :spot_fleet_request_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -15775,7 +16669,7 @@ module Aws
       #           security_group_ids: ["String"],
       #         },
       #       }
-      class RequestSpotInstancesRequest < Aws::Structure.new(
+      class RequestSpotInstancesRequest < Struct.new(
         :dry_run,
         :spot_price,
         :client_token,
@@ -15787,6 +16681,8 @@ module Aws
         :availability_zone_group,
         :block_duration_minutes,
         :launch_specification)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -15897,8 +16793,10 @@ module Aws
       end
 
       # Contains the output of RequestSpotInstances.
-      class RequestSpotInstancesResult < Aws::Structure.new(
+      class RequestSpotInstancesResult < Struct.new(
         :spot_instance_requests)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_instance_requests
         #   One or more Spot instance requests.
@@ -15968,7 +16866,7 @@ module Aws
       #         },
       #         security_group_ids: ["String"],
       #       }
-      class RequestSpotLaunchSpecification < Aws::Structure.new(
+      class RequestSpotLaunchSpecification < Struct.new(
         :image_id,
         :key_name,
         :security_groups,
@@ -15985,6 +16883,8 @@ module Aws
         :ebs_optimized,
         :monitoring,
         :security_group_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the AMI.
@@ -16064,12 +16964,14 @@ module Aws
       end
 
       # Describes a reservation.
-      class Reservation < Aws::Structure.new(
+      class Reservation < Struct.new(
         :reservation_id,
         :owner_id,
         :requester_id,
         :groups,
         :instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] reservation_id
         #   The ID of the reservation.
@@ -16102,9 +17004,11 @@ module Aws
       #         amount: 1.0,
       #         currency_code: "USD", # accepts USD
       #       }
-      class ReservedInstanceLimitPrice < Aws::Structure.new(
+      class ReservedInstanceLimitPrice < Struct.new(
         :amount,
         :currency_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] amount
         #   Used for Reserved Instance Marketplace offerings. Specifies the
@@ -16119,7 +17023,7 @@ module Aws
       end
 
       # Describes a Reserved Instance.
-      class ReservedInstances < Aws::Structure.new(
+      class ReservedInstances < Struct.new(
         :reserved_instances_id,
         :instance_type,
         :availability_zone,
@@ -16136,6 +17040,8 @@ module Aws
         :currency_code,
         :offering_type,
         :recurring_charges)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_id
         #   The ID of the Reserved Instance.
@@ -16216,11 +17122,13 @@ module Aws
       #         instance_count: 1,
       #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #       }
-      class ReservedInstancesConfiguration < Aws::Structure.new(
+      class ReservedInstancesConfiguration < Struct.new(
         :availability_zone,
         :platform,
         :instance_count,
         :instance_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zone
         #   The Availability Zone for the modified Reserved Instances.
@@ -16242,8 +17150,10 @@ module Aws
       end
 
       # Describes the ID of a Reserved Instance.
-      class ReservedInstancesId < Aws::Structure.new(
+      class ReservedInstancesId < Struct.new(
         :reserved_instances_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_id
         #   The ID of the Reserved Instance.
@@ -16252,7 +17162,7 @@ module Aws
       end
 
       # Describes a Reserved Instance listing.
-      class ReservedInstancesListing < Aws::Structure.new(
+      class ReservedInstancesListing < Struct.new(
         :reserved_instances_listing_id,
         :reserved_instances_id,
         :create_date,
@@ -16263,6 +17173,8 @@ module Aws
         :price_schedules,
         :tags,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_listing_id
         #   The ID of the Reserved Instance listing.
@@ -16314,7 +17226,7 @@ module Aws
       end
 
       # Describes a Reserved Instance modification.
-      class ReservedInstancesModification < Aws::Structure.new(
+      class ReservedInstancesModification < Struct.new(
         :reserved_instances_modification_id,
         :reserved_instances_ids,
         :modification_results,
@@ -16324,6 +17236,8 @@ module Aws
         :status,
         :status_message,
         :client_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_modification_id
         #   A unique ID for the Reserved Instance modification.
@@ -16371,9 +17285,11 @@ module Aws
       end
 
       # Describes the modification request/s.
-      class ReservedInstancesModificationResult < Aws::Structure.new(
+      class ReservedInstancesModificationResult < Struct.new(
         :reserved_instances_id,
         :target_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_id
         #   The ID for the Reserved Instances that were created as part of the
@@ -16389,7 +17305,7 @@ module Aws
       end
 
       # Describes a Reserved Instance offering.
-      class ReservedInstancesOffering < Aws::Structure.new(
+      class ReservedInstancesOffering < Struct.new(
         :reserved_instances_offering_id,
         :instance_type,
         :availability_zone,
@@ -16403,6 +17319,8 @@ module Aws
         :recurring_charges,
         :marketplace,
         :pricing_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_instances_offering_id
         #   The ID of the Reserved Instance offering.
@@ -16471,10 +17389,12 @@ module Aws
       #         image_id: "String", # required
       #         attribute: "launchPermission", # required, accepts launchPermission
       #       }
-      class ResetImageAttributeRequest < Aws::Structure.new(
+      class ResetImageAttributeRequest < Struct.new(
         :dry_run,
         :image_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -16503,10 +17423,12 @@ module Aws
       #         instance_id: "String", # required
       #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
       #       }
-      class ResetInstanceAttributeRequest < Aws::Structure.new(
+      class ResetInstanceAttributeRequest < Struct.new(
         :dry_run,
         :instance_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -16540,10 +17462,12 @@ module Aws
       #         network_interface_id: "String", # required
       #         source_dest_check: "String",
       #       }
-      class ResetNetworkInterfaceAttributeRequest < Aws::Structure.new(
+      class ResetNetworkInterfaceAttributeRequest < Struct.new(
         :dry_run,
         :network_interface_id,
         :source_dest_check)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -16572,10 +17496,12 @@ module Aws
       #         snapshot_id: "String", # required
       #         attribute: "productCodes", # required, accepts productCodes, createVolumePermission
       #       }
-      class ResetSnapshotAttributeRequest < Aws::Structure.new(
+      class ResetSnapshotAttributeRequest < Struct.new(
         :dry_run,
         :snapshot_id,
         :attribute)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -16603,9 +17529,11 @@ module Aws
       #         dry_run: false,
       #         public_ip: "String", # required
       #       }
-      class RestoreAddressToClassicRequest < Aws::Structure.new(
+      class RestoreAddressToClassicRequest < Struct.new(
         :dry_run,
         :public_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -16621,9 +17549,11 @@ module Aws
       end
 
       # Contains the output of RestoreAddressToClassic.
-      class RestoreAddressToClassicResult < Aws::Structure.new(
+      class RestoreAddressToClassicResult < Struct.new(
         :status,
         :public_ip)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The move status for the IP address.
@@ -16676,7 +17606,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class RevokeSecurityGroupEgressRequest < Aws::Structure.new(
+      class RevokeSecurityGroupEgressRequest < Struct.new(
         :dry_run,
         :group_id,
         :source_security_group_name,
@@ -16686,6 +17616,8 @@ module Aws
         :to_port,
         :cidr_ip,
         :ip_permissions)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -16781,7 +17713,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class RevokeSecurityGroupIngressRequest < Aws::Structure.new(
+      class RevokeSecurityGroupIngressRequest < Struct.new(
         :dry_run,
         :group_name,
         :group_id,
@@ -16792,6 +17724,8 @@ module Aws
         :to_port,
         :cidr_ip,
         :ip_permissions)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -16862,7 +17796,7 @@ module Aws
       end
 
       # Describes a route in a route table.
-      class Route < Aws::Structure.new(
+      class Route < Struct.new(
         :destination_cidr_block,
         :destination_prefix_list_id,
         :gateway_id,
@@ -16873,6 +17807,8 @@ module Aws
         :nat_gateway_id,
         :state,
         :origin)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_cidr_block
         #   The CIDR block used for the destination match.
@@ -16928,13 +17864,15 @@ module Aws
       end
 
       # Describes a route table.
-      class RouteTable < Aws::Structure.new(
+      class RouteTable < Struct.new(
         :route_table_id,
         :vpc_id,
         :routes,
         :associations,
         :tags,
         :propagating_vgws)
+
+        include Aws::Structure
 
         # @!attribute [rw] route_table_id
         #   The ID of the route table.
@@ -16963,11 +17901,13 @@ module Aws
       end
 
       # Describes an association between a route table and a subnet.
-      class RouteTableAssociation < Aws::Structure.new(
+      class RouteTableAssociation < Struct.new(
         :route_table_association_id,
         :route_table_id,
         :subnet_id,
         :main)
+
+        include Aws::Structure
 
         # @!attribute [rw] route_table_association_id
         #   The ID of the association between a route table and a subnet.
@@ -16995,8 +17935,10 @@ module Aws
       #       {
       #         enabled: false, # required
       #       }
-      class RunInstancesMonitoringEnabled < Aws::Structure.new(
+      class RunInstancesMonitoringEnabled < Struct.new(
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Indicates whether monitoring is enabled for the instance.
@@ -17076,7 +18018,7 @@ module Aws
       #         },
       #         ebs_optimized: false,
       #       }
-      class RunInstancesRequest < Aws::Structure.new(
+      class RunInstancesRequest < Struct.new(
         :dry_run,
         :image_id,
         :min_count,
@@ -17100,6 +18042,8 @@ module Aws
         :network_interfaces,
         :iam_instance_profile,
         :ebs_optimized)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -17384,12 +18328,14 @@ module Aws
       #           ebs_optimized: false,
       #         },
       #       }
-      class RunScheduledInstancesRequest < Aws::Structure.new(
+      class RunScheduledInstancesRequest < Struct.new(
         :dry_run,
         :client_token,
         :instance_count,
         :scheduled_instance_id,
         :launch_specification)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -17426,8 +18372,10 @@ module Aws
       end
 
       # Contains the output of RunScheduledInstances.
-      class RunScheduledInstancesResult < Aws::Structure.new(
+      class RunScheduledInstancesResult < Struct.new(
         :instance_id_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id_set
         #   The IDs of the newly launched instances.
@@ -17447,12 +18395,14 @@ module Aws
       #         upload_policy: "data",
       #         upload_policy_signature: "String",
       #       }
-      class S3Storage < Aws::Structure.new(
+      class S3Storage < Struct.new(
         :bucket,
         :prefix,
         :aws_access_key_id,
         :upload_policy,
         :upload_policy_signature)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   The bucket in which to store the AMI. You can specify a bucket that
@@ -17487,7 +18437,7 @@ module Aws
       end
 
       # Describes a Scheduled Instance.
-      class ScheduledInstance < Aws::Structure.new(
+      class ScheduledInstance < Struct.new(
         :scheduled_instance_id,
         :instance_type,
         :platform,
@@ -17503,6 +18453,8 @@ module Aws
         :term_start_date,
         :term_end_date,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_instance_id
         #   The Scheduled Instance ID.
@@ -17567,7 +18519,7 @@ module Aws
       end
 
       # Describes a schedule that is available for your Scheduled Instances.
-      class ScheduledInstanceAvailability < Aws::Structure.new(
+      class ScheduledInstanceAvailability < Struct.new(
         :instance_type,
         :platform,
         :network_platform,
@@ -17581,6 +18533,8 @@ module Aws
         :available_instance_count,
         :min_term_duration_in_days,
         :max_term_duration_in_days)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_type
         #   The instance type. You can specify one of the C3, C4, M4, or R3
@@ -17638,12 +18592,14 @@ module Aws
       end
 
       # Describes the recurring schedule for a Scheduled Instance.
-      class ScheduledInstanceRecurrence < Aws::Structure.new(
+      class ScheduledInstanceRecurrence < Struct.new(
         :frequency,
         :interval,
         :occurrence_day_set,
         :occurrence_relative_to_end,
         :occurrence_unit)
+
+        include Aws::Structure
 
         # @!attribute [rw] frequency
         #   The frequency (`Daily`, `Weekly`, or `Monthly`).
@@ -17682,12 +18638,14 @@ module Aws
       #         occurrence_relative_to_end: false,
       #         occurrence_unit: "String",
       #       }
-      class ScheduledInstanceRecurrenceRequest < Aws::Structure.new(
+      class ScheduledInstanceRecurrenceRequest < Struct.new(
         :frequency,
         :interval,
         :occurrence_days,
         :occurrence_relative_to_end,
         :occurrence_unit)
+
+        include Aws::Structure
 
         # @!attribute [rw] frequency
         #   The frequency (`Daily`, `Weekly`, or `Monthly`).
@@ -17738,11 +18696,13 @@ module Aws
       #           encrypted: false,
       #         },
       #       }
-      class ScheduledInstancesBlockDeviceMapping < Aws::Structure.new(
+      class ScheduledInstancesBlockDeviceMapping < Struct.new(
         :device_name,
         :no_device,
         :virtual_name,
         :ebs)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_name
         #   The device name exposed to the instance (for example, `/dev/sdh` or
@@ -17787,13 +18747,15 @@ module Aws
       #         iops: 1,
       #         encrypted: false,
       #       }
-      class ScheduledInstancesEbs < Aws::Structure.new(
+      class ScheduledInstancesEbs < Struct.new(
         :snapshot_id,
         :volume_size,
         :delete_on_termination,
         :volume_type,
         :iops,
         :encrypted)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The ID of the snapshot.
@@ -17855,9 +18817,11 @@ module Aws
       #         arn: "String",
       #         name: "String",
       #       }
-      class ScheduledInstancesIamInstanceProfile < Aws::Structure.new(
+      class ScheduledInstancesIamInstanceProfile < Struct.new(
         :arn,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN).
@@ -17933,7 +18897,7 @@ module Aws
       #         },
       #         ebs_optimized: false,
       #       }
-      class ScheduledInstancesLaunchSpecification < Aws::Structure.new(
+      class ScheduledInstancesLaunchSpecification < Struct.new(
         :image_id,
         :key_name,
         :security_group_ids,
@@ -17948,6 +18912,8 @@ module Aws
         :network_interfaces,
         :iam_instance_profile,
         :ebs_optimized)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the Amazon Machine Image (AMI).
@@ -18021,8 +18987,10 @@ module Aws
       #       {
       #         enabled: false,
       #       }
-      class ScheduledInstancesMonitoring < Aws::Structure.new(
+      class ScheduledInstancesMonitoring < Struct.new(
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Indicates whether monitoring is enabled.
@@ -18051,7 +19019,7 @@ module Aws
       #         groups: ["String"],
       #         delete_on_termination: false,
       #       }
-      class ScheduledInstancesNetworkInterface < Aws::Structure.new(
+      class ScheduledInstancesNetworkInterface < Struct.new(
         :network_interface_id,
         :device_index,
         :subnet_id,
@@ -18062,6 +19030,8 @@ module Aws
         :associate_public_ip_address,
         :groups,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface_id
         #   The ID of the network interface.
@@ -18119,9 +19089,11 @@ module Aws
       #         availability_zone: "String",
       #         group_name: "String",
       #       }
-      class ScheduledInstancesPlacement < Aws::Structure.new(
+      class ScheduledInstancesPlacement < Struct.new(
         :availability_zone,
         :group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zone
         #   The Availability Zone.
@@ -18141,9 +19113,11 @@ module Aws
       #         private_ip_address: "String",
       #         primary: false,
       #       }
-      class ScheduledInstancesPrivateIpAddressConfig < Aws::Structure.new(
+      class ScheduledInstancesPrivateIpAddressConfig < Struct.new(
         :private_ip_address,
         :primary)
+
+        include Aws::Structure
 
         # @!attribute [rw] private_ip_address
         #   The IP address.
@@ -18157,7 +19131,7 @@ module Aws
       end
 
       # Describes a security group
-      class SecurityGroup < Aws::Structure.new(
+      class SecurityGroup < Struct.new(
         :owner_id,
         :group_name,
         :group_id,
@@ -18166,6 +19140,8 @@ module Aws
         :ip_permissions_egress,
         :vpc_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_id
         #   The AWS account ID of the owner of the security group.
@@ -18204,10 +19180,12 @@ module Aws
 
       # Describes a VPC with a security group that references your security
       # group.
-      class SecurityGroupReference < Aws::Structure.new(
+      class SecurityGroupReference < Struct.new(
         :group_id,
         :referencing_vpc_id,
         :vpc_peering_connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_id
         #   The ID of your security group.
@@ -18232,9 +19210,11 @@ module Aws
       #         earliest_time: Time.now, # required
       #         latest_time: Time.now, # required
       #       }
-      class SlotDateTimeRangeRequest < Aws::Structure.new(
+      class SlotDateTimeRangeRequest < Struct.new(
         :earliest_time,
         :latest_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] earliest_time
         #   The earliest date and time, in UTC, for the Scheduled Instance to
@@ -18258,9 +19238,11 @@ module Aws
       #         earliest_time: Time.now,
       #         latest_time: Time.now,
       #       }
-      class SlotStartTimeRangeRequest < Aws::Structure.new(
+      class SlotStartTimeRangeRequest < Struct.new(
         :earliest_time,
         :latest_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] earliest_time
         #   The earliest date and time, in UTC, for the Scheduled Instance to
@@ -18275,7 +19257,7 @@ module Aws
       end
 
       # Describes a snapshot.
-      class Snapshot < Aws::Structure.new(
+      class Snapshot < Struct.new(
         :snapshot_id,
         :volume_id,
         :state,
@@ -18290,6 +19272,8 @@ module Aws
         :encrypted,
         :kms_key_id,
         :data_encryption_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The ID of the snapshot. Each snapshot receives a unique identifier
@@ -18370,7 +19354,7 @@ module Aws
       end
 
       # Describes the snapshot created from the imported disk.
-      class SnapshotDetail < Aws::Structure.new(
+      class SnapshotDetail < Struct.new(
         :disk_image_size,
         :description,
         :format,
@@ -18381,6 +19365,8 @@ module Aws
         :progress,
         :status_message,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] disk_image_size
         #   The size of the disk in the snapshot, in GiB.
@@ -18437,11 +19423,13 @@ module Aws
       #           s3_key: "String",
       #         },
       #       }
-      class SnapshotDiskContainer < Aws::Structure.new(
+      class SnapshotDiskContainer < Struct.new(
         :description,
         :format,
         :url,
         :user_bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] description
         #   The description of the disk image being imported.
@@ -18465,7 +19453,7 @@ module Aws
       end
 
       # Details about the import snapshot task.
-      class SnapshotTaskDetail < Aws::Structure.new(
+      class SnapshotTaskDetail < Struct.new(
         :disk_image_size,
         :description,
         :format,
@@ -18475,6 +19463,8 @@ module Aws
         :progress,
         :status_message,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] disk_image_size
         #   The size of the disk in the snapshot, in GiB.
@@ -18515,12 +19505,14 @@ module Aws
       end
 
       # Describes the data feed for a Spot instance.
-      class SpotDatafeedSubscription < Aws::Structure.new(
+      class SpotDatafeedSubscription < Struct.new(
         :owner_id,
         :bucket,
         :prefix,
         :state,
         :fault)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_id
         #   The AWS account ID of the account.
@@ -18612,7 +19604,7 @@ module Aws
       #         weighted_capacity: 1.0,
       #         spot_price: "String",
       #       }
-      class SpotFleetLaunchSpecification < Aws::Structure.new(
+      class SpotFleetLaunchSpecification < Struct.new(
         :image_id,
         :key_name,
         :security_groups,
@@ -18630,6 +19622,8 @@ module Aws
         :ebs_optimized,
         :weighted_capacity,
         :spot_price)
+
+        include Aws::Structure
 
         # @!attribute [rw] image_id
         #   The ID of the AMI.
@@ -18733,8 +19727,10 @@ module Aws
       #       {
       #         enabled: false,
       #       }
-      class SpotFleetMonitoring < Aws::Structure.new(
+      class SpotFleetMonitoring < Struct.new(
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Enables monitoring for the instance.
@@ -18745,12 +19741,14 @@ module Aws
       end
 
       # Describes a Spot fleet request.
-      class SpotFleetRequestConfig < Aws::Structure.new(
+      class SpotFleetRequestConfig < Struct.new(
         :spot_fleet_request_id,
         :spot_fleet_request_state,
         :spot_fleet_request_config,
         :create_time,
         :activity_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_fleet_request_id
         #   The ID of the Spot fleet request.
@@ -18862,7 +19860,7 @@ module Aws
       #         fulfilled_capacity: 1.0,
       #         type: "request", # accepts request, maintain
       #       }
-      class SpotFleetRequestConfigData < Aws::Structure.new(
+      class SpotFleetRequestConfigData < Struct.new(
         :client_token,
         :spot_price,
         :target_capacity,
@@ -18875,6 +19873,8 @@ module Aws
         :allocation_strategy,
         :fulfilled_capacity,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] client_token
         #   A unique, case-sensitive identifier you provide to ensure
@@ -18957,7 +19957,7 @@ module Aws
       end
 
       # Describes a Spot instance request.
-      class SpotInstanceRequest < Aws::Structure.new(
+      class SpotInstanceRequest < Struct.new(
         :spot_instance_request_id,
         :spot_price,
         :type,
@@ -18976,6 +19976,8 @@ module Aws
         :actual_block_hourly_price,
         :tags,
         :launched_availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] spot_instance_request_id
         #   The ID of the Spot instance request.
@@ -19074,9 +20076,11 @@ module Aws
       end
 
       # Describes a Spot instance state change.
-      class SpotInstanceStateFault < Aws::Structure.new(
+      class SpotInstanceStateFault < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The reason code for the Spot instance state change.
@@ -19089,10 +20093,12 @@ module Aws
       end
 
       # Describes the status of a Spot instance request.
-      class SpotInstanceStatus < Aws::Structure.new(
+      class SpotInstanceStatus < Struct.new(
         :code,
         :update_time,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The status code. For a list of status codes, see [Spot Bid Status
@@ -19122,9 +20128,11 @@ module Aws
       #         availability_zone: "String",
       #         group_name: "String",
       #       }
-      class SpotPlacement < Aws::Structure.new(
+      class SpotPlacement < Struct.new(
         :availability_zone,
         :group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zone
         #   The Availability Zone.
@@ -19141,12 +20149,14 @@ module Aws
 
       # Describes the maximum hourly price (bid) for any Spot instance
       # launched to fulfill the request.
-      class SpotPrice < Aws::Structure.new(
+      class SpotPrice < Struct.new(
         :instance_type,
         :product_description,
         :spot_price,
         :timestamp,
         :availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_type
         #   The instance type.
@@ -19173,13 +20183,15 @@ module Aws
       end
 
       # Describes a stale rule in a security group.
-      class StaleIpPermission < Aws::Structure.new(
+      class StaleIpPermission < Struct.new(
         :from_port,
         :ip_protocol,
         :ip_ranges,
         :prefix_list_ids,
         :to_port,
         :user_id_group_pairs)
+
+        include Aws::Structure
 
         # @!attribute [rw] from_port
         #   The start of the port range for the TCP and UDP protocols, or an
@@ -19220,13 +20232,15 @@ module Aws
 
       # Describes a stale security group (a security group that contains stale
       # rules).
-      class StaleSecurityGroup < Aws::Structure.new(
+      class StaleSecurityGroup < Struct.new(
         :group_id,
         :group_name,
         :description,
         :vpc_id,
         :stale_ip_permissions,
         :stale_ip_permissions_egress)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_id
         #   The ID of the security group.
@@ -19263,10 +20277,12 @@ module Aws
       #         additional_info: "String",
       #         dry_run: false,
       #       }
-      class StartInstancesRequest < Aws::Structure.new(
+      class StartInstancesRequest < Struct.new(
         :instance_ids,
         :additional_info,
         :dry_run)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   One or more instance IDs.
@@ -19286,8 +20302,10 @@ module Aws
       end
 
       # Contains the output of StartInstances.
-      class StartInstancesResult < Aws::Structure.new(
+      class StartInstancesResult < Struct.new(
         :starting_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] starting_instances
         #   Information about one or more started instances.
@@ -19296,9 +20314,11 @@ module Aws
       end
 
       # Describes a state change.
-      class StateReason < Aws::Structure.new(
+      class StateReason < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The reason code for the state change.
@@ -19344,10 +20364,12 @@ module Aws
       #         instance_ids: ["String"], # required
       #         force: false,
       #       }
-      class StopInstancesRequest < Aws::Structure.new(
+      class StopInstancesRequest < Struct.new(
         :dry_run,
         :instance_ids,
         :force)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -19372,8 +20394,10 @@ module Aws
       end
 
       # Contains the output of StopInstances.
-      class StopInstancesResult < Aws::Structure.new(
+      class StopInstancesResult < Struct.new(
         :stopping_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] stopping_instances
         #   Information about one or more stopped instances.
@@ -19394,8 +20418,10 @@ module Aws
       #           upload_policy_signature: "String",
       #         },
       #       }
-      class Storage < Aws::Structure.new(
+      class Storage < Struct.new(
         :s3)
+
+        include Aws::Structure
 
         # @!attribute [rw] s3
         #   An Amazon S3 storage location.
@@ -19404,7 +20430,7 @@ module Aws
       end
 
       # Describes a subnet.
-      class Subnet < Aws::Structure.new(
+      class Subnet < Struct.new(
         :subnet_id,
         :state,
         :vpc_id,
@@ -19414,6 +20440,8 @@ module Aws
         :default_for_az,
         :map_public_ip_on_launch,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_id
         #   The ID of the subnet.
@@ -19464,9 +20492,11 @@ module Aws
       #         key: "String",
       #         value: "String",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key of the tag.
@@ -19485,11 +20515,13 @@ module Aws
       end
 
       # Describes a tag.
-      class TagDescription < Aws::Structure.new(
+      class TagDescription < Struct.new(
         :resource_id,
         :resource_type,
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The ID of the resource. For example, `ami-1a2b3c4d`.
@@ -19517,9 +20549,11 @@ module Aws
       #         dry_run: false,
       #         instance_ids: ["String"], # required
       #       }
-      class TerminateInstancesRequest < Aws::Structure.new(
+      class TerminateInstancesRequest < Struct.new(
         :dry_run,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -19535,8 +20569,10 @@ module Aws
       end
 
       # Contains the output of TerminateInstances.
-      class TerminateInstancesResult < Aws::Structure.new(
+      class TerminateInstancesResult < Struct.new(
         :terminating_instances)
+
+        include Aws::Structure
 
         # @!attribute [rw] terminating_instances
         #   Information about one or more terminated instances.
@@ -19552,9 +20588,11 @@ module Aws
       #         network_interface_id: "String", # required
       #         private_ip_addresses: ["String"], # required
       #       }
-      class UnassignPrivateIpAddressesRequest < Aws::Structure.new(
+      class UnassignPrivateIpAddressesRequest < Struct.new(
         :network_interface_id,
         :private_ip_addresses)
+
+        include Aws::Structure
 
         # @!attribute [rw] network_interface_id
         #   The ID of the network interface.
@@ -19576,9 +20614,11 @@ module Aws
       #         dry_run: false,
       #         instance_ids: ["String"], # required
       #       }
-      class UnmonitorInstancesRequest < Aws::Structure.new(
+      class UnmonitorInstancesRequest < Struct.new(
         :dry_run,
         :instance_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] dry_run
         #   Checks whether you have the required permissions for the action,
@@ -19594,8 +20634,10 @@ module Aws
       end
 
       # Contains the output of UnmonitorInstances.
-      class UnmonitorInstancesResult < Aws::Structure.new(
+      class UnmonitorInstancesResult < Struct.new(
         :instance_monitorings)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_monitorings
         #   Monitoring information for one or more instances.
@@ -19605,9 +20647,11 @@ module Aws
 
       # Information about items that were not successfully processed in a
       # batch call.
-      class UnsuccessfulItem < Aws::Structure.new(
+      class UnsuccessfulItem < Struct.new(
         :resource_id,
         :error)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The ID of the resource.
@@ -19625,9 +20669,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
-      class UnsuccessfulItemError < Aws::Structure.new(
+      class UnsuccessfulItemError < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The error code.
@@ -19647,9 +20693,11 @@ module Aws
       #         s3_bucket: "String",
       #         s3_key: "String",
       #       }
-      class UserBucket < Aws::Structure.new(
+      class UserBucket < Struct.new(
         :s3_bucket,
         :s3_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] s3_bucket
         #   The name of the S3 bucket where the disk image is located.
@@ -19662,9 +20710,11 @@ module Aws
       end
 
       # Describes the S3 bucket for the disk image.
-      class UserBucketDetails < Aws::Structure.new(
+      class UserBucketDetails < Struct.new(
         :s3_bucket,
         :s3_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] s3_bucket
         #   The S3 bucket from which the disk image was created.
@@ -19683,8 +20733,10 @@ module Aws
       #       {
       #         data: "String",
       #       }
-      class UserData < Aws::Structure.new(
+      class UserData < Struct.new(
         :data)
+
+        include Aws::Structure
 
         # @!attribute [rw] data
         #   The user data. If you are using an AWS SDK or command line tool,
@@ -19706,13 +20758,15 @@ module Aws
       #         vpc_peering_connection_id: "String",
       #         peering_status: "String",
       #       }
-      class UserIdGroupPair < Aws::Structure.new(
+      class UserIdGroupPair < Struct.new(
         :user_id,
         :group_name,
         :group_id,
         :vpc_id,
         :vpc_peering_connection_id,
         :peering_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_id
         #   The ID of an AWS account. For a referenced security group in another
@@ -19747,12 +20801,14 @@ module Aws
       end
 
       # Describes telemetry for a VPN tunnel.
-      class VgwTelemetry < Aws::Structure.new(
+      class VgwTelemetry < Struct.new(
         :outside_ip_address,
         :status,
         :last_status_change,
         :status_message,
         :accepted_route_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] outside_ip_address
         #   The Internet-routable IP address of the virtual private gateway\'s
@@ -19778,7 +20834,7 @@ module Aws
       end
 
       # Describes a volume.
-      class Volume < Aws::Structure.new(
+      class Volume < Struct.new(
         :volume_id,
         :size,
         :snapshot_id,
@@ -19791,6 +20847,8 @@ module Aws
         :iops,
         :encrypted,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The ID of the volume.
@@ -19865,13 +20923,15 @@ module Aws
       end
 
       # Describes volume attachment details.
-      class VolumeAttachment < Aws::Structure.new(
+      class VolumeAttachment < Struct.new(
         :volume_id,
         :instance_id,
         :device,
         :state,
         :attach_time,
         :delete_on_termination)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The ID of the volume.
@@ -19906,8 +20966,10 @@ module Aws
       #       {
       #         size: 1, # required
       #       }
-      class VolumeDetail < Aws::Structure.new(
+      class VolumeDetail < Struct.new(
         :size)
+
+        include Aws::Structure
 
         # @!attribute [rw] size
         #   The size of the volume, in GiB.
@@ -19916,11 +20978,13 @@ module Aws
       end
 
       # Describes a volume status operation code.
-      class VolumeStatusAction < Aws::Structure.new(
+      class VolumeStatusAction < Struct.new(
         :code,
         :description,
         :event_type,
         :event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The code identifying the operation, for example, `enable-volume-io`.
@@ -19941,9 +21005,11 @@ module Aws
       end
 
       # Describes a volume status.
-      class VolumeStatusDetails < Aws::Structure.new(
+      class VolumeStatusDetails < Struct.new(
         :name,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the volume status.
@@ -19956,12 +21022,14 @@ module Aws
       end
 
       # Describes a volume status event.
-      class VolumeStatusEvent < Aws::Structure.new(
+      class VolumeStatusEvent < Struct.new(
         :event_type,
         :description,
         :not_before,
         :not_after,
         :event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_type
         #   The type of this event.
@@ -19986,9 +21054,11 @@ module Aws
       end
 
       # Describes the status of a volume.
-      class VolumeStatusInfo < Aws::Structure.new(
+      class VolumeStatusInfo < Struct.new(
         :status,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the volume.
@@ -20001,12 +21071,14 @@ module Aws
       end
 
       # Describes the volume status.
-      class VolumeStatusItem < Aws::Structure.new(
+      class VolumeStatusItem < Struct.new(
         :volume_id,
         :availability_zone,
         :volume_status,
         :events,
         :actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_id
         #   The volume ID.
@@ -20031,7 +21103,7 @@ module Aws
       end
 
       # Describes a VPC.
-      class Vpc < Aws::Structure.new(
+      class Vpc < Struct.new(
         :vpc_id,
         :state,
         :cidr_block,
@@ -20039,6 +21111,8 @@ module Aws
         :tags,
         :instance_tenancy,
         :is_default)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -20072,9 +21146,11 @@ module Aws
       end
 
       # Describes an attachment between a virtual private gateway and a VPC.
-      class VpcAttachment < Aws::Structure.new(
+      class VpcAttachment < Struct.new(
         :vpc_id,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -20087,10 +21163,12 @@ module Aws
       end
 
       # Describes whether a VPC is enabled for ClassicLink.
-      class VpcClassicLink < Aws::Structure.new(
+      class VpcClassicLink < Struct.new(
         :vpc_id,
         :classic_link_enabled,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The ID of the VPC.
@@ -20107,7 +21185,7 @@ module Aws
       end
 
       # Describes a VPC endpoint.
-      class VpcEndpoint < Aws::Structure.new(
+      class VpcEndpoint < Struct.new(
         :vpc_endpoint_id,
         :vpc_id,
         :service_name,
@@ -20115,6 +21193,8 @@ module Aws
         :policy_document,
         :route_table_ids,
         :creation_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_endpoint_id
         #   The ID of the VPC endpoint.
@@ -20147,13 +21227,15 @@ module Aws
       end
 
       # Describes a VPC peering connection.
-      class VpcPeeringConnection < Aws::Structure.new(
+      class VpcPeeringConnection < Struct.new(
         :accepter_vpc_info,
         :expiration_time,
         :requester_vpc_info,
         :status,
         :tags,
         :vpc_peering_connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] accepter_vpc_info
         #   Information about the accepter VPC. CIDR block information is not
@@ -20185,10 +21267,12 @@ module Aws
       end
 
       # Describes the VPC peering connection options.
-      class VpcPeeringConnectionOptionsDescription < Aws::Structure.new(
+      class VpcPeeringConnectionOptionsDescription < Struct.new(
         :allow_egress_from_local_classic_link_to_remote_vpc,
         :allow_egress_from_local_vpc_to_remote_classic_link,
         :allow_dns_resolution_from_remote_vpc)
+
+        include Aws::Structure
 
         # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
         #   Indicates whether a local ClassicLink connection can communicate
@@ -20208,9 +21292,11 @@ module Aws
       end
 
       # Describes the status of a VPC peering connection.
-      class VpcPeeringConnectionStateReason < Aws::Structure.new(
+      class VpcPeeringConnectionStateReason < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The status of the VPC peering connection.
@@ -20224,11 +21310,13 @@ module Aws
       end
 
       # Describes a VPC in a VPC peering connection.
-      class VpcPeeringConnectionVpcInfo < Aws::Structure.new(
+      class VpcPeeringConnectionVpcInfo < Struct.new(
         :cidr_block,
         :owner_id,
         :vpc_id,
         :peering_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] cidr_block
         #   The CIDR block for the VPC.
@@ -20250,7 +21338,7 @@ module Aws
       end
 
       # Describes a VPN connection.
-      class VpnConnection < Aws::Structure.new(
+      class VpnConnection < Struct.new(
         :vpn_connection_id,
         :state,
         :customer_gateway_configuration,
@@ -20261,6 +21349,8 @@ module Aws
         :vgw_telemetry,
         :options,
         :routes)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_connection_id
         #   The ID of the VPN connection.
@@ -20310,8 +21400,10 @@ module Aws
       end
 
       # Describes VPN connection options.
-      class VpnConnectionOptions < Aws::Structure.new(
+      class VpnConnectionOptions < Struct.new(
         :static_routes_only)
+
+        include Aws::Structure
 
         # @!attribute [rw] static_routes_only
         #   Indicates whether the VPN connection uses static routes only. Static
@@ -20327,8 +21419,10 @@ module Aws
       #       {
       #         static_routes_only: false,
       #       }
-      class VpnConnectionOptionsSpecification < Aws::Structure.new(
+      class VpnConnectionOptionsSpecification < Struct.new(
         :static_routes_only)
+
+        include Aws::Structure
 
         # @!attribute [rw] static_routes_only
         #   Indicates whether the VPN connection uses static routes only. Static
@@ -20338,13 +21432,15 @@ module Aws
       end
 
       # Describes a virtual private gateway.
-      class VpnGateway < Aws::Structure.new(
+      class VpnGateway < Struct.new(
         :vpn_gateway_id,
         :state,
         :type,
         :availability_zone,
         :vpc_attachments,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpn_gateway_id
         #   The ID of the virtual private gateway.
@@ -20374,10 +21470,12 @@ module Aws
       end
 
       # Describes a static route for a VPN connection.
-      class VpnStaticRoute < Aws::Structure.new(
+      class VpnStaticRoute < Struct.new(
         :destination_cidr_block,
         :source,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_cidr_block
         #   The CIDR block associated with the local subnet of the customer data

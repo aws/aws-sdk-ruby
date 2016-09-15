@@ -50,9 +50,11 @@ module Aws
       #         ],
       #         job_flow_id: "XmlStringMaxLen256", # required
       #       }
-      class AddInstanceGroupsInput < Aws::Structure.new(
+      class AddInstanceGroupsInput < Struct.new(
         :instance_groups,
         :job_flow_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_groups
         #   Instance Groups to add.
@@ -65,9 +67,11 @@ module Aws
       end
 
       # Output from an AddInstanceGroups call.
-      class AddInstanceGroupsOutput < Aws::Structure.new(
+      class AddInstanceGroupsOutput < Struct.new(
         :job_flow_id,
         :instance_group_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flow_id
         #   The job flow ID in which the instance groups are added.
@@ -103,9 +107,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddJobFlowStepsInput < Aws::Structure.new(
+      class AddJobFlowStepsInput < Struct.new(
         :job_flow_id,
         :steps)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flow_id
         #   A string that uniquely identifies the job flow. This identifier is
@@ -119,8 +125,10 @@ module Aws
       end
 
       # The output for the AddJobFlowSteps operation.
-      class AddJobFlowStepsOutput < Aws::Structure.new(
+      class AddJobFlowStepsOutput < Struct.new(
         :step_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] step_ids
         #   The identifiers of the list of steps added to the job flow.
@@ -141,9 +149,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsInput < Aws::Structure.new(
+      class AddTagsInput < Struct.new(
         :resource_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The Amazon EMR resource identifier to which tags will be added. This
@@ -198,11 +208,13 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class Application < Aws::Structure.new(
+      class Application < Struct.new(
         :name,
         :version,
         :args,
         :additional_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the application.
@@ -235,9 +247,11 @@ module Aws
       #           args: ["XmlString"],
       #         },
       #       }
-      class BootstrapActionConfig < Aws::Structure.new(
+      class BootstrapActionConfig < Struct.new(
         :name,
         :script_bootstrap_action)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the bootstrap action.
@@ -250,8 +264,10 @@ module Aws
       end
 
       # Reports the configuration of a bootstrap action in a job flow.
-      class BootstrapActionDetail < Aws::Structure.new(
+      class BootstrapActionDetail < Struct.new(
         :bootstrap_action_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] bootstrap_action_config
         #   A description of the bootstrap action.
@@ -260,7 +276,7 @@ module Aws
       end
 
       # The detailed description of the cluster.
-      class Cluster < Aws::Structure.new(
+      class Cluster < Struct.new(
         :id,
         :name,
         :status,
@@ -278,6 +294,8 @@ module Aws
         :normalized_instance_hours,
         :master_public_dns_name,
         :configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique identifier for the cluster.
@@ -374,9 +392,11 @@ module Aws
       end
 
       # The reason that the cluster changed to its current state.
-      class ClusterStateChangeReason < Aws::Structure.new(
+      class ClusterStateChangeReason < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The programmatic code for the state change reason.
@@ -389,10 +409,12 @@ module Aws
       end
 
       # The detailed status of the cluster.
-      class ClusterStatus < Aws::Structure.new(
+      class ClusterStatus < Struct.new(
         :state,
         :state_change_reason,
         :timeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The current state of the cluster.
@@ -410,11 +432,13 @@ module Aws
       end
 
       # The summary description of the cluster.
-      class ClusterSummary < Aws::Structure.new(
+      class ClusterSummary < Struct.new(
         :id,
         :name,
         :status,
         :normalized_instance_hours)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique identifier for the cluster.
@@ -441,10 +465,12 @@ module Aws
       end
 
       # Represents the timeline of the cluster\'s lifecycle.
-      class ClusterTimeline < Aws::Structure.new(
+      class ClusterTimeline < Struct.new(
         :creation_date_time,
         :ready_date_time,
         :end_date_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_date_time
         #   The creation date and time of the cluster.
@@ -461,10 +487,12 @@ module Aws
       end
 
       # An entity describing an executable that runs on a cluster.
-      class Command < Aws::Structure.new(
+      class Command < Struct.new(
         :name,
         :script_path,
         :args)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the command.
@@ -510,10 +538,12 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class Configuration < Aws::Structure.new(
+      class Configuration < Struct.new(
         :classification,
         :configurations,
         :properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] classification
         #   The classification of a configuration. For more information see,
@@ -541,8 +571,10 @@ module Aws
       #       {
       #         cluster_id: "ClusterId", # required
       #       }
-      class DescribeClusterInput < Aws::Structure.new(
+      class DescribeClusterInput < Struct.new(
         :cluster_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_id
         #   The identifier of the cluster to describe.
@@ -551,8 +583,10 @@ module Aws
       end
 
       # This output contains the description of the cluster.
-      class DescribeClusterOutput < Aws::Structure.new(
+      class DescribeClusterOutput < Struct.new(
         :cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster
         #   This output contains the details for the requested cluster.
@@ -570,11 +604,13 @@ module Aws
       #         job_flow_ids: ["XmlString"],
       #         job_flow_states: ["STARTING"], # accepts STARTING, BOOTSTRAPPING, RUNNING, WAITING, SHUTTING_DOWN, TERMINATED, COMPLETED, FAILED
       #       }
-      class DescribeJobFlowsInput < Aws::Structure.new(
+      class DescribeJobFlowsInput < Struct.new(
         :created_after,
         :created_before,
         :job_flow_ids,
         :job_flow_states)
+
+        include Aws::Structure
 
         # @!attribute [rw] created_after
         #   Return only job flows created after this date and time.
@@ -595,8 +631,10 @@ module Aws
       end
 
       # The output for the DescribeJobFlows operation.
-      class DescribeJobFlowsOutput < Aws::Structure.new(
+      class DescribeJobFlowsOutput < Struct.new(
         :job_flows)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flows
         #   A list of job flows matching the parameters supplied.
@@ -612,9 +650,11 @@ module Aws
       #         cluster_id: "ClusterId", # required
       #         step_id: "StepId", # required
       #       }
-      class DescribeStepInput < Aws::Structure.new(
+      class DescribeStepInput < Struct.new(
         :cluster_id,
         :step_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_id
         #   The identifier of the cluster with steps to describe.
@@ -627,8 +667,10 @@ module Aws
       end
 
       # This output contains the description of the cluster step.
-      class DescribeStepOutput < Aws::Structure.new(
+      class DescribeStepOutput < Struct.new(
         :step)
+
+        include Aws::Structure
 
         # @!attribute [rw] step
         #   The step details for the requested step identifier.
@@ -638,9 +680,11 @@ module Aws
 
       # Configuration of requested EBS block device associated with the
       # instance group.
-      class EbsBlockDevice < Aws::Structure.new(
+      class EbsBlockDevice < Struct.new(
         :volume_specification,
         :device)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_specification
         #   EBS volume specifications such as volume type, IOPS, and size(GiB)
@@ -668,9 +712,11 @@ module Aws
       #         },
       #         volumes_per_instance: 1,
       #       }
-      class EbsBlockDeviceConfig < Aws::Structure.new(
+      class EbsBlockDeviceConfig < Struct.new(
         :volume_specification,
         :volumes_per_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_specification
         #   EBS volume specifications such as volume type, IOPS, and size(GiB)
@@ -701,9 +747,11 @@ module Aws
       #         ],
       #         ebs_optimized: false,
       #       }
-      class EbsConfiguration < Aws::Structure.new(
+      class EbsConfiguration < Struct.new(
         :ebs_block_device_configs,
         :ebs_optimized)
+
+        include Aws::Structure
 
         # @!attribute [rw] ebs_block_device_configs
         #   @return [Array<Types::EbsBlockDeviceConfig>]
@@ -714,9 +762,11 @@ module Aws
       end
 
       # EBS block device that\'s attached to an EC2 instance.
-      class EbsVolume < Aws::Structure.new(
+      class EbsVolume < Struct.new(
         :device,
         :volume_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] device
         #   The device name that is exposed to the instance, such as /dev/sdh.
@@ -731,7 +781,7 @@ module Aws
       # Provides information about the EC2 instances in a cluster grouped by
       # category. For example, key name, subnet ID, IAM instance profile, and
       # so on.
-      class Ec2InstanceAttributes < Aws::Structure.new(
+      class Ec2InstanceAttributes < Struct.new(
         :ec2_key_name,
         :ec2_subnet_id,
         :ec2_availability_zone,
@@ -741,6 +791,8 @@ module Aws
         :service_access_security_group,
         :additional_master_security_groups,
         :additional_slave_security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] ec2_key_name
         #   The name of the Amazon EC2 key pair to use when connecting with SSH
@@ -794,10 +846,12 @@ module Aws
 
       # The details of the step failure. The service attempts to detect the
       # root cause for many common failures.
-      class FailureDetails < Aws::Structure.new(
+      class FailureDetails < Struct.new(
         :reason,
         :message,
         :log_file)
+
+        include Aws::Structure
 
         # @!attribute [rw] reason
         #   The reason for the step failure. In the case where the service
@@ -835,11 +889,13 @@ module Aws
       #         main_class: "XmlString",
       #         args: ["XmlString"],
       #       }
-      class HadoopJarStepConfig < Aws::Structure.new(
+      class HadoopJarStepConfig < Struct.new(
         :properties,
         :jar,
         :main_class,
         :args)
+
+        include Aws::Structure
 
         # @!attribute [rw] properties
         #   A list of Java properties that are set when the step runs. You can
@@ -866,11 +922,13 @@ module Aws
       # A cluster step consisting of a JAR file whose main function will be
       # executed. The main function submits a job for Hadoop to execute and
       # waits for the job to finish or fail.
-      class HadoopStepConfig < Aws::Structure.new(
+      class HadoopStepConfig < Struct.new(
         :jar,
         :properties,
         :main_class,
         :args)
+
+        include Aws::Structure
 
         # @!attribute [rw] jar
         #   The path to the JAR file that runs during the step.
@@ -895,7 +953,7 @@ module Aws
       end
 
       # Represents an EC2 instance provisioned as part of cluster.
-      class Instance < Aws::Structure.new(
+      class Instance < Struct.new(
         :id,
         :ec2_instance_id,
         :public_dns_name,
@@ -905,6 +963,8 @@ module Aws
         :status,
         :instance_group_id,
         :ebs_volumes)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique identifier for the instance in Amazon EMR.
@@ -947,7 +1007,7 @@ module Aws
       # This entity represents an instance group, which is a group of
       # instances that have common purpose. For example, CORE instance group
       # is used for HDFS.
-      class InstanceGroup < Aws::Structure.new(
+      class InstanceGroup < Struct.new(
         :id,
         :name,
         :market,
@@ -961,6 +1021,8 @@ module Aws
         :ebs_block_devices,
         :ebs_optimized,
         :shrink_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the instance group.
@@ -1063,7 +1125,7 @@ module Aws
       #           ebs_optimized: false,
       #         },
       #       }
-      class InstanceGroupConfig < Aws::Structure.new(
+      class InstanceGroupConfig < Struct.new(
         :name,
         :market,
         :instance_role,
@@ -1072,6 +1134,8 @@ module Aws
         :instance_count,
         :configurations,
         :ebs_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Friendly name given to the instance group.
@@ -1118,7 +1182,7 @@ module Aws
       end
 
       # Detailed information about an instance group.
-      class InstanceGroupDetail < Aws::Structure.new(
+      class InstanceGroupDetail < Struct.new(
         :instance_group_id,
         :name,
         :market,
@@ -1133,6 +1197,8 @@ module Aws
         :start_date_time,
         :ready_date_time,
         :end_date_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_group_id
         #   Unique identifier for the instance group.
@@ -1212,11 +1278,13 @@ module Aws
       #           },
       #         },
       #       }
-      class InstanceGroupModifyConfig < Aws::Structure.new(
+      class InstanceGroupModifyConfig < Struct.new(
         :instance_group_id,
         :instance_count,
         :ec2_instance_ids_to_terminate,
         :shrink_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_group_id
         #   Unique ID of the instance group to expand or shrink.
@@ -1238,9 +1306,11 @@ module Aws
       end
 
       # The status change reason details for the instance group.
-      class InstanceGroupStateChangeReason < Aws::Structure.new(
+      class InstanceGroupStateChangeReason < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The programmable code for the state change reason.
@@ -1253,10 +1323,12 @@ module Aws
       end
 
       # The details of the instance group status.
-      class InstanceGroupStatus < Aws::Structure.new(
+      class InstanceGroupStatus < Struct.new(
         :state,
         :state_change_reason,
         :timeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The current state of the instance group.
@@ -1273,10 +1345,12 @@ module Aws
       end
 
       # The timeline of the instance group lifecycle.
-      class InstanceGroupTimeline < Aws::Structure.new(
+      class InstanceGroupTimeline < Struct.new(
         :creation_date_time,
         :ready_date_time,
         :end_date_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_date_time
         #   The creation date and time of the instance group.
@@ -1303,10 +1377,12 @@ module Aws
       #         instances_to_protect: ["InstanceId"],
       #         instance_termination_timeout: 1,
       #       }
-      class InstanceResizePolicy < Aws::Structure.new(
+      class InstanceResizePolicy < Struct.new(
         :instances_to_terminate,
         :instances_to_protect,
         :instance_termination_timeout)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances_to_terminate
         #   Specific list of instances to be terminated when shrinking an
@@ -1326,9 +1402,11 @@ module Aws
       end
 
       # The details of the status change reason for the instance.
-      class InstanceStateChangeReason < Aws::Structure.new(
+      class InstanceStateChangeReason < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The programmable code for the state change reason.
@@ -1341,10 +1419,12 @@ module Aws
       end
 
       # The instance status details.
-      class InstanceStatus < Aws::Structure.new(
+      class InstanceStatus < Struct.new(
         :state,
         :state_change_reason,
         :timeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The current state of the instance.
@@ -1361,10 +1441,12 @@ module Aws
       end
 
       # The timeline of the instance lifecycle.
-      class InstanceTimeline < Aws::Structure.new(
+      class InstanceTimeline < Struct.new(
         :creation_date_time,
         :ready_date_time,
         :end_date_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_date_time
         #   The creation date and time of the instance.
@@ -1381,7 +1463,7 @@ module Aws
       end
 
       # A description of a job flow.
-      class JobFlowDetail < Aws::Structure.new(
+      class JobFlowDetail < Struct.new(
         :job_flow_id,
         :name,
         :log_uri,
@@ -1394,6 +1476,8 @@ module Aws
         :visible_to_all_users,
         :job_flow_role,
         :service_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flow_id
         #   The job flow identifier.
@@ -1463,13 +1547,15 @@ module Aws
       end
 
       # Describes the status of the job flow.
-      class JobFlowExecutionStatusDetail < Aws::Structure.new(
+      class JobFlowExecutionStatusDetail < Struct.new(
         :state,
         :creation_date_time,
         :start_date_time,
         :ready_date_time,
         :end_date_time,
         :last_state_change_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The state of the job flow.
@@ -1558,7 +1644,7 @@ module Aws
       #         additional_master_security_groups: ["XmlStringMaxLen256"],
       #         additional_slave_security_groups: ["XmlStringMaxLen256"],
       #       }
-      class JobFlowInstancesConfig < Aws::Structure.new(
+      class JobFlowInstancesConfig < Struct.new(
         :master_instance_type,
         :slave_instance_type,
         :instance_count,
@@ -1574,6 +1660,8 @@ module Aws
         :service_access_security_group,
         :additional_master_security_groups,
         :additional_slave_security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] master_instance_type
         #   The EC2 instance type of the master node.
@@ -1659,7 +1747,7 @@ module Aws
       end
 
       # Specify the type of Amazon EC2 instances to run the job flow on.
-      class JobFlowInstancesDetail < Aws::Structure.new(
+      class JobFlowInstancesDetail < Struct.new(
         :master_instance_type,
         :master_public_dns_name,
         :master_instance_id,
@@ -1673,6 +1761,8 @@ module Aws
         :keep_job_flow_alive_when_no_steps,
         :termination_protected,
         :hadoop_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] master_instance_type
         #   The Amazon EC2 master node instance type.
@@ -1751,9 +1841,11 @@ module Aws
       #         key: "XmlString",
       #         value: "XmlString",
       #       }
-      class KeyValue < Aws::Structure.new(
+      class KeyValue < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The unique identifier of a key value pair.
@@ -1773,9 +1865,11 @@ module Aws
       #         cluster_id: "ClusterId", # required
       #         marker: "Marker",
       #       }
-      class ListBootstrapActionsInput < Aws::Structure.new(
+      class ListBootstrapActionsInput < Struct.new(
         :cluster_id,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_id
         #   The cluster identifier for the bootstrap actions to list .
@@ -1789,9 +1883,11 @@ module Aws
       end
 
       # This output contains the boostrap actions detail .
-      class ListBootstrapActionsOutput < Aws::Structure.new(
+      class ListBootstrapActionsOutput < Struct.new(
         :bootstrap_actions,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] bootstrap_actions
         #   The bootstrap actions associated with the cluster .
@@ -1815,11 +1911,13 @@ module Aws
       #         cluster_states: ["STARTING"], # accepts STARTING, BOOTSTRAPPING, RUNNING, WAITING, TERMINATING, TERMINATED, TERMINATED_WITH_ERRORS
       #         marker: "Marker",
       #       }
-      class ListClustersInput < Aws::Structure.new(
+      class ListClustersInput < Struct.new(
         :created_after,
         :created_before,
         :cluster_states,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] created_after
         #   The creation date and time beginning value filter for listing
@@ -1843,9 +1941,11 @@ module Aws
 
       # This contains a ClusterSummaryList with the cluster details; for
       # example, the cluster IDs, names, and status.
-      class ListClustersOutput < Aws::Structure.new(
+      class ListClustersOutput < Struct.new(
         :clusters,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] clusters
         #   The list of clusters for the account based on the given filters.
@@ -1866,9 +1966,11 @@ module Aws
       #         cluster_id: "ClusterId", # required
       #         marker: "Marker",
       #       }
-      class ListInstanceGroupsInput < Aws::Structure.new(
+      class ListInstanceGroupsInput < Struct.new(
         :cluster_id,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_id
         #   The identifier of the cluster for which to list the instance groups.
@@ -1882,9 +1984,11 @@ module Aws
       end
 
       # This input determines which instance groups to retrieve.
-      class ListInstanceGroupsOutput < Aws::Structure.new(
+      class ListInstanceGroupsOutput < Struct.new(
         :instance_groups,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_groups
         #   The list of instance groups for the cluster and given filters.
@@ -1908,12 +2012,14 @@ module Aws
       #         instance_states: ["AWAITING_FULFILLMENT"], # accepts AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING, TERMINATED
       #         marker: "Marker",
       #       }
-      class ListInstancesInput < Aws::Structure.new(
+      class ListInstancesInput < Struct.new(
         :cluster_id,
         :instance_group_id,
         :instance_group_types,
         :instance_states,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_id
         #   The identifier of the cluster for which to list the instances.
@@ -1941,9 +2047,11 @@ module Aws
       end
 
       # This output contains the list of instances.
-      class ListInstancesOutput < Aws::Structure.new(
+      class ListInstancesOutput < Struct.new(
         :instances,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] instances
         #   The list of instances for the cluster and given filters.
@@ -1966,11 +2074,13 @@ module Aws
       #         step_ids: ["XmlString"],
       #         marker: "Marker",
       #       }
-      class ListStepsInput < Aws::Structure.new(
+      class ListStepsInput < Struct.new(
         :cluster_id,
         :step_states,
         :step_ids,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cluster_id
         #   The identifier of the cluster for which to list the steps.
@@ -1994,9 +2104,11 @@ module Aws
 
       # This output contains the list of steps returned in reverse order. This
       # means that the last step is the first element in the list.
-      class ListStepsOutput < Aws::Structure.new(
+      class ListStepsOutput < Struct.new(
         :steps,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] steps
         #   The filtered list of steps for the cluster.
@@ -2030,8 +2142,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyInstanceGroupsInput < Aws::Structure.new(
+      class ModifyInstanceGroupsInput < Struct.new(
         :instance_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_groups
         #   Instance groups to change.
@@ -2046,8 +2160,10 @@ module Aws
       #       {
       #         availability_zone: "XmlString", # required
       #       }
-      class PlacementType < Aws::Structure.new(
+      class PlacementType < Struct.new(
         :availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zone
         #   The Amazon EC2 Availability Zone for the job flow.
@@ -2063,9 +2179,11 @@ module Aws
       #         resource_id: "ResourceId", # required
       #         tag_keys: ["String"], # required
       #       }
-      class RemoveTagsInput < Aws::Structure.new(
+      class RemoveTagsInput < Struct.new(
         :resource_id,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The Amazon EMR resource identifier from which tags will be removed.
@@ -2207,7 +2325,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class RunJobFlowInput < Aws::Structure.new(
+      class RunJobFlowInput < Struct.new(
         :name,
         :log_uri,
         :additional_info,
@@ -2224,6 +2342,8 @@ module Aws
         :job_flow_role,
         :service_role,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the job flow.
@@ -2394,8 +2514,10 @@ module Aws
       end
 
       # The result of the RunJobFlow operation.
-      class RunJobFlowOutput < Aws::Structure.new(
+      class RunJobFlowOutput < Struct.new(
         :job_flow_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flow_id
         #   An unique identifier for the job flow.
@@ -2411,9 +2533,11 @@ module Aws
       #         path: "XmlString", # required
       #         args: ["XmlString"],
       #       }
-      class ScriptBootstrapActionConfig < Aws::Structure.new(
+      class ScriptBootstrapActionConfig < Struct.new(
         :path,
         :args)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   Location of the script to run during a bootstrap action. Can be
@@ -2435,9 +2559,11 @@ module Aws
       #         job_flow_ids: ["XmlString"], # required
       #         termination_protected: false, # required
       #       }
-      class SetTerminationProtectionInput < Aws::Structure.new(
+      class SetTerminationProtectionInput < Struct.new(
         :job_flow_ids,
         :termination_protected)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flow_ids
         #   A list of strings that uniquely identify the job flows to protect.
@@ -2461,9 +2587,11 @@ module Aws
       #         job_flow_ids: ["XmlString"], # required
       #         visible_to_all_users: false, # required
       #       }
-      class SetVisibleToAllUsersInput < Aws::Structure.new(
+      class SetVisibleToAllUsersInput < Struct.new(
         :job_flow_ids,
         :visible_to_all_users)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flow_ids
         #   Identifiers of the job flows to receive the new visibility setting.
@@ -2493,9 +2621,11 @@ module Aws
       #           instance_termination_timeout: 1,
       #         },
       #       }
-      class ShrinkPolicy < Aws::Structure.new(
+      class ShrinkPolicy < Struct.new(
         :decommission_timeout,
         :instance_resize_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] decommission_timeout
         #   The desired timeout for decommissioning an instance. Overrides the
@@ -2510,12 +2640,14 @@ module Aws
       end
 
       # This represents a step in a cluster.
-      class Step < Aws::Structure.new(
+      class Step < Struct.new(
         :id,
         :name,
         :config,
         :action_on_failure,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the cluster step.
@@ -2560,10 +2692,12 @@ module Aws
       #           args: ["XmlString"],
       #         },
       #       }
-      class StepConfig < Aws::Structure.new(
+      class StepConfig < Struct.new(
         :name,
         :action_on_failure,
         :hadoop_jar_step)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the job flow step.
@@ -2580,9 +2714,11 @@ module Aws
       end
 
       # Combines the execution state and configuration of a step.
-      class StepDetail < Aws::Structure.new(
+      class StepDetail < Struct.new(
         :step_config,
         :execution_status_detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] step_config
         #   The step configuration.
@@ -2595,12 +2731,14 @@ module Aws
       end
 
       # The execution state of a step.
-      class StepExecutionStatusDetail < Aws::Structure.new(
+      class StepExecutionStatusDetail < Struct.new(
         :state,
         :creation_date_time,
         :start_date_time,
         :end_date_time,
         :last_state_change_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The state of the job flow step.
@@ -2625,9 +2763,11 @@ module Aws
       end
 
       # The details of the step state change reason.
-      class StepStateChangeReason < Aws::Structure.new(
+      class StepStateChangeReason < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The programmable code for the state change reason. Note: Currently,
@@ -2641,11 +2781,13 @@ module Aws
       end
 
       # The execution status details of the cluster step.
-      class StepStatus < Aws::Structure.new(
+      class StepStatus < Struct.new(
         :state,
         :state_change_reason,
         :failure_details,
         :timeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The execution state of the cluster step.
@@ -2667,12 +2809,14 @@ module Aws
       end
 
       # The summary of the cluster step.
-      class StepSummary < Aws::Structure.new(
+      class StepSummary < Struct.new(
         :id,
         :name,
         :config,
         :action_on_failure,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the cluster step.
@@ -2699,10 +2843,12 @@ module Aws
       end
 
       # The timeline of the cluster step lifecycle.
-      class StepTimeline < Aws::Structure.new(
+      class StepTimeline < Struct.new(
         :creation_date_time,
         :start_date_time,
         :end_date_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_date_time
         #   The date and time when the cluster step was created.
@@ -2729,9 +2875,11 @@ module Aws
       #         name: "XmlStringMaxLen256",
       #         args: ["XmlString"],
       #       }
-      class SupportedProductConfig < Aws::Structure.new(
+      class SupportedProductConfig < Struct.new(
         :name,
         :args)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the product configuration.
@@ -2759,9 +2907,11 @@ module Aws
       #         key: "String",
       #         value: "String",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A user-defined key, which is the minimum required information for a
@@ -2791,8 +2941,10 @@ module Aws
       #       {
       #         job_flow_ids: ["XmlString"], # required
       #       }
-      class TerminateJobFlowsInput < Aws::Structure.new(
+      class TerminateJobFlowsInput < Struct.new(
         :job_flow_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] job_flow_ids
         #   A list of job flows to be shutdown.
@@ -2811,10 +2963,12 @@ module Aws
       #         iops: 1,
       #         size_in_gb: 1, # required
       #       }
-      class VolumeSpecification < Aws::Structure.new(
+      class VolumeSpecification < Struct.new(
         :volume_type,
         :iops,
         :size_in_gb)
+
+        include Aws::Structure
 
         # @!attribute [rw] volume_type
         #   The volume type. Volume types supported are gp2, io1, standard.

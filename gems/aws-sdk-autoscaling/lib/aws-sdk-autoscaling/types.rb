@@ -10,9 +10,11 @@ module Aws
     module Types
 
       # Contains the output of DescribeScalingActivities.
-      class ActivitiesType < Aws::Structure.new(
+      class ActivitiesType < Struct.new(
         :activities,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] activities
         #   The scaling activities. Activities are sorted by start time.
@@ -29,7 +31,7 @@ module Aws
       # Describes scaling activity, which is a long-running process that
       # represents a change to your Auto Scaling group, such as changing its
       # size or replacing an instance.
-      class Activity < Aws::Structure.new(
+      class Activity < Struct.new(
         :activity_id,
         :auto_scaling_group_name,
         :description,
@@ -40,6 +42,8 @@ module Aws
         :status_message,
         :progress,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_id
         #   The ID of the activity.
@@ -85,8 +89,10 @@ module Aws
       end
 
       # Contains the output of TerminateInstancesInAutoScalingGroup.
-      class ActivityType < Aws::Structure.new(
+      class ActivityType < Struct.new(
         :activity)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity
         #   A scaling activity.
@@ -102,8 +108,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html
-      class AdjustmentType < Aws::Structure.new(
+      class AdjustmentType < Struct.new(
         :adjustment_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] adjustment_type
         #   The policy adjustment type. The valid values are `ChangeInCapacity`,
@@ -113,9 +121,11 @@ module Aws
       end
 
       # Describes an alarm.
-      class Alarm < Aws::Structure.new(
+      class Alarm < Struct.new(
         :alarm_name,
         :alarm_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] alarm_name
         #   The name of the alarm.
@@ -135,9 +145,11 @@ module Aws
       #         instance_ids: ["XmlStringMaxLen19"],
       #         auto_scaling_group_name: "ResourceName", # required
       #       }
-      class AttachInstancesQuery < Aws::Structure.new(
+      class AttachInstancesQuery < Struct.new(
         :instance_ids,
         :auto_scaling_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   One or more instance IDs.
@@ -159,9 +171,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         target_group_arns: ["XmlStringMaxLen511"], # required
       #       }
-      class AttachLoadBalancerTargetGroupsType < Aws::Structure.new(
+      class AttachLoadBalancerTargetGroupsType < Struct.new(
         :auto_scaling_group_name,
         :target_group_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -184,9 +198,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         load_balancer_names: ["XmlStringMaxLen255"], # required
       #       }
-      class AttachLoadBalancersType < Aws::Structure.new(
+      class AttachLoadBalancersType < Struct.new(
         :auto_scaling_group_name,
         :load_balancer_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -199,7 +215,7 @@ module Aws
       end
 
       # Describes an Auto Scaling group.
-      class AutoScalingGroup < Aws::Structure.new(
+      class AutoScalingGroup < Struct.new(
         :auto_scaling_group_name,
         :auto_scaling_group_arn,
         :launch_configuration_name,
@@ -222,6 +238,8 @@ module Aws
         :tags,
         :termination_policies,
         :new_instances_protected_from_scale_in)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -339,10 +357,12 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class AutoScalingGroupNamesType < Aws::Structure.new(
+      class AutoScalingGroupNamesType < Struct.new(
         :auto_scaling_group_names,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_names
         #   The group names. If you omit this parameter, all Auto Scaling groups
@@ -361,9 +381,11 @@ module Aws
       end
 
       # Contains the output for DescribeAutoScalingGroups.
-      class AutoScalingGroupsType < Aws::Structure.new(
+      class AutoScalingGroupsType < Struct.new(
         :auto_scaling_groups,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_groups
         #   The groups.
@@ -377,7 +399,7 @@ module Aws
       end
 
       # Describes an EC2 instance associated with an Auto Scaling group.
-      class AutoScalingInstanceDetails < Aws::Structure.new(
+      class AutoScalingInstanceDetails < Struct.new(
         :instance_id,
         :auto_scaling_group_name,
         :availability_zone,
@@ -385,6 +407,8 @@ module Aws
         :health_status,
         :launch_configuration_name,
         :protected_from_scale_in)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -426,9 +450,11 @@ module Aws
       end
 
       # Contains the output of DescribeAutoScalingInstances.
-      class AutoScalingInstancesType < Aws::Structure.new(
+      class AutoScalingInstancesType < Struct.new(
         :auto_scaling_instances,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_instances
         #   The instances.
@@ -458,11 +484,13 @@ module Aws
       #         },
       #         no_device: false,
       #       }
-      class BlockDeviceMapping < Aws::Structure.new(
+      class BlockDeviceMapping < Struct.new(
         :virtual_name,
         :device_name,
         :ebs,
         :no_device)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_name
         #   The name of the virtual device (for example, `ephemeral0`).
@@ -501,12 +529,14 @@ module Aws
       #         lifecycle_action_result: "LifecycleActionResult", # required
       #         instance_id: "XmlStringMaxLen19",
       #       }
-      class CompleteLifecycleActionType < Aws::Structure.new(
+      class CompleteLifecycleActionType < Struct.new(
         :lifecycle_hook_name,
         :auto_scaling_group_name,
         :lifecycle_action_token,
         :lifecycle_action_result,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_hook_name
         #   The name of the lifecycle hook.
@@ -565,7 +595,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateAutoScalingGroupType < Aws::Structure.new(
+      class CreateAutoScalingGroupType < Struct.new(
         :auto_scaling_group_name,
         :launch_configuration_name,
         :instance_id,
@@ -583,6 +613,8 @@ module Aws
         :termination_policies,
         :new_instances_protected_from_scale_in,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group. This name must be unique within the scope of
@@ -785,7 +817,7 @@ module Aws
       #         associate_public_ip_address: false,
       #         placement_tenancy: "XmlStringMaxLen64",
       #       }
-      class CreateLaunchConfigurationType < Aws::Structure.new(
+      class CreateLaunchConfigurationType < Struct.new(
         :launch_configuration_name,
         :image_id,
         :key_name,
@@ -804,6 +836,8 @@ module Aws
         :ebs_optimized,
         :associate_public_ip_address,
         :placement_tenancy)
+
+        include Aws::Structure
 
         # @!attribute [rw] launch_configuration_name
         #   The name of the launch configuration. This name must be unique
@@ -1033,8 +1067,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateOrUpdateTagsType < Aws::Structure.new(
+      class CreateOrUpdateTagsType < Struct.new(
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   One or more tags.
@@ -1050,9 +1086,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         force_delete: false,
       #       }
-      class DeleteAutoScalingGroupType < Aws::Structure.new(
+      class DeleteAutoScalingGroupType < Struct.new(
         :auto_scaling_group_name,
         :force_delete)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group to delete.
@@ -1078,9 +1116,11 @@ module Aws
       #         lifecycle_hook_name: "AsciiStringMaxLen255", # required
       #         auto_scaling_group_name: "ResourceName", # required
       #       }
-      class DeleteLifecycleHookType < Aws::Structure.new(
+      class DeleteLifecycleHookType < Struct.new(
         :lifecycle_hook_name,
         :auto_scaling_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_hook_name
         #   The name of the lifecycle hook.
@@ -1100,9 +1140,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         topic_arn: "ResourceName", # required
       #       }
-      class DeleteNotificationConfigurationType < Aws::Structure.new(
+      class DeleteNotificationConfigurationType < Struct.new(
         :auto_scaling_group_name,
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -1123,9 +1165,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName",
       #         policy_name: "ResourceName", # required
       #       }
-      class DeletePolicyType < Aws::Structure.new(
+      class DeletePolicyType < Struct.new(
         :auto_scaling_group_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -1145,9 +1189,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         scheduled_action_name: "ResourceName", # required
       #       }
-      class DeleteScheduledActionType < Aws::Structure.new(
+      class DeleteScheduledActionType < Struct.new(
         :auto_scaling_group_name,
         :scheduled_action_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -1174,8 +1220,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class DeleteTagsType < Aws::Structure.new(
+      class DeleteTagsType < Struct.new(
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   One or more tags.
@@ -1184,11 +1232,13 @@ module Aws
       end
 
       # Contains the parameters for DescribeAccountLimits.
-      class DescribeAccountLimitsAnswer < Aws::Structure.new(
+      class DescribeAccountLimitsAnswer < Struct.new(
         :max_number_of_auto_scaling_groups,
         :max_number_of_launch_configurations,
         :number_of_auto_scaling_groups,
         :number_of_launch_configurations)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_number_of_auto_scaling_groups
         #   The maximum number of groups allowed for your AWS account. The
@@ -1211,8 +1261,10 @@ module Aws
       end
 
       # Contains the parameters for DescribeAdjustmentTypes.
-      class DescribeAdjustmentTypesAnswer < Aws::Structure.new(
+      class DescribeAdjustmentTypesAnswer < Struct.new(
         :adjustment_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] adjustment_types
         #   The policy adjustment types.
@@ -1229,10 +1281,12 @@ module Aws
       #         max_records: 1,
       #         next_token: "XmlString",
       #       }
-      class DescribeAutoScalingInstancesType < Aws::Structure.new(
+      class DescribeAutoScalingInstancesType < Struct.new(
         :instance_ids,
         :max_records,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   The instances to describe; up to 50 instance IDs. If you omit this
@@ -1252,8 +1306,10 @@ module Aws
       end
 
       # Contains the output of DescribeAutoScalingNotificationTypes.
-      class DescribeAutoScalingNotificationTypesAnswer < Aws::Structure.new(
+      class DescribeAutoScalingNotificationTypesAnswer < Struct.new(
         :auto_scaling_notification_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_notification_types
         #   The notification types.
@@ -1262,8 +1318,10 @@ module Aws
       end
 
       # Contains the output of DescribeLifecycleHookTypes.
-      class DescribeLifecycleHookTypesAnswer < Aws::Structure.new(
+      class DescribeLifecycleHookTypesAnswer < Struct.new(
         :lifecycle_hook_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_hook_types
         #   The lifecycle hook types.
@@ -1272,8 +1330,10 @@ module Aws
       end
 
       # Contains the output of DescribeLifecycleHooks.
-      class DescribeLifecycleHooksAnswer < Aws::Structure.new(
+      class DescribeLifecycleHooksAnswer < Struct.new(
         :lifecycle_hooks)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_hooks
         #   The lifecycle hooks for the specified group.
@@ -1289,9 +1349,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         lifecycle_hook_names: ["AsciiStringMaxLen255"],
       #       }
-      class DescribeLifecycleHooksType < Aws::Structure.new(
+      class DescribeLifecycleHooksType < Struct.new(
         :auto_scaling_group_name,
         :lifecycle_hook_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -1313,10 +1375,12 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class DescribeLoadBalancerTargetGroupsRequest < Aws::Structure.new(
+      class DescribeLoadBalancerTargetGroupsRequest < Struct.new(
         :auto_scaling_group_name,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -1334,9 +1398,11 @@ module Aws
       end
 
       # Contains the output of DescribeLoadBalancerTargetGroups.
-      class DescribeLoadBalancerTargetGroupsResponse < Aws::Structure.new(
+      class DescribeLoadBalancerTargetGroupsResponse < Struct.new(
         :load_balancer_target_groups,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_target_groups
         #   Information about the target groups.
@@ -1358,10 +1424,12 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class DescribeLoadBalancersRequest < Aws::Structure.new(
+      class DescribeLoadBalancersRequest < Struct.new(
         :auto_scaling_group_name,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -1379,9 +1447,11 @@ module Aws
       end
 
       # Contains the output of DescribeLoadBalancers.
-      class DescribeLoadBalancersResponse < Aws::Structure.new(
+      class DescribeLoadBalancersResponse < Struct.new(
         :load_balancers,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancers
         #   The load balancers.
@@ -1395,9 +1465,11 @@ module Aws
       end
 
       # Contains the output of DescribeMetricsCollectionTypes.
-      class DescribeMetricCollectionTypesAnswer < Aws::Structure.new(
+      class DescribeMetricCollectionTypesAnswer < Struct.new(
         :metrics,
         :granularities)
+
+        include Aws::Structure
 
         # @!attribute [rw] metrics
         #   One or more metrics.
@@ -1410,9 +1482,11 @@ module Aws
       end
 
       # Contains the output from DescribeNotificationConfigurations.
-      class DescribeNotificationConfigurationsAnswer < Aws::Structure.new(
+      class DescribeNotificationConfigurationsAnswer < Struct.new(
         :notification_configurations,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] notification_configurations
         #   The notification configurations.
@@ -1434,10 +1508,12 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class DescribeNotificationConfigurationsType < Aws::Structure.new(
+      class DescribeNotificationConfigurationsType < Struct.new(
         :auto_scaling_group_names,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_names
         #   The name of the group.
@@ -1465,12 +1541,14 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class DescribePoliciesType < Aws::Structure.new(
+      class DescribePoliciesType < Struct.new(
         :auto_scaling_group_name,
         :policy_names,
         :policy_types,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -1510,11 +1588,13 @@ module Aws
       #         max_records: 1,
       #         next_token: "XmlString",
       #       }
-      class DescribeScalingActivitiesType < Aws::Structure.new(
+      class DescribeScalingActivitiesType < Struct.new(
         :activity_ids,
         :auto_scaling_group_name,
         :max_records,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] activity_ids
         #   The activity IDs of the desired scaling activities. If you omit this
@@ -1552,13 +1632,15 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class DescribeScheduledActionsType < Aws::Structure.new(
+      class DescribeScheduledActionsType < Struct.new(
         :auto_scaling_group_name,
         :scheduled_action_names,
         :start_time,
         :end_time,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -1609,10 +1691,12 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class DescribeTagsType < Aws::Structure.new(
+      class DescribeTagsType < Struct.new(
         :filters,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   A filter used to scope the tags to return.
@@ -1630,8 +1714,10 @@ module Aws
       end
 
       # Contains the output of DescribeTerminationPolicyTypes.
-      class DescribeTerminationPolicyTypesAnswer < Aws::Structure.new(
+      class DescribeTerminationPolicyTypesAnswer < Struct.new(
         :termination_policy_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] termination_policy_types
         #   The termination policies supported by Auto Scaling
@@ -1642,8 +1728,10 @@ module Aws
       end
 
       # Contains the output of DetachInstances.
-      class DetachInstancesAnswer < Aws::Structure.new(
+      class DetachInstancesAnswer < Struct.new(
         :activities)
+
+        include Aws::Structure
 
         # @!attribute [rw] activities
         #   The activities related to detaching the instances from the Auto
@@ -1661,10 +1749,12 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         should_decrement_desired_capacity: false, # required
       #       }
-      class DetachInstancesQuery < Aws::Structure.new(
+      class DetachInstancesQuery < Struct.new(
         :instance_ids,
         :auto_scaling_group_name,
         :should_decrement_desired_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   One or more instance IDs.
@@ -1690,9 +1780,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         target_group_arns: ["XmlStringMaxLen511"], # required
       #       }
-      class DetachLoadBalancerTargetGroupsType < Aws::Structure.new(
+      class DetachLoadBalancerTargetGroupsType < Struct.new(
         :auto_scaling_group_name,
         :target_group_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -1715,9 +1807,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         load_balancer_names: ["XmlStringMaxLen255"], # required
       #       }
-      class DetachLoadBalancersType < Aws::Structure.new(
+      class DetachLoadBalancersType < Struct.new(
         :auto_scaling_group_name,
         :load_balancer_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -1737,9 +1831,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         metrics: ["XmlStringMaxLen255"],
       #       }
-      class DisableMetricsCollectionQuery < Aws::Structure.new(
+      class DisableMetricsCollectionQuery < Struct.new(
         :auto_scaling_group_name,
         :metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name or Amazon Resource Name (ARN) of the group.
@@ -1780,13 +1876,15 @@ module Aws
       #         iops: 1,
       #         encrypted: false,
       #       }
-      class Ebs < Aws::Structure.new(
+      class Ebs < Struct.new(
         :snapshot_id,
         :volume_size,
         :volume_type,
         :delete_on_termination,
         :iops,
         :encrypted)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The ID of the snapshot.
@@ -1854,10 +1952,12 @@ module Aws
       #         metrics: ["XmlStringMaxLen255"],
       #         granularity: "XmlStringMaxLen255", # required
       #       }
-      class EnableMetricsCollectionQuery < Aws::Structure.new(
+      class EnableMetricsCollectionQuery < Struct.new(
         :auto_scaling_group_name,
         :metrics,
         :granularity)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name or ARN of the Auto Scaling group.
@@ -1892,9 +1992,11 @@ module Aws
       end
 
       # Describes an enabled metric.
-      class EnabledMetric < Aws::Structure.new(
+      class EnabledMetric < Struct.new(
         :metric,
         :granularity)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric
         #   One of the following metrics:
@@ -1923,8 +2025,10 @@ module Aws
       end
 
       # Contains the output of EnterStandby.
-      class EnterStandbyAnswer < Aws::Structure.new(
+      class EnterStandbyAnswer < Struct.new(
         :activities)
+
+        include Aws::Structure
 
         # @!attribute [rw] activities
         #   The activities related to moving instances into `Standby` mode.
@@ -1941,10 +2045,12 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         should_decrement_desired_capacity: false, # required
       #       }
-      class EnterStandbyQuery < Aws::Structure.new(
+      class EnterStandbyQuery < Struct.new(
         :instance_ids,
         :auto_scaling_group_name,
         :should_decrement_desired_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   One or more instances to move into `Standby` mode. You must specify
@@ -1975,12 +2081,14 @@ module Aws
       #         metric_value: 1.0,
       #         breach_threshold: 1.0,
       #       }
-      class ExecutePolicyType < Aws::Structure.new(
+      class ExecutePolicyType < Struct.new(
         :auto_scaling_group_name,
         :policy_name,
         :honor_cooldown,
         :metric_value,
         :breach_threshold)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
@@ -2030,8 +2138,10 @@ module Aws
       end
 
       # Contains the parameters for ExitStandby.
-      class ExitStandbyAnswer < Aws::Structure.new(
+      class ExitStandbyAnswer < Struct.new(
         :activities)
+
+        include Aws::Structure
 
         # @!attribute [rw] activities
         #   The activities related to moving instances out of `Standby` mode.
@@ -2047,9 +2157,11 @@ module Aws
       #         instance_ids: ["XmlStringMaxLen19"],
       #         auto_scaling_group_name: "ResourceName", # required
       #       }
-      class ExitStandbyQuery < Aws::Structure.new(
+      class ExitStandbyQuery < Struct.new(
         :instance_ids,
         :auto_scaling_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   One or more instance IDs. You must specify at least one instance ID.
@@ -2069,9 +2181,11 @@ module Aws
       #         name: "XmlString",
       #         values: ["XmlString"],
       #       }
-      class Filter < Aws::Structure.new(
+      class Filter < Struct.new(
         :name,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the filter. The valid values are:
@@ -2086,13 +2200,15 @@ module Aws
       end
 
       # Describes an EC2 instance.
-      class Instance < Aws::Structure.new(
+      class Instance < Struct.new(
         :instance_id,
         :availability_zone,
         :lifecycle_state,
         :health_status,
         :launch_configuration_name,
         :protected_from_scale_in)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -2132,8 +2248,10 @@ module Aws
       #       {
       #         enabled: false,
       #       }
-      class InstanceMonitoring < Aws::Structure.new(
+      class InstanceMonitoring < Struct.new(
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   If `True`, instance monitoring is enabled.
@@ -2142,7 +2260,7 @@ module Aws
       end
 
       # Describes a launch configuration.
-      class LaunchConfiguration < Aws::Structure.new(
+      class LaunchConfiguration < Struct.new(
         :launch_configuration_name,
         :launch_configuration_arn,
         :image_id,
@@ -2162,6 +2280,8 @@ module Aws
         :ebs_optimized,
         :associate_public_ip_address,
         :placement_tenancy)
+
+        include Aws::Structure
 
         # @!attribute [rw] launch_configuration_name
         #   The name of the launch configuration.
@@ -2270,8 +2390,10 @@ module Aws
       #       {
       #         launch_configuration_name: "ResourceName", # required
       #       }
-      class LaunchConfigurationNameType < Aws::Structure.new(
+      class LaunchConfigurationNameType < Struct.new(
         :launch_configuration_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] launch_configuration_name
         #   The name of the launch configuration.
@@ -2288,10 +2410,12 @@ module Aws
       #         next_token: "XmlString",
       #         max_records: 1,
       #       }
-      class LaunchConfigurationNamesType < Aws::Structure.new(
+      class LaunchConfigurationNamesType < Struct.new(
         :launch_configuration_names,
         :next_token,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] launch_configuration_names
         #   The launch configuration names. If you omit this parameter, all
@@ -2311,9 +2435,11 @@ module Aws
       end
 
       # Contains the output of DescribeLaunchConfigurations.
-      class LaunchConfigurationsType < Aws::Structure.new(
+      class LaunchConfigurationsType < Struct.new(
         :launch_configurations,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] launch_configurations
         #   The launch configurations.
@@ -2342,7 +2468,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
-      class LifecycleHook < Aws::Structure.new(
+      class LifecycleHook < Struct.new(
         :lifecycle_hook_name,
         :auto_scaling_group_name,
         :lifecycle_transition,
@@ -2352,6 +2478,8 @@ module Aws
         :heartbeat_timeout,
         :global_timeout,
         :default_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_hook_name
         #   The name of the lifecycle hook.
@@ -2433,9 +2561,11 @@ module Aws
       # to `InService` after at least one instance in the group passes the
       # health check. If EC2 health checks are enabled instead, the load
       # balancer remains in the `Added` state.
-      class LoadBalancerState < Aws::Structure.new(
+      class LoadBalancerState < Struct.new(
         :load_balancer_name,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the load balancer.
@@ -2473,9 +2603,11 @@ module Aws
       # at least one Auto Scaling instance passes the health check. If EC2
       # health checks are enabled instead, the target group remains in the
       # `Added` state.
-      class LoadBalancerTargetGroupState < Aws::Structure.new(
+      class LoadBalancerTargetGroupState < Struct.new(
         :load_balancer_target_group_arn,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -2505,8 +2637,10 @@ module Aws
       end
 
       # Describes a metric.
-      class MetricCollectionType < Aws::Structure.new(
+      class MetricCollectionType < Struct.new(
         :metric)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric
         #   One of the following metrics:
@@ -2531,8 +2665,10 @@ module Aws
       end
 
       # Describes a granularity of a metric.
-      class MetricGranularityType < Aws::Structure.new(
+      class MetricGranularityType < Struct.new(
         :granularity)
+
+        include Aws::Structure
 
         # @!attribute [rw] granularity
         #   The granularity. The only valid value is `1Minute`.
@@ -2541,10 +2677,12 @@ module Aws
       end
 
       # Describes a notification.
-      class NotificationConfiguration < Aws::Structure.new(
+      class NotificationConfiguration < Struct.new(
         :auto_scaling_group_name,
         :topic_arn,
         :notification_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -2572,9 +2710,11 @@ module Aws
       end
 
       # Contains the output of DescribePolicies.
-      class PoliciesType < Aws::Structure.new(
+      class PoliciesType < Struct.new(
         :scaling_policies,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] scaling_policies
         #   The scaling policies.
@@ -2588,8 +2728,10 @@ module Aws
       end
 
       # Contains the output of PutScalingPolicy.
-      class PolicyARNType < Aws::Structure.new(
+      class PolicyARNType < Struct.new(
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the policy.
@@ -2605,8 +2747,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html#process-types
-      class ProcessType < Aws::Structure.new(
+      class ProcessType < Struct.new(
         :process_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] process_name
         #   One of the following processes:
@@ -2631,8 +2775,10 @@ module Aws
       end
 
       # Contains the output of DescribeScalingProcessTypes.
-      class ProcessesType < Aws::Structure.new(
+      class ProcessesType < Struct.new(
         :processes)
+
+        include Aws::Structure
 
         # @!attribute [rw] processes
         #   The names of the process types.
@@ -2657,7 +2803,7 @@ module Aws
       #         heartbeat_timeout: 1,
       #         default_result: "LifecycleActionResult",
       #       }
-      class PutLifecycleHookType < Aws::Structure.new(
+      class PutLifecycleHookType < Struct.new(
         :lifecycle_hook_name,
         :auto_scaling_group_name,
         :lifecycle_transition,
@@ -2666,6 +2812,8 @@ module Aws
         :notification_metadata,
         :heartbeat_timeout,
         :default_result)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_hook_name
         #   The name of the lifecycle hook.
@@ -2756,10 +2904,12 @@ module Aws
       #         topic_arn: "ResourceName", # required
       #         notification_types: ["XmlStringMaxLen255"], # required
       #       }
-      class PutNotificationConfigurationType < Aws::Structure.new(
+      class PutNotificationConfigurationType < Struct.new(
         :auto_scaling_group_name,
         :topic_arn,
         :notification_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -2801,7 +2951,7 @@ module Aws
       #         ],
       #         estimated_instance_warmup: 1,
       #       }
-      class PutScalingPolicyType < Aws::Structure.new(
+      class PutScalingPolicyType < Struct.new(
         :auto_scaling_group_name,
         :policy_name,
         :policy_type,
@@ -2813,6 +2963,8 @@ module Aws
         :metric_aggregation_type,
         :step_adjustments,
         :estimated_instance_warmup)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name or ARN of the group.
@@ -2919,7 +3071,7 @@ module Aws
       #         max_size: 1,
       #         desired_capacity: 1,
       #       }
-      class PutScheduledUpdateGroupActionType < Aws::Structure.new(
+      class PutScheduledUpdateGroupActionType < Struct.new(
         :auto_scaling_group_name,
         :scheduled_action_name,
         :time,
@@ -2929,6 +3081,8 @@ module Aws
         :min_size,
         :max_size,
         :desired_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
@@ -2998,11 +3152,13 @@ module Aws
       #         lifecycle_action_token: "LifecycleActionToken",
       #         instance_id: "XmlStringMaxLen19",
       #       }
-      class RecordLifecycleActionHeartbeatType < Aws::Structure.new(
+      class RecordLifecycleActionHeartbeatType < Struct.new(
         :lifecycle_hook_name,
         :auto_scaling_group_name,
         :lifecycle_action_token,
         :instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] lifecycle_hook_name
         #   The name of the lifecycle hook.
@@ -3026,7 +3182,7 @@ module Aws
       end
 
       # Describes a scaling policy.
-      class ScalingPolicy < Aws::Structure.new(
+      class ScalingPolicy < Struct.new(
         :auto_scaling_group_name,
         :policy_name,
         :policy_arn,
@@ -3040,6 +3196,8 @@ module Aws
         :metric_aggregation_type,
         :estimated_instance_warmup,
         :alarms)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group associated with this scaling
@@ -3116,9 +3274,11 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         scaling_processes: ["XmlStringMaxLen255"],
       #       }
-      class ScalingProcessQuery < Aws::Structure.new(
+      class ScalingProcessQuery < Struct.new(
         :auto_scaling_group_name,
         :scaling_processes)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
@@ -3148,9 +3308,11 @@ module Aws
       end
 
       # Contains the output of DescribeScheduledActions.
-      class ScheduledActionsType < Aws::Structure.new(
+      class ScheduledActionsType < Struct.new(
         :scheduled_update_group_actions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] scheduled_update_group_actions
         #   The scheduled actions.
@@ -3164,7 +3326,7 @@ module Aws
       end
 
       # Describes a scheduled update to an Auto Scaling group.
-      class ScheduledUpdateGroupAction < Aws::Structure.new(
+      class ScheduledUpdateGroupAction < Struct.new(
         :auto_scaling_group_name,
         :scheduled_action_name,
         :scheduled_action_arn,
@@ -3175,6 +3337,8 @@ module Aws
         :min_size,
         :max_size,
         :desired_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the group.
@@ -3233,10 +3397,12 @@ module Aws
       #         desired_capacity: 1, # required
       #         honor_cooldown: false,
       #       }
-      class SetDesiredCapacityType < Aws::Structure.new(
+      class SetDesiredCapacityType < Struct.new(
         :auto_scaling_group_name,
         :desired_capacity,
         :honor_cooldown)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.
@@ -3266,10 +3432,12 @@ module Aws
       #         health_status: "XmlStringMaxLen32", # required
       #         should_respect_grace_period: false,
       #       }
-      class SetInstanceHealthQuery < Aws::Structure.new(
+      class SetInstanceHealthQuery < Struct.new(
         :instance_id,
         :health_status,
         :should_respect_grace_period)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -3307,10 +3475,12 @@ module Aws
       #         auto_scaling_group_name: "ResourceName", # required
       #         protected_from_scale_in: false, # required
       #       }
-      class SetInstanceProtectionQuery < Aws::Structure.new(
+      class SetInstanceProtectionQuery < Struct.new(
         :instance_ids,
         :auto_scaling_group_name,
         :protected_from_scale_in)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_ids
         #   One or more instance IDs.
@@ -3364,10 +3534,12 @@ module Aws
       #         metric_interval_upper_bound: 1.0,
       #         scaling_adjustment: 1, # required
       #       }
-      class StepAdjustment < Aws::Structure.new(
+      class StepAdjustment < Struct.new(
         :metric_interval_lower_bound,
         :metric_interval_upper_bound,
         :scaling_adjustment)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_interval_lower_bound
         #   The lower bound for the difference between the alarm threshold and
@@ -3399,9 +3571,11 @@ module Aws
 
       # Describes an Auto Scaling process that has been suspended. For more
       # information, see ProcessType.
-      class SuspendedProcess < Aws::Structure.new(
+      class SuspendedProcess < Struct.new(
         :process_name,
         :suspension_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] process_name
         #   The name of the suspended process.
@@ -3424,12 +3598,14 @@ module Aws
       #         value: "TagValue",
       #         propagate_at_launch: false,
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :resource_id,
         :resource_type,
         :key,
         :value,
         :propagate_at_launch)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The name of the group.
@@ -3456,12 +3632,14 @@ module Aws
       end
 
       # Describes a tag for an Auto Scaling group.
-      class TagDescription < Aws::Structure.new(
+      class TagDescription < Struct.new(
         :resource_id,
         :resource_type,
         :key,
         :value,
         :propagate_at_launch)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The name of the group.
@@ -3488,9 +3666,11 @@ module Aws
       end
 
       # Contains the output of DescribeTags.
-      class TagsType < Aws::Structure.new(
+      class TagsType < Struct.new(
         :tags,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   One or more tags.
@@ -3511,9 +3691,11 @@ module Aws
       #         instance_id: "XmlStringMaxLen19", # required
       #         should_decrement_desired_capacity: false, # required
       #       }
-      class TerminateInstanceInAutoScalingGroupType < Aws::Structure.new(
+      class TerminateInstanceInAutoScalingGroupType < Struct.new(
         :instance_id,
         :should_decrement_desired_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the instance.
@@ -3545,7 +3727,7 @@ module Aws
       #         termination_policies: ["XmlStringMaxLen1600"],
       #         new_instances_protected_from_scale_in: false,
       #       }
-      class UpdateAutoScalingGroupType < Aws::Structure.new(
+      class UpdateAutoScalingGroupType < Struct.new(
         :auto_scaling_group_name,
         :launch_configuration_name,
         :min_size,
@@ -3559,6 +3741,8 @@ module Aws
         :vpc_zone_identifier,
         :termination_policies,
         :new_instances_protected_from_scale_in)
+
+        include Aws::Structure
 
         # @!attribute [rw] auto_scaling_group_name
         #   The name of the Auto Scaling group.

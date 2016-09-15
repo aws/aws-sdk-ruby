@@ -21,9 +21,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddAttributesToFindingsRequest < Aws::Structure.new(
+      class AddAttributesToFindingsRequest < Struct.new(
         :finding_arns,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] finding_arns
         #   The ARNs that specify the findings that you want to assign
@@ -37,8 +39,10 @@ module Aws
 
       end
 
-      class AddAttributesToFindingsResponse < Aws::Structure.new(
+      class AddAttributesToFindingsResponse < Struct.new(
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_items
         #   Attribute details that cannot be described. An error code is
@@ -50,9 +54,11 @@ module Aws
       # Used in the exception error that is thrown if you start an assessment
       # run for an assessment target that includes an EC2 instance that is
       # already participating in another started assessment run.
-      class AgentAlreadyRunningAssessment < Aws::Structure.new(
+      class AgentAlreadyRunningAssessment < Struct.new(
         :agent_id,
         :assessment_run_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_id
         #   ID of the agent that is running on an EC2 instance that is already
@@ -74,9 +80,11 @@ module Aws
       #         agent_healths: ["HEALTHY"], # required, accepts HEALTHY, UNHEALTHY
       #         agent_health_codes: ["IDLE"], # required, accepts IDLE, RUNNING, SHUTDOWN, UNHEALTHY, THROTTLED, UNKNOWN
       #       }
-      class AgentFilter < Aws::Structure.new(
+      class AgentFilter < Struct.new(
         :agent_healths,
         :agent_health_codes)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_healths
         #   The current health state of the agent. Values can be set to
@@ -92,9 +100,11 @@ module Aws
       end
 
       # Used as a response element in the PreviewAgents action.
-      class AgentPreview < Aws::Structure.new(
+      class AgentPreview < Struct.new(
         :agent_id,
         :auto_scaling_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_id
         #   The ID of the EC2 instance where the agent is installed.
@@ -111,7 +121,7 @@ module Aws
       # findings of the assessment run .
       #
       # Used as the response element in the DescribeAssessmentRuns action.
-      class AssessmentRun < Aws::Structure.new(
+      class AssessmentRun < Struct.new(
         :arn,
         :name,
         :assessment_template_arn,
@@ -126,6 +136,8 @@ module Aws
         :data_collected,
         :state_changes,
         :notifications)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The ARN of the assessment run.
@@ -193,7 +205,7 @@ module Aws
 
       # Contains information about an Amazon Inspector agent. This data type
       # is used as a response element in the ListAssessmentRunAgents action.
-      class AssessmentRunAgent < Aws::Structure.new(
+      class AssessmentRunAgent < Struct.new(
         :agent_id,
         :assessment_run_arn,
         :agent_health,
@@ -201,6 +213,8 @@ module Aws
         :agent_health_details,
         :auto_scaling_group,
         :telemetry_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_id
         #   The AWS account of the EC2 instance where the agent is installed.
@@ -259,7 +273,7 @@ module Aws
       #           end_date: Time.now,
       #         },
       #       }
-      class AssessmentRunFilter < Aws::Structure.new(
+      class AssessmentRunFilter < Struct.new(
         :name_pattern,
         :states,
         :duration_range,
@@ -267,6 +281,8 @@ module Aws
         :start_time_range,
         :completion_time_range,
         :state_change_time_range)
+
+        include Aws::Structure
 
         # @!attribute [rw] name_pattern
         #   For a record to match a filter, an explicit value or a string
@@ -317,13 +333,15 @@ module Aws
       end
 
       # Used as one of the elements of the AssessmentRun data type.
-      class AssessmentRunNotification < Aws::Structure.new(
+      class AssessmentRunNotification < Struct.new(
         :date,
         :event,
         :message,
         :error,
         :sns_topic_arn,
         :sns_publish_status_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] date
         #   The date of the notification.
@@ -352,9 +370,11 @@ module Aws
       end
 
       # Used as one of the elements of the AssessmentRun data type.
-      class AssessmentRunStateChange < Aws::Structure.new(
+      class AssessmentRunStateChange < Struct.new(
         :state_changed_at,
         :state)
+
+        include Aws::Structure
 
         # @!attribute [rw] state_changed_at
         #   The last time the assessment run state changed.
@@ -369,12 +389,14 @@ module Aws
       # Contains information about an Amazon Inspector application. This data
       # type is used as the response element in the DescribeAssessmentTargets
       # action.
-      class AssessmentTarget < Aws::Structure.new(
+      class AssessmentTarget < Struct.new(
         :arn,
         :name,
         :resource_group_arn,
         :created_at,
         :updated_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The ARN that specifies the Amazon Inspector assessment target.
@@ -406,8 +428,10 @@ module Aws
       #       {
       #         assessment_target_name_pattern: "NamePattern",
       #       }
-      class AssessmentTargetFilter < Aws::Structure.new(
+      class AssessmentTargetFilter < Struct.new(
         :assessment_target_name_pattern)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_name_pattern
         #   For a record to match a filter, an explicit value or a string that
@@ -421,7 +445,7 @@ module Aws
       # Contains information about an Amazon Inspector assessment template.
       # This data type is used as the response element in the
       # DescribeAssessmentTemplates action.
-      class AssessmentTemplate < Aws::Structure.new(
+      class AssessmentTemplate < Struct.new(
         :arn,
         :name,
         :assessment_target_arn,
@@ -429,6 +453,8 @@ module Aws
         :rules_package_arns,
         :user_attributes_for_findings,
         :created_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The ARN of the assessment template.
@@ -476,10 +502,12 @@ module Aws
       #         },
       #         rules_package_arns: ["Arn"],
       #       }
-      class AssessmentTemplateFilter < Aws::Structure.new(
+      class AssessmentTemplateFilter < Struct.new(
         :name_pattern,
         :duration_range,
         :rules_package_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] name_pattern
         #   For a record to match a filter, an explicit value or a string that
@@ -506,13 +534,15 @@ module Aws
 
       # A collection of attributes of the host from which the finding is
       # generated.
-      class AssetAttributes < Aws::Structure.new(
+      class AssetAttributes < Struct.new(
         :schema_version,
         :agent_id,
         :auto_scaling_group,
         :ami_id,
         :hostname,
         :ipv4_addresses)
+
+        include Aws::Structure
 
         # @!attribute [rw] schema_version
         #   The schema version of this data type.
@@ -553,9 +583,11 @@ module Aws
       #         key: "AttributeKey", # required
       #         value: "AttributeValue",
       #       }
-      class Attribute < Aws::Structure.new(
+      class Attribute < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The attribute key.
@@ -574,9 +606,11 @@ module Aws
       #         assessment_target_name: "AssessmentTargetName", # required
       #         resource_group_arn: "Arn", # required
       #       }
-      class CreateAssessmentTargetRequest < Aws::Structure.new(
+      class CreateAssessmentTargetRequest < Struct.new(
         :assessment_target_name,
         :resource_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_name
         #   The user-defined name that identifies the assessment target that you
@@ -590,8 +624,10 @@ module Aws
 
       end
 
-      class CreateAssessmentTargetResponse < Aws::Structure.new(
+      class CreateAssessmentTargetResponse < Struct.new(
         :assessment_target_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_arn
         #   The ARN that specifies the assessment target that is created.
@@ -614,12 +650,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateAssessmentTemplateRequest < Aws::Structure.new(
+      class CreateAssessmentTemplateRequest < Struct.new(
         :assessment_target_arn,
         :assessment_template_name,
         :duration_in_seconds,
         :rules_package_arns,
         :user_attributes_for_findings)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_arn
         #   The ARN that specifies the assessment target for which you want to
@@ -651,8 +689,10 @@ module Aws
 
       end
 
-      class CreateAssessmentTemplateResponse < Aws::Structure.new(
+      class CreateAssessmentTemplateResponse < Struct.new(
         :assessment_template_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_template_arn
         #   The ARN that specifies the assessment template that is created.
@@ -671,8 +711,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateResourceGroupRequest < Aws::Structure.new(
+      class CreateResourceGroupRequest < Struct.new(
         :resource_group_tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_group_tags
         #   A collection of keys and an array of possible values,
@@ -684,8 +726,10 @@ module Aws
 
       end
 
-      class CreateResourceGroupResponse < Aws::Structure.new(
+      class CreateResourceGroupResponse < Struct.new(
         :resource_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_group_arn
         #   The ARN that specifies the resource group that is created.
@@ -699,8 +743,10 @@ module Aws
       #       {
       #         assessment_run_arn: "Arn", # required
       #       }
-      class DeleteAssessmentRunRequest < Aws::Structure.new(
+      class DeleteAssessmentRunRequest < Struct.new(
         :assessment_run_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arn
         #   The ARN that specifies the assessment run that you want to delete.
@@ -714,8 +760,10 @@ module Aws
       #       {
       #         assessment_target_arn: "Arn", # required
       #       }
-      class DeleteAssessmentTargetRequest < Aws::Structure.new(
+      class DeleteAssessmentTargetRequest < Struct.new(
         :assessment_target_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_arn
         #   The ARN that specifies the assessment target that you want to
@@ -730,8 +778,10 @@ module Aws
       #       {
       #         assessment_template_arn: "Arn", # required
       #       }
-      class DeleteAssessmentTemplateRequest < Aws::Structure.new(
+      class DeleteAssessmentTemplateRequest < Struct.new(
         :assessment_template_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_template_arn
         #   The ARN that specifies the assessment template that you want to
@@ -746,8 +796,10 @@ module Aws
       #       {
       #         assessment_run_arns: ["Arn"], # required
       #       }
-      class DescribeAssessmentRunsRequest < Aws::Structure.new(
+      class DescribeAssessmentRunsRequest < Struct.new(
         :assessment_run_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arns
         #   The ARN that specifies the assessment run that you want to describe.
@@ -755,9 +807,11 @@ module Aws
 
       end
 
-      class DescribeAssessmentRunsResponse < Aws::Structure.new(
+      class DescribeAssessmentRunsResponse < Struct.new(
         :assessment_runs,
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_runs
         #   Information about the assessment run.
@@ -776,8 +830,10 @@ module Aws
       #       {
       #         assessment_target_arns: ["Arn"], # required
       #       }
-      class DescribeAssessmentTargetsRequest < Aws::Structure.new(
+      class DescribeAssessmentTargetsRequest < Struct.new(
         :assessment_target_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_arns
         #   The ARNs that specifies the assessment targets that you want to
@@ -786,9 +842,11 @@ module Aws
 
       end
 
-      class DescribeAssessmentTargetsResponse < Aws::Structure.new(
+      class DescribeAssessmentTargetsResponse < Struct.new(
         :assessment_targets,
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_targets
         #   Information about the assessment targets.
@@ -807,8 +865,10 @@ module Aws
       #       {
       #         assessment_template_arns: ["Arn"], # required
       #       }
-      class DescribeAssessmentTemplatesRequest < Aws::Structure.new(
+      class DescribeAssessmentTemplatesRequest < Struct.new(
         :assessment_template_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_template_arns
         #   The ARN that specifiesthe assessment templates that you want to
@@ -817,9 +877,11 @@ module Aws
 
       end
 
-      class DescribeAssessmentTemplatesResponse < Aws::Structure.new(
+      class DescribeAssessmentTemplatesResponse < Struct.new(
         :assessment_templates,
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_templates
         #   Information about the assessment templates.
@@ -832,10 +894,12 @@ module Aws
 
       end
 
-      class DescribeCrossAccountAccessRoleResponse < Aws::Structure.new(
+      class DescribeCrossAccountAccessRoleResponse < Struct.new(
         :role_arn,
         :valid,
         :registered_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN that specifies the IAM role that Amazon Inspector uses to
@@ -861,9 +925,11 @@ module Aws
       #         finding_arns: ["Arn"], # required
       #         locale: "EN_US", # accepts EN_US
       #       }
-      class DescribeFindingsRequest < Aws::Structure.new(
+      class DescribeFindingsRequest < Struct.new(
         :finding_arns,
         :locale)
+
+        include Aws::Structure
 
         # @!attribute [rw] finding_arns
         #   The ARN that specifies the finding that you want to describe.
@@ -877,9 +943,11 @@ module Aws
 
       end
 
-      class DescribeFindingsResponse < Aws::Structure.new(
+      class DescribeFindingsResponse < Struct.new(
         :findings,
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] findings
         #   Information about the finding.
@@ -898,8 +966,10 @@ module Aws
       #       {
       #         resource_group_arns: ["Arn"], # required
       #       }
-      class DescribeResourceGroupsRequest < Aws::Structure.new(
+      class DescribeResourceGroupsRequest < Struct.new(
         :resource_group_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_group_arns
         #   The ARN that specifies the resource group that you want to describe.
@@ -907,9 +977,11 @@ module Aws
 
       end
 
-      class DescribeResourceGroupsResponse < Aws::Structure.new(
+      class DescribeResourceGroupsResponse < Struct.new(
         :resource_groups,
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_groups
         #   Information about a resource group.
@@ -929,9 +1001,11 @@ module Aws
       #         rules_package_arns: ["Arn"], # required
       #         locale: "EN_US", # accepts EN_US
       #       }
-      class DescribeRulesPackagesRequest < Aws::Structure.new(
+      class DescribeRulesPackagesRequest < Struct.new(
         :rules_package_arns,
         :locale)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules_package_arns
         #   The ARN that specifies the rules package that you want to describe.
@@ -944,9 +1018,11 @@ module Aws
 
       end
 
-      class DescribeRulesPackagesResponse < Aws::Structure.new(
+      class DescribeRulesPackagesResponse < Struct.new(
         :rules_packages,
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules_packages
         #   Information about the rules package.
@@ -967,9 +1043,11 @@ module Aws
       #         min_seconds: 1,
       #         max_seconds: 1,
       #       }
-      class DurationRange < Aws::Structure.new(
+      class DurationRange < Struct.new(
         :min_seconds,
         :max_seconds)
+
+        include Aws::Structure
 
         # @!attribute [rw] min_seconds
         #   The minimum value of the duration range. Must be greater than zero.
@@ -983,9 +1061,11 @@ module Aws
       end
 
       # This data type is used in the Subscription data type.
-      class EventSubscription < Aws::Structure.new(
+      class EventSubscription < Struct.new(
         :event,
         :subscribed_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] event
         #   The event for which Amazon Simple Notification Service (SNS)
@@ -999,9 +1079,11 @@ module Aws
       end
 
       # Includes details about the failed items.
-      class FailedItemDetails < Aws::Structure.new(
+      class FailedItemDetails < Struct.new(
         :failure_code,
         :retryable)
+
+        include Aws::Structure
 
         # @!attribute [rw] failure_code
         #   The status code of a failed item.
@@ -1016,7 +1098,7 @@ module Aws
 
       # Contains information about an Amazon Inspector finding. This data type
       # is used as the response element in the DescribeFindings action.
-      class Finding < Aws::Structure.new(
+      class Finding < Struct.new(
         :arn,
         :schema_version,
         :service,
@@ -1035,6 +1117,8 @@ module Aws
         :user_attributes,
         :created_at,
         :updated_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The ARN that specifies the finding.
@@ -1140,7 +1224,7 @@ module Aws
       #           end_date: Time.now,
       #         },
       #       }
-      class FindingFilter < Aws::Structure.new(
+      class FindingFilter < Struct.new(
         :agent_ids,
         :auto_scaling_groups,
         :rule_names,
@@ -1149,6 +1233,8 @@ module Aws
         :attributes,
         :user_attributes,
         :creation_time_range)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_ids
         #   For a record to match a filter, one of the values that is specified
@@ -1204,8 +1290,10 @@ module Aws
       #       {
       #         assessment_run_arn: "Arn", # required
       #       }
-      class GetTelemetryMetadataRequest < Aws::Structure.new(
+      class GetTelemetryMetadataRequest < Struct.new(
         :assessment_run_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arn
         #   The ARN that specifies the assessment run that has the telemetry
@@ -1214,8 +1302,10 @@ module Aws
 
       end
 
-      class GetTelemetryMetadataResponse < Aws::Structure.new(
+      class GetTelemetryMetadataResponse < Struct.new(
         :telemetry_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] telemetry_metadata
         #   Telemetry details.
@@ -1224,10 +1314,12 @@ module Aws
       end
 
       # This data type is used in the Finding data type.
-      class InspectorServiceAttributes < Aws::Structure.new(
+      class InspectorServiceAttributes < Struct.new(
         :schema_version,
         :assessment_run_arn,
         :rules_package_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] schema_version
         #   The schema version of this data type.
@@ -1255,11 +1347,13 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class ListAssessmentRunAgentsRequest < Aws::Structure.new(
+      class ListAssessmentRunAgentsRequest < Struct.new(
         :assessment_run_arn,
         :filter,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arn
         #   The ARN that specifies the assessment run whose agents you want to
@@ -1291,9 +1385,11 @@ module Aws
 
       end
 
-      class ListAssessmentRunAgentsResponse < Aws::Structure.new(
+      class ListAssessmentRunAgentsResponse < Struct.new(
         :assessment_run_agents,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_agents
         #   A list of ARNs that specifies the agents returned by the action.
@@ -1338,11 +1434,13 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class ListAssessmentRunsRequest < Aws::Structure.new(
+      class ListAssessmentRunsRequest < Struct.new(
         :assessment_template_arns,
         :filter,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_template_arns
         #   The ARNs that specify the assessment templates whose assessment runs
@@ -1374,9 +1472,11 @@ module Aws
 
       end
 
-      class ListAssessmentRunsResponse < Aws::Structure.new(
+      class ListAssessmentRunsResponse < Struct.new(
         :assessment_run_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arns
         #   A list of ARNs that specifies the assessment runs that are returned
@@ -1403,10 +1503,12 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class ListAssessmentTargetsRequest < Aws::Structure.new(
+      class ListAssessmentTargetsRequest < Struct.new(
         :filter,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter
         #   You can use this parameter to specify a subset of data to be
@@ -1433,9 +1535,11 @@ module Aws
 
       end
 
-      class ListAssessmentTargetsResponse < Aws::Structure.new(
+      class ListAssessmentTargetsResponse < Struct.new(
         :assessment_target_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_arns
         #   A list of ARNs that specifies the assessment targets that are
@@ -1468,11 +1572,13 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class ListAssessmentTemplatesRequest < Aws::Structure.new(
+      class ListAssessmentTemplatesRequest < Struct.new(
         :assessment_target_arns,
         :filter,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_arns
         #   A list of ARNs that specifies the assessment targets whose
@@ -1504,9 +1610,11 @@ module Aws
 
       end
 
-      class ListAssessmentTemplatesResponse < Aws::Structure.new(
+      class ListAssessmentTemplatesResponse < Struct.new(
         :assessment_template_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_template_arns
         #   A list of ARNs that specifies the assessment templates returned by
@@ -1531,10 +1639,12 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class ListEventSubscriptionsRequest < Aws::Structure.new(
+      class ListEventSubscriptionsRequest < Struct.new(
         :resource_arn,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The ARN of the assessment template for which you want to list the
@@ -1557,9 +1667,11 @@ module Aws
 
       end
 
-      class ListEventSubscriptionsResponse < Aws::Structure.new(
+      class ListEventSubscriptionsResponse < Struct.new(
         :subscriptions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscriptions
         #   Details of the returned event subscriptions.
@@ -1606,11 +1718,13 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class ListFindingsRequest < Aws::Structure.new(
+      class ListFindingsRequest < Struct.new(
         :assessment_run_arns,
         :filter,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arns
         #   The ARNs of the assessment runs that generate the findings that you
@@ -1642,9 +1756,11 @@ module Aws
 
       end
 
-      class ListFindingsResponse < Aws::Structure.new(
+      class ListFindingsResponse < Struct.new(
         :finding_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] finding_arns
         #   A list of ARNs that specifies the findings returned by the action.
@@ -1667,9 +1783,11 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class ListRulesPackagesRequest < Aws::Structure.new(
+      class ListRulesPackagesRequest < Struct.new(
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   You can use this parameter when paginating results. Set the value of
@@ -1687,9 +1805,11 @@ module Aws
 
       end
 
-      class ListRulesPackagesResponse < Aws::Structure.new(
+      class ListRulesPackagesResponse < Struct.new(
         :rules_package_arns,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules_package_arns
         #   The list of ARNs that specifies the rules packages returned by the
@@ -1712,8 +1832,10 @@ module Aws
       #       {
       #         resource_arn: "Arn", # required
       #       }
-      class ListTagsForResourceRequest < Aws::Structure.new(
+      class ListTagsForResourceRequest < Struct.new(
         :resource_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The ARN that specifies the assessment template whose tags you want
@@ -1722,8 +1844,10 @@ module Aws
 
       end
 
-      class ListTagsForResourceResponse < Aws::Structure.new(
+      class ListTagsForResourceResponse < Struct.new(
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   A collection of key and value pairs.
@@ -1739,10 +1863,12 @@ module Aws
       #         next_token: "PaginationToken",
       #         max_results: 1,
       #       }
-      class PreviewAgentsRequest < Aws::Structure.new(
+      class PreviewAgentsRequest < Struct.new(
         :preview_agents_arn,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] preview_agents_arn
         #   The ARN of the assessment target whose agents you want to preview.
@@ -1764,9 +1890,11 @@ module Aws
 
       end
 
-      class PreviewAgentsResponse < Aws::Structure.new(
+      class PreviewAgentsResponse < Struct.new(
         :agent_previews,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] agent_previews
         #   The resulting list of agents.
@@ -1788,8 +1916,10 @@ module Aws
       #       {
       #         role_arn: "Arn", # required
       #       }
-      class RegisterCrossAccountAccessRoleRequest < Aws::Structure.new(
+      class RegisterCrossAccountAccessRoleRequest < Struct.new(
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that Amazon Inspector uses to list your EC2
@@ -1806,9 +1936,11 @@ module Aws
       #         finding_arns: ["Arn"], # required
       #         attribute_keys: ["AttributeKey"], # required
       #       }
-      class RemoveAttributesFromFindingsRequest < Aws::Structure.new(
+      class RemoveAttributesFromFindingsRequest < Struct.new(
         :finding_arns,
         :attribute_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] finding_arns
         #   The ARNs that specify the findings that you want to remove
@@ -1822,8 +1954,10 @@ module Aws
 
       end
 
-      class RemoveAttributesFromFindingsResponse < Aws::Structure.new(
+      class RemoveAttributesFromFindingsResponse < Struct.new(
         :failed_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_items
         #   Attributes details that cannot be described. An error code is
@@ -1836,10 +1970,12 @@ module Aws
       # defines a set of tags that, when queried, identify the AWS resources
       # that make up the assessment target. This data type is used as the
       # response element in the DescribeResourceGroups action.
-      class ResourceGroup < Aws::Structure.new(
+      class ResourceGroup < Struct.new(
         :arn,
         :tags,
         :created_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The ARN of the resource group.
@@ -1865,9 +2001,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue",
       #       }
-      class ResourceGroupTag < Aws::Structure.new(
+      class ResourceGroupTag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A tag key.
@@ -1882,12 +2020,14 @@ module Aws
       # Contains information about an Amazon Inspector rules package. This
       # data type is used as the response element in the DescribeRulesPackages
       # action.
-      class RulesPackage < Aws::Structure.new(
+      class RulesPackage < Struct.new(
         :arn,
         :name,
         :version,
         :provider,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The ARN of the rules package.
@@ -1923,9 +2063,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class SetTagsForResourceRequest < Aws::Structure.new(
+      class SetTagsForResourceRequest < Struct.new(
         :resource_arn,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The ARN of the assessment template that you want to set tags to.
@@ -1945,9 +2087,11 @@ module Aws
       #         assessment_template_arn: "Arn", # required
       #         assessment_run_name: "AssessmentRunName",
       #       }
-      class StartAssessmentRunRequest < Aws::Structure.new(
+      class StartAssessmentRunRequest < Struct.new(
         :assessment_template_arn,
         :assessment_run_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_template_arn
         #   The ARN of the assessment template of the assessment run that you
@@ -1962,8 +2106,10 @@ module Aws
 
       end
 
-      class StartAssessmentRunResponse < Aws::Structure.new(
+      class StartAssessmentRunResponse < Struct.new(
         :assessment_run_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arn
         #   The ARN of the assessment run that has been started.
@@ -1977,8 +2123,10 @@ module Aws
       #       {
       #         assessment_run_arn: "Arn", # required
       #       }
-      class StopAssessmentRunRequest < Aws::Structure.new(
+      class StopAssessmentRunRequest < Struct.new(
         :assessment_run_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_run_arn
         #   The ARN of the assessment run that you want to stop.
@@ -1994,10 +2142,12 @@ module Aws
       #         event: "ASSESSMENT_RUN_STARTED", # required, accepts ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, FINDING_REPORTED, OTHER
       #         topic_arn: "Arn", # required
       #       }
-      class SubscribeToEventRequest < Aws::Structure.new(
+      class SubscribeToEventRequest < Struct.new(
         :resource_arn,
         :event,
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The ARN of the assessment template that is used during the event for
@@ -2016,10 +2166,12 @@ module Aws
 
       # This data type is used as a response element in the
       # ListEventSubscriptions action.
-      class Subscription < Aws::Structure.new(
+      class Subscription < Struct.new(
         :resource_arn,
         :topic_arn,
         :event_subscriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The ARN of the assessment template that is used during the event for
@@ -2047,9 +2199,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A tag key.
@@ -2064,10 +2218,12 @@ module Aws
       # The metadata about the Amazon Inspector application data metrics
       # collected by the agent. This data type is used as the response element
       # in the GetTelemetryMetadata action.
-      class TelemetryMetadata < Aws::Structure.new(
+      class TelemetryMetadata < Struct.new(
         :message_type,
         :count,
         :data_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] message_type
         #   A specific type of behavioral data that is collected by the agent.
@@ -2093,9 +2249,11 @@ module Aws
       #         begin_date: Time.now,
       #         end_date: Time.now,
       #       }
-      class TimestampRange < Aws::Structure.new(
+      class TimestampRange < Struct.new(
         :begin_date,
         :end_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] begin_date
         #   The minimum value of the timestamp range.
@@ -2115,10 +2273,12 @@ module Aws
       #         event: "ASSESSMENT_RUN_STARTED", # required, accepts ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, FINDING_REPORTED, OTHER
       #         topic_arn: "Arn", # required
       #       }
-      class UnsubscribeFromEventRequest < Aws::Structure.new(
+      class UnsubscribeFromEventRequest < Struct.new(
         :resource_arn,
         :event,
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The ARN of the assessment template that is used during the event for
@@ -2143,10 +2303,12 @@ module Aws
       #         assessment_target_name: "AssessmentTargetName", # required
       #         resource_group_arn: "Arn", # required
       #       }
-      class UpdateAssessmentTargetRequest < Aws::Structure.new(
+      class UpdateAssessmentTargetRequest < Struct.new(
         :assessment_target_arn,
         :assessment_target_name,
         :resource_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] assessment_target_arn
         #   The ARN of the assessment target that you want to update.

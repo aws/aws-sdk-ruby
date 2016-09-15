@@ -22,10 +22,12 @@ module Aws
       #         ],
       #         update_security_group_for_directory_controllers: false,
       #       }
-      class AddIpRoutesRequest < Aws::Structure.new(
+      class AddIpRoutesRequest < Struct.new(
         :directory_id,
         :ip_routes,
         :update_security_group_for_directory_controllers)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   Identifier (ID) of the directory to which to add the address block.
@@ -119,9 +121,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToResourceRequest < Aws::Structure.new(
+      class AddTagsToResourceRequest < Struct.new(
         :resource_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   Identifier (ID) for the directory to which to add the tag.
@@ -143,9 +147,11 @@ module Aws
       #         name: "AttributeName",
       #         value: "AttributeValue",
       #       }
-      class Attribute < Aws::Structure.new(
+      class Attribute < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the attribute.
@@ -158,10 +164,12 @@ module Aws
       end
 
       # Contains information about a computer account in a directory.
-      class Computer < Aws::Structure.new(
+      class Computer < Struct.new(
         :computer_id,
         :computer_name,
         :computer_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] computer_id
         #   The identifier of the computer.
@@ -181,10 +189,12 @@ module Aws
       # Points to a remote domain with which you are setting up a trust
       # relationship. Conditional forwarders are required in order to set up a
       # trust relationship with another domain.
-      class ConditionalForwarder < Aws::Structure.new(
+      class ConditionalForwarder < Struct.new(
         :remote_domain_name,
         :dns_ip_addrs,
         :replication_scope)
+
+        include Aws::Structure
 
         # @!attribute [rw] remote_domain_name
         #   The fully qualified domain name (FQDN) of the remote domains pointed
@@ -222,13 +232,15 @@ module Aws
       #           customer_user_name: "UserName", # required
       #         },
       #       }
-      class ConnectDirectoryRequest < Aws::Structure.new(
+      class ConnectDirectoryRequest < Struct.new(
         :name,
         :short_name,
         :password,
         :description,
         :size,
         :connect_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The fully-qualified name of the on-premises directory, such as
@@ -259,8 +271,10 @@ module Aws
       end
 
       # Contains the results of the ConnectDirectory operation.
-      class ConnectDirectoryResult < Aws::Structure.new(
+      class ConnectDirectoryResult < Struct.new(
         :directory_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the new directory.
@@ -276,9 +290,11 @@ module Aws
       #         directory_id: "DirectoryId", # required
       #         alias: "AliasName", # required
       #       }
-      class CreateAliasRequest < Aws::Structure.new(
+      class CreateAliasRequest < Struct.new(
         :directory_id,
         :alias)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory for which to create the alias.
@@ -295,9 +311,11 @@ module Aws
       end
 
       # Contains the results of the CreateAlias operation.
-      class CreateAliasResult < Aws::Structure.new(
+      class CreateAliasResult < Struct.new(
         :directory_id,
         :alias)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory.
@@ -325,12 +343,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateComputerRequest < Aws::Structure.new(
+      class CreateComputerRequest < Struct.new(
         :directory_id,
         :computer_name,
         :password,
         :organizational_unit_distinguished_name,
         :computer_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory in which to create the computer
@@ -360,8 +380,10 @@ module Aws
       end
 
       # Contains the results for the CreateComputer operation.
-      class CreateComputerResult < Aws::Structure.new(
+      class CreateComputerResult < Struct.new(
         :computer)
+
+        include Aws::Structure
 
         # @!attribute [rw] computer
         #   A Computer object that represents the computer account.
@@ -381,10 +403,12 @@ module Aws
       #         remote_domain_name: "RemoteDomainName", # required
       #         dns_ip_addrs: ["IpAddr"], # required
       #       }
-      class CreateConditionalForwarderRequest < Aws::Structure.new(
+      class CreateConditionalForwarderRequest < Struct.new(
         :directory_id,
         :remote_domain_name,
         :dns_ip_addrs)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory ID of the AWS directory for which you are creating the
@@ -421,13 +445,15 @@ module Aws
       #           subnet_ids: ["SubnetId"], # required
       #         },
       #       }
-      class CreateDirectoryRequest < Aws::Structure.new(
+      class CreateDirectoryRequest < Struct.new(
         :name,
         :short_name,
         :password,
         :description,
         :size,
         :vpc_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The fully qualified name for the directory, such as
@@ -460,8 +486,10 @@ module Aws
       end
 
       # Contains the results of the CreateDirectory operation.
-      class CreateDirectoryResult < Aws::Structure.new(
+      class CreateDirectoryResult < Struct.new(
         :directory_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory that was created.
@@ -483,12 +511,14 @@ module Aws
       #           subnet_ids: ["SubnetId"], # required
       #         },
       #       }
-      class CreateMicrosoftADRequest < Aws::Structure.new(
+      class CreateMicrosoftADRequest < Struct.new(
         :name,
         :short_name,
         :password,
         :description,
         :vpc_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The fully qualified domain name for the directory, such as
@@ -521,8 +551,10 @@ module Aws
       end
 
       # Result of a CreateMicrosoftAD request.
-      class CreateMicrosoftADResult < Aws::Structure.new(
+      class CreateMicrosoftADResult < Struct.new(
         :directory_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory that was created.
@@ -538,9 +570,11 @@ module Aws
       #         directory_id: "DirectoryId", # required
       #         name: "SnapshotName",
       #       }
-      class CreateSnapshotRequest < Aws::Structure.new(
+      class CreateSnapshotRequest < Struct.new(
         :directory_id,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory of which to take a snapshot.
@@ -553,8 +587,10 @@ module Aws
       end
 
       # Contains the results of the CreateSnapshot operation.
-      class CreateSnapshotResult < Aws::Structure.new(
+      class CreateSnapshotResult < Struct.new(
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The identifier of the snapshot that was created.
@@ -583,13 +619,15 @@ module Aws
       #         trust_type: "Forest", # accepts Forest
       #         conditional_forwarder_ip_addrs: ["IpAddr"],
       #       }
-      class CreateTrustRequest < Aws::Structure.new(
+      class CreateTrustRequest < Struct.new(
         :directory_id,
         :remote_domain_name,
         :trust_password,
         :trust_direction,
         :trust_type,
         :conditional_forwarder_ip_addrs)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The Directory ID of the Microsoft AD in the AWS cloud for which to
@@ -622,8 +660,10 @@ module Aws
       end
 
       # The result of a CreateTrust request.
-      class CreateTrustResult < Aws::Structure.new(
+      class CreateTrustResult < Struct.new(
         :trust_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] trust_id
         #   A unique identifier for the trust relationship that was created.
@@ -639,9 +679,11 @@ module Aws
       #         directory_id: "DirectoryId", # required
       #         remote_domain_name: "RemoteDomainName", # required
       #       }
-      class DeleteConditionalForwarderRequest < Aws::Structure.new(
+      class DeleteConditionalForwarderRequest < Struct.new(
         :directory_id,
         :remote_domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory ID for which you are deleting the conditional
@@ -665,8 +707,10 @@ module Aws
       #       {
       #         directory_id: "DirectoryId", # required
       #       }
-      class DeleteDirectoryRequest < Aws::Structure.new(
+      class DeleteDirectoryRequest < Struct.new(
         :directory_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory to delete.
@@ -675,8 +719,10 @@ module Aws
       end
 
       # Contains the results of the DeleteDirectory operation.
-      class DeleteDirectoryResult < Aws::Structure.new(
+      class DeleteDirectoryResult < Struct.new(
         :directory_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory identifier.
@@ -691,8 +737,10 @@ module Aws
       #       {
       #         snapshot_id: "SnapshotId", # required
       #       }
-      class DeleteSnapshotRequest < Aws::Structure.new(
+      class DeleteSnapshotRequest < Struct.new(
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The identifier of the directory snapshot to be deleted.
@@ -701,8 +749,10 @@ module Aws
       end
 
       # Contains the results of the DeleteSnapshot operation.
-      class DeleteSnapshotResult < Aws::Structure.new(
+      class DeleteSnapshotResult < Struct.new(
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The identifier of the directory snapshot that was deleted.
@@ -719,9 +769,11 @@ module Aws
       #         trust_id: "TrustId", # required
       #         delete_associated_conditional_forwarder: false,
       #       }
-      class DeleteTrustRequest < Aws::Structure.new(
+      class DeleteTrustRequest < Struct.new(
         :trust_id,
         :delete_associated_conditional_forwarder)
+
+        include Aws::Structure
 
         # @!attribute [rw] trust_id
         #   The Trust ID of the trust relationship to be deleted.
@@ -734,8 +786,10 @@ module Aws
       end
 
       # The result of a DeleteTrust request.
-      class DeleteTrustResult < Aws::Structure.new(
+      class DeleteTrustResult < Struct.new(
         :trust_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] trust_id
         #   The Trust ID of the trust relationship that was deleted.
@@ -752,9 +806,11 @@ module Aws
       #         directory_id: "DirectoryId", # required
       #         topic_name: "TopicName", # required
       #       }
-      class DeregisterEventTopicRequest < Aws::Structure.new(
+      class DeregisterEventTopicRequest < Struct.new(
         :directory_id,
         :topic_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The Directory ID to remove as a publisher. This directory will no
@@ -779,9 +835,11 @@ module Aws
       #         directory_id: "DirectoryId", # required
       #         remote_domain_names: ["RemoteDomainName"],
       #       }
-      class DescribeConditionalForwardersRequest < Aws::Structure.new(
+      class DescribeConditionalForwardersRequest < Struct.new(
         :directory_id,
         :remote_domain_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory ID for which to get the list of associated conditional
@@ -797,8 +855,10 @@ module Aws
       end
 
       # The result of a DescribeConditionalForwarder request.
-      class DescribeConditionalForwardersResult < Aws::Structure.new(
+      class DescribeConditionalForwardersResult < Struct.new(
         :conditional_forwarders)
+
+        include Aws::Structure
 
         # @!attribute [rw] conditional_forwarders
         #   The list of conditional forwarders that have been created.
@@ -815,10 +875,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeDirectoriesRequest < Aws::Structure.new(
+      class DescribeDirectoriesRequest < Struct.new(
         :directory_ids,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_ids
         #   A list of identifiers of the directories for which to obtain the
@@ -843,9 +905,11 @@ module Aws
       end
 
       # Contains the results of the DescribeDirectories operation.
-      class DescribeDirectoriesResult < Aws::Structure.new(
+      class DescribeDirectoriesResult < Struct.new(
         :directory_descriptions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_descriptions
         #   The list of DirectoryDescription objects that were retrieved.
@@ -872,9 +936,11 @@ module Aws
       #         directory_id: "DirectoryId",
       #         topic_names: ["TopicName"],
       #       }
-      class DescribeEventTopicsRequest < Aws::Structure.new(
+      class DescribeEventTopicsRequest < Struct.new(
         :directory_id,
         :topic_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The Directory ID for which to get the list of associated SNS topics.
@@ -894,8 +960,10 @@ module Aws
       end
 
       # The result of a DescribeEventTopic request.
-      class DescribeEventTopicsResult < Aws::Structure.new(
+      class DescribeEventTopicsResult < Struct.new(
         :event_topics)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_topics
         #   A list of SNS topic names that receive status messages from the
@@ -914,11 +982,13 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeSnapshotsRequest < Aws::Structure.new(
+      class DescribeSnapshotsRequest < Struct.new(
         :directory_id,
         :snapshot_ids,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory for which to retrieve snapshot
@@ -943,9 +1013,11 @@ module Aws
       end
 
       # Contains the results of the DescribeSnapshots operation.
-      class DescribeSnapshotsResult < Aws::Structure.new(
+      class DescribeSnapshotsResult < Struct.new(
         :snapshots,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshots
         #   The list of Snapshot objects that were retrieved.
@@ -975,11 +1047,13 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeTrustsRequest < Aws::Structure.new(
+      class DescribeTrustsRequest < Struct.new(
         :directory_id,
         :trust_ids,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The Directory ID of the AWS directory that is a part of the
@@ -1007,9 +1081,11 @@ module Aws
       end
 
       # The result of a DescribeTrust request.
-      class DescribeTrustsResult < Aws::Structure.new(
+      class DescribeTrustsResult < Struct.new(
         :trusts,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] trusts
         #   The list of Trust objects that were retrieved.
@@ -1039,11 +1115,13 @@ module Aws
       #         customer_dns_ips: ["IpAddr"], # required
       #         customer_user_name: "UserName", # required
       #       }
-      class DirectoryConnectSettings < Aws::Structure.new(
+      class DirectoryConnectSettings < Struct.new(
         :vpc_id,
         :subnet_ids,
         :customer_dns_ips,
         :customer_user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The identifier of the VPC in which the AD Connector is created.
@@ -1074,13 +1152,15 @@ module Aws
       end
 
       # Contains information about an AD Connector directory.
-      class DirectoryConnectSettingsDescription < Aws::Structure.new(
+      class DirectoryConnectSettingsDescription < Struct.new(
         :vpc_id,
         :subnet_ids,
         :customer_user_name,
         :security_group_id,
         :availability_zones,
         :connect_ips)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The identifier of the VPC that the AD Connector is in.
@@ -1109,7 +1189,7 @@ module Aws
       end
 
       # Contains information about an AWS Directory Service directory.
-      class DirectoryDescription < Aws::Structure.new(
+      class DirectoryDescription < Struct.new(
         :directory_id,
         :name,
         :short_name,
@@ -1128,6 +1208,8 @@ module Aws
         :radius_status,
         :stage_reason,
         :sso_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory identifier.
@@ -1220,7 +1302,7 @@ module Aws
       end
 
       # Contains directory limit information for a region.
-      class DirectoryLimits < Aws::Structure.new(
+      class DirectoryLimits < Struct.new(
         :cloud_only_directories_limit,
         :cloud_only_directories_current_count,
         :cloud_only_directories_limit_reached,
@@ -1230,6 +1312,8 @@ module Aws
         :connected_directories_limit,
         :connected_directories_current_count,
         :connected_directories_limit_reached)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_only_directories_limit
         #   The maximum number of cloud directories allowed in the region.
@@ -1279,9 +1363,11 @@ module Aws
       #         vpc_id: "VpcId", # required
       #         subnet_ids: ["SubnetId"], # required
       #       }
-      class DirectoryVpcSettings < Aws::Structure.new(
+      class DirectoryVpcSettings < Struct.new(
         :vpc_id,
         :subnet_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The identifier of the VPC in which to create the directory.
@@ -1297,11 +1383,13 @@ module Aws
       end
 
       # Contains information about the directory.
-      class DirectoryVpcSettingsDescription < Aws::Structure.new(
+      class DirectoryVpcSettingsDescription < Struct.new(
         :vpc_id,
         :subnet_ids,
         :security_group_id,
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_id
         #   The identifier of the VPC that the directory is in.
@@ -1332,8 +1420,10 @@ module Aws
       #       {
       #         directory_id: "DirectoryId", # required
       #       }
-      class DisableRadiusRequest < Aws::Structure.new(
+      class DisableRadiusRequest < Struct.new(
         :directory_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory for which to disable MFA.
@@ -1353,10 +1443,12 @@ module Aws
       #         user_name: "UserName",
       #         password: "ConnectPassword",
       #       }
-      class DisableSsoRequest < Aws::Structure.new(
+      class DisableSsoRequest < Struct.new(
         :directory_id,
         :user_name,
         :password)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory for which to disable single-sign on.
@@ -1403,9 +1495,11 @@ module Aws
       #           use_same_username: false,
       #         },
       #       }
-      class EnableRadiusRequest < Aws::Structure.new(
+      class EnableRadiusRequest < Struct.new(
         :directory_id,
         :radius_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory for which to enable MFA.
@@ -1430,10 +1524,12 @@ module Aws
       #         user_name: "UserName",
       #         password: "ConnectPassword",
       #       }
-      class EnableSsoRequest < Aws::Structure.new(
+      class EnableSsoRequest < Struct.new(
         :directory_id,
         :user_name,
         :password)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory for which to enable single-sign on.
@@ -1464,12 +1560,14 @@ module Aws
 
       # Information about SNS topic and AWS Directory Service directory
       # associations.
-      class EventTopic < Aws::Structure.new(
+      class EventTopic < Struct.new(
         :directory_id,
         :topic_name,
         :topic_arn,
         :created_date_time,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The Directory ID of an AWS Directory Service directory that will
@@ -1501,8 +1599,10 @@ module Aws
       class GetDirectoryLimitsRequest < Aws::EmptyStructure; end
 
       # Contains the results of the GetDirectoryLimits operation.
-      class GetDirectoryLimitsResult < Aws::Structure.new(
+      class GetDirectoryLimitsResult < Struct.new(
         :directory_limits)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_limits
         #   A DirectoryLimits object that contains the directory limits for the
@@ -1518,8 +1618,10 @@ module Aws
       #       {
       #         directory_id: "DirectoryId", # required
       #       }
-      class GetSnapshotLimitsRequest < Aws::Structure.new(
+      class GetSnapshotLimitsRequest < Struct.new(
         :directory_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   Contains the identifier of the directory to obtain the limits for.
@@ -1528,8 +1630,10 @@ module Aws
       end
 
       # Contains the results of the GetSnapshotLimits operation.
-      class GetSnapshotLimitsResult < Aws::Structure.new(
+      class GetSnapshotLimitsResult < Struct.new(
         :snapshot_limits)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_limits
         #   A SnapshotLimits object that contains the manual snapshot limits for
@@ -1547,9 +1651,11 @@ module Aws
       #         cidr_ip: "CidrIp",
       #         description: "Description",
       #       }
-      class IpRoute < Aws::Structure.new(
+      class IpRoute < Struct.new(
         :cidr_ip,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] cidr_ip
         #   IP address block using CIDR format, for example 10.0.0.0/24. This is
@@ -1565,13 +1671,15 @@ module Aws
       end
 
       # Information about one or more IP address blocks.
-      class IpRouteInfo < Aws::Structure.new(
+      class IpRouteInfo < Struct.new(
         :directory_id,
         :cidr_ip,
         :ip_route_status_msg,
         :added_date_time,
         :ip_route_status_reason,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   Identifier (ID) of the directory associated with the IP addresses.
@@ -1607,10 +1715,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class ListIpRoutesRequest < Aws::Structure.new(
+      class ListIpRoutesRequest < Struct.new(
         :directory_id,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   Identifier (ID) of the directory for which you want to retrieve the
@@ -1630,9 +1740,11 @@ module Aws
 
       end
 
-      class ListIpRoutesResult < Aws::Structure.new(
+      class ListIpRoutesResult < Struct.new(
         :ip_routes_info,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_routes_info
         #   A list of IpRoutes.
@@ -1654,10 +1766,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class ListTagsForResourceRequest < Aws::Structure.new(
+      class ListTagsForResourceRequest < Struct.new(
         :resource_id,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   Identifier (ID) of the directory for which you want to retrieve
@@ -1674,9 +1788,11 @@ module Aws
 
       end
 
-      class ListTagsForResourceResult < Aws::Structure.new(
+      class ListTagsForResourceResult < Struct.new(
         :tags,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   List of tags returned by the ListTagsForResource operation.
@@ -1703,7 +1819,7 @@ module Aws
       #         display_label: "RadiusDisplayLabel",
       #         use_same_username: false,
       #       }
-      class RadiusSettings < Aws::Structure.new(
+      class RadiusSettings < Struct.new(
         :radius_servers,
         :radius_port,
         :radius_timeout,
@@ -1712,6 +1828,8 @@ module Aws
         :authentication_protocol,
         :display_label,
         :use_same_username)
+
+        include Aws::Structure
 
         # @!attribute [rw] radius_servers
         #   An array of strings that contains the IP addresses of the RADIUS
@@ -1761,9 +1879,11 @@ module Aws
       #         directory_id: "DirectoryId", # required
       #         topic_name: "TopicName", # required
       #       }
-      class RegisterEventTopicRequest < Aws::Structure.new(
+      class RegisterEventTopicRequest < Struct.new(
         :directory_id,
         :topic_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The Directory ID that will publish status messages to the SNS topic.
@@ -1787,9 +1907,11 @@ module Aws
       #         directory_id: "DirectoryId", # required
       #         cidr_ips: ["CidrIp"], # required
       #       }
-      class RemoveIpRoutesRequest < Aws::Structure.new(
+      class RemoveIpRoutesRequest < Struct.new(
         :directory_id,
         :cidr_ips)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   Identifier (ID) of the directory from which you want to remove the
@@ -1811,9 +1933,11 @@ module Aws
       #         resource_id: "ResourceId", # required
       #         tag_keys: ["TagKey"], # required
       #       }
-      class RemoveTagsFromResourceRequest < Aws::Structure.new(
+      class RemoveTagsFromResourceRequest < Struct.new(
         :resource_id,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   Identifier (ID) of the directory from which to remove the tag.
@@ -1835,8 +1959,10 @@ module Aws
       #       {
       #         snapshot_id: "SnapshotId", # required
       #       }
-      class RestoreFromSnapshotRequest < Aws::Structure.new(
+      class RestoreFromSnapshotRequest < Struct.new(
         :snapshot_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_id
         #   The identifier of the snapshot to restore from.
@@ -1848,13 +1974,15 @@ module Aws
       class RestoreFromSnapshotResult < Aws::EmptyStructure; end
 
       # Describes a directory snapshot.
-      class Snapshot < Aws::Structure.new(
+      class Snapshot < Struct.new(
         :directory_id,
         :snapshot_id,
         :type,
         :name,
         :status,
         :start_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory identifier.
@@ -1883,10 +2011,12 @@ module Aws
       end
 
       # Contains manual snapshot limit information for a directory.
-      class SnapshotLimits < Aws::Structure.new(
+      class SnapshotLimits < Struct.new(
         :manual_snapshots_limit,
         :manual_snapshots_current_count,
         :manual_snapshots_limit_reached)
+
+        include Aws::Structure
 
         # @!attribute [rw] manual_snapshots_limit
         #   The maximum number of manual snapshots allowed.
@@ -1911,9 +2041,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   Required name of the tag. The string value can be Unicode characters
@@ -1935,7 +2067,7 @@ module Aws
 
       # Describes a trust relationship between an Microsoft AD in the AWS
       # cloud and an external domain.
-      class Trust < Aws::Structure.new(
+      class Trust < Struct.new(
         :directory_id,
         :trust_id,
         :remote_domain_name,
@@ -1946,6 +2078,8 @@ module Aws
         :last_updated_date_time,
         :state_last_updated_date_time,
         :trust_state_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The Directory ID of the AWS directory involved in the trust
@@ -2000,10 +2134,12 @@ module Aws
       #         remote_domain_name: "RemoteDomainName", # required
       #         dns_ip_addrs: ["IpAddr"], # required
       #       }
-      class UpdateConditionalForwarderRequest < Aws::Structure.new(
+      class UpdateConditionalForwarderRequest < Struct.new(
         :directory_id,
         :remote_domain_name,
         :dns_ip_addrs)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The directory ID of the AWS directory for which to update the
@@ -2042,9 +2178,11 @@ module Aws
       #           use_same_username: false,
       #         },
       #       }
-      class UpdateRadiusRequest < Aws::Structure.new(
+      class UpdateRadiusRequest < Struct.new(
         :directory_id,
         :radius_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] directory_id
         #   The identifier of the directory for which to update the RADIUS
@@ -2069,8 +2207,10 @@ module Aws
       #       {
       #         trust_id: "TrustId", # required
       #       }
-      class VerifyTrustRequest < Aws::Structure.new(
+      class VerifyTrustRequest < Struct.new(
         :trust_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] trust_id
         #   The unique Trust ID of the trust relationship to verify.
@@ -2079,8 +2219,10 @@ module Aws
       end
 
       # Result of a VerifyTrust request.
-      class VerifyTrustResult < Aws::Structure.new(
+      class VerifyTrustResult < Struct.new(
         :trust_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] trust_id
         #   The unique Trust ID of the trust relationship that was verified.

@@ -19,9 +19,11 @@ module Aws
       #         region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
       #         name: "AlarmName", # required
       #       }
-      class AlarmIdentifier < Aws::Structure.new(
+      class AlarmIdentifier < Struct.new(
         :region,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] region
         #   A complex type that identifies the CloudWatch alarm that you want
@@ -75,10 +77,12 @@ module Aws
       #         dns_name: "DNSName", # required
       #         evaluate_target_health: false, # required
       #       }
-      class AliasTarget < Aws::Structure.new(
+      class AliasTarget < Struct.new(
         :hosted_zone_id,
         :dns_name,
         :evaluate_target_health)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   *Alias resource records sets only*\: The value used depends on where
@@ -329,10 +333,12 @@ module Aws
       #         },
       #         comment: "AssociateVPCComment",
       #       }
-      class AssociateVPCWithHostedZoneRequest < Aws::Structure.new(
+      class AssociateVPCWithHostedZoneRequest < Struct.new(
         :hosted_zone_id,
         :vpc,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the hosted zone you want to associate your VPC with.
@@ -354,8 +360,10 @@ module Aws
 
       # A complex type that contains the response information for the hosted
       # zone.
-      class AssociateVPCWithHostedZoneResponse < Aws::Structure.new(
+      class AssociateVPCWithHostedZoneResponse < Struct.new(
         :change_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_info
         #   A complex type that describes the changes made to your hosted zone.
@@ -396,9 +404,11 @@ module Aws
       #           traffic_policy_instance_id: "TrafficPolicyInstanceId",
       #         },
       #       }
-      class Change < Aws::Structure.new(
+      class Change < Struct.new(
         :action,
         :resource_record_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] action
         #   The action to perform:
@@ -476,9 +486,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ChangeBatch < Aws::Structure.new(
+      class ChangeBatch < Struct.new(
         :comment,
         :changes)
+
+        include Aws::Structure
 
         # @!attribute [rw] comment
         #   *Optional:* Any comments you want to include about a change batch
@@ -493,13 +505,15 @@ module Aws
 
       # A complex type that lists the changes and information for a
       # ChangeBatch.
-      class ChangeBatchRecord < Aws::Structure.new(
+      class ChangeBatchRecord < Struct.new(
         :id,
         :submitted_at,
         :status,
         :comment,
         :submitter,
         :changes)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the request. Use this ID to track when the change has
@@ -540,11 +554,13 @@ module Aws
 
       # A complex type that describes change information about changes made to
       # your hosted zone.
-      class ChangeInfo < Aws::Structure.new(
+      class ChangeInfo < Struct.new(
         :id,
         :status,
         :submitted_at,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the request.
@@ -617,9 +633,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class ChangeResourceRecordSetsRequest < Aws::Structure.new(
+      class ChangeResourceRecordSetsRequest < Struct.new(
         :hosted_zone_id,
         :change_batch)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the hosted zone that contains the resource record sets
@@ -634,8 +652,10 @@ module Aws
       end
 
       # A complex type containing the response for the request.
-      class ChangeResourceRecordSetsResponse < Aws::Structure.new(
+      class ChangeResourceRecordSetsResponse < Struct.new(
         :change_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_info
         #   A complex type that contains information about changes made to your
@@ -663,11 +683,13 @@ module Aws
       #         ],
       #         remove_tag_keys: ["TagKey"],
       #       }
-      class ChangeTagsForResourceRequest < Aws::Structure.new(
+      class ChangeTagsForResourceRequest < Struct.new(
         :resource_type,
         :resource_id,
         :add_tags,
         :remove_tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of the resource.
@@ -703,7 +725,7 @@ module Aws
 
       # A complex type that contains information about the CloudWatch alarm
       # that Amazon Route 53 is monitoring for this health check.
-      class CloudWatchAlarmConfiguration < Aws::Structure.new(
+      class CloudWatchAlarmConfiguration < Struct.new(
         :evaluation_periods,
         :threshold,
         :comparison_operator,
@@ -712,6 +734,8 @@ module Aws
         :namespace,
         :statistic,
         :dimensions)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_periods
         #   For the metric that the CloudWatch alarm is associated with, the
@@ -791,9 +815,11 @@ module Aws
       #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
       #         },
       #       }
-      class CreateHealthCheckRequest < Aws::Structure.new(
+      class CreateHealthCheckRequest < Struct.new(
         :caller_reference,
         :health_check_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] caller_reference
         #   A unique string that identifies the request and that allows failed
@@ -811,9 +837,11 @@ module Aws
 
       # A complex type containing the response information for the new health
       # check.
-      class CreateHealthCheckResponse < Aws::Structure.new(
+      class CreateHealthCheckResponse < Struct.new(
         :health_check,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check
         #   A complex type that contains identifying information about the
@@ -843,12 +871,14 @@ module Aws
       #         },
       #         delegation_set_id: "ResourceId",
       #       }
-      class CreateHostedZoneRequest < Aws::Structure.new(
+      class CreateHostedZoneRequest < Struct.new(
         :name,
         :vpc,
         :caller_reference,
         :hosted_zone_config,
         :delegation_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the domain. For resource record types that include a
@@ -909,12 +939,14 @@ module Aws
 
       # A complex type containing the response information for the hosted
       # zone.
-      class CreateHostedZoneResponse < Aws::Structure.new(
+      class CreateHostedZoneResponse < Struct.new(
         :hosted_zone,
         :change_info,
         :delegation_set,
         :vpc,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone
         #   A complex type that contains general information about the hosted
@@ -945,9 +977,11 @@ module Aws
       #         caller_reference: "Nonce", # required
       #         hosted_zone_id: "ResourceId",
       #       }
-      class CreateReusableDelegationSetRequest < Aws::Structure.new(
+      class CreateReusableDelegationSetRequest < Struct.new(
         :caller_reference,
         :hosted_zone_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] caller_reference
         #   A unique string that identifies the request, and that allows you to
@@ -965,9 +999,11 @@ module Aws
 
       end
 
-      class CreateReusableDelegationSetResponse < Aws::Structure.new(
+      class CreateReusableDelegationSetResponse < Struct.new(
         :delegation_set,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] delegation_set
         #   A complex type that contains name server information.
@@ -991,12 +1027,14 @@ module Aws
       #         traffic_policy_id: "TrafficPolicyId", # required
       #         traffic_policy_version: 1, # required
       #       }
-      class CreateTrafficPolicyInstanceRequest < Aws::Structure.new(
+      class CreateTrafficPolicyInstanceRequest < Struct.new(
         :hosted_zone_id,
         :name,
         :ttl,
         :traffic_policy_id,
         :traffic_policy_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the hosted zone in which you want Amazon Route 53 to
@@ -1031,9 +1069,11 @@ module Aws
 
       # A complex type that contains the response information for the
       # `CreateTrafficPolicyInstance` request.
-      class CreateTrafficPolicyInstanceResponse < Aws::Structure.new(
+      class CreateTrafficPolicyInstanceResponse < Struct.new(
         :traffic_policy_instance,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_instance
         #   A complex type that contains settings for the new traffic policy
@@ -1056,10 +1096,12 @@ module Aws
       #         document: "TrafficPolicyDocument", # required
       #         comment: "TrafficPolicyComment",
       #       }
-      class CreateTrafficPolicyRequest < Aws::Structure.new(
+      class CreateTrafficPolicyRequest < Struct.new(
         :name,
         :document,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the traffic policy.
@@ -1084,9 +1126,11 @@ module Aws
 
       # A complex type that contains the response information for the
       # `CreateTrafficPolicy` request.
-      class CreateTrafficPolicyResponse < Aws::Structure.new(
+      class CreateTrafficPolicyResponse < Struct.new(
         :traffic_policy,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy
         #   A complex type that contains settings for the new traffic policy.
@@ -1107,10 +1151,12 @@ module Aws
       #         document: "TrafficPolicyDocument", # required
       #         comment: "TrafficPolicyComment",
       #       }
-      class CreateTrafficPolicyVersionRequest < Aws::Structure.new(
+      class CreateTrafficPolicyVersionRequest < Struct.new(
         :id,
         :document,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the traffic policy for which you want to create a new
@@ -1133,9 +1179,11 @@ module Aws
 
       # A complex type that contains the response information for the
       # `CreateTrafficPolicyVersion` request.
-      class CreateTrafficPolicyVersionResponse < Aws::Structure.new(
+      class CreateTrafficPolicyVersionResponse < Struct.new(
         :traffic_policy,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy
         #   A complex type that contains settings for the new version of the
@@ -1148,10 +1196,12 @@ module Aws
       end
 
       # A complex type that describes the name servers for this hosted zone.
-      class DelegationSet < Aws::Structure.new(
+      class DelegationSet < Struct.new(
         :id,
         :caller_reference,
         :name_servers)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   @return [String]
@@ -1174,8 +1224,10 @@ module Aws
       #       {
       #         health_check_id: "HealthCheckId", # required
       #       }
-      class DeleteHealthCheckRequest < Aws::Structure.new(
+      class DeleteHealthCheckRequest < Struct.new(
         :health_check_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_id
         #   @return [String]
@@ -1193,8 +1245,10 @@ module Aws
       #       {
       #         id: "ResourceId", # required
       #       }
-      class DeleteHostedZoneRequest < Aws::Structure.new(
+      class DeleteHostedZoneRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the hosted zone you want to delete.
@@ -1203,8 +1257,10 @@ module Aws
       end
 
       # A complex type containing the response information for the request.
-      class DeleteHostedZoneResponse < Aws::Structure.new(
+      class DeleteHostedZoneResponse < Struct.new(
         :change_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_info
         #   A complex type that contains the ID, the status, and the date and
@@ -1220,8 +1276,10 @@ module Aws
       #       {
       #         id: "ResourceId", # required
       #       }
-      class DeleteReusableDelegationSetRequest < Aws::Structure.new(
+      class DeleteReusableDelegationSetRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the reusable delegation set you want to delete.
@@ -1240,8 +1298,10 @@ module Aws
       #       {
       #         id: "TrafficPolicyInstanceId", # required
       #       }
-      class DeleteTrafficPolicyInstanceRequest < Aws::Structure.new(
+      class DeleteTrafficPolicyInstanceRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the traffic policy instance that you want to delete.
@@ -1266,9 +1326,11 @@ module Aws
       #         id: "TrafficPolicyId", # required
       #         version: 1, # required
       #       }
-      class DeleteTrafficPolicyRequest < Aws::Structure.new(
+      class DeleteTrafficPolicyRequest < Struct.new(
         :id,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the traffic policy that you want to delete.
@@ -1285,9 +1347,11 @@ module Aws
 
       # For the metric that the CloudWatch alarm is associated with, a complex
       # type that contains information about one dimension.
-      class Dimension < Aws::Structure.new(
+      class Dimension < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   For the metric that the CloudWatch alarm is associated with, the
@@ -1314,10 +1378,12 @@ module Aws
       #         },
       #         comment: "DisassociateVPCComment",
       #       }
-      class DisassociateVPCFromHostedZoneRequest < Aws::Structure.new(
+      class DisassociateVPCFromHostedZoneRequest < Struct.new(
         :hosted_zone_id,
         :vpc,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the VPC that you want to disassociate from an Amazon Route
@@ -1337,8 +1403,10 @@ module Aws
 
       # A complex type that contains the response information for the
       # disassociate request.
-      class DisassociateVPCFromHostedZoneResponse < Aws::Structure.new(
+      class DisassociateVPCFromHostedZoneResponse < Struct.new(
         :change_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_info
         #   A complex type that describes the changes made to your hosted zone.
@@ -1355,10 +1423,12 @@ module Aws
       #         country_code: "GeoLocationCountryCode",
       #         subdivision_code: "GeoLocationSubdivisionCode",
       #       }
-      class GeoLocation < Aws::Structure.new(
+      class GeoLocation < Struct.new(
         :continent_code,
         :country_code,
         :subdivision_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] continent_code
         #   The two-letter code for the continent.
@@ -1382,13 +1452,15 @@ module Aws
 
       # A complex type that contains the codes and full continent, country,
       # and subdivision names for the specified `geolocation` code.
-      class GeoLocationDetails < Aws::Structure.new(
+      class GeoLocationDetails < Struct.new(
         :continent_code,
         :continent_name,
         :country_code,
         :country_name,
         :subdivision_code,
         :subdivision_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] continent_code
         #   The two-letter code for the continent.
@@ -1425,8 +1497,10 @@ module Aws
       #       {
       #         id: "ResourceId", # required
       #       }
-      class GetChangeDetailsRequest < Aws::Structure.new(
+      class GetChangeDetailsRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the change batch. This is the value that you specified in
@@ -1436,8 +1510,10 @@ module Aws
       end
 
       # A complex type that contains the `ChangeBatchRecord` element.
-      class GetChangeDetailsResponse < Aws::Structure.new(
+      class GetChangeDetailsResponse < Struct.new(
         :change_batch_record)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_batch_record
         #   A complex type that contains information about the specified change
@@ -1454,8 +1530,10 @@ module Aws
       #       {
       #         id: "ResourceId", # required
       #       }
-      class GetChangeRequest < Aws::Structure.new(
+      class GetChangeRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the change batch request. The value that you specify here
@@ -1466,8 +1544,10 @@ module Aws
       end
 
       # A complex type that contains the `ChangeInfo` element.
-      class GetChangeResponse < Aws::Structure.new(
+      class GetChangeResponse < Struct.new(
         :change_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] change_info
         #   A complex type that contains information about the specified change
@@ -1481,8 +1561,10 @@ module Aws
       class GetCheckerIpRangesRequest < Aws::EmptyStructure; end
 
       # A complex type that contains the `CheckerIpRanges` element.
-      class GetCheckerIpRangesResponse < Aws::Structure.new(
+      class GetCheckerIpRangesResponse < Struct.new(
         :checker_ip_ranges)
+
+        include Aws::Structure
 
         # @!attribute [rw] checker_ip_ranges
         #   A complex type that contains sorted list of IP ranges in CIDR format
@@ -1501,10 +1583,12 @@ module Aws
       #         country_code: "GeoLocationCountryCode",
       #         subdivision_code: "GeoLocationSubdivisionCode",
       #       }
-      class GetGeoLocationRequest < Aws::Structure.new(
+      class GetGeoLocationRequest < Struct.new(
         :continent_code,
         :country_code,
         :subdivision_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] continent_code
         #   Amazon Route 53 supports the following contintent codes:
@@ -1548,8 +1632,10 @@ module Aws
 
       # A complex type that contains the response information for the
       # specified geolocation code.
-      class GetGeoLocationResponse < Aws::Structure.new(
+      class GetGeoLocationResponse < Struct.new(
         :geo_location_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] geo_location_details
         #   A complex type that contains the codes and full continent, country,
@@ -1565,8 +1651,10 @@ module Aws
 
       # A complex type that contains the response to a `healthcheckcount`
       # request.
-      class GetHealthCheckCountResponse < Aws::Structure.new(
+      class GetHealthCheckCountResponse < Struct.new(
         :health_check_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_count
         #   The number of health checks associated with the current AWS account.
@@ -1595,8 +1683,10 @@ module Aws
       #       {
       #         health_check_id: "HealthCheckId", # required
       #       }
-      class GetHealthCheckLastFailureReasonRequest < Aws::Structure.new(
+      class GetHealthCheckLastFailureReasonRequest < Struct.new(
         :health_check_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_id
         #   The ID for the health check for which you want the last failure
@@ -1608,8 +1698,10 @@ module Aws
 
       # A complex type that contains the response to a
       # `GetHealthCheckLastFailureReason` request.
-      class GetHealthCheckLastFailureReasonResponse < Aws::Structure.new(
+      class GetHealthCheckLastFailureReasonResponse < Struct.new(
         :health_check_observations)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_observations
         #   A list that contains one `Observation` element for each Amazon Route
@@ -1636,8 +1728,10 @@ module Aws
       #       {
       #         health_check_id: "HealthCheckId", # required
       #       }
-      class GetHealthCheckRequest < Aws::Structure.new(
+      class GetHealthCheckRequest < Struct.new(
         :health_check_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_id
         #   The identifier that Amazon Route 53 assigned to the health check
@@ -1650,8 +1744,10 @@ module Aws
 
       # A complex type that contains the response to a `GetHealthCheck`
       # request.
-      class GetHealthCheckResponse < Aws::Structure.new(
+      class GetHealthCheckResponse < Struct.new(
         :health_check)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check
         #   A complex type that contains information about one health check that
@@ -1668,8 +1764,10 @@ module Aws
       #       {
       #         health_check_id: "HealthCheckId", # required
       #       }
-      class GetHealthCheckStatusRequest < Aws::Structure.new(
+      class GetHealthCheckStatusRequest < Struct.new(
         :health_check_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_id
         #   If you want Amazon Route 53 to return this resource record set in
@@ -1743,8 +1841,10 @@ module Aws
 
       # A complex type that contains the response to a `GetHealthCheck`
       # request.
-      class GetHealthCheckStatusResponse < Aws::Structure.new(
+      class GetHealthCheckStatusResponse < Struct.new(
         :health_check_observations)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_observations
         #   A list that contains one `HealthCheckObservation` element for each
@@ -1761,8 +1861,10 @@ module Aws
 
       # A complex type that contains the response to a `hostedzonecount`
       # request.
-      class GetHostedZoneCountResponse < Aws::Structure.new(
+      class GetHostedZoneCountResponse < Struct.new(
         :hosted_zone_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_count
         #   The total number of public and private hosted zones associated with
@@ -1778,8 +1880,10 @@ module Aws
       #       {
       #         id: "ResourceId", # required
       #       }
-      class GetHostedZoneRequest < Aws::Structure.new(
+      class GetHostedZoneRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the hosted zone for which you want to get a list of the
@@ -1790,10 +1894,12 @@ module Aws
 
       # A complex type containing the response information for the hosted
       # zone.
-      class GetHostedZoneResponse < Aws::Structure.new(
+      class GetHostedZoneResponse < Struct.new(
         :hosted_zone,
         :delegation_set,
         :vp_cs)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone
         #   A complex type that contains general information about the hosted
@@ -1818,8 +1924,10 @@ module Aws
       #       {
       #         id: "ResourceId", # required
       #       }
-      class GetReusableDelegationSetRequest < Aws::Structure.new(
+      class GetReusableDelegationSetRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the reusable delegation set for which you want to get a
@@ -1830,8 +1938,10 @@ module Aws
 
       # A complex type that contains the response to the
       # `GetReusableDelegationSet` request.
-      class GetReusableDelegationSetResponse < Aws::Structure.new(
+      class GetReusableDelegationSetResponse < Struct.new(
         :delegation_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] delegation_set
         #   A complex type that contains information about the reusable
@@ -1847,8 +1957,10 @@ module Aws
 
       # A complex type that contains information about the resource record
       # sets that Amazon Route 53 created based on a specified traffic policy.
-      class GetTrafficPolicyInstanceCountResponse < Aws::Structure.new(
+      class GetTrafficPolicyInstanceCountResponse < Struct.new(
         :traffic_policy_instance_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_instance_count
         #   The number of traffic policy instances that are associated with the
@@ -1868,8 +1980,10 @@ module Aws
       #       {
       #         id: "TrafficPolicyInstanceId", # required
       #       }
-      class GetTrafficPolicyInstanceRequest < Aws::Structure.new(
+      class GetTrafficPolicyInstanceRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the traffic policy instance that you want to get
@@ -1880,8 +1994,10 @@ module Aws
 
       # A complex type that contains information about the resource record
       # sets that Amazon Route 53 created based on a specified traffic policy.
-      class GetTrafficPolicyInstanceResponse < Aws::Structure.new(
+      class GetTrafficPolicyInstanceResponse < Struct.new(
         :traffic_policy_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_instance
         #   A complex type that contains settings for the traffic policy
@@ -1900,9 +2016,11 @@ module Aws
       #         id: "TrafficPolicyId", # required
       #         version: 1, # required
       #       }
-      class GetTrafficPolicyRequest < Aws::Structure.new(
+      class GetTrafficPolicyRequest < Struct.new(
         :id,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the traffic policy that you want to get information about.
@@ -1916,8 +2034,10 @@ module Aws
       end
 
       # A complex type that contains the response information for the request.
-      class GetTrafficPolicyResponse < Aws::Structure.new(
+      class GetTrafficPolicyResponse < Struct.new(
         :traffic_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy
         #   A complex type that contains settings for the specified traffic
@@ -1928,12 +2048,14 @@ module Aws
 
       # A complex type that contains information about one health check that
       # is associated with the current AWS account.
-      class HealthCheck < Aws::Structure.new(
+      class HealthCheck < Struct.new(
         :id,
         :caller_reference,
         :health_check_config,
         :health_check_version,
         :cloud_watch_alarm_configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier that Amazon Route 53assigned to the health check when
@@ -1990,7 +2112,7 @@ module Aws
       #         },
       #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
       #       }
-      class HealthCheckConfig < Aws::Structure.new(
+      class HealthCheckConfig < Struct.new(
         :ip_address,
         :port,
         :type,
@@ -2007,6 +2129,8 @@ module Aws
         :regions,
         :alarm_identifier,
         :insufficient_data_health_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] ip_address
         #   The IPv4 IP address of the endpoint on which you want Amazon Route
@@ -2304,10 +2428,12 @@ module Aws
 
       # A complex type that contains the last failure reason as reported by
       # one Amazon Route 53 health checker.
-      class HealthCheckObservation < Aws::Structure.new(
+      class HealthCheckObservation < Struct.new(
         :region,
         :ip_address,
         :status_report)
+
+        include Aws::Structure
 
         # @!attribute [rw] region
         #   The region of the Amazon Route 53 health checker that provided the
@@ -2329,12 +2455,14 @@ module Aws
 
       # A complex type that contains general information about the hosted
       # zone.
-      class HostedZone < Aws::Structure.new(
+      class HostedZone < Struct.new(
         :id,
         :name,
         :caller_reference,
         :config,
         :resource_record_set_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID that Amazon Route 53 assigned to the hosted zone when you
@@ -2378,9 +2506,11 @@ module Aws
       #         comment: "ResourceDescription",
       #         private_zone: false,
       #       }
-      class HostedZoneConfig < Aws::Structure.new(
+      class HostedZoneConfig < Struct.new(
         :comment,
         :private_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] comment
         #   Any comments that you want to include about the hosted zone.
@@ -2403,12 +2533,14 @@ module Aws
       #         max_items: 1,
       #         marker: "PageMarker",
       #       }
-      class ListChangeBatchesByHostedZoneRequest < Aws::Structure.new(
+      class ListChangeBatchesByHostedZoneRequest < Struct.new(
         :hosted_zone_id,
         :start_date,
         :end_date,
         :max_items,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the hosted zone that you want to see changes for.
@@ -2433,12 +2565,14 @@ module Aws
       end
 
       # A complex type containing the response information for the request.
-      class ListChangeBatchesByHostedZoneResponse < Aws::Structure.new(
+      class ListChangeBatchesByHostedZoneResponse < Struct.new(
         :max_items,
         :marker,
         :is_truncated,
         :change_batch_records,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_items
         #   The value that you specified for the `maxitems` parameter in the
@@ -2479,7 +2613,7 @@ module Aws
       #         max_items: 1,
       #         marker: "PageMarker",
       #       }
-      class ListChangeBatchesByRRSetRequest < Aws::Structure.new(
+      class ListChangeBatchesByRRSetRequest < Struct.new(
         :hosted_zone_id,
         :name,
         :type,
@@ -2488,6 +2622,8 @@ module Aws
         :end_date,
         :max_items,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the hosted zone that you want to see changes for.
@@ -2524,12 +2660,14 @@ module Aws
       end
 
       # The input for a ListChangeBatchesByRRSet request.
-      class ListChangeBatchesByRRSetResponse < Aws::Structure.new(
+      class ListChangeBatchesByRRSetResponse < Struct.new(
         :max_items,
         :marker,
         :is_truncated,
         :change_batch_records,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_items
         #   The maximum number of items on a page.
@@ -2572,11 +2710,13 @@ module Aws
       #         start_subdivision_code: "GeoLocationSubdivisionCode",
       #         max_items: 1,
       #       }
-      class ListGeoLocationsRequest < Aws::Structure.new(
+      class ListGeoLocationsRequest < Struct.new(
         :start_continent_code,
         :start_country_code,
         :start_subdivision_code,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] start_continent_code
         #   The code for the continent with which you want to start listing
@@ -2630,13 +2770,15 @@ module Aws
       end
 
       # A complex type containing the response information for the request.
-      class ListGeoLocationsResponse < Aws::Structure.new(
+      class ListGeoLocationsResponse < Struct.new(
         :geo_location_details_list,
         :is_truncated,
         :next_continent_code,
         :next_country_code,
         :next_subdivision_code,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] geo_location_details_list
         #   A complex type that contains one `GeoLocationDetails` element for
@@ -2699,9 +2841,11 @@ module Aws
       #         marker: "PageMarker",
       #         max_items: 1,
       #       }
-      class ListHealthChecksRequest < Aws::Structure.new(
+      class ListHealthChecksRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   If the response to a `ListHealthChecks` is more than one page,
@@ -2737,12 +2881,14 @@ module Aws
 
       # A complex type that contains the response to a `ListHealthChecks`
       # request.
-      class ListHealthChecksResponse < Aws::Structure.new(
+      class ListHealthChecksResponse < Struct.new(
         :health_checks,
         :marker,
         :is_truncated,
         :next_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_checks
         #   A complex type that contains one `HealthCheck` element for each
@@ -2844,10 +2990,12 @@ module Aws
       #         hosted_zone_id: "ResourceId",
       #         max_items: 1,
       #       }
-      class ListHostedZonesByNameRequest < Aws::Structure.new(
+      class ListHostedZonesByNameRequest < Struct.new(
         :dns_name,
         :hosted_zone_id,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] dns_name
         #   (Optional) For your first request to `ListHostedZonesByName`,
@@ -2885,7 +3033,7 @@ module Aws
       end
 
       # A complex type that contains the response information for the request.
-      class ListHostedZonesByNameResponse < Aws::Structure.new(
+      class ListHostedZonesByNameResponse < Struct.new(
         :hosted_zones,
         :dns_name,
         :hosted_zone_id,
@@ -2893,6 +3041,8 @@ module Aws
         :next_dns_name,
         :next_hosted_zone_id,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zones
         #   A complex type that contains general information about the hosted
@@ -2984,10 +3134,12 @@ module Aws
       #         max_items: 1,
       #         delegation_set_id: "ResourceId",
       #       }
-      class ListHostedZonesRequest < Aws::Structure.new(
+      class ListHostedZonesRequest < Struct.new(
         :marker,
         :max_items,
         :delegation_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   (Optional) If you have more hosted zones than the value of
@@ -3014,12 +3166,14 @@ module Aws
 
       end
 
-      class ListHostedZonesResponse < Aws::Structure.new(
+      class ListHostedZonesResponse < Struct.new(
         :hosted_zones,
         :marker,
         :is_truncated,
         :next_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zones
         #   A complex type that contains general information about the hosted
@@ -3067,12 +3221,14 @@ module Aws
       #         start_record_identifier: "ResourceRecordSetIdentifier",
       #         max_items: 1,
       #       }
-      class ListResourceRecordSetsRequest < Aws::Structure.new(
+      class ListResourceRecordSetsRequest < Struct.new(
         :hosted_zone_id,
         :start_record_name,
         :start_record_type,
         :start_record_identifier,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the hosted zone that contains the resource record sets
@@ -3131,13 +3287,15 @@ module Aws
 
       # A complex type that contains list information for the resource record
       # set.
-      class ListResourceRecordSetsResponse < Aws::Structure.new(
+      class ListResourceRecordSetsResponse < Struct.new(
         :resource_record_sets,
         :is_truncated,
         :next_record_name,
         :next_record_type,
         :next_record_identifier,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_record_sets
         #   Information about multiple resource record sets.
@@ -3197,9 +3355,11 @@ module Aws
       #         marker: "PageMarker",
       #         max_items: 1,
       #       }
-      class ListReusableDelegationSetsRequest < Aws::Structure.new(
+      class ListReusableDelegationSetsRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   If you\'re making the second or subsequent call to
@@ -3217,12 +3377,14 @@ module Aws
 
       # A complex type that contains information about the reusable delegation
       # sets that are associated with the current AWS account.
-      class ListReusableDelegationSetsResponse < Aws::Structure.new(
+      class ListReusableDelegationSetsResponse < Struct.new(
         :delegation_sets,
         :marker,
         :is_truncated,
         :next_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] delegation_sets
         #   A complex type that contains one `DelegationSet` element for each
@@ -3267,9 +3429,11 @@ module Aws
       #         resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
       #         resource_id: "TagResourceId", # required
       #       }
-      class ListTagsForResourceRequest < Aws::Structure.new(
+      class ListTagsForResourceRequest < Struct.new(
         :resource_type,
         :resource_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of the resource.
@@ -3287,8 +3451,10 @@ module Aws
 
       # A complex type that contains information about the health checks or
       # hosted zones for which you want to list tags.
-      class ListTagsForResourceResponse < Aws::Structure.new(
+      class ListTagsForResourceResponse < Struct.new(
         :resource_tag_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_tag_set
         #   A `ResourceTagSet` containing tags associated with the specified
@@ -3306,9 +3472,11 @@ module Aws
       #         resource_type: "healthcheck", # required, accepts healthcheck, hostedzone
       #         resource_ids: ["TagResourceId"], # required
       #       }
-      class ListTagsForResourcesRequest < Aws::Structure.new(
+      class ListTagsForResourcesRequest < Struct.new(
         :resource_type,
         :resource_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of the resources.
@@ -3326,8 +3494,10 @@ module Aws
       end
 
       # A complex type containing tags for the specified resources.
-      class ListTagsForResourcesResponse < Aws::Structure.new(
+      class ListTagsForResourcesResponse < Struct.new(
         :resource_tag_sets)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_tag_sets
         #   A list of `ResourceTagSet`s containing tags associated with the
@@ -3345,9 +3515,11 @@ module Aws
       #         traffic_policy_id_marker: "TrafficPolicyId",
       #         max_items: 1,
       #       }
-      class ListTrafficPoliciesRequest < Aws::Structure.new(
+      class ListTrafficPoliciesRequest < Struct.new(
         :traffic_policy_id_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_id_marker
         #   (Conditional) For your first request to `ListTrafficPolicies`, do
@@ -3376,11 +3548,13 @@ module Aws
       end
 
       # A complex type that contains the response information for the request.
-      class ListTrafficPoliciesResponse < Aws::Structure.new(
+      class ListTrafficPoliciesResponse < Struct.new(
         :traffic_policy_summaries,
         :is_truncated,
         :traffic_policy_id_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_summaries
         #   A list that contains one `TrafficPolicySummary` element for each
@@ -3421,11 +3595,13 @@ module Aws
       #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #         max_items: 1,
       #       }
-      class ListTrafficPolicyInstancesByHostedZoneRequest < Aws::Structure.new(
+      class ListTrafficPolicyInstancesByHostedZoneRequest < Struct.new(
         :hosted_zone_id,
         :traffic_policy_instance_name_marker,
         :traffic_policy_instance_type_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   The ID of the hosted zone for which you want to list traffic policy
@@ -3476,12 +3652,14 @@ module Aws
       end
 
       # A complex type that contains the response information for the request.
-      class ListTrafficPolicyInstancesByHostedZoneResponse < Aws::Structure.new(
+      class ListTrafficPolicyInstancesByHostedZoneResponse < Struct.new(
         :traffic_policy_instances,
         :traffic_policy_instance_name_marker,
         :traffic_policy_instance_type_marker,
         :is_truncated,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_instances
         #   A list that contains one `TrafficPolicyInstance` element for each
@@ -3533,13 +3711,15 @@ module Aws
       #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #         max_items: 1,
       #       }
-      class ListTrafficPolicyInstancesByPolicyRequest < Aws::Structure.new(
+      class ListTrafficPolicyInstancesByPolicyRequest < Struct.new(
         :traffic_policy_id,
         :traffic_policy_version,
         :hosted_zone_id_marker,
         :traffic_policy_instance_name_marker,
         :traffic_policy_instance_type_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_id
         #   The ID of the traffic policy for which you want to list traffic
@@ -3613,13 +3793,15 @@ module Aws
       end
 
       # A complex type that contains the response information for the request.
-      class ListTrafficPolicyInstancesByPolicyResponse < Aws::Structure.new(
+      class ListTrafficPolicyInstancesByPolicyResponse < Struct.new(
         :traffic_policy_instances,
         :hosted_zone_id_marker,
         :traffic_policy_instance_name_marker,
         :traffic_policy_instance_type_marker,
         :is_truncated,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_instances
         #   A list that contains one `TrafficPolicyInstance` element for each
@@ -3674,11 +3856,13 @@ module Aws
       #         traffic_policy_instance_type_marker: "SOA", # accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #         max_items: 1,
       #       }
-      class ListTrafficPolicyInstancesRequest < Aws::Structure.new(
+      class ListTrafficPolicyInstancesRequest < Struct.new(
         :hosted_zone_id_marker,
         :traffic_policy_instance_name_marker,
         :traffic_policy_instance_type_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id_marker
         #   For the first request to `ListTrafficPolicyInstances`, omit this
@@ -3736,13 +3920,15 @@ module Aws
       end
 
       # A complex type that contains the response information for the request.
-      class ListTrafficPolicyInstancesResponse < Aws::Structure.new(
+      class ListTrafficPolicyInstancesResponse < Struct.new(
         :traffic_policy_instances,
         :hosted_zone_id_marker,
         :traffic_policy_instance_name_marker,
         :traffic_policy_instance_type_marker,
         :is_truncated,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_instances
         #   A list that contains one `TrafficPolicyInstance` element for each
@@ -3796,10 +3982,12 @@ module Aws
       #         traffic_policy_version_marker: "TrafficPolicyVersionMarker",
       #         max_items: 1,
       #       }
-      class ListTrafficPolicyVersionsRequest < Aws::Structure.new(
+      class ListTrafficPolicyVersionsRequest < Struct.new(
         :id,
         :traffic_policy_version_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Specify the value of `Id` of the traffic policy for which you want
@@ -3835,11 +4023,13 @@ module Aws
       end
 
       # A complex type that contains the response information for the request.
-      class ListTrafficPolicyVersionsResponse < Aws::Structure.new(
+      class ListTrafficPolicyVersionsResponse < Struct.new(
         :traffic_policies,
         :is_truncated,
         :traffic_policy_version_marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policies
         #   A list that contains one `TrafficPolicy` element for each traffic
@@ -3885,8 +4075,10 @@ module Aws
       #       {
       #         value: "RData", # required
       #       }
-      class ResourceRecord < Aws::Structure.new(
+      class ResourceRecord < Struct.new(
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The current or new DNS record value, not to exceed 4,000 characters.
@@ -3939,7 +4131,7 @@ module Aws
       #         health_check_id: "HealthCheckId",
       #         traffic_policy_instance_id: "TrafficPolicyInstanceId",
       #       }
-      class ResourceRecordSet < Aws::Structure.new(
+      class ResourceRecordSet < Struct.new(
         :name,
         :type,
         :set_identifier,
@@ -3952,6 +4144,8 @@ module Aws
         :alias_target,
         :health_check_id,
         :traffic_policy_instance_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the domain you want to perform the action on.
@@ -4389,10 +4583,12 @@ module Aws
       end
 
       # A complex type containing a resource and its associated tags.
-      class ResourceTagSet < Aws::Structure.new(
+      class ResourceTagSet < Struct.new(
         :resource_type,
         :resource_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of the resource.
@@ -4414,9 +4610,11 @@ module Aws
 
       # A complex type that contains the status that one Amazon Route 53
       # health checker reports and the time of the health check.
-      class StatusReport < Aws::Structure.new(
+      class StatusReport < Struct.new(
         :status,
         :checked_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   A description of the status of the health check endpoint as reported
@@ -4445,9 +4643,11 @@ module Aws
       #         key: "TagKey",
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The value of `Key` depends on the operation that you want to
@@ -4533,13 +4733,15 @@ module Aws
       #         edns0_client_subnet_ip: "IPAddress",
       #         edns0_client_subnet_mask: "SubnetMask",
       #       }
-      class TestDNSAnswerRequest < Aws::Structure.new(
+      class TestDNSAnswerRequest < Struct.new(
         :hosted_zone_id,
         :record_name,
         :record_type,
         :resolver_ip,
         :edns0_client_subnet_ip,
         :edns0_client_subnet_mask)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone_id
         #   @return [String]
@@ -4563,13 +4765,15 @@ module Aws
 
       # A complex type that contains the response to a `TestDNSAnswer`
       # request.
-      class TestDNSAnswerResponse < Aws::Structure.new(
+      class TestDNSAnswerResponse < Struct.new(
         :nameserver,
         :record_name,
         :record_type,
         :record_data,
         :response_code,
         :protocol)
+
+        include Aws::Structure
 
         # @!attribute [rw] nameserver
         #   The Amazon Route 53 name server used to respond to the request.
@@ -4609,13 +4813,15 @@ module Aws
 
       end
 
-      class TrafficPolicy < Aws::Structure.new(
+      class TrafficPolicy < Struct.new(
         :id,
         :version,
         :name,
         :type,
         :document,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   @return [String]
@@ -4637,7 +4843,7 @@ module Aws
 
       end
 
-      class TrafficPolicyInstance < Aws::Structure.new(
+      class TrafficPolicyInstance < Struct.new(
         :id,
         :hosted_zone_id,
         :name,
@@ -4647,6 +4853,8 @@ module Aws
         :traffic_policy_id,
         :traffic_policy_version,
         :traffic_policy_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   @return [String]
@@ -4677,12 +4885,14 @@ module Aws
 
       end
 
-      class TrafficPolicySummary < Aws::Structure.new(
+      class TrafficPolicySummary < Struct.new(
         :id,
         :name,
         :type,
         :latest_version,
         :traffic_policy_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   @return [String]
@@ -4725,7 +4935,7 @@ module Aws
       #         },
       #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
       #       }
-      class UpdateHealthCheckRequest < Aws::Structure.new(
+      class UpdateHealthCheckRequest < Struct.new(
         :health_check_id,
         :health_check_version,
         :ip_address,
@@ -4741,6 +4951,8 @@ module Aws
         :regions,
         :alarm_identifier,
         :insufficient_data_health_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check_id
         #   The ID for the health check for which you want detailed information.
@@ -4971,8 +5183,10 @@ module Aws
 
       end
 
-      class UpdateHealthCheckResponse < Aws::Structure.new(
+      class UpdateHealthCheckResponse < Struct.new(
         :health_check)
+
+        include Aws::Structure
 
         # @!attribute [rw] health_check
         #   A complex type that contains information about one health check that
@@ -4989,9 +5203,11 @@ module Aws
       #         id: "ResourceId", # required
       #         comment: "ResourceDescription",
       #       }
-      class UpdateHostedZoneCommentRequest < Aws::Structure.new(
+      class UpdateHostedZoneCommentRequest < Struct.new(
         :id,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID for the hosted zone for which you want to update the comment.
@@ -5007,8 +5223,10 @@ module Aws
 
       # A complex type that contains the response to the
       # UpdateHostedZoneCommentRequest.
-      class UpdateHostedZoneCommentResponse < Aws::Structure.new(
+      class UpdateHostedZoneCommentResponse < Struct.new(
         :hosted_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] hosted_zone
         #   A complex type that contains general information about the hosted
@@ -5027,10 +5245,12 @@ module Aws
       #         version: 1, # required
       #         comment: "TrafficPolicyComment", # required
       #       }
-      class UpdateTrafficPolicyCommentRequest < Aws::Structure.new(
+      class UpdateTrafficPolicyCommentRequest < Struct.new(
         :id,
         :version,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The value of `Id` for the traffic policy for which you want to
@@ -5050,8 +5270,10 @@ module Aws
 
       # A complex type that contains the response information for the traffic
       # policy.
-      class UpdateTrafficPolicyCommentResponse < Aws::Structure.new(
+      class UpdateTrafficPolicyCommentResponse < Struct.new(
         :traffic_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy
         #   A complex type that contains settings for the specified traffic
@@ -5072,11 +5294,13 @@ module Aws
       #         traffic_policy_id: "TrafficPolicyId", # required
       #         traffic_policy_version: 1, # required
       #       }
-      class UpdateTrafficPolicyInstanceRequest < Aws::Structure.new(
+      class UpdateTrafficPolicyInstanceRequest < Struct.new(
         :id,
         :ttl,
         :traffic_policy_id,
         :traffic_policy_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the traffic policy instance that you want to update.
@@ -5103,8 +5327,10 @@ module Aws
 
       # A complex type that contains information about the resource record
       # sets that Amazon Route 53 created based on a specified traffic policy.
-      class UpdateTrafficPolicyInstanceResponse < Aws::Structure.new(
+      class UpdateTrafficPolicyInstanceResponse < Struct.new(
         :traffic_policy_instance)
+
+        include Aws::Structure
 
         # @!attribute [rw] traffic_policy_instance
         #   A complex type that contains settings for the updated traffic policy
@@ -5120,9 +5346,11 @@ module Aws
       #         vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #         vpc_id: "VPCId",
       #       }
-      class VPC < Aws::Structure.new(
+      class VPC < Struct.new(
         :vpc_region,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] vpc_region
         #   @return [String]

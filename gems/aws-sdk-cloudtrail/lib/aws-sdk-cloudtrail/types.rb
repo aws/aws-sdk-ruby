@@ -22,9 +22,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsRequest < Aws::Structure.new(
+      class AddTagsRequest < Struct.new(
         :resource_id,
         :tags_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   Specifies the ARN of the trail to which one or more tags will be
@@ -59,7 +61,7 @@ module Aws
       #         cloud_watch_logs_role_arn: "String",
       #         kms_key_id: "String",
       #       }
-      class CreateTrailRequest < Aws::Structure.new(
+      class CreateTrailRequest < Struct.new(
         :name,
         :s3_bucket_name,
         :s3_key_prefix,
@@ -70,6 +72,8 @@ module Aws
         :cloud_watch_logs_log_group_arn,
         :cloud_watch_logs_role_arn,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name of the trail. The name must meet the following
@@ -173,7 +177,7 @@ module Aws
 
       # Returns the objects or data listed below if successful. Otherwise,
       # returns an error.
-      class CreateTrailResponse < Aws::Structure.new(
+      class CreateTrailResponse < Struct.new(
         :name,
         :s3_bucket_name,
         :s3_key_prefix,
@@ -186,6 +190,8 @@ module Aws
         :cloud_watch_logs_log_group_arn,
         :cloud_watch_logs_role_arn,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name of the trail.
@@ -265,8 +271,10 @@ module Aws
       #       {
       #         name: "String", # required
       #       }
-      class DeleteTrailRequest < Aws::Structure.new(
+      class DeleteTrailRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
@@ -289,9 +297,11 @@ module Aws
       #         trail_name_list: ["String"],
       #         include_shadow_trails: false,
       #       }
-      class DescribeTrailsRequest < Aws::Structure.new(
+      class DescribeTrailsRequest < Struct.new(
         :trail_name_list,
         :include_shadow_trails)
+
+        include Aws::Structure
 
         # @!attribute [rw] trail_name_list
         #   Specifies a list of trail names, trail ARNs, or both, of the trails
@@ -327,8 +337,10 @@ module Aws
 
       # Returns the objects or data listed below if successful. Otherwise,
       # returns an error.
-      class DescribeTrailsResponse < Aws::Structure.new(
+      class DescribeTrailsResponse < Struct.new(
         :trail_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] trail_list
         #   The list of trail objects.
@@ -338,13 +350,15 @@ module Aws
 
       # Contains information about an event that was returned by a lookup
       # request. The result includes a representation of a CloudTrail event.
-      class Event < Aws::Structure.new(
+      class Event < Struct.new(
         :event_id,
         :event_name,
         :event_time,
         :username,
         :resources,
         :cloud_trail_event)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_id
         #   The CloudTrail ID of the event returned.
@@ -380,8 +394,10 @@ module Aws
       #       {
       #         name: "String", # required
       #       }
-      class GetTrailStatusRequest < Aws::Structure.new(
+      class GetTrailStatusRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name or the CloudTrail ARN of the trail for which you
@@ -396,7 +412,7 @@ module Aws
 
       # Returns the objects or data listed below if successful. Otherwise,
       # returns an error.
-      class GetTrailStatusResponse < Aws::Structure.new(
+      class GetTrailStatusResponse < Struct.new(
         :is_logging,
         :latest_delivery_error,
         :latest_notification_error,
@@ -414,6 +430,8 @@ module Aws
         :latest_delivery_attempt_succeeded,
         :time_logging_started,
         :time_logging_stopped)
+
+        include Aws::Structure
 
         # @!attribute [rw] is_logging
         #   Whether the CloudTrail is currently logging AWS API calls.
@@ -538,10 +556,12 @@ module Aws
       #         end_time: Time.now,
       #         next_token: "String",
       #       }
-      class ListPublicKeysRequest < Aws::Structure.new(
+      class ListPublicKeysRequest < Struct.new(
         :start_time,
         :end_time,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] start_time
         #   Optionally specifies, in UTC, the start of the time range to look up
@@ -563,9 +583,11 @@ module Aws
 
       # Returns the objects or data listed below if successful. Otherwise,
       # returns an error.
-      class ListPublicKeysResponse < Aws::Structure.new(
+      class ListPublicKeysResponse < Struct.new(
         :public_key_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] public_key_list
         #   Contains an array of PublicKey objects.
@@ -589,9 +611,11 @@ module Aws
       #         resource_id_list: ["String"], # required
       #         next_token: "String",
       #       }
-      class ListTagsRequest < Aws::Structure.new(
+      class ListTagsRequest < Struct.new(
         :resource_id_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id_list
         #   Specifies a list of trail ARNs whose tags will be listed. The list
@@ -608,9 +632,11 @@ module Aws
 
       # Returns the objects or data listed below if successful. Otherwise,
       # returns an error.
-      class ListTagsResponse < Aws::Structure.new(
+      class ListTagsResponse < Struct.new(
         :resource_tag_list,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_tag_list
         #   A list of resource tags.
@@ -630,9 +656,11 @@ module Aws
       #         attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName
       #         attribute_value: "String", # required
       #       }
-      class LookupAttribute < Aws::Structure.new(
+      class LookupAttribute < Struct.new(
         :attribute_key,
         :attribute_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_key
         #   Specifies an attribute on which to filter the events returned.
@@ -660,12 +688,14 @@ module Aws
       #         max_results: 1,
       #         next_token: "NextToken",
       #       }
-      class LookupEventsRequest < Aws::Structure.new(
+      class LookupEventsRequest < Struct.new(
         :lookup_attributes,
         :start_time,
         :end_time,
         :max_results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] lookup_attributes
         #   Contains a list of lookup attributes. Currently the list can contain
@@ -701,9 +731,11 @@ module Aws
       end
 
       # Contains a response to a LookupEvents action.
-      class LookupEventsResponse < Aws::Structure.new(
+      class LookupEventsResponse < Struct.new(
         :events,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] events
         #   A list of events returned based on the lookup attributes specified
@@ -723,11 +755,13 @@ module Aws
       end
 
       # Contains information about a returned public key.
-      class PublicKey < Aws::Structure.new(
+      class PublicKey < Struct.new(
         :value,
         :validity_start_time,
         :validity_end_time,
         :fingerprint)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The DER encoded public key value in PKCS#1 format.
@@ -760,9 +794,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class RemoveTagsRequest < Aws::Structure.new(
+      class RemoveTagsRequest < Struct.new(
         :resource_id,
         :tags_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   Specifies the ARN of the trail from which tags should be removed.
@@ -782,9 +818,11 @@ module Aws
       class RemoveTagsResponse < Aws::EmptyStructure; end
 
       # Specifies the type and name of a resource referenced by an event.
-      class Resource < Aws::Structure.new(
+      class Resource < Struct.new(
         :resource_type,
         :resource_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_type
         #   The type of a resource referenced by the event returned. When the
@@ -809,9 +847,11 @@ module Aws
       end
 
       # A resource tag.
-      class ResourceTag < Aws::Structure.new(
+      class ResourceTag < Struct.new(
         :resource_id,
         :tags_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   Specifies the ARN of the resource.
@@ -831,8 +871,10 @@ module Aws
       #       {
       #         name: "String", # required
       #       }
-      class StartLoggingRequest < Aws::Structure.new(
+      class StartLoggingRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name or the CloudTrail ARN of the trail for which
@@ -855,8 +897,10 @@ module Aws
       #       {
       #         name: "String", # required
       #       }
-      class StopLoggingRequest < Aws::Structure.new(
+      class StopLoggingRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name or the CloudTrail ARN of the trail for which
@@ -881,9 +925,11 @@ module Aws
       #         key: "String", # required
       #         value: "String",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key in a key-value pair. The key must be must be no longer than
@@ -899,7 +945,7 @@ module Aws
       end
 
       # The settings for a trail.
-      class Trail < Aws::Structure.new(
+      class Trail < Struct.new(
         :name,
         :s3_bucket_name,
         :s3_key_prefix,
@@ -913,6 +959,8 @@ module Aws
         :cloud_watch_logs_log_group_arn,
         :cloud_watch_logs_role_arn,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Name of the trail set by calling CreateTrail. The maximum length is
@@ -1011,7 +1059,7 @@ module Aws
       #         cloud_watch_logs_role_arn: "String",
       #         kms_key_id: "String",
       #       }
-      class UpdateTrailRequest < Aws::Structure.new(
+      class UpdateTrailRequest < Struct.new(
         :name,
         :s3_bucket_name,
         :s3_key_prefix,
@@ -1022,6 +1070,8 @@ module Aws
         :cloud_watch_logs_log_group_arn,
         :cloud_watch_logs_role_arn,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name of the trail or trail ARN. If `Name` is a trail
@@ -1134,7 +1184,7 @@ module Aws
 
       # Returns the objects or data listed below if successful. Otherwise,
       # returns an error.
-      class UpdateTrailResponse < Aws::Structure.new(
+      class UpdateTrailResponse < Struct.new(
         :name,
         :s3_bucket_name,
         :s3_key_prefix,
@@ -1147,6 +1197,8 @@ module Aws
         :cloud_watch_logs_log_group_arn,
         :cloud_watch_logs_role_arn,
         :kms_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Specifies the name of the trail.

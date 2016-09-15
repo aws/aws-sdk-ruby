@@ -17,9 +17,11 @@ module Aws
       #         type: "forward", # required, accepts forward
       #         target_group_arn: "TargetGroupArn", # required
       #       }
-      class Action < Aws::Structure.new(
+      class Action < Struct.new(
         :type,
         :target_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The type of action.
@@ -44,9 +46,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsInput < Aws::Structure.new(
+      class AddTagsInput < Struct.new(
         :resource_arns,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arns
         #   The Amazon Resource Name (ARN) of the resource.
@@ -62,9 +66,11 @@ module Aws
       class AddTagsOutput < Aws::EmptyStructure; end
 
       # Information about an Availability Zone.
-      class AvailabilityZone < Aws::Structure.new(
+      class AvailabilityZone < Struct.new(
         :zone_name,
         :subnet_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] zone_name
         #   The name of the Availability Zone.
@@ -84,8 +90,10 @@ module Aws
       #       {
       #         certificate_arn: "CertificateArn",
       #       }
-      class Certificate < Aws::Structure.new(
+      class Certificate < Struct.new(
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The Amazon Resource Name (ARN) of the certificate.
@@ -94,9 +102,11 @@ module Aws
       end
 
       # Information about a cipher used in a policy.
-      class Cipher < Aws::Structure.new(
+      class Cipher < Struct.new(
         :name,
         :priority)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the cipher.
@@ -129,13 +139,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateListenerInput < Aws::Structure.new(
+      class CreateListenerInput < Struct.new(
         :load_balancer_arn,
         :protocol,
         :port,
         :ssl_policy,
         :certificates,
         :default_actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -166,8 +178,10 @@ module Aws
       end
 
       # Contains the output of CreateListener.
-      class CreateListenerOutput < Aws::Structure.new(
+      class CreateListenerOutput < Struct.new(
         :listeners)
+
+        include Aws::Structure
 
         # @!attribute [rw] listeners
         #   Information about the listener.
@@ -191,12 +205,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateLoadBalancerInput < Aws::Structure.new(
+      class CreateLoadBalancerInput < Struct.new(
         :name,
         :subnets,
         :security_groups,
         :scheme,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the load balancer.
@@ -239,8 +255,10 @@ module Aws
       end
 
       # Contains the output of CreateLoadBalancer.
-      class CreateLoadBalancerOutput < Aws::Structure.new(
+      class CreateLoadBalancerOutput < Struct.new(
         :load_balancers)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancers
         #   Information about the load balancer.
@@ -268,11 +286,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateRuleInput < Aws::Structure.new(
+      class CreateRuleInput < Struct.new(
         :listener_arn,
         :conditions,
         :priority,
         :actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] listener_arn
         #   The Amazon Resource Name (ARN) of the listener.
@@ -294,8 +314,10 @@ module Aws
       end
 
       # Contains the output of CreateRule.
-      class CreateRuleOutput < Aws::Structure.new(
+      class CreateRuleOutput < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   Information about the rule.
@@ -323,7 +345,7 @@ module Aws
       #           http_code: "HttpCode", # required
       #         },
       #       }
-      class CreateTargetGroupInput < Aws::Structure.new(
+      class CreateTargetGroupInput < Struct.new(
         :name,
         :protocol,
         :port,
@@ -336,6 +358,8 @@ module Aws
         :healthy_threshold_count,
         :unhealthy_threshold_count,
         :matcher)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the target group.
@@ -398,8 +422,10 @@ module Aws
       end
 
       # Contains the output of CreateTargetGroup.
-      class CreateTargetGroupOutput < Aws::Structure.new(
+      class CreateTargetGroupOutput < Struct.new(
         :target_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_groups
         #   Information about the target group.
@@ -414,8 +440,10 @@ module Aws
       #       {
       #         listener_arn: "ListenerArn", # required
       #       }
-      class DeleteListenerInput < Aws::Structure.new(
+      class DeleteListenerInput < Struct.new(
         :listener_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] listener_arn
         #   The Amazon Resource Name (ARN) of the listener.
@@ -433,8 +461,10 @@ module Aws
       #       {
       #         load_balancer_arn: "LoadBalancerArn", # required
       #       }
-      class DeleteLoadBalancerInput < Aws::Structure.new(
+      class DeleteLoadBalancerInput < Struct.new(
         :load_balancer_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -452,8 +482,10 @@ module Aws
       #       {
       #         rule_arn: "RuleArn", # required
       #       }
-      class DeleteRuleInput < Aws::Structure.new(
+      class DeleteRuleInput < Struct.new(
         :rule_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_arn
         #   The Amazon Resource Name (ARN) of the rule.
@@ -471,8 +503,10 @@ module Aws
       #       {
       #         target_group_arn: "TargetGroupArn", # required
       #       }
-      class DeleteTargetGroupInput < Aws::Structure.new(
+      class DeleteTargetGroupInput < Struct.new(
         :target_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -496,9 +530,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DeregisterTargetsInput < Aws::Structure.new(
+      class DeregisterTargetsInput < Struct.new(
         :target_group_arn,
         :targets)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -523,11 +559,13 @@ module Aws
       #         marker: "Marker",
       #         page_size: 1,
       #       }
-      class DescribeListenersInput < Aws::Structure.new(
+      class DescribeListenersInput < Struct.new(
         :load_balancer_arn,
         :listener_arns,
         :marker,
         :page_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -549,9 +587,11 @@ module Aws
       end
 
       # Contains the output of DescribeListeners.
-      class DescribeListenersOutput < Aws::Structure.new(
+      class DescribeListenersOutput < Struct.new(
         :listeners,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] listeners
         #   Information about the listeners.
@@ -571,8 +611,10 @@ module Aws
       #       {
       #         load_balancer_arn: "LoadBalancerArn", # required
       #       }
-      class DescribeLoadBalancerAttributesInput < Aws::Structure.new(
+      class DescribeLoadBalancerAttributesInput < Struct.new(
         :load_balancer_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -581,8 +623,10 @@ module Aws
       end
 
       # Contains the output of DescribeLoadBalancerAttributes.
-      class DescribeLoadBalancerAttributesOutput < Aws::Structure.new(
+      class DescribeLoadBalancerAttributesOutput < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   Information about the load balancer attributes.
@@ -600,11 +644,13 @@ module Aws
       #         marker: "Marker",
       #         page_size: 1,
       #       }
-      class DescribeLoadBalancersInput < Aws::Structure.new(
+      class DescribeLoadBalancersInput < Struct.new(
         :load_balancer_arns,
         :names,
         :marker,
         :page_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arns
         #   The Amazon Resource Names (ARN) of the load balancers.
@@ -626,9 +672,11 @@ module Aws
       end
 
       # Contains the output of DescribeLoadBalancers.
-      class DescribeLoadBalancersOutput < Aws::Structure.new(
+      class DescribeLoadBalancersOutput < Struct.new(
         :load_balancers,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancers
         #   Information about the load balancers.
@@ -649,9 +697,11 @@ module Aws
       #         listener_arn: "ListenerArn",
       #         rule_arns: ["RuleArn"],
       #       }
-      class DescribeRulesInput < Aws::Structure.new(
+      class DescribeRulesInput < Struct.new(
         :listener_arn,
         :rule_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] listener_arn
         #   The Amazon Resource Name (ARN) of the listener.
@@ -664,8 +714,10 @@ module Aws
       end
 
       # Contains the output of DescribeRules.
-      class DescribeRulesOutput < Aws::Structure.new(
+      class DescribeRulesOutput < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   Information about the rules.
@@ -682,10 +734,12 @@ module Aws
       #         marker: "Marker",
       #         page_size: 1,
       #       }
-      class DescribeSSLPoliciesInput < Aws::Structure.new(
+      class DescribeSSLPoliciesInput < Struct.new(
         :names,
         :marker,
         :page_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] names
         #   The names of the policies.
@@ -703,9 +757,11 @@ module Aws
       end
 
       # Contains the output of DescribeSSLPolicies.
-      class DescribeSSLPoliciesOutput < Aws::Structure.new(
+      class DescribeSSLPoliciesOutput < Struct.new(
         :ssl_policies,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] ssl_policies
         #   Information about the policies.
@@ -725,8 +781,10 @@ module Aws
       #       {
       #         resource_arns: ["ResourceArn"], # required
       #       }
-      class DescribeTagsInput < Aws::Structure.new(
+      class DescribeTagsInput < Struct.new(
         :resource_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arns
         #   The Amazon Resource Names (ARN) of the resources.
@@ -735,8 +793,10 @@ module Aws
       end
 
       # Contains the output of DescribeTags.
-      class DescribeTagsOutput < Aws::Structure.new(
+      class DescribeTagsOutput < Struct.new(
         :tag_descriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_descriptions
         #   Information about the tags.
@@ -751,8 +811,10 @@ module Aws
       #       {
       #         target_group_arn: "TargetGroupArn", # required
       #       }
-      class DescribeTargetGroupAttributesInput < Aws::Structure.new(
+      class DescribeTargetGroupAttributesInput < Struct.new(
         :target_group_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -761,8 +823,10 @@ module Aws
       end
 
       # Contains the output of DescribeTargetGroupAttributes.
-      class DescribeTargetGroupAttributesOutput < Aws::Structure.new(
+      class DescribeTargetGroupAttributesOutput < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   Information about the target group attributes
@@ -781,12 +845,14 @@ module Aws
       #         marker: "Marker",
       #         page_size: 1,
       #       }
-      class DescribeTargetGroupsInput < Aws::Structure.new(
+      class DescribeTargetGroupsInput < Struct.new(
         :load_balancer_arn,
         :target_group_arns,
         :names,
         :marker,
         :page_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -812,9 +878,11 @@ module Aws
       end
 
       # Contains the output of DescribeTargetGroups.
-      class DescribeTargetGroupsOutput < Aws::Structure.new(
+      class DescribeTargetGroupsOutput < Struct.new(
         :target_groups,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_groups
         #   Information about the target groups.
@@ -840,9 +908,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeTargetHealthInput < Aws::Structure.new(
+      class DescribeTargetHealthInput < Struct.new(
         :target_group_arn,
         :targets)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -855,8 +925,10 @@ module Aws
       end
 
       # Contains the output of DescribeTargetHealth.
-      class DescribeTargetHealthOutput < Aws::Structure.new(
+      class DescribeTargetHealthOutput < Struct.new(
         :target_health_descriptions)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_health_descriptions
         #   Information about the health of the targets.
@@ -865,7 +937,7 @@ module Aws
       end
 
       # Information about a listener.
-      class Listener < Aws::Structure.new(
+      class Listener < Struct.new(
         :listener_arn,
         :load_balancer_arn,
         :port,
@@ -873,6 +945,8 @@ module Aws
         :certificates,
         :ssl_policy,
         :default_actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] listener_arn
         #   The Amazon Resource Name (ARN) of the listener.
@@ -907,7 +981,7 @@ module Aws
       end
 
       # Information about a load balancer.
-      class LoadBalancer < Aws::Structure.new(
+      class LoadBalancer < Struct.new(
         :load_balancer_arn,
         :dns_name,
         :canonical_hosted_zone_id,
@@ -919,6 +993,8 @@ module Aws
         :type,
         :availability_zones,
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -985,9 +1061,11 @@ module Aws
       #         key: "LoadBalancerAttributeKey",
       #         value: "LoadBalancerAttributeValue",
       #       }
-      class LoadBalancerAttribute < Aws::Structure.new(
+      class LoadBalancerAttribute < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the attribute.
@@ -1019,9 +1097,11 @@ module Aws
       end
 
       # Information about the state of the load balancer.
-      class LoadBalancerState < Aws::Structure.new(
+      class LoadBalancerState < Struct.new(
         :code,
         :reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The state code. The initial state of the load balancer is
@@ -1044,8 +1124,10 @@ module Aws
       #       {
       #         http_code: "HttpCode", # required
       #       }
-      class Matcher < Aws::Structure.new(
+      class Matcher < Struct.new(
         :http_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] http_code
         #   The HTTP codes. The default value is 200. You can specify multiple
@@ -1076,13 +1158,15 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyListenerInput < Aws::Structure.new(
+      class ModifyListenerInput < Struct.new(
         :listener_arn,
         :port,
         :protocol,
         :ssl_policy,
         :certificates,
         :default_actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] listener_arn
         #   The Amazon Resource Name (ARN) of the listener.
@@ -1112,8 +1196,10 @@ module Aws
       end
 
       # Contains the output of ModifyListener.
-      class ModifyListenerOutput < Aws::Structure.new(
+      class ModifyListenerOutput < Struct.new(
         :listeners)
+
+        include Aws::Structure
 
         # @!attribute [rw] listeners
         #   Information about the modified listeners.
@@ -1134,9 +1220,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyLoadBalancerAttributesInput < Aws::Structure.new(
+      class ModifyLoadBalancerAttributesInput < Struct.new(
         :load_balancer_arn,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -1149,8 +1237,10 @@ module Aws
       end
 
       # Contains the output of ModifyLoadBalancerAttributes.
-      class ModifyLoadBalancerAttributesOutput < Aws::Structure.new(
+      class ModifyLoadBalancerAttributesOutput < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   Information about the load balancer attributes.
@@ -1177,10 +1267,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyRuleInput < Aws::Structure.new(
+      class ModifyRuleInput < Struct.new(
         :rule_arn,
         :conditions,
         :actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_arn
         #   The Amazon Resource Name (ARN) of the rule.
@@ -1197,8 +1289,10 @@ module Aws
       end
 
       # Contains the output of ModifyRules.
-      class ModifyRuleOutput < Aws::Structure.new(
+      class ModifyRuleOutput < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   Information about the rule.
@@ -1219,9 +1313,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyTargetGroupAttributesInput < Aws::Structure.new(
+      class ModifyTargetGroupAttributesInput < Struct.new(
         :target_group_arn,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -1234,8 +1330,10 @@ module Aws
       end
 
       # Contains the output of ModifyTargetGroupAttributes.
-      class ModifyTargetGroupAttributesOutput < Aws::Structure.new(
+      class ModifyTargetGroupAttributesOutput < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   Information about the attributes.
@@ -1260,7 +1358,7 @@ module Aws
       #           http_code: "HttpCode", # required
       #         },
       #       }
-      class ModifyTargetGroupInput < Aws::Structure.new(
+      class ModifyTargetGroupInput < Struct.new(
         :target_group_arn,
         :health_check_protocol,
         :health_check_port,
@@ -1270,6 +1368,8 @@ module Aws
         :healthy_threshold_count,
         :unhealthy_threshold_count,
         :matcher)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -1315,8 +1415,10 @@ module Aws
       end
 
       # Contains the output of ModifyTargetGroup.
-      class ModifyTargetGroupOutput < Aws::Structure.new(
+      class ModifyTargetGroupOutput < Struct.new(
         :target_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_groups
         #   Information about the target group.
@@ -1337,9 +1439,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class RegisterTargetsInput < Aws::Structure.new(
+      class RegisterTargetsInput < Struct.new(
         :target_group_arn,
         :targets)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -1362,9 +1466,11 @@ module Aws
       #         resource_arns: ["ResourceArn"], # required
       #         tag_keys: ["TagKey"], # required
       #       }
-      class RemoveTagsInput < Aws::Structure.new(
+      class RemoveTagsInput < Struct.new(
         :resource_arns,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arns
         #   The Amazon Resource Name (ARN) of the resource.
@@ -1380,12 +1486,14 @@ module Aws
       class RemoveTagsOutput < Aws::EmptyStructure; end
 
       # Information about a rule.
-      class Rule < Aws::Structure.new(
+      class Rule < Struct.new(
         :rule_arn,
         :priority,
         :conditions,
         :actions,
         :is_default)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_arn
         #   The Amazon Resource Name (ARN) of the rule.
@@ -1417,9 +1525,11 @@ module Aws
       #         field: "ConditionFieldName",
       #         values: ["StringValue"],
       #       }
-      class RuleCondition < Aws::Structure.new(
+      class RuleCondition < Struct.new(
         :field,
         :values)
+
+        include Aws::Structure
 
         # @!attribute [rw] field
         #   The name of the field. The possible value is `path-pattern`.
@@ -1452,9 +1562,11 @@ module Aws
       #         rule_arn: "RuleArn",
       #         priority: 1,
       #       }
-      class RulePriorityPair < Aws::Structure.new(
+      class RulePriorityPair < Struct.new(
         :rule_arn,
         :priority)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_arn
         #   The Amazon Resource Name (ARN) of the rule.
@@ -1478,8 +1590,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class SetRulePrioritiesInput < Aws::Structure.new(
+      class SetRulePrioritiesInput < Struct.new(
         :rule_priorities)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_priorities
         #   The rule priorities.
@@ -1488,8 +1602,10 @@ module Aws
       end
 
       # Contains the output of SetRulePriorities.
-      class SetRulePrioritiesOutput < Aws::Structure.new(
+      class SetRulePrioritiesOutput < Struct.new(
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   Information about the rules.
@@ -1505,9 +1621,11 @@ module Aws
       #         load_balancer_arn: "LoadBalancerArn", # required
       #         security_groups: ["SecurityGroupId"], # required
       #       }
-      class SetSecurityGroupsInput < Aws::Structure.new(
+      class SetSecurityGroupsInput < Struct.new(
         :load_balancer_arn,
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -1520,8 +1638,10 @@ module Aws
       end
 
       # Contains the output of SetSecurityGroups.
-      class SetSecurityGroupsOutput < Aws::Structure.new(
+      class SetSecurityGroupsOutput < Struct.new(
         :security_group_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] security_group_ids
         #   The IDs of the security groups associated with the load balancer.
@@ -1537,9 +1657,11 @@ module Aws
       #         load_balancer_arn: "LoadBalancerArn", # required
       #         subnets: ["SubnetId"], # required
       #       }
-      class SetSubnetsInput < Aws::Structure.new(
+      class SetSubnetsInput < Struct.new(
         :load_balancer_arn,
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_arn
         #   The Amazon Resource Name (ARN) of the load balancer.
@@ -1553,8 +1675,10 @@ module Aws
       end
 
       # Contains the output of SetSubnets.
-      class SetSubnetsOutput < Aws::Structure.new(
+      class SetSubnetsOutput < Struct.new(
         :availability_zones)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability_zones
         #   Information about the subnet and Availability Zone.
@@ -1563,10 +1687,12 @@ module Aws
       end
 
       # Information about a policy used for SSL negotiation.
-      class SslPolicy < Aws::Structure.new(
+      class SslPolicy < Struct.new(
         :ssl_protocols,
         :ciphers,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] ssl_protocols
         #   The protocols.
@@ -1590,9 +1716,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key of the tag.
@@ -1605,9 +1733,11 @@ module Aws
       end
 
       # The tags associated with a resource.
-      class TagDescription < Aws::Structure.new(
+      class TagDescription < Struct.new(
         :resource_arn,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_arn
         #   The Amazon Resource Name (ARN) of the resource.
@@ -1627,9 +1757,11 @@ module Aws
       #         id: "TargetId", # required
       #         port: 1,
       #       }
-      class TargetDescription < Aws::Structure.new(
+      class TargetDescription < Struct.new(
         :id,
         :port)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the target.
@@ -1642,7 +1774,7 @@ module Aws
       end
 
       # Information about a target group.
-      class TargetGroup < Aws::Structure.new(
+      class TargetGroup < Struct.new(
         :target_group_arn,
         :target_group_name,
         :protocol,
@@ -1657,6 +1789,8 @@ module Aws
         :health_check_path,
         :matcher,
         :load_balancer_arns)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_group_arn
         #   The Amazon Resource Name (ARN) of the target group.
@@ -1730,9 +1864,11 @@ module Aws
       #         key: "TargetGroupAttributeKey",
       #         value: "TargetGroupAttributeValue",
       #       }
-      class TargetGroupAttribute < Aws::Structure.new(
+      class TargetGroupAttribute < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the attribute.
@@ -1763,10 +1899,12 @@ module Aws
       end
 
       # Information about the current health of a target.
-      class TargetHealth < Aws::Structure.new(
+      class TargetHealth < Struct.new(
         :state,
         :reason,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   The state of the target.
@@ -1833,10 +1971,12 @@ module Aws
       end
 
       # Information about the health of a target.
-      class TargetHealthDescription < Aws::Structure.new(
+      class TargetHealthDescription < Struct.new(
         :target,
         :health_check_port,
         :target_health)
+
+        include Aws::Structure
 
         # @!attribute [rw] target
         #   The description of the target.

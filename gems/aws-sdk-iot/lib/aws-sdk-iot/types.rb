@@ -17,9 +17,11 @@ module Aws
       #         certificate_id: "CertificateId", # required
       #         set_as_active: false,
       #       }
-      class AcceptCertificateTransferRequest < Aws::Structure.new(
+      class AcceptCertificateTransferRequest < Struct.new(
         :certificate_id,
         :set_as_active)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate.
@@ -102,7 +104,7 @@ module Aws
       #           id: "ElasticsearchId", # required
       #         },
       #       }
-      class Action < Aws::Structure.new(
+      class Action < Struct.new(
         :dynamo_db,
         :lambda,
         :sns,
@@ -114,6 +116,8 @@ module Aws
         :cloudwatch_metric,
         :cloudwatch_alarm,
         :elasticsearch)
+
+        include Aws::Structure
 
         # @!attribute [rw] dynamo_db
         #   Write to a DynamoDB table.
@@ -169,9 +173,11 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         principal: "Principal", # required
       #       }
-      class AttachPrincipalPolicyRequest < Aws::Structure.new(
+      class AttachPrincipalPolicyRequest < Struct.new(
         :policy_name,
         :principal)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -192,9 +198,11 @@ module Aws
       #         thing_name: "ThingName", # required
       #         principal: "Principal", # required
       #       }
-      class AttachThingPrincipalRequest < Aws::Structure.new(
+      class AttachThingPrincipalRequest < Struct.new(
         :thing_name,
         :principal)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -219,9 +227,11 @@ module Aws
       #         },
       #         merge: false,
       #       }
-      class AttributePayload < Aws::Structure.new(
+      class AttributePayload < Struct.new(
         :attributes,
         :merge)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   A JSON string containing up to three key-value pair in JSON format.
@@ -246,11 +256,13 @@ module Aws
       end
 
       # A CA certificate.
-      class CACertificate < Aws::Structure.new(
+      class CACertificate < Struct.new(
         :certificate_arn,
         :certificate_id,
         :status,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The ARN of the CA certificate.
@@ -274,7 +286,7 @@ module Aws
       end
 
       # Describes a CA certificate.
-      class CACertificateDescription < Aws::Structure.new(
+      class CACertificateDescription < Struct.new(
         :certificate_arn,
         :certificate_id,
         :status,
@@ -282,6 +294,8 @@ module Aws
         :owned_by,
         :creation_date,
         :auto_registration_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The CA certificate ARN.
@@ -321,8 +335,10 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
-      class CancelCertificateTransferRequest < Aws::Structure.new(
+      class CancelCertificateTransferRequest < Struct.new(
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate.
@@ -331,11 +347,13 @@ module Aws
       end
 
       # Information about a certificate.
-      class Certificate < Aws::Structure.new(
+      class Certificate < Struct.new(
         :certificate_arn,
         :certificate_id,
         :status,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The ARN of the certificate.
@@ -359,7 +377,7 @@ module Aws
       end
 
       # Describes a certificate.
-      class CertificateDescription < Aws::Structure.new(
+      class CertificateDescription < Struct.new(
         :certificate_arn,
         :certificate_id,
         :ca_certificate_id,
@@ -370,6 +388,8 @@ module Aws
         :creation_date,
         :last_modified_date,
         :transfer_data)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The ARN of the certificate.
@@ -424,11 +444,13 @@ module Aws
       #         state_reason: "StateReason", # required
       #         state_value: "StateValue", # required
       #       }
-      class CloudwatchAlarmAction < Aws::Structure.new(
+      class CloudwatchAlarmAction < Struct.new(
         :role_arn,
         :alarm_name,
         :state_reason,
         :state_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The IAM role that allows access to the CloudWatch alarm.
@@ -461,13 +483,15 @@ module Aws
       #         metric_unit: "MetricUnit", # required
       #         metric_timestamp: "MetricTimestamp",
       #       }
-      class CloudwatchMetricAction < Aws::Structure.new(
+      class CloudwatchMetricAction < Struct.new(
         :role_arn,
         :metric_namespace,
         :metric_name,
         :metric_value,
         :metric_unit,
         :metric_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The IAM role that allows access to the CloudWatch metric.
@@ -511,9 +535,11 @@ module Aws
       #         certificate_signing_request: "CertificateSigningRequest", # required
       #         set_as_active: false,
       #       }
-      class CreateCertificateFromCsrRequest < Aws::Structure.new(
+      class CreateCertificateFromCsrRequest < Struct.new(
         :certificate_signing_request,
         :set_as_active)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_signing_request
         #   The certificate signing request (CSR).
@@ -526,10 +552,12 @@ module Aws
       end
 
       # The output from the CreateCertificateFromCsr operation.
-      class CreateCertificateFromCsrResponse < Aws::Structure.new(
+      class CreateCertificateFromCsrResponse < Struct.new(
         :certificate_arn,
         :certificate_id,
         :certificate_pem)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The Amazon Resource Name (ARN) of the certificate. You can use the
@@ -554,8 +582,10 @@ module Aws
       #       {
       #         set_as_active: false,
       #       }
-      class CreateKeysAndCertificateRequest < Aws::Structure.new(
+      class CreateKeysAndCertificateRequest < Struct.new(
         :set_as_active)
+
+        include Aws::Structure
 
         # @!attribute [rw] set_as_active
         #   Specifies whether the certificate is active.
@@ -564,11 +594,13 @@ module Aws
       end
 
       # The output of the CreateKeysAndCertificate operation.
-      class CreateKeysAndCertificateResponse < Aws::Structure.new(
+      class CreateKeysAndCertificateResponse < Struct.new(
         :certificate_arn,
         :certificate_id,
         :certificate_pem,
         :key_pair)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The ARN of the certificate.
@@ -597,9 +629,11 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_document: "PolicyDocument", # required
       #       }
-      class CreatePolicyRequest < Aws::Structure.new(
+      class CreatePolicyRequest < Struct.new(
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -614,11 +648,13 @@ module Aws
       end
 
       # The output from the CreatePolicy operation.
-      class CreatePolicyResponse < Aws::Structure.new(
+      class CreatePolicyResponse < Struct.new(
         :policy_name,
         :policy_arn,
         :policy_document,
         :policy_version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -647,10 +683,12 @@ module Aws
       #         policy_document: "PolicyDocument", # required
       #         set_as_default: false,
       #       }
-      class CreatePolicyVersionRequest < Aws::Structure.new(
+      class CreatePolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_document,
         :set_as_default)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -671,11 +709,13 @@ module Aws
       end
 
       # The output of the CreatePolicyVersion operation.
-      class CreatePolicyVersionResponse < Aws::Structure.new(
+      class CreatePolicyVersionResponse < Struct.new(
         :policy_arn,
         :policy_document,
         :policy_version_id,
         :is_default_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The policy ARN.
@@ -709,10 +749,12 @@ module Aws
       #           merge: false,
       #         },
       #       }
-      class CreateThingRequest < Aws::Structure.new(
+      class CreateThingRequest < Struct.new(
         :thing_name,
         :thing_type_name,
         :attribute_payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing to create.
@@ -732,9 +774,11 @@ module Aws
       end
 
       # The output of the CreateThing operation.
-      class CreateThingResponse < Aws::Structure.new(
+      class CreateThingResponse < Struct.new(
         :thing_name,
         :thing_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the new thing.
@@ -757,9 +801,11 @@ module Aws
       #           searchable_attributes: ["AttributeName"],
       #         },
       #       }
-      class CreateThingTypeRequest < Aws::Structure.new(
+      class CreateThingTypeRequest < Struct.new(
         :thing_type_name,
         :thing_type_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_name
         #   The name of the thing type.
@@ -774,9 +820,11 @@ module Aws
       end
 
       # The output of the CreateThingType operation.
-      class CreateThingTypeResponse < Aws::Structure.new(
+      class CreateThingTypeResponse < Struct.new(
         :thing_type_name,
         :thing_type_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_name
         #   The name of the thing type.
@@ -870,9 +918,11 @@ module Aws
       #           aws_iot_sql_version: "AwsIotSqlVersion",
       #         },
       #       }
-      class CreateTopicRuleRequest < Aws::Structure.new(
+      class CreateTopicRuleRequest < Struct.new(
         :rule_name,
         :topic_rule_payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_name
         #   The name of the rule.
@@ -891,8 +941,10 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
-      class DeleteCACertificateRequest < Aws::Structure.new(
+      class DeleteCACertificateRequest < Struct.new(
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate to delete.
@@ -910,8 +962,10 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
-      class DeleteCertificateRequest < Aws::Structure.new(
+      class DeleteCertificateRequest < Struct.new(
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate.
@@ -926,8 +980,10 @@ module Aws
       #       {
       #         policy_name: "PolicyName", # required
       #       }
-      class DeletePolicyRequest < Aws::Structure.new(
+      class DeletePolicyRequest < Struct.new(
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy to delete.
@@ -943,9 +999,11 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_version_id: "PolicyVersionId", # required
       #       }
-      class DeletePolicyVersionRequest < Aws::Structure.new(
+      class DeletePolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy.
@@ -972,9 +1030,11 @@ module Aws
       #         thing_name: "ThingName", # required
       #         expected_version: 1,
       #       }
-      class DeleteThingRequest < Aws::Structure.new(
+      class DeleteThingRequest < Struct.new(
         :thing_name,
         :expected_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing to delete.
@@ -999,8 +1059,10 @@ module Aws
       #       {
       #         thing_type_name: "ThingTypeName", # required
       #       }
-      class DeleteThingTypeRequest < Aws::Structure.new(
+      class DeleteThingTypeRequest < Struct.new(
         :thing_type_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_name
         #   The name of the thing type.
@@ -1018,8 +1080,10 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
-      class DeleteTopicRuleRequest < Aws::Structure.new(
+      class DeleteTopicRuleRequest < Struct.new(
         :rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_name
         #   The name of the rule.
@@ -1035,9 +1099,11 @@ module Aws
       #         thing_type_name: "ThingTypeName", # required
       #         undo_deprecate: false,
       #       }
-      class DeprecateThingTypeRequest < Aws::Structure.new(
+      class DeprecateThingTypeRequest < Struct.new(
         :thing_type_name,
         :undo_deprecate)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_name
         #   The name of the thing type to deprecate.
@@ -1061,8 +1127,10 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
-      class DescribeCACertificateRequest < Aws::Structure.new(
+      class DescribeCACertificateRequest < Struct.new(
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The CA certificate identifier.
@@ -1071,8 +1139,10 @@ module Aws
       end
 
       # The output from the DescribeCACertificate operation.
-      class DescribeCACertificateResponse < Aws::Structure.new(
+      class DescribeCACertificateResponse < Struct.new(
         :certificate_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_description
         #   The CA certificate description.
@@ -1087,8 +1157,10 @@ module Aws
       #       {
       #         certificate_id: "CertificateId", # required
       #       }
-      class DescribeCertificateRequest < Aws::Structure.new(
+      class DescribeCertificateRequest < Struct.new(
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate.
@@ -1097,8 +1169,10 @@ module Aws
       end
 
       # The output of the DescribeCertificate operation.
-      class DescribeCertificateResponse < Aws::Structure.new(
+      class DescribeCertificateResponse < Struct.new(
         :certificate_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_description
         #   The description of the certificate.
@@ -1111,8 +1185,10 @@ module Aws
       class DescribeEndpointRequest < Aws::EmptyStructure; end
 
       # The output from the DescribeEndpoint operation.
-      class DescribeEndpointResponse < Aws::Structure.new(
+      class DescribeEndpointResponse < Struct.new(
         :endpoint_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] endpoint_address
         #   The endpoint. The format of the endpoint is as follows:
@@ -1128,8 +1204,10 @@ module Aws
       #       {
       #         thing_name: "ThingName", # required
       #       }
-      class DescribeThingRequest < Aws::Structure.new(
+      class DescribeThingRequest < Struct.new(
         :thing_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -1138,12 +1216,14 @@ module Aws
       end
 
       # The output from the DescribeThing operation.
-      class DescribeThingResponse < Aws::Structure.new(
+      class DescribeThingResponse < Struct.new(
         :default_client_id,
         :thing_name,
         :thing_type_name,
         :attributes,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] default_client_id
         #   The default client ID.
@@ -1180,8 +1260,10 @@ module Aws
       #       {
       #         thing_type_name: "ThingTypeName", # required
       #       }
-      class DescribeThingTypeRequest < Aws::Structure.new(
+      class DescribeThingTypeRequest < Struct.new(
         :thing_type_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_name
         #   The name of the thing type.
@@ -1190,10 +1272,12 @@ module Aws
       end
 
       # The output for the DescribeThingType operation.
-      class DescribeThingTypeResponse < Aws::Structure.new(
+      class DescribeThingTypeResponse < Struct.new(
         :thing_type_name,
         :thing_type_properties,
         :thing_type_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_name
         #   The name of the thing type.
@@ -1222,9 +1306,11 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         principal: "Principal", # required
       #       }
-      class DetachPrincipalPolicyRequest < Aws::Structure.new(
+      class DetachPrincipalPolicyRequest < Struct.new(
         :policy_name,
         :principal)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy to detach.
@@ -1248,9 +1334,11 @@ module Aws
       #         thing_name: "ThingName", # required
       #         principal: "Principal", # required
       #       }
-      class DetachThingPrincipalRequest < Aws::Structure.new(
+      class DetachThingPrincipalRequest < Struct.new(
         :thing_name,
         :principal)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -1274,8 +1362,10 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
-      class DisableTopicRuleRequest < Aws::Structure.new(
+      class DisableTopicRuleRequest < Struct.new(
         :rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_name
         #   The name of the rule to disable.
@@ -1316,7 +1406,7 @@ module Aws
       #         range_key_type: "STRING", # accepts STRING, NUMBER
       #         payload_field: "PayloadField",
       #       }
-      class DynamoDBAction < Aws::Structure.new(
+      class DynamoDBAction < Struct.new(
         :table_name,
         :role_arn,
         :operation,
@@ -1327,6 +1417,8 @@ module Aws
         :range_key_value,
         :range_key_type,
         :payload_field)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the DynamoDB table.
@@ -1384,12 +1476,14 @@ module Aws
       #         type: "ElasticsearchType", # required
       #         id: "ElasticsearchId", # required
       #       }
-      class ElasticsearchAction < Aws::Structure.new(
+      class ElasticsearchAction < Struct.new(
         :role_arn,
         :endpoint,
         :index,
         :type,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The IAM role ARN that has access to Elasticsearch.
@@ -1420,8 +1514,10 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
-      class EnableTopicRuleRequest < Aws::Structure.new(
+      class EnableTopicRuleRequest < Struct.new(
         :rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_name
         #   The name of the topic rule to enable.
@@ -1439,10 +1535,12 @@ module Aws
       #         delivery_stream_name: "DeliveryStreamName", # required
       #         separator: "FirehoseSeparator",
       #       }
-      class FirehoseAction < Aws::Structure.new(
+      class FirehoseAction < Struct.new(
         :role_arn,
         :delivery_stream_name,
         :separator)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The IAM role that grants access to the Amazon Kinesis Firehost
@@ -1466,9 +1564,11 @@ module Aws
       class GetLoggingOptionsRequest < Aws::EmptyStructure; end
 
       # The output from the GetLoggingOptions operation.
-      class GetLoggingOptionsResponse < Aws::Structure.new(
+      class GetLoggingOptionsResponse < Struct.new(
         :role_arn,
         :log_level)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that grants access.
@@ -1487,8 +1587,10 @@ module Aws
       #       {
       #         policy_name: "PolicyName", # required
       #       }
-      class GetPolicyRequest < Aws::Structure.new(
+      class GetPolicyRequest < Struct.new(
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy.
@@ -1497,11 +1599,13 @@ module Aws
       end
 
       # The output from the GetPolicy operation.
-      class GetPolicyResponse < Aws::Structure.new(
+      class GetPolicyResponse < Struct.new(
         :policy_name,
         :policy_arn,
         :policy_document,
         :default_version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -1529,9 +1633,11 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_version_id: "PolicyVersionId", # required
       #       }
-      class GetPolicyVersionRequest < Aws::Structure.new(
+      class GetPolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy.
@@ -1544,12 +1650,14 @@ module Aws
       end
 
       # The output from the GetPolicyVersion operation.
-      class GetPolicyVersionResponse < Aws::Structure.new(
+      class GetPolicyVersionResponse < Struct.new(
         :policy_arn,
         :policy_name,
         :policy_document,
         :policy_version_id,
         :is_default_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The policy ARN.
@@ -1578,8 +1686,10 @@ module Aws
       class GetRegistrationCodeRequest < Aws::EmptyStructure; end
 
       # The output from the GetRegistrationCode operation.
-      class GetRegistrationCodeResponse < Aws::Structure.new(
+      class GetRegistrationCodeResponse < Struct.new(
         :registration_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] registration_code
         #   The CA certificate registration code.
@@ -1594,8 +1704,10 @@ module Aws
       #       {
       #         rule_name: "RuleName", # required
       #       }
-      class GetTopicRuleRequest < Aws::Structure.new(
+      class GetTopicRuleRequest < Struct.new(
         :rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_name
         #   The name of the rule.
@@ -1604,9 +1716,11 @@ module Aws
       end
 
       # The output from the GetTopicRule operation.
-      class GetTopicRuleResponse < Aws::Structure.new(
+      class GetTopicRuleResponse < Struct.new(
         :rule_arn,
         :rule)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_arn
         #   The rule ARN.
@@ -1619,9 +1733,11 @@ module Aws
       end
 
       # Describes a key pair.
-      class KeyPair < Aws::Structure.new(
+      class KeyPair < Struct.new(
         :public_key,
         :private_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] public_key
         #   The public key.
@@ -1642,10 +1758,12 @@ module Aws
       #         stream_name: "StreamName", # required
       #         partition_key: "PartitionKey",
       #       }
-      class KinesisAction < Aws::Structure.new(
+      class KinesisAction < Struct.new(
         :role_arn,
         :stream_name,
         :partition_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that grants access to the Amazon Kinesis
@@ -1669,8 +1787,10 @@ module Aws
       #       {
       #         function_arn: "FunctionArn", # required
       #       }
-      class LambdaAction < Aws::Structure.new(
+      class LambdaAction < Struct.new(
         :function_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_arn
         #   The ARN of the Lambda function.
@@ -1687,10 +1807,12 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
-      class ListCACertificatesRequest < Aws::Structure.new(
+      class ListCACertificatesRequest < Struct.new(
         :page_size,
         :marker,
         :ascending_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] page_size
         #   The result page size.
@@ -1707,9 +1829,11 @@ module Aws
       end
 
       # The output from the ListCACertificates operation.
-      class ListCACertificatesResponse < Aws::Structure.new(
+      class ListCACertificatesResponse < Struct.new(
         :certificates,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificates
         #   The CA certificates registered in your AWS account.
@@ -1731,11 +1855,13 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
-      class ListCertificatesByCARequest < Aws::Structure.new(
+      class ListCertificatesByCARequest < Struct.new(
         :ca_certificate_id,
         :page_size,
         :marker,
         :ascending_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] ca_certificate_id
         #   The ID of the CA certificate. This operation will list all
@@ -1759,9 +1885,11 @@ module Aws
       end
 
       # The output of the ListCertificatesByCA operation.
-      class ListCertificatesByCAResponse < Aws::Structure.new(
+      class ListCertificatesByCAResponse < Struct.new(
         :certificates,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificates
         #   The device certificates signed by the specified CA certificate.
@@ -1783,10 +1911,12 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
-      class ListCertificatesRequest < Aws::Structure.new(
+      class ListCertificatesRequest < Struct.new(
         :page_size,
         :marker,
         :ascending_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] page_size
         #   The result page size.
@@ -1804,9 +1934,11 @@ module Aws
       end
 
       # The output of the ListCertificates operation.
-      class ListCertificatesResponse < Aws::Structure.new(
+      class ListCertificatesResponse < Struct.new(
         :certificates,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificates
         #   The descriptions of the certificates.
@@ -1828,10 +1960,12 @@ module Aws
       #         marker: "Marker",
       #         ascending_order: false,
       #       }
-      class ListOutgoingCertificatesRequest < Aws::Structure.new(
+      class ListOutgoingCertificatesRequest < Struct.new(
         :page_size,
         :marker,
         :ascending_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] page_size
         #   The result page size.
@@ -1849,9 +1983,11 @@ module Aws
       end
 
       # The output from the ListOutgoingCertificates operation.
-      class ListOutgoingCertificatesResponse < Aws::Structure.new(
+      class ListOutgoingCertificatesResponse < Struct.new(
         :outgoing_certificates,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] outgoing_certificates
         #   The certificates that are being transfered but not yet accepted.
@@ -1872,10 +2008,12 @@ module Aws
       #         page_size: 1,
       #         ascending_order: false,
       #       }
-      class ListPoliciesRequest < Aws::Structure.new(
+      class ListPoliciesRequest < Struct.new(
         :marker,
         :page_size,
         :ascending_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   The marker for the next set of results.
@@ -1893,9 +2031,11 @@ module Aws
       end
 
       # The output from the ListPolicies operation.
-      class ListPoliciesResponse < Aws::Structure.new(
+      class ListPoliciesResponse < Struct.new(
         :policies,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policies
         #   The descriptions of the policies.
@@ -1918,11 +2058,13 @@ module Aws
       #         page_size: 1,
       #         ascending_order: false,
       #       }
-      class ListPolicyPrincipalsRequest < Aws::Structure.new(
+      class ListPolicyPrincipalsRequest < Struct.new(
         :policy_name,
         :marker,
         :page_size,
         :ascending_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -1944,9 +2086,11 @@ module Aws
       end
 
       # The output from the ListPolicyPrincipals operation.
-      class ListPolicyPrincipalsResponse < Aws::Structure.new(
+      class ListPolicyPrincipalsResponse < Struct.new(
         :principals,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] principals
         #   The descriptions of the principals.
@@ -1966,8 +2110,10 @@ module Aws
       #       {
       #         policy_name: "PolicyName", # required
       #       }
-      class ListPolicyVersionsRequest < Aws::Structure.new(
+      class ListPolicyVersionsRequest < Struct.new(
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -1976,8 +2122,10 @@ module Aws
       end
 
       # The output from the ListPolicyVersions operation.
-      class ListPolicyVersionsResponse < Aws::Structure.new(
+      class ListPolicyVersionsResponse < Struct.new(
         :policy_versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_versions
         #   The policy versions.
@@ -1995,11 +2143,13 @@ module Aws
       #         page_size: 1,
       #         ascending_order: false,
       #       }
-      class ListPrincipalPoliciesRequest < Aws::Structure.new(
+      class ListPrincipalPoliciesRequest < Struct.new(
         :principal,
         :marker,
         :page_size,
         :ascending_order)
+
+        include Aws::Structure
 
         # @!attribute [rw] principal
         #   The principal.
@@ -2021,9 +2171,11 @@ module Aws
       end
 
       # The output from the ListPrincipalPolicies operation.
-      class ListPrincipalPoliciesResponse < Aws::Structure.new(
+      class ListPrincipalPoliciesResponse < Struct.new(
         :policies,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policies
         #   The policies.
@@ -2045,10 +2197,12 @@ module Aws
       #         max_results: 1,
       #         principal: "Principal", # required
       #       }
-      class ListPrincipalThingsRequest < Aws::Structure.new(
+      class ListPrincipalThingsRequest < Struct.new(
         :next_token,
         :max_results,
         :principal)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The token for the next set of results, or **null** if there are no
@@ -2066,9 +2220,11 @@ module Aws
       end
 
       # The output from the ListPrincipalThings operation.
-      class ListPrincipalThingsResponse < Aws::Structure.new(
+      class ListPrincipalThingsResponse < Struct.new(
         :things,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] things
         #   The things.
@@ -2088,8 +2244,10 @@ module Aws
       #       {
       #         thing_name: "ThingName", # required
       #       }
-      class ListThingPrincipalsRequest < Aws::Structure.new(
+      class ListThingPrincipalsRequest < Struct.new(
         :thing_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -2098,8 +2256,10 @@ module Aws
       end
 
       # The output from the ListThingPrincipals operation.
-      class ListThingPrincipalsResponse < Aws::Structure.new(
+      class ListThingPrincipalsResponse < Struct.new(
         :principals)
+
+        include Aws::Structure
 
         # @!attribute [rw] principals
         #   The principals associated with the thing.
@@ -2116,10 +2276,12 @@ module Aws
       #         max_results: 1,
       #         thing_type_name: "ThingTypeName",
       #       }
-      class ListThingTypesRequest < Aws::Structure.new(
+      class ListThingTypesRequest < Struct.new(
         :next_token,
         :max_results,
         :thing_type_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The token for the next set of results, or **null** if there are no
@@ -2137,9 +2299,11 @@ module Aws
       end
 
       # The output for the ListThingTypes operation.
-      class ListThingTypesResponse < Aws::Structure.new(
+      class ListThingTypesResponse < Struct.new(
         :thing_types,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_types
         #   The thing types.
@@ -2163,12 +2327,14 @@ module Aws
       #         attribute_value: "AttributeValue",
       #         thing_type_name: "ThingTypeName",
       #       }
-      class ListThingsRequest < Aws::Structure.new(
+      class ListThingsRequest < Struct.new(
         :next_token,
         :max_results,
         :attribute_name,
         :attribute_value,
         :thing_type_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   The token for the next set of results, or **null** if there are no
@@ -2194,9 +2360,11 @@ module Aws
       end
 
       # The output from the ListThings operation.
-      class ListThingsResponse < Aws::Structure.new(
+      class ListThingsResponse < Struct.new(
         :things,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] things
         #   The things.
@@ -2219,11 +2387,13 @@ module Aws
       #         next_token: "NextToken",
       #         rule_disabled: false,
       #       }
-      class ListTopicRulesRequest < Aws::Structure.new(
+      class ListTopicRulesRequest < Struct.new(
         :topic,
         :max_results,
         :next_token,
         :rule_disabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic
         #   The topic.
@@ -2244,9 +2414,11 @@ module Aws
       end
 
       # The output from the ListTopicRules operation.
-      class ListTopicRulesResponse < Aws::Structure.new(
+      class ListTopicRulesResponse < Struct.new(
         :rules,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] rules
         #   The rules.
@@ -2266,9 +2438,11 @@ module Aws
       #         role_arn: "AwsArn", # required
       #         log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
       #       }
-      class LoggingOptionsPayload < Aws::Structure.new(
+      class LoggingOptionsPayload < Struct.new(
         :role_arn,
         :log_level)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that grants access.
@@ -2281,13 +2455,15 @@ module Aws
       end
 
       # A certificate that has been transfered but not yet accepted.
-      class OutgoingCertificate < Aws::Structure.new(
+      class OutgoingCertificate < Struct.new(
         :certificate_arn,
         :certificate_id,
         :transferred_to,
         :transfer_date,
         :transfer_message,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The certificate ARN.
@@ -2316,9 +2492,11 @@ module Aws
       end
 
       # Describes an AWS IoT policy.
-      class Policy < Aws::Structure.new(
+      class Policy < Struct.new(
         :policy_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -2331,10 +2509,12 @@ module Aws
       end
 
       # Describes a policy version.
-      class PolicyVersion < Aws::Structure.new(
+      class PolicyVersion < Struct.new(
         :version_id,
         :is_default_version,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] version_id
         #   The policy version ID.
@@ -2360,11 +2540,13 @@ module Aws
       #         set_as_active: false,
       #         allow_auto_registration: false,
       #       }
-      class RegisterCACertificateRequest < Aws::Structure.new(
+      class RegisterCACertificateRequest < Struct.new(
         :ca_certificate,
         :verification_certificate,
         :set_as_active,
         :allow_auto_registration)
+
+        include Aws::Structure
 
         # @!attribute [rw] ca_certificate
         #   The CA certificate.
@@ -2387,9 +2569,11 @@ module Aws
       end
 
       # The output from the RegisterCACertificateResponse operation.
-      class RegisterCACertificateResponse < Aws::Structure.new(
+      class RegisterCACertificateResponse < Struct.new(
         :certificate_arn,
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The CA certificate ARN.
@@ -2410,10 +2594,12 @@ module Aws
       #         ca_certificate_pem: "CertificatePem",
       #         set_as_active: false,
       #       }
-      class RegisterCertificateRequest < Aws::Structure.new(
+      class RegisterCertificateRequest < Struct.new(
         :certificate_pem,
         :ca_certificate_pem,
         :set_as_active)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_pem
         #   The certificate data, in PEM format.
@@ -2432,9 +2618,11 @@ module Aws
       end
 
       # The output from the RegisterCertificate operation.
-      class RegisterCertificateResponse < Aws::Structure.new(
+      class RegisterCertificateResponse < Struct.new(
         :certificate_arn,
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The certificate ARN.
@@ -2454,9 +2642,11 @@ module Aws
       #         certificate_id: "CertificateId", # required
       #         reject_reason: "Message",
       #       }
-      class RejectCertificateTransferRequest < Aws::Structure.new(
+      class RejectCertificateTransferRequest < Struct.new(
         :certificate_id,
         :reject_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate.
@@ -2550,9 +2740,11 @@ module Aws
       #           aws_iot_sql_version: "AwsIotSqlVersion",
       #         },
       #       }
-      class ReplaceTopicRuleRequest < Aws::Structure.new(
+      class ReplaceTopicRuleRequest < Struct.new(
         :rule_name,
         :topic_rule_payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_name
         #   The name of the rule.
@@ -2572,9 +2764,11 @@ module Aws
       #         role_arn: "AwsArn", # required
       #         topic: "TopicPattern", # required
       #       }
-      class RepublishAction < Aws::Structure.new(
+      class RepublishAction < Struct.new(
         :role_arn,
         :topic)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that grants access.
@@ -2595,10 +2789,12 @@ module Aws
       #         bucket_name: "BucketName", # required
       #         key: "Key", # required
       #       }
-      class S3Action < Aws::Structure.new(
+      class S3Action < Struct.new(
         :role_arn,
         :bucket_name,
         :key)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that grants access.
@@ -2622,9 +2818,11 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy_version_id: "PolicyVersionId", # required
       #       }
-      class SetDefaultPolicyVersionRequest < Aws::Structure.new(
+      class SetDefaultPolicyVersionRequest < Struct.new(
         :policy_name,
         :policy_version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The policy name.
@@ -2646,8 +2844,10 @@ module Aws
       #           log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
       #         },
       #       }
-      class SetLoggingOptionsRequest < Aws::Structure.new(
+      class SetLoggingOptionsRequest < Struct.new(
         :logging_options_payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] logging_options_payload
         #   The logging options payload.
@@ -2664,10 +2864,12 @@ module Aws
       #         role_arn: "AwsArn", # required
       #         message_format: "RAW", # accepts RAW, JSON
       #       }
-      class SnsAction < Aws::Structure.new(
+      class SnsAction < Struct.new(
         :target_arn,
         :role_arn,
         :message_format)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_arn
         #   The ARN of the SNS topic.
@@ -2701,10 +2903,12 @@ module Aws
       #         queue_url: "QueueUrl", # required
       #         use_base_64: false,
       #       }
-      class SqsAction < Aws::Structure.new(
+      class SqsAction < Struct.new(
         :role_arn,
         :queue_url,
         :use_base_64)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_arn
         #   The ARN of the IAM role that grants access.
@@ -2722,11 +2926,13 @@ module Aws
 
       # The properties of the thing, including thing name, thing type name,
       # and a list of thing attributes.
-      class ThingAttribute < Aws::Structure.new(
+      class ThingAttribute < Struct.new(
         :thing_name,
         :thing_type_name,
         :attributes,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -2749,10 +2955,12 @@ module Aws
 
       # The definition of the thing type, including thing type name and
       # description.
-      class ThingTypeDefinition < Aws::Structure.new(
+      class ThingTypeDefinition < Struct.new(
         :thing_type_name,
         :thing_type_properties,
         :thing_type_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_name
         #   The name of the thing type.
@@ -2775,10 +2983,12 @@ module Aws
       # type including: creation date and time, a value indicating whether the
       # thing type is deprecated, and a date and time when time was
       # deprecated.
-      class ThingTypeMetadata < Aws::Structure.new(
+      class ThingTypeMetadata < Struct.new(
         :deprecated,
         :deprecation_date,
         :creation_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] deprecated
         #   Whether the thing type is deprecated. If **true**, no new things
@@ -2805,9 +3015,11 @@ module Aws
       #         thing_type_description: "ThingTypeDescription",
       #         searchable_attributes: ["AttributeName"],
       #       }
-      class ThingTypeProperties < Aws::Structure.new(
+      class ThingTypeProperties < Struct.new(
         :thing_type_description,
         :searchable_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_type_description
         #   The description of the thing type.
@@ -2820,7 +3032,7 @@ module Aws
       end
 
       # Describes a rule.
-      class TopicRule < Aws::Structure.new(
+      class TopicRule < Struct.new(
         :rule_name,
         :sql,
         :description,
@@ -2828,6 +3040,8 @@ module Aws
         :actions,
         :rule_disabled,
         :aws_iot_sql_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_name
         #   The name of the rule.
@@ -2861,12 +3075,14 @@ module Aws
       end
 
       # Describes a rule.
-      class TopicRuleListItem < Aws::Structure.new(
+      class TopicRuleListItem < Struct.new(
         :rule_arn,
         :rule_name,
         :topic_pattern,
         :created_at,
         :rule_disabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_arn
         #   The rule ARN.
@@ -2969,12 +3185,14 @@ module Aws
       #         rule_disabled: false,
       #         aws_iot_sql_version: "AwsIotSqlVersion",
       #       }
-      class TopicRulePayload < Aws::Structure.new(
+      class TopicRulePayload < Struct.new(
         :sql,
         :description,
         :actions,
         :rule_disabled,
         :aws_iot_sql_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] sql
         #   The SQL statement used to query the topic. For more information, see
@@ -3012,10 +3230,12 @@ module Aws
       #         target_aws_account: "AwsAccountId", # required
       #         transfer_message: "Message",
       #       }
-      class TransferCertificateRequest < Aws::Structure.new(
+      class TransferCertificateRequest < Struct.new(
         :certificate_id,
         :target_aws_account,
         :transfer_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate.
@@ -3032,8 +3252,10 @@ module Aws
       end
 
       # The output from the TransferCertificate operation.
-      class TransferCertificateResponse < Aws::Structure.new(
+      class TransferCertificateResponse < Struct.new(
         :transferred_certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] transferred_certificate_arn
         #   The ARN of the certificate.
@@ -3042,12 +3264,14 @@ module Aws
       end
 
       # Data used to transfer a certificate to an AWS account.
-      class TransferData < Aws::Structure.new(
+      class TransferData < Struct.new(
         :transfer_message,
         :reject_reason,
         :transfer_date,
         :accept_date,
         :reject_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] transfer_message
         #   The transfer message.
@@ -3080,10 +3304,12 @@ module Aws
       #         new_status: "ACTIVE", # accepts ACTIVE, INACTIVE
       #         new_auto_registration_status: "ENABLE", # accepts ENABLE, DISABLE
       #       }
-      class UpdateCACertificateRequest < Aws::Structure.new(
+      class UpdateCACertificateRequest < Struct.new(
         :certificate_id,
         :new_status,
         :new_auto_registration_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The CA certificate identifier.
@@ -3111,9 +3337,11 @@ module Aws
       #         certificate_id: "CertificateId", # required
       #         new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
       #       }
-      class UpdateCertificateRequest < Aws::Structure.new(
+      class UpdateCertificateRequest < Struct.new(
         :certificate_id,
         :new_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_id
         #   The ID of the certificate.
@@ -3148,12 +3376,14 @@ module Aws
       #         expected_version: 1,
       #         remove_thing_type: false,
       #       }
-      class UpdateThingRequest < Aws::Structure.new(
+      class UpdateThingRequest < Struct.new(
         :thing_name,
         :thing_type_name,
         :attribute_payload,
         :expected_version,
         :remove_thing_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing to update.

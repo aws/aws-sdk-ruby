@@ -14,10 +14,12 @@ module Aws
       # for any of the other cache behaviors for this distribution. These are
       # accounts that you want to allow to create signed URLs for private
       # content.
-      class ActiveTrustedSigners < Aws::Structure.new(
+      class ActiveTrustedSigners < Struct.new(
         :enabled,
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Each active trusted signer.
@@ -48,9 +50,11 @@ module Aws
       #         quantity: 1, # required
       #         items: ["string"],
       #       }
-      class Aliases < Aws::Structure.new(
+      class Aliases < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of CNAMEs, if any, for this distribution.
@@ -83,10 +87,12 @@ module Aws
       #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
       #         },
       #       }
-      class AllowedMethods < Aws::Structure.new(
+      class AllowedMethods < Struct.new(
         :quantity,
         :items,
         :cached_methods)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of HTTP methods that you want CloudFront to forward to
@@ -173,7 +179,7 @@ module Aws
       #         max_ttl: 1,
       #         compress: false,
       #       }
-      class CacheBehavior < Aws::Structure.new(
+      class CacheBehavior < Struct.new(
         :path_pattern,
         :target_origin_id,
         :forwarded_values,
@@ -185,6 +191,8 @@ module Aws
         :default_ttl,
         :max_ttl,
         :compress)
+
+        include Aws::Structure
 
         # @!attribute [rw] path_pattern
         #   The pattern (for example, images/\*.jpg) that specifies which
@@ -360,9 +368,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CacheBehaviors < Aws::Structure.new(
+      class CacheBehaviors < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of cache behaviors for this distribution.
@@ -389,9 +399,11 @@ module Aws
       #         quantity: 1, # required
       #         items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
       #       }
-      class CachedMethods < Aws::Structure.new(
+      class CachedMethods < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of HTTP methods for which you want CloudFront to cache
@@ -408,10 +420,12 @@ module Aws
       end
 
       # CloudFront origin access identity.
-      class CloudFrontOriginAccessIdentity < Aws::Structure.new(
+      class CloudFrontOriginAccessIdentity < Struct.new(
         :id,
         :s3_canonical_user_id,
         :cloud_front_origin_access_identity_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID for the origin access identity. For example: E74FTE3AJFJ256A.
@@ -437,9 +451,11 @@ module Aws
       #         caller_reference: "string", # required
       #         comment: "string", # required
       #       }
-      class CloudFrontOriginAccessIdentityConfig < Aws::Structure.new(
+      class CloudFrontOriginAccessIdentityConfig < Struct.new(
         :caller_reference,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] caller_reference
         #   A unique number that ensures the request can\'t be replayed. If the
@@ -464,13 +480,15 @@ module Aws
       end
 
       # The CloudFrontOriginAccessIdentityList type.
-      class CloudFrontOriginAccessIdentityList < Aws::Structure.new(
+      class CloudFrontOriginAccessIdentityList < Struct.new(
         :marker,
         :next_marker,
         :max_items,
         :is_truncated,
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   The value you provided for the Marker request parameter.
@@ -507,10 +525,12 @@ module Aws
       end
 
       # Summary of the information about a CloudFront origin access identity.
-      class CloudFrontOriginAccessIdentitySummary < Aws::Structure.new(
+      class CloudFrontOriginAccessIdentitySummary < Struct.new(
         :id,
         :s3_canonical_user_id,
         :comment)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID for the origin access identity. For example: E74FTE3AJFJ256A.
@@ -539,9 +559,11 @@ module Aws
       #         quantity: 1, # required
       #         items: ["string"],
       #       }
-      class CookieNames < Aws::Structure.new(
+      class CookieNames < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of whitelisted cookies for this cache behavior.
@@ -566,9 +588,11 @@ module Aws
       #           items: ["string"],
       #         },
       #       }
-      class CookiePreference < Aws::Structure.new(
+      class CookiePreference < Struct.new(
         :forward,
         :whitelisted_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] forward
         #   Use this element to specify whether you want CloudFront to forward
@@ -596,8 +620,10 @@ module Aws
       #           comment: "string", # required
       #         },
       #       }
-      class CreateCloudFrontOriginAccessIdentityRequest < Aws::Structure.new(
+      class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
         :cloud_front_origin_access_identity_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_origin_access_identity_config
         #   The origin access identity\'s configuration information.
@@ -606,10 +632,12 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class CreateCloudFrontOriginAccessIdentityResult < Aws::Structure.new(
+      class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
         :cloud_front_origin_access_identity,
         :location,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_origin_access_identity
         #   The origin access identity\'s information.
@@ -795,8 +823,10 @@ module Aws
       #           web_acl_id: "string",
       #         },
       #       }
-      class CreateDistributionRequest < Aws::Structure.new(
+      class CreateDistributionRequest < Struct.new(
         :distribution_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_config
         #   The distribution\'s configuration information.
@@ -805,10 +835,12 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class CreateDistributionResult < Aws::Structure.new(
+      class CreateDistributionResult < Struct.new(
         :distribution,
         :location,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution
         #   The distribution\'s information.
@@ -1004,8 +1036,10 @@ module Aws
       #           },
       #         },
       #       }
-      class CreateDistributionWithTagsRequest < Aws::Structure.new(
+      class CreateDistributionWithTagsRequest < Struct.new(
         :distribution_config_with_tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_config_with_tags
         #   The distribution\'s configuration information.
@@ -1014,10 +1048,12 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class CreateDistributionWithTagsResult < Aws::Structure.new(
+      class CreateDistributionWithTagsResult < Struct.new(
         :distribution,
         :location,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution
         #   The distribution\'s information.
@@ -1049,9 +1085,11 @@ module Aws
       #           caller_reference: "string", # required
       #         },
       #       }
-      class CreateInvalidationRequest < Aws::Structure.new(
+      class CreateInvalidationRequest < Struct.new(
         :distribution_id,
         :invalidation_batch)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_id
         #   The distribution\'s id.
@@ -1064,9 +1102,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class CreateInvalidationResult < Aws::Structure.new(
+      class CreateInvalidationResult < Struct.new(
         :location,
         :invalidation)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   The fully qualified URI of the distribution and invalidation batch
@@ -1109,8 +1149,10 @@ module Aws
       #           enabled: false, # required
       #         },
       #       }
-      class CreateStreamingDistributionRequest < Aws::Structure.new(
+      class CreateStreamingDistributionRequest < Struct.new(
         :streaming_distribution_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution_config
         #   The streaming distribution\'s configuration information.
@@ -1119,10 +1161,12 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class CreateStreamingDistributionResult < Aws::Structure.new(
+      class CreateStreamingDistributionResult < Struct.new(
         :streaming_distribution,
         :location,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution
         #   The streaming distribution\'s information.
@@ -1180,8 +1224,10 @@ module Aws
       #           },
       #         },
       #       }
-      class CreateStreamingDistributionWithTagsRequest < Aws::Structure.new(
+      class CreateStreamingDistributionWithTagsRequest < Struct.new(
         :streaming_distribution_config_with_tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution_config_with_tags
         #   The streaming distribution\'s configuration information.
@@ -1190,10 +1236,12 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class CreateStreamingDistributionWithTagsResult < Aws::Structure.new(
+      class CreateStreamingDistributionWithTagsResult < Struct.new(
         :streaming_distribution,
         :location,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution
         #   The streaming distribution\'s information.
@@ -1232,11 +1280,13 @@ module Aws
       #         response_code: "string",
       #         error_caching_min_ttl: 1,
       #       }
-      class CustomErrorResponse < Aws::Structure.new(
+      class CustomErrorResponse < Struct.new(
         :error_code,
         :response_page_path,
         :response_code,
         :error_caching_min_ttl)
+
+        include Aws::Structure
 
         # @!attribute [rw] error_code
         #   The 4xx or 5xx HTTP status code that you want to customize. For a
@@ -1285,9 +1335,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CustomErrorResponses < Aws::Structure.new(
+      class CustomErrorResponses < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of custom error responses for this distribution.
@@ -1314,9 +1366,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CustomHeaders < Aws::Structure.new(
+      class CustomHeaders < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of custom headers for this origin.
@@ -1341,11 +1395,13 @@ module Aws
       #           items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
       #         },
       #       }
-      class CustomOriginConfig < Aws::Structure.new(
+      class CustomOriginConfig < Struct.new(
         :http_port,
         :https_port,
         :origin_protocol_policy,
         :origin_ssl_protocols)
+
+        include Aws::Structure
 
         # @!attribute [rw] http_port
         #   The HTTP port the custom origin listens on.
@@ -1413,7 +1469,7 @@ module Aws
       #         max_ttl: 1,
       #         compress: false,
       #       }
-      class DefaultCacheBehavior < Aws::Structure.new(
+      class DefaultCacheBehavior < Struct.new(
         :target_origin_id,
         :forwarded_values,
         :trusted_signers,
@@ -1424,6 +1480,8 @@ module Aws
         :default_ttl,
         :max_ttl,
         :compress)
+
+        include Aws::Structure
 
         # @!attribute [rw] target_origin_id
         #   The value of ID for the origin that you want CloudFront to route
@@ -1546,9 +1604,11 @@ module Aws
       #         id: "string", # required
       #         if_match: "string",
       #       }
-      class DeleteCloudFrontOriginAccessIdentityRequest < Aws::Structure.new(
+      class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
         :id,
         :if_match)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The origin access identity\'s id.
@@ -1569,9 +1629,11 @@ module Aws
       #         id: "string", # required
       #         if_match: "string",
       #       }
-      class DeleteDistributionRequest < Aws::Structure.new(
+      class DeleteDistributionRequest < Struct.new(
         :id,
         :if_match)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The distribution id.
@@ -1592,9 +1654,11 @@ module Aws
       #         id: "string", # required
       #         if_match: "string",
       #       }
-      class DeleteStreamingDistributionRequest < Aws::Structure.new(
+      class DeleteStreamingDistributionRequest < Struct.new(
         :id,
         :if_match)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The distribution id.
@@ -1608,7 +1672,7 @@ module Aws
       end
 
       # A distribution.
-      class Distribution < Aws::Structure.new(
+      class Distribution < Struct.new(
         :id,
         :arn,
         :status,
@@ -1617,6 +1681,8 @@ module Aws
         :domain_name,
         :active_trusted_signers,
         :distribution_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the distribution. For example: EDFDVBD632BHDS5.
@@ -1832,7 +1898,7 @@ module Aws
       #         },
       #         web_acl_id: "string",
       #       }
-      class DistributionConfig < Aws::Structure.new(
+      class DistributionConfig < Struct.new(
         :caller_reference,
         :aliases,
         :default_root_object,
@@ -1847,6 +1913,8 @@ module Aws
         :viewer_certificate,
         :restrictions,
         :web_acl_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] caller_reference
         #   A unique number that ensures the request can\'t be replayed. If the
@@ -2116,9 +2184,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class DistributionConfigWithTags < Aws::Structure.new(
+      class DistributionConfigWithTags < Struct.new(
         :distribution_config,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_config
         #   A distribution Configuration.
@@ -2131,13 +2201,15 @@ module Aws
       end
 
       # A distribution list.
-      class DistributionList < Aws::Structure.new(
+      class DistributionList < Struct.new(
         :marker,
         :next_marker,
         :max_items,
         :is_truncated,
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   The value you provided for the Marker request parameter.
@@ -2173,7 +2245,7 @@ module Aws
       end
 
       # A summary of the information for an Amazon CloudFront distribution.
-      class DistributionSummary < Aws::Structure.new(
+      class DistributionSummary < Struct.new(
         :id,
         :arn,
         :status,
@@ -2190,6 +2262,8 @@ module Aws
         :viewer_certificate,
         :restrictions,
         :web_acl_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the distribution. For example: EDFDVBD632BHDS5.
@@ -2294,11 +2368,13 @@ module Aws
       #           items: ["string"],
       #         },
       #       }
-      class ForwardedValues < Aws::Structure.new(
+      class ForwardedValues < Struct.new(
         :query_string,
         :cookies,
         :headers,
         :query_string_cache_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] query_string
         #   Indicates whether you want CloudFront to forward query strings to
@@ -2353,10 +2429,12 @@ module Aws
       #         quantity: 1, # required
       #         items: ["string"],
       #       }
-      class GeoRestriction < Aws::Structure.new(
+      class GeoRestriction < Struct.new(
         :restriction_type,
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] restriction_type
         #   The method that you want to use to restrict distribution of your
@@ -2397,8 +2475,10 @@ module Aws
       #       {
       #         id: "string", # required
       #       }
-      class GetCloudFrontOriginAccessIdentityConfigRequest < Aws::Structure.new(
+      class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identity\'s id.
@@ -2407,9 +2487,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class GetCloudFrontOriginAccessIdentityConfigResult < Aws::Structure.new(
+      class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
         :cloud_front_origin_access_identity_config,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_origin_access_identity_config
         #   The origin access identity\'s configuration information.
@@ -2429,8 +2511,10 @@ module Aws
       #       {
       #         id: "string", # required
       #       }
-      class GetCloudFrontOriginAccessIdentityRequest < Aws::Structure.new(
+      class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identity\'s id.
@@ -2439,9 +2523,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class GetCloudFrontOriginAccessIdentityResult < Aws::Structure.new(
+      class GetCloudFrontOriginAccessIdentityResult < Struct.new(
         :cloud_front_origin_access_identity,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_origin_access_identity
         #   The origin access identity\'s information.
@@ -2461,8 +2547,10 @@ module Aws
       #       {
       #         id: "string", # required
       #       }
-      class GetDistributionConfigRequest < Aws::Structure.new(
+      class GetDistributionConfigRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The distribution\'s id.
@@ -2471,9 +2559,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class GetDistributionConfigResult < Aws::Structure.new(
+      class GetDistributionConfigResult < Struct.new(
         :distribution_config,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_config
         #   The distribution\'s configuration information.
@@ -2493,8 +2583,10 @@ module Aws
       #       {
       #         id: "string", # required
       #       }
-      class GetDistributionRequest < Aws::Structure.new(
+      class GetDistributionRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The distribution\'s id.
@@ -2503,9 +2595,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class GetDistributionResult < Aws::Structure.new(
+      class GetDistributionResult < Struct.new(
         :distribution,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution
         #   The distribution\'s information.
@@ -2526,9 +2620,11 @@ module Aws
       #         distribution_id: "string", # required
       #         id: "string", # required
       #       }
-      class GetInvalidationRequest < Aws::Structure.new(
+      class GetInvalidationRequest < Struct.new(
         :distribution_id,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_id
         #   The distribution\'s id.
@@ -2541,8 +2637,10 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class GetInvalidationResult < Aws::Structure.new(
+      class GetInvalidationResult < Struct.new(
         :invalidation)
+
+        include Aws::Structure
 
         # @!attribute [rw] invalidation
         #   The invalidation\'s information.
@@ -2557,8 +2655,10 @@ module Aws
       #       {
       #         id: "string", # required
       #       }
-      class GetStreamingDistributionConfigRequest < Aws::Structure.new(
+      class GetStreamingDistributionConfigRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The streaming distribution\'s id.
@@ -2567,9 +2667,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class GetStreamingDistributionConfigResult < Aws::Structure.new(
+      class GetStreamingDistributionConfigResult < Struct.new(
         :streaming_distribution_config,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution_config
         #   The streaming distribution\'s configuration information.
@@ -2589,8 +2691,10 @@ module Aws
       #       {
       #         id: "string", # required
       #       }
-      class GetStreamingDistributionRequest < Aws::Structure.new(
+      class GetStreamingDistributionRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The streaming distribution\'s id.
@@ -2599,9 +2703,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class GetStreamingDistributionResult < Aws::Structure.new(
+      class GetStreamingDistributionResult < Struct.new(
         :streaming_distribution,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution
         #   The streaming distribution\'s information.
@@ -2630,9 +2736,11 @@ module Aws
       #         quantity: 1, # required
       #         items: ["string"],
       #       }
-      class Headers < Aws::Structure.new(
+      class Headers < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of different headers that you want CloudFront to forward
@@ -2653,11 +2761,13 @@ module Aws
       end
 
       # An invalidation.
-      class Invalidation < Aws::Structure.new(
+      class Invalidation < Struct.new(
         :id,
         :status,
         :create_time,
         :invalidation_batch)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the invalidation request. For example:
@@ -2690,9 +2800,11 @@ module Aws
       #         },
       #         caller_reference: "string", # required
       #       }
-      class InvalidationBatch < Aws::Structure.new(
+      class InvalidationBatch < Struct.new(
         :paths,
         :caller_reference)
+
+        include Aws::Structure
 
         # @!attribute [rw] paths
         #   The path of the object to invalidate. The path is relative to the
@@ -2720,13 +2832,15 @@ module Aws
       end
 
       # An invalidation list.
-      class InvalidationList < Aws::Structure.new(
+      class InvalidationList < Struct.new(
         :marker,
         :next_marker,
         :max_items,
         :is_truncated,
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   The value you provided for the Marker request parameter.
@@ -2762,10 +2876,12 @@ module Aws
       end
 
       # Summary of an invalidation request.
-      class InvalidationSummary < Aws::Structure.new(
+      class InvalidationSummary < Struct.new(
         :id,
         :create_time,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique ID for an invalidation request.
@@ -2782,9 +2898,11 @@ module Aws
 
       # A complex type that lists the active CloudFront key pairs, if any,
       # that are associated with AwsAccountNumber.
-      class KeyPairIds < Aws::Structure.new(
+      class KeyPairIds < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of active CloudFront key pairs for AwsAccountNumber.
@@ -2805,9 +2923,11 @@ module Aws
       #         marker: "string",
       #         max_items: 1,
       #       }
-      class ListCloudFrontOriginAccessIdentitiesRequest < Aws::Structure.new(
+      class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Use this when paginating results to indicate where to begin in your
@@ -2826,8 +2946,10 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class ListCloudFrontOriginAccessIdentitiesResult < Aws::Structure.new(
+      class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
         :cloud_front_origin_access_identity_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_origin_access_identity_list
         #   The CloudFrontOriginAccessIdentityList type.
@@ -2845,10 +2967,12 @@ module Aws
       #         max_items: 1,
       #         web_acl_id: "string", # required
       #       }
-      class ListDistributionsByWebACLIdRequest < Aws::Structure.new(
+      class ListDistributionsByWebACLIdRequest < Struct.new(
         :marker,
         :max_items,
         :web_acl_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Use Marker and MaxItems to control pagination of results. If you
@@ -2876,8 +3000,10 @@ module Aws
 
       # The response to a request to list the distributions that are
       # associated with a specified AWS WAF web ACL.
-      class ListDistributionsByWebACLIdResult < Aws::Structure.new(
+      class ListDistributionsByWebACLIdResult < Struct.new(
         :distribution_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_list
         #   The DistributionList type.
@@ -2893,9 +3019,11 @@ module Aws
       #         marker: "string",
       #         max_items: 1,
       #       }
-      class ListDistributionsRequest < Aws::Structure.new(
+      class ListDistributionsRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Use Marker and MaxItems to control pagination of results. If you
@@ -2915,8 +3043,10 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class ListDistributionsResult < Aws::Structure.new(
+      class ListDistributionsResult < Struct.new(
         :distribution_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_list
         #   The DistributionList type.
@@ -2933,10 +3063,12 @@ module Aws
       #         marker: "string",
       #         max_items: 1,
       #       }
-      class ListInvalidationsRequest < Aws::Structure.new(
+      class ListInvalidationsRequest < Struct.new(
         :distribution_id,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_id
         #   The distribution\'s id.
@@ -2961,8 +3093,10 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class ListInvalidationsResult < Aws::Structure.new(
+      class ListInvalidationsResult < Struct.new(
         :invalidation_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] invalidation_list
         #   Information about invalidation batches.
@@ -2978,9 +3112,11 @@ module Aws
       #         marker: "string",
       #         max_items: 1,
       #       }
-      class ListStreamingDistributionsRequest < Aws::Structure.new(
+      class ListStreamingDistributionsRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Use this when paginating results to indicate where to begin in your
@@ -2999,8 +3135,10 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class ListStreamingDistributionsResult < Aws::Structure.new(
+      class ListStreamingDistributionsResult < Struct.new(
         :streaming_distribution_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution_list
         #   The StreamingDistributionList type.
@@ -3015,8 +3153,10 @@ module Aws
       #       {
       #         resource: "ResourceARN", # required
       #       }
-      class ListTagsForResourceRequest < Aws::Structure.new(
+      class ListTagsForResourceRequest < Struct.new(
         :resource)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   An ARN of a CloudFront resource.
@@ -3025,8 +3165,10 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class ListTagsForResourceResult < Aws::Structure.new(
+      class ListTagsForResourceResult < Struct.new(
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   A complex type that contains zero or more Tag elements.
@@ -3045,11 +3187,13 @@ module Aws
       #         bucket: "string", # required
       #         prefix: "string", # required
       #       }
-      class LoggingConfig < Aws::Structure.new(
+      class LoggingConfig < Struct.new(
         :enabled,
         :include_cookies,
         :bucket,
         :prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Specifies whether you want CloudFront to save access logs to an
@@ -3117,13 +3261,15 @@ module Aws
       #           },
       #         },
       #       }
-      class Origin < Aws::Structure.new(
+      class Origin < Struct.new(
         :id,
         :domain_name,
         :origin_path,
         :custom_headers,
         :s3_origin_config,
         :custom_origin_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   A unique identifier for the origin. The value of Id must be unique
@@ -3176,9 +3322,11 @@ module Aws
       #         header_name: "string", # required
       #         header_value: "string", # required
       #       }
-      class OriginCustomHeader < Aws::Structure.new(
+      class OriginCustomHeader < Struct.new(
         :header_name,
         :header_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] header_name
         #   The header\'s name.
@@ -3199,9 +3347,11 @@ module Aws
       #         quantity: 1, # required
       #         items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
       #       }
-      class OriginSslProtocols < Aws::Structure.new(
+      class OriginSslProtocols < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of SSL/TLS protocols that you want to allow CloudFront to
@@ -3252,9 +3402,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class Origins < Aws::Structure.new(
+      class Origins < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of origins for this distribution.
@@ -3275,9 +3427,11 @@ module Aws
       #         quantity: 1, # required
       #         items: ["string"],
       #       }
-      class Paths < Aws::Structure.new(
+      class Paths < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of objects that you want to invalidate.
@@ -3297,9 +3451,11 @@ module Aws
       #         quantity: 1, # required
       #         items: ["string"],
       #       }
-      class QueryStringCacheKeys < Aws::Structure.new(
+      class QueryStringCacheKeys < Struct.new(
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] quantity
         #   The number of whitelisted query string parameters for this cache
@@ -3326,8 +3482,10 @@ module Aws
       #           items: ["string"],
       #         },
       #       }
-      class Restrictions < Aws::Structure.new(
+      class Restrictions < Struct.new(
         :geo_restriction)
+
+        include Aws::Structure
 
         # @!attribute [rw] geo_restriction
         #   A complex type that controls the countries in which your content is
@@ -3351,9 +3509,11 @@ module Aws
       #         domain_name: "string", # required
       #         origin_access_identity: "string", # required
       #       }
-      class S3Origin < Aws::Structure.new(
+      class S3Origin < Struct.new(
         :domain_name,
         :origin_access_identity)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The DNS name of the S3 origin.
@@ -3374,8 +3534,10 @@ module Aws
       #       {
       #         origin_access_identity: "string", # required
       #       }
-      class S3OriginConfig < Aws::Structure.new(
+      class S3OriginConfig < Struct.new(
         :origin_access_identity)
+
+        include Aws::Structure
 
         # @!attribute [rw] origin_access_identity
         #   The CloudFront origin access identity to associate with the origin.
@@ -3398,9 +3560,11 @@ module Aws
       # A complex type that lists the AWS accounts that were included in the
       # TrustedSigners complex type, as well as their active CloudFront key
       # pair IDs, if any.
-      class Signer < Aws::Structure.new(
+      class Signer < Struct.new(
         :aws_account_number,
         :key_pair_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] aws_account_number
         #   Specifies an AWS account that can create signed URLs. Values: self,
@@ -3417,7 +3581,7 @@ module Aws
       end
 
       # A streaming distribution.
-      class StreamingDistribution < Aws::Structure.new(
+      class StreamingDistribution < Struct.new(
         :id,
         :arn,
         :status,
@@ -3425,6 +3589,8 @@ module Aws
         :domain_name,
         :active_trusted_signers,
         :streaming_distribution_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the streaming distribution. For example:
@@ -3500,7 +3666,7 @@ module Aws
       #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
       #         enabled: false, # required
       #       }
-      class StreamingDistributionConfig < Aws::Structure.new(
+      class StreamingDistributionConfig < Struct.new(
         :caller_reference,
         :s3_origin,
         :aliases,
@@ -3509,6 +3675,8 @@ module Aws
         :trusted_signers,
         :price_class,
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] caller_reference
         #   A unique number that ensures the request can\'t be replayed. If the
@@ -3612,9 +3780,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class StreamingDistributionConfigWithTags < Aws::Structure.new(
+      class StreamingDistributionConfigWithTags < Struct.new(
         :streaming_distribution_config,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution_config
         #   A streaming distribution Configuration.
@@ -3627,13 +3797,15 @@ module Aws
       end
 
       # A streaming distribution list.
-      class StreamingDistributionList < Aws::Structure.new(
+      class StreamingDistributionList < Struct.new(
         :marker,
         :next_marker,
         :max_items,
         :is_truncated,
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   The value you provided for the Marker request parameter.
@@ -3671,7 +3843,7 @@ module Aws
 
       # A summary of the information for an Amazon CloudFront streaming
       # distribution.
-      class StreamingDistributionSummary < Aws::Structure.new(
+      class StreamingDistributionSummary < Struct.new(
         :id,
         :arn,
         :status,
@@ -3683,6 +3855,8 @@ module Aws
         :comment,
         :price_class,
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the distribution. For example: EDFDVBD632BHDS5.
@@ -3761,10 +3935,12 @@ module Aws
       #         bucket: "string", # required
       #         prefix: "string", # required
       #       }
-      class StreamingLoggingConfig < Aws::Structure.new(
+      class StreamingLoggingConfig < Struct.new(
         :enabled,
         :bucket,
         :prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Specifies whether you want CloudFront to save access logs to an
@@ -3799,9 +3975,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A string that contains Tag key. The string length should be between
@@ -3824,8 +4002,10 @@ module Aws
       #       {
       #         items: ["TagKey"],
       #       }
-      class TagKeys < Aws::Structure.new(
+      class TagKeys < Struct.new(
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] items
         #   A complex type that contains Tag key elements
@@ -3848,9 +4028,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class TagResourceRequest < Aws::Structure.new(
+      class TagResourceRequest < Struct.new(
         :resource,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   An ARN of a CloudFront resource.
@@ -3874,8 +4056,10 @@ module Aws
       #           },
       #         ],
       #       }
-      class Tags < Aws::Structure.new(
+      class Tags < Struct.new(
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] items
         #   A complex type that contains Tag elements
@@ -3904,10 +4088,12 @@ module Aws
       #         quantity: 1, # required
       #         items: ["string"],
       #       }
-      class TrustedSigners < Aws::Structure.new(
+      class TrustedSigners < Struct.new(
         :enabled,
         :quantity,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] enabled
         #   Specifies whether you want to require end users to use signed URLs
@@ -3935,9 +4121,11 @@ module Aws
       #           items: ["TagKey"],
       #         },
       #       }
-      class UntagResourceRequest < Aws::Structure.new(
+      class UntagResourceRequest < Struct.new(
         :resource,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource
         #   An ARN of a CloudFront resource.
@@ -3961,10 +4149,12 @@ module Aws
       #         id: "string", # required
       #         if_match: "string",
       #       }
-      class UpdateCloudFrontOriginAccessIdentityRequest < Aws::Structure.new(
+      class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
         :cloud_front_origin_access_identity_config,
         :id,
         :if_match)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_origin_access_identity_config
         #   The identity\'s configuration information.
@@ -3982,9 +4172,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class UpdateCloudFrontOriginAccessIdentityResult < Aws::Structure.new(
+      class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
         :cloud_front_origin_access_identity,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_origin_access_identity
         #   The origin access identity\'s information.
@@ -4167,10 +4359,12 @@ module Aws
       #         id: "string", # required
       #         if_match: "string",
       #       }
-      class UpdateDistributionRequest < Aws::Structure.new(
+      class UpdateDistributionRequest < Struct.new(
         :distribution_config,
         :id,
         :if_match)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution_config
         #   The distribution\'s configuration information.
@@ -4188,9 +4382,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class UpdateDistributionResult < Aws::Structure.new(
+      class UpdateDistributionResult < Struct.new(
         :distribution,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] distribution
         #   The distribution\'s information.
@@ -4235,10 +4431,12 @@ module Aws
       #         id: "string", # required
       #         if_match: "string",
       #       }
-      class UpdateStreamingDistributionRequest < Aws::Structure.new(
+      class UpdateStreamingDistributionRequest < Struct.new(
         :streaming_distribution_config,
         :id,
         :if_match)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution_config
         #   The streaming distribution\'s configuration information.
@@ -4257,9 +4455,11 @@ module Aws
       end
 
       # The returned result of the corresponding request.
-      class UpdateStreamingDistributionResult < Aws::Structure.new(
+      class UpdateStreamingDistributionResult < Struct.new(
         :streaming_distribution,
         :etag)
+
+        include Aws::Structure
 
         # @!attribute [rw] streaming_distribution
         #   The streaming distribution\'s information.
@@ -4286,7 +4486,7 @@ module Aws
       #         certificate: "string",
       #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
       #       }
-      class ViewerCertificate < Aws::Structure.new(
+      class ViewerCertificate < Struct.new(
         :cloud_front_default_certificate,
         :iam_certificate_id,
         :acm_certificate_arn,
@@ -4294,6 +4494,8 @@ module Aws
         :minimum_protocol_version,
         :certificate,
         :certificate_source)
+
+        include Aws::Structure
 
         # @!attribute [rw] cloud_front_default_certificate
         #   If you want viewers to use HTTPS to request your objects and you\'re

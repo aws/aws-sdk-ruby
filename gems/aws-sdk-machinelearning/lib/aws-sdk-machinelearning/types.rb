@@ -22,10 +22,12 @@ module Aws
       #         resource_id: "EntityId", # required
       #         resource_type: "BatchPrediction", # required, accepts BatchPrediction, DataSource, Evaluation, MLModel
       #       }
-      class AddTagsInput < Aws::Structure.new(
+      class AddTagsInput < Struct.new(
         :tags,
         :resource_id,
         :resource_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   The key-value pairs to use to create tags. If you specify a key
@@ -44,9 +46,11 @@ module Aws
       end
 
       # Amazon ML returns the following elements.
-      class AddTagsOutput < Aws::Structure.new(
+      class AddTagsOutput < Struct.new(
         :resource_id,
         :resource_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The ID of the ML object that was tagged.
@@ -62,7 +66,7 @@ module Aws
       #
       # The content consists of the detailed metadata, the status, and the
       # data file information of a `Batch Prediction`.
-      class BatchPrediction < Aws::Structure.new(
+      class BatchPrediction < Struct.new(
         :batch_prediction_id,
         :ml_model_id,
         :batch_prediction_data_source_id,
@@ -79,6 +83,8 @@ module Aws
         :started_at,
         :total_record_count,
         :invalid_record_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   The ID assigned to the `BatchPrediction` at creation. This value
@@ -179,12 +185,14 @@ module Aws
       #         batch_prediction_data_source_id: "EntityId", # required
       #         output_uri: "S3Url", # required
       #       }
-      class CreateBatchPredictionInput < Aws::Structure.new(
+      class CreateBatchPredictionInput < Struct.new(
         :batch_prediction_id,
         :batch_prediction_name,
         :ml_model_id,
         :batch_prediction_data_source_id,
         :output_uri)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   A user-supplied ID that uniquely identifies the `BatchPrediction`.
@@ -228,8 +236,10 @@ module Aws
       # The `CreateBatchPrediction` operation is asynchronous. You can poll
       # for status updates by using the `>GetBatchPrediction` operation and
       # checking the `Status` parameter of the result.
-      class CreateBatchPredictionOutput < Aws::Structure.new(
+      class CreateBatchPredictionOutput < Struct.new(
         :batch_prediction_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   A user-supplied ID that uniquely identifies the `BatchPrediction`.
@@ -267,12 +277,14 @@ module Aws
       #         role_arn: "RoleARN", # required
       #         compute_statistics: false,
       #       }
-      class CreateDataSourceFromRDSInput < Aws::Structure.new(
+      class CreateDataSourceFromRDSInput < Struct.new(
         :data_source_id,
         :data_source_name,
         :rds_data,
         :role_arn,
         :compute_statistics)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied ID that uniquely identifies the `DataSource`.
@@ -360,8 +372,10 @@ module Aws
       # `Status` shows up as `FAILED`. You can also check the progress of the
       # copy operation by going to the `DataPipeline` console and looking up
       # the pipeline using the `pipelineId ` from the describe call.
-      class CreateDataSourceFromRDSOutput < Aws::Structure.new(
+      class CreateDataSourceFromRDSOutput < Struct.new(
         :data_source_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied ID that uniquely identifies the datasource. This
@@ -395,12 +409,14 @@ module Aws
       #         role_arn: "RoleARN", # required
       #         compute_statistics: false,
       #       }
-      class CreateDataSourceFromRedshiftInput < Aws::Structure.new(
+      class CreateDataSourceFromRedshiftInput < Struct.new(
         :data_source_id,
         :data_source_name,
         :data_spec,
         :role_arn,
         :compute_statistics)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied ID that uniquely identifies the `DataSource`.
@@ -469,8 +485,10 @@ module Aws
       # The `CreateDataSourceFromRedshift` operation is asynchronous. You can
       # poll for updates by using the `GetBatchPrediction` operation and
       # checking the `Status` parameter.
-      class CreateDataSourceFromRedshiftOutput < Aws::Structure.new(
+      class CreateDataSourceFromRedshiftOutput < Struct.new(
         :data_source_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied ID that uniquely identifies the datasource. This
@@ -494,11 +512,13 @@ module Aws
       #         },
       #         compute_statistics: false,
       #       }
-      class CreateDataSourceFromS3Input < Aws::Structure.new(
+      class CreateDataSourceFromS3Input < Struct.new(
         :data_source_id,
         :data_source_name,
         :data_spec,
         :compute_statistics)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied identifier that uniquely identifies the
@@ -542,8 +562,10 @@ module Aws
       # The `CreateDataSourceFromS3` operation is asynchronous. You can poll
       # for updates by using the `GetBatchPrediction` operation and checking
       # the `Status` parameter.
-      class CreateDataSourceFromS3Output < Aws::Structure.new(
+      class CreateDataSourceFromS3Output < Struct.new(
         :data_source_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied ID that uniquely identifies the `DataSource`. This
@@ -562,11 +584,13 @@ module Aws
       #         ml_model_id: "EntityId", # required
       #         evaluation_data_source_id: "EntityId", # required
       #       }
-      class CreateEvaluationInput < Aws::Structure.new(
+      class CreateEvaluationInput < Struct.new(
         :evaluation_id,
         :evaluation_name,
         :ml_model_id,
         :evaluation_data_source_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   A user-supplied ID that uniquely identifies the `Evaluation`.
@@ -596,8 +620,10 @@ module Aws
       # `CreateEvaluation` operation is asynchronous. You can poll for status
       # updates by using the `GetEvcaluation` operation and checking the
       # `Status` parameter.
-      class CreateEvaluationOutput < Aws::Structure.new(
+      class CreateEvaluationOutput < Struct.new(
         :evaluation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   The user-supplied ID that uniquely identifies the `Evaluation`. This
@@ -621,7 +647,7 @@ module Aws
       #         recipe: "Recipe",
       #         recipe_uri: "S3Url",
       #       }
-      class CreateMLModelInput < Aws::Structure.new(
+      class CreateMLModelInput < Struct.new(
         :ml_model_id,
         :ml_model_name,
         :ml_model_type,
@@ -629,6 +655,8 @@ module Aws
         :training_data_source_id,
         :recipe,
         :recipe_uri)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   A user-supplied ID that uniquely identifies the `MLModel`.
@@ -727,8 +755,10 @@ module Aws
       # The `CreateMLModel` operation is asynchronous. You can poll for status
       # updates by using the `GetMLModel` operation and checking the `Status`
       # parameter.
-      class CreateMLModelOutput < Aws::Structure.new(
+      class CreateMLModelOutput < Struct.new(
         :ml_model_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   A user-supplied ID that uniquely identifies the `MLModel`. This
@@ -744,8 +774,10 @@ module Aws
       #       {
       #         ml_model_id: "EntityId", # required
       #       }
-      class CreateRealtimeEndpointInput < Aws::Structure.new(
+      class CreateRealtimeEndpointInput < Struct.new(
         :ml_model_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   The ID assigned to the `MLModel` during creation.
@@ -763,9 +795,11 @@ module Aws
       # `MLModel`.
       #
       #  </note>
-      class CreateRealtimeEndpointOutput < Aws::Structure.new(
+      class CreateRealtimeEndpointOutput < Struct.new(
         :ml_model_id,
         :realtime_endpoint_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   A user-supplied ID that uniquely identifies the `MLModel`. This
@@ -783,7 +817,7 @@ module Aws
       #
       # The content consists of the detailed metadata and data file
       # information and the current status of the `DataSource`.
-      class DataSource < Aws::Structure.new(
+      class DataSource < Struct.new(
         :data_source_id,
         :data_location_s3,
         :data_rearrangement,
@@ -802,6 +836,8 @@ module Aws
         :compute_time,
         :finished_at,
         :started_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   The ID that is assigned to the `DataSource` during creation.
@@ -906,8 +942,10 @@ module Aws
       #       {
       #         batch_prediction_id: "EntityId", # required
       #       }
-      class DeleteBatchPredictionInput < Aws::Structure.new(
+      class DeleteBatchPredictionInput < Struct.new(
         :batch_prediction_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   A user-supplied ID that uniquely identifies the `BatchPrediction`.
@@ -920,8 +958,10 @@ module Aws
       # You can use the `GetBatchPrediction` operation and check the value of
       # the `Status` parameter to see whether a `BatchPrediction` is marked as
       # `DELETED`.
-      class DeleteBatchPredictionOutput < Aws::Structure.new(
+      class DeleteBatchPredictionOutput < Struct.new(
         :batch_prediction_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   A user-supplied ID that uniquely identifies the `BatchPrediction`.
@@ -937,8 +977,10 @@ module Aws
       #       {
       #         data_source_id: "EntityId", # required
       #       }
-      class DeleteDataSourceInput < Aws::Structure.new(
+      class DeleteDataSourceInput < Struct.new(
         :data_source_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied ID that uniquely identifies the `DataSource`.
@@ -947,8 +989,10 @@ module Aws
       end
 
       # Represents the output of a `DeleteDataSource` operation.
-      class DeleteDataSourceOutput < Aws::Structure.new(
+      class DeleteDataSourceOutput < Struct.new(
         :data_source_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   A user-supplied ID that uniquely identifies the `DataSource`. This
@@ -964,8 +1008,10 @@ module Aws
       #       {
       #         evaluation_id: "EntityId", # required
       #       }
-      class DeleteEvaluationInput < Aws::Structure.new(
+      class DeleteEvaluationInput < Struct.new(
         :evaluation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   A user-supplied ID that uniquely identifies the `Evaluation` to
@@ -981,8 +1027,10 @@ module Aws
       # You can use the `GetEvaluation` operation and check the value of the
       # `Status` parameter to see whether an `Evaluation` is marked as
       # `DELETED`.
-      class DeleteEvaluationOutput < Aws::Structure.new(
+      class DeleteEvaluationOutput < Struct.new(
         :evaluation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   A user-supplied ID that uniquely identifies the `Evaluation`. This
@@ -998,8 +1046,10 @@ module Aws
       #       {
       #         ml_model_id: "EntityId", # required
       #       }
-      class DeleteMLModelInput < Aws::Structure.new(
+      class DeleteMLModelInput < Struct.new(
         :ml_model_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   A user-supplied ID that uniquely identifies the `MLModel`.
@@ -1011,8 +1061,10 @@ module Aws
       #
       # You can use the `GetMLModel` operation and check the value of the
       # `Status` parameter to see whether an `MLModel` is marked as `DELETED`.
-      class DeleteMLModelOutput < Aws::Structure.new(
+      class DeleteMLModelOutput < Struct.new(
         :ml_model_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   A user-supplied ID that uniquely identifies the `MLModel`. This
@@ -1028,8 +1080,10 @@ module Aws
       #       {
       #         ml_model_id: "EntityId", # required
       #       }
-      class DeleteRealtimeEndpointInput < Aws::Structure.new(
+      class DeleteRealtimeEndpointInput < Struct.new(
         :ml_model_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   The ID assigned to the `MLModel` during creation.
@@ -1041,9 +1095,11 @@ module Aws
       #
       # The result contains the `MLModelId` and the endpoint information for
       # the `MLModel`.
-      class DeleteRealtimeEndpointOutput < Aws::Structure.new(
+      class DeleteRealtimeEndpointOutput < Struct.new(
         :ml_model_id,
         :realtime_endpoint_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   A user-supplied ID that uniquely identifies the `MLModel`. This
@@ -1065,10 +1121,12 @@ module Aws
       #         resource_id: "EntityId", # required
       #         resource_type: "BatchPrediction", # required, accepts BatchPrediction, DataSource, Evaluation, MLModel
       #       }
-      class DeleteTagsInput < Aws::Structure.new(
+      class DeleteTagsInput < Struct.new(
         :tag_keys,
         :resource_id,
         :resource_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_keys
         #   One or more tags to delete.
@@ -1085,9 +1143,11 @@ module Aws
       end
 
       # Amazon ML returns the following elements.
-      class DeleteTagsOutput < Aws::Structure.new(
+      class DeleteTagsOutput < Struct.new(
         :resource_id,
         :resource_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The ID of the ML object from which tags were deleted.
@@ -1115,7 +1175,7 @@ module Aws
       #         next_token: "StringType",
       #         limit: 1,
       #       }
-      class DescribeBatchPredictionsInput < Aws::Structure.new(
+      class DescribeBatchPredictionsInput < Struct.new(
         :filter_variable,
         :eq,
         :gt,
@@ -1127,6 +1187,8 @@ module Aws
         :sort_order,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_variable
         #   Use one of the following variables to filter a list of
@@ -1224,9 +1286,11 @@ module Aws
 
       # Represents the output of a `DescribeBatchPredictions` operation. The
       # content is essentially a list of `BatchPrediction`s.
-      class DescribeBatchPredictionsOutput < Aws::Structure.new(
+      class DescribeBatchPredictionsOutput < Struct.new(
         :results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] results
         #   A list of `BatchPrediction` objects that meet the search criteria.
@@ -1255,7 +1319,7 @@ module Aws
       #         next_token: "StringType",
       #         limit: 1,
       #       }
-      class DescribeDataSourcesInput < Aws::Structure.new(
+      class DescribeDataSourcesInput < Struct.new(
         :filter_variable,
         :eq,
         :gt,
@@ -1267,6 +1331,8 @@ module Aws
         :sort_order,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_variable
         #   Use one of the following variables to filter a list of
@@ -1357,9 +1423,11 @@ module Aws
 
       # Represents the query results from a DescribeDataSources operation. The
       # content is essentially a list of `DataSource`.
-      class DescribeDataSourcesOutput < Aws::Structure.new(
+      class DescribeDataSourcesOutput < Struct.new(
         :results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] results
         #   A list of `DataSource` that meet the search criteria.
@@ -1388,7 +1456,7 @@ module Aws
       #         next_token: "StringType",
       #         limit: 1,
       #       }
-      class DescribeEvaluationsInput < Aws::Structure.new(
+      class DescribeEvaluationsInput < Struct.new(
         :filter_variable,
         :eq,
         :gt,
@@ -1400,6 +1468,8 @@ module Aws
         :sort_order,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_variable
         #   Use one of the following variable to filter a list of `Evaluation`
@@ -1494,9 +1564,11 @@ module Aws
 
       # Represents the query results from a `DescribeEvaluations` operation.
       # The content is essentially a list of `Evaluation`.
-      class DescribeEvaluationsOutput < Aws::Structure.new(
+      class DescribeEvaluationsOutput < Struct.new(
         :results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] results
         #   A list of `Evaluation` that meet the search criteria.
@@ -1525,7 +1597,7 @@ module Aws
       #         next_token: "StringType",
       #         limit: 1,
       #       }
-      class DescribeMLModelsInput < Aws::Structure.new(
+      class DescribeMLModelsInput < Struct.new(
         :filter_variable,
         :eq,
         :gt,
@@ -1537,6 +1609,8 @@ module Aws
         :sort_order,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_variable
         #   Use one of the following variables to filter a list of `MLModel`\:
@@ -1636,9 +1710,11 @@ module Aws
 
       # Represents the output of a `DescribeMLModels` operation. The content
       # is essentially a list of `MLModel`.
-      class DescribeMLModelsOutput < Aws::Structure.new(
+      class DescribeMLModelsOutput < Struct.new(
         :results,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] results
         #   A list of `MLModel` that meet the search criteria.
@@ -1658,9 +1734,11 @@ module Aws
       #         resource_id: "EntityId", # required
       #         resource_type: "BatchPrediction", # required, accepts BatchPrediction, DataSource, Evaluation, MLModel
       #       }
-      class DescribeTagsInput < Aws::Structure.new(
+      class DescribeTagsInput < Struct.new(
         :resource_id,
         :resource_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The ID of the ML object. For example, `exampleModelId`.
@@ -1673,10 +1751,12 @@ module Aws
       end
 
       # Amazon ML returns the following elements.
-      class DescribeTagsOutput < Aws::Structure.new(
+      class DescribeTagsOutput < Struct.new(
         :resource_id,
         :resource_type,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_id
         #   The ID of the tagged ML object.
@@ -1696,7 +1776,7 @@ module Aws
       #
       # The content consists of the detailed metadata and data file
       # information and the current status of the `Evaluation`.
-      class Evaluation < Aws::Structure.new(
+      class Evaluation < Struct.new(
         :evaluation_id,
         :ml_model_id,
         :evaluation_data_source_id,
@@ -1711,6 +1791,8 @@ module Aws
         :compute_time,
         :finished_at,
         :started_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   The ID that is assigned to the `Evaluation` at creation.
@@ -1812,8 +1894,10 @@ module Aws
       #       {
       #         batch_prediction_id: "EntityId", # required
       #       }
-      class GetBatchPredictionInput < Aws::Structure.new(
+      class GetBatchPredictionInput < Struct.new(
         :batch_prediction_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   An ID assigned to the `BatchPrediction` at creation.
@@ -1823,7 +1907,7 @@ module Aws
 
       # Represents the output of a `GetBatchPrediction` operation and
       # describes a `BatchPrediction`.
-      class GetBatchPredictionOutput < Aws::Structure.new(
+      class GetBatchPredictionOutput < Struct.new(
         :batch_prediction_id,
         :ml_model_id,
         :batch_prediction_data_source_id,
@@ -1841,6 +1925,8 @@ module Aws
         :started_at,
         :total_record_count,
         :invalid_record_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   An ID assigned to the `BatchPrediction` at creation. This value
@@ -1951,9 +2037,11 @@ module Aws
       #         data_source_id: "EntityId", # required
       #         verbose: false,
       #       }
-      class GetDataSourceInput < Aws::Structure.new(
+      class GetDataSourceInput < Struct.new(
         :data_source_id,
         :verbose)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   The ID assigned to the `DataSource` at creation.
@@ -1972,7 +2060,7 @@ module Aws
 
       # Represents the output of a `GetDataSource` operation and describes a
       # `DataSource`.
-      class GetDataSourceOutput < Aws::Structure.new(
+      class GetDataSourceOutput < Struct.new(
         :data_source_id,
         :data_location_s3,
         :data_rearrangement,
@@ -1993,6 +2081,8 @@ module Aws
         :finished_at,
         :started_at,
         :data_source_schema)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   The ID assigned to the `DataSource` at creation. This value should
@@ -2119,8 +2209,10 @@ module Aws
       #       {
       #         evaluation_id: "EntityId", # required
       #       }
-      class GetEvaluationInput < Aws::Structure.new(
+      class GetEvaluationInput < Struct.new(
         :evaluation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   The ID of the `Evaluation` to retrieve. The evaluation of each
@@ -2132,7 +2224,7 @@ module Aws
 
       # Represents the output of a `GetEvaluation` operation and describes an
       # `Evaluation`.
-      class GetEvaluationOutput < Aws::Structure.new(
+      class GetEvaluationOutput < Struct.new(
         :evaluation_id,
         :ml_model_id,
         :evaluation_data_source_id,
@@ -2148,6 +2240,8 @@ module Aws
         :compute_time,
         :finished_at,
         :started_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   The evaluation ID which is same as the `EvaluationId` in the
@@ -2263,9 +2357,11 @@ module Aws
       #         ml_model_id: "EntityId", # required
       #         verbose: false,
       #       }
-      class GetMLModelInput < Aws::Structure.new(
+      class GetMLModelInput < Struct.new(
         :ml_model_id,
         :verbose)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   The ID assigned to the `MLModel` at creation.
@@ -2283,7 +2379,7 @@ module Aws
 
       # Represents the output of a `GetMLModel` operation, and provides
       # detailed information about a `MLModel`.
-      class GetMLModelOutput < Aws::Structure.new(
+      class GetMLModelOutput < Struct.new(
         :ml_model_id,
         :training_data_source_id,
         :created_by_iam_user,
@@ -2305,6 +2401,8 @@ module Aws
         :started_at,
         :recipe,
         :schema)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   The MLModel ID<?oxy\_insert\_start author=\"annbech\"
@@ -2492,7 +2590,7 @@ module Aws
       #
       # The content consists of the detailed metadata and the current status
       # of the `MLModel`.
-      class MLModel < Aws::Structure.new(
+      class MLModel < Struct.new(
         :ml_model_id,
         :training_data_source_id,
         :created_by_iam_user,
@@ -2512,6 +2610,8 @@ module Aws
         :compute_time,
         :finished_at,
         :started_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   The ID assigned to the `MLModel` at creation.
@@ -2684,8 +2784,10 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/machine-learning/latest/dg
-      class PerformanceMetrics < Aws::Structure.new(
+      class PerformanceMetrics < Struct.new(
         :properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] properties
         #   @return [Hash<String,String>]
@@ -2702,10 +2804,12 @@ module Aws
       #         },
       #         predict_endpoint: "VipURL", # required
       #       }
-      class PredictInput < Aws::Structure.new(
+      class PredictInput < Struct.new(
         :ml_model_id,
         :record,
         :predict_endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   A unique identifier of the `MLModel`.
@@ -2720,8 +2824,10 @@ module Aws
 
       end
 
-      class PredictOutput < Aws::Structure.new(
+      class PredictOutput < Struct.new(
         :prediction)
+
+        include Aws::Structure
 
         # @!attribute [rw] prediction
         #   The output from a `Predict` operation:
@@ -2754,11 +2860,13 @@ module Aws
       #   corresponding to each label.
       #
       # * `PredictedValue` - Present for a `REGRESSION` `MLModel` request.
-      class Prediction < Aws::Structure.new(
+      class Prediction < Struct.new(
         :predicted_label,
         :predicted_value,
         :predicted_scores,
         :details)
+
+        include Aws::Structure
 
         # @!attribute [rw] predicted_label
         #   The prediction label for either a `BINARY` or `MULTICLASS`
@@ -2803,7 +2911,7 @@ module Aws
       #         subnet_id: "EDPSubnetId", # required
       #         security_group_ids: ["EDPSecurityGroupId"], # required
       #       }
-      class RDSDataSpec < Aws::Structure.new(
+      class RDSDataSpec < Struct.new(
         :database_information,
         :select_sql_query,
         :database_credentials,
@@ -2815,6 +2923,8 @@ module Aws
         :service_role,
         :subnet_id,
         :security_group_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] database_information
         #   Describes the `DatabaseName` and `InstanceIdentifier` of an Amazon
@@ -3022,9 +3132,11 @@ module Aws
       #         instance_identifier: "RDSInstanceIdentifier", # required
       #         database_name: "RDSDatabaseName", # required
       #       }
-      class RDSDatabase < Aws::Structure.new(
+      class RDSDatabase < Struct.new(
         :instance_identifier,
         :database_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_identifier
         #   The ID of an RDS DB instance.
@@ -3045,9 +3157,11 @@ module Aws
       #         username: "RDSDatabaseUsername", # required
       #         password: "RDSDatabasePassword", # required
       #       }
-      class RDSDatabaseCredentials < Aws::Structure.new(
+      class RDSDatabaseCredentials < Struct.new(
         :username,
         :password)
+
+        include Aws::Structure
 
         # @!attribute [rw] username
         #   The username to be used by Amazon ML to connect to database on an
@@ -3064,13 +3178,15 @@ module Aws
       end
 
       # The datasource details that are specific to Amazon RDS.
-      class RDSMetadata < Aws::Structure.new(
+      class RDSMetadata < Struct.new(
         :database,
         :database_user_name,
         :select_sql_query,
         :resource_role,
         :service_role,
         :data_pipeline_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] database
         #   The database details required to connect to an Amazon RDS.
@@ -3117,11 +3233,13 @@ module Aws
       end
 
       # Describes the real-time endpoint information for an `MLModel`.
-      class RealtimeEndpointInfo < Aws::Structure.new(
+      class RealtimeEndpointInfo < Struct.new(
         :peak_requests_per_second,
         :created_at,
         :endpoint_url,
         :endpoint_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] peak_requests_per_second
         #   The maximum processing rate for the real-time endpoint for
@@ -3173,7 +3291,7 @@ module Aws
       #         data_schema: "DataSchema",
       #         data_schema_uri: "S3Url",
       #       }
-      class RedshiftDataSpec < Aws::Structure.new(
+      class RedshiftDataSpec < Struct.new(
         :database_information,
         :select_sql_query,
         :database_credentials,
@@ -3181,6 +3299,8 @@ module Aws
         :data_rearrangement,
         :data_schema,
         :data_schema_uri)
+
+        include Aws::Structure
 
         # @!attribute [rw] database_information
         #   Describes the `DatabaseName` and `ClusterIdentifier` for an Amazon
@@ -3350,9 +3470,11 @@ module Aws
       #         database_name: "RedshiftDatabaseName", # required
       #         cluster_identifier: "RedshiftClusterIdentifier", # required
       #       }
-      class RedshiftDatabase < Aws::Structure.new(
+      class RedshiftDatabase < Struct.new(
         :database_name,
         :cluster_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] database_name
         #   The name of a database hosted on an Amazon Redshift cluster.
@@ -3373,9 +3495,11 @@ module Aws
       #         username: "RedshiftDatabaseUsername", # required
       #         password: "RedshiftDatabasePassword", # required
       #       }
-      class RedshiftDatabaseCredentials < Aws::Structure.new(
+      class RedshiftDatabaseCredentials < Struct.new(
         :username,
         :password)
+
+        include Aws::Structure
 
         # @!attribute [rw] username
         #   A username to be used by Amazon Machine Learning (Amazon ML)to
@@ -3403,10 +3527,12 @@ module Aws
       end
 
       # Describes the `DataSource` details specific to Amazon Redshift.
-      class RedshiftMetadata < Aws::Structure.new(
+      class RedshiftMetadata < Struct.new(
         :redshift_database,
         :database_user_name,
         :select_sql_query)
+
+        include Aws::Structure
 
         # @!attribute [rw] redshift_database
         #   Describes the database details required to connect to an Amazon
@@ -3442,11 +3568,13 @@ module Aws
       #         data_schema: "DataSchema",
       #         data_schema_location_s3: "S3Url",
       #       }
-      class S3DataSpec < Aws::Structure.new(
+      class S3DataSpec < Struct.new(
         :data_location_s3,
         :data_rearrangement,
         :data_schema,
         :data_schema_location_s3)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_location_s3
         #   The location of the data file(s) used by a `DataSource`. The URI
@@ -3606,9 +3734,11 @@ module Aws
       #         key: "TagKey",
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A unique identifier for the tag. Valid characters include Unicode
@@ -3630,9 +3760,11 @@ module Aws
       #         batch_prediction_id: "EntityId", # required
       #         batch_prediction_name: "EntityName", # required
       #       }
-      class UpdateBatchPredictionInput < Aws::Structure.new(
+      class UpdateBatchPredictionInput < Struct.new(
         :batch_prediction_id,
         :batch_prediction_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   The ID assigned to the `BatchPrediction` during creation.
@@ -3648,8 +3780,10 @@ module Aws
       #
       # You can see the updated content by using the `GetBatchPrediction`
       # operation.
-      class UpdateBatchPredictionOutput < Aws::Structure.new(
+      class UpdateBatchPredictionOutput < Struct.new(
         :batch_prediction_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] batch_prediction_id
         #   The ID assigned to the `BatchPrediction` during creation. This value
@@ -3666,9 +3800,11 @@ module Aws
       #         data_source_id: "EntityId", # required
       #         data_source_name: "EntityName", # required
       #       }
-      class UpdateDataSourceInput < Aws::Structure.new(
+      class UpdateDataSourceInput < Struct.new(
         :data_source_id,
         :data_source_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   The ID assigned to the `DataSource` during creation.
@@ -3685,8 +3821,10 @@ module Aws
       #
       # You can see the updated content by using the `GetBatchPrediction`
       # operation.
-      class UpdateDataSourceOutput < Aws::Structure.new(
+      class UpdateDataSourceOutput < Struct.new(
         :data_source_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_source_id
         #   The ID assigned to the `DataSource` during creation. This value
@@ -3703,9 +3841,11 @@ module Aws
       #         evaluation_id: "EntityId", # required
       #         evaluation_name: "EntityName", # required
       #       }
-      class UpdateEvaluationInput < Aws::Structure.new(
+      class UpdateEvaluationInput < Struct.new(
         :evaluation_id,
         :evaluation_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   The ID assigned to the `Evaluation` during creation.
@@ -3722,8 +3862,10 @@ module Aws
       #
       # You can see the updated content by using the `GetEvaluation`
       # operation.
-      class UpdateEvaluationOutput < Aws::Structure.new(
+      class UpdateEvaluationOutput < Struct.new(
         :evaluation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_id
         #   The ID assigned to the `Evaluation` during creation. This value
@@ -3740,10 +3882,12 @@ module Aws
       #         ml_model_name: "EntityName",
       #         score_threshold: 1.0,
       #       }
-      class UpdateMLModelInput < Aws::Structure.new(
+      class UpdateMLModelInput < Struct.new(
         :ml_model_id,
         :ml_model_name,
         :score_threshold)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   The ID assigned to the `MLModel` during creation.
@@ -3769,8 +3913,10 @@ module Aws
       # Represents the output of an `UpdateMLModel` operation.
       #
       # You can see the updated content by using the `GetMLModel` operation.
-      class UpdateMLModelOutput < Aws::Structure.new(
+      class UpdateMLModelOutput < Struct.new(
         :ml_model_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] ml_model_id
         #   The ID assigned to the `MLModel` during creation. This value should

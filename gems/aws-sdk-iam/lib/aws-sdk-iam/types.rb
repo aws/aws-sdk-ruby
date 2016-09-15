@@ -20,12 +20,14 @@ module Aws
       # If you lose a secret access key, you must create a new access key.
       #
       #  </note>
-      class AccessKey < Aws::Structure.new(
+      class AccessKey < Struct.new(
         :user_name,
         :access_key_id,
         :status,
         :secret_access_key,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user that the access key is associated with.
@@ -54,10 +56,12 @@ module Aws
       #
       # This data type is used as a response element in the
       # GetAccessKeyLastUsed action.
-      class AccessKeyLastUsed < Aws::Structure.new(
+      class AccessKeyLastUsed < Struct.new(
         :last_used_date,
         :service_name,
         :region)
+
+        include Aws::Structure
 
         # @!attribute [rw] last_used_date
         #   The date and time, in [ISO 8601 date-time format][1], when the
@@ -112,11 +116,13 @@ module Aws
       #
       # This data type is used as a response element in the ListAccessKeys
       # action.
-      class AccessKeyMetadata < Aws::Structure.new(
+      class AccessKeyMetadata < Struct.new(
         :user_name,
         :access_key_id,
         :status,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user that the key is associated with.
@@ -144,9 +150,11 @@ module Aws
       #         open_id_connect_provider_arn: "arnType", # required
       #         client_id: "clientIDType", # required
       #       }
-      class AddClientIDToOpenIDConnectProviderRequest < Aws::Structure.new(
+      class AddClientIDToOpenIDConnectProviderRequest < Struct.new(
         :open_id_connect_provider_arn,
         :client_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_id_connect_provider_arn
         #   The Amazon Resource Name (ARN) of the IAM OpenID Connect (OIDC)
@@ -168,9 +176,11 @@ module Aws
       #         instance_profile_name: "instanceProfileNameType", # required
       #         role_name: "roleNameType", # required
       #       }
-      class AddRoleToInstanceProfileRequest < Aws::Structure.new(
+      class AddRoleToInstanceProfileRequest < Struct.new(
         :instance_profile_name,
         :role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profile_name
         #   The name of the instance profile to update.
@@ -205,9 +215,11 @@ module Aws
       #         group_name: "groupNameType", # required
       #         user_name: "existingUserNameType", # required
       #       }
-      class AddUserToGroupRequest < Aws::Structure.new(
+      class AddUserToGroupRequest < Struct.new(
         :group_name,
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the group to update.
@@ -242,9 +254,11 @@ module Aws
       #         group_name: "groupNameType", # required
       #         policy_arn: "arnType", # required
       #       }
-      class AttachGroupPolicyRequest < Aws::Structure.new(
+      class AttachGroupPolicyRequest < Struct.new(
         :group_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name (friendly name, not ARN) of the group to attach the policy
@@ -279,9 +293,11 @@ module Aws
       #         role_name: "roleNameType", # required
       #         policy_arn: "arnType", # required
       #       }
-      class AttachRolePolicyRequest < Aws::Structure.new(
+      class AttachRolePolicyRequest < Struct.new(
         :role_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name (friendly name, not ARN) of the role to attach the policy
@@ -316,9 +332,11 @@ module Aws
       #         user_name: "userNameType", # required
       #         policy_arn: "arnType", # required
       #       }
-      class AttachUserPolicyRequest < Aws::Structure.new(
+      class AttachUserPolicyRequest < Struct.new(
         :user_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name (friendly name, not ARN) of the IAM user to attach the
@@ -359,9 +377,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      class AttachedPolicy < Aws::Structure.new(
+      class AttachedPolicy < Struct.new(
         :policy_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The friendly name of the attached policy.
@@ -388,9 +408,11 @@ module Aws
       #         old_password: "passwordType", # required
       #         new_password: "passwordType", # required
       #       }
-      class ChangePasswordRequest < Aws::Structure.new(
+      class ChangePasswordRequest < Struct.new(
         :old_password,
         :new_password)
+
+        include Aws::Structure
 
         # @!attribute [rw] old_password
         #   The IAM user\'s current password.
@@ -433,10 +455,12 @@ module Aws
       #         context_key_values: ["ContextKeyValueType"],
       #         context_key_type: "string", # accepts string, stringList, numeric, numericList, boolean, booleanList, ip, ipList, binary, binaryList, date, dateList
       #       }
-      class ContextEntry < Aws::Structure.new(
+      class ContextEntry < Struct.new(
         :context_key_name,
         :context_key_values,
         :context_key_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] context_key_name
         #   The full name of a condition context key, including the service
@@ -462,8 +486,10 @@ module Aws
       #       {
       #         user_name: "existingUserNameType",
       #       }
-      class CreateAccessKeyRequest < Aws::Structure.new(
+      class CreateAccessKeyRequest < Struct.new(
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user that the new key will belong to.
@@ -480,8 +506,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateAccessKey request.
-      class CreateAccessKeyResponse < Aws::Structure.new(
+      class CreateAccessKeyResponse < Struct.new(
         :access_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_key
         #   A structure with details about the access key.
@@ -495,8 +523,10 @@ module Aws
       #       {
       #         account_alias: "accountAliasType", # required
       #       }
-      class CreateAccountAliasRequest < Aws::Structure.new(
+      class CreateAccountAliasRequest < Struct.new(
         :account_alias)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_alias
         #   The account alias to create.
@@ -519,9 +549,11 @@ module Aws
       #         path: "pathType",
       #         group_name: "groupNameType", # required
       #       }
-      class CreateGroupRequest < Aws::Structure.new(
+      class CreateGroupRequest < Struct.new(
         :path,
         :group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the group. For more information about paths, see [IAM
@@ -562,8 +594,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateGroup request.
-      class CreateGroupResponse < Aws::Structure.new(
+      class CreateGroupResponse < Struct.new(
         :group)
+
+        include Aws::Structure
 
         # @!attribute [rw] group
         #   A structure containing details about the new group.
@@ -578,9 +612,11 @@ module Aws
       #         instance_profile_name: "instanceProfileNameType", # required
       #         path: "pathType",
       #       }
-      class CreateInstanceProfileRequest < Aws::Structure.new(
+      class CreateInstanceProfileRequest < Struct.new(
         :instance_profile_name,
         :path)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profile_name
         #   The name of the instance profile to create.
@@ -617,8 +653,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateInstanceProfile request.
-      class CreateInstanceProfileResponse < Aws::Structure.new(
+      class CreateInstanceProfileResponse < Struct.new(
         :instance_profile)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profile
         #   A structure containing details about the new instance profile.
@@ -634,10 +672,12 @@ module Aws
       #         password: "passwordType", # required
       #         password_reset_required: false,
       #       }
-      class CreateLoginProfileRequest < Aws::Structure.new(
+      class CreateLoginProfileRequest < Struct.new(
         :user_name,
         :password,
         :password_reset_required)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user to create a password for. The user must
@@ -678,8 +718,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateLoginProfile request.
-      class CreateLoginProfileResponse < Aws::Structure.new(
+      class CreateLoginProfileResponse < Struct.new(
         :login_profile)
+
+        include Aws::Structure
 
         # @!attribute [rw] login_profile
         #   A structure containing the user name and password create date.
@@ -695,10 +737,12 @@ module Aws
       #         client_id_list: ["clientIDType"],
       #         thumbprint_list: ["thumbprintType"], # required
       #       }
-      class CreateOpenIDConnectProviderRequest < Aws::Structure.new(
+      class CreateOpenIDConnectProviderRequest < Struct.new(
         :url,
         :client_id_list,
         :thumbprint_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] url
         #   The URL of the identity provider. The URL must begin with
@@ -762,8 +806,10 @@ module Aws
 
       # Contains the response to a successful CreateOpenIDConnectProvider
       # request.
-      class CreateOpenIDConnectProviderResponse < Aws::Structure.new(
+      class CreateOpenIDConnectProviderResponse < Struct.new(
         :open_id_connect_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_id_connect_provider_arn
         #   The Amazon Resource Name (ARN) of the new IAM OpenID Connect
@@ -782,11 +828,13 @@ module Aws
       #         policy_document: "policyDocumentType", # required
       #         description: "policyDescriptionType",
       #       }
-      class CreatePolicyRequest < Aws::Structure.new(
+      class CreatePolicyRequest < Struct.new(
         :policy_name,
         :path,
         :policy_document,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The friendly name of the policy.
@@ -851,8 +899,10 @@ module Aws
       end
 
       # Contains the response to a successful CreatePolicy request.
-      class CreatePolicyResponse < Aws::Structure.new(
+      class CreatePolicyResponse < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   A structure containing details about the new policy.
@@ -868,10 +918,12 @@ module Aws
       #         policy_document: "policyDocumentType", # required
       #         set_as_default: false,
       #       }
-      class CreatePolicyVersionRequest < Aws::Structure.new(
+      class CreatePolicyVersionRequest < Struct.new(
         :policy_arn,
         :policy_document,
         :set_as_default)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the IAM policy to which you want
@@ -919,8 +971,10 @@ module Aws
       end
 
       # Contains the response to a successful CreatePolicyVersion request.
-      class CreatePolicyVersionResponse < Aws::Structure.new(
+      class CreatePolicyVersionResponse < Struct.new(
         :policy_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_version
         #   A structure containing details about the new policy version.
@@ -936,10 +990,12 @@ module Aws
       #         role_name: "roleNameType", # required
       #         assume_role_policy_document: "policyDocumentType", # required
       #       }
-      class CreateRoleRequest < Aws::Structure.new(
+      class CreateRoleRequest < Struct.new(
         :path,
         :role_name,
         :assume_role_policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the role. For more information about paths, see [IAM
@@ -993,8 +1049,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateRole request.
-      class CreateRoleResponse < Aws::Structure.new(
+      class CreateRoleResponse < Struct.new(
         :role)
+
+        include Aws::Structure
 
         # @!attribute [rw] role
         #   A structure containing details about the new role.
@@ -1009,9 +1067,11 @@ module Aws
       #         saml_metadata_document: "SAMLMetadataDocumentType", # required
       #         name: "SAMLProviderNameType", # required
       #       }
-      class CreateSAMLProviderRequest < Aws::Structure.new(
+      class CreateSAMLProviderRequest < Struct.new(
         :saml_metadata_document,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_metadata_document
         #   An XML document generated by an identity provider (IdP) that
@@ -1044,8 +1104,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateSAMLProvider request.
-      class CreateSAMLProviderResponse < Aws::Structure.new(
+      class CreateSAMLProviderResponse < Struct.new(
         :saml_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_provider_arn
         #   The Amazon Resource Name (ARN) of the new SAML provider resource in
@@ -1061,9 +1123,11 @@ module Aws
       #         path: "pathType",
       #         user_name: "userNameType", # required
       #       }
-      class CreateUserRequest < Aws::Structure.new(
+      class CreateUserRequest < Struct.new(
         :path,
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path for the user name. For more information about paths, see
@@ -1102,8 +1166,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateUser request.
-      class CreateUserResponse < Aws::Structure.new(
+      class CreateUserResponse < Struct.new(
         :user)
+
+        include Aws::Structure
 
         # @!attribute [rw] user
         #   A structure with details about the new IAM user.
@@ -1118,9 +1184,11 @@ module Aws
       #         path: "pathType",
       #         virtual_mfa_device_name: "virtualMFADeviceName", # required
       #       }
-      class CreateVirtualMFADeviceRequest < Aws::Structure.new(
+      class CreateVirtualMFADeviceRequest < Struct.new(
         :path,
         :virtual_mfa_device_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path for the virtual MFA device. For more information about
@@ -1158,8 +1226,10 @@ module Aws
       end
 
       # Contains the response to a successful CreateVirtualMFADevice request.
-      class CreateVirtualMFADeviceResponse < Aws::Structure.new(
+      class CreateVirtualMFADeviceResponse < Struct.new(
         :virtual_mfa_device)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_mfa_device
         #   A structure containing details about the new virtual MFA device.
@@ -1174,9 +1244,11 @@ module Aws
       #         user_name: "existingUserNameType", # required
       #         serial_number: "serialNumberType", # required
       #       }
-      class DeactivateMFADeviceRequest < Aws::Structure.new(
+      class DeactivateMFADeviceRequest < Struct.new(
         :user_name,
         :serial_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose MFA device you want to deactivate.
@@ -1213,9 +1285,11 @@ module Aws
       #         user_name: "existingUserNameType",
       #         access_key_id: "accessKeyIdType", # required
       #       }
-      class DeleteAccessKeyRequest < Aws::Structure.new(
+      class DeleteAccessKeyRequest < Struct.new(
         :user_name,
         :access_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose access key pair you want to delete.
@@ -1249,8 +1323,10 @@ module Aws
       #       {
       #         account_alias: "accountAliasType", # required
       #       }
-      class DeleteAccountAliasRequest < Aws::Structure.new(
+      class DeleteAccountAliasRequest < Struct.new(
         :account_alias)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_alias
         #   The name of the account alias to delete.
@@ -1273,9 +1349,11 @@ module Aws
       #         group_name: "groupNameType", # required
       #         policy_name: "policyNameType", # required
       #       }
-      class DeleteGroupPolicyRequest < Aws::Structure.new(
+      class DeleteGroupPolicyRequest < Struct.new(
         :group_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name (friendly name, not ARN) identifying the group that the
@@ -1310,8 +1388,10 @@ module Aws
       #       {
       #         group_name: "groupNameType", # required
       #       }
-      class DeleteGroupRequest < Aws::Structure.new(
+      class DeleteGroupRequest < Struct.new(
         :group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the IAM group to delete.
@@ -1333,8 +1413,10 @@ module Aws
       #       {
       #         instance_profile_name: "instanceProfileNameType", # required
       #       }
-      class DeleteInstanceProfileRequest < Aws::Structure.new(
+      class DeleteInstanceProfileRequest < Struct.new(
         :instance_profile_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profile_name
         #   The name of the instance profile to delete.
@@ -1356,8 +1438,10 @@ module Aws
       #       {
       #         user_name: "userNameType", # required
       #       }
-      class DeleteLoginProfileRequest < Aws::Structure.new(
+      class DeleteLoginProfileRequest < Struct.new(
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose password you want to delete.
@@ -1379,8 +1463,10 @@ module Aws
       #       {
       #         open_id_connect_provider_arn: "arnType", # required
       #       }
-      class DeleteOpenIDConnectProviderRequest < Aws::Structure.new(
+      class DeleteOpenIDConnectProviderRequest < Struct.new(
         :open_id_connect_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_id_connect_provider_arn
         #   The Amazon Resource Name (ARN) of the IAM OpenID Connect provider
@@ -1397,8 +1483,10 @@ module Aws
       #       {
       #         policy_arn: "arnType", # required
       #       }
-      class DeletePolicyRequest < Aws::Structure.new(
+      class DeletePolicyRequest < Struct.new(
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the IAM policy you want to delete.
@@ -1420,9 +1508,11 @@ module Aws
       #         policy_arn: "arnType", # required
       #         version_id: "policyVersionIdType", # required
       #       }
-      class DeletePolicyVersionRequest < Aws::Structure.new(
+      class DeletePolicyVersionRequest < Struct.new(
         :policy_arn,
         :version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the IAM policy from which you want
@@ -1462,9 +1552,11 @@ module Aws
       #         role_name: "roleNameType", # required
       #         policy_name: "policyNameType", # required
       #       }
-      class DeleteRolePolicyRequest < Aws::Structure.new(
+      class DeleteRolePolicyRequest < Struct.new(
         :role_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name (friendly name, not ARN) identifying the role that the
@@ -1499,8 +1591,10 @@ module Aws
       #       {
       #         role_name: "roleNameType", # required
       #       }
-      class DeleteRoleRequest < Aws::Structure.new(
+      class DeleteRoleRequest < Struct.new(
         :role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name of the role to delete.
@@ -1522,8 +1616,10 @@ module Aws
       #       {
       #         saml_provider_arn: "arnType", # required
       #       }
-      class DeleteSAMLProviderRequest < Aws::Structure.new(
+      class DeleteSAMLProviderRequest < Struct.new(
         :saml_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_provider_arn
         #   The Amazon Resource Name (ARN) of the SAML provider to delete.
@@ -1538,9 +1634,11 @@ module Aws
       #         user_name: "userNameType", # required
       #         ssh_public_key_id: "publicKeyIdType", # required
       #       }
-      class DeleteSSHPublicKeyRequest < Aws::Structure.new(
+      class DeleteSSHPublicKeyRequest < Struct.new(
         :user_name,
         :ssh_public_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user associated with the SSH public key.
@@ -1573,8 +1671,10 @@ module Aws
       #       {
       #         server_certificate_name: "serverCertificateNameType", # required
       #       }
-      class DeleteServerCertificateRequest < Aws::Structure.new(
+      class DeleteServerCertificateRequest < Struct.new(
         :server_certificate_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_certificate_name
         #   The name of the server certificate you want to delete.
@@ -1597,9 +1697,11 @@ module Aws
       #         user_name: "existingUserNameType",
       #         certificate_id: "certificateIdType", # required
       #       }
-      class DeleteSigningCertificateRequest < Aws::Structure.new(
+      class DeleteSigningCertificateRequest < Struct.new(
         :user_name,
         :certificate_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user the signing certificate belongs to.
@@ -1634,9 +1736,11 @@ module Aws
       #         user_name: "existingUserNameType", # required
       #         policy_name: "policyNameType", # required
       #       }
-      class DeleteUserPolicyRequest < Aws::Structure.new(
+      class DeleteUserPolicyRequest < Struct.new(
         :user_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name (friendly name, not ARN) identifying the user that the
@@ -1671,8 +1775,10 @@ module Aws
       #       {
       #         user_name: "existingUserNameType", # required
       #       }
-      class DeleteUserRequest < Aws::Structure.new(
+      class DeleteUserRequest < Struct.new(
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user to delete.
@@ -1694,8 +1800,10 @@ module Aws
       #       {
       #         serial_number: "serialNumberType", # required
       #       }
-      class DeleteVirtualMFADeviceRequest < Aws::Structure.new(
+      class DeleteVirtualMFADeviceRequest < Struct.new(
         :serial_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] serial_number
         #   The serial number that uniquely identifies the MFA device. For
@@ -1720,9 +1828,11 @@ module Aws
       #         group_name: "groupNameType", # required
       #         policy_arn: "arnType", # required
       #       }
-      class DetachGroupPolicyRequest < Aws::Structure.new(
+      class DetachGroupPolicyRequest < Struct.new(
         :group_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name (friendly name, not ARN) of the IAM group to detach the
@@ -1757,9 +1867,11 @@ module Aws
       #         role_name: "roleNameType", # required
       #         policy_arn: "arnType", # required
       #       }
-      class DetachRolePolicyRequest < Aws::Structure.new(
+      class DetachRolePolicyRequest < Struct.new(
         :role_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name (friendly name, not ARN) of the IAM role to detach the
@@ -1794,9 +1906,11 @@ module Aws
       #         user_name: "userNameType", # required
       #         policy_arn: "arnType", # required
       #       }
-      class DetachUserPolicyRequest < Aws::Structure.new(
+      class DetachUserPolicyRequest < Struct.new(
         :user_name,
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name (friendly name, not ARN) of the IAM user to detach the
@@ -1833,11 +1947,13 @@ module Aws
       #         authentication_code_1: "authenticationCodeType", # required
       #         authentication_code_2: "authenticationCodeType", # required
       #       }
-      class EnableMFADeviceRequest < Aws::Structure.new(
+      class EnableMFADeviceRequest < Struct.new(
         :user_name,
         :serial_number,
         :authentication_code_1,
         :authentication_code_2)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user for whom you want to enable the MFA device.
@@ -1883,7 +1999,7 @@ module Aws
       #
       # This data type is used by the return parameter of `
       # SimulateCustomPolicy ` and ` SimulatePrincipalPolicy `.
-      class EvaluationResult < Aws::Structure.new(
+      class EvaluationResult < Struct.new(
         :eval_action_name,
         :eval_resource_name,
         :eval_decision,
@@ -1891,6 +2007,8 @@ module Aws
         :missing_context_values,
         :eval_decision_details,
         :resource_specific_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] eval_action_name
         #   The name of the API action tested on the indicated resource.
@@ -1946,9 +2064,11 @@ module Aws
 
       # Contains the response to a successful GenerateCredentialReport
       # request.
-      class GenerateCredentialReportResponse < Aws::Structure.new(
+      class GenerateCredentialReportResponse < Struct.new(
         :state,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] state
         #   Information about the state of the credential report.
@@ -1966,8 +2086,10 @@ module Aws
       #       {
       #         access_key_id: "accessKeyIdType", # required
       #       }
-      class GetAccessKeyLastUsedRequest < Aws::Structure.new(
+      class GetAccessKeyLastUsedRequest < Struct.new(
         :access_key_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_key_id
         #   The identifier of an access key.
@@ -1985,9 +2107,11 @@ module Aws
       # Contains the response to a successful GetAccessKeyLastUsed request. It
       # is also returned as a member of the AccessKeyMetaData structure
       # returned by the ListAccessKeys action.
-      class GetAccessKeyLastUsedResponse < Aws::Structure.new(
+      class GetAccessKeyLastUsedResponse < Struct.new(
         :user_name,
         :access_key_last_used)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the AWS IAM user that owns this access key.
@@ -2007,10 +2131,12 @@ module Aws
       #         max_items: 1,
       #         marker: "markerType",
       #       }
-      class GetAccountAuthorizationDetailsRequest < Aws::Structure.new(
+      class GetAccountAuthorizationDetailsRequest < Struct.new(
         :filter,
         :max_items,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter
         #   A list of entity types used to filter the results. Only the entities
@@ -2046,13 +2172,15 @@ module Aws
 
       # Contains the response to a successful GetAccountAuthorizationDetails
       # request.
-      class GetAccountAuthorizationDetailsResponse < Aws::Structure.new(
+      class GetAccountAuthorizationDetailsResponse < Struct.new(
         :user_detail_list,
         :group_detail_list,
         :role_detail_list,
         :policies,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_detail_list
         #   A list containing information about IAM users.
@@ -2090,8 +2218,10 @@ module Aws
 
       # Contains the response to a successful GetAccountPasswordPolicy
       # request.
-      class GetAccountPasswordPolicyResponse < Aws::Structure.new(
+      class GetAccountPasswordPolicyResponse < Struct.new(
         :password_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] password_policy
         #   Contains information about the account password policy.
@@ -2103,8 +2233,10 @@ module Aws
       end
 
       # Contains the response to a successful GetAccountSummary request.
-      class GetAccountSummaryResponse < Aws::Structure.new(
+      class GetAccountSummaryResponse < Struct.new(
         :summary_map)
+
+        include Aws::Structure
 
         # @!attribute [rw] summary_map
         #   A set of key value pairs containing information about IAM entity
@@ -2119,8 +2251,10 @@ module Aws
       #       {
       #         policy_input_list: ["policyDocumentType"], # required
       #       }
-      class GetContextKeysForCustomPolicyRequest < Aws::Structure.new(
+      class GetContextKeysForCustomPolicyRequest < Struct.new(
         :policy_input_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_input_list
         #   A list of policies for which you want the list of context keys
@@ -2142,8 +2276,10 @@ module Aws
 
       # Contains the response to a successful GetContextKeysForPrincipalPolicy
       # or GetContextKeysForCustomPolicy request.
-      class GetContextKeysForPolicyResponse < Aws::Structure.new(
+      class GetContextKeysForPolicyResponse < Struct.new(
         :context_key_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] context_key_names
         #   The list of context keys that are referenced in the input policies.
@@ -2158,9 +2294,11 @@ module Aws
       #         policy_source_arn: "arnType", # required
       #         policy_input_list: ["policyDocumentType"],
       #       }
-      class GetContextKeysForPrincipalPolicyRequest < Aws::Structure.new(
+      class GetContextKeysForPrincipalPolicyRequest < Struct.new(
         :policy_source_arn,
         :policy_input_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_source_arn
         #   The ARN of a user, group, or role whose policies contain the context
@@ -2198,10 +2336,12 @@ module Aws
       end
 
       # Contains the response to a successful GetCredentialReport request.
-      class GetCredentialReportResponse < Aws::Structure.new(
+      class GetCredentialReportResponse < Struct.new(
         :content,
         :report_format,
         :generated_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] content
         #   Contains the credential report. The report is Base64-encoded.
@@ -2229,9 +2369,11 @@ module Aws
       #         group_name: "groupNameType", # required
       #         policy_name: "policyNameType", # required
       #       }
-      class GetGroupPolicyRequest < Aws::Structure.new(
+      class GetGroupPolicyRequest < Struct.new(
         :group_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the group the policy is associated with.
@@ -2260,10 +2402,12 @@ module Aws
       end
 
       # Contains the response to a successful GetGroupPolicy request.
-      class GetGroupPolicyResponse < Aws::Structure.new(
+      class GetGroupPolicyResponse < Struct.new(
         :group_name,
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The group the policy is associated with.
@@ -2287,10 +2431,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class GetGroupRequest < Aws::Structure.new(
+      class GetGroupRequest < Struct.new(
         :group_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the group.
@@ -2327,11 +2473,13 @@ module Aws
       end
 
       # Contains the response to a successful GetGroup request.
-      class GetGroupResponse < Aws::Structure.new(
+      class GetGroupResponse < Struct.new(
         :group,
         :users,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] group
         #   A structure that contains details about the group.
@@ -2365,8 +2513,10 @@ module Aws
       #       {
       #         instance_profile_name: "instanceProfileNameType", # required
       #       }
-      class GetInstanceProfileRequest < Aws::Structure.new(
+      class GetInstanceProfileRequest < Struct.new(
         :instance_profile_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profile_name
         #   The name of the instance profile to get information about.
@@ -2383,8 +2533,10 @@ module Aws
       end
 
       # Contains the response to a successful GetInstanceProfile request.
-      class GetInstanceProfileResponse < Aws::Structure.new(
+      class GetInstanceProfileResponse < Struct.new(
         :instance_profile)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profile
         #   A structure containing details about the instance profile.
@@ -2398,8 +2550,10 @@ module Aws
       #       {
       #         user_name: "userNameType", # required
       #       }
-      class GetLoginProfileRequest < Aws::Structure.new(
+      class GetLoginProfileRequest < Struct.new(
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose login profile you want to retrieve.
@@ -2416,8 +2570,10 @@ module Aws
       end
 
       # Contains the response to a successful GetLoginProfile request.
-      class GetLoginProfileResponse < Aws::Structure.new(
+      class GetLoginProfileResponse < Struct.new(
         :login_profile)
+
+        include Aws::Structure
 
         # @!attribute [rw] login_profile
         #   A structure containing the user name and password create date for
@@ -2432,8 +2588,10 @@ module Aws
       #       {
       #         open_id_connect_provider_arn: "arnType", # required
       #       }
-      class GetOpenIDConnectProviderRequest < Aws::Structure.new(
+      class GetOpenIDConnectProviderRequest < Struct.new(
         :open_id_connect_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_id_connect_provider_arn
         #   The Amazon Resource Name (ARN) of the OIDC provider resource object
@@ -2452,11 +2610,13 @@ module Aws
 
       # Contains the response to a successful GetOpenIDConnectProvider
       # request.
-      class GetOpenIDConnectProviderResponse < Aws::Structure.new(
+      class GetOpenIDConnectProviderResponse < Struct.new(
         :url,
         :client_id_list,
         :thumbprint_list,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] url
         #   The URL that the IAM OIDC provider resource object is associated
@@ -2488,8 +2648,10 @@ module Aws
       #       {
       #         policy_arn: "arnType", # required
       #       }
-      class GetPolicyRequest < Aws::Structure.new(
+      class GetPolicyRequest < Struct.new(
         :policy_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the managed policy that you want
@@ -2506,8 +2668,10 @@ module Aws
       end
 
       # Contains the response to a successful GetPolicy request.
-      class GetPolicyResponse < Aws::Structure.new(
+      class GetPolicyResponse < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   A structure containing details about the policy.
@@ -2522,9 +2686,11 @@ module Aws
       #         policy_arn: "arnType", # required
       #         version_id: "policyVersionIdType", # required
       #       }
-      class GetPolicyVersionRequest < Aws::Structure.new(
+      class GetPolicyVersionRequest < Struct.new(
         :policy_arn,
         :version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the managed policy that you want
@@ -2554,8 +2720,10 @@ module Aws
       end
 
       # Contains the response to a successful GetPolicyVersion request.
-      class GetPolicyVersionResponse < Aws::Structure.new(
+      class GetPolicyVersionResponse < Struct.new(
         :policy_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_version
         #   A structure containing details about the policy version.
@@ -2570,9 +2738,11 @@ module Aws
       #         role_name: "roleNameType", # required
       #         policy_name: "policyNameType", # required
       #       }
-      class GetRolePolicyRequest < Aws::Structure.new(
+      class GetRolePolicyRequest < Struct.new(
         :role_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name of the role associated with the policy.
@@ -2601,10 +2771,12 @@ module Aws
       end
 
       # Contains the response to a successful GetRolePolicy request.
-      class GetRolePolicyResponse < Aws::Structure.new(
+      class GetRolePolicyResponse < Struct.new(
         :role_name,
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The role the policy is associated with.
@@ -2626,8 +2798,10 @@ module Aws
       #       {
       #         role_name: "roleNameType", # required
       #       }
-      class GetRoleRequest < Aws::Structure.new(
+      class GetRoleRequest < Struct.new(
         :role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name of the IAM role to get information about.
@@ -2644,8 +2818,10 @@ module Aws
       end
 
       # Contains the response to a successful GetRole request.
-      class GetRoleResponse < Aws::Structure.new(
+      class GetRoleResponse < Struct.new(
         :role)
+
+        include Aws::Structure
 
         # @!attribute [rw] role
         #   A structure containing details about the IAM role.
@@ -2659,8 +2835,10 @@ module Aws
       #       {
       #         saml_provider_arn: "arnType", # required
       #       }
-      class GetSAMLProviderRequest < Aws::Structure.new(
+      class GetSAMLProviderRequest < Struct.new(
         :saml_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_provider_arn
         #   The Amazon Resource Name (ARN) of the SAML provider resource object
@@ -2677,10 +2855,12 @@ module Aws
       end
 
       # Contains the response to a successful GetSAMLProvider request.
-      class GetSAMLProviderResponse < Aws::Structure.new(
+      class GetSAMLProviderResponse < Struct.new(
         :saml_metadata_document,
         :create_date,
         :valid_until)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_metadata_document
         #   The XML metadata document that includes information about an
@@ -2705,10 +2885,12 @@ module Aws
       #         ssh_public_key_id: "publicKeyIdType", # required
       #         encoding: "SSH", # required, accepts SSH, PEM
       #       }
-      class GetSSHPublicKeyRequest < Aws::Structure.new(
+      class GetSSHPublicKeyRequest < Struct.new(
         :user_name,
         :ssh_public_key_id,
         :encoding)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user associated with the SSH public key.
@@ -2742,8 +2924,10 @@ module Aws
       end
 
       # Contains the response to a successful GetSSHPublicKey request.
-      class GetSSHPublicKeyResponse < Aws::Structure.new(
+      class GetSSHPublicKeyResponse < Struct.new(
         :ssh_public_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] ssh_public_key
         #   A structure containing details about the SSH public key.
@@ -2757,8 +2941,10 @@ module Aws
       #       {
       #         server_certificate_name: "serverCertificateNameType", # required
       #       }
-      class GetServerCertificateRequest < Aws::Structure.new(
+      class GetServerCertificateRequest < Struct.new(
         :server_certificate_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_certificate_name
         #   The name of the server certificate you want to retrieve information
@@ -2776,8 +2962,10 @@ module Aws
       end
 
       # Contains the response to a successful GetServerCertificate request.
-      class GetServerCertificateResponse < Aws::Structure.new(
+      class GetServerCertificateResponse < Struct.new(
         :server_certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_certificate
         #   A structure containing details about the server certificate.
@@ -2792,9 +2980,11 @@ module Aws
       #         user_name: "existingUserNameType", # required
       #         policy_name: "policyNameType", # required
       #       }
-      class GetUserPolicyRequest < Aws::Structure.new(
+      class GetUserPolicyRequest < Struct.new(
         :user_name,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user who the policy is associated with.
@@ -2823,10 +3013,12 @@ module Aws
       end
 
       # Contains the response to a successful GetUserPolicy request.
-      class GetUserPolicyResponse < Aws::Structure.new(
+      class GetUserPolicyResponse < Struct.new(
         :user_name,
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The user the policy is associated with.
@@ -2848,8 +3040,10 @@ module Aws
       #       {
       #         user_name: "existingUserNameType",
       #       }
-      class GetUserRequest < Aws::Structure.new(
+      class GetUserRequest < Struct.new(
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user to get information about.
@@ -2868,8 +3062,10 @@ module Aws
       end
 
       # Contains the response to a successful GetUser request.
-      class GetUserResponse < Aws::Structure.new(
+      class GetUserResponse < Struct.new(
         :user)
+
+        include Aws::Structure
 
         # @!attribute [rw] user
         #   A structure containing details about the IAM user.
@@ -2886,12 +3082,14 @@ module Aws
       # * GetGroup
       #
       # * ListGroups
-      class Group < Aws::Structure.new(
+      class Group < Struct.new(
         :path,
         :group_name,
         :group_id,
         :arn,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the group. For more information about paths, see [IAM
@@ -2942,7 +3140,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # GetAccountAuthorizationDetails action.
-      class GroupDetail < Aws::Structure.new(
+      class GroupDetail < Struct.new(
         :path,
         :group_name,
         :group_id,
@@ -2950,6 +3148,8 @@ module Aws
         :create_date,
         :group_policy_list,
         :attached_managed_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the group. For more information about paths, see [IAM
@@ -3016,13 +3216,15 @@ module Aws
       # * ListInstanceProfiles
       #
       # * ListInstanceProfilesForRole
-      class InstanceProfile < Aws::Structure.new(
+      class InstanceProfile < Struct.new(
         :path,
         :instance_profile_name,
         :instance_profile_id,
         :arn,
         :create_date,
         :roles)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the instance profile. For more information about paths,
@@ -3075,10 +3277,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListAccessKeysRequest < Aws::Structure.new(
+      class ListAccessKeysRequest < Struct.new(
         :user_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user.
@@ -3115,10 +3319,12 @@ module Aws
       end
 
       # Contains the response to a successful ListAccessKeys request.
-      class ListAccessKeysResponse < Aws::Structure.new(
+      class ListAccessKeysResponse < Struct.new(
         :access_key_metadata,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] access_key_metadata
         #   A list of objects containing metadata about the access keys.
@@ -3149,9 +3355,11 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListAccountAliasesRequest < Aws::Structure.new(
+      class ListAccountAliasesRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Use this parameter only when paginating results and only after you
@@ -3176,10 +3384,12 @@ module Aws
       end
 
       # Contains the response to a successful ListAccountAliases request.
-      class ListAccountAliasesResponse < Aws::Structure.new(
+      class ListAccountAliasesResponse < Struct.new(
         :account_aliases,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_aliases
         #   A list of aliases associated with the account. AWS supports only one
@@ -3213,11 +3423,13 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListAttachedGroupPoliciesRequest < Aws::Structure.new(
+      class ListAttachedGroupPoliciesRequest < Struct.new(
         :group_name,
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name (friendly name, not ARN) of the group to list attached
@@ -3273,10 +3485,12 @@ module Aws
 
       # Contains the response to a successful ListAttachedGroupPolicies
       # request.
-      class ListAttachedGroupPoliciesResponse < Aws::Structure.new(
+      class ListAttachedGroupPoliciesResponse < Struct.new(
         :attached_policies,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] attached_policies
         #   A list of the attached policies.
@@ -3309,11 +3523,13 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListAttachedRolePoliciesRequest < Aws::Structure.new(
+      class ListAttachedRolePoliciesRequest < Struct.new(
         :role_name,
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name (friendly name, not ARN) of the role to list attached
@@ -3369,10 +3585,12 @@ module Aws
 
       # Contains the response to a successful ListAttachedRolePolicies
       # request.
-      class ListAttachedRolePoliciesResponse < Aws::Structure.new(
+      class ListAttachedRolePoliciesResponse < Struct.new(
         :attached_policies,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] attached_policies
         #   A list of the attached policies.
@@ -3405,11 +3623,13 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListAttachedUserPoliciesRequest < Aws::Structure.new(
+      class ListAttachedUserPoliciesRequest < Struct.new(
         :user_name,
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name (friendly name, not ARN) of the user to list attached
@@ -3465,10 +3685,12 @@ module Aws
 
       # Contains the response to a successful ListAttachedUserPolicies
       # request.
-      class ListAttachedUserPoliciesResponse < Aws::Structure.new(
+      class ListAttachedUserPoliciesResponse < Struct.new(
         :attached_policies,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] attached_policies
         #   A list of the attached policies.
@@ -3502,12 +3724,14 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListEntitiesForPolicyRequest < Aws::Structure.new(
+      class ListEntitiesForPolicyRequest < Struct.new(
         :policy_arn,
         :entity_filter,
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the IAM policy for which you want
@@ -3571,12 +3795,14 @@ module Aws
       end
 
       # Contains the response to a successful ListEntitiesForPolicy request.
-      class ListEntitiesForPolicyResponse < Aws::Structure.new(
+      class ListEntitiesForPolicyResponse < Struct.new(
         :policy_groups,
         :policy_users,
         :policy_roles,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_groups
         #   A list of IAM groups that the policy is attached to.
@@ -3616,10 +3842,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListGroupPoliciesRequest < Aws::Structure.new(
+      class ListGroupPoliciesRequest < Struct.new(
         :group_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the group to list policies for.
@@ -3656,10 +3884,12 @@ module Aws
       end
 
       # Contains the response to a successful ListGroupPolicies request.
-      class ListGroupPoliciesResponse < Aws::Structure.new(
+      class ListGroupPoliciesResponse < Struct.new(
         :policy_names,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_names
         #   A list of policy names.
@@ -3691,10 +3921,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListGroupsForUserRequest < Aws::Structure.new(
+      class ListGroupsForUserRequest < Struct.new(
         :user_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user to list groups for.
@@ -3731,10 +3963,12 @@ module Aws
       end
 
       # Contains the response to a successful ListGroupsForUser request.
-      class ListGroupsForUserResponse < Aws::Structure.new(
+      class ListGroupsForUserResponse < Struct.new(
         :groups,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] groups
         #   A list of groups.
@@ -3766,10 +4000,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListGroupsRequest < Aws::Structure.new(
+      class ListGroupsRequest < Struct.new(
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] path_prefix
         #   The path prefix for filtering the results. For example, the prefix
@@ -3812,10 +4048,12 @@ module Aws
       end
 
       # Contains the response to a successful ListGroups request.
-      class ListGroupsResponse < Aws::Structure.new(
+      class ListGroupsResponse < Struct.new(
         :groups,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] groups
         #   A list of groups.
@@ -3847,10 +4085,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListInstanceProfilesForRoleRequest < Aws::Structure.new(
+      class ListInstanceProfilesForRoleRequest < Struct.new(
         :role_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name of the role to list instance profiles for.
@@ -3888,10 +4128,12 @@ module Aws
 
       # Contains the response to a successful ListInstanceProfilesForRole
       # request.
-      class ListInstanceProfilesForRoleResponse < Aws::Structure.new(
+      class ListInstanceProfilesForRoleResponse < Struct.new(
         :instance_profiles,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profiles
         #   A list of instance profiles.
@@ -3923,10 +4165,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListInstanceProfilesRequest < Aws::Structure.new(
+      class ListInstanceProfilesRequest < Struct.new(
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] path_prefix
         #   The path prefix for filtering the results. For example, the prefix
@@ -3969,10 +4213,12 @@ module Aws
       end
 
       # Contains the response to a successful ListInstanceProfiles request.
-      class ListInstanceProfilesResponse < Aws::Structure.new(
+      class ListInstanceProfilesResponse < Struct.new(
         :instance_profiles,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profiles
         #   A list of instance profiles.
@@ -4004,10 +4250,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListMFADevicesRequest < Aws::Structure.new(
+      class ListMFADevicesRequest < Struct.new(
         :user_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose MFA devices you want to list.
@@ -4044,10 +4292,12 @@ module Aws
       end
 
       # Contains the response to a successful ListMFADevices request.
-      class ListMFADevicesResponse < Aws::Structure.new(
+      class ListMFADevicesResponse < Struct.new(
         :mfa_devices,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] mfa_devices
         #   A list of MFA devices.
@@ -4076,8 +4326,10 @@ module Aws
 
       # Contains the response to a successful ListOpenIDConnectProviders
       # request.
-      class ListOpenIDConnectProvidersResponse < Aws::Structure.new(
+      class ListOpenIDConnectProvidersResponse < Struct.new(
         :open_id_connect_provider_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_id_connect_provider_list
         #   The list of IAM OIDC provider resource objects defined in the AWS
@@ -4096,12 +4348,14 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListPoliciesRequest < Aws::Structure.new(
+      class ListPoliciesRequest < Struct.new(
         :scope,
         :only_attached,
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] scope
         #   The scope to use for filtering the results.
@@ -4161,10 +4415,12 @@ module Aws
       end
 
       # Contains the response to a successful ListPolicies request.
-      class ListPoliciesResponse < Aws::Structure.new(
+      class ListPoliciesResponse < Struct.new(
         :policies,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policies
         #   A list of policies.
@@ -4196,10 +4452,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListPolicyVersionsRequest < Aws::Structure.new(
+      class ListPolicyVersionsRequest < Struct.new(
         :policy_arn,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the IAM policy for which you want
@@ -4236,10 +4494,12 @@ module Aws
       end
 
       # Contains the response to a successful ListPolicyVersions request.
-      class ListPolicyVersionsResponse < Aws::Structure.new(
+      class ListPolicyVersionsResponse < Struct.new(
         :versions,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] versions
         #   A list of policy versions.
@@ -4278,10 +4538,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListRolePoliciesRequest < Aws::Structure.new(
+      class ListRolePoliciesRequest < Struct.new(
         :role_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name of the role to list policies for.
@@ -4318,10 +4580,12 @@ module Aws
       end
 
       # Contains the response to a successful ListRolePolicies request.
-      class ListRolePoliciesResponse < Aws::Structure.new(
+      class ListRolePoliciesResponse < Struct.new(
         :policy_names,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_names
         #   A list of policy names.
@@ -4353,10 +4617,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListRolesRequest < Aws::Structure.new(
+      class ListRolesRequest < Struct.new(
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] path_prefix
         #   The path prefix for filtering the results. For example, the prefix
@@ -4399,10 +4665,12 @@ module Aws
       end
 
       # Contains the response to a successful ListRoles request.
-      class ListRolesResponse < Aws::Structure.new(
+      class ListRolesResponse < Struct.new(
         :roles,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] roles
         #   A list of roles.
@@ -4430,8 +4698,10 @@ module Aws
       class ListSAMLProvidersRequest < Aws::EmptyStructure; end
 
       # Contains the response to a successful ListSAMLProviders request.
-      class ListSAMLProvidersResponse < Aws::Structure.new(
+      class ListSAMLProvidersResponse < Struct.new(
         :saml_provider_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_provider_list
         #   The list of SAML provider resource objects defined in IAM for this
@@ -4448,10 +4718,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListSSHPublicKeysRequest < Aws::Structure.new(
+      class ListSSHPublicKeysRequest < Struct.new(
         :user_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user to list SSH public keys for. If none is
@@ -4490,10 +4762,12 @@ module Aws
       end
 
       # Contains the response to a successful ListSSHPublicKeys request.
-      class ListSSHPublicKeysResponse < Aws::Structure.new(
+      class ListSSHPublicKeysResponse < Struct.new(
         :ssh_public_keys,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] ssh_public_keys
         #   A list of the SSH public keys assigned to IAM user.
@@ -4525,10 +4799,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListServerCertificatesRequest < Aws::Structure.new(
+      class ListServerCertificatesRequest < Struct.new(
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] path_prefix
         #   The path prefix for filtering the results. For example:
@@ -4571,10 +4847,12 @@ module Aws
       end
 
       # Contains the response to a successful ListServerCertificates request.
-      class ListServerCertificatesResponse < Aws::Structure.new(
+      class ListServerCertificatesResponse < Struct.new(
         :server_certificate_metadata_list,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_certificate_metadata_list
         #   A list of server certificates.
@@ -4606,10 +4884,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListSigningCertificatesRequest < Aws::Structure.new(
+      class ListSigningCertificatesRequest < Struct.new(
         :user_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user whose signing certificates you want to
@@ -4647,10 +4927,12 @@ module Aws
       end
 
       # Contains the response to a successful ListSigningCertificates request.
-      class ListSigningCertificatesResponse < Aws::Structure.new(
+      class ListSigningCertificatesResponse < Struct.new(
         :certificates,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificates
         #   A list of the user\'s signing certificate information.
@@ -4682,10 +4964,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListUserPoliciesRequest < Aws::Structure.new(
+      class ListUserPoliciesRequest < Struct.new(
         :user_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user to list policies for.
@@ -4722,10 +5006,12 @@ module Aws
       end
 
       # Contains the response to a successful ListUserPolicies request.
-      class ListUserPoliciesResponse < Aws::Structure.new(
+      class ListUserPoliciesResponse < Struct.new(
         :policy_names,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_names
         #   A list of policy names.
@@ -4757,10 +5043,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListUsersRequest < Aws::Structure.new(
+      class ListUsersRequest < Struct.new(
         :path_prefix,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] path_prefix
         #   The path prefix for filtering the results. For example:
@@ -4803,10 +5091,12 @@ module Aws
       end
 
       # Contains the response to a successful ListUsers request.
-      class ListUsersResponse < Aws::Structure.new(
+      class ListUsersResponse < Struct.new(
         :users,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] users
         #   A list of users.
@@ -4838,10 +5128,12 @@ module Aws
       #         marker: "markerType",
       #         max_items: 1,
       #       }
-      class ListVirtualMFADevicesRequest < Aws::Structure.new(
+      class ListVirtualMFADevicesRequest < Struct.new(
         :assignment_status,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] assignment_status
         #   The status (`Unassigned` or `Assigned`) of the devices to list. If
@@ -4872,10 +5164,12 @@ module Aws
       end
 
       # Contains the response to a successful ListVirtualMFADevices request.
-      class ListVirtualMFADevicesResponse < Aws::Structure.new(
+      class ListVirtualMFADevicesResponse < Struct.new(
         :virtual_mfa_devices,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_mfa_devices
         #   The list of virtual MFA devices in the current account that match
@@ -4904,10 +5198,12 @@ module Aws
       #
       # This data type is used as a response element in the CreateLoginProfile
       # and GetLoginProfile actions.
-      class LoginProfile < Aws::Structure.new(
+      class LoginProfile < Struct.new(
         :user_name,
         :create_date,
         :password_reset_required)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user, which can be used for signing in to the AWS
@@ -4929,10 +5225,12 @@ module Aws
       #
       # This data type is used as a response element in the ListMFADevices
       # action.
-      class MFADevice < Aws::Structure.new(
+      class MFADevice < Struct.new(
         :user_name,
         :serial_number,
         :enable_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The user with whom the MFA device is associated.
@@ -4962,7 +5260,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      class ManagedPolicyDetail < Aws::Structure.new(
+      class ManagedPolicyDetail < Struct.new(
         :policy_name,
         :policy_id,
         :arn,
@@ -4974,6 +5272,8 @@ module Aws
         :create_date,
         :update_date,
         :policy_version_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The friendly name (not ARN) identifying the policy.
@@ -5070,8 +5370,10 @@ module Aws
 
       # Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect
       # provider.
-      class OpenIDConnectProviderListEntry < Aws::Structure.new(
+      class OpenIDConnectProviderListEntry < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS
@@ -5091,7 +5393,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # GetAccountPasswordPolicy action.
-      class PasswordPolicy < Aws::Structure.new(
+      class PasswordPolicy < Struct.new(
         :minimum_password_length,
         :require_symbols,
         :require_numbers,
@@ -5102,6 +5404,8 @@ module Aws
         :max_password_age,
         :password_reuse_prevention,
         :hard_expiry)
+
+        include Aws::Structure
 
         # @!attribute [rw] minimum_password_length
         #   Minimum length to require for IAM user passwords.
@@ -5163,7 +5467,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      class Policy < Aws::Structure.new(
+      class Policy < Struct.new(
         :policy_name,
         :policy_id,
         :arn,
@@ -5174,6 +5478,8 @@ module Aws
         :description,
         :create_date,
         :update_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The friendly name (not ARN) identifying the policy.
@@ -5265,9 +5571,11 @@ module Aws
       #
       # This data type is used as a response element in the
       # GetAccountAuthorizationDetails action.
-      class PolicyDetail < Aws::Structure.new(
+      class PolicyDetail < Struct.new(
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_name
         #   The name of the policy.
@@ -5291,9 +5599,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      class PolicyGroup < Aws::Structure.new(
+      class PolicyGroup < Struct.new(
         :group_name,
         :group_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name (friendly name, not ARN) identifying the group.
@@ -5323,9 +5633,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      class PolicyRole < Aws::Structure.new(
+      class PolicyRole < Struct.new(
         :role_name,
         :role_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name (friendly name, not ARN) identifying the role.
@@ -5355,9 +5667,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      class PolicyUser < Aws::Structure.new(
+      class PolicyUser < Struct.new(
         :user_name,
         :user_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name (friendly name, not ARN) identifying the user.
@@ -5387,11 +5701,13 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
-      class PolicyVersion < Aws::Structure.new(
+      class PolicyVersion < Struct.new(
         :document,
         :version_id,
         :is_default_version,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] document
         #   The policy document.
@@ -5429,9 +5745,11 @@ module Aws
       # a policy document.
       #
       # This data type is used as a member of the ` Statement ` type.
-      class Position < Aws::Structure.new(
+      class Position < Struct.new(
         :line,
         :column)
+
+        include Aws::Structure
 
         # @!attribute [rw] line
         #   The line containing the specified position in the document.
@@ -5452,10 +5770,12 @@ module Aws
       #         policy_name: "policyNameType", # required
       #         policy_document: "policyDocumentType", # required
       #       }
-      class PutGroupPolicyRequest < Aws::Structure.new(
+      class PutGroupPolicyRequest < Struct.new(
         :group_name,
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the group to associate the policy with.
@@ -5505,10 +5825,12 @@ module Aws
       #         policy_name: "policyNameType", # required
       #         policy_document: "policyDocumentType", # required
       #       }
-      class PutRolePolicyRequest < Aws::Structure.new(
+      class PutRolePolicyRequest < Struct.new(
         :role_name,
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name of the role to associate the policy with.
@@ -5558,10 +5880,12 @@ module Aws
       #         policy_name: "policyNameType", # required
       #         policy_document: "policyDocumentType", # required
       #       }
-      class PutUserPolicyRequest < Aws::Structure.new(
+      class PutUserPolicyRequest < Struct.new(
         :user_name,
         :policy_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user to associate the policy with.
@@ -5610,9 +5934,11 @@ module Aws
       #         open_id_connect_provider_arn: "arnType", # required
       #         client_id: "clientIDType", # required
       #       }
-      class RemoveClientIDFromOpenIDConnectProviderRequest < Aws::Structure.new(
+      class RemoveClientIDFromOpenIDConnectProviderRequest < Struct.new(
         :open_id_connect_provider_arn,
         :client_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_id_connect_provider_arn
         #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource to
@@ -5642,9 +5968,11 @@ module Aws
       #         instance_profile_name: "instanceProfileNameType", # required
       #         role_name: "roleNameType", # required
       #       }
-      class RemoveRoleFromInstanceProfileRequest < Aws::Structure.new(
+      class RemoveRoleFromInstanceProfileRequest < Struct.new(
         :instance_profile_name,
         :role_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_profile_name
         #   The name of the instance profile to update.
@@ -5679,9 +6007,11 @@ module Aws
       #         group_name: "groupNameType", # required
       #         user_name: "existingUserNameType", # required
       #       }
-      class RemoveUserFromGroupRequest < Aws::Structure.new(
+      class RemoveUserFromGroupRequest < Struct.new(
         :group_name,
         :user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   The name of the group to update.
@@ -5713,12 +6043,14 @@ module Aws
       # single resource.
       #
       # This data type is used by a member of the EvaluationResult data type.
-      class ResourceSpecificResult < Aws::Structure.new(
+      class ResourceSpecificResult < Struct.new(
         :eval_resource_name,
         :eval_resource_decision,
         :matched_statements,
         :missing_context_values,
         :eval_decision_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] eval_resource_name
         #   The name of the simulated resource, in Amazon Resource Name (ARN)
@@ -5771,11 +6103,13 @@ module Aws
       #         authentication_code_1: "authenticationCodeType", # required
       #         authentication_code_2: "authenticationCodeType", # required
       #       }
-      class ResyncMFADeviceRequest < Aws::Structure.new(
+      class ResyncMFADeviceRequest < Struct.new(
         :user_name,
         :serial_number,
         :authentication_code_1,
         :authentication_code_2)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose MFA device you want to resynchronize.
@@ -5824,13 +6158,15 @@ module Aws
       # * GetRole
       #
       # * ListRoles
-      class Role < Aws::Structure.new(
+      class Role < Struct.new(
         :path,
         :role_name,
         :role_id,
         :arn,
         :create_date,
         :assume_role_policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the role. For more information about paths, see [IAM
@@ -5885,7 +6221,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # GetAccountAuthorizationDetails action.
-      class RoleDetail < Aws::Structure.new(
+      class RoleDetail < Struct.new(
         :path,
         :role_name,
         :role_id,
@@ -5895,6 +6231,8 @@ module Aws
         :instance_profile_list,
         :role_policy_list,
         :attached_managed_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the role. For more information about paths, see [IAM
@@ -5961,10 +6299,12 @@ module Aws
       end
 
       # Contains the list of SAML providers for this account.
-      class SAMLProviderListEntry < Aws::Structure.new(
+      class SAMLProviderListEntry < Struct.new(
         :arn,
         :valid_until,
         :create_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the SAML provider.
@@ -5984,13 +6324,15 @@ module Aws
       #
       # This data type is used as a response element in the GetSSHPublicKey
       # and UploadSSHPublicKey actions.
-      class SSHPublicKey < Aws::Structure.new(
+      class SSHPublicKey < Struct.new(
         :user_name,
         :ssh_public_key_id,
         :fingerprint,
         :ssh_public_key_body,
         :status,
         :upload_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user associated with the SSH public key.
@@ -6030,11 +6372,13 @@ module Aws
       #
       # This data type is used as a response element in the ListSSHPublicKeys
       # action.
-      class SSHPublicKeyMetadata < Aws::Structure.new(
+      class SSHPublicKeyMetadata < Struct.new(
         :user_name,
         :ssh_public_key_id,
         :status,
         :upload_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user associated with the SSH public key.
@@ -6065,10 +6409,12 @@ module Aws
       #
       # This data type is used as a response element in the
       # GetServerCertificate action.
-      class ServerCertificate < Aws::Structure.new(
+      class ServerCertificate < Struct.new(
         :server_certificate_metadata,
         :certificate_body,
         :certificate_chain)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_certificate_metadata
         #   The meta information of the server certificate, such as its name,
@@ -6090,13 +6436,15 @@ module Aws
       #
       # This data type is used as a response element in the
       # UploadServerCertificate and ListServerCertificates actions.
-      class ServerCertificateMetadata < Aws::Structure.new(
+      class ServerCertificateMetadata < Struct.new(
         :path,
         :server_certificate_name,
         :server_certificate_id,
         :arn,
         :upload_date,
         :expiration)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the server certificate. For more information about
@@ -6148,9 +6496,11 @@ module Aws
       #         policy_arn: "arnType", # required
       #         version_id: "policyVersionIdType", # required
       #       }
-      class SetDefaultPolicyVersionRequest < Aws::Structure.new(
+      class SetDefaultPolicyVersionRequest < Struct.new(
         :policy_arn,
         :version_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_arn
         #   The Amazon Resource Name (ARN) of the IAM policy whose default
@@ -6181,12 +6531,14 @@ module Aws
       #
       # This data type is used as a response element in the
       # UploadSigningCertificate and ListSigningCertificates actions.
-      class SigningCertificate < Aws::Structure.new(
+      class SigningCertificate < Struct.new(
         :user_name,
         :certificate_id,
         :certificate_body,
         :status,
         :upload_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user the signing certificate is associated with.
@@ -6232,7 +6584,7 @@ module Aws
       #         max_items: 1,
       #         marker: "markerType",
       #       }
-      class SimulateCustomPolicyRequest < Aws::Structure.new(
+      class SimulateCustomPolicyRequest < Struct.new(
         :policy_input_list,
         :action_names,
         :resource_arns,
@@ -6243,6 +6595,8 @@ module Aws
         :resource_handling_option,
         :max_items,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_input_list
         #   A list of policy documents to include in the simulation. Each
@@ -6415,10 +6769,12 @@ module Aws
 
       # Contains the response to a successful SimulatePrincipalPolicy or
       # SimulateCustomPolicy request.
-      class SimulatePolicyResponse < Aws::Structure.new(
+      class SimulatePolicyResponse < Struct.new(
         :evaluation_results,
         :is_truncated,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] evaluation_results
         #   The results of the simulation.
@@ -6464,7 +6820,7 @@ module Aws
       #         max_items: 1,
       #         marker: "markerType",
       #       }
-      class SimulatePrincipalPolicyRequest < Aws::Structure.new(
+      class SimulatePrincipalPolicyRequest < Struct.new(
         :policy_source_arn,
         :policy_input_list,
         :action_names,
@@ -6476,6 +6832,8 @@ module Aws
         :resource_handling_option,
         :max_items,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_source_arn
         #   The Amazon Resource Name (ARN) of a user, group, or role whose
@@ -6672,11 +7030,13 @@ module Aws
       #
       # This data type is used by the `MatchedStatements` member of the `
       # EvaluationResult ` type.
-      class Statement < Aws::Structure.new(
+      class Statement < Struct.new(
         :source_policy_id,
         :source_policy_type,
         :start_position,
         :end_position)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_policy_id
         #   The identifier of the policy that was provided as an input.
@@ -6705,10 +7065,12 @@ module Aws
       #         access_key_id: "accessKeyIdType", # required
       #         status: "Active", # required, accepts Active, Inactive
       #       }
-      class UpdateAccessKeyRequest < Aws::Structure.new(
+      class UpdateAccessKeyRequest < Struct.new(
         :user_name,
         :access_key_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose key you want to update.
@@ -6755,7 +7117,7 @@ module Aws
       #         password_reuse_prevention: 1,
       #         hard_expiry: false,
       #       }
-      class UpdateAccountPasswordPolicyRequest < Aws::Structure.new(
+      class UpdateAccountPasswordPolicyRequest < Struct.new(
         :minimum_password_length,
         :require_symbols,
         :require_numbers,
@@ -6765,6 +7127,8 @@ module Aws
         :max_password_age,
         :password_reuse_prevention,
         :hard_expiry)
+
+        include Aws::Structure
 
         # @!attribute [rw] minimum_password_length
         #   The minimum number of characters allowed in an IAM user password.
@@ -6846,9 +7210,11 @@ module Aws
       #         role_name: "roleNameType", # required
       #         policy_document: "policyDocumentType", # required
       #       }
-      class UpdateAssumeRolePolicyRequest < Aws::Structure.new(
+      class UpdateAssumeRolePolicyRequest < Struct.new(
         :role_name,
         :policy_document)
+
+        include Aws::Structure
 
         # @!attribute [rw] role_name
         #   The name of the role to update with the new policy.
@@ -6886,10 +7252,12 @@ module Aws
       #         new_path: "pathType",
       #         new_group_name: "groupNameType",
       #       }
-      class UpdateGroupRequest < Aws::Structure.new(
+      class UpdateGroupRequest < Struct.new(
         :group_name,
         :new_path,
         :new_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] group_name
         #   Name of the IAM group to update. If you\'re changing the name of the
@@ -6943,10 +7311,12 @@ module Aws
       #         password: "passwordType",
       #         password_reset_required: false,
       #       }
-      class UpdateLoginProfileRequest < Aws::Structure.new(
+      class UpdateLoginProfileRequest < Struct.new(
         :user_name,
         :password,
         :password_reset_required)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user whose password you want to update.
@@ -6991,9 +7361,11 @@ module Aws
       #         open_id_connect_provider_arn: "arnType", # required
       #         thumbprint_list: ["thumbprintType"], # required
       #       }
-      class UpdateOpenIDConnectProviderThumbprintRequest < Aws::Structure.new(
+      class UpdateOpenIDConnectProviderThumbprintRequest < Struct.new(
         :open_id_connect_provider_arn,
         :thumbprint_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] open_id_connect_provider_arn
         #   The Amazon Resource Name (ARN) of the IAM OIDC provider resource
@@ -7024,9 +7396,11 @@ module Aws
       #         saml_metadata_document: "SAMLMetadataDocumentType", # required
       #         saml_provider_arn: "arnType", # required
       #       }
-      class UpdateSAMLProviderRequest < Aws::Structure.new(
+      class UpdateSAMLProviderRequest < Struct.new(
         :saml_metadata_document,
         :saml_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_metadata_document
         #   An XML document generated by an identity provider (IdP) that
@@ -7051,8 +7425,10 @@ module Aws
       end
 
       # Contains the response to a successful UpdateSAMLProvider request.
-      class UpdateSAMLProviderResponse < Aws::Structure.new(
+      class UpdateSAMLProviderResponse < Struct.new(
         :saml_provider_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] saml_provider_arn
         #   The Amazon Resource Name (ARN) of the SAML provider that was
@@ -7069,10 +7445,12 @@ module Aws
       #         ssh_public_key_id: "publicKeyIdType", # required
       #         status: "Active", # required, accepts Active, Inactive
       #       }
-      class UpdateSSHPublicKeyRequest < Aws::Structure.new(
+      class UpdateSSHPublicKeyRequest < Struct.new(
         :user_name,
         :ssh_public_key_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user associated with the SSH public key.
@@ -7113,10 +7491,12 @@ module Aws
       #         new_path: "pathType",
       #         new_server_certificate_name: "serverCertificateNameType",
       #       }
-      class UpdateServerCertificateRequest < Aws::Structure.new(
+      class UpdateServerCertificateRequest < Struct.new(
         :server_certificate_name,
         :new_path,
         :new_server_certificate_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_certificate_name
         #   The name of the server certificate that you want to update.
@@ -7170,10 +7550,12 @@ module Aws
       #         certificate_id: "certificateIdType", # required
       #         status: "Active", # required, accepts Active, Inactive
       #       }
-      class UpdateSigningCertificateRequest < Aws::Structure.new(
+      class UpdateSigningCertificateRequest < Struct.new(
         :user_name,
         :certificate_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user the signing certificate belongs to.
@@ -7214,10 +7596,12 @@ module Aws
       #         new_path: "pathType",
       #         new_user_name: "userNameType",
       #       }
-      class UpdateUserRequest < Aws::Structure.new(
+      class UpdateUserRequest < Struct.new(
         :user_name,
         :new_path,
         :new_user_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   Name of the user to update. If you\'re changing the name of the
@@ -7270,9 +7654,11 @@ module Aws
       #         user_name: "userNameType", # required
       #         ssh_public_key_body: "publicKeyMaterialType", # required
       #       }
-      class UploadSSHPublicKeyRequest < Aws::Structure.new(
+      class UploadSSHPublicKeyRequest < Struct.new(
         :user_name,
         :ssh_public_key_body)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the IAM user to associate the SSH public key with.
@@ -7304,8 +7690,10 @@ module Aws
       end
 
       # Contains the response to a successful UploadSSHPublicKey request.
-      class UploadSSHPublicKeyResponse < Aws::Structure.new(
+      class UploadSSHPublicKeyResponse < Struct.new(
         :ssh_public_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] ssh_public_key
         #   Contains information about the SSH public key.
@@ -7323,12 +7711,14 @@ module Aws
       #         private_key: "privateKeyType", # required
       #         certificate_chain: "certificateChainType",
       #       }
-      class UploadServerCertificateRequest < Aws::Structure.new(
+      class UploadServerCertificateRequest < Struct.new(
         :path,
         :server_certificate_name,
         :certificate_body,
         :private_key,
         :certificate_chain)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path for the server certificate. For more information about
@@ -7415,8 +7805,10 @@ module Aws
       end
 
       # Contains the response to a successful UploadServerCertificate request.
-      class UploadServerCertificateResponse < Aws::Structure.new(
+      class UploadServerCertificateResponse < Struct.new(
         :server_certificate_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] server_certificate_metadata
         #   The meta information of the uploaded server certificate without its
@@ -7432,9 +7824,11 @@ module Aws
       #         user_name: "existingUserNameType",
       #         certificate_body: "certificateBodyType", # required
       #       }
-      class UploadSigningCertificateRequest < Aws::Structure.new(
+      class UploadSigningCertificateRequest < Struct.new(
         :user_name,
         :certificate_body)
+
+        include Aws::Structure
 
         # @!attribute [rw] user_name
         #   The name of the user the signing certificate is for.
@@ -7466,8 +7860,10 @@ module Aws
 
       # Contains the response to a successful UploadSigningCertificate
       # request.
-      class UploadSigningCertificateResponse < Aws::Structure.new(
+      class UploadSigningCertificateResponse < Struct.new(
         :certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate
         #   Information about the certificate.
@@ -7484,13 +7880,15 @@ module Aws
       # * GetUser
       #
       # * ListUsers
-      class User < Aws::Structure.new(
+      class User < Struct.new(
         :path,
         :user_name,
         :user_id,
         :arn,
         :create_date,
         :password_last_used)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the user. For more information about paths, see [IAM
@@ -7565,7 +7963,7 @@ module Aws
       #
       # This data type is used as a response element in the
       # GetAccountAuthorizationDetails action.
-      class UserDetail < Aws::Structure.new(
+      class UserDetail < Struct.new(
         :path,
         :user_name,
         :user_id,
@@ -7574,6 +7972,8 @@ module Aws
         :user_policy_list,
         :group_list,
         :attached_managed_policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] path
         #   The path to the user. For more information about paths, see [IAM
@@ -7634,12 +8034,14 @@ module Aws
       end
 
       # Contains information about a virtual MFA device.
-      class VirtualMFADevice < Aws::Structure.new(
+      class VirtualMFADevice < Struct.new(
         :serial_number,
         :base_32_string_seed,
         :qr_code_png,
         :user,
         :enable_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] serial_number
         #   The serial number associated with `VirtualMFADevice`.

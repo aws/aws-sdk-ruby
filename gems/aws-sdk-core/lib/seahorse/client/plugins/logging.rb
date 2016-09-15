@@ -1,6 +1,7 @@
 module Seahorse
   module Client
     module Plugins
+      # @api private
       class Logging < Plugin
 
         option(:logger,
@@ -17,7 +18,7 @@ is not set, logging is disabled.
           docstring: 'The log level to send messages to the logger at.')
 
         option(:log_formatter,
-          default: nil,
+          default: Seahorse::Client::Logging::Formatter.default,
           doc_default: 'Aws::Log::Formatter.default',
           doc_type: 'Aws::Log::Formatter',
           docstring: 'The log formatter.')

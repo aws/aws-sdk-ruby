@@ -36,7 +36,7 @@ module Aws
       #           initialization_vector: "ZeroTo255String",
       #         },
       #       }
-      class Artwork < Aws::Structure.new(
+      class Artwork < Struct.new(
         :input_key,
         :max_width,
         :max_height,
@@ -44,6 +44,8 @@ module Aws
         :padding_policy,
         :album_art_format,
         :encryption)
+
+        include Aws::Structure
 
         # @!attribute [rw] input_key
         #   The name of the file to be used as album art. To determine which
@@ -131,11 +133,13 @@ module Aws
       #         bit_order: "AudioBitOrder",
       #         signed: "AudioSigned",
       #       }
-      class AudioCodecOptions < Aws::Structure.new(
+      class AudioCodecOptions < Struct.new(
         :profile,
         :bit_depth,
         :bit_order,
         :signed)
+
+        include Aws::Structure
 
         # @!attribute [rw] profile
         #   You can only choose an audio profile when you specify AAC for the
@@ -214,13 +218,15 @@ module Aws
       #           signed: "AudioSigned",
       #         },
       #       }
-      class AudioParameters < Aws::Structure.new(
+      class AudioParameters < Struct.new(
         :codec,
         :sample_rate,
         :bit_rate,
         :channels,
         :audio_packing_mode,
         :codec_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] codec
         #   The audio codec for the output file. Valid values include `aac`,
@@ -380,8 +386,10 @@ module Aws
       #       {
       #         id: "Id", # required
       #       }
-      class CancelJobRequest < Aws::Structure.new(
+      class CancelJobRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the job that you want to cancel.
@@ -411,10 +419,12 @@ module Aws
       #           initialization_vector: "ZeroTo255String",
       #         },
       #       }
-      class CaptionFormat < Aws::Structure.new(
+      class CaptionFormat < Struct.new(
         :format,
         :pattern,
         :encryption)
+
+        include Aws::Structure
 
         # @!attribute [rw] format
         #   The format you specify determines whether Elastic Transcoder
@@ -491,12 +501,14 @@ module Aws
       #           initialization_vector: "ZeroTo255String",
       #         },
       #       }
-      class CaptionSource < Aws::Structure.new(
+      class CaptionSource < Struct.new(
         :key,
         :language,
         :time_offset,
         :label,
         :encryption)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the sidecar caption file that you want Elastic
@@ -571,10 +583,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class Captions < Aws::Structure.new(
+      class Captions < Struct.new(
         :merge_policy,
         :caption_sources,
         :caption_formats)
+
+        include Aws::Structure
 
         # @!attribute [rw] merge_policy
         #   A policy that determines how Elastic Transcoder handles the
@@ -624,8 +638,10 @@ module Aws
       #           duration: "Time",
       #         },
       #       }
-      class Clip < Aws::Structure.new(
+      class Clip < Struct.new(
         :time_span)
+
+        include Aws::Structure
 
         # @!attribute [rw] time_span
         #   Settings that determine when a clip begins and how long it lasts.
@@ -724,7 +740,7 @@ module Aws
       #           initialization_vector: "ZeroTo255String",
       #         },
       #       }
-      class CreateJobOutput < Aws::Structure.new(
+      class CreateJobOutput < Struct.new(
         :key,
         :thumbnail_pattern,
         :thumbnail_encryption,
@@ -736,6 +752,8 @@ module Aws
         :composition,
         :captions,
         :encryption)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name to assign to the transcoded file. Elastic Transcoder saves
@@ -935,12 +953,14 @@ module Aws
       #           license_acquisition_url: "OneTo512String",
       #         },
       #       }
-      class CreateJobPlaylist < Aws::Structure.new(
+      class CreateJobPlaylist < Struct.new(
         :name,
         :format,
         :output_keys,
         :hls_content_protection,
         :play_ready_drm)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name that you want Elastic Transcoder to assign to the master
@@ -1248,7 +1268,7 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class CreateJobRequest < Aws::Structure.new(
+      class CreateJobRequest < Struct.new(
         :pipeline_id,
         :input,
         :output,
@@ -1256,6 +1276,8 @@ module Aws
         :output_key_prefix,
         :playlists,
         :user_metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The `Id` of the pipeline that you want Elastic Transcoder to use for
@@ -1306,8 +1328,10 @@ module Aws
       end
 
       # The CreateJobResponse structure.
-      class CreateJobResponse < Aws::Structure.new(
+      class CreateJobResponse < Struct.new(
         :job)
+
+        include Aws::Structure
 
         # @!attribute [rw] job
         #   A section of the response body that provides information about the
@@ -1355,7 +1379,7 @@ module Aws
       #           ],
       #         },
       #       }
-      class CreatePipelineRequest < Aws::Structure.new(
+      class CreatePipelineRequest < Struct.new(
         :name,
         :input_bucket,
         :output_bucket,
@@ -1364,6 +1388,8 @@ module Aws
         :notifications,
         :content_config,
         :thumbnail_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the pipeline. We recommend that the name be unique
@@ -1572,9 +1598,11 @@ module Aws
 
       # When you create a pipeline, Elastic Transcoder returns the values that
       # you specified in the request.
-      class CreatePipelineResponse < Aws::Structure.new(
+      class CreatePipelineResponse < Struct.new(
         :pipeline,
         :warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   A section of the response body that provides information about the
@@ -1656,13 +1684,15 @@ module Aws
       #           padding_policy: "PaddingPolicy",
       #         },
       #       }
-      class CreatePresetRequest < Aws::Structure.new(
+      class CreatePresetRequest < Struct.new(
         :name,
         :description,
         :container,
         :video,
         :audio,
         :thumbnails)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the preset. We recommend that the name be unique within
@@ -1695,9 +1725,11 @@ module Aws
       end
 
       # The `CreatePresetResponse` structure.
-      class CreatePresetResponse < Aws::Structure.new(
+      class CreatePresetResponse < Struct.new(
         :preset,
         :warning)
+
+        include Aws::Structure
 
         # @!attribute [rw] preset
         #   A section of the response body that provides information about the
@@ -1721,8 +1753,10 @@ module Aws
       #       {
       #         id: "Id", # required
       #       }
-      class DeletePipelineRequest < Aws::Structure.new(
+      class DeletePipelineRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the pipeline that you want to delete.
@@ -1740,8 +1774,10 @@ module Aws
       #       {
       #         id: "Id", # required
       #       }
-      class DeletePresetRequest < Aws::Structure.new(
+      class DeletePresetRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the preset for which you want to get detailed
@@ -1765,12 +1801,14 @@ module Aws
       #         file_size: 1,
       #         duration_millis: 1,
       #       }
-      class DetectedProperties < Aws::Structure.new(
+      class DetectedProperties < Struct.new(
         :width,
         :height,
         :frame_rate,
         :file_size,
         :duration_millis)
+
+        include Aws::Structure
 
         # @!attribute [rw] width
         #   The detected width of the input file, in pixels.
@@ -1808,11 +1846,13 @@ module Aws
       #         key_md_5: "Base64EncodedString",
       #         initialization_vector: "ZeroTo255String",
       #       }
-      class Encryption < Aws::Structure.new(
+      class Encryption < Struct.new(
         :mode,
         :key,
         :key_md_5,
         :initialization_vector)
+
+        include Aws::Structure
 
         # @!attribute [rw] mode
         #   The specific server-side encryption mode that you want Elastic
@@ -1900,13 +1940,15 @@ module Aws
       #         license_acquisition_url: "ZeroTo512String",
       #         key_storage_policy: "KeyStoragePolicy",
       #       }
-      class HlsContentProtection < Aws::Structure.new(
+      class HlsContentProtection < Struct.new(
         :method,
         :key,
         :key_md_5,
         :initialization_vector,
         :license_acquisition_url,
         :key_storage_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] method
         #   The content protection method for your output. The only valid value
@@ -1967,7 +2009,7 @@ module Aws
 
       # A section of the response body that provides information about the job
       # that is created.
-      class Job < Aws::Structure.new(
+      class Job < Struct.new(
         :id,
         :arn,
         :pipeline_id,
@@ -1979,6 +2021,8 @@ module Aws
         :status,
         :user_metadata,
         :timing)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier that Elastic Transcoder assigned to the job. You use
@@ -2099,9 +2143,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class JobAlbumArt < Aws::Structure.new(
+      class JobAlbumArt < Struct.new(
         :merge_policy,
         :artwork)
+
+        include Aws::Structure
 
         # @!attribute [rw] merge_policy
         #   A policy that determines how Elastic Transcoder will handle the
@@ -2152,7 +2198,7 @@ module Aws
       #           duration_millis: 1,
       #         },
       #       }
-      class JobInput < Aws::Structure.new(
+      class JobInput < Struct.new(
         :key,
         :frame_rate,
         :resolution,
@@ -2161,6 +2207,8 @@ module Aws
         :container,
         :encryption,
         :detected_properties)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The name of the file to transcode. Elsewhere in the body of the JSON
@@ -2243,7 +2291,7 @@ module Aws
       # If you specified multiple outputs for a job, the `Output` object lists
       # information about the first output. This duplicates the information
       # that is listed for the first output in the `Outputs` object.
-      class JobOutput < Aws::Structure.new(
+      class JobOutput < Struct.new(
         :id,
         :key,
         :thumbnail_pattern,
@@ -2265,6 +2313,8 @@ module Aws
         :captions,
         :encryption,
         :applied_color_space_conversion)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   A sequential counter, starting with 1, that identifies an output
@@ -2532,10 +2582,12 @@ module Aws
       #           initialization_vector: "ZeroTo255String",
       #         },
       #       }
-      class JobWatermark < Aws::Structure.new(
+      class JobWatermark < Struct.new(
         :preset_watermark_id,
         :input_key,
         :encryption)
+
+        include Aws::Structure
 
         # @!attribute [rw] preset_watermark_id
         #   The ID of the watermark settings that Elastic Transcoder uses to add
@@ -2573,10 +2625,12 @@ module Aws
       #         ascending: "Ascending",
       #         page_token: "Id",
       #       }
-      class ListJobsByPipelineRequest < Aws::Structure.new(
+      class ListJobsByPipelineRequest < Struct.new(
         :pipeline_id,
         :ascending,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline_id
         #   The ID of the pipeline for which you want to get job information.
@@ -2597,9 +2651,11 @@ module Aws
       end
 
       # The `ListJobsByPipelineResponse` structure.
-      class ListJobsByPipelineResponse < Aws::Structure.new(
+      class ListJobsByPipelineResponse < Struct.new(
         :jobs,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] jobs
         #   An array of `Job` objects that are in the specified pipeline.
@@ -2623,10 +2679,12 @@ module Aws
       #         ascending: "Ascending",
       #         page_token: "Id",
       #       }
-      class ListJobsByStatusRequest < Aws::Structure.new(
+      class ListJobsByStatusRequest < Struct.new(
         :status,
         :ascending,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   To get information about all of the jobs associated with the current
@@ -2649,9 +2707,11 @@ module Aws
       end
 
       # The `ListJobsByStatusResponse` structure.
-      class ListJobsByStatusResponse < Aws::Structure.new(
+      class ListJobsByStatusResponse < Struct.new(
         :jobs,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] jobs
         #   An array of `Job` objects that have the specified status.
@@ -2674,9 +2734,11 @@ module Aws
       #         ascending: "Ascending",
       #         page_token: "Id",
       #       }
-      class ListPipelinesRequest < Aws::Structure.new(
+      class ListPipelinesRequest < Struct.new(
         :ascending,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] ascending
         #   To list pipelines in chronological order by the date and time that
@@ -2693,9 +2755,11 @@ module Aws
       end
 
       # A list of the pipelines associated with the current AWS account.
-      class ListPipelinesResponse < Aws::Structure.new(
+      class ListPipelinesResponse < Struct.new(
         :pipelines,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipelines
         #   An array of `Pipeline` objects.
@@ -2718,9 +2782,11 @@ module Aws
       #         ascending: "Ascending",
       #         page_token: "Id",
       #       }
-      class ListPresetsRequest < Aws::Structure.new(
+      class ListPresetsRequest < Struct.new(
         :ascending,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] ascending
         #   To list presets in chronological order by the date and time that
@@ -2737,9 +2803,11 @@ module Aws
       end
 
       # The `ListPresetsResponse` structure.
-      class ListPresetsResponse < Aws::Structure.new(
+      class ListPresetsResponse < Struct.new(
         :presets,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] presets
         #   An array of `Preset` objects.
@@ -2767,11 +2835,13 @@ module Aws
       #         warning: "SnsTopic",
       #         error: "SnsTopic",
       #       }
-      class Notifications < Aws::Structure.new(
+      class Notifications < Struct.new(
         :progressing,
         :completed,
         :warning,
         :error)
+
+        include Aws::Structure
 
         # @!attribute [rw] progressing
         #   The Amazon Simple Notification Service (Amazon SNS) topic that you
@@ -2805,10 +2875,12 @@ module Aws
       #         grantee: "Grantee",
       #         access: ["AccessControl"],
       #       }
-      class Permission < Aws::Structure.new(
+      class Permission < Struct.new(
         :grantee_type,
         :grantee,
         :access)
+
+        include Aws::Structure
 
         # @!attribute [rw] grantee_type
         #   The type of value that appears in the Grantee object: *
@@ -2847,7 +2919,7 @@ module Aws
       end
 
       # The pipeline (queue) that is used to manage jobs.
-      class Pipeline < Aws::Structure.new(
+      class Pipeline < Struct.new(
         :id,
         :arn,
         :name,
@@ -2859,6 +2931,8 @@ module Aws
         :notifications,
         :content_config,
         :thumbnail_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the pipeline. You use this value to identify the
@@ -3030,10 +3104,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class PipelineOutputConfig < Aws::Structure.new(
+      class PipelineOutputConfig < Struct.new(
         :bucket,
         :storage_class,
         :permissions)
+
+        include Aws::Structure
 
         # @!attribute [rw] bucket
         #   The Amazon S3 bucket in which you want Elastic Transcoder to save
@@ -3100,13 +3176,15 @@ module Aws
       #         initialization_vector: "ZeroTo255String",
       #         license_acquisition_url: "OneTo512String",
       #       }
-      class PlayReadyDrm < Aws::Structure.new(
+      class PlayReadyDrm < Struct.new(
         :format,
         :key,
         :key_md_5,
         :key_id,
         :initialization_vector,
         :license_acquisition_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] format
         #   The type of DRM, if any, that you want Elastic Transcoder to apply
@@ -3168,7 +3246,7 @@ module Aws
       # playlists that you want Elastic Transcoder to create. We recommend
       # that you create only one master playlist per output format. The
       # maximum number of master playlists in a job is 30.
-      class Playlist < Aws::Structure.new(
+      class Playlist < Struct.new(
         :name,
         :format,
         :output_keys,
@@ -3176,6 +3254,8 @@ module Aws
         :play_ready_drm,
         :status,
         :status_detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name that you want Elastic Transcoder to assign to the master
@@ -3266,7 +3346,7 @@ module Aws
       # iPod and iPhone versions. You can also create your own presets for
       # formats that aren\'t included among the default presets. You specify
       # which preset you want to use when you create a job.
-      class Preset < Aws::Structure.new(
+      class Preset < Struct.new(
         :id,
         :arn,
         :name,
@@ -3276,6 +3356,8 @@ module Aws
         :video,
         :thumbnails,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   Identifier for the new preset. You use this value to get settings
@@ -3352,7 +3434,7 @@ module Aws
       #         opacity: "Opacity",
       #         target: "Target",
       #       }
-      class PresetWatermark < Aws::Structure.new(
+      class PresetWatermark < Struct.new(
         :id,
         :max_width,
         :max_height,
@@ -3363,6 +3445,8 @@ module Aws
         :vertical_offset,
         :opacity,
         :target)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   A unique identifier for the settings for one watermark. The value of `Id` can be up to 40 characters long.
@@ -3519,8 +3603,10 @@ module Aws
       #       {
       #         id: "Id", # required
       #       }
-      class ReadJobRequest < Aws::Structure.new(
+      class ReadJobRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the job for which you want to get detailed
@@ -3530,8 +3616,10 @@ module Aws
       end
 
       # The `ReadJobResponse` structure.
-      class ReadJobResponse < Aws::Structure.new(
+      class ReadJobResponse < Struct.new(
         :job)
+
+        include Aws::Structure
 
         # @!attribute [rw] job
         #   A section of the response body that provides information about the
@@ -3547,8 +3635,10 @@ module Aws
       #       {
       #         id: "Id", # required
       #       }
-      class ReadPipelineRequest < Aws::Structure.new(
+      class ReadPipelineRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the pipeline to read.
@@ -3557,9 +3647,11 @@ module Aws
       end
 
       # The `ReadPipelineResponse` structure.
-      class ReadPipelineResponse < Aws::Structure.new(
+      class ReadPipelineResponse < Struct.new(
         :pipeline,
         :warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   A section of the response body that provides information about the
@@ -3584,8 +3676,10 @@ module Aws
       #       {
       #         id: "Id", # required
       #       }
-      class ReadPresetRequest < Aws::Structure.new(
+      class ReadPresetRequest < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the preset for which you want to get detailed
@@ -3595,8 +3689,10 @@ module Aws
       end
 
       # The `ReadPresetResponse` structure.
-      class ReadPresetResponse < Aws::Structure.new(
+      class ReadPresetResponse < Struct.new(
         :preset)
+
+        include Aws::Structure
 
         # @!attribute [rw] preset
         #   A section of the response body that provides information about the
@@ -3615,11 +3711,13 @@ module Aws
       #         output_bucket: "BucketName", # required
       #         topics: ["SnsTopic"], # required
       #       }
-      class TestRoleRequest < Aws::Structure.new(
+      class TestRoleRequest < Struct.new(
         :role,
         :input_bucket,
         :output_bucket,
         :topics)
+
+        include Aws::Structure
 
         # @!attribute [rw] role
         #   The IAM Amazon Resource Name (ARN) for the role that you want
@@ -3644,9 +3742,11 @@ module Aws
       end
 
       # The `TestRoleResponse` structure.
-      class TestRoleResponse < Aws::Structure.new(
+      class TestRoleResponse < Struct.new(
         :success,
         :messages)
+
+        include Aws::Structure
 
         # @!attribute [rw] success
         #   If the operation is successful, this value is `true`; otherwise, the
@@ -3675,7 +3775,7 @@ module Aws
       #         sizing_policy: "SizingPolicy",
       #         padding_policy: "PaddingPolicy",
       #       }
-      class Thumbnails < Aws::Structure.new(
+      class Thumbnails < Struct.new(
         :format,
         :interval,
         :resolution,
@@ -3684,6 +3784,8 @@ module Aws
         :max_height,
         :sizing_policy,
         :padding_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] format
         #   The format of thumbnails, if any. Valid values are `jpg` and `png`.
@@ -3791,9 +3893,11 @@ module Aws
       #         start_time: "Time",
       #         duration: "Time",
       #       }
-      class TimeSpan < Aws::Structure.new(
+      class TimeSpan < Struct.new(
         :start_time,
         :duration)
+
+        include Aws::Structure
 
         # @!attribute [rw] start_time
         #   The place in the input file where you want a clip to start. The
@@ -3818,10 +3922,12 @@ module Aws
       end
 
       # Details about the timing of a job.
-      class Timing < Aws::Structure.new(
+      class Timing < Struct.new(
         :submit_time_millis,
         :start_time_millis,
         :finish_time_millis)
+
+        include Aws::Structure
 
         # @!attribute [rw] submit_time_millis
         #   The time the job was submitted to Elastic Transcoder, in epoch
@@ -3851,9 +3957,11 @@ module Aws
       #           error: "SnsTopic",
       #         },
       #       }
-      class UpdatePipelineNotificationsRequest < Aws::Structure.new(
+      class UpdatePipelineNotificationsRequest < Struct.new(
         :id,
         :notifications)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the pipeline for which you want to change
@@ -3888,8 +3996,10 @@ module Aws
       end
 
       # The `UpdatePipelineNotificationsResponse` structure.
-      class UpdatePipelineNotificationsResponse < Aws::Structure.new(
+      class UpdatePipelineNotificationsResponse < Struct.new(
         :pipeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   A section of the response body that provides information about the
@@ -3937,7 +4047,7 @@ module Aws
       #           ],
       #         },
       #       }
-      class UpdatePipelineRequest < Aws::Structure.new(
+      class UpdatePipelineRequest < Struct.new(
         :id,
         :name,
         :input_bucket,
@@ -3946,6 +4056,8 @@ module Aws
         :notifications,
         :content_config,
         :thumbnail_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the pipeline that you want to update.
@@ -4114,9 +4226,11 @@ module Aws
 
       # When you update a pipeline, Elastic Transcoder returns the values that
       # you specified in the request.
-      class UpdatePipelineResponse < Aws::Structure.new(
+      class UpdatePipelineResponse < Struct.new(
         :pipeline,
         :warnings)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   The pipeline (queue) that is used to manage jobs.
@@ -4141,9 +4255,11 @@ module Aws
       #         id: "Id", # required
       #         status: "PipelineStatus", # required
       #       }
-      class UpdatePipelineStatusRequest < Aws::Structure.new(
+      class UpdatePipelineStatusRequest < Struct.new(
         :id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier of the pipeline to update.
@@ -4160,8 +4276,10 @@ module Aws
 
       # When you update status for a pipeline, Elastic Transcoder returns the
       # values that you specified in the request.
-      class UpdatePipelineStatusResponse < Aws::Structure.new(
+      class UpdatePipelineStatusResponse < Struct.new(
         :pipeline)
+
+        include Aws::Structure
 
         # @!attribute [rw] pipeline
         #   A section of the response body that provides information about the
@@ -4206,7 +4324,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class VideoParameters < Aws::Structure.new(
+      class VideoParameters < Struct.new(
         :codec,
         :codec_options,
         :keyframes_max_dist,
@@ -4222,6 +4340,8 @@ module Aws
         :sizing_policy,
         :padding_policy,
         :watermarks)
+
+        include Aws::Structure
 
         # @!attribute [rw] codec
         #   The video codec for the output file. Valid values include `gif`,
@@ -4641,9 +4761,11 @@ module Aws
       # Using resources in the same region, such as your Amazon S3 buckets,
       # Amazon SNS notification topics, and AWS KMS key, reduces processing
       # time and prevents cross-regional charges.
-      class Warning < Aws::Structure.new(
+      class Warning < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The code of the cross-regional warning.

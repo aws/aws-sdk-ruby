@@ -19,12 +19,14 @@ module Aws
       #         usage_quantity: 1, # required
       #         dry_run: false, # required
       #       }
-      class MeterUsageRequest < Aws::Structure.new(
+      class MeterUsageRequest < Struct.new(
         :product_code,
         :timestamp,
         :usage_dimension,
         :usage_quantity,
         :dry_run)
+
+        include Aws::Structure
 
         # @!attribute [rw] product_code
         #   Product code is used to uniquely identify a product in AWS
@@ -55,8 +57,10 @@ module Aws
 
       end
 
-      class MeterUsageResult < Aws::Structure.new(
+      class MeterUsageResult < Struct.new(
         :metering_record_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] metering_record_id
         #   @return [String]

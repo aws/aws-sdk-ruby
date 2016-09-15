@@ -22,9 +22,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToResourceMessage < Aws::Structure.new(
+      class AddTagsToResourceMessage < Struct.new(
         :resource_name,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon Resource Name (ARN) of the resource to which the tags are
@@ -49,8 +51,10 @@ module Aws
 
       # Represents the allowed node types you can use to modify your cache
       # cluster or replication group.
-      class AllowedNodeTypeModificationsMessage < Aws::Structure.new(
+      class AllowedNodeTypeModificationsMessage < Struct.new(
         :scale_up_modifications)
+
+        include Aws::Structure
 
         # @!attribute [rw] scale_up_modifications
         #   A string list, each element of which specifies a cache node type
@@ -73,10 +77,12 @@ module Aws
       #         ec2_security_group_name: "String", # required
       #         ec2_security_group_owner_id: "String", # required
       #       }
-      class AuthorizeCacheSecurityGroupIngressMessage < Aws::Structure.new(
+      class AuthorizeCacheSecurityGroupIngressMessage < Struct.new(
         :cache_security_group_name,
         :ec2_security_group_name,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group_name
         #   The cache security group which will allow network ingress.
@@ -95,8 +101,10 @@ module Aws
 
       end
 
-      class AuthorizeCacheSecurityGroupIngressResult < Aws::Structure.new(
+      class AuthorizeCacheSecurityGroupIngressResult < Struct.new(
         :cache_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group
         #   Represents the output of one of the following actions:
@@ -111,8 +119,10 @@ module Aws
       end
 
       # Describes an Availability Zone in which the cache cluster is launched.
-      class AvailabilityZone < Aws::Structure.new(
+      class AvailabilityZone < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the Availability Zone.
@@ -121,7 +131,7 @@ module Aws
       end
 
       # Contains all of the attributes of a specific cache cluster.
-      class CacheCluster < Aws::Structure.new(
+      class CacheCluster < Struct.new(
         :cache_cluster_id,
         :configuration_endpoint,
         :client_download_landing_page,
@@ -144,6 +154,8 @@ module Aws
         :replication_group_id,
         :snapshot_retention_limit,
         :snapshot_window)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The user-supplied identifier of the cache cluster. This identifier
@@ -328,9 +340,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeCacheClusters* action.
-      class CacheClusterMessage < Aws::Structure.new(
+      class CacheClusterMessage < Struct.new(
         :marker,
         :cache_clusters)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -344,12 +358,14 @@ module Aws
       end
 
       # Provides all of the details about a particular cache engine version.
-      class CacheEngineVersion < Aws::Structure.new(
+      class CacheEngineVersion < Struct.new(
         :engine,
         :engine_version,
         :cache_parameter_group_family,
         :cache_engine_description,
         :cache_engine_version_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine
         #   The name of the cache engine.
@@ -375,9 +391,11 @@ module Aws
       end
 
       # Represents the output of a DescribeCacheEngineVersions action.
-      class CacheEngineVersionMessage < Aws::Structure.new(
+      class CacheEngineVersionMessage < Struct.new(
         :marker,
         :cache_engine_versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -435,7 +453,7 @@ module Aws
       # [1]: http://aws.amazon.com/elasticache/details
       # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
       # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
-      class CacheNode < Aws::Structure.new(
+      class CacheNode < Struct.new(
         :cache_node_id,
         :cache_node_status,
         :cache_node_create_time,
@@ -443,6 +461,8 @@ module Aws
         :parameter_group_status,
         :source_cache_node_id,
         :customer_availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_node_id
         #   The cache node identifier. A node ID is a numeric identifier (0001,
@@ -482,7 +502,7 @@ module Aws
       # applied to. For example, in a Redis cache cluster, a *cache.m1.large*
       # cache node type would have a larger *maxmemory* value than a
       # *cache.m1.small* type.
-      class CacheNodeTypeSpecificParameter < Aws::Structure.new(
+      class CacheNodeTypeSpecificParameter < Struct.new(
         :parameter_name,
         :description,
         :source,
@@ -492,6 +512,8 @@ module Aws
         :minimum_engine_version,
         :cache_node_type_specific_values,
         :change_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_name
         #   The name of the parameter.
@@ -543,9 +565,11 @@ module Aws
       end
 
       # A value that applies only to a certain cache node type.
-      class CacheNodeTypeSpecificValue < Aws::Structure.new(
+      class CacheNodeTypeSpecificValue < Struct.new(
         :cache_node_type,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_node_type
         #   The cache node type for which this value applies.
@@ -558,10 +582,12 @@ module Aws
       end
 
       # Represents the output of a *CreateCacheParameterGroup* action.
-      class CacheParameterGroup < Aws::Structure.new(
+      class CacheParameterGroup < Struct.new(
         :cache_parameter_group_name,
         :cache_parameter_group_family,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of the cache parameter group.
@@ -579,10 +605,12 @@ module Aws
       end
 
       # Represents the output of a *DescribeCacheParameters* action.
-      class CacheParameterGroupDetails < Aws::Structure.new(
+      class CacheParameterGroupDetails < Struct.new(
         :marker,
         :parameters,
         :cache_node_type_specific_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -605,8 +633,10 @@ module Aws
       # * *ModifyCacheParameterGroup*
       #
       # * *ResetCacheParameterGroup*
-      class CacheParameterGroupNameMessage < Aws::Structure.new(
+      class CacheParameterGroupNameMessage < Struct.new(
         :cache_parameter_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of the cache parameter group.
@@ -615,10 +645,12 @@ module Aws
       end
 
       # The status of the cache parameter group.
-      class CacheParameterGroupStatus < Aws::Structure.new(
+      class CacheParameterGroupStatus < Struct.new(
         :cache_parameter_group_name,
         :parameter_apply_status,
         :cache_node_ids_to_reboot)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of the cache parameter group.
@@ -637,9 +669,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeCacheParameterGroups* action.
-      class CacheParameterGroupsMessage < Aws::Structure.new(
+      class CacheParameterGroupsMessage < Struct.new(
         :marker,
         :cache_parameter_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -659,11 +693,13 @@ module Aws
       # * *CreateCacheSecurityGroup*
       #
       # * *RevokeCacheSecurityGroupIngress*
-      class CacheSecurityGroup < Aws::Structure.new(
+      class CacheSecurityGroup < Struct.new(
         :owner_id,
         :cache_security_group_name,
         :description,
         :ec2_security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_id
         #   The AWS account ID of the cache security group owner.
@@ -686,9 +722,11 @@ module Aws
 
       # Represents a cache cluster\'s status within a particular cache
       # security group.
-      class CacheSecurityGroupMembership < Aws::Structure.new(
+      class CacheSecurityGroupMembership < Struct.new(
         :cache_security_group_name,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group_name
         #   The name of the cache security group.
@@ -703,9 +741,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeCacheSecurityGroups* action.
-      class CacheSecurityGroupMessage < Aws::Structure.new(
+      class CacheSecurityGroupMessage < Struct.new(
         :marker,
         :cache_security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -723,11 +763,13 @@ module Aws
       # * *CreateCacheSubnetGroup*
       #
       # * *ModifyCacheSubnetGroup*
-      class CacheSubnetGroup < Aws::Structure.new(
+      class CacheSubnetGroup < Struct.new(
         :cache_subnet_group_name,
         :cache_subnet_group_description,
         :vpc_id,
         :subnets)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_subnet_group_name
         #   The name of the cache subnet group.
@@ -749,9 +791,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeCacheSubnetGroups* action.
-      class CacheSubnetGroupMessage < Aws::Structure.new(
+      class CacheSubnetGroupMessage < Struct.new(
         :marker,
         :cache_subnet_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -773,10 +817,12 @@ module Aws
       #         target_snapshot_name: "String", # required
       #         target_bucket: "String",
       #       }
-      class CopySnapshotMessage < Aws::Structure.new(
+      class CopySnapshotMessage < Struct.new(
         :source_snapshot_name,
         :target_snapshot_name,
         :target_bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_snapshot_name
         #   The name of an existing snapshot from which to make a copy.
@@ -868,8 +914,10 @@ module Aws
 
       end
 
-      class CopySnapshotResult < Aws::Structure.new(
+      class CopySnapshotResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Represents a copy of an entire cache cluster as of the time when the
@@ -911,7 +959,7 @@ module Aws
       #         snapshot_retention_limit: 1,
       #         snapshot_window: "String",
       #       }
-      class CreateCacheClusterMessage < Aws::Structure.new(
+      class CreateCacheClusterMessage < Struct.new(
         :cache_cluster_id,
         :replication_group_id,
         :az_mode,
@@ -934,6 +982,8 @@ module Aws
         :auto_minor_version_upgrade,
         :snapshot_retention_limit,
         :snapshot_window)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The node group identifier. This parameter is stored as a lowercase
@@ -1231,8 +1281,10 @@ module Aws
 
       end
 
-      class CreateCacheClusterResult < Aws::Structure.new(
+      class CreateCacheClusterResult < Struct.new(
         :cache_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster
         #   Contains all of the attributes of a specific cache cluster.
@@ -1249,10 +1301,12 @@ module Aws
       #         cache_parameter_group_family: "String", # required
       #         description: "String", # required
       #       }
-      class CreateCacheParameterGroupMessage < Aws::Structure.new(
+      class CreateCacheParameterGroupMessage < Struct.new(
         :cache_parameter_group_name,
         :cache_parameter_group_family,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   A user-specified name for the cache parameter group.
@@ -1271,8 +1325,10 @@ module Aws
 
       end
 
-      class CreateCacheParameterGroupResult < Aws::Structure.new(
+      class CreateCacheParameterGroupResult < Struct.new(
         :cache_parameter_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group
         #   Represents the output of a *CreateCacheParameterGroup* action.
@@ -1288,9 +1344,11 @@ module Aws
       #         cache_security_group_name: "String", # required
       #         description: "String", # required
       #       }
-      class CreateCacheSecurityGroupMessage < Aws::Structure.new(
+      class CreateCacheSecurityGroupMessage < Struct.new(
         :cache_security_group_name,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group_name
         #   A name for the cache security group. This value is stored as a
@@ -1308,8 +1366,10 @@ module Aws
 
       end
 
-      class CreateCacheSecurityGroupResult < Aws::Structure.new(
+      class CreateCacheSecurityGroupResult < Struct.new(
         :cache_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group
         #   Represents the output of one of the following actions:
@@ -1332,10 +1392,12 @@ module Aws
       #         cache_subnet_group_description: "String", # required
       #         subnet_ids: ["String"], # required
       #       }
-      class CreateCacheSubnetGroupMessage < Aws::Structure.new(
+      class CreateCacheSubnetGroupMessage < Struct.new(
         :cache_subnet_group_name,
         :cache_subnet_group_description,
         :subnet_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_subnet_group_name
         #   A name for the cache subnet group. This value is stored as a
@@ -1357,8 +1419,10 @@ module Aws
 
       end
 
-      class CreateCacheSubnetGroupResult < Aws::Structure.new(
+      class CreateCacheSubnetGroupResult < Struct.new(
         :cache_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_subnet_group
         #   Represents the output of one of the following actions:
@@ -1403,7 +1467,7 @@ module Aws
       #         snapshot_retention_limit: 1,
       #         snapshot_window: "String",
       #       }
-      class CreateReplicationGroupMessage < Aws::Structure.new(
+      class CreateReplicationGroupMessage < Struct.new(
         :replication_group_id,
         :replication_group_description,
         :primary_cluster_id,
@@ -1426,6 +1490,8 @@ module Aws
         :auto_minor_version_upgrade,
         :snapshot_retention_limit,
         :snapshot_window)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group_id
         #   The replication group identifier. This parameter is stored as a
@@ -1708,8 +1774,10 @@ module Aws
 
       end
 
-      class CreateReplicationGroupResult < Aws::Structure.new(
+      class CreateReplicationGroupResult < Struct.new(
         :replication_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group
         #   Contains all of the attributes of a specific replication group.
@@ -1725,9 +1793,11 @@ module Aws
       #         cache_cluster_id: "String", # required
       #         snapshot_name: "String", # required
       #       }
-      class CreateSnapshotMessage < Aws::Structure.new(
+      class CreateSnapshotMessage < Struct.new(
         :cache_cluster_id,
         :snapshot_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The identifier of an existing cache cluster. The snapshot will be
@@ -1740,8 +1810,10 @@ module Aws
 
       end
 
-      class CreateSnapshotResult < Aws::Structure.new(
+      class CreateSnapshotResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Represents a copy of an entire cache cluster as of the time when the
@@ -1758,9 +1830,11 @@ module Aws
       #         cache_cluster_id: "String", # required
       #         final_snapshot_identifier: "String",
       #       }
-      class DeleteCacheClusterMessage < Aws::Structure.new(
+      class DeleteCacheClusterMessage < Struct.new(
         :cache_cluster_id,
         :final_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The cache cluster identifier for the cluster to be deleted. This
@@ -1776,8 +1850,10 @@ module Aws
 
       end
 
-      class DeleteCacheClusterResult < Aws::Structure.new(
+      class DeleteCacheClusterResult < Struct.new(
         :cache_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster
         #   Contains all of the attributes of a specific cache cluster.
@@ -1792,8 +1868,10 @@ module Aws
       #       {
       #         cache_parameter_group_name: "String", # required
       #       }
-      class DeleteCacheParameterGroupMessage < Aws::Structure.new(
+      class DeleteCacheParameterGroupMessage < Struct.new(
         :cache_parameter_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of the cache parameter group to delete.
@@ -1813,8 +1891,10 @@ module Aws
       #       {
       #         cache_security_group_name: "String", # required
       #       }
-      class DeleteCacheSecurityGroupMessage < Aws::Structure.new(
+      class DeleteCacheSecurityGroupMessage < Struct.new(
         :cache_security_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group_name
         #   The name of the cache security group to delete.
@@ -1833,8 +1913,10 @@ module Aws
       #       {
       #         cache_subnet_group_name: "String", # required
       #       }
-      class DeleteCacheSubnetGroupMessage < Aws::Structure.new(
+      class DeleteCacheSubnetGroupMessage < Struct.new(
         :cache_subnet_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_subnet_group_name
         #   The name of the cache subnet group to delete.
@@ -1854,10 +1936,12 @@ module Aws
       #         retain_primary_cluster: false,
       #         final_snapshot_identifier: "String",
       #       }
-      class DeleteReplicationGroupMessage < Aws::Structure.new(
+      class DeleteReplicationGroupMessage < Struct.new(
         :replication_group_id,
         :retain_primary_cluster,
         :final_snapshot_identifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group_id
         #   The identifier for the cluster to be deleted. This parameter is not
@@ -1879,8 +1963,10 @@ module Aws
 
       end
 
-      class DeleteReplicationGroupResult < Aws::Structure.new(
+      class DeleteReplicationGroupResult < Struct.new(
         :replication_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group
         #   Contains all of the attributes of a specific replication group.
@@ -1895,8 +1981,10 @@ module Aws
       #       {
       #         snapshot_name: "String", # required
       #       }
-      class DeleteSnapshotMessage < Aws::Structure.new(
+      class DeleteSnapshotMessage < Struct.new(
         :snapshot_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_name
         #   The name of the snapshot to be deleted.
@@ -1904,8 +1992,10 @@ module Aws
 
       end
 
-      class DeleteSnapshotResult < Aws::Structure.new(
+      class DeleteSnapshotResult < Struct.new(
         :snapshot)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot
         #   Represents a copy of an entire cache cluster as of the time when the
@@ -1924,11 +2014,13 @@ module Aws
       #         marker: "String",
       #         show_cache_node_info: false,
       #       }
-      class DescribeCacheClustersMessage < Aws::Structure.new(
+      class DescribeCacheClustersMessage < Struct.new(
         :cache_cluster_id,
         :max_records,
         :marker,
         :show_cache_node_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The user-supplied cluster identifier. If this parameter is
@@ -1973,13 +2065,15 @@ module Aws
       #         marker: "String",
       #         default_only: false,
       #       }
-      class DescribeCacheEngineVersionsMessage < Aws::Structure.new(
+      class DescribeCacheEngineVersionsMessage < Struct.new(
         :engine,
         :engine_version,
         :cache_parameter_group_family,
         :max_records,
         :marker,
         :default_only)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine
         #   The cache engine to return. Valid values: `memcached` \| `redis`
@@ -2038,10 +2132,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeCacheParameterGroupsMessage < Aws::Structure.new(
+      class DescribeCacheParameterGroupsMessage < Struct.new(
         :cache_parameter_group_name,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of a specific cache parameter group to return details for.
@@ -2077,11 +2173,13 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeCacheParametersMessage < Aws::Structure.new(
+      class DescribeCacheParametersMessage < Struct.new(
         :cache_parameter_group_name,
         :source,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of a specific cache parameter group to return details for.
@@ -2122,10 +2220,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeCacheSecurityGroupsMessage < Aws::Structure.new(
+      class DescribeCacheSecurityGroupsMessage < Struct.new(
         :cache_security_group_name,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group_name
         #   The name of the cache security group to return details for.
@@ -2160,10 +2260,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeCacheSubnetGroupsMessage < Aws::Structure.new(
+      class DescribeCacheSubnetGroupsMessage < Struct.new(
         :cache_subnet_group_name,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_subnet_group_name
         #   The name of the cache subnet group to return details for.
@@ -2198,10 +2300,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEngineDefaultParametersMessage < Aws::Structure.new(
+      class DescribeEngineDefaultParametersMessage < Struct.new(
         :cache_parameter_group_family,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_family
         #   The name of the cache parameter group family. Valid values are:
@@ -2228,8 +2332,10 @@ module Aws
 
       end
 
-      class DescribeEngineDefaultParametersResult < Aws::Structure.new(
+      class DescribeEngineDefaultParametersResult < Struct.new(
         :engine_defaults)
+
+        include Aws::Structure
 
         # @!attribute [rw] engine_defaults
         #   Represents the output of a *DescribeEngineDefaultParameters* action.
@@ -2250,7 +2356,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeEventsMessage < Aws::Structure.new(
+      class DescribeEventsMessage < Struct.new(
         :source_identifier,
         :source_type,
         :start_time,
@@ -2258,6 +2364,8 @@ module Aws
         :duration,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_identifier
         #   The identifier of the event source for which events will be
@@ -2316,10 +2424,12 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReplicationGroupsMessage < Aws::Structure.new(
+      class DescribeReplicationGroupsMessage < Struct.new(
         :replication_group_id,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group_id
         #   The identifier for the replication group to be described. This
@@ -2363,7 +2473,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReservedCacheNodesMessage < Aws::Structure.new(
+      class DescribeReservedCacheNodesMessage < Struct.new(
         :reserved_cache_node_id,
         :reserved_cache_nodes_offering_id,
         :cache_node_type,
@@ -2372,6 +2482,8 @@ module Aws
         :offering_type,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_cache_node_id
         #   The reserved cache node identifier filter value. Use this parameter
@@ -2486,7 +2598,7 @@ module Aws
       #         max_records: 1,
       #         marker: "String",
       #       }
-      class DescribeReservedCacheNodesOfferingsMessage < Aws::Structure.new(
+      class DescribeReservedCacheNodesOfferingsMessage < Struct.new(
         :reserved_cache_nodes_offering_id,
         :cache_node_type,
         :duration,
@@ -2494,6 +2606,8 @@ module Aws
         :offering_type,
         :max_records,
         :marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_cache_nodes_offering_id
         #   The offering identifier filter value. Use this parameter to show
@@ -2592,9 +2706,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeSnapshots* action.
-      class DescribeSnapshotsListMessage < Aws::Structure.new(
+      class DescribeSnapshotsListMessage < Struct.new(
         :marker,
         :snapshots)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   An optional marker returned from a prior request. Use this marker
@@ -2621,12 +2737,14 @@ module Aws
       #         marker: "String",
       #         max_records: 1,
       #       }
-      class DescribeSnapshotsMessage < Aws::Structure.new(
+      class DescribeSnapshotsMessage < Struct.new(
         :cache_cluster_id,
         :snapshot_name,
         :snapshot_source,
         :marker,
         :max_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   A user-supplied cluster identifier. If this parameter is specified,
@@ -2668,10 +2786,12 @@ module Aws
 
       # Provides ownership and status information for an Amazon EC2 security
       # group.
-      class EC2SecurityGroup < Aws::Structure.new(
+      class EC2SecurityGroup < Struct.new(
         :status,
         :ec2_security_group_name,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status of the Amazon EC2 security group.
@@ -2689,9 +2809,11 @@ module Aws
 
       # Represents the information required for client programs to connect to
       # a cache node.
-      class Endpoint < Aws::Structure.new(
+      class Endpoint < Struct.new(
         :address,
         :port)
+
+        include Aws::Structure
 
         # @!attribute [rw] address
         #   The DNS hostname of the cache node.
@@ -2704,11 +2826,13 @@ module Aws
       end
 
       # Represents the output of a *DescribeEngineDefaultParameters* action.
-      class EngineDefaults < Aws::Structure.new(
+      class EngineDefaults < Struct.new(
         :cache_parameter_group_family,
         :marker,
         :parameters,
         :cache_node_type_specific_parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_family
         #   Specifies the name of the cache parameter group family to which the
@@ -2734,11 +2858,13 @@ module Aws
       # Represents a single occurrence of something interesting within the
       # system. Some examples of events are creating a cache cluster, adding
       # or removing a cache node, or rebooting a node.
-      class Event < Aws::Structure.new(
+      class Event < Struct.new(
         :source_identifier,
         :source_type,
         :message,
         :date)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_identifier
         #   The identifier for the source of the event. For example, if the
@@ -2762,9 +2888,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeEvents* action.
-      class EventsMessage < Aws::Structure.new(
+      class EventsMessage < Struct.new(
         :marker,
         :events)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -2786,9 +2914,11 @@ module Aws
       #         cache_cluster_id: "String",
       #         replication_group_id: "String",
       #       }
-      class ListAllowedNodeTypeModificationsMessage < Aws::Structure.new(
+      class ListAllowedNodeTypeModificationsMessage < Struct.new(
         :cache_cluster_id,
         :replication_group_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The name of the cache cluster you want to scale up to a larger node
@@ -2823,8 +2953,10 @@ module Aws
       #       {
       #         resource_name: "String", # required
       #       }
-      class ListTagsForResourceMessage < Aws::Structure.new(
+      class ListTagsForResourceMessage < Struct.new(
         :resource_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon Resource Name (ARN) of the resource for which you want
@@ -2865,7 +2997,7 @@ module Aws
       #         snapshot_window: "String",
       #         cache_node_type: "String",
       #       }
-      class ModifyCacheClusterMessage < Aws::Structure.new(
+      class ModifyCacheClusterMessage < Struct.new(
         :cache_cluster_id,
         :num_cache_nodes,
         :cache_node_ids_to_remove,
@@ -2883,6 +3015,8 @@ module Aws
         :snapshot_retention_limit,
         :snapshot_window,
         :cache_node_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The cache cluster identifier. This value is stored as a lowercase
@@ -3190,8 +3324,10 @@ module Aws
 
       end
 
-      class ModifyCacheClusterResult < Aws::Structure.new(
+      class ModifyCacheClusterResult < Struct.new(
         :cache_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster
         #   Contains all of the attributes of a specific cache cluster.
@@ -3212,9 +3348,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ModifyCacheParameterGroupMessage < Aws::Structure.new(
+      class ModifyCacheParameterGroupMessage < Struct.new(
         :cache_parameter_group_name,
         :parameter_name_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of the cache parameter group to modify.
@@ -3238,10 +3376,12 @@ module Aws
       #         cache_subnet_group_description: "String",
       #         subnet_ids: ["String"],
       #       }
-      class ModifyCacheSubnetGroupMessage < Aws::Structure.new(
+      class ModifyCacheSubnetGroupMessage < Struct.new(
         :cache_subnet_group_name,
         :cache_subnet_group_description,
         :subnet_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_subnet_group_name
         #   The name for the cache subnet group. This value is stored as a
@@ -3263,8 +3403,10 @@ module Aws
 
       end
 
-      class ModifyCacheSubnetGroupResult < Aws::Structure.new(
+      class ModifyCacheSubnetGroupResult < Struct.new(
         :cache_subnet_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_subnet_group
         #   Represents the output of one of the following actions:
@@ -3299,7 +3441,7 @@ module Aws
       #         snapshot_window: "String",
       #         cache_node_type: "String",
       #       }
-      class ModifyReplicationGroupMessage < Aws::Structure.new(
+      class ModifyReplicationGroupMessage < Struct.new(
         :replication_group_id,
         :replication_group_description,
         :primary_cluster_id,
@@ -3317,6 +3459,8 @@ module Aws
         :snapshot_retention_limit,
         :snapshot_window,
         :cache_node_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group_id
         #   The identifier of the replication group to modify.
@@ -3487,8 +3631,10 @@ module Aws
 
       end
 
-      class ModifyReplicationGroupResult < Aws::Structure.new(
+      class ModifyReplicationGroupResult < Struct.new(
         :replication_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group
         #   Contains all of the attributes of a specific replication group.
@@ -3497,11 +3643,13 @@ module Aws
       end
 
       # Represents a collection of cache nodes in a replication group.
-      class NodeGroup < Aws::Structure.new(
+      class NodeGroup < Struct.new(
         :node_group_id,
         :status,
         :primary_endpoint,
         :node_group_members)
+
+        include Aws::Structure
 
         # @!attribute [rw] node_group_id
         #   The identifier for the node group. A replication group contains only
@@ -3526,12 +3674,14 @@ module Aws
       end
 
       # Represents a single node within a node group.
-      class NodeGroupMember < Aws::Structure.new(
+      class NodeGroupMember < Struct.new(
         :cache_cluster_id,
         :cache_node_id,
         :read_endpoint,
         :preferred_availability_zone,
         :current_role)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The ID of the cache cluster to which the node belongs.
@@ -3559,11 +3709,13 @@ module Aws
       end
 
       # Represents an individual cache node in a snapshot of a cache cluster.
-      class NodeSnapshot < Aws::Structure.new(
+      class NodeSnapshot < Struct.new(
         :cache_node_id,
         :cache_size,
         :cache_node_create_time,
         :snapshot_create_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_node_id
         #   The cache node identifier for the node in the source cache cluster.
@@ -3588,9 +3740,11 @@ module Aws
       # Describes a notification topic and its status. Notification topics are
       # used for publishing ElastiCache events to subscribers using Amazon
       # Simple Notification Service (SNS).
-      class NotificationConfiguration < Aws::Structure.new(
+      class NotificationConfiguration < Struct.new(
         :topic_arn,
         :topic_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The Amazon Resource Name (ARN) that identifies the topic.
@@ -3604,7 +3758,7 @@ module Aws
 
       # Describes an individual setting that controls some aspect of
       # ElastiCache behavior.
-      class Parameter < Aws::Structure.new(
+      class Parameter < Struct.new(
         :parameter_name,
         :parameter_value,
         :description,
@@ -3614,6 +3768,8 @@ module Aws
         :is_modifiable,
         :minimum_engine_version,
         :change_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_name
         #   The name of the parameter.
@@ -3672,9 +3828,11 @@ module Aws
       #         parameter_name: "String",
       #         parameter_value: "String",
       #       }
-      class ParameterNameValue < Aws::Structure.new(
+      class ParameterNameValue < Struct.new(
         :parameter_name,
         :parameter_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_name
         #   The name of the parameter.
@@ -3688,11 +3846,13 @@ module Aws
 
       # A group of settings that will be applied to the cache cluster in the
       # future, or that are currently being applied.
-      class PendingModifiedValues < Aws::Structure.new(
+      class PendingModifiedValues < Struct.new(
         :num_cache_nodes,
         :cache_node_ids_to_remove,
         :engine_version,
         :cache_node_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] num_cache_nodes
         #   The new number of cache nodes for the cache cluster.
@@ -3727,10 +3887,12 @@ module Aws
       #         reserved_cache_node_id: "String",
       #         cache_node_count: 1,
       #       }
-      class PurchaseReservedCacheNodesOfferingMessage < Aws::Structure.new(
+      class PurchaseReservedCacheNodesOfferingMessage < Struct.new(
         :reserved_cache_nodes_offering_id,
         :reserved_cache_node_id,
         :cache_node_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_cache_nodes_offering_id
         #   The ID of the reserved cache node offering to purchase.
@@ -3759,8 +3921,10 @@ module Aws
 
       end
 
-      class PurchaseReservedCacheNodesOfferingResult < Aws::Structure.new(
+      class PurchaseReservedCacheNodesOfferingResult < Struct.new(
         :reserved_cache_node)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_cache_node
         #   Represents the output of a *PurchaseReservedCacheNodesOffering*
@@ -3777,9 +3941,11 @@ module Aws
       #         cache_cluster_id: "String", # required
       #         cache_node_ids_to_reboot: ["String"], # required
       #       }
-      class RebootCacheClusterMessage < Aws::Structure.new(
+      class RebootCacheClusterMessage < Struct.new(
         :cache_cluster_id,
         :cache_node_ids_to_reboot)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster_id
         #   The cache cluster identifier. This parameter is stored as a
@@ -3794,8 +3960,10 @@ module Aws
 
       end
 
-      class RebootCacheClusterResult < Aws::Structure.new(
+      class RebootCacheClusterResult < Struct.new(
         :cache_cluster)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_cluster
         #   Contains all of the attributes of a specific cache cluster.
@@ -3805,9 +3973,11 @@ module Aws
 
       # Contains the specific price and frequency of a recurring charges for a
       # reserved cache node, or for a reserved cache node offering.
-      class RecurringCharge < Aws::Structure.new(
+      class RecurringCharge < Struct.new(
         :recurring_charge_amount,
         :recurring_charge_frequency)
+
+        include Aws::Structure
 
         # @!attribute [rw] recurring_charge_amount
         #   The monetary amount of the recurring charge.
@@ -3827,9 +3997,11 @@ module Aws
       #         resource_name: "String", # required
       #         tag_keys: ["String"], # required
       #       }
-      class RemoveTagsFromResourceMessage < Aws::Structure.new(
+      class RemoveTagsFromResourceMessage < Struct.new(
         :resource_name,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   The Amazon Resource Name (ARN) of the resource from which you want
@@ -3855,7 +4027,7 @@ module Aws
       end
 
       # Contains all of the attributes of a specific replication group.
-      class ReplicationGroup < Aws::Structure.new(
+      class ReplicationGroup < Struct.new(
         :replication_group_id,
         :description,
         :status,
@@ -3864,6 +4036,8 @@ module Aws
         :node_groups,
         :snapshotting_cluster_id,
         :automatic_failover)
+
+        include Aws::Structure
 
         # @!attribute [rw] replication_group_id
         #   The identifier for the replication group.
@@ -3913,9 +4087,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeReplicationGroups* action.
-      class ReplicationGroupMessage < Aws::Structure.new(
+      class ReplicationGroupMessage < Struct.new(
         :marker,
         :replication_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -3930,9 +4106,11 @@ module Aws
 
       # The settings to be applied to the replication group, either
       # immediately or during the next maintenance window.
-      class ReplicationGroupPendingModifiedValues < Aws::Structure.new(
+      class ReplicationGroupPendingModifiedValues < Struct.new(
         :primary_cluster_id,
         :automatic_failover_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] primary_cluster_id
         #   The primary cluster ID which will be applied immediately (if
@@ -3956,7 +4134,7 @@ module Aws
 
       # Represents the output of a *PurchaseReservedCacheNodesOffering*
       # action.
-      class ReservedCacheNode < Aws::Structure.new(
+      class ReservedCacheNode < Struct.new(
         :reserved_cache_node_id,
         :reserved_cache_nodes_offering_id,
         :cache_node_type,
@@ -3969,6 +4147,8 @@ module Aws
         :offering_type,
         :state,
         :recurring_charges)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_cache_node_id
         #   The unique identifier for the reservation.
@@ -4063,9 +4243,11 @@ module Aws
       end
 
       # Represents the output of a *DescribeReservedCacheNodes* action.
-      class ReservedCacheNodeMessage < Aws::Structure.new(
+      class ReservedCacheNodeMessage < Struct.new(
         :marker,
         :reserved_cache_nodes)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -4079,7 +4261,7 @@ module Aws
       end
 
       # Describes all of the attributes of a reserved cache node offering.
-      class ReservedCacheNodesOffering < Aws::Structure.new(
+      class ReservedCacheNodesOffering < Struct.new(
         :reserved_cache_nodes_offering_id,
         :cache_node_type,
         :duration,
@@ -4088,6 +4270,8 @@ module Aws
         :product_description,
         :offering_type,
         :recurring_charges)
+
+        include Aws::Structure
 
         # @!attribute [rw] reserved_cache_nodes_offering_id
         #   A unique identifier for the reserved cache node offering.
@@ -4167,9 +4351,11 @@ module Aws
 
       # Represents the output of a *DescribeReservedCacheNodesOfferings*
       # action.
-      class ReservedCacheNodesOfferingMessage < Aws::Structure.new(
+      class ReservedCacheNodesOfferingMessage < Struct.new(
         :marker,
         :reserved_cache_nodes_offerings)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Provides an identifier to allow retrieval of paginated results.
@@ -4196,10 +4382,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class ResetCacheParameterGroupMessage < Aws::Structure.new(
+      class ResetCacheParameterGroupMessage < Struct.new(
         :cache_parameter_group_name,
         :reset_all_parameters,
         :parameter_name_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_parameter_group_name
         #   The name of the cache parameter group to reset.
@@ -4230,10 +4418,12 @@ module Aws
       #         ec2_security_group_name: "String", # required
       #         ec2_security_group_owner_id: "String", # required
       #       }
-      class RevokeCacheSecurityGroupIngressMessage < Aws::Structure.new(
+      class RevokeCacheSecurityGroupIngressMessage < Struct.new(
         :cache_security_group_name,
         :ec2_security_group_name,
         :ec2_security_group_owner_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group_name
         #   The name of the cache security group to revoke ingress from.
@@ -4251,8 +4441,10 @@ module Aws
 
       end
 
-      class RevokeCacheSecurityGroupIngressResult < Aws::Structure.new(
+      class RevokeCacheSecurityGroupIngressResult < Struct.new(
         :cache_security_group)
+
+        include Aws::Structure
 
         # @!attribute [rw] cache_security_group
         #   Represents the output of one of the following actions:
@@ -4267,9 +4459,11 @@ module Aws
       end
 
       # Represents a single cache security group and its status.
-      class SecurityGroupMembership < Aws::Structure.new(
+      class SecurityGroupMembership < Struct.new(
         :security_group_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] security_group_id
         #   The identifier of the cache security group.
@@ -4285,7 +4479,7 @@ module Aws
 
       # Represents a copy of an entire cache cluster as of the time when the
       # snapshot was taken.
-      class Snapshot < Aws::Structure.new(
+      class Snapshot < Struct.new(
         :snapshot_name,
         :cache_cluster_id,
         :snapshot_status,
@@ -4306,6 +4500,8 @@ module Aws
         :snapshot_retention_limit,
         :snapshot_window,
         :node_snapshots)
+
+        include Aws::Structure
 
         # @!attribute [rw] snapshot_name
         #   The name of a snapshot. For an automatic snapshot, the name is
@@ -4480,9 +4676,11 @@ module Aws
       # Represents the subnet associated with a cache cluster. This parameter
       # refers to subnets defined in Amazon Virtual Private Cloud (Amazon VPC)
       # and used with ElastiCache.
-      class Subnet < Aws::Structure.new(
+      class Subnet < Struct.new(
         :subnet_identifier,
         :subnet_availability_zone)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_identifier
         #   The unique identifier for the subnet.
@@ -4504,9 +4702,11 @@ module Aws
       #         key: "String",
       #         value: "String",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key for the tag.
@@ -4520,8 +4720,10 @@ module Aws
 
       # Represents the output from the *AddTagsToResource*,
       # *ListTagsOnResource*, and *RemoveTagsFromResource* actions.
-      class TagListMessage < Aws::Structure.new(
+      class TagListMessage < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   A list of cost allocation tags as key-value pairs.

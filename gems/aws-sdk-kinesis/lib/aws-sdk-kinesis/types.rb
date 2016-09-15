@@ -19,9 +19,11 @@ module Aws
       #           "TagKey" => "TagValue",
       #         },
       #       }
-      class AddTagsToStreamInput < Aws::Structure.new(
+      class AddTagsToStreamInput < Struct.new(
         :stream_name,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream.
@@ -41,9 +43,11 @@ module Aws
       #         stream_name: "StreamName", # required
       #         shard_count: 1, # required
       #       }
-      class CreateStreamInput < Aws::Structure.new(
+      class CreateStreamInput < Struct.new(
         :stream_name,
         :shard_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   A name to identify the stream. The stream name is scoped to the AWS
@@ -71,9 +75,11 @@ module Aws
       #         stream_name: "StreamName", # required
       #         retention_period_hours: 1, # required
       #       }
-      class DecreaseStreamRetentionPeriodInput < Aws::Structure.new(
+      class DecreaseStreamRetentionPeriodInput < Struct.new(
         :stream_name,
         :retention_period_hours)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream to modify.
@@ -93,8 +99,10 @@ module Aws
       #       {
       #         stream_name: "StreamName", # required
       #       }
-      class DeleteStreamInput < Aws::Structure.new(
+      class DeleteStreamInput < Struct.new(
         :stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream to delete.
@@ -111,10 +119,12 @@ module Aws
       #         limit: 1,
       #         exclusive_start_shard_id: "ShardId",
       #       }
-      class DescribeStreamInput < Aws::Structure.new(
+      class DescribeStreamInput < Struct.new(
         :stream_name,
         :limit,
         :exclusive_start_shard_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream to describe.
@@ -131,8 +141,10 @@ module Aws
       end
 
       # Represents the output for `DescribeStream`.
-      class DescribeStreamOutput < Aws::Structure.new(
+      class DescribeStreamOutput < Struct.new(
         :stream_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_description
         #   The current status of the stream, the stream ARN, an array of shard
@@ -150,9 +162,11 @@ module Aws
       #         stream_name: "StreamName", # required
       #         shard_level_metrics: ["IncomingBytes"], # required, accepts IncomingBytes, IncomingRecords, OutgoingBytes, OutgoingRecords, WriteProvisionedThroughputExceeded, ReadProvisionedThroughputExceeded, IteratorAgeMilliseconds, ALL
       #       }
-      class DisableEnhancedMonitoringInput < Aws::Structure.new(
+      class DisableEnhancedMonitoringInput < Struct.new(
         :stream_name,
         :shard_level_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the Amazon Kinesis stream for which to disable enhanced
@@ -193,9 +207,11 @@ module Aws
       #         stream_name: "StreamName", # required
       #         shard_level_metrics: ["IncomingBytes"], # required, accepts IncomingBytes, IncomingRecords, OutgoingBytes, OutgoingRecords, WriteProvisionedThroughputExceeded, ReadProvisionedThroughputExceeded, IteratorAgeMilliseconds, ALL
       #       }
-      class EnableEnhancedMonitoringInput < Aws::Structure.new(
+      class EnableEnhancedMonitoringInput < Struct.new(
         :stream_name,
         :shard_level_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream for which to enable enhanced monitoring.
@@ -228,8 +244,10 @@ module Aws
       end
 
       # Represents enhanced metrics types.
-      class EnhancedMetrics < Aws::Structure.new(
+      class EnhancedMetrics < Struct.new(
         :shard_level_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_level_metrics
         #   List of shard-level metrics.
@@ -259,10 +277,12 @@ module Aws
 
       # Represents the output for EnableEnhancedMonitoring and
       # DisableEnhancedMonitoring.
-      class EnhancedMonitoringOutput < Aws::Structure.new(
+      class EnhancedMonitoringOutput < Struct.new(
         :stream_name,
         :current_shard_level_metrics,
         :desired_shard_level_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the Amazon Kinesis stream.
@@ -288,9 +308,11 @@ module Aws
       #         shard_iterator: "ShardIterator", # required
       #         limit: 1,
       #       }
-      class GetRecordsInput < Aws::Structure.new(
+      class GetRecordsInput < Struct.new(
         :shard_iterator,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_iterator
         #   The position in the shard from which you want to start sequentially
@@ -307,10 +329,12 @@ module Aws
       end
 
       # Represents the output for GetRecords.
-      class GetRecordsOutput < Aws::Structure.new(
+      class GetRecordsOutput < Struct.new(
         :records,
         :next_shard_iterator,
         :millis_behind_latest)
+
+        include Aws::Structure
 
         # @!attribute [rw] records
         #   The data records retrieved from the shard.
@@ -342,12 +366,14 @@ module Aws
       #         starting_sequence_number: "SequenceNumber",
       #         timestamp: Time.now,
       #       }
-      class GetShardIteratorInput < Aws::Structure.new(
+      class GetShardIteratorInput < Struct.new(
         :stream_name,
         :shard_id,
         :shard_iterator_type,
         :starting_sequence_number,
         :timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the Amazon Kinesis stream.
@@ -397,8 +423,10 @@ module Aws
       end
 
       # Represents the output for `GetShardIterator`.
-      class GetShardIteratorOutput < Aws::Structure.new(
+      class GetShardIteratorOutput < Struct.new(
         :shard_iterator)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_iterator
         #   The position in the shard from which to start reading data records
@@ -410,9 +438,11 @@ module Aws
 
       # The range of possible hash key values for the shard, which is a set of
       # ordered contiguous positive integers.
-      class HashKeyRange < Aws::Structure.new(
+      class HashKeyRange < Struct.new(
         :starting_hash_key,
         :ending_hash_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] starting_hash_key
         #   The starting hash key of the hash key range.
@@ -432,9 +462,11 @@ module Aws
       #         stream_name: "StreamName", # required
       #         retention_period_hours: 1, # required
       #       }
-      class IncreaseStreamRetentionPeriodInput < Aws::Structure.new(
+      class IncreaseStreamRetentionPeriodInput < Struct.new(
         :stream_name,
         :retention_period_hours)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream to modify.
@@ -455,9 +487,11 @@ module Aws
       #         limit: 1,
       #         exclusive_start_stream_name: "StreamName",
       #       }
-      class ListStreamsInput < Aws::Structure.new(
+      class ListStreamsInput < Struct.new(
         :limit,
         :exclusive_start_stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] limit
         #   The maximum number of streams to list.
@@ -470,9 +504,11 @@ module Aws
       end
 
       # Represents the output for `ListStreams`.
-      class ListStreamsOutput < Aws::Structure.new(
+      class ListStreamsOutput < Struct.new(
         :stream_names,
         :has_more_streams)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_names
         #   The names of the streams that are associated with the AWS account
@@ -494,10 +530,12 @@ module Aws
       #         exclusive_start_tag_key: "TagKey",
       #         limit: 1,
       #       }
-      class ListTagsForStreamInput < Aws::Structure.new(
+      class ListTagsForStreamInput < Struct.new(
         :stream_name,
         :exclusive_start_tag_key,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream.
@@ -519,9 +557,11 @@ module Aws
       end
 
       # Represents the output for `ListTagsForStream`.
-      class ListTagsForStreamOutput < Aws::Structure.new(
+      class ListTagsForStreamOutput < Struct.new(
         :tags,
         :has_more_tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   A list of tags associated with `StreamName`, starting with the first
@@ -545,10 +585,12 @@ module Aws
       #         shard_to_merge: "ShardId", # required
       #         adjacent_shard_to_merge: "ShardId", # required
       #       }
-      class MergeShardsInput < Aws::Structure.new(
+      class MergeShardsInput < Struct.new(
         :stream_name,
         :shard_to_merge,
         :adjacent_shard_to_merge)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream for the merge.
@@ -576,12 +618,14 @@ module Aws
       #         explicit_hash_key: "HashKey",
       #         sequence_number_for_ordering: "SequenceNumber",
       #       }
-      class PutRecordInput < Aws::Structure.new(
+      class PutRecordInput < Struct.new(
         :stream_name,
         :data,
         :partition_key,
         :explicit_hash_key,
         :sequence_number_for_ordering)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream to put the data record into.
@@ -623,9 +667,11 @@ module Aws
       end
 
       # Represents the output for `PutRecord`.
-      class PutRecordOutput < Aws::Structure.new(
+      class PutRecordOutput < Struct.new(
         :shard_id,
         :sequence_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_id
         #   The shard ID of the shard where the data record was placed.
@@ -654,9 +700,11 @@ module Aws
       #         ],
       #         stream_name: "StreamName", # required
       #       }
-      class PutRecordsInput < Aws::Structure.new(
+      class PutRecordsInput < Struct.new(
         :records,
         :stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] records
         #   The records associated with the request.
@@ -669,9 +717,11 @@ module Aws
       end
 
       # `PutRecords` results.
-      class PutRecordsOutput < Aws::Structure.new(
+      class PutRecordsOutput < Struct.new(
         :failed_record_count,
         :records)
+
+        include Aws::Structure
 
         # @!attribute [rw] failed_record_count
         #   The number of unsuccessfully processed records in a `PutRecords`
@@ -697,10 +747,12 @@ module Aws
       #         explicit_hash_key: "HashKey",
       #         partition_key: "PartitionKey", # required
       #       }
-      class PutRecordsRequestEntry < Aws::Structure.new(
+      class PutRecordsRequestEntry < Struct.new(
         :data,
         :explicit_hash_key,
         :partition_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] data
         #   The data blob to put into the record, which is base64-encoded when
@@ -733,11 +785,13 @@ module Aws
       # `SequenceNumber` and `ShardId` in the result. A record that fails to
       # be added to the stream includes `ErrorCode` and `ErrorMessage` in the
       # result.
-      class PutRecordsResultEntry < Aws::Structure.new(
+      class PutRecordsResultEntry < Struct.new(
         :sequence_number,
         :shard_id,
         :error_code,
         :error_message)
+
+        include Aws::Structure
 
         # @!attribute [rw] sequence_number
         #   The sequence number for an individual record result.
@@ -765,11 +819,13 @@ module Aws
 
       # The unit of data of the Amazon Kinesis stream, which is composed of a
       # sequence number, a partition key, and a data blob.
-      class Record < Aws::Structure.new(
+      class Record < Struct.new(
         :sequence_number,
         :approximate_arrival_timestamp,
         :data,
         :partition_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] sequence_number
         #   The unique identifier of the record in the stream.
@@ -801,9 +857,11 @@ module Aws
       #         stream_name: "StreamName", # required
       #         tag_keys: ["TagKey"], # required
       #       }
-      class RemoveTagsFromStreamInput < Aws::Structure.new(
+      class RemoveTagsFromStreamInput < Struct.new(
         :stream_name,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream.
@@ -817,9 +875,11 @@ module Aws
       end
 
       # The range of possible sequence numbers for the shard.
-      class SequenceNumberRange < Aws::Structure.new(
+      class SequenceNumberRange < Struct.new(
         :starting_sequence_number,
         :ending_sequence_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] starting_sequence_number
         #   The starting sequence number for the range.
@@ -834,12 +894,14 @@ module Aws
 
       # A uniquely identified group of data records in an Amazon Kinesis
       # stream.
-      class Shard < Aws::Structure.new(
+      class Shard < Struct.new(
         :shard_id,
         :parent_shard_id,
         :adjacent_parent_shard_id,
         :hash_key_range,
         :sequence_number_range)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_id
         #   The unique identifier of the shard within the stream.
@@ -873,10 +935,12 @@ module Aws
       #         shard_to_split: "ShardId", # required
       #         new_starting_hash_key: "HashKey", # required
       #       }
-      class SplitShardInput < Aws::Structure.new(
+      class SplitShardInput < Struct.new(
         :stream_name,
         :shard_to_split,
         :new_starting_hash_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream for the shard split.
@@ -900,7 +964,7 @@ module Aws
       end
 
       # Represents the output for DescribeStream.
-      class StreamDescription < Aws::Structure.new(
+      class StreamDescription < Struct.new(
         :stream_name,
         :stream_arn,
         :stream_status,
@@ -908,6 +972,8 @@ module Aws
         :has_more_shards,
         :retention_period_hours,
         :enhanced_monitoring)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_name
         #   The name of the stream being described.
@@ -954,9 +1020,11 @@ module Aws
       end
 
       # Metadata assigned to the stream, consisting of a key-value pair.
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A unique identifier for the tag. Maximum length: 128 characters.

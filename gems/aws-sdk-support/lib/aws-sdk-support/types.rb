@@ -21,9 +21,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddAttachmentsToSetRequest < Aws::Structure.new(
+      class AddAttachmentsToSetRequest < Struct.new(
         :attachment_set_id,
         :attachments)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_set_id
         #   The ID of the attachment set. If an `AttachmentSetId` is not
@@ -41,9 +43,11 @@ module Aws
 
       # The ID and expiry time of the attachment set returned by the
       # AddAttachmentsToSet operation.
-      class AddAttachmentsToSetResponse < Aws::Structure.new(
+      class AddAttachmentsToSetResponse < Struct.new(
         :attachment_set_id,
         :expiry_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_set_id
         #   The ID of the attachment set. If an `AttachmentSetId` was not
@@ -68,11 +72,13 @@ module Aws
       #         cc_email_addresses: ["CcEmailAddress"],
       #         attachment_set_id: "AttachmentSetId",
       #       }
-      class AddCommunicationToCaseRequest < Aws::Structure.new(
+      class AddCommunicationToCaseRequest < Struct.new(
         :case_id,
         :communication_body,
         :cc_email_addresses,
         :attachment_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] case_id
         #   The AWS Support case ID requested or returned in the call. The case
@@ -97,8 +103,10 @@ module Aws
       end
 
       # The result of the AddCommunicationToCase operation.
-      class AddCommunicationToCaseResponse < Aws::Structure.new(
+      class AddCommunicationToCaseResponse < Struct.new(
         :result)
+
+        include Aws::Structure
 
         # @!attribute [rw] result
         #   True if AddCommunicationToCase succeeds. Otherwise, returns an
@@ -116,9 +124,11 @@ module Aws
       #         file_name: "FileName",
       #         data: "data",
       #       }
-      class Attachment < Aws::Structure.new(
+      class Attachment < Struct.new(
         :file_name,
         :data)
+
+        include Aws::Structure
 
         # @!attribute [rw] file_name
         #   The name of the attachment file.
@@ -133,9 +143,11 @@ module Aws
       # The file name and ID of an attachment to a case communication. You can
       # use the ID to retrieve the attachment with the DescribeAttachment
       # operation.
-      class AttachmentDetails < Aws::Structure.new(
+      class AttachmentDetails < Struct.new(
         :attachment_id,
         :file_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_id
         #   The ID of the attachment.
@@ -179,7 +191,7 @@ module Aws
       #     the case.
       # 12. **TimeCreated.** The time the case was created, in ISO-8601
       #     format.
-      class CaseDetails < Aws::Structure.new(
+      class CaseDetails < Struct.new(
         :case_id,
         :display_id,
         :subject,
@@ -192,6 +204,8 @@ module Aws
         :recent_communications,
         :cc_email_addresses,
         :language)
+
+        include Aws::Structure
 
         # @!attribute [rw] case_id
         #   The AWS Support case ID requested or returned in the call. The case
@@ -258,9 +272,11 @@ module Aws
       # A JSON-formatted name/value pair that represents the category name and
       # category code of the problem, selected from the DescribeServices
       # response for each AWS service.
-      class Category < Aws::Structure.new(
+      class Category < Struct.new(
         :code,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The category code for the support case.
@@ -275,12 +291,14 @@ module Aws
       # A communication associated with an AWS Support case. The communication
       # consists of the case ID, the message body, attachment information, the
       # account email address, and the date and time of the communication.
-      class Communication < Aws::Structure.new(
+      class Communication < Struct.new(
         :case_id,
         :body,
         :submitted_by,
         :time_created,
         :attachment_set)
+
+        include Aws::Structure
 
         # @!attribute [rw] case_id
         #   The AWS Support case ID requested or returned in the call. The case
@@ -321,7 +339,7 @@ module Aws
       #         issue_type: "IssueType",
       #         attachment_set_id: "AttachmentSetId",
       #       }
-      class CreateCaseRequest < Aws::Structure.new(
+      class CreateCaseRequest < Struct.new(
         :subject,
         :service_code,
         :severity_code,
@@ -331,6 +349,8 @@ module Aws
         :language,
         :issue_type,
         :attachment_set_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] subject
         #   The title of the AWS Support case.
@@ -388,8 +408,10 @@ module Aws
 
       # The AWS Support case ID returned by a successful completion of the
       # CreateCase operation.
-      class CreateCaseResponse < Aws::Structure.new(
+      class CreateCaseResponse < Struct.new(
         :case_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] case_id
         #   The AWS Support case ID requested or returned in the call. The case
@@ -405,8 +427,10 @@ module Aws
       #       {
       #         attachment_id: "AttachmentId", # required
       #       }
-      class DescribeAttachmentRequest < Aws::Structure.new(
+      class DescribeAttachmentRequest < Struct.new(
         :attachment_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment_id
         #   The ID of the attachment to return. Attachment IDs are returned by
@@ -417,8 +441,10 @@ module Aws
 
       # The content and file name of the attachment returned by the
       # DescribeAttachment operation.
-      class DescribeAttachmentResponse < Aws::Structure.new(
+      class DescribeAttachmentResponse < Struct.new(
         :attachment)
+
+        include Aws::Structure
 
         # @!attribute [rw] attachment
         #   The attachment content and file name.
@@ -440,7 +466,7 @@ module Aws
       #         language: "Language",
       #         include_communications: false,
       #       }
-      class DescribeCasesRequest < Aws::Structure.new(
+      class DescribeCasesRequest < Struct.new(
         :case_id_list,
         :display_id,
         :after_time,
@@ -450,6 +476,8 @@ module Aws
         :max_results,
         :language,
         :include_communications)
+
+        include Aws::Structure
 
         # @!attribute [rw] case_id_list
         #   A list of ID numbers of the support cases you want returned. The
@@ -502,9 +530,11 @@ module Aws
 
       # Returns an array of CaseDetails objects and a `NextToken` that defines
       # a point for pagination in the result set.
-      class DescribeCasesResponse < Aws::Structure.new(
+      class DescribeCasesResponse < Struct.new(
         :cases,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] cases
         #   The details for the cases that match the request.
@@ -526,12 +556,14 @@ module Aws
       #         next_token: "NextToken",
       #         max_results: 1,
       #       }
-      class DescribeCommunicationsRequest < Aws::Structure.new(
+      class DescribeCommunicationsRequest < Struct.new(
         :case_id,
         :before_time,
         :after_time,
         :next_token,
         :max_results)
+
+        include Aws::Structure
 
         # @!attribute [rw] case_id
         #   The AWS Support case ID requested or returned in the call. The case
@@ -562,9 +594,11 @@ module Aws
       end
 
       # The communications returned by the DescribeCommunications operation.
-      class DescribeCommunicationsResponse < Aws::Structure.new(
+      class DescribeCommunicationsResponse < Struct.new(
         :communications,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] communications
         #   The communications for the case.
@@ -583,9 +617,11 @@ module Aws
       #         service_code_list: ["ServiceCode"],
       #         language: "Language",
       #       }
-      class DescribeServicesRequest < Aws::Structure.new(
+      class DescribeServicesRequest < Struct.new(
         :service_code_list,
         :language)
+
+        include Aws::Structure
 
         # @!attribute [rw] service_code_list
         #   A JSON-formatted list of service codes available for AWS services.
@@ -601,8 +637,10 @@ module Aws
       end
 
       # The list of AWS services returned by the DescribeServices operation.
-      class DescribeServicesResponse < Aws::Structure.new(
+      class DescribeServicesResponse < Struct.new(
         :services)
+
+        include Aws::Structure
 
         # @!attribute [rw] services
         #   A JSON-formatted list of AWS services.
@@ -616,8 +654,10 @@ module Aws
       #       {
       #         language: "Language",
       #       }
-      class DescribeSeverityLevelsRequest < Aws::Structure.new(
+      class DescribeSeverityLevelsRequest < Struct.new(
         :language)
+
+        include Aws::Structure
 
         # @!attribute [rw] language
         #   The ISO 639-1 code for the language in which AWS provides support.
@@ -630,8 +670,10 @@ module Aws
 
       # The list of severity levels returned by the DescribeSeverityLevels
       # operation.
-      class DescribeSeverityLevelsResponse < Aws::Structure.new(
+      class DescribeSeverityLevelsResponse < Struct.new(
         :severity_levels)
+
+        include Aws::Structure
 
         # @!attribute [rw] severity_levels
         #   The available severity levels for the support case. Available
@@ -647,8 +689,10 @@ module Aws
       #       {
       #         check_ids: ["String"], # required
       #       }
-      class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Aws::Structure.new(
+      class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Struct.new(
         :check_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] check_ids
         #   The IDs of the Trusted Advisor checks.
@@ -658,8 +702,10 @@ module Aws
 
       # The statuses of the Trusted Advisor checks returned by the
       # DescribeTrustedAdvisorCheckRefreshStatuses operation.
-      class DescribeTrustedAdvisorCheckRefreshStatusesResponse < Aws::Structure.new(
+      class DescribeTrustedAdvisorCheckRefreshStatusesResponse < Struct.new(
         :statuses)
+
+        include Aws::Structure
 
         # @!attribute [rw] statuses
         #   The refresh status of the specified Trusted Advisor checks.
@@ -674,9 +720,11 @@ module Aws
       #         check_id: "String", # required
       #         language: "String",
       #       }
-      class DescribeTrustedAdvisorCheckResultRequest < Aws::Structure.new(
+      class DescribeTrustedAdvisorCheckResultRequest < Struct.new(
         :check_id,
         :language)
+
+        include Aws::Structure
 
         # @!attribute [rw] check_id
         #   The unique identifier for the Trusted Advisor check.
@@ -693,8 +741,10 @@ module Aws
 
       # The result of the Trusted Advisor check returned by the
       # DescribeTrustedAdvisorCheckResult operation.
-      class DescribeTrustedAdvisorCheckResultResponse < Aws::Structure.new(
+      class DescribeTrustedAdvisorCheckResultResponse < Struct.new(
         :result)
+
+        include Aws::Structure
 
         # @!attribute [rw] result
         #   The detailed results of the Trusted Advisor check.
@@ -708,8 +758,10 @@ module Aws
       #       {
       #         check_ids: ["String"], # required
       #       }
-      class DescribeTrustedAdvisorCheckSummariesRequest < Aws::Structure.new(
+      class DescribeTrustedAdvisorCheckSummariesRequest < Struct.new(
         :check_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] check_ids
         #   The IDs of the Trusted Advisor checks.
@@ -719,8 +771,10 @@ module Aws
 
       # The summaries of the Trusted Advisor checks returned by the
       # DescribeTrustedAdvisorCheckSummaries operation.
-      class DescribeTrustedAdvisorCheckSummariesResponse < Aws::Structure.new(
+      class DescribeTrustedAdvisorCheckSummariesResponse < Struct.new(
         :summaries)
+
+        include Aws::Structure
 
         # @!attribute [rw] summaries
         #   The summary information for the requested Trusted Advisor checks.
@@ -734,8 +788,10 @@ module Aws
       #       {
       #         language: "String", # required
       #       }
-      class DescribeTrustedAdvisorChecksRequest < Aws::Structure.new(
+      class DescribeTrustedAdvisorChecksRequest < Struct.new(
         :language)
+
+        include Aws::Structure
 
         # @!attribute [rw] language
         #   The ISO 639-1 code for the language in which AWS provides support.
@@ -748,8 +804,10 @@ module Aws
 
       # Information about the Trusted Advisor checks returned by the
       # DescribeTrustedAdvisorChecks operation.
-      class DescribeTrustedAdvisorChecksResponse < Aws::Structure.new(
+      class DescribeTrustedAdvisorChecksResponse < Struct.new(
         :checks)
+
+        include Aws::Structure
 
         # @!attribute [rw] checks
         #   Information about all available Trusted Advisor checks.
@@ -758,9 +816,11 @@ module Aws
       end
 
       # The five most recent communications associated with the case.
-      class RecentCaseCommunications < Aws::Structure.new(
+      class RecentCaseCommunications < Struct.new(
         :communications,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] communications
         #   The five most recent communications associated with the case.
@@ -778,8 +838,10 @@ module Aws
       #       {
       #         check_id: "String", # required
       #       }
-      class RefreshTrustedAdvisorCheckRequest < Aws::Structure.new(
+      class RefreshTrustedAdvisorCheckRequest < Struct.new(
         :check_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] check_id
         #   The unique identifier for the Trusted Advisor check.
@@ -788,8 +850,10 @@ module Aws
       end
 
       # The current refresh status of a Trusted Advisor check.
-      class RefreshTrustedAdvisorCheckResponse < Aws::Structure.new(
+      class RefreshTrustedAdvisorCheckResponse < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The current refresh status for a check, including the amount of time
@@ -804,8 +868,10 @@ module Aws
       #       {
       #         case_id: "CaseId",
       #       }
-      class ResolveCaseRequest < Aws::Structure.new(
+      class ResolveCaseRequest < Struct.new(
         :case_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] case_id
         #   The AWS Support case ID requested or returned in the call. The case
@@ -816,9 +882,11 @@ module Aws
       end
 
       # The status of the case returned by the ResolveCase operation.
-      class ResolveCaseResponse < Aws::Structure.new(
+      class ResolveCaseResponse < Struct.new(
         :initial_case_status,
         :final_case_status)
+
+        include Aws::Structure
 
         # @!attribute [rw] initial_case_status
         #   The status of the case when the ResolveCase request was sent.
@@ -832,10 +900,12 @@ module Aws
 
       # Information about an AWS service returned by the DescribeServices
       # operation.
-      class Service < Aws::Structure.new(
+      class Service < Struct.new(
         :code,
         :name,
         :categories)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The code for an AWS service returned by the DescribeServices
@@ -859,9 +929,11 @@ module Aws
 
       # A code and name pair that represent a severity level that can be
       # applied to a support case.
-      class SeverityLevel < Aws::Structure.new(
+      class SeverityLevel < Struct.new(
         :code,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   One of four values: \"low,\" \"medium,\" \"high,\" and \"urgent\".
@@ -878,8 +950,10 @@ module Aws
 
       # The container for summary information that relates to the category of
       # the Trusted Advisor check.
-      class TrustedAdvisorCategorySpecificSummary < Aws::Structure.new(
+      class TrustedAdvisorCategorySpecificSummary < Struct.new(
         :cost_optimizing)
+
+        include Aws::Structure
 
         # @!attribute [rw] cost_optimizing
         #   The summary information about cost savings for a Trusted Advisor
@@ -889,12 +963,14 @@ module Aws
       end
 
       # The description and metadata for a Trusted Advisor check.
-      class TrustedAdvisorCheckDescription < Aws::Structure.new(
+      class TrustedAdvisorCheckDescription < Struct.new(
         :id,
         :name,
         :description,
         :category,
         :metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique identifier for the Trusted Advisor check.
@@ -925,10 +1001,12 @@ module Aws
       end
 
       # The refresh status of a Trusted Advisor check.
-      class TrustedAdvisorCheckRefreshStatus < Aws::Structure.new(
+      class TrustedAdvisorCheckRefreshStatus < Struct.new(
         :check_id,
         :status,
         :millis_until_next_refreshable)
+
+        include Aws::Structure
 
         # @!attribute [rw] check_id
         #   The unique identifier for the Trusted Advisor check.
@@ -949,13 +1027,15 @@ module Aws
 
       # The results of a Trusted Advisor check returned by
       # DescribeTrustedAdvisorCheckResult.
-      class TrustedAdvisorCheckResult < Aws::Structure.new(
+      class TrustedAdvisorCheckResult < Struct.new(
         :check_id,
         :timestamp,
         :status,
         :resources_summary,
         :category_specific_summary,
         :flagged_resources)
+
+        include Aws::Structure
 
         # @!attribute [rw] check_id
         #   The unique identifier for the Trusted Advisor check.
@@ -988,13 +1068,15 @@ module Aws
 
       # A summary of a Trusted Advisor check result, including the alert
       # status, last refresh, and number of resources examined.
-      class TrustedAdvisorCheckSummary < Aws::Structure.new(
+      class TrustedAdvisorCheckSummary < Struct.new(
         :check_id,
         :timestamp,
         :status,
         :has_flagged_resources,
         :resources_summary,
         :category_specific_summary)
+
+        include Aws::Structure
 
         # @!attribute [rw] check_id
         #   The unique identifier for the Trusted Advisor check.
@@ -1027,9 +1109,11 @@ module Aws
 
       # The estimated cost savings that might be realized if the recommended
       # actions are taken.
-      class TrustedAdvisorCostOptimizingSummary < Aws::Structure.new(
+      class TrustedAdvisorCostOptimizingSummary < Struct.new(
         :estimated_monthly_savings,
         :estimated_percent_monthly_savings)
+
+        include Aws::Structure
 
         # @!attribute [rw] estimated_monthly_savings
         #   The estimated monthly savings that might be realized if the
@@ -1045,12 +1129,14 @@ module Aws
 
       # Contains information about a resource identified by a Trusted Advisor
       # check.
-      class TrustedAdvisorResourceDetail < Aws::Structure.new(
+      class TrustedAdvisorResourceDetail < Struct.new(
         :status,
         :region,
         :resource_id,
         :is_suppressed,
         :metadata)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   The status code for the resource identified in the Trusted Advisor
@@ -1083,11 +1169,13 @@ module Aws
 
       # Details about AWS resources that were analyzed in a call to Trusted
       # Advisor DescribeTrustedAdvisorCheckSummaries.
-      class TrustedAdvisorResourcesSummary < Aws::Structure.new(
+      class TrustedAdvisorResourcesSummary < Struct.new(
         :resources_processed,
         :resources_flagged,
         :resources_ignored,
         :resources_suppressed)
+
+        include Aws::Structure
 
         # @!attribute [rw] resources_processed
         #   The number of AWS resources that were analyzed by the Trusted

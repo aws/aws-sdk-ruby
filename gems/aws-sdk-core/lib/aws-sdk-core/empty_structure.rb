@@ -1,3 +1,5 @@
 module Aws
-  class EmptyStructure < Struct.new('AwsEmptyStructure'); end
+  class EmptyStructure < Struct.new('AwsEmptyStructure')
+    include(Aws::Structure)
+  end
 end

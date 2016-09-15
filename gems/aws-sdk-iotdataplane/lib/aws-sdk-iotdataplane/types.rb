@@ -16,8 +16,10 @@ module Aws
       #       {
       #         thing_name: "ThingName", # required
       #       }
-      class DeleteThingShadowRequest < Aws::Structure.new(
+      class DeleteThingShadowRequest < Struct.new(
         :thing_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -26,8 +28,10 @@ module Aws
       end
 
       # The output from the DeleteThingShadow operation.
-      class DeleteThingShadowResponse < Aws::Structure.new(
+      class DeleteThingShadowResponse < Struct.new(
         :payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] payload
         #   The state information, in JSON format.
@@ -42,8 +46,10 @@ module Aws
       #       {
       #         thing_name: "ThingName", # required
       #       }
-      class GetThingShadowRequest < Aws::Structure.new(
+      class GetThingShadowRequest < Struct.new(
         :thing_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -52,8 +58,10 @@ module Aws
       end
 
       # The output from the GetThingShadow operation.
-      class GetThingShadowResponse < Aws::Structure.new(
+      class GetThingShadowResponse < Struct.new(
         :payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] payload
         #   The state information, in JSON format.
@@ -70,10 +78,12 @@ module Aws
       #         qos: 1,
       #         payload: "data",
       #       }
-      class PublishRequest < Aws::Structure.new(
+      class PublishRequest < Struct.new(
         :topic,
         :qos,
         :payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic
         #   The name of the MQTT topic.
@@ -97,9 +107,11 @@ module Aws
       #         thing_name: "ThingName", # required
       #         payload: "data", # required
       #       }
-      class UpdateThingShadowRequest < Aws::Structure.new(
+      class UpdateThingShadowRequest < Struct.new(
         :thing_name,
         :payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] thing_name
         #   The name of the thing.
@@ -112,8 +124,10 @@ module Aws
       end
 
       # The output from the UpdateThingShadow operation.
-      class UpdateThingShadowResponse < Aws::Structure.new(
+      class UpdateThingShadowResponse < Struct.new(
         :payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] payload
         #   The state information, in JSON format.

@@ -17,7 +17,7 @@ module Aws
       # title and authors attributes. Each book has one title but can have
       # many authors. The multi-valued attribute is a set; duplicate values
       # are not allowed.
-      class AttributeValue < Aws::Structure.new(
+      class AttributeValue < Struct.new(
         :s,
         :n,
         :b,
@@ -28,6 +28,8 @@ module Aws
         :l,
         :null,
         :bool)
+
+        include Aws::Structure
 
         # @!attribute [rw] s
         #   A String data type.
@@ -80,10 +82,12 @@ module Aws
       #         limit: 1,
       #         exclusive_start_shard_id: "ShardId",
       #       }
-      class DescribeStreamInput < Aws::Structure.new(
+      class DescribeStreamInput < Struct.new(
         :stream_arn,
         :limit,
         :exclusive_start_shard_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_arn
         #   The Amazon Resource Name (ARN) for the stream.
@@ -103,8 +107,10 @@ module Aws
       end
 
       # Represents the output of a *DescribeStream* operation.
-      class DescribeStreamOutput < Aws::Structure.new(
+      class DescribeStreamOutput < Struct.new(
         :stream_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_description
         #   A complete description of the stream, including its creation date
@@ -123,9 +129,11 @@ module Aws
       #         shard_iterator: "ShardIterator", # required
       #         limit: 1,
       #       }
-      class GetRecordsInput < Aws::Structure.new(
+      class GetRecordsInput < Struct.new(
         :shard_iterator,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_iterator
         #   A shard iterator that was retrieved from a previous GetShardIterator
@@ -141,9 +149,11 @@ module Aws
       end
 
       # Represents the output of a *GetRecords* operation.
-      class GetRecordsOutput < Aws::Structure.new(
+      class GetRecordsOutput < Struct.new(
         :records,
         :next_shard_iterator)
+
+        include Aws::Structure
 
         # @!attribute [rw] records
         #   The stream records from the shard, which were retrieved using the
@@ -168,11 +178,13 @@ module Aws
       #         shard_iterator_type: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_SEQUENCE_NUMBER, AFTER_SEQUENCE_NUMBER
       #         sequence_number: "SequenceNumber",
       #       }
-      class GetShardIteratorInput < Aws::Structure.new(
+      class GetShardIteratorInput < Struct.new(
         :stream_arn,
         :shard_id,
         :shard_iterator_type,
         :sequence_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_arn
         #   The Amazon Resource Name (ARN) for the stream.
@@ -212,8 +224,10 @@ module Aws
       end
 
       # Represents the output of a *GetShardIterator* operation.
-      class GetShardIteratorOutput < Aws::Structure.new(
+      class GetShardIteratorOutput < Struct.new(
         :shard_iterator)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_iterator
         #   The position in the shard from which to start reading stream records
@@ -244,9 +258,11 @@ module Aws
       # by the sort key value.
       #
       #  </note>
-      class KeySchemaElement < Aws::Structure.new(
+      class KeySchemaElement < Struct.new(
         :attribute_name,
         :key_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of a key attribute.
@@ -268,10 +284,12 @@ module Aws
       #         limit: 1,
       #         exclusive_start_stream_arn: "StreamArn",
       #       }
-      class ListStreamsInput < Aws::Structure.new(
+      class ListStreamsInput < Struct.new(
         :table_name,
         :limit,
         :exclusive_start_stream_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   If this parameter is provided, then only the streams associated with
@@ -291,9 +309,11 @@ module Aws
       end
 
       # Represents the output of a *ListStreams* operation.
-      class ListStreamsOutput < Aws::Structure.new(
+      class ListStreamsOutput < Struct.new(
         :streams,
         :last_evaluated_stream_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] streams
         #   A list of stream descriptors associated with the current account and
@@ -318,13 +338,15 @@ module Aws
       end
 
       # A description of a unique event within a stream.
-      class Record < Aws::Structure.new(
+      class Record < Struct.new(
         :event_id,
         :event_name,
         :event_version,
         :event_source,
         :aws_region,
         :dynamodb)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_id
         #   A globally unique identifier for the event that was recorded in this
@@ -371,9 +393,11 @@ module Aws
 
       # The beginning and ending sequence numbers for the stream records
       # contained within a shard.
-      class SequenceNumberRange < Aws::Structure.new(
+      class SequenceNumberRange < Struct.new(
         :starting_sequence_number,
         :ending_sequence_number)
+
+        include Aws::Structure
 
         # @!attribute [rw] starting_sequence_number
         #   The first sequence number.
@@ -386,10 +410,12 @@ module Aws
       end
 
       # A uniquely identified group of stream records within a stream.
-      class Shard < Aws::Structure.new(
+      class Shard < Struct.new(
         :shard_id,
         :sequence_number_range,
         :parent_shard_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] shard_id
         #   The system-generated identifier for this shard.
@@ -406,10 +432,12 @@ module Aws
       end
 
       # Represents all of the data describing a particular stream.
-      class Stream < Aws::Structure.new(
+      class Stream < Struct.new(
         :stream_arn,
         :table_name,
         :stream_label)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_arn
         #   The Amazon Resource Name (ARN) for the stream.
@@ -437,7 +465,7 @@ module Aws
       end
 
       # Represents all of the data describing a particular stream.
-      class StreamDescription < Aws::Structure.new(
+      class StreamDescription < Struct.new(
         :stream_arn,
         :stream_label,
         :stream_status,
@@ -447,6 +475,8 @@ module Aws
         :key_schema,
         :shards,
         :last_evaluated_shard_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_arn
         #   The Amazon Resource Name (ARN) for the stream.
@@ -532,7 +562,7 @@ module Aws
 
       # A description of a single data modification that was performed on an
       # item in a DynamoDB table.
-      class StreamRecord < Aws::Structure.new(
+      class StreamRecord < Struct.new(
         :approximate_creation_date_time,
         :keys,
         :new_image,
@@ -540,6 +570,8 @@ module Aws
         :sequence_number,
         :size_bytes,
         :stream_view_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] approximate_creation_date_time
         #   The approximate date and time when the stream record was created, in

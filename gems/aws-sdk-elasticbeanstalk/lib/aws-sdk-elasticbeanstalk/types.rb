@@ -16,9 +16,11 @@ module Aws
       #         environment_id: "EnvironmentId",
       #         environment_name: "EnvironmentName",
       #       }
-      class AbortEnvironmentUpdateMessage < Aws::Structure.new(
+      class AbortEnvironmentUpdateMessage < Struct.new(
         :environment_id,
         :environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   This specifies the ID of the environment with the in-progress update
@@ -33,13 +35,15 @@ module Aws
       end
 
       # Describes the properties of an application.
-      class ApplicationDescription < Aws::Structure.new(
+      class ApplicationDescription < Struct.new(
         :application_name,
         :description,
         :date_created,
         :date_updated,
         :versions,
         :configuration_templates)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application.
@@ -69,8 +73,10 @@ module Aws
       end
 
       # Result message containing a single description of an application.
-      class ApplicationDescriptionMessage < Aws::Structure.new(
+      class ApplicationDescriptionMessage < Struct.new(
         :application)
+
+        include Aws::Structure
 
         # @!attribute [rw] application
         #   The ApplicationDescription of the application.
@@ -79,8 +85,10 @@ module Aws
       end
 
       # Result message containing a list of application descriptions.
-      class ApplicationDescriptionsMessage < Aws::Structure.new(
+      class ApplicationDescriptionsMessage < Struct.new(
         :applications)
+
+        include Aws::Structure
 
         # @!attribute [rw] applications
         #   This parameter contains a list of ApplicationDescription.
@@ -89,11 +97,13 @@ module Aws
       end
 
       # Represents the application metrics for a specified environment.
-      class ApplicationMetrics < Aws::Structure.new(
+      class ApplicationMetrics < Struct.new(
         :duration,
         :request_count,
         :status_codes,
         :latency)
+
+        include Aws::Structure
 
         # @!attribute [rw] duration
         #   The amount of time that the metrics cover (usually 10 seconds). For
@@ -120,7 +130,7 @@ module Aws
       end
 
       # Describes the properties of an application version.
-      class ApplicationVersionDescription < Aws::Structure.new(
+      class ApplicationVersionDescription < Struct.new(
         :application_name,
         :description,
         :version_label,
@@ -128,6 +138,8 @@ module Aws
         :date_created,
         :date_updated,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application associated with this release.
@@ -162,8 +174,10 @@ module Aws
 
       # Result message wrapping a single description of an application
       # version.
-      class ApplicationVersionDescriptionMessage < Aws::Structure.new(
+      class ApplicationVersionDescriptionMessage < Struct.new(
         :application_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_version
         #   The ApplicationVersionDescription of the application version.
@@ -172,8 +186,10 @@ module Aws
       end
 
       # Result message wrapping a list of application version descriptions.
-      class ApplicationVersionDescriptionsMessage < Aws::Structure.new(
+      class ApplicationVersionDescriptionsMessage < Struct.new(
         :application_versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_versions
         #   List of `ApplicationVersionDescription` objects sorted by order of
@@ -191,10 +207,12 @@ module Aws
       #         environment_id: "String",
       #         action_id: "String", # required
       #       }
-      class ApplyEnvironmentManagedActionRequest < Aws::Structure.new(
+      class ApplyEnvironmentManagedActionRequest < Struct.new(
         :environment_name,
         :environment_id,
         :action_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_name
         #   The name of the target environment.
@@ -211,11 +229,13 @@ module Aws
       end
 
       # The result message containing information about the managed action.
-      class ApplyEnvironmentManagedActionResult < Aws::Structure.new(
+      class ApplyEnvironmentManagedActionResult < Struct.new(
         :action_id,
         :action_description,
         :action_type,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_id
         #   The action ID of the managed action.
@@ -236,8 +256,10 @@ module Aws
       end
 
       # Describes an Auto Scaling launch configuration.
-      class AutoScalingGroup < Aws::Structure.new(
+      class AutoScalingGroup < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the `AutoScalingGroup` .
@@ -249,7 +271,7 @@ module Aws
       # that belongs to the AWS Elastic Beanstalk environment. Use the
       # `instanceId` property to specify the application instance for which
       # you\'d like to return data.
-      class CPUUtilization < Aws::Structure.new(
+      class CPUUtilization < Struct.new(
         :user,
         :nice,
         :system,
@@ -257,6 +279,8 @@ module Aws
         :io_wait,
         :irq,
         :soft_irq)
+
+        include Aws::Structure
 
         # @!attribute [rw] user
         #   Percentage of time that the CPU has spent in the `User` state over
@@ -302,8 +326,10 @@ module Aws
       #       {
       #         cname_prefix: "DNSCnamePrefix", # required
       #       }
-      class CheckDNSAvailabilityMessage < Aws::Structure.new(
+      class CheckDNSAvailabilityMessage < Struct.new(
         :cname_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] cname_prefix
         #   The prefix used when this CNAME is reserved.
@@ -312,9 +338,11 @@ module Aws
       end
 
       # Indicates if the specified CNAME is available.
-      class CheckDNSAvailabilityResultMessage < Aws::Structure.new(
+      class CheckDNSAvailabilityResultMessage < Struct.new(
         :available,
         :fully_qualified_cname)
+
+        include Aws::Structure
 
         # @!attribute [rw] available
         #   Indicates if the specified CNAME is available:
@@ -339,10 +367,12 @@ module Aws
       #         group_name: "GroupName",
       #         version_labels: ["VersionLabel"],
       #       }
-      class ComposeEnvironmentsMessage < Aws::Structure.new(
+      class ComposeEnvironmentsMessage < Struct.new(
         :application_name,
         :group_name,
         :version_labels)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application to which the specified source bundles
@@ -371,7 +401,7 @@ module Aws
       end
 
       # Describes the possible values for a configuration option.
-      class ConfigurationOptionDescription < Aws::Structure.new(
+      class ConfigurationOptionDescription < Struct.new(
         :namespace,
         :name,
         :default_value,
@@ -383,6 +413,8 @@ module Aws
         :max_value,
         :max_length,
         :regex)
+
+        include Aws::Structure
 
         # @!attribute [rw] namespace
         #   A unique namespace identifying the option\'s associated AWS
@@ -484,11 +516,13 @@ module Aws
       #         option_name: "ConfigurationOptionName",
       #         value: "ConfigurationOptionValue",
       #       }
-      class ConfigurationOptionSetting < Aws::Structure.new(
+      class ConfigurationOptionSetting < Struct.new(
         :resource_name,
         :namespace,
         :option_name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   A unique resource name for a time-based scaling configuration
@@ -511,9 +545,11 @@ module Aws
       end
 
       # Describes the settings for a specified configuration set.
-      class ConfigurationOptionsDescription < Aws::Structure.new(
+      class ConfigurationOptionsDescription < Struct.new(
         :solution_stack_name,
         :options)
+
+        include Aws::Structure
 
         # @!attribute [rw] solution_stack_name
         #   The name of the solution stack these configuration options belong
@@ -527,7 +563,7 @@ module Aws
       end
 
       # Describes the settings for a configuration set.
-      class ConfigurationSettingsDescription < Aws::Structure.new(
+      class ConfigurationSettingsDescription < Struct.new(
         :solution_stack_name,
         :application_name,
         :template_name,
@@ -537,6 +573,8 @@ module Aws
         :date_created,
         :date_updated,
         :option_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] solution_stack_name
         #   The name of the solution stack this configuration set uses.
@@ -593,8 +631,10 @@ module Aws
 
       # The results from a request to change the configuration settings of an
       # environment.
-      class ConfigurationSettingsDescriptions < Aws::Structure.new(
+      class ConfigurationSettingsDescriptions < Struct.new(
         :configuration_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration_settings
         #   A list of ConfigurationSettingsDescription.
@@ -603,8 +643,10 @@ module Aws
       end
 
       # Provides a list of validation messages.
-      class ConfigurationSettingsValidationMessages < Aws::Structure.new(
+      class ConfigurationSettingsValidationMessages < Struct.new(
         :messages)
+
+        include Aws::Structure
 
         # @!attribute [rw] messages
         #   A list of ValidationMessage.
@@ -620,9 +662,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         description: "Description",
       #       }
-      class CreateApplicationMessage < Aws::Structure.new(
+      class CreateApplicationMessage < Struct.new(
         :application_name,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application.
@@ -652,13 +696,15 @@ module Aws
       #         auto_create_application: false,
       #         process: false,
       #       }
-      class CreateApplicationVersionMessage < Aws::Structure.new(
+      class CreateApplicationVersionMessage < Struct.new(
         :application_name,
         :version_label,
         :description,
         :source_bundle,
         :auto_create_application,
         :process)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application. If no application is found with this
@@ -740,7 +786,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateConfigurationTemplateMessage < Aws::Structure.new(
+      class CreateConfigurationTemplateMessage < Struct.new(
         :application_name,
         :template_name,
         :solution_stack_name,
@@ -748,6 +794,8 @@ module Aws
         :environment_id,
         :description,
         :option_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application to associate with this configuration
@@ -857,7 +905,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateEnvironmentMessage < Aws::Structure.new(
+      class CreateEnvironmentMessage < Struct.new(
         :application_name,
         :environment_name,
         :group_name,
@@ -870,6 +918,8 @@ module Aws
         :solution_stack_name,
         :option_settings,
         :options_to_remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application that contains the version to be
@@ -973,8 +1023,10 @@ module Aws
       end
 
       # Results of a CreateStorageLocationResult call.
-      class CreateStorageLocationResultMessage < Aws::Structure.new(
+      class CreateStorageLocationResultMessage < Struct.new(
         :s3_bucket)
+
+        include Aws::Structure
 
         # @!attribute [rw] s3_bucket
         #   The name of the Amazon S3 bucket created.
@@ -990,9 +1042,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         terminate_env_by_force: false,
       #       }
-      class DeleteApplicationMessage < Aws::Structure.new(
+      class DeleteApplicationMessage < Struct.new(
         :application_name,
         :terminate_env_by_force)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application to delete.
@@ -1014,10 +1068,12 @@ module Aws
       #         version_label: "VersionLabel", # required
       #         delete_source_bundle: false,
       #       }
-      class DeleteApplicationVersionMessage < Aws::Structure.new(
+      class DeleteApplicationVersionMessage < Struct.new(
         :application_name,
         :version_label,
         :delete_source_bundle)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application to delete releases from.
@@ -1049,9 +1105,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         template_name: "ConfigurationTemplateName", # required
       #       }
-      class DeleteConfigurationTemplateMessage < Aws::Structure.new(
+      class DeleteConfigurationTemplateMessage < Struct.new(
         :application_name,
         :template_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application to delete the configuration template
@@ -1072,9 +1130,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         environment_name: "EnvironmentName", # required
       #       }
-      class DeleteEnvironmentConfigurationMessage < Aws::Structure.new(
+      class DeleteEnvironmentConfigurationMessage < Struct.new(
         :application_name,
         :environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application the environment is associated with.
@@ -1087,11 +1147,13 @@ module Aws
       end
 
       # Information about an application version deployment.
-      class Deployment < Aws::Structure.new(
+      class Deployment < Struct.new(
         :version_label,
         :deployment_id,
         :status,
         :deployment_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] version_label
         #   The version label of the application version in the deployment.
@@ -1127,9 +1189,11 @@ module Aws
       #         application_name: "ApplicationName",
       #         version_labels: ["VersionLabel"],
       #       }
-      class DescribeApplicationVersionsMessage < Aws::Structure.new(
+      class DescribeApplicationVersionsMessage < Struct.new(
         :application_name,
         :version_labels)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   If specified, AWS Elastic Beanstalk restricts the returned
@@ -1151,8 +1215,10 @@ module Aws
       #       {
       #         application_names: ["ApplicationName"],
       #       }
-      class DescribeApplicationsMessage < Aws::Structure.new(
+      class DescribeApplicationsMessage < Struct.new(
         :application_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_names
         #   If specified, AWS Elastic Beanstalk restricts the returned
@@ -1178,12 +1244,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class DescribeConfigurationOptionsMessage < Aws::Structure.new(
+      class DescribeConfigurationOptionsMessage < Struct.new(
         :application_name,
         :template_name,
         :environment_name,
         :solution_stack_name,
         :options)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application associated with the configuration
@@ -1224,10 +1292,12 @@ module Aws
       #         template_name: "ConfigurationTemplateName",
       #         environment_name: "EnvironmentName",
       #       }
-      class DescribeConfigurationSettingsMessage < Aws::Structure.new(
+      class DescribeConfigurationSettingsMessage < Struct.new(
         :application_name,
         :template_name,
         :environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The application for the environment or configuration template.
@@ -1263,10 +1333,12 @@ module Aws
       #         environment_id: "EnvironmentId",
       #         attribute_names: ["Status"], # accepts Status, Color, Causes, ApplicationMetrics, InstancesHealth, All, HealthStatus, RefreshedAt
       #       }
-      class DescribeEnvironmentHealthRequest < Aws::Structure.new(
+      class DescribeEnvironmentHealthRequest < Struct.new(
         :environment_name,
         :environment_id,
         :attribute_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_name
         #   Specifies the AWS Elastic Beanstalk environment name.
@@ -1293,7 +1365,7 @@ module Aws
       end
 
       # See the example below for a sample response.
-      class DescribeEnvironmentHealthResult < Aws::Structure.new(
+      class DescribeEnvironmentHealthResult < Struct.new(
         :environment_name,
         :health_status,
         :status,
@@ -1302,6 +1374,8 @@ module Aws
         :application_metrics,
         :instances_health,
         :refreshed_at)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_name
         #   The AWS Elastic Beanstalk environment name.
@@ -1364,11 +1438,13 @@ module Aws
       #         next_token: "String",
       #         max_items: 1,
       #       }
-      class DescribeEnvironmentManagedActionHistoryRequest < Aws::Structure.new(
+      class DescribeEnvironmentManagedActionHistoryRequest < Struct.new(
         :environment_id,
         :environment_name,
         :next_token,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   The environment ID of the target environment.
@@ -1390,9 +1466,11 @@ module Aws
 
       # A result message containing a list of completed and failed managed
       # actions.
-      class DescribeEnvironmentManagedActionHistoryResult < Aws::Structure.new(
+      class DescribeEnvironmentManagedActionHistoryResult < Struct.new(
         :managed_action_history_items,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] managed_action_history_items
         #   A list of completed and failed managed actions.
@@ -1416,10 +1494,12 @@ module Aws
       #         environment_id: "String",
       #         status: "Scheduled", # accepts Scheduled, Pending, Running, Unknown
       #       }
-      class DescribeEnvironmentManagedActionsRequest < Aws::Structure.new(
+      class DescribeEnvironmentManagedActionsRequest < Struct.new(
         :environment_name,
         :environment_id,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_name
         #   The name of the target environment.
@@ -1436,8 +1516,10 @@ module Aws
       end
 
       # The result message containing a list of managed actions.
-      class DescribeEnvironmentManagedActionsResult < Aws::Structure.new(
+      class DescribeEnvironmentManagedActionsResult < Struct.new(
         :managed_actions)
+
+        include Aws::Structure
 
         # @!attribute [rw] managed_actions
         #   A list of upcoming and in-progress managed actions.
@@ -1453,9 +1535,11 @@ module Aws
       #         environment_id: "EnvironmentId",
       #         environment_name: "EnvironmentName",
       #       }
-      class DescribeEnvironmentResourcesMessage < Aws::Structure.new(
+      class DescribeEnvironmentResourcesMessage < Struct.new(
         :environment_id,
         :environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   The ID of the environment to retrieve AWS resource usage data.
@@ -1487,13 +1571,15 @@ module Aws
       #         include_deleted: false,
       #         included_deleted_back_to: Time.now,
       #       }
-      class DescribeEnvironmentsMessage < Aws::Structure.new(
+      class DescribeEnvironmentsMessage < Struct.new(
         :application_name,
         :version_label,
         :environment_ids,
         :environment_names,
         :include_deleted,
         :included_deleted_back_to)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   If specified, AWS Elastic Beanstalk restricts the returned
@@ -1550,7 +1636,7 @@ module Aws
       #         max_records: 1,
       #         next_token: "Token",
       #       }
-      class DescribeEventsMessage < Aws::Structure.new(
+      class DescribeEventsMessage < Struct.new(
         :application_name,
         :version_label,
         :template_name,
@@ -1562,6 +1648,8 @@ module Aws
         :end_time,
         :max_records,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   If specified, AWS Elastic Beanstalk restricts the returned
@@ -1632,11 +1720,13 @@ module Aws
       #         attribute_names: ["HealthStatus"], # accepts HealthStatus, Color, Causes, ApplicationMetrics, RefreshedAt, LaunchedAt, System, Deployment, AvailabilityZone, InstanceType, All
       #         next_token: "NextToken",
       #       }
-      class DescribeInstancesHealthRequest < Aws::Structure.new(
+      class DescribeInstancesHealthRequest < Struct.new(
         :environment_name,
         :environment_id,
         :attribute_names,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_name
         #   Specifies the AWS Elastic Beanstalk environment name.
@@ -1659,10 +1749,12 @@ module Aws
       end
 
       # See the example below for a sample response.
-      class DescribeInstancesHealthResult < Aws::Structure.new(
+      class DescribeInstancesHealthResult < Struct.new(
         :instance_health_list,
         :refreshed_at,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_health_list
         #   Contains the response body with information about the health of the
@@ -1680,7 +1772,7 @@ module Aws
       end
 
       # Describes the properties of an environment.
-      class EnvironmentDescription < Aws::Structure.new(
+      class EnvironmentDescription < Struct.new(
         :environment_name,
         :environment_id,
         :application_name,
@@ -1699,6 +1791,8 @@ module Aws
         :resources,
         :tier,
         :environment_links)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_name
         #   The name of this environment.
@@ -1811,8 +1905,10 @@ module Aws
       end
 
       # Result message containing a list of environment descriptions.
-      class EnvironmentDescriptionsMessage < Aws::Structure.new(
+      class EnvironmentDescriptionsMessage < Struct.new(
         :environments)
+
+        include Aws::Structure
 
         # @!attribute [rw] environments
         #   Returns an EnvironmentDescription list.
@@ -1821,11 +1917,13 @@ module Aws
       end
 
       # The information retrieved from the Amazon EC2 instances.
-      class EnvironmentInfoDescription < Aws::Structure.new(
+      class EnvironmentInfoDescription < Struct.new(
         :info_type,
         :ec2_instance_id,
         :sample_timestamp,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] info_type
         #   The type of information retrieved.
@@ -1853,9 +1951,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
-      class EnvironmentLink < Aws::Structure.new(
+      class EnvironmentLink < Struct.new(
         :link_name,
         :environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] link_name
         #   The name of the link.
@@ -1869,7 +1969,7 @@ module Aws
 
       # Describes the AWS resources in use by this environment. This data is
       # live.
-      class EnvironmentResourceDescription < Aws::Structure.new(
+      class EnvironmentResourceDescription < Struct.new(
         :environment_name,
         :auto_scaling_groups,
         :instances,
@@ -1877,6 +1977,8 @@ module Aws
         :load_balancers,
         :triggers,
         :queues)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_name
         #   The name of the environment.
@@ -1909,8 +2011,10 @@ module Aws
       end
 
       # Result message containing a list of environment resource descriptions.
-      class EnvironmentResourceDescriptionsMessage < Aws::Structure.new(
+      class EnvironmentResourceDescriptionsMessage < Struct.new(
         :environment_resources)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_resources
         #   A list of EnvironmentResourceDescription.
@@ -1920,8 +2024,10 @@ module Aws
 
       # Describes the AWS resources in use by this environment. This data is
       # not live data.
-      class EnvironmentResourcesDescription < Aws::Structure.new(
+      class EnvironmentResourcesDescription < Struct.new(
         :load_balancer)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer
         #   Describes the LoadBalancer.
@@ -1938,10 +2044,12 @@ module Aws
       #         type: "String",
       #         version: "String",
       #       }
-      class EnvironmentTier < Aws::Structure.new(
+      class EnvironmentTier < Struct.new(
         :name,
         :type,
         :version)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of this environment tier.
@@ -1958,7 +2066,7 @@ module Aws
       end
 
       # Describes an event.
-      class EventDescription < Aws::Structure.new(
+      class EventDescription < Struct.new(
         :event_date,
         :message,
         :application_name,
@@ -1967,6 +2075,8 @@ module Aws
         :environment_name,
         :request_id,
         :severity)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_date
         #   The date when the event occurred.
@@ -2004,9 +2114,11 @@ module Aws
       end
 
       # Result message wrapping a list of event descriptions.
-      class EventDescriptionsMessage < Aws::Structure.new(
+      class EventDescriptionsMessage < Struct.new(
         :events,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] events
         #   A list of EventDescription.
@@ -2021,8 +2133,10 @@ module Aws
       end
 
       # The description of an Amazon EC2 instance.
-      class Instance < Aws::Structure.new(
+      class Instance < Struct.new(
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID of the Amazon EC2 instance.
@@ -2036,7 +2150,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
-      class InstanceHealthSummary < Aws::Structure.new(
+      class InstanceHealthSummary < Struct.new(
         :no_data,
         :unknown,
         :pending,
@@ -2045,6 +2159,8 @@ module Aws
         :warning,
         :degraded,
         :severe)
+
+        include Aws::Structure
 
         # @!attribute [rw] no_data
         #   **Grey.** AWS Elastic Beanstalk and the health agent are reporting
@@ -2089,7 +2205,7 @@ module Aws
 
       # Represents the average latency for the slowest X percent of requests
       # over the last 10 seconds.
-      class Latency < Aws::Structure.new(
+      class Latency < Struct.new(
         :p999,
         :p99,
         :p95,
@@ -2098,6 +2214,8 @@ module Aws
         :p75,
         :p50,
         :p10)
+
+        include Aws::Structure
 
         # @!attribute [rw] p999
         #   The average latency for the slowest 0.1 percent of requests over the
@@ -2142,8 +2260,10 @@ module Aws
       end
 
       # Describes an Auto Scaling launch configuration.
-      class LaunchConfiguration < Aws::Structure.new(
+      class LaunchConfiguration < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the launch configuration.
@@ -2152,9 +2272,11 @@ module Aws
       end
 
       # A list of available AWS Elastic Beanstalk solution stacks.
-      class ListAvailableSolutionStacksResultMessage < Aws::Structure.new(
+      class ListAvailableSolutionStacksResultMessage < Struct.new(
         :solution_stacks,
         :solution_stack_details)
+
+        include Aws::Structure
 
         # @!attribute [rw] solution_stacks
         #   A list of available solution stacks.
@@ -2168,9 +2290,11 @@ module Aws
       end
 
       # Describes the properties of a Listener for the LoadBalancer.
-      class Listener < Aws::Structure.new(
+      class Listener < Struct.new(
         :protocol,
         :port)
+
+        include Aws::Structure
 
         # @!attribute [rw] protocol
         #   The protocol that is used by the Listener.
@@ -2183,8 +2307,10 @@ module Aws
       end
 
       # Describes a LoadBalancer.
-      class LoadBalancer < Aws::Structure.new(
+      class LoadBalancer < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the LoadBalancer.
@@ -2193,10 +2319,12 @@ module Aws
       end
 
       # Describes the details of a LoadBalancer.
-      class LoadBalancerDescription < Aws::Structure.new(
+      class LoadBalancerDescription < Struct.new(
         :load_balancer_name,
         :domain,
         :listeners)
+
+        include Aws::Structure
 
         # @!attribute [rw] load_balancer_name
         #   The name of the LoadBalancer.
@@ -2213,12 +2341,14 @@ module Aws
       end
 
       # The record of an upcoming or in-progress managed action.
-      class ManagedAction < Aws::Structure.new(
+      class ManagedAction < Struct.new(
         :action_id,
         :action_description,
         :action_type,
         :status,
         :window_start_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_id
         #   A unique identifier for the managed action.
@@ -2245,7 +2375,7 @@ module Aws
       end
 
       # The record of a completed or failed managed action.
-      class ManagedActionHistoryItem < Aws::Structure.new(
+      class ManagedActionHistoryItem < Struct.new(
         :action_id,
         :action_type,
         :action_description,
@@ -2254,6 +2384,8 @@ module Aws
         :failure_description,
         :executed_time,
         :finished_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] action_id
         #   A unique identifier for the managed action.
@@ -2291,9 +2423,11 @@ module Aws
 
       # A regular expression representing a restriction on a string
       # configuration option value.
-      class OptionRestrictionRegex < Aws::Structure.new(
+      class OptionRestrictionRegex < Struct.new(
         :pattern,
         :label)
+
+        include Aws::Structure
 
         # @!attribute [rw] pattern
         #   The regular expression pattern that a string configuration option
@@ -2315,10 +2449,12 @@ module Aws
       #         namespace: "OptionNamespace",
       #         option_name: "ConfigurationOptionName",
       #       }
-      class OptionSpecification < Aws::Structure.new(
+      class OptionSpecification < Struct.new(
         :resource_name,
         :namespace,
         :option_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] resource_name
         #   A unique resource name for a time-based scaling configuration
@@ -2337,9 +2473,11 @@ module Aws
       end
 
       # Describes a queue.
-      class Queue < Aws::Structure.new(
+      class Queue < Struct.new(
         :name,
         :url)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the queue.
@@ -2358,9 +2496,11 @@ module Aws
       #         environment_id: "EnvironmentId",
       #         environment_name: "EnvironmentName",
       #       }
-      class RebuildEnvironmentMessage < Aws::Structure.new(
+      class RebuildEnvironmentMessage < Struct.new(
         :environment_id,
         :environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   The ID of the environment to rebuild.
@@ -2390,10 +2530,12 @@ module Aws
       #         environment_name: "EnvironmentName",
       #         info_type: "tail", # required, accepts tail, bundle
       #       }
-      class RequestEnvironmentInfoMessage < Aws::Structure.new(
+      class RequestEnvironmentInfoMessage < Struct.new(
         :environment_id,
         :environment_name,
         :info_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   The ID of the environment of the requested data.
@@ -2430,9 +2572,11 @@ module Aws
       #         environment_id: "EnvironmentId",
       #         environment_name: "EnvironmentName",
       #       }
-      class RestartAppServerMessage < Aws::Structure.new(
+      class RestartAppServerMessage < Struct.new(
         :environment_id,
         :environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   The ID of the environment to restart the server for.
@@ -2461,10 +2605,12 @@ module Aws
       #         environment_name: "EnvironmentName",
       #         info_type: "tail", # required, accepts tail, bundle
       #       }
-      class RetrieveEnvironmentInfoMessage < Aws::Structure.new(
+      class RetrieveEnvironmentInfoMessage < Struct.new(
         :environment_id,
         :environment_name,
         :info_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   The ID of the data\'s environment.
@@ -2496,8 +2642,10 @@ module Aws
 
       # Result message containing a description of the requested environment
       # info.
-      class RetrieveEnvironmentInfoResultMessage < Aws::Structure.new(
+      class RetrieveEnvironmentInfoResultMessage < Struct.new(
         :environment_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_info
         #   The EnvironmentInfoDescription of the environment.
@@ -2513,9 +2661,11 @@ module Aws
       #         s3_bucket: "S3Bucket",
       #         s3_key: "S3Key",
       #       }
-      class S3Location < Aws::Structure.new(
+      class S3Location < Struct.new(
         :s3_bucket,
         :s3_key)
+
+        include Aws::Structure
 
         # @!attribute [rw] s3_bucket
         #   The Amazon S3 bucket where the data is located.
@@ -2531,7 +2681,7 @@ module Aws
       # to the AWS Elastic Beanstalk environment. Use the `InstanceId`
       # property to specify the application instance for which you\'d like to
       # return data.
-      class SingleInstanceHealth < Aws::Structure.new(
+      class SingleInstanceHealth < Struct.new(
         :instance_id,
         :health_status,
         :color,
@@ -2542,6 +2692,8 @@ module Aws
         :deployment,
         :availability_zone,
         :instance_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] instance_id
         #   The ID of the Amazon EC2 instance.
@@ -2599,9 +2751,11 @@ module Aws
       end
 
       # Describes the solution stack.
-      class SolutionStackDescription < Aws::Structure.new(
+      class SolutionStackDescription < Struct.new(
         :solution_stack_name,
         :permitted_file_types)
+
+        include Aws::Structure
 
         # @!attribute [rw] solution_stack_name
         #   The name of the solution stack.
@@ -2621,9 +2775,11 @@ module Aws
       #         application_name: "ApplicationName",
       #         template_name: "ConfigurationTemplateName",
       #       }
-      class SourceConfiguration < Aws::Structure.new(
+      class SourceConfiguration < Struct.new(
         :application_name,
         :template_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application associated with the configuration.
@@ -2642,11 +2798,13 @@ module Aws
       #
       #
       # [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
-      class StatusCodes < Aws::Structure.new(
+      class StatusCodes < Struct.new(
         :status_2xx,
         :status_3xx,
         :status_4xx,
         :status_5xx)
+
+        include Aws::Structure
 
         # @!attribute [rw] status_2xx
         #   The percentage of requests over the last 10 seconds that resulted in
@@ -2680,11 +2838,13 @@ module Aws
       #         destination_environment_id: "EnvironmentId",
       #         destination_environment_name: "EnvironmentName",
       #       }
-      class SwapEnvironmentCNAMEsMessage < Aws::Structure.new(
+      class SwapEnvironmentCNAMEsMessage < Struct.new(
         :source_environment_id,
         :source_environment_name,
         :destination_environment_id,
         :destination_environment_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] source_environment_id
         #   The ID of the source environment.
@@ -2726,9 +2886,11 @@ module Aws
 
       # Represents CPU utilization and load average information for
       # applications running in the specified environment.
-      class SystemStatus < Aws::Structure.new(
+      class SystemStatus < Struct.new(
         :cpu_utilization,
         :load_average)
+
+        include Aws::Structure
 
         # @!attribute [rw] cpu_utilization
         #   Represents CPU utilization information from the specified instance
@@ -2756,9 +2918,11 @@ module Aws
       #         key: "TagKey",
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key of the tag.
@@ -2780,11 +2944,13 @@ module Aws
       #         terminate_resources: false,
       #         force_terminate: false,
       #       }
-      class TerminateEnvironmentMessage < Aws::Structure.new(
+      class TerminateEnvironmentMessage < Struct.new(
         :environment_id,
         :environment_name,
         :terminate_resources,
         :force_terminate)
+
+        include Aws::Structure
 
         # @!attribute [rw] environment_id
         #   The ID of the environment to terminate.
@@ -2832,8 +2998,10 @@ module Aws
       end
 
       # Describes a trigger.
-      class Trigger < Aws::Structure.new(
+      class Trigger < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the trigger.
@@ -2849,9 +3017,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         description: "Description",
       #       }
-      class UpdateApplicationMessage < Aws::Structure.new(
+      class UpdateApplicationMessage < Struct.new(
         :application_name,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application to update. If no such application is
@@ -2875,10 +3045,12 @@ module Aws
       #         version_label: "VersionLabel", # required
       #         description: "Description",
       #       }
-      class UpdateApplicationVersionMessage < Aws::Structure.new(
+      class UpdateApplicationVersionMessage < Struct.new(
         :application_name,
         :version_label,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application associated with this version.
@@ -2925,12 +3097,14 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateConfigurationTemplateMessage < Aws::Structure.new(
+      class UpdateConfigurationTemplateMessage < Struct.new(
         :application_name,
         :template_name,
         :description,
         :option_settings,
         :options_to_remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application associated with the configuration
@@ -3001,7 +3175,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateEnvironmentMessage < Aws::Structure.new(
+      class UpdateEnvironmentMessage < Struct.new(
         :application_name,
         :environment_id,
         :environment_name,
@@ -3013,6 +3187,8 @@ module Aws
         :solution_stack_name,
         :option_settings,
         :options_to_remove)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application with which the environment is
@@ -3112,11 +3288,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class ValidateConfigurationSettingsMessage < Aws::Structure.new(
+      class ValidateConfigurationSettingsMessage < Struct.new(
         :application_name,
         :template_name,
         :environment_name,
         :option_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] application_name
         #   The name of the application that the configuration template or
@@ -3144,11 +3322,13 @@ module Aws
       end
 
       # An error or warning for a desired configuration option value.
-      class ValidationMessage < Aws::Structure.new(
+      class ValidationMessage < Struct.new(
         :message,
         :severity,
         :namespace,
         :option_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] message
         #   A message describing the error or warning.

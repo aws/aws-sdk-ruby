@@ -16,9 +16,11 @@ module Aws
       #         creation_token: "CreationToken", # required
       #         performance_mode: "generalPurpose", # accepts generalPurpose, maxIO
       #       }
-      class CreateFileSystemRequest < Aws::Structure.new(
+      class CreateFileSystemRequest < Struct.new(
         :creation_token,
         :performance_mode)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_token
         #   String of up to 64 ASCII characters. Amazon EFS uses this to ensure
@@ -45,11 +47,13 @@ module Aws
       #         ip_address: "IpAddress",
       #         security_groups: ["SecurityGroup"],
       #       }
-      class CreateMountTargetRequest < Aws::Structure.new(
+      class CreateMountTargetRequest < Struct.new(
         :file_system_id,
         :subnet_id,
         :ip_address,
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] file_system_id
         #   ID of the file system for which to create the mount target.
@@ -82,9 +86,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateTagsRequest < Aws::Structure.new(
+      class CreateTagsRequest < Struct.new(
         :file_system_id,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] file_system_id
         #   ID of the file system whose tags you want to modify (String). This
@@ -104,8 +110,10 @@ module Aws
       #       {
       #         file_system_id: "FileSystemId", # required
       #       }
-      class DeleteFileSystemRequest < Aws::Structure.new(
+      class DeleteFileSystemRequest < Struct.new(
         :file_system_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] file_system_id
         #   ID of the file system you want to delete.
@@ -119,8 +127,10 @@ module Aws
       #       {
       #         mount_target_id: "MountTargetId", # required
       #       }
-      class DeleteMountTargetRequest < Aws::Structure.new(
+      class DeleteMountTargetRequest < Struct.new(
         :mount_target_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] mount_target_id
         #   ID of the mount target to delete (String).
@@ -135,9 +145,11 @@ module Aws
       #         file_system_id: "FileSystemId", # required
       #         tag_keys: ["TagKey"], # required
       #       }
-      class DeleteTagsRequest < Aws::Structure.new(
+      class DeleteTagsRequest < Struct.new(
         :file_system_id,
         :tag_keys)
+
+        include Aws::Structure
 
         # @!attribute [rw] file_system_id
         #   ID of the file system whose tags you want to delete (String).
@@ -158,11 +170,13 @@ module Aws
       #         creation_token: "CreationToken",
       #         file_system_id: "FileSystemId",
       #       }
-      class DescribeFileSystemsRequest < Aws::Structure.new(
+      class DescribeFileSystemsRequest < Struct.new(
         :max_items,
         :marker,
         :creation_token,
         :file_system_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_items
         #   (Optional) Specifies the maximum number of file systems to return in
@@ -191,10 +205,12 @@ module Aws
 
       end
 
-      class DescribeFileSystemsResponse < Aws::Structure.new(
+      class DescribeFileSystemsResponse < Struct.new(
         :marker,
         :file_systems,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Present if provided by caller in the request (String).
@@ -218,8 +234,10 @@ module Aws
       #       {
       #         mount_target_id: "MountTargetId", # required
       #       }
-      class DescribeMountTargetSecurityGroupsRequest < Aws::Structure.new(
+      class DescribeMountTargetSecurityGroupsRequest < Struct.new(
         :mount_target_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] mount_target_id
         #   ID of the mount target whose security groups you want to retrieve.
@@ -227,8 +245,10 @@ module Aws
 
       end
 
-      class DescribeMountTargetSecurityGroupsResponse < Aws::Structure.new(
+      class DescribeMountTargetSecurityGroupsResponse < Struct.new(
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] security_groups
         #   Array of security groups.
@@ -245,11 +265,13 @@ module Aws
       #         file_system_id: "FileSystemId",
       #         mount_target_id: "MountTargetId",
       #       }
-      class DescribeMountTargetsRequest < Aws::Structure.new(
+      class DescribeMountTargetsRequest < Struct.new(
         :max_items,
         :marker,
         :file_system_id,
         :mount_target_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_items
         #   (Optional) Maximum number of mount targets to return in the
@@ -277,10 +299,12 @@ module Aws
 
       end
 
-      class DescribeMountTargetsResponse < Aws::Structure.new(
+      class DescribeMountTargetsResponse < Struct.new(
         :marker,
         :mount_targets,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   If the request included the `Marker`, the response returns that
@@ -308,10 +332,12 @@ module Aws
       #         marker: "Marker",
       #         file_system_id: "FileSystemId", # required
       #       }
-      class DescribeTagsRequest < Aws::Structure.new(
+      class DescribeTagsRequest < Struct.new(
         :max_items,
         :marker,
         :file_system_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_items
         #   (Optional) Maximum number of file system tags to return in the
@@ -330,10 +356,12 @@ module Aws
 
       end
 
-      class DescribeTagsResponse < Aws::Structure.new(
+      class DescribeTagsResponse < Struct.new(
         :marker,
         :tags,
         :next_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   If the request included a `Marker`, the response returns that value
@@ -355,7 +383,7 @@ module Aws
       end
 
       # Description of the file system.
-      class FileSystemDescription < Aws::Structure.new(
+      class FileSystemDescription < Struct.new(
         :owner_id,
         :creation_token,
         :file_system_id,
@@ -365,6 +393,8 @@ module Aws
         :number_of_mount_targets,
         :size_in_bytes,
         :performance_mode)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_id
         #   AWS account that created the file system. If the file system was
@@ -428,9 +458,11 @@ module Aws
       # system is not modified for a period longer than a couple of hours.
       # Otherwise, the value is not necessarily the exact size the file system
       # was at any instant in time.
-      class FileSystemSize < Aws::Structure.new(
+      class FileSystemSize < Struct.new(
         :value,
         :timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   Latest known metered size (in bytes) of data stored in the file
@@ -452,9 +484,11 @@ module Aws
       #         mount_target_id: "MountTargetId", # required
       #         security_groups: ["SecurityGroup"],
       #       }
-      class ModifyMountTargetSecurityGroupsRequest < Aws::Structure.new(
+      class ModifyMountTargetSecurityGroupsRequest < Struct.new(
         :mount_target_id,
         :security_groups)
+
+        include Aws::Structure
 
         # @!attribute [rw] mount_target_id
         #   ID of the mount target whose security groups you want to modify.
@@ -467,7 +501,7 @@ module Aws
       end
 
       # Provides a description of a mount target.
-      class MountTargetDescription < Aws::Structure.new(
+      class MountTargetDescription < Struct.new(
         :owner_id,
         :mount_target_id,
         :file_system_id,
@@ -475,6 +509,8 @@ module Aws
         :life_cycle_state,
         :ip_address,
         :network_interface_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_id
         #   AWS account ID that owns the resource.
@@ -518,9 +554,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue", # required
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   Tag key (String). The key can\'t start with `aws:`.

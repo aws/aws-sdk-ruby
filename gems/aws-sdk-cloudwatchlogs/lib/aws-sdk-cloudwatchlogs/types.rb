@@ -15,8 +15,10 @@ module Aws
       #       {
       #         task_id: "ExportTaskId", # required
       #       }
-      class CancelExportTaskRequest < Aws::Structure.new(
+      class CancelExportTaskRequest < Struct.new(
         :task_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_id
         #   Id of the export task to cancel.
@@ -36,7 +38,7 @@ module Aws
       #         destination: "ExportDestinationBucket", # required
       #         destination_prefix: "ExportDestinationPrefix",
       #       }
-      class CreateExportTaskRequest < Aws::Structure.new(
+      class CreateExportTaskRequest < Struct.new(
         :task_name,
         :log_group_name,
         :log_stream_name_prefix,
@@ -44,6 +46,8 @@ module Aws
         :to,
         :destination,
         :destination_prefix)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_name
         #   The name of the export task.
@@ -87,8 +91,10 @@ module Aws
 
       end
 
-      class CreateExportTaskResponse < Aws::Structure.new(
+      class CreateExportTaskResponse < Struct.new(
         :task_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_id
         #   Id of the export task that got created.
@@ -102,8 +108,10 @@ module Aws
       #       {
       #         log_group_name: "LogGroupName", # required
       #       }
-      class CreateLogGroupRequest < Aws::Structure.new(
+      class CreateLogGroupRequest < Struct.new(
         :log_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to create.
@@ -118,9 +126,11 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #         log_stream_name: "LogStreamName", # required
       #       }
-      class CreateLogStreamRequest < Aws::Structure.new(
+      class CreateLogStreamRequest < Struct.new(
         :log_group_name,
         :log_stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group under which the log stream is to be
@@ -139,8 +149,10 @@ module Aws
       #       {
       #         destination_name: "DestinationName", # required
       #       }
-      class DeleteDestinationRequest < Aws::Structure.new(
+      class DeleteDestinationRequest < Struct.new(
         :destination_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_name
         #   The name of destination to delete.
@@ -154,8 +166,10 @@ module Aws
       #       {
       #         log_group_name: "LogGroupName", # required
       #       }
-      class DeleteLogGroupRequest < Aws::Structure.new(
+      class DeleteLogGroupRequest < Struct.new(
         :log_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to delete.
@@ -170,9 +184,11 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #         log_stream_name: "LogStreamName", # required
       #       }
-      class DeleteLogStreamRequest < Aws::Structure.new(
+      class DeleteLogStreamRequest < Struct.new(
         :log_group_name,
         :log_stream_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group under which the log stream to delete
@@ -192,9 +208,11 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #         filter_name: "FilterName", # required
       #       }
-      class DeleteMetricFilterRequest < Aws::Structure.new(
+      class DeleteMetricFilterRequest < Struct.new(
         :log_group_name,
         :filter_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group that is associated with the metric filter
@@ -213,8 +231,10 @@ module Aws
       #       {
       #         log_group_name: "LogGroupName", # required
       #       }
-      class DeleteRetentionPolicyRequest < Aws::Structure.new(
+      class DeleteRetentionPolicyRequest < Struct.new(
         :log_group_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group that is associated with the retention
@@ -230,9 +250,11 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #         filter_name: "FilterName", # required
       #       }
-      class DeleteSubscriptionFilterRequest < Aws::Structure.new(
+      class DeleteSubscriptionFilterRequest < Struct.new(
         :log_group_name,
         :filter_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group that is associated with the subscription
@@ -253,10 +275,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeDestinationsRequest < Aws::Structure.new(
+      class DescribeDestinationsRequest < Struct.new(
         :destination_name_prefix,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_name_prefix
         #   Will only return destinations that match the provided
@@ -276,9 +300,11 @@ module Aws
 
       end
 
-      class DescribeDestinationsResponse < Aws::Structure.new(
+      class DescribeDestinationsResponse < Struct.new(
         :destinations,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] destinations
         #   @return [Array<Types::Destination>]
@@ -300,11 +326,13 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeExportTasksRequest < Aws::Structure.new(
+      class DescribeExportTasksRequest < Struct.new(
         :task_id,
         :status_code,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_id
         #   Export task that matches the specified task Id will be returned.
@@ -329,9 +357,11 @@ module Aws
 
       end
 
-      class DescribeExportTasksResponse < Aws::Structure.new(
+      class DescribeExportTasksResponse < Struct.new(
         :export_tasks,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] export_tasks
         #   A list of export tasks.
@@ -353,10 +383,12 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeLogGroupsRequest < Aws::Structure.new(
+      class DescribeLogGroupsRequest < Struct.new(
         :log_group_name_prefix,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name_prefix
         #   Will only return log groups that match the provided
@@ -377,9 +409,11 @@ module Aws
 
       end
 
-      class DescribeLogGroupsResponse < Aws::Structure.new(
+      class DescribeLogGroupsResponse < Struct.new(
         :log_groups,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_groups
         #   A list of log groups.
@@ -404,13 +438,15 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeLogStreamsRequest < Aws::Structure.new(
+      class DescribeLogStreamsRequest < Struct.new(
         :log_group_name,
         :log_stream_name_prefix,
         :order_by,
         :descending,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The log group name for which log streams are to be listed.
@@ -448,9 +484,11 @@ module Aws
 
       end
 
-      class DescribeLogStreamsResponse < Aws::Structure.new(
+      class DescribeLogStreamsResponse < Struct.new(
         :log_streams,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_streams
         #   A list of log streams.
@@ -473,11 +511,13 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeMetricFiltersRequest < Aws::Structure.new(
+      class DescribeMetricFiltersRequest < Struct.new(
         :log_group_name,
         :filter_name_prefix,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The log group name for which metric filters are to be listed.
@@ -502,9 +542,11 @@ module Aws
 
       end
 
-      class DescribeMetricFiltersResponse < Aws::Structure.new(
+      class DescribeMetricFiltersResponse < Struct.new(
         :metric_filters,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_filters
         #   @return [Array<Types::MetricFilter>]
@@ -526,11 +568,13 @@ module Aws
       #         next_token: "NextToken",
       #         limit: 1,
       #       }
-      class DescribeSubscriptionFiltersRequest < Aws::Structure.new(
+      class DescribeSubscriptionFiltersRequest < Struct.new(
         :log_group_name,
         :filter_name_prefix,
         :next_token,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The log group name for which subscription filters are to be listed.
@@ -554,9 +598,11 @@ module Aws
 
       end
 
-      class DescribeSubscriptionFiltersResponse < Aws::Structure.new(
+      class DescribeSubscriptionFiltersResponse < Struct.new(
         :subscription_filters,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] subscription_filters
         #   @return [Array<Types::SubscriptionFilter>]
@@ -571,13 +617,15 @@ module Aws
 
       # A cross account destination that is the recipient of subscription log
       # events.
-      class Destination < Aws::Structure.new(
+      class Destination < Struct.new(
         :destination_name,
         :target_arn,
         :role_arn,
         :access_policy,
         :arn,
         :creation_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_name
         #   Name of the destination.
@@ -609,7 +657,7 @@ module Aws
       end
 
       # Represents an export task.
-      class ExportTask < Aws::Structure.new(
+      class ExportTask < Struct.new(
         :task_id,
         :task_name,
         :log_group_name,
@@ -619,6 +667,8 @@ module Aws
         :destination_prefix,
         :status,
         :execution_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] task_id
         #   Id of the export task.
@@ -664,9 +714,11 @@ module Aws
       end
 
       # Represents the status of an export task.
-      class ExportTaskExecutionInfo < Aws::Structure.new(
+      class ExportTaskExecutionInfo < Struct.new(
         :creation_time,
         :completion_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] creation_time
         #   A point in time when the export task got created.
@@ -679,9 +731,11 @@ module Aws
       end
 
       # Represents the status of an export task.
-      class ExportTaskStatus < Aws::Structure.new(
+      class ExportTaskStatus < Struct.new(
         :code,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   Status code of the export task.
@@ -706,7 +760,7 @@ module Aws
       #         limit: 1,
       #         interleaved: false,
       #       }
-      class FilterLogEventsRequest < Aws::Structure.new(
+      class FilterLogEventsRequest < Struct.new(
         :log_group_name,
         :log_stream_names,
         :start_time,
@@ -715,6 +769,8 @@ module Aws
         :next_token,
         :limit,
         :interleaved)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to query.
@@ -763,10 +819,12 @@ module Aws
 
       end
 
-      class FilterLogEventsResponse < Aws::Structure.new(
+      class FilterLogEventsResponse < Struct.new(
         :events,
         :searched_log_streams,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] events
         #   A list of `FilteredLogEvent` objects representing the matched events
@@ -788,12 +846,14 @@ module Aws
       end
 
       # Represents a matched event from a `FilterLogEvents` request.
-      class FilteredLogEvent < Aws::Structure.new(
+      class FilteredLogEvent < Struct.new(
         :log_stream_name,
         :timestamp,
         :message,
         :ingestion_time,
         :event_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_stream_name
         #   The name of the log stream this event belongs to.
@@ -831,7 +891,7 @@ module Aws
       #         limit: 1,
       #         start_from_head: false,
       #       }
-      class GetLogEventsRequest < Aws::Structure.new(
+      class GetLogEventsRequest < Struct.new(
         :log_group_name,
         :log_stream_name,
         :start_time,
@@ -839,6 +899,8 @@ module Aws
         :next_token,
         :limit,
         :start_from_head)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to query.
@@ -878,10 +940,12 @@ module Aws
 
       end
 
-      class GetLogEventsResponse < Aws::Structure.new(
+      class GetLogEventsResponse < Struct.new(
         :events,
         :next_forward_token,
         :next_backward_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] events
         #   @return [Array<Types::OutputLogEvent>]
@@ -911,9 +975,11 @@ module Aws
       #         timestamp: 1, # required
       #         message: "EventMessage", # required
       #       }
-      class InputLogEvent < Aws::Structure.new(
+      class InputLogEvent < Struct.new(
         :timestamp,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] timestamp
         #   A point in time expressed as the number of milliseconds since Jan 1,
@@ -925,13 +991,15 @@ module Aws
 
       end
 
-      class LogGroup < Aws::Structure.new(
+      class LogGroup < Struct.new(
         :log_group_name,
         :creation_time,
         :retention_in_days,
         :metric_filter_count,
         :arn,
         :stored_bytes)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   @return [String]
@@ -960,7 +1028,7 @@ module Aws
       end
 
       # A log stream is sequence of log events from a single emitter of logs.
-      class LogStream < Aws::Structure.new(
+      class LogStream < Struct.new(
         :log_stream_name,
         :creation_time,
         :first_event_timestamp,
@@ -969,6 +1037,8 @@ module Aws
         :upload_sequence_token,
         :arn,
         :stored_bytes)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_stream_name
         #   @return [String]
@@ -1011,11 +1081,13 @@ module Aws
       # Metric filters can be used to express how CloudWatch Logs would
       # extract metric observations from ingested log events and transform
       # them to metric data in a CloudWatch metric.
-      class MetricFilter < Aws::Structure.new(
+      class MetricFilter < Struct.new(
         :filter_name,
         :filter_pattern,
         :metric_transformations,
         :creation_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_name
         #   A name for a metric or subscription filter.
@@ -1038,10 +1110,12 @@ module Aws
 
       end
 
-      class MetricFilterMatchRecord < Aws::Structure.new(
+      class MetricFilterMatchRecord < Struct.new(
         :event_number,
         :event_message,
         :extracted_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_number
         #   @return [Integer]
@@ -1063,11 +1137,13 @@ module Aws
       #         metric_value: "MetricValue", # required
       #         default_value: 1.0,
       #       }
-      class MetricTransformation < Aws::Structure.new(
+      class MetricTransformation < Struct.new(
         :metric_name,
         :metric_namespace,
         :metric_value,
         :default_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] metric_name
         #   Name of the metric.
@@ -1089,10 +1165,12 @@ module Aws
 
       end
 
-      class OutputLogEvent < Aws::Structure.new(
+      class OutputLogEvent < Struct.new(
         :timestamp,
         :message,
         :ingestion_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] timestamp
         #   A point in time expressed as the number of milliseconds since Jan 1,
@@ -1116,9 +1194,11 @@ module Aws
       #         destination_name: "DestinationName", # required
       #         access_policy: "AccessPolicy", # required
       #       }
-      class PutDestinationPolicyRequest < Aws::Structure.new(
+      class PutDestinationPolicyRequest < Struct.new(
         :destination_name,
         :access_policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_name
         #   A name for an existing destination.
@@ -1139,10 +1219,12 @@ module Aws
       #         target_arn: "TargetArn", # required
       #         role_arn: "RoleArn", # required
       #       }
-      class PutDestinationRequest < Aws::Structure.new(
+      class PutDestinationRequest < Struct.new(
         :destination_name,
         :target_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination_name
         #   A name for the destination.
@@ -1160,8 +1242,10 @@ module Aws
 
       end
 
-      class PutDestinationResponse < Aws::Structure.new(
+      class PutDestinationResponse < Struct.new(
         :destination)
+
+        include Aws::Structure
 
         # @!attribute [rw] destination
         #   A cross account destination that is the recipient of subscription
@@ -1184,11 +1268,13 @@ module Aws
       #         ],
       #         sequence_token: "SequenceToken",
       #       }
-      class PutLogEventsRequest < Aws::Structure.new(
+      class PutLogEventsRequest < Struct.new(
         :log_group_name,
         :log_stream_name,
         :log_events,
         :sequence_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to put log events to.
@@ -1209,9 +1295,11 @@ module Aws
 
       end
 
-      class PutLogEventsResponse < Aws::Structure.new(
+      class PutLogEventsResponse < Struct.new(
         :next_sequence_token,
         :rejected_log_events_info)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_sequence_token
         #   A string token used for making PutLogEvents requests. A
@@ -1241,11 +1329,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class PutMetricFilterRequest < Aws::Structure.new(
+      class PutMetricFilterRequest < Struct.new(
         :log_group_name,
         :filter_name,
         :filter_pattern,
         :metric_transformations)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to associate the metric filter with.
@@ -1274,9 +1364,11 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #         retention_in_days: 1, # required
       #       }
-      class PutRetentionPolicyRequest < Aws::Structure.new(
+      class PutRetentionPolicyRequest < Struct.new(
         :log_group_name,
         :retention_in_days)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to associate the retention policy with.
@@ -1300,12 +1392,14 @@ module Aws
       #         destination_arn: "DestinationArn", # required
       #         role_arn: "RoleArn",
       #       }
-      class PutSubscriptionFilterRequest < Aws::Structure.new(
+      class PutSubscriptionFilterRequest < Struct.new(
         :log_group_name,
         :filter_name,
         :filter_pattern,
         :destination_arn,
         :role_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_group_name
         #   The name of the log group to associate the subscription filter with.
@@ -1347,10 +1441,12 @@ module Aws
 
       end
 
-      class RejectedLogEventsInfo < Aws::Structure.new(
+      class RejectedLogEventsInfo < Struct.new(
         :too_new_log_event_start_index,
         :too_old_log_event_end_index,
         :expired_log_event_end_index)
+
+        include Aws::Structure
 
         # @!attribute [rw] too_new_log_event_start_index
         #   @return [Integer]
@@ -1365,9 +1461,11 @@ module Aws
 
       # An object indicating the search status of a log stream in a
       # `FilterLogEvents` request.
-      class SearchedLogStream < Aws::Structure.new(
+      class SearchedLogStream < Struct.new(
         :log_stream_name,
         :searched_completely)
+
+        include Aws::Structure
 
         # @!attribute [rw] log_stream_name
         #   The name of the log stream.
@@ -1380,13 +1478,15 @@ module Aws
 
       end
 
-      class SubscriptionFilter < Aws::Structure.new(
+      class SubscriptionFilter < Struct.new(
         :filter_name,
         :log_group_name,
         :filter_pattern,
         :destination_arn,
         :role_arn,
         :creation_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_name
         #   A name for a metric or subscription filter.
@@ -1422,9 +1522,11 @@ module Aws
       #         filter_pattern: "FilterPattern", # required
       #         log_event_messages: ["EventMessage"], # required
       #       }
-      class TestMetricFilterRequest < Aws::Structure.new(
+      class TestMetricFilterRequest < Struct.new(
         :filter_pattern,
         :log_event_messages)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_pattern
         #   A symbolic description of how CloudWatch Logs should interpret the
@@ -1439,8 +1541,10 @@ module Aws
 
       end
 
-      class TestMetricFilterResponse < Aws::Structure.new(
+      class TestMetricFilterResponse < Struct.new(
         :matches)
+
+        include Aws::Structure
 
         # @!attribute [rw] matches
         #   @return [Array<Types::MetricFilterMatchRecord>]

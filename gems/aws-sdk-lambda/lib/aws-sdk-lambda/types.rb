@@ -22,7 +22,7 @@ module Aws
       #         event_source_token: "EventSourceToken",
       #         qualifier: "Qualifier",
       #       }
-      class AddPermissionRequest < Aws::Structure.new(
+      class AddPermissionRequest < Struct.new(
         :function_name,
         :statement_id,
         :action,
@@ -31,6 +31,8 @@ module Aws
         :source_account,
         :event_source_token,
         :qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   Name of the Lambda function whose resource policy you are updating
@@ -121,8 +123,10 @@ module Aws
 
       end
 
-      class AddPermissionResponse < Aws::Structure.new(
+      class AddPermissionResponse < Struct.new(
         :statement)
+
+        include Aws::Structure
 
         # @!attribute [rw] statement
         #   The permission statement you specified in the request. The response
@@ -134,11 +138,13 @@ module Aws
 
       # Provides configuration information about a Lambda function version
       # alias.
-      class AliasConfiguration < Aws::Structure.new(
+      class AliasConfiguration < Struct.new(
         :alias_arn,
         :name,
         :function_version,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] alias_arn
         #   Lambda function ARN that is qualified using the alias name as the
@@ -170,11 +176,13 @@ module Aws
       #         function_version: "Version", # required
       #         description: "Description",
       #       }
-      class CreateAliasRequest < Aws::Structure.new(
+      class CreateAliasRequest < Struct.new(
         :function_name,
         :name,
         :function_version,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   Name of the Lambda function for which you want to create an alias.
@@ -204,12 +212,14 @@ module Aws
       #         batch_size: 1,
       #         starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST
       #       }
-      class CreateEventSourceMappingRequest < Aws::Structure.new(
+      class CreateEventSourceMappingRequest < Struct.new(
         :event_source_arn,
         :function_name,
         :enabled,
         :batch_size,
         :starting_position)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_source_arn
         #   The Amazon Resource Name (ARN) of the Amazon Kinesis or the Amazon
@@ -291,7 +301,7 @@ module Aws
       #           security_group_ids: ["SecurityGroupId"],
       #         },
       #       }
-      class CreateFunctionRequest < Aws::Structure.new(
+      class CreateFunctionRequest < Struct.new(
         :function_name,
         :runtime,
         :role,
@@ -302,6 +312,8 @@ module Aws
         :memory_size,
         :publish,
         :vpc_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The name you want to assign to the function you are uploading. The
@@ -386,9 +398,11 @@ module Aws
       #         function_name: "FunctionName", # required
       #         name: "Alias", # required
       #       }
-      class DeleteAliasRequest < Aws::Structure.new(
+      class DeleteAliasRequest < Struct.new(
         :function_name,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The Lambda function name for which the alias is created. Deleting an
@@ -407,8 +421,10 @@ module Aws
       #       {
       #         uuid: "String", # required
       #       }
-      class DeleteEventSourceMappingRequest < Aws::Structure.new(
+      class DeleteEventSourceMappingRequest < Struct.new(
         :uuid)
+
+        include Aws::Structure
 
         # @!attribute [rw] uuid
         #   The event source mapping ID.
@@ -423,9 +439,11 @@ module Aws
       #         function_name: "FunctionName", # required
       #         qualifier: "Qualifier",
       #       }
-      class DeleteFunctionRequest < Aws::Structure.new(
+      class DeleteFunctionRequest < Struct.new(
         :function_name,
         :qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The Lambda function to delete.
@@ -464,7 +482,7 @@ module Aws
 
       # Describes mapping between an Amazon Kinesis stream and a Lambda
       # function.
-      class EventSourceMappingConfiguration < Aws::Structure.new(
+      class EventSourceMappingConfiguration < Struct.new(
         :uuid,
         :batch_size,
         :event_source_arn,
@@ -473,6 +491,8 @@ module Aws
         :last_processing_result,
         :state,
         :state_transition_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] uuid
         #   The AWS Lambda assigned opaque identifier for the mapping.
@@ -527,11 +547,13 @@ module Aws
       #         s3_key: "S3Key",
       #         s3_object_version: "S3ObjectVersion",
       #       }
-      class FunctionCode < Aws::Structure.new(
+      class FunctionCode < Struct.new(
         :zip_file,
         :s3_bucket,
         :s3_key,
         :s3_object_version)
+
+        include Aws::Structure
 
         # @!attribute [rw] zip_file
         #   The contents of your zip file containing your deployment package. If
@@ -565,9 +587,11 @@ module Aws
       end
 
       # The object for the Lambda function location.
-      class FunctionCodeLocation < Aws::Structure.new(
+      class FunctionCodeLocation < Struct.new(
         :repository_type,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] repository_type
         #   The repository from which you can download the function.
@@ -581,7 +605,7 @@ module Aws
       end
 
       # A complex type that describes function metadata.
-      class FunctionConfiguration < Aws::Structure.new(
+      class FunctionConfiguration < Struct.new(
         :function_name,
         :function_arn,
         :runtime,
@@ -595,6 +619,8 @@ module Aws
         :code_sha_256,
         :version,
         :vpc_config)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The name of the function.
@@ -666,9 +692,11 @@ module Aws
       #         function_name: "FunctionName", # required
       #         name: "Alias", # required
       #       }
-      class GetAliasRequest < Aws::Structure.new(
+      class GetAliasRequest < Struct.new(
         :function_name,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   Function name for which the alias is created. An alias is a
@@ -688,8 +716,10 @@ module Aws
       #       {
       #         uuid: "String", # required
       #       }
-      class GetEventSourceMappingRequest < Aws::Structure.new(
+      class GetEventSourceMappingRequest < Struct.new(
         :uuid)
+
+        include Aws::Structure
 
         # @!attribute [rw] uuid
         #   The AWS Lambda assigned ID of the event source mapping.
@@ -704,9 +734,11 @@ module Aws
       #         function_name: "FunctionName", # required
       #         qualifier: "Qualifier",
       #       }
-      class GetFunctionConfigurationRequest < Aws::Structure.new(
+      class GetFunctionConfigurationRequest < Struct.new(
         :function_name,
         :qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The name of the Lambda function for which you want to retrieve the
@@ -743,9 +775,11 @@ module Aws
       #         function_name: "FunctionName", # required
       #         qualifier: "Qualifier",
       #       }
-      class GetFunctionRequest < Aws::Structure.new(
+      class GetFunctionRequest < Struct.new(
         :function_name,
         :qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The Lambda function name.
@@ -774,9 +808,11 @@ module Aws
 
       # This response contains the object for the Lambda function location
       # (see .
-      class GetFunctionResponse < Aws::Structure.new(
+      class GetFunctionResponse < Struct.new(
         :configuration,
         :code)
+
+        include Aws::Structure
 
         # @!attribute [rw] configuration
         #   A complex type that describes function metadata.
@@ -795,9 +831,11 @@ module Aws
       #         function_name: "FunctionName", # required
       #         qualifier: "Qualifier",
       #       }
-      class GetPolicyRequest < Aws::Structure.new(
+      class GetPolicyRequest < Struct.new(
         :function_name,
         :qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   Function name whose resource policy you want to retrieve.
@@ -824,8 +862,10 @@ module Aws
 
       end
 
-      class GetPolicyResponse < Aws::Structure.new(
+      class GetPolicyResponse < Struct.new(
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   The resource policy associated with the specified function. The
@@ -846,13 +886,15 @@ module Aws
       #         payload: "data",
       #         qualifier: "Qualifier",
       #       }
-      class InvocationRequest < Aws::Structure.new(
+      class InvocationRequest < Struct.new(
         :function_name,
         :invocation_type,
         :log_type,
         :client_context,
         :payload,
         :qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The Lambda function name.
@@ -920,11 +962,13 @@ module Aws
 
       # Upon success, returns an empty response. Otherwise, throws an
       # exception.
-      class InvocationResponse < Aws::Structure.new(
+      class InvocationResponse < Struct.new(
         :status_code,
         :function_error,
         :log_result,
         :payload)
+
+        include Aws::Structure
 
         # @!attribute [rw] status_code
         #   The HTTP status code will be in the 200 range for successful
@@ -974,9 +1018,11 @@ module Aws
       #         function_name: "FunctionName", # required
       #         invoke_args: "data", # required
       #       }
-      class InvokeAsyncRequest < Aws::Structure.new(
+      class InvokeAsyncRequest < Struct.new(
         :function_name,
         :invoke_args)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The Lambda function name.
@@ -990,8 +1036,10 @@ module Aws
 
       # Upon success, it returns empty response. Otherwise, throws an
       # exception.
-      class InvokeAsyncResponse < Aws::Structure.new(
+      class InvokeAsyncResponse < Struct.new(
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] status
         #   It will be 202 upon success.
@@ -1008,11 +1056,13 @@ module Aws
       #         marker: "String",
       #         max_items: 1,
       #       }
-      class ListAliasesRequest < Aws::Structure.new(
+      class ListAliasesRequest < Struct.new(
         :function_name,
         :function_version,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   Lambda function name for which the alias is created.
@@ -1038,9 +1088,11 @@ module Aws
 
       end
 
-      class ListAliasesResponse < Aws::Structure.new(
+      class ListAliasesResponse < Struct.new(
         :next_marker,
         :aliases)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   A string, present if there are more aliases.
@@ -1061,11 +1113,13 @@ module Aws
       #         marker: "String",
       #         max_items: 1,
       #       }
-      class ListEventSourceMappingsRequest < Aws::Structure.new(
+      class ListEventSourceMappingsRequest < Struct.new(
         :event_source_arn,
         :function_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] event_source_arn
         #   The Amazon Resource Name (ARN) of the Amazon Kinesis stream. (This
@@ -1101,9 +1155,11 @@ module Aws
       end
 
       # Contains a list of event sources (see )
-      class ListEventSourceMappingsResponse < Aws::Structure.new(
+      class ListEventSourceMappingsResponse < Struct.new(
         :next_marker,
         :event_source_mappings)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   A string, present if there are more event source mappings.
@@ -1122,9 +1178,11 @@ module Aws
       #         marker: "String",
       #         max_items: 1,
       #       }
-      class ListFunctionsRequest < Aws::Structure.new(
+      class ListFunctionsRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   Optional string. An opaque pagination token returned from a previous
@@ -1142,9 +1200,11 @@ module Aws
 
       # Contains a list of AWS Lambda function configurations (see
       # FunctionConfiguration.
-      class ListFunctionsResponse < Aws::Structure.new(
+      class ListFunctionsResponse < Struct.new(
         :next_marker,
         :functions)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   A string, present if there are more functions.
@@ -1164,10 +1224,12 @@ module Aws
       #         marker: "String",
       #         max_items: 1,
       #       }
-      class ListVersionsByFunctionRequest < Aws::Structure.new(
+      class ListVersionsByFunctionRequest < Struct.new(
         :function_name,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   Function name whose versions to list. You can specify a function
@@ -1194,9 +1256,11 @@ module Aws
 
       end
 
-      class ListVersionsByFunctionResponse < Aws::Structure.new(
+      class ListVersionsByFunctionResponse < Struct.new(
         :next_marker,
         :versions)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_marker
         #   A string, present if there are more function versions.
@@ -1216,10 +1280,12 @@ module Aws
       #         code_sha_256: "String",
       #         description: "Description",
       #       }
-      class PublishVersionRequest < Aws::Structure.new(
+      class PublishVersionRequest < Struct.new(
         :function_name,
         :code_sha_256,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The Lambda function name. You can specify a function name (for
@@ -1254,10 +1320,12 @@ module Aws
       #         statement_id: "StatementId", # required
       #         qualifier: "Qualifier",
       #       }
-      class RemovePermissionRequest < Aws::Structure.new(
+      class RemovePermissionRequest < Struct.new(
         :function_name,
         :statement_id,
         :qualifier)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   Lambda function whose resource policy you want to remove a
@@ -1294,11 +1362,13 @@ module Aws
       #         function_version: "Version",
       #         description: "Description",
       #       }
-      class UpdateAliasRequest < Aws::Structure.new(
+      class UpdateAliasRequest < Struct.new(
         :function_name,
         :name,
         :function_version,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The function name for which the alias is created.
@@ -1328,11 +1398,13 @@ module Aws
       #         enabled: false,
       #         batch_size: 1,
       #       }
-      class UpdateEventSourceMappingRequest < Aws::Structure.new(
+      class UpdateEventSourceMappingRequest < Struct.new(
         :uuid,
         :function_name,
         :enabled,
         :batch_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] uuid
         #   The event source mapping identifier.
@@ -1384,13 +1456,15 @@ module Aws
       #         s3_object_version: "S3ObjectVersion",
       #         publish: false,
       #       }
-      class UpdateFunctionCodeRequest < Aws::Structure.new(
+      class UpdateFunctionCodeRequest < Struct.new(
         :function_name,
         :zip_file,
         :s3_bucket,
         :s3_key,
         :s3_object_version,
         :publish)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The existing Lambda function name whose code you want to replace.
@@ -1456,7 +1530,7 @@ module Aws
       #         },
       #         runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7
       #       }
-      class UpdateFunctionConfigurationRequest < Aws::Structure.new(
+      class UpdateFunctionConfigurationRequest < Struct.new(
         :function_name,
         :role,
         :handler,
@@ -1465,6 +1539,8 @@ module Aws
         :memory_size,
         :vpc_config,
         :runtime)
+
+        include Aws::Structure
 
         # @!attribute [rw] function_name
         #   The name of the Lambda function.
@@ -1536,9 +1612,11 @@ module Aws
       #         subnet_ids: ["SubnetId"],
       #         security_group_ids: ["SecurityGroupId"],
       #       }
-      class VpcConfig < Aws::Structure.new(
+      class VpcConfig < Struct.new(
         :subnet_ids,
         :security_group_ids)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_ids
         #   A list of one or more subnet IDs in your VPC.
@@ -1551,10 +1629,12 @@ module Aws
       end
 
       # VPC configuration associated with your Lambda function.
-      class VpcConfigResponse < Aws::Structure.new(
+      class VpcConfigResponse < Struct.new(
         :subnet_ids,
         :security_group_ids,
         :vpc_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] subnet_ids
         #   A list of subnet IDs associated with the Lambda function.

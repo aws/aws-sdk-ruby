@@ -10,10 +10,12 @@ module Aws
     module Types
 
       # A container for account-level settings within AWS Device Farm.
-      class AccountSettings < Aws::Structure.new(
+      class AccountSettings < Struct.new(
         :aws_account_number,
         :unmetered_devices,
         :unmetered_remote_access_devices)
+
+        include Aws::Structure
 
         # @!attribute [rw] aws_account_number
         #   The AWS account number specified in the `AccountSettings` container.
@@ -33,12 +35,14 @@ module Aws
 
       # Represents the output of a test. Examples of artifacts include logs
       # and screenshots.
-      class Artifact < Aws::Structure.new(
+      class Artifact < Struct.new(
         :arn,
         :name,
         :type,
         :extension,
         :url)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The artifact\'s ARN.
@@ -117,10 +121,12 @@ module Aws
       # device.
       #
       # Note that this does not represent system-wide CPU usage.
-      class CPU < Aws::Structure.new(
+      class CPU < Struct.new(
         :frequency,
         :architecture,
         :clock)
+
+        include Aws::Structure
 
         # @!attribute [rw] frequency
         #   The CPU\'s frequency.
@@ -138,7 +144,7 @@ module Aws
       end
 
       # Represents entity counters.
-      class Counters < Aws::Structure.new(
+      class Counters < Struct.new(
         :total,
         :passed,
         :failed,
@@ -146,6 +152,8 @@ module Aws
         :errored,
         :stopped,
         :skipped)
+
+        include Aws::Structure
 
         # @!attribute [rw] total
         #   The total number of entities.
@@ -193,11 +201,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class CreateDevicePoolRequest < Aws::Structure.new(
+      class CreateDevicePoolRequest < Struct.new(
         :project_arn,
         :name,
         :description,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] project_arn
         #   The ARN of the project for the device pool.
@@ -218,8 +228,10 @@ module Aws
       end
 
       # Represents the result of a create device pool request.
-      class CreateDevicePoolResult < Aws::Structure.new(
+      class CreateDevicePoolResult < Struct.new(
         :device_pool)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_pool
         #   The newly created device pool.
@@ -234,8 +246,10 @@ module Aws
       #       {
       #         name: "Name", # required
       #       }
-      class CreateProjectRequest < Aws::Structure.new(
+      class CreateProjectRequest < Struct.new(
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The project\'s name.
@@ -244,8 +258,10 @@ module Aws
       end
 
       # Represents the result of a create project request.
-      class CreateProjectResult < Aws::Structure.new(
+      class CreateProjectResult < Struct.new(
         :project)
+
+        include Aws::Structure
 
         # @!attribute [rw] project
         #   The newly created project.
@@ -261,8 +277,10 @@ module Aws
       #       {
       #         billing_method: "METERED", # accepts METERED, UNMETERED
       #       }
-      class CreateRemoteAccessSessionConfiguration < Aws::Structure.new(
+      class CreateRemoteAccessSessionConfiguration < Struct.new(
         :billing_method)
+
+        include Aws::Structure
 
         # @!attribute [rw] billing_method
         #   Returns the billing method for purposes of configuring a remote
@@ -283,11 +301,13 @@ module Aws
       #           billing_method: "METERED", # accepts METERED, UNMETERED
       #         },
       #       }
-      class CreateRemoteAccessSessionRequest < Aws::Structure.new(
+      class CreateRemoteAccessSessionRequest < Struct.new(
         :project_arn,
         :device_arn,
         :name,
         :configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] project_arn
         #   The Amazon Resource Name (ARN) of the project for which you want to
@@ -311,8 +331,10 @@ module Aws
 
       # Represents the server response from a request to create a remote
       # access session.
-      class CreateRemoteAccessSessionResult < Aws::Structure.new(
+      class CreateRemoteAccessSessionResult < Struct.new(
         :remote_access_session)
+
+        include Aws::Structure
 
         # @!attribute [rw] remote_access_session
         #   A container that describes the remote access session when the
@@ -331,11 +353,13 @@ module Aws
       #         type: "ANDROID_APP", # required, accepts ANDROID_APP, IOS_APP, WEB_APP, EXTERNAL_DATA, APPIUM_JAVA_JUNIT_TEST_PACKAGE, APPIUM_JAVA_TESTNG_TEST_PACKAGE, APPIUM_PYTHON_TEST_PACKAGE, APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE, APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE, APPIUM_WEB_PYTHON_TEST_PACKAGE, CALABASH_TEST_PACKAGE, INSTRUMENTATION_TEST_PACKAGE, UIAUTOMATION_TEST_PACKAGE, UIAUTOMATOR_TEST_PACKAGE, XCTEST_TEST_PACKAGE, XCTEST_UI_TEST_PACKAGE
       #         content_type: "ContentType",
       #       }
-      class CreateUploadRequest < Aws::Structure.new(
+      class CreateUploadRequest < Struct.new(
         :project_arn,
         :name,
         :type,
         :content_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] project_arn
         #   The ARN of the project for the upload.
@@ -401,8 +425,10 @@ module Aws
       end
 
       # Represents the result of a create upload request.
-      class CreateUploadResult < Aws::Structure.new(
+      class CreateUploadResult < Struct.new(
         :upload)
+
+        include Aws::Structure
 
         # @!attribute [rw] upload
         #   The newly created upload.
@@ -417,8 +443,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class DeleteDevicePoolRequest < Aws::Structure.new(
+      class DeleteDevicePoolRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   Represents the Amazon Resource Name (ARN) of the Device Farm device
@@ -437,8 +465,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class DeleteProjectRequest < Aws::Structure.new(
+      class DeleteProjectRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   Represents the Amazon Resource Name (ARN) of the Device Farm project
@@ -457,8 +487,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class DeleteRemoteAccessSessionRequest < Aws::Structure.new(
+      class DeleteRemoteAccessSessionRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the sesssion for which you want to
@@ -478,8 +510,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class DeleteRunRequest < Aws::Structure.new(
+      class DeleteRunRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) for the run you wish to delete.
@@ -497,8 +531,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class DeleteUploadRequest < Aws::Structure.new(
+      class DeleteUploadRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   Represents the Amazon Resource Name (ARN) of the Device Farm upload
@@ -511,7 +547,7 @@ module Aws
       class DeleteUploadResult < Aws::EmptyStructure; end
 
       # Represents a device type that an app is tested against.
-      class Device < Aws::Structure.new(
+      class Device < Struct.new(
         :arn,
         :name,
         :manufacturer,
@@ -529,6 +565,8 @@ module Aws
         :remote_access_enabled,
         :fleet_type,
         :fleet_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The device\'s ARN.
@@ -618,10 +656,12 @@ module Aws
       # Represents the total (metered or unmetered) minutes used by the
       # resource to run tests. Contains the sum of minutes consumed by all
       # children.
-      class DeviceMinutes < Aws::Structure.new(
+      class DeviceMinutes < Struct.new(
         :total,
         :metered,
         :unmetered)
+
+        include Aws::Structure
 
         # @!attribute [rw] total
         #   When specified, represents the total minutes used by the resource to
@@ -641,12 +681,14 @@ module Aws
       end
 
       # Represents a collection of device types.
-      class DevicePool < Aws::Structure.new(
+      class DevicePool < Struct.new(
         :arn,
         :name,
         :description,
         :type,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The device pool\'s ARN.
@@ -679,10 +721,12 @@ module Aws
       end
 
       # Represents a device pool compatibility result.
-      class DevicePoolCompatibilityResult < Aws::Structure.new(
+      class DevicePoolCompatibilityResult < Struct.new(
         :device,
         :compatible,
         :incompatibility_messages)
+
+        include Aws::Structure
 
         # @!attribute [rw] device
         #   Represents a device type that an app is tested against.
@@ -704,8 +748,10 @@ module Aws
 
       # Represents the account settings return values from the
       # `GetAccountSettings` request.
-      class GetAccountSettingsResult < Aws::Structure.new(
+      class GetAccountSettingsResult < Struct.new(
         :account_settings)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_settings
         #   A container for account-level settings within AWS Device Farm.
@@ -722,10 +768,12 @@ module Aws
       #         app_arn: "AmazonResourceName",
       #         test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
       #       }
-      class GetDevicePoolCompatibilityRequest < Aws::Structure.new(
+      class GetDevicePoolCompatibilityRequest < Struct.new(
         :device_pool_arn,
         :app_arn,
         :test_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_pool_arn
         #   The device pool\'s ARN.
@@ -776,9 +824,11 @@ module Aws
       end
 
       # Represents the result of describe device pool compatibility request.
-      class GetDevicePoolCompatibilityResult < Aws::Structure.new(
+      class GetDevicePoolCompatibilityResult < Struct.new(
         :compatible_devices,
         :incompatible_devices)
+
+        include Aws::Structure
 
         # @!attribute [rw] compatible_devices
         #   Information about compatible devices.
@@ -797,8 +847,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetDevicePoolRequest < Aws::Structure.new(
+      class GetDevicePoolRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The device pool\'s ARN.
@@ -807,8 +859,10 @@ module Aws
       end
 
       # Represents the result of a get device pool request.
-      class GetDevicePoolResult < Aws::Structure.new(
+      class GetDevicePoolResult < Struct.new(
         :device_pool)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_pool
         #   Represents a collection of device types.
@@ -823,8 +877,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetDeviceRequest < Aws::Structure.new(
+      class GetDeviceRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The device type\'s ARN.
@@ -833,8 +889,10 @@ module Aws
       end
 
       # Represents the result of a get device request.
-      class GetDeviceResult < Aws::Structure.new(
+      class GetDeviceResult < Struct.new(
         :device)
+
+        include Aws::Structure
 
         # @!attribute [rw] device
         #   Represents a device type that an app is tested against.
@@ -849,8 +907,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetJobRequest < Aws::Structure.new(
+      class GetJobRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The job\'s ARN.
@@ -859,8 +919,10 @@ module Aws
       end
 
       # Represents the result of a get job request.
-      class GetJobResult < Aws::Structure.new(
+      class GetJobResult < Struct.new(
         :job)
+
+        include Aws::Structure
 
         # @!attribute [rw] job
         #   Represents a device.
@@ -876,8 +938,10 @@ module Aws
       #       {
       #         next_token: "PaginationToken",
       #       }
-      class GetOfferingStatusRequest < Aws::Structure.new(
+      class GetOfferingStatusRequest < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An identifier that was returned from the previous call to this
@@ -888,10 +952,12 @@ module Aws
       end
 
       # Returns the status result for a device offering.
-      class GetOfferingStatusResult < Aws::Structure.new(
+      class GetOfferingStatusResult < Struct.new(
         :current,
         :next_period,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] current
         #   When specified, gets the offering status for the current period.
@@ -916,8 +982,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetProjectRequest < Aws::Structure.new(
+      class GetProjectRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The project\'s ARN.
@@ -926,8 +994,10 @@ module Aws
       end
 
       # Represents the result of a get project request.
-      class GetProjectResult < Aws::Structure.new(
+      class GetProjectResult < Struct.new(
         :project)
+
+        include Aws::Structure
 
         # @!attribute [rw] project
         #   Represents an operating-system neutral workspace for running and
@@ -944,8 +1014,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetRemoteAccessSessionRequest < Aws::Structure.new(
+      class GetRemoteAccessSessionRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the remote access session about
@@ -956,8 +1028,10 @@ module Aws
 
       # Represents the response from the server that lists detailed
       # information about the remote access session.
-      class GetRemoteAccessSessionResult < Aws::Structure.new(
+      class GetRemoteAccessSessionResult < Struct.new(
         :remote_access_session)
+
+        include Aws::Structure
 
         # @!attribute [rw] remote_access_session
         #   A container that lists detailed information about the remote access
@@ -973,8 +1047,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetRunRequest < Aws::Structure.new(
+      class GetRunRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The run\'s ARN.
@@ -983,8 +1059,10 @@ module Aws
       end
 
       # Represents the result of a get run request.
-      class GetRunResult < Aws::Structure.new(
+      class GetRunResult < Struct.new(
         :run)
+
+        include Aws::Structure
 
         # @!attribute [rw] run
         #   Represents an app on a set of devices with a specific test and
@@ -1000,8 +1078,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetSuiteRequest < Aws::Structure.new(
+      class GetSuiteRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The suite\'s ARN.
@@ -1010,8 +1090,10 @@ module Aws
       end
 
       # Represents the result of a get suite request.
-      class GetSuiteResult < Aws::Structure.new(
+      class GetSuiteResult < Struct.new(
         :suite)
+
+        include Aws::Structure
 
         # @!attribute [rw] suite
         #   Represents a collection of one or more tests.
@@ -1026,8 +1108,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetTestRequest < Aws::Structure.new(
+      class GetTestRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The test\'s ARN.
@@ -1036,8 +1120,10 @@ module Aws
       end
 
       # Represents the result of a get test request.
-      class GetTestResult < Aws::Structure.new(
+      class GetTestResult < Struct.new(
         :test)
+
+        include Aws::Structure
 
         # @!attribute [rw] test
         #   Represents a condition that is evaluated.
@@ -1052,8 +1138,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class GetUploadRequest < Aws::Structure.new(
+      class GetUploadRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The upload\'s ARN.
@@ -1062,8 +1150,10 @@ module Aws
       end
 
       # Represents the result of a get upload request.
-      class GetUploadResult < Aws::Structure.new(
+      class GetUploadResult < Struct.new(
         :upload)
+
+        include Aws::Structure
 
         # @!attribute [rw] upload
         #   An app or a set of one or more tests to upload or that have been
@@ -1073,9 +1163,11 @@ module Aws
       end
 
       # Represents information about incompatibility.
-      class IncompatibilityMessage < Aws::Structure.new(
+      class IncompatibilityMessage < Struct.new(
         :message,
         :type)
+
+        include Aws::Structure
 
         # @!attribute [rw] message
         #   A message about the incompatibility.
@@ -1107,9 +1199,11 @@ module Aws
       #         remote_access_session_arn: "AmazonResourceName", # required
       #         app_arn: "AmazonResourceName", # required
       #       }
-      class InstallToRemoteAccessSessionRequest < Aws::Structure.new(
+      class InstallToRemoteAccessSessionRequest < Struct.new(
         :remote_access_session_arn,
         :app_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] remote_access_session_arn
         #   The Amazon Resource Name (ARN) of the remote access session about
@@ -1125,8 +1219,10 @@ module Aws
 
       # Represents the response from the server after AWS Device Farm makes a
       # request to install to a remote access session.
-      class InstallToRemoteAccessSessionResult < Aws::Structure.new(
+      class InstallToRemoteAccessSessionResult < Struct.new(
         :app_upload)
+
+        include Aws::Structure
 
         # @!attribute [rw] app_upload
         #   An app or a set of one or more tests to upload or that have been
@@ -1136,7 +1232,7 @@ module Aws
       end
 
       # Represents a device.
-      class Job < Aws::Structure.new(
+      class Job < Struct.new(
         :arn,
         :name,
         :type,
@@ -1149,6 +1245,8 @@ module Aws
         :message,
         :device,
         :device_minutes)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The job\'s ARN.
@@ -1278,10 +1376,12 @@ module Aws
       #         type: "SCREENSHOT", # required, accepts SCREENSHOT, FILE, LOG
       #         next_token: "PaginationToken",
       #       }
-      class ListArtifactsRequest < Aws::Structure.new(
+      class ListArtifactsRequest < Struct.new(
         :arn,
         :type,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Run, Job, Suite, or Test ARN.
@@ -1306,9 +1406,11 @@ module Aws
       end
 
       # Represents the result of a list artifacts operation.
-      class ListArtifactsResult < Aws::Structure.new(
+      class ListArtifactsResult < Struct.new(
         :artifacts,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] artifacts
         #   Information about the artifacts.
@@ -1332,10 +1434,12 @@ module Aws
       #         type: "CURATED", # accepts CURATED, PRIVATE
       #         next_token: "PaginationToken",
       #       }
-      class ListDevicePoolsRequest < Aws::Structure.new(
+      class ListDevicePoolsRequest < Struct.new(
         :arn,
         :type,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The project ARN.
@@ -1362,9 +1466,11 @@ module Aws
       end
 
       # Represents the result of a list device pools request.
-      class ListDevicePoolsResult < Aws::Structure.new(
+      class ListDevicePoolsResult < Struct.new(
         :device_pools,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_pools
         #   Information about the device pools.
@@ -1387,9 +1493,11 @@ module Aws
       #         arn: "AmazonResourceName",
       #         next_token: "PaginationToken",
       #       }
-      class ListDevicesRequest < Aws::Structure.new(
+      class ListDevicesRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The device types\' ARNs.
@@ -1404,9 +1512,11 @@ module Aws
       end
 
       # Represents the result of a list devices operation.
-      class ListDevicesResult < Aws::Structure.new(
+      class ListDevicesResult < Struct.new(
         :devices,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] devices
         #   Information about the devices.
@@ -1429,9 +1539,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListJobsRequest < Aws::Structure.new(
+      class ListJobsRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The jobs\' ARNs.
@@ -1446,9 +1558,11 @@ module Aws
       end
 
       # Represents the result of a list jobs request.
-      class ListJobsResult < Aws::Structure.new(
+      class ListJobsResult < Struct.new(
         :jobs,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] jobs
         #   Information about the jobs.
@@ -1470,8 +1584,10 @@ module Aws
       #       {
       #         next_token: "PaginationToken",
       #       }
-      class ListOfferingTransactionsRequest < Aws::Structure.new(
+      class ListOfferingTransactionsRequest < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An identifier that was returned from the previous call to this
@@ -1482,9 +1598,11 @@ module Aws
       end
 
       # Returns the transaction log of the specified offerings.
-      class ListOfferingTransactionsResult < Aws::Structure.new(
+      class ListOfferingTransactionsResult < Struct.new(
         :offering_transactions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_transactions
         #   The audit log of subscriptions you have purchased and modified
@@ -1506,8 +1624,10 @@ module Aws
       #       {
       #         next_token: "PaginationToken",
       #       }
-      class ListOfferingsRequest < Aws::Structure.new(
+      class ListOfferingsRequest < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   An identifier that was returned from the previous call to this
@@ -1518,9 +1638,11 @@ module Aws
       end
 
       # Represents the return values of the list of offerings.
-      class ListOfferingsResult < Aws::Structure.new(
+      class ListOfferingsResult < Struct.new(
         :offerings,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] offerings
         #   A value representing the list offering results.
@@ -1542,9 +1664,11 @@ module Aws
       #         arn: "AmazonResourceName",
       #         next_token: "PaginationToken",
       #       }
-      class ListProjectsRequest < Aws::Structure.new(
+      class ListProjectsRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The projects\' ARNs.
@@ -1559,9 +1683,11 @@ module Aws
       end
 
       # Represents the result of a list projects request.
-      class ListProjectsResult < Aws::Structure.new(
+      class ListProjectsResult < Struct.new(
         :projects,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] projects
         #   Information about the projects.
@@ -1585,9 +1711,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListRemoteAccessSessionsRequest < Aws::Structure.new(
+      class ListRemoteAccessSessionsRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the remote access session about
@@ -1604,9 +1732,11 @@ module Aws
 
       # Represents the response from the server after AWS Device Farm makes a
       # request to return information about the remote access session.
-      class ListRemoteAccessSessionsResult < Aws::Structure.new(
+      class ListRemoteAccessSessionsResult < Struct.new(
         :remote_access_sessions,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] remote_access_sessions
         #   A container representing the metadata from the service about each
@@ -1629,9 +1759,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListRunsRequest < Aws::Structure.new(
+      class ListRunsRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The runs\' ARNs.
@@ -1646,9 +1778,11 @@ module Aws
       end
 
       # Represents the result of a list runs request.
-      class ListRunsResult < Aws::Structure.new(
+      class ListRunsResult < Struct.new(
         :runs,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] runs
         #   Information about the runs.
@@ -1671,9 +1805,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListSamplesRequest < Aws::Structure.new(
+      class ListSamplesRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The samples\' ARNs.
@@ -1688,9 +1824,11 @@ module Aws
       end
 
       # Represents the result of a list samples request.
-      class ListSamplesResult < Aws::Structure.new(
+      class ListSamplesResult < Struct.new(
         :samples,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] samples
         #   Information about the samples.
@@ -1713,9 +1851,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListSuitesRequest < Aws::Structure.new(
+      class ListSuitesRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The suites\' ARNs.
@@ -1730,9 +1870,11 @@ module Aws
       end
 
       # Represents the result of a list suites request.
-      class ListSuitesResult < Aws::Structure.new(
+      class ListSuitesResult < Struct.new(
         :suites,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] suites
         #   Information about the suites.
@@ -1755,9 +1897,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListTestsRequest < Aws::Structure.new(
+      class ListTestsRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The tests\' ARNs.
@@ -1772,9 +1916,11 @@ module Aws
       end
 
       # Represents the result of a list tests request.
-      class ListTestsResult < Aws::Structure.new(
+      class ListTestsResult < Struct.new(
         :tests,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] tests
         #   Information about the tests.
@@ -1797,9 +1943,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListUniqueProblemsRequest < Aws::Structure.new(
+      class ListUniqueProblemsRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The unique problems\' ARNs.
@@ -1814,9 +1962,11 @@ module Aws
       end
 
       # Represents the result of a list unique problems request.
-      class ListUniqueProblemsResult < Aws::Structure.new(
+      class ListUniqueProblemsResult < Struct.new(
         :unique_problems,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] unique_problems
         #   Information about the unique problems.
@@ -1855,9 +2005,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         next_token: "PaginationToken",
       #       }
-      class ListUploadsRequest < Aws::Structure.new(
+      class ListUploadsRequest < Struct.new(
         :arn,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The uploads\' ARNs.
@@ -1872,9 +2024,11 @@ module Aws
       end
 
       # Represents the result of a list uploads request.
-      class ListUploadsResult < Aws::Structure.new(
+      class ListUploadsResult < Struct.new(
         :uploads,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] uploads
         #   Information about the uploads.
@@ -1900,9 +2054,11 @@ module Aws
       #         latitude: 1.0, # required
       #         longitude: 1.0, # required
       #       }
-      class Location < Aws::Structure.new(
+      class Location < Struct.new(
         :latitude,
         :longitude)
+
+        include Aws::Structure
 
         # @!attribute [rw] latitude
         #   The latitude.
@@ -1916,9 +2072,11 @@ module Aws
 
       # A number representing the monetary amount for an offering or
       # transaction.
-      class MonetaryAmount < Aws::Structure.new(
+      class MonetaryAmount < Struct.new(
         :amount,
         :currency_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] amount
         #   The numerical amount of an offering or transaction.
@@ -1932,12 +2090,14 @@ module Aws
       end
 
       # Represents the metadata of a device offering.
-      class Offering < Aws::Structure.new(
+      class Offering < Struct.new(
         :id,
         :description,
         :type,
         :platform,
         :recurring_charges)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The ID that corresponds to a device offering.
@@ -1962,11 +2122,13 @@ module Aws
       end
 
       # The status of the offering.
-      class OfferingStatus < Aws::Structure.new(
+      class OfferingStatus < Struct.new(
         :type,
         :offering,
         :quantity,
         :effective_on)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The type specified for the offering status.
@@ -1987,11 +2149,13 @@ module Aws
       end
 
       # Represents the metadata of an offering transaction.
-      class OfferingTransaction < Aws::Structure.new(
+      class OfferingTransaction < Struct.new(
         :offering_status,
         :transaction_id,
         :created_on,
         :cost)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_status
         #   The status of an offering transaction.
@@ -2012,7 +2176,7 @@ module Aws
       end
 
       # Represents a specific warning or failure.
-      class Problem < Aws::Structure.new(
+      class Problem < Struct.new(
         :run,
         :job,
         :suite,
@@ -2020,6 +2184,8 @@ module Aws
         :device,
         :result,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] run
         #   Information about the associated run.
@@ -2068,9 +2234,11 @@ module Aws
       end
 
       # Information about a problem detail.
-      class ProblemDetail < Aws::Structure.new(
+      class ProblemDetail < Struct.new(
         :arn,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The problem detail\'s ARN.
@@ -2084,10 +2252,12 @@ module Aws
 
       # Represents an operating-system neutral workspace for running and
       # managing tests.
-      class Project < Aws::Structure.new(
+      class Project < Struct.new(
         :arn,
         :name,
         :created)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The project\'s ARN.
@@ -2111,9 +2281,11 @@ module Aws
       #         offering_id: "OfferingIdentifier",
       #         quantity: 1,
       #       }
-      class PurchaseOfferingRequest < Aws::Structure.new(
+      class PurchaseOfferingRequest < Struct.new(
         :offering_id,
         :quantity)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_id
         #   The ID of the offering.
@@ -2127,8 +2299,10 @@ module Aws
       end
 
       # The result of the purchase offering (e.g., success or failure).
-      class PurchaseOfferingResult < Aws::Structure.new(
+      class PurchaseOfferingResult < Struct.new(
         :offering_transaction)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_transaction
         #   Represents the offering transaction for the purchase result.
@@ -2147,11 +2321,13 @@ module Aws
       #         nfc: false,
       #         gps: false,
       #       }
-      class Radios < Aws::Structure.new(
+      class Radios < Struct.new(
         :wifi,
         :bluetooth,
         :nfc,
         :gps)
+
+        include Aws::Structure
 
         # @!attribute [rw] wifi
         #   True if Wi-Fi is enabled at the beginning of the test; otherwise,
@@ -2176,9 +2352,11 @@ module Aws
       end
 
       # Specifies whether charges for devices will be recurring.
-      class RecurringCharge < Aws::Structure.new(
+      class RecurringCharge < Struct.new(
         :cost,
         :frequency)
+
+        include Aws::Structure
 
         # @!attribute [rw] cost
         #   The cost of the recurring charge.
@@ -2191,7 +2369,7 @@ module Aws
       end
 
       # Represents information about the remote access session.
-      class RemoteAccessSession < Aws::Structure.new(
+      class RemoteAccessSession < Struct.new(
         :arn,
         :name,
         :created,
@@ -2204,6 +2382,8 @@ module Aws
         :billing_method,
         :device_minutes,
         :endpoint)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the remote access session.
@@ -2305,9 +2485,11 @@ module Aws
       #         offering_id: "OfferingIdentifier",
       #         quantity: 1,
       #       }
-      class RenewOfferingRequest < Aws::Structure.new(
+      class RenewOfferingRequest < Struct.new(
         :offering_id,
         :quantity)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_id
         #   The ID of a request to renew an offering.
@@ -2320,8 +2502,10 @@ module Aws
       end
 
       # The result of a renewal offering.
-      class RenewOfferingResult < Aws::Structure.new(
+      class RenewOfferingResult < Struct.new(
         :offering_transaction)
+
+        include Aws::Structure
 
         # @!attribute [rw] offering_transaction
         #   Represents the status of the offering transaction for the renewal.
@@ -2331,9 +2515,11 @@ module Aws
 
       # Represents the screen resolution of a device in height and width,
       # expressed in pixels.
-      class Resolution < Aws::Structure.new(
+      class Resolution < Struct.new(
         :width,
         :height)
+
+        include Aws::Structure
 
         # @!attribute [rw] width
         #   The screen resolution\'s width, expressed in pixels.
@@ -2354,10 +2540,12 @@ module Aws
       #         operator: "EQUALS", # accepts EQUALS, LESS_THAN, GREATER_THAN, IN, NOT_IN
       #         value: "String",
       #       }
-      class Rule < Aws::Structure.new(
+      class Rule < Struct.new(
         :attribute,
         :operator,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute
         #   The rule\'s stringified attribute. For example, specify the value as
@@ -2396,7 +2584,7 @@ module Aws
 
       # Represents an app on a set of devices with a specific test and
       # configuration.
-      class Run < Aws::Structure.new(
+      class Run < Struct.new(
         :arn,
         :name,
         :type,
@@ -2412,6 +2600,8 @@ module Aws
         :completed_jobs,
         :billing_method,
         :device_minutes)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The run\'s ARN.
@@ -2554,10 +2744,12 @@ module Aws
       end
 
       # Represents a sample of performance data.
-      class Sample < Aws::Structure.new(
+      class Sample < Struct.new(
         :arn,
         :type,
         :url)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The sample\'s ARN.
@@ -2638,7 +2830,7 @@ module Aws
       #         auxiliary_apps: ["AmazonResourceName"],
       #         billing_method: "METERED", # accepts METERED, UNMETERED
       #       }
-      class ScheduleRunConfiguration < Aws::Structure.new(
+      class ScheduleRunConfiguration < Struct.new(
         :extra_data_package_arn,
         :network_profile_arn,
         :locale,
@@ -2646,6 +2838,8 @@ module Aws
         :radios,
         :auxiliary_apps,
         :billing_method)
+
+        include Aws::Structure
 
         # @!attribute [rw] extra_data_package_arn
         #   The ARN of the extra data for the run. The extra data is a .zip file
@@ -2716,13 +2910,15 @@ module Aws
       #           billing_method: "METERED", # accepts METERED, UNMETERED
       #         },
       #       }
-      class ScheduleRunRequest < Aws::Structure.new(
+      class ScheduleRunRequest < Struct.new(
         :project_arn,
         :app_arn,
         :device_pool_arn,
         :name,
         :test,
         :configuration)
+
+        include Aws::Structure
 
         # @!attribute [rw] project_arn
         #   The ARN of the project for the run to be scheduled.
@@ -2751,8 +2947,10 @@ module Aws
       end
 
       # Represents the result of a schedule run request.
-      class ScheduleRunResult < Aws::Structure.new(
+      class ScheduleRunResult < Struct.new(
         :run)
+
+        include Aws::Structure
 
         # @!attribute [rw] run
         #   Information about the scheduled run.
@@ -2772,11 +2970,13 @@ module Aws
       #           "String" => "String",
       #         },
       #       }
-      class ScheduleRunTest < Aws::Structure.new(
+      class ScheduleRunTest < Struct.new(
         :type,
         :test_package_arn,
         :filter,
         :parameters)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The test\'s type.
@@ -2837,8 +3037,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class StopRemoteAccessSessionRequest < Aws::Structure.new(
+      class StopRemoteAccessSessionRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the remote access session you wish
@@ -2849,8 +3051,10 @@ module Aws
 
       # Represents the response from the server that describes the remote
       # access session when AWS Device Farm stops the session.
-      class StopRemoteAccessSessionResult < Aws::Structure.new(
+      class StopRemoteAccessSessionResult < Struct.new(
         :remote_access_session)
+
+        include Aws::Structure
 
         # @!attribute [rw] remote_access_session
         #   A container representing the metadata from the service about the
@@ -2866,8 +3070,10 @@ module Aws
       #       {
       #         arn: "AmazonResourceName", # required
       #       }
-      class StopRunRequest < Aws::Structure.new(
+      class StopRunRequest < Struct.new(
         :arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   Represents the Amazon Resource Name (ARN) of the Device Farm run you
@@ -2877,8 +3083,10 @@ module Aws
       end
 
       # Represents the results of your stop run attempt.
-      class StopRunResult < Aws::Structure.new(
+      class StopRunResult < Struct.new(
         :run)
+
+        include Aws::Structure
 
         # @!attribute [rw] run
         #   Represents an app on a set of devices with a specific test and
@@ -2888,7 +3096,7 @@ module Aws
       end
 
       # Represents a collection of one or more tests.
-      class Suite < Aws::Structure.new(
+      class Suite < Struct.new(
         :arn,
         :name,
         :type,
@@ -2900,6 +3108,8 @@ module Aws
         :counters,
         :message,
         :device_minutes)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The suite\'s ARN.
@@ -3018,7 +3228,7 @@ module Aws
       end
 
       # Represents a condition that is evaluated.
-      class Test < Aws::Structure.new(
+      class Test < Struct.new(
         :arn,
         :name,
         :type,
@@ -3030,6 +3240,8 @@ module Aws
         :counters,
         :message,
         :device_minutes)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The test\'s ARN.
@@ -3148,9 +3360,11 @@ module Aws
       end
 
       # A collection of one or more problems, grouped by their result.
-      class UniqueProblem < Aws::Structure.new(
+      class UniqueProblem < Struct.new(
         :message,
         :problems)
+
+        include Aws::Structure
 
         # @!attribute [rw] message
         #   A message about the unique problems\' result.
@@ -3178,11 +3392,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateDevicePoolRequest < Aws::Structure.new(
+      class UpdateDevicePoolRequest < Struct.new(
         :arn,
         :name,
         :description,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resourc Name (ARN) of the Device Farm device pool you
@@ -3207,8 +3423,10 @@ module Aws
       end
 
       # Represents the result of an update device pool request.
-      class UpdateDevicePoolResult < Aws::Structure.new(
+      class UpdateDevicePoolResult < Struct.new(
         :device_pool)
+
+        include Aws::Structure
 
         # @!attribute [rw] device_pool
         #   Represents a collection of device types.
@@ -3224,9 +3442,11 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #         name: "Name",
       #       }
-      class UpdateProjectRequest < Aws::Structure.new(
+      class UpdateProjectRequest < Struct.new(
         :arn,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The Amazon Resource Name (ARN) of the project whose name you wish to
@@ -3241,8 +3461,10 @@ module Aws
       end
 
       # Represents the result of an update project request.
-      class UpdateProjectResult < Aws::Structure.new(
+      class UpdateProjectResult < Struct.new(
         :project)
+
+        include Aws::Structure
 
         # @!attribute [rw] project
         #   Represents an operating-system neutral workspace for running and
@@ -3253,7 +3475,7 @@ module Aws
 
       # An app or a set of one or more tests to upload or that have been
       # uploaded.
-      class Upload < Aws::Structure.new(
+      class Upload < Struct.new(
         :arn,
         :name,
         :created,
@@ -3263,6 +3485,8 @@ module Aws
         :metadata,
         :content_type,
         :message)
+
+        include Aws::Structure
 
         # @!attribute [rw] arn
         #   The upload\'s ARN.

@@ -24,7 +24,7 @@ module Aws
       #           "OptionalKey" => "OptionalValue",
       #         },
       #       }
-      class GenerateDataSetRequest < Aws::Structure.new(
+      class GenerateDataSetRequest < Struct.new(
         :data_set_type,
         :data_set_publication_date,
         :role_name_arn,
@@ -32,6 +32,8 @@ module Aws
         :destination_s3_prefix,
         :sns_topic_arn,
         :customer_defined_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_set_type
         #   The desired data set type.
@@ -122,8 +124,10 @@ module Aws
       end
 
       # Container for the result of the GenerateDataSet operation.
-      class GenerateDataSetResult < Aws::Structure.new(
+      class GenerateDataSetResult < Struct.new(
         :data_set_request_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_set_request_id
         #   A unique identifier representing a specific request to the
@@ -148,7 +152,7 @@ module Aws
       #           "OptionalKey" => "OptionalValue",
       #         },
       #       }
-      class StartSupportDataExportRequest < Aws::Structure.new(
+      class StartSupportDataExportRequest < Struct.new(
         :data_set_type,
         :from_date,
         :role_name_arn,
@@ -156,6 +160,8 @@ module Aws
         :destination_s3_prefix,
         :sns_topic_arn,
         :customer_defined_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_set_type
         #   Specifies the data set type to be written to the output csv file.
@@ -214,8 +220,10 @@ module Aws
       end
 
       # Container for the result of the StartSupportDataExport operation.
-      class StartSupportDataExportResult < Aws::Structure.new(
+      class StartSupportDataExportResult < Struct.new(
         :data_set_request_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] data_set_request_id
         #   A unique identifier representing a specific request to the

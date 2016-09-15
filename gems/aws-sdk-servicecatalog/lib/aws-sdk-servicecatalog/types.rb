@@ -11,9 +11,11 @@ module Aws
 
       # An administrator-specified constraint to apply when provisioning a
       # product.
-      class ConstraintSummary < Aws::Structure.new(
+      class ConstraintSummary < Struct.new(
         :type,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The type of the constraint.
@@ -32,9 +34,11 @@ module Aws
       #         accept_language: "AcceptLanguage",
       #         id: "Id", # required
       #       }
-      class DescribeProductInput < Aws::Structure.new(
+      class DescribeProductInput < Struct.new(
         :accept_language,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -54,9 +58,11 @@ module Aws
 
       end
 
-      class DescribeProductOutput < Aws::Structure.new(
+      class DescribeProductOutput < Struct.new(
         :product_view_summary,
         :provisioning_artifacts)
+
+        include Aws::Structure
 
         # @!attribute [rw] product_view_summary
         #   The summary metadata about the specified product.
@@ -77,9 +83,11 @@ module Aws
       #         accept_language: "AcceptLanguage",
       #         id: "Id", # required
       #       }
-      class DescribeProductViewInput < Aws::Structure.new(
+      class DescribeProductViewInput < Struct.new(
         :accept_language,
         :id)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -99,9 +107,11 @@ module Aws
 
       end
 
-      class DescribeProductViewOutput < Aws::Structure.new(
+      class DescribeProductViewOutput < Struct.new(
         :product_view_summary,
         :provisioning_artifacts)
+
+        include Aws::Structure
 
         # @!attribute [rw] product_view_summary
         #   The summary metadata about the specified product.
@@ -124,11 +134,13 @@ module Aws
       #         provisioning_artifact_id: "Id", # required
       #         path_id: "Id",
       #       }
-      class DescribeProvisioningParametersInput < Aws::Structure.new(
+      class DescribeProvisioningParametersInput < Struct.new(
         :accept_language,
         :product_id,
         :provisioning_artifact_id,
         :path_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -158,10 +170,12 @@ module Aws
 
       end
 
-      class DescribeProvisioningParametersOutput < Aws::Structure.new(
+      class DescribeProvisioningParametersOutput < Struct.new(
         :provisioning_artifact_parameters,
         :constraint_summaries,
         :usage_instructions)
+
+        include Aws::Structure
 
         # @!attribute [rw] provisioning_artifact_parameters
         #   The list of parameters used to successfully provision the product.
@@ -191,11 +205,13 @@ module Aws
       #         page_token: "PageToken",
       #         page_size: 1,
       #       }
-      class DescribeRecordInput < Aws::Structure.new(
+      class DescribeRecordInput < Struct.new(
         :accept_language,
         :id,
         :page_token,
         :page_size)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -228,10 +244,12 @@ module Aws
 
       end
 
-      class DescribeRecordOutput < Aws::Structure.new(
+      class DescribeRecordOutput < Struct.new(
         :record_detail,
         :record_outputs,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_detail
         #   Detailed record information for the specified product.
@@ -253,11 +271,13 @@ module Aws
 
       # Summary information about a path for a user to have access to a
       # specified product.
-      class LaunchPathSummary < Aws::Structure.new(
+      class LaunchPathSummary < Struct.new(
         :id,
         :constraint_summaries,
         :tags,
         :name)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The unique identifier of the product path.
@@ -287,11 +307,13 @@ module Aws
       #         page_size: 1,
       #         page_token: "PageToken",
       #       }
-      class ListLaunchPathsInput < Aws::Structure.new(
+      class ListLaunchPathsInput < Struct.new(
         :accept_language,
         :product_id,
         :page_size,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -323,9 +345,11 @@ module Aws
 
       end
 
-      class ListLaunchPathsOutput < Aws::Structure.new(
+      class ListLaunchPathsOutput < Struct.new(
         :launch_path_summaries,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] launch_path_summaries
         #   List of launch path information summaries for the specified
@@ -351,11 +375,13 @@ module Aws
       #         page_size: 1,
       #         page_token: "PageToken",
       #       }
-      class ListRecordHistoryInput < Aws::Structure.new(
+      class ListRecordHistoryInput < Struct.new(
         :accept_language,
         :search_filter,
         :page_size,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -386,9 +412,11 @@ module Aws
 
       end
 
-      class ListRecordHistoryOutput < Aws::Structure.new(
+      class ListRecordHistoryOutput < Struct.new(
         :record_details,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_details
         #   A list of record detail objects, listed in reverse chronological
@@ -411,9 +439,11 @@ module Aws
       #         key: "SearchFilterKey",
       #         value: "SearchFilterValue",
       #       }
-      class ListRecordHistorySearchFilter < Aws::Structure.new(
+      class ListRecordHistorySearchFilter < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The filter key.
@@ -426,8 +456,10 @@ module Aws
       end
 
       # The constraints that the administrator has put on the parameter.
-      class ParameterConstraints < Aws::Structure.new(
+      class ParameterConstraints < Struct.new(
         :allowed_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] allowed_values
         #   The values that the administrator has allowed for the parameter.
@@ -437,9 +469,11 @@ module Aws
 
       # A single product view aggregation value/count pair, containing
       # metadata about each product to which the calling user has access.
-      class ProductViewAggregationValue < Aws::Structure.new(
+      class ProductViewAggregationValue < Struct.new(
         :value,
         :approximate_count)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   The value of the product view aggregation.
@@ -452,7 +486,7 @@ module Aws
       end
 
       # The summary metadata about the specified product.
-      class ProductViewSummary < Aws::Structure.new(
+      class ProductViewSummary < Struct.new(
         :id,
         :product_id,
         :name,
@@ -464,6 +498,8 @@ module Aws
         :support_email,
         :support_description,
         :support_url)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The product view identifier.
@@ -543,7 +579,7 @@ module Aws
       #         notification_arns: ["NotificationArn"],
       #         provision_token: "IdempotencyToken", # required
       #       }
-      class ProvisionProductInput < Aws::Structure.new(
+      class ProvisionProductInput < Struct.new(
         :accept_language,
         :product_id,
         :provisioning_artifact_id,
@@ -553,6 +589,8 @@ module Aws
         :tags,
         :notification_arns,
         :provision_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -607,8 +645,10 @@ module Aws
 
       end
 
-      class ProvisionProductOutput < Aws::Structure.new(
+      class ProvisionProductOutput < Struct.new(
         :record_detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_detail
         #   The detailed result of the ProvisionProduct request, containing the
@@ -620,7 +660,7 @@ module Aws
       end
 
       # Detailed information about a ProvisionedProduct object.
-      class ProvisionedProductDetail < Aws::Structure.new(
+      class ProvisionedProductDetail < Struct.new(
         :name,
         :arn,
         :type,
@@ -630,6 +670,8 @@ module Aws
         :created_time,
         :idempotency_token,
         :last_record_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The user-friendly name of the ProvisionedProduct object.
@@ -673,11 +715,13 @@ module Aws
 
       # Contains information indicating the ways in which a product can be
       # provisioned.
-      class ProvisioningArtifact < Aws::Structure.new(
+      class ProvisioningArtifact < Struct.new(
         :id,
         :name,
         :description,
         :created_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] id
         #   The identifier for the artifact.
@@ -699,13 +743,15 @@ module Aws
 
       # A parameter used to successfully provision the product. This value
       # includes a list of allowable values and additional metadata.
-      class ProvisioningArtifactParameter < Aws::Structure.new(
+      class ProvisioningArtifactParameter < Struct.new(
         :parameter_key,
         :default_value,
         :parameter_type,
         :is_no_echo,
         :description,
         :parameter_constraints)
+
+        include Aws::Structure
 
         # @!attribute [rw] parameter_key
         #   The parameter key.
@@ -744,9 +790,11 @@ module Aws
       #         key: "ParameterKey",
       #         value: "ParameterValue",
       #       }
-      class ProvisioningParameter < Aws::Structure.new(
+      class ProvisioningParameter < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The `ProvisioningArtifactParameter.ParameterKey` parameter from
@@ -761,7 +809,7 @@ module Aws
       end
 
       # The full details of a specific ProvisionedProduct object.
-      class RecordDetail < Aws::Structure.new(
+      class RecordDetail < Struct.new(
         :record_id,
         :provisioned_product_name,
         :status,
@@ -775,6 +823,8 @@ module Aws
         :path_id,
         :record_errors,
         :record_tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_id
         #   The identifier of the ProvisionedProduct object record.
@@ -833,9 +883,11 @@ module Aws
       end
 
       # The error code and description resulting from an operation.
-      class RecordError < Aws::Structure.new(
+      class RecordError < Struct.new(
         :code,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] code
         #   The numeric value of the error.
@@ -850,10 +902,12 @@ module Aws
       # An output for the specified Product object created as the result of a
       # request. For example, a CloudFormation-backed product that creates an
       # S3 bucket would have an output for the S3 bucket URL.
-      class RecordOutput < Aws::Structure.new(
+      class RecordOutput < Struct.new(
         :output_key,
         :output_value,
         :description)
+
+        include Aws::Structure
 
         # @!attribute [rw] output_key
         #   The output key.
@@ -870,9 +924,11 @@ module Aws
       end
 
       # A tag associated with the record, stored as a key-value pair.
-      class RecordTag < Aws::Structure.new(
+      class RecordTag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key for this tag.
@@ -892,10 +948,12 @@ module Aws
       #         page_size: 1,
       #         page_token: "PageToken",
       #       }
-      class ScanProvisionedProductsInput < Aws::Structure.new(
+      class ScanProvisionedProductsInput < Struct.new(
         :accept_language,
         :page_size,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -922,9 +980,11 @@ module Aws
 
       end
 
-      class ScanProvisionedProductsOutput < Aws::Structure.new(
+      class ScanProvisionedProductsOutput < Struct.new(
         :provisioned_products,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] provisioned_products
         #   A list of ProvisionedProduct detail objects.
@@ -950,13 +1010,15 @@ module Aws
       #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
       #         page_token: "PageToken",
       #       }
-      class SearchProductsInput < Aws::Structure.new(
+      class SearchProductsInput < Struct.new(
         :accept_language,
         :filters,
         :page_size,
         :sort_by,
         :sort_order,
         :page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -999,10 +1061,12 @@ module Aws
 
       end
 
-      class SearchProductsOutput < Aws::Structure.new(
+      class SearchProductsOutput < Struct.new(
         :product_view_summaries,
         :product_view_aggregations,
         :next_page_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] product_view_summaries
         #   A list of the product view summary objects.
@@ -1028,9 +1092,11 @@ module Aws
       #         key: "TagKey",
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The `ProvisioningArtifactParameter.TagKey` parameter from
@@ -1053,12 +1119,14 @@ module Aws
       #         ignore_errors: false,
       #         accept_language: "AcceptLanguage",
       #       }
-      class TerminateProvisionedProductInput < Aws::Structure.new(
+      class TerminateProvisionedProductInput < Struct.new(
         :provisioned_product_name,
         :provisioned_product_id,
         :terminate_token,
         :ignore_errors,
         :accept_language)
+
+        include Aws::Structure
 
         # @!attribute [rw] provisioned_product_name
         #   The name of the ProvisionedProduct object to terminate. You must
@@ -1100,8 +1168,10 @@ module Aws
 
       end
 
-      class TerminateProvisionedProductOutput < Aws::Structure.new(
+      class TerminateProvisionedProductOutput < Struct.new(
         :record_detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_detail
         #   The detailed result of the TerminateProvisionedProduct request,
@@ -1131,7 +1201,7 @@ module Aws
       #         ],
       #         update_token: "IdempotencyToken", # required
       #       }
-      class UpdateProvisionedProductInput < Aws::Structure.new(
+      class UpdateProvisionedProductInput < Struct.new(
         :accept_language,
         :provisioned_product_name,
         :provisioned_product_id,
@@ -1140,6 +1210,8 @@ module Aws
         :path_id,
         :provisioning_parameters,
         :update_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] accept_language
         #   Optional language code. Supported language codes are as follows:
@@ -1192,8 +1264,10 @@ module Aws
 
       end
 
-      class UpdateProvisionedProductOutput < Aws::Structure.new(
+      class UpdateProvisionedProductOutput < Struct.new(
         :record_detail)
+
+        include Aws::Structure
 
         # @!attribute [rw] record_detail
         #   The detailed result of the UpdateProvisionedProduct request,
@@ -1215,10 +1289,12 @@ module Aws
       #         value: "ParameterValue",
       #         use_previous_value: false,
       #       }
-      class UpdateProvisioningParameter < Aws::Structure.new(
+      class UpdateProvisioningParameter < Struct.new(
         :key,
         :value,
         :use_previous_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The `ProvisioningArtifactParameter.ParameterKey` parameter from
@@ -1239,9 +1315,11 @@ module Aws
       end
 
       # Additional information provided by the administrator.
-      class UsageInstruction < Aws::Structure.new(
+      class UsageInstruction < Struct.new(
         :type,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] type
         #   The usage instruction type for the value.

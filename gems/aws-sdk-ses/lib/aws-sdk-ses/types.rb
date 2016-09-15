@@ -25,9 +25,11 @@ module Aws
       #         header_name: "HeaderName", # required
       #         header_value: "HeaderValue", # required
       #       }
-      class AddHeaderAction < Aws::Structure.new(
+      class AddHeaderAction < Struct.new(
         :header_name,
         :header_value)
+
+        include Aws::Structure
 
         # @!attribute [rw] header_name
         #   The name of the header to add. Must be between 1 and 50 characters,
@@ -58,9 +60,11 @@ module Aws
       #           charset: "Charset",
       #         },
       #       }
-      class Body < Aws::Structure.new(
+      class Body < Struct.new(
         :text,
         :html)
+
+        include Aws::Structure
 
         # @!attribute [rw] text
         #   The content of the message, in text format. Use this for text-based
@@ -97,12 +101,14 @@ module Aws
       #         message: "BounceMessage", # required
       #         sender: "Address", # required
       #       }
-      class BounceAction < Aws::Structure.new(
+      class BounceAction < Struct.new(
         :topic_arn,
         :smtp_reply_code,
         :status_code,
         :message,
         :sender)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
@@ -175,11 +181,13 @@ module Aws
       #           ],
       #         },
       #       }
-      class BouncedRecipientInfo < Aws::Structure.new(
+      class BouncedRecipientInfo < Struct.new(
         :recipient,
         :recipient_arn,
         :bounce_type,
         :recipient_dsn_fields)
+
+        include Aws::Structure
 
         # @!attribute [rw] recipient
         #   The email address of the recipient of the bounced email.
@@ -224,9 +232,11 @@ module Aws
       #         rule_set_name: "ReceiptRuleSetName", # required
       #         original_rule_set_name: "ReceiptRuleSetName", # required
       #       }
-      class CloneReceiptRuleSetRequest < Aws::Structure.new(
+      class CloneReceiptRuleSetRequest < Struct.new(
         :rule_set_name,
         :original_rule_set_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the rule set to create. The name must:
@@ -261,9 +271,11 @@ module Aws
       #         data: "MessageData", # required
       #         charset: "Charset",
       #       }
-      class Content < Aws::Structure.new(
+      class Content < Struct.new(
         :data,
         :charset)
+
+        include Aws::Structure
 
         # @!attribute [rw] data
         #   The textual data of the content.
@@ -294,8 +306,10 @@ module Aws
       #           },
       #         },
       #       }
-      class CreateReceiptFilterRequest < Aws::Structure.new(
+      class CreateReceiptFilterRequest < Struct.new(
         :filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter
         #   A data structure that describes the IP address filter to create,
@@ -367,10 +381,12 @@ module Aws
       #           scan_enabled: false,
       #         },
       #       }
-      class CreateReceiptRuleRequest < Aws::Structure.new(
+      class CreateReceiptRuleRequest < Struct.new(
         :rule_set_name,
         :after,
         :rule)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the rule set to which to add the rule.
@@ -405,8 +421,10 @@ module Aws
       #       {
       #         rule_set_name: "ReceiptRuleSetName", # required
       #       }
-      class CreateReceiptRuleSetRequest < Aws::Structure.new(
+      class CreateReceiptRuleSetRequest < Struct.new(
         :rule_set_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the rule set to create. The name must:
@@ -439,9 +457,11 @@ module Aws
       #         identity: "Identity", # required
       #         policy_name: "PolicyName", # required
       #       }
-      class DeleteIdentityPolicyRequest < Aws::Structure.new(
+      class DeleteIdentityPolicyRequest < Struct.new(
         :identity,
         :policy_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity that is associated with the policy that you want to
@@ -470,8 +490,10 @@ module Aws
       #       {
       #         identity: "Identity", # required
       #       }
-      class DeleteIdentityRequest < Aws::Structure.new(
+      class DeleteIdentityRequest < Struct.new(
         :identity)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity to be removed from the list of identities for the AWS
@@ -496,8 +518,10 @@ module Aws
       #       {
       #         filter_name: "ReceiptFilterName", # required
       #       }
-      class DeleteReceiptFilterRequest < Aws::Structure.new(
+      class DeleteReceiptFilterRequest < Struct.new(
         :filter_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] filter_name
         #   The name of the IP address filter to delete.
@@ -522,9 +546,11 @@ module Aws
       #         rule_set_name: "ReceiptRuleSetName", # required
       #         rule_name: "ReceiptRuleName", # required
       #       }
-      class DeleteReceiptRuleRequest < Aws::Structure.new(
+      class DeleteReceiptRuleRequest < Struct.new(
         :rule_set_name,
         :rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set that contains the receipt rule to
@@ -554,8 +580,10 @@ module Aws
       #       {
       #         rule_set_name: "ReceiptRuleSetName", # required
       #       }
-      class DeleteReceiptRuleSetRequest < Aws::Structure.new(
+      class DeleteReceiptRuleSetRequest < Struct.new(
         :rule_set_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set to delete.
@@ -574,8 +602,10 @@ module Aws
       #       {
       #         email_address: "Address", # required
       #       }
-      class DeleteVerifiedEmailAddressRequest < Aws::Structure.new(
+      class DeleteVerifiedEmailAddressRequest < Struct.new(
         :email_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] email_address
         #   An email address to be removed from the list of verified addresses.
@@ -596,9 +626,11 @@ module Aws
 
       # Represents the metadata and receipt rules for the receipt rule set
       # that is currently active.
-      class DescribeActiveReceiptRuleSetResponse < Aws::Structure.new(
+      class DescribeActiveReceiptRuleSetResponse < Struct.new(
         :metadata,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] metadata
         #   The metadata for the currently active receipt rule set. The metadata
@@ -626,9 +658,11 @@ module Aws
       #         rule_set_name: "ReceiptRuleSetName", # required
       #         rule_name: "ReceiptRuleName", # required
       #       }
-      class DescribeReceiptRuleRequest < Aws::Structure.new(
+      class DescribeReceiptRuleRequest < Struct.new(
         :rule_set_name,
         :rule_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set to which the receipt rule belongs.
@@ -641,8 +675,10 @@ module Aws
       end
 
       # Represents the details of a receipt rule.
-      class DescribeReceiptRuleResponse < Aws::Structure.new(
+      class DescribeReceiptRuleResponse < Struct.new(
         :rule)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule
         #   A data structure that contains the specified receipt rule\'s name,
@@ -665,8 +701,10 @@ module Aws
       #       {
       #         rule_set_name: "ReceiptRuleSetName", # required
       #       }
-      class DescribeReceiptRuleSetRequest < Aws::Structure.new(
+      class DescribeReceiptRuleSetRequest < Struct.new(
         :rule_set_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set to describe.
@@ -675,9 +713,11 @@ module Aws
       end
 
       # Represents the details of the specified receipt rule set.
-      class DescribeReceiptRuleSetResponse < Aws::Structure.new(
+      class DescribeReceiptRuleSetResponse < Struct.new(
         :metadata,
         :rules)
+
+        include Aws::Structure
 
         # @!attribute [rw] metadata
         #   The metadata for the receipt rule set, which consists of the rule
@@ -711,10 +751,12 @@ module Aws
       #         cc_addresses: ["Address"],
       #         bcc_addresses: ["Address"],
       #       }
-      class Destination < Aws::Structure.new(
+      class Destination < Struct.new(
         :to_addresses,
         :cc_addresses,
         :bcc_addresses)
+
+        include Aws::Structure
 
         # @!attribute [rw] to_addresses
         #   The To: field(s) of the message.
@@ -746,9 +788,11 @@ module Aws
       #         name: "ExtensionFieldName", # required
       #         value: "ExtensionFieldValue", # required
       #       }
-      class ExtensionField < Aws::Structure.new(
+      class ExtensionField < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the header to add. Must be between 1 and 50 characters,
@@ -779,8 +823,10 @@ module Aws
       #       {
       #         identities: ["Identity"], # required
       #       }
-      class GetIdentityDkimAttributesRequest < Aws::Structure.new(
+      class GetIdentityDkimAttributesRequest < Struct.new(
         :identities)
+
+        include Aws::Structure
 
         # @!attribute [rw] identities
         #   A list of one or more verified identities - email addresses,
@@ -793,8 +839,10 @@ module Aws
       # For domain identities, this response also contains the DKIM tokens
       # that are required for Easy DKIM signing, and whether Amazon SES
       # successfully verified that these tokens were published.
-      class GetIdentityDkimAttributesResponse < Aws::Structure.new(
+      class GetIdentityDkimAttributesResponse < Struct.new(
         :dkim_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] dkim_attributes
         #   The DKIM attributes for an email address or a domain.
@@ -815,8 +863,10 @@ module Aws
       #       {
       #         identities: ["Identity"], # required
       #       }
-      class GetIdentityMailFromDomainAttributesRequest < Aws::Structure.new(
+      class GetIdentityMailFromDomainAttributesRequest < Struct.new(
         :identities)
+
+        include Aws::Structure
 
         # @!attribute [rw] identities
         #   A list of one or more identities.
@@ -825,8 +875,10 @@ module Aws
       end
 
       # Represents the custom MAIL FROM attributes for a list of identities.
-      class GetIdentityMailFromDomainAttributesResponse < Aws::Structure.new(
+      class GetIdentityMailFromDomainAttributesResponse < Struct.new(
         :mail_from_domain_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] mail_from_domain_attributes
         #   A map of identities to custom MAIL FROM attributes.
@@ -847,8 +899,10 @@ module Aws
       #       {
       #         identities: ["Identity"], # required
       #       }
-      class GetIdentityNotificationAttributesRequest < Aws::Structure.new(
+      class GetIdentityNotificationAttributesRequest < Struct.new(
         :identities)
+
+        include Aws::Structure
 
         # @!attribute [rw] identities
         #   A list of one or more identities. You can specify an identity by
@@ -860,8 +914,10 @@ module Aws
       end
 
       # Represents the notification attributes for a list of identities.
-      class GetIdentityNotificationAttributesResponse < Aws::Structure.new(
+      class GetIdentityNotificationAttributesResponse < Struct.new(
         :notification_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] notification_attributes
         #   A map of Identity to IdentityNotificationAttributes.
@@ -884,9 +940,11 @@ module Aws
       #         identity: "Identity", # required
       #         policy_names: ["PolicyName"], # required
       #       }
-      class GetIdentityPoliciesRequest < Aws::Structure.new(
+      class GetIdentityPoliciesRequest < Struct.new(
         :identity,
         :policy_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity for which the policies will be retrieved. You can
@@ -907,8 +965,10 @@ module Aws
       end
 
       # Represents the requested sending authorization policies.
-      class GetIdentityPoliciesResponse < Aws::Structure.new(
+      class GetIdentityPoliciesResponse < Struct.new(
         :policies)
+
+        include Aws::Structure
 
         # @!attribute [rw] policies
         #   A map of policy names to policies.
@@ -930,8 +990,10 @@ module Aws
       #       {
       #         identities: ["Identity"], # required
       #       }
-      class GetIdentityVerificationAttributesRequest < Aws::Structure.new(
+      class GetIdentityVerificationAttributesRequest < Struct.new(
         :identities)
+
+        include Aws::Structure
 
         # @!attribute [rw] identities
         #   A list of identities.
@@ -941,8 +1003,10 @@ module Aws
 
       # The Amazon SES verification status of a list of identities. For domain
       # identities, this response also contains the verification token.
-      class GetIdentityVerificationAttributesResponse < Aws::Structure.new(
+      class GetIdentityVerificationAttributesResponse < Struct.new(
         :verification_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] verification_attributes
         #   A map of Identities to IdentityVerificationAttributes objects.
@@ -952,10 +1016,12 @@ module Aws
 
       # Represents your Amazon SES daily sending quota, maximum send rate, and
       # the number of emails you have sent in the last 24 hours.
-      class GetSendQuotaResponse < Aws::Structure.new(
+      class GetSendQuotaResponse < Struct.new(
         :max_24_hour_send,
         :max_send_rate,
         :sent_last_24_hours)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_24_hour_send
         #   The maximum number of emails the user is allowed to send in a
@@ -980,8 +1046,10 @@ module Aws
 
       # Represents a list of data points. This list contains aggregated data
       # from the previous two weeks of your sending activity with Amazon SES.
-      class GetSendStatisticsResponse < Aws::Structure.new(
+      class GetSendStatisticsResponse < Struct.new(
         :send_data_points)
+
+        include Aws::Structure
 
         # @!attribute [rw] send_data_points
         #   A list of data points, each of which represents 15 minutes of
@@ -992,10 +1060,12 @@ module Aws
 
       # Represents the DKIM attributes of a verified email address or a
       # domain.
-      class IdentityDkimAttributes < Aws::Structure.new(
+      class IdentityDkimAttributes < Struct.new(
         :dkim_enabled,
         :dkim_verification_status,
         :dkim_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] dkim_enabled
         #   True if DKIM signing is enabled for email sent from the identity;
@@ -1030,10 +1100,12 @@ module Aws
 
       # Represents the custom MAIL FROM domain attributes of a verified
       # identity (email address or domain).
-      class IdentityMailFromDomainAttributes < Aws::Structure.new(
+      class IdentityMailFromDomainAttributes < Struct.new(
         :mail_from_domain,
         :mail_from_domain_status,
         :behavior_on_mx_failure)
+
+        include Aws::Structure
 
         # @!attribute [rw] mail_from_domain
         #   The custom MAIL FROM domain that the identity is configured to use.
@@ -1068,7 +1140,7 @@ module Aws
       # SNS) topics set for bounce, complaint, and/or delivery notifications,
       # and whether feedback forwarding is enabled for bounce and complaint
       # notifications.
-      class IdentityNotificationAttributes < Aws::Structure.new(
+      class IdentityNotificationAttributes < Struct.new(
         :bounce_topic,
         :complaint_topic,
         :delivery_topic,
@@ -1076,6 +1148,8 @@ module Aws
         :headers_in_bounce_notifications_enabled,
         :headers_in_complaint_notifications_enabled,
         :headers_in_delivery_notifications_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] bounce_topic
         #   The Amazon Resource Name (ARN) of the Amazon SNS topic where Amazon
@@ -1127,9 +1201,11 @@ module Aws
       end
 
       # Represents the verification attributes of a single identity.
-      class IdentityVerificationAttributes < Aws::Structure.new(
+      class IdentityVerificationAttributes < Struct.new(
         :verification_status,
         :verification_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] verification_status
         #   The verification status of the identity: \"Pending\", \"Success\",
@@ -1167,10 +1243,12 @@ module Aws
       #         function_arn: "AmazonResourceName", # required
       #         invocation_type: "Event", # accepts Event, RequestResponse
       #       }
-      class LambdaAction < Aws::Structure.new(
+      class LambdaAction < Struct.new(
         :topic_arn,
         :function_arn,
         :invocation_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify
@@ -1229,10 +1307,12 @@ module Aws
       #         next_token: "NextToken",
       #         max_items: 1,
       #       }
-      class ListIdentitiesRequest < Aws::Structure.new(
+      class ListIdentitiesRequest < Struct.new(
         :identity_type,
         :next_token,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity_type
         #   The type of the identities to list. Possible values are
@@ -1253,9 +1333,11 @@ module Aws
 
       # A list of all identities that you have attempted to verify under your
       # AWS account, regardless of verification status.
-      class ListIdentitiesResponse < Aws::Structure.new(
+      class ListIdentitiesResponse < Struct.new(
         :identities,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] identities
         #   A list of identities.
@@ -1282,8 +1364,10 @@ module Aws
       #       {
       #         identity: "Identity", # required
       #       }
-      class ListIdentityPoliciesRequest < Aws::Structure.new(
+      class ListIdentityPoliciesRequest < Struct.new(
         :identity)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity that is associated with the policy for which the
@@ -1299,8 +1383,10 @@ module Aws
 
       # A list of names of sending authorization policies that apply to an
       # identity.
-      class ListIdentityPoliciesResponse < Aws::Structure.new(
+      class ListIdentityPoliciesResponse < Struct.new(
         :policy_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy_names
         #   A list of names of policies that apply to the specified identity.
@@ -1320,8 +1406,10 @@ module Aws
       class ListReceiptFiltersRequest < Aws::EmptyStructure; end
 
       # A list of IP address filters that exist under your AWS account.
-      class ListReceiptFiltersResponse < Aws::Structure.new(
+      class ListReceiptFiltersResponse < Struct.new(
         :filters)
+
+        include Aws::Structure
 
         # @!attribute [rw] filters
         #   A list of IP address filter data structures, which each consist of a
@@ -1345,8 +1433,10 @@ module Aws
       #       {
       #         next_token: "NextToken",
       #       }
-      class ListReceiptRuleSetsRequest < Aws::Structure.new(
+      class ListReceiptRuleSetsRequest < Struct.new(
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   A token returned from a previous call to `ListReceiptRuleSets` to
@@ -1356,9 +1446,11 @@ module Aws
       end
 
       # A list of receipt rule sets that exist under your AWS account.
-      class ListReceiptRuleSetsResponse < Aws::Structure.new(
+      class ListReceiptRuleSetsResponse < Struct.new(
         :rule_sets,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_sets
         #   The metadata for the currently active receipt rule set. The metadata
@@ -1377,8 +1469,10 @@ module Aws
 
       # A list of email addresses that you have verified with Amazon SES under
       # your AWS account.
-      class ListVerifiedEmailAddressesResponse < Aws::Structure.new(
+      class ListVerifiedEmailAddressesResponse < Struct.new(
         :verified_email_addresses)
+
+        include Aws::Structure
 
         # @!attribute [rw] verified_email_addresses
         #   A list of email addresses that have been verified.
@@ -1406,9 +1500,11 @@ module Aws
       #           },
       #         },
       #       }
-      class Message < Aws::Structure.new(
+      class Message < Struct.new(
         :subject,
         :body)
+
+        include Aws::Structure
 
         # @!attribute [rw] subject
         #   The subject of the message: A short summary of the content, which
@@ -1444,10 +1540,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class MessageDsn < Aws::Structure.new(
+      class MessageDsn < Struct.new(
         :reporting_mta,
         :arrival_date,
         :extension_fields)
+
+        include Aws::Structure
 
         # @!attribute [rw] reporting_mta
         #   The reporting MTA that attempted to deliver the message, formatted
@@ -1490,10 +1588,12 @@ module Aws
       #         policy_name: "PolicyName", # required
       #         policy: "Policy", # required
       #       }
-      class PutIdentityPolicyRequest < Aws::Structure.new(
+      class PutIdentityPolicyRequest < Struct.new(
         :identity,
         :policy_name,
         :policy)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity to which the policy will apply. You can specify an
@@ -1535,8 +1635,10 @@ module Aws
       #       {
       #         data: "data", # required
       #       }
-      class RawMessage < Aws::Structure.new(
+      class RawMessage < Struct.new(
         :data)
+
+        include Aws::Structure
 
         # @!attribute [rw] data
         #   The raw data of the message. The client must ensure that the message
@@ -1614,7 +1716,7 @@ module Aws
       #           encoding: "UTF-8", # accepts UTF-8, Base64
       #         },
       #       }
-      class ReceiptAction < Aws::Structure.new(
+      class ReceiptAction < Struct.new(
         :s3_action,
         :bounce_action,
         :workmail_action,
@@ -1622,6 +1724,8 @@ module Aws
         :stop_action,
         :add_header_action,
         :sns_action)
+
+        include Aws::Structure
 
         # @!attribute [rw] s3_action
         #   Saves the received message to an Amazon Simple Storage Service
@@ -1680,9 +1784,11 @@ module Aws
       #           cidr: "Cidr", # required
       #         },
       #       }
-      class ReceiptFilter < Aws::Structure.new(
+      class ReceiptFilter < Struct.new(
         :name,
         :ip_filter)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the IP address filter. The name must:
@@ -1719,9 +1825,11 @@ module Aws
       #         policy: "Block", # required, accepts Block, Allow
       #         cidr: "Cidr", # required
       #       }
-      class ReceiptIpFilter < Aws::Structure.new(
+      class ReceiptIpFilter < Struct.new(
         :policy,
         :cidr)
+
+        include Aws::Structure
 
         # @!attribute [rw] policy
         #   Indicates whether to block or allow incoming mail from the specified
@@ -1805,13 +1913,15 @@ module Aws
       #         ],
       #         scan_enabled: false,
       #       }
-      class ReceiptRule < Aws::Structure.new(
+      class ReceiptRule < Struct.new(
         :name,
         :enabled,
         :tls_policy,
         :recipients,
         :actions,
         :scan_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the receipt rule. The name must:
@@ -1866,9 +1976,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-receipt-rule-set.html
-      class ReceiptRuleSetMetadata < Aws::Structure.new(
+      class ReceiptRuleSetMetadata < Struct.new(
         :name,
         :created_timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the receipt rule set. The name must:
@@ -1914,7 +2026,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class RecipientDsnFields < Aws::Structure.new(
+      class RecipientDsnFields < Struct.new(
         :final_recipient,
         :action,
         :remote_mta,
@@ -1922,6 +2034,8 @@ module Aws
         :diagnostic_code,
         :last_attempt_date,
         :extension_fields)
+
+        include Aws::Structure
 
         # @!attribute [rw] final_recipient
         #   The email address to which the message was ultimately delivered.
@@ -2010,9 +2124,11 @@ module Aws
       #         rule_set_name: "ReceiptRuleSetName", # required
       #         rule_names: ["ReceiptRuleName"], # required
       #       }
-      class ReorderReceiptRuleSetRequest < Aws::Structure.new(
+      class ReorderReceiptRuleSetRequest < Struct.new(
         :rule_set_name,
         :rule_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set to reorder.
@@ -2061,11 +2177,13 @@ module Aws
       #         object_key_prefix: "S3KeyPrefix",
       #         kms_key_arn: "AmazonResourceName",
       #       }
-      class S3Action < Aws::Structure.new(
+      class S3Action < Struct.new(
         :topic_arn,
         :bucket_name,
         :object_key_prefix,
         :kms_key_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The ARN of the Amazon SNS topic to notify when the message is saved
@@ -2170,9 +2288,11 @@ module Aws
       #         topic_arn: "AmazonResourceName", # required
       #         encoding: "UTF-8", # accepts UTF-8, Base64
       #       }
-      class SNSAction < Aws::Structure.new(
+      class SNSAction < Struct.new(
         :topic_arn,
         :encoding)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify. An
@@ -2237,13 +2357,15 @@ module Aws
       #         ],
       #         bounce_sender_arn: "AmazonResourceName",
       #       }
-      class SendBounceRequest < Aws::Structure.new(
+      class SendBounceRequest < Struct.new(
         :original_message_id,
         :bounce_sender,
         :explanation,
         :message_dsn,
         :bounced_recipient_info_list,
         :bounce_sender_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] original_message_id
         #   The message ID of the message to be bounced.
@@ -2287,8 +2409,10 @@ module Aws
       end
 
       # Represents a unique message ID.
-      class SendBounceResponse < Aws::Structure.new(
+      class SendBounceResponse < Struct.new(
         :message_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] message_id
         #   The message ID of the bounce message.
@@ -2298,12 +2422,14 @@ module Aws
 
       # Represents sending statistics data. Each `SendDataPoint` contains
       # statistics for a 15-minute period of sending activity.
-      class SendDataPoint < Aws::Structure.new(
+      class SendDataPoint < Struct.new(
         :timestamp,
         :delivery_attempts,
         :bounces,
         :complaints,
         :rejects)
+
+        include Aws::Structure
 
         # @!attribute [rw] timestamp
         #   Time of the data point.
@@ -2364,7 +2490,7 @@ module Aws
       #         source_arn: "AmazonResourceName",
       #         return_path_arn: "AmazonResourceName",
       #       }
-      class SendEmailRequest < Aws::Structure.new(
+      class SendEmailRequest < Struct.new(
         :source,
         :destination,
         :message,
@@ -2372,6 +2498,8 @@ module Aws
         :return_path,
         :source_arn,
         :return_path_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] source
         #   The email address that is sending the email. This email address must
@@ -2469,8 +2597,10 @@ module Aws
       end
 
       # Represents a unique message ID.
-      class SendEmailResponse < Aws::Structure.new(
+      class SendEmailResponse < Struct.new(
         :message_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] message_id
         #   The unique message identifier returned from the `SendEmail` action.
@@ -2497,13 +2627,15 @@ module Aws
       #         source_arn: "AmazonResourceName",
       #         return_path_arn: "AmazonResourceName",
       #       }
-      class SendRawEmailRequest < Aws::Structure.new(
+      class SendRawEmailRequest < Struct.new(
         :source,
         :destinations,
         :raw_message,
         :from_arn,
         :source_arn,
         :return_path_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] source
         #   The identity\'s email address. If you do not provide a value for
@@ -2637,8 +2769,10 @@ module Aws
       end
 
       # Represents a unique message ID.
-      class SendRawEmailResponse < Aws::Structure.new(
+      class SendRawEmailResponse < Struct.new(
         :message_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] message_id
         #   The unique message identifier returned from the `SendRawEmail`
@@ -2660,8 +2794,10 @@ module Aws
       #       {
       #         rule_set_name: "ReceiptRuleSetName",
       #       }
-      class SetActiveReceiptRuleSetRequest < Aws::Structure.new(
+      class SetActiveReceiptRuleSetRequest < Struct.new(
         :rule_set_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set to make active. Setting this value
@@ -2687,9 +2823,11 @@ module Aws
       #         identity: "Identity", # required
       #         dkim_enabled: false, # required
       #       }
-      class SetIdentityDkimEnabledRequest < Aws::Structure.new(
+      class SetIdentityDkimEnabledRequest < Struct.new(
         :identity,
         :dkim_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity for which DKIM signing should be enabled or disabled.
@@ -2720,9 +2858,11 @@ module Aws
       #         identity: "Identity", # required
       #         forwarding_enabled: false, # required
       #       }
-      class SetIdentityFeedbackForwardingEnabledRequest < Aws::Structure.new(
+      class SetIdentityFeedbackForwardingEnabledRequest < Struct.new(
         :identity,
         :forwarding_enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity for which to set bounce and complaint notification
@@ -2761,10 +2901,12 @@ module Aws
       #         notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
       #         enabled: false, # required
       #       }
-      class SetIdentityHeadersInNotificationsEnabledRequest < Aws::Structure.new(
+      class SetIdentityHeadersInNotificationsEnabledRequest < Struct.new(
         :identity,
         :notification_type,
         :enabled)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity for which to enable or disable headers in
@@ -2807,10 +2949,12 @@ module Aws
       #         mail_from_domain: "MailFromDomainName",
       #         behavior_on_mx_failure: "UseDefaultValue", # accepts UseDefaultValue, RejectMessage
       #       }
-      class SetIdentityMailFromDomainRequest < Aws::Structure.new(
+      class SetIdentityMailFromDomainRequest < Struct.new(
         :identity,
         :mail_from_domain,
         :behavior_on_mx_failure)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The verified identity for which you want to enable or disable the
@@ -2865,10 +3009,12 @@ module Aws
       #         notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
       #         sns_topic: "NotificationTopic",
       #       }
-      class SetIdentityNotificationTopicRequest < Aws::Structure.new(
+      class SetIdentityNotificationTopicRequest < Struct.new(
         :identity,
         :notification_type,
         :sns_topic)
+
+        include Aws::Structure
 
         # @!attribute [rw] identity
         #   The identity for which the Amazon SNS topic will be set. You can
@@ -2909,10 +3055,12 @@ module Aws
       #         rule_name: "ReceiptRuleName", # required
       #         after: "ReceiptRuleName",
       #       }
-      class SetReceiptRulePositionRequest < Aws::Structure.new(
+      class SetReceiptRulePositionRequest < Struct.new(
         :rule_set_name,
         :rule_name,
         :after)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set that contains the receipt rule to
@@ -2950,9 +3098,11 @@ module Aws
       #         scope: "RuleSet", # required, accepts RuleSet
       #         topic_arn: "AmazonResourceName",
       #       }
-      class StopAction < Aws::Structure.new(
+      class StopAction < Struct.new(
         :scope,
         :topic_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] scope
         #   The scope to which the Stop action applies. That is, what is being
@@ -3031,9 +3181,11 @@ module Aws
       #           scan_enabled: false,
       #         },
       #       }
-      class UpdateReceiptRuleRequest < Aws::Structure.new(
+      class UpdateReceiptRuleRequest < Struct.new(
         :rule_set_name,
         :rule)
+
+        include Aws::Structure
 
         # @!attribute [rw] rule_set_name
         #   The name of the receipt rule set to which the receipt rule belongs.
@@ -3061,8 +3213,10 @@ module Aws
       #       {
       #         domain: "Domain", # required
       #       }
-      class VerifyDomainDkimRequest < Aws::Structure.new(
+      class VerifyDomainDkimRequest < Struct.new(
         :domain)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The name of the domain to be verified for Easy DKIM signing.
@@ -3072,8 +3226,10 @@ module Aws
 
       # Returns CNAME records that you must publish to the DNS server of your
       # domain to set up Easy DKIM with Amazon SES.
-      class VerifyDomainDkimResponse < Aws::Structure.new(
+      class VerifyDomainDkimResponse < Struct.new(
         :dkim_tokens)
+
+        include Aws::Structure
 
         # @!attribute [rw] dkim_tokens
         #   A set of character strings that represent the domain\'s identity. If
@@ -3111,8 +3267,10 @@ module Aws
       #       {
       #         domain: "Domain", # required
       #       }
-      class VerifyDomainIdentityRequest < Aws::Structure.new(
+      class VerifyDomainIdentityRequest < Struct.new(
         :domain)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain
         #   The domain to be verified.
@@ -3122,8 +3280,10 @@ module Aws
 
       # Returns a TXT record that you must publish to the DNS server of your
       # domain to complete domain verification with Amazon SES.
-      class VerifyDomainIdentityResponse < Aws::Structure.new(
+      class VerifyDomainIdentityResponse < Struct.new(
         :verification_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] verification_token
         #   A TXT record that must be placed in the DNS settings for the domain,
@@ -3145,8 +3305,10 @@ module Aws
       #       {
       #         email_address: "Address", # required
       #       }
-      class VerifyEmailAddressRequest < Aws::Structure.new(
+      class VerifyEmailAddressRequest < Struct.new(
         :email_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] email_address
         #   The email address to be verified.
@@ -3167,8 +3329,10 @@ module Aws
       #       {
       #         email_address: "Address", # required
       #       }
-      class VerifyEmailIdentityRequest < Aws::Structure.new(
+      class VerifyEmailIdentityRequest < Struct.new(
         :email_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] email_address
         #   The email address to be verified.
@@ -3198,9 +3362,11 @@ module Aws
       #         topic_arn: "AmazonResourceName",
       #         organization_arn: "AmazonResourceName", # required
       #       }
-      class WorkmailAction < Aws::Structure.new(
+      class WorkmailAction < Struct.new(
         :topic_arn,
         :organization_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] topic_arn
         #   The Amazon Resource Name (ARN) of the Amazon SNS topic to notify

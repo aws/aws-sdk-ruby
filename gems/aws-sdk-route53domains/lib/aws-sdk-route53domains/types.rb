@@ -9,12 +9,14 @@ module Aws
   module Route53Domains
     module Types
 
-      class BillingRecord < Aws::Structure.new(
+      class BillingRecord < Struct.new(
         :domain_name,
         :operation,
         :invoice_id,
         :bill_date,
         :price)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -63,9 +65,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         idn_lang_code: "LangCode",
       #       }
-      class CheckDomainAvailabilityRequest < Aws::Structure.new(
+      class CheckDomainAvailabilityRequest < Struct.new(
         :domain_name,
         :idn_lang_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -88,8 +92,10 @@ module Aws
       end
 
       # The CheckDomainAvailability response includes the following elements.
-      class CheckDomainAvailabilityResponse < Aws::Structure.new(
+      class CheckDomainAvailabilityResponse < Struct.new(
         :availability)
+
+        include Aws::Structure
 
         # @!attribute [rw] availability
         #   Whether the domain name is available for registering.
@@ -145,7 +151,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class ContactDetail < Aws::Structure.new(
+      class ContactDetail < Struct.new(
         :first_name,
         :last_name,
         :contact_type,
@@ -160,6 +166,8 @@ module Aws
         :email,
         :fax,
         :extra_params)
+
+        include Aws::Structure
 
         # @!attribute [rw] first_name
         #   First name of contact.
@@ -379,9 +387,11 @@ module Aws
       #         domain_name: "DomainName", # required
       #         tags_to_delete: ["TagKey"], # required
       #       }
-      class DeleteTagsForDomainRequest < Aws::Structure.new(
+      class DeleteTagsForDomainRequest < Struct.new(
         :domain_name,
         :tags_to_delete)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain for which you want to delete one or more tags.
@@ -425,8 +435,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class DisableDomainAutoRenewRequest < Aws::Structure.new(
+      class DisableDomainAutoRenewRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   @return [String]
@@ -442,8 +454,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class DisableDomainTransferLockRequest < Aws::Structure.new(
+      class DisableDomainTransferLockRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -462,8 +476,10 @@ module Aws
       end
 
       # The DisableDomainTransferLock response includes the following element.
-      class DisableDomainTransferLockResponse < Aws::Structure.new(
+      class DisableDomainTransferLockResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier for tracking the progress of the request. To use this ID
@@ -478,9 +494,11 @@ module Aws
 
       end
 
-      class DomainSuggestion < Aws::Structure.new(
+      class DomainSuggestion < Struct.new(
         :domain_name,
         :availability)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   @return [String]
@@ -490,11 +508,13 @@ module Aws
 
       end
 
-      class DomainSummary < Aws::Structure.new(
+      class DomainSummary < Struct.new(
         :domain_name,
         :auto_renew,
         :transfer_lock,
         :expiry)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -534,8 +554,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class EnableDomainAutoRenewRequest < Aws::Structure.new(
+      class EnableDomainAutoRenewRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   @return [String]
@@ -551,8 +573,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class EnableDomainTransferLockRequest < Aws::Structure.new(
+      class EnableDomainTransferLockRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -571,8 +595,10 @@ module Aws
       end
 
       # The EnableDomainTransferLock response includes the following elements.
-      class EnableDomainTransferLockResponse < Aws::Structure.new(
+      class EnableDomainTransferLockResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier for tracking the progress of the request. To use this ID
@@ -595,9 +621,11 @@ module Aws
       #         name: "DUNS_NUMBER", # required, accepts DUNS_NUMBER, BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, BIRTH_CITY, DOCUMENT_NUMBER, AU_ID_NUMBER, AU_ID_TYPE, CA_LEGAL_TYPE, CA_BUSINESS_ENTITY_TYPE, ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, ES_LEGAL_FORM, FI_BUSINESS_NUMBER, FI_ID_NUMBER, IT_PIN, RU_PASSPORT_DATA, SE_ID_NUMBER, SG_ID_NUMBER, VAT_NUMBER
       #         value: "ExtraParamValue", # required
       #       }
-      class ExtraParam < Aws::Structure.new(
+      class ExtraParam < Struct.new(
         :name,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   Name of the additional parameter required by the top-level domain.
@@ -643,8 +671,10 @@ module Aws
       #       {
       #         domain_name: "DomainName",
       #       }
-      class GetContactReachabilityStatusRequest < Aws::Structure.new(
+      class GetContactReachabilityStatusRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain for which you want to know whether the
@@ -659,9 +689,11 @@ module Aws
 
       end
 
-      class GetContactReachabilityStatusResponse < Aws::Structure.new(
+      class GetContactReachabilityStatusResponse < Struct.new(
         :domain_name,
         :status)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain name for which you requested the reachability status.
@@ -688,8 +720,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class GetDomainDetailRequest < Aws::Structure.new(
+      class GetDomainDetailRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -708,7 +742,7 @@ module Aws
       end
 
       # The GetDomainDetail response includes the following elements.
-      class GetDomainDetailResponse < Aws::Structure.new(
+      class GetDomainDetailResponse < Struct.new(
         :domain_name,
         :nameservers,
         :auto_renew,
@@ -730,6 +764,8 @@ module Aws
         :reseller,
         :dns_sec,
         :status_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -909,10 +945,12 @@ module Aws
       #         suggestion_count: 1, # required
       #         only_available: false, # required
       #       }
-      class GetDomainSuggestionsRequest < Aws::Structure.new(
+      class GetDomainSuggestionsRequest < Struct.new(
         :domain_name,
         :suggestion_count,
         :only_available)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   @return [String]
@@ -925,8 +963,10 @@ module Aws
 
       end
 
-      class GetDomainSuggestionsResponse < Aws::Structure.new(
+      class GetDomainSuggestionsResponse < Struct.new(
         :suggestions_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] suggestions_list
         #   @return [Array<Types::DomainSuggestion>]
@@ -940,8 +980,10 @@ module Aws
       #       {
       #         operation_id: "OperationId", # required
       #       }
-      class GetOperationDetailRequest < Aws::Structure.new(
+      class GetOperationDetailRequest < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   The identifier for the operation for which you want to get the
@@ -958,13 +1000,15 @@ module Aws
       end
 
       # The GetOperationDetail response includes the following elements.
-      class GetOperationDetailResponse < Aws::Structure.new(
+      class GetOperationDetailResponse < Struct.new(
         :operation_id,
         :status,
         :message,
         :domain_name,
         :type,
         :submitted_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   The identifier for the operation.
@@ -1010,9 +1054,11 @@ module Aws
       #         marker: "PageMarker",
       #         max_items: 1,
       #       }
-      class ListDomainsRequest < Aws::Structure.new(
+      class ListDomainsRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   For an initial request for a list of domains, omit this element. If
@@ -1048,9 +1094,11 @@ module Aws
       end
 
       # The ListDomains response includes the following elements.
-      class ListDomainsResponse < Aws::Structure.new(
+      class ListDomainsResponse < Struct.new(
         :domains,
         :next_page_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] domains
         #   A summary of domains.
@@ -1080,9 +1128,11 @@ module Aws
       #         marker: "PageMarker",
       #         max_items: 1,
       #       }
-      class ListOperationsRequest < Aws::Structure.new(
+      class ListOperationsRequest < Struct.new(
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] marker
         #   For an initial request for a list of operations, omit this element.
@@ -1115,9 +1165,11 @@ module Aws
       end
 
       # The ListOperations response includes the following elements.
-      class ListOperationsResponse < Aws::Structure.new(
+      class ListOperationsResponse < Struct.new(
         :operations,
         :next_page_marker)
+
+        include Aws::Structure
 
         # @!attribute [rw] operations
         #   Lists summaries of the operations.
@@ -1146,8 +1198,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class ListTagsForDomainRequest < Aws::Structure.new(
+      class ListTagsForDomainRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain for which you want to get a list of tags.
@@ -1156,8 +1210,10 @@ module Aws
       end
 
       # The ListTagsForDomain response includes the following elements.
-      class ListTagsForDomainResponse < Aws::Structure.new(
+      class ListTagsForDomainResponse < Struct.new(
         :tag_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] tag_list
         #   A list of the tags that are associated with the specified domain.
@@ -1189,9 +1245,11 @@ module Aws
       #         name: "HostName", # required
       #         glue_ips: ["GlueIp"],
       #       }
-      class Nameserver < Aws::Structure.new(
+      class Nameserver < Struct.new(
         :name,
         :glue_ips)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The fully qualified host name of the name server.
@@ -1221,11 +1279,13 @@ module Aws
       end
 
       # OperationSummary includes the following elements.
-      class OperationSummary < Aws::Structure.new(
+      class OperationSummary < Struct.new(
         :operation_id,
         :status,
         :type,
         :submitted_date)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier returned to track the requested action.
@@ -1331,7 +1391,7 @@ module Aws
       #         privacy_protect_registrant_contact: false,
       #         privacy_protect_tech_contact: false,
       #       }
-      class RegisterDomainRequest < Aws::Structure.new(
+      class RegisterDomainRequest < Struct.new(
         :domain_name,
         :idn_lang_code,
         :duration_in_years,
@@ -1342,6 +1402,8 @@ module Aws
         :privacy_protect_admin_contact,
         :privacy_protect_registrant_contact,
         :privacy_protect_tech_contact)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -1476,8 +1538,10 @@ module Aws
       end
 
       # The RegisterDomain response includes the following element.
-      class RegisterDomainResponse < Aws::Structure.new(
+      class RegisterDomainResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier for tracking the progress of the request. To use this ID
@@ -1502,10 +1566,12 @@ module Aws
       #         duration_in_years: 1,
       #         current_expiry_year: 1, # required
       #       }
-      class RenewDomainRequest < Aws::Structure.new(
+      class RenewDomainRequest < Struct.new(
         :domain_name,
         :duration_in_years,
         :current_expiry_year)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   @return [String]
@@ -1545,8 +1611,10 @@ module Aws
 
       end
 
-      class RenewDomainResponse < Aws::Structure.new(
+      class RenewDomainResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   @return [String]
@@ -1559,8 +1627,10 @@ module Aws
       #       {
       #         domain_name: "DomainName",
       #       }
-      class ResendContactReachabilityEmailRequest < Aws::Structure.new(
+      class ResendContactReachabilityEmailRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain for which you want Amazon Route 53 to resend
@@ -1575,10 +1645,12 @@ module Aws
 
       end
 
-      class ResendContactReachabilityEmailResponse < Aws::Structure.new(
+      class ResendContactReachabilityEmailResponse < Struct.new(
         :domain_name,
         :email_address,
         :is_already_verified)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain name for which you requested a confirmation email.
@@ -1604,8 +1676,10 @@ module Aws
       #       {
       #         domain_name: "DomainName", # required
       #       }
-      class RetrieveDomainAuthCodeRequest < Aws::Structure.new(
+      class RetrieveDomainAuthCodeRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -1624,8 +1698,10 @@ module Aws
       end
 
       # The RetrieveDomainAuthCode response includes the following element.
-      class RetrieveDomainAuthCodeResponse < Aws::Structure.new(
+      class RetrieveDomainAuthCodeResponse < Struct.new(
         :auth_code)
+
+        include Aws::Structure
 
         # @!attribute [rw] auth_code
         #   The authorization code for the domain.
@@ -1643,9 +1719,11 @@ module Aws
       #         key: "TagKey",
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key (name) of a tag.
@@ -1760,7 +1838,7 @@ module Aws
       #         privacy_protect_registrant_contact: false,
       #         privacy_protect_tech_contact: false,
       #       }
-      class TransferDomainRequest < Aws::Structure.new(
+      class TransferDomainRequest < Struct.new(
         :domain_name,
         :idn_lang_code,
         :duration_in_years,
@@ -1773,6 +1851,8 @@ module Aws
         :privacy_protect_admin_contact,
         :privacy_protect_registrant_contact,
         :privacy_protect_tech_contact)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -1926,8 +2006,10 @@ module Aws
       end
 
       # The TranserDomain response includes the following element.
-      class TransferDomainResponse < Aws::Structure.new(
+      class TransferDomainResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier for tracking the progress of the request. To use this ID
@@ -1953,11 +2035,13 @@ module Aws
       #         registrant_privacy: false,
       #         tech_privacy: false,
       #       }
-      class UpdateDomainContactPrivacyRequest < Aws::Structure.new(
+      class UpdateDomainContactPrivacyRequest < Struct.new(
         :domain_name,
         :admin_privacy,
         :registrant_privacy,
         :tech_privacy)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -2022,8 +2106,10 @@ module Aws
 
       # The UpdateDomainContactPrivacy response includes the following
       # element.
-      class UpdateDomainContactPrivacyResponse < Aws::Structure.new(
+      class UpdateDomainContactPrivacyResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier for tracking the progress of the request. To use this ID
@@ -2108,11 +2194,13 @@ module Aws
       #           ],
       #         },
       #       }
-      class UpdateDomainContactRequest < Aws::Structure.new(
+      class UpdateDomainContactRequest < Struct.new(
         :domain_name,
         :admin_contact,
         :registrant_contact,
         :tech_contact)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -2170,8 +2258,10 @@ module Aws
       end
 
       # The UpdateDomainContact response includes the following element.
-      class UpdateDomainContactResponse < Aws::Structure.new(
+      class UpdateDomainContactResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier for tracking the progress of the request. To use this ID
@@ -2200,10 +2290,12 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateDomainNameserversRequest < Aws::Structure.new(
+      class UpdateDomainNameserversRequest < Struct.new(
         :domain_name,
         :fi_auth_key,
         :nameservers)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of a domain.
@@ -2236,8 +2328,10 @@ module Aws
       end
 
       # The UpdateDomainNameservers response includes the following element.
-      class UpdateDomainNameserversResponse < Aws::Structure.new(
+      class UpdateDomainNameserversResponse < Struct.new(
         :operation_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] operation_id
         #   Identifier for tracking the progress of the request. To use this ID
@@ -2265,9 +2359,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class UpdateTagsForDomainRequest < Aws::Structure.new(
+      class UpdateTagsForDomainRequest < Struct.new(
         :domain_name,
         :tags_to_update)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The domain for which you want to add or update tags.
@@ -2346,11 +2442,13 @@ module Aws
       #         marker: "PageMarker",
       #         max_items: 1,
       #       }
-      class ViewBillingRequest < Aws::Structure.new(
+      class ViewBillingRequest < Struct.new(
         :start,
         :end,
         :marker,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] start
         #   The beginning date and time for the time period for which you want a
@@ -2408,9 +2506,11 @@ module Aws
       end
 
       # The ViewBilling response includes the following elements.
-      class ViewBillingResponse < Aws::Structure.new(
+      class ViewBillingResponse < Struct.new(
         :next_page_marker,
         :billing_records)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_page_marker
         #   If there are more billing records than you specified for `MaxItems`

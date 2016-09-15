@@ -21,9 +21,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class AddTagsToCertificateRequest < Aws::Structure.new(
+      class AddTagsToCertificateRequest < Struct.new(
         :certificate_arn,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains the ARN of the ACM Certificate to which the tag
@@ -47,7 +49,7 @@ module Aws
 
       # Contains detailed metadata about an ACM Certificate. This structure is
       # returned in the response to a DescribeCertificate request.
-      class CertificateDetail < Aws::Structure.new(
+      class CertificateDetail < Struct.new(
         :certificate_arn,
         :domain_name,
         :subject_alternative_names,
@@ -66,6 +68,8 @@ module Aws
         :signature_algorithm,
         :in_use_by,
         :failure_reason)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   The Amazon Resource Name (ARN) of the certificate. For more
@@ -170,9 +174,11 @@ module Aws
 
       # This structure is returned in the response object of ListCertificates
       # action.
-      class CertificateSummary < Aws::Structure.new(
+      class CertificateSummary < Struct.new(
         :certificate_arn,
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   Amazon Resource Name (ARN) of the certificate. This is of the form:
@@ -200,8 +206,10 @@ module Aws
       #       {
       #         certificate_arn: "Arn", # required
       #       }
-      class DeleteCertificateRequest < Aws::Structure.new(
+      class DeleteCertificateRequest < Struct.new(
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains the ARN of the ACM Certificate to be deleted.
@@ -225,8 +233,10 @@ module Aws
       #       {
       #         certificate_arn: "Arn", # required
       #       }
-      class DescribeCertificateRequest < Aws::Structure.new(
+      class DescribeCertificateRequest < Struct.new(
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains an ACM Certificate ARN. The ARN must be of the
@@ -244,8 +254,10 @@ module Aws
 
       end
 
-      class DescribeCertificateResponse < Aws::Structure.new(
+      class DescribeCertificateResponse < Struct.new(
         :certificate)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate
         #   Contains a CertificateDetail structure that lists the fields of an
@@ -257,10 +269,12 @@ module Aws
       # Structure that contains the domain name, the base validation domain to
       # which validation email is sent, and the email addresses used to
       # validate the domain identity.
-      class DomainValidation < Aws::Structure.new(
+      class DomainValidation < Struct.new(
         :domain_name,
         :validation_emails,
         :validation_domain)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   Fully Qualified Domain Name (FQDN) of the form `www.example.com or `
@@ -287,9 +301,11 @@ module Aws
       #         domain_name: "DomainNameString", # required
       #         validation_domain: "DomainNameString", # required
       #       }
-      class DomainValidationOption < Aws::Structure.new(
+      class DomainValidationOption < Struct.new(
         :domain_name,
         :validation_domain)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   Fully Qualified Domain Name (FQDN) of the certificate being
@@ -325,8 +341,10 @@ module Aws
       #       {
       #         certificate_arn: "Arn", # required
       #       }
-      class GetCertificateRequest < Aws::Structure.new(
+      class GetCertificateRequest < Struct.new(
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains a certificate ARN in the following format:
@@ -343,9 +361,11 @@ module Aws
 
       end
 
-      class GetCertificateResponse < Aws::Structure.new(
+      class GetCertificateResponse < Struct.new(
         :certificate,
         :certificate_chain)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate
         #   String that contains the ACM Certificate represented by the ARN
@@ -367,10 +387,12 @@ module Aws
       #         next_token: "NextToken",
       #         max_items: 1,
       #       }
-      class ListCertificatesRequest < Aws::Structure.new(
+      class ListCertificatesRequest < Struct.new(
         :certificate_statuses,
         :next_token,
         :max_items)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_statuses
         #   The status or statuses on which to filter the list of ACM
@@ -394,9 +416,11 @@ module Aws
 
       end
 
-      class ListCertificatesResponse < Aws::Structure.new(
+      class ListCertificatesResponse < Struct.new(
         :next_token,
         :certificate_summary_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] next_token
         #   When the list is truncated, this value is present and contains the
@@ -416,8 +440,10 @@ module Aws
       #       {
       #         certificate_arn: "Arn", # required
       #       }
-      class ListTagsForCertificateRequest < Aws::Structure.new(
+      class ListTagsForCertificateRequest < Struct.new(
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains the ARN of the ACM Certificate for which you
@@ -435,8 +461,10 @@ module Aws
 
       end
 
-      class ListTagsForCertificateResponse < Aws::Structure.new(
+      class ListTagsForCertificateResponse < Struct.new(
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] tags
         #   The key-value pairs that define the applied tags.
@@ -456,9 +484,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class RemoveTagsFromCertificateRequest < Aws::Structure.new(
+      class RemoveTagsFromCertificateRequest < Struct.new(
         :certificate_arn,
         :tags)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains the ARN of the ACM Certificate with one or more
@@ -494,11 +524,13 @@ module Aws
       #           },
       #         ],
       #       }
-      class RequestCertificateRequest < Aws::Structure.new(
+      class RequestCertificateRequest < Struct.new(
         :domain_name,
         :subject_alternative_names,
         :idempotency_token,
         :domain_validation_options)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   Fully qualified domain name (FQDN), such as www.example.com, of the
@@ -547,8 +579,10 @@ module Aws
 
       end
 
-      class RequestCertificateResponse < Aws::Structure.new(
+      class RequestCertificateResponse < Struct.new(
         :certificate_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains the ARN of the issued certificate. This must be
@@ -567,10 +601,12 @@ module Aws
       #         domain: "DomainNameString", # required
       #         validation_domain: "DomainNameString", # required
       #       }
-      class ResendValidationEmailRequest < Aws::Structure.new(
+      class ResendValidationEmailRequest < Struct.new(
         :certificate_arn,
         :domain,
         :validation_domain)
+
+        include Aws::Structure
 
         # @!attribute [rw] certificate_arn
         #   String that contains the ARN of the requested certificate. The
@@ -621,9 +657,11 @@ module Aws
       #         key: "TagKey", # required
       #         value: "TagValue",
       #       }
-      class Tag < Aws::Structure.new(
+      class Tag < Struct.new(
         :key,
         :value)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   The key of the tag.

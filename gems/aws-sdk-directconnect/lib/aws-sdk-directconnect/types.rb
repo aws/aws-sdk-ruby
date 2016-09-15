@@ -21,12 +21,14 @@ module Aws
       #         interconnect_id: "InterconnectId", # required
       #         vlan: 1, # required
       #       }
-      class AllocateConnectionOnInterconnectRequest < Aws::Structure.new(
+      class AllocateConnectionOnInterconnectRequest < Struct.new(
         :bandwidth,
         :connection_name,
         :owner_account,
         :interconnect_id,
         :vlan)
+
+        include Aws::Structure
 
         # @!attribute [rw] bandwidth
         #   Bandwidth of the connection.
@@ -90,10 +92,12 @@ module Aws
       #           customer_address: "CustomerAddress",
       #         },
       #       }
-      class AllocatePrivateVirtualInterfaceRequest < Aws::Structure.new(
+      class AllocatePrivateVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :owner_account,
         :new_private_virtual_interface_allocation)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   The connection ID on which the private virtual interface is
@@ -139,10 +143,12 @@ module Aws
       #           ],
       #         },
       #       }
-      class AllocatePublicVirtualInterfaceRequest < Aws::Structure.new(
+      class AllocatePublicVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :owner_account,
         :new_public_virtual_interface_allocation)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   The connection ID on which the public virtual interface is
@@ -173,8 +179,10 @@ module Aws
       #       {
       #         connection_id: "ConnectionId", # required
       #       }
-      class ConfirmConnectionRequest < Aws::Structure.new(
+      class ConfirmConnectionRequest < Struct.new(
         :connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   ID of the connection.
@@ -187,8 +195,10 @@ module Aws
       end
 
       # The response received when ConfirmConnection is called.
-      class ConfirmConnectionResponse < Aws::Structure.new(
+      class ConfirmConnectionResponse < Struct.new(
         :connection_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_state
         #   State of the connection.
@@ -229,9 +239,11 @@ module Aws
       #         virtual_interface_id: "VirtualInterfaceId", # required
       #         virtual_gateway_id: "VirtualGatewayId", # required
       #       }
-      class ConfirmPrivateVirtualInterfaceRequest < Aws::Structure.new(
+      class ConfirmPrivateVirtualInterfaceRequest < Struct.new(
         :virtual_interface_id,
         :virtual_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_id
         #   ID of the virtual interface.
@@ -258,8 +270,10 @@ module Aws
       end
 
       # The response received when ConfirmPrivateVirtualInterface is called.
-      class ConfirmPrivateVirtualInterfaceResponse < Aws::Structure.new(
+      class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_state
         #   State of the virtual interface.
@@ -305,8 +319,10 @@ module Aws
       #       {
       #         virtual_interface_id: "VirtualInterfaceId", # required
       #       }
-      class ConfirmPublicVirtualInterfaceRequest < Aws::Structure.new(
+      class ConfirmPublicVirtualInterfaceRequest < Struct.new(
         :virtual_interface_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_id
         #   ID of the virtual interface.
@@ -319,8 +335,10 @@ module Aws
       end
 
       # The response received when ConfirmPublicVirtualInterface is called.
-      class ConfirmPublicVirtualInterfaceResponse < Aws::Structure.new(
+      class ConfirmPublicVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_state
         #   State of the virtual interface.
@@ -360,7 +378,7 @@ module Aws
 
       # A connection represents the physical network connection between the
       # AWS Direct Connect location and the customer.
-      class Connection < Aws::Structure.new(
+      class Connection < Struct.new(
         :owner_account,
         :connection_id,
         :connection_name,
@@ -371,6 +389,8 @@ module Aws
         :vlan,
         :partner_name,
         :loa_issue_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_account
         #   The AWS account that will own the new connection.
@@ -464,8 +484,10 @@ module Aws
       end
 
       # A structure containing a list of connections.
-      class Connections < Aws::Structure.new(
+      class Connections < Struct.new(
         :connections)
+
+        include Aws::Structure
 
         # @!attribute [rw] connections
         #   A list of connections.
@@ -482,10 +504,12 @@ module Aws
       #         bandwidth: "Bandwidth", # required
       #         connection_name: "ConnectionName", # required
       #       }
-      class CreateConnectionRequest < Aws::Structure.new(
+      class CreateConnectionRequest < Struct.new(
         :location,
         :bandwidth,
         :connection_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] location
         #   Where the connection is located.
@@ -522,10 +546,12 @@ module Aws
       #         bandwidth: "Bandwidth", # required
       #         location: "LocationCode", # required
       #       }
-      class CreateInterconnectRequest < Aws::Structure.new(
+      class CreateInterconnectRequest < Struct.new(
         :interconnect_name,
         :bandwidth,
         :location)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnect_name
         #   The name of the interconnect.
@@ -572,9 +598,11 @@ module Aws
       #           virtual_gateway_id: "VirtualGatewayId", # required
       #         },
       #       }
-      class CreatePrivateVirtualInterfaceRequest < Aws::Structure.new(
+      class CreatePrivateVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :new_private_virtual_interface)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   ID of the connection.
@@ -614,9 +642,11 @@ module Aws
       #           ],
       #         },
       #       }
-      class CreatePublicVirtualInterfaceRequest < Aws::Structure.new(
+      class CreatePublicVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :new_public_virtual_interface)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   ID of the connection.
@@ -641,8 +671,10 @@ module Aws
       #       {
       #         connection_id: "ConnectionId", # required
       #       }
-      class DeleteConnectionRequest < Aws::Structure.new(
+      class DeleteConnectionRequest < Struct.new(
         :connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   ID of the connection.
@@ -661,8 +693,10 @@ module Aws
       #       {
       #         interconnect_id: "InterconnectId", # required
       #       }
-      class DeleteInterconnectRequest < Aws::Structure.new(
+      class DeleteInterconnectRequest < Struct.new(
         :interconnect_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnect_id
         #   The ID of the interconnect.
@@ -673,8 +707,10 @@ module Aws
       end
 
       # The response received when DeleteInterconnect is called.
-      class DeleteInterconnectResponse < Aws::Structure.new(
+      class DeleteInterconnectResponse < Struct.new(
         :interconnect_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnect_state
         #   State of the interconnect.
@@ -706,8 +742,10 @@ module Aws
       #       {
       #         virtual_interface_id: "VirtualInterfaceId", # required
       #       }
-      class DeleteVirtualInterfaceRequest < Aws::Structure.new(
+      class DeleteVirtualInterfaceRequest < Struct.new(
         :virtual_interface_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_id
         #   ID of the virtual interface.
@@ -720,8 +758,10 @@ module Aws
       end
 
       # The response received when DeleteVirtualInterface is called.
-      class DeleteVirtualInterfaceResponse < Aws::Structure.new(
+      class DeleteVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_state
         #   State of the virtual interface.
@@ -768,10 +808,12 @@ module Aws
       #         provider_name: "ProviderName",
       #         loa_content_type: "application/pdf", # accepts application/pdf
       #       }
-      class DescribeConnectionLoaRequest < Aws::Structure.new(
+      class DescribeConnectionLoaRequest < Struct.new(
         :connection_id,
         :provider_name,
         :loa_content_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   ID of the connection.
@@ -801,8 +843,10 @@ module Aws
       end
 
       # The response received when DescribeConnectionLoa is called.
-      class DescribeConnectionLoaResponse < Aws::Structure.new(
+      class DescribeConnectionLoaResponse < Struct.new(
         :loa)
+
+        include Aws::Structure
 
         # @!attribute [rw] loa
         #   A structure containing the Letter of Authorization - Connecting
@@ -819,8 +863,10 @@ module Aws
       #       {
       #         interconnect_id: "InterconnectId", # required
       #       }
-      class DescribeConnectionsOnInterconnectRequest < Aws::Structure.new(
+      class DescribeConnectionsOnInterconnectRequest < Struct.new(
         :interconnect_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnect_id
         #   ID of the interconnect on which a list of connection is provisioned.
@@ -839,8 +885,10 @@ module Aws
       #       {
       #         connection_id: "ConnectionId",
       #       }
-      class DescribeConnectionsRequest < Aws::Structure.new(
+      class DescribeConnectionsRequest < Struct.new(
         :connection_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   ID of the connection.
@@ -861,10 +909,12 @@ module Aws
       #         provider_name: "ProviderName",
       #         loa_content_type: "application/pdf", # accepts application/pdf
       #       }
-      class DescribeInterconnectLoaRequest < Aws::Structure.new(
+      class DescribeInterconnectLoaRequest < Struct.new(
         :interconnect_id,
         :provider_name,
         :loa_content_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnect_id
         #   The ID of the interconnect.
@@ -892,8 +942,10 @@ module Aws
       end
 
       # The response received when DescribeInterconnectLoa is called.
-      class DescribeInterconnectLoaResponse < Aws::Structure.new(
+      class DescribeInterconnectLoaResponse < Struct.new(
         :loa)
+
+        include Aws::Structure
 
         # @!attribute [rw] loa
         #   A structure containing the Letter of Authorization - Connecting
@@ -909,8 +961,10 @@ module Aws
       #       {
       #         interconnect_id: "InterconnectId",
       #       }
-      class DescribeInterconnectsRequest < Aws::Structure.new(
+      class DescribeInterconnectsRequest < Struct.new(
         :interconnect_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnect_id
         #   The ID of the interconnect.
@@ -929,9 +983,11 @@ module Aws
       #         connection_id: "ConnectionId",
       #         virtual_interface_id: "VirtualInterfaceId",
       #       }
-      class DescribeVirtualInterfacesRequest < Aws::Structure.new(
+      class DescribeVirtualInterfacesRequest < Struct.new(
         :connection_id,
         :virtual_interface_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] connection_id
         #   ID of the connection.
@@ -964,7 +1020,7 @@ module Aws
       # numbers, are shared by all of the hosted connections on the
       # interconnect, and the owner of the interconnect determines how these
       # resources are assigned.
-      class Interconnect < Aws::Structure.new(
+      class Interconnect < Struct.new(
         :interconnect_id,
         :interconnect_name,
         :interconnect_state,
@@ -972,6 +1028,8 @@ module Aws
         :location,
         :bandwidth,
         :loa_issue_time)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnect_id
         #   The ID of the interconnect.
@@ -1038,8 +1096,10 @@ module Aws
       end
 
       # A structure containing a list of interconnects.
-      class Interconnects < Aws::Structure.new(
+      class Interconnects < Struct.new(
         :interconnects)
+
+        include Aws::Structure
 
         # @!attribute [rw] interconnects
         #   A list of interconnects.
@@ -1049,9 +1109,11 @@ module Aws
 
       # A structure containing the Letter of Authorization - Connecting
       # Facility Assignment (LOA-CFA) for a connection.
-      class Loa < Aws::Structure.new(
+      class Loa < Struct.new(
         :loa_content,
         :loa_content_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] loa_content
         #   The binary contents of the LOA-CFA document.
@@ -1069,9 +1131,11 @@ module Aws
 
       # An AWS Direct Connect location where connections and interconnects can
       # be requested.
-      class Location < Aws::Structure.new(
+      class Location < Struct.new(
         :location_code,
         :location_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] location_code
         #   The code used to indicate the AWS Direct Connect location.
@@ -1089,8 +1153,10 @@ module Aws
       # many network providers have equipment, and where cross connects can be
       # delivered. Locations include a name and facility code, and must be
       # provided when creating a connection.
-      class Locations < Aws::Structure.new(
+      class Locations < Struct.new(
         :locations)
+
+        include Aws::Structure
 
         # @!attribute [rw] locations
         #   A list of colocation hubs where network providers have equipment.
@@ -1113,7 +1179,7 @@ module Aws
       #         customer_address: "CustomerAddress",
       #         virtual_gateway_id: "VirtualGatewayId", # required
       #       }
-      class NewPrivateVirtualInterface < Aws::Structure.new(
+      class NewPrivateVirtualInterface < Struct.new(
         :virtual_interface_name,
         :vlan,
         :asn,
@@ -1121,6 +1187,8 @@ module Aws
         :amazon_address,
         :customer_address,
         :virtual_gateway_id)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_name
         #   The name of the virtual interface assigned by the customer.
@@ -1181,13 +1249,15 @@ module Aws
       #         amazon_address: "AmazonAddress",
       #         customer_address: "CustomerAddress",
       #       }
-      class NewPrivateVirtualInterfaceAllocation < Aws::Structure.new(
+      class NewPrivateVirtualInterfaceAllocation < Struct.new(
         :virtual_interface_name,
         :vlan,
         :asn,
         :auth_key,
         :amazon_address,
         :customer_address)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_name
         #   The name of the virtual interface assigned by the customer.
@@ -1246,7 +1316,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class NewPublicVirtualInterface < Aws::Structure.new(
+      class NewPublicVirtualInterface < Struct.new(
         :virtual_interface_name,
         :vlan,
         :asn,
@@ -1254,6 +1324,8 @@ module Aws
         :amazon_address,
         :customer_address,
         :route_filter_prefixes)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_name
         #   The name of the virtual interface assigned by the customer.
@@ -1317,7 +1389,7 @@ module Aws
       #           },
       #         ],
       #       }
-      class NewPublicVirtualInterfaceAllocation < Aws::Structure.new(
+      class NewPublicVirtualInterfaceAllocation < Struct.new(
         :virtual_interface_name,
         :vlan,
         :asn,
@@ -1325,6 +1397,8 @@ module Aws
         :amazon_address,
         :customer_address,
         :route_filter_prefixes)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interface_name
         #   The name of the virtual interface assigned by the customer.
@@ -1378,8 +1452,10 @@ module Aws
       #       {
       #         cidr: "CIDR",
       #       }
-      class RouteFilterPrefix < Aws::Structure.new(
+      class RouteFilterPrefix < Struct.new(
         :cidr)
+
+        include Aws::Structure
 
         # @!attribute [rw] cidr
         #   CIDR notation for the advertised route. Multiple routes are
@@ -1400,9 +1476,11 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-CreateVpnGateway.html
-      class VirtualGateway < Aws::Structure.new(
+      class VirtualGateway < Struct.new(
         :virtual_gateway_id,
         :virtual_gateway_state)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_gateway_id
         #   The ID of the virtual private gateway to a VPC. This only applies to
@@ -1429,8 +1507,10 @@ module Aws
       end
 
       # A structure containing a list of virtual private gateways.
-      class VirtualGateways < Aws::Structure.new(
+      class VirtualGateways < Struct.new(
         :virtual_gateways)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_gateways
         #   A list of virtual private gateways.
@@ -1440,7 +1520,7 @@ module Aws
 
       # A virtual interface (VLAN) transmits the traffic between the AWS
       # Direct Connect location and the customer.
-      class VirtualInterface < Aws::Structure.new(
+      class VirtualInterface < Struct.new(
         :owner_account,
         :virtual_interface_id,
         :location,
@@ -1456,6 +1536,8 @@ module Aws
         :customer_router_config,
         :virtual_gateway_id,
         :route_filter_prefixes)
+
+        include Aws::Structure
 
         # @!attribute [rw] owner_account
         #   The AWS account that will own the new virtual interface.
@@ -1582,8 +1664,10 @@ module Aws
       end
 
       # A structure containing a list of virtual interfaces.
-      class VirtualInterfaces < Aws::Structure.new(
+      class VirtualInterfaces < Struct.new(
         :virtual_interfaces)
+
+        include Aws::Structure
 
         # @!attribute [rw] virtual_interfaces
         #   A list of virtual interfaces.

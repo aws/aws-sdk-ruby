@@ -18,9 +18,11 @@ module Aws
       #         attribute_name: "KeySchemaAttributeName", # required
       #         attribute_type: "S", # required, accepts S, N, B
       #       }
-      class AttributeDefinition < Aws::Structure.new(
+      class AttributeDefinition < Struct.new(
         :attribute_name,
         :attribute_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   A name for the attribute.
@@ -63,7 +65,7 @@ module Aws
       #         null: false,
       #         bool: false,
       #       }
-      class AttributeValue < Aws::Structure.new(
+      class AttributeValue < Struct.new(
         :s,
         :n,
         :b,
@@ -74,6 +76,8 @@ module Aws
         :l,
         :null,
         :bool)
+
+        include Aws::Structure
 
         # @!attribute [rw] s
         #   A String data type.
@@ -137,9 +141,11 @@ module Aws
       #         value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         action: "ADD", # accepts ADD, PUT, DELETE
       #       }
-      class AttributeValueUpdate < Aws::Structure.new(
+      class AttributeValueUpdate < Struct.new(
         :value,
         :action)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   Represents the data for an attribute. You can set one, and only one,
@@ -254,9 +260,11 @@ module Aws
       #         },
       #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
       #       }
-      class BatchGetItemInput < Aws::Structure.new(
+      class BatchGetItemInput < Struct.new(
         :request_items,
         :return_consumed_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] request_items
         #   A map of one or more table names and, for each table, a map that
@@ -389,10 +397,12 @@ module Aws
       end
 
       # Represents the output of a *BatchGetItem* operation.
-      class BatchGetItemOutput < Aws::Structure.new(
+      class BatchGetItemOutput < Struct.new(
         :responses,
         :unprocessed_keys,
         :consumed_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] responses
         #   A map of table name to a list of items. Each object in *Responses*
@@ -461,10 +471,12 @@ module Aws
       #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
       #         return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
       #       }
-      class BatchWriteItemInput < Aws::Structure.new(
+      class BatchWriteItemInput < Struct.new(
         :request_items,
         :return_consumed_capacity,
         :return_item_collection_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] request_items
         #   A map of one or more table names and, for each table, a list of
@@ -531,10 +543,12 @@ module Aws
       end
 
       # Represents the output of a *BatchWriteItem* operation.
-      class BatchWriteItemOutput < Aws::Structure.new(
+      class BatchWriteItemOutput < Struct.new(
         :unprocessed_items,
         :item_collection_metrics,
         :consumed_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] unprocessed_items
         #   A map of tables and requests against those tables that were not
@@ -612,8 +626,10 @@ module Aws
 
       # Represents the amount of provisioned throughput capacity consumed on a
       # table or an index.
-      class Capacity < Aws::Structure.new(
+      class Capacity < Struct.new(
         :capacity_units)
+
+        include Aws::Structure
 
         # @!attribute [rw] capacity_units
         #   The total number of capacity units consumed on a table or an index.
@@ -642,9 +658,11 @@ module Aws
       #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
       #       }
-      class Condition < Aws::Structure.new(
+      class Condition < Struct.new(
         :attribute_value_list,
         :comparison_operator)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_value_list
         #   One or more values to evaluate against the supplied attribute. The
@@ -853,12 +871,14 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
-      class ConsumedCapacity < Aws::Structure.new(
+      class ConsumedCapacity < Struct.new(
         :table_name,
         :capacity_units,
         :table,
         :local_secondary_indexes,
         :global_secondary_indexes)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table that was affected by the operation.
@@ -907,11 +927,13 @@ module Aws
       #           write_capacity_units: 1, # required
       #         },
       #       }
-      class CreateGlobalSecondaryIndexAction < Aws::Structure.new(
+      class CreateGlobalSecondaryIndexAction < Struct.new(
         :index_name,
         :key_schema,
         :projection,
         :provisioned_throughput)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_name
         #   The name of the global secondary index to be created.
@@ -1003,7 +1025,7 @@ module Aws
       #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
       #         },
       #       }
-      class CreateTableInput < Aws::Structure.new(
+      class CreateTableInput < Struct.new(
         :attribute_definitions,
         :table_name,
         :key_schema,
@@ -1011,6 +1033,8 @@ module Aws
         :global_secondary_indexes,
         :provisioned_throughput,
         :stream_specification)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_definitions
         #   An array of attributes that describe the key schema for the table
@@ -1192,8 +1216,10 @@ module Aws
       end
 
       # Represents the output of a *CreateTable* operation.
-      class CreateTableOutput < Aws::Structure.new(
+      class CreateTableOutput < Struct.new(
         :table_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_description
         #   Represents the properties of a table.
@@ -1209,8 +1235,10 @@ module Aws
       #       {
       #         index_name: "IndexName", # required
       #       }
-      class DeleteGlobalSecondaryIndexAction < Aws::Structure.new(
+      class DeleteGlobalSecondaryIndexAction < Struct.new(
         :index_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_name
         #   The name of the global secondary index to be deleted.
@@ -1247,7 +1275,7 @@ module Aws
       #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         },
       #       }
-      class DeleteItemInput < Aws::Structure.new(
+      class DeleteItemInput < Struct.new(
         :table_name,
         :key,
         :expected,
@@ -1258,6 +1286,8 @@ module Aws
         :condition_expression,
         :expression_attribute_names,
         :expression_attribute_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table from which to delete the item.
@@ -1710,10 +1740,12 @@ module Aws
       end
 
       # Represents the output of a *DeleteItem* operation.
-      class DeleteItemOutput < Aws::Structure.new(
+      class DeleteItemOutput < Struct.new(
         :attributes,
         :consumed_capacity,
         :item_collection_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   A map of attribute names to *AttributeValue* objects, representing
@@ -1770,8 +1802,10 @@ module Aws
       #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         },
       #       }
-      class DeleteRequest < Aws::Structure.new(
+      class DeleteRequest < Struct.new(
         :key)
+
+        include Aws::Structure
 
         # @!attribute [rw] key
         #   A map of attribute name to attribute values, representing the
@@ -1789,8 +1823,10 @@ module Aws
       #       {
       #         table_name: "TableName", # required
       #       }
-      class DeleteTableInput < Aws::Structure.new(
+      class DeleteTableInput < Struct.new(
         :table_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table to delete.
@@ -1799,8 +1835,10 @@ module Aws
       end
 
       # Represents the output of a *DeleteTable* operation.
-      class DeleteTableOutput < Aws::Structure.new(
+      class DeleteTableOutput < Struct.new(
         :table_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_description
         #   Represents the properties of a table.
@@ -1813,11 +1851,13 @@ module Aws
       class DescribeLimitsInput < Aws::EmptyStructure; end
 
       # Represents the output of a *DescribeLimits* operation.
-      class DescribeLimitsOutput < Aws::Structure.new(
+      class DescribeLimitsOutput < Struct.new(
         :account_max_read_capacity_units,
         :account_max_write_capacity_units,
         :table_max_read_capacity_units,
         :table_max_write_capacity_units)
+
+        include Aws::Structure
 
         # @!attribute [rw] account_max_read_capacity_units
         #   The maximum total read capacity units that your account allows you
@@ -1852,8 +1892,10 @@ module Aws
       #       {
       #         table_name: "TableName", # required
       #       }
-      class DescribeTableInput < Aws::Structure.new(
+      class DescribeTableInput < Struct.new(
         :table_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table to describe.
@@ -1862,8 +1904,10 @@ module Aws
       end
 
       # Represents the output of a *DescribeTable* operation.
-      class DescribeTableOutput < Aws::Structure.new(
+      class DescribeTableOutput < Struct.new(
         :table)
+
+        include Aws::Structure
 
         # @!attribute [rw] table
         #   Represents the properties of a table.
@@ -1902,11 +1946,13 @@ module Aws
       #         comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
       #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #       }
-      class ExpectedAttributeValue < Aws::Structure.new(
+      class ExpectedAttributeValue < Struct.new(
         :value,
         :exists,
         :comparison_operator,
         :attribute_value_list)
+
+        include Aws::Structure
 
         # @!attribute [rw] value
         #   Represents the data for an attribute. You can set one, and only one,
@@ -2158,7 +2204,7 @@ module Aws
       #           "ExpressionAttributeNameVariable" => "AttributeName",
       #         },
       #       }
-      class GetItemInput < Aws::Structure.new(
+      class GetItemInput < Struct.new(
         :table_name,
         :key,
         :attributes_to_get,
@@ -2166,6 +2212,8 @@ module Aws
         :return_consumed_capacity,
         :projection_expression,
         :expression_attribute_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table containing the requested item.
@@ -2310,9 +2358,11 @@ module Aws
       end
 
       # Represents the output of a *GetItem* operation.
-      class GetItemOutput < Aws::Structure.new(
+      class GetItemOutput < Struct.new(
         :item,
         :consumed_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] item
         #   A map of attribute names to *AttributeValue* objects, as specified
@@ -2355,11 +2405,13 @@ module Aws
       #           write_capacity_units: 1, # required
       #         },
       #       }
-      class GlobalSecondaryIndex < Aws::Structure.new(
+      class GlobalSecondaryIndex < Struct.new(
         :index_name,
         :key_schema,
         :projection,
         :provisioned_throughput)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_name
         #   The name of the global secondary index. The name must be unique
@@ -2409,7 +2461,7 @@ module Aws
       end
 
       # Represents the properties of a global secondary index.
-      class GlobalSecondaryIndexDescription < Aws::Structure.new(
+      class GlobalSecondaryIndexDescription < Struct.new(
         :index_name,
         :key_schema,
         :projection,
@@ -2419,6 +2471,8 @@ module Aws
         :index_size_bytes,
         :item_count,
         :index_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_name
         #   The name of the global secondary index.
@@ -2544,10 +2598,12 @@ module Aws
       #           index_name: "IndexName", # required
       #         },
       #       }
-      class GlobalSecondaryIndexUpdate < Aws::Structure.new(
+      class GlobalSecondaryIndexUpdate < Struct.new(
         :update,
         :create,
         :delete)
+
+        include Aws::Structure
 
         # @!attribute [rw] update
         #   The name of an existing global secondary index, along with new
@@ -2579,9 +2635,11 @@ module Aws
       # operation. *ItemCollectionMetrics* is only returned if the request
       # asked for it. If the table does not have any local secondary indexes,
       # this information is not returned in the response.
-      class ItemCollectionMetrics < Aws::Structure.new(
+      class ItemCollectionMetrics < Struct.new(
         :item_collection_key,
         :size_estimate_range_gb)
+
+        include Aws::Structure
 
         # @!attribute [rw] item_collection_key
         #   The partition key value of the item collection. This value is the
@@ -2622,9 +2680,11 @@ module Aws
       #         attribute_name: "KeySchemaAttributeName", # required
       #         key_type: "HASH", # required, accepts HASH, RANGE
       #       }
-      class KeySchemaElement < Aws::Structure.new(
+      class KeySchemaElement < Struct.new(
         :attribute_name,
         :key_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_name
         #   The name of a key attribute.
@@ -2675,12 +2735,14 @@ module Aws
       #           "ExpressionAttributeNameVariable" => "AttributeName",
       #         },
       #       }
-      class KeysAndAttributes < Aws::Structure.new(
+      class KeysAndAttributes < Struct.new(
         :keys,
         :attributes_to_get,
         :consistent_read,
         :projection_expression,
         :expression_attribute_names)
+
+        include Aws::Structure
 
         # @!attribute [rw] keys
         #   The primary key attribute values that define the items and the
@@ -2786,9 +2848,11 @@ module Aws
       #         exclusive_start_table_name: "TableName",
       #         limit: 1,
       #       }
-      class ListTablesInput < Aws::Structure.new(
+      class ListTablesInput < Struct.new(
         :exclusive_start_table_name,
         :limit)
+
+        include Aws::Structure
 
         # @!attribute [rw] exclusive_start_table_name
         #   The first table name that this operation will evaluate. Use the
@@ -2804,9 +2868,11 @@ module Aws
       end
 
       # Represents the output of a *ListTables* operation.
-      class ListTablesOutput < Aws::Structure.new(
+      class ListTablesOutput < Struct.new(
         :table_names,
         :last_evaluated_table_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_names
         #   The names of the tables associated with the current account at the
@@ -2846,10 +2912,12 @@ module Aws
       #           non_key_attributes: ["NonKeyAttributeName"],
       #         },
       #       }
-      class LocalSecondaryIndex < Aws::Structure.new(
+      class LocalSecondaryIndex < Struct.new(
         :index_name,
         :key_schema,
         :projection)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_name
         #   The name of the local secondary index. The name must be unique among
@@ -2886,13 +2954,15 @@ module Aws
       end
 
       # Represents the properties of a local secondary index.
-      class LocalSecondaryIndexDescription < Aws::Structure.new(
+      class LocalSecondaryIndexDescription < Struct.new(
         :index_name,
         :key_schema,
         :projection,
         :index_size_bytes,
         :item_count,
         :index_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_name
         #   Represents the name of the local secondary index.
@@ -2953,9 +3023,11 @@ module Aws
       #         projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
       #         non_key_attributes: ["NonKeyAttributeName"],
       #       }
-      class Projection < Aws::Structure.new(
+      class Projection < Struct.new(
         :projection_type,
         :non_key_attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] projection_type
         #   The set of attributes that are projected into the index:
@@ -2999,9 +3071,11 @@ module Aws
       #         read_capacity_units: 1, # required
       #         write_capacity_units: 1, # required
       #       }
-      class ProvisionedThroughput < Aws::Structure.new(
+      class ProvisionedThroughput < Struct.new(
         :read_capacity_units,
         :write_capacity_units)
+
+        include Aws::Structure
 
         # @!attribute [rw] read_capacity_units
         #   The maximum number of strongly consistent reads consumed per second
@@ -3030,12 +3104,14 @@ module Aws
       # Represents the provisioned throughput settings for the table,
       # consisting of read and write capacity units, along with data about
       # increases and decreases.
-      class ProvisionedThroughputDescription < Aws::Structure.new(
+      class ProvisionedThroughputDescription < Struct.new(
         :last_increase_date_time,
         :last_decrease_date_time,
         :number_of_decreases_today,
         :read_capacity_units,
         :write_capacity_units)
+
+        include Aws::Structure
 
         # @!attribute [rw] last_increase_date_time
         #   The date and time of the last provisioned throughput increase for
@@ -3102,7 +3178,7 @@ module Aws
       #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         },
       #       }
-      class PutItemInput < Aws::Structure.new(
+      class PutItemInput < Struct.new(
         :table_name,
         :item,
         :expected,
@@ -3113,6 +3189,8 @@ module Aws
         :condition_expression,
         :expression_attribute_names,
         :expression_attribute_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table to contain the item.
@@ -3580,10 +3658,12 @@ module Aws
       end
 
       # Represents the output of a *PutItem* operation.
-      class PutItemOutput < Aws::Structure.new(
+      class PutItemOutput < Struct.new(
         :attributes,
         :consumed_capacity,
         :item_collection_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   The attribute values as they appeared before the *PutItem*
@@ -3640,8 +3720,10 @@ module Aws
       #           "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         },
       #       }
-      class PutRequest < Aws::Structure.new(
+      class PutRequest < Struct.new(
         :item)
+
+        include Aws::Structure
 
         # @!attribute [rw] item
         #   A map of attribute name to attribute values, representing the
@@ -3693,7 +3775,7 @@ module Aws
       #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         },
       #       }
-      class QueryInput < Aws::Structure.new(
+      class QueryInput < Struct.new(
         :table_name,
         :index_name,
         :select,
@@ -3711,6 +3793,8 @@ module Aws
         :key_condition_expression,
         :expression_attribute_names,
         :expression_attribute_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table containing the requested items.
@@ -4345,12 +4429,14 @@ module Aws
       end
 
       # Represents the output of a *Query* operation.
-      class QueryOutput < Aws::Structure.new(
+      class QueryOutput < Struct.new(
         :items,
         :count,
         :scanned_count,
         :last_evaluated_key,
         :consumed_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] items
         #   An array of item attributes that match the query criteria. Each
@@ -4447,7 +4533,7 @@ module Aws
       #         },
       #         consistent_read: false,
       #       }
-      class ScanInput < Aws::Structure.new(
+      class ScanInput < Struct.new(
         :table_name,
         :index_name,
         :attributes_to_get,
@@ -4464,6 +4550,8 @@ module Aws
         :expression_attribute_names,
         :expression_attribute_values,
         :consistent_read)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table containing the requested items; or, if you
@@ -4849,12 +4937,14 @@ module Aws
       end
 
       # Represents the output of a *Scan* operation.
-      class ScanOutput < Aws::Structure.new(
+      class ScanOutput < Struct.new(
         :items,
         :count,
         :scanned_count,
         :last_evaluated_key,
         :consumed_capacity)
+
+        include Aws::Structure
 
         # @!attribute [rw] items
         #   An array of item attributes that match the scan criteria. Each
@@ -4924,9 +5014,11 @@ module Aws
       #         stream_enabled: false,
       #         stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
       #       }
-      class StreamSpecification < Aws::Structure.new(
+      class StreamSpecification < Struct.new(
         :stream_enabled,
         :stream_view_type)
+
+        include Aws::Structure
 
         # @!attribute [rw] stream_enabled
         #   Indicates whether DynamoDB Streams is enabled (true) or disabled
@@ -4960,7 +5052,7 @@ module Aws
       end
 
       # Represents the properties of a table.
-      class TableDescription < Aws::Structure.new(
+      class TableDescription < Struct.new(
         :attribute_definitions,
         :table_name,
         :key_schema,
@@ -4975,6 +5067,8 @@ module Aws
         :stream_specification,
         :latest_stream_label,
         :latest_stream_arn)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_definitions
         #   An array of *AttributeDefinition* objects. Each of these objects
@@ -5224,9 +5318,11 @@ module Aws
       #           write_capacity_units: 1, # required
       #         },
       #       }
-      class UpdateGlobalSecondaryIndexAction < Aws::Structure.new(
+      class UpdateGlobalSecondaryIndexAction < Struct.new(
         :index_name,
         :provisioned_throughput)
+
+        include Aws::Structure
 
         # @!attribute [rw] index_name
         #   The name of the global secondary index to be updated.
@@ -5283,7 +5379,7 @@ module Aws
       #           "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #         },
       #       }
-      class UpdateItemInput < Aws::Structure.new(
+      class UpdateItemInput < Struct.new(
         :table_name,
         :key,
         :attribute_updates,
@@ -5296,6 +5392,8 @@ module Aws
         :condition_expression,
         :expression_attribute_names,
         :expression_attribute_values)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_name
         #   The name of the table containing the item to update.
@@ -5964,10 +6062,12 @@ module Aws
       end
 
       # Represents the output of an *UpdateItem* operation.
-      class UpdateItemOutput < Aws::Structure.new(
+      class UpdateItemOutput < Struct.new(
         :attributes,
         :consumed_capacity,
         :item_collection_metrics)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   A map of attribute values as they appeared before the *UpdateItem*
@@ -6050,12 +6150,14 @@ module Aws
       #           stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
       #         },
       #       }
-      class UpdateTableInput < Aws::Structure.new(
+      class UpdateTableInput < Struct.new(
         :attribute_definitions,
         :table_name,
         :provisioned_throughput,
         :global_secondary_index_updates,
         :stream_specification)
+
+        include Aws::Structure
 
         # @!attribute [rw] attribute_definitions
         #   An array of attributes that describe the key schema for the table
@@ -6113,8 +6215,10 @@ module Aws
       end
 
       # Represents the output of an *UpdateTable* operation.
-      class UpdateTableOutput < Aws::Structure.new(
+      class UpdateTableOutput < Struct.new(
         :table_description)
+
+        include Aws::Structure
 
         # @!attribute [rw] table_description
         #   Represents the properties of a table.
@@ -6141,9 +6245,11 @@ module Aws
       #           },
       #         },
       #       }
-      class WriteRequest < Aws::Structure.new(
+      class WriteRequest < Struct.new(
         :put_request,
         :delete_request)
+
+        include Aws::Structure
 
         # @!attribute [rw] put_request
         #   A request to perform a *PutItem* operation.

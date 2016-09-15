@@ -18,11 +18,13 @@ module Aws
       #         value: "String", # required
       #         alternate_value_encoding: "String",
       #       }
-      class Attribute < Aws::Structure.new(
+      class Attribute < Struct.new(
         :name,
         :alternate_name_encoding,
         :value,
         :alternate_value_encoding)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the attribute.
@@ -59,9 +61,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class BatchDeleteAttributesRequest < Aws::Structure.new(
+      class BatchDeleteAttributesRequest < Struct.new(
         :domain_name,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain in which the attributes are being deleted.
@@ -91,9 +95,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class BatchPutAttributesRequest < Aws::Structure.new(
+      class BatchPutAttributesRequest < Struct.new(
         :domain_name,
         :items)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain in which the attributes are being stored.
@@ -111,8 +117,10 @@ module Aws
       #       {
       #         domain_name: "String", # required
       #       }
-      class CreateDomainRequest < Aws::Structure.new(
+      class CreateDomainRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain to create. The name can range between 3 and
@@ -136,9 +144,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class DeletableItem < Aws::Structure.new(
+      class DeletableItem < Struct.new(
         :name,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   @return [String]
@@ -168,11 +178,13 @@ module Aws
       #           exists: false,
       #         },
       #       }
-      class DeleteAttributesRequest < Aws::Structure.new(
+      class DeleteAttributesRequest < Struct.new(
         :domain_name,
         :item_name,
         :attributes,
         :expected)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain in which to perform the operation.
@@ -205,8 +217,10 @@ module Aws
       #       {
       #         domain_name: "String", # required
       #       }
-      class DeleteDomainRequest < Aws::Structure.new(
+      class DeleteDomainRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain to delete.
@@ -220,8 +234,10 @@ module Aws
       #       {
       #         domain_name: "String", # required
       #       }
-      class DomainMetadataRequest < Aws::Structure.new(
+      class DomainMetadataRequest < Struct.new(
         :domain_name)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain for which to display the metadata of.
@@ -229,7 +245,7 @@ module Aws
 
       end
 
-      class DomainMetadataResult < Aws::Structure.new(
+      class DomainMetadataResult < Struct.new(
         :item_count,
         :item_names_size_bytes,
         :attribute_name_count,
@@ -237,6 +253,8 @@ module Aws
         :attribute_value_count,
         :attribute_values_size_bytes,
         :timestamp)
+
+        include Aws::Structure
 
         # @!attribute [rw] item_count
         #   The number of all items in the domain.
@@ -279,11 +297,13 @@ module Aws
       #         attribute_names: ["String"],
       #         consistent_read: false,
       #       }
-      class GetAttributesRequest < Aws::Structure.new(
+      class GetAttributesRequest < Struct.new(
         :domain_name,
         :item_name,
         :attribute_names,
         :consistent_read)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain in which to perform the operation.
@@ -303,8 +323,10 @@ module Aws
 
       end
 
-      class GetAttributesResult < Aws::Structure.new(
+      class GetAttributesResult < Struct.new(
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] attributes
         #   The list of attributes returned by the operation.
@@ -312,10 +334,12 @@ module Aws
 
       end
 
-      class Item < Aws::Structure.new(
+      class Item < Struct.new(
         :name,
         :alternate_name_encoding,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the item.
@@ -337,9 +361,11 @@ module Aws
       #         max_number_of_domains: 1,
       #         next_token: "String",
       #       }
-      class ListDomainsRequest < Aws::Structure.new(
+      class ListDomainsRequest < Struct.new(
         :max_number_of_domains,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] max_number_of_domains
         #   The maximum number of domain names you want returned. The range is 1
@@ -353,9 +379,11 @@ module Aws
 
       end
 
-      class ListDomainsResult < Aws::Structure.new(
+      class ListDomainsResult < Struct.new(
         :domain_names,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_names
         #   A list of domain names that match the expression.
@@ -386,11 +414,13 @@ module Aws
       #           exists: false,
       #         },
       #       }
-      class PutAttributesRequest < Aws::Structure.new(
+      class PutAttributesRequest < Struct.new(
         :domain_name,
         :item_name,
         :attributes,
         :expected)
+
+        include Aws::Structure
 
         # @!attribute [rw] domain_name
         #   The name of the domain in which to perform the operation.
@@ -421,10 +451,12 @@ module Aws
       #         value: "String", # required
       #         replace: false,
       #       }
-      class ReplaceableAttribute < Aws::Structure.new(
+      class ReplaceableAttribute < Struct.new(
         :name,
         :value,
         :replace)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the replaceable attribute.
@@ -453,9 +485,11 @@ module Aws
       #           },
       #         ],
       #       }
-      class ReplaceableItem < Aws::Structure.new(
+      class ReplaceableItem < Struct.new(
         :name,
         :attributes)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the replaceable item.
@@ -475,10 +509,12 @@ module Aws
       #         next_token: "String",
       #         consistent_read: false,
       #       }
-      class SelectRequest < Aws::Structure.new(
+      class SelectRequest < Struct.new(
         :select_expression,
         :next_token,
         :consistent_read)
+
+        include Aws::Structure
 
         # @!attribute [rw] select_expression
         #   The expression used to query the domain.
@@ -494,9 +530,11 @@ module Aws
 
       end
 
-      class SelectResult < Aws::Structure.new(
+      class SelectResult < Struct.new(
         :items,
         :next_token)
+
+        include Aws::Structure
 
         # @!attribute [rw] items
         #   A list of items that match the select expression.
@@ -521,10 +559,12 @@ module Aws
       #         value: "String",
       #         exists: false,
       #       }
-      class UpdateCondition < Aws::Structure.new(
+      class UpdateCondition < Struct.new(
         :name,
         :value,
         :exists)
+
+        include Aws::Structure
 
         # @!attribute [rw] name
         #   The name of the attribute involved in the condition.
