@@ -761,7 +761,6 @@ module Aws
       #   its context - ElastiCache or an Amazon S3 bucket if exporting.
       #
       #   **Error Message**
-      #   {: .title}
       #
       #   * **Error Message:** The S3 bucket %s already contains an object
       #     with key %s.
@@ -787,7 +786,6 @@ module Aws
       #   You could receive one of the following error messages.
       #
       #   **Erorr Messages**
-      #   {: .title}
       #
       #   * <b>Error Message: </b> ElastiCache has not been granted READ
       #     permissions %s on the S3 Bucket.

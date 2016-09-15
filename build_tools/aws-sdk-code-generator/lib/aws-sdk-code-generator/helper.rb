@@ -1,6 +1,13 @@
 require 'kramdown'
 require 'set'
 
+# disable inline attribute lists
+class Kramdown::Converter::Kramdown
+  def ial_for_element(*args)
+    nil
+  end
+end
+
 module AwsSdkCodeGenerator
   module Helper
 

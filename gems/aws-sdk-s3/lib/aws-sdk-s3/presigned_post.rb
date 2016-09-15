@@ -428,7 +428,7 @@ module Aws
       #   If the value is not set or if it is set to an invalid value, Amazon
       #   S3 returns an empty document with a 204 status code.
       #
-      #   @param [String] The status code returned to the client upon
+      #   @param [String] value The status code returned to the client upon
       #   @return [self]
       define_field(:success_action_status)
 

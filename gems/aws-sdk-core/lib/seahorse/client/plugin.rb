@@ -42,7 +42,7 @@ module Seahorse
 
       class << self
 
-        # @override option(name, options = {}, &block)
+        # @overload option(name, options = {}, &block)
         # @option options [Object] :default Can also be set by passing a block.
         # @option options [String] :doc_default
         # @option options [Boolean] :required

@@ -407,7 +407,6 @@ module Aws
       #   `SERVER` configuration items.
       #
       #   **Server**
-      #   {: .title}
       #
       #   * `server.hostName`
       #
@@ -423,7 +422,6 @@ module Aws
       #   `PROCESS` configuration items.
       #
       #   **Process**
-      #   {: .title}
       #
       #   * `process.configurationid`
       #
@@ -445,7 +443,6 @@ module Aws
       #   `CONNECTION` configuration items.
       #
       #   **Connection**
-      #   {: .title}
       #
       #   * `connection.sourceIp`
       #

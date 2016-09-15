@@ -84,7 +84,7 @@ module Aws
 
     # Sources static credentials from shared credential/config files.
     #
-    # @param [Hash] options
+    # @param [Hash] opts
     # @option options [String] :profile the name of the configuration file from
     #   which credentials are being sourced.
     # @return [Aws::Credentials] credentials sourced from configuration values,
