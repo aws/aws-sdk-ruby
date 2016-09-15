@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.1 (2016-09-15)
+------------------
+
 * Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
