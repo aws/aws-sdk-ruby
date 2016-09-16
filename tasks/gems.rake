@@ -13,6 +13,6 @@ rule /gems:.+$/ do |task|
   Dir.chdir("gems/#{gem_name}") do
     version = File.read('VERSION').strip
     sh("gem build #{gem_name}.gemspec")
-    sh("mv #{gem_name}-#{version}.gem ..")
+    sh("mv #{gem_name}-#{version}.gem ../../")
   end
 end
