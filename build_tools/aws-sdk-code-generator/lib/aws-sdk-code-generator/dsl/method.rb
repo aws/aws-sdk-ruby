@@ -75,6 +75,7 @@ module AwsSdkCodeGenerator
       def yard_docs
         docs = []
         docs.concat(@docstring.lines)
+        docs.concat(["# @overload #{@name}#{ParamList.new(@params).signature}"])
         tags = []
         tags.concat(ParamList.new(@params).tags)
         tags.concat(@option_tags)
