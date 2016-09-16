@@ -43,10 +43,6 @@ group :docs do
   gem 'rdiscount'
 end
 
-group :release do
-  gem 'octokit'
-end
-
 group :repl do
   gem 'pry'
 end
