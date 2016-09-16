@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-gemspec path: 'gems/aws-sdk-core'
-
 gem 'rake', require: false
+gem 'jmespath'
 
 group :optionaldeps do
 
