@@ -1,17 +1,18 @@
-# TODO : rework to support serivce specific releases
-#desc 'Builds the aws-sdk gems'
-#task 'gems:build' do
-#  sh("rm -f *.gem")
-#  $GEM_NAMES.each do |gem_name|
-#    Dir.chdir(gem_name) do
-#      sh("gem build #{gem_name}.gemspec")
-#      sh("mv #{gem_name}-#{$VERSION}.gem ..")
-#    end
-#  end
-#end
-#
-#task 'gems:push' do
-#  $GEM_NAMES.each do |gem_name|
-#    sh("gem push #{gem_name}-#{$VERSION}.gem")
-#  end
-#end
+desc 'Build every gem.'
+task 'gems' do
+  Dir.glob('gems/*').each do |gem_dir|
+    Rake::Task[gem_dir.sub('/', ':')].invoke
+  end
+end
+
+desc "Builds a single gem, eg gems:aws-sdk-s3"
+task 'gems:*'
+
+rule /gems:.+$/ do |task|
+  gem_name = task.name.split(':').last
+  Dir.chdir("gems/#{gem_name}") do
+    version = File.read('VERSION').strip
+    sh("gem build #{gem_name}.gemspec")
+    sh("mv #{gem_name}-#{version}.gem ..")
+  end
+end
