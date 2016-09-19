@@ -64,11 +64,11 @@ module Aws
           'stop' => 'batch_stop',
           'terminate' => 'batch_terminate!',
           'unmonitor' => 'batch_unmonitor',
-        }.each do |deprecated_name, name|
+        }.each do |deprecated_name, correct_name|
           Resources::Operations::DeprecatedOperation.define({
             resource_class: EC2::Instance,
             deprecated_name: deprecated_name,
-            name: name,
+            name: correct_name,
           })
         end
         Resources::Operations::DeprecatedOperation.define({
