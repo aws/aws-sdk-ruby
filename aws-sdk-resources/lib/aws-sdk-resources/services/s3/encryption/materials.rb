@@ -33,7 +33,7 @@ module Aws
               key
             else
               msg = "invalid key, symmetric key required to be 16, 24, or "
-              msg << "32 bytes in length, saw length 31"
+              msg << "32 bytes in length, saw length " + key.bytesize.to_s
               raise ArgumentError, msg
             end
           else
