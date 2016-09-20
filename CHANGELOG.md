@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.2 (2016-09-20)
+------------------
+
 * Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
 
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
