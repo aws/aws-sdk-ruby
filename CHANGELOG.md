@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
 2.6.1 (2016-09-15)
 ------------------
 
