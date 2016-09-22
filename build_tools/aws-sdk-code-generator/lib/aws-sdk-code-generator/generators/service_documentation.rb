@@ -15,6 +15,7 @@ module AwsSdkCodeGenerator
 
       def docstring
         <<-MARKDOWN
+@service
 This module provides support for #{@product_name}.
 
 # #{@namespace}::Client
