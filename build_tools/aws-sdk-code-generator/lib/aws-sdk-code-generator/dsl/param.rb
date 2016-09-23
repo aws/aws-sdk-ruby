@@ -22,7 +22,7 @@ module AwsSdkCodeGenerator
       private
 
       def first_line
-        "# @param#{@type} #{@name}#{yard_default}"
+        "#   @param#{@type} #{@name}#{yard_default}"
       end
 
       def yard_default

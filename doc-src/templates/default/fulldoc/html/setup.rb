@@ -18,7 +18,7 @@ def class_list(root = Registry.root, tree = TreeContext.new)
   # service classes
   out << "<li class='#{tree.classes.join(' ')} nolink'>"
   out << "<div class='item' style='padding-left:#{tree.indent}'>"
-  out << "<a class='toggle'></a> Services"
+  out << "<a class='toggle'></a> Service-Gem Classes"
   out << "</div><ul>"
   children = Registry.at('Aws').children.select { |c| c.has_tag?(:service) }
   tree.nest do

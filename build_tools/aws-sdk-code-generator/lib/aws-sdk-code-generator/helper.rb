@@ -142,12 +142,18 @@ module AwsSdkCodeGenerator
         # turn them into YARD links.
         html = html.gsub(/<a>(.+?)<\/a>/) { $1 }
 
-        Kramdown::Document.new(
+        # <important> tag doesn't render well
+        html = html.gsub(/<important>(.+?)<\/important>/){ "<p>#{$1}</p>" }
+
+        markdown = Kramdown::Document.new(
           html,
           input: 'html',
           line_width: line_width,
           auto_ids: false
         ).to_kramdown.strip
+
+        # remove extra escape
+        markdown.gsub(/\\(`|'|")/, '\1')
       end
     end
 
